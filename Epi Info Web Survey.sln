@@ -3,15 +3,20 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SurveyManagerInterface", "SurveyManagerInterface\SurveyManagerInterface.csproj", "{31F91938-2997-4650-8D36-71C845F1071D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EIWS_BLL_Core", "EIWS_BLL_Core\EIWS_BLL_Core.csproj", "{D49B7A21-644B-49D7-9A5D-387BF31EAFE5}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 2
+		SccNumberOfProjects = 3
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs04
 		SccLocalPath0 = .
 		SccProjectUniqueName1 = SurveyManagerInterface\\SurveyManagerInterface.csproj
 		SccProjectName1 = SurveyManagerInterface
 		SccLocalPath1 = SurveyManagerInterface
+		SccProjectUniqueName2 = EIWS_BLL_Core\\EIWS_BLL_Core.csproj
+		SccProjectName2 = EIWS_BLL_Core
+		SccLocalPath2 = EIWS_BLL_Core
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -22,6 +27,10 @@ Global
 		{31F91938-2997-4650-8D36-71C845F1071D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{31F91938-2997-4650-8D36-71C845F1071D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{31F91938-2997-4650-8D36-71C845F1071D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D49B7A21-644B-49D7-9A5D-387BF31EAFE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D49B7A21-644B-49D7-9A5D-387BF31EAFE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D49B7A21-644B-49D7-9A5D-387BF31EAFE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D49B7A21-644B-49D7-9A5D-387BF31EAFE5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
