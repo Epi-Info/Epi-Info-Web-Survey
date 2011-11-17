@@ -20,7 +20,7 @@ namespace SurveyManagerInterface
 
     // Use a data contract as illustrated in the sample below to add composite types to service operations
     [DataContract]
-    public class ISurveyRequest
+    public class ISurveyRequest : Epi.Web.Interfaces.ISurveyRequest
     {
 
         [DataMember]
@@ -61,7 +61,7 @@ namespace SurveyManagerInterface
 
     }
 
-    public interface ISurveyRequestResult
+    public interface ISurveyRequestResult : Epi.Web.Interfaces.ISurveyRequestResult
     {
         [DataMember]
         public bool IsPulished
