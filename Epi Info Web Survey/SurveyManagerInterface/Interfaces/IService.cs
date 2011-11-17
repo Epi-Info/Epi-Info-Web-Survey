@@ -1,0 +1,87 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.Serialization;
+using System.ServiceModel;
+using System.Text;
+
+namespace SurveyManagerInterface
+{
+    // NOTE: You can use the "Rename" command on the "Refactor" menu to change the interface name "IService1" in both code and config file together.
+    [ServiceContract]
+    public interface ISurveyManager
+    {
+
+        [OperationContract]
+        ISurveyRequestResult PublishSurvey(ISurveyRequest pRequestMessage);
+
+
+    }
+
+    // Use a data contract as illustrated in the sample below to add composite types to service operations
+    [DataContract]
+    public class ISurveyRequest
+    {
+
+        [DataMember]
+        public DateTime ClosingDate
+        {
+            get;
+            set;
+        }
+
+        [DataMember]
+        public string SurveyName
+        {
+            get;
+            set;
+        }
+
+        [DataMember]
+        public string OrganizationName
+        {
+            get;
+            set;
+        }
+
+        [DataMember]
+        public string IntroductionText
+        {
+            get;
+            set;
+        }
+
+
+        [DataMember]
+        public string TemplateXML
+        {
+            get;
+            set;
+        }
+
+    }
+
+    public interface ISurveyRequestResult
+    {
+        [DataMember]
+        public bool IsPulished
+        {
+            get;
+            set;
+        }
+
+        [DataMember]
+        public string URL
+        {
+            get;
+            set;
+        }
+
+        [DataMember]
+        public string StatusText
+        {
+            get;
+            set;
+        }
+    }
+}
