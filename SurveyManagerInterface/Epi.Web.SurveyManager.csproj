@@ -52,7 +52,7 @@
     <Compile Include="Service.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="Interfaces\App.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EIWS_BLL_Core\Epi.Web.BLL.csproj">
