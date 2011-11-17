@@ -5,9 +5,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epi.Web.SurveyManager", "Su
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epi.Web.BLL", "EIWS_BLL_Core\Epi.Web.BLL.csproj", "{D49B7A21-644B-49D7-9A5D-387BF31EAFE5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epi.Web.EF", "Epi.Web.EF\Epi.Web.EF.csproj", "{05A484AB-A555-4200-936B-BEC573285BCC}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 3
+		SccNumberOfProjects = 4
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs04
 		SccLocalPath0 = .
@@ -17,6 +19,9 @@ Global
 		SccProjectUniqueName2 = EIWS_BLL_Core\\Epi.Web.BLL.csproj
 		SccProjectName2 = EIWS_BLL_Core
 		SccLocalPath2 = EIWS_BLL_Core
+		SccProjectUniqueName3 = Epi.Web.EF\\Epi.Web.EF.csproj
+		SccProjectName3 = Epi.Web.EF
+		SccLocalPath3 = Epi.Web.EF
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +36,10 @@ Global
 		{D49B7A21-644B-49D7-9A5D-387BF31EAFE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D49B7A21-644B-49D7-9A5D-387BF31EAFE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D49B7A21-644B-49D7-9A5D-387BF31EAFE5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05A484AB-A555-4200-936B-BEC573285BCC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05A484AB-A555-4200-936B-BEC573285BCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05A484AB-A555-4200-936B-BEC573285BCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05A484AB-A555-4200-936B-BEC573285BCC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
