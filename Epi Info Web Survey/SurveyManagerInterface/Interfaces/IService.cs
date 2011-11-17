@@ -14,7 +14,6 @@ namespace SurveyManagerInterface
         ISurveyRequestResult PublishSurvey(ISurveyRequest pRequestMessage);
     }
 
-    // Use a data contract as illustrated in the sample below to add composite types to service operations
     [DataContract]
     public class ISurveyRequest : Epi.Web.Interfaces.ISurveyRequest
     {
@@ -25,7 +24,13 @@ namespace SurveyManagerInterface
         public string SurveyName { get; set; }
 
         [DataMember]
+        public string SurveyNumber { get; set; }
+
+        [DataMember]
         public string OrganizationName { get; set; }
+
+        [DataMember]
+        public string DepartmentName { get; set; }
 
         [DataMember]
         public string IntroductionText { get; set; }
