@@ -7,7 +7,6 @@ using System.Text;
 
 namespace SurveyManagerInterface
 {
-    // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "Service1" in both code and config file together.
     public class Service : ISurveyManager
     {
 
@@ -15,6 +14,8 @@ namespace SurveyManagerInterface
         {
             ISurveyRequestResult result = null;
 
+            Epi.Web.BLL.Publisher Implementation = new Epi.Web.BLL.Publisher();
+            result = (ISurveyRequestResult) Implementation.PublishSurvey(pRequestMessage);
             return result;
 
         }
