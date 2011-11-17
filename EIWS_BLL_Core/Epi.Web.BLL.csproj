@@ -37,6 +37,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -48,6 +49,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Epi.Web.EF\Epi.Web.EF.csproj">
+      <Project>{05A484AB-A555-4200-936B-BEC573285BCC}</Project>
+      <Name>Epi.Web.EF</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Epi.Web.Interfaces\Epi.Web.Interfaces.csproj">
       <Project>{B8AF69BD-3CE1-4AA5-875D-3FB87C7FCE44}</Project>
       <Name>Epi.Web.Interfaces</Name>
