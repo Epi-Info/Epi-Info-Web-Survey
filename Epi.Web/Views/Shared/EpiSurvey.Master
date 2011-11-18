@@ -1,0 +1,43 @@
+﻿<%@ Master Language="C#" Inherits="System.Web.Mvc.ViewMasterPage" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+    <!-- #BeginEditable "doctitle" -->
+    <title>
+        <asp:ContentPlaceHolder ID="TitleContent" runat="server" />
+    </title>
+    <!-- #EndEditable -->
+    <style type="text/css">
+        @import url('css/epistyle.css');
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="top">
+            <h1> Header</h1>
+               
+        </div>
+        <!-- #BeginEditable "body" -->
+        <div id="infobox">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+        <!--End editable body-->
+        <div id="footer">
+            <div id="footleft">
+                <span style="font-size: 8pt;">Powered by:</span>
+                <img alt="Epi Info" height="42" src="images/epi.png" width="42" align="middle" />
+            </div>
+            <div id="footright">
+                <img alt="CDC" height="42" src="images/cdclogo.png" width="71" />
+                <img src="images/logo_dhhs.gif" alt="HHS" height="42" />
+            </div>
+            <div style="clear: both;">
+            </div>
+        </div>
+    </div>
+</body>
+</html>
