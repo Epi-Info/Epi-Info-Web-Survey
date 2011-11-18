@@ -1,15 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epi.Web.SurveyManager", "SurveyManagerInterface\Epi.Web.SurveyManager.csproj", "{31F91938-2997-4650-8D36-71C845F1071D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epi.Web", "Epi.Web\Epi.Web.csproj", "{D7A6E617-B077-4F9A-9646-F2083B4A0FD0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epi.Web.Interfaces", "Epi.Web.Interfaces\Epi.Web.Interfaces.csproj", "{B8AF69BD-3CE1-4AA5-875D-3FB87C7FCE44}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epi.Web.BLL", "EIWS_BLL_Core\Epi.Web.BLL.csproj", "{D49B7A21-644B-49D7-9A5D-387BF31EAFE5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epi.Web.EF", "Epi.Web.EF\Epi.Web.EF.csproj", "{05A484AB-A555-4200-936B-BEC573285BCC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epi.Web", "Epi.Web\Epi.Web.csproj", "{D7A6E617-B077-4F9A-9646-F2083B4A0FD0}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epi.Web.Interfaces", "Epi.Web.Interfaces\Epi.Web.Interfaces.csproj", "{B8AF69BD-3CE1-4AA5-875D-3FB87C7FCE44}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epi.Web.SurveyManager", "SurveyManagerInterface\Epi.Web.SurveyManager.csproj", "{31F91938-2997-4650-8D36-71C845F1071D}"
 EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
@@ -17,39 +17,27 @@ Global
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs04
 		SccLocalPath0 = .
-		SccProjectUniqueName1 = SurveyManagerInterface\\Epi.Web.SurveyManager.csproj
-		SccProjectName1 = SurveyManagerInterface
-		SccLocalPath1 = SurveyManagerInterface
-		SccProjectUniqueName2 = EIWS_BLL_Core\\Epi.Web.BLL.csproj
-		SccProjectName2 = EIWS_BLL_Core
-		SccLocalPath2 = EIWS_BLL_Core
-		SccProjectUniqueName3 = Epi.Web.EF\\Epi.Web.EF.csproj
-		SccProjectName3 = Epi.Web.EF
-		SccLocalPath3 = Epi.Web.EF
-		SccProjectUniqueName4 = Epi.Web\\Epi.Web.csproj
-		SccProjectName4 = Epi.Web
-		SccLocalPath4 = Epi.Web
-		SccProjectUniqueName5 = Epi.Web.Interfaces\\Epi.Web.Interfaces.csproj
-		SccProjectName5 = Epi.Web.Interfaces
-		SccLocalPath5 = Epi.Web.Interfaces
+		SccProjectUniqueName1 = Epi.Web\\Epi.Web.csproj
+		SccProjectName1 = Epi.Web
+		SccLocalPath1 = Epi.Web
+		SccProjectUniqueName2 = Epi.Web.Interfaces\\Epi.Web.Interfaces.csproj
+		SccProjectName2 = Epi.Web.Interfaces
+		SccLocalPath2 = Epi.Web.Interfaces
+		SccProjectUniqueName3 = EIWS_BLL_Core\\Epi.Web.BLL.csproj
+		SccProjectName3 = EIWS_BLL_Core
+		SccLocalPath3 = EIWS_BLL_Core
+		SccProjectUniqueName4 = Epi.Web.EF\\Epi.Web.EF.csproj
+		SccProjectName4 = Epi.Web.EF
+		SccLocalPath4 = Epi.Web.EF
+		SccProjectUniqueName5 = SurveyManagerInterface\\Epi.Web.SurveyManager.csproj
+		SccProjectName5 = SurveyManagerInterface
+		SccLocalPath5 = SurveyManagerInterface
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{31F91938-2997-4650-8D36-71C845F1071D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{31F91938-2997-4650-8D36-71C845F1071D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{31F91938-2997-4650-8D36-71C845F1071D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{31F91938-2997-4650-8D36-71C845F1071D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D49B7A21-644B-49D7-9A5D-387BF31EAFE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D49B7A21-644B-49D7-9A5D-387BF31EAFE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D49B7A21-644B-49D7-9A5D-387BF31EAFE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D49B7A21-644B-49D7-9A5D-387BF31EAFE5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{05A484AB-A555-4200-936B-BEC573285BCC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{05A484AB-A555-4200-936B-BEC573285BCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{05A484AB-A555-4200-936B-BEC573285BCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{05A484AB-A555-4200-936B-BEC573285BCC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D7A6E617-B077-4F9A-9646-F2083B4A0FD0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D7A6E617-B077-4F9A-9646-F2083B4A0FD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D7A6E617-B077-4F9A-9646-F2083B4A0FD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -58,6 +46,18 @@ Global
 		{B8AF69BD-3CE1-4AA5-875D-3FB87C7FCE44}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B8AF69BD-3CE1-4AA5-875D-3FB87C7FCE44}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B8AF69BD-3CE1-4AA5-875D-3FB87C7FCE44}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D49B7A21-644B-49D7-9A5D-387BF31EAFE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D49B7A21-644B-49D7-9A5D-387BF31EAFE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D49B7A21-644B-49D7-9A5D-387BF31EAFE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D49B7A21-644B-49D7-9A5D-387BF31EAFE5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05A484AB-A555-4200-936B-BEC573285BCC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05A484AB-A555-4200-936B-BEC573285BCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05A484AB-A555-4200-936B-BEC573285BCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05A484AB-A555-4200-936B-BEC573285BCC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31F91938-2997-4650-8D36-71C845F1071D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31F91938-2997-4650-8D36-71C845F1071D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31F91938-2997-4650-8D36-71C845F1071D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31F91938-2997-4650-8D36-71C845F1071D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
