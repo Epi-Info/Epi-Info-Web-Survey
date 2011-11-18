@@ -5,17 +5,21 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
 
-namespace SurveyManagerInterface
+namespace Epi.Web.SurveyManager
 {
     public class Service : ISurveyManager
     {
-
-        ISurveyRequestResult PublishSurvey(ISurveyRequest pRequestMessage)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="pRequestMessage"></param>
+        /// <returns></returns>
+        public cSurveyRequestResult PublishSurvey(cSurveyRequest pRequestMessage)
         {
-            ISurveyRequestResult result = null;
+            cSurveyRequestResult result = null;
 
             Epi.Web.BLL.Publisher Implementation = new Epi.Web.BLL.Publisher();
-            result = (ISurveyRequestResult) Implementation.PublishSurvey(pRequestMessage);
+            result = (cSurveyRequestResult) Implementation.PublishSurvey(pRequestMessage);
             return result;
 
         }
