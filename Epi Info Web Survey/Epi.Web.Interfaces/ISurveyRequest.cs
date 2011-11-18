@@ -7,16 +7,16 @@ using System.Text;
 namespace Epi.Web.Interfaces
 {
     
-        public class ISurveyRequest
+        public interface ISurveyRequest
         {
-            public DateTime ClosingDate { get; set; }
-            public string SurveyName { get; set; }
-            public string SurveyNumber { get; set; }
-            public string OrganizationName { get; set; }
-            public string DepartmentName { get; set; }
-            public string IntroductionText { get; set; }
-            public bool IsSingleResponse { get; set;  }
-            public string TemplateXML { get; set; }
+            DateTime ClosingDate { get; set; }
+            string SurveyName { get; set; }
+            string SurveyNumber { get; set; }
+            string OrganizationName { get; set; }
+            string DepartmentName { get; set; }
+            string IntroductionText { get; set; }
+            bool IsSingleResponse { get; set;  }
+            string TemplateXML { get; set; }
         }
 
 
