@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Epi.Web.SurveyManager" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Epi.Web.SurveyManager" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="cSurveyRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ClosingDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="DepartmentName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IntroductionText" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsSingleResponse" type="xs:boolean" />
+      <xs:element minOccurs="0" name="OrganizationName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SurveyName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SurveyNumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TemplateXML" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="cSurveyRequest" nillable="true" type="tns:cSurveyRequest" />
+  <xs:complexType name="cSurveyRequestResult">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="IsPulished" type="xs:boolean" />
+      <xs:element minOccurs="0" name="StatusText" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="URL" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="cSurveyRequestResult" nillable="true" type="tns:cSurveyRequestResult" />
+</xs:schema>
