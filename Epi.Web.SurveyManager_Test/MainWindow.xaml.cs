@@ -23,5 +23,46 @@ namespace Epi.Web.SurveyManager_Test
         {
             InitializeComponent();
         }
+
+        private void button1_Click(object sender, RoutedEventArgs e)
+        {
+            SurveyManagerService.SurveyManagerClient client = new SurveyManagerService.SurveyManagerClient();
+
+            SurveyManagerService.cSurveyRequest Request = new SurveyManagerService.cSurveyRequest();
+            if (this.ClosingDateCalendar.SelectedDate == null)
+            {
+                Request.ClosingDate = (DateTime)this.ClosingDateCalendar.DisplayDate;
+            }
+            else
+            {
+                Request.ClosingDate = (DateTime)this.ClosingDateCalendar.SelectedDate;
+            }
+
+            Request.DepartmentName = this.DepartmentTextBox.Text;
+            Request.IntroductionText = this.IntroductionTextBox.Selection.Text;
+            Request.IsSingleResponse = (bool)this.IsSingleResponseCheckBox.IsChecked;
+
+            Request.OrganizationName = this.OrganizationTextBox.Text;
+            Request.SurveyName = this.SurveyNameTextBox.Text;
+            Request.SurveyNumber = this.SurveyNumberTextBox.Text;
+            Request.TemplateXML = this.TemplateXMLTextBox.Selection.Text;
+
+            try
+            {
+                SurveyManagerService.cSurveyRequestResult Result = client.PublishSurvey(Request);
+
+                ServiceResponseTextBox.AppendText("is published: ");
+                ServiceResponseTextBox.AppendText(Result.IsPulished.ToString());
+                ServiceResponseTextBox.AppendText("\nURL: ");
+                ServiceResponseTextBox.AppendText(Result.URL);
+                ServiceResponseTextBox.AppendText("\nStatus Text: ");
+                ServiceResponseTextBox.AppendText(Result.StatusText);
+            }
+            catch(Exception ex)
+            {
+                ServiceResponseTextBox.AppendText("error:\n");
+                ServiceResponseTextBox.AppendText(ex.ToString());
+            }
+        }
     }
 }
