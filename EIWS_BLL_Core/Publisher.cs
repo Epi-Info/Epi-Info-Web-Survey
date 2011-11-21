@@ -33,8 +33,8 @@ namespace Epi.Web.BLL
             if (pRequestMessage != null) {
                 try
                 {
-                    //var Entities = new Epi.Web.EF.EIWSEntities(connectionString);
-                    var Entities = new Epi.Web.EF.EIWSEntities();
+                    var Entities = new Epi.Web.EF.EIWSEntities(connectionString);
+                    //var Entities = new Epi.Web.EF.EIWSEntities();
 
                     Epi.Web.EF.SurveyMetaData SurveyMetaData = new Epi.Web.EF.SurveyMetaData();
 
