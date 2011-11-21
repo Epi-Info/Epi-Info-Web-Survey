@@ -26,9 +26,9 @@ namespace Epi.Web.SurveyManager_Test
 
         private void button1_Click(object sender, RoutedEventArgs e)
         {
-            SurveyManagerService.SurveyManagerClient client = new SurveyManagerService.SurveyManagerClient();
+            Epi.Web.SurveyManager.Service  client = new Epi.Web.SurveyManager.Service();
 
-            SurveyManagerService.cSurveyRequest Request = new SurveyManagerService.cSurveyRequest();
+            Epi.Web.SurveyManager.cSurveyRequest Request = new Epi.Web.SurveyManager.cSurveyRequest();
             if (this.ClosingDateCalendar.SelectedDate == null)
             {
                 Request.ClosingDate = (DateTime)this.ClosingDateCalendar.DisplayDate;
@@ -49,7 +49,7 @@ namespace Epi.Web.SurveyManager_Test
 
             try
             {
-                SurveyManagerService.cSurveyRequestResult Result = client.PublishSurvey(Request);
+                Epi.Web.SurveyManager.cSurveyRequestResult Result = client.PublishSurvey(Request);
 
                 ServiceResponseTextBox.AppendText("is published: ");
                 ServiceResponseTextBox.AppendText(Result.IsPulished.ToString());

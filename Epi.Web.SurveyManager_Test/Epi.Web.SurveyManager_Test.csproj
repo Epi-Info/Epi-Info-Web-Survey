@@ -138,6 +138,16 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Epi.Web.Interfaces\Epi.Web.Interfaces.csproj">
+      <Project>{B8AF69BD-3CE1-4AA5-875D-3FB87C7FCE44}</Project>
+      <Name>Epi.Web.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SurveyManagerInterface\Epi.Web.SurveyManager.csproj">
+      <Project>{31F91938-2997-4650-8D36-71C845F1071D}</Project>
+      <Name>Epi.Web.SurveyManager</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
