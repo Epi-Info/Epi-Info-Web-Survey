@@ -52,9 +52,6 @@
     <Compile Include="Service.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Interfaces\App.config" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\EIWS_BLL_Core\Epi.Web.BLL.csproj">
       <Project>{D49B7A21-644B-49D7-9A5D-387BF31EAFE5}</Project>
       <Name>Epi.Web.BLL</Name>
