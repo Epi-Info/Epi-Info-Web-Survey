@@ -36,14 +36,16 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Epi.Web.ServiceHost", "Epi.
 		VWDPort = "22587"
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epi.Web.SurveyManager_Test", "Epi.Web.SurveyManager_Test\Epi.Web.SurveyManager_Test.csproj", "{13D8FD8D-1403-4C84-823A-1E27806CAC30}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epi.Web.SurveyManager.Client", "Epi.Web.SurveyManager_Test\Epi.Web.SurveyManager.Client.csproj", "{13D8FD8D-1403-4C84-823A-1E27806CAC30}"
 	ProjectSection(ProjectDependencies) = postProject
 		{87C1365F-B3D2-4D30-9C3B-D26CE677D7FE} = {87C1365F-B3D2-4D30-9C3B-D26CE677D7FE}
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epi.Web.BLL.Test", "Epi.Web.SurveyManager.Test\Epi.Web.BLL.Test.csproj", "{163A960D-721D-4C43-B4D9-66522FFA3BAE}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 8
+		SccNumberOfProjects = 9
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs04
 		SccLocalPath0 = .
@@ -67,9 +69,12 @@ Global
 		SccProjectName6 = Epi.Web.ServiceHost
 		SccLocalPath6 = Epi.Web.ServiceHost
 		SccProjectEnlistmentChoice6 = 2
-		SccProjectUniqueName7 = Epi.Web.SurveyManager_Test\\Epi.Web.SurveyManager_Test.csproj
+		SccProjectUniqueName7 = Epi.Web.SurveyManager_Test\\Epi.Web.SurveyManager.Client.csproj
 		SccProjectName7 = Epi.Web.SurveyManager_Test
 		SccLocalPath7 = Epi.Web.SurveyManager_Test
+		SccProjectUniqueName8 = Epi.Web.SurveyManager.Test\\Epi.Web.BLL.Test.csproj
+		SccProjectName8 = Epi.Web.SurveyManager.Test
+		SccLocalPath8 = Epi.Web.SurveyManager.Test
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -150,6 +155,16 @@ Global
 		{13D8FD8D-1403-4C84-823A-1E27806CAC30}.Release|Mixed Platforms.Build.0 = Release|x86
 		{13D8FD8D-1403-4C84-823A-1E27806CAC30}.Release|x86.ActiveCfg = Release|x86
 		{13D8FD8D-1403-4C84-823A-1E27806CAC30}.Release|x86.Build.0 = Release|x86
+		{163A960D-721D-4C43-B4D9-66522FFA3BAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{163A960D-721D-4C43-B4D9-66522FFA3BAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{163A960D-721D-4C43-B4D9-66522FFA3BAE}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{163A960D-721D-4C43-B4D9-66522FFA3BAE}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{163A960D-721D-4C43-B4D9-66522FFA3BAE}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{163A960D-721D-4C43-B4D9-66522FFA3BAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{163A960D-721D-4C43-B4D9-66522FFA3BAE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{163A960D-721D-4C43-B4D9-66522FFA3BAE}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{163A960D-721D-4C43-B4D9-66522FFA3BAE}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{163A960D-721D-4C43-B4D9-66522FFA3BAE}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
