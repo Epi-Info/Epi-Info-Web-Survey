@@ -11,7 +11,7 @@ namespace Epi.Web.BLL
         public Epi.Web.Interfaces.ISurveyRequestResult PublishSurvey(Epi.Web.Interfaces.ISurveyRequest pRequestMessage)
         {
 
-            Epi.Web.Interfaces.ISurveyRequestResult result = null;
+            Epi.Web.Interfaces.ISurveyRequestResult result = new cSurveyRequestResult();
             if (pRequestMessage != null) {
 
                 var Entities = new Epi.Web.EF.EIWSEntities();
