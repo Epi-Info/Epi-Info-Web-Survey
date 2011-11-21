@@ -16,10 +16,14 @@ namespace Epi.Web.SurveyManager
         /// <returns></returns>
         public cSurveyRequestResult PublishSurvey(cSurveyRequest pRequestMessage)
         {
-            cSurveyRequestResult result = null;
+            cSurveyRequestResult result = new cSurveyRequestResult();
 
             Epi.Web.BLL.Publisher Implementation = new Epi.Web.BLL.Publisher();
-            result = (cSurveyRequestResult) Implementation.PublishSurvey(pRequestMessage);
+            Epi.Web.Interfaces.ISurveyRequestResult r = Implementation.PublishSurvey(pRequestMessage);
+            result.IsPulished = r.IsPulished;
+            result.StatusText = r.StatusText;
+            result.URL = r.URL;
+
             return result;
 
         }
