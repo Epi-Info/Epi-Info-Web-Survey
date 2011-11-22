@@ -7,7 +7,7 @@ using System.Runtime.Serialization;
 namespace Epi.Web.Common.DTO
 {
     [DataContract]
-    public class cSurveyRequest : Epi.Web.Interfaces.ISurveyRequest
+    public class cSurveyRequest  
     {
         DateTime closingDate;
         string surveyName;
