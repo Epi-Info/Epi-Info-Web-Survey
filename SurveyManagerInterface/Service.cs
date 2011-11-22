@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
+using Epi.Web.Common.DTO;
 
 namespace Epi.Web.SurveyManager
 {
@@ -16,13 +17,13 @@ namespace Epi.Web.SurveyManager
         /// <returns></returns>
         public cSurveyRequestResult PublishSurvey(cSurveyRequest pRequestMessage)
         {
-            cSurveyRequestResult result = new cSurveyRequestResult();
+            cSurveyRequestResult result = null;
 
             Epi.Web.BLL.Publisher Implementation = new Epi.Web.BLL.Publisher();
-            Epi.Web.Interfaces.ISurveyRequestResult r = Implementation.PublishSurvey(pRequestMessage);
-            result.IsPulished = r.IsPulished;
-            result.StatusText = r.StatusText;
-            result.URL = r.URL;
+            result = Implementation.PublishSurvey(pRequestMessage);
+            //result.IsPulished = r.IsPulished;
+            //result.StatusText = r.StatusText;
+            //result.URL = r.URL;
 
             return result;
 

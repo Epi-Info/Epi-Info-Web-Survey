@@ -28,7 +28,7 @@ namespace Epi.Web.SurveyManager_Test
         {
             Epi.Web.SurveyManager.Service  client = new Epi.Web.SurveyManager.Service();
 
-            Epi.Web.SurveyManager.cSurveyRequest Request = new Epi.Web.SurveyManager.cSurveyRequest();
+            Epi.Web.Common.DTO.cSurveyRequest Request = new Epi.Web.Common.DTO.cSurveyRequest();
             if (this.ClosingDateCalendar.SelectedDate == null)
             {
                 Request.ClosingDate = (DateTime)this.ClosingDateCalendar.DisplayDate;
@@ -49,7 +49,7 @@ namespace Epi.Web.SurveyManager_Test
 
             try
             {
-                Epi.Web.SurveyManager.cSurveyRequestResult Result = client.PublishSurvey(Request);
+                Epi.Web.Common.DTO.cSurveyRequestResult Result = client.PublishSurvey(Request);
 
                 ServiceResponseTextBox.AppendText("is published: ");
                 ServiceResponseTextBox.AppendText(Result.IsPulished.ToString());
