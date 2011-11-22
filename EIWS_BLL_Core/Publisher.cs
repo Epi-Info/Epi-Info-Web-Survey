@@ -89,7 +89,7 @@ namespace Epi.Web.BLL
             return result;
         }
 
-        public string GetURL(Epi.Web.Interfaces.ISurveyRequest pRequestMessage , Guid SurveyId )
+        public string GetURL(Epi.Web.Common.DTO.cSurveyRequest pRequestMessage , Guid SurveyId )
         {
             System.Text.StringBuilder URL = new System.Text.StringBuilder();
             URL.Append(System.Configuration.ConfigurationManager.AppSettings["URL"]);
