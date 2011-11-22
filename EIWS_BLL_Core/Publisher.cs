@@ -91,15 +91,13 @@ namespace Epi.Web.BLL
 
         public string GetURL(Epi.Web.Interfaces.ISurveyRequest pRequestMessage , Guid SurveyId )
         {
-           
-            string URL = System.Configuration.ConfigurationManager.AppSettings["URL"];
-            URL += "/";
-            URL += pRequestMessage.SurveyNumber.ToString();
-            URL += "/";
-            URL += SurveyId.ToString();
-        
-
-            return URL;
+            System.Text.StringBuilder URL = new System.Text.StringBuilder();
+            URL.Append(System.Configuration.ConfigurationManager.AppSettings["URL"]);
+            URL.Append("/");
+            URL.Append(pRequestMessage.SurveyNumber.ToString());
+            URL.Append("/");
+            URL.Append(SurveyId.ToString());
+            return URL.ToString();
         }
         public string GetconnectionString() {
             string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["EIWSEntities"].ConnectionString;
