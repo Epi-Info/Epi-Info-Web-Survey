@@ -21,11 +21,11 @@ namespace Epi.Web.BLL
         /// <param name="pRequestMessage"></param>
         /// <returns></returns>
         /// 
-   
-        public Epi.Web.Interfaces.ISurveyRequestResult PublishSurvey(Epi.Web.Interfaces.ISurveyRequest pRequestMessage)
+
+        public Epi.Web.Common.DTO.cSurveyRequestResult PublishSurvey(Epi.Web.Common.DTO.cSurveyRequest pRequestMessage)
         {
-              
-            cSurveyRequestResult result = new cSurveyRequestResult();
+
+            Epi.Web.Common.DTO.cSurveyRequestResult result = new Epi.Web.Common.DTO.cSurveyRequestResult();
 
             var SurveyId = Guid.NewGuid();
             var  connectionString = GetconnectionString();

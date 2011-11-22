@@ -56,6 +56,10 @@
       <Project>{D49B7A21-644B-49D7-9A5D-387BF31EAFE5}</Project>
       <Name>Epi.Web.BLL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Epi.Web.Common\Epi.Web.Common.csproj">
+      <Project>{6E2F059B-C1CD-401F-8A63-DC2933CFB0D8}</Project>
+      <Name>Epi.Web.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Epi.Web.Interfaces\Epi.Web.Interfaces.csproj">
       <Project>{B8AF69BD-3CE1-4AA5-875D-3FB87C7FCE44}</Project>
       <Name>Epi.Web.Interfaces</Name>
