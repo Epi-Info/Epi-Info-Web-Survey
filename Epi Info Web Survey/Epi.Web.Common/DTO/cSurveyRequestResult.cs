@@ -7,7 +7,7 @@ using System.Runtime.Serialization;
 namespace Epi.Web.Common.DTO
 {
     [DataContract]
-    public class cSurveyRequestResult : Epi.Web.Interfaces.ISurveyRequestResult
+    public class cSurveyRequestResult  
     {
         bool isPulished;
         string uRL;
