@@ -13,6 +13,8 @@ namespace Epi.Web.Common.DTO
         private string _SurveyNumber;
         private string _SurveyName;
         private string _IntroductionText;
+        private string _DepartmentName;
+        private string _OrganizationName;
         private string _XML;
         private bool _IsSuccess;
 
@@ -36,6 +38,21 @@ namespace Epi.Web.Common.DTO
             get { return _SurveyName; }
             set { _SurveyName = value; }
         }
+
+        [DataMember]
+        public string OrganizationName
+        {
+            get { return _OrganizationName; }
+            set { _OrganizationName = value; }
+        }
+
+        [DataMember]
+        public string DepartmentName
+        {
+            get { return _DepartmentName; }
+            set { _DepartmentName = value; }
+        }
+
 
         [DataMember]
         public string IntroductionText
