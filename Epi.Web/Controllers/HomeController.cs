@@ -20,10 +20,11 @@ namespace Epi.Web.Controllers
         }
         public ActionResult ListSurvey(string param)
         {
-            //string surveyid = Request.QueryString["param"];
-            //SurveyManager sm= new SurveyManager();
-            var s = _iSurveyManager.GetSurveyInfoById(param);
-            return View(s);
+            string surveyid = Request.Path.Substring(Request.Path.LastIndexOf('/') + 1,Request.Path.Length - Request.Path.LastIndexOf('/') - 1);
+
+
+            var s = _iSurveyManager.GetSurveyInfoById(surveyid);
+            return View("SurveyIntroduction", s);
             
         }
 
