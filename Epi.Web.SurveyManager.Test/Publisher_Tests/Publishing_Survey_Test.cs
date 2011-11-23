@@ -18,7 +18,10 @@ namespace Epi.Web.SurveyManager.Test
         [Test]
         public void Publish_The_survey()
         {
-            Assert.AreEqual(true, true);
+            //var result = PublishSurvey();
+            //Assert.AreNotEqual("", result);
         }
+
+     
     }
 }

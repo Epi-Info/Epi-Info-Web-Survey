@@ -32,18 +32,14 @@ namespace Epi.Web.SurveyManager
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="pRequestMessage"></param>
+        /// <param name="pId"></param>
         /// <returns></returns>
         public cSurveyInfo GetSurveyInfoById(string pId)
         {
             cSurveyInfo result = null;
-
-            //Epi.Web.BLL.Publisher Implementation = new Epi.Web.BLL.Publisher();
-            //result = Implementation.PublishSurvey(pRequestMessage);
-            //result.IsPulished = r.IsPulished;
-            //result.StatusText = r.StatusText;
-            //result.URL = r.URL;
-
+            Epi.Web.BLL.SurveyInfo Implementation = new Epi.Web.BLL.SurveyInfo();
+            result = Implementation.GetSurveyInfoById(pId);
+   
             return result;
 
         }

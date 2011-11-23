@@ -13,6 +13,8 @@ namespace Epi.Web.BLL
   
     public class Publisher
     {
+
+        #region"Public members"
         /// <summary>
         ///  This class is used to process the object sent from the WCF service “SurveyManager”, 
         ///  save survey info into SurvayMetaData Table 
@@ -21,16 +23,20 @@ namespace Epi.Web.BLL
         /// <param name="pRequestMessage"></param>
         /// <returns></returns>
         /// 
+        public Publisher()
+        {
 
+        }
         public Epi.Web.Common.DTO.cSurveyRequestResult PublishSurvey(Epi.Web.Common.DTO.cSurveyRequest pRequestMessage)
         {
 
             Epi.Web.Common.DTO.cSurveyRequestResult result = new Epi.Web.Common.DTO.cSurveyRequestResult();
 
             var SurveyId = Guid.NewGuid();
-            var  connectionString = GetconnectionString();
-            
-            if (pRequestMessage != null) {
+            var connectionString = GetconnectionString();
+
+            if (pRequestMessage != null)
+            {
                 try
                 {
                     var Entities = new Epi.Web.EF.EIWSEntities(connectionString);
@@ -39,32 +45,32 @@ namespace Epi.Web.BLL
                     Epi.Web.EF.SurveyMetaData SurveyMetaData = new Epi.Web.EF.SurveyMetaData();
 
 
-                SurveyMetaData.SurveyId = SurveyId;
-                SurveyMetaData.ClosingDate = pRequestMessage.ClosingDate;
-               
-                SurveyMetaData.IntroductionText = pRequestMessage.IntroductionText;
+                    SurveyMetaData.SurveyId = SurveyId;
+                    SurveyMetaData.ClosingDate = pRequestMessage.ClosingDate;
 
-                SurveyMetaData.DepartmentName = pRequestMessage.DepartmentName;
-                SurveyMetaData.OrganizationName = pRequestMessage.OrganizationName;
+                    SurveyMetaData.IntroductionText = pRequestMessage.IntroductionText;
 
-                SurveyMetaData.SurveyNumber = pRequestMessage.SurveyNumber;
+                    SurveyMetaData.DepartmentName = pRequestMessage.DepartmentName;
+                    SurveyMetaData.OrganizationName = pRequestMessage.OrganizationName;
 
-                SurveyMetaData.TemplateXML = pRequestMessage.TemplateXML;
+                    SurveyMetaData.SurveyNumber = pRequestMessage.SurveyNumber;
 
-                SurveyMetaData.SurveyName = pRequestMessage.SurveyName;
+                    SurveyMetaData.TemplateXML = pRequestMessage.TemplateXML;
 
-                Entities.AddToSurveyMetaDatas(SurveyMetaData);
-                
-                try
-                {
-                  
-                    Entities.SaveChanges();
-                }
-                catch 
-                {
-                    Entities.ObjectStateManager.GetObjectStateEntry(SurveyMetaData).Delete();
-              
-                }
+                    SurveyMetaData.SurveyName = pRequestMessage.SurveyName;
+
+                    Entities.AddToSurveyMetaDatas(SurveyMetaData);
+
+                    try
+                    {
+
+                        Entities.SaveChanges();
+                    }
+                    catch
+                    {
+                        Entities.ObjectStateManager.GetObjectStateEntry(SurveyMetaData).Delete();
+
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -77,19 +83,23 @@ namespace Epi.Web.BLL
                     result.URL = GetURL(pRequestMessage, SurveyId);
                     result.IsPulished = true;
                 }
-                else {
+                else
+                {
 
                     result.URL = "";
                     result.IsPulished = false;
                     result.StatusText = "An Error has occurred while publishing your survey.";
                 }
-                
-                 
+
+
             }
             return result;
         }
 
-        public string GetURL(Epi.Web.Common.DTO.cSurveyRequest pRequestMessage , Guid SurveyId )
+        #endregion
+
+        #region "Private members"
+        private string GetURL(Epi.Web.Common.DTO.cSurveyRequest pRequestMessage, Guid SurveyId)
         {
             System.Text.StringBuilder URL = new System.Text.StringBuilder();
             URL.Append(System.Configuration.ConfigurationManager.AppSettings["URL"]);
@@ -99,9 +109,12 @@ namespace Epi.Web.BLL
             URL.Append(SurveyId.ToString());
             return URL.ToString();
         }
+        #endregion
+        
         public string GetconnectionString() {
             string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["EIWSEntities"].ConnectionString;
             return connectionString;
         }
+      
     }
 }
