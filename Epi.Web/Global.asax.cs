@@ -24,7 +24,7 @@ namespace Epi.Web
             routes.MapRoute
             (
                 "Survey", // Route name
-                "Survey/ListSurvey/{id}", // URL with parameters
+                "Survey/{id}", // URL with parameters
                 new { controller = "Home", action = "ListSurvey", id = UrlParameter.Optional }
             ); // Parameter defaults
 
