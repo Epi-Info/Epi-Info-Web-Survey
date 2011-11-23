@@ -15,7 +15,7 @@ namespace Epi.Web.SurveyManager
         cSurveyRequestResult PublishSurvey(cSurveyRequest pRequestMessage);
 
         [OperationContract]
-        cSurveyInfo GetSurveyInfoById(String pid);
+        cSurveyInfo GetSurveyInfoById(String pIid);
     }
 
 }
