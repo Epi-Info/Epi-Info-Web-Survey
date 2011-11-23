@@ -15,26 +15,26 @@ namespace Epi.Web.BLL
         public Epi.Web.Common.DTO.cSurveyInfo GetSurveyInfoById(String pId){
 
             Epi.Web.Common.DTO.cSurveyInfo result = new Epi.Web.Common.DTO.cSurveyInfo();
-
+            Guid Id = new Guid(pId);
 
 
             using (var Context = new Epi.Web.EF.EIWSEntities(GetconnectionString()))
            {
                var Surveys = from p in Context.SurveyMetaDatas
-                              // where p.SurveyId == pId
-                             where p.SurveyNumber == "33333"
+                             where p.SurveyId.Equals(Id)
 
                                select p;
 
-               foreach (var Survey in Surveys)
-               {
-                   result.SurveyName = Survey.SurveyName;
-                   result.SurveyNumber = Survey.SurveyNumber;
-                   result.XML = Survey.TemplateXML;
-                   result.SurveyName = Survey.SurveyName;
-                   result.IntroductionText = Survey.IntroductionText;
- 
-               }
+                var Survey = Surveys.Single();
+               
+                result.SurveyName = Survey.SurveyName;
+                result.SurveyNumber = Survey.SurveyNumber;
+                result.XML = Survey.TemplateXML;
+                result.SurveyName = Survey.SurveyName;
+                result.IntroductionText = Survey.IntroductionText;
+                result.OrganizationName = Survey.OrganizationName;
+                result.DepartmentName = Survey.DepartmentName;
+               
 
            }
 
