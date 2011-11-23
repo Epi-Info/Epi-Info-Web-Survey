@@ -10,7 +10,8 @@ namespace Epi.Web.Controllers
     public class HomeController : Controller
     {
         
-         private ISurveyManager _iSurveyManager;
+         //private ISurveyManager _iSurveyManager;
+        private ISurveyManager _iSurveyManager;
 
 
          public HomeController(ISurveyManager iSurveyManager)
