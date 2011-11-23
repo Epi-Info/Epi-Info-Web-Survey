@@ -49,7 +49,7 @@ namespace Epi.Web.SurveyManager_Test
 
             try
             {
-                Epi.Web.Common.DTO.cSurveyRequestResult Result = client.GetSurveyById(Request);
+                Epi.Web.Common.DTO.cSurveyRequestResult Result = client.PublishSurvey(Request);
 
                 ServiceResponseTextBox.AppendText("is published: ");
                 ServiceResponseTextBox.AppendText(Result.IsPulished.ToString());
