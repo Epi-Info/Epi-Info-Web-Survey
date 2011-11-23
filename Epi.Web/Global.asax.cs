@@ -21,13 +21,22 @@ namespace Epi.Web
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            routes.MapRoute
+            (
+                "Survey", // Route name
+                "Survey/ListSurvey/{id}", // URL with parameters
+                new { controller = "Home", action = "ListSurvey", id = UrlParameter.Optional }
+            ); // Parameter defaults
+
+           
+
             routes.MapRoute(
                 "Default", // Route name
                 "{controller}/{action}/{id}", // URL with parameters
-                new { controller = "Home", action = "Index", id = UrlParameter.Optional } // Parameter defaults
-               
+                new { controller = "Home", action = "Index", id = UrlParameter.Optional }); // Parameter defaults
 
-            );
+
+            
 
         }
 
