@@ -24,9 +24,9 @@ namespace Epi.Web.Controllers
 
 
             var s = _iSurveyManager.GetSurveyInfoById(surveyid);
-            return View("SurveyIntroduction");
+            //return View("SurveyIntroduction");
 
-           // return View("SurveyIntroduction", s);
+            return View("SurveyIntroduction", s);
             
         }
 
