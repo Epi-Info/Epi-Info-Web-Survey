@@ -46,8 +46,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Publishing_Survey_Test.cs" />
+    <Compile Include="Publisher_Tests\Get_URL.cs" />
+    <Compile Include="Publisher_Tests\Publishing_Survey_Test.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EIWS_BLL_Core\Epi.Web.BLL.csproj">
+      <Project>{D49B7A21-644B-49D7-9A5D-387BF31EAFE5}</Project>
+      <Name>Epi.Web.BLL</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

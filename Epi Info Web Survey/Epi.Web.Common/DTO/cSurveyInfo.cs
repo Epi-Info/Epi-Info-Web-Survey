@@ -12,7 +12,7 @@ namespace Epi.Web.Common.DTO
         private string _SurveyId;
         private string _SurveyNumber;
         private string _SurveyName;
-        private string _SurveyDescription;
+        private string _IntroductionText;
         private string _XML;
         private bool _IsSuccess;
 
@@ -38,10 +38,10 @@ namespace Epi.Web.Common.DTO
         }
 
         [DataMember]
-        public string SurveyDescription
+        public string IntroductionText
         {
-            get { return _SurveyDescription; }
-            set { _SurveyDescription = value; }
+            get { return _IntroductionText; }
+            set { _IntroductionText = value; }
         }
         [DataMember]
         public string XML

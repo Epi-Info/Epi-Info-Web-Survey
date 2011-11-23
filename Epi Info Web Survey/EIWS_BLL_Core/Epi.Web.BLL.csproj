@@ -57,6 +57,7 @@
   <ItemGroup>
     <Compile Include="Publisher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SurveyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Epi.Web.Common\Epi.Web.Common.csproj">
