@@ -21,7 +21,7 @@ namespace Epi.Web.Controllers
         {
             //string surveyid = Request.QueryString["param"];
             //SurveyManager sm= new SurveyManager();
-            var s = _iSurveyManager.GetSurveyById(param);
+            var s = _iSurveyManager.GetSurveyInfoById(param);
             return View(s);
             
         }
