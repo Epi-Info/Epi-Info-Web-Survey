@@ -15,7 +15,7 @@ namespace Epi.Web.SurveyManager
         /// </summary>
         /// <param name="pRequestMessage"></param>
         /// <returns></returns>
-        public cSurveyRequestResult PublishSurvey(cSurveyRequest pRequestMessage)
+        public cSurveyRequestResult GetSurveyById(cSurveyRequest pRequestMessage)
         {
             cSurveyRequestResult result = null;
 

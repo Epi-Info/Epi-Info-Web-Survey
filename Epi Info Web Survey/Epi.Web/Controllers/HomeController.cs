@@ -3,17 +3,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
+using Epi.Web.Models;
+using Epi.Web.SurveyManager;
 namespace Epi.Web.Controllers
 {
     public class HomeController : Controller
     {
-        //
-        // GET: /Home/
+        
+         private ISurveyManager _iSurveyManager;
 
-        public ActionResult Index()
+
+         public HomeController(ISurveyManager iSurveyManager)
         {
-            return View();
+            _iSurveyManager = iSurveyManager;
+        }
+        public ActionResult ListSurvey(string param)
+        {
+            //string surveyid = Request.QueryString["param"];
+            //SurveyManager sm= new SurveyManager();
+            var s = _iSurveyManager.GetSurveyById(param);
+            return View(s);
+            
         }
 
     }
