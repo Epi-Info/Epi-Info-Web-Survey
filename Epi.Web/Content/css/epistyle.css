@@ -29,7 +29,7 @@ body
  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
  }
 
-#top
+#header
  {
  padding: 0.5em 0.5em 1.0em .5em;
  background-color: #bfe7ea;
@@ -40,7 +40,7 @@ body
  -moz-border-radius-topright: 10px;
  }
 
-#top h1
+#header h1
  {
  padding: 0;
  margin: 0;
@@ -50,6 +50,7 @@ body
 
 #content
  {
+ clear:both;
  margin-left: 0.5em;
  margin-right: 0.5em;
  padding: 1em;
@@ -68,7 +69,7 @@ body
  /*margin-top: -1em;*/
  padding: 0.2em 0.5em 0.2em .5em;
  font-size: 9pt;
- margin-bottom: 1em;
+/* margin-bottom: 1em;*/
  background: #87d69b;
  }
 

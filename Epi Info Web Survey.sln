@@ -45,9 +45,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epi.Web.BLL.Test", "Epi.Web
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epi.Web.Common", "Epi.Web.Common\Epi.Web.Common.csproj", "{6E2F059B-C1CD-401F-8A63-DC2933CFB0D8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epi.Web.Test", "Epi.Web.Test\Epi.Web.Test.csproj", "{6F9325C1-4172-455D-9ADC-AC88F36408F6}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 10
+		SccNumberOfProjects = 11
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs04
 		SccLocalPath0 = .
@@ -80,6 +82,9 @@ Global
 		SccProjectUniqueName9 = Epi.Web.Common\\Epi.Web.Common.csproj
 		SccProjectName9 = Epi.Web.Common
 		SccLocalPath9 = Epi.Web.Common
+		SccProjectUniqueName10 = Epi.Web.Test\\Epi.Web.Test.csproj
+		SccProjectName10 = Epi.Web.Test
+		SccLocalPath10 = Epi.Web.Test
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -180,6 +185,16 @@ Global
 		{6E2F059B-C1CD-401F-8A63-DC2933CFB0D8}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{6E2F059B-C1CD-401F-8A63-DC2933CFB0D8}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{6E2F059B-C1CD-401F-8A63-DC2933CFB0D8}.Release|x86.ActiveCfg = Release|Any CPU
+		{6F9325C1-4172-455D-9ADC-AC88F36408F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F9325C1-4172-455D-9ADC-AC88F36408F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F9325C1-4172-455D-9ADC-AC88F36408F6}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{6F9325C1-4172-455D-9ADC-AC88F36408F6}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{6F9325C1-4172-455D-9ADC-AC88F36408F6}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{6F9325C1-4172-455D-9ADC-AC88F36408F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F9325C1-4172-455D-9ADC-AC88F36408F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F9325C1-4172-455D-9ADC-AC88F36408F6}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{6F9325C1-4172-455D-9ADC-AC88F36408F6}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{6F9325C1-4172-455D-9ADC-AC88F36408F6}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
