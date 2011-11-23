@@ -4,7 +4,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
-using Epi.Web.Common.DTO;
+using Epi.Web.Common;
 
 namespace Epi.Web.SurveyManager
 {
