@@ -4,6 +4,12 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
     Index
 </asp:Content>
+<asp:Content ID="Content3" ContentPlaceHolderID="HeaderContent" runat="server">
+     <div id="header">
+            <h1>
+                Survey Name- <%:(ViewData.Model).SurveyName %></h1>
+        </div>
+</asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div id="infobox">
         <div id="surveyno">

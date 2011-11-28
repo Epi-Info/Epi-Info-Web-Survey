@@ -16,7 +16,8 @@
 <body>
     <div id="container">
         <!--Beginning of Header file link-->
-        <!--#include file="header.htm"-->
+         <asp:ContentPlaceHolder ID="HeaderContent" runat="server">
+        </asp:ContentPlaceHolder>
         <!--End of Header file link-->
         <!-- Beginning of Body-->
         <asp:ContentPlaceHolder ID="MainContent" runat="server">
