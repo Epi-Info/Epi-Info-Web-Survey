@@ -94,11 +94,28 @@
   <ItemGroup>
     <Content Include="Content\css\epistyle.css" />
     <Content Include="Content\css\overlay.png" />
+    <Content Include="Content\css\page.css" />
+    <Content Include="Content\images\arrow_left.png" />
+    <Content Include="Content\images\arrow_right.png" />
     <Content Include="Content\images\bgMainDropShadowGradient.png" />
+    <Content Include="Content\images\button_check.png" />
     <Content Include="Content\images\cdclogo.png" />
     <Content Include="Content\images\epi.png" />
+    <Content Include="Content\images\error.png" />
+    <Content Include="Content\images\go.png" />
     <Content Include="Content\images\logo_dhhs.gif" />
+    <Content Include="Content\images\next.png" />
+    <Content Include="Content\images\next_d.png" />
     <Content Include="Content\images\overlay.png" />
+    <Content Include="Content\images\pagination_bg.png" />
+    <Content Include="Content\images\pagination_bg_1.png" />
+    <Content Include="Content\images\pagination_bg_2.png" />
+    <Content Include="Content\images\prev.png" />
+    <Content Include="Content\images\prev_d.png" />
+    <Content Include="Content\images\save.png" />
+    <Content Include="Content\images\sign_warning.png" />
+    <Content Include="Content\images\submit.png" />
+    <Content Include="Content\images\warn.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -139,6 +156,7 @@
     <Content Include="Scripts\modernizr-1.7.js" />
     <Content Include="Scripts\modernizr-1.7.min.js" />
     <Content Include="Unity.Mvc3.README.txt" />
+    <Content Include="Views\Home\Survey.aspx" />
     <Content Include="Views\Home\SurveyIntroduction.aspx" />
     <Content Include="Views\Home\Index.aspx" />
     <Content Include="Views\Shared\footer.htm" />

@@ -67,12 +67,12 @@ body
 #infobox
  {
  /*margin-top: -1em;*/
- padding: 0.2em 0.5em 0.2em .5em;
+ padding: 0.5em 0.5em 0.5em .5em;
  font-size: 9pt;
-/* margin-bottom: 1em;*/
+ margin-bottom: 1em;
  background: #87d69b;
  }
-
+/*DIv Style for Splash Page*/
 #surveyno
  {
  float: left;
@@ -80,13 +80,14 @@ body
  white-space:normal; 
  word-wrap: break-word;
  }
- 
+
 #orgn
  {
  float: left;
  width: 33%;
  white-space:normal;
  word-wrap: break-word;
+  text-align:center;
  }
 
 #dept
@@ -97,17 +98,54 @@ body
  white-space:normal;
  word-wrap: break-word;
  }
+/*---*/
+/*Div Style for pagination*/
+#exit
+ {
+ float: right;
+ width: 12%;
+ vertical-align:middle;
+ }
+/*---*/
+/*Div Style for Previous, Save, Continue*/
+#prev
+ {
+ float: left;
+ width: 33%;
+ }
 
- 
+#save
+ {
+ float: left;
+ width: 33%;
+ margin: auto;
+ }
+
+#next
+ {
+ float: right;
+ width: 33%;
+ }
+/*---*/
+
 .boldlabel
  {
  font-weight: bold;	
  }
  
+#nav
+ {
+ width: 92%;
+ border-top: 1px solid #244640;
+ padding: .5em;
+ position:absolute;
+ bottom:80px;
+ }
+
 #footer
  {
  position:absolute;
- bottom:0px;
+ bottom:5px;
  width: 804px;
  padding: .5em;
  color: #333;
@@ -122,9 +160,10 @@ body
  -moz-box-shadow: -1px -1px 0px 0px #888;
  -webkit-box-shadow: 1px -1px 0px 0px #888;
  box-shadow: 0px -1px 1px 0px #888;
+  behavior: url(PIE.htc);
+ 
  }
 
-#leftnav p, #rightnav p { margin: 0 0 1em 0; }
 #content h2 { margin: 0 0 .5em 0; }
 
 #footleft
@@ -138,69 +177,74 @@ body
  float: right;
  }
 
-/*label 
+button.exitsurvey:hover,  button.save:hover, button.prev:hover, button.next:hover, button.begin:hover
  {
- padding: 0 30px 0 0;
- width: 110px;
+ cursor: pointer;
+ opacity: 0.8;
  }
 
-input:not([type=radio]), textarea, select 
+img.button 
  {
- background: #ffffff;
- border: 1px silver solid;
- -moz-border-radius: 3px;
- -webkit-border-radius: 3px;
- -khtml-border-radius: 3px;
- border-radius: 3px;
- outline: none;
- padding: 5px;
- 
+ vertical-align:text-top;
  }
  
-input:not([type=submit]):focus, textarea:focus 
+button.save, button.prev, button.next, button.exitsurvey, button.begin
  {
- background: #eaeaea;
+ border: 1px #4e9689 solid;
+ -moz-border-radius: 10px;
+ -webkit-border-radius: 10px;
+ -khtml-border-radius: 10px;
+ border-radius: 10px;
+ padding: 3px 5px 3px 5px;
+ color:#244640;
+ font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+ font-size: 10pt;
+ font-weight:bold;
+ border: 1px solid rgba(0,0,0,0.5);
+ background: rgba(195,255,104,0.6);
+ box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
+ -o-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
+ -webkit-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
+ -moz-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
+ behavior: url(PIE.htc); 
  }
-				
-input [type=radio]
+
+button.exitsurvey
  {
- margin-right: 5px;
- }*/
+ background: rgba(255,255,255,0.9);
+ width: 80px;
+ padding: 2px;
+ font-size: 8pt;
+ font-weight:bold;
+ height: 26px;
+ }
  
-button.begin
+ button.begin
  {
- border: none;
- -moz-border-radius: 20px;
- -webkit-border-radius: 20px;
- -khtml-border-radius: 20px;
- border-radius: 20px;
- color: #000;
  display: block;
- font-size: 14pt;				
+ font-size: 12pt;				
  font-weight: bold;
  letter-spacing: 1px;
- margin: auto;
- padding: 7px 10px;
- /*text-shadow: 0 1px 1px #000000;
- text-transform: uppercase;*/
- -moz-box-shadow: 10px 10px 5px #888;
- -webkit-box-shadow: 10px 10px 5px #888;
- box-shadow: 10px 10px 5px #bfbfbf;
+ padding: 4px 10px 8px 10px;
+ margin: 0 auto;
  width: 200px;
  height: 40px;
  text-align: center;
- background: #9dc773 url('../images/overlay.png') left top repeat-x; /* fallback color + image */
- background-image: -moz-linear-gradient(100% 100% 90deg, #9dc773, #afd18c);
- background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#afd18c), to(#9dc773));
- text-shadow: -1px -1px 0px rgba(0,0,0,0.15);
- vertical-align:middle;
  }
 
-
-button.begin:hover 
+.success
  {
- background: #87d69b;
- cursor: pointer;
- opacity: 0.9;
- }
+ border: 1px solid #4d8000; 
+ background: #e6ffbf; 
+ margin-bottom: 10px; 
+ margin-left: 0.5em; 
+ margin-right: 0.5em; 
+ padding: 5px;
+ font-size: 10pt;
+ font-weight: bold;
+ -moz-border-radius: 10px;
+ -webkit-border-radius: 10px;
+ -khtml-border-radius: 10px;
+ border-radius: 10px;
 
+ }
