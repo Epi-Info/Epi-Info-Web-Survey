@@ -45,9 +45,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epi.Web.BLL.Test", "Epi.Web
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epi.Web.Common", "Epi.Web.Common\Epi.Web.Common.csproj", "{6E2F059B-C1CD-401F-8A63-DC2933CFB0D8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epi.Web.DynamicForms.Core", "Epi.DynamicForms.Core\Epi.Web.DynamicForms.Core.csproj", "{9624E64A-013F-41E8-84BA-C34EE744685E}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 10
+		SccNumberOfProjects = 11
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs04
 		SccLocalPath0 = .
@@ -80,6 +82,9 @@ Global
 		SccProjectUniqueName9 = Epi.Web.Common\\Epi.Web.Common.csproj
 		SccProjectName9 = Epi.Web.Common
 		SccLocalPath9 = Epi.Web.Common
+		SccProjectUniqueName10 = Epi.DynamicForms.Core\\Epi.Web.DynamicForms.Core.csproj
+		SccProjectName10 = Epi.DynamicForms.Core
+		SccLocalPath10 = Epi.DynamicForms.Core
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -180,6 +185,16 @@ Global
 		{6E2F059B-C1CD-401F-8A63-DC2933CFB0D8}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{6E2F059B-C1CD-401F-8A63-DC2933CFB0D8}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{6E2F059B-C1CD-401F-8A63-DC2933CFB0D8}.Release|x86.ActiveCfg = Release|Any CPU
+		{9624E64A-013F-41E8-84BA-C34EE744685E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9624E64A-013F-41E8-84BA-C34EE744685E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9624E64A-013F-41E8-84BA-C34EE744685E}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{9624E64A-013F-41E8-84BA-C34EE744685E}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{9624E64A-013F-41E8-84BA-C34EE744685E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{9624E64A-013F-41E8-84BA-C34EE744685E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9624E64A-013F-41E8-84BA-C34EE744685E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9624E64A-013F-41E8-84BA-C34EE744685E}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{9624E64A-013F-41E8-84BA-C34EE744685E}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{9624E64A-013F-41E8-84BA-C34EE744685E}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
