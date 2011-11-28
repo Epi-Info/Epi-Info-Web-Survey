@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Epi.Web.Models;
 using Epi.Web.SurveyManager;
+
 namespace Epi.Web.Controllers
 {
     public class HomeController : Controller
@@ -35,9 +36,11 @@ namespace Epi.Web.Controllers
             string surveyid = Request.Path.Substring(Request.Path.LastIndexOf('/') + 1, Request.Path.Length - Request.Path.LastIndexOf('/') - 1);
 
 
-            var s = _iSurveyManager.GetSurveyInfoById(surveyid);
+           // var s = _iSurveyManager.GetSurveyInfoById(surveyid);
 
-            return View("Survey", s);
+            var form = MvcDynamicForms.Demo.Models.FormProvider.GetForm();
+            //return View("Demo", form);
+            return View("Survey", form);
 
         }
     }
