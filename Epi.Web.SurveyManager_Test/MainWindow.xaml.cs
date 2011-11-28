@@ -45,7 +45,7 @@ namespace Epi.Web.SurveyManager_Test
             Request.OrganizationName = this.OrganizationTextBox.Text;
             Request.SurveyName = this.SurveyNameTextBox.Text;
             Request.SurveyNumber = this.SurveyNumberTextBox.Text;
-            Request.TemplateXML = this.TemplateXMLTextBox.Selection.Text;
+            Request.TemplateXML = new TextRange(this.TemplateXMLTextBox.Document.ContentStart, this.TemplateXMLTextBox.Document.ContentEnd).Text; 
 
             try
             {
