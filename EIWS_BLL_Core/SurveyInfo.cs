@@ -26,7 +26,8 @@ namespace Epi.Web.BLL
                                select p;
 
                 var Survey = Surveys.Single();
-               
+
+                result.SurveyId = Survey.SurveyId.ToString();
                 result.SurveyName = Survey.SurveyName;
                 result.SurveyNumber = Survey.SurveyNumber;
                 result.XML = Survey.TemplateXML;
