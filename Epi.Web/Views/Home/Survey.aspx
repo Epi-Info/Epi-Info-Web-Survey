@@ -1,13 +1,15 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/EpiSurvey.Master"
     Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
-
+<%@ Register Assembly="Microsoft.ReportViewer.WebForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+    Namespace="Microsoft.Reporting.WebForms" TagPrefix="rsweb" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
     Index
 </asp:Content>
  <asp:Content ID="Content2" ContentPlaceHolderID="HeaderContent" runat="server">
      <div id="header">
             <h1>
-                Survey Name- <%:(ViewData.Model).SurveyName %></h1>
+               <%-- Survey Name- <%:(ViewData.Model).SurveyName %>--%>
+                </h1>
         </div>
 </asp:Content>
  
@@ -38,17 +40,17 @@
 	<div id="content">
 		<%--Lable--%>
         <ul>
-            <li>SurveyId: <%: (ViewData.Model).SurveyId %></li>
+           <%-- <li>SurveyId: <%: (ViewData.Model).SurveyId %></li>
             <li>SurveyName: <%: (ViewData.Model).SurveyName %></li>
             <li>SurveyNumber: <%: (ViewData.Model).SurveyNumber%></li>
             <li>OrganiztionName: <%: (ViewData.Model).OrganizationName%></li>
             <li>DepartmentName: <%: (ViewData.Model).DepartmentName%></li>
             <li>IntroductionText: <%: (ViewData.Model).IntroductionText %></li>
             <li>XML: <%: (ViewData.Model).XML%></li>
-            <li>IsSuccess: <%: (ViewData.Model).IsSuccess%></li>
+            <li>IsSuccess: <%: (ViewData.Model).IsSuccess%></li>--%>
         </ul>
-
-
+        <%Html.BeginForm(); %>
+        <%=Model.RenderHtml(true) %>
 
    
 	        <div id="nav">

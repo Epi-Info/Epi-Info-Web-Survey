@@ -85,6 +85,7 @@
   <ItemGroup>
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="FormProvider.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -156,6 +157,7 @@
     <Content Include="Scripts\modernizr-1.7.js" />
     <Content Include="Scripts\modernizr-1.7.min.js" />
     <Content Include="Unity.Mvc3.README.txt" />
+    <Content Include="Views\Home\Demo.aspx" />
     <Content Include="Views\Home\Survey.aspx" />
     <Content Include="Views\Home\SurveyIntroduction.aspx" />
     <Content Include="Views\Home\Index.aspx" />
@@ -182,6 +184,10 @@
     <Content Include="Views\Shared\Error.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Epi.DynamicForms.Core\Epi.Web.DynamicForms.Core.csproj">
+      <Project>{9624E64A-013F-41E8-84BA-C34EE744685E}</Project>
+      <Name>Epi.Web.DynamicForms.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Epi.Web.Common\Epi.Web.Common.csproj">
       <Project>{6E2F059B-C1CD-401F-8A63-DC2933CFB0D8}</Project>
       <Name>Epi.Web.Common</Name>
