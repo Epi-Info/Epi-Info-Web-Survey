@@ -37,6 +37,19 @@
 
 	<div id="content">
 		<%--Lable--%>
+        <ul>
+            <li>SurveyId: <%: (ViewData.Model).SurveyId %></li>
+            <li>SurveyName: <%: (ViewData.Model).SurveyName %></li>
+            <li>SurveyNumber: <%: (ViewData.Model).SurveyNumber%></li>
+            <li>OrganiztionName: <%: (ViewData.Model).OrganizationName%></li>
+            <li>DepartmentName: <%: (ViewData.Model).DepartmentName%></li>
+            <li>IntroductionText: <%: (ViewData.Model).IntroductionText %></li>
+            <li>XML: <%: (ViewData.Model).XML%></li>
+            <li>IsSuccess: <%: (ViewData.Model).IsSuccess%></li>
+        </ul>
+
+
+
    
 	        <div id="nav">
 		         <div id="prev" align="left">&nbsp;</div>
