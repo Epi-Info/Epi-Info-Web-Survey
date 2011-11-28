@@ -29,5 +29,16 @@ namespace Epi.Web.Controllers
             
         }
 
+
+        public ActionResult StartSurvey(string param)
+        {
+            string surveyid = Request.Path.Substring(Request.Path.LastIndexOf('/') + 1, Request.Path.Length - Request.Path.LastIndexOf('/') - 1);
+
+
+            var s = _iSurveyManager.GetSurveyInfoById(surveyid);
+
+            return View("SurveyIntroduction", s);
+
+        }
     }
 }
