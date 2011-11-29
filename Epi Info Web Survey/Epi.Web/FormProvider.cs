@@ -22,31 +22,7 @@ namespace MvcDynamicForms.Demo.Models
             {
                 XDocument xdoc = XDocument.Parse(XML);
                 
-
-                double HeightSize, WidthSize;
-                try
-                {
-                    var _top = from Node in
-                                   xdoc.Descendants("View")
-                               select Node.Attribute("Height").Value;
-
-                    HeightSize = double.Parse(_top.First());
-
-
-                    var _left = (from Node in
-                                     xdoc.Descendants("View")
-                                 select Node.Attribute("Width").Value);
-                    WidthSize = double.Parse(_left.First());
-                }
-                catch (System.Exception ex)
-                {
-                    HeightSize = 400;
-                    WidthSize = 800;
-                }
-
-
-
-
+  
                 var _FieldsTypeIDs = from _FieldTypeID in
                                          xdoc.Descendants("Field")
                                      where _FieldTypeID.Attribute("Position").Value == (PageNumber - 1).ToString()
@@ -70,8 +46,8 @@ namespace MvcDynamicForms.Demo.Models
                                 Wrap = true,
                                 DisplayOrder = 10,
                                 Html = _FieldTypeID.Attribute("Name").Value,
-                                Top = HeightSize * double.Parse(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value),
-                                Left = WidthSize * double.Parse(_FieldTypeID.Attribute("ControlLeftPositionPercentage").Value),
+                                Top = GetHeight(xdoc) * double.Parse(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value),
+                                Left = GetWidth(xdoc) * double.Parse(_FieldTypeID.Attribute("ControlLeftPositionPercentage").Value),
                                 CssClass = "Epi.Label"
                             };
                             form.AddFields(Label);
@@ -168,6 +144,44 @@ namespace MvcDynamicForms.Demo.Models
             return form;
         }
 
-       
+        public static double GetHeight(XDocument xdoc) 
+        
+        {
+             
+            try
+            {
+                var _top = from Node in
+                               xdoc.Descendants("View")
+                           select Node.Attribute("Height").Value;
+
+                 return double.Parse(_top.First());
+
+
+                
+            }
+            catch (System.Exception ex)
+            {
+                return 400;
+                
+            }
+        
+        }
+        public static double GetWidth(XDocument xdoc)
+        {
+
+            try
+            {
+                
+                var _left = (from Node in
+                                 xdoc.Descendants("View")
+                             select Node.Attribute("Width").Value);
+                return double.Parse(_left.First());
+            }
+            catch (System.Exception ex)
+            {
+                 
+                return  800;
+            }
+        }
     }
 }
