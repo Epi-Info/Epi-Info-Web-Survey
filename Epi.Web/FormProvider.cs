@@ -11,135 +11,159 @@ namespace MvcDynamicForms.Demo.Models
     {
         public static Form GetForm(object SurveyMetaData ,int PageNumber)
         {
-
-            XDocument xdoc = XDocument.Parse(((Epi.Web.Common.DTO.cSurveyInfo)(SurveyMetaData)).XML);
             var form = new Form();
 
-           var _top = from Node in
-                          xdoc.Descendants("View")
-                       select Node.Attribute("Height").Value;
-           
-           var _left = (from Node in
-                            xdoc.Descendants("View")
-                        select Node.Attribute("Width").Value);
+            string XML = ((Epi.Web.Common.DTO.cSurveyInfo)(SurveyMetaData)).XML;
+            if (string.IsNullOrEmpty(XML))
+            {
+                // no XML what to do?
+            }
+            else
+            {
+                XDocument xdoc = XDocument.Parse(XML);
+                
 
-            
-            var _FieldsTypeIDs = from _FieldTypeID in
-                                     xdoc.Descendants("Field")
-                                 where _FieldTypeID.Attribute("Position").Value == (PageNumber-1).ToString()
-                                 select _FieldTypeID;
+                double HeightSize, WidthSize;
+                try
+                {
+                    var _top = from Node in
+                                   xdoc.Descendants("View")
+                               select Node.Attribute("Height").Value;
 
-                               
+                    HeightSize = double.Parse(_top.First());
 
-            foreach (var _FieldTypeID in _FieldsTypeIDs)
-               {
-                   switch (_FieldTypeID.Attribute("FieldTypeId").Value)
+
+                    var _left = (from Node in
+                                     xdoc.Descendants("View")
+                                 select Node.Attribute("Width").Value);
+                    WidthSize = double.Parse(_left.First());
+                }
+                catch (System.Exception ex)
+                {
+                    HeightSize = 400;
+                    WidthSize = 800;
+                }
+
+
+
+
+                var _FieldsTypeIDs = from _FieldTypeID in
+                                         xdoc.Descendants("Field")
+                                     where _FieldTypeID.Attribute("Position").Value == (PageNumber - 1).ToString()
+                                     select _FieldTypeID;
+
+
+
+                foreach (var _FieldTypeID in _FieldsTypeIDs)
+                {
+                    switch (_FieldTypeID.Attribute("FieldTypeId").Value)
                     {
                         case "1"://Text
 
-                        break;
+                            break;
 
-                        case "2" ://Label/Title
-                        
-                        var Label = new Literal
-                        {
-                            FieldWrapper = "div",
-                            Wrap = true,
-                            DisplayOrder = 10,
-                            Html = _FieldTypeID.Attribute("Name").Value,
-                            Top = 1013.0 * double.Parse(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value),
-                            Left = 893.0 * double.Parse(_FieldTypeID.Attribute("ControlLeftPositionPercentage").Value),
-                            CssClass="Epi.Label"
-                        };
-                        form.AddFields(Label);
-                         break;
+                        case "2"://Label/Title
+
+                            var Label = new Literal
+                            {
+                                FieldWrapper = "div",
+                                Wrap = true,
+                                DisplayOrder = 10,
+                                Html = _FieldTypeID.Attribute("Name").Value,
+                                Top = HeightSize * double.Parse(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value),
+                                Left = WidthSize * double.Parse(_FieldTypeID.Attribute("ControlLeftPositionPercentage").Value),
+                                CssClass = "Epi.Label"
+                            };
+                            form.AddFields(Label);
+                            break;
                         case "3"://Label
-                          
-                         break;
-                     }
 
-               }
-             
-            
-           
+                            break;
+                    }
+
+                }
 
 
 
-            //var name = new TextBox
-            //{
-            //    Title = "Name",
-            //    Prompt = "Enter your full name:",
-            //    DisplayOrder = 20,
-            //    Required = true,
-            //    RequiredMessage = "Your full name is required",
-            //    Key = "1233"
-            //};
-           
 
-            //var gender = new RadioList
-            //{
-            //    DisplayOrder = 30,
-            //    Title = "Gender",
-            //    Prompt = "Select your gender:",
-            //    Required = true,
-            //    Orientation = Orientation.Vertical
-            //};
-            //gender.AddChoices("Male,Female", ",");
 
-            
-            //var sports = new CheckBoxList
-            //{
-            //    DisplayOrder = 40,
-            //    Title = "Favorite Sports",
-            //    Prompt = "What are your favorite sports?",
-            //    Orientation = Orientation.Horizontal
-            //};
-            //sports.AddChoices("Baseball,Football,Soccer,Basketball,Tennis,Boxing,Golf", ",");
 
-            //var states = new Select
-            //{
-            //    DisplayOrder = 50,
-            //    Title = "Visited States",
-            //    MultipleSelection = true,
-            //    Size = 10,
-            //    Prompt = "What US states have you visited? (Use the ctrl key to select multiple states.)"
-            //};
-            //states.AddChoices("Alabama,Alaska,Arizona,Arkansas,California,Colorado,Connecticut,Delaware,Florida,Georgia,Hawaii,Idaho,Illinois,Indiana,Iowa,Kansas,Kentucky,Louisiana,Maine,Maryland,Massachusetts,Michigan,Minnesota,Mississippi,Missouri,Montana,Nebraska,Nevada,New Hampshire,New Jersey,New Mexico,New York,North Carolina,North Dakota,Ohio,Oklahoma,Oregon,Pennsylvania,Rhode Island,South Carolina,South Dakota,Tennessee,Texas,Utah,Vermont,Virginia,Washington,West Virginia,Wisconsin,Wyoming", ",");
+                //var name = new TextBox
+                //{
+                //    Title = "Name",
+                //    Prompt = "Enter your full name:",
+                //    DisplayOrder = 20,
+                //    Required = true,
+                //    RequiredMessage = "Your full name is required",
+                //    Key = "1233"
+                //};
 
-            //var bio = new TextArea
-            //{
-            //    DisplayOrder = 60,
-            //    Title = "Bio",
-            //    Prompt = "Describe yourself:"
-            //};
-            //bio.InputHtmlAttributes.Add("cols", "40");
-            //bio.InputHtmlAttributes.Add("rows", "6");
 
-            //var month = new Select
-            //{
-            //    DisplayOrder = 70,
-            //    Title = "Month Born",
-            //    Prompt = "What month were you born in?",
-            //    ShowEmptyOption = true,
-            //    EmptyOption = "- Select One - "
-            //};
-            //month.AddChoices("January,February,March,April,May,June,July,August,September,October,November,December", ",");
+                //var gender = new RadioList
+                //{
+                //    DisplayOrder = 30,
+                //    Title = "Gender",
+                //    Prompt = "Select your gender:",
+                //    Required = true,
+                //    Orientation = Orientation.Vertical
+                //};
+                //gender.AddChoices("Male,Female", ",");
 
-            //var agree = new CheckBox
-            //{
-            //    DisplayOrder = 80,
-            //    Title = "Agrees To Terms",
-            //    Prompt = "I agree to all of the terms in the EULA.",
-            //    Required = true,
-            //    RequiredMessage = "You must agree to the EULA!"
-            //};
 
-        
+                //var sports = new CheckBoxList
+                //{
+                //    DisplayOrder = 40,
+                //    Title = "Favorite Sports",
+                //    Prompt = "What are your favorite sports?",
+                //    Orientation = Orientation.Horizontal
+                //};
+                //sports.AddChoices("Baseball,Football,Soccer,Basketball,Tennis,Boxing,Golf", ",");
 
-            // create form and add fields to it
-            //var form = new Form();
-            ////form.AddFields(description, name, Age, gender, email, sports, states, bio, month, agree );
-            //form.AddFields(description);
+                //var states = new Select
+                //{
+                //    DisplayOrder = 50,
+                //    Title = "Visited States",
+                //    MultipleSelection = true,
+                //    Size = 10,
+                //    Prompt = "What US states have you visited? (Use the ctrl key to select multiple states.)"
+                //};
+                //states.AddChoices("Alabama,Alaska,Arizona,Arkansas,California,Colorado,Connecticut,Delaware,Florida,Georgia,Hawaii,Idaho,Illinois,Indiana,Iowa,Kansas,Kentucky,Louisiana,Maine,Maryland,Massachusetts,Michigan,Minnesota,Mississippi,Missouri,Montana,Nebraska,Nevada,New Hampshire,New Jersey,New Mexico,New York,North Carolina,North Dakota,Ohio,Oklahoma,Oregon,Pennsylvania,Rhode Island,South Carolina,South Dakota,Tennessee,Texas,Utah,Vermont,Virginia,Washington,West Virginia,Wisconsin,Wyoming", ",");
+
+                //var bio = new TextArea
+                //{
+                //    DisplayOrder = 60,
+                //    Title = "Bio",
+                //    Prompt = "Describe yourself:"
+                //};
+                //bio.InputHtmlAttributes.Add("cols", "40");
+                //bio.InputHtmlAttributes.Add("rows", "6");
+
+                //var month = new Select
+                //{
+                //    DisplayOrder = 70,
+                //    Title = "Month Born",
+                //    Prompt = "What month were you born in?",
+                //    ShowEmptyOption = true,
+                //    EmptyOption = "- Select One - "
+                //};
+                //month.AddChoices("January,February,March,April,May,June,July,August,September,October,November,December", ",");
+
+                //var agree = new CheckBox
+                //{
+                //    DisplayOrder = 80,
+                //    Title = "Agrees To Terms",
+                //    Prompt = "I agree to all of the terms in the EULA.",
+                //    Required = true,
+                //    RequiredMessage = "You must agree to the EULA!"
+                //};
+
+
+
+                // create form and add fields to it
+                //var form = new Form();
+                ////form.AddFields(description, name, Age, gender, email, sports, states, bio, month, agree );
+                //form.AddFields(description);
+            }
 
             return form;
         }
