@@ -63,7 +63,15 @@ body
  font-size: 12pt;
  font-weight: bold;
  }
-
+.MvcDynamicForm
+{
+  width:893px; 
+  height:1200px;
+  display:block; 
+  border:1px solid white; 
+  position:relative;  
+   
+    }
 #infobox
  {
  /*margin-top: -1em;*/
