@@ -25,8 +25,8 @@ namespace Epi.Web
             routes.MapRoute
             (
                 "BeginSurvey", // Route name
-                "Survey/begin/{id}", // URL with parameters
-                new { controller = "Home", action = "StartSurvey", id = UrlParameter.Optional }
+                "Survey/begin/{surveyid}", // URL with parameters
+                new { controller = "Home", action = "StartSurvey", surveyid = UrlParameter.Optional }
             ); 
 
 
@@ -34,8 +34,8 @@ namespace Epi.Web
             routes.MapRoute
             (
                 "Survey", // Route name
-                "Survey/{id}", // URL with parameters
-                new { controller = "Home", action = "ListSurvey", id = UrlParameter.Optional }
+                "Survey/{surveyid}", // URL with parameters
+                new { controller = "Home", action = "ListSurvey", surveyid = UrlParameter.Optional }
             ); // Parameter defaults
 
            
