@@ -12,8 +12,8 @@ namespace MvcDynamicForms.Demo.Models
         public static Form GetForm(object SurveyMetaData ,int PageNumber)
         {
             var form = new Form();
-
-            string XML = ((Epi.Web.Common.DTO.cSurveyInfo)(SurveyMetaData)).XML;
+            form.SurveyInfo = (Epi.Web.Common.DTO.cSurveyInfo)(SurveyMetaData);
+            string XML = form.SurveyInfo.XML;
             if (string.IsNullOrEmpty(XML))
             {
                 // no XML what to do?
