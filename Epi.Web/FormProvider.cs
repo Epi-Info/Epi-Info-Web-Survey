@@ -15,17 +15,18 @@ namespace MvcDynamicForms.Demo.Models
             XDocument xdoc = XDocument.Parse(((Epi.Web.Common.DTO.cSurveyInfo)(SurveyMetaData)).XML);
             var form = new Form();
 
-            var _top = from Node in
-                           xdoc.Descendants("FieldFootprint")
+           var _top = from Node in
+                          xdoc.Descendants("View")
                        select Node.Attribute("Height").Value;
-            var _left = from Node in
-                            xdoc.Descendants("FieldFootprint")
-                        select Node.Attribute("Height").Value;
+           
+           var _left = (from Node in
+                            xdoc.Descendants("View")
+                        select Node.Attribute("Width").Value);
 
-
+            
             var _FieldsTypeIDs = from _FieldTypeID in
                                      xdoc.Descendants("Field")
-                                 //where _FieldTypeID.Attribute("PageId").Value == PageNumber.ToString()
+                                 where _FieldTypeID.Attribute("Position").Value == (PageNumber-1).ToString()
                                  select _FieldTypeID;
 
                                
