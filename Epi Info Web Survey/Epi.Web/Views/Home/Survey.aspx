@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/EpiSurvey.Master"
-    Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
+    Inherits="System.Web.Mvc.ViewPage<MvcDynamicForms.Form>" %>
 <%@ Register Assembly="Microsoft.ReportViewer.WebForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     Namespace="Microsoft.Reporting.WebForms" TagPrefix="rsweb" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
@@ -8,7 +8,7 @@
  <asp:Content ID="Content2" ContentPlaceHolderID="HeaderContent" runat="server">
      <div id="header">
             <h1>
-                Survey Name-<%-- <%:(ViewData.Model).SurveyName %>--%>
+                Survey Name- <%:Model.SurveyInfo.SurveyName %>
                 </h1>
         </div>
 </asp:Content>
