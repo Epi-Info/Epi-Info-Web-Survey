@@ -15,6 +15,12 @@ namespace MvcDynamicForms.Demo.Models
             XDocument xdoc = XDocument.Parse(((Epi.Web.Common.DTO.cSurveyInfo)(SurveyMetaData)).XML);
             var form = new Form();
 
+            var _top = from Node in
+                           xdoc.Descendants("FieldFootprint")
+                       select Node.Attribute("Height").Value;
+            var _left = from Node in
+                            xdoc.Descendants("FieldFootprint")
+                        select Node.Attribute("Height").Value;
 
 
             var _FieldsTypeIDs = from _FieldTypeID in
@@ -40,8 +46,8 @@ namespace MvcDynamicForms.Demo.Models
                             Wrap = true,
                             DisplayOrder = 10,
                             Html = _FieldTypeID.Attribute("Name").Value,
-                            Top = 300.0 * double.Parse(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value),
-                            Left = 600.0 * double.Parse(_FieldTypeID.Attribute("ControlLeftPositionPercentage").Value),
+                            Top = 1013.0 * double.Parse(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value),
+                            Left = 893.0 * double.Parse(_FieldTypeID.Attribute("ControlLeftPositionPercentage").Value),
                             CssClass="Epi.Label"
                         };
                         form.AddFields(Label);
