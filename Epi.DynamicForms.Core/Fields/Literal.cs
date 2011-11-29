@@ -26,7 +26,17 @@ namespace MvcDynamicForms.Fields
             if (Wrap)
             {
                 var wrapper = new TagBuilder(_fieldWrapper);
-                wrapper.Attributes["class"] = _fieldWrapperClass;
+                if (string.IsNullOrEmpty(this._cssClass))
+                {
+                    wrapper.Attributes["class"] = _fieldWrapperClass;
+                }
+                else
+                {
+                    wrapper.Attributes["class"] = this._cssClass;
+                }
+
+                wrapper.Attributes.Add(new KeyValuePair<string,string>("style","position:absolute;left:" + this._left.ToString() + "px;top:" + this._top.ToString() + "px"));
+
                 wrapper.InnerHtml = Html;
                 return wrapper.ToString();
             }
