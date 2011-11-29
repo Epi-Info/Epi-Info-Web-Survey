@@ -9,16 +9,17 @@ namespace MvcDynamicForms.Demo.Models
 {
     public static class FormProvider
     {
-        public static Form GetForm(object s)
+        public static Form GetForm(object SurveyMetaData ,int PageNumber)
         {
-       
-            XDocument xdoc = XDocument.Parse(((Epi.Web.Common.DTO.cSurveyInfo)(s)).XML);
+
+            XDocument xdoc = XDocument.Parse(((Epi.Web.Common.DTO.cSurveyInfo)(SurveyMetaData)).XML);
             var form = new Form();
 
 
 
             var _FieldsTypeIDs = from _FieldTypeID in
                                      xdoc.Descendants("Field")
+                                 where _FieldTypeID.Attribute("PageId").Value == PageNumber.ToString()
                                  select _FieldTypeID;
 
                                

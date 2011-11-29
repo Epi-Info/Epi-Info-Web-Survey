@@ -36,10 +36,9 @@ namespace Epi.Web.Controllers
             string surveyid = Request.Path.Substring(Request.Path.LastIndexOf('/') + 1, Request.Path.Length - Request.Path.LastIndexOf('/') - 1);
 
 
-            var s = _iSurveyManager.GetSurveyInfoById(surveyid);
+            var SurveyMetaData = _iSurveyManager.GetSurveyInfoById(surveyid);
 
-            var form = MvcDynamicForms.Demo.Models.FormProvider.GetForm(s);
-            //return View("Demo", form);
+            var form = MvcDynamicForms.Demo.Models.FormProvider.GetForm(SurveyMetaData ,1);// Requesting the first page of the survey.
             return View("Survey", form);
 
         }
