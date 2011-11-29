@@ -19,7 +19,7 @@ namespace MvcDynamicForms.Demo.Models
 
             var _FieldsTypeIDs = from _FieldTypeID in
                                      xdoc.Descendants("Field")
-                                 where _FieldTypeID.Attribute("PageId").Value == PageNumber.ToString()
+                                 //where _FieldTypeID.Attribute("PageId").Value == PageNumber.ToString()
                                  select _FieldTypeID;
 
                                
@@ -36,7 +36,7 @@ namespace MvcDynamicForms.Demo.Models
                         
                         var Label = new Literal
                         {
-                            FieldWrapper = "p",
+                            FieldWrapper = "div",
                             Wrap = true,
                             DisplayOrder = 10,
                             Html = _FieldTypeID.Attribute("Name").Value,
