@@ -35,7 +35,7 @@ namespace MvcDynamicForms.Fields
                     wrapper.Attributes["class"] = this._cssClass;
                 }
 
-                wrapper.Attributes.Add(new KeyValuePair<string,string>("style","position:absolute;left:" + this._left.ToString() + "px;top:" + this._top.ToString() + "px"));
+                wrapper.Attributes.Add(new KeyValuePair<string,string>("style","position:relative;left:" + this._left.ToString() + "px;top:" + this._top.ToString() + "px"));
 
                 wrapper.InnerHtml = Html;
                 return wrapper.ToString();
