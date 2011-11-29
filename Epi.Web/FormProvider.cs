@@ -4,6 +4,8 @@ using System.Xml;
 using System.Xml.Linq;
 using System.Text;
 using MvcDynamicForms;
+ 
+
 
 namespace MvcDynamicForms.Demo.Models
 {
@@ -29,7 +31,9 @@ namespace MvcDynamicForms.Demo.Models
                                      select _FieldTypeID;
 
 
-
+                double Width, Height;
+                Width = GetWidth(xdoc);
+                Height= GetHeight(xdoc);
                 foreach (var _FieldTypeID in _FieldsTypeIDs)
                 {
                     switch (_FieldTypeID.Attribute("FieldTypeId").Value)
@@ -46,8 +50,8 @@ namespace MvcDynamicForms.Demo.Models
                                 Wrap = true,
                                 DisplayOrder = 10,
                                 Html = _FieldTypeID.Attribute("Name").Value,
-                                Top = GetHeight(xdoc) * double.Parse(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value),
-                                Left = GetWidth(xdoc) * double.Parse(_FieldTypeID.Attribute("ControlLeftPositionPercentage").Value),
+                                Top = Height * double.Parse(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value),
+                                Left = Width * double.Parse(_FieldTypeID.Attribute("ControlLeftPositionPercentage").Value),
                                 CssClass = "Epi.Label"
                             };
                             form.AddFields(Label);
