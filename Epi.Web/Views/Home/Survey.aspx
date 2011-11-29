@@ -8,7 +8,7 @@
  <asp:Content ID="Content2" ContentPlaceHolderID="HeaderContent" runat="server">
      <div id="header">
             <h1>
-               <%-- Survey Name- <%:(ViewData.Model).SurveyName %>--%>
+                Survey Name-<%-- <%:(ViewData.Model).SurveyName %>--%>
                 </h1>
         </div>
 </asp:Content>
@@ -49,9 +49,11 @@
             <li>XML: <%: (ViewData.Model).XML%></li>
             <li>IsSuccess: <%: (ViewData.Model).IsSuccess%></li>--%>
         </ul>
+        <div class="MvcDynamicForm" style="width:893px; height:1200px;display:block; border:1px solid white; position:relative;">
+
         <%Html.BeginForm(); %>
         <%=Model.RenderHtml(true) %>
-
+        </div>
    
 	        <div id="nav">
 		         <div id="prev" align="left">&nbsp;</div>
