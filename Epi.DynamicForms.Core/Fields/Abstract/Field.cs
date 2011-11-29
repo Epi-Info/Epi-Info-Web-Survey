@@ -13,6 +13,10 @@ namespace MvcDynamicForms.Fields
         protected Form _form;
         protected string _fieldWrapperClass = "MvcFieldWrapper";
 
+        protected double _top;
+        protected double _left;
+        protected string _cssClass;
+
         internal Form Form
         {
             get
@@ -61,5 +65,10 @@ namespace MvcDynamicForms.Fields
         /// </summary>
         /// <returns>Returns a string containing the rendered html of the Field object.</returns>
         public abstract string RenderHtml();
+
+
+        public double Top { get { return this._top; } set { this._top = value; } }
+        public double Left { get { return this._left; } set { this._left = value; } }
+        public string CssClass { get { return this._cssClass; } set { this._cssClass = value; } }
     }
 }
