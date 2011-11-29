@@ -39,8 +39,10 @@ namespace MvcDynamicForms.Demo.Models
                             FieldWrapper = "p",
                             Wrap = true,
                             DisplayOrder = 10,
-                            Html = _FieldTypeID.Attribute("Name").Value
-
+                            Html = _FieldTypeID.Attribute("Name").Value,
+                            Top = 300.0 * double.Parse(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value),
+                            Left = 600.0 * double.Parse(_FieldTypeID.Attribute("ControlLeftPositionPercentage").Value),
+                            CssClass="Epi.Label"
                         };
                         form.AddFields(Label);
                          break;
