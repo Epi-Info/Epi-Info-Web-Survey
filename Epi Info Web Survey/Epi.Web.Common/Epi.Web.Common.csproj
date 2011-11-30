@@ -45,16 +45,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DTO\cSurveyRequest.cs" />
-    <Compile Include="DTO\cSurveyRequestResult.cs" />
-    <Compile Include="DTO\cSurveyInfo.cs" />
+    <Compile Include="BusinessObject\SurveyInfoBO.cs" />
+    <Compile Include="BusinessObject\SurveyRequestBO.cs" />
+    <Compile Include="BusinessObject\SurveyRequestResultBO.cs" />
+    <Compile Include="DTO\SurveyRequestDTO.cs" />
+    <Compile Include="DTO\SurveyRequestResultDTO.cs" />
+    <Compile Include="DTO\SurveyInfoDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Epi.Web.Interfaces\Epi.Web.Interfaces.csproj">
-      <Project>{B8AF69BD-3CE1-4AA5-875D-3FB87C7FCE44}</Project>
-      <Name>Epi.Web.Interfaces</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

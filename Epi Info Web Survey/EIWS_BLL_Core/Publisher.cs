@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Reflection;
 using System.Xml;
+using Epi.Web.Common.BusinessObject;
 
 namespace Epi.Web.BLL
 {
@@ -13,7 +14,7 @@ namespace Epi.Web.BLL
   
     public class Publisher
     {
-
+        private Epi.Web.Interfaces.DataInterfaces.ISurveyInfoDao SurveyInfoDao;
         #region"Public members"
         /// <summary>
         ///  This class is used to process the object sent from the WCF service “SurveyManager”, 
@@ -23,62 +24,60 @@ namespace Epi.Web.BLL
         /// <param name="pRequestMessage"></param>
         /// <returns></returns>
         /// 
-        public Publisher()
+        public Publisher(Epi.Web.Interfaces.DataInterfaces.ISurveyInfoDao pSurveyInfoDao)
         {
-
+            this.SurveyInfoDao = pSurveyInfoDao;
         }
-        public Epi.Web.Common.DTO.cSurveyRequestResult PublishSurvey(Epi.Web.Common.DTO.cSurveyRequest pRequestMessage)
+
+        public SurveyRequestResultBO PublishSurvey(SurveyRequestBO pRequestMessage)
         {
 
-            Epi.Web.Common.DTO.cSurveyRequestResult result = new Epi.Web.Common.DTO.cSurveyRequestResult();
+            SurveyRequestResultBO result = new SurveyRequestResultBO();
 
             var SurveyId = Guid.NewGuid();
-            var connectionString = GetconnectionString();
 
             if (pRequestMessage != null)
             {
-                try
+
+                if (! string.IsNullOrEmpty(pRequestMessage.SurveyNumber))
                 {
-                    var Entities = new Epi.Web.EF.EIWSEntities(connectionString);
-                    //var Entities = new Epi.Web.EF.EIWSEntities();
-
-                    Epi.Web.EF.SurveyMetaData SurveyMetaData = new Epi.Web.EF.SurveyMetaData();
-
-
-                    SurveyMetaData.SurveyId = SurveyId;
-                    SurveyMetaData.ClosingDate = pRequestMessage.ClosingDate;
-
-                    SurveyMetaData.IntroductionText = pRequestMessage.IntroductionText;
-
-                    SurveyMetaData.DepartmentName = pRequestMessage.DepartmentName;
-                    SurveyMetaData.OrganizationName = pRequestMessage.OrganizationName;
-
-                    SurveyMetaData.SurveyNumber = pRequestMessage.SurveyNumber;
-
-                    SurveyMetaData.TemplateXML = pRequestMessage.TemplateXML;
-
-                    SurveyMetaData.SurveyName = pRequestMessage.SurveyName;
-
-                    Entities.AddToSurveyMetaDatas(SurveyMetaData);
-
                     try
                     {
 
-                        Entities.SaveChanges();
+                        Epi.Web.Common.BusinessObject.SurveyInfoBO BO = new Common.BusinessObject.SurveyInfoBO();
+
+                        BO.SurveyId = SurveyId.ToString();
+                        BO.ClosingDate = pRequestMessage.ClosingDate;
+
+                        BO.IntroductionText = pRequestMessage.IntroductionText;
+
+                        BO.DepartmentName = pRequestMessage.DepartmentName;
+                        BO.OrganizationName = pRequestMessage.OrganizationName;
+
+                        BO.SurveyNumber = pRequestMessage.SurveyNumber;
+
+                        BO.XML = pRequestMessage.TemplateXML;
+
+                        BO.SurveyName = pRequestMessage.SurveyName;
+
+
+                        try
+                        {
+
+                            this.SurveyInfoDao.InsertSurveyInfo(BO);
+                        }
+                        catch (Exception ex)
+                        {
+                            //Entities.ObjectStateManager.GetObjectStateEntry(SurveyMetaData).Delete();
+
+                        }
                     }
-                    catch
+                    catch (Exception ex)
                     {
-                        Entities.ObjectStateManager.GetObjectStateEntry(SurveyMetaData).Delete();
+                        throw (ex);
 
                     }
-                }
-                catch (Exception ex)
-                {
-                    throw (ex);
 
-                }
-                if (pRequestMessage.SurveyNumber != "" && pRequestMessage.SurveyNumber != null)
-                {
 
                     result.URL = GetURL(pRequestMessage, SurveyId);
                     result.IsPulished = true;
@@ -99,7 +98,7 @@ namespace Epi.Web.BLL
         #endregion
 
         #region "Private members"
-        private string GetURL(Epi.Web.Common.DTO.cSurveyRequest pRequestMessage, Guid SurveyId)
+        private string GetURL(SurveyRequestBO pRequestMessage, Guid SurveyId)
         {
             System.Text.StringBuilder URL = new System.Text.StringBuilder();
             URL.Append(System.Configuration.ConfigurationManager.AppSettings["URL"]);
