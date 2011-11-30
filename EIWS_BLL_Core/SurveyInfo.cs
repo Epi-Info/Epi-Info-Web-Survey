@@ -12,9 +12,9 @@ namespace Epi.Web.BLL
         public SurveyInfo()
         {
         }
-        public Epi.Web.Common.DTO.cSurveyInfo GetSurveyInfoById(String pId){
-
-            Epi.Web.Common.DTO.cSurveyInfo result = new Epi.Web.Common.DTO.cSurveyInfo();
+        public Epi.Web.Common.DTO.SurveyInfoDTO GetSurveyInfoById(String pId)
+        {
+            Epi.Web.Common.DTO.SurveyInfoDTO result = new Epi.Web.Common.DTO.SurveyInfoDTO();
             Guid Id = new Guid(pId);
 
 

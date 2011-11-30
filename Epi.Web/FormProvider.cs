@@ -14,7 +14,7 @@ namespace MvcDynamicForms.Demo.Models
         public static Form GetForm(object SurveyMetaData ,int PageNumber)
         {
             var form = new Form();
-            form.SurveyInfo = (Epi.Web.Common.DTO.cSurveyInfo)(SurveyMetaData);
+            form.SurveyInfo = (Epi.Web.Common.DTO.SurveyInfoDTO)(SurveyMetaData);
             string XML = form.SurveyInfo.XML;
             if (string.IsNullOrEmpty(XML))
             {
