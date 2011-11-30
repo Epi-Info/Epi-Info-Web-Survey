@@ -12,10 +12,10 @@ namespace Epi.Web.SurveyManager
     public interface ISurveyManager 
     {
         [OperationContract]
-        cSurveyRequestResult PublishSurvey(cSurveyRequest pRequestMessage);
+        SurveyRequestResultDTO PublishSurvey(SurveyRequestDTO pRequestMessage);
 
         [OperationContract]
-        cSurveyInfo GetSurveyInfoById(String pIid);
+        SurveyInfoDTO GetSurveyInfoById(String pIid);
     }
 
 }
