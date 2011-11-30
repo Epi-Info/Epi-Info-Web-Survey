@@ -10,17 +10,19 @@ namespace Epi.Web.SurveyManager
 {
     public class Service : ISurveyManager
     {
+
         /// <summary>
         /// 
         /// </summary>
         /// <param name="pRequestMessage"></param>
         /// <returns></returns>
-        public cSurveyRequestResult PublishSurvey(cSurveyRequest pRequestMessage)
+        public SurveyRequestResultDTO PublishSurvey(SurveyRequestDTO pRequestMessage)
         {
-            cSurveyRequestResult result = null;
+            SurveyRequestResultDTO result = null;
+            Epi.Web.Interfaces.DataInterfaces.ISurveyInfoDao SurveyInfoDao = null;
 
-            Epi.Web.BLL.Publisher Implementation = new Epi.Web.BLL.Publisher();
-            result = Implementation.PublishSurvey(pRequestMessage);
+            Epi.Web.BLL.Publisher Implementation = new Epi.Web.BLL.Publisher(SurveyInfoDao);
+            result = Mapper.BusinessObjectToDataTransfer(Implementation.PublishSurvey(Mapper.DataTransferToBusinessObject(pRequestMessage)));
             //result.IsPulished = r.IsPulished;
             //result.StatusText = r.StatusText;
             //result.URL = r.URL;
@@ -34,9 +36,9 @@ namespace Epi.Web.SurveyManager
         /// </summary>
         /// <param name="pId"></param>
         /// <returns></returns>
-        public cSurveyInfo GetSurveyInfoById(string pId)
+        public SurveyInfoDTO GetSurveyInfoById(string pId)
         {
-            cSurveyInfo result = null;
+            SurveyInfoDTO result = null;
             Epi.Web.BLL.SurveyInfo Implementation = new Epi.Web.BLL.SurveyInfo();
             result = Implementation.GetSurveyInfoById(pId);
    

@@ -20,7 +20,7 @@ namespace MvcDynamicForms
         private string _formWrapperClass = "MvcDynamicForm";
         private string _fieldPrefix = "MvcDynamicField_";
         private FieldList _fields;
-        private Epi.Web.Common.DTO.cSurveyInfo _SurveyInfo;
+        private Epi.Web.Common.DTO.SurveyInfoDTO _SurveyInfo;
 
         /// <summary>
         /// The html element that wraps all rendered html.
@@ -191,7 +191,7 @@ namespace MvcDynamicForms
             return responses;
         }
 
-        public Epi.Web.Common.DTO.cSurveyInfo SurveyInfo
+        public Epi.Web.Common.DTO.SurveyInfoDTO SurveyInfo
         {
             get {return this._SurveyInfo; }
             set { this._SurveyInfo = value; }
