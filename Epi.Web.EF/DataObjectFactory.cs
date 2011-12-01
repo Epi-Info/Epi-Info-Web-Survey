@@ -32,5 +32,9 @@ namespace Epi.Web.EF
         {
             return new Epi.Web.EF.EIWSEntities(_connectionString);
         }
+        public static Epi.Web.EF.SurveyMetaData CreateSurveyMetaData()
+        {
+            return new Epi.Web.EF.SurveyMetaData();
+        }
     }
 }
