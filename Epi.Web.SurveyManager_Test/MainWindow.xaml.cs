@@ -39,7 +39,7 @@ namespace Epi.Web.SurveyManager_Test
             }
 
             Request.DepartmentName = this.DepartmentTextBox.Text;
-            Request.IntroductionText = this.IntroductionTextBox.Selection.Text;
+            Request.IntroductionText = new TextRange(this.IntroductionTextBox.Document.ContentStart, this.IntroductionTextBox.Document.ContentEnd).Text; 
             Request.IsSingleResponse = (bool)this.IsSingleResponseCheckBox.IsChecked;
 
             Request.OrganizationName = this.OrganizationTextBox.Text;
