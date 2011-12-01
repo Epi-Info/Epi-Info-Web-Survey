@@ -15,6 +15,7 @@ namespace Epi.Web.EF
         static DataObjectFactory()
         {
             string connectionStringName = ConfigurationManager.AppSettings.Get("EIWSEntities");
+            //To Do: Decrypt connection string here
             _connectionString = ConfigurationManager.ConnectionStrings[connectionStringName].ConnectionString;
         }
 

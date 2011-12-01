@@ -45,7 +45,7 @@ namespace Epi.Web.EF
         /// <param name="SurveyInfo">SurveyInfo.</param>
         public SurveyInfoBO InsertSurveyInfo(SurveyInfoBO SurveyInfo)
         {
-            using (var Context = new Epi.Web.EF.EIWSEntities( DataObjectFactory.CreateContext().ToString()))
+            using (var Context = DataObjectFactory.CreateContext()) 
             {
                 
             }
