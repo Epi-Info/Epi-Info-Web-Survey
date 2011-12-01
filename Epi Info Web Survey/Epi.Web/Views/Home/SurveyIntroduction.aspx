@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/EpiSurvey.Master"
-    Inherits="System.Web.Mvc.ViewPage<Epi.Web.Common.DTO.cSurveyInfo>" %>
+    Inherits="System.Web.Mvc.ViewPage<Epi.Web.Common.DTO.SurveyInfoDTO>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
     Index
