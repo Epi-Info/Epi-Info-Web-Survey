@@ -35,17 +35,17 @@ namespace Epi.Web.EF
         /// </summary>
         /// <param name="customer">A SurveyInfoBO business object.</param>
         /// <returns>A SurveyMetaData entity.</returns>
-        internal static SurveyMetaData Map(SurveyInfoBO entity)
+        internal static SurveyMetaData Map(SurveyInfoBO businessobject)
         {
             return new SurveyMetaData
             {
-                SurveyId = new Guid(entity.SurveyId),
-                SurveyName = entity.SurveyName,
-                SurveyNumber = entity.SurveyNumber,
-                TemplateXML = entity.XML,
-                IntroductionText = entity.IntroductionText,
-                OrganizationName = entity.OrganizationName,
-                DepartmentName = entity.DepartmentName
+                SurveyId = new Guid(businessobject.SurveyId),
+                SurveyName = businessobject.SurveyName,
+                SurveyNumber = businessobject.SurveyNumber,
+                TemplateXML = businessobject.XML,
+                IntroductionText = businessobject.IntroductionText,
+                OrganizationName = businessobject.OrganizationName,
+                DepartmentName = businessobject.DepartmentName
             };
         }
 

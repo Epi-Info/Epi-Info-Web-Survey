@@ -47,7 +47,7 @@ namespace Epi.Web.BLL
                         Epi.Web.Common.BusinessObject.SurveyInfoBO BO = new Common.BusinessObject.SurveyInfoBO();
 
                         BO.SurveyId = SurveyId.ToString();
-                        BO.ClosingDate = pRequestMessage.ClosingDate;
+                        BO.ClosingDate =  pRequestMessage.ClosingDate;
 
                         BO.IntroductionText = pRequestMessage.IntroductionText;
 

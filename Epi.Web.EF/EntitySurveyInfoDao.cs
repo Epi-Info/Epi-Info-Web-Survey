@@ -41,16 +41,20 @@ namespace Epi.Web.EF
         /// </summary>
         /// <remarks>
         /// Following insert, SurveyInfo object will contain the new identifier.
-        /// </remarks>
+        /// </remarks>  
         /// <param name="SurveyInfo">SurveyInfo.</param>
-        public SurveyInfoBO InsertSurveyInfo(SurveyInfoBO SurveyInfo)
+        public  void InsertSurveyInfo(SurveyInfoBO SurveyInfo)
         {
-            using (var Context = DataObjectFactory.CreateContext()) 
+            using (var Context = DataObjectFactory.CreateContext() ) 
             {
-                
+                var SurveyMetaDataEntity = DataObjectFactory.CreateSurveyMetaData();
+                SurveyMetaDataEntity = Mapper.Map(SurveyInfo);
+                Context.AddToSurveyMetaDatas(SurveyMetaDataEntity);
+               
+                Context.SaveChanges();
             }
 
-            return SurveyInfo;
+             
         }
 
         /// <summary>
