@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Runtime.Serialization;
 
-namespace Epi.Web.Common.DTO
+namespace Epi.Web.Common.Message
 {
     [DataContract]
-    public class SurveyRequestResultDTO  
+    public class SurveyRequestResponse  
     {
         bool isPulished;
         string uRL;
