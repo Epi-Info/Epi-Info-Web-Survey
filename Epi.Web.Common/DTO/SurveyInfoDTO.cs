@@ -17,6 +17,7 @@ namespace Epi.Web.Common.DTO
         private string _OrganizationName;
         private string _XML;
         private bool _IsSuccess;
+        private DateTime _ClosingDate;
 
 
         [DataMember]
@@ -71,6 +72,13 @@ namespace Epi.Web.Common.DTO
         {
             get { return _IsSuccess; }
             set { _IsSuccess = value; }
+        }
+
+        [DataMember]
+        public DateTime ClosingDate
+        {
+            get { return _ClosingDate; }
+            set { _ClosingDate = value; }
         }
 
     }
