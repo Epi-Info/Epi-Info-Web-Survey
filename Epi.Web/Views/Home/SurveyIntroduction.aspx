@@ -22,12 +22,12 @@
         </div>
     </div>
     <div>
-     <b><%: Model.IntroductionText %></b> <br />
+      <h2 >
+            Welcome</h2>  
+      <%: Model.IntroductionText %>  <br />
     </div>
     <div id="content">
-        <h2>
-            Welcome</h2>
-        <p>
+       
         </p>
         <p>
             <button id="beginsurvey" class="begin green" type="submit" onclick="<%: "window.location.href='begin/" + (ViewData.Model).SurveyId + "'"%>">
