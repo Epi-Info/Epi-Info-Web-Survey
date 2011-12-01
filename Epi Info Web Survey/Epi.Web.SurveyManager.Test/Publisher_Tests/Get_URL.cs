@@ -24,8 +24,8 @@ namespace Epi.Web.SurveyManager.Test.Publisher_Tests
         public void Get_Servey_URL()
         {
            // string result = "";
-            var result = _publisher.GetconnectionString();
-           Assert.AreNotEqual(result.ToString(), "");
+         //   var result = _publisher.GetconnectionString();
+           //Assert.AreNotEqual(result.ToString(), "");
            //Assert.Ignore();
 
             

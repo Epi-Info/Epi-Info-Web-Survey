@@ -110,10 +110,7 @@ namespace Epi.Web.BLL
         }
         #endregion
         
-        public string GetconnectionString() {
-            string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["EIWSEntities"].ConnectionString;
-            return connectionString;
-        }
+        
       
     }
 }
