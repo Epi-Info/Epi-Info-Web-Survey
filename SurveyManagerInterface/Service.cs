@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
+using Epi.Web.Common.Message;
 using Epi.Web.Common.DTO;
 
 namespace Epi.Web.SurveyManager
@@ -16,16 +17,13 @@ namespace Epi.Web.SurveyManager
         /// </summary>
         /// <param name="pRequestMessage"></param>
         /// <returns></returns>
-        public SurveyRequestResultDTO PublishSurvey(SurveyRequestDTO pRequestMessage)
+        public SurveyRequestResponse PublishSurvey(SurveyRequest pRequestMessage)
         {
-            SurveyRequestResultDTO result = null;
+            SurveyRequestResponse result = null;
             Epi.Web.Interfaces.DataInterfaces.ISurveyInfoDao SurveyInfoDao = null;
 
             Epi.Web.BLL.Publisher Implementation = new Epi.Web.BLL.Publisher(SurveyInfoDao);
             result = Mapper.BusinessObjectToDataTransfer(Implementation.PublishSurvey(Mapper.DataTransferToBusinessObject(pRequestMessage)));
-            //result.IsPulished = r.IsPulished;
-            //result.StatusText = r.StatusText;
-            //result.URL = r.URL;
 
             return result;
 
