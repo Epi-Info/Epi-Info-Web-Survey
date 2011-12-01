@@ -65,7 +65,7 @@ namespace Epi.Web.EF
         /// <param name="SurveyInfo">SurveyInfo.</param>
         SurveyInfoBO InsertSurveyInfo(SurveyInfoBO SurveyInfo)
         {
-            using (var Context = new Epi.Web.EF.EIWSEntities(GetconnectionString()))
+            using (var Context = new Epi.Web.EF.EIWSEntities( DataObjectFactory.CreateContext().ToString()))
             {
                 
             }
@@ -77,17 +77,13 @@ namespace Epi.Web.EF
         /// Updates a SurveyInfo.
         /// </summary>
         /// <param name="SurveyInfo">SurveyInfo.</param>
-        void UpdateSurveyInfo(SurveyInfoBO SurveyInfo);
+        //void UpdateSurveyInfo(SurveyInfoBO SurveyInfo);
 
         /// <summary>
         /// Deletes a SurveyInfo
         /// </summary>
         /// <param name="SurveyInfo">SurveyInfo.</param>
-        void DeleteSurveyInfo(SurveyInfoBO SurveyInfo);
-        public string GetconnectionString()
-        {
-            string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["EIWSEntities"].ConnectionString;
-            return connectionString;
-        }
+       //void DeleteSurveyInfo(SurveyInfoBO SurveyInfo);
+       
     }
 }
