@@ -4,8 +4,8 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
-using Epi.Web.Common.Message;
 using Epi.Web.Common.DTO;
+using Epi.Web.Common.Message;
 
 namespace Epi.Web.SurveyManager
 {
@@ -37,8 +37,9 @@ namespace Epi.Web.SurveyManager
         public SurveyInfoDTO GetSurveyInfoById(string pId)
         {
             SurveyInfoDTO result = null;
-            Epi.Web.BLL.SurveyInfo Implementation = new Epi.Web.BLL.SurveyInfo();
-            result = Implementation.GetSurveyInfoById(pId);
+            Epi.Web.Interfaces.DataInterfaces.ISurveyInfoDao SurveyInfoDao = null;
+            Epi.Web.BLL.SurveyInfo Implementation = new Epi.Web.BLL.SurveyInfo(SurveyInfoDao);
+            result = Mapper.BusinessObjectToDataTransfer(Implementation.GetSurveyInfoById(pId));
    
             return result;
 
