@@ -45,6 +45,28 @@ namespace Epi.Web.SurveyManager
             };
         }
 
+
+        /// <summary>
+        /// Maps SurveyInfoBO business object to SurveyMetaData entity.
+        /// </summary>
+        /// <param name="customer">A SurveyInfoBO business object.</param>
+        /// <returns>A SurveyMetaData entity.</returns>
+        internal static SurveyInfoDTO BusinessObjectToDataTransfer(SurveyInfoBO entity)
+        {
+            return new SurveyInfoDTO
+            {
+                SurveyId = entity.SurveyId,
+                SurveyName = entity.SurveyName,
+                SurveyNumber = entity.SurveyNumber,
+                XML = entity.XML,
+                IntroductionText = entity.IntroductionText,
+                OrganizationName = entity.OrganizationName,
+                DepartmentName = entity.DepartmentName,
+                ClosingDate = entity.ClosingDate
+
+            };
+        }
+
         ///// <summary>
         ///// Transforms list of category BOs list of category DTOs.
         ///// </summary>
