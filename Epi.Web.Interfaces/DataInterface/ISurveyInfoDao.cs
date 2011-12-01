@@ -26,14 +26,14 @@ namespace Epi.Web.Interfaces.DataInterfaces
         /// </summary>
         /// <param name="sortExpression">Sort order.</param>
         /// <returns>Sorted list of SurveyInfos.</returns>
-        List<SurveyInfoBO> GetSurveyInfos(string sortExpression = "SurveyInfoId ASC");
+       // List<SurveyInfoBO> GetSurveyInfos(string sortExpression = "SurveyInfoId ASC");
         
         /// <summary>
         /// Gets SurveyInfo given an order.
         /// </summary>
         /// <param name="orderId">Unique order identifier.</param>
         /// <returns>SurveyInfo.</returns>
-        SurveyInfoBO GetSurveyInfoByOrder(int orderId);
+       // SurveyInfoBO GetSurveyInfoByOrder(int orderId);
 
         /// <summary>
         /// Gets SurveyInfos with order statistics in given sort order.
@@ -41,7 +41,7 @@ namespace Epi.Web.Interfaces.DataInterfaces
         /// <param name="SurveyInfos">SurveyInfo list.</param>
         /// <param name="sortExpression">Sort order.</param>
         /// <returns>Sorted list of SurveyInfos with order statistics.</returns>
-        List<SurveyInfoBO> GetSurveyInfosWithOrderStatistics(string sortExpression);
+     //   List<SurveyInfoBO> GetSurveyInfosWithOrderStatistics(string sortExpression);
 
         /// <summary>
         /// Inserts a new SurveyInfo. 
@@ -62,6 +62,6 @@ namespace Epi.Web.Interfaces.DataInterfaces
         /// Deletes a SurveyInfo
         /// </summary>
         /// <param name="SurveyInfo">SurveyInfo.</param>
-        void DeleteSurveyInfo(SurveyInfoBO SurveyInfo);
+         void DeleteSurveyInfo(SurveyInfoBO SurveyInfo);
     }
 }
