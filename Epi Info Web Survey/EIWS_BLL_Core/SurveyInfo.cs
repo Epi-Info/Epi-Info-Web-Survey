@@ -2,52 +2,25 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Epi.Web.Common.BusinessObject;
 
 namespace Epi.Web.BLL
 {
 
   public  class SurveyInfo
     {
+      private Epi.Web.Interfaces.DataInterfaces.ISurveyInfoDao SurveyInfoDao;
 
-        public SurveyInfo()
+
+        public SurveyInfo(Epi.Web.Interfaces.DataInterfaces.ISurveyInfoDao pSurveyInfoDao)
         {
+            this.SurveyInfoDao = pSurveyInfoDao;
         }
-        public Epi.Web.Common.DTO.SurveyInfoDTO GetSurveyInfoById(String pId)
+
+        public SurveyInfoBO GetSurveyInfoById(String pId)
         {
-            Epi.Web.Common.DTO.SurveyInfoDTO result = new Epi.Web.Common.DTO.SurveyInfoDTO();
-            Guid Id = new Guid(pId);
-
-
-            using (var Context = new Epi.Web.EF.EIWSEntities(GetconnectionString()))
-           {
-               var Surveys = from p in Context.SurveyMetaDatas
-                             where p.SurveyId.Equals(Id)
-
-                               select p;
-
-                var Survey = Surveys.Single();
-
-                result.SurveyId = Survey.SurveyId.ToString();
-                result.SurveyName = Survey.SurveyName;
-                result.SurveyNumber = Survey.SurveyNumber;
-                result.XML = Survey.TemplateXML;
-                result.SurveyName = Survey.SurveyName;
-                result.IntroductionText = Survey.IntroductionText;
-                result.OrganizationName = Survey.OrganizationName;
-                result.DepartmentName = Survey.DepartmentName;
-               
-
-           }
-
+            SurveyInfoBO result = this.SurveyInfoDao.GetSurveyInfo(pId);
             return result;
-
-          
-        
-        }
-        public string GetconnectionString()
-        {
-            string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["EIWSEntities"].ConnectionString;
-            return connectionString;
         }
     }
 }
