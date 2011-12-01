@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Epi.Web.Common.BusinessObject;
 using Epi.Web.Common.DTO;
+using Epi.Web.Common.Message;
 
 namespace Epi.Web.SurveyManager
 {
@@ -15,7 +16,7 @@ namespace Epi.Web.SurveyManager
         /// </summary>
         /// <param name="entity">A SurveyMetaData entity to be transformed.</param>
         /// <returns>A SurveyInfoBO business object.</returns>
-        internal static  SurveyRequestBO DataTransferToBusinessObject(SurveyRequestDTO entity)
+        internal static  SurveyRequestBO DataTransferToBusinessObject(SurveyRequest entity)
         {
             return new SurveyRequestBO
             {
@@ -33,9 +34,9 @@ namespace Epi.Web.SurveyManager
         /// </summary>
         /// <param name="customer">A SurveyInfoBO business object.</param>
         /// <returns>A SurveyMetaData entity.</returns>
-        internal static SurveyRequestResultDTO BusinessObjectToDataTransfer(SurveyRequestResultBO entity)
+        internal static SurveyRequestResponse BusinessObjectToDataTransfer(SurveyRequestResultBO entity)
         {
-            return new SurveyRequestResultDTO
+            return new SurveyRequestResponse
             {
                 IsPulished = entity.IsPulished,
                 StatusText = entity.StatusText,

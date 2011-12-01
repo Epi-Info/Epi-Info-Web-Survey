@@ -5,6 +5,7 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
 using Epi.Web.Common.DTO;
+using Epi.Web.Common.Message;
 
 namespace Epi.Web.SurveyManager
 {
@@ -12,7 +13,7 @@ namespace Epi.Web.SurveyManager
     public interface ISurveyManager 
     {
         [OperationContract]
-        SurveyRequestResultDTO PublishSurvey(SurveyRequestDTO pRequestMessage);
+        SurveyRequestResponse PublishSurvey(SurveyRequest pRequestMessage);
 
         [OperationContract]
         SurveyInfoDTO GetSurveyInfoById(String pIid);
