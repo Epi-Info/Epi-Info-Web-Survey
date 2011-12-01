@@ -16,7 +16,7 @@ namespace Epi.Web.SurveyManager.Test.Publisher_Tests
         public void Setup()
         {
             
-            _publisher = new Epi.Web.BLL.Publisher();
+          //  _publisher = new Epi.Web.BLL.Publisher();
 
         }
 
