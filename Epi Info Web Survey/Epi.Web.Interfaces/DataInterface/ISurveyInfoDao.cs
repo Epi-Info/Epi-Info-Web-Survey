@@ -50,7 +50,7 @@ namespace Epi.Web.Interfaces.DataInterfaces
         /// Following insert, SurveyInfo object will contain the new identifier.
         /// </remarks>
         /// <param name="SurveyInfo">SurveyInfo.</param>
-        SurveyInfoBO InsertSurveyInfo(SurveyInfoBO SurveyInfo);
+       void InsertSurveyInfo(SurveyInfoBO SurveyInfo);
 
         /// <summary>
         /// Updates a SurveyInfo.
