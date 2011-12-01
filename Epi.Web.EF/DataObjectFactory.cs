@@ -14,7 +14,7 @@ namespace Epi.Web.EF
         /// </summary>
         static DataObjectFactory()
         {
-            string connectionStringName = ConfigurationManager.AppSettings.Get("ConnectionStringName");
+            string connectionStringName = ConfigurationManager.AppSettings.Get("EIWSEntities");
             _connectionString = ConfigurationManager.ConnectionStrings[connectionStringName].ConnectionString;
         }
 
