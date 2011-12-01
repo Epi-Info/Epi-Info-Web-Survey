@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataObjectFactory.cs" />
+    <Compile Include="EntityDaoFactory.cs" />
     <Compile Include="EntitySurveyInfoDao.cs" />
     <Compile Include="Epi.Web.Model.Designer.cs">
       <AutoGen>True</AutoGen>
