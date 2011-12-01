@@ -20,7 +20,7 @@ namespace Epi.Web.SurveyManager
         public SurveyRequestResponse PublishSurvey(SurveyRequest pRequestMessage)
         {
             SurveyRequestResponse result = null;
-            Epi.Web.Interfaces.DataInterfaces.ISurveyInfoDao SurveyInfoDao = null;
+            Epi.Web.Interfaces.DataInterfaces.ISurveyInfoDao SurveyInfoDao = new EF.EntitySurveyInfoDao();
 
             Epi.Web.BLL.Publisher Implementation = new Epi.Web.BLL.Publisher(SurveyInfoDao);
             result = Mapper.BusinessObjectToDataTransfer(Implementation.PublishSurvey(Mapper.DataTransferToBusinessObject(pRequestMessage)));
@@ -37,7 +37,7 @@ namespace Epi.Web.SurveyManager
         public SurveyInfoDTO GetSurveyInfoById(string pId)
         {
             SurveyInfoDTO result = null;
-            Epi.Web.Interfaces.DataInterfaces.ISurveyInfoDao SurveyInfoDao = null;
+            Epi.Web.Interfaces.DataInterfaces.ISurveyInfoDao SurveyInfoDao = new EF.EntitySurveyInfoDao();
             Epi.Web.BLL.SurveyInfo Implementation = new Epi.Web.BLL.SurveyInfo(SurveyInfoDao);
             result = Mapper.BusinessObjectToDataTransfer(Implementation.GetSurveyInfoById(pId));
    
