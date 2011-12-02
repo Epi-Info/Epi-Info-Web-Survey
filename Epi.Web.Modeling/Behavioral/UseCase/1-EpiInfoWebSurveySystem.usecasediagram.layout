@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<useCaseDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="EPIInfoWebSurveySystem">
+  <useCaseModelRootMoniker Id="2cd50db4-b59d-473f-8a6c-68f123e3ae3d" />
+  <nestedChildShapes>
+    <actorShape Id="1d6ef0ce-3b57-4cc0-8afb-8020026360e2" absoluteBounds="1.625, 3.25, 0.5, 0.5" isReference="false" heightOffset="0">
+      <actorMoniker Id="2ccf4b36-32b5-4502-8791-8d20ab2bf90c" LastKnownName="From Designer" />
+      <relativeChildShapes />
+    </actorShape>
+    <useCaseAssociationConnector edgePoints="[(1.875 : 3.5); (1.875 : 3.5)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="113, 111, 110" sourceMultiplicity="" targetMultiplicity="">
+      <associationMoniker Id="c817c6da-73f7-4e3e-8d19-ebffb1b3fe18" />
+      <relativeChildShapes />
+      <nodes>
+        <actorShapeMoniker Id="1d6ef0ce-3b57-4cc0-8afb-8020026360e2" />
+        <actorShapeMoniker Id="1d6ef0ce-3b57-4cc0-8afb-8020026360e2" />
+      </nodes>
+    </useCaseAssociationConnector>
+    <actorShape Id="be99e3d9-9258-435d-8ae6-f2a7b952bb0b" absoluteBounds="1.625, 4.125, 0.5, 0.5" isReference="false" heightOffset="0">
+      <actorMoniker Id="e27e06c2-c622-4cba-84dc-37be3bb1f903" LastKnownName="Survey Participant" />
+      <relativeChildShapes />
+    </actorShape>
+    <actorShape Id="f02e86b6-ddfe-43d6-820a-46e691ae6da5" absoluteBounds="1.625, 5, 0.5, 0.5" isReference="false" heightOffset="0">
+      <actorMoniker Id="72024c4e-1b8d-45b3-9799-7012d189fe5f" LastKnownName="Epidemiologist" />
+      <relativeChildShapes />
+    </actorShape>
+    <useCaseShape Id="5c9b2f5b-a846-4e16-9d4b-45f8139d7f07" absoluteBounds="4, 1.875, 1, 0.5" customColor="238, 237, 131" heightOffset="0">
+      <useCaseMoniker Id="93265863-40fa-4efd-9667-06b56de08ebd" LastKnownName="Create Survey" />
+      <relativeChildShapes />
+    </useCaseShape>
+    <useCaseAssociationConnector edgePoints="[(2.125 : 3.36904761904762); (4.15476212665875 : 2.30583888603589)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="113, 111, 110" sourceMultiplicity="" targetMultiplicity="">
+      <associationMoniker Id="be8922bb-2833-4bd1-bb18-7606d996282f" />
+      <relativeChildShapes />
+      <nodes>
+        <actorShapeMoniker Id="1d6ef0ce-3b57-4cc0-8afb-8020026360e2" />
+        <useCaseShapeMoniker Id="5c9b2f5b-a846-4e16-9d4b-45f8139d7f07" />
+      </nodes>
+    </useCaseAssociationConnector>
+    <useCaseShape Id="bbe8a421-36c4-4461-a764-a293da50b48d" absoluteBounds="4, 6.125, 1, 0.5" customColor="238, 237, 131" heightOffset="0">
+      <useCaseMoniker Id="0279962f-5181-4f7b-94b3-4c4ca1b9cb8a" LastKnownName="Analyze Survey" />
+      <relativeChildShapes />
+    </useCaseShape>
+    <useCaseAssociationConnector edgePoints="[(2.125 : 5.35714285714286); (4.12037169881735 : 6.21230215663601)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="113, 111, 110" sourceMultiplicity="" targetMultiplicity="">
+      <associationMoniker Id="0afbbe18-03f2-41f4-a385-61b363fa47b6" />
+      <relativeChildShapes />
+      <nodes>
+        <actorShapeMoniker Id="f02e86b6-ddfe-43d6-820a-46e691ae6da5" />
+        <useCaseShapeMoniker Id="bbe8a421-36c4-4461-a764-a293da50b48d" />
+      </nodes>
+    </useCaseAssociationConnector>
+    <commentShape Id="54840110-af13-4fea-b85c-8449beb1f699" absoluteBounds="0.5, 0.75, 2.25, 0.875" customColor="251, 247, 200">
+      <commentMoniker Id="b83fa443-5456-4866-b0cb-6727c73cb393" />
+      <relativeChildShapes />
+    </commentShape>
+    <useCaseShape Id="f19f5a36-7a1b-4b98-a864-125aa4e613ea" absoluteBounds="4, 7, 1, 0.5" customColor="238, 237, 131" heightOffset="0">
+      <useCaseMoniker Id="3860ea46-0bf9-4ad8-a63a-115559b892b1" LastKnownName="Email Survey" />
+      <relativeChildShapes />
+    </useCaseShape>
+    <useCaseAssociationConnector edgePoints="[(2.125 : 5.44047619047619); (4.22567177925659 : 7.04098802229073)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="113, 111, 110" sourceMultiplicity="" targetMultiplicity="">
+      <associationMoniker Id="c3df6242-fc2c-46c2-9db8-eae33e3b96af" />
+      <relativeChildShapes />
+      <nodes>
+        <actorShapeMoniker Id="f02e86b6-ddfe-43d6-820a-46e691ae6da5" />
+        <useCaseShapeMoniker Id="f19f5a36-7a1b-4b98-a864-125aa4e613ea" />
+      </nodes>
+    </useCaseAssociationConnector>
+    <useCaseShape Id="17e855c5-ca7a-4ce2-b29e-17ec3788216d" absoluteBounds="4, 1.125, 1, 0.5" customColor="238, 237, 131" heightOffset="0">
+      <useCaseMoniker Id="3aae1ff1-c38c-4d4d-9649-f8f36107bb4c" LastKnownName="Email Survey" />
+      <relativeChildShapes />
+    </useCaseShape>
+    <useCaseAssociationConnector edgePoints="[(2.125 : 3.29761904761905); (4.23725355963904 : 1.58769949933982)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="113, 111, 110" sourceMultiplicity="" targetMultiplicity="">
+      <associationMoniker Id="35aeb31d-285c-4617-8f1a-429e9b0a2749" />
+      <relativeChildShapes />
+      <nodes>
+        <actorShapeMoniker Id="1d6ef0ce-3b57-4cc0-8afb-8020026360e2" />
+        <useCaseShapeMoniker Id="17e855c5-ca7a-4ce2-b29e-17ec3788216d" />
+      </nodes>
+    </useCaseAssociationConnector>
+    <SubsystemShape Id="70a67a03-7601-4aeb-90e3-c52b16a7cef1" absoluteBounds="3, 2.625, 3, 3.25" customColor="White">
+      <subsystemMoniker Id="4d7c9db0-21e2-46ce-b0be-6c21088d1346" LastKnownName="Epi Info Web Survey System" />
+      <nestedChildShapes>
+        <useCaseShape Id="648736b0-d36b-43ea-bc3a-3601705428c9" absoluteBounds="4, 3.25, 1, 0.5" customColor="238, 237, 131" heightOffset="0">
+          <useCaseMoniker Id="0482bf1b-b76e-45db-844f-b24ba32b2fcb" LastKnownName="Post Survey" />
+          <relativeChildShapes />
+        </useCaseShape>
+        <useCaseShape Id="a69aea99-d507-4339-b663-af671197d06e" absoluteBounds="4, 4.125, 1, 0.5" customColor="238, 237, 131" heightOffset="0">
+          <useCaseMoniker Id="aab4b12e-f418-4b67-b8ec-5662facf6946" LastKnownName="Take Survey" />
+          <relativeChildShapes />
+        </useCaseShape>
+        <useCaseShape Id="8d899f0b-220b-40c2-9ce5-0b483e637e9e" absoluteBounds="4, 5, 1, 0.5" customColor="238, 237, 131" heightOffset="0">
+          <useCaseMoniker Id="380ad482-58ce-40e9-b4e3-42bb4895b60f" LastKnownName="Download Survey" />
+          <relativeChildShapes />
+        </useCaseShape>
+      </nestedChildShapes>
+    </SubsystemShape>
+    <useCaseAssociationConnector edgePoints="[(2.125 : 3.5); (4 : 3.5)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="113, 111, 110" sourceMultiplicity="" targetMultiplicity="">
+      <associationMoniker Id="9a6eca97-2e4e-472d-924c-3ef60b297328" />
+      <relativeChildShapes />
+      <nodes>
+        <actorShapeMoniker Id="1d6ef0ce-3b57-4cc0-8afb-8020026360e2" />
+        <useCaseShapeMoniker Id="648736b0-d36b-43ea-bc3a-3601705428c9" />
+      </nodes>
+    </useCaseAssociationConnector>
+    <useCaseAssociationConnector edgePoints="[(2.125 : 4.375); (4 : 4.375)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="113, 111, 110" sourceMultiplicity="" targetMultiplicity="">
+      <associationMoniker Id="775c518a-af06-4c8b-afb2-0ca2882d4dfc" />
+      <relativeChildShapes />
+      <nodes>
+        <actorShapeMoniker Id="be99e3d9-9258-435d-8ae6-f2a7b952bb0b" />
+        <useCaseShapeMoniker Id="a69aea99-d507-4339-b663-af671197d06e" />
+      </nodes>
+    </useCaseAssociationConnector>
+    <useCaseAssociationConnector edgePoints="[(2.125 : 5.25); (4 : 5.25)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="113, 111, 110" sourceMultiplicity="" targetMultiplicity="">
+      <associationMoniker Id="d68c24f3-33b1-4dbe-84ef-f2708d7542d8" />
+      <relativeChildShapes />
+      <nodes>
+        <actorShapeMoniker Id="f02e86b6-ddfe-43d6-820a-46e691ae6da5" />
+        <useCaseShapeMoniker Id="8d899f0b-220b-40c2-9ce5-0b483e637e9e" />
+      </nodes>
+    </useCaseAssociationConnector>
+  </nestedChildShapes>
+</useCaseDiagram>
