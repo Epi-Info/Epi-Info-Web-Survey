@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace Epi.Web.WCF.PublishServer
+namespace Epi.Web.WCF.SurveyHost
 {
     public partial class SiteMaster : System.Web.UI.MasterPage
     {

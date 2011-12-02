@@ -1,1 +1,1 @@
-﻿<%@ServiceHost Service="Epi.Web.SurveyManager.Service"%>
+﻿<%@ServiceHost Service="Epi.Web.SurveyHost.Service"%>
