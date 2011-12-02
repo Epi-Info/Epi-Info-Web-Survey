@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/EpiSurvey.Master"
-    Inherits="System.Web.Mvc.ViewPage<Epi.Web.Common.DTO.SurveyInfoDTO>" %>
+    Inherits="System.Web.Mvc.ViewPage<Epi.Web.Models.SurveyInfoMVC>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
     Index
@@ -22,12 +22,12 @@
         </div>
     </div>
     <div>
-      <h2 >
-            Welcome</h2>  
-      <%: Model.IntroductionText %>  <br />
+     <b><%: Model.IntroductionText %></b> <br />
     </div>
     <div id="content">
-       
+        <h2>
+            Welcome</h2>
+        <p>
         </p>
         <p>
             <button id="beginsurvey" class="begin green" type="submit" onclick="<%: "window.location.href='begin/" + (ViewData.Model).SurveyId + "'"%>">
