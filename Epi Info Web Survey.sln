@@ -11,41 +11,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epi.Web.EF", "Epi.Web.EF\Ep
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epi.Web.SurveyManager", "SurveyManagerInterface\Epi.Web.SurveyManager.csproj", "{31F91938-2997-4650-8D36-71C845F1071D}"
 EndProject
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Epi.Web.ServiceHost", "Epi.Web.ServiceHost", "{87C1365F-B3D2-4D30-9C3B-D26CE677D7FE}"
-	ProjectSection(WebsiteProperties) = preProject
-		SccProjectName = "SAK"
-		SccAuxPath = "SAK"
-		SccLocalPath = "SAK"
-		SccProvider = "SAK"
-		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
-		ProjectReferences = "{31F91938-2997-4650-8D36-71C845F1071D}|Epi.Web.SurveyManager.dll;{D49B7A21-644B-49D7-9A5D-387BF31EAFE5}|Epi.Web.BLL.dll;{05A484AB-A555-4200-936B-BEC573285BCC}|Epi.Web.EF.dll;{B8AF69BD-3CE1-4AA5-875D-3FB87C7FCE44}|Epi.Web.Interfaces.dll;{6E2F059B-C1CD-401F-8A63-DC2933CFB0D8}|Epi.Web.Common.dll;"
-		Debug.AspNetCompiler.VirtualPath = "/Epi.Web.ServiceHost"
-		Debug.AspNetCompiler.PhysicalPath = "Epi.Web.ServiceHost\"
-		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\Epi.Web.ServiceHost\"
-		Debug.AspNetCompiler.Updateable = "true"
-		Debug.AspNetCompiler.ForceOverwrite = "true"
-		Debug.AspNetCompiler.FixedNames = "false"
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.VirtualPath = "/Epi.Web.ServiceHost"
-		Release.AspNetCompiler.PhysicalPath = "Epi.Web.ServiceHost\"
-		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\Epi.Web.ServiceHost\"
-		Release.AspNetCompiler.Updateable = "true"
-		Release.AspNetCompiler.ForceOverwrite = "true"
-		Release.AspNetCompiler.FixedNames = "false"
-		Release.AspNetCompiler.Debug = "False"
-		VWDPort = "22587"
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epi.Web.SurveyManager.Client", "Epi.Web.SurveyManager_Test\Epi.Web.SurveyManager.Client.csproj", "{13D8FD8D-1403-4C84-823A-1E27806CAC30}"
-	ProjectSection(ProjectDependencies) = postProject
-		{87C1365F-B3D2-4D30-9C3B-D26CE677D7FE} = {87C1365F-B3D2-4D30-9C3B-D26CE677D7FE}
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epi.Web.BLL.Test", "Epi.Web.SurveyManager.Test\Epi.Web.BLL.Test.csproj", "{163A960D-721D-4C43-B4D9-66522FFA3BAE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epi.Web.Common", "Epi.Web.Common\Epi.Web.Common.csproj", "{6E2F059B-C1CD-401F-8A63-DC2933CFB0D8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epi.Web.DynamicForms.Core", "Epi.DynamicForms.Core\Epi.Web.DynamicForms.Core.csproj", "{9624E64A-013F-41E8-84BA-C34EE744685E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epi.Web.WCF.SurveyServer", "Epi.Web.WCF.PublishServer\Epi.Web.WCF.SurveyServer.csproj", "{BEFC85E4-F3A3-4108-9575-4EF1A004364E}"
 EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
@@ -68,23 +42,21 @@ Global
 		SccProjectUniqueName5 = SurveyManagerInterface\\Epi.Web.SurveyManager.csproj
 		SccProjectName5 = SurveyManagerInterface
 		SccLocalPath5 = SurveyManagerInterface
-		SccWebProject6 = true
-		SccProjectUniqueName6 = Epi.Web.ServiceHost
-		SccProjectName6 = Epi.Web.ServiceHost
-		SccLocalPath6 = Epi.Web.ServiceHost
-		SccProjectEnlistmentChoice6 = 2
-		SccProjectUniqueName7 = Epi.Web.SurveyManager_Test\\Epi.Web.SurveyManager.Client.csproj
-		SccProjectName7 = Epi.Web.SurveyManager_Test
-		SccLocalPath7 = Epi.Web.SurveyManager_Test
-		SccProjectUniqueName8 = Epi.Web.SurveyManager.Test\\Epi.Web.BLL.Test.csproj
-		SccProjectName8 = Epi.Web.SurveyManager.Test
-		SccLocalPath8 = Epi.Web.SurveyManager.Test
-		SccProjectUniqueName9 = Epi.Web.Common\\Epi.Web.Common.csproj
-		SccProjectName9 = Epi.Web.Common
-		SccLocalPath9 = Epi.Web.Common
-		SccProjectUniqueName10 = Epi.DynamicForms.Core\\Epi.Web.DynamicForms.Core.csproj
-		SccProjectName10 = Epi.DynamicForms.Core
-		SccLocalPath10 = Epi.DynamicForms.Core
+		SccProjectUniqueName6 = Epi.Web.SurveyManager_Test\\Epi.Web.SurveyManager.Client.csproj
+		SccProjectName6 = Epi.Web.SurveyManager_Test
+		SccLocalPath6 = Epi.Web.SurveyManager_Test
+		SccProjectUniqueName7 = Epi.Web.SurveyManager.Test\\Epi.Web.BLL.Test.csproj
+		SccProjectName7 = Epi.Web.SurveyManager.Test
+		SccLocalPath7 = Epi.Web.SurveyManager.Test
+		SccProjectUniqueName8 = Epi.Web.Common\\Epi.Web.Common.csproj
+		SccProjectName8 = Epi.Web.Common
+		SccLocalPath8 = Epi.Web.Common
+		SccProjectUniqueName9 = Epi.DynamicForms.Core\\Epi.Web.DynamicForms.Core.csproj
+		SccProjectName9 = Epi.DynamicForms.Core
+		SccLocalPath9 = Epi.DynamicForms.Core
+		SccProjectUniqueName10 = Epi.Web.WCF.PublishServer\\Epi.Web.WCF.SurveyServer.csproj
+		SccProjectName10 = Epi.Web.WCF.PublishServer
+		SccLocalPath10 = Epi.Web.WCF.PublishServer
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -145,16 +117,6 @@ Global
 		{31F91938-2997-4650-8D36-71C845F1071D}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{31F91938-2997-4650-8D36-71C845F1071D}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{31F91938-2997-4650-8D36-71C845F1071D}.Release|x86.ActiveCfg = Release|Any CPU
-		{87C1365F-B3D2-4D30-9C3B-D26CE677D7FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{87C1365F-B3D2-4D30-9C3B-D26CE677D7FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{87C1365F-B3D2-4D30-9C3B-D26CE677D7FE}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{87C1365F-B3D2-4D30-9C3B-D26CE677D7FE}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{87C1365F-B3D2-4D30-9C3B-D26CE677D7FE}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{87C1365F-B3D2-4D30-9C3B-D26CE677D7FE}.Release|Any CPU.ActiveCfg = Debug|Any CPU
-		{87C1365F-B3D2-4D30-9C3B-D26CE677D7FE}.Release|Any CPU.Build.0 = Debug|Any CPU
-		{87C1365F-B3D2-4D30-9C3B-D26CE677D7FE}.Release|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{87C1365F-B3D2-4D30-9C3B-D26CE677D7FE}.Release|Mixed Platforms.Build.0 = Debug|Any CPU
-		{87C1365F-B3D2-4D30-9C3B-D26CE677D7FE}.Release|x86.ActiveCfg = Debug|Any CPU
 		{13D8FD8D-1403-4C84-823A-1E27806CAC30}.Debug|Any CPU.ActiveCfg = Debug|x86
 		{13D8FD8D-1403-4C84-823A-1E27806CAC30}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
 		{13D8FD8D-1403-4C84-823A-1E27806CAC30}.Debug|Mixed Platforms.Build.0 = Debug|x86
@@ -195,6 +157,16 @@ Global
 		{9624E64A-013F-41E8-84BA-C34EE744685E}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{9624E64A-013F-41E8-84BA-C34EE744685E}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{9624E64A-013F-41E8-84BA-C34EE744685E}.Release|x86.ActiveCfg = Release|Any CPU
+		{BEFC85E4-F3A3-4108-9575-4EF1A004364E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BEFC85E4-F3A3-4108-9575-4EF1A004364E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BEFC85E4-F3A3-4108-9575-4EF1A004364E}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{BEFC85E4-F3A3-4108-9575-4EF1A004364E}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{BEFC85E4-F3A3-4108-9575-4EF1A004364E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{BEFC85E4-F3A3-4108-9575-4EF1A004364E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BEFC85E4-F3A3-4108-9575-4EF1A004364E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BEFC85E4-F3A3-4108-9575-4EF1A004364E}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{BEFC85E4-F3A3-4108-9575-4EF1A004364E}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{BEFC85E4-F3A3-4108-9575-4EF1A004364E}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
