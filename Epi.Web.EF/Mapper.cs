@@ -33,7 +33,7 @@ namespace Epi.Web.EF
         /// <summary>
         /// Maps SurveyInfoBO business object to SurveyMetaData entity.
         /// </summary>
-        /// <param name="customer">A SurveyInfoBO business object.</param>
+        /// <param name="businessobject">A SurveyInfoBO business object.</param>
         /// <returns>A SurveyMetaData entity.</returns>
         internal static SurveyMetaData Map(SurveyInfoBO businessobject)
         {
