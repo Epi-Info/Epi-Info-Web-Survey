@@ -1,0 +1,174 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<useCaseModelRoot xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm5="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" xmlns:dm9="http://schemas.microsoft.com/dsltools/SimpleShapesModel" dslVersion="1.0.0.0" Id="81abefd1-1fdd-47b6-9468-a88c5c0a513e" name="EPIInfoWebSurvey" linkedPackageId="fc2f16b1-531e-4cd0-b6d2-1ff140c6304c" xmlns="http://schemas.microsoft.com/dsltools/UseCaseModel">
+  <ownedCommentsInternal>
+    <comment Id="7a7caa66-aea4-458b-8a4f-ad68fa51acdc">
+      <elementDefinition Id="ed6bd47b-d65f-4d4e-8a94-b15ac77ae494" />
+      <body>The use cases depicted here represent the use cases that survery participant participates in. The realization of these use cases is accomplished by Epi Info Web Survey Application.</body>
+    </comment>
+  </ownedCommentsInternal>
+  <profileInstances>
+    <packageHasProfileInstances Id="b8f9ddec-290a-4ff6-afd3-b4bb0e323d2d">
+      <profileInstance Id="69b59c10-05c3-4082-9ce0-a5851914a8a2" name="StandardProfileL2">
+        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+      </profileInstance>
+      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances Id="b0fd2be5-9714-40d7-87a1-d61efbf28fa6">
+      <profileInstance Id="4126adbf-2d32-48e9-ac60-f7ec72f8c0a8" name="StandardProfileL3">
+        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+      </profileInstance>
+      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <useCaseModelRootHasTypes>
+      <actor Id="a6f004e6-108e-4647-921c-be8f28900c6e" name="Survery Participant" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="bd93dd00-339e-4d35-b12e-59219412cfdb" />
+        <targetEnds>
+          <association Id="4e455054-378d-443f-9285-2b69d9254e39" isDerived="false" sourceEndRoleName="Survery Participant" targetEndRoleName="Access survey" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="81ecb5e8-9d42-444f-b995-376cb3e219de" LastKnownName="Access survey" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="8e7dfcfb-4305-487d-9406-95aebbac48a8" name="Survery Participant" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="bba4ba2d-48aa-4afe-8df5-cf0c453bb9ae" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="288176bd-ac5c-47c3-9cf5-40667d04389d" name="Access survey" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="4645a6dc-3cdd-4c08-a8ba-01d63fa57a87" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="a565891b-6892-42ae-b0d8-96b03f52cb06" />
+          </association>
+          <association Id="81d366ce-519d-4e7e-b14f-20f7f7fbf6b1" isDerived="false" sourceEndRoleName="Survery Participant" targetEndRoleName="Distribute the survey" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="190756ad-74ca-4e5f-92ae-e306f1708e5f" LastKnownName="Distribute the survey" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="d5ad0e9c-c7f3-48e1-b51f-e7bc101d634b" name="Survery Participant" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="6efc461f-8e4b-482e-8042-cfa330d47573" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="7ab9e63f-10d1-4b2c-9834-80b13bef341d" name="Distribute the survey" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="4d3f12ee-c657-4541-81de-e26f139913a2" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="323d651a-8cda-4831-a048-c16bef86e527" />
+          </association>
+          <association Id="2e08f3f5-d2be-495d-8dd0-ecfc62e744ec" isDerived="false" sourceEndRoleName="Survery Participant" targetEndRoleName="Save the survey" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="87b1f018-d682-4940-9241-7bf9b9264124" LastKnownName="Save the survey" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="364033bf-8786-4f2f-8029-754e571af963" name="Survery Participant" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="7c509eb3-3a65-4422-a617-f867b0a9c2e3" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="241a89d6-b108-4a27-9cca-3dc737a94008" name="Save the survey" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="8e8d8cd6-31e1-4410-8d2b-2a6fff173a05" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="96fb0a1e-ccc2-4e75-b3e9-bc017e48b1f3" />
+          </association>
+          <association Id="069c267c-ea08-4b89-b360-b8f376853b9a" isDerived="false" sourceEndRoleName="Survery Participant" targetEndRoleName="Submit the survey" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="4ea67b2e-95af-47d0-b58f-0454ea5c4e81" LastKnownName="Submit the survey" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="04809b1c-3688-4420-be6d-eb8ebb4592ee" name="Survery Participant" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="508b34c8-a1a9-49a7-bb08-070b9c06f476" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="9aee8d1d-e5b5-4122-9ff6-dabcc02a174a" name="Submit the survey" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="f43ec86e-cde2-4e38-9768-f77d1413dd9d" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="11e6e009-3b44-44fb-b607-01faa90a5fda" />
+          </association>
+          <association Id="847f7602-0ca9-4ec5-bf69-0f08e8f7786f" isDerived="false" sourceEndRoleName="Survery Participant" targetEndRoleName="Navigate the survey" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="a0c57d2c-7cee-4053-8ef1-aea8412491ec" LastKnownName="Navigate the survey" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="b81a94ef-082f-4f25-a41c-959b91dd818f" name="Survery Participant" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="317f1283-1dc8-46d9-9e45-c55422d41069" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="842c340c-5cb6-416e-9409-600f6f7d80bc" name="Navigate the survey" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="7dcee496-0d0a-4443-a289-9d62b25a5f38" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="231b012e-0747-4e71-bd6c-1dea8b310b35" />
+          </association>
+        </targetEnds>
+      </actor>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <subsystem Id="bc4e02a5-6f1a-482c-9180-d6afaf9c0aca" name="Epi Info Web Survey Application" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="8a4c4825-7a13-43fc-a890-322df3929546" />
+      </subsystem>
+    </useCaseModelRootHasTypes>
+    <packageHasNamedElement>
+      <useCase Id="81ecb5e8-9d42-444f-b995-376cb3e219de" name="Access survey" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="d33aa5e2-ed9d-4c03-a31a-11f3367006a0" />
+        <subjects>
+          <subsystemMoniker Id="bc4e02a5-6f1a-482c-9180-d6afaf9c0aca" LastKnownName="Epi Info Web Survey Application" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="190756ad-74ca-4e5f-92ae-e306f1708e5f" name="Distribute the survey" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="d66273dc-c27d-4b7e-a689-5f059a2dceb3" />
+        <subjects>
+          <subsystemMoniker Id="bc4e02a5-6f1a-482c-9180-d6afaf9c0aca" LastKnownName="Epi Info Web Survey Application" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="87b1f018-d682-4940-9241-7bf9b9264124" name="Save the survey" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="8b5d4f47-27eb-43d9-b2dd-99072a019b6e" />
+        <subjects>
+          <subsystemMoniker Id="bc4e02a5-6f1a-482c-9180-d6afaf9c0aca" LastKnownName="Epi Info Web Survey Application" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="4ea67b2e-95af-47d0-b58f-0454ea5c4e81" name="Submit the survey" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="763a00fc-0f70-4165-bf71-29368bb7d676" />
+        <subjects>
+          <subsystemMoniker Id="bc4e02a5-6f1a-482c-9180-d6afaf9c0aca" LastKnownName="Epi Info Web Survey Application" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="a0c57d2c-7cee-4053-8ef1-aea8412491ec" name="Navigate the survey" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="793e3cb6-c8ac-46b3-8696-e3bff8189a2c" />
+        <subjects>
+          <subsystemMoniker Id="bc4e02a5-6f1a-482c-9180-d6afaf9c0aca" LastKnownName="Epi Info Web Survey Application" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="1313a186-7c51-4860-8189-50a518e3b5d3" name="Reload saved survey" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="6949e3c6-d096-48c5-bf1f-4a675365c184" />
+        <extendedCases>
+          <extend Id="814b77fd-6082-44c3-a8aa-8db95526dce8">
+            <useCaseMoniker Id="81ecb5e8-9d42-444f-b995-376cb3e219de" LastKnownName="Access survey" />
+            <elementDefinition Id="7513a5c5-f1ec-4556-9ca7-d5e1709f8bba" />
+          </extend>
+        </extendedCases>
+        <subjects>
+          <subsystemMoniker Id="bc4e02a5-6f1a-482c-9180-d6afaf9c0aca" LastKnownName="Epi Info Web Survey Application" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+  </packagedElements>
+  <package Id="fc2f16b1-531e-4cd0-b6d2-1ff140c6304c" name="Epi.Web.Modeling">
+    <elementDefinition Id="daf1de51-1862-4459-9e4a-e7f71a55a436" />
+  </package>
+</useCaseModelRoot>

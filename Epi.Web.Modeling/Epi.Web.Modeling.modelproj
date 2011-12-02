@@ -21,9 +21,47 @@
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v10.0\ArchitectureTools\Microsoft.VisualStudio.TeamArchitect.ModelingProject.targets" />
   <ItemGroup>
+    <Content Include="Behavioral\Activity\1-EpiInfoSystem.activitydiagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Behavioral\Activity\1-EpiInfoSystem.activitydiagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>Behavioral\Activity\1-EpiInfoSystem.activitydiagram</DependentUpon>
+    </Content>
+    <Content Include="Behavioral\Activity\2-EpiInfoWebSurveyDataCollection.activitydiagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Behavioral\Activity\2-EpiInfoWebSurveyDataCollection.activitydiagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>Behavioral\Activity\2-EpiInfoWebSurveyDataCollection.activitydiagram</DependentUpon>
+    </Content>
+    <Content Include="Behavioral\UseCase\3-EpiInfoWebSurvey.usecasediagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Behavioral\UseCase\3-EpiInfoWebSurvey.usecasediagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>Behavioral\UseCase\3-EpiInfoWebSurvey.usecasediagram</DependentUpon>
+    </Content>
+    <Content Include="Behavioral\UseCase\2-EpiInfoWebSurveyManager.usecasediagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Behavioral\UseCase\2-EpiInfoWebSurveyManager.usecasediagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>Behavioral\UseCase\2-EpiInfoWebSurveyManager.usecasediagram</DependentUpon>
+    </Content>
+    <Content Include="Behavioral\UseCase\1-EpiInfoWebSurveySystem.usecasediagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Behavioral\UseCase\1-EpiInfoWebSurveySystem.usecasediagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>Behavioral\UseCase\1-EpiInfoWebSurveySystem.usecasediagram</DependentUpon>
+    </Content>
+    <Folder Include="Behavioral\Activity\" />
+    <Folder Include="Behavioral\UseCase\" />
     <Folder Include="ModelDefinition\" />
     <Content Include="ModelDefinition\Epi.Web.Modeling.uml">
       <SubType>Content</SubType>
     </Content>
+    <Folder Include="Behavioral" />
   </ItemGroup>
 </Project>
