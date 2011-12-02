@@ -4,7 +4,7 @@ using Epi.Web.Common.BusinessObject;
 using Epi.Web.Common.DTO;
 using Epi.Web.Common.Message;
 
-namespace Epi.Web.SurveyManager
+namespace Epi.Web.WCF.SurveyService
 {
     /// <summary>
     /// Maps DTOs (Data Transfer Objects) to BOs (Business Objects) and vice versa.
