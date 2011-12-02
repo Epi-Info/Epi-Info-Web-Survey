@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epi.Web.BLL", "EIWS_BLL_Cor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epi.Web.EF", "Epi.Web.EF\Epi.Web.EF.csproj", "{05A484AB-A555-4200-936B-BEC573285BCC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epi.Web.SurveyManager", "SurveyManagerInterface\Epi.Web.SurveyManager.csproj", "{31F91938-2997-4650-8D36-71C845F1071D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epi.Web.WCF.SurveyService", "SurveyManagerInterface\Epi.Web.WCF.SurveyService.csproj", "{31F91938-2997-4650-8D36-71C845F1071D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epi.Web.SurveyManager.Client", "Epi.Web.SurveyManager_Test\Epi.Web.SurveyManager.Client.csproj", "{13D8FD8D-1403-4C84-823A-1E27806CAC30}"
 EndProject
@@ -19,7 +19,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epi.Web.Common", "Epi.Web.C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epi.Web.DynamicForms.Core", "Epi.DynamicForms.Core\Epi.Web.DynamicForms.Core.csproj", "{9624E64A-013F-41E8-84BA-C34EE744685E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epi.Web.WCF.SurveyServer", "Epi.Web.WCF.PublishServer\Epi.Web.WCF.SurveyServer.csproj", "{BEFC85E4-F3A3-4108-9575-4EF1A004364E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epi.Web.WCF.SurveyHost", "Epi.Web.WCF.PublishServer\Epi.Web.WCF.SurveyHost.csproj", "{BEFC85E4-F3A3-4108-9575-4EF1A004364E}"
 EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
@@ -39,22 +39,22 @@ Global
 		SccProjectUniqueName4 = Epi.Web.EF\\Epi.Web.EF.csproj
 		SccProjectName4 = Epi.Web.EF
 		SccLocalPath4 = Epi.Web.EF
-		SccProjectUniqueName5 = SurveyManagerInterface\\Epi.Web.SurveyManager.csproj
-		SccProjectName5 = SurveyManagerInterface
-		SccLocalPath5 = SurveyManagerInterface
-		SccProjectUniqueName6 = Epi.Web.SurveyManager_Test\\Epi.Web.SurveyManager.Client.csproj
-		SccProjectName6 = Epi.Web.SurveyManager_Test
-		SccLocalPath6 = Epi.Web.SurveyManager_Test
-		SccProjectUniqueName7 = Epi.Web.SurveyManager.Test\\Epi.Web.BLL.Test.csproj
-		SccProjectName7 = Epi.Web.SurveyManager.Test
-		SccLocalPath7 = Epi.Web.SurveyManager.Test
-		SccProjectUniqueName8 = Epi.Web.Common\\Epi.Web.Common.csproj
-		SccProjectName8 = Epi.Web.Common
-		SccLocalPath8 = Epi.Web.Common
-		SccProjectUniqueName9 = Epi.DynamicForms.Core\\Epi.Web.DynamicForms.Core.csproj
-		SccProjectName9 = Epi.DynamicForms.Core
-		SccLocalPath9 = Epi.DynamicForms.Core
-		SccProjectUniqueName10 = Epi.Web.WCF.PublishServer\\Epi.Web.WCF.SurveyServer.csproj
+		SccProjectUniqueName5 = Epi.Web.SurveyManager_Test\\Epi.Web.SurveyManager.Client.csproj
+		SccProjectName5 = Epi.Web.SurveyManager_Test
+		SccLocalPath5 = Epi.Web.SurveyManager_Test
+		SccProjectUniqueName6 = Epi.Web.SurveyManager.Test\\Epi.Web.BLL.Test.csproj
+		SccProjectName6 = Epi.Web.SurveyManager.Test
+		SccLocalPath6 = Epi.Web.SurveyManager.Test
+		SccProjectUniqueName7 = Epi.Web.Common\\Epi.Web.Common.csproj
+		SccProjectName7 = Epi.Web.Common
+		SccLocalPath7 = Epi.Web.Common
+		SccProjectUniqueName8 = Epi.DynamicForms.Core\\Epi.Web.DynamicForms.Core.csproj
+		SccProjectName8 = Epi.DynamicForms.Core
+		SccLocalPath8 = Epi.DynamicForms.Core
+		SccProjectUniqueName9 = SurveyManagerInterface\\Epi.Web.WCF.SurveyService.csproj
+		SccProjectName9 = SurveyManagerInterface
+		SccLocalPath9 = SurveyManagerInterface
+		SccProjectUniqueName10 = Epi.Web.WCF.PublishServer\\Epi.Web.WCF.SurveyHost.csproj
 		SccProjectName10 = Epi.Web.WCF.PublishServer
 		SccLocalPath10 = Epi.Web.WCF.PublishServer
 	EndGlobalSection
