@@ -4,39 +4,55 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Epi.Web.Models;
-using Epi.Web.WCF.SurveyService;
+using Epi.Web.Repositories.Core;
 
 namespace Epi.Web.Controllers
 {
     public class HomeController : Controller
     {
         
-         //private ISurveyManager _iSurveyManager;
-        private ISurveyManager _iSurveyManager;
+        
+        // Initialize ISurveyInfoRepository 
+        private ISurveyInfoRepository _iSurveyInfoRepository;
 
-
-         public HomeController(ISurveyManager iSurveyManager)
+        /// <summary>
+        /// Injectinting ISurveyInfoRepository through Constructor
+        /// </summary>
+        /// <param name="iSurveyInfoRepository"></param>
+        public HomeController(ISurveyInfoRepository iSurveyInfoRepository)
         {
-            _iSurveyManager = iSurveyManager;
+            _iSurveyInfoRepository = iSurveyInfoRepository;
         }
+
+        /// <summary>
+        /// Accept SurveyId as parameter, 
+        /// Get the SurveyInfoDTO by GetSurveyInfoById call and convert it to a SurveyInfoModel object
+        /// pump the SurveyInfoModel to the "SurveyIntroduction" view
+        /// </summary>
+        /// <param name="surveyid"></param>
+        /// <returns></returns>
         public ActionResult ListSurvey(string surveyid)
-        {
-            var s = _iSurveyManager.GetSurveyInfoById(surveyid);
+        { 
+            var s = _iSurveyInfoRepository.GetSurveyInfoById(surveyid).ToSurveyInfoModel();
 
             return View("SurveyIntroduction", s);
-            
+
         }
 
-
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="surveyid"></param>
+        /// <returns></returns>
         public ActionResult StartSurvey(string surveyid)
         {
+            var surveyInfoDTO = _iSurveyInfoRepository.GetSurveyInfoById(surveyid);
 
-
-            var SurveyMetaData = _iSurveyManager.GetSurveyInfoById(surveyid);
-
-            var form = MvcDynamicForms.Demo.Models.FormProvider.GetForm(SurveyMetaData ,1);// Requesting the first page of the survey.
+            var form = MvcDynamicForms.Demo.Models.FormProvider.GetForm(surveyInfoDTO, 1);// Requesting the first page of the survey.
             return View("Survey", form);
 
         }
+       
     }
 }
