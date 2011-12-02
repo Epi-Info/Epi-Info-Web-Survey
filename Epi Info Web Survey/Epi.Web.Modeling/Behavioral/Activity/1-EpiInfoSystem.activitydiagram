@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<activityRootModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm5="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" xmlns:dm9="http://schemas.microsoft.com/dsltools/SimpleShapesModel" xmlns:dm10="http://schemas.microsoft.com/dsltools/UseCaseModel" dslVersion="1.0.0.0" Id="5fd0ff6f-3211-4953-9795-0d2a13c37277" name="1-EpiInfoSystem" linkedPackageId="9748c706-5c0a-4254-9856-9f3c5623b531" xmlns="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ActivityDesigner">
+  <profileInstances>
+    <packageHasProfileInstances Id="6d65aaee-ec91-439c-b641-e818d68abd22">
+      <profileInstance Id="904a7990-1c46-4697-bb1e-97f72b7871d6" name="StandardProfileL2">
+        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+      </profileInstance>
+      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances Id="4ab3ca52-6769-472e-a7a0-ad7d57bad7df">
+      <profileInstance Id="2fb9f2b3-4c07-44d6-9f23-36820e2768e4" name="StandardProfileL3">
+        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+      </profileInstance>
+      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <activityRootModelHasActivity>
+      <activity Id="f9db3d47-747f-4024-a6ac-a5df0cc59583" name="1-EpiInfoSystem" isAbstract="false" isLeaf="false" isActiveClass="false" isReentrant="false" isReadOnly="false" isSingleExecution="false">
+        <elementDefinition Id="f77326b2-c8a6-4c49-aa6b-e753f691216d" />
+        <nodes>
+          <initialNode Id="200d5516-6f42-4fe7-b031-84bba71c1da7" name="Initial1" isLeaf="false">
+            <elementDefinition Id="f40b4e72-8bfd-46aa-91e1-5c3b95e2dbdc" />
+            <flowNodeTargets>
+              <controlFlow Id="dfaded89-ef54-4c15-bce9-a680ceaf3e73" isLeaf="false">
+                <opaqueActionMoniker Id="5b2a6f5e-76e6-44d7-b834-a71a503e3f47" LastKnownName="Publish survey" />
+                <elementDefinition Id="c17410f2-d6ba-4bfa-86fe-def8a97fce6e" />
+              </controlFlow>
+            </flowNodeTargets>
+          </initialNode>
+          <opaqueAction Id="5b2a6f5e-76e6-44d7-b834-a71a503e3f47" name="Publish survey" isLeaf="false">
+            <elementDefinition Id="7f0c72d2-ea20-42c4-8f38-797db0fea314" />
+            <flowNodeTargets>
+              <controlFlow Id="37e1eba9-db4b-4056-95ae-8ca7dcc6cb26" isLeaf="false">
+                <opaqueActionMoniker Id="c7b6ae86-02f9-4c1b-bd62-0e04000c185a" LastKnownName="Distribute URL" />
+                <elementDefinition Id="48aaa5e6-6f6f-4339-95c5-8385d50a4836" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction Id="c7b6ae86-02f9-4c1b-bd62-0e04000c185a" name="Distribute URL" isLeaf="false">
+            <elementDefinition Id="f650f210-1199-43b8-8d16-fa43d2a3a748" />
+            <flowNodeTargets>
+              <controlFlow Id="c037c54e-7e3b-4f6d-8e56-57d0298f3a78" isLeaf="false">
+                <opaqueActionMoniker Id="c172d4bd-8fdd-43ba-b4c8-a6931ae0e404" LastKnownName="Download  response" />
+                <elementDefinition Id="ff074dfa-176d-44dd-bf83-10032d19412b" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction Id="c172d4bd-8fdd-43ba-b4c8-a6931ae0e404" name="Download  response" isLeaf="false">
+            <elementDefinition Id="aea6f38b-25d5-4465-8e76-20c2b31ee8be" />
+            <flowNodeTargets>
+              <controlFlow Id="9b63d169-a6bb-4bf4-8553-d46eaac2c050" isLeaf="false">
+                <opaqueActionMoniker Id="21d7f135-22af-40ed-b985-5c4dd6c30bc9" LastKnownName="Analyze" />
+                <elementDefinition Id="cac618c7-be26-4149-9dde-16a94f4780ec" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction Id="21d7f135-22af-40ed-b985-5c4dd6c30bc9" name="Analyze" isLeaf="false">
+            <elementDefinition Id="cd32a167-c59a-4242-b42a-ae0d346e4e1b" />
+            <flowNodeTargets>
+              <controlFlow Id="e50eeecc-5547-4654-a6f0-ff79d6484fd5" isLeaf="false">
+                <activityFinalNodeMoniker Id="598ce9b6-c602-497d-bc9c-43ecb1e8e159" LastKnownName="ActivityFinal1" />
+                <elementDefinition Id="0d2cb571-a6c7-4fb2-8b65-44589d225b13" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <activityFinalNode Id="598ce9b6-c602-497d-bc9c-43ecb1e8e159" name="ActivityFinal1" isLeaf="false">
+            <elementDefinition Id="80962c55-6da7-42b3-aca9-7dd3136c18ab" />
+          </activityFinalNode>
+          <callBehaviorAction Id="3c92be7b-6350-49e0-a489-21f14d22771e" name="Conduct Survey" isLeaf="false">
+            <elementDefinition Id="40992706-dd03-420c-b2bc-4cc1c6c0e459" />
+          </callBehaviorAction>
+        </nodes>
+      </activity>
+    </activityRootModelHasActivity>
+  </packagedElements>
+  <package Id="9748c706-5c0a-4254-9856-9f3c5623b531" name="Epi.Web.Modeling">
+    <elementDefinition Id="daf1de51-1862-4459-9e4a-e7f71a55a436" />
+  </package>
+</activityRootModel>

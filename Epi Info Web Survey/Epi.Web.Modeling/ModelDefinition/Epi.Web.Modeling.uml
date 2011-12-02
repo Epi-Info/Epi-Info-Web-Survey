@@ -1,8 +1,42 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<modelStoreModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm5="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
+<modelStoreModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm5="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/SimpleShapesModel" xmlns:dm9="http://schemas.microsoft.com/dsltools/UseCaseModel" xmlns:dm10="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ActivityDesigner"
   dslVersion="1.0.0.0"
   Id="daf1de51-1862-4459-9e4a-e7f71a55a436"
   name="Epi.Web.Modeling" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
+  <ownedCommentsInternal>
+    <comment
+      Id="d375b6e9-98e1-4530-9f2a-7a56a6d8fe3b">
+      <body>This is a high level use case diagram of Epi Info Web Survery System that encapsulates application and services. The use cases depicted here inside teh system are only high level use cases.</body>
+    </comment>
+    <comment
+      Id="309a6bdd-4c3b-4463-8ad5-bee725f084e7">
+      <body>The use cases depicted here represent only the use cases that Form designer will be making use of. These use cases are realized using Epi Info Survey Manager Service</body>
+    </comment>
+    <comment
+      Id="ed6bd47b-d65f-4d4e-8a94-b15ac77ae494">
+      <body>The use cases depicted here represent the use cases that survery participant participates in. The realization of these use cases is accomplished by Epi Info Web Survey Application.</body>
+    </comment>
+    <comment
+      Id="60f0aab2-8b4c-4d18-8e23-4a6af7c3eddb">
+      <body>If Singler response and already submitted</body>
+      <annotatedElements>
+        <opaqueActionMoniker
+          Id="4c31695a-f45c-440e-9d2a-706b9370bbc4"
+          LastKnownName="Prohibit Entry"
+          LastKnownLocation="Epi.Web.Modeling.uml" />
+      </annotatedElements>
+    </comment>
+    <comment
+      Id="6e564e1f-9cf8-4ac0-9640-bda2d262b031">
+      <body>If single response but not submitted or multiple response and not submitted or new</body>
+      <annotatedElements>
+        <opaqueActionMoniker
+          Id="baf97350-1878-4ec5-8b0f-3b8e45adadb1"
+          LastKnownName="Begin Survey"
+          LastKnownLocation="Epi.Web.Modeling.uml" />
+      </annotatedElements>
+    </comment>
+  </ownedCommentsInternal>
   <profileInstances>
     <packageHasProfileInstances
       Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b">
@@ -17,28 +51,1792 @@
         name="StandardProfileL3" />
     </packageHasProfileInstances>
   </profileInstances>
+  <packagedElements>
+    <packageHasNamedElement>
+      <actor
+        Id="a16f58b7-42de-4553-9320-b36d1b467990"
+        name="From Designer"
+        isAbstract="false"
+        isLeaf="false">
+        <targetEnds>
+          <association
+            Id="b918f420-8a16-4f3d-b805-8c77ca21fbce"
+            isDerived="false"
+            sourceEndRoleName="From Designer"
+            targetEndRoleName="Post Survey"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="04df77ff-47f9-45e8-9354-44c211b86050"
+              LastKnownName="Post Survey"
+              LastKnownLocation="Epi.Web.Modeling.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="d6d9526f-31dc-41d7-a11f-75a4de162ec9"
+                  name="From Designer"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="4d546ad7-cb78-42a2-8b99-b6eab342d169"
+                  name="Post Survey"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="1b1192d2-f0a2-48e1-af52-071699cd94cc"
+            isDerived="false"
+            sourceEndRoleName="From Designer"
+            targetEndRoleName="Create Survey"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="b2d440b4-53a9-4bdc-beb9-1776ff3ff346"
+              LastKnownName="Create Survey"
+              LastKnownLocation="Epi.Web.Modeling.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="bca4e6c0-55bd-4334-b53a-0f5cec450b91"
+                  name="From Designer"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="212f64e8-5b5f-42ea-9656-03b54f58f7d2"
+                  name="Create Survey"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="515e5e06-aa2e-4873-a155-14e14532177f"
+            isDerived="false"
+            sourceEndRoleName="From Designer"
+            targetEndRoleName="From Designer"
+            isLeaf="false"
+            isAbstract="false">
+            <actorMoniker
+              Id="a16f58b7-42de-4553-9320-b36d1b467990"
+              LastKnownName="From Designer"
+              LastKnownLocation="Epi.Web.Modeling.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="c13ee55b-7c79-4884-8f04-f5f647481643"
+                  name="From Designer"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="c1843f82-2f1e-49a9-aea5-ac3dd6b022f7"
+                  name="From Designer"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="101fba9b-ae7c-4761-9a62-29c6f5871c85"
+            isDerived="false"
+            sourceEndRoleName="From Designer"
+            targetEndRoleName="Email Survey"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="0161eba3-381b-47f8-9201-a1ea06fa7ff9"
+              LastKnownName="Email Survey"
+              LastKnownLocation="Epi.Web.Modeling.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="57174bbc-baa8-4421-9932-d996068ce524"
+                  name="From Designer"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="1c8bcecf-4f37-4f2b-9e5c-afc0ce10f8db"
+                  name="Email Survey"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+      </actor>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <actor
+        Id="c09097a0-1156-4c1d-8dca-2ecdc85b4795"
+        name="Survey Participant"
+        isAbstract="false"
+        isLeaf="false">
+        <targetEnds>
+          <association
+            Id="4b418994-b406-4ffd-8d12-67516e32deb1"
+            isDerived="false"
+            sourceEndRoleName="Survey Participant"
+            targetEndRoleName="Take Survey"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="8e28974d-0769-4b3b-871d-917ea6ec1532"
+              LastKnownName="Take Survey"
+              LastKnownLocation="Epi.Web.Modeling.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="87847d0e-dcca-4ee2-9661-906bcd5da0e5"
+                  name="Survey Participant"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="9874cd0c-e855-47e4-ba82-41d8118a9e6e"
+                  name="Take Survey"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+      </actor>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <actor
+        Id="0e4cd495-c1eb-4d2d-8bad-6f9e5037521e"
+        name="Epidemiologist"
+        isAbstract="false"
+        isLeaf="false">
+        <targetEnds>
+          <association
+            Id="b9999c03-9efb-449a-9ac1-f34f01e36370"
+            isDerived="false"
+            sourceEndRoleName="Epidemiologist"
+            targetEndRoleName="Download Survey"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="a782525a-d8c5-407f-9c26-7a373ed56dad"
+              LastKnownName="Download Survey"
+              LastKnownLocation="Epi.Web.Modeling.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="ca81c326-b4e8-4c87-b72c-707eba765bfc"
+                  name="Epidemiologist"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="5bceb60d-2433-49df-99fc-f62d26f65f43"
+                  name="Download Survey"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="dfdeea3c-c35e-419c-b891-2402f6febf35"
+            isDerived="false"
+            sourceEndRoleName="Epidemiologist"
+            targetEndRoleName="Analyze Survey"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="d07acab5-9c4c-4bef-8047-632ed6dedec4"
+              LastKnownName="Analyze Survey"
+              LastKnownLocation="Epi.Web.Modeling.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="b8f40bfb-2eeb-491d-b896-3e054fc7e5c3"
+                  name="Epidemiologist"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="b3fb3086-1a55-4f73-85da-d28953ccdac3"
+                  name="Analyze Survey"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="c70d4dda-93ed-48ce-83bd-67fb2942cee3"
+            isDerived="false"
+            sourceEndRoleName="Epidemiologist"
+            targetEndRoleName="Email Survey"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="f5152bae-b85e-4ac5-b185-5d382284a917"
+              LastKnownName="Email Survey"
+              LastKnownLocation="Epi.Web.Modeling.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="d89c7299-b93c-442a-9f63-48d1a8432a95"
+                  name="Epidemiologist"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="9218fe72-1f64-416c-97a6-0c1a9e12334c"
+                  name="Email Survey"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+      </actor>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <subsystem
+        Id="ba775635-edfe-4a42-a344-013f410a6c0a"
+        name="Epi Info Web Survey System"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="04df77ff-47f9-45e8-9354-44c211b86050"
+        name="Post Survey"
+        isAbstract="false"
+        isLeaf="false">
+        <subjects>
+          <subsystemMoniker
+            Id="ba775635-edfe-4a42-a344-013f410a6c0a"
+            LastKnownName="Epi Info Web Survey System"
+            LastKnownLocation="Epi.Web.Modeling.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="8e28974d-0769-4b3b-871d-917ea6ec1532"
+        name="Take Survey"
+        isAbstract="false"
+        isLeaf="false">
+        <subjects>
+          <subsystemMoniker
+            Id="ba775635-edfe-4a42-a344-013f410a6c0a"
+            LastKnownName="Epi Info Web Survey System"
+            LastKnownLocation="Epi.Web.Modeling.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="a782525a-d8c5-407f-9c26-7a373ed56dad"
+        name="Download Survey"
+        isAbstract="false"
+        isLeaf="false">
+        <subjects>
+          <subsystemMoniker
+            Id="ba775635-edfe-4a42-a344-013f410a6c0a"
+            LastKnownName="Epi Info Web Survey System"
+            LastKnownLocation="Epi.Web.Modeling.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="56523c18-b091-4b91-aa14-726c861a5659"
+        name="UseCase1"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="b2d440b4-53a9-4bdc-beb9-1776ff3ff346"
+        name="Create Survey"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="d07acab5-9c4c-4bef-8047-632ed6dedec4"
+        name="Analyze Survey"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <actor
+        Id="eb742021-1060-4717-a3ba-57665aaa9112"
+        name="Form Designer"
+        isAbstract="false"
+        isLeaf="false">
+        <targetEnds>
+          <association
+            Id="c428cc31-c8dd-4f5f-8890-12a694be4e9e"
+            isDerived="false"
+            sourceEndRoleName="Form Designer"
+            targetEndRoleName="Publish Survey"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="4971b621-6199-475e-be1b-8ccd9e60c221"
+              LastKnownName="Publish Survey"
+              LastKnownLocation="Epi.Web.Modeling.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="5a71027d-8029-47bb-b83f-48e0b7c87a27"
+                  name="Form Designer"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="f33a6ffa-053f-4246-ac27-be66bdf5a405"
+                  name="Publish Survey"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="83a36b9e-65b8-4a1a-a44a-0197bc8f1366"
+            isDerived="false"
+            sourceEndRoleName="Form Designer"
+            targetEndRoleName="Create a survey"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="88d4b035-b92c-46f8-b1d0-950f497f7713"
+              LastKnownName="Create a survey"
+              LastKnownLocation="Epi.Web.Modeling.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="cdca1e1d-b153-48ac-ae1c-1a791dbd2e5c"
+                  name="Form Designer"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="ae8e00cf-5f10-40aa-9dd8-6d0d23159e27"
+                  name="Create a survey"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="aecb38e4-cd57-4b60-b21d-331aeef19ee7"
+            isDerived="false"
+            sourceEndRoleName="Form Designer"
+            targetEndRoleName="Email the survey"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="5ba56bf4-08a5-42cd-8cfb-3a8da489f771"
+              LastKnownName="Email the survey"
+              LastKnownLocation="Epi.Web.Modeling.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="34bd85a6-1e91-4a56-a04b-2e165a8108d1"
+                  name="Form Designer"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="76f5081d-1d5a-4b9c-9a96-9bcf3ad702a5"
+                  name="Email the survey"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+      </actor>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <subsystem
+        Id="080cbbe1-b3ae-4238-bdac-b65ec2381226"
+        name="Epi Info Survey Publish Service"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="264cf555-4fd6-47af-ad9c-2a3295a5e597"
+        name="Publish labels"
+        isAbstract="false"
+        isLeaf="false">
+        <subjects>
+          <subsystemMoniker
+            Id="080cbbe1-b3ae-4238-bdac-b65ec2381226"
+            LastKnownName="Epi Info Survey Publish Service"
+            LastKnownLocation="Epi.Web.Modeling.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="df3eeb95-b148-4ca6-9f6d-e75ad5da26f5"
+        name="Publish text boxes"
+        isAbstract="false"
+        isLeaf="false">
+        <additions>
+          <include
+            Id="2042babd-ec39-4be1-8d19-89003d3636d9">
+            <useCaseMoniker
+              Id="4729e658-efa3-4c09-be7c-f71abe9aff4c"
+              LastKnownName="Publish required questions"
+              LastKnownLocation="Epi.Web.Modeling.uml" />
+          </include>
+        </additions>
+        <subjects>
+          <subsystemMoniker
+            Id="080cbbe1-b3ae-4238-bdac-b65ec2381226"
+            LastKnownName="Epi Info Survey Publish Service"
+            LastKnownLocation="Epi.Web.Modeling.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="fe1cf997-9087-42d8-b3ff-cd23bc31bfe7"
+        name="UseCase2"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="a19c47bd-2b50-46b1-b7e9-003341b20ade"
+        name="Publish check boxes"
+        isAbstract="false"
+        isLeaf="false">
+        <additions>
+          <include
+            Id="72799976-426a-41c5-a7e2-fafee8b0bcb2">
+            <useCaseMoniker
+              Id="4729e658-efa3-4c09-be7c-f71abe9aff4c"
+              LastKnownName="Publish required questions"
+              LastKnownLocation="Epi.Web.Modeling.uml" />
+          </include>
+        </additions>
+        <subjects>
+          <subsystemMoniker
+            Id="080cbbe1-b3ae-4238-bdac-b65ec2381226"
+            LastKnownName="Epi Info Survey Publish Service"
+            LastKnownLocation="Epi.Web.Modeling.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="9217bb21-d3f9-4221-a496-4d9826e3c8fb"
+        name="Publish group boxes"
+        isAbstract="false"
+        isLeaf="false">
+        <subjects>
+          <subsystemMoniker
+            Id="080cbbe1-b3ae-4238-bdac-b65ec2381226"
+            LastKnownName="Epi Info Survey Publish Service"
+            LastKnownLocation="Epi.Web.Modeling.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="4729e658-efa3-4c09-be7c-f71abe9aff4c"
+        name="Publish required questions"
+        isAbstract="false"
+        isLeaf="false">
+        <subjects>
+          <subsystemMoniker
+            Id="080cbbe1-b3ae-4238-bdac-b65ec2381226"
+            LastKnownName="Epi Info Survey Publish Service"
+            LastKnownLocation="Epi.Web.Modeling.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="73f09a3b-dead-42ca-bb30-a7297f822af9"
+        name="Publish skip pattern"
+        isAbstract="false"
+        isLeaf="false">
+        <subjects>
+          <subsystemMoniker
+            Id="080cbbe1-b3ae-4238-bdac-b65ec2381226"
+            LastKnownName="Epi Info Survey Publish Service"
+            LastKnownLocation="Epi.Web.Modeling.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="24fadb1a-a44a-4d2e-81f5-decbafde6621"
+        name="Publish navigation logic"
+        isAbstract="false"
+        isLeaf="false">
+        <subjects>
+          <subsystemMoniker
+            Id="080cbbe1-b3ae-4238-bdac-b65ec2381226"
+            LastKnownName="Epi Info Survey Publish Service"
+            LastKnownLocation="Epi.Web.Modeling.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="c39e7f15-9344-465d-bc88-1b93a8d69cb6"
+        name="Publish single line text boxes"
+        isAbstract="false"
+        isLeaf="false">
+        <generalsInternal>
+          <generalization
+            Id="e50057f8-9346-479e-af00-6e00fe8425e0"
+            isSubstitutable="false">
+            <useCaseMoniker
+              Id="df3eeb95-b148-4ca6-9f6d-e75ad5da26f5"
+              LastKnownName="Publish text boxes"
+              LastKnownLocation="Epi.Web.Modeling.uml" />
+          </generalization>
+        </generalsInternal>
+        <subjects>
+          <subsystemMoniker
+            Id="080cbbe1-b3ae-4238-bdac-b65ec2381226"
+            LastKnownName="Epi Info Survey Publish Service"
+            LastKnownLocation="Epi.Web.Modeling.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="78825f3e-6400-49f4-8134-1637ee631dfc"
+        name="Publish multi line text boxes"
+        isAbstract="false"
+        isLeaf="false">
+        <generalsInternal>
+          <generalization
+            Id="0952ed08-3270-4aab-a9ba-fcd5331d9e65"
+            isSubstitutable="false">
+            <useCaseMoniker
+              Id="df3eeb95-b148-4ca6-9f6d-e75ad5da26f5"
+              LastKnownName="Publish text boxes"
+              LastKnownLocation="Epi.Web.Modeling.uml" />
+          </generalization>
+        </generalsInternal>
+        <subjects>
+          <subsystemMoniker
+            Id="080cbbe1-b3ae-4238-bdac-b65ec2381226"
+            LastKnownName="Epi Info Survey Publish Service"
+            LastKnownLocation="Epi.Web.Modeling.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="240801af-8fb8-4032-961f-db4751f7c4fa"
+        name="Publish numeric text boxes"
+        isAbstract="false"
+        isLeaf="false">
+        <generalsInternal>
+          <generalization
+            Id="3e9012d4-49ff-4e3c-b9dc-01c7234f4b62"
+            isSubstitutable="false">
+            <useCaseMoniker
+              Id="df3eeb95-b148-4ca6-9f6d-e75ad5da26f5"
+              LastKnownName="Publish text boxes"
+              LastKnownLocation="Epi.Web.Modeling.uml" />
+          </generalization>
+        </generalsInternal>
+        <subjects>
+          <subsystemMoniker
+            Id="080cbbe1-b3ae-4238-bdac-b65ec2381226"
+            LastKnownName="Epi Info Survey Publish Service"
+            LastKnownLocation="Epi.Web.Modeling.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="c187fe99-5130-40cd-bb42-33fb00efc181"
+        name="Publish date picker"
+        isAbstract="false"
+        isLeaf="false">
+        <additions>
+          <include
+            Id="e0b12749-c8f7-45ed-96d9-2b9105702ccb">
+            <useCaseMoniker
+              Id="4729e658-efa3-4c09-be7c-f71abe9aff4c"
+              LastKnownName="Publish required questions"
+              LastKnownLocation="Epi.Web.Modeling.uml" />
+          </include>
+        </additions>
+        <subjects>
+          <subsystemMoniker
+            Id="080cbbe1-b3ae-4238-bdac-b65ec2381226"
+            LastKnownName="Epi Info Survey Publish Service"
+            LastKnownLocation="Epi.Web.Modeling.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <actor
+        Id="bd93dd00-339e-4d35-b12e-59219412cfdb"
+        name="Survery Participant"
+        isAbstract="false"
+        isLeaf="false">
+        <targetEnds>
+          <association
+            Id="a565891b-6892-42ae-b0d8-96b03f52cb06"
+            isDerived="false"
+            sourceEndRoleName="Survery Participant"
+            targetEndRoleName="Access survey"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="d33aa5e2-ed9d-4c03-a31a-11f3367006a0"
+              LastKnownName="Access survey"
+              LastKnownLocation="Epi.Web.Modeling.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="bba4ba2d-48aa-4afe-8df5-cf0c453bb9ae"
+                  name="Survery Participant"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="4645a6dc-3cdd-4c08-a8ba-01d63fa57a87"
+                  name="Access survey"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="323d651a-8cda-4831-a048-c16bef86e527"
+            isDerived="false"
+            sourceEndRoleName="Survery Participant"
+            targetEndRoleName="Distribute the survey"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="d66273dc-c27d-4b7e-a689-5f059a2dceb3"
+              LastKnownName="Distribute the survey"
+              LastKnownLocation="Epi.Web.Modeling.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="6efc461f-8e4b-482e-8042-cfa330d47573"
+                  name="Survery Participant"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="4d3f12ee-c657-4541-81de-e26f139913a2"
+                  name="Distribute the survey"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="96fb0a1e-ccc2-4e75-b3e9-bc017e48b1f3"
+            isDerived="false"
+            sourceEndRoleName="Survery Participant"
+            targetEndRoleName="Save the survey"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="8b5d4f47-27eb-43d9-b2dd-99072a019b6e"
+              LastKnownName="Save the survey"
+              LastKnownLocation="Epi.Web.Modeling.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="7c509eb3-3a65-4422-a617-f867b0a9c2e3"
+                  name="Survery Participant"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="8e8d8cd6-31e1-4410-8d2b-2a6fff173a05"
+                  name="Save the survey"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="11e6e009-3b44-44fb-b607-01faa90a5fda"
+            isDerived="false"
+            sourceEndRoleName="Survery Participant"
+            targetEndRoleName="Submit the survey"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="763a00fc-0f70-4165-bf71-29368bb7d676"
+              LastKnownName="Submit the survey"
+              LastKnownLocation="Epi.Web.Modeling.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="508b34c8-a1a9-49a7-bb08-070b9c06f476"
+                  name="Survery Participant"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="f43ec86e-cde2-4e38-9768-f77d1413dd9d"
+                  name="Submit the survey"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="231b012e-0747-4e71-bd6c-1dea8b310b35"
+            isDerived="false"
+            sourceEndRoleName="Survery Participant"
+            targetEndRoleName="Navigate the survey"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="793e3cb6-c8ac-46b3-8696-e3bff8189a2c"
+              LastKnownName="Navigate the survey"
+              LastKnownLocation="Epi.Web.Modeling.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="317f1283-1dc8-46d9-9e45-c55422d41069"
+                  name="Survery Participant"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="7dcee496-0d0a-4443-a289-9d62b25a5f38"
+                  name="Navigate the survey"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+      </actor>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <subsystem
+        Id="8a4c4825-7a13-43fc-a890-322df3929546"
+        name="Epi Info Web Survey Application"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="4971b621-6199-475e-be1b-8ccd9e60c221"
+        name="Publish Survey"
+        isAbstract="false"
+        isLeaf="false">
+        <additions>
+          <include
+            Id="46ac32bb-5001-448a-ae71-e84e8211dd72">
+            <useCaseMoniker
+              Id="264cf555-4fd6-47af-ad9c-2a3295a5e597"
+              LastKnownName="Publish labels"
+              LastKnownLocation="Epi.Web.Modeling.uml" />
+          </include>
+          <include
+            Id="11506ab7-8546-4fe6-a18b-25063beb7d7a">
+            <useCaseMoniker
+              Id="df3eeb95-b148-4ca6-9f6d-e75ad5da26f5"
+              LastKnownName="Publish text boxes"
+              LastKnownLocation="Epi.Web.Modeling.uml" />
+          </include>
+          <include
+            Id="ba25d354-56f2-42f4-9152-984fdbcb5f4c">
+            <useCaseMoniker
+              Id="c187fe99-5130-40cd-bb42-33fb00efc181"
+              LastKnownName="Publish date picker"
+              LastKnownLocation="Epi.Web.Modeling.uml" />
+          </include>
+          <include
+            Id="9a3a7ef7-f52f-41d8-aa6c-1c48d3c53d9c">
+            <useCaseMoniker
+              Id="a19c47bd-2b50-46b1-b7e9-003341b20ade"
+              LastKnownName="Publish check boxes"
+              LastKnownLocation="Epi.Web.Modeling.uml" />
+          </include>
+          <include
+            Id="67bcc314-5829-4aec-8d2a-624c3b13fa8a">
+            <useCaseMoniker
+              Id="9217bb21-d3f9-4221-a496-4d9826e3c8fb"
+              LastKnownName="Publish group boxes"
+              LastKnownLocation="Epi.Web.Modeling.uml" />
+          </include>
+          <include
+            Id="2cdd55e4-28e5-44f3-b9c1-58dc40c3da62">
+            <useCaseMoniker
+              Id="73f09a3b-dead-42ca-bb30-a7297f822af9"
+              LastKnownName="Publish skip pattern"
+              LastKnownLocation="Epi.Web.Modeling.uml" />
+          </include>
+          <include
+            Id="ac54b183-a794-44ff-afee-b276ebb92922">
+            <useCaseMoniker
+              Id="24fadb1a-a44a-4d2e-81f5-decbafde6621"
+              LastKnownName="Publish navigation logic"
+              LastKnownLocation="Epi.Web.Modeling.uml" />
+          </include>
+        </additions>
+        <subjects>
+          <subsystemMoniker
+            Id="080cbbe1-b3ae-4238-bdac-b65ec2381226"
+            LastKnownName="Epi Info Survey Publish Service"
+            LastKnownLocation="Epi.Web.Modeling.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="5ba56bf4-08a5-42cd-8cfb-3a8da489f771"
+        name="Email the survey"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="424608f2-1635-4afb-a6da-06ab56e92ca7"
+        name="UseCase3"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="88d4b035-b92c-46f8-b1d0-950f497f7713"
+        name="Create a survey"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="d33aa5e2-ed9d-4c03-a31a-11f3367006a0"
+        name="Access survey"
+        isAbstract="false"
+        isLeaf="false">
+        <subjects>
+          <subsystemMoniker
+            Id="8a4c4825-7a13-43fc-a890-322df3929546"
+            LastKnownName="Epi Info Web Survey Application"
+            LastKnownLocation="Epi.Web.Modeling.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="d66273dc-c27d-4b7e-a689-5f059a2dceb3"
+        name="Distribute the survey"
+        isAbstract="false"
+        isLeaf="false">
+        <subjects>
+          <subsystemMoniker
+            Id="8a4c4825-7a13-43fc-a890-322df3929546"
+            LastKnownName="Epi Info Web Survey Application"
+            LastKnownLocation="Epi.Web.Modeling.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="8b5d4f47-27eb-43d9-b2dd-99072a019b6e"
+        name="Save the survey"
+        isAbstract="false"
+        isLeaf="false">
+        <subjects>
+          <subsystemMoniker
+            Id="8a4c4825-7a13-43fc-a890-322df3929546"
+            LastKnownName="Epi Info Web Survey Application"
+            LastKnownLocation="Epi.Web.Modeling.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="763a00fc-0f70-4165-bf71-29368bb7d676"
+        name="Submit the survey"
+        isAbstract="false"
+        isLeaf="false">
+        <subjects>
+          <subsystemMoniker
+            Id="8a4c4825-7a13-43fc-a890-322df3929546"
+            LastKnownName="Epi Info Web Survey Application"
+            LastKnownLocation="Epi.Web.Modeling.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="793e3cb6-c8ac-46b3-8696-e3bff8189a2c"
+        name="Navigate the survey"
+        isAbstract="false"
+        isLeaf="false">
+        <subjects>
+          <subsystemMoniker
+            Id="8a4c4825-7a13-43fc-a890-322df3929546"
+            LastKnownName="Epi Info Web Survey Application"
+            LastKnownLocation="Epi.Web.Modeling.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="6949e3c6-d096-48c5-bf1f-4a675365c184"
+        name="Reload saved survey"
+        isAbstract="false"
+        isLeaf="false">
+        <extendedCases>
+          <extend
+            Id="7513a5c5-f1ec-4556-9ca7-d5e1709f8bba">
+            <useCaseMoniker
+              Id="d33aa5e2-ed9d-4c03-a31a-11f3367006a0"
+              LastKnownName="Access survey"
+              LastKnownLocation="Epi.Web.Modeling.uml" />
+          </extend>
+        </extendedCases>
+        <subjects>
+          <subsystemMoniker
+            Id="8a4c4825-7a13-43fc-a890-322df3929546"
+            LastKnownName="Epi Info Web Survey Application"
+            LastKnownLocation="Epi.Web.Modeling.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="14d814d3-b78f-4841-85b3-f08f25a7711c"
+        name="Download Survey"
+        isAbstract="false"
+        isLeaf="false">
+        <subjects>
+          <subsystemMoniker
+            Id="080cbbe1-b3ae-4238-bdac-b65ec2381226"
+            LastKnownName="Epi Info Survey Publish Service"
+            LastKnownLocation="Epi.Web.Modeling.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <actor
+        Id="8f5a48c8-fdd1-4667-b80f-a94980697e81"
+        name="Epidemiologist"
+        isAbstract="false"
+        isLeaf="false">
+        <targetEnds>
+          <association
+            Id="c701ed08-e15e-4a63-89c4-703f1bba2245"
+            isDerived="false"
+            sourceEndRoleName="Epidemiologist"
+            targetEndRoleName="Download Survey"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="14d814d3-b78f-4841-85b3-f08f25a7711c"
+              LastKnownName="Download Survey"
+              LastKnownLocation="Epi.Web.Modeling.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="3b72a211-a17c-4327-a1db-298124022ee1"
+                  name="Epidemiologist"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="dc8be131-0713-4fe1-836e-23c7ce6c544a"
+                  name="Download Survey"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+      </actor>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="f2181f2b-9e09-40a6-a6f8-68e7f2867769"
+        name="Analyze"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="d6c4d2f2-79ad-4749-8552-685eaba4af94"
+        name="E"
+        isAbstract="false"
+        isLeaf="false">
+        <targetEnds>
+          <association
+            Id="601ba498-0810-41b1-9c2b-5d9ca83df5fb"
+            isDerived="false"
+            sourceEndRoleName="Email Survey"
+            targetEndRoleName="Email Survey"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="d6c4d2f2-79ad-4749-8552-685eaba4af94"
+              LastKnownName="E"
+              LastKnownLocation="Epi.Web.Modeling.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="b1a5abd2-b92e-47e1-90ef-169fcf71236f"
+                  name="Email Survey"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="049b8284-1e3c-42ee-94ef-1b3ae8f378f8"
+                  name="Email Survey"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="f5152bae-b85e-4ac5-b185-5d382284a917"
+        name="Email Survey"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="0161eba3-381b-47f8-9201-a1ea06fa7ff9"
+        name="Email Survey"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <activity
+        Id="f77326b2-c8a6-4c49-aa6b-e753f691216d"
+        name="1-EpiInfoSystem"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false"
+        isReentrant="false"
+        isReadOnly="false"
+        isSingleExecution="false">
+        <nodes>
+          <initialNode
+            Id="f40b4e72-8bfd-46aa-91e1-5c3b95e2dbdc"
+            name="Initial1"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="c17410f2-d6ba-4bfa-86fe-def8a97fce6e"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="7f0c72d2-ea20-42c4-8f38-797db0fea314"
+                  LastKnownName="Publish survey"
+                  LastKnownLocation="Epi.Web.Modeling.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </initialNode>
+          <opaqueAction
+            Id="7f0c72d2-ea20-42c4-8f38-797db0fea314"
+            name="Publish survey"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="48aaa5e6-6f6f-4339-95c5-8385d50a4836"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="f650f210-1199-43b8-8d16-fa43d2a3a748"
+                  LastKnownName="Distribute URL"
+                  LastKnownLocation="Epi.Web.Modeling.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction
+            Id="f650f210-1199-43b8-8d16-fa43d2a3a748"
+            name="Distribute URL"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="ff074dfa-176d-44dd-bf83-10032d19412b"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="aea6f38b-25d5-4465-8e76-20c2b31ee8be"
+                  LastKnownName="Download  response"
+                  LastKnownLocation="Epi.Web.Modeling.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction
+            Id="aea6f38b-25d5-4465-8e76-20c2b31ee8be"
+            name="Download  response"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="cac618c7-be26-4149-9dde-16a94f4780ec"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="cd32a167-c59a-4242-b42a-ae0d346e4e1b"
+                  LastKnownName="Analyze"
+                  LastKnownLocation="Epi.Web.Modeling.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction
+            Id="cd32a167-c59a-4242-b42a-ae0d346e4e1b"
+            name="Analyze"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="0d2cb571-a6c7-4fb2-8b65-44589d225b13"
+                isLeaf="false">
+                <activityFinalNodeMoniker
+                  Id="80962c55-6da7-42b3-aca9-7dd3136c18ab"
+                  LastKnownName="ActivityFinal1"
+                  LastKnownLocation="Epi.Web.Modeling.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <activityFinalNode
+            Id="80962c55-6da7-42b3-aca9-7dd3136c18ab"
+            name="ActivityFinal1"
+            isLeaf="false" />
+          <callBehaviorAction
+            Id="40992706-dd03-420c-b2bc-4cc1c6c0e459"
+            name="Conduct Survey"
+            isLeaf="false" />
+        </nodes>
+      </activity>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <activity
+        Id="33b16cf9-6ff6-4fad-aebe-1bb90f90d3ad"
+        name="2-EpiInfoWebSurveyDataCollection"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false"
+        isReentrant="false"
+        isReadOnly="false"
+        isSingleExecution="false">
+        <nodes>
+          <initialNode
+            Id="cf8fe0ec-f964-49a7-beeb-8ca02b130c99"
+            name="Initial1"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="17868afe-a2f6-4345-83a6-4af600f68f75"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="62e0ae6b-4b14-4a56-9542-f453a174e25e"
+                  LastKnownName="Launch Survey"
+                  LastKnownLocation="Epi.Web.Modeling.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </initialNode>
+          <opaqueAction
+            Id="62e0ae6b-4b14-4a56-9542-f453a174e25e"
+            name="Launch Survey"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="568da3b0-ab08-4e4f-9f0f-7f2a37bd32b1"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="74a18c33-487f-43b0-b37d-0665942cf57f"
+                  LastKnownName="Preliminary validations"
+                  LastKnownLocation="Epi.Web.Modeling.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction
+            Id="baf97350-1878-4ec5-8b0f-3b8e45adadb1"
+            name="Begin Survey"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="bf9da943-540e-45c6-89c5-f944c57e02de"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="3dcfb35b-a714-428b-9737-ca0d0f845e34"
+                  LastKnownName="Provide Response"
+                  LastKnownLocation="Epi.Web.Modeling.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction
+            Id="3dcfb35b-a714-428b-9737-ca0d0f845e34"
+            name="Provide Response"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="f90d0602-63fe-443d-82a8-d1478b76e1a0"
+                isLeaf="false">
+                <forkNodeMoniker
+                  Id="f2f6c47f-0efe-40e0-8f03-984259c84166"
+                  LastKnownName="Fork1"
+                  LastKnownLocation="Epi.Web.Modeling.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction
+            Id="8b5740cc-2e54-4d4b-a53e-021f56930d2d"
+            name="Navigate"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="56315946-ac62-447a-a3e0-1e27e91cb7db"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="3dcfb35b-a714-428b-9737-ca0d0f845e34"
+                  LastKnownName="Provide Response"
+                  LastKnownLocation="Epi.Web.Modeling.uml" />
+              </controlFlow>
+              <controlFlow
+                Id="4b9549e9-d8a1-43b3-b7f8-0507e5fd2b32"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="64277a6c-10f1-4fee-bca0-41bb5023a47c"
+                  LastKnownName="Validate navigation"
+                  LastKnownLocation="Epi.Web.Modeling.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction
+            Id="dd007237-588b-42b4-8f6b-d747e13a9cac"
+            name="Save survey"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="a1c7e732-1d5a-4ae3-8a52-dd91336bab4f"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="3dcfb35b-a714-428b-9737-ca0d0f845e34"
+                  LastKnownName="Provide Response"
+                  LastKnownLocation="Epi.Web.Modeling.uml" />
+              </controlFlow>
+              <controlFlow
+                Id="29e7ad36-2b1d-439e-9126-b39afb6cfacf"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="fb884d7e-4240-4211-bfe4-ad054f54f2fc"
+                  LastKnownName="Validate data"
+                  LastKnownLocation="Epi.Web.Modeling.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <forkNode
+            Id="f2f6c47f-0efe-40e0-8f03-984259c84166"
+            name="Fork1"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="9730c811-836a-4a5c-bf0f-0d7ff1eec676"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="dd007237-588b-42b4-8f6b-d747e13a9cac"
+                  LastKnownName="Save survey"
+                  LastKnownLocation="Epi.Web.Modeling.uml" />
+              </controlFlow>
+              <controlFlow
+                Id="39375a14-671c-41b2-b766-fc40aa0aa8d7"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="8b5740cc-2e54-4d4b-a53e-021f56930d2d"
+                  LastKnownName="Navigate"
+                  LastKnownLocation="Epi.Web.Modeling.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </forkNode>
+          <opaqueAction
+            Id="3042f95c-fa9d-47af-a242-adc6be5b93f7"
+            name="Submit survey"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="83bfdcaf-f647-4b1f-aa40-d2f8fc22debe"
+                isLeaf="false">
+                <activityFinalNodeMoniker
+                  Id="8f26e2fa-fdc5-4c75-b331-4d6bf963fac3"
+                  LastKnownName="ActivityFinal1"
+                  LastKnownLocation="Epi.Web.Modeling.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <activityFinalNode
+            Id="8f26e2fa-fdc5-4c75-b331-4d6bf963fac3"
+            name="ActivityFinal1"
+            isLeaf="false" />
+          <opaqueAction
+            Id="fb884d7e-4240-4211-bfe4-ad054f54f2fc"
+            name="Validate data"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="9b1f81b2-b4a2-486e-8f56-f8725abf7b8e"
+                isLeaf="false">
+                <decisionNodeMoniker
+                  Id="dfc76437-887f-4c57-b476-f624d2889a25"
+                  LastKnownName="Decision2"
+                  LastKnownLocation="Epi.Web.Modeling.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction
+            Id="64277a6c-10f1-4fee-bca0-41bb5023a47c"
+            name="Validate navigation"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="b38ae7b3-7db7-4db4-b7b1-a1756cad3ac8"
+                isLeaf="false">
+                <decisionNodeMoniker
+                  Id="add36a46-0a93-4c0c-808a-3bd4fea00f69"
+                  LastKnownName="Decision1"
+                  LastKnownLocation="Epi.Web.Modeling.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction
+            Id="b9b06920-df5c-455d-9cae-8b85cc89ceef"
+            name="Fix valiation"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="e436fd2b-dc05-415c-948f-cb7d90bf7ea2"
+                isLeaf="false">
+                <joinNodeMoniker
+                  Id="97dc6e5c-f9a4-48f5-9947-ea9aecb194ae"
+                  LastKnownName="Join2"
+                  LastKnownLocation="Epi.Web.Modeling.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction
+            Id="67b7799f-6385-4323-9638-11c1652d710d"
+            name="Save response"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="e5061f1f-a969-4c6a-8c17-1e9bbe8362a2"
+                isLeaf="false">
+                <joinNodeMoniker
+                  Id="97dc6e5c-f9a4-48f5-9947-ea9aecb194ae"
+                  LastKnownName="Join2"
+                  LastKnownLocation="Epi.Web.Modeling.uml" />
+              </controlFlow>
+              <controlFlow
+                Id="2d26d602-f311-42a2-aa44-0804da569755"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="21f71fbd-4681-4ae1-bd96-b32a558f8a36"
+                  LastKnownName="Email unique URL"
+                  LastKnownLocation="Epi.Web.Modeling.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <decisionNode
+            Id="add36a46-0a93-4c0c-808a-3bd4fea00f69"
+            name="Decision1"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="513da0d7-3b44-4ee7-9ff2-1ed7b0db9a78"
+                guard="Fail"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="b9b06920-df5c-455d-9cae-8b85cc89ceef"
+                  LastKnownName="Fix valiation"
+                  LastKnownLocation="Epi.Web.Modeling.uml" />
+              </controlFlow>
+              <controlFlow
+                Id="ed0b70bd-6ad4-410f-92a8-a90d9728283c"
+                guard="Pass"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="67b7799f-6385-4323-9638-11c1652d710d"
+                  LastKnownName="Save response"
+                  LastKnownLocation="Epi.Web.Modeling.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </decisionNode>
+          <decisionNode
+            Id="dfc76437-887f-4c57-b476-f624d2889a25"
+            name="Decision2"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="ce934348-5a1b-4662-ac34-15d3d382ceb1"
+                guard="Pass"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="67b7799f-6385-4323-9638-11c1652d710d"
+                  LastKnownName="Save response"
+                  LastKnownLocation="Epi.Web.Modeling.uml" />
+              </controlFlow>
+              <controlFlow
+                Id="98d5c923-f859-46b5-8ba9-a78d77ba6785"
+                guard="Fail"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="b9b06920-df5c-455d-9cae-8b85cc89ceef"
+                  LastKnownName="Fix valiation"
+                  LastKnownLocation="Epi.Web.Modeling.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </decisionNode>
+          <joinNode
+            Id="97dc6e5c-f9a4-48f5-9947-ea9aecb194ae"
+            name="Join2"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="7e265996-abd5-4100-8636-7dfd8f454dfe"
+                isLeaf="false">
+                <decisionNodeMoniker
+                  Id="515cba6d-8f40-4d15-920b-6ceb5d0a4521"
+                  LastKnownName="Decision3"
+                  LastKnownLocation="Epi.Web.Modeling.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </joinNode>
+          <decisionNode
+            Id="515cba6d-8f40-4d15-920b-6ceb5d0a4521"
+            name="Decision3"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="9de27ac4-8a43-47c1-8205-c2d0b3a1754e"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="3dcfb35b-a714-428b-9737-ca0d0f845e34"
+                  LastKnownName="Provide Response"
+                  LastKnownLocation="Epi.Web.Modeling.uml" />
+              </controlFlow>
+              <controlFlow
+                Id="6d0b520b-fc0e-443e-9524-66083322592e"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="7a963291-71fa-460c-ae54-9090b6930b62"
+                  LastKnownName="Exit"
+                  LastKnownLocation="Epi.Web.Modeling.uml" />
+              </controlFlow>
+              <controlFlow
+                Id="ea9453c9-6c29-4a9d-bb95-e74d83a01c69"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="3042f95c-fa9d-47af-a242-adc6be5b93f7"
+                  LastKnownName="Submit survey"
+                  LastKnownLocation="Epi.Web.Modeling.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </decisionNode>
+          <opaqueAction
+            Id="7a963291-71fa-460c-ae54-9090b6930b62"
+            name="Exit"
+            isLeaf="false" />
+          <opaqueAction
+            Id="21f71fbd-4681-4ae1-bd96-b32a558f8a36"
+            name="Email unique URL"
+            isLeaf="false" />
+          <opaqueAction
+            Id="74a18c33-487f-43b0-b37d-0665942cf57f"
+            name="Preliminary validations"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="eabf4f1c-dbba-44e3-ada7-99fbd0049de6"
+                isLeaf="false">
+                <decisionNodeMoniker
+                  Id="3fe4d3b9-35ec-4899-b066-6ec611ad7b67"
+                  LastKnownName="Decision4"
+                  LastKnownLocation="Epi.Web.Modeling.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <decisionNode
+            Id="3fe4d3b9-35ec-4899-b066-6ec611ad7b67"
+            name="Decision4"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="c4c0a012-33c6-4557-afb2-5b8a2f97d292"
+                guard="Pass"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="baf97350-1878-4ec5-8b0f-3b8e45adadb1"
+                  LastKnownName="Begin Survey"
+                  LastKnownLocation="Epi.Web.Modeling.uml" />
+              </controlFlow>
+              <controlFlow
+                Id="b597864b-2cb4-49d6-9609-c34bda61dbb5"
+                guard="Fail"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="4c31695a-f45c-440e-9d2a-706b9370bbc4"
+                  LastKnownName="Prohibit Entry"
+                  LastKnownLocation="Epi.Web.Modeling.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </decisionNode>
+          <opaqueAction
+            Id="4c31695a-f45c-440e-9d2a-706b9370bbc4"
+            name="Prohibit Entry"
+            isLeaf="false" />
+        </nodes>
+      </activity>
+    </packageHasNamedElement>
+  </packagedElements>
   <primitiveType
     Id="220a3521-e091-4221-bae9-3ef9018e845c"
     name="Integer"
     isAbstract="false"
-    isTemplate="false"
     isLeaf="false" />
   <primitiveType
     Id="8943dc84-709e-4f62-b15a-a3273aa6f165"
     name="Boolean"
     isAbstract="false"
-    isTemplate="false"
     isLeaf="false" />
   <primitiveType
     Id="59259974-6d55-42c6-b7bd-763d77ac8ef9"
     name="String"
     isAbstract="false"
-    isTemplate="false"
     isLeaf="false" />
   <primitiveType
     Id="3ab42e7d-4969-445a-b209-471f5cb8209c"
     name="UnlimitedNatural"
     isAbstract="false"
-    isTemplate="false"
     isLeaf="false" />
 </modelStoreModel>

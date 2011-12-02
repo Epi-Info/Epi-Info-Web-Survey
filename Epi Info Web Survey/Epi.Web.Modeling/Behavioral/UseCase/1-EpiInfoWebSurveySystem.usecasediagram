@@ -1,0 +1,226 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<useCaseModelRoot xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm5="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" xmlns:dm9="http://schemas.microsoft.com/dsltools/SimpleShapesModel" dslVersion="1.0.0.0" Id="2cd50db4-b59d-473f-8a6c-68f123e3ae3d" name="EPIInfoWebSurveySystem" linkedPackageId="61c9238c-a1c0-4942-842c-6ad432b7d409" xmlns="http://schemas.microsoft.com/dsltools/UseCaseModel">
+  <ownedCommentsInternal>
+    <comment Id="b83fa443-5456-4866-b0cb-6727c73cb393">
+      <elementDefinition Id="d375b6e9-98e1-4530-9f2a-7a56a6d8fe3b" />
+      <body>This is a high level use case diagram of Epi Info Web Survery System that encapsulates application and services. The use cases depicted here inside teh system are only high level use cases.</body>
+    </comment>
+  </ownedCommentsInternal>
+  <profileInstances>
+    <packageHasProfileInstances Id="fb430de2-89d8-4eb4-b006-c6549a429acf">
+      <profileInstance Id="959608a9-cc75-4c4d-9cfc-f3bf79d7aa92" name="StandardProfileL2">
+        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+      </profileInstance>
+      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances Id="f93d3ee4-9359-4729-8d96-958fc0457df6">
+      <profileInstance Id="87425968-c14b-466d-b171-9cb774fae8a1" name="StandardProfileL3">
+        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+      </profileInstance>
+      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <useCaseModelRootHasTypes>
+      <actor Id="2ccf4b36-32b5-4502-8791-8d20ab2bf90c" name="From Designer" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="a16f58b7-42de-4553-9320-b36d1b467990" />
+        <targetEnds>
+          <association Id="9a6eca97-2e4e-472d-924c-3ef60b297328" isDerived="false" sourceEndRoleName="From Designer" targetEndRoleName="Post Survey" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="0482bf1b-b76e-45db-844f-b24ba32b2fcb" LastKnownName="Post Survey" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="569b8d95-044b-444c-890c-3be0c00daae5" name="From Designer" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="d6d9526f-31dc-41d7-a11f-75a4de162ec9" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="db6478ae-0d65-43ce-9d2a-cd4e1efcac93" name="Post Survey" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="4d546ad7-cb78-42a2-8b99-b6eab342d169" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="b918f420-8a16-4f3d-b805-8c77ca21fbce" />
+          </association>
+          <association Id="be8922bb-2833-4bd1-bb18-7606d996282f" isDerived="false" sourceEndRoleName="From Designer" targetEndRoleName="Create Survey" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="93265863-40fa-4efd-9667-06b56de08ebd" LastKnownName="Create Survey" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="b0d29f84-d893-4621-aa22-2124a9acd271" name="From Designer" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="bca4e6c0-55bd-4334-b53a-0f5cec450b91" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="52c93c3e-1281-4139-86b0-643194404086" name="Create Survey" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="212f64e8-5b5f-42ea-9656-03b54f58f7d2" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="1b1192d2-f0a2-48e1-af52-071699cd94cc" />
+          </association>
+          <association Id="c817c6da-73f7-4e3e-8d19-ebffb1b3fe18" isDerived="false" sourceEndRoleName="From Designer" targetEndRoleName="From Designer" isLeaf="false" isAbstract="false">
+            <actorMoniker Id="2ccf4b36-32b5-4502-8791-8d20ab2bf90c" LastKnownName="From Designer" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="0b7ff2b9-db5d-41a9-ba0b-89d686d120a9" name="From Designer" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="c13ee55b-7c79-4884-8f04-f5f647481643" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="5ad664ee-054b-4f91-a886-22b801c785bf" name="From Designer" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="c1843f82-2f1e-49a9-aea5-ac3dd6b022f7" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="515e5e06-aa2e-4873-a155-14e14532177f" />
+          </association>
+          <association Id="35aeb31d-285c-4617-8f1a-429e9b0a2749" isDerived="false" sourceEndRoleName="From Designer" targetEndRoleName="Email Survey" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="3aae1ff1-c38c-4d4d-9649-f8f36107bb4c" LastKnownName="Email Survey" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="b0fea499-e31e-436f-a7a8-f99b7bb19ffa" name="From Designer" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="57174bbc-baa8-4421-9932-d996068ce524" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="668cc8c9-c936-480b-959d-bf169b4ae86e" name="Email Survey" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="1c8bcecf-4f37-4f2b-9e5c-afc0ce10f8db" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="101fba9b-ae7c-4761-9a62-29c6f5871c85" />
+          </association>
+        </targetEnds>
+      </actor>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <actor Id="e27e06c2-c622-4cba-84dc-37be3bb1f903" name="Survey Participant" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="c09097a0-1156-4c1d-8dca-2ecdc85b4795" />
+        <targetEnds>
+          <association Id="775c518a-af06-4c8b-afb2-0ca2882d4dfc" isDerived="false" sourceEndRoleName="Survey Participant" targetEndRoleName="Take Survey" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="aab4b12e-f418-4b67-b8ec-5662facf6946" LastKnownName="Take Survey" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="aca7465b-beb7-4ff4-b07e-dc1b132c2f4f" name="Survey Participant" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="87847d0e-dcca-4ee2-9661-906bcd5da0e5" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="365f2b62-351d-41a9-b181-563e8efe4f39" name="Take Survey" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="9874cd0c-e855-47e4-ba82-41d8118a9e6e" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="4b418994-b406-4ffd-8d12-67516e32deb1" />
+          </association>
+        </targetEnds>
+      </actor>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <actor Id="72024c4e-1b8d-45b3-9799-7012d189fe5f" name="Epidemiologist" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="0e4cd495-c1eb-4d2d-8bad-6f9e5037521e" />
+        <targetEnds>
+          <association Id="d68c24f3-33b1-4dbe-84ef-f2708d7542d8" isDerived="false" sourceEndRoleName="Epidemiologist" targetEndRoleName="Download Survey" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="380ad482-58ce-40e9-b4e3-42bb4895b60f" LastKnownName="Download Survey" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="d1fe79d9-d62d-404f-8ff3-0d9b636d6e14" name="Epidemiologist" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="ca81c326-b4e8-4c87-b72c-707eba765bfc" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="911253b4-097e-416d-b226-13c8e244b44d" name="Download Survey" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="5bceb60d-2433-49df-99fc-f62d26f65f43" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="b9999c03-9efb-449a-9ac1-f34f01e36370" />
+          </association>
+          <association Id="0afbbe18-03f2-41f4-a385-61b363fa47b6" isDerived="false" sourceEndRoleName="Epidemiologist" targetEndRoleName="Analyze Survey" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="0279962f-5181-4f7b-94b3-4c4ca1b9cb8a" LastKnownName="Analyze Survey" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="d24b014c-bb0a-479e-a2b0-37fab2e4362e" name="Epidemiologist" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="b8f40bfb-2eeb-491d-b896-3e054fc7e5c3" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="373f9a10-41b4-40b6-a4e1-4ab6117c7c6e" name="Analyze Survey" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="b3fb3086-1a55-4f73-85da-d28953ccdac3" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="dfdeea3c-c35e-419c-b891-2402f6febf35" />
+          </association>
+          <association Id="c3df6242-fc2c-46c2-9db8-eae33e3b96af" isDerived="false" sourceEndRoleName="Epidemiologist" targetEndRoleName="Email Survey" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="3860ea46-0bf9-4ad8-a63a-115559b892b1" LastKnownName="Email Survey" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="d4adf953-96d8-4e9c-8e93-f9981c278152" name="Epidemiologist" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="d89c7299-b93c-442a-9f63-48d1a8432a95" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="0f3760b9-cb12-454c-b43e-03b5a35e6038" name="Email Survey" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="9218fe72-1f64-416c-97a6-0c1a9e12334c" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="c70d4dda-93ed-48ce-83bd-67fb2942cee3" />
+          </association>
+        </targetEnds>
+      </actor>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <subsystem Id="4d7c9db0-21e2-46ce-b0be-6c21088d1346" name="Epi Info Web Survey System" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="ba775635-edfe-4a42-a344-013f410a6c0a" />
+      </subsystem>
+    </useCaseModelRootHasTypes>
+    <packageHasNamedElement>
+      <useCase Id="0482bf1b-b76e-45db-844f-b24ba32b2fcb" name="Post Survey" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="04df77ff-47f9-45e8-9354-44c211b86050" />
+        <subjects>
+          <subsystemMoniker Id="4d7c9db0-21e2-46ce-b0be-6c21088d1346" LastKnownName="Epi Info Web Survey System" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="aab4b12e-f418-4b67-b8ec-5662facf6946" name="Take Survey" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="8e28974d-0769-4b3b-871d-917ea6ec1532" />
+        <subjects>
+          <subsystemMoniker Id="4d7c9db0-21e2-46ce-b0be-6c21088d1346" LastKnownName="Epi Info Web Survey System" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="380ad482-58ce-40e9-b4e3-42bb4895b60f" name="Download Survey" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="a782525a-d8c5-407f-9c26-7a373ed56dad" />
+        <subjects>
+          <subsystemMoniker Id="4d7c9db0-21e2-46ce-b0be-6c21088d1346" LastKnownName="Epi Info Web Survey System" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <useCaseModelRootHasTypes>
+      <useCase Id="93265863-40fa-4efd-9667-06b56de08ebd" name="Create Survey" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="b2d440b4-53a9-4bdc-beb9-1776ff3ff346" />
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="0279962f-5181-4f7b-94b3-4c4ca1b9cb8a" name="Analyze Survey" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="d07acab5-9c4c-4bef-8047-632ed6dedec4" />
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="3860ea46-0bf9-4ad8-a63a-115559b892b1" name="Email Survey" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="f5152bae-b85e-4ac5-b185-5d382284a917" />
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="3aae1ff1-c38c-4d4d-9649-f8f36107bb4c" name="Email Survey" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="0161eba3-381b-47f8-9201-a1ea06fa7ff9" />
+      </useCase>
+    </useCaseModelRootHasTypes>
+  </packagedElements>
+  <package Id="61c9238c-a1c0-4942-842c-6ad432b7d409" name="Epi.Web.Modeling">
+    <elementDefinition Id="daf1de51-1862-4459-9e4a-e7f71a55a436" />
+  </package>
+</useCaseModelRoot>
