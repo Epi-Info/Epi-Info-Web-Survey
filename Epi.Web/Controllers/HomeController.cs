@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Epi.Web.Models;
-using Epi.Web.SurveyManager;
+using Epi.Web.WCF.SurveyService;
 
 namespace Epi.Web.Controllers
 {

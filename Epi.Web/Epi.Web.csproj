@@ -192,9 +192,9 @@
       <Project>{6E2F059B-C1CD-401F-8A63-DC2933CFB0D8}</Project>
       <Name>Epi.Web.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SurveyManagerInterface\Epi.Web.SurveyManager.csproj">
+    <ProjectReference Include="..\SurveyManagerInterface\Epi.Web.WCF.SurveyService.csproj">
       <Project>{31F91938-2997-4650-8D36-71C845F1071D}</Project>
-      <Name>Epi.Web.SurveyManager</Name>
+      <Name>Epi.Web.WCF.SurveyService</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

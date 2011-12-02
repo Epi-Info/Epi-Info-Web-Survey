@@ -149,9 +149,9 @@
       <Project>{B8AF69BD-3CE1-4AA5-875D-3FB87C7FCE44}</Project>
       <Name>Epi.Web.Interfaces</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SurveyManagerInterface\Epi.Web.SurveyManager.csproj">
+    <ProjectReference Include="..\SurveyManagerInterface\Epi.Web.WCF.SurveyService.csproj">
       <Project>{31F91938-2997-4650-8D36-71C845F1071D}</Project>
-      <Name>Epi.Web.SurveyManager</Name>
+      <Name>Epi.Web.WCF.SurveyService</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -20,7 +20,7 @@ namespace Epi.Web
             // register all your components with the container here
             // e.g. container.RegisterType<ITestService, TestService>();            
 
-            container.RegisterType<Epi.Web.SurveyManager.ISurveyManager, Epi.Web.SurveyManager.Service>();
+            container.RegisterType<Epi.Web.WCF.SurveyService.ISurveyManager, Epi.Web.WCF.SurveyService.Service>();
             container.RegisterControllers();
 
             return container;
