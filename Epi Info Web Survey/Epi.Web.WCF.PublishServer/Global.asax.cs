@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Security;
 using System.Web.SessionState;
 
-namespace Epi.Web.WCF.PublishServer
+namespace Epi.Web.WCF.SurveyHost
 {
     public class Global : System.Web.HttpApplication
     {

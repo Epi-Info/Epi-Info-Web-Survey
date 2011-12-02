@@ -1,1 +1,1 @@
-﻿<%@ Application Codebehind="Global.asax.cs" Inherits="Epi.Web.WCF.PublishServer.Global" Language="C#" %>
+﻿<%@ Application Codebehind="Global.asax.cs" Inherits="Epi.Web.WCF.SurveyHost.Global" Language="C#" %>
