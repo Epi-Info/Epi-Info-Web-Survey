@@ -2,6 +2,8 @@ using System.Web.Mvc;
 using Microsoft.Practices.Unity;
 using Unity.Mvc3;
 using Epi.Web.Models;
+using Epi.Web.Repositories;
+
 namespace Epi.Web
 {
     public static class Bootstrapper
@@ -20,7 +22,7 @@ namespace Epi.Web
             // register all your components with the container here
             // e.g. container.RegisterType<ITestService, TestService>();            
 
-            container.RegisterType<Epi.Web.WCF.SurveyService.ISurveyManager, Epi.Web.WCF.SurveyService.Service>();
+            container.RegisterType<Epi.Web.Repositories.Core.ISurveyInfoRepository, Epi.Web.Repositories.SurveyInfoRepository>();
             container.RegisterControllers();
 
             return container;
