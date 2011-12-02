@@ -28,7 +28,10 @@ namespace Epi.Web.BLL
         {
             this.SurveyInfoDao = pSurveyInfoDao;
         }
-
+        public Publisher()
+        {
+            
+        }
         public SurveyRequestResultBO PublishSurvey(SurveyRequestBO pRequestMessage)
         {
 
