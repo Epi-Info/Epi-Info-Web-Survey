@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:22587/Epi.Web.ServiceHost/SurveyManagerService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Epi.Web.Common.Message" />
+  <xs:import schemaLocation="http://localhost:22587/Epi.Web.ServiceHost/SurveyManagerService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/Epi.Web.Common.DTO" />
+  <xs:element name="PublishSurvey">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Epi.Web.Common.Message" minOccurs="0" name="pRequestMessage" nillable="true" type="q1:SurveyRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PublishSurveyResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Epi.Web.Common.DTO" minOccurs="0" name="PublishSurveyResult" nillable="true" type="q2:SurveyRequestResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSurveyInfoById">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="pIid" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSurveyInfoByIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Epi.Web.Common.DTO" minOccurs="0" name="GetSurveyInfoByIdResult" nillable="true" type="q3:SurveyInfoDTO" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
