@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Configuration;
 using System.ServiceModel;
+using System.ServiceModel.Configuration;
 using Epi.Web.ActionServiceClient;
 namespace Epi.Web.Repositories.Core
 {
@@ -24,7 +25,7 @@ namespace Epi.Web.Repositories.Core
             {
                 // Check if not initialized yet
                 if (HttpContext.Current.Session["ActionServiceClient"] == null)
-                    HttpContext.Current.Session["ActionServiceClient"] = new SurveyManagerClient();
+                    HttpContext.Current.Session["ActionServiceClient"] = new SurveyManagerClient("WSHttpBinding_ISurveyManager");
 
                 // If current client is 'faulted' (due to some error), create a new instance.
                 var client = HttpContext.Current.Session["ActionServiceClient"] as SurveyManagerClient;
@@ -33,14 +34,14 @@ namespace Epi.Web.Repositories.Core
                     try { client.Abort(); }
                     catch { /* no action */ }
 
-                    client = new SurveyManagerClient();
+                    client = new SurveyManagerClient("WSHttpBinding_ISurveyManager");
                     HttpContext.Current.Session["ActionServiceClient"] = client;
                 }
-
                 return client;
             }
         }
 
+       
         /// <summary>
         /// Correlates requestid with returned response correlationId. 
         /// These must always match. If not, request and responses are not related.
