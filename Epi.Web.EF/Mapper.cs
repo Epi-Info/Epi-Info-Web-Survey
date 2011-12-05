@@ -26,7 +26,8 @@ namespace Epi.Web.EF
                 XML = entity.TemplateXML,
                 IntroductionText = entity.IntroductionText,
                 OrganizationName = entity.OrganizationName,
-                DepartmentName = entity.DepartmentName
+                DepartmentName = entity.DepartmentName,
+                ClosingDate = entity.ClosingDate
             };
         }
 
@@ -45,7 +46,8 @@ namespace Epi.Web.EF
                 TemplateXML = businessobject.XML,
                 IntroductionText = businessobject.IntroductionText,
                 OrganizationName = businessobject.OrganizationName,
-                DepartmentName = businessobject.DepartmentName
+                DepartmentName = businessobject.DepartmentName,
+                ClosingDate = businessobject.ClosingDate 
             };
         }
 

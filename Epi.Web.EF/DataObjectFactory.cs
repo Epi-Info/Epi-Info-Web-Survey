@@ -1,4 +1,6 @@
 ﻿using System.Configuration;
+using System;
+ 
 
 namespace Epi.Web.EF
 {
@@ -14,11 +16,18 @@ namespace Epi.Web.EF
         /// </summary>
         static DataObjectFactory()
         {
-            //  string connectionStringName = ConfigurationManager.AppSettings.Get("ConnectionStringName");
-            string connectionStringName = "EIWSEntities";
+            try
+            {
+                //  string connectionStringName = ConfigurationManager.AppSettings.Get("ConnectionStringName");
+                string connectionStringName = "EIWSEntities";
 
-            //To Do: Decrypt connection string here
-            _connectionString = ConfigurationManager.ConnectionStrings[connectionStringName].ConnectionString;
+                //To Do: Decrypt connection string here
+                _connectionString = ConfigurationManager.ConnectionStrings[connectionStringName].ConnectionString;
+            }
+            catch (Exception ex) 
+                {
+                    throw (ex);
+                }
         }
 
         /// <summary>
