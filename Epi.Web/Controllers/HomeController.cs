@@ -31,6 +31,7 @@ namespace Epi.Web.Controllers
         /// </summary>
         /// <param name="surveyid"></param>
         /// <returns></returns>
+        [HttpGet]
         public ActionResult ListSurvey(string surveyid)
         { 
             var s = _iSurveyInfoRepository.GetSurveyInfoById(surveyid).ToSurveyInfoModel();
@@ -40,16 +41,21 @@ namespace Epi.Web.Controllers
         }
 
         
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="surveyid"></param>
-        /// <returns></returns>
-        public ActionResult StartSurvey(string surveyid)
+       /// <summary>
+       /// passing the surveyModel, retrieving the SurveyId
+       /// get the surveyInfoDTO based on SurveyId
+       /// Get the form object based on SurveyInfoDTO and pass to the view
+       /// Model Binding
+       /// </summary>
+       /// <param name="surveyModel"></param>
+       /// <returns></returns>
+        [HttpPost]
+        public ActionResult ListSurvey(Epi.Web.Models.SurveyInfoModel surveyModel)
         {
-            var surveyInfoDTO = _iSurveyInfoRepository.GetSurveyInfoById(surveyid);
+            var surveyInfoDTO = _iSurveyInfoRepository.GetSurveyInfoById(surveyModel.SurveyId);
 
             var form = MvcDynamicForms.Demo.Models.FormProvider.GetForm(surveyInfoDTO, 1);// Requesting the first page of the survey.
+            
             return View("Survey", form);
 
         }
