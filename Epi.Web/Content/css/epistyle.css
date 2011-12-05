@@ -13,7 +13,6 @@ body
 #container
  {
  width: 920px;
- /*min-width: 820px;*/
  min-height: 99%;
  position:relative;
  margin: auto;
@@ -27,6 +26,7 @@ body
  -webkit-box-shadow: 10px 10px 5px #888;
  box-shadow: 10px 10px 5px #bfbfbf;
  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+ behavior: url('C:\WorkSpace\EpiInfoWebSurvey\Epi Info Web Survey\Epi.Web\PIE.htc'); 
  }
 
 #header
@@ -34,10 +34,9 @@ body
  padding: 0.5em 0.5em 1.0em .5em;
  background-color: #bfe7ea;
  border-bottom: 1px solid #4e9689;
- border-top-left-radius:10px;
- border-top-right-radius:10px;
- -moz-border-radius-topleft: 10px;
- -moz-border-radius-topright: 10px;
+ -moz-border-radius: 10px 10px 0 0;
+ border-radius: 10px 10px 0 0;
+ behavior: url('C:\WorkSpace\EpiInfoWebSurvey\Epi Info Web Survey\Epi.Web\PIE.htc');
  }
 
 #header h1
@@ -55,7 +54,7 @@ body
  margin-right: 0.5em;
  padding: 1em;
  font: 10pt;
- padding-bottom:80px; 
+/* padding-bottom:80px; */
  }
 
 #content h2
@@ -63,19 +62,21 @@ body
  font-size: 12pt;
  font-weight: bold;
  }
+ 
 .MvcDynamicForm
-{
+ {
   width:893px; 
   height:1200px;
   display:block; 
   border:1px solid white; 
   position:relative;  
-   
-    }
+ }
+ 
 #infobox
  {
  /*margin-top: -1em;*/
- padding: 0.5em 0.5em 0.5em .5em;
+ border-right: 1px solid #4e9689 inset;
+ padding: 0.5em;
  font-size: 9pt;
  margin-bottom: 1em;
  background: #87d69b;
@@ -112,7 +113,9 @@ body
  {
  float: right;
  width: 12%;
+ position:relative;
  vertical-align:middle;
+ margin-right: -10px;
  }
 /*---*/
 /*Div Style for Previous, Save, Continue*/
@@ -120,6 +123,7 @@ body
  {
  float: left;
  width: 33%;
+ vertical-align:middle;
  }
 
 #save
@@ -127,12 +131,14 @@ body
  float: left;
  width: 33%;
  margin: auto;
+ vertical-align:middle;
  }
 
 #next
  {
  float: right;
  width: 33%;
+ vertical-align:middle;
  }
 /*---*/
 
@@ -143,6 +149,7 @@ body
  
 #nav
  {
+ display:block;
  width: 92%;
  border-top: 1px solid #244640;
  padding: .5em;
@@ -153,23 +160,20 @@ body
 #footer
  {
  position:absolute;
- bottom:5px;
+ bottom:0px;
  width: 98%;
  padding: .5em;
  color: #333;
  background-color: #f4fce8;
  border-top: 1px solid #4e9689;
- border-bottom-left-radius:10px;
- border-bottom-right-radius:10px;
- -moz-border-radius-bottomleft: 10px;
- -moz-border-radius-bottomright: 10px;
+ -moz-border-radius: 0 0 10px 10px;
+ border-radius: 0 0 10px 10px;
  height: 40px;
  vertical-align:middle;
  -moz-box-shadow: -1px -1px 0px 0px #888;
  -webkit-box-shadow: 1px -1px 0px 0px #888;
  box-shadow: 0px -1px 1px 0px #888;
-  behavior: url(PIE.htc);
- 
+ behavior: url(PIE.htc);
  }
 
 #content h2 { margin: 0 0 .5em 0; }
@@ -185,7 +189,7 @@ body
  float: right;
  }
 
-button.exitsurvey:hover,  button.save:hover, button.prev:hover, button.next:hover, button.begin:hover
+button.exitsurvey:hover,  button.save:hover, button.prev:hover, button.next:hover, button.begin:hover, button.submit:hover
  {
  cursor: pointer;
  opacity: 0.8;
@@ -196,7 +200,7 @@ img.button
  vertical-align:text-top;
  }
  
-button.save, button.prev, button.next, button.exitsurvey, button.begin
+button.save, button.prev, button.next, button.begin
  {
  border: 1px #4e9689 solid;
  -moz-border-radius: 10px;
@@ -208,23 +212,32 @@ button.save, button.prev, button.next, button.exitsurvey, button.begin
  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
  font-size: 10pt;
  font-weight:bold;
+ width: 150px;
  border: 1px solid rgba(0,0,0,0.5);
- background: rgba(195,255,104,0.6);
+ background: #d4eab3; 
+ background: rgba(195,255,104,0.6); 
  box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
  -o-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
  -webkit-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
  -moz-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
- behavior: url(PIE.htc); 
+ behavior:url(PIE.htc);
  }
 
 button.exitsurvey
  {
+ border: 1px #4e9689 solid;
+ -moz-border-radius: 10px;
+ -webkit-border-radius: 10px;
+ -khtml-border-radius: 10px;
+ border-radius: 10px;
+ background: #e5e5e5;
  background: rgba(255,255,255,0.9);
  width: 80px;
  padding: 2px;
  font-size: 8pt;
  font-weight:bold;
  height: 26px;
+ behavior:url(PIE.htc);
  }
  
  button.begin
@@ -247,12 +260,35 @@ button.exitsurvey
  margin-bottom: 10px; 
  margin-left: 0.5em; 
  margin-right: 0.5em; 
- padding: 5px;
+ padding: 10px;
  font-size: 10pt;
  font-weight: bold;
  -moz-border-radius: 10px;
  -webkit-border-radius: 10px;
  -khtml-border-radius: 10px;
  border-radius: 10px;
+ behavior:url(PIE.htc);
+ }
 
+button.submits
+ {
+ border: 1px #4e9689 solid;
+ -moz-border-radius: 10px;
+ -webkit-border-radius: 10px;
+ -khtml-border-radius: 10px;
+ border-radius: 10px;
+ padding: 3px 5px 3px 5px;
+ color:#244640;
+ font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+ font-size: 10pt;
+ font-weight:bold;
+ width: 160px;
+ border: 1px solid rgba(0,0,0,0.5);
+ background: #bfe7ea; 
+ background: rgba(191,231,234,0.6); 
+ box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
+ -o-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
+ -webkit-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
+ -moz-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
+ behavior:url(PIE.htc);
  }
