@@ -3,13 +3,13 @@
 namespace Epi.Web.WCF.SurveyService.Criteria
 {
     /// <summary>
-    /// Holds criteria for customer queries.
+    /// Holds criteria for SurveyInfo queries.
     /// </summary>
     [DataContract(Namespace = "http://www.yourcompany.com/types/")]
     public class SurveyInfoCriteria : Criteria
     {
         /// <summary>
-        /// Unique customer identifier.
+        /// Unique SurveyInfo identifier.
         /// </summary>
         [DataMember]
         public string SurveyId { get; set; }
