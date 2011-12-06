@@ -40,12 +40,15 @@ namespace Epi.Web
 
            
 
+            //routes.MapRoute(
+            //    "Default", // Route name
+            //    "{controller}/{action}/{id}", // URL with parameters
+            //    new { controller = "Home", action = "Index", id = UrlParameter.Optional }); // Parameter defaults
+
             routes.MapRoute(
-                "Default", // Route name
-                "{controller}/{action}/{id}", // URL with parameters
-                new { controller = "Home", action = "Index", id = UrlParameter.Optional }); // Parameter defaults
-
-
+               "Default", // Route name
+               "{*url}", // URL with parameters
+               new { controller = "Home", action = "Index", id = UrlParameter.Optional });
             
 
         }
