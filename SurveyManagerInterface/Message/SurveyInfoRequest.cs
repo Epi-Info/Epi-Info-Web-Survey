@@ -6,7 +6,7 @@ using Epi.Web.Common.DTO;
 namespace Epi.Web.WCF.SurveyService.Messages
 {
     /// <summary>
-    /// Represents a customer request message from client.
+    /// Represents a SurveyInfo request message from client.
     /// </summary>
     [DataContract(Namespace = "http://www.yourcompany.com/types/")]
     public class SurveyInfoRequest : RequestBase
@@ -18,7 +18,7 @@ namespace Epi.Web.WCF.SurveyService.Messages
         public SurveyInfoCriteria Criteria;
 
         /// <summary>
-        /// Customer object.
+        /// SurveyInfo object.
         /// </summary>
         [DataMember]
         public SurveyInfoDTO SurveyInfo;
