@@ -51,7 +51,7 @@ namespace Epi.Web.SurveyManager.Test.Publisher_Tests
 
             //Assert
             Assert.NotNull(objSurveyInfoBO.XML);
-            Assert.NotNull(objSurveyInfoBO.XML);
+            Assert.NotNull(TemplateXML);
             //Assert.AreEqual(objSurveyInfoBO.XML, TemplateXML.ToString());
 
         
