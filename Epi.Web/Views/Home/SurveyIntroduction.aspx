@@ -1,20 +1,17 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/EpiSurvey.Master"
     Inherits="System.Web.Mvc.ViewPage<Epi.Web.Models.SurveyInfoModel>" %>
 
+
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
     Index
 </asp:Content>
-
 <%--<asp:Content ID="Content3" ContentPlaceHolderID="HeaderContent" runat="server">
     
       
 </asp:Content>--%>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-   
-   
-
     <% using (Html.BeginForm())
-      { %>
+       { %>
     <div id="header">
         <h1>
             <%: Model.SurveyName %></h1>
@@ -33,28 +30,29 @@
         </div>
     </div>
     <div id="content">
-       
-            
-             <% if (Model.ClosingDate.Date >= DateTime.Now.Date)
-       {%>
-       <h2>Welcome!</h2><br>
+        <% if (Model.ClosingDate.Date >= DateTime.Now.Date)
+           {%>
+        <h2>
+            Welcome!</h2>
+        <br>
         <div>
-            
-                <%: Model.IntroductionText%>
+            <%: Model.IntroductionText%>
             <br />
         </div>
-        
         <p>
         </p>
         <p>
             <button id="beginsurvey" class="begin green" type="submit">
                 Begin Survey</button>
         </p>
-        <%}else{ %>
+        <%}
+           else
+           { %>
         <div>
         </div>
         <div id="attention">
-            <img src="../Content/images/sign_warning.png" alt="" style="vertical-align: middle; padding-right: 10px;">
+            <img src="../Content/images/sign_warning.png" alt="" style="vertical-align: middle;
+                padding-right: 10px;">
             This survey is currently closed. Please contact the author of this survey for further
             assistance.
         </div>
