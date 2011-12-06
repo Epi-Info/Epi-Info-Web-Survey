@@ -27,7 +27,8 @@ namespace Epi.Web.EF
                 IntroductionText = entity.IntroductionText,
                 OrganizationName = entity.OrganizationName,
                 DepartmentName = entity.DepartmentName,
-                ClosingDate = entity.ClosingDate
+                ClosingDate = entity.ClosingDate,
+                SurveyType =   entity.SurveyType 
             };
         }
 
@@ -47,7 +48,9 @@ namespace Epi.Web.EF
                 IntroductionText = businessobject.IntroductionText,
                 OrganizationName = businessobject.OrganizationName,
                 DepartmentName = businessobject.DepartmentName,
-                ClosingDate = businessobject.ClosingDate 
+                ClosingDate = businessobject.ClosingDate ,
+                SurveyType = businessobject.SurveyType 
+
             };
         }
 

@@ -51,6 +51,9 @@
     <Compile Include="Publisher_Tests\Get_URL.cs" />
     <Compile Include="Publisher_Tests\Publishing_Survey_Test.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Publisher_Tests\When_Meta_Info_Provided.cs" />
+    <Compile Include="Publisher_Tests\When_Survey_Is_Created_With_Labels.cs" />
+    <Compile Include="Publisher_Tests\When_Survey_Posted.cs" />
     <Compile Include="SurveyDataProvider.cs" />
   </ItemGroup>
   <ItemGroup>

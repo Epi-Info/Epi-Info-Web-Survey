@@ -10,6 +10,7 @@ namespace Epi.Web.Common.BusinessObject
     {
         private string _SurveyId;
         private string _SurveyNumber;
+        private int  _SurveyType;
         private string _SurveyName;
         private string _IntroductionText;
         private string _DepartmentName;
@@ -29,7 +30,11 @@ namespace Epi.Web.Common.BusinessObject
             get { return _SurveyNumber; }
             set { _SurveyNumber = value; }
         }
-
+        public int SurveyType
+        {
+            get { return _SurveyType; }
+            set { _SurveyType = value; }
+        }
 
         public string SurveyName
         {

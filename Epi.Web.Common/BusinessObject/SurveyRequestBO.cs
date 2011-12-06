@@ -11,6 +11,7 @@ namespace Epi.Web.Common.BusinessObject
     {
         DateTime closingDate;
         string surveyName;
+        int surveyType;
         string surveyNumber;
         string organizationName;
         string departmentName;
@@ -42,6 +43,8 @@ namespace Epi.Web.Common.BusinessObject
 
         
         public string TemplateXML { get { return this.templateXML; } set { this.templateXML = value; } }
+
+        public int SurveyType { get { return this.surveyType; } set { this.surveyType = value; } }
 
     }
 }

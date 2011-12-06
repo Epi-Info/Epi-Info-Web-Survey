@@ -63,6 +63,7 @@ namespace Epi.Web.BLL
 
                         BO.SurveyName = pRequestMessage.SurveyName;
 
+                        BO.SurveyType = pRequestMessage.SurveyType;
 
                         try
                         {
