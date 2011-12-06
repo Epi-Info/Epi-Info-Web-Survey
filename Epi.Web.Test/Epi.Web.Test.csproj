@@ -35,6 +35,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Moq">
+      <HintPath>..\packages\Moq.4.0.10827\lib\NET40\Moq.dll</HintPath>
+    </Reference>
     <Reference Include="nunit.framework, Version=2.5.10.11092, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\Program Files (x86)\NUnit 2.5.10\bin\net-2.0\framework\nunit.framework.dll</HintPath>
@@ -61,15 +64,35 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="SurveyTest.cs" />
+    <Compile Include="Controllers\HomeController_Tests\When_Click_Button.cs" />
+    <Compile Include="Controllers\HomeController_Tests\When_Open_Survey_Link.cs" />
+    <Compile Include="Mock\SurveyRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Epi.DynamicForms.Core\Epi.Web.DynamicForms.Core.csproj">
+      <Project>{9624E64A-013F-41E8-84BA-C34EE744685E}</Project>
+      <Name>Epi.Web.DynamicForms.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Epi.Web.Common\Epi.Web.Common.csproj">
+      <Project>{6E2F059B-C1CD-401F-8A63-DC2933CFB0D8}</Project>
+      <Name>Epi.Web.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Epi.Web\Epi.Web.csproj">
       <Project>{D7A6E617-B077-4F9A-9646-F2083B4A0FD0}</Project>
       <Name>Epi.Web</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SurveyManagerInterface\Epi.Web.SurveyManager.csproj">
+      <Project>{31F91938-2997-4650-8D36-71C845F1071D}</Project>
+      <Name>Epi.Web.SurveyManager</Name>
+    </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
