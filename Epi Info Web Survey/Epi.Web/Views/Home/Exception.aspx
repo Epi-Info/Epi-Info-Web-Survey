@@ -1,0 +1,18 @@
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/EpiSurvey.Master" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
+    Exception
+</asp:Content>
+
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+
+<div id="attention" style="margin: 10px">
+            <img src="../Content/images/sign_warning.png" alt="" style="vertical-align: middle;
+                padding-right: 10px;">
+           The Survey does not exists
+        </div>
+
+</asp:Content>
+
+<asp:Content ID="Content3" ContentPlaceHolderID="HeaderContent" runat="server">
+</asp:Content>
