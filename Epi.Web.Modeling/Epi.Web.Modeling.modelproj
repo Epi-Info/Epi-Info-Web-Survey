@@ -35,6 +35,27 @@
       <SubType>Content</SubType>
       <DependentUpon>Behavioral\Activity\2-EpiInfoWebSurveyDataCollection.activitydiagram</DependentUpon>
     </Content>
+    <Content Include="Behavioral\Sequence\PublishingSurvey.sequencediagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Behavioral\Sequence\PublishingSurvey.sequencediagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>Behavioral\Sequence\PublishingSurvey.sequencediagram</DependentUpon>
+    </Content>
+    <Content Include="Behavioral\Sequence\AccessingSurvey.sequencediagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Behavioral\Sequence\AccessingSurvey.sequencediagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>Behavioral\Sequence\AccessingSurvey.sequencediagram</DependentUpon>
+    </Content>
+    <Content Include="Behavioral\Sequence\StartSurvey.sequencediagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Behavioral\Sequence\StartSurvey.sequencediagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>Behavioral\Sequence\StartSurvey.sequencediagram</DependentUpon>
+    </Content>
     <Content Include="Behavioral\UseCase\3-EpiInfoWebSurvey.usecasediagram">
       <SubType>Content</SubType>
     </Content>
@@ -57,11 +78,37 @@
       <DependentUpon>Behavioral\UseCase\1-EpiInfoWebSurveySystem.usecasediagram</DependentUpon>
     </Content>
     <Folder Include="Behavioral\Activity\" />
+    <Folder Include="Behavioral\Sequence" />
     <Folder Include="Behavioral\UseCase\" />
     <Folder Include="ModelDefinition\" />
     <Content Include="ModelDefinition\Epi.Web.Modeling.uml">
       <SubType>Content</SubType>
     </Content>
     <Folder Include="Behavioral" />
+    <Folder Include="Layer" />
+  </ItemGroup>
+  <ItemGroup>
+    <Validate Include="Layer\DetailedLogical.layerdiagram">
+      <SubType>Content</SubType>
+    </Validate>
+    <Validate Include="Layer\DetailedLogical.layerdiagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>Layer\DetailedLogical.layerdiagram</DependentUpon>
+    </Validate>
+    <Validate Include="Layer\DetailedLogical.layerdiagram.suppressions">
+      <SubType>Content</SubType>
+      <DependentUpon>Layer\DetailedLogical.layerdiagram</DependentUpon>
+    </Validate>
+    <Validate Include="Layer\HighLevelLogical.layerdiagram">
+      <SubType>Content</SubType>
+    </Validate>
+    <Validate Include="Layer\HighLevelLogical.layerdiagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>Layer\HighLevelLogical.layerdiagram</DependentUpon>
+    </Validate>
+    <Validate Include="Layer\HighLevelLogical.layerdiagram.suppressions">
+      <SubType>Content</SubType>
+      <DependentUpon>Layer\HighLevelLogical.layerdiagram</DependentUpon>
+    </Validate>
   </ItemGroup>
 </Project>
