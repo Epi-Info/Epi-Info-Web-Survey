@@ -1,25 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<useCaseModelRoot xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm5="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" xmlns:dm9="http://schemas.microsoft.com/dsltools/SimpleShapesModel" dslVersion="1.0.0.0" Id="81abefd1-1fdd-47b6-9468-a88c5c0a513e" name="EPIInfoWebSurvey" linkedPackageId="fc2f16b1-531e-4cd0-b6d2-1ff140c6304c" xmlns="http://schemas.microsoft.com/dsltools/UseCaseModel">
+<useCaseModelRoot xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm5="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" xmlns:dm9="http://schemas.microsoft.com/dsltools/SimpleShapesModel" xmlns:dm10="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ActivityDesigner" xmlns:dm11="http://schemas.microsoft.com/VisualStudio/TeamArchitect/SequenceDesigner" dslVersion="1.0.0.0" Id="81abefd1-1fdd-47b6-9468-a88c5c0a513e" name="EPIInfoWebSurvey" linkedPackageId="fc2f16b1-531e-4cd0-b6d2-1ff140c6304c" xmlns="http://schemas.microsoft.com/dsltools/UseCaseModel">
   <ownedCommentsInternal>
     <comment Id="7a7caa66-aea4-458b-8a4f-ad68fa51acdc">
       <elementDefinition Id="ed6bd47b-d65f-4d4e-8a94-b15ac77ae494" />
       <body>The use cases depicted here represent the use cases that survery participant participates in. The realization of these use cases is accomplished by Epi Info Web Survey Application.</body>
     </comment>
   </ownedCommentsInternal>
-  <profileInstances>
-    <packageHasProfileInstances Id="b8f9ddec-290a-4ff6-afd3-b4bb0e323d2d">
-      <profileInstance Id="69b59c10-05c3-4082-9ce0-a5851914a8a2" name="StandardProfileL2">
-        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
-      </profileInstance>
-      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
-    </packageHasProfileInstances>
-    <packageHasProfileInstances Id="b0fd2be5-9714-40d7-87a1-d61efbf28fa6">
-      <profileInstance Id="4126adbf-2d32-48e9-ac60-f7ec72f8c0a8" name="StandardProfileL3">
-        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
-      </profileInstance>
-      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
-    </packageHasProfileInstances>
-  </profileInstances>
   <packagedElements>
     <useCaseModelRootHasTypes>
       <actor Id="a6f004e6-108e-4647-921c-be8f28900c6e" name="Survery Participant" isAbstract="false" isLeaf="false">
@@ -170,5 +156,19 @@
   </packagedElements>
   <package Id="fc2f16b1-531e-4cd0-b6d2-1ff140c6304c" name="Epi.Web.Modeling">
     <elementDefinition Id="daf1de51-1862-4459-9e4a-e7f71a55a436" />
+    <profileInstances>
+      <packageHasProfileInstances Id="b8f9ddec-290a-4ff6-afd3-b4bb0e323d2d">
+        <profileInstance Id="69b59c10-05c3-4082-9ce0-a5851914a8a2" name="StandardProfileL2">
+          <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+        </profileInstance>
+        <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+      </packageHasProfileInstances>
+      <packageHasProfileInstances Id="b0fd2be5-9714-40d7-87a1-d61efbf28fa6">
+        <profileInstance Id="4126adbf-2d32-48e9-ac60-f7ec72f8c0a8" name="StandardProfileL3">
+          <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+        </profileInstance>
+        <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+      </packageHasProfileInstances>
+    </profileInstances>
   </package>
 </useCaseModelRoot>

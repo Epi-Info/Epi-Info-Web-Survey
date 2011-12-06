@@ -39,7 +39,7 @@
         </useCaseShape>
       </nestedChildShapes>
     </SubsystemShape>
-    <extendConnector edgePoints="[(5.625 : 1.25); (4.625 : 1.25)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="Black" useCaseStereotype="«extend»">
+    <extendConnector edgePoints="[(5.625 : 1.25); (4.625 : 1.25)]" fixedFrom="NotFixed" fixedTo="NotFixed" customColor="Black" useCaseStereotype="«extend»">
       <extendMoniker Id="814b77fd-6082-44c3-a8aa-8db95526dce8" />
       <relativeChildShapes />
       <nodes>
@@ -47,7 +47,7 @@
         <useCaseShapeMoniker Id="35790ec8-4d7b-4c7d-bfd4-2050f06b1ad9" />
       </nodes>
     </extendConnector>
-    <useCaseAssociationConnector edgePoints="[(2.125 : 2.47222222222222); (3.80838110487137 : 1.44348932480083)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="113, 111, 110" sourceMultiplicity="" targetMultiplicity="">
+    <useCaseAssociationConnector edgePoints="[(2.125 : 2.47222222222222); (3.80838110487137 : 1.44348932480083)]" fixedFrom="NotFixed" fixedTo="NotFixed" customColor="113, 111, 110" sourceMultiplicity="" targetMultiplicity="">
       <associationMoniker Id="4e455054-378d-443f-9285-2b69d9254e39" />
       <relativeChildShapes />
       <nodes>
@@ -55,7 +55,7 @@
         <useCaseShapeMoniker Id="35790ec8-4d7b-4c7d-bfd4-2050f06b1ad9" />
       </nodes>
     </useCaseAssociationConnector>
-    <useCaseAssociationConnector edgePoints="[(2.125 : 2.56944444444444); (3.66809422568987 : 2.22653461651336)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="113, 111, 110" sourceMultiplicity="" targetMultiplicity="">
+    <useCaseAssociationConnector edgePoints="[(2.125 : 2.56944444444444); (3.66809422568987 : 2.22653461651336)]" fixedFrom="NotFixed" fixedTo="NotFixed" customColor="113, 111, 110" sourceMultiplicity="" targetMultiplicity="">
       <associationMoniker Id="81d366ce-519d-4e7e-b14f-20f7f7fbf6b1" />
       <relativeChildShapes />
       <nodes>
@@ -63,7 +63,7 @@
         <useCaseShapeMoniker Id="06860529-7d0a-43e0-b0e0-dfb9366368f4" />
       </nodes>
     </useCaseAssociationConnector>
-    <useCaseAssociationConnector edgePoints="[(2.125 : 2.66666666666667); (3.65065835097474 : 2.92094305849579)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="113, 111, 110" sourceMultiplicity="" targetMultiplicity="">
+    <useCaseAssociationConnector edgePoints="[(2.125 : 2.66666666666667); (3.65065835097474 : 2.92094305849579)]" fixedFrom="NotFixed" fixedTo="NotFixed" customColor="113, 111, 110" sourceMultiplicity="" targetMultiplicity="">
       <associationMoniker Id="2e08f3f5-d2be-495d-8dd0-ecfc62e744ec" />
       <relativeChildShapes />
       <nodes>
@@ -71,7 +71,7 @@
         <useCaseShapeMoniker Id="7093b40e-feca-478b-b624-f446fbcae1b6" />
       </nodes>
     </useCaseAssociationConnector>
-    <useCaseAssociationConnector edgePoints="[(2.125 : 2.76388888888889); (3.79051763418878 : 3.68917646343821)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="113, 111, 110" sourceMultiplicity="" targetMultiplicity="">
+    <useCaseAssociationConnector edgePoints="[(2.125 : 2.76388888888889); (3.79051763418878 : 3.68917646343821)]" fixedFrom="NotFixed" fixedTo="NotFixed" customColor="113, 111, 110" sourceMultiplicity="" targetMultiplicity="">
       <associationMoniker Id="069c267c-ea08-4b89-b360-b8f376853b9a" />
       <relativeChildShapes />
       <nodes>
@@ -79,7 +79,7 @@
         <useCaseShapeMoniker Id="55592f4e-d1a9-4844-90be-3040a8d28036" />
       </nodes>
     </useCaseAssociationConnector>
-    <useCaseAssociationConnector edgePoints="[(2.125 : 2.86111111111111); (3.89105613979048 : 4.52905302091323)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="113, 111, 110" sourceMultiplicity="" targetMultiplicity="">
+    <useCaseAssociationConnector edgePoints="[(2.125 : 2.86111111111111); (3.89105613979048 : 4.52905302091323)]" fixedFrom="NotFixed" fixedTo="NotFixed" customColor="113, 111, 110" sourceMultiplicity="" targetMultiplicity="">
       <associationMoniker Id="847f7602-0ca9-4ec5-bf69-0f08e8f7786f" />
       <relativeChildShapes />
       <nodes>
