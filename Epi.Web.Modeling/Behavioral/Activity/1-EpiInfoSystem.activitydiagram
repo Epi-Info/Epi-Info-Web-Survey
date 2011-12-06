@@ -1,19 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<activityRootModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm5="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" xmlns:dm9="http://schemas.microsoft.com/dsltools/SimpleShapesModel" xmlns:dm10="http://schemas.microsoft.com/dsltools/UseCaseModel" dslVersion="1.0.0.0" Id="5fd0ff6f-3211-4953-9795-0d2a13c37277" name="1-EpiInfoSystem" linkedPackageId="9748c706-5c0a-4254-9856-9f3c5623b531" xmlns="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ActivityDesigner">
-  <profileInstances>
-    <packageHasProfileInstances Id="6d65aaee-ec91-439c-b641-e818d68abd22">
-      <profileInstance Id="904a7990-1c46-4697-bb1e-97f72b7871d6" name="StandardProfileL2">
-        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
-      </profileInstance>
-      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
-    </packageHasProfileInstances>
-    <packageHasProfileInstances Id="4ab3ca52-6769-472e-a7a0-ad7d57bad7df">
-      <profileInstance Id="2fb9f2b3-4c07-44d6-9f23-36820e2768e4" name="StandardProfileL3">
-        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
-      </profileInstance>
-      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
-    </packageHasProfileInstances>
-  </profileInstances>
+<activityRootModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm5="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" xmlns:dm9="http://schemas.microsoft.com/dsltools/SimpleShapesModel" dslVersion="1.0.0.0" Id="5fd0ff6f-3211-4953-9795-0d2a13c37277" name="1-EpiInfoSystem" linkedPackageId="9748c706-5c0a-4254-9856-9f3c5623b531" xmlns="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ActivityDesigner">
   <packagedElements>
     <activityRootModelHasActivity>
       <activity Id="f9db3d47-747f-4024-a6ac-a5df0cc59583" name="1-EpiInfoSystem" isAbstract="false" isLeaf="false" isActiveClass="false" isReentrant="false" isReadOnly="false" isSingleExecution="false">
@@ -40,9 +26,9 @@
           <opaqueAction Id="c7b6ae86-02f9-4c1b-bd62-0e04000c185a" name="Distribute URL" isLeaf="false">
             <elementDefinition Id="f650f210-1199-43b8-8d16-fa43d2a3a748" />
             <flowNodeTargets>
-              <controlFlow Id="c037c54e-7e3b-4f6d-8e56-57d0298f3a78" isLeaf="false">
-                <opaqueActionMoniker Id="c172d4bd-8fdd-43ba-b4c8-a6931ae0e404" LastKnownName="Download  response" />
-                <elementDefinition Id="ff074dfa-176d-44dd-bf83-10032d19412b" />
+              <controlFlow Id="c17f0125-7fbe-4301-accd-2f11ff377da9" isLeaf="false">
+                <callBehaviorActionMoniker Id="3c92be7b-6350-49e0-a489-21f14d22771e" LastKnownName="Conduct Survey" />
+                <elementDefinition Id="80428ffd-4498-4ddb-88ae-46f8b258bd3e" />
               </controlFlow>
             </flowNodeTargets>
           </opaqueAction>
@@ -69,6 +55,12 @@
           </activityFinalNode>
           <callBehaviorAction Id="3c92be7b-6350-49e0-a489-21f14d22771e" name="Conduct Survey" isLeaf="false">
             <elementDefinition Id="40992706-dd03-420c-b2bc-4cc1c6c0e459" />
+            <flowNodeTargets>
+              <controlFlow Id="1ef27052-ac63-4f11-9951-5ff267b97395" isLeaf="false">
+                <opaqueActionMoniker Id="c172d4bd-8fdd-43ba-b4c8-a6931ae0e404" LastKnownName="Download  response" />
+                <elementDefinition Id="e11e7e13-c5e0-4a2e-8874-8faa5830e52f" />
+              </controlFlow>
+            </flowNodeTargets>
           </callBehaviorAction>
         </nodes>
       </activity>
@@ -76,5 +68,19 @@
   </packagedElements>
   <package Id="9748c706-5c0a-4254-9856-9f3c5623b531" name="Epi.Web.Modeling">
     <elementDefinition Id="daf1de51-1862-4459-9e4a-e7f71a55a436" />
+    <profileInstances>
+      <packageHasProfileInstances Id="6d65aaee-ec91-439c-b641-e818d68abd22">
+        <profileInstance Id="904a7990-1c46-4697-bb1e-97f72b7871d6" name="StandardProfileL2">
+          <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+        </profileInstance>
+        <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+      </packageHasProfileInstances>
+      <packageHasProfileInstances Id="4ab3ca52-6769-472e-a7a0-ad7d57bad7df">
+        <profileInstance Id="2fb9f2b3-4c07-44d6-9f23-36820e2768e4" name="StandardProfileL3">
+          <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+        </profileInstance>
+        <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+      </packageHasProfileInstances>
+    </profileInstances>
   </package>
 </activityRootModel>
