@@ -38,12 +38,9 @@
         <p>
         </p>
         <p>
-           <%-- <button id="beginsurvey" class="begin green" type="submit" onclick="<%: "window.location.href='begin/" + (ViewData.Model).SurveyId + "'"%>">
-                Begin Survey</button> --%>
-                <button id="beginsurvey" class="begin green" type="submit">
+            <button id="beginsurvey" class="begin green" type="submit">
                 Begin Survey</button>
-                </p>
-
+        </p>
     </div>
     <% } %>
 </asp:Content>
