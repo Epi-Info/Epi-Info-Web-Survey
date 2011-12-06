@@ -20,7 +20,7 @@ namespace Epi.Web.SurveyManager.Test
            private string     SurveyName = "Survey Name";
            private string   SurveyNumber = "ABC";
            private string TemplateXML =  GetXML();
-
+           private int SurveyType = 1;
            
            private string _DepartmentName = "";
            private string _IntroductionText = "";
@@ -29,6 +29,8 @@ namespace Epi.Web.SurveyManager.Test
            private string _SurveyName = "";
            private string _SurveyNumber = "";
            private string _TemplateXML = "";
+           private int _SurveyType = 0 ;
+
 
     public SurveyRequestBO CreateSurveyRequestBOObject()
 
@@ -42,7 +44,7 @@ namespace Epi.Web.SurveyManager.Test
             pRequestMessage.SurveyName = SurveyName;
             pRequestMessage.SurveyNumber = SurveyNumber;
             pRequestMessage.TemplateXML = TemplateXML;
-
+            pRequestMessage.SurveyType = SurveyType;
             return pRequestMessage;
         }
 
@@ -57,6 +59,7 @@ namespace Epi.Web.SurveyManager.Test
             pRequestMessage.SurveyName = _SurveyName;
             pRequestMessage.SurveyNumber = _SurveyNumber;
             pRequestMessage.TemplateXML = _TemplateXML;
+            pRequestMessage.SurveyType = _SurveyType;
 
             return pRequestMessage;
         }

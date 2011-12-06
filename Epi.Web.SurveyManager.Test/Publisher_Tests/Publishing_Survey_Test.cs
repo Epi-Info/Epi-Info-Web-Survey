@@ -7,6 +7,7 @@ using Epi.Web.BLL;
 using Epi.Web.Common.BusinessObject;
 using Epi.Web.Interfaces.DataInterfaces;
 using Epi.Web.EF;
+using System.Xml;
 
 
 
@@ -123,8 +124,49 @@ namespace Epi.Web.SurveyManager.Test
             Assert.AreEqual(objSurveyInfoBO.ClosingDate , closingDate );
         }
 
-    
-        
+
+        [Test]
+        public void When_Single_Response_Survey_Provided_It_Is_Recorded()//Single and Multiple
+        {
+
+            //Arrange
+
+
+            ISurveyInfoDao objISurveryInfoDao = new EntitySurveyInfoDao();
+            SurveyInfo objSurveyInfo = new SurveyInfo(objISurveryInfoDao);
+
+            Publisher objPublisher = new Publisher(objISurveryInfoDao);
+
+            SurveyDataProvider DataObj = new SurveyDataProvider();//Get Data
+
+            SurveyRequestBO objSurveyRequestBO;
+            SurveyRequestResultBO objSurveyResponseBO;
+            SurveyInfoBO objSurveyInfoBO;
+            int ResonseType;
+            string surveyURL;
+            string surveyID = string.Empty;
+            
+            //Act
+
+            objSurveyRequestBO = DataObj.CreateSurveyRequestBOObject();
+
+            ResonseType = objSurveyRequestBO.SurveyType;
+
+            objSurveyResponseBO = objPublisher.PublishSurvey(objSurveyRequestBO);// publish survey and get Response back
+
+            surveyURL = objSurveyResponseBO.URL;
+            surveyID = surveyURL.Substring(surveyURL.LastIndexOf('/') + 1);  //Get the ID from Url. 
+
+
+            objSurveyInfoBO = objSurveyInfo.GetSurveyInfoById(surveyID);
+
+
+            //Assert
+
+            Assert.AreEqual(objSurveyInfoBO.SurveyType, ResonseType);
+
+
+        }
         
     }
 }
