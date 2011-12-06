@@ -33,11 +33,19 @@ namespace Epi.Web.Controllers
         /// <returns></returns>
         [HttpGet]
         public ActionResult ListSurvey(string surveyid)
-        { 
-            var s = _iSurveyInfoRepository.GetSurveyInfoById(surveyid).ToSurveyInfoModel();
+        {
+            /*TO DO: Later we will pass an empty SurveyInfoDTO object and validate it here something like
+             if surveyInfodto.SurveyName== null then go to the exception page*/
+            try
+            {
+                var s = _iSurveyInfoRepository.GetSurveyInfoById(surveyid).ToSurveyInfoModel();
 
-            return View("SurveyIntroduction", s);
-
+                return View("SurveyIntroduction", s);
+            }
+            catch (Exception ex)
+            {
+                return View("Exception");
+            }
         }
 
         
