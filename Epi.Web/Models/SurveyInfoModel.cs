@@ -19,7 +19,7 @@ namespace Epi.Web.Models
         private string _OrganizationName;
         private string _XML;
         private bool _IsSuccess;
-
+        private DateTime _ClosingDate;
 
         public string SurveyId
         {
@@ -72,6 +72,12 @@ namespace Epi.Web.Models
         {
             get { return _IsSuccess; }
             set { _IsSuccess = value; }
+        }
+
+        public DateTime ClosingDate
+        {
+            get { return _ClosingDate; }
+            set { _ClosingDate = value; }
         }
 
     }
