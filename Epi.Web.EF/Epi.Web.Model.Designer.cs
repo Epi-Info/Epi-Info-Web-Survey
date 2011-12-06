@@ -68,6 +68,22 @@ namespace Epi.Web.EF
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
+        public ObjectSet<SurveyType> SurveyTypes
+        {
+            get
+            {
+                if ((_SurveyTypes == null))
+                {
+                    _SurveyTypes = base.CreateObjectSet<SurveyType>("SurveyTypes");
+                }
+                return _SurveyTypes;
+            }
+        }
+        private ObjectSet<SurveyType> _SurveyTypes;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
         public ObjectSet<SurveyMetaData> SurveyMetaDatas
         {
             get
@@ -83,6 +99,14 @@ namespace Epi.Web.EF
 
         #endregion
         #region AddTo Methods
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the SurveyTypes EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToSurveyTypes(SurveyType surveyType)
+        {
+            base.AddObject("SurveyTypes", surveyType);
+        }
     
         /// <summary>
         /// Deprecated Method for adding a new object to the SurveyMetaDatas EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
@@ -114,14 +138,16 @@ namespace Epi.Web.EF
         /// Create a new SurveyMetaData object.
         /// </summary>
         /// <param name="surveyId">Initial value of the SurveyId property.</param>
+        /// <param name="surveyType">Initial value of the SurveyType property.</param>
         /// <param name="closingDate">Initial value of the ClosingDate property.</param>
         /// <param name="surveyName">Initial value of the SurveyName property.</param>
         /// <param name="introductionText">Initial value of the IntroductionText property.</param>
         /// <param name="templateXML">Initial value of the TemplateXML property.</param>
-        public static SurveyMetaData CreateSurveyMetaData(global::System.Guid surveyId, global::System.DateTime closingDate, global::System.String surveyName, global::System.String introductionText, global::System.String templateXML)
+        public static SurveyMetaData CreateSurveyMetaData(global::System.Guid surveyId, global::System.Int32 surveyType, global::System.DateTime closingDate, global::System.String surveyName, global::System.String introductionText, global::System.String templateXML)
         {
             SurveyMetaData surveyMetaData = new SurveyMetaData();
             surveyMetaData.SurveyId = surveyId;
+            surveyMetaData.SurveyType = surveyType;
             surveyMetaData.ClosingDate = closingDate;
             surveyMetaData.SurveyName = surveyName;
             surveyMetaData.IntroductionText = introductionText;
@@ -182,6 +208,30 @@ namespace Epi.Web.EF
         private global::System.String _SurveyNumber;
         partial void OnSurveyNumberChanging(global::System.String value);
         partial void OnSurveyNumberChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 SurveyType
+        {
+            get
+            {
+                return _SurveyType;
+            }
+            set
+            {
+                OnSurveyTypeChanging(value);
+                ReportPropertyChanging("SurveyType");
+                _SurveyType = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("SurveyType");
+                OnSurveyTypeChanged();
+            }
+        }
+        private global::System.Int32 _SurveyType;
+        partial void OnSurveyTypeChanging(global::System.Int32 value);
+        partial void OnSurveyTypeChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -326,6 +376,85 @@ namespace Epi.Web.EF
         private global::System.String _TemplateXML;
         partial void OnTemplateXMLChanging(global::System.String value);
         partial void OnTemplateXMLChanged();
+
+        #endregion
+    
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="EIWSModel", Name="SurveyType")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class SurveyType : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new SurveyType object.
+        /// </summary>
+        /// <param name="id">Initial value of the Id property.</param>
+        public static SurveyType CreateSurveyType(global::System.Int32 id)
+        {
+            SurveyType surveyType = new SurveyType();
+            surveyType.Id = id;
+            return surveyType;
+        }
+
+        #endregion
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Id
+        {
+            get
+            {
+                return _Id;
+            }
+            set
+            {
+                if (_Id != value)
+                {
+                    OnIdChanging(value);
+                    ReportPropertyChanging("Id");
+                    _Id = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("Id");
+                    OnIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _Id;
+        partial void OnIdChanging(global::System.Int32 value);
+        partial void OnIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Value
+        {
+            get
+            {
+                return _Value;
+            }
+            set
+            {
+                OnValueChanging(value);
+                ReportPropertyChanging("Value");
+                _Value = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Value");
+                OnValueChanged();
+            }
+        }
+        private global::System.String _Value;
+        partial void OnValueChanging(global::System.String value);
+        partial void OnValueChanged();
 
         #endregion
     
