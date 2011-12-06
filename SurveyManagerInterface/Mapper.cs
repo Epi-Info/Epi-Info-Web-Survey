@@ -32,7 +32,7 @@ namespace Epi.Web.WCF.SurveyService
         /// <summary>
         /// Maps SurveyInfoBO business object to SurveyMetaData entity.
         /// </summary>
-        /// <param name="customer">A SurveyInfoBO business object.</param>
+        /// <param name="SurveyInfo">A SurveyInfoBO business object.</param>
         /// <returns>A SurveyMetaData entity.</returns>
         internal static SurveyRequestResponse BusinessObjectToDataTransfer(SurveyRequestResultBO entity)
         {
@@ -49,7 +49,7 @@ namespace Epi.Web.WCF.SurveyService
         /// <summary>
         /// Maps SurveyInfoBO business object to SurveyMetaData entity.
         /// </summary>
-        /// <param name="customer">A SurveyInfoBO business object.</param>
+        /// <param name="SurveyInfo">A SurveyInfoBO business object.</param>
         /// <returns>A SurveyMetaData entity.</returns>
         internal static SurveyInfoDTO BusinessObjectToDataTransfer(SurveyInfoBO entity)
         {
@@ -129,35 +129,35 @@ namespace Epi.Web.WCF.SurveyService
         //}
 
         ///// <summary>
-        ///// Transforms list of Customer BOs to list of Customer DTOs.
+        ///// Transforms list of SurveyInfo BOs to list of SurveyInfo DTOs.
         ///// </summary>
-        ///// <param name="customers">List of Customer BOs.</param>
-        ///// <returns>List of Customer DTOs.</returns>
-        //public static IList<CustomerDto> ToDataTransferObjects(IEnumerable<Customer> customers)
+        ///// <param name="SurveyInfos">List of SurveyInfo BOs.</param>
+        ///// <returns>List of SurveyInfo DTOs.</returns>
+        //public static IList<SurveyInfoDto> ToDataTransferObjects(IEnumerable<SurveyInfo> SurveyInfos)
         //{
-        //    if (customers == null) return null;
-        //    return customers.Select(c => ToDataTransferObject(c)).ToList();
+        //    if (SurveyInfos == null) return null;
+        //    return SurveyInfos.Select(c => ToDataTransferObject(c)).ToList();
         //}
 
         ///// <summary>
-        ///// Transforms Customer BO to Customer DTO.
+        ///// Transforms SurveyInfo BO to SurveyInfo DTO.
         ///// </summary>
-        ///// <param name="customer">Customer BO.</param>
-        ///// <returns>Customer DTO.</returns>
-        //public static CustomerDto ToDataTransferObject(Customer customer)
+        ///// <param name="SurveyInfo">SurveyInfo BO.</param>
+        ///// <returns>SurveyInfo DTO.</returns>
+        //public static SurveyInfoDto ToDataTransferObject(SurveyInfo SurveyInfo)
         //{
-        //    if (customer == null) return null;
+        //    if (SurveyInfo == null) return null;
 
-        //    return new CustomerDto
+        //    return new SurveyInfoDto
         //    {
-        //        CustomerId = customer.CustomerId,
-        //        Company = customer.Company,
-        //        Country = customer.Country,
-        //        City = customer.City,
-        //        Orders = ToDataTransferObjects(customer.Orders),
-        //        LastOrderDate = customer.LastOrderDate,
-        //        NumOrders = customer.NumOrders,
-        //        Version = customer.Version
+        //        SurveyInfoId = SurveyInfo.SurveyInfoId,
+        //        Company = SurveyInfo.Company,
+        //        Country = SurveyInfo.Country,
+        //        City = SurveyInfo.City,
+        //        Orders = ToDataTransferObjects(SurveyInfo.Orders),
+        //        LastOrderDate = SurveyInfo.LastOrderDate,
+        //        NumOrders = SurveyInfo.NumOrders,
+        //        Version = SurveyInfo.Version
         //    };
         //}
 
@@ -186,7 +186,7 @@ namespace Epi.Web.WCF.SurveyService
         //        OrderId = order.OrderId,
         //        Freight = order.Freight,
         //        OrderDate = order.OrderDate,
-        //        Customer = ToDataTransferObject(order.Customer),
+        //        SurveyInfo = ToDataTransferObject(order.SurveyInfo),
         //        OrderDetails = ToDataTransferObjects(order.OrderDetails),
         //        RequiredDate = order.RequiredDate,
         //        Version = order.Version
@@ -270,17 +270,17 @@ namespace Epi.Web.WCF.SurveyService
         //}
 
         ///// <summary>
-        ///// Transfers Customer DTO to Customer BO.
+        ///// Transfers SurveyInfo DTO to SurveyInfo BO.
         ///// </summary>
-        ///// <param name="c">Customer DTO.</param>
-        ///// <returns>Customer BO.</returns>
-        //public static Customer FromDataTransferObject(CustomerDto c)
+        ///// <param name="c">SurveyInfo DTO.</param>
+        ///// <returns>SurveyInfo BO.</returns>
+        //public static SurveyInfo FromDataTransferObject(SurveyInfoDto c)
         //{
         //    if (c == null) return null;
 
-        //    return new Customer
+        //    return new SurveyInfo
         //    {
-        //        CustomerId = c.CustomerId,
+        //        SurveyInfoId = c.SurveyInfoId,
         //        Company = c.Company,
         //        City = c.City,
         //        Country = c.Country,

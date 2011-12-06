@@ -107,8 +107,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="bin\Epi.Web.dll" />
-    <Content Include="bin\Epi.Web.pdb" />
     <Content Include="Content\css\epistyle.css" />
     <Content Include="Content\css\overlay.png" />
     <Content Include="Content\css\page.css" />
@@ -247,6 +245,9 @@
     <None Include="Service References\ActionServiceClient\SurveyManagerService3.xsd">
       <SubType>Designer</SubType>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
