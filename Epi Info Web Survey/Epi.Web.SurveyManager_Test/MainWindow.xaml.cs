@@ -22,6 +22,7 @@ namespace Epi.Web.SurveyManager_Test
         public MainWindow()
         {
             InitializeComponent();
+            this.ClosingDateCalendar.SelectedDate = DateTime.Now;
         }
 
         private void button1_Click(object sender, RoutedEventArgs e)
