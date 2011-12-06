@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<layerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/SimpleShapesModel" dslVersion="1.0.0.0" Id="a11c5b3a-cc8e-4349-bac2-157d50ae12b0" xmlns="http://schemas.microsoft.com/VisualStudio/TeamArchitect/LayerDesigner">
+  <comments>
+    <comment Id="e7511f3a-7f04-4f85-91e1-1f5875fef04b" name="Comment1">
+      <body>Classes written using jQuery
+1. Validation libraries will extend custom validation annotations implemented in C#.
+2. Control library / extenders that can wrap up certain controls from jQuery UI or dojo framework
+3. Service communicators will wrap up the asynchronous calls that can be made through javaScript classes. Will be implemented using jQuery syntax.</body>
+      <layerElements>
+        <linkFromCommentToLayerElement>
+          <layerMoniker Id="466e1be0-544a-41b6-9d31-601c4a0155d1" />
+        </linkFromCommentToLayerElement>
+      </layerElements>
+    </comment>
+    <comment Id="7073a052-9411-414d-8798-eb08ce951cf4" name="Comment2">
+      <body>Presentation Layer
+- Components: All controls that need to be created dynamically are implemented in Epi.Web.DynamicForms.Core. 
+Patterns: Factory
+
+- UI is implemented using ASP.NET MVC  technology. 
+~ Patterns: MVC, Repository, Inversion of Control (IoC)
+~ IoC container: Microsoft Unity IoC for MVC (Unity.MVC3)
+
+- UI Tests are written using NUnit
+~ Test framework: NUnit V2.5.10
+~ Test Helper: Visual NUnit, NUnit test harness
+
+
+
+</body>
+      <layerElements>
+        <linkFromCommentToLayerElement>
+          <layerMoniker Id="e09fd8cb-95ed-4f4c-92d5-3f4a2b52d23b" />
+        </linkFromCommentToLayerElement>
+      </layerElements>
+    </comment>
+    <comment Id="30731885-fa45-4536-9a6f-c4b5d6c9dea4" name="Comment3">
+      <body>Hosting Layer
+- IIS will be the host for the WCF Services. There will be two host for
+WCF Service exposing two different end points
+
+- Survery Manager Service Host: This host will expos the endpoint that will allows Epi Info 7 to publish and download the surveys.
+
+- Survery Data Entry Service Host: This host will expose endpoint that will allow Epi Info Web Survey application to exchange data collected using the web application</body>
+      <layerElements>
+        <linkFromCommentToLayerElement>
+          <layerMoniker Id="ac9b6a4e-f381-4606-a311-9d770b5989a3" />
+        </linkFromCommentToLayerElement>
+      </layerElements>
+    </comment>
+  </comments>
+  <layers>
+    <layer Id="d546762f-7719-4115-8928-5442b92e6327" name="Web Server">
+      <childLayers>
+        <layer Id="104692ce-d2f4-4dc5-8498-f57cef3feb08" name="Business Layer">
+          <childLayers>
+            <layer Id="3e728cdf-5093-43da-ae07-9d971a610cd4" name="Business Objects" />
+            <layer Id="bf77fca6-1dab-4bc1-9b9a-7597cc6ac714" name="Business Entities" />
+            <layer Id="e4e90f4f-0fbf-4c7e-a44f-2b7fa6c9d0a1" name="Business Interfaces" />
+          </childLayers>
+        </layer>
+        <layer Id="c2e2da63-00e5-4a4d-81e7-95934dc5d06f" name="Data Layer">
+          <childLayers>
+            <layer Id="e3bfeed0-dd81-4140-9c37-84fbea136783" name="Data Access Components" />
+            <layer Id="c6de43e0-42bb-498d-a394-3377031528d9" name="Data Helpers/ Utilities" />
+            <layer Id="ba9924d2-5375-470c-a03c-279a175b984a" name="Data Access Interfaces" />
+          </childLayers>
+        </layer>
+        <layer Id="6bbc70f3-97af-4085-be29-c964fbbda6f9" name="Cross Cutting">
+          <childLayers>
+            <layer Id="d8a6920a-726d-4834-b87d-290dfbc1db04" name="Security" />
+            <layer Id="f4ac82d6-3aea-4493-b2cb-ec3235ec27c6" name="Communication" />
+            <layer Id="78789fa3-0b78-4c66-bafc-11f114c7fc34" name="Operational Management" />
+          </childLayers>
+        </layer>
+        <layer Id="e09fd8cb-95ed-4f4c-92d5-3f4a2b52d23b" name="Presentation Layer">
+          <childLayers>
+            <layer Id="4a76fbc8-035f-40ae-828a-39f5c365105f" name="Epi.Web.DynamicForms.Core">
+              <dependencyToLayers>
+                <dependencyFromLayerToLayer Id="23f55051-fc07-46e2-8dc2-f61699b5dd7c" direction="Bidirectional">
+                  <layerMoniker Id="3ca26a64-c68f-44a1-aa64-7098c0600ab9" />
+                </dependencyFromLayerToLayer>
+              </dependencyToLayers>
+            </layer>
+            <layer Id="3ca26a64-c68f-44a1-aa64-7098c0600ab9" name="Epi.Web" />
+          </childLayers>
+        </layer>
+        <layer Id="836a8300-c23e-46ab-a3cf-811638cda4d3" name="Services Layer">
+          <childLayers>
+            <layer Id="0e5713d3-4b21-48a0-9e7a-b69c87b66204" name="Service Interfaces" />
+            <layer Id="fd24ba40-d287-498e-b0da-d78e91a0edec" name="Message Types" />
+          </childLayers>
+        </layer>
+        <layer Id="4be7ddd8-696b-401e-b229-4c8749916cb1" name="Hosting Layer">
+          <childLayers>
+            <layer Id="ac9b6a4e-f381-4606-a311-9d770b5989a3" name="Service Interface" />
+          </childLayers>
+        </layer>
+      </childLayers>
+    </layer>
+    <layer Id="7a655e39-b0a0-4061-a13c-90cb71ce6f31" name="Client">
+      <childLayers>
+        <layer Id="ba785de4-0bf2-48ab-8298-01e229351597" name=" Browser">
+          <childLayers>
+            <layer Id="cb2f5c93-3f9e-4a7e-be72-1411b5a13317" name="Rendering" />
+            <layer Id="466e1be0-544a-41b6-9d31-601c4a0155d1" name="JavaScript Libraries">
+              <childLayers>
+                <layer Id="04279a19-c6b8-409d-80c0-8791594397a8" name="Validation libraries" />
+                <layer Id="48833eee-a4e4-440b-aa18-096fd47171ce" name="Control library / Extenders" />
+                <layer Id="a50e620a-3643-42e3-ae4b-1a00c0c6f934" name="Service communicator" />
+              </childLayers>
+            </layer>
+          </childLayers>
+        </layer>
+      </childLayers>
+    </layer>
+  </layers>
+</layerModel>
