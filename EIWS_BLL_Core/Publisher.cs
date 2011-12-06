@@ -106,9 +106,9 @@ namespace Epi.Web.BLL
         {
             System.Text.StringBuilder URL = new System.Text.StringBuilder();
             URL.Append(System.Configuration.ConfigurationManager.AppSettings["URL"]);
-            URL.Append("/");
-            URL.Append(pRequestMessage.SurveyNumber.ToString());
-            URL.Append("/");
+           // URL.Append("/");
+            //URL.Append(pRequestMessage.SurveyNumber.ToString());
+            //URL.Append("/");
             URL.Append(SurveyId.ToString());
             return URL.ToString();
         }
