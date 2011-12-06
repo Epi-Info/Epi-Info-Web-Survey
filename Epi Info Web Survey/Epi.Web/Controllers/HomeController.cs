@@ -24,6 +24,11 @@ namespace Epi.Web.Controllers
             _iSurveyInfoRepository = iSurveyInfoRepository;
         }
 
+        [HttpGet]
+        public ActionResult Index()
+        {
+            return View("Index");
+        }
         /// <summary>
         /// Accept SurveyId as parameter, 
         /// Get the SurveyInfoDTO by GetSurveyInfoById call and convert it to a SurveyInfoModel object
