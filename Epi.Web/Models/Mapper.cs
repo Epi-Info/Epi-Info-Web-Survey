@@ -29,7 +29,8 @@ namespace Epi.Web.Models
                 DepartmentName = SurveyInfoDTO.DepartmentName,
                 IntroductionText = SurveyInfoDTO.IntroductionText,
                 XML = SurveyInfoDTO.XML,
-                IsSuccess = SurveyInfoDTO.IsSuccess
+                IsSuccess = SurveyInfoDTO.IsSuccess,
+                ClosingDate = SurveyInfoDTO.ClosingDate
             };
         }
 
@@ -50,7 +51,8 @@ namespace Epi.Web.Models
                 DepartmentName = SurveyInfoModel.DepartmentName,
                 IntroductionText = SurveyInfoModel.IntroductionText,
                 XML = SurveyInfoModel.XML,
-                IsSuccess = SurveyInfoModel.IsSuccess
+                IsSuccess = SurveyInfoModel.IsSuccess,
+                ClosingDate = SurveyInfoModel.ClosingDate
             };
         }
 
