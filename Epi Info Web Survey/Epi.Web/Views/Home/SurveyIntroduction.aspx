@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/EpiSurvey.Master"
+﻿<%@ Page Title="Begin Survey" Language="C#" MasterPageFile="~/Views/Shared/EpiSurvey.Master"
     Inherits="System.Web.Mvc.ViewPage<Epi.Web.Models.SurveyInfoModel>" %>
 
 
