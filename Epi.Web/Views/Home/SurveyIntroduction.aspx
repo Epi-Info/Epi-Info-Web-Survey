@@ -54,7 +54,7 @@
         <div>
         </div>
         <div id="attention">
-            <img src="../Content/images/sign_warning.png" style="vertical-align: middle; padding-right: 10px;">
+            <img src="../Content/images/sign_warning.png" alt="" style="vertical-align: middle; padding-right: 10px;">
             This survey is currently closed. Please contact the author of this survey for further
             assistance.
         </div>
