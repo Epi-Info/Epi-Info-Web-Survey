@@ -16,6 +16,10 @@ namespace MvcDynamicForms.Fields
         protected double _top;
         protected double _left;
         protected string _cssClass;
+        protected string _fontfamily;
+        protected double _fontSize;
+        protected string _fontstyle;
+
 
         internal Form Form
         {
@@ -70,5 +74,12 @@ namespace MvcDynamicForms.Fields
         public double Top { get { return this._top; } set { this._top = value; } }
         public double Left { get { return this._left; } set { this._left = value; } }
         public string CssClass { get { return this._cssClass; } set { this._cssClass = value; } }
+        //_font
+        public string fontfamily { get { return this._fontfamily; } set { this._fontfamily = value; } }
+        public double fontSize { get { return this._fontSize; } set { this._fontSize = value; } }
+        public string fontstyle { get { return this._fontstyle; } set { this._fontstyle = value; } }
+
+         
+        //
     }
 }

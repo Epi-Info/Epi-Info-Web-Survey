@@ -38,8 +38,20 @@ namespace MvcDynamicForms.Demo.Models
                 {
                     switch (_FieldTypeID.Attribute("FieldTypeId").Value)
                     {
-                        case "1"://Text
-
+                        case "1"://TextBox
+                            var name = new TextBox
+                            {
+                                Title = "Name",
+                                Prompt = "Enter your full name:",
+                                DisplayOrder = 20,
+                                Required = true,
+                                RequiredMessage = "Your full name is required",
+                                Key = "1233",
+                                //,
+                                 Top = Height * double.Parse(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value),
+                                Left = Width * double.Parse(_FieldTypeID.Attribute("ControlLeftPositionPercentage").Value)
+                            };
+                            form.AddFields(name);
                             break;
 
                         case "2"://Label/Title
@@ -52,7 +64,10 @@ namespace MvcDynamicForms.Demo.Models
                                 Html = _FieldTypeID.Attribute("Name").Value,
                                 Top = Height * double.Parse(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value),
                                 Left = Width * double.Parse(_FieldTypeID.Attribute("ControlLeftPositionPercentage").Value),
-                                CssClass = "Epi.Label"
+                                CssClass = "EpiLabel",
+                                fontSize = double.Parse(_FieldTypeID.Attribute("ControlFontSize").Value),
+                                fontfamily = _FieldTypeID.Attribute("ControlFontFamily").Value,
+                                fontstyle = _FieldTypeID.Attribute("ControlFontStyle").Value
                             };
                             form.AddFields(Label);
                             break;
