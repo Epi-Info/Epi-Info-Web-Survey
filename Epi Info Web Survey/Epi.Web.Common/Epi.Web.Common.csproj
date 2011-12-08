@@ -48,10 +48,27 @@
     <Compile Include="BusinessObject\SurveyInfoBO.cs" />
     <Compile Include="BusinessObject\SurveyRequestBO.cs" />
     <Compile Include="BusinessObject\SurveyRequestResultBO.cs" />
+    <Compile Include="Criteria\Criteria.cs" />
+    <Compile Include="Criteria\SurveyInfoCriteria.cs" />
+    <Compile Include="Message\Base\AcknowledgeType.cs" />
+    <Compile Include="Message\Base\PersistType.cs" />
+    <Compile Include="Message\Base\RequestBase.cs" />
+    <Compile Include="Message\Base\ResponseBase.cs" />
+    <Compile Include="Message\LoginRequest.cs" />
+    <Compile Include="Message\LoginResponse.cs" />
+    <Compile Include="Message\LogoutRequest.cs" />
+    <Compile Include="Message\LogoutResponse.cs" />
+    <Compile Include="Message\SurveyInfoRequest.cs" />
+    <Compile Include="Message\SurveyInfoResponse.cs" />
     <Compile Include="Message\SurveyRequest.cs" />
     <Compile Include="Message\SurveyRequestResponse.cs" />
     <Compile Include="DTO\SurveyInfoDTO.cs" />
+    <Compile Include="Message\TokenRequest.cs" />
+    <Compile Include="Message\TokenResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ObjectMapper\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
