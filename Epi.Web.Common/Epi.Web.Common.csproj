@@ -65,11 +65,10 @@
     <Compile Include="DTO\SurveyInfoDTO.cs" />
     <Compile Include="Message\TokenRequest.cs" />
     <Compile Include="Message\TokenResponse.cs" />
+    <Compile Include="ObjectMapping\Mapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ObjectMapper\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

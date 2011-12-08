@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace Epi.Web.WCF.SurveyService.Criteria
+namespace Epi.Web.Common.Criteria
 {
     /// <summary>
     /// Holds criteria for SurveyInfo queries.
