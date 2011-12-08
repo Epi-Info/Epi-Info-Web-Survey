@@ -1,6 +1,6 @@
 using System.Runtime.Serialization;
 
-namespace Epi.Web.WCF.SurveyService.MessageBase
+namespace Epi.Web.Common.MessageBase
 {
     /// <summary>
     /// Base class for all client request messages of the web service. It standardizes 
