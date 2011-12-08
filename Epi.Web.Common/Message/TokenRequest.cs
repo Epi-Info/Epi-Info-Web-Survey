@@ -1,7 +1,7 @@
 ﻿using System.Runtime.Serialization;
-using Epi.Web.WCF.SurveyService.MessageBase;
+using Epi.Web.Common.MessageBase;
 
-namespace Epi.Web.WCF.SurveyService.Messages
+namespace Epi.Web.Common.Messages
 {
     /// <summary>
     /// Respresents a security token request message from client to web service.

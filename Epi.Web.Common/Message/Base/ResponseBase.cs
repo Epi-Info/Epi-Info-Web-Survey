@@ -2,7 +2,7 @@ using System;
 using System.Reflection;
 using System.Runtime.Serialization;
 
-namespace Epi.Web.WCF.SurveyService.MessageBase
+namespace Epi.Web.Common.MessageBase
 {
     /// <summary>
     /// Base class for all response messages to clients of the web service. It standardizes 
