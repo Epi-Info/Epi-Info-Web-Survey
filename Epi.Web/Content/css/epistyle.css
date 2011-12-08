@@ -309,3 +309,15 @@ button.submits
  border-radius: 10px;
  behavior:url(PIE.htc);
  }
+ /*Form Styles*/
+ 
+div.EpiLabel  {
+	/*position:absolute;*/
+	color: #000;   
+	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;  
+	font-size: 10pt;  
+	font-style: normal;  
+	font-weight: normal; 
+	text-decoration: none;  
+	text-transform: none;  
+}
