@@ -19,7 +19,6 @@ namespace MvcDynamicForms.Fields
         protected string _fontfamily;
         protected double _fontSize;
         protected string _fontstyle;
-
         protected double _Width;
         protected double _Height;
 
