@@ -42,11 +42,11 @@ namespace MvcDynamicForms.Demo.Models
                             var name = new TextBox
                             {
                                 Title = "Name",
-                                Prompt = "Enter your full name:",
+                                Prompt = _FieldTypeID.Attribute("PromptText").Value,
                                 DisplayOrder = 20,
                                 Required = true,
                                 RequiredMessage = "Your full name is required",
-                                Key = _FieldTypeID.Attribute("ControlTopPositionPercentage").Value,
+                                Key = _FieldTypeID.Attribute("Name").Value,
                                 //,
                                  Top = _Height * double.Parse(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value),
                                 Left = _Width * double.Parse(_FieldTypeID.Attribute("ControlLeftPositionPercentage").Value)
