@@ -1,7 +1,7 @@
 ﻿using System.Runtime.Serialization;
 using Epi.Web.Common.MessageBase;
 
-namespace Epi.Web.Common.Messages
+namespace Epi.Web.Common.Message
 {
     /// <summary>
     /// Respresents a security token request message from client to web service.

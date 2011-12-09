@@ -3,7 +3,7 @@ using Epi.Web.Common.MessageBase;
 using Epi.Web.Common.Criteria;
 using Epi.Web.Common.DTO;
 
-namespace Epi.Web.WCF.SurveyService.Messages
+namespace Epi.Web.Common.Message
 {
     /// <summary>
     /// Represents a SurveyInfo request message from client.
