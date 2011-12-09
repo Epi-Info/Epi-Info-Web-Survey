@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Epi.Web.Common.BusinessObject;
+using Epi.Web.Common.Criteria;
 
 namespace Epi.Web.BLL
 {
@@ -22,5 +23,6 @@ namespace Epi.Web.BLL
             SurveyInfoBO result = this.SurveyInfoDao.GetSurveyInfo(pId);
             return result;
         }
+
     }
 }

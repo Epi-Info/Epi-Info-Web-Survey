@@ -11,61 +11,69 @@ namespace Epi.Web.Common.ObjectMapping
     /// </summary>
     public static class Mapper
     {
+
         /// <summary>
         /// Maps SurveyMetaData entity to SurveyInfoBO business object.
         /// </summary>
         /// <param name="entity">A SurveyMetaData entity to be transformed.</param>
         /// <returns>A SurveyInfoBO business object.</returns>
-        internal static  SurveyRequestBO ToBusinessObject(SurveyRequest entity)
+        public static SurveyInfoBO ToBusinessObject(SurveyInfoDTO pDTO)
         {
-            return new SurveyRequestBO
+            return new SurveyInfoBO
             {
-                SurveyName = entity.SurveyName,
-                SurveyNumber = entity.SurveyNumber,
-                TemplateXML = entity.TemplateXML,
-                IntroductionText = entity.IntroductionText,
-                OrganizationName = entity.OrganizationName,
-                DepartmentName = entity.DepartmentName
+                SurveyId = pDTO.SurveyId,
+                SurveyName = pDTO.SurveyName,
+                SurveyNumber = pDTO.SurveyNumber,
+                XML = pDTO.XML,
+                IntroductionText = pDTO.IntroductionText,
+                OrganizationName = pDTO.OrganizationName,
+                DepartmentName = pDTO.DepartmentName,
+                ClosingDate = pDTO.ClosingDate,
+                SurveyType = pDTO.SurveyType
+
             };
         }
 
         /// <summary>
-        /// Maps SurveyInfoBO business object to SurveyMetaData entity.
+        /// Maps SurveyInfoBO business object to SurveyInfoDTO entity.
         /// </summary>
         /// <param name="SurveyInfo">A SurveyInfoBO business object.</param>
-        /// <returns>A SurveyMetaData entity.</returns>
-        internal static SurveyRequestResponse BusinessObjectToDataTransfer(SurveyRequestResultBO entity)
-        {
-            return new SurveyRequestResponse
-            {
-                IsPulished = entity.IsPulished,
-                StatusText = entity.StatusText,
-                URL = entity.URL
-
-            };
-        }
-
-
-        /// <summary>
-        /// Maps SurveyInfoBO business object to SurveyMetaData entity.
-        /// </summary>
-        /// <param name="SurveyInfo">A SurveyInfoBO business object.</param>
-        /// <returns>A SurveyMetaData entity.</returns>
-        internal static SurveyInfoDTO ToDataTransferObject(SurveyInfoBO entity)
+        /// <returns>A SurveyInfoDTO.</returns>
+        public static SurveyInfoDTO ToDataTransferObject(SurveyInfoBO pBO)
         {
             return new SurveyInfoDTO
             {
-                SurveyId = entity.SurveyId,
-                SurveyName = entity.SurveyName,
-                SurveyNumber = entity.SurveyNumber,
-                XML = entity.XML,
-                IntroductionText = entity.IntroductionText,
-                OrganizationName = entity.OrganizationName,
-                DepartmentName = entity.DepartmentName,
-                ClosingDate = entity.ClosingDate
+                SurveyId = pBO.SurveyId,
+                SurveyName = pBO.SurveyName,
+                SurveyNumber = pBO.SurveyNumber,
+                XML = pBO.XML,
+                IntroductionText = pBO.IntroductionText,
+                OrganizationName = pBO.OrganizationName,
+                DepartmentName = pBO.DepartmentName,
+                ClosingDate = pBO.ClosingDate
 
             };
         }
+
+
+        /// <summary>
+        /// Maps SurveyRequestResultBO business object to PublishInfoDTO.
+        /// </summary>
+        /// <param name="SurveyInfo">A SurveyRequestResultBO business object.</param>
+        /// <returns>A PublishInfoDTO.</returns>
+        public static PublishInfoDTO ToDataTransferObject(SurveyRequestResultBO pBO)
+        {
+            return new PublishInfoDTO
+            {
+                IsPulished = pBO.IsPulished,
+                StatusText = pBO.StatusText,
+                URL = pBO.URL
+
+            };
+        }
+
+
+
 
         /// <summary>
         /// Transforms list of SurveyInfoBO BOs list of category DTOs.

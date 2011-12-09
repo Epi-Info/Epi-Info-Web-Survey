@@ -6,12 +6,13 @@ using System.Runtime.Serialization;
 
 namespace Epi.Web.Common.DTO
 {
-    [DataContract]
-    public class SurveyInfoDTO
+    [DataContract(Namespace = "http://www.yourcompany.com/types/")]
+    public class SurveyInfoDTO 
     {
         private string _SurveyId;
         private string _SurveyNumber;
         private string _SurveyName;
+        private int _SurveyType;
         private string _IntroductionText;
         private string _DepartmentName;
         private string _OrganizationName;
@@ -38,6 +39,13 @@ namespace Epi.Web.Common.DTO
         {
             get { return _SurveyName; }
             set { _SurveyName = value; }
+        }
+
+        [DataMember]
+        public int SurveyType
+        {
+            get { return _SurveyType; }
+            set { _SurveyType = value; }
         }
 
         [DataMember]
