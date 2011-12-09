@@ -39,7 +39,7 @@
 
 	<div id="content">
 		<%--Lable--%>
-        <ul>
+       <%-- <ul>--%>
            <%-- <li>SurveyId: <%: (ViewData.Model).SurveyId %></li>
             <li>SurveyName: <%: (ViewData.Model).SurveyName %></li>
             <li>SurveyNumber: <%: (ViewData.Model).SurveyNumber%></li>
@@ -48,19 +48,19 @@
             <li>IntroductionText: <%: (ViewData.Model).IntroductionText %></li>
             <li>XML: <%: (ViewData.Model).XML%></li>
             <li>IsSuccess: <%: (ViewData.Model).IsSuccess%></li>--%>
-        </ul>
-       <%-- <div class="MvcDynamicForm" style="width:893px; height:1200px;display:block; border:1px solid white; position:relative;">--%>
+       <%-- </ul>--%>
+       <%-- <div class="MvcDynamicForm" style="width:893px; height:600px;">--%>
 
         <%Html.BeginForm(); %>
         <%=Model.RenderHtml(true) %>
        <%-- </div>--%>
-   
+   	</div>
 	        <div id="nav">
 		         <div id="prev" align="left">&nbsp;</div>
  		         <div id="save" align="center"><button class="save" type="submit"><img class="button" src="/Content/images/save.png" alt=""> Save & Close</button></div>
  		         <div id="next" align="right"><button class="next" type="submit" onclick="window.location.href='survey2.html'">Continue <img class="button" src="/Content/images/arrow_right.png" alt=""></button></div>
 	        </div>
-	</div>
+
   
     
     

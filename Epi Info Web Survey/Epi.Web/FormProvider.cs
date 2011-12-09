@@ -46,7 +46,7 @@ namespace MvcDynamicForms.Demo.Models
                                 DisplayOrder = 20,
                                 Required = true,
                                 RequiredMessage = "Your full name is required",
-                                Key = "1233",
+                                Key = _FieldTypeID.Attribute("ControlTopPositionPercentage").Value,
                                 //,
                                  Top = _Height * double.Parse(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value),
                                 Left = _Width * double.Parse(_FieldTypeID.Attribute("ControlLeftPositionPercentage").Value)
@@ -64,7 +64,7 @@ namespace MvcDynamicForms.Demo.Models
                                 Html = _FieldTypeID.Attribute("PromptText").Value,
                                 Top = _Height * double.Parse(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value),
                                 Left = _Width * double.Parse(_FieldTypeID.Attribute("ControlLeftPositionPercentage").Value),
-                                CssClass = GetCssClass( _FieldTypeID.Attribute("ControlFontStyle").Value.ToString()),// "EpiLabel epiunderline",
+                                CssClass =   "EpiLabel",
                                 fontSize = double.Parse(_FieldTypeID.Attribute("ControlFontSize").Value),
                                 fontfamily = _FieldTypeID.Attribute("ControlFontFamily").Value,
                                 fontstyle = _FieldTypeID.Attribute("ControlFontStyle").Value,
@@ -205,48 +205,6 @@ namespace MvcDynamicForms.Demo.Models
                 return  800;
             }
         }
-        public static string GetCssClass(string ControlFontStyle)
-        {
-
-
-            StringBuilder CssStyles = new StringBuilder();
-
-            char[] delimiterChars = { ' ', ',' };
-            string[] Styles = ControlFontStyle.Split(delimiterChars);
-
-            CssStyles.Append("EpiLabel");
-
-            foreach (string Style in Styles)
-            {
-                CssStyles.Append(" ");
-                switch (Style.ToString())
-                {
-                    case "Bold":
-                        CssStyles.Append("epibold");
-                        break;
-                    case "Italic":
-                        CssStyles.Append("epiitalic");
-                     
-                        break;
-                    case "Underline":
-                        CssStyles.Append("epiunderline");
-                        
-                        break;
-                    case "Strikeout":
-                        CssStyles.Append("epistrike");
-                        
-                        break;
-                    case "Regular":
-                        CssStyles.Append("Regular");
-                         
-                        break;
-                }
- 
-            }
-
-
-            return CssStyles.ToString();
-
-        }
+       
     }
 }
