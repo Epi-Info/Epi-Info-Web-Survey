@@ -65,8 +65,8 @@ body
  
 .MvcDynamicForm
  {
-  width:893px; 
-  height:1200px;
+  /*width:800px; 
+  height:1200px;*/
   display:block; 
   border:1px solid white; 
   position:relative;  
@@ -148,14 +148,17 @@ body
  }
  
 #nav
- {
- display:block;
- width: 92%;
- border-top: 1px solid #244640;
- padding: .5em;
- position:absolute;
- bottom:80px;
- }
+{
+width: 92%;
+text-align: center;
+border-top: 1px solid #244640;
+margin: 0 20px;
+padding: 1em;
+position:absolute;
+bottom:80px;
+/*clear:both;*/
+}
+
 
 #footer
  {
@@ -317,19 +320,4 @@ div.EpiLabel  {
 	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;  
 	font-size: 10pt;  
 }
-.epibold {
-font-weight:bold;
-}
-
-.epiitalic {
-font-style:italic;
-}
-
-.epiunderline {
-text-decoration:underline;
-}
-
-.epistrike {
-text-decoration: line-through;
-}
-
+ 
