@@ -93,7 +93,7 @@ namespace MvcDynamicForms.Fields
 
             }
              CssStyles.Append(";font:");//1
-         if (FontStyle.ToString() != "")
+           if (!string.IsNullOrEmpty(FontStyle.ToString())) 
             {
                
                 CssStyles.Append(FontStyle);//2
@@ -120,8 +120,8 @@ namespace MvcDynamicForms.Fields
                 }
 
             }
-
-            if (TextDecoration.ToString() != "")
+            if (!string.IsNullOrEmpty(TextDecoration.ToString()))
+            
             {
                 CssStyles.Append(";text-decoration:");
             }
