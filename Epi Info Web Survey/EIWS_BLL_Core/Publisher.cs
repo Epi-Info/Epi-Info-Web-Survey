@@ -32,7 +32,7 @@ namespace Epi.Web.BLL
         {
             
         }
-        public SurveyRequestResultBO PublishSurvey(SurveyRequestBO pRequestMessage)
+        public SurveyRequestResultBO PublishSurvey(SurveyInfoBO  pRequestMessage)
         {
 
             SurveyRequestResultBO result = new SurveyRequestResultBO();
@@ -59,7 +59,7 @@ namespace Epi.Web.BLL
 
                         BO.SurveyNumber = pRequestMessage.SurveyNumber;
 
-                        BO.XML = pRequestMessage.TemplateXML;
+                        BO.XML = pRequestMessage.XML;
 
                         BO.SurveyName = pRequestMessage.SurveyName;
 
@@ -72,6 +72,7 @@ namespace Epi.Web.BLL
                         }
                         catch (Exception ex)
                         {
+                            System.Console.Write(ex.ToString());
                             //Entities.ObjectStateManager.GetObjectStateEntry(SurveyMetaData).Delete();
 
                         }
@@ -102,7 +103,7 @@ namespace Epi.Web.BLL
         #endregion
 
         #region "Private members"
-        private string GetURL(SurveyRequestBO pRequestMessage, Guid SurveyId)
+        private string GetURL(SurveyInfoBO  pRequestMessage, Guid SurveyId)
         {
             System.Text.StringBuilder URL = new System.Text.StringBuilder();
             URL.Append(System.Configuration.ConfigurationManager.AppSettings["URL"]);

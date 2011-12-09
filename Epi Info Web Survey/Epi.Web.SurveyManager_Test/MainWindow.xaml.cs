@@ -29,35 +29,43 @@ namespace Epi.Web.SurveyManager_Test
         {
             Epi.Web.WCF.SurveyService.Service client = new Epi.Web.WCF.SurveyService.Service();
 
-            Epi.Web.Common.Message.SurveyRequest Request = new Epi.Web.Common.Message.SurveyRequest();
+            Epi.Web.Common.Message.PublishRequest Request = new Epi.Web.Common.Message.PublishRequest();
             if (this.ClosingDateCalendar.SelectedDate == null)
             {
-                Request.ClosingDate = (DateTime)this.ClosingDateCalendar.DisplayDate;
+                TimeSpan t = new TimeSpan(10, 0,0,0);
+                Request.SurveyInfo.ClosingDate = DateTime.Now + t;
             }
             else
             {
-                Request.ClosingDate = (DateTime)this.ClosingDateCalendar.SelectedDate;
+                Request.SurveyInfo.ClosingDate = (DateTime)this.ClosingDateCalendar.SelectedDate;
             }
 
-            Request.DepartmentName = this.DepartmentTextBox.Text;
-            Request.IntroductionText = new TextRange(this.IntroductionTextBox.Document.ContentStart, this.IntroductionTextBox.Document.ContentEnd).Text; 
-            Request.IsSingleResponse = (bool)this.IsSingleResponseCheckBox.IsChecked;
+            Request.SurveyInfo.DepartmentName = this.DepartmentTextBox.Text;
+            Request.SurveyInfo.IntroductionText = new TextRange(this.IntroductionTextBox.Document.ContentStart, this.IntroductionTextBox.Document.ContentEnd).Text;
+            if((bool)this.IsSingleResponseCheckBox.IsChecked)
+            {
+                Request.SurveyInfo.SurveyType = 1;
+            }
+            else
+            {
+                Request.SurveyInfo.SurveyType = 0;
+            }
 
-            Request.OrganizationName = this.OrganizationTextBox.Text;
-            Request.SurveyName = this.SurveyNameTextBox.Text;
-            Request.SurveyNumber = this.SurveyNumberTextBox.Text;
-            Request.TemplateXML = new TextRange(this.TemplateXMLTextBox.Document.ContentStart, this.TemplateXMLTextBox.Document.ContentEnd).Text; 
+            Request.SurveyInfo.OrganizationName = this.OrganizationTextBox.Text;
+            Request.SurveyInfo.SurveyName = this.SurveyNameTextBox.Text;
+            Request.SurveyInfo.SurveyNumber = this.SurveyNumberTextBox.Text;
+            Request.SurveyInfo.XML = new TextRange(this.TemplateXMLTextBox.Document.ContentStart, this.TemplateXMLTextBox.Document.ContentEnd).Text; 
 
             try
             {
-                Epi.Web.Common.DTO.SurveyRequestResponse Result = client.PublishSurvey(Request);
+                Epi.Web.Common.Message.PublishResponse Result = client.PublishSurvey(Request);
 
                 ServiceResponseTextBox.AppendText("is published: ");
-                ServiceResponseTextBox.AppendText(Result.IsPulished.ToString());
+                ServiceResponseTextBox.AppendText(Result.PublishInfo.IsPulished.ToString());
                 ServiceResponseTextBox.AppendText("\nURL: ");
-                ServiceResponseTextBox.AppendText(Result.URL);
+                ServiceResponseTextBox.AppendText(Result.PublishInfo.URL);
                 ServiceResponseTextBox.AppendText("\nStatus Text: ");
-                ServiceResponseTextBox.AppendText(Result.StatusText);
+                ServiceResponseTextBox.AppendText(Result.PublishInfo.StatusText);
             }
             catch(Exception ex)
             {
