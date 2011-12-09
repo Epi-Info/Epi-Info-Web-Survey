@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 using Epi.Web.Common.MessageBase;
 using Epi.Web.Common.DTO;
 
-namespace Epi.Web.WCF.SurveyService.Messages
+namespace Epi.Web.Common.Message
 {
     /// <summary>
     /// Represents a SurveyInfo response message to client
