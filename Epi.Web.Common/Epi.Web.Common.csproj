@@ -46,9 +46,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BusinessObject\BusinessObject.cs" />
     <Compile Include="BusinessObject\SurveyInfoBO.cs" />
     <Compile Include="BusinessObject\SurveyRequestBO.cs" />
     <Compile Include="BusinessObject\SurveyRequestResultBO.cs" />
+    <Compile Include="BusinessRule\BusinessRule.cs" />
+    <Compile Include="BusinessRule\ValidateCompare.cs" />
+    <Compile Include="BusinessRule\ValidateCreditcard.cs" />
+    <Compile Include="BusinessRule\ValidateEmail.cs" />
+    <Compile Include="BusinessRule\ValidateId.cs" />
+    <Compile Include="BusinessRule\ValidateIPAddress.cs" />
+    <Compile Include="BusinessRule\ValidateLength.cs" />
+    <Compile Include="BusinessRule\ValidateRange.cs" />
+    <Compile Include="BusinessRule\ValidateRegex.cs" />
+    <Compile Include="BusinessRule\ValidateRequired.cs" />
+    <Compile Include="BusinessRule\ValidationDataType.cs" />
+    <Compile Include="BusinessRule\ValidationOperator.cs" />
     <Compile Include="Criteria\Criteria.cs" />
     <Compile Include="Criteria\SurveyInfoCriteria.cs" />
     <Compile Include="Message\Base\AcknowledgeType.cs" />
@@ -59,10 +72,12 @@
     <Compile Include="Message\LoginResponse.cs" />
     <Compile Include="Message\LogoutRequest.cs" />
     <Compile Include="Message\LogoutResponse.cs" />
+    <Compile Include="Message\PublishRequest.cs" />
+    <Compile Include="Message\PublishResponse.cs" />
     <Compile Include="Message\SurveyInfoRequest.cs" />
     <Compile Include="Message\SurveyInfoResponse.cs" />
     <Compile Include="Message\SurveyRequest.cs" />
-    <Compile Include="Message\SurveyRequestResponse.cs" />
+    <Compile Include="DTO\PublishInfoDTO.cs" />
     <Compile Include="DTO\SurveyInfoDTO.cs" />
     <Compile Include="Message\TokenRequest.cs" />
     <Compile Include="Message\TokenResponse.cs" />

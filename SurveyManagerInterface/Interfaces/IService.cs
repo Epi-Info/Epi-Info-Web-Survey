@@ -13,10 +13,10 @@ namespace Epi.Web.WCF.SurveyService
     public interface ISurveyManager 
     {
         [OperationContract]
-        SurveyRequestResponse PublishSurvey(SurveyRequest pRequestMessage);
+        PublishResponse PublishSurvey(PublishRequest pRequestMessage);
 
         [OperationContract]
-        SurveyInfoDTO GetSurveyInfoById(String pIid);
+        SurveyInfoResponse GetSurveyInfo(SurveyInfoRequest pRequest);
     }
 
 }

@@ -6,8 +6,8 @@ using System.Runtime.Serialization;
 
 namespace Epi.Web.Common.DTO
 {
-    [DataContract]
-    public class SurveyRequestResponse  
+    [DataContract(Namespace = "http://www.yourcompany.com/types/")]
+    public class PublishInfoDTO  
     {
         bool isPulished;
         string uRL;
