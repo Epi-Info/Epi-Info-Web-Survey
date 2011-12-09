@@ -100,14 +100,13 @@
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Properties\DataSources\Epi.Web.Common.Message.PublishResponse.datasource" />
+    <None Include="Properties\DataSources\Epi.Web.Common.Message.SurveyInfoResponse.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
-    <None Include="Service References\SurveyManagerService\Epi.Web.SurveyManager_Test.SurveyManagerService.cSurveyRequestResult.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
     <None Include="Service References\SurveyManagerService\Service.wsdl" />
     <None Include="Service References\SurveyManagerService\SurveyManagerService.xsd">
       <SubType>Designer</SubType>
@@ -116,6 +115,9 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\SurveyManagerService\SurveyManagerService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SurveyManagerService\SurveyManagerService3.xsd">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
