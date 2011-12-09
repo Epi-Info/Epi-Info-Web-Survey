@@ -20,6 +20,8 @@ namespace MvcDynamicForms.Fields
         protected double _fontSize;
         protected string _fontstyle;
 
+        protected double _Width;
+        protected double _Height;
 
         internal Form Form
         {
@@ -79,7 +81,9 @@ namespace MvcDynamicForms.Fields
         public double fontSize { get { return this._fontSize; } set { this._fontSize = value; } }
         public string fontstyle { get { return this._fontstyle; } set { this._fontstyle = value; } }
 
-         
+        public double Width { get { return this._Width; } set { this._Width = value; } }
+        public double Height { get { return this._Height; } set { this._Height = value; } }
+        
         //
     }
 }
