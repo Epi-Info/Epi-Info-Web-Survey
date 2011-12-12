@@ -73,6 +73,10 @@ namespace Epi.Web.WCF.SurveyService
         /// <returns>SurveyInfo response message.</returns>
         public SurveyInfoResponse SetSurveyInfo(SurveyInfoRequest request)
         {
+            Epi.Web.Interfaces.DataInterfaces.ISurveyInfoDao surveyInfoDao = new EF.EntitySurveyInfoDao();
+            Epi.Web.BLL.SurveyInfo Implementation = new Epi.Web.BLL.SurveyInfo(surveyInfoDao);
+
+
             var response = new SurveyInfoResponse(request.RequestId);
 
             // Validate client tag, access token, and user credentials
@@ -103,23 +107,29 @@ namespace Epi.Web.WCF.SurveyService
             {
                 if (request.Action == "Create")
                 {
-                    //_SurveyInfoDao.InsertSurveyInfo(SurveyInfo);
+                    Implementation.InsertSurveyInfo(SurveyInfo);
                     response.SurveyInfo = Mapper.ToDataTransferObject(SurveyInfo);
                 }
                 else if (request.Action == "Update")
                 {
-                    //_SurveyInfoDao.UpdateSurveyInfo(SurveyInfo);
+                    Implementation.UpdateSurveyInfo(SurveyInfo);
                     response.SurveyInfo = Mapper.ToDataTransferObject(SurveyInfo);
                 }
                 else if (request.Action == "Delete")
                 {
                     var criteria = request.Criteria as SurveyInfoCriteria;
-                    //var cust = _SurveyInfoDao.GetSurveyInfo(criteria.SurveyInfoId);
+                    var survey = Implementation.GetSurveyInfoById(SurveyInfo.SurveyId);
 
                     try
                     {
-                        //_SurveyInfoDao.DeleteSurveyInfo(cust);
-                        response.RowsAffected = 1;
+                        if (Implementation.DeleteSurveyInfo(survey))
+                        {
+                            response.RowsAffected = 1;
+                        }
+                        else
+                        {
+                            response.RowsAffected = 0;
+                        }
                     }
                     catch
                     {

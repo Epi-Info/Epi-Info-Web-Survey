@@ -24,5 +24,31 @@ namespace Epi.Web.BLL
             return result;
         }
 
+        public SurveyInfoBO InsertSurveyInfo(SurveyInfoBO pValue)
+        {
+            SurveyInfoBO result = pValue;
+            this.SurveyInfoDao.InsertSurveyInfo(pValue);
+            return result;
+        }
+
+
+
+        public SurveyInfoBO UpdateSurveyInfo(SurveyInfoBO pValue)
+        {
+            SurveyInfoBO result = pValue;
+            this.SurveyInfoDao.UpdateSurveyInfo(pValue);
+            return result;
+        }
+
+        public bool DeleteSurveyInfo(SurveyInfoBO pValue)
+        {
+            bool result = false;
+
+            this.SurveyInfoDao.DeleteSurveyInfo(pValue);
+            result = true;
+
+            return result;
+        }
+
     }
 }
