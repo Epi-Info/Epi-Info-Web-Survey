@@ -11,6 +11,11 @@ namespace Epi.Web.Common.Message
     [DataContract(Namespace = "http://www.yourcompany.com/types/")]
     public class SurveyInfoRequest : RequestBase
     {
+        public SurveyInfoRequest()
+        {
+            this.Criteria = new SurveyInfoCriteria();
+        }
+
         /// <summary>
         /// Selection criteria and sort order
         /// </summary>
