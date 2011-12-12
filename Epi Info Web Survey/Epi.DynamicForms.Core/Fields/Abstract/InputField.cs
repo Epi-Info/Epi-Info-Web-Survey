@@ -12,6 +12,10 @@ namespace MvcDynamicForms.Fields
     [Serializable]
     public abstract class InputField : Field
     {
+        protected double _Prompttop;
+        protected double _Promptleft;
+        protected double _PromptWidth;
+        protected double _ControlWidth;
         protected string _key = Guid.NewGuid().ToString();
         protected string _requiredMessage = "Required";
         protected string _promptClass = "MvcDynamicFieldPrompt";
@@ -129,7 +133,15 @@ namespace MvcDynamicForms.Fields
         {
             Error = null;
         }
+        //protected double _Prompttop;
+        // protected double _Promptleft;
+        //protected double _PromptWidth;
+        //protected double _ControlWidth;
+        public double PromptTop { get { return this._Prompttop; } set { this._Prompttop = value; } }
+        public double PromptLeft { get { return this._Promptleft; } set { this._Promptleft = value; } }
 
+        public double PromptWidth { get { return this._PromptWidth; } set { this._PromptWidth = value; } }
+        public double ControlWidth { get { return this._ControlWidth; } set { this._ControlWidth = value; } }
 
     }
 }
