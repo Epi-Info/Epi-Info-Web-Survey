@@ -134,7 +134,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="WSHttpBinding_ISurveyManager_GetSurveyInfoById_Input_policy">
+  <wsp:Policy wsu:Id="WSHttpBinding_ISurveyManager_GetSurveyInfo_Input_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
@@ -153,7 +153,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="WSHttpBinding_ISurveyManager_GetSurveyInfoById_output_policy">
+  <wsp:Policy wsu:Id="WSHttpBinding_ISurveyManager_GetSurveyInfo_output_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
@@ -176,8 +176,8 @@
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import schemaLocation="http://localhost:22587/Epi.Web.ServiceHost/SurveyManagerService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
       <xsd:import schemaLocation="http://localhost:22587/Epi.Web.ServiceHost/SurveyManagerService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-      <xsd:import schemaLocation="http://localhost:22587/Epi.Web.ServiceHost/SurveyManagerService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Epi.Web.Common.Message" />
-      <xsd:import schemaLocation="http://localhost:22587/Epi.Web.ServiceHost/SurveyManagerService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/Epi.Web.Common.DTO" />
+      <xsd:import schemaLocation="http://localhost:22587/Epi.Web.ServiceHost/SurveyManagerService.svc?xsd=xsd2" namespace="http://www.yourcompany.com/types/" />
+      <xsd:import schemaLocation="http://localhost:22587/Epi.Web.ServiceHost/SurveyManagerService.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="ISurveyManager_PublishSurvey_InputMessage">
@@ -186,20 +186,20 @@
   <wsdl:message name="ISurveyManager_PublishSurvey_OutputMessage">
     <wsdl:part name="parameters" element="tns:PublishSurveyResponse" />
   </wsdl:message>
-  <wsdl:message name="ISurveyManager_GetSurveyInfoById_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetSurveyInfoById" />
+  <wsdl:message name="ISurveyManager_GetSurveyInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSurveyInfo" />
   </wsdl:message>
-  <wsdl:message name="ISurveyManager_GetSurveyInfoById_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetSurveyInfoByIdResponse" />
+  <wsdl:message name="ISurveyManager_GetSurveyInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSurveyInfoResponse" />
   </wsdl:message>
   <wsdl:portType name="ISurveyManager">
     <wsdl:operation name="PublishSurvey">
       <wsdl:input wsaw:Action="http://tempuri.org/ISurveyManager/PublishSurvey" message="tns:ISurveyManager_PublishSurvey_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ISurveyManager/PublishSurveyResponse" message="tns:ISurveyManager_PublishSurvey_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="GetSurveyInfoById">
-      <wsdl:input wsaw:Action="http://tempuri.org/ISurveyManager/GetSurveyInfoById" message="tns:ISurveyManager_GetSurveyInfoById_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/ISurveyManager/GetSurveyInfoByIdResponse" message="tns:ISurveyManager_GetSurveyInfoById_OutputMessage" />
+    <wsdl:operation name="GetSurveyInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISurveyManager/GetSurveyInfo" message="tns:ISurveyManager_GetSurveyInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISurveyManager/GetSurveyInfoResponse" message="tns:ISurveyManager_GetSurveyInfo_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="WSHttpBinding_ISurveyManager" type="tns:ISurveyManager">
@@ -216,14 +216,14 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetSurveyInfoById">
-      <soap12:operation soapAction="http://tempuri.org/ISurveyManager/GetSurveyInfoById" style="document" />
+    <wsdl:operation name="GetSurveyInfo">
+      <soap12:operation soapAction="http://tempuri.org/ISurveyManager/GetSurveyInfo" style="document" />
       <wsdl:input>
-        <wsp:PolicyReference URI="#WSHttpBinding_ISurveyManager_GetSurveyInfoById_Input_policy" />
+        <wsp:PolicyReference URI="#WSHttpBinding_ISurveyManager_GetSurveyInfo_Input_policy" />
         <soap12:body use="literal" />
       </wsdl:input>
       <wsdl:output>
-        <wsp:PolicyReference URI="#WSHttpBinding_ISurveyManager_GetSurveyInfoById_output_policy" />
+        <wsp:PolicyReference URI="#WSHttpBinding_ISurveyManager_GetSurveyInfo_output_policy" />
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
@@ -234,7 +234,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>http://localhost:22587/Epi.Web.ServiceHost/SurveyManagerService.svc</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>ismailt01@ETIEXT.lan</Upn>
+          <Upn>hainesj01@ETIEXT.lan</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>

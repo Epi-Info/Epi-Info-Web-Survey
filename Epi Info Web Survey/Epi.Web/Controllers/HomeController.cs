@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Epi.Web.Models;
 using Epi.Web.Repositories.Core;
+using Epi.Web.Common.Message;
 
 namespace Epi.Web.Controllers
 {
@@ -43,7 +44,9 @@ namespace Epi.Web.Controllers
              if surveyInfodto.SurveyName== null then go to the exception page*/
             try
             {
-                var s = _iSurveyInfoRepository.GetSurveyInfoById(surveyid).ToSurveyInfoModel();
+                SurveyInfoRequest surveyInfoRequest = new SurveyInfoRequest();
+                surveyInfoRequest.Criteria.SurveyId = surveyid;
+                var s = Mapper.ToSurveyInfoModel(_iSurveyInfoRepository.GetSurveyInfo(surveyInfoRequest).SurveyInfo);
 
                 return View("SurveyIntroduction", s);
             }
@@ -65,7 +68,9 @@ namespace Epi.Web.Controllers
         [HttpPost]
         public ActionResult ListSurvey(Epi.Web.Models.SurveyInfoModel surveyModel)
         {
-            var surveyInfoDTO = _iSurveyInfoRepository.GetSurveyInfoById(surveyModel.SurveyId);
+            SurveyInfoRequest surveyInfoRequest = new SurveyInfoRequest();
+            surveyInfoRequest.Criteria.SurveyId = surveyModel.SurveyId;
+            var surveyInfoDTO = _iSurveyInfoRepository.GetSurveyInfo(surveyInfoRequest).SurveyInfo;
 
             var form = MvcDynamicForms.Demo.Models.FormProvider.GetForm(surveyInfoDTO, 1);// Requesting the first page of the survey.
             
