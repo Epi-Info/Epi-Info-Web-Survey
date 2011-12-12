@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Epi.Web.Common.Message;
 
 namespace Epi.Web.Repositories.Core
 {
@@ -11,6 +12,6 @@ namespace Epi.Web.Repositories.Core
     /// </summary>
     public interface ISurveyInfoRepository: IRepository<Epi.Web.Common.DTO.SurveyInfoDTO>
     {
-        Epi.Web.Common.DTO.SurveyInfoDTO GetSurveyInfoById(string pId);
+        SurveyInfoResponse GetSurveyInfo(SurveyInfoRequest pRequestId);
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using Epi.Web.Repositories.Core;
 using Epi.Web.ActionServiceClient;
+using Epi.Web.Common.Message;
 
 namespace Epi.Web.Repositories
 {
@@ -16,12 +17,12 @@ namespace Epi.Web.Repositories
         /// </summary>
         /// <param name="surveyid"></param>
         /// <returns></returns>
-        public Common.DTO.SurveyInfoDTO GetSurveyInfoById(string surveyid)
+        public SurveyInfoResponse GetSurveyInfo(SurveyInfoRequest pRequest)
         {
-            
-            Epi.Web.Common.DTO.SurveyInfoDTO surveyInfoDTO = Client.GetSurveyInfoById(surveyid);
-            
-            return surveyInfoDTO;
+
+            SurveyInfoResponse result = Client.GetSurveyInfo(pRequest);
+
+            return result;
             
         }
 
