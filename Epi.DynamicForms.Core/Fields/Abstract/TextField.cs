@@ -32,7 +32,8 @@ namespace MvcDynamicForms.Fields
                 _regexMessage = value;
             }
         }
-        internal string Value { get; set; }
+        internal string Value{ get; set; }
+        
 
         public override string Response
         {

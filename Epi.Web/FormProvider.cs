@@ -47,9 +47,15 @@ namespace MvcDynamicForms.Demo.Models
                                 Required = true,
                                 RequiredMessage = "Your full name is required",
                                 Key = _FieldTypeID.Attribute("Name").Value,
-                                //,
-                                 Top = _Height * double.Parse(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value),
-                                Left = _Width * double.Parse(_FieldTypeID.Attribute("ControlLeftPositionPercentage").Value)
+                                PromptTop = _Height * double.Parse(_FieldTypeID.Attribute("PromptTopPositionPercentage").Value),
+                                PromptLeft = _Width * double.Parse(_FieldTypeID.Attribute("PromptLeftPositionPercentage").Value),
+                                Top = _Height * double.Parse(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value),
+                                Left = _Width * double.Parse(_FieldTypeID.Attribute("ControlLeftPositionPercentage").Value),
+                                PromptWidth = _Width * double.Parse(_FieldTypeID.Attribute("ControlWidthPercentage").Value),
+                                ControlWidth = _Width * double.Parse(_FieldTypeID.Attribute("ControlWidthPercentage").Value),
+                                fontstyle = _FieldTypeID.Attribute("PromptFontStyle").Value,
+                                fontSize = double.Parse(_FieldTypeID.Attribute("PromptFontSize").Value),
+                                fontfamily = _FieldTypeID.Attribute("PromptFontFamily").Value
                             };
                             form.AddFields(name);
                             break;
