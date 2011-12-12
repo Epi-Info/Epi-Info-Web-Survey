@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using Epi.Web.Models;
 using Epi.Web.Repositories.Core;
 using Epi.Web.Common.Message;
+using Epi.Web.Common.Criteria;
 
 namespace Epi.Web.Controllers
 {
@@ -45,8 +46,11 @@ namespace Epi.Web.Controllers
             try
             {
                 SurveyInfoRequest surveyInfoRequest = new SurveyInfoRequest();
+                
+                
                 surveyInfoRequest.Criteria.SurveyId = surveyid;
-                var s = Mapper.ToSurveyInfoModel(_iSurveyInfoRepository.GetSurveyInfo(surveyInfoRequest).SurveyInfo);
+                SurveyInfoResponse surveyInfoResponse = _iSurveyInfoRepository.GetSurveyInfo(surveyInfoRequest);
+                var s = Mapper.ToSurveyInfoModel(surveyInfoResponse.SurveyInfo);
 
                 return View("SurveyIntroduction", s);
             }
