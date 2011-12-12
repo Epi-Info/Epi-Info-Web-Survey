@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://www.yourcompany.com/types/" elementFormDefault="qualified" targetNamespace="http://www.yourcompany.com/types/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="http://localhost:22587/Epi.Web.ServiceHost/SurveyManagerService.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-  <xs:complexType name="PublishRequest">
+  <xs:import schemaLocation="http://localhost:22587/Epi.Web.ServiceHost/SurveyDataService.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:complexType name="SurveyInfoRequest">
     <xs:complexContent mixed="false">
       <xs:extension base="tns:RequestBase">
         <xs:sequence>
+          <xs:element minOccurs="0" name="Criteria" nillable="true" type="tns:SurveyInfoCriteria" />
           <xs:element minOccurs="0" name="SurveyInfo" nillable="true" type="tns:SurveyInfoDTO" />
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-  <xs:element name="PublishRequest" nillable="true" type="tns:PublishRequest" />
+  <xs:element name="SurveyInfoRequest" nillable="true" type="tns:SurveyInfoRequest" />
   <xs:complexType name="RequestBase">
     <xs:sequence>
       <xs:element minOccurs="0" name="AccessToken" nillable="true" type="xs:string" />
@@ -22,6 +23,23 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="RequestBase" nillable="true" type="tns:RequestBase" />
+  <xs:complexType name="SurveyInfoCriteria">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Criteria">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="IncludeOrderStatistics" type="xs:boolean" />
+          <xs:element minOccurs="0" name="SurveyId" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="SurveyInfoCriteria" nillable="true" type="tns:SurveyInfoCriteria" />
+  <xs:complexType name="Criteria">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="SortExpression" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Criteria" nillable="true" type="tns:Criteria" />
   <xs:complexType name="SurveyInfoDTO">
     <xs:sequence>
       <xs:element minOccurs="0" name="ClosingDate" type="xs:dateTime" />
@@ -37,16 +55,17 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="SurveyInfoDTO" nillable="true" type="tns:SurveyInfoDTO" />
-  <xs:complexType name="PublishResponse">
+  <xs:complexType name="SurveyInfoResponse">
     <xs:complexContent mixed="false">
       <xs:extension base="tns:ResponseBase">
         <xs:sequence>
-          <xs:element minOccurs="0" name="PublishInfo" nillable="true" type="tns:PublishInfoDTO" />
+          <xs:element minOccurs="0" name="SurveyInfo" nillable="true" type="tns:SurveyInfoDTO" />
+          <xs:element minOccurs="0" name="SurveyInfoList" nillable="true" type="tns:ArrayOfSurveyInfoDTO" />
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-  <xs:element name="PublishResponse" nillable="true" type="tns:PublishResponse" />
+  <xs:element name="SurveyInfoResponse" nillable="true" type="tns:SurveyInfoResponse" />
   <xs:complexType name="ResponseBase">
     <xs:sequence>
       <xs:element minOccurs="0" name="Acknowledge" type="tns:AcknowledgeType" />
@@ -67,12 +86,10 @@
     </xs:restriction>
   </xs:simpleType>
   <xs:element name="AcknowledgeType" nillable="true" type="tns:AcknowledgeType" />
-  <xs:complexType name="PublishInfoDTO">
+  <xs:complexType name="ArrayOfSurveyInfoDTO">
     <xs:sequence>
-      <xs:element minOccurs="0" name="IsPulished" type="xs:boolean" />
-      <xs:element minOccurs="0" name="StatusText" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="URL" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="SurveyInfoDTO" nillable="true" type="tns:SurveyInfoDTO" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="PublishInfoDTO" nillable="true" type="tns:PublishInfoDTO" />
+  <xs:element name="ArrayOfSurveyInfoDTO" nillable="true" type="tns:ArrayOfSurveyInfoDTO" />
 </xs:schema>

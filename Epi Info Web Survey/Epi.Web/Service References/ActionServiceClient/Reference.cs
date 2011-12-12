@@ -12,49 +12,49 @@ namespace Epi.Web.ActionServiceClient {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ActionServiceClient.ISurveyManager")]
-    public interface ISurveyManager {
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ActionServiceClient.IDataService")]
+    public interface IDataService {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISurveyManager/PublishSurvey", ReplyAction="http://tempuri.org/ISurveyManager/PublishSurveyResponse")]
-        Epi.Web.Common.Message.PublishResponse PublishSurvey(Epi.Web.Common.Message.PublishRequest pRequestMessage);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISurveyManager/GetSurveyInfo", ReplyAction="http://tempuri.org/ISurveyManager/GetSurveyInfoResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/GetSurveyInfo", ReplyAction="http://tempuri.org/IDataService/GetSurveyInfoResponse")]
         Epi.Web.Common.Message.SurveyInfoResponse GetSurveyInfo(Epi.Web.Common.Message.SurveyInfoRequest pRequest);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/SetSurveyInfo", ReplyAction="http://tempuri.org/IDataService/SetSurveyInfoResponse")]
+        Epi.Web.Common.Message.SurveyInfoResponse SetSurveyInfo(Epi.Web.Common.Message.SurveyInfoRequest pRequest);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface ISurveyManagerChannel : Epi.Web.ActionServiceClient.ISurveyManager, System.ServiceModel.IClientChannel {
+    public interface IDataServiceChannel : Epi.Web.ActionServiceClient.IDataService, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class SurveyManagerClient : System.ServiceModel.ClientBase<Epi.Web.ActionServiceClient.ISurveyManager>, Epi.Web.ActionServiceClient.ISurveyManager {
+    public partial class DataServiceClient : System.ServiceModel.ClientBase<Epi.Web.ActionServiceClient.IDataService>, Epi.Web.ActionServiceClient.IDataService {
         
-        public SurveyManagerClient() {
+        public DataServiceClient() {
         }
         
-        public SurveyManagerClient(string endpointConfigurationName) : 
+        public DataServiceClient(string endpointConfigurationName) : 
                 base(endpointConfigurationName) {
         }
         
-        public SurveyManagerClient(string endpointConfigurationName, string remoteAddress) : 
+        public DataServiceClient(string endpointConfigurationName, string remoteAddress) : 
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public SurveyManagerClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public DataServiceClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public SurveyManagerClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public DataServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
-        }
-        
-        public Epi.Web.Common.Message.PublishResponse PublishSurvey(Epi.Web.Common.Message.PublishRequest pRequestMessage) {
-            return base.Channel.PublishSurvey(pRequestMessage);
         }
         
         public Epi.Web.Common.Message.SurveyInfoResponse GetSurveyInfo(Epi.Web.Common.Message.SurveyInfoRequest pRequest) {
             return base.Channel.GetSurveyInfo(pRequest);
+        }
+        
+        public Epi.Web.Common.Message.SurveyInfoResponse SetSurveyInfo(Epi.Web.Common.Message.SurveyInfoRequest pRequest) {
+            return base.Channel.SetSurveyInfo(pRequest);
         }
     }
 }
