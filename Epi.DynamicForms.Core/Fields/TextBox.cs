@@ -21,7 +21,13 @@ namespace MvcDynamicForms.Fields
             var prompt = new TagBuilder("label");
             prompt.SetInnerText(Prompt);
             prompt.Attributes.Add("for", inputName);
-            prompt.Attributes.Add("class", _promptClass);
+          //  prompt.Attributes.Add("class", _promptClass);
+            prompt.Attributes.Add("class", "EpiLabel");
+
+            StringBuilder StyleValues = new StringBuilder();
+
+            StyleValues.Append(GetContolStyle(_fontstyle.ToString(), _Prompttop.ToString(), _Promptleft.ToString(), _PromptWidth.ToString(), Height.ToString()));
+            prompt.Attributes.Add("style", StyleValues.ToString());    
             html.Append(prompt.ToString());
 
             // error label
@@ -39,7 +45,9 @@ namespace MvcDynamicForms.Fields
             txt.Attributes.Add("name", inputName);
             txt.Attributes.Add("id", inputName);
             txt.Attributes.Add("type", "text");
-            txt.Attributes.Add("value", Value);            
+            txt.Attributes.Add("value", Value);
+            txt.Attributes.Add("style", "position:absolute;left:" + _left.ToString() + "px;top:" + _top.ToString() + "px" + ";width:"+_ControlWidth.ToString()+"px");            
+          
             txt.MergeAttributes(_inputHtmlAttributes);
             html.Append(txt.ToString(TagRenderMode.SelfClosing));
 
@@ -48,5 +56,6 @@ namespace MvcDynamicForms.Fields
             wrapper.InnerHtml = html.ToString();
             return wrapper.ToString();
         }
+        
     }
 }
