@@ -10,13 +10,12 @@ using Epi.Web.Common.Message;
 namespace Epi.Web.WCF.SurveyService
 {
     [ServiceContract]
-    public interface ISurveyManager 
+    public interface IManagerService
     {
         [OperationContract]
         PublishResponse PublishSurvey(PublishRequest pRequestMessage);
 
-        [OperationContract]
-        SurveyInfoResponse GetSurveyInfo(SurveyInfoRequest pRequest);
     }
+
 
 }

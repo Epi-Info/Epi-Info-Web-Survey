@@ -12,49 +12,42 @@ namespace Epi.Web.SurveyManager_Test.SurveyManagerService {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="SurveyManagerService.ISurveyManager")]
-    public interface ISurveyManager {
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="SurveyManagerService.IManagerService")]
+    public interface IManagerService {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISurveyManager/PublishSurvey", ReplyAction="http://tempuri.org/ISurveyManager/PublishSurveyResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IManagerService/PublishSurvey", ReplyAction="http://tempuri.org/IManagerService/PublishSurveyResponse")]
         Epi.Web.Common.Message.PublishResponse PublishSurvey(Epi.Web.Common.Message.PublishRequest pRequestMessage);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISurveyManager/GetSurveyInfo", ReplyAction="http://tempuri.org/ISurveyManager/GetSurveyInfoResponse")]
-        Epi.Web.Common.Message.SurveyInfoResponse GetSurveyInfo(Epi.Web.Common.Message.SurveyInfoRequest pRequest);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface ISurveyManagerChannel : Epi.Web.SurveyManager_Test.SurveyManagerService.ISurveyManager, System.ServiceModel.IClientChannel {
+    public interface IManagerServiceChannel : Epi.Web.SurveyManager_Test.SurveyManagerService.IManagerService, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class SurveyManagerClient : System.ServiceModel.ClientBase<Epi.Web.SurveyManager_Test.SurveyManagerService.ISurveyManager>, Epi.Web.SurveyManager_Test.SurveyManagerService.ISurveyManager {
+    public partial class ManagerServiceClient : System.ServiceModel.ClientBase<Epi.Web.SurveyManager_Test.SurveyManagerService.IManagerService>, Epi.Web.SurveyManager_Test.SurveyManagerService.IManagerService {
         
-        public SurveyManagerClient() {
+        public ManagerServiceClient() {
         }
         
-        public SurveyManagerClient(string endpointConfigurationName) : 
+        public ManagerServiceClient(string endpointConfigurationName) : 
                 base(endpointConfigurationName) {
         }
         
-        public SurveyManagerClient(string endpointConfigurationName, string remoteAddress) : 
+        public ManagerServiceClient(string endpointConfigurationName, string remoteAddress) : 
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public SurveyManagerClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public ManagerServiceClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public SurveyManagerClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public ManagerServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
         }
         
         public Epi.Web.Common.Message.PublishResponse PublishSurvey(Epi.Web.Common.Message.PublishRequest pRequestMessage) {
             return base.Channel.PublishSurvey(pRequestMessage);
-        }
-        
-        public Epi.Web.Common.Message.SurveyInfoResponse GetSurveyInfo(Epi.Web.Common.Message.SurveyInfoRequest pRequest) {
-            return base.Channel.GetSurveyInfo(pRequest);
         }
     }
 }
