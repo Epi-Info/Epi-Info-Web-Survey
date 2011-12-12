@@ -2,6 +2,9 @@
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epi.Web", "Epi.Web\Epi.Web.csproj", "{D7A6E617-B077-4F9A-9646-F2083B4A0FD0}"
+	ProjectSection(ProjectDependencies) = postProject
+		{BEFC85E4-F3A3-4108-9575-4EF1A004364E} = {BEFC85E4-F3A3-4108-9575-4EF1A004364E}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epi.Web.Interfaces", "Epi.Web.Interfaces\Epi.Web.Interfaces.csproj", "{B8AF69BD-3CE1-4AA5-875D-3FB87C7FCE44}"
 EndProject
@@ -119,6 +122,7 @@ Global
 		{31F91938-2997-4650-8D36-71C845F1071D}.Release|x86.ActiveCfg = Release|Any CPU
 		{13D8FD8D-1403-4C84-823A-1E27806CAC30}.Debug|Any CPU.ActiveCfg = Debug|x86
 		{13D8FD8D-1403-4C84-823A-1E27806CAC30}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{13D8FD8D-1403-4C84-823A-1E27806CAC30}.Debug|Mixed Platforms.Build.0 = Debug|x86
 		{13D8FD8D-1403-4C84-823A-1E27806CAC30}.Debug|x86.ActiveCfg = Debug|x86
 		{13D8FD8D-1403-4C84-823A-1E27806CAC30}.Debug|x86.Build.0 = Debug|x86
 		{13D8FD8D-1403-4C84-823A-1E27806CAC30}.Release|Any CPU.ActiveCfg = Release|x86

@@ -16,10 +16,10 @@ namespace Epi.Web.ActionServiceClient {
     public interface ISurveyManager {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISurveyManager/PublishSurvey", ReplyAction="http://tempuri.org/ISurveyManager/PublishSurveyResponse")]
-        Epi.Web.Common.DTO.PublishInfoDTO PublishSurvey(Epi.Web.Common.Message.SurveyRequest pRequestMessage);
+        Epi.Web.Common.Message.PublishResponse PublishSurvey(Epi.Web.Common.Message.PublishRequest pRequestMessage);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISurveyManager/GetSurveyInfoById", ReplyAction="http://tempuri.org/ISurveyManager/GetSurveyInfoByIdResponse")]
-        Epi.Web.Common.DTO.SurveyInfoDTO GetSurveyInfoById(string pIid);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISurveyManager/GetSurveyInfo", ReplyAction="http://tempuri.org/ISurveyManager/GetSurveyInfoResponse")]
+        Epi.Web.Common.Message.SurveyInfoResponse GetSurveyInfo(Epi.Web.Common.Message.SurveyInfoRequest pRequest);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -49,12 +49,12 @@ namespace Epi.Web.ActionServiceClient {
                 base(binding, remoteAddress) {
         }
         
-        public Epi.Web.Common.DTO.PublishInfoDTO PublishSurvey(Epi.Web.Common.Message.SurveyRequest pRequestMessage) {
+        public Epi.Web.Common.Message.PublishResponse PublishSurvey(Epi.Web.Common.Message.PublishRequest pRequestMessage) {
             return base.Channel.PublishSurvey(pRequestMessage);
         }
         
-        public Epi.Web.Common.DTO.SurveyInfoDTO GetSurveyInfoById(string pIid) {
-            return base.Channel.GetSurveyInfoById(pIid);
+        public Epi.Web.Common.Message.SurveyInfoResponse GetSurveyInfo(Epi.Web.Common.Message.SurveyInfoRequest pRequest) {
+            return base.Channel.GetSurveyInfo(pRequest);
         }
     }
 }
