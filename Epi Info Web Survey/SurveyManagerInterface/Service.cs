@@ -74,10 +74,11 @@ namespace Epi.Web.WCF.SurveyService
             //    response.SurveyInfos = SurveyInfos.Select(c => Mapper.ToDataTransferObject(c)).ToList();
             //}
 
-            if (pRequest.LoadOptions.Contains("SurveyInfo"))
-            {
+            //if (pRequest.LoadOptions.Contains("SurveyInfo"))
+            //{
                 result.SurveyInfo = Mapper.ToDataTransferObject(Implementation.GetSurveyInfoById(pRequest.Criteria.SurveyId));
-            }
+            //}
+
             return result;
         }
 
@@ -222,6 +223,8 @@ namespace Epi.Web.WCF.SurveyService
         /// <returns></returns>
         private bool ValidRequest(RequestBase request, ResponseBase response, Validate validate)
         {
+            bool result = true;
+
             // Validate Client Tag. 
             // Hardcoded here. In production this should query a 'client' table in a database.
             if ((Validate.ClientTag & validate) == Validate.ClientTag)
@@ -230,7 +233,7 @@ namespace Epi.Web.WCF.SurveyService
                 {
                     response.Acknowledge = AcknowledgeType.Failure;
                     response.Message = "Unknown Client Tag";
-                    return false;
+                    //return false;
                 }
             }
 
@@ -242,7 +245,7 @@ namespace Epi.Web.WCF.SurveyService
                 {
                     response.Acknowledge = AcknowledgeType.Failure;
                     response.Message = "Invalid or expired AccessToken. Call GetToken()";
-                    return false;
+                    //return false;
                 }
             }
 
@@ -253,12 +256,12 @@ namespace Epi.Web.WCF.SurveyService
                 {
                     response.Acknowledge = AcknowledgeType.Failure;
                     response.Message = "Please login and provide user credentials before accessing these methods.";
-                    return false;
+                    //return false;
                 }
             }
 
 
-            return true;
+            return result;
         }
 
         /// <summary>
