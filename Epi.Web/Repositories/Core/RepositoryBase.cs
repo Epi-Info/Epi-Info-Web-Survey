@@ -19,22 +19,22 @@ namespace Epi.Web.Repositories.Core
         /// <summary>
         /// Lazy loads ActionServiceClient and stores it in Session object.
         /// </summary>
-        protected SurveyManagerClient Client
+        protected DataServiceClient Client
         {
             get
             {
                 // Check if not initialized yet
                 if (HttpContext.Current.Session["ActionServiceClient"] == null)
-                    HttpContext.Current.Session["ActionServiceClient"] = new SurveyManagerClient("WSHttpBinding_ISurveyManager");
+                    HttpContext.Current.Session["ActionServiceClient"] = new DataServiceClient("WSHttpBinding_IDataService");
 
                 // If current client is 'faulted' (due to some error), create a new instance.
-                var client = HttpContext.Current.Session["ActionServiceClient"] as SurveyManagerClient;
+                var client = HttpContext.Current.Session["ActionServiceClient"] as DataServiceClient;
                 if (client.State == CommunicationState.Faulted)
                 {
                     try { client.Abort(); }
                     catch { /* no action */ }
 
-                    client = new SurveyManagerClient("WSHttpBinding_ISurveyManager");
+                    client = new DataServiceClient("WSHttpBinding_IDataService");
                     HttpContext.Current.Session["ActionServiceClient"] = client;
                 }
                 return client;

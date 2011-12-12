@@ -169,7 +169,7 @@
     <Content Include="Scripts\modernizr-1.7.min.js" />
     <None Include="Properties\DataSources\Epi.Web.Common.Message.PublishResponse.datasource" />
     <None Include="Properties\DataSources\Epi.Web.Common.Message.SurveyInfoResponse.datasource" />
-    <None Include="Service References\ActionServiceClient\SurveyManagerService.disco" />
+    <None Include="Service References\ActionServiceClient\SurveyDataService.disco" />
     <None Include="Service References\ActionServiceClient\configuration91.svcinfo" />
     <None Include="Service References\ActionServiceClient\configuration.svcinfo" />
     <None Include="Service References\ActionServiceClient\Reference.svcmap">
@@ -202,13 +202,17 @@
     <Content Include="Scripts\MicrosoftMvcValidation.debug.js" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\Shared\Error.aspx" />
-    <None Include="Service References\ActionServiceClient\SurveyManagerService1.xsd">
+    <None Include="Service References\ActionServiceClient\DataService.wsdl" />
+    <None Include="Service References\ActionServiceClient\SurveyDataService.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\ActionServiceClient\SurveyManagerService2.xsd">
+    <None Include="Service References\ActionServiceClient\SurveyDataService1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\ActionServiceClient\SurveyManagerService3.xsd">
+    <None Include="Service References\ActionServiceClient\SurveyDataService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ActionServiceClient\SurveyDataService3.xsd">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
@@ -238,10 +242,6 @@
   <ItemGroup>
     <None Include="Properties\DataSources\Epi.Web.Common.DTO.SurveyInfoDTO.datasource" />
     <None Include="Properties\DataSources\Epi.Web.Common.DTO.SurveyRequestResponse.datasource" />
-    <None Include="Service References\ActionServiceClient\Service.wsdl" />
-    <None Include="Service References\ActionServiceClient\SurveyManagerService.xsd">
-      <SubType>Designer</SubType>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\ActionServiceClient\" />
