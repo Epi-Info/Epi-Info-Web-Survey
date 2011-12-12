@@ -15,18 +15,4 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetSurveyInfo">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q3="http://www.yourcompany.com/types/" minOccurs="0" name="pRequest" nillable="true" type="q3:SurveyInfoRequest" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetSurveyInfoResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q4="http://www.yourcompany.com/types/" minOccurs="0" name="GetSurveyInfoResult" nillable="true" type="q4:SurveyInfoResponse" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
 </xs:schema>

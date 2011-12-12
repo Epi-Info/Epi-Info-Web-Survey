@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:22587/Epi.Web.ServiceHost/SurveyDataService.svc?xsd=xsd2" namespace="http://www.yourcompany.com/types/" />
+  <xs:element name="GetSurveyInfo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://www.yourcompany.com/types/" minOccurs="0" name="pRequest" nillable="true" type="q1:SurveyInfoRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSurveyInfoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://www.yourcompany.com/types/" minOccurs="0" name="GetSurveyInfoResult" nillable="true" type="q2:SurveyInfoResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetSurveyInfo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://www.yourcompany.com/types/" minOccurs="0" name="pRequest" nillable="true" type="q3:SurveyInfoRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetSurveyInfoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://www.yourcompany.com/types/" minOccurs="0" name="SetSurveyInfoResult" nillable="true" type="q4:SurveyInfoResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
