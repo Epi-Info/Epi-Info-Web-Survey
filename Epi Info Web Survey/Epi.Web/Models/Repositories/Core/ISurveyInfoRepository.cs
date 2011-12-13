@@ -8,9 +8,9 @@ namespace Epi.Web.Repositories.Core
 {
     /// <summary>
     /// SurveyInfo Repository interface.
-    /// Derives from standard IRepository. Adds one SurveyInfo specific member.
+    /// Derives from standard IRepository of SurveyInfoResponse. Adds a method GetSurveyInfo .
     /// </summary>
-    public interface ISurveyInfoRepository: IRepository<Epi.Web.Common.DTO.SurveyInfoDTO>
+    public interface ISurveyInfoRepository: IRepository<Epi.Web.Common.Message.SurveyInfoResponse>
     {
         SurveyInfoResponse GetSurveyInfo(SurveyInfoRequest pRequestId);
     }

@@ -4,6 +4,7 @@ using Unity.Mvc3;
 using Epi.Web.Models;
 using Epi.Web.Repositories;
 
+
 namespace Epi.Web
 {
     public static class Bootstrapper
@@ -20,12 +21,23 @@ namespace Epi.Web
             var container = new UnityContainer();
 
             // register all your components with the container here
+            //Configuring constructor injection. 
+            //InjectedMembers: A unity container extension that allows you to configure which constructor, property or method gets injected via API
+            //ConfigureInjectionFor is the API to configure injection for a particular type e.g. DataServiceClient proxy class
+            //InjectionConstructor: creates an instance of Microsoft.Practices.Unity.InjectionConstructor that looks for a constructor with the given set of parameters
             // e.g. container.RegisterType<ITestService, TestService>();            
-
+            container
+            .RegisterType<Epi.Web.ActionServiceClient.IDataService, Epi.Web.ActionServiceClient.DataServiceClient>()
+           .Configure<InjectedMembers>()
+            .ConfigureInjectionFor<Epi.Web.ActionServiceClient.DataServiceClient>(new InjectionConstructor("WSHttpBinding_IDataService"));
+           
+            container.RegisterType<Epi.Web.Common.Message.SurveyInfoRequest, Epi.Web.Common.Message.SurveyInfoRequest>();
             container.RegisterType<Epi.Web.Repositories.Core.ISurveyInfoRepository, Epi.Web.Repositories.SurveyInfoRepository>();
+
             container.RegisterControllers();
 
             return container;
+
         }
     }
 }
