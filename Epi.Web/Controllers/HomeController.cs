@@ -16,14 +16,16 @@ namespace Epi.Web.Controllers
         
         // Initialize ISurveyInfoRepository 
         private ISurveyInfoRepository _iSurveyInfoRepository;
-
+        //Initialize SurveyInfoRequest
+        private Epi.Web.Common.Message.SurveyInfoRequest _surveyInfoRequest;
         /// <summary>
         /// Injectinting ISurveyInfoRepository through Constructor
         /// </summary>
         /// <param name="iSurveyInfoRepository"></param>
-        public HomeController(ISurveyInfoRepository iSurveyInfoRepository)
+        public HomeController(ISurveyInfoRepository iSurveyInfoRepository, Epi.Web.Common.Message.SurveyInfoRequest surveyInfoRequest)
         {
             _iSurveyInfoRepository = iSurveyInfoRepository;
+            _surveyInfoRequest = surveyInfoRequest;
         }
 
         [HttpGet]
@@ -33,7 +35,8 @@ namespace Epi.Web.Controllers
         }
         /// <summary>
         /// Accept SurveyId as parameter, 
-        /// Get the SurveyInfoDTO by GetSurveyInfoById call and convert it to a SurveyInfoModel object
+        /// 
+        /// Get the SurveyInfoResponse by GetSurveyInfo call and convert it to a SurveyInfoModel object
         /// pump the SurveyInfoModel to the "SurveyIntroduction" view
         /// </summary>
         /// <param name="surveyid"></param>
@@ -45,11 +48,9 @@ namespace Epi.Web.Controllers
              if surveyInfodto.SurveyName== null then go to the exception page*/
             try
             {
-                SurveyInfoRequest surveyInfoRequest = new SurveyInfoRequest();
-                
-                
-                surveyInfoRequest.Criteria.SurveyId = surveyid;
-                SurveyInfoResponse surveyInfoResponse = _iSurveyInfoRepository.GetSurveyInfo(surveyInfoRequest);
+               
+                _surveyInfoRequest.Criteria.SurveyId = surveyid;
+                SurveyInfoResponse surveyInfoResponse = _iSurveyInfoRepository.GetSurveyInfo(_surveyInfoRequest);
                 var s = Mapper.ToSurveyInfoModel(surveyInfoResponse.SurveyInfo);
 
                 return View("SurveyIntroduction", s);
@@ -62,8 +63,8 @@ namespace Epi.Web.Controllers
 
         
        /// <summary>
-       /// passing the surveyModel, retrieving the SurveyId
-       /// get the surveyInfoDTO based on SurveyId
+       /// Assign the SurveyId to the surveyInforequest object
+        /// get the surveyInfoDTO based on surveyInforequest object by method GetSurveyInfo(SurveyInfoRequest)
        /// Get the form object based on SurveyInfoDTO and pass to the view
        /// Model Binding
        /// </summary>
@@ -72,9 +73,9 @@ namespace Epi.Web.Controllers
         [HttpPost]
         public ActionResult ListSurvey(Epi.Web.Models.SurveyInfoModel surveyModel)
         {
-            SurveyInfoRequest surveyInfoRequest = new SurveyInfoRequest();
-            surveyInfoRequest.Criteria.SurveyId = surveyModel.SurveyId;
-            var surveyInfoDTO = _iSurveyInfoRepository.GetSurveyInfo(surveyInfoRequest).SurveyInfo;
+            //SurveyInfoRequest surveyInfoRequest = new SurveyInfoRequest();
+            _surveyInfoRequest.Criteria.SurveyId = surveyModel.SurveyId;
+            var surveyInfoDTO = _iSurveyInfoRepository.GetSurveyInfo(_surveyInfoRequest).SurveyInfo;
 
             var form = MvcDynamicForms.Demo.Models.FormProvider.GetForm(surveyInfoDTO, 1);// Requesting the first page of the survey.
             

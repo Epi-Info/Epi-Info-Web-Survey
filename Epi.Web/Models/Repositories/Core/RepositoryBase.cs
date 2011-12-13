@@ -9,6 +9,7 @@ using Epi.Web.ActionServiceClient;
 namespace Epi.Web.Repositories.Core
 {
     /// <summary>
+    /// TODO: For now commented. Later we will delete this class
     /// Base class for all Repositories. 
     /// Provides common repository functionality, including:
     ///   - Management of Service client.
@@ -19,27 +20,27 @@ namespace Epi.Web.Repositories.Core
         /// <summary>
         /// Lazy loads ActionServiceClient and stores it in Session object.
         /// </summary>
-        protected DataServiceClient Client
-        {
-            get
-            {
-                // Check if not initialized yet
-                if (HttpContext.Current.Session["ActionServiceClient"] == null)
-                    HttpContext.Current.Session["ActionServiceClient"] = new DataServiceClient("WSHttpBinding_IDataService");
+        //protected SurveyManagerClient Client
+        //{
+        //    get
+        //    {
+        //        // Check if not initialized yet
+        //        if (HttpContext.Current.Session["ActionServiceClient"] == null)
+        //            HttpContext.Current.Session["ActionServiceClient"] = new SurveyManagerClient("WSHttpBinding_ISurveyManager");
 
-                // If current client is 'faulted' (due to some error), create a new instance.
-                var client = HttpContext.Current.Session["ActionServiceClient"] as DataServiceClient;
-                if (client.State == CommunicationState.Faulted)
-                {
-                    try { client.Abort(); }
-                    catch { /* no action */ }
+        //        // If current client is 'faulted' (due to some error), create a new instance.
+        //        var client = HttpContext.Current.Session["ActionServiceClient"] as SurveyManagerClient;
+        //        if (client.State == CommunicationState.Faulted)
+        //        {
+        //            try { client.Abort(); }
+        //            catch { /* no action */ }
 
-                    client = new DataServiceClient("WSHttpBinding_IDataService");
-                    HttpContext.Current.Session["ActionServiceClient"] = client;
-                }
-                return client;
-            }
-        }
+        //            client = new SurveyManagerClient("WSHttpBinding_ISurveyManager");
+        //            HttpContext.Current.Session["ActionServiceClient"] = client;
+        //        }
+        //        return client;
+        //    }
+        //}
 
        
         /// <summary>

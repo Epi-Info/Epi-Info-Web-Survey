@@ -12,16 +12,24 @@ namespace Epi.Web.Repositories
     {
 
 
+
+        private Epi.Web.ActionServiceClient.IDataService _iSurveyManager;
+
+        public SurveyInfoRepository(Epi.Web.ActionServiceClient.IDataService iSurveyManager)
+        {
+            _iSurveyManager = iSurveyManager;
+        }
+        
         /// <summary>
-        /// Calling the proxy client to fetch a SurveyInfoDTO object
+        /// Calling the proxy client to fetch a SurveyInfoResponse object
         /// </summary>
         /// <param name="surveyid"></param>
         /// <returns></returns>
         public SurveyInfoResponse GetSurveyInfo(SurveyInfoRequest pRequest)
         {
 
-            SurveyInfoResponse result = Client.GetSurveyInfo(pRequest);
-
+            //SurveyInfoResponse result = Client.GetSurveyInfo(pRequest);
+            SurveyInfoResponse result = _iSurveyManager.GetSurveyInfo(pRequest);
             return result;
             
         }
@@ -57,6 +65,26 @@ namespace Epi.Web.Repositories
                 throw new NotImplementedException();
             } 
         #endregion
-       
+
+
+            List<SurveyInfoResponse> IRepository<SurveyInfoResponse>.GetList(Criterion criterion = null)
+            {
+                throw new NotImplementedException();
+            }
+
+            SurveyInfoResponse IRepository<SurveyInfoResponse>.Get(int id)
+            {
+                throw new NotImplementedException();
+            }
+
+            public void Insert(SurveyInfoResponse t)
+            {
+                throw new NotImplementedException();
+            }
+
+            public void Update(SurveyInfoResponse t)
+            {
+                throw new NotImplementedException();
+            }
     }
 }
