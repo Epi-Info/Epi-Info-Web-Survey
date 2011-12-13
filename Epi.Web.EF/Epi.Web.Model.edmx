@@ -7,7 +7,12 @@
     <Schema Namespace="EIWSModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="EIWSModelStoreContainer">
           <EntitySet Name="SurveyMetaData" EntityType="EIWSModel.Store.SurveyMetaData" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="SurveyResponse" EntityType="EIWSModel.Store.SurveyResponse" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="SurveyTypes" EntityType="EIWSModel.Store.SurveyTypes" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_SurveyResponse_SurveyMetaData" Association="EIWSModel.Store.FK_SurveyResponse_SurveyMetaData">
+            <End Role="SurveyMetaData" EntitySet="SurveyMetaData" />
+            <End Role="SurveyResponse" EntitySet="SurveyResponse" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="SurveyMetaData">
           <Key>
@@ -23,6 +28,17 @@
           <Property Name="IntroductionText" Type="nvarchar(max)" Nullable="false" />
           <Property Name="TemplateXML" Type="xml" Nullable="false" />
         </EntityType>
+        <EntityType Name="SurveyResponse">
+          <Key>
+            <PropertyRef Name="ResponseId" />
+          </Key>
+          <Property Name="ResponseId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="SurveyId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="DateLastUpdated" Type="datetime2" Nullable="false" />
+          <Property Name="DateCompleted" Type="datetime2" />
+          <Property Name="IsComplete" Type="bit" Nullable="false" />
+          <Property Name="ResponseXML" Type="xml" Nullable="false" />
+        </EntityType>
         <EntityType Name="SurveyTypes">
           <Key>
             <PropertyRef Name="Id" />
@@ -30,6 +46,18 @@
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="Value" Type="varchar" MaxLength="50" />
         </EntityType>
+        <Association Name="FK_SurveyResponse_SurveyMetaData">
+          <End Role="SurveyMetaData" Type="EIWSModel.Store.SurveyMetaData" Multiplicity="1" />
+          <End Role="SurveyResponse" Type="EIWSModel.Store.SurveyResponse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SurveyMetaData">
+              <PropertyRef Name="SurveyId" />
+            </Principal>
+            <Dependent Role="SurveyResponse">
+              <PropertyRef Name="SurveyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -37,6 +65,11 @@
         <EntityContainer Name="EIWSEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="SurveyTypes" EntityType="EIWSModel.SurveyType" />
           <EntitySet Name="SurveyMetaDatas" EntityType="EIWSModel.SurveyMetaData" />
+          <EntitySet Name="SurveyResponses" EntityType="EIWSModel.SurveyResponse" />
+          <AssociationSet Name="FK_SurveyResponse_SurveyMetaData" Association="EIWSModel.FK_SurveyResponse_SurveyMetaData">
+            <End Role="SurveyMetaData" EntitySet="SurveyMetaDatas" />
+            <End Role="SurveyResponse" EntitySet="SurveyResponses" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="SurveyType">
           <Key>
@@ -58,7 +91,32 @@
           <Property Type="String" Name="DepartmentName" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="IntroductionText" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="TemplateXML" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="SurveyResponses" Relationship="EIWSModel.FK_SurveyResponse_SurveyMetaData" FromRole="SurveyMetaData" ToRole="SurveyResponse" />
         </EntityType>
+        <EntityType Name="SurveyResponse">
+          <Key>
+            <PropertyRef Name="ResponseId" />
+          </Key>
+          <Property Type="Guid" Name="ResponseId" Nullable="false" />
+          <Property Type="Guid" Name="SurveyId" Nullable="false" />
+          <Property Type="DateTime" Name="DateLastUpdated" Nullable="false" />
+          <Property Type="DateTime" Name="DateCompleted" />
+          <Property Type="Boolean" Name="IsComplete" Nullable="false" />
+          <Property Type="String" Name="ResponseXML" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="SurveyMetaData" Relationship="EIWSModel.FK_SurveyResponse_SurveyMetaData" FromRole="SurveyResponse" ToRole="SurveyMetaData" />
+        </EntityType>
+        <Association Name="FK_SurveyResponse_SurveyMetaData">
+          <End Type="EIWSModel.SurveyMetaData" Role="SurveyMetaData" Multiplicity="1" />
+          <End Type="EIWSModel.SurveyResponse" Role="SurveyResponse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SurveyMetaData">
+              <PropertyRef Name="SurveyId" />
+            </Principal>
+            <Dependent Role="SurveyResponse">
+              <PropertyRef Name="SurveyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -88,6 +146,18 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="SurveyResponses">
+            <EntityTypeMapping TypeName="EIWSModel.SurveyResponse">
+              <MappingFragment StoreEntitySet="SurveyResponse">
+                <ScalarProperty Name="ResponseXML" ColumnName="ResponseXML" />
+                <ScalarProperty Name="IsComplete" ColumnName="IsComplete" />
+                <ScalarProperty Name="DateCompleted" ColumnName="DateCompleted" />
+                <ScalarProperty Name="DateLastUpdated" ColumnName="DateLastUpdated" />
+                <ScalarProperty Name="SurveyId" ColumnName="SurveyId" />
+                <ScalarProperty Name="ResponseId" ColumnName="ResponseId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -111,6 +181,12 @@
       <Diagram Name="Epi.Web.Model">
         <EntityTypeShape EntityType="EIWSModel.SurveyType" Width="1.5" PointX="3.375" PointY="0.75" Height="1.4033821614583326" />
         <EntityTypeShape EntityType="EIWSModel.SurveyMetaData" Width="1.5" PointX="0.75" PointY="0.75" Height="2.7494921874999996" />
+        <EntityTypeShape EntityType="EIWSModel.SurveyResponse" Width="2.25" PointX="3" PointY="3" Height="2.0853483072916656" />
+        <AssociationConnector Association="EIWSModel.FK_SurveyResponse_SurveyMetaData" >
+          <ConnectorPoint PointX="2.25" PointY="2.5380553268229167" />
+          <ConnectorPoint PointX="3.15625" PointY="2.5380553268229167" />
+          <ConnectorPoint PointX="3.15625" PointY="3" />
+        </AssociationConnector>
       </Diagram>
     </Diagrams>
   </Designer>
