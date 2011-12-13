@@ -12,7 +12,7 @@ namespace Epi.Web.Models
     {
 
         /// <summary>
-        /// Maps SurveyInfo DTO to SurveyInfo MVC.
+        /// Maps SurveyInfo DTO to SurveyInfo Model.
         /// </summary>
         /// <param name="customer"></param>
         /// <returns></returns>
