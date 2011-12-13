@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="SJj56/sZIV/HPXQMQAA8PxYwVUA=">
+<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="Wziqtz4O5YXYU+3K/WM5fLGKjcM=">
   <bindingConfigurations>
     <bindingConfiguration bindingType="wsHttpBinding" name="WSHttpBinding_IDataService">
       <properties>
@@ -157,7 +157,7 @@
           <serializedValue>System.ServiceModel.Configuration.UserPrincipalNameElement</serializedValue>
         </property>
         <property path="/identity/userPrincipalName/value" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>hainesj01@ETIEXT.lan</serializedValue>
+          <serializedValue>ismailt01@ETIEXT.lan</serializedValue>
         </property>
         <property path="/identity/servicePrincipalName" isComplexType="true" isExplicitlyDefined="false" clrType="System.ServiceModel.Configuration.ServicePrincipalNameElement, System.ServiceModel, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>System.ServiceModel.Configuration.ServicePrincipalNameElement</serializedValue>
