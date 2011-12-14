@@ -235,12 +235,12 @@ namespace Epi.Web.WCF.SurveyService
                 if (request.Action == "Create")
                 {
                     Implementation.InsertSurveyResponse(SurveyResponse);
-                    //response.SurveyResponse = Mapper.ToDataTransferObject(SurveyResponse);
+                    response.SurveyResponseDTO = Mapper.ToDataTransferObject(SurveyResponse);
                 }
                 else if (request.Action == "Update")
                 {
                     Implementation.UpdateSurveyResponse(SurveyResponse);
-                   // response.SurveyResponse = Mapper.ToDataTransferObject(SurveyResponse);
+                    response.SurveyResponseDTO = Mapper.ToDataTransferObject(SurveyResponse);
                 }
                 else if (request.Action == "Delete")
                 {
