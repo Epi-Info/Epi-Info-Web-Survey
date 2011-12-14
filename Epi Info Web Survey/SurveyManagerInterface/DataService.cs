@@ -69,8 +69,8 @@ namespace Epi.Web.WCF.SurveyService
         /// <summary>
         /// Set (add, update, delete) SurveyInfo value.
         /// </summary>
-        /// <param name="request">SurveyInfo request message.</param>
-        /// <returns>SurveyInfo response message.</returns>
+        /// <param name="request">SurveyInfoRequest request message.</param>
+        /// <returns>SurveyInfoRequest response message.</returns>
         public SurveyInfoResponse SetSurveyInfo(SurveyInfoRequest request)
         {
             Epi.Web.Interfaces.DataInterfaces.ISurveyInfoDao surveyInfoDao = new EF.EntitySurveyInfoDao();
@@ -184,6 +184,88 @@ namespace Epi.Web.WCF.SurveyService
             //}
 
             return result;
+        }
+
+
+
+        /// <summary>
+        /// Set (add, update, delete) SurveyInfo value.
+        /// </summary>
+        /// <param name="request">SurveyResponse request message.</param>
+        /// <returns>SurveyResponse response message.</returns>
+        public SurveyResponseResponse SaveSurveyResponse(SurveyResponseRequest request)
+        {
+            Epi.Web.Interfaces.DataInterfaces.ISurveyResponseDao SurveyResponseDao = new EF.EntitySurveyResponseDao();
+            Epi.Web.BLL.SurveyResponse Implementation = new Epi.Web.BLL.SurveyResponse(SurveyResponseDao);
+
+
+            SurveyResponseResponse response = new SurveyResponseResponse(request.RequestId);
+
+            // Validate client tag, access token, and user credentials
+            if (!ValidRequest(request, response, Validate.All))
+            {
+                return response;
+            }
+            
+            // Transform SurveyResponse data transfer object to SurveyResponse business object
+            SurveyResponseBO SurveyResponse = new SurveyResponseBO();
+                
+                
+                //Mapper.ToBusinessObject(request.SurveyResponseDTO);
+
+            // Validate SurveyResponse business rules
+
+            if (request.Action != "Delete")
+            {
+                //if (!SurveyResponse.Validate())
+                //{
+                //    response.Acknowledge = AcknowledgeType.Failure;
+
+                //    foreach (string error in SurveyResponse.ValidationErrors)
+                //        response.Message += error + Environment.NewLine;
+
+                //    return response;
+                //}
+            }
+
+            // Run within the context of a database transaction. Currently commented out.
+            // The Decorator Design Pattern. 
+            //using (TransactionDecorator transaction = new TransactionDecorator())
+            {
+                if (request.Action == "Create")
+                {
+                    Implementation.InsertSurveyResponse(SurveyResponse);
+                    //response.SurveyResponse = Mapper.ToDataTransferObject(SurveyResponse);
+                }
+                else if (request.Action == "Update")
+                {
+                    Implementation.UpdateSurveyResponse(SurveyResponse);
+                   // response.SurveyResponse = Mapper.ToDataTransferObject(SurveyResponse);
+                }
+                else if (request.Action == "Delete")
+                {
+                    var criteria = request.Criteria as SurveyResponseCriteria;
+                    var survey = Implementation.GetSurveyResponseById(SurveyResponse.SurveyId);
+
+                    try
+                    {
+                        if (Implementation.DeleteSurveyResponse(survey))
+                        {
+                            response.RowsAffected = 1;
+                        }
+                        else
+                        {
+                            response.RowsAffected = 0;
+                        }
+                    }
+                    catch
+                    {
+                        response.RowsAffected = 0;
+                    }
+                }
+            }
+
+            return response;
         }
 
         /// <summary>
