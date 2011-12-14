@@ -47,8 +47,7 @@ namespace Epi.Web.EF
         {
             using (var Context = DataObjectFactory.CreateContext() ) 
             {
-                var SurveyMetaDataEntity = DataObjectFactory.CreateSurveyMetaData();
-                SurveyMetaDataEntity = Mapper.Map(SurveyInfo);
+                var SurveyMetaDataEntity = Mapper.Map(SurveyInfo);
                 Context.AddToSurveyMetaDatas(SurveyMetaDataEntity);
                
                 Context.SaveChanges();

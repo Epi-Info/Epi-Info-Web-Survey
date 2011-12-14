@@ -57,6 +57,24 @@ namespace Epi.Web.Common.ObjectMapping
 
 
         /// <summary>
+        /// Maps SurveyInfoBO business object to SurveyInfoDTO entity.
+        /// </summary>
+        /// <param name="SurveyInfo">A SurveyInfoBO business object.</param>
+        /// <returns>A SurveyInfoDTO.</returns>
+        public static SurveyResponseDTO ToDataTransferObject(SurveyResponseBO pBO)
+        {
+            return new SurveyResponseDTO
+            {
+                SurveyId = pBO.SurveyId,
+                ResponseId = pBO.ResponseId,
+                DateLastUpdated = pBO.DateLastUpdated,
+                XML = pBO.XML,
+                DateCompleted = pBO.DateCompleted,
+                IsCompleted = pBO.IsCompleted
+            };
+        }
+
+        /// <summary>
         /// Maps SurveyRequestResultBO business object to PublishInfoDTO.
         /// </summary>
         /// <param name="SurveyInfo">A SurveyRequestResultBO business object.</param>

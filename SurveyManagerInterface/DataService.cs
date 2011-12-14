@@ -25,7 +25,7 @@ namespace Epi.Web.WCF.SurveyService
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="pId"></param>
+        /// <param name="pRequest"></param>
         /// <returns></returns>
         public SurveyInfoResponse GetSurveyInfo(SurveyInfoRequest pRequest)
         {
@@ -142,6 +142,49 @@ namespace Epi.Web.WCF.SurveyService
         }
 
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="pRequest"></param>
+        /// <returns></returns>
+        public SurveyResponseResponse GetSurveyResponse(SurveyResponseRequest pRequest)
+        {
+            SurveyResponseResponse result = new SurveyResponseResponse(pRequest.RequestId);
+            Epi.Web.Interfaces.DataInterfaces.ISurveyResponseDao surveyInfoDao = new EF.EntitySurveyResponseDao();
+            Epi.Web.BLL.SurveyResponse Implementation = new Epi.Web.BLL.SurveyResponse(surveyInfoDao);
+
+            // Validate client tag, access token, and user credentials
+            if (!ValidRequest(pRequest, result, Validate.All))
+            {
+                return result;
+            }
+
+            var criteria = pRequest.Criteria as SurveyResponseCriteria;
+            string sort = criteria.SortExpression;
+
+            //if (request.LoadOptions.Contains("SurveyInfos"))
+            //{
+            //    IEnumerable<SurveyInfoDTO> SurveyInfos;
+            //    if (!criteria.IncludeOrderStatistics)
+            //    {
+            //        SurveyInfos = Implementation.GetSurveyInfos(sort);
+            //    }
+            //    else
+            //    {
+            //        SurveyInfos = Implementation.GetSurveyInfosWithOrderStatistics(sort);
+            //    }
+
+            //    response.SurveyInfos = SurveyInfos.Select(c => Mapper.ToDataTransferObject(c)).ToList();
+            //}
+
+            //if (pRequest.LoadOptions.Contains("SurveyInfo"))
+            //{
+            result.SurveyResponseDTO = Mapper.ToDataTransferObject(Implementation.GetSurveyResponseById(pRequest.Criteria.SurveyId));
+            //}
+
+            return result;
+        }
 
         /// <summary>
         /// Gets unique session based token that is valid for the duration of the session.
