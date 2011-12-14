@@ -54,5 +54,42 @@ namespace Epi.Web.EF
             };
         }
 
+
+        /// <summary>
+        /// Maps SurveyMetaData entity to SurveyInfoBO business object.
+        /// </summary>
+        /// <param name="entity">A SurveyMetaData entity to be transformed.</param>
+        /// <returns>A SurveyInfoBO business object.</returns>
+        internal static SurveyResponseBO Map(SurveyResponse entity)
+        {
+            return new SurveyResponseBO
+            {
+                SurveyId = entity.SurveyId.ToString(),
+                ResponseId = entity.ResponseId.ToString(),
+                XML = entity.ResponseXML,
+                IsCompleted = entity.IsComplete,
+                DateLastUpdated = entity.DateLastUpdated,
+                DateCompleted = entity.DateCompleted.Value
+            };
+        }
+
+        /// <summary>
+        /// Maps SurveyInfoBO business object to SurveyMetaData entity.
+        /// </summary>
+        /// <param name="businessobject">A SurveyInfoBO business object.</param>
+        /// <returns>A SurveyMetaData entity.</returns>
+        internal static SurveyResponse Map(SurveyResponseBO businessobject)
+        {
+            return new SurveyResponse
+            {
+                SurveyId = new Guid(businessobject.SurveyId),
+                ResponseId = new Guid(businessobject.ResponseId),
+                ResponseXML = businessobject.XML,
+                IsComplete = businessobject.IsCompleted,
+                DateLastUpdated = businessobject.DateLastUpdated,
+                DateCompleted = businessobject.DateCompleted
+
+            };
+        }
     }
 }
