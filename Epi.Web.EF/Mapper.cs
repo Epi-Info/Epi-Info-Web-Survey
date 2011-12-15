@@ -28,7 +28,7 @@ namespace Epi.Web.EF
                 OrganizationName = entity.OrganizationName,
                 DepartmentName = entity.DepartmentName,
                 ClosingDate = entity.ClosingDate,
-                SurveyType =   entity.SurveyType 
+                SurveyType =   entity.SurveyTypeId 
             };
         }
 
@@ -49,7 +49,7 @@ namespace Epi.Web.EF
                 OrganizationName = businessobject.OrganizationName,
                 DepartmentName = businessobject.DepartmentName,
                 ClosingDate = businessobject.ClosingDate ,
-                SurveyType = businessobject.SurveyType 
+                SurveyTypeId = businessobject.SurveyType 
 
             };
         }
@@ -67,7 +67,7 @@ namespace Epi.Web.EF
                 SurveyId = entity.SurveyId.ToString(),
                 ResponseId = entity.ResponseId.ToString(),
                 XML = entity.ResponseXML,
-                IsCompleted = entity.IsComplete,
+               // IsCompleted = entity.IsComplete,
                 DateLastUpdated = entity.DateLastUpdated,
                 DateCompleted = entity.DateCompleted.Value
             };
@@ -85,7 +85,7 @@ namespace Epi.Web.EF
                 SurveyId = new Guid(businessobject.SurveyId),
                 ResponseId = new Guid(businessobject.ResponseId),
                 ResponseXML = businessobject.XML,
-                IsComplete = businessobject.IsCompleted,
+                //IsComplete = businessobject.IsCompleted,
                 DateLastUpdated = businessobject.DateLastUpdated,
                 DateCompleted = businessobject.DateCompleted
 
