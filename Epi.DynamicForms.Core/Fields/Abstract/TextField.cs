@@ -37,7 +37,7 @@ namespace MvcDynamicForms.Fields
 
         public override string Response
         {
-            get { return Value.Trim(); }
+            get { return Value; }
         }
         public override bool Validate()
         {
