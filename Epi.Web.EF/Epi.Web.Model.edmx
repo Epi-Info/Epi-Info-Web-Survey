@@ -6,21 +6,44 @@
     <edmx:StorageModels>
     <Schema Namespace="EIWSModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="EIWSModelStoreContainer">
+          <EntitySet Name="lk_Status" EntityType="EIWSModel.Store.lk_Status" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="lk_SurveyType" EntityType="EIWSModel.Store.lk_SurveyType" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="SurveyMetaData" EntityType="EIWSModel.Store.SurveyMetaData" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="SurveyResponse" EntityType="EIWSModel.Store.SurveyResponse" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="SurveyTypes" EntityType="EIWSModel.Store.SurveyTypes" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_SurveyMetaData_lk_SurveyType" Association="EIWSModel.Store.FK_SurveyMetaData_lk_SurveyType">
+            <End Role="lk_SurveyType" EntitySet="lk_SurveyType" />
+            <End Role="SurveyMetaData" EntitySet="SurveyMetaData" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SurveyResponse_lk_Status" Association="EIWSModel.Store.FK_SurveyResponse_lk_Status">
+            <End Role="lk_Status" EntitySet="lk_Status" />
+            <End Role="SurveyResponse" EntitySet="SurveyResponse" />
+          </AssociationSet>
           <AssociationSet Name="FK_SurveyResponse_SurveyMetaData" Association="EIWSModel.Store.FK_SurveyResponse_SurveyMetaData">
             <End Role="SurveyMetaData" EntitySet="SurveyMetaData" />
             <End Role="SurveyResponse" EntitySet="SurveyResponse" />
           </AssociationSet>
         </EntityContainer>
+        <EntityType Name="lk_Status">
+          <Key>
+            <PropertyRef Name="StatusId" />
+          </Key>
+          <Property Name="StatusId" Type="int" Nullable="false" />
+          <Property Name="Status" Type="nvarchar" Nullable="false" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="lk_SurveyType">
+          <Key>
+            <PropertyRef Name="SurveyTypeId" />
+          </Key>
+          <Property Name="SurveyTypeId" Type="int" Nullable="false" />
+          <Property Name="SurveyType" Type="varchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="SurveyMetaData">
           <Key>
             <PropertyRef Name="SurveyId" />
           </Key>
           <Property Name="SurveyId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="SurveyNumber" Type="nvarchar" MaxLength="20" />
-          <Property Name="SurveyType" Type="int" Nullable="false" />
+          <Property Name="SurveyTypeId" Type="int" Nullable="false" />
           <Property Name="ClosingDate" Type="datetime2" Nullable="false" />
           <Property Name="SurveyName" Type="nvarchar" Nullable="false" MaxLength="255" />
           <Property Name="OrganizationName" Type="nvarchar" MaxLength="100" />
@@ -36,16 +59,33 @@
           <Property Name="SurveyId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="DateLastUpdated" Type="datetime2" Nullable="false" />
           <Property Name="DateCompleted" Type="datetime2" />
-          <Property Name="IsComplete" Type="bit" Nullable="false" />
+          <Property Name="StatusId" Type="int" Nullable="false" />
           <Property Name="ResponseXML" Type="xml" Nullable="false" />
         </EntityType>
-        <EntityType Name="SurveyTypes">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="Value" Type="varchar" MaxLength="50" />
-        </EntityType>
+        <Association Name="FK_SurveyMetaData_lk_SurveyType">
+          <End Role="lk_SurveyType" Type="EIWSModel.Store.lk_SurveyType" Multiplicity="1" />
+          <End Role="SurveyMetaData" Type="EIWSModel.Store.SurveyMetaData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="lk_SurveyType">
+              <PropertyRef Name="SurveyTypeId" />
+            </Principal>
+            <Dependent Role="SurveyMetaData">
+              <PropertyRef Name="SurveyTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SurveyResponse_lk_Status">
+          <End Role="lk_Status" Type="EIWSModel.Store.lk_Status" Multiplicity="1" />
+          <End Role="SurveyResponse" Type="EIWSModel.Store.SurveyResponse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="lk_Status">
+              <PropertyRef Name="StatusId" />
+            </Principal>
+            <Dependent Role="SurveyResponse">
+              <PropertyRef Name="StatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_SurveyResponse_SurveyMetaData">
           <End Role="SurveyMetaData" Type="EIWSModel.Store.SurveyMetaData" Multiplicity="1" />
           <End Role="SurveyResponse" Type="EIWSModel.Store.SurveyResponse" Multiplicity="*" />
@@ -63,20 +103,38 @@
     <edmx:ConceptualModels>
       <Schema Namespace="EIWSModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
         <EntityContainer Name="EIWSEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="SurveyTypes" EntityType="EIWSModel.SurveyType" />
+          <EntitySet Name="lk_Status" EntityType="EIWSModel.lk_Status" />
+          <EntitySet Name="lk_SurveyType" EntityType="EIWSModel.lk_SurveyType" />
           <EntitySet Name="SurveyMetaDatas" EntityType="EIWSModel.SurveyMetaData" />
           <EntitySet Name="SurveyResponses" EntityType="EIWSModel.SurveyResponse" />
+          <AssociationSet Name="FK_SurveyResponse_lk_Status" Association="EIWSModel.FK_SurveyResponse_lk_Status">
+            <End Role="lk_Status" EntitySet="lk_Status" />
+            <End Role="SurveyResponse" EntitySet="SurveyResponses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SurveyMetaData_lk_SurveyType" Association="EIWSModel.FK_SurveyMetaData_lk_SurveyType">
+            <End Role="lk_SurveyType" EntitySet="lk_SurveyType" />
+            <End Role="SurveyMetaData" EntitySet="SurveyMetaDatas" />
+          </AssociationSet>
           <AssociationSet Name="FK_SurveyResponse_SurveyMetaData" Association="EIWSModel.FK_SurveyResponse_SurveyMetaData">
             <End Role="SurveyMetaData" EntitySet="SurveyMetaDatas" />
             <End Role="SurveyResponse" EntitySet="SurveyResponses" />
           </AssociationSet>
         </EntityContainer>
-        <EntityType Name="SurveyType">
+        <EntityType Name="lk_Status">
           <Key>
-            <PropertyRef Name="Id" />
+            <PropertyRef Name="StatusId" />
           </Key>
-          <Property Type="Int32" Name="Id" Nullable="false" />
-          <Property Type="String" Name="Value" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="StatusId" Nullable="false" />
+          <Property Type="String" Name="Status" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="SurveyResponses" Relationship="EIWSModel.FK_SurveyResponse_lk_Status" FromRole="lk_Status" ToRole="SurveyResponse" />
+        </EntityType>
+        <EntityType Name="lk_SurveyType">
+          <Key>
+            <PropertyRef Name="SurveyTypeId" />
+          </Key>
+          <Property Type="Int32" Name="SurveyTypeId" Nullable="false" />
+          <Property Type="String" Name="SurveyType" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="SurveyMetaDatas" Relationship="EIWSModel.FK_SurveyMetaData_lk_SurveyType" FromRole="lk_SurveyType" ToRole="SurveyMetaData" />
         </EntityType>
         <EntityType Name="SurveyMetaData">
           <Key>
@@ -84,13 +142,14 @@
           </Key>
           <Property Type="Guid" Name="SurveyId" Nullable="false" />
           <Property Type="String" Name="SurveyNumber" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Type="Int32" Name="SurveyType" Nullable="false" />
+          <Property Type="Int32" Name="SurveyTypeId" Nullable="false" />
           <Property Type="DateTime" Name="ClosingDate" Nullable="false" />
           <Property Type="String" Name="SurveyName" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="OrganizationName" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="DepartmentName" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="IntroductionText" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="TemplateXML" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="lk_SurveyType" Relationship="EIWSModel.FK_SurveyMetaData_lk_SurveyType" FromRole="SurveyMetaData" ToRole="lk_SurveyType" />
           <NavigationProperty Name="SurveyResponses" Relationship="EIWSModel.FK_SurveyResponse_SurveyMetaData" FromRole="SurveyMetaData" ToRole="SurveyResponse" />
         </EntityType>
         <EntityType Name="SurveyResponse">
@@ -101,10 +160,35 @@
           <Property Type="Guid" Name="SurveyId" Nullable="false" />
           <Property Type="DateTime" Name="DateLastUpdated" Nullable="false" />
           <Property Type="DateTime" Name="DateCompleted" />
-          <Property Type="Boolean" Name="IsComplete" Nullable="false" />
+          <Property Type="Int32" Name="StatusId" Nullable="false" />
           <Property Type="String" Name="ResponseXML" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="lk_Status" Relationship="EIWSModel.FK_SurveyResponse_lk_Status" FromRole="SurveyResponse" ToRole="lk_Status" />
           <NavigationProperty Name="SurveyMetaData" Relationship="EIWSModel.FK_SurveyResponse_SurveyMetaData" FromRole="SurveyResponse" ToRole="SurveyMetaData" />
         </EntityType>
+        <Association Name="FK_SurveyResponse_lk_Status">
+          <End Type="EIWSModel.lk_Status" Role="lk_Status" Multiplicity="1" />
+          <End Type="EIWSModel.SurveyResponse" Role="SurveyResponse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="lk_Status">
+              <PropertyRef Name="StatusId" />
+            </Principal>
+            <Dependent Role="SurveyResponse">
+              <PropertyRef Name="StatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SurveyMetaData_lk_SurveyType">
+          <End Type="EIWSModel.lk_SurveyType" Role="lk_SurveyType" Multiplicity="1" />
+          <End Type="EIWSModel.SurveyMetaData" Role="SurveyMetaData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="lk_SurveyType">
+              <PropertyRef Name="SurveyTypeId" />
+            </Principal>
+            <Dependent Role="SurveyMetaData">
+              <PropertyRef Name="SurveyTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_SurveyResponse_SurveyMetaData">
           <End Type="EIWSModel.SurveyMetaData" Role="SurveyMetaData" Multiplicity="1" />
           <End Type="EIWSModel.SurveyResponse" Role="SurveyResponse" Multiplicity="*" />
@@ -123,11 +207,19 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="EIWSModelStoreContainer" CdmEntityContainer="EIWSEntities">
-          <EntitySetMapping Name="SurveyTypes">
-            <EntityTypeMapping TypeName="EIWSModel.SurveyType">
-              <MappingFragment StoreEntitySet="SurveyTypes">
-                <ScalarProperty Name="Value" ColumnName="Value" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
+          <EntitySetMapping Name="lk_Status">
+            <EntityTypeMapping TypeName="EIWSModel.lk_Status">
+              <MappingFragment StoreEntitySet="lk_Status">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="lk_SurveyType">
+            <EntityTypeMapping TypeName="EIWSModel.lk_SurveyType">
+              <MappingFragment StoreEntitySet="lk_SurveyType">
+                <ScalarProperty Name="SurveyType" ColumnName="SurveyType" />
+                <ScalarProperty Name="SurveyTypeId" ColumnName="SurveyTypeId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -140,7 +232,7 @@
                 <ScalarProperty Name="OrganizationName" ColumnName="OrganizationName" />
                 <ScalarProperty Name="SurveyName" ColumnName="SurveyName" />
                 <ScalarProperty Name="ClosingDate" ColumnName="ClosingDate" />
-                <ScalarProperty Name="SurveyType" ColumnName="SurveyType" />
+                <ScalarProperty Name="SurveyTypeId" ColumnName="SurveyTypeId" />
                 <ScalarProperty Name="SurveyNumber" ColumnName="SurveyNumber" />
                 <ScalarProperty Name="SurveyId" ColumnName="SurveyId" />
               </MappingFragment>
@@ -150,7 +242,7 @@
             <EntityTypeMapping TypeName="EIWSModel.SurveyResponse">
               <MappingFragment StoreEntitySet="SurveyResponse">
                 <ScalarProperty Name="ResponseXML" ColumnName="ResponseXML" />
-                <ScalarProperty Name="IsComplete" ColumnName="IsComplete" />
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
                 <ScalarProperty Name="DateCompleted" ColumnName="DateCompleted" />
                 <ScalarProperty Name="DateLastUpdated" ColumnName="DateLastUpdated" />
                 <ScalarProperty Name="SurveyId" ColumnName="SurveyId" />
@@ -179,13 +271,21 @@
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
       <Diagram Name="Epi.Web.Model">
-        <EntityTypeShape EntityType="EIWSModel.SurveyType" Width="1.5" PointX="3.375" PointY="0.75" Height="1.4033821614583326" />
-        <EntityTypeShape EntityType="EIWSModel.SurveyMetaData" Width="1.5" PointX="0.75" PointY="0.75" Height="2.7494921874999996" />
-        <EntityTypeShape EntityType="EIWSModel.SurveyResponse" Width="2.25" PointX="3" PointY="3" Height="2.0853483072916656" />
+        <EntityTypeShape EntityType="EIWSModel.lk_Status" Width="1.5" PointX="5" PointY="4.125" Height="1.5956835937499996" />
+        <EntityTypeShape EntityType="EIWSModel.lk_SurveyType" Width="1.5" PointX="0.75" PointY="1.75" Height="1.5956835937499996" />
+        <EntityTypeShape EntityType="EIWSModel.SurveyMetaData" Width="1.5" PointX="3" PointY="1" Height="3.1340950520833313" />
+        <EntityTypeShape EntityType="EIWSModel.SurveyResponse" Width="1.5" PointX="6" PointY="0.5" Height="2.5571907552083317" />
+        <AssociationConnector Association="EIWSModel.FK_SurveyResponse_lk_Status" >
+          <ConnectorPoint PointX="6.25" PointY="4.125" />
+          <ConnectorPoint PointX="6.25" PointY="3.0571907552083317" />
+        </AssociationConnector>
+        <AssociationConnector Association="EIWSModel.FK_SurveyMetaData_lk_SurveyType" >
+          <ConnectorPoint PointX="2.25" PointY="2.547841796875" />
+          <ConnectorPoint PointX="3" PointY="2.547841796875" />
+        </AssociationConnector>
         <AssociationConnector Association="EIWSModel.FK_SurveyResponse_SurveyMetaData" >
-          <ConnectorPoint PointX="2.25" PointY="2.5380553268229167" />
-          <ConnectorPoint PointX="3.15625" PointY="2.5380553268229167" />
-          <ConnectorPoint PointX="3.15625" PointY="3" />
+          <ConnectorPoint PointX="4.5" PointY="2.0285953776041659" />
+          <ConnectorPoint PointX="6" PointY="2.0285953776041659" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>
