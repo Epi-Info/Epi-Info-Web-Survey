@@ -37,9 +37,8 @@ namespace Epi.Web
                 "Survey/{surveyid}", // URL with parameters
                 new { controller = "Home", action = "ListSurvey", surveyid = UrlParameter.Optional }
             ); // Parameter defaults
-
            
-
+        
             //routes.MapRoute(
             //    "Default", // Route name
             //    "{controller}/{action}/{id}", // URL with parameters
