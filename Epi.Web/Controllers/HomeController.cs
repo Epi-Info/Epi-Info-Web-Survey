@@ -31,6 +31,14 @@ namespace Epi.Web.Controllers
         [HttpGet]
         public ActionResult Index()
         {
+          
+            return View("Index");
+        }
+
+
+        
+        public ActionResult Index1()
+        {
             return View("Index");
         }
         /// <summary>
@@ -71,17 +79,38 @@ namespace Epi.Web.Controllers
        /// <param name="surveyModel"></param>
        /// <returns></returns>
         [HttpPost]
-        public ActionResult ListSurvey(Epi.Web.Models.SurveyInfoModel surveyModel)
+        public ActionResult ListSurvey(Epi.Web.Models.SurveyInfoModel surveyModel, string submit, string surveyid)
         {
             //SurveyInfoRequest surveyInfoRequest = new SurveyInfoRequest();
-            _surveyInfoRequest.Criteria.SurveyId = surveyModel.SurveyId;
-            var surveyInfoDTO = _iSurveyInfoRepository.GetSurveyInfo(_surveyInfoRequest).SurveyInfo;
+            if (!string.IsNullOrEmpty(submit))
+            {
+                return Submit(surveyid);
+            }
+            else
+            {
+                _surveyInfoRequest.Criteria.SurveyId = surveyModel.SurveyId;
+                var surveyInfoDTO = _iSurveyInfoRepository.GetSurveyInfo(_surveyInfoRequest).SurveyInfo;
 
-            var form = MvcDynamicForms.Demo.Models.FormProvider.GetForm(surveyInfoDTO, 1);// Requesting the first page of the survey.
-            
-            return View("Survey", form);
+                var form = MvcDynamicForms.Demo.Models.FormProvider.GetForm(surveyInfoDTO, 1);// Requesting the first page of the survey.
 
+                return View("Survey", form);
+            }
         }
-       
+
+        public ActionResult Submit(string surveyid)
+        {
+            try
+            {
+                _surveyInfoRequest.Criteria.SurveyId = surveyid;
+                SurveyInfoResponse surveyInfoResponse = _iSurveyInfoRepository.GetSurveyInfo(_surveyInfoRequest);
+                var s = Mapper.ToSurveyInfoModel(surveyInfoResponse.SurveyInfo);
+
+                return View("PostSubmit", s);
+            }
+            catch (Exception ex)
+            {
+                return View("Exception");
+            }
+        }
     }
 }

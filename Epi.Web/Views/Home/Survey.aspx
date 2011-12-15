@@ -2,6 +2,7 @@
     Inherits="System.Web.Mvc.ViewPage<MvcDynamicForms.Form>" %>
 <%@ Register Assembly="Microsoft.ReportViewer.WebForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
     Namespace="Microsoft.Reporting.WebForms" TagPrefix="rsweb" %>
+ 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
     Index
 </asp:Content>
@@ -33,36 +34,36 @@
 		<a href="/page2" class="nextprev" title="Go to Next Page"><img src="/Content/images/next.png" height="16px" style="vertical-align: text-top; text-decoration:none;" border="0" alt="Next Page"></a>
 	  </div>
 	   
-	  <div id="exit"><button class="exitsurvey" type="submit">Exit Survey</button></div>
+	  <div id="exit">
+      <button class="exitsurvey" type="submit">Exit Survey</button>
+      
+      </div>
 	  <div style="clear:both;"></div>
 	 </div>
 
 	<div id="content">
-		<%--Lable--%>
-       <%-- <ul>--%>
-           <%-- <li>SurveyId: <%: (ViewData.Model).SurveyId %></li>
-            <li>SurveyName: <%: (ViewData.Model).SurveyName %></li>
-            <li>SurveyNumber: <%: (ViewData.Model).SurveyNumber%></li>
-            <li>OrganiztionName: <%: (ViewData.Model).OrganizationName%></li>
-            <li>DepartmentName: <%: (ViewData.Model).DepartmentName%></li>
-            <li>IntroductionText: <%: (ViewData.Model).IntroductionText %></li>
-            <li>XML: <%: (ViewData.Model).XML%></li>
-            <li>IsSuccess: <%: (ViewData.Model).IsSuccess%></li>--%>
-       <%-- </ul>--%>
-       <%-- <div class="MvcDynamicForm" style="width:893px; height:600px;">--%>
+		 
 
-        <%Html.BeginForm(); %>
+        <%Html.BeginForm("Index1" , "", FormMethod.Post, new { id = "myform" }); %>
+        
         <%=Model.RenderHtml(true) %>
+        
        <%-- </div>--%>
    	</div>
 	        <div id="nav">
-		         <div id="prev" align="left">&nbsp;</div>
- 		         <div id="save" align="center"><button class="save" type="submit"><img class="button" src="/Content/images/save.png" alt=""> Save & Close</button></div>
- 		         <div id="next" align="right"><button class="next" type="submit" onclick="window.location.href='survey2.html'">Continue <img class="button" src="/Content/images/arrow_right.png" alt=""></button></div>
+
+		        
+                  <div id="prev" align="left"><button class="prev"  type="submit" ><img class="button" src="../../Content/images/arrow_left.png"> Previous</button></div>
+	 		 <div id="save" align="center"><button class="save" type="submit" onclick="window.location='survey3.html'"><img class="button" src="../../Content/images/save.png"> Save & Close</button></div>
+	 		 
+          <div id="next" align="right"><button class="submits" type="submit"  name="submit" value="Submit" >
+              Submit Survey <img class="button" src="../../Content/images/submit.png"></button></div> 
+
+            <%-- onclick="location.href='<%:Url.Action("Index1", "HomeController")%>'"--%>
 	        </div>
 
-  
-    
-    
- 
+
+
+
+ <%Html.EndForm(); %>
 </asp:Content>
