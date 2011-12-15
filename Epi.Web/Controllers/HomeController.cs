@@ -112,7 +112,7 @@ namespace Epi.Web.Controllers
                     var s = Mapper.ToSurveyInfoModel(surveyInfoResponse.SurveyInfo);
                     if (!form.Validate())
                     {
-                        return View("Exception");
+                        return View("Survey", form);
                     }
                     else
                     {
