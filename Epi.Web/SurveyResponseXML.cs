@@ -22,11 +22,11 @@ namespace Epi.Web
             {
                 if(this.ResponseDetailList.ContainsKey(field.Key))
                 {
-                    this.ResponseDetailList[field.Key] = field.Response;
+                    this.ResponseDetailList[field.Key] = field.GetXML();
                 }
                 else
                 {
-	                this.ResponseDetailList.Add(field.Key, field.Response);
+                    this.ResponseDetailList.Add(field.Key, field.GetXML());
                 }
             }
         }
@@ -39,19 +39,19 @@ namespace Epi.Web
             }
             else
             {
-	            this.ResponseDetailList.Add(pField.Key, pField.Response);
+                this.ResponseDetailList.Add(pField.Key, pField.GetXML());
             }
         }
 
-         public void SetValue(string pKey, string pValue)
+         public void SetValue(string pKey, string pXMLValue)
          {
             if(this.ResponseDetailList.ContainsKey(pKey))
             {
-                this.ResponseDetailList[pKey] = pValue;
+                this.ResponseDetailList[pKey] = pXMLValue;
             }
             else
             {
-	            this.ResponseDetailList.Add(pKey, pValue);
+                this.ResponseDetailList.Add(pKey, pXMLValue);
             }
          }
 

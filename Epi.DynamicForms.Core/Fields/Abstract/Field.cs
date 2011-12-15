@@ -176,5 +176,8 @@ namespace MvcDynamicForms.Fields
             return CssStyles.ToString();
 
         }
+
+        public virtual string GetXML() { return ""; }
+
     }
 }
