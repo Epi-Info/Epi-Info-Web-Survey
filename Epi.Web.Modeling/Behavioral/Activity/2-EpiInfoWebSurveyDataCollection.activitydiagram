@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<activityRootModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm5="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" xmlns:dm9="http://schemas.microsoft.com/dsltools/SimpleShapesModel" xmlns:dm10="http://schemas.microsoft.com/dsltools/UseCaseModel" dslVersion="1.0.0.0" Id="7a8757a9-2ddd-48af-a27d-60631f48568c" name="2-EpiInfoWebSurveyDataCollection" linkedPackageId="dac2ba1c-e39a-41b6-a66c-a3be31853ff6" xmlns="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ActivityDesigner">
+<activityRootModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm5="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" xmlns:dm9="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ComponentDesigner" xmlns:dm10="http://schemas.microsoft.com/dsltools/SimpleShapesModel" xmlns:dm11="http://schemas.microsoft.com/dsltools/LogicalClassDesigner" dslVersion="1.0.0.0" Id="7a8757a9-2ddd-48af-a27d-60631f48568c" name="2-EpiInfoWebSurveyDataCollection" linkedPackageId="dac2ba1c-e39a-41b6-a66c-a3be31853ff6" xmlns="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ActivityDesigner">
   <ownedCommentsInternal>
     <comment Id="f1b63f5e-fa51-4150-b70b-8cdba69244b7">
       <elementDefinition Id="60f0aab2-8b4c-4d18-8e23-4a6af7c3eddb" />
@@ -17,17 +17,11 @@
     </comment>
   </ownedCommentsInternal>
   <profileInstances>
-    <packageHasProfileInstances Id="10b59c31-f7ff-46db-96b5-e9a65272f7f8">
-      <profileInstance Id="30f8da7b-6bd1-4324-aba4-5eb2f0b88261" name="StandardProfileL2">
-        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+    <packageHasProfileInstances Id="9cc12bd4-21e1-477d-b13c-4a85177fd601">
+      <profileInstance Id="6d983094-3f9d-4aad-9bea-04b26e9081a5" name="CSharpProfile">
+        <elementDefinition Id="db4513e1-8269-43fb-88f7-458a5cba77b0" />
       </profileInstance>
-      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
-    </packageHasProfileInstances>
-    <packageHasProfileInstances Id="72a04894-d63f-463e-abc6-1cca33e6bb19">
-      <profileInstance Id="8daae0c0-a624-4bc8-9056-d7728738840f" name="StandardProfileL3">
-        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
-      </profileInstance>
-      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+      <elementDefinition Id="c2d726cf-e8bf-43b1-a6ef-713303241450" />
     </packageHasProfileInstances>
   </profileInstances>
   <packagedElements>
@@ -251,5 +245,19 @@
   </packagedElements>
   <package Id="dac2ba1c-e39a-41b6-a66c-a3be31853ff6" name="Epi.Web.Modeling">
     <elementDefinition Id="daf1de51-1862-4459-9e4a-e7f71a55a436" />
+    <profileInstances>
+      <packageHasProfileInstances Id="10b59c31-f7ff-46db-96b5-e9a65272f7f8">
+        <profileInstance Id="30f8da7b-6bd1-4324-aba4-5eb2f0b88261" name="StandardProfileL2">
+          <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+        </profileInstance>
+        <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+      </packageHasProfileInstances>
+      <packageHasProfileInstances Id="72a04894-d63f-463e-abc6-1cca33e6bb19">
+        <profileInstance Id="8daae0c0-a624-4bc8-9056-d7728738840f" name="StandardProfileL3">
+          <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+        </profileInstance>
+        <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+      </packageHasProfileInstances>
+    </profileInstances>
   </package>
 </activityRootModel>
