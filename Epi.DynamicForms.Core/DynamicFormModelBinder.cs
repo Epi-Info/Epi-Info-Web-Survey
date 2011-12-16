@@ -27,6 +27,13 @@ namespace MvcDynamicForms
                     var txtField = (TextField)dynField;
                     txtField.Value = postedForm[key];
                 }
+
+                else if (dynField is NumericTextField)
+                {
+                    var numerictxtField = (NumericTextField)dynField;
+                    numerictxtField.Value = postedForm[key]; 
+                }
+
                 else if (dynField is ListField)
                 {
                     var lstField = (ListField)dynField;
