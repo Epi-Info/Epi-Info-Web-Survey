@@ -180,7 +180,7 @@ namespace Epi.Web.WCF.SurveyService
 
             //if (pRequest.LoadOptions.Contains("SurveyInfo"))
             //{
-            result.SurveyResponseDTO = Mapper.ToDataTransferObject(Implementation.GetSurveyResponseById(pRequest.Criteria.SurveyId));
+            result.SurveyResponseDTO = Mapper.ToDataTransferObject(Implementation.GetSurveyResponseById(pRequest.Criteria.ResposneId));
             //}
 
             return result;
@@ -208,10 +208,7 @@ namespace Epi.Web.WCF.SurveyService
             }
             
             // Transform SurveyResponse data transfer object to SurveyResponse business object
-            SurveyResponseBO SurveyResponse = new SurveyResponseBO();
-                
-                
-                //Mapper.ToBusinessObject(request.SurveyResponseDTO);
+            SurveyResponseBO SurveyResponse = Mapper.ToBusinessObject(request.SurveyResponseDTO);
 
             // Validate SurveyResponse business rules
 
@@ -232,17 +229,17 @@ namespace Epi.Web.WCF.SurveyService
             // The Decorator Design Pattern. 
             //using (TransactionDecorator transaction = new TransactionDecorator())
             {
-                if (request.Action == "Create")
+                if (request.Action.Equals("Create", StringComparison.OrdinalIgnoreCase))
                 {
                     Implementation.InsertSurveyResponse(SurveyResponse);
                     response.SurveyResponseDTO = Mapper.ToDataTransferObject(SurveyResponse);
                 }
-                else if (request.Action == "Update")
+                else if (request.Action.Equals("Update", StringComparison.OrdinalIgnoreCase))
                 {
                     Implementation.UpdateSurveyResponse(SurveyResponse);
                     response.SurveyResponseDTO = Mapper.ToDataTransferObject(SurveyResponse);
                 }
-                else if (request.Action == "Delete")
+                else if (request.Action.Equals("Delete", StringComparison.OrdinalIgnoreCase))
                 {
                     var criteria = request.Criteria as SurveyResponseCriteria;
                     var survey = Implementation.GetSurveyResponseById(SurveyResponse.SurveyId);
