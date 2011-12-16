@@ -29,7 +29,7 @@ namespace Epi.Web.EF
             using (var Context = DataObjectFactory.CreateContext())
             {
 
-                result = Mapper.Map(Context.SurveyResponses.FirstOrDefault(x => x.SurveyId == Id));
+                result = Mapper.Map(Context.SurveyResponses.FirstOrDefault(x => x.ResponseId == Id));
             }
 
             return result;
@@ -63,7 +63,13 @@ namespace Epi.Web.EF
         public void UpdateSurveyResponse(SurveyResponseBO SurveyResponse)
         { 
         //Update Survey
-        
+            using (var Context = DataObjectFactory.CreateContext())
+            {
+                SurveyResponse SurveyResponseEntity = Mapper.ToEF(SurveyResponse);
+                Context.AddToSurveyResponses(SurveyResponseEntity);
+
+                Context.SaveChanges();
+            }
         }
 
         /// <summary>
