@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<componentModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm5="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" dslVersion="1.0.0.0" Id="f5060218-72db-49e7-8870-ef33222a3dad" name="EpiInfoWebSurveySystemDependencies" linkedPackageId="2d672e83-73ee-4e8f-b1bd-5e1718949495" xmlns="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ComponentDesigner">
+<componentModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm5="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" xmlns:dm9="http://schemas.microsoft.com/dsltools/SimpleShapesModel" xmlns:dm10="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ActivityDesigner" xmlns:dm11="http://schemas.microsoft.com/dsltools/LogicalClassDesigner" dslVersion="1.0.0.0" Id="f5060218-72db-49e7-8870-ef33222a3dad" name="EpiInfoWebSurveySystemDependencies" linkedPackageId="2d672e83-73ee-4e8f-b1bd-5e1718949495" xmlns="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ComponentDesigner">
   <profileInstances>
     <packageHasProfileInstances Id="99dbbbc9-9401-46d8-8daa-5eab40d29129">
       <profileInstance Id="fbc41638-ce72-4c5b-ae75-6c92ef45303d" name="StandardProfileL2">
@@ -12,6 +12,12 @@
         <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
       </profileInstance>
       <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances Id="65e6a41a-0db8-4d04-9956-b4cf76da09f9">
+      <profileInstance Id="fe9ba318-a1b9-47e0-9f69-4fe644dd3a09" name="CSharpProfile">
+        <elementDefinition Id="db4513e1-8269-43fb-88f7-458a5cba77b0" />
+      </profileInstance>
+      <elementDefinition Id="c2d726cf-e8bf-43b1-a6ef-713303241450" />
     </packageHasProfileInstances>
   </profileInstances>
   <packagedElements>
