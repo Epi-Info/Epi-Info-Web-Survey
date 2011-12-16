@@ -83,10 +83,13 @@
     <Compile Include="Fields\Abstract\ListField.cs" />
     <Compile Include="Fields\Abstract\Field.cs" />
     <Compile Include="FieldList.cs" />
+    <Compile Include="Fields\Abstract\NumericTextField.cs" />
     <Compile Include="Fields\Abstract\OrientableField.cs" />
     <Compile Include="Fields\CheckBox.cs" />
     <Compile Include="Fields\CheckBoxList.cs" />
+    <Compile Include="Fields\DatePicker.cs" />
     <Compile Include="Fields\Literal.cs" />
+    <Compile Include="Fields\NumericTextBox.cs" />
     <Compile Include="Fields\RadioList.cs" />
     <Compile Include="Fields\Select.cs" />
     <Compile Include="Fields\TextArea.cs" />
