@@ -36,8 +36,9 @@ namespace MvcDynamicForms.Fields
                 var error = new TagBuilder("label");
                 error.Attributes.Add("for", inputName);
                 error.Attributes.Add("class", _errorClass);
+                
                 StringBuilder errorStyleValues = new StringBuilder();
-                errorStyleValues.Append(GetContolStyle(_fontstyle.ToString(), (_Prompttop ).ToString(), (_Promptleft ).ToString(), _PromptWidth.ToString(), Height.ToString()));
+                errorStyleValues.Append(GetContolStyle(_fontstyle.ToString(), (_Prompttop+40 ).ToString(), (_Promptleft ).ToString(), (_PromptWidth+100).ToString(), Height.ToString()));
                 error.Attributes.Add("style", errorStyleValues.ToString());    
                 error.SetInnerText(Error);
                 html.Append(error.ToString());
@@ -49,10 +50,10 @@ namespace MvcDynamicForms.Fields
             txt.Attributes.Add("id", inputName);
             txt.Attributes.Add("type", "text");
             txt.Attributes.Add("value", Value);
-        
+            if(_IsRequired ==true){
             txt.Attributes.Add("class", "validate[required] text-input");
             txt.Attributes.Add("data-prompt-position", "topRight:15");
-           
+            }
 
             txt.Attributes.Add("style", "position:absolute;left:" + _left.ToString() + "px;top:" + _top.ToString() + "px" + ";width:"+_ControlWidth.ToString()+"px");            
           

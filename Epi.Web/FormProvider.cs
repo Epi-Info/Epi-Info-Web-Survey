@@ -56,7 +56,10 @@ namespace MvcDynamicForms.Demo.Models
                                 ControlWidth = _Width * double.Parse(_FieldTypeID.Attribute("ControlWidthPercentage").Value),
                                 fontstyle = _FieldTypeID.Attribute("PromptFontStyle").Value,
                                 fontSize = double.Parse(_FieldTypeID.Attribute("PromptFontSize").Value),
-                                fontfamily = _FieldTypeID.Attribute("PromptFontFamily").Value
+                                fontfamily = _FieldTypeID.Attribute("PromptFontFamily").Value,
+                                IsRequired =bool.Parse(_FieldTypeID.Attribute("IsRequired").Value),
+                                IsReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value)
+
                             };
                             form.AddFields(name);
                             break;

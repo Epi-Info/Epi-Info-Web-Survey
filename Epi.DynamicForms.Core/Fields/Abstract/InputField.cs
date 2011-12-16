@@ -20,6 +20,8 @@ namespace MvcDynamicForms.Fields
         protected string _requiredMessage = "Required";
         protected string _promptClass = "MvcDynamicFieldPrompt";
         protected string _errorClass = "MvcDynamicFieldError";
+        protected Boolean _IsRequired;
+        protected Boolean _IsReadOnly;
         protected Dictionary<string, string> _inputHtmlAttributes = new Dictionary<string, string>();
         /// <summary>
         /// Used to identify each InputField when performing model binding.
@@ -133,15 +135,15 @@ namespace MvcDynamicForms.Fields
         {
             Error = null;
         }
-        //protected double _Prompttop;
-        // protected double _Promptleft;
-        //protected double _PromptWidth;
-        //protected double _ControlWidth;
+         
         public double PromptTop { get { return this._Prompttop; } set { this._Prompttop = value; } }
         public double PromptLeft { get { return this._Promptleft; } set { this._Promptleft = value; } }
 
         public double PromptWidth { get { return this._PromptWidth; } set { this._PromptWidth = value; } }
         public double ControlWidth { get { return this._ControlWidth; } set { this._ControlWidth = value; } }
+        
+        public Boolean IsRequired { get { return this._IsRequired; } set {   this._IsRequired =value; } }
+        public Boolean IsReadOnly { get { return this._IsReadOnly; } set {   this._IsReadOnly = value; }}
 
     }
 }
