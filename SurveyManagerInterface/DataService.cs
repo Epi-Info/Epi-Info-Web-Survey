@@ -193,7 +193,7 @@ namespace Epi.Web.WCF.SurveyService
         /// </summary>
         /// <param name="request">SurveyResponse request message.</param>
         /// <returns>SurveyResponse response message.</returns>
-        public SurveyResponseResponse SaveSurveyResponse(SurveyResponseRequest request)
+        public SurveyResponseResponse SetSurveyResponse(SurveyResponseRequest request)
         {
             Epi.Web.Interfaces.DataInterfaces.ISurveyResponseDao SurveyResponseDao = new EF.EntitySurveyResponseDao();
             Epi.Web.BLL.SurveyResponse Implementation = new Epi.Web.BLL.SurveyResponse(SurveyResponseDao);

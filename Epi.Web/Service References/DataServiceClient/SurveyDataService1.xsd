@@ -92,4 +92,57 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfSurveyInfoDTO" nillable="true" type="tns:ArrayOfSurveyInfoDTO" />
+  <xs:complexType name="SurveyResponseRequest">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:RequestBase">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Criteria" nillable="true" type="tns:SurveyResponseCriteria" />
+          <xs:element minOccurs="0" name="SurveyResponseDTO" nillable="true" type="tns:SurveyResponseDTO" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="SurveyResponseRequest" nillable="true" type="tns:SurveyResponseRequest" />
+  <xs:complexType name="SurveyResponseCriteria">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:Criteria">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="DateCompleted" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="IncludeOrderStatistics" type="xs:boolean" />
+          <xs:element minOccurs="0" name="IsCompleted" type="xs:boolean" />
+          <xs:element minOccurs="0" name="ResposneId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="SurveyId" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="SurveyResponseCriteria" nillable="true" type="tns:SurveyResponseCriteria" />
+  <xs:complexType name="SurveyResponseDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="DateCompleted" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="DateLastUpdated" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="ResponseId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Status" type="xs:int" />
+      <xs:element minOccurs="0" name="SurveyId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="XML" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SurveyResponseDTO" nillable="true" type="tns:SurveyResponseDTO" />
+  <xs:complexType name="SurveyResponseResponse">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ResponseBase">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="SurveyResponseDTO" nillable="true" type="tns:SurveyResponseDTO" />
+          <xs:element minOccurs="0" name="SurveyResponseDTOList" nillable="true" type="tns:ArrayOfSurveyResponseDTO" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="SurveyResponseResponse" nillable="true" type="tns:SurveyResponseResponse" />
+  <xs:complexType name="ArrayOfSurveyResponseDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="SurveyResponseDTO" nillable="true" type="tns:SurveyResponseDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfSurveyResponseDTO" nillable="true" type="tns:ArrayOfSurveyResponseDTO" />
 </xs:schema>
