@@ -61,13 +61,19 @@ namespace Epi.Web.EF
         /// </summary>
         /// <param name="SurveyResponse">SurveyResponse.</param>
         public void UpdateSurveyResponse(SurveyResponseBO SurveyResponse)
-        { 
+        {
+            Guid Id = new Guid(SurveyResponse.ResponseId);
+
         //Update Survey
             using (var Context = DataObjectFactory.CreateContext())
             {
-                SurveyResponse SurveyResponseEntity = Mapper.ToEF(SurveyResponse);
-                Context.AddToSurveyResponses(SurveyResponseEntity);
+                var Query = from response in Context.SurveyResponses
+                            where response.ResponseId == Id 
+                            select response;
 
+                var DataRow = Query.Single();
+                DataRow.ResponseXML = SurveyResponse.XML;
+            
                 Context.SaveChanges();
             }
         }
