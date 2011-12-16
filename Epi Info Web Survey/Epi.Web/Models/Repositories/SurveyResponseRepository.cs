@@ -8,39 +8,46 @@ using Epi.Web.Common.Message;
 
 namespace Epi.Web.Repositories
 {
-    public class SurveyInfoRepository : RepositoryBase, ISurveyInfoRepository
+    public class SurveyResponseRepository : RepositoryBase, ISurveyResponseRepository
     {
 
 
 
         private Epi.Web.DataServiceClient.IDataService _iSurveyManager;
 
-        public SurveyInfoRepository(Epi.Web.DataServiceClient.IDataService iSurveyManager)
+        public SurveyResponseRepository(Epi.Web.DataServiceClient.IDataService iSurveyManager)
         {
             _iSurveyManager = iSurveyManager;
         }
         
         /// <summary>
-        /// Calling the proxy client to fetch a SurveyInfoResponse object
+        /// Calling the proxy client to fetch a SurveyResponseResponse object
         /// </summary>
         /// <param name="surveyid"></param>
         /// <returns></returns>
-        public SurveyInfoResponse GetSurveyInfo(SurveyInfoRequest pRequest)
+        public SurveyResponseResponse GetSurveyResponse(SurveyResponseRequest pRequest)
         {
 
-            //SurveyInfoResponse result = Client.GetSurveyInfo(pRequest);
-            SurveyInfoResponse result = _iSurveyManager.GetSurveyInfo(pRequest);
+            //SurveyResponseResponse result = Client.GetSurveyResponse(pRequest);
+            SurveyResponseResponse result = _iSurveyManager.GetSurveyResponse(pRequest);
             return result;
             
         }
 
+
+        public SurveyResponseResponse SaveSurveyResponse(SurveyResponseRequest pRequest)
+        {
+            SurveyResponseResponse result = _iSurveyManager.SetSurveyResponse(pRequest);
+            return result;
+        }
+
         #region stubcode
-            public List<Common.DTO.SurveyInfoDTO> GetList(Criterion criterion = null)
+            public List<Common.DTO.SurveyResponseDTO> GetList(Criterion criterion = null)
             {
                 throw new NotImplementedException();
             }
 
-            public Common.DTO.SurveyInfoDTO Get(int id)
+            public Common.DTO.SurveyResponseDTO Get(int id)
             {
                 throw new NotImplementedException();
             }
@@ -50,12 +57,12 @@ namespace Epi.Web.Repositories
                 throw new NotImplementedException();
             }
 
-            public void Insert(Common.DTO.SurveyInfoDTO t)
+            public void Insert(Common.DTO.SurveyResponseDTO t)
             {
                 throw new NotImplementedException();
             }
 
-            public void Update(Common.DTO.SurveyInfoDTO t)
+            public void Update(Common.DTO.SurveyResponseDTO t)
             {
                 throw new NotImplementedException();
             }
@@ -67,22 +74,22 @@ namespace Epi.Web.Repositories
         #endregion
 
 
-            List<SurveyInfoResponse> IRepository<SurveyInfoResponse>.GetList(Criterion criterion = null)
+            List<SurveyResponseResponse> IRepository<SurveyResponseResponse>.GetList(Criterion criterion = null)
             {
                 throw new NotImplementedException();
             }
 
-            SurveyInfoResponse IRepository<SurveyInfoResponse>.Get(int id)
+            SurveyResponseResponse IRepository<SurveyResponseResponse>.Get(int id)
             {
                 throw new NotImplementedException();
             }
 
-            public void Insert(SurveyInfoResponse t)
+            public void Insert(SurveyResponseResponse t)
             {
                 throw new NotImplementedException();
             }
 
-            public void Update(SurveyInfoResponse t)
+            public void Update(SurveyResponseResponse t)
             {
                 throw new NotImplementedException();
             }

@@ -18,6 +18,14 @@ namespace Epi.Web.WCF.SurveyService
 
         [OperationContract]
         SurveyInfoResponse SetSurveyInfo(SurveyInfoRequest pRequest);
+
+
+        [OperationContract]
+        SurveyResponseResponse GetSurveyResponse(SurveyResponseRequest pRequest);
+
+        [OperationContract]
+        SurveyResponseResponse SetSurveyResponse(SurveyResponseRequest pRequest);
+
     }
 
 }

@@ -27,12 +27,17 @@ namespace Epi.Web
             //InjectionConstructor: creates an instance of Microsoft.Practices.Unity.InjectionConstructor that looks for a constructor with the given set of parameters
             // e.g. container.RegisterType<ITestService, TestService>();            
             container
-            .RegisterType<Epi.Web.ActionServiceClient.IDataService, Epi.Web.ActionServiceClient.DataServiceClient>()
+            .RegisterType<Epi.Web.DataServiceClient.IDataService, Epi.Web.DataServiceClient.DataServiceClient>()
            .Configure<InjectedMembers>()
-            .ConfigureInjectionFor<Epi.Web.ActionServiceClient.DataServiceClient>(new InjectionConstructor("WSHttpBinding_IDataService"));
+            .ConfigureInjectionFor<Epi.Web.DataServiceClient.DataServiceClient>(new InjectionConstructor("WSHttpBinding_IDataService"));
            
             container.RegisterType<Epi.Web.Common.Message.SurveyInfoRequest, Epi.Web.Common.Message.SurveyInfoRequest>();
             container.RegisterType<Epi.Web.Repositories.Core.ISurveyInfoRepository, Epi.Web.Repositories.SurveyInfoRepository>();
+
+
+            container.RegisterType<Epi.Web.Common.Message.SurveyResponseRequest, Epi.Web.Common.Message.SurveyResponseRequest>();
+            container.RegisterType<Epi.Web.Repositories.Core.ISurveyResponseRepository, Epi.Web.Repositories.SurveyResponseRepository>();
+
 
             container.RegisterControllers();
 

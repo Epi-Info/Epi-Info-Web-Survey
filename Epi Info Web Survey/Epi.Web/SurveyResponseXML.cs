@@ -32,10 +32,6 @@ namespace Epi.Web
                     this.ResponseDetailList.Add(field.Key, field.Response);
                 }
             }
-            if (ResponseDetailList.Count() != 0)
-            {
-                CreateResponseXml(ResponseDetailList);
-            }
         }
 
         public void Add(MvcDynamicForms.Fields.InputField pField)
@@ -75,7 +71,7 @@ namespace Epi.Web
             return result;
          }
 
-          public XmlDocument CreateResponseXml(Dictionary<string, string> ResponseDetailList)
+          public XmlDocument CreateResponseXml()
           {
 
 
@@ -85,7 +81,7 @@ namespace Epi.Web
               xml.AppendChild(root);
 
 
-              foreach ( KeyValuePair<string, string> pair  in ResponseDetailList)
+              foreach ( KeyValuePair<string, string> pair  in this.ResponseDetailList)
               {
                   XmlElement child = xml.CreateElement("ResponseDetail");
                   child.SetAttribute("QuestionId", pair.Key);

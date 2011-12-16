@@ -8,11 +8,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Epi.Web.ActionServiceClient {
+namespace Epi.Web.DataServiceClient {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ActionServiceClient.IDataService")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="DataServiceClient.IDataService")]
     public interface IDataService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/GetSurveyInfo", ReplyAction="http://tempuri.org/IDataService/GetSurveyInfoResponse")]
@@ -20,15 +20,21 @@ namespace Epi.Web.ActionServiceClient {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/SetSurveyInfo", ReplyAction="http://tempuri.org/IDataService/SetSurveyInfoResponse")]
         Epi.Web.Common.Message.SurveyInfoResponse SetSurveyInfo(Epi.Web.Common.Message.SurveyInfoRequest pRequest);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/GetSurveyResponse", ReplyAction="http://tempuri.org/IDataService/GetSurveyResponseResponse")]
+        Epi.Web.Common.Message.SurveyResponseResponse GetSurveyResponse(Epi.Web.Common.Message.SurveyResponseRequest pRequest);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/SetSurveyResponse", ReplyAction="http://tempuri.org/IDataService/SetSurveyResponseResponse")]
+        Epi.Web.Common.Message.SurveyResponseResponse SetSurveyResponse(Epi.Web.Common.Message.SurveyResponseRequest pRequest);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IDataServiceChannel : Epi.Web.ActionServiceClient.IDataService, System.ServiceModel.IClientChannel {
+    public interface IDataServiceChannel : Epi.Web.DataServiceClient.IDataService, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class DataServiceClient : System.ServiceModel.ClientBase<Epi.Web.ActionServiceClient.IDataService>, Epi.Web.ActionServiceClient.IDataService {
+    public partial class DataServiceClient : System.ServiceModel.ClientBase<Epi.Web.DataServiceClient.IDataService>, Epi.Web.DataServiceClient.IDataService {
         
         public DataServiceClient() {
         }
@@ -55,6 +61,14 @@ namespace Epi.Web.ActionServiceClient {
         
         public Epi.Web.Common.Message.SurveyInfoResponse SetSurveyInfo(Epi.Web.Common.Message.SurveyInfoRequest pRequest) {
             return base.Channel.SetSurveyInfo(pRequest);
+        }
+        
+        public Epi.Web.Common.Message.SurveyResponseResponse GetSurveyResponse(Epi.Web.Common.Message.SurveyResponseRequest pRequest) {
+            return base.Channel.GetSurveyResponse(pRequest);
+        }
+        
+        public Epi.Web.Common.Message.SurveyResponseResponse SetSurveyResponse(Epi.Web.Common.Message.SurveyResponseRequest pRequest) {
+            return base.Channel.SetSurveyResponse(pRequest);
         }
     }
 }
