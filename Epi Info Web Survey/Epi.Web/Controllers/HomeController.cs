@@ -102,15 +102,17 @@ namespace Epi.Web.Controllers
             else
             {
                 SurveyResponseRequest surveyResponseRequest = new SurveyResponseRequest();
-                Guid ResponseID = new Guid();
+                Guid ResponseID = Guid.NewGuid();
                 TempData["SurveyResponseId"] = ResponseID.ToString();
                 surveyResponseRequest.Criteria.ResposneId = ResponseID.ToString();
+                
                 surveyResponseRequest.SurveyResponseDTO = new Common.DTO.SurveyResponseDTO();
+                surveyResponseRequest.SurveyResponseDTO.ResponseId = ResponseID.ToString();
                 surveyResponseRequest.SurveyResponseDTO.DateCompleted = DateTime.MinValue ;
                 surveyResponseRequest.SurveyResponseDTO.SurveyId = surveyid;
                 surveyResponseRequest.SurveyResponseDTO.Status = 1;
                 surveyResponseRequest.SurveyResponseDTO.XML = new SurveyResponseXML(surveyid).CreateResponseXml().InnerXml;
-
+                surveyResponseRequest.Action = "Create";
                 SurveyResponseResponse surveyResponseResponse =  _iSurveyResponseRepository.SaveSurveyResponse(surveyResponseRequest);
 
                 return View("Survey", form);

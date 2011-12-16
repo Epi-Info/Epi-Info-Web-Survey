@@ -80,7 +80,7 @@ namespace Epi.Web.Common.ObjectMapping
         /// </summary>
         /// <param name="SurveyInfo">A SurveyResponseDTO business object.</param>
         /// /// <returns>A SurveyResponseBO.</returns>
-        public static SurveyResponseBO ToDataTransferObject(SurveyResponseDTO pBO)
+        public static SurveyResponseBO ToBusinessObject(SurveyResponseDTO pBO)
         {
             return new SurveyResponseBO
             {

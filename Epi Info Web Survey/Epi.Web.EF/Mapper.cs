@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Epi.Web.Common.BusinessObject;
+using Epi.Web.Common.DTO;
 
 namespace Epi.Web.EF
 {
@@ -60,6 +61,43 @@ namespace Epi.Web.EF
         /// </summary>
         /// <param name="entity">A SurveyMetaData entity to be transformed.</param>
         /// <returns>A SurveyInfoBO business object.</returns>
+        internal static SurveyResponseBO Map(SurveyResponseDTO entity)
+        {
+            return new SurveyResponseBO
+            {
+                SurveyId = entity.SurveyId.ToString(),
+                ResponseId = entity.ResponseId.ToString(),
+                XML = entity.XML,
+                Status = entity.Status,
+                DateLastUpdated = entity.DateLastUpdated,
+                DateCompleted = entity.DateCompleted
+            };
+        }
+
+        /// <summary>
+        /// Maps SurveyInfoBO business object to SurveyMetaData entity.
+        /// </summary>
+        /// <param name="businessobject">A SurveyInfoBO business object.</param>
+        /// <returns>A SurveyMetaData entity.</returns>
+        internal static SurveyResponseDTO Map(SurveyResponseBO businessobject)
+        {
+            return new SurveyResponseDTO
+            {
+                SurveyId = businessobject.SurveyId,
+                ResponseId = businessobject.ResponseId,
+                XML = businessobject.XML,
+                Status = businessobject.Status,
+                DateLastUpdated = businessobject.DateLastUpdated,
+                DateCompleted = businessobject.DateCompleted
+
+            };
+        }
+
+        /// <summary>
+        /// Maps SurveyMetaData entity to SurveyInfoBO business object.
+        /// </summary>
+        /// <param name="entity">A SurveyMetaData entity to be transformed.</param>
+        /// <returns>A SurveyInfoBO business object.</returns>
         internal static SurveyResponseBO Map(SurveyResponse entity)
         {
             return new SurveyResponseBO
@@ -67,7 +105,7 @@ namespace Epi.Web.EF
                 SurveyId = entity.SurveyId.ToString(),
                 ResponseId = entity.ResponseId.ToString(),
                 XML = entity.ResponseXML,
-               // IsCompleted = entity.IsComplete,
+                Status = entity.StatusId,
                 DateLastUpdated = entity.DateLastUpdated,
                 DateCompleted = entity.DateCompleted.Value
             };
@@ -78,16 +116,16 @@ namespace Epi.Web.EF
         /// </summary>
         /// <param name="businessobject">A SurveyInfoBO business object.</param>
         /// <returns>A SurveyMetaData entity.</returns>
-        internal static SurveyResponse Map(SurveyResponseBO businessobject)
+        internal static SurveyResponse ToEF(SurveyResponseBO pBO)
         {
             return new SurveyResponse
             {
-                SurveyId = new Guid(businessobject.SurveyId),
-                ResponseId = new Guid(businessobject.ResponseId),
-                ResponseXML = businessobject.XML,
-                //IsComplete = businessobject.IsCompleted,
-                DateLastUpdated = businessobject.DateLastUpdated,
-                DateCompleted = businessobject.DateCompleted
+                SurveyId = new Guid(pBO.SurveyId),
+                ResponseId = new Guid(pBO.ResponseId),
+                ResponseXML = pBO.XML,
+                StatusId = pBO.Status,
+                DateLastUpdated = pBO.DateLastUpdated,
+                DateCompleted = pBO.DateCompleted
 
             };
         }
