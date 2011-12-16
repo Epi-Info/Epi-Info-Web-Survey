@@ -116,6 +116,8 @@ namespace Epi.Web.Controllers
             SurveyInfoResponse surveyInfoResponse = _iSurveyInfoRepository.GetSurveyInfo(_surveyInfoRequest);
             var s = Mapper.ToSurveyInfoModel(surveyInfoResponse.SurveyInfo);
 
+            UpdateModel(form);
+
             if (form.Validate())
             {
                 // 1 Get the record for the current survey response

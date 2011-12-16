@@ -11,10 +11,11 @@ namespace Epi.Web
     {
 
         Dictionary<string, string> ResponseDetailList = new Dictionary<string, string>();
+        string _SurveyId;
 
-        public SurveyResponseXML()
+        public SurveyResponseXML(string pSurveyId)
         {
-
+            this._SurveyId = pSurveyId;
         }
 
         public void Add(MvcDynamicForms.Form pForm)
@@ -77,7 +78,7 @@ namespace Epi.Web
 
               XmlDocument xml = new XmlDocument();
               XmlElement root = xml.CreateElement("SurveyResponse");
-              root.SetAttribute("SurveyId","");
+              root.SetAttribute("SurveyId", this._SurveyId);
               xml.AppendChild(root);
 
 
