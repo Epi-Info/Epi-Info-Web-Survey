@@ -2,13 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Xml;
+using System.Xml.Linq;
 
 namespace Epi.Web
 {
     public class SurveyResponseXML
     {
-        Dictionary<string,string> ResponseDetailList;
 
+        Dictionary<string, string> ResponseDetailList = new Dictionary<string, string>();
 
         public SurveyResponseXML()
         {
@@ -20,14 +22,19 @@ namespace Epi.Web
 
             foreach (var field in pForm.InputFields)
             {
+           
                 if(this.ResponseDetailList.ContainsKey(field.Key))
                 {
-                    this.ResponseDetailList[field.Key] = field.GetXML();
+                    this.ResponseDetailList[field.Key] = field.Key;
                 }
                 else
                 {
-                    this.ResponseDetailList.Add(field.Key, field.GetXML());
+                    this.ResponseDetailList.Add(field.Key, field.Response);
                 }
+            }
+            if (ResponseDetailList.Count() != 0)
+            {
+                CreateResponseXml(ResponseDetailList);
             }
         }
 
@@ -67,5 +74,28 @@ namespace Epi.Web
 
             return result;
          }
+
+          public XmlDocument CreateResponseXml(Dictionary<string, string> ResponseDetailList)
+          {
+
+
+              XmlDocument xml = new XmlDocument();
+              XmlElement root = xml.CreateElement("SurveyResponse");
+              root.SetAttribute("SurveyId","");
+              xml.AppendChild(root);
+
+
+              foreach ( KeyValuePair<string, string> pair  in ResponseDetailList)
+              {
+                  XmlElement child = xml.CreateElement("ResponseDetail");
+                  child.SetAttribute("QuestionId", pair.Key);
+                  child.InnerText = pair.Value;
+                  root.AppendChild(child);
+              }
+
+
+              return xml;
+          }
+
     }
 }

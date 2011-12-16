@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-
+using System.Xml;
+using System.Xml.Linq;
+ 
 namespace MvcDynamicForms.Fields
 {
     /// <summary>
@@ -68,7 +70,12 @@ namespace MvcDynamicForms.Fields
             ClearError();
             return true;
         }
+        public override string GetXML()
+        {
 
+            string XML ="<ResponseDetail QuestionId='"+_key + "'>" + Response +"<ResponseDetail>";
+            return XML;
+        }
 
 
     }
