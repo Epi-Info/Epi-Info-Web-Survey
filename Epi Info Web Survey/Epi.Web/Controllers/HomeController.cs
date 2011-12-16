@@ -110,12 +110,17 @@ namespace Epi.Web.Controllers
                    _surveyInfoRequest.Criteria.SurveyId = surveyid;
                     SurveyInfoResponse surveyInfoResponse = _iSurveyInfoRepository.GetSurveyInfo(_surveyInfoRequest);
                     var s = Mapper.ToSurveyInfoModel(surveyInfoResponse.SurveyInfo);
+
+                    UpdateModel(form);
+
                     if (!form.Validate())
                     {
                         return View("Survey", form);
                     }
                     else
                     {
+                        SurveyResponseXML SurveyResponseXML = new SurveyResponseXML();
+                        SurveyResponseXML.Add(form);
                          return View("PostSubmit", s);
                       
                     }
