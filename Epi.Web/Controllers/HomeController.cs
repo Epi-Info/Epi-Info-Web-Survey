@@ -145,9 +145,10 @@ namespace Epi.Web.Controllers
                 surveyResponseRequest.SurveyResponseDTO = surveyResponseResponse.SurveyResponseDTO;
                 SurveyResponseXML surveyXML = new SurveyResponseXML(surveyid);
                 surveyXML.Add(form);
-                surveyResponseRequest.SurveyResponseDTO.XML = surveyXML.CreateResponseXml().ToString();
+                surveyResponseRequest.SurveyResponseDTO.XML = surveyXML.CreateResponseXml().InnerXml;
 
                 // 3 save the current survey response
+                surveyResponseRequest.Action = "Update";
                 surveyResponseResponse = _iSurveyResponseRepository.SaveSurveyResponse(surveyResponseRequest);
 
                 return View("PostSubmit", s);
