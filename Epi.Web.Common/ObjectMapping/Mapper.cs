@@ -70,7 +70,7 @@ namespace Epi.Web.Common.ObjectMapping
                 DateLastUpdated = pBO.DateLastUpdated,
                 XML = pBO.XML,
                 DateCompleted = pBO.DateCompleted,
-                IsCompleted = pBO.IsCompleted
+                Status = pBO.Status
             };
         }
 
@@ -89,7 +89,7 @@ namespace Epi.Web.Common.ObjectMapping
                 DateLastUpdated = pBO.DateLastUpdated,
                 XML = pBO.XML,
                 DateCompleted = pBO.DateCompleted,
-                IsCompleted = pBO.IsCompleted
+                Status = pBO.Status
             };
         }
 

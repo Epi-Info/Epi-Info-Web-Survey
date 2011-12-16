@@ -8,6 +8,7 @@ using Epi.Web.Repositories.Core;
 using Epi.Web.Common.Message;
 using Epi.Web.Common.Criteria;
 
+
 namespace Epi.Web.Controllers
 {
     public class HomeController : Controller
@@ -18,11 +19,17 @@ namespace Epi.Web.Controllers
         private ISurveyInfoRepository _iSurveyInfoRepository;
         //Initialize SurveyInfoRequest
         private Epi.Web.Common.Message.SurveyInfoRequest _surveyInfoRequest;
+
+
+        private ISurveyResponseRepository _iSurveyResponseRepository;
+        private Epi.Web.Common.Message.SurveyResponseRequest _surveyResponseRequest;
+
+
         /// <summary>
         /// Injectinting ISurveyInfoRepository through Constructor
         /// </summary>
         /// <param name="iSurveyInfoRepository"></param>
-        public HomeController(ISurveyInfoRepository iSurveyInfoRepository, Epi.Web.Common.Message.SurveyInfoRequest surveyInfoRequest)
+        public HomeController(ISurveyInfoRepository iSurveyInfoRepository, Epi.Web.Common.Message.SurveyInfoRequest surveyInfoRequest, ISurveyResponseRepository iSurveyResponseRepository)
         {
             _iSurveyInfoRepository = iSurveyInfoRepository;
             _surveyInfoRequest = surveyInfoRequest;
@@ -100,33 +107,42 @@ namespace Epi.Web.Controllers
 
         public ActionResult Submit(string surveyid, Epi.Web.Models.SurveyInfoModel surveyModel)
         {
-
-
             _surveyInfoRequest.Criteria.SurveyId = surveyModel.SurveyId;
             var surveyInfoDTO = _iSurveyInfoRepository.GetSurveyInfo(_surveyInfoRequest).SurveyInfo;
 
             var form = MvcDynamicForms.Demo.Models.FormProvider.GetForm(surveyInfoDTO, 1);// Requesting the first page of the survey.
             
-                   _surveyInfoRequest.Criteria.SurveyId = surveyid;
-                    SurveyInfoResponse surveyInfoResponse = _iSurveyInfoRepository.GetSurveyInfo(_surveyInfoRequest);
-                    var s = Mapper.ToSurveyInfoModel(surveyInfoResponse.SurveyInfo);
+            _surveyInfoRequest.Criteria.SurveyId = surveyid;
+            SurveyInfoResponse surveyInfoResponse = _iSurveyInfoRepository.GetSurveyInfo(_surveyInfoRequest);
+            var s = Mapper.ToSurveyInfoModel(surveyInfoResponse.SurveyInfo);
 
-                    UpdateModel(form);
+            if (form.Validate())
+            {
+                // 1 Get the record for the current survey response
+                // 2 update the current survey response
+                // 3 save the current survey response
 
-                    if (!form.Validate())
-                    {
-                        return View("Survey", form);
-                    }
-                    else
-                    {
-                        SurveyResponseXML SurveyResponseXML = new SurveyResponseXML();
-                        SurveyResponseXML.Add(form);
-                         return View("PostSubmit", s);
-                      
-                    }
+                // 1 Get the record for the current survey response
+                SurveyResponseRequest surveyResponseRequest = new SurveyResponseRequest();
+                surveyResponseRequest.Criteria.ResposneId = "current surveyresponseId goes here";
+                SurveyResponseResponse surveyResponseResponse = _iSurveyResponseRepository.GetSurveyResponse(surveyResponseRequest);
+
+                // 2 update the current survey response
+                surveyResponseRequest.SurveyResponseDTO = surveyResponseResponse.SurveyResponseDTO;
+                SurveyResponseXML surveyXML = new SurveyResponseXML();
+                surveyXML.Add(form);
+                surveyResponseRequest.SurveyResponseDTO.XML = surveyXML.CreateResponseXml().ToString();
+
+                // 3 save the current survey response
+                surveyResponseResponse = _iSurveyResponseRepository.SaveSurveyResponse(surveyResponseRequest);
+
+                return View("PostSubmit", s);
+            }
+            else
+            {
+                return View("Survey", form);
+            }
            
-                    
-            
         }
     }
 }

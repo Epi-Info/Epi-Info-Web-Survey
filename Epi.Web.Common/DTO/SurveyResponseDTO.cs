@@ -18,7 +18,7 @@ namespace Epi.Web.Common.DTO
         [DataMember]
         public DateTime DateCompleted { get; set; }
         [DataMember]
-        public bool IsCompleted { get; set; }
+        public int Status { get; set; }
         [DataMember]
         public string XML { get; set; }
     }

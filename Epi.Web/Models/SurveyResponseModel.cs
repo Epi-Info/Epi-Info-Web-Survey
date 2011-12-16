@@ -1,17 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.Web;
 
-namespace Epi.Web.Common.BusinessObject
+namespace Epi.Web.Models
 {
-    public class SurveyResponseBO
+    
+    /// <summary>
+    /// The Survey Model that will be pumped to view
+    /// </summary>
+    public class SurveyResponseModel
     {
-        public string ResponseId{ get; set; }
+        public string ResponseId { get; set; }
         public string SurveyId { get; set; }
         public DateTime DateLastUpdated { get; set; }
         public DateTime DateCompleted { get; set; }
         public int Status { get; set; }
         public string XML { get; set; }
+
     }
 }
