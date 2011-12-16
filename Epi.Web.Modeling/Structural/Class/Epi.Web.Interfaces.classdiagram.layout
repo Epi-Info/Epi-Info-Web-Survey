@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<logicalClassDesignerDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="Epi.Web.Interfaces">
+  <logicalClassDesignerModelMoniker Id="58dc8e31-2cbf-4b2b-8312-88aa53dd8826" />
+  <nestedChildShapes>
+    <packageShape Id="5e940b86-9aa4-4eb5-989d-4d87cb539594" absoluteBounds="0.875, 1.375, 7.125, 3.5" customColor="255, 249, 230" hideQualifiedName="false">
+      <packageMoniker Id="57a806ca-8e44-421b-b26c-16ab7af495c0" LastKnownName="Epi.Web.Interfaces" />
+      <nestedChildShapes>
+        <packageShape Id="b229e7c9-9be1-46e7-82ae-5ab98775553f" absoluteBounds="1, 2.125, 6.5, 2.375" customColor="255, 249, 230" hideQualifiedName="false">
+          <packageMoniker Id="6bc1077c-c1f4-49e3-a40d-48784a20670d" LastKnownName="Epi.Web.Interfaces.DataInterfaces" />
+          <nestedChildShapes>
+            <interfaceShape Id="f5258dc4-d71f-4a1a-bef8-cbd1a43f02ab" absoluteBounds="5.875, 2.5, 1.5, 1.7309721742073698" hideQualifiedName="false" increaseHeight="0.18800345897674564" customColor="207, 223, 191">
+              <interfaceMoniker Id="ce1c8c74-23ad-4e7d-9f75-f627cedb0dcf" LastKnownName="ISurveyResponseDao" />
+              <nestedChildShapes>
+                <AttributeElementListCompartment Id="89164b98-6f88-444e-b81b-6a50c79637a9" absoluteBounds="5.89, 3.0780034589767453, 1.4700000000000002, 0.2011718675494194" name="AttributesCompartment" titleTextColor="Black" itemTextColor="Black" />
+                <OperationElementListCompartment Id="cd249eec-b541-4394-8434-e0bd6aac5717" absoluteBounds="5.89, 3.2891753265261654, 1.4700000000000002, 0.84179684768120444" name="OperationsCompartment" titleTextColor="Black" itemTextColor="Black" />
+              </nestedChildShapes>
+            </interfaceShape>
+            <interfaceShape Id="3424e1e8-23fd-403e-b40f-540b2b17a4a1" absoluteBounds="4.125, 2.5, 1.5, 1.7309721742073694" hideQualifiedName="false" increaseHeight="0.18800345897674564" customColor="207, 223, 191">
+              <interfaceMoniker Id="187871a9-b2ae-4425-8f9e-50a427f0f6c0" LastKnownName="ISurveyInfoDao" />
+              <nestedChildShapes>
+                <AttributeElementListCompartment Id="863ac975-6d7f-478f-93c6-94a66f208a1e" absoluteBounds="4.14, 3.0780034589767458, 1.4700000000000002, 0.2011718675494194" name="AttributesCompartment" titleTextColor="Black" itemTextColor="Black" />
+                <OperationElementListCompartment Id="488fc9e8-6e64-4308-9b8c-77919be763c3" absoluteBounds="4.14, 3.289175326526165, 1.4700000000000002, 0.84179684768120444" name="OperationsCompartment" titleTextColor="Black" itemTextColor="Black" />
+              </nestedChildShapes>
+            </interfaceShape>
+            <interfaceShape Id="1c3a252d-1397-4054-98c3-3b3e131ba97f" absoluteBounds="1.25, 2.75, 1.5, 1.2505034391085308" hideQualifiedName="false" increaseHeight="0.18800345897674564" customColor="207, 223, 191">
+              <interfaceMoniker Id="a0d580de-3640-47e8-8f7a-ca6a1d0d2875" LastKnownName="IDaoFactory" />
+              <nestedChildShapes>
+                <AttributeElementListCompartment Id="48b95b37-e173-4616-89ff-87c5da9d5d47" absoluteBounds="1.2650000000000001, 3.3280034589767458, 1.4700000000000002, 0.36132811258236563" name="AttributesCompartment" titleTextColor="Black" itemTextColor="Black" />
+                <OperationElementListCompartment Id="b6dc9cd9-6677-4101-a99c-afdbdce0736b" absoluteBounds="1.2650000000000001, 3.6993315715591111, 1.4700000000000002, 0.2011718675494194" name="OperationsCompartment" titleTextColor="Black" itemTextColor="Black" />
+              </nestedChildShapes>
+            </interfaceShape>
+            <associationConnector edgePoints="[(2.75 : 3.37525171955427); (4.125 : 3.37525171955427)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="113, 111, 110" sourceMultiplicity="*" targetMultiplicity="1">
+              <associationMoniker Id="d0c08ded-3265-4843-bee7-a978e6367e8f" />
+              <relativeChildShapes />
+              <nodes>
+                <interfaceShapeMoniker Id="1c3a252d-1397-4054-98c3-3b3e131ba97f" />
+                <interfaceShapeMoniker Id="3424e1e8-23fd-403e-b40f-540b2b17a4a1" />
+              </nodes>
+            </associationConnector>
+          </nestedChildShapes>
+        </packageShape>
+      </nestedChildShapes>
+    </packageShape>
+  </nestedChildShapes>
+</logicalClassDesignerDiagram>
