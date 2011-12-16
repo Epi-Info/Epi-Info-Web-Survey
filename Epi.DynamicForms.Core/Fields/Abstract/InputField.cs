@@ -67,6 +67,11 @@ namespace MvcDynamicForms.Fields
         /// Whether the field must be completed to be valid.
         /// </summary>
         public bool Required { get; set; }
+
+        /// <summary>
+        /// Whether the field is readonly. If the field is readonly then the required = false
+        /// </summary>
+        public bool ReadOnly { get; set; }
         /// <summary>
         /// The error message that the end user sees if they do not complete the field.
         /// </summary>
