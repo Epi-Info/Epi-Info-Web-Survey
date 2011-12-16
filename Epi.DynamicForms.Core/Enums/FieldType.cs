@@ -11,7 +11,9 @@
         CheckBoxList = 4,
         RadioButtonList = 5,
         Select = 6,
-        Literal = 7
+        Literal = 7,
+        NumericTextBox = 8,
+        DatePicker = 9
     }
 }
  
