@@ -92,8 +92,8 @@ namespace Epi.Web.Controllers
             //SurveyInfoRequest surveyInfoRequest = new SurveyInfoRequest();
             _surveyInfoRequest.Criteria.SurveyId = surveyModel.SurveyId;
             var surveyInfoDTO = _iSurveyInfoRepository.GetSurveyInfo(_surveyInfoRequest).SurveyInfo;
-
-            var form = MvcDynamicForms.Demo.Models.FormProvider.GetForm(surveyInfoDTO, 1);// Requesting the first page of the survey.
+            var form = MvcDynamicForms.Demo.Models.FormProvider.GetForm(surveyInfoDTO, this.GetCurrentPage(), this.GetCurrentSurveyAnswer());
+            
 
             if (!string.IsNullOrEmpty(submit))
             {
@@ -113,7 +113,7 @@ namespace Epi.Web.Controllers
                 surveyResponseRequest.SurveyResponseDTO.Status = 1;
                 surveyResponseRequest.SurveyResponseDTO.XML = new SurveyResponseXML(surveyid).CreateResponseXml().InnerXml;
                 surveyResponseRequest.Action = "Create";
-                SurveyAnswerResponse surveyResponseResponse =  _iSurveyResponseRepository.SaveSurveyResponse(surveyResponseRequest);
+                SurveyAnswerResponse surveyResponseResponse =  _iSurveyResponseRepository.SaveSurveyAnswer(surveyResponseRequest);
 
                 return View("Survey", form);
             }
@@ -124,7 +124,7 @@ namespace Epi.Web.Controllers
             _surveyInfoRequest.Criteria.SurveyId = surveyModel.SurveyId;
             var surveyInfoDTO = _iSurveyInfoRepository.GetSurveyInfo(_surveyInfoRequest).SurveyInfo;
 
-            var form = MvcDynamicForms.Demo.Models.FormProvider.GetForm(surveyInfoDTO, 1);// Requesting the first page of the survey.
+            var form = MvcDynamicForms.Demo.Models.FormProvider.GetForm(surveyInfoDTO, this.GetCurrentPage(), this.GetCurrentSurveyAnswer());// Requesting the first page of the survey.
             
             _surveyInfoRequest.Criteria.SurveyId = surveyid;
             SurveyInfoResponse surveyInfoResponse = _iSurveyInfoRepository.GetSurveyInfo(_surveyInfoRequest);
@@ -139,7 +139,7 @@ namespace Epi.Web.Controllers
                 // 1 Get the record for the current survey response
                 SurveyAnswerRequest surveyResponseRequest = new SurveyAnswerRequest();
                 surveyResponseRequest.Criteria.ResposneId = TempData["SurveyResponseId"].ToString();
-                SurveyAnswerResponse surveyResponseResponse = _iSurveyResponseRepository.GetSurveyResponse(surveyResponseRequest);
+                SurveyAnswerResponse surveyResponseResponse = _iSurveyResponseRepository.GetSurveyAnswer(surveyResponseRequest);
 
                 // 2 update the current survey response
                 surveyResponseRequest.SurveyResponseDTO = surveyResponseResponse.SurveyResponseDTO;
@@ -149,7 +149,7 @@ namespace Epi.Web.Controllers
 
                 // 3 save the current survey response
                 surveyResponseRequest.Action = "Update";
-                surveyResponseResponse = _iSurveyResponseRepository.SaveSurveyResponse(surveyResponseRequest);
+                surveyResponseResponse = _iSurveyResponseRepository.SaveSurveyAnswer(surveyResponseRequest);
 
                 return View("PostSubmit", s);
             }
@@ -157,7 +157,32 @@ namespace Epi.Web.Controllers
             {
                 return View("Survey", form);
             }
-           
         }
+
+        private int GetCurrentPage()
+        {
+            int CurrentPage = 1;
+            if (TempData.ContainsKey("CurrentPage") && TempData["CurrentPage"] != null)
+            {
+                int.TryParse(TempData["CurrentPage"].ToString(), out CurrentPage);
+            }
+
+            return CurrentPage;
+        }
+
+        private Epi.Web.Common.DTO.SurveyAnswerDTO GetCurrentSurveyAnswer()
+        {
+            Epi.Web.Common.DTO.SurveyAnswerDTO result = null;
+
+            if (TempData.ContainsKey("SurveyResponseId") && TempData["SurveyResponseId"] != null && !string.IsNullOrEmpty(TempData["SurveyResponseId"].ToString()))
+            {
+                SurveyAnswerRequest surveyAnswerRequest = new SurveyAnswerRequest();
+                surveyAnswerRequest.Criteria.ResposneId = TempData["SurveyResponseId"].ToString();
+                result = _iSurveyResponseRepository.GetSurveyAnswer(surveyAnswerRequest).SurveyResponseDTO;
+            }
+
+            return result;
+        }
+
     }
 }
