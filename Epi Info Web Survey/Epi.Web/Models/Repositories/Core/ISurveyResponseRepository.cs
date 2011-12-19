@@ -10,7 +10,7 @@ namespace Epi.Web.Repositories.Core
     /// SurveyResponse Repository interface.
     /// Derives from standard IRepository of SurveyResponseResponse. Adds a method GetSurveyResponse .
     /// </summary>
-    public interface ISurveyResponseRepository: IRepository<Epi.Web.Common.Message.SurveyAnswerResponse>
+    public interface ISurveyAnswerRepository: IRepository<Epi.Web.Common.Message.SurveyAnswerResponse>
     {
         SurveyAnswerResponse GetSurveyAnswer(SurveyAnswerRequest pRequest);
         SurveyAnswerResponse SaveSurveyAnswer(SurveyAnswerRequest pRequest);
