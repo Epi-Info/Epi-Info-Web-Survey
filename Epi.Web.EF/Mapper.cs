@@ -61,7 +61,7 @@ namespace Epi.Web.EF
         /// </summary>
         /// <param name="entity">A SurveyMetaData entity to be transformed.</param>
         /// <returns>A SurveyInfoBO business object.</returns>
-        internal static SurveyResponseBO Map(SurveyResponseDTO entity)
+        internal static SurveyResponseBO Map(SurveyAnswerDTO entity)
         {
             return new SurveyResponseBO
             {
@@ -79,9 +79,9 @@ namespace Epi.Web.EF
         /// </summary>
         /// <param name="businessobject">A SurveyInfoBO business object.</param>
         /// <returns>A SurveyMetaData entity.</returns>
-        internal static SurveyResponseDTO Map(SurveyResponseBO businessobject)
+        internal static SurveyAnswerDTO Map(SurveyResponseBO businessobject)
         {
-            return new SurveyResponseDTO
+            return new SurveyAnswerDTO
             {
                 SurveyId = businessobject.SurveyId,
                 ResponseId = businessobject.ResponseId,

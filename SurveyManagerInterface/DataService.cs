@@ -148,9 +148,9 @@ namespace Epi.Web.WCF.SurveyService
         /// </summary>
         /// <param name="pRequest"></param>
         /// <returns></returns>
-        public SurveyResponseResponse GetSurveyResponse(SurveyResponseRequest pRequest)
+        public SurveyAnswerResponse GetSurveyResponse(SurveyAnswerRequest pRequest)
         {
-            SurveyResponseResponse result = new SurveyResponseResponse(pRequest.RequestId);
+            SurveyAnswerResponse result = new SurveyAnswerResponse(pRequest.RequestId);
             Epi.Web.Interfaces.DataInterfaces.ISurveyResponseDao surveyInfoDao = new EF.EntitySurveyResponseDao();
             Epi.Web.BLL.SurveyResponse Implementation = new Epi.Web.BLL.SurveyResponse(surveyInfoDao);
 
@@ -193,13 +193,13 @@ namespace Epi.Web.WCF.SurveyService
         /// </summary>
         /// <param name="request">SurveyResponse request message.</param>
         /// <returns>SurveyResponse response message.</returns>
-        public SurveyResponseResponse SetSurveyResponse(SurveyResponseRequest request)
+        public SurveyAnswerResponse SetSurveyResponse(SurveyAnswerRequest request)
         {
             Epi.Web.Interfaces.DataInterfaces.ISurveyResponseDao SurveyResponseDao = new EF.EntitySurveyResponseDao();
             Epi.Web.BLL.SurveyResponse Implementation = new Epi.Web.BLL.SurveyResponse(SurveyResponseDao);
 
 
-            SurveyResponseResponse response = new SurveyResponseResponse(request.RequestId);
+            SurveyAnswerResponse response = new SurveyAnswerResponse(request.RequestId);
 
             // Validate client tag, access token, and user credentials
             if (!ValidRequest(request, response, Validate.All))

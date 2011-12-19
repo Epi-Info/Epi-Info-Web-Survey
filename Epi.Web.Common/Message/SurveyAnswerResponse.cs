@@ -10,29 +10,29 @@ namespace Epi.Web.Common.Message
     /// Represents a SurveyInfo response message to client
     /// </summary>    
     [DataContract(Namespace = "http://www.yourcompany.com/types/")]
-    public class SurveyResponseResponse : ResponseBase
+    public class SurveyAnswerResponse : ResponseBase
     {
         /// <summary>
         /// Default Constructor for SurveyInfoResponse.
         /// </summary>
-        public SurveyResponseResponse() { }
+        public SurveyAnswerResponse() { }
 
         /// <summary>
         /// Overloaded Constructor for SurveyInfoResponse. Sets CorrelationId.
         /// </summary>
         /// <param name="correlationId"></param>
-        public SurveyResponseResponse(string correlationId) : base(correlationId) { }
+        public SurveyAnswerResponse(string correlationId) : base(correlationId) { }
 
         /// <summary>
         /// List of SurveyInfos. 
         /// </summary>
         [DataMember]
-        public IList<SurveyResponseDTO> SurveyResponseDTOList;
+        public IList<SurveyAnswerDTO> SurveyResponseDTOList;
 
         /// <summary>
         /// Single SurveyInfo
         /// </summary>
         [DataMember]
-        public SurveyResponseDTO SurveyResponseDTO;
+        public SurveyAnswerDTO SurveyResponseDTO;
     }
 }
