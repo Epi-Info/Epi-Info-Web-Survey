@@ -25,7 +25,7 @@ namespace Epi.Web.Repositories
         /// </summary>
         /// <param name="surveyid"></param>
         /// <returns></returns>
-        public SurveyAnswerResponse GetSurveyResponse(SurveyAnswerRequest pRequest)
+        public SurveyAnswerResponse GetSurveyAnswer(SurveyAnswerRequest pRequest)
         {
 
             //SurveyResponseResponse result = Client.GetSurveyResponse(pRequest);
@@ -35,7 +35,7 @@ namespace Epi.Web.Repositories
         }
 
 
-        public SurveyAnswerResponse SaveSurveyResponse(SurveyAnswerRequest pRequest)
+        public SurveyAnswerResponse SaveSurveyAnswer(SurveyAnswerRequest pRequest)
         {
             SurveyAnswerResponse result = _iSurveyManager.SetSurveyAnswer(pRequest);
             return result;
