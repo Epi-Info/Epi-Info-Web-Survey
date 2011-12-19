@@ -35,7 +35,7 @@ namespace Epi.Web
             container.RegisterType<Epi.Web.Repositories.Core.ISurveyInfoRepository, Epi.Web.Repositories.SurveyInfoRepository>();
 
 
-            container.RegisterType<Epi.Web.Common.Message.SurveyResponseRequest, Epi.Web.Common.Message.SurveyResponseRequest>();
+            container.RegisterType<Epi.Web.Common.Message.SurveyAnswerRequest, Epi.Web.Common.Message.SurveyAnswerRequest>();
             container.RegisterType<Epi.Web.Repositories.Core.ISurveyResponseRepository, Epi.Web.Repositories.SurveyResponseRepository>();
 
 

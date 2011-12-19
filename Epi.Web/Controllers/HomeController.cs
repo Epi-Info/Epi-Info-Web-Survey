@@ -22,7 +22,7 @@ namespace Epi.Web.Controllers
 
 
         private ISurveyResponseRepository _iSurveyResponseRepository;
-        private Epi.Web.Common.Message.SurveyResponseRequest _surveyResponseRequest;
+        private Epi.Web.Common.Message.SurveyAnswerRequest _surveyResponseRequest;
 
 
         /// <summary>
@@ -101,19 +101,19 @@ namespace Epi.Web.Controllers
             }
             else
             {
-                SurveyResponseRequest surveyResponseRequest = new SurveyResponseRequest();
+                SurveyAnswerRequest surveyResponseRequest = new SurveyAnswerRequest();
                 Guid ResponseID = Guid.NewGuid();
                 TempData["SurveyResponseId"] = ResponseID.ToString();
                 surveyResponseRequest.Criteria.ResposneId = ResponseID.ToString();
                 
-                surveyResponseRequest.SurveyResponseDTO = new Common.DTO.SurveyResponseDTO();
+                surveyResponseRequest.SurveyResponseDTO = new Common.DTO.SurveyAnswerDTO();
                 surveyResponseRequest.SurveyResponseDTO.ResponseId = ResponseID.ToString();
                 surveyResponseRequest.SurveyResponseDTO.DateCompleted = DateTime.MinValue ;
                 surveyResponseRequest.SurveyResponseDTO.SurveyId = surveyid;
                 surveyResponseRequest.SurveyResponseDTO.Status = 1;
                 surveyResponseRequest.SurveyResponseDTO.XML = new SurveyResponseXML(surveyid).CreateResponseXml().InnerXml;
                 surveyResponseRequest.Action = "Create";
-                SurveyResponseResponse surveyResponseResponse =  _iSurveyResponseRepository.SaveSurveyResponse(surveyResponseRequest);
+                SurveyAnswerResponse surveyResponseResponse =  _iSurveyResponseRepository.SaveSurveyResponse(surveyResponseRequest);
 
                 return View("Survey", form);
             }
@@ -137,9 +137,9 @@ namespace Epi.Web.Controllers
                 // 3 save the current survey response
 
                 // 1 Get the record for the current survey response
-                SurveyResponseRequest surveyResponseRequest = new SurveyResponseRequest();
+                SurveyAnswerRequest surveyResponseRequest = new SurveyAnswerRequest();
                 surveyResponseRequest.Criteria.ResposneId = TempData["SurveyResponseId"].ToString();
-                SurveyResponseResponse surveyResponseResponse = _iSurveyResponseRepository.GetSurveyResponse(surveyResponseRequest);
+                SurveyAnswerResponse surveyResponseResponse = _iSurveyResponseRepository.GetSurveyResponse(surveyResponseRequest);
 
                 // 2 update the current survey response
                 surveyResponseRequest.SurveyResponseDTO = surveyResponseResponse.SurveyResponseDTO;

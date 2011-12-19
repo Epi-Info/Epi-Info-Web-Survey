@@ -22,10 +22,10 @@ namespace Epi.Web.DataServiceClient {
         Epi.Web.Common.Message.SurveyInfoResponse SetSurveyInfo(Epi.Web.Common.Message.SurveyInfoRequest pRequest);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/GetSurveyResponse", ReplyAction="http://tempuri.org/IDataService/GetSurveyResponseResponse")]
-        Epi.Web.Common.Message.SurveyResponseResponse GetSurveyResponse(Epi.Web.Common.Message.SurveyResponseRequest pRequest);
+        Epi.Web.Common.Message.SurveyAnswerResponse GetSurveyResponse(Epi.Web.Common.Message.SurveyAnswerRequest pRequest);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/SetSurveyResponse", ReplyAction="http://tempuri.org/IDataService/SetSurveyResponseResponse")]
-        Epi.Web.Common.Message.SurveyResponseResponse SetSurveyResponse(Epi.Web.Common.Message.SurveyResponseRequest pRequest);
+        Epi.Web.Common.Message.SurveyAnswerResponse SetSurveyResponse(Epi.Web.Common.Message.SurveyAnswerRequest pRequest);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -63,11 +63,11 @@ namespace Epi.Web.DataServiceClient {
             return base.Channel.SetSurveyInfo(pRequest);
         }
         
-        public Epi.Web.Common.Message.SurveyResponseResponse GetSurveyResponse(Epi.Web.Common.Message.SurveyResponseRequest pRequest) {
+        public Epi.Web.Common.Message.SurveyAnswerResponse GetSurveyResponse(Epi.Web.Common.Message.SurveyAnswerRequest pRequest) {
             return base.Channel.GetSurveyResponse(pRequest);
         }
         
-        public Epi.Web.Common.Message.SurveyResponseResponse SetSurveyResponse(Epi.Web.Common.Message.SurveyResponseRequest pRequest) {
+        public Epi.Web.Common.Message.SurveyAnswerResponse SetSurveyResponse(Epi.Web.Common.Message.SurveyAnswerRequest pRequest) {
             return base.Channel.SetSurveyResponse(pRequest);
         }
     }
