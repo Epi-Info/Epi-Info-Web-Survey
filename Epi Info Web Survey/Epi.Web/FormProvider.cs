@@ -40,7 +40,7 @@ namespace MvcDynamicForms.Demo.Models
                     switch (_FieldTypeID.Attribute("FieldTypeId").Value)
                     {
                         case "1"://TextBox
-                            var name = new TextBox
+                            var TextBox = new TextBox
                             {
                                 Title = "Name",
                                 Prompt = _FieldTypeID.Attribute("PromptText").Value,
@@ -61,8 +61,9 @@ namespace MvcDynamicForms.Demo.Models
                                 IsReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value)
 
                             };
-                            form.AddFields(name);
+                            form.AddFields(TextBox);
                             break;
+                       
 
                         case "2"://Label/Title
 
@@ -86,6 +87,54 @@ namespace MvcDynamicForms.Demo.Models
                             break;
                         case "3"://Label
 
+                            break;
+                        case "4"://MultiLineTextBox
+                            var MultiLineTextBox = new TextArea
+                            {
+                                Title = "Name",
+                                Prompt = _FieldTypeID.Attribute("PromptText").Value,
+                                DisplayOrder = 20,
+                                Required = true,
+                                RequiredMessage = "Your full name is required",
+                                Key = _FieldTypeID.Attribute("Name").Value,
+                                PromptTop = _Height * double.Parse(_FieldTypeID.Attribute("PromptTopPositionPercentage").Value),
+                                PromptLeft = _Width * double.Parse(_FieldTypeID.Attribute("PromptLeftPositionPercentage").Value),
+                                Top = _Height * double.Parse(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value),
+                                Left = _Width * double.Parse(_FieldTypeID.Attribute("ControlLeftPositionPercentage").Value),
+                                PromptWidth = _Width * double.Parse(_FieldTypeID.Attribute("ControlWidthPercentage").Value),
+                                ControlWidth = _Width * double.Parse(_FieldTypeID.Attribute("ControlWidthPercentage").Value),
+                                fontstyle = _FieldTypeID.Attribute("PromptFontStyle").Value,
+                                fontSize = double.Parse(_FieldTypeID.Attribute("PromptFontSize").Value),
+                                fontfamily = _FieldTypeID.Attribute("PromptFontFamily").Value,
+                                IsRequired = bool.Parse(_FieldTypeID.Attribute("IsRequired").Value),
+                                IsReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value)
+
+                            };
+                            form.AddFields(MultiLineTextBox);
+                            break;
+                        case "5"://NumericTextBox
+                            var NumericTextBox = new NumericTextBox
+                            {
+                                Title = "Name",
+                                Prompt = _FieldTypeID.Attribute("PromptText").Value,
+                                DisplayOrder = 20,
+                                Required = true,
+                                RequiredMessage = "Your full name is required",
+                                Key = _FieldTypeID.Attribute("Name").Value,
+                                PromptTop = _Height * double.Parse(_FieldTypeID.Attribute("PromptTopPositionPercentage").Value),
+                                PromptLeft = _Width * double.Parse(_FieldTypeID.Attribute("PromptLeftPositionPercentage").Value),
+                                Top = _Height * double.Parse(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value),
+                                Left = _Width * double.Parse(_FieldTypeID.Attribute("ControlLeftPositionPercentage").Value),
+                                PromptWidth = _Width * double.Parse(_FieldTypeID.Attribute("ControlWidthPercentage").Value),
+                                ControlWidth = _Width * double.Parse(_FieldTypeID.Attribute("ControlWidthPercentage").Value),
+                                fontstyle = _FieldTypeID.Attribute("PromptFontStyle").Value,
+                                fontSize = double.Parse(_FieldTypeID.Attribute("PromptFontSize").Value),
+                                fontfamily = _FieldTypeID.Attribute("PromptFontFamily").Value,
+                                IsRequired = bool.Parse(_FieldTypeID.Attribute("IsRequired").Value),
+                                IsReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value)
+
+                            };
+                            form.AddFields(NumericTextBox);
                             break;
                     }
 
