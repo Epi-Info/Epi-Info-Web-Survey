@@ -8,7 +8,7 @@ using Epi.Web.Common.Message;
 
 namespace Epi.Web.Repositories
 {
-    public class SurveyResponseRepository : RepositoryBase, ISurveyResponseRepository
+    public class SurveyResponseRepository : RepositoryBase, ISurveyAnswerRepository
     {
 
 

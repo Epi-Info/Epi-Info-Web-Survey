@@ -21,7 +21,7 @@ namespace Epi.Web.Controllers
         private Epi.Web.Common.Message.SurveyInfoRequest _surveyInfoRequest;
 
 
-        private ISurveyResponseRepository _iSurveyResponseRepository;
+        private ISurveyAnswerRepository _iSurveyResponseRepository;
         private Epi.Web.Common.Message.SurveyAnswerRequest _surveyResponseRequest;
 
 
@@ -29,7 +29,7 @@ namespace Epi.Web.Controllers
         /// Injectinting ISurveyInfoRepository through Constructor
         /// </summary>
         /// <param name="iSurveyInfoRepository"></param>
-        public HomeController(ISurveyInfoRepository iSurveyInfoRepository, Epi.Web.Common.Message.SurveyInfoRequest surveyInfoRequest, ISurveyResponseRepository iSurveyResponseRepository)
+        public HomeController(ISurveyInfoRepository iSurveyInfoRepository, Epi.Web.Common.Message.SurveyInfoRequest surveyInfoRequest, ISurveyAnswerRepository iSurveyResponseRepository)
         {
             _iSurveyInfoRepository = iSurveyInfoRepository;
             _surveyInfoRequest = surveyInfoRequest;
