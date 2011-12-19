@@ -66,13 +66,13 @@
     <Compile Include="Criteria\SurveyResponseCriteria.cs" />
     <Compile Include="Criteria\Criteria.cs" />
     <Compile Include="Criteria\SurveyInfoCriteria.cs" />
-    <Compile Include="DTO\SurveyResponseDTO.cs" />
+    <Compile Include="DTO\SurveyAnswerDTO.cs" />
     <Compile Include="Message\Base\AcknowledgeType.cs" />
     <Compile Include="Message\Base\PersistType.cs" />
     <Compile Include="Message\Base\RequestBase.cs" />
     <Compile Include="Message\Base\ResponseBase.cs" />
-    <Compile Include="Message\SurveyResponseRequest.cs" />
-    <Compile Include="Message\SurveyResponseResponse.cs" />
+    <Compile Include="Message\SurveyAnswerRequest.cs" />
+    <Compile Include="Message\SurveyAnswerResponse.cs" />
     <Compile Include="Message\LoginRequest.cs" />
     <Compile Include="Message\LoginResponse.cs" />
     <Compile Include="Message\LogoutRequest.cs" />

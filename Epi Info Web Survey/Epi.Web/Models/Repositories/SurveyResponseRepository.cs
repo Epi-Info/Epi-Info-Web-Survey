@@ -25,29 +25,29 @@ namespace Epi.Web.Repositories
         /// </summary>
         /// <param name="surveyid"></param>
         /// <returns></returns>
-        public SurveyResponseResponse GetSurveyResponse(SurveyResponseRequest pRequest)
+        public SurveyAnswerResponse GetSurveyResponse(SurveyAnswerRequest pRequest)
         {
 
             //SurveyResponseResponse result = Client.GetSurveyResponse(pRequest);
-            SurveyResponseResponse result = _iSurveyManager.GetSurveyResponse(pRequest);
+            SurveyAnswerResponse result = _iSurveyManager.GetSurveyResponse(pRequest);
             return result;
             
         }
 
 
-        public SurveyResponseResponse SaveSurveyResponse(SurveyResponseRequest pRequest)
+        public SurveyAnswerResponse SaveSurveyResponse(SurveyAnswerRequest pRequest)
         {
-            SurveyResponseResponse result = _iSurveyManager.SetSurveyResponse(pRequest);
+            SurveyAnswerResponse result = _iSurveyManager.SetSurveyResponse(pRequest);
             return result;
         }
 
         #region stubcode
-            public List<Common.DTO.SurveyResponseDTO> GetList(Criterion criterion = null)
+            public List<Common.DTO.SurveyAnswerDTO> GetList(Criterion criterion = null)
             {
                 throw new NotImplementedException();
             }
 
-            public Common.DTO.SurveyResponseDTO Get(int id)
+            public Common.DTO.SurveyAnswerDTO Get(int id)
             {
                 throw new NotImplementedException();
             }
@@ -57,12 +57,12 @@ namespace Epi.Web.Repositories
                 throw new NotImplementedException();
             }
 
-            public void Insert(Common.DTO.SurveyResponseDTO t)
+            public void Insert(Common.DTO.SurveyAnswerDTO t)
             {
                 throw new NotImplementedException();
             }
 
-            public void Update(Common.DTO.SurveyResponseDTO t)
+            public void Update(Common.DTO.SurveyAnswerDTO t)
             {
                 throw new NotImplementedException();
             }
@@ -74,22 +74,22 @@ namespace Epi.Web.Repositories
         #endregion
 
 
-            List<SurveyResponseResponse> IRepository<SurveyResponseResponse>.GetList(Criterion criterion = null)
+            List<SurveyAnswerResponse> IRepository<SurveyAnswerResponse>.GetList(Criterion criterion = null)
             {
                 throw new NotImplementedException();
             }
 
-            SurveyResponseResponse IRepository<SurveyResponseResponse>.Get(int id)
+            SurveyAnswerResponse IRepository<SurveyAnswerResponse>.Get(int id)
             {
                 throw new NotImplementedException();
             }
 
-            public void Insert(SurveyResponseResponse t)
+            public void Insert(SurveyAnswerResponse t)
             {
                 throw new NotImplementedException();
             }
 
-            public void Update(SurveyResponseResponse t)
+            public void Update(SurveyAnswerResponse t)
             {
                 throw new NotImplementedException();
             }
