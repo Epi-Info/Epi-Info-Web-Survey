@@ -39,114 +39,114 @@ namespace Epi.Web.WCF.SurveyService
             return result;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="pId"></param>
-        /// <returns></returns>
-        public SurveyInfoResponse GetSurveyInfo(SurveyInfoRequest pRequest)
-        {
-            SurveyInfoResponse result = new SurveyInfoResponse(pRequest.RequestId);
-            Epi.Web.Interfaces.DataInterfaces.ISurveyInfoDao surveyInfoDao = new EF.EntitySurveyInfoDao();
-            Epi.Web.BLL.SurveyInfo Implementation = new Epi.Web.BLL.SurveyInfo(surveyInfoDao);
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <param name="pId"></param>
+        ///// <returns></returns>
+        //public SurveyInfoResponse GetSurveyInfo(SurveyInfoRequest pRequest)
+        //{
+        //    SurveyInfoResponse result = new SurveyInfoResponse(pRequest.RequestId);
+        //    Epi.Web.Interfaces.DataInterfaces.ISurveyInfoDao surveyInfoDao = new EF.EntitySurveyInfoDao();
+        //    Epi.Web.BLL.SurveyInfo Implementation = new Epi.Web.BLL.SurveyInfo(surveyInfoDao);
 
-            // Validate client tag, access token, and user credentials
-            if (!ValidRequest(pRequest, result, Validate.All))
-            {
-                return result;
-            }
+        //    // Validate client tag, access token, and user credentials
+        //    if (!ValidRequest(pRequest, result, Validate.All))
+        //    {
+        //        return result;
+        //    }
 
-            var criteria = pRequest.Criteria as SurveyInfoCriteria;
-            string sort = criteria.SortExpression;
+        //    var criteria = pRequest.Criteria as SurveyInfoCriteria;
+        //    string sort = criteria.SortExpression;
 
-            //if (request.LoadOptions.Contains("SurveyInfos"))
-            //{
-            //    IEnumerable<SurveyInfoDTO> SurveyInfos;
-            //    if (!criteria.IncludeOrderStatistics)
-            //    {
-            //        SurveyInfos = Implementation.GetSurveyInfos(sort);
-            //    }
-            //    else
-            //    {
-            //        SurveyInfos = Implementation.GetSurveyInfosWithOrderStatistics(sort);
-            //    }
+        //    //if (request.LoadOptions.Contains("SurveyInfos"))
+        //    //{
+        //    //    IEnumerable<SurveyInfoDTO> SurveyInfos;
+        //    //    if (!criteria.IncludeOrderStatistics)
+        //    //    {
+        //    //        SurveyInfos = Implementation.GetSurveyInfos(sort);
+        //    //    }
+        //    //    else
+        //    //    {
+        //    //        SurveyInfos = Implementation.GetSurveyInfosWithOrderStatistics(sort);
+        //    //    }
 
-            //    response.SurveyInfos = SurveyInfos.Select(c => Mapper.ToDataTransferObject(c)).ToList();
-            //}
+        //    //    response.SurveyInfos = SurveyInfos.Select(c => Mapper.ToDataTransferObject(c)).ToList();
+        //    //}
 
-            //if (pRequest.LoadOptions.Contains("SurveyInfo"))
-            //{
-                result.SurveyInfo = Mapper.ToDataTransferObject(Implementation.GetSurveyInfoById(pRequest.Criteria.SurveyId));
-            //}
+        //    //if (pRequest.LoadOptions.Contains("SurveyInfo"))
+        //    //{
+        //        result.SurveyInfo = Mapper.ToDataTransferObject(Implementation.GetSurveyInfoById(pRequest.Criteria.SurveyId));
+        //    //}
 
-            return result;
-        }
+        //    return result;
+        //}
 
 
-        /// <summary>
-        /// Set (add, update, delete) SurveyInfo value.
-        /// </summary>
-        /// <param name="request">SurveyInfo request message.</param>
-        /// <returns>SurveyInfo response message.</returns>
-        public SurveyInfoResponse SetSurveyInfo(SurveyInfoRequest request)
-        {
-            var response = new SurveyInfoResponse(request.RequestId);
+        ///// <summary>
+        ///// Set (add, update, delete) SurveyInfo value.
+        ///// </summary>
+        ///// <param name="request">SurveyInfo request message.</param>
+        ///// <returns>SurveyInfo response message.</returns>
+        //public SurveyInfoResponse SetSurveyInfo(SurveyInfoRequest request)
+        //{
+        //    var response = new SurveyInfoResponse(request.RequestId);
 
-            // Validate client tag, access token, and user credentials
-            if (!ValidRequest(request, response, Validate.All))
-                return response;
+        //    // Validate client tag, access token, and user credentials
+        //    if (!ValidRequest(request, response, Validate.All))
+        //        return response;
 
-            // Transform SurveyInfo data transfer object to SurveyInfo business object
-            var SurveyInfo = Mapper.ToBusinessObject(request.SurveyInfo);
+        //    // Transform SurveyInfo data transfer object to SurveyInfo business object
+        //    var SurveyInfo = Mapper.ToBusinessObject(request.SurveyInfo);
 
-            // Validate SurveyInfo business rules
+        //    // Validate SurveyInfo business rules
 
-            if (request.Action != "Delete")
-            {
-                //if (!SurveyInfo.Validate())
-                //{
-                //    response.Acknowledge = AcknowledgeType.Failure;
+        //    if (request.Action != "Delete")
+        //    {
+        //        //if (!SurveyInfo.Validate())
+        //        //{
+        //        //    response.Acknowledge = AcknowledgeType.Failure;
 
-                //    foreach (string error in SurveyInfo.ValidationErrors)
-                //        response.Message += error + Environment.NewLine;
+        //        //    foreach (string error in SurveyInfo.ValidationErrors)
+        //        //        response.Message += error + Environment.NewLine;
 
-                //    return response;
-                //}
-            }
+        //        //    return response;
+        //        //}
+        //    }
 
-            // Run within the context of a database transaction. Currently commented out.
-            // The Decorator Design Pattern. 
-            //using (TransactionDecorator transaction = new TransactionDecorator())
-            {
-                if (request.Action == "Create")
-                {
-                    //_SurveyInfoDao.InsertSurveyInfo(SurveyInfo);
-                    response.SurveyInfo = Mapper.ToDataTransferObject(SurveyInfo);
-                }
-                else if (request.Action == "Update")
-                {
-                    //_SurveyInfoDao.UpdateSurveyInfo(SurveyInfo);
-                    response.SurveyInfo = Mapper.ToDataTransferObject(SurveyInfo);
-                }
-                else if (request.Action == "Delete")
-                {
-                    var criteria = request.Criteria as SurveyInfoCriteria;
-                    //var cust = _SurveyInfoDao.GetSurveyInfo(criteria.SurveyInfoId);
+        //    // Run within the context of a database transaction. Currently commented out.
+        //    // The Decorator Design Pattern. 
+        //    //using (TransactionDecorator transaction = new TransactionDecorator())
+        //    {
+        //        if (request.Action == "Create")
+        //        {
+        //            //_SurveyInfoDao.InsertSurveyInfo(SurveyInfo);
+        //            response.SurveyInfo = Mapper.ToDataTransferObject(SurveyInfo);
+        //        }
+        //        else if (request.Action == "Update")
+        //        {
+        //            //_SurveyInfoDao.UpdateSurveyInfo(SurveyInfo);
+        //            response.SurveyInfo = Mapper.ToDataTransferObject(SurveyInfo);
+        //        }
+        //        else if (request.Action == "Delete")
+        //        {
+        //            var criteria = request.Criteria as SurveyInfoCriteria;
+        //            //var cust = _SurveyInfoDao.GetSurveyInfo(criteria.SurveyInfoId);
 
-                    try
-                    {
-                        //_SurveyInfoDao.DeleteSurveyInfo(cust);
-                        response.RowsAffected = 1;
-                    }
-                    catch
-                    {
-                        response.RowsAffected = 0;
-                    }
-                }
-            }
+        //            try
+        //            {
+        //                //_SurveyInfoDao.DeleteSurveyInfo(cust);
+        //                response.RowsAffected = 1;
+        //            }
+        //            catch
+        //            {
+        //                response.RowsAffected = 0;
+        //            }
+        //        }
+        //    }
 
-            return response;
-        }
+        //    return response;
+        //}
 
 
 

@@ -18,6 +18,9 @@ namespace Epi.Web.Interfaces.DataInterfaces
         /// Gets an order data access object.
         /// </summary>
         ISurveyInfoDao SurveyInfoDao { get; }
+
+
+        ISurveyResponseDao SurveyResponseDao { get; }
     }
 
 }
