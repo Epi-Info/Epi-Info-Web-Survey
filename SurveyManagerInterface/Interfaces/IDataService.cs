@@ -21,10 +21,10 @@ namespace Epi.Web.WCF.SurveyService
 
 
         [OperationContract]
-        SurveyAnswerResponse GetSurveyResponse(SurveyAnswerRequest pRequest);
+        SurveyAnswerResponse GetSurveyAnswer(SurveyAnswerRequest pRequest);
 
         [OperationContract]
-        SurveyAnswerResponse SetSurveyResponse(SurveyAnswerRequest pRequest);
+        SurveyAnswerResponse SetSurveyAnswer(SurveyAnswerRequest pRequest);
 
     }
 
