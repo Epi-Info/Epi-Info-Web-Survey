@@ -37,7 +37,7 @@ namespace MvcDynamicForms.Fields
                 error.Attributes.Add("for", inputName);
                 error.Attributes.Add("class", _errorClass);
                 StringBuilder errorStyleValues = new StringBuilder();
-                errorStyleValues.Append(GetContolStyle(_fontstyle.ToString(), (_Prompttop).ToString(), (_Promptleft).ToString(), _PromptWidth.ToString(), Height.ToString()));
+              errorStyleValues.Append(GetContolStyle(_fontstyle.ToString(), (_Prompttop+40 ).ToString(), (_Promptleft ).ToString(), (_PromptWidth+100).ToString(), Height.ToString()));
                 error.Attributes.Add("style", errorStyleValues.ToString());
                 error.SetInnerText(Error);
                 html.Append(error.ToString());
