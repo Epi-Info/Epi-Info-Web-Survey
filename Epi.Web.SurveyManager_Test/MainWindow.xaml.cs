@@ -48,7 +48,7 @@ namespace Epi.Web.SurveyManager_Test
             }
             else
             {
-                Request.SurveyInfo.SurveyType = 0;
+                Request.SurveyInfo.SurveyType = 2;
             }
 
             Request.SurveyInfo.OrganizationName = this.OrganizationTextBox.Text;
