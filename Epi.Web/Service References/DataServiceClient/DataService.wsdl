@@ -172,7 +172,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="WSHttpBinding_IDataService_GetSurveyResponse_Input_policy">
+  <wsp:Policy wsu:Id="WSHttpBinding_IDataService_GetSurveyAnswer_Input_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
@@ -191,7 +191,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="WSHttpBinding_IDataService_GetSurveyResponse_output_policy">
+  <wsp:Policy wsu:Id="WSHttpBinding_IDataService_GetSurveyAnswer_output_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
@@ -210,7 +210,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="WSHttpBinding_IDataService_SetSurveyResponse_Input_policy">
+  <wsp:Policy wsu:Id="WSHttpBinding_IDataService_SetSurveyAnswer_Input_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
@@ -229,7 +229,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="WSHttpBinding_IDataService_SetSurveyResponse_output_policy">
+  <wsp:Policy wsu:Id="WSHttpBinding_IDataService_SetSurveyAnswer_output_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
@@ -268,17 +268,17 @@
   <wsdl:message name="IDataService_SetSurveyInfo_OutputMessage">
     <wsdl:part name="parameters" element="tns:SetSurveyInfoResponse" />
   </wsdl:message>
-  <wsdl:message name="IDataService_GetSurveyResponse_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetSurveyResponse" />
+  <wsdl:message name="IDataService_GetSurveyAnswer_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSurveyAnswer" />
   </wsdl:message>
-  <wsdl:message name="IDataService_GetSurveyResponse_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetSurveyResponseResponse" />
+  <wsdl:message name="IDataService_GetSurveyAnswer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSurveyAnswerResponse" />
   </wsdl:message>
-  <wsdl:message name="IDataService_SetSurveyResponse_InputMessage">
-    <wsdl:part name="parameters" element="tns:SetSurveyResponse" />
+  <wsdl:message name="IDataService_SetSurveyAnswer_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetSurveyAnswer" />
   </wsdl:message>
-  <wsdl:message name="IDataService_SetSurveyResponse_OutputMessage">
-    <wsdl:part name="parameters" element="tns:SetSurveyResponseResponse" />
+  <wsdl:message name="IDataService_SetSurveyAnswer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetSurveyAnswerResponse" />
   </wsdl:message>
   <wsdl:portType name="IDataService">
     <wsdl:operation name="GetSurveyInfo">
@@ -289,13 +289,13 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IDataService/SetSurveyInfo" message="tns:IDataService_SetSurveyInfo_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IDataService/SetSurveyInfoResponse" message="tns:IDataService_SetSurveyInfo_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="GetSurveyResponse">
-      <wsdl:input wsaw:Action="http://tempuri.org/IDataService/GetSurveyResponse" message="tns:IDataService_GetSurveyResponse_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IDataService/GetSurveyResponseResponse" message="tns:IDataService_GetSurveyResponse_OutputMessage" />
+    <wsdl:operation name="GetSurveyAnswer">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDataService/GetSurveyAnswer" message="tns:IDataService_GetSurveyAnswer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDataService/GetSurveyAnswerResponse" message="tns:IDataService_GetSurveyAnswer_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="SetSurveyResponse">
-      <wsdl:input wsaw:Action="http://tempuri.org/IDataService/SetSurveyResponse" message="tns:IDataService_SetSurveyResponse_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IDataService/SetSurveyResponseResponse" message="tns:IDataService_SetSurveyResponse_OutputMessage" />
+    <wsdl:operation name="SetSurveyAnswer">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDataService/SetSurveyAnswer" message="tns:IDataService_SetSurveyAnswer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDataService/SetSurveyAnswerResponse" message="tns:IDataService_SetSurveyAnswer_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="WSHttpBinding_IDataService" type="tns:IDataService">
@@ -323,25 +323,25 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetSurveyResponse">
-      <soap12:operation soapAction="http://tempuri.org/IDataService/GetSurveyResponse" style="document" />
+    <wsdl:operation name="GetSurveyAnswer">
+      <soap12:operation soapAction="http://tempuri.org/IDataService/GetSurveyAnswer" style="document" />
       <wsdl:input>
-        <wsp:PolicyReference URI="#WSHttpBinding_IDataService_GetSurveyResponse_Input_policy" />
+        <wsp:PolicyReference URI="#WSHttpBinding_IDataService_GetSurveyAnswer_Input_policy" />
         <soap12:body use="literal" />
       </wsdl:input>
       <wsdl:output>
-        <wsp:PolicyReference URI="#WSHttpBinding_IDataService_GetSurveyResponse_output_policy" />
+        <wsp:PolicyReference URI="#WSHttpBinding_IDataService_GetSurveyAnswer_output_policy" />
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="SetSurveyResponse">
-      <soap12:operation soapAction="http://tempuri.org/IDataService/SetSurveyResponse" style="document" />
+    <wsdl:operation name="SetSurveyAnswer">
+      <soap12:operation soapAction="http://tempuri.org/IDataService/SetSurveyAnswer" style="document" />
       <wsdl:input>
-        <wsp:PolicyReference URI="#WSHttpBinding_IDataService_SetSurveyResponse_Input_policy" />
+        <wsp:PolicyReference URI="#WSHttpBinding_IDataService_SetSurveyAnswer_Input_policy" />
         <soap12:body use="literal" />
       </wsdl:input>
       <wsdl:output>
-        <wsp:PolicyReference URI="#WSHttpBinding_IDataService_SetSurveyResponse_output_policy" />
+        <wsp:PolicyReference URI="#WSHttpBinding_IDataService_SetSurveyAnswer_output_policy" />
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
