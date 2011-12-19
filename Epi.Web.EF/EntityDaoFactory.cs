@@ -22,6 +22,10 @@ namespace Epi.Web.EF
         }
 
 
+        public ISurveyResponseDao SurveyResponseDao
+        {
+            get { return new EntitySurveyResponseDao(); }  
+        }
 
     }
 }

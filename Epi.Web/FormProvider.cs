@@ -131,7 +131,9 @@ namespace MvcDynamicForms.Demo.Models
                                 fontSize = double.Parse(_FieldTypeID.Attribute("PromptFontSize").Value),
                                 fontfamily = _FieldTypeID.Attribute("PromptFontFamily").Value,
                                 IsRequired = bool.Parse(_FieldTypeID.Attribute("IsRequired").Value),
-                                IsReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value)
+                                IsReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value),
+                                Lower = _FieldTypeID.Attribute("Lower").Value,
+                                Upper = _FieldTypeID.Attribute("Upper").Value
 
                             };
                             form.AddFields(NumericTextBox);

@@ -28,9 +28,10 @@ namespace Epi.Web.SurveyManager.Test
             //Arrange
             Publisher objPublisher = new Publisher();
             SurveyRequestResultBO objSurveyRequestResultBO;
-            SurveyDataProvider DataObj = new SurveyDataProvider();
+            // SurveyDataProvider DataObj = new SurveyDataProvider();
+            SurveyInfoBO DataObj = new SurveyInfoBO();
             //Act
-            objSurveyRequestResultBO = objPublisher.PublishSurvey(DataObj.CreateSurveyRequestBOObject());
+            objSurveyRequestResultBO = objPublisher.PublishSurvey(DataObj );
             //Assert
             Assert.IsNotEmpty(objSurveyRequestResultBO.URL);
             Assert.IsTrue(objSurveyRequestResultBO.IsPulished);
@@ -44,9 +45,10 @@ namespace Epi.Web.SurveyManager.Test
             //Arrange
             Publisher objPublisher = new Publisher();
             SurveyRequestResultBO objSurveyRequestResultBO;
-            SurveyDataProvider DataObj = new SurveyDataProvider();
+            // SurveyDataProvider DataObj = new SurveyDataProvider();
+            SurveyInfoBO DataObj = new SurveyInfoBO();
             //Act
-            objSurveyRequestResultBO = objPublisher.PublishSurvey(DataObj.CreateSurveyRequestBOObjectWithNoData());
+            objSurveyRequestResultBO = objPublisher.PublishSurvey(DataObj );
             //Assert
             Assert.IsEmpty(objSurveyRequestResultBO.URL);
             Assert.IsFalse(objSurveyRequestResultBO.IsPulished);
