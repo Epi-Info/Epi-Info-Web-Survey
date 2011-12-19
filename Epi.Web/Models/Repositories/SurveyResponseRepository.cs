@@ -29,7 +29,7 @@ namespace Epi.Web.Repositories
         {
 
             //SurveyResponseResponse result = Client.GetSurveyResponse(pRequest);
-            SurveyAnswerResponse result = _iSurveyManager.GetSurveyResponse(pRequest);
+            SurveyAnswerResponse result = _iSurveyManager.GetSurveyAnswer(pRequest);
             return result;
             
         }
@@ -37,7 +37,7 @@ namespace Epi.Web.Repositories
 
         public SurveyAnswerResponse SaveSurveyResponse(SurveyAnswerRequest pRequest)
         {
-            SurveyAnswerResponse result = _iSurveyManager.SetSurveyResponse(pRequest);
+            SurveyAnswerResponse result = _iSurveyManager.SetSurveyAnswer(pRequest);
             return result;
         }
 
