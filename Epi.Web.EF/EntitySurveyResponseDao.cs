@@ -74,7 +74,7 @@ namespace Epi.Web.EF
                 var DataRow = Query.Single();
                 DataRow.ResponseXML = SurveyResponse.XML;
                 DataRow.DateCompleted = DateTime.Now;
-                DataRow.StatusId = 2;
+                DataRow.StatusId = SurveyResponse.Status;
                 DataRow.DateLastUpdated = DateTime.Now;
                 Context.SaveChanges();
             }
