@@ -10,6 +10,12 @@ namespace Epi.Web.Common.Message
     [DataContract(Namespace = "http://www.yourcompany.com/types/")]
     public class PublishRequest : Epi.Web.Common.MessageBase.RequestBase
     {
+
+        public PublishRequest()
+        {
+            this.SurveyInfo = new SurveyInfoDTO();
+        }
+
         /// <summary>
         /// SurveyInfo object.
         /// </summary>
