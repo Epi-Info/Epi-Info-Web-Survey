@@ -11,7 +11,7 @@ namespace MvcDynamicForms.Demo.Models
 {
     public static class FormProvider
     {
-        public static Form GetForm(object SurveyMetaData ,int PageNumber)
+        public static Form GetForm(object SurveyMetaData ,int PageNumber, Epi.Web.Common.DTO.SurveyAnswerDTO SurveyAnswer)
         {
             var form = new Form();
             form.SurveyInfo = (Epi.Web.Common.DTO.SurveyInfoDTO)(SurveyMetaData);
