@@ -12,7 +12,7 @@ namespace Epi.Web.Repositories.Core
     /// </summary>
     public interface ISurveyResponseRepository: IRepository<Epi.Web.Common.Message.SurveyAnswerResponse>
     {
-        SurveyAnswerResponse GetSurveyResponse(SurveyAnswerRequest pRequest);
-        SurveyAnswerResponse SaveSurveyResponse(SurveyAnswerRequest pRequest);
+        SurveyAnswerResponse GetSurveyAnswer(SurveyAnswerRequest pRequest);
+        SurveyAnswerResponse SaveSurveyAnswer(SurveyAnswerRequest pRequest);
     }
 }
