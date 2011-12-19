@@ -148,7 +148,7 @@ namespace Epi.Web.WCF.SurveyService
         /// </summary>
         /// <param name="pRequest"></param>
         /// <returns></returns>
-        public SurveyAnswerResponse GetSurveyResponse(SurveyAnswerRequest pRequest)
+        public SurveyAnswerResponse GetSurveyAnswer(SurveyAnswerRequest pRequest)
         {
             SurveyAnswerResponse result = new SurveyAnswerResponse(pRequest.RequestId);
             Epi.Web.Interfaces.DataInterfaces.ISurveyResponseDao surveyInfoDao = new EF.EntitySurveyResponseDao();
@@ -193,7 +193,7 @@ namespace Epi.Web.WCF.SurveyService
         /// </summary>
         /// <param name="request">SurveyResponse request message.</param>
         /// <returns>SurveyResponse response message.</returns>
-        public SurveyAnswerResponse SetSurveyResponse(SurveyAnswerRequest request)
+        public SurveyAnswerResponse SetSurveyAnswer(SurveyAnswerRequest request)
         {
             Epi.Web.Interfaces.DataInterfaces.ISurveyResponseDao SurveyResponseDao = new EF.EntitySurveyResponseDao();
             Epi.Web.BLL.SurveyResponse Implementation = new Epi.Web.BLL.SurveyResponse(SurveyResponseDao);
