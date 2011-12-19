@@ -67,6 +67,7 @@ body
  {
   /*width:800px; 
   height:1200px;*/
+  min-height:600px;
   display:block; 
   border:1px solid white; 
   position:relative;  
@@ -320,7 +321,10 @@ button.submits
 	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;  
 	font-size: 10pt;  
 }
- 
+ textarea
+ {
+     resize: none; 
+ }
  
 .error {
     font: normal 12px arial;

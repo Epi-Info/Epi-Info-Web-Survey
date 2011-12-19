@@ -50,7 +50,17 @@ namespace MvcDynamicForms.Fields
             txt.Attributes.Add("type", "text");
             txt.Attributes.Add("value", Value);
 
-            txt.Attributes.Add("class", "validate[required] text-input");
+          
+            if ((!string.IsNullOrEmpty(Lower)) && (!string.IsNullOrEmpty(Upper)))
+            {
+
+                txt.Attributes.Add("class", "validate[required,min[" + Lower + "],max[" + Upper + "]]"); 
+            }
+            else {
+
+                txt.Attributes.Add("class", "validate[required]"); //custom[onlyLetterNumber]:No special characters allowed
+            
+            }
             txt.Attributes.Add("data-prompt-position", "topRight:15");
 
 

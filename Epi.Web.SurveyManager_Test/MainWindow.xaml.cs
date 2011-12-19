@@ -33,13 +33,13 @@ namespace Epi.Web.SurveyManager_Test
             if (this.ClosingDateCalendar.SelectedDate == null)
             {
                 TimeSpan t = new TimeSpan(10, 0,0,0);
-                Request.SurveyInfo.ClosingDate = DateTime.Now + t;
+             Request.SurveyInfo.ClosingDate = DateTime.Now + t;
             }
             else
             {
-                Request.SurveyInfo.ClosingDate = (DateTime)this.ClosingDateCalendar.SelectedDate;
+                /// Request.SurveyInfo.ClosingDate = (DateTime)this.ClosingDateCalendar.SelectedDate;
             }
-
+         
             Request.SurveyInfo.DepartmentName = this.DepartmentTextBox.Text;
             Request.SurveyInfo.IntroductionText = new TextRange(this.IntroductionTextBox.Document.ContentStart, this.IntroductionTextBox.Document.ContentEnd).Text;
             if((bool)this.IsSingleResponseCheckBox.IsChecked)
