@@ -1,4 +1,5 @@
 using System.Runtime.Serialization;
+using System.Collections.Generic;
 using Epi.Web.Common.MessageBase;
 using Epi.Web.Common.Criteria;
 using Epi.Web.Common.DTO;
@@ -9,9 +10,9 @@ namespace Epi.Web.Common.Message
     /// Represents a SurveyInfo request message from client.
     /// </summary>
     [DataContract(Namespace = "http://www.yourcompany.com/types/")]
-    public class SurveyResponseRequest : RequestBase
+    public class SurveyAnswerRequest : RequestBase
     {
-        public SurveyResponseRequest()
+        public SurveyAnswerRequest()
         {
             this.Criteria = new SurveyResponseCriteria();
         }
@@ -26,6 +27,6 @@ namespace Epi.Web.Common.Message
         /// SurveyInfo object.
         /// </summary>
         [DataMember]
-        public SurveyResponseDTO SurveyResponseDTO;
+        public SurveyAnswerDTO SurveyResponseDTO;
     }
 }

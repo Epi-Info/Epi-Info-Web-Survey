@@ -61,9 +61,9 @@ namespace Epi.Web.Common.ObjectMapping
         /// </summary>
         /// <param name="SurveyInfo">A SurveyInfoBO business object.</param>
         /// <returns>A SurveyInfoDTO.</returns>
-        public static SurveyResponseDTO ToDataTransferObject(SurveyResponseBO pBO)
+        public static SurveyAnswerDTO ToDataTransferObject(SurveyResponseBO pBO)
         {
-            return new SurveyResponseDTO
+            return new SurveyAnswerDTO
             {
                 SurveyId = pBO.SurveyId,
                 ResponseId = pBO.ResponseId,
@@ -80,7 +80,7 @@ namespace Epi.Web.Common.ObjectMapping
         /// </summary>
         /// <param name="SurveyInfo">A SurveyResponseDTO business object.</param>
         /// /// <returns>A SurveyResponseBO.</returns>
-        public static SurveyResponseBO ToBusinessObject(SurveyResponseDTO pBO)
+        public static SurveyResponseBO ToBusinessObject(SurveyAnswerDTO pBO)
         {
             return new SurveyResponseBO
             {

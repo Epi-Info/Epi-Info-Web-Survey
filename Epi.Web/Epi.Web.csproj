@@ -177,6 +177,7 @@
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <None Include="Properties\DataSources\Epi.Web.Common.Message.PublishResponse.datasource" />
+    <None Include="Properties\DataSources\Epi.Web.Common.Message.SurveyAnswerResponse.datasource" />
     <None Include="Properties\DataSources\Epi.Web.Common.Message.SurveyInfoResponse.datasource" />
     <None Include="Properties\DataSources\Epi.Web.Common.Message.SurveyResponseResponse.datasource" />
     <None Include="Service References\DataServiceClient\SurveyDataService.disco" />

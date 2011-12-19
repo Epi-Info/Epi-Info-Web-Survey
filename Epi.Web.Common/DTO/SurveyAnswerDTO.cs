@@ -7,7 +7,7 @@ using System.Runtime.Serialization;
 namespace Epi.Web.Common.DTO
 {
     [DataContract(Namespace = "http://www.yourcompany.com/types/")]
-    public class SurveyResponseDTO
+    public class SurveyAnswerDTO
     {
         [DataMember]
         public string ResponseId{ get; set; }
