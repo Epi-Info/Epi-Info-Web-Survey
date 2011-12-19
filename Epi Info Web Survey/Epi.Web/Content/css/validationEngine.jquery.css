@@ -21,10 +21,10 @@
 
 .formError .formErrorContent {
 	width: 100%;
-	background: #ee0101;
+	background: #fff5c1;
 	position:relative;
 	z-index:5001;
-	color: #fff;
+	color: #ea5036;
 	width: 150px;
 	font-family: tahoma;
 	font-size: 11px;
@@ -74,7 +74,7 @@ body.rtl .formError .formErrorArrow {
 	-webkit-box-shadow: 0 2px 3px #444;
 	font-size: 0px;
 	height: 1px;
-	background: #ee0101;
+	background: #fff5c1;
 	margin: 0 auto;
 	line-height: 0;
 	font-size: 0;
