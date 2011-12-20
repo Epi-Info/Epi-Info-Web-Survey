@@ -15,7 +15,7 @@ namespace MvcDynamicForms.Fields
     public abstract class TextField : InputField
     {
         private string _regexMessage = "Invalid";
-
+        private string _ControlValue;
         /// <summary>
         /// A regular expression that will be applied to the user's text respone for validation.
         /// </summary>
@@ -35,11 +35,12 @@ namespace MvcDynamicForms.Fields
             }
         }
         internal string Value{ get; set; }
-        
+       // public string Value { get { return _Value; } set { _Value = value; } }
 
         public override string Response
         {
             get { return Value; }
+            
         }
         public override bool Validate()
         {
@@ -84,6 +85,6 @@ namespace MvcDynamicForms.Fields
             return XML;
         }
 
-
+        public string ControlValue { get { return _ControlValue; } set { _ControlValue = value; } }
     }
 }

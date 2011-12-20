@@ -45,7 +45,8 @@ namespace MvcDynamicForms.Fields
             var txt = new TagBuilder("textarea");
             txt.Attributes.Add("name", inputName);
             txt.Attributes.Add("id", inputName);
-            txt.SetInnerText(Value);
+           // txt.SetInnerText(Value);
+            txt.SetInnerText(ControlValue);
             if (_IsRequired == true)
             {
                 txt.Attributes.Add("class", "validate[required] text-input");
