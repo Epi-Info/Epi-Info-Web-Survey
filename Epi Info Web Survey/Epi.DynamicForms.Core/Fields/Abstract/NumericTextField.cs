@@ -13,8 +13,8 @@ namespace MvcDynamicForms.Fields
     public abstract class NumericTextField : InputField
     {
         private string _regexMessage = "Invalid";
-
-
+        private string _ControlValue;
+     
         /// <summary>
         /// A regular expression that will be applied to the user's text respone for validation.
         /// </summary>
@@ -33,11 +33,13 @@ namespace MvcDynamicForms.Fields
                 _regexMessage = value;
             }
         }
-        internal string Value { get; set; }
-
+       internal string Value { get; set; }
+        //public string Value { get { return _Value; } set { _Value = value; } }
         public override string Response
         {
-            get { return Value.Trim(); }
+            get { return Value; }
+
+             
         }
 
         //Declaring the min value for decimal
@@ -133,7 +135,7 @@ namespace MvcDynamicForms.Fields
 
         }
 
-
+        public string ControlValue { get { return _ControlValue; } set { _ControlValue = value; } }
 
 
 

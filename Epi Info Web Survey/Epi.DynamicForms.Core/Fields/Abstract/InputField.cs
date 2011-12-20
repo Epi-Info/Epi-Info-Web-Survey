@@ -22,6 +22,8 @@ namespace MvcDynamicForms.Fields
         protected string _errorClass = "MvcDynamicFieldError";
         protected Boolean _IsRequired;
         protected Boolean _IsReadOnly;
+       
+
         protected Dictionary<string, string> _inputHtmlAttributes = new Dictionary<string, string>();
         /// <summary>
         /// Used to identify each InputField when performing model binding.
@@ -149,6 +151,6 @@ namespace MvcDynamicForms.Fields
         
         public Boolean IsRequired { get { return this._IsRequired; } set {   this._IsRequired =value; } }
         public Boolean IsReadOnly { get { return this._IsReadOnly; } set {   this._IsReadOnly = value; }}
-
+      
     }
 }
