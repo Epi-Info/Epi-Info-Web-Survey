@@ -11,8 +11,17 @@ namespace MvcDynamicForms.Demo.Models
 {
     public static class FormProvider
     {
-        public static Form GetForm(object SurveyMetaData ,int PageNumber, Epi.Web.Common.DTO.SurveyAnswerDTO SurveyAnswer)
+        public static Form GetForm(object SurveyMetaData ,int PageNumber, Epi.Web.Common.DTO.SurveyAnswerDTO _SurveyAnswer)
         {
+            string SurveyAnswer;
+
+            if ( _SurveyAnswer != null)
+            {
+                SurveyAnswer = _SurveyAnswer.XML;
+
+            }
+            else { SurveyAnswer = ""; }
+
             var form = new Form();
             form.SurveyInfo = (Epi.Web.Common.DTO.SurveyInfoDTO)(SurveyMetaData);
             
@@ -58,7 +67,9 @@ namespace MvcDynamicForms.Demo.Models
                                 fontSize = double.Parse(_FieldTypeID.Attribute("PromptFontSize").Value),
                                 fontfamily = _FieldTypeID.Attribute("PromptFontFamily").Value,
                                 IsRequired =bool.Parse(_FieldTypeID.Attribute("IsRequired").Value),
-                                IsReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value)
+                                IsReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value),
+                                ControlValue = GetControlValue(SurveyAnswer, _FieldTypeID.Attribute("UniqueId").Value)
+                                
 
                             };
                             form.AddFields(TextBox);
@@ -107,7 +118,8 @@ namespace MvcDynamicForms.Demo.Models
                                 fontSize = double.Parse(_FieldTypeID.Attribute("PromptFontSize").Value),
                                 fontfamily = _FieldTypeID.Attribute("PromptFontFamily").Value,
                                 IsRequired = bool.Parse(_FieldTypeID.Attribute("IsRequired").Value),
-                                IsReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value)
+                                IsReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value),
+                                ControlValue = GetControlValue(SurveyAnswer, _FieldTypeID.Attribute("UniqueId").Value) 
 
                             };
                             form.AddFields(MultiLineTextBox);
@@ -133,8 +145,8 @@ namespace MvcDynamicForms.Demo.Models
                                 IsRequired = bool.Parse(_FieldTypeID.Attribute("IsRequired").Value),
                                 IsReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value),
                                 Lower = _FieldTypeID.Attribute("Lower").Value,
-                                Upper = _FieldTypeID.Attribute("Upper").Value
-
+                                Upper = _FieldTypeID.Attribute("Upper").Value,
+                                ControlValue = GetControlValue(SurveyAnswer , _FieldTypeID.Attribute("UniqueId").Value)
                             };
                             form.AddFields(NumericTextBox);
                             break;
@@ -265,6 +277,30 @@ namespace MvcDynamicForms.Demo.Models
                  
                 return  800;
             }
+        }
+
+        public  static string GetControlValue( string Xml,string ControlId ) {
+
+            string ControlValue = "";
+
+            if (!string.IsNullOrEmpty(Xml))
+            {
+
+                XDocument xdoc = XDocument.Parse(Xml);
+
+
+                var _ControlValues = from _ControlValue in
+                                         xdoc.Descendants("ResponseDetail")
+                                     where _ControlValue.Attribute("QuestionId").Value == ControlId.ToString()
+                                     select _ControlValue;
+
+                foreach (var _ControlValue in _ControlValues)
+                {
+                    ControlValue = _ControlValue.Value ;
+                }
+            }
+
+            return ControlValue;
         }
        
     }

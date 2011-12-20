@@ -47,7 +47,8 @@ namespace MvcDynamicForms.Fields
             txt.Attributes.Add("name", inputName);
             txt.Attributes.Add("id", inputName);
             txt.Attributes.Add("type", "text");
-            txt.Attributes.Add("value", Value);
+           // txt.Attributes.Add("value", Value);
+            txt.Attributes.Add("value", ControlValue);
             if(_IsRequired ==true){
             txt.Attributes.Add("class", "validate[required] text-input");
             txt.Attributes.Add("data-prompt-position", "topRight:15");
