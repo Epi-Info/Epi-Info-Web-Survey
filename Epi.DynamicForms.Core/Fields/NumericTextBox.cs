@@ -50,35 +50,16 @@ namespace MvcDynamicForms.Fields
             txt.Attributes.Add("type", "text");
             // txt.Attributes.Add("value", Value);
             txt.Attributes.Add("value", ControlValue);
-
-          
-            if ((!string.IsNullOrEmpty(Lower)) && (!string.IsNullOrEmpty(Upper)))
-            {
-
-                txt.Attributes.Add("class", "validate[required,min[" + Lower + "],max[" + Upper + "],number]"); 
-            }
-            else {
-                if (_IsRequired == true)
-                {
-                    txt.Attributes.Add("class", "validate[required],number"); //custom[onlyLetterNumber]:No special characters allowed
-                }
-                else {
-                    txt.Attributes.Add("class" ,"number"); //custom[onlyLetterNumber]:No special characters allowed
-                
-                }
-            }
+            txt.Attributes.Add("class", GetControlClass());
             txt.Attributes.Add("data-prompt-position", "topRight:15");
-
-
             txt.Attributes.Add("style", "position:absolute;left:" + _left.ToString() + "px;top:" + _top.ToString() + "px" + ";width:" + _ControlWidth.ToString() + "px");
-
             txt.MergeAttributes(_inputHtmlAttributes);
             html.Append(txt.ToString(TagRenderMode.SelfClosing));
 
             //adding numeric text box validation jquery script tag
-            //var scriptNumeric = new TagBuilder("script");
-            //scriptNumeric.InnerHtml = "$(function() { $('#" + inputName + "').numeric();});";
-            //html.Append(scriptNumeric.ToString(TagRenderMode.Normal));
+            var scriptNumeric = new TagBuilder("script");
+            scriptNumeric.InnerHtml = "$(function() { $('#" + inputName + "').numeric();});";
+            html.Append(scriptNumeric.ToString(TagRenderMode.Normal));
 
             // If readonly then add the following jquery script to make the field disabled 
             if (ReadOnly)
@@ -93,6 +74,27 @@ namespace MvcDynamicForms.Fields
             wrapper.InnerHtml = html.ToString();
             return wrapper.ToString();
         }
+        public string GetControlClass() {
 
+            StringBuilder ControlClass = new StringBuilder();
+
+            ControlClass.Append("validate[");
+
+            if ((!string.IsNullOrEmpty(Lower)) && (!string.IsNullOrEmpty(Upper)))
+            {
+
+                ControlClass.Append("min[" + Lower + "],max[" + Upper + "],");
+            }
+            if (_IsRequired == true)
+            {
+
+                ControlClass.Append("required");
+
+            }
+            ControlClass.Append("]");
+
+            return ControlClass.ToString();
+        
+        }
     }
 }
