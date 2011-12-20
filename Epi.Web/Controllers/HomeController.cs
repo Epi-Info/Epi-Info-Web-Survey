@@ -151,7 +151,9 @@ namespace Epi.Web.Controllers
                 surveyResponseRequest.Action = "Update";
                 surveyResponseResponse = _iSurveyResponseRepository.SaveSurveyAnswer(surveyResponseRequest);
 
-                return View("PostSubmit", s);
+              return View("PostSubmit", s);
+               // form = MvcDynamicForms.Demo.Models.FormProvider.GetForm(surveyInfoDTO, this.GetCurrentPage(), this.GetCurrentSurveyAnswer());//Testing SurveyAnswer 
+               // return View("Survey", form); //Testing SurveyAnswer 
             }
             else
             {

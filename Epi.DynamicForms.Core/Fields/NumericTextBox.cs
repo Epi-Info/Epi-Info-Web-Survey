@@ -48,18 +48,24 @@ namespace MvcDynamicForms.Fields
             txt.Attributes.Add("name", inputName);
             txt.Attributes.Add("id", inputName);
             txt.Attributes.Add("type", "text");
-            txt.Attributes.Add("value", Value);
+            // txt.Attributes.Add("value", Value);
+            txt.Attributes.Add("value", ControlValue);
 
           
             if ((!string.IsNullOrEmpty(Lower)) && (!string.IsNullOrEmpty(Upper)))
             {
 
-                txt.Attributes.Add("class", "validate[required,min[" + Lower + "],max[" + Upper + "]]"); 
+                txt.Attributes.Add("class", "validate[required,min[" + Lower + "],max[" + Upper + "],number]"); 
             }
             else {
-
-                txt.Attributes.Add("class", "validate[required]"); //custom[onlyLetterNumber]:No special characters allowed
-            
+                if (_IsRequired == true)
+                {
+                    txt.Attributes.Add("class", "validate[required],number"); //custom[onlyLetterNumber]:No special characters allowed
+                }
+                else {
+                    txt.Attributes.Add("class" ,"number"); //custom[onlyLetterNumber]:No special characters allowed
+                
+                }
             }
             txt.Attributes.Add("data-prompt-position", "topRight:15");
 
@@ -70,9 +76,9 @@ namespace MvcDynamicForms.Fields
             html.Append(txt.ToString(TagRenderMode.SelfClosing));
 
             //adding numeric text box validation jquery script tag
-            var scriptNumeric = new TagBuilder("script");
-            scriptNumeric.InnerHtml = "$(function() { $('#" + inputName + "').numeric();});";
-            html.Append(scriptNumeric.ToString(TagRenderMode.Normal));
+            //var scriptNumeric = new TagBuilder("script");
+            //scriptNumeric.InnerHtml = "$(function() { $('#" + inputName + "').numeric();});";
+            //html.Append(scriptNumeric.ToString(TagRenderMode.Normal));
 
             // If readonly then add the following jquery script to make the field disabled 
             if (ReadOnly)
