@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Epi.Web.Common.Message;
 
-namespace Epi.Web.Repositories.Core
+namespace Epi.Web.MVC.Repositories.Core
 {
     /// <summary>
     /// SurveyResponse Repository interface.

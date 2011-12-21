@@ -5,7 +5,7 @@ using System.Web;
 using System.Xml;
 using System.Xml.Linq;
 
-namespace Epi.Web.Models.Utility
+namespace Epi.Web.MVC.Utility
 {
     public class SurveyResponseXML
     {
@@ -72,15 +72,15 @@ namespace Epi.Web.Models.Utility
 
 
               XmlDocument xml = new XmlDocument();
-              XmlElement root = xml.CreateElement(Epi.Web.Models.Constants.Constant.SURVEY_RESPONSE);
-              root.SetAttribute(Epi.Web.Models.Constants.Constant.SURVEY_ID, SurveyId);
+              XmlElement root = xml.CreateElement(Epi.Web.MVC.Constants.Constant.SURVEY_RESPONSE);
+              root.SetAttribute(Epi.Web.MVC.Constants.Constant.SURVEY_ID, SurveyId);
               xml.AppendChild(root);
 
 
               foreach ( KeyValuePair<string, string> pair  in this.ResponseDetailList)
               {
-                  XmlElement child = xml.CreateElement(Epi.Web.Models.Constants.Constant.RESPONSE_DETAILS);
-                  child.SetAttribute(Epi.Web.Models.Constants.Constant.QUESTION_ID, pair.Key);
+                  XmlElement child = xml.CreateElement(Epi.Web.MVC.Constants.Constant.RESPONSE_DETAILS);
+                  child.SetAttribute(Epi.Web.MVC.Constants.Constant.QUESTION_ID, pair.Key);
                   child.InnerText = pair.Value;
                   root.AppendChild(child);
               }
