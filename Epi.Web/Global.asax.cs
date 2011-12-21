@@ -22,32 +22,49 @@ namespace Epi.Web
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
 
-            routes.MapRoute
-            (
-                "BeginSurvey", // Route name
-                "Survey/begin/{surveyid}", // URL with parameters
-                new { controller = "Home", action = "StartSurvey", surveyid = UrlParameter.Optional }
-            ); 
-
-
 
             routes.MapRoute
             (
-                "Survey", // Route name
-                "Survey/{surveyid}", // URL with parameters
-                new { controller = "Home", action = "ListSurvey", surveyid = UrlParameter.Optional }
+                null, // Route name
+                "Home/{surveyid}", // URL with parameters
+                new { controller = "Home", action = "Index", surveyid = UrlParameter.Optional }
             ); // Parameter defaults
-           
-        
-            //routes.MapRoute(
-            //    "Default", // Route name
-            //    "{controller}/{action}/{id}", // URL with parameters
-            //    new { controller = "Home", action = "Index", id = UrlParameter.Optional }); // Parameter defaults
 
-            routes.MapRoute(
-               "Default", // Route name
-               "{*url}", // URL with parameters
-               new { controller = "Home", action = "Index", id = UrlParameter.Optional });
+            routes.MapRoute
+           (
+               null, // Route name
+               "Survey/{surveyid}", // URL with parameters
+               new { controller = "Survey", action = "Index", surveyid = UrlParameter.Optional }
+           ); // Parameter defaults
+
+            routes.MapRoute
+           (
+               null, // Route name
+               "FinalizeSurvey/{surveyid}", // URL with parameters
+               new { controller = "Final", action = "Index", surveyid = UrlParameter.Optional }
+           ); // Parameter defaults
+
+            //routes.MapRoute
+            //(
+            //    null, // Route name
+            //    "Survey/{surveyid}", // URL with parameters
+            //    new { controller = "Survey", action = "ListSurvey", surveyid = UrlParameter.Optional }
+            //); // Parameter defaults
+
+            //routes.MapRoute
+            //  (
+            //      null, // Route name
+            //      "Survey/{surveyid}", // URL with parameters
+            //      new { controller = "Home", action = "PostSubmit", surveyid = UrlParameter.Optional }
+            //  ); // 
+
+        
+           
+
+            //routes.MapRoute(
+            //   null, // Route name
+            //   "{*url}", // URL with parameters
+            //   new { controller = "Home", action = "Index", id = UrlParameter.Optional });
             
 
         }

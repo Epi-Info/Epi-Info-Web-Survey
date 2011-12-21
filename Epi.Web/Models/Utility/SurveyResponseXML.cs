@@ -5,18 +5,13 @@ using System.Web;
 using System.Xml;
 using System.Xml.Linq;
 
-namespace Epi.Web
+namespace Epi.Web.Models.Utility
 {
     public class SurveyResponseXML
     {
 
         Dictionary<string, string> ResponseDetailList = new Dictionary<string, string>();
-        string _SurveyId;
-
-        public SurveyResponseXML(string pSurveyId)
-        {
-            this._SurveyId = pSurveyId;
-        }
+        
 
         public void Add(MvcDynamicForms.Form pForm)
         {
@@ -72,21 +67,20 @@ namespace Epi.Web
             return result;
          }
 
-          public XmlDocument CreateResponseXml()
+          public XmlDocument CreateResponseXml(string SurveyId)
           {
 
 
               XmlDocument xml = new XmlDocument();
-              
-              XmlElement root = xml.CreateElement("SurveyResponse");
-              root.SetAttribute("SurveyId", this._SurveyId);
+              XmlElement root = xml.CreateElement(Epi.Web.Models.Constants.Constant.SURVEY_RESPONSE);
+              root.SetAttribute(Epi.Web.Models.Constants.Constant.SURVEY_ID, SurveyId);
               xml.AppendChild(root);
 
 
               foreach ( KeyValuePair<string, string> pair  in this.ResponseDetailList)
               {
-                  XmlElement child = xml.CreateElement("ResponseDetail");
-                  child.SetAttribute("QuestionId", pair.Key);
+                  XmlElement child = xml.CreateElement(Epi.Web.Models.Constants.Constant.RESPONSE_DETAILS);
+                  child.SetAttribute(Epi.Web.Models.Constants.Constant.QUESTION_ID, pair.Key);
                   child.InnerText = pair.Value;
                   root.AppendChild(child);
               }
