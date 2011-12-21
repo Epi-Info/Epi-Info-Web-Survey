@@ -29,7 +29,7 @@
         </div>
     </div>
      <div class="success">
- <img src="../../Content/images/button_check.png" style="vertical-align:middle; padding-right: 10px;"> <%: Epi.Web.Models.Constants.Constant.SURVEY_SUBMISSION_MESSAGE %>
+ <img src="../../Content/images/button_check.png" style="vertical-align:middle; padding-right: 10px;"> <%: Epi.Web.MVC.Constants.Constant.SURVEY_SUBMISSION_MESSAGE %>
  </div>  
  </asp:Content> 
  

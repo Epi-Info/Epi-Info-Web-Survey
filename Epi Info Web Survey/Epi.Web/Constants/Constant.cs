@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace Epi.Web.Models.Constants
+namespace Epi.Web.MVC.Constants
 {
     public static class Constant
     {

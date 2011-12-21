@@ -1,11 +1,11 @@
 using System.Web.Mvc;
 using Microsoft.Practices.Unity;
 using Unity.Mvc3;
-using Epi.Web.Models;
-using Epi.Web.Repositories;
-using Epi.Web.Models.Utility;
+using Epi.Web.MVC;
+using Epi.Web.MVC;
+using Epi.Web.MVC.Utility;
 
-namespace Epi.Web
+namespace Epi.Web.MVC
 {
     public static class Bootstrapper
     {
@@ -32,18 +32,18 @@ namespace Epi.Web
             .ConfigureInjectionFor<Epi.Web.DataServiceClient.DataServiceClient>(new InjectionConstructor("WSHttpBinding_IDataService"));
            
             container.RegisterType<Epi.Web.Common.Message.SurveyInfoRequest, Epi.Web.Common.Message.SurveyInfoRequest>();
-            container.RegisterType<Epi.Web.Repositories.Core.ISurveyInfoRepository, Epi.Web.Repositories.SurveyInfoRepository>();
+            container.RegisterType<Epi.Web.MVC.Repositories.Core.ISurveyInfoRepository, Epi.Web.MVC.Repositories.SurveyInfoRepository>();
 
 
             container.RegisterType<Epi.Web.Common.Message.SurveyAnswerRequest, Epi.Web.Common.Message.SurveyAnswerRequest>();
-            container.RegisterType<Epi.Web.Repositories.Core.ISurveyAnswerRepository, Epi.Web.Repositories.SurveyAnswerRepository>();
+            container.RegisterType<Epi.Web.MVC.Repositories.Core.ISurveyAnswerRepository, Epi.Web.MVC.Repositories.SurveyAnswerRepository>();
             
             container.RegisterType<SurveyResponseXML, SurveyResponseXML>()
                 .Configure<InjectedMembers>()
                 .ConfigureInjectionFor<SurveyResponseXML>(new InjectionConstructor());
 
             container.RegisterType<Common.DTO.SurveyAnswerDTO, Common.DTO.SurveyAnswerDTO>();
-            container.RegisterType<Epi.Web.Models.ModelObject.SurveyTransactionObject, Epi.Web.Models.ModelObject.SurveyTransactionObject>();
+            container.RegisterType<Epi.Web.MVC.Facade.SurveyFacade, Epi.Web.MVC.Facade.SurveyFacade>();
             container.RegisterControllers();
 
             return container;

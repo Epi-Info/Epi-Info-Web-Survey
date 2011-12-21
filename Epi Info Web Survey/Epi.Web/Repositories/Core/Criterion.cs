@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Text;
-namespace Epi.Web.Repositories.Core
+namespace Epi.Web.MVC.Repositories.Core
 {
     /// <summary>
     /// Criterion stores and transports query criteria inluding sort orders and filtering.
