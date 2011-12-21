@@ -82,12 +82,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Controllers\FinalController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\SurveyController.cs" />
     <Compile Include="FormProvider.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Repositories\SurveyResponseRepository.cs" />
+    <Compile Include="Models\Constants\Constant.cs" />
+    <Compile Include="Models\ModelObject\SurveyTransactionObject.cs" />
+    <Compile Include="Models\Repositories\SurveyAnswerRepository.cs" />
     <Compile Include="Models\SurveyResponseModel.cs" />
     <Compile Include="Models\Mapper.cs" />
     <Compile Include="Models\Repositories\Core\ISurveyResponseRepository.cs" />
@@ -103,7 +107,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="SurveyResponseXML.cs" />
+    <Compile Include="Models\Utility\SurveyResponseXML.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="bin\Epi.Web.dll" />
@@ -177,7 +181,6 @@
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <None Include="Properties\DataSources\Epi.Web.Common.Message.PublishResponse.datasource" />
-    <None Include="Properties\DataSources\Epi.Web.Common.Message.SurveyAnswerResponse.datasource" />
     <None Include="Properties\DataSources\Epi.Web.Common.Message.SurveyInfoResponse.datasource" />
     <None Include="Properties\DataSources\Epi.Web.Common.Message.SurveyResponseResponse.datasource" />
     <None Include="Service References\DataServiceClient\SurveyDataService.disco" />
@@ -190,13 +193,13 @@
     <Content Include="Scripts\jquery.validationEngine-en.js" />
     <Content Include="Scripts\jquery.validationEngine.js" />
     <Content Include="Unity.Mvc3.README.txt" />
-    <Content Include="Views\Home\Demo.aspx" />
-    <Content Include="Views\Home\Exception.aspx" />
-    <Content Include="Views\Home\PostSubmit.aspx" />
-    <Content Include="Views\Home\Survey.aspx" />
-    <Content Include="Views\Home\SurveyIntroduction.aspx" />
+    <Content Include="Views\Final\Index.aspx" />
+    <Content Include="Views\Final\PostSubmit.aspx" />
     <Content Include="Views\Home\Index.aspx" />
+    <Content Include="Views\Survey\Demo.aspx" />
+    <Content Include="Views\Survey\Exception.aspx" />
     <Content Include="Views\Shared\footer.htm" />
+    <Content Include="Views\Survey\Index.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -249,9 +252,7 @@
     <None Include="Properties\DataSources\Epi.Web.Common.DTO.SurveyInfoDTO.datasource" />
     <None Include="Properties\DataSources\Epi.Web.Common.DTO.SurveyRequestResponse.datasource" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\ModelInterface\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\DataServiceClient\" />
   </ItemGroup>
