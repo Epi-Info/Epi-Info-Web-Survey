@@ -41,9 +41,6 @@ namespace Epi.Web.MVC.Controllers
             try
             {
 
-                //_surveyInfoRequest.Criteria.SurveyId = surveyid;
-                //SurveyInfoResponse surveyInfoResponse = _iSurveyInfoRepository.GetSurveyInfo(_surveyInfoRequest);
-                //SurveyInfoModel surveyModel = Mapper.ToSurveyInfoModel(surveyInfoResponse.SurveyInfo);
                 SurveyInfoModel surveyInfoModel = _surveyFacade.GetSurveyInfoModel(surveyid);
                 return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, surveyInfoModel);
             }
