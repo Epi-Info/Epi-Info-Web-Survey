@@ -8,14 +8,14 @@ using Epi.Web.Common.Message;
 
 namespace Epi.Web.Repositories
 {
-    public class SurveyResponseRepository : RepositoryBase, ISurveyAnswerRepository
+    public class SurveyAnswerRepository : RepositoryBase, ISurveyAnswerRepository
     {
 
 
 
         private Epi.Web.DataServiceClient.IDataService _iSurveyManager;
 
-        public SurveyResponseRepository(Epi.Web.DataServiceClient.IDataService iSurveyManager)
+        public SurveyAnswerRepository(Epi.Web.DataServiceClient.IDataService iSurveyManager)
         {
             _iSurveyManager = iSurveyManager;
         }

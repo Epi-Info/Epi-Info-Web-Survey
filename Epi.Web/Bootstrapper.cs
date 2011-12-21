@@ -3,7 +3,7 @@ using Microsoft.Practices.Unity;
 using Unity.Mvc3;
 using Epi.Web.Models;
 using Epi.Web.Repositories;
-
+using Epi.Web.Models.Utility;
 
 namespace Epi.Web
 {
@@ -36,9 +36,14 @@ namespace Epi.Web
 
 
             container.RegisterType<Epi.Web.Common.Message.SurveyAnswerRequest, Epi.Web.Common.Message.SurveyAnswerRequest>();
-            container.RegisterType<Epi.Web.Repositories.Core.ISurveyAnswerRepository, Epi.Web.Repositories.SurveyResponseRepository>();
+            container.RegisterType<Epi.Web.Repositories.Core.ISurveyAnswerRepository, Epi.Web.Repositories.SurveyAnswerRepository>();
+            
+            container.RegisterType<SurveyResponseXML, SurveyResponseXML>()
+                .Configure<InjectedMembers>()
+                .ConfigureInjectionFor<SurveyResponseXML>(new InjectionConstructor());
 
-
+            container.RegisterType<Common.DTO.SurveyAnswerDTO, Common.DTO.SurveyAnswerDTO>();
+            container.RegisterType<Epi.Web.Models.ModelObject.SurveyTransactionObject, Epi.Web.Models.ModelObject.SurveyTransactionObject>();
             container.RegisterControllers();
 
             return container;
