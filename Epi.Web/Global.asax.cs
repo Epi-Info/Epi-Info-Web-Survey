@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace Epi.Web
+namespace Epi.Web.MVC
 {
     // Note: For instructions on enabling IIS6 or IIS7 classic mode, 
     // visit http://go.microsoft.com/?LinkId=9394801
@@ -26,7 +26,7 @@ namespace Epi.Web
             routes.MapRoute
             (
                 null, // Route name
-                "Survey/{surveyid}", // URL with parameters
+                "Home/{surveyid}", // URL with parameters
                 new { controller = "Home", action = "Index", surveyid = UrlParameter.Optional }
             ); // Parameter defaults
 
@@ -40,9 +40,15 @@ namespace Epi.Web
             routes.MapRoute
            (
                null, // Route name
-               "Survey/{surveyid}", // URL with parameters
+               "Final/{surveyid}", // URL with parameters
                new { controller = "Final", action = "Index", surveyid = UrlParameter.Optional }
            ); // Parameter defaults
+
+            routes.MapRoute(
+               "Default", // Route name
+               "{*url}", // URL with parameters
+               new { controller = "Home", action = "Splash", id = UrlParameter.Optional });
+
 
             //routes.MapRoute
             //(

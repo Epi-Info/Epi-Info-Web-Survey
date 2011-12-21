@@ -1,41 +1,30 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using Epi.Web.Models;
-using Epi.Web.Repositories.Core;
-using Epi.Web.Common.Message;
-using Epi.Web.Common.Criteria;
-using Epi.Web.Models.Constants;
-using MvcDynamicForms.Demo.Models;
-using Epi.Web.Models.Utility;
+using Epi.Web.MVC.Models;
 
-namespace Epi.Web.Controllers
+namespace Epi.Web.MVC.Controllers
 {
     public class HomeController : Controller
     {
 
-        // declare ISurveyInfoRepository which inherits IRepository of SurveyInfoResponse object
-        private ISurveyInfoRepository _iSurveyInfoRepository;
-
-        //declare SurveyInfoRequest
-        private Epi.Web.Common.Message.SurveyInfoRequest _surveyInfoRequest;
-
+        //declare  SurveyFacade
+        private Epi.Web.MVC.Facade.SurveyFacade _surveyFacade;
         
+       
         /// <summary>
-        /// Injectinting ISurveyInfoRepository and SurveyInfoRequest through Constructor
+        /// injecting surveyFacade to the constructor 
         /// </summary>
-        /// <param name="iSurveyInfoRepository"></param>
-        public HomeController(ISurveyInfoRepository iSurveyInfoRepository,
-                                  Epi.Web.Common.Message.SurveyInfoRequest surveyInfoRequest)
+        /// <param name="surveyFacade"></param>
+        public HomeController(Epi.Web.MVC.Facade.SurveyFacade surveyFacade)
         {
-            _iSurveyInfoRepository = iSurveyInfoRepository;
-            _surveyInfoRequest = surveyInfoRequest;
+            _surveyFacade = surveyFacade;
         }
 
 
-
+        public ActionResult Splash()
+        {
+            return View("Splash");
+        }
         /// <summary>
         /// Accept SurveyId as parameter, 
         /// 
@@ -52,15 +41,15 @@ namespace Epi.Web.Controllers
             try
             {
 
-                _surveyInfoRequest.Criteria.SurveyId = surveyid;
-                SurveyInfoResponse surveyInfoResponse = _iSurveyInfoRepository.GetSurveyInfo(_surveyInfoRequest);
-                var s = Mapper.ToSurveyInfoModel(surveyInfoResponse.SurveyInfo);
-
-                return View(Epi.Web.Models.Constants.Constant.INDEX_PAGE, s);
+                //_surveyInfoRequest.Criteria.SurveyId = surveyid;
+                //SurveyInfoResponse surveyInfoResponse = _iSurveyInfoRepository.GetSurveyInfo(_surveyInfoRequest);
+                //SurveyInfoModel surveyModel = Mapper.ToSurveyInfoModel(surveyInfoResponse.SurveyInfo);
+                SurveyInfoModel surveyInfoModel = _surveyFacade.GetSurveyInfoModel(surveyid);
+                return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, surveyInfoModel);
             }
             catch (Exception ex)
             {
-                return View(Epi.Web.Models.Constants.Constant.EXCEPTION_PAGE);
+                return View(Epi.Web.MVC.Constants.Constant.EXCEPTION_PAGE);
             }
         }
 
@@ -70,11 +59,11 @@ namespace Epi.Web.Controllers
         /// <param name="surveyModel"></param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult Index(Epi.Web.Models.SurveyInfoModel surveyModel)
+        public ActionResult Index(Epi.Web.MVC.Models.SurveyInfoModel surveyModel)
         {
-            
-            return RedirectToAction(Epi.Web.Models.Constants.Constant.INDEX, Epi.Web.Models.Constants.Constant.SURVEY_CONTROLLER);
-            
+            //string page;
+           // return RedirectToAction(Epi.Web.Models.Constants.Constant.INDEX, Epi.Web.Models.Constants.Constant.SURVEY_CONTROLLER, new {id="page" });
+            return RedirectToAction(Epi.Web.MVC.Constants.Constant.INDEX, Epi.Web.MVC.Constants.Constant.SURVEY_CONTROLLER);
         }
 
 

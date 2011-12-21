@@ -6,7 +6,7 @@ using System.Configuration;
 using System.ServiceModel;
 using System.ServiceModel.Configuration;
 using Epi.Web.DataServiceClient;
-namespace Epi.Web.Repositories.Core
+namespace Epi.Web.MVC.Repositories.Core
 {
     /// <summary>
     /// TODO: For now commented. Later we will delete this class

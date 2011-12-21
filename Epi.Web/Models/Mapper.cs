@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using Epi.Web.Models;
-namespace Epi.Web.Models
+using Epi.Web.MVC;
+namespace Epi.Web.MVC.Models
 {
     /// <summary>
     /// Maps DTO object to Model object or Model object to DTO object

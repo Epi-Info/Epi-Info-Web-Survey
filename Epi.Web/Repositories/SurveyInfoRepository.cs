@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using Epi.Web.Repositories.Core;
+using Epi.Web.MVC.Repositories.Core;
 using Epi.Web.DataServiceClient;
 using Epi.Web.Common.Message;
 
-namespace Epi.Web.Repositories
+namespace Epi.Web.MVC.Repositories
 {
     public class SurveyInfoRepository : RepositoryBase, ISurveyInfoRepository
     {
