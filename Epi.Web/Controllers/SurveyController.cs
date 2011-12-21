@@ -74,7 +74,7 @@ namespace Epi.Web.Controllers
             }
             else
             {
-                return View(Epi.Web.Models.Constants.Constant.SURVAY_PAGE, form);
+                return View(Epi.Web.Models.Constants.Constant.INDEX_PAGE, form);
             }
 
             
