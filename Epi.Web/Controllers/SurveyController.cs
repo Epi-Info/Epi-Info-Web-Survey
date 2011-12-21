@@ -1,17 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using Epi.Web.Models;
-using Epi.Web.Repositories.Core;
-using Epi.Web.Common.Message;
-using Epi.Web.Common.Criteria;
-using Epi.Web.Models.Constants;
-using MvcDynamicForms.Demo.Models;
-using Epi.Web.Models.ModelObject;
-using Epi.Web.Models.Utility;
-namespace Epi.Web.Controllers
+using Epi.Web.MVC.Facade;
+using Epi.Web.MVC.Models;
+namespace Epi.Web.MVC.Controllers
 {
     public class SurveyController : Controller
     {
@@ -20,15 +11,15 @@ namespace Epi.Web.Controllers
         
 
         //declare SurveyTransactionObject object
-        private SurveyTransactionObject _surveyTransactionObj;
+        private SurveyFacade _surveyFacade;
         /// <summary>
         /// Injectinting SurveyTransactionObject through Constructor
         /// </summary>
         /// <param name="iSurveyInfoRepository"></param>
         
-        public SurveyController(SurveyTransactionObject surveyTransactionObj)
+        public SurveyController(SurveyFacade surveyFacade)
         {
-            _surveyTransactionObj = surveyTransactionObj;
+            _surveyFacade = surveyFacade;
         }
         
         
@@ -41,40 +32,44 @@ namespace Epi.Web.Controllers
        /// <returns></returns>
  
         
-        public ActionResult Index(string surveyId)
+        public ActionResult Index(string surveyId,string page)
         {
-           
 
-            //create the responseid
-            Guid ResponseID = Guid.NewGuid();
-            
-            //get the survey form
-            var form = _surveyTransactionObj.GetSurveyFormData(surveyId, this.GetCurrentPage(), this.GetCurrentSurveyAnswer());
+            //if (!string.IsNullOrEmpty(page))
+            //{
+                //create the responseid
+                Guid ResponseID = Guid.NewGuid();
 
-            //put the ResponseId in Temp data for later use
-            TempData[Epi.Web.Models.Constants.Constant.RESPONSE_ID] = ResponseID.ToString();
+                //get the survey form
+                var form = _surveyFacade.GetSurveyFormData(surveyId, this.GetCurrentPage(), this.GetCurrentSurveyAnswer());
 
-            // create the first survey response
-            _surveyTransactionObj.CreateSurveyAnswer(surveyId, ResponseID.ToString());
-            return View(Epi.Web.Models.Constants.Constant.INDEX_PAGE, form);          
+                //put the ResponseId in Temp data for later use
+                TempData[Epi.Web.MVC.Constants.Constant.RESPONSE_ID] = ResponseID.ToString();
+
+                // create the first survey response
+                _surveyFacade.CreateSurveyAnswer(surveyId, ResponseID.ToString());
+                return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
+            //}
+            //return null;
         }
         [HttpPost]
         public ActionResult Index(SurveyInfoModel surveyInfoModel,string Submit)
         {
             
             //get the survey form
-            MvcDynamicForms.Form form = _surveyTransactionObj.GetSurveyFormData(surveyInfoModel.SurveyId, this.GetCurrentPage(), this.GetCurrentSurveyAnswer());
+            MvcDynamicForms.Form form = _surveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, this.GetCurrentPage(), this.GetCurrentSurveyAnswer());
             //Update the model
             UpdateModel(form);
             if (form.Validate())
             {
-                _surveyTransactionObj.UpdateSurveyResponse(surveyInfoModel, TempData[Epi.Web.Models.Constants.Constant.RESPONSE_ID].ToString(), form);
-                
+                _surveyFacade.UpdateSurveyResponse(surveyInfoModel, TempData[Epi.Web.MVC.Constants.Constant.RESPONSE_ID].ToString(), form);
+
+                //return RedirectToAction("Index", "Final", new {id="final" });
                 return RedirectToAction("Index", "Final");
-            }
+            }  
             else
             {
-                return View(Epi.Web.Models.Constants.Constant.INDEX_PAGE, form);
+                return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
             }
 
             
@@ -90,9 +85,9 @@ namespace Epi.Web.Controllers
         private int GetCurrentPage()
         {
             int CurrentPage = 1;
-            if (TempData.ContainsKey(Epi.Web.Models.Constants.Constant.CURRENT_PAGE) && TempData[Epi.Web.Models.Constants.Constant.CURRENT_PAGE] != null)
+            if (TempData.ContainsKey(Epi.Web.MVC.Constants.Constant.CURRENT_PAGE) && TempData[Epi.Web.MVC.Constants.Constant.CURRENT_PAGE] != null)
             {
-                int.TryParse(TempData[Epi.Web.Models.Constants.Constant.CURRENT_PAGE].ToString(), out CurrentPage);
+                int.TryParse(TempData[Epi.Web.MVC.Constants.Constant.CURRENT_PAGE].ToString(), out CurrentPage);
             }
 
             return CurrentPage;

@@ -3,17 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Epi.Web.Models;
-using Epi.Web.Repositories.Core;
+using Epi.Web.MVC;
+using Epi.Web.MVC.Repositories.Core;
 using Epi.Web.Common.Message;
 using Epi.Web.Common.Criteria;
-using Epi.Web.Models.Constants;
+using Epi.Web.MVC.Constants;
 using MvcDynamicForms.Demo.Models;
-using Epi.Web.Models.Utility;
+using Epi.Web.MVC.Utility;
+using Epi.Web.MVC.Models;
 
-namespace Epi.Web.Models.ModelObject
+namespace Epi.Web.MVC.Facade
 {
-    public class SurveyTransactionObject
+    public class SurveyFacade
     {
         // declare ISurveyInfoRepository which inherits IRepository of SurveyInfoResponse object
         private ISurveyInfoRepository _iSurveyInfoRepository;
@@ -37,7 +38,7 @@ namespace Epi.Web.Models.ModelObject
         /// Injectinting ISurveyInfoRepository through Constructor
         /// </summary>
         /// <param name="iSurveyInfoRepository"></param>
-        public SurveyTransactionObject(ISurveyInfoRepository iSurveyInfoRepository, ISurveyAnswerRepository iSurveyResponseRepository,
+        public SurveyFacade(ISurveyInfoRepository iSurveyInfoRepository, ISurveyAnswerRepository iSurveyResponseRepository,
                                   Epi.Web.Common.Message.SurveyInfoRequest surveyInfoRequest, Epi.Web.Common.Message.SurveyAnswerRequest surveyResponseRequest,
                                   Common.DTO.SurveyAnswerDTO surveyAnswerDTO,
                                    SurveyResponseXML surveyResponseXML)
@@ -79,7 +80,7 @@ namespace Epi.Web.Models.ModelObject
             _surveyAnswerRequest.SurveyResponseDTO.SurveyId = surveyId;
             _surveyAnswerRequest.SurveyResponseDTO.Status = (int)Constant.Status.InProgress;
             _surveyAnswerRequest.SurveyResponseDTO.XML = _surveyResponseXML.CreateResponseXml(surveyId).InnerXml;
-            _surveyAnswerRequest.Action = Epi.Web.Models.Constants.Constant.CREATE;  //"Create";
+            _surveyAnswerRequest.Action = Epi.Web.MVC.Constants.Constant.CREATE;  //"Create";
             _iSurveyResponseRepository.SaveSurveyAnswer(_surveyAnswerRequest);
         }
 
@@ -144,7 +145,7 @@ namespace Epi.Web.Models.ModelObject
         /// <returns></returns>
         private SurveyAnswerResponse SaveSurveyAnswerResponse(SurveyAnswerRequest p_surveyAnswerRequest)
         {
-            p_surveyAnswerRequest.Action = Epi.Web.Models.Constants.Constant.UPDATE;  //"Update";
+            p_surveyAnswerRequest.Action = Epi.Web.MVC.Constants.Constant.UPDATE;  //"Update";
             return _iSurveyResponseRepository.SaveSurveyAnswer(p_surveyAnswerRequest);
         }
         
