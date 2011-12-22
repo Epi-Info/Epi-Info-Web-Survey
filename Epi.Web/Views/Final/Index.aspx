@@ -9,7 +9,7 @@
 <div id="attention" style="margin: 10px">
             <img src="../Content/images/sign_warning.png" alt="" style="vertical-align: middle;
                 padding-right: 10px;">
-           <%: Epi.Web.Models.Constants.Constant.SURVEY_NOT_EXISTS %>
+           <%: Epi.Web.MVC.Constants.Constant.SURVEY_NOT_EXISTS %>
         </div>
 
 </asp:Content>
