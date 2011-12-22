@@ -15,7 +15,7 @@
     </div>
     <div id="content">
         <h2>
-            Welcome to Epi Info Survey. This is the first sprint.</h2>
+            Welcome to Epi Info Survey. This is the 2nd sprint.</h2>
         <p>
         </p>
        
