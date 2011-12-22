@@ -27,7 +27,7 @@ namespace Epi.Web.SurveyManager_Test
 
         private void button1_Click(object sender, RoutedEventArgs e)
         {
-            Epi.Web.WCF.SurveyService.ManagerService client = new Epi.Web.WCF.SurveyService.ManagerService();
+            SurveyManagerService.ManagerServiceClient client = new SurveyManagerService.ManagerServiceClient();
 
             Epi.Web.Common.Message.PublishRequest Request = new Epi.Web.Common.Message.PublishRequest();
             if (this.ClosingDateCalendar.SelectedDate == null)
