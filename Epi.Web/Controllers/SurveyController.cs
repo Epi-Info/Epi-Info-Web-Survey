@@ -37,12 +37,13 @@ namespace Epi.Web.MVC.Controllers
 
             //if (!string.IsNullOrEmpty(page))
             //{
-                //create the responseid
-                Guid ResponseID = Guid.NewGuid();
-
+               
                 //get the survey form
                 var form = _surveyFacade.GetSurveyFormData(surveyId, this.GetCurrentPage(), this.GetCurrentSurveyAnswer());
 
+                //create the responseid
+                Guid ResponseID = Guid.NewGuid();
+               
                 //put the ResponseId in Temp data for later use
                 TempData[Epi.Web.MVC.Constants.Constant.RESPONSE_ID] = ResponseID.ToString();
 
@@ -65,7 +66,8 @@ namespace Epi.Web.MVC.Controllers
                 _surveyFacade.UpdateSurveyResponse(surveyInfoModel, TempData[Epi.Web.MVC.Constants.Constant.RESPONSE_ID].ToString(), form);
 
                 //return RedirectToAction("Index", "Final", new {id="final" });
-                return RedirectToAction("Index", "Final");
+                //return RedirectToAction("Index", "Survey");
+               return RedirectToAction("Index", "Final");
             }  
             else
             {
@@ -97,12 +99,14 @@ namespace Epi.Web.MVC.Controllers
         {
             Epi.Web.Common.DTO.SurveyAnswerDTO result = null;
 
-            //if (TempData.ContainsKey(Epi.Web.Models.Constants.Constant.RESPONSE_ID) && TempData[Epi.Web.Models.Constants.Constant.RESPONSE_ID] != null
-            //                                                                   && !string.IsNullOrEmpty(TempData[Epi.Web.Models.Constants.Constant.RESPONSE_ID].ToString()))
-            //{
-            //    _surveyAnswerRequest.Criteria.ResposneId = TempData[Epi.Web.Models.Constants.Constant.RESPONSE_ID].ToString();
-            //    result = _iSurveyResponseRepository.GetSurveyAnswer(_surveyAnswerRequest).SurveyResponseDTO;
-            //}
+            if (TempData.ContainsKey(Epi.Web.MVC.Constants.Constant.RESPONSE_ID) && TempData[Epi.Web.MVC.Constants.Constant.RESPONSE_ID] != null
+                                                                               && !string.IsNullOrEmpty(TempData[Epi.Web.MVC.Constants.Constant.RESPONSE_ID].ToString()))
+            {
+                //_surveyAnswerRequest.Criteria.ResposneId = TempData[Epi.Web.MVC.Constants.Constant.RESPONSE_ID].ToString();
+                //result = _iSurveyResponseRepository.GetSurveyAnswer(_surveyAnswerRequest).SurveyResponseDTO;
+                return _surveyFacade.GetSurveyAnswerResponse(TempData[Epi.Web.MVC.Constants.Constant.RESPONSE_ID].ToString()).SurveyResponseDTO;
+                 
+            }
 
             return result;
         }
