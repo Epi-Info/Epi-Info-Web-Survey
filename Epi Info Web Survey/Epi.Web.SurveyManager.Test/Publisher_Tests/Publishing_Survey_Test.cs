@@ -102,7 +102,7 @@ namespace Epi.Web.SurveyManager.Test
 
             SurveyRequestBO objSurveyRequestBO;
             SurveyRequestResultBO objSurveyResponseBO;
-            SurveyInfoBO objSurveyInfoBO;
+            SurveyInfoBO objSurveyInfoBO = new SurveyInfoBO ();
             DateTime closingDate;
             string surveyURL;
             string surveyID = string.Empty;
@@ -112,8 +112,8 @@ namespace Epi.Web.SurveyManager.Test
             closingDate = objSurveyRequestBO.ClosingDate;   //Closing date that is sent in    
 
 
-            objSurveyResponseBO = objPublisher.PublishSurvey(objSurveyRequestBO);// publish survey and get Response back
-           
+           // objSurveyResponseBO = objPublisher.PublishSurvey(objSurveyRequestBO);// publish survey and get Response back
+            objSurveyResponseBO = objPublisher.PublishSurvey(objSurveyInfoBO);
             surveyURL = objSurveyResponseBO.URL;
             surveyID = surveyURL.Substring(surveyURL.LastIndexOf('/')+1);  //Get the ID from Url. 
 
@@ -140,22 +140,29 @@ namespace Epi.Web.SurveyManager.Test
             Publisher objPublisher = new Publisher(objISurveryInfoDao);
 
             SurveyDataProvider DataObj = new SurveyDataProvider();//Get Data
-
+          
             SurveyRequestBO objSurveyRequestBO;
             SurveyRequestResultBO objSurveyResponseBO;
-            SurveyInfoBO objSurveyInfoBO;
+            SurveyInfoBO objSurveyInfoBO = new SurveyInfoBO();
             int ResonseType;
             string surveyURL;
             string surveyID = string.Empty;
-            
+
+
+            EntitySurveyInfoDao EntitySurveyInfoDao = new EntitySurveyInfoDao();
+
             //Act
 
             objSurveyRequestBO = DataObj.CreateSurveyRequestBOObject();
+            //objSurveyInfoBO =objSurveyRequestBO;
+
+          objSurveyInfoBO =  EntitySurveyInfoDao.GetSurveyInfo(objSurveyRequestBO.SurveyNumber);
+            
 
             ResonseType = objSurveyRequestBO.SurveyType;
 
-            objSurveyResponseBO = objPublisher.PublishSurvey(objSurveyRequestBO);// publish survey and get Response back
-
+            //objSurveyResponseBO = objPublisher.PublishSurvey(objSurveyRequestBO);// publish survey and get Response back
+            objSurveyResponseBO = objPublisher.PublishSurvey(objSurveyInfoBO);
             surveyURL = objSurveyResponseBO.URL;
             surveyID = surveyURL.Substring(surveyURL.LastIndexOf('/') + 1);  //Get the ID from Url. 
 

@@ -28,7 +28,7 @@ namespace Epi.Web.SurveyManager.Test.Publisher_Tests
 
             SurveyRequestBO objSurveyRequestBO;
             SurveyRequestResultBO objSurveyResponseBO;
-            SurveyInfoBO objSurveyInfoBO;
+            SurveyInfoBO objSurveyInfoBO = new SurveyInfoBO();
             int ResonseType;
             string surveyURL;
             string surveyID = string.Empty;
@@ -39,8 +39,9 @@ namespace Epi.Web.SurveyManager.Test.Publisher_Tests
             objSurveyRequestBO.SurveyType = 1;
             ResonseType = objSurveyRequestBO.SurveyType;
 
-            objSurveyResponseBO = objPublisher.PublishSurvey(objSurveyRequestBO);// publish survey and get Response back
-
+            //objSurveyResponseBO = objPublisher.PublishSurvey(objSurveyRequestBO);// publish survey and get Response back
+            objSurveyInfoBO = DataObj.CreateSurveyInfoBOObject(); 
+            objSurveyResponseBO = objPublisher.PublishSurvey(objSurveyInfoBO);
             surveyURL = objSurveyResponseBO.URL;
             surveyID = surveyURL.Substring(surveyURL.LastIndexOf('/') + 1);  //Get the ID from Url. 
 
@@ -70,7 +71,7 @@ namespace Epi.Web.SurveyManager.Test.Publisher_Tests
 
             SurveyRequestBO objSurveyRequestBO;
             SurveyRequestResultBO objSurveyResponseBO;
-            SurveyInfoBO objSurveyInfoBO;
+            SurveyInfoBO objSurveyInfoBO = new SurveyInfoBO() ;
             int ResonseType;
             string surveyURL;
             string surveyID = string.Empty;
@@ -81,8 +82,9 @@ namespace Epi.Web.SurveyManager.Test.Publisher_Tests
             objSurveyRequestBO.SurveyType = 2;
 
             ResonseType = objSurveyRequestBO.SurveyType;
-
-            objSurveyResponseBO = objPublisher.PublishSurvey(objSurveyRequestBO);// publish survey and get Response back
+            objSurveyInfoBO = DataObj.CreateSurveyInfoBOObject(); 
+           // objSurveyResponseBO = objPublisher.PublishSurvey(objSurveyRequestBO);// publish survey and get Response back
+            objSurveyResponseBO = objPublisher.PublishSurvey(objSurveyInfoBO);
 
             surveyURL = objSurveyResponseBO.URL;
             surveyID = surveyURL.Substring(surveyURL.LastIndexOf('/') + 1);  //Get the ID from Url. 
@@ -111,7 +113,7 @@ namespace Epi.Web.SurveyManager.Test.Publisher_Tests
 
             SurveyRequestBO objSurveyRequestBO;
             SurveyRequestResultBO objSurveyResponseBO;
-            SurveyInfoBO objSurveyInfoBO;
+            SurveyInfoBO objSurveyInfoBO = new SurveyInfoBO() ;
             DateTime closingDate;
             string surveyURL;
             string surveyID = string.Empty;
@@ -121,8 +123,10 @@ namespace Epi.Web.SurveyManager.Test.Publisher_Tests
             closingDate = objSurveyRequestBO.ClosingDate;   //Closing date that is sent in    
 
 
-            objSurveyResponseBO = objPublisher.PublishSurvey(objSurveyRequestBO);// publish survey and get Response back
-           
+            //objSurveyResponseBO = objPublisher.PublishSurvey(objSurveyRequestBO);// publish survey and get Response back
+            objSurveyInfoBO = DataObj.CreateSurveyInfoBOObject(); 
+            objSurveyResponseBO = objPublisher.PublishSurvey(objSurveyInfoBO);
+
             surveyURL = objSurveyResponseBO.URL;
             surveyID = surveyURL.Substring(surveyURL.LastIndexOf('/')+1);  //Get the ID from Url. 
 
