@@ -63,6 +63,20 @@ namespace Epi.Web.SurveyManager.Test
 
             return pRequestMessage;
         }
+        public SurveyInfoBO CreateSurveyInfoBOObject()
+        {
+            SurveyInfoBO pRequestMessage = new SurveyInfoBO();
+            pRequestMessage.ClosingDate = ClosingDate;
+            pRequestMessage.DepartmentName = DepartmentName;
+            pRequestMessage.IntroductionText = IntroductionText;
+           // pRequestMessage.IsSingleResponse = IsSingleResponse;
+            pRequestMessage.OrganizationName = OrganizationName;
+            pRequestMessage.SurveyName = SurveyName;
+            pRequestMessage.SurveyNumber = SurveyNumber;
+            pRequestMessage.XML = TemplateXML;
+            pRequestMessage.SurveyType = SurveyType;
+            return pRequestMessage;
+        }
         private static string GetXML()
         {
              XDocument xdoc = XDocument.Load("../../MetaDataXML.xml");
