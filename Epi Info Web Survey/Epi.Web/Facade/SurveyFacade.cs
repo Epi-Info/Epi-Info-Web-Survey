@@ -1,14 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using Epi.Web.MVC;
 using Epi.Web.MVC.Repositories.Core;
 using Epi.Web.Common.Message;
-using Epi.Web.Common.Criteria;
 using Epi.Web.MVC.Constants;
-using MvcDynamicForms.Demo.Models;
 using Epi.Web.MVC.Utility;
 using Epi.Web.MVC.Models;
 
@@ -63,7 +56,7 @@ namespace Epi.Web.MVC.Facade
         {
             //Get the SurveyInfoDTO
             Epi.Web.Common.DTO.SurveyInfoDTO surveyInfoDTO = GetSurveyInfoDTO(surveyId);
-            MvcDynamicForms.Form form = MvcDynamicForms.Demo.Models.FormProvider.GetForm(surveyInfoDTO, pageNumber, surveyAnswerDTO);
+            MvcDynamicForms.Form form = Epi.Web.MVC.Utility.FormProvider.GetForm(surveyInfoDTO, pageNumber, surveyAnswerDTO);
             return form;
         }
         /// <summary>
