@@ -8,7 +8,7 @@
     <ProjectGuid>{6F9325C1-4172-455D-9ADC-AC88F36408F6}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Epi.Web.Test</RootNamespace>
+    <RootNamespace>Epi.Web.MVC</RootNamespace>
     <AssemblyName>Epi.Web.Test</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -64,9 +64,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\HomeController_Tests\When_Click_Button.cs" />
-    <Compile Include="Controllers\HomeController_Tests\When_Open_Survey_Link.cs" />
+    <Compile Include="Controllers\HomeController_Tests\When_Arrive_At_Application.cs" />
+    <Compile Include="Controllers\HomeController_Tests\When_Click_Survey_Button.cs" />
     <Compile Include="Mock\SurveyRepository.cs" />
+    <Compile Include="Mock\TestSurveyFacade.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
