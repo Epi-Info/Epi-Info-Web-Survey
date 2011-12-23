@@ -85,6 +85,7 @@
     <Compile Include="Controllers\FinalController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SurveyController.cs" />
+    <Compile Include="Facade\ISurveyFacade.cs" />
     <Compile Include="Utility\FormProvider.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

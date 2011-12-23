@@ -4,16 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Web.Mvc;
 using Epi.Web;
-using Epi.Web.Models;
+using Epi.Web.MVC.Models;
 using NUnit.Framework;
 using Moq;
 using NUnit.Mocks;
 using Epi.Web.Common.DTO;
-using Epi.Web.Repositories;
+using Epi.Web.MVC.Repositories;
 
-namespace Epi.Web.Test.Mock
+namespace Epi.Web.MVC.Mock
 {
-    public class SurveyRepository : Epi.Web.Repositories.Core.ISurveyInfoRepository, Epi.Web.Repositories.Core.IRepository<Epi.Web.Common.DTO.SurveyInfoDTO>
+    public class SurveyRepository : Epi.Web.MVC.Repositories.Core.ISurveyInfoRepository, Epi.Web.MVC.Repositories.Core.IRepository<Epi.Web.Common.DTO.SurveyInfoDTO>
     {
 
 
@@ -27,24 +27,51 @@ namespace Epi.Web.Test.Mock
         /// </summary>
         /// <param name="pIid"></param>
         /// <returns></returns>
-        SurveyInfoDTO Epi.Web.Repositories.Core.ISurveyInfoRepository.GetSurveyInfoById(string pIid)
-        {
-            List<SurveyInfoDTO> surveyResponseList = new SurveyResponseCreater().ListOfSurveyResponse();
-            SurveyInfoDTO sResponse = surveyResponseList.Find(x => x.SurveyId == pIid);
-            return sResponse;
-        }
+       
 
-        public List<SurveyInfoDTO> GetList(Repositories.Core.Criterion criterion = null)
+
+
+        public Common.Message.SurveyInfoResponse GetSurveyInfo(Common.Message.SurveyInfoRequest pRequestId)
         {
             throw new NotImplementedException();
         }
 
-        public SurveyInfoDTO Get(int id)
+        public List<Common.Message.SurveyInfoResponse> GetList(MVC.Repositories.Core.Criterion criterion = null)
         {
             throw new NotImplementedException();
         }
 
-        public int GetCount(Repositories.Core.Criterion criterion = null)
+        public Common.Message.SurveyInfoResponse Get(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int GetCount(MVC.Repositories.Core.Criterion criterion = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Insert(Common.Message.SurveyInfoResponse t)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Update(Common.Message.SurveyInfoResponse t)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Delete(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        List<SurveyInfoDTO> MVC.Repositories.Core.IRepository<SurveyInfoDTO>.GetList(MVC.Repositories.Core.Criterion criterion = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        SurveyInfoDTO MVC.Repositories.Core.IRepository<SurveyInfoDTO>.Get(int id)
         {
             throw new NotImplementedException();
         }
@@ -55,41 +82,6 @@ namespace Epi.Web.Test.Mock
         }
 
         public void Update(SurveyInfoDTO t)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Delete(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        List<SurveyInfoDTO> Repositories.Core.IRepository<SurveyInfoDTO>.GetList(Repositories.Core.Criterion criterion)
-        {
-            throw new NotImplementedException();
-        }
-
-        SurveyInfoDTO Repositories.Core.IRepository<SurveyInfoDTO>.Get(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        int Repositories.Core.IRepository<SurveyInfoDTO>.GetCount(Repositories.Core.Criterion criterion)
-        {
-            throw new NotImplementedException();
-        }
-
-        void Repositories.Core.IRepository<SurveyInfoDTO>.Insert(SurveyInfoDTO t)
-        {
-            throw new NotImplementedException();
-        }
-
-        void Repositories.Core.IRepository<SurveyInfoDTO>.Update(SurveyInfoDTO t)
-        {
-            throw new NotImplementedException();
-        }
-
-        void Repositories.Core.IRepository<SurveyInfoDTO>.Delete(int id)
         {
             throw new NotImplementedException();
         }

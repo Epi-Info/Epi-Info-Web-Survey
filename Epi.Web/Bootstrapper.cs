@@ -43,7 +43,7 @@ namespace Epi.Web.MVC
                 .ConfigureInjectionFor<SurveyResponseXML>(new InjectionConstructor());
 
             container.RegisterType<Common.DTO.SurveyAnswerDTO, Common.DTO.SurveyAnswerDTO>();
-            container.RegisterType<Epi.Web.MVC.Facade.SurveyFacade, Epi.Web.MVC.Facade.SurveyFacade>();
+            container.RegisterType<Epi.Web.MVC.Facade.ISurveyFacade, Epi.Web.MVC.Facade.SurveyFacade>();
             container.RegisterControllers();
 
             return container;

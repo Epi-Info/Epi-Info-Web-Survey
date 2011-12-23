@@ -8,16 +8,16 @@ namespace Epi.Web.MVC.Controllers
     {
 
         //declare  SurveyFacade
-        private Epi.Web.MVC.Facade.SurveyFacade _surveyFacade;
+        private Epi.Web.MVC.Facade.ISurveyFacade _isurveyFacade;
         
        
         /// <summary>
         /// injecting surveyFacade to the constructor 
         /// </summary>
         /// <param name="surveyFacade"></param>
-        public HomeController(Epi.Web.MVC.Facade.SurveyFacade surveyFacade)
+        public HomeController(Epi.Web.MVC.Facade.ISurveyFacade isurveyFacade)
         {
-            _surveyFacade = surveyFacade;
+            _isurveyFacade = isurveyFacade;
         }
 
 
@@ -41,7 +41,7 @@ namespace Epi.Web.MVC.Controllers
             try
             {
 
-                SurveyInfoModel surveyInfoModel = _surveyFacade.GetSurveyInfoModel(surveyid);
+                SurveyInfoModel surveyInfoModel = _isurveyFacade.GetSurveyInfoModel(surveyid);
                 return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, surveyInfoModel);
             }
             catch (Exception ex)
