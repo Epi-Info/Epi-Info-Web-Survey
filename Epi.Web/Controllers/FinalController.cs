@@ -8,22 +8,22 @@ namespace Epi.Web.MVC.Controllers
         
 
         //declare SurveyTransactionObject object
-        private SurveyFacade _surveyTransactionObj;
+        private ISurveyFacade _isurveyFacade;
         /// <summary>
         /// Injectinting SurveyTransactionObject through Constructor
         /// </summary>
         /// <param name="iSurveyInfoRepository"></param>
-        public FinalController(SurveyFacade surveyTransactionObj)
+        public FinalController(ISurveyFacade isurveyFacade)
         {
-           
-            _surveyTransactionObj = surveyTransactionObj;
+
+            _isurveyFacade = isurveyFacade;
         }
         public ActionResult Index(string surveyId,string final)
         {
 
             //if (!string.IsNullOrEmpty(final))
             //{
-                SurveyInfoModel surveyInfoModel = _surveyTransactionObj.GetSurveyInfoModel(surveyId);
+            SurveyInfoModel surveyInfoModel = _isurveyFacade.GetSurveyInfoModel(surveyId);
                 return View(Epi.Web.MVC.Constants.Constant.SUBMIT_PAGE, surveyInfoModel);
             //}
             //return null;

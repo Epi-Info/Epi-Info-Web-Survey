@@ -4,10 +4,10 @@ using Epi.Web.Common.Message;
 using Epi.Web.MVC.Constants;
 using Epi.Web.MVC.Utility;
 using Epi.Web.MVC.Models;
-
+using Epi.Web.MVC.Facade;
 namespace Epi.Web.MVC.Facade
 {
-    public class SurveyFacade
+    public class SurveyFacade:ISurveyFacade
     {
         // declare ISurveyInfoRepository which inherits IRepository of SurveyInfoResponse object
         private ISurveyInfoRepository _iSurveyInfoRepository;
