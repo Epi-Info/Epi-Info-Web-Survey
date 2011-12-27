@@ -6,7 +6,7 @@ using System.Web.Mvc;
 using Epi.Web;
 using Epi.Web.MVC.Models;
 using NUnit.Framework;
-//using Moq;
+using Moq;
 using NUnit.Mocks;
 using Epi.Web.Common.DTO;
 using Epi.Web.MVC.Repositories;
@@ -89,7 +89,7 @@ namespace Epi.Web.MVC.Mock
             surveyInfoModel.OrganizationName = "ABC Organization";
             surveyInfoModel.IntroductionText = "ABC Introduction test";
             surveyInfoModel.IsSuccess = true;
-            surveyInfoModel.XML = "";
+            surveyInfoModel.XML = SurveyHelperTest.GetXML();
             return surveyInfoModel;
         }
 

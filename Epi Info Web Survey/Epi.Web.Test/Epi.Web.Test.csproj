@@ -66,6 +66,7 @@
   <ItemGroup>
     <Compile Include="Controllers\HomeController_Tests\When_Arrive_At_Application.cs" />
     <Compile Include="Controllers\HomeController_Tests\When_Click_Survey_Button.cs" />
+    <Compile Include="Mock\SurveyHelperTest.cs" />
     <Compile Include="Mock\SurveyRepository.cs" />
     <Compile Include="Mock\TestSurveyFacade.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -83,7 +84,7 @@
       <Project>{D7A6E617-B077-4F9A-9646-F2083B4A0FD0}</Project>
       <Name>Epi.Web</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SurveyManagerInterface\Epi.Web.WCF.SurveyService.csproj">
+    <ProjectReference Include="..\SurveyManagerInterface\Epi.Web.SurveyManager.csproj">
       <Project>{31F91938-2997-4650-8D36-71C845F1071D}</Project>
       <Name>Epi.Web.SurveyManager</Name>
     </ProjectReference>
@@ -93,7 +94,9 @@
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Mock\MetaDataXML.xml" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
