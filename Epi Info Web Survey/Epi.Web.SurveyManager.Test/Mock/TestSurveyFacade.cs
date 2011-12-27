@@ -2,18 +2,20 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Web.Mvc;
+//using System.Web.Mvc;
 using Epi.Web;
 using Epi.Web.MVC.Models;
 using NUnit.Framework;
 //using Moq;
-using NUnit.Mocks;
+//using NUnit.Mocks;
 using Epi.Web.Common.DTO;
 using Epi.Web.MVC.Repositories;
 using Epi.Web.MVC.Facade;
 using Epi.Web.MVC.Utility;
 using Epi.Web.MVC.Repositories.Core;
-
+using System.Xml;
+using System.Xml.Linq;
+ 
 namespace Epi.Web.MVC.Mock
 {
     public class TestSurveyFacade : ISurveyFacade
@@ -59,7 +61,7 @@ namespace Epi.Web.MVC.Mock
         }
         public MvcDynamicForms.Form GetSurveyFormData(string surveyId, int pageNumber, SurveyAnswerDTO surveyAnswerDTO)
         {
-            SurveyInfoModel surveyInfoModel = GetSurveyInfoModel("");
+            SurveyInfoModel surveyInfoModel = GetSurveyInfoModel(surveyId);
             SurveyInfoDTO surveyInfoDTO = Epi.Web.MVC.Models.Mapper.ToSurveyInfoDTO(surveyInfoModel);
             
             MvcDynamicForms.Form form = Epi.Web.MVC.Utility.FormProvider.GetForm(surveyInfoDTO, 1, null);
@@ -82,6 +84,7 @@ namespace Epi.Web.MVC.Mock
             //Epi.Web.Common.Message.SurveyInfoResponse surveyInfoResponse = _iSurveyInfoRepository.GetSurveyInfo(_surveyInfoRequest);
             //SurveyInfoModel s = Mapper.ToSurveyInfoModel(surveyInfoResponse.SurveyInfo);
             //return s;
+         //   SurveyDataProvider DataObj = new SurveyDataProvider();//Get Data
             SurveyInfoModel surveyInfoModel = new SurveyInfoModel();
             surveyInfoModel.SurveyId = "1";
             surveyInfoModel.SurveyName = "ABC Survey";
@@ -89,13 +92,19 @@ namespace Epi.Web.MVC.Mock
             surveyInfoModel.OrganizationName = "ABC Organization";
             surveyInfoModel.IntroductionText = "ABC Introduction test";
             surveyInfoModel.IsSuccess = true;
-            surveyInfoModel.XML = "";
+            surveyInfoModel.XML = GetXML();
             return surveyInfoModel;
         }
 
         public Common.Message.SurveyAnswerResponse GetSurveyAnswerResponse(string responseId)
         {
             throw new NotImplementedException();
+        }
+        private static string GetXML()
+        {
+            XDocument xdoc = XDocument.Load("../../MetaDataXML.xml");
+
+            return xdoc.ToString();
         }
     }
 }
