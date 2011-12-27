@@ -13,7 +13,7 @@ namespace Epi.Web.MVC.Facade
         private ISurveyInfoRepository _iSurveyInfoRepository;
 
         // declare ISurveyResponseRepository which inherits IRepository of SurveyResponseResponse object
-        private ISurveyAnswerRepository _iSurveyResponseRepository;
+        private ISurveyAnswerRepository _iSurveyAnswerRepository;
 
         //declare SurveyInfoRequest
         private Epi.Web.Common.Message.SurveyInfoRequest _surveyInfoRequest;
@@ -37,7 +37,7 @@ namespace Epi.Web.MVC.Facade
                                    SurveyResponseXML surveyResponseXML)
         {
             _iSurveyInfoRepository = iSurveyInfoRepository;
-            _iSurveyResponseRepository = iSurveyResponseRepository;
+            _iSurveyAnswerRepository = iSurveyResponseRepository;
             _surveyInfoRequest = surveyInfoRequest;
             _surveyAnswerRequest = surveyResponseRequest;
             _surveyAnswerDTO = surveyAnswerDTO;
@@ -55,7 +55,7 @@ namespace Epi.Web.MVC.Facade
         public MvcDynamicForms.Form GetSurveyFormData(string surveyId, int pageNumber, Epi.Web.Common.DTO.SurveyAnswerDTO surveyAnswerDTO)
         {
             //Get the SurveyInfoDTO
-            Epi.Web.Common.DTO.SurveyInfoDTO surveyInfoDTO = GetSurveyInfoDTO(surveyId);
+            Epi.Web.Common.DTO.SurveyInfoDTO surveyInfoDTO = SurveyHelper.GetSurveyInfoDTO(_surveyInfoRequest,_iSurveyInfoRepository,surveyId);
             MvcDynamicForms.Form form = Epi.Web.MVC.Utility.FormProvider.GetForm(surveyInfoDTO, pageNumber, surveyAnswerDTO);
             return form;
         }
@@ -66,15 +66,8 @@ namespace Epi.Web.MVC.Facade
         /// <returns></returns>
         public void CreateSurveyAnswer(string surveyId,string responseId)
         {
-            _surveyAnswerRequest.Criteria.ResposneId = responseId.ToString();
-            _surveyAnswerRequest.SurveyResponseDTO = _surveyAnswerDTO;
-            _surveyAnswerRequest.SurveyResponseDTO.ResponseId = responseId.ToString();
-            _surveyAnswerRequest.SurveyResponseDTO.DateCompleted = DateTime.Now;
-            _surveyAnswerRequest.SurveyResponseDTO.SurveyId = surveyId;
-            _surveyAnswerRequest.SurveyResponseDTO.Status = (int)Constant.Status.InProgress;
-            _surveyAnswerRequest.SurveyResponseDTO.XML = _surveyResponseXML.CreateResponseXml(surveyId).InnerXml;
-            _surveyAnswerRequest.Action = Epi.Web.MVC.Constants.Constant.CREATE;  //"Create";
-            _iSurveyResponseRepository.SaveSurveyAnswer(_surveyAnswerRequest);
+           
+            SurveyHelper.CreateSurveyResponse(surveyId, responseId, _surveyAnswerRequest, _surveyAnswerDTO, _surveyResponseXML, _iSurveyAnswerRepository);
         }
 
 
@@ -82,33 +75,18 @@ namespace Epi.Web.MVC.Facade
         public void UpdateSurveyResponse(SurveyInfoModel surveyInfoModel, string responseId,MvcDynamicForms.Form form)
         {
             // 1 Get the record for the current survey response
-            // 2 update the current survey response
-            // 3 save the current survey response
-
-            // 1 Get the record for the current survey response
-            SurveyAnswerResponse surveyResponseResponse = GetSurveyAnswerResponse(responseId);
-
-            // 2 update the current survey response
-            _surveyAnswerRequest.SurveyResponseDTO = surveyResponseResponse.SurveyResponseDTO;
-            _surveyResponseXML.Add(form);
-            _surveyAnswerRequest.SurveyResponseDTO.XML = _surveyResponseXML.CreateResponseXml(surveyInfoModel.SurveyId).InnerXml;
-
-            // 3 save the current survey response
-
-            surveyResponseResponse = SaveSurveyAnswerResponse(_surveyAnswerRequest);
+            // 2 update the current survey response and save the response
+            
+            //// 1 Get the record for the current survey response
+            SurveyAnswerResponse surveyAnswerResponse = GetSurveyAnswerResponse(responseId);
+            
+            ///2 Update the current survey response and save it
+           
+            SurveyHelper.UpdateSurveyResponse(surveyInfoModel, form, _surveyAnswerRequest, _surveyResponseXML, _iSurveyAnswerRepository,surveyAnswerResponse, responseId);
         }
         
 
-        /// <summary>
-        /// returns SurveyInfoDTO object based on SurveyId
-        /// </summary>
-        /// <param name="SurveyId"></param>
-        /// <returns></returns>
-        private Epi.Web.Common.DTO.SurveyInfoDTO GetSurveyInfoDTO(string SurveyId)
-        {
-            _surveyInfoRequest.Criteria.SurveyId = SurveyId;
-            return _iSurveyInfoRepository.GetSurveyInfo(_surveyInfoRequest).SurveyInfo;
-        }
+       
 
         public SurveyInfoModel GetSurveyInfoModel(string surveyId)
         {
@@ -128,19 +106,10 @@ namespace Epi.Web.MVC.Facade
         public SurveyAnswerResponse GetSurveyAnswerResponse(string responseId)
         {
             _surveyAnswerRequest.Criteria.ResposneId = responseId;
-            SurveyAnswerResponse surveyResponseResponse = _iSurveyResponseRepository.GetSurveyAnswer(_surveyAnswerRequest);
-            return surveyResponseResponse;
+            SurveyAnswerResponse surveyAnswerResponse = _iSurveyAnswerRepository.GetSurveyAnswer(_surveyAnswerRequest);
+            return surveyAnswerResponse;
         }
-        /// <summary>
-        /// Save the current survey response Step:3
-        /// </summary>
-        /// <param name="p_surveyAnswerRequest"></param>
-        /// <returns></returns>
-        private SurveyAnswerResponse SaveSurveyAnswerResponse(SurveyAnswerRequest p_surveyAnswerRequest)
-        {
-            p_surveyAnswerRequest.Action = Epi.Web.MVC.Constants.Constant.UPDATE;  //"Update";
-            return _iSurveyResponseRepository.SaveSurveyAnswer(p_surveyAnswerRequest);
-        }
+        
         
     }
 }
