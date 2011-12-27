@@ -49,107 +49,30 @@ namespace Epi.Web.MVC.Utility
                 {
                     switch (_FieldTypeID.Attribute("FieldTypeId").Value)
                     {
-                        case "1"://TextBox
-                            var TextBox = new TextBox
-                            {
-                                Title = "Name",
-                                Prompt = _FieldTypeID.Attribute("PromptText").Value,
-                                DisplayOrder = 20,
-                                Required = true,
-                                RequiredMessage = _FieldTypeID.Attribute("PromptText").Value + " is required",
-                                Key = _FieldTypeID.Attribute("UniqueId").Value,
-                                PromptTop = _Height * double.Parse(_FieldTypeID.Attribute("PromptTopPositionPercentage").Value),
-                                PromptLeft = _Width * double.Parse(_FieldTypeID.Attribute("PromptLeftPositionPercentage").Value),
-                                Top = _Height * double.Parse(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value),
-                                Left = _Width * double.Parse(_FieldTypeID.Attribute("ControlLeftPositionPercentage").Value),
-                                PromptWidth = _Width * double.Parse(_FieldTypeID.Attribute("ControlWidthPercentage").Value),
-                                ControlWidth = _Width * double.Parse(_FieldTypeID.Attribute("ControlWidthPercentage").Value),
-                                fontstyle = _FieldTypeID.Attribute("PromptFontStyle").Value,
-                                fontSize = double.Parse(_FieldTypeID.Attribute("PromptFontSize").Value),
-                                fontfamily = _FieldTypeID.Attribute("PromptFontFamily").Value,
-                                IsRequired =bool.Parse(_FieldTypeID.Attribute("IsRequired").Value),
-                                IsReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value),
-                                ControlValue = GetControlValue(SurveyAnswer, _FieldTypeID.Attribute("UniqueId").Value)
-                                
-
-                            };
-                            form.AddFields(TextBox);
+                        case "1":
+                            var _TextBoxValue= GetControlValue(SurveyAnswer, _FieldTypeID.Attribute("UniqueId").Value);
+                            TextBoxProvider TextBox = new TextBoxProvider();
+                            form.AddFields(TextBox.GetTextBox(_FieldTypeID, _Width, _Height, SurveyAnswer, _TextBoxValue));
                             break;
                        
 
                         case "2"://Label/Title
-
-                            var Label = new Literal
-                            {
-                                FieldWrapper = "div",
-                                Wrap = true,
-                                DisplayOrder = 10,
-                                Html = _FieldTypeID.Attribute("PromptText").Value,
-                                Top = _Height * double.Parse(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value),
-                                Left = _Width * double.Parse(_FieldTypeID.Attribute("ControlLeftPositionPercentage").Value),
-                                CssClass =   "EpiLabel",
-                                fontSize = double.Parse(_FieldTypeID.Attribute("ControlFontSize").Value),
-                                fontfamily = _FieldTypeID.Attribute("ControlFontFamily").Value,
-                                fontstyle = _FieldTypeID.Attribute("ControlFontStyle").Value,
-                                Height = _Height * double.Parse(_FieldTypeID.Attribute("ControlHeightPercentage").Value),
-                                Width = _Width * double.Parse(_FieldTypeID.Attribute("ControlWidthPercentage").Value)
-
-                            };
-                            form.AddFields(Label);
+                            LabelProvider Label = new LabelProvider();
+                            form.AddFields(Label.GetLabel(_FieldTypeID,_Width,_Height ));
                             break;
                         case "3"://Label
 
                             break;
                         case "4"://MultiLineTextBox
-                            var MultiLineTextBox = new TextArea
-                            {
-                                Title = "Name",
-                                Prompt = _FieldTypeID.Attribute("PromptText").Value,
-                                DisplayOrder = 20,
-                                Required = true,
-                                RequiredMessage = _FieldTypeID.Attribute("PromptText").Value + " is required",
-                                Key = _FieldTypeID.Attribute("UniqueId").Value,
-                                PromptTop = _Height * double.Parse(_FieldTypeID.Attribute("PromptTopPositionPercentage").Value),
-                                PromptLeft = _Width * double.Parse(_FieldTypeID.Attribute("PromptLeftPositionPercentage").Value),
-                                Top = _Height * double.Parse(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value),
-                                Left = _Width * double.Parse(_FieldTypeID.Attribute("ControlLeftPositionPercentage").Value),
-                                PromptWidth = _Width * double.Parse(_FieldTypeID.Attribute("ControlWidthPercentage").Value),
-                                ControlWidth = _Width * double.Parse(_FieldTypeID.Attribute("ControlWidthPercentage").Value),
-                                fontstyle = _FieldTypeID.Attribute("PromptFontStyle").Value,
-                                fontSize = double.Parse(_FieldTypeID.Attribute("PromptFontSize").Value),
-                                fontfamily = _FieldTypeID.Attribute("PromptFontFamily").Value,
-                                IsRequired = bool.Parse(_FieldTypeID.Attribute("IsRequired").Value),
-                                IsReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value),
-                                ControlValue = GetControlValue(SurveyAnswer, _FieldTypeID.Attribute("UniqueId").Value) 
-
-                            };
-                            form.AddFields(MultiLineTextBox);
+                             TextAreaProvider MultiLineTextBox = new TextAreaProvider();
+                            var _TextAreaValue= GetControlValue(SurveyAnswer, _FieldTypeID.Attribute("UniqueId").Value);
+                            form.AddFields(MultiLineTextBox.GetTextArea(_FieldTypeID, _Width,_Height,SurveyAnswer,_TextAreaValue));
                             break;
                         case "5"://NumericTextBox
-                            var NumericTextBox = new NumericTextBox
-                            {
-                                Title = "Name",
-                                Prompt = _FieldTypeID.Attribute("PromptText").Value,
-                                DisplayOrder = 20,
-                                Required = true,
-                                RequiredMessage = _FieldTypeID.Attribute("PromptText").Value + " is required",
-                                Key = _FieldTypeID.Attribute("UniqueId").Value,
-                                PromptTop = _Height * double.Parse(_FieldTypeID.Attribute("PromptTopPositionPercentage").Value),
-                                PromptLeft = _Width * double.Parse(_FieldTypeID.Attribute("PromptLeftPositionPercentage").Value),
-                                Top = _Height * double.Parse(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value),
-                                Left = _Width * double.Parse(_FieldTypeID.Attribute("ControlLeftPositionPercentage").Value),
-                                PromptWidth = _Width * double.Parse(_FieldTypeID.Attribute("ControlWidthPercentage").Value),
-                                ControlWidth = _Width * double.Parse(_FieldTypeID.Attribute("ControlWidthPercentage").Value),
-                                fontstyle = _FieldTypeID.Attribute("PromptFontStyle").Value,
-                                fontSize = double.Parse(_FieldTypeID.Attribute("PromptFontSize").Value),
-                                fontfamily = _FieldTypeID.Attribute("PromptFontFamily").Value,
-                                IsRequired = bool.Parse(_FieldTypeID.Attribute("IsRequired").Value),
-                                IsReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value),
-                                Lower = _FieldTypeID.Attribute("Lower").Value,
-                                Upper = _FieldTypeID.Attribute("Upper").Value,
-                                ControlValue = GetControlValue(SurveyAnswer , _FieldTypeID.Attribute("UniqueId").Value)
-                            };
-                            form.AddFields(NumericTextBox);
+                            
+                            NumericTextBoxProvider NumericTextBox = new NumericTextBoxProvider();
+                            var _NumericTextBoxValue = GetControlValue(SurveyAnswer, _FieldTypeID.Attribute("UniqueId").Value);
+                            form.AddFields(NumericTextBox.GetNumericTextBox(_FieldTypeID, _Width, _Height, SurveyAnswer, _NumericTextBoxValue));
                             break;
                     }
 
