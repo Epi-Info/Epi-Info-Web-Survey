@@ -108,11 +108,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="Utility\LabelProvider.cs" />
-    <Compile Include="Utility\NumericTextBoxProvider.cs" />
+    <Compile Include="Utility\SurveyHelper.cs" />
     <Compile Include="Utility\SurveyResponseXML.cs" />
-    <Compile Include="Utility\TextAreaProvider.cs" />
-    <Compile Include="Utility\TextBoxProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="bin\Epi.Web.dll" />

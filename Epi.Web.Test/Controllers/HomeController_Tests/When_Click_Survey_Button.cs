@@ -6,7 +6,7 @@ using System.Web.Mvc;
 using Epi.Web;
 using Epi.Web.MVC.Models;
 using NUnit.Framework;
-//using Moq;
+using Moq;
 using NUnit.Mocks;
 using Epi.Web.Common.DTO;
 using Epi.Web.MVC.Repositories;
@@ -31,11 +31,12 @@ namespace Epi.Web.MVC.Controllers.HomeController_Tests
             var controller = new Epi.Web.MVC.Controllers.SurveyController(iSurveyFacade);
             ViewResult c = controller.Index("1","page") as ViewResult;
             //Assert
-            MvcDynamicForms.Form f = c.Model as MvcDynamicForms.Form;
+            //MvcDynamicForms.Form f = c.Model as MvcDynamicForms.Form;
+            MvcDynamicForms.Form f = iSurveyFacade.GetSurveyFormData("1", 1, null);
+            //Assert.AreEqual(typeof(MvcDynamicForms.Form), c.Model);//test to make sure it is returning field prefix
+            Assert.AreEqual(7, f.Fields.Count);//test to make sure it is returning correct number of items
+            Assert.AreEqual("MvcDynamicForms.Fields.TextBox", f.Fields[0].GetType().ToString());//end item in the forms collection is a textbox
             
-           // Assert.AreEqual(typeof(MvcDynamicForms.Form), c.Model);//test to make sure it is displaying the survey form data
-
-            Assert.AreEqual("MvcDynamicField_", f.FieldPrefix);//test to make sure it is returning field prefix
         }
 //        [Test]
 //        public void Then_Able_To_See_Survey()
