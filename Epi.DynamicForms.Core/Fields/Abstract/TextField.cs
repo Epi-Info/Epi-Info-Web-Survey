@@ -15,7 +15,6 @@ namespace MvcDynamicForms.Fields
     public abstract class TextField : InputField
     {
         private string _regexMessage = "Invalid";
-        private string _ControlValue;
         /// <summary>
         /// A regular expression that will be applied to the user's text respone for validation.
         /// </summary>
