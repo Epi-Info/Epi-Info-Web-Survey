@@ -49,7 +49,7 @@ namespace MvcDynamicForms.Fields
             txt.Attributes.Add("id", inputName);
             txt.Attributes.Add("type", "text");
             // txt.Attributes.Add("value", Value);
-            txt.Attributes.Add("value", ControlValue);
+            txt.Attributes.Add("value",Value);
             txt.Attributes.Add("class", GetControlClass());
             txt.Attributes.Add("data-prompt-position", "topRight:15");
             txt.Attributes.Add("style", "position:absolute;left:" + _left.ToString() + "px;top:" + _top.ToString() + "px" + ";width:" + _ControlWidth.ToString() + "px");
