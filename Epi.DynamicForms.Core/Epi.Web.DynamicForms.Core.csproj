@@ -80,6 +80,7 @@
   <ItemGroup>
     <Compile Include="DynamicFormModelBinder.cs" />
     <Compile Include="Enums\Orientation.cs" />
+    <Compile Include="ErrorSummary.cs" />
     <Compile Include="Fields\Abstract\ListField.cs" />
     <Compile Include="Fields\Abstract\Field.cs" />
     <Compile Include="FieldList.cs" />
