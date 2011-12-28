@@ -95,7 +95,7 @@ namespace MvcDynamicForms.Fields
                 if (!regex.IsMatch(Value))
                 {
                     //invalid: it is not numeric
-                    Error = "Not numeric";
+                    Error = "Value must be a number";
                     return false;
                 }
                 else

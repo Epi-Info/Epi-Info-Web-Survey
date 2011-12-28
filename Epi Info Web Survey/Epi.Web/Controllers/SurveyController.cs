@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using Epi.Web.MVC.Facade;
 using Epi.Web.MVC.Models;
+using System.Collections.Generic;
 namespace Epi.Web.MVC.Controllers
 {
     public class SurveyController : Controller
@@ -62,6 +63,7 @@ namespace Epi.Web.MVC.Controllers
             MvcDynamicForms.Form form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, this.GetCurrentPage(), this.GetCurrentSurveyAnswer());
             //Update the model
             UpdateModel(form);
+            
             if (form.Validate())
             {
                 string responseId = TempData[Epi.Web.MVC.Constants.Constant.RESPONSE_ID].ToString();
@@ -72,6 +74,7 @@ namespace Epi.Web.MVC.Controllers
             }  
             else
             {
+
                 return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
             }
 

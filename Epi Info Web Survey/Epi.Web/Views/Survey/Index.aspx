@@ -42,10 +42,27 @@
 	 </div>
 
 	<div id="content">
-		 
 
+     <% if (!string.IsNullOrEmpty(Model.GetErrorSummary()))
+        {%>
+        <div class="errormsg">
+            
+            <div class="image">
+                <img src="../../Content/images/error.png" style="vertical-align: middle; padding-right: 10px;">
+            </div>
+            <div class="message">
+              <span style="font-weight:bold; font-size:10pt;">Please correct the following errors before continuing:</span>
+                <br>
+               
+                <%= Model.GetErrorSummary()%>
+            </div>
+            <div style="clear: both;">
+            </div>
+
+        </div>
+        <% }%>
         <%Html.BeginForm(null , null, FormMethod.Post, new { id = "myform" }); %>
-        
+      
         <%=Model.RenderHtml(true) %>
         
       
