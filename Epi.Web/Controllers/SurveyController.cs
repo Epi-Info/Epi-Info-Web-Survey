@@ -70,6 +70,7 @@ namespace Epi.Web.MVC.Controllers
                 _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId, form);
 
                 //return RedirectToAction("Index", "Final", new {id="final" });
+                TempData[Epi.Web.MVC.Constants.Constant.RESPONSE_ID] = null;
                return RedirectToAction("Index", "Final");
             }  
             else
