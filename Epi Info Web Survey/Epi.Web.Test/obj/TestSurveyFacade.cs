@@ -57,6 +57,11 @@ namespace Epi.Web.MVC.Mock
         {
             _surveyInfoRequest = surveyInfoRequest;
         }
+
+        public TestSurveyFacade()
+        { 
+        
+        }
         public MvcDynamicForms.Form GetSurveyFormData(string surveyId, int pageNumber, SurveyAnswerDTO surveyAnswerDTO)
         {
             SurveyInfoModel surveyInfoModel = GetSurveyInfoModel("");

@@ -65,10 +65,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\HomeController_Tests\When_Arrive_At_Application.cs" />
-    <Compile Include="Controllers\HomeController_Tests\When_Click_Survey_Button.cs" />
+    <Compile Include="Controllers\HomeController_Tests\When_Click_Begin_Survey_Button.cs" />
+    <Compile Include="Controllers\HomeController_Tests\When_Submit_Survey.cs" />
     <Compile Include="Mock\SurveyHelperTest.cs" />
     <Compile Include="Mock\SurveyRepository.cs" />
-    <Compile Include="Mock\TestSurveyFacade.cs" />
+    <Compile Include="obj\TestSurveyFacade.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
