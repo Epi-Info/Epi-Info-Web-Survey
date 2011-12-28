@@ -194,6 +194,66 @@ namespace MvcDynamicForms
             return responses;
         }
 
+
+        /// <summary>
+        ///  
+        /// </summary>
+        /// <param name="completedOnly"> </param>
+        /// <returns>List of Response objects.</returns>
+        public string GetErrorSummary()
+        {
+            List<ErrorSummary> ErrorSummary = new List<ErrorSummary>();
+
+            foreach (var field in InputFields.OrderBy(x => x.DisplayOrder))
+            {
+                var Error = new ErrorSummary
+                {
+                    ErrorCode = field.ErrorClass,
+                    ErrorValue = field.Error,
+                    FieldName =field.Prompt
+                };
+
+                if ( string.IsNullOrEmpty(Error.ErrorValue))
+                    continue;
+
+                ErrorSummary.Add(Error);
+            }
+
+            if (ErrorSummary.Count > 0)
+            {
+                return GetErrorSummaryList(ErrorSummary);
+            }
+            else 
+            {
+                return string.Empty;
+            }
+
+       
+           
+        }
+
+        public string GetErrorSummaryList(List<ErrorSummary> ErrorSummary)
+        {
+
+  
+            StringBuilder ErrorList = new StringBuilder();
+            ErrorList.Append("<Ul>");
+            foreach (var Error in ErrorSummary)
+            {
+                ErrorList.Append("<li>");
+                ErrorList.Append("<B>");
+                ErrorList.Append(Error.FieldName);
+                ErrorList.Append(":");
+                ErrorList.Append("</B>");
+                ErrorList.Append(" ");
+                ErrorList.Append(Error.ErrorValue);
+                ErrorList.Append("</li>");
+            }
+            ErrorList.Append("</Ul>");
+
+            return ErrorList.ToString();
+
+        }
         public Epi.Web.Common.DTO.SurveyInfoDTO SurveyInfo
         {
             get {return this._SurveyInfo; }
