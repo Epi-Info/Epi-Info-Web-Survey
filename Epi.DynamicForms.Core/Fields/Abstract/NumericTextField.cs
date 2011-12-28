@@ -33,7 +33,7 @@ namespace MvcDynamicForms.Fields
                 _regexMessage = value;
             }
         }
-       internal string Value { get; set; }
+       public string Value { get; set; }
         //public string Value { get { return _Value; } set { _Value = value; } }
         public override string Response
         {
@@ -135,7 +135,7 @@ namespace MvcDynamicForms.Fields
 
         }
 
-        public string ControlValue { get { return _ControlValue; } set { _ControlValue = value; } }
+       
 
 
 

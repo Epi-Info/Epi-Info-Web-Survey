@@ -214,7 +214,8 @@ namespace Epi.Web.MVC.Utility
                 IsReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value),
                 Lower = _FieldTypeID.Attribute("Lower").Value,
                 Upper = _FieldTypeID.Attribute("Upper").Value,
-                ControlValue = _ControlValue
+                Value = _ControlValue
+                
             };
             return NumericTextBox;
 
@@ -265,7 +266,7 @@ namespace Epi.Web.MVC.Utility
                 fontfamily = _FieldTypeID.Attribute("PromptFontFamily").Value,
                 IsRequired = bool.Parse(_FieldTypeID.Attribute("IsRequired").Value),
                 IsReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value),
-                ControlValue = _ControlValue
+                Value = _ControlValue
 
 
             };
@@ -295,7 +296,8 @@ namespace Epi.Web.MVC.Utility
                 fontfamily = _FieldTypeID.Attribute("PromptFontFamily").Value,
                 IsRequired = bool.Parse(_FieldTypeID.Attribute("IsRequired").Value),
                 IsReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value),
-                ControlValue = _ControlValue
+                Value = _ControlValue
+                
 
 
             };
