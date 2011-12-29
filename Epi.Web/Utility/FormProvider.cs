@@ -215,7 +215,8 @@ namespace Epi.Web.MVC.Utility
                 IsReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value),
                 Lower = _FieldTypeID.Attribute("Lower").Value,
                 Upper = _FieldTypeID.Attribute("Upper").Value,
-                Value = _ControlValue
+                Value = _ControlValue,
+                Pattern = _FieldTypeID.Attribute("Pattern").Value
                 
             };
             return NumericTextBox;

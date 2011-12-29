@@ -55,6 +55,14 @@ namespace MvcDynamicForms.Fields
             scriptNumeric.InnerHtml = "$(function() { $('#" + inputName + "').numeric();});";
             html.Append(scriptNumeric.ToString(TagRenderMode.Normal));
 
+            //if masked input not empty appy the pattern jquery plugin
+            if (!string.IsNullOrEmpty(Pattern))
+            {
+                string maskedPatternEq = GetMaskedPattern(Pattern);
+                var scriptMaskedInput = new TagBuilder("script");
+                scriptMaskedInput.InnerHtml = "$(function() { $('#" + inputName + "').mask('"+maskedPatternEq+"');});";
+                html.Append(scriptMaskedInput.ToString(TagRenderMode.Normal));
+            }
             // If readonly then add the following jquery script to make the field disabled 
             if (ReadOnly)
             {
@@ -67,6 +75,34 @@ namespace MvcDynamicForms.Fields
             wrapper.Attributes["class"] = _fieldWrapperClass;
             wrapper.InnerHtml = html.ToString();
             return wrapper.ToString();
+        }
+
+        private string GetMaskedPattern(string pattern)
+        {
+            string maskedPattern = string.Empty;
+            switch (pattern)
+            {
+                case "#":
+                    maskedPattern = "9";
+                    break;
+                case "##":
+                    maskedPattern = "99";
+                    break;
+                case "###":
+                    maskedPattern = "999";
+                    break;
+                case "####":
+                    maskedPattern = "9999" ;
+                    break;
+                case "##.##":
+                    maskedPattern = "99.99";
+                    break;
+                case "##.###":
+                    maskedPattern = "99.999";
+                    break;
+                   
+            }
+            return maskedPattern;
         }
         public string GetControlClass() {
 
