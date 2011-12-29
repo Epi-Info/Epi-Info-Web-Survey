@@ -4,7 +4,7 @@ using System.Xml;
 using System.Xml.Linq;
 using System.Text;
 using MvcDynamicForms;
-
+ 
 
 
 namespace Epi.Web.MVC.Utility
@@ -15,7 +15,7 @@ namespace Epi.Web.MVC.Utility
         public static Form GetForm(object SurveyMetaData ,int PageNumber, Epi.Web.Common.DTO.SurveyAnswerDTO _SurveyAnswer)
         {
             string SurveyAnswer;
-
+            
             if ( _SurveyAnswer != null)
             {
                 SurveyAnswer = _SurveyAnswer.XML;
@@ -198,7 +198,7 @@ namespace Epi.Web.MVC.Utility
                 Title = "Name",
                 Prompt = _FieldTypeID.Attribute("PromptText").Value,
                 DisplayOrder = 20,
-                Required = true,
+                Required =  _FieldTypeID.Attribute("IsRequired").Value == "True"?true:false ,
                 //RequiredMessage = _FieldTypeID.Attribute("PromptText").Value + " is required",
                 RequiredMessage =  "This field is required",
                 Key = _FieldTypeID.Attribute("UniqueId").Value,
@@ -253,7 +253,7 @@ namespace Epi.Web.MVC.Utility
                 Title = "Name",
                 Prompt = _FieldTypeID.Attribute("PromptText").Value,
                 DisplayOrder = 20,
-                Required = true,
+                Required = _FieldTypeID.Attribute("IsRequired").Value == "True" ? true : false,
                 //RequiredMessage = _FieldTypeID.Attribute("PromptText").Value + " is required",
                 RequiredMessage = "This field is required",
                 Key = _FieldTypeID.Attribute("UniqueId").Value,
@@ -284,7 +284,7 @@ namespace Epi.Web.MVC.Utility
                 Title = "Name",
                 Prompt = _FieldTypeID.Attribute("PromptText").Value,
                 DisplayOrder = 20,
-                Required = true,
+                Required = _FieldTypeID.Attribute("IsRequired").Value == "True" ? true : false,
                 //RequiredMessage = _FieldTypeID.Attribute("PromptText").Value + " is required",
                 RequiredMessage = "This field is required",
                 Key = _FieldTypeID.Attribute("UniqueId").Value,
@@ -307,5 +307,7 @@ namespace Epi.Web.MVC.Utility
             return TextBox;
 
         }
+
+       
     }
 }

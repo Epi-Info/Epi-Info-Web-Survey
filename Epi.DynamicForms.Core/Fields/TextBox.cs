@@ -16,7 +16,7 @@ namespace MvcDynamicForms.Fields
         {
             var html = new StringBuilder();
             var inputName = _form.FieldPrefix + _key;
-
+            string ErrorStyle = string.Empty;
             // prompt label
             var prompt = new TagBuilder("label");
             prompt.SetInnerText(Prompt);
@@ -32,6 +32,7 @@ namespace MvcDynamicForms.Fields
             if (!IsValid)
             {
                 //Add new Error to the error Obj
+                ErrorStyle = ";border-color: red";
             }
 
             // input element
@@ -46,7 +47,7 @@ namespace MvcDynamicForms.Fields
             txt.Attributes.Add("data-prompt-position", "topRight:15");
             }
 
-            txt.Attributes.Add("style", "position:absolute;left:" + _left.ToString() + "px;top:" + _top.ToString() + "px" + ";width:"+_ControlWidth.ToString()+"px");            
+            txt.Attributes.Add("style", "position:absolute;left:" + _left.ToString() + "px;top:" + _top.ToString() + "px" + ";width:" + _ControlWidth.ToString() + "px" + ErrorStyle);            
           
             txt.MergeAttributes(_inputHtmlAttributes);
             html.Append(txt.ToString(TagRenderMode.SelfClosing));
