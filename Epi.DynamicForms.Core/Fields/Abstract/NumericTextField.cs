@@ -46,6 +46,8 @@ namespace MvcDynamicForms.Fields
         private string _lower;
         //Declaring the max value for decimal
         private string _upper;
+        //Declaring the pattern field
+        private string _pattern;
 
         public string Lower
         {
@@ -57,6 +59,12 @@ namespace MvcDynamicForms.Fields
         {
             get { return _upper; }
             set { _upper = value; }
+        }
+
+        public string Pattern
+        {
+            get { return _pattern; }
+            set { _pattern = value; }
         }
         /// <summary>
         /// Server Side validation for Numeric TextBox  
