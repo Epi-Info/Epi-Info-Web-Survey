@@ -16,6 +16,7 @@ namespace MvcDynamicForms.Fields
         protected double _Promptleft;
         protected double _PromptWidth;
         protected double _ControlWidth;
+        protected double _ControlHeight;
         protected string _key = Guid.NewGuid().ToString();
         protected string _requiredMessage = "Required";
         protected string _promptClass = "MvcDynamicFieldPrompt";
@@ -148,7 +149,8 @@ namespace MvcDynamicForms.Fields
 
         public double PromptWidth { get { return this._PromptWidth; } set { this._PromptWidth = value; } }
         public double ControlWidth { get { return this._ControlWidth; } set { this._ControlWidth = value; } }
-        
+       
+        public double ControlHeight { get { return this._ControlHeight; } set { this._ControlHeight = value; } }
         public Boolean IsRequired { get { return this._IsRequired; } set {   this._IsRequired =value; } }
         public Boolean IsReadOnly { get { return this._IsReadOnly; } set {   this._IsReadOnly = value; }}
       
