@@ -209,16 +209,24 @@
                     }
                     if (!allow && lastMatch + 1 < partialPosition) {
                         /******************************Customised the downloaded plugin******************************************************************************/
-                        if (test.length == 0) { /*if entering first time the field is empty*/
+                        /*if entering first time the field is empty (Integers only). Clear the buffer.*/
+                        if (test.length == 0) { 
                             input.val("");
                             clearBuffer(0, len);
                         }
-
-                        else if (test.indexOf("_") != -1) {/*if key pressed on the field and left without putting any digit, means test contains '_' as character, clear buffer*/
+                        /*if key pressed on the field and left without putting any digit, means test contains '_' as character (decimal numbers), clear buffer
+                        This logis is intended for decimal numbers, if clicked on the field and then click outside test will be something like (_ _._ _ _) if pattern
+                        is '##.###'. So we are clearing the buffer
+                        */
+                        else if (test.indexOf("_") != -1) {
                             input.val("");
                             clearBuffer(0, len);
                         }
-                        else if ((test.indexOf(".") != -1) && (test.length == 1)) {//if test contains character '.' clear buffer
+                        /*
+                         if test contains character '.' clear buffer (for Decimals only). If we put some number inside the decimal patterned (e.g ##.###) numeric
+                         text box and then deleted the digits the '.' will still be there, but we still want to clear the buffer. 
+                        */
+                        else if ((test.indexOf(".") != -1) && (test.length == 1)) {
                             input.val("");
                             clearBuffer(0, len);
                         }
@@ -236,11 +244,11 @@
 
                                 lengthd = buffer.indexOf(".");
 
-                                //populate the array with digits before decimal
+                                //populate the array with digits before decimal point
                                 for (var k = 0; k < lengthd; k++) {
                                     arrayBeforeDecimal[k] = buffer[k];
                                 }
-                                //populate the array with digits after decimal
+                                //populate the array with digits after decimal point
                                 for (var l = lengthd + 1; l < len; l++) {
                                     if (buffer[l] == settings.placeholder) {
                                         arrayAfterDecimal[l] = "0";
@@ -280,6 +288,29 @@
 
 
                 /*Customized function written for plugin*/
+                /*
+                 The following function will position the digits in an integer or the digits before decimal point in decimal number
+                 For example, for integer pattern '####' we put 4 and click outside the box. The buffer will look something like
+                 buffer[0] = 4
+                 buffer[1] = _
+                 buffer[2] = _
+                 buffer[3] = _
+                 In the above case, first we will need to organize the buffer.
+                 
+                 buffer[0] = _
+                 buffer[1] = _
+                 buffer[2] = _
+                 buffer[3] = 4
+
+                 Then replace the buffer space with '_'(s) with '0'
+
+                 buffer[0] = 0
+                 buffer[1] = 0
+                 buffer[2] = 0
+                 buffer[3] = 4
+                 
+                 In the similar way for decimals we are taking the digits before decimal and process in similar fashion.   
+                */
                 function positionNumber(pLength, pBuffer) {
                     var noOfDigit = 0;
                     var noOfNonDigit = 0;
@@ -296,7 +327,7 @@
                         if (pBuffer[i] == settings.placeholder)
                             noOfNonDigit++;
                     }
-                    /*populating buffer array, first spaces for non digits with '0'*/
+                    /*populating buffer array, the beginning spaces for non-digits('_') with '0'*/
                     for (var i = 0; i < noOfNonDigit; i++) {
                         pBuffer[i] = "0";
                     }
