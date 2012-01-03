@@ -45,6 +45,10 @@ namespace Epi.Web.MVC.Utility
                 double _Width, _Height;
                 _Width = GetWidth(xdoc);
                 _Height= GetHeight(xdoc);
+
+                form.Width = _Width;
+                form.Height = _Height;
+                
                 foreach (var _FieldTypeID in _FieldsTypeIDs)
                 {
                     switch (_FieldTypeID.Attribute("FieldTypeId").Value)
@@ -142,7 +146,7 @@ namespace Epi.Web.MVC.Utility
             }
             catch (System.Exception ex)
             {
-                return 400;
+                return 768;
                 
             }
         
@@ -161,7 +165,7 @@ namespace Epi.Web.MVC.Utility
             catch (System.Exception ex)
             {
                  
-                return  800;
+                return  1024;
             }
         }
 
