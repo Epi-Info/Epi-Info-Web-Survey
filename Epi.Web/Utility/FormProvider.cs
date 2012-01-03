@@ -139,8 +139,6 @@ namespace Epi.Web.MVC.Utility
 
                  return double.Parse(_top.First());
 
-
-                
             }
             catch (System.Exception ex)
             {
