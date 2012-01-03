@@ -56,6 +56,10 @@ namespace MvcDynamicForms.Fields
 
                 return value.ToString().TrimEnd(_responseDelimiter.ToCharArray()).Trim();
             }
+            set 
+            {
+                
+            }
         }
         public override bool Validate()
         {
