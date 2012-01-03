@@ -22,6 +22,9 @@ namespace MvcDynamicForms
         private FieldList _fields;
         private Epi.Web.Common.DTO.SurveyInfoDTO _SurveyInfo;
 
+        public double Width { get; set; }
+        public double Height { get; set; }
+
         /// <summary>
         /// The html element that wraps all rendered html.
         /// </summary>
@@ -116,6 +119,7 @@ namespace MvcDynamicForms
         public string RenderHtml(bool formatHtml)
         {
             var formWrapper = new TagBuilder(_formWrapper);
+            formWrapper.Attributes.Add("style", string.Format("width:{0}px;height:{1}px;", this.Width,this.Height + 100)); 
             formWrapper.Attributes["class"] = _formWrapperClass;
             var html = new StringBuilder(formWrapper.ToString(TagRenderMode.StartTag));
 
