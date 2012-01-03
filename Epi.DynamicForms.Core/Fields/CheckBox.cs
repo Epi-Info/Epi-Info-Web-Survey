@@ -55,6 +55,10 @@ namespace MvcDynamicForms.Fields
             {
                 return Checked ? _checkedValue : _uncheckedValue;
             }
+            set
+            {
+               
+            }
         }
 
         public override bool Validate()

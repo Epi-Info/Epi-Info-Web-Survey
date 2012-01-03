@@ -39,6 +39,10 @@ namespace MvcDynamicForms.Fields
         public override string Response
         {
             get { return Value; }
+            set
+            {
+              Value = value;   
+            }
             
         }
         public override bool Validate()
