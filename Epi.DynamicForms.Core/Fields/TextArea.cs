@@ -19,6 +19,12 @@ namespace MvcDynamicForms.Fields
             string ErrorStyle = string.Empty;
              //prompt label
             var prompt = new TagBuilder("label");
+            //if required put an asterist after the prompt text
+            if (Required)
+            {
+                string asterisk = " (*)";
+                Prompt += asterisk;
+            }
             prompt.SetInnerText(Prompt);
             prompt.Attributes.Add("for", inputName);
             prompt.Attributes.Add("class", "EpiLabel");

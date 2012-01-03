@@ -38,7 +38,7 @@ namespace MvcDynamicForms.Fields
         public override string Response
         {
             get { return Value; }
-
+            set { Value = value; }
              
         }
 
@@ -78,6 +78,11 @@ namespace MvcDynamicForms.Fields
                 Required = false;
                 ClearError();
                 return true;
+            }
+            //if response have character "_" or only "." it is not required, so assign Response = ""
+            if ((Response.IndexOf("_") != -1) ||((Response.IndexOf(".") != -1 && Response.Length ==1)))
+            {
+                Response = string.Empty;
             }
             if (string.IsNullOrEmpty(Response))
             {
