@@ -65,7 +65,7 @@ namespace MvcDynamicForms.Fields
         /// <summary>
         /// String representing the user's response to the field.
         /// </summary>
-        public abstract string Response { get; }
+        public abstract string Response { get; set; }
         /// <summary>
         /// Whether the field must be completed to be valid.
         /// </summary>
