@@ -52,7 +52,10 @@ namespace MvcDynamicForms.Fields
             txt.Attributes.Add("class", "validate[required] text-input");
             txt.Attributes.Add("data-prompt-position", "topRight:15");
             }
-
+            if (_MaxLength.ToString() != "0" && !string.IsNullOrEmpty(_MaxLength.ToString()))
+            {
+                txt.Attributes.Add("MaxLength", _MaxLength.ToString());
+            }
             txt.Attributes.Add("style", "position:absolute;left:" + _left.ToString() + "px;top:" + _top.ToString() + "px" + ";width:" + _ControlWidth.ToString() + "px" + ErrorStyle);            
           
             txt.MergeAttributes(_inputHtmlAttributes);
