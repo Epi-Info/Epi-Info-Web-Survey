@@ -303,6 +303,7 @@ namespace Epi.Web.MVC.Utility
                 fontfamily = _FieldTypeID.Attribute("PromptFontFamily").Value,
                 IsRequired = bool.Parse(_FieldTypeID.Attribute("IsRequired").Value),
                 IsReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value),
+                MaxLength = int.Parse(_FieldTypeID.Attribute("MaxLength").Value),
                 Value = _ControlValue
                 
 
