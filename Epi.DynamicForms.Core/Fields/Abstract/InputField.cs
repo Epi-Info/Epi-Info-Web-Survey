@@ -23,7 +23,7 @@ namespace MvcDynamicForms.Fields
         protected string _errorClass = "MvcDynamicFieldError";
         protected Boolean _IsRequired;
         protected Boolean _IsReadOnly;
-       
+        protected int _MaxLength;
 
         protected Dictionary<string, string> _inputHtmlAttributes = new Dictionary<string, string>();
         /// <summary>
@@ -153,6 +153,6 @@ namespace MvcDynamicForms.Fields
         public double ControlHeight { get { return this._ControlHeight; } set { this._ControlHeight = value; } }
         public Boolean IsRequired { get { return this._IsRequired; } set {   this._IsRequired =value; } }
         public Boolean IsReadOnly { get { return this._IsReadOnly; } set {   this._IsReadOnly = value; }}
-      
+        public int MaxLength { get { return this._MaxLength; } set { this._MaxLength = value; } }
     }
 }
