@@ -20,16 +20,20 @@ namespace Epi.Web.EF
         /// </summary>
         /// <param name="SurveyResponseId">Unique SurveyResponse identifier.</param>
         /// <returns>SurveyResponse.</returns>
-        public SurveyResponseBO GetSurveyResponse(string SurveyResponseId)
+        public List<SurveyResponseBO> GetSurveyResponse(List<string> SurveyResponseId)
         {
 
-            SurveyResponseBO result = new SurveyResponseBO();
-            Guid Id = new Guid(SurveyResponseId);
+            List<SurveyResponseBO> result = new List<SurveyResponseBO>();
 
-            using (var Context = DataObjectFactory.CreateContext())
+            foreach (string surveyResponseId in SurveyResponseId)
             {
+                Guid Id = new Guid(surveyResponseId);
 
-                result = Mapper.Map(Context.SurveyResponses.FirstOrDefault(x => x.ResponseId == Id));
+                using (var Context = DataObjectFactory.CreateContext())
+                {
+
+                    result.Add(Mapper.Map(Context.SurveyResponses.FirstOrDefault(x => x.ResponseId == Id)));
+                }
             }
 
             return result;

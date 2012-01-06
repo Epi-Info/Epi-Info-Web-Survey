@@ -18,10 +18,19 @@ namespace Epi.Web.BLL
             this.SurveyInfoDao = pSurveyInfoDao;
         }
 
-        public SurveyInfoBO GetSurveyInfoById(String pId)
+        public SurveyInfoBO GetSurveyInfoById(string pId)
         {
-            SurveyInfoBO result = this.SurveyInfoDao.GetSurveyInfo(pId);
-            return result;
+            List<string> IdList = new List<string>();
+            IdList.Add(pId);
+            List<SurveyInfoBO> result = this.SurveyInfoDao.GetSurveyInfo(IdList);
+            if (result.Count > 0)
+            {
+                return result[0];
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public SurveyInfoBO InsertSurveyInfo(SurveyInfoBO pValue)

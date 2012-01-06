@@ -63,7 +63,7 @@ namespace Epi.Web.WCF.SurveyService
 
             //if (pRequest.LoadOptions.Contains("SurveyInfo"))
             //{
-                result.SurveyInfo = Mapper.ToDataTransferObject(implementation.GetSurveyInfoById(pRequest.Criteria.SurveyId));
+                result.SurveyInfo.Add(Mapper.ToDataTransferObject(implementation.GetSurveyInfoById(pRequest.Criteria.SurveyId)));
             //}
 
             return result;
@@ -88,7 +88,7 @@ namespace Epi.Web.WCF.SurveyService
                 return response;
 
             // Transform SurveyInfo data transfer object to SurveyInfo business object
-            var SurveyInfo = Mapper.ToBusinessObject(request.SurveyInfo);
+            var SurveyInfo = Mapper.ToBusinessObject(request.SurveyInfoList[0]);
 
             // Validate SurveyInfo business rules
 
@@ -112,12 +112,12 @@ namespace Epi.Web.WCF.SurveyService
                 if (request.Action == "Create")
                 {
                     Implementation.InsertSurveyInfo(SurveyInfo);
-                    response.SurveyInfo = Mapper.ToDataTransferObject(SurveyInfo);
+                    response.SurveyInfo.Add(Mapper.ToDataTransferObject(SurveyInfo));
                 }
                 else if (request.Action == "Update")
                 {
                     Implementation.UpdateSurveyInfo(SurveyInfo);
-                    response.SurveyInfo = Mapper.ToDataTransferObject(SurveyInfo);
+                    response.SurveyInfo.Add(Mapper.ToDataTransferObject(SurveyInfo));
                 }
                 else if (request.Action == "Delete")
                 {
@@ -169,7 +169,7 @@ namespace Epi.Web.WCF.SurveyService
                 return result;
             }
 
-            var criteria = pRequest.Criteria as SurveyResponseCriteria;
+            var criteria = pRequest.Criteria as SurveyAnswerCriteria;
             string sort = criteria.SortExpression;
 
             //if (request.LoadOptions.Contains("SurveyInfos"))
@@ -189,7 +189,7 @@ namespace Epi.Web.WCF.SurveyService
 
             //if (pRequest.LoadOptions.Contains("SurveyInfo"))
             //{
-            result.SurveyResponseDTO = Mapper.ToDataTransferObject(Implementation.GetSurveyResponseById(pRequest.Criteria.ResposneId));
+            result.SurveyResponseList = Mapper.ToDataTransferObject(Implementation.GetSurveyResponseById(pRequest.Criteria.SurveyAnswerIdList));
             //}
 
             return result;
@@ -217,7 +217,7 @@ namespace Epi.Web.WCF.SurveyService
             }
             
             // Transform SurveyResponse data transfer object to SurveyResponse business object
-            SurveyResponseBO SurveyResponse = Mapper.ToBusinessObject(request.SurveyResponseDTO);
+            SurveyResponseBO SurveyResponse = Mapper.ToBusinessObject(request.SurveyAnswerList)[0];
 
             // Validate SurveyResponse business rules
 
@@ -241,32 +241,33 @@ namespace Epi.Web.WCF.SurveyService
                 if (request.Action.Equals("Create", StringComparison.OrdinalIgnoreCase))
                 {
                     Implementation.InsertSurveyResponse(SurveyResponse);
-                    response.SurveyResponseDTO = Mapper.ToDataTransferObject(SurveyResponse);
+                    response.SurveyResponseList.Add(Mapper.ToDataTransferObject(SurveyResponse));
                 }
                 else if (request.Action.Equals("Update", StringComparison.OrdinalIgnoreCase))
                 {
                     Implementation.UpdateSurveyResponse(SurveyResponse);
-                    response.SurveyResponseDTO = Mapper.ToDataTransferObject(SurveyResponse);
+                    response.SurveyResponseList.Add( Mapper.ToDataTransferObject(SurveyResponse));
                 }
                 else if (request.Action.Equals("Delete", StringComparison.OrdinalIgnoreCase))
                 {
-                    var criteria = request.Criteria as SurveyResponseCriteria;
-                    var survey = Implementation.GetSurveyResponseById(SurveyResponse.SurveyId);
+                    var criteria = request.Criteria as SurveyAnswerCriteria;
+                    var survey = Implementation.GetSurveyResponseById(new List<string> { SurveyResponse.SurveyId });
 
-                    try
+                    foreach (SurveyResponseBO surveyResponse in survey)
                     {
-                        if (Implementation.DeleteSurveyResponse(survey))
+                        try
                         {
-                            response.RowsAffected = 1;
+
+                            if (Implementation.DeleteSurveyResponse(surveyResponse))
+                            {
+                                response.RowsAffected += 1;
+                            }
+
                         }
-                        else
+                        catch
                         {
-                            response.RowsAffected = 0;
+                            //response.RowsAffected = 0;
                         }
-                    }
-                    catch
-                    {
-                        response.RowsAffected = 0;
                     }
                 }
             }

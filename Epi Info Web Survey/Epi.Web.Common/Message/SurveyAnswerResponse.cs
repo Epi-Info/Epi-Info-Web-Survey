@@ -15,24 +15,18 @@ namespace Epi.Web.Common.Message
         /// <summary>
         /// Default Constructor for SurveyInfoResponse.
         /// </summary>
-        public SurveyAnswerResponse() { }
+        public SurveyAnswerResponse() { this.SurveyResponseList = new List<SurveyAnswerDTO>(); }
 
         /// <summary>
         /// Overloaded Constructor for SurveyInfoResponse. Sets CorrelationId.
         /// </summary>
         /// <param name="correlationId"></param>
-        public SurveyAnswerResponse(string correlationId) : base(correlationId) { }
+        public SurveyAnswerResponse(string correlationId) : base(correlationId) { this.SurveyResponseList = new List<SurveyAnswerDTO>(); }
 
-        /// <summary>
-        /// List of SurveyInfos. 
-        /// </summary>
-        [DataMember]
-        public IList<SurveyAnswerDTO> SurveyResponseDTOList;
-
-        /// <summary>
+           /// <summary>
         /// Single SurveyInfo
         /// </summary>
         [DataMember]
-        public SurveyAnswerDTO SurveyResponseDTO;
+        public List<SurveyAnswerDTO> SurveyResponseList;
     }
 }
