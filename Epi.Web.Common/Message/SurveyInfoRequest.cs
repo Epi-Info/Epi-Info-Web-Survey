@@ -1,4 +1,5 @@
 using System.Runtime.Serialization;
+using System.Collections.Generic;
 using Epi.Web.Common.MessageBase;
 using Epi.Web.Common.Criteria;
 using Epi.Web.Common.DTO;
@@ -22,10 +23,11 @@ namespace Epi.Web.Common.Message
         [DataMember]
         public SurveyInfoCriteria Criteria;
 
+
         /// <summary>
-        /// SurveyInfo object.
+        /// SurveyInfo List.
         /// </summary>
         [DataMember]
-        public SurveyInfoDTO SurveyInfo;
+        public List<SurveyInfoDTO> SurveyInfoList;
     }
 }

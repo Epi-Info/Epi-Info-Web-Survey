@@ -14,19 +14,20 @@ namespace Epi.Web.Common.Message
     {
         public SurveyAnswerRequest()
         {
-            this.Criteria = new SurveyResponseCriteria();
+            this.Criteria = new SurveyAnswerCriteria();
+            this.SurveyAnswerList = new List<SurveyAnswerDTO>();
         }
 
         /// <summary>
         /// Selection criteria and sort order
         /// </summary>
         [DataMember]
-        public SurveyResponseCriteria Criteria;
+        public SurveyAnswerCriteria Criteria;
 
         /// <summary>
         /// SurveyInfo object.
         /// </summary>
         [DataMember]
-        public SurveyAnswerDTO SurveyResponseDTO;
+        public List<SurveyAnswerDTO> SurveyAnswerList;
     }
 }

@@ -9,7 +9,7 @@ namespace Epi.Web.MVC.Models
     /// <summary>
     /// The Survey Model that will be pumped to view
     /// </summary>
-    public class SurveyResponseModel
+    public class SurveyAnswerModel
     {
         public string ResponseId { get; set; }
         public string SurveyId { get; set; }

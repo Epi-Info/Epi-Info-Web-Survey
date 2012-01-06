@@ -19,7 +19,7 @@ namespace Epi.Web.Interfaces.DataInterfaces
         /// </summary>
         /// <param name="SurveyInfoId">Unique SurveyInfo identifier.</param>
         /// <returns>SurveyInfo.</returns>
-        SurveyInfoBO GetSurveyInfo(string SurveyInfoId);
+        List<SurveyInfoBO> GetSurveyInfo(List<string> SurveyInfoId);
 
         /// <summary>
         /// Gets a sorted list of all SurveyInfos.

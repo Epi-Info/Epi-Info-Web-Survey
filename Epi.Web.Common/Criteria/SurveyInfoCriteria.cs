@@ -8,6 +8,13 @@ namespace Epi.Web.Common.Criteria
     [DataContract(Namespace = "http://www.yourcompany.com/types/")]
     public class SurveyInfoCriteria : Criteria
     {
+
+
+        public SurveyInfoCriteria()
+        {
+            
+        }
+
         /// <summary>
         /// Unique SurveyInfo identifier.
         /// </summary>
