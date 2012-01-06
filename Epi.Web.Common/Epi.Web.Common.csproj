@@ -63,7 +63,7 @@
     <Compile Include="BusinessRule\ValidateRequired.cs" />
     <Compile Include="BusinessRule\ValidationDataType.cs" />
     <Compile Include="BusinessRule\ValidationOperator.cs" />
-    <Compile Include="Criteria\SurveyResponseCriteria.cs" />
+    <Compile Include="Criteria\SurveyAnswerCriteria.cs" />
     <Compile Include="Criteria\Criteria.cs" />
     <Compile Include="Criteria\SurveyInfoCriteria.cs" />
     <Compile Include="DTO\SurveyAnswerDTO.cs" />

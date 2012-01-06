@@ -114,7 +114,7 @@ namespace Epi.Web.MVC.Controllers
                    //TODO: Now repopulating the TempData (by reassigning to responseId) so it persisits, later we will need to find a better 
                    //way to replace it. 
                     TempData[Epi.Web.MVC.Constants.Constant.RESPONSE_ID] = responseId;
-                    return _isurveyFacade.GetSurveyAnswerResponse(responseId).SurveyResponseDTO;
+                    return _isurveyFacade.GetSurveyAnswerResponse(responseId).SurveyResponseList[0];
                
 
 

@@ -15,7 +15,10 @@ namespace Epi.Web.WCF.SurveyService
         [OperationContract]
         PublishResponse PublishSurvey(PublishRequest pRequestMessage);
 
+        [OperationContract]
+        SurveyInfoResponse GetSurveyInfo(SurveyInfoRequest pRequest);
+
+        [OperationContract]
+        SurveyAnswerResponse GetSurveyAnswer(SurveyAnswerRequest pRequest);
     }
-
-
 }

@@ -77,7 +77,7 @@
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="Unity.Mvc3">
-      <HintPath>..\..\..\..\..\Documents and Settings\jhaines\My Documents\Downloads\Unity.Mvc3.dll</HintPath>
+      <HintPath>..\packages\Unity.Mvc3.1.1\lib\Unity.Mvc3.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

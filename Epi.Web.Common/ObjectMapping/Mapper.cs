@@ -34,6 +34,19 @@ namespace Epi.Web.Common.ObjectMapping
             };
         }
 
+
+        public static List<SurveyInfoBO> ToBusinessObject(List<SurveyInfoDTO> pSurveyInfoList)
+        {
+            List<SurveyInfoBO> result = new List<SurveyInfoBO>();
+            foreach (SurveyInfoDTO surveyInfo in pSurveyInfoList)
+            {
+                result.Add(ToBusinessObject(surveyInfo));
+            };
+
+            return result;
+        }
+
+
         /// <summary>
         /// Maps SurveyInfoBO business object to SurveyInfoDTO entity.
         /// </summary>
@@ -54,7 +67,16 @@ namespace Epi.Web.Common.ObjectMapping
 
             };
         }
+        public static List<SurveyInfoDTO> ToDataTransferObject(List<SurveyInfoBO> pSurveyInfoList)
+        {
+            List<SurveyInfoDTO> result = new List<SurveyInfoDTO>();
+            foreach (SurveyInfoBO surveyInfo in pSurveyInfoList)
+            {
+                result.Add(ToDataTransferObject(surveyInfo));
+            };
 
+            return result;
+        }
 
         /// <summary>
         /// Maps SurveyInfoBO business object to SurveyInfoDTO entity.
@@ -73,7 +95,16 @@ namespace Epi.Web.Common.ObjectMapping
                 Status = pBO.Status
             };
         }
+        public static List<SurveyAnswerDTO> ToDataTransferObject(List<SurveyResponseBO> pSurveyResposneList)
+        {
+            List<SurveyAnswerDTO> result = new List<SurveyAnswerDTO>();
+            foreach (SurveyResponseBO surveyResponse in pSurveyResposneList)
+            {
+                result.Add(ToDataTransferObject(surveyResponse));
+            };
 
+            return result;
+        }
 
         /// <summary>
         /// Maps SurveyInfoBO business object to SurveyInfoDTO entity.
@@ -91,6 +122,17 @@ namespace Epi.Web.Common.ObjectMapping
                 DateCompleted = pBO.DateCompleted,
                 Status = pBO.Status
             };
+        }
+
+        public static List<SurveyResponseBO> ToBusinessObject(List<SurveyAnswerDTO> pSurveyAnswerList)
+        {
+            List<SurveyResponseBO> result = new List<SurveyResponseBO>();
+            foreach (SurveyAnswerDTO surveyAnswer in pSurveyAnswerList)
+            {
+                result.Add(ToBusinessObject(surveyAnswer));
+            };
+
+            return result;
         }
 
         /// <summary>
