@@ -92,7 +92,7 @@ namespace Epi.Web.MVC.Facade
         {
             _surveyInfoRequest.Criteria.SurveyId = surveyId;
             SurveyInfoResponse surveyInfoResponse = _iSurveyInfoRepository.GetSurveyInfo(_surveyInfoRequest);
-            SurveyInfoModel s = Mapper.ToSurveyInfoModel(surveyInfoResponse.SurveyInfo);
+            SurveyInfoModel s = Mapper.ToSurveyInfoModel(surveyInfoResponse.SurveyInfo[0]);
             return s;
         }
 
@@ -105,7 +105,7 @@ namespace Epi.Web.MVC.Facade
         /// <returns></returns>
         public SurveyAnswerResponse GetSurveyAnswerResponse(string responseId)
         {
-            _surveyAnswerRequest.Criteria.ResposneId = responseId;
+            _surveyAnswerRequest.Criteria.SurveyAnswerIdList.Add(responseId);
             SurveyAnswerResponse surveyAnswerResponse = _iSurveyAnswerRepository.GetSurveyAnswer(_surveyAnswerRequest);
             return surveyAnswerResponse;
         }

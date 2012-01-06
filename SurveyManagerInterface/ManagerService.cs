@@ -39,6 +39,103 @@ namespace Epi.Web.WCF.SurveyService
             return result;
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="pRequest"></param>
+        /// <returns></returns>
+        public SurveyInfoResponse GetSurveyInfo(SurveyInfoRequest pRequest)
+        {
+            SurveyInfoResponse result = new SurveyInfoResponse(pRequest.RequestId);
+            //Epi.Web.Interfaces.DataInterfaces.ISurveyInfoDao surveyInfoDao = new EF.EntitySurveyInfoDao();
+            //Epi.Web.BLL.SurveyInfo implementation = new Epi.Web.BLL.SurveyInfo(surveyInfoDao);
+
+            Epi.Web.Interfaces.DataInterfaces.IDaoFactory entityDaoFactory = new EF.EntityDaoFactory();
+            Epi.Web.Interfaces.DataInterfaces.ISurveyInfoDao surveyInfoDao = entityDaoFactory.SurveyInfoDao;
+            Epi.Web.BLL.SurveyInfo implementation = new Epi.Web.BLL.SurveyInfo(surveyInfoDao);
+
+            // Validate client tag, access token, and user credentials
+            if (!ValidRequest(pRequest, result, Validate.All))
+            {
+                return result;
+            }
+
+            var criteria = pRequest.Criteria as SurveyInfoCriteria;
+            string sort = criteria.SortExpression;
+
+            //if (request.LoadOptions.Contains("SurveyInfos"))
+            //{
+            //    IEnumerable<SurveyInfoDTO> SurveyInfos;
+            //    if (!criteria.IncludeOrderStatistics)
+            //    {
+            //        SurveyInfos = Implementation.GetSurveyInfos(sort);
+            //    }
+            //    else
+            //    {
+            //        SurveyInfos = Implementation.GetSurveyInfosWithOrderStatistics(sort);
+            //    }
+
+            //    response.SurveyInfos = SurveyInfos.Select(c => Mapper.ToDataTransferObject(c)).ToList();
+            //}
+
+            //if (pRequest.LoadOptions.Contains("SurveyInfo"))
+            //{
+            result.SurveyInfo.Add(Mapper.ToDataTransferObject(implementation.GetSurveyInfoById(pRequest.Criteria.SurveyId)));
+            //}
+
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="pRequest"></param>
+        /// <returns></returns>
+        public SurveyAnswerResponse GetSurveyAnswer(SurveyAnswerRequest pRequest)
+        {
+            SurveyAnswerResponse result = new SurveyAnswerResponse(pRequest.RequestId);
+            //Epi.Web.Interfaces.DataInterfaces.ISurveyResponseDao surveyInfoDao = new EF.EntitySurveyResponseDao();
+            //Epi.Web.BLL.SurveyResponse Implementation = new Epi.Web.BLL.SurveyResponse(surveyInfoDao);
+
+            Epi.Web.Interfaces.DataInterfaces.IDaoFactory entityDaoFactory = new EF.EntityDaoFactory();
+            Epi.Web.Interfaces.DataInterfaces.ISurveyResponseDao ISurveyResponseDao = entityDaoFactory.SurveyResponseDao;
+            Epi.Web.BLL.SurveyResponse Implementation = new Epi.Web.BLL.SurveyResponse(ISurveyResponseDao);
+
+
+            // Validate client tag, access token, and user credentials
+            if (!ValidRequest(pRequest, result, Validate.All))
+            {
+                return result;
+            }
+
+            var criteria = pRequest.Criteria as SurveyAnswerCriteria;
+            string sort = criteria.SortExpression;
+
+            //if (request.LoadOptions.Contains("SurveyInfos"))
+            //{
+            //    IEnumerable<SurveyInfoDTO> SurveyInfos;
+            //    if (!criteria.IncludeOrderStatistics)
+            //    {
+            //        SurveyInfos = Implementation.GetSurveyInfos(sort);
+            //    }
+            //    else
+            //    {
+            //        SurveyInfos = Implementation.GetSurveyInfosWithOrderStatistics(sort);
+            //    }
+
+            //    response.SurveyInfos = SurveyInfos.Select(c => Mapper.ToDataTransferObject(c)).ToList();
+            //}
+
+            //if (pRequest.LoadOptions.Contains("SurveyInfo"))
+            //{
+            result.SurveyResponseList = Mapper.ToDataTransferObject(Implementation.GetSurveyResponseById(pRequest.Criteria.SurveyAnswerIdList));
+            //}
+
+            return result;
+        }
+
+
         ///// <summary>
         ///// 
         ///// </summary>
