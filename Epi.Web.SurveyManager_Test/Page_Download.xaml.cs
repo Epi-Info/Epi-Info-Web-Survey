@@ -48,7 +48,7 @@ namespace Epi.Web.SurveyManager.Client
                 
                 foreach(Epi.Web.Common.DTO.SurveyInfoDTO SurveyInfo in Result.SurveyInfo)
                 {
-                    SurveyInfoResponseTextBox.AppendText(SurveyInfo.SurveyId + " " + SurveyInfo.SurveyName + "\n");
+                    SurveyInfoResponseTextBox.AppendText(string.Format("{0} - {1} - {2}\n", SurveyInfo.SurveyId, SurveyInfo.SurveyName, SurveyInfo.ClosingDate));
                 }
             }
             catch (Exception ex)
