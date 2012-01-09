@@ -25,14 +25,25 @@ namespace Epi.Web.EF
 
             List<SurveyResponseBO> result = new List<SurveyResponseBO>();
 
-            foreach (string surveyResponseId in SurveyResponseId)
+            if (SurveyResponseId.Count > 0)
             {
-                Guid Id = new Guid(surveyResponseId);
+                foreach (string surveyResponseId in SurveyResponseId)
+                {
+                    Guid Id = new Guid(surveyResponseId);
 
+                    using (var Context = DataObjectFactory.CreateContext())
+                    {
+
+                        result.Add(Mapper.Map(Context.SurveyResponses.FirstOrDefault(x => x.ResponseId == Id)));
+                    }
+                }
+            }
+            else
+            {
                 using (var Context = DataObjectFactory.CreateContext())
                 {
 
-                    result.Add(Mapper.Map(Context.SurveyResponses.FirstOrDefault(x => x.ResponseId == Id)));
+                    result = Mapper.Map(Context.SurveyResponses.ToList());
                 }
             }
 

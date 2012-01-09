@@ -24,15 +24,27 @@ namespace Epi.Web.EF
         {
 
             List<SurveyInfoBO> result = new List<SurveyInfoBO>();
-            foreach (string surveyInfoId in SurveyInfoId)
+            if (SurveyInfoId.Count > 0)
             {
-                Guid Id = new Guid(surveyInfoId);
+                foreach (string surveyInfoId in SurveyInfoId)
+                {
+                    Guid Id = new Guid(surveyInfoId);
 
+                    using (var Context = DataObjectFactory.CreateContext())
+                    {
+
+                        result.Add(Mapper.Map(Context.SurveyMetaDatas.FirstOrDefault(x => x.SurveyId == Id)));
+                    }
+                }
+            }
+            else
+            {
                 using (var Context = DataObjectFactory.CreateContext())
                 {
 
-                    result.Add(Mapper.Map(Context.SurveyMetaDatas.FirstOrDefault(x => x.SurveyId == Id)));
+                    result = Mapper.Map(Context.SurveyMetaDatas.ToList());
                 }
+             
             }
 
             return result;

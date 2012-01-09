@@ -33,6 +33,18 @@ namespace Epi.Web.EF
             };
         }
 
+
+        internal static List<SurveyInfoBO> Map(List<SurveyMetaData> entities)
+        {
+            List<SurveyInfoBO> result = new List<SurveyInfoBO>();
+            foreach (SurveyMetaData surveyMetaData in entities)
+            {
+                result.Add(Map(surveyMetaData));
+            }
+
+            return result;
+        }
+
         /// <summary>
         /// Maps SurveyInfoBO business object to SurveyMetaData entity.
         /// </summary>
@@ -109,6 +121,17 @@ namespace Epi.Web.EF
                 DateLastUpdated = entity.DateLastUpdated,
                 DateCompleted = entity.DateCompleted.Value
             };
+        }
+
+        internal static List<SurveyResponseBO> Map(List<SurveyResponse> entities)
+        {
+            List<SurveyResponseBO> result = new List<SurveyResponseBO>();
+            foreach (SurveyResponse surveyResponse in entities)
+            {
+                result.Add(Map(surveyResponse));
+            }
+
+            return result;
         }
 
         /// <summary>
