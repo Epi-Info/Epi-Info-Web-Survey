@@ -81,7 +81,12 @@ namespace Epi.Web.WCF.SurveyService
 
             //if (pRequest.LoadOptions.Contains("SurveyInfo"))
             //{
-            result.SurveyInfo.Add(Mapper.ToDataTransferObject(implementation.GetSurveyInfoById(pRequest.Criteria.SurveyId)));
+            List<string> SurveyIdList = new List<string>();
+            if (!string.IsNullOrEmpty(pRequest.Criteria.SurveyId))
+            {
+                SurveyIdList.Add(pRequest.Criteria.SurveyId);
+            }
+            result.SurveyInfo = Mapper.ToDataTransferObject(implementation.GetSurveyInfoById(SurveyIdList));
             //}
 
             return result;
