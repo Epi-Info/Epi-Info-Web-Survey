@@ -34,6 +34,12 @@ namespace MvcDynamicForms
                     numerictxtField.Value = postedForm[key]; 
                 }
 
+                else if (dynField is DatePickerField)
+                {
+                    var datepickerField = (DatePickerField)dynField;
+                    datepickerField.Value = postedForm[key];
+                }
+
                 else if (dynField is ListField)
                 {
                     var lstField = (ListField)dynField;
