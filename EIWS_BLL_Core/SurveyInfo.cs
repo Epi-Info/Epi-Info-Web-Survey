@@ -21,7 +21,10 @@ namespace Epi.Web.BLL
         public SurveyInfoBO GetSurveyInfoById(string pId)
         {
             List<string> IdList = new List<string>();
-            IdList.Add(pId);
+            if (! string.IsNullOrEmpty(pId))
+            {
+                IdList.Add(pId);
+            }
             List<SurveyInfoBO> result = this.SurveyInfoDao.GetSurveyInfo(IdList);
             if (result.Count > 0)
             {
@@ -31,6 +34,14 @@ namespace Epi.Web.BLL
             {
                 return null;
             }
+        }
+
+        public List<SurveyInfoBO> GetSurveyInfoById(List<string> pIdList)
+        {
+
+            List<SurveyInfoBO> result = this.SurveyInfoDao.GetSurveyInfo(pIdList);
+            return result;
+            
         }
 
         public SurveyInfoBO InsertSurveyInfo(SurveyInfoBO pValue)
