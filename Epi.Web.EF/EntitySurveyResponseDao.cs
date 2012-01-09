@@ -20,14 +20,14 @@ namespace Epi.Web.EF
         /// </summary>
         /// <param name="SurveyResponseId">Unique SurveyResponse identifier.</param>
         /// <returns>SurveyResponse.</returns>
-        public List<SurveyResponseBO> GetSurveyResponse(List<string> SurveyResponseId)
+        public List<SurveyResponseBO> GetSurveyResponse(List<string> SurveyResponseIdList)
         {
 
             List<SurveyResponseBO> result = new List<SurveyResponseBO>();
 
-            if (SurveyResponseId.Count > 0)
+            if (SurveyResponseIdList.Count > 0)
             {
-                foreach (string surveyResponseId in SurveyResponseId)
+                foreach (string surveyResponseId in SurveyResponseIdList)
                 {
                     Guid Id = new Guid(surveyResponseId);
 
@@ -49,7 +49,32 @@ namespace Epi.Web.EF
 
             return result;
         }
-   
+
+
+        /// <summary>
+        /// Gets SurveyResponses per a SurveyId.
+        /// </summary>
+        /// <param name="SurveyResponseId">Unique SurveyResponse identifier.</param>
+        /// <returns>SurveyResponse.</returns>
+        public List<SurveyResponseBO> GetSurveyResponseBySurveyId(List<string> SurveyIdList)
+        {
+
+            List<SurveyResponseBO> result = new List<SurveyResponseBO>();
+
+            foreach (string surveyResponseId in SurveyIdList)
+            {
+                Guid Id = new Guid(surveyResponseId);
+
+                using (var Context = DataObjectFactory.CreateContext())
+                {
+
+                    result.Add(Mapper.Map(Context.SurveyResponses.FirstOrDefault(x => x.SurveyId == Id)));
+                }
+            }
+
+            return result;
+        }
+
 
         /// <summary>
         /// Inserts a new SurveyResponse. 
