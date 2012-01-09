@@ -21,6 +21,12 @@ namespace Epi.Web.BLL
             return result;
         }
 
+        public List<SurveyResponseBO> GetSurveyResponseBySurveyId(List<String> pSurveyIdList)
+        {
+            List<SurveyResponseBO> result = this.SurveyResponseDao.GetSurveyResponseBySurveyId(pSurveyIdList);
+            return result;
+        }
+
         public SurveyResponseBO InsertSurveyResponse(SurveyResponseBO pValue)
         {
             SurveyResponseBO result = pValue;
