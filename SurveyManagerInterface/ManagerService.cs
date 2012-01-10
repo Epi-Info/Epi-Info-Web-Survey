@@ -132,6 +132,18 @@ namespace Epi.Web.WCF.SurveyService
             //    response.SurveyInfos = SurveyInfos.Select(c => Mapper.ToDataTransferObject(c)).ToList();
             //}
 
+
+            result.SurveyResponseList = Mapper.ToDataTransferObject
+                (
+                    Implementation.GetSurveyResponse
+                    (
+                        pRequest.Criteria.SurveyAnswerIdList,
+                        pRequest.Criteria.SurveyId,
+                        pRequest.Criteria.DateCompleted,
+                        pRequest.Criteria.StatusId
+                    )
+                );
+            /*
             if (string.IsNullOrEmpty(pRequest.Criteria.SurveyId))
             {
                 result.SurveyResponseList = Mapper.ToDataTransferObject(Implementation.GetSurveyResponseById(pRequest.Criteria.SurveyAnswerIdList));
@@ -139,7 +151,7 @@ namespace Epi.Web.WCF.SurveyService
             else
             {
                 result.SurveyResponseList = Mapper.ToDataTransferObject(Implementation.GetSurveyResponseBySurveyId(pRequest.Criteria.SurveyAnswerIdList));
-            }
+            }*/
 
             return result;
         }

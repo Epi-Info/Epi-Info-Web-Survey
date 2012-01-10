@@ -7,6 +7,7 @@ using System.Collections.Generic;
 //using System.Linq.Dynamic;
 using Epi.Web.Interfaces.DataInterfaces;
 using Epi.Web.Common.BusinessObject;
+using Epi.Web.Common.Criteria;
 
 namespace Epi.Web.EF
 {
@@ -72,6 +73,63 @@ namespace Epi.Web.EF
                 }
             }
 
+            return result;
+        }
+
+
+        /// <summary>
+        /// Gets SurveyResponses depending on criteria.
+        /// </summary>
+        /// <param name="SurveyResponseId">Unique SurveyResponse identifier.</param>
+        /// <returns>SurveyResponse.</returns>
+        public List<SurveyResponseBO> GetSurveyResponse(List<string> SurveyAnswerIdList, string pSurveyId, DateTime pDateCompleted, int pStatusId = -1)
+        {
+            List<SurveyResponseBO> result = new List<SurveyResponseBO>();
+            List<SurveyResponse> responseList = new List<SurveyResponse>();
+
+            if (SurveyAnswerIdList.Count > 0)
+            {
+                foreach (string surveyResponseId in SurveyAnswerIdList)
+                {
+                    Guid Id = new Guid(surveyResponseId);
+                    using (var Context = DataObjectFactory.CreateContext())
+                    {
+                        responseList.Add(Context.SurveyResponses.FirstOrDefault(x => x.ResponseId == Id));
+                    }
+                }
+            }
+            else
+            {
+                using (var Context = DataObjectFactory.CreateContext())
+                {
+                    responseList = Context.SurveyResponses.ToList();
+                }
+            }
+
+
+            if(! string.IsNullOrEmpty(pSurveyId))
+            {
+                Guid Id = new Guid(pSurveyId);
+                List<SurveyResponse> surveyList = new List<SurveyResponse>();
+                surveyList.AddRange(responseList.Where(x => x.SurveyId == Id));
+                responseList = surveyList;
+            }
+
+            if (pStatusId > -1)
+            {
+                List<SurveyResponse> statusList = new List<SurveyResponse>();
+                statusList.AddRange(responseList.Where(x => x.StatusId == pStatusId));
+                responseList = statusList;
+            }
+
+            if (pDateCompleted > DateTime.MinValue)
+            {
+                List<SurveyResponse> dateList = new List<SurveyResponse>();
+                dateList.AddRange(responseList.Where(x => x.DateCompleted == pDateCompleted));
+                responseList = dateList;
+            }
+
+            result = Mapper.Map(responseList);
             return result;
         }
 
