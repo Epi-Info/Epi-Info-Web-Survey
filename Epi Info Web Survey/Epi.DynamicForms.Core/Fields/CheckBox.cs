@@ -79,16 +79,13 @@ namespace MvcDynamicForms.Fields
         {
             var inputName = _form.FieldPrefix + _key;
             var html = new StringBuilder();
-
+            string ErrorStyle = string.Empty;
 
             // error label
             if (!IsValid)
             {
-                var error = new TagBuilder("label");
-                error.SetInnerText(Error);
-                error.Attributes.Add("for", inputName);
-                error.Attributes.Add("class", _errorClass);
-                html.Append(error.ToString());
+                //Add new Error to the error Obj
+                ErrorStyle = ";border-color: red";
             }
 
             // checkbox input
@@ -98,6 +95,10 @@ namespace MvcDynamicForms.Fields
             chk.Attributes.Add("type", "checkbox");
             if (Checked) chk.Attributes.Add("checked", "checked");
             chk.Attributes.Add("value", bool.TrueString);
+        
+           
+            chk.Attributes.Add("style", "position:absolute;left:" + _left.ToString() + "px;top:" + _top.ToString() + "px" + ";width:" + _ControlWidth.ToString() + "px" + ErrorStyle);            
+          
             chk.MergeAttributes(_inputHtmlAttributes);
             html.Append(chk.ToString(TagRenderMode.SelfClosing));
 
@@ -105,8 +106,17 @@ namespace MvcDynamicForms.Fields
             var prompt = new TagBuilder("label");
             prompt.SetInnerText(Prompt);
             prompt.Attributes.Add("for", inputName);
-            prompt.Attributes.Add("class", _promptClass);
+            prompt.Attributes.Add("class", "EpiLabel");
+            StringBuilder StyleValues = new StringBuilder();
+            StyleValues.Append(GetContolStyle(_fontstyle.ToString(), _Prompttop.ToString(), _Promptleft.ToString(), null, Height.ToString()));
+            prompt.Attributes.Add("style", StyleValues.ToString());
             html.Append(prompt.ToString());
+            if (ReadOnly)
+            {
+                var scriptReadOnlyText = new TagBuilder("script");
+                scriptReadOnlyText.InnerHtml = "$(function(){$('#" + inputName + "').attr('disabled','disabled')});";
+                html.Append(scriptReadOnlyText.ToString(TagRenderMode.Normal));
+            }
 
             // hidden input (so that value is posted when checkbox is unchecked)
             var hdn = new TagBuilder("input");
@@ -114,9 +124,10 @@ namespace MvcDynamicForms.Fields
             hdn.Attributes.Add("id", inputName + "_hidden");
             hdn.Attributes.Add("name", inputName);
             hdn.Attributes.Add("value", bool.FalseString);
+
             html.Append(hdn.ToString(TagRenderMode.SelfClosing));
 
-
+          
             var wrapper = new TagBuilder(_fieldWrapper);
             wrapper.Attributes["class"] = _fieldWrapperClass;
             wrapper.InnerHtml = html.ToString();
