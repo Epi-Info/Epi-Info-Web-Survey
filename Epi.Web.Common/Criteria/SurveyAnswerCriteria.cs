@@ -15,6 +15,8 @@ namespace Epi.Web.Common.Criteria
         public SurveyAnswerCriteria()
         {
             this.SurveyAnswerIdList = new List<string>();
+            this.StatusId = -1;
+            this.DateCompleted = DateTime.MinValue;
         }
 
         /// <summary>
@@ -31,10 +33,10 @@ namespace Epi.Web.Common.Criteria
 
 
         /// <summary>
-        /// IsCompleted predicate.
+        /// Complete / Inprogress indicator
         /// </summary>
         [DataMember]
-        public bool IsCompleted { get; set; }
+        public int StatusId { get; set; }
 
 
         /// <summary>
