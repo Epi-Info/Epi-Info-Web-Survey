@@ -979,7 +979,7 @@
         //Checks if the start date is before the end date
         //returns true if end is later than start
         _dateCompare: function (start, end) {
-            return (new Date(start.toString()) < new Date(end.toString()));
+            return (new Date(start.toString()) <= new Date(end.toString()));
         },
         /**
         * Checks date range
