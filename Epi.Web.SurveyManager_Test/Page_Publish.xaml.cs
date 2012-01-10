@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Xml;
 
 namespace Epi.Web.SurveyManager.Client
 {
@@ -86,7 +87,7 @@ namespace Epi.Web.SurveyManager.Client
         {
             // Configure open file dialog box
             Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
-            dlg.FileName = "Xml Document"; // Default file name
+            dlg.FileName = ""; // Default file name
             dlg.DefaultExt = ".xml"; // Default file extension
             dlg.Filter = "xml documents (.xml)|*.xml"; // Filter files by extension
 
@@ -98,6 +99,14 @@ namespace Epi.Web.SurveyManager.Client
             {
                 // Open document
                 string filename = dlg.FileName;
+
+                XmlDocument xmlDoc = new XmlDocument();
+
+                xmlDoc.Load(filename);
+
+                TemplateXMLTextBox.Document.Blocks.Clear();
+                TemplateXMLTextBox.AppendText(xmlDoc.InnerXml); 
+                
             }
         }
     }
