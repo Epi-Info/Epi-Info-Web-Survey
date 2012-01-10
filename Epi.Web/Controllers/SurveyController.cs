@@ -41,17 +41,25 @@ namespace Epi.Web.MVC.Controllers
 
             
             //get the survey form
+            try
+            {
+
                 var form = _isurveyFacade.GetSurveyFormData(surveyId, this.GetCurrentPage(), this.GetCurrentSurveyAnswer());
-              
+
                 //create the responseid
-                Guid ResponseID = Guid.NewGuid();        
-               
+                Guid ResponseID = Guid.NewGuid();
+
                 //put the ResponseId in Temp data for later use
                 TempData[Epi.Web.MVC.Constants.Constant.RESPONSE_ID] = ResponseID.ToString();
-                
+
                 // create the first survey response
                 _isurveyFacade.CreateSurveyAnswer(surveyId, ResponseID.ToString());
                 return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
+            }
+            catch (Exception ex)
+            {
+                return View(Epi.Web.MVC.Constants.Constant.EXCEPTION_PAGE);
+            }
             //}
             //return null;
         }

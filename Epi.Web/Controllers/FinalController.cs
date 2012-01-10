@@ -1,6 +1,7 @@
 ﻿using System.Web.Mvc;
 using Epi.Web.MVC.Facade;
 using Epi.Web.MVC.Models;
+using System;
 namespace Epi.Web.MVC.Controllers
 {
     public class FinalController : Controller
@@ -23,11 +24,17 @@ namespace Epi.Web.MVC.Controllers
 
             //if (!string.IsNullOrEmpty(final))
             //{
+             try
+            {
             SurveyInfoModel surveyInfoModel = _isurveyFacade.GetSurveyInfoModel(surveyId);
                 return View(Epi.Web.MVC.Constants.Constant.SUBMIT_PAGE, surveyInfoModel);
             //}
             //return null;
-            
+            }
+             catch (Exception ex)
+             {
+                 return View(Epi.Web.MVC.Constants.Constant.EXCEPTION_PAGE);
+             }
         }
 
         
