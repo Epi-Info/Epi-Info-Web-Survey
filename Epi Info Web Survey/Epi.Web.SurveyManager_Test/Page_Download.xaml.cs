@@ -46,7 +46,7 @@ namespace Epi.Web.SurveyManager.Client
             {
                 Epi.Web.Common.Message.SurveyInfoResponse Result = client.GetSurveyInfo(Request);
                 
-                foreach(Epi.Web.Common.DTO.SurveyInfoDTO SurveyInfo in Result.SurveyInfo)
+                foreach(Epi.Web.Common.DTO.SurveyInfoDTO SurveyInfo in Result.SurveyInfoList)
                 {
                     SurveyInfoResponseTextBox.AppendText(string.Format("{0} - {1} - {2}\n", SurveyInfo.SurveyId, SurveyInfo.SurveyName, SurveyInfo.ClosingDate));
                 }
