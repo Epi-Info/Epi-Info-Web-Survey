@@ -28,7 +28,7 @@ namespace Epi.Web.EF
 
             if (SurveyResponseIdList.Count > 0)
             {
-                foreach (string surveyResponseId in SurveyResponseIdList)
+                foreach (string surveyResponseId in SurveyResponseIdList.Distinct())
                 {
                     Guid Id = new Guid(surveyResponseId);
 
@@ -62,7 +62,7 @@ namespace Epi.Web.EF
 
             List<SurveyResponseBO> result = new List<SurveyResponseBO>();
 
-            foreach (string surveyResponseId in SurveyIdList)
+            foreach (string surveyResponseId in SurveyIdList.Distinct())
             {
                 Guid Id = new Guid(surveyResponseId);
 
@@ -89,7 +89,7 @@ namespace Epi.Web.EF
 
             if (SurveyAnswerIdList.Count > 0)
             {
-                foreach (string surveyResponseId in SurveyAnswerIdList)
+                foreach (string surveyResponseId in SurveyAnswerIdList.Distinct())
                 {
                     Guid Id = new Guid(surveyResponseId);
                     using (var Context = DataObjectFactory.CreateContext())
