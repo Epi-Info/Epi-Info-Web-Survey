@@ -498,7 +498,7 @@
                         errorMsg = methods._customRegex(field, rules, i, options);
                         break;
                     case "customDate":
-                        debugger;
+                       
                         errorMsg = methods._customRegexDate(field, rules, i, options);
                         break;
                     case "groupRequired":
@@ -541,7 +541,7 @@
                         errorMsg = methods._future(field, rules, i, options);
                         break;
                     case "datePickerRange":
-                        debugger;
+                       
 
                         var firstOfGroup = rules[i + 1]; //lower
                         var secondOfGroup = rules[i + 2]; //upper
@@ -553,7 +553,7 @@
                          
                         break;
                     case "dateRange":
-                        debugger;
+                       
                         var classGroup = "[class*=" + rules[i + 1] + "]";
                         var firstOfGroup = form.find(classGroup).eq(0);
                         var secondOfGroup = form.find(classGroup).eq(1);
@@ -990,7 +990,7 @@
         */
         _datepickerRange: function (first, second, rules, i, options, field) {
             //are not both populated
-            debugger;
+           
             var Lower = methods._parseDate(first);
             var Upper = methods._parseDate(second);
             //are both dates but range is off
