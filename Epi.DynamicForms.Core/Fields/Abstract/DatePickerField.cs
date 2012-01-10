@@ -14,6 +14,7 @@ namespace MvcDynamicForms.Fields
     {
         private string _regexMessage = "Invalid";
         private string _ControlValue;
+    
 
         /// <summary>
         /// A regular expression that will be applied to the user's text respone for validation.
@@ -99,7 +100,7 @@ namespace MvcDynamicForms.Fields
                      Matches: 01/01/2001 | 1/1/1999 | 10/20/2080 
                      Non-Matches: 13/01/2001 | 1/1/1800 | 10/32/2080 
                  */
-                string regularExp = "^(([1-9])|(0[1-9])|(1[0-2]))\\/(([0-9])|([0-2][0-9])|(3[0-1]))\\/(([0-9][0-9])|([1-2][0,9][0-9][0-9]))$";
+                string regularExp = "^(((((((0?[13578])|(1[02]))[\\.\\-/]?((0?[1-9])|([12]\\d)|(3[01])))|(((0?[469])|(11))[\\.\\-/]?((0?[1-9])|([12]\\d)|(30)))|((0?2)[\\.\\-/]?((0?[1-9])|(1\\d)|(2[0-8]))))[\\.\\-/]?(((19)|(20))?([\\d][\\d]))))|((0?2)[\\.\\-/]?(29)[\\.\\-/]?(((19)|(20))?(([02468][048])|([13579][26])))))$";
                 var regex = new Regex(regularExp);
 
                 if (!regex.IsMatch(Value))
@@ -118,7 +119,7 @@ namespace MvcDynamicForms.Fields
                         //if the date is either less than the lower limit or greater than the upper limit raise error
                         if ((DateTime.Parse(Value) < DateTime.Parse(Lower)) || (DateTime.Parse(Value) > DateTime.Parse(Upper)))
                         {
-                            Error = string.Format("Date must be in between {0} and {1}", Lower, Upper);
+                            Error = string.Format("Date must be in between {0} and {1}", GetDateFormat(Lower), GetDateFormat(Upper));
                             return false;
                         }
                     }
@@ -126,13 +127,13 @@ namespace MvcDynamicForms.Fields
                     //invalid: checking for lower limit
                     if ((!string.IsNullOrEmpty(Lower)) && (DateTime.Parse(Value) < DateTime.Parse(Lower)))
                     {
-                        Error = string.Format("Date can not be less than {0}", Lower);
+                        Error = string.Format("Date can not be less than {0}", GetDateFormat(Lower));
                         return false;
                     }
                     //invalid: checking the upper limit 
                     if ((!string.IsNullOrEmpty(Upper)) && (DateTime.Parse(Value) > DateTime.Parse(Upper)))
                     {
-                        Error = string.Format("Date can not be greater than {0}", Upper);
+                        Error = string.Format("Date can not be greater than {0}", GetDateFormat(Upper));
                         return false;
                     }
 
@@ -145,8 +146,43 @@ namespace MvcDynamicForms.Fields
 
         }
 
-        
 
+        public string GetDateFormat(string Date)
+        {
+            StringBuilder NewDateFormat = new StringBuilder();
+
+            string MM = "";
+            string DD = "";
+            string YYYY = "";
+            char splitChar = '/';
+            if (!string.IsNullOrEmpty(Date))
+            {
+                if (Date.Contains('-'))
+                {
+                    splitChar = '-';
+                }
+                else
+                {
+
+                    splitChar = '/';
+                }
+                string[] dateList = Date.Split((char)splitChar);
+                MM = dateList[0];
+                DD = dateList[1];
+                YYYY = dateList[2];
+                NewDateFormat.Append(MM);
+                NewDateFormat.Append('/');
+                NewDateFormat.Append(DD);
+                NewDateFormat.Append('/');
+                NewDateFormat.Append(YYYY);
+            }
+            else
+            {
+                NewDateFormat.Append("");
+
+            }
+            return NewDateFormat.ToString();
+        } 
 
 
 

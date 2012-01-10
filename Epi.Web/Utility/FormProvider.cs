@@ -71,10 +71,20 @@ namespace Epi.Web.MVC.Utility
                             form.AddFields( GetTextArea(_FieldTypeID, _Width,_Height,SurveyAnswer,_TextAreaValue));
                             break;
                         case "5"://NumericTextBox
-                            
-                            
+                             
                             var _NumericTextBoxValue = GetControlValue(SurveyAnswer, _FieldTypeID.Attribute("UniqueId").Value);
                             form.AddFields( GetNumericTextBox(_FieldTypeID, _Width, _Height, SurveyAnswer, _NumericTextBoxValue));
+                            break;
+                        // 7 DatePicker
+                        case "7"://NumericTextBox
+
+                            var _DatePickerValue = GetControlValue(SurveyAnswer, _FieldTypeID.Attribute("UniqueId").Value);
+                            form.AddFields(GetDatePicker(_FieldTypeID, _Width, _Height, SurveyAnswer, _DatePickerValue));
+                            break;
+                        case "10"://CheckBox
+
+                            var _CheckBoxValue = GetControlValue(SurveyAnswer, _FieldTypeID.Attribute("UniqueId").Value);
+                            form.AddFields(GetCheckBox(_FieldTypeID, _Width, _Height, SurveyAnswer, _CheckBoxValue));
                             break;
                     }
 
@@ -114,14 +124,7 @@ namespace Epi.Web.MVC.Utility
                 //};
                 //month.AddChoices("January,February,March,April,May,June,July,August,September,October,November,December", ",");
 
-                //var agree = new CheckBox
-                //{
-                //    DisplayOrder = 80,
-                //    Title = "Agrees To Terms",
-                //    Prompt = "I agree to all of the terms in the EULA.",
-                //    Required = true,
-                //    RequiredMessage = "You must agree to the EULA!"
-                //};
+               
 
 
 
@@ -199,7 +202,7 @@ namespace Epi.Web.MVC.Utility
             {
                 Title = "Name",
                 Prompt = _FieldTypeID.Attribute("PromptText").Value,
-                DisplayOrder = 20,
+                DisplayOrder = int.Parse(_FieldTypeID.Attribute("TabIndex").Value),
                 Required =  _FieldTypeID.Attribute("IsRequired").Value == "True"?true:false ,
                 //RequiredMessage = _FieldTypeID.Attribute("PromptText").Value + " is required",
                 RequiredMessage =  "This field is required",
@@ -232,7 +235,7 @@ namespace Epi.Web.MVC.Utility
             {
                 FieldWrapper = "div",
                 Wrap = true,
-                DisplayOrder = 10,
+                DisplayOrder = int.Parse(_FieldTypeID.Attribute("TabIndex").Value),
                 Html = _FieldTypeID.Attribute("PromptText").Value,
                 Top = _Height * double.Parse(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value),
                 Left = _Width * double.Parse(_FieldTypeID.Attribute("ControlLeftPositionPercentage").Value),
@@ -255,7 +258,7 @@ namespace Epi.Web.MVC.Utility
             {
                 Title = "Name",
                 Prompt = _FieldTypeID.Attribute("PromptText").Value,
-                DisplayOrder = 20,
+                DisplayOrder = int.Parse(_FieldTypeID.Attribute("TabIndex").Value),
                 Required = _FieldTypeID.Attribute("IsRequired").Value == "True" ? true : false,
                 //RequiredMessage = _FieldTypeID.Attribute("PromptText").Value + " is required",
                 RequiredMessage = "This field is required",
@@ -287,7 +290,7 @@ namespace Epi.Web.MVC.Utility
             {
                 Title = "Name",
                 Prompt = _FieldTypeID.Attribute("PromptText").Value,
-                DisplayOrder = 20,
+                DisplayOrder = int.Parse(_FieldTypeID.Attribute("TabIndex").Value),
                 Required = _FieldTypeID.Attribute("IsRequired").Value == "True" ? true : false,
                 //RequiredMessage = _FieldTypeID.Attribute("PromptText").Value + " is required",
                 RequiredMessage = "This field is required",
@@ -310,6 +313,68 @@ namespace Epi.Web.MVC.Utility
 
             };
             return TextBox;
+
+        }
+        private static CheckBox GetCheckBox(XElement _FieldTypeID, double _Width, double _Height, string SurveyAnswer, string _ControlValue)
+        {
+
+
+            var CheckBox = new CheckBox
+            {
+                Title = "Name",
+                Prompt = _FieldTypeID.Attribute("PromptText").Value,
+                DisplayOrder = int.Parse(_FieldTypeID.Attribute("TabIndex").Value),
+                RequiredMessage = "This field is required",
+                Key = _FieldTypeID.Attribute("UniqueId").Value,
+                PromptTop = _Height * double.Parse(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value)+2,
+                PromptLeft = _Width * double.Parse(_FieldTypeID.Attribute("ControlLeftPositionPercentage").Value)+115,
+                Top = _Height * double.Parse(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value),
+                Left = _Width * double.Parse(_FieldTypeID.Attribute("ControlLeftPositionPercentage").Value),
+                PromptWidth = _Width * double.Parse(_FieldTypeID.Attribute("ControlWidthPercentage").Value),
+                ControlWidth = _Width * double.Parse(_FieldTypeID.Attribute("ControlWidthPercentage").Value),
+                fontstyle = _FieldTypeID.Attribute("PromptFontStyle").Value,
+                fontSize = double.Parse(_FieldTypeID.Attribute("PromptFontSize").Value),
+                fontfamily = _FieldTypeID.Attribute("PromptFontFamily").Value,
+                ReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value) 
+                 
+              
+      
+            };
+
+ 
+            return CheckBox;
+        
+        }
+        private static DatePicker GetDatePicker(XElement _FieldTypeID, double _Width, double _Height, string SurveyAnswer, string _ControlValue)
+        {
+
+            var DatePicker = new DatePicker
+            {
+                Title = "Name",
+                Prompt = _FieldTypeID.Attribute("PromptText").Value,
+                DisplayOrder = int.Parse(_FieldTypeID.Attribute("TabIndex").Value),
+                Required = _FieldTypeID.Attribute("IsRequired").Value == "True" ? true : false,
+                //RequiredMessage = _FieldTypeID.Attribute("PromptText").Value + " is required",
+                RequiredMessage = "This field is required",
+                Key = _FieldTypeID.Attribute("UniqueId").Value,
+                PromptTop = _Height * double.Parse(_FieldTypeID.Attribute("PromptTopPositionPercentage").Value),
+                PromptLeft = _Width * double.Parse(_FieldTypeID.Attribute("PromptLeftPositionPercentage").Value),
+                Top = _Height * double.Parse(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value),
+                Left = _Width * double.Parse(_FieldTypeID.Attribute("ControlLeftPositionPercentage").Value),
+                PromptWidth = _Width * double.Parse(_FieldTypeID.Attribute("ControlWidthPercentage").Value),
+                ControlWidth = _Width * double.Parse(_FieldTypeID.Attribute("ControlWidthPercentage").Value),
+                fontstyle = _FieldTypeID.Attribute("PromptFontStyle").Value,
+                fontSize = double.Parse(_FieldTypeID.Attribute("PromptFontSize").Value),
+                fontfamily = _FieldTypeID.Attribute("PromptFontFamily").Value,
+                IsRequired = bool.Parse(_FieldTypeID.Attribute("IsRequired").Value),
+                IsReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value),
+                Lower = _FieldTypeID.Attribute("Lower").Value,
+                Upper = _FieldTypeID.Attribute("Upper").Value,
+                Value = _ControlValue,
+                Pattern = _FieldTypeID.Attribute("Pattern").Value
+
+            };
+            return DatePicker;
 
         }
 
