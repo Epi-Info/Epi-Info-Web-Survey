@@ -327,11 +327,12 @@ namespace Epi.Web.MVC.Utility
                 RequiredMessage = "This field is required",
                 Key = _FieldTypeID.Attribute("UniqueId").Value,
                 PromptTop = _Height * double.Parse(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value)+2,
-                PromptLeft = _Width * double.Parse(_FieldTypeID.Attribute("ControlLeftPositionPercentage").Value)+115,
+                PromptLeft = _Width * double.Parse(_FieldTypeID.Attribute("ControlLeftPositionPercentage").Value)+20,
                 Top = _Height * double.Parse(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value),
                 Left = _Width * double.Parse(_FieldTypeID.Attribute("ControlLeftPositionPercentage").Value),
-                PromptWidth = _Width * double.Parse(_FieldTypeID.Attribute("ControlWidthPercentage").Value),
-                ControlWidth = _Width * double.Parse(_FieldTypeID.Attribute("ControlWidthPercentage").Value),
+                 PromptWidth = _Width * double.Parse(_FieldTypeID.Attribute("ControlWidthPercentage").Value),
+                 //ControlWidth = _Width * double.Parse(_FieldTypeID.Attribute("ControlWidthPercentage").Value),
+               ControlWidth = 10,
                 fontstyle = _FieldTypeID.Attribute("PromptFontStyle").Value,
                 fontSize = double.Parse(_FieldTypeID.Attribute("PromptFontSize").Value),
                 fontfamily = _FieldTypeID.Attribute("PromptFontFamily").Value,
@@ -370,7 +371,7 @@ namespace Epi.Web.MVC.Utility
                 IsReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value),
                 Lower = _FieldTypeID.Attribute("Lower").Value,
                 Upper = _FieldTypeID.Attribute("Upper").Value,
-                Value = _ControlValue,
+                Value = _ControlValue, 
                 Pattern = _FieldTypeID.Attribute("Pattern").Value
 
             };
