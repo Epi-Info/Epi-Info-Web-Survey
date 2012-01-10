@@ -19,7 +19,6 @@ namespace MvcDynamicForms.Fields
             string ErrorStyle = string.Empty;
             // prompt label
             var prompt = new TagBuilder("label");
-
             prompt.SetInnerText(Prompt);
             prompt.Attributes.Add("for", inputName);
             prompt.Attributes.Add("class", "EpiLabel");
@@ -32,8 +31,8 @@ namespace MvcDynamicForms.Fields
             // error label
             if (!IsValid)
             {
-                //Add new Error to the error Obj
                 ErrorStyle = ";border-color: red";
+                
             }
 
             // input element
@@ -41,19 +40,15 @@ namespace MvcDynamicForms.Fields
             txt.Attributes.Add("name", inputName);
             txt.Attributes.Add("id", inputName);
             txt.Attributes.Add("type", "text");
-            // txt.Attributes.Add("value", Value);
             txt.Attributes.Add("value", Value);
 
-            txt.Attributes.Add("class", GetControlClass());
-
-
-            if (_IsRequired == true)
-            {
-                txt.Attributes.Add("class", "validate[required] text-input");
-                txt.Attributes.Add("data-prompt-position", "topRight:15");
-            }
             
-            txt.Attributes.Add("style", "position:absolute;left:" + _left.ToString() + "px;top:" + _top.ToString() + "px" + ";width:" + _ControlWidth.ToString() + "px" + ErrorStyle);
+            if (_MaxLength.ToString() != "0" && !string.IsNullOrEmpty(_MaxLength.ToString()))
+            {
+                txt.Attributes.Add("MaxLength", _MaxLength.ToString());
+            }
+            txt.Attributes.Add("class", GetControlClass(Value));
+            txt.Attributes.Add("style", "position:absolute;left:" + _left.ToString() + "px;top:" + _top.ToString() + "px" + ";width:" + _ControlWidth.ToString() + "px" + ErrorStyle);            
 
             txt.MergeAttributes(_inputHtmlAttributes);
             html.Append(txt.ToString(TagRenderMode.SelfClosing));
@@ -63,14 +58,6 @@ namespace MvcDynamicForms.Fields
             scriptDatePicker.InnerHtml = "$(function() { $('#" + inputName + "').datepicker({changeMonth: true,changeYear: true});});";
             html.Append(scriptDatePicker.ToString(TagRenderMode.Normal));
 
-            // If readonly then add the following jquery script to make the field disabled 
-            if (ReadOnly)
-            {
-                var scriptReadOnlyText = new TagBuilder("script");
-                scriptReadOnlyText.InnerHtml = "$(function(){$('#" + inputName + "').attr('disabled','disabled')});";
-                html.Append(scriptReadOnlyText.ToString(TagRenderMode.Normal));
-            }
-
 
             var wrapper = new TagBuilder(_fieldWrapper);
             wrapper.Attributes["class"] = _fieldWrapperClass;
@@ -78,88 +65,71 @@ namespace MvcDynamicForms.Fields
             return wrapper.ToString();
         }
 
-        public string GetControlClass()
-        {
 
+        public string GetControlClass(string Value)
+        {
+             
+ 
             StringBuilder ControlClass = new StringBuilder();
 
             ControlClass.Append("validate[");
 
-            if ((!string.IsNullOrEmpty(Lower)) && (!string.IsNullOrEmpty(Upper)))
+            
+            if ((!string.IsNullOrEmpty(GetRightDateFormat(Lower).ToString()) && (!string.IsNullOrEmpty(GetRightDateFormat(Upper).ToString()))))
             {
 
-                ControlClass.Append("custom[date],future[" + Lower + "],custom[date],past[" + Upper + "],");
+             //   ControlClass.Append("customDate[date],future[" + GetRightDateFormat(Lower).ToString() + "],past[" + GetRightDateFormat(Upper).ToString() + "],");
+                //dateRange
+                ControlClass.Append("customDate[date],datePickerRange, " + GetRightDateFormat(Lower).ToString() + "," + GetRightDateFormat(Upper).ToString() + ",");
             }
-            if (_IsRequired == true)
+          if (_IsRequired == true)
             {
 
-                ControlClass.Append("required");
+            ControlClass.Append("required"); // working fine
 
-            }
-            ControlClass.Append("]");
+             }
+            ControlClass.Append("] text-input datepicker");
 
             return ControlClass.ToString();
 
         }
 
-        //public override string RenderHtml()
-        //{
-        //    var html = new StringBuilder();
-        //    var inputName = _form.FieldPrefix + _key;
+        public string GetRightDateFormat(string Date)
+        {
+            StringBuilder NewDateFormat = new StringBuilder();
 
-        //    // prompt label
-        //    var prompt = new TagBuilder("label");
-        //    prompt.SetInnerText(Prompt);
-        //    prompt.Attributes.Add("for", inputName);
-        //    //  prompt.Attributes.Add("class", _promptClass);
-        //    prompt.Attributes.Add("class", "EpiLabel");
+            string MM = "";
+            string DD = "";
+            string YYYY = "";
+            char splitChar = '/';
+            if (!string.IsNullOrEmpty(Date))
+            {
+                if (Date.Contains('-'))
+                {
+                    splitChar = '-';
+                }
+                else
+                {
 
-        //    StringBuilder StyleValues = new StringBuilder();
+                    splitChar = '/';
+                }
+                string[] dateList = Date.Split((char)splitChar);
+                MM = dateList[0];
+                DD = dateList[1];
+                YYYY = dateList[2];
+                NewDateFormat.Append(YYYY);
+                NewDateFormat.Append('/');
+                NewDateFormat.Append(MM);
+                NewDateFormat.Append('/');
+                NewDateFormat.Append(DD);
+            }
+            else
+            {
+                NewDateFormat.Append("");
 
-        //    StyleValues.Append(GetContolStyle(_fontstyle.ToString(), _Prompttop.ToString(), _Promptleft.ToString(), _PromptWidth.ToString(), Height.ToString()));
-        //    prompt.Attributes.Add("style", StyleValues.ToString());
-        //    html.Append(prompt.ToString());
-
-        //    // error label
-        //    if (!IsValid)
-        //    {
-        //        var error = new TagBuilder("label");
-        //        error.Attributes.Add("for", inputName);
-        //        error.Attributes.Add("class", _errorClass);
-        //        StringBuilder errorStyleValues = new StringBuilder();
-        //        errorStyleValues.Append(GetContolStyle(_fontstyle.ToString(), (_Prompttop).ToString(), (_Promptleft).ToString(), _PromptWidth.ToString(), Height.ToString()));
-        //        error.Attributes.Add("style", errorStyleValues.ToString());
-        //        error.SetInnerText(Error);
-        //        html.Append(error.ToString());
-        //    }
-
-        //    // input element
-        //    var txt = new TagBuilder("input");
-        //    txt.Attributes.Add("name", inputName);
-        //    txt.Attributes.Add("id", inputName);
-        //    txt.Attributes.Add("type", "text");
-        //    txt.Attributes.Add("value", Value);
-
-        //    //txt.Attributes.Add("class", "validate[required] text-input");
-        //    txt.Attributes.Add("data-prompt-position", "topRight:15");
-
-
-        //    txt.Attributes.Add("style", "position:absolute;left:" + _left.ToString() + "px;top:" + _top.ToString() + "px" + ";width:" + _ControlWidth.ToString() + "px");
-
-        //    txt.MergeAttributes(_inputHtmlAttributes);
-        //    html.Append(txt.ToString(TagRenderMode.SelfClosing));
-
-
-        //    // adding scripts for date picker
-        //    var scriptDatePicker = new TagBuilder("script");
-        //    scriptDatePicker.InnerHtml = "$(function() { $('#" + inputName + "').datepicker({changeMonth: true,changeYear: true});});";
-        //    html.Append(scriptDatePicker.ToString(TagRenderMode.Normal));
-
-        //    var wrapper = new TagBuilder(_fieldWrapper);
-        //    wrapper.Attributes["class"] = _fieldWrapperClass;
-        //    wrapper.InnerHtml = html.ToString();
-        //    return wrapper.ToString();
-        //}
+            }
+            return NewDateFormat.ToString();
+        } 
 
     }
 }
