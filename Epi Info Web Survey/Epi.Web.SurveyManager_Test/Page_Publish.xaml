@@ -31,7 +31,7 @@
         <Label Content="Department Name" Height="23" HorizontalAlignment="Left" Margin="0,50,0,0" Name="label2" VerticalAlignment="Top" Width="112" Grid.Column="4" Grid.Row="1" />
         <Label Content="Organization Name" Height="24" HorizontalAlignment="Left" Margin="0,50,0,0" Name="label5" VerticalAlignment="Top" Width="104" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" />
         <Label Content="Survey Number" Height="24" HorizontalAlignment="Left" Margin="0,7,0,0" Name="label6" VerticalAlignment="Top" Width="85" Grid.Column="4" Grid.Row="1" />
-        <Label Content="Template XML" Height="23" HorizontalAlignment="Left" Margin="14,152,0,0" Name="label8" VerticalAlignment="Top" Width="84" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" />
+        <Label Content="Template XML" Height="23" HorizontalAlignment="Left" Margin="15,139,0,0" Name="label8" VerticalAlignment="Top" Width="84" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" />
         <Label Content="Label" Height="28" HorizontalAlignment="Left" Margin="8,-90,0,0" Name="label13" VerticalAlignment="Top" Grid.Column="2" />
         <Label Content="Survey Name" Height="28" HorizontalAlignment="Left" Margin="19,3,0,0" Name="label15" VerticalAlignment="Top" Grid.ColumnSpan="3" Grid.Row="1" />
         <CheckBox Content="Is Single Response?" Grid.Column="1" Height="16" HorizontalAlignment="Left" Margin="15,116,0,0" Name="IsSingleResponseCheckBox" VerticalAlignment="Top" Uid="IsSingleResponse" Grid.ColumnSpan="2" Grid.Row="1" />
@@ -41,5 +41,6 @@
         <Button Content="View Download Client" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="2" Height="42" HorizontalAlignment="Left" Margin="17,220,0,0" Name="button1" VerticalAlignment="Top" Width="123" Click="button1_Click_1" />
         <Label Content="Closing Date:" Grid.Column="4" Grid.Row="1" Height="28" HorizontalAlignment="Left" Margin="0,105,0,0" Name="label4" VerticalAlignment="Top" />
         <DatePicker Grid.Column="4" Grid.Row="1" Height="23" HorizontalAlignment="Left" Margin="80,110,0,0" Name="datePicker1" VerticalAlignment="Top" Width="182" />
+        <Button Content="Find File..." Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="1" Height="23" HorizontalAlignment="Left" Margin="37,140,0,0" Name="FindFileButton" VerticalAlignment="Top" Width="75" Click="FindFileButton_Click" />
     </Grid>
 </Page>

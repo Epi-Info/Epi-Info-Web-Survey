@@ -81,5 +81,24 @@ namespace Epi.Web.SurveyManager.Client
             Page_Download page_Download = new Page_Download();
             this.NavigationService.Navigate(page_Download);
         }
+
+        private void FindFileButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Configure open file dialog box
+            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+            dlg.FileName = "Xml Document"; // Default file name
+            dlg.DefaultExt = ".xml"; // Default file extension
+            dlg.Filter = "xml documents (.xml)|*.xml"; // Filter files by extension
+
+            // Show open file dialog box
+            Nullable<bool> result = dlg.ShowDialog();
+
+            // Process open file dialog box results
+            if (result == true)
+            {
+                // Open document
+                string filename = dlg.FileName;
+            }
+        }
     }
 }
