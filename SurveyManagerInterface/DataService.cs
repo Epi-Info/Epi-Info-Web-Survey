@@ -63,7 +63,7 @@ namespace Epi.Web.WCF.SurveyService
 
             //if (pRequest.LoadOptions.Contains("SurveyInfo"))
             //{
-                result.SurveyInfo.Add(Mapper.ToDataTransferObject(implementation.GetSurveyInfoById(pRequest.Criteria.SurveyId)));
+                result.SurveyInfoList.Add(Mapper.ToDataTransferObject(implementation.GetSurveyInfoById(pRequest.Criteria.SurveyId)));
             //}
 
             return result;
@@ -112,12 +112,12 @@ namespace Epi.Web.WCF.SurveyService
                 if (request.Action == "Create")
                 {
                     Implementation.InsertSurveyInfo(SurveyInfo);
-                    response.SurveyInfo.Add(Mapper.ToDataTransferObject(SurveyInfo));
+                    response.SurveyInfoList.Add(Mapper.ToDataTransferObject(SurveyInfo));
                 }
                 else if (request.Action == "Update")
                 {
                     Implementation.UpdateSurveyInfo(SurveyInfo);
-                    response.SurveyInfo.Add(Mapper.ToDataTransferObject(SurveyInfo));
+                    response.SurveyInfoList.Add(Mapper.ToDataTransferObject(SurveyInfo));
                 }
                 else if (request.Action == "Delete")
                 {
