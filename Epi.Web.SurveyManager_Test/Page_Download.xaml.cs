@@ -41,11 +41,12 @@ namespace Epi.Web.SurveyManager.Client
                 Request.Criteria.SurveyId = this.SurveyCriteria_SurveyId.Text;
             }
 
-
+            new TextRange(SurveyInfoResponseTextBox.Document.ContentStart, SurveyInfoResponseTextBox.Document.ContentEnd).Text = "";
             try
             {
                 Epi.Web.Common.Message.SurveyInfoResponse Result = client.GetSurveyInfo(Request);
-                
+
+                SurveyInfoResponseTextBox.AppendText(string.Format("{0} - records.\n", Result.SurveyInfoList.Count));
                 foreach(Epi.Web.Common.DTO.SurveyInfoDTO SurveyInfo in Result.SurveyInfoList)
                 {
                     SurveyInfoResponseTextBox.AppendText(string.Format("{0} - {1} - {2}\n", SurveyInfo.SurveyId, SurveyInfo.SurveyName, SurveyInfo.ClosingDate));
@@ -64,16 +65,18 @@ namespace Epi.Web.SurveyManager.Client
 
             Epi.Web.Common.Message.SurveyAnswerRequest Request = new Epi.Web.Common.Message.SurveyAnswerRequest();
 
-            if (!string.IsNullOrEmpty(this.SurveyCriteria_SurveyId.Text))
+            if (!string.IsNullOrEmpty(this.SurveyAnswerCriteria_SurveyIdTextBox.Text))
             {
-                Request.Criteria.SurveyId = this.SurveyCriteria_SurveyId.Text;
+                Request.Criteria.SurveyId = this.SurveyAnswerCriteria_SurveyIdTextBox.Text;
             }
 
-
+            new TextRange(SurveyAnswerResponseTextBox.Document.ContentStart, SurveyAnswerResponseTextBox.Document.ContentEnd).Text = "";
+            
             try
             {
                 Epi.Web.Common.Message.SurveyAnswerResponse Result = client.GetSurveyAnswer(Request);
 
+                SurveyAnswerResponseTextBox.AppendText(string.Format("{0} - records .\n", Result.SurveyResponseList.Count));
                 foreach (Epi.Web.Common.DTO.SurveyAnswerDTO SurveyAnswer in Result.SurveyResponseList)
                 {
                     SurveyAnswerResponseTextBox.AppendText(string.Format("{0} - {1} - {2}\n",SurveyAnswer.SurveyId, SurveyAnswer.Status, SurveyAnswer.DateLastUpdated));

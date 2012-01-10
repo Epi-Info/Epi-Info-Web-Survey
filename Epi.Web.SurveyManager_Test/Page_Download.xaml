@@ -25,7 +25,7 @@
             <Grid>
                 <Label Content="SurveyAnswerIdList" Height="28" HorizontalAlignment="Left" Margin="0,38,0,0" Name="label2" VerticalAlignment="Top" />
                 <Label Content="SurveyId" Height="28" HorizontalAlignment="Left" Margin="0,6,0,0" Name="label3" VerticalAlignment="Top" />
-                <TextBox Height="26" HorizontalAlignment="Left" Margin="59,6,0,0" Name="textBox2" VerticalAlignment="Top" Width="214" />
+                <TextBox Height="26" HorizontalAlignment="Left" Margin="59,6,0,0" Name="SurveyAnswerCriteria_SurveyIdTextBox" VerticalAlignment="Top" Width="214" />
                 <Button Content="Download Surveys" Height="30" HorizontalAlignment="Left" Margin="373,156,0,0" Name="button2" VerticalAlignment="Top" Width="107" Click="button2_Click" />
                 <CheckBox Content="Only Completed" Height="16" HorizontalAlignment="Left" Margin="292,6,0,0" Name="checkBox1" VerticalAlignment="Top" Width="102" />
                 <ListBox Height="94" HorizontalAlignment="Left" Margin="7,92,0,0" Name="listBox1" VerticalAlignment="Top" Width="357" />

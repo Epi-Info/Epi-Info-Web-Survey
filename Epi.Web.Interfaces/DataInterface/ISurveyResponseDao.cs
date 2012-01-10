@@ -31,6 +31,15 @@ namespace Epi.Web.Interfaces.DataInterfaces
         List<SurveyResponseBO> GetSurveyResponseBySurveyId(List<string> SurveyIdList);
 
 
+        
+        /// <summary>
+        /// Get SurveyResponses based on criteria.
+        /// </summary>
+        /// <param name="SurveyResponseId">Unique SurveyResponse identifier.</param>
+        /// <returns>SurveyResponse.</returns>
+        List<SurveyResponseBO> GetSurveyResponse(List<string> SurveyAnswerIdList, string pSurveyId, DateTime pDateCompleted, int pStatusId = -1);
+
+
         /// <summary>
         /// Gets a sorted list of all SurveyResponses.
         /// </summary>
