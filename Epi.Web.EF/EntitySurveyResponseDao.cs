@@ -94,7 +94,11 @@ namespace Epi.Web.EF
                     Guid Id = new Guid(surveyResponseId);
                     using (var Context = DataObjectFactory.CreateContext())
                     {
-                        responseList.Add(Context.SurveyResponses.FirstOrDefault(x => x.ResponseId == Id));
+                        SurveyResponse surveyResponse = Context.SurveyResponses.First(x => x.ResponseId == Id);
+                        if (surveyResponse != null)
+                        {
+                            responseList.Add(surveyResponse);
+                        }
                     }
                 }
             }
