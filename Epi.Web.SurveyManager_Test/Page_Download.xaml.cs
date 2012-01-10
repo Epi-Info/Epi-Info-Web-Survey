@@ -41,7 +41,7 @@ namespace Epi.Web.SurveyManager.Client
                 Request.Criteria.SurveyId = this.SurveyCriteria_SurveyId.Text;
             }
 
-            new TextRange(SurveyInfoResponseTextBox.Document.ContentStart, SurveyInfoResponseTextBox.Document.ContentEnd).Text = "";
+            SurveyInfoResponseTextBox.Document.Blocks.Clear();
             try
             {
                 Epi.Web.Common.Message.SurveyInfoResponse Result = client.GetSurveyInfo(Request);
@@ -65,12 +65,29 @@ namespace Epi.Web.SurveyManager.Client
 
             Epi.Web.Common.Message.SurveyAnswerRequest Request = new Epi.Web.Common.Message.SurveyAnswerRequest();
 
+            foreach (string id in SurveyAnswerIdListBox.Items)
+            {
+                Request.Criteria.SurveyAnswerIdList.Add(id);
+            }
+
+
             if (!string.IsNullOrEmpty(this.SurveyAnswerCriteria_SurveyIdTextBox.Text))
             {
                 Request.Criteria.SurveyId = this.SurveyAnswerCriteria_SurveyIdTextBox.Text;
             }
 
-            new TextRange(SurveyAnswerResponseTextBox.Document.ContentStart, SurveyAnswerResponseTextBox.Document.ContentEnd).Text = "";
+
+            if (this.datePicker1.SelectedDate != null)
+            {
+                Request.Criteria.DateCompleted = (DateTime)this.datePicker1.SelectedDate;
+            }
+
+            if ((bool)this.OnlyCompletedCheckBox.IsChecked)
+            {
+                Request.Criteria.StatusId = 1;
+            }
+
+            SurveyAnswerResponseTextBox.Document.Blocks.Clear();
             
             try
             {
@@ -79,13 +96,26 @@ namespace Epi.Web.SurveyManager.Client
                 SurveyAnswerResponseTextBox.AppendText(string.Format("{0} - records .\n", Result.SurveyResponseList.Count));
                 foreach (Epi.Web.Common.DTO.SurveyAnswerDTO SurveyAnswer in Result.SurveyResponseList)
                 {
-                    SurveyAnswerResponseTextBox.AppendText(string.Format("{0} - {1} - {2}\n",SurveyAnswer.SurveyId, SurveyAnswer.Status, SurveyAnswer.DateLastUpdated));
+                    SurveyAnswerResponseTextBox.AppendText(string.Format("{0} - {1} - {2}\n",SurveyAnswer.ResponseId, SurveyAnswer.Status, SurveyAnswer.DateLastUpdated));
                 }
             }
             catch (Exception ex)
             {
                 SurveyAnswerResponseTextBox.AppendText("error:\n");
                 SurveyAnswerResponseTextBox.AppendText(ex.ToString());
+            }
+        }
+
+        private void ClearListButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.SurveyAnswerIdListBox.Items.Clear();
+        }
+
+        private void AddSurveyAnswerIdButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(AddAnswerIdTextBox.Text))
+            {
+                this.SurveyAnswerIdListBox.Items.Add(AddAnswerIdTextBox.Text);
             }
         }
     }
