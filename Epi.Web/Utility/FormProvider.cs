@@ -86,8 +86,8 @@ namespace Epi.Web.MVC.Utility
                             form.AddFields(GetCheckBox(_FieldTypeID, _Width, _Height, SurveyAnswer, _CheckBoxValue));
                             break;
                         //case "19"://DropDown
-                        //    string DropDownValues ="";
-                        //    DropDownValues = GetDropDownValues(xdoc, _FieldTypeID.Attribute("Name").Value);
+                        //    string DropDownValues = "";
+                        //    DropDownValues = GetDropDownValues(xdoc, _FieldTypeID.Attribute("Name").Value, _FieldTypeID.Attribute("SourceTableName").Value);
                         //    var _DropDownSelectedValue = GetControlValue(SurveyAnswer, _FieldTypeID.Attribute("UniqueId").Value);
                         //    form.AddFields(GetDropDown(_FieldTypeID, _Width, _Height, SurveyAnswer, _DropDownSelectedValue, DropDownValues));
                         //    break;
@@ -397,14 +397,14 @@ namespace Epi.Web.MVC.Utility
                     fontfamily = _FieldTypeID.Attribute("PromptFontFamily").Value,
                     IsRequired = bool.Parse(_FieldTypeID.Attribute("IsRequired").Value),
                     IsReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value),
-                    ShowEmptyOption = true,
+                    ShowEmptyOption = false,
                     EmptyOption = "- Select One - "
                 };
             DropDown.AddChoices(DropDownValues, ",");
 
             return DropDown;
         }
-        public static   string  GetDropDownValues(XDocument Xml, string ControlName)
+        public static   string  GetDropDownValues(XDocument Xml, string ControlName,string TableName)
         {
             StringBuilder DropDownValues = new StringBuilder();
            
@@ -417,13 +417,24 @@ namespace Epi.Web.MVC.Utility
 
                 var _ControlValues = from _ControlValue in
                                          xdoc.Descendants("SourceTable")
-                                      where _ControlValue.Attribute("TableName").Value == ControlName.ToString()
+                                     where _ControlValue.Attribute("TableName").Value == TableName.ToString()
                                      select _ControlValue;
 
                 foreach (var _ControlValue in _ControlValues)
                 {
-                    DropDownValues.Append(_ControlValue.Value);
-                    DropDownValues.Append(",");
+
+
+                    var _SourceTableValues = from _SourceTableValue in  _ControlValues.Descendants("Item")
+                                             //where _SourceTableValue.LastAttribute.Value == ControlName.ToString()
+                                              
+                                             select _SourceTableValue;
+
+                    foreach (var _SourceTableValue in _SourceTableValues)
+                    {
+
+                        DropDownValues.Append(_SourceTableValue.LastAttribute.Value );
+                        DropDownValues.Append(",");
+                    }
                 }
             }
 
