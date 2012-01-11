@@ -10,16 +10,16 @@
     <Grid Height="622">
         <Grid.RowDefinitions>
             <RowDefinition Height="6*" />
-            <RowDefinition Height="309*" />
-            <RowDefinition Height="341*" />
-            <RowDefinition Height="14*" />
+            <RowDefinition Height="284*" />
+            <RowDefinition Height="319*" />
+            <RowDefinition Height="13*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="19*" />
-            <ColumnDefinition Width="66*" />
-            <ColumnDefinition Width="79*" />
-            <ColumnDefinition Width="124*" />
-            <ColumnDefinition Width="321*" />
+            <ColumnDefinition Width="20*" />
+            <ColumnDefinition Width="68*" />
+            <ColumnDefinition Width="82*" />
+            <ColumnDefinition Width="114*" />
+            <ColumnDefinition Width="347*" />
         </Grid.ColumnDefinitions>
         <Button Content="Submit Request" Height="41" HorizontalAlignment="Left" Margin="141,221,0,0" Name="SubmitButton" VerticalAlignment="Top" Width="120" Grid.Column="4" Uid="SubmitRequestButton" Click="button1_Click" Grid.Row="2" />
         <RichTextBox Height="92" HorizontalAlignment="Left" Margin="15,169,0,0" Name="TemplateXMLTextBox" VerticalAlignment="Top" Width="525" Grid.Column="1" Uid="TemplatXML" Grid.ColumnSpan="4" Grid.Row="1" />
@@ -42,5 +42,8 @@
         <Label Content="Closing Date:" Grid.Column="4" Grid.Row="1" Height="28" HorizontalAlignment="Left" Margin="0,105,0,0" Name="label4" VerticalAlignment="Top" />
         <DatePicker Grid.Column="4" Grid.Row="1" Height="23" HorizontalAlignment="Left" Margin="80,110,0,0" Name="datePicker1" VerticalAlignment="Top" Width="182" />
         <Button Content="Find File..." Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="1" Height="23" HorizontalAlignment="Left" Margin="37,140,0,0" Name="FindFileButton" VerticalAlignment="Top" Width="75" Click="FindFileButton_Click" />
+        <Label Content="Label" Grid.Column="3" Grid.Row="1" Height="28" HorizontalAlignment="Left" Margin="78,145,0,0" Name="TemplateFileLabel" VerticalAlignment="Top" />
+        <Button Content="Find File..." Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="2" Height="23" HorizontalAlignment="Left" Margin="47,274,0,0" Name="FindIntroTextButton" VerticalAlignment="Top" Width="75" Click="FindIntroTextButton_Click" />
+        <Label Content="IntroFileLabel" Grid.Column="3" Grid.Row="1" Grid.RowSpan="2" Height="28" HorizontalAlignment="Left" Margin="58,275,0,0" Name="IntroFileLabel" VerticalAlignment="Top" />
     </Grid>
 </Page>

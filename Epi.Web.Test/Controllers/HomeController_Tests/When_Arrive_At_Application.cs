@@ -16,7 +16,7 @@ namespace Epi.Web.MVC.Test.Controllers.HomeController_Tests
             
             //Arrange
             surveyInfoRequest=new Epi.Web.Common.Message.SurveyInfoRequest();
-            surveyInfoRequest.Criteria.SurveyId = "1";
+            surveyInfoRequest.Criteria.SurveyIdList = "1";
             iSurveyFacade = new TestSurveyFacade(surveyInfoRequest);
             var controller = new Epi.Web.MVC.Controllers.HomeController(iSurveyFacade);
             ViewResult c = controller.Index("1") as ViewResult;

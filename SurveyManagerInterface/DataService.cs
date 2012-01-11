@@ -45,6 +45,12 @@ namespace Epi.Web.WCF.SurveyService
 
             var criteria = pRequest.Criteria as SurveyInfoCriteria;
             string sort = criteria.SortExpression;
+            List<string> SurveyIdList = new List<string>();
+            foreach (string id in criteria.SurveyIdList)
+            {
+                SurveyIdList.Add(id.ToUpper());
+            }
+
 
             //if (request.LoadOptions.Contains("SurveyInfos"))
             //{
@@ -63,7 +69,7 @@ namespace Epi.Web.WCF.SurveyService
 
             //if (pRequest.LoadOptions.Contains("SurveyInfo"))
             //{
-                result.SurveyInfoList.Add(Mapper.ToDataTransferObject(implementation.GetSurveyInfoById(pRequest.Criteria.SurveyId)));
+            result.SurveyInfoList = Mapper.ToDataTransferObject(implementation.GetSurveyInfoById(SurveyIdList));
             //}
 
             return result;

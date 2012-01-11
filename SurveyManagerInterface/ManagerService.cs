@@ -63,6 +63,11 @@ namespace Epi.Web.WCF.SurveyService
 
             var criteria = pRequest.Criteria as SurveyInfoCriteria;
             string sort = criteria.SortExpression;
+            List<string> SurveyIdList = new List<string>();
+            foreach (string id in criteria.SurveyIdList)
+            {
+                SurveyIdList.Add(id.ToUpper());
+            }
 
             //if (request.LoadOptions.Contains("SurveyInfos"))
             //{
@@ -81,11 +86,7 @@ namespace Epi.Web.WCF.SurveyService
 
             //if (pRequest.LoadOptions.Contains("SurveyInfo"))
             //{
-            List<string> SurveyIdList = new List<string>();
-            if (!string.IsNullOrEmpty(pRequest.Criteria.SurveyId))
-            {
-                SurveyIdList.Add(pRequest.Criteria.SurveyId);
-            }
+            
             result.SurveyInfoList = Mapper.ToDataTransferObject(implementation.GetSurveyInfoById(SurveyIdList));
             //}
 
@@ -114,8 +115,15 @@ namespace Epi.Web.WCF.SurveyService
                 return result;
             }
 
-            var criteria = pRequest.Criteria as SurveyAnswerCriteria;
-            string sort = criteria.SortExpression;
+            SurveyAnswerCriteria criteria = pRequest.Criteria;
+
+            List<string> IdList = new List<string>();
+
+            foreach (string id in criteria.SurveyAnswerIdList)
+            {
+                IdList.Add(id.ToUpper());
+            }
+            //string sort = criteria.SortExpression;
 
             //if (request.LoadOptions.Contains("SurveyInfos"))
             //{
@@ -137,10 +145,10 @@ namespace Epi.Web.WCF.SurveyService
                 (
                     Implementation.GetSurveyResponse
                     (
-                        pRequest.Criteria.SurveyAnswerIdList,
-                        pRequest.Criteria.SurveyId,
-                        pRequest.Criteria.DateCompleted,
-                        pRequest.Criteria.StatusId
+                        IdList,
+                        criteria.SurveyId,
+                        criteria.DateCompleted,
+                        criteria.StatusId
                     )
                 );
             /*
