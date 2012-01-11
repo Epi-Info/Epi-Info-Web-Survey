@@ -68,7 +68,7 @@ namespace Epi.Web.MVC.Utility
                                                   ISurveyInfoRepository iSurveyInfoRepository,                 
                                                   string SurveyId)
         {
-            surveyInfoRequest.Criteria.SurveyId = SurveyId;
+            surveyInfoRequest.Criteria.SurveyIdList.Add(SurveyId);
             return iSurveyInfoRepository.GetSurveyInfo(surveyInfoRequest).SurveyInfoList[0];
         }
     }
