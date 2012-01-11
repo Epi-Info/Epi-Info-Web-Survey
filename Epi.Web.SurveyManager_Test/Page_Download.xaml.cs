@@ -30,7 +30,7 @@ namespace Epi.Web.SurveyManager.Client
             this.NavigationService.Navigate(page_Publish);
         }
 
-        private void button1_Click(object sender, RoutedEventArgs e)
+        private void DownloadSurveyInfoButton_Click(object sender, RoutedEventArgs e)
         {
             SurveyManagerService.ManagerServiceClient client = new SurveyManagerService.ManagerServiceClient();
 
@@ -59,7 +59,7 @@ namespace Epi.Web.SurveyManager.Client
             }
         }
 
-        private void button2_Click(object sender, RoutedEventArgs e)
+        private void DownloadSurveyAnswersButton_Click(object sender, RoutedEventArgs e)
         {
             SurveyManagerService.ManagerServiceClient client = new SurveyManagerService.ManagerServiceClient();
 
