@@ -36,7 +36,7 @@ namespace Epi.Web.SurveyManager.Client
 
             Epi.Web.Common.Message.SurveyInfoRequest Request = new Epi.Web.Common.Message.SurveyInfoRequest();
             
-            if (!string.IsNullOrEmpty(this.SurveyCriteria_SurveyId.Text))
+            if (!string.IsNullOrEmpty(this.SurveyCriteria_SurveyId.Text.Trim()))
             {
                 Request.Criteria.SurveyIdList.Add(this.SurveyCriteria_SurveyId.Text);
             }
@@ -70,12 +70,10 @@ namespace Epi.Web.SurveyManager.Client
                 Request.Criteria.SurveyAnswerIdList.Add(id);
             }
 
-
-            if (!string.IsNullOrEmpty(this.SurveyAnswerCriteria_SurveyIdTextBox.Text))
+            if (!string.IsNullOrEmpty(this.SurveyAnswerCriteria_SurveyIdTextBox.Text.Trim()))
             {
                 Request.Criteria.SurveyId = this.SurveyAnswerCriteria_SurveyIdTextBox.Text;
             }
-
 
             if (this.datePicker1.SelectedDate != null)
             {
@@ -88,7 +86,6 @@ namespace Epi.Web.SurveyManager.Client
             }
 
             SurveyAnswerResponseTextBox.Document.Blocks.Clear();
-            
             try
             {
                 Epi.Web.Common.Message.SurveyAnswerResponse Result = client.GetSurveyAnswer(Request);
@@ -109,6 +106,10 @@ namespace Epi.Web.SurveyManager.Client
         private void ClearListButton_Click(object sender, RoutedEventArgs e)
         {
             this.SurveyAnswerIdListBox.Items.Clear();
+            this.datePicker1.SelectedDate = null;
+            this.SurveyAnswerCriteria_SurveyIdTextBox.Text = "";
+            this.AddAnswerIdTextBox.Text = "";
+            this.OnlyCompletedCheckBox.IsChecked = false;
         }
 
         private void AddSurveyAnswerIdButton_Click(object sender, RoutedEventArgs e)
@@ -117,6 +118,11 @@ namespace Epi.Web.SurveyManager.Client
             {
                 this.SurveyAnswerIdListBox.Items.Add(AddAnswerIdTextBox.Text);
             }
+        }
+
+        private void ClearSurveyCriteriaButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.SurveyCriteria_SurveyId.Text = "";
         }
     }
 }
