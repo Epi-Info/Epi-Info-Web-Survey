@@ -27,7 +27,7 @@ namespace Epi.Web.MVC.Controllers
              try
             {
             SurveyInfoModel surveyInfoModel = _isurveyFacade.GetSurveyInfoModel(surveyId);
-                return View(Epi.Web.MVC.Constants.Constant.SUBMIT_PAGE, surveyInfoModel);
+                return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, surveyInfoModel);
             //}
             //return null;
             }
