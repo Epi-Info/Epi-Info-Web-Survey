@@ -91,14 +91,22 @@ namespace Epi.Web.EF
             {
                 foreach (string surveyResponseId in SurveyAnswerIdList.Distinct())
                 {
-                    Guid Id = new Guid(surveyResponseId);
-                    using (var Context = DataObjectFactory.CreateContext())
+                    try
                     {
-                        SurveyResponse surveyResponse = Context.SurveyResponses.First(x => x.ResponseId == Id);
-                        if (surveyResponse != null)
+                        Guid Id = new Guid(surveyResponseId);
+
+                        using (var Context = DataObjectFactory.CreateContext())
                         {
-                            responseList.Add(surveyResponse);
+                            SurveyResponse surveyResponse = Context.SurveyResponses.First(x => x.ResponseId == Id);
+                            if (surveyResponse != null)
+                            {
+                                responseList.Add(surveyResponse);
+                            }
                         }
+                    }
+                    catch (Exception ex)
+                    {
+                        // do nothing for now
                     }
                 }
             }
@@ -129,7 +137,8 @@ namespace Epi.Web.EF
             if (pDateCompleted > DateTime.MinValue)
             {
                 List<SurveyResponse> dateList = new List<SurveyResponse>();
-                dateList.AddRange(responseList.Where(x => x.DateCompleted == pDateCompleted));
+
+                dateList.AddRange(responseList.Where(x => x.DateCompleted.Value.Month ==  pDateCompleted.Month && x.DateCompleted.Value.Year == pDateCompleted.Year && x.DateCompleted.Value.Day == pDateCompleted.Day));
                 responseList = dateList;
             }
 
