@@ -38,7 +38,7 @@ namespace Epi.Web.SurveyManager.Client
             
             if (!string.IsNullOrEmpty(this.SurveyCriteria_SurveyId.Text))
             {
-                Request.Criteria.SurveyId = this.SurveyCriteria_SurveyId.Text;
+                Request.Criteria.SurveyIdList.Add(this.SurveyCriteria_SurveyId.Text);
             }
 
             SurveyInfoResponseTextBox.Document.Blocks.Clear();
@@ -46,7 +46,7 @@ namespace Epi.Web.SurveyManager.Client
             {
                 Epi.Web.Common.Message.SurveyInfoResponse Result = client.GetSurveyInfo(Request);
 
-                SurveyInfoResponseTextBox.AppendText(string.Format("{0} - records.\n", Result.SurveyInfoList.Count));
+                SurveyInfoResponseTextBox.AppendText(string.Format("{0} - records. \n\n", Result.SurveyInfoList.Count));
                 foreach(Epi.Web.Common.DTO.SurveyInfoDTO SurveyInfo in Result.SurveyInfoList)
                 {
                     SurveyInfoResponseTextBox.AppendText(string.Format("{0} - {1} - {2}\n", SurveyInfo.SurveyId, SurveyInfo.SurveyName, SurveyInfo.ClosingDate));
@@ -93,7 +93,7 @@ namespace Epi.Web.SurveyManager.Client
             {
                 Epi.Web.Common.Message.SurveyAnswerResponse Result = client.GetSurveyAnswer(Request);
 
-                SurveyAnswerResponseTextBox.AppendText(string.Format("{0} - records .\n", Result.SurveyResponseList.Count));
+                SurveyAnswerResponseTextBox.AppendText(string.Format("{0} - records.\n\n", Result.SurveyResponseList.Count));
                 foreach (Epi.Web.Common.DTO.SurveyAnswerDTO SurveyAnswer in Result.SurveyResponseList)
                 {
                     SurveyAnswerResponseTextBox.AppendText(string.Format("{0} - {1} - {2}\n",SurveyAnswer.ResponseId, SurveyAnswer.Status, SurveyAnswer.DateLastUpdated));

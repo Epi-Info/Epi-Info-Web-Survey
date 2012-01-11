@@ -100,13 +100,43 @@ namespace Epi.Web.SurveyManager.Client
                 // Open document
                 string filename = dlg.FileName;
 
+                this.TemplateFileLabel.Content = filename;
+
                 XmlDocument xmlDoc = new XmlDocument();
 
                 xmlDoc.Load(filename);
 
                 TemplateXMLTextBox.Document.Blocks.Clear();
                 TemplateXMLTextBox.AppendText(xmlDoc.InnerXml); 
-                
+            }
+        }
+
+        private void FindIntroTextButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Configure open file dialog box
+            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+            dlg.FileName = ""; // Default file name
+            dlg.DefaultExt = ""; // Default file extension
+            dlg.Filter = "html or text documents |*.*"; // Filter files by extension
+
+            // Show open file dialog box
+            Nullable<bool> result = dlg.ShowDialog();
+
+            // Process open file dialog box results
+            if (result == true)
+            {
+                // Open document
+                string filename = dlg.FileName;
+
+                this.IntroFileLabel.Content = filename;
+                System.IO.TextReader textReader = System.IO.File.OpenText(filename);
+
+
+                IntroductionTextBox.Document.Blocks.Clear();
+                IntroductionTextBox.AppendText(textReader.ReadToEnd());
+
+                textReader.Close();
+
             }
         }
     }
