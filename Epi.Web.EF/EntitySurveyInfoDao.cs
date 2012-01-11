@@ -26,7 +26,7 @@ namespace Epi.Web.EF
             List<SurveyInfoBO> result = new List<SurveyInfoBO>();
             if (SurveyInfoId.Count > 0)
             {
-                foreach (string surveyInfoId in SurveyInfoId)
+                foreach (string surveyInfoId in SurveyInfoId.Distinct())
                 {
                     Guid Id = new Guid(surveyInfoId);
 
