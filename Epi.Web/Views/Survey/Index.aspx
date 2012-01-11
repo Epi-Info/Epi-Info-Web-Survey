@@ -59,9 +59,10 @@
 
         </div>
         <% }%>
-        <%Html.BeginForm(null , null, FormMethod.Post, new { id = "myform" }); %>
-      
-        <%=Model.RenderHtml(true) %>
+        <% using (Html.BeginForm(null, null, FormMethod.Post, new { id = "myform" }))
+           { %>
+         <%: Html.AntiForgeryToken() %>
+        <%=Model.RenderHtml(true)%>
         
       
    	</div>
@@ -80,5 +81,5 @@
 
 
 
- <%Html.EndForm(); %>
+ <%} %>
 </asp:Content>

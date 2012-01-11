@@ -32,7 +32,7 @@ namespace Epi.Web.MVC.Controllers
        /// <param name="surveyId"></param>
        /// <returns></returns>
  
-        
+        [HttpGet]
         public ActionResult Index(string surveyId,string page)
         {
 
@@ -63,31 +63,37 @@ namespace Epi.Web.MVC.Controllers
             //}
             //return null;
         }
-        [HttpPost]
+        [HttpPost] [ValidateAntiForgeryToken]
         public ActionResult Index(SurveyInfoModel surveyInfoModel,string Submit)
         {
-            
-            //get the survey form
-            MvcDynamicForms.Form form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, this.GetCurrentPage(), this.GetCurrentSurveyAnswer());
-            //Update the model
-            UpdateModel(form);
-            
-            if (form.Validate())
-            {
-                string responseId = TempData[Epi.Web.MVC.Constants.Constant.RESPONSE_ID].ToString();
-                _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId, form);
 
-                //return RedirectToAction("Index", "Final", new {id="final" });
-                TempData[Epi.Web.MVC.Constants.Constant.RESPONSE_ID] = null;
-               return RedirectToAction("Index", "Final");
-            }  
-            else
+            try
             {
+                //get the survey form
+                MvcDynamicForms.Form form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, this.GetCurrentPage(), this.GetCurrentSurveyAnswer());
+                //Update the model
+                UpdateModel(form);
 
-                return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
+                if (form.Validate())
+                {
+                    string responseId = TempData[Epi.Web.MVC.Constants.Constant.RESPONSE_ID].ToString();
+                    _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId, form);
+
+                    //return RedirectToAction("Index", "Final", new {id="final" });
+                    TempData[Epi.Web.MVC.Constants.Constant.RESPONSE_ID] = null;
+                    return RedirectToAction("Index", "Final");
+                }
+                else
+                {
+
+                    return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
+                }
+
             }
-
-            
+            catch (Exception ex)
+            {
+                return View(Epi.Web.MVC.Constants.Constant.EXCEPTION_PAGE);
+            }
         }
       
 
