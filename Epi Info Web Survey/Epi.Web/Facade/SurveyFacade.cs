@@ -90,7 +90,7 @@ namespace Epi.Web.MVC.Facade
 
         public SurveyInfoModel GetSurveyInfoModel(string surveyId)
         {
-            _surveyInfoRequest.Criteria.SurveyId = surveyId;
+            _surveyInfoRequest.Criteria.SurveyIdList.Add(surveyId);
             SurveyInfoResponse surveyInfoResponse = _iSurveyInfoRepository.GetSurveyInfo(_surveyInfoRequest);
             SurveyInfoModel s = Mapper.ToSurveyInfoModel(surveyInfoResponse.SurveyInfoList[0]);
             return s;
