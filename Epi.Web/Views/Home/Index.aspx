@@ -26,7 +26,8 @@
 
 <asp:Content ID="Content3" ContentPlaceHolderID="MainContent" runat="server">
     <% using (Html.BeginForm())
-       { %>   
+       { %>
+      <%: Html.AntiForgeryToken() %>   
     <div id="content">
         <% if (Model.ClosingDate.Date >= DateTime.Now.Date)
            {%>

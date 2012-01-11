@@ -55,13 +55,20 @@ namespace Epi.Web.MVC.Controllers
         /// </summary>
         /// <param name="surveyModel"></param>
         /// <returns></returns>
-        [HttpPost]
+        [HttpPost][ValidateAntiForgeryToken]
         public ActionResult Index(Epi.Web.MVC.Models.SurveyInfoModel surveyModel)
         {
-            //string page;
-           // return RedirectToAction(Epi.Web.Models.Constants.Constant.INDEX, Epi.Web.Models.Constants.Constant.SURVEY_CONTROLLER, new {id="page" });
-            return RedirectToAction(Epi.Web.MVC.Constants.Constant.INDEX, Epi.Web.MVC.Constants.Constant.SURVEY_CONTROLLER);
-        }
+            try
+            {
+                //string page;
+                // return RedirectToAction(Epi.Web.Models.Constants.Constant.INDEX, Epi.Web.Models.Constants.Constant.SURVEY_CONTROLLER, new {id="page" });
+                return RedirectToAction(Epi.Web.MVC.Constants.Constant.INDEX, Epi.Web.MVC.Constants.Constant.SURVEY_CONTROLLER);
+            }
+            catch (Exception ex)
+            {
+                return View(Epi.Web.MVC.Constants.Constant.EXCEPTION_PAGE);
+            }
+         }
 
 
     }
