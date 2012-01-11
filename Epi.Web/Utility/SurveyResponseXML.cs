@@ -21,11 +21,11 @@ namespace Epi.Web.MVC.Utility
            
                 if(this.ResponseDetailList.ContainsKey(field.Key))
                 {
-                    this.ResponseDetailList[field.Key] = field.Key;
+                    this.ResponseDetailList[field.Title] = field.Key;
                 }
                 else
                 {
-                    this.ResponseDetailList.Add(field.Key, field.Response);
+                    this.ResponseDetailList.Add(field.Title, field.Response);
                 }
             }
         }
@@ -34,11 +34,11 @@ namespace Epi.Web.MVC.Utility
         {
             if(this.ResponseDetailList.ContainsKey(pField.Key))
             {
-                this.ResponseDetailList[pField.Key] = pField.Response;
+                this.ResponseDetailList[pField.Title] = pField.Response;
             }
             else
             {
-                this.ResponseDetailList.Add(pField.Key, pField.GetXML());
+                this.ResponseDetailList.Add(pField.Title, pField.GetXML());
             }
         }
 
@@ -80,7 +80,7 @@ namespace Epi.Web.MVC.Utility
               foreach ( KeyValuePair<string, string> pair  in this.ResponseDetailList)
               {
                   XmlElement child = xml.CreateElement(Epi.Web.MVC.Constants.Constant.RESPONSE_DETAILS);
-                  child.SetAttribute(Epi.Web.MVC.Constants.Constant.QUESTION_ID, pair.Key);
+                  child.SetAttribute("QuestionName", pair.Key);
                   child.InnerText = pair.Value;
                   root.AppendChild(child);
               }
