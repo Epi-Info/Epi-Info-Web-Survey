@@ -215,12 +215,9 @@
     <Content Include="Scripts\jquery.validationEngine.js" />
     <Content Include="Unity.Mvc3.README.txt" />
     <Content Include="Views\Final\Index.aspx" />
-    <Content Include="Views\Final\PostSubmit.aspx" />
     <Content Include="Views\Home\Index.aspx" />
     <Content Include="Views\Home\Splash.aspx" />
     <Content Include="Views\Shared\Exception.aspx" />
-    <Content Include="Views\Survey\Demo.aspx" />
-    <Content Include="Views\Survey\Exception.aspx" />
     <Content Include="Views\Shared\footer.htm" />
     <Content Include="Views\Survey\Index.aspx" />
     <Content Include="Web.config">

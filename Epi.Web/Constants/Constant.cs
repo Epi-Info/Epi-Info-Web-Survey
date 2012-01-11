@@ -30,7 +30,7 @@ namespace Epi.Web.MVC.Constants
         public const string SURVEY_INTRODUCTION = "SurveyIntroduction";
         public const string SURVAY_PAGE = "Survey";
         public const string EXCEPTION_PAGE = "Exception";
-        public const string SUBMIT_PAGE = "PostSubmit";
+        
 
         /*controllers*/
         public const string HOME_CONTROLLER = "Home";

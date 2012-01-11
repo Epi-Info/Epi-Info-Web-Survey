@@ -1,18 +1,34 @@
-﻿<%@ Page Title="Survey Error" Language="C#" MasterPageFile="~/Views/Shared/EpiSurvey.Master" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/EpiSurvey.Master" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-    Exception
+    PostSubmit
 </asp:Content>
 
-<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
-<div id="attention" style="margin: 10px">
-            <img src="../Content/images/sign_warning.png" alt="" style="vertical-align: middle;
-                padding-right: 10px;">
-           <%: Epi.Web.MVC.Constants.Constant.SURVEY_NOT_EXISTS %>
+ <asp:Content ID="Content5" ContentPlaceHolderID="HeaderContent" runat="server">
+     <div id="header">
+            <h1>
+                <%: Model.SurveyName %>
+                </h1>
         </div>
-
 </asp:Content>
+ 
+ <asp:Content ID="Content6" ContentPlaceHolderID="MainContent" runat="server">
 
-<asp:Content ID="Content3" ContentPlaceHolderID="HeaderContent" runat="server">
-</asp:Content>
+  <div id="infobox">
+        <div id="surveyno">
+            <span class="boldlabel">Survey #:</span> <span>
+                <%: Model.SurveyNumber%></span></div>
+        <div id="orgn">
+            <span class="boldlabel">Organization:</span> <span>
+                <%: Model.OrganizationName%></span></div>
+        <div id="dept">
+            <span class="boldlabel">Department:</span> <span>
+                <%: Model.DepartmentName%></span></div>
+        <div style="clear: both;">
+        </div>
+    </div>
+     <div class="success">
+ <img src="../../Content/images/button_check.png" style="vertical-align:middle; padding-right: 10px;"> <%: Epi.Web.MVC.Constants.Constant.SURVEY_SUBMISSION_MESSAGE %>
+ </div>  
+ </asp:Content> 
