@@ -12,13 +12,14 @@
         <GroupBox Header="SurveyInfo Criteria" Height="76" HorizontalAlignment="Left" Margin="12,12,0,0" Name="groupBox1" VerticalAlignment="Top" Width="498" Background="#FFD8EBC7">
             <Grid Height="56">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="19*" />
-                    <ColumnDefinition Width="44*" />
-                    <ColumnDefinition Width="324*" />
+                    <ColumnDefinition Width="24*" />
+                    <ColumnDefinition Width="14*" />
+                    <ColumnDefinition Width="41*" />
+                    <ColumnDefinition Width="407*" />
                 </Grid.ColumnDefinitions>
-                <Label Content="SurveyId" Height="28" HorizontalAlignment="Left" Margin="7,15,0,0" Name="label1" VerticalAlignment="Top" Grid.ColumnSpan="2" />
-                <TextBox Height="26" HorizontalAlignment="Left" Margin="3,17,0,0" Name="SurveyCriteria_SurveyId" VerticalAlignment="Top" Width="214" Grid.Column="2" Uid="" />
-                <Button Content="Get Survey Information" Height="30" HorizontalAlignment="Left" Margin="237,14,0,0" Name="DownloadSurveyInfoButton" VerticalAlignment="Top" Width="137" Grid.Column="2" Click="DownloadSurveyInfoButton_Click" />
+                <Label Content="SurveyId" Height="28" HorizontalAlignment="Left" Margin="7,15,0,0" Name="label1" VerticalAlignment="Top" Grid.ColumnSpan="3" />
+                <TextBox Height="26" HorizontalAlignment="Left" Margin="3,17,0,0" Name="SurveyCriteria_SurveyId" VerticalAlignment="Top" Width="214" Grid.Column="3" Uid="" />
+                <Button Content="Get Survey Information" Height="30" HorizontalAlignment="Left" Margin="237,14,0,0" Name="DownloadSurveyInfoButton" VerticalAlignment="Top" Width="137" Grid.Column="3" Click="DownloadSurveyInfoButton_Click" />
             </Grid>
         </GroupBox>
         <GroupBox Header="SurveyAnswer Criteria" Height="211" HorizontalAlignment="Left" Margin="12,186,0,0" Name="groupBox2" VerticalAlignment="Top" Width="498" Background="#FFD8EBC7">
@@ -31,7 +32,7 @@
                 <Label Content="SurveyAnswerIdList" Height="28" HorizontalAlignment="Left" Margin="0,38,0,0" Name="label2" VerticalAlignment="Top" Grid.ColumnSpan="3" />
                 <Label Content="SurveyId" Height="28" HorizontalAlignment="Left" Margin="0,6,0,0" Name="label3" VerticalAlignment="Top" Grid.ColumnSpan="3" />
                 <TextBox Height="26" HorizontalAlignment="Left" Margin="8,6,0,0" Name="SurveyAnswerCriteria_SurveyIdTextBox" VerticalAlignment="Top" Width="227" Grid.Column="2" />
-                <Button Content="Download Surveys" Height="30" HorizontalAlignment="Left" Margin="322,156,0,0" Name="DownloadSurveyAnswersButton" VerticalAlignment="Top" Width="107" Click="DownloadSurveyAnswersButton_Click" Grid.Column="2" />
+                <Button Content="Download Answers" Height="30" HorizontalAlignment="Left" Margin="322,156,0,0" Name="DownloadSurveyAnswersButton" VerticalAlignment="Top" Width="107" Click="DownloadSurveyAnswersButton_Click" Grid.Column="2" />
                 <CheckBox Content="Only Completed" Height="16" HorizontalAlignment="Left" Margin="241,6,0,0" Name="OnlyCompletedCheckBox" VerticalAlignment="Top" Width="102" Grid.Column="2" />
                 <ListBox Height="94" HorizontalAlignment="Left" Margin="7,92,0,0" Name="SurveyAnswerIdListBox" VerticalAlignment="Top" Width="357" Grid.ColumnSpan="3" />
                 <Label Content="Date Completed" Height="28" HorizontalAlignment="Left" Margin="241,42,0,0" Name="label4" VerticalAlignment="Top" Grid.Column="2" />
