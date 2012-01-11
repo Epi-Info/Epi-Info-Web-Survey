@@ -4,8 +4,7 @@ using System.Xml;
 using System.Xml.Linq;
 using System.Text;
 using MvcDynamicForms;
- 
-
+using System.Collections.Generic;
 
 namespace Epi.Web.MVC.Utility
 {
@@ -86,6 +85,12 @@ namespace Epi.Web.MVC.Utility
                             var _CheckBoxValue = GetControlValue(SurveyAnswer, _FieldTypeID.Attribute("UniqueId").Value);
                             form.AddFields(GetCheckBox(_FieldTypeID, _Width, _Height, SurveyAnswer, _CheckBoxValue));
                             break;
+                        //case "19"://DropDown
+                        //    string DropDownValues ="";
+                        //    DropDownValues = GetDropDownValues(xdoc, _FieldTypeID.Attribute("Name").Value);
+                        //    var _DropDownSelectedValue = GetControlValue(SurveyAnswer, _FieldTypeID.Attribute("UniqueId").Value);
+                        //    form.AddFields(GetDropDown(_FieldTypeID, _Width, _Height, SurveyAnswer, _DropDownSelectedValue, DropDownValues));
+                        //    break;
                     }
 
                 }
@@ -114,17 +119,7 @@ namespace Epi.Web.MVC.Utility
 
                 
 
-                //var month = new Select
-                //{
-                //    DisplayOrder = 70,
-                //    Title = "Month Born",
-                //    Prompt = "What month were you born in?",
-                //    ShowEmptyOption = true,
-                //    EmptyOption = "- Select One - "
-                //};
-                //month.AddChoices("January,February,March,April,May,June,July,August,September,October,November,December", ",");
 
-               
 
 
 
@@ -200,7 +195,7 @@ namespace Epi.Web.MVC.Utility
 
             var NumericTextBox = new NumericTextBox
             {
-                Title = "Name",
+                Title = _FieldTypeID.Attribute("Name").Value,
                 Prompt = _FieldTypeID.Attribute("PromptText").Value,
                 DisplayOrder = int.Parse(_FieldTypeID.Attribute("TabIndex").Value),
                 Required =  _FieldTypeID.Attribute("IsRequired").Value == "True"?true:false ,
@@ -256,7 +251,7 @@ namespace Epi.Web.MVC.Utility
 
             var TextArea = new TextArea
             {
-                Title = "Name",
+                Title = _FieldTypeID.Attribute("Name").Value,
                 Prompt = _FieldTypeID.Attribute("PromptText").Value,
                 DisplayOrder = int.Parse(_FieldTypeID.Attribute("TabIndex").Value),
                 Required = _FieldTypeID.Attribute("IsRequired").Value == "True" ? true : false,
@@ -288,7 +283,7 @@ namespace Epi.Web.MVC.Utility
 
             var TextBox = new TextBox
             {
-                Title = "Name",
+                Title = _FieldTypeID.Attribute("Name").Value,
                 Prompt = _FieldTypeID.Attribute("PromptText").Value,
                 DisplayOrder = int.Parse(_FieldTypeID.Attribute("TabIndex").Value),
                 Required = _FieldTypeID.Attribute("IsRequired").Value == "True" ? true : false,
@@ -321,7 +316,7 @@ namespace Epi.Web.MVC.Utility
 
             var CheckBox = new CheckBox
             {
-                Title = "Name",
+                Title = _FieldTypeID.Attribute("Name").Value,
                 Prompt = _FieldTypeID.Attribute("PromptText").Value,
                 DisplayOrder = int.Parse(_FieldTypeID.Attribute("TabIndex").Value),
                 RequiredMessage = "This field is required",
@@ -351,7 +346,7 @@ namespace Epi.Web.MVC.Utility
 
             var DatePicker = new DatePicker
             {
-                Title = "Name",
+                Title = _FieldTypeID.Attribute("Name").Value,
                 Prompt = _FieldTypeID.Attribute("PromptText").Value,
                 DisplayOrder = int.Parse(_FieldTypeID.Attribute("TabIndex").Value),
                 Required = _FieldTypeID.Attribute("IsRequired").Value == "True" ? true : false,
@@ -378,7 +373,61 @@ namespace Epi.Web.MVC.Utility
             return DatePicker;
 
         }
+        private static Select GetDropDown(XElement _FieldTypeID, double _Width, double _Height, string SurveyAnswer, string _ControlValue, string  DropDownValues)
+        {
+                        
+            
+            
+            var DropDown = new Select
+                {
+                    Title = _FieldTypeID.Attribute("Name").Value,
+                    Prompt = _FieldTypeID.Attribute("PromptText").Value,
+                    DisplayOrder = int.Parse(_FieldTypeID.Attribute("TabIndex").Value),
+                    Required = _FieldTypeID.Attribute("IsRequired").Value == "True" ? true : false,
+                    RequiredMessage = "This field is required",
+                    Key = _FieldTypeID.Attribute("UniqueId").Value,
+                    PromptTop = _Height * double.Parse(_FieldTypeID.Attribute("PromptTopPositionPercentage").Value),
+                    PromptLeft = _Width * double.Parse(_FieldTypeID.Attribute("PromptLeftPositionPercentage").Value),
+                    Top = _Height * double.Parse(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value),
+                    Left = _Width * double.Parse(_FieldTypeID.Attribute("ControlLeftPositionPercentage").Value),
+                    PromptWidth = _Width * double.Parse(_FieldTypeID.Attribute("ControlWidthPercentage").Value),
+                    ControlWidth = _Width * double.Parse(_FieldTypeID.Attribute("ControlWidthPercentage").Value),
+                    fontstyle = _FieldTypeID.Attribute("PromptFontStyle").Value,
+                    fontSize = double.Parse(_FieldTypeID.Attribute("PromptFontSize").Value),
+                    fontfamily = _FieldTypeID.Attribute("PromptFontFamily").Value,
+                    IsRequired = bool.Parse(_FieldTypeID.Attribute("IsRequired").Value),
+                    IsReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value),
+                    ShowEmptyOption = true,
+                    EmptyOption = "- Select One - "
+                };
+            DropDown.AddChoices(DropDownValues, ",");
 
-       
+            return DropDown;
+        }
+        public static   string  GetDropDownValues(XDocument Xml, string ControlName)
+        {
+            StringBuilder DropDownValues = new StringBuilder();
+           
+
+            if (!string.IsNullOrEmpty(Xml.ToString()))
+            {
+
+                XDocument xdoc = XDocument.Parse(Xml.ToString());
+
+
+                var _ControlValues = from _ControlValue in
+                                         xdoc.Descendants("SourceTable")
+                                      where _ControlValue.Attribute("TableName").Value == ControlName.ToString()
+                                     select _ControlValue;
+
+                foreach (var _ControlValue in _ControlValues)
+                {
+                    DropDownValues.Append(_ControlValue.Value);
+                    DropDownValues.Append(",");
+                }
+            }
+
+            return DropDownValues.ToString();
+        }
     }
 }
