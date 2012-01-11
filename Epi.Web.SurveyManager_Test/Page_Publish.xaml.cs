@@ -139,5 +139,17 @@ namespace Epi.Web.SurveyManager.Client
 
             }
         }
+
+        private void ClearTemplateButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.TemplateFileLabel.Content = "";
+            TemplateXMLTextBox.Document.Blocks.Clear();
+        }
+
+        private void ClearIntroButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.IntroFileLabel.Content = "";
+            IntroductionTextBox.Document.Blocks.Clear();
+        }
     }
 }
