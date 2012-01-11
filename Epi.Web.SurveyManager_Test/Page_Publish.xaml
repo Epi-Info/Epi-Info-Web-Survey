@@ -53,6 +53,8 @@
                 <Label Content="Label" Height="28" HorizontalAlignment="Left" Margin="210,147,0,0" Name="TemplateFileLabel" VerticalAlignment="Top" Width="354" />
                 <Button Content="Find File..." Height="23" HorizontalAlignment="Left" Margin="118,271,0,0" Name="FindIntroTextButton" VerticalAlignment="Top" Width="75" Click="FindIntroTextButton_Click" />
                 <Label Content="IntroFileLabel" Height="28" HorizontalAlignment="Left" Margin="199,0,0,4" Name="IntroFileLabel" VerticalAlignment="Bottom" Width="354" />
+                <Button Content="." Height="56" HorizontalAlignment="Left" Margin="557,0,0,44" Name="ClearTemplateButton" VerticalAlignment="Bottom" Width="11" Click="ClearTemplateButton_Click" />
+                <Button Content="." Grid.Row="2" Grid.RowSpan="3" Height="68" HorizontalAlignment="Left" Margin="560,9,0,0" Name="ClearIntroButton" VerticalAlignment="Top" Width="12" Click="ClearIntroButton_Click" />
             </Grid>
         </GroupBox>
     </Grid>
