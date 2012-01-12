@@ -85,12 +85,19 @@ namespace Epi.Web.MVC.Utility
                             var _CheckBoxValue = GetControlValue(SurveyAnswer, _FieldTypeID.Attribute("UniqueId").Value);
                             form.AddFields(GetCheckBox(_FieldTypeID, _Width, _Height, SurveyAnswer, _CheckBoxValue));
                             break;
+                        case "17"://DropDown
+                            string DropDownValues1 = "";
+                            DropDownValues1 = GetDropDownValues(xdoc, _FieldTypeID.Attribute("Name").Value, _FieldTypeID.Attribute("SourceTableName").Value);
+                            var _DropDownSelectedValue1 = GetControlValue(SurveyAnswer, _FieldTypeID.Attribute("UniqueId").Value);
+                            form.AddFields(GetDropDown(_FieldTypeID, _Width, _Height, SurveyAnswer, _DropDownSelectedValue1, DropDownValues1));
+                            break;
                         case "19"://DropDown
                             string DropDownValues = "";
                             DropDownValues = GetDropDownValues(xdoc, _FieldTypeID.Attribute("Name").Value, _FieldTypeID.Attribute("SourceTableName").Value);
                             var _DropDownSelectedValue = GetControlValue(SurveyAnswer, _FieldTypeID.Attribute("UniqueId").Value);
                             form.AddFields(GetDropDown(_FieldTypeID, _Width, _Height, SurveyAnswer, _DropDownSelectedValue, DropDownValues));
                             break;
+                        
                     }
 
                 }
