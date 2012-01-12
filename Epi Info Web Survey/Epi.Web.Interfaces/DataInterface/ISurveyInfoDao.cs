@@ -15,11 +15,21 @@ namespace Epi.Web.Interfaces.DataInterfaces
     public interface ISurveyInfoDao
     {
         /// <summary>
-        /// Gets a specific SurveyInfo.
+        /// Gets SurveyInfo based on a list of ids
         /// </summary>
         /// <param name="SurveyInfoId">Unique SurveyInfo identifier.</param>
         /// <returns>SurveyInfo.</returns>
-        List<SurveyInfoBO> GetSurveyInfo(List<string> SurveyInfoId);
+        List<SurveyInfoBO> GetSurveyInfo(List<string> SurveyInfoIdList);
+
+
+        /// <summary>
+        /// Gets SurveyInfo based on criteria
+        /// </summary>
+        /// <param name="SurveyInfoId">Unique SurveyInfo identifier.</param>
+        /// <returns>SurveyInfo.</returns>
+        List<SurveyInfoBO> GetSurveyInfo(List<string> SurveyInfoIdList, DateTime pClosingDate, int pSurveyType = -1);
+
+
 
         /// <summary>
         /// Gets a sorted list of all SurveyInfos.

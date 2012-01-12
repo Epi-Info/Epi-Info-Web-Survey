@@ -36,12 +36,27 @@ namespace Epi.Web.BLL
             }
         }
 
+        /// <summary>
+        /// Gets SurveyInfo based on criteria
+        /// </summary>
+        /// <param name="SurveyInfoId">Unique SurveyInfo identifier.</param>
+        /// <returns>SurveyInfo.</returns>
         public List<SurveyInfoBO> GetSurveyInfoById(List<string> pIdList)
         {
-
             List<SurveyInfoBO> result = this.SurveyInfoDao.GetSurveyInfo(pIdList);
             return result;
-            
+        }
+
+
+      /// <summary>
+        /// Gets SurveyInfo based on criteria
+        /// </summary>
+        /// <param name="SurveyInfoId">Unique SurveyInfo identifier.</param>
+        /// <returns>SurveyInfo.</returns>
+        public List<SurveyInfoBO> GetSurveyInfo(List<string> SurveyInfoIdList, DateTime pClosingDate, int pSurveyType = -1)
+        {
+            List<SurveyInfoBO> result = this.SurveyInfoDao.GetSurveyInfo(SurveyInfoIdList, pClosingDate, pSurveyType);
+            return result;
         }
 
         public SurveyInfoBO InsertSurveyInfo(SurveyInfoBO pValue)
