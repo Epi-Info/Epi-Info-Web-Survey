@@ -16,17 +16,17 @@ namespace Epi.Web.EF
     public class EntitySurveyInfoDao : ISurveyInfoDao
     {
         /// <summary>
-        /// Gets a specific SurveyInfo.
+        /// Gets SurveyInfo based on a list of ids
         /// </summary>
         /// <param name="SurveyInfoId">Unique SurveyInfo identifier.</param>
         /// <returns>SurveyInfo.</returns>
-        public List<SurveyInfoBO> GetSurveyInfo(List<string> SurveyInfoId)
+        public List<SurveyInfoBO> GetSurveyInfo(List<string> SurveyInfoIdList)
         {
 
             List<SurveyInfoBO> result = new List<SurveyInfoBO>();
-            if (SurveyInfoId.Count > 0)
+            if (SurveyInfoIdList.Count > 0)
             {
-                foreach (string surveyInfoId in SurveyInfoId.Distinct())
+                foreach (string surveyInfoId in SurveyInfoIdList.Distinct())
                 {
                     Guid Id = new Guid(surveyInfoId);
 
@@ -41,15 +41,62 @@ namespace Epi.Web.EF
             {
                 using (var Context = DataObjectFactory.CreateContext())
                 {
-
                     result = Mapper.Map(Context.SurveyMetaDatas.ToList());
                 }
-             
             }
 
             return result;
         }
-   
+
+
+        /// <summary>
+        /// Gets SurveyInfo based on criteria
+        /// </summary>
+        /// <param name="SurveyInfoId">Unique SurveyInfo identifier.</param>
+        /// <returns>SurveyInfo.</returns>
+        public List<SurveyInfoBO> GetSurveyInfo(List<string> SurveyInfoIdList, DateTime pClosingDate, int pSurveyType = -1)
+        {
+            List<SurveyInfoBO> result = new List<SurveyInfoBO>();
+
+            List<SurveyMetaData> responseList = new List<SurveyMetaData>();
+            if (SurveyInfoIdList.Count > 0)
+            {
+                foreach (string surveyInfoId in SurveyInfoIdList.Distinct())
+                {
+                    Guid Id = new Guid(surveyInfoId);
+
+                    using (var Context = DataObjectFactory.CreateContext())
+                    {
+                        responseList.Add(Context.SurveyMetaDatas.FirstOrDefault(x => x.SurveyId == Id));
+                    }
+                }
+            }
+            else
+            {
+                using (var Context = DataObjectFactory.CreateContext())
+                {
+                    responseList = Context.SurveyMetaDatas.ToList();
+                }
+            }
+
+            if (pSurveyType > -1)
+            {
+                List<SurveyMetaData> statusList = new List<SurveyMetaData>();
+                statusList.AddRange(responseList.Where(x => x.SurveyTypeId == pSurveyType));
+                responseList = statusList;
+            }
+
+            if (pClosingDate > DateTime.MinValue)
+            {
+                List<SurveyMetaData> dateList = new List<SurveyMetaData>();
+
+                dateList.AddRange(responseList.Where(x => x.ClosingDate.Month >= pClosingDate.Month && x.ClosingDate.Year >= pClosingDate.Year && x.ClosingDate.Day >= pClosingDate.Day));
+                responseList = dateList;
+            }
+
+            result = Mapper.Map(responseList);
+            return result;
+        }
 
         /// <summary>
         /// Inserts a new SurveyInfo. 
