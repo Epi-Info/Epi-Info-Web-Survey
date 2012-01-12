@@ -53,30 +53,50 @@ namespace MvcDynamicForms.Fields
         {
             var html = new StringBuilder();
             var inputName = _form.FieldPrefix + _key;
-
+            string ErrorStyle = string.Empty;
             // prompt
             var prompt = new TagBuilder("label");
-            prompt.Attributes.Add("class", _promptClass);
-            prompt.Attributes.Add("for", inputName);
             prompt.SetInnerText(Prompt);
+            prompt.Attributes.Add("for", inputName);
+            prompt.Attributes.Add("class", "EpiLabel");
+
+            StringBuilder StyleValues = new StringBuilder();
+            StyleValues.Append(GetContolStyle(_fontstyle.ToString(), _Prompttop.ToString(), _Promptleft.ToString(), null, Height.ToString()));
+            prompt.Attributes.Add("style", StyleValues.ToString());
             html.Append(prompt.ToString());
 
             // error label
             if (!IsValid)
             {
-                var error = new TagBuilder("label");
-                error.Attributes.Add("class", _errorClass);
-                error.Attributes.Add("for", inputName);
-                error.SetInnerText(Error);
-                html.Append(error.ToString());
+                //Add new Error to the error Obj
+
+                ErrorStyle = ";border-color: red";
+             
             }
 
             // open select element
             var select = new TagBuilder("select");
             select.Attributes.Add("id", inputName);
             select.Attributes.Add("name", inputName);
+
+
+
+           // select.SetInnerText(Value);
+            if (_IsRequired == true)
+            {
+                select.Attributes.Add("class", "validate[required] text-input");
+                select.Attributes.Add("data-prompt-position", "topRight:15");
+            }
+            select.Attributes.Add("style", "position:absolute;left:" + _left.ToString() + "px;top:" + _top.ToString() + "px" + ";width:" + _ControlWidth.ToString() + "px"  + ErrorStyle);
             select.MergeAttributes(_inputHtmlAttributes);
             html.Append(select.ToString(TagRenderMode.StartTag));
+            // If readonly then add the following jquery script to make the field disabled 
+            if (ReadOnly)
+            {
+                var scriptReadOnlyText = new TagBuilder("script");
+                scriptReadOnlyText.InnerHtml = "$(function(){$('#" + inputName + "').attr('disabled','disabled')});";
+                html.Append(scriptReadOnlyText.ToString(TagRenderMode.Normal));
+            }
 
             // initial empty option
             if (ShowEmptyOption)
