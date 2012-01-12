@@ -41,6 +41,17 @@ namespace Epi.Web.SurveyManager.Client
                 Request.Criteria.SurveyIdList.Add(this.SurveyCriteria_SurveyId.Text);
             }
 
+            if ((bool)this.SurveyCriteria_CurrentlyOpenCheckBox.IsChecked)
+            {
+                Request.Criteria.ClosingDate = DateTime.Now;
+            }
+
+            if (this.SurveyInfoCriteria_SurveyTypeListBox.SelectedIndex > -1)
+            {
+                Request.Criteria.SurveyType = int.Parse(((ListBoxItem)this.SurveyInfoCriteria_SurveyTypeListBox.Items[this.SurveyInfoCriteria_SurveyTypeListBox.SelectedIndex]).Tag.ToString());
+            }
+
+
             SurveyInfoResponseTextBox.Document.Blocks.Clear();
             try
             {
@@ -123,6 +134,8 @@ namespace Epi.Web.SurveyManager.Client
         private void ClearSurveyCriteriaButton_Click(object sender, RoutedEventArgs e)
         {
             this.SurveyCriteria_SurveyId.Text = "";
+            this.SurveyInfoCriteria_SurveyTypeListBox.SelectedIndex = -1;
+            this.SurveyCriteria_CurrentlyOpenCheckBox.IsChecked = false;
         }
     }
 }
