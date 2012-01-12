@@ -258,6 +258,7 @@
         _onSubmitEvent: function () {
             var form = $(this);
             var options = form.data('jqv');
+            // $("#ui-datepicker-div").;
 
             // validate each field (- skip field ajax validation, no necessary since we will perform an ajax form validation)
             var r = methods._validateFields(form, true);
@@ -313,7 +314,8 @@
             form.find('[class*=validate]').not(':hidden').not(":disabled").each(function () {
                 var field = $(this);
                 errorFound |= methods._validateField(field, options, skipAjaxValidation);
-                field.focus();
+                //field.focus();//commented to prevent popup calender on validation EPI Survey Modification
+               
                 if (options.doNotShowAllErrosOnSubmit)
                     return false;
                 if (errorFound && first_err == null) first_err = field;
@@ -498,7 +500,7 @@
                         errorMsg = methods._customRegex(field, rules, i, options);
                         break;
                     case "customDate":
-                       
+
                         errorMsg = methods._customRegexDate(field, rules, i, options);
                         break;
                     case "groupRequired":
@@ -541,7 +543,7 @@
                         errorMsg = methods._future(field, rules, i, options);
                         break;
                     case "datePickerRange":
-                       
+
 
                         var firstOfGroup = rules[i + 1]; //lower
                         var secondOfGroup = rules[i + 2]; //upper
@@ -550,10 +552,10 @@
                         if (firstOfGroup || secondOfGroup) {
                             errorMsg = methods._datepickerRange(firstOfGroup, secondOfGroup, rules, i, options, field);
                         }
-                         
+
                         break;
                     case "dateRange":
-                       
+
                         var classGroup = "[class*=" + rules[i + 1] + "]";
                         var firstOfGroup = form.find(classGroup).eq(0);
                         var secondOfGroup = form.find(classGroup).eq(1);
@@ -672,7 +674,7 @@
                             return options.allrules[rules[i]].alertTextCheckboxMultiple;
                     }
                     break;
-                // required for <select>     
+                // required for <select>        
                 case "select-one":
                     // added by paul@kinetek.net for select boxes, Thank you
                     if (!field.val())
@@ -990,17 +992,17 @@
         */
         _datepickerRange: function (first, second, rules, i, options, field) {
             //are not both populated
-           
+
             var Lower = methods._parseDate(first);
             var Upper = methods._parseDate(second);
             //are both dates but range is off
             if (field.val() != null && field.val() != "") {
                 if (!methods._dateCompare(first, field.val())) {
-                    return options.allrules[rules[i]].alertText+" " + methods._dateToString(Lower) + " and " + methods._dateToString(Upper);
+                    return options.allrules[rules[i]].alertText + " " + methods._dateToString(Lower) + " and " + methods._dateToString(Upper);
                 }
                 ///are both dates but range is off
                 if (!methods._dateCompare(field.val(), second)) {
-                    return options.allrules[rules[i]].alertText +" "+ methods._dateToString(Lower) + " and " + methods._dateToString(Upper);
+                    return options.allrules[rules[i]].alertText + " " + methods._dateToString(Lower) + " and " + methods._dateToString(Upper);
                 }
             }
         },
