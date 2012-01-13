@@ -57,5 +57,6 @@
                 <Button Content="." Grid.Row="2" Grid.RowSpan="3" Height="68" HorizontalAlignment="Left" Margin="560,9,0,0" Name="ClearIntroButton" VerticalAlignment="Top" Width="12" Click="ClearIntroButton_Click" />
             </Grid>
         </GroupBox>
+        <Button Content="Open URL" Grid.Column="3" Grid.Row="2" Height="23" HorizontalAlignment="Left" Margin="11,259,0,0" Name="OpenURLButton" VerticalAlignment="Top" Width="75" Click="OpenURLButton_Click" />
     </Grid>
 </Page>
