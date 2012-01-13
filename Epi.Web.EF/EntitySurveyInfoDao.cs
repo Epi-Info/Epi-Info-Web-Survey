@@ -22,7 +22,6 @@ namespace Epi.Web.EF
         /// <returns>SurveyInfo.</returns>
         public List<SurveyInfoBO> GetSurveyInfo(List<string> SurveyInfoIdList)
         {
-
             List<SurveyInfoBO> result = new List<SurveyInfoBO>();
             if (SurveyInfoIdList.Count > 0)
             {
@@ -32,7 +31,6 @@ namespace Epi.Web.EF
 
                     using (var Context = DataObjectFactory.CreateContext())
                     {
-
                         result.Add(Mapper.Map(Context.SurveyMetaDatas.FirstOrDefault(x => x.SurveyId == Id)));
                     }
                 }
@@ -114,8 +112,6 @@ namespace Epi.Web.EF
                
                 Context.SaveChanges();
             }
-
-             
         }
 
         /// <summary>

@@ -20,15 +20,21 @@ namespace Epi.Web.SurveyManager.Client
     /// </summary>
     public partial class Page_Publish : Page
     {
+        String URL;
+
         public Page_Publish()
         {
             InitializeComponent();
             TimeSpan t = new TimeSpan(10, 0, 0, 0);
             this.datePicker1.SelectedDate = DateTime.Now + t;
+
+            
         }
 
         private void button1_Click(object sender, RoutedEventArgs e)
         {
+
+            ServiceResponseTextBox.Document.Blocks.Clear();
 
             SurveyManagerService.ManagerServiceClient client = new SurveyManagerService.ManagerServiceClient();
 
@@ -63,6 +69,7 @@ namespace Epi.Web.SurveyManager.Client
             {
                 Epi.Web.Common.Message.PublishResponse Result = client.PublishSurvey(Request);
 
+                URL = Result.PublishInfo.URL;
                 ServiceResponseTextBox.AppendText("is published: ");
                 ServiceResponseTextBox.AppendText(Result.PublishInfo.IsPulished.ToString());
                 ServiceResponseTextBox.AppendText("\nURL: ");
@@ -150,6 +157,26 @@ namespace Epi.Web.SurveyManager.Client
         {
             this.IntroFileLabel.Content = "";
             IntroductionTextBox.Document.Blocks.Clear();
+        }
+
+        private void OpenURLButton_Click(object sender, RoutedEventArgs e)
+        {
+
+
+            using (WebBrowser browser = new WebBrowser())
+            {
+                //string userPass = username + ":" + password;
+                /*string encodedUserPass = Convert.ToBase64String(
+                  Encoding.ASCII.GetBytes(userPass)
+                );*/
+
+                browser.Navigate(
+                  URL,
+                  "Epi.Web Demo", // Force a new window by passing a unique frame name
+                  null, // No POST data
+                  null
+                );
+            }
         }
     }
 }
