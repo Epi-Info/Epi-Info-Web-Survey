@@ -140,8 +140,15 @@ namespace MvcDynamicForms
 
             if (formatHtml)
             {
-                var xml = XDocument.Parse(html.ToString());
-                return xml.ToString();
+                try
+                {
+                    var xml = XDocument.Parse(html.ToString());
+                    return xml.ToString();
+                }
+                catch (Exception ex)
+                {
+                    return html.ToString();
+                }
             }
 
             return html.ToString();
