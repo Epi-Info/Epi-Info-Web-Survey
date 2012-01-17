@@ -5,7 +5,7 @@ using System.Xml.Linq;
 using System.Text;
 using MvcDynamicForms;
 using System.Collections.Generic;
-
+using System;
 namespace Epi.Web.MVC.Utility
 {
     public static class FormProvider
@@ -85,19 +85,28 @@ namespace Epi.Web.MVC.Utility
                             var _CheckBoxValue = GetControlValue(SurveyAnswer, _FieldTypeID.Attribute("UniqueId").Value);
                             form.AddFields(GetCheckBox(_FieldTypeID, _Width, _Height, SurveyAnswer, _CheckBoxValue));
                             break;
-                        case "17"://DropDown
+                        case "17"://DropDown LegalValues
                             string DropDownValues1 = "";
                             DropDownValues1 = GetDropDownValues(xdoc, _FieldTypeID.Attribute("Name").Value, _FieldTypeID.Attribute("SourceTableName").Value);
                             var _DropDownSelectedValue1 = GetControlValue(SurveyAnswer, _FieldTypeID.Attribute("UniqueId").Value);
                             form.AddFields(GetDropDown(_FieldTypeID, _Width, _Height, SurveyAnswer, _DropDownSelectedValue1, DropDownValues1));
                             break;
-                        case "19"://DropDown
+                        case "18"://DropDown Codes
+                            string DropDownValues2 = "";
+                            DropDownValues2 = GetDropDownValues(xdoc, _FieldTypeID.Attribute("Name").Value, _FieldTypeID.Attribute("SourceTableName").Value);
+                            var _DropDownSelectedValue2 = GetControlValue(SurveyAnswer, _FieldTypeID.Attribute("UniqueId").Value);
+                            form.AddFields(GetDropDown(_FieldTypeID, _Width, _Height, SurveyAnswer, _DropDownSelectedValue2, DropDownValues2));
+                            break;
+                        case "19"://DropDown CommentLegal
                             string DropDownValues = "";
                             DropDownValues = GetDropDownValues(xdoc, _FieldTypeID.Attribute("Name").Value, _FieldTypeID.Attribute("SourceTableName").Value);
                             var _DropDownSelectedValue = GetControlValue(SurveyAnswer, _FieldTypeID.Attribute("UniqueId").Value);
                             form.AddFields(GetDropDown(_FieldTypeID, _Width, _Height, SurveyAnswer, _DropDownSelectedValue, DropDownValues));
                             break;
-                        
+                        case "21"://GroupBox
+                            var _GroupBoxValue = GetControlValue(SurveyAnswer, _FieldTypeID.Attribute("UniqueId").Value);
+                            form.AddFields(GetGroupBox(_FieldTypeID, _Width, _Height, SurveyAnswer, _GroupBoxValue));
+                            break;
                     }
 
                 }
@@ -438,13 +447,46 @@ namespace Epi.Web.MVC.Utility
                     foreach (var _SourceTableValue in _SourceTableValues)
                     {
 
-                        DropDownValues.Append(_SourceTableValue.LastAttribute.Value );
+                       // DropDownValues.Append(_SourceTableValue.LastAttribute.Value );
+                        DropDownValues.Append(_SourceTableValue.FirstAttribute.Value);
                         DropDownValues.Append(",");
                     }
                 }
             }
 
             return DropDownValues.ToString();
+        }
+        private static GroupBox GetGroupBox(XElement _FieldTypeID, double _Width, double _Height, string SurveyAnswer, string _ControlValue)
+        {
+
+
+            var GroupBox = new GroupBox();
+               
+                    GroupBox.Title = _FieldTypeID.Attribute("Name").Value;
+                    GroupBox.Prompt = _FieldTypeID.Attribute("PromptText").Value;
+                    GroupBox.RequiredMessage = "This field is required";
+                    GroupBox.Key = _FieldTypeID.Attribute("UniqueId").Value;
+                    GroupBox.PromptTop = _Height * double.Parse(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value) ;
+                    GroupBox.PromptLeft = _Width * double.Parse(_FieldTypeID.Attribute("ControlLeftPositionPercentage").Value) ;
+                    GroupBox.Top = _Height * double.Parse(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value);
+                    GroupBox.Left = _Width * double.Parse(_FieldTypeID.Attribute("ControlLeftPositionPercentage").Value);
+                    //GroupBox.PromptWidth = _Width * double.Parse(_FieldTypeID.Attribute("ControlWidthPercentage").Value);
+                    GroupBox.ControlHeight = _Height * double.Parse(_FieldTypeID.Attribute("ControlHeightPercentage").Value)-12;
+                    GroupBox.ControlWidth = _Width * double.Parse(_FieldTypeID.Attribute("ControlWidthPercentage").Value)-12;
+                    GroupBox.fontstyle = _FieldTypeID.Attribute("ControlFontStyle").Value;
+                    GroupBox.fontSize = double.Parse(_FieldTypeID.Attribute("ControlFontSize").Value);
+                    GroupBox.fontfamily = _FieldTypeID.Attribute("ControlFontFamily").Value;
+                    GroupBox.ReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value);
+
+
+
+                
+                return GroupBox;
+           
+           
+
+           
+
         }
     }
 }
