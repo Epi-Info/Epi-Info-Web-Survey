@@ -31,10 +31,11 @@ namespace Epi.Web.SurveyManager.Client
             
         }
 
-        private void button1_Click(object sender, RoutedEventArgs e)
+        private void SubmitRequestButton_Click(object sender, RoutedEventArgs e)
         {
 
             ServiceResponseTextBox.Document.Blocks.Clear();
+            this.OpenURLButton.IsEnabled = false;
 
             SurveyManagerService.ManagerServiceClient client = new SurveyManagerService.ManagerServiceClient();
 
@@ -76,6 +77,9 @@ namespace Epi.Web.SurveyManager.Client
                 ServiceResponseTextBox.AppendText(Result.PublishInfo.URL);
                 ServiceResponseTextBox.AppendText("\nStatus Text: ");
                 ServiceResponseTextBox.AppendText(Result.PublishInfo.StatusText);
+
+                this.OpenURLButton.IsEnabled = Result.PublishInfo.IsPulished;
+                
             }
             catch (Exception ex)
             {
@@ -161,21 +165,17 @@ namespace Epi.Web.SurveyManager.Client
 
         private void OpenURLButton_Click(object sender, RoutedEventArgs e)
         {
-
-
-            using (WebBrowser browser = new WebBrowser())
+            if (!string.IsNullOrWhiteSpace(URL))
             {
-                //string userPass = username + ":" + password;
-                /*string encodedUserPass = Convert.ToBase64String(
-                  Encoding.ASCII.GetBytes(userPass)
-                );*/
-
-                browser.Navigate(
-                  URL,
-                  "Epi.Web Demo", // Force a new window by passing a unique frame name
-                  null, // No POST data
-                  null
-                );
+                using (WebBrowser browser = new WebBrowser())
+                {
+                    browser.Navigate(
+                      URL,
+                      "Epi.Web Demo", 
+                      null,
+                      null
+                    );
+                }
             }
         }
     }
