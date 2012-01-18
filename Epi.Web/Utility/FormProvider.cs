@@ -23,9 +23,23 @@ namespace Epi.Web.MVC.Utility
             else { SurveyAnswer = ""; }
 
             var form = new Form();
+            
+
             form.SurveyInfo = (Epi.Web.Common.DTO.SurveyInfoDTO)(SurveyMetaData);
             
             string XML = form.SurveyInfo.XML;
+
+            
+            form.CurrentPage = PageNumber;
+            if (string.IsNullOrEmpty(XML))
+            {
+                
+                form.NumberOfPages = 1;
+            }
+            else 
+            {
+                form.NumberOfPages = GetNumberOfPages(XDocument.Parse(XML));
+            }
             if (string.IsNullOrEmpty(XML))
             {
                 // no XML what to do?
@@ -85,23 +99,29 @@ namespace Epi.Web.MVC.Utility
                             var _CheckBoxValue = GetControlValue(SurveyAnswer, _FieldTypeID.Attribute("UniqueId").Value);
                             form.AddFields(GetCheckBox(_FieldTypeID, _Width, _Height, SurveyAnswer, _CheckBoxValue));
                             break;
+
+                        case "11"://DropDown Yes/No
+                           
+                            var _DropDownSelectedValueYN = GetControlValue(SurveyAnswer, _FieldTypeID.Attribute("UniqueId").Value);
+                            form.AddFields(GetDropDown(_FieldTypeID, _Width, _Height, SurveyAnswer, _DropDownSelectedValueYN, "Yes,No",11));
+                            break;
                         case "17"://DropDown LegalValues
                             string DropDownValues1 = "";
                             DropDownValues1 = GetDropDownValues(xdoc, _FieldTypeID.Attribute("Name").Value, _FieldTypeID.Attribute("SourceTableName").Value);
                             var _DropDownSelectedValue1 = GetControlValue(SurveyAnswer, _FieldTypeID.Attribute("UniqueId").Value);
-                            form.AddFields(GetDropDown(_FieldTypeID, _Width, _Height, SurveyAnswer, _DropDownSelectedValue1, DropDownValues1));
+                            form.AddFields(GetDropDown(_FieldTypeID, _Width, _Height, SurveyAnswer, _DropDownSelectedValue1, DropDownValues1,17));
                             break;
                         case "18"://DropDown Codes
                             string DropDownValues2 = "";
                             DropDownValues2 = GetDropDownValues(xdoc, _FieldTypeID.Attribute("Name").Value, _FieldTypeID.Attribute("SourceTableName").Value);
                             var _DropDownSelectedValue2 = GetControlValue(SurveyAnswer, _FieldTypeID.Attribute("UniqueId").Value);
-                            form.AddFields(GetDropDown(_FieldTypeID, _Width, _Height, SurveyAnswer, _DropDownSelectedValue2, DropDownValues2));
+                            form.AddFields(GetDropDown(_FieldTypeID, _Width, _Height, SurveyAnswer, _DropDownSelectedValue2, DropDownValues2,18));
                             break;
                         case "19"://DropDown CommentLegal
                             string DropDownValues = "";
                             DropDownValues = GetDropDownValues(xdoc, _FieldTypeID.Attribute("Name").Value, _FieldTypeID.Attribute("SourceTableName").Value);
                             var _DropDownSelectedValue = GetControlValue(SurveyAnswer, _FieldTypeID.Attribute("UniqueId").Value);
-                            form.AddFields(GetDropDown(_FieldTypeID, _Width, _Height, SurveyAnswer, _DropDownSelectedValue, DropDownValues));
+                            form.AddFields(GetDropDown(_FieldTypeID, _Width, _Height, SurveyAnswer, _DropDownSelectedValue, DropDownValues,19));
                             break;
                         case "21"://GroupBox
                             var _GroupBoxValue = GetControlValue(SurveyAnswer, _FieldTypeID.Attribute("UniqueId").Value);
@@ -389,7 +409,7 @@ namespace Epi.Web.MVC.Utility
             return DatePicker;
 
         }
-        private static Select GetDropDown(XElement _FieldTypeID, double _Width, double _Height, string SurveyAnswer, string _ControlValue, string  DropDownValues)
+        private static Select GetDropDown(XElement _FieldTypeID, double _Width, double _Height, string SurveyAnswer, string _ControlValue, string DropDownValues, int FieldTypeId)
         {
                         
             
@@ -413,13 +433,15 @@ namespace Epi.Web.MVC.Utility
                     fontfamily = _FieldTypeID.Attribute("PromptFontFamily").Value,
                     IsRequired = bool.Parse(_FieldTypeID.Attribute("IsRequired").Value),
                     IsReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value),
-                    ShowEmptyOption = false,
-                    EmptyOption = "- Select One - "
+                    ShowEmptyOption = true,
+                    SelectType=FieldTypeId,
+                    EmptyOption = "Select"
                 };
             DropDown.AddChoices(DropDownValues, ",");
 
             return DropDown;
         }
+         
         public static   string  GetDropDownValues(XDocument Xml, string ControlName,string TableName)
         {
             StringBuilder DropDownValues = new StringBuilder();
@@ -487,6 +509,15 @@ namespace Epi.Web.MVC.Utility
 
            
 
+        }
+        private static int GetNumberOfPages(XDocument Xml)
+        {
+            var _FieldsTypeIDs = from _FieldTypeID in
+                                     Xml.Descendants("View")
+                                
+                                 select  _FieldTypeID;
+
+            return _FieldsTypeIDs.Elements().Count() ;
         }
     }
 }

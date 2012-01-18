@@ -40,9 +40,12 @@ namespace MvcDynamicForms.Fields
             }
             set { _inputHtmlAttributes["multiple"] = value.ToString(); }
         }
+
+        public int SelectType { get; set; }
         /// <summary>
         /// The text to be rendered as the first option in the select list when ShowEmptyOption is set to true.
         /// </summary>
+        /// 
         public string EmptyOption { get; set; }
         /// <summary>
         /// Determines whether a valueless option is rendered as the first option in the list.
@@ -82,6 +85,7 @@ namespace MvcDynamicForms.Fields
 
 
            // select.SetInnerText(Value);
+
             if (_IsRequired == true)
             {
                 select.Attributes.Add("class", "validate[required] text-input");
@@ -108,15 +112,53 @@ namespace MvcDynamicForms.Fields
             }
 
             // options
-            foreach (var choice in _choices)
-            {
-                var opt = new TagBuilder("option");
-                opt.Attributes.Add("value", choice.Key);
-                if (choice.Value) opt.Attributes.Add("selected", "selected");
-                opt.SetInnerText(choice.Key);
-                html.Append(opt.ToString());
-            }
 
+            switch (this.SelectType.ToString())
+            {
+                case "11":
+                    foreach (var choice in _choices)
+                    {
+                        var opt = new TagBuilder("option");
+                        opt.Attributes.Add("value",( choice.Key =="Yes"? "1":"0"));
+                        if (choice.Value) opt.Attributes.Add("selected", "selected");
+                        opt.SetInnerText(choice.Key);
+                        html.Append(opt.ToString());
+                    }
+                    break;
+                case "17":
+                    foreach (var choice in _choices)
+                    {
+                        var opt = new TagBuilder("option");
+                        opt.Attributes.Add("value", choice.Key);
+                        if (choice.Value) opt.Attributes.Add("selected", "selected");
+                        opt.SetInnerText(choice.Key);
+                        html.Append(opt.ToString());
+                    }
+                
+                    break;
+                case "18":
+                    foreach (var choice in _choices)
+                    {
+                        var opt = new TagBuilder("option");
+                        opt.Attributes.Add("value", choice.Key);
+                        if (choice.Value) opt.Attributes.Add("selected", "selected");
+                        opt.SetInnerText(choice.Key);
+                        html.Append(opt.ToString());
+                    }
+
+                    break;
+                case "19":
+                    foreach (var choice in _choices)
+                    {
+                        var opt = new TagBuilder("option");
+                        opt.Attributes.Add("value", choice.Key.Remove(choice.Key.IndexOf("-")));
+                        if (choice.Value) opt.Attributes.Add("selected", "selected");
+                        opt.SetInnerText(choice.Key.Substring(choice.Key.IndexOf("-") + 1));
+                        html.Append(opt.ToString());
+                    }
+                    break;
+            }
+ 
             // close select element
             html.Append(select.ToString(TagRenderMode.EndTag));
 
