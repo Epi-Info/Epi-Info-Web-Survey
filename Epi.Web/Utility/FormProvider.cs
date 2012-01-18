@@ -30,16 +30,16 @@ namespace Epi.Web.MVC.Utility
             string XML = form.SurveyInfo.XML;
 
             
-            form.CurrentPage = PageNumber;
-            if (string.IsNullOrEmpty(XML))
-            {
+            //form.CurrentPage = PageNumber;
+            //if (string.IsNullOrEmpty(XML))
+            //{
                 
-                form.NumberOfPages = 1;
-            }
-            else 
-            {
-                form.NumberOfPages = GetNumberOfPages(XDocument.Parse(XML));
-            }
+            //    form.NumberOfPages = 1;
+            //}
+            //else 
+            //{
+            //    form.NumberOfPages = GetNumberOfPages(XDocument.Parse(XML));
+            //}
             if (string.IsNullOrEmpty(XML))
             {
                 // no XML what to do?
