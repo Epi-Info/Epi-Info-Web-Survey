@@ -5,6 +5,9 @@ using System.Web;
 using Epi.Web.MVC.Repositories.Core;
 using Epi.Web.DataServiceClient;
 using Epi.Web.Common.Message;
+using Epi.Web.Common.Exception;
+using System.ServiceModel;
+using Epi.Web.DataServiceClient;
 
 namespace Epi.Web.MVC.Repositories
 {
@@ -13,11 +16,11 @@ namespace Epi.Web.MVC.Repositories
 
 
 
-        private Epi.Web.DataServiceClient.IDataService _iSurveyManager;
+        private Epi.Web.DataServiceClient.IDataService _iDataService;
 
-        public SurveyAnswerRepository(Epi.Web.DataServiceClient.IDataService iSurveyManager)
+        public SurveyAnswerRepository(Epi.Web.DataServiceClient.IDataService iDataService)
         {
-            _iSurveyManager = iSurveyManager;
+            _iDataService = iDataService;
         }
         
         /// <summary>
@@ -27,18 +30,62 @@ namespace Epi.Web.MVC.Repositories
         /// <returns></returns>
         public SurveyAnswerResponse GetSurveyAnswer(SurveyAnswerRequest pRequest)
         {
-
-            //SurveyResponseResponse result = Client.GetSurveyResponse(pRequest);
-            SurveyAnswerResponse result = _iSurveyManager.GetSurveyAnswer(pRequest);
-            return result;
-            
+            try
+            {
+                //SurveyResponseResponse result = Client.GetSurveyResponse(pRequest);
+                SurveyAnswerResponse result = _iDataService.GetSurveyAnswer(pRequest);
+                return result;
+            }
+            catch (FaultException<CustomFaultException> cfe)
+            {
+                throw cfe;
+            }
+            catch (FaultException fe)
+            {
+                throw fe;
+            }
+            catch (CommunicationException ce)
+            {
+                throw ce;
+            }
+            catch (TimeoutException te)
+            {
+                throw te;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
 
         public SurveyAnswerResponse SaveSurveyAnswer(SurveyAnswerRequest pRequest)
         {
-            SurveyAnswerResponse result = _iSurveyManager.SetSurveyAnswer(pRequest);
-            return result;
+            try
+            {
+                SurveyAnswerResponse result = _iDataService.SetSurveyAnswer(pRequest);
+                return result;
+            }
+            catch (FaultException<CustomFaultException> cfe)
+            {
+                throw cfe;
+            }
+            catch (FaultException fe)
+            {
+                throw fe;
+            }
+            catch (CommunicationException ce)
+            {
+                throw ce;
+            }
+            catch (TimeoutException te)
+            {
+                throw te;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         #region stubcode

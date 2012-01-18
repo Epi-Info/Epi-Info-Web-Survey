@@ -134,6 +134,25 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
+  <wsp:Policy wsu:Id="WSHttpBinding_IDataService_GetSurveyInfo_CustomFaultExceptionFault_Fault">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
   <wsp:Policy wsu:Id="WSHttpBinding_IDataService_SetSurveyInfo_Input_policy">
     <wsp:ExactlyOne>
       <wsp:All>
@@ -154,6 +173,25 @@
     </wsp:ExactlyOne>
   </wsp:Policy>
   <wsp:Policy wsu:Id="WSHttpBinding_IDataService_SetSurveyInfo_output_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="WSHttpBinding_IDataService_SetSurveyInfo_CustomFaultExceptionFault_Fault">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
@@ -210,6 +248,25 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
+  <wsp:Policy wsu:Id="WSHttpBinding_IDataService_GetSurveyAnswer_CustomFaultExceptionFault_Fault">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
   <wsp:Policy wsu:Id="WSHttpBinding_IDataService_SetSurveyAnswer_Input_policy">
     <wsp:ExactlyOne>
       <wsp:All>
@@ -248,11 +305,30 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
+  <wsp:Policy wsu:Id="WSHttpBinding_IDataService_SetSurveyAnswer_CustomFaultExceptionFault_Fault">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import schemaLocation="http://localhost:22587/Epi.Web.ServiceHost/SurveyDataService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
-      <xsd:import schemaLocation="http://localhost:22587/Epi.Web.ServiceHost/SurveyDataService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import schemaLocation="http://localhost:22587/Epi.Web.ServiceHost/SurveyDataService.svc?xsd=xsd2" namespace="http://www.yourcompany.com/types/" />
+      <xsd:import schemaLocation="http://localhost:22587/Epi.Web.ServiceHost/SurveyDataService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import schemaLocation="http://localhost:22587/Epi.Web.ServiceHost/SurveyDataService.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
     </xsd:schema>
   </wsdl:types>
@@ -262,11 +338,17 @@
   <wsdl:message name="IDataService_GetSurveyInfo_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetSurveyInfoResponse" />
   </wsdl:message>
+  <wsdl:message name="IDataService_GetSurveyInfo_CustomFaultExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q1="http://www.yourcompany.com/types/" name="detail" element="q1:CustomFaultException" />
+  </wsdl:message>
   <wsdl:message name="IDataService_SetSurveyInfo_InputMessage">
     <wsdl:part name="parameters" element="tns:SetSurveyInfo" />
   </wsdl:message>
   <wsdl:message name="IDataService_SetSurveyInfo_OutputMessage">
     <wsdl:part name="parameters" element="tns:SetSurveyInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_SetSurveyInfo_CustomFaultExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q2="http://www.yourcompany.com/types/" name="detail" element="q2:CustomFaultException" />
   </wsdl:message>
   <wsdl:message name="IDataService_GetSurveyAnswer_InputMessage">
     <wsdl:part name="parameters" element="tns:GetSurveyAnswer" />
@@ -274,28 +356,38 @@
   <wsdl:message name="IDataService_GetSurveyAnswer_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetSurveyAnswerResponse" />
   </wsdl:message>
+  <wsdl:message name="IDataService_GetSurveyAnswer_CustomFaultExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q3="http://www.yourcompany.com/types/" name="detail" element="q3:CustomFaultException" />
+  </wsdl:message>
   <wsdl:message name="IDataService_SetSurveyAnswer_InputMessage">
     <wsdl:part name="parameters" element="tns:SetSurveyAnswer" />
   </wsdl:message>
   <wsdl:message name="IDataService_SetSurveyAnswer_OutputMessage">
     <wsdl:part name="parameters" element="tns:SetSurveyAnswerResponse" />
   </wsdl:message>
+  <wsdl:message name="IDataService_SetSurveyAnswer_CustomFaultExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q4="http://www.yourcompany.com/types/" name="detail" element="q4:CustomFaultException" />
+  </wsdl:message>
   <wsdl:portType name="IDataService">
     <wsdl:operation name="GetSurveyInfo">
       <wsdl:input wsaw:Action="http://tempuri.org/IDataService/GetSurveyInfo" message="tns:IDataService_GetSurveyInfo_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IDataService/GetSurveyInfoResponse" message="tns:IDataService_GetSurveyInfo_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IDataService/GetSurveyInfoCustomFaultExceptionFault" name="CustomFaultExceptionFault" message="tns:IDataService_GetSurveyInfo_CustomFaultExceptionFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="SetSurveyInfo">
       <wsdl:input wsaw:Action="http://tempuri.org/IDataService/SetSurveyInfo" message="tns:IDataService_SetSurveyInfo_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IDataService/SetSurveyInfoResponse" message="tns:IDataService_SetSurveyInfo_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IDataService/SetSurveyInfoCustomFaultExceptionFault" name="CustomFaultExceptionFault" message="tns:IDataService_SetSurveyInfo_CustomFaultExceptionFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetSurveyAnswer">
       <wsdl:input wsaw:Action="http://tempuri.org/IDataService/GetSurveyAnswer" message="tns:IDataService_GetSurveyAnswer_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IDataService/GetSurveyAnswerResponse" message="tns:IDataService_GetSurveyAnswer_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IDataService/GetSurveyAnswerCustomFaultExceptionFault" name="CustomFaultExceptionFault" message="tns:IDataService_GetSurveyAnswer_CustomFaultExceptionFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="SetSurveyAnswer">
       <wsdl:input wsaw:Action="http://tempuri.org/IDataService/SetSurveyAnswer" message="tns:IDataService_SetSurveyAnswer_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IDataService/SetSurveyAnswerResponse" message="tns:IDataService_SetSurveyAnswer_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IDataService/SetSurveyAnswerCustomFaultExceptionFault" name="CustomFaultExceptionFault" message="tns:IDataService_SetSurveyAnswer_CustomFaultExceptionFault_FaultMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="WSHttpBinding_IDataService" type="tns:IDataService">
@@ -311,6 +403,10 @@
         <wsp:PolicyReference URI="#WSHttpBinding_IDataService_GetSurveyInfo_output_policy" />
         <soap12:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="CustomFaultExceptionFault">
+        <wsp:PolicyReference URI="#WSHttpBinding_IDataService_GetSurveyInfo_CustomFaultExceptionFault_Fault" />
+        <soap12:fault use="literal" name="CustomFaultExceptionFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="SetSurveyInfo">
       <soap12:operation soapAction="http://tempuri.org/IDataService/SetSurveyInfo" style="document" />
@@ -322,6 +418,10 @@
         <wsp:PolicyReference URI="#WSHttpBinding_IDataService_SetSurveyInfo_output_policy" />
         <soap12:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="CustomFaultExceptionFault">
+        <wsp:PolicyReference URI="#WSHttpBinding_IDataService_SetSurveyInfo_CustomFaultExceptionFault_Fault" />
+        <soap12:fault use="literal" name="CustomFaultExceptionFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="GetSurveyAnswer">
       <soap12:operation soapAction="http://tempuri.org/IDataService/GetSurveyAnswer" style="document" />
@@ -333,6 +433,10 @@
         <wsp:PolicyReference URI="#WSHttpBinding_IDataService_GetSurveyAnswer_output_policy" />
         <soap12:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="CustomFaultExceptionFault">
+        <wsp:PolicyReference URI="#WSHttpBinding_IDataService_GetSurveyAnswer_CustomFaultExceptionFault_Fault" />
+        <soap12:fault use="literal" name="CustomFaultExceptionFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="SetSurveyAnswer">
       <soap12:operation soapAction="http://tempuri.org/IDataService/SetSurveyAnswer" style="document" />
@@ -344,6 +448,10 @@
         <wsp:PolicyReference URI="#WSHttpBinding_IDataService_SetSurveyAnswer_output_policy" />
         <soap12:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="CustomFaultExceptionFault">
+        <wsp:PolicyReference URI="#WSHttpBinding_IDataService_SetSurveyAnswer_CustomFaultExceptionFault_Fault" />
+        <soap12:fault use="literal" name="CustomFaultExceptionFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="DataService">
@@ -352,7 +460,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>http://localhost:22587/Epi.Web.ServiceHost/SurveyDataService.svc</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>hainesj01@ETIEXT.lan</Upn>
+          <Upn>ismailt01@ETIEXT.lan</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>

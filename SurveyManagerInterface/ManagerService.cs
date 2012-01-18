@@ -10,7 +10,7 @@ using Epi.Web.Common.MessageBase;
 using Epi.Web.Common.Criteria;
 using Epi.Web.Common.ObjectMapping;
 using Epi.Web.Common.BusinessObject;
-
+using Epi.Web.Common.Exception;
 namespace Epi.Web.WCF.SurveyService
 {
     public class ManagerService : IManagerService
@@ -28,15 +28,27 @@ namespace Epi.Web.WCF.SurveyService
         /// <returns></returns>
         public PublishResponse PublishSurvey(PublishRequest pRequest)
         {
-            PublishResponse result = new PublishResponse(pRequest.RequestId);
-            Epi.Web.Interfaces.DataInterfaces.ISurveyInfoDao SurveyInfoDao = new EF.EntitySurveyInfoDao();
+            try
+            {
+                PublishResponse result = new PublishResponse(pRequest.RequestId);
+                Epi.Web.Interfaces.DataInterfaces.ISurveyInfoDao SurveyInfoDao = new EF.EntitySurveyInfoDao();
 
-            Epi.Web.BLL.Publisher Implementation = new Epi.Web.BLL.Publisher(SurveyInfoDao);
-            SurveyInfoBO surveyInfoBO = Mapper.ToBusinessObject(pRequest.SurveyInfo);
-            SurveyRequestResultBO surveyRequestResultBO = Implementation.PublishSurvey(surveyInfoBO);
-            result.PublishInfo = Mapper.ToDataTransferObject(surveyRequestResultBO);
+                Epi.Web.BLL.Publisher Implementation = new Epi.Web.BLL.Publisher(SurveyInfoDao);
+                SurveyInfoBO surveyInfoBO = Mapper.ToBusinessObject(pRequest.SurveyInfo);
+                SurveyRequestResultBO surveyRequestResultBO = Implementation.PublishSurvey(surveyInfoBO);
+                result.PublishInfo = Mapper.ToDataTransferObject(surveyRequestResultBO);
 
-            return result;
+                return result;
+            }
+            catch (Exception ex)
+            {
+                CustomFaultException customFaultException = new CustomFaultException();
+                customFaultException.CustomMessage = ex.Message;
+                customFaultException.Source = ex.Source;
+                customFaultException.StackTrace = ex.StackTrace;
+                customFaultException.HelpLink = ex.HelpLink;
+                throw new FaultException<CustomFaultException>(customFaultException);
+            }
         }
 
 
@@ -47,50 +59,62 @@ namespace Epi.Web.WCF.SurveyService
         /// <returns></returns>
         public SurveyInfoResponse GetSurveyInfo(SurveyInfoRequest pRequest)
         {
-            SurveyInfoResponse result = new SurveyInfoResponse(pRequest.RequestId);
-            //Epi.Web.Interfaces.DataInterfaces.ISurveyInfoDao surveyInfoDao = new EF.EntitySurveyInfoDao();
-            //Epi.Web.BLL.SurveyInfo implementation = new Epi.Web.BLL.SurveyInfo(surveyInfoDao);
-
-            Epi.Web.Interfaces.DataInterfaces.IDaoFactory entityDaoFactory = new EF.EntityDaoFactory();
-            Epi.Web.Interfaces.DataInterfaces.ISurveyInfoDao surveyInfoDao = entityDaoFactory.SurveyInfoDao;
-            Epi.Web.BLL.SurveyInfo implementation = new Epi.Web.BLL.SurveyInfo(surveyInfoDao);
-
-            // Validate client tag, access token, and user credentials
-            if (!ValidRequest(pRequest, result, Validate.All))
+            try
             {
+                SurveyInfoResponse result = new SurveyInfoResponse(pRequest.RequestId);
+                //Epi.Web.Interfaces.DataInterfaces.ISurveyInfoDao surveyInfoDao = new EF.EntitySurveyInfoDao();
+                //Epi.Web.BLL.SurveyInfo implementation = new Epi.Web.BLL.SurveyInfo(surveyInfoDao);
+
+                Epi.Web.Interfaces.DataInterfaces.IDaoFactory entityDaoFactory = new EF.EntityDaoFactory();
+                Epi.Web.Interfaces.DataInterfaces.ISurveyInfoDao surveyInfoDao = entityDaoFactory.SurveyInfoDao;
+                Epi.Web.BLL.SurveyInfo implementation = new Epi.Web.BLL.SurveyInfo(surveyInfoDao);
+
+                // Validate client tag, access token, and user credentials
+                if (!ValidRequest(pRequest, result, Validate.All))
+                {
+                    return result;
+                }
+
+                var criteria = pRequest.Criteria as SurveyInfoCriteria;
+                string sort = criteria.SortExpression;
+                List<string> SurveyIdList = new List<string>();
+                foreach (string id in criteria.SurveyIdList)
+                {
+                    SurveyIdList.Add(id.ToUpper());
+                }
+
+                //if (request.LoadOptions.Contains("SurveyInfos"))
+                //{
+                //    IEnumerable<SurveyInfoDTO> SurveyInfos;
+                //    if (!criteria.IncludeOrderStatistics)
+                //    {
+                //        SurveyInfos = Implementation.GetSurveyInfos(sort);
+                //    }
+                //    else
+                //    {
+                //        SurveyInfos = Implementation.GetSurveyInfosWithOrderStatistics(sort);
+                //    }
+
+                //    response.SurveyInfos = SurveyInfos.Select(c => Mapper.ToDataTransferObject(c)).ToList();
+                //}
+
+                //if (pRequest.LoadOptions.Contains("SurveyInfo"))
+                //{
+
+                result.SurveyInfoList = Mapper.ToDataTransferObject(implementation.GetSurveyInfo(SurveyIdList, criteria.ClosingDate, criteria.SurveyType));
+                //}
+
                 return result;
             }
-
-            var criteria = pRequest.Criteria as SurveyInfoCriteria;
-            string sort = criteria.SortExpression;
-            List<string> SurveyIdList = new List<string>();
-            foreach (string id in criteria.SurveyIdList)
+            catch (Exception ex)
             {
-                SurveyIdList.Add(id.ToUpper());
+                CustomFaultException customFaultException = new CustomFaultException();
+                customFaultException.CustomMessage = ex.Message;
+                customFaultException.Source = ex.Source;
+                customFaultException.StackTrace = ex.StackTrace;
+                customFaultException.HelpLink = ex.HelpLink;
+                throw new FaultException<CustomFaultException>(customFaultException);
             }
-
-            //if (request.LoadOptions.Contains("SurveyInfos"))
-            //{
-            //    IEnumerable<SurveyInfoDTO> SurveyInfos;
-            //    if (!criteria.IncludeOrderStatistics)
-            //    {
-            //        SurveyInfos = Implementation.GetSurveyInfos(sort);
-            //    }
-            //    else
-            //    {
-            //        SurveyInfos = Implementation.GetSurveyInfosWithOrderStatistics(sort);
-            //    }
-
-            //    response.SurveyInfos = SurveyInfos.Select(c => Mapper.ToDataTransferObject(c)).ToList();
-            //}
-
-            //if (pRequest.LoadOptions.Contains("SurveyInfo"))
-            //{
-            
-            result.SurveyInfoList = Mapper.ToDataTransferObject(implementation.GetSurveyInfo(SurveyIdList, criteria.ClosingDate, criteria.SurveyType));
-            //}
-
-            return result;
         }
 
         /// <summary>
@@ -100,68 +124,80 @@ namespace Epi.Web.WCF.SurveyService
         /// <returns></returns>
         public SurveyAnswerResponse GetSurveyAnswer(SurveyAnswerRequest pRequest)
         {
-            SurveyAnswerResponse result = new SurveyAnswerResponse(pRequest.RequestId);
-            //Epi.Web.Interfaces.DataInterfaces.ISurveyResponseDao surveyInfoDao = new EF.EntitySurveyResponseDao();
-            //Epi.Web.BLL.SurveyResponse Implementation = new Epi.Web.BLL.SurveyResponse(surveyInfoDao);
-
-            Epi.Web.Interfaces.DataInterfaces.IDaoFactory entityDaoFactory = new EF.EntityDaoFactory();
-            Epi.Web.Interfaces.DataInterfaces.ISurveyResponseDao ISurveyResponseDao = entityDaoFactory.SurveyResponseDao;
-            Epi.Web.BLL.SurveyResponse Implementation = new Epi.Web.BLL.SurveyResponse(ISurveyResponseDao);
-
-
-            // Validate client tag, access token, and user credentials
-            if (!ValidRequest(pRequest, result, Validate.All))
+            try
             {
+                SurveyAnswerResponse result = new SurveyAnswerResponse(pRequest.RequestId);
+                //Epi.Web.Interfaces.DataInterfaces.ISurveyResponseDao surveyInfoDao = new EF.EntitySurveyResponseDao();
+                //Epi.Web.BLL.SurveyResponse Implementation = new Epi.Web.BLL.SurveyResponse(surveyInfoDao);
+
+                Epi.Web.Interfaces.DataInterfaces.IDaoFactory entityDaoFactory = new EF.EntityDaoFactory();
+                Epi.Web.Interfaces.DataInterfaces.ISurveyResponseDao ISurveyResponseDao = entityDaoFactory.SurveyResponseDao;
+                Epi.Web.BLL.SurveyResponse Implementation = new Epi.Web.BLL.SurveyResponse(ISurveyResponseDao);
+
+
+                // Validate client tag, access token, and user credentials
+                if (!ValidRequest(pRequest, result, Validate.All))
+                {
+                    return result;
+                }
+
+                SurveyAnswerCriteria criteria = pRequest.Criteria;
+
+                List<string> IdList = new List<string>();
+
+                foreach (string id in criteria.SurveyAnswerIdList)
+                {
+                    IdList.Add(id.ToUpper());
+                }
+                //string sort = criteria.SortExpression;
+
+                //if (request.LoadOptions.Contains("SurveyInfos"))
+                //{
+                //    IEnumerable<SurveyInfoDTO> SurveyInfos;
+                //    if (!criteria.IncludeOrderStatistics)
+                //    {
+                //        SurveyInfos = Implementation.GetSurveyInfos(sort);
+                //    }
+                //    else
+                //    {
+                //        SurveyInfos = Implementation.GetSurveyInfosWithOrderStatistics(sort);
+                //    }
+
+                //    response.SurveyInfos = SurveyInfos.Select(c => Mapper.ToDataTransferObject(c)).ToList();
+                //}
+
+
+                result.SurveyResponseList = Mapper.ToDataTransferObject
+                    (
+                        Implementation.GetSurveyResponse
+                        (
+                            IdList,
+                            criteria.SurveyId,
+                            criteria.DateCompleted,
+                            criteria.StatusId
+                        )
+                    );
+                /*
+                if (string.IsNullOrEmpty(pRequest.Criteria.SurveyId))
+                {
+                    result.SurveyResponseList = Mapper.ToDataTransferObject(Implementation.GetSurveyResponseById(pRequest.Criteria.SurveyAnswerIdList));
+                }
+                else
+                {
+                    result.SurveyResponseList = Mapper.ToDataTransferObject(Implementation.GetSurveyResponseBySurveyId(pRequest.Criteria.SurveyAnswerIdList));
+                }*/
+
                 return result;
             }
-
-            SurveyAnswerCriteria criteria = pRequest.Criteria;
-
-            List<string> IdList = new List<string>();
-
-            foreach (string id in criteria.SurveyAnswerIdList)
+            catch (Exception ex)
             {
-                IdList.Add(id.ToUpper());
+                CustomFaultException customFaultException = new CustomFaultException();
+                customFaultException.CustomMessage = ex.Message;
+                customFaultException.Source = ex.Source;
+                customFaultException.StackTrace = ex.StackTrace;
+                customFaultException.HelpLink = ex.HelpLink;
+                throw new FaultException<CustomFaultException>(customFaultException);
             }
-            //string sort = criteria.SortExpression;
-
-            //if (request.LoadOptions.Contains("SurveyInfos"))
-            //{
-            //    IEnumerable<SurveyInfoDTO> SurveyInfos;
-            //    if (!criteria.IncludeOrderStatistics)
-            //    {
-            //        SurveyInfos = Implementation.GetSurveyInfos(sort);
-            //    }
-            //    else
-            //    {
-            //        SurveyInfos = Implementation.GetSurveyInfosWithOrderStatistics(sort);
-            //    }
-
-            //    response.SurveyInfos = SurveyInfos.Select(c => Mapper.ToDataTransferObject(c)).ToList();
-            //}
-
-
-            result.SurveyResponseList = Mapper.ToDataTransferObject
-                (
-                    Implementation.GetSurveyResponse
-                    (
-                        IdList,
-                        criteria.SurveyId,
-                        criteria.DateCompleted,
-                        criteria.StatusId
-                    )
-                );
-            /*
-            if (string.IsNullOrEmpty(pRequest.Criteria.SurveyId))
-            {
-                result.SurveyResponseList = Mapper.ToDataTransferObject(Implementation.GetSurveyResponseById(pRequest.Criteria.SurveyAnswerIdList));
-            }
-            else
-            {
-                result.SurveyResponseList = Mapper.ToDataTransferObject(Implementation.GetSurveyResponseBySurveyId(pRequest.Criteria.SurveyAnswerIdList));
-            }*/
-
-            return result;
         }
 
 
