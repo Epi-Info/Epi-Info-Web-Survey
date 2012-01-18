@@ -5,7 +5,9 @@ using System.Web;
 using Epi.Web.MVC.Repositories.Core;
 using Epi.Web.DataServiceClient;
 using Epi.Web.Common.Message;
-
+using Epi.Web.Common.Exception;
+using System.ServiceModel;
+using Epi.Web.DataServiceClient;
 namespace Epi.Web.MVC.Repositories
 {
     public class SurveyInfoRepository : RepositoryBase, ISurveyInfoRepository
@@ -13,11 +15,11 @@ namespace Epi.Web.MVC.Repositories
 
 
 
-        private Epi.Web.DataServiceClient.IDataService _iSurveyManager;
+        private Epi.Web.DataServiceClient.IDataService _iDataService;
 
-        public SurveyInfoRepository(Epi.Web.DataServiceClient.IDataService iSurveyManager)
+        public SurveyInfoRepository(Epi.Web.DataServiceClient.IDataService iDataService)
         {
-            _iSurveyManager = iSurveyManager;
+            _iDataService = iDataService;
         }
         
         /// <summary>
@@ -28,10 +30,32 @@ namespace Epi.Web.MVC.Repositories
         public SurveyInfoResponse GetSurveyInfo(SurveyInfoRequest pRequest)
         {
 
-            //SurveyInfoResponse result = Client.GetSurveyInfo(pRequest);
-            SurveyInfoResponse result = _iSurveyManager.GetSurveyInfo(pRequest);
-            return result;
-            
+            try
+            {
+                //SurveyInfoResponse result = Client.GetSurveyInfo(pRequest);
+                SurveyInfoResponse result = _iDataService.GetSurveyInfo(pRequest);
+                return result;
+            }
+            catch (FaultException<CustomFaultException> cfe)
+            {
+                throw cfe;
+            }
+            catch (FaultException fe)
+            {
+                throw fe;
+            }
+            catch (CommunicationException ce)
+            {
+                throw ce;
+            }
+            catch (TimeoutException te)
+            {
+                throw te;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         #region stubcode
