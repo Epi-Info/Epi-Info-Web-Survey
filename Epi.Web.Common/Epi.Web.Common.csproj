@@ -67,6 +67,7 @@
     <Compile Include="Criteria\Criteria.cs" />
     <Compile Include="Criteria\SurveyInfoCriteria.cs" />
     <Compile Include="DTO\SurveyAnswerDTO.cs" />
+    <Compile Include="Exception\CustomFaultException.cs" />
     <Compile Include="Message\Base\AcknowledgeType.cs" />
     <Compile Include="Message\Base\PersistType.cs" />
     <Compile Include="Message\Base\RequestBase.cs" />
