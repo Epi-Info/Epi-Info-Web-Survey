@@ -12,6 +12,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Xml;
+using System.ServiceModel;
+using Epi.Web.Common.Exception;
 
 namespace Epi.Web.SurveyManager.Client
 {
@@ -81,9 +83,29 @@ namespace Epi.Web.SurveyManager.Client
                 this.OpenURLButton.IsEnabled = Result.PublishInfo.IsPulished;
                 
             }
+            catch (FaultException<CustomFaultException> cfe)
+            {
+                ServiceResponseTextBox.AppendText("FaultException<CustomFaultException>:\n");
+                ServiceResponseTextBox.AppendText(cfe.ToString());
+            }
+            catch (FaultException fe)
+            {
+                ServiceResponseTextBox.AppendText("FaultException:\n");
+                ServiceResponseTextBox.AppendText(fe.ToString());
+            }
+            catch (CommunicationException ce)
+            {
+                ServiceResponseTextBox.AppendText("CommunicationException:\n");
+                ServiceResponseTextBox.AppendText(ce.ToString());
+            }
+            catch (TimeoutException te)
+            {
+                ServiceResponseTextBox.AppendText("TimeoutException:\n");
+                ServiceResponseTextBox.AppendText(te.ToString());
+            }
             catch (Exception ex)
             {
-                ServiceResponseTextBox.AppendText("error:\n");
+                ServiceResponseTextBox.AppendText("Exception:\n");
                 ServiceResponseTextBox.AppendText(ex.ToString());
             }
         }

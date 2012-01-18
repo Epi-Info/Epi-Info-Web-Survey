@@ -12,6 +12,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using System.ServiceModel;
+using Epi.Web.Common.Exception;
+
 namespace Epi.Web.SurveyManager.Client
 {
     /// <summary>
@@ -63,9 +66,29 @@ namespace Epi.Web.SurveyManager.Client
                     SurveyInfoResponseTextBox.AppendText(string.Format("{0} - {1} - {2}\n", SurveyInfo.SurveyId, SurveyInfo.SurveyName, SurveyInfo.ClosingDate));
                 }
             }
+            catch (FaultException<CustomFaultException> cfe)
+            {
+                SurveyInfoResponseTextBox.AppendText("FaultException<CustomFaultException>:\n");
+                SurveyInfoResponseTextBox.AppendText(cfe.ToString());
+            }
+            catch (FaultException fe)
+            {
+                SurveyInfoResponseTextBox.AppendText("FaultException:\n");
+                SurveyInfoResponseTextBox.AppendText(fe.ToString());
+            }
+            catch (CommunicationException ce)
+            {
+                SurveyInfoResponseTextBox.AppendText("CommunicationException:\n");
+                SurveyInfoResponseTextBox.AppendText(ce.ToString());
+            }
+            catch (TimeoutException te)
+            {
+                SurveyInfoResponseTextBox.AppendText("TimeoutException:\n");
+                SurveyInfoResponseTextBox.AppendText(te.ToString());
+            }
             catch (Exception ex)
             {
-                SurveyInfoResponseTextBox.AppendText("error:\n");
+                SurveyInfoResponseTextBox.AppendText("Exception:\n");
                 SurveyInfoResponseTextBox.AppendText(ex.ToString());
             }
         }
@@ -107,9 +130,29 @@ namespace Epi.Web.SurveyManager.Client
                     SurveyAnswerResponseTextBox.AppendText(string.Format("{0} - {1} - {2}\n",SurveyAnswer.ResponseId, SurveyAnswer.Status, SurveyAnswer.DateLastUpdated));
                 }
             }
+            catch (FaultException<CustomFaultException> cfe)
+            {
+                SurveyAnswerResponseTextBox.AppendText("FaultException<CustomFaultException>:\n");
+                SurveyAnswerResponseTextBox.AppendText(cfe.ToString());
+            }
+            catch (FaultException fe)
+            {
+                SurveyAnswerResponseTextBox.AppendText("FaultException:\n");
+                SurveyAnswerResponseTextBox.AppendText(fe.ToString());
+            }
+            catch (CommunicationException ce)
+            {
+                SurveyAnswerResponseTextBox.AppendText("CommunicationException:\n");
+                SurveyAnswerResponseTextBox.AppendText(ce.ToString());
+            }
+            catch (TimeoutException te)
+            {
+                SurveyAnswerResponseTextBox.AppendText("TimeoutException:\n");
+                SurveyAnswerResponseTextBox.AppendText(te.ToString());
+            }
             catch (Exception ex)
             {
-                SurveyAnswerResponseTextBox.AppendText("error:\n");
+                SurveyAnswerResponseTextBox.AppendText("Exception:\n");
                 SurveyAnswerResponseTextBox.AppendText(ex.ToString());
             }
         }
