@@ -89,7 +89,7 @@ namespace MvcDynamicForms.Fields
             if (_IsRequired == true)
             {
                 select.Attributes.Add("class", "validate[required] text-input");
-                select.Attributes.Add("data-prompt-position", "topRight:15");
+                select.Attributes.Add("data-prompt-position", "topRight:10");
             }
             select.Attributes.Add("style", "position:absolute;left:" + _left.ToString() + "px;top:" + _top.ToString() + "px" + ";width:" + _ControlWidth.ToString() + "px"  + ErrorStyle);
             select.MergeAttributes(_inputHtmlAttributes);
