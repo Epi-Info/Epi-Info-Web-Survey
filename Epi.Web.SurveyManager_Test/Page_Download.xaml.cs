@@ -104,7 +104,7 @@ namespace Epi.Web.SurveyManager.Client
                 Request.Criteria.SurveyAnswerIdList.Add(id);
             }
 
-            if (!string.IsNullOrEmpty(this.SurveyAnswerCriteria_SurveyIdTextBox.Text.Trim()))
+                if (!string.IsNullOrEmpty(this.SurveyAnswerCriteria_SurveyIdTextBox.Text.Trim()))
             {
                 Request.Criteria.SurveyId = this.SurveyAnswerCriteria_SurveyIdTextBox.Text;
             }
@@ -127,7 +127,7 @@ namespace Epi.Web.SurveyManager.Client
                 SurveyAnswerResponseTextBox.AppendText(string.Format("{0} - records.\n\n", Result.SurveyResponseList.Count));
                 foreach (Epi.Web.Common.DTO.SurveyAnswerDTO SurveyAnswer in Result.SurveyResponseList)
                 {
-                    SurveyAnswerResponseTextBox.AppendText(string.Format("{0} - {1} - {2}\n",SurveyAnswer.ResponseId, SurveyAnswer.Status, SurveyAnswer.DateLastUpdated));
+                    SurveyAnswerResponseTextBox.AppendText(string.Format("{0} - {1} - {2} - {3}\n",SurveyAnswer.ResponseId, SurveyAnswer.Status, SurveyAnswer.DateLastUpdated, SurveyAnswer.XML));
                 }
             }
             catch (FaultException<CustomFaultException> cfe)
