@@ -194,8 +194,7 @@ namespace Epi.Web.SurveyManager.Client
                     browser.Navigate(
                       URL,
                       "Epi.Web Demo", 
-                      null,
-                      null
+                      null, null
                     );
                 }
             }
