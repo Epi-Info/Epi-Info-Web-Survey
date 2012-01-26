@@ -18,74 +18,54 @@
  
     <div id="infobox">
         <div class="pages">
-		<%--<span class="nextprev"><img src="/Content/images/prev_d.png" height="16px" style="vertical-align:text-top;" alt="Previous Page"></span>--%>
-     
-		<%--<span class="current">1 /</span>--%>
-       <% if (Model.NumberOfPages > 0)
-          {
-              int num = 0;
+
+       <% 
+           if (Model.NumberOfPages > 0)
+           {
+                int num = 0;
               
-              %>
-
-           <% for (int i = 1; Model.NumberOfPages > i - 1; i++)
-              {
-                  
-                  num = i; %>
-         <% if (i == 1 && Model.CurrentPage >1)
-            {  %>
-                  <a  href="<%=string.Format("{0}://{1}/survey/{2}/{3}", ViewContext.HttpContext.Request.Url.Scheme, ViewContext.HttpContext.Request.Url.Authority,  Model.SurveyInfo.SurveyId,Model.CurrentPage-1) %>" class="nextprev" title="Previous Page"><img src="/Content/images/prev_d.png" height="16px" style="vertical-align:text-top;" alt="Previous Page"></a>
-         
-          <%
-            }
-            else if (i == 1)
-            { %>
-                          <a href="<%=string.Format("{0}://{1}/survey/{2}/{3}", ViewContext.HttpContext.Request.Url.Scheme, ViewContext.HttpContext.Request.Url.Authority,  Model.SurveyInfo.SurveyId,Model.CurrentPage) %>" class="nextprev" title="Previous Page"><img src="/Content/images/prev_d.png" height="16px" style="vertical-align:text-top;" alt="Previous Page"></a>
-
-         <% } %>
+             for (int i = 1; Model.NumberOfPages > i - 1; i++)
+             {
+                    num = i; 
+                    if (i == 1 && Model.CurrentPage >1)
+                    {  
+                          Response.Write(string.Format("<a  href=\"{0}://{1}/survey/{2}/{3} class=\"nextprev\" title=\"Previous Page\"><img src=\"/Content/images/prev_d.png\" height=\"16px\" style=\"vertical-align:text-top;\" alt=\"Previous Page\"></a>", ViewContext.HttpContext.Request.Url.Scheme, ViewContext.HttpContext.Request.Url.Authority,  Model.SurveyInfo.SurveyId,Model.CurrentPage-1));
+          
+                    }
+                    else if (i == 1)
+                    {
+                                  Response.Write(string.Format("<a href=\"{0}://{1}/survey/{2}/{3} class=\"nextprev\" title=\"Previous Page\"><img src=\"/Content/images/prev_d.png\" height=\"16px\" style=\"vertical-align:text-top;\" alt=\"Previous Page\"></a>", ViewContext.HttpContext.Request.Url.Scheme, ViewContext.HttpContext.Request.Url.Authority,  Model.SurveyInfo.SurveyId,Model.CurrentPage));
+                    } 
 
 
 
-         <% if (Model.CurrentPage == i)
-            {  %>
-          <span class="current"><%= num%></span>
-          <%
-            }
-            else
-            { %>
+                    if (Model.CurrentPage == i)
+                    { 
+                      Response.Write("<span class=\"current\">" + num + "</span>");
 
-          <%--<a href="<%=string.Format("{0}://{1}/survey/{2}/{3}", ViewContext.HttpContext.Request.Url.Scheme, ViewContext.HttpContext.Request.Url.Authority,  Model.SurveyInfo.SurveyId, num) %>" title="Go to page"   ><%=num %></a>--%> 
-          <%-- <%= Html.ActionLink(num.ToString(), "Index", "SurveyController", new AjaxOptions{ HttpMethod = "POST" })%>--%>
-         
-          <a href="<%=num %>" title="Go to page"   ><%=num %></a>
+                    }
+                    else
+                    { 
+                         Response.Write("<a href=\"" + num + "\" title=\"Go to page\">" + num + "</a>");
+                     }
 
-            <% } %>
+             } 
 
-         <% } %>
+               if (Model.CurrentPage != Model.NumberOfPages )
+                {
 
-           <% if (Model.CurrentPage != Model.NumberOfPages )
-            {  %>
-                  
-         <a href="<%=string.Format("{0}://{1}/survey/{2}/{3}", ViewContext.HttpContext.Request.Url.Scheme, ViewContext.HttpContext.Request.Url.Authority,  Model.SurveyInfo.SurveyId, Model.CurrentPage+1) %>" class="nextprev" title="Go to Next Page"><img src="/Content/images/next.png" height="16px" style="vertical-align: text-top; text-decoration:none;" border="0" alt="Next Page"></a>
-          <%
-            }
-            else
-            { %>
-          <a href="<%=string.Format("{0}://{1}/survey/{2}/{3}", ViewContext.HttpContext.Request.Url.Scheme, ViewContext.HttpContext.Request.Url.Authority,  Model.SurveyInfo.SurveyId, Model.CurrentPage) %>" class="nextprev" title="Go to Next Page"><img src="/Content/images/next.png" height="16px" style="vertical-align: text-top; text-decoration:none;" border="0" alt="Next Page"></a>
+                    Response.Write(string.Format("<a href=\"{0}://{1}/survey/{2}/{3}\" class=\"nextprev\" title=\"Go to Next Page\"><img src=\"/Content/images/next.png\" height=\"16px\" style=\"vertical-align: text-top; text-decoration:none;\" border=\"0\" alt=\"Next Page\"></a>", ViewContext.HttpContext.Request.Url.Scheme, ViewContext.HttpContext.Request.Url.Authority, Model.SurveyInfo.SurveyId, Model.CurrentPage + 1));
+          
+                }
+                else
+                { 
+                    Response.Write(string.Format("<a href=\"{0}://{1}/survey/{2}/{3}\" class=\"nextprev\" title=\"Go to Next Page\"><img src=\"/Content/images/next.png\" height=\"16px\" style=\"vertical-align: text-top; text-decoration:none;\" border=\"0\" alt=\"Next Page\"></a>", ViewContext.HttpContext.Request.Url.Scheme, ViewContext.HttpContext.Request.Url.Authority,  Model.SurveyInfo.SurveyId, Model.CurrentPage) );
             
-         <% } %>
-         <% } %>
-      <%--  <a href="" title="Go to page 2">2</a>
-		<a href="" title="Go to page 3">3</a>
-		<a href="" title="Go to page 4">4</a>
-		<a href="" title="Go to page 5">5</a>
-		<a href="" title="Go to page 6">6</a>
-		<a href="" title="Go to page 7">7</a>
-		<a href="" title="Go to page 8">8</a>
-		<a href="/page9" title="Go to page 9">9</a>
-		<a href="/page10" title="Go to page 10">10</a>
-	    <span>&#8230;</span><a href="/page230" title="Go to page 15">15</a>
-		<a href="/page231" title="Go to page 20">20</a>--%>
-	<%--	<a href="<%=string.Format("{0}://{1}/survey/{2}/{3}", ViewContext.HttpContext.Request.Url.Scheme, ViewContext.HttpContext.Request.Url.Authority,  Model.SurveyInfo.SurveyId, num+1) %>" class="nextprev" title="Go to Next Page"><img src="/Content/images/next.png" height="16px" style="vertical-align: text-top; text-decoration:none;" border="0" alt="Next Page"></a>--%>
+                } 
+          }
+          
+        %>
+      
 	  </div>
 	 
 	  <div id="exit">
