@@ -15,7 +15,7 @@
 </asp:Content>
  
  <asp:Content ID="Content3" ContentPlaceHolderID="MainContent" runat="server">
-   
+ 
     <div id="infobox">
         <div class="pages">
 		<%--<span class="nextprev"><img src="/Content/images/prev_d.png" height="16px" style="vertical-align:text-top;" alt="Previous Page"></span>--%>
@@ -129,7 +129,7 @@
                   <div id="prev" align="left"><button class="prev"  type="submit" ><img class="button" src="../../Content/images/arrow_left.png"> Previous</button></div>
 	 		 <div id="save" align="center"><button class="save" type="submit" onclick="window.location='survey3.html'"><img class="button" src="../../Content/images/save.png"> Save & Close</button></div>
 	 		 
-          <div id="next" align="right"><button class="submits" type="submit"  name="submit" value="Submit" >
+          <div id="next" align="right"><button class="submits" type="submit"   value="Submit"  >
               Submit Survey </button></div> 
 
             
