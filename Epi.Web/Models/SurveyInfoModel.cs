@@ -80,5 +80,6 @@ namespace Epi.Web.MVC.Models
             set { _ClosingDate = value; }
         }
 
+
     }
 }
