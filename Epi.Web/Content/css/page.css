@@ -8,6 +8,8 @@
  color: #244640;
 }
 
+img { border: none;}
+
 .pages a {
 	color:#244640;
     display: block;

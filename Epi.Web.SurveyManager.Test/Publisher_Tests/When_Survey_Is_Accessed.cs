@@ -27,7 +27,9 @@ namespace Epi.Web.SurveyManager.Test.Publisher_Tests
             //Arrange
 
             surveyInfoRequest = new Epi.Web.Common.Message.SurveyInfoRequest();
-            surveyInfoRequest.Criteria.SurveyIdList = "1";
+            List<string> SurveyIdList = new List<string>();
+            SurveyIdList.Add("1");
+            surveyInfoRequest.Criteria.SurveyIdList = SurveyIdList;
             iSurveyFacade = new TestSurveyFacade(surveyInfoRequest);
             var surveyId = "7696d742-e42d-45d1-8352-ec8c3f0db3c2";
             int CurrentPage = 1;

@@ -213,6 +213,8 @@
     </None>
     <Content Include="Scripts\jquery.validationEngine-en.js" />
     <Content Include="Scripts\jquery.validationEngine.js" />
+    <Content Include="Scripts\MicrosoftAjax.js" />
+    <Content Include="Scripts\MicrosoftMvcAjax.js" />
     <Content Include="Unity.Mvc3.README.txt" />
     <Content Include="Views\Final\Index.aspx" />
     <Content Include="Views\Home\Index.aspx" />
