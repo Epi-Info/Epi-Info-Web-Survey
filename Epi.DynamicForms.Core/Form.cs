@@ -270,5 +270,9 @@ namespace MvcDynamicForms
             get {return this._SurveyInfo; }
             set { this._SurveyInfo = value; }
         }
+
+
+        public int NumberOfPages { get; set; }
+        public int CurrentPage  { get; set; }
     }
 }
