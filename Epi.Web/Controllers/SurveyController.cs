@@ -52,33 +52,33 @@ namespace Epi.Web.MVC.Controllers
                 //create the responseid
                 Guid ResponseIDGuid = Guid.NewGuid();
                 string ResponseID = ResponseIDGuid.ToString();
-                if (TempData[Epi.Web.MVC.Constants.Constant.RESPONSE_ID] == null)
-                {
+                //if (TempData[Epi.Web.MVC.Constants.Constant.RESPONSE_ID] == null)
+                //{
                     
 
                     //put the ResponseId in Temp data for later use
                     TempData[Epi.Web.MVC.Constants.Constant.RESPONSE_ID] = ResponseID.ToString();
                     _isurveyFacade.CreateSurveyAnswer(surveyId, ResponseID.ToString());
-                }
-                else
-                {
-                    ResponseID = TempData[Epi.Web.MVC.Constants.Constant.RESPONSE_ID].ToString();
-                    UpdateModel(form);
+                //}
+                //else
+                //{
+                //    ResponseID = TempData[Epi.Web.MVC.Constants.Constant.RESPONSE_ID].ToString();
+                //    UpdateModel(form);
 
-                    if (form.Validate())
-                    {
-                        string responseId = TempData[Epi.Web.MVC.Constants.Constant.RESPONSE_ID].ToString();
-                        _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId, form);
+                //    if (form.Validate())
+                //    {
+                //        string responseId = TempData[Epi.Web.MVC.Constants.Constant.RESPONSE_ID].ToString();
+                //        _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId, form);
 
-                        return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
-                    }
+                //        return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
+                //    }
 
 
                     return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
 
-                }
+                //}
                 
-               return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
+               //return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
                  
                
             }
@@ -103,7 +103,7 @@ namespace Epi.Web.MVC.Controllers
                 //Update the model
                 UpdateModel(form);
 
-                if (form.Validate())
+                if (form.Validate() && !string.IsNullOrEmpty(Submit))
                 {
                     string responseId = TempData[Epi.Web.MVC.Constants.Constant.RESPONSE_ID].ToString();
                     _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId, form);
