@@ -29,8 +29,6 @@ namespace Epi.Web.SurveyManager.Client
             InitializeComponent();
             TimeSpan t = new TimeSpan(10, 0, 0, 0);
             this.datePicker1.SelectedDate = DateTime.Now + t;
-
-            
         }
 
         private void SubmitRequestButton_Click(object sender, RoutedEventArgs e)
