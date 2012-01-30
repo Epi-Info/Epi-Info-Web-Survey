@@ -1,6 +1,6 @@
 ﻿using System.Configuration;
 using System;
- 
+using Epi.Web.Common.Security; 
 
 namespace Epi.Web.EF
 {
@@ -21,8 +21,8 @@ namespace Epi.Web.EF
                 //  string connectionStringName = ConfigurationManager.AppSettings.Get("ConnectionStringName");
                 string connectionStringName = "EIWSEntities";
 
-                //To Do: Decrypt connection string here
-                _connectionString = ConfigurationManager.ConnectionStrings[connectionStringName].ConnectionString;
+                //Decrypt connection string here
+                _connectionString = Cryptography.Decrypt(ConfigurationManager.ConnectionStrings[connectionStringName].ConnectionString);
             }
             catch (Exception ex) 
                 {
