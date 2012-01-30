@@ -33,7 +33,7 @@ namespace Epi.Web.MVC.Controllers
        /// <returns></returns>
  
         [HttpGet]
-        public ActionResult Index(string surveyId,string page)
+        public ActionResult Index(string surveyId, int PageNUmber)
         {
 
             //if (!string.IsNullOrEmpty(page))
@@ -44,7 +44,7 @@ namespace Epi.Web.MVC.Controllers
             try
             {
 
-                var form = _isurveyFacade.GetSurveyFormData(surveyId, this.GetCurrentPage(), this.GetCurrentSurveyAnswer());
+                var form = _isurveyFacade.GetSurveyFormData(surveyId,PageNUmber, this.GetCurrentSurveyAnswer());
 
                 //create the responseid
                 Guid ResponseID = Guid.NewGuid();
@@ -64,7 +64,7 @@ namespace Epi.Web.MVC.Controllers
             //return null;
         }
         [HttpPost] [ValidateAntiForgeryToken]
-        public ActionResult Index(SurveyInfoModel surveyInfoModel,string Submit)
+        public ActionResult Index(SurveyInfoModel surveyInfoModel, string Submitbutton, string Savebutton, int PageNUmber)
         {
 
             try
@@ -73,22 +73,42 @@ namespace Epi.Web.MVC.Controllers
                 MvcDynamicForms.Form form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, this.GetCurrentPage(), this.GetCurrentSurveyAnswer());
                 //Update the model
                 UpdateModel(form);
-
-                if (form.Validate())
+                if (!string.IsNullOrEmpty(Submitbutton))
                 {
-                    string responseId = TempData[Epi.Web.MVC.Constants.Constant.RESPONSE_ID].ToString();
-                    _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId, form);
+                    if (form.Validate())
+                    {
+                        string responseId = TempData[Epi.Web.MVC.Constants.Constant.RESPONSE_ID].ToString();
+                        _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId, form);
 
-                    //return RedirectToAction("Index", "Final", new {id="final" });
-                    TempData[Epi.Web.MVC.Constants.Constant.RESPONSE_ID] = null;
-                    return RedirectToAction("Index", "Final");
+                        //return RedirectToAction("Index", "Final", new {id="final" });
+                        TempData[Epi.Web.MVC.Constants.Constant.RESPONSE_ID] = null;
+                        return RedirectToAction("Index", "Final");
+                    }
+                    else
+                    {
+
+                        return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
+                    }
                 }
                 else
                 {
 
-                    return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
-                }
 
+                    if (!string.IsNullOrEmpty(Savebutton))
+                    {
+                        return RedirectToAction("Index", "Save");// this code is just a place holder
+                    }
+                    else
+                    {
+
+                        return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
+                    
+                    }
+
+
+
+
+                }
             }
             catch (Exception ex)
             {

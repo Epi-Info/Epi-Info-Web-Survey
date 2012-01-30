@@ -3,15 +3,7 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<script type="text/javascript">
-    $(function () {
-        $('a').click(PostForm);
-        function PostForm(event) {
-            $("#myform").submit();
-            return true;
-        }
-    });
-</script>
+ 
 <div id="header">
             <h1>
                 Survey Name- @Model.SurveyInfo.SurveyName 
@@ -37,13 +29,13 @@
                   num = i;  
                     if (i == 1 && Model.CurrentPage >1)
                         {   
-                              <a  href="@string.Format("{0}://{1}/survey/{2}/{3}", ViewContext.HttpContext.Request.Url.Scheme, ViewContext.HttpContext.Request.Url.Authority,  Model.SurveyInfo.SurveyId,Model.CurrentPage-1)" class="nextprev" title="Previous Page"><img src="/Content/images/prev_d.png" height="16px" style="vertical-align:text-top;" alt="Previous Page"></a>
+                              <a  href="@string.Format("{0}://{1}/survey/{2}/{3}", ViewContext.HttpContext.Request.Url.Scheme, ViewContext.HttpContext.Request.Url.Authority,  Model.SurveyInfo.SurveyId,Model.CurrentPage-1)"   class="nextprev" title="Previous Page"><img src="/Content/images/prev_d.png" height="16px" style="vertical-align:text-top;" alt="Previous Page"></a>
          
            
                         }
                     else if (i == 1)
                     {  
-                              <a href="@string.Format("{0}://{1}/survey/{2}/{3}", ViewContext.HttpContext.Request.Url.Scheme, ViewContext.HttpContext.Request.Url.Authority,  Model.SurveyInfo.SurveyId,Model.CurrentPage)" class="nextprev" title="Previous Page"><img src="/Content/images/prev_d.png" height="16px" style="vertical-align:text-top;" alt="Previous Page"></a>
+                              <a href="@string.Format("{0}://{1}/survey/{2}/{3}", ViewContext.HttpContext.Request.Url.Scheme, ViewContext.HttpContext.Request.Url.Authority,  Model.SurveyInfo.SurveyId,Model.CurrentPage)"   class="nextprev" title="Previous Page"><img src="/Content/images/prev_d.png" height="16px" style="vertical-align:text-top;" alt="Previous Page"></a>
 
                     }  
 
@@ -103,7 +95,7 @@
               <span style="font-weight:bold; font-size:10pt;">Please correct the following errors before continuing:</span>
                 <br>
                
-                @Model.GetErrorSummary() 
+                 @Html.Raw(Model.GetErrorSummary())
             </div>
             <div style="clear: both;">
             </div>
@@ -113,29 +105,30 @@
         @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "myform" }))
            {  
             <br />
-              <a id="linkToPost" href="#">Perform HTTP Post</a><br />
+              
              @Html.AntiForgeryToken()  
              @Html.Raw(Model.RenderHtml(true))
              
             
-           }
-   	     </div>
+           
+   	           
 	        <div id="nav">
 
 		        
               <div id="prev" align="left"><button class="prev"  type="submit" ><img class="button" src="../../Content/images/arrow_left.png"> Previous</button>
               
               </div>
-	 		 <div id="save" align="center"><button class="save" type="submit" onclick="window.location='survey3.html'"><img class="button" src="../../Content/images/save.png"/> Save & Close</button>
+	 		 <div id="save" align="center"><button class="save" type="submit" name="Savebutton" onclick="window.location='survey3.html'"><img class="button" src="../../Content/images/save.png"/> Save & Close</button>
              </div>
 	 		 
-              <div id="next" align="right"><button class="submits" type="submit"  name="submit" value="Submit" >
+              <div id="next" align="right">
+              <button class="submits" type="submit"  name="Submitbutton" value="Submit" >
               Submit Survey </button>
                </div> 
 
             
 	        </div>
-
+           }
 
 
 
