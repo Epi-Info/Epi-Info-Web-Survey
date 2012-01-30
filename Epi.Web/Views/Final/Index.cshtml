@@ -1,0 +1,27 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+ <div id="header">
+            <h1>
+                @Model.SurveyName  
+                </h1>
+        </div>
+
+          <div id="infobox">
+        <div id="surveyno">
+            <span class="boldlabel">Survey #:</span> <span>
+                @Model.SurveyNumber</span></div>
+        <div id="orgn">
+            <span class="boldlabel">Organization:</span> <span>
+                @Model.OrganizationName</span></div>
+        <div id="dept">
+            <span class="boldlabel">Department:</span> <span>
+                @Model.DepartmentName</span></div>
+        <div style="clear: both;">
+        </div>
+    </div>
+     <div class="success">
+ <img src="../../Content/images/button_check.png" style="vertical-align:middle; padding-right: 10px;"> @Epi.Web.MVC.Constants.Constant.SURVEY_SUBMISSION_MESSAGE 
+ </div>  

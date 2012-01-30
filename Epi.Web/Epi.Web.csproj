@@ -214,6 +214,9 @@
     <Content Include="Scripts\jquery.validationEngine-en.js" />
     <Content Include="Scripts\jquery.validationEngine.js" />
     <Content Include="Unity.Mvc3.README.txt" />
+    <Content Include="Views\Final\Index.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\Splash.cshtml" />
     <Content Include="Views\Shared\footer.htm" />
     <Content Include="Views\Survey\Index.cshtml" />
     <Content Include="Web.config">
@@ -240,10 +243,7 @@
       <SubType>Designer</SubType>
     </None>
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\Splash.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Exception.cshtml" />
-    <Content Include="Views\Final\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
   </ItemGroup>
   <ItemGroup>
