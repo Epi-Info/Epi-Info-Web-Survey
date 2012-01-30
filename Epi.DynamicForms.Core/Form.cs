@@ -138,6 +138,9 @@ namespace MvcDynamicForms
 
             html.Append(formWrapper.ToString(TagRenderMode.EndTag));
 
+            return html.ToString();
+
+            /*
             if (formatHtml)
             {
                 try
@@ -151,7 +154,7 @@ namespace MvcDynamicForms
                 }
             }
 
-            return html.ToString();
+            return html.ToString();*/
         }
         /// <summary>
         /// Returns a string containing the rendered html of every contained Field object. The html can optionally include the Form object's state serialized into a hidden field.
