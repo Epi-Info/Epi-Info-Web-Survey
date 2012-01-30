@@ -112,8 +112,6 @@
     <Compile Include="Utility\SurveyResponseXML.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="bin\Epi.Web.dll" />
-    <Content Include="bin\Epi.Web.pdb" />
     <Content Include="Content\css\epistyle.css" />
     <Content Include="Content\css\jquery-ui-1.8.16.custom.css" />
     <Content Include="Content\css\overlay.png" />
@@ -270,7 +268,9 @@
     <None Include="Properties\DataSources\Epi.Web.Common.DTO.SurveyInfoDTO.datasource" />
     <None Include="Properties\DataSources\Epi.Web.Common.DTO.SurveyRequestResponse.datasource" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="bin\" />
+  </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\DataServiceClient\" />
   </ItemGroup>
