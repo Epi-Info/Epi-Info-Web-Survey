@@ -22,7 +22,13 @@
 
             $("#myform").validationEngine();
         }); 
-      
+       $(function () {
+                 $('a').click(PostForm);
+                 function PostForm(event) {
+               $("#myform").submit();
+               return false;
+                 }
+             });
      </script>  
      
       <script type="text/javascript">
