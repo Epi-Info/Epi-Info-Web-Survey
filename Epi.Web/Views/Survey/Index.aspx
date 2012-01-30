@@ -24,43 +24,35 @@
            {
                 int num = 0;
               
-             for (int i = 1; Model.NumberOfPages > i - 1; i++)
-             {
-                    num = i; 
-                    if (i == 1 && Model.CurrentPage >1)
-                    {  
-                          Response.Write(string.Format("<a  href=\"{0}://{1}/survey/{2}/{3} class=\"nextprev\" title=\"Previous Page\"><img src=\"/Content/images/prev_d.png\" height=\"16px\" style=\"vertical-align:text-top;\" alt=\"Previous Page\"></a>", ViewContext.HttpContext.Request.Url.Scheme, ViewContext.HttpContext.Request.Url.Authority,  Model.SurveyInfo.SurveyId,Model.CurrentPage-1));
-          
-                    }
-                    else if (i == 1)
-                    {
-                                  Response.Write(string.Format("<a href=\"{0}://{1}/survey/{2}/{3} class=\"nextprev\" title=\"Previous Page\"><img src=\"/Content/images/prev_d.png\" height=\"16px\" style=\"vertical-align:text-top;\" alt=\"Previous Page\"></a>", ViewContext.HttpContext.Request.Url.Scheme, ViewContext.HttpContext.Request.Url.Authority,  Model.SurveyInfo.SurveyId,Model.CurrentPage));
-                    } 
-
-
-
-                    if (Model.CurrentPage == i)
-                    { 
-                      Response.Write("<span class=\"current\">" + num + "</span>");
-
-                    }
-                    else
-                    { 
-                         Response.Write("<a href=\"" + num + "\" title=\"Go to page\">" + num + "</a>");
-                     }
-
-             } 
-
-               if (Model.CurrentPage != Model.NumberOfPages )
+                for (int i = 1; Model.NumberOfPages > i - 1; i++)
                 {
+                        num = i; 
+                        if (i == 1 && Model.CurrentPage >1)
+                        {  
+                              Response.Write(string.Format("<a  href=\"{0}://{1}/survey/{2}/{3} class=\"nextprev\" title=\"Previous Page\"><img src=\"/Content/images/prev_d.png\" height=\"16px\" style=\"vertical-align:text-top;\" alt=\"Previous Page\"></a>", ViewContext.HttpContext.Request.Url.Scheme, ViewContext.HttpContext.Request.Url.Authority,  Model.SurveyInfo.SurveyId,Model.CurrentPage-1));
+                        }
+                        else if (i == 1)
+                        {
+                              Response.Write(string.Format("<a href=\"{0}://{1}/survey/{2}/{3} class=\"nextprev\" title=\"Previous Page\"><img src=\"/Content/images/prev_d.png\" height=\"16px\" style=\"vertical-align:text-top;\" alt=\"Previous Page\"></a>", ViewContext.HttpContext.Request.Url.Scheme, ViewContext.HttpContext.Request.Url.Authority,  Model.SurveyInfo.SurveyId,Model.CurrentPage));
+                        } 
 
+                        if (Model.CurrentPage == i)
+                        { 
+                          Response.Write("<span class=\"current\">" + num + "</span>");
+                        }
+                        else
+                        { 
+                             Response.Write("<a href=\"" + num + "\" title=\"Go to page\">" + num + "</a>");
+                        }
+                } 
+
+                if (Model.CurrentPage != Model.NumberOfPages )
+                {
                     Response.Write(string.Format("<a href=\"{0}://{1}/survey/{2}/{3}\" class=\"nextprev\" title=\"Go to Next Page\"><img src=\"/Content/images/next.png\" height=\"16px\" style=\"vertical-align: text-top; text-decoration:none;\" border=\"0\" alt=\"Next Page\"></a>", ViewContext.HttpContext.Request.Url.Scheme, ViewContext.HttpContext.Request.Url.Authority, Model.SurveyInfo.SurveyId, Model.CurrentPage + 1));
-          
                 }
                 else
                 { 
                     Response.Write(string.Format("<a href=\"{0}://{1}/survey/{2}/{3}\" class=\"nextprev\" title=\"Go to Next Page\"><img src=\"/Content/images/next.png\" height=\"16px\" style=\"vertical-align: text-top; text-decoration:none;\" border=\"0\" alt=\"Next Page\"></a>", ViewContext.HttpContext.Request.Url.Scheme, ViewContext.HttpContext.Request.Url.Authority,  Model.SurveyInfo.SurveyId, Model.CurrentPage) );
-            
                 } 
           }
           

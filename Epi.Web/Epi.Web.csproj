@@ -231,7 +231,6 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Views\Web.config" />
     <Content Include="Views\Shared\Error.aspx" />
     <None Include="Service References\DataServiceClient\DataService.wsdl" />
     <None Include="Service References\DataServiceClient\SurveyDataService.xsd">
@@ -246,6 +245,7 @@
     <None Include="Service References\DataServiceClient\SurveyDataService3.xsd">
       <SubType>Designer</SubType>
     </None>
+    <Content Include="Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Epi.DynamicForms.Core\Epi.Web.DynamicForms.Core.csproj">
