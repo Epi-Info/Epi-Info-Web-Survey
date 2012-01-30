@@ -32,8 +32,8 @@ namespace Epi.Web.MVC.Controllers
        /// <param name="surveyId"></param>
        /// <returns></returns>
  
-    [HttpGet]
-        public ActionResult Index(SurveyInfoModel surveyInfoModel,string surveyId,int PageNumber )
+        [HttpGet]
+        public ActionResult Index(string surveyId,string page)
         {
 
             //if (!string.IsNullOrEmpty(page))
@@ -44,43 +44,17 @@ namespace Epi.Web.MVC.Controllers
             try
             {
 
-             //   var form = _isurveyFacade.GetSurveyFormData(surveyId, this.GetCurrentPage(), this.GetCurrentSurveyAnswer());
+                var form = _isurveyFacade.GetSurveyFormData(surveyId, this.GetCurrentPage(), this.GetCurrentSurveyAnswer());
 
-                var form = _isurveyFacade.GetSurveyFormData(surveyId, PageNumber, this.GetCurrentSurveyAnswer());
-          
-                
                 //create the responseid
-                Guid ResponseIDGuid = Guid.NewGuid();
-                string ResponseID = ResponseIDGuid.ToString();
-                //if (TempData[Epi.Web.MVC.Constants.Constant.RESPONSE_ID] == null)
-                //{
-                    
+                Guid ResponseID = Guid.NewGuid();
 
-                    //put the ResponseId in Temp data for later use
-                    TempData[Epi.Web.MVC.Constants.Constant.RESPONSE_ID] = ResponseID.ToString();
-                    _isurveyFacade.CreateSurveyAnswer(surveyId, ResponseID.ToString());
-                //}
-                //else
-                //{
-                //    ResponseID = TempData[Epi.Web.MVC.Constants.Constant.RESPONSE_ID].ToString();
-                //    UpdateModel(form);
+                //put the ResponseId in Temp data for later use
+                TempData[Epi.Web.MVC.Constants.Constant.RESPONSE_ID] = ResponseID.ToString();
 
-                //    if (form.Validate())
-                //    {
-                //        string responseId = TempData[Epi.Web.MVC.Constants.Constant.RESPONSE_ID].ToString();
-                //        _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId, form);
-
-                //        return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
-                //    }
-
-
-                    return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
-
-                //}
-                
-               //return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
-                 
-               
+                // create the first survey response
+                _isurveyFacade.CreateSurveyAnswer(surveyId, ResponseID.ToString());
+                return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
             }
             catch (Exception ex)
             {
@@ -89,10 +63,7 @@ namespace Epi.Web.MVC.Controllers
             //}
             //return null;
         }
-
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        [HttpPost] [ValidateAntiForgeryToken]
         public ActionResult Index(SurveyInfoModel surveyInfoModel,string Submit)
         {
 
@@ -103,7 +74,7 @@ namespace Epi.Web.MVC.Controllers
                 //Update the model
                 UpdateModel(form);
 
-                if (form.Validate() && !string.IsNullOrEmpty(Submit))
+                if (form.Validate())
                 {
                     string responseId = TempData[Epi.Web.MVC.Constants.Constant.RESPONSE_ID].ToString();
                     _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId, form);
@@ -124,23 +95,11 @@ namespace Epi.Web.MVC.Controllers
                 return View(Epi.Web.MVC.Constants.Constant.EXCEPTION_PAGE);
             }
         }
+      
 
 
+        
 
-
-        public ActionResult Index5(SurveyInfoModel surveyInfoModel, string Submit)
-        {
-
-            try
-            {
-
-                return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE);
-            }
-            catch (Exception ex)
-            {
-                return View(Epi.Web.MVC.Constants.Constant.EXCEPTION_PAGE);
-            }
-        }
 
 
         
