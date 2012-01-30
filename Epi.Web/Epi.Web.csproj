@@ -13,7 +13,7 @@
     <RootNamespace>Epi.Web</RootNamespace>
     <AssemblyName>Epi.Web</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <MvcBuildViews>false</MvcBuildViews>
+    <MvcBuildViews>true</MvcBuildViews>
     <UseIISExpress>false</UseIISExpress>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
@@ -213,15 +213,9 @@
     </None>
     <Content Include="Scripts\jquery.validationEngine-en.js" />
     <Content Include="Scripts\jquery.validationEngine.js" />
-    <Content Include="Scripts\MicrosoftAjax.js" />
-    <Content Include="Scripts\MicrosoftMvcAjax.js" />
     <Content Include="Unity.Mvc3.README.txt" />
-    <Content Include="Views\Final\Index.aspx" />
-    <Content Include="Views\Home\Index.aspx" />
-    <Content Include="Views\Home\Splash.aspx" />
-    <Content Include="Views\Shared\Exception.aspx" />
     <Content Include="Views\Shared\footer.htm" />
-    <Content Include="Views\Survey\Index.aspx" />
+    <Content Include="Views\Survey\Index.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -231,7 +225,7 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Views\Shared\Error.aspx" />
+    <Content Include="Views\Web.config" />
     <None Include="Service References\DataServiceClient\DataService.wsdl" />
     <None Include="Service References\DataServiceClient\SurveyDataService.xsd">
       <SubType>Designer</SubType>
@@ -245,7 +239,12 @@
     <None Include="Service References\DataServiceClient\SurveyDataService3.xsd">
       <SubType>Designer</SubType>
     </None>
-    <Content Include="Views\Web.config" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\Splash.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\Exception.cshtml" />
+    <Content Include="Views\Final\Index.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Epi.DynamicForms.Core\Epi.Web.DynamicForms.Core.csproj">
@@ -266,9 +265,6 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Shared\EpiSurvey.Master" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\DataSources\Epi.Web.Common.DTO.SurveyInfoDTO.datasource" />
@@ -294,8 +290,8 @@
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
-          <AutoAssignPort>False</AutoAssignPort>
-          <DevelopmentServerPort>49249</DevelopmentServerPort>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>55712</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost/EpiWeb</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
