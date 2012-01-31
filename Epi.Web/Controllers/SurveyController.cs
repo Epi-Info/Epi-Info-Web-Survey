@@ -67,48 +67,54 @@ namespace Epi.Web.MVC.Controllers
         public ActionResult Index(SurveyInfoModel surveyInfoModel, string Submitbutton, string Savebutton, int PageNumber = 1)
         {
 
+            string responseId = null;
             try
             {
                 //get the survey form
                 MvcDynamicForms.Form form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, this.GetCurrentPage(), this.GetCurrentSurveyAnswer());
                 //Update the model
                 UpdateModel(form);
-                if (!string.IsNullOrEmpty(Submitbutton))
-                {
-                    if (form.Validate())
-                    {
-                        string responseId = TempData[Epi.Web.MVC.Constants.Constant.RESPONSE_ID].ToString();
-                        _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId, form);
 
-                        //return RedirectToAction("Index", "Final", new {id="final" });
+                if (form.Validate())
+                {
+
+                    if (TempData.ContainsKey(Epi.Web.MVC.Constants.Constant.RESPONSE_ID))
+                    {
+                        if (!string.IsNullOrEmpty(TempData[Epi.Web.MVC.Constants.Constant.RESPONSE_ID].ToString()))
+                        {
+                            responseId = TempData[Epi.Web.MVC.Constants.Constant.RESPONSE_ID].ToString();
+                            _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId, form);
+                        }
+                    }
+
+                    if (!string.IsNullOrEmpty(Submitbutton))
+                    {
                         TempData[Epi.Web.MVC.Constants.Constant.RESPONSE_ID] = null;
                         return RedirectToAction("Index", "Final");
                     }
-                    else
-                    {
-
-                        return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
-                    }
-                }
-                else
-                {
-
-
-                    if (!string.IsNullOrEmpty(Savebutton))
+                    else if (!string.IsNullOrEmpty(Savebutton))
                     {
                         return RedirectToAction("Index", "Save");// this code is just a place holder
                     }
                     else
                     {
+                        //goto url
+                        form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, PageNumber, this.GetCurrentSurveyAnswer());
+
+                        //form.Validate();
 
                         return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
-                    
-                    }
-
-
-
+                     }
 
                 }
+                else
+                {
+                    //stay on same page
+                    return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
+                }
+
+
+
             }
             catch (Exception ex)
             {
