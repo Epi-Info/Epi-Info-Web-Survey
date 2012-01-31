@@ -24,9 +24,13 @@
         }); 
        $(function () {
                  $('a').click(PostForm);
-                 function PostForm(event) {
-               $("#myform").submit();
-               return false;
+                 function PostForm(event) 
+                 {
+
+                     document.forms[0].action = event.target.href;
+                     document.forms[0].submit();
+
+                    return false;
                  }
              });
      </script>  
