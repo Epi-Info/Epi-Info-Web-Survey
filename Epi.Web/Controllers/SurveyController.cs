@@ -33,7 +33,7 @@ namespace Epi.Web.MVC.Controllers
        /// <returns></returns>
  
         [HttpGet]
-        public ActionResult Index(string surveyId, int PageNUmber)
+        public ActionResult Index(string surveyId, int PageNumber = 1)
         {
 
             //if (!string.IsNullOrEmpty(page))
@@ -44,7 +44,7 @@ namespace Epi.Web.MVC.Controllers
             try
             {
 
-                var form = _isurveyFacade.GetSurveyFormData(surveyId,PageNUmber, this.GetCurrentSurveyAnswer());
+                var form = _isurveyFacade.GetSurveyFormData(surveyId,PageNumber, this.GetCurrentSurveyAnswer());
 
                 //create the responseid
                 Guid ResponseID = Guid.NewGuid();
@@ -64,7 +64,7 @@ namespace Epi.Web.MVC.Controllers
             //return null;
         }
         [HttpPost] [ValidateAntiForgeryToken]
-        public ActionResult Index(SurveyInfoModel surveyInfoModel, string Submitbutton, string Savebutton, int PageNUmber)
+        public ActionResult Index(SurveyInfoModel surveyInfoModel, string Submitbutton, string Savebutton, int PageNumber = 1)
         {
 
             try
