@@ -96,9 +96,7 @@ namespace Epi.Web.MVC.Controllers
                     }
                     else if (!string.IsNullOrEmpty(Savebutton))
                     {
-                        //return RedirectToAction("Index", "Save");// this code is just a place holder
-                        form.SaveClicked = true;
-                        return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
+                        return RedirectToAction("Index", "Save");// this code is just a place holder
                     }
 
 
