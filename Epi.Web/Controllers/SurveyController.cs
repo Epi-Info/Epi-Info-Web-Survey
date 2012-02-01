@@ -52,7 +52,7 @@ namespace Epi.Web.MVC.Controllers
 
                 //put the ResponseId in Temp data for later use
                 TempData[Epi.Web.MVC.Constants.Constant.RESPONSE_ID] = ResponseID.ToString();
-
+               
                 // create the first survey response
                 _isurveyFacade.CreateSurveyAnswer(surveyId, ResponseID.ToString());
                 return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
@@ -71,7 +71,7 @@ namespace Epi.Web.MVC.Controllers
             string responseId = null;
             try
             {
-                 
+            
                 //get the survey form
                 MvcDynamicForms.Form form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, this.GetCurrentPage()== 0? 1 : this.GetCurrentPage(), this.GetCurrentSurveyAnswer());
                 //Update the model
