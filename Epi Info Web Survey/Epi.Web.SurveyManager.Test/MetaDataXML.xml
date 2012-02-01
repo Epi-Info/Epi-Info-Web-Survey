@@ -34,3 +34,48 @@
     <Item citydropdown="Los Angeles" />
   </SourceTable>
 </Template>
+<SurveyResponse SurveyId="57c5617d-c6b6-4daf-9319-45e4dad7c4d4">
+  <Page PageNumber="1">
+    <ResponseDetail QuestionName="CaseID"></ResponseDetail>
+    <ResponseDetail QuestionName="DateofInterview"></ResponseDetail>
+    <ResponseDetail QuestionName="DiagnosticStatus">1-HIV Infection (not AIDS)</ResponseDetail>
+    <ResponseDetail QuestionName="Tested"></ResponseDetail>
+    <ResponseDetail QuestionName="DemographicInformation"></ResponseDetail>
+    <ResponseDetail QuestionName="FirstName"></ResponseDetail>
+    <ResponseDetail QuestionName="LastName"></ResponseDetail>
+    <ResponseDetail QuestionName="Sex"></ResponseDetail>
+    <ResponseDetail QuestionName="DOB"></ResponseDetail>
+    <ResponseDetail QuestionName="Age"></ResponseDetail>
+    <ResponseDetail QuestionName="EthnicityGroup">2135:2-Hispanic or Latino</ResponseDetail>
+    <ResponseDetail QuestionName="White">No</ResponseDetail>
+    <ResponseDetail QuestionName="NativeHawaiianOtherPacificIslander">No</ResponseDetail>
+    <ResponseDetail QuestionName="UnknownOther">No</ResponseDetail>
+    <ResponseDetail QuestionName="Black">No</ResponseDetail>
+    <ResponseDetail QuestionName="AmericanIndianAlaskanNative">No</ResponseDetail>
+    <ResponseDetail QuestionName="Asian">No</ResponseDetail>
+    <ResponseDetail QuestionName="Multiracial">No</ResponseDetail>
+    <ResponseDetail QuestionName="PatientAddress"></ResponseDetail>
+    <ResponseDetail QuestionName="City"></ResponseDetail>
+    <ResponseDetail QuestionName="State"></ResponseDetail>
+    <ResponseDetail QuestionName="Zip"></ResponseDetail>
+    <ResponseDetail QuestionName="Latitude"></ResponseDetail>
+    <ResponseDetail QuestionName="Longitude"></ResponseDetail>
+    <ResponseDetail QuestionName="Occupation">11:3011-Administrative Services Managers [11-3011]</ResponseDetail>
+    <ResponseDetail QuestionName="EmailAddress"></ResponseDetail>
+    <ResponseDetail QuestionName="FacilityofDiagnosos"></ResponseDetail>
+    <ResponseDetail QuestionName="FacilityName"></ResponseDetail>
+    <ResponseDetail QuestionName="FacilityCity"></ResponseDetail>
+    <ResponseDetail QuestionName="StateCountry"></ResponseDetail>
+    <ResponseDetail QuestionName="FacilitySetting"></ResponseDetail>
+    <ResponseDetail QuestionName="FacilityType"></ResponseDetail>
+    <ResponseDetail QuestionName="PatientHistory"></ResponseDetail>
+    <ResponseDetail QuestionName="SexWithMale"></ResponseDetail>
+    <ResponseDetail QuestionName="SexWithFemale"></ResponseDetail>
+    <ResponseDetail QuestionName="InjectedDrugs"></ResponseDetail>
+    <ResponseDetail QuestionName="SexWithDrugUser"></ResponseDetail>
+    <ResponseDetail QuestionName="SexWithBisexualMale"></ResponseDetail>
+    <ResponseDetail QuestionName="SexWithTransfusionRecipient"></ResponseDetail>
+    <ResponseDetail QuestionName="SexWithTransplantRecipient"></ResponseDetail>
+    <ResponseDetail QuestionName="SexWithPersonHIVAIDS"></ResponseDetail>
+  </Page>
+</SurveyResponse>

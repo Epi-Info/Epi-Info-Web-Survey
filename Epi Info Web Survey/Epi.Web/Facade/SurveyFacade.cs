@@ -72,7 +72,7 @@ namespace Epi.Web.MVC.Facade
 
 
 
-        public void UpdateSurveyResponse(SurveyInfoModel surveyInfoModel, string responseId,MvcDynamicForms.Form form)
+        public void UpdateSurveyResponse(SurveyInfoModel surveyInfoModel, string responseId, MvcDynamicForms.Form form, Epi.Web.Common.DTO.SurveyAnswerDTO surveyAnswerDTO)
         {
             // 1 Get the record for the current survey response
             // 2 update the current survey response and save the response
@@ -81,8 +81,8 @@ namespace Epi.Web.MVC.Facade
             SurveyAnswerResponse surveyAnswerResponse = GetSurveyAnswerResponse(responseId);
             
             ///2 Update the current survey response and save it
-           
-            SurveyHelper.UpdateSurveyResponse(surveyInfoModel, form, _surveyAnswerRequest, _surveyResponseXML, _iSurveyAnswerRepository,surveyAnswerResponse, responseId);
+
+            SurveyHelper.UpdateSurveyResponse(surveyInfoModel, form, _surveyAnswerRequest, _surveyResponseXML, _iSurveyAnswerRepository, surveyAnswerResponse, responseId, surveyAnswerDTO);
         }
         
 
