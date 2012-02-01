@@ -88,5 +88,6 @@ namespace MvcDynamicForms.Fields
                 .ToList()
                 .ForEach(c => _choices.Add(c, false));
         }
+        public string SelectedValue { get; set; }
     }
 }
