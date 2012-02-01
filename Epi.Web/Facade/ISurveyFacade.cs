@@ -11,7 +11,7 @@ namespace Epi.Web.MVC.Facade
     {
         MvcDynamicForms.Form GetSurveyFormData(string surveyId, int pageNumber, Epi.Web.Common.DTO.SurveyAnswerDTO surveyAnswerDTO);
         void CreateSurveyAnswer(string surveyId, string responseId);
-        void UpdateSurveyResponse(SurveyInfoModel surveyInfoModel, string responseId, MvcDynamicForms.Form form);
+        void UpdateSurveyResponse(SurveyInfoModel surveyInfoModel, string responseId, MvcDynamicForms.Form form, Epi.Web.Common.DTO.SurveyAnswerDTO surveyAnswerDTO);
         
         SurveyInfoModel GetSurveyInfoModel(string surveyId);
         SurveyAnswerResponse GetSurveyAnswerResponse(string responseId);

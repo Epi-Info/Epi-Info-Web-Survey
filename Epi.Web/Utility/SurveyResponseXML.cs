@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Xml;
 using System.Xml.Linq;
+using Epi.Web.Common.Message;
 
 namespace Epi.Web.MVC.Utility
 {
@@ -67,22 +68,37 @@ namespace Epi.Web.MVC.Utility
             return result;
          }
 
-          public XmlDocument CreateResponseXml(string SurveyId)
+          public XmlDocument CreateResponseXml(string SurveyId, bool AddRoot, int CurrentPage)
           {
 
+               
 
+              
               XmlDocument xml = new XmlDocument();
               XmlElement root = xml.CreateElement(Epi.Web.MVC.Constants.Constant.SURVEY_RESPONSE);
+              if (AddRoot == true)
+              {
+            
               root.SetAttribute(Epi.Web.MVC.Constants.Constant.SURVEY_ID, SurveyId);
               xml.AppendChild(root);
+              }
 
+              XmlElement PageRoot = xml.CreateElement("Page");
+              PageRoot.SetAttribute("PageNumber", CurrentPage.ToString());
+              if (AddRoot == true)
+              {
+                  root.AppendChild(PageRoot);
+              }
+              else {
+                  xml.AppendChild(PageRoot);
+              }
 
               foreach ( KeyValuePair<string, string> pair  in this.ResponseDetailList)
               {
                   XmlElement child = xml.CreateElement(Epi.Web.MVC.Constants.Constant.RESPONSE_DETAILS);
                   child.SetAttribute("QuestionName", pair.Key);
                   child.InnerText = pair.Value;
-                  root.AppendChild(child);
+                  PageRoot.AppendChild(child);
               }
 
 
