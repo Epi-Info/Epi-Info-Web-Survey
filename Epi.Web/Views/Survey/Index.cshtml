@@ -3,7 +3,34 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
- 
+<script type="text/javascript"> 
+$(function() {
+		// a workaround for a flaw in the demo system (http://dev.jqueryui.com/ticket/4375), ignore!
+        
+         $("#dialog").dialog({
+             autoOpen: false,
+             show: "blind",
+            // hide: "explode",
+             resizable: false,
+		     height:250,
+		     modal: true,
+         });
+         
+         if($('#_showModalPopup').val() == 'True')
+         {
+
+           //call your jquery modal popup method
+           $("#dialog").dialog("open");
+             return true;
+          }
+	});
+
+    function myfunction()
+         {
+            $("#dialog").dialog("close");
+         }
+</script>
+
 <div id="header">
             <h1>
                 Survey Name- @Model.SurveyInfo.SurveyName 
@@ -29,7 +56,7 @@
                   num = i;  
                     if (i == 1 && Model.CurrentPage >1)
                         {   
-                              <a  style="background-image: url('/Content/images/prev.png');"   href="@string.Format("{0}://{1}/survey/{2}/{3}", ViewContext.HttpContext.Request.Url.Scheme, ViewContext.HttpContext.Request.Url.Authority,  Model.SurveyInfo.SurveyId,Model.CurrentPage-1)"    class="nextprev" title="Previous Page">
+                              <a  style="background-image: url('/Content/images/prev.png'); background-repeat:no-repeat; background-position:center; width:13px;"   href="@string.Format("{0}://{1}/survey/{2}/{3}", ViewContext.HttpContext.Request.Url.Scheme, ViewContext.HttpContext.Request.Url.Authority,  Model.SurveyInfo.SurveyId,Model.CurrentPage-1)"    class="nextprev" title="Previous Page">
                           &nbsp;&nbsp;&nbsp;
                               </a>
                        
@@ -59,7 +86,7 @@
           if (Model.CurrentPage != Model.NumberOfPages )
             {  
                   
-         <a    style="background-image: url('/Content/images/next.png');" href="@string.Format("{0}://{1}/survey/{2}/{3}", ViewContext.HttpContext.Request.Url.Scheme, ViewContext.HttpContext.Request.Url.Authority,  Model.SurveyInfo.SurveyId, Model.CurrentPage+1)" class="nextprev" title="Go to Next Page">
+         <a    style="background-image: url('/Content/images/next.png');  background-repeat:no-repeat; background-position:center; width:13px;" href="@string.Format("{0}://{1}/survey/{2}/{3}", ViewContext.HttpContext.Request.Url.Scheme, ViewContext.HttpContext.Request.Url.Authority,  Model.SurveyInfo.SurveyId, Model.CurrentPage+1)" class="nextprev" title="Go to Next Page">
         &nbsp;&nbsp;&nbsp;
          </a>
           
@@ -86,11 +113,11 @@
         <div class="errormsg">
             
             <div class="image">
-                <img src="../../Content/images/error.png" style="vertical-align: middle; padding-right: 10px;">
+                <img src="../../Content/images/error.png" style="vertical-align: middle; padding-right: 10px;" alt=""/>
             </div>
             <div class="message">
               <span style="font-weight:bold; font-size:10pt;">Please correct the following errors before continuing:</span>
-                <br>
+                <br/>
                
                  @Html.Raw(Model.GetErrorSummary())
             </div>
@@ -100,13 +127,25 @@
         </div>
          } 
         @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "myform" }))
-           {  
+        {  
             <br />
               
              @Html.AntiForgeryToken()  
              @Html.Raw(Model.RenderHtml(true))
              
-            
+             @Html.HiddenFor(model => model.SaveClicked, new { id = "_showModalPopup" })
+             
+               <div class="demo">
+              <div id="dialog" title="Your Survey has been saved.">
+	            <p>Please copy and save the survey link to access the survey at a later time.</p>
+ 	            <p><input id="url" type="text" style="width: 250px;"/>
+ 	            <button>Copy Link</button></p>
+ 	            <hr/>
+ 	            <p>Optionally enter your email address to have the URL emailed to you.</p>
+ 	            <p><label for="email">Email:</label> <input id="email" type="text" style="width: 150px;"/>
+ 	            <button id="send" type="submit" name="send1" value="send2" onclick="myfunction();">Send</button></p>
+               </div>
+            </div> 
            
    	           
 	        <div id="nav">
@@ -114,11 +153,10 @@
              @if (Model.CurrentPage != 1)
              {  
 		        
-              <div id="prev" align="left"><button class="prev" value="PreviousButton"  name="PreviousButton"  type="button" onclick="@string.Format("document.forms[0].action = '{0}://{1}/survey/{2}/{3}'; $('#myform').submit();", ViewContext.HttpContext.Request.Url.Scheme, ViewContext.HttpContext.Request.Url.Authority,  Model.SurveyInfo.SurveyId, Model.CurrentPage-1)"><img class="button" src="../../Content/images/arrow_left.png"> Previous</button>
+              <div id="prev" align="left"><button class="prev" value="PreviousButton"  name="PreviousButton"  type="button" onclick="@string.Format("document.forms[0].action = '{0}://{1}/survey/{2}/{3}'; $('#myform').submit();", ViewContext.HttpContext.Request.Url.Scheme, ViewContext.HttpContext.Request.Url.Authority, Model.SurveyInfo.SurveyId, Model.CurrentPage - 1)"><img class="button" src="../../Content/images/arrow_left.png"> Previous</button>
               
               </div>
-             }
-	 		 <div id="save" align="center"><button class="save" type="submit" value="Savebutton"name="Savebutton"  onclick="window.location='survey3.html'"><img class="button" src="../../Content/images/save.png"/> Save & Close</button>
+	 		 <div id="savediv" align="center"><button class="save" type="submit" name="Savebutton" value="save"><img class="button" src="../../Content/images/save.png" alt=""/> Save</button>
              </div>
 	 		 
               
@@ -132,16 +170,17 @@
                else
                {
                     <div id="prev" align="right">
-                    <button class="next"  name="ContinueButton" type="button" onclick="@string.Format("document.forms[0].action = '{0}://{1}/survey/{2}/{3}'; $('#myform').submit();", ViewContext.HttpContext.Request.Url.Scheme, ViewContext.HttpContext.Request.Url.Authority,  Model.SurveyInfo.SurveyId, Model.CurrentPage+1)">Continue <img class="button" src="../../Content/images/arrow_right.png"></button>
+                    <button class="next"  name="ContinueButton" type="button" onclick="@string.Format("document.forms[0].action = '{0}://{1}/survey/{2}/{3}'; $('#myform').submit();", ViewContext.HttpContext.Request.Url.Scheme, ViewContext.HttpContext.Request.Url.Authority, Model.SurveyInfo.SurveyId, Model.CurrentPage + 1)">Continue <img class="button" src="../../Content/images/arrow_right.png"></button>
                     </div>
-               
+                      
                }
-                
-
-            
-	        </div>
-           }
 
 
 
- }  
+
+             }
+           </div> 
+           
+        }
+        
+ 
