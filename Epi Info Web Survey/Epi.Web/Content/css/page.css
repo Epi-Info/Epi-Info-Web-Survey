@@ -64,7 +64,10 @@ img { border: none;}
 .pages a.nextprev {
     font-weight: bold;
     background: #fff;
-     padding: 0.2em 0.2em;
+    padding: 0.2em 0.2em;
+    background-repeat:no-repeat;
+    background-position:center; 
+    width:13px;
 }
 
 .pages span.nextprev {
