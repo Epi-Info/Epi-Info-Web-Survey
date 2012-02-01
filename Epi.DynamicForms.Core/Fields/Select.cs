@@ -157,7 +157,7 @@ namespace MvcDynamicForms.Fields
                     {
                         var opt = new TagBuilder("option");
                         opt.Attributes.Add("value", choice.Key.Remove(choice.Key.IndexOf("-")));
-                        if (choice.Key == SelectedValue.ToString()) opt.Attributes.Add("selected", "selected");
+                        if (choice.Key.Remove(choice.Key.IndexOf("-")) == SelectedValue.ToString()) opt.Attributes.Add("selected", "selected");
                         opt.SetInnerText(choice.Key.Substring(choice.Key.IndexOf("-") + 1));
                         html.Append(opt.ToString());
                     }
