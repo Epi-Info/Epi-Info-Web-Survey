@@ -67,7 +67,7 @@ namespace Epi.Web.MVC.Utility
                     switch (_FieldTypeID.Attribute("FieldTypeId").Value)
                     {
                         case "1":
-                            var _TextBoxValue= GetControlValue(SurveyAnswer, _FieldTypeID.Attribute("UniqueId").Value);
+                            var _TextBoxValue= GetControlValue(SurveyAnswer, _FieldTypeID.Attribute("Name").Value);
                             form.AddFields( GetTextBox(_FieldTypeID, _Width, _Height, SurveyAnswer, _TextBoxValue));
                             break;
                        
@@ -79,30 +79,30 @@ namespace Epi.Web.MVC.Utility
 
                             break;
                         case "4"://MultiLineTextBox
-                              
-                            var _TextAreaValue= GetControlValue(SurveyAnswer, _FieldTypeID.Attribute("UniqueId").Value);
+
+                            var _TextAreaValue = GetControlValue(SurveyAnswer, _FieldTypeID.Attribute("Name").Value);
                             form.AddFields( GetTextArea(_FieldTypeID, _Width,_Height,SurveyAnswer,_TextAreaValue));
                             break;
                         case "5"://NumericTextBox
-                             
-                            var _NumericTextBoxValue = GetControlValue(SurveyAnswer, _FieldTypeID.Attribute("UniqueId").Value);
+
+                            var _NumericTextBoxValue = GetControlValue(SurveyAnswer, _FieldTypeID.Attribute("Name").Value);
                             form.AddFields( GetNumericTextBox(_FieldTypeID, _Width, _Height, SurveyAnswer, _NumericTextBoxValue));
                             break;
                         // 7 DatePicker
                         case "7"://NumericTextBox
 
-                            var _DatePickerValue = GetControlValue(SurveyAnswer, _FieldTypeID.Attribute("UniqueId").Value);
+                            var _DatePickerValue = GetControlValue(SurveyAnswer, _FieldTypeID.Attribute("Name").Value);
                             form.AddFields(GetDatePicker(_FieldTypeID, _Width, _Height, SurveyAnswer, _DatePickerValue));
                             break;
                         case "10"://CheckBox
 
-                            var _CheckBoxValue = GetControlValue(SurveyAnswer, _FieldTypeID.Attribute("UniqueId").Value);
+                            var _CheckBoxValue = GetControlValue(SurveyAnswer, _FieldTypeID.Attribute("Name").Value);
                             form.AddFields(GetCheckBox(_FieldTypeID, _Width, _Height, SurveyAnswer, _CheckBoxValue));
                             break;
 
                         case "11"://DropDown Yes/No
-                           
-                            var _DropDownSelectedValueYN = GetControlValue(SurveyAnswer, _FieldTypeID.Attribute("UniqueId").Value);
+
+                            var _DropDownSelectedValueYN = GetControlValue(SurveyAnswer, _FieldTypeID.Attribute("Name").Value);
                             form.AddFields(GetDropDown(_FieldTypeID, _Width, _Height, SurveyAnswer, _DropDownSelectedValueYN, "Yes,No",11));
                             break;
                         case "17"://DropDown LegalValues
@@ -203,7 +203,7 @@ namespace Epi.Web.MVC.Utility
             }
         }
 
-        public  static string GetControlValue( string Xml,string ControlId ) {
+        public  static string GetControlValue( string Xml,string ControlName ) {
 
             string ControlValue = "";
 
@@ -215,7 +215,7 @@ namespace Epi.Web.MVC.Utility
 
                 var _ControlValues = from _ControlValue in
                                          xdoc.Descendants("ResponseDetail")
-                                     where _ControlValue.Attribute("QuestionId").Value == ControlId.ToString()
+                                     where _ControlValue.Attribute("QuestionName").Value == ControlName.ToString()
                                      select _ControlValue;
 
                 foreach (var _ControlValue in _ControlValues)

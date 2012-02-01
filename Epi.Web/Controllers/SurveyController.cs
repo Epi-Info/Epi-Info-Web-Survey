@@ -3,6 +3,7 @@ using System.Web.Mvc;
 using Epi.Web.MVC.Facade;
 using Epi.Web.MVC.Models;
 using System.Collections.Generic;
+using System.Text;
 namespace Epi.Web.MVC.Controllers
 {
     public class SurveyController : Controller
@@ -70,8 +71,9 @@ namespace Epi.Web.MVC.Controllers
             string responseId = null;
             try
             {
+                 
                 //get the survey form
-                MvcDynamicForms.Form form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, this.GetCurrentPage(), this.GetCurrentSurveyAnswer());
+                MvcDynamicForms.Form form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, this.GetCurrentPage()== 0? 1 : this.GetCurrentPage(), this.GetCurrentSurveyAnswer());
                 //Update the model
                 UpdateModel(form);
 
@@ -83,7 +85,7 @@ namespace Epi.Web.MVC.Controllers
                         if (!string.IsNullOrEmpty(TempData[Epi.Web.MVC.Constants.Constant.RESPONSE_ID].ToString()))
                         {
                             responseId = TempData[Epi.Web.MVC.Constants.Constant.RESPONSE_ID].ToString();
-                            _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId, form);
+                            _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId, form, this.GetCurrentSurveyAnswer());
                         }
                     }
 
@@ -132,11 +134,10 @@ namespace Epi.Web.MVC.Controllers
         private int GetCurrentPage()
         {
             int CurrentPage = 1;
-            if (ViewData.ContainsKey(Epi.Web.MVC.Constants.Constant.CURRENT_PAGE) && ViewData[Epi.Web.MVC.Constants.Constant.CURRENT_PAGE] != null)
-            {
-                int.TryParse(ViewData[Epi.Web.MVC.Constants.Constant.CURRENT_PAGE].ToString(), out CurrentPage);
-            }
+            
+            string PageNum = this.Request.UrlReferrer.ToString().Substring(this.Request.UrlReferrer.ToString().LastIndexOf('/')+1);
 
+            int.TryParse(PageNum, out CurrentPage);
             return CurrentPage;
         }
 
