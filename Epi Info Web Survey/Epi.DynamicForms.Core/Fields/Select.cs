@@ -84,7 +84,7 @@ namespace MvcDynamicForms.Fields
 
 
 
-           // select.SetInnerText(Value);
+         
 
             if (_IsRequired == true)
             {
@@ -119,8 +119,13 @@ namespace MvcDynamicForms.Fields
                     foreach (var choice in _choices)
                     {
                         var opt = new TagBuilder("option");
+                        var optSelectedVale = "";
+                        if (!string.IsNullOrEmpty(SelectedValue.ToString()))
+                        {
+                         optSelectedVale = SelectedValue.ToString()=="1"? "Yes" : "No";
+                        }
                         opt.Attributes.Add("value",( choice.Key =="Yes"? "1":"0"));
-                        if (choice.Value) opt.Attributes.Add("selected", "selected");
+                        if (choice.Key == optSelectedVale.ToString()) opt.Attributes.Add("selected", "selected");
                         opt.SetInnerText(choice.Key);
                         html.Append(opt.ToString());
                     }
@@ -130,7 +135,7 @@ namespace MvcDynamicForms.Fields
                     {
                         var opt = new TagBuilder("option");
                         opt.Attributes.Add("value", choice.Key);
-                        if (choice.Value) opt.Attributes.Add("selected", "selected");
+                        if (choice.Key == SelectedValue.ToString()) opt.Attributes.Add("selected", "selected");
                         opt.SetInnerText(choice.Key);
                         html.Append(opt.ToString());
                     }
@@ -141,7 +146,7 @@ namespace MvcDynamicForms.Fields
                     {
                         var opt = new TagBuilder("option");
                         opt.Attributes.Add("value", choice.Key);
-                        if (choice.Value) opt.Attributes.Add("selected", "selected");
+                        if (choice.Key == SelectedValue.ToString()) opt.Attributes.Add("selected", "selected");
                         opt.SetInnerText(choice.Key);
                         html.Append(opt.ToString());
                     }
@@ -152,7 +157,7 @@ namespace MvcDynamicForms.Fields
                     {
                         var opt = new TagBuilder("option");
                         opt.Attributes.Add("value", choice.Key.Remove(choice.Key.IndexOf("-")));
-                        if (choice.Value) opt.Attributes.Add("selected", "selected");
+                        if (choice.Key == SelectedValue.ToString()) opt.Attributes.Add("selected", "selected");
                         opt.SetInnerText(choice.Key.Substring(choice.Key.IndexOf("-") + 1));
                         html.Append(opt.ToString());
                     }
