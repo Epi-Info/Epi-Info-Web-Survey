@@ -108,19 +108,19 @@ namespace Epi.Web.MVC.Utility
                         case "17"://DropDown LegalValues
                             string DropDownValues1 = "";
                             DropDownValues1 = GetDropDownValues(xdoc, _FieldTypeID.Attribute("Name").Value, _FieldTypeID.Attribute("SourceTableName").Value);
-                            var _DropDownSelectedValue1 = GetControlValue(SurveyAnswer, _FieldTypeID.Attribute("UniqueId").Value);
+                            var _DropDownSelectedValue1 = GetControlValue(SurveyAnswer, _FieldTypeID.Attribute("Name").Value);
                             form.AddFields(GetDropDown(_FieldTypeID, _Width, _Height, SurveyAnswer, _DropDownSelectedValue1, DropDownValues1,17));
                             break;
                         case "18"://DropDown Codes
                             string DropDownValues2 = "";
                             DropDownValues2 = GetDropDownValues(xdoc, _FieldTypeID.Attribute("Name").Value, _FieldTypeID.Attribute("SourceTableName").Value);
-                            var _DropDownSelectedValue2 = GetControlValue(SurveyAnswer, _FieldTypeID.Attribute("UniqueId").Value);
+                            var _DropDownSelectedValue2 = GetControlValue(SurveyAnswer, _FieldTypeID.Attribute("Name").Value);
                             form.AddFields(GetDropDown(_FieldTypeID, _Width, _Height, SurveyAnswer, _DropDownSelectedValue2, DropDownValues2,18));
                             break;
                         case "19"://DropDown CommentLegal
                             string DropDownValues = "";
                             DropDownValues = GetDropDownValues(xdoc, _FieldTypeID.Attribute("Name").Value, _FieldTypeID.Attribute("SourceTableName").Value);
-                            var _DropDownSelectedValue = GetControlValue(SurveyAnswer, _FieldTypeID.Attribute("UniqueId").Value);
+                            var _DropDownSelectedValue = GetControlValue(SurveyAnswer, _FieldTypeID.Attribute("Name").Value);
                             form.AddFields(GetDropDown(_FieldTypeID, _Width, _Height, SurveyAnswer, _DropDownSelectedValue, DropDownValues,19));
                             break;
                         case "21"://GroupBox
@@ -363,7 +363,8 @@ namespace Epi.Web.MVC.Utility
                 Left = _Width * double.Parse(_FieldTypeID.Attribute("ControlLeftPositionPercentage").Value),
                  PromptWidth = _Width * double.Parse(_FieldTypeID.Attribute("ControlWidthPercentage").Value),
                  //ControlWidth = _Width * double.Parse(_FieldTypeID.Attribute("ControlWidthPercentage").Value),
-               ControlWidth = 10,
+                ControlWidth = 10,
+                Checked = _ControlValue =="Yes"?true:false,
                 fontstyle = _FieldTypeID.Attribute("PromptFontStyle").Value,
                 fontSize = double.Parse(_FieldTypeID.Attribute("PromptFontSize").Value),
                 fontfamily = _FieldTypeID.Attribute("PromptFontFamily").Value,
@@ -435,6 +436,7 @@ namespace Epi.Web.MVC.Utility
                     IsReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value),
                     ShowEmptyOption = true,
                     SelectType=FieldTypeId,
+                    SelectedValue = _ControlValue,
                     EmptyOption = "Select"
                 };
             DropDown.AddChoices(DropDownValues, ",");
