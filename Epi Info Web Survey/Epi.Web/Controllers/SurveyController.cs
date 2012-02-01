@@ -89,28 +89,31 @@ namespace Epi.Web.MVC.Controllers
                         }
                     }
 
-                    //if (!string.IsNullOrEmpty(Submitbutton))
-                    //{
-                    //    TempData[Epi.Web.MVC.Constants.Constant.RESPONSE_ID] = null;
-                    //    return RedirectToAction("Index", "Final");
-                    //}
-                    //else if (!string.IsNullOrEmpty(Savebutton))
-                    //{
-                    //    return RedirectToAction("Index", "Save");// this code is just a place holder
-                    //}
-
-
-
-                    else if (!string.IsNullOrEmpty(ContinueButton))
+                    if (!string.IsNullOrEmpty(Submitbutton))
                     {
-                        form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, PageNumber + 1, this.GetCurrentSurveyAnswer());
+                        TempData[Epi.Web.MVC.Constants.Constant.RESPONSE_ID] = null;
+                        return RedirectToAction("Index", "Final");
+                    }
+                    else if (!string.IsNullOrEmpty(Savebutton))
+                    {
+                        //return RedirectToAction("Index", "Save");// this code is just a place holder
+                        form.SaveClicked = true;
                         return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
                     }
-                    else if (!string.IsNullOrEmpty(PreviousButton))
-                    {
-                        form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, PageNumber - 1, this.GetCurrentSurveyAnswer());
-                        return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
-                    }  else
+
+
+
+                    //else if (!string.IsNullOrEmpty(ContinueButton))
+                    //{
+                    //    form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, PageNumber + 1, this.GetCurrentSurveyAnswer());
+                    //    return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
+                    //}
+                    //else if (!string.IsNullOrEmpty(PreviousButton))
+                    //{
+                    //    form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, PageNumber - 1, this.GetCurrentSurveyAnswer());
+                    //    return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
+                    //}  
+                    else
                     {
                         //goto url
                         form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, PageNumber, this.GetCurrentSurveyAnswer());
