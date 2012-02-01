@@ -65,7 +65,7 @@ namespace Epi.Web.MVC.Controllers
             //return null;
         }
         [HttpPost] [ValidateAntiForgeryToken]
-        public ActionResult Index(SurveyInfoModel surveyInfoModel, string Submitbutton, string Savebutton, int PageNumber = 1)
+        public ActionResult Index(SurveyInfoModel surveyInfoModel, string Submitbutton, string Savebutton, string ContinueButton, string PreviousButton, int PageNumber = 1)
         {
 
             string responseId = null;
@@ -89,16 +89,28 @@ namespace Epi.Web.MVC.Controllers
                         }
                     }
 
-                    if (!string.IsNullOrEmpty(Submitbutton))
+                    //if (!string.IsNullOrEmpty(Submitbutton))
+                    //{
+                    //    TempData[Epi.Web.MVC.Constants.Constant.RESPONSE_ID] = null;
+                    //    return RedirectToAction("Index", "Final");
+                    //}
+                    //else if (!string.IsNullOrEmpty(Savebutton))
+                    //{
+                    //    return RedirectToAction("Index", "Save");// this code is just a place holder
+                    //}
+
+
+
+                    else if (!string.IsNullOrEmpty(ContinueButton))
                     {
-                        TempData[Epi.Web.MVC.Constants.Constant.RESPONSE_ID] = null;
-                        return RedirectToAction("Index", "Final");
+                        form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, PageNumber + 1, this.GetCurrentSurveyAnswer());
+                        return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
                     }
-                    else if (!string.IsNullOrEmpty(Savebutton))
+                    else if (!string.IsNullOrEmpty(PreviousButton))
                     {
-                        return RedirectToAction("Index", "Save");// this code is just a place holder
-                    }
-                    else
+                        form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, PageNumber - 1, this.GetCurrentSurveyAnswer());
+                        return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
+                    }  else
                     {
                         //goto url
                         form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, PageNumber, this.GetCurrentSurveyAnswer());
