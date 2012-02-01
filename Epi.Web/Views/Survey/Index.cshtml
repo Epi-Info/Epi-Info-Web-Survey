@@ -111,11 +111,14 @@
    	           
 	        <div id="nav">
 
+             @if (Model.CurrentPage != 1)
+             {  
 		        
-              <div id="prev" align="left"><button class="prev"  name="PreviousButton"  type="submit" ><img class="button" src="../../Content/images/arrow_left.png"> Previous</button>
+              <div id="prev" align="left"><button class="prev" value="PreviousButton"  name="PreviousButton"  type="submit" ><img class="button" src="../../Content/images/arrow_left.png"> Previous</button>
               
               </div>
-	 		 <div id="save" align="center"><button class="save" type="submit" name="Savebutton"  onclick="window.location='survey3.html'"><img class="button" src="../../Content/images/save.png"/> Save & Close</button>
+             }
+	 		 <div id="save" align="center"><button class="save" type="submit" value="Savebutton"name="Savebutton"  onclick="window.location='survey3.html'"><img class="button" src="../../Content/images/save.png"/> Save & Close</button>
              </div>
 	 		 
               
@@ -129,7 +132,7 @@
                else
                {
                     <div id="prev" align="right">
-                    <button class="next"  name="ContinueButton" type="submit" >Continue <img class="button" src="../../Content/images/arrow_right.png"></button>
+                    <button class="next" value="ContinueButton" name="ContinueButton" type="submit" >Continue <img class="button" src="../../Content/images/arrow_right.png"></button>
                     </div>
                
                }
