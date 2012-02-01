@@ -112,16 +112,28 @@
 	        <div id="nav">
 
 		        
-              <div id="prev" align="left"><button class="prev"  type="submit" ><img class="button" src="../../Content/images/arrow_left.png"> Previous</button>
+              <div id="prev" align="left"><button class="prev"  name="PreviousButton"  type="submit" ><img class="button" src="../../Content/images/arrow_left.png"> Previous</button>
               
               </div>
 	 		 <div id="save" align="center"><button class="save" type="submit" name="Savebutton"  onclick="window.location='survey3.html'"><img class="button" src="../../Content/images/save.png"/> Save & Close</button>
              </div>
 	 		 
-              <div id="next" align="right">
+              
+               @if (Model.CurrentPage == Model.NumberOfPages)
+               {  
+               <div id="next" align="right"> 
               <button class="submits" type="submit"  name="Submitbutton" value="Submit" >
               Submit Survey </button>
-               </div> 
+              </div>
+               }
+               else
+               {
+                    <div id="prev" align="right">
+                    <button class="next"  name="ContinueButton" type="submit" >Continue <img class="button" src="../../Content/images/arrow_right.png"></button>
+                    </div>
+               
+               }
+                
 
             
 	        </div>
