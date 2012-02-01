@@ -112,8 +112,28 @@
     <Compile Include="Utility\SurveyResponseXML.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\css\demos.css" />
     <Content Include="Content\css\epistyle.css" />
+    <Content Include="Content\css\images\check.gif" />
+    <Content Include="Content\css\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\css\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\css\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\css\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\css\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\css\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\css\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\css\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\css\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\css\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\css\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\css\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\css\images\ui-icons_cd0a0a_256x240.png" />
     <Content Include="Content\css\jquery-ui-1.8.16.custom.css" />
+    <Content Include="Content\css\jquery.ui.all.css" />
+    <Content Include="Content\css\jquery.ui.base.css" />
+    <Content Include="Content\css\jquery.ui.core.css" />
+    <Content Include="Content\css\jquery.ui.dialog.css" />
+    <Content Include="Content\css\jquery.ui.theme.css" />
     <Content Include="Content\css\overlay.png" />
     <Content Include="Content\css\page.css" />
     <Content Include="Content\css\ui-lightness\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
@@ -192,9 +212,16 @@
     <Content Include="Scripts\jquery-ui-1.8.11.js" />
     <Content Include="Scripts\jquery-ui-1.8.11.min.js" />
     <Content Include="Scripts\jquery-ui-1.8.16.custom.min.js" />
+    <Content Include="Scripts\jquery.bgiframe-2.1.2.js" />
     <Content Include="Scripts\jquery.number_format.js" />
     <Content Include="Scripts\jquery.maskedinput-1.3.js" />
     <Content Include="Scripts\jquery.numeric.js" />
+    <Content Include="Scripts\jquery.ui.all.css" />
+    <Content Include="Scripts\jquery.ui.core.js" />
+    <Content Include="Scripts\jquery.ui.dialog.js" />
+    <Content Include="Scripts\jquery.ui.mouse.js" />
+    <Content Include="Scripts\jquery.ui.position.js" />
+    <Content Include="Scripts\jquery.ui.widget.js" />
     <Content Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
