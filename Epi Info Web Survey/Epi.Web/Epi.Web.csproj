@@ -84,6 +84,7 @@
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Controllers\FinalController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ResponseController.cs" />
     <Compile Include="Controllers\SurveyController.cs" />
     <Compile Include="Facade\ISurveyFacade.cs" />
     <Compile Include="Utility\FormProvider.cs" />
@@ -271,6 +272,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Shared\Exception.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Response\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Epi.DynamicForms.Core\Epi.Web.DynamicForms.Core.csproj">

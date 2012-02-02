@@ -30,17 +30,17 @@ namespace Epi.Web.MVC
                 new { controller = "Home", action = "Index", surveyid = UrlParameter.Optional }
             ); // Parameter defaults
             routes.MapRoute
-    (
-        null, // Route name
-        "Survey/{surveyid}/{PageNUmber}", // URL with parameters
-        new { controller = "Survey", action = "Index", surveyid = UrlParameter.Optional, PageNUmber = UrlParameter.Optional }
-    ); // Parameter defaults
-           // routes.MapRoute
-           //(
-           //    null, // Route name
-           //    "Survey/{surveyid}", // URL with parameters
-           //    new { controller = "Survey", action = "Index", surveyid = UrlParameter.Optional }
-           //); // Parameter defaults
+                (
+                    null, // Route name
+                    "Survey/{surveyid}/{PageNUmber}", // URL with parameters
+                    new { controller = "Survey", action = "Index", surveyid = UrlParameter.Optional, PageNUmber = UrlParameter.Optional }
+                ); // Parameter defaults
+            routes.MapRoute
+                 (
+                     null, // Route name
+                     "SurveyResponse/{surveyid}/{responseid}/{PageNUmber}", // URL with parameters
+                     new { controller = "Response", action = "Index", surveyid = UrlParameter.Optional, responseid = UrlParameter.Optional, PageNUmber = UrlParameter.Optional }
+                 );
 
             routes.MapRoute
            (
