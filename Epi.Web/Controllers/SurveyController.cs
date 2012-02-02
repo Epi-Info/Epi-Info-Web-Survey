@@ -91,8 +91,20 @@ namespace Epi.Web.MVC.Controllers
 
                     if (!string.IsNullOrEmpty(Submitbutton))
                     {
-                        TempData[Epi.Web.MVC.Constants.Constant.RESPONSE_ID] = null;
-                        return RedirectToAction("Index", "Final");
+
+
+                        int invalidPage = Epi.Web.Utility.ValidateResponse.Validate(form.SurveyInfo.XML, this.GetCurrentSurveyAnswer().XML);  
+                        if(invalidPage > 0)
+                        {
+                            form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, invalidPage, this.GetCurrentSurveyAnswer());
+                            return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
+                        }
+                        else
+                        {
+
+                            TempData[Epi.Web.MVC.Constants.Constant.RESPONSE_ID] = null;
+                            return RedirectToAction("Index", "Final");
+                        }
                     }
                     else if (!string.IsNullOrEmpty(Savebutton))
                     {
@@ -180,7 +192,7 @@ namespace Epi.Web.MVC.Controllers
         }
 
 
-       
+
 
 
     }
