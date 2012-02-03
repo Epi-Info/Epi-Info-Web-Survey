@@ -76,7 +76,7 @@ namespace Epi.Web.MVC.Controllers
                 MvcDynamicForms.Form form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, this.GetCurrentPage()== 0? 1 : this.GetCurrentPage(), this.GetCurrentSurveyAnswer());
                 //Update the model
                 UpdateModel(form);
-
+                bool IsSubmited = false;
                 if (form.Validate())
                 {
 
@@ -84,8 +84,12 @@ namespace Epi.Web.MVC.Controllers
                     {
                         if (!string.IsNullOrEmpty(TempData[Epi.Web.MVC.Constants.Constant.RESPONSE_ID].ToString()))
                         {
+                            if (!string.IsNullOrEmpty(Submitbutton))
+                            {
+                                IsSubmited = true;//survey has been submited
+                            }
                             responseId = TempData[Epi.Web.MVC.Constants.Constant.RESPONSE_ID].ToString();
-                            _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId, form, this.GetCurrentSurveyAnswer());
+                            _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId, form, this.GetCurrentSurveyAnswer(), IsSubmited);
                         }
                     }
 

@@ -67,7 +67,7 @@ namespace Epi.Web.MVC.Controllers
             try
             {
                 SurveyInfoModel surveyInfoModel = _isurveyFacade.GetSurveyInfoModel(GetCurrentSurveyAnswer().SurveyId.ToString());
-                if (surveyInfoModel.ClosingDate > DateTime.Now && StatusId == GetCurrentSurveyAnswer().Status)
+                if (surveyInfoModel.ClosingDate > DateTime.Now && GetCurrentSurveyAnswer().Status == 1 && GetCurrentSurveyAnswer().Status ==  StatusId)
                 {
                 return RedirectToRoute(new { Controller = "Survey", Action = "Index", surveyId = GetCurrentSurveyAnswer().SurveyId.ToString(), PageNumber = 1 });
                 }
