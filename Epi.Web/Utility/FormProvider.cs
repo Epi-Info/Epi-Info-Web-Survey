@@ -439,7 +439,14 @@ namespace Epi.Web.MVC.Utility
                     SelectedValue = _ControlValue,
                     EmptyOption = "Select"
                 };
+
+
             DropDown.AddChoices(DropDownValues, ",");
+
+            if (!string.IsNullOrWhiteSpace(_ControlValue))
+            {
+                DropDown.Choices[_ControlValue] = true;
+            }
 
             return DropDown;
         }
