@@ -41,7 +41,7 @@ namespace Epi.Web.MVC.Utility
         public static void UpdateSurveyResponse(SurveyInfoModel surveyInfoModel,MvcDynamicForms.Form form, SurveyAnswerRequest surveyAnswerRequest,
                                                              SurveyResponseXML surveyResponseXML,
                                                             ISurveyAnswerRepository iSurveyAnswerRepository,
-                                                             SurveyAnswerResponse surveyAnswerResponse,string responseId, Epi.Web.Common.DTO.SurveyAnswerDTO surveyAnswerDTO)
+                                                             SurveyAnswerResponse surveyAnswerResponse,string responseId, Epi.Web.Common.DTO.SurveyAnswerDTO surveyAnswerDTO,bool IsSubmited)
         {
             // 1 Get the record for the current survey response
             // 2 update the current survey response
@@ -66,6 +66,12 @@ namespace Epi.Web.MVC.Utility
             if (SavedXml.Root.FirstAttribute.Value.ToString() != "0")
             { 
                 surveyAnswerRequest.SurveyAnswerList[0].XML = MergeXml(SavedXml, CurrentPageResponseXml,form.CurrentPage).ToString(); 
+            }
+            if (IsSubmited)
+            {
+           
+            surveyAnswerRequest.SurveyAnswerList[0].Status= 2;
+            
             }
  
             iSurveyAnswerRepository.SaveSurveyAnswer(surveyAnswerRequest);
