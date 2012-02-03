@@ -38,8 +38,8 @@ namespace Epi.Web.MVC
             routes.MapRoute
                  (
                      null, // Route name
-                     "SurveyResponse/{surveyid}/{responseid}/{PageNUmber}", // URL with parameters
-                     new { controller = "Response", action = "Index", surveyid = UrlParameter.Optional, responseid = UrlParameter.Optional, PageNUmber = UrlParameter.Optional }
+                     "Home/{responseid}/{StatusId}", // URL with parameters
+                     new { controller = "Home", action = "Response", responseid = UrlParameter.Optional, StatusId = UrlParameter.Optional }
                  );
 
             routes.MapRoute

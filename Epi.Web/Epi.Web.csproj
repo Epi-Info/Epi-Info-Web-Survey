@@ -84,7 +84,6 @@
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Controllers\FinalController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ResponseController.cs" />
     <Compile Include="Controllers\SurveyController.cs" />
     <Compile Include="Facade\ISurveyFacade.cs" />
     <Compile Include="Utility\FormProvider.cs" />
