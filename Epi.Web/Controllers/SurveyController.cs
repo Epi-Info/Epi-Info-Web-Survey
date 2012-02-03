@@ -47,14 +47,14 @@ namespace Epi.Web.MVC.Controllers
 
                 var form = _isurveyFacade.GetSurveyFormData(surveyId,PageNumber, this.GetCurrentSurveyAnswer());
 
-                //create the responseid
-                Guid ResponseID = Guid.NewGuid();
+                ////create the responseid
+                //Guid ResponseID = Guid.NewGuid();
 
-                //put the ResponseId in Temp data for later use
-                TempData[Epi.Web.MVC.Constants.Constant.RESPONSE_ID] = ResponseID.ToString();
+                ////put the ResponseId in Temp data for later use
+                //TempData[Epi.Web.MVC.Constants.Constant.RESPONSE_ID] = ResponseID.ToString();
                
-                // create the first survey response
-                _isurveyFacade.CreateSurveyAnswer(surveyId, ResponseID.ToString());
+                //// create the first survey response
+                //_isurveyFacade.CreateSurveyAnswer(surveyId, ResponseID.ToString());
                 return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
             }
             catch (Exception ex)
@@ -143,12 +143,14 @@ namespace Epi.Web.MVC.Controllers
                 }
 
 
-
+               
             }
+
             catch (Exception ex)
             {
                 return View(Epi.Web.MVC.Constants.Constant.EXCEPTION_PAGE);
             }
+            
         }
       
 
