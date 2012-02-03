@@ -77,6 +77,7 @@ namespace Epi.Web.MVC.Controllers
                 //Update the model
                 UpdateModel(form);
                 bool IsSubmited = false;
+                bool IsSaved = false;
                 if (form.Validate())
                 {
 
@@ -88,8 +89,12 @@ namespace Epi.Web.MVC.Controllers
                             {
                                 IsSubmited = true;//survey has been submited
                             }
+                            if (!string.IsNullOrEmpty(Savebutton))
+                            {
+                                IsSaved = true;//survey has been submited
+                            }
                             responseId = TempData[Epi.Web.MVC.Constants.Constant.RESPONSE_ID].ToString();
-                            _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId, form, this.GetCurrentSurveyAnswer(), IsSubmited);
+                            _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId, form, this.GetCurrentSurveyAnswer(), IsSubmited, IsSaved);
                         }
                     }
 
