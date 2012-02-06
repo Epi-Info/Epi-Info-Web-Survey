@@ -108,7 +108,17 @@ namespace Epi.Web.MVC.Controllers
                             }
                         }
 
-                        return RedirectToAction("Index", "Final");
+
+                        int invalidPage = Epi.Web.Utility.ValidateResponse.Validate(form.SurveyInfo.XML, SurveyAnswer.XML);  
+                        if(invalidPage > 0)
+                        {
+                            form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, invalidPage, SurveyAnswer);
+                            return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
+                        }
+                        else
+                        {
+                            return RedirectToAction("Index", "Final", new { surveyId = surveyInfoModel.SurveyId });
+                        }
                     }
                     else if (!string.IsNullOrEmpty(Savebutton))
                     {

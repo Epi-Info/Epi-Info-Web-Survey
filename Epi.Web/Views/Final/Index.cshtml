@@ -23,5 +23,39 @@
         </div>
     </div>
      <div class="success">
- <img src="../../Content/images/button_check.png" style="vertical-align:middle; padding-right: 10px;"> @Epi.Web.MVC.Constants.Constant.SURVEY_SUBMISSION_MESSAGE 
+       <img src="../../Content/images/button_check.png" style="vertical-align:middle; padding-right: 10px;"> @Epi.Web.MVC.Constants.Constant.SURVEY_SUBMISSION_MESSAGE 
+                        
+    @using (Html.BeginForm())
+       { 
+        @Html.AntiForgeryToken()  
+            <div id="content">
+               @if(Model.ClosingDate.Date >= DateTime.Now.Date)
+               
+               {
+                     
+                        <p>
+                            <button id="beginsurvey" class="begin green" type="submit">
+                                Begin Survey</button>
+
+                        </p>
+               }
+               
+               else
+                { 
+                <div>
+                </div>
+                <div id="attention">
+                    <img src="../../Content/images/sign_warning.png" alt="" style="vertical-align: middle;
+                        padding-right: 10px;" />
+                    This survey is currently closed. Please contact the author of this survey for further
+                    assistance.
+                </div>
+                }
+                
+           </div>
+               
+     }
+                         
+
+
  </div>  
