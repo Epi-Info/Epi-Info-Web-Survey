@@ -282,5 +282,9 @@ namespace MvcDynamicForms
         /// we display the modal dialg to send email for survey 
         /// </summary>
         public bool SaveClicked { get; set; }
+        /// <summary>
+        /// Response Id is saved with the form object to facilitate generating url that can be sent by e-mail or copy text, so a user can retrieve the unfinished survey
+        /// </summary>
+        public string ResponseId { get; set; }
     }
 }
