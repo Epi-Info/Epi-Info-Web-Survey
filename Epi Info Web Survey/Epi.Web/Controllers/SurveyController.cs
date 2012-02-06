@@ -45,18 +45,19 @@ namespace Epi.Web.MVC.Controllers
             try
             {
                 Epi.Web.Common.DTO.SurveyAnswerDTO surveyAnswerDTO = GetSurveyAnswer(responseId);
-
-                var form = _isurveyFacade.GetSurveyFormData(surveyAnswerDTO.SurveyId, PageNumber, surveyAnswerDTO);
-
-                ////create the responseid
-                //Guid ResponseID = Guid.NewGuid();
-
-                ////put the ResponseId in Temp data for later use
-                //TempData[Epi.Web.MVC.Constants.Constant.RESPONSE_ID] = ResponseID.ToString();
-               
-                //// create the first survey response
-                //_isurveyFacade.CreateSurveyAnswer(surveyId, ResponseID.ToString());
-                return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
+                SurveyInfoModel surveyInfoModel = _isurveyFacade.GetSurveyInfoModel(surveyAnswerDTO.SurveyId);
+                ValidationResultEnum ValidationTest = ValidateResponse(Mapper.ToSurveyAnswerModel(surveyAnswerDTO), surveyInfoModel);
+                switch(ValidationTest)
+                {
+                    case ValidationResultEnum.SurveyIsPastClosingDate:
+                        return View(Epi.Web.MVC.Constants.Constant.EXCEPTION_PAGE);
+                    case ValidationResultEnum.SurveyIsAlreadyCompleted:
+                        return View(Epi.Web.MVC.Constants.Constant.EXCEPTION_PAGE);
+                    case ValidationResultEnum.Success:
+                    default:
+                        var form = _isurveyFacade.GetSurveyFormData(surveyAnswerDTO.SurveyId, PageNumber, surveyAnswerDTO);
+                        return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
+                }
             }
             catch (Exception ex)
             {
@@ -196,6 +197,32 @@ namespace Epi.Web.MVC.Controllers
         }
 
 
+
+        private enum ValidationResultEnum
+        {
+            Success,
+            SurveyIsPastClosingDate,
+            SurveyIsAlreadyCompleted
+        }
+
+
+        private ValidationResultEnum ValidateResponse(SurveyAnswerModel SurveyAnswer, SurveyInfoModel SurveyInfo)
+        {
+            ValidationResultEnum result = ValidationResultEnum.Success;
+
+            if (DateTime.Now > SurveyInfo.ClosingDate)
+            {
+                return ValidationResultEnum.SurveyIsPastClosingDate;
+            }
+
+
+            if (SurveyAnswer.Status == 3)
+            {
+                return ValidationResultEnum.SurveyIsAlreadyCompleted;
+            }
+
+            return result;
+        }
 
 
 
