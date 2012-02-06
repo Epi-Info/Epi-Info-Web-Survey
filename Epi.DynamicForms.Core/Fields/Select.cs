@@ -156,9 +156,13 @@ namespace MvcDynamicForms.Fields
                     foreach (var choice in _choices)
                     {
                         var opt = new TagBuilder("option");
+                        if (choice.Key.Contains("-"))
+                        {
                         opt.Attributes.Add("value", choice.Key.Remove(choice.Key.IndexOf("-")));
+                        
                         if (choice.Key.Remove(choice.Key.IndexOf("-")) == SelectedValue.ToString()) opt.Attributes.Add("selected", "selected");
                         opt.SetInnerText(choice.Key.Substring(choice.Key.IndexOf("-") + 1));
+                        }
                         html.Append(opt.ToString());
                     }
                     break;
