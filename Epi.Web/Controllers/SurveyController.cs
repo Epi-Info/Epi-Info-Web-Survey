@@ -34,7 +34,7 @@ namespace Epi.Web.MVC.Controllers
        /// <returns></returns>
  
         [HttpGet]
-        public ActionResult Index(string surveyId, int PageNumber = 1)
+        public ActionResult Index(string responseId, int PageNumber = 1)
         {
 
             //if (!string.IsNullOrEmpty(page))
@@ -44,8 +44,9 @@ namespace Epi.Web.MVC.Controllers
             //get the survey form
             try
             {
+                Epi.Web.Common.DTO.SurveyAnswerDTO surveyAnswerDTO = GetSurveyAnswer(responseId);
 
-                var form = _isurveyFacade.GetSurveyFormData(surveyId,PageNumber, this.GetCurrentSurveyAnswer());
+                var form = _isurveyFacade.GetSurveyFormData(surveyAnswerDTO.SurveyId, PageNumber, surveyAnswerDTO);
 
                 ////create the responseid
                 //Guid ResponseID = Guid.NewGuid();
@@ -65,53 +66,57 @@ namespace Epi.Web.MVC.Controllers
             //return null;
         }
         [HttpPost] [ValidateAntiForgeryToken]
-        public ActionResult Index(SurveyInfoModel surveyInfoModel, string Submitbutton, string Savebutton, string ContinueButton, string PreviousButton, int PageNumber = 1)
+        //public ActionResult Index(SurveyInfoModel surveyInfoModel, string Submitbutton, string Savebutton, string ContinueButton, string PreviousButton, int PageNumber = 1)
+        public ActionResult Index(SurveyAnswerModel surveyAnswerModel, string Submitbutton, string Savebutton, string ContinueButton, string PreviousButton, int PageNumber = 1)
         {
 
-            string responseId = null;
+            string responseId = surveyAnswerModel.ResponseId;
             try
             {
-            
+                Epi.Web.Common.DTO.SurveyAnswerDTO SurveyAnswer = _isurveyFacade.GetSurveyAnswerResponse(responseId).SurveyResponseList[0];
+
+                SurveyInfoModel surveyInfoModel = _isurveyFacade.GetSurveyInfoModel(SurveyAnswer.SurveyId);
+                
                 //get the survey form
-                MvcDynamicForms.Form form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, this.GetCurrentPage()== 0? 1 : this.GetCurrentPage(), this.GetCurrentSurveyAnswer());
+                MvcDynamicForms.Form form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, this.GetCurrentPage() == 0 ? 1 : this.GetCurrentPage(), SurveyAnswer);
                 //Update the model
                 UpdateModel(form);
                 bool IsSubmited = false;
                 bool IsSaved = false;
                 if (form.Validate())
                 {
-
-                    if (TempData.ContainsKey(Epi.Web.MVC.Constants.Constant.RESPONSE_ID))
+                   
+                    if (!string.IsNullOrEmpty(Submitbutton))
                     {
-                        if (!string.IsNullOrEmpty(TempData[Epi.Web.MVC.Constants.Constant.RESPONSE_ID].ToString()))
-                        {
-                            if (!string.IsNullOrEmpty(Submitbutton))
-                            {
-                                IsSubmited = true;//survey has been submited
-                            }
-                            if (!string.IsNullOrEmpty(Savebutton))
-                            {
-                                IsSaved = true;//survey has been submited
-                            }
-                            responseId = TempData[Epi.Web.MVC.Constants.Constant.RESPONSE_ID].ToString();
-                            _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId, form, this.GetCurrentSurveyAnswer(), IsSubmited, IsSaved);
-                        }
+                        IsSubmited = true;//survey has been submited
                     }
-
+                    if (!string.IsNullOrEmpty(Savebutton))
+                    {
+                        IsSaved = true;//survey has been submited
+                    }
+                    _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId, form, SurveyAnswer, IsSubmited, IsSaved);
+                    
                     if (!string.IsNullOrEmpty(Submitbutton))
                     {
 
+                        for (int i = 1; i < form.NumberOfPages; i++)
+                        {
+                            form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, i, SurveyAnswer);
+                            if (!form.Validate())
+                            {
+                                return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
+                            }
+                        }
 
-                        int invalidPage = Epi.Web.Utility.ValidateResponse.Validate(form.SurveyInfo.XML, this.GetCurrentSurveyAnswer().XML);  
+
+                        int invalidPage = Epi.Web.Utility.ValidateResponse.Validate(form.SurveyInfo.XML, SurveyAnswer.XML);  
                         if(invalidPage > 0)
                         {
-                            form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, invalidPage, this.GetCurrentSurveyAnswer());
+                            form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, invalidPage, SurveyAnswer);
                             return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
                         }
                         else
                         {
-
-                            TempData[Epi.Web.MVC.Constants.Constant.RESPONSE_ID] = null;
                             return RedirectToAction("Index", "Final");
                         }
                     }
@@ -137,7 +142,7 @@ namespace Epi.Web.MVC.Controllers
                     else
                     {
                         //goto url
-                        form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, PageNumber, this.GetCurrentSurveyAnswer());
+                        form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, PageNumber, SurveyAnswer);
 
                         //form.Validate();
 
@@ -179,27 +184,15 @@ namespace Epi.Web.MVC.Controllers
             return CurrentPage;
         }
 
-        private Epi.Web.Common.DTO.SurveyAnswerDTO GetCurrentSurveyAnswer()
+        private Epi.Web.Common.DTO.SurveyAnswerDTO GetSurveyAnswer(string responseId)
         {
             Epi.Web.Common.DTO.SurveyAnswerDTO result = null;
 
-            if (TempData.ContainsKey(Epi.Web.MVC.Constants.Constant.RESPONSE_ID) && TempData[Epi.Web.MVC.Constants.Constant.RESPONSE_ID] != null
-                                                                               && !string.IsNullOrEmpty(TempData[Epi.Web.MVC.Constants.Constant.RESPONSE_ID].ToString()))
-            {
-               
-                string responseId = TempData[Epi.Web.MVC.Constants.Constant.RESPONSE_ID].ToString();
-
-               
-                   //TODO: Now repopulating the TempData (by reassigning to responseId) so it persisits, later we will need to find a better 
-                   //way to replace it. 
-                    TempData[Epi.Web.MVC.Constants.Constant.RESPONSE_ID] = responseId;
-                    return _isurveyFacade.GetSurveyAnswerResponse(responseId).SurveyResponseList[0];
-               
-
-
-            }
+            //responseId = TempData[Epi.Web.MVC.Constants.Constant.RESPONSE_ID].ToString();
+            result =  _isurveyFacade.GetSurveyAnswerResponse(responseId).SurveyResponseList[0];
 
             return result;
+
         }
 
 
