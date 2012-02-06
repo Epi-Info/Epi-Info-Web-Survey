@@ -40,14 +40,7 @@ namespace Epi.Web.MVC.Controllers
              if surveyInfodto.SurveyName== null then go to the exception page*/
             try
             {
-                //create the responseid
-                Guid ResponseID = Guid.NewGuid();
 
-                //put the ResponseId in Temp data for later use
-                TempData[Epi.Web.MVC.Constants.Constant.RESPONSE_ID] = ResponseID.ToString();
-
-                // create the first survey response
-                _isurveyFacade.CreateSurveyAnswer(surveyid, ResponseID.ToString());
               //  TempData[Epi.Web.MVC.Constants.Constant.RESPONSE_ID] = "";
                 SurveyInfoModel surveyInfoModel = _isurveyFacade.GetSurveyInfoModel(surveyid);
                 return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, surveyInfoModel);
@@ -92,9 +85,18 @@ namespace Epi.Web.MVC.Controllers
         {
             try
             {
+
+                //put the ResponseId in Temp data for later use
+                //TempData[Epi.Web.MVC.Constants.Constant.RESPONSE_ID] = ResponseID.ToString();
+
+                //create the responseid
+                Guid ResponseID = Guid.NewGuid();
+
+                // create the first survey response
+                _isurveyFacade.CreateSurveyAnswer(surveyModel.SurveyId, ResponseID.ToString());
                 //string page;
                 // return RedirectToAction(Epi.Web.Models.Constants.Constant.INDEX, Epi.Web.Models.Constants.Constant.SURVEY_CONTROLLER, new {id="page" });
-                return RedirectToAction(Epi.Web.MVC.Constants.Constant.INDEX, Epi.Web.MVC.Constants.Constant.SURVEY_CONTROLLER);
+                return RedirectToAction(Epi.Web.MVC.Constants.Constant.INDEX, Epi.Web.MVC.Constants.Constant.SURVEY_CONTROLLER, new { responseid = ResponseID });
             }
             catch (Exception ex)
             {

@@ -56,7 +56,7 @@ $(function() {
                   num = i;  
                     if (i == 1 && Model.CurrentPage >1)
                         {   
-                              <a  style="background-image: url('/Content/images/prev.png'); background-repeat:no-repeat; background-position:center; width:13px;"   href="@string.Format("{0}://{1}/survey/{2}/{3}", ViewContext.HttpContext.Request.Url.Scheme, ViewContext.HttpContext.Request.Url.Authority,  Model.SurveyInfo.SurveyId,Model.CurrentPage-1)"    class="nextprev" title="Previous Page">
+                              <a  style="background-image: url('/Content/images/prev.png'); background-repeat:no-repeat; background-position:center; width:13px;"   href="@string.Format("{0}://{1}/survey/{2}/{3}", ViewContext.HttpContext.Request.Url.Scheme, ViewContext.HttpContext.Request.Url.Authority,  Model.ResponseId,Model.CurrentPage-1)"    class="nextprev" title="Previous Page">
                           &nbsp;&nbsp;&nbsp;
                               </a>
                        
@@ -76,7 +76,7 @@ $(function() {
 
        
          
-                    <a href="@string.Format("{0}://{1}/survey/{2}/{3}", ViewContext.HttpContext.Request.Url.Scheme, ViewContext.HttpContext.Request.Url.Authority, Model.SurveyInfo.SurveyId, num) " title="Go to page"   >@num</a> 
+                    <a href="@string.Format("{0}://{1}/survey/{2}/{3}", ViewContext.HttpContext.Request.Url.Scheme, ViewContext.HttpContext.Request.Url.Authority, Model.ResponseId, num) " title="Go to page"   >@num</a> 
 
                     
               }  
@@ -86,7 +86,7 @@ $(function() {
           if (Model.CurrentPage != Model.NumberOfPages )
             {  
                   
-         <a    style="background-image: url('/Content/images/next.png');  background-repeat:no-repeat; background-position:center; width:13px;" href="@string.Format("{0}://{1}/survey/{2}/{3}", ViewContext.HttpContext.Request.Url.Scheme, ViewContext.HttpContext.Request.Url.Authority,  Model.SurveyInfo.SurveyId, Model.CurrentPage+1)" class="nextprev" title="Go to Next Page">
+         <a    style="background-image: url('/Content/images/next.png');  background-repeat:no-repeat; background-position:center; width:13px;" href="@string.Format("{0}://{1}/survey/{2}/{3}", ViewContext.HttpContext.Request.Url.Scheme, ViewContext.HttpContext.Request.Url.Authority,  Model.ResponseId, Model.CurrentPage+1)" class="nextprev" title="Go to Next Page">
         &nbsp;&nbsp;&nbsp;
          </a>
           
@@ -153,7 +153,7 @@ $(function() {
              @if (Model.CurrentPage != 1)
              {  
 		        
-              <div id="prev" align="left"><button class="prev" value="PreviousButton"  name="PreviousButton"  type="button" onclick="@string.Format("document.forms[0].action = '{0}://{1}/survey/{2}/{3}'; $('#myform').submit();", ViewContext.HttpContext.Request.Url.Scheme, ViewContext.HttpContext.Request.Url.Authority, Model.SurveyInfo.SurveyId, Model.CurrentPage - 1)"><img class="button" src="../../Content/images/arrow_left.png"> Previous</button>
+              <div id="prev" align="left"><button class="prev" value="PreviousButton"  name="PreviousButton"  type="button" onclick="@string.Format("document.forms[0].action = '{0}://{1}/survey/{2}/{3}'; $('#myform').submit();", ViewContext.HttpContext.Request.Url.Scheme, ViewContext.HttpContext.Request.Url.Authority, Model.ResponseId, Model.CurrentPage - 1)"><img class="button" src="../../Content/images/arrow_left.png"> Previous</button>
               
               </div>
              }
@@ -171,7 +171,7 @@ $(function() {
                else
                {
                     <div id="prev" align="right">
-                    <button class="next"  name="ContinueButton" type="button" onclick="@string.Format("document.forms[0].action = '{0}://{1}/survey/{2}/{3}'; $('#myform').submit();", ViewContext.HttpContext.Request.Url.Scheme, ViewContext.HttpContext.Request.Url.Authority, Model.SurveyInfo.SurveyId, Model.CurrentPage + 1)">Continue <img class="button" src="../../Content/images/arrow_right.png"></button>
+                    <button class="next"  name="ContinueButton" type="button" onclick="@string.Format("document.forms[0].action = '{0}://{1}/survey/{2}/{3}'; $('#myform').submit();", ViewContext.HttpContext.Request.Url.Scheme, ViewContext.HttpContext.Request.Url.Authority, Model.ResponseId, Model.CurrentPage + 1)">Continue <img class="button" src="../../Content/images/arrow_right.png"></button>
                     </div>
                       
                }

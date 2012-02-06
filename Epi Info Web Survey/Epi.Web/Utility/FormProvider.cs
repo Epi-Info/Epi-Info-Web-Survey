@@ -23,7 +23,8 @@ namespace Epi.Web.MVC.Utility
             else { SurveyAnswer = ""; }
 
             var form = new Form();
-            
+
+            form.ResponseId = _SurveyAnswer.ResponseId;
 
             form.SurveyInfo = (Epi.Web.Common.DTO.SurveyInfoDTO)(SurveyMetaData);
             
