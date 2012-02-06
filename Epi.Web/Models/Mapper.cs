@@ -56,5 +56,40 @@ namespace Epi.Web.MVC.Models
             };
         }
 
+
+        public static SurveyAnswerModel ToSurveyAnswerModel(this Epi.Web.Common.DTO.SurveyAnswerDTO SurveyAnswerDTO)
+        {
+            return new SurveyAnswerModel
+            {
+                ResponseId = SurveyAnswerDTO.ResponseId,
+                SurveyId = SurveyAnswerDTO.SurveyId,
+                DateLastUpdated = SurveyAnswerDTO.DateLastUpdated,
+                DateCompleted = SurveyAnswerDTO.DateCompleted,
+                Status = SurveyAnswerDTO.Status,
+                XML = SurveyAnswerDTO.XML
+            };
+        }
+
+        /// <summary>
+        /// Maps SurveyInfo Model to SurveyInfo DTO.
+        /// </summary>
+        /// <param name="customer"></param>
+        /// <returns></returns>
+
+        public static Epi.Web.Common.DTO.SurveyAnswerDTO ToSurveyAnswerDTO(SurveyAnswerModel SurveyAnswerModel)
+        {
+            return new Epi.Web.Common.DTO.SurveyAnswerDTO
+            {
+                ResponseId = SurveyAnswerModel.ResponseId,
+                SurveyId = SurveyAnswerModel.SurveyId,
+                DateLastUpdated = SurveyAnswerModel.DateLastUpdated,
+                DateCompleted = SurveyAnswerModel.DateCompleted,
+                Status = SurveyAnswerModel.Status,
+                XML = SurveyAnswerModel.XML
+            };
+        }
+
+
+
     }
 }

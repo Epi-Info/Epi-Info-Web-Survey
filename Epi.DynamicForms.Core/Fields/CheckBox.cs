@@ -63,6 +63,7 @@ namespace MvcDynamicForms.Fields
 
         public override bool Validate()
         {
+            /*
             if (Required && !Checked)
             {
                 // Isn't valid
@@ -71,6 +72,7 @@ namespace MvcDynamicForms.Fields
             }
 
             // Is Valid
+            */
             ClearError();
             return true;
         }
