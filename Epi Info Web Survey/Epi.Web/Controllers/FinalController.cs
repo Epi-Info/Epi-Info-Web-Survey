@@ -6,7 +6,7 @@ namespace Epi.Web.MVC.Controllers
 {
     public class FinalController : Controller
     {
-        
+
 
         //declare SurveyTransactionObject object
         private ISurveyFacade _isurveyFacade;
@@ -19,25 +19,45 @@ namespace Epi.Web.MVC.Controllers
 
             _isurveyFacade = isurveyFacade;
         }
-        public ActionResult Index(string surveyId,string final)
+        [HttpGet]
+        public ActionResult Index(string surveyId, string final)
         {
 
             //if (!string.IsNullOrEmpty(final))
             //{
-             try
+            try
             {
-            SurveyInfoModel surveyInfoModel = _isurveyFacade.GetSurveyInfoModel(surveyId);
+                SurveyInfoModel surveyInfoModel = _isurveyFacade.GetSurveyInfoModel(surveyId);
                 return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, surveyInfoModel);
-            //}
-            //return null;
+
+                //}
+                //return null;
             }
-             catch (Exception ex)
-             {
-                 return View(Epi.Web.MVC.Constants.Constant.EXCEPTION_PAGE);
-             }
+            catch (Exception ex)
+            {
+                return View(Epi.Web.MVC.Constants.Constant.EXCEPTION_PAGE);
+            }
         }
 
-        
+        [HttpPost]
+        public ActionResult Index(string surveyId, SurveyAnswerModel surveyAnswerModel)
+        {
+
+
+            try
+            {
+               Guid responseId = Guid.NewGuid(); 
+
+              
+               _isurveyFacade.CreateSurveyAnswer(surveyId, responseId.ToString());
+               return RedirectToRoute(new { Controller = "Survey", Action = "Index", responseId = responseId, PageNumber = 1 });
+            }
+            catch (Exception ex)
+            {
+                return View(Epi.Web.MVC.Constants.Constant.EXCEPTION_PAGE);
+            }
+
+        }
 
     }
 }
