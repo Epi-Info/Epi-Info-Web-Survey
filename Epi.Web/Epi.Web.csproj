@@ -242,8 +242,6 @@
     </None>
     <Content Include="Scripts\jquery.validationEngine-en.js" />
     <Content Include="Scripts\jquery.validationEngine.js" />
-    <Content Include="Scripts\ZeroClipboard.js" />
-    <Content Include="Scripts\ZeroClipboard.swf" />
     <Content Include="Unity.Mvc3.README.txt" />
     <Content Include="Views\Final\Index.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
