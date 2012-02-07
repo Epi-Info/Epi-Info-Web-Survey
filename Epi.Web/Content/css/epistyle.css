@@ -373,3 +373,21 @@ float:right;
 width: 94%;
 vertical-align: top;
 }
+
+button.copylink
+{
+   background-color:transparent;
+   border:none;
+   color: #0a2695;
+   text-decoration: underline;
+   cursor:pointer;
+   padding-left: 20px;
+   font-family: Segoe UI;
+   font-weight:bold;
+ }
+ 
+ button.copylink:hover
+{
+   text-decoration: none;
+     
+ }
