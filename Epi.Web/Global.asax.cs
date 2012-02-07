@@ -49,10 +49,10 @@ namespace Epi.Web.MVC
                new { controller = "Final", action = "Index", surveyid = UrlParameter.Optional }
            ); // Parameter defaults
 
-            //routes.MapRoute(
-            //   "Default", // Route name
-            //   "{*url}", // URL with parameters
-            //   new { controller = "Home", action = "Splash", id = UrlParameter.Optional });
+            routes.MapRoute(
+               "Default", // Route name
+               "{*url}", // URL with parameters
+               new { controller = "Home", action = "Splash", id = UrlParameter.Optional });
 
             routes.MapRoute(
               null,                                              // Route name
