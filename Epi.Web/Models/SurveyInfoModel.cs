@@ -20,6 +20,7 @@ namespace Epi.Web.MVC.Models
         private string _XML;
         private bool _IsSuccess;
         private DateTime _ClosingDate;
+        private int _SurveyType;
 
         public string SurveyId
         {
@@ -80,6 +81,10 @@ namespace Epi.Web.MVC.Models
             set { _ClosingDate = value; }
         }
 
-
+        public int SurveyType
+        {
+            get { return _SurveyType; }
+            set { _SurveyType = value; }
+        }
     }
 }
