@@ -84,6 +84,7 @@
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Controllers\FinalController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PostController.cs" />
     <Compile Include="Controllers\SurveyController.cs" />
     <Compile Include="Facade\ISurveyFacade.cs" />
     <Compile Include="Utility\FormProvider.cs" />
@@ -108,6 +109,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Utility\EmailMessage.cs" />
     <Compile Include="Utility\SurveyHelper.cs" />
     <Compile Include="Utility\SurveyResponseXML.cs" />
     <Compile Include="Utility\ValidateResponse.cs" />
@@ -214,6 +216,7 @@
     <Content Include="Scripts\jquery-ui-1.8.11.min.js" />
     <Content Include="Scripts\jquery-ui-1.8.16.custom.min.js" />
     <Content Include="Scripts\jquery.bgiframe-2.1.2.js" />
+    <Content Include="Scripts\jquery.Epi.Survey.Components.js" />
     <Content Include="Scripts\jquery.number_format.js" />
     <Content Include="Scripts\jquery.maskedinput-1.3.js" />
     <Content Include="Scripts\jquery.numeric.js" />
@@ -239,6 +242,8 @@
     </None>
     <Content Include="Scripts\jquery.validationEngine-en.js" />
     <Content Include="Scripts\jquery.validationEngine.js" />
+    <Content Include="Scripts\ZeroClipboard.js" />
+    <Content Include="Scripts\ZeroClipboard.swf" />
     <Content Include="Unity.Mvc3.README.txt" />
     <Content Include="Views\Final\Index.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />

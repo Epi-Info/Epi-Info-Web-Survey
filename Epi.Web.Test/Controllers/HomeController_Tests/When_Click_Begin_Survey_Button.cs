@@ -29,7 +29,7 @@ namespace Epi.Web.MVC.Controllers.HomeController_Tests
             surveyInfoRequest.Criteria.SurveyIdList = "1";
             iSurveyFacade = new TestSurveyFacade(surveyInfoRequest);
             var controller = new Epi.Web.MVC.Controllers.SurveyController(iSurveyFacade);
-            ViewResult c = controller.Index("1","page") as ViewResult;
+            ViewResult c = controller.Notify("1","page") as ViewResult;
             //MvcDynamicForms.Form f = c.Model as MvcDynamicForms.Form;
             MvcDynamicForms.Form f = iSurveyFacade.GetSurveyFormData("1", 1, null);
             //Assert.AreEqual(typeof(MvcDynamicForms.Form), c.Model);//test to make sure it is returning field prefix
