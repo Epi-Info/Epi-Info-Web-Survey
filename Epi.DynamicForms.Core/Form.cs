@@ -278,10 +278,10 @@ namespace MvcDynamicForms
         public int NumberOfPages { get; set; }
         public int CurrentPage  { get; set; }
         /// <summary>
-        /// SaveClicked is a boolean used to find whether the Save button has been clicked. It hs captured as a hidden variable in Survey/Index.cshtml. Based on the value
+        /// IsSaved is a boolean used to find whether the Save button has been clicked. It hs captured as a hidden variable in Survey/Index.cshtml. Based on the value
         /// we display the modal dialg to send email for survey 
         /// </summary>
-        public bool SaveClicked { get; set; }
+        public bool IsSaved { get; set; }
         /// <summary>
         /// Response Id is saved with the form object to facilitate generating url that can be sent by e-mail or copy text, so a user can retrieve the unfinished survey
         /// </summary>
