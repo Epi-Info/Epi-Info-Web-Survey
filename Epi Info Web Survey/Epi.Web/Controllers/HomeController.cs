@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Web.Mvc;
 using Epi.Web.MVC.Models;
-
+using System.Xml;
+using System.Xml.Linq;
+using System.Linq;
 namespace Epi.Web.MVC.Controllers
 {
     public class HomeController : Controller
@@ -60,9 +62,9 @@ namespace Epi.Web.MVC.Controllers
             try
             {
                 SurveyInfoModel surveyInfoModel = _isurveyFacade.GetSurveyInfoModel(GetCurrentSurveyAnswer().SurveyId.ToString());
-                if (surveyInfoModel.ClosingDate > DateTime.Now && GetCurrentSurveyAnswer().Status == 2 && GetCurrentSurveyAnswer().Status ==  StatusId)
+                if (surveyInfoModel.ClosingDate > DateTime.Now && GetCurrentSurveyAnswer().Status == 2 )
                 {
-                return RedirectToRoute(new { Controller = "Survey", Action = "Index", surveyId = GetCurrentSurveyAnswer().SurveyId.ToString(), PageNumber = 1 });
+                    return RedirectToRoute(new { Controller = "Survey", Action = "Index", responseid = responseid, PageNumber = GetSurveyPageNumber(GetCurrentSurveyAnswer().XML.ToString()) });
                 }
                 else{
                  return View(Epi.Web.MVC.Constants.Constant.EXCEPTION_PAGE);
@@ -125,6 +127,16 @@ namespace Epi.Web.MVC.Controllers
             }
 
             return result;
+        }
+
+        private int GetSurveyPageNumber( string ResponseXml) {
+
+            XDocument xdoc = XDocument.Parse(ResponseXml);
+
+               int PageNumber = xdoc.Root.Elements("Page").Count();
+
+            return PageNumber;
+        
         }
     }
 }
