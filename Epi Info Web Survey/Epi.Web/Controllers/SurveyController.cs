@@ -46,14 +46,14 @@ namespace Epi.Web.MVC.Controllers
             {
                 Epi.Web.Common.DTO.SurveyAnswerDTO surveyAnswerDTO = GetSurveyAnswer(responseId);
                 SurveyInfoModel surveyInfoModel = _isurveyFacade.GetSurveyInfoModel(surveyAnswerDTO.SurveyId);
-                ValidationResultEnum ValidationTest = ValidateResponse(Mapper.ToSurveyAnswerModel(surveyAnswerDTO), surveyInfoModel);
+                PreValidationResultEnum ValidationTest = PreValidateResponse(Mapper.ToSurveyAnswerModel(surveyAnswerDTO), surveyInfoModel);
                 switch(ValidationTest)
                 {
-                    case ValidationResultEnum.SurveyIsPastClosingDate:
+                    case PreValidationResultEnum.SurveyIsPastClosingDate:
                         return View(Epi.Web.MVC.Constants.Constant.EXCEPTION_PAGE);
-                    case ValidationResultEnum.SurveyIsAlreadyCompleted:
+                    case PreValidationResultEnum.SurveyIsAlreadyCompleted:
                         return View(Epi.Web.MVC.Constants.Constant.EXCEPTION_PAGE);
-                    case ValidationResultEnum.Success:
+                    case PreValidationResultEnum.Success:
                     default:
                         var form = _isurveyFacade.GetSurveyFormData(surveyAnswerDTO.SurveyId, PageNumber, surveyAnswerDTO);
                         return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
@@ -77,86 +77,79 @@ namespace Epi.Web.MVC.Controllers
                 Epi.Web.Common.DTO.SurveyAnswerDTO SurveyAnswer = _isurveyFacade.GetSurveyAnswerResponse(responseId).SurveyResponseList[0];
 
                 SurveyInfoModel surveyInfoModel = _isurveyFacade.GetSurveyInfoModel(SurveyAnswer.SurveyId);
-                
-                //get the survey form
-                MvcDynamicForms.Form form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, this.GetCurrentPage() == 0 ? 1 : this.GetCurrentPage(), SurveyAnswer);
-                //Update the model
-                UpdateModel(form);
-                bool IsSubmited = false;
-               
-                if (form.Validate())
-                {
-                   
-                    if (!string.IsNullOrEmpty(Submitbutton))
-                    {
-                        IsSubmited = true;//survey has been submited
-                    }
-                    if (!string.IsNullOrEmpty(Savebutton))
-                    {
-                        form.IsSaved = true;
-                    }
-                    _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId, form, SurveyAnswer, IsSubmited, form.IsSaved);
-                    
-                    if (!string.IsNullOrEmpty(Submitbutton))
-                    {
 
-                        for (int i = 1; i < form.NumberOfPages; i++)
+                PreValidationResultEnum ValidationTest = PreValidateResponse(Mapper.ToSurveyAnswerModel(SurveyAnswer), surveyInfoModel);
+                switch (ValidationTest)
+                {
+                    case PreValidationResultEnum.SurveyIsPastClosingDate:
+                        return View(Epi.Web.MVC.Constants.Constant.EXCEPTION_PAGE);
+                    case PreValidationResultEnum.SurveyIsAlreadyCompleted:
+                        return View(Epi.Web.MVC.Constants.Constant.EXCEPTION_PAGE);
+                    case PreValidationResultEnum.Success:
+                    default:
+
+                        //get the survey form
+                        MvcDynamicForms.Form form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, this.GetCurrentPage() == 0 ? 1 : this.GetCurrentPage(), SurveyAnswer);
+                        //Update the model
+                        UpdateModel(form);
+                        bool IsSubmited = false;
+                        bool IsSaved = false;
+
+
+                        _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId, form, SurveyAnswer, IsSubmited, IsSaved);
+
+                        if (form.Validate())
                         {
-                            form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, i, SurveyAnswer);
-                            if (!form.Validate())
+                            if (!string.IsNullOrEmpty(Submitbutton))
                             {
+
+                                for (int i = 1; i < form.NumberOfPages; i++)
+                                {
+                                    form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, i, SurveyAnswer);
+                                    if (!form.Validate())
+                                    {
+                                        return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
+                                    }
+                                }
+
+                                
+                                IsSubmited = true;//survey has been submited this will change the survey status to 3 - Completed
+                                _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId, form, SurveyAnswer, IsSubmited, IsSaved);
+
+                                return RedirectToAction("Index", "Final", new { surveyId = surveyInfoModel.SurveyId });
+                            }
+                            else if (!string.IsNullOrEmpty(Savebutton))
+                            {
+                                form.IsSaved = true;
+                                form.StatusId = SurveyAnswer.Status;
+                                if (SurveyAnswer.Status == 1)
+                                {
+                                    SurveyAnswer.Status = 2;
+                                     
+                                }
+                                _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId, form, SurveyAnswer, IsSubmited, IsSaved);
+                                    
+                                return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
+
+                            }
+                            else
+                            {
+                                //goto url
+                                form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, PageNumber, SurveyAnswer);
+
+                                //form.Validate();
+
                                 return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
                             }
-                        }
 
-
-                        int invalidPage = Epi.Web.Utility.ValidateResponse.Validate(form.SurveyInfo.XML, SurveyAnswer.XML);  
-                        if(invalidPage > 0)
-                        {
-                            form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, invalidPage, SurveyAnswer);
-                            return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
                         }
                         else
                         {
-                            return RedirectToAction("Index", "Final", new { surveyId = surveyInfoModel.SurveyId });
+                            //stay on same page
+                            return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
                         }
-                    }
-                    else if (!string.IsNullOrEmpty(Savebutton))
-                    {
-                         
-                        return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
-
-                    }
-
-
-
-                    //else if (!string.IsNullOrEmpty(ContinueButton))
-                    //{
-                    //    form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, PageNumber + 1, this.GetCurrentSurveyAnswer());
-                    //    return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
-                    //}
-                    //else if (!string.IsNullOrEmpty(PreviousButton))
-                    //{
-                    //    form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, PageNumber - 1, this.GetCurrentSurveyAnswer());
-                    //    return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
-                    //}  
-                    else
-                    {
-                        //goto url
-                        form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, PageNumber, SurveyAnswer);
-
-                        //form.Validate();
-
-                        return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
-                     }
 
                 }
-                else
-                {
-                    //stay on same page
-                    return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
-                }
-
 
                
             }
@@ -167,14 +160,8 @@ namespace Epi.Web.MVC.Controllers
             }
             
         }
-      
 
-
-        
-
-
-
-        
+ 
         private int GetCurrentPage()
         {
             int CurrentPage = 1;
@@ -198,7 +185,7 @@ namespace Epi.Web.MVC.Controllers
 
 
 
-        private enum ValidationResultEnum
+        private enum PreValidationResultEnum
         {
             Success,
             SurveyIsPastClosingDate,
@@ -206,19 +193,19 @@ namespace Epi.Web.MVC.Controllers
         }
 
 
-        private ValidationResultEnum ValidateResponse(SurveyAnswerModel SurveyAnswer, SurveyInfoModel SurveyInfo)
+        private PreValidationResultEnum PreValidateResponse(SurveyAnswerModel SurveyAnswer, SurveyInfoModel SurveyInfo)
         {
-            ValidationResultEnum result = ValidationResultEnum.Success;
+            PreValidationResultEnum result = PreValidationResultEnum.Success;
 
             if (DateTime.Now > SurveyInfo.ClosingDate)
             {
-                return ValidationResultEnum.SurveyIsPastClosingDate;
+                return PreValidationResultEnum.SurveyIsPastClosingDate;
             }
 
 
             if (SurveyAnswer.Status == 3)
             {
-                return ValidationResultEnum.SurveyIsAlreadyCompleted;
+                return PreValidationResultEnum.SurveyIsAlreadyCompleted;
             }
 
             return result;

@@ -166,6 +166,7 @@
              @Html.AntiForgeryToken()  
              @Html.Raw(Model.RenderHtml(true))
              
+            @Html.HiddenFor(model => model.StatusId, new { id = "_statusId" })
              @Html.HiddenFor(model => model.IsSaved, new { id = "_showModalPopup" })
              @Html.HiddenFor(model => model.ResponseId, new { id = "_responseId" })
               
