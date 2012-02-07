@@ -27,6 +27,7 @@ namespace Epi.Web.MVC.Controllers
             //{
             try
             {
+                
                 SurveyInfoModel surveyInfoModel = _isurveyFacade.GetSurveyInfoModel(surveyId);
                 return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, surveyInfoModel);
 
@@ -40,7 +41,7 @@ namespace Epi.Web.MVC.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(string surveyId, SurveyAnswerModel surveyAnswerModel)
+        public ActionResult Index(string surveyId, SurveyAnswerModel surveyAnswerModel )
         {
 
 

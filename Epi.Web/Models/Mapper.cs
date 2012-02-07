@@ -30,7 +30,9 @@ namespace Epi.Web.MVC.Models
                 IntroductionText = SurveyInfoDTO.IntroductionText,
                 XML = SurveyInfoDTO.XML,
                 IsSuccess = SurveyInfoDTO.IsSuccess,
+                SurveyType = SurveyInfoDTO.SurveyType,
                 ClosingDate = SurveyInfoDTO.ClosingDate
+
             };
         }
 

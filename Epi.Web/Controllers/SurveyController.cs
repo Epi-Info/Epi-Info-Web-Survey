@@ -83,7 +83,7 @@ namespace Epi.Web.MVC.Controllers
                 //Update the model
                 UpdateModel(form);
                 bool IsSubmited = false;
-                bool IsSaved = false;
+               
                 if (form.Validate())
                 {
                    
@@ -91,8 +91,11 @@ namespace Epi.Web.MVC.Controllers
                     {
                         IsSubmited = true;//survey has been submited
                     }
-                   
-                    _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId, form, SurveyAnswer, IsSubmited, IsSaved);
+                    if (!string.IsNullOrEmpty(Savebutton))
+                    {
+                        form.IsSaved = true;
+                    }
+                    _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId, form, SurveyAnswer, IsSubmited, form.IsSaved);
                     
                     if (!string.IsNullOrEmpty(Submitbutton))
                     {
@@ -120,7 +123,7 @@ namespace Epi.Web.MVC.Controllers
                     }
                     else if (!string.IsNullOrEmpty(Savebutton))
                     {
-                        form.IsSaved = true;
+                         
                         return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
 
                     }
