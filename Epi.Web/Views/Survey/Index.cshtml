@@ -6,7 +6,7 @@
 <script type="text/javascript">
     $(document).ready(function () {
         // a workaround for a flaw in the demo system (http://dev.jqueryui.com/ticket/4375), ignore!
-      
+
         $("#dialog").dialog({
             autoOpen: false,
             show: "blind",
@@ -15,13 +15,18 @@
             height: 250,
             modal: true
         });
-        var responseUrl = GetRedirectionUrl(); 
+        var responseUrl = GetRedirectionUrl();
         $('#url').val(responseUrl);
         $('.success').hide();
         if ($('#_showModalPopup').val() == 'True') {
-            $('.success').show();
-            //call your jquery modal popup method
-            $("#dialog").dialog("open");
+            if ($('#_statusId').val() == '1') { //if clicking the save button for the first time
+                $('.success').show();
+                //call your jquery modal popup method
+                $("#dialog").dialog("open");
+            }
+            else {
+                $('.success').show(); //in subsequest click we just show that the survey has been saved not the modal popup
+            }
             return true;
         }
 
