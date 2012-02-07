@@ -120,13 +120,9 @@ namespace Epi.Web.MVC.Controllers
                             }
                             else if (!string.IsNullOrEmpty(Savebutton))
                             {
-                                form.IsSaved = true;
+                                IsSaved = form.IsSaved = true;
                                 form.StatusId = SurveyAnswer.Status;
-                                if (SurveyAnswer.Status == 1)
-                                {
-                                    SurveyAnswer.Status = 2;
-                                     
-                                }
+                                
                                 _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId, form, SurveyAnswer, IsSubmited, IsSaved);
                                     
                                 return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);

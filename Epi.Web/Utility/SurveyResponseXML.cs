@@ -19,10 +19,10 @@ namespace Epi.Web.MVC.Utility
 
             foreach (var field in pForm.InputFields)
             {
-           
-                if(this.ResponseDetailList.ContainsKey(field.Key))
+
+                if (this.ResponseDetailList.ContainsKey(field.Title))
                 {
-                    this.ResponseDetailList[field.Title] = field.Key;
+                    this.ResponseDetailList[field.Title] = field.Response;
                 }
                 else
                 {
@@ -33,9 +33,9 @@ namespace Epi.Web.MVC.Utility
 
         public void Add(MvcDynamicForms.Fields.InputField pField)
         {
-            if(this.ResponseDetailList.ContainsKey(pField.Key))
+            if (this.ResponseDetailList.ContainsKey(pField.Title))
             {
-                this.ResponseDetailList[pField.Title] = pField.Response;
+                this.ResponseDetailList[pField.Title] = pField.GetXML();
             }
             else
             {
