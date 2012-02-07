@@ -98,11 +98,22 @@ namespace Epi.Web.MVC.Controllers
 
                         _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId, form, SurveyAnswer, IsSubmited, IsSaved);
 
-                        if (form.Validate())
+
+                        if (!string.IsNullOrEmpty(Savebutton))
+                        {
+                                IsSaved = form.IsSaved = true;
+                                form.StatusId = SurveyAnswer.Status;
+                                
+                                _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId, form, SurveyAnswer, IsSubmited, IsSaved);
+                                    
+                                return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
+
+                        }
+                        else if (form.Validate())
                         {
                             if (!string.IsNullOrEmpty(Submitbutton))
                             {
-
+                                // ReValidate All Pages
                                 for (int i = 1; i < form.NumberOfPages; i++)
                                 {
                                     form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, i, SurveyAnswer);
@@ -118,23 +129,10 @@ namespace Epi.Web.MVC.Controllers
 
                                 return RedirectToAction("Index", "Final", new { surveyId = surveyInfoModel.SurveyId });
                             }
-                            else if (!string.IsNullOrEmpty(Savebutton))
-                            {
-                                IsSaved = form.IsSaved = true;
-                                form.StatusId = SurveyAnswer.Status;
-                                
-                                _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId, form, SurveyAnswer, IsSubmited, IsSaved);
-                                    
-                                return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
-
-                            }
                             else
                             {
-                                //goto url
+                                //This is a Navigation to a url
                                 form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, PageNumber, SurveyAnswer);
-
-                                //form.Validate();
-
                                 return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
                             }
 
