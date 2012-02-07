@@ -29,10 +29,25 @@
    
    <script type="text/javascript">
 
-        $(document).ready(function () {
 
-            $("#myform").validationEngine();
-        }); 
+
+
+
+       $(document).ready(function () {
+
+           $('#Savebutton').click(function () {
+
+
+               $("#myform").validationEngine('detach');
+               return true;
+           });
+
+           $("#myform").validationEngine();
+       }); 
+
+
+
+
        $(function () {
                  $('a').click(PostForm);
                  function PostForm(event) 
