@@ -76,6 +76,7 @@ namespace Epi.Web.MVC.Utility
               
               XmlDocument xml = new XmlDocument();
               XmlElement root = xml.CreateElement(Epi.Web.MVC.Constants.Constant.SURVEY_RESPONSE);
+            
               if (AddRoot == true)
               {
             
