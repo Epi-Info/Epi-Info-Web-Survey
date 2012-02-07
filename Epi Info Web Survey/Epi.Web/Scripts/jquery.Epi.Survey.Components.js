@@ -12,11 +12,11 @@ function NotifyByEmail(emailAddress,redirectUrl) {
             user,
             function (data) {
                 if (data === true) {
-                    alert('User is saved');
+                    alert('An email has been sent to the participant with survey URL.');
                 }
                 else {
 
-                    alert('Failed to save the user');
+                    alert('Failed to send email to the participant');
 
                 }
             },
