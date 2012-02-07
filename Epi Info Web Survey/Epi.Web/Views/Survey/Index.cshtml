@@ -3,32 +3,61 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<script type="text/javascript"> 
-$(function() {
-		// a workaround for a flaw in the demo system (http://dev.jqueryui.com/ticket/4375), ignore!
-        
-         $("#dialog").dialog({
-             autoOpen: false,
-             show: "blind",
+<script type="text/javascript">
+    $(document).ready(function () {
+        // a workaround for a flaw in the demo system (http://dev.jqueryui.com/ticket/4375), ignore!
+      
+        $("#dialog").dialog({
+            autoOpen: false,
+            show: "blind",
             // hide: "explode",
-             resizable: false,
-		     height:250,
-		     modal: true,
-         });
-         
-         if($('#_showModalPopup').val() == 'True')
-         {
+            resizable: false,
+            height: 250,
+            modal: true
+        });
+        var responseUrl = GetRedirectionUrl(); 
+        $('#url').val(responseUrl);
+        $('.success').hide();
+        if ($('#_showModalPopup').val() == 'True') {
+            $('.success').show();
+            //call your jquery modal popup method
+            $("#dialog").dialog("open");
+            return true;
+        }
 
-           //call your jquery modal popup method
-           $("#dialog").dialog("open");
-             return true;
-          }
-	});
 
-    function myfunction()
-         {
-            $("#dialog").dialog("close");
-         }
+    });
+
+    $(document).ready(function () {
+
+        $("#send").click(function () {
+
+
+            var emailAddress = $("#email").val();
+            var redirectUrl = GetRedirectionUrl();
+            if (ValidateEmail(emailAddress)) {
+                //Call notify function to send notification
+                NotifyByEmail(emailAddress, redirectUrl);
+                //close the modal popup after processing
+                $("#dialog").dialog("close");
+            }
+            else {
+                // $('#email').after('<span class="error">Enter a valid email address.</span>');
+                alert('Enter a valid email address');
+            }
+        });
+
+
+         /*Open the modal popup on link click*/
+        $('#copy').click(function () {
+            $("#dialog").dialog("open");
+            $('#url').val(GetRedirectionUrl());
+            return false;
+        });
+
+    });
+
+  
 </script>
 
 <div id="header">
@@ -107,6 +136,10 @@ $(function() {
 	 </div>
 
 	<div id="content">
+         <div class="success">
+	     <img src="../../Content/images/button_check.png" style="vertical-align:middle; padding-right: 10px;" alt=""/> Your survey has been saved.
+ 	      <button id="copy" type="button" name="copy" class="copylink">Get Survey Link</button>
+      </div>
 
      @if (!string.IsNullOrEmpty(Model.GetErrorSummary()))
         { 
@@ -133,27 +166,16 @@ $(function() {
              @Html.AntiForgeryToken()  
              @Html.Raw(Model.RenderHtml(true))
              
-             @Html.HiddenFor(model => model.SaveClicked, new { id = "_showModalPopup" })
-             
-               <div class="demo">
-              <div id="dialog" title="Your Survey has been saved.">
-	            <p>Please copy and save the survey link to access the survey at a later time.</p>
- 	            <p><input id="url" type="text" style="width: 250px;"/>
- 	            <button>Copy Link</button></p>
- 	            <hr/>
- 	            <p>Optionally enter your email address to have the URL emailed to you.</p>
- 	            <p><label for="email">Email:</label> <input id="email" type="text" style="width: 150px;"/>
- 	            <button id="send" type="submit" name="send1" value="send2" onclick="myfunction();">Send</button></p>
-               </div>
-            </div> 
-           
+             @Html.HiddenFor(model => model.IsSaved, new { id = "_showModalPopup" })
+             @Html.HiddenFor(model => model.ResponseId, new { id = "_responseId" })
+              
    	           
 	        <div id="nav">
 
              @if (Model.CurrentPage != 1)
              {  
 		        
-              <div id="prev" align="left"><button class="prev" value="PreviousButton"  name="PreviousButton"  type="button" onclick="@string.Format("document.forms[0].action = '{0}://{1}/survey/{2}/{3}'; $('#myform').submit();", ViewContext.HttpContext.Request.Url.Scheme, ViewContext.HttpContext.Request.Url.Authority, Model.ResponseId, Model.CurrentPage - 1)"><img class="button" src="../../Content/images/arrow_left.png"> Previous</button>
+              <div id="prev" align="left"><button class="prev" value="PreviousButton"  name="PreviousButton"  type="button" onclick="@string.Format("document.forms[0].action = '{0}://{1}/survey/{2}/{3}'; $('#myform').submit();", ViewContext.HttpContext.Request.Url.Scheme, ViewContext.HttpContext.Request.Url.Authority, Model.ResponseId, Model.CurrentPage - 1)"><img class="button" src="../../Content/images/arrow_left.png" alt=""/> Previous</button>
               
               </div>
              }
@@ -171,7 +193,7 @@ $(function() {
                else
                {
                     <div id="prev" align="right">
-                    <button class="next"  name="ContinueButton" type="button" onclick="@string.Format("document.forms[0].action = '{0}://{1}/survey/{2}/{3}'; $('#myform').submit();", ViewContext.HttpContext.Request.Url.Scheme, ViewContext.HttpContext.Request.Url.Authority, Model.ResponseId, Model.CurrentPage + 1)">Continue <img class="button" src="../../Content/images/arrow_right.png"></button>
+                    <button class="next"  name="ContinueButton" type="button" onclick="@string.Format("document.forms[0].action = '{0}://{1}/survey/{2}/{3}'; $('#myform').submit();", ViewContext.HttpContext.Request.Url.Scheme, ViewContext.HttpContext.Request.Url.Authority, Model.ResponseId, Model.CurrentPage + 1)">Continue <img class="button" src="../../Content/images/arrow_right.png" alt=""/></button>
                     </div>
                       
                }
@@ -180,8 +202,21 @@ $(function() {
 
 
              
-           </div> 
+              </div>    
            
         }
-        
- 
+       
+     </div>
+
+      <div class="demo">
+              <div id="dialog" title="Your Survey has been saved.">
+	            <p>Please copy and save the survey link to access the survey at a later time.</p>
+ 	            <p>@*<input  id="url" type="text" style="width: 250px;"/>*@
+                <textarea id="url" cols="40" rows="3"></textarea>
+ 	           @* <button id="copyClipboard" type="button" name="copy">Copy Link</button>*@</p>
+ 	            <hr/>
+ 	            <p>Optionally enter your email address to have the URL emailed to you.</p>
+ 	            <p><label for="email">Email:</label> <input id="email" type="text" style="width: 150px;"/>
+ 	            <button id="send" type="button">Send</button></p>
+               </div>
+            </div> 
