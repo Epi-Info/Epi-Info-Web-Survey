@@ -6,7 +6,7 @@
 <script type="text/javascript">
     $(document).ready(function () {
         // a workaround for a flaw in the demo system (http://dev.jqueryui.com/ticket/4375), ignore!
-
+         
         $("#dialog").dialog({
             autoOpen: false,
             show: "blind",
@@ -23,6 +23,7 @@
                 $('.success').show();
                 //call your jquery modal popup method
                 $("#dialog").dialog("open");
+
             }
             else {
                 $('.success').show(); //in subsequest click we just show that the survey has been saved not the modal popup
@@ -185,9 +186,9 @@
               
               </div>
              }
-	 		 <div id="savediv" align="center"><button class="save" type="submit" name="Savebutton" value="save"><img class="button" src="../../Content/images/save.png" alt=""/> Save</button>
+	 		 <div id="savediv" align="center"><button class="save" type="submit" id ="Savebutton" name="Savebutton" value="save"><img class="button" src="../../Content/images/save.png" alt=""/> Save</button>
              </div>
-                
+                 
               
                @if (Model.CurrentPage == Model.NumberOfPages)
                {  
