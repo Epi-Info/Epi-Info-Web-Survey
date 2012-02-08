@@ -52,6 +52,7 @@ namespace Epi.Web.SurveyManager.Client
 
             Request.SurveyInfo.DepartmentName = this.DepartmentTextBox.Text;
             Request.SurveyInfo.IntroductionText = new TextRange(this.IntroductionTextBox.Document.ContentStart, this.IntroductionTextBox.Document.ContentEnd).Text;
+            Request.SurveyInfo.ExitText = new TextRange(this.ExitTextTextBox.Document.ContentStart, this.ExitTextTextBox.Document.ContentEnd).Text;
             if ((bool)this.IsSingleResponseCheckBox.IsChecked)
             {
                 Request.SurveyInfo.SurveyType = 1;
