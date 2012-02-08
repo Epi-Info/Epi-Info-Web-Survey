@@ -29,7 +29,7 @@
        { 
         @Html.AntiForgeryToken()  
             <div id="content">
-               @if (Model.ClosingDate.Date >= DateTime.Now.Date && Model.SurveyType > 0)
+               @if (Model.ClosingDate.Date >= DateTime.Now.Date && Model.SurveyType == 2)
                
                {
                      
