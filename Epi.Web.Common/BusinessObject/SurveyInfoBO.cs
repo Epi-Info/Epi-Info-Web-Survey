@@ -16,6 +16,7 @@ namespace Epi.Web.Common.BusinessObject
         private string _DepartmentName;
         private string _OrganizationName;
         private string _XML;
+        private string _ExitText;
 
         private DateTime _ClosingDate;
 
@@ -62,6 +63,12 @@ namespace Epi.Web.Common.BusinessObject
         {
             get { return _IntroductionText; }
             set { _IntroductionText = value; }
+        }
+
+        public string ExitText
+        {
+            get { return _ExitText; }
+            set { _ExitText = value; }
         }
 
         public string XML

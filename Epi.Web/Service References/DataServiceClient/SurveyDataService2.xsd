@@ -15,45 +15,31 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="SetSurveyInfo">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q3="http://www.yourcompany.com/types/" minOccurs="0" name="pRequest" nillable="true" type="q3:SurveyInfoRequest" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="SetSurveyInfoResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q4="http://www.yourcompany.com/types/" minOccurs="0" name="SetSurveyInfoResult" nillable="true" type="q4:SurveyInfoResponse" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
   <xs:element name="GetSurveyAnswer">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q5="http://www.yourcompany.com/types/" minOccurs="0" name="pRequest" nillable="true" type="q5:SurveyAnswerRequest" />
+        <xs:element xmlns:q3="http://www.yourcompany.com/types/" minOccurs="0" name="pRequest" nillable="true" type="q3:SurveyAnswerRequest" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetSurveyAnswerResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q6="http://www.yourcompany.com/types/" minOccurs="0" name="GetSurveyAnswerResult" nillable="true" type="q6:SurveyAnswerResponse" />
+        <xs:element xmlns:q4="http://www.yourcompany.com/types/" minOccurs="0" name="GetSurveyAnswerResult" nillable="true" type="q4:SurveyAnswerResponse" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="SetSurveyAnswer">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q7="http://www.yourcompany.com/types/" minOccurs="0" name="pRequest" nillable="true" type="q7:SurveyAnswerRequest" />
+        <xs:element xmlns:q5="http://www.yourcompany.com/types/" minOccurs="0" name="pRequest" nillable="true" type="q5:SurveyAnswerRequest" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="SetSurveyAnswerResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q8="http://www.yourcompany.com/types/" minOccurs="0" name="SetSurveyAnswerResult" nillable="true" type="q8:SurveyAnswerResponse" />
+        <xs:element xmlns:q6="http://www.yourcompany.com/types/" minOccurs="0" name="SetSurveyAnswerResult" nillable="true" type="q6:SurveyAnswerResponse" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

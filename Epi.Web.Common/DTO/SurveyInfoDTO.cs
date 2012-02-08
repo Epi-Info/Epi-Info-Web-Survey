@@ -14,6 +14,7 @@ namespace Epi.Web.Common.DTO
         private string _SurveyName;
         private int _SurveyType;
         private string _IntroductionText;
+        private string _ExitText;
         private string _DepartmentName;
         private string _OrganizationName;
         private string _XML;
@@ -69,6 +70,14 @@ namespace Epi.Web.Common.DTO
             get { return _IntroductionText; }
             set { _IntroductionText = value; }
         }
+
+        [DataMember]
+        public string ExitText
+        {
+            get { return _ExitText; }
+            set { _ExitText = value; }
+        }
+
         [DataMember]
         public string XML
         {

@@ -139,7 +139,7 @@ namespace Epi.Web.MVC.Controllers
                         }
                         else
                         {
-                            //stay on same page
+                            //Invalid Data - stay on same page
                             return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
                         }
 
