@@ -118,6 +118,93 @@ namespace Epi.Web.WCF.SurveyService
         }
 
         /// <summary>
+        /// Set (add, update, delete) SurveyInfo value.
+        /// </summary>
+        /// <param name="request">SurveyInfoRequest request message.</param>
+        /// <returns>SurveyInfoRequest response message.</returns>
+        public SurveyInfoResponse SetSurveyInfo(SurveyInfoRequest request)
+        {
+            try
+            {
+                Epi.Web.Interfaces.DataInterfaces.ISurveyInfoDao surveyInfoDao = new EF.EntitySurveyInfoDao();
+                Epi.Web.BLL.SurveyInfo Implementation = new Epi.Web.BLL.SurveyInfo(surveyInfoDao);
+
+
+                var response = new SurveyInfoResponse(request.RequestId);
+
+                // Validate client tag, access token, and user credentials
+                if (!ValidRequest(request, response, Validate.All))
+                    return response;
+
+                // Transform SurveyInfo data transfer object to SurveyInfo business object
+                var SurveyInfo = Mapper.ToBusinessObject(request.SurveyInfoList[0]);
+
+                // Validate SurveyInfo business rules
+
+                if (request.Action != "Delete")
+                {
+                    //if (!SurveyInfo.Validate())
+                    //{
+                    //    response.Acknowledge = AcknowledgeType.Failure;
+
+                    //    foreach (string error in SurveyInfo.ValidationErrors)
+                    //        response.Message += error + Environment.NewLine;
+
+                    //    return response;
+                    //}
+                }
+
+                // Run within the context of a database transaction. Currently commented out.
+                // The Decorator Design Pattern. 
+                //using (TransactionDecorator transaction = new TransactionDecorator())
+                {
+                    if (request.Action == "Create")
+                    {
+                        Implementation.InsertSurveyInfo(SurveyInfo);
+                        response.SurveyInfoList.Add(Mapper.ToDataTransferObject(SurveyInfo));
+                    }
+                    else if (request.Action == "Update")
+                    {
+                        Implementation.UpdateSurveyInfo(SurveyInfo);
+                        response.SurveyInfoList.Add(Mapper.ToDataTransferObject(SurveyInfo));
+                    }
+                    else if (request.Action == "Delete")
+                    {
+                        var criteria = request.Criteria as SurveyInfoCriteria;
+                        var survey = Implementation.GetSurveyInfoById(SurveyInfo.SurveyId);
+
+                        try
+                        {
+                            if (Implementation.DeleteSurveyInfo(survey))
+                            {
+                                response.RowsAffected = 1;
+                            }
+                            else
+                            {
+                                response.RowsAffected = 0;
+                            }
+                        }
+                        catch
+                        {
+                            response.RowsAffected = 0;
+                        }
+                    }
+                }
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                CustomFaultException customFaultException = new CustomFaultException();
+                customFaultException.CustomMessage = ex.Message;
+                customFaultException.Source = ex.Source;
+                customFaultException.StackTrace = ex.StackTrace;
+                customFaultException.HelpLink = ex.HelpLink;
+                throw new FaultException<CustomFaultException>(customFaultException);
+            }
+        }
+
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="pRequest"></param>
