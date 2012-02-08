@@ -63,6 +63,7 @@ namespace Epi.Web.Common.ObjectMapping
                 IntroductionText = pBO.IntroductionText,
                 OrganizationName = pBO.OrganizationName,
                 DepartmentName = pBO.DepartmentName,
+                SurveyType =pBO.SurveyType,
                 ClosingDate = pBO.ClosingDate
 
             };
