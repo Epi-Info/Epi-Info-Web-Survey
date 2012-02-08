@@ -39,17 +39,20 @@
                            @Model.IntroductionText
                             <br />
                         </div>
-                        <p>
-                        </p>
+                        <p></p>
                         <p>
                             <button id="beginsurvey" class="begin green" type="submit">
                                 Begin Survey</button>
 
                         </p>
+                        <p style="text-align:center">Survey Closing Date: @string.Format("{0:dddd, MMMM d, yyyy}", Model.ClosingDate)</p>
+                        
+                        
+                   
                }
-               
+
                else
-                { 
+               { 
                 <div>
                 </div>
                 <div id="attention">
@@ -57,8 +60,9 @@
                         padding-right: 10px;" />
                     This survey is currently closed. Please contact the author of this survey for further
                     assistance.
+                    <p style="text-align:center">Survey Closing Date: @string.Format("{0:dddd, MMMM d, yyyy}", Model.ClosingDate)</p>
                 </div>
-                }
+               }
                 
            </div>
                
