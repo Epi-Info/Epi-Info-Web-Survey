@@ -180,5 +180,11 @@ namespace Epi.Web.SurveyManager.Client
             this.SurveyInfoCriteria_SurveyTypeListBox.SelectedIndex = -1;
             this.SurveyCriteria_CurrentlyOpenCheckBox.IsChecked = false;
         }
+
+        private void ManageSurveyButton_Click(object sender, RoutedEventArgs e)
+        {
+            Page_ManageSurvey page_ManageSurvey = new Page_ManageSurvey();
+            this.NavigationService.Navigate(page_ManageSurvey);
+        }
     }
 }

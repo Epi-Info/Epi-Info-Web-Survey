@@ -11,8 +11,8 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="6*" />
             <RowDefinition Height="284*" />
-            <RowDefinition Height="319*" />
-            <RowDefinition Height="13*" />
+            <RowDefinition Height="330*" />
+            <RowDefinition Height="2*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20*" />
@@ -21,12 +21,12 @@
             <ColumnDefinition Width="114*" />
             <ColumnDefinition Width="347*" />
         </Grid.ColumnDefinitions>
-        <Button Content="Submit Request" Height="41" HorizontalAlignment="Left" Margin="208,260,0,0" Name="SubmitRequestButton" VerticalAlignment="Top" Width="120" Grid.Column="4" Uid="" Click="SubmitRequestButton_Click" Grid.Row="2" />
-        <Label Content="Service Response:" Height="30" HorizontalAlignment="Left" Margin="10,142,0,0" Name="label1" VerticalAlignment="Top" Width="100" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="2" />
-        <RichTextBox Grid.Column="1" HorizontalAlignment="Left" Margin="14,166,0,72" Name="ServiceResponseTextBox" Width="580" Uid="ServiceResponse" Grid.ColumnSpan="4" Grid.Row="2" VerticalScrollBarVisibility="Visible" />
-        <Button Content="View Download Client" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="2" Height="42" HorizontalAlignment="Left" Margin="10,259,0,0" Name="button1" VerticalAlignment="Top" Width="123" Click="button1_Click_1" />
-        <GroupBox Grid.RowSpan="2" Height="412" HorizontalAlignment="Left" Name="groupBox1" VerticalAlignment="Top" Width="585" Grid.ColumnSpan="4" Grid.Column="1" Margin="14,6,0,0" Grid.Row="1" Header="Survey Info" Background="#FFD8EBC7">
-            <Grid Height="398" Width="574">
+        <Button Content="Submit Request" Height="29" HorizontalAlignment="Left" Margin="208,271,0,0" Name="SubmitRequestButton" VerticalAlignment="Top" Width="120" Grid.Column="4" Uid="" Click="SubmitRequestButton_Click" Grid.Row="2" />
+        <Label Content="Service Response:" Height="30" HorizontalAlignment="Left" Margin="10,173,0,0" Name="label1" VerticalAlignment="Top" Width="100" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="2" />
+        <RichTextBox Grid.Column="1" HorizontalAlignment="Left" Margin="10,192,0,66" Name="ServiceResponseTextBox" Width="580" Uid="ServiceResponse" Grid.ColumnSpan="4" Grid.Row="2" VerticalScrollBarVisibility="Visible" />
+        <Button Content="View Download Client" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="2" Height="30" HorizontalAlignment="Left" Margin="10,270,0,0" Name="button1" VerticalAlignment="Top" Width="123" Click="button1_Click_1" />
+        <GroupBox Grid.RowSpan="2" Height="455" HorizontalAlignment="Left" Name="groupBox1" VerticalAlignment="Top" Width="585" Grid.ColumnSpan="4" Grid.Column="1" Margin="14,6,0,0" Grid.Row="1" Header="Survey Info" Background="#FFD8EBC7">
+            <Grid Height="438" Width="574">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="306*" />
                     <RowDefinition Height="*" />
@@ -34,7 +34,7 @@
                     <RowDefinition Height="26*" />
                     <RowDefinition Height="52*" />
                 </Grid.RowDefinitions>
-                <RichTextBox Height="92" HorizontalAlignment="Left" Margin="28,170,0,0" Name="TemplateXMLTextBox" VerticalAlignment="Top" Width="525" Uid="TemplatXML" VerticalScrollBarVisibility="Visible" />
+                <RichTextBox Height="50" HorizontalAlignment="Left" Margin="28,170,0,0" Name="TemplateXMLTextBox" VerticalAlignment="Top" Width="525" Uid="TemplatXML" VerticalScrollBarVisibility="Visible" />
                 <TextBox Height="27" HorizontalAlignment="Left" Margin="288,25,0,0" Name="SurveyNumberTextBox" VerticalAlignment="Top" Width="261" Uid="SurveyNumber" Text="AE01-IOU" />
                 <TextBox Height="25" HorizontalAlignment="Right" Margin="0,26,293,0" Name="SurveyNameTextBox" VerticalAlignment="Top" Width="259" Uid="SurveyName" Text="Survey1" />
                 <TextBox Height="23" Margin="288,80,69,0" Name="DepartmentTextBox" VerticalAlignment="Top" Uid="DepartmentName" Text="Department1" />
@@ -45,18 +45,24 @@
                 <Label Content="Template XML" Height="23" HorizontalAlignment="Left" Margin="39,141,0,0" Name="label8" VerticalAlignment="Top" Width="84" />
                 <Label Content="Survey Name" Height="28" HorizontalAlignment="Left" Margin="39,5,0,0" Name="label15" VerticalAlignment="Top" />
                 <CheckBox Content="Is Single Response?" Height="16" HorizontalAlignment="Left" Margin="28,119,0,0" Name="IsSingleResponseCheckBox" VerticalAlignment="Top" Uid="IsSingleResponse" />
-                <RichTextBox Height="87" HorizontalAlignment="Left" Margin="28,301,0,0" Name="IntroductionTextBox" VerticalAlignment="Top" Width="525" Uid="IntroductionText" VerticalScrollBarVisibility="Visible" Grid.RowSpan="5" />
-                <Label Content="Introduction Text" Height="28" HorizontalAlignment="Left" Margin="28,270,0,0" Name="label3" VerticalAlignment="Top" />
+                <RichTextBox Height="70" HorizontalAlignment="Left" Margin="28,257,0,0" Name="IntroductionTextBox" VerticalAlignment="Top" Width="525" Uid="IntroductionText" VerticalScrollBarVisibility="Visible" />
+                <Label Content="Introduction Text" Height="28" HorizontalAlignment="Left" Margin="28,226,0,0" Name="label3" VerticalAlignment="Top" />
                 <Label Content="Closing Date:" Height="28" HorizontalAlignment="Left" Margin="288,107,0,0" Name="label4" VerticalAlignment="Top" />
                 <DatePicker Height="23" HorizontalAlignment="Left" Margin="368,112,0,0" Name="datePicker1" VerticalAlignment="Top" Width="182" />
                 <Button Content="Find File..." Height="23" HorizontalAlignment="Left" Margin="129,142,0,0" Name="FindFileButton" VerticalAlignment="Top" Width="75" Click="FindFileButton_Click" />
-                <Label Content="Label" Height="28" HorizontalAlignment="Left" Margin="210,147,0,0" Name="TemplateFileLabel" VerticalAlignment="Top" Width="354" />
-                <Button Content="Find File..." Height="23" HorizontalAlignment="Left" Margin="118,271,0,0" Name="FindIntroTextButton" VerticalAlignment="Top" Width="75" Click="FindIntroTextButton_Click" />
-                <Label Content="IntroFileLabel" Height="28" HorizontalAlignment="Left" Margin="199,0,0,4" Name="IntroFileLabel" VerticalAlignment="Bottom" Width="354" />
-                <Button Content="." Height="56" HorizontalAlignment="Left" Margin="557,0,0,44" Name="ClearTemplateButton" VerticalAlignment="Bottom" Width="11" Click="ClearTemplateButton_Click" />
-                <Button Content="." Grid.Row="2" Grid.RowSpan="3" Height="68" HorizontalAlignment="Left" Margin="560,9,0,0" Name="ClearIntroButton" VerticalAlignment="Top" Width="12" Click="ClearIntroButton_Click" />
+                <Label Content="No Survey Template file is selected." Height="28" HorizontalAlignment="Left" Margin="210,147,0,0" Name="TemplateFileLabel" VerticalAlignment="Top" Width="354" />
+                <Button Content="Find File..." Height="23" HorizontalAlignment="Left" Margin="118,227,0,0" Name="FindIntroTextButton" VerticalAlignment="Top" Width="75" Click="FindIntroTextButton_Click" />
+                <Label Content="No Intro Text File is selected." Height="28" HorizontalAlignment="Left" Margin="199,0,0,48" Name="IntroFileLabel" VerticalAlignment="Bottom" Width="354" />
+                <Button Content="." Height="50" HorizontalAlignment="Left" Margin="558,0,0,117" Name="ClearTemplateButton" VerticalAlignment="Bottom" Width="11" Click="ClearTemplateButton_Click" />
+                <Button Content="." Height="70" HorizontalAlignment="Left" Margin="557,257,0,0" Name="ClearIntroButton" VerticalAlignment="Top" Width="12" Click="ClearIntroButton_Click" />
+                <Label Content="Exit Survey Text" Grid.Row="1" Grid.RowSpan="3" Height="28" HorizontalAlignment="Left" Margin="28,0,0,0" Name="label7" VerticalAlignment="Top" />
+                <Button Content="Find File..." Grid.Row="2" Height="23" HorizontalAlignment="Left" Margin="118,2,0,0" Name="FindExtiTextButton" VerticalAlignment="Top" Width="75" Click="FindExtiTextButton_Click" Grid.RowSpan="2" />
+                <Label Content="No Exit Text file is selected." Height="28" HorizontalAlignment="Left" Margin="199,333,0,0" Name="ExitTextLabel" VerticalAlignment="Top" Grid.RowSpan="4" />
+                <RichTextBox Grid.Row="3" Height="66" Margin="28,14,21,0" Name="ExitTextTextBox" VerticalAlignment="Top" VerticalScrollBarVisibility="Visible" Grid.RowSpan="2" />
+                <Button Content="." Height="66" HorizontalAlignment="Left" Margin="557,14,0,0" Name="ClearExitTextButton" VerticalAlignment="Top" Width="12" Grid.Row="3" Click="ClearExitTextButton_Click" Grid.RowSpan="2" />
             </Grid>
         </GroupBox>
-        <Button Content="Open URL" Grid.Column="3" Grid.Row="2" Height="42" HorizontalAlignment="Left" Margin="80,259,0,0" Name="OpenURLButton" VerticalAlignment="Top" Width="125" Click="OpenURLButton_Click" Grid.ColumnSpan="2" IsEnabled="False" />
+        <Button Content="Open URL" Grid.Column="4" Grid.Row="2" Height="30" HorizontalAlignment="Left" Margin="77,270,0,0" Name="OpenURLButton" VerticalAlignment="Top" Width="125" Click="OpenURLButton_Click" IsEnabled="False" />
+        <Button Content="Manage Existing Surveys" Grid.Column="2" Grid.Row="2" Height="30" HorizontalAlignment="Left" Margin="70,270,0,0" Name="ManageSurveyButton" VerticalAlignment="Top" Width="135" Grid.ColumnSpan="3" Click="ManageSurveyButton_Click" />
     </Grid>
 </Page>
