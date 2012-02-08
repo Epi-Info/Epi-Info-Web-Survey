@@ -53,5 +53,6 @@
         </GroupBox>
         <Button Content="View Publish Client" Height="23" HorizontalAlignment="Left" Margin="12,541,0,0" Name="button3" VerticalAlignment="Top" Width="118" Click="button3_Click" />
         <RichTextBox Height="99" HorizontalAlignment="Left" Margin="12,436,0,0" Name="SurveyAnswerResponseTextBox" VerticalAlignment="Top" Width="498" VerticalScrollBarVisibility="Visible" />
+        <Button Content="Manage Existing Surveys" Height="24" HorizontalAlignment="Left" Margin="136,541,0,0" Name="ManageSurveyButton" VerticalAlignment="Top" Width="150" Click="ManageSurveyButton_Click" />
     </Grid>
 </Page>

@@ -173,13 +173,13 @@ namespace Epi.Web.SurveyManager.Client
 
         private void ClearTemplateButton_Click(object sender, RoutedEventArgs e)
         {
-            this.TemplateFileLabel.Content = "";
+            this.TemplateFileLabel.Content = "No Survey Template file is selected.";
             TemplateXMLTextBox.Document.Blocks.Clear();
         }
 
         private void ClearIntroButton_Click(object sender, RoutedEventArgs e)
         {
-            this.IntroFileLabel.Content = "";
+            this.IntroFileLabel.Content = "No Intro Text file is selected.";
             IntroductionTextBox.Document.Blocks.Clear();
         }
 
@@ -196,6 +196,47 @@ namespace Epi.Web.SurveyManager.Client
                     );
                 }
             }
+        }
+
+        private void ManageSurveyButton_Click(object sender, RoutedEventArgs e)
+        {
+            Page_ManageSurvey page_ManageSurvey = new Page_ManageSurvey();
+            this.NavigationService.Navigate(page_ManageSurvey);
+        }
+
+        private void FindExtiTextButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Configure open file dialog box
+            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+            dlg.FileName = ""; // Default file name
+            dlg.DefaultExt = ""; // Default file extension
+            dlg.Filter = "html or text documents |*.*"; // Filter files by extension
+
+            // Show open file dialog box
+            Nullable<bool> result = dlg.ShowDialog();
+
+            // Process open file dialog box results
+            if (result == true)
+            {
+                // Open document
+                string filename = dlg.FileName;
+
+                this.ExitTextLabel.Content = filename;
+                System.IO.TextReader textReader = System.IO.File.OpenText(filename);
+
+
+                ExitTextTextBox.Document.Blocks.Clear();
+                ExitTextTextBox.AppendText(textReader.ReadToEnd());
+
+                textReader.Close();
+
+            }
+        }
+
+        private void ClearExitTextButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.ExitTextLabel.Content = "No Exit Text file is selected.";
+            ExitTextTextBox.Document.Blocks.Clear();
         }
     }
 }
