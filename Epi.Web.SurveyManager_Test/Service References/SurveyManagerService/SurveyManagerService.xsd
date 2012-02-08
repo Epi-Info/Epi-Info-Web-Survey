@@ -26,6 +26,7 @@
     <xs:sequence>
       <xs:element minOccurs="0" name="ClosingDate" type="xs:dateTime" />
       <xs:element minOccurs="0" name="DepartmentName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ExitText" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="IntroductionText" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="IsSuccess" type="xs:boolean" />
       <xs:element minOccurs="0" name="OrganizationName" nillable="true" type="xs:string" />
@@ -75,6 +76,15 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="PublishInfoDTO" nillable="true" type="tns:PublishInfoDTO" />
+  <xs:complexType name="CustomFaultException">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CustomMessage" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="HelpLink" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Source" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="StackTrace" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CustomFaultException" nillable="true" type="tns:CustomFaultException" />
   <xs:complexType name="SurveyInfoRequest">
     <xs:complexContent mixed="false">
       <xs:extension base="tns:RequestBase">
@@ -90,8 +100,10 @@
     <xs:complexContent mixed="false">
       <xs:extension base="tns:Criteria">
         <xs:sequence>
+          <xs:element minOccurs="0" name="ClosingDate" type="xs:dateTime" />
           <xs:element minOccurs="0" name="IncludeOrderStatistics" type="xs:boolean" />
           <xs:element xmlns:q2="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="SurveyIdList" nillable="true" type="q2:ArrayOfstring" />
+          <xs:element minOccurs="0" name="SurveyType" type="xs:int" />
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
