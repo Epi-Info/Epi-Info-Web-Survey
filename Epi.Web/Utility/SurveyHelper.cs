@@ -41,7 +41,7 @@ namespace Epi.Web.MVC.Utility
         public static void UpdateSurveyResponse(SurveyInfoModel surveyInfoModel,MvcDynamicForms.Form form, SurveyAnswerRequest surveyAnswerRequest,
                                                              SurveyResponseXML surveyResponseXML,
                                                             ISurveyAnswerRepository iSurveyAnswerRepository,
-                                                             SurveyAnswerResponse surveyAnswerResponse, string responseId, Epi.Web.Common.DTO.SurveyAnswerDTO surveyAnswerDTO, bool IsSubmited, bool IsSaved)
+                                                             SurveyAnswerResponse surveyAnswerResponse, string responseId, Epi.Web.Common.DTO.SurveyAnswerDTO surveyAnswerDTO, bool IsSubmited, bool IsSaved,int  PageNumber)
         {
             // 1 Get the record for the current survey response
             // 2 update the current survey response
@@ -81,7 +81,12 @@ namespace Epi.Web.MVC.Utility
             surveyAnswerRequest.SurveyAnswerList[0].Status= 2;
             
             }
- 
+ ////Update page number before saving response XML
+
+            XDocument Xdoc = XDocument.Parse(surveyAnswerRequest.SurveyAnswerList[0].XML);
+
+            Xdoc.Root.Attribute("LastPageVisited").Value = PageNumber.ToString();
+            surveyAnswerRequest.SurveyAnswerList[0].XML = Xdoc.ToString();
             iSurveyAnswerRepository.SaveSurveyAnswer(surveyAnswerRequest);
            
         }
