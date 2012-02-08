@@ -24,11 +24,14 @@
     </div>
      <div class="success">
        <img src="../../Content/images/button_check.png" style="vertical-align:middle; padding-right: 10px;"> @Epi.Web.MVC.Constants.Constant.SURVEY_SUBMISSION_MESSAGE 
-                        
     @using (Html.BeginForm())
        { 
         @Html.AntiForgeryToken()  
             <div id="content">
+                        <div>
+                           @Model.ExitText
+                            <br />
+                        </div>
                @if (Model.ClosingDate.Date >= DateTime.Now.Date && Model.SurveyType == 2)
                
                {
@@ -38,6 +41,7 @@
                                 Retake Survey</button>
 
                         </p>
+                        <p style="text-align:center">Survey Closing Date: @string.Format("{0:dddd, MMMM d, yyyy}", Model.ClosingDate)</p>
                }
                
               

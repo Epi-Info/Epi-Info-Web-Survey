@@ -28,6 +28,7 @@ namespace Epi.Web.MVC.Models
                 OrganizationName = SurveyInfoDTO.OrganizationName,
                 DepartmentName = SurveyInfoDTO.DepartmentName,
                 IntroductionText = SurveyInfoDTO.IntroductionText,
+                ExitText = SurveyInfoDTO.ExitText,
                 XML = SurveyInfoDTO.XML,
                 IsSuccess = SurveyInfoDTO.IsSuccess,
                 SurveyType = SurveyInfoDTO.SurveyType,
@@ -52,6 +53,7 @@ namespace Epi.Web.MVC.Models
                 OrganizationName = SurveyInfoModel.OrganizationName,
                 DepartmentName = SurveyInfoModel.DepartmentName,
                 IntroductionText = SurveyInfoModel.IntroductionText,
+                ExitText = SurveyInfoModel.ExitText,
                 XML = SurveyInfoModel.XML,
                 IsSuccess = SurveyInfoModel.IsSuccess,
                 ClosingDate = SurveyInfoModel.ClosingDate
