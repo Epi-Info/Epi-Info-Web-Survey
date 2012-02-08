@@ -32,7 +32,7 @@ function NotifyByEmail(emailAddress,redirectUrl) {
             var currentUrl = window.location.href;
             var currentUrlArray = [];
             currentUrlArray = currentUrl.split("/");
-            var responseUrl = currentUrlArray[0] + "//" + currentUrlArray[2] + "/Survey/" + responseId;
+            var responseUrl = currentUrlArray[0] + "//" + currentUrlArray[2] + "/Home/" + responseId;
             return responseUrl;
         }
 
