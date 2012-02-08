@@ -29,7 +29,7 @@
        { 
         @Html.AntiForgeryToken()  
             <div id="content">
-               @if(Model.ClosingDate.Date >= DateTime.Now.Date)
+               @if(Model.ClosingDate >= DateTime.Now)
                
                {
                         <h2>
