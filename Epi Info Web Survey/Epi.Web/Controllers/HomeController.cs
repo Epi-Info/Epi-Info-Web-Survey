@@ -133,7 +133,7 @@ namespace Epi.Web.MVC.Controllers
 
             XDocument xdoc = XDocument.Parse(ResponseXml);
 
-               int PageNumber = xdoc.Root.Elements("Page").Count();
+            int PageNumber =  int.Parse(xdoc.Root.Attribute("LastPageVisited").Value);
 
             return PageNumber;
         

@@ -96,16 +96,20 @@ namespace Epi.Web.MVC.Controllers
                         bool IsSaved = false;
 
 
-                        _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId, form, SurveyAnswer, IsSubmited, IsSaved);
+                        _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId, form, SurveyAnswer, IsSubmited, IsSaved, PageNumber);
 
 
                         if (!string.IsNullOrEmpty(Savebutton))
                         {
-                                IsSaved = form.IsSaved = true;
-                                form.StatusId = SurveyAnswer.Status;
+
+                            SurveyAnswer = _isurveyFacade.GetSurveyAnswerResponse(responseId).SurveyResponseList[0];
+                            form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, this.GetCurrentPage() == 0 ? 1 : this.GetCurrentPage(), SurveyAnswer);
+                            //Update the model
+                            UpdateModel(form);
+                            IsSaved = form.IsSaved = true;
+                            form.StatusId = SurveyAnswer.Status;
+                             _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId, form, SurveyAnswer, IsSubmited, IsSaved, PageNumber);
                                 
-                                _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId, form, SurveyAnswer, IsSubmited, IsSaved);
-                                    
                                 return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
 
                         }
@@ -125,7 +129,7 @@ namespace Epi.Web.MVC.Controllers
 
                                 
                                 IsSubmited = true;//survey has been submited this will change the survey status to 3 - Completed
-                                _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId, form, SurveyAnswer, IsSubmited, IsSaved);
+                                _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId, form, SurveyAnswer, IsSubmited, IsSaved, PageNumber);
 
                                 return RedirectToAction("Index", "Final", new { surveyId = surveyInfoModel.SurveyId });
                             }

@@ -75,12 +75,13 @@ namespace Epi.Web.MVC.Utility
 
               
               XmlDocument xml = new XmlDocument();
-              XmlElement root = xml.CreateElement(Epi.Web.MVC.Constants.Constant.SURVEY_RESPONSE);
+              XmlElement root = xml.CreateElement("SurveyResponse");
             
               if (AddRoot == true)
               {
-            
-              root.SetAttribute(Epi.Web.MVC.Constants.Constant.SURVEY_ID, SurveyId);
+
+              root.SetAttribute("SurveyId", SurveyId);
+              root.SetAttribute("LastPageVisited", "1");
               xml.AppendChild(root);
               }
 
