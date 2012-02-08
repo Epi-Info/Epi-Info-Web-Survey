@@ -15,6 +15,7 @@ namespace Epi.Web.MVC.Models
         private string _SurveyNumber;
         private string _SurveyName;
         private string _IntroductionText;
+        private string _ExitText;
         private string _DepartmentName;
         private string _OrganizationName;
         private string _XML;
@@ -61,6 +62,12 @@ namespace Epi.Web.MVC.Models
         {
             get { return _IntroductionText; }
             set { _IntroductionText = value; }
+        }
+
+        public string ExitText
+        {
+            get { return _ExitText; }
+            set { _ExitText = value; }
         }
         
         public string XML
