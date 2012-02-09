@@ -53,7 +53,7 @@ namespace Epi.Web.BLL
                         BO.ClosingDate =  pRequestMessage.ClosingDate;
 
                         BO.IntroductionText = pRequestMessage.IntroductionText;
-
+                        BO.ExitText = pRequestMessage.ExitText;
                         BO.DepartmentName = pRequestMessage.DepartmentName;
                         BO.OrganizationName = pRequestMessage.OrganizationName;
 
