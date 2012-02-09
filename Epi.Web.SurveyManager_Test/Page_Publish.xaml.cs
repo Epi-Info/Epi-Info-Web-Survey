@@ -29,6 +29,7 @@ namespace Epi.Web.SurveyManager.Client
             InitializeComponent();
             TimeSpan t = new TimeSpan(10, 0, 0, 0);
             this.datePicker1.SelectedDate = DateTime.Now + t;
+            this.WindowTitle = "Publish Survey";
         }
 
         private void SubmitRequestButton_Click(object sender, RoutedEventArgs e)
