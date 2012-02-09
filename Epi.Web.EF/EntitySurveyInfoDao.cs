@@ -120,7 +120,28 @@ namespace Epi.Web.EF
         /// <param name="SurveyInfo">SurveyInfo.</param>
         public void UpdateSurveyInfo(SurveyInfoBO SurveyInfo)
         { 
-        //Update Survey
+            Guid Id = new Guid(SurveyInfo.SurveyId);
+
+            //Update Survey
+            using (var Context = DataObjectFactory.CreateContext())
+            {
+                var Query = from response in Context.SurveyMetaDatas
+                            where response.SurveyId == Id
+                            select response;
+
+                var DataRow = Query.Single();
+                DataRow.SurveyName = SurveyInfo.SurveyName;
+                DataRow.SurveyNumber = SurveyInfo.SurveyNumber;
+                DataRow.TemplateXML = SurveyInfo.XML;
+                DataRow.IntroductionText = SurveyInfo.IntroductionText;
+                DataRow.OrganizationName = SurveyInfo.OrganizationName;
+                DataRow.DepartmentName = SurveyInfo.DepartmentName;
+                DataRow.ClosingDate = SurveyInfo.ClosingDate;
+                DataRow.SurveyTypeId = SurveyInfo.SurveyType;
+
+                Context.SaveChanges();
+            }
+
         
         }
 

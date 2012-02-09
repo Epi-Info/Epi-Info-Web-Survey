@@ -15,7 +15,10 @@ namespace Epi.Web.Common.Message
         /// <summary>
         /// Default Constructor for SurveyInfoResponse.
         /// </summary>
-        public SurveyInfoResponse() { this.SurveyInfoList = new List<SurveyInfoDTO>(); }
+        public SurveyInfoResponse() 
+        { 
+            this.SurveyInfoList = new List<SurveyInfoDTO>(); 
+        }
 
         /// <summary>
         /// Overloaded Constructor for SurveyInfoResponse. Sets CorrelationId.
