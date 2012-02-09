@@ -46,9 +46,9 @@ namespace Epi.Web.MVC.Controllers
                 switch(ValidationTest)
                 {
                     case PreValidationResultEnum.SurveyIsPastClosingDate:
-                        return View(Epi.Web.MVC.Constants.Constant.SURVEY_CLOSED_MESSAGE);
+                        return View("SurveyClosedError");
                     case PreValidationResultEnum.SurveyIsAlreadyCompleted:
-                        return View(Epi.Web.MVC.Constants.Constant.SURVEY_SUBMITED_MESSAGE);
+                        return View("IsSubmitedError");
                     case PreValidationResultEnum.Success:
                     default:
                         var form = _isurveyFacade.GetSurveyFormData(surveyAnswerDTO.SurveyId, PageNumber, surveyAnswerDTO);
@@ -84,9 +84,9 @@ namespace Epi.Web.MVC.Controllers
                 switch (ValidationTest)
                 {
                     case PreValidationResultEnum.SurveyIsPastClosingDate:
-                        return View(Epi.Web.MVC.Constants.Constant.EXCEPTION_PAGE);
+                        return View("SurveyClosedError");
                     case PreValidationResultEnum.SurveyIsAlreadyCompleted:
-                        return View(Epi.Web.MVC.Constants.Constant.EXCEPTION_PAGE);
+                        return View("IsSubmitedError");
                     case PreValidationResultEnum.Success:
                     default:
 
