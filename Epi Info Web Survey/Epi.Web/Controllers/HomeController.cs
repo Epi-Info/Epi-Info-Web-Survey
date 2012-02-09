@@ -93,7 +93,7 @@ namespace Epi.Web.MVC.Controllers
 
                 //create the responseid
                 Guid ResponseID = Guid.NewGuid();
-
+                TempData[Epi.Web.MVC.Constants.Constant.RESPONSE_ID] = ResponseID.ToString();
                 // create the first survey response
                 _isurveyFacade.CreateSurveyAnswer(surveyModel.SurveyId, ResponseID.ToString());
                 //string page;
