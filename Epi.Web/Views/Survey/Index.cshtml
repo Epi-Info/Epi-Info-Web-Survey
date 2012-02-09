@@ -178,7 +178,7 @@
               
    	           
 	        <div id="nav">
-            <div id="prev" align="left">
+            <div id="prev" align="left">&nbsp;
              @if (Model.CurrentPage != 1)
              {  
 		        
@@ -200,7 +200,7 @@
                }
                else
                {
-                    <div id="prev" align="right">
+                    <div id="next" align="right">
                     <button class="next"  name="ContinueButton" type="button" onclick="@string.Format("document.forms[0].action = '{0}://{1}/survey/{2}/{3}'; $('#myform').submit();", ViewContext.HttpContext.Request.Url.Scheme, ViewContext.HttpContext.Request.Url.Authority, Model.ResponseId, Model.CurrentPage + 1)">Continue <img class="button" src="../../Content/images/arrow_right.png" alt=""/></button>
                     </div>
                       
