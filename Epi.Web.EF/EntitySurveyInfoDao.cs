@@ -134,6 +134,7 @@ namespace Epi.Web.EF
                 DataRow.SurveyNumber = SurveyInfo.SurveyNumber;
                 DataRow.TemplateXML = SurveyInfo.XML;
                 DataRow.IntroductionText = SurveyInfo.IntroductionText;
+                DataRow.ExitText = SurveyInfo.ExitText;
                 DataRow.OrganizationName = SurveyInfo.OrganizationName;
                 DataRow.DepartmentName = SurveyInfo.DepartmentName;
                 DataRow.ClosingDate = SurveyInfo.ClosingDate;
