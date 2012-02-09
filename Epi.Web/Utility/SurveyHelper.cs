@@ -81,14 +81,15 @@ namespace Epi.Web.MVC.Utility
                 surveyAnswerRequest.SurveyAnswerList[0].Status = 3;
                 Xdoc.Root.Attribute("LastPageVisited").Remove();
             }
-            surveyAnswerRequest.SurveyAnswerList[0].XML = Xdoc.ToString();
-            iSurveyAnswerRepository.SaveSurveyAnswer(surveyAnswerRequest);
             if (IsSaved)
             {
-           
-            surveyAnswerRequest.SurveyAnswerList[0].Status= 2;
-            
+
+                surveyAnswerRequest.SurveyAnswerList[0].Status = 2;
+
             }
+            surveyAnswerRequest.SurveyAnswerList[0].XML = Xdoc.ToString();
+            iSurveyAnswerRepository.SaveSurveyAnswer(surveyAnswerRequest);
+           
 
            
         }
