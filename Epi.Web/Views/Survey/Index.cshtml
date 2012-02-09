@@ -12,7 +12,7 @@
             show: "blind",
             // hide: "explode",
             resizable: false,
-            height: 250,
+            height: 300,
             modal: true
         });
         var responseUrl = GetRedirectionUrl();
@@ -51,7 +51,7 @@
             }
             else {
                 // $('#email').after('<span class="error">Enter a valid email address.</span>');
-                alert('Enter a valid email address');
+                alert('Enter a valid email address!');
             }
         });
 
@@ -70,7 +70,7 @@
 
 <div id="header">
             <h1>
-                Survey Name- @Model.SurveyInfo.SurveyName 
+                @Model.SurveyInfo.SurveyName 
                  
                 </h1>
  </div>
@@ -182,12 +182,12 @@
              @if (Model.CurrentPage != 1)
              {  
 		        
-              <button class="prev" value="PreviousButton"  name="PreviousButton"  type="button" onclick="@string.Format("document.forms[0].action = '{0}://{1}/survey/{2}/{3}'; $('#myform').submit();", ViewContext.HttpContext.Request.Url.Scheme, ViewContext.HttpContext.Request.Url.Authority, Model.ResponseId, Model.CurrentPage - 1)"><img class="button" src="../../Content/images/arrow_left.png" alt=""/> Previous</button>
+              <button class="prev" value="PreviousButton"  name="PreviousButton"  type="button" onclick="@string.Format("document.forms[0].action = '{0}://{1}/survey/{2}/{3}'; $('#myform').submit();", ViewContext.HttpContext.Request.Url.Scheme, ViewContext.HttpContext.Request.Url.Authority, Model.ResponseId, Model.CurrentPage - 1)"><img class="button" src="../../Content/images/arrow_left.png" alt=""/>&nbsp; Previous</button>
               
               
              }
              </div>
-	 		 <div id="savediv" align="center"><button class="save" type="submit" id ="Savebutton" name="Savebutton" value="save"><img class="button" src="../../Content/images/save.png" alt=""/> Save</button>
+	 		 <div id="savediv" align="center"><button class="save" type="submit" id ="Savebutton" name="Savebutton" value="save"><img class="button" src="../../Content/images/save.png" alt=""/>&nbsp; Save</button>
              </div>
                  
               
@@ -195,13 +195,13 @@
                {  
                <div id="next" align="right"> 
               <button class="submits" type="submit"  name="Submitbutton" value="Submit" >
-              Submit Survey </button>
+              Submit Survey &nbsp;<img class="button" src="../../Content/images/submit.png" alt=""/></button>
               </div>
                }
                else
                {
                     <div id="next" align="right">
-                    <button class="next"  name="ContinueButton" type="button" onclick="@string.Format("document.forms[0].action = '{0}://{1}/survey/{2}/{3}'; $('#myform').submit();", ViewContext.HttpContext.Request.Url.Scheme, ViewContext.HttpContext.Request.Url.Authority, Model.ResponseId, Model.CurrentPage + 1)">Continue <img class="button" src="../../Content/images/arrow_right.png" alt=""/></button>
+                    <button class="next"  name="ContinueButton" type="button" onclick="@string.Format("document.forms[0].action = '{0}://{1}/survey/{2}/{3}'; $('#myform').submit();", ViewContext.HttpContext.Request.Url.Scheme, ViewContext.HttpContext.Request.Url.Authority, Model.ResponseId, Model.CurrentPage + 1)">Continue &nbsp;<img class="button" src="../../Content/images/arrow_right.png" alt=""/></button>
                     </div>
                       
                }
@@ -218,13 +218,15 @@
 
       <div class="demo">
               <div id="dialog" title="Your Survey has been saved.">
-	            <p>Please copy and save the survey link to access the survey at a later time.</p>
+	            <p>Please copy and save the survey link to return to the survey at a later time.</p>
  	            <p>@*<input  id="url" type="text" style="width: 250px;"/>*@
-                <textarea id="url" cols="40" rows="3"></textarea>
+                <textarea id="url" cols="70" rows="3" style="white-space:pre;"></textarea>
  	           @* <button id="copyClipboard" type="button" name="copy">Copy Link</button>*@</p>
  	            <hr/>
- 	            <p>Optionally enter your email address to have the URL emailed to you.</p>
- 	            <p><label for="email">Email:</label> <input id="email" type="text" style="width: 150px;"/>
+ 	            <p>Optionally enter your email address to have the survey link emailed to you.</p>
+ 	            <p><label for="email">Email:</label> <input id="email" type="text" style="width: 250px;"/>
  	            <button id="send" type="button">Send</button></p>
+                <br />
+                <p style="font-size: 8pt; padding: 5px; background: #ffffa8;"><strong>Note:</strong> Your email address will not be saved and only be used to send you the survey link.</p>
                </div>
             </div> 
