@@ -37,11 +37,7 @@ namespace Epi.Web.MVC.Controllers
         public ActionResult Index(string responseId, int PageNumber = 1)
         {
 
-            //if (!string.IsNullOrEmpty(page))
-            //{
-
-            
-            //get the survey form
+         
             try
             {
                 Epi.Web.Common.DTO.SurveyAnswerDTO surveyAnswerDTO = GetSurveyAnswer(responseId);
