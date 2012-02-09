@@ -56,6 +56,12 @@ namespace Epi.Web.MVC.Controllers
                     case PreValidationResultEnum.Success:
                     default:
                         var form = _isurveyFacade.GetSurveyFormData(surveyAnswerDTO.SurveyId, PageNumber, surveyAnswerDTO);
+                        // if redirect then perform server validation before displaying
+                        if (TempData.ContainsKey("isredirect") && !string.IsNullOrWhiteSpace(TempData["isredirect"].ToString()))
+                        {
+                            form.Validate();
+                        }
+
                         return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
                 }
             }
@@ -123,6 +129,7 @@ namespace Epi.Web.MVC.Controllers
                                     form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, i, SurveyAnswer);
                                     if (!form.Validate())
                                     {
+                                        TempData["isredirect"] = "true";
                                         return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
                                     }
                                 }
