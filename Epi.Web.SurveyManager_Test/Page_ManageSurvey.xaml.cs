@@ -126,19 +126,22 @@ namespace Epi.Web.SurveyManager.Client
         private void SearchResultListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
                 this.selectedIndex = this.SearchResultListBox.SelectedIndex;
+                if (this.selectedIndex > -1)
+                {
 
-                this.SurveyNameTextBox.Text = this.SurveyInfoList[this.selectedIndex].SurveyName;
-                this.DepartmentTextBox.Text = this.SurveyInfoList[this.selectedIndex].DepartmentName;
-                this.SurveyNumberTextBox.Text = this.SurveyInfoList[this.selectedIndex].SurveyNumber;
-                this.OrganizationTextBox.Text = this.SurveyInfoList[this.selectedIndex].OrganizationName;
-                this.datePicker1.SelectedDate = this.SurveyInfoList[this.selectedIndex].ClosingDate;
-                if (this.SurveyInfoList[this.selectedIndex].SurveyType == 1)
-                {
-                    this.IsSingleResponseCheckBox.IsChecked = true;
-                }
-                else
-                {
-                    this.IsSingleResponseCheckBox.IsChecked = false;
+                    this.SurveyNameTextBox.Text = this.SurveyInfoList[this.selectedIndex].SurveyName;
+                    this.DepartmentTextBox.Text = this.SurveyInfoList[this.selectedIndex].DepartmentName;
+                    this.SurveyNumberTextBox.Text = this.SurveyInfoList[this.selectedIndex].SurveyNumber;
+                    this.OrganizationTextBox.Text = this.SurveyInfoList[this.selectedIndex].OrganizationName;
+                    this.datePicker1.SelectedDate = this.SurveyInfoList[this.selectedIndex].ClosingDate;
+                    if (this.SurveyInfoList[this.selectedIndex].SurveyType == 1)
+                    {
+                        this.IsSingleResponseCheckBox.IsChecked = true;
+                    }
+                    else
+                    {
+                        this.IsSingleResponseCheckBox.IsChecked = false;
+                    }
                 }
 
         }
