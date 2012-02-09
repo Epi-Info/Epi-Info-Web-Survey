@@ -62,12 +62,20 @@ namespace Epi.Web.MVC.Controllers
             try
             {
                 SurveyInfoModel surveyInfoModel = _isurveyFacade.GetSurveyInfoModel(GetCurrentSurveyAnswer().SurveyId.ToString());
-                if (surveyInfoModel.ClosingDate > DateTime.Now && GetCurrentSurveyAnswer().Status == 2 )
+                if (surveyInfoModel.ClosingDate > DateTime.Now)
                 {
-                    return RedirectToRoute(new { Controller = "Survey", Action = "Index", responseid = responseid, PageNumber = GetSurveyPageNumber(GetCurrentSurveyAnswer().XML.ToString()) });
+                    if (GetCurrentSurveyAnswer().Status == 2)
+                    {
+                        return RedirectToRoute(new { Controller = "Survey", Action = "Index", responseid = responseid, PageNumber = GetSurveyPageNumber(GetCurrentSurveyAnswer().XML.ToString()) });
+                    }
+                    else {
+                        return View("IsSubmitedError");
+                    
+                    }
                 }
-                else{
-                 return View(Epi.Web.MVC.Constants.Constant.EXCEPTION_PAGE);
+                else
+                {
+                    return View("SurveyClosedError");
                 }
             }
             catch (Exception ex)
