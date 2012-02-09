@@ -25,6 +25,7 @@ namespace Epi.Web.SurveyManager.Client
         public Page_Download()
         {
             InitializeComponent();
+            this.WindowTitle = "Manage Download of Survey and Response Infomation";
         }
 
         private void button3_Click(object sender, RoutedEventArgs e)
