@@ -9,7 +9,7 @@
 
     <Grid Height="577">
         <RichTextBox Height="86" HorizontalAlignment="Left" Margin="12,127,0,0" Name="SurveyInfoResponseTextBox" VerticalAlignment="Top" Width="498" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Visible" />
-        <GroupBox Header="SurveyInfo Criteria" Height="109" HorizontalAlignment="Left" Margin="12,12,0,0" Name="groupBox1" VerticalAlignment="Top" Width="498" Background="#FFD8EBC7">
+        <GroupBox Header="SurveyInfo Criteria" Height="109" HorizontalAlignment="Left" Margin="12,12,0,0" Name="groupBox1" VerticalAlignment="Top" Width="498" Background="#FFC2D2DE">
             <Grid Height="97">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="24*" />
@@ -30,7 +30,7 @@
                 </ListBox>
             </Grid>
         </GroupBox>
-        <GroupBox Header="SurveyAnswer Criteria" Height="211" HorizontalAlignment="Left" Margin="12,219,0,0" Name="groupBox2" VerticalAlignment="Top" Width="498" Background="#FFD8EBC7">
+        <GroupBox Header="SurveyAnswer Criteria" Height="211" HorizontalAlignment="Left" Margin="12,219,0,0" Name="groupBox2" VerticalAlignment="Top" Width="498" Background="#FFC2D2DE">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="39*" />
