@@ -73,8 +73,7 @@ namespace Epi.Web.MVC.Utility
             XDocument Xdoc = XDocument.Parse(surveyAnswerRequest.SurveyAnswerList[0].XML);
 
             Xdoc.Root.Attribute("LastPageVisited").Value = PageNumber.ToString();
-            surveyAnswerRequest.SurveyAnswerList[0].XML = Xdoc.ToString();
-            iSurveyAnswerRepository.SaveSurveyAnswer(surveyAnswerRequest);
+            
             ////Update survey response Status
             if (IsSubmited)
             {
@@ -82,7 +81,8 @@ namespace Epi.Web.MVC.Utility
                 surveyAnswerRequest.SurveyAnswerList[0].Status = 3;
                 Xdoc.Root.Attribute("LastPageVisited").Remove();
             }
-
+            surveyAnswerRequest.SurveyAnswerList[0].XML = Xdoc.ToString();
+            iSurveyAnswerRepository.SaveSurveyAnswer(surveyAnswerRequest);
             if (IsSaved)
             {
            
