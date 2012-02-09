@@ -17,16 +17,18 @@
         });
         var responseUrl = GetRedirectionUrl();
         $('#url').val(responseUrl);
-        $('.success').hide();
+      
         if ($('#_showModalPopup').val() == 'True') {
             if ($('#_statusId').val() == '1') { //if clicking the save button for the first time
-                $('.success').show();
+                $('#successContent').show();
+                $('#successContent').append('<div class="success"><img src="../../Content/images/button_check.png" style="vertical-align:middle; padding-right: 10px;" alt=""/> Your survey has been saved.<button id="copy" type="button" name="copy" class="copylink">Get Survey Link</button></div>')
                 //call your jquery modal popup method
                 $("#dialog").dialog("open");
 
             }
             else {
-                $('.success').show(); //in subsequest click we just show that the survey has been saved not the modal popup
+                $('#successContent').show(); //in subsequest click we just show that the survey has been saved not the modal popup
+                $('#successContent').append('<div class="success"><img src="../../Content/images/button_check.png" style="vertical-align:middle; padding-right: 10px;" alt=""/> Your survey has been saved.<button id="copy" type="button" name="copy" class="copylink">Get Survey Link</button></div>')
             }
             return true;
         }
@@ -142,11 +144,9 @@
 	 </div>
 
 	<div id="content">
-         <div class="success">
-	     <img src="../../Content/images/button_check.png" style="vertical-align:middle; padding-right: 10px;" alt=""/> Your survey has been saved.
- 	      <button id="copy" type="button" name="copy" class="copylink">Get Survey Link</button>
-      </div>
-
+         <div id="successContent">
+         
+         </div>
      @if (!string.IsNullOrEmpty(Model.GetErrorSummary()))
         { 
         <div class="errormsg">
@@ -167,7 +167,7 @@
          } 
         @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "myform" }))
         {  
-            <br />
+           
               
              @Html.AntiForgeryToken()  
              @Html.Raw(Model.RenderHtml(true))
