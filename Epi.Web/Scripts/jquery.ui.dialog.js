@@ -82,7 +82,7 @@ $.widget("ui.dialog", {
 		show: null,
 		stack: true,
 		title: '',
-		width: 300,
+		width: 480,
 		zIndex: 1000
 	},
 

@@ -12,7 +12,7 @@ body
  
 #container
  {
- width: 820px;
+ width: 840px;
  min-height: 99%;
  position:relative;
  margin: auto;
@@ -150,11 +150,11 @@ body
  
 #nav
 {
-width: 92%;
+width: 90%;
 text-align: center;
 border-top: 1px solid #244640;
 margin: 0 auto;
-padding: 1em;
+padding: 0.8em 1.2em;
 position:absolute;
 bottom:80px;
 /*clear:both;*/

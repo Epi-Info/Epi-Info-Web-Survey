@@ -12,7 +12,7 @@ function NotifyByEmail(emailAddress,redirectUrl) {
             user,
             function (data) {
                 if (data === true) {
-                    alert('An email has been sent to the participant with survey URL.');
+                    alert('An email has been sent with survey link.');
                 }
                 else {
 

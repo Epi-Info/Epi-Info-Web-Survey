@@ -22,9 +22,11 @@
         <div style="clear: both;">
         </div>
     </div>
-     <div class="success">
-       <img src="../../Content/images/button_check.png" style="vertical-align:middle; padding-right: 10px;"> @Epi.Web.MVC.Constants.Constant.SURVEY_SUBMISSION_MESSAGE 
-    @using (Html.BeginForm())
+<div class="success">
+    <img src="../../Content/images/button_check.png" style="vertical-align: middle; padding-right: 10px;">
+    @Epi.Web.MVC.Constants.Constant.SURVEY_SUBMISSION_MESSAGE
+</div>
+@using (Html.BeginForm())
        { 
         @Html.AntiForgeryToken()  
             <div id="content">
@@ -38,10 +40,10 @@
                      
                         <p>
                             <button id="beginsurvey" class="begin green" type="submit">
-                                Retake Survey</button>
+                               Start Survey Again</button>
 
                         </p>
-                        <p style="text-align:center">Survey Closing Date: @string.Format("{0:dddd, MMMM d, yyyy}", Model.ClosingDate)</p>
+                        <p style="text-align:center; font-size:9pt;">Survey Closing Date: @string.Format("{0:dddd, MMMM d, yyyy}", Model.ClosingDate)</p>
                }
                
               
@@ -49,7 +51,3 @@
            </div>
                
      }
-                         
-
-
- </div>  
