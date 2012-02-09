@@ -275,6 +275,8 @@
     <Content Include="Views\Shared\Exception.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Response\Index.cshtml" />
+    <Content Include="Views\Shared\IsSubmitedError.cshtml" />
+    <Content Include="Views\Shared\SurveyClosedError.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Epi.DynamicForms.Core\Epi.Web.DynamicForms.Core.csproj">
