@@ -25,6 +25,7 @@ namespace Epi.Web.SurveyManager.Client
         public Page_ManageSurvey()
         {
             InitializeComponent();
+            this.WindowTitle = "Manage Survey Updates";
         }
 
 
