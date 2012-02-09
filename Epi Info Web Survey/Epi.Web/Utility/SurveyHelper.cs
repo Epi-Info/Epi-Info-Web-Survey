@@ -68,11 +68,19 @@ namespace Epi.Web.MVC.Utility
                 surveyAnswerRequest.SurveyAnswerList[0].XML = MergeXml(SavedXml, CurrentPageResponseXml,form.CurrentPage).ToString(); 
             }
 
+            ////Update page number before saving response XML
+
+            XDocument Xdoc = XDocument.Parse(surveyAnswerRequest.SurveyAnswerList[0].XML);
+
+            Xdoc.Root.Attribute("LastPageVisited").Value = PageNumber.ToString();
+            surveyAnswerRequest.SurveyAnswerList[0].XML = Xdoc.ToString();
+            iSurveyAnswerRepository.SaveSurveyAnswer(surveyAnswerRequest);
+            ////Update survey response Status
             if (IsSubmited)
             {
 
                 surveyAnswerRequest.SurveyAnswerList[0].Status = 3;
-
+                Xdoc.Root.Attribute("LastPageVisited").Remove();
             }
 
             if (IsSaved)
@@ -81,13 +89,7 @@ namespace Epi.Web.MVC.Utility
             surveyAnswerRequest.SurveyAnswerList[0].Status= 2;
             
             }
- ////Update page number before saving response XML
 
-            XDocument Xdoc = XDocument.Parse(surveyAnswerRequest.SurveyAnswerList[0].XML);
-
-            Xdoc.Root.Attribute("LastPageVisited").Value = PageNumber.ToString();
-            surveyAnswerRequest.SurveyAnswerList[0].XML = Xdoc.ToString();
-            iSurveyAnswerRepository.SaveSurveyAnswer(surveyAnswerRequest);
            
         }
 
