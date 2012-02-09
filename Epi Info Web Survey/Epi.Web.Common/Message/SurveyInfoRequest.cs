@@ -15,6 +15,7 @@ namespace Epi.Web.Common.Message
         public SurveyInfoRequest()
         {
             this.Criteria = new SurveyInfoCriteria();
+            this.SurveyInfoList = new List<SurveyInfoDTO>();
         }
 
         /// <summary>
