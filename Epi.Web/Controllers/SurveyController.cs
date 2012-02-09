@@ -130,7 +130,8 @@ namespace Epi.Web.MVC.Controllers
                                     if (!form.Validate())
                                     {
                                         TempData["isredirect"] = "true";
-                                        return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
+                                      //  return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
+                                        return RedirectToRoute(new { Controller = "Survey", Action = "Index", responseid = responseId, PageNumber = i.ToString() });
                                     }
                                 }
 
