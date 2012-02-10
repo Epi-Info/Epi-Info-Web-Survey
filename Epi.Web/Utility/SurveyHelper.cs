@@ -71,9 +71,10 @@ namespace Epi.Web.MVC.Utility
             ////Update page number before saving response XML
 
             XDocument Xdoc = XDocument.Parse(surveyAnswerRequest.SurveyAnswerList[0].XML);
-
-            Xdoc.Root.Attribute("LastPageVisited").Value = PageNumber.ToString();
-            
+            if (PageNumber != 0)
+            {
+                Xdoc.Root.Attribute("LastPageVisited").Value = PageNumber.ToString();
+            }
             ////Update survey response Status
             if (IsSubmited)
             {
