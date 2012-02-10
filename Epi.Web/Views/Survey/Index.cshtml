@@ -6,7 +6,7 @@
 <script type="text/javascript">
     $(document).ready(function () {
         // a workaround for a flaw in the demo system (http://dev.jqueryui.com/ticket/4375), ignore!
-         
+       
         $("#dialog").dialog({
             autoOpen: false,
             show: "blind",
@@ -56,7 +56,14 @@
         });
 
 
-         /*Open the modal popup on link click*/
+        $("#close").live("click", function () {
+           
+            window.open('', '_parent', '');
+            window.close();
+        });
+
+
+        /*Open the modal popup on link click*/
         $('#copy').click(function () {
             $("#dialog").dialog("open");
             $('#url').val(GetRedirectionUrl());
@@ -65,7 +72,7 @@
 
     });
 
-  
+   
 </script>
 
 <div id="header">
@@ -137,7 +144,7 @@
       </div>
 	   
 	  <div id="exit">
-      <button class="exitsurvey" type="submit">Exit Survey</button>
+      <button class="exitsurvey" type="submit"  onclick="javascript:window.open('','_parent','');window.close();" id="close">Exit Survey</button>
       
       </div>
 	  <div style="clear:both;"></div>
