@@ -5,7 +5,8 @@ function NotifyByEmail(emailAddress,redirectUrl) {
     /*post email address and redirect url asynchronously to Post controller */
     //debugger;
     var user = { 'emailAddress': emailAddress,
-                 'redirectUrl':redirectUrl
+                 'redirectUrl':redirectUrl,
+                 __RequestVerificationToken: $("input[name=__RequestVerificationToken]").val()
     };
     $.post(
             '/Post/Notify',
