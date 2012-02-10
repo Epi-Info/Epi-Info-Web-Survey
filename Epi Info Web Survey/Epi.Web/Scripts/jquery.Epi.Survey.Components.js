@@ -29,11 +29,10 @@ function NotifyByEmail(emailAddress,redirectUrl) {
         function GetRedirectionUrl() {
 
             var responseId = $('#_responseId').val();
-            var statusId = $('#_statusId').val();
             var currentUrl = window.location.href;
             var currentUrlArray = [];
             currentUrlArray = currentUrl.split("/");
-            var responseUrl = currentUrlArray[0] + "//" + currentUrlArray[2] + "/Home/" + responseId + '/' + statusId;
+            var responseUrl = currentUrlArray[0] + "//" + currentUrlArray[2] + "/Survey/" + responseId;
             return responseUrl;
         }
 
