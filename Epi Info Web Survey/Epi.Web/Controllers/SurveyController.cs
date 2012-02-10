@@ -4,6 +4,8 @@ using Epi.Web.MVC.Facade;
 using Epi.Web.MVC.Models;
 using System.Collections.Generic;
 using System.Text;
+using System.Xml;
+using System.Xml.Linq;
 namespace Epi.Web.MVC.Controllers
 {
     public class SurveyController : Controller
@@ -34,15 +36,21 @@ namespace Epi.Web.MVC.Controllers
        /// <returns></returns>
  
         [HttpGet]
-        public ActionResult Index(string responseId, int PageNumber = 1)
+        public ActionResult Index(string responseId, int PageNumber = 0)
         {
 
          
             try
             {
+               
                 Epi.Web.Common.DTO.SurveyAnswerDTO surveyAnswerDTO = GetSurveyAnswer(responseId);
                 SurveyInfoModel surveyInfoModel = _isurveyFacade.GetSurveyInfoModel(surveyAnswerDTO.SurveyId);
                 PreValidationResultEnum ValidationTest = PreValidateResponse(Mapper.ToSurveyAnswerModel(surveyAnswerDTO), surveyInfoModel);
+                if (PageNumber == 0)
+                {
+                    PageNumber = GetSurveyPageNumber(surveyAnswerDTO.XML.ToString());
+
+                }
                 switch(ValidationTest)
                 {
                     case PreValidationResultEnum.SurveyIsPastClosingDate:
@@ -70,17 +78,23 @@ namespace Epi.Web.MVC.Controllers
         }
         [HttpPost] [ValidateAntiForgeryToken]
         //public ActionResult Index(SurveyInfoModel surveyInfoModel, string Submitbutton, string Savebutton, string ContinueButton, string PreviousButton, int PageNumber = 1)
-        public ActionResult Index(SurveyAnswerModel surveyAnswerModel, string Submitbutton, string Savebutton, string ContinueButton, string PreviousButton, int PageNumber = 1)
+        public ActionResult Index(SurveyAnswerModel surveyAnswerModel, string Submitbutton, string Savebutton, string ContinueButton, string PreviousButton, int PageNumber = 0)
         {
 
             string responseId = surveyAnswerModel.ResponseId;
             try
             {
+
                 Epi.Web.Common.DTO.SurveyAnswerDTO SurveyAnswer = _isurveyFacade.GetSurveyAnswerResponse(responseId).SurveyResponseList[0];
 
                 SurveyInfoModel surveyInfoModel = _isurveyFacade.GetSurveyInfoModel(SurveyAnswer.SurveyId);
 
                 PreValidationResultEnum ValidationTest = PreValidateResponse(Mapper.ToSurveyAnswerModel(SurveyAnswer), surveyInfoModel);
+                if (PageNumber == 0)
+                {
+                    PageNumber = GetSurveyPageNumber(SurveyAnswer.XML.ToString());
+
+                }
                 switch (ValidationTest)
                 {
                     case PreValidationResultEnum.SurveyIsPastClosingDate:
@@ -213,7 +227,24 @@ namespace Epi.Web.MVC.Controllers
             return result;
         }
 
+        private int GetSurveyPageNumber(string ResponseXml)
+        {
 
+            XDocument xdoc = XDocument.Parse(ResponseXml);
+
+            int PageNumber = 0;
+
+            if (!xdoc.Root.IsEmpty)
+            {
+                PageNumber= int.Parse(xdoc.Root.Attribute("LastPageVisited").Value);
+            }else{
+            
+            PageNumber =1;
+            }
+
+            return PageNumber;
+
+        }
 
     }
 }
