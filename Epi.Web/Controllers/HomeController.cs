@@ -55,35 +55,7 @@ namespace Epi.Web.MVC.Controllers
 
 
 
-        public ActionResult Response(string responseid, int StatusId)
-        {
-            TempData[Epi.Web.MVC.Constants.Constant.RESPONSE_ID] = responseid;
-             
-            try
-            {
-                SurveyInfoModel surveyInfoModel = _isurveyFacade.GetSurveyInfoModel(GetCurrentSurveyAnswer().SurveyId.ToString());
-                if (surveyInfoModel.ClosingDate > DateTime.Now)
-                {
-                    if (GetCurrentSurveyAnswer().Status == 2)
-                    {
-                        return RedirectToRoute(new { Controller = "Survey", Action = "Index", responseid = responseid, PageNumber = GetSurveyPageNumber(GetCurrentSurveyAnswer().XML.ToString()) });
-                    }
-                    else {
-                        return View("IsSubmitedError");
-                    
-                    }
-                }
-                else
-                {
-                    return View("SurveyClosedError");
-                }
-            }
-            catch (Exception ex)
-            {
-                return View(Epi.Web.MVC.Constants.Constant.EXCEPTION_PAGE);
-            }
-        }
-
+       
 
         /// <summary>
         /// redirecting to Survey controller to action method Index
@@ -137,14 +109,6 @@ namespace Epi.Web.MVC.Controllers
             return result;
         }
 
-        private int GetSurveyPageNumber( string ResponseXml) {
-
-            XDocument xdoc = XDocument.Parse(ResponseXml);
-
-            int PageNumber =  int.Parse(xdoc.Root.Attribute("LastPageVisited").Value);
-
-            return PageNumber;
-        
-        }
+       
     }
 }
