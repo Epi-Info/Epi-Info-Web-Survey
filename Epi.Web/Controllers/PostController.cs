@@ -12,7 +12,7 @@ namespace Epi.Web.Controllers
         // GET: /Notify/
 
         [AcceptVerbs(HttpVerbs.Post)]
-       
+       [ValidateAntiForgeryToken]
         public JsonResult Notify(string emailAddress, string redirectUrl)
         {
             
