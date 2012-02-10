@@ -90,11 +90,7 @@ namespace Epi.Web.MVC.Controllers
                 SurveyInfoModel surveyInfoModel = _isurveyFacade.GetSurveyInfoModel(SurveyAnswer.SurveyId);
 
                 PreValidationResultEnum ValidationTest = PreValidateResponse(Mapper.ToSurveyAnswerModel(SurveyAnswer), surveyInfoModel);
-                if (PageNumber == 0)
-                {
-                    PageNumber = GetSurveyPageNumber(SurveyAnswer.XML.ToString());
-
-                }
+             
                 switch (ValidationTest)
                 {
                     case PreValidationResultEnum.SurveyIsPastClosingDate:
@@ -105,7 +101,7 @@ namespace Epi.Web.MVC.Controllers
                     default:
 
                         //get the survey form
-                        MvcDynamicForms.Form form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, this.GetCurrentPage() == 0 ? 1 : this.GetCurrentPage(), SurveyAnswer);
+                        MvcDynamicForms.Form form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, GetSurveyPageNumber(SurveyAnswer.XML.ToString()), SurveyAnswer);
                         //Update the model
                         UpdateModel(form);
                         bool IsSubmited = false;
@@ -119,7 +115,7 @@ namespace Epi.Web.MVC.Controllers
                         {
 
                             SurveyAnswer = _isurveyFacade.GetSurveyAnswerResponse(responseId).SurveyResponseList[0];
-                            form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, this.GetCurrentPage() == 0 ? 1 : this.GetCurrentPage(), SurveyAnswer);
+                            form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, GetSurveyPageNumber(SurveyAnswer.XML.ToString()), SurveyAnswer);
                             //Update the model
                             UpdateModel(form);
                             IsSaved = form.IsSaved = true;
