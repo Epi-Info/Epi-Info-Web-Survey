@@ -24,16 +24,19 @@
     </div>
 <div class="success">
     <img src="../../Content/images/button_check.png" style="vertical-align: middle; padding-right: 10px;">
-    @Epi.Web.MVC.Constants.Constant.SURVEY_SUBMISSION_MESSAGE
+    @if(string.IsNullOrWhiteSpace(Model.ExitText)) 
+    {
+        @Epi.Web.MVC.Constants.Constant.SURVEY_SUBMISSION_MESSAGE;
+    } 
+    else 
+    {
+        @Model.ExitText;
+    }
 </div>
 @using (Html.BeginForm())
        { 
         @Html.AntiForgeryToken()  
             <div id="content">
-                        <div>
-                           @Model.ExitText
-                            <br />
-                        </div>
                @if (Model.ClosingDate.Date >= DateTime.Now.Date && Model.SurveyType == 2)
                
                {
