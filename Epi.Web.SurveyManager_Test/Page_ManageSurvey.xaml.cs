@@ -56,6 +56,17 @@ namespace Epi.Web.SurveyManager.Client
 
             SurveyInfoResponseTextBox.Document.Blocks.Clear();
             SearchResultListBox.Items.Clear();
+
+            this.selectedIndex = -1;
+
+            this.SurveyNameTextBox.Text = "";
+            this.DepartmentTextBox.Text = "";
+            this.SurveyNumberTextBox.Text = "";
+            this.OrganizationTextBox.Text = "";
+            this.datePicker1.SelectedDate = DateTime.Now;
+            this.IsSingleResponseCheckBox.IsChecked = false;
+
+
             try
             {
                 Epi.Web.Common.Message.SurveyInfoResponse Result = client.GetSurveyInfo(Request);
