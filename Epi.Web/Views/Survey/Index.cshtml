@@ -184,7 +184,8 @@
              @Html.HiddenFor(model => model.IsSaved, new { id = "_showModalPopup" })
              @Html.HiddenFor(model => model.ResponseId, new { id = "_responseId" })
              @Html.HiddenFor(model => model.SurveyInfo.SurveyName, new { id = "_surveyName"}) 
-   	           
+            
+   	        <input type="hidden"  name="is_save_action" value="false" />
 	        <div id="nav">
             <div id="prev" align="left">&nbsp;
              @if (Model.CurrentPage != 1)
@@ -195,7 +196,7 @@
               
              }
              </div>
-	 		 <div id="savediv" align="center"><button class="save" type="submit" id ="Savebutton" name="Savebutton" value="save"><img class="button" src="../../Content/images/save.png" alt=""/>&nbsp; Save</button>
+	 		 <div id="savediv" align="center"><button class="save" type="button" id ="Savebutton" name="Savebutton" value="save" onclick="@string.Format("document.forms[0].is_save_action.value='true';document.forms[0].action = '{0}://{1}/survey/{2}/{3}';$('#myform').validationEngine('detach'); $('#myform').submit();", ViewContext.HttpContext.Request.Url.Scheme, ViewContext.HttpContext.Request.Url.Authority, Model.ResponseId, Model.CurrentPage)"><img class="button" src="../../Content/images/save.png" alt=""/>&nbsp; Save</button>
              </div>
                  
               
