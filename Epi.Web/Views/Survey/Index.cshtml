@@ -39,13 +39,14 @@
     $(document).ready(function () {
 
         $("#send").click(function () {
-
+            debugger;
 
             var emailAddress = $("#email").val();
             var redirectUrl = GetRedirectionUrl();
+            var surveyName = $("#_surveyName").val();
             if (ValidateEmail(emailAddress)) {
                 //Call notify function to send notification
-                NotifyByEmail(emailAddress, redirectUrl);
+                NotifyByEmail(emailAddress, redirectUrl, surveyName);
                 //close the modal popup after processing
                 $("#dialog").dialog("close");
             }
@@ -57,7 +58,7 @@
 
 
         $("#close").live("click", function () {
-           
+
             window.open('', '_parent', '');
             window.close();
         });
@@ -182,7 +183,7 @@
             @Html.HiddenFor(model => model.StatusId, new { id = "_statusId" })
              @Html.HiddenFor(model => model.IsSaved, new { id = "_showModalPopup" })
              @Html.HiddenFor(model => model.ResponseId, new { id = "_responseId" })
-              
+             @Html.HiddenFor(model => model.SurveyInfo.SurveyName, new { id = "_surveyName"}) 
    	           
 	        <div id="nav">
             <div id="prev" align="left">&nbsp;
