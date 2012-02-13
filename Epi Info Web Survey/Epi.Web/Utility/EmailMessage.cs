@@ -15,7 +15,7 @@ namespace Epi.Web.Utility
         /// <param name="email"></param>
         /// <param name="response"></param>
         /// <returns></returns>
-        public static bool SendMessage(string emailAddress, string redirectUrl)
+        public static bool SendMessage(string emailAddress, string redirectUrl,string surveyName)
         {
             try
             {
@@ -31,12 +31,13 @@ namespace Epi.Web.Utility
                 //for test
                 System.Net.Mail.MailMessage message = new System.Net.Mail.MailMessage();
                 message.To.Add(emailAddress);
-                message.Subject = ConfigurationManager.AppSettings["EMAIL_SUBJECT"].ToString();   //"This is the Subject line";
+                message.Subject = "Link for Survey: " + surveyName; //ConfigurationManager.AppSettings["EMAIL_SUBJECT"].ToString();   //"This is the Subject line";
                 message.From = new System.Net.Mail.MailAddress(ConfigurationManager.AppSettings["EMAIL_FROM"].ToString());//sender email address
                 message.Body = redirectUrl;
+                
                 System.Net.Mail.SmtpClient smtp = new System.Net.Mail.SmtpClient(ConfigurationManager.AppSettings["SMTP_HOST"].ToString());//server 
                 smtp.Credentials = new System.Net.NetworkCredential(ConfigurationManager.AppSettings["EMAIL_FROM"].ToString(), ConfigurationManager.AppSettings["EMAIL_PASSWORD"].ToString());
-                smtp.EnableSsl = true;
+                //smtp.EnableSsl = true;
                 smtp.Port = Convert.ToInt16(ConfigurationManager.AppSettings["SMTP_PORT"].ToString());
                 smtp.EnableSsl = true;
 
