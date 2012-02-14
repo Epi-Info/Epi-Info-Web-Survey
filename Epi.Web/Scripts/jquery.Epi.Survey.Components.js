@@ -3,7 +3,7 @@
 
 function NotifyByEmail(emailAddress,redirectUrl,surveyName) {
     /*post email address and redirect url asynchronously to Post controller */
-    debugger;
+    //debugger;
     var user = { 'emailAddress': emailAddress,
                  'redirectUrl': redirectUrl,
                  'surveyName':surveyName,
