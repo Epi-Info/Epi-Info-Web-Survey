@@ -23,15 +23,18 @@
         </div>
     </div>
 <div class="success">
-    <img src="../../Content/images/button_check.png" style="vertical-align: middle; padding-right: 10px;">
-    @if(string.IsNullOrWhiteSpace(Model.ExitText)) 
-    {
-        @Epi.Web.MVC.Constants.Constant.SURVEY_SUBMISSION_MESSAGE;
-    } 
-    else 
-    {
-        @Model.ExitText;
-    }
+    <div class="image"><img src="../../Content/images/button_check.png" style="vertical-align: middle; padding-right: 10px;"></div>
+    <div class="message">
+        @if(string.IsNullOrWhiteSpace(Model.ExitText)) 
+        {
+            @Epi.Web.MVC.Constants.Constant.SURVEY_SUBMISSION_MESSAGE;
+        } 
+        else 
+        {
+            @Model.ExitText;
+        }
+    </div>
+    <div style="clear:both;"></div>
 </div>
 @using (Html.BeginForm())
        { 
