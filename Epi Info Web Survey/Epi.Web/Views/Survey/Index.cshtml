@@ -39,7 +39,7 @@
     $(document).ready(function () {
 
         $("#send").click(function () {
-            debugger;
+            //debugger;
 
             var emailAddress = $("#email").val();
             var redirectUrl = GetRedirectionUrl();
@@ -229,7 +229,7 @@
               <div id="dialog" title="Your Survey has been saved.">
 	            <p>Please copy and save the survey link to return to the survey at a later time.</p>
  	            <p>@*<input  id="url" type="text" style="width: 250px;"/>*@
-                <textarea id="url" cols="70" rows="3" style="white-space:pre;"></textarea>
+                <textarea id="url" cols="70" rows="3" style="white-space:pre;" readonly="readonly"></textarea>
  	           @* <button id="copyClipboard" type="button" name="copy">Copy Link</button>*@</p>
  	            <hr/>
  	            <p>Optionally enter your email address to have the survey link emailed to you.</p>
