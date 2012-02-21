@@ -81,8 +81,18 @@ namespace MvcDynamicForms.Fields
             var select = new TagBuilder("select");
             select.Attributes.Add("id", inputName);
             select.Attributes.Add("name", inputName);
+            ////////////Check code start//////////////////
+            select.Attributes.Add("onfocus", "EventArray.push('" + Prompt +  "before')");//befor
+            select.Attributes.Add("onblur", "EventArray.push('" + Prompt + "After')");//After
+            ////////////Check code end//////////////////
 
-
+            if (inputName.Contains("MvcDynamicField_6e014f46-7d86-4f06-9e2c-49586d033665"))
+            {
+                //select.Attributes.Add("onfocus", " EventArray.push(document.getElementById('MvcDynamicField_9573a6df-bf8e-4b1c-af27-b0a4daa704b6').value='befor';");//befor
+                //select.Attributes.Add("onblur", " document.getElementById('MvcDynamicField_9573a6df-bf8e-4b1c-af27-b0a4daa704b6').value='After';");//After
+                //select.Attributes.Add("onfocus", " EventArray.push('before');");//befor
+                //select.Attributes.Add("onblur", " EventArray.push('after')");//After
+            }
 
          
 

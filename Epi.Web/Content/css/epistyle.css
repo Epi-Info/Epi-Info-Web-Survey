@@ -26,9 +26,9 @@ body
  -webkit-box-shadow: 10px 10px 5px #888;
  box-shadow: 10px 10px 5px #bfbfbf;
  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
- behavior: url('C:\WorkSpace\EpiInfoWebSurvey\Epi Info Web Survey\Epi.Web\PIE.htc'); 
+behavior: url('/Scripts/PIE.htc');
  }
-
+ 
 #header
  {
  padding: 0.5em 0.5em 1.0em .5em;
@@ -36,7 +36,7 @@ body
  border-bottom: 1px solid #4e9689;
  -moz-border-radius: 10px 10px 0 0;
  border-radius: 10px 10px 0 0;
- behavior: url('C:\WorkSpace\EpiInfoWebSurvey\Epi Info Web Survey\Epi.Web\PIE.htc');
+ behavior: url('/Scripts/PIE.htc');
  }
 
 #header h1
@@ -177,7 +177,7 @@ bottom:80px;
  -moz-box-shadow: -1px -1px 0px 0px #888;
  -webkit-box-shadow: 1px -1px 0px 0px #888;
  box-shadow: 0px -1px 1px 0px #888;
- behavior: url(PIE.htc);
+ behavior: url('/Scripts/PIE.htc');
  }
 
 #content h2 { margin: 0 0 .5em 0; }
@@ -224,7 +224,7 @@ button.save, button.prev, button.next, button.begin
  -o-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
  -webkit-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
  -moz-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
- behavior:url(PIE.htc);
+  behavior: url('/Scripts/PIE.htc');
  }
 
 button.exitsurvey
@@ -241,7 +241,7 @@ button.exitsurvey
  font-size: 8pt;
  font-weight:bold;
  height: 26px;
- behavior:url(PIE.htc);
+ behavior: url('/Scripts/PIE.htc');
  }
  
  button.begin
@@ -271,7 +271,7 @@ button.exitsurvey
  -webkit-border-radius: 10px;
  -khtml-border-radius: 10px;
  border-radius: 10px;
- behavior:url(PIE.htc);
+behavior: url('/Scripts/PIE.htc');
  }
 
 button.submits
@@ -294,7 +294,7 @@ button.submits
  -o-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
  -webkit-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
  -moz-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
- behavior:url(PIE.htc);
+behavior: url('/Scripts/PIE.htc');
  }
 
   #attention
@@ -311,7 +311,7 @@ button.submits
  -webkit-border-radius: 10px;
  -khtml-border-radius: 10px;
  border-radius: 10px;
- behavior:url(PIE.htc);
+behavior: url('/Scripts/PIE.htc');
  }
  /*Form Styles*/
  
@@ -365,7 +365,7 @@ font-size: 9pt;
 -webkit-border-radius: 10px;
 -khtml-border-radius: 10px;
 border-radius: 10px;
-behavior:url(PIE.htc);
+behavior: url('/Scripts/PIE.htc');
 }
 
 .message

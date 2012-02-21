@@ -243,6 +243,7 @@
     </None>
     <Content Include="Scripts\jquery.validationEngine-en.js" />
     <Content Include="Scripts\jquery.validationEngine.js" />
+    <Content Include="Scripts\PIE.htc" />
     <Content Include="Unity.Mvc3.README.txt" />
     <Content Include="Views\Final\Index.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
@@ -258,7 +259,9 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Views\Web.config" />
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="Service References\DataServiceClient\DataService.wsdl" />
     <None Include="Service References\DataServiceClient\SurveyDataService.xsd">
       <SubType>Designer</SubType>
@@ -324,11 +327,11 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>False</AutoAssignPort>
           <DevelopmentServerPort>49249</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost/EpiWebCP</IISUrl>
+          <IISUrl>http://localhost/EpiWeb</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
