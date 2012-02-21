@@ -26,7 +26,7 @@ body
  -webkit-box-shadow: 10px 10px 5px #888;
  box-shadow: 10px 10px 5px #bfbfbf;
  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-behavior: url('/Scripts/PIE.htc');
+behavior: url('../Scripts/PIE.htc');
  }
  
 #header
@@ -36,7 +36,7 @@ behavior: url('/Scripts/PIE.htc');
  border-bottom: 1px solid #4e9689;
  -moz-border-radius: 10px 10px 0 0;
  border-radius: 10px 10px 0 0;
- behavior: url('/Scripts/PIE.htc');
+ behavior: url('../Scripts/PIE.htc');
  }
 
 #header h1
@@ -177,7 +177,7 @@ bottom:80px;
  -moz-box-shadow: -1px -1px 0px 0px #888;
  -webkit-box-shadow: 1px -1px 0px 0px #888;
  box-shadow: 0px -1px 1px 0px #888;
- behavior: url('/Scripts/PIE.htc');
+ behavior: url('../Scripts/PIE.htc');
  }
 
 #content h2 { margin: 0 0 .5em 0; }
@@ -224,8 +224,42 @@ button.save, button.prev, button.next, button.begin
  -o-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
  -webkit-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
  -moz-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
-  behavior: url('/Scripts/PIE.htc');
+  behavior: url('../Scripts/PIE.htc');
  }
+
+button.save
+{
+    background-image: url('../images/save.png');
+    background-position:42px center;
+    background-repeat: repeat-x;
+    background-repeat:no-repeat;
+    padding-left:20px;
+}
+
+button.prev
+{
+  background-image: url('../images/arrow_left.png');
+  background-position:25px center;
+  background-repeat:no-repeat;
+  padding-left:40px;
+  text-align:left;
+}
+
+button.next
+{
+  background-image: url('../images/arrow_right.png');
+  background-position:109px center;
+  background-repeat:no-repeat;
+    /*padding-left:20px;*/
+}
+
+button.submits
+{
+  background-image: url('../images/submit.png') !important;
+  background-position:129px center !important;
+  background-repeat:no-repeat !important;
+    /*padding-left:20px;*/
+}
 
 button.exitsurvey
  {
@@ -241,7 +275,7 @@ button.exitsurvey
  font-size: 8pt;
  font-weight:bold;
  height: 26px;
- behavior: url('/Scripts/PIE.htc');
+ behavior: url('../Scripts/PIE.htc');
  }
  
  button.begin
@@ -271,7 +305,7 @@ button.exitsurvey
  -webkit-border-radius: 10px;
  -khtml-border-radius: 10px;
  border-radius: 10px;
-behavior: url('/Scripts/PIE.htc');
+behavior: url('../Scripts/PIE.htc');
  }
 
 button.submits
@@ -294,7 +328,7 @@ button.submits
  -o-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
  -webkit-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
  -moz-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
-behavior: url('/Scripts/PIE.htc');
+behavior: url('../Scripts/PIE.htc');
  }
 
   #attention
@@ -311,7 +345,7 @@ behavior: url('/Scripts/PIE.htc');
  -webkit-border-radius: 10px;
  -khtml-border-radius: 10px;
  border-radius: 10px;
-behavior: url('/Scripts/PIE.htc');
+behavior: url('../Scripts/PIE.htc');
  }
  /*Form Styles*/
  
@@ -365,7 +399,7 @@ font-size: 9pt;
 -webkit-border-radius: 10px;
 -khtml-border-radius: 10px;
 border-radius: 10px;
-behavior: url('/Scripts/PIE.htc');
+behavior: url('../Scripts/PIE.htc');
 }
 
 .message
