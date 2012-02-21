@@ -1,16 +1,17 @@
 ﻿
 
 
-function NotifyByEmail(emailAddress,redirectUrl,surveyName) {
+function NotifyByEmail(emailAddress, redirectUrl, surveyName, postUrl) {
     /*post email address and redirect url asynchronously to Post controller */
-    //debugger;
+
     var user = { 'emailAddress': emailAddress,
-                 'redirectUrl': redirectUrl,
-                 'surveyName':surveyName,
-                 __RequestVerificationToken: $("input[name=__RequestVerificationToken]").val()
+        'redirectUrl': redirectUrl,
+        'surveyName': surveyName,
+        __RequestVerificationToken: $("input[name=__RequestVerificationToken]").val()
     };
+
     $.post(
-            '/Post/Notify',
+            postUrl,
             user,
             function (data) {
                 if (data === true) {
@@ -25,21 +26,64 @@ function NotifyByEmail(emailAddress,redirectUrl,surveyName) {
             'json'
         );
 
-        }
+}
 
 /*generating Url*/
-        function GetRedirectionUrl() {
+function GetRedirectionUrl() {
+    //debugger;
+    // return to survey url: 'http://hostname/survey/responseid'
+    var currentUrl = window.location.href;
+    currentUrl = processUrl(currentUrl, 'RedirectionUrl', "");
+    return currentUrl;
+}
 
-            var responseId = $('#_responseId').val();
-            var currentUrl = window.location.href;
-            var currentUrlArray = [];
-            currentUrlArray = currentUrl.split("/");
-            var responseUrl = currentUrlArray[0] + "//" + currentUrlArray[2] + "/Survey/" + responseId;
-            return responseUrl;
-        }
+function processUrl(currentUrl, processType, pageNumber) {
+    //debugger;
+    var currentUrlArray = [];
+    currentUrlArray = currentUrl.split("/");
+    var intRegex = /^\d+$/;
+
+    switch (processType) {
+        case 'RedirectionUrl':
+
+            if (intRegex.test(currentUrlArray[currentUrlArray.length - 1])) { //if page number  attached to url remove the number
+                currentUrlArray.splice(currentUrlArray.length - 1, 1);
+                currentUrl = currentUrlArray.join("/");
+            }
+
+            break;
+        case 'PreviousUrl':
+
+            var pageNumberP;
+            pageNumberP = parseInt(pageNumber) - 1;
+            if (!intRegex.test(currentUrlArray[currentUrlArray.length - 1])) { //if page number not attached to url
+                currentUrl = currentUrl + "/" + pageNumberP.toString();
+            }
+            else { //if page number attached to url
+                currentUrlArray[currentUrlArray.length - 1] = pageNumberP;
+                currentUrl = currentUrlArray.join("/");
+            }
+            break;
+        case 'ContinueUrl':
+            var pageNumberC;
+            pageNumberC = parseInt(pageNumber) + 1;
+            if (!intRegex.test(currentUrlArray[currentUrlArray.length - 1])) { //if page number not attached to url
+                currentUrl = currentUrl + "/" + pageNumberC.toString();
+            }
+            else { //if page number attached to url
+                currentUrlArray[currentUrlArray.length - 1] = pageNumberC;
+                currentUrl = currentUrlArray.join("/");
+            }
+            break;
+
+        default:
+            //code to be executed if n is different from case 1 and 2
+    }
+    return currentUrl;
+}
 
 function ValidateEmail($email) {
-/*Email validation*/
+    /*Email validation*/
     var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
     if ($email.length == 0) {
         return false;
