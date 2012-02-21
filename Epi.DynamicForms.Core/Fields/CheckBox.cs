@@ -98,8 +98,8 @@ namespace MvcDynamicForms.Fields
             if (Checked) chk.Attributes.Add("checked", "checked");
             chk.Attributes.Add("value", bool.TrueString);
             ////////////Check code start//////////////////
-            chk.Attributes.Add("onfocus", "EventArray.push('" + Prompt + "Befor')");//befor
-            chk.Attributes.Add("onblur", "EventArray.push('" + Prompt + "After')");//After
+           // chk.Attributes.Add("onfocus", "EventArray.push('" + Prompt + "Befor')");//befor
+            //chk.Attributes.Add("onblur", "EventArray.push('" + Prompt + "After')");//After
             ////////////Check code end//////////////////
            
             chk.Attributes.Add("style", "position:absolute;left:" + _left.ToString() + "px;top:" + _top.ToString() + "px" + ";width:" + _ControlWidth.ToString() + "px" + ErrorStyle);            
