@@ -43,8 +43,8 @@ namespace MvcDynamicForms.Fields
             txt.Attributes.Add("type", "text");
            // txt.Attributes.Add("value", Value);
             ////////////Check code start//////////////////
-            txt.Attributes.Add("onfocus", "EventArray.push('" + Prompt + "before')");//befor
-            txt.Attributes.Add("onblur", "EventArray.push('" + Prompt + "After')");//After
+           // txt.Attributes.Add("onfocus", "EventArray.push('" + Prompt + "before')");//befor
+           // txt.Attributes.Add("onblur", "EventArray.push('" + Prompt + "After')");//After
             ////////////Check code end//////////////////
             txt.Attributes.Add("value", Value);
             if(_IsRequired ==true){
