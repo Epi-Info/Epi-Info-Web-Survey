@@ -238,7 +238,7 @@ namespace Epi.Web.MVC.Utility
                 Required =  _FieldTypeID.Attribute("IsRequired").Value == "True"?true:false ,
                 //RequiredMessage = _FieldTypeID.Attribute("PromptText").Value + " is required",
                 RequiredMessage =  "This field is required",
-                Key = _FieldTypeID.Attribute("UniqueId").Value,
+                Key = _FieldTypeID.Attribute("Name").Value,
                 PromptTop = _Height * double.Parse(_FieldTypeID.Attribute("PromptTopPositionPercentage").Value),
                 PromptLeft = _Width * double.Parse(_FieldTypeID.Attribute("PromptLeftPositionPercentage").Value),
                 Top = _Height * double.Parse(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value),
@@ -294,7 +294,7 @@ namespace Epi.Web.MVC.Utility
                 Required = _FieldTypeID.Attribute("IsRequired").Value == "True" ? true : false,
                 //RequiredMessage = _FieldTypeID.Attribute("PromptText").Value + " is required",
                 RequiredMessage = "This field is required",
-                Key = _FieldTypeID.Attribute("UniqueId").Value,
+                Key = _FieldTypeID.Attribute("Name").Value,
                 PromptTop = _Height * double.Parse(_FieldTypeID.Attribute("PromptTopPositionPercentage").Value),
                 PromptLeft = _Width * double.Parse(_FieldTypeID.Attribute("PromptLeftPositionPercentage").Value),
                 Top = _Height * double.Parse(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value),
@@ -326,7 +326,7 @@ namespace Epi.Web.MVC.Utility
                 Required = _FieldTypeID.Attribute("IsRequired").Value == "True" ? true : false,
                 //RequiredMessage = _FieldTypeID.Attribute("PromptText").Value + " is required",
                 RequiredMessage = "This field is required",
-                Key = _FieldTypeID.Attribute("UniqueId").Value,
+                Key = _FieldTypeID.Attribute("Name").Value,
                 PromptTop = _Height * double.Parse(_FieldTypeID.Attribute("PromptTopPositionPercentage").Value),
                 PromptLeft = _Width * double.Parse(_FieldTypeID.Attribute("PromptLeftPositionPercentage").Value),
                 Top = _Height * double.Parse(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value),
@@ -357,7 +357,7 @@ namespace Epi.Web.MVC.Utility
                 Prompt = _FieldTypeID.Attribute("PromptText").Value,
                 DisplayOrder = int.Parse(_FieldTypeID.Attribute("TabIndex").Value),
                 RequiredMessage = "This field is required",
-                Key = _FieldTypeID.Attribute("UniqueId").Value,
+                Key = _FieldTypeID.Attribute("Name").Value,
                 PromptTop = _Height * double.Parse(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value)+2,
                 PromptLeft = _Width * double.Parse(_FieldTypeID.Attribute("ControlLeftPositionPercentage").Value)+20,
                 Top = _Height * double.Parse(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value),
@@ -390,7 +390,7 @@ namespace Epi.Web.MVC.Utility
                 Required = _FieldTypeID.Attribute("IsRequired").Value == "True" ? true : false,
                 //RequiredMessage = _FieldTypeID.Attribute("PromptText").Value + " is required",
                 RequiredMessage = "This field is required",
-                Key = _FieldTypeID.Attribute("UniqueId").Value,
+                Key = _FieldTypeID.Attribute("Name").Value,
                 PromptTop = _Height * double.Parse(_FieldTypeID.Attribute("PromptTopPositionPercentage").Value),
                 PromptLeft = _Width * double.Parse(_FieldTypeID.Attribute("PromptLeftPositionPercentage").Value),
                 Top = _Height * double.Parse(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value),
@@ -423,7 +423,7 @@ namespace Epi.Web.MVC.Utility
                     DisplayOrder = int.Parse(_FieldTypeID.Attribute("TabIndex").Value),
                     Required = _FieldTypeID.Attribute("IsRequired").Value == "True" ? true : false,
                     RequiredMessage = "This field is required",
-                    Key = _FieldTypeID.Attribute("UniqueId").Value,
+                    Key = _FieldTypeID.Attribute("Name").Value,
                     PromptTop = _Height * double.Parse(_FieldTypeID.Attribute("PromptTopPositionPercentage").Value),
                     PromptLeft = _Width * double.Parse(_FieldTypeID.Attribute("PromptLeftPositionPercentage").Value),
                     Top = _Height * double.Parse(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value),
@@ -497,7 +497,7 @@ namespace Epi.Web.MVC.Utility
                     GroupBox.Title = _FieldTypeID.Attribute("Name").Value;
                     GroupBox.Prompt = _FieldTypeID.Attribute("PromptText").Value;
                     GroupBox.RequiredMessage = "This field is required";
-                    GroupBox.Key = _FieldTypeID.Attribute("UniqueId").Value;
+                    GroupBox.Key = _FieldTypeID.Attribute("Name").Value;
                     GroupBox.PromptTop = _Height * double.Parse(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value) ;
                     GroupBox.PromptLeft = _Width * double.Parse(_FieldTypeID.Attribute("ControlLeftPositionPercentage").Value) ;
                     GroupBox.Top = _Height * double.Parse(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value);
