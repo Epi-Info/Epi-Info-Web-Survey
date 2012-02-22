@@ -5,6 +5,8 @@
 }
 @*<script src="../../Scripts/jquery-1.5.1-vsdoc.js" type="text/javascript"></script>*@
 <script type="text/javascript">
+
+     
     /*Clicking the save button to save the survey*/
     function Save() {
         //debugger;
@@ -240,7 +242,7 @@
              @Html.Raw(Model.RenderHtml(true))
              
            
-            
+            <input type="hidden"  id="HiddenFieldsList"  name="HiddenFieldsList" value="" />
    	        <input type="hidden"  name="is_save_action" value="false" />
 	        <div id="nav">
             <div id="prev" align="left">&nbsp;
