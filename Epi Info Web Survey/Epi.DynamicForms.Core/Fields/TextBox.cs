@@ -23,7 +23,7 @@ namespace MvcDynamicForms.Fields
             prompt.SetInnerText(Prompt);
             prompt.Attributes.Add("for", inputName);
             prompt.Attributes.Add("class", "EpiLabel");
-
+            prompt.Attributes.Add("Id", "Label" + inputName);
             StringBuilder StyleValues = new StringBuilder();
             StyleValues.Append(GetContolStyle(_fontstyle.ToString(), _Prompttop.ToString(), _Promptleft.ToString(), null, Height.ToString()));
             prompt.Attributes.Add("style", StyleValues.ToString());    
@@ -43,8 +43,13 @@ namespace MvcDynamicForms.Fields
             txt.Attributes.Add("type", "text");
            // txt.Attributes.Add("value", Value);
             ////////////Check code start//////////////////
-           // txt.Attributes.Add("onfocus", "EventArray.push('" + Prompt + "before')");//befor
-           // txt.Attributes.Add("onblur", "EventArray.push('" + Prompt + "After')");//After
+            txt.Attributes.Add("onfocus", "");//befor
+            if (inputName.ToString() == "MvcDynamicField_81bf961e-084c-4102-a98f-eebc63c1f157")
+            {
+                txt.Attributes.Add("onblur", "$('#MvcDynamicField_a36e1d37-1d72-4fa6-982b-fdd850a73428').hide(); $('#LabelMvcDynamicField_a36e1d37-1d72-4fa6-982b-fdd850a73428').hide();");//After
+               //txt.Attributes.Add("onblur", "$('#LabelMvcDynamicField_a36e1d37-1d72-4fa6-982b-fdd850a73428').hide();");//After
+               
+            }
             ////////////Check code end//////////////////
             txt.Attributes.Add("value", Value);
             if(_IsRequired ==true){
