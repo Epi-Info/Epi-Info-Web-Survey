@@ -44,10 +44,11 @@ namespace MvcDynamicForms.Fields
            // txt.Attributes.Add("value", Value);
             ////////////Check code start//////////////////
             txt.Attributes.Add("onfocus", "");//befor
-            if (inputName.ToString() == "MvcDynamicField_81bf961e-084c-4102-a98f-eebc63c1f157")
+            if (inputName.ToString() == "MvcDynamicField_FirstName")
             {
-                txt.Attributes.Add("onblur", "$('#MvcDynamicField_a36e1d37-1d72-4fa6-982b-fdd850a73428').hide(); $('#LabelMvcDynamicField_a36e1d37-1d72-4fa6-982b-fdd850a73428').hide();");//After
+                //txt.Attributes.Add("onblur", "$('#MvcDynamicField_a36e1d37-1d72-4fa6-982b-fdd850a73428').hide(); $('#LabelMvcDynamicField_a36e1d37-1d72-4fa6-982b-fdd850a73428').hide();");//After
                //txt.Attributes.Add("onblur", "$('#LabelMvcDynamicField_a36e1d37-1d72-4fa6-982b-fdd850a73428').hide();");//After
+                txt.Attributes.Add("onblur", "var List = new Array();List.push('Ill');CCE_Hide(List,false);");//After
                
             }
             ////////////Check code end//////////////////
