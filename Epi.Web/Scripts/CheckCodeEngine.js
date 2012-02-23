@@ -13,11 +13,13 @@ function CCE_Hide(pNameList, pIsExceptionList)
         {
             if (pIsExceptionList)
             {
-                CCE_ProcessHideExceptCommand(pNameList);
+             CCE_ProcessHideExceptCommand(pNameList);
+                
             }
             else
             {
                 CCE_ProcessHideCommand(pNameList);
+                
             }
         }
         catch (ex)
@@ -44,6 +46,7 @@ function CCE_ProcessHideCommand(pCheckCodeList)
             $(query).hide();
             query = '#LabelMvcDynamicField_' + pCheckCodeList[i];
             $(query).hide();
+             AddToHiddenFieldsList(pCheckCodeList[i]);
         }
     }
 }
@@ -100,3 +103,14 @@ function CCE_SymbolTable()
         this._SymbolList = new Array();
 
 }
+function AddToHiddenFieldsList(FieldName)
+ {
+    if (document.getElementById("HiddenFieldsList").value !="") 
+    {
+
+        document.getElementById("HiddenFieldsList").value += ",";
+    
+    }
+    document.getElementById("HiddenFieldsList").value += FieldName;
+    
+ }

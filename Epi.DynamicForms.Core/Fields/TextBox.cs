@@ -25,7 +25,7 @@ namespace MvcDynamicForms.Fields
             prompt.Attributes.Add("class", "EpiLabel");
             prompt.Attributes.Add("Id", "Label" + inputName);
             StringBuilder StyleValues = new StringBuilder();
-            StyleValues.Append(GetContolStyle(_fontstyle.ToString(), _Prompttop.ToString(), _Promptleft.ToString(), null, Height.ToString()));
+            StyleValues.Append(GetContolStyle(_fontstyle.ToString(), _Prompttop.ToString(), _Promptleft.ToString(), null, Height.ToString(),_IsHidden));
             prompt.Attributes.Add("style", StyleValues.ToString());    
             html.Append(prompt.ToString());
 
@@ -48,7 +48,7 @@ namespace MvcDynamicForms.Fields
             {
                 //txt.Attributes.Add("onblur", "$('#MvcDynamicField_a36e1d37-1d72-4fa6-982b-fdd850a73428').hide(); $('#LabelMvcDynamicField_a36e1d37-1d72-4fa6-982b-fdd850a73428').hide();");//After
                //txt.Attributes.Add("onblur", "$('#LabelMvcDynamicField_a36e1d37-1d72-4fa6-982b-fdd850a73428').hide();");//After
-                txt.Attributes.Add("onblur", "var List = new Array();List.push('Ill');CCE_Hide(List,false);");//After
+                txt.Attributes.Add("onblur", "var List = new Array();List.push('Ill');List.push('MvcDynamicField_Ill');CCE_Hide(List,false);");//After
                
             }
             ////////////Check code end//////////////////
@@ -61,7 +61,12 @@ namespace MvcDynamicForms.Fields
             {
                 txt.Attributes.Add("MaxLength", _MaxLength.ToString());
             }
-            txt.Attributes.Add("style", "position:absolute;left:" + _left.ToString() + "px;top:" + _top.ToString() + "px" + ";width:" + _ControlWidth.ToString() + "px" + ErrorStyle);            
+            string IsHiddenStyle = "";
+            if (_IsHidden)
+            {
+                IsHiddenStyle = "display:none";
+            }
+            txt.Attributes.Add("style", "position:absolute;left:" + _left.ToString() + "px;top:" + _top.ToString() + "px" + ";width:" + _ControlWidth.ToString() + "px" + ErrorStyle + ";" + IsHiddenStyle);            
           
             txt.MergeAttributes(_inputHtmlAttributes);
             html.Append(txt.ToString(TagRenderMode.SelfClosing));

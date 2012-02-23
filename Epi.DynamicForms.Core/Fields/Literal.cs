@@ -39,7 +39,7 @@ namespace MvcDynamicForms.Fields
                
                 StringBuilder StyleValues = new StringBuilder();
 
-                StyleValues.Append(GetContolStyle(_fontstyle.ToString(), _top.ToString(), _left.ToString(), Width.ToString(), Height.ToString()));
+                StyleValues.Append(GetContolStyle(_fontstyle.ToString(), _top.ToString(), _left.ToString(), Width.ToString(), Height.ToString(), IsHidden));
 
                 wrapper.Attributes.Add(new KeyValuePair<string, string>("style", StyleValues.ToString()));  
                 wrapper.InnerHtml = Html;

@@ -51,6 +51,10 @@ namespace Epi.Web.MVC.Controllers
                     PageNumber = GetSurveyPageNumber(surveyAnswerDTO.XML.ToString());
 
                 }
+                else { 
+                
+                
+                }
                 switch(ValidationTest)
                 {
                     case PreValidationResultEnum.SurveyIsPastClosingDate:
@@ -103,11 +107,13 @@ namespace Epi.Web.MVC.Controllers
                         //get the survey form
                         MvcDynamicForms.Form form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, GetSurveyPageNumber(SurveyAnswer.XML.ToString()), SurveyAnswer);
                         //Update the model
+                        
                         UpdateModel(form);
+                       
                         bool IsSubmited = false;
                         bool IsSaved = false;
 
-
+                        form.HiddenFieldsList = this.Request.Form["HiddenFieldsList"].ToString();
                         _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId, form, SurveyAnswer, IsSubmited, IsSaved, PageNumber);
 
 
