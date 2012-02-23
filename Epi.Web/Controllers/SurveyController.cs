@@ -69,7 +69,7 @@ namespace Epi.Web.MVC.Controllers
                         {
                             form.Validate();
                         }
-
+                        this.SetCurrentPage(surveyAnswerDTO, PageNumber);
                         return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
                 }
             }
@@ -191,6 +191,31 @@ namespace Epi.Web.MVC.Controllers
             return CurrentPage;
         }
 
+
+
+
+        private void SetCurrentPage(Epi.Web.Common.DTO.SurveyAnswerDTO surveyAnswerDTO, int PageNumber)
+        {
+
+            XDocument Xdoc = XDocument.Parse(surveyAnswerDTO.XML);
+            if (PageNumber != 0)
+            {
+                Xdoc.Root.Attribute("LastPageVisited").Value = PageNumber.ToString();
+            }
+
+            surveyAnswerDTO.XML = Xdoc.ToString();
+            
+            Epi.Web.MVC.Repositories.SurveyAnswerRepository iSurveyAnswerRepository = new Repositories.SurveyAnswerRepository(new DataServiceClient.DataServiceClient());
+            Epi.Web.Common.Message.SurveyAnswerRequest  sar = new Common.Message.SurveyAnswerRequest();
+            sar.Action = "Update";
+            sar.SurveyAnswerList.Add(surveyAnswerDTO);
+
+            iSurveyAnswerRepository.SaveSurveyAnswer(sar);
+
+        }
+
+
+
         private Epi.Web.Common.DTO.SurveyAnswerDTO GetSurveyAnswer(string responseId)
         {
             Epi.Web.Common.DTO.SurveyAnswerDTO result = null;
@@ -234,15 +259,16 @@ namespace Epi.Web.MVC.Controllers
         {
 
             XDocument xdoc = XDocument.Parse(ResponseXml);
-
+            
             int PageNumber = 0;
 
             if (!xdoc.Root.IsEmpty && (string)xdoc.Root.Attribute("LastPageVisited") != null)
             {
                 PageNumber= int.Parse(xdoc.Root.Attribute("LastPageVisited").Value);
-            }else{
-            
-            PageNumber =1;
+            }
+            else
+            {
+                PageNumber =1;
             }
 
             return PageNumber;
