@@ -24,7 +24,7 @@ namespace MvcDynamicForms.Fields
         protected string _fontstyle;
         protected double _Width;
         protected double _Height;
-        
+        protected bool _IsHidden;
 
         internal Form Form
         {
@@ -87,13 +87,13 @@ namespace MvcDynamicForms.Fields
 
         public double Width { get { return this._Width; } set { this._Width = value; } }
         public double Height { get { return this._Height; } set { this._Height = value; } }
-
+        public bool IsHidden { get { return this._IsHidden; } set { this._IsHidden = value; } }
         /// <summary>
         /// This function generates control style 
         /// </summary>
         /// <param name="ControlFontStyle"></param>
         /// <returns></returns>
-        public string GetContolStyle(string ControlFontStyle, string Top, string Left, string Width, string Height)
+        public string GetContolStyle(string ControlFontStyle, string Top, string Left, string Width, string Height, bool IsHidden)
         {
 
             StringBuilder FontStyle = new StringBuilder();
@@ -178,7 +178,10 @@ namespace MvcDynamicForms.Fields
             {
                 CssStyles.Append(";text-decoration:");
             }
-
+            if (IsHidden)
+            {
+                CssStyles.Append(";display:none");
+            }
             CssStyles.Append(TextDecoration);
 
 

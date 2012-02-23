@@ -3,6 +3,7 @@ using MvcDynamicForms.Fields;
 using System.Xml;
 using System.Xml.Linq;
 using System.Text;
+using System.Web;
 using MvcDynamicForms;
 using System.Collections.Generic;
 using System;
@@ -68,13 +69,15 @@ namespace Epi.Web.MVC.Utility
                     switch (_FieldTypeID.Attribute("FieldTypeId").Value)
                     {
                         case "1":
-                            var _TextBoxValue= GetControlValue(SurveyAnswer, _FieldTypeID.Attribute("Name").Value);
-                            form.AddFields( GetTextBox(_FieldTypeID, _Width, _Height, SurveyAnswer, _TextBoxValue));
+                           
+                                var _TextBoxValue = GetControlValue(SurveyAnswer, _FieldTypeID.Attribute("Name").Value);
+                                form.AddFields(GetTextBox(_FieldTypeID, _Width, _Height, SurveyAnswer, _TextBoxValue));
+                            
                             break;
                        
 
                         case "2"://Label/Title
-                             form.AddFields( GetLabel(_FieldTypeID,_Width,_Height ));
+                            form.AddFields(GetLabel(_FieldTypeID, _Width, _Height, SurveyAnswer));
                             break;
                         case "3"://Label
 
@@ -102,28 +105,35 @@ namespace Epi.Web.MVC.Utility
                             break;
 
                         case "11"://DropDown Yes/No
-
-                            var _DropDownSelectedValueYN = GetControlValue(SurveyAnswer, _FieldTypeID.Attribute("Name").Value);
-                            form.AddFields(GetDropDown(_FieldTypeID, _Width, _Height, SurveyAnswer, _DropDownSelectedValueYN, "Yes,No",11));
+                             
+                                   var _DropDownSelectedValueYN = GetControlValue(SurveyAnswer, _FieldTypeID.Attribute("Name").Value);
+                                   form.AddFields(GetDropDown(_FieldTypeID, _Width, _Height, SurveyAnswer, _DropDownSelectedValueYN, "Yes,No", 11));
+                               
                             break;
                         case "17"://DropDown LegalValues
-                            string DropDownValues1 = "";
-                            DropDownValues1 = GetDropDownValues(xdoc, _FieldTypeID.Attribute("Name").Value, _FieldTypeID.Attribute("SourceTableName").Value);
-                            var _DropDownSelectedValue1 = GetControlValue(SurveyAnswer, _FieldTypeID.Attribute("Name").Value);
-                            form.AddFields(GetDropDown(_FieldTypeID, _Width, _Height, SurveyAnswer, _DropDownSelectedValue1, DropDownValues1,17));
-                            break;
+                        
+                              string DropDownValues1 = "";
+                              DropDownValues1 = GetDropDownValues(xdoc, _FieldTypeID.Attribute("Name").Value, _FieldTypeID.Attribute("SourceTableName").Value);
+                              var _DropDownSelectedValue1 = GetControlValue(SurveyAnswer, _FieldTypeID.Attribute("Name").Value);
+                              form.AddFields(GetDropDown(_FieldTypeID, _Width, _Height, SurveyAnswer, _DropDownSelectedValue1, DropDownValues1, 17));
+                          
+                             break;
                         case "18"://DropDown Codes
-                            string DropDownValues2 = "";
-                            DropDownValues2 = GetDropDownValues(xdoc, _FieldTypeID.Attribute("Name").Value, _FieldTypeID.Attribute("SourceTableName").Value);
-                            var _DropDownSelectedValue2 = GetControlValue(SurveyAnswer, _FieldTypeID.Attribute("Name").Value);
-                            form.AddFields(GetDropDown(_FieldTypeID, _Width, _Height, SurveyAnswer, _DropDownSelectedValue2, DropDownValues2,18));
-                            break;
+                              
+                                   string DropDownValues2 = "";
+                                   DropDownValues2 = GetDropDownValues(xdoc, _FieldTypeID.Attribute("Name").Value, _FieldTypeID.Attribute("SourceTableName").Value);
+                                   var _DropDownSelectedValue2 = GetControlValue(SurveyAnswer, _FieldTypeID.Attribute("Name").Value);
+                                   form.AddFields(GetDropDown(_FieldTypeID, _Width, _Height, SurveyAnswer, _DropDownSelectedValue2, DropDownValues2, 18));
+                               
+                              break;
                         case "19"://DropDown CommentLegal
-                            string DropDownValues = "";
-                            DropDownValues = GetDropDownValues(xdoc, _FieldTypeID.Attribute("Name").Value, _FieldTypeID.Attribute("SourceTableName").Value);
-                            var _DropDownSelectedValue = GetControlValue(SurveyAnswer, _FieldTypeID.Attribute("Name").Value);
-                            form.AddFields(GetDropDown(_FieldTypeID, _Width, _Height, SurveyAnswer, _DropDownSelectedValue, DropDownValues,19));
-                            break;
+                             
+                                  string DropDownValues = "";
+                                  DropDownValues = GetDropDownValues(xdoc, _FieldTypeID.Attribute("Name").Value, _FieldTypeID.Attribute("SourceTableName").Value);
+                                  var _DropDownSelectedValue = GetControlValue(SurveyAnswer, _FieldTypeID.Attribute("Name").Value);
+                                  form.AddFields(GetDropDown(_FieldTypeID, _Width, _Height, SurveyAnswer, _DropDownSelectedValue, DropDownValues, 19));
+                              
+                                   break;
                         case "21"://GroupBox
                             var _GroupBoxValue = GetControlValue(SurveyAnswer, _FieldTypeID.Attribute("UniqueId").Value);
                             form.AddFields(GetGroupBox(_FieldTypeID, _Width, _Height, SurveyAnswer, _GroupBoxValue));
@@ -162,7 +172,7 @@ namespace Epi.Web.MVC.Utility
 
             
             }
-
+           
             return form;
         }
 
@@ -253,13 +263,14 @@ namespace Epi.Web.MVC.Utility
                 Lower = _FieldTypeID.Attribute("Lower").Value,
                 Upper = _FieldTypeID.Attribute("Upper").Value,
                 Value = _ControlValue,
+                IsHidden = IsHidden(SurveyAnswer, _FieldTypeID.Attribute("Name").Value),
                 Pattern = _FieldTypeID.Attribute("Pattern").Value
                 
             };
             return NumericTextBox;
 
         }
-        private static Literal GetLabel(XElement _FieldTypeID, double _Width, double _Height)
+        private static Literal GetLabel(XElement _FieldTypeID, double _Width, double _Height,string SurveyAnswer)
         {
 
 
@@ -276,6 +287,7 @@ namespace Epi.Web.MVC.Utility
                 fontfamily = _FieldTypeID.Attribute("ControlFontFamily").Value,
                 fontstyle = _FieldTypeID.Attribute("ControlFontStyle").Value,
                 Height = _Height * double.Parse(_FieldTypeID.Attribute("ControlHeightPercentage").Value),
+                IsHidden = IsHidden(SurveyAnswer, _FieldTypeID.Attribute("Name").Value),
                 Width = _Width * double.Parse(_FieldTypeID.Attribute("ControlWidthPercentage").Value)
 
             };
@@ -307,6 +319,7 @@ namespace Epi.Web.MVC.Utility
                 fontfamily = _FieldTypeID.Attribute("PromptFontFamily").Value,
                 IsRequired = bool.Parse(_FieldTypeID.Attribute("IsRequired").Value),
                 IsReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value),
+                IsHidden = IsHidden(SurveyAnswer, _FieldTypeID.Attribute("Name").Value),
                 Value = _ControlValue
 
 
@@ -339,6 +352,7 @@ namespace Epi.Web.MVC.Utility
                 IsRequired = bool.Parse(_FieldTypeID.Attribute("IsRequired").Value),
                 IsReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value),
                 MaxLength = int.Parse(_FieldTypeID.Attribute("MaxLength").Value),
+                IsHidden = IsHidden(SurveyAnswer, _FieldTypeID.Attribute("Name").Value),
                 Value = _ControlValue
                 
 
@@ -369,6 +383,7 @@ namespace Epi.Web.MVC.Utility
                 fontstyle = _FieldTypeID.Attribute("PromptFontStyle").Value,
                 fontSize = double.Parse(_FieldTypeID.Attribute("PromptFontSize").Value),
                 fontfamily = _FieldTypeID.Attribute("PromptFontFamily").Value,
+                IsHidden = IsHidden(SurveyAnswer, _FieldTypeID.Attribute("Name").Value),
                 ReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value) 
                  
               
@@ -404,7 +419,8 @@ namespace Epi.Web.MVC.Utility
                 IsReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value),
                 Lower = _FieldTypeID.Attribute("Lower").Value,
                 Upper = _FieldTypeID.Attribute("Upper").Value,
-                Value = _ControlValue, 
+                Value = _ControlValue,
+                IsHidden = IsHidden(SurveyAnswer, _FieldTypeID.Attribute("Name").Value),
                 Pattern = _FieldTypeID.Attribute("Pattern").Value
 
             };
@@ -438,7 +454,10 @@ namespace Epi.Web.MVC.Utility
                     ShowEmptyOption = true,
                     SelectType=FieldTypeId,
                     SelectedValue = _ControlValue,
+                    IsHidden= IsHidden(SurveyAnswer, _FieldTypeID.Attribute("Name").Value),
+                     
                     EmptyOption = "Select"
+
                 };
 
 
@@ -509,7 +528,7 @@ namespace Epi.Web.MVC.Utility
                     GroupBox.fontSize = double.Parse(_FieldTypeID.Attribute("ControlFontSize").Value);
                     GroupBox.fontfamily = _FieldTypeID.Attribute("ControlFontFamily").Value;
                     GroupBox.ReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value);
-
+                    GroupBox.IsHidden = IsHidden(SurveyAnswer, _FieldTypeID.Attribute("Name").Value);
 
 
                 
@@ -528,6 +547,34 @@ namespace Epi.Web.MVC.Utility
                                  select  _FieldTypeID;
 
             return _FieldsTypeIDs.Elements().Count() ;
+        }
+
+        //check if the control should be hidden
+        public static bool IsHidden(string Xml, string ControlName)
+        {
+
+            bool _IsHidden = false;
+
+            if (!string.IsNullOrEmpty(Xml))
+            {
+                XDocument xdoc = XDocument.Parse(Xml);
+
+                if (!string.IsNullOrEmpty(xdoc.Root.Attribute("HiddenFieldsList").Value.ToString()))
+                {
+                    if (xdoc.Root.Attribute("HiddenFieldsList").Value.Contains(ControlName))
+                    {
+                        _IsHidden = true;
+                    }
+                    else
+                    {
+
+                        _IsHidden = false;
+                    }
+                }
+
+            }
+
+            return _IsHidden;
         }
     }
 }

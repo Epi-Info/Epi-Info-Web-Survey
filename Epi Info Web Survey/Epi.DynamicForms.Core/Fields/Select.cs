@@ -57,6 +57,7 @@ namespace MvcDynamicForms.Fields
             var html = new StringBuilder();
             var inputName = _form.FieldPrefix + _key;
             string ErrorStyle = string.Empty;
+            
             // prompt
             var prompt = new TagBuilder("label");
             prompt.SetInnerText(Prompt);
@@ -64,8 +65,9 @@ namespace MvcDynamicForms.Fields
             prompt.Attributes.Add("class", "EpiLabel");
             prompt.Attributes.Add("Id", "Label" + inputName);
 
+            
             StringBuilder StyleValues = new StringBuilder();
-            StyleValues.Append(GetContolStyle(_fontstyle.ToString(), _Prompttop.ToString(), _Promptleft.ToString(), null, Height.ToString()));
+            StyleValues.Append(GetContolStyle(_fontstyle.ToString(), _Prompttop.ToString(), _Promptleft.ToString(), null, Height.ToString(),_IsHidden));
             prompt.Attributes.Add("style", StyleValues.ToString());
             html.Append(prompt.ToString());
 
@@ -95,14 +97,18 @@ namespace MvcDynamicForms.Fields
             //    //select.Attributes.Add("onblur", " EventArray.push('after')");//After
             //}
 
-         
+            
 
             if (_IsRequired == true)
             {
                 select.Attributes.Add("class", "validate[required] text-input");
                 select.Attributes.Add("data-prompt-position", "topRight:10");
             }
-            select.Attributes.Add("style", "position:absolute;left:" + _left.ToString() + "px;top:" + _top.ToString() + "px" + ";width:" + _ControlWidth.ToString() + "px"  + ErrorStyle);
+            string IsHiddenStyle = "";
+            if(_IsHidden){
+                IsHiddenStyle = "display:none";
+            }
+            select.Attributes.Add("style", "position:absolute;left:" + _left.ToString() + "px;top:" + _top.ToString() + "px" + ";width:" + _ControlWidth.ToString() + "px" + ErrorStyle + ";" +IsHiddenStyle);
             select.MergeAttributes(_inputHtmlAttributes);
             html.Append(select.ToString(TagRenderMode.StartTag));
             // If readonly then add the following jquery script to make the field disabled 

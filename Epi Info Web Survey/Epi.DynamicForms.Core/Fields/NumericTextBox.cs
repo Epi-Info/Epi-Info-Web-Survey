@@ -28,7 +28,7 @@ namespace MvcDynamicForms.Fields
             StringBuilder StyleValues = new StringBuilder();
 
             //StyleValues.Append(GetContolStyle(_fontstyle.ToString(), _Prompttop.ToString(), _Promptleft.ToString(), _PromptWidth.ToString(), Height.ToString()));
-            StyleValues.Append(GetContolStyle(_fontstyle.ToString(), _Prompttop.ToString(), _Promptleft.ToString(), null, Height.ToString()));
+            StyleValues.Append(GetContolStyle(_fontstyle.ToString(), _Prompttop.ToString(), _Promptleft.ToString(), null, Height.ToString(), IsHidden));
             prompt.Attributes.Add("style", StyleValues.ToString());
             html.Append(prompt.ToString());
 
@@ -38,7 +38,11 @@ namespace MvcDynamicForms.Fields
                 //Add new Error to the error Obj
                  ErrorStyle = ";border-color: red";
             }
-
+            string IsHiddenStyle = "";
+            if (_IsHidden)
+            {
+                IsHiddenStyle = "display:none";
+            }
             // input element
             var txt = new TagBuilder("input");
             txt.Attributes.Add("name", inputName);
@@ -48,7 +52,7 @@ namespace MvcDynamicForms.Fields
             txt.Attributes.Add("value",Value);
             txt.Attributes.Add("class", GetControlClass());
             txt.Attributes.Add("data-prompt-position", "topRight:15");
-            txt.Attributes.Add("style", "position:absolute;left:" + _left.ToString() + "px;top:" + _top.ToString() + "px" + ";width:" + _ControlWidth.ToString() + "px" + ErrorStyle);
+            txt.Attributes.Add("style", "position:absolute;left:" + _left.ToString() + "px;top:" + _top.ToString() + "px" + ";width:" + _ControlWidth.ToString() + "px" + ErrorStyle + ";" + IsHiddenStyle);
             txt.MergeAttributes(_inputHtmlAttributes);
             html.Append(txt.ToString(TagRenderMode.SelfClosing));
 
