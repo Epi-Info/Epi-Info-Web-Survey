@@ -25,7 +25,7 @@ namespace MvcDynamicForms.Fields
             prompt.Attributes.Add("class", "EpiLabel");
            
             StringBuilder StyleValues = new StringBuilder();
-            StyleValues.Append(GetContolStyle(_fontstyle.ToString(), _Prompttop.ToString(), _Promptleft.ToString(), null, Height.ToString()));
+            StyleValues.Append(GetContolStyle(_fontstyle.ToString(), _Prompttop.ToString(), _Promptleft.ToString(), null, Height.ToString(),IsHidden));
             prompt.Attributes.Add("style", StyleValues.ToString());
             html.Append(prompt.ToString());
             // error label
@@ -48,7 +48,12 @@ namespace MvcDynamicForms.Fields
                 txt.Attributes.Add("class", "validate[required] text-input");
                 txt.Attributes.Add("data-prompt-position", "topRight:15");
             }
-            txt.Attributes.Add("style", "position:absolute;left:" + _left.ToString() + "px;top:" + _top.ToString() + "px" + ";width:" + _ControlWidth.ToString() + "px"+";height:"+_ControlHeight.ToString()+"px" + ErrorStyle);            
+            string IsHiddenStyle = "";
+            if (_IsHidden)
+            {
+                IsHiddenStyle = "display:none";
+            }
+            txt.Attributes.Add("style", "position:absolute;left:" + _left.ToString() + "px;top:" + _top.ToString() + "px" + ";width:" + _ControlWidth.ToString() + "px" + ";height:" + _ControlHeight.ToString() + "px" + ErrorStyle + ";" + IsHiddenStyle);            
             txt.MergeAttributes(_inputHtmlAttributes);
             html.Append(txt.ToString());
 
