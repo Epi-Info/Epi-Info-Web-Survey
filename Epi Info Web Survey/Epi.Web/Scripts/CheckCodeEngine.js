@@ -103,6 +103,26 @@ function CCE_SymbolTable()
         this._SymbolList = new Array();
 
 }
+
+function Rule_Begin_After_Statement() 
+{
+    this.Statements = null;
+}
+
+Rule_Begin_After_Statement.prototype.Execute = function ()
+{
+    return this.Statements.Execute();
+}
+
+function Rule_Hide() 
+{
+    this.IdentifierList, this.IsExceptList
+}
+
+Rule_Hide.prototype.Execute = function ()
+{
+    CCE_Hide(this.IdentifierList, this.IsExceptList)
+}
 function AddToHiddenFieldsList(FieldName)
  {
     if (document.getElementById("HiddenFieldsList").value !="") 
