@@ -31,9 +31,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		CreateDatabase.sql = CreateDatabase.sql
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epi.Web.CheckCodeEngine", "Epi.Web.CheckCodeEngine\Epi.Web.CheckCodeEngine.csproj", "{6B084882-EF4F-4CF0-85B1-1E8C357AE822}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 12
+		SccNumberOfProjects = 13
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs04
 		SccLocalPath0 = .
@@ -70,6 +72,9 @@ Global
 		SccProjectUniqueName11 = Epi.Web.Test\\Epi.Web.Test.csproj
 		SccProjectName11 = Epi.Web.Test
 		SccLocalPath11 = Epi.Web.Test
+		SccProjectUniqueName12 = Epi.Web.CheckCodeEngine\\Epi.Web.CheckCodeEngine.csproj
+		SccProjectName12 = Epi.Web.CheckCodeEngine
+		SccLocalPath12 = Epi.Web.CheckCodeEngine
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -186,6 +191,16 @@ Global
 		{6F9325C1-4172-455D-9ADC-AC88F36408F6}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{6F9325C1-4172-455D-9ADC-AC88F36408F6}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{6F9325C1-4172-455D-9ADC-AC88F36408F6}.Release|x86.ActiveCfg = Release|Any CPU
+		{6B084882-EF4F-4CF0-85B1-1E8C357AE822}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B084882-EF4F-4CF0-85B1-1E8C357AE822}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B084882-EF4F-4CF0-85B1-1E8C357AE822}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{6B084882-EF4F-4CF0-85B1-1E8C357AE822}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{6B084882-EF4F-4CF0-85B1-1E8C357AE822}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{6B084882-EF4F-4CF0-85B1-1E8C357AE822}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B084882-EF4F-4CF0-85B1-1E8C357AE822}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B084882-EF4F-4CF0-85B1-1E8C357AE822}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{6B084882-EF4F-4CF0-85B1-1E8C357AE822}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{6B084882-EF4F-4CF0-85B1-1E8C357AE822}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
