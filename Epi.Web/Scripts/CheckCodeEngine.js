@@ -66,3 +66,37 @@ function CCE_GetAssociatedControls()
 {
     // will return a list of controls associated with a field name
 }
+
+
+function CCE_Context() 
+{
+
+}
+
+function CCE_Symbol() 
+{
+      this.Name = new String();
+      this.Type = new String();
+      this.Rule = null;
+}
+
+function CCE_Symbol(pName, pType) 
+{
+      this.Name = pName;
+      this.Type = pType;
+      this.Rule = null;
+}
+
+
+
+
+
+
+
+function CCE_SymbolTable
+{
+        this._name;
+        this._parent;
+        this._SymbolList = new Array();
+
+}
