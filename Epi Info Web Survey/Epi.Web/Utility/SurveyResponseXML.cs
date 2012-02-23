@@ -76,22 +76,22 @@ namespace Epi.Web.MVC.Utility
               
               XmlDocument xml = new XmlDocument();
               XmlElement root = xml.CreateElement("SurveyResponse");
-            
-              if (AddRoot == true)
+
+              if ( CurrentPage==0)
               {
 
               root.SetAttribute("SurveyId", SurveyId);
               root.SetAttribute("LastPageVisited", "1");
+              root.SetAttribute("HiddenFieldsList","");
               xml.AppendChild(root);
               }
 
               XmlElement PageRoot = xml.CreateElement("Page");
-              PageRoot.SetAttribute("PageNumber", CurrentPage.ToString());
-              if (AddRoot == true)
+              if ( CurrentPage!=0)
               {
-                  root.AppendChild(PageRoot);
-              }
-              else {
+               
+                 
+                  PageRoot.SetAttribute("PageNumber", CurrentPage.ToString());
                   xml.AppendChild(PageRoot);
               }
 
