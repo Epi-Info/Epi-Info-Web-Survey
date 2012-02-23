@@ -75,12 +75,27 @@ namespace Epi.Web.MVC.Utility
             {
                 Xdoc.Root.Attribute("LastPageVisited").Value = PageNumber.ToString();
             }
+            ////Update Hidden Fields List before saving response XML
+            if (!string.IsNullOrEmpty(form.HiddenFieldsList))
+            {
+                if (!string.IsNullOrEmpty(Xdoc.Root.Attribute("HiddenFieldsList").Value))
+                {
+                Xdoc.Root.Attribute("HiddenFieldsList").Value += ",";
+                Xdoc.Root.Attribute("HiddenFieldsList").Value += form.HiddenFieldsList.ToString();
+                }else{
+
+                    Xdoc.Root.Attribute("HiddenFieldsList").Value = form.HiddenFieldsList.ToString();
+                }
+            }
+
+
             ////Update survey response Status
             if (IsSubmited)
             {
 
                 surveyAnswerRequest.SurveyAnswerList[0].Status = 3;
                 Xdoc.Root.Attribute("LastPageVisited").Remove();
+                Xdoc.Root.Attribute("HiddenFieldsList").Remove();
             }
             if (IsSaved)
             {
