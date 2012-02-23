@@ -93,7 +93,7 @@ function CCE_Symbol(pName, pType)
 
 
 
-function CCE_SymbolTable
+function CCE_SymbolTable()
 {
         this._name;
         this._parent;
