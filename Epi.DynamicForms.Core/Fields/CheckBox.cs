@@ -97,12 +97,17 @@ namespace MvcDynamicForms.Fields
             chk.Attributes.Add("type", "checkbox");
             if (Checked) chk.Attributes.Add("checked", "checked");
             chk.Attributes.Add("value", bool.TrueString);
+            string IsHiddenStyle = "";
+            if (_IsHidden)
+            {
+                IsHiddenStyle = "display:none";
+            }
             ////////////Check code start//////////////////
            // chk.Attributes.Add("onfocus", "EventArray.push('" + Prompt + "Befor')");//befor
             //chk.Attributes.Add("onblur", "EventArray.push('" + Prompt + "After')");//After
             ////////////Check code end//////////////////
-           
-            chk.Attributes.Add("style", "position:absolute;left:" + _left.ToString() + "px;top:" + _top.ToString() + "px" + ";width:" + _ControlWidth.ToString() + "px" + ErrorStyle);            
+
+            chk.Attributes.Add("style", "position:absolute;left:" + _left.ToString() + "px;top:" + _top.ToString() + "px" + ";width:" + _ControlWidth.ToString() + "px" + ErrorStyle + ";" + IsHiddenStyle);            
           
             chk.MergeAttributes(_inputHtmlAttributes);
             html.Append(chk.ToString(TagRenderMode.SelfClosing));
@@ -113,7 +118,7 @@ namespace MvcDynamicForms.Fields
             prompt.Attributes.Add("for", inputName);
             prompt.Attributes.Add("class", "EpiLabel");
             StringBuilder StyleValues = new StringBuilder();
-            StyleValues.Append(GetContolStyle(_fontstyle.ToString(), _Prompttop.ToString(), _Promptleft.ToString(), null, Height.ToString()));
+            StyleValues.Append(GetContolStyle(_fontstyle.ToString(), _Prompttop.ToString(), _Promptleft.ToString(), null, Height.ToString(), IsHidden));
             prompt.Attributes.Add("style", StyleValues.ToString());
             html.Append(prompt.ToString());
             if (ReadOnly)
