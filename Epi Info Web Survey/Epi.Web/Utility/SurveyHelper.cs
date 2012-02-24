@@ -46,49 +46,52 @@ namespace Epi.Web.MVC.Utility
             // 1 Get the record for the current survey response
             // 2 update the current survey response
             // 3 save the current survey response
-
-           
-            // 2 a. update the current survey answer request
-            surveyAnswerRequest.SurveyAnswerList = surveyAnswerResponse.SurveyResponseList;
-            surveyResponseXML.Add(form);
-            XDocument SavedXml = XDocument.Parse(surveyAnswerDTO.XML);
-            bool AddRoot = false;
-            if (SavedXml.Root.FirstAttribute.Value.ToString() == "0")
+            if (!IsSubmited)
             {
-                  AddRoot = true;
-            }
-            surveyAnswerRequest.SurveyAnswerList[0].XML = surveyResponseXML.CreateResponseXml(surveyInfoModel.SurveyId,AddRoot,form.CurrentPage).InnerXml;
-            // 2 b. save the current survey response
-            surveyAnswerRequest.Action = Epi.Web.MVC.Constants.Constant.UPDATE;  //"Update";
-            //Append to Response Xml
-           
-            XDocument CurrentPageResponseXml = XDocument.Parse(surveyAnswerRequest.SurveyAnswerList[0].XML);
-            if (SavedXml.Root.FirstAttribute.Value.ToString() != "0")
-            { 
-                surveyAnswerRequest.SurveyAnswerList[0].XML = MergeXml(SavedXml, CurrentPageResponseXml,form.CurrentPage).ToString(); 
-            }
 
-            ////Update page number before saving response XML
-
-            XDocument Xdoc = XDocument.Parse(surveyAnswerRequest.SurveyAnswerList[0].XML);
-            if (PageNumber != 0)
-            {
-                Xdoc.Root.Attribute("LastPageVisited").Value = PageNumber.ToString();
-            }
-            ////Update Hidden Fields List before saving response XML
-            if (!string.IsNullOrEmpty(form.HiddenFieldsList))
-            {
-                if (!string.IsNullOrEmpty(Xdoc.Root.Attribute("HiddenFieldsList").Value))
+                // 2 a. update the current survey answer request
+                surveyAnswerRequest.SurveyAnswerList = surveyAnswerResponse.SurveyResponseList;
+                surveyResponseXML.Add(form);
+                XDocument SavedXml = XDocument.Parse(surveyAnswerDTO.XML);
+                bool AddRoot = false;
+                if (SavedXml.Root.FirstAttribute.Value.ToString() == "0")
                 {
-                Xdoc.Root.Attribute("HiddenFieldsList").Value += ",";
-                Xdoc.Root.Attribute("HiddenFieldsList").Value += form.HiddenFieldsList.ToString();
-                }else{
+                    AddRoot = true;
+                }
+                surveyAnswerRequest.SurveyAnswerList[0].XML = surveyResponseXML.CreateResponseXml(surveyInfoModel.SurveyId, AddRoot, form.CurrentPage).InnerXml;
+                // 2 b. save the current survey response
+                surveyAnswerRequest.Action = Epi.Web.MVC.Constants.Constant.UPDATE;  //"Update";
+                //Append to Response Xml
 
-                    Xdoc.Root.Attribute("HiddenFieldsList").Value = form.HiddenFieldsList.ToString();
+                XDocument CurrentPageResponseXml = XDocument.Parse(surveyAnswerRequest.SurveyAnswerList[0].XML);
+                if (SavedXml.Root.FirstAttribute.Value.ToString() != "0")
+                {
+                    surveyAnswerRequest.SurveyAnswerList[0].XML = MergeXml(SavedXml, CurrentPageResponseXml, form.CurrentPage).ToString();
                 }
             }
+                ////Update page number before saving response XML
 
+                XDocument Xdoc = XDocument.Parse(surveyAnswerRequest.SurveyAnswerList[0].XML);
+                if (PageNumber != 0)
+                {
+                    Xdoc.Root.Attribute("LastPageVisited").Value = PageNumber.ToString();
+                }
+                ////Update Hidden Fields List before saving response XML
+                if (!string.IsNullOrEmpty(form.HiddenFieldsList))
+                {
+                    if (!string.IsNullOrEmpty(Xdoc.Root.Attribute("HiddenFieldsList").Value))
+                    {
+                        Xdoc.Root.Attribute("HiddenFieldsList").Value += ",";
+                        Xdoc.Root.Attribute("HiddenFieldsList").Value += form.HiddenFieldsList.ToString();
+                    }
+                    else
+                    {
 
+                        Xdoc.Root.Attribute("HiddenFieldsList").Value = form.HiddenFieldsList.ToString();
+                    }
+                }
+
+           
             ////Update survey response Status
             if (IsSubmited)
             {
