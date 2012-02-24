@@ -1,50 +1,16 @@
-﻿<Template Level="View">
-  <Project>
-    <View ViewId="6" Name="SprintForm" IsRelatedView="False" CheckCode="&#xA;&#xD;" Width="768" Height="1028" Orientation="Portrait" LabelAlign="Vertical">
-      <Page PageId="7" Name="New Page" Position="0" BackgroundId="0" ViewId="6">
-        <Field Name="SurveyTitleGoesHere" PageId="7" FieldId="58" UniqueId="784405d0-7a65-4ced-8d97-eedfabd3dd51" FieldTypeId="2" ControlAfterCheckCode="" ControlBeforeCheckCode="" PageName="New Page" PageBeforeCheckCode="" PageAfterCheckCode="" Position="0" ControlTopPositionPercentage="0.0233463035019455" ControlLeftPositionPercentage="0.21875" ControlHeightPercentage="0.0383333333333333" ControlWidthPercentage="0.69" Expr1015="Trebuchet MS" Expr1016="15.75" Expr1017="Bold" ControlScriptName="" PromptTopPositionPercentage="" PromptLeftPositionPercentage="" PromptText="Survey Title Goes Here 16 pt Bold Trebuchet MS" PromptFontFamily="" PromptFontSize="" PromptFontStyle="" ControlFontFamily="Trebuchet MS" ControlFontSize="15.75" ControlFontStyle="Bold" PromptScriptName="" ShouldRepeatLast="False" IsRequired="False" IsReadOnly="False" ShouldRetainImageSize="False" Pattern="" MaxLength="" ShowTextOnRight="False" Lower="" Upper="" RelateCondition="" ShouldReturnToParent="False" RelatedViewId="" List="" SourceTableName="" CodeColumnName="" TextColumnName="" Sort="False" IsExclusiveTable="False" TabIndex="0" HasTabStop="False" SourceFieldId="" />
-        <Field Name="SectionHeader12ptItalicVerdana" PageId="7" FieldId="59" UniqueId="2bfd23da-435e-4a31-9b61-aeed014e1248" FieldTypeId="2" ControlAfterCheckCode="" ControlBeforeCheckCode="" PageName="New Page" PageBeforeCheckCode="" PageAfterCheckCode="" Position="0" ControlTopPositionPercentage="0.0817120622568093" ControlLeftPositionPercentage="0.078125" ControlHeightPercentage="0.0398832684824903" ControlWidthPercentage="0.3125" Expr1015="Verdana" Expr1016="12" Expr1017="Bold, Italic" ControlScriptName="" PromptTopPositionPercentage="" PromptLeftPositionPercentage="" PromptText="Section Header 12 pt Bold Italic Verdana" PromptFontFamily="" PromptFontSize="" PromptFontStyle="" ControlFontFamily="Verdana" ControlFontSize="12" ControlFontStyle="Bold, Italic" PromptScriptName="" ShouldRepeatLast="False" IsRequired="False" IsReadOnly="False" ShouldRetainImageSize="False" Pattern="" MaxLength="" ShowTextOnRight="False" Lower="" Upper="" RelateCondition="" ShouldReturnToParent="False" RelatedViewId="" List="" SourceTableName="" CodeColumnName="" TextColumnName="" Sort="False" IsExclusiveTable="False" TabIndex="0" HasTabStop="False" SourceFieldId="" />
-        <Field Name="InstructionText9ptUnderlinedArial" PageId="7" FieldId="60" UniqueId="ee8ffd8a-040d-4a1a-ad0f-455ce0090405" FieldTypeId="2" ControlAfterCheckCode="" ControlBeforeCheckCode="" PageName="New Page" PageBeforeCheckCode="" PageAfterCheckCode="" Position="0" ControlTopPositionPercentage="0.1284046692607" ControlLeftPositionPercentage="0.078125" ControlHeightPercentage="0.0252918287937743" ControlWidthPercentage="0.328125" Expr1015="Arial" Expr1016="9" Expr1017="Underline" ControlScriptName="" PromptTopPositionPercentage="" PromptLeftPositionPercentage="" PromptText="Instruction Text 9 pt Underlined Arial" PromptFontFamily="" PromptFontSize="" PromptFontStyle="" ControlFontFamily="Arial" ControlFontSize="9" ControlFontStyle="Underline" PromptScriptName="" ShouldRepeatLast="False" IsRequired="False" IsReadOnly="False" ShouldRetainImageSize="False" Pattern="" MaxLength="" ShowTextOnRight="False" Lower="" Upper="" RelateCondition="" ShouldReturnToParent="False" RelatedViewId="" List="" SourceTableName="" CodeColumnName="" TextColumnName="" Sort="False" IsExclusiveTable="False" TabIndex="0" HasTabStop="False" SourceFieldId="" />
-        <Field Name="InstructionText9ptUnderlinedArial11" PageId="7" FieldId="61" UniqueId="89079a4c-b213-4fb9-815d-c51b68a23bc6" FieldTypeId="2" ControlAfterCheckCode="" ControlBeforeCheckCode="" PageName="New Page" PageBeforeCheckCode="" PageAfterCheckCode="" Position="0" ControlTopPositionPercentage="0.140077821011673" ControlLeftPositionPercentage="0.514322916666667" ControlHeightPercentage="0.0231621349446123" ControlWidthPercentage="0.28125" Expr1015="Calibri" Expr1016="9" Expr1017="Strikeout" ControlScriptName="" PromptTopPositionPercentage="" PromptLeftPositionPercentage="" PromptText="Instruction Text 9 pt Strikeout Calibri" PromptFontFamily="" PromptFontSize="" PromptFontStyle="" ControlFontFamily="Calibri" ControlFontSize="9" ControlFontStyle="Strikeout" PromptScriptName="" ShouldRepeatLast="False" IsRequired="False" IsReadOnly="False" ShouldRetainImageSize="False" Pattern="" MaxLength="" ShowTextOnRight="False" Lower="" Upper="" RelateCondition="" ShouldReturnToParent="False" RelatedViewId="" List="" SourceTableName="" CodeColumnName="" TextColumnName="" Sort="False" IsExclusiveTable="False" TabIndex="0" HasTabStop="False" SourceFieldId="" />
-        <Field Name="TB1NotRequired" PageId="7" FieldId="62" UniqueId="0eb21e47-ca0f-47ec-a9eb-5a2eac4958e4" FieldTypeId="1" ControlAfterCheckCode="" ControlBeforeCheckCode="" PageName="New Page" PageBeforeCheckCode="" PageAfterCheckCode="" Position="0" ControlTopPositionPercentage="0.178015564202335" ControlLeftPositionPercentage="0.0872395833333333" ControlHeightPercentage="0.0383333333333333" ControlWidthPercentage="0.25" Expr1015="Arial" Expr1016="10.25" Expr1017="Regular" ControlScriptName="" PromptTopPositionPercentage="0.16147859922179" PromptLeftPositionPercentage="0.0846354166666667" PromptText="TB #1: (Not Required)" PromptFontFamily="Verdana" PromptFontSize="8.25" PromptFontStyle="Regular" ControlFontFamily="Arial" ControlFontSize="10.25" ControlFontStyle="Regular" PromptScriptName="" ShouldRepeatLast="False" IsRequired="False" IsReadOnly="False" ShouldRetainImageSize="False" Pattern="" MaxLength="0" ShowTextOnRight="False" Lower="" Upper="" RelateCondition="" ShouldReturnToParent="False" RelatedViewId="" List="" SourceTableName="" CodeColumnName="" TextColumnName="" Sort="False" IsExclusiveTable="False" TabIndex="0" HasTabStop="True" SourceFieldId="" />
-        <Field Name="TB1NotRequired11" PageId="7" FieldId="63" UniqueId="76963ca8-785c-4343-bd1c-1d72a53f4d63" FieldTypeId="1" ControlAfterCheckCode="" ControlBeforeCheckCode="" PageName="New Page" PageBeforeCheckCode="" PageAfterCheckCode="" Position="0" ControlTopPositionPercentage="0.186770428015564" ControlLeftPositionPercentage="0.514322916666667" ControlHeightPercentage="0.0383333333333333" ControlWidthPercentage="0.25" Expr1015="Arial" Expr1016="10.25" Expr1017="Regular" ControlScriptName="" PromptTopPositionPercentage="0.164396887159533" PromptLeftPositionPercentage="0.514322916666667" PromptText="TB #1: (Required)" PromptFontFamily="Verdana" PromptFontSize="8.25" PromptFontStyle="Regular" ControlFontFamily="Arial" ControlFontSize="10.25" ControlFontStyle="Regular" PromptScriptName="" ShouldRepeatLast="False" IsRequired="True" IsReadOnly="False" ShouldRetainImageSize="False" Pattern="" MaxLength="0" ShowTextOnRight="False" Lower="" Upper="" RelateCondition="" ShouldReturnToParent="False" RelatedViewId="" List="" SourceTableName="" CodeColumnName="" TextColumnName="" Sort="False" IsExclusiveTable="False" TabIndex="0" HasTabStop="True" SourceFieldId="" />
-        <Field Name="TB2NotRequiredMax10" PageId="7" FieldId="64" UniqueId="7b6a9ca7-31a9-4cf0-9ffe-6206fb6feb3c" FieldTypeId="1" ControlAfterCheckCode="" ControlBeforeCheckCode="" PageName="New Page" PageBeforeCheckCode="" PageAfterCheckCode="" Position="0" ControlTopPositionPercentage="0.248054474708171" ControlLeftPositionPercentage="0.0872395833333333" ControlHeightPercentage="0.0383333333333333" ControlWidthPercentage="0.11" Expr1015="Arial" Expr1016="10.25" Expr1017="Regular" ControlScriptName="" PromptTopPositionPercentage="0.224708171206226" PromptLeftPositionPercentage="0.0872395833333333" PromptText="TB #2: (Not Required Max 10)" PromptFontFamily="Verdana" PromptFontSize="8.25" PromptFontStyle="Regular" ControlFontFamily="Arial" ControlFontSize="10.25" ControlFontStyle="Regular" PromptScriptName="" ShouldRepeatLast="False" IsRequired="False" IsReadOnly="False" ShouldRetainImageSize="False" Pattern="" MaxLength="0" ShowTextOnRight="False" Lower="" Upper="" RelateCondition="" ShouldReturnToParent="False" RelatedViewId="" List="" SourceTableName="" CodeColumnName="" TextColumnName="" Sort="False" IsExclusiveTable="False" TabIndex="1" HasTabStop="True" SourceFieldId="" />
-        <Field Name="TB2NotRequiredMax1011" PageId="7" FieldId="65" UniqueId="dab06bef-8cf9-45fb-90af-a8e8a6e24cd6" FieldTypeId="1" ControlAfterCheckCode="" ControlBeforeCheckCode="" PageName="New Page" PageBeforeCheckCode="" PageAfterCheckCode="" Position="0" ControlTopPositionPercentage="0.256809338521401" ControlLeftPositionPercentage="0.514322916666667" ControlHeightPercentage="0.0383333333333333" ControlWidthPercentage="0.11" Expr1015="Arial" Expr1016="10.25" Expr1017="Regular" ControlScriptName="" PromptTopPositionPercentage="0.23443579766537" PromptLeftPositionPercentage="0.514322916666667" PromptText="TB #2: (Required Max 10)" PromptFontFamily="Verdana" PromptFontSize="8.25" PromptFontStyle="Regular" ControlFontFamily="Arial" ControlFontSize="10.25" ControlFontStyle="Regular" PromptScriptName="" ShouldRepeatLast="False" IsRequired="True" IsReadOnly="False" ShouldRetainImageSize="False" Pattern="" MaxLength="0" ShowTextOnRight="False" Lower="" Upper="" RelateCondition="" ShouldReturnToParent="False" RelatedViewId="" List="" SourceTableName="" CodeColumnName="" TextColumnName="" Sort="False" IsExclusiveTable="False" TabIndex="1" HasTabStop="True" SourceFieldId="" />
-        <Field Name="ML1NotRequired11" PageId="7" FieldId="66" UniqueId="fdd4e3a7-81b0-481a-bdd8-621e9fb9cb6f" FieldTypeId="4" ControlAfterCheckCode="" ControlBeforeCheckCode="" PageName="New Page" PageBeforeCheckCode="" PageAfterCheckCode="" Position="0" ControlTopPositionPercentage="0.308365758754864" ControlLeftPositionPercentage="0.515625" ControlHeightPercentage="0.108333333333333" ControlWidthPercentage="0.3" Expr1015="Arial" Expr1016="10.25" Expr1017="Regular" ControlScriptName="" PromptTopPositionPercentage="0.285992217898833" PromptLeftPositionPercentage="0.515625" PromptText="ML #1: (Required)" PromptFontFamily="Verdana" PromptFontSize="8.25" PromptFontStyle="Regular" ControlFontFamily="Arial" ControlFontSize="10.25" ControlFontStyle="Regular" PromptScriptName="" ShouldRepeatLast="False" IsRequired="True" IsReadOnly="False" ShouldRetainImageSize="False" Pattern="" MaxLength="0" ShowTextOnRight="False" Lower="" Upper="" RelateCondition="" ShouldReturnToParent="False" RelatedViewId="" List="" SourceTableName="" CodeColumnName="" TextColumnName="" Sort="False" IsExclusiveTable="False" TabIndex="2" HasTabStop="True" SourceFieldId="" />
-        <Field Name="ML1NotRequired" PageId="7" FieldId="67" UniqueId="c5978dd8-f1f6-4c43-a592-f5afcaa8c196" FieldTypeId="4" ControlAfterCheckCode="" ControlBeforeCheckCode="" PageName="New Page" PageBeforeCheckCode="" PageAfterCheckCode="" Position="0" ControlTopPositionPercentage="0.312256809338521" ControlLeftPositionPercentage="0.08984375" ControlHeightPercentage="0.108333333333333" ControlWidthPercentage="0.3" Expr1015="Arial" Expr1016="10.25" Expr1017="Regular" ControlScriptName="" PromptTopPositionPercentage="0.288910505836576" PromptLeftPositionPercentage="0.08984375" PromptText="ML #1: (Not Required)" PromptFontFamily="Verdana" PromptFontSize="8.25" PromptFontStyle="Regular" ControlFontFamily="Arial" ControlFontSize="10.25" ControlFontStyle="Regular" PromptScriptName="" ShouldRepeatLast="False" IsRequired="False" IsReadOnly="False" ShouldRetainImageSize="False" Pattern="" MaxLength="0" ShowTextOnRight="False" Lower="" Upper="" RelateCondition="" ShouldReturnToParent="False" RelatedViewId="" List="" SourceTableName="" CodeColumnName="" TextColumnName="" Sort="False" IsExclusiveTable="False" TabIndex="2" HasTabStop="True" SourceFieldId="" />
-        <Field Name="Num1NotRequired11" PageId="7" FieldId="68" UniqueId="87d7aeba-7b07-4e05-ba55-0f53ff2f9ea0" FieldTypeId="5" ControlAfterCheckCode="" ControlBeforeCheckCode="" PageName="New Page" PageBeforeCheckCode="" PageAfterCheckCode="" Position="0" ControlTopPositionPercentage="0.46011673151751" ControlLeftPositionPercentage="0.515625" ControlHeightPercentage="0.0383333333333333" ControlWidthPercentage="0.25" Expr1015="Arial" Expr1016="10.25" Expr1017="Regular" ControlScriptName="" PromptTopPositionPercentage="0.437743190661479" PromptLeftPositionPercentage="0.515625" PromptText="Num #1: (Required)" PromptFontFamily="Verdana" PromptFontSize="8.25" PromptFontStyle="Regular" ControlFontFamily="Arial" ControlFontSize="10.25" ControlFontStyle="Regular" PromptScriptName="" ShouldRepeatLast="False" IsRequired="True" IsReadOnly="False" ShouldRetainImageSize="False" Pattern="" MaxLength="" ShowTextOnRight="False" Lower="" Upper="" RelateCondition="" ShouldReturnToParent="False" RelatedViewId="" List="" SourceTableName="" CodeColumnName="" TextColumnName="" Sort="False" IsExclusiveTable="False" TabIndex="3" HasTabStop="True" SourceFieldId="" />
-        <Field Name="Num1NotRequired" PageId="7" FieldId="69" UniqueId="2b8d10d6-1904-4654-8006-c4c96a36ab10" FieldTypeId="5" ControlAfterCheckCode="" ControlBeforeCheckCode="" PageName="New Page" PageBeforeCheckCode="" PageAfterCheckCode="" Position="0" ControlTopPositionPercentage="0.464007782101167" ControlLeftPositionPercentage="0.08984375" ControlHeightPercentage="0.0383333333333333" ControlWidthPercentage="0.25" Expr1015="Arial" Expr1016="10.25" Expr1017="Regular" ControlScriptName="" PromptTopPositionPercentage="0.440661478599222" PromptLeftPositionPercentage="0.08984375" PromptText="Num #1: (Not Required)" PromptFontFamily="Verdana" PromptFontSize="8.25" PromptFontStyle="Regular" ControlFontFamily="Arial" ControlFontSize="10.25" ControlFontStyle="Regular" PromptScriptName="" ShouldRepeatLast="False" IsRequired="False" IsReadOnly="False" ShouldRetainImageSize="False" Pattern="" MaxLength="" ShowTextOnRight="False" Lower="" Upper="" RelateCondition="" ShouldReturnToParent="False" RelatedViewId="" List="" SourceTableName="" CodeColumnName="" TextColumnName="" Sort="False" IsExclusiveTable="False" TabIndex="3" HasTabStop="True" SourceFieldId="" />
-        <Field Name="Num3NotReqd22" PageId="7" FieldId="85" UniqueId="88cac439-e227-4328-98de-ad6ef93a2c0d" FieldTypeId="5" ControlAfterCheckCode="" ControlBeforeCheckCode="" PageName="New Page" PageBeforeCheckCode="" PageAfterCheckCode="" Position="0" ControlTopPositionPercentage="0.525291828793774" ControlLeftPositionPercentage="0.0885416666666667" ControlHeightPercentage="0.0383333333333333" ControlWidthPercentage="0.0677083333333333" Expr1015="Arial" Expr1016="10.25" Expr1017="Regular" ControlScriptName="" PromptTopPositionPercentage="0.502918287937743" PromptLeftPositionPercentage="0.0885416666666667" PromptText="Num #8: (Not Reqd, ##.###)" PromptFontFamily="Verdana" PromptFontSize="8.25" PromptFontStyle="Regular" ControlFontFamily="Arial" ControlFontSize="10.25" ControlFontStyle="Regular" PromptScriptName="" ShouldRepeatLast="False" IsRequired="False" IsReadOnly="False" ShouldRetainImageSize="False" Pattern="##.###" MaxLength="" ShowTextOnRight="False" Lower="" Upper="" RelateCondition="" ShouldReturnToParent="False" RelatedViewId="" List="" SourceTableName="" CodeColumnName="" TextColumnName="" Sort="False" IsExclusiveTable="False" TabIndex="5" HasTabStop="True" SourceFieldId="" />
-        <Field Name="DateField" PageId="7" FieldId="86" UniqueId="a7fdfe35-0bea-44fb-b584-b06173c0bad9" FieldTypeId="7" ControlAfterCheckCode="" ControlBeforeCheckCode="" PageName="New Page" PageBeforeCheckCode="" PageAfterCheckCode="" Position="0" ControlTopPositionPercentage="0.516536964980545" ControlLeftPositionPercentage="0.515625" ControlHeightPercentage="0.0223735408560311" ControlWidthPercentage="0.125" Expr1015="Arial" Expr1016="10.25" Expr1017="Regular" ControlScriptName="" PromptTopPositionPercentage="0.499027237354086" PromptLeftPositionPercentage="0.515625" PromptText="DateField" PromptFontFamily="Verdana" PromptFontSize="8.25" PromptFontStyle="Regular" ControlFontFamily="Arial" ControlFontSize="10.25" ControlFontStyle="Regular" PromptScriptName="" ShouldRepeatLast="False" IsRequired="False" IsReadOnly="False" ShouldRetainImageSize="False" Pattern="MM-DD-YYYY" MaxLength="" ShowTextOnRight="False" Lower="01-12-2012" Upper="06-01-2012" RelateCondition="" ShouldReturnToParent="False" RelatedViewId="" List="" SourceTableName="" CodeColumnName="" TextColumnName="" Sort="False" IsExclusiveTable="False" TabIndex="6" HasTabStop="True" SourceFieldId="" />
-        <Field Name="SectionHeader10ptBoldTimesNewRoman1" PageId="7" FieldId="84" UniqueId="e9648760-4523-4f5a-88c8-83c0e8f32f67" FieldTypeId="2" ControlAfterCheckCode="" ControlBeforeCheckCode="" PageName="New Page" PageBeforeCheckCode="" PageAfterCheckCode="" Position="0" ControlTopPositionPercentage="0.105058365758755" ControlLeftPositionPercentage="0.514322916666667" ControlHeightPercentage="0.0281973816717019" ControlWidthPercentage="0.359375" Expr1015="Times New Roman" Expr1016="9.75" Expr1017="Bold" ControlScriptName="" PromptTopPositionPercentage="" PromptLeftPositionPercentage="" PromptText="Section Header 10 pt Bold Times New Roman" PromptFontFamily="" PromptFontSize="" PromptFontStyle="" ControlFontFamily="Times New Roman" ControlFontSize="9.75" ControlFontStyle="Bold" PromptScriptName="" ShouldRepeatLast="False" IsRequired="False" IsReadOnly="False" ShouldRetainImageSize="False" Pattern="" MaxLength="" ShowTextOnRight="False" Lower="" Upper="" RelateCondition="" ShouldReturnToParent="False" RelatedViewId="" List="" SourceTableName="" CodeColumnName="" TextColumnName="" Sort="False" IsExclusiveTable="False" TabIndex="7" HasTabStop="False" SourceFieldId="" />
-        <Field Name="LettuceCheckbox" PageId="7" FieldId="87" UniqueId="bf8745c8-5ad7-47da-8484-4920b8f64cff" FieldTypeId="10" ControlAfterCheckCode="" ControlBeforeCheckCode="" PageName="New Page" PageBeforeCheckCode="" PageAfterCheckCode="" Position="0" ControlTopPositionPercentage="0.592412451361868" ControlLeftPositionPercentage="0.649739583333333" ControlHeightPercentage="0.0233463035019455" ControlWidthPercentage="0.260416666666667" Expr1015="Microsoft Sans Serif" Expr1016="8.5" Expr1017="Regular" ControlScriptName="" PromptTopPositionPercentage="" PromptLeftPositionPercentage="" PromptText="Lettuce" PromptFontFamily="Verdana" PromptFontSize="8.25" PromptFontStyle="Regular" ControlFontFamily="Microsoft Sans Serif" ControlFontSize="8.5" ControlFontStyle="Regular" PromptScriptName="" ShouldRepeatLast="False" IsRequired="False" IsReadOnly="False" ShouldRetainImageSize="False" Pattern="" MaxLength="" ShowTextOnRight="False" Lower="" Upper="" RelateCondition="" ShouldReturnToParent="False" RelatedViewId="" List="" SourceTableName="" CodeColumnName="" TextColumnName="" Sort="False" IsExclusiveTable="False" TabIndex="7" HasTabStop="True" SourceFieldId="" />
-        <Field Name="TomatoCheckBox" PageId="7" FieldId="88" UniqueId="2dc9df89-7725-42f6-b46c-2b5fc6a5ff18" FieldTypeId="10" ControlAfterCheckCode="" ControlBeforeCheckCode="" PageName="New Page" PageBeforeCheckCode="" PageAfterCheckCode="" Position="0" ControlTopPositionPercentage="0.618677042801556" ControlLeftPositionPercentage="0.649739583333333" ControlHeightPercentage="0.0233463035019455" ControlWidthPercentage="0.260416666666667" Expr1015="Microsoft Sans Serif" Expr1016="8.5" Expr1017="Regular" ControlScriptName="" PromptTopPositionPercentage="" PromptLeftPositionPercentage="" PromptText="Tomato" PromptFontFamily="Verdana" PromptFontSize="8.25" PromptFontStyle="Regular" ControlFontFamily="Microsoft Sans Serif" ControlFontSize="8.5" ControlFontStyle="Regular" PromptScriptName="" ShouldRepeatLast="False" IsRequired="False" IsReadOnly="False" ShouldRetainImageSize="False" Pattern="" MaxLength="" ShowTextOnRight="False" Lower="" Upper="" RelateCondition="" ShouldReturnToParent="False" RelatedViewId="" List="" SourceTableName="" CodeColumnName="" TextColumnName="" Sort="False" IsExclusiveTable="False" TabIndex="8" HasTabStop="True" SourceFieldId="" />
-        <Field Name="MustardCheckBox" PageId="7" FieldId="89" UniqueId="74d0a4f4-9b10-44f4-a726-821521332a08" FieldTypeId="10" ControlAfterCheckCode="" ControlBeforeCheckCode="" PageName="New Page" PageBeforeCheckCode="" PageAfterCheckCode="" Position="0" ControlTopPositionPercentage="0.644941634241245" ControlLeftPositionPercentage="0.649739583333333" ControlHeightPercentage="0.0233463035019455" ControlWidthPercentage="0.260416666666667" Expr1015="Microsoft Sans Serif" Expr1016="8.5" Expr1017="Regular" ControlScriptName="" PromptTopPositionPercentage="" PromptLeftPositionPercentage="" PromptText="Mustard" PromptFontFamily="Verdana" PromptFontSize="8.25" PromptFontStyle="Regular" ControlFontFamily="Microsoft Sans Serif" ControlFontSize="8.5" ControlFontStyle="Regular" PromptScriptName="" ShouldRepeatLast="False" IsRequired="False" IsReadOnly="False" ShouldRetainImageSize="False" Pattern="" MaxLength="" ShowTextOnRight="False" Lower="" Upper="" RelateCondition="" ShouldReturnToParent="False" RelatedViewId="" List="" SourceTableName="" CodeColumnName="" TextColumnName="" Sort="False" IsExclusiveTable="False" TabIndex="9" HasTabStop="True" SourceFieldId="" />
-        <Field Name="AdditionalSupplies" PageId="7" FieldId="90" UniqueId="e577f194-746f-45d0-bfdd-0fa3111ff3d7" FieldTypeId="2" ControlAfterCheckCode="" ControlBeforeCheckCode="" PageName="New Page" PageBeforeCheckCode="" PageAfterCheckCode="" Position="0" ControlTopPositionPercentage="0.570038910505837" ControlLeftPositionPercentage="0.571614583333333" ControlHeightPercentage="0.0126459143968872" ControlWidthPercentage="0.15625" Expr1015="Verdana" Expr1016="8.25" Expr1017="Regular" ControlScriptName="" PromptTopPositionPercentage="" PromptLeftPositionPercentage="" PromptText="Additional Supplies:" PromptFontFamily="" PromptFontSize="" PromptFontStyle="" ControlFontFamily="Verdana" ControlFontSize="8.25" ControlFontStyle="Regular" PromptScriptName="" ShouldRepeatLast="False" IsRequired="False" IsReadOnly="False" ShouldRetainImageSize="False" Pattern="" MaxLength="" ShowTextOnRight="False" Lower="" Upper="" RelateCondition="" ShouldReturnToParent="False" RelatedViewId="" List="" SourceTableName="" CodeColumnName="" TextColumnName="" Sort="False" IsExclusiveTable="False" TabIndex="10" HasTabStop="False" SourceFieldId="" />
-        <Field Name="CityDropDown" PageId="7" FieldId="91" UniqueId="3ca29f75-076a-4de8-bfc8-cc69014c0bb1" FieldTypeId="17" ControlAfterCheckCode="" ControlBeforeCheckCode="" PageName="New Page" PageBeforeCheckCode="" PageAfterCheckCode="" Position="0" ControlTopPositionPercentage="0.577821011673152" ControlLeftPositionPercentage="0.09375" ControlHeightPercentage="0.0204280155642023" ControlWidthPercentage="0.260416666666667" Expr1015="Arial" Expr1016="10.25" Expr1017="Regular" ControlScriptName="" PromptTopPositionPercentage="0.560311284046693" PromptLeftPositionPercentage="0.09375" PromptText="City" PromptFontFamily="Verdana" PromptFontSize="8.25" PromptFontStyle="Regular" ControlFontFamily="Arial" ControlFontSize="10.25" ControlFontStyle="Regular" PromptScriptName="" ShouldRepeatLast="False" IsRequired="False" IsReadOnly="False" ShouldRetainImageSize="False" Pattern="" MaxLength="" ShowTextOnRight="False" Lower="" Upper="" RelateCondition="" ShouldReturnToParent="False" RelatedViewId="" List="" SourceTableName="codecitydropdown" CodeColumnName="CityDropDown" TextColumnName="CityDropDown" Sort="True" IsExclusiveTable="False" TabIndex="10" HasTabStop="True" SourceFieldId="" />
-        <Field Name="sports" Position="0" PageId="1" SourceFieldId="" HasTabStop="True" TabIndex="0" IsExclusiveTable="False" Sort="False" TextColumnName="" CodeColumnName="" SourceTableName="" List="" RelatedViewId="" ShouldReturnToParent="False" RelateCondition="" Upper="" Lower="" ShowTextOnRight="False" MaxLength="" Pattern="" ShouldRetainImageSize="False" IsReadOnly="False" IsRequired="False" ShouldRepeatLast="False" PromptScriptName="" ControlFontStyle="Bold" ControlFontSize="9" ControlFontFamily="Verdana" PromptFontStyle="" PromptFontSize="" PromptFontFamily="" PromptText="sports" PromptLeftPositionPercentage="" PromptTopPositionPercentage="" ControlScriptName="" Expr1017="Bold" Expr1016="9" Expr1015="Verdana" ControlWidthPercentage="0.609375" ControlHeightPercentage="0.257782101167315" ControlLeftPositionPercentage="0.12890625" ControlTopPositionPercentage="0.131322957198444" PageAfterCheckCode="" PageBeforeCheckCode="" PageName="Page 1" ControlBeforeCheckCode="" ControlAfterCheckCode="" FieldTypeId="21" UniqueId="40a6e987-a6b2-4444-a4a8-f3a8d5fb862d" FieldId="4"/>
-      </Page>
-    </View>
-  </Project>
-  <SourceTable TableName="codecitydropdown">
-    <Item citydropdown="Atlanta" />
-    <Item citydropdown="Charlotte" />
-    <Item citydropdown="New York" />
-    <Item citydropdown="Columbia" />
-    <Item citydropdown="Los Angeles" />
-  </SourceTable>
-</Template>
-<SurveyResponse SurveyId="ba92989c-4ee2-4fd5-8d32-62715994baec">
+﻿<SurveyResponse SurveyId="57c5617d-c6b6-4daf-9319-45e4dad7c4d4">
   <Page PageNumber="1">
-    <ResponseDetail QuestionName="CaseID">45435</ResponseDetail>
+    <ResponseDetail QuestionName="CaseID">123</ResponseDetail>
     <ResponseDetail QuestionName="DateofInterview" />
+    <ResponseDetail QuestionName="DiagnosticStatus">1-HIV Infection (not AIDS)</ResponseDetail>
+    <ResponseDetail QuestionName="Tested" />
     <ResponseDetail QuestionName="DemographicInformation" />
-    <ResponseDetail QuestionName="FirstName">ghhtry</ResponseDetail>
-    <ResponseDetail QuestionName="LastName">tytr</ResponseDetail>
-    <ResponseDetail QuestionName="Sex">M-Male</ResponseDetail>
+    <ResponseDetail QuestionName="FirstName" />
+    <ResponseDetail QuestionName="LastName" />
+    <ResponseDetail QuestionName="Sex">A-Ambiguous</ResponseDetail>
     <ResponseDetail QuestionName="DOB" />
     <ResponseDetail QuestionName="Age" />
-    <ResponseDetail QuestionName="EthnicityGroup" />
+    <ResponseDetail QuestionName="EthnicityGroup">2135:2-Hispanic or Latino</ResponseDetail>
     <ResponseDetail QuestionName="White">No</ResponseDetail>
     <ResponseDetail QuestionName="NativeHawaiianOtherPacificIslander">No</ResponseDetail>
     <ResponseDetail QuestionName="UnknownOther">No</ResponseDetail>
@@ -52,94 +18,53 @@
     <ResponseDetail QuestionName="AmericanIndianAlaskanNative">No</ResponseDetail>
     <ResponseDetail QuestionName="Asian">No</ResponseDetail>
     <ResponseDetail QuestionName="Multiracial">No</ResponseDetail>
-    <ResponseDetail QuestionName="PatientAddress">trytry</ResponseDetail>
-    <ResponseDetail QuestionName="State">56</ResponseDetail>
+    <ResponseDetail QuestionName="PatientAddress" />
+    <ResponseDetail QuestionName="City" />
+    <ResponseDetail QuestionName="State" />
+    <ResponseDetail QuestionName="Zip" />
     <ResponseDetail QuestionName="Latitude" />
     <ResponseDetail QuestionName="Longitude" />
-    <ResponseDetail QuestionName="Occupation" />
+    <ResponseDetail QuestionName="Occupation">and GED Teachers and Instructors [25-3011</ResponseDetail>
     <ResponseDetail QuestionName="EmailAddress" />
-    <ResponseDetail QuestionName="Symptoms" />
-    <ResponseDetail QuestionName="ILL">1</ResponseDetail>
-    <ResponseDetail QuestionName="OnsetDate" />
-    <ResponseDetail QuestionName="SymptomDuration" />
-    <ResponseDetail QuestionName="Headache">No</ResponseDetail>
-    <ResponseDetail QuestionName="Fever">No</ResponseDetail>
-    <ResponseDetail QuestionName="Vomiting">No</ResponseDetail>
-    <ResponseDetail QuestionName="BloodyDiarrhea">No</ResponseDetail>
-    <ResponseDetail QuestionName="NonBloodyDiarrhea">No</ResponseDetail>
-    <ResponseDetail QuestionName="PoorFeeding">Yes</ResponseDetail>
-    <ResponseDetail QuestionName="Chills">No</ResponseDetail>
-    <ResponseDetail QuestionName="Irritable">No</ResponseDetail>
-    <ResponseDetail QuestionName="Nausea">No</ResponseDetail>
-    <ResponseDetail QuestionName="Abdominalcramps">No</ResponseDetail>
-    <ResponseDetail QuestionName="FeverTemp" />
-    <ResponseDetail QuestionName="LooseStoolsPerDay" />
-    <ResponseDetail QuestionName="DoctorVisit">0</ResponseDetail>
-    <ResponseDetail QuestionName="DoctorVisitDate" />
-    <ResponseDetail QuestionName="Hospitalized" />
-    <ResponseDetail QuestionName="HospitalAdmissionDate" />
-    <ResponseDetail QuestionName="Antibiotics" />
-    <ResponseDetail QuestionName="Died" />
-    <ResponseDetail QuestionName="DateOfDeath" />
-  </Page>
-  <Page PageNumber="3">
-    <ResponseDetail QuestionName="MedicalCareFacility" />
-    <ResponseDetail QuestionName="ClinicHospitalName">56ghtr</ResponseDetail>
-    <ResponseDetail QuestionName="Hasthepersonbeendiagnosedwith" />
-    <ResponseDetail QuestionName="Cognitivedysfunction" />
-    <ResponseDetail QuestionName="Seizuredisorder" />
-    <ResponseDetail QuestionName="Dateofvisit">02/06/2012</ResponseDetail>
-    <ResponseDetail QuestionName="Neuromusculardisorder" />
-    <ResponseDetail QuestionName="PatientorMedicalRecord" />
-    <ResponseDetail QuestionName="GuillainBarreSyndrome" />
-    <ResponseDetail QuestionName="Admitted" />
-    <ResponseDetail QuestionName="Chroniclungdisease" />
-    <ResponseDetail QuestionName="Wasthepatienttransferred" />
-    <ResponseDetail QuestionName="Chronicmetabolicdisordersincludingdiabetesmellitus" />
-    <ResponseDetail QuestionName="Admissiondate" />
-    <ResponseDetail QuestionName="Chroniccardiovasculardiseaseexcludinghypertension" />
-    <ResponseDetail QuestionName="Dischargedate" />
-    <ResponseDetail QuestionName="Cancerdiagnosedi" />
-    <ResponseDetail QuestionName="TreatingPhysicianName" />
-    <ResponseDetail QuestionName="Immunosuppresiveconditionincl" />
-    <ResponseDetail QuestionName="Pregnantcurrentlyorwithin10daysofhospitalization" />
-    <ResponseDetail QuestionName="Renaldisease" />
-    <ResponseDetail QuestionName="Hemoglobinopathyincludingsicklecelldisease" />
-    <ResponseDetail QuestionName="Otherconditionspecify">rghyut</ResponseDetail>
-    <ResponseDetail QuestionName="Otherconditionspecify3">ryjuty</ResponseDetail>
-    <ResponseDetail QuestionName="Otherconditionspecify1">tyuty</ResponseDetail>
+    <ResponseDetail QuestionName="FacilityofDiagnosos" />
+    <ResponseDetail QuestionName="FacilityName" />
+    <ResponseDetail QuestionName="FacilityCity" />
+    <ResponseDetail QuestionName="StateCountry" />
+    <ResponseDetail QuestionName="FacilitySetting" />
+    <ResponseDetail QuestionName="FacilityType" />
+    <ResponseDetail QuestionName="PatientHistory" />
+    <ResponseDetail QuestionName="SexWithMale" />
+    <ResponseDetail QuestionName="SexWithFemale" />
+    <ResponseDetail QuestionName="InjectedDrugs" />
+    <ResponseDetail QuestionName="SexWithDrugUser" />
+    <ResponseDetail QuestionName="SexWithBisexualMale" />
+    <ResponseDetail QuestionName="SexWithTransfusionRecipient" />
+    <ResponseDetail QuestionName="SexWithTransplantRecipient" />
+    <ResponseDetail QuestionName="SexWithPersonHIVAIDS" />
   </Page>
   <Page PageNumber="2">
-    <ResponseDetail QuestionName="FoodsEaten" />
-    <ResponseDetail QuestionName="Freshcelery">No</ResponseDetail>
-    <ResponseDetail QuestionName="Grapes">No</ResponseDetail>
-    <ResponseDetail QuestionName="Blueberries">Yes</ResponseDetail>
-    <ResponseDetail QuestionName="Breastmilk">No</ResponseDetail>
-    <ResponseDetail QuestionName="Skimmilk">No</ResponseDetail>
-    <ResponseDetail QuestionName="Cheddarcheese">No</ResponseDetail>
-    <ResponseDetail QuestionName="Peaches">No</ResponseDetail>
-    <ResponseDetail QuestionName="Americancheese">No</ResponseDetail>
-    <ResponseDetail QuestionName="Strawberries">No</ResponseDetail>
-    <ResponseDetail QuestionName="Orangejuice">No</ResponseDetail>
-    <ResponseDetail QuestionName="Applejuice">Yes</ResponseDetail>
-    <ResponseDetail QuestionName="Freshtomatoes">No</ResponseDetail>
-    <ResponseDetail QuestionName="Beefjerkey">No</ResponseDetail>
-    <ResponseDetail QuestionName="Sourcream">No</ResponseDetail>
-    <ResponseDetail QuestionName="Viennasausages">No</ResponseDetail>
-    <ResponseDetail QuestionName="N2milk">No</ResponseDetail>
-    <ResponseDetail QuestionName="Icecream">No</ResponseDetail>
-    <ResponseDetail QuestionName="Turkey">No</ResponseDetail>
-    <ResponseDetail QuestionName="Wholemilk">No</ResponseDetail>
-    <ResponseDetail QuestionName="Rawcarrots">No</ResponseDetail>
-    <ResponseDetail QuestionName="Beansprouts">No</ResponseDetail>
-    <ResponseDetail QuestionName="Butter">No</ResponseDetail>
-    <ResponseDetail QuestionName="Cookedbacon">No</ResponseDetail>
-    <ResponseDetail QuestionName="BuyLastTenDays">fdg reytrhy trytr tryutryu trytr trytry tytry tytry dgterter</ResponseDetail>
-    <ResponseDetail QuestionName="LabTestingandResults" />
-    <ResponseDetail QuestionName="StoolSubmitted" />
-    <ResponseDetail QuestionName="StoolCollectionDate">02/13/2012</ResponseDetail>
-    <ResponseDetail QuestionName="O157H7isolated" />
-    <ResponseDetail QuestionName="Lab">gfhdrgh</ResponseDetail>
-    <ResponseDetail QuestionName="LabResults">ehytryuru</ResponseDetail>
+    <ResponseDetail QuestionName="LaboratoryData" />
+    <ResponseDetail QuestionName="HIV1EIA" />
+    <ResponseDetail QuestionName="HIV1HIV2combinationEIA" />
+    <ResponseDetail QuestionName="HIV1WesternblotIFA" />
+    <ResponseDetail QuestionName="Culture">No</ResponseDetail>
+    <ResponseDetail QuestionName="Antigen">No</ResponseDetail>
+    <ResponseDetail QuestionName="PCRDNAorRNAprobe">No</ResponseDetail>
+    <ResponseDetail QuestionName="ViralLoadTestType" />
+    <ResponseDetail QuestionName="ViralLoad">12</ResponseDetail>
+    <ResponseDetail QuestionName="Test1Month">12</ResponseDetail>
+    <ResponseDetail QuestionName="Test2Month" />
+    <ResponseDetail QuestionName="Test3Month" />
+    <ResponseDetail QuestionName="ViralLoadTestMonth" />
+    <ResponseDetail QuestionName="Test1Year" />
+    <ResponseDetail QuestionName="Test2Year" />
+    <ResponseDetail QuestionName="Test3Year" />
+    <ResponseDetail QuestionName="ViralLoadTestYear" />
+    <ResponseDetail QuestionName="CD4countCur" />
+    <ResponseDetail QuestionName="CD4countFirst" />
+    <ResponseDetail QuestionName="CD4percentCur" />
+    <ResponseDetail QuestionName="CD4percentFirst" />
+    <ResponseDetail QuestionName="CommentLegal" />
+    <ResponseDetail QuestionName="LegalValues" />
   </Page>
 </SurveyResponse>
