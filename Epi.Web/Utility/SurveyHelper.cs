@@ -32,7 +32,7 @@ namespace Epi.Web.MVC.Utility
             surveyAnswerDTO.DateCompleted = DateTime.Now;
             surveyAnswerDTO.SurveyId = surveyId;
             surveyAnswerDTO.Status = (int)Constant.Status.InProgress;
-            surveyAnswerDTO.XML = surveyResponseXML.CreateResponseXml(surveyId, AddRoot,0).InnerXml;
+            surveyAnswerDTO.XML = surveyResponseXML.CreateResponseXml(surveyId, AddRoot,0,"").InnerXml;
             surveyAnswerRequest.SurveyAnswerList.Add(surveyAnswerDTO);
             surveyAnswerRequest.Action = Epi.Web.MVC.Constants.Constant.CREATE;  //"Create";
             iSurveyAnswerRepository.SaveSurveyAnswer(surveyAnswerRequest);
@@ -58,7 +58,7 @@ namespace Epi.Web.MVC.Utility
                 {
                     AddRoot = true;
                 }
-                surveyAnswerRequest.SurveyAnswerList[0].XML = surveyResponseXML.CreateResponseXml(surveyInfoModel.SurveyId, AddRoot, form.CurrentPage).InnerXml;
+                surveyAnswerRequest.SurveyAnswerList[0].XML = surveyResponseXML.CreateResponseXml(surveyInfoModel.SurveyId, AddRoot, form.CurrentPage,form.PagesId).InnerXml;
                 // 2 b. save the current survey response
                 surveyAnswerRequest.Action = Epi.Web.MVC.Constants.Constant.UPDATE;  //"Update";
                 //Append to Response Xml
@@ -99,6 +99,7 @@ namespace Epi.Web.MVC.Utility
                 surveyAnswerRequest.SurveyAnswerList[0].Status = 3;
                 Xdoc.Root.Attribute("LastPageVisited").Remove();
                 Xdoc.Root.Attribute("HiddenFieldsList").Remove();
+                RemovePageNumAtt(Xdoc);
             }
             if (IsSaved)
             {
@@ -111,6 +112,20 @@ namespace Epi.Web.MVC.Utility
            
 
            
+        }
+
+        private static void RemovePageNumAtt(XDocument Xdoc)
+        {
+            var _Pages = from _Page in Xdoc.Descendants("Page") select _Page;
+
+           foreach (var _Page in _Pages) 
+            {
+
+                _Page.Attribute("PageNumber").Remove();
+            }
+
+
+             
         }
 
 
