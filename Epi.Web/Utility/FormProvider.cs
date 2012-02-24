@@ -7,6 +7,7 @@ using System.Web;
 using MvcDynamicForms;
 using System.Collections.Generic;
 using System;
+using System.Xml.XPath;
 namespace Epi.Web.MVC.Utility
 {
     public static class FormProvider
@@ -60,7 +61,7 @@ namespace Epi.Web.MVC.Utility
                 double _Width, _Height;
                 _Width = GetWidth(xdoc);
                 _Height= GetHeight(xdoc);
-
+                form.PagesId = GetPageId(XML,PageNumber );
                 form.Width = _Width;
                 form.Height = _Height;
                 
@@ -575,6 +576,16 @@ namespace Epi.Web.MVC.Utility
             }
 
             return _IsHidden;
+        }
+        public static string GetPageId(string Xml, int PageNumber)
+        {
+            XDocument xdoc = XDocument.Parse(Xml);
+
+            XElement XElement = xdoc.XPathSelectElement("Template/Project/View/Page[@Position = '" + (PageNumber - 1).ToString() + "']");
+            
+           
+
+            return   XElement.Attribute("PageId").Value.ToString();
         }
     }
 }
