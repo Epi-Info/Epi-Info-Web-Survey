@@ -80,7 +80,8 @@ namespace Epi.Core.EnterInterpreter
         //public event CommunicateUIEventHandler CommunicateUI;
 
         const string RESOURCES_LANGUAGE_RULES = "Epi.Core.EnterInterpreter.grammar.EpiInfoGrammar.cgt";
-        const string RESOURCES_LANGUAGE_RULES_ENTER = "Epi.Core.EnterInterpreter.grammar.EpiInfo.Enter.Grammar.cgt";
+        //const string RESOURCES_LANGUAGE_RULES_ENTER = "Epi.Core.EnterInterpreter.grammar.EpiInfo.Enter.Grammar.cgt";
+        const string RESOURCES_LANGUAGE_RULES_ENTER = "Epi.Web.CheckCodeEngine.grammar.EpiInfo.Enter.Grammar.cgt";
 
         /// <summary>
         /// Returns Epi Info compiled grammar table as stream
@@ -246,7 +247,7 @@ namespace Epi.Core.EnterInterpreter
 
         public void Execute(string source)
         {
-            if (this.host.IsExecutionEnabled)
+            //if (this.host.IsExecutionEnabled)
             {
                 try
                 {
@@ -262,26 +263,26 @@ namespace Epi.Core.EnterInterpreter
                 {
                     if (!ex.Message.ToUpper().Contains("STACK EMPTY"))
                     {
-                        if (this.host.IsSuppressErrorsEnabled)
+                        //if (this.host.IsSuppressErrorsEnabled)
                         {
                             //Logger.Log(string.Format("{0} - EnterInterpreter Parse Error. : source [{1}]\n message:\n{2}", DateTime.Now, ex.Source, ex.Message));
-                        }
+                        }/*
                         else
                         {
                             throw ex;
-                        }
+                        }*/
                     }
                 }
                 catch (Exception ex)
                 {
-                    if (this.host.IsSuppressErrorsEnabled)
+                    //if (this.host.IsSuppressErrorsEnabled)
                     {
                         //Logger.Log(string.Format("{0} - EnterInterpreter Execute : source [{1}]\n message:\n{2}", DateTime.Now, ex.Source, ex.Message));
-                    }
+                    }/*
                     else
                     {
                         throw ex;
-                    }
+                    }*/
                 }
             }
         }

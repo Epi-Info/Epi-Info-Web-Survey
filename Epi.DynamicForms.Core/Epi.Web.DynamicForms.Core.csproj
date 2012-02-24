@@ -55,6 +55,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EpiInfo.Plugin">
+      <HintPath>..\..\..\Epi Info 7\EpiInfoPlugin\bin\Debug\EpiInfo.Plugin.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core">
@@ -128,6 +131,10 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Epi.Web.CheckCodeEngine\Epi.Web.CheckCodeEngine.csproj">
+      <Project>{6B084882-EF4F-4CF0-85B1-1E8C357AE822}</Project>
+      <Name>Epi.Web.CheckCodeEngine</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Epi.Web.Common\Epi.Web.Common.csproj">
       <Project>{6E2F059B-C1CD-401F-8A63-DC2933CFB0D8}</Project>
       <Name>Epi.Web.Common</Name>
