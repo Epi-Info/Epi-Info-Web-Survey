@@ -61,7 +61,7 @@ namespace Epi.Web.MVC.Utility
                 double _Width, _Height;
                 _Width = GetWidth(xdoc);
                 _Height= GetHeight(xdoc);
-                form.PagesId = GetPageId(XML,PageNumber );
+                form.PageId = GetPageId(XML,PageNumber );
                 form.Width = _Width;
                 form.Height = _Height;
                 
@@ -577,6 +577,7 @@ namespace Epi.Web.MVC.Utility
 
             return _IsHidden;
         }
+      //get pegeid for xml
         public static string GetPageId(string Xml, int PageNumber)
         {
             XDocument xdoc = XDocument.Parse(Xml);

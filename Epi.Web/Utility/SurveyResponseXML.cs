@@ -92,7 +92,7 @@ namespace Epi.Web.MVC.Utility
                
                  
                   PageRoot.SetAttribute("PageNumber", CurrentPage.ToString());
-                  PageRoot.SetAttribute("PageId", Pageid);
+                  PageRoot.SetAttribute("PageId", Pageid);//Added PageId Attribute to the page node
                   xml.AppendChild(PageRoot);
               }
 
