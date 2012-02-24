@@ -58,7 +58,7 @@ namespace Epi.Web.MVC.Utility
                 {
                     AddRoot = true;
                 }
-                surveyAnswerRequest.SurveyAnswerList[0].XML = surveyResponseXML.CreateResponseXml(surveyInfoModel.SurveyId, AddRoot, form.CurrentPage,form.PagesId).InnerXml;
+                surveyAnswerRequest.SurveyAnswerList[0].XML = surveyResponseXML.CreateResponseXml(surveyInfoModel.SurveyId, AddRoot, form.CurrentPage,form.PageId).InnerXml;
                 // 2 b. save the current survey response
                 surveyAnswerRequest.Action = Epi.Web.MVC.Constants.Constant.UPDATE;  //"Update";
                 //Append to Response Xml
@@ -113,7 +113,7 @@ namespace Epi.Web.MVC.Utility
 
            
         }
-
+        //Remove PageNumber attribute
         private static void RemovePageNumAtt(XDocument Xdoc)
         {
             var _Pages = from _Page in Xdoc.Descendants("Page") select _Page;

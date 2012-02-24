@@ -21,7 +21,7 @@ namespace MvcDynamicForms
         private string _fieldPrefix = "MvcDynamicField_";
         private FieldList _fields;
         private Epi.Web.Common.DTO.SurveyInfoDTO _SurveyInfo;
-        private string _PagesId = "";
+        private string _PageId = "";
         public double Width { get; set; }
         public double Height { get; set; }
 
@@ -274,15 +274,15 @@ namespace MvcDynamicForms
             set { this._SurveyInfo = value; }
         }
 
-        public string PagesId
+        public string PageId
         {
             get
             {
-                return _PagesId;
+                return _PageId;
             }
             set
             {
-                _PagesId = value;
+                _PageId = value;
             }
         }
         public int NumberOfPages { get; set; }
