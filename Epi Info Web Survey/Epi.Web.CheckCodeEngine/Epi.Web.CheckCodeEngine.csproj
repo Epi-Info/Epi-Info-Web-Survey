@@ -171,7 +171,7 @@
     <None Include="ClassDiagram1.cd" />
     <None Include="CommandProcess.cd" />
     <None Include="Framework.cd" />
-    <None Include="grammar\EpiInfo.Enter.Grammar.cgt" />
+    <EmbeddedResource Include="grammar\EpiInfo.Enter.Grammar.cgt" />
     <None Include="grammar\EpiInfo.Enter.Grammar.grm" />
   </ItemGroup>
   <ItemGroup>
