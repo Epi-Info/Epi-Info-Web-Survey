@@ -68,7 +68,7 @@ namespace Epi.Web.MVC.Utility
             return result;
          }
 
-          public XmlDocument CreateResponseXml(string SurveyId, bool AddRoot, int CurrentPage)
+          public XmlDocument  CreateResponseXml(string SurveyId, bool AddRoot, int CurrentPage,string Pageid)
           {
 
                
@@ -92,6 +92,7 @@ namespace Epi.Web.MVC.Utility
                
                  
                   PageRoot.SetAttribute("PageNumber", CurrentPage.ToString());
+                  PageRoot.SetAttribute("PageId", Pageid);
                   xml.AppendChild(PageRoot);
               }
 
