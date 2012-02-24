@@ -262,7 +262,7 @@ namespace Epi.Web.MVC.Controllers
             
             int PageNumber = 0;
 
-            if (!xdoc.Root.IsEmpty && (string)xdoc.Root.Attribute("LastPageVisited") != null)
+            if (  (string)xdoc.Root.Attribute("LastPageVisited") != null)
             {
                 PageNumber= int.Parse(xdoc.Root.Attribute("LastPageVisited").Value);
             }
