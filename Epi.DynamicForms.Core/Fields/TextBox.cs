@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web.Mvc;
+using Epi.Core.EnterInterpreter;
 
 namespace MvcDynamicForms.Fields
 {
@@ -12,6 +13,10 @@ namespace MvcDynamicForms.Fields
     [Serializable]
     public class TextBox : TextField
     {
+
+        
+
+
         public override string RenderHtml()
         {
             var html = new StringBuilder();
@@ -43,13 +48,26 @@ namespace MvcDynamicForms.Fields
             txt.Attributes.Add("type", "text");
            // txt.Attributes.Add("value", Value);
             ////////////Check code start//////////////////
+
+
             txt.Attributes.Add("onfocus", "");//befor
             if (inputName.ToString() == "MvcDynamicField_FirstName")
             {
                 //txt.Attributes.Add("onblur", "$('#MvcDynamicField_a36e1d37-1d72-4fa6-982b-fdd850a73428').hide(); $('#LabelMvcDynamicField_a36e1d37-1d72-4fa6-982b-fdd850a73428').hide();");//After
                //txt.Attributes.Add("onblur", "$('#LabelMvcDynamicField_a36e1d37-1d72-4fa6-982b-fdd850a73428').hide();");//After
-                txt.Attributes.Add("onblur", "var List = new Array();List.push('Ill');List.push('MvcDynamicField_Ill');CCE_Hide(List,false);");//After
-               
+                //txt.Attributes.Add("onblur", "var List = new Array();List.push('Ill');List.push('MvcDynamicField_Ill');CCE_Hide(List,false);");//After
+
+                Epi.Core.EnterInterpreter.EpiInterpreterParser EIP = new Epi.Core.EnterInterpreter.EpiInterpreterParser(Epi.Core.EnterInterpreter.EpiInterpreterParser.GetEnterCompiledGrammarTable());
+                EIP.Execute("Field Ill before hide Ill end-before end-field");
+                EnterRule FunctionObject = (EnterRule)EIP.Context.GetCommand("level=field&event=after&identifier=" + _key);
+                if (FunctionObject != null)
+                {
+                    StringBuilder JavaScript = new StringBuilder();
+                    FunctionObject.ToJavaScript(JavaScript);
+                    //txt.Attributes.Add("onblur", inputName + "_After();");//After
+                    txt.Attributes.Add("onblur", JavaScript.ToString()); //After
+                }
+
             }
             ////////////Check code end//////////////////
             txt.Attributes.Add("value", Value);
