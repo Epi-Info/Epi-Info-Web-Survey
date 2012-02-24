@@ -40,6 +40,11 @@ namespace Epi.Core.EnterInterpreter
         public abstract object Execute();
 
 
+        public virtual void ToJavaScript(StringBuilder pJavaScriptBuilder)
+        {
+            return;
+        }
+
         public override string ToString()
         {
             return "";

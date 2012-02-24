@@ -60,7 +60,19 @@ namespace Epi.Core.EnterInterpreter.Rules
 
         }
 
-        public override bool IsNull() { return this.Statements == null; } 
+        public override bool IsNull() { return this.Statements == null; }
 
+
+        public override void ToJavaScript(StringBuilder pJavaScriptBuilder)
+        {
+            pJavaScriptBuilder.AppendLine("_After()");
+            pJavaScriptBuilder.AppendLine("{");
+
+            this.Statements.ToJavaScript(pJavaScriptBuilder);
+
+
+            pJavaScriptBuilder.AppendLine("}");
+
+        }
     }
 }

@@ -99,7 +99,15 @@ namespace Epi.Core.EnterInterpreter.Rules
         {
 
             return BeginBefore == null && BeginAfter == null && BeginClick == null; 
-        } 
+        }
+
+
+        public override void ToJavaScript(StringBuilder pJavaScriptBuilder)
+        {
+            pJavaScriptBuilder.AppendLine("function ");
+            pJavaScriptBuilder.AppendLine(Identifier);
+
+        }
 
     }
 
