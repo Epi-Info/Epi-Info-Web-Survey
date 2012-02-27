@@ -302,14 +302,13 @@ namespace MvcDynamicForms
         { 
             get; set;
         }
-        public Epi.Core.EnterInterpreter.EpiInterpreterParser FormCheckCodeObj { get; set; }
+        public Epi.Core.EnterInterpreter.Rule_Context FormCheckCodeObj { get; set; }
 
-        public Epi.Core.EnterInterpreter.EpiInterpreterParser GetCheckCodeObj(string FormCheckCode)
+        public Epi.Core.EnterInterpreter.Rule_Context GetCheckCodeObj(string FormCheckCode)
         { 
-        
-        Epi.Core.EnterInterpreter.EpiInterpreterParser EIP = new Epi.Core.EnterInterpreter.EpiInterpreterParser(Epi.Core.EnterInterpreter.EpiInterpreterParser.GetEnterCompiledGrammarTable());
-        EIP.Execute(FormCheckCode);
-        return EIP;
+            Epi.Core.EnterInterpreter.EpiInterpreterParser EIP = new Epi.Core.EnterInterpreter.EpiInterpreterParser(Epi.Core.EnterInterpreter.EpiInterpreterParser.GetEnterCompiledGrammarTable());
+            EIP.Execute(FormCheckCode);
+            return (Epi.Core.EnterInterpreter.Rule_Context)EIP.Context;
         }
     }
 }
