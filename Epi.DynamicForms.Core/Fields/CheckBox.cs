@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web.Mvc;
-
+using Epi.Core.EnterInterpreter;
 namespace MvcDynamicForms.Fields
 {
     /// <summary>
@@ -134,7 +134,23 @@ namespace MvcDynamicForms.Fields
             hdn.Attributes.Add("id", inputName + "_hidden");
             hdn.Attributes.Add("name", inputName);
             hdn.Attributes.Add("value", bool.FalseString);
-            
+            ////////////Check code start//////////////////
+            EnterRule FunctionObjectAfter = (EnterRule)_form.FormCheckCodeObj.Context.GetCommand("level=field&event=after&identifier=" + _key);
+            if (FunctionObjectAfter != null)
+            {
+                StringBuilder JavaScript = new StringBuilder();
+                FunctionObjectAfter.ToJavaScript(JavaScript);
+                hdn.Attributes.Add("onblur", "function " + _key + JavaScript.ToString() + "; " + _key + "_After();"); //After
+            }
+            EnterRule FunctionObjectBefore = (EnterRule)_form.FormCheckCodeObj.Context.GetCommand("level=field&event=before&identifier=" + _key);
+            if (FunctionObjectBefore != null)
+            {
+                StringBuilder JavaScript = new StringBuilder();
+                FunctionObjectBefore.ToJavaScript(JavaScript);
+                hdn.Attributes.Add("onfocus", "function " + _key + JavaScript.ToString() + "; " + _key + "_Before();"); //Before
+            }
+
+            ////////////Check code end//////////////////
             html.Append(hdn.ToString(TagRenderMode.SelfClosing));
 
           

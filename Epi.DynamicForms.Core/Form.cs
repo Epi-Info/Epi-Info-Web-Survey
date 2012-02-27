@@ -24,7 +24,7 @@ namespace MvcDynamicForms
         private string _PageId = "";
         public double Width { get; set; }
         public double Height { get; set; }
-
+        
         /// <summary>
         /// The html element that wraps all rendered html.
         /// </summary>
@@ -301,6 +301,15 @@ namespace MvcDynamicForms
         public string HiddenFieldsList 
         { 
             get; set;
+        }
+        public Epi.Core.EnterInterpreter.EpiInterpreterParser FormCheckCodeObj { get; set; }
+
+        public Epi.Core.EnterInterpreter.EpiInterpreterParser GetCheckCodeObj(string FormCheckCode)
+        { 
+        
+        Epi.Core.EnterInterpreter.EpiInterpreterParser EIP = new Epi.Core.EnterInterpreter.EpiInterpreterParser(Epi.Core.EnterInterpreter.EpiInterpreterParser.GetEnterCompiledGrammarTable());
+        EIP.Execute(FormCheckCode);
+        return EIP;
         }
     }
 }
