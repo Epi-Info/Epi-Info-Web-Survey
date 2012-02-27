@@ -31,8 +31,7 @@ namespace Epi.Web.MVC.Utility
             form.SurveyInfo = (Epi.Web.Common.DTO.SurveyInfoDTO)(SurveyMetaData);
            
             string XML = form.SurveyInfo.XML;
-
-
+            
             form.CurrentPage = PageNumber;
             if (string.IsNullOrEmpty(XML))
             {
@@ -64,7 +63,13 @@ namespace Epi.Web.MVC.Utility
                 form.PageId = GetPageId(XML,PageNumber );
                 form.Width = _Width;
                 form.Height = _Height;
-                
+                //Add checkcode to Form
+                XElement ViewElement = xdoc.XPathSelectElement("Template/Project/View");
+                string checkcode = ViewElement.Attribute("CheckCode").Value.ToString();
+                if (!string.IsNullOrEmpty(checkcode))
+                {
+                    form.FormCheckCodeObj = form.GetCheckCodeObj(checkcode);
+                }
                 foreach (var _FieldTypeID in _FieldsTypeIDs)
                 {
                     switch (_FieldTypeID.Attribute("FieldTypeId").Value)
@@ -588,5 +593,6 @@ namespace Epi.Web.MVC.Utility
 
             return   XElement.Attribute("PageId").Value.ToString();
         }
+     
     }
 }

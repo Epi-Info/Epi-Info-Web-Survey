@@ -15,7 +15,7 @@ namespace MvcDynamicForms.Fields
     {
 
 
-        static Epi.Core.EnterInterpreter.EpiInterpreterParser EIP = new Epi.Core.EnterInterpreter.EpiInterpreterParser(Epi.Core.EnterInterpreter.EpiInterpreterParser.GetEnterCompiledGrammarTable());
+        
 
         public override string RenderHtml()
         {
@@ -48,27 +48,21 @@ namespace MvcDynamicForms.Fields
             txt.Attributes.Add("type", "text");
            // txt.Attributes.Add("value", Value);
             ////////////Check code start//////////////////
-
-
-            txt.Attributes.Add("onfocus", "");//befor
-            //if (inputName.ToString() == "MvcDynamicField_FirstName")
-            //{
-                //txt.Attributes.Add("onblur", "$('#MvcDynamicField_a36e1d37-1d72-4fa6-982b-fdd850a73428').hide(); $('#LabelMvcDynamicField_a36e1d37-1d72-4fa6-982b-fdd850a73428').hide();");//After
-               //txt.Attributes.Add("onblur", "$('#LabelMvcDynamicField_a36e1d37-1d72-4fa6-982b-fdd850a73428').hide();");//After
-                //txt.Attributes.Add("onblur", "var List = new Array();List.push('Ill');List.push('MvcDynamicField_Ill');CCE_Hide(List,false);");//After
-
-
-                TextBox.EIP.Execute("Field LastName after hide Ill FirstName end-after end-field");
-                EnterRule FunctionObject = (EnterRule)TextBox.EIP.Context.GetCommand("level=field&event=after&identifier=" + _key);
-                if (FunctionObject != null)
+                EnterRule FunctionObjectAfter = (EnterRule)_form.FormCheckCodeObj.Context.GetCommand("level=field&event=after&identifier=" + _key);
+                if (FunctionObjectAfter != null)
                 {
                     StringBuilder JavaScript = new StringBuilder();
-                    FunctionObject.ToJavaScript(JavaScript);
-                    //txt.Attributes.Add("onblur", inputName + "_After();");//After
+                    FunctionObjectAfter.ToJavaScript(JavaScript); 
                     txt.Attributes.Add("onblur", "function " + _key + JavaScript.ToString() + "; " + _key + "_After();"); //After
                 }
+                EnterRule FunctionObjectBefore = (EnterRule)_form.FormCheckCodeObj.Context.GetCommand("level=field&event=before&identifier=" + _key);
+                if (FunctionObjectBefore != null)
+                {
+                    StringBuilder JavaScript = new StringBuilder();
+                    FunctionObjectBefore.ToJavaScript(JavaScript); 
+                    txt.Attributes.Add("onfocus", "function " + _key + JavaScript.ToString() + "; " + _key + "_Before();"); //Before
+                }
 
-            //}
             ////////////Check code end//////////////////
             txt.Attributes.Add("value", Value);
             if(_IsRequired ==true){
