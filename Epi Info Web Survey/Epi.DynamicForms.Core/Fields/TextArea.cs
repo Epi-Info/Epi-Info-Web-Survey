@@ -44,14 +44,14 @@ namespace MvcDynamicForms.Fields
             txt.Attributes.Add("id", inputName);
            // txt.SetInnerText(Value);
             ////////////Check code start//////////////////
-            EnterRule FunctionObjectAfter = (EnterRule)_form.FormCheckCodeObj.Context.GetCommand("level=field&event=after&identifier=" + _key);
+            EnterRule FunctionObjectAfter = (EnterRule)_form.FormCheckCodeObj.GetCommand("level=field&event=after&identifier=" + _key);
             if (FunctionObjectAfter != null)
             {
                 StringBuilder JavaScript = new StringBuilder();
                 FunctionObjectAfter.ToJavaScript(JavaScript);
                 txt.Attributes.Add("onblur", "function " + _key + JavaScript.ToString() + "; " + _key + "_After();"); //After
             }
-            EnterRule FunctionObjectBefore = (EnterRule)_form.FormCheckCodeObj.Context.GetCommand("level=field&event=before&identifier=" + _key);
+            EnterRule FunctionObjectBefore = (EnterRule)_form.FormCheckCodeObj.GetCommand("level=field&event=before&identifier=" + _key);
             if (FunctionObjectBefore != null)
             {
                 StringBuilder JavaScript = new StringBuilder();
