@@ -56,7 +56,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EpiInfo.Plugin">
-      <HintPath>..\..\..\Epi Info 7\EpiInfoPlugin\bin\Debug\EpiInfo.Plugin.dll</HintPath>
+      <HintPath>..\Epi.Web\bin\EpiInfo.Plugin.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
