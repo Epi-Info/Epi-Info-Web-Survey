@@ -65,6 +65,82 @@ function CCE_ProcessHideExceptCommand(pCheckCodeList)
     }
 }
 
+
+//****** UnHide Start
+
+
+function CCE_UnHide(pNameList, pIsExceptionList) 
+{
+    /*
+    var List = new Array();
+    for (var i = 0; i < pNameList.Length; i++)
+    {
+    List.Add(pControlList[i]);
+    }*/
+
+    try 
+    {
+        if (pIsExceptionList) 
+        {
+            CCE_ProcessUnHideExceptCommand(pNameList);
+
+        }
+        else 
+        {
+            CCE_ProcessUnHideCommand(pNameList);
+        }
+    }
+    catch (ex) 
+    {
+
+    }
+}
+
+
+/// <summary>
+/// Processes the Hide command for check code execution
+/// </summary>
+/// <param name="checkCodeList">A list of fields to hide</param>
+function CCE_ProcessUnHideCommand(pCheckCodeList) 
+{
+    if (pCheckCodeList != null) 
+    {
+        //var controlsList = GetAssociatedControls(pCheckCodeList);
+        //this.canvas.HideCheckCodeItems(controlsList);
+        for (var i = 0; i < pCheckCodeList.length; i++) 
+        {
+
+            var query = '#MvcDynamicField_' + pCheckCodeList[i];
+            $(query).show();
+            query = '#LabelMvcDynamicField_' + pCheckCodeList[i];
+            $(query).show();
+            AddToHiddenFieldsList(pCheckCodeList[i]);
+        }
+    }
+}
+
+
+/// <summary>
+/// Processed the Hide Except command for check code execution
+/// </summary>
+/// <param name="checkCodeList">A list of fields</param>
+function CCE_ProcessUnHideExceptCommand(pCheckCodeList)
+{
+    if (pCheckCodeList != null) 
+    {
+        var controlsList = GetAssociatedControls(pCheckCodeList);
+        //this.canvas.HideExceptCheckCodeItems(controlsList);
+    }
+}
+
+
+
+
+
+//****** UnHide End
+
+
+
 function CCE_GetAssociatedControls()
 {
     // will return a list of controls associated with a field name
