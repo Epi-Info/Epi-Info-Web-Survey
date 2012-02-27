@@ -68,7 +68,10 @@ namespace Epi.Core.EnterInterpreter.Rules
             pJavaScriptBuilder.AppendLine("_After()");
             pJavaScriptBuilder.AppendLine("{");
 
-            this.Statements.ToJavaScript(pJavaScriptBuilder);
+            if (this.Statements != null)
+            {
+                this.Statements.ToJavaScript(pJavaScriptBuilder);
+            }
 
 
             pJavaScriptBuilder.AppendLine("}");

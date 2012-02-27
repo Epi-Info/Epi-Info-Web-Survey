@@ -44,7 +44,7 @@ namespace Epi.Core.EnterInterpreter.Rules
             pJavaScriptBuilder.AppendLine("var List = new Array();");
             foreach (string fieldName in IdentifierList)
             {
-                pJavaScriptBuilder.AppendLine(string.Format("List.push('{0]');", fieldName));
+                pJavaScriptBuilder.AppendLine(string.Format("List.push('{0}');", fieldName));
             }
             //result.AppendLine("List.push('MvcDynamicField_Ill');");
             if (this.IsExceptList)
