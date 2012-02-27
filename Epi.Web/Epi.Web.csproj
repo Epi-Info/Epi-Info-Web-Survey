@@ -40,6 +40,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EpiInfo.Plugin, Version=7.0.9.8, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\EpiInfo.Plugin.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation">
       <HintPath>..\packages\CommonServiceLocator.1.0\lib\NET35\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
@@ -289,6 +293,10 @@
     <ProjectReference Include="..\Epi.DynamicForms.Core\Epi.Web.DynamicForms.Core.csproj">
       <Project>{9624E64A-013F-41E8-84BA-C34EE744685E}</Project>
       <Name>Epi.Web.DynamicForms.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Epi.Web.CheckCodeEngine\Epi.Web.CheckCodeEngine.csproj">
+      <Project>{6B084882-EF4F-4CF0-85B1-1E8C357AE822}</Project>
+      <Name>Epi.Web.CheckCodeEngine</Name>
     </ProjectReference>
     <ProjectReference Include="..\Epi.Web.Common\Epi.Web.Common.csproj">
       <Project>{6E2F059B-C1CD-401F-8A63-DC2933CFB0D8}</Project>

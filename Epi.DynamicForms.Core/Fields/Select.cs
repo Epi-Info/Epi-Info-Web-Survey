@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web.Mvc;
-
+using Epi.Core.EnterInterpreter;
 namespace MvcDynamicForms.Fields
 {
     /// <summary>
@@ -85,17 +85,22 @@ namespace MvcDynamicForms.Fields
             select.Attributes.Add("id", inputName);
             select.Attributes.Add("name", inputName);
             ////////////Check code start//////////////////
-           // select.Attributes.Add("onfocus", "EventArray.push('" + Prompt +  "before')");//befor
-           // select.Attributes.Add("onblur", "EventArray.push('" + Prompt + "After')");//After
-            ////////////Check code end//////////////////
+            EnterRule FunctionObjectAfter = (EnterRule)_form.FormCheckCodeObj.Context.GetCommand("level=field&event=after&identifier=" + _key);
+            if (FunctionObjectAfter != null)
+            {
+                StringBuilder JavaScript = new StringBuilder();
+                FunctionObjectAfter.ToJavaScript(JavaScript);
+                select.Attributes.Add("onblur", "function " + _key + JavaScript.ToString() + "; " + _key + "_After();"); //After
+            }
+            EnterRule FunctionObjectBefore = (EnterRule)_form.FormCheckCodeObj.Context.GetCommand("level=field&event=before&identifier=" + _key);
+            if (FunctionObjectBefore != null)
+            {
+                StringBuilder JavaScript = new StringBuilder();
+                FunctionObjectBefore.ToJavaScript(JavaScript);
+                select.Attributes.Add("onfocus", "function " + _key + JavaScript.ToString() + "; " + _key + "_Before();"); //Before
+            }
 
-            //if (inputName.Contains("MvcDynamicField_6e014f46-7d86-4f06-9e2c-49586d033665"))
-            //{
-            //    //select.Attributes.Add("onfocus", " EventArray.push(document.getElementById('MvcDynamicField_9573a6df-bf8e-4b1c-af27-b0a4daa704b6').value='befor';");//befor
-            //    //select.Attributes.Add("onblur", " document.getElementById('MvcDynamicField_9573a6df-bf8e-4b1c-af27-b0a4daa704b6').value='After';");//After
-            //    //select.Attributes.Add("onfocus", " EventArray.push('before');");//befor
-            //    //select.Attributes.Add("onblur", " EventArray.push('after')");//After
-            //}
+            ////////////Check code end//////////////////
 
             
 
