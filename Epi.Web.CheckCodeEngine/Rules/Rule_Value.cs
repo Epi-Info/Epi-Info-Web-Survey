@@ -259,9 +259,9 @@ namespace Epi.Core.EnterInterpreter.Rules
 
             if (this.Id != null)
             {
-                pJavaScriptBuilder.Append("cce_Context.resolve(\"");
+                pJavaScriptBuilder.Append("cce_Context.getValue(\"");
                 pJavaScriptBuilder.Append(this.Id);
-                pJavaScriptBuilder.Append("\").val()");
+                pJavaScriptBuilder.Append("\")");
             }
 
             else
