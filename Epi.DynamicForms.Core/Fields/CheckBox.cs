@@ -136,12 +136,12 @@ namespace MvcDynamicForms.Fields
             hdn.Attributes.Add("value", bool.FalseString);
             ////////////Check code start//////////////////
             EnterRule FunctionObjectAfter = (EnterRule)_form.FormCheckCodeObj.GetCommand("level=field&event=after&identifier=" + _key);
-            if (FunctionObjectAfter != null)
+            if (FunctionObjectAfter != null && !FunctionObjectAfter.IsNull())
             {
                 hdn.Attributes.Add("onblur", "return " + _key + "_After();"); //After
             }
             EnterRule FunctionObjectBefore = (EnterRule)_form.FormCheckCodeObj.GetCommand("level=field&event=before&identifier=" + _key);
-            if (FunctionObjectBefore != null)
+            if (FunctionObjectBefore != null && !FunctionObjectBefore.IsNull())
             { 
                 hdn.Attributes.Add("onfocus", "return " + _key + "_Before();"); //Before
             }
