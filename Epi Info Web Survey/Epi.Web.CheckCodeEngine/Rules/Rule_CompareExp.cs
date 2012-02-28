@@ -232,13 +232,17 @@ namespace Epi.Core.EnterInterpreter.Rules
             {
 
                 this.ConcatExp.ToJavaScript(pJavaScriptBuilder);
-                if (this.op == "=")
+                switch (op)
                 {
-                    pJavaScriptBuilder.Append("==");
-                }
-                else
-                {
-                    pJavaScriptBuilder.Append(this.op);
+                    case "=":
+                        pJavaScriptBuilder.Append("==");
+                        break;
+                    case "<>":
+                        pJavaScriptBuilder.Append("!=");
+                        break;
+                    default:
+                        pJavaScriptBuilder.Append(this.op);
+                        break;
                 }
                 this.CompareExp.ToJavaScript(pJavaScriptBuilder);
             }
