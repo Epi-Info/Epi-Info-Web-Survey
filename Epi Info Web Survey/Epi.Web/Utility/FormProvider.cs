@@ -8,6 +8,7 @@ using MvcDynamicForms;
 using System.Collections.Generic;
 using System;
 using System.Xml.XPath;
+using Epi.Core.EnterInterpreter;
 namespace Epi.Web.MVC.Utility
 {
     public static class FormProvider
@@ -66,12 +67,22 @@ namespace Epi.Web.MVC.Utility
                 //Add checkcode to Form
                 XElement ViewElement = xdoc.XPathSelectElement("Template/Project/View");
                 string checkcode = ViewElement.Attribute("CheckCode").Value.ToString();
+                StringBuilder JavaScript = new StringBuilder();
+               
+
                 if (!string.IsNullOrEmpty(checkcode))
                 {
                     form.FormCheckCodeObj = form.GetCheckCodeObj(checkcode);
                 }
+
+                
+
+
                 foreach (var _FieldTypeID in _FieldsTypeIDs)
                 {
+                    
+                    JavaScript.Append(GetFormJavaScript(checkcode, form, _FieldTypeID.Attribute("Name").Value));
+                             
                     switch (_FieldTypeID.Attribute("FieldTypeId").Value)
                     {
                         case "1":
@@ -170,15 +181,15 @@ namespace Epi.Web.MVC.Utility
                 //};
                 //sports.AddChoices("Baseball,Football,Soccer,Basketball,Tennis,Boxing,Golf", ",");
 
-                
 
 
 
 
 
-            
+
+                form.FormJavaScript = JavaScript.ToString();
             }
-           
+            
             return form;
         }
 
@@ -593,6 +604,26 @@ namespace Epi.Web.MVC.Utility
 
             return   XElement.Attribute("PageId").Value.ToString();
         }
-     
+        public static string GetFormJavaScript(string CheckCode, Form form, string controlName)
+        {// controlName
+
+          StringBuilder B_JavaScript = new StringBuilder();
+          EnterRule FunctionObject_B = (EnterRule)form.FormCheckCodeObj.GetCommand("level=field&event=before&identifier=" + controlName);
+          if (FunctionObject_B != null)
+          {
+              B_JavaScript.Append("function " + controlName);
+              FunctionObject_B.ToJavaScript(B_JavaScript);
+          }
+
+          StringBuilder A_JavaScript = new StringBuilder();
+          EnterRule FunctionObject_A = (EnterRule)form.FormCheckCodeObj.GetCommand("level=field&event=after&identifier=" + controlName);
+          if (FunctionObject_A != null)
+          {
+              A_JavaScript.Append("function " + controlName);
+              FunctionObject_A.ToJavaScript(A_JavaScript);
+          }
+
+          return  B_JavaScript.ToString() +"  "+ A_JavaScript.ToString();
+        }
     }
 }
