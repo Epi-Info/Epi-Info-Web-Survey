@@ -253,5 +253,35 @@ namespace Epi.Core.EnterInterpreter.Rules
             return result;
         }
 
+
+        public override void ToJavaScript(StringBuilder pJavaScriptBuilder)
+        {
+
+            if (this.Id != null)
+            {
+                pJavaScriptBuilder.Append("cce_Context.resolve(\"");
+                pJavaScriptBuilder.Append(this.Id);
+                pJavaScriptBuilder.Append("\").val()");
+            }
+
+            else
+            {
+                pJavaScriptBuilder.Append(this.value.ToString());
+            }
+
+            /*
+            pJavaScriptBuilder.AppendLine("if(");
+            this.IfClause.ToJavaScript(pJavaScriptBuilder);
+            pJavaScriptBuilder.AppendLine(")\n{\n");
+            this.ThenClause.ToJavaScript(pJavaScriptBuilder);
+            if (this.ElseClause != null)
+            {
+                pJavaScriptBuilder.AppendLine("}\nelse{\n");
+                this.ElseClause.ToJavaScript(pJavaScriptBuilder);
+            }
+            pJavaScriptBuilder.AppendLine("}\n");
+            */
+        }
+
     }
 }

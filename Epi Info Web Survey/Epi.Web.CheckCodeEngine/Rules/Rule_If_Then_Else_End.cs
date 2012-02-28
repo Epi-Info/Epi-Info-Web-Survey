@@ -29,10 +29,11 @@ namespace Epi.Core.EnterInterpreter.Rules
             {
                 ElseClause = EnterRule.BuildStatments(pContext, pToken.Tokens[5]);
             }
+                /*
             else
             {
                 ElseClause = EnterRule.BuildStatments(pContext, pToken.Tokens[4]);
-            }
+            }*/
         }
 
         /// <summary>
@@ -71,5 +72,28 @@ namespace Epi.Core.EnterInterpreter.Rules
                 this.ElseClause.Execute();
             }
         }
+
+
+
+
+        public override void ToJavaScript(StringBuilder pJavaScriptBuilder)
+        {
+            pJavaScriptBuilder.Append("if(");
+            this.IfClause.ToJavaScript(pJavaScriptBuilder);
+            pJavaScriptBuilder.Append(")\n{\n");
+            this.ThenClause.ToJavaScript(pJavaScriptBuilder);
+            pJavaScriptBuilder.Append("}\n");
+            if (this.ElseClause != null && !this.ElseClause.IsNull())
+            {
+                pJavaScriptBuilder.AppendLine("else{\n");
+                this.ElseClause.ToJavaScript(pJavaScriptBuilder);
+                pJavaScriptBuilder.AppendLine("}\n");
+            }
+            
+
+        }
+
+
+
     }
 }

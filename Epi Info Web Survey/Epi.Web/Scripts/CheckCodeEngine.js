@@ -139,18 +139,18 @@ function CCE_ProcessUnHideExceptCommand(pCheckCodeList)
 
 //****** UnHide End
 
-
-
-function CCE_GetAssociatedControls()
-{
-    // will return a list of controls associated with a field name
-}
-
-
 function CCE_Context() 
 {
-
+    this.symbolTable = new Array();
 }
+
+CCE_Context.prototype.resolve = function (pName) 
+{
+    var query = '#MvcDynamicField_' + pName;
+    return $(query);
+}
+
+cce_Context = new CCE_Context();
 
 function CCE_Symbol() 
 {
