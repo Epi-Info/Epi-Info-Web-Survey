@@ -2,13 +2,6 @@
 
 function CCE_Hide(pNameList, pIsExceptionList)
 {
-    /*
-        var List = new Array();
-        for (var i = 0; i < pNameList.Length; i++)
-        {
-            List.Add(pControlList[i]);
-        }*/
-
         try
         {
             if (pIsExceptionList)
@@ -46,7 +39,7 @@ function CCE_ProcessHideCommand(pCheckCodeList)
             $(query).hide();
             query = '#LabelMvcDynamicField_' + pCheckCodeList[i];
             $(query).hide();
-             AddToHiddenFieldsList(pCheckCodeList[i]);
+             CCE_AddToHiddenFieldsList(pCheckCodeList[i]);
         }
     }
 }
@@ -114,7 +107,7 @@ function CCE_ProcessUnHideCommand(pCheckCodeList)
             $(query).show();
             query = '#LabelMvcDynamicField_' + pCheckCodeList[i];
             $(query).show();
-            AddToHiddenFieldsList(pCheckCodeList[i]);
+            CCE_AddToHiddenFieldsList(pCheckCodeList[i]);
         }
     }
 }
@@ -225,17 +218,8 @@ Rule_Hide.prototype.Execute = function ()
 {
     CCE_Hide(this.IdentifierList, this.IsExceptList)
 }
-function AddToHiddenFieldsList(FieldName)
- {
-    if (document.getElementById("HiddenFieldsList").value !="") 
-    {
 
-        document.getElementById("HiddenFieldsList").value += ",";
-    
-    }
-    document.getElementById("HiddenFieldsList").value += FieldName;
-    
- }
+
 
 
 
@@ -243,20 +227,21 @@ function AddToHiddenFieldsList(FieldName)
  /******************Highlight and unhighlight controls********************************/
 
  /*-----------Highlight--------------*/
- function CCE_Highlight(pNameList, pIsExceptionList) {
-    
-
-     try {
-         if (pIsExceptionList) {
+ function CCE_Highlight(pNameList, pIsExceptionList) 
+ {
+      try 
+      {
+         if (pIsExceptionList) 
+         {
              CCE_ProcessHighlightExceptCommand(pNameList);
-
          }
-         else {
+         else 
+         {
              CCE_ProcessHighlightCommand(pNameList);
-
          }
      }
-     catch (ex) {
+     catch (ex) 
+     {
 
      }
  }
@@ -266,17 +251,17 @@ function AddToHiddenFieldsList(FieldName)
  /// Processes the Highlight command for check code execution
  /// </summary>
  /// <param name="checkCodeList">A list of fields to highlight</param>
- function CCE_ProcessHighlightCommand(pCheckCodeList) {
-     if (pCheckCodeList != null) {
-         //var controlsList = GetAssociatedControls(pCheckCodeList);
-         //this.canvas.HideCheckCodeItems(controlsList);
+ function CCE_ProcessHighlightCommand(pCheckCodeList)
+ {
+     if (pCheckCodeList != null) 
+     {
          for (var i = 0; i < pCheckCodeList.length; i++) {
 
              var query = '#MvcDynamicField_' + pCheckCodeList[i];
              $(query).css("background-color","yellow");
              query = '#LabelMvcDynamicField_' + pCheckCodeList[i];
             // $(query).hide();// no need to highlight the label
-             AddToHilightedFieldsList(pCheckCodeList[i]);
+            CCE_AddToHilightedFieldsList(pCheckCodeList[i]);
          }
      }
  }
@@ -286,8 +271,10 @@ function AddToHiddenFieldsList(FieldName)
  /// Processed the Highlight Except command for check code execution
  /// </summary>
  /// <param name="checkCodeList">A list of fields</param>
- function CCE_ProcessHighlightExceptCommand(pCheckCodeList) {
-     if (pCheckCodeList != null) {
+ function CCE_ProcessHighlightExceptCommand(pCheckCodeList) 
+ {
+     if (pCheckCodeList != null) 
+     {
          var controlsList = GetAssociatedControls(pCheckCodeList);
          //this.canvas.HideExceptCheckCodeItems(controlsList);
      }
@@ -296,19 +283,21 @@ function AddToHiddenFieldsList(FieldName)
  
  /*-----------------Un Highlight-----------------------------------*/
 
- function CCE_UnHighlight(pNameList, pIsExceptionList) {
-     
-
-     try {
-         if (pIsExceptionList) {
+ function CCE_UnHighlight(pNameList, pIsExceptionList) 
+ {
+     try 
+     {
+         if (pIsExceptionList) 
+         {
              CCE_ProcessUnHighlightExceptCommand(pNameList);
-
          }
-         else {
+         else 
+         {
              CCE_ProcessUnHighlightCommand(pNameList);
          }
      }
-     catch (ex) {
+     catch (ex) 
+     {
 
      }
  }
@@ -318,17 +307,17 @@ function AddToHiddenFieldsList(FieldName)
  /// Processes the Un-highlight command for check code execution
  /// </summary>
  /// <param name="checkCodeList">A list of fields to un-highlight</param>
- function CCE_ProcessUnHighlightCommand(pCheckCodeList) {
-     if (pCheckCodeList != null) {
-         //var controlsList = GetAssociatedControls(pCheckCodeList);
-         //this.canvas.HideCheckCodeItems(controlsList);
-         for (var i = 0; i < pCheckCodeList.length; i++) {
+ function CCE_ProcessUnHighlightCommand(pCheckCodeList) 
+ {
+     if (pCheckCodeList != null) 
+     {
+         for (var i = 0; i < pCheckCodeList.length; i++) 
+         {
 
              var query = '#MvcDynamicField_' + pCheckCodeList[i];
              $(query).css("background-color", " ");
              query = '#LabelMvcDynamicField_' + pCheckCodeList[i];
-             //$(query).show();// don't do anything with label
-             AddToHilightedFieldsList(pCheckCodeList[i]);
+             CCE_AddToHilightedFieldsList(pCheckCodeList[i]);
          }
      }
  }
@@ -338,8 +327,10 @@ function AddToHiddenFieldsList(FieldName)
  /// Processed the un-highlight Except command for check code execution
  /// </summary>
  /// <param name="checkCodeList">A list of fields</param>
- function CCE_ProcessUnHighlightExceptCommand(pCheckCodeList) {
-     if (pCheckCodeList != null) {
+ function CCE_ProcessUnHighlightExceptCommand(pCheckCodeList) 
+ {
+     if (pCheckCodeList != null) 
+     {
          var controlsList = GetAssociatedControls(pCheckCodeList);
          //this.canvas.HideExceptCheckCodeItems(controlsList);
      }
@@ -347,36 +338,27 @@ function AddToHiddenFieldsList(FieldName)
 
 
  /****Add to highlighted control list********************/
- 
- function AddToHilightedFieldsList(FieldName) {
-     if (document.getElementById("HighlightedFieldsList").value != "") {
-
-         document.getElementById("HighlightedFieldsList").value += ",";
-
-     }
-     document.getElementById("HighlightedFieldsList").value += FieldName;
-
- }
 
  /////////////////////////////////////////////////////////////////////////////////////
 
  /******************Enable and disable controls********************************/
 
  /*-----------Disable--------------*/
- function CCE_Disable(pNameList, pIsExceptionList) {
-
-
-     try {
-         if (pIsExceptionList) {
+ function CCE_Disable(pNameList, pIsExceptionList) 
+ {
+     try 
+     {
+         if (pIsExceptionList) 
+         {
              CCE_ProcessDisableExceptCommand(pNameList);
-
          }
-         else {
+         else
+         {
              CCE_ProcessDisableCommand(pNameList);
-
          }
      }
-     catch (ex) {
+     catch (ex) 
+     {
 
      }
  }
@@ -386,17 +368,19 @@ function AddToHiddenFieldsList(FieldName)
  /// Processes the Disable command for check code execution
  /// </summary>
  /// <param name="checkCodeList">A list of fields to disable</param>
- function CCE_ProcessDisableCommand(pCheckCodeList) {
-     if (pCheckCodeList != null) {
+ function CCE_ProcessDisableCommand(pCheckCodeList) 
+ {
+     if (pCheckCodeList != null) 
+     {
          //var controlsList = GetAssociatedControls(pCheckCodeList);
          //this.canvas.HideCheckCodeItems(controlsList);
-         for (var i = 0; i < pCheckCodeList.length; i++) {
-
+         for (var i = 0; i < pCheckCodeList.length; i++) 
+         {
              var query = '#MvcDynamicField_' + pCheckCodeList[i];
              $(query).attr('disabled', 'disabled');
              query = '#LabelMvcDynamicField_' + pCheckCodeList[i];
              // $(query).hide();// no need to disable the label
-             AddToDisabledFieldsList(pCheckCodeList[i]);
+             CCE_AddToDisabledFieldsList(pCheckCodeList[i]);
          }
      }
  }
@@ -406,8 +390,10 @@ function AddToHiddenFieldsList(FieldName)
  /// Processed the Disable Except command for check code execution
  /// </summary>
  /// <param name="checkCodeList">A list of fields</param>
- function CCE_ProcessDisableExceptCommand(pCheckCodeList) {
-     if (pCheckCodeList != null) {
+ function CCE_ProcessDisableExceptCommand(pCheckCodeList) 
+ {
+     if (pCheckCodeList != null) 
+     {
          var controlsList = GetAssociatedControls(pCheckCodeList);
          //this.canvas.HideExceptCheckCodeItems(controlsList);
      }
@@ -416,19 +402,21 @@ function AddToHiddenFieldsList(FieldName)
 
  /*-----------------Enable-----------------------------------*/
 
- function CCE_Enable(pNameList, pIsExceptionList) {
-
-
-     try {
-         if (pIsExceptionList) {
+ function CCE_Enable(pNameList, pIsExceptionList) 
+ {
+     try 
+     {
+         if (pIsExceptionList) 
+         {
              CCE_ProcessEnableExceptCommand(pNameList);
-
          }
-         else {
+         else 
+         {
              CCE_ProcessEnableCommand(pNameList);
          }
      }
-     catch (ex) {
+     catch (ex) 
+     {
 
      }
  }
@@ -438,17 +426,17 @@ function AddToHiddenFieldsList(FieldName)
  /// Processes the Enable command for check code execution
  /// </summary>
  /// <param name="checkCodeList">A list of fields to enable</param>
- function CCE_ProcessEnableCommand(pCheckCodeList) {
-     if (pCheckCodeList != null) {
-         //var controlsList = GetAssociatedControls(pCheckCodeList);
-         //this.canvas.HideCheckCodeItems(controlsList);
-         for (var i = 0; i < pCheckCodeList.length; i++) {
-
+ function CCE_ProcessEnableCommand(pCheckCodeList) 
+ {
+     if (pCheckCodeList != null) 
+     {
+         for (var i = 0; i < pCheckCodeList.length; i++) 
+         {
              var query = '#MvcDynamicField_' + pCheckCodeList[i];
              $(query).removeAttr('disabled');
              query = '#LabelMvcDynamicField_' + pCheckCodeList[i];
              //$(query).show();// don't do anything with label
-             AddToDisabledFieldsList(pCheckCodeList[i]);
+             CCE_AddToDisabledFieldsList(pCheckCodeList[i]);
          }
      }
  }
@@ -458,8 +446,10 @@ function AddToHiddenFieldsList(FieldName)
  /// Processed the enable Except command for check code execution
  /// </summary>
  /// <param name="checkCodeList">A list of fields</param>
- function CCE_ProcessEnableExceptCommand(pCheckCodeList) {
-     if (pCheckCodeList != null) {
+ function CCE_ProcessEnableExceptCommand(pCheckCodeList) 
+ {
+     if (pCheckCodeList != null) 
+     {
          var controlsList = GetAssociatedControls(pCheckCodeList);
          //this.canvas.HideExceptCheckCodeItems(controlsList);
      }
@@ -468,20 +458,36 @@ function AddToHiddenFieldsList(FieldName)
 
  /****Add to disabled control list********************/
 
- function AddToDisabledFieldsList(FieldName) {
-     if (document.getElementById("DisabledFieldsList").value != "") {
-
+ function CCE_AddToDisabledFieldsList(FieldName) 
+ {
+     if (document.getElementById("DisabledFieldsList").value != "") 
+     {
          document.getElementById("DisabledFieldsList").value += ",";
-
      }
      document.getElementById("DisabledFieldsList").value += FieldName;
+ }
+
+
+  
+ function CCE_AddToHilightedFieldsList(FieldName) 
+ {
+     if (document.getElementById("HighlightedFieldsList").value != "") 
+     {
+         document.getElementById("HighlightedFieldsList").value += ",";
+     }
+     document.getElementById("HighlightedFieldsList").value += FieldName;
 
  }
 
 
-
-
-
+function CCE_AddToHiddenFieldsList(FieldName)
+{
+    if (document.getElementById("HiddenFieldsList").value !="") 
+    {
+        document.getElementById("HiddenFieldsList").value += ",";
+    }
+    document.getElementById("HiddenFieldsList").value += FieldName;
+}
 
 
 
