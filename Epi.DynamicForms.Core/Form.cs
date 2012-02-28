@@ -310,5 +310,10 @@ namespace MvcDynamicForms
             EIP.Execute(FormCheckCode);
             return (Epi.Core.EnterInterpreter.Rule_Context)EIP.Context;
         }
+        public string FormJavaScript { get; set; }
+
+
+    
+
     }
 }
