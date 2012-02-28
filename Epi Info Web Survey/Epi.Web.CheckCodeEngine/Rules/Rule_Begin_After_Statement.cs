@@ -60,8 +60,10 @@ namespace Epi.Core.EnterInterpreter.Rules
 
         }
 
-        public override bool IsNull() { return this.Statements == null; }
-
+        public override bool IsNull() 
+        {
+            return this.Statements == null;
+        }
 
         public override void ToJavaScript(StringBuilder pJavaScriptBuilder)
         {
