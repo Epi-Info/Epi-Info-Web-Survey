@@ -150,6 +150,32 @@ CCE_Context.prototype.resolve = function (pName)
     return $(query);
 }
 
+
+CCE_Context.prototype.getValue = function (pName) 
+{
+    var field = this.resolve(pName);
+    if (field != null) 
+    {
+        return field.val();
+    }
+    else 
+    {
+        return null;
+    }
+}
+
+
+CCE_Context.prototype.setValue = function (pName, pValue) 
+{
+    var field = this.resolve(pName);
+    if (field != null) 
+    {
+        field.val(pValue);
+    }
+}
+
+
+
 cce_Context = new CCE_Context();
 
 function CCE_Symbol() 
