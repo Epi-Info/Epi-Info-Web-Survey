@@ -53,5 +53,18 @@ namespace Epi.Core.EnterInterpreter.Rules
 
         return result;
        }
+
+      public override void ToJavaScript(StringBuilder pJavaScriptBuilder)
+      {
+
+          if (this.statements != null)
+          {
+             this.statements.ToJavaScript(pJavaScriptBuilder);
+
+          }
+
+          this.statement.ToJavaScript(pJavaScriptBuilder);
+      }
+
     }
 }
