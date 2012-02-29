@@ -134,6 +134,7 @@ namespace Epi.Web.MVC.Controllers
                             form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, GetSurveyPageNumber(SurveyAnswer.XML.ToString()) == 0 ? 1 : GetSurveyPageNumber(SurveyAnswer.XML.ToString()), SurveyAnswer);
                             //Update the model
                             UpdateModel(form);
+                            form.HiddenFieldsList = this.Request.Form["HiddenFieldsList"].ToString();
                             IsSaved = form.IsSaved = true;
                             form.StatusId = SurveyAnswer.Status;
                              _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId, form, SurveyAnswer, IsSubmited, IsSaved, PageNumber);
