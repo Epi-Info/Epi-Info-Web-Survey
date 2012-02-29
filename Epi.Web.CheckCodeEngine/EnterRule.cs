@@ -75,6 +75,34 @@ namespace Epi.Core.EnterInterpreter
             return re.IsMatch(value);
         }
 
+
+        protected object ConvertStringToBoolean(string pValue)
+        {
+            object result = null;
+
+            switch (pValue.ToUpper())
+            {
+                case "(+)":
+                case "YES":
+                case "Y":
+                case "TRUE":
+                case "T":
+                    result = true;
+                    break;
+
+                case "(-)":
+                case "NO":
+                case "N":
+                case "FALSE":
+                case "F":
+                    result = false;
+                    break;
+            }
+
+
+            return result;
+        }
+
         /// <summary>
         /// Returns the DataType enumeration for the data type name passed 
         /// </summary>

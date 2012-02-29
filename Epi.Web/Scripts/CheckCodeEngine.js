@@ -178,18 +178,6 @@ function CCE_Symbol()
       this.Rule = null;
 }
 
-function CCE_Symbol(pName, pType) 
-{
-      this.Name = pName;
-      this.Type = pType;
-      this.Rule = null;
-}
-
-
-
-
-
-
 
 function CCE_SymbolTable()
 {
