@@ -35,6 +35,7 @@
 
 
        $(document).ready(function () {
+          
            $('#successContent').hide();
 
 
@@ -42,7 +43,7 @@
 
            $('div#pages a').click(PostForm);
            function PostForm(event) {
-           // Clicking the navigation links at the top, get the target Url and then post the form
+               // Clicking the navigation links at the top, get the target Url and then post the form
                document.forms[0].action = event.target.href;
                $("#myform").submit();
 
