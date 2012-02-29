@@ -468,14 +468,19 @@ Rule_Hide.prototype.Execute = function ()
  }
 
 
-function CCE_AddToHiddenFieldsList(FieldName)
-{
-    if (document.getElementById("HiddenFieldsList").value !="") 
+function CCE_AddToHiddenFieldsList(FieldName) {
+    debugger;
+var HiddenFieldsList =document.getElementById("HiddenFieldsList").value.toString()
+if (HiddenFieldsList != "" && HiddenFieldsList.indexOf(FieldName.tostring())!= -1)
+    if (HiddenFieldsList != "" && HiddenFieldsList.indexOf(FieldName.tostring())) 
     {
         document.getElementById("HiddenFieldsList").value += ",";
     }
-    document.getElementById("HiddenFieldsList").value += FieldName;
+    if (  HiddenFieldsList.indexOf(FieldName.tostring())!= -1) {
+        document.getElementById("HiddenFieldsList").value += FieldName;
+    }
 }
+
 
 
 
