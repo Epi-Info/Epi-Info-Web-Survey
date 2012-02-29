@@ -38,5 +38,24 @@ namespace Epi.Core.EnterInterpreter.Rules
             this.Context.EnterCheckCodeInterface.Disable(this.IdentifierList, this.IsExceptList);
             return null;
         }
+
+        public override void ToJavaScript(StringBuilder pJavaScriptBuilder)
+        {
+            pJavaScriptBuilder.AppendLine("var List = new Array();");
+            foreach (string fieldName in IdentifierList)
+            {
+                pJavaScriptBuilder.AppendLine(string.Format("List.push('{0}');", fieldName));
+            }
+            //result.AppendLine("List.push('MvcDynamicField_Ill');");
+            if (this.IsExceptList)
+            {
+                pJavaScriptBuilder.AppendLine("CCE_Disable(List,true);");
+            }
+            else
+            {
+                pJavaScriptBuilder.AppendLine("CCE_Disable(List,false);");
+            }
+
+        }
     }
 }
