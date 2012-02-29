@@ -150,6 +150,21 @@ namespace Epi.Core.EnterInterpreter.Rules
                                     break;
                             }
                         }
+                        else if (op.Equals("=") && (LHSO is Boolean || RHSO is Boolean))
+                        {
+                            if (LHSO is Boolean && RHSO is Boolean)
+                            {
+                                result = LHSO == RHSO;   
+                            }
+                            else if (LHSO is Boolean)
+                            {
+                                result = (Boolean)LHSO == (Boolean) this.ConvertStringToBoolean(RHSO.ToString());
+                            }
+                            else
+                            {
+                                result = (Boolean)this.ConvertStringToBoolean(LHSO.ToString()) == (Boolean)RHSO;
+                            }
+                        }
                         else
                         {
                             i = StringComparer.CurrentCultureIgnoreCase.Compare(LHSO.ToString(), RHSO.ToString());
