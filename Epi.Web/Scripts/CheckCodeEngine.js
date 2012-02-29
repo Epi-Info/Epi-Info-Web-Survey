@@ -315,7 +315,7 @@ Rule_Hide.prototype.Execute = function ()
          {
 
              var query = '#MvcDynamicField_' + pCheckCodeList[i];
-             $(query).css("background-color", " ");
+             $(query).css("background-color", "white");
              query = '#LabelMvcDynamicField_' + pCheckCodeList[i];
              CCE_AddToHilightedFieldsList(pCheckCodeList[i]);
          }
