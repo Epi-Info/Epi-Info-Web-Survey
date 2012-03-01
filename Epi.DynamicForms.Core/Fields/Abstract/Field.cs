@@ -25,6 +25,8 @@ namespace MvcDynamicForms.Fields
         protected double _Width;
         protected double _Height;
         protected bool _IsHidden;
+        protected bool _IsHighlighted;
+        protected bool _IsDisabled;
 
         internal Form Form
         {
@@ -88,6 +90,8 @@ namespace MvcDynamicForms.Fields
         public double Width { get { return this._Width; } set { this._Width = value; } }
         public double Height { get { return this._Height; } set { this._Height = value; } }
         public bool IsHidden { get { return this._IsHidden; } set { this._IsHidden = value; } }
+        public bool IsHighlighted { get { return this._IsHighlighted; } set { this._IsHighlighted = value; } }
+        public bool IsDisabled { get { return this._IsDisabled; } set { this._IsDisabled = value; } }
         /// <summary>
         /// This function generates control style 
         /// </summary>
