@@ -108,10 +108,23 @@ namespace MvcDynamicForms.Fields
                 select.Attributes.Add("data-prompt-position", "topRight:10");
             }
             string IsHiddenStyle = "";
+            string IsHighlightedStyle = "";
             if(_IsHidden){
                 IsHiddenStyle = "display:none";
             }
-            select.Attributes.Add("style", "position:absolute;left:" + _left.ToString() + "px;top:" + _top.ToString() + "px" + ";width:" + _ControlWidth.ToString() + "px" + ErrorStyle + ";" +IsHiddenStyle);
+            if (_IsHighlighted)
+            {
+                IsHighlightedStyle = "background-color:yellow";
+            }
+            else
+            {
+                IsHighlightedStyle = "background-color:white";
+            }
+            if (_IsDisabled)
+            {
+                select.Attributes.Add("disabled", "disabled");
+            }
+            select.Attributes.Add("style", "position:absolute;left:" + _left.ToString() + "px;top:" + _top.ToString() + "px" + ";width:" + _ControlWidth.ToString() + "px" + ErrorStyle + ";" +IsHiddenStyle + ";" + IsHighlightedStyle);
             select.MergeAttributes(_inputHtmlAttributes);
             html.Append(select.ToString(TagRenderMode.StartTag));
             // If readonly then add the following jquery script to make the field disabled 

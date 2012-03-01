@@ -38,16 +38,35 @@ namespace MvcDynamicForms.Fields
                 //Add new Error to the error Obj
                  ErrorStyle = ";border-color: red";
             }
-            string IsHiddenStyle = "";
-            if (_IsHidden)
-            {
-                IsHiddenStyle = "display:none";
-            }
+            
             // input element
             var txt = new TagBuilder("input");
             txt.Attributes.Add("name", inputName);
             txt.Attributes.Add("id", inputName);
             txt.Attributes.Add("type", "text");
+
+
+            string IsHiddenStyle = "";
+            string IsHighlightedStyle = "";
+            if (_IsHidden)
+            {
+                IsHiddenStyle = "display:none";
+            }
+            if (_IsHighlighted)
+            {
+                IsHighlightedStyle = "background-color:yellow";
+            }
+            else
+            {
+                IsHighlightedStyle = "background-color:white";
+            }
+            if (_IsDisabled)
+            {
+                txt.Attributes.Add("disabled", "disabled");
+            }
+            
+            
+            
             // txt.Attributes.Add("value", Value);
             ////////////Check code start//////////////////
             EnterRule FunctionObjectAfter = (EnterRule)_form.FormCheckCodeObj.GetCommand("level=field&event=after&identifier=" + _key);
@@ -65,7 +84,7 @@ namespace MvcDynamicForms.Fields
             txt.Attributes.Add("value",Value);
             txt.Attributes.Add("class", GetControlClass());
             txt.Attributes.Add("data-prompt-position", "topRight:15");
-            txt.Attributes.Add("style", "position:absolute;left:" + _left.ToString() + "px;top:" + _top.ToString() + "px" + ";width:" + _ControlWidth.ToString() + "px" + ErrorStyle + ";" + IsHiddenStyle);
+            txt.Attributes.Add("style", "position:absolute;left:" + _left.ToString() + "px;top:" + _top.ToString() + "px" + ";width:" + _ControlWidth.ToString() + "px" + ErrorStyle + ";" + IsHiddenStyle + ";" + IsHighlightedStyle);
             txt.MergeAttributes(_inputHtmlAttributes);
             html.Append(txt.ToString(TagRenderMode.SelfClosing));
 
