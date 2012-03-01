@@ -98,16 +98,29 @@ namespace MvcDynamicForms.Fields
             if (Checked) chk.Attributes.Add("checked", "checked");
             chk.Attributes.Add("value", bool.TrueString);
             string IsHiddenStyle = "";
+            string IsHighlightedStyle = "";
             if (_IsHidden)
             {
                 IsHiddenStyle = "display:none";
+            }
+            if (_IsHighlighted)
+            {
+                IsHighlightedStyle = "background-color:yellow";
+            }
+            else
+            {
+                IsHighlightedStyle = "background-color:white";
+            }
+            if (_IsDisabled)
+            {
+                chk.Attributes.Add("disabled", "disabled");
             }
             ////////////Check code start//////////////////
            // chk.Attributes.Add("onfocus", "EventArray.push('" + Prompt + "Befor')");//befor
             //chk.Attributes.Add("onblur", "EventArray.push('" + Prompt + "After')");//After
             ////////////Check code end//////////////////
 
-            chk.Attributes.Add("style", "position:absolute;left:" + _left.ToString() + "px;top:" + _top.ToString() + "px" + ";width:" + _ControlWidth.ToString() + "px" + ErrorStyle + ";" + IsHiddenStyle);            
+            chk.Attributes.Add("style", "position:absolute;left:" + _left.ToString() + "px;top:" + _top.ToString() + "px" + ";width:" + _ControlWidth.ToString() + "px" + ErrorStyle + ";" + IsHiddenStyle + ";" + IsHighlightedStyle);            
           
             chk.MergeAttributes(_inputHtmlAttributes);
             html.Append(chk.ToString(TagRenderMode.SelfClosing));
