@@ -39,7 +39,8 @@ function CCE_ProcessHideCommand(pCheckCodeList)
             $(query).hide();
             query = '#LabelMvcDynamicField_' + pCheckCodeList[i];
             $(query).hide();
-             CCE_AddToHiddenFieldsList(pCheckCodeList[i]);
+            //CCE_AddToHiddenFieldsList(pCheckCodeList[i]);
+            CCE_AddToFieldsList(pCheckCodeList[i], 'HiddenFieldsList')
         }
     }
 }
@@ -107,7 +108,8 @@ function CCE_ProcessUnHideCommand(pCheckCodeList)
             $(query).show();
             query = '#LabelMvcDynamicField_' + pCheckCodeList[i];
             $(query).show();
-            CCE_AddToHiddenFieldsList(pCheckCodeList[i]);
+
+            CCE_RemoveFromFieldsList(pCheckCodeList[i], 'HiddenFieldsList');
         }
     }
 }
@@ -249,7 +251,8 @@ Rule_Hide.prototype.Execute = function ()
              $(query).css("background-color","yellow");
              query = '#LabelMvcDynamicField_' + pCheckCodeList[i];
             // $(query).hide();// no need to highlight the label
-            CCE_AddToHilightedFieldsList(pCheckCodeList[i]);
+             //CCE_AddToHilightedFieldsList(pCheckCodeList[i]);
+             CCE_AddToFieldsList(pCheckCodeList[i], 'HighlightedFieldsList');
          }
      }
  }
@@ -305,7 +308,8 @@ Rule_Hide.prototype.Execute = function ()
              var query = '#MvcDynamicField_' + pCheckCodeList[i];
              $(query).css("background-color", "white");
              query = '#LabelMvcDynamicField_' + pCheckCodeList[i];
-             CCE_AddToHilightedFieldsList(pCheckCodeList[i]);
+             //CCE_AddToHilightedFieldsList(pCheckCodeList[i]);
+             CCE_RemoveFromFieldsList(pCheckCodeList[i], 'HighlightedFieldsList');
          }
      }
  }
@@ -368,7 +372,8 @@ Rule_Hide.prototype.Execute = function ()
              $(query).attr('disabled', 'disabled');
              query = '#LabelMvcDynamicField_' + pCheckCodeList[i];
              // $(query).hide();// no need to disable the label
-             CCE_AddToDisabledFieldsList(pCheckCodeList[i]);
+             // CCE_AddToDisabledFieldsList(pCheckCodeList[i]);
+              CCE_AddToFieldsList(pCheckCodeList[i], 'DisabledFieldsList');
          }
      }
  }
@@ -424,7 +429,8 @@ Rule_Hide.prototype.Execute = function ()
              $(query).removeAttr('disabled');
              query = '#LabelMvcDynamicField_' + pCheckCodeList[i];
              //$(query).show();// don't do anything with label
-             CCE_AddToDisabledFieldsList(pCheckCodeList[i]);
+             // CCE_AddToDisabledFieldsList(pCheckCodeList[i]);
+             CCE_RemoveFromFieldsList(pCheckCodeList[i], 'DisabledFieldsList');
          }
      }
  }
@@ -446,42 +452,78 @@ Rule_Hide.prototype.Execute = function ()
 
  /****Add to disabled control list********************/
 
- function CCE_AddToDisabledFieldsList(FieldName) 
- {
-     if (document.getElementById("DisabledFieldsList").value != "") 
-     {
-         document.getElementById("DisabledFieldsList").value += ",";
-     }
-     document.getElementById("DisabledFieldsList").value += FieldName;
- }
+// function CCE_AddToDisabledFieldsList(FieldName) 
+// {
+//     if (document.getElementById("DisabledFieldsList").value != "") 
+//     {
+//         document.getElementById("DisabledFieldsList").value += ",";
+//     }
+//     document.getElementById("DisabledFieldsList").value += FieldName;
+// }
 
 
-  
- function CCE_AddToHilightedFieldsList(FieldName) 
- {
-     if (document.getElementById("HighlightedFieldsList").value != "") 
-     {
-         document.getElementById("HighlightedFieldsList").value += ",";
-     }
-     document.getElementById("HighlightedFieldsList").value += FieldName;
+//  
+// function CCE_AddToHilightedFieldsList(FieldName) 
+// {
+//     if (document.getElementById("HighlightedFieldsList").value != "") 
+//     {
+//         document.getElementById("HighlightedFieldsList").value += ",";
+//     }
+//     document.getElementById("HighlightedFieldsList").value += FieldName;
 
- }
+// }
 
 
-function CCE_AddToHiddenFieldsList(FieldName) {
+//function CCE_AddToHiddenFieldsList(FieldName) 
+//{
+//    debugger;
+//var HiddenFieldsList =document.getElementById("HiddenFieldsList").value.toString()
+//if (HiddenFieldsList != "" && HiddenFieldsList.indexOf(FieldName.toString())== -1)
+//    
+//    {
+//        document.getElementById("HiddenFieldsList").value += ",";
+//    }
+//    if (  HiddenFieldsList.indexOf(FieldName.toString())== -1) {
+//        document.getElementById("HiddenFieldsList").value += FieldName;
+//    }
+//}
+
+
+
+function CCE_AddToFieldsList(FieldName,ListName) {
     debugger;
-var HiddenFieldsList =document.getElementById("HiddenFieldsList").value.toString()
-if (HiddenFieldsList != "" && HiddenFieldsList.indexOf(FieldName.tostring())!= -1)
-    if (HiddenFieldsList != "" && HiddenFieldsList.indexOf(FieldName.tostring())) 
-    {
-        document.getElementById("HiddenFieldsList").value += ",";
+    var HiddenFieldsList = document.getElementById(ListName.toString()).value.toString()
+    if (HiddenFieldsList != "" && HiddenFieldsList.indexOf(FieldName.toString()) == -1) {
+        document.getElementById(ListName.toString()).value += ",";
     }
-    if (  HiddenFieldsList.indexOf(FieldName.tostring())!= -1) {
-        document.getElementById("HiddenFieldsList").value += FieldName;
+    if (HiddenFieldsList.indexOf(FieldName.toString()) == -1) {
+        document.getElementById(ListName.toString()).value += FieldName;
     }
 }
 
 
+function CCE_RemoveFromFieldsList(FieldName,ListName)
+ {
+     debugger;
+    
+    var list = document.getElementById(ListName.toString()).value;
+    document.getElementById(ListName).value = "";
+    var ListArray = list.split(',');
+
+    for (var i = 0; i < ListArray.length; i++) {
+
+        if (list != "" && ListArray[i] != FieldName)
+          {
+            document.getElementById(listName.toString()).value += ",";
+          }
+        if (ListArray[i] != FieldName)
+         {
+             document.getElementById(listName.toString()).value += ListArray[i];
+         }
+    }
+
+
+ }
 
 
 
