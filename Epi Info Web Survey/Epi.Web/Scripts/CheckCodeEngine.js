@@ -139,12 +139,32 @@ function CCE_Context()
     this.symbolTable = new Array();
 }
 
-CCE_Context.prototype.resolve = function (pName) 
+
+CCE_Context.prototype.define = function (pName, pType, pSource) 
 {
-    var query = '#MvcDynamicField_' + pName;
-    return $(query);
+    this.symbolTable[pName.toLowerCase()] = new CCE_Symbol(pName.toLowerCase(), pType.toLowerCase(), pSource.toLowerCase());
 }
 
+CCE_Context.prototype.resolve = function (pName) 
+{
+    var cce_Symbol = this.symbolTable[pName.toLowerCase()];
+    if(cce_Symbol != null)
+    {
+        if(cce_Symbol.Source == "datasource")
+        {
+            var query = '#MvcDynamicField_' + pName;
+            return $(query);
+        }
+        else
+        {
+            return cce_Symbol.Value;
+        }
+    }
+    else
+    {
+        return null;
+    }
+}
 
 CCE_Context.prototype.getValue = function (pName) 
 {
@@ -169,15 +189,12 @@ CCE_Context.prototype.setValue = function (pName, pValue)
     }
 }
 
-
-
-cce_Context = new CCE_Context();
-
-function CCE_Symbol() 
+function CCE_Symbol(pName, pType, pSource) 
 {
-      this.Name = new String();
-      this.Type = new String();
-      this.Rule = null;
+      this.Name = pName;
+      this.Type = pType;
+      this.Source = pSource;
+      this.Value = null;
 }
 
 
@@ -527,3 +544,4 @@ function CCE_RemoveFromFieldsList(FieldName,ListName)
 
 
 
+cce_Context = new CCE_Context();
