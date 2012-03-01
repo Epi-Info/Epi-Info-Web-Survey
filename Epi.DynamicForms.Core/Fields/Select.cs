@@ -116,10 +116,7 @@ namespace MvcDynamicForms.Fields
             {
                 IsHighlightedStyle = "background-color:yellow";
             }
-            else
-            {
-                IsHighlightedStyle = "background-color:white";
-            }
+             
             if (_IsDisabled)
             {
                 select.Attributes.Add("disabled", "disabled");
