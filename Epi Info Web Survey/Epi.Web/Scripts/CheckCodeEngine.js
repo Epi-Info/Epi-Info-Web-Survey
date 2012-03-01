@@ -148,30 +148,46 @@ CCE_Context.prototype.define = function (pName, pType, pSource)
 CCE_Context.prototype.resolve = function (pName) 
 {
     var cce_Symbol = this.symbolTable[pName.toLowerCase()];
-    if(cce_Symbol != null)
+
+    return cce_Symbol;
+}
+
+CCE_Context.prototype.getValue = function (pName) 
+{
+    var cce_Symbol = this.resolve(pName);
+    if (cce_Symbol != null) 
     {
         if(cce_Symbol.Source == "datasource")
         {
             var query = '#MvcDynamicField_' + pName;
-            return $(query);
+            var field = $(query);
+            if(field != null)
+            {
+                if(cce_Symbol.Type == "yesno")
+                {
+                    if(field.val() == "1")
+                    {
+                        return "Yes";
+                    }
+                    else
+                    {
+                        return "No";
+                    }
+                }
+                else
+                {
+                    return field.val();
+                }
+            }
+            else
+            {
+                return null;
+            }
         }
         else
         {
             return cce_Symbol.Value;
         }
-    }
-    else
-    {
-        return null;
-    }
-}
-
-CCE_Context.prototype.getValue = function (pName) 
-{
-    var field = this.resolve(pName);
-    if (field != null) 
-    {
-        return field.val();
     }
     else 
     {
@@ -182,10 +198,21 @@ CCE_Context.prototype.getValue = function (pName)
 
 CCE_Context.prototype.setValue = function (pName, pValue) 
 {
-    var field = this.resolve(pName);
-    if (field != null) 
+    var cce_Symbol = this.resolve(pName);
+    if (cce_Symbol != null) 
     {
-        field.val(pValue);
+        if(cce_Symbol.Source == "datasource")
+        {
+            var query = '#MvcDynamicField_' + pName;
+            $(query).val(pValue);
+            cce_Symbol.Value = pValue;
+        }
+        else
+        {
+            cce_Symbol.Value = pValue;
+        }
+
+        
     }
 }
 
