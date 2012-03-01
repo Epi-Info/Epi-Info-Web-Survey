@@ -302,6 +302,16 @@ namespace MvcDynamicForms
         { 
             get; set;
         }
+        public string HighlightedFieldsList
+        {
+            get;
+            set;
+        }
+        public string DisabledFieldsList
+        {
+            get;
+            set;
+        }
         public Epi.Core.EnterInterpreter.Rule_Context FormCheckCodeObj { get; set; }
 
         public Epi.Core.EnterInterpreter.Rule_Context GetCheckCodeObj(string FormCheckCode)

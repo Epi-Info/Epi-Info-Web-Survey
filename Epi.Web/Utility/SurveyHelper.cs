@@ -79,20 +79,25 @@ namespace Epi.Web.MVC.Utility
                 ////Update Hidden Fields List before saving response XML
                if (form.HiddenFieldsList !=null)
                 {
-                    
-
-                    //if (!string.IsNullOrEmpty(Xdoc.Root.Attribute("HiddenFieldsList").Value))
-                    //{
-                    //    Xdoc.Root.Attribute("HiddenFieldsList").Value += ",";
-                    //    Xdoc.Root.Attribute("HiddenFieldsList").Value += form.HiddenFieldsList.ToString();
-                    //}
-                    //else
-                    //{
+                     
                         Xdoc.Root.Attribute("HiddenFieldsList").Value = "";
                         Xdoc.Root.Attribute("HiddenFieldsList").Value = form.HiddenFieldsList.ToString();
-                   // }
+                   
                 }
+               if (form.HighlightedFieldsList != null)
+               {
 
+                   Xdoc.Root.Attribute("HighlightedFieldsList").Value = "";
+                   Xdoc.Root.Attribute("HighlightedFieldsList").Value = form.HighlightedFieldsList.ToString();
+
+               }
+               if (form.DisabledFieldsList != null)
+               {
+
+                   Xdoc.Root.Attribute("DisabledFieldsList").Value = "";
+                   Xdoc.Root.Attribute("DisabledFieldsList").Value = form.DisabledFieldsList.ToString();
+
+               }
            
             ////Update survey response Status
             if (IsSubmited)
@@ -101,6 +106,8 @@ namespace Epi.Web.MVC.Utility
                 surveyAnswerRequest.SurveyAnswerList[0].Status = 3;
                 Xdoc.Root.Attribute("LastPageVisited").Remove();
                 Xdoc.Root.Attribute("HiddenFieldsList").Remove();
+                Xdoc.Root.Attribute("HighlightedFieldsList").Remove();
+                Xdoc.Root.Attribute("DisabledFieldsList").Remove();
                 RemovePageNumAtt(Xdoc);
             }
             if (IsSaved)
