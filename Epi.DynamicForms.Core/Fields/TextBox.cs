@@ -72,11 +72,26 @@ namespace MvcDynamicForms.Fields
                 txt.Attributes.Add("MaxLength", _MaxLength.ToString());
             }
             string IsHiddenStyle = "";
+            string IsHighlightedStyle = "";
+           
             if (_IsHidden)
             {
                 IsHiddenStyle = "display:none";
             }
-            txt.Attributes.Add("style", "position:absolute;left:" + _left.ToString() + "px;top:" + _top.ToString() + "px" + ";width:" + _ControlWidth.ToString() + "px" + ErrorStyle + ";" + IsHiddenStyle);            
+            if (_IsHighlighted)
+            {
+                IsHighlightedStyle = "background-color:yellow";
+            }
+            else
+            {
+                IsHighlightedStyle = "background-color:white";
+            }
+
+            if (_IsDisabled)
+            {
+                txt.Attributes.Add("disabled", "disabled");
+            }
+            txt.Attributes.Add("style", "position:absolute;left:" + _left.ToString() + "px;top:" + _top.ToString() + "px" + ";width:" + _ControlWidth.ToString() + "px" + ErrorStyle + ";" + IsHiddenStyle + ";" + IsHighlightedStyle);            
           
             txt.MergeAttributes(_inputHtmlAttributes);
             html.Append(txt.ToString(TagRenderMode.SelfClosing));
