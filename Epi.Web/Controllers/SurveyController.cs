@@ -112,17 +112,14 @@ namespace Epi.Web.MVC.Controllers
                        
                         bool IsSubmited = false;
                         bool IsSaved = false;
-                        //string TempDataa = "";
-                     
-                        //XDocument xdoc = XDocument.Parse(SurveyAnswer.XML.ToString());
-                        //TempData["HiddenFieldsList"]=xdoc.Root.Attribute("HiddenFieldsList").Value.ToString();
-                        //TempDataa = TempData["HiddenFieldsList"].ToString();
+                       
 
 
  
 
                             form.HiddenFieldsList = this.Request.Form["HiddenFieldsList"].ToString();
-                       
+                            form.HighlightedFieldsList = this.Request.Form["HighlightedFieldsList"].ToString();
+                            form.DisabledFieldsList = this.Request.Form["DisabledFieldsList"].ToString();
                          
                         _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId, form, SurveyAnswer, IsSubmited, IsSaved, PageNumber);
 
@@ -135,6 +132,8 @@ namespace Epi.Web.MVC.Controllers
                             //Update the model
                             UpdateModel(form);
                             form.HiddenFieldsList = this.Request.Form["HiddenFieldsList"].ToString();
+                            form.HighlightedFieldsList = this.Request.Form["HighlightedFieldsList"].ToString();
+                            form.DisabledFieldsList = this.Request.Form["DisabledFieldsList"].ToString();
                             IsSaved = form.IsSaved = true;
                             form.StatusId = SurveyAnswer.Status;
                              _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId, form, SurveyAnswer, IsSubmited, IsSaved, PageNumber);

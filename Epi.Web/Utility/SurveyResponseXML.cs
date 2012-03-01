@@ -83,6 +83,8 @@ namespace Epi.Web.MVC.Utility
               root.SetAttribute("SurveyId", SurveyId);
               root.SetAttribute("LastPageVisited", "1");
               root.SetAttribute("HiddenFieldsList","");
+              root.SetAttribute("HighlightedFieldsList", "");
+              root.SetAttribute("DisabledFieldsList", "");
               xml.AppendChild(root);
               }
 
