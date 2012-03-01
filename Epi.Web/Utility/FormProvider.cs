@@ -280,7 +280,7 @@ namespace Epi.Web.MVC.Utility
                 Lower = _FieldTypeID.Attribute("Lower").Value,
                 Upper = _FieldTypeID.Attribute("Upper").Value,
                 Value = _ControlValue,
-                IsHidden = IsHidden(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "HiddenFieldsList"),
+                IsHidden = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "HiddenFieldsList"),
                 Pattern = _FieldTypeID.Attribute("Pattern").Value
                 
             };
@@ -304,7 +304,7 @@ namespace Epi.Web.MVC.Utility
                 fontfamily = _FieldTypeID.Attribute("ControlFontFamily").Value,
                 fontstyle = _FieldTypeID.Attribute("ControlFontStyle").Value,
                 Height = _Height * double.Parse(_FieldTypeID.Attribute("ControlHeightPercentage").Value),
-                IsHidden = IsHidden(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "HiddenFieldsList"),
+                IsHidden = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "HiddenFieldsList"),
                 Width = _Width * double.Parse(_FieldTypeID.Attribute("ControlWidthPercentage").Value)
 
             };
@@ -336,7 +336,7 @@ namespace Epi.Web.MVC.Utility
                 fontfamily = _FieldTypeID.Attribute("PromptFontFamily").Value,
                 IsRequired = bool.Parse(_FieldTypeID.Attribute("IsRequired").Value),
                 IsReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value),
-                IsHidden = IsHidden(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "HiddenFieldsList"),
+                IsHidden = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "HiddenFieldsList"),
                 Value = _ControlValue
 
 
@@ -369,7 +369,7 @@ namespace Epi.Web.MVC.Utility
                 IsRequired = bool.Parse(_FieldTypeID.Attribute("IsRequired").Value),
                 IsReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value),
                 MaxLength = int.Parse(_FieldTypeID.Attribute("MaxLength").Value),
-                IsHidden = IsHidden(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "HiddenFieldsList"),
+                IsHidden = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "HiddenFieldsList"),
                 Value = _ControlValue
                 
 
@@ -400,7 +400,7 @@ namespace Epi.Web.MVC.Utility
                 fontstyle = _FieldTypeID.Attribute("PromptFontStyle").Value,
                 fontSize = double.Parse(_FieldTypeID.Attribute("PromptFontSize").Value),
                 fontfamily = _FieldTypeID.Attribute("PromptFontFamily").Value,
-                IsHidden = IsHidden(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "HiddenFieldsList"),
+                IsHidden = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "HiddenFieldsList"),
                 ReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value) 
                  
               
@@ -437,7 +437,7 @@ namespace Epi.Web.MVC.Utility
                 Lower = _FieldTypeID.Attribute("Lower").Value,
                 Upper = _FieldTypeID.Attribute("Upper").Value,
                 Value = _ControlValue,
-                IsHidden = IsHidden(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "HiddenFieldsList"),
+                IsHidden = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "HiddenFieldsList"),
                 Pattern = _FieldTypeID.Attribute("Pattern").Value
 
             };
@@ -471,7 +471,7 @@ namespace Epi.Web.MVC.Utility
                     ShowEmptyOption = true,
                     SelectType=FieldTypeId,
                     SelectedValue = _ControlValue,
-                    IsHidden = IsHidden(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "HiddenFieldsList"),
+                    IsHidden = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "HiddenFieldsList"),
                      
                     EmptyOption = "Select"
 
@@ -545,7 +545,7 @@ namespace Epi.Web.MVC.Utility
                     GroupBox.fontSize = double.Parse(_FieldTypeID.Attribute("ControlFontSize").Value);
                     GroupBox.fontfamily = _FieldTypeID.Attribute("ControlFontFamily").Value;
                     GroupBox.ReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value);
-                    GroupBox.IsHidden = IsHidden(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "HiddenFieldsList");
+                    GroupBox.IsHidden = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "HiddenFieldsList");
 
 
                 
@@ -567,7 +567,7 @@ namespace Epi.Web.MVC.Utility
         }
 
         //check if the control should be hidden
-        public static bool IsHidden(string Xml, string ControlName,string ListName)
+        public static bool GetControlState(string Xml, string ControlName,string ListName)
         {
 
             bool _Val = false;
