@@ -216,12 +216,12 @@ CCE_Context.prototype.setValue = function (pName, pValue)
     }
 }
 
-function CCE_Symbol(pName, pType, pSource) 
+function CCE_Symbol(pName, pType, pSource, pValue) 
 {
       this.Name = pName;
       this.Type = pType;
       this.Source = pSource;
-      this.Value = null;
+      this.Value = pValue;
 }
 
 
