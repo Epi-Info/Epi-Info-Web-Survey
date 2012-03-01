@@ -491,12 +491,12 @@ Rule_Hide.prototype.Execute = function ()
 
 
 function CCE_AddToFieldsList(FieldName,ListName) {
-    debugger;
-    var HiddenFieldsList = document.getElementById(ListName.toString()).value.toString()
-    if (HiddenFieldsList != "" && HiddenFieldsList.indexOf(FieldName.toString()) == -1) {
+     
+    var  List = document.getElementById(ListName.toString()).value.toString()
+    if ( List != "" &&  List.indexOf(FieldName.toString()) == -1) {
         document.getElementById(ListName.toString()).value += ",";
     }
-    if (HiddenFieldsList.indexOf(FieldName.toString()) == -1) {
+    if ( List.indexOf(FieldName.toString()) == -1) {
         document.getElementById(ListName.toString()).value += FieldName;
     }
 }
@@ -504,7 +504,7 @@ function CCE_AddToFieldsList(FieldName,ListName) {
 
 function CCE_RemoveFromFieldsList(FieldName,ListName)
  {
-     debugger;
+      
     
     var list = document.getElementById(ListName.toString()).value;
     document.getElementById(ListName).value = "";
