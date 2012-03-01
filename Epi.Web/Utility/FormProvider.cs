@@ -251,7 +251,8 @@ namespace Epi.Web.MVC.Utility
             }
         }
 
-        public  static string GetControlValue( string Xml,string ControlName ) {
+        public  static string GetControlValue( string Xml,string ControlName ) 
+        {
 
             string ControlValue = "";
 
