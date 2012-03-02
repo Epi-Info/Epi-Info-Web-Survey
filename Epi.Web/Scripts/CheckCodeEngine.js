@@ -35,9 +35,9 @@ function CCE_ProcessHideCommand(pCheckCodeList)
         for (var i = 0; i < pCheckCodeList.length; i++) 
         {
             
-            var query = '#MvcDynamicField_' + pCheckCodeList[i];
+            var query = '#mvcdynamicfield_' + pCheckCodeList[i];
             $(query).hide();
-            query = '#LabelMvcDynamicField_' + pCheckCodeList[i];
+            query = '#labelmvcdynamicfield_' + pCheckCodeList[i];
             $(query).hide();
             //CCE_AddToHiddenFieldsList(pCheckCodeList[i]);
             CCE_AddToFieldsList(pCheckCodeList[i], 'HiddenFieldsList')
@@ -104,9 +104,9 @@ function CCE_ProcessUnHideCommand(pCheckCodeList)
         for (var i = 0; i < pCheckCodeList.length; i++) 
         {
 
-            var query = '#MvcDynamicField_' + pCheckCodeList[i];
+            var query = '#mvcdynamicfield_' + pCheckCodeList[i];
             $(query).show();
-            query = '#LabelMvcDynamicField_' + pCheckCodeList[i];
+            query = '#labelmvcdynamicfield_' + pCheckCodeList[i];
             $(query).show();
 
             CCE_RemoveFromFieldsList(pCheckCodeList[i], 'HiddenFieldsList');
@@ -159,7 +159,7 @@ CCE_Context.prototype.getValue = function (pName)
     {
         if(cce_Symbol.Source == "datasource")
         {
-            var query = '#MvcDynamicField_' + pName;
+            var query = '#mvcdynamicfield_' + pName;
             var field = $(query);
             if(field != null)
             {
@@ -203,7 +203,7 @@ CCE_Context.prototype.setValue = function (pName, pValue)
     {
         if(cce_Symbol.Source == "datasource")
         {
-            var query = '#MvcDynamicField_' + pName;
+            var query = '#mvcdynamicfield_' + pName;
             $(query).val(pValue);
             cce_Symbol.Value = pValue;
         }
@@ -291,9 +291,9 @@ Rule_Hide.prototype.Execute = function ()
      {
          for (var i = 0; i < pCheckCodeList.length; i++) {
 
-             var query = '#MvcDynamicField_' + pCheckCodeList[i];
+             var query = '#mvcdynamicfield_' + pCheckCodeList[i];
              $(query).css("background-color","yellow");
-             query = '#LabelMvcDynamicField_' + pCheckCodeList[i];
+             query = '#labelmvcdynamicfield_' + pCheckCodeList[i];
             // $(query).hide();// no need to highlight the label
              //CCE_AddToHilightedFieldsList(pCheckCodeList[i]);
              CCE_AddToFieldsList(pCheckCodeList[i], 'HighlightedFieldsList');
@@ -349,9 +349,9 @@ Rule_Hide.prototype.Execute = function ()
          for (var i = 0; i < pCheckCodeList.length; i++) 
          {
 
-             var query = '#MvcDynamicField_' + pCheckCodeList[i];
+             var query = '#mvcdynamicfield_' + pCheckCodeList[i];
              $(query).css("background-color", "white");
-             query = '#LabelMvcDynamicField_' + pCheckCodeList[i];
+             query = '#labelmvcdynamicfield_' + pCheckCodeList[i];
              //CCE_AddToHilightedFieldsList(pCheckCodeList[i]);
              CCE_RemoveFromFieldsList(pCheckCodeList[i], 'HighlightedFieldsList');
          }
@@ -412,9 +412,9 @@ Rule_Hide.prototype.Execute = function ()
          //this.canvas.HideCheckCodeItems(controlsList);
          for (var i = 0; i < pCheckCodeList.length; i++) 
          {
-             var query = '#MvcDynamicField_' + pCheckCodeList[i];
+             var query = '#mvcdynamicfield_' + pCheckCodeList[i];
              $(query).attr('disabled', 'disabled');
-             query = '#LabelMvcDynamicField_' + pCheckCodeList[i];
+             query = '#labelmvcdynamicfield_' + pCheckCodeList[i];
              // $(query).hide();// no need to disable the label
              // CCE_AddToDisabledFieldsList(pCheckCodeList[i]);
               CCE_AddToFieldsList(pCheckCodeList[i], 'DisabledFieldsList');
@@ -469,9 +469,9 @@ Rule_Hide.prototype.Execute = function ()
      {
          for (var i = 0; i < pCheckCodeList.length; i++) 
          {
-             var query = '#MvcDynamicField_' + pCheckCodeList[i];
+             var query = '#mvcdynamicfield_' + pCheckCodeList[i];
              $(query).removeAttr('disabled');
-             query = '#LabelMvcDynamicField_' + pCheckCodeList[i];
+             query = '#labelmvcdynamicfield_' + pCheckCodeList[i];
              //$(query).show();// don't do anything with label
              // CCE_AddToDisabledFieldsList(pCheckCodeList[i]);
              CCE_RemoveFromFieldsList(pCheckCodeList[i], 'DisabledFieldsList');
@@ -547,25 +547,20 @@ function CCE_AddToFieldsList(FieldName,ListName) {
 
 
 function CCE_RemoveFromFieldsList(FieldName,ListName)
- {
-      
-    
-    var list = document.getElementById(ListName.toString()).value;
-    document.getElementById(ListName).value = "";
+{
+    var list = document.getElementById(ListName).value;
     var ListArray = list.split(',');
+    var newList = new Array();
 
-    for (var i = 0; i < ListArray.length; i++) {
-
-        if (list != "" && ListArray[i] != FieldName)
-          {
-            document.getElementById(listName.toString()).value += ",";
-          }
+    for (var i = 0; i < ListArray.length; i++) 
+    {
         if (ListArray[i] != FieldName)
-         {
-             document.getElementById(listName.toString()).value += ListArray[i];
-         }
+        {
+            newList.push(ListArray[i]);
+        }
     }
 
+    document.getElementById(ListName).value  = newList.join(",");
 
  }
 
