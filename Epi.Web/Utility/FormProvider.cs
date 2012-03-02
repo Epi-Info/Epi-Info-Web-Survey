@@ -72,6 +72,12 @@ namespace Epi.Web.MVC.Utility
                 string defineFormat = "cce_Context.define(\"{0}\", \"{1}\", \"{2}\", \"{3}\");";
                 string defineNumberFormat = "cce_Context.define(\"{0}\", \"{1}\", \"{2}\", new Number({3}));";
 
+                XDocument xdocResponse = XDocument.Parse(_SurveyAnswer.XML);
+
+                form.HiddenFieldsList = xdocResponse.Root.Attribute("HiddenFieldsList").Value;
+                form.HighlightedFieldsList = xdocResponse.Root.Attribute("HighlightedFieldsList").Value;
+                form.DisabledFieldsList = xdocResponse.Root.Attribute("DisabledFieldsList").Value;
+
                 if (!string.IsNullOrEmpty(checkcode))
                 {
                     form.FormCheckCodeObj = form.GetCheckCodeObj(checkcode);
