@@ -399,7 +399,7 @@ namespace Epi.Core.EnterInterpreter
                         result = new Rule_NegateExp(pContext, NT);
                         break;
                     case "<Begin_Before_statement>":
-                        result = new Rule_Begin_Before_Statement(pContext, NT); 
+                        result = new Rule_Begin_Before_Statement(pContext, NT);
                         break;
                     case "<Begin_After_statement>":
                         result = new Rule_Begin_After_Statement(pContext, NT);

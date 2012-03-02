@@ -534,16 +534,21 @@ Rule_Hide.prototype.Execute = function ()
 
 
 
-function CCE_AddToFieldsList(FieldName,ListName) {
+function CCE_AddToFieldsList(FieldName,ListName)
+{
 
     var List = document.getElementById(ListName).value.toString()
     var ListArray = List.split(',');
     var Counter = 0;
-    for (var i = 0; i < ListArray.length; i++) {
-        if (ListArray[i] == FieldName) {
+    for (var i = 0; i < ListArray.length; i++) 
+    {
+        if (ListArray[i] == FieldName) 
+        {
             Counter ++;
         }
-        if (Counter == 0) {
+
+        if (Counter == 0) 
+        {
             ListArray.push(FieldName);
         }
         document.getElementById(ListName).value = ListArray.join(",");
