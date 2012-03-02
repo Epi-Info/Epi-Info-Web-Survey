@@ -46,7 +46,7 @@ namespace MvcDynamicForms.Fields
             txt.Attributes.Add("name", inputName);
             txt.Attributes.Add("id", inputName);
             txt.Attributes.Add("type", "text");
-           // txt.Attributes.Add("value", Value);
+            
             ////////////Check code start//////////////////
                 EnterRule FunctionObjectAfter = (EnterRule)_form.FormCheckCodeObj.GetCommand("level=field&event=after&identifier=" + _key);
                 if (FunctionObjectAfter != null && !FunctionObjectAfter.IsNull() )
@@ -101,6 +101,11 @@ namespace MvcDynamicForms.Fields
                 html.Append(scriptReadOnlyText.ToString(TagRenderMode.Normal));
             }
 
+            //prevent text box control to submit on enter click
+            var scriptBuilder = new TagBuilder("script");
+            scriptBuilder.InnerHtml = "$('#" + inputName + "').BlockEnter('" + inputName + "');";
+            scriptBuilder.ToString(TagRenderMode.Normal);
+            html.Append(scriptBuilder.ToString(TagRenderMode.Normal));
 
             var wrapper = new TagBuilder(_fieldWrapper);
             wrapper.Attributes["class"] = _fieldWrapperClass;
