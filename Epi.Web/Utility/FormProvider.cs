@@ -610,14 +610,20 @@ namespace Epi.Web.MVC.Utility
 
                 if (!string.IsNullOrEmpty(xdoc.Root.Attribute(ListName).Value.ToString()))
                 {
-                    if (xdoc.Root.Attribute(ListName).Value.Contains(ControlName))
+                    string List =xdoc.Root.Attribute(ListName).Value;
+                    string[] ListArray = List.Split(',');
+                    for (var i = 0; i < ListArray.Length; i++)
                     {
-                        _Val = true;
-                    }
-                    else
-                    {
+                        if (ListArray[i]  == ControlName.ToLower())
+                        {
+                            _Val = true;
+                            break;
+                        }
+                        else
+                        {
 
-                        _Val = false;
+                            _Val = false;
+                        }
                     }
                 }
 

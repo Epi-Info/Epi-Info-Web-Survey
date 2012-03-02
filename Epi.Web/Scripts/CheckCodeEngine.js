@@ -535,26 +535,34 @@ Rule_Hide.prototype.Execute = function ()
 
 
 function CCE_AddToFieldsList(FieldName,ListName) {
-     
-    var  List = document.getElementById(ListName.toString()).value.toString()
-    if ( List != "" &&  List.indexOf(FieldName.toString()) == -1) {
-        document.getElementById(ListName.toString()).value += ",";
+
+    var List = document.getElementById(ListName).value.toString()
+    var ListArray = List.split(',');
+    var Counter = 0;
+    for (var i = 0; i < ListArray.length; i++) {
+        if (ListArray[i] == FieldName) {
+            Counter ++;
+        }
+        if (Counter == 0) {
+            ListArray.push(FieldName);
+        }
+        document.getElementById(ListName).value = ListArray.join(",");
     }
-    if ( List.indexOf(FieldName.toString()) == -1) {
-        document.getElementById(ListName.toString()).value += FieldName;
-    }
+
+
 }
 
 
-function CCE_RemoveFromFieldsList(FieldName,ListName)
-{
+function CCE_RemoveFromFieldsList(FieldName,ListName) {
+
+    debugger;
     var list = document.getElementById(ListName).value;
     var ListArray = list.split(',');
     var newList = new Array();
 
     for (var i = 0; i < ListArray.length; i++) 
     {
-        if (ListArray[i] != FieldName)
+        if (ListArray[i] != FieldName && ListArray[i] != "")
         {
             newList.push(ListArray[i]);
         }
