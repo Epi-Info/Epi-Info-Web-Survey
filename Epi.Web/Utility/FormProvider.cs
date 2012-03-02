@@ -643,7 +643,7 @@ namespace Epi.Web.MVC.Utility
           EnterRule FunctionObject_B = (EnterRule)form.FormCheckCodeObj.GetCommand("level=field&event=before&identifier=" + controlName);
           if (FunctionObject_B != null && !FunctionObject_B.IsNull())
           {
-              B_JavaScript.Append("function " + controlName);
+              B_JavaScript.Append("function " + controlName.ToLower());
               FunctionObject_B.ToJavaScript(B_JavaScript);
           }
 
@@ -651,7 +651,7 @@ namespace Epi.Web.MVC.Utility
           EnterRule FunctionObject_A = (EnterRule)form.FormCheckCodeObj.GetCommand("level=field&event=after&identifier=" + controlName);
           if (FunctionObject_A != null && !FunctionObject_A.IsNull())
           {
-              A_JavaScript.Append("function " + controlName);
+              A_JavaScript.Append("function " + controlName.ToLower());
               FunctionObject_A.ToJavaScript(A_JavaScript);
           }
 

@@ -28,7 +28,7 @@ namespace MvcDynamicForms.Fields
             prompt.SetInnerText(Prompt);
             prompt.Attributes.Add("for", inputName);
             prompt.Attributes.Add("class", "EpiLabel");
-            prompt.Attributes.Add("Id", "Label" + inputName);
+            prompt.Attributes.Add("Id", "label" + inputName);
             StringBuilder StyleValues = new StringBuilder();
             StyleValues.Append(GetContolStyle(_fontstyle.ToString(), _Prompttop.ToString(), _Promptleft.ToString(), null, Height.ToString(),_IsHidden));
             prompt.Attributes.Add("style", StyleValues.ToString());    
@@ -52,13 +52,13 @@ namespace MvcDynamicForms.Fields
                 if (FunctionObjectAfter != null && !FunctionObjectAfter.IsNull() )
                 {
                     
-                    txt.Attributes.Add("onblur", "return " + _key + "_After();"); //After
+                    txt.Attributes.Add("onblur", "return " + _key + "_after();"); //After
                 }
                 EnterRule FunctionObjectBefore = (EnterRule)_form.FormCheckCodeObj.GetCommand("level=field&event=before&identifier=" + _key);
                 if (FunctionObjectBefore != null && !FunctionObjectBefore.IsNull())
                 {
                     
-                    txt.Attributes.Add("onfocus", "return "+ _key + "_Before();"); //Before
+                    txt.Attributes.Add("onfocus", "return "+ _key + "_before();"); //Before
                 }
 
             ////////////Check code end//////////////////
