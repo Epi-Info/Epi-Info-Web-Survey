@@ -85,6 +85,11 @@ namespace MvcDynamicForms.Fields
             scriptDatePicker.InnerHtml = "$(function() { $('#" + inputName + "').datepicker({changeMonth: true,changeYear: true});});";
             html.Append(scriptDatePicker.ToString(TagRenderMode.Normal));
 
+            //prevent date picker control to submit on enter click
+            var scriptBuilder = new TagBuilder("script");
+            scriptBuilder.InnerHtml = "$('#" + inputName + "').BlockEnter('" + inputName + "');";
+            scriptBuilder.ToString(TagRenderMode.Normal);
+            html.Append(scriptBuilder.ToString(TagRenderMode.Normal));
 
             var wrapper = new TagBuilder(_fieldWrapper);
             wrapper.Attributes["class"] = _fieldWrapperClass;
