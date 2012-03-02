@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Text;
 using System.Xml;
 using System.Xml.Linq;
+using System.Xml.XPath;
+using Epi.Core.EnterInterpreter;
 namespace Epi.Web.MVC.Controllers
 {
     public class SurveyController : Controller
@@ -55,6 +57,21 @@ namespace Epi.Web.MVC.Controllers
                 
                 
                 }
+                //Injecting page level control states 
+                //XDocument xdoc = XDocument.Parse(surveyInfoModel.XML);
+                //XElement ViewElement = xdoc.XPathSelectElement("Template/Project/View");
+                //string checkcode = ViewElement.Attribute("CheckCode").Value.ToString();
+                //if (!string.IsNullOrEmpty(checkcode))
+                //{
+                //    Epi.Core.EnterInterpreter.EpiInterpreterParser EIP = new Epi.Core.EnterInterpreter.EpiInterpreterParser(Epi.Core.EnterInterpreter.EpiInterpreterParser.GetEnterCompiledGrammarTable());
+                //    EIP.Execute(checkcode);
+                //    StringBuilder JavaScript = new StringBuilder();
+                //   // EnterRule FunctionObject = (EnterRule)((Epi.Core.EnterInterpreter.Rule_Context)EIP.Context).GetCommand("level=page&event=before&identifier=" + "page 1");
+                //    EnterRule FunctionObject = (EnterRule)((Epi.Core.EnterInterpreter.Rule_Context)EIP.Context).GetCommand("level=page&event=before&identifier=" + "page 1");
+                //    JavaScript.Append("function " + "page1");
+                //    FunctionObject.ToJavaScript(JavaScript);
+                //}
+
                 switch(ValidationTest)
                 {
                     case PreValidationResultEnum.SurveyIsPastClosingDate:
@@ -112,14 +129,43 @@ namespace Epi.Web.MVC.Controllers
                        
                         bool IsSubmited = false;
                         bool IsSaved = false;
-                       
+
+                        form.HiddenFieldsList = this.Request.Form["HiddenFieldsList"].ToString();
+
+                        //if (string.IsNullOrEmpty(this.Request.Form["HiddenFieldsList"].ToString()))
+                        //{
+                        //    form.HiddenFieldsList = GetResponseFormState(SurveyAnswer.XML.ToString(), "HiddenFieldsList").ToString();
+                        //}
+                        //else
+                        //{
+                        //    form.HiddenFieldsList = this.Request.Form["HiddenFieldsList"].ToString();
+
+                        //}
 
 
- 
-
-                            form.HiddenFieldsList = this.Request.Form["HiddenFieldsList"].ToString();
                             form.HighlightedFieldsList = this.Request.Form["HighlightedFieldsList"].ToString();
+
+                            //if (string.IsNullOrEmpty(this.Request.Form["HighlightedFieldsList"].ToString()))
+                            //{
+                            //    form.HighlightedFieldsList = GetResponseFormState(SurveyAnswer.XML.ToString(), "HighlightedFieldsList").ToString();
+                            //}
+                            //else
+                            //{
+                            //    form.HighlightedFieldsList = this.Request.Form["HighlightedFieldsList"].ToString();
+
+                            //}
+
                             form.DisabledFieldsList = this.Request.Form["DisabledFieldsList"].ToString();
+
+                            //if (string.IsNullOrEmpty(this.Request.Form["DisabledFieldsList"].ToString()))
+                            //{
+                            //    form.DisabledFieldsList = GetResponseFormState(SurveyAnswer.XML.ToString(), "DisabledFieldsList").ToString();
+                            //}
+                            //else
+                            //{
+                            //    form.DisabledFieldsList = this.Request.Form["DisabledFieldsList"].ToString();
+
+                            //}
                          
                         _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId, form, SurveyAnswer, IsSubmited, IsSaved, PageNumber);
 
@@ -131,9 +177,38 @@ namespace Epi.Web.MVC.Controllers
                             form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, GetSurveyPageNumber(SurveyAnswer.XML.ToString()) == 0 ? 1 : GetSurveyPageNumber(SurveyAnswer.XML.ToString()), SurveyAnswer);
                             //Update the model
                             UpdateModel(form);
+
                             form.HiddenFieldsList = this.Request.Form["HiddenFieldsList"].ToString();
+                            //if (string.IsNullOrEmpty(this.Request.Form["HiddenFieldsList"].ToString()))
+                            //{
+                            //    form.HiddenFieldsList = GetResponseFormState(SurveyAnswer.XML.ToString(), "HiddenFieldsList").ToString();
+                            //}
+                            //else
+                            //{
+                            //    form.HiddenFieldsList = this.Request.Form["HiddenFieldsList"].ToString();
+
+                            //}
                             form.HighlightedFieldsList = this.Request.Form["HighlightedFieldsList"].ToString();
+                            //if (string.IsNullOrEmpty(this.Request.Form["HighlightedFieldsList"].ToString()))
+                            //{
+                            //    form.HighlightedFieldsList = GetResponseFormState(SurveyAnswer.XML.ToString(), "HighlightedFieldsList").ToString();
+                            //}
+                            //else
+                            //{
+                            //    form.HighlightedFieldsList = this.Request.Form["HighlightedFieldsList"].ToString();
+
+                            //}
                             form.DisabledFieldsList = this.Request.Form["DisabledFieldsList"].ToString();
+
+                            //if (string.IsNullOrEmpty(this.Request.Form["DisabledFieldsList"].ToString()))
+                            //{
+                            //    form.DisabledFieldsList = GetResponseFormState(SurveyAnswer.XML.ToString(), "DisabledFieldsList").ToString();
+                            //}
+                            //else
+                            //{
+                            //    form.DisabledFieldsList = this.Request.Form["DisabledFieldsList"].ToString();
+
+                            //}
                             IsSaved = form.IsSaved = true;
                             form.StatusId = SurveyAnswer.Status;
                              _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId, form, SurveyAnswer, IsSubmited, IsSaved, PageNumber);
@@ -167,6 +242,41 @@ namespace Epi.Web.MVC.Controllers
                             else
                             {
                                 //This is a Navigation to a url
+                                form.HiddenFieldsList = this.Request.Form["HiddenFieldsList"].ToString();
+                                //if (string.IsNullOrEmpty(this.Request.Form["HiddenFieldsList"].ToString()))
+                                //{
+                                //    form.HiddenFieldsList = GetResponseFormState(SurveyAnswer.XML.ToString(), "HiddenFieldsList").ToString();
+                                //}
+                                //else
+                                //{
+                                //    form.HiddenFieldsList = this.Request.Form["HiddenFieldsList"].ToString();
+
+                                //}
+                                form.HighlightedFieldsList = this.Request.Form["HighlightedFieldsList"].ToString();
+                                //if (string.IsNullOrEmpty(this.Request.Form["HighlightedFieldsList"].ToString()))
+                                //{
+                                //    form.HighlightedFieldsList = GetResponseFormState(SurveyAnswer.XML.ToString(), "HighlightedFieldsList").ToString();
+                                //}
+                                //else
+                                //{
+                                //    form.HighlightedFieldsList = this.Request.Form["HighlightedFieldsList"].ToString();
+
+                                //}
+                                 form.DisabledFieldsList = this.Request.Form["DisabledFieldsList"].ToString();
+
+                                //if (string.IsNullOrEmpty(this.Request.Form["DisabledFieldsList"].ToString()))
+                                //{
+                                //    form.DisabledFieldsList = GetResponseFormState(SurveyAnswer.XML.ToString(), "DisabledFieldsList").ToString();
+                                //}
+                                //else
+                                //{
+                                //    form.DisabledFieldsList = this.Request.Form["DisabledFieldsList"].ToString();
+
+                                //}
+
+                                _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId, form, SurveyAnswer, IsSubmited, IsSaved, PageNumber);
+
+                                SurveyAnswer = _isurveyFacade.GetSurveyAnswerResponse(responseId).SurveyResponseList[0];
                                 form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, PageNumber, SurveyAnswer);
                                 return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
                             }
@@ -283,6 +393,27 @@ namespace Epi.Web.MVC.Controllers
 
             return PageNumber;
 
+        }
+
+        public static string GetResponseFormState(string Xml, string ListName)
+        {
+
+            string List = "";
+
+            if (!string.IsNullOrEmpty(Xml))
+            {
+                XDocument xdoc = XDocument.Parse(Xml);
+
+                if (!string.IsNullOrEmpty(xdoc.Root.Attribute(ListName).Value.ToString()))
+                {
+                     List = xdoc.Root.Attribute(ListName).Value;
+                   
+                    
+                }
+
+            }
+
+            return List;
         }
 
     }
