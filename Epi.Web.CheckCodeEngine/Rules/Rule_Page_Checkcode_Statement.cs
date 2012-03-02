@@ -81,6 +81,16 @@ namespace Epi.Core.EnterInterpreter.Rules
             return this.TextField;
         }
 
-        public override bool IsNull() { return BeginBefore == null && BeginAfter == null; } 
+        public override bool IsNull() 
+        { 
+            return BeginBefore == null && BeginAfter == null;
+        }
+
+        public override void ToJavaScript(StringBuilder pJavaScriptBuilder)
+        {
+            pJavaScriptBuilder.AppendLine("function ");
+            pJavaScriptBuilder.AppendLine(Identifier);
+
+        }
     }
 }
