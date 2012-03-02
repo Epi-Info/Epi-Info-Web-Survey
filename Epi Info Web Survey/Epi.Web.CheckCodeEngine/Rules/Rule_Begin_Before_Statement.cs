@@ -69,7 +69,7 @@ namespace Epi.Core.EnterInterpreter.Rules
 
         public override void ToJavaScript(StringBuilder pJavaScriptBuilder)
         {
-            pJavaScriptBuilder.AppendLine("_Before()");
+            pJavaScriptBuilder.AppendLine("_before()");
             pJavaScriptBuilder.AppendLine("{");
 
             if (this.Statements != null)

@@ -70,7 +70,7 @@ namespace MvcDynamicForms
         {
             get
             {
-                return _fieldPrefix;
+                return _fieldPrefix.ToLower();
             }
             set
             {
