@@ -106,6 +106,12 @@ namespace MvcDynamicForms.Fields
                 html.Append(scriptReadOnlyText.ToString(TagRenderMode.Normal));
             }
 
+            //prevent numeric text box control to submit on enter click
+            var scriptBuilder = new TagBuilder("script");
+            scriptBuilder.InnerHtml = "$('#" + inputName + "').BlockEnter('" + inputName + "');";
+            scriptBuilder.ToString(TagRenderMode.Normal);
+            html.Append(scriptBuilder.ToString(TagRenderMode.Normal));
+
             var wrapper = new TagBuilder(_fieldWrapper);
             wrapper.Attributes["class"] = _fieldWrapperClass;
             wrapper.InnerHtml = html.ToString();
