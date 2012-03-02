@@ -37,7 +37,7 @@ namespace MvcDynamicForms.Fields
             }
             set
             {
-                _key = value;
+                _key = value.ToLower();
             }
         }
         /// <summary>
