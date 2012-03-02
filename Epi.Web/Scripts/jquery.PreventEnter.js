@@ -21,7 +21,7 @@ from submitting. e.g we certainly dont want to prevent submit or save to perform
             });
 
             $('#' + id).keydown(function (event) {
-                debugger;
+                
                 if (event.keyCode == 13) {
                     event.preventDefault();
                     return false;
