@@ -39,5 +39,25 @@ namespace Epi.Core.EnterInterpreter.Rules
 
             return null;
         }
+
+        public override bool IsNull()
+        {
+            return CheckCodeBlock.IsNull() || (CheckCodeBlocks != null && CheckCodeBlocks.IsNull());
+        }
+
+
+        public override void ToJavaScript(StringBuilder pJavaScriptBuilder)
+        {
+
+
+            CheckCodeBlock.ToJavaScript(pJavaScriptBuilder);
+
+            if (CheckCodeBlocks != null)
+            {
+                CheckCodeBlocks.ToJavaScript(pJavaScriptBuilder);
+            }
+
+        }
+
     }
 }
