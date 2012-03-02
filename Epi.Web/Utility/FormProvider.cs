@@ -78,10 +78,28 @@ namespace Epi.Web.MVC.Utility
                 form.HighlightedFieldsList = xdocResponse.Root.Attribute("HighlightedFieldsList").Value;
                 form.DisabledFieldsList = xdocResponse.Root.Attribute("DisabledFieldsList").Value;
 
+                /*
                 if (!string.IsNullOrEmpty(checkcode))
                 {
-                    form.FormCheckCodeObj = form.GetCheckCodeObj(checkcode);
+                    
+                }*/
+
+                form.FormCheckCodeObj = form.GetCheckCodeObj(checkcode);
+                string PageName = GetPageName(XML, PageNumber);
+
+                Epi.Core.EnterInterpreter.Rules.Rule_Begin_Before_Statement FunctionObject_A = (Epi.Core.EnterInterpreter.Rules.Rule_Begin_Before_Statement)form.FormCheckCodeObj.GetCommand("level=page&event=before&identifier=" + PageName);
+                if (FunctionObject_A != null && !FunctionObject_A.IsNull())
+                {
+
+                          JavaScript.Append("$(document).ready(function () {  ");
+                          JavaScript.Append("page" + PageNumber + "_before();");
+                          JavaScript.Append("});");
+
+                          JavaScript.Append("\n\nfunction page" + PageNumber);
+                          FunctionObject_A.ToJavaScript(JavaScript);
                 }
+
+
 
                 foreach (var _FieldTypeID in _FieldsTypeIDs)
                 {
@@ -648,6 +666,18 @@ namespace Epi.Web.MVC.Utility
 
             return   XElement.Attribute("PageId").Value.ToString();
         }
+
+        public static string GetPageName(string Xml, int PageNumber)
+        {
+            XDocument xdoc = XDocument.Parse(Xml);
+
+            XElement XElement = xdoc.XPathSelectElement("Template/Project/View/Page[@Position = '" + (PageNumber - 1).ToString() + "']");
+
+
+
+            return XElement.Attribute("Name").Value.ToString();
+        }
+
         public static string GetFormJavaScript(string CheckCode, Form form, string controlName)
         {// controlName
 
