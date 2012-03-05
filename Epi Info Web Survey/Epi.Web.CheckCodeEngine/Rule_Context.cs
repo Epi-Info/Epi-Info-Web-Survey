@@ -5,6 +5,10 @@ using System.Data;
 using System.Text.RegularExpressions;
 using com.calitha.goldparser;
 using Epi;
+using System.Linq;
+using System.Xml;
+using System.Xml.Linq;
+
 /*
 using Epi.Collections;
 using Epi.Data;
@@ -513,117 +517,113 @@ public System.Collections.Specialized.NameValueCollection GlobalVariables;*/
             return new cSymbolTable(pName, pParent);
         }
 
-        /*
-        public int[,] GetCodeBlockLineNumbers(string pLevel, string pEvent, string pIdentifier)
+
+        public void LoadTemplate(XDocument pTemplateText)
         {
-            int[,] result = null;
-            try
+            var _FieldsTypeIDs = from _FieldTypeID in pTemplateText.Descendants("Field")
+                                 select _FieldTypeID;
+
+
+            foreach (var _FieldTypeID in _FieldsTypeIDs)
             {
-                this.IsExecuteMode = false;
-                NonterminalToken T = this.parser.Parse(this.commandText);
-
-                string SearchRule = null;
-
-                NonterminalToken R = FindBlock(T, SearchRule, pIdentifier);
-
-                if (R != null)
+                //var Value = GetControlValue(SurveyAnswer, _FieldTypeID.Attribute("Name").Value);
+                //JavaScript.Append(GetFormJavaScript(checkcode, form, _FieldTypeID.Attribute("Name").Value));
+                switch (_FieldTypeID.Attribute("FieldTypeId").Value)
                 {
-                    //result = R.ToString();
+                    case "1": // textbox
+
+                        //var _TextBoxValue = Value;
+                        //form.AddFields(GetTextBox(_FieldTypeID, _Width, _Height, SurveyAnswer, _TextBoxValue));
+                        //                                             pName, pType, pSource
+                        //VariableDefinitions.AppendLine(string.Format(defineFormat, _FieldTypeID.Attribute("Name").Value, "textbox", "datasource", Value));
+                        break;
+
+                    case "2"://Label/Title
+                        //form.AddFields(GetLabel(_FieldTypeID, _Width, _Height, SurveyAnswer));
+                        //                                             pName, pType, pSource
+                        //VariableDefinitions.AppendLine(string.Format(defineFormat, _FieldTypeID.Attribute("Name").Value, "lable", "datasource",Value)); 
+                        break;
+                    case "3"://Label
+
+                        break;
+                    case "4"://MultiLineTextBox
+
+                        //var _TextAreaValue = Value;
+                        //form.AddFields(GetTextArea(_FieldTypeID, _Width, _Height, SurveyAnswer, _TextAreaValue));
+                        //                                             pName, pType, pSource
+                        //VariableDefinitions.AppendLine(string.Format(defineFormat, _FieldTypeID.Attribute("Name").Value, "multiline", "datasource", Value));
+                        break;
+                    case "5"://NumericTextBox
+
+                        //var _NumericTextBoxValue = Value;
+                        //form.AddFields(GetNumericTextBox(_FieldTypeID, _Width, _Height, SurveyAnswer, _NumericTextBoxValue));
+                        //                                             pName, pType, pSource
+                        //VariableDefinitions.AppendLine(string.Format(defineNumberFormat, _FieldTypeID.Attribute("Name").Value, "number", "datasource", Value));
+                        break;
+                    // 7 DatePicker
+                    case "7"://NumericTextBox
+
+                        //var _DatePickerValue = Value;
+                        //form.AddFields(GetDatePicker(_FieldTypeID, _Width, _Height, SurveyAnswer, _DatePickerValue));
+                        //                                             pName, pType, pSource
+                        //VariableDefinitions.AppendLine(string.Format(defineNumberFormat, _FieldTypeID.Attribute("Name").Value, "number", "datasource", Value));
+                        break;
+                    case "10"://CheckBox
+
+                        //var _CheckBoxValue = Value;
+                        //form.AddFields(GetCheckBox(_FieldTypeID, _Width, _Height, SurveyAnswer, _CheckBoxValue));
+                        //                                             pName, pType, pSource
+                        //VariableDefinitions.AppendLine(string.Format(defineFormat, _FieldTypeID.Attribute("Name").Value, "checkbox", "datasource", Value));
+                        break;
+
+                    case "11"://DropDown Yes/No
+
+                        //var _DropDownSelectedValueYN = Value;
+                        //form.AddFields(GetDropDown(_FieldTypeID, _Width, _Height, SurveyAnswer, _DropDownSelectedValueYN, "Yes,No", 11));
+                        //                                             pName, pType, pSource
+                        //VariableDefinitions.AppendLine(string.Format(defineFormat, _FieldTypeID.Attribute("Name").Value, "yesno", "datasource", Value));
+
+                        break;
+                    case "17"://DropDown LegalValues
+
+                        //string DropDownValues1 = "";
+                        //DropDownValues1 = GetDropDownValues(xdoc, _FieldTypeID.Attribute("Name").Value, _FieldTypeID.Attribute("SourceTableName").Value);
+                        //var _DropDownSelectedValue1 = Value;
+                        //form.AddFields(GetDropDown(_FieldTypeID, _Width, _Height, SurveyAnswer, _DropDownSelectedValue1, DropDownValues1, 17));
+                        //                                          pName, pType, pSource
+                        //VariableDefinitions.AppendLine(string.Format(defineFormat, _FieldTypeID.Attribute("Name").Value, "legalvalue", "datasource", Value));
+
+                        break;
+                    case "18"://DropDown Codes
+
+                        //string DropDownValues2 = "";
+                        //DropDownValues2 = GetDropDownValues(xdoc, _FieldTypeID.Attribute("Name").Value, _FieldTypeID.Attribute("SourceTableName").Value);
+                        //var _DropDownSelectedValue2 = Value;
+                        //form.AddFields(GetDropDown(_FieldTypeID, _Width, _Height, SurveyAnswer, _DropDownSelectedValue2, DropDownValues2, 18));
+                        ////                                             pName, pType, pSource
+                        //VariableDefinitions.AppendLine(string.Format(defineFormat, _FieldTypeID.Attribute("Name").Value, "code", "datasource", Value));
+
+                        break;
+                    case "19"://DropDown CommentLegal
+
+                        //string DropDownValues = "";
+                        //DropDownValues = GetDropDownValues(xdoc, _FieldTypeID.Attribute("Name").Value, _FieldTypeID.Attribute("SourceTableName").Value);
+                        //var _DropDownSelectedValue = Value;
+                        //form.AddFields(GetDropDown(_FieldTypeID, _Width, _Height, SurveyAnswer, _DropDownSelectedValue, DropDownValues, 19));
+                        ////                                             pName, pType, pSource
+                        //VariableDefinitions.AppendLine(string.Format(defineFormat, _FieldTypeID.Attribute("Name").Value, "commentlegal", "datasource", Value));
+
+                        break;
+                    case "21"://GroupBox
+                        //var _GroupBoxValue = GetControlValue(SurveyAnswer, _FieldTypeID.Attribute("UniqueId").Value);
+                        //form.AddFields(GetGroupBox(_FieldTypeID, _Width, _Height, SurveyAnswer, _GroupBoxValue));
+                        ////                                             pName, pType, pSource
+                        //VariableDefinitions.AppendLine(string.Format(defineFormat, _FieldTypeID.Attribute("Name").Value, "", "datasource",Value)); 
+                        break;
                 }
-                //Rule_Statements program = new Rule_Statements(mContext, T);
-            }
-            catch
-            {
 
             }
-            return result;
         }
-
-        public void ExecuteCodeBlock(string pLevel, string pEvent, string pIdentifier)
-        {
-            pIdentifier = pIdentifier.ToLower();
-
-            switch (pLevel.ToLower())
-            {
-                case "view":
-                    if (pEvent.ToLower() == "before")
-                    {
-                        if (this.BeforeCheckCode.ContainsKey("view"))
-                        {
-                            this.BeforeCheckCode["view"].Execute();
-                        }
-                    }
-                    else if (pEvent.ToLower() == "after")
-                    {
-                        if (this.AfterCheckCode.ContainsKey("view"))
-                        {
-                            this.AfterCheckCode["view"].Execute();
-                        }
-                    }
-                    break;
-                case "record":
-                    if (pEvent.ToLower() == "before")
-                    {
-                        if (this.BeforeCheckCode.ContainsKey("record"))
-                        {
-                            this.BeforeCheckCode["record"].Execute();
-                        }
-                    }
-                    else if (pEvent.ToLower() == "after")
-                    {
-                        if (this.BeforeCheckCode.ContainsKey("record"))
-                        {
-                            this.AfterCheckCode["record"].Execute();
-                        }
-                    }
-                    break;
-                case "page":
-                    if (pEvent.ToLower() == "before")
-                    {
-                        if (this.PageBeforeCheckCode.ContainsKey(pIdentifier))
-                        {
-                            this.PageBeforeCheckCode[pIdentifier].Execute();
-                        }
-                    }
-                    else if (pEvent.ToLower() == "after")
-                    {
-                        if (this.PageAfterCheckCode.ContainsKey(pIdentifier))
-                        {
-                            this.PageAfterCheckCode[pIdentifier].Execute();
-                        }
-                    }
-                    break;
-                case "field":
-                    if (pEvent.ToLower() == "before")
-                    {
-                        if (this.FieldBeforeCheckCode.ContainsKey(pIdentifier))
-                        {
-                            this.FieldBeforeCheckCode[pIdentifier].Execute();
-                        }
-                    }
-                    else if (pEvent.ToLower() == "after")
-                    {
-                        if (this.FieldAfterCheckCode.ContainsKey(pIdentifier))
-                        {
-                            this.FieldAfterCheckCode[pIdentifier].Execute();
-                        }
-                    }
-                    else if (pEvent.ToLower() == "click")
-                    {
-                        if (this.FieldClickCheckCode.ContainsKey(pIdentifier))
-                        {
-                            this.FieldClickCheckCode[pIdentifier].Execute();
-                        }
-                    }
-                    break;
-                case "sub":
-                    if (this.Subroutine.ContainsKey(pEvent.ToLower()))
-                    {
-                        this.Subroutine[pEvent.ToLower()].Execute();
-                    }
-                    break;
-            }
-        }*/
 
 
     }
