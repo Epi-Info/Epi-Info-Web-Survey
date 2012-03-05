@@ -96,7 +96,9 @@ namespace Epi.Web.MVC.Utility
                           JavaScript.Append("});");
 
                           JavaScript.Append("\n\nfunction page" + PageNumber);
-                          FunctionObject_A.ToJavaScript(JavaScript);
+                          FunctionObject_A.ToJavaScript(JavaScript);
+
+
                 }
 
 
