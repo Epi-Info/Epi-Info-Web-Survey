@@ -66,6 +66,7 @@
     <Compile Include="EpiInfo7EventGrammar.cs" />
     <Compile Include="IDLLClass.cs" />
     <Compile Include="IEnterCheckCode.cs" />
+    <Compile Include="PluginVariable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rules\EpiFunctions.cs" />
     <Compile Include="Rules\Functions\Rule_Abs.cs" />
