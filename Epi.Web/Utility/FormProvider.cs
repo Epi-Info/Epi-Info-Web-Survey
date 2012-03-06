@@ -716,29 +716,13 @@ namespace Epi.Web.MVC.Utility
                 Epi.Core.EnterInterpreter.Rules.Rule_Begin_After_Statement FunctionObject_A = (Epi.Core.EnterInterpreter.Rules.Rule_Begin_After_Statement)form.FormCheckCodeObj.GetCommand("level=page&event=after&identifier=" + PageName);
                 if (FunctionObject_A != null && !FunctionObject_A.IsNull())
                 {
-                    //1
-                    //JavaScript.Append("$(window).bind('beforeunload', function() {");
-                    //JavaScript.Append("page" + PageNumber + "_after(); ");
-                    //JavaScript.Append("});");
+                    JavaScript.AppendLine("$(document).ready(function () {");
+                    JavaScript.AppendLine("$('#myform').submit(function () {");
+                    JavaScript.AppendLine("page" + PageNumber + "_after();})");
+                    JavaScript.AppendLine("});");
 
-                    //2
-                    //JavaScript.Append("$(document).ready(function () {  ");
-                    //JavaScript.Append("page" + PageNumber + "_after();");
-                    //JavaScript.Append("});");
-
-
-                    //3 working 
-                    //JavaScript.Append("$(document).ready(function () { $('div#pages a').click(function(event){");
-                    //JavaScript.Append("page" + PageNumber + "_after(); event.preventDefault();})");
-                    //JavaScript.Append("});");
-
-                    JavaScript.Append("$('myform').submit(function () {");
-                    JavaScript.Append("page" + PageNumber + "_after();})");
-                    JavaScript.Append("});");
-
-
-                   JavaScript.Append("\n\nfunction page" + PageNumber);
-                   FunctionObject_A.ToJavaScript(JavaScript);
+                    JavaScript.Append("\n\nfunction page" + PageNumber);
+                    FunctionObject_A.ToJavaScript(JavaScript);
                   
                 }
             }
