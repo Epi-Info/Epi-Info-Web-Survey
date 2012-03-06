@@ -87,21 +87,11 @@ namespace Epi.Web.MVC.Utility
                 form.FormCheckCodeObj = form.GetCheckCodeObj(checkcode);
                 string PageName = GetPageName(XML, PageNumber);
 
-                Epi.Core.EnterInterpreter.Rules.Rule_Begin_Before_Statement FunctionObject_A = (Epi.Core.EnterInterpreter.Rules.Rule_Begin_Before_Statement)form.FormCheckCodeObj.GetCommand("level=page&event=before&identifier=" + PageName);
-                if (FunctionObject_A != null && !FunctionObject_A.IsNull())
-                {
 
-                          JavaScript.Append("$(document).ready(function () {  ");
-                          JavaScript.Append("page" + PageNumber + "_before();");
-                          JavaScript.Append("});");
-
-                          JavaScript.Append("\n\nfunction page" + PageNumber);
-                          FunctionObject_A.ToJavaScript(JavaScript);
-
-
-                }
-
-
+                //Generate page level Java script (Before)
+                JavaScript.Append(GetPageLevelJS(PageNumber, form, PageName,"Before"));
+                //Generate page level Java script (After)
+                JavaScript.Append(GetPageLevelJS(PageNumber, form, PageName, "After"));
 
                 foreach (var _FieldTypeID in _FieldsTypeIDs)
                 {
@@ -700,6 +690,60 @@ namespace Epi.Web.MVC.Utility
           }
 
           return  B_JavaScript.ToString() +"  "+ A_JavaScript.ToString();
+        }
+
+        public static string GetPageLevelJS(int PageNumber,Form form,string PageName,string BeforeOrAfter)
+        {
+            StringBuilder JavaScript = new StringBuilder();
+            if (BeforeOrAfter == "Before")
+            {
+                Epi.Core.EnterInterpreter.Rules.Rule_Begin_Before_Statement FunctionObject_B = (Epi.Core.EnterInterpreter.Rules.Rule_Begin_Before_Statement)form.FormCheckCodeObj.GetCommand("level=page&event=before&identifier=" + PageName);
+                if (FunctionObject_B != null && !FunctionObject_B.IsNull())
+                {
+
+                    JavaScript.Append("$(document).ready(function () {  ");
+                    JavaScript.Append("page" + PageNumber + "_before();");
+                    JavaScript.Append("});");
+
+                    JavaScript.Append("\n\nfunction page" + PageNumber);
+                    FunctionObject_B.ToJavaScript(JavaScript);
+
+
+                }
+            }
+            if (BeforeOrAfter == "After")
+            {
+                Epi.Core.EnterInterpreter.Rules.Rule_Begin_After_Statement FunctionObject_A = (Epi.Core.EnterInterpreter.Rules.Rule_Begin_After_Statement)form.FormCheckCodeObj.GetCommand("level=page&event=after&identifier=" + PageName);
+                if (FunctionObject_A != null && !FunctionObject_A.IsNull())
+                {
+                    //1
+                    //JavaScript.Append("$(window).bind('beforeunload', function() {");
+                    //JavaScript.Append("page" + PageNumber + "_after(); ");
+                    //JavaScript.Append("});");
+
+                    //2
+                    //JavaScript.Append("$(document).ready(function () {  ");
+                    //JavaScript.Append("page" + PageNumber + "_after();");
+                    //JavaScript.Append("});");
+
+
+                    //3 working 
+                    //JavaScript.Append("$(document).ready(function () { $('div#pages a').click(function(event){");
+                    //JavaScript.Append("page" + PageNumber + "_after(); event.preventDefault();})");
+                    //JavaScript.Append("});");
+
+                    JavaScript.Append("$(document).ready(function () { $('div#pages a').click(function(event){");
+                    JavaScript.Append("page" + PageNumber + "_after();})");
+                    JavaScript.Append("});");
+
+
+                   JavaScript.Append("\n\nfunction page" + PageNumber);
+                   FunctionObject_A.ToJavaScript(JavaScript);
+                  
+                }
+            }
+
+            return JavaScript.ToString();
         }
     }
 }
