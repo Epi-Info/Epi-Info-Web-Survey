@@ -732,7 +732,7 @@ namespace Epi.Web.MVC.Utility
                     //JavaScript.Append("page" + PageNumber + "_after(); event.preventDefault();})");
                     //JavaScript.Append("});");
 
-                    JavaScript.Append("$(document).ready(function () { $('div#pages a').click(function(event){");
+                    JavaScript.Append("$('myform').submit(function () {");
                     JavaScript.Append("page" + PageNumber + "_after();})");
                     JavaScript.Append("});");
 
