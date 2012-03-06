@@ -5,6 +5,7 @@
 <div id="attention" style="margin: 10px">
             <img src="@Url.Content("~/Content/images/sign_warning.png")" alt="" style="vertical-align: middle;
                 padding-right: 10px;"/>
-       @Epi.Web.MVC.Constants.Constant.SURVEY_SUBMITED_MESSAGE
+       @System.Configuration.ConfigurationManager.AppSettings["SURVEY_SUBMITED_MESSAGE"]
+       
 </div>
 

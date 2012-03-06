@@ -354,7 +354,7 @@ behavior: url('../Scripts/PIE.htc');
 	color: #000;   
 	font-family: "Segoe UI", Tahoma, Geneva, Verdana, AriaL, sans-serif;  
 	font-size: 10pt;  
-	white-space: pre;
+	/*white-space: pre;*/
 }
  textarea
  {
