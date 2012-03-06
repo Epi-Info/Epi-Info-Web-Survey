@@ -27,7 +27,7 @@
     <div class="message">
         @if(string.IsNullOrWhiteSpace(Model.ExitText)) 
         {
-            @Epi.Web.MVC.Constants.Constant.SURVEY_SUBMISSION_MESSAGE;
+            @System.Configuration.ConfigurationManager.AppSettings["SURVEY_SUBMISSION_MESSAGE"];
         } 
         else 
         {

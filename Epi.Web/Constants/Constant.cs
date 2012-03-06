@@ -40,9 +40,9 @@ namespace Epi.Web.MVC.Constants
         public const string INDEX = "Index";
 
         /*Survey page messages*/
-        public const string SURVEY_NOT_EXISTS = "The Survey does not exist. Please check the survey link and try again.";
-        public const string SURVEY_SUBMISSION_MESSAGE = "Thank you! Your survey has been submitted.";
-        public const string SURVEY_SUBMITED_MESSAGE = "This survey has been submitted.";
-        public const string SURVEY_CLOSED_MESSAGE = "This survey is currently closed. Please contact the author of this survey for further assistance.";
+        //public const string SURVEY_NOT_EXISTS = "The Survey does not exist. Please check the survey link and try again.";
+        //public const string SURVEY_SUBMISSION_MESSAGE = "Thank you! Your survey has been submitted.";
+        //public const string SURVEY_SUBMITED_MESSAGE = "This survey has been submitted.";
+        //public const string SURVEY_CLOSED_MESSAGE = "This survey is currently closed. Please contact the author of this survey for further assistance.";
     }
 }
