@@ -22,6 +22,7 @@ namespace MvcDynamicForms.Fields
             
             prompt.SetInnerText(Prompt);
             prompt.Attributes.Add("for", inputName);
+            prompt.Attributes.Add("Id", "label" + inputName);
             //  prompt.Attributes.Add("class", _promptClass);
             prompt.Attributes.Add("class", "EpiLabel");
 
