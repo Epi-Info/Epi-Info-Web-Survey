@@ -57,20 +57,7 @@ namespace Epi.Web.MVC.Controllers
                 
                 
                 }
-                //Injecting page level control states 
-                //XDocument xdoc = XDocument.Parse(surveyInfoModel.XML);
-                //XElement ViewElement = xdoc.XPathSelectElement("Template/Project/View");
-                //string checkcode = ViewElement.Attribute("CheckCode").Value.ToString();
-                //if (!string.IsNullOrEmpty(checkcode))
-                //{
-                //    Epi.Core.EnterInterpreter.EpiInterpreterParser EIP = new Epi.Core.EnterInterpreter.EpiInterpreterParser(Epi.Core.EnterInterpreter.EpiInterpreterParser.GetEnterCompiledGrammarTable());
-                //    EIP.Execute(checkcode);
-                //    StringBuilder JavaScript = new StringBuilder();
-                //   // EnterRule FunctionObject = (EnterRule)((Epi.Core.EnterInterpreter.Rule_Context)EIP.Context).GetCommand("level=page&event=before&identifier=" + "page 1");
-                //    EnterRule FunctionObject = (EnterRule)((Epi.Core.EnterInterpreter.Rule_Context)EIP.Context).GetCommand("level=page&event=before&identifier=" + "page 1");
-                //    JavaScript.Append("function " + "page1");
-                //    FunctionObject.ToJavaScript(JavaScript);
-                //}
+                
 
                 switch(ValidationTest)
                 {
@@ -101,7 +88,7 @@ namespace Epi.Web.MVC.Controllers
         //public ActionResult Index(SurveyInfoModel surveyInfoModel, string Submitbutton, string Savebutton, string ContinueButton, string PreviousButton, int PageNumber = 1)
         public ActionResult Index(SurveyAnswerModel surveyAnswerModel, string Submitbutton, string Savebutton, string ContinueButton, string PreviousButton, int PageNumber = 0)
         {
-
+            
             string responseId = surveyAnswerModel.ResponseId;
             try
             {
@@ -130,15 +117,10 @@ namespace Epi.Web.MVC.Controllers
                         bool IsSubmited = false;
                         bool IsSaved = false;
 
-                        form.HiddenFieldsList = this.Request.Form["HiddenFieldsList"].ToString();
-
-                        
-
-
+                            form.HiddenFieldsList = this.Request.Form["HiddenFieldsList"].ToString();
+                         
                             form.HighlightedFieldsList = this.Request.Form["HighlightedFieldsList"].ToString();
-
-                             
-
+                         
                             form.DisabledFieldsList = this.Request.Form["DisabledFieldsList"].ToString();
 
                             
@@ -194,11 +176,9 @@ namespace Epi.Web.MVC.Controllers
                             else
                             {
                                 //This is a Navigation to a url
-                                form.HiddenFieldsList = this.Request.Form["HiddenFieldsList"].ToString();
+                                 form.HiddenFieldsList = this.Request.Form["HiddenFieldsList"].ToString();
                                
-
-                               
-                                form.HighlightedFieldsList = this.Request.Form["HighlightedFieldsList"].ToString();
+                                 form.HighlightedFieldsList = this.Request.Form["HighlightedFieldsList"].ToString();
                                 
                                  form.DisabledFieldsList = this.Request.Form["DisabledFieldsList"].ToString();
 

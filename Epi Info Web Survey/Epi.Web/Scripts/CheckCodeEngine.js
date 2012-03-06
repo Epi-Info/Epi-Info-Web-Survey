@@ -536,7 +536,7 @@ Rule_Hide.prototype.Execute = function ()
 
 function CCE_AddToFieldsList(FieldName,ListName)
 {
-    debugger;
+   
     var List = document.getElementById(ListName).value.toString()
     var ListArray = List.split(',');
     var Counter = 0;
@@ -560,7 +560,7 @@ function CCE_AddToFieldsList(FieldName,ListName)
 
 function CCE_RemoveFromFieldsList(FieldName,ListName) {
 
-    debugger;
+    
     var list = document.getElementById(ListName).value;
     var ListArray = list.split(',');
     var newList = new Array();
