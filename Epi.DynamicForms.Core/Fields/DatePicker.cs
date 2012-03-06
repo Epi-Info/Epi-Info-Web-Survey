@@ -21,6 +21,7 @@ namespace MvcDynamicForms.Fields
             var prompt = new TagBuilder("label");
             prompt.SetInnerText(Prompt);
             prompt.Attributes.Add("for", inputName);
+            prompt.Attributes.Add("Id", "label" + inputName);
             prompt.Attributes.Add("class", "EpiLabel");
 
             StringBuilder StyleValues = new StringBuilder();
