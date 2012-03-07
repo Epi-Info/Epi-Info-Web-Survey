@@ -12,6 +12,7 @@ namespace Epi.Core.EnterInterpreter
         private EpiInfo.Plugin.VariableScope variableScope;
         private string expression;
         private string _Namespace;
+        private string _ControlType;
 
         public PluginVariable() { }
 
@@ -29,5 +30,6 @@ namespace Epi.Core.EnterInterpreter
         public EpiInfo.Plugin.VariableScope VariableScope { get { return this.variableScope; } set { this.variableScope = value; } }
         public string Expression { get { return this.expression; } set { this.expression = value; } }
         public string Namespace { get { return this._Namespace; } set { this._Namespace = value; } }
+        public string ControlType { get { return this._ControlType; } set { this._ControlType = value; } }
     }
 }
