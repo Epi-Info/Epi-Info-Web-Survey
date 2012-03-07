@@ -78,13 +78,11 @@ namespace Epi.Web.MVC.Utility
                 form.HighlightedFieldsList = xdocResponse.Root.Attribute("HighlightedFieldsList").Value;
                 form.DisabledFieldsList = xdocResponse.Root.Attribute("DisabledFieldsList").Value;
 
-                /*
-                if (!string.IsNullOrEmpty(checkcode))
-                {
-                    
-                }*/
 
+                
                 form.FormCheckCodeObj = form.GetCheckCodeObj(checkcode);
+                form.FormCheckCodeObj.LoadTemplate(xdoc, xdocResponse);
+
                 string PageName = GetPageName(XML, PageNumber);
 
 
