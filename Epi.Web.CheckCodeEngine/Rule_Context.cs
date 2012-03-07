@@ -489,40 +489,52 @@ public System.Collections.Specialized.NameValueCollection GlobalVariables;*/
                 {
                     case "1": // textbox
                         var.DataType = DataType.Text;
+                        var.ControlType = "textbox";
                         break;
 
                     case "2"://Label/Title
                         var.DataType = DataType.Text;
+                        var.ControlType = "label";
                         break;
                     case "3"://Label
                         var.DataType = DataType.Text;
+                        var.ControlType = "label";
                         break;
                     case "4"://MultiLineTextBox
                         var.DataType = DataType.Text;
+                        var.ControlType = "multiline";
                         break;
                     case "5"://NumericTextBox
                         var.DataType = DataType.Number;
+                        var.ControlType = "numeric";
                         break;
                     case "7":// 7 DatePicker
                         var.DataType = DataType.Date;
+                        var.ControlType = "datepicker";
                         break;
                     case "10"://CheckBox
                         var.DataType = DataType.Boolean;
+                        var.ControlType = "checkbox";
                         break;
                     case "11"://DropDown Yes/No
-                        var.DataType = DataType.YesNo;
+                        var.DataType = DataType.Boolean;
+                        var.ControlType = "yesno";
                         break;
                     case "17"://DropDown LegalValues
                         var.DataType = DataType.Text;
+                        var.ControlType = "legalvalues";
                         break;
                     case "18"://DropDown Codes
                         var.DataType = DataType.Text;
+                        var.ControlType = "codes";
                         break;
                     case "19"://DropDown CommentLegal
                         var.DataType = DataType.Text;
+                        var.ControlType = "commentlegal";
                         break;
                     case "21"://GroupBox
                         var.DataType = DataType.Unknown;
+                        var.ControlType = "groupbox";
                         break;
                 }
 
