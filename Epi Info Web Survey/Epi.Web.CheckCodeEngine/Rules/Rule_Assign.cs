@@ -165,5 +165,16 @@ namespace Epi.Core.EnterInterpreter.Rules
         }
 
 
+
+        public override void ToJavaScript(StringBuilder pJavaScriptBuilder)
+        {
+            pJavaScriptBuilder.Append("cce_Context.setValue('");
+            pJavaScriptBuilder.Append(this.QualifiedId.ToLower());
+            pJavaScriptBuilder.Append("', ");
+            this.value.ToJavaScript(pJavaScriptBuilder);
+            pJavaScriptBuilder.AppendLine(");");
+        }
+
+
     }
 }
