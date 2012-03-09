@@ -504,7 +504,7 @@ public System.Collections.Specialized.NameValueCollection GlobalVariables;*/
                     case "1": // textbox
                         var.DataType = DataType.Text;
                         var.ControlType = "textbox";
-                        JavaScriptVariableDefinitions.AppendLine(string.Format(defineFormat, _FieldTypeID.Attribute("Name").Value, "textbox", "datasource", var.Expression)); 
+                        //JavaScriptVariableDefinitions.AppendLine(string.Format(defineFormat, _FieldTypeID.Attribute("Name").Value, "textbox", "datasource", var.Expression)); 
                         break;
 
                     case "2"://Label/Title
@@ -518,42 +518,42 @@ public System.Collections.Specialized.NameValueCollection GlobalVariables;*/
                     case "4"://MultiLineTextBox
                         var.DataType = DataType.Text;
                         var.ControlType = "multiline";
-                        JavaScriptVariableDefinitions.AppendLine(string.Format(defineFormat, _FieldTypeID.Attribute("Name").Value, "multiline", "datasource", var.Expression)); 
+                        //JavaScriptVariableDefinitions.AppendLine(string.Format(defineFormat, _FieldTypeID.Attribute("Name").Value, "multiline", "datasource", var.Expression)); 
                         break;
                     case "5"://NumericTextBox
                         var.DataType = DataType.Number;
                         var.ControlType = "numeric";
-                        JavaScriptVariableDefinitions.AppendLine(string.Format(defineNumberFormat, _FieldTypeID.Attribute("Name").Value, "number", "datasource", var.Expression)); 
+                        //JavaScriptVariableDefinitions.AppendLine(string.Format(defineNumberFormat, _FieldTypeID.Attribute("Name").Value, "number", "datasource", var.Expression)); 
                         break;
                     case "7":// 7 DatePicker
                         var.DataType = DataType.Date;
                         var.ControlType = "datepicker";
-                        JavaScriptVariableDefinitions.AppendLine(string.Format(defineFormat, _FieldTypeID.Attribute("Name").Value, "number", "datasource", var.Expression)); 
+                        //JavaScriptVariableDefinitions.AppendLine(string.Format(defineFormat, _FieldTypeID.Attribute("Name").Value, "number", "datasource", var.Expression)); 
                         break;
                     case "10"://CheckBox
                         var.DataType = DataType.Boolean;
                         var.ControlType = "checkbox";
-                        JavaScriptVariableDefinitions.AppendLine(string.Format(defineFormat, _FieldTypeID.Attribute("Name").Value, "checkbox", "datasource", var.Expression)); 
+                        //JavaScriptVariableDefinitions.AppendLine(string.Format(defineFormat, _FieldTypeID.Attribute("Name").Value, "checkbox", "datasource", var.Expression)); 
                         break;
                     case "11"://DropDown Yes/No
                         var.DataType = DataType.Boolean;
                         var.ControlType = "yesno";
-                        JavaScriptVariableDefinitions.AppendLine(string.Format(defineFormat, _FieldTypeID.Attribute("Name").Value, "yesno", "datasource", var.Expression)); 
+                        //JavaScriptVariableDefinitions.AppendLine(string.Format(defineFormat, _FieldTypeID.Attribute("Name").Value, "yesno", "datasource", var.Expression)); 
                         break;
                     case "17"://DropDown LegalValues
                         var.DataType = DataType.Text;
                         var.ControlType = "legalvalues";
-                        JavaScriptVariableDefinitions.AppendLine(string.Format(defineFormat, _FieldTypeID.Attribute("Name").Value, "legalvalue", "datasource", var.Expression));
+                        //JavaScriptVariableDefinitions.AppendLine(string.Format(defineFormat, _FieldTypeID.Attribute("Name").Value, "legalvalue", "datasource", var.Expression));
                         break;
                     case "18"://DropDown Codes
                         var.DataType = DataType.Text;
                         var.ControlType = "codes";
-                        JavaScriptVariableDefinitions.AppendLine(string.Format(defineFormat, _FieldTypeID.Attribute("Name").Value, "code", "datasource", var.Expression));
+                        //JavaScriptVariableDefinitions.AppendLine(string.Format(defineFormat, _FieldTypeID.Attribute("Name").Value, "code", "datasource", var.Expression));
                         break;
                     case "19"://DropDown CommentLegal
                         var.DataType = DataType.Text;
                         var.ControlType = "commentlegal";
-                        JavaScriptVariableDefinitions.AppendLine(string.Format(defineFormat, _FieldTypeID.Attribute("Name").Value, "commentlegal", "datasource", var.Expression)); 
+                        //JavaScriptVariableDefinitions.AppendLine(string.Format(defineFormat, _FieldTypeID.Attribute("Name").Value, "commentlegal", "datasource", var.Expression)); 
                         break;
                     case "21"://GroupBox
                         var.DataType = DataType.Unknown;
@@ -585,5 +585,47 @@ public System.Collections.Specialized.NameValueCollection GlobalVariables;*/
 
             return ControlValue;
         }
+
+
+        public StringBuilder GetVariableJavaScript()
+        {
+            StringBuilder result = new StringBuilder();
+
+            string defineFormat = "cce_Context.define(\"{0}\", \"{1}\", \"{2}\", \"{3}\");";
+            string defineNumberFormat = "cce_Context.define(\"{0}\", \"{1}\", \"{2}\", new Number({3}));";
+
+
+            foreach (PluginVariable var in this.CurrentScope.FindVariables( VariableScope.DataSource | VariableScope.Global | VariableScope.Permanent))
+            {
+
+                switch (var.ControlType)
+                {
+
+                    case "checkbox":
+                    case "yesno":
+                        result.AppendLine(string.Format(defineFormat, var.Name, var.ControlType, "datasource", var.Expression));
+                        break;
+
+                    case "numeric":
+                        result.AppendLine(string.Format(defineNumberFormat, var.Name, var.ControlType, "datasource", var.Expression));
+                        break;
+                    case "commentlegal":
+                    case  "codes":
+                    case "legalvalues":
+                    case "datepicker":
+                    case "multiline":
+                    case "textbox": 
+                    default:
+                        result.AppendLine(string.Format(defineFormat, var.Name, var.ControlType, "datasource", var.Expression));
+                        break;
+
+                }
+
+
+            }
+
+            return result;
+        }
+
     }
 }
