@@ -21,7 +21,7 @@ namespace Epi.Web.EF
         /// </summary>
         /// <param name="SurveyResponseId">Unique SurveyResponse identifier.</param>
         /// <returns>SurveyResponse.</returns>
-        public List<SurveyResponseBO> GetSurveyResponse(List<string> SurveyResponseIdList)
+        public List<SurveyResponseBO> GetSurveyResponse(List<string> SurveyResponseIdList, Guid UserPublishKey)
         {
 
             List<SurveyResponseBO> result = new List<SurveyResponseBO>();
@@ -35,7 +35,7 @@ namespace Epi.Web.EF
                     using (var Context = DataObjectFactory.CreateContext())
                     {
 
-                        result.Add(Mapper.Map(Context.SurveyResponses.FirstOrDefault(x => x.ResponseId == Id)));
+                        result.Add(Mapper.Map(Context.SurveyResponses.FirstOrDefault(x => x.ResponseId == Id && x.UserPublishKey == UserPublishKey)));
                     }
                 }
             }
@@ -57,7 +57,7 @@ namespace Epi.Web.EF
         /// </summary>
         /// <param name="SurveyResponseId">Unique SurveyResponse identifier.</param>
         /// <returns>SurveyResponse.</returns>
-        public List<SurveyResponseBO> GetSurveyResponseBySurveyId(List<string> SurveyIdList)
+        public List<SurveyResponseBO> GetSurveyResponseBySurveyId(List<string> SurveyIdList, Guid UserPublishKey)
         {
 
             List<SurveyResponseBO> result = new List<SurveyResponseBO>();
@@ -69,7 +69,7 @@ namespace Epi.Web.EF
                 using (var Context = DataObjectFactory.CreateContext())
                 {
 
-                    result.Add(Mapper.Map(Context.SurveyResponses.FirstOrDefault(x => x.SurveyId == Id)));
+                    result.Add(Mapper.Map(Context.SurveyResponses.FirstOrDefault(x => x.SurveyId == Id && x.UserPublishKey == UserPublishKey)));
                 }
             }
 
@@ -82,7 +82,7 @@ namespace Epi.Web.EF
         /// </summary>
         /// <param name="SurveyResponseId">Unique SurveyResponse identifier.</param>
         /// <returns>SurveyResponse.</returns>
-        public List<SurveyResponseBO> GetSurveyResponse(List<string> SurveyAnswerIdList, string pSurveyId, DateTime pDateCompleted, int pStatusId = -1)
+        public List<SurveyResponseBO> GetSurveyResponse(List<string> SurveyAnswerIdList, string pSurveyId, DateTime pDateCompleted, int pStatusId = -1 )
         {
             List<SurveyResponseBO> result = new List<SurveyResponseBO>();
             List<SurveyResponse> responseList = new List<SurveyResponse>();
@@ -94,10 +94,11 @@ namespace Epi.Web.EF
                     try
                     {
                         Guid Id = new Guid(surveyResponseId);
+                       
 
                         using (var Context = DataObjectFactory.CreateContext())
                         {
-                            SurveyResponse surveyResponse = Context.SurveyResponses.First(x => x.ResponseId == Id);
+                            SurveyResponse surveyResponse = Context.SurveyResponses.First(x => x.ResponseId == Id );
                             if (surveyResponse != null)
                             {
                                 responseList.Add(surveyResponse);
@@ -187,6 +188,7 @@ namespace Epi.Web.EF
                 DataRow.DateCompleted = DateTime.Now;
                 DataRow.StatusId = SurveyResponse.Status;
                 DataRow.DateLastUpdated = DateTime.Now;
+                DataRow.UserPublishKey = SurveyResponse.UserPublishKey;
                 Context.SaveChanges();
             }
         }

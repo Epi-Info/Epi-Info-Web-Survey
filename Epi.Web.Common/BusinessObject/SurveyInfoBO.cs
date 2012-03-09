@@ -17,6 +17,7 @@ namespace Epi.Web.Common.BusinessObject
         private string _OrganizationName;
         private string _XML;
         private string _ExitText;
+        private Guid _UserPublishKey;
 
         private DateTime _ClosingDate;
 
@@ -82,6 +83,12 @@ namespace Epi.Web.Common.BusinessObject
         {
             get { return _ClosingDate; }
             set { _ClosingDate = value; }
+        }
+
+        public Guid UserPublishKey 
+        {
+            get { return _UserPublishKey; }
+            set { _UserPublishKey = value; }
         }
 
     }
