@@ -221,7 +221,7 @@ namespace Epi.Web.WCF.SurveyService
 
                 //if (pRequest.LoadOptions.Contains("SurveyInfo"))
                 //{
-                result.SurveyResponseList = Mapper.ToDataTransferObject(Implementation.GetSurveyResponseById(pRequest.Criteria.SurveyAnswerIdList));
+                result.SurveyResponseList = Mapper.ToDataTransferObject(Implementation.GetSurveyResponseById(pRequest.Criteria.SurveyAnswerIdList, pRequest.Criteria.UserPublishKey));
                 //}
 
                 return result;
@@ -295,7 +295,7 @@ namespace Epi.Web.WCF.SurveyService
                     else if (request.Action.Equals("Delete", StringComparison.OrdinalIgnoreCase))
                     {
                         var criteria = request.Criteria as SurveyAnswerCriteria;
-                        var survey = Implementation.GetSurveyResponseById(new List<string> { SurveyResponse.SurveyId });
+                        var survey = Implementation.GetSurveyResponseById(new List<string> { SurveyResponse.SurveyId },SurveyResponse.UserPublishKey);
 
                         foreach (SurveyResponseBO surveyResponse in survey)
                         {

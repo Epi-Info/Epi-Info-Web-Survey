@@ -19,7 +19,7 @@ namespace Epi.Web.Interfaces.DataInterfaces
         /// </summary>
         /// <param name="SurveyResponseId">Unique SurveyResponse identifier.</param>
         /// <returns>SurveyResponse.</returns>
-        List<SurveyResponseBO> GetSurveyResponse(List<string> SurveyResponseIdList);
+        List<SurveyResponseBO> GetSurveyResponse(List<string> SurveyResponseIdList, Guid UserPublishKey);
 
 
 
@@ -28,7 +28,7 @@ namespace Epi.Web.Interfaces.DataInterfaces
         /// </summary>
         /// <param name="SurveyResponseId">Unique SurveyResponse identifier.</param>
         /// <returns>SurveyResponse.</returns>
-        List<SurveyResponseBO> GetSurveyResponseBySurveyId(List<string> SurveyIdList);
+        List<SurveyResponseBO> GetSurveyResponseBySurveyId(List<string> SurveyIdList, Guid UserPublishKey);
 
 
         
@@ -37,7 +37,7 @@ namespace Epi.Web.Interfaces.DataInterfaces
         /// </summary>
         /// <param name="SurveyResponseId">Unique SurveyResponse identifier.</param>
         /// <returns>SurveyResponse.</returns>
-        List<SurveyResponseBO> GetSurveyResponse(List<string> SurveyAnswerIdList, string pSurveyId, DateTime pDateCompleted, int pStatusId = -1);
+        List<SurveyResponseBO> GetSurveyResponse(List<string> SurveyAnswerIdList, string pSurveyId, DateTime pDateCompleted, int pStatusId = -1 );
 
 
         /// <summary>
@@ -69,7 +69,7 @@ namespace Epi.Web.Interfaces.DataInterfaces
         /// Following insert, SurveyResponse object will contain the new identifier.
         /// </remarks>
         /// <param name="SurveyResponse">SurveyResponse.</param>
-       void InsertSurveyResponse(SurveyResponseBO SurveyResponse);
+        void InsertSurveyResponse(SurveyResponseBO SurveyResponse);
 
         /// <summary>
         /// Updates a SurveyResponse.

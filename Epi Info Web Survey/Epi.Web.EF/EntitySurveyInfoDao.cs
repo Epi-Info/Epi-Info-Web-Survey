@@ -139,6 +139,7 @@ namespace Epi.Web.EF
                 DataRow.DepartmentName = SurveyInfo.DepartmentName;
                 DataRow.ClosingDate = SurveyInfo.ClosingDate;
                 DataRow.SurveyTypeId = SurveyInfo.SurveyType;
+                DataRow.UserPublishKey = SurveyInfo.UserPublishKey;
 
                 Context.SaveChanges();
             }

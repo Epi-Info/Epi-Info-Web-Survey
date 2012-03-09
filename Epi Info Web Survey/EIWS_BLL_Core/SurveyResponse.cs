@@ -15,15 +15,15 @@ namespace Epi.Web.BLL
             this.SurveyResponseDao = pSurveyResponseDao;
         }
 
-        public List<SurveyResponseBO> GetSurveyResponseById(List<String> pId)
+        public List<SurveyResponseBO> GetSurveyResponseById(List<String> pId, Guid UserPublishKey)
         {
-            List<SurveyResponseBO> result = this.SurveyResponseDao.GetSurveyResponse(pId);
+            List<SurveyResponseBO> result = this.SurveyResponseDao.GetSurveyResponse(pId, UserPublishKey);
             return result;
         }
 
-        public List<SurveyResponseBO> GetSurveyResponseBySurveyId(List<String> pSurveyIdList)
+        public List<SurveyResponseBO> GetSurveyResponseBySurveyId(List<String> pSurveyIdList, Guid UserPublishKey)
         {
-            List<SurveyResponseBO> result = this.SurveyResponseDao.GetSurveyResponseBySurveyId(pSurveyIdList);
+            List<SurveyResponseBO> result = this.SurveyResponseDao.GetSurveyResponseBySurveyId(pSurveyIdList, UserPublishKey);
             return result;
         }
 
