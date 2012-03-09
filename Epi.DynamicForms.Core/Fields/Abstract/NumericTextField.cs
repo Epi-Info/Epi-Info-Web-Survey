@@ -102,10 +102,12 @@ namespace MvcDynamicForms.Fields
                  This will be usefull in money related fields or decimal fields. (www.regexlib.com)  */
                 /*** Matches  .568 | 8578 | 1234567.1234567 ****/
                 /**** Non-Matches: 568. | 56.89.36 | 5.3.6.9.6 *****/
-                string regularExp = "^([0-9]*|\\d*\\.\\d{1}?\\d*)$";
+               // string regularExp = "^([0-9]*|\\d*\\.\\d{1}?\\d*)$";
+               string regularExp = "^-?([0-9]*|\\d*\\.\\d{1}?\\d*)$";
                 var regex = new Regex(regularExp);
 
                 if (!regex.IsMatch(Value))
+                 
                 {
                     //invalid: it is not numeric
                     Error = "Value must be a number";

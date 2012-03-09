@@ -50,5 +50,9 @@ namespace Epi.Web.Common.Criteria
         /// </summary>
         [DataMember]
         public bool IncludeOrderStatistics { get; set; }
+
+        
+       [DataMember]
+        public Guid UserPublishKey { get; set; }
     }
 }
