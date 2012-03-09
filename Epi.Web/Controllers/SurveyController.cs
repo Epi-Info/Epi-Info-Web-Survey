@@ -195,7 +195,20 @@ namespace Epi.Web.MVC.Controllers
                         else
                         {
                             //Invalid Data - stay on same page
-                            return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
+                            int CurrentPageNum = GetSurveyPageNumber(SurveyAnswer.XML.ToString()) ;
+                           
+
+
+                            if (CurrentPageNum != PageNumber) // failed validation and navigating to different page// must keep url the same 
+                            {
+                                TempData["isredirect"] = "true";
+                                return RedirectToAction("Index", "Survey", new { RequestId = form.ResponseId, PageNumber = CurrentPageNum });
+                                 
+                            }
+                            else
+                            {
+                                return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
+                            }
                         }
 
                 }

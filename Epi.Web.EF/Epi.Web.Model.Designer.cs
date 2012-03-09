@@ -689,6 +689,30 @@ namespace Epi.Web.EF
         private global::System.String _ExitText;
         partial void OnExitTextChanging(global::System.String value);
         partial void OnExitTextChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Guid> UserPublishKey
+        {
+            get
+            {
+                return _UserPublishKey;
+            }
+            set
+            {
+                OnUserPublishKeyChanging(value);
+                ReportPropertyChanging("UserPublishKey");
+                _UserPublishKey = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("UserPublishKey");
+                OnUserPublishKeyChanged();
+            }
+        }
+        private Nullable<global::System.Guid> _UserPublishKey;
+        partial void OnUserPublishKeyChanging(Nullable<global::System.Guid> value);
+        partial void OnUserPublishKeyChanged();
 
         #endregion
     
@@ -935,6 +959,30 @@ namespace Epi.Web.EF
         private global::System.String _ResponseXML;
         partial void OnResponseXMLChanging(global::System.String value);
         partial void OnResponseXMLChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Guid> UserPublishKey
+        {
+            get
+            {
+                return _UserPublishKey;
+            }
+            set
+            {
+                OnUserPublishKeyChanging(value);
+                ReportPropertyChanging("UserPublishKey");
+                _UserPublishKey = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("UserPublishKey");
+                OnUserPublishKeyChanged();
+            }
+        }
+        private Nullable<global::System.Guid> _UserPublishKey;
+        partial void OnUserPublishKeyChanging(Nullable<global::System.Guid> value);
+        partial void OnUserPublishKeyChanged();
 
         #endregion
     

@@ -15,6 +15,7 @@ namespace Epi.Web.Common.BusinessObject
         }
 
         public string ResponseId{ get; set; }
+        public Guid UserPublishKey { get; set; }
         public string SurveyId { get; set; }
         public DateTime DateLastUpdated { get; set; }
         public DateTime DateCompleted { get; set; }

@@ -30,6 +30,7 @@ namespace Epi.Web.EF
                 OrganizationName = entity.OrganizationName,
                 DepartmentName = entity.DepartmentName,
                 ClosingDate = entity.ClosingDate,
+               // UserPublishKey = entity.UserPublishKey ,
                 SurveyType =   entity.SurveyTypeId 
             };
         }
@@ -64,6 +65,7 @@ namespace Epi.Web.EF
                 OrganizationName = businessobject.OrganizationName,
                 DepartmentName = businessobject.DepartmentName,
                 ClosingDate = businessobject.ClosingDate ,
+                UserPublishKey=businessobject.UserPublishKey,
                 SurveyTypeId = businessobject.SurveyType 
 
             };
@@ -83,6 +85,7 @@ namespace Epi.Web.EF
                 ResponseId = entity.ResponseId.ToString(),
                 XML = entity.XML,
                 Status = entity.Status,
+                UserPublishKey = entity.UserPublishKey,
                 DateLastUpdated = entity.DateLastUpdated,
                 DateCompleted = entity.DateCompleted
             };
@@ -101,6 +104,7 @@ namespace Epi.Web.EF
                 ResponseId = businessobject.ResponseId,
                 XML = businessobject.XML,
                 Status = businessobject.Status,
+                UserPublishKey = businessobject.UserPublishKey,
                 DateLastUpdated = businessobject.DateLastUpdated,
                 DateCompleted = businessobject.DateCompleted
 
@@ -120,6 +124,7 @@ namespace Epi.Web.EF
                 ResponseId = entity.ResponseId.ToString(),
                 XML = entity.ResponseXML,
                 Status = entity.StatusId,
+                UserPublishKey = (Guid)entity.UserPublishKey,
                 DateLastUpdated = entity.DateLastUpdated,
                 DateCompleted = entity.DateCompleted.Value
             };
@@ -149,6 +154,7 @@ namespace Epi.Web.EF
                 ResponseId = new Guid(pBO.ResponseId),
                 ResponseXML = pBO.XML,
                 StatusId = pBO.Status,
+                UserPublishKey=pBO.UserPublishKey,
                 DateLastUpdated = pBO.DateLastUpdated,
                 DateCompleted = pBO.DateCompleted
 
