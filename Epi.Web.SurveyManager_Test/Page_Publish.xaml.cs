@@ -68,6 +68,9 @@ namespace Epi.Web.SurveyManager.Client
             Request.SurveyInfo.SurveyNumber = this.SurveyNumberTextBox.Text;
             Request.SurveyInfo.XML = new TextRange(this.TemplateXMLTextBox.Document.ContentStart, this.TemplateXMLTextBox.Document.ContentEnd).Text;
 
+            Guid UserPublishKey = Guid.NewGuid();
+            Request.SurveyInfo.UserPublishKey = UserPublishKey;
+
             try
             {
                 Epi.Web.Common.Message.PublishResponse Result = client.PublishSurvey(Request);
@@ -79,7 +82,8 @@ namespace Epi.Web.SurveyManager.Client
                 ServiceResponseTextBox.AppendText(Result.PublishInfo.URL);
                 ServiceResponseTextBox.AppendText("\nStatus Text: ");
                 ServiceResponseTextBox.AppendText(Result.PublishInfo.StatusText);
-
+                ServiceResponseTextBox.AppendText("\n User Publish Key: ");
+                ServiceResponseTextBox.AppendText(UserPublishKey.ToString());
                 this.OpenURLButton.IsEnabled = Result.PublishInfo.IsPulished;
                 
             }
