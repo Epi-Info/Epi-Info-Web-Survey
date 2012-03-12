@@ -85,6 +85,7 @@ namespace Epi.Core.EnterInterpreter.Rules
 
                 result.VariableScope = vt;
                 result.DataType = type;
+                result.ControlType = "hidden";
                 this.Context.CurrentScope.define(result);
 
                 return result;
@@ -167,5 +168,56 @@ namespace Epi.Core.EnterInterpreter.Rules
         //        throw ex;
         //    }
         //}
+
+
+        public override void ToJavaScript(StringBuilder pJavaScriptBuilder)
+        {
+            string defineFormat = "cce_Context.define(\"{0}\", \"{1}\", \"{2}\", \"{3}\");";
+            string defineNumberFormat = "cce_Context.define(\"{0}\", \"{1}\", \"{2}\", new Number({3}));";
+
+            PluginVariable var = (PluginVariable) this.Context.CurrentScope.resolve(this.Identifier);
+
+            if (var == null)
+            {
+                //foreach (PluginVariable var in this.Context.CurrentScope.FindVariables( VariableScope.DataSource | VariableScope.Global | VariableScope.Permanent))
+                var = new PluginVariable();
+
+                var.Name = this.Identifier;
+                string dataTypeName = VariableTypeIndicator.Trim().ToUpper();
+                EpiInfo.Plugin.DataType type = GetDataType(dataTypeName);
+                string variableScope = Variable_Scope.Trim().ToUpper();
+                EpiInfo.Plugin.VariableScope vt = EpiInfo.Plugin.VariableScope.Standard;
+
+                if (!string.IsNullOrEmpty(variableScope))
+                {
+                    vt = this.GetVariableScopeIdByName(variableScope);
+                }
+
+                var.VariableScope = vt;
+                var.DataType = type;
+
+            }
+            switch (var.ControlType)
+            {
+
+                case "checkbox":
+                case "yesno":
+                    pJavaScriptBuilder.AppendLine(string.Format(defineFormat, var.Name, var.ControlType, "datasource", var.Expression));
+                    break;
+
+                case "numeric":
+                    pJavaScriptBuilder.AppendLine(string.Format(defineNumberFormat, var.Name, var.ControlType, "datasource", var.Expression));
+                    break;
+                case "commentlegal":
+                case  "codes":
+                case "legalvalues":
+                case "datepicker":
+                case "multiline":
+                case "textbox": 
+                default:
+                    pJavaScriptBuilder.AppendLine(string.Format(defineFormat, var.Name, var.ControlType, "datasource", var.Expression));
+                    break;
+            }
+        }
     }
 }
