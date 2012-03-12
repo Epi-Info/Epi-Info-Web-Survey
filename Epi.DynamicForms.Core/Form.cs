@@ -314,11 +314,14 @@ namespace MvcDynamicForms
         }
         public Epi.Core.EnterInterpreter.Rule_Context FormCheckCodeObj { get; set; }
 
-        public Epi.Core.EnterInterpreter.Rule_Context GetCheckCodeObj(string FormCheckCode)
+        public Epi.Core.EnterInterpreter.Rule_Context GetCheckCodeObj(System.Xml.Linq.XDocument xdoc, System.Xml.Linq.XDocument xdocResponse, string FormCheckCode)
         { 
             Epi.Core.EnterInterpreter.EpiInterpreterParser EIP = new Epi.Core.EnterInterpreter.EpiInterpreterParser(Epi.Core.EnterInterpreter.EpiInterpreterParser.GetEnterCompiledGrammarTable());
+            Epi.Core.EnterInterpreter.Rule_Context result = (Epi.Core.EnterInterpreter.Rule_Context) EIP.Context;
+            result.LoadTemplate(xdoc, xdocResponse);
             EIP.Execute(FormCheckCode);
-            return (Epi.Core.EnterInterpreter.Rule_Context)EIP.Context;
+
+            return result;
         }
         public string FormJavaScript { get; set; }
 

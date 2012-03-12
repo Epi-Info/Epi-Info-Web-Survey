@@ -32,7 +32,8 @@ namespace Epi.Core.EnterInterpreter.Rules
         {
 
             //if (define_Statements_Group != null && define_Statements_Group.Define_Statement_Type != null && this.Context.EnterCheckCodeInterface.IsExecutionEnabled)
-            if (define_Statements_Group != null && this.Context.EnterCheckCodeInterface.IsExecutionEnabled)
+            //if (define_Statements_Group != null && this.Context.EnterCheckCodeInterface.IsExecutionEnabled)
+            if (define_Statements_Group != null)// && this.Context.EnterCheckCodeInterface.IsExecutionEnabled)
             {
                 this.Context.DefineVariablesCheckcode = this;
                 return define_Statements_Group.Execute();
