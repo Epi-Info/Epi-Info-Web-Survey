@@ -62,65 +62,29 @@ namespace Epi.Core.EnterInterpreter.Rules
 
         }
 
-        /// <summary>
+
+                /// <summary>
         /// peforms the Define rule uses the MemoryRegion and this.Context.DataSet to hold variable definitions
         /// </summary>
         /// <returns>object</returns>
         public override object Execute()
         {
+            PluginVariable result = new PluginVariable();
             try
             {
-                EpiInfo.Plugin.IVariable var = null;
-
-                var = this.Context.CurrentScope.resolve(Identifier);
-                if (var != null)
-                {
-                    if (var.VariableScope != VariableScope.Permanent && var.VariableScope != VariableScope.Global)
-                        {
-                            this.Context.EnterCheckCodeInterface.Dialog("Duplicate variable: " + Identifier, "Define");
-                            return null;
-                        }
-                }
-                
-
                 string dataTypeName = VariableTypeIndicator.Trim().ToUpper();
                 EpiInfo.Plugin.DataType type = GetDataType(dataTypeName);
                 string variableScope = Variable_Scope.Trim().ToUpper();
                 EpiInfo.Plugin.VariableScope vt = EpiInfo.Plugin.VariableScope.Standard;
-                
-               //if(variableScope.Equals("PERMANENT", StringComparison.OrdinalIgnoreCase))
-               //{
-               //    vt = EpiInfo.Plugin.VariableScope.Permanent;
-               //}
-               //else if(variableScope.Equals("GLOBAL", StringComparison.OrdinalIgnoreCase))
-               //{
-               //     vt = EpiInfo.Plugin.VariableScope.Global;
-               //}
-               //else
-               //{
-               //     vt = EpiInfo.Plugin.VariableScope.Standard;
-               //}
 
-                
                 if (!string.IsNullOrEmpty(variableScope))
                 {
                     vt = this.GetVariableScopeIdByName(variableScope);
                 }
 
-                //var = new PluginVariable(Identifier, type, vt, null);
-                var = null;
-                string promptString = Define_Prompt.Trim().Replace("\"", string.Empty);
-                if (!string.IsNullOrEmpty(promptString))
-                {
-                    promptString = promptString.Replace("(", string.Empty).Replace(")", string.Empty);
-                    promptString.Replace("\"", string.Empty);
-                }
-                //var.PromptText = promptString;
-                //this.Context.MemoryRegion.DefineVariable(var);
-                EpiInfo.Plugin.IVariable temp = (EpiInfo.Plugin.IVariable)var;
-                this.Context.CurrentScope.define(temp);
+                this.Context.CurrentScope.define(result);
 
-                return var;
+                return result;
             }
             catch (Exception ex)
             {
@@ -129,5 +93,76 @@ namespace Epi.Core.EnterInterpreter.Rules
                 throw ex;
             }
         }
+
+
+
+
+        ///// <summary>
+        ///// peforms the Define rule uses the MemoryRegion and this.Context.DataSet to hold variable definitions
+        ///// </summary>
+        ///// <returns>object</returns>
+        //public override object Execute_Old()
+        //{
+        //    try
+        //    {
+        //        EpiInfo.Plugin.IVariable var = null;
+
+        //        var = this.Context.CurrentScope.resolve(Identifier);
+        //        if (var != null)
+        //        {
+        //            if (var.VariableScope != VariableScope.Permanent && var.VariableScope != VariableScope.Global)
+        //                {
+        //                    this.Context.EnterCheckCodeInterface.Dialog("Duplicate variable: " + Identifier, "Define");
+        //                    return null;
+        //                }
+        //        }
+                
+
+        //        string dataTypeName = VariableTypeIndicator.Trim().ToUpper();
+        //        EpiInfo.Plugin.DataType type = GetDataType(dataTypeName);
+        //        string variableScope = Variable_Scope.Trim().ToUpper();
+        //        EpiInfo.Plugin.VariableScope vt = EpiInfo.Plugin.VariableScope.Standard;
+                
+        //       //if(variableScope.Equals("PERMANENT", StringComparison.OrdinalIgnoreCase))
+        //       //{
+        //       //    vt = EpiInfo.Plugin.VariableScope.Permanent;
+        //       //}
+        //       //else if(variableScope.Equals("GLOBAL", StringComparison.OrdinalIgnoreCase))
+        //       //{
+        //       //     vt = EpiInfo.Plugin.VariableScope.Global;
+        //       //}
+        //       //else
+        //       //{
+        //       //     vt = EpiInfo.Plugin.VariableScope.Standard;
+        //       //}
+
+                
+        //        if (!string.IsNullOrEmpty(variableScope))
+        //        {
+        //            vt = this.GetVariableScopeIdByName(variableScope);
+        //        }
+
+        //        //var = new PluginVariable(Identifier, type, vt, null);
+        //        var = null;
+        //        string promptString = Define_Prompt.Trim().Replace("\"", string.Empty);
+        //        if (!string.IsNullOrEmpty(promptString))
+        //        {
+        //            promptString = promptString.Replace("(", string.Empty).Replace(")", string.Empty);
+        //            promptString.Replace("\"", string.Empty);
+        //        }
+        //        //var.PromptText = promptString;
+        //        //this.Context.MemoryRegion.DefineVariable(var);
+        //        EpiInfo.Plugin.IVariable temp = (EpiInfo.Plugin.IVariable)var;
+        //        this.Context.CurrentScope.define(temp);
+
+        //        return var;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        //Epi.Diagnostics.Debugger.Break();
+        //        //Epi.Diagnostics.Debugger.LogException(ex);
+        //        throw ex;
+        //    }
+        //}
     }
 }
