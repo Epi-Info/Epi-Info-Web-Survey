@@ -247,6 +247,13 @@ namespace Epi.Web.WCF.SurveyService
 
                 SurveyAnswerCriteria criteria = pRequest.Criteria;
 
+
+                if (criteria.UserPublishKey == null)
+                {
+                    return result;
+                }
+
+
                 List<string> IdList = new List<string>();
 
                 foreach (string id in criteria.SurveyAnswerIdList)
@@ -271,16 +278,21 @@ namespace Epi.Web.WCF.SurveyService
                 //}
 
 
-                result.SurveyResponseList = Mapper.ToDataTransferObject
-                    (
-                        Implementation.GetSurveyResponse
+                List<SurveyResponseBO> SurveyResponseBOList = Implementation.GetSurveyResponse
                         (
                             IdList,
                             criteria.SurveyId,
                             criteria.DateCompleted,
                             criteria.StatusId
-                        )
-                    );
+                        );
+                foreach (SurveyResponseBO surveyResponseBo in SurveyResponseBOList)
+                {
+                    if (surveyResponseBo.UserPublishKey == criteria.UserPublishKey)
+                    {
+                        result.SurveyResponseList.Add(Mapper.ToDataTransferObject(surveyResponseBo));
+                    }
+                }
+
                 /*
                 if (string.IsNullOrEmpty(pRequest.Criteria.SurveyId))
                 {
