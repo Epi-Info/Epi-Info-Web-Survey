@@ -64,6 +64,7 @@ namespace Epi.Web.BLL
                         BO.SurveyName = pRequestMessage.SurveyName;
 
                         BO.SurveyType = pRequestMessage.SurveyType;
+                        BO.UserPublishKey = pRequestMessage.UserPublishKey;
 
                         try
                         {

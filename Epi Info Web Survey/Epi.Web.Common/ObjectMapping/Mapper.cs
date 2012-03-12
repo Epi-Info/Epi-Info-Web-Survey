@@ -30,7 +30,9 @@ namespace Epi.Web.Common.ObjectMapping
                 OrganizationName = pDTO.OrganizationName,
                 DepartmentName = pDTO.DepartmentName,
                 ClosingDate = pDTO.ClosingDate,
+                UserPublishKey=pDTO.UserPublishKey,
                 SurveyType = pDTO.SurveyType
+
 
             };
         }
