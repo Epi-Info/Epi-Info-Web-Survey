@@ -587,10 +587,8 @@ public System.Collections.Specialized.NameValueCollection GlobalVariables;*/
         }
 
 
-        public StringBuilder GetVariableJavaScript()
+        public void GetVariableJavaScript(StringBuilder pJavaScriptBuilder)
         {
-            StringBuilder result = new StringBuilder();
-
             string defineFormat = "cce_Context.define(\"{0}\", \"{1}\", \"{2}\", \"{3}\");";
             string defineNumberFormat = "cce_Context.define(\"{0}\", \"{1}\", \"{2}\", new Number({3}));";
 
@@ -603,11 +601,11 @@ public System.Collections.Specialized.NameValueCollection GlobalVariables;*/
 
                     case "checkbox":
                     case "yesno":
-                        result.AppendLine(string.Format(defineFormat, var.Name, var.ControlType, "datasource", var.Expression));
+                        pJavaScriptBuilder.AppendLine(string.Format(defineFormat, var.Name, var.ControlType, "datasource", var.Expression));
                         break;
 
                     case "numeric":
-                        result.AppendLine(string.Format(defineNumberFormat, var.Name, var.ControlType, "datasource", var.Expression));
+                        pJavaScriptBuilder.AppendLine(string.Format(defineNumberFormat, var.Name, var.ControlType, "datasource", var.Expression));
                         break;
                     case "commentlegal":
                     case  "codes":
@@ -616,15 +614,13 @@ public System.Collections.Specialized.NameValueCollection GlobalVariables;*/
                     case "multiline":
                     case "textbox": 
                     default:
-                        result.AppendLine(string.Format(defineFormat, var.Name, var.ControlType, "datasource", var.Expression));
+                        pJavaScriptBuilder.AppendLine(string.Format(defineFormat, var.Name, var.ControlType, "datasource", var.Expression));
                         break;
 
                 }
 
-
             }
 
-            return result;
         }
 
     }

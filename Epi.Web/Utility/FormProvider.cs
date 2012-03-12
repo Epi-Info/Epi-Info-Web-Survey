@@ -79,9 +79,11 @@ namespace Epi.Web.MVC.Utility
                 form.DisabledFieldsList = xdocResponse.Root.Attribute("DisabledFieldsList").Value;
 
 
+                form.FormCheckCodeObj = form.GetCheckCodeObj(xdoc, xdocResponse, checkcode);
                 
-                form.FormCheckCodeObj = form.GetCheckCodeObj(checkcode);
-                form.FormCheckCodeObj.LoadTemplate(xdoc, xdocResponse);
+
+
+                form.FormCheckCodeObj.GetVariableJavaScript(VariableDefinitions);
 
                 string PageName = GetPageName(XML, PageNumber);
 
