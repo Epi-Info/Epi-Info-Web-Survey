@@ -75,6 +75,12 @@ namespace Epi.Web.WCF.SurveyService
                     return result;
                 }
 
+                //Validate UserPublishKey exists
+                if (pRequest.Criteria.UserPublishKey == null)
+                {
+                    return result;
+                }
+
                 var criteria = pRequest.Criteria as SurveyInfoCriteria;
                 string sort = criteria.SortExpression;
                 List<string> SurveyIdList = new List<string>();
@@ -101,7 +107,18 @@ namespace Epi.Web.WCF.SurveyService
                 //if (pRequest.LoadOptions.Contains("SurveyInfo"))
                 //{
 
-                result.SurveyInfoList = Mapper.ToDataTransferObject(implementation.GetSurveyInfo(SurveyIdList, criteria.ClosingDate, criteria.SurveyType));
+                //result.SurveyInfoList = Mapper.ToDataTransferObject(implementation.GetSurveyInfo(SurveyIdList, criteria.ClosingDate, criteria.SurveyType));
+
+
+                List<SurveyInfoBO> SurveyBOList = implementation.GetSurveyInfo(SurveyIdList, criteria.ClosingDate, criteria.SurveyType);
+                foreach (SurveyInfoBO surveyInfoBO in SurveyBOList)
+                {
+                    if (surveyInfoBO.UserPublishKey == pRequest.Criteria.UserPublishKey)
+                    {
+                        result.SurveyInfoList.Add(Mapper.ToDataTransferObject(surveyInfoBO));
+                    }
+                }
+
                 //}
 
                 return result;
@@ -411,7 +428,8 @@ namespace Epi.Web.WCF.SurveyService
             ClientTag = 0x0001,
             AccessToken = 0x0002,
             UserCredentials = 0x0004,
-            All = ClientTag | AccessToken | UserCredentials
+            UserPublishKey = 0x0008,
+            All = ClientTag | AccessToken | UserCredentials | UserPublishKey
         }
 
 
