@@ -37,6 +37,13 @@ namespace Epi.Web.Common.Criteria
 
 
         /// <summary>
+        /// User Publish Key for Manager Service
+        /// </summary>
+        [DataMember]
+        public Guid UserPublishKey { get; set; }
+
+
+        /// <summary>
         /// Flag as to whether to include order statistics.
         /// </summary>
         [DataMember]
