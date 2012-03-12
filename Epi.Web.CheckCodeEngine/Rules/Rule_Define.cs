@@ -72,6 +72,7 @@ namespace Epi.Core.EnterInterpreter.Rules
             PluginVariable result = new PluginVariable();
             try
             {
+                result.Name = this.Identifier;
                 string dataTypeName = VariableTypeIndicator.Trim().ToUpper();
                 EpiInfo.Plugin.DataType type = GetDataType(dataTypeName);
                 string variableScope = Variable_Scope.Trim().ToUpper();
@@ -82,6 +83,8 @@ namespace Epi.Core.EnterInterpreter.Rules
                     vt = this.GetVariableScopeIdByName(variableScope);
                 }
 
+                result.VariableScope = vt;
+                result.DataType = type;
                 this.Context.CurrentScope.define(result);
 
                 return result;
