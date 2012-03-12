@@ -510,11 +510,13 @@ public System.Collections.Specialized.NameValueCollection GlobalVariables;*/
                     case "2"://Label/Title
                         var.DataType = DataType.Text;
                         var.ControlType = "label";
-                        break;
+                        continue;
+                        //break;
                     case "3"://Label
                         var.DataType = DataType.Text;
                         var.ControlType = "label";
-                        break;
+                        continue;
+                        //break;
                     case "4"://MultiLineTextBox
                         var.DataType = DataType.Text;
                         var.ControlType = "multiline";
@@ -593,19 +595,37 @@ public System.Collections.Specialized.NameValueCollection GlobalVariables;*/
             string defineNumberFormat = "cce_Context.define(\"{0}\", \"{1}\", \"{2}\", new Number({3}));";
 
 
-            foreach (PluginVariable var in this.CurrentScope.FindVariables( VariableScope.DataSource | VariableScope.Global | VariableScope.Permanent))
+            foreach (PluginVariable var in this.CurrentScope.FindVariables( VariableScope.DataSource | VariableScope.Global | VariableScope.Permanent | VariableScope.Standard))
             {
+                string DataSource;
+                switch (var.VariableScope)
+                {
+                    case VariableScope.DataSource:
+                        DataSource = "datasource";
+                        break;
+                    case VariableScope.Global:
+                        DataSource = "global";
+                        break;
+                    case VariableScope.Permanent:
+                        DataSource = "permanent";
+                        break;
+                    case VariableScope.Standard:
+                    default:
+                        DataSource = "standard";
+                        break;
+
+                }
 
                 switch (var.ControlType)
                 {
 
                     case "checkbox":
                     case "yesno":
-                        pJavaScriptBuilder.AppendLine(string.Format(defineFormat, var.Name, var.ControlType, "datasource", var.Expression));
+                        pJavaScriptBuilder.AppendLine(string.Format(defineFormat, var.Name, var.ControlType, DataSource, var.Expression));
                         break;
 
                     case "numeric":
-                        pJavaScriptBuilder.AppendLine(string.Format(defineNumberFormat, var.Name, var.ControlType, "datasource", var.Expression));
+                        pJavaScriptBuilder.AppendLine(string.Format(defineNumberFormat, var.Name, var.ControlType, DataSource, var.Expression));
                         break;
                     case "commentlegal":
                     case  "codes":
@@ -614,7 +634,7 @@ public System.Collections.Specialized.NameValueCollection GlobalVariables;*/
                     case "multiline":
                     case "textbox": 
                     default:
-                        pJavaScriptBuilder.AppendLine(string.Format(defineFormat, var.Name, var.ControlType, "datasource", var.Expression));
+                        pJavaScriptBuilder.AppendLine(string.Format(defineFormat, var.Name, var.ControlType, DataSource, var.Expression));
                         break;
 
                 }

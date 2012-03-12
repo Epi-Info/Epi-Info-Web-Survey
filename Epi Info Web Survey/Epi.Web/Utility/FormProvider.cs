@@ -105,7 +105,7 @@ namespace Epi.Web.MVC.Utility
                                 var _TextBoxValue = Value;
                                 form.AddFields(GetTextBox(_FieldTypeID, _Width, _Height, SurveyAnswer, _TextBoxValue));
                                 //                                             pName, pType, pSource
-                                VariableDefinitions.AppendLine(string.Format(defineFormat, _FieldTypeID.Attribute("Name").Value,"textbox","datasource",Value)); 
+                                //VariableDefinitions.AppendLine(string.Format(defineFormat, _FieldTypeID.Attribute("Name").Value,"textbox","datasource",Value)); 
                             break;
 
                         case "2"://Label/Title
@@ -121,14 +121,14 @@ namespace Epi.Web.MVC.Utility
                             var _TextAreaValue = Value;
                             form.AddFields( GetTextArea(_FieldTypeID, _Width,_Height,SurveyAnswer,_TextAreaValue));
                             //                                             pName, pType, pSource
-                            VariableDefinitions.AppendLine(string.Format(defineFormat, _FieldTypeID.Attribute("Name").Value, "multiline", "datasource",Value)); 
+                            //VariableDefinitions.AppendLine(string.Format(defineFormat, _FieldTypeID.Attribute("Name").Value, "multiline", "datasource",Value)); 
                             break;
                         case "5"://NumericTextBox
 
                             var _NumericTextBoxValue = Value;
                             form.AddFields( GetNumericTextBox(_FieldTypeID, _Width, _Height, SurveyAnswer, _NumericTextBoxValue));
                             //                                             pName, pType, pSource
-                            VariableDefinitions.AppendLine(string.Format(defineNumberFormat, _FieldTypeID.Attribute("Name").Value, "number", "datasource", Value)); 
+                            //VariableDefinitions.AppendLine(string.Format(defineNumberFormat, _FieldTypeID.Attribute("Name").Value, "number", "datasource", Value)); 
                             break;
                         // 7 DatePicker
                         case "7"://NumericTextBox
@@ -136,14 +136,14 @@ namespace Epi.Web.MVC.Utility
                             var _DatePickerValue = Value;
                             form.AddFields(GetDatePicker(_FieldTypeID, _Width, _Height, SurveyAnswer, _DatePickerValue));
                             //                                             pName, pType, pSource
-                            VariableDefinitions.AppendLine(string.Format(defineNumberFormat, _FieldTypeID.Attribute("Name").Value, "number", "datasource", Value)); 
+                            //VariableDefinitions.AppendLine(string.Format(defineNumberFormat, _FieldTypeID.Attribute("Name").Value, "number", "datasource", Value)); 
                             break;
                         case "10"://CheckBox
 
                             var _CheckBoxValue = Value;
                             form.AddFields(GetCheckBox(_FieldTypeID, _Width, _Height, SurveyAnswer, _CheckBoxValue));
                             //                                             pName, pType, pSource
-                            VariableDefinitions.AppendLine(string.Format(defineFormat, _FieldTypeID.Attribute("Name").Value, "checkbox", "datasource",Value)); 
+                            //VariableDefinitions.AppendLine(string.Format(defineFormat, _FieldTypeID.Attribute("Name").Value, "checkbox", "datasource",Value)); 
                             break;
 
                         case "11"://DropDown Yes/No
@@ -151,7 +151,7 @@ namespace Epi.Web.MVC.Utility
                                    var _DropDownSelectedValueYN = Value;
                                    form.AddFields(GetDropDown(_FieldTypeID, _Width, _Height, SurveyAnswer, _DropDownSelectedValueYN, "Yes,No", 11));
                                    //                                             pName, pType, pSource
-                                   VariableDefinitions.AppendLine(string.Format(defineFormat, _FieldTypeID.Attribute("Name").Value, "yesno", "datasource",Value)); 
+                                   //VariableDefinitions.AppendLine(string.Format(defineFormat, _FieldTypeID.Attribute("Name").Value, "yesno", "datasource",Value)); 
                                
                             break;
                         case "17"://DropDown LegalValues
@@ -161,7 +161,7 @@ namespace Epi.Web.MVC.Utility
                               var _DropDownSelectedValue1 = Value;
                               form.AddFields(GetDropDown(_FieldTypeID, _Width, _Height, SurveyAnswer, _DropDownSelectedValue1, DropDownValues1, 17));
                               //                                             pName, pType, pSource
-                              VariableDefinitions.AppendLine(string.Format(defineFormat, _FieldTypeID.Attribute("Name").Value, "legalvalue", "datasource",Value)); 
+                              //VariableDefinitions.AppendLine(string.Format(defineFormat, _FieldTypeID.Attribute("Name").Value, "legalvalue", "datasource",Value)); 
                           
                              break;
                         case "18"://DropDown Codes
@@ -171,7 +171,7 @@ namespace Epi.Web.MVC.Utility
                                    var _DropDownSelectedValue2 = Value;
                                    form.AddFields(GetDropDown(_FieldTypeID, _Width, _Height, SurveyAnswer, _DropDownSelectedValue2, DropDownValues2, 18));
                                    //                                             pName, pType, pSource
-                                   VariableDefinitions.AppendLine(string.Format(defineFormat, _FieldTypeID.Attribute("Name").Value, "code", "datasource",Value)); 
+                                   //VariableDefinitions.AppendLine(string.Format(defineFormat, _FieldTypeID.Attribute("Name").Value, "code", "datasource",Value)); 
                                
                               break;
                         case "19"://DropDown CommentLegal
@@ -181,7 +181,7 @@ namespace Epi.Web.MVC.Utility
                                   var _DropDownSelectedValue = Value;
                                   form.AddFields(GetDropDown(_FieldTypeID, _Width, _Height, SurveyAnswer, _DropDownSelectedValue, DropDownValues, 19));
                                   //                                             pName, pType, pSource
-                                  VariableDefinitions.AppendLine(string.Format(defineFormat, _FieldTypeID.Attribute("Name").Value, "commentlegal", "datasource",Value)); 
+                                  //VariableDefinitions.AppendLine(string.Format(defineFormat, _FieldTypeID.Attribute("Name").Value, "commentlegal", "datasource",Value)); 
                               
                                    break;
                         case "21"://GroupBox
