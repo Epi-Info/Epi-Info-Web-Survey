@@ -51,6 +51,14 @@ namespace Epi.Core.EnterInterpreter.Rules
         }
 
 
-        public override bool IsNull() { return this.define_Statements_Group == null; } 
+        public override bool IsNull() { return this.define_Statements_Group == null; }
+
+        public override void ToJavaScript(StringBuilder pJavaScriptBuilder)
+        {
+            if (define_Statements_Group != null)// && this.Context.EnterCheckCodeInterface.IsExecutionEnabled)
+            {
+                this.define_Statements_Group.ToJavaScript(pJavaScriptBuilder);
+            }
+        }
     }
 }
