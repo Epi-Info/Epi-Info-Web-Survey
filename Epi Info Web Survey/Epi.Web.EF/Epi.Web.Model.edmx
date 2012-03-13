@@ -64,7 +64,6 @@
           <Property Name="DateCompleted" Type="datetime2" />
           <Property Name="StatusId" Type="int" Nullable="false" />
           <Property Name="ResponseXML" Type="xml" Nullable="false" />
-          <Property Name="UserPublishKey" Type="uniqueidentifier" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -181,7 +180,6 @@
           <Property Type="String" Name="ResponseXML" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="lk_Status" Relationship="EIWSModel.FK_SurveyResponse_lk_Status" FromRole="SurveyResponse" ToRole="lk_Status" />
           <NavigationProperty Name="SurveyMetaData" Relationship="EIWSModel.FK_SurveyResponse_SurveyMetaData" FromRole="SurveyResponse" ToRole="SurveyMetaData" />
-          <Property Type="Guid" Name="UserPublishKey" />
         </EntityType>
         <Association Name="FK_SurveyResponse_lk_Status">
           <End Type="EIWSModel.lk_Status" Role="lk_Status" Multiplicity="1" />
@@ -271,7 +269,6 @@
           <EntitySetMapping Name="SurveyResponses">
             <EntityTypeMapping TypeName="EIWSModel.SurveyResponse">
               <MappingFragment StoreEntitySet="SurveyResponse">
-                <ScalarProperty Name="UserPublishKey" ColumnName="UserPublishKey" />
                 <ScalarProperty Name="ResponseXML" ColumnName="ResponseXML" />
                 <ScalarProperty Name="StatusId" ColumnName="StatusId" />
                 <ScalarProperty Name="DateCompleted" ColumnName="DateCompleted" />
@@ -316,18 +313,18 @@
         <EntityTypeShape EntityType="EIWSModel.lk_Status" Width="1.5" PointX="5" PointY="4.125" Height="1.5956835937499996" />
         <EntityTypeShape EntityType="EIWSModel.lk_SurveyType" Width="1.5" PointX="0.75" PointY="1.75" Height="1.5956835937499996" />
         <EntityTypeShape EntityType="EIWSModel.SurveyMetaData" Width="1.5" PointX="3" PointY="1" Height="3.1340950520833313" />
-        <EntityTypeShape EntityType="EIWSModel.SurveyResponse" Width="1.5" PointX="6" PointY="0.5" Height="2.5571907552083317" />
+        <EntityTypeShape EntityType="EIWSModel.SurveyResponse" Width="1.5" PointX="6" PointY="0.5" Height="2.5571907552083339" />
         <AssociationConnector Association="EIWSModel.FK_SurveyResponse_lk_Status" >
           <ConnectorPoint PointX="6.25" PointY="4.125" />
-          <ConnectorPoint PointX="6.25" PointY="3.0571907552083317" />
+          <ConnectorPoint PointX="6.25" PointY="3.0571907552083339" />
         </AssociationConnector>
         <AssociationConnector Association="EIWSModel.FK_SurveyMetaData_lk_SurveyType" >
           <ConnectorPoint PointX="2.25" PointY="2.547841796875" />
           <ConnectorPoint PointX="3" PointY="2.547841796875" />
         </AssociationConnector>
         <AssociationConnector Association="EIWSModel.FK_SurveyResponse_SurveyMetaData" >
-          <ConnectorPoint PointX="4.5" PointY="2.0285953776041659" />
-          <ConnectorPoint PointX="6" PointY="2.0285953776041659" />
+          <ConnectorPoint PointX="4.5" PointY="2.0285953776041667" />
+          <ConnectorPoint PointX="6" PointY="2.0285953776041667" />
         </AssociationConnector>
         <EntityTypeShape EntityType="EIWSModel.sysdiagram" Width="1.5" PointX="0.75" PointY="5.75" Height="1.9802864583333317" />
       </Diagram>

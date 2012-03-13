@@ -35,7 +35,7 @@ namespace Epi.Web.EF
                     using (var Context = DataObjectFactory.CreateContext())
                     {
 
-                        result.Add(Mapper.Map(Context.SurveyResponses.FirstOrDefault(x => x.ResponseId == Id && x.UserPublishKey == UserPublishKey)));
+                        result.Add(Mapper.Map(Context.SurveyResponses.FirstOrDefault(x => x.ResponseId == Id )));
                     }
                 }
             }
@@ -69,7 +69,7 @@ namespace Epi.Web.EF
                 using (var Context = DataObjectFactory.CreateContext())
                 {
 
-                    result.Add(Mapper.Map(Context.SurveyResponses.FirstOrDefault(x => x.SurveyId == Id && x.UserPublishKey == UserPublishKey)));
+                    result.Add(Mapper.Map(Context.SurveyResponses.FirstOrDefault(x => x.SurveyId == Id )));
                 }
             }
 
@@ -188,7 +188,7 @@ namespace Epi.Web.EF
                 DataRow.DateCompleted = DateTime.Now;
                 DataRow.StatusId = SurveyResponse.Status;
                 DataRow.DateLastUpdated = DateTime.Now;
-                DataRow.UserPublishKey = SurveyResponse.UserPublishKey;
+                
                 Context.SaveChanges();
             }
         }
