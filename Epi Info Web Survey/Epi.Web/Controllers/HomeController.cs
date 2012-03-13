@@ -3,7 +3,10 @@ using System.Web.Mvc;
 using Epi.Web.MVC.Models;
 using System.Xml;
 using System.Xml.Linq;
+using System.Xml.XPath;
 using System.Linq;
+using Epi.Core.EnterInterpreter;
+
 namespace Epi.Web.MVC.Controllers
 {
     public class HomeController : Controller
@@ -75,7 +78,31 @@ namespace Epi.Web.MVC.Controllers
                 Guid ResponseID = Guid.NewGuid();
                 TempData[Epi.Web.MVC.Constants.Constant.RESPONSE_ID] = ResponseID.ToString();
                 // create the first survey response
-                _isurveyFacade.CreateSurveyAnswer(surveyModel.SurveyId, ResponseID.ToString());
+                Epi.Web.Common.DTO.SurveyAnswerDTO SurveyAnswer = _isurveyFacade.CreateSurveyAnswer(surveyModel.SurveyId, ResponseID.ToString());
+
+                SurveyInfoModel surveyInfoModel = _isurveyFacade.GetSurveyInfoModel(SurveyAnswer.SurveyId);
+                
+                // Execute - Record Before - Begin
+                MvcDynamicForms.Form form = _isurveyFacade.GetSurveyFormData(SurveyAnswer.SurveyId, 1, SurveyAnswer);
+
+                XDocument xdoc = XDocument.Parse(surveyInfoModel.XML);
+                XDocument xdocResponse = XDocument.Parse(SurveyAnswer.XML);
+
+                XElement ViewElement = xdoc.XPathSelectElement("Template/Project/View");
+                string checkcode = ViewElement.Attribute("CheckCode").Value.ToString();
+
+                form.FormCheckCodeObj = form.GetCheckCodeObj(xdoc, xdocResponse, checkcode);
+
+                EnterRule FunctionObject_B = (EnterRule)form.FormCheckCodeObj.GetCommand("level=record&event=before&identifier=");
+                if (FunctionObject_B != null && !FunctionObject_B.IsNull())
+                {
+
+                    FunctionObject_B.Execute();
+                    // update the survey response with the hidden/highlighted and disabled
+                    // field list
+                }
+                // Execute - Record Before - End
+
                 //string page;
                 // return RedirectToAction(Epi.Web.Models.Constants.Constant.INDEX, Epi.Web.Models.Constants.Constant.SURVEY_CONTROLLER, new {id="page" });
                 return RedirectToAction(Epi.Web.MVC.Constants.Constant.INDEX, Epi.Web.MVC.Constants.Constant.SURVEY_CONTROLLER, new { responseid = ResponseID });

@@ -53,6 +53,81 @@ public System.Collections.Specialized.NameValueCollection GlobalVariables;*/
 
         public System.Text.StringBuilder JavaScriptVariableDefinitions;
 
+
+        private List<string> _HiddenFieldList;
+        private List<string> _HighlightedFieldList;
+        private List<string> _DisabledFieldList;
+
+
+        public string HiddenFieldList
+        {
+            get { 
+                    StringBuilder result = new StringBuilder();
+                    foreach(string s in _HiddenFieldList) 
+                    {
+                        result.Append(s);
+                        result.Append(',');
+                    }
+                    return result.ToString();
+                }
+            set 
+            {
+                string[] list = value.Split(',');
+                _HiddenFieldList.Clear();
+                foreach (string s in list)
+                {
+                    _HiddenFieldList.Add(s);
+                }
+            }
+        }
+
+        public string HighlightedFieldList
+        {
+            get { 
+                    StringBuilder result = new StringBuilder();
+                    foreach (string s in _HighlightedFieldList) 
+                    {
+                        result.Append(s);
+                        result.Append(',');
+                    }
+                    return result.ToString();
+                }
+            set
+            {
+                string[] list = value.Split(',');
+                _HighlightedFieldList.Clear();
+                foreach (string s in list)
+                {
+                    _HighlightedFieldList.Add(s);
+                }
+            }
+        }
+
+        public string DisabledFieldList
+        {
+            get { 
+                    StringBuilder result = new StringBuilder();
+                    foreach (string s in _DisabledFieldList) 
+                    {
+                        result.Append(s);
+                        result.Append(',');
+                    }
+                    return result.ToString(); 
+                }
+            set
+            {
+                string[] list = value.Split(',');
+                _DisabledFieldList.Clear();
+                foreach (string s in list)
+                {
+                    _DisabledFieldList.Add(s);
+                }
+            }
+        }
+
+
+
+
         private string[] parseGetCommandSearchText(string pSearchText)
         {
             string[] result = null;
@@ -235,6 +310,11 @@ public System.Collections.Specialized.NameValueCollection GlobalVariables;*/
             this.ProgramText = new StringBuilder();
             this.JavaScriptVariableDefinitions = new StringBuilder();
             this.DLLClassList = new Dictionary<string, IDLLClass>(StringComparer.OrdinalIgnoreCase);
+
+            this._HiddenFieldList = new List<string>();
+            this._HighlightedFieldList = new List<string>();
+            this._DisabledFieldList = new List<string>();
+
 
            //this.DefineVariablesCheckCode = new Rule_DefineVariables_Statement();
 
