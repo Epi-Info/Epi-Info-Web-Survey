@@ -23,6 +23,8 @@ namespace Epi.Web.MVC.Models
         private DateTime _ClosingDate;
         private int _SurveyType;
 
+        private Guid _UserPublishKey;
+
         public string SurveyId
         {
             get { return _SurveyId; }
@@ -92,6 +94,12 @@ namespace Epi.Web.MVC.Models
         {
             get { return _SurveyType; }
             set { _SurveyType = value; }
+        }
+
+        public Guid UserPublishKey
+        { 
+            get { return _UserPublishKey; } 
+            set { this._UserPublishKey = value; } 
         }
     }
 }

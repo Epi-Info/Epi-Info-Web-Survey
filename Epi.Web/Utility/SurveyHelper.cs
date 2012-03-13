@@ -22,7 +22,7 @@ namespace Epi.Web.MVC.Utility
         /// <param name="surveyAnswerDTO"></param>
         /// <param name="surveyResponseXML"></param>
         /// <param name="iSurveyAnswerRepository"></param>
-        public static void CreateSurveyResponse(string surveyId, string responseId,SurveyAnswerRequest surveyAnswerRequest,
+        public static Epi.Web.Common.DTO.SurveyAnswerDTO CreateSurveyResponse(string surveyId, string responseId, SurveyAnswerRequest surveyAnswerRequest,
                                           Common.DTO.SurveyAnswerDTO surveyAnswerDTO,
                                           SurveyResponseXML surveyResponseXML, ISurveyAnswerRepository iSurveyAnswerRepository)
         {
@@ -36,6 +36,8 @@ namespace Epi.Web.MVC.Utility
             surveyAnswerRequest.SurveyAnswerList.Add(surveyAnswerDTO);
             surveyAnswerRequest.Action = Epi.Web.MVC.Constants.Constant.CREATE;  //"Create";
             iSurveyAnswerRepository.SaveSurveyAnswer(surveyAnswerRequest);
+
+            return surveyAnswerDTO;
         }
 
         public static void UpdateSurveyResponse(SurveyInfoModel surveyInfoModel,MvcDynamicForms.Form form, SurveyAnswerRequest surveyAnswerRequest,
