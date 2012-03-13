@@ -254,6 +254,16 @@ namespace Epi.Web.WCF.SurveyService
                 }
 
 
+                Epi.Web.Interfaces.DataInterfaces.ISurveyInfoDao surveyInfoDao = new EF.EntitySurveyInfoDao();
+                Epi.Web.BLL.SurveyInfo SurveyInfo = new Epi.Web.BLL.SurveyInfo(surveyInfoDao);
+                Guid UserPublishKey = SurveyInfo.GetSurveyInfoById(criteria.SurveyId).UserPublishKey;
+
+                if (criteria.UserPublishKey != UserPublishKey)
+                {
+                    return result;
+                }
+              
+            
                 List<string> IdList = new List<string>();
 
                 foreach (string id in criteria.SurveyAnswerIdList)
@@ -287,7 +297,8 @@ namespace Epi.Web.WCF.SurveyService
                         );
                 foreach (SurveyResponseBO surveyResponseBo in SurveyResponseBOList)
                 {
-                    if (surveyResponseBo.UserPublishKey == criteria.UserPublishKey)
+                   // if (surveyResponseBo.UserPublishKey == criteria.UserPublishKey)
+                    if (UserPublishKey == criteria.UserPublishKey)
                     {
                         result.SurveyResponseList.Add(Mapper.ToDataTransferObject(surveyResponseBo));
                     }
