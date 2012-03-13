@@ -19,20 +19,26 @@ namespace Epi.Web.EF
         /// <returns>A SurveyInfoBO business object.</returns>
         internal static SurveyInfoBO Map(SurveyMetaData entity)
         {
-            return new SurveyInfoBO
-            {
-                SurveyId = entity.SurveyId.ToString(),
-                SurveyName = entity.SurveyName,
-                SurveyNumber = entity.SurveyNumber,
-                XML = entity.TemplateXML,
-                IntroductionText = entity.IntroductionText,
-                ExitText = entity.ExitText,
-                OrganizationName = entity.OrganizationName,
-                DepartmentName = entity.DepartmentName,
-                ClosingDate = entity.ClosingDate,
-                UserPublishKey = (Guid)entity.UserPublishKey ,
-                SurveyType =   entity.SurveyTypeId 
-            };
+            SurveyInfoBO result =  new SurveyInfoBO();
+            
+                result.SurveyId = entity.SurveyId.ToString();
+                result.SurveyName = entity.SurveyName;
+                result.SurveyNumber = entity.SurveyNumber;
+                result.XML = entity.TemplateXML;
+                result.IntroductionText = entity.IntroductionText;
+                result.ExitText = entity.ExitText;
+                result.OrganizationName = entity.OrganizationName;
+                result.DepartmentName = entity.DepartmentName;
+                result.ClosingDate = entity.ClosingDate;
+                if (entity.UserPublishKey != null)
+                {
+                    result.UserPublishKey = (Guid)entity.UserPublishKey.Value;
+                }
+                result.SurveyType = entity.SurveyTypeId; 
+            
+
+
+            return result;
         }
 
 
