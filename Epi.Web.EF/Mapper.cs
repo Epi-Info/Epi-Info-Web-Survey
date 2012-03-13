@@ -30,7 +30,7 @@ namespace Epi.Web.EF
                 OrganizationName = entity.OrganizationName,
                 DepartmentName = entity.DepartmentName,
                 ClosingDate = entity.ClosingDate,
-               // UserPublishKey = entity.UserPublishKey ,
+                UserPublishKey = (Guid)entity.UserPublishKey ,
                 SurveyType =   entity.SurveyTypeId 
             };
         }
@@ -124,7 +124,7 @@ namespace Epi.Web.EF
                 ResponseId = entity.ResponseId.ToString(),
                 XML = entity.ResponseXML,
                 Status = entity.StatusId,
-                UserPublishKey = (Guid)entity.UserPublishKey,
+                //UserPublishKey = (Guid)entity.UserPublishKey,
                 DateLastUpdated = entity.DateLastUpdated,
                 DateCompleted = entity.DateCompleted.Value
             };
@@ -154,7 +154,7 @@ namespace Epi.Web.EF
                 ResponseId = new Guid(pBO.ResponseId),
                 ResponseXML = pBO.XML,
                 StatusId = pBO.Status,
-                UserPublishKey=pBO.UserPublishKey,
+                
                 DateLastUpdated = pBO.DateLastUpdated,
                 DateCompleted = pBO.DateCompleted
 

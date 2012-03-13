@@ -156,7 +156,7 @@ namespace Epi.Web.SurveyManager.Test
             objSurveyRequestBO = DataObj.CreateSurveyRequestBOObject();
             //objSurveyInfoBO =objSurveyRequestBO;
 
-          objSurveyInfoBO =  EntitySurveyInfoDao.GetSurveyInfo(objSurveyRequestBO.SurveyNumber);
+         // objSurveyInfoBO =  EntitySurveyInfoDao.GetSurveyInfo(objSurveyRequestBO.SurveyNumber);
             
 
             ResonseType = objSurveyRequestBO.SurveyType;

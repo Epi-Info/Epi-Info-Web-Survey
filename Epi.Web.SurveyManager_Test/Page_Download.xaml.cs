@@ -110,6 +110,11 @@ namespace Epi.Web.SurveyManager.Client
                 Request.Criteria.SurveyId = this.SurveyAnswerCriteria_SurveyIdTextBox.Text;
             }
 
+                if (!string.IsNullOrEmpty(this.UserPublishKeytextBox.Text.Trim()))
+                {
+                    Request.Criteria.UserPublishKey = new Guid(this.UserPublishKeytextBox.Text);
+                }
+
             if (this.datePicker1.SelectedDate != null)
             {
                 Request.Criteria.DateCompleted = (DateTime)this.datePicker1.SelectedDate;
