@@ -54,9 +54,9 @@ public System.Collections.Specialized.NameValueCollection GlobalVariables;*/
         public System.Text.StringBuilder JavaScriptVariableDefinitions;
 
 
-        private List<string> _HiddenFieldList;
-        private List<string> _HighlightedFieldList;
-        private List<string> _DisabledFieldList;
+        public List<string> _HiddenFieldList;
+        public List<string> _HighlightedFieldList;
+        public List<string> _DisabledFieldList;
 
 
         public string HiddenFieldList
@@ -76,7 +76,7 @@ public System.Collections.Specialized.NameValueCollection GlobalVariables;*/
                 _HiddenFieldList.Clear();
                 foreach (string s in list)
                 {
-                    _HiddenFieldList.Add(s);
+                    _HiddenFieldList.Add(s.ToLower());
                 }
             }
         }
@@ -98,7 +98,7 @@ public System.Collections.Specialized.NameValueCollection GlobalVariables;*/
                 _HighlightedFieldList.Clear();
                 foreach (string s in list)
                 {
-                    _HighlightedFieldList.Add(s);
+                    _HighlightedFieldList.Add(s.ToLower());
                 }
             }
         }
@@ -120,7 +120,7 @@ public System.Collections.Specialized.NameValueCollection GlobalVariables;*/
                 _DisabledFieldList.Clear();
                 foreach (string s in list)
                 {
-                    _DisabledFieldList.Add(s);
+                    _DisabledFieldList.Add(s.ToLower());
                 }
             }
         }
