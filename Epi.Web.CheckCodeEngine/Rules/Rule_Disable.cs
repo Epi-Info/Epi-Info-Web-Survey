@@ -35,7 +35,17 @@ namespace Epi.Core.EnterInterpreter.Rules
         /// <returns>object</returns>
         public override object Execute()
         {
-            this.Context.EnterCheckCodeInterface.Disable(this.IdentifierList, this.IsExceptList);
+            //this.Context.EnterCheckCodeInterface.Disable(this.IdentifierList, this.IsExceptList);
+            if (!this.IsExceptList)
+            {
+                foreach (string s in this.IdentifierList)
+                {
+                    if (!this.Context.DisabledFieldList.Contains(s.ToLower()))
+                    {
+                        this.Context._DisabledFieldList.Add(s.ToLower());
+                    }
+                }
+            }
             return null;
         }
 
