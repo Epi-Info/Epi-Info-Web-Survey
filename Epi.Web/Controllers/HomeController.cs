@@ -100,6 +100,10 @@ namespace Epi.Web.MVC.Controllers
                     FunctionObject_B.Execute();
                     // update the survey response with the hidden/highlighted and disabled
                     // field list
+                    form.HiddenFieldsList = FunctionObject_B.Context.HiddenFieldList;
+                    form.HighlightedFieldsList = FunctionObject_B.Context.HighlightedFieldList ;
+                    form.DisabledFieldsList =FunctionObject_B.Context.DisabledFieldList;
+                    _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, ResponseID.ToString(), form, SurveyAnswer, false, false, 1);
                 }
                 // Execute - Record Before - End
 
