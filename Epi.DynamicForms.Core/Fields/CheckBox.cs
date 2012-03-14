@@ -120,6 +120,19 @@ namespace MvcDynamicForms.Fields
             chk.Attributes.Add("style", "position:absolute;left:" + _left.ToString() + "px;top:" + _top.ToString() + "px" + ";width:" + _ControlWidth.ToString() + "px" + ErrorStyle + ";" + IsHiddenStyle + ";" + IsHighlightedStyle);            
           
             chk.MergeAttributes(_inputHtmlAttributes);
+            ////////////Check code start//////////////////
+            EnterRule FunctionObjectAfter = (EnterRule)_form.FormCheckCodeObj.GetCommand("level=field&event=after&identifier=" + _key);
+            if (FunctionObjectAfter != null && !FunctionObjectAfter.IsNull())
+            {
+                chk.Attributes.Add("onblur", "return " + _key + "_after();"); //After
+            }
+            EnterRule FunctionObjectBefore = (EnterRule)_form.FormCheckCodeObj.GetCommand("level=field&event=before&identifier=" + _key);
+            if (FunctionObjectBefore != null && !FunctionObjectBefore.IsNull())
+            {
+                chk.Attributes.Add("onfocus", "return " + _key + "_before();"); //Before
+            }
+
+            ////////////Check code end//////////////////
             html.Append(chk.ToString(TagRenderMode.SelfClosing));
 
             // prompt label
@@ -145,16 +158,16 @@ namespace MvcDynamicForms.Fields
             hdn.Attributes.Add("name", inputName);
             hdn.Attributes.Add("value", bool.FalseString);
             ////////////Check code start//////////////////
-            EnterRule FunctionObjectAfter = (EnterRule)_form.FormCheckCodeObj.GetCommand("level=field&event=after&identifier=" + _key);
-            if (FunctionObjectAfter != null && !FunctionObjectAfter.IsNull())
-            {
-                hdn.Attributes.Add("onblur", "return " + _key + "_after();"); //After
-            }
-            EnterRule FunctionObjectBefore = (EnterRule)_form.FormCheckCodeObj.GetCommand("level=field&event=before&identifier=" + _key);
-            if (FunctionObjectBefore != null && !FunctionObjectBefore.IsNull())
-            { 
-                hdn.Attributes.Add("onfocus", "return " + _key + "_before();"); //Before
-            }
+            //EnterRule FunctionObjectAfter = (EnterRule)_form.FormCheckCodeObj.GetCommand("level=field&event=after&identifier=" + _key);
+            //if (FunctionObjectAfter != null && !FunctionObjectAfter.IsNull())
+            //{
+            //    hdn.Attributes.Add("onblur", "return " + _key + "_after();"); //After
+            //}
+            //EnterRule FunctionObjectBefore = (EnterRule)_form.FormCheckCodeObj.GetCommand("level=field&event=before&identifier=" + _key);
+            //if (FunctionObjectBefore != null && !FunctionObjectBefore.IsNull())
+            //{ 
+            //    hdn.Attributes.Add("onfocus", "return " + _key + "_before();"); //Before
+            //}
 
             ////////////Check code end//////////////////
             html.Append(hdn.ToString(TagRenderMode.SelfClosing));
