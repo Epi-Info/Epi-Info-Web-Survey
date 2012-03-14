@@ -30,7 +30,8 @@ namespace Epi.Core.EnterInterpreter.Rules
         {
             object result = null;
 
-            if (this.Statements != null && this.Context.EnterCheckCodeInterface.IsExecutionEnabled)
+            //if (this.Statements != null && this.Context.EnterCheckCodeInterface.IsExecutionEnabled)
+            if (this.Statements != null)
             {
                 try
                 {
@@ -38,14 +39,15 @@ namespace Epi.Core.EnterInterpreter.Rules
                 }
                 catch (Exception ex)
                 {
-                    if (this.Context.EnterCheckCodeInterface.IsSuppressErrorsEnabled)
+                    throw ex;
+                    /*if (this.Context.EnterCheckCodeInterface.IsSuppressErrorsEnabled)
                     {
                         //Logger.Log(string.Format("{0} - EnterInterpreter Execute : source [{1}]\n message:\n{2}", DateTime.Now, ex.Source, ex.Message));
                     }
                     else
                     {
                         throw ex;
-                    }
+                    }*/
                 }
             }
             return result;
