@@ -7,9 +7,9 @@ namespace Epi.Core.EnterInterpreter.Rules
 {
     public class Rule_Value : EnterRule
     {
-        string Id = null;
+        public string Id = null;
         string Namespace = null;
-        object value = null;
+        public object value = null;
         //object ReturnResult = null;
 
         public Rule_Value(Rule_Context pContext, Token pToken) : base(pContext)
