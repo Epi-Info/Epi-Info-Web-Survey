@@ -127,11 +127,6 @@ function CCE_ProcessUnHideExceptCommand(pCheckCodeList)
         //this.canvas.HideExceptCheckCodeItems(controlsList);
     }
 }
-
-
-
-
-
 //****** UnHide End
 
 function CCE_Context() 
