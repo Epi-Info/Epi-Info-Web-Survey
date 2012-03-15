@@ -107,12 +107,37 @@ namespace Epi.Web.MVC.Controllers
                         return View("IsSubmitedError");
                     case PreValidationResultEnum.Success:
                     default:
+                        MvcDynamicForms.Form form;
+                        int CurrentPageNum = GetSurveyPageNumber(SurveyAnswer.XML.ToString());
+                        int ReffererPageNum;
+                        string url = this.Request.UrlReferrer.ToString();
+                        int LastIndex = url.LastIndexOf("/");
+                        string StringNumber = null;
+                        if (url.Length - LastIndex + 1 <= url.Length)
+                        {
+                            StringNumber = url.Substring(LastIndex, url.Length - LastIndex);
+                            StringNumber = StringNumber.Trim('/');
+                        }
 
-                        //get the survey form
-                        MvcDynamicForms.Form form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, GetSurveyPageNumber(SurveyAnswer.XML.ToString()), SurveyAnswer);
-                        //Update the model
-                        
-                        UpdateModel(form);
+                        if (int.TryParse(StringNumber, out ReffererPageNum))
+                        {
+                            if (ReffererPageNum != CurrentPageNum)
+                            {
+                                form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, ReffererPageNum, SurveyAnswer);
+                            }
+                            else
+                            {
+                                form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, CurrentPageNum, SurveyAnswer);
+                            }
+                            
+                            UpdateModel(form);
+                        }
+                        else
+                        {
+                            //get the survey form
+                            form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, GetSurveyPageNumber(SurveyAnswer.XML.ToString()), SurveyAnswer);
+                            UpdateModel(form);
+                        }
                        
                         bool IsSubmited = false;
                         bool IsSaved = false;
@@ -210,7 +235,7 @@ namespace Epi.Web.MVC.Controllers
                         else
                         {
                             //Invalid Data - stay on same page
-                            int CurrentPageNum = GetSurveyPageNumber(SurveyAnswer.XML.ToString()) ;
+                            CurrentPageNum = GetSurveyPageNumber(SurveyAnswer.XML.ToString()) ;
                            
 
 
