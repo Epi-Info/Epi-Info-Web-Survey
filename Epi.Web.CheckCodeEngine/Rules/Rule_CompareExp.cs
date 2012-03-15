@@ -246,7 +246,36 @@ namespace Epi.Core.EnterInterpreter.Rules
             else
             {
 
+
+
                 this.ConcatExp.ToJavaScript(pJavaScriptBuilder);
+                if (this.ConcatExp is Rule_Value)
+                {
+                    Rule_Value LHS = (Rule_Value)this.ConcatExp;
+                    if (!string.IsNullOrEmpty(LHS.Id))
+                    {
+                        PluginVariable var = (PluginVariable)this.Context.CurrentScope.resolve(LHS.Id);
+                        if (var != null)
+                        {
+                            switch (var.DataType)
+                            {
+
+                                case EpiInfo.Plugin.DataType.Text:
+                                case EpiInfo.Plugin.DataType.GUID:
+                                    pJavaScriptBuilder.Append(".toLowerCase()");
+                                    break;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (LHS.value is string)
+                        {
+                            pJavaScriptBuilder.Append(".toLowerCase()");
+                        }
+                    }
+                }
+
                 switch (op)
                 {
                     case "=":
@@ -260,6 +289,32 @@ namespace Epi.Core.EnterInterpreter.Rules
                         break;
                 }
                 this.CompareExp.ToJavaScript(pJavaScriptBuilder);
+                if (this.ConcatExp is Rule_Value)
+                {
+                    Rule_Value RHS = (Rule_Value)this.ConcatExp;
+                    if (!string.IsNullOrEmpty(RHS.Id))
+                    {
+                        PluginVariable var = (PluginVariable)this.Context.CurrentScope.resolve(RHS.Id);
+                        if (var != null)
+                        {
+                            switch (var.DataType)
+                            {
+
+                                case EpiInfo.Plugin.DataType.Text:
+                                case EpiInfo.Plugin.DataType.GUID:
+                                    pJavaScriptBuilder.Append(".toLowerCase()");
+                                    break;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (RHS.value is string)
+                        {
+                            pJavaScriptBuilder.Append(".toLowerCase()");
+                        }
+                    }
+                }
             }
 
         }
