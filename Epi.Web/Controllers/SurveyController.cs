@@ -167,6 +167,21 @@ namespace Epi.Web.MVC.Controllers
                                     }
                                 }
 
+                                // execute after event
+                                EnterRule FunctionObject_A = (EnterRule)form.FormCheckCodeObj.GetCommand("level=record&event=after&identifier=");
+                                if (FunctionObject_A != null && !FunctionObject_A.IsNull())
+                                {
+                                    try
+                                    {
+                                        FunctionObject_A.Execute();
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        // do nothing so that processing can 
+                                        // continue
+                                    }
+                                }
+
                                 
                                 IsSubmited = true;//survey has been submited this will change the survey status to 3 - Completed
                                 _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId, form, SurveyAnswer, IsSubmited, IsSaved, PageNumber);

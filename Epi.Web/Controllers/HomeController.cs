@@ -96,14 +96,21 @@ namespace Epi.Web.MVC.Controllers
                 EnterRule FunctionObject_B = (EnterRule)form.FormCheckCodeObj.GetCommand("level=record&event=before&identifier=");
                 if (FunctionObject_B != null && !FunctionObject_B.IsNull())
                 {
-
-                    FunctionObject_B.Execute();
-                    // update the survey response with the hidden/highlighted and disabled
-                    // field list
-                    form.HiddenFieldsList = FunctionObject_B.Context.HiddenFieldList;
-                    form.HighlightedFieldsList = FunctionObject_B.Context.HighlightedFieldList ;
-                    form.DisabledFieldsList =FunctionObject_B.Context.DisabledFieldList;
-                    _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, ResponseID.ToString(), form, SurveyAnswer, false, false, 1);
+                    try
+                    {
+                        FunctionObject_B.Execute();
+                        // update the survey response with the hidden/highlighted and disabled
+                        // field list
+                        form.HiddenFieldsList = FunctionObject_B.Context.HiddenFieldList;
+                        form.HighlightedFieldsList = FunctionObject_B.Context.HighlightedFieldList;
+                        form.DisabledFieldsList = FunctionObject_B.Context.DisabledFieldList;
+                        _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, ResponseID.ToString(), form, SurveyAnswer, false, false, 1);
+                    }
+                    catch (Exception ex)
+                    {
+                        // do nothing so that processing
+                        // can continue
+                    }
                 }
                 // Execute - Record Before - End
 
