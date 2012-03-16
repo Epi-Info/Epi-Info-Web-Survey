@@ -468,7 +468,7 @@ Comment End = '*/'
 <Not Exp>                           ::= NOT <Compare Exp>
                                         | <Compare Exp>
 
-<Compare Exp>                           ::=  <Concat Exp> LIKE String
+<Compare Exp>                           ::=  <Concat Exp> LIKE String | <Concat Exp> LIKE Identifier
                                 | <Concat Exp> '=' <Compare Exp>
                                         | <Concat Exp> '<>' <Compare Exp>
                                         | <Concat Exp> '>' <Compare Exp>
