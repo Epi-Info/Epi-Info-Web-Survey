@@ -26,7 +26,7 @@ namespace Epi.Core.EnterInterpreter.Rules
             this.ConcatExp = EnterRule.BuildStatments(pContext, pToken.Tokens[0]);
             if (pToken.Tokens.Length > 1)
             {
-                op = pToken.Tokens[1].ToString();
+                op = pToken.Tokens[1].ToString().ToLower();
 
                 if (pToken.Tokens[1].ToString() == "LIKE")
                 {
@@ -247,73 +247,88 @@ namespace Epi.Core.EnterInterpreter.Rules
             {
 
 
-
-                this.ConcatExp.ToJavaScript(pJavaScriptBuilder);
-                if (this.ConcatExp is Rule_Value)
+                if (this.op == "like")
                 {
-                    Rule_Value LHS = (Rule_Value)this.ConcatExp;
-                    if (!string.IsNullOrEmpty(LHS.Id))
-                    {
-                        PluginVariable var = (PluginVariable)this.Context.CurrentScope.resolve(LHS.Id);
-                        if (var != null)
-                        {
-                            switch (var.DataType)
-                            {
 
-                                case EpiInfo.Plugin.DataType.Text:
-                                case EpiInfo.Plugin.DataType.GUID:
-                                    pJavaScriptBuilder.Append(".toLowerCase()");
-                                    break;
+                    pJavaScriptBuilder.Append("CCE_Like(");
+                    this.ConcatExp.ToJavaScript(pJavaScriptBuilder);
+                    pJavaScriptBuilder.Append(",'");
+                    pJavaScriptBuilder.Append(this.STRING);
+                    pJavaScriptBuilder.Append("',");
+                    this.CompareExp.ToJavaScript(pJavaScriptBuilder);
+                    pJavaScriptBuilder.Append(")");
+                }
+                else
+                {
+
+                    this.ConcatExp.ToJavaScript(pJavaScriptBuilder);
+                    if (this.ConcatExp is Rule_Value)
+                    {
+                        Rule_Value LHS = (Rule_Value)this.ConcatExp;
+                        if (!string.IsNullOrEmpty(LHS.Id))
+                        {
+                            PluginVariable var = (PluginVariable)this.Context.CurrentScope.resolve(LHS.Id);
+                            if (var != null)
+                            {
+                                switch (var.DataType)
+                                {
+
+                                    case EpiInfo.Plugin.DataType.Text:
+                                    case EpiInfo.Plugin.DataType.GUID:
+                                        pJavaScriptBuilder.Append(".toLowerCase()");
+                                        break;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            if (LHS.value is string)
+                            {
+                                pJavaScriptBuilder.Append(".toLowerCase()");
                             }
                         }
                     }
-                    else
+
+                    switch (op)
                     {
-                        if (LHS.value is string)
-                        {
-                            pJavaScriptBuilder.Append(".toLowerCase()");
-                        }
+                        case "=":
+                            pJavaScriptBuilder.Append("==");
+                            break;
+                        case "<>":
+                            pJavaScriptBuilder.Append("!=");
+                            break;
+                        default:
+                            pJavaScriptBuilder.Append(this.op);
+                            break;
                     }
-                }
-
-                switch (op)
-                {
-                    case "=":
-                        pJavaScriptBuilder.Append("==");
-                        break;
-                    case "<>":
-                        pJavaScriptBuilder.Append("!=");
-                        break;
-                    default:
-                        pJavaScriptBuilder.Append(this.op);
-                        break;
-                }
-                this.CompareExp.ToJavaScript(pJavaScriptBuilder);
-                if (this.ConcatExp is Rule_Value)
-                {
-                    Rule_Value RHS = (Rule_Value)this.ConcatExp;
-                    if (!string.IsNullOrEmpty(RHS.Id))
+                    this.CompareExp.ToJavaScript(pJavaScriptBuilder);
+                    if (this.ConcatExp is Rule_Value)
                     {
-                        PluginVariable var = (PluginVariable)this.Context.CurrentScope.resolve(RHS.Id);
-                        if (var != null)
+                        Rule_Value RHS = (Rule_Value)this.ConcatExp;
+                        if (!string.IsNullOrEmpty(RHS.Id))
                         {
-                            switch (var.DataType)
+                            PluginVariable var = (PluginVariable)this.Context.CurrentScope.resolve(RHS.Id);
+                            if (var != null)
                             {
+                                switch (var.DataType)
+                                {
 
-                                case EpiInfo.Plugin.DataType.Text:
-                                case EpiInfo.Plugin.DataType.GUID:
-                                    pJavaScriptBuilder.Append(".toLowerCase()");
-                                    break;
+                                    case EpiInfo.Plugin.DataType.Text:
+                                    case EpiInfo.Plugin.DataType.GUID:
+                                        pJavaScriptBuilder.Append(".toLowerCase()");
+                                        break;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            if (RHS.value is string)
+                            {
+                                pJavaScriptBuilder.Append(".toLowerCase()");
                             }
                         }
                     }
-                    else
-                    {
-                        if (RHS.value is string)
-                        {
-                            pJavaScriptBuilder.Append(".toLowerCase()");
-                        }
-                    }
+
                 }
             }
 
