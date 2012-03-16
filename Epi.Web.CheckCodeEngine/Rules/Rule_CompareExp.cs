@@ -252,9 +252,8 @@ namespace Epi.Core.EnterInterpreter.Rules
 
                     pJavaScriptBuilder.Append("CCE_Like(");
                     this.ConcatExp.ToJavaScript(pJavaScriptBuilder);
-                    pJavaScriptBuilder.Append(",'");
-                    pJavaScriptBuilder.Append(this.STRING);
-                    pJavaScriptBuilder.Append("',");
+                    pJavaScriptBuilder.Append(",");
+                  
                     this.CompareExp.ToJavaScript(pJavaScriptBuilder);
                     pJavaScriptBuilder.Append(")");
                 }
