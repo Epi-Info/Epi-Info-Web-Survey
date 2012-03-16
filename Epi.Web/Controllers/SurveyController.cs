@@ -136,7 +136,10 @@ namespace Epi.Web.MVC.Controllers
                         {
                             //get the survey form
                             form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, GetSurveyPageNumber(SurveyAnswer.XML.ToString()), SurveyAnswer);
-                            UpdateModel(form);
+                            if (ReffererPageNum == CurrentPageNum)
+                            {
+                                UpdateModel(form);
+                            }
                         }
                        
                         bool IsSubmited = false;
