@@ -147,45 +147,34 @@ CCE_Context.prototype.resolve = function (pName)
     return cce_Symbol;
 }
 
-CCE_Context.prototype.getValue = function (pName) 
-{
+CCE_Context.prototype.getValue = function (pName) {
     var cce_Symbol = this.resolve(pName);
-    if (cce_Symbol != null) 
-    {
-        if(cce_Symbol.Source == "datasource")
-        {
+    if (cce_Symbol != null) {
+        if (cce_Symbol.Source == "datasource") {
             var query = '#mvcdynamicfield_' + pName;
             var field = $(query);
-            if(field != null)
-            {
-                if(cce_Symbol.Type == "yesno")
-                {
-                    if(field.val() == "1")
-                    {
-                        return "Yes";
+            if (field != null) {
+                if (cce_Symbol.Type == "yesno") {
+                    if (field.val() == "1") {
+                        return "True"; //"Yes";
                     }
-                    else
-                    {
-                        return "No";
+                    else {
+                        return "False"; // "No";
                     }
                 }
-                else
-                {
+                else {
                     return field.val();
                 }
             }
-            else
-            {
+            else {
                 return null;
             }
         }
-        else
-        {
+        else {
             return cce_Symbol.Value;
         }
     }
-    else 
-    {
+    else {
         return null;
     }
 }
