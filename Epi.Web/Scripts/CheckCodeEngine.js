@@ -36,6 +36,8 @@ function CCE_ProcessHideCommand(pCheckCodeList)
         {
             
             var query = '#mvcdynamicfield_' + pCheckCodeList[i];
+             //clear the control value before hiding
+             ClearControlValue(query);
             $(query).hide();
             query = '#labelmvcdynamicfield_' + pCheckCodeList[i];
             $(query).hide();
@@ -590,6 +592,16 @@ function CCE_RemoveFromFieldsList(FieldName,ListName) {
 
  }
 
-
+ //Clear the control value
+ function ClearControlValue(controlId) {
+    
+    //if control is a check box uncheck it otherwise clear the control value
+     if ($(controlId).attr('type') == 'checkbox') {
+         $(controlId).attr('checked', false);
+     }
+     else {
+         $(controlId).val('');
+     }
+ }
 
 cce_Context = new CCE_Context();
