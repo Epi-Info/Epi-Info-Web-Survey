@@ -130,9 +130,21 @@ function CCE_ProcessUnHideExceptCommand(pCheckCodeList)
 //****** UnHide End
 
 
-function CCE_Like(pLHS, pExpression, pRHS)
+function CCE_Like(pLHS, pRHS)
 {
-    return false;
+ 
+var result = false;
+var testValue = "^" + (pRHS.toString()).replace("*", "\\w*") + "$";
+var re = new RegExp(testValue,"i");
+if (pLHS.match(re))
+ {
+  result = true;
+ }
+else
+ {
+  result = false;
+ }
+ return result;
 }
 
 
