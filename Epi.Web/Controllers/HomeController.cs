@@ -81,7 +81,18 @@ namespace Epi.Web.MVC.Controllers
                 Epi.Web.Common.DTO.SurveyAnswerDTO SurveyAnswer = _isurveyFacade.CreateSurveyAnswer(surveyModel.SurveyId, ResponseID.ToString());
 
                 SurveyInfoModel surveyInfoModel = _isurveyFacade.GetSurveyInfoModel(SurveyAnswer.SurveyId);
-                
+
+                int NumberOfPages = GetNumberOfPages(XDocument.Parse(surveyInfoModel.XML));
+                // for (int i = 1; i <  NumberOfPages+1; i++)
+                for (int i = NumberOfPages; i > 0; i--)
+                {
+                    SurveyAnswer = _isurveyFacade.GetSurveyAnswerResponse(SurveyAnswer.ResponseId).SurveyResponseList[0];
+
+                    MvcDynamicForms.Form formRs = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, i, SurveyAnswer);
+
+                    _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, SurveyAnswer.ResponseId, formRs, SurveyAnswer, false, false, i);
+
+                }
                 // Execute - Record Before - Begin
                 MvcDynamicForms.Form form = _isurveyFacade.GetSurveyFormData(SurveyAnswer.SurveyId, 1, SurveyAnswer);
 
@@ -146,7 +157,15 @@ namespace Epi.Web.MVC.Controllers
 
             return result;
         }
+        private static int GetNumberOfPages(XDocument Xml)
+        {
+            var _FieldsTypeIDs = from _FieldTypeID in
+                                     Xml.Descendants("View")
 
+                                 select _FieldTypeID;
+
+            return _FieldsTypeIDs.Elements().Count();
+        }
        
     }
 }
