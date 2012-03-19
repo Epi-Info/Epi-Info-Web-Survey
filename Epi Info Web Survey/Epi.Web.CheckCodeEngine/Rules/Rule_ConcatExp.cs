@@ -72,7 +72,7 @@ namespace Epi.Core.EnterInterpreter.Rules
             else
             {
                 this.AddExp.ToJavaScript(pJavaScriptBuilder);
-                pJavaScriptBuilder.Append(this.op);
+                pJavaScriptBuilder.Append("+");
                 this.ConcatExp.ToJavaScript(pJavaScriptBuilder);
             }
 
