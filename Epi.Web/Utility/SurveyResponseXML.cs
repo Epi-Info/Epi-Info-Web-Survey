@@ -16,7 +16,7 @@ namespace Epi.Web.MVC.Utility
 
         public void Add(MvcDynamicForms.Form pForm)
         {
-
+            ResponseDetailList.Clear();
             foreach (var field in pForm.InputFields)
             {
 
