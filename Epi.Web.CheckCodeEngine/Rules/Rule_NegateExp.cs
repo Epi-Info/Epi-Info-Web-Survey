@@ -52,5 +52,25 @@ namespace Epi.Core.EnterInterpreter.Rules
 
             return result;
         }
+
+        public override void ToJavaScript(StringBuilder pJavaScriptBuilder)
+        {
+            if (this.op != null)
+            {
+                if (this.op == "-")
+                {
+                    pJavaScriptBuilder.Append("-1 * ");
+                    Value.ToJavaScript(pJavaScriptBuilder);
+                }
+                else
+                {
+                    Value.ToJavaScript(pJavaScriptBuilder);
+                }
+            }
+            else
+            {
+                Value.ToJavaScript(pJavaScriptBuilder);
+            }
+        }
     }
 }

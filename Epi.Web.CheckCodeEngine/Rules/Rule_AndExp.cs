@@ -46,5 +46,23 @@ namespace Epi.Core.EnterInterpreter.Rules
 
             return result;
         }
+
+
+        public override void ToJavaScript(StringBuilder pJavaScriptBuilder)
+        {
+            if (this.AndExp == null)
+            {
+                this.NotExp.ToJavaScript(pJavaScriptBuilder);
+            }
+            else
+            {
+                // dpb: this needs to be fixed to work with more then just strings
+
+                this.NotExp.ToJavaScript(pJavaScriptBuilder);
+                pJavaScriptBuilder.Append("&&");
+                this.AndExp.ToJavaScript(pJavaScriptBuilder);
+
+            }
+        }
     }
 }
