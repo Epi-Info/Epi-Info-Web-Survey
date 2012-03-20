@@ -6,6 +6,7 @@ using System.Xml.Linq;
 using System.Xml.XPath;
 using System.Linq;
 using Epi.Core.EnterInterpreter;
+using System.Collections.Generic;
 
 namespace Epi.Web.MVC.Controllers
 {
@@ -81,19 +82,7 @@ namespace Epi.Web.MVC.Controllers
                 Epi.Web.Common.DTO.SurveyAnswerDTO SurveyAnswer = _isurveyFacade.CreateSurveyAnswer(surveyModel.SurveyId, ResponseID.ToString());
 
                 SurveyInfoModel surveyInfoModel = _isurveyFacade.GetSurveyInfoModel(SurveyAnswer.SurveyId);
-
-                int NumberOfPages = GetNumberOfPages(XDocument.Parse(surveyInfoModel.XML));
-                // for (int i = 1; i <  NumberOfPages+1; i++)
-                for (int i = NumberOfPages; i > 0; i--)
-                {
-                    SurveyAnswer = _isurveyFacade.GetSurveyAnswerResponse(SurveyAnswer.ResponseId).SurveyResponseList[0];
-
-                    MvcDynamicForms.Form formRs = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, i, SurveyAnswer);
-
-                    _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, SurveyAnswer.ResponseId, formRs, SurveyAnswer, false, false, i);
-
-                }
-                // Execute - Record Before - Begin
+ 
                 MvcDynamicForms.Form form = _isurveyFacade.GetSurveyFormData(SurveyAnswer.SurveyId, 1, SurveyAnswer);
 
                 XDocument xdoc = XDocument.Parse(surveyInfoModel.XML);
@@ -105,12 +94,16 @@ namespace Epi.Web.MVC.Controllers
                 form.FormCheckCodeObj = form.GetCheckCodeObj(xdoc, xdocResponse, checkcode);
 
                 EnterRule FunctionObject_B = (EnterRule)form.FormCheckCodeObj.GetCommand("level=record&event=before&identifier=");
+               
+
+
+
                 if (FunctionObject_B != null && !FunctionObject_B.IsNull())
                 {
                     try
                     {
                         FunctionObject_B.Execute();
-                        // update the survey response with the hidden/highlighted and disabled
+                        
                         // field list
                         form.HiddenFieldsList = FunctionObject_B.Context.HiddenFieldList;
                         form.HighlightedFieldsList = FunctionObject_B.Context.HighlightedFieldList;
@@ -123,7 +116,28 @@ namespace Epi.Web.MVC.Controllers
                         // can continue
                     }
                 }
-                // Execute - Record Before - End
+                ///////////////////////////// Execute - Record Before - start//////////////////////
+
+              
+                Dictionary<string, string> ContextDetailList = new Dictionary<string, string>();
+                ContextDetailList = Epi.Web.MVC.Utility.SurveyHelper.GetContextDetailList(FunctionObject_B);
+
+              int NumberOfPages = GetNumberOfPages(XDocument.Parse(surveyInfoModel.XML)); 
+                for (int i = NumberOfPages; i > 0; i--)
+                {
+                    SurveyAnswer = _isurveyFacade.GetSurveyAnswerResponse(SurveyAnswer.ResponseId).SurveyResponseList[0];
+
+                    MvcDynamicForms.Form formRs = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, i, SurveyAnswer);
+
+                    formRs = Epi.Web.MVC.Utility.SurveyHelper.UpdateResponseFromContext(formRs, ContextDetailList);
+                     
+                    _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, SurveyAnswer.ResponseId, formRs, SurveyAnswer, false, false, i);
+
+                }
+                SurveyAnswer = _isurveyFacade.GetSurveyAnswerResponse(SurveyAnswer.ResponseId).SurveyResponseList[0];
+
+                ///////////////////////////// Execute - Record Before - End//////////////////////
+                 
 
                 //string page;
                 // return RedirectToAction(Epi.Web.Models.Constants.Constant.INDEX, Epi.Web.Models.Constants.Constant.SURVEY_CONTROLLER, new {id="page" });
@@ -166,6 +180,10 @@ namespace Epi.Web.MVC.Controllers
 
             return _FieldsTypeIDs.Elements().Count();
         }
+
+        //public  string UpdateResponseFromContext(XDocument RequestXml, Dictionary<string, string> ContextDetailList, string ResponseXml, Epi.Web.MVC.Models.SurveyInfoModel surveyModel, string ResponseID)
        
+      
+
     }
 }
