@@ -558,10 +558,12 @@ public System.Collections.Specialized.NameValueCollection GlobalVariables;*/
 
         public void LoadTemplate(XDocument pTemplateDoc, XDocument pSurveyResponseDoc)
         {
+
+            // todo for each page in 
             var _FieldsTypeIDs = from _FieldTypeID in pTemplateDoc.Descendants("Field")
                                  select _FieldTypeID;
 
-
+            string PageNumber = "";
             string defineFormat = "cce_Context.define(\"{0}\", \"{1}\", \"{2}\", \"{3}\");";
             string defineNumberFormat = "cce_Context.define(\"{0}\", \"{1}\", \"{2}\", new Number({3}));";
 
@@ -572,6 +574,7 @@ public System.Collections.Specialized.NameValueCollection GlobalVariables;*/
                 PluginVariable var = new PluginVariable();
                 var.Name = _FieldTypeID.Attribute("Name").Value;
                 var.VariableScope = VariableScope.DataSource;
+                var.PageNumber = PageNumber;
 
                 if (pSurveyResponseDoc != null)
                 {
@@ -642,8 +645,6 @@ public System.Collections.Specialized.NameValueCollection GlobalVariables;*/
                         var.ControlType = "groupbox";
                         break;
                 }
-
-                
                 this.DefineVariable(var);
 
             }
@@ -671,8 +672,8 @@ public System.Collections.Specialized.NameValueCollection GlobalVariables;*/
 
         public void GetVariableJavaScript(StringBuilder pJavaScriptBuilder)
         {
-            string defineFormat = "cce_Context.define(\"{0}\", \"{1}\", \"{2}\", \"{3}\");";
-            string defineNumberFormat = "cce_Context.define(\"{0}\", \"{1}\", \"{2}\", new Number({3}));";
+            string defineFormat = "cce_Context.define(\"{0}\", \"{1}\", \"{2}\", \"{3}\", \"{4}\");";
+            string defineNumberFormat = "cce_Context.define(\"{0}\", \"{1}\", \"{2}\", \"{3}\", new Number({4}));";
 
 
             foreach (PluginVariable var in this.CurrentScope.FindVariables( VariableScope.DataSource | VariableScope.Global | VariableScope.Permanent | VariableScope.Standard))
@@ -701,11 +702,11 @@ public System.Collections.Specialized.NameValueCollection GlobalVariables;*/
 
                     case "checkbox":
                     case "yesno":
-                        pJavaScriptBuilder.AppendLine(string.Format(defineFormat, var.Name, var.ControlType, DataSource, var.Expression));
+                        pJavaScriptBuilder.AppendLine(string.Format(defineFormat, var.Name, var.ControlType, DataSource, var.PageNumber, var.Expression));
                         break;
 
                     case "numeric":
-                        pJavaScriptBuilder.AppendLine(string.Format(defineNumberFormat, var.Name, var.ControlType, DataSource, var.Expression));
+                        pJavaScriptBuilder.AppendLine(string.Format(defineNumberFormat, var.Name, var.ControlType, DataSource, var.PageNumber, var.Expression));
                         break;
                     case "commentlegal":
                     case  "codes":
@@ -714,7 +715,7 @@ public System.Collections.Specialized.NameValueCollection GlobalVariables;*/
                     case "multiline":
                     case "textbox": 
                     default:
-                        pJavaScriptBuilder.AppendLine(string.Format(defineFormat, var.Name, var.ControlType, DataSource, var.Expression));
+                        pJavaScriptBuilder.AppendLine(string.Format(defineFormat, var.Name, var.ControlType, DataSource, var.PageNumber, var.Expression));
                         break;
 
                 }

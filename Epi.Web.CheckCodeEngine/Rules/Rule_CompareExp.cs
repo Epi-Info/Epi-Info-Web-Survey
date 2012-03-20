@@ -260,32 +260,14 @@ namespace Epi.Core.EnterInterpreter.Rules
                 else
                 {
 
-                    this.ConcatExp.ToJavaScript(pJavaScriptBuilder);
+                    
                     if (this.ConcatExp is Rule_Value)
                     {
-                        Rule_Value LHS = (Rule_Value)this.ConcatExp;
-                        if (!string.IsNullOrEmpty(LHS.Id))
-                        {
-                            PluginVariable var = (PluginVariable)this.Context.CurrentScope.resolve(LHS.Id);
-                            if (var != null)
-                            {
-                                switch (var.DataType)
-                                {
-
-                                    case EpiInfo.Plugin.DataType.Text:
-                                    case EpiInfo.Plugin.DataType.GUID:
-                                        pJavaScriptBuilder.Append(".toLowerCase()");
-                                        break;
-                                }
-                            }
-                        }
-                        else
-                        {
-                            if (LHS.value is string)
-                            {
-                                pJavaScriptBuilder.Append(".toLowerCase()");
-                            }
-                        }
+                        WriteValueJavascript((Rule_Value)this.ConcatExp, pJavaScriptBuilder);
+                    }
+                    else
+                    {
+                        this.ConcatExp.ToJavaScript(pJavaScriptBuilder);
                     }
 
                     switch (op)
@@ -300,38 +282,84 @@ namespace Epi.Core.EnterInterpreter.Rules
                             pJavaScriptBuilder.Append(this.op);
                             break;
                     }
-                    this.CompareExp.ToJavaScript(pJavaScriptBuilder);
-                    if (this.ConcatExp is Rule_Value)
-                    {
-                        Rule_Value RHS = (Rule_Value)this.ConcatExp;
-                        if (!string.IsNullOrEmpty(RHS.Id))
-                        {
-                            PluginVariable var = (PluginVariable)this.Context.CurrentScope.resolve(RHS.Id);
-                            if (var != null)
-                            {
-                                switch (var.DataType)
-                                {
 
-                                    case EpiInfo.Plugin.DataType.Text:
-                                    case EpiInfo.Plugin.DataType.GUID:
-                                        pJavaScriptBuilder.Append(".toLowerCase()");
-                                        break;
-                                }
-                            }
-                        }
-                        else
-                        {
-                            if (RHS.value is string)
-                            {
-                                pJavaScriptBuilder.Append(".toLowerCase()");
-                            }
-                        }
+                    if (this.CompareExp is Rule_Value)
+                    {
+                        WriteValueJavascript((Rule_Value)this.CompareExp, pJavaScriptBuilder);
+                    }
+                    else
+                    {
+                        this.CompareExp.ToJavaScript(pJavaScriptBuilder);
                     }
 
                 }
             }
 
         }
+
+        private void WriteValueJavascript(Rule_Value pValue, StringBuilder pJavaScriptBuilder)
+        {
+
+
+            if (!string.IsNullOrEmpty(pValue.Id))
+            {
+                PluginVariable var = (PluginVariable)this.Context.CurrentScope.resolve(pValue.Id);
+                pValue.ToJavaScript(pJavaScriptBuilder);
+                if (var != null)
+                {
+                    switch (var.DataType)
+                    {
+
+                        case EpiInfo.Plugin.DataType.Boolean:
+                        case EpiInfo.Plugin.DataType.Date:
+                        case EpiInfo.Plugin.DataType.DateTime:
+                        case EpiInfo.Plugin.DataType.Number:
+                        case EpiInfo.Plugin.DataType.Time:
+                            break;
+                        case EpiInfo.Plugin.DataType.Text:
+                        case EpiInfo.Plugin.DataType.GUID:
+                        default:
+                            pJavaScriptBuilder.Append(".toLowerCase()");
+                            break;
+                    }
+                }
+            }
+            else
+            {
+               
+
+                if (pValue.VariableDataType != EpiInfo.Plugin.DataType.Unknown)
+                {
+                    pValue.ToJavaScript(pJavaScriptBuilder);
+
+                    switch (pValue.VariableDataType)
+                    {
+
+                        case EpiInfo.Plugin.DataType.Boolean:
+                        case EpiInfo.Plugin.DataType.Date:
+                        case EpiInfo.Plugin.DataType.DateTime:
+                        case EpiInfo.Plugin.DataType.Number:
+                        case EpiInfo.Plugin.DataType.Time:
+                            break;
+
+                        case EpiInfo.Plugin.DataType.Text:
+                        default:
+                            pJavaScriptBuilder.Append(".toLowerCase()");
+                            break;
+                    }
+                }
+                else if (pValue.value is string)
+                {
+                    pValue.ToJavaScript(pJavaScriptBuilder);
+                    pJavaScriptBuilder.Append(".toLowerCase()");
+                }
+                else
+                {
+                    pValue.ToJavaScript(pJavaScriptBuilder);
+                }
+            }
+        }
+        
 
     }
 }
