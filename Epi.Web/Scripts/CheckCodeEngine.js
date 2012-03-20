@@ -196,6 +196,7 @@ CCE_Context.prototype.getValue = function (pName)
                 case "numeric": //string has been converted to number to compare with another number
                   var numericField = Number(field.val());
                   return numericField;
+                  break;
                 default:
                   return field.val();
               }          
