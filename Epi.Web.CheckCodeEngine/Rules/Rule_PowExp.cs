@@ -46,5 +46,22 @@ namespace Epi.Core.EnterInterpreter.Rules
 
             return result;
         }
+
+
+        public override void ToJavaScript(StringBuilder pJavaScriptBuilder)
+        {
+            if (NegateExp2 == null)
+            {
+                this.NegateExp1.ToJavaScript(pJavaScriptBuilder);
+            }
+            else
+            {
+                pJavaScriptBuilder.Append("Math.pow(");
+                this.NegateExp1.ToJavaScript(pJavaScriptBuilder);
+                pJavaScriptBuilder.Append(",");
+                this.NegateExp2.ToJavaScript(pJavaScriptBuilder);
+                pJavaScriptBuilder.Append(")");
+            }
+        }
     }
 }
