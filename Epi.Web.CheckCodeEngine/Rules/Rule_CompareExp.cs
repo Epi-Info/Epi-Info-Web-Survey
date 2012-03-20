@@ -238,18 +238,14 @@ namespace Epi.Core.EnterInterpreter.Rules
 
         public override void ToJavaScript(StringBuilder pJavaScriptBuilder)
         {
-
             if (op == null)
             {
                 this.ConcatExp.ToJavaScript(pJavaScriptBuilder);
             }
             else
             {
-
-
                 if (this.op == "like")
                 {
-
                     pJavaScriptBuilder.Append("CCE_Like(");
                     this.ConcatExp.ToJavaScript(pJavaScriptBuilder);
                     pJavaScriptBuilder.Append(",");
@@ -259,8 +255,6 @@ namespace Epi.Core.EnterInterpreter.Rules
                 }
                 else
                 {
-
-                    
                     if (this.ConcatExp is Rule_Value)
                     {
                         WriteValueJavascript((Rule_Value)this.ConcatExp, pJavaScriptBuilder);
@@ -299,8 +293,6 @@ namespace Epi.Core.EnterInterpreter.Rules
 
         private void WriteValueJavascript(Rule_Value pValue, StringBuilder pJavaScriptBuilder)
         {
-
-
             if (!string.IsNullOrEmpty(pValue.Id))
             {
                 PluginVariable var = (PluginVariable)this.Context.CurrentScope.resolve(pValue.Id);
@@ -326,22 +318,17 @@ namespace Epi.Core.EnterInterpreter.Rules
             }
             else
             {
-               
-
                 if (pValue.VariableDataType != EpiInfo.Plugin.DataType.Unknown)
                 {
                     pValue.ToJavaScript(pJavaScriptBuilder);
-
                     switch (pValue.VariableDataType)
                     {
-
                         case EpiInfo.Plugin.DataType.Boolean:
                         case EpiInfo.Plugin.DataType.Date:
                         case EpiInfo.Plugin.DataType.DateTime:
                         case EpiInfo.Plugin.DataType.Number:
                         case EpiInfo.Plugin.DataType.Time:
                             break;
-
                         case EpiInfo.Plugin.DataType.Text:
                         default:
                             pJavaScriptBuilder.Append(".toLowerCase()");
@@ -359,7 +346,5 @@ namespace Epi.Core.EnterInterpreter.Rules
                 }
             }
         }
-        
-
     }
 }
