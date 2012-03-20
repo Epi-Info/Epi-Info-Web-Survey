@@ -177,16 +177,17 @@ CCE_Context.prototype.getValue = function (pName)
         {
             var query = '#mvcdynamicfield_' + pName;
             var field = $(query);
-            if (field != null) {
+            if (field != null) 
+            {
                 if (cce_Symbol.Type == "yesno") 
                 {
                     if (field.val() == "1") 
                     {
-                        return "True"; //"Yes";
+                        return true; //"Yes";
                     }
                     else 
                     {
-                        return "False"; // "No";
+                        return false; // "No";
                     }
                 }
                 else 
@@ -231,11 +232,12 @@ CCE_Context.prototype.setValue = function (pName, pValue)
     }
 }
 
-function CCE_Symbol(pName, pType, pSource, pValue) 
+function CCE_Symbol(pName, pType, pSource, pPageNumber, pValue) 
 {
       this.Name = pName;
       this.Type = pType;
       this.Source = pSource;
+      this.PageNumber = pPageNumber;
       this.Value = pValue;
 }
 
