@@ -182,18 +182,8 @@ namespace Epi.Web.MVC.Controllers
                         {
                             if (!string.IsNullOrEmpty(Submitbutton))
                             {
-                                // ReValidate All Pages
-                                for (int i = 1; i < form.NumberOfPages; i++)
-                                {
-                                    form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, i, SurveyAnswer);
-                                    if (!form.Validate())
-                                    {
-                                        TempData["isredirect"] = "true";
-                                      //  return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
-                                        _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId, form, SurveyAnswer, IsSubmited, IsSaved, i);
-                                        return RedirectToRoute(new { Controller = "Survey", Action = "Index", responseid = responseId, PageNumber = i.ToString() });
-                                    }
-                                }
+
+
 
                                 // execute after event
                                 EnterRule FunctionObject_A = (EnterRule)form.FormCheckCodeObj.GetCommand("level=record&event=after&identifier=");
@@ -209,6 +199,32 @@ namespace Epi.Web.MVC.Controllers
                                         // continue
                                     }
                                 }
+                                Dictionary<string, string> ContextDetailList = new Dictionary<string, string>();
+                                ContextDetailList = Epi.Web.MVC.Utility.SurveyHelper.GetContextDetailList(FunctionObject_A);
+
+                                SurveyAnswer = _isurveyFacade.GetSurveyAnswerResponse(responseId).SurveyResponseList[0];
+                                // ReValidate All Pages
+                                for (int i = 1; i < form.NumberOfPages+1; i++)
+                                {
+                                    form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, i, SurveyAnswer);
+                                    if (!form.Validate())
+                                    {
+                                        TempData["isredirect"] = "true";
+                                        //  return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
+                                        _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId, form, SurveyAnswer, IsSubmited, IsSaved, i);
+                                        return RedirectToRoute(new { Controller = "Survey", Action = "Index", responseid = responseId, PageNumber = i.ToString() });
+                                    }
+
+                                    ///////////////////////////// Execute - Record After - start//////////////////////
+                                    else
+                                    {
+                                        form = Epi.Web.MVC.Utility.SurveyHelper.UpdateResponseFromContext(form, ContextDetailList);
+                                        _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId, form, SurveyAnswer, false, false, i);
+                                    }
+                                    ///////////////////////////// Execute - Record After - End//////////////////////
+                                }
+
+                               
 
                                 
                                 IsSubmited = true;//survey has been submited this will change the survey status to 3 - Completed
