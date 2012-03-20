@@ -44,10 +44,10 @@ namespace MvcDynamicForms.Fields
             txt.Attributes.Add("value", Value);
             ////////////Check code start//////////////////
             EnterRule FunctionObjectAfter = (EnterRule)_form.FormCheckCodeObj.GetCommand("level=field&event=after&identifier=" + _key);
-            if (FunctionObjectAfter != null && !FunctionObjectAfter.IsNull())
-            { 
-                txt.Attributes.Add("onblur", "return " + _key + "_after();"); //After
-            }
+            //if (FunctionObjectAfter != null && !FunctionObjectAfter.IsNull())
+            //{ 
+                //txt.Attributes.Add("onblur", "return " + _key + "_after();"); //After
+            //}
             EnterRule FunctionObjectBefore = (EnterRule)_form.FormCheckCodeObj.GetCommand("level=field&event=before&identifier=" + _key);
             if (FunctionObjectBefore != null && !FunctionObjectBefore.IsNull())
             { 
@@ -83,8 +83,19 @@ namespace MvcDynamicForms.Fields
 
             // adding scripts for date picker
             var scriptDatePicker = new TagBuilder("script");
-            scriptDatePicker.InnerHtml = "$(function() { $('#" + inputName + "').datepicker({changeMonth: true,changeYear: true});});";
-            html.Append(scriptDatePicker.ToString(TagRenderMode.Normal));
+            //scriptDatePicker.InnerHtml = "$(function() { $('#" + inputName + "').datepicker({changeMonth: true,changeYear: true});});";
+            /*Checkcode control after event...for datepicker, the onblur event fires on selecting a date from calender. Since the datepicker control itself is tied to after event which was firing before the datepicker
+             textbox is populated the comparison was not working. For this reason, the control after steps are interjected inside datepicker onClose event, so the after event is fired when the datepicker is populated 
+             */
+            if (FunctionObjectAfter != null && !FunctionObjectAfter.IsNull())
+            {
+                scriptDatePicker.InnerHtml = "$('#" + inputName + "').datepicker({onClose:function(){" + _key + "_after();},changeMonth:true,changeYear:true});";
+            }
+            else
+            {
+                scriptDatePicker.InnerHtml = "$('#" + inputName + "').datepicker({changeMonth: true,changeYear: true});";
+            }
+             html.Append(scriptDatePicker.ToString(TagRenderMode.Normal));
 
             //prevent date picker control to submit on enter click
             var scriptBuilder = new TagBuilder("script");

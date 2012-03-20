@@ -179,21 +179,26 @@ CCE_Context.prototype.getValue = function (pName)
             var field = $(query);
             if (field != null) 
             {
-                if (cce_Symbol.Type == "yesno") 
-                {
-                    if (field.val() == "1") 
-                    {
-                        return true; //"Yes";
-                    }
-                    else 
-                    {
-                        return false; // "No";
-                    }
-                }
-                else 
-                {
-                    return field.val();
-                }
+               switch(cce_Symbol.Type)
+               {
+                case "yesno":
+                  if (field.val() == "1") {       
+                     return true; //"Yes";
+                  }
+                  else{ 
+                     return false; // "No";
+                  }
+                  break;
+                case "datepicker": //string has been converted to date for comparison with another date
+                   var datefield = new Date(field.val());
+                   return datefield;
+                   break;
+                case "numeric": //string has been converted to number to compare with another number
+                  var numericField = Number(field.val());
+                  return numericField;
+                default:
+                  return field.val();
+              }          
             }
             else
             {
