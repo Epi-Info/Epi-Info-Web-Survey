@@ -73,7 +73,19 @@ GO
 USE [OSELS_EIWS]
 GO
 
-/****** Object:  Table [dbo].[SurveyMetaData]    Script Date: 02/07/2012 15:40:52 ******/
+/************************************************************SurveyMetaData*********************************************/
+
+USE [OSELS_EIWS]
+GO
+
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_SurveyMetaData_lk_SurveyType]') AND parent_object_id = OBJECT_ID(N'[dbo].[SurveyMetaData]'))
+ALTER TABLE [dbo].[SurveyMetaData] DROP CONSTRAINT [FK_SurveyMetaData_lk_SurveyType]
+GO
+
+USE [OSELS_EIWS]
+GO
+
+/****** Object:  Table [dbo].[SurveyMetaData]    Script Date: 03/19/2012 09:54:57 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[SurveyMetaData]') AND type in (N'U'))
 DROP TABLE [dbo].[SurveyMetaData]
 GO
@@ -81,7 +93,7 @@ GO
 USE [OSELS_EIWS]
 GO
 
-/****** Object:  Table [dbo].[SurveyMetaData]    Script Date: 02/07/2012 15:40:52 ******/
+/****** Object:  Table [dbo].[SurveyMetaData]    Script Date: 03/19/2012 09:54:57 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -99,6 +111,7 @@ CREATE TABLE [dbo].[SurveyMetaData](
       [IntroductionText] [nvarchar](max) NOT NULL,
       [TemplateXML] [xml] NOT NULL,
       [ExitText] [nvarchar](max) NULL,
+      [UserPublishKey] [uniqueidentifier] NULL,
 CONSTRAINT [PK_SurveyMetaData] PRIMARY KEY CLUSTERED 
 (
       [SurveyId] ASC
@@ -114,6 +127,8 @@ GO
 ALTER TABLE [dbo].[SurveyMetaData] CHECK CONSTRAINT [FK_SurveyMetaData_lk_SurveyType]
 GO
 
+
+/*********************************************************SurveyResponse*************************************************/
 
 USE [OSELS_EIWS]
 GO
@@ -136,7 +151,7 @@ GO
 USE [OSELS_EIWS]
 GO
 
-/****** Object:  Table [dbo].[SurveyResponse]    Script Date: 02/07/2012 15:41:17 ******/
+/****** Object:  Table [dbo].[SurveyResponse]    Script Date: 03/19/2012 09:56:44 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[SurveyResponse]') AND type in (N'U'))
 DROP TABLE [dbo].[SurveyResponse]
 GO
@@ -144,7 +159,7 @@ GO
 USE [OSELS_EIWS]
 GO
 
-/****** Object:  Table [dbo].[SurveyResponse]    Script Date: 02/07/2012 15:41:17 ******/
+/****** Object:  Table [dbo].[SurveyResponse]    Script Date: 03/19/2012 09:56:44 ******/
 SET ANSI_NULLS ON
 GO
 

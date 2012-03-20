@@ -10,6 +10,7 @@ namespace Epi.Core.EnterInterpreter.Rules
         public string Id = null;
         string Namespace = null;
         public object value = null;
+        public EpiInfo.Plugin.DataType VariableDataType;
         //object ReturnResult = null;
 
         public Rule_Value(Rule_Context pContext, Token pToken) : base(pContext)
@@ -32,8 +33,8 @@ namespace Epi.Core.EnterInterpreter.Rules
                             //this.value = new Rule_FunctionCall(pContext, (NonterminalToken)T.Tokens[0]);
                             this.value = EnterRule.BuildStatments(pContext, T.Tokens[0]);
                             break;
+                        
                         case "<Literal>":
-                        case "Boolean":
                         default:
                             this.value = this.GetCommandElement(T.Tokens, 0);
                             break;
@@ -65,12 +66,32 @@ namespace Epi.Core.EnterInterpreter.Rules
                 switch (TT.Symbol.ToString())
                 {
                     case "Boolean":
+                        this.VariableDataType = EpiInfo.Plugin.DataType.Boolean;
+                        this.value = TT.Text;
+                        break;
+                    case "RealLiteral":
+                    case "DecLiteral":
+                        this.VariableDataType = EpiInfo.Plugin.DataType.Number;
+                        this.value = TT.Text;
+                        break;
+                    case "Date":
+                        this.VariableDataType = EpiInfo.Plugin.DataType.Date;
+                        this.value = TT.Text;
+                        break;
+                    case "Time":
+                        this.VariableDataType = EpiInfo.Plugin.DataType.Time;
                         this.value = TT.Text;
                         break;
                     case "Identifier":
                         this.Id = TT.Text;
+                        this.VariableDataType = EpiInfo.Plugin.DataType.Time;
+                        break;
+                    case "String":
+                        this.VariableDataType = EpiInfo.Plugin.DataType.Text;
+                        this.value = TT.Text;
                         break;
                     default:
+                        this.VariableDataType = EpiInfo.Plugin.DataType.Unknown;
                         this.value = TT.Text;
                         break;
                 }

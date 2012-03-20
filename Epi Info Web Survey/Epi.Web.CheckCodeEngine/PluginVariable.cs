@@ -13,6 +13,7 @@ namespace Epi.Core.EnterInterpreter
         private string expression;
         private string _Namespace;
         private string _ControlType;
+        private string _PageNumber;
 
         public PluginVariable() { }
 
@@ -31,5 +32,6 @@ namespace Epi.Core.EnterInterpreter
         public string Expression { get { return this.expression; } set { this.expression = value; } }
         public string Namespace { get { return this._Namespace; } set { this._Namespace = value; } }
         public string ControlType { get { return this._ControlType; } set { this._ControlType = value; } }
+        public string PageNumber { get { return this._PageNumber; } set { this._PageNumber = value; } }
     }
 }
