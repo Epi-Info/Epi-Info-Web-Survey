@@ -8,6 +8,7 @@ using Epi.Web.MVC.Facade;
 using System.Xml;
 using System.Xml.Linq;
 using System.Linq;
+using System.Collections.Generic;
 using System.Xml.XPath;
 namespace Epi.Web.MVC.Utility
 {
@@ -180,6 +181,62 @@ namespace Epi.Web.MVC.Utility
             
         
         }
+
+
+        public static MvcDynamicForms.Form UpdateResponseFromContext(MvcDynamicForms.Form form, Dictionary<string, string> ContextDetailList)
+        {
+
+
+
+            Dictionary<string, string> formControlList = new Dictionary<string, string>();
+
+            //var responses = new List<Response>();
+            foreach (var field in form.InputFields.OrderBy(x => x.DisplayOrder))
+            {
+                string fieldName = field.Title;
+
+                //  formControlList[field.Title] =   field.GetType().ToString().Substring(23);
+                for (int i = 0; i < ContextDetailList.Count(); i++)
+                {
+
+                    if (ContextDetailList.ContainsKey(fieldName))
+                    {
+                        field.Response = ContextDetailList[fieldName].ToString();
+                    }
+
+
+                }
+
+            }
+
+
+
+            return form;
+        }
+
+        public static Dictionary<string, string> GetContextDetailList(Epi.Core.EnterInterpreter.EnterRule FunctionObject)
+        {
+
+
+            Dictionary<string, string> ContextDetailList = new Dictionary<string, string>();
+
+
+            if (FunctionObject != null && !FunctionObject.IsNull())
+            {
+
+                foreach (var field in FunctionObject.Context.CurrentScope.SymbolList)
+                {
+                    if (!string.IsNullOrEmpty(field.Value.Expression))
+                    {
+                        ContextDetailList[field.Key] = field.Value.Expression;
+                    }
+                }
+            }
+
+
+            return ContextDetailList;
+        }
+
 
     }
 }
