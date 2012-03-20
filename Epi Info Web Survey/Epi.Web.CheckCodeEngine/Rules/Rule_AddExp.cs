@@ -95,5 +95,19 @@ namespace Epi.Core.EnterInterpreter.Rules
             return result;
         }
 
+        public override void ToJavaScript(StringBuilder pJavaScriptBuilder)
+        {
+            if (operation == null)
+            {
+                this.MultExp.ToJavaScript(pJavaScriptBuilder);
+            }
+            else
+            {
+                this.MultExp.ToJavaScript(pJavaScriptBuilder);
+                pJavaScriptBuilder.Append(operation);
+                this.AddExp.ToJavaScript(pJavaScriptBuilder);
+            }
+        }
+
     }
 }
