@@ -33,8 +33,16 @@ namespace Epi.Core.EnterInterpreter.Rules
                             //this.value = new Rule_FunctionCall(pContext, (NonterminalToken)T.Tokens[0]);
                             this.value = EnterRule.BuildStatments(pContext, T.Tokens[0]);
                             break;
-                        
+
+                        case "<Literal_Date>":
+                            this.VariableDataType = EpiInfo.Plugin.DataType.Date;
+                            this.value = this.GetCommandElement(T.Tokens, 0);
+                            break;
                         case "<Literal>":
+                        case "<Literal_String>":
+                            this.VariableDataType = EpiInfo.Plugin.DataType.Text;
+                            this.value = this.GetCommandElement(T.Tokens, 0);
+                            break;
                         default:
                             this.value = this.GetCommandElement(T.Tokens, 0);
                             break;
@@ -287,9 +295,78 @@ namespace Epi.Core.EnterInterpreter.Rules
 
             else
             {
-                pJavaScriptBuilder.Append(this.value.ToString());
+                //pJavaScriptBuilder.Append(this.value.ToString());
+
+                if (this.VariableDataType != EpiInfo.Plugin.DataType.Unknown)
+                {
+                    
+                    switch (this.VariableDataType)
+                    {
+                        case EpiInfo.Plugin.DataType.Boolean:
+                            pJavaScriptBuilder.Append(this.ConvertStringToBoolean(this.value.ToString()));
+                            break;
+                        case EpiInfo.Plugin.DataType.Date:
+                            pJavaScriptBuilder.Append(string.Format("new Date(\"{0}\").valueOf()",this.value.ToString()));
+                            break;
+
+                        case EpiInfo.Plugin.DataType.DateTime:
+                        case EpiInfo.Plugin.DataType.Number:
+                        case EpiInfo.Plugin.DataType.Time:
+                            pJavaScriptBuilder.Append(this.value.ToString());
+                            break;
+                        case EpiInfo.Plugin.DataType.Text:
+                        default:
+                            pJavaScriptBuilder.Append(this.value.ToString());
+                            pJavaScriptBuilder.Append(".toLowerCase()");
+                            break;
+                    }
+                }
+                else if (this.value is string)
+                {
+                    pJavaScriptBuilder.Append(this.value.ToString());
+                    pJavaScriptBuilder.Append(".toLowerCase()");
+                }
+                else
+                {
+                    pJavaScriptBuilder.Append(this.value.ToString());
+                }
+
             }
         }
+
+
+
+        protected void WriteValueJavascript(Rule_Value pValue, StringBuilder pJavaScriptBuilder)
+        {
+            if (!string.IsNullOrEmpty(pValue.Id))
+            {
+                PluginVariable var = (PluginVariable)this.Context.CurrentScope.resolve(pValue.Id);
+                pValue.ToJavaScript(pJavaScriptBuilder);
+                if (var != null)
+                {
+                    switch (var.DataType)
+                    {
+
+                        case EpiInfo.Plugin.DataType.Boolean:
+                        case EpiInfo.Plugin.DataType.Date:
+                        case EpiInfo.Plugin.DataType.DateTime:
+                        case EpiInfo.Plugin.DataType.Number:
+                        case EpiInfo.Plugin.DataType.Time:
+                            break;
+                        case EpiInfo.Plugin.DataType.Text:
+                        case EpiInfo.Plugin.DataType.GUID:
+                        default:
+                            pJavaScriptBuilder.Append(".toLowerCase()");
+                            break;
+                    }
+                }
+            }
+            else
+            {
+
+            }
+        }
+
 
     }
 }
