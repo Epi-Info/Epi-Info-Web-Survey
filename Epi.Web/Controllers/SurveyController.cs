@@ -218,7 +218,7 @@ namespace Epi.Web.MVC.Controllers
                                     ///////////////////////////// Execute - Record After - start//////////////////////
                                     else
                                     {
-                                        form = Epi.Web.MVC.Utility.SurveyHelper.UpdateResponseFromContext(form, ContextDetailList);
+                                        form = Epi.Web.MVC.Utility.SurveyHelper.UpdateControlsValuesFromContext(form, ContextDetailList);
                                         _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId, form, SurveyAnswer, false, false, i);
                                     }
                                     ///////////////////////////// Execute - Record After - End//////////////////////

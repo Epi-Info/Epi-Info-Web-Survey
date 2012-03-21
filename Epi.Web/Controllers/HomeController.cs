@@ -129,7 +129,7 @@ namespace Epi.Web.MVC.Controllers
 
                     MvcDynamicForms.Form formRs = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, i, SurveyAnswer);
 
-                    formRs = Epi.Web.MVC.Utility.SurveyHelper.UpdateResponseFromContext(formRs, ContextDetailList);
+                    formRs = Epi.Web.MVC.Utility.SurveyHelper.UpdateControlsValuesFromContext(formRs, ContextDetailList);
                      
                     _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, SurveyAnswer.ResponseId, formRs, SurveyAnswer, false, false, i);
 
