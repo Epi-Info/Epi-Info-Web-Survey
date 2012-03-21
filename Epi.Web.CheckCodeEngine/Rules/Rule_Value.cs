@@ -317,56 +317,16 @@ namespace Epi.Core.EnterInterpreter.Rules
                         case EpiInfo.Plugin.DataType.Text:
                         default:
                             pJavaScriptBuilder.Append(this.value.ToString());
-                            pJavaScriptBuilder.Append(".toLowerCase()");
                             break;
                     }
                 }
-                else if (this.value is string)
-                {
-                    pJavaScriptBuilder.Append(this.value.ToString());
-                    pJavaScriptBuilder.Append(".toLowerCase()");
-                }
-                else
+                else 
                 {
                     pJavaScriptBuilder.Append(this.value.ToString());
                 }
 
             }
         }
-
-
-
-        protected void WriteValueJavascript(Rule_Value pValue, StringBuilder pJavaScriptBuilder)
-        {
-            if (!string.IsNullOrEmpty(pValue.Id))
-            {
-                PluginVariable var = (PluginVariable)this.Context.CurrentScope.resolve(pValue.Id);
-                pValue.ToJavaScript(pJavaScriptBuilder);
-                if (var != null)
-                {
-                    switch (var.DataType)
-                    {
-
-                        case EpiInfo.Plugin.DataType.Boolean:
-                        case EpiInfo.Plugin.DataType.Date:
-                        case EpiInfo.Plugin.DataType.DateTime:
-                        case EpiInfo.Plugin.DataType.Number:
-                        case EpiInfo.Plugin.DataType.Time:
-                            break;
-                        case EpiInfo.Plugin.DataType.Text:
-                        case EpiInfo.Plugin.DataType.GUID:
-                        default:
-                            pJavaScriptBuilder.Append(".toLowerCase()");
-                            break;
-                    }
-                }
-            }
-            else
-            {
-
-            }
-        }
-
 
     }
 }
