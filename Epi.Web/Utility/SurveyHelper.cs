@@ -183,7 +183,13 @@ namespace Epi.Web.MVC.Utility
         }
 
 
-        public static MvcDynamicForms.Form UpdateResponseFromContext(MvcDynamicForms.Form form, Dictionary<string, string> ContextDetailList)
+        /// <summary>
+        ///  
+        /// </summary>
+        /// <param name="form"></param>
+        /// <param name="ContextDetailList"></param>
+        /// <returns>Returns a Form object</returns>
+        public static MvcDynamicForms.Form UpdateControlsValuesFromContext(MvcDynamicForms.Form form, Dictionary<string, string> ContextDetailList)
         {
 
 
