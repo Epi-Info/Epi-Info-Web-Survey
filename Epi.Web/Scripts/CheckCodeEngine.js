@@ -56,6 +56,9 @@ function CCE_ProcessHideExceptCommand(pCheckCodeList)
 {
     if (pCheckCodeList != null)
     {
+
+        var ControlList = new Array();
+
         for(var i in cce_Context.symbolTable)
         {
             var symbol = cce_Context.symbolTable[i];
@@ -74,19 +77,12 @@ function CCE_ProcessHideExceptCommand(pCheckCodeList)
 
                 if(! isFound)
                 {
-                    var query = '#mvcdynamicfield_' + symbol_name;
-                    //clear the control value before hiding
-                    ClearControlValue(query);
-                    $(query).hide();
-                    query = '#labelmvcdynamicfield_' + symbol_name;
-                    $(query).hide();
-                    //CCE_AddToHiddenFieldsList(pCheckCodeList[i]);
-                    CCE_AddToFieldsList(symbol_name, 'HiddenFieldsList')
+                    ControlList.push(symbol_name);
                 }
             }
-
         }
-        
+
+        CCE_ProcessHideCommand(ControlList);
     }
 }
 
@@ -152,10 +148,35 @@ function CCE_ProcessUnHideCommand(pCheckCodeList)
 /// <param name="checkCodeList">A list of fields</param>
 function CCE_ProcessUnHideExceptCommand(pCheckCodeList)
 {
-    if (pCheckCodeList != null) 
+    if (pCheckCodeList != null)
     {
-        var controlsList = GetAssociatedControls(pCheckCodeList);
-        //this.canvas.HideExceptCheckCodeItems(controlsList);
+
+        var ControlList = new Array();
+
+        for(var i in cce_Context.symbolTable)
+        {
+            var symbol = cce_Context.symbolTable[i];
+            var symbol_name = symbol.Name.toLowerCase();
+            if(symbol.Source == "datasource")
+            {
+                var isFound = false;
+                for(var j = 0; j < pCheckCodeList.length; j++)
+                {
+                    if(pCheckCodeList[j].toLowerCase() == symbol_name)
+                    {
+                        isFound = true;
+                        break;
+                    }
+                }
+
+                if(! isFound)
+                {
+                    ControlList.push(symbol_name);
+                }
+            }
+        }
+
+        CCE_ProcessUnHideCommand(ControlList);
     }
 }
 //****** UnHide End
@@ -360,11 +381,36 @@ Rule_Hide.prototype.Execute = function ()
  /// <param name="checkCodeList">A list of fields</param>
  function CCE_ProcessHighlightExceptCommand(pCheckCodeList) 
  {
-     if (pCheckCodeList != null) 
-     {
-         var controlsList = GetAssociatedControls(pCheckCodeList);
-         //this.canvas.HideExceptCheckCodeItems(controlsList);
-     }
+    if (pCheckCodeList != null)
+    {
+
+        var ControlList = new Array();
+
+        for(var i in cce_Context.symbolTable)
+        {
+            var symbol = cce_Context.symbolTable[i];
+            var symbol_name = symbol.Name.toLowerCase();
+            if(symbol.Source == "datasource")
+            {
+                var isFound = false;
+                for(var j = 0; j < pCheckCodeList.length; j++)
+                {
+                    if(pCheckCodeList[j].toLowerCase() == symbol_name)
+                    {
+                        isFound = true;
+                        break;
+                    }
+                }
+
+                if(! isFound)
+                {
+                    ControlList.push(symbol_name);
+                }
+            }
+        }
+
+        CCE_ProcessHighlightCommand(ControlList);
+    }
  }
 
  
@@ -417,11 +463,36 @@ Rule_Hide.prototype.Execute = function ()
  /// <param name="checkCodeList">A list of fields</param>
  function CCE_ProcessUnHighlightExceptCommand(pCheckCodeList) 
  {
-     if (pCheckCodeList != null) 
-     {
-         var controlsList = GetAssociatedControls(pCheckCodeList);
-         //this.canvas.HideExceptCheckCodeItems(controlsList);
-     }
+    if (pCheckCodeList != null)
+    {
+
+        var ControlList = new Array();
+
+        for(var i in cce_Context.symbolTable)
+        {
+            var symbol = cce_Context.symbolTable[i];
+            var symbol_name = symbol.Name.toLowerCase();
+            if(symbol.Source == "datasource")
+            {
+                var isFound = false;
+                for(var j = 0; j < pCheckCodeList.length; j++)
+                {
+                    if(pCheckCodeList[j].toLowerCase() == symbol_name)
+                    {
+                        isFound = true;
+                        break;
+                    }
+                }
+
+                if(! isFound)
+                {
+                    ControlList.push(symbol_name);
+                }
+            }
+        }
+
+        CCE_ProcessUnHighlightCommand(ControlList);
+    }
  }
 
 
@@ -481,11 +552,36 @@ Rule_Hide.prototype.Execute = function ()
  /// <param name="checkCodeList">A list of fields</param>
  function CCE_ProcessDisableExceptCommand(pCheckCodeList) 
  {
-     if (pCheckCodeList != null) 
-     {
-         var controlsList = GetAssociatedControls(pCheckCodeList);
-         //this.canvas.HideExceptCheckCodeItems(controlsList);
-     }
+    if (pCheckCodeList != null)
+    {
+
+        var ControlList = new Array();
+
+        for(var i in cce_Context.symbolTable)
+        {
+            var symbol = cce_Context.symbolTable[i];
+            var symbol_name = symbol.Name.toLowerCase();
+            if(symbol.Source == "datasource")
+            {
+                var isFound = false;
+                for(var j = 0; j < pCheckCodeList.length; j++)
+                {
+                    if(pCheckCodeList[j].toLowerCase() == symbol_name)
+                    {
+                        isFound = true;
+                        break;
+                    }
+                }
+
+                if(! isFound)
+                {
+                    ControlList.push(symbol_name);
+                }
+            }
+        }
+
+        CCE_ProcessDisableCommand(ControlList);
+    }
  }
 
 
@@ -538,11 +634,36 @@ Rule_Hide.prototype.Execute = function ()
  /// <param name="checkCodeList">A list of fields</param>
  function CCE_ProcessEnableExceptCommand(pCheckCodeList) 
  {
-     if (pCheckCodeList != null) 
-     {
-         var controlsList = GetAssociatedControls(pCheckCodeList);
-         //this.canvas.HideExceptCheckCodeItems(controlsList);
-     }
+    if (pCheckCodeList != null)
+    {
+
+        var ControlList = new Array();
+
+        for(var i in cce_Context.symbolTable)
+        {
+            var symbol = cce_Context.symbolTable[i];
+            var symbol_name = symbol.Name.toLowerCase();
+            if(symbol.Source == "datasource")
+            {
+                var isFound = false;
+                for(var j = 0; j < pCheckCodeList.length; j++)
+                {
+                    if(pCheckCodeList[j].toLowerCase() == symbol_name)
+                    {
+                        isFound = true;
+                        break;
+                    }
+                }
+
+                if(! isFound)
+                {
+                    ControlList.push(symbol_name);
+                }
+            }
+        }
+
+        CCE_ProcessEnableCommand(ControlList);
+    }
  }
 
 
