@@ -240,7 +240,7 @@ CCE_Context.prototype.getValue = function (pName)
                   }
                   break;
                 case "datepicker": //string has been converted to date for comparison with another date
-                   var datefield = new Date(field.val());
+                   var datefield = new Date(field.val()).valueOf();
                    return datefield;
                    break;
                 case "numeric": //string has been converted to number to compare with another number
