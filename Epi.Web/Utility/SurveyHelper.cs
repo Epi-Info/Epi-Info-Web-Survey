@@ -184,7 +184,8 @@ namespace Epi.Web.MVC.Utility
 
 
         /// <summary>
-        ///  
+        ///   This function will loop through the form controls and checks if any of the controls are found in the context detail list. 
+        ///   If any their values get updated from the context list.
         /// </summary>
         /// <param name="form"></param>
         /// <param name="ContextDetailList"></param>
