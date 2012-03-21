@@ -40,7 +40,7 @@ namespace MvcDynamicForms.Fields
                     wrapper.Attributes["class"] = this._cssClass;
                 }
 
-                wrapper.Attributes["ID"] = "labelmvcdynamicfield_" + Name;
+                wrapper.Attributes["ID"] = "labelmvcdynamicfield_" + Name.ToLower();
                
                 StringBuilder StyleValues = new StringBuilder();
 
