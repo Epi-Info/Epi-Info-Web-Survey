@@ -593,8 +593,8 @@ public System.Collections.Specialized.NameValueCollection GlobalVariables;*/
                     case "2"://Label/Title
                         var.DataType = DataType.Text;
                         var.ControlType = "label";
-                        continue;
-                        //break;
+                        //continue;
+                        break;
                     case "3"://Label
                         var.DataType = DataType.Text;
                         var.ControlType = "label";
