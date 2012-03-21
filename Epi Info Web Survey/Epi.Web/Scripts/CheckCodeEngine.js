@@ -232,21 +232,20 @@ CCE_Context.prototype.getValue = function (pName)
                switch(cce_Symbol.Type)
                {
                 case "yesno":
-                  if (field.val() == "1") {       
+                  if (field.val() == "1")
+                  {       
                      return true; //"Yes";
                   }
-                  else{ 
+                  else
+                  {
                      return false; // "No";
                   }
-                  break;
                 case "datepicker": //string has been converted to date for comparison with another date
                    var datefield = new Date(field.val()).valueOf();
                    return datefield;
-                   break;
                 case "numeric": //string has been converted to number to compare with another number
-                  var numericField = Number(field.val());
+                  var numericField = new Number(field.val());
                   return numericField;
-                  break;
                 default:
                   return field.val();
               }          
