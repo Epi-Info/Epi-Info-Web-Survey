@@ -15,6 +15,9 @@ namespace MvcDynamicForms.Fields
         /// <summary>
         /// Determines whether the rendered html will be wrapped by another element.
         /// </summary>
+        /// 
+
+        public string Name { get; set; }
         public bool Wrap { get; set; }
         /// <summary>
         /// The html to be rendered on the form.
@@ -26,6 +29,7 @@ namespace MvcDynamicForms.Fields
             if (Wrap)
             
             {
+                
                 var wrapper = new TagBuilder(_fieldWrapper);
                 if (string.IsNullOrEmpty(this._cssClass))
                 {
@@ -36,6 +40,7 @@ namespace MvcDynamicForms.Fields
                     wrapper.Attributes["class"] = this._cssClass;
                 }
 
+                wrapper.Attributes["ID"] = "labelmvcdynamicfield_" + Name;
                
                 StringBuilder StyleValues = new StringBuilder();
 
