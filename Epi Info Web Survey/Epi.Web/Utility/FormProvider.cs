@@ -343,6 +343,7 @@ namespace Epi.Web.MVC.Utility
                 fontstyle = _FieldTypeID.Attribute("ControlFontStyle").Value,
                 Height = _Height * double.Parse(_FieldTypeID.Attribute("ControlHeightPercentage").Value),
                 IsHidden = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "HiddenFieldsList"),
+                Name =_FieldTypeID.Attribute("Name").Value,
                 Width = _Width * double.Parse(_FieldTypeID.Attribute("ControlWidthPercentage").Value)
 
             };
