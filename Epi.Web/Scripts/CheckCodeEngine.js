@@ -56,8 +56,37 @@ function CCE_ProcessHideExceptCommand(pCheckCodeList)
 {
     if (pCheckCodeList != null)
     {
-        var controlsList = GetAssociatedControls(pCheckCodeList);
-        //this.canvas.HideExceptCheckCodeItems(controlsList);
+        for(var i in cce_Context.symbolTable)
+        {
+            var symbol = cce_Context.symbolTable[i];
+            var symbol_name = symbol.Name.toLowerCase();
+            if(symbol.Source == "datasource")
+            {
+                var isFound = false;
+                for(var j = 0; j < pCheckCodeList.length; j++)
+                {
+                    if(pCheckCodeList[j].toLowerCase() == symbol_name)
+                    {
+                        isFound = true;
+                        break;
+                    }
+                }
+
+                if(! isFound)
+                {
+                    var query = '#mvcdynamicfield_' + symbol_name;
+                    //clear the control value before hiding
+                    ClearControlValue(query);
+                    $(query).hide();
+                    query = '#labelmvcdynamicfield_' + symbol_name;
+                    $(query).hide();
+                    //CCE_AddToHiddenFieldsList(pCheckCodeList[i]);
+                    CCE_AddToFieldsList(symbol_name, 'HiddenFieldsList')
+                }
+            }
+
+        }
+        
     }
 }
 
