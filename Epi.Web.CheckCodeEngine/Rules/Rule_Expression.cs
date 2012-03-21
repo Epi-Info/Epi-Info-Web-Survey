@@ -86,8 +86,6 @@ namespace Epi.Core.EnterInterpreter.Rules
 
                 if (op != null)
                 {
-                    this.Expression.ToJavaScript(pJavaScriptBuilder);
-
                     switch (op)
                     {
                         case "OR":
@@ -97,6 +95,8 @@ namespace Epi.Core.EnterInterpreter.Rules
                             pJavaScriptBuilder.Append("!=");
                             break;
                     }
+
+                    this.Expression.ToJavaScript(pJavaScriptBuilder);
                 }
             }
         }
