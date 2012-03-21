@@ -291,6 +291,7 @@ namespace Epi.Core.EnterInterpreter.Rules
 
         }
 
+
         private void WriteValueJavascript(Rule_Value pValue, StringBuilder pJavaScriptBuilder)
         {
             if (!string.IsNullOrEmpty(pValue.Id))
@@ -346,5 +347,6 @@ namespace Epi.Core.EnterInterpreter.Rules
                 }
             }
         }
+
     }
 }
