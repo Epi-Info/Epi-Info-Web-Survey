@@ -43,6 +43,13 @@ namespace Epi.Core.EnterInterpreter.Rules
                             this.VariableDataType = EpiInfo.Plugin.DataType.Text;
                             this.value = this.GetCommandElement(T.Tokens, 0);
                             break;
+                        case "<Number>":
+                        case "<Real_Number>":
+                        case "<Decimal_Number>":
+                        case "<Hex_Number>":
+                            this.VariableDataType = EpiInfo.Plugin.DataType.Number;
+                            this.value = this.GetCommandElement(T.Tokens, 0);
+                            break;
                         default:
                             this.value = this.GetCommandElement(T.Tokens, 0);
                             break;
@@ -79,6 +86,7 @@ namespace Epi.Core.EnterInterpreter.Rules
                         break;
                     case "RealLiteral":
                     case "DecLiteral":
+                    case "HexLiteral":
                         this.VariableDataType = EpiInfo.Plugin.DataType.Number;
                         this.value = TT.Text;
                         break;
@@ -309,8 +317,11 @@ namespace Epi.Core.EnterInterpreter.Rules
                             pJavaScriptBuilder.Append(string.Format("new Date(\"{0}\").valueOf()",this.value.ToString()));
                             break;
 
-                        case EpiInfo.Plugin.DataType.DateTime:
+
                         case EpiInfo.Plugin.DataType.Number:
+                            pJavaScriptBuilder.Append(string.Format("new Number({0}).valueOf()", this.value.ToString()));
+                            break;
+                        case EpiInfo.Plugin.DataType.DateTime:
                         case EpiInfo.Plugin.DataType.Time:
                             pJavaScriptBuilder.Append(this.value.ToString());
                             break;
