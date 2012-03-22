@@ -31,6 +31,7 @@ namespace Epi.Core.EnterInterpreter.Rules
                 if (pToken.Tokens[1].ToString() == "LIKE")
                 {
                     this.STRING = pToken.Tokens[2].ToString();
+                    this.CompareExp = EnterRule.BuildStatments(pContext, pToken.Tokens[2]);
                 }
                 else
                 {
