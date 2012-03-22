@@ -50,5 +50,22 @@ namespace Epi.Core.EnterInterpreter.Rules
         {
             return this.TextField;
         }
+
+        public override void ToJavaScript(StringBuilder pJavaScriptBuilder)
+        {
+
+            pJavaScriptBuilder.AppendLine("function sub_");
+            pJavaScriptBuilder.AppendLine(this.Identifier.ToLower());
+            pJavaScriptBuilder.AppendLine("(){");
+
+            if (this.Statements != null)
+            {
+                this.Statements.ToJavaScript(pJavaScriptBuilder);
+            }
+
+            pJavaScriptBuilder.AppendLine("}");
+
+        }
+
     }
 }
