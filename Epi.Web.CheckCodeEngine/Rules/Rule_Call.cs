@@ -31,5 +31,17 @@ namespace Epi.Core.EnterInterpreter.Rules
 
             return null;
         }
+
+
+        public override void ToJavaScript(StringBuilder pJavaScriptBuilder)
+        {
+            if (this.Context.Subroutine.ContainsKey(this.Identifier.ToLower()))
+            {
+                EnterRule Sub = this.Context.Subroutine[this.Identifier];
+                Sub.ToJavaScript(pJavaScriptBuilder);
+            }
+
+
+        }
     }
 }
