@@ -152,12 +152,20 @@ namespace MvcDynamicForms.Fields
                         var optSelectedVale = "";
                         if (!string.IsNullOrEmpty(SelectedValue.ToString()))
                         {
-                         optSelectedVale = SelectedValue.ToString()=="1"? "Yes" : "No";
+                         optSelectedVale = SelectedValue.ToString();//=="1"? "Yes" : "No";
                         }
-                        opt.Attributes.Add("value",( choice.Key =="Yes"? "1":"0"));
-                        if (choice.Key == optSelectedVale.ToString()) opt.Attributes.Add("selected", "selected");
-                        opt.SetInnerText(choice.Key);
-                        html.Append(opt.ToString());
+                         opt.Attributes.Add("value",( choice.Key =="Yes"? "1":"0"));
+                        if (choice.Key == optSelectedVale.ToString())
+                        {
+                            opt.Attributes.Add("selected", "selected");
+                            
+                        }
+                        if (choice.Key == "Yes" || choice.Key == "No")
+                        {
+                            opt.SetInnerText(choice.Key);
+                            html.Append(opt.ToString());
+                        }
+                        
                     }
                     break;
                 case "17":

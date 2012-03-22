@@ -147,8 +147,24 @@ namespace Epi.Web.MVC.Utility
                             break;
 
                         case "11"://DropDown Yes/No
+                                   
                              
                                    var _DropDownSelectedValueYN = Value;
+
+                                   if (_DropDownSelectedValueYN == "1")
+                                   {
+                                       _DropDownSelectedValueYN = "Yes";
+                                   }
+                                    
+                                  if (_DropDownSelectedValueYN == "0")
+                                   {
+
+                                       _DropDownSelectedValueYN = "No";
+                                   }
+                                  
+
+
+
                                    form.AddFields(GetDropDown(_FieldTypeID, _Width, _Height, SurveyAnswer, _DropDownSelectedValueYN, "Yes,No", 11));
                                    //                                             pName, pType, pSource
                                    //VariableDefinitions.AppendLine(string.Format(defineFormat, _FieldTypeID.Attribute("Name").Value, "yesno", "datasource",Value)); 
@@ -517,7 +533,7 @@ namespace Epi.Web.MVC.Utility
                     IsReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value),
                     ShowEmptyOption = true,
                     SelectType=FieldTypeId,
-                    SelectedValue = _ControlValue,
+                    SelectedValue = _ControlValue ,
                     IsHidden = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "HiddenFieldsList"),
                     IsHighlighted = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "HighlightedFieldsList"),
                     IsDisabled = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "DisabledFieldsList"),
@@ -529,10 +545,10 @@ namespace Epi.Web.MVC.Utility
 
             DropDown.AddChoices(DropDownValues, ",");
 
-            if (!string.IsNullOrWhiteSpace(_ControlValue))
-            {
-                DropDown.Choices[_ControlValue] = true;
-            }
+            //if (!string.IsNullOrWhiteSpace(_ControlValue))
+            //{
+            //    DropDown.Choices[_ControlValue] = true;
+            //}
 
             return DropDown;
         }
