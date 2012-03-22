@@ -240,6 +240,16 @@ CCE_Context.prototype.getValue = function (pName)
                   {
                      return false; // "No";
                   }
+                case "checkbox":
+                    if(field.is(':checked'))
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                    
                 case "datepicker": //string has been converted to date for comparison with another date
                    var datefield = new Date(field.val()).valueOf();
                    return datefield;
