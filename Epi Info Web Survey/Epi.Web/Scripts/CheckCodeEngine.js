@@ -244,7 +244,7 @@ CCE_Context.prototype.getValue = function (pName)
                    var datefield = new Date(field.val()).valueOf();
                    return datefield;
                 case "numeric": //string has been converted to number to compare with another number
-                  var numericField = new Number(field.val());
+                  var numericField = new Number(field.val()).valueOf();
                   return numericField;
                 default:
                   return field.val();
