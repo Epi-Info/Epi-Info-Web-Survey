@@ -52,6 +52,19 @@ namespace Epi.Core.EnterInterpreter.Rules
                             break;
                         default:
                             this.value = this.GetCommandElement(T.Tokens, 0);
+                            switch (this.value.ToString())
+                            {
+                                case "(+)":
+                                    this.VariableDataType = EpiInfo.Plugin.DataType.Boolean;
+                                    this.value = true;
+                                    break;
+                                case "(-)":
+                                case "(.)":
+                                    this.VariableDataType = EpiInfo.Plugin.DataType.Boolean;
+                                    this.value = false;
+                                    break;
+
+                            }
                             break;
                     }
                 }
@@ -72,6 +85,7 @@ namespace Epi.Core.EnterInterpreter.Rules
                     else
                     {
                         this.value = EnterRule.BuildStatments(pContext, T.Tokens[1]);
+
                     }
                 }
             }
@@ -311,7 +325,14 @@ namespace Epi.Core.EnterInterpreter.Rules
                     switch (this.VariableDataType)
                     {
                         case EpiInfo.Plugin.DataType.Boolean:
-                            pJavaScriptBuilder.Append(this.ConvertStringToBoolean(this.value.ToString()));
+                            if ((bool)this.ConvertStringToBoolean(this.value.ToString()))
+                            {
+                                pJavaScriptBuilder.Append("true");
+                            }
+                            else
+                            {
+                                pJavaScriptBuilder.Append("false");
+                            }
                             break;
                         case EpiInfo.Plugin.DataType.Date:
                             pJavaScriptBuilder.Append(string.Format("new Date(\"{0}\").valueOf()",this.value.ToString()));
