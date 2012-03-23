@@ -69,8 +69,9 @@ namespace Epi.Core.EnterInterpreter.Rules
         {
             if (this.isNotStatement)
             {
-                pJavaScriptBuilder.Append("!");
+                pJavaScriptBuilder.Append("!(");
                 this.CompareExp.ToJavaScript(pJavaScriptBuilder);
+                pJavaScriptBuilder.Append(")");
             }
             else
             {
