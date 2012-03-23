@@ -49,6 +49,7 @@ public System.Collections.Specialized.NameValueCollection GlobalVariables;*/
         public System.Collections.Generic.Dictionary<string, EnterRule> FieldAfterCheckCode;
         public System.Collections.Generic.Dictionary<string, EnterRule> FieldClickCheckCode;
         public System.Collections.Generic.Dictionary<string, EnterRule> Subroutine;
+        public System.Collections.Generic.Dictionary<string, EnterRule> OuterSubroutine;
 
 
         public System.Text.StringBuilder JavaScriptVariableDefinitions;
@@ -329,6 +330,7 @@ public System.Collections.Specialized.NameValueCollection GlobalVariables;*/
             this.FieldAfterCheckCode = new Dictionary<string, EnterRule>(StringComparer.OrdinalIgnoreCase);
             this.FieldClickCheckCode = new Dictionary<string, EnterRule>(StringComparer.OrdinalIgnoreCase);
             this.Subroutine = new Dictionary<string, EnterRule>(StringComparer.OrdinalIgnoreCase);
+            this.OuterSubroutine = new Dictionary<string, EnterRule>(StringComparer.OrdinalIgnoreCase);
 
 
         }
@@ -721,8 +723,15 @@ public System.Collections.Specialized.NameValueCollection GlobalVariables;*/
                 }
 
             }
-
         }
 
+
+        public void GetSubroutineJavaScript(StringBuilder pJavaScriptBuilder)
+        {
+            foreach (KeyValuePair<string,EnterRule> kvp in this.OuterSubroutine)
+            {
+                kvp.Value.ToJavaScript(pJavaScriptBuilder);
+            }
+        }
     }
 }
