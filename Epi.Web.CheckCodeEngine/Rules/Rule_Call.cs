@@ -37,8 +37,9 @@ namespace Epi.Core.EnterInterpreter.Rules
         {
             if (this.Context.Subroutine.ContainsKey(this.Identifier.ToLower()))
             {
-                EnterRule Sub = this.Context.Subroutine[this.Identifier];
-                Sub.ToJavaScript(pJavaScriptBuilder);
+                pJavaScriptBuilder.Append("sub_");
+                pJavaScriptBuilder.Append(this.Identifier.ToLower());
+                pJavaScriptBuilder.AppendLine("();");
             }
 
 
