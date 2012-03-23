@@ -84,7 +84,8 @@ namespace Epi.Web.MVC.Utility
 
 
                 form.FormCheckCodeObj.GetVariableJavaScript(VariableDefinitions);
-
+                form.FormCheckCodeObj.GetSubroutineJavaScript(VariableDefinitions);
+                
                 string PageName = GetPageName(XML, PageNumber);
 
 

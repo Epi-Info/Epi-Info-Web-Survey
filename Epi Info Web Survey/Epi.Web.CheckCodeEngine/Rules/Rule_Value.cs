@@ -50,6 +50,9 @@ namespace Epi.Core.EnterInterpreter.Rules
                             this.VariableDataType = EpiInfo.Plugin.DataType.Number;
                             this.value = this.GetCommandElement(T.Tokens, 0);
                             break;
+                        case "<Subroutine_Statement>":
+
+                            break;
                         default:
                             this.value = this.GetCommandElement(T.Tokens, 0);
                             switch (this.value.ToString())
@@ -59,9 +62,12 @@ namespace Epi.Core.EnterInterpreter.Rules
                                     this.value = true;
                                     break;
                                 case "(-)":
-                                case "(.)":
                                     this.VariableDataType = EpiInfo.Plugin.DataType.Boolean;
                                     this.value = false;
+                                    break;
+                                case "(.)":
+                                    this.VariableDataType = EpiInfo.Plugin.DataType.Boolean;
+                                    this.value = null;
                                     break;
 
                             }
@@ -321,17 +327,29 @@ namespace Epi.Core.EnterInterpreter.Rules
 
                 if (this.VariableDataType != EpiInfo.Plugin.DataType.Unknown)
                 {
-                    
                     switch (this.VariableDataType)
                     {
                         case EpiInfo.Plugin.DataType.Boolean:
-                            if ((bool)this.ConvertStringToBoolean(this.value.ToString()))
+                            if(this.value == null)
                             {
-                                pJavaScriptBuilder.Append("true");
+                                pJavaScriptBuilder.Append("null");
                             }
                             else
                             {
-                                pJavaScriptBuilder.Append("false");
+                                Object result = this.ConvertStringToBoolean(this.value.ToString());
+                                if(result == null)
+                                {
+                                    pJavaScriptBuilder.Append("null");
+                                }
+                                else
+                                if ((bool)result)
+                                {
+                                    pJavaScriptBuilder.Append("true");
+                                }
+                                else
+                                {
+                                    pJavaScriptBuilder.Append("false");
+                                }
                             }
                             break;
                         case EpiInfo.Plugin.DataType.Date:

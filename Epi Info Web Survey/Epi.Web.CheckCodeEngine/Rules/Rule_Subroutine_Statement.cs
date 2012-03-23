@@ -40,8 +40,10 @@ namespace Epi.Core.EnterInterpreter.Rules
             if (this.Context.Subroutine.ContainsKey(this.Identifier))
             {
                 this.Context.Subroutine.Remove(this.Identifier);
+                this.Context.OuterSubroutine.Remove(this.Identifier);
             }
             this.Context.Subroutine.Add(this.Identifier, this.Statements);
+            this.Context.OuterSubroutine.Add(this.Identifier, this);
 
             return null;
         }
@@ -54,8 +56,8 @@ namespace Epi.Core.EnterInterpreter.Rules
         public override void ToJavaScript(StringBuilder pJavaScriptBuilder)
         {
 
-            pJavaScriptBuilder.AppendLine("function sub_");
-            pJavaScriptBuilder.AppendLine(this.Identifier.ToLower());
+            pJavaScriptBuilder.Append("function sub_");
+            pJavaScriptBuilder.Append(this.Identifier.ToLower());
             pJavaScriptBuilder.AppendLine("(){");
 
             if (this.Statements != null)
