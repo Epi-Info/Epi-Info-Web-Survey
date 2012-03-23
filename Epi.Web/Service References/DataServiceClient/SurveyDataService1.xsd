@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns:tns="http://www.yourcompany.com/types/" elementFormDefault="qualified" targetNamespace="http://www.yourcompany.com/types/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://www.yourcompany.com/types/" elementFormDefault="qualified" targetNamespace="http://www.yourcompany.com/types/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import schemaLocation="http://localhost:22587/Epi.Web.ServiceHost/SurveyDataService.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:import schemaLocation="http://localhost:22587/Epi.Web.ServiceHost/SurveyDataService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
   <xs:complexType name="SurveyInfoRequest">
     <xs:complexContent mixed="false">
       <xs:extension base="tns:RequestBase">
@@ -31,6 +32,7 @@
           <xs:element minOccurs="0" name="IncludeOrderStatistics" type="xs:boolean" />
           <xs:element xmlns:q2="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="SurveyIdList" nillable="true" type="q2:ArrayOfstring" />
           <xs:element minOccurs="0" name="SurveyType" type="xs:int" />
+          <xs:element minOccurs="0" name="UserPublishKey" type="ser:guid" />
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -60,6 +62,7 @@
       <xs:element minOccurs="0" name="SurveyName" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="SurveyNumber" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="SurveyType" type="xs:int" />
+      <xs:element minOccurs="0" name="UserPublishKey" type="ser:guid" />
       <xs:element minOccurs="0" name="XML" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
@@ -123,6 +126,7 @@
           <xs:element minOccurs="0" name="StatusId" type="xs:int" />
           <xs:element xmlns:q3="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="SurveyAnswerIdList" nillable="true" type="q3:ArrayOfstring" />
           <xs:element minOccurs="0" name="SurveyId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="UserPublishKey" type="ser:guid" />
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -141,6 +145,7 @@
       <xs:element minOccurs="0" name="ResponseId" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Status" type="xs:int" />
       <xs:element minOccurs="0" name="SurveyId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UserPublishKey" type="ser:guid" />
       <xs:element minOccurs="0" name="XML" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
