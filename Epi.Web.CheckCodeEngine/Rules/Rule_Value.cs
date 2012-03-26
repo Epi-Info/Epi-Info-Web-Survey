@@ -187,7 +187,8 @@ namespace Epi.Core.EnterInterpreter.Rules
                 else 
                 {
                     
-                    result = ParseDataStrings(((String)value));
+                    //result = ParseDataStrings(((String)value));
+                    result = ParseDataStrings(value);
                 }
             }
             return result;
@@ -306,6 +307,10 @@ namespace Epi.Core.EnterInterpreter.Rules
                 {
                     result = dateTime;
                 }
+            }
+            else if (subject is Boolean)
+            {
+                result = subject;
             }
             return result;
         }

@@ -198,20 +198,13 @@ namespace Epi.Web.MVC.Utility
             Dictionary<string, string> formControlList = new Dictionary<string, string>();
 
             //var responses = new List<Response>();
-            foreach (var field in form.InputFields.OrderBy(x => x.DisplayOrder))
+            foreach (var field in form.InputFields)
             {
                 string fieldName = field.Title;
 
-                //  formControlList[field.Title] =   field.GetType().ToString().Substring(23);
-                for (int i = 0; i < ContextDetailList.Count(); i++)
+                if (ContextDetailList.ContainsKey(fieldName))
                 {
-
-                    if (ContextDetailList.ContainsKey(fieldName))
-                    {
-                        field.Response = ContextDetailList[fieldName].ToString();
-                    }
-
-
+                    field.Response = ContextDetailList[fieldName].ToString();
                 }
 
             }
