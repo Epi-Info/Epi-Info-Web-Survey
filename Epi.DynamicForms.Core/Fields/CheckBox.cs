@@ -57,7 +57,19 @@ namespace MvcDynamicForms.Fields
             }
             set
             {
-               
+                switch(value.ToLower())
+                {
+                    case "yes":
+                    case "true":
+                        Checked = true;
+                        break;
+                    case "no":
+                    case "false":
+                    default:
+                        Checked = false;
+                        break;
+                }
+            
             }
         }
 
