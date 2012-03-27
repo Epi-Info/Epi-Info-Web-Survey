@@ -46,6 +46,28 @@ namespace Epi.Core.EnterInterpreter.Rules
                     }
                 }
             }
+            else
+            {
+                Dictionary<string, string> FieldChecker = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+                foreach (string s in this.IdentifierList)
+                {
+                    if (!FieldChecker.ContainsKey(s))
+                    {
+                        FieldChecker.Add(s.ToLower(), s.ToLower());
+                    }
+                }
+
+                foreach (EpiInfo.Plugin.IVariable v in this.Context.CurrentScope.FindVariables(EpiInfo.Plugin.VariableScope.DataSource))
+                {
+                    string key = v.Name.ToLower();
+
+                    if (!this.Context._DisabledFieldList.Contains(key) && !FieldChecker.ContainsKey(key))
+                    {
+                        this.Context._DisabledFieldList.Add(key);
+                    }
+                }
+
+            }
             return null;
         }
 
