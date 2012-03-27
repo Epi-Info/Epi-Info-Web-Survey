@@ -13,7 +13,7 @@ namespace MvcDynamicForms.Fields
     {
         protected Dictionary<string, bool> _choices = new Dictionary<string, bool>();
         protected string _responseDelimiter = ", ";
-
+        
         /// <summary>
         /// The choices that the end user can choose from.
         /// </summary>
@@ -58,7 +58,10 @@ namespace MvcDynamicForms.Fields
             }
             set 
             {
+                 
                 
+                        SelectedValue = value;
+                        
             }
         }
         public override bool Validate()
@@ -88,6 +91,6 @@ namespace MvcDynamicForms.Fields
                 .ToList()
                 .ForEach(c => _choices.Add(c, false));
         }
-        public string SelectedValue { get; set; }
+        public string SelectedValue{ get;set;}
     }
 }
