@@ -137,7 +137,16 @@ namespace Epi.Core.EnterInterpreter.Rules
             {
                 if (result != null)
                 {
-                    this.Context.EnterCheckCodeInterface.Assign(this.QualifiedId, result);
+                    EpiInfo.Plugin.IVariable v = this.Context.CurrentScope.resolve(this.QualifiedId);
+                    if (result != null)
+                    {
+                        v.Expression = result.ToString();
+                    }
+                    else
+                    {
+                        v.Expression = "";
+                    }
+                    
                 }
             }
             
