@@ -41,7 +41,8 @@ namespace MvcDynamicForms.Fields
             {
                 _responseDelimiter = value;
             }
-        }        
+        }
+        public int SelectType { get; set; }
         public override string Response
         {
             get
@@ -59,11 +60,97 @@ namespace MvcDynamicForms.Fields
             set 
             {
                  
+                    switch (this.SelectType.ToString())
+                    {
+                        case "11"://Yes/No
+
+                            Dictionary<string, bool> choices11 = new Dictionary<string, bool>();
+                           
+                            foreach (var choice in _choices)
+                            {
+
+                                string choiceValue = value == "True" ? "Yes" : "No";
+
+                                if (choice.Key == choiceValue)
+                                {
+                                    choices11.Add(choice.Key.ToString(), true);
+
+                                }
+                                else {
+                                    choices11.Add(choice.Key.ToString(), false);
+                                }
+                                
+                            }
+                            Choices = choices11;
+                            break;
+                        case "17"://DropDown LegalValues
+                           Dictionary<string, bool> choices17 = new Dictionary<string, bool>();
+                           
+                            foreach (var choice in _choices)
+                            {
+                                 
+
+                               
+                                if (choice.Key == value)
+                                {
+                                    choices17.Add(choice.Key.ToString(), true);
+
+                                }
+                                else {
+                                    choices17.Add(choice.Key.ToString(), false);
+                                }
+                                
+                            }
+                            Choices = choices17;
+                            break;
+                        case "18":
+                         Dictionary<string, bool> choices18 = new Dictionary<string, bool>();
+                           
+                            foreach (var choice in _choices)
+                            {
+                                 
+
+                               
+                                if (choice.Key == value)
+                                {
+                                    choices18.Add(choice.Key.ToString(), true);
+
+                                }
+                                else {
+                                    choices18.Add(choice.Key.ToString(), false);
+                                }
+                                
+                            }
+                            Choices = choices18;
+
+                            break;
+                        case "19"://Comment Legal
+                          Dictionary<string, bool> choices19 = new Dictionary<string, bool>();
+                           
+                            foreach (var choice in _choices)
+                            {
+                                 
+
+                               
+                                if (choice.Key == value)
+                                {
+                                    choices19.Add(choice.Key.ToString(), true);
+                                 
+                                }
+                                else {
+                                    choices19.Add(choice.Key.ToString(), false);
+                                }
+                                
+                            }
+                            Choices = choices19;
+                            break;
+                    }
+                }
                 
-                        SelectedValue = value;
+                       
                         
             }
-        }
+        
         public override bool Validate()
         {
             if (Required && !_choices.Values.Contains(true))
