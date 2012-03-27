@@ -41,7 +41,7 @@ namespace MvcDynamicForms.Fields
             set { _inputHtmlAttributes["multiple"] = value.ToString(); }
         }
 
-        public int SelectType { get; set; }
+        //public int SelectType { get; set; }
         /// <summary>
         /// The text to be rendered as the first option in the select list when ShowEmptyOption is set to true.
         /// </summary>
