@@ -27,7 +27,7 @@ namespace Epi.Core.EnterInterpreter.Rules
                 this.IdentifierList = this.GetCommandElement(pToken.Tokens, 1).ToString().Split(' ');
             }
         }
-
+         
 
         /// <summary>
         /// performs execution of the HIDE command via the EnterCheckCodeInterface.Hide method
