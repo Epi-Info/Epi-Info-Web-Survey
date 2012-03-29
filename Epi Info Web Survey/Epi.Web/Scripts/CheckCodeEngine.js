@@ -282,17 +282,27 @@ CCE_Context.prototype.setValue = function (pName, pValue)
     var cce_Symbol = this.resolve(pName);
     if (cce_Symbol != null) 
     {
-        if(cce_Symbol.Source == "datasource")
-        {
-            var query = '#mvcdynamicfield_' + pName;
-            $(query).val(pValue);
-            cce_Symbol.Value = pValue;
-        }
-        else
-        {
-            cce_Symbol.Value = pValue;
-        }
-
+     var query = '#mvcdynamicfield_' + pName;
+//        if (eval(document.getElementById(query)))
+//        {
+                if(cce_Symbol.Source == "datasource")
+                {
+                   
+                    $(query).val(pValue);
+                    cce_Symbol.Value = pValue;
+                }
+                else
+                {
+                    cce_Symbol.Value = pValue;
+                }
+//        }
+        
+//        else{
+//        
+//        var FieldNameAndValue =pName+'?'+ escape(pValue);
+//       CCE_AddToFieldsList(FieldNameAndValue,"AssignList");
+//         
+//        }
         
     }
 }
@@ -713,9 +723,7 @@ Rule_Hide.prototype.Execute = function ()
 //        document.getElementById("HiddenFieldsList").value += FieldName;
 //    }
 //}
-
-
-
+ 
 function CCE_AddToFieldsList(FieldName,ListName)
 {
    

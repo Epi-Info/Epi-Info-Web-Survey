@@ -77,7 +77,7 @@ namespace Epi.Web.MVC.Utility
                 form.HiddenFieldsList = xdocResponse.Root.Attribute("HiddenFieldsList").Value;
                 form.HighlightedFieldsList = xdocResponse.Root.Attribute("HighlightedFieldsList").Value;
                 form.DisabledFieldsList = xdocResponse.Root.Attribute("DisabledFieldsList").Value;
-
+                
 
                 form.FormCheckCodeObj = form.GetCheckCodeObj(xdoc, xdocResponse, checkcode);
                 
@@ -97,7 +97,7 @@ namespace Epi.Web.MVC.Utility
                 foreach (var _FieldTypeID in _FieldsTypeIDs)
                 {
                     var Value = GetControlValue(SurveyAnswer, _FieldTypeID.Attribute("Name").Value);
-
+                 
                     JavaScript.Append(GetFormJavaScript(checkcode, form, _FieldTypeID.Attribute("Name").Value));
 
 
@@ -436,7 +436,7 @@ namespace Epi.Web.MVC.Utility
                 //IsRequired = bool.Parse(_FieldTypeID.Attribute("IsRequired").Value),
                 //IsReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value),
                 //MaxLength = int.Parse(_FieldTypeID.Attribute("MaxLength").Value),
-                //IsHidden = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "HiddenFieldsList"),
+                IsPlaceHolder = true,
                 //IsHighlighted = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "HighlightedFieldsList"),
                 //IsDisabled = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "DisabledFieldsList"),
                 Value = _ControlValue
@@ -794,5 +794,10 @@ namespace Epi.Web.MVC.Utility
 
             return JavaScript.ToString();
         }
+
+
+
+       
+
     }
 }

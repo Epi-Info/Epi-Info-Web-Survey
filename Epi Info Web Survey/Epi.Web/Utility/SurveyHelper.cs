@@ -8,6 +8,7 @@ using Epi.Web.MVC.Facade;
 using System.Xml;
 using System.Xml.Linq;
 using System.Linq;
+using System.Web;
 using System.Collections.Generic;
 using System.Xml.XPath;
 namespace Epi.Web.MVC.Utility
@@ -54,6 +55,12 @@ namespace Epi.Web.MVC.Utility
 
                 // 2 a. update the current survey answer request
                 surveyAnswerRequest.SurveyAnswerList = surveyAnswerResponse.SurveyResponseList;
+
+                
+           
+   
+            
+
                 surveyResponseXML.Add(form);
                 XDocument SavedXml = XDocument.Parse(surveyAnswerDTO.XML);
                 bool AddRoot = false;
@@ -101,7 +108,43 @@ namespace Epi.Web.MVC.Utility
                    Xdoc.Root.Attribute("DisabledFieldsList").Value = form.DisabledFieldsList.ToString();
 
                }
-           
+               //  AssignList 
+               List<KeyValuePair<string, String>> FieldsList = new List<KeyValuePair<string, string>>();
+              
+               FieldsList = GetHiddenFieldsList(form);
+               if (FieldsList != null)
+               {
+                    XElement XElement = null;
+
+                    for (var i = 0; i < FieldsList.Count; i++)
+                        {
+
+
+                            if (!string.IsNullOrEmpty(FieldsList[i].Key))
+                            {
+
+
+                                //string FieldName = ListArray[i].Substring(0, ListArray[i].IndexOf('?')).ToString();
+                                //XElement = Xdoc.XPathSelectElement("SurveyResponse/Page/ResponseDetail[@QuestionName = '" + FieldName.ToUpper() + "']");
+                                //string Value = ListArray[i].Split('?')[1];
+                                //XElement.Value = HttpUtility.HtmlDecode(Value);
+
+                                string FieldName = FieldsList[i].Key;
+                                XElement = Xdoc.XPathSelectElement("SurveyResponse/Page/ResponseDetail[@QuestionName = '" + FieldName.ToUpper() + "']");
+                                string Value = FieldsList[i].Value;
+                                if ( XElement != null)
+                                {
+                                XElement.Value =  Value ;
+                                }
+                               
+                            }
+                        }
+                    form.AssignList = null;
+               }
+
+                       
+ 
+             
             ////Update survey response Status
             if (IsSubmited)
             {
@@ -111,6 +154,7 @@ namespace Epi.Web.MVC.Utility
                 Xdoc.Root.Attribute("HiddenFieldsList").Remove();
                 Xdoc.Root.Attribute("HighlightedFieldsList").Remove();
                 Xdoc.Root.Attribute("DisabledFieldsList").Remove();
+               
                 RemovePageNumAtt(Xdoc);
             }
             if (IsSaved)
@@ -237,6 +281,22 @@ namespace Epi.Web.MVC.Utility
             return ContextDetailList;
         }
 
+        public static List<KeyValuePair<string, string>> GetHiddenFieldsList(MvcDynamicForms.Form pForm)
+        {
+
+            List<KeyValuePair<string, String>> FieldsList = new List<KeyValuePair<string, string>>();
+
+            foreach (var field in pForm.InputFields)
+            {
+                if (field.IsPlaceHolder)
+                {
+                    FieldsList.Add(new KeyValuePair<string, string>(field.Title, field.Response));
+                     
+                }
+            }
+
+            return FieldsList;
+        }
 
     }
 }
