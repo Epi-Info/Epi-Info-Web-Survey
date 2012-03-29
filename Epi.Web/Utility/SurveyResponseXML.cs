@@ -19,14 +19,16 @@ namespace Epi.Web.MVC.Utility
             ResponseDetailList.Clear();
             foreach (var field in pForm.InputFields)
             {
-
-                if (this.ResponseDetailList.ContainsKey(field.Title))
+                if (!field.IsPlaceHolder)
                 {
-                    this.ResponseDetailList[field.Title] = field.Response;
-                }
-                else
-                {
-                    this.ResponseDetailList.Add(field.Title, field.Response);
+                    if (this.ResponseDetailList.ContainsKey(field.Title))
+                    {
+                        this.ResponseDetailList[field.Title] = field.Response;
+                    }
+                    else
+                    {
+                        this.ResponseDetailList.Add(field.Title, field.Response);
+                    }
                 }
             }
         }
@@ -85,6 +87,7 @@ namespace Epi.Web.MVC.Utility
               root.SetAttribute("HiddenFieldsList","");
               root.SetAttribute("HighlightedFieldsList", "");
               root.SetAttribute("DisabledFieldsList", "");
+              
               xml.AppendChild(root);
               }
 

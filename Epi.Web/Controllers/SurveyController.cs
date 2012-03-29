@@ -151,7 +151,7 @@ namespace Epi.Web.MVC.Controllers
                          
                             form.DisabledFieldsList = this.Request.Form["DisabledFieldsList"].ToString();
 
-                            
+                            form.AssignList = this.Request.Form["AssignList"].ToString();
                          
                         _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId, form, SurveyAnswer, IsSubmited, IsSaved, PageNumber);
 
@@ -169,6 +169,8 @@ namespace Epi.Web.MVC.Controllers
                             form.HighlightedFieldsList = this.Request.Form["HighlightedFieldsList"].ToString();
                             
                             form.DisabledFieldsList = this.Request.Form["DisabledFieldsList"].ToString();
+
+                            form.AssignList = this.Request.Form["AssignList"].ToString();
 
                             
                             IsSaved = form.IsSaved = true;
@@ -240,7 +242,7 @@ namespace Epi.Web.MVC.Controllers
                                  form.HighlightedFieldsList = this.Request.Form["HighlightedFieldsList"].ToString();
                                 
                                  form.DisabledFieldsList = this.Request.Form["DisabledFieldsList"].ToString();
-
+                                 form.AssignList = this.Request.Form["AssignList"].ToString();
                                  
 
                                 _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId, form, SurveyAnswer, IsSubmited, IsSaved, PageNumber);
