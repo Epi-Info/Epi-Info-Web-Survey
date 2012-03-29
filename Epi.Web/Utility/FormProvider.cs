@@ -54,7 +54,7 @@ namespace Epi.Web.MVC.Utility
   
                 var _FieldsTypeIDs = from _FieldTypeID in
                                          xdoc.Descendants("Field")
-                                     where _FieldTypeID.Attribute("Position").Value == (PageNumber - 1).ToString()
+                                     //where _FieldTypeID.Attribute("Position").Value == (PageNumber - 1).ToString()
                                      select _FieldTypeID;
 
 
@@ -99,114 +99,123 @@ namespace Epi.Web.MVC.Utility
                     var Value = GetControlValue(SurveyAnswer, _FieldTypeID.Attribute("Name").Value);
 
                     JavaScript.Append(GetFormJavaScript(checkcode, form, _FieldTypeID.Attribute("Name").Value));
-                    switch (_FieldTypeID.Attribute("FieldTypeId").Value)
+
+
+                    if (_FieldTypeID.Attribute("Position").Value != (PageNumber - 1).ToString())
                     {
-                        case "1": // textbox
-                           
+                        form.AddFields(GetHiddenField(_FieldTypeID, _Width, _Height, SurveyAnswer, Value));
+                    }
+                    else
+                    {
+                        switch (_FieldTypeID.Attribute("FieldTypeId").Value)
+                        {
+                            case "1": // textbox
+
                                 var _TextBoxValue = Value;
                                 form.AddFields(GetTextBox(_FieldTypeID, _Width, _Height, SurveyAnswer, _TextBoxValue));
                                 //                                             pName, pType, pSource
                                 //VariableDefinitions.AppendLine(string.Format(defineFormat, _FieldTypeID.Attribute("Name").Value,"textbox","datasource",Value)); 
-                            break;
+                                break;
 
-                        case "2"://Label/Title
-                            form.AddFields(GetLabel(_FieldTypeID, _Width, _Height, SurveyAnswer));
-                            //                                             pName, pType, pSource
-                            //VariableDefinitions.AppendLine(string.Format(defineFormat, _FieldTypeID.Attribute("Name").Value, "lable", "datasource",Value)); 
-                            break;
-                        case "3"://Label
+                            case "2"://Label/Title
+                                form.AddFields(GetLabel(_FieldTypeID, _Width, _Height, SurveyAnswer));
+                                //                                             pName, pType, pSource
+                                //VariableDefinitions.AppendLine(string.Format(defineFormat, _FieldTypeID.Attribute("Name").Value, "lable", "datasource",Value)); 
+                                break;
+                            case "3"://Label
 
-                            break;
-                        case "4"://MultiLineTextBox
+                                break;
+                            case "4"://MultiLineTextBox
 
-                            var _TextAreaValue = Value;
-                            form.AddFields( GetTextArea(_FieldTypeID, _Width,_Height,SurveyAnswer,_TextAreaValue));
-                            //                                             pName, pType, pSource
-                            //VariableDefinitions.AppendLine(string.Format(defineFormat, _FieldTypeID.Attribute("Name").Value, "multiline", "datasource",Value)); 
-                            break;
-                        case "5"://NumericTextBox
+                                var _TextAreaValue = Value;
+                                form.AddFields(GetTextArea(_FieldTypeID, _Width, _Height, SurveyAnswer, _TextAreaValue));
+                                //                                             pName, pType, pSource
+                                //VariableDefinitions.AppendLine(string.Format(defineFormat, _FieldTypeID.Attribute("Name").Value, "multiline", "datasource",Value)); 
+                                break;
+                            case "5"://NumericTextBox
 
-                            var _NumericTextBoxValue = Value;
-                            form.AddFields( GetNumericTextBox(_FieldTypeID, _Width, _Height, SurveyAnswer, _NumericTextBoxValue));
-                            //                                             pName, pType, pSource
-                            //VariableDefinitions.AppendLine(string.Format(defineNumberFormat, _FieldTypeID.Attribute("Name").Value, "number", "datasource", Value)); 
-                            break;
-                        // 7 DatePicker
-                        case "7"://NumericTextBox
+                                var _NumericTextBoxValue = Value;
+                                form.AddFields(GetNumericTextBox(_FieldTypeID, _Width, _Height, SurveyAnswer, _NumericTextBoxValue));
+                                //                                             pName, pType, pSource
+                                //VariableDefinitions.AppendLine(string.Format(defineNumberFormat, _FieldTypeID.Attribute("Name").Value, "number", "datasource", Value)); 
+                                break;
+                            // 7 DatePicker
+                            case "7"://NumericTextBox
 
-                            var _DatePickerValue = Value;
-                            form.AddFields(GetDatePicker(_FieldTypeID, _Width, _Height, SurveyAnswer, _DatePickerValue));
-                            //                                             pName, pType, pSource
-                            //VariableDefinitions.AppendLine(string.Format(defineNumberFormat, _FieldTypeID.Attribute("Name").Value, "number", "datasource", Value)); 
-                            break;
-                        case "10"://CheckBox
+                                var _DatePickerValue = Value;
+                                form.AddFields(GetDatePicker(_FieldTypeID, _Width, _Height, SurveyAnswer, _DatePickerValue));
+                                //                                             pName, pType, pSource
+                                //VariableDefinitions.AppendLine(string.Format(defineNumberFormat, _FieldTypeID.Attribute("Name").Value, "number", "datasource", Value)); 
+                                break;
+                            case "10"://CheckBox
 
-                            var _CheckBoxValue = Value;
-                            form.AddFields(GetCheckBox(_FieldTypeID, _Width, _Height, SurveyAnswer, _CheckBoxValue));
-                            //                                             pName, pType, pSource
-                            //VariableDefinitions.AppendLine(string.Format(defineFormat, _FieldTypeID.Attribute("Name").Value, "checkbox", "datasource",Value)); 
-                            break;
+                                var _CheckBoxValue = Value;
+                                form.AddFields(GetCheckBox(_FieldTypeID, _Width, _Height, SurveyAnswer, _CheckBoxValue));
+                                //                                             pName, pType, pSource
+                                //VariableDefinitions.AppendLine(string.Format(defineFormat, _FieldTypeID.Attribute("Name").Value, "checkbox", "datasource",Value)); 
+                                break;
 
-                        case "11"://DropDown Yes/No
-                                   
-                             
-                                   var _DropDownSelectedValueYN = Value;
-
-                                   if (_DropDownSelectedValueYN == "1")
-                                   {
-                                       _DropDownSelectedValueYN = "Yes";
-                                   }
-                                    
-                                  if (_DropDownSelectedValueYN == "0")
-                                   {
-
-                                       _DropDownSelectedValueYN = "No";
-                                   }
-                                  
+                            case "11"://DropDown Yes/No
 
 
+                                var _DropDownSelectedValueYN = Value;
 
-                                   form.AddFields(GetDropDown(_FieldTypeID, _Width, _Height, SurveyAnswer, _DropDownSelectedValueYN, "Yes,No", 11));
-                                   //                                             pName, pType, pSource
-                                   //VariableDefinitions.AppendLine(string.Format(defineFormat, _FieldTypeID.Attribute("Name").Value, "yesno", "datasource",Value)); 
-                               
-                            break;
-                        case "17"://DropDown LegalValues
-                        
-                              string DropDownValues1 = "";
-                              DropDownValues1 = GetDropDownValues(xdoc, _FieldTypeID.Attribute("Name").Value, _FieldTypeID.Attribute("SourceTableName").Value);
-                              var _DropDownSelectedValue1 = Value;
-                              form.AddFields(GetDropDown(_FieldTypeID, _Width, _Height, SurveyAnswer, _DropDownSelectedValue1, DropDownValues1, 17));
-                              //                                             pName, pType, pSource
-                              //VariableDefinitions.AppendLine(string.Format(defineFormat, _FieldTypeID.Attribute("Name").Value, "legalvalue", "datasource",Value)); 
-                          
-                             break;
-                        case "18"://DropDown Codes
-                              
-                                   string DropDownValues2 = "";
-                                   DropDownValues2 = GetDropDownValues(xdoc, _FieldTypeID.Attribute("Name").Value, _FieldTypeID.Attribute("SourceTableName").Value);
-                                   var _DropDownSelectedValue2 = Value;
-                                   form.AddFields(GetDropDown(_FieldTypeID, _Width, _Height, SurveyAnswer, _DropDownSelectedValue2, DropDownValues2, 18));
-                                   //                                             pName, pType, pSource
-                                   //VariableDefinitions.AppendLine(string.Format(defineFormat, _FieldTypeID.Attribute("Name").Value, "code", "datasource",Value)); 
-                               
-                              break;
-                        case "19"://DropDown CommentLegal
-                             
-                                  string DropDownValues = "";
-                                  DropDownValues = GetDropDownValues(xdoc, _FieldTypeID.Attribute("Name").Value, _FieldTypeID.Attribute("SourceTableName").Value);
-                                  var _DropDownSelectedValue = Value;
-                                  form.AddFields(GetDropDown(_FieldTypeID, _Width, _Height, SurveyAnswer, _DropDownSelectedValue, DropDownValues, 19));
-                                  //                                             pName, pType, pSource
-                                  //VariableDefinitions.AppendLine(string.Format(defineFormat, _FieldTypeID.Attribute("Name").Value, "commentlegal", "datasource",Value)); 
-                              
-                                   break;
-                        case "21"://GroupBox
-                            var _GroupBoxValue = GetControlValue(SurveyAnswer, _FieldTypeID.Attribute("UniqueId").Value);
-                            form.AddFields(GetGroupBox(_FieldTypeID, _Width, _Height, SurveyAnswer, _GroupBoxValue));
+                                if (_DropDownSelectedValueYN == "1")
+                                {
+                                    _DropDownSelectedValueYN = "Yes";
+                                }
+
+                                if (_DropDownSelectedValueYN == "0")
+                                {
+
+                                    _DropDownSelectedValueYN = "No";
+                                }
+
+
+
+
+                                form.AddFields(GetDropDown(_FieldTypeID, _Width, _Height, SurveyAnswer, _DropDownSelectedValueYN, "Yes,No", 11));
+                                //                                             pName, pType, pSource
+                                //VariableDefinitions.AppendLine(string.Format(defineFormat, _FieldTypeID.Attribute("Name").Value, "yesno", "datasource",Value)); 
+
+                                break;
+                            case "17"://DropDown LegalValues
+
+                                string DropDownValues1 = "";
+                                DropDownValues1 = GetDropDownValues(xdoc, _FieldTypeID.Attribute("Name").Value, _FieldTypeID.Attribute("SourceTableName").Value);
+                                var _DropDownSelectedValue1 = Value;
+                                form.AddFields(GetDropDown(_FieldTypeID, _Width, _Height, SurveyAnswer, _DropDownSelectedValue1, DropDownValues1, 17));
+                                //                                             pName, pType, pSource
+                                //VariableDefinitions.AppendLine(string.Format(defineFormat, _FieldTypeID.Attribute("Name").Value, "legalvalue", "datasource",Value)); 
+
+                                break;
+                            case "18"://DropDown Codes
+
+                                string DropDownValues2 = "";
+                                DropDownValues2 = GetDropDownValues(xdoc, _FieldTypeID.Attribute("Name").Value, _FieldTypeID.Attribute("SourceTableName").Value);
+                                var _DropDownSelectedValue2 = Value;
+                                form.AddFields(GetDropDown(_FieldTypeID, _Width, _Height, SurveyAnswer, _DropDownSelectedValue2, DropDownValues2, 18));
+                                //                                             pName, pType, pSource
+                                //VariableDefinitions.AppendLine(string.Format(defineFormat, _FieldTypeID.Attribute("Name").Value, "code", "datasource",Value)); 
+
+                                break;
+                            case "19"://DropDown CommentLegal
+
+                                string DropDownValues = "";
+                                DropDownValues = GetDropDownValues(xdoc, _FieldTypeID.Attribute("Name").Value, _FieldTypeID.Attribute("SourceTableName").Value);
+                                var _DropDownSelectedValue = Value;
+                                form.AddFields(GetDropDown(_FieldTypeID, _Width, _Height, SurveyAnswer, _DropDownSelectedValue, DropDownValues, 19));
+                                //                                             pName, pType, pSource
+                                //VariableDefinitions.AppendLine(string.Format(defineFormat, _FieldTypeID.Attribute("Name").Value, "commentlegal", "datasource",Value)); 
+
+                                break;
+                            case "21"://GroupBox
+                                var _GroupBoxValue = GetControlValue(SurveyAnswer, _FieldTypeID.Attribute("UniqueId").Value);
+                                form.AddFields(GetGroupBox(_FieldTypeID, _Width, _Height, SurveyAnswer, _GroupBoxValue));
                                 //                                             pName, pType, pSource
                                 //VariableDefinitions.AppendLine(string.Format(defineFormat, _FieldTypeID.Attribute("Name").Value, "", "datasource",Value)); 
-                            break;
+                                break;
+                        }
                     }
 
                 }
@@ -402,6 +411,44 @@ namespace Epi.Web.MVC.Utility
             return TextArea;
 
         }
+        private static Hidden GetHiddenField(XElement _FieldTypeID, double _Width, double _Height, string SurveyAnswer, string _ControlValue)
+        {
+
+
+            var result = new Hidden
+            {
+                Title = _FieldTypeID.Attribute("Name").Value,
+                //Prompt = _FieldTypeID.Attribute("PromptText").Value,
+                //DisplayOrder = int.Parse(_FieldTypeID.Attribute("TabIndex").Value),
+                //Required = _FieldTypeID.Attribute("IsRequired").Value == "True" ? true : false,
+                //RequiredMessage = _FieldTypeID.Attribute("PromptText").Value + " is required",
+                //RequiredMessage = "This field is required",
+                Key = _FieldTypeID.Attribute("Name").Value,
+                //PromptTop = _Height * double.Parse(_FieldTypeID.Attribute("PromptTopPositionPercentage").Value),
+                //PromptLeft = _Width * double.Parse(_FieldTypeID.Attribute("PromptLeftPositionPercentage").Value),
+                //Top = _Height * double.Parse(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value),
+                //Left = _Width * double.Parse(_FieldTypeID.Attribute("ControlLeftPositionPercentage").Value),
+                //PromptWidth = _Width * double.Parse(_FieldTypeID.Attribute("ControlWidthPercentage").Value),
+                //ControlWidth = _Width * double.Parse(_FieldTypeID.Attribute("ControlWidthPercentage").Value),
+                //fontstyle = _FieldTypeID.Attribute("PromptFontStyle").Value,
+                //fontSize = double.Parse(_FieldTypeID.Attribute("PromptFontSize").Value),
+                //fontfamily = _FieldTypeID.Attribute("PromptFontFamily").Value,
+                //IsRequired = bool.Parse(_FieldTypeID.Attribute("IsRequired").Value),
+                //IsReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value),
+                //MaxLength = int.Parse(_FieldTypeID.Attribute("MaxLength").Value),
+                //IsHidden = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "HiddenFieldsList"),
+                //IsHighlighted = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "HighlightedFieldsList"),
+                //IsDisabled = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "DisabledFieldsList"),
+                Value = _ControlValue
+
+
+
+            };
+            return result;
+
+        }
+
+
         private static TextBox GetTextBox(XElement _FieldTypeID, double _Width, double _Height, string SurveyAnswer, string _ControlValue)
         {
 
