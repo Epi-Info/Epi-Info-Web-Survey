@@ -312,6 +312,11 @@ namespace MvcDynamicForms
             get;
             set;
         }
+        public string AssignList
+        {
+            get;
+            set;
+        }
         public Epi.Core.EnterInterpreter.Rule_Context FormCheckCodeObj { get; set; }
 
         public Epi.Core.EnterInterpreter.Rule_Context GetCheckCodeObj(System.Xml.Linq.XDocument xdoc, System.Xml.Linq.XDocument xdocResponse, string FormCheckCode)

@@ -27,7 +27,7 @@ namespace MvcDynamicForms.Fields
         protected bool _IsHidden;
         protected bool _IsHighlighted;
         protected bool _IsDisabled;
-
+        protected bool _IsPlaceHolder;
         internal Form Form
         {
             get
@@ -92,6 +92,9 @@ namespace MvcDynamicForms.Fields
         public bool IsHidden { get { return this._IsHidden; } set { this._IsHidden = value; } }
         public bool IsHighlighted { get { return this._IsHighlighted; } set { this._IsHighlighted = value; } }
         public bool IsDisabled { get { return this._IsDisabled; } set { this._IsDisabled = value; } }
+
+        public bool IsPlaceHolder  { get { return this._IsPlaceHolder; } set { this._IsPlaceHolder = value; } }
+        
         /// <summary>
         /// This function generates control style 
         /// </summary>

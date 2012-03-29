@@ -62,6 +62,7 @@ namespace MvcDynamicForms.Fields
                 }
 
             ////////////Check code end//////////////////
+            
             txt.Attributes.Add("value", Value);
             if(_IsRequired ==true){
             txt.Attributes.Add("class", "validate[required] text-input");
