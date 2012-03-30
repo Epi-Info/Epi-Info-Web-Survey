@@ -30,7 +30,40 @@ namespace Epi.Core.EnterInterpreter.Rules
         /// <returns>object</returns>
         public override object Execute()
         {
-            this.Context.EnterCheckCodeInterface.UnHide(this.IdentifierList, this.IsExceptList);
+            //this.Context.EnterCheckCodeInterface.UnHide(this.IdentifierList, this.IsExceptList);
+
+            if (!this.IsExceptList)
+            {
+                foreach (string s in this.IdentifierList)
+                {
+                    if (!this.Context.HiddenFieldList.Contains(s.ToLower()))
+                    {
+                        this.Context._HiddenFieldList.Remove(s.ToLower());
+                    }
+                }
+            }
+            else
+            {
+                Dictionary<string, string> FieldChecker = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+                foreach (string s in this.IdentifierList)
+                {
+                    if (!FieldChecker.ContainsKey(s))
+                    {
+                        FieldChecker.Remove(s.ToLower());
+                    }
+                }
+
+                foreach (EpiInfo.Plugin.IVariable v in this.Context.CurrentScope.FindVariables(EpiInfo.Plugin.VariableScope.DataSource))
+                {
+                    string key = v.Name.ToLower();
+
+                    if (!this.Context.HiddenFieldList.Contains(key) && !FieldChecker.ContainsKey(key))
+                    {
+                        this.Context._HiddenFieldList.Remove(key);
+                    }
+                }
+
+            }
 
             return null;
 
