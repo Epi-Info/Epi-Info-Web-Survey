@@ -199,7 +199,7 @@ namespace Epi.Core.EnterInterpreter.Rules
 
                         if (LHSO.GetType().Name.ToUpper() == "STRING" && RHSO.GetType().Name.ToUpper() == "STRING")
                         {
-                            i = StringComparer.CurrentCultureIgnoreCase.Compare(LHSO, RHSO);
+                            i = StringComparer.CurrentCultureIgnoreCase.Compare(LHSO.ToString().Trim(), RHSO.ToString().Trim());
                         }
                         else if (LHSO is IComparable && RHSO is IComparable)
                         {
