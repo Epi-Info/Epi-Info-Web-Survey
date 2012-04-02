@@ -33,7 +33,7 @@ namespace Epi.Core.EnterInterpreter.Rules
         /// <returns>object</returns>
         public override object Execute()
         {
-            this.Context.EnterCheckCodeInterface.GoTo(Destination);
+            //this.Context.EnterCheckCodeInterface.GoTo(Destination);
 
             return null;
         }
