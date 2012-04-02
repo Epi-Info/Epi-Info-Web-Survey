@@ -37,7 +37,7 @@ function CCE_ProcessHideCommand(pCheckCodeList)
             
             var query = '#mvcdynamicfield_' + pCheckCodeList[i];
              //clear the control value before hiding
-             ClearControlValue(query);
+             CCE_ClearControlValue(query);
             $(query).hide();
             query = '#labelmvcdynamicfield_' + pCheckCodeList[i];
             $(query).hide();
@@ -768,7 +768,7 @@ function CCE_RemoveFromFieldsList(FieldName,ListName) {
  }
 
  //Clear the control value
- function ClearControlValue(controlId) {
+ function CCE_CCE_ClearControlValue(controlId) {
     
     //if control is a check box uncheck it otherwise clear the control value
      if ($(controlId).attr('type') == 'checkbox') {
@@ -781,15 +781,18 @@ function CCE_RemoveFromFieldsList(FieldName,ListName) {
 
  //Go to a page or focus on a control on the same page
 
- function goToControlOrPage(controlOrPage) {
-     if (parseInt(controlOrPage) == controlOrPage) {
+ function CCE_GoToControlOrPage(controlOrPage) 
+ {
+     if (parseInt(controlOrPage) == controlOrPage) 
+     {
          var currentUrl = window.location.href;
          //get the url in the format of http://localhost/<Server>/survey/<ResponseID>
          currentUrl = processUrl(currentUrl, 'RedirectionUrl', "");
          $("#myform")[0].action = currentUrl + "/" + controlOrPage;
          $("#myform").submit();
      }
-     else {
+     else 
+     {
          var controlId = '#mvcdynamicfield_' + controlOrPage;
          $(controlId).focus();
      }
