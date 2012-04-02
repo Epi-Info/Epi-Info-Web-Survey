@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web.Mvc;
+using System.Web;
 
 namespace MvcDynamicForms.Fields
 {
@@ -40,13 +41,16 @@ namespace MvcDynamicForms.Fields
                     wrapper.Attributes["class"] = this._cssClass;
                 }
 
+                Html = MvcHtmlString.Create(Html.Replace(" ", "&nbsp;")).ToString();
+
                 wrapper.Attributes["ID"] = "labelmvcdynamicfield_" + Name.ToLower();
                
                 StringBuilder StyleValues = new StringBuilder();
 
                 StyleValues.Append(GetContolStyle(_fontstyle.ToString(), _top.ToString(), _left.ToString(), Width.ToString(), Height.ToString(), IsHidden));
-
-                wrapper.Attributes.Add(new KeyValuePair<string, string>("style", StyleValues.ToString()));  
+                StyleValues.Append(";word-wrap:break-word;");
+                 wrapper.Attributes.Add(new KeyValuePair<string, string>("style", StyleValues.ToString()));
+               
                 wrapper.InnerHtml = Html;
                 return wrapper.ToString();
             }
