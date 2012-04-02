@@ -37,5 +37,13 @@ namespace Epi.Core.EnterInterpreter.Rules
 
             return null;
         }
+
+
+        public override void ToJavaScript(StringBuilder pJavaScriptBuilder)
+        {
+            pJavaScriptBuilder.Append("CCE_GoToControlOrPage('");
+            pJavaScriptBuilder.Append(this.Destination);
+            pJavaScriptBuilder.Append("');");
+        }
     }
 }
