@@ -779,4 +779,20 @@ function CCE_RemoveFromFieldsList(FieldName,ListName) {
      }
  }
 
+ //Go to a page or focus on a control on the same page
+
+ function goToControlOrPage(controlOrPage) {
+     if (parseInt(controlOrPage) == controlOrPage) {
+         var currentUrl = window.location.href;
+         //get the url in the format of http://localhost/<Server>/survey/<ResponseID>
+         currentUrl = processUrl(currentUrl, 'RedirectionUrl', "");
+         $("#myform")[0].action = currentUrl + "/" + controlOrPage;
+         $("#myform").submit();
+     }
+     else {
+         var controlId = '#mvcdynamicfield_' + controlOrPage;
+         $(controlId).focus();
+     }
+ }
+
 cce_Context = new CCE_Context();
