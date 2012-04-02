@@ -768,13 +768,16 @@ function CCE_RemoveFromFieldsList(FieldName,ListName) {
  }
 
  //Clear the control value
- function CCE_CCE_ClearControlValue(controlId) {
+ function CCE_ClearControlValue(controlId) 
+ {
     
     //if control is a check box uncheck it otherwise clear the control value
-     if ($(controlId).attr('type') == 'checkbox') {
+     if ($(controlId).attr('type') == 'checkbox') 
+     {
          $(controlId).attr('checked', false);
      }
-     else {
+     else 
+     {
          $(controlId).val('');
      }
  }
