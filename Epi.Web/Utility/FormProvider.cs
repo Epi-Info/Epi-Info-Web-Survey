@@ -754,7 +754,14 @@ namespace Epi.Web.MVC.Utility
               FunctionObject_A.ToJavaScript(A_JavaScript);
           }
 
-          return  B_JavaScript.ToString() +"  "+ A_JavaScript.ToString();
+          EnterRule FunctionObject = (EnterRule)form.FormCheckCodeObj.GetCommand("level=field&event=click&identifier=" + controlName);
+          if (FunctionObject != null && !FunctionObject.IsNull())
+          {
+              A_JavaScript.Append("function " + controlName.ToLower());
+              FunctionObject.ToJavaScript(A_JavaScript);
+          }
+
+          return  B_JavaScript.ToString() + "  " + A_JavaScript.ToString();
         }
 
         public static string GetPageLevelJS(int PageNumber,Form form,string PageName,string BeforeOrAfter)

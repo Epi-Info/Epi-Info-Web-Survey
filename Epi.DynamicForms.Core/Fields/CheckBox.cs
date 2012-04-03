@@ -144,6 +144,16 @@ namespace MvcDynamicForms.Fields
                 chk.Attributes.Add("onfocus", "return " + _key + "_before();"); //Before
             }
 
+
+            EnterRule FunctionObjectClick = (EnterRule)_form.FormCheckCodeObj.GetCommand("level=field&event=click&identifier=" + _key);
+            if (FunctionObjectClick != null && !FunctionObjectClick.IsNull())
+            {
+                chk.Attributes.Add("onclick", "return " + _key + "_click();"); 
+            }
+
+
+
+
             ////////////Check code end//////////////////
             html.Append(chk.ToString(TagRenderMode.SelfClosing));
 
