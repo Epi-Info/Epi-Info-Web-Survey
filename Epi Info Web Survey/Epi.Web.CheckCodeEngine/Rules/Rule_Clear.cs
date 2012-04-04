@@ -21,9 +21,28 @@ namespace Epi.Core.EnterInterpreter.Rules
         /// <returns>object</returns>
         public override object Execute()
         {
-            this.Context.EnterCheckCodeInterface.Clear(this.IdentifierList);
+            foreach (string s in this.IdentifierList)
+            {
+                this.Context.CurrentScope.resolve(s).Expression = "";
+            }
 
             return null;
         }
+
+
+        public override void ToJavaScript(StringBuilder pJavaScriptBuilder)
+        {
+
+            foreach (string s in this.IdentifierList)
+            {
+                pJavaScriptBuilder.Append("CCE_ClearControlValue('");
+                pJavaScriptBuilder.Append(s.ToLower());
+                pJavaScriptBuilder.AppendLine("');");
+            }
+
+
+
+        }
+
     }
 }
