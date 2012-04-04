@@ -139,7 +139,7 @@ namespace Epi.Web.MVC.Utility
                                
                             }
                         }
-                    form.AssignList = null;
+                   
                }
 
                        
@@ -164,6 +164,7 @@ namespace Epi.Web.MVC.Utility
 
             }
             surveyAnswerRequest.SurveyAnswerList[0].XML = Xdoc.ToString();
+            
             iSurveyAnswerRepository.SaveSurveyAnswer(surveyAnswerRequest);
            
 
@@ -297,6 +298,12 @@ namespace Epi.Web.MVC.Utility
 
             return FieldsList;
         }
+        public static void UpdatePassCode(UserAuthenticationRequest AuthenticationRequest, ISurveyAnswerRepository iSurveyAnswerRepository)
+        {
 
+
+            iSurveyAnswerRepository.UpdatePassCode(AuthenticationRequest);
+
+        }
     }
 }

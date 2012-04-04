@@ -143,6 +143,7 @@
       <xs:element minOccurs="0" name="DateCompleted" type="xs:dateTime" />
       <xs:element minOccurs="0" name="DateLastUpdated" type="xs:dateTime" />
       <xs:element minOccurs="0" name="ResponseId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ResponsePassCode" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Status" type="xs:int" />
       <xs:element minOccurs="0" name="SurveyId" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="UserPublishKey" type="ser:guid" />
@@ -160,4 +161,26 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="SurveyAnswerResponse" nillable="true" type="tns:SurveyAnswerResponse" />
+  <xs:complexType name="UserAuthenticationRequest">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:RequestBase">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="PassCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="SurveyResponseId" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="UserAuthenticationRequest" nillable="true" type="tns:UserAuthenticationRequest" />
+  <xs:complexType name="UserAuthenticationResponse">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ResponseBase">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="PassCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="UserIsValid" type="xs:boolean" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="UserAuthenticationResponse" nillable="true" type="tns:UserAuthenticationResponse" />
 </xs:schema>

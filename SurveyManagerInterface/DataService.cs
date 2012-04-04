@@ -375,6 +375,70 @@ namespace Epi.Web.WCF.SurveyService
             return response;
         }
 
+
+        public UserAuthenticationResponse PassCodeLogin(UserAuthenticationRequest request)
+        {
+            var response = new UserAuthenticationResponse();
+            Epi.Web.Interfaces.DataInterfaces.IDaoFactory entityDaoFactory = new EF.EntityDaoFactory();
+            Epi.Web.Interfaces.DataInterfaces.ISurveyResponseDao ISurveyResponseDao = entityDaoFactory.SurveyResponseDao;
+            Epi.Web.BLL.SurveyResponse Implementation = new Epi.Web.BLL.SurveyResponse(ISurveyResponseDao);
+
+            UserAuthenticationRequestBO PassCodeBO = Mapper.ToPassCodeBO(request);
+            bool result = Implementation.ValidateUser(PassCodeBO);
+ 
+          if (result)
+          {
+
+              response.Acknowledge = AcknowledgeType.Failure;
+              response.Message = "Invalid Pass Code.";
+              response.UserIsValid = true;
+              
+          }
+          else 
+          {
+              response.UserIsValid = false;
+          
+          }
+           
+             
+              return response;
+        }
+        public UserAuthenticationResponse GetAuthenticationResponse(UserAuthenticationRequest pRequest)
+        {
+            UserAuthenticationResponse response = new UserAuthenticationResponse();
+            Epi.Web.Interfaces.DataInterfaces.IDaoFactory entityDaoFactory = new EF.EntityDaoFactory();
+            Epi.Web.Interfaces.DataInterfaces.ISurveyResponseDao ISurveyResponseDao = entityDaoFactory.SurveyResponseDao;
+            Epi.Web.BLL.SurveyResponse Implementation = new Epi.Web.BLL.SurveyResponse(ISurveyResponseDao);
+
+
+            Epi.Web.Common.BusinessObject.UserAuthenticationRequestBO PassCodeBO = Mapper.ToPassCodeBO(pRequest);
+
+            response = Mapper.ToAuthenticationResponse(Implementation.GetAuthenticationResponse(PassCodeBO));
+
+ 
+            return response;
+        
+        
+        
+        }
+
+        public UserAuthenticationResponse SetPassCode(UserAuthenticationRequest request) { 
+        
+        
+            var response = new UserAuthenticationResponse();
+            Epi.Web.Interfaces.DataInterfaces.IDaoFactory entityDaoFactory = new EF.EntityDaoFactory();
+            Epi.Web.Interfaces.DataInterfaces.ISurveyResponseDao ISurveyResponseDao = entityDaoFactory.SurveyResponseDao;
+            Epi.Web.BLL.SurveyResponse Implementation = new Epi.Web.BLL.SurveyResponse(ISurveyResponseDao);
+
+            Epi.Web.Common.BusinessObject.UserAuthenticationRequestBO PassCodeBO = Mapper.ToPassCodeBO(request);
+            Implementation.SavePassCode(PassCodeBO);
+
+
+            return response;
+        
+        
+        
+        }
         /// <summary>
         /// Logout from application service.
         /// </summary>
@@ -462,6 +526,7 @@ namespace Epi.Web.WCF.SurveyService
 
             return result;
         }
+
 
     }
 }

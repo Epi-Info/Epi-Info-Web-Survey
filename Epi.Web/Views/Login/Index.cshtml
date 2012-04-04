@@ -1,0 +1,18 @@
+﻿@model Epi.Web.MVC.Models.PassCodeModel
+
+@{
+    ViewBag.Title = "Admin: Log In";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Log In</h1>
+
+<p>Please enter survey pass code:</p>
+@using(Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+   
+    
+   @Html.TextBoxFor(m=>m.PassCode);
+    
+    <p><input type="submit" value="Log in" /></p>
+}

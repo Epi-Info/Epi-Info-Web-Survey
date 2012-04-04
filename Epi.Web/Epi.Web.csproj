@@ -90,9 +90,11 @@
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Controllers\FinalController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\PostController.cs" />
     <Compile Include="Controllers\SurveyController.cs" />
     <Compile Include="Facade\ISurveyFacade.cs" />
+    <Compile Include="Models\PassCodeModel.cs" />
     <Compile Include="Utility\FormProvider.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -242,6 +244,7 @@
     <None Include="Properties\DataSources\Epi.Web.Common.Message.SurveyAnswerResponse.datasource" />
     <None Include="Properties\DataSources\Epi.Web.Common.Message.SurveyInfoResponse.datasource" />
     <None Include="Properties\DataSources\Epi.Web.Common.Message.SurveyResponseResponse.datasource" />
+    <None Include="Properties\DataSources\Epi.Web.Common.Message.UserAuthenticationResponse.datasource" />
     <None Include="Service References\DataServiceClient\SurveyDataService.disco" />
     <None Include="Service References\DataServiceClient\configuration91.svcinfo" />
     <None Include="Service References\DataServiceClient\configuration.svcinfo" />
@@ -289,6 +292,7 @@
     <Content Include="Views\Response\Index.cshtml" />
     <Content Include="Views\Shared\IsSubmitedError.cshtml" />
     <Content Include="Views\Shared\SurveyClosedError.cshtml" />
+    <Content Include="Views\Login\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Epi.DynamicForms.Core\Epi.Web.DynamicForms.Core.csproj">

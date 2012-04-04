@@ -130,9 +130,10 @@ namespace Epi.Web.EF
                 ResponseId = entity.ResponseId.ToString(),
                 XML = entity.ResponseXML,
                 Status = entity.StatusId,
-                //UserPublishKey = (Guid)entity.UserPublishKey,
+                
                 DateLastUpdated = entity.DateLastUpdated,
-                DateCompleted = entity.DateCompleted.Value
+                DateCompleted = entity.DateCompleted.Value,
+                
             };
         }
 
@@ -165,6 +166,17 @@ namespace Epi.Web.EF
                 DateCompleted = pBO.DateCompleted
 
             };
+        }
+        internal static UserAuthenticationResponseBO ToAuthenticationResponseBO(UserAuthenticationRequestBO AuthenticationRequestBO)
+        {
+
+
+            return new UserAuthenticationResponseBO
+            {
+                PassCode = AuthenticationRequestBO.PassCode,
+
+            };
+        
         }
     }
 }

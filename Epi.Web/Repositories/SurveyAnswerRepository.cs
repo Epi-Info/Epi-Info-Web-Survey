@@ -57,8 +57,94 @@ namespace Epi.Web.MVC.Repositories
                 throw ex;
             }
         }
+        public UserAuthenticationResponse UpdatePassCode(UserAuthenticationRequest AuthenticationRequest)
+        {
+            try
+            {
 
+                UserAuthenticationResponse result  = _iDataService.SetPassCode(AuthenticationRequest);
+                return result;
+            }
+            catch (FaultException<CustomFaultException> cfe)
+            {
+                throw cfe;
+            }
+            catch (FaultException fe)
+            {
+                throw fe;
+            }
+            catch (CommunicationException ce)
+            {
+                throw ce;
+            }
+            catch (TimeoutException te)
+            {
+                throw te;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        
+        }
+        public UserAuthenticationResponse ValidateUser(UserAuthenticationRequest pRequest)
+        {
+            try
+            {
+               
+                UserAuthenticationResponse result = _iDataService.PassCodeLogin(pRequest);
+                return result;
+            }
+            catch (FaultException<CustomFaultException> cfe)
+            {
+                throw cfe;
+            }
+            catch (FaultException fe)
+            {
+                throw fe;
+            }
+            catch (CommunicationException ce)
+            {
+                throw ce;
+            }
+            catch (TimeoutException te)
+            {
+                throw te;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public UserAuthenticationResponse GetAuthenticationResponse(UserAuthenticationRequest pRequest)
+        {
+            try
+            {
 
+                UserAuthenticationResponse result = _iDataService.GetAuthenticationResponse(pRequest);
+                return result;
+            }
+            catch (FaultException<CustomFaultException> cfe)
+            {
+                throw cfe;
+            }
+            catch (FaultException fe)
+            {
+                throw fe;
+            }
+            catch (CommunicationException ce)
+            {
+                throw ce;
+            }
+            catch (TimeoutException te)
+            {
+                throw te;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         public SurveyAnswerResponse SaveSurveyAnswer(SurveyAnswerRequest pRequest)
         {
             try

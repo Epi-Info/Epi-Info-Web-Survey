@@ -97,6 +97,7 @@ namespace Epi.Web.Common.ObjectMapping
                 DateLastUpdated = pBO.DateLastUpdated,
                 XML = pBO.XML,
                 DateCompleted = pBO.DateCompleted,
+              
                 Status = pBO.Status
             };
         }
@@ -126,6 +127,7 @@ namespace Epi.Web.Common.ObjectMapping
                 XML = pBO.XML,
                 DateCompleted = pBO.DateCompleted,
                 Status = pBO.Status
+                
             };
         }
 
@@ -156,9 +158,28 @@ namespace Epi.Web.Common.ObjectMapping
             };
         }
 
+        public static UserAuthenticationRequestBO ToPassCodeBO(UserAuthenticationRequest UserAuthenticationObj)
+        {
+            return new UserAuthenticationRequestBO
+            {
+                ResponseId = UserAuthenticationObj.SurveyResponseId,
+                PassCode = UserAuthenticationObj.PassCode
 
+            };
+        }
 
+        public static UserAuthenticationResponse ToAuthenticationResponse(UserAuthenticationResponseBO AuthenticationRequestBO)
+        {
 
+            return new UserAuthenticationResponse
+            {
+
+                PassCode = AuthenticationRequestBO.PassCode,
+
+            };
+        
+        
+        }
         /// <summary>
         /// Transforms list of SurveyInfoBO BOs list of category DTOs.
         /// </summary>

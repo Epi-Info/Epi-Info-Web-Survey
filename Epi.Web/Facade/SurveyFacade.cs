@@ -21,6 +21,10 @@ namespace Epi.Web.MVC.Facade
         //declare SurveyResponseRequest
         private Epi.Web.Common.Message.SurveyAnswerRequest _surveyAnswerRequest;
 
+        //declare UserAuthenticationRequest
+        private Epi.Web.Common.Message.UserAuthenticationRequest _surveyAuthenticationRequest;
+        //declare PassCodeDTO
+        private Epi.Web.Common.DTO.PassCodeDTO _PassCodeDTO;
         //declare SurveyAnswerDTO
         private Common.DTO.SurveyAnswerDTO _surveyAnswerDTO;
 
@@ -34,7 +38,7 @@ namespace Epi.Web.MVC.Facade
         public SurveyFacade(ISurveyInfoRepository iSurveyInfoRepository, ISurveyAnswerRepository iSurveyResponseRepository,
                                   Epi.Web.Common.Message.SurveyInfoRequest surveyInfoRequest, Epi.Web.Common.Message.SurveyAnswerRequest surveyResponseRequest,
                                   Common.DTO.SurveyAnswerDTO surveyAnswerDTO,
-                                   SurveyResponseXML surveyResponseXML)
+                                   SurveyResponseXML surveyResponseXML, UserAuthenticationRequest surveyAuthenticationRequest, Epi.Web.Common.DTO.PassCodeDTO PassCodeDTO)
         {
             _iSurveyInfoRepository = iSurveyInfoRepository;
             _iSurveyAnswerRepository = iSurveyResponseRepository;
@@ -42,6 +46,8 @@ namespace Epi.Web.MVC.Facade
             _surveyAnswerRequest = surveyResponseRequest;
             _surveyAnswerDTO = surveyAnswerDTO;
             _surveyResponseXML = surveyResponseXML;
+            _surveyAuthenticationRequest = surveyAuthenticationRequest;
+            _PassCodeDTO = PassCodeDTO;
         }
 
         /// <summary>
@@ -109,7 +115,28 @@ namespace Epi.Web.MVC.Facade
             SurveyAnswerResponse surveyAnswerResponse = _iSurveyAnswerRepository.GetSurveyAnswer(_surveyAnswerRequest);
             return surveyAnswerResponse;
         }
+
+        public UserAuthenticationResponse ValidateUser(string responseId,string passcode)
+        {
+            _surveyAuthenticationRequest.PassCode = passcode;
+            _surveyAuthenticationRequest.SurveyResponseId = responseId;
+            UserAuthenticationResponse AuthenticationResponse = _iSurveyAnswerRepository.ValidateUser(_surveyAuthenticationRequest);
+            return AuthenticationResponse;
+        }
+        public void UpdatePassCode(string ResponseId, string Passcode ) {
+
+            // convert DTO to  UserAuthenticationRquest
+            _PassCodeDTO.ResponseId = ResponseId;
+            _PassCodeDTO.PassCode = Passcode;
+            UserAuthenticationRequest AuthenticationRequestObj = Mapper.ToUserAuthenticationObj(_PassCodeDTO);
+            SurveyHelper.UpdatePassCode(AuthenticationRequestObj, _iSurveyAnswerRepository);
         
-        
+        }
+        public UserAuthenticationResponse GetAuthenticationResponse(string responseId) {
+
+            _surveyAuthenticationRequest.SurveyResponseId = responseId;
+            UserAuthenticationResponse AuthenticationResponse = _iSurveyAnswerRepository.GetAuthenticationResponse(_surveyAuthenticationRequest);
+            return AuthenticationResponse;
+        }
     }
 }
