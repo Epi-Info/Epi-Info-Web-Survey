@@ -7,6 +7,7 @@ using System.Xml.XPath;
 using System.Linq;
 using Epi.Core.EnterInterpreter;
 using System.Collections.Generic;
+using System.Web.Security;
 
 namespace Epi.Web.MVC.Controllers
 {
@@ -46,7 +47,7 @@ namespace Epi.Web.MVC.Controllers
              if surveyInfodto.SurveyName== null then go to the exception page*/
             try
             {
-
+                 
               //  TempData[Epi.Web.MVC.Constants.Constant.RESPONSE_ID] = "";
                 SurveyInfoModel surveyInfoModel = _isurveyFacade.GetSurveyInfoModel(surveyid);
                 return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, surveyInfoModel);
@@ -71,7 +72,7 @@ namespace Epi.Web.MVC.Controllers
         {
             try
             {
-
+                FormsAuthentication.SetAuthCookie("BeginSurvey", false);
                 //put the ResponseId in Temp data for later use
                 //TempData[Epi.Web.MVC.Constants.Constant.RESPONSE_ID] = ResponseID.ToString();
 

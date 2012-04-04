@@ -188,9 +188,53 @@ namespace Epi.Web.EF
                 DataRow.DateCompleted = DateTime.Now;
                 DataRow.StatusId = SurveyResponse.Status;
                 DataRow.DateLastUpdated = DateTime.Now;
-                
+             //   DataRow.ResponsePasscode = SurveyResponse.ResponsePassCode;
                 Context.SaveChanges();
             }
+        }
+        public void UpdatePassCode(UserAuthenticationRequestBO passcodeBO) {
+
+
+            Guid Id = new Guid(passcodeBO.ResponseId);
+
+            //Update Survey
+            using (var Context = DataObjectFactory.CreateContext())
+            {
+                var Query = from response in Context.SurveyResponses
+                            where response.ResponseId == Id
+                            select response;
+
+                var DataRow = Query.Single();
+                
+                DataRow.ResponsePasscode = passcodeBO.PassCode;
+                Context.SaveChanges();
+            }
+        }
+        public UserAuthenticationResponseBO GetAuthenticationResponse(UserAuthenticationRequestBO passcodeBO)
+        {
+
+            try
+            {
+                Guid Id = new Guid(passcodeBO.ResponseId);
+
+
+                using (var Context = DataObjectFactory.CreateContext())
+                {
+                    SurveyResponse surveyResponse = Context.SurveyResponses.First(x => x.ResponseId == Id);
+                    if (surveyResponse != null)
+                    {
+                        passcodeBO.PassCode = surveyResponse.ResponsePasscode;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // do nothing for now
+            }
+
+            UserAuthenticationResponseBO UserAuthenticationResponseBO = Mapper.ToAuthenticationResponseBO(passcodeBO);
+            return UserAuthenticationResponseBO;
+
         }
 
         /// <summary>

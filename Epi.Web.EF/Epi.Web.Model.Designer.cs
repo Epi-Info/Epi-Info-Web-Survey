@@ -959,6 +959,30 @@ namespace Epi.Web.EF
         private global::System.String _ResponseXML;
         partial void OnResponseXMLChanging(global::System.String value);
         partial void OnResponseXMLChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String ResponsePasscode
+        {
+            get
+            {
+                return _ResponsePasscode;
+            }
+            set
+            {
+                OnResponsePasscodeChanging(value);
+                ReportPropertyChanging("ResponsePasscode");
+                _ResponsePasscode = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("ResponsePasscode");
+                OnResponsePasscodeChanged();
+            }
+        }
+        private global::System.String _ResponsePasscode;
+        partial void OnResponsePasscodeChanging(global::System.String value);
+        partial void OnResponsePasscodeChanged();
 
         #endregion
     
