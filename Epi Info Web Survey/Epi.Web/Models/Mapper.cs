@@ -95,7 +95,15 @@ namespace Epi.Web.MVC.Models
             };
         }
 
+        public static Epi.Web.Common.Message.UserAuthenticationRequest ToUserAuthenticationObj(Epi.Web.Common.DTO.PassCodeDTO pDTO)
+        {
+            return new Epi.Web.Common.Message.UserAuthenticationRequest
+            {
+                SurveyResponseId =pDTO.ResponseId,
+                PassCode =pDTO.PassCode
 
+            };
+        }
 
     }
 }

@@ -10,6 +10,7 @@ using System.Xml.XPath;
 using Epi.Core.EnterInterpreter;
 namespace Epi.Web.MVC.Controllers
 {
+        [Authorize]
     public class SurveyController : Controller
     {
 
@@ -38,12 +39,15 @@ namespace Epi.Web.MVC.Controllers
        /// <returns></returns>
  
         [HttpGet]
+        
+         
         public ActionResult Index(string responseId, int PageNumber = 0)
         {
 
-         
+
             try
             {
+                 
                
                 Epi.Web.Common.DTO.SurveyAnswerDTO surveyAnswerDTO = GetSurveyAnswer(responseId);
                 SurveyInfoModel surveyInfoModel = _isurveyFacade.GetSurveyInfoModel(surveyAnswerDTO.SurveyId);
@@ -175,6 +179,17 @@ namespace Epi.Web.MVC.Controllers
                             
                             IsSaved = form.IsSaved = true;
                             form.StatusId = SurveyAnswer.Status;
+
+
+                            Epi.Web.Common.Message.UserAuthenticationResponse AuthenticationResponse = _isurveyFacade.GetAuthenticationResponse(responseId);
+
+                            if (string.IsNullOrEmpty(AuthenticationResponse.PassCode))
+                            {
+                                Guid PassCode = Guid.NewGuid();
+
+                               
+                                _isurveyFacade.UpdatePassCode(responseId, PassCode.ToString().Substring(0, 4));
+                            }
                              _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId, form, SurveyAnswer, IsSubmited, IsSaved, PageNumber);
                                 
                                 return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);

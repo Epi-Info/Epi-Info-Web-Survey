@@ -26,6 +26,19 @@ namespace Epi.Web.DataServiceClient {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/SetSurveyAnswer", ReplyAction="http://tempuri.org/IDataService/SetSurveyAnswerResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(Epi.Web.Common.Exception.CustomFaultException), Action="http://tempuri.org/IDataService/SetSurveyAnswerCustomFaultExceptionFault", Name="CustomFaultException", Namespace="http://www.yourcompany.com/types/")]
         Epi.Web.Common.Message.SurveyAnswerResponse SetSurveyAnswer(Epi.Web.Common.Message.SurveyAnswerRequest pRequest);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/PassCodeLogin", ReplyAction="http://tempuri.org/IDataService/PassCodeLoginResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Epi.Web.Common.Exception.CustomFaultException), Action="http://tempuri.org/IDataService/PassCodeLoginCustomFaultExceptionFault", Name="CustomFaultException", Namespace="http://www.yourcompany.com/types/")]
+        Epi.Web.Common.Message.UserAuthenticationResponse PassCodeLogin(Epi.Web.Common.Message.UserAuthenticationRequest pRequest);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/SetPassCode", ReplyAction="http://tempuri.org/IDataService/SetPassCodeResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Epi.Web.Common.Exception.CustomFaultException), Action="http://tempuri.org/IDataService/SetPassCodeCustomFaultExceptionFault", Name="CustomFaultException", Namespace="http://www.yourcompany.com/types/")]
+        Epi.Web.Common.Message.UserAuthenticationResponse SetPassCode(Epi.Web.Common.Message.UserAuthenticationRequest pRequest);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/GetAuthenticationResponse", ReplyAction="http://tempuri.org/IDataService/GetAuthenticationResponseResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Epi.Web.Common.Exception.CustomFaultException), Action="http://tempuri.org/IDataService/GetAuthenticationResponseCustomFaultExceptionFaul" +
+            "t", Name="CustomFaultException", Namespace="http://www.yourcompany.com/types/")]
+        Epi.Web.Common.Message.UserAuthenticationResponse GetAuthenticationResponse(Epi.Web.Common.Message.UserAuthenticationRequest pRequest);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -65,6 +78,18 @@ namespace Epi.Web.DataServiceClient {
         
         public Epi.Web.Common.Message.SurveyAnswerResponse SetSurveyAnswer(Epi.Web.Common.Message.SurveyAnswerRequest pRequest) {
             return base.Channel.SetSurveyAnswer(pRequest);
+        }
+        
+        public Epi.Web.Common.Message.UserAuthenticationResponse PassCodeLogin(Epi.Web.Common.Message.UserAuthenticationRequest pRequest) {
+            return base.Channel.PassCodeLogin(pRequest);
+        }
+        
+        public Epi.Web.Common.Message.UserAuthenticationResponse SetPassCode(Epi.Web.Common.Message.UserAuthenticationRequest pRequest) {
+            return base.Channel.SetPassCode(pRequest);
+        }
+        
+        public Epi.Web.Common.Message.UserAuthenticationResponse GetAuthenticationResponse(Epi.Web.Common.Message.UserAuthenticationRequest pRequest) {
+            return base.Channel.GetAuthenticationResponse(pRequest);
         }
     }
 }

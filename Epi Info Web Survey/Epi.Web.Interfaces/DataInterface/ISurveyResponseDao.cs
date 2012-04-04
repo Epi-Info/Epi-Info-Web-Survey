@@ -82,5 +82,8 @@ namespace Epi.Web.Interfaces.DataInterfaces
         /// </summary>
         /// <param name="SurveyResponse">SurveyResponse.</param>
          void DeleteSurveyResponse(SurveyResponseBO SurveyResponse);
+
+         void UpdatePassCode(UserAuthenticationRequestBO passcodeBO);
+         UserAuthenticationResponseBO GetAuthenticationResponse(UserAuthenticationRequestBO passcodeBO);
     }
 }
