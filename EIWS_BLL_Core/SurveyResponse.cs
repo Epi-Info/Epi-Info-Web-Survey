@@ -21,6 +21,53 @@ namespace Epi.Web.BLL
             return result;
         }
 
+        //Validate User
+        public bool ValidateUser(UserAuthenticationRequestBO PassCodeBoObj)
+        {
+            string PassCode = PassCodeBoObj.PassCode;
+            string ResponseId = PassCodeBoObj.ResponseId;
+            List<string> ResponseIdList = new List<string> ();
+            ResponseIdList.Add(PassCodeBoObj.ResponseId);
+ 
+            UserAuthenticationResponseBO results = this.SurveyResponseDao.GetAuthenticationResponse(PassCodeBoObj);
+                
+             
+
+            bool ISValidUser = false;
+
+            if ( results != null)
+            {
+
+                if (results.PassCode == PassCode)
+                {
+                    ISValidUser = true;
+
+
+                }
+                else
+                {
+                    ISValidUser = false;
+                }
+            }
+            return ISValidUser;
+        }
+        //Save Pass code 
+        public void SavePassCode( UserAuthenticationRequestBO pValue)
+        {
+            UserAuthenticationRequestBO result = pValue;
+            this.SurveyResponseDao.UpdatePassCode(pValue);
+          
+
+           
+        }
+        // Get Authentication Response
+        public UserAuthenticationResponseBO GetAuthenticationResponse(UserAuthenticationRequestBO pValue)
+        {
+            UserAuthenticationResponseBO result = this.SurveyResponseDao.GetAuthenticationResponse(pValue);
+
+            return result; 
+
+        }
         public List<SurveyResponseBO> GetSurveyResponseBySurveyId(List<String> pSurveyIdList, Guid UserPublishKey)
         {
             List<SurveyResponseBO> result = this.SurveyResponseDao.GetSurveyResponseBySurveyId(pSurveyIdList, UserPublishKey);
