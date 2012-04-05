@@ -11,6 +11,7 @@ using System.Linq;
 using System.Web;
 using System.Collections.Generic;
 using System.Xml.XPath;
+using System.Text.RegularExpressions;
 namespace Epi.Web.MVC.Utility
 {
     public class SurveyHelper
@@ -304,6 +305,22 @@ namespace Epi.Web.MVC.Utility
 
             iSurveyAnswerRepository.UpdatePassCode(AuthenticationRequest);
 
+        }
+        public static string GetPassCode() {
+
+            Guid Guid = Guid.NewGuid();
+            string Passcode = Guid.ToString().Substring(0, 4);
+            return Passcode;
+        }
+        public static bool IsGuid(string expression)
+        {
+            if (expression != null)
+            {
+                Regex guidRegEx = new Regex(@"^(\{{0,1}([0-9a-fA-F]){8}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){12}\}{0,1})$");
+
+                return guidRegEx.IsMatch(expression);
+            }
+            return false;
         }
     }
 }
