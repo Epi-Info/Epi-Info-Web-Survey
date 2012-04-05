@@ -180,16 +180,14 @@ namespace Epi.Web.MVC.Controllers
                             IsSaved = form.IsSaved = true;
                             form.StatusId = SurveyAnswer.Status;
 
-
+                            // Pass Code Logic  start 
                             Epi.Web.Common.Message.UserAuthenticationResponse AuthenticationResponse = _isurveyFacade.GetAuthenticationResponse(responseId);
 
                             if (string.IsNullOrEmpty(AuthenticationResponse.PassCode))
                             {
-                                Guid PassCode = Guid.NewGuid();
-
-                               
-                                _isurveyFacade.UpdatePassCode(responseId, PassCode.ToString().Substring(0, 4));
+                                _isurveyFacade.UpdatePassCode(responseId, Epi.Web.MVC.Utility.SurveyHelper.GetPassCode());
                             }
+                            // Pass Code Logic  end 
                              _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId, form, SurveyAnswer, IsSubmited, IsSaved, PageNumber);
                                 
                                 return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
