@@ -10,6 +10,7 @@ using System.Xml.XPath;
 using Epi.Core.EnterInterpreter;
 using System.Web.Security;
 
+
 namespace Epi.Web.MVC.Controllers
 {
     public class LoginController : Controller
@@ -41,8 +42,19 @@ namespace Epi.Web.MVC.Controllers
        {
 
 
-           string[] temp = ReturnUrl.Split('/');
-           responseId = temp[3] ;
+           string[] expressions = ReturnUrl.Split('/');
+
+           foreach (var expression in expressions)
+           {
+               if (Epi.Web.MVC.Utility.SurveyHelper.IsGuid(expression))
+               {
+
+                       responseId = expression;
+                       break;
+               }
+           
+           }
+           
 
            Epi.Web.Common.Message.UserAuthenticationResponse result = _isurveyFacade.ValidateUser(responseId, Model.PassCode);
 
@@ -59,5 +71,6 @@ namespace Epi.Web.MVC.Controllers
                return View();
            }
        }
+      
     }
 }

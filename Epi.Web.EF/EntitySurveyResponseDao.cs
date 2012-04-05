@@ -210,12 +210,14 @@ namespace Epi.Web.EF
                 Context.SaveChanges();
             }
         }
-        public UserAuthenticationResponseBO GetAuthenticationResponse(UserAuthenticationRequestBO passcodeBO)
+        public UserAuthenticationResponseBO GetAuthenticationResponse(UserAuthenticationRequestBO UserAuthenticationRequestBO)
         {
 
+            UserAuthenticationResponseBO UserAuthenticationResponseBO = Mapper.ToAuthenticationResponseBO(UserAuthenticationRequestBO);
             try
             {
-                Guid Id = new Guid(passcodeBO.ResponseId);
+
+                Guid Id = new Guid(UserAuthenticationRequestBO.ResponseId);
 
 
                 using (var Context = DataObjectFactory.CreateContext())
@@ -223,16 +225,14 @@ namespace Epi.Web.EF
                     SurveyResponse surveyResponse = Context.SurveyResponses.First(x => x.ResponseId == Id);
                     if (surveyResponse != null)
                     {
-                        passcodeBO.PassCode = surveyResponse.ResponsePasscode;
+                        UserAuthenticationResponseBO.PassCode = surveyResponse.ResponsePasscode;
                     }
                 }
             }
             catch (Exception ex)
             {
-                // do nothing for now
+                throw (ex);
             }
-
-            UserAuthenticationResponseBO UserAuthenticationResponseBO = Mapper.ToAuthenticationResponseBO(passcodeBO);
             return UserAuthenticationResponseBO;
 
         }
