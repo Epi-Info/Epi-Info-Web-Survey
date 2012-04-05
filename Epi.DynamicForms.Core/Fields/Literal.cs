@@ -41,7 +41,12 @@ namespace MvcDynamicForms.Fields
                     wrapper.Attributes["class"] = this._cssClass;
                 }
 
-                Html = MvcHtmlString.Create(Html.Replace(" ", "&nbsp;")).ToString();
+
+                System.Text.RegularExpressions.Regex regex = new System.Text.RegularExpressions.Regex(@"(\r\n|\r|\n)+");
+
+                string newText = regex.Replace(Html.Replace(" ", "&nbsp;"), "<br />");
+
+                Html = MvcHtmlString.Create(newText).ToString();
 
                 wrapper.Attributes["ID"] = "labelmvcdynamicfield_" + Name.ToLower();
                
