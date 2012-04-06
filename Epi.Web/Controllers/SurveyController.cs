@@ -8,6 +8,7 @@ using System.Xml;
 using System.Xml.Linq;
 using System.Xml.XPath;
 using Epi.Core.EnterInterpreter;
+using System.Web.Security;
 namespace Epi.Web.MVC.Controllers
 {
         [Authorize]
@@ -39,8 +40,8 @@ namespace Epi.Web.MVC.Controllers
        /// <returns></returns>
  
         [HttpGet]
-        
-         
+
+        [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")] 
         public ActionResult Index(string responseId, int PageNumber = 0)
         {
 
@@ -88,7 +89,9 @@ namespace Epi.Web.MVC.Controllers
             //}
             //return null;
         }
-        [HttpPost] [ValidateAntiForgeryToken]
+        [HttpPost]
+        [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
+        [ValidateAntiForgeryToken]
         //public ActionResult Index(SurveyInfoModel surveyInfoModel, string Submitbutton, string Savebutton, string ContinueButton, string PreviousButton, int PageNumber = 1)
         public ActionResult Index(SurveyAnswerModel surveyAnswerModel, string Submitbutton, string Savebutton, string ContinueButton, string PreviousButton, int PageNumber = 0)
         {
@@ -244,7 +247,7 @@ namespace Epi.Web.MVC.Controllers
                                 
                                 IsSubmited = true;//survey has been submited this will change the survey status to 3 - Completed
                                 _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId, form, SurveyAnswer, IsSubmited, IsSaved, PageNumber);
-
+                                FormsAuthentication.SignOut();
                                 return RedirectToAction("Index", "Final", new { surveyId = surveyInfoModel.SurveyId });
                             }
                             else

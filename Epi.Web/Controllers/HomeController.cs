@@ -8,6 +8,7 @@ using System.Linq;
 using Epi.Core.EnterInterpreter;
 using System.Collections.Generic;
 using System.Web.Security;
+ 
 
 namespace Epi.Web.MVC.Controllers
 {
@@ -40,6 +41,8 @@ namespace Epi.Web.MVC.Controllers
         /// </summary>
         /// <param name="surveyid"></param>
         /// <returns></returns>
+        
+        
         [HttpGet]
         public ActionResult Index(string surveyid)
         {
@@ -47,7 +50,9 @@ namespace Epi.Web.MVC.Controllers
              if surveyInfodto.SurveyName== null then go to the exception page*/
             try
             {
-                 
+                FormsAuthentication.SignOut();
+               
+
               //  TempData[Epi.Web.MVC.Constants.Constant.RESPONSE_ID] = "";
                 SurveyInfoModel surveyInfoModel = _isurveyFacade.GetSurveyInfoModel(surveyid);
                 return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, surveyInfoModel);
