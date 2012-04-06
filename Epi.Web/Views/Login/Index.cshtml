@@ -5,14 +5,30 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Log In</h1>
+<div id="header"><h1>Epi Info Web Survey </h1></div>
 
-<p>Please enter survey pass code:</p>
-@using(Html.BeginForm()) {
+
+<div id="content">
+
+<p>Please enter the survey pass code provided along with the survey link to view your responses.</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+<div class="Logsin">
+  
+<div class="LogHead"><h2 style="font-size: 18px; padding-bottom:6px;">Enter Pass Code </h2></div>   
+<div class="logbody">  
+
+@using (Html.BeginForm())
+{
     @Html.ValidationSummary(true)
-   
+    <p style="margin-bottom:2px; font-size:10pt; font-weight:bold;"><label for="Passcode">Pass Code:</label>
     
-   @Html.TextBoxFor(m=>m.PassCode);
     
-    <p><input type="submit" value="Log in" /></p>
+   @Html.TextBoxFor(m => m.PassCode)
+    
+ <button style="margin-left:10px; width:50px;" type="submit" value="Log in" class="login">Go</button></p>
 }
+</div> 
+</div>
+</div>

@@ -193,7 +193,7 @@ bottom:80px;
  float: right;
  }
 
-button.exitsurvey:hover,  button.save:hover, button.prev:hover, button.next:hover, button.begin:hover, button.submits:hover
+button.exitsurvey:hover,  button.save:hover, button.prev:hover, button.next:hover, button.begin:hover, button.submits:hover, button.login:hover
  {
  cursor: pointer;
  opacity: 0.8;
@@ -204,7 +204,7 @@ img.button
  vertical-align:text-top;
  }
  
-button.save, button.prev, button.next, button.begin
+button.save, button.prev, button.next, button.begin, button.login
  {
  border: 1px #4e9689 solid;
  -moz-border-radius: 10px;
@@ -355,7 +355,10 @@ behavior: url('../Scripts/PIE.htc');
 	font-family: "Segoe UI", Tahoma, Geneva, Verdana, AriaL, sans-serif;  
 	font-size: 10pt;  
 	/*white-space: pre;*/
+	white-space:normal;
+	display:block;
 }
+
  textarea
  {
      resize: none; 
@@ -426,3 +429,66 @@ button.copylink
    text-decoration: none;
      
  }
+ 
+/*Styles for Log In Page*/
+.Logsin
+{
+  width: 340px; 
+  border: 1px solid #4e9689;  
+  -moz-border-radius: 10px; 
+  -webkit-border-radius: 10px; 
+  -khtml-border-radius: 10px; 
+  border-radius: 10px; 
+  behavior: url('../Scripts/PIE.htc');
+  margin-left:auto;
+  margin-right:auto;
+}
+
+.LogHead
+{
+    background:#87d69b; 
+    padding-top:5px; 
+    padding-left:20px; 
+    -moz-border-radius: 10px 10px 0 0; 
+    border-radius: 10px 10px 0 0; 
+    behavior: url('../Scripts/PIE.htc');
+}
+
+.logbody
+{
+    padding:0px 20px 40px 20px;
+}
+
+.validation-summary-errors
+{
+    
+    background: #fbe1dd;
+    border: 1px solid #e6482d;
+    padding:3px 5px 3px 2px;
+    margin:5px 0 10px 0;
+    -moz-border-radius: 10px; 
+    border-radius: 10px; 
+    behavior: url('../Scripts/PIE.htc');
+}
+.validation-summary-errors li
+{
+   
+   background-image: url('../images/error2.png') !important;
+  background-position:1px center !important;
+  background-repeat:no-repeat !important;
+     font-size: 10pt;
+    font-weight: bold;
+    color: #000;
+    list-style-type:none;
+    margin-left:2px;
+    padding-left: 30px;
+    font-size:9pt;
+    
+}
+
+.validation-summary-errors ul
+{
+    margin:2px 0 2px 0; 
+    padding:0px;
+    
+}
