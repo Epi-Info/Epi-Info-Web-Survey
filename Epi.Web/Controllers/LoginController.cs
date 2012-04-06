@@ -67,7 +67,7 @@ namespace Epi.Web.MVC.Controllers
            }
            else
            {
-               ModelState.AddModelError("", "Incorrect Pass code");
+               ModelState.AddModelError("", "Pass code is incorrect.");
                return View();
            }
        }
