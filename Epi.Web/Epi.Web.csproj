@@ -170,6 +170,7 @@
     <Content Include="Content\images\cdclogo.png" />
     <Content Include="Content\images\epi.png" />
     <Content Include="Content\images\error.png" />
+    <Content Include="Content\images\error2.png" />
     <Content Include="Content\images\go.png" />
     <Content Include="Content\images\logo_dhhs.gif" />
     <Content Include="Content\images\next.png" />
