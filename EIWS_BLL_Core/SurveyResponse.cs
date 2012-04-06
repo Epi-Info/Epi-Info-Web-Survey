@@ -35,7 +35,7 @@ namespace Epi.Web.BLL
 
             bool ISValidUser = false;
 
-            if ( results != null)
+            if (results != null && !string.IsNullOrEmpty(PassCode))
             {
 
                 if (results.PassCode == PassCode)
