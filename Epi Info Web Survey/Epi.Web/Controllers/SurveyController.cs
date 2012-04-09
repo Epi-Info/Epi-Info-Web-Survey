@@ -186,9 +186,19 @@ namespace Epi.Web.MVC.Controllers
                             // Pass Code Logic  start 
                             Epi.Web.Common.Message.UserAuthenticationResponse AuthenticationResponse = _isurveyFacade.GetAuthenticationResponse(responseId);
 
+                            string strPassCode = Epi.Web.MVC.Utility.SurveyHelper.GetPassCode();
                             if (string.IsNullOrEmpty(AuthenticationResponse.PassCode))
                             {
-                                _isurveyFacade.UpdatePassCode(responseId, Epi.Web.MVC.Utility.SurveyHelper.GetPassCode());
+                                _isurveyFacade.UpdatePassCode(responseId, strPassCode);
+                            }
+                            if (AuthenticationResponse.PassCode == null)
+                            {
+                                form.PassCode = strPassCode;
+
+                            }
+                            else
+                            {
+                                form.PassCode = AuthenticationResponse.PassCode;
                             }
                             // Pass Code Logic  end 
                              _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId, form, SurveyAnswer, IsSubmited, IsSaved, PageNumber);
