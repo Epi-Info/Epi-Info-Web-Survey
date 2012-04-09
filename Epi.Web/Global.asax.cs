@@ -61,6 +61,15 @@ namespace Epi.Web.MVC
               );  // Parameter defaults
 
 
+            routes.MapRoute
+           (
+             null,                                              // Route name
+             "Post/SignOut/{id}",                           // URL with parameters
+             new { controller = "Post", action = "SignOut", id = "" }
+             );  // Parameter defaults
+
+
+
             routes.MapRoute(
                "Default", // Route name
                "{*url}", // URL with parameters
