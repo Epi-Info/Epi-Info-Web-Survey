@@ -29,6 +29,30 @@ function NotifyByEmail(emailAddress, redirectUrl, surveyName, postUrl,passCode) 
 
 }
 
+function SignOutAndRedirect(signoutUrl,homePageUrl) {
+    //post to the login/SignOut action method and signout after that redirect to home page
+   
+    var user = {
+        __RequestVerificationToken: $("input[name=__RequestVerificationToken]").val()
+    };
+
+    $.post(
+            signoutUrl,
+            user,
+            function (data) {
+                if (data === true) {
+                    window.location.href = homePageUrl; //rerirecting to home page
+                }
+                else {
+
+                    alert('Unable to sign out');
+
+                }
+            },
+            'json'
+        );
+}
+
 /*generating Url*/
 function GetRedirectionUrl() {
     //debugger;
