@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Epi.Web.Utility;
+using System.Web.Security;
 namespace Epi.Web.Controllers
 {
     public class PostController : Controller
@@ -25,6 +26,27 @@ namespace Epi.Web.Controllers
                 return Json(false);
             }
         }
+
+
+        /// <summary>
+        /// Sign out a Survey Instance
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public JsonResult SignOut()
+        {
+            try
+            {
+                FormsAuthentication.SignOut();
+                return Json(true);
+            }
+            catch (Exception ex)
+            {
+                return Json(false);
+            }
+        } 
+
       
     }
 }

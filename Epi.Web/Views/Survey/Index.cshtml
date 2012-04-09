@@ -129,7 +129,7 @@
             if (ValidateEmail(emailAddress) && ValidateEmail(confirmemail)) {
                 if ($.trim(emailAddress) == $.trim(confirmemail)) {
                     //Call notify function to send notification
-                    NotifyByEmail(emailAddress, redirectUrl, surveyName, postUrl,passCode);
+                    NotifyByEmail(emailAddress, redirectUrl, surveyName, postUrl, passCode);
                     //close the modal popup after processing
                     $("#dialog").dialog("close");
                 }
@@ -146,8 +146,10 @@
 
         /*Exit the survey */
         $("#close").click(function () {
-
-            window.location.href = '@Url.Action("Index","Home")' + '/' + '@Model.SurveyInfo.SurveyId'; //'http://wwwn.cdc.gov/epiinfo/';
+            
+            var signoutUrl = '@Url.Action("SignOut","Post")';
+            var homePageUrl = '@Url.Action("Index","Home")' + '/' + '@Model.SurveyInfo.SurveyId'; //'http://wwwn.cdc.gov/epiinfo/';
+            SignOutAndRedirect(signoutUrl, homePageUrl);
         });
 
 

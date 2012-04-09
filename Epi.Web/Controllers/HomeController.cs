@@ -50,7 +50,7 @@ namespace Epi.Web.MVC.Controllers
              if surveyInfodto.SurveyName== null then go to the exception page*/
             try
             {
-                FormsAuthentication.SignOut();
+               // FormsAuthentication.SignOut();
                
 
               //  TempData[Epi.Web.MVC.Constants.Constant.RESPONSE_ID] = "";
