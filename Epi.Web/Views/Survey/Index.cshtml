@@ -74,7 +74,7 @@
 
     $(document).ready(function () {
         // a workaround for a flaw in the demo system (http://dev.jqueryui.com/ticket/4375), ignore!
-
+        
 
         $("#dialog").dialog({
             autoOpen: false,
@@ -87,17 +87,25 @@
         var responseUrl = GetRedirectionUrl();
         $('#url').val(responseUrl);
 
+        var passcode = '@Model.PassCode';
+        $('#spPassCode').text(passcode);
 
         if ('@Model.IsSaved' == 'True') {
 
             if ('@Model.StatusId' == '1') { //if clicking the save button for the first time
                 $('#successContent').show();
                 $('#successContent').append('<div class="success"><img src="@Url.Content("~/Content/images/button_check.png")" style="vertical-align:middle; padding-right: 10px;" alt=""/> Your survey has been saved.<button id="copy" type="button" name="copy" class="copylink">Get Survey Link</button></div>')
+
+                
+
                 //call your jquery modal popup method
                 $("#dialog").dialog("open");
-
+                
             }
             else {
+
+                
+
                 $('#successContent').show(); //in subsequest click we just show that the survey has been saved not the modal popup
                 $('#successContent').append('<div class="success"><img src="@Url.Content("~/Content/images/button_check.png")" style="vertical-align:middle; padding-right: 10px;" alt=""/> Your survey has been saved.<button id="copy" type="button" name="copy" class="copylink">Get Survey Link</button></div>')
             }
@@ -115,12 +123,13 @@
             var redirectUrl = GetRedirectionUrl();
             //var surveyName = $("#_surveyName").val();
             var surveyName = '@Model.SurveyInfo.SurveyName';
+            var passCode = $('#spPassCode').text();
             //url to post for email to be sent
             var postUrl = '@Url.Action("Notify","Post")';
             if (ValidateEmail(emailAddress) && ValidateEmail(confirmemail)) {
                 if ($.trim(emailAddress) == $.trim(confirmemail)) {
                     //Call notify function to send notification
-                    NotifyByEmail(emailAddress, redirectUrl, surveyName, postUrl);
+                    NotifyByEmail(emailAddress, redirectUrl, surveyName, postUrl,passCode);
                     //close the modal popup after processing
                     $("#dialog").dialog("close");
                 }
@@ -327,12 +336,12 @@
      
       <div class="demo">
               <div id="dialog" title="Your Survey has been saved.">
-	            <p>Please copy and save the survey link to return to the survey at a later time.</p>
- 	            <p>@*<input  id="url" type="text" style="width: 250px;"/>*@
-                <textarea id="url" cols="70" rows="3" style="white-space:pre;" readonly="readonly"></textarea>
- 	           @* <button id="copyClipboard" type="button" name="copy">Copy Link</button>*@</p>
+	            <p>Please copy and save the survey link as well as the Pass Code to return to the survey at a later time.</p>
+                <p>Survey Url:<br /><textarea id="url" cols="65" rows="3" style="white-space:pre;" readonly="readonly"></textarea></p>
+ 	          
+               <p>Pass Code: <span id="spPassCode"></span></p>
  	            <hr/>
- 	            <p>Optionally enter your email address to have the survey link emailed to you.</p>
+ 	            <p>Optionally enter your email address to have the survey link and the Pass Code emailed to you.</p>
  	            
                
                 

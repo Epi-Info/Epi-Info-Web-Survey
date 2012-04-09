@@ -297,7 +297,8 @@ namespace MvcDynamicForms
         /// </summary>
         public string ResponseId { get; set; }
         public int StatusId { get; set; }
-
+        // To return to survey after exit
+        public string PassCode { get; set; }
         public string HiddenFieldsList 
         { 
             get; set;
