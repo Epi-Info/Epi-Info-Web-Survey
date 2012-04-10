@@ -29,6 +29,15 @@ namespace Epi.Web.MVC
                 "Home/{surveyid}", // URL with parameters
                 new { controller = "Home", action = "Index", surveyid = UrlParameter.Optional }
             ); // Parameter defaults
+
+            routes.MapRoute
+     (
+       null,                                              // Route name
+       "Survey/UpdateResponseXml/{id}",                           // URL with parameters
+       new { controller = "Survey", action = "UpdateResponseXml", id = "" }
+       );  // Parameter defaults
+
+
             routes.MapRoute
                 (
                     null, // Route name
@@ -60,6 +69,8 @@ namespace Epi.Web.MVC
               new { controller = "Post", action = "Notify", id = "" }
               );  // Parameter defaults
 
+
+        
 
             routes.MapRoute
            (
