@@ -425,6 +425,38 @@ namespace Epi.Web.MVC.Controllers
 
             return List;
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public JsonResult UpdateResponseXml(string Name, string Value, string responseId)
+        {
+            try
+            {
+                Epi.Web.Common.DTO.SurveyAnswerDTO SurveyAnswer = _isurveyFacade.GetSurveyAnswerResponse(responseId).SurveyResponseList[0];
+
+                SurveyInfoModel surveyInfoModel = _isurveyFacade.GetSurveyInfoModel(SurveyAnswer.SurveyId);
+
+                int NumberOfPages = Epi.Web.MVC.Utility.SurveyHelper.GetNumberOfPags(SurveyAnswer.XML);
+                    
+                     
+                for (int i = NumberOfPages; i > 0; i--)
+                {
+                    SurveyAnswer = _isurveyFacade.GetSurveyAnswerResponse(SurveyAnswer.ResponseId).SurveyResponseList[0];
+
+                    MvcDynamicForms.Form formRs = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, i, SurveyAnswer);
+
+                     formRs = Epi.Web.MVC.Utility.SurveyHelper.UpdateControlsValues(formRs, Name,Value);
+
+                    _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, SurveyAnswer.ResponseId, formRs, SurveyAnswer, false, false, i);
+
+                }
+                return Json(true);
+            }
+            catch (Exception ex)
+            {
+                return Json(false);
+            }
+        } 
+
 
     }
 }
