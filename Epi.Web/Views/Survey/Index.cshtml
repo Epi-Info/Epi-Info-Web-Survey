@@ -164,7 +164,16 @@
 
     });
  
-
+ 
+ function updateXml(pName, pValue) {
+ 
+   
+            var UpdateUrl = '@Url.Action("UpdateResponseXml","Survey")';
+           
+            UpdateResponse(UpdateUrl,pName, pValue,'@Model.ResponseId');
+            
+            }
+ 
  
    
 </script>

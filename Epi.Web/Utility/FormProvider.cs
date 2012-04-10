@@ -80,9 +80,8 @@ namespace Epi.Web.MVC.Utility
                 
 
                 form.FormCheckCodeObj = form.GetCheckCodeObj(xdoc, xdocResponse, checkcode);
-                
 
-
+           
                 form.FormCheckCodeObj.GetVariableJavaScript(VariableDefinitions);
                 form.FormCheckCodeObj.GetSubroutineJavaScript(VariableDefinitions);
                 
@@ -93,7 +92,7 @@ namespace Epi.Web.MVC.Utility
                 JavaScript.Append(GetPageLevelJS(PageNumber, form, PageName,"Before"));
                 //Generate page level Java script (After)
                 JavaScript.Append(GetPageLevelJS(PageNumber, form, PageName, "After"));
-
+                
                 foreach (var _FieldTypeID in _FieldsTypeIDs)
                 {
                     var Value = GetControlValue(SurveyAnswer, _FieldTypeID.Attribute("Name").Value);
@@ -103,10 +102,10 @@ namespace Epi.Web.MVC.Utility
 
                     if (_FieldTypeID.Attribute("Position").Value != (PageNumber - 1).ToString())
                     {
-                        form.AddFields(GetHiddenField(_FieldTypeID, _Width, _Height, SurveyAnswer, Value));
-                    }
-                    else
-                    {
+                    //    form.AddFields(GetHiddenField(_FieldTypeID, _Width, _Height, SurveyAnswer, Value));
+                   }
+                   else
+                   {
                         switch (_FieldTypeID.Attribute("FieldTypeId").Value)
                         {
                             case "1": // textbox
