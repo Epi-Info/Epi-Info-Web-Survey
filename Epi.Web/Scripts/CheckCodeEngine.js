@@ -282,19 +282,19 @@ CCE_Context.prototype.setValue = function (pName, pValue)
     var cce_Symbol = this.resolve(pName);
     if (cce_Symbol != null) 
     {
-     var query = '#mvcdynamicfield_' + pName;
+     var Jquery = '#mvcdynamicfield_' + pName;
 //        if (eval(document.getElementById(query)))
 //        {
-                if(cce_Symbol.Source == "datasource")
-                {
-                   
-                    $(query).val(pValue);
-                    cce_Symbol.Value = pValue;
-                }
-                else
-                {
-                    cce_Symbol.Value = pValue;
-                }
+//                if(cce_Symbol.Source == "datasource")
+//                {
+//                   
+//                    $(query).val(pValue);
+//                    cce_Symbol.Value = pValue;
+//                }
+//                else
+//                {
+//                    cce_Symbol.Value = pValue;
+//                }
 //        }
         
 //        else{
@@ -303,6 +303,23 @@ CCE_Context.prototype.setValue = function (pName, pValue)
 //       CCE_AddToFieldsList(FieldNameAndValue,"AssignList");
 //         
 //        }
+
+ var FieldName = 'mvcdynamicfield_' + pName;
+ if (eval(document.getElementById(FieldName)))
+        {
+            if(cce_Symbol.Source == "datasource")
+                {
+                   
+                    $(Jquery).val(pValue);
+                    cce_Symbol.Value = pValue;
+                }
+        }
+        else
+        {
+        
+        updateXml(pName, pValue) ;
+        
+        }
         
     }
 }

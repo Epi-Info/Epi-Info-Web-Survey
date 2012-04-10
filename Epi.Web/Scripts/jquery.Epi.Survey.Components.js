@@ -52,6 +52,31 @@ function SignOutAndRedirect(signoutUrl,homePageUrl) {
             'json'
         );
 }
+function UpdateResponse(UpdateUrl,pName, pValue,responseId) {
+    //post to the UpdateResponse action method and signout after that redirect to home page
+   
+    var user = {'Name': pName,
+        'Value': pValue,
+        'responseId':responseId,
+        __RequestVerificationToken: $("input[name=__RequestVerificationToken]").val()
+    };
+
+    $.post(
+            UpdateUrl,
+            user,
+            function (data) {
+                if (data === true) {
+                 
+                }
+                else {
+
+                    alert('Unable to Update');
+
+                }
+            },
+            'json'
+        );
+}
 
 /*generating Url*/
 function GetRedirectionUrl() {

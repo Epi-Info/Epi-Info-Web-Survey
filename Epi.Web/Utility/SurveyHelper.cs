@@ -259,7 +259,24 @@ namespace Epi.Web.MVC.Utility
 
             return form;
         }
+        public static MvcDynamicForms.Form UpdateControlsValues (MvcDynamicForms.Form form, string Name , string Value)
+        {
+ 
+            foreach (var field in form.InputFields)
+            {
+                string fieldName = field.Title;
 
+                if (Name.ToLower() == fieldName.ToLower())
+                {
+                    field.Response = Value.ToString();
+                }
+
+            }
+
+
+
+            return form;
+        }
         public static Dictionary<string, string> GetContextDetailList(Epi.Core.EnterInterpreter.EnterRule FunctionObject)
         {
 
@@ -322,5 +339,20 @@ namespace Epi.Web.MVC.Utility
             }
             return false;
         }
+
+
+
+        public static int GetNumberOfPags(string ResponseXml)
+        {
+
+            XDocument xdoc = XDocument.Parse(ResponseXml);
+            int PageNumber = 0;
+            PageNumber = xdoc.Root.Elements("Page").Count();
+  
+            return PageNumber;
+
+
+        }
+
     }
 }
