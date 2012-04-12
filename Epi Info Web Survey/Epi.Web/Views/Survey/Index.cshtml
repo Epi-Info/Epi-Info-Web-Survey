@@ -19,13 +19,10 @@
    
    <script type="text/javascript">
 
-
-
-      
-
- 
-      
-     </script>  
+   $(function () {
+           $("#savediv button[title]").tooltip();
+       });
+ </script>  
 <script type="text/javascript">
 
      
@@ -75,13 +72,15 @@
     $(document).ready(function () {
         // a workaround for a flaw in the demo system (http://dev.jqueryui.com/ticket/4375), ignore!
         
+        //$("#Savebutton").tooltip();
+
 
         $("#dialog").dialog({
             autoOpen: false,
             show: "blind",
-            // hide: "explode",
+            hide: "blind",
             resizable: false,
-            height: 340,
+            height: 370,
             modal: true
         });
         var responseUrl = GetRedirectionUrl();
@@ -94,7 +93,7 @@
 
             if ('@Model.StatusId' == '1') { //if clicking the save button for the first time
                 $('#successContent').show();
-                $('#successContent').append('<div class="success"><img src="@Url.Content("~/Content/images/button_check.png")" style="vertical-align:middle; padding-right: 10px;" alt=""/> Your survey has been saved.<button id="copy" type="button" name="copy" class="copylink">Get Survey Link</button></div>')
+                $('#successContent').append('<div class="success"><img src="@Url.Content("~/Content/images/button_check.png")" style="vertical-align:middle; padding-right: 10px;" alt=""/> Your survey has been saved.<button id="copy" type="button" name="copy" class="copylink">Get Survey Link & Pass Code</button></div>')
 
                 
 
@@ -107,7 +106,7 @@
                 
 
                 $('#successContent').show(); //in subsequest click we just show that the survey has been saved not the modal popup
-                $('#successContent').append('<div class="success"><img src="@Url.Content("~/Content/images/button_check.png")" style="vertical-align:middle; padding-right: 10px;" alt=""/> Your survey has been saved.<button id="copy" type="button" name="copy" class="copylink">Get Survey Link</button></div>')
+                $('#successContent').append('<div class="success"><img src="@Url.Content("~/Content/images/button_check.png")" style="vertical-align:middle; padding-right: 10px;" alt=""/> Your survey has been saved.<button id="copy" type="button" name="copy" class="copylink">Get Survey Link & Pass Code</button></div>')
             }
             return true;
         }
@@ -317,7 +316,8 @@
              </div>
 	 		 
 
-             <div id="savediv" align="center"><button class="save" type="button" id ="Savebutton" onclick="Save();" name="Savebutton" value="save"> &nbsp; Save & Get Link</button>
+             <div id="savediv" align="center">
+             <button class="save"  title="Click this button to finish the survey later. Use the survey link and pass code provided to return to the survey at a later time." type="button" id ="Savebutton" onclick="Save();" name="Savebutton" value="save"> &nbsp; Finish later</button>
              </div>
                  
               
@@ -345,22 +345,21 @@
 
 
      
-      <div class="demo">
-              <div id="dialog" title="Your Survey has been saved.">
-	            <p>Please copy and save the survey link as well as the Pass Code to return to the survey at a later time.</p>
-                <p>Survey Url:<br /><textarea id="url" cols="65" rows="3" style="white-space:pre;" readonly="readonly"></textarea></p>
- 	          
-               <p>Pass Code: <span id="spPassCode"></span></p>
- 	            <hr/>
- 	            <p>Optionally enter your email address to have the survey link and the Pass Code emailed to you.</p>
- 	            
+    <div id="dialog" title="Your Survey has been saved.">
+                   <p>Please copy and save the <span style="font-weight:bold;">Survey Link</span> and <span style="font-weight:bold;">Pass Code</span> in order to return to the survey at a later time.</p>
+                <p><span style="font-weight:bold;">Survey Link:</span><br /><textarea id="url" cols="65"  style="  height:30px;  white-space:pre; background:#d6e7f5; border:1px solid #aecfea; padding:4px; margin-top:4px;" readonly="readonly"></textarea></p>
+                
+               <p style="font-weight:bold;">Pass Code: <span id="spPassCode" style="font-size:12pt; background:#d6e7f5; border:1px solid #aecfea; padding:4px 10px;"></span></p>
+                  <hr/>
+                  <p>Optionally enter your email address to have the Survey Link and Pass Code emailed to you.</p>
+                  
                
                 
                 <p><label for="email">Email:</label> <input id="email" type="text" style="width: 200px; margin-left:48px;"/></p>
- 	            <p><label for="confirmemail">Confirm Email:</label> <input id="confirmemail" type="text" style="width: 200px;"/>
- 	            <button id="send" type="button">Send</button></p>
+                  <p><label for="confirmemail">Confirm Email:</label> <input id="confirmemail" type="text" style="width: 200px;"/>
+                  <button id="send" type="button" class="login" style="width:50px">Send</button></p>
                 <br />
-                <p style="font-size: 8pt; padding: 5px; background: #ffffa8;"><strong>Note:</strong> Your email address will not be saved and will only be used to send you the survey link.</p>
+                <p style="font-size: 8pt; padding: 5px; background: #ffffa8; margin-top:-5px;"><strong>Note:</strong> Your email address will not be saved and will only be used to send you the survey link.</p>
                </div>
-        </div> 
+
      

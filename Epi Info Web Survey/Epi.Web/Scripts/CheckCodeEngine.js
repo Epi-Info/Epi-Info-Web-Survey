@@ -817,6 +817,7 @@ function CCE_RemoveFromFieldsList(FieldName,ListName) {
      {
          var controlId = '#mvcdynamicfield_' + controlOrPage.toLowerCase();
          $(controlId).focus();
+          
      }
  }
 
