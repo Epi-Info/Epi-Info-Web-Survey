@@ -230,7 +230,7 @@ button.save, button.prev, button.next, button.begin, button.login
 button.save
 {
     background-image: url('../images/save.png');
-    background-position:12px center;
+    background-position:22px center;
     background-repeat: repeat-x;
     background-repeat:no-repeat;
     padding-left:20px;
@@ -492,3 +492,17 @@ button.copylink
     padding:0px;
     
 }
+
+/*Tooltip Styles*/
+.tooltip {
+    display:none;
+    background:url('../images/black_arrow2.png') no-repeat;
+   background-position: -5px 10px;
+    font-size:9pt;
+    font-family:Segoe UI;
+    font-weight:bold;
+    height:80px;
+    width:150px;
+    padding:26px 22px 20px 38px;
+    color:#333;
+  }
