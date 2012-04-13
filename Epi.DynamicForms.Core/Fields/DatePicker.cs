@@ -89,7 +89,10 @@ namespace MvcDynamicForms.Fields
              */
             if (FunctionObjectAfter != null && !FunctionObjectAfter.IsNull())
             {
-                scriptDatePicker.InnerHtml = "$('#" + inputName + "').datepicker({onClose:function(){" + _key + "_after();},changeMonth:true,changeYear:true});";
+                //scriptDatePicker.InnerHtml = "$('#" + inputName + "').datepicker({onClose:function(){" + _key + "_after();},changeMonth:true,changeYear:true});";
+                //Note: datepicker seems to have a command inst.input.focus(); (I think) called after the onClose callback which resets the focus to the original input element. I'm wondering if there is way round this with bind(). 
+                //http://stackoverflow.com/questions/7087987/change-the-focus-on-jqueryui-datepicker-on-close
+                scriptDatePicker.InnerHtml = "$('#" + inputName + "').datepicker({onClose:function(){setTimeout(" + _key + "_after,100);},changeMonth:true,changeYear:true});";
             }
             else
             {
