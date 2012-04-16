@@ -72,7 +72,7 @@ namespace Epi.Web.MVC.Controllers
         /// </summary>
         /// <param name="surveyModel"></param>
         /// <returns></returns>
-        [HttpPost][ValidateAntiForgeryToken]
+        [HttpPost]
         public ActionResult Index(Epi.Web.MVC.Models.SurveyInfoModel surveyModel)
         {
             try
