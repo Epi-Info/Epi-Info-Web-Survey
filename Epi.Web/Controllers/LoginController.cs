@@ -38,7 +38,7 @@ namespace Epi.Web.MVC.Controllers
             return View("Index");
         }
        [HttpPost]
-       [ValidateAntiForgeryToken]
+      
        public ActionResult Index(PassCodeModel Model, string responseId, string ReturnUrl)
        {
 
