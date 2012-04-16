@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web.Mvc;
+using  System.Web;
 using Epi.Core.EnterInterpreter;
 namespace MvcDynamicForms.Fields
 {
@@ -55,6 +56,7 @@ namespace MvcDynamicForms.Fields
         public override string RenderHtml()
         {
             var html = new StringBuilder();
+
             var inputName = _form.FieldPrefix + _key;
             string ErrorStyle = string.Empty;
             
@@ -63,10 +65,12 @@ namespace MvcDynamicForms.Fields
 
             System.Text.RegularExpressions.Regex regex = new System.Text.RegularExpressions.Regex(@"(\r\n|\r|\n)+");
 
-            string modPrompt = regex.Replace(Prompt.Replace(" ", "&nbsp;"), "<br />");
-            html = MvcHtmlString.Create(modPrompt).ToString();
+            string newText = regex.Replace(Prompt.Replace(" ", "&nbsp;"), "<br />");
 
-            prompt.SetInnerText(modPrompt);
+            string NewPromp = System.Web.Mvc.MvcHtmlString.Create(newText).ToString();
+
+
+            prompt.InnerHtml=NewPromp;
             prompt.Attributes.Add("for", inputName);
             prompt.Attributes.Add("class", "EpiLabel");
             prompt.Attributes.Add("Id", "label" + inputName);
