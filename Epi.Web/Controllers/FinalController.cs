@@ -41,7 +41,7 @@ namespace Epi.Web.MVC.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
+       
         public ActionResult Index(string surveyId, SurveyAnswerModel surveyAnswerModel )
         {
 
