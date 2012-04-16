@@ -60,7 +60,13 @@ namespace MvcDynamicForms.Fields
             
             // prompt
             var prompt = new TagBuilder("label");
-            prompt.SetInnerText(Prompt);
+
+            System.Text.RegularExpressions.Regex regex = new System.Text.RegularExpressions.Regex(@"(\r\n|\r|\n)+");
+
+            string modPrompt = regex.Replace(Prompt.Replace(" ", "&nbsp;"), "<br />");
+            html = MvcHtmlString.Create(modPrompt).ToString();
+
+            prompt.SetInnerText(modPrompt);
             prompt.Attributes.Add("for", inputName);
             prompt.Attributes.Add("class", "EpiLabel");
             prompt.Attributes.Add("Id", "label" + inputName);
