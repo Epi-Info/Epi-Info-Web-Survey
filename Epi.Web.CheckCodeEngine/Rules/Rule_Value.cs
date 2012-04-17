@@ -11,6 +11,8 @@ namespace Epi.Core.EnterInterpreter.Rules
         string Namespace = null;
         public object value = null;
         public EpiInfo.Plugin.DataType VariableDataType;
+        bool UseParenthesis = false;
+
         //object ReturnResult = null;
 
         public Rule_Value(Rule_Context pContext, Token pToken) : base(pContext)
@@ -90,7 +92,14 @@ namespace Epi.Core.EnterInterpreter.Rules
                     }
                     else
                     {
+                        if (this.GetCommandElement(T.Tokens, 0) == "(")
+                        {
+                            UseParenthesis = true;
+                        }
+                        
+                        //this.value = new Rule_ExprList(pContext, (NonterminalToken)T.Tokens[1]);
                         this.value = EnterRule.BuildStatments(pContext, T.Tokens[1]);
+                        
 
                     }
                 }
@@ -368,6 +377,26 @@ namespace Epi.Core.EnterInterpreter.Rules
                         case EpiInfo.Plugin.DataType.DateTime:
                         case EpiInfo.Plugin.DataType.Time:
                             pJavaScriptBuilder.Append(this.value.ToString());
+                            break;
+                        case EpiInfo.Plugin.DataType.Object:
+                            if (this.value is EnterRule)
+                            {
+                                if (this.UseParenthesis)
+                                {
+                                    pJavaScriptBuilder.Append("("); 
+                                    ((EnterRule)this.value).ToJavaScript(pJavaScriptBuilder);
+                                    pJavaScriptBuilder.Append(")");
+                                }
+                                else
+                                {
+
+                                    ((EnterRule)this.value).ToJavaScript(pJavaScriptBuilder);
+                                }
+                            }
+                            else
+                            {
+                                pJavaScriptBuilder.Append(this.value.ToString());
+                            }
                             break;
                         case EpiInfo.Plugin.DataType.Text:
                         default:
