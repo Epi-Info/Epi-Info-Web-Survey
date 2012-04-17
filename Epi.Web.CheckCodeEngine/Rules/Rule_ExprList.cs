@@ -47,12 +47,15 @@ namespace Epi.Core.EnterInterpreter.Rules
 
         public override void ToJavaScript(StringBuilder pJavaScriptBuilder)
         {
-            this.Expression.ToJavaScript(pJavaScriptBuilder);
 
+            
+            this.Expression.ToJavaScript(pJavaScriptBuilder);
             if (this.ExprList != null)
             {
                 this.ExprList.ToJavaScript(pJavaScriptBuilder);
             }
+            
+            
         }
     }
 }
