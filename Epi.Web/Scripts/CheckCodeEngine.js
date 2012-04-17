@@ -226,7 +226,8 @@ CCE_Context.prototype.getValue = function (pName)
         if (cce_Symbol.Source == "datasource") 
         {
             var query = '#mvcdynamicfield_' + pName;
-            if (eval(document.getElementById(query)))
+            var fielName ='mvcdynamicfield_' + pName;
+            if (eval(document.getElementById(fielName)))
             {
                var field = $(query);
                switch(cce_Symbol.Type)
