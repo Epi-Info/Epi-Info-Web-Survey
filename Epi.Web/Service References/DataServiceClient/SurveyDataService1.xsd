@@ -143,7 +143,6 @@
       <xs:element minOccurs="0" name="DateCompleted" type="xs:dateTime" />
       <xs:element minOccurs="0" name="DateLastUpdated" type="xs:dateTime" />
       <xs:element minOccurs="0" name="ResponseId" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="ResponsePassCode" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Status" type="xs:int" />
       <xs:element minOccurs="0" name="SurveyId" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="UserPublishKey" type="ser:guid" />

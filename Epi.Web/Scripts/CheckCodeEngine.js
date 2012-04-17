@@ -206,9 +206,9 @@ function CCE_Context()
 }
 
 
-CCE_Context.prototype.define = function (pName, pType, pSource) 
+CCE_Context.prototype.define = function (pName, pType, pSource, pPage, pValue) 
 {
-    this.symbolTable[pName.toLowerCase()] = new CCE_Symbol(pName.toLowerCase(), pType.toLowerCase(), pSource.toLowerCase());
+    this.symbolTable[pName.toLowerCase()] = new CCE_Symbol(pName.toLowerCase(), pType.toLowerCase(), pSource.toLowerCase(), pPage.toLowerCase(), pValue.toLowerCase());
 }
 
 CCE_Context.prototype.resolve = function (pName) 
@@ -226,9 +226,9 @@ CCE_Context.prototype.getValue = function (pName)
         if (cce_Symbol.Source == "datasource") 
         {
             var query = '#mvcdynamicfield_' + pName;
-            var field = $(query);
-            if (field != null) 
+            if (eval(document.getElementById(query)))
             {
+               var field = $(query);
                switch(cce_Symbol.Type)
                {
                 case "yesno":
@@ -262,7 +262,7 @@ CCE_Context.prototype.getValue = function (pName)
             }
             else
             {
-                return null;
+              return cce_Symbol.Value;
             }
         }
         else 
@@ -282,30 +282,11 @@ CCE_Context.prototype.setValue = function (pName, pValue)
     var cce_Symbol = this.resolve(pName);
     if (cce_Symbol != null) 
     {
-     var Jquery = '#mvcdynamicfield_' + pName;
-//        if (eval(document.getElementById(query)))
-//        {
-//                if(cce_Symbol.Source == "datasource")
-//                {
-//                   
-//                    $(query).val(pValue);
-//                    cce_Symbol.Value = pValue;
-//                }
-//                else
-//                {
-//                    cce_Symbol.Value = pValue;
-//                }
-//        }
-        
-//        else{
-//        
-//        var FieldNameAndValue =pName+'?'+ escape(pValue);
-//       CCE_AddToFieldsList(FieldNameAndValue,"AssignList");
-//         
-//        }
+        cce_Symbol.Value = pValue;
 
- var FieldName = 'mvcdynamicfield_' + pName;
- if (eval(document.getElementById(FieldName)))
+        var Jquery = '#mvcdynamicfield_' + pName;
+        var FieldName = 'mvcdynamicfield_' + pName;
+        if (eval(document.getElementById(FieldName)))
         {
             if(cce_Symbol.Source == "datasource")
                 {
@@ -320,7 +301,6 @@ CCE_Context.prototype.setValue = function (pName, pValue)
         updateXml(pName, pValue) ;
         
         }
-        
     }
 }
 
