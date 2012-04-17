@@ -63,8 +63,9 @@ namespace Epi.Web.MVC.Controllers
            {
                FormsAuthentication.SetAuthCookie(Model.PassCode, false);
               // return RedirectToRoute(new { Controller = "Survey", Action = "Index", responseid = responseId });
-
-               return Redirect(ReturnUrl ?? Url.Action("Index", "Admin", responseId));
+               
+              
+               return Redirect(ReturnUrl);
            }
            else
            {
