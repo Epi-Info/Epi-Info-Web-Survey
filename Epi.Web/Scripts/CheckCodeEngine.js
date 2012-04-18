@@ -205,7 +205,7 @@ function CCE_Context()
     this.symbolTable = new Array();
 }
 
-
+ 
 CCE_Context.prototype.define = function (pName, pType, pSource, pPage, pValue) 
 {
     this.symbolTable[pName.toLowerCase()] = new CCE_Symbol(pName.toLowerCase(), pType.toLowerCase(), pSource.toLowerCase(), pPage.toLowerCase(), pValue);
