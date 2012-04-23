@@ -5,11 +5,14 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+
 <div id="header"><h1>Epi Info Web Survey </h1></div>
 
 
 <div id="content">
-
+<p style="text-align:right">
+  @Html.ActionLink("Return to home page", "Index", "Home", new { surveyid = @ViewBag.SurveyId }, null) 
+</p>
 <p>Please enter the survey pass code provided along with the survey link to view your responses.</p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
