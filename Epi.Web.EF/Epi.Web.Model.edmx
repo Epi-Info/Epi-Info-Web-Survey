@@ -8,7 +8,7 @@
         <EntityContainer Name="EIWSModelStoreContainer">
           <EntitySet Name="lk_Status" EntityType="EIWSModel.Store.lk_Status" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="lk_SurveyType" EntityType="EIWSModel.Store.lk_SurveyType" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="SurveyAdministrator" EntityType="EIWSModel.Store.SurveyAdministrator" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Organization" EntityType="EIWSModel.Store.Organization" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="SurveyMetaData" EntityType="EIWSModel.Store.SurveyMetaData" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="SurveyResponse" EntityType="EIWSModel.Store.SurveyResponse" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="sysdiagrams" EntityType="EIWSModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
@@ -16,8 +16,8 @@
             <End Role="lk_SurveyType" EntitySet="lk_SurveyType" />
             <End Role="SurveyMetaData" EntitySet="SurveyMetaData" />
           </AssociationSet>
-          <AssociationSet Name="FK_SurveyMetaData_SurveyAdministrator" Association="EIWSModel.Store.FK_SurveyMetaData_SurveyAdministrator">
-            <End Role="SurveyAdministrator" EntitySet="SurveyAdministrator" />
+          <AssociationSet Name="FK_SurveyMetaData_Organization" Association="EIWSModel.Store.FK_SurveyMetaData_Organization">
+            <End Role="Organization" EntitySet="Organization" />
             <End Role="SurveyMetaData" EntitySet="SurveyMetaData" />
           </AssociationSet>
           <AssociationSet Name="FK_SurveyResponse_lk_Status" Association="EIWSModel.Store.FK_SurveyResponse_lk_Status">
@@ -43,13 +43,12 @@
           <Property Name="SurveyTypeId" Type="int" Nullable="false" />
           <Property Name="SurveyType" Type="varchar" MaxLength="50" />
         </EntityType>
-        <EntityType Name="SurveyAdministrator">
+        <EntityType Name="Organization">
           <Key>
-            <PropertyRef Name="SecurityKey" />
+            <PropertyRef Name="OrganizationKey" />
           </Key>
-          <Property Name="SecurityKey" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="Department" Type="nvarchar" MaxLength="70" />
-          <Property Name="IsSuperUser" Type="bit" />
+          <Property Name="OrganizationKey" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Organization" Type="nvarchar" Nullable="false" MaxLength="70" />
         </EntityType>
         <EntityType Name="SurveyMetaData">
           <Key>
@@ -68,7 +67,7 @@
           <Property Name="UserPublishKey" Type="uniqueidentifier" />
           <Property Name="TemplateXMLSize" Type="bigint" />
           <Property Name="DateCreated" Type="timestamp" StoreGeneratedPattern="Computed" />
-          <Property Name="SecurityKey" Type="uniqueidentifier" />
+          <Property Name="OrganizationKey" Type="uniqueidentifier" />
         </EntityType>
         <EntityType Name="SurveyResponse">
           <Key>
@@ -106,15 +105,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_SurveyMetaData_SurveyAdministrator">
-          <End Role="SurveyAdministrator" Type="EIWSModel.Store.SurveyAdministrator" Multiplicity="0..1" />
+        <Association Name="FK_SurveyMetaData_Organization">
+          <End Role="Organization" Type="EIWSModel.Store.Organization" Multiplicity="0..1" />
           <End Role="SurveyMetaData" Type="EIWSModel.Store.SurveyMetaData" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="SurveyAdministrator">
-              <PropertyRef Name="SecurityKey" />
+            <Principal Role="Organization">
+              <PropertyRef Name="OrganizationKey" />
             </Principal>
             <Dependent Role="SurveyMetaData">
-              <PropertyRef Name="SecurityKey" />
+              <PropertyRef Name="OrganizationKey" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -164,9 +163,9 @@
             <End Role="SurveyResponse" EntitySet="SurveyResponses" />
           </AssociationSet>
           <EntitySet Name="sysdiagrams" EntityType="EIWSModel.sysdiagram" />
-          <EntitySet Name="SurveyAdministrators" EntityType="EIWSModel.SurveyAdministrator" />
-          <AssociationSet Name="FK_SurveyMetaData_SurveyAdministrator" Association="EIWSModel.FK_SurveyMetaData_SurveyAdministrator">
-            <End Role="SurveyAdministrator" EntitySet="SurveyAdministrators" />
+          <EntitySet Name="Organizations" EntityType="EIWSModel.Organization" />
+          <AssociationSet Name="FK_SurveyMetaData_Organization" Association="EIWSModel.FK_SurveyMetaData_Organization">
+            <End Role="Organization" EntitySet="Organizations" />
             <End Role="SurveyMetaData" EntitySet="SurveyMetaDatas" />
           </AssociationSet>
         </EntityContainer>
@@ -205,8 +204,8 @@
           <Property Type="Guid" Name="UserPublishKey" />
           <Property Type="Int64" Name="TemplateXMLSize" />
           <Property Type="Binary" Name="DateCreated" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
-          <Property Type="Guid" Name="SecurityKey" />
-          <NavigationProperty Name="SurveyAdministrator" Relationship="EIWSModel.FK_SurveyMetaData_SurveyAdministrator" FromRole="SurveyMetaData" ToRole="SurveyAdministrator" />
+          <Property Type="Guid" Name="OrganizationKey" />
+          <NavigationProperty Name="Organization" Relationship="EIWSModel.FK_SurveyMetaData_Organization" FromRole="SurveyMetaData" ToRole="Organization" />
         </EntityType>
         <EntityType Name="SurveyResponse">
           <Key>
@@ -270,24 +269,23 @@
           <Property Type="Int32" Name="version" />
           <Property Type="Binary" Name="definition" MaxLength="Max" FixedLength="false" />
         </EntityType>
-        <EntityType Name="SurveyAdministrator">
+        <EntityType Name="Organization">
           <Key>
-            <PropertyRef Name="SecurityKey" />
+            <PropertyRef Name="OrganizationKey" />
           </Key>
-          <Property Type="Guid" Name="SecurityKey" Nullable="false" />
-          <Property Type="String" Name="Department" MaxLength="70" FixedLength="false" Unicode="true" />
-          <Property Type="Boolean" Name="IsSuperUser" />
-          <NavigationProperty Name="SurveyMetaDatas" Relationship="EIWSModel.FK_SurveyMetaData_SurveyAdministrator" FromRole="SurveyAdministrator" ToRole="SurveyMetaData" />
+          <Property Type="Guid" Name="OrganizationKey" Nullable="false" />
+          <Property Type="String" Name="Organization1" Nullable="false" MaxLength="70" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="SurveyMetaDatas" Relationship="EIWSModel.FK_SurveyMetaData_Organization" FromRole="Organization" ToRole="SurveyMetaData" />
         </EntityType>
-        <Association Name="FK_SurveyMetaData_SurveyAdministrator">
-          <End Type="EIWSModel.SurveyAdministrator" Role="SurveyAdministrator" Multiplicity="0..1" />
+        <Association Name="FK_SurveyMetaData_Organization">
+          <End Type="EIWSModel.Organization" Role="Organization" Multiplicity="0..1" />
           <End Type="EIWSModel.SurveyMetaData" Role="SurveyMetaData" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="SurveyAdministrator">
-              <PropertyRef Name="SecurityKey" />
+            <Principal Role="Organization">
+              <PropertyRef Name="OrganizationKey" />
             </Principal>
             <Dependent Role="SurveyMetaData">
-              <PropertyRef Name="SecurityKey" />
+              <PropertyRef Name="OrganizationKey" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -316,7 +314,7 @@
           <EntitySetMapping Name="SurveyMetaDatas">
             <EntityTypeMapping TypeName="EIWSModel.SurveyMetaData">
               <MappingFragment StoreEntitySet="SurveyMetaData">
-                <ScalarProperty Name="SecurityKey" ColumnName="SecurityKey" />
+                <ScalarProperty Name="OrganizationKey" ColumnName="OrganizationKey" />
                 <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
                 <ScalarProperty Name="TemplateXMLSize" ColumnName="TemplateXMLSize" />
                 <ScalarProperty Name="UserPublishKey" ColumnName="UserPublishKey" />
@@ -359,12 +357,11 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="SurveyAdministrators">
-            <EntityTypeMapping TypeName="EIWSModel.SurveyAdministrator">
-              <MappingFragment StoreEntitySet="SurveyAdministrator">
-                <ScalarProperty Name="IsSuperUser" ColumnName="IsSuperUser" />
-                <ScalarProperty Name="Department" ColumnName="Department" />
-                <ScalarProperty Name="SecurityKey" ColumnName="SecurityKey" />
+          <EntitySetMapping Name="Organizations">
+            <EntityTypeMapping TypeName="EIWSModel.Organization">
+              <MappingFragment StoreEntitySet="Organization">
+                <ScalarProperty Name="Organization1" ColumnName="Organization" />
+                <ScalarProperty Name="OrganizationKey" ColumnName="OrganizationKey" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -389,27 +386,27 @@
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
       <Diagram Name="Epi.Web.Model">
-        <EntityTypeShape EntityType="EIWSModel.lk_Status" Width="1.5" PointX="6.5" PointY="4" Height="1.5956835937499996" />
-        <EntityTypeShape EntityType="EIWSModel.lk_SurveyType" Width="1.5" PointX="0.75" PointY="1.75" Height="1.5956835937499996" />
-        <EntityTypeShape EntityType="EIWSModel.SurveyMetaData" Width="1.5" PointX="3.375" PointY="2.25" Height="3.5186979166666656" />
+        <EntityTypeShape EntityType="EIWSModel.lk_Status" Width="1.5" PointX="9.125" PointY="2.375" Height="1.5956835937499996" />
+        <EntityTypeShape EntityType="EIWSModel.lk_SurveyType" Width="1.5" PointX="0.875" PointY="2" Height="1.5956835937499996" />
+        <EntityTypeShape EntityType="EIWSModel.SurveyMetaData" Width="1.5" PointX="3.375" PointY="2.25" Height="4.2879036458333326" />
         <EntityTypeShape EntityType="EIWSModel.SurveyResponse" Width="1.75" PointX="6" PointY="0.5" Height="2.7494921875" />
         <AssociationConnector Association="EIWSModel.FK_SurveyResponse_lk_Status" >
-          <ConnectorPoint PointX="7.125" PointY="4" />
-          <ConnectorPoint PointX="7.125" PointY="3.6340950520833335" />
+          <ConnectorPoint PointX="9.125" PointY="3.0045475260416667" />
+          <ConnectorPoint PointX="7.75" PointY="3.0045475260416667" />
         </AssociationConnector>
         <AssociationConnector Association="EIWSModel.FK_SurveyMetaData_lk_SurveyType" >
-          <ConnectorPoint PointX="2.25" PointY="2.7978417968749993" />
-          <ConnectorPoint PointX="3.375" PointY="2.7978417968749993" />
+          <ConnectorPoint PointX="2.375" PointY="2.922841796875" />
+          <ConnectorPoint PointX="3.375" PointY="2.922841796875" />
         </AssociationConnector>
         <AssociationConnector Association="EIWSModel.FK_SurveyResponse_SurveyMetaData" >
-          <ConnectorPoint PointX="4.875" PointY="2.9420475260416663" />
-          <ConnectorPoint PointX="6" PointY="2.9420475260416663" />
+          <ConnectorPoint PointX="4.875" PointY="2.9420475260416667" />
+          <ConnectorPoint PointX="6" PointY="2.9420475260416667" />
         </AssociationConnector>
         <EntityTypeShape EntityType="EIWSModel.sysdiagram" Width="1.5" PointX="0.75" PointY="5.75" Height="1.9802864583333317" />
-        <EntityTypeShape EntityType="EIWSModel.SurveyAdministrator" Width="1.5" PointX="5.375" PointY="6.875" Height="1.7879850260416674" />
-        <AssociationConnector Association="EIWSModel.FK_SurveyMetaData_SurveyAdministrator" >
-          <ConnectorPoint PointX="5.375" PointY="6.875" />
-          <ConnectorPoint PointX="4.875" PointY="6.5379036458333326" />
+        <EntityTypeShape EntityType="EIWSModel.Organization" Width="1.5" PointX="7.125" PointY="5" Height="1.5956835937499996" />
+        <AssociationConnector Association="EIWSModel.FK_SurveyMetaData_Organization" >
+          <ConnectorPoint PointX="7.125" PointY="5.7689518229166659" />
+          <ConnectorPoint PointX="4.875" PointY="5.7689518229166659" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>

@@ -21,7 +21,7 @@ using System.Runtime.Serialization;
 [assembly: EdmRelationshipAttribute("EIWSModel", "FK_SurveyResponse_lk_Status", "lk_Status", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Epi.Web.EF.lk_Status), "SurveyResponse", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Epi.Web.EF.SurveyResponse), true)]
 [assembly: EdmRelationshipAttribute("EIWSModel", "FK_SurveyMetaData_lk_SurveyType", "lk_SurveyType", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Epi.Web.EF.lk_SurveyType), "SurveyMetaData", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Epi.Web.EF.SurveyMetaData), true)]
 [assembly: EdmRelationshipAttribute("EIWSModel", "FK_SurveyResponse_SurveyMetaData", "SurveyMetaData", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Epi.Web.EF.SurveyMetaData), "SurveyResponse", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Epi.Web.EF.SurveyResponse), true)]
-[assembly: EdmRelationshipAttribute("EIWSModel", "FK_SurveyMetaData_SurveyAdministrator", "SurveyAdministrator", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Epi.Web.EF.SurveyAdministrator), "SurveyMetaData", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Epi.Web.EF.SurveyMetaData), true)]
+[assembly: EdmRelationshipAttribute("EIWSModel", "FK_SurveyMetaData_Organization", "Organization", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Epi.Web.EF.Organization), "SurveyMetaData", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Epi.Web.EF.SurveyMetaData), true)]
 
 #endregion
 
@@ -156,18 +156,18 @@ namespace Epi.Web.EF
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<SurveyAdministrator> SurveyAdministrators
+        public ObjectSet<Organization> Organizations
         {
             get
             {
-                if ((_SurveyAdministrators == null))
+                if ((_Organizations == null))
                 {
-                    _SurveyAdministrators = base.CreateObjectSet<SurveyAdministrator>("SurveyAdministrators");
+                    _Organizations = base.CreateObjectSet<Organization>("Organizations");
                 }
-                return _SurveyAdministrators;
+                return _Organizations;
             }
         }
-        private ObjectSet<SurveyAdministrator> _SurveyAdministrators;
+        private ObjectSet<Organization> _Organizations;
 
         #endregion
         #region AddTo Methods
@@ -213,11 +213,11 @@ namespace Epi.Web.EF
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the SurveyAdministrators EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// Deprecated Method for adding a new object to the Organizations EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
-        public void AddToSurveyAdministrators(SurveyAdministrator surveyAdministrator)
+        public void AddToOrganizations(Organization organization)
         {
-            base.AddObject("SurveyAdministrators", surveyAdministrator);
+            base.AddObject("Organizations", organization);
         }
 
         #endregion
@@ -441,22 +441,24 @@ namespace Epi.Web.EF
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="EIWSModel", Name="SurveyAdministrator")]
+    [EdmEntityTypeAttribute(NamespaceName="EIWSModel", Name="Organization")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    public partial class SurveyAdministrator : EntityObject
+    public partial class Organization : EntityObject
     {
         #region Factory Method
     
         /// <summary>
-        /// Create a new SurveyAdministrator object.
+        /// Create a new Organization object.
         /// </summary>
-        /// <param name="securityKey">Initial value of the SecurityKey property.</param>
-        public static SurveyAdministrator CreateSurveyAdministrator(global::System.Guid securityKey)
+        /// <param name="organizationKey">Initial value of the OrganizationKey property.</param>
+        /// <param name="organization1">Initial value of the Organization1 property.</param>
+        public static Organization CreateOrganization(global::System.Guid organizationKey, global::System.String organization1)
         {
-            SurveyAdministrator surveyAdministrator = new SurveyAdministrator();
-            surveyAdministrator.SecurityKey = securityKey;
-            return surveyAdministrator;
+            Organization organization = new Organization();
+            organization.OrganizationKey = organizationKey;
+            organization.Organization1 = organization1;
+            return organization;
         }
 
         #endregion
@@ -467,75 +469,51 @@ namespace Epi.Web.EF
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Guid SecurityKey
+        public global::System.Guid OrganizationKey
         {
             get
             {
-                return _SecurityKey;
+                return _OrganizationKey;
             }
             set
             {
-                if (_SecurityKey != value)
+                if (_OrganizationKey != value)
                 {
-                    OnSecurityKeyChanging(value);
-                    ReportPropertyChanging("SecurityKey");
-                    _SecurityKey = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("SecurityKey");
-                    OnSecurityKeyChanged();
+                    OnOrganizationKeyChanging(value);
+                    ReportPropertyChanging("OrganizationKey");
+                    _OrganizationKey = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("OrganizationKey");
+                    OnOrganizationKeyChanged();
                 }
             }
         }
-        private global::System.Guid _SecurityKey;
-        partial void OnSecurityKeyChanging(global::System.Guid value);
-        partial void OnSecurityKeyChanged();
+        private global::System.Guid _OrganizationKey;
+        partial void OnOrganizationKeyChanging(global::System.Guid value);
+        partial void OnOrganizationKeyChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String Department
+        public global::System.String Organization1
         {
             get
             {
-                return _Department;
+                return _Organization1;
             }
             set
             {
-                OnDepartmentChanging(value);
-                ReportPropertyChanging("Department");
-                _Department = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("Department");
-                OnDepartmentChanged();
+                OnOrganization1Changing(value);
+                ReportPropertyChanging("Organization1");
+                _Organization1 = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Organization1");
+                OnOrganization1Changed();
             }
         }
-        private global::System.String _Department;
-        partial void OnDepartmentChanging(global::System.String value);
-        partial void OnDepartmentChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.Boolean> IsSuperUser
-        {
-            get
-            {
-                return _IsSuperUser;
-            }
-            set
-            {
-                OnIsSuperUserChanging(value);
-                ReportPropertyChanging("IsSuperUser");
-                _IsSuperUser = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("IsSuperUser");
-                OnIsSuperUserChanged();
-            }
-        }
-        private Nullable<global::System.Boolean> _IsSuperUser;
-        partial void OnIsSuperUserChanging(Nullable<global::System.Boolean> value);
-        partial void OnIsSuperUserChanged();
+        private global::System.String _Organization1;
+        partial void OnOrganization1Changing(global::System.String value);
+        partial void OnOrganization1Changed();
 
         #endregion
     
@@ -547,18 +525,18 @@ namespace Epi.Web.EF
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("EIWSModel", "FK_SurveyMetaData_SurveyAdministrator", "SurveyMetaData")]
+        [EdmRelationshipNavigationPropertyAttribute("EIWSModel", "FK_SurveyMetaData_Organization", "SurveyMetaData")]
         public EntityCollection<SurveyMetaData> SurveyMetaDatas
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<SurveyMetaData>("EIWSModel.FK_SurveyMetaData_SurveyAdministrator", "SurveyMetaData");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<SurveyMetaData>("EIWSModel.FK_SurveyMetaData_Organization", "SurveyMetaData");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<SurveyMetaData>("EIWSModel.FK_SurveyMetaData_SurveyAdministrator", "SurveyMetaData", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<SurveyMetaData>("EIWSModel.FK_SurveyMetaData_Organization", "SurveyMetaData", value);
                 }
             }
         }
@@ -920,24 +898,24 @@ namespace Epi.Web.EF
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Guid> SecurityKey
+        public Nullable<global::System.Guid> OrganizationKey
         {
             get
             {
-                return _SecurityKey;
+                return _OrganizationKey;
             }
             set
             {
-                OnSecurityKeyChanging(value);
-                ReportPropertyChanging("SecurityKey");
-                _SecurityKey = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("SecurityKey");
-                OnSecurityKeyChanged();
+                OnOrganizationKeyChanging(value);
+                ReportPropertyChanging("OrganizationKey");
+                _OrganizationKey = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("OrganizationKey");
+                OnOrganizationKeyChanged();
             }
         }
-        private Nullable<global::System.Guid> _SecurityKey;
-        partial void OnSecurityKeyChanging(Nullable<global::System.Guid> value);
-        partial void OnSecurityKeyChanged();
+        private Nullable<global::System.Guid> _OrganizationKey;
+        partial void OnOrganizationKeyChanging(Nullable<global::System.Guid> value);
+        partial void OnOrganizationKeyChanged();
 
         #endregion
     
@@ -1009,16 +987,16 @@ namespace Epi.Web.EF
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("EIWSModel", "FK_SurveyMetaData_SurveyAdministrator", "SurveyAdministrator")]
-        public SurveyAdministrator SurveyAdministrator
+        [EdmRelationshipNavigationPropertyAttribute("EIWSModel", "FK_SurveyMetaData_Organization", "Organization")]
+        public Organization Organization
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SurveyAdministrator>("EIWSModel.FK_SurveyMetaData_SurveyAdministrator", "SurveyAdministrator").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Organization>("EIWSModel.FK_SurveyMetaData_Organization", "Organization").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SurveyAdministrator>("EIWSModel.FK_SurveyMetaData_SurveyAdministrator", "SurveyAdministrator").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Organization>("EIWSModel.FK_SurveyMetaData_Organization", "Organization").Value = value;
             }
         }
         /// <summary>
@@ -1026,17 +1004,17 @@ namespace Epi.Web.EF
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<SurveyAdministrator> SurveyAdministratorReference
+        public EntityReference<Organization> OrganizationReference
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SurveyAdministrator>("EIWSModel.FK_SurveyMetaData_SurveyAdministrator", "SurveyAdministrator");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Organization>("EIWSModel.FK_SurveyMetaData_Organization", "Organization");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<SurveyAdministrator>("EIWSModel.FK_SurveyMetaData_SurveyAdministrator", "SurveyAdministrator", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Organization>("EIWSModel.FK_SurveyMetaData_Organization", "Organization", value);
                 }
             }
         }
