@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Linq;
 using System.Collections.Generic;
-
+using System.Xml;
+using System.Xml.Linq;
+using System.Text;
 //using BusinessObjects;
 //using DataObjects.EntityFramework.ModelMapper;
 //using System.Linq.Dynamic;
@@ -184,13 +186,24 @@ namespace Epi.Web.EF
                             select response;
 
                 var DataRow = Query.Single();
+
+              
+
                 DataRow.ResponseXML = SurveyResponse.XML;
                 DataRow.DateCompleted = DateTime.Now;
                 DataRow.StatusId = SurveyResponse.Status;
                 DataRow.DateLastUpdated = DateTime.Now;
              //   DataRow.ResponsePasscode = SurveyResponse.ResponsePassCode;
+                DataRow.ResponseXMLSize = RemoveWhitespace(SurveyResponse.XML).Length; 
                 Context.SaveChanges();
             }
+        }
+        public static string RemoveWhitespace(string xml)
+        {
+            System.Text.RegularExpressions.Regex regex = new System.Text.RegularExpressions.Regex(@">\s*<");
+            xml = regex.Replace(xml, "><");
+
+            return xml.Trim();
         }
         public void UpdatePassCode(UserAuthenticationRequestBO passcodeBO) {
 
