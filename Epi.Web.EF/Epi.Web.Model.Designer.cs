@@ -453,11 +453,13 @@ namespace Epi.Web.EF
         /// </summary>
         /// <param name="organizationKey">Initial value of the OrganizationKey property.</param>
         /// <param name="organization1">Initial value of the Organization1 property.</param>
-        public static Organization CreateOrganization(global::System.Guid organizationKey, global::System.String organization1)
+        /// <param name="isEnabled">Initial value of the IsEnabled property.</param>
+        public static Organization CreateOrganization(global::System.Guid organizationKey, global::System.String organization1, global::System.Boolean isEnabled)
         {
             Organization organization = new Organization();
             organization.OrganizationKey = organizationKey;
             organization.Organization1 = organization1;
+            organization.IsEnabled = isEnabled;
             return organization;
         }
 
@@ -514,6 +516,30 @@ namespace Epi.Web.EF
         private global::System.String _Organization1;
         partial void OnOrganization1Changing(global::System.String value);
         partial void OnOrganization1Changed();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean IsEnabled
+        {
+            get
+            {
+                return _IsEnabled;
+            }
+            set
+            {
+                OnIsEnabledChanging(value);
+                ReportPropertyChanging("IsEnabled");
+                _IsEnabled = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("IsEnabled");
+                OnIsEnabledChanged();
+            }
+        }
+        private global::System.Boolean _IsEnabled;
+        partial void OnIsEnabledChanging(global::System.Boolean value);
+        partial void OnIsEnabledChanged();
 
         #endregion
     
