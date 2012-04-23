@@ -193,7 +193,7 @@ bottom:80px;
  float: right;
  }
 
-button.exitsurvey:hover,  button.save:hover, button.prev:hover, button.next:hover, button.begin:hover, button.submits:hover, button.login:hover
+button.exitsurvey:hover,  button.save:hover, button.prev:hover, button.next:hover, button.begin:hover, button.submits:hover, button.login:hover, a.returnto:hover
  {
  cursor: pointer;
  opacity: 0.8;
@@ -492,6 +492,30 @@ button.copylink
     padding:0px;
     
 }
+
+a.returnto
+ {
+ border: 1px #4e9689 solid;
+ -moz-border-radius: 10px;
+ -webkit-border-radius: 10px;
+ -khtml-border-radius: 10px;
+ border-radius: 10px;
+ padding: 5px 15px 5px 15px;
+ color:#244640;
+ font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+ font-size: 10pt;
+ font-weight:bold;
+ width: 150px;
+ border: 1px solid rgba(0,0,0,0.5);
+ background: #d4eab3; 
+ background: rgba(195,255,104,0.6); 
+ box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
+ -o-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
+ -webkit-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
+ -moz-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
+  text-decoration: none;
+  behavior: url('../Scripts/PIE.htc');
+ }
 
 /*Tooltip Styles*/
 .tooltip {
