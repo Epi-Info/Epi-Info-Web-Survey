@@ -70,7 +70,7 @@
     <Compile Include="Criteria\SurveyAnswerCriteria.cs" />
     <Compile Include="Criteria\Criteria.cs" />
     <Compile Include="Criteria\SurveyInfoCriteria.cs" />
-    <Compile Include="DTO\OrganizationBO.cs" />
+    <Compile Include="DTO\OrganizationDTO.cs" />
     <Compile Include="DTO\PassCodeDTO.cs" />
     <Compile Include="DTO\SurveyAnswerDTO.cs" />
     <Compile Include="Exception\CustomFaultException.cs" />
@@ -78,6 +78,8 @@
     <Compile Include="Message\Base\PersistType.cs" />
     <Compile Include="Message\Base\RequestBase.cs" />
     <Compile Include="Message\Base\ResponseBase.cs" />
+    <Compile Include="Message\OrganizationRequest.cs" />
+    <Compile Include="Message\OrganizationResponse.cs" />
     <Compile Include="Message\UserAuthenticationRequest.cs" />
     <Compile Include="Message\SurveyAnswerRequest.cs" />
     <Compile Include="Message\SurveyAnswerResponse.cs" />
