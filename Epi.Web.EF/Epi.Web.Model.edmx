@@ -49,6 +49,7 @@
           </Key>
           <Property Name="OrganizationKey" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Organization" Type="nvarchar" Nullable="false" MaxLength="70" />
+          <Property Name="IsEnabled" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="SurveyMetaData">
           <Key>
@@ -276,6 +277,7 @@
           <Property Type="Guid" Name="OrganizationKey" Nullable="false" />
           <Property Type="String" Name="Organization1" Nullable="false" MaxLength="70" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="SurveyMetaDatas" Relationship="EIWSModel.FK_SurveyMetaData_Organization" FromRole="Organization" ToRole="SurveyMetaData" />
+          <Property Type="Boolean" Name="IsEnabled" Nullable="false" />
         </EntityType>
         <Association Name="FK_SurveyMetaData_Organization">
           <End Type="EIWSModel.Organization" Role="Organization" Multiplicity="0..1" />
@@ -360,6 +362,7 @@
           <EntitySetMapping Name="Organizations">
             <EntityTypeMapping TypeName="EIWSModel.Organization">
               <MappingFragment StoreEntitySet="Organization">
+                <ScalarProperty Name="IsEnabled" ColumnName="IsEnabled" />
                 <ScalarProperty Name="Organization1" ColumnName="Organization" />
                 <ScalarProperty Name="OrganizationKey" ColumnName="OrganizationKey" />
               </MappingFragment>
