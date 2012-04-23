@@ -31,10 +31,13 @@ namespace Epi.Web.MVC.Controllers
        [HttpGet]
         public ActionResult Index(string responseId, string ReturnUrl)
         {
-            
-           
-          
-          
+
+           //get the responseId
+            responseId = GetResponseId(ReturnUrl);
+            //get the surveyId
+             string SurveyId = _isurveyFacade.GetSurveyAnswerResponse(responseId).SurveyResponseList[0].SurveyId;
+             //put surveyId in viewbag so can be retrieved in Login/Index.cshtml
+             ViewBag.SurveyId = SurveyId;
             return View("Index");
         }
        [HttpPost]
@@ -42,20 +45,16 @@ namespace Epi.Web.MVC.Controllers
        public ActionResult Index(PassCodeModel Model, string responseId, string ReturnUrl)
        {
 
+          
 
-           string[] expressions = ReturnUrl.Split('/');
+           //parse and get the responseId
+           responseId = GetResponseId(ReturnUrl);
 
-           foreach (var expression in expressions)
-           {
-               if (Epi.Web.MVC.Utility.SurveyHelper.IsGuid(expression))
-               {
+           //get the surveyId
+           string SurveyId = _isurveyFacade.GetSurveyAnswerResponse(responseId).SurveyResponseList[0].SurveyId;
+           //put surveyId in viewbag so can be retrieved in Login/Index.cshtml
+           ViewBag.SurveyId = SurveyId;
 
-                       responseId = expression;
-                       break;
-               }
-           
-           }
-           
 
            Epi.Web.Common.Message.UserAuthenticationResponse result = _isurveyFacade.ValidateUser(responseId, Model.PassCode);
 
@@ -72,6 +71,30 @@ namespace Epi.Web.MVC.Controllers
                ModelState.AddModelError("", "Pass code is incorrect.");
                return View();
            }
+       }
+
+      
+      /// <summary>
+      /// parse and return the responseId from response Url 
+      /// </summary>
+      /// <param name="returnUrl"></param>
+      /// <returns></returns>
+        private string GetResponseId(string returnUrl)
+       {
+           string responseId = string.Empty;
+           string[] expressions = returnUrl.Split('/');
+
+           foreach (var expression in expressions)
+           {
+               if (Epi.Web.MVC.Utility.SurveyHelper.IsGuid(expression))
+               {
+
+                   responseId = expression;
+                   break;
+               }
+
+           }
+           return responseId;
        }
 
        
