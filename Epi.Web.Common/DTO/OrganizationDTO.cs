@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Runtime.Serialization;
 
-namespace Epi.Web.Common.BusinessObject
+namespace Epi.Web.Common.DTO
 {
-    public class OrganizationBO
+    public class OrganizationDTO
     {
         private string _Organization;
         private Guid _OrganizationKey;
