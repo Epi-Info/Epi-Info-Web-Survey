@@ -11,7 +11,8 @@
 
 <div id="content">
 <p style="text-align:right">
-  @Html.ActionLink("Return to home page", "Index", "Home", new { surveyid = @ViewBag.SurveyId }, null) 
+   <a  href="@Url.RouteUrl(null, new { controller = "Home", action = "Index", surveyid = @ViewBag.SurveyId})">Return to home page</a>
+  
 </p>
 <p>Please enter the survey pass code provided along with the survey link to view your responses.</p>
 <p>&nbsp;</p>
