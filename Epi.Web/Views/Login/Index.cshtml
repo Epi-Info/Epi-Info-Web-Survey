@@ -10,13 +10,9 @@
 
 
 <div id="content">
-<p style="text-align:right">
-   <a  href="@Url.RouteUrl(null, new { controller = "Home", action = "Index", surveyid = @ViewBag.SurveyId})">Return to home page</a>
-  
-</p>
-<p>Please enter the survey pass code provided along with the survey link to view your responses.</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
+
+<p style="text-align:left">Please enter the survey pass code provided along with the survey link to view your survey responses.</p>
+
 
 <div class="Logsin">
   
@@ -36,4 +32,11 @@
 }
 </div> 
 </div>
+
+<p>&nbsp;</p><p>&nbsp;</p>
+<p style="text-align:left;">
+<span style="font-weight:bold">Note:</span> If you do not have a pass code, click the button to begin a new survey.
+   <a  href="@Url.RouteUrl(null, new { controller = "Home", action = "Index", surveyid = @ViewBag.SurveyId})" class="returnto" style="margin-left:30px;">Return to Survey Home</a>
+  
+</p>
 </div>
