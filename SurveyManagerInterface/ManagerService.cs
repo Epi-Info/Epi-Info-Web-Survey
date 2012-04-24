@@ -463,5 +463,24 @@ namespace Epi.Web.WCF.SurveyService
             return result;
         }
 
+
+        public OrganizationResponse GetOrganization(OrganizationRequest pRequest)
+        {
+            OrganizationResponse result = new OrganizationResponse();
+
+            return result;
+        }
+
+
+
+        public OrganizationResponse SetOrganization(OrganizationRequest pRequest)
+        {
+            OrganizationResponse result = new OrganizationResponse();
+
+            return result;
+
+        }
+
+
     }
 }
