@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EntityOrganizationDao.cs" />
     <Compile Include="EntitySurveyResponseDao.cs" />
     <Compile Include="DataObjectFactory.cs" />
     <Compile Include="EntityDaoFactory.cs" />
