@@ -16,6 +16,9 @@ namespace Epi.Web.Common.Criteria
         }
 
         [DataMember]
+        public Guid AdminstrationKey { get; set; }
+
+        [DataMember]
         public List<string> Organization  { get; set; }
 
         [DataMember]
