@@ -11,7 +11,7 @@ namespace Epi.Web.Common.DTO
         private string _Organization;
         private Guid _OrganizationKey;
         private bool _IsEnabled;
-
+        private Guid _AdminId;
 
         public string Organization
         {
@@ -23,6 +23,11 @@ namespace Epi.Web.Common.DTO
         {
             get { return _OrganizationKey; }
             set { _OrganizationKey = value; }
+        }
+        public Guid AdminId
+        {
+            get { return _AdminId; }
+            set { _AdminId = value; }
         }
 
         public bool IsEnabled

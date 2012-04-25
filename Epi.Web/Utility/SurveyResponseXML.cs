@@ -78,7 +78,7 @@ namespace Epi.Web.MVC.Utility
               
               XmlDocument xml = new XmlDocument();
               XmlElement root = xml.CreateElement("SurveyResponse");
-
+             
               if ( CurrentPage==0)
               {
 
@@ -109,7 +109,7 @@ namespace Epi.Web.MVC.Utility
                   PageRoot.AppendChild(child);
               }
 
-
+            
               return xml;
           }
 

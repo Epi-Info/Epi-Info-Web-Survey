@@ -41,9 +41,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -61,6 +64,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Page_AddUser.xaml.cs">
+      <DependentUpon>Page_AddUser.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Page_Download.xaml.cs">
       <DependentUpon>Page_Download.xaml</DependentUpon>
     </Compile>
@@ -75,6 +81,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Page Include="Page_AddUser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -121,6 +131,7 @@
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Properties\DataSources\Epi.Web.Common.Message.OrganizationResponse.datasource" />
     <None Include="Properties\DataSources\Epi.Web.Common.Message.PublishResponse.datasource" />
     <None Include="Properties\DataSources\Epi.Web.Common.Message.SurveyAnswerResponse.datasource" />
     <None Include="Properties\DataSources\Epi.Web.Common.Message.SurveyInfoResponse.datasource" />
@@ -140,6 +151,9 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\SurveyManagerService\SurveyManagerService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SurveyManagerService\SurveyManagerService4.xsd">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>

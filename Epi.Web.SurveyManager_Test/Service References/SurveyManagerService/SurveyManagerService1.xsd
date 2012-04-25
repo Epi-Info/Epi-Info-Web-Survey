@@ -29,31 +29,59 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetOrganization">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="http://www.yourcompany.com/types/" minOccurs="0" name="pRequest" nillable="true" type="q5:OrganizationRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetOrganizationResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q6="http://www.yourcompany.com/types/" minOccurs="0" name="GetOrganizationResult" nillable="true" type="q6:OrganizationResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="SetSurveyInfo">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q5="http://www.yourcompany.com/types/" minOccurs="0" name="pRequest" nillable="true" type="q5:SurveyInfoRequest" />
+        <xs:element xmlns:q7="http://www.yourcompany.com/types/" minOccurs="0" name="pRequest" nillable="true" type="q7:SurveyInfoRequest" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="SetSurveyInfoResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q6="http://www.yourcompany.com/types/" minOccurs="0" name="SetSurveyInfoResult" nillable="true" type="q6:SurveyInfoResponse" />
+        <xs:element xmlns:q8="http://www.yourcompany.com/types/" minOccurs="0" name="SetSurveyInfoResult" nillable="true" type="q8:SurveyInfoResponse" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetSurveyAnswer">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q7="http://www.yourcompany.com/types/" minOccurs="0" name="pRequest" nillable="true" type="q7:SurveyAnswerRequest" />
+        <xs:element xmlns:q9="http://www.yourcompany.com/types/" minOccurs="0" name="pRequest" nillable="true" type="q9:SurveyAnswerRequest" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetSurveyAnswerResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q8="http://www.yourcompany.com/types/" minOccurs="0" name="GetSurveyAnswerResult" nillable="true" type="q8:SurveyAnswerResponse" />
+        <xs:element xmlns:q10="http://www.yourcompany.com/types/" minOccurs="0" name="GetSurveyAnswerResult" nillable="true" type="q10:SurveyAnswerResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetOrganization">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q11="http://www.yourcompany.com/types/" minOccurs="0" name="pRequest" nillable="true" type="q11:OrganizationRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetOrganizationResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q12="http://www.yourcompany.com/types/" minOccurs="0" name="SetOrganizationResult" nillable="true" type="q12:OrganizationResponse" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

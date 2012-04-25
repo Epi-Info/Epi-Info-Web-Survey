@@ -239,5 +239,15 @@ namespace Epi.Web.SurveyManager.Client
                 }
             }
         }
+
+
+
+        private void AddUser_click(object sender, RoutedEventArgs e) {
+
+
+            Page_AddUser page_AddUser = new Page_AddUser();
+            this.NavigationService.Navigate(page_AddUser);
+        }
+
     }
 }

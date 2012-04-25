@@ -133,7 +133,7 @@ namespace Epi.Web.SurveyManager.Client
                 SurveyAnswerResponseTextBox.AppendText(string.Format("{0} - records.\n\n", Result.SurveyResponseList.Count));
                 foreach (Epi.Web.Common.DTO.SurveyAnswerDTO SurveyAnswer in Result.SurveyResponseList)
                 {
-                    SurveyAnswerResponseTextBox.AppendText(string.Format("{0} - {1} - {2} - {3}\n",SurveyAnswer.ResponseId, SurveyAnswer.Status, SurveyAnswer.DateLastUpdated, SurveyAnswer.XML));
+                    SurveyAnswerResponseTextBox.AppendText(string.Format("{0} - {1} - {2} - {3}\n",SurveyAnswer.ResponseId, SurveyAnswer.Status, SurveyAnswer.DateUpdated, SurveyAnswer.XML));
                 }
             }
             catch (FaultException<CustomFaultException> cfe)
@@ -191,6 +191,14 @@ namespace Epi.Web.SurveyManager.Client
         {
             Page_ManageSurvey page_ManageSurvey = new Page_ManageSurvey();
             this.NavigationService.Navigate(page_ManageSurvey);
+        }
+
+        private void AddUser_click(object sender, RoutedEventArgs e)
+        {
+
+
+            Page_AddUser page_AddUser = new Page_AddUser();
+            this.NavigationService.Navigate(page_AddUser);
         }
     }
 }
