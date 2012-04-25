@@ -22,6 +22,7 @@
   </MetadataSources>
   <Metadata>
     <MetadataFile FileName="SurveyManagerService3.xsd" MetadataType="Schema" ID="3160b85c-24bb-4ffa-b5f2-70674b7ef86e" SourceId="1" SourceUrl="http://localhost:22587/Epi.Web.ServiceHost/SurveyManagerService.svc?xsd=xsd3" />
+    <MetadataFile FileName="SurveyManagerService4.xsd" MetadataType="Schema" ID="db31a379-531b-40b5-a75e-2f524fe32ac2" SourceId="1" SourceUrl="http://localhost:22587/Epi.Web.ServiceHost/SurveyManagerService.svc?xsd=xsd4" />
     <MetadataFile FileName="Service.wsdl" MetadataType="Wsdl" ID="05f155bf-3485-4208-a2f3-f086c67ab24b" SourceId="1" SourceUrl="http://localhost:22587/Epi.Web.ServiceHost/SurveyManagerService.svc?wsdl" />
     <MetadataFile FileName="SurveyManagerService.disco" MetadataType="Disco" ID="ec195c42-38f5-42d3-8957-272fe4eecdbc" SourceId="1" SourceUrl="http://localhost:22587/Epi.Web.ServiceHost/SurveyManagerService.svc?disco" />
     <MetadataFile FileName="SurveyManagerService1.xsd" MetadataType="Schema" ID="8f8f9c2b-21d7-4667-9558-ed53953faa7a" SourceId="1" SourceUrl="http://localhost:22587/Epi.Web.ServiceHost/SurveyManagerService.svc?xsd=xsd0" />

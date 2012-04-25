@@ -37,6 +37,17 @@ namespace Epi.Web.Common.ObjectMapping
             };
         }
 
+        public static OrganizationBO ToBusinessObject(OrganizationDTO pDTO)
+        {
+            return new OrganizationBO
+            {
+                 IsEnabled = pDTO.IsEnabled,
+                 Organization = pDTO.Organization,
+                 OrganizationKey = pDTO.OrganizationKey,
+                  AdminId = pDTO.AdminId,
+                  
+            };
+        }
 
         public static List<SurveyInfoBO> ToBusinessObject(List<SurveyInfoDTO> pSurveyInfoList)
         {
@@ -94,7 +105,7 @@ namespace Epi.Web.Common.ObjectMapping
             {
                 SurveyId = pBO.SurveyId,
                 ResponseId = pBO.ResponseId,
-                DateLastUpdated = pBO.DateLastUpdated,
+                DateUpdated = pBO.DateUpdated,
                 XML = pBO.XML,
                 DateCompleted = pBO.DateCompleted,
               
@@ -123,7 +134,7 @@ namespace Epi.Web.Common.ObjectMapping
             {
                 SurveyId = pBO.SurveyId,
                 ResponseId = pBO.ResponseId,
-                DateLastUpdated = pBO.DateLastUpdated,
+                DateUpdated = pBO.DateUpdated,
                 XML = pBO.XML,
                 DateCompleted = pBO.DateCompleted,
                 Status = pBO.Status
