@@ -108,6 +108,22 @@ namespace Epi.Web.EF
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
+        public ObjectSet<sysdiagram> sysdiagrams
+        {
+            get
+            {
+                if ((_sysdiagrams == null))
+                {
+                    _sysdiagrams = base.CreateObjectSet<sysdiagram>("sysdiagrams");
+                }
+                return _sysdiagrams;
+            }
+        }
+        private ObjectSet<sysdiagram> _sysdiagrams;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
         public ObjectSet<SurveyMetaData> SurveyMetaDatas
         {
             get
@@ -136,22 +152,6 @@ namespace Epi.Web.EF
             }
         }
         private ObjectSet<SurveyResponse> _SurveyResponses;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<sysdiagram> sysdiagrams
-        {
-            get
-            {
-                if ((_sysdiagrams == null))
-                {
-                    _sysdiagrams = base.CreateObjectSet<sysdiagram>("sysdiagrams");
-                }
-                return _sysdiagrams;
-            }
-        }
-        private ObjectSet<sysdiagram> _sysdiagrams;
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -189,6 +189,14 @@ namespace Epi.Web.EF
         }
     
         /// <summary>
+        /// Deprecated Method for adding a new object to the sysdiagrams EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddTosysdiagrams(sysdiagram sysdiagram)
+        {
+            base.AddObject("sysdiagrams", sysdiagram);
+        }
+    
+        /// <summary>
         /// Deprecated Method for adding a new object to the SurveyMetaDatas EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddToSurveyMetaDatas(SurveyMetaData surveyMetaData)
@@ -202,14 +210,6 @@ namespace Epi.Web.EF
         public void AddToSurveyResponses(SurveyResponse surveyResponse)
         {
             base.AddObject("SurveyResponses", surveyResponse);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the sysdiagrams EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddTosysdiagrams(sysdiagram sysdiagram)
-        {
-            base.AddObject("sysdiagrams", sysdiagram);
         }
     
         /// <summary>
@@ -451,12 +451,14 @@ namespace Epi.Web.EF
         /// <summary>
         /// Create a new Organization object.
         /// </summary>
+        /// <param name="organizationId">Initial value of the OrganizationId property.</param>
         /// <param name="organizationKey">Initial value of the OrganizationKey property.</param>
         /// <param name="organization1">Initial value of the Organization1 property.</param>
         /// <param name="isEnabled">Initial value of the IsEnabled property.</param>
-        public static Organization CreateOrganization(global::System.Guid organizationKey, global::System.String organization1, global::System.Boolean isEnabled)
+        public static Organization CreateOrganization(global::System.Int32 organizationId, global::System.Guid organizationKey, global::System.String organization1, global::System.Boolean isEnabled)
         {
             Organization organization = new Organization();
+            organization.OrganizationId = organizationId;
             organization.OrganizationKey = organizationKey;
             organization.Organization1 = organization1;
             organization.IsEnabled = isEnabled;
@@ -471,6 +473,33 @@ namespace Epi.Web.EF
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
+        public global::System.Int32 OrganizationId
+        {
+            get
+            {
+                return _OrganizationId;
+            }
+            set
+            {
+                if (_OrganizationId != value)
+                {
+                    OnOrganizationIdChanging(value);
+                    ReportPropertyChanging("OrganizationId");
+                    _OrganizationId = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("OrganizationId");
+                    OnOrganizationIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _OrganizationId;
+        partial void OnOrganizationIdChanging(global::System.Int32 value);
+        partial void OnOrganizationIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
         public global::System.Guid OrganizationKey
         {
             get
@@ -479,14 +508,11 @@ namespace Epi.Web.EF
             }
             set
             {
-                if (_OrganizationKey != value)
-                {
-                    OnOrganizationKeyChanging(value);
-                    ReportPropertyChanging("OrganizationKey");
-                    _OrganizationKey = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("OrganizationKey");
-                    OnOrganizationKeyChanged();
-                }
+                OnOrganizationKeyChanging(value);
+                ReportPropertyChanging("OrganizationKey");
+                _OrganizationKey = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("OrganizationKey");
+                OnOrganizationKeyChanged();
             }
         }
         private global::System.Guid _OrganizationKey;
@@ -589,7 +615,8 @@ namespace Epi.Web.EF
         /// <param name="surveyName">Initial value of the SurveyName property.</param>
         /// <param name="introductionText">Initial value of the IntroductionText property.</param>
         /// <param name="templateXML">Initial value of the TemplateXML property.</param>
-        public static SurveyMetaData CreateSurveyMetaData(global::System.Guid surveyId, global::System.Int32 surveyTypeId, global::System.DateTime closingDate, global::System.String surveyName, global::System.String introductionText, global::System.String templateXML)
+        /// <param name="dateCreated">Initial value of the DateCreated property.</param>
+        public static SurveyMetaData CreateSurveyMetaData(global::System.Guid surveyId, global::System.Int32 surveyTypeId, global::System.DateTime closingDate, global::System.String surveyName, global::System.String introductionText, global::System.String templateXML, global::System.DateTime dateCreated)
         {
             SurveyMetaData surveyMetaData = new SurveyMetaData();
             surveyMetaData.SurveyId = surveyId;
@@ -598,6 +625,7 @@ namespace Epi.Web.EF
             surveyMetaData.SurveyName = surveyName;
             surveyMetaData.IntroductionText = introductionText;
             surveyMetaData.TemplateXML = templateXML;
+            surveyMetaData.DateCreated = dateCreated;
             return surveyMetaData;
         }
 
@@ -898,25 +926,25 @@ namespace Epi.Web.EF
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Byte[] DateCreated
+        public global::System.DateTime DateCreated
         {
             get
             {
-                return StructuralObject.GetValidValue(_DateCreated);
+                return _DateCreated;
             }
             set
             {
                 OnDateCreatedChanging(value);
                 ReportPropertyChanging("DateCreated");
-                _DateCreated = StructuralObject.SetValidValue(value, true);
+                _DateCreated = StructuralObject.SetValidValue(value);
                 ReportPropertyChanged("DateCreated");
                 OnDateCreatedChanged();
             }
         }
-        private global::System.Byte[] _DateCreated;
-        partial void OnDateCreatedChanging(global::System.Byte[] value);
+        private global::System.DateTime _DateCreated;
+        partial void OnDateCreatedChanging(global::System.DateTime value);
         partial void OnDateCreatedChanged();
     
         /// <summary>
@@ -924,24 +952,24 @@ namespace Epi.Web.EF
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Guid> OrganizationKey
+        public Nullable<global::System.Int32> OrganizationId
         {
             get
             {
-                return _OrganizationKey;
+                return _OrganizationId;
             }
             set
             {
-                OnOrganizationKeyChanging(value);
-                ReportPropertyChanging("OrganizationKey");
-                _OrganizationKey = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("OrganizationKey");
-                OnOrganizationKeyChanged();
+                OnOrganizationIdChanging(value);
+                ReportPropertyChanging("OrganizationId");
+                _OrganizationId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("OrganizationId");
+                OnOrganizationIdChanged();
             }
         }
-        private Nullable<global::System.Guid> _OrganizationKey;
-        partial void OnOrganizationKeyChanging(Nullable<global::System.Guid> value);
-        partial void OnOrganizationKeyChanged();
+        private Nullable<global::System.Int32> _OrganizationId;
+        partial void OnOrganizationIdChanging(Nullable<global::System.Int32> value);
+        partial void OnOrganizationIdChanged();
 
         #endregion
     
@@ -1063,17 +1091,19 @@ namespace Epi.Web.EF
         /// </summary>
         /// <param name="responseId">Initial value of the ResponseId property.</param>
         /// <param name="surveyId">Initial value of the SurveyId property.</param>
-        /// <param name="dateLastUpdated">Initial value of the DateLastUpdated property.</param>
+        /// <param name="dateUpdated">Initial value of the DateUpdated property.</param>
         /// <param name="statusId">Initial value of the StatusId property.</param>
         /// <param name="responseXML">Initial value of the ResponseXML property.</param>
-        public static SurveyResponse CreateSurveyResponse(global::System.Guid responseId, global::System.Guid surveyId, global::System.DateTime dateLastUpdated, global::System.Int32 statusId, global::System.String responseXML)
+        /// <param name="dateCreated">Initial value of the DateCreated property.</param>
+        public static SurveyResponse CreateSurveyResponse(global::System.Guid responseId, global::System.Guid surveyId, global::System.DateTime dateUpdated, global::System.Int32 statusId, global::System.String responseXML, global::System.DateTime dateCreated)
         {
             SurveyResponse surveyResponse = new SurveyResponse();
             surveyResponse.ResponseId = responseId;
             surveyResponse.SurveyId = surveyId;
-            surveyResponse.DateLastUpdated = dateLastUpdated;
+            surveyResponse.DateUpdated = dateUpdated;
             surveyResponse.StatusId = statusId;
             surveyResponse.ResponseXML = responseXML;
+            surveyResponse.DateCreated = dateCreated;
             return surveyResponse;
         }
 
@@ -1136,24 +1166,24 @@ namespace Epi.Web.EF
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.DateTime DateLastUpdated
+        public global::System.DateTime DateUpdated
         {
             get
             {
-                return _DateLastUpdated;
+                return _DateUpdated;
             }
             set
             {
-                OnDateLastUpdatedChanging(value);
-                ReportPropertyChanging("DateLastUpdated");
-                _DateLastUpdated = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("DateLastUpdated");
-                OnDateLastUpdatedChanged();
+                OnDateUpdatedChanging(value);
+                ReportPropertyChanging("DateUpdated");
+                _DateUpdated = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("DateUpdated");
+                OnDateUpdatedChanged();
             }
         }
-        private global::System.DateTime _DateLastUpdated;
-        partial void OnDateLastUpdatedChanging(global::System.DateTime value);
-        partial void OnDateLastUpdatedChanged();
+        private global::System.DateTime _DateUpdated;
+        partial void OnDateUpdatedChanging(global::System.DateTime value);
+        partial void OnDateUpdatedChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -1256,30 +1286,6 @@ namespace Epi.Web.EF
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.Byte[] DateCreated
-        {
-            get
-            {
-                return StructuralObject.GetValidValue(_DateCreated);
-            }
-            set
-            {
-                OnDateCreatedChanging(value);
-                ReportPropertyChanging("DateCreated");
-                _DateCreated = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("DateCreated");
-                OnDateCreatedChanged();
-            }
-        }
-        private global::System.Byte[] _DateCreated;
-        partial void OnDateCreatedChanging(global::System.Byte[] value);
-        partial void OnDateCreatedChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
         public Nullable<global::System.Int64> ResponseXMLSize
         {
             get
@@ -1298,6 +1304,30 @@ namespace Epi.Web.EF
         private Nullable<global::System.Int64> _ResponseXMLSize;
         partial void OnResponseXMLSizeChanging(Nullable<global::System.Int64> value);
         partial void OnResponseXMLSizeChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime DateCreated
+        {
+            get
+            {
+                return _DateCreated;
+            }
+            set
+            {
+                OnDateCreatedChanging(value);
+                ReportPropertyChanging("DateCreated");
+                _DateCreated = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("DateCreated");
+                OnDateCreatedChanged();
+            }
+        }
+        private global::System.DateTime _DateCreated;
+        partial void OnDateCreatedChanging(global::System.DateTime value);
+        partial void OnDateCreatedChanged();
 
         #endregion
     

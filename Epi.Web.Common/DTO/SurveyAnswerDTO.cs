@@ -14,7 +14,7 @@ namespace Epi.Web.Common.DTO
         [DataMember]
         public string SurveyId { get; set; }
         [DataMember]
-        public DateTime DateLastUpdated { get; set; }
+        public DateTime DateUpdated { get; set; }
         [DataMember]
         public DateTime DateCompleted { get; set; }
         [DataMember]

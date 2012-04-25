@@ -473,11 +473,57 @@ namespace Epi.Web.WCF.SurveyService
 
 
 
-        public OrganizationResponse SetOrganization(OrganizationRequest pRequest)
+        public OrganizationResponse SetOrganization(OrganizationRequest request)
         {
-            OrganizationResponse result = new OrganizationResponse();
+          
+            try
+            {
+                Epi.Web.Interfaces.DataInterfaces.IOrganizationDao IOrganizationDao = new EF.EntityOrganizationDao();
+                Epi.Web.BLL.Organization Implementation = new Epi.Web.BLL.Organization(IOrganizationDao);
 
-            return result;
+
+                
+                var response = new OrganizationResponse(request.RequestId);
+                // Validate client tag, access token, and user credentials
+
+                if (!ValidRequest(request, response, Validate.All))
+                    return response;
+
+                // Transform SurveyInfo data transfer object to SurveyInfo business object
+                var Organization = Mapper.ToBusinessObject(request.Organization);
+                Implementation.InsertOrganizationInfo(Organization);
+                
+            
+                return response;
+            }
+            catch (Exception ex)
+            {
+                CustomFaultException customFaultException = new CustomFaultException();
+                customFaultException.CustomMessage = ex.Message;
+                customFaultException.Source = ex.Source;
+                customFaultException.StackTrace = ex.StackTrace;
+                customFaultException.HelpLink = ex.HelpLink;
+                throw new FaultException<CustomFaultException>(customFaultException);
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
 
         }
 

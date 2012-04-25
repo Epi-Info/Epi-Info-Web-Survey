@@ -244,5 +244,13 @@ namespace Epi.Web.SurveyManager.Client
             this.ExitTextLabel.Content = "No Exit Text file is selected.";
             ExitTextTextBox.Document.Blocks.Clear();
         }
+
+        private void AddUser_click(object sender, RoutedEventArgs e)
+        {
+
+
+            Page_AddUser page_AddUser = new Page_AddUser();
+            this.NavigationService.Navigate(page_AddUser);
+        }
     }
 }

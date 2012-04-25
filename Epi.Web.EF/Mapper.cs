@@ -92,7 +92,7 @@ namespace Epi.Web.EF
                 XML = entity.XML,
                 Status = entity.Status,
                 UserPublishKey = entity.UserPublishKey,
-                DateLastUpdated = entity.DateLastUpdated,
+                DateUpdated = entity.DateUpdated,
                 DateCompleted = entity.DateCompleted
             };
         }
@@ -111,7 +111,7 @@ namespace Epi.Web.EF
                 XML = businessobject.XML,
                 Status = businessobject.Status,
                 UserPublishKey = businessobject.UserPublishKey,
-                DateLastUpdated = businessobject.DateLastUpdated,
+                DateUpdated = businessobject.DateUpdated,
                 DateCompleted = businessobject.DateCompleted
 
             };
@@ -130,8 +130,7 @@ namespace Epi.Web.EF
                 ResponseId = entity.ResponseId.ToString(),
                 XML = entity.ResponseXML,
                 Status = entity.StatusId,
-                
-                DateLastUpdated = entity.DateLastUpdated,
+                 DateUpdated = entity.DateUpdated,
                 DateCompleted = entity.DateCompleted.Value,
                 
             };
@@ -147,7 +146,28 @@ namespace Epi.Web.EF
 
             return result;
         }
+        internal static OrganizationBO Map(Organization entity)
+        {
+            return new OrganizationBO
+            {
+                Organization = entity.Organization1,
+                IsEnabled = entity.IsEnabled,
+                OrganizationKey = entity.OrganizationKey 
 
+
+            };
+        }
+        internal static Organization ToEF(OrganizationBO pBo)
+        {
+            return new Organization
+            {
+                Organization1 = pBo.Organization,
+                IsEnabled = pBo.IsEnabled,
+                OrganizationKey = pBo.OrganizationKey,
+
+
+            };
+        }
         /// <summary>
         /// Maps SurveyInfoBO business object to SurveyMetaData entity.
         /// </summary>
@@ -162,7 +182,7 @@ namespace Epi.Web.EF
                 ResponseXML = pBO.XML,
                 StatusId = pBO.Status,
                 
-                DateLastUpdated = pBO.DateLastUpdated,
+                DateUpdated = pBO.DateUpdated,
                 DateCompleted = pBO.DateCompleted
 
             };
