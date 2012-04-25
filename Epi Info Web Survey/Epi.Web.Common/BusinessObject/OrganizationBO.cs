@@ -12,7 +12,7 @@ namespace Epi.Web.Common.BusinessObject
         private string _Organization;
         private Guid _OrganizationKey;
         private bool _IsEnabled;
-
+        private Guid _AdminId;
         [DataMember]
         public string Organization
         {
@@ -33,7 +33,12 @@ namespace Epi.Web.Common.BusinessObject
             get { return _IsEnabled; }
             set { _IsEnabled = value; }
         }
-
+        [DataMember]
+        public Guid AdminId
+        {
+            get { return _AdminId; }
+            set { _AdminId = value; }
+        }
 
     }
 }

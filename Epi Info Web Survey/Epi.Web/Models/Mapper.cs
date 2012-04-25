@@ -69,7 +69,7 @@ namespace Epi.Web.MVC.Models
             {
                 ResponseId = SurveyAnswerDTO.ResponseId,
                 SurveyId = SurveyAnswerDTO.SurveyId,
-                DateLastUpdated = SurveyAnswerDTO.DateLastUpdated,
+                DateUpdated = SurveyAnswerDTO.DateUpdated,
                 DateCompleted = SurveyAnswerDTO.DateCompleted,
                 Status = SurveyAnswerDTO.Status,
                 XML = SurveyAnswerDTO.XML
@@ -88,7 +88,7 @@ namespace Epi.Web.MVC.Models
             {
                 ResponseId = SurveyAnswerModel.ResponseId,
                 SurveyId = SurveyAnswerModel.SurveyId,
-                DateLastUpdated = SurveyAnswerModel.DateLastUpdated,
+                DateUpdated = SurveyAnswerModel.DateUpdated,
                 DateCompleted = SurveyAnswerModel.DateCompleted,
                 Status = SurveyAnswerModel.Status,
                 XML = SurveyAnswerModel.XML

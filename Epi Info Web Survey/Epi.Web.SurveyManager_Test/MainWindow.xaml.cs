@@ -22,6 +22,7 @@ namespace Epi.Web.SurveyManager.Client
         public MainWindow()
         {
             InitializeComponent();
+           // this.Content = new Menu();
         }
      
     }

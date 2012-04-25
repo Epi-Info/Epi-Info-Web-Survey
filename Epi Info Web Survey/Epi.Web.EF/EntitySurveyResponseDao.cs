@@ -192,7 +192,7 @@ namespace Epi.Web.EF
                 DataRow.ResponseXML = SurveyResponse.XML;
                 DataRow.DateCompleted = DateTime.Now;
                 DataRow.StatusId = SurveyResponse.Status;
-                DataRow.DateLastUpdated = DateTime.Now;
+                DataRow.DateUpdated = DateTime.Now;
              //   DataRow.ResponsePasscode = SurveyResponse.ResponsePassCode;
                 DataRow.ResponseXMLSize = RemoveWhitespace(SurveyResponse.XML).Length; 
                 Context.SaveChanges();

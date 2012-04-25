@@ -13,7 +13,7 @@ namespace Epi.Web.MVC.Models
     {
         public string ResponseId { get; set; }
         public string SurveyId { get; set; }
-        public DateTime DateLastUpdated { get; set; }
+        public DateTime DateUpdated { get; set; }
         public DateTime DateCompleted { get; set; }
         public int Status { get; set; }
         public string XML { get; set; }
