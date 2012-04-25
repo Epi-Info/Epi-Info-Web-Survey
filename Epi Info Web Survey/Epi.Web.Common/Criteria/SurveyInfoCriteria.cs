@@ -18,6 +18,31 @@ namespace Epi.Web.Common.Criteria
         }
 
         /// <summary>
+        /// Organization Key for Manager Service
+        /// </summary>
+        [DataMember]
+        public Guid OrganizationKey { get; set; }
+
+
+        /// <summary>
+        /// Which page to retrieve
+        /// </summary>
+        [DataMember]
+        public int PageNumber { get; set; }
+
+        /// <summary>
+        /// Number of Records per page
+        /// </summary>
+        [DataMember]
+        public int PageSize { get; set; }
+
+        /// <summary>
+        /// Number of Records per page
+        /// </summary>
+        [DataMember]
+        public bool ReturnSizeInfoOnly { get; set; }
+
+        /// <summary>
         /// Unique SurveyInfo identifier.
         /// </summary>
         [DataMember]
