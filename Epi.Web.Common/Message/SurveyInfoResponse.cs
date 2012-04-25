@@ -21,6 +21,19 @@ namespace Epi.Web.Common.Message
         }
 
         /// <summary>
+        /// Total number of pages for query
+        /// </summary>
+        [DataMember]
+        public int PageTotal { get; set; }
+
+        /// <summary>
+        /// Number of Records per page
+        /// </summary>
+        [DataMember]
+        public int PageSize { get; set; }
+
+
+        /// <summary>
         /// Overloaded Constructor for SurveyInfoResponse. Sets CorrelationId.
         /// </summary>
         /// <param name="correlationId"></param>

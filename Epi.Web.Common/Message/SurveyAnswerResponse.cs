@@ -28,5 +28,20 @@ namespace Epi.Web.Common.Message
         /// </summary>
         [DataMember]
         public List<SurveyAnswerDTO> SurveyResponseList;
+
+        /// <summary>
+        /// Total number of pages for query
+        /// </summary>
+        [DataMember]
+        public int PageTotal { get; set; }
+
+        /// <summary>
+        /// Number of Records per page
+        /// </summary>
+        [DataMember]
+        public int PageSize { get; set; }
+
+
+
     }
 }
