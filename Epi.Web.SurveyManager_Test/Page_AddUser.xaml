@@ -10,11 +10,11 @@
     <Grid Height="692" Width="629"  >
 
    
-        <GroupBox Header="Add Organization " Height="168" HorizontalAlignment="Left" Margin="42,179,0,0" Name="groupBox2" VerticalAlignment="Top" Width="551" Background="#FFE5E19E"></GroupBox>
+        <GroupBox Header="Add Organization " Height="168" HorizontalAlignment="Left" Margin="42,180,0,0" Name="groupBox2" VerticalAlignment="Top" Width="551" Background="#FFE5E19E"></GroupBox>
         <Button Content="View Publish Client" Height="30" HorizontalAlignment="Left" Margin="33,38,0,0" Name="ViewPublishClient" VerticalAlignment="Top" Width="118"  Click="ViewPublishClien_Click" />
         <Button Content="Manage Existing Surveys" Height="30" HorizontalAlignment="Left" Margin="157,38,0,0" Name="ManageSurveyButton" VerticalAlignment="Top" Width="150"  Click="ManageSurveyButton_Click" />
         <Button Content="View Download Client" Height="30" HorizontalAlignment="Left" Margin="314,38,0,0" Name="ViewDownloadClient" VerticalAlignment="Top" Width="162" Click="ViewDownloadClient_Click" />
-        <Button Content="Add Key" Height="23" HorizontalAlignment="Right" Margin="0,257,62,0" Name="Add" VerticalAlignment="Top" Width="131" Click="AddOrganization_Click" />
+        <Button Content="Add Key" Height="23" HorizontalAlignment="Right" Margin="0,259,120,0" Name="Add" VerticalAlignment="Top" Width="143" Click="AddOrganization_Click" />
         <Label Content="Organization:" Height="28" Margin="71,194,0,470" Name="label2" HorizontalAlignment="Left" Width="88" />
         <TextBox Height="23" HorizontalAlignment="Left" Margin="243,199,0,0" Name="OrganizationtextBox1" VerticalAlignment="Top" Width="266" Background="White" AutoWordSelection="True" />
         <Label Content="Organization Generated key:" Height="28" Margin="71,223,0,441" Name="label3" HorizontalAlignment="Left" Width="158" />
@@ -22,19 +22,19 @@
         <GroupBox Header="Admin Pass" Name="groupBox1" Width="551" Background="#FFE5E19E" Margin="42,96,36,519"></GroupBox>
         <PasswordBox Height="23" Name="passwordBox1" Margin="243,132,120,537" MaxLength="36" />
         <Label Content="Admin Pass:" Height="28" Name="label1" Margin="71,127,468,537" />
-        <Button Content="Generate Key" Height="23" HorizontalAlignment="Left" Margin="299,257,0,0" Name="GenerateKey" VerticalAlignment="Top" Width="131" Click="GenerateKey_Clik" />
-        <GroupBox Header="Get Organization Key" Height="318" HorizontalAlignment="Left" Margin="46,343,0,0" Name="groupBox3" VerticalAlignment="Top" Width="547" Background="#FFE5E19E">
+        <Button Content="Generate Key" Height="23" HorizontalAlignment="Left" Margin="241,259,0,0" Name="GenerateKey" VerticalAlignment="Top" Width="111" Click="GenerateKey_Clik" />
+        <GroupBox Header="Get Organization Key" Height="305" HorizontalAlignment="Left" Margin="46,355,0,0" Name="groupBox3" VerticalAlignment="Top" Width="547" Background="#FFE5E19E">
              
         </GroupBox>
-        <Label Content="Organization:" Height="28" HorizontalAlignment="Left" Margin="71,377,0,287" Name="label4" Width="88" />
-        <Button Content="Get Keys " Height="23" HorizontalAlignment="Left" Margin="424,565,0,0" Name="GetKey" VerticalAlignment="Top" Width="143"  Click="GetKey_Clik"/>
-        <Label Content="Organization keys:" Height="28" HorizontalAlignment="Left" Margin="71,502,0,162" Name="label5" Width="158" />
+        <Label Content="Organization:" Height="28" HorizontalAlignment="Left" Margin="71,404,0,260" Name="label4" Width="88" />
+        <Button Content="Get Keys " Height="23" HorizontalAlignment="Left" Margin="366,459,0,0" Name="GetKey" VerticalAlignment="Top" Width="143"  Click="GetKey_Clik"/>
+        <Label Content="Organization keys:" Height="28" HorizontalAlignment="Left" Margin="71,500,0,164" Name="label5" Width="158" />
         <RichTextBox Height="49" HorizontalAlignment="Left" Margin="243,288,0,0" Name="MessagerichTextBox1" VerticalAlignment="Top" Width="266" Foreground="#FFF20909" VerticalScrollBarVisibility="Visible" />
         <Label Content="Message:" Height="28" HorizontalAlignment="Left" Margin="71,288,0,0" Name="label6" VerticalAlignment="Top" />
-        <Button Content="Get Organization Names" Height="23" HorizontalAlignment="Left" Margin="424,461,0,0" Name="button1" VerticalAlignment="Top" Width="143" Click="GetOrganizationNames_Clik" />
-        <ListBox Height="82" HorizontalAlignment="Left" Margin="200,364,0,0" Name="OnamelistBox1" VerticalAlignment="Top" Width="309" AllowDrop="True" />
-        <RichTextBox Foreground="#FFF20909" Height="49" HorizontalAlignment="Left" Margin="200,604,0,0" Name="richTextBox1" VerticalAlignment="Top" VerticalScrollBarVisibility="Visible" Width="309" />
-        <Label Content="Message:" Height="28" HorizontalAlignment="Left" Margin="71,604,0,0" Name="label7" VerticalAlignment="Top" />
-        <ListBox AllowDrop="True" Height="58" HorizontalAlignment="Left" Margin="200,490,0,0" Name="OKeyslistBox1" VerticalAlignment="Top" Width="309" />
+        <Button Content="Get Organization Names" Height="23" HorizontalAlignment="Left" Margin="366,375,0,0" Name="button1" VerticalAlignment="Top" Width="143" Click="GetOrganizationNames_Clik" />
+        <ComboBox Height="25" HorizontalAlignment="Left" Margin="200,404,0,0" Name="OnamelistBox1" VerticalAlignment="Top" Width="309" AllowDrop="True" />
+        <RichTextBox Foreground="#FFF20909" Height="49" HorizontalAlignment="Left" Margin="200,586,0,0" Name="richTextBox1" VerticalAlignment="Top" VerticalScrollBarVisibility="Visible" Width="309" />
+        <Label Content="Message:" Height="28" HorizontalAlignment="Left" Margin="71,586,0,0" Name="label7" VerticalAlignment="Top" />
+        <ListBox AllowDrop="True" Height="58" HorizontalAlignment="Left" Margin="200,488,0,0" Name="OKeyslistBox1" VerticalAlignment="Top" Width="309" />
     </Grid>
 </Page>
