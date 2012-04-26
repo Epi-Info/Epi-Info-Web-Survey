@@ -10,7 +10,7 @@ namespace Epi.Web.Common.BusinessObject
     public class OrganizationBO
     {
         private string _Organization;
-        private Guid _OrganizationKey;
+        private string _OrganizationKey;
         private bool _IsEnabled;
         private Guid _AdminId;
         [DataMember]
@@ -21,7 +21,7 @@ namespace Epi.Web.Common.BusinessObject
         }
 
         [DataMember]
-        public Guid OrganizationKey 
+        public string OrganizationKey 
         {
             get { return _OrganizationKey; }
             set { _OrganizationKey = value; }

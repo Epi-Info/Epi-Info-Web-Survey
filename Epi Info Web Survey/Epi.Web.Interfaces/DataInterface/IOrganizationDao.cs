@@ -19,9 +19,9 @@ namespace Epi.Web.Interfaces.DataInterfaces
         /// </summary>
         /// <param name="OrganizationId">Unique Organization identifier.</param>
         /// <returns>Organization.</returns>
-        OrganizationBO GetOrganizationKey(string OrganizationName );
+        List<OrganizationBO> GetOrganizationKeys(string OrganizationName );
 
-
+        List<OrganizationBO> GetOrganizationInfo();
 
      //   /// <summary>
      //   /// Gets a specific Organization.

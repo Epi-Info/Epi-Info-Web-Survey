@@ -152,7 +152,7 @@ namespace Epi.Web.EF
             {
                 Organization = entity.Organization1,
                 IsEnabled = entity.IsEnabled,
-                OrganizationKey = entity.OrganizationKey 
+                OrganizationKey = entity.OrganizationKey
 
 
             };

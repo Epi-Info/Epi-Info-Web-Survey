@@ -3,10 +3,17 @@
   <xs:import schemaLocation="http://localhost:22587/Epi.Web.ServiceHost/SurveyManagerService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
   <xs:complexType name="OrganizationDTO">
     <xs:sequence>
+      <xs:element minOccurs="0" name="AdminId" type="ser:guid" />
       <xs:element minOccurs="0" name="IsEnabled" type="xs:boolean" />
       <xs:element minOccurs="0" name="Organization" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="OrganizationKey" type="ser:guid" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="OrganizationDTO" nillable="true" type="tns:OrganizationDTO" />
+  <xs:complexType name="ArrayOfOrganizationDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="OrganizationDTO" nillable="true" type="tns:OrganizationDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfOrganizationDTO" nillable="true" type="tns:ArrayOfOrganizationDTO" />
 </xs:schema>
