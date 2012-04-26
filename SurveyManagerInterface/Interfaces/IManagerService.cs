@@ -27,6 +27,10 @@ namespace Epi.Web.WCF.SurveyService
 
         [OperationContract]
         [FaultContract(typeof(CustomFaultException))]
+        OrganizationResponse GetOrganizationInfo(OrganizationRequest pRequest);
+
+        [OperationContract]
+        [FaultContract(typeof(CustomFaultException))]
         SurveyInfoResponse SetSurveyInfo(SurveyInfoRequest pRequest);
 
         [OperationContract]

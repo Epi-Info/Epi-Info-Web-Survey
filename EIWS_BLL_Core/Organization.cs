@@ -18,10 +18,16 @@ namespace Epi.Web.BLL
             this.OrganizationDao = pOrganizationDao;
         }
 
-        public OrganizationBO GetOrganizationKey(string OrganizationName)
+        public List<OrganizationBO> GetOrganizationKey(string OrganizationName)
         {
 
-            OrganizationBO result = this.OrganizationDao.GetOrganizationKey(OrganizationName);
+            List<OrganizationBO> result = this.OrganizationDao.GetOrganizationKeys(OrganizationName);
+            return result;
+        }
+        public List<OrganizationBO> GetOrganizationInfo()
+        {
+
+            List<OrganizationBO> result = this.OrganizationDao.GetOrganizationInfo();
             return result;
         }
         public void InsertOrganizationInfo(OrganizationBO OrganizationBO)
@@ -36,6 +42,27 @@ namespace Epi.Web.BLL
             this.OrganizationDao.UpdateOrganization(OrganizationBO);
 
         }
+        //Validate Admin
+        public bool ValidateAdmin(string AdminKey, OrganizationBO OrganizationBO)
+        {
+           
+            bool ISValidUser = false;
 
+            if (!string.IsNullOrEmpty(AdminKey) && !string.IsNullOrEmpty(OrganizationBO.AdminId.ToString()))
+            {
+
+                if (AdminKey == OrganizationBO.AdminId.ToString())
+                {
+                    ISValidUser = true;
+
+
+                }
+                else
+                {
+                    ISValidUser = false;
+                }
+            }
+            return ISValidUser;
+        }
     }
 }

@@ -11,6 +11,10 @@ using Epi.Web.Common.Criteria;
 using Epi.Web.Common.ObjectMapping;
 using Epi.Web.Common.BusinessObject;
 using Epi.Web.Common.Exception;
+
+using System.Configuration;
+using Epi.Web.Common.Security;
+ 
 namespace Epi.Web.WCF.SurveyService
 {
     public class ManagerService : IManagerService
@@ -464,11 +468,99 @@ namespace Epi.Web.WCF.SurveyService
         }
 
 
-        public OrganizationResponse GetOrganization(OrganizationRequest pRequest)
+        public OrganizationResponse GetOrganization(OrganizationRequest request)
         {
-            OrganizationResponse result = new OrganizationResponse();
+            string AdmiKey = Cryptography.Decrypt(ConfigurationManager.AppSettings["AdminKey"]);
 
-            return result;
+            try
+            {
+                Epi.Web.Interfaces.DataInterfaces.IOrganizationDao IOrganizationDao = new EF.EntityOrganizationDao();
+                Epi.Web.BLL.Organization Implementation = new Epi.Web.BLL.Organization(IOrganizationDao);
+                 // Transform SurveyInfo data transfer object to SurveyInfo business object
+                 OrganizationBO Organization = Mapper.ToBusinessObject(request.Organization);
+                 var response = new OrganizationResponse(request.RequestId);
+
+                 if (Implementation.ValidateAdmin(AdmiKey, Organization))
+                 {
+
+                     // Validate client tag, access token, and user credentials
+
+                     if (!ValidRequest(request, response, Validate.All))
+                         return response;
+
+                     List<OrganizationBO> ListOrganizationBO = Implementation.GetOrganizationKey(Organization.Organization);
+                     response.OrganizationList = new List<OrganizationDTO>();
+                     foreach (OrganizationBO Item in ListOrganizationBO)
+                     {
+                         (response.OrganizationList).Add(Mapper.ToDataTransferObjects(Item));
+
+                     }
+                     return response;
+                 }
+                 else {
+
+                     return response;
+                 }
+              
+                 
+            }
+            catch (Exception ex)
+            {
+                CustomFaultException customFaultException = new CustomFaultException();
+                customFaultException.CustomMessage = ex.Message;
+                customFaultException.Source = ex.Source;
+                customFaultException.StackTrace = ex.StackTrace;
+                customFaultException.HelpLink = ex.HelpLink;
+                throw new FaultException<CustomFaultException>(customFaultException);
+            }
+        }
+
+        public OrganizationResponse GetOrganizationInfo(OrganizationRequest request)
+        {
+            string AdmiKey = Cryptography.Decrypt(ConfigurationManager.AppSettings["AdminKey"]);
+
+            try
+            {
+                Epi.Web.Interfaces.DataInterfaces.IOrganizationDao IOrganizationDao = new EF.EntityOrganizationDao();
+                Epi.Web.BLL.Organization Implementation = new Epi.Web.BLL.Organization(IOrganizationDao);
+                // Transform SurveyInfo data transfer object to SurveyInfo business object
+                OrganizationBO Organization = Mapper.ToBusinessObject(request.Organization);
+                var response = new OrganizationResponse(request.RequestId);
+
+                if (Implementation.ValidateAdmin(AdmiKey, Organization))
+                {
+
+                    // Validate client tag, access token, and user credentials
+
+                    if (!ValidRequest(request, response, Validate.All))
+                        return response;
+
+                    List<OrganizationBO> ListOrganizationBO = Implementation.GetOrganizationInfo();
+                    response.OrganizationList = new List<OrganizationDTO>();
+                    foreach (OrganizationBO Item in ListOrganizationBO)
+                    {
+                        (response.OrganizationList).Add(Mapper.ToDataTransferObjects(Item));
+
+                    }
+                    return response;
+                }
+                else
+                {
+
+                    return response;
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                CustomFaultException customFaultException = new CustomFaultException();
+                customFaultException.CustomMessage = ex.Message;
+                customFaultException.Source = ex.Source;
+                customFaultException.StackTrace = ex.StackTrace;
+                customFaultException.HelpLink = ex.HelpLink;
+                throw new FaultException<CustomFaultException>(customFaultException);
+            }
         }
 
 
@@ -478,23 +570,29 @@ namespace Epi.Web.WCF.SurveyService
           
             try
             {
+               string  AdmiKey = Cryptography.Decrypt(ConfigurationManager.AppSettings["AdminKey"]);
+               
                 Epi.Web.Interfaces.DataInterfaces.IOrganizationDao IOrganizationDao = new EF.EntityOrganizationDao();
                 Epi.Web.BLL.Organization Implementation = new Epi.Web.BLL.Organization(IOrganizationDao);
-
-
-                
-                var response = new OrganizationResponse(request.RequestId);
-                // Validate client tag, access token, and user credentials
-
-                if (!ValidRequest(request, response, Validate.All))
-                    return response;
-
                 // Transform SurveyInfo data transfer object to SurveyInfo business object
                 var Organization = Mapper.ToBusinessObject(request.Organization);
-                Implementation.InsertOrganizationInfo(Organization);
-                
-            
-                return response;
+                var response = new OrganizationResponse(request.RequestId);
+                // Validate client tag, access token, and user credentials
+                if (Implementation.ValidateAdmin(AdmiKey, Organization))
+                {
+                    
+
+                    if (!ValidRequest(request, response, Validate.All))
+                        return response;
+                     Implementation.InsertOrganizationInfo(Organization);
+
+                     response.Message = "Successfully added organization Key";
+                    return response;
+                }
+                else {
+                    response.Message = "Invalid Admi Key";
+                    return response;
+                }
             }
             catch (Exception ex)
             {
@@ -506,24 +604,6 @@ namespace Epi.Web.WCF.SurveyService
                 throw new FaultException<CustomFaultException>(customFaultException);
             }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            
 
         }
 
