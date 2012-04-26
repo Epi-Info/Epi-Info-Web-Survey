@@ -73,6 +73,8 @@ namespace Epi.Web.SurveyManager.Client
                             Request.Organization.OrganizationKey = Cryptography.Encrypt(this.GeneratedkeytextBox1.Text);
                             Epi.Web.Common.Message.OrganizationResponse Result = client.SetOrganization(Request);
                             MessagerichTextBox1.Document.Blocks.Clear();
+                            OrganizationtextBox1.Clear();
+                            GeneratedkeytextBox1.Clear();
                             MessagerichTextBox1.AppendText(Result.Message.ToString());
                         }
                         else
