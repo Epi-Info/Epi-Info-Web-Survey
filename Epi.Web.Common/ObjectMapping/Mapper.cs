@@ -49,6 +49,20 @@ namespace Epi.Web.Common.ObjectMapping
             };
         }
 
+        public static OrganizationDTO ToDataTransferObjects(OrganizationBO pBO)
+        {
+
+            return new OrganizationDTO
+            {
+                AdminId = pBO.AdminId,
+                IsEnabled = pBO.IsEnabled,
+                Organization = pBO.Organization,
+                OrganizationKey = pBO.OrganizationKey
+
+            };
+
+        }
+
         public static List<SurveyInfoBO> ToBusinessObject(List<SurveyInfoDTO> pSurveyInfoList)
         {
             List<SurveyInfoBO> result = new List<SurveyInfoBO>();
@@ -202,6 +216,8 @@ namespace Epi.Web.Common.ObjectMapping
             return pBO.Select(c => ToDataTransferObject(c)).ToList();
         }
 
+
+        
 
         ///// <summary>
         ///// Transforms list of category BOs list of category DTOs.

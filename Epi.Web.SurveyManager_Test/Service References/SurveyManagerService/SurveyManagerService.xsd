@@ -149,7 +149,8 @@
     <xs:complexContent mixed="false">
       <xs:extension base="tns:ResponseBase">
         <xs:sequence>
-          <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Epi.Web.Common.DTO" minOccurs="0" name="Organization" nillable="true" type="q4:OrganizationDTO" />
+          <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
+          <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Epi.Web.Common.DTO" minOccurs="0" name="OrganizationList" nillable="true" type="q4:ArrayOfOrganizationDTO" />
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>

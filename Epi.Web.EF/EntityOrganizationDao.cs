@@ -23,25 +23,51 @@ namespace Epi.Web.EF
         /// </summary>
         /// <param name="OrganizationId">Unique Organization identifier.</param>
         /// <returns>Organization.</returns>
-        public OrganizationBO GetOrganizationKey(string OrganizationName)
+        public List<OrganizationBO> GetOrganizationKeys(string OrganizationName)
         {
 
-            OrganizationBO OrganizationBO = new OrganizationBO();
+           List<OrganizationBO> OrganizationBO = new  List<OrganizationBO>();
 
-            if (!string.IsNullOrEmpty(OrganizationName))
-            {
+           using (var Context = DataObjectFactory.CreateContext())
+           {
+               var Query = from response in Context.Organizations
+                           where response.Organization1 == OrganizationName
+                           select response;
+
+               var DataRow = Query;
+             foreach(var Row in DataRow)
+               {
+
+                 OrganizationBO.Add(Mapper.Map(Row));
                
-                using (var Context = DataObjectFactory.CreateContext())
-                {
-                   OrganizationBO = Mapper.Map((Context.Organizations.FirstOrDefault(x => x.Organization1 == OrganizationName)));
-                }
-            
-                 
-            }
-
+               }
+           }
             return OrganizationBO;
         }
 
+
+        public List<OrganizationBO> GetOrganizationInfo()
+        {
+
+            List<OrganizationBO> OrganizationBO = new List<OrganizationBO>();
+
+            using (var Context = DataObjectFactory.CreateContext())
+            {
+               var Query = (from response in Context.Organizations
+                            
+                       select response);
+
+                
+                var DataRow = Query;
+                foreach (var Row in DataRow)
+                {
+
+                    OrganizationBO.Add(Mapper.Map(Row));
+
+                }
+            }
+            return OrganizationBO;
+        }
 
 
 

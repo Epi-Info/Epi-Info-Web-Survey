@@ -14,7 +14,7 @@ namespace Epi.Web.Common.Message
         /// <summary>
         /// Default Constructor for OrganizationResponse.
         /// </summary>
-        public OrganizationResponse() { }
+        public OrganizationResponse() {}
 
         /// <summary>
         /// Overloaded Constructor for OrganizationResponse. Sets CorrelationId.
@@ -22,11 +22,13 @@ namespace Epi.Web.Common.Message
         /// <param name="correlationId"></param>
         public OrganizationResponse(string correlationId) : base(correlationId) { }
 
+        [DataMember]
+        public string Message;
 
         /// <summary>
         /// OrganizationInfo object.
         /// </summary>
         [DataMember]
-        public OrganizationDTO Organization;
+        public List<OrganizationDTO> OrganizationList;
     }
 }
