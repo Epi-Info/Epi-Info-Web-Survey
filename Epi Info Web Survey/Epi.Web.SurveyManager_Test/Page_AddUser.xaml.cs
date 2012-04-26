@@ -138,6 +138,11 @@ namespace Epi.Web.SurveyManager.Client
                             Request.Organization.AdminId = new Guid(passwordBox1.Password);
                             Epi.Web.Common.Message.OrganizationResponse Result = client.GetOrganization(Request);
                             OKeyslistBox1.Items.Clear();
+                            if (Result.Message != null)
+                            {
+                                richTextBox1.AppendText(Result.Message.ToString());
+                            }
+
                             if (Result.OrganizationList != null)
                             {
 
@@ -147,7 +152,9 @@ namespace Epi.Web.SurveyManager.Client
                                     OKeyslistBox1.Items.Add(Cryptography.Decrypt(Result.OrganizationList[i].OrganizationKey.ToString()));
 
                                 }
+                                
                             }
+                           
                         }
                         else
                         {
@@ -192,8 +199,10 @@ namespace Epi.Web.SurveyManager.Client
                     Epi.Web.Common.Message.OrganizationResponse Result = client.GetOrganizationInfo(Request);
 
                     OnamelistBox1.Items.Clear();
-
-
+                    if (Result.Message != null)
+                    {
+                    richTextBox1.AppendText(Result.Message.ToString());
+                    }
                     if (Result.OrganizationList != null)
                     {
 
@@ -203,9 +212,9 @@ namespace Epi.Web.SurveyManager.Client
                             this.OnamelistBox1.Items.Add(Result.OrganizationList[i].Organization);
 
                         }
-
+                       
                     }
-
+                   
                 }
                 else
                 {
