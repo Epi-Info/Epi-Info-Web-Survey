@@ -241,5 +241,10 @@ namespace Epi.Web.SurveyManager.Client
             return false;
         }
 
+        //Copy_Clik
+        private void Copy_Clik(object sender, RoutedEventArgs e)
+        {
+            Clipboard.SetText(this.OKeyslistBox1.SelectedItem.ToString());
+        }
     }
 }
