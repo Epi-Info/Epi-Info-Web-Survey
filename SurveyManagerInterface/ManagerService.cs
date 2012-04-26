@@ -498,7 +498,7 @@ namespace Epi.Web.WCF.SurveyService
                      return response;
                  }
                  else {
-
+                     response.Message = "Invalid Admi Key";
                      return response;
                  }
               
@@ -546,8 +546,9 @@ namespace Epi.Web.WCF.SurveyService
                 }
                 else
                 {
+                    response.Message = "Invalid Admi Key";
 
-                    return response;
+                    return response ;
                 }
 
 
