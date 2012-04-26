@@ -9,7 +9,7 @@ namespace Epi.Web.Common.DTO
     public class OrganizationDTO
     {
         private string _Organization;
-        private Guid _OrganizationKey;
+        private string _OrganizationKey;
         private bool _IsEnabled;
         private Guid _AdminId;
 
@@ -19,7 +19,7 @@ namespace Epi.Web.Common.DTO
             set { _Organization = value; }
         }
 
-        public Guid OrganizationKey 
+        public string OrganizationKey 
         {
             get { return _OrganizationKey; }
             set { _OrganizationKey = value; }
