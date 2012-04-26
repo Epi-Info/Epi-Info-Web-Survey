@@ -28,7 +28,7 @@
         </GroupBox>
         <Label Content="Organization:" Height="28" HorizontalAlignment="Left" Margin="71,377,0,287" Name="label4" Width="88" />
         <Button Content="Get Keys " Height="23" HorizontalAlignment="Left" Margin="424,565,0,0" Name="GetKey" VerticalAlignment="Top" Width="143"  Click="GetKey_Clik"/>
-        <Label Content="Organization key:" Height="28" HorizontalAlignment="Left" Margin="71,502,0,162" Name="label5" Width="158" />
+        <Label Content="Organization keys:" Height="28" HorizontalAlignment="Left" Margin="71,502,0,162" Name="label5" Width="158" />
         <RichTextBox Height="49" HorizontalAlignment="Left" Margin="243,288,0,0" Name="MessagerichTextBox1" VerticalAlignment="Top" Width="266" Foreground="#FFF20909" VerticalScrollBarVisibility="Visible" />
         <Label Content="Message:" Height="28" HorizontalAlignment="Left" Margin="71,288,0,0" Name="label6" VerticalAlignment="Top" />
         <Button Content="Get Organization Names" Height="23" HorizontalAlignment="Left" Margin="424,461,0,0" Name="button1" VerticalAlignment="Top" Width="143" Click="GetOrganizationNames_Clik" />
