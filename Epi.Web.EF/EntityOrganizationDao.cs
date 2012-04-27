@@ -54,11 +54,11 @@ namespace Epi.Web.EF
             using (var Context = DataObjectFactory.CreateContext())
             {
                var Query = (from response in Context.Organizations
-                            
+                            where response.IsEnabled == true   
                        select response);
 
                 
-                var DataRow = Query;
+                var DataRow = Query.Distinct();
                 foreach (var Row in DataRow)
                 {
 
@@ -69,6 +69,28 @@ namespace Epi.Web.EF
             return OrganizationBO;
         }
 
+        public List<OrganizationBO> GetOrganizationNames()
+        {
+
+            List<OrganizationBO> OrganizationBO = new List<OrganizationBO>();
+
+            using (var Context = DataObjectFactory.CreateContext())
+            {
+                var Query = (from response in Context.Organizations
+                             where response.IsEnabled == true
+                             select new {response.Organization1 }).Distinct();
+
+
+                var DataRow = Query.Distinct() ;
+                foreach (var Row in DataRow)
+                {
+
+                    OrganizationBO.Add(Mapper.Map(Row.Organization1));
+
+                }
+            }
+            return OrganizationBO;
+        }
 
 
         /// <summary>

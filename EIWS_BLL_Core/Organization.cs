@@ -30,6 +30,12 @@ namespace Epi.Web.BLL
             List<OrganizationBO> result = this.OrganizationDao.GetOrganizationInfo();
             return result;
         }
+        public List<OrganizationBO> GetOrganizationNames()
+        {
+
+            List<OrganizationBO> result = this.OrganizationDao.GetOrganizationNames();
+            return result;
+        }
         public void InsertOrganizationInfo(OrganizationBO OrganizationBO)
         {
 
