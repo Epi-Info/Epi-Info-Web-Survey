@@ -157,6 +157,8 @@ namespace Epi.Web.SurveyManager.Client
 
                                     EditOtextBox1.Text = Cryptography.Decrypt(Result.OrganizationList[i].OrganizationKey.ToString());
 
+                                    this.ONameEditTextBox1.Text = Result.OrganizationList[i].Organization;
+                                    this.checkBox1.IsChecked = Result.OrganizationList[i].IsEnabled;
                                 }
                                 
                             }
