@@ -23,24 +23,26 @@
         <PasswordBox Height="23" Name="passwordBox1" Margin="234,118,129,551" MaxLength="36" />
         <Label Content="Admin Pass:" Height="28" Name="label1" Margin="62,113,477,551" />
         <Button Content="Generate Key" Height="23" HorizontalAlignment="Left" Margin="232,245,0,0" Name="GenerateKey" VerticalAlignment="Top" Width="111" Click="GenerateKey_Clik" />
-        <GroupBox Header="Get Organization Key" Height="305" HorizontalAlignment="Left" Margin="33,340,0,0" Name="groupBox3" VerticalAlignment="Top" Width="551" Background="#FFE5E19E">
+        <GroupBox Header="Get Organization Key" Height="305" HorizontalAlignment="Left" Margin="35,346,0,0" Name="groupBox3" VerticalAlignment="Top" Width="551" Background="#FFE5E19E">
              
         </GroupBox>
         <Label Content="Organization:" Height="28" HorizontalAlignment="Left" Margin="62,390,0,274" Name="label4" Width="88" />
-        <Button Content="Copy" Height="23" Margin="456,452,129,0" Name="GetKey" VerticalAlignment="Top" Click="Copy_Clik" ToolTip="Copy to Clipboard" />
+        <Button Content="Copy" Height="23" Margin="514,423,71,0" Name="GetKey" VerticalAlignment="Top" Click="Copy_Clik" ToolTip="Copy to Clipboard" />
         <Label Content="Organization keys:" Height="28" HorizontalAlignment="Left" Margin="62,418,0,246" Name="label5" Width="158" />
         <RichTextBox Height="49" HorizontalAlignment="Left" Margin="234,274,0,0" Name="MessagerichTextBox1" VerticalAlignment="Top" Width="266" Foreground="#FFF20909" VerticalScrollBarVisibility="Visible" />
         <Label Content="Message:" Height="28" HorizontalAlignment="Left" Margin="62,274,0,0" Name="label6" VerticalAlignment="Top" />
         <Button Content="Get Organization Names" Height="23" HorizontalAlignment="Left" Margin="357,361,0,0" Name="button1" VerticalAlignment="Top" Width="143" Click="GetOrganizationNames_Clik" />
         <ComboBox   Height="25" HorizontalAlignment="Left" Margin="191,390,0,0" Name="OnamelistBox1" VerticalAlignment="Top" Width="309" AllowDrop="True" SelectionChanged="GetKey_Clik" SelectedIndex="0" />
-        <RichTextBox Foreground="#FFF20909" Height="49" HorizontalAlignment="Left" Margin="191,582,0,0" Name="richTextBox1" VerticalAlignment="Top" VerticalScrollBarVisibility="Visible" Width="309" />
-        <Label Content="Message:" Height="28" HorizontalAlignment="Left" Margin="62,582,0,0" Name="label7" VerticalAlignment="Top" />
-        <Button Click="Edit_Clik" Content="Edit" Height="23" Margin="396,452,189,0" Name="button2" ToolTip="Copy to Clipboard" VerticalAlignment="Top" />
-        <Label Content="Organization:" Height="28" HorizontalAlignment="Left" Margin="62,488,0,176" Name="label8" Width="106" />
-        <TextBox AutoWordSelection="True" Background="White" Height="23" HorizontalAlignment="Left" Margin="191,493,0,0" Name="ONameEditTextBox1" VerticalAlignment="Top" Width="309" />
-        <CheckBox Content="Is Enabled" Height="16" HorizontalAlignment="Left" Margin="191,531,0,0" Name="checkBox1" VerticalAlignment="Top" />
-        <Button  Click="Save_Click" Content="Save" Height="23" Margin="456,524,129,0" Name="button3" ToolTip="Copy to Clipboard" VerticalAlignment="Top" />
+        <RichTextBox Foreground="#FFF20909" Height="49" HorizontalAlignment="Left" Margin="191,564,0,0" Name="richTextBox1" VerticalAlignment="Top" VerticalScrollBarVisibility="Visible" Width="309" />
+        <Label Content="Message:" Height="28" HorizontalAlignment="Left" Margin="62,564,0,0" Name="label7" VerticalAlignment="Top" />
+        <Label Content="Organization:" Height="28" HorizontalAlignment="Left" Margin="62,485,0,179" Name="label8" Width="106" />
+        <TextBox AutoWordSelection="True" Background="White" Height="23" HorizontalAlignment="Left" Margin="191,490,0,0" Name="ONameEditTextBox1" VerticalAlignment="Top" Width="309" />
+        <CheckBox Content="Is Enabled" Height="16" HorizontalAlignment="Left" Margin="191,528,0,0" Name="checkBox1" VerticalAlignment="Top" />
+        <Button  Click="Save_Click" Content="Save" Height="23" Margin="456,521,129,0" Name="button3" ToolTip="Copy to Clipboard" VerticalAlignment="Top" />
         <TextBox Background="#FFD8D5D5" Height="23" HorizontalAlignment="Right" IsReadOnly="True" Margin="0,423,129,0" Name="EditOtextBox1" VerticalAlignment="Top" Width="309" />
+        <GroupBox Header="Edit Organization Info" Height="100" HorizontalAlignment="Left" Margin="56,458,0,0" Name="groupBox4" VerticalAlignment="Top" Width="502">
+            <Grid />
+        </GroupBox>
     </Grid>
    
 </Page>
