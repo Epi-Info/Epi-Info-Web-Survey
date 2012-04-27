@@ -22,6 +22,7 @@ namespace Epi.Web.Interfaces.DataInterfaces
         List<OrganizationBO> GetOrganizationKeys(string OrganizationName );
 
         List<OrganizationBO> GetOrganizationInfo();
+        List<OrganizationBO> GetOrganizationNames();
 
      //   /// <summary>
      //   /// Gets a specific Organization.
