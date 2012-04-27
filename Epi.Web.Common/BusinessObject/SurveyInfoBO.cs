@@ -18,7 +18,7 @@ namespace Epi.Web.Common.BusinessObject
         private string _XML;
         private string _ExitText;
         private Guid _UserPublishKey;
-
+        private Guid _OrganizationKey;
         private DateTime _ClosingDate;
 
         public string SurveyId
@@ -89,6 +89,12 @@ namespace Epi.Web.Common.BusinessObject
         {
             get { return _UserPublishKey; }
             set { _UserPublishKey = value; }
+        }
+
+        public Guid OrganizationKey
+        {
+            get { return _OrganizationKey; }
+            set { _OrganizationKey = value; }
         }
 
     }

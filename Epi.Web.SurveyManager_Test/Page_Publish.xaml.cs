@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using System.Xml;
 using System.ServiceModel;
 using Epi.Web.Common.Exception;
+using System.Text.RegularExpressions;
 
 namespace Epi.Web.SurveyManager.Client
 {
@@ -70,11 +71,20 @@ namespace Epi.Web.SurveyManager.Client
 
             Guid UserPublishKey = Guid.NewGuid();
             Request.SurveyInfo.UserPublishKey = UserPublishKey;
-
+            //get the Organization key and assign it to SurveyInfoDTO object under PublishRequest
+            string strOrganizationKey = passOrganizationKey.Password.ToString();
+            if (!IsGuid(strOrganizationKey))
+            {
+                MessageBox.Show("Organization key is not in correct format");
+                return;
+            }
+            Guid gOrganizationkey = new Guid(strOrganizationKey);
+            Request.SurveyInfo.OrganizationKey = gOrganizationkey;
             try
             {
                 Epi.Web.Common.Message.PublishResponse Result = client.PublishSurvey(Request);
 
+                passOrganizationKey.Password = string.Empty;
                 URL = Result.PublishInfo.URL;
                 ServiceResponseTextBox.AppendText("is published: ");
                 ServiceResponseTextBox.AppendText(Result.PublishInfo.IsPulished.ToString());
@@ -251,6 +261,17 @@ namespace Epi.Web.SurveyManager.Client
 
             Page_AddUser page_AddUser = new Page_AddUser();
             this.NavigationService.Navigate(page_AddUser);
+        }
+
+        private  bool IsGuid(string expression)
+        {
+            if (expression != null)
+            {
+                Regex guidRegEx = new Regex(@"^(\{{0,1}([0-9a-fA-F]){8}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){12}\}{0,1})$");
+
+                return guidRegEx.IsMatch(expression);
+            }
+            return false;
         }
     }
 }

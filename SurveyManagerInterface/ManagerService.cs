@@ -36,8 +36,10 @@ namespace Epi.Web.WCF.SurveyService
             {
                 PublishResponse result = new PublishResponse(pRequest.RequestId);
                 Epi.Web.Interfaces.DataInterfaces.ISurveyInfoDao SurveyInfoDao = new EF.EntitySurveyInfoDao();
+                Epi.Web.Interfaces.DataInterfaces.IOrganizationDao OrganizationDao = new EF.EntityOrganizationDao();
 
-                Epi.Web.BLL.Publisher Implementation = new Epi.Web.BLL.Publisher(SurveyInfoDao);
+
+                Epi.Web.BLL.Publisher Implementation = new Epi.Web.BLL.Publisher(SurveyInfoDao,OrganizationDao);
                 SurveyInfoBO surveyInfoBO = Mapper.ToBusinessObject(pRequest.SurveyInfo);
                 SurveyRequestResultBO surveyRequestResultBO = Implementation.PublishSurvey(surveyInfoBO);
                 result.PublishInfo = Mapper.ToDataTransferObject(surveyRequestResultBO);
