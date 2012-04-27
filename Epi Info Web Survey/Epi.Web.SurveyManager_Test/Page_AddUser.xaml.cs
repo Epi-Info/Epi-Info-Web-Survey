@@ -55,7 +55,7 @@ namespace Epi.Web.SurveyManager.Client
             MessagerichTextBox1.Document.Blocks.Clear();
             SurveyManagerService.ManagerServiceClient client = new SurveyManagerService.ManagerServiceClient();
             Epi.Web.Common.Message.OrganizationRequest Request = new Epi.Web.Common.Message.OrganizationRequest();
-
+            MessagerichTextBox1.Foreground = Brushes.Red;
 
 
             
@@ -75,6 +75,10 @@ namespace Epi.Web.SurveyManager.Client
                             MessagerichTextBox1.Document.Blocks.Clear();
                             OrganizationtextBox1.Clear();
                             GeneratedkeytextBox1.Clear();
+                            if (Result.Message.ToString().Contains("Successfully"))
+                            {
+                                MessagerichTextBox1.Foreground = Brushes.Green;
+                            } 
                             MessagerichTextBox1.AppendText(Result.Message.ToString());
                         }
                         else
