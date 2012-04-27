@@ -20,7 +20,7 @@ namespace Epi.Web.Interfaces.DataInterfaces
         /// <param name="OrganizationId">Unique Organization identifier.</param>
         /// <returns>Organization.</returns>
         List<OrganizationBO> GetOrganizationKeys(string OrganizationName );
-
+        List<OrganizationBO> GetOrganizationInfoByOrgKey(string gOrgKeyEncrypted);
         List<OrganizationBO> GetOrganizationInfo();
         List<OrganizationBO> GetOrganizationNames();
         OrganizationBO GetOrganizationInfoByKey(string key);

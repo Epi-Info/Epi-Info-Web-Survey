@@ -15,6 +15,7 @@ namespace Epi.Web.BLL
     public class Publisher
     {
         private Epi.Web.Interfaces.DataInterfaces.ISurveyInfoDao SurveyInfoDao;
+        private Epi.Web.Interfaces.DataInterfaces.IOrganizationDao OrganizationDao;
         #region"Public members"
         /// <summary>
         ///  This class is used to process the object sent from the WCF service “SurveyManager”, 
@@ -24,9 +25,10 @@ namespace Epi.Web.BLL
         /// <param name="pRequestMessage"></param>
         /// <returns></returns>
         /// 
-        public Publisher(Epi.Web.Interfaces.DataInterfaces.ISurveyInfoDao pSurveyInfoDao)
+        public Publisher(Epi.Web.Interfaces.DataInterfaces.ISurveyInfoDao pSurveyInfoDao, Epi.Web.Interfaces.DataInterfaces.IOrganizationDao pPrganizationDao)
         {
             this.SurveyInfoDao = pSurveyInfoDao;
+            this.OrganizationDao = pPrganizationDao;
         }
         public Publisher()
         {
@@ -42,7 +44,7 @@ namespace Epi.Web.BLL
             if (pRequestMessage != null)
             {
 
-                if (! string.IsNullOrEmpty(pRequestMessage.SurveyNumber))
+                if (! string.IsNullOrEmpty(pRequestMessage.SurveyNumber)  &&  ValidateOrganizationKey(pRequestMessage.OrganizationKey))
                 {
                     try
                     {
@@ -65,10 +67,11 @@ namespace Epi.Web.BLL
 
                         BO.SurveyType = pRequestMessage.SurveyType;
                         BO.UserPublishKey = pRequestMessage.UserPublishKey;
-
+                        BO.OrganizationKey = pRequestMessage.OrganizationKey;
+                        BO.OrganizationKey = pRequestMessage.OrganizationKey;
                         try
                         {
-
+                           
                             this.SurveyInfoDao.InsertSurveyInfo(BO);
                         }
                         catch (Exception ex)
@@ -99,6 +102,28 @@ namespace Epi.Web.BLL
 
             }
             return result;
+        }
+     
+        /// <summary>
+        /// validate the Organization key passed with the list of Organization keys retrieved from database 
+        /// through EF
+        /// </summary>
+        /// <param name="OrganizationKey"></param>
+        /// <returns></returns>
+        private bool ValidateOrganizationKey(Guid gOrganizationKey)
+        {
+            string strOrgKeyEncrypted = Epi.Web.Common.Security.Cryptography.Encrypt(gOrganizationKey.ToString());
+            List<OrganizationBO> OrganizationBoList = this.OrganizationDao.GetOrganizationInfoByOrgKey(strOrgKeyEncrypted);
+            if (OrganizationBoList.Count > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;    
+            }
+            
+           
         }
 
         #endregion

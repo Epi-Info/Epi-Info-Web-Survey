@@ -111,6 +111,30 @@ namespace Epi.Web.EF
         }
 
 
+        public List<OrganizationBO> GetOrganizationInfoByOrgKey(string gOrgKeyEncrypted)
+        {
+
+            List<OrganizationBO> OrganizationBO = new List<OrganizationBO>();
+
+            using (var Context = DataObjectFactory.CreateContext())
+            {
+                var Query = (from response in Context.Organizations
+                             where response.OrganizationKey == gOrgKeyEncrypted && response.IsEnabled == true
+
+                             select response);
+
+                
+                var DataRow = Query;
+                foreach (var Row in DataRow)
+                {
+
+                    OrganizationBO.Add(Mapper.Map(Row));
+
+                }
+            }
+            return OrganizationBO;
+        }
+
         /// <summary>
         /// Inserts a new Organization. 
         /// </summary>
