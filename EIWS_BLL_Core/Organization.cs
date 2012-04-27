@@ -18,6 +18,12 @@ namespace Epi.Web.BLL
             this.OrganizationDao = pOrganizationDao;
         }
 
+        public OrganizationBO GetOrganizationByKey(string OrganizationKey)
+        {
+
+            OrganizationBO result = this.OrganizationDao.GetOrganizationInfoByKey(OrganizationKey);
+            return result;
+        }
         public List<OrganizationBO> GetOrganizationKey(string OrganizationName)
         {
 
