@@ -127,7 +127,8 @@ namespace Epi.Web.SurveyManager.Client
             SurveyManagerService.ManagerServiceClient client = new SurveyManagerService.ManagerServiceClient();
             Epi.Web.Common.Message.OrganizationRequest Request = new Epi.Web.Common.Message.OrganizationRequest();
 
-
+            this.ONameEditTextBox1.Clear();
+            this.checkBox1.IsChecked = false;
             richTextBox1.Document.Blocks.Clear();
             try
             {
@@ -141,7 +142,8 @@ namespace Epi.Web.SurveyManager.Client
                             Request.Organization.Organization = this.OnamelistBox1.SelectedItem.ToString();
                             Request.Organization.AdminId = new Guid(passwordBox1.Password);
                             Epi.Web.Common.Message.OrganizationResponse Result = client.GetOrganization(Request);
-                            OKeyslistBox1.Items.Clear();
+                            EditOtextBox1.Clear();
+                            ONameEditTextBox1.Clear();
                             if (Result.Message != null)
                             {
                                 richTextBox1.AppendText(Result.Message.ToString());
@@ -153,7 +155,7 @@ namespace Epi.Web.SurveyManager.Client
                                 for (int i = 0; i < Result.OrganizationList.Count; i++)
                                 {
 
-                                    OKeyslistBox1.Items.Add(Cryptography.Decrypt(Result.OrganizationList[i].OrganizationKey.ToString()));
+                                    EditOtextBox1.Text = Cryptography.Decrypt(Result.OrganizationList[i].OrganizationKey.ToString());
 
                                 }
                                 
@@ -193,6 +195,7 @@ namespace Epi.Web.SurveyManager.Client
             Epi.Web.Common.Message.OrganizationRequest Request = new Epi.Web.Common.Message.OrganizationRequest();
 
             richTextBox1.Document.Blocks.Clear();
+           
             try
             {
 
@@ -250,9 +253,107 @@ namespace Epi.Web.SurveyManager.Client
         //Copy_Clik
         private void Copy_Clik(object sender, RoutedEventArgs e)
         {
-            if (OKeyslistBox1.SelectedItem != null)
+            if (!string.IsNullOrEmpty(EditOtextBox1.Text ))
             {
-                Clipboard.SetText(this.OKeyslistBox1.SelectedItem.ToString());
+                Clipboard.SetText(EditOtextBox1.Text);
+            }
+        }
+        private void Edit_Clik(object sender, RoutedEventArgs e)
+        {
+            //if (!string.IsNullOrEmpty(EditOtextBox1.Text))
+            //{
+                SurveyManagerService.ManagerServiceClient client = new SurveyManagerService.ManagerServiceClient();
+                Epi.Web.Common.Message.OrganizationRequest Request = new Epi.Web.Common.Message.OrganizationRequest();
+
+                richTextBox1.Document.Blocks.Clear();
+                try
+                {
+
+                    if (!string.IsNullOrEmpty(passwordBox1.Password.ToString()) && IsGuid(passwordBox1.Password.ToString()))
+                    {
+
+                        Request.Organization.AdminId = new Guid(passwordBox1.Password);
+                        Request.Organization.OrganizationKey = EditOtextBox1.Text;
+                        Epi.Web.Common.Message.OrganizationResponse Result = client.GetOrganizationByKey(Request);
+                        if (Result.OrganizationList != null)
+                        {
+
+                            for (int i = 0; i < Result.OrganizationList.Count; i++)
+                            {
+
+                                this.ONameEditTextBox1.Text = Result.OrganizationList[i].Organization;
+                                this.checkBox1.IsChecked = Result.OrganizationList[i].IsEnabled;
+                            }
+
+                        }
+                      
+                    }
+                    else
+                    {
+
+                        richTextBox1.AppendText("Admin pass  is required and Should be a Guid.");
+
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                    richTextBox1.AppendText("Error occurred while trying to get organization Info. ");
+                }
+            //}
+            //else {
+            //    richTextBox1.AppendText("Please select organization key.");
+            
+            //}
+        }
+
+        //Save_Click
+        private void Save_Click(object sender, RoutedEventArgs e)
+        {
+            MessagerichTextBox1.Document.Blocks.Clear();
+            SurveyManagerService.ManagerServiceClient client = new SurveyManagerService.ManagerServiceClient();
+            Epi.Web.Common.Message.OrganizationRequest Request = new Epi.Web.Common.Message.OrganizationRequest();
+            richTextBox1.Foreground = Brushes.Red;
+            richTextBox1.Document.Blocks.Clear();
+
+
+            try
+            {
+                if (!string.IsNullOrEmpty(passwordBox1.Password.ToString()) && IsGuid(passwordBox1.Password.ToString()))
+                {
+
+                   
+                            if (checkBox1.IsChecked == true)
+                            {
+                                Request.Organization.IsEnabled = true;
+                            }else{
+                                  Request.Organization.IsEnabled = false;
+                            }
+                            Request.Organization.AdminId = new Guid(passwordBox1.Password);
+                            Request.Organization.Organization = ONameEditTextBox1.Text;
+                            Request.Organization.OrganizationKey = Cryptography.Encrypt(EditOtextBox1.Text);
+                            Epi.Web.Common.Message.OrganizationResponse Result = client.UpdateOrganizationInfo(Request);
+                           
+                           
+                            if (Result.Message.ToString().Contains("Successfully"))
+                            {
+                                richTextBox1.Foreground = Brushes.Green;
+                                 
+                            }
+                            richTextBox1.AppendText(Result.Message.ToString());
+                        
+                }
+                else
+                {
+
+                    richTextBox1.AppendText("Admin pass  is required and Should be a Guid.");
+
+                }
+            }
+            catch (Exception ex)
+            {
+
+                richTextBox1.AppendText("Error occurred while updating organization info. Please  try again. ");
             }
         }
     }
