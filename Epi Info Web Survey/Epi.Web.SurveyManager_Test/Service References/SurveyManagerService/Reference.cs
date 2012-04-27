@@ -35,6 +35,10 @@ namespace Epi.Web.SurveyManager.Client.SurveyManagerService {
         [System.ServiceModel.FaultContractAttribute(typeof(Epi.Web.Common.Exception.CustomFaultException), Action="http://tempuri.org/IManagerService/GetOrganizationNamesCustomFaultExceptionFault", Name="CustomFaultException", Namespace="http://www.yourcompany.com/types/")]
         Epi.Web.Common.Message.OrganizationResponse GetOrganizationNames(Epi.Web.Common.Message.OrganizationRequest pRequest);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IManagerService/GetOrganizationByKey", ReplyAction="http://tempuri.org/IManagerService/GetOrganizationByKeyResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Epi.Web.Common.Exception.CustomFaultException), Action="http://tempuri.org/IManagerService/GetOrganizationByKeyCustomFaultExceptionFault", Name="CustomFaultException", Namespace="http://www.yourcompany.com/types/")]
+        Epi.Web.Common.Message.OrganizationResponse GetOrganizationByKey(Epi.Web.Common.Message.OrganizationRequest pRequest);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IManagerService/SetSurveyInfo", ReplyAction="http://tempuri.org/IManagerService/SetSurveyInfoResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(Epi.Web.Common.Exception.CustomFaultException), Action="http://tempuri.org/IManagerService/SetSurveyInfoCustomFaultExceptionFault", Name="CustomFaultException", Namespace="http://www.yourcompany.com/types/")]
         Epi.Web.Common.Message.SurveyInfoResponse SetSurveyInfo(Epi.Web.Common.Message.SurveyInfoRequest pRequest);
@@ -46,6 +50,11 @@ namespace Epi.Web.SurveyManager.Client.SurveyManagerService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IManagerService/SetOrganization", ReplyAction="http://tempuri.org/IManagerService/SetOrganizationResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(Epi.Web.Common.Exception.CustomFaultException), Action="http://tempuri.org/IManagerService/SetOrganizationCustomFaultExceptionFault", Name="CustomFaultException", Namespace="http://www.yourcompany.com/types/")]
         Epi.Web.Common.Message.OrganizationResponse SetOrganization(Epi.Web.Common.Message.OrganizationRequest pRequest);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IManagerService/UpdateOrganizationInfo", ReplyAction="http://tempuri.org/IManagerService/UpdateOrganizationInfoResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Epi.Web.Common.Exception.CustomFaultException), Action="http://tempuri.org/IManagerService/UpdateOrganizationInfoCustomFaultExceptionFaul" +
+            "t", Name="CustomFaultException", Namespace="http://www.yourcompany.com/types/")]
+        Epi.Web.Common.Message.OrganizationResponse UpdateOrganizationInfo(Epi.Web.Common.Message.OrganizationRequest pRequest);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -95,6 +104,10 @@ namespace Epi.Web.SurveyManager.Client.SurveyManagerService {
             return base.Channel.GetOrganizationNames(pRequest);
         }
         
+        public Epi.Web.Common.Message.OrganizationResponse GetOrganizationByKey(Epi.Web.Common.Message.OrganizationRequest pRequest) {
+            return base.Channel.GetOrganizationByKey(pRequest);
+        }
+        
         public Epi.Web.Common.Message.SurveyInfoResponse SetSurveyInfo(Epi.Web.Common.Message.SurveyInfoRequest pRequest) {
             return base.Channel.SetSurveyInfo(pRequest);
         }
@@ -105,6 +118,10 @@ namespace Epi.Web.SurveyManager.Client.SurveyManagerService {
         
         public Epi.Web.Common.Message.OrganizationResponse SetOrganization(Epi.Web.Common.Message.OrganizationRequest pRequest) {
             return base.Channel.SetOrganization(pRequest);
+        }
+        
+        public Epi.Web.Common.Message.OrganizationResponse UpdateOrganizationInfo(Epi.Web.Common.Message.OrganizationRequest pRequest) {
+            return base.Channel.UpdateOrganizationInfo(pRequest);
         }
     }
 }

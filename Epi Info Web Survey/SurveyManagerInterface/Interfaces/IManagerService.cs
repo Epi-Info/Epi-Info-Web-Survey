@@ -31,7 +31,10 @@ namespace Epi.Web.WCF.SurveyService
         [OperationContract]
         [FaultContract(typeof(CustomFaultException))]
         OrganizationResponse GetOrganizationNames(OrganizationRequest pRequest);
-
+        
+        [OperationContract]
+        [FaultContract(typeof(CustomFaultException))]
+        OrganizationResponse GetOrganizationByKey(OrganizationRequest pRequest);
         [OperationContract]
         [FaultContract(typeof(CustomFaultException))]
         SurveyInfoResponse SetSurveyInfo(SurveyInfoRequest pRequest);
@@ -43,6 +46,9 @@ namespace Epi.Web.WCF.SurveyService
         [OperationContract]
         [FaultContract(typeof(CustomFaultException))]
         OrganizationResponse SetOrganization(OrganizationRequest pRequest);
-
+         
+        [OperationContract]
+        [FaultContract(typeof(CustomFaultException))]
+        OrganizationResponse UpdateOrganizationInfo(OrganizationRequest pRequest);
     }
 }
