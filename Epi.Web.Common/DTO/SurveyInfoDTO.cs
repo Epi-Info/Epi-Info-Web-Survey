@@ -21,6 +21,7 @@ namespace Epi.Web.Common.DTO
         private bool _IsSuccess;
         private DateTime _ClosingDate;
         private Guid _UserPublishKey;
+        private Guid _OrganizationKey;
 
         [DataMember]
         public string SurveyId
@@ -103,6 +104,13 @@ namespace Epi.Web.Common.DTO
         {
             get { return _UserPublishKey; }
             set { _UserPublishKey = value; }
+        }
+
+        [DataMember]
+        public Guid OrganizationKey
+        {
+            get { return _OrganizationKey; }
+            set { _OrganizationKey = value; }
         }
     }
 }
