@@ -49,7 +49,7 @@
           </Key>
           <Property Name="OrganizationId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="OrganizationKey" Type="nvarchar" Nullable="false" MaxLength="500" />
-          <Property Name="Organization" Type="nvarchar" Nullable="false" MaxLength="70" />
+          <Property Name="Organization" Type="nvarchar" Nullable="false" MaxLength="200" />
           <Property Name="IsEnabled" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="SurveyMetaData">
@@ -277,7 +277,7 @@
           </Key>
           <Property Type="Int32" Name="OrganizationId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="String" Name="OrganizationKey" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="Organization1" Nullable="false" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Organization1" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Type="Boolean" Name="IsEnabled" Nullable="false" />
           <NavigationProperty Name="SurveyMetaDatas" Relationship="EIWSModel.FK_SurveyMetaData_Organization" FromRole="Organization" ToRole="SurveyMetaData" />
         </EntityType>

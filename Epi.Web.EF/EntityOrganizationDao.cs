@@ -54,7 +54,7 @@ namespace Epi.Web.EF
             using (var Context = DataObjectFactory.CreateContext())
             {
                var Query = (from response in Context.Organizations
-                            where response.IsEnabled == true   
+                            
                        select response);
 
                 
@@ -69,6 +69,24 @@ namespace Epi.Web.EF
             return OrganizationBO;
         }
 
+
+        public  OrganizationBO  GetOrganizationInfoByKey(string key)
+        {
+
+             OrganizationBO OrganizationBO = new  OrganizationBO ();
+
+            using (var Context = DataObjectFactory.CreateContext())
+            {
+                var Query = (from response in Context.Organizations
+                             where response.OrganizationKey == key
+                             select response);
+
+                OrganizationBO = Mapper.Map(Query.Single());
+
+                 
+            }
+            return OrganizationBO;
+        }
         public List<OrganizationBO> GetOrganizationNames()
         {
 
@@ -77,7 +95,7 @@ namespace Epi.Web.EF
             using (var Context = DataObjectFactory.CreateContext())
             {
                 var Query = (from response in Context.Organizations
-                             where response.IsEnabled == true
+
                              select new {response.Organization1 }).Distinct();
 
 
@@ -124,12 +142,12 @@ namespace Epi.Web.EF
             using (var Context = DataObjectFactory.CreateContext())
             {
                 var Query = from response in Context.Organizations
-                            where response.Organization1 == Organization.Organization
+                            where response.OrganizationKey == Organization.OrganizationKey
                             select response;
 
                 var DataRow = Query.Single();
                 DataRow.Organization1 = Organization.Organization;
-                DataRow.OrganizationKey = Organization.OrganizationKey;
+              
                 DataRow.IsEnabled =  Organization.IsEnabled ;
                 Context.SaveChanges();
             }
