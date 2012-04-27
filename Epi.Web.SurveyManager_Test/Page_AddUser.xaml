@@ -6,7 +6,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="690" d:DesignWidth="630"
 	Title="AddUser">
-
+    
     <Grid Height="692" Width="629"  >
 
    
@@ -32,9 +32,10 @@
         <RichTextBox Height="49" HorizontalAlignment="Left" Margin="234,274,0,0" Name="MessagerichTextBox1" VerticalAlignment="Top" Width="266" Foreground="#FFF20909" VerticalScrollBarVisibility="Visible" />
         <Label Content="Message:" Height="28" HorizontalAlignment="Left" Margin="62,274,0,0" Name="label6" VerticalAlignment="Top" />
         <Button Content="Get Organization Names" Height="23" HorizontalAlignment="Left" Margin="357,361,0,0" Name="button1" VerticalAlignment="Top" Width="143" Click="GetOrganizationNames_Clik" />
-        <ComboBox Height="25" HorizontalAlignment="Left" Margin="191,390,0,0" Name="OnamelistBox1" VerticalAlignment="Top" Width="309" AllowDrop="True" SelectionChanged="GetKey_Clik" />
+        <ComboBox   Height="25" HorizontalAlignment="Left" Margin="191,390,0,0" Name="OnamelistBox1" VerticalAlignment="Top" Width="309" AllowDrop="True" SelectionChanged="GetKey_Clik" SelectedIndex="0" />
         <RichTextBox Foreground="#FFF20909" Height="49" HorizontalAlignment="Left" Margin="191,572,0,0" Name="richTextBox1" VerticalAlignment="Top" VerticalScrollBarVisibility="Visible" Width="309" />
         <Label Content="Message:" Height="28" HorizontalAlignment="Left" Margin="62,572,0,0" Name="label7" VerticalAlignment="Top" />
         <ListBox AllowDrop="True" Height="58" HorizontalAlignment="Left" Margin="191,441,0,0" Name="OKeyslistBox1" VerticalAlignment="Top" Width="309" />
     </Grid>
+   
 </Page>
