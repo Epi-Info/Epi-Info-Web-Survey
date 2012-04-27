@@ -6,7 +6,7 @@
       <xs:element minOccurs="0" name="AdminId" type="ser:guid" />
       <xs:element minOccurs="0" name="IsEnabled" type="xs:boolean" />
       <xs:element minOccurs="0" name="Organization" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="OrganizationKey" type="ser:guid" />
+      <xs:element minOccurs="0" name="OrganizationKey" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="OrganizationDTO" nillable="true" type="tns:OrganizationDTO" />

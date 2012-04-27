@@ -196,7 +196,9 @@ namespace Epi.Web.SurveyManager.Client
                 {
 
                     Request.Organization.AdminId = new Guid(passwordBox1.Password);
-                    Epi.Web.Common.Message.OrganizationResponse Result = client.GetOrganizationInfo(Request);
+                   // Epi.Web.Common.Message.OrganizationResponse Result = client.GetOrganizationInfo(Request);
+                    Epi.Web.Common.Message.OrganizationResponse Result = client.GetOrganizationNames(Request);
+             
 
                     OnamelistBox1.Items.Clear();
                     if (Result.Message != null)
@@ -212,7 +214,7 @@ namespace Epi.Web.SurveyManager.Client
                             this.OnamelistBox1.Items.Add(Result.OrganizationList[i].Organization);
 
                         }
-                       
+                        this.OnamelistBox1.SelectedIndex = 0;
                     }
                    
                 }
@@ -244,7 +246,10 @@ namespace Epi.Web.SurveyManager.Client
         //Copy_Clik
         private void Copy_Clik(object sender, RoutedEventArgs e)
         {
-            Clipboard.SetText(this.OKeyslistBox1.SelectedItem.ToString());
+            if (OKeyslistBox1.SelectedItem != null)
+            {
+                Clipboard.SetText(this.OKeyslistBox1.SelectedItem.ToString());
+            }
         }
     }
 }

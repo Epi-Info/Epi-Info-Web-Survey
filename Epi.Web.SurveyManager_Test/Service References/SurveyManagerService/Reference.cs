@@ -31,6 +31,10 @@ namespace Epi.Web.SurveyManager.Client.SurveyManagerService {
         [System.ServiceModel.FaultContractAttribute(typeof(Epi.Web.Common.Exception.CustomFaultException), Action="http://tempuri.org/IManagerService/GetOrganizationInfoCustomFaultExceptionFault", Name="CustomFaultException", Namespace="http://www.yourcompany.com/types/")]
         Epi.Web.Common.Message.OrganizationResponse GetOrganizationInfo(Epi.Web.Common.Message.OrganizationRequest pRequest);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IManagerService/GetOrganizationNames", ReplyAction="http://tempuri.org/IManagerService/GetOrganizationNamesResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Epi.Web.Common.Exception.CustomFaultException), Action="http://tempuri.org/IManagerService/GetOrganizationNamesCustomFaultExceptionFault", Name="CustomFaultException", Namespace="http://www.yourcompany.com/types/")]
+        Epi.Web.Common.Message.OrganizationResponse GetOrganizationNames(Epi.Web.Common.Message.OrganizationRequest pRequest);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IManagerService/SetSurveyInfo", ReplyAction="http://tempuri.org/IManagerService/SetSurveyInfoResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(Epi.Web.Common.Exception.CustomFaultException), Action="http://tempuri.org/IManagerService/SetSurveyInfoCustomFaultExceptionFault", Name="CustomFaultException", Namespace="http://www.yourcompany.com/types/")]
         Epi.Web.Common.Message.SurveyInfoResponse SetSurveyInfo(Epi.Web.Common.Message.SurveyInfoRequest pRequest);
@@ -85,6 +89,10 @@ namespace Epi.Web.SurveyManager.Client.SurveyManagerService {
         
         public Epi.Web.Common.Message.OrganizationResponse GetOrganizationInfo(Epi.Web.Common.Message.OrganizationRequest pRequest) {
             return base.Channel.GetOrganizationInfo(pRequest);
+        }
+        
+        public Epi.Web.Common.Message.OrganizationResponse GetOrganizationNames(Epi.Web.Common.Message.OrganizationRequest pRequest) {
+            return base.Channel.GetOrganizationNames(pRequest);
         }
         
         public Epi.Web.Common.Message.SurveyInfoResponse SetSurveyInfo(Epi.Web.Common.Message.SurveyInfoRequest pRequest) {

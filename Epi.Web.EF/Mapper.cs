@@ -157,6 +157,16 @@ namespace Epi.Web.EF
 
             };
         }
+        internal static OrganizationBO Map(string Organization)
+        {
+            return new OrganizationBO
+            {
+                Organization = Organization
+                 
+
+
+            };
+        }
         internal static Organization ToEF(OrganizationBO pBo)
         {
             return new Organization
