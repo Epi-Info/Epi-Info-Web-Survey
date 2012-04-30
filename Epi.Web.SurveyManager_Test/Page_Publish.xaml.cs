@@ -24,13 +24,17 @@ namespace Epi.Web.SurveyManager.Client
     public partial class Page_Publish : Page
     {
         String URL;
-
+        public Guid UserPublishKey;
         public Page_Publish()
         {
             InitializeComponent();
             TimeSpan t = new TimeSpan(10, 0, 0, 0);
             this.datePicker1.SelectedDate = DateTime.Now + t;
             this.WindowTitle = "Publish Survey";
+
+            //generate the publish key guid for simulation
+            UserPublishKey = Guid.NewGuid();
+            txtPublishKey.Text = UserPublishKey.ToString();
         }
 
         private void SubmitRequestButton_Click(object sender, RoutedEventArgs e)
@@ -68,9 +72,15 @@ namespace Epi.Web.SurveyManager.Client
             Request.SurveyInfo.SurveyName = this.SurveyNameTextBox.Text;
             Request.SurveyInfo.SurveyNumber = this.SurveyNumberTextBox.Text;
             Request.SurveyInfo.XML = new TextRange(this.TemplateXMLTextBox.Document.ContentStart, this.TemplateXMLTextBox.Document.ContentEnd).Text;
+           
+            //Checking the publish key guid is in correct format
+            if (!IsGuid(txtPublishKey.Text))
+            {
+                MessageBox.Show("Publish key is not in correct format");
+                return;
+            }
 
-            Guid UserPublishKey = Guid.NewGuid();
-            Request.SurveyInfo.UserPublishKey = UserPublishKey;
+            Request.SurveyInfo.UserPublishKey = new Guid(txtPublishKey.Text);
             //get the Organization key and assign it to SurveyInfoDTO object under PublishRequest
             string strOrganizationKey = passOrganizationKey.Password.ToString();
             if (!IsGuid(strOrganizationKey))
