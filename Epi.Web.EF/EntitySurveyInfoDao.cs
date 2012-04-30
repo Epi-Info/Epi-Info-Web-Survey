@@ -20,7 +20,7 @@ namespace Epi.Web.EF
         /// </summary>
         /// <param name="SurveyInfoId">Unique SurveyInfo identifier.</param>
         /// <returns>SurveyInfo.</returns>
-        public List<SurveyInfoBO> GetSurveyInfo(List<string> SurveyInfoIdList)
+        public List<SurveyInfoBO> GetSurveyInfo(List<string> SurveyInfoIdList, int PageNumber = -1, int PageSize = -1)
         {
             List<SurveyInfoBO> result = new List<SurveyInfoBO>();
             if (SurveyInfoIdList.Count > 0)
@@ -52,7 +52,7 @@ namespace Epi.Web.EF
         /// </summary>
         /// <param name="SurveyInfoId">Unique SurveyInfo identifier.</param>
         /// <returns>SurveyInfo.</returns>
-        public List<SurveyInfoBO> GetSurveyInfo(List<string> SurveyInfoIdList, DateTime pClosingDate, int pSurveyType = -1)
+        public List<SurveyInfoBO> GetSurveyInfo(List<string> SurveyInfoIdList, DateTime pClosingDate, int pSurveyType = -1, int PageNumber = -1, int PageSize = -1)
         {
             List<SurveyInfoBO> result = new List<SurveyInfoBO>();
 
