@@ -64,9 +64,20 @@ namespace Epi.Core.EnterInterpreter.Rules
                 {
                     result = true;
                 }
-                else if (Util.IsEmpty(LHSO) || Util.IsEmpty(RHSO))
+                else if (Util.IsEmpty(LHSO) && Util.IsEmpty(RHSO) && op.Equals("<>"))
                 {
-                    result = false;
+                    return false;
+                }
+                else if ((Util.IsEmpty(LHSO) || Util.IsEmpty(RHSO)))
+                {
+                    if (op.Equals("<>"))
+                    {
+                        return !(Util.IsEmpty(LHSO) && Util.IsEmpty(RHSO));
+                    }
+                    else
+                    {
+                        result = false;
+                    }
                 }
                 else if (op.Equals("LIKE", StringComparison.OrdinalIgnoreCase) && LHSO is String && RHSO is String)
                 {
