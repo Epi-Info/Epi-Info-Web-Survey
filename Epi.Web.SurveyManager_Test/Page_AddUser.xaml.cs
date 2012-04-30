@@ -15,6 +15,7 @@ using System.Configuration;
 using Epi.Web.Common.Security;
 using System.Security;
 using System.Text.RegularExpressions;
+ 
 namespace Epi.Web.SurveyManager.Client
 {
     /// <summary>
@@ -192,53 +193,9 @@ namespace Epi.Web.SurveyManager.Client
         }
         private void GetOrganizationNames_Clik(object sender, RoutedEventArgs e)
         {
+
+            GetOrganizationNames();
             
-            SurveyManagerService.ManagerServiceClient client = new SurveyManagerService.ManagerServiceClient();
-            Epi.Web.Common.Message.OrganizationRequest Request = new Epi.Web.Common.Message.OrganizationRequest();
-
-            richTextBox1.Document.Blocks.Clear();
-           
-            try
-            {
-
-                if (!string.IsNullOrEmpty(passwordBox1.Password.ToString()) && IsGuid(passwordBox1.Password.ToString()))
-                {
-
-                    Request.Organization.AdminId = new Guid(passwordBox1.Password);
-                   // Epi.Web.Common.Message.OrganizationResponse Result = client.GetOrganizationInfo(Request);
-                    Epi.Web.Common.Message.OrganizationResponse Result = client.GetOrganizationNames(Request);
-             
-
-                    OnamelistBox1.Items.Clear();
-                    if (Result.Message != null)
-                    {
-                    richTextBox1.AppendText(Result.Message.ToString());
-                    }
-                    if (Result.OrganizationList != null)
-                    {
-
-                        for (int i = 0; i < Result.OrganizationList.Count; i++)
-                        {
-
-                            this.OnamelistBox1.Items.Add(Result.OrganizationList[i].Organization);
-
-                        }
-                        this.OnamelistBox1.SelectedIndex = 0;
-                    }
-                   
-                }
-                else
-                {
-
-                    richTextBox1.AppendText("Admin pass  is required and Should be a Guid.");
-
-                }
-            }
-            catch (Exception ex)
-            {
-
-                richTextBox1.AppendText("Error occurred while trying to get all organization names. ");
-            }
 
         }
         public static bool IsGuid(string expression)
@@ -340,7 +297,8 @@ namespace Epi.Web.SurveyManager.Client
                             if (Result.Message.ToString().Contains("Successfully"))
                             {
                                 richTextBox1.Foreground = Brushes.Green;
-                                 
+                                GetOrganizationNames();
+                                this.OnamelistBox1.SelectedItem = Request.Organization.Organization;
                             }
                             richTextBox1.AppendText(Result.Message.ToString());
                         
@@ -358,5 +316,60 @@ namespace Epi.Web.SurveyManager.Client
                 richTextBox1.AppendText("Error occurred while updating organization info. Please  try again. ");
             }
         }
+
+        public void GetOrganizationNames()
+        {
+
+            SurveyManagerService.ManagerServiceClient client = new SurveyManagerService.ManagerServiceClient();
+            Epi.Web.Common.Message.OrganizationRequest Request = new Epi.Web.Common.Message.OrganizationRequest();
+
+            richTextBox1.Document.Blocks.Clear();
+
+            try
+            {
+
+                if (!string.IsNullOrEmpty(passwordBox1.Password.ToString()) && IsGuid(passwordBox1.Password.ToString()))
+                {
+
+                    Request.Organization.AdminId = new Guid(passwordBox1.Password);
+                    // Epi.Web.Common.Message.OrganizationResponse Result = client.GetOrganizationInfo(Request);
+                    Epi.Web.Common.Message.OrganizationResponse Result = client.GetOrganizationNames(Request);
+
+
+                    OnamelistBox1.Items.Clear();
+                    if (Result.Message != null)
+                    {
+                        richTextBox1.AppendText(Result.Message.ToString());
+                    }
+                    if (Result.OrganizationList != null)
+                    {
+
+                        for (int i = 0; i < Result.OrganizationList.Count; i++)
+                        {
+
+                            this.OnamelistBox1.Items.Add(Result.OrganizationList[i].Organization);
+
+                        }
+                        this.OnamelistBox1.SelectedIndex = 0;
+                    }
+
+                }
+                else
+                {
+
+                    richTextBox1.AppendText("Admin pass  is required and Should be a Guid.");
+
+                }
+            }
+            catch (Exception ex)
+            {
+
+                richTextBox1.AppendText("Error occurred while trying to get all organization names. ");
+            }
+
+            
+        
+        }
+        
     }
 }
