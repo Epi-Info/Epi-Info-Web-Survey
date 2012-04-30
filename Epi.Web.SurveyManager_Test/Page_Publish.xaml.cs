@@ -32,9 +32,7 @@ namespace Epi.Web.SurveyManager.Client
             this.datePicker1.SelectedDate = DateTime.Now + t;
             this.WindowTitle = "Publish Survey";
 
-            //generate the publish key guid for simulation
-            UserPublishKey = Guid.NewGuid();
-            txtPublishKey.Text = UserPublishKey.ToString();
+           
         }
 
         private void SubmitRequestButton_Click(object sender, RoutedEventArgs e)
@@ -282,6 +280,15 @@ namespace Epi.Web.SurveyManager.Client
                 return guidRegEx.IsMatch(expression);
             }
             return false;
+        }
+
+        
+
+        private void btnGeneratePublishkey_Click(object sender, RoutedEventArgs e)
+        {
+            //generate the publish key guid for simulation
+            UserPublishKey = Guid.NewGuid();
+            txtPublishKey.Text = UserPublishKey.ToString();
         }
     }
 }
