@@ -19,7 +19,7 @@ namespace Epi.Web.Interfaces.DataInterfaces
         /// </summary>
         /// <param name="SurveyResponseId">Unique SurveyResponse identifier.</param>
         /// <returns>SurveyResponse.</returns>
-        List<SurveyResponseBO> GetSurveyResponse(List<string> SurveyResponseIdList, Guid UserPublishKey);
+        List<SurveyResponseBO> GetSurveyResponse(List<string> SurveyResponseIdList, Guid UserPublishKey, int PageNumber = -1, int PageSize = -1);
 
 
 
@@ -28,7 +28,7 @@ namespace Epi.Web.Interfaces.DataInterfaces
         /// </summary>
         /// <param name="SurveyResponseId">Unique SurveyResponse identifier.</param>
         /// <returns>SurveyResponse.</returns>
-        List<SurveyResponseBO> GetSurveyResponseBySurveyId(List<string> SurveyIdList, Guid UserPublishKey);
+        List<SurveyResponseBO> GetSurveyResponseBySurveyId(List<string> SurveyIdList, Guid UserPublishKey, int PageNumber = -1, int PageSize = -1);
 
 
         
@@ -37,7 +37,7 @@ namespace Epi.Web.Interfaces.DataInterfaces
         /// </summary>
         /// <param name="SurveyResponseId">Unique SurveyResponse identifier.</param>
         /// <returns>SurveyResponse.</returns>
-        List<SurveyResponseBO> GetSurveyResponse(List<string> SurveyAnswerIdList, string pSurveyId, DateTime pDateCompleted, int pStatusId = -1 );
+        List<SurveyResponseBO> GetSurveyResponse(List<string> SurveyAnswerIdList, string pSurveyId, DateTime pDateCompleted, int pStatusId = -1, int PageNumber = -1, int PageSize = -1);
 
 
         /// <summary>
