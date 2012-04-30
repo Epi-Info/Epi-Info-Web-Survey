@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="BusinessObject\BusinessObject.cs" />
     <Compile Include="BusinessObject\OrganizationBO.cs" />
+    <Compile Include="BusinessObject\PageInfoBO.cs" />
     <Compile Include="BusinessObject\UserAuthenticationRequestBO.cs" />
     <Compile Include="BusinessObject\SurveyInfoBO.cs" />
     <Compile Include="BusinessObject\SurveyRequestBO.cs" />
@@ -71,6 +72,7 @@
     <Compile Include="Criteria\Criteria.cs" />
     <Compile Include="Criteria\SurveyInfoCriteria.cs" />
     <Compile Include="DTO\OrganizationDTO.cs" />
+    <Compile Include="DTO\PageInfoDTO.cs" />
     <Compile Include="DTO\PassCodeDTO.cs" />
     <Compile Include="DTO\SurveyAnswerDTO.cs" />
     <Compile Include="Exception\CustomFaultException.cs" />
