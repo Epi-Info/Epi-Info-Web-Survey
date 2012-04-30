@@ -4,13 +4,13 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       mc:Ignorable="d" 
-     d:DesignHeight="694" d:DesignWidth="631"
+     d:DesignHeight="1017" d:DesignWidth="632"
 	Title="Page_Download">
 
-    <Grid Height="692" Width="629">
-        <RichTextBox Height="86" HorizontalAlignment="Left" Margin="28,187,0,0" Name="SurveyInfoResponseTextBox" VerticalAlignment="Top" Width="554" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Visible" />
-        <GroupBox Header="SurveyInfo Criteria" Height="109" HorizontalAlignment="Left" Margin="22,73,0,0" Name="groupBox1" VerticalAlignment="Top" Width="566" Background="#FFC2D2DE">
-            <Grid Height="97">
+    <Grid Height="988" Width="623">
+        <RichTextBox Height="86" HorizontalAlignment="Left" Margin="32,288,0,0" Name="SurveyInfoResponseTextBox" VerticalAlignment="Top" Width="554" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Visible" />
+        <GroupBox Header="SurveyInfo Criteria" Height="190" HorizontalAlignment="Left" Margin="22,73,0,0" Name="groupBox1" VerticalAlignment="Top" Width="565" Background="#FFC2D2DE">
+            <Grid Height="158" Width="549">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="24*" />
                     <ColumnDefinition Width="14*" />
@@ -20,18 +20,22 @@
                 </Grid.ColumnDefinitions>
                 <Label Content="SurveyId" Height="28" HorizontalAlignment="Left" Margin="8,4,0,0" Name="label1" VerticalAlignment="Top" Grid.ColumnSpan="3" />
                 <TextBox Height="26" HorizontalAlignment="Left" Name="SurveyCriteria_SurveyId" VerticalAlignment="Top" Width="255" Grid.Column="2" Uid="" Margin="26,4,0,0" Grid.ColumnSpan="2" />
-                <Button Content="Get Survey Information" Height="30" HorizontalAlignment="Right" Margin="0,51,138,0" Name="DownloadSurveyInfoButton" VerticalAlignment="Top" Width="137" Grid.Column="3" Click="DownloadSurveyInfoButton_Click" />
-                <Button Content="Clear Criteria" Grid.Column="4" Height="21" HorizontalAlignment="Left" Margin="25,64,0,0" Name="ClearSurveyCriteriaButton" VerticalAlignment="Top" Width="75" Click="ClearSurveyCriteriaButton_Click" />
-                <CheckBox Content="Currently open" Grid.Column="2" Height="16" HorizontalAlignment="Left" Margin="12,58,0,0" Name="SurveyCriteria_CurrentlyOpenCheckBox" VerticalAlignment="Top" Grid.ColumnSpan="2" />
+                <Button Content="Clear Criteria" Grid.Column="4" Height="21" HorizontalAlignment="Left" Margin="12,6,0,0" Name="ClearSurveyCriteriaButton" VerticalAlignment="Top" Width="75" Click="ClearSurveyCriteriaButton_Click" />
+                <CheckBox Content="Currently open" Height="16" HorizontalAlignment="Left" Margin="11,46,0,0" Name="SurveyCriteria_CurrentlyOpenCheckBox" VerticalAlignment="Top" Grid.ColumnSpan="4" />
                 <ListBox Grid.Column="3" Height="47" HorizontalAlignment="Left" Margin="241,2,0,0" Name="SurveyInfoCriteria_SurveyTypeListBox" VerticalAlignment="Top" Width="120" Grid.ColumnSpan="2">
                     <ListBoxItem Content="All Survey Types" Tag="-1" />
                     <ListBoxItem Content="Single Response" Tag="1" />
                     <ListBoxItem Content="Multi Response" Tag="2" />
                 </ListBox>
+                <Label Content="Organization Key" Height="28" HorizontalAlignment="Left" Margin="6,68,0,0" Name="lblOrganizationKeySurveyInfo" VerticalAlignment="Top" Width="109" Grid.ColumnSpan="4" />
+                <TextBox Height="23" HorizontalAlignment="Left" Margin="23,68,0,0" Name="txtOrganizationKeySurveyInfo" VerticalAlignment="Top" Width="370" Grid.Column="3" Grid.ColumnSpan="2" />
+                <CheckBox Content="Is Size Request" Height="16" HorizontalAlignment="Left" Margin="10,102,0,0" Name="chkIsSizeRequestSurveyInfo" VerticalAlignment="Top" Grid.ColumnSpan="4" />
+                <Button Content="Get Survey Information" Height="30" HorizontalAlignment="Left" Margin="8,124,0,0" Name="DownloadSurveyInfoButton" VerticalAlignment="Top" Width="137" Click="DownloadSurveyInfoButton_Click" Grid.ColumnSpan="4" />
+                <Label Content="" Grid.Column="3" Height="28" HorizontalAlignment="Left" Margin="104,102,0,0" Name="lblPageSizeSurveyInfo" VerticalAlignment="Top" Width="233" />
             </Grid>
         </GroupBox>
-        <GroupBox Header="SurveyAnswer Criteria" Height="255" HorizontalAlignment="Left" Margin="24,272,0,0" Name="groupBox2" VerticalAlignment="Top" Width="558" Background="#FFC2D2DE">
-            <Grid Width="546" Height="239">
+        <GroupBox Header="SurveyAnswer Criteria" Height="446" HorizontalAlignment="Left" Margin="34,380,0,0" Name="groupBox2" VerticalAlignment="Top" Width="589" Background="#FFC2D2DE">
+            <Grid Width="569" Height="399">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="40*" />
                     <ColumnDefinition Width="4*" />
@@ -40,21 +44,27 @@
                 <Label Content="SurveyAnswerIdList" Height="28" HorizontalAlignment="Left" Margin="6,72,0,0" Name="label2" VerticalAlignment="Top" Grid.ColumnSpan="3" />
                 <Label Content="SurveyId" Height="28" HorizontalAlignment="Left" Margin="6,6,0,0" Name="label3" VerticalAlignment="Top" Grid.ColumnSpan="3" />
                 <TextBox Height="26" HorizontalAlignment="Left" Margin="62,6,0,0" Name="SurveyAnswerCriteria_SurveyIdTextBox" VerticalAlignment="Top" Width="227" Grid.Column="2" />
-                <Button Content="Download Answers" Height="30" HorizontalAlignment="Left" Margin="321,196,0,0" Name="DownloadSurveyAnswersButton" VerticalAlignment="Top" Width="107" Click="DownloadSurveyAnswersButton_Click" Grid.Column="2" />
                 <CheckBox Content="Only Completed" Height="16" HorizontalAlignment="Left" Margin="322,6,0,0" Name="OnlyCompletedCheckBox" VerticalAlignment="Top" Width="102" Grid.Column="2" />
                 <ListBox Height="94" HorizontalAlignment="Left" Margin="6,132,0,0" Name="SurveyAnswerIdListBox" VerticalAlignment="Top" Width="357" Grid.ColumnSpan="3" />
                 <Label Content="Date Completed" Height="28" HorizontalAlignment="Left" Margin="322,82,0,0" Name="label4" VerticalAlignment="Top" Grid.Column="2" />
                 <DatePicker Height="25" HorizontalAlignment="Left" Margin="328,101,0,0" Name="datePicker1" VerticalAlignment="Top" Width="134" Grid.Column="2" />
                 <TextBox Height="23" HorizontalAlignment="Left" Margin="6,97,0,0" Name="AddAnswerIdTextBox" VerticalAlignment="Top" Width="282" Grid.ColumnSpan="3" />
-                <Button Content="Add" Height="26" HorizontalAlignment="Right" Margin="0,0,183,118" Name="AddSurveyAnswerIdButton" VerticalAlignment="Bottom" Width="41" Click="AddSurveyAnswerIdButton_Click" Grid.Column="2" />
+                <Button Content="Add" Height="26" HorizontalAlignment="Right" Margin="0,97,227,0" Name="AddSurveyAnswerIdButton" VerticalAlignment="Top" Width="41" Click="AddSurveyAnswerIdButton_Click" Grid.Column="2" />
                 <CheckBox Content="Only Summary Data" Height="16" HorizontalAlignment="Left" Margin="322,30,0,0" Name="checkBox2" VerticalAlignment="Top" IsEnabled="False" Grid.Column="2" />
                 <Button Content="Clear Criteria" Height="23" HorizontalAlignment="Left" Margin="321,132,0,0" Name="ClearListButton" VerticalAlignment="Top" Width="78" Click="ClearListButton_Click" Grid.Column="2" />
                 <Label Content="User Publish Key" Grid.ColumnSpan="3" Height="28" HorizontalAlignment="Left" Margin="6,48,0,0" Name="label5" VerticalAlignment="Top" Width="104" />
                 <TextBox Grid.Column="2" Height="26" HorizontalAlignment="Left" Margin="62,48,0,0" Name="UserPublishKeytextBox" VerticalAlignment="Top" Width="227" />
+                <TextBox Height="23" HorizontalAlignment="Left" Margin="75,245,0,0" Name="txtPublishKeySurveyResponse" VerticalAlignment="Top" Width="370" Grid.Column="2" />
+                <Label Content="User Publish Key" Height="28" HorizontalAlignment="Left" Margin="3,240,0,0" Name="lblPublishKeyResponse" VerticalAlignment="Top" Width="109" Grid.ColumnSpan="3" />
+                <TextBox Height="23" HorizontalAlignment="Left" Margin="75,271,0,0" Name="txtOrganizationKeySurveyResponse" VerticalAlignment="Top" Width="370" Grid.Column="2" />
+                <Label Content="Organization Key" Height="28" HorizontalAlignment="Left" Margin="3,266,0,0" Name="lblOrganizationKeyResponse" VerticalAlignment="Top" Width="109" Grid.ColumnSpan="3" />
+                <CheckBox Content="Is Size Request" Grid.ColumnSpan="3" Height="16" HorizontalAlignment="Left" Margin="10,305,0,0" Name="chkIsSizeRequestSurveyResponse" VerticalAlignment="Top" />
+                <Button Content="Download Answers" Height="30" HorizontalAlignment="Left" Margin="10,352,0,0" Name="DownloadSurveyAnswersButton" VerticalAlignment="Top" Width="107" Click="DownloadSurveyAnswersButton_Click" Grid.ColumnSpan="3" />
+                <Label Content="" Height="28" HorizontalAlignment="Left" Margin="75,305,0,0" Name="lblPageSizeSurveyResponse" VerticalAlignment="Top" Width="233" Grid.Column="2" />
             </Grid>
         </GroupBox>
         <Button Content="View Publish Client" Height="30" HorizontalAlignment="Left" Margin="27,26,0,0" Name="button3" VerticalAlignment="Top" Width="118" Click="button3_Click" />
-        <RichTextBox Height="135" Margin="28,533,47,0" Name="SurveyAnswerResponseTextBox" VerticalAlignment="Top" VerticalScrollBarVisibility="Visible" />
+        <RichTextBox Height="135" Margin="36,832,39,0" Name="SurveyAnswerResponseTextBox" VerticalAlignment="Top" VerticalScrollBarVisibility="Visible" />
         <Button Content="Manage Existing Surveys" Height="30" HorizontalAlignment="Left" Margin="151,26,0,0" Name="ManageSurveyButton" VerticalAlignment="Top" Width="150" Click="ManageSurveyButton_Click" />
         <Button Content="Add User" Height="30" HorizontalAlignment="Left" Margin="308,26,0,0" Name="button1" VerticalAlignment="Top" Width="162" Click="AddUser_click" />
     </Grid>
