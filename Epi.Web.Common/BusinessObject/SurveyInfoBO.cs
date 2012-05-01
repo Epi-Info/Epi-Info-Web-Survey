@@ -20,6 +20,7 @@ namespace Epi.Web.Common.BusinessObject
         private Guid _UserPublishKey;
         private Guid _OrganizationKey;
         private DateTime _ClosingDate;
+        
 
         public string SurveyId
         {
@@ -97,5 +98,8 @@ namespace Epi.Web.Common.BusinessObject
             set { _OrganizationKey = value; }
         }
 
+        
+
+        
     }
 }

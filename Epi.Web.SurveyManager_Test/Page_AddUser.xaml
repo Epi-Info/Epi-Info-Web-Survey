@@ -38,7 +38,7 @@
         <Label Content="Organization:" Height="28" HorizontalAlignment="Left" Margin="62,485,0,179" Name="label8" Width="106" />
         <TextBox AutoWordSelection="True" Background="White" Height="23" HorizontalAlignment="Left" Margin="191,490,0,0" Name="ONameEditTextBox1" VerticalAlignment="Top" Width="309" />
         <CheckBox Content="Is Enabled" Height="16" HorizontalAlignment="Left" Margin="191,528,0,0" Name="checkBox1" VerticalAlignment="Top" />
-        <Button  Click="Save_Click" Content="Save" Height="23" Margin="456,521,129,0" Name="Savebutton" ToolTip="Copy to Clipboard" VerticalAlignment="Top" />
+        <Button  Click="Save_Click" Content="Update" Height="23" Margin="456,521,129,0" Name="Savebutton" ToolTip="Copy to Clipboard" VerticalAlignment="Top" />
         <TextBox Background="#FFD8D5D5" Height="23" HorizontalAlignment="Right" IsReadOnly="True" Margin="0,423,129,0" Name="EditOtextBox1" VerticalAlignment="Top" Width="309" />
         <GroupBox Header="Edit Organization Info" Height="100" HorizontalAlignment="Left" Margin="56,458,0,0" Name="groupBox4" VerticalAlignment="Top" Width="502">
             <Grid />
