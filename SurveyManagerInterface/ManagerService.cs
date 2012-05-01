@@ -120,7 +120,7 @@ namespace Epi.Web.WCF.SurveyService
 
                 if (pRequest.Criteria.ReturnSizeInfoOnly == true)
                 {
-                    PageInfoBO PageInfoBO = implementation.GetSurveySizeInfo(criteria.ClosingDate, criteria.SurveyType, ResponseMaxSize);
+                    PageInfoBO PageInfoBO = implementation.GetSurveySizeInfo(SurveyIdList, criteria.ClosingDate, criteria.SurveyType, criteria.PageNumber, criteria.PageSize, ResponseMaxSize);
 
                     result.PageSize = PageInfoBO.PageSize;
                     result.NumberOfPages = PageInfoBO.NumberOfPages;

@@ -30,6 +30,7 @@ namespace Epi.Web.EF
                 result.OrganizationName = entity.OrganizationName;
                 result.DepartmentName = entity.DepartmentName;
                 result.ClosingDate = entity.ClosingDate;
+                result.TemplateXMLSize = (long) entity.TemplateXMLSize;
                 if (entity.UserPublishKey != null)
                 {
                     result.UserPublishKey = (Guid)entity.UserPublishKey.Value;
