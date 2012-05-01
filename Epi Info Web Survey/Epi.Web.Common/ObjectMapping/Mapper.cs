@@ -93,7 +93,8 @@ namespace Epi.Web.Common.ObjectMapping
                 OrganizationName = pBO.OrganizationName,
                 DepartmentName = pBO.DepartmentName,
                 SurveyType =pBO.SurveyType,
-                ClosingDate = pBO.ClosingDate
+                ClosingDate = pBO.ClosingDate 
+               
 
             };
         }

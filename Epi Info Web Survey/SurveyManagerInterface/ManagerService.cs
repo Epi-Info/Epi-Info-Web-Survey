@@ -114,9 +114,22 @@ namespace Epi.Web.WCF.SurveyService
                 //{
 
                 //result.SurveyInfoList = Mapper.ToDataTransferObject(implementation.GetSurveyInfo(SurveyIdList, criteria.ClosingDate, criteria.SurveyType));
+                List<SurveyInfoBO> SurveyBOList = new List<SurveyInfoBO>();
+              //  int ResponseMaxSize = 16384;   
+                int ResponseMaxSize =   Int32.Parse(ConfigurationManager.AppSettings["maxBytesPerRead"]);
 
+                if (pRequest.Criteria.ReturnSizeInfoOnly == true)
+                {
+                    PageInfoBO PageInfoBO = implementation.GetSurveySizeInfo(criteria.ClosingDate, criteria.SurveyType, ResponseMaxSize);
 
-                List<SurveyInfoBO> SurveyBOList = implementation.GetSurveyInfo(SurveyIdList, criteria.ClosingDate, criteria.SurveyType);
+                    result.PageSize = PageInfoBO.PageSize;
+                    result.NumberOfPages = PageInfoBO.NumberOfPages;
+                }
+                else
+                {
+                SurveyBOList = implementation.GetSurveyInfo(SurveyIdList, criteria.ClosingDate, criteria.SurveyType, criteria.PageNumber, criteria.PageSize);//Default 
+                
+              
                 foreach (SurveyInfoBO surveyInfoBO in SurveyBOList)
                 {
                     if (surveyInfoBO.UserPublishKey == pRequest.Criteria.UserPublishKey)
@@ -125,7 +138,7 @@ namespace Epi.Web.WCF.SurveyService
                     }
                 }
 
-                //}
+                }
 
                 return result;
             }
@@ -293,23 +306,34 @@ namespace Epi.Web.WCF.SurveyService
                 //    response.SurveyInfos = SurveyInfos.Select(c => Mapper.ToDataTransferObject(c)).ToList();
                 //}
 
+                 int ResponseMaxSize =   Int32.Parse(ConfigurationManager.AppSettings["maxBytesPerRead"]);
 
-                List<SurveyResponseBO> SurveyResponseBOList = Implementation.GetSurveyResponse
-                        (
-                            IdList,
-                            criteria.SurveyId,
-                            criteria.DateCompleted,
-                            criteria.StatusId
-                        );
-                foreach (SurveyResponseBO surveyResponseBo in SurveyResponseBOList)
-                {
-                   // if (surveyResponseBo.UserPublishKey == criteria.UserPublishKey)
-                    if (UserPublishKey == criteria.UserPublishKey)
-                    {
-                        result.SurveyResponseList.Add(Mapper.ToDataTransferObject(surveyResponseBo));
-                    }
-                }
+                 if (pRequest.Criteria.ReturnSizeInfoOnly == true)
+                 {
+                     PageInfoBO PageInfoBO = Implementation.GetResponseSurveySize(criteria.SurveyId, criteria.DateCompleted,criteria.StatusId, ResponseMaxSize);
 
+                     result.PageSize = PageInfoBO.PageSize;
+                     result.NumberOfPages = PageInfoBO.NumberOfPages;
+                 }
+                 else
+                 {
+
+                     List<SurveyResponseBO> SurveyResponseBOList = Implementation.GetSurveyResponse
+                             (
+                                 IdList,
+                                 criteria.SurveyId,
+                                 criteria.DateCompleted,
+                                 criteria.StatusId
+                             );
+                     foreach (SurveyResponseBO surveyResponseBo in SurveyResponseBOList)
+                     {
+                         // if (surveyResponseBo.UserPublishKey == criteria.UserPublishKey)
+                         if (UserPublishKey == criteria.UserPublishKey)
+                         {
+                             result.SurveyResponseList.Add(Mapper.ToDataTransferObject(surveyResponseBo));
+                         }
+                     }
+                 }
                 /*
                 if (string.IsNullOrEmpty(pRequest.Criteria.SurveyId))
                 {
@@ -733,7 +757,7 @@ namespace Epi.Web.WCF.SurveyService
                 }
                 else
                 {
-                    response.Message = "Invalid Admi Key";
+                    response.Message = "Invalid Admin Key";
                     return response;
                 }
             }

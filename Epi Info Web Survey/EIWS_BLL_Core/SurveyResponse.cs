@@ -104,5 +104,11 @@ namespace Epi.Web.BLL
 
             return result;
         }
+
+        public PageInfoBO GetResponseSurveySize(string SurveyId,DateTime pClosingDate, int pSurveyType = -1, int pResponseMaxSize = -1)
+        {
+            PageInfoBO result = this.SurveyResponseDao.GetSurveyResponseSize(SurveyId, pClosingDate, pSurveyType, pResponseMaxSize);
+            return result;
+        }
     }
 }
