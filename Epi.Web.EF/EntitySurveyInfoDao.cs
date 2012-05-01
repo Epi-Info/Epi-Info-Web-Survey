@@ -43,6 +43,15 @@ namespace Epi.Web.EF
                 }
             }
 
+
+            // remove the items to skip
+            // remove the items after the page size
+            if (PageNumber > 0 && PageSize > 0)
+            {
+                result.Skip(PageNumber * PageSize - PageSize);
+                result.Take(PageSize);
+            }
+
             return result;
         }
 
@@ -93,6 +102,15 @@ namespace Epi.Web.EF
             }
 
             result = Mapper.Map(responseList);
+
+            // remove the items to skip
+            // remove the items after the page size
+            if (PageNumber > 0 && PageSize > 0)
+            {
+                result.Skip(PageNumber * PageSize - PageSize);
+                result.Take(PageSize);
+            }
+
             return result;
         }
 
@@ -190,6 +208,77 @@ namespace Epi.Web.EF
             
             return result;
         }
+
+
+
+                /// <summary>
+        /// Gets SurveyInfo Size Data on a list of ids
+        /// </summary>
+        /// <param name="SurveyInfoId">Unique SurveyInfo identifier.</param>
+        /// <returns>PageInfoBO.</returns>
+        public PageInfoBO GetSurveySizeInfo(List<string> SurveyInfoIdList, int PageNumber = -1, int PageSize = -1, int ResponseMaxSize = -1)
+        {
+            PageInfoBO result = new PageInfoBO();
+
+            List<SurveyInfoBO> resultRows = GetSurveyInfo(SurveyInfoIdList, PageNumber, PageSize);
+
+            int NumberOfRows = 0;
+            int ResponsesTotalsize = 0;
+            decimal AvgResponseSize = 0;
+            decimal NumberOfResponsPerPage = 0;
+
+
+            NumberOfRows = resultRows.Count;
+            ResponsesTotalsize = (int)resultRows.Select(x => x.TemplateXMLSize).Sum();
+
+            AvgResponseSize = ResponsesTotalsize / NumberOfRows;
+            NumberOfResponsPerPage = (int)Math.Ceiling(ResponseMaxSize / AvgResponseSize);
+
+
+            result.PageSize = (int)Math.Ceiling(NumberOfResponsPerPage);
+            result.NumberOfPages = (int)Math.Ceiling(NumberOfRows / NumberOfResponsPerPage);
+
+            return result;
+
+        }
+
+
+        /// <summary>
+        /// Gets SurveyInfo Size Data based on criteria
+        /// </summary>
+        /// <param name="SurveyInfoId">Unique SurveyInfo identifier.</param>
+        /// <returns>PageInfoBO.</returns>
+        public PageInfoBO GetSurveySizeInfo(List<string> SurveyInfoIdList, DateTime pClosingDate, int pSurveyType = -1, int PageNumber = -1, int PageSize = -1, int ResponseMaxSize = -1)
+        {
+
+            PageInfoBO result = new PageInfoBO();
+
+            List<SurveyInfoBO> resultRows =  GetSurveyInfo(SurveyInfoIdList, pClosingDate, pSurveyType, PageNumber, PageSize);
+
+            int NumberOfRows = 0;
+            int ResponsesTotalsize = 0;
+            decimal AvgResponseSize = 0;
+            decimal NumberOfResponsPerPage = 0;
+
+
+            NumberOfRows = resultRows.Count;
+            ResponsesTotalsize = (int)resultRows.Select(x => x.TemplateXMLSize).Sum();
+
+            AvgResponseSize = ResponsesTotalsize / NumberOfRows;
+            NumberOfResponsPerPage = (int)Math.Ceiling(ResponseMaxSize / AvgResponseSize);
+
+
+            result.PageSize = (int)Math.Ceiling(NumberOfResponsPerPage);
+            result.NumberOfPages = (int)Math.Ceiling(NumberOfRows / NumberOfResponsPerPage);
+            
+            
+
+
+            return result;
+        }
+
+
+
        
     }
 }
