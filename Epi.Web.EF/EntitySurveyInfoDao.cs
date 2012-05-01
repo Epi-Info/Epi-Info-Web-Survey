@@ -176,40 +176,6 @@ namespace Epi.Web.EF
        
        }
 
-        public PageInfoBO GetSurveySizeInfo( DateTime pClosingDate, int pSurveyType = -1, int ResponseMaxSize = -1)
-        {
-            PageInfoBO result = new PageInfoBO();
-
-        
-           int NumberOfRows = 0;
-           int ResponsesTotalsize = 0;
-           decimal AvgResponseSize = 0;
-           decimal NumberOfResponsPerPage = 0;
-             
-                using (var Context = DataObjectFactory.CreateContext())
-                {
-                    var Query = from response in Context.SurveyMetaDatas
-                               
-                                select response;
-
-
-              
-                    NumberOfRows = Query.Select(x => x.TemplateXMLSize).Count();
-                    ResponsesTotalsize = (int)Query.Select(x => x.TemplateXMLSize).Sum();
-
-                    AvgResponseSize =  ResponsesTotalsize / NumberOfRows;
-                    NumberOfResponsPerPage = (int)Math.Ceiling(ResponseMaxSize / AvgResponseSize);
-
-
-                    result.PageSize = (int) Math.Ceiling( NumberOfResponsPerPage);
-                    result.NumberOfPages = (int) Math.Ceiling(NumberOfRows / NumberOfResponsPerPage);
-                }
-            
-            
-            return result;
-        }
-
-
 
                 /// <summary>
         /// Gets SurveyInfo Size Data on a list of ids
