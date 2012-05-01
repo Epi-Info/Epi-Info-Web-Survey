@@ -17,6 +17,7 @@ namespace Epi.Web.Common.BusinessObject
         private string _OrganizationName;
         private string _XML;
         private string _ExitText;
+        private long _TemplateXMLSize;
         private Guid _UserPublishKey;
         private Guid _OrganizationKey;
         private DateTime _ClosingDate;
@@ -98,7 +99,11 @@ namespace Epi.Web.Common.BusinessObject
             set { _OrganizationKey = value; }
         }
 
-        
+        public long TemplateXMLSize
+        {
+            get { return _TemplateXMLSize; }
+            set { _TemplateXMLSize = value; }
+        }
 
         
     }
