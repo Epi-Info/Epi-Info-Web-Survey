@@ -127,17 +127,14 @@ namespace Epi.Web.WCF.SurveyService
                 }
                 else
                 {
-                SurveyBOList = implementation.GetSurveyInfo(SurveyIdList, criteria.ClosingDate, criteria.SurveyType, criteria.PageNumber, criteria.PageSize);//Default 
-                
-              
-                foreach (SurveyInfoBO surveyInfoBO in SurveyBOList)
-                {
-                    if (surveyInfoBO.UserPublishKey == pRequest.Criteria.UserPublishKey)
+                    SurveyBOList = implementation.GetSurveyInfo(SurveyIdList, criteria.ClosingDate, criteria.SurveyType, criteria.PageNumber, criteria.PageSize);//Default 
+                    foreach (SurveyInfoBO surveyInfoBO in SurveyBOList)
                     {
-                        result.SurveyInfoList.Add(Mapper.ToDataTransferObject(surveyInfoBO));
+                        if (surveyInfoBO.UserPublishKey == pRequest.Criteria.UserPublishKey)
+                        {
+                            result.SurveyInfoList.Add(Mapper.ToDataTransferObject(surveyInfoBO));
+                        }
                     }
-                }
-
                 }
 
                 return result;
