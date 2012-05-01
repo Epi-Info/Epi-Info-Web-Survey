@@ -24,7 +24,7 @@ namespace Epi.Web.Common.Message
         /// Total number of pages for query
         /// </summary>
         [DataMember]
-        public int PageTotal { get; set; }
+        public int NumberOfPages { get; set; }
 
         /// <summary>
         /// Number of Records per page

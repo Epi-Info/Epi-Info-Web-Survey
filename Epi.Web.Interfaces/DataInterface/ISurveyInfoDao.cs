@@ -30,6 +30,9 @@ namespace Epi.Web.Interfaces.DataInterfaces
         List<SurveyInfoBO> GetSurveyInfo(List<string> SurveyInfoIdList, DateTime pClosingDate, int pSurveyType = -1, int PageNumber = -1, int PageSize = -1);
 
 
+        PageInfoBO GetSurveySizeInfo( DateTime pClosingDate, int pSurveyType = -1, int ResponsesTotalsize = -1);
+
+
 
         /// <summary>
         /// Gets a sorted list of all SurveyInfos.
