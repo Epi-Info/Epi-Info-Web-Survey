@@ -53,12 +53,17 @@ namespace Epi.Web.BLL
         /// </summary>
         /// <param name="SurveyInfoId">Unique SurveyInfo identifier.</param>
         /// <returns>SurveyInfo.</returns>
-        public List<SurveyInfoBO> GetSurveyInfo(List<string> SurveyInfoIdList, DateTime pClosingDate, int pSurveyType = -1)
+        public List<SurveyInfoBO> GetSurveyInfo(List<string> SurveyInfoIdList, DateTime pClosingDate, int pSurveyType = -1, int pPageNumber = -1, int pPageSize = -1)
         {
-            List<SurveyInfoBO> result = this.SurveyInfoDao.GetSurveyInfo(SurveyInfoIdList, pClosingDate, pSurveyType);
+            List<SurveyInfoBO> result = this.SurveyInfoDao.GetSurveyInfo(SurveyInfoIdList, pClosingDate, pSurveyType, pPageNumber, pPageSize);
             return result;
         }
-
+        public PageInfoBO GetSurveySizeInfo( DateTime pClosingDate, int pSurveyType = -1, int pResponseMaxSize = -1)
+        {
+            PageInfoBO result = this.SurveyInfoDao.GetSurveySizeInfo(pClosingDate, pSurveyType, pResponseMaxSize);
+            return result;
+        }
+      
         public SurveyInfoBO InsertSurveyInfo(SurveyInfoBO pValue)
         {
             SurveyInfoBO result = pValue;

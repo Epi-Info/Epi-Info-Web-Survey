@@ -122,7 +122,7 @@ namespace Epi.Web.SurveyManager.Client
 
         private void button1_Click_1(object sender, RoutedEventArgs e)
         {
-            Page_Download page_Download = new Page_Download();
+            DownLoad page_Download = new DownLoad();
             this.NavigationService.Navigate(page_Download);
         }
 

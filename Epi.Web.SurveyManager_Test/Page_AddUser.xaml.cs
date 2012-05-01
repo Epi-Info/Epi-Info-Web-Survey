@@ -47,7 +47,7 @@ namespace Epi.Web.SurveyManager.Client
 
         private void ViewDownloadClient_Click(object sender, RoutedEventArgs e)
         {
-            Page_Download Page_Download = new Page_Download();
+           DownLoad Page_Download = new DownLoad();
             this.NavigationService.Navigate(Page_Download);
         }
 
