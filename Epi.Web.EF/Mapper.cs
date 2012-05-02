@@ -31,6 +31,7 @@ namespace Epi.Web.EF
                 result.DepartmentName = entity.DepartmentName;
                 result.ClosingDate = entity.ClosingDate;
                 result.TemplateXMLSize = (long) entity.TemplateXMLSize;
+                result.DateCreated = entity.DateCreated;
                 if (entity.UserPublishKey != null)
                 {
                     result.UserPublishKey = (Guid)entity.UserPublishKey.Value;
@@ -134,7 +135,7 @@ namespace Epi.Web.EF
                  DateUpdated = entity.DateUpdated,
                 DateCompleted = entity.DateCompleted.Value,
                  TemplateXMLSize = (long)entity.ResponseXMLSize,
-                
+                 DateCreated = entity.DateCreated,
             };
         }
 

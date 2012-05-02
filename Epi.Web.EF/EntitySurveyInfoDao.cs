@@ -44,12 +44,21 @@ namespace Epi.Web.EF
             }
 
 
+            result.Sort(CompareByDateCreated);
+
             // remove the items to skip
             // remove the items after the page size
             if (PageNumber > 0 && PageSize > 0)
             {
-                result.Skip(PageNumber * PageSize - PageSize);
-                result.Take(PageSize);
+                // remove the items to skip
+                if (PageNumber * PageSize - PageSize > 0)
+                {
+                    result.RemoveRange(0, PageSize);
+                }
+
+                // remove the items after the page size
+                result.RemoveRange(PageNumber * PageSize, result.Count - PageNumber * PageSize);
+
             }
 
             return result;
@@ -102,16 +111,23 @@ namespace Epi.Web.EF
             }
 
             result = Mapper.Map(responseList);
+            result.Sort(CompareByDateCreated);
 
             // remove the items to skip
             // remove the items after the page size
             if (PageNumber > 0 && PageSize > 0)
             {
-                
-                result.Skip(PageNumber * PageSize - PageSize);
-                result.Take(PageSize);
-            }
+                // remove the items to skip
+                if(PageNumber * PageSize - PageSize > 0)
+                {
+                    result.RemoveRange(0, PageSize);
+                }
 
+                // remove the items after the page size
+                result.RemoveRange(PageNumber * PageSize, result.Count - PageNumber * PageSize);
+                
+            }
+            
             return result;
         }
 
@@ -244,7 +260,10 @@ namespace Epi.Web.EF
             return result;
         }
 
-
+        private static int CompareByDateCreated(SurveyInfoBO x, SurveyInfoBO y)
+        {
+            return x.DateCreated.CompareTo(y.DateCreated);
+        }
 
        
     }
