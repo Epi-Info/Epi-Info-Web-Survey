@@ -118,14 +118,12 @@ namespace Epi.Web.EF
             if (PageNumber > 0 && PageSize > 0)
             {
                 // remove the items to skip
-                if(PageNumber * PageSize - PageSize > 0)
+                if (PageNumber * PageSize - PageSize > 0)
                 {
                     result.RemoveRange(0, PageSize);
                 }
 
-                // remove the items after the page size
                 result.RemoveRange(PageNumber * PageSize, result.Count - PageNumber * PageSize);
-                
             }
             
             return result;
