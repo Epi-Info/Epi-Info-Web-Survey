@@ -86,7 +86,7 @@ namespace Epi.Web.SurveyManager.Client
             try
             {
                 if (PageNumber > 1) {
-                    for (int i = 1; PageNumber > i;i++ )
+                    for (int i = 1; i <= PageNumber ;i++ )
                     {
                         Request.Criteria.PageNumber = i;
                         Request.Criteria.PageSize =  PageSize;
