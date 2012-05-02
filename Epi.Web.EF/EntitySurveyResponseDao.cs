@@ -50,6 +50,24 @@ namespace Epi.Web.EF
                 }
             }
 
+            result.Sort(CompareByDateCreated);
+
+            // remove the items to skip
+            // remove the items after the page size
+            if (PageNumber > 0 && PageSize > 0)
+            {
+                // remove the items to skip
+                if (PageNumber * PageSize - PageSize > 0)
+                {
+                    result.RemoveRange(0, PageSize);
+                }
+
+                // remove the items after the page size
+                result.RemoveRange(PageNumber * PageSize, result.Count - PageNumber * PageSize);
+
+            }
+
+
             return result;
         }
 
@@ -102,6 +120,25 @@ namespace Epi.Web.EF
                     result.Add(Mapper.Map(Context.SurveyResponses.FirstOrDefault(x => x.SurveyId == Id )));
                 }
             }
+
+
+            result.Sort(CompareByDateCreated);
+
+            // remove the items to skip
+            // remove the items after the page size
+            if (PageNumber > 0 && PageSize > 0)
+            {
+                // remove the items to skip
+                if (PageNumber * PageSize - PageSize > 0)
+                {
+                    result.RemoveRange(0, PageSize);
+                }
+
+                // remove the items after the page size
+                result.RemoveRange(PageNumber * PageSize, result.Count - PageNumber * PageSize);
+
+            }
+
 
             return result;
         }
@@ -202,6 +239,25 @@ namespace Epi.Web.EF
             }
 
             result = Mapper.Map(responseList);
+
+            result.Sort(CompareByDateCreated);
+
+            // remove the items to skip
+            // remove the items after the page size
+            if (PageNumber > 0 && PageSize > 0)
+            {
+                // remove the items to skip
+                if (PageNumber * PageSize - PageSize > 0)
+                {
+                    result.RemoveRange(0, PageSize);
+                }
+
+                // remove the items after the page size
+                result.RemoveRange(PageNumber * PageSize, result.Count - PageNumber * PageSize);
+
+            }
+
+
             return result;
         }
 
@@ -344,10 +400,13 @@ namespace Epi.Web.EF
            //Delete Survey
        
        }
-        
 
 
-        
+
+        private static int CompareByDateCreated(SurveyResponseBO x, SurveyResponseBO y)
+        {
+            return x.DateCreated.CompareTo(y.DateCreated);
+        }
 
     
 
