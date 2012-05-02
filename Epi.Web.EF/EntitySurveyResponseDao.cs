@@ -50,21 +50,19 @@ namespace Epi.Web.EF
                 }
             }
 
-            result.Sort(CompareByDateCreated);
-
-            // remove the items to skip
-            // remove the items after the page size
             if (PageNumber > 0 && PageSize > 0)
             {
+                result.Sort(CompareByDateCreated);
                 // remove the items to skip
                 if (PageNumber * PageSize - PageSize > 0)
                 {
                     result.RemoveRange(0, PageSize);
                 }
 
-                // remove the items after the page size
-                result.RemoveRange(PageNumber * PageSize, result.Count - PageNumber * PageSize);
-
+                if (PageNumber * PageSize < result.Count)
+                {
+                    result.RemoveRange(PageNumber * PageSize, result.Count - PageNumber * PageSize);
+                }
             }
 
 
@@ -122,21 +120,19 @@ namespace Epi.Web.EF
             }
 
 
-            result.Sort(CompareByDateCreated);
-
-            // remove the items to skip
-            // remove the items after the page size
             if (PageNumber > 0 && PageSize > 0)
             {
+                result.Sort(CompareByDateCreated);
                 // remove the items to skip
                 if (PageNumber * PageSize - PageSize > 0)
                 {
                     result.RemoveRange(0, PageSize);
                 }
 
-                // remove the items after the page size
-                result.RemoveRange(PageNumber * PageSize, result.Count - PageNumber * PageSize);
-
+                if (PageNumber * PageSize < result.Count)
+                {
+                    result.RemoveRange(PageNumber * PageSize, result.Count - PageNumber * PageSize);
+                }
             }
 
 
@@ -240,21 +236,19 @@ namespace Epi.Web.EF
 
             result = Mapper.Map(responseList);
 
-            result.Sort(CompareByDateCreated);
-
-            // remove the items to skip
-            // remove the items after the page size
             if (PageNumber > 0 && PageSize > 0)
             {
+                result.Sort(CompareByDateCreated);
                 // remove the items to skip
                 if (PageNumber * PageSize - PageSize > 0)
                 {
                     result.RemoveRange(0, PageSize);
                 }
 
-                // remove the items after the page size
-                result.RemoveRange(PageNumber * PageSize, result.Count - PageNumber * PageSize);
-
+                if (PageNumber * PageSize < result.Count)
+                {
+                    result.RemoveRange(PageNumber * PageSize, result.Count - PageNumber * PageSize);
+                }
             }
 
 
