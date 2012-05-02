@@ -55,29 +55,64 @@ namespace Epi.Web.SurveyManager.Client
                 Request.Criteria.SurveyType = int.Parse(((ListBoxItem)this.SurveyInfoCriteria_SurveyTypeListBox.Items[this.SurveyInfoCriteria_SurveyTypeListBox.SelectedIndex]).Tag.ToString());
             }
 
+
+            int PageNumber = 0;
+            int PageSize = 0;
+
             if (this.chkIsSizeRequestSurveyInfo.IsChecked == true)
             {
                 Request.Criteria.ReturnSizeInfoOnly = true;
             }
+            else {
+
+                //Paging test 
+                Request.Criteria.ReturnSizeInfoOnly = true;
+                Epi.Web.Common.Message.SurveyInfoResponse SizeResult = client.GetSurveyInfo(Request);
+
+                Request.Criteria.ReturnSizeInfoOnly = false;
+
+                if (SizeResult.NumberOfPages>1)
+                {
+                //Request.Criteria.PageNumber = SizeResult.NumberOfPages;
+               // Request.Criteria.PageSize = SizeResult.PageSize;
+
+                      PageNumber = SizeResult.NumberOfPages;
+                       PageSize = SizeResult.PageSize;
+                }
+            
+            
+            }
             SurveyInfoResponseTextBox.Document.Blocks.Clear();
             try
             {
-                Epi.Web.Common.Message.SurveyInfoResponse Result = client.GetSurveyInfo(Request);
-
-                if (Result.NumberOfPages > 0 && Result.PageSize > 0)
-                {
-                    SurveyInfoResponseTextBox.AppendText(string.Format(" - Number of Pages: {0}   \n\n", Result.NumberOfPages));
-                    SurveyInfoResponseTextBox.AppendText(string.Format(" - Pages Size:   {0}  ", Result.PageSize));
-
-
-                }
-                else
-                {
-
-                    SurveyInfoResponseTextBox.AppendText(string.Format("{0} - records. \n\n", Result.SurveyInfoList.Count));
-                    foreach (Epi.Web.Common.DTO.SurveyInfoDTO SurveyInfo in Result.SurveyInfoList)
+                if (PageNumber > 1) {
+                    for (int i = 1; PageNumber > i;i++ )
                     {
-                        SurveyInfoResponseTextBox.AppendText(string.Format("{0} - {1} - {2}\n", SurveyInfo.SurveyId, SurveyInfo.SurveyName, SurveyInfo.ClosingDate));
+                        Request.Criteria.PageNumber = i;
+                        Request.Criteria.PageSize =  PageSize;
+                        Epi.Web.Common.Message.SurveyInfoResponse Result = client.GetSurveyInfo(Request);
+                //    }
+                
+                //}
+               // Epi.Web.Common.Message.SurveyInfoResponse Result = client.GetSurveyInfo(Request);
+
+                            if (Result.NumberOfPages > 0 && Result.PageSize > 0)
+                            {
+                                SurveyInfoResponseTextBox.AppendText(string.Format(" - Number of Pages: {0}   \n\n", Result.NumberOfPages));
+                                SurveyInfoResponseTextBox.AppendText(string.Format(" - Pages Size:   {0}  ", Result.PageSize));
+
+
+                            }
+                            else
+                            {
+                  
+                                        SurveyInfoResponseTextBox.AppendText(string.Format("{0} - records. \n\n", Result.SurveyInfoList.Count));
+                                        foreach (Epi.Web.Common.DTO.SurveyInfoDTO SurveyInfo in Result.SurveyInfoList)
+                                        {
+                                            SurveyInfoResponseTextBox.AppendText(string.Format("{0} - {1} - {2}\n", SurveyInfo.SurveyId, SurveyInfo.SurveyName, SurveyInfo.ClosingDate));
+                                        }
+
+                            }
                     }
 
                 }
