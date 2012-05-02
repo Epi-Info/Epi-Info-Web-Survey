@@ -21,6 +21,7 @@ namespace Epi.Web.Common.BusinessObject
         private Guid _UserPublishKey;
         private Guid _OrganizationKey;
         private DateTime _ClosingDate;
+        private DateTime _DateCreated;
         
 
         public string SurveyId
@@ -105,6 +106,10 @@ namespace Epi.Web.Common.BusinessObject
             set { _TemplateXMLSize = value; }
         }
 
-        
+        public DateTime DateCreated
+        {
+            get { return _DateCreated; }
+            set{ _DateCreated = value;}
+        }
     }
 }
