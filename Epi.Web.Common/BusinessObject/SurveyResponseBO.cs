@@ -21,6 +21,7 @@ namespace Epi.Web.Common.BusinessObject
         public DateTime DateCompleted { get; set; }
         public int Status { get; set; }
         public string XML { get; set; }
+        public long TemplateXMLSize { get; set; }
        
     }
 }

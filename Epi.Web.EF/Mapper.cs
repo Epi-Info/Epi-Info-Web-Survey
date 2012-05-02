@@ -133,6 +133,7 @@ namespace Epi.Web.EF
                 Status = entity.StatusId,
                  DateUpdated = entity.DateUpdated,
                 DateCompleted = entity.DateCompleted.Value,
+                 TemplateXMLSize = (long)entity.ResponseXMLSize,
                 
             };
         }
