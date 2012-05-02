@@ -107,6 +107,7 @@ namespace Epi.Web.EF
             // remove the items after the page size
             if (PageNumber > 0 && PageSize > 0)
             {
+                
                 result.Skip(PageNumber * PageSize - PageSize);
                 result.Take(PageSize);
             }
