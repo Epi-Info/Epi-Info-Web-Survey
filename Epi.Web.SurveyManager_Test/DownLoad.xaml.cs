@@ -74,21 +74,27 @@ namespace Epi.Web.SurveyManager.Client
                 else 
                 {
 
-                    //Paging test 
+                    // 2 Step process:
+                    //      1 - get sizing information.
+                    //      2 - Loop thru calls for query results
+
+
+                    // 1 - get sizing information
                     Request.Criteria.ReturnSizeInfoOnly = true;
                     Epi.Web.Common.Message.SurveyInfoResponse SizeResult = client.GetSurveyInfo(Request);
-
-                    PageSize = SizeResult.PageSize;
-                    Request.Criteria.ReturnSizeInfoOnly = false;
 
                     SurveyInfoResponseTextBox.AppendText(string.Format(" - Number of Pages: {0}   \n\n", SizeResult.NumberOfPages));
                     SurveyInfoResponseTextBox.AppendText(string.Format(" - Pages Size:   {0}  \n", SizeResult.PageSize));
 
+                    // 2 - loop thru calls for query results
+                    PageSize = SizeResult.PageSize;
+                    PageNumber = SizeResult.NumberOfPages;
+                    Request.Criteria.ReturnSizeInfoOnly = false;
 
-                    for (int i = 1; i <= SizeResult.NumberOfPages; i++)
+                    for (int i = 1; i <= PageNumber; i++)
                     {
                         Request.Criteria.PageNumber = i;
-                        Request.Criteria.PageSize = PageSize;
+                        
                         Epi.Web.Common.Message.SurveyInfoResponse Result = client.GetSurveyInfo(Request);
 
                         foreach (Epi.Web.Common.DTO.SurveyInfoDTO SurveyInfo in Result.SurveyInfoList)
