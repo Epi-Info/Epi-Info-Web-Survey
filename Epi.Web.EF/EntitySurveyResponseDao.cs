@@ -155,8 +155,8 @@ namespace Epi.Web.EF
             NumberOfRows = resultRows.Count;
             ResponsesTotalsize = (int)resultRows.Select(x => x.TemplateXMLSize).Sum();
 
-            AvgResponseSize = ResponsesTotalsize / NumberOfRows;
-            NumberOfResponsPerPage = (int)Math.Ceiling(ResponseMaxSize / AvgResponseSize);
+            AvgResponseSize = (int)resultRows.Select(x => x.TemplateXMLSize).Average();
+            NumberOfResponsPerPage = (int)Math.Ceiling((ResponseMaxSize/2) / AvgResponseSize);
 
 
             result.PageSize = (int)Math.Ceiling(NumberOfResponsPerPage);
@@ -270,8 +270,9 @@ namespace Epi.Web.EF
             NumberOfRows = resultRows.Count;
             ResponsesTotalsize = (int)resultRows.Select(x => x.TemplateXMLSize).Sum();
 
-            AvgResponseSize = ResponsesTotalsize / NumberOfRows;
-            NumberOfResponsPerPage = (int)Math.Ceiling(ResponseMaxSize / AvgResponseSize);
+            AvgResponseSize = (int)resultRows.Select(x => x.TemplateXMLSize).Average();
+
+            NumberOfResponsPerPage = (int)Math.Ceiling((ResponseMaxSize / 2) / AvgResponseSize);
 
 
             result.PageSize = (int)Math.Ceiling(NumberOfResponsPerPage);
