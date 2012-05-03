@@ -121,6 +121,17 @@ namespace Epi.Web.EF
             {
                 result.Sort(CompareByDateCreated);
                 // remove the items to skip
+
+                //List<SurveyInfoBO> temp = new List<SurveyInfoBO>();
+
+                //foreach (var item in result.Skip((PageNumber * PageSize) - PageSize).Take(PageSize))
+                //{
+
+                //    temp.Add(item);
+
+                //}
+                //result = temp.ToList();
+
                 if (PageNumber * PageSize - PageSize > 0)
                 {
                     result.RemoveRange(0, PageSize);
@@ -218,8 +229,10 @@ namespace Epi.Web.EF
             NumberOfRows = resultRows.Count;
             ResponsesTotalsize = (int)resultRows.Select(x => x.TemplateXMLSize).Sum();
 
-            AvgResponseSize = ResponsesTotalsize / NumberOfRows;
-            NumberOfResponsPerPage = (int)Math.Ceiling(ResponseMaxSize / AvgResponseSize);
+            AvgResponseSize = (int)resultRows.Select(x => x.TemplateXMLSize).Average();
+          
+
+            NumberOfResponsPerPage = (int)Math.Ceiling((ResponseMaxSize/2) / AvgResponseSize);
 
 
             result.PageSize = (int)Math.Ceiling(NumberOfResponsPerPage);
@@ -246,13 +259,13 @@ namespace Epi.Web.EF
             int ResponsesTotalsize = 0;
             decimal AvgResponseSize = 0;
             decimal NumberOfResponsPerPage = 0;
-
+             
 
             NumberOfRows = resultRows.Count;
             ResponsesTotalsize = (int)resultRows.Select(x => x.TemplateXMLSize).Sum();
 
-            AvgResponseSize = ResponsesTotalsize / NumberOfRows;
-            NumberOfResponsPerPage = (int)Math.Ceiling(ResponseMaxSize / AvgResponseSize);
+            AvgResponseSize  = (int)resultRows.Select(x => x.TemplateXMLSize).Average();
+            NumberOfResponsPerPage = (int)Math.Ceiling((ResponseMaxSize/2) / AvgResponseSize);
 
 
             result.PageSize = (int)Math.Ceiling(NumberOfResponsPerPage);
