@@ -35,7 +35,7 @@ namespace Epi.Web.Interfaces.DataInterfaces
         /// </summary>
         /// <param name="SurveyInfoId">Unique SurveyInfo identifier.</param>
         /// <returns>SurveyInfo.</returns>
-        List<SurveyInfoBO> GetSurveyInfo(List<string> SurveyInfoIdList, DateTime pClosingDate, int pSurveyType = -1, int PageNumber = -1, int PageSize = -1);
+        List<SurveyInfoBO> GetSurveyInfo(List<string> SurveyInfoIdList, DateTime pClosingDate, string Okey, int pSurveyType = -1, int PageNumber = -1, int PageSize = -1);
 
 
 
@@ -45,7 +45,7 @@ namespace Epi.Web.Interfaces.DataInterfaces
         /// </summary>
         /// <param name="SurveyInfoId">Unique SurveyInfo identifier.</param>
         /// <returns>PageInfoBO.</returns>
-        PageInfoBO GetSurveySizeInfo(List<string> SurveyInfoIdList, DateTime pClosingDate, int pSurveyType = -1, int PageNumber = -1, int PageSize = -1, int ResponsesTotalsize = -1);
+        PageInfoBO GetSurveySizeInfo(List<string> SurveyInfoIdList, DateTime pClosingDate, string Okey,int pSurveyType = -1, int PageNumber = -1, int PageSize = -1, int ResponsesTotalsize = -1);
 
 
 

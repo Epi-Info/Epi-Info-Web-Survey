@@ -126,6 +126,7 @@ namespace Epi.Web.EF
         /// <returns>A SurveyInfoBO business object.</returns>
         internal static SurveyResponseBO Map(SurveyResponse entity)
         {
+           
             return new SurveyResponseBO
             {
                 SurveyId = entity.SurveyId.ToString(),
@@ -134,7 +135,7 @@ namespace Epi.Web.EF
                 Status = entity.StatusId,
                  DateUpdated = entity.DateUpdated,
                 DateCompleted = entity.DateCompleted.Value,
-                 TemplateXMLSize = (long)entity.ResponseXMLSize,
+                TemplateXMLSize = (long)entity.ResponseXMLSize,
                  DateCreated = entity.DateCreated,
             };
         }
@@ -194,7 +195,7 @@ namespace Epi.Web.EF
                 ResponseId = new Guid(pBO.ResponseId),
                 ResponseXML = pBO.XML,
                 StatusId = pBO.Status,
-                
+                 ResponseXMLSize = pBO.TemplateXMLSize,
                 DateUpdated = pBO.DateUpdated,
                 DateCompleted = pBO.DateCompleted
 
