@@ -78,7 +78,7 @@ namespace Epi.Web.EF
             using (var Context = DataObjectFactory.CreateContext())
             {
                 var Query = (from response in Context.Organizations
-                             where response.OrganizationKey == key
+                             where response.OrganizationKey ==  key
                              select response);
 
                 OrganizationBO = Mapper.Map(Query.Single());

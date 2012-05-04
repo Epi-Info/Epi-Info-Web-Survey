@@ -95,44 +95,50 @@ namespace Epi.Web.WCF.SurveyService
                     SurveyIdList.Add(id.ToUpper());
                 }
 
-                //if (request.LoadOptions.Contains("SurveyInfos"))
-                //{
-                //    IEnumerable<SurveyInfoDTO> SurveyInfos;
-                //    if (!criteria.IncludeOrderStatistics)
-                //    {
-                //        SurveyInfos = Implementation.GetSurveyInfos(sort);
-                //    }
-                //    else
-                //    {
-                //        SurveyInfos = Implementation.GetSurveyInfosWithOrderStatistics(sort);
-                //    }
 
-                //    response.SurveyInfos = SurveyInfos.Select(c => Mapper.ToDataTransferObject(c)).ToList();
-                //}
+                
 
-                //if (pRequest.LoadOptions.Contains("SurveyInfo"))
-                //{
-
-                //result.SurveyInfoList = Mapper.ToDataTransferObject(implementation.GetSurveyInfo(SurveyIdList, criteria.ClosingDate, criteria.SurveyType));
+                
                 List<SurveyInfoBO> SurveyBOList = new List<SurveyInfoBO>();
               //  int ResponseMaxSize = 16384;   
                 int ResponseMaxSize =   Int32.Parse(ConfigurationManager.AppSettings["maxBytesPerRead"]);
 
-                if (pRequest.Criteria.ReturnSizeInfoOnly == true)
-                {
-                    PageInfoBO PageInfoBO = implementation.GetSurveySizeInfo(SurveyIdList, criteria.ClosingDate, criteria.SurveyType, criteria.PageNumber, criteria.PageSize, ResponseMaxSize);
 
-                    result.PageSize = PageInfoBO.PageSize;
-                    result.NumberOfPages = PageInfoBO.NumberOfPages;
-                }
-                else
+
+                Epi.Web.Interfaces.DataInterfaces.IOrganizationDao entityDaoFactory1 = new EF.EntityOrganizationDao();
+                //Epi.Web.Interfaces.DataInterfaces.ISurveyInfoDao surveyInfoDao = entityDaoFactory.SurveyInfoDao;
+                Epi.Web.Interfaces.DataInterfaces.IOrganizationDao surveyInfoDao1 = entityDaoFactory1;
+
+                Epi.Web.BLL.Organization implementation1 = new Epi.Web.BLL.Organization(surveyInfoDao1);
+                string EncryptedKey = Cryptography.Encrypt(pRequest.Criteria.OrganizationKey.ToString());
+                OrganizationBO OrganizationBO = implementation1.GetOrganizationByKey(EncryptedKey);
+
+
+
+
+                if (OrganizationBO != null)
                 {
-                    SurveyBOList = implementation.GetSurveyInfo(SurveyIdList, criteria.ClosingDate, criteria.SurveyType, criteria.PageNumber, criteria.PageSize);//Default 
-                    foreach (SurveyInfoBO surveyInfoBO in SurveyBOList)
+                    if (pRequest.Criteria.ReturnSizeInfoOnly == true)
                     {
-                        if (surveyInfoBO.UserPublishKey == pRequest.Criteria.UserPublishKey)
+                        PageInfoBO PageInfoBO = implementation.GetSurveySizeInfo(SurveyIdList, criteria.ClosingDate, criteria.SurveyType, criteria.PageNumber, criteria.PageSize, ResponseMaxSize);
+
+                        /////////////////////////////
+                        // Epi.Web.Interfaces.DataInterfaces.IDaoFactory entityDaoFactory = new EF.EntityDaoFactory();
+
+                        /////////////////////////////////////
+                        result.PageSize = PageInfoBO.PageSize;
+                        result.NumberOfPages = PageInfoBO.NumberOfPages;
+                    }
+                    else
+                    {
+                        SurveyBOList = implementation.GetSurveyInfo(SurveyIdList, criteria.ClosingDate, criteria.SurveyType, criteria.PageNumber, criteria.PageSize);//Default 
+                        foreach (SurveyInfoBO surveyInfoBO in SurveyBOList)
                         {
-                            result.SurveyInfoList.Add(Mapper.ToDataTransferObject(surveyInfoBO));
+                            //adding Organization Key
+                            if (surveyInfoBO.UserPublishKey == pRequest.Criteria.UserPublishKey && surveyInfoBO.OrganizationKey.ToString() == Epi.Web.Common.Security.Cryptography.Encrypt(pRequest.Criteria.OrganizationKey.ToString()))
+                            {
+                                result.SurveyInfoList.Add(Mapper.ToDataTransferObject(surveyInfoBO));
+                            }
                         }
                     }
                 }

@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 
 using System.ServiceModel;
 using Epi.Web.Common.Exception;
+using System.Text.RegularExpressions;
 
 namespace Epi.Web.SurveyManager.Client
 {
@@ -39,6 +40,18 @@ namespace Epi.Web.SurveyManager.Client
             SurveyManagerService.ManagerServiceClient client = new SurveyManagerService.ManagerServiceClient();
 
             Epi.Web.Common.Message.SurveyInfoRequest Request = new Epi.Web.Common.Message.SurveyInfoRequest();
+
+
+            //Checking the Organization key guid is in correct format
+            if (!IsGuid(passOrganizationKeySurveyInfo.Password))
+            {
+                MessageBox.Show("Publish key is not in correct format");
+                return;
+            }
+            //Assign the organization key
+            Request.Criteria.OrganizationKey = new Guid(passOrganizationKeySurveyInfo.Password);
+
+
 
             if (!string.IsNullOrEmpty(this.SurveyCriteria_SurveyId.Text.Trim()))
             {
@@ -256,5 +269,17 @@ namespace Epi.Web.SurveyManager.Client
             Page_AddUser page_AddUser = new Page_AddUser();
             this.NavigationService.Navigate(page_AddUser);
         }
+
+        private bool IsGuid(string expression)
+        {
+            if (expression != null)
+            {
+                Regex guidRegEx = new Regex(@"^(\{{0,1}([0-9a-fA-F]){8}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){12}\}{0,1})$");
+
+                return guidRegEx.IsMatch(expression);
+            }
+            return false;
+        }
+
     }
 }
