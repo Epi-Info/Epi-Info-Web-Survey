@@ -14,7 +14,7 @@
         <Button Click="ClearSurveyCriteriaButton_Click" Content="Clear Criteria" Height="23" HorizontalAlignment="Left" Margin="464,170,0,0" Name="ClearSurveyCriteriaButton" VerticalAlignment="Top" Width="75" />
         <CheckBox Content="Currently open" Height="16" HorizontalAlignment="Left" Margin="158,108,0,0" Name="SurveyCriteria_CurrentlyOpenCheckBox" VerticalAlignment="Top" />
         <Label Content="Organization Key" Height="28" HorizontalAlignment="Left" Margin="54,131,0,0" Name="lblOrganizationKeySurveyInfo" VerticalAlignment="Top" Width="109" />
-        <TextBox Height="23" HorizontalAlignment="Left" Margin="158,133,0,0" Name="txtOrganizationKeySurveyInfo" VerticalAlignment="Top" Width="255" />
+        <PasswordBox Height="23" HorizontalAlignment="Left" Margin="158,133,0,0" Name="passOrganizationKeySurveyInfo" VerticalAlignment="Top" Width="255" />
         <CheckBox Content="Is Size Request" Height="16" HorizontalAlignment="Left" Margin="158,177,0,0" Name="chkIsSizeRequestSurveyInfo" VerticalAlignment="Top" />
         <Button  Click="DownloadSurveyInfoButton_Click" Content="Get Survey Information" Height="23" HorizontalAlignment="Left" Margin="321,170,0,0" Name="DownloadSurveyInfoButton" VerticalAlignment="Top" Width="137" />
         <Button Click="button3_Click" Content="View Publish Client" Height="30" HorizontalAlignment="Left" Margin="10,10,0,0" Name="button3" VerticalAlignment="Top" Width="118" />

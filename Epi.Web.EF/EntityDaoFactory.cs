@@ -27,5 +27,9 @@ namespace Epi.Web.EF
             get { return new EntitySurveyResponseDao(); }  
         }
 
+        public IOrganizationDao OrganizationDao {
+            get{return new EntityOrganizationDao();}
+        
+        }
     }
 }
