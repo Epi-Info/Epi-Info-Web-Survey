@@ -80,9 +80,15 @@ namespace Epi.Web.SurveyManager.Client
                 {
                     Request.Criteria.ReturnSizeInfoOnly = true;
                     Epi.Web.Common.Message.SurveyInfoResponse Result = client.GetSurveyInfo(Request);
-
+                    if (Result.Message.Contains("ErrorOkey"))
+                    {
+                        SurveyInfoResponseTextBox.AppendText(string.Format("Organization Key not found"));
+                        
+                    
+                    }else{
                     SurveyInfoResponseTextBox.AppendText(string.Format(" - Number of Pages: {0}   \n\n", Result.NumberOfPages));
                     SurveyInfoResponseTextBox.AppendText(string.Format(" - Pages Size:   {0} \n ", Result.PageSize));
+                    }
                 }
                 else 
                 {
@@ -177,19 +183,21 @@ namespace Epi.Web.SurveyManager.Client
                 Request.Criteria.StatusId = 1;
             }
             //chkIsSizeRequestSurveyResponse
-            if (this.chkIsSizeRequestSurveyResponse.IsChecked == true)
-            {
-                Request.Criteria.ReturnSizeInfoOnly = true;
-            }
-
+             
             SurveyAnswerResponseTextBox.Document.Blocks.Clear();
+            int PageNumber = 0;
+            int PageSize = 0;
+
             try
             {
-                Epi.Web.Common.Message.SurveyAnswerResponse Result = client.GetSurveyAnswer(Request);
 
 
-                if (Result.NumberOfPages > 0 && Result.PageSize > 0)
+
+                if (this.chkIsSizeRequestSurveyResponse.IsChecked == true)
                 {
+                    Request.Criteria.ReturnSizeInfoOnly = true;
+                    Epi.Web.Common.Message.SurveyAnswerResponse Result = client.GetSurveyAnswer(Request);
+
                     SurveyAnswerResponseTextBox.AppendText(string.Format(" - Number of Pages: {0}   \n\n", Result.NumberOfPages));
                     SurveyAnswerResponseTextBox.AppendText(string.Format(" - Pages Size:   {0}  ", Result.PageSize));
 
@@ -197,11 +205,29 @@ namespace Epi.Web.SurveyManager.Client
                 }
                 else
                 {
+                    Request.Criteria.ReturnSizeInfoOnly = true;
+                    Epi.Web.Common.Message.SurveyAnswerResponse SizeResult = client.GetSurveyAnswer(Request);
 
-                    SurveyAnswerResponseTextBox.AppendText(string.Format("{0} - records.\n\n", Result.SurveyResponseList.Count));
-                    foreach (Epi.Web.Common.DTO.SurveyAnswerDTO SurveyAnswer in Result.SurveyResponseList)
+                    PageSize = SizeResult.PageSize;
+                    Request.Criteria.ReturnSizeInfoOnly = false;
+
+                    SurveyAnswerResponseTextBox.AppendText(string.Format(" - Number of Pages: {0}   \n\n", SizeResult.NumberOfPages));
+                    SurveyAnswerResponseTextBox.AppendText(string.Format(" - Pages Size:   {0}  \n", SizeResult.PageSize));
+
+
+
+
+
+                   for (int i = 1; i <= SizeResult.NumberOfPages; i++)
                     {
-                        SurveyAnswerResponseTextBox.AppendText(string.Format("{0} - {1} - {2} - {3}\n", SurveyAnswer.ResponseId, SurveyAnswer.Status, SurveyAnswer.DateUpdated, SurveyAnswer.XML));
+                            Request.Criteria.PageNumber = i;
+                            Request.Criteria.PageSize = PageSize;
+                            Epi.Web.Common.Message.SurveyAnswerResponse Result = client.GetSurveyAnswer(Request);
+                            SurveyAnswerResponseTextBox.AppendText(string.Format(" -Number of available records: {0}\n\n", Result.SurveyResponseList.Count));
+                            foreach (Epi.Web.Common.DTO.SurveyAnswerDTO SurveyAnswer in Result.SurveyResponseList)
+                            {
+                                SurveyAnswerResponseTextBox.AppendText(string.Format("{0} - {1} - {2} - {3}\n", SurveyAnswer.ResponseId, SurveyAnswer.Status, SurveyAnswer.DateUpdated, SurveyAnswer.XML));
+                            }
                     }
                 }
             }

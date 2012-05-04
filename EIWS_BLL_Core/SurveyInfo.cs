@@ -61,14 +61,14 @@ namespace Epi.Web.BLL
         /// </summary>
         /// <param name="SurveyInfoId">Unique SurveyInfo identifier.</param>
         /// <returns>SurveyInfo.</returns>
-        public List<SurveyInfoBO> GetSurveyInfo(List<string> SurveyInfoIdList, DateTime pClosingDate, int pSurveyType = -1, int pPageNumber = -1, int pPageSize = -1)
+        public List<SurveyInfoBO> GetSurveyInfo(List<string> SurveyInfoIdList, DateTime pClosingDate, string Okey, int pSurveyType = -1, int pPageNumber = -1, int pPageSize = -1)
         {
-            List<SurveyInfoBO> result = this.SurveyInfoDao.GetSurveyInfo(SurveyInfoIdList, pClosingDate, pSurveyType, pPageNumber, pPageSize);
+            List<SurveyInfoBO> result = this.SurveyInfoDao.GetSurveyInfo(SurveyInfoIdList, pClosingDate, Okey, pSurveyType, pPageNumber, pPageSize);
             return result;
         }
-        public PageInfoBO GetSurveySizeInfo(List<string> SurveyInfoIdList, DateTime pClosingDate, int pSurveyType = -1, int pPageNumber = -1, int pPageSize = -1, int pResponseMaxSize = -1)
+        public PageInfoBO GetSurveySizeInfo(List<string> SurveyInfoIdList, DateTime pClosingDate, string Okey, int pSurveyType = -1, int pPageNumber = -1, int pPageSize = -1, int pResponseMaxSize = -1)
         {
-            PageInfoBO result = this.SurveyInfoDao.GetSurveySizeInfo(SurveyInfoIdList, pClosingDate, pSurveyType, pPageNumber, pPageSize, pResponseMaxSize);
+            PageInfoBO result = this.SurveyInfoDao.GetSurveySizeInfo(SurveyInfoIdList, pClosingDate, Okey,pSurveyType, pPageNumber, pPageSize, pResponseMaxSize);
             return result;
         }
       

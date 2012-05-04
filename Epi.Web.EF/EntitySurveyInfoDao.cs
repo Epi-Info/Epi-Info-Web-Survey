@@ -72,11 +72,21 @@ namespace Epi.Web.EF
         /// </summary>
         /// <param name="SurveyInfoId">Unique SurveyInfo identifier.</param>
         /// <returns>SurveyInfo.</returns>
-        public List<SurveyInfoBO> GetSurveyInfo(List<string> SurveyInfoIdList, DateTime pClosingDate, int pSurveyType = -1, int PageNumber = -1, int PageSize = -1)
+        public List<SurveyInfoBO> GetSurveyInfo(List<string> SurveyInfoIdList, DateTime pClosingDate,string Okey ,int pSurveyType = -1, int PageNumber = -1, int PageSize = -1)
         {
             List<SurveyInfoBO> result = new List<SurveyInfoBO>();
 
             List<SurveyMetaData> responseList = new List<SurveyMetaData>();
+
+            int  OrganizationId =0;
+
+            using (var Context = DataObjectFactory.CreateContext())
+            {
+               
+                OrganizationId =  Context.Organizations.FirstOrDefault(x => x.OrganizationKey == Okey).OrganizationId;
+            }
+
+
             if (SurveyInfoIdList.Count > 0)
             {
                 foreach (string surveyInfoId in SurveyInfoIdList.Distinct())
@@ -85,7 +95,7 @@ namespace Epi.Web.EF
 
                     using (var Context = DataObjectFactory.CreateContext())
                     {
-                        responseList.Add(Context.SurveyMetaDatas.FirstOrDefault(x => x.SurveyId == Id));
+                        responseList.Add(Context.SurveyMetaDatas.FirstOrDefault(x => x.SurveyId == Id && x.OrganizationId == OrganizationId));
                     }
                 }
             }
@@ -94,6 +104,7 @@ namespace Epi.Web.EF
                 using (var Context = DataObjectFactory.CreateContext())
                 {
                     responseList = Context.SurveyMetaDatas.ToList();
+                  
                 }
             }
 
@@ -102,6 +113,14 @@ namespace Epi.Web.EF
                 List<SurveyMetaData> statusList = new List<SurveyMetaData>();
                 statusList.AddRange(responseList.Where(x => x.SurveyTypeId == pSurveyType));
                 responseList = statusList;
+            }
+
+
+            if (OrganizationId >0){
+                List<SurveyMetaData> OIdList = new List<SurveyMetaData>();
+                OIdList.AddRange(responseList.Where(x => x.OrganizationId == OrganizationId));
+                responseList = OIdList;
+            
             }
 
             if (pClosingDate > DateTime.MinValue)
@@ -248,12 +267,12 @@ namespace Epi.Web.EF
         /// </summary>
         /// <param name="SurveyInfoId">Unique SurveyInfo identifier.</param>
         /// <returns>PageInfoBO.</returns>
-        public PageInfoBO GetSurveySizeInfo(List<string> SurveyInfoIdList, DateTime pClosingDate, int pSurveyType = -1, int PageNumber = -1, int PageSize = -1, int ResponseMaxSize = -1)
+        public PageInfoBO GetSurveySizeInfo(List<string> SurveyInfoIdList, DateTime pClosingDate,string Okey, int pSurveyType = -1, int PageNumber = -1, int PageSize = -1, int ResponseMaxSize = -1)
         {
 
             PageInfoBO result = new PageInfoBO();
 
-            List<SurveyInfoBO> resultRows =  GetSurveyInfo(SurveyInfoIdList, pClosingDate, pSurveyType, PageNumber, PageSize);
+            List<SurveyInfoBO> resultRows =  GetSurveyInfo(SurveyInfoIdList, pClosingDate,Okey, pSurveyType, PageNumber, PageSize);
 
             int NumberOfRows = 0;
             int ResponsesTotalsize = 0;
@@ -262,7 +281,7 @@ namespace Epi.Web.EF
              
 
             NumberOfRows = resultRows.Count;
-            ResponsesTotalsize = (int)resultRows.Select(x => x.TemplateXMLSize).Sum();
+            ResponsesTotalsize = (int)resultRows.Select(x => x.TemplateXMLSize ).Sum();
 
             AvgResponseSize  = (int)resultRows.Select(x => x.TemplateXMLSize).Average();
             NumberOfResponsPerPage = (int)Math.Ceiling((ResponseMaxSize/2) / AvgResponseSize);
