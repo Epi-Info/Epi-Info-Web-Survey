@@ -21,6 +21,8 @@ namespace Epi.Web.Interfaces.DataInterfaces
 
 
         ISurveyResponseDao SurveyResponseDao { get; }
+
+        IOrganizationDao OrganizationDao { get; }
     }
 
 }
