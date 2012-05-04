@@ -120,27 +120,24 @@ namespace Epi.Web.WCF.SurveyService
                 {
                     if (pRequest.Criteria.ReturnSizeInfoOnly == true)
                     {
-                        PageInfoBO PageInfoBO = implementation.GetSurveySizeInfo(SurveyIdList, criteria.ClosingDate, criteria.SurveyType, criteria.PageNumber, criteria.PageSize, ResponseMaxSize);
-
-                        /////////////////////////////
-                        // Epi.Web.Interfaces.DataInterfaces.IDaoFactory entityDaoFactory = new EF.EntityDaoFactory();
-
-                        /////////////////////////////////////
+                        PageInfoBO PageInfoBO = implementation.GetSurveySizeInfo(SurveyIdList, criteria.ClosingDate, Cryptography.Encrypt(criteria.OrganizationKey.ToString()), criteria.SurveyType, criteria.PageNumber, criteria.PageSize, ResponseMaxSize);
                         result.PageSize = PageInfoBO.PageSize;
                         result.NumberOfPages = PageInfoBO.NumberOfPages;
                     }
                     else
                     {
-                        SurveyBOList = implementation.GetSurveyInfo(SurveyIdList, criteria.ClosingDate, criteria.SurveyType, criteria.PageNumber, criteria.PageSize);//Default 
+                        SurveyBOList = implementation.GetSurveyInfo(SurveyIdList, criteria.ClosingDate, Cryptography.Encrypt(criteria.OrganizationKey.ToString()), criteria.SurveyType, criteria.PageNumber, criteria.PageSize);//Default 
                         foreach (SurveyInfoBO surveyInfoBO in SurveyBOList)
                         {
-                            //adding Organization Key
-                            if (surveyInfoBO.UserPublishKey == pRequest.Criteria.UserPublishKey && surveyInfoBO.OrganizationKey.ToString() == Epi.Web.Common.Security.Cryptography.Encrypt(pRequest.Criteria.OrganizationKey.ToString()))
-                            {
-                                result.SurveyInfoList.Add(Mapper.ToDataTransferObject(surveyInfoBO));
-                            }
+
+                            result.SurveyInfoList.Add(Mapper.ToDataTransferObject(surveyInfoBO));
+
                         }
                     }
+                }
+                else {
+
+                    result.Message = "ErrorOkey";
                 }
 
                 return result;

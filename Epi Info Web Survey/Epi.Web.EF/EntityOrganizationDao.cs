@@ -80,9 +80,14 @@ namespace Epi.Web.EF
                 var Query = (from response in Context.Organizations
                              where response.OrganizationKey ==  key
                              select response);
-
-                OrganizationBO = Mapper.Map(Query.Single());
-
+                if (Query.Count() > 0)
+                {
+                    OrganizationBO = Mapper.Map(Query.SingleOrDefault());
+                   
+                }
+                else {
+                    return null;
+                }
                  
             }
             return OrganizationBO;
