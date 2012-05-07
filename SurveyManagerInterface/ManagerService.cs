@@ -256,95 +256,126 @@ namespace Epi.Web.WCF.SurveyService
                 Epi.Web.Interfaces.DataInterfaces.IDaoFactory entityDaoFactory = new EF.EntityDaoFactory();
                 Epi.Web.Interfaces.DataInterfaces.ISurveyResponseDao ISurveyResponseDao = entityDaoFactory.SurveyResponseDao;
                 Epi.Web.BLL.SurveyResponse Implementation = new Epi.Web.BLL.SurveyResponse(ISurveyResponseDao);
+               
 
 
-                // Validate client tag, access token, and user credentials
-                if (!ValidRequest(pRequest, result, Validate.All))
+                //Get Organization Info
+                Epi.Web.Interfaces.DataInterfaces.IOrganizationDao entityDaoFactory1 = new EF.EntityOrganizationDao();
+                //Epi.Web.Interfaces.DataInterfaces.ISurveyInfoDao surveyInfoDao = entityDaoFactory.SurveyInfoDao;
+                Epi.Web.Interfaces.DataInterfaces.IOrganizationDao surveyInfoDao1 = entityDaoFactory1;
+
+                Epi.Web.BLL.Organization implementation1 = new Epi.Web.BLL.Organization(surveyInfoDao1);
+                string EncryptedKey = Cryptography.Encrypt(pRequest.Criteria.OrganizationKey.ToString());
+                OrganizationBO OrganizationBO = implementation1.GetOrganizationByKey(EncryptedKey);
+
+
+                if (OrganizationBO != null)
                 {
-                    return result;
+
+                    // Validate client tag, access token, and user credentials
+                    if (!ValidRequest(pRequest, result, Validate.All))
+                    {
+                        return result;
+                    }
+
+                    SurveyAnswerCriteria criteria = pRequest.Criteria;
+
+
+                    if (criteria.UserPublishKey == null)
+                    {
+                        return result;
+                    }
+
+
+                    Epi.Web.Interfaces.DataInterfaces.ISurveyInfoDao surveyInfoDao = new EF.EntitySurveyInfoDao();
+                    Epi.Web.BLL.SurveyInfo SurveyInfo = new Epi.Web.BLL.SurveyInfo(surveyInfoDao);
+
+
+
+
+
+                    List<string> SurveyIdList = new List<string>();
+
+                    SurveyIdList.Add(criteria.SurveyId);
+                    string orgkeyencrypted = Cryptography.Encrypt(criteria.OrganizationKey.ToString());
+
+                    bool validSurvey = false;
+                    validSurvey = SurveyInfo.IsSurveyInfoValidByOrgKeyAndPublishKey(SurveyIdList, orgkeyencrypted, criteria.UserPublishKey);
+
+                    if (validSurvey == true)
+                    {
+
+                        Guid UserPublishKey = SurveyInfo.GetSurveyInfoById(criteria.SurveyId).UserPublishKey;
+
+                        if (criteria.UserPublishKey != UserPublishKey)
+                        {
+                            return result;
+                        }
+
+
+                        List<string> IdList = new List<string>();
+
+                        foreach (string id in criteria.SurveyAnswerIdList)
+                        {
+                            IdList.Add(id.ToUpper());
+                        }
+                        //string sort = criteria.SortExpression;
+
+                        //if (request.LoadOptions.Contains("SurveyInfos"))
+                        //{
+                        //    IEnumerable<SurveyInfoDTO> SurveyInfos;
+                        //    if (!criteria.IncludeOrderStatistics)
+                        //    {
+                        //        SurveyInfos = Implementation.GetSurveyInfos(sort);
+                        //    }
+                        //    else
+                        //    {
+                        //        SurveyInfos = Implementation.GetSurveyInfosWithOrderStatistics(sort);
+                        //    }
+
+                        //    response.SurveyInfos = SurveyInfos.Select(c => Mapper.ToDataTransferObject(c)).ToList();
+                        //}
+
+                        int ResponseMaxSize = Int32.Parse(ConfigurationManager.AppSettings["maxBytesPerRead"]);
+
+                        if (pRequest.Criteria.ReturnSizeInfoOnly == true)
+                        {
+
+                            PageInfoBO PageInfoBO = Implementation.GetResponseSurveySize(IdList, criteria.SurveyId, criteria.DateCompleted, criteria.StatusId, -1, -1, ResponseMaxSize);
+
+                            result.PageSize = PageInfoBO.PageSize;
+                            result.NumberOfPages = PageInfoBO.NumberOfPages;
+                        }
+                        else
+                        {
+
+                            List<SurveyResponseBO> SurveyResponseBOList = Implementation.GetSurveyResponse
+                                    (
+                                        IdList,
+                                        criteria.SurveyId,
+                                        criteria.DateCompleted,
+                                        criteria.StatusId
+                                    );
+                            foreach (SurveyResponseBO surveyResponseBo in SurveyResponseBOList)
+                            {
+                                // if (surveyResponseBo.UserPublishKey == criteria.UserPublishKey)
+                                if (UserPublishKey == criteria.UserPublishKey)
+                                {
+                                    result.SurveyResponseList.Add(Mapper.ToDataTransferObject(surveyResponseBo));
+                                }
+                            }
+                        }
+                        /*
+                        if (string.IsNullOrEmpty(pRequest.Criteria.SurveyId))
+                        {
+                            result.SurveyResponseList = Mapper.ToDataTransferObject(Implementation.GetSurveyResponseById(pRequest.Criteria.SurveyAnswerIdList));
+                        }
+                        else
+                        {
+                            result.SurveyResponseList = Mapper.ToDataTransferObject(Implementation.GetSurveyResponseBySurveyId(pRequest.Criteria.SurveyAnswerIdList));
+                        }*/
+                    }
                 }
-
-                SurveyAnswerCriteria criteria = pRequest.Criteria;
-
-
-                if (criteria.UserPublishKey == null)
-                {
-                    return result;
-                }
-
-
-                Epi.Web.Interfaces.DataInterfaces.ISurveyInfoDao surveyInfoDao = new EF.EntitySurveyInfoDao();
-                Epi.Web.BLL.SurveyInfo SurveyInfo = new Epi.Web.BLL.SurveyInfo(surveyInfoDao);
-                Guid UserPublishKey = SurveyInfo.GetSurveyInfoById(criteria.SurveyId).UserPublishKey;
-
-                if (criteria.UserPublishKey != UserPublishKey)
-                {
-                    return result;
-                }
-              
-            
-                List<string> IdList = new List<string>();
-
-                foreach (string id in criteria.SurveyAnswerIdList)
-                {
-                    IdList.Add(id.ToUpper());
-                }
-                //string sort = criteria.SortExpression;
-
-                //if (request.LoadOptions.Contains("SurveyInfos"))
-                //{
-                //    IEnumerable<SurveyInfoDTO> SurveyInfos;
-                //    if (!criteria.IncludeOrderStatistics)
-                //    {
-                //        SurveyInfos = Implementation.GetSurveyInfos(sort);
-                //    }
-                //    else
-                //    {
-                //        SurveyInfos = Implementation.GetSurveyInfosWithOrderStatistics(sort);
-                //    }
-
-                //    response.SurveyInfos = SurveyInfos.Select(c => Mapper.ToDataTransferObject(c)).ToList();
-                //}
-
-                 int ResponseMaxSize =   Int32.Parse(ConfigurationManager.AppSettings["maxBytesPerRead"]);
-
-                 if (pRequest.Criteria.ReturnSizeInfoOnly == true)
-                 {
-                      
-                     PageInfoBO PageInfoBO = Implementation.GetResponseSurveySize(IdList,criteria.SurveyId,criteria.DateCompleted,criteria.StatusId,-1,-1, ResponseMaxSize);
-
-                     result.PageSize = PageInfoBO.PageSize;
-                     result.NumberOfPages = PageInfoBO.NumberOfPages;
-                 }
-                 else
-                 {
-
-                     List<SurveyResponseBO> SurveyResponseBOList = Implementation.GetSurveyResponse
-                             (
-                                 IdList,
-                                 criteria.SurveyId,
-                                 criteria.DateCompleted,
-                                 criteria.StatusId
-                             );
-                     foreach (SurveyResponseBO surveyResponseBo in SurveyResponseBOList)
-                     {
-                         // if (surveyResponseBo.UserPublishKey == criteria.UserPublishKey)
-                         if (UserPublishKey == criteria.UserPublishKey)
-                         {
-                             result.SurveyResponseList.Add(Mapper.ToDataTransferObject(surveyResponseBo));
-                         }
-                     }
-                 }
-                /*
-                if (string.IsNullOrEmpty(pRequest.Criteria.SurveyId))
-                {
-                    result.SurveyResponseList = Mapper.ToDataTransferObject(Implementation.GetSurveyResponseById(pRequest.Criteria.SurveyAnswerIdList));
-                }
-                else
-                {
-                    result.SurveyResponseList = Mapper.ToDataTransferObject(Implementation.GetSurveyResponseBySurveyId(pRequest.Criteria.SurveyAnswerIdList));
-                }*/
-
                 return result;
             }
             catch (Exception ex)
