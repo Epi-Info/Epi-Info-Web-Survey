@@ -45,7 +45,7 @@ namespace Epi.Web.SurveyManager.Client
             //Checking the Organization key guid is in correct format
             if (!IsGuid(passOrganizationKeySurveyInfo.Password))
             {
-                MessageBox.Show("Publish key is not in correct format");
+                MessageBox.Show("Organization key is not in correct format");
                 return;
             }
             //Assign the organization key
@@ -168,9 +168,15 @@ namespace Epi.Web.SurveyManager.Client
                 Request.Criteria.SurveyId = this.SurveyAnswerCriteria_SurveyIdTextBox.Text;
             }
 
-            if (!string.IsNullOrEmpty(this.UserPublishKeytextBox.Text.Trim()))
+            if (!string.IsNullOrEmpty(this.passUserPublishKeySurveyResponse.Password.Trim()) && IsGuid(passUserPublishKeySurveyResponse.Password))
             {
-                Request.Criteria.UserPublishKey = new Guid(this.UserPublishKeytextBox.Text);
+                Request.Criteria.UserPublishKey = new Guid(this.passUserPublishKeySurveyResponse.Password);
+
+            }
+            else
+            {
+                MessageBox.Show("Publish key is not in correct format");
+                return;
             }
 
             if (this.datePicker1.SelectedDate != null)
@@ -183,6 +189,20 @@ namespace Epi.Web.SurveyManager.Client
                 Request.Criteria.StatusId = 1;
             }
             //chkIsSizeRequestSurveyResponse
+
+
+
+            //Checking the Organization key guid is in correct format
+            if (!IsGuid(passOrganizationKeySurveyResponse.Password))
+            {
+                MessageBox.Show("Organization key is not in correct format");
+                return;
+            }
+            //Assign the organization key
+            Request.Criteria.OrganizationKey = new Guid(passOrganizationKeySurveyResponse.Password);
+
+
+
              
             SurveyAnswerResponseTextBox.Document.Blocks.Clear();
             int PageNumber = 0;
