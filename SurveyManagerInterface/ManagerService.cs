@@ -137,7 +137,7 @@ namespace Epi.Web.WCF.SurveyService
                 }
                 else {
 
-                    result.Message = "ErrorOkey";
+                    result.Message = "Organization Key not found";
                 }
 
                 return result;
@@ -375,7 +375,16 @@ namespace Epi.Web.WCF.SurveyService
                             result.SurveyResponseList = Mapper.ToDataTransferObject(Implementation.GetSurveyResponseBySurveyId(pRequest.Criteria.SurveyAnswerIdList));
                         }*/
                     }
+                    else
+                    {
+                        result.Message = "SurveyId or Organization Key or Publish Key are invalid.";
+                    }
                 }
+                else
+                {
+                  result.Message = "Organization Key not found";
+                }
+               
                 return result;
             }
             catch (Exception ex)
@@ -427,7 +436,7 @@ namespace Epi.Web.WCF.SurveyService
             if (! ValidateUser(request.UserName, request.Password))
             {
                 response.Acknowledge = AcknowledgeType.Failure;
-                response.Message = "Invalid username and/or password.";
+                //response.Message = "Invalid username and/or password.";
                 return response;
             }
 
@@ -472,7 +481,7 @@ namespace Epi.Web.WCF.SurveyService
                 if (request.ClientTag != "ABC123")
                 {
                     response.Acknowledge = AcknowledgeType.Failure;
-                    response.Message = "Unknown Client Tag";
+                   // response.Message = "Unknown Client Tag";
                     //return false;
                 }
             }
@@ -484,7 +493,7 @@ namespace Epi.Web.WCF.SurveyService
                 if (request.AccessToken != _accessToken)
                 {
                     response.Acknowledge = AcknowledgeType.Failure;
-                    response.Message = "Invalid or expired AccessToken. Call GetToken()";
+                    //response.Message = "Invalid or expired AccessToken. Call GetToken()";
                     //return false;
                 }
             }
@@ -495,7 +504,7 @@ namespace Epi.Web.WCF.SurveyService
                 if (_userName == null)
                 {
                     response.Acknowledge = AcknowledgeType.Failure;
-                    response.Message = "Please login and provide user credentials before accessing these methods.";
+                    //response.Message = "Please login and provide user credentials before accessing these methods.";
                     //return false;
                 }
             }
@@ -556,7 +565,7 @@ namespace Epi.Web.WCF.SurveyService
                      return response;
                  }
                  else {
-                     response.Message = "Invalid Admi Key";
+                     response.Message = "Invalid Admin Key";
                      return response;
                  }
               
@@ -604,7 +613,7 @@ namespace Epi.Web.WCF.SurveyService
                 }
                 else
                 {
-                    response.Message = "Invalid Admi Key";
+                    response.Message = "Invalid Admin Key";
 
                     return response ;
                 }
@@ -654,7 +663,7 @@ namespace Epi.Web.WCF.SurveyService
                 }
                 else
                 {
-                    response.Message = "Invalid Admi Key";
+                    response.Message = "Invalid Admin Key";
 
                     return response;
                 }
@@ -698,7 +707,7 @@ namespace Epi.Web.WCF.SurveyService
                     return response;
                 }
                 else {
-                    response.Message = "Invalid Admi Key";
+                    response.Message = "Invalid Admin Key";
                     return response;
                 }
             }
@@ -745,7 +754,7 @@ namespace Epi.Web.WCF.SurveyService
                 }
                 else
                 {
-                    response.Message = "Invalid Admi Key";
+                    response.Message = "Invalid Admin Key";
 
                     return response;
                 }

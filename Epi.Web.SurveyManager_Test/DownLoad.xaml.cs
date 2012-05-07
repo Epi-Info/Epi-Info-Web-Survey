@@ -80,9 +80,9 @@ namespace Epi.Web.SurveyManager.Client
                 {
                     Request.Criteria.ReturnSizeInfoOnly = true;
                     Epi.Web.Common.Message.SurveyInfoResponse Result = client.GetSurveyInfo(Request);
-                    if (Result.Message.Contains("ErrorOkey"))
+                    if (!string.IsNullOrEmpty(Result.Message))
                     {
-                        SurveyInfoResponseTextBox.AppendText(string.Format("Organization Key not found"));
+                        SurveyInfoResponseTextBox.AppendText(string.Format(Result.Message));
                         
                     
                     }else{
@@ -102,26 +102,34 @@ namespace Epi.Web.SurveyManager.Client
                     Request.Criteria.ReturnSizeInfoOnly = true;
                     Epi.Web.Common.Message.SurveyInfoResponse SizeResult = client.GetSurveyInfo(Request);
 
-                    SurveyInfoResponseTextBox.AppendText(string.Format(" - Number of Pages: {0}   \n\n", SizeResult.NumberOfPages));
-                    SurveyInfoResponseTextBox.AppendText(string.Format(" - Pages Size:   {0}  \n", SizeResult.PageSize));
 
-                    // 2 - loop thru calls for query results
-                    PageSize = SizeResult.PageSize;
-                    PageNumber = SizeResult.NumberOfPages;
-                    Request.Criteria.ReturnSizeInfoOnly = false;
-
-                    for (int i = 1; i <= PageNumber; i++)
+                    if (!string.IsNullOrEmpty(SizeResult.Message))
                     {
-                        Request.Criteria.PageNumber = i;
-                        
-                        Epi.Web.Common.Message.SurveyInfoResponse Result = client.GetSurveyInfo(Request);
+                        SurveyInfoResponseTextBox.AppendText(string.Format(SizeResult.Message));
 
-                        foreach (Epi.Web.Common.DTO.SurveyInfoDTO SurveyInfo in Result.SurveyInfoList)
+                    }
+                    else
+                    {
+                        SurveyInfoResponseTextBox.AppendText(string.Format(" - Number of Pages: {0}   \n\n", SizeResult.NumberOfPages));
+                        SurveyInfoResponseTextBox.AppendText(string.Format(" - Pages Size:   {0}  \n", SizeResult.PageSize));
+
+                        // 2 - loop thru calls for query results
+                        PageSize = SizeResult.PageSize;
+                        PageNumber = SizeResult.NumberOfPages;
+                        Request.Criteria.ReturnSizeInfoOnly = false;
+
+                        for (int i = 1; i <= PageNumber; i++)
                         {
-                            SurveyInfoResponseTextBox.AppendText(string.Format("{0} - {1} - {2}\n", SurveyInfo.SurveyId, SurveyInfo.SurveyName, SurveyInfo.ClosingDate));
+                            Request.Criteria.PageNumber = i;
+
+                            Epi.Web.Common.Message.SurveyInfoResponse Result = client.GetSurveyInfo(Request);
+
+                            foreach (Epi.Web.Common.DTO.SurveyInfoDTO SurveyInfo in Result.SurveyInfoList)
+                            {
+                                SurveyInfoResponseTextBox.AppendText(string.Format("{0} - {1} - {2}\n", SurveyInfo.SurveyId, SurveyInfo.SurveyName, SurveyInfo.ClosingDate));
+                            }
                         }
                     }
-            
                 }
                 
             }
@@ -218,9 +226,15 @@ namespace Epi.Web.SurveyManager.Client
                     Request.Criteria.ReturnSizeInfoOnly = true;
                     Epi.Web.Common.Message.SurveyAnswerResponse Result = client.GetSurveyAnswer(Request);
 
-                    SurveyAnswerResponseTextBox.AppendText(string.Format(" - Number of Pages: {0}   \n\n", Result.NumberOfPages));
-                    SurveyAnswerResponseTextBox.AppendText(string.Format(" - Pages Size:   {0}  ", Result.PageSize));
-
+                    if (!string.IsNullOrEmpty(Result.Message))
+                    {
+                        SurveyAnswerResponseTextBox.AppendText(string.Format(Result.Message));
+                    }
+                    else
+                    {
+                        SurveyAnswerResponseTextBox.AppendText(string.Format(" - Number of Pages: {0}   \n\n", Result.NumberOfPages));
+                        SurveyAnswerResponseTextBox.AppendText(string.Format(" - Pages Size:   {0}  ", Result.PageSize));
+                    }
 
                 }
                 else
@@ -228,18 +242,24 @@ namespace Epi.Web.SurveyManager.Client
                     Request.Criteria.ReturnSizeInfoOnly = true;
                     Epi.Web.Common.Message.SurveyAnswerResponse SizeResult = client.GetSurveyAnswer(Request);
 
-                    PageSize = SizeResult.PageSize;
-                    Request.Criteria.ReturnSizeInfoOnly = false;
-
-                    SurveyAnswerResponseTextBox.AppendText(string.Format(" - Number of Pages: {0}   \n\n", SizeResult.NumberOfPages));
-                    SurveyAnswerResponseTextBox.AppendText(string.Format(" - Pages Size:   {0}  \n", SizeResult.PageSize));
-
-
-
-
-
-                   for (int i = 1; i <= SizeResult.NumberOfPages; i++)
+                    if (!string.IsNullOrEmpty(SizeResult.Message))
                     {
+                        SurveyAnswerResponseTextBox.AppendText(string.Format(SizeResult.Message));
+                    }
+                    else
+                    {
+                        PageSize = SizeResult.PageSize;
+                        Request.Criteria.ReturnSizeInfoOnly = false;
+
+                        SurveyAnswerResponseTextBox.AppendText(string.Format(" - Number of Pages: {0}   \n\n", SizeResult.NumberOfPages));
+                        SurveyAnswerResponseTextBox.AppendText(string.Format(" - Pages Size:   {0}  \n", SizeResult.PageSize));
+
+
+
+
+
+                        for (int i = 1; i <= SizeResult.NumberOfPages; i++)
+                        {
                             Request.Criteria.PageNumber = i;
                             Request.Criteria.PageSize = PageSize;
                             Epi.Web.Common.Message.SurveyAnswerResponse Result = client.GetSurveyAnswer(Request);
@@ -248,6 +268,7 @@ namespace Epi.Web.SurveyManager.Client
                             {
                                 SurveyAnswerResponseTextBox.AppendText(string.Format("{0} - {1} - {2} - {3}\n", SurveyAnswer.ResponseId, SurveyAnswer.Status, SurveyAnswer.DateUpdated, SurveyAnswer.XML));
                             }
+                        }
                     }
                 }
             }
