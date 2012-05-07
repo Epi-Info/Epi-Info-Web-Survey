@@ -69,6 +69,7 @@ namespace Epi.Web.BLL
                         BO.UserPublishKey = pRequestMessage.UserPublishKey;
                         BO.OrganizationKey = pRequestMessage.OrganizationKey;
                         BO.OrganizationKey = pRequestMessage.OrganizationKey;
+                        BO.TemplateXMLSize = pRequestMessage.TemplateXMLSize;
                         try
                         {
                            

@@ -174,9 +174,24 @@ namespace Epi.Web.EF
         /// <param name="SurveyInfo">SurveyInfo.</param>
         public  void InsertSurveyInfo(SurveyInfoBO SurveyInfo)
         {
+           int OrganizationId = 0;
             using (var Context = DataObjectFactory.CreateContext() ) 
             {
+
+                //retrieve OrganizationId based on OrganizationKey
+                using (var ContextOrg = DataObjectFactory.CreateContext())
+                {
+                    string OrgKey = Epi.Web.Common.Security.Cryptography.Encrypt(SurveyInfo.OrganizationKey.ToString());
+                    OrganizationId = ContextOrg.Organizations.FirstOrDefault(x => x.OrganizationKey == OrgKey).OrganizationId;
+                }
+
+
+                
+                SurveyInfo.TemplateXMLSize = RemoveWhitespace(SurveyInfo.XML).Length;
+                SurveyInfo.DateCreated = DateTime.Now;
+                
                 var SurveyMetaDataEntity = Mapper.Map(SurveyInfo);
+                SurveyMetaDataEntity.OrganizationId = OrganizationId;
                 Context.AddToSurveyMetaDatas(SurveyMetaDataEntity);
                
                 Context.SaveChanges();
@@ -209,6 +224,7 @@ namespace Epi.Web.EF
                 DataRow.ClosingDate = SurveyInfo.ClosingDate;
                 DataRow.SurveyTypeId = SurveyInfo.SurveyType;
                 DataRow.UserPublishKey = SurveyInfo.UserPublishKey;
+                DataRow.TemplateXMLSize = RemoveWhitespace(SurveyInfo.XML).Length;
 
                 Context.SaveChanges();
             }
@@ -301,6 +317,12 @@ namespace Epi.Web.EF
             return x.DateCreated.CompareTo(y.DateCreated);
         }
 
-       
+        public static string RemoveWhitespace(string xml)
+        {
+            System.Text.RegularExpressions.Regex regex = new System.Text.RegularExpressions.Regex(@">\s*<");
+            xml = regex.Replace(xml, "><");
+
+            return xml.Trim();
+        }
     }
 }
