@@ -108,62 +108,107 @@ namespace Epi.Web.EF
                 }
             }
 
-            if (pSurveyType > -1)
+
+            if (responseList[0] != null && responseList.Count > 0)
             {
-                List<SurveyMetaData> statusList = new List<SurveyMetaData>();
-                statusList.AddRange(responseList.Where(x => x.SurveyTypeId == pSurveyType));
-                responseList = statusList;
-            }
+
+                if (pSurveyType > -1)
+                {
+                    List<SurveyMetaData> statusList = new List<SurveyMetaData>();
+                    statusList.AddRange(responseList.Where(x => x.SurveyTypeId == pSurveyType));
+                    responseList = statusList;
+                }
 
 
-            if (OrganizationId >0){
-                List<SurveyMetaData> OIdList = new List<SurveyMetaData>();
-                OIdList.AddRange(responseList.Where(x => x.OrganizationId == OrganizationId));
-                responseList = OIdList;
-            
-            }
+                if (OrganizationId > 0)
+                {
+                    List<SurveyMetaData> OIdList = new List<SurveyMetaData>();
+                    OIdList.AddRange(responseList.Where(x => x.OrganizationId == OrganizationId));
+                    responseList = OIdList;
 
-            if (pClosingDate > DateTime.MinValue)
-            {
-                List<SurveyMetaData> dateList = new List<SurveyMetaData>();
+                }
 
-                dateList.AddRange(responseList.Where(x => x.ClosingDate.Month >= pClosingDate.Month && x.ClosingDate.Year >= pClosingDate.Year && x.ClosingDate.Day >= pClosingDate.Day));
-                responseList = dateList;
-            }
+                if (pClosingDate != null)
+                {
+                    if (pClosingDate > DateTime.MinValue)
+                    {
+                        List<SurveyMetaData> dateList = new List<SurveyMetaData>();
 
-            result = Mapper.Map(responseList);
-            
+                        dateList.AddRange(responseList.Where(x => x.ClosingDate.Month >= pClosingDate.Month && x.ClosingDate.Year >= pClosingDate.Year && x.ClosingDate.Day >= pClosingDate.Day));
+                        responseList = dateList;
+                    }
+                }
+                result = Mapper.Map(responseList);
 
-            // remove the items to skip
-            // remove the items after the page size
-            if (PageNumber > 0 && PageSize > 0)
-            {
-                result.Sort(CompareByDateCreated);
+
                 // remove the items to skip
-
-                //List<SurveyInfoBO> temp = new List<SurveyInfoBO>();
-
-                //foreach (var item in result.Skip((PageNumber * PageSize) - PageSize).Take(PageSize))
-                //{
-
-                //    temp.Add(item);
-
-                //}
-                //result = temp.ToList();
-
-                if (PageNumber * PageSize - PageSize > 0)
+                // remove the items after the page size
+                if (PageNumber > 0 && PageSize > 0)
                 {
-                    result.RemoveRange(0, PageSize);
-                }
+                    result.Sort(CompareByDateCreated);
+                    // remove the items to skip
 
-                if (PageNumber * PageSize < result.Count)
-                {
-                    result.RemoveRange(PageNumber * PageSize, result.Count - PageNumber * PageSize);
+                    //List<SurveyInfoBO> temp = new List<SurveyInfoBO>();
+
+                    //foreach (var item in result.Skip((PageNumber * PageSize) - PageSize).Take(PageSize))
+                    //{
+
+                    //    temp.Add(item);
+
+                    //}
+                    //result = temp.ToList();
+
+                    if (PageNumber * PageSize - PageSize > 0)
+                    {
+                        result.RemoveRange(0, PageSize);
+                    }
+
+                    if (PageNumber * PageSize < result.Count)
+                    {
+                        result.RemoveRange(PageNumber * PageSize, result.Count - PageNumber * PageSize);
+                    }
                 }
             }
-            
             return result;
         }
+
+
+
+        public List<SurveyInfoBO> GetSurveyInfoByOrgKeyAndPublishKey(List<string> SurveyInfoIdList, string Okey, Guid publishKey)
+        {
+            List<SurveyInfoBO> result = new List<SurveyInfoBO>();
+
+            List<SurveyMetaData> responseList = new List<SurveyMetaData>();
+
+            int OrganizationId = 0;
+
+            using (var Context = DataObjectFactory.CreateContext())
+            {
+
+                OrganizationId = Context.Organizations.FirstOrDefault(x => x.OrganizationKey == Okey).OrganizationId;
+            }
+
+
+            if (SurveyInfoIdList.Count > 0)
+            {
+                foreach (string surveyInfoId in SurveyInfoIdList.Distinct())
+                {
+                    Guid Id = new Guid(surveyInfoId);
+
+                    using (var Context = DataObjectFactory.CreateContext())
+                    {
+                        responseList.Add(Context.SurveyMetaDatas.FirstOrDefault(x => x.SurveyId == Id && x.OrganizationId == OrganizationId && x.UserPublishKey == publishKey));
+                    }
+                }
+                if (responseList[0] != null && responseList.Count > 0)
+                {
+                    result = Mapper.Map(responseList);
+                }
+            }
+            return result;
+        }
+
+
 
         /// <summary>
         /// Inserts a new SurveyInfo. 
@@ -261,19 +306,24 @@ namespace Epi.Web.EF
             decimal NumberOfResponsPerPage = 0;
 
 
-            NumberOfRows = resultRows.Count;
-            ResponsesTotalsize = (int)resultRows.Select(x => x.TemplateXMLSize).Sum();
 
-            AvgResponseSize = (int)resultRows.Select(x => x.TemplateXMLSize).Average();
-          
+            if (resultRows.Count > 0)
+            {
 
-            NumberOfResponsPerPage = (int)Math.Ceiling((ResponseMaxSize/2) / AvgResponseSize);
+                NumberOfRows = resultRows.Count;
+                ResponsesTotalsize = (int)resultRows.Select(x => x.TemplateXMLSize).Sum();
+
+                AvgResponseSize = (int)resultRows.Select(x => x.TemplateXMLSize).Average();
 
 
-            result.PageSize = (int)Math.Ceiling(NumberOfResponsPerPage);
-            result.NumberOfPages = (int)Math.Ceiling(NumberOfRows / NumberOfResponsPerPage);
+                NumberOfResponsPerPage = (int)Math.Ceiling((ResponseMaxSize / 2) / AvgResponseSize);
 
-            return result;
+
+                result.PageSize = (int)Math.Ceiling(NumberOfResponsPerPage);
+                result.NumberOfPages = (int)Math.Ceiling(NumberOfRows / NumberOfResponsPerPage);
+            }
+                return result;
+           
 
         }
 
@@ -294,18 +344,19 @@ namespace Epi.Web.EF
             int ResponsesTotalsize = 0;
             decimal AvgResponseSize = 0;
             decimal NumberOfResponsPerPage = 0;
-             
 
-            NumberOfRows = resultRows.Count;
-            ResponsesTotalsize = (int)resultRows.Select(x => x.TemplateXMLSize ).Sum();
+            if (resultRows.Count > 0)
+            {
+                NumberOfRows = resultRows.Count;
+                ResponsesTotalsize = (int)resultRows.Select(x => x.TemplateXMLSize).Sum();
 
-            AvgResponseSize  = (int)resultRows.Select(x => x.TemplateXMLSize).Average();
-            NumberOfResponsPerPage = (int)Math.Ceiling((ResponseMaxSize/2) / AvgResponseSize);
+                AvgResponseSize = (int)resultRows.Select(x => x.TemplateXMLSize).Average();
+                NumberOfResponsPerPage = (int)Math.Ceiling((ResponseMaxSize / 2) / AvgResponseSize);
 
 
-            result.PageSize = (int)Math.Ceiling(NumberOfResponsPerPage);
-            result.NumberOfPages = (int)Math.Ceiling(NumberOfRows / NumberOfResponsPerPage);
-            
+                result.PageSize = (int)Math.Ceiling(NumberOfResponsPerPage);
+                result.NumberOfPages = (int)Math.Ceiling(NumberOfRows / NumberOfResponsPerPage);
+            }
             
 
 

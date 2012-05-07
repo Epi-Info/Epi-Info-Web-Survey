@@ -36,6 +36,9 @@ namespace Epi.Web.BLL
             }
         }
 
+
+     
+
         /// <summary>
         /// Gets SurveyInfo based on criteria
         /// </summary>
@@ -52,8 +55,20 @@ namespace Epi.Web.BLL
             PageInfoBO result = this.SurveyInfoDao.GetSurveySizeInfo(pIdList, -1, -1, pResponseMaxSize);
             return result;
         }
-      
 
+
+        public bool IsSurveyInfoValidByOrgKeyAndPublishKey(List<string> SurveyInfoIdList, string Okey, Guid publishKey)
+        {
+            List<SurveyInfoBO> result = this.SurveyInfoDao.GetSurveyInfoByOrgKeyAndPublishKey(SurveyInfoIdList,Okey,publishKey);
+            if (result != null && result.Count > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
 
 
       /// <summary>

@@ -74,5 +74,8 @@ namespace Epi.Web.Common.Criteria
         
        [DataMember]
         public Guid UserPublishKey { get; set; }
+
+       [DataMember]
+       public Guid OrganizationKey { get; set; }
     }
 }

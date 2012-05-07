@@ -41,8 +41,8 @@
         <CheckBox Content="Only Summary Data" Height="16" HorizontalAlignment="Left" IsEnabled="False" Margin="421,331,0,0" Name="checkBox2" VerticalAlignment="Top" />
         <Button Click="ClearListButton_Click"  Content="Clear Criteria" Height="23" HorizontalAlignment="Left" Margin="473,477,0,0" Name="ClearListButton" VerticalAlignment="Top" Width="73" />
         <Label Content="User Publish Key" Height="28" HorizontalAlignment="Left" Margin="56,331,0,0" Name="label5" VerticalAlignment="Top" Width="104" />
-        <TextBox Height="23" HorizontalAlignment="Left" Margin="180,331,0,0" Name="UserPublishKeytextBox" VerticalAlignment="Top" Width="227" />
-        <TextBox Height="23" HorizontalAlignment="Left" Margin="180,363,0,0" Name="txtOrganizationKeySurveyResponse" VerticalAlignment="Top" Width="227" />
+        <PasswordBox Height="23" HorizontalAlignment="Left" Margin="180,331,0,0" Name="passUserPublishKeySurveyResponse" VerticalAlignment="Top" Width="227" />
+        <PasswordBox Height="23" HorizontalAlignment="Left" Margin="180,363,0,0" Name="passOrganizationKeySurveyResponse" VerticalAlignment="Top" Width="227" />
         <Label Content="Organization Key" Height="28" HorizontalAlignment="Left" Margin="57,358,0,0" Name="lblOrganizationKeyResponse" VerticalAlignment="Top" Width="109" />
         <CheckBox Content="Is Size Request" Height="16" HorizontalAlignment="Left" Margin="421,366,0,0" Name="chkIsSizeRequestSurveyResponse" VerticalAlignment="Top" />
         <Button Click="DownloadSurveyAnswersButton_Click" Content="Download" Height="23" HorizontalAlignment="Left" Margin="473,518,0,0" Name="DownloadSurveyAnswersButton" VerticalAlignment="Top" Width="73" />
