@@ -2,6 +2,7 @@
 using Epi.Web.MVC.Facade;
 using Epi.Web.MVC.Models;
 using System;
+using System.Web.Security;
 namespace Epi.Web.MVC.Controllers
 {
     public class FinalController : Controller
@@ -40,17 +41,24 @@ namespace Epi.Web.MVC.Controllers
             }
         }
 
-        //rather than taking to survey we are taking the user to home page.
+
+
         [HttpPost]
 
-        public ActionResult Index(string surveyId)
+        public ActionResult Index(string surveyId, SurveyAnswerModel surveyAnswerModel)
         {
 
 
             try
             {
-               
-                return RedirectToRoute(new { Controller = "Home", Action = "Index", SurveyId = surveyId });
+
+                FormsAuthentication.SetAuthCookie("BeginSurvey", false);
+                
+                Guid responseId = Guid.NewGuid();
+
+
+                _isurveyFacade.CreateSurveyAnswer(surveyId, responseId.ToString());
+                return RedirectToRoute(new { Controller = "Survey", Action = "Index", responseId = responseId, PageNumber = 1 });
             }
             catch (Exception ex)
             {
@@ -58,27 +66,6 @@ namespace Epi.Web.MVC.Controllers
             }
 
         }
-
-        //[HttpPost]
-       
-        //public ActionResult Index(string surveyId, SurveyAnswerModel surveyAnswerModel )
-        //{
-
-
-        //    try
-        //    {
-        //       Guid responseId = Guid.NewGuid(); 
-
-              
-        //       _isurveyFacade.CreateSurveyAnswer(surveyId, responseId.ToString());
-        //       return RedirectToRoute(new { Controller = "Survey", Action = "Index", responseId = responseId, PageNumber = 1 });
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return View(Epi.Web.MVC.Constants.Constant.EXCEPTION_PAGE);
-        //    }
-
-        //}
 
     }
 }
