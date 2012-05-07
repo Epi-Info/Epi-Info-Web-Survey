@@ -74,7 +74,12 @@ namespace Epi.Web.EF
                 DepartmentName = businessobject.DepartmentName,
                 ClosingDate = businessobject.ClosingDate ,
                 UserPublishKey=businessobject.UserPublishKey,
-                SurveyTypeId = businessobject.SurveyType 
+                SurveyTypeId = businessobject.SurveyType,
+                TemplateXMLSize = businessobject.TemplateXMLSize,
+                DateCreated = businessobject.DateCreated,
+                
+               
+                
 
             };
         }
