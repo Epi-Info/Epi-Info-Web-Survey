@@ -57,9 +57,9 @@ namespace Epi.Web.BLL
         }
 
 
-        public bool IsSurveyInfoValidByOrgKeyAndPublishKey(List<string> SurveyInfoIdList, string Okey, Guid publishKey)
+        public bool IsSurveyInfoValidByOrgKeyAndPublishKey(string SurveyId, string Okey, Guid publishKey)
         {
-            List<SurveyInfoBO> result = this.SurveyInfoDao.GetSurveyInfoByOrgKeyAndPublishKey(SurveyInfoIdList,Okey,publishKey);
+            List<SurveyInfoBO> result = this.SurveyInfoDao.GetSurveyInfoByOrgKeyAndPublishKey(SurveyId,Okey,publishKey);
             if (result != null && result.Count > 0)
             {
                 return true;

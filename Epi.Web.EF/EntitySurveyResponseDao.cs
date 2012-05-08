@@ -207,18 +207,24 @@ namespace Epi.Web.EF
             {
                 using (var Context = DataObjectFactory.CreateContext())
                 {
-                    responseList = Context.SurveyResponses.ToList();
+                    if (!string.IsNullOrEmpty(pSurveyId))
+                    {
+                        Guid Id = new Guid(pSurveyId);
+                        responseList = Context.SurveyResponses.Where(x => x.SurveyId == Id).ToList();
+                    }
+                    
+                   
                 }
             }
 
 
-            if(! string.IsNullOrEmpty(pSurveyId))
-            {
-                Guid Id = new Guid(pSurveyId);
-                List<SurveyResponse> surveyList = new List<SurveyResponse>();
-                surveyList.AddRange(responseList.Where(x => x.SurveyId == Id));
-                responseList = surveyList;
-            }
+            //if(! string.IsNullOrEmpty(pSurveyId))
+            //{
+            //    Guid Id = new Guid(pSurveyId);
+            //    List<SurveyResponse> surveyList = new List<SurveyResponse>();
+            //    surveyList.AddRange(responseList.Where(x => x.SurveyId == Id));
+            //    responseList = surveyList;
+            //}
 
             if (pStatusId > -1)
             {
