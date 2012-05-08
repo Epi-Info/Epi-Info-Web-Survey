@@ -309,12 +309,12 @@ namespace Epi.Web.WCF.SurveyService
                     if (validSurvey == true)
                     {
 
-                        Guid UserPublishKey = SurveyInfo.GetSurveyInfoById(criteria.SurveyId).UserPublishKey;
+                        //Guid UserPublishKey = SurveyInfo.GetSurveyInfoById(criteria.SurveyId).UserPublishKey;
 
-                        if (criteria.UserPublishKey != UserPublishKey)
-                        {
-                            return result;
-                        }
+                        //if (criteria.UserPublishKey != UserPublishKey)
+                        //{
+                        //    return result;
+                        //}
 
 
                         List<string> IdList = new List<string>();
@@ -363,10 +363,10 @@ namespace Epi.Web.WCF.SurveyService
                             foreach (SurveyResponseBO surveyResponseBo in SurveyResponseBOList)
                             {
                                 // if (surveyResponseBo.UserPublishKey == criteria.UserPublishKey)
-                                if (UserPublishKey == criteria.UserPublishKey)
-                                {
+                                //if (UserPublishKey == criteria.UserPublishKey)
+                                //{
                                     result.SurveyResponseList.Add(Mapper.ToDataTransferObject(surveyResponseBo));
-                                }
+                              //  }
                             }
                         }
                         /*
