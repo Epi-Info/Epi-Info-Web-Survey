@@ -174,7 +174,7 @@ namespace Epi.Web.EF
 
 
 
-        public List<SurveyInfoBO> GetSurveyInfoByOrgKeyAndPublishKey(List<string> SurveyInfoIdList, string Okey, Guid publishKey)
+        public List<SurveyInfoBO> GetSurveyInfoByOrgKeyAndPublishKey(string SurveyId, string Okey, Guid publishKey)
         {
             List<SurveyInfoBO> result = new List<SurveyInfoBO>();
 
@@ -188,25 +188,23 @@ namespace Epi.Web.EF
                 OrganizationId = Context.Organizations.FirstOrDefault(x => x.OrganizationKey == Okey).OrganizationId;
             }
 
-
-            if (SurveyInfoIdList.Count > 0)
+            if (!string.IsNullOrEmpty(SurveyId))
             {
-                foreach (string surveyInfoId in SurveyInfoIdList.Distinct())
-                {
-                    Guid Id = new Guid(surveyInfoId);
-
-                    using (var Context = DataObjectFactory.CreateContext())
+                 Guid Id = new Guid(SurveyId);
+                using (var Context = DataObjectFactory.CreateContext())
                     {
                         responseList.Add(Context.SurveyMetaDatas.FirstOrDefault(x => x.SurveyId == Id && x.OrganizationId == OrganizationId && x.UserPublishKey == publishKey));
-                    }
-                }
-                if (responseList[0] != null && responseList.Count > 0)
-                {
-                    result = Mapper.Map(responseList);
-                }
+                        result = Mapper.Map(responseList);
+                     } 
             }
+
+             
+                
+           
             return result;
         }
+
+        
 
 
 

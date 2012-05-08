@@ -240,7 +240,7 @@ namespace Epi.Web.SurveyManager.Client
                 else
                 {
                     Request.Criteria.ReturnSizeInfoOnly = true;
-                    Epi.Web.Common.Message.SurveyAnswerResponse SizeResult = client.GetSurveyAnswer(Request);
+                     Epi.Web.Common.Message.SurveyAnswerResponse SizeResult = client.GetSurveyAnswer(Request);
 
                     if (!string.IsNullOrEmpty(SizeResult.Message))
                     {
