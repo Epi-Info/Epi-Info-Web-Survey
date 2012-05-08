@@ -294,13 +294,17 @@ namespace Epi.Web.WCF.SurveyService
 
 
 
-                    List<string> SurveyIdList = new List<string>();
+                    //List<string> SurveyIdList = new List<string>();
 
-                    SurveyIdList.Add(criteria.SurveyId);
+                    //SurveyIdList.Add(criteria.SurveyId);
                     string orgkeyencrypted = Cryptography.Encrypt(criteria.OrganizationKey.ToString());
 
                     bool validSurvey = false;
-                    validSurvey = SurveyInfo.IsSurveyInfoValidByOrgKeyAndPublishKey(SurveyIdList, orgkeyencrypted, criteria.UserPublishKey);
+                   // if (string.IsNullOrEmpty(criteria.SurveyId.ToString()))
+                   // {
+                        validSurvey = SurveyInfo.IsSurveyInfoValidByOrgKeyAndPublishKey(criteria.SurveyId, orgkeyencrypted, criteria.UserPublishKey);
+
+                    //}
 
                     if (validSurvey == true)
                     {
