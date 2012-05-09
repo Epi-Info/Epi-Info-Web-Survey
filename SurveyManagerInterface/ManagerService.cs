@@ -111,12 +111,10 @@ namespace Epi.Web.WCF.SurveyService
 
                 Epi.Web.BLL.Organization implementation1 = new Epi.Web.BLL.Organization(surveyInfoDao1);
                 string EncryptedKey = Cryptography.Encrypt(pRequest.Criteria.OrganizationKey.ToString());
-                OrganizationBO OrganizationBO = implementation1.GetOrganizationByKey(EncryptedKey);
+                
+               bool ISValidOrg = implementation1.ValidateOrganization(EncryptedKey);
 
-
-
-
-                if (OrganizationBO != null)
+           if (ISValidOrg)
                 {
                     if (pRequest.Criteria.ReturnSizeInfoOnly == true)
                     {
@@ -266,10 +264,12 @@ namespace Epi.Web.WCF.SurveyService
 
                 Epi.Web.BLL.Organization implementation1 = new Epi.Web.BLL.Organization(surveyInfoDao1);
                 string EncryptedKey = Cryptography.Encrypt(pRequest.Criteria.OrganizationKey.ToString());
-                OrganizationBO OrganizationBO = implementation1.GetOrganizationByKey(EncryptedKey);
+                bool ISValidOrg = implementation1.ValidateOrganization(EncryptedKey);
 
 
-                if (OrganizationBO != null)
+                
+                if (ISValidOrg)
+             
                 {
 
                     // Validate client tag, access token, and user credentials
