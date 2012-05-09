@@ -292,7 +292,7 @@ namespace Epi.Web.EF
         /// </summary>
         /// <param name="SurveyInfoId">Unique SurveyInfo identifier.</param>
         /// <returns>PageInfoBO.</returns>
-        public List<SurveyInfoBO> GetSurveySizeInfo(List<string> SurveyInfoIdList, int PageNumber = -1, int PageSize = -1, int ResponseMaxSize = -1)
+        public List<SurveyInfoBO> GetSurveySizeInfo(List<string> SurveyInfoIdList,int PageNumber = -1, int PageSize = -1, int ResponseMaxSize = -1)
         {
            
 
@@ -310,7 +310,7 @@ namespace Epi.Web.EF
         /// </summary>
         /// <param name="SurveyInfoId">Unique SurveyInfo identifier.</param>
         /// <returns>PageInfoBO.</returns>
-        public List<SurveyInfoBO> GetSurveySizeInfo(List<string> SurveyInfoIdList, DateTime pClosingDate, string Okey, int pSurveyType = -1, int PageNumber = -1, int PageSize = -1, int ResponseMaxSize = -1)
+        public List<SurveyInfoBO> GetSurveySizeInfo(List<string> SurveyInfoIdList, DateTime pClosingDate, string Okey,  int pSurveyType = -1, int PageNumber = -1, int PageSize = -1, int ResponseMaxSize = -1)
         {
 
            

@@ -50,13 +50,13 @@ namespace Epi.Web.BLL
             return result;
         }
 
-        public PageInfoBO GetSurveySizeInfo(List<string> pIdList, int pResponseMaxSize = -1)
+        public PageInfoBO GetSurveySizeInfo(List<string> pIdList,int BandwidthUsageFactor, int pResponseMaxSize = -1)
         { 
             List<SurveyInfoBO> SurveyInfoBOList = this.SurveyInfoDao.GetSurveySizeInfo(pIdList, -1, -1, pResponseMaxSize);
 
             PageInfoBO result = new PageInfoBO();
 
-            result = Epi.Web.BLL.Common.GetSurveySize(SurveyInfoBOList, pResponseMaxSize);
+            result = Epi.Web.BLL.Common.GetSurveySize(SurveyInfoBOList,BandwidthUsageFactor, pResponseMaxSize);
             return result;
 
 
@@ -87,7 +87,7 @@ namespace Epi.Web.BLL
             List<SurveyInfoBO> result = this.SurveyInfoDao.GetSurveyInfo(SurveyInfoIdList, pClosingDate, Okey, pSurveyType, pPageNumber, pPageSize);
             return result;
         }
-        public PageInfoBO GetSurveySizeInfo(List<string> SurveyInfoIdList, DateTime pClosingDate, string Okey, int pSurveyType = -1, int pPageNumber = -1, int pPageSize = -1, int pResponseMaxSize = -1)
+        public PageInfoBO GetSurveySizeInfo(List<string> SurveyInfoIdList, DateTime pClosingDate, string Okey, int BandwidthUsageFactor, int pSurveyType = -1, int pPageNumber = -1, int pPageSize = -1, int pResponseMaxSize = -1)
         {
              
 
@@ -96,7 +96,7 @@ namespace Epi.Web.BLL
 
             PageInfoBO result = new PageInfoBO();
 
-            result = Epi.Web.BLL.Common.GetSurveySize(SurveyInfoBOList, pResponseMaxSize);
+            result = Epi.Web.BLL.Common.GetSurveySize(SurveyInfoBOList, BandwidthUsageFactor, pResponseMaxSize);
             return result;
 
         }
