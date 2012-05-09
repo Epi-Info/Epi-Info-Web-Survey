@@ -344,8 +344,11 @@ namespace Epi.Web.WCF.SurveyService
 
                         if (pRequest.Criteria.ReturnSizeInfoOnly == true)
                         {
+                            // call BLL with a list of records 
 
                             PageInfoBO PageInfoBO = Implementation.GetResponseSurveySize(IdList, criteria.SurveyId, criteria.DateCompleted, criteria.StatusId, -1, -1, ResponseMaxSize);
+
+                           
 
                             result.PageSize = PageInfoBO.PageSize;
                             result.NumberOfPages = PageInfoBO.NumberOfPages;
@@ -360,6 +363,11 @@ namespace Epi.Web.WCF.SurveyService
                                         criteria.DateCompleted,
                                         criteria.StatusId
                                     );
+
+ 
+
+
+
                             foreach (SurveyResponseBO surveyResponseBo in SurveyResponseBOList)
                             {
                                 // if (surveyResponseBo.UserPublishKey == criteria.UserPublishKey)

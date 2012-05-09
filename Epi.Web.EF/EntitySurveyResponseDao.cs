@@ -70,32 +70,14 @@ namespace Epi.Web.EF
         }
 
 
-        public PageInfoBO GetSurveyResponseSize(List<string> SurveyResponseIdList, Guid UserPublishKey, int PageNumber = -1, int PageSize = -1 ,int ResponseMaxSize = -1)
+        public List<SurveyResponseBO> GetSurveyResponseSize(List<string> SurveyResponseIdList, Guid UserPublishKey, int PageNumber = -1, int PageSize = -1, int ResponseMaxSize = -1)
         {
-         PageInfoBO result = new PageInfoBO();
+         
 
             List<SurveyResponseBO> resultRows =  GetSurveyResponse(SurveyResponseIdList,  UserPublishKey,  PageNumber ,  PageSize );
 
-            int NumberOfRows = 0;
-            int ResponsesTotalsize = 0;
-            decimal AvgResponseSize = 0;
-            decimal NumberOfResponsPerPage = 0;
 
-
-            NumberOfRows = resultRows.Count;
-            ResponsesTotalsize = (int)resultRows.Select(x => x.TemplateXMLSize).Sum();
-
-            AvgResponseSize = ResponsesTotalsize / NumberOfRows;
-            NumberOfResponsPerPage = (int)Math.Ceiling(ResponseMaxSize / AvgResponseSize);
-
-
-            result.PageSize = (int)Math.Ceiling(NumberOfResponsPerPage);
-            result.NumberOfPages = (int)Math.Ceiling(NumberOfRows / NumberOfResponsPerPage);
-            
-            
-
-
-            return result;
+            return resultRows;
         }
 
         /// <summary>
@@ -140,33 +122,15 @@ namespace Epi.Web.EF
         }
 
 
-         public PageInfoBO GetSurveyResponseBySurveyIdSize(List<string> SurveyIdList, Guid UserPublishKey, int PageNumber = -1, int PageSize = -1,int ResponseMaxSize = -1){
+        public List<SurveyResponseBO> GetSurveyResponseBySurveyIdSize(List<string> SurveyIdList, Guid UserPublishKey, int PageNumber = -1, int PageSize = -1, int ResponseMaxSize = -1)
+        {
          
-          PageInfoBO result = new PageInfoBO();
+        
 
             List<SurveyResponseBO> resultRows =  GetSurveyResponseBySurveyId(SurveyIdList,  UserPublishKey,  PageNumber ,  PageSize );
 
-            int NumberOfRows = 0;
-            int ResponsesTotalsize = 0;
-            decimal AvgResponseSize = 0;
-            decimal NumberOfResponsPerPage = 0;
-
-            if (resultRows.Count > 0)
-            {
-                NumberOfRows = resultRows.Count;
-                ResponsesTotalsize = (int)resultRows.Select(x => x.TemplateXMLSize).Sum();
-
-                AvgResponseSize = (int)resultRows.Select(x => x.TemplateXMLSize).Average();
-                NumberOfResponsPerPage = (int)Math.Ceiling((ResponseMaxSize / 2) / AvgResponseSize);
-
-
-                result.PageSize = (int)Math.Ceiling(NumberOfResponsPerPage);
-                result.NumberOfPages = (int)Math.Ceiling(NumberOfRows / NumberOfResponsPerPage);
-            }
-            
-
-
-            return result;
+        
+            return resultRows;
          }
 
         /// <summary>
@@ -263,33 +227,14 @@ namespace Epi.Web.EF
         }
 
 
-         public PageInfoBO GetSurveyResponseSize (List<string> SurveyAnswerIdList, string pSurveyId, DateTime pDateCompleted, int pStatusId = -1, int PageNumber = -1, int PageSize = -1,int ResponseMaxSize = -1){
-         PageInfoBO result = new PageInfoBO();
+        public List<SurveyResponseBO> GetSurveyResponseSize(List<string> SurveyAnswerIdList, string pSurveyId, DateTime pDateCompleted, int pStatusId = -1, int PageNumber = -1, int PageSize = -1, int ResponseMaxSize = -1)
+        {
+          
 
             List<SurveyResponseBO> resultRows =  GetSurveyResponse(SurveyAnswerIdList,  pSurveyId,pDateCompleted,pStatusId , PageNumber ,  PageSize );
+ 
 
-            int NumberOfRows = 0;
-            int ResponsesTotalsize = 0;
-            decimal AvgResponseSize = 0;
-            decimal NumberOfResponsPerPage = 0;
-
-            if (resultRows.Count > 0)
-            {
-                NumberOfRows = resultRows.Count;
-                ResponsesTotalsize = (int)resultRows.Select(x => x.TemplateXMLSize).Sum();
-
-                AvgResponseSize = (int)resultRows.Select(x => x.TemplateXMLSize).Average();
-
-                NumberOfResponsPerPage = (int)Math.Ceiling((ResponseMaxSize / 2) / AvgResponseSize);
-
-
-                result.PageSize = (int)Math.Ceiling(NumberOfResponsPerPage);
-                result.NumberOfPages = (int)Math.Ceiling(NumberOfRows / NumberOfResponsPerPage);
-            }
-            
-
-
-            return result;
+            return resultRows;
          
          }
 
