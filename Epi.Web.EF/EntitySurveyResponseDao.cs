@@ -122,7 +122,7 @@ namespace Epi.Web.EF
         }
 
 
-        public List<SurveyResponseBO> GetSurveyResponseBySurveyIdSize(List<string> SurveyIdList, Guid UserPublishKey, int PageNumber = -1, int PageSize = -1, int ResponseMaxSize = -1)
+        public List<SurveyResponseBO> GetSurveyResponseBySurveyIdSize(List<string> SurveyIdList, Guid UserPublishKey , int PageNumber = -1, int PageSize = -1, int ResponseMaxSize = -1)
         {
          
         
