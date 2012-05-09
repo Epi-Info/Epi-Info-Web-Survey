@@ -102,7 +102,7 @@ namespace Epi.Web.WCF.SurveyService
                 List<SurveyInfoBO> SurveyBOList = new List<SurveyInfoBO>();
               //  int ResponseMaxSize = 16384;   
                 int ResponseMaxSize =   Int32.Parse(ConfigurationManager.AppSettings["maxBytesPerRead"]);
-
+                int BandwidthUsageFactor = Int32.Parse(ConfigurationManager.AppSettings["BandwidthUsageFactor"]);
 
 
                 Epi.Web.Interfaces.DataInterfaces.IOrganizationDao entityDaoFactory1 = new EF.EntityOrganizationDao();
@@ -118,7 +118,8 @@ namespace Epi.Web.WCF.SurveyService
                 {
                     if (pRequest.Criteria.ReturnSizeInfoOnly == true)
                     {
-                        PageInfoBO PageInfoBO = implementation.GetSurveySizeInfo(SurveyIdList, criteria.ClosingDate, Cryptography.Encrypt(criteria.OrganizationKey.ToString()), criteria.SurveyType, criteria.PageNumber, criteria.PageSize, ResponseMaxSize);
+                        // add BandwidthUsageFactor
+                        PageInfoBO PageInfoBO = implementation.GetSurveySizeInfo(SurveyIdList, criteria.ClosingDate, Cryptography.Encrypt(criteria.OrganizationKey.ToString()), BandwidthUsageFactor, criteria.SurveyType, criteria.PageNumber, criteria.PageSize, ResponseMaxSize);
                         result.PageSize = PageInfoBO.PageSize;
                         result.NumberOfPages = PageInfoBO.NumberOfPages;
                     }

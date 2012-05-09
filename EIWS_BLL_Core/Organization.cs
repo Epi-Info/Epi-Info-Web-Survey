@@ -80,6 +80,7 @@ namespace Epi.Web.BLL
         //Validate Organization
         public bool ValidateOrganization(string EncryptedKey)
         {
+           
             OrganizationBO OrganizationBO =  GetOrganizationByKey(EncryptedKey);
             bool ISValidOrg = false;
 
