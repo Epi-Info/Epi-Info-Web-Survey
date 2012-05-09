@@ -49,7 +49,7 @@ namespace Epi.Web.BLL
                     try
                     {
 
-                        Epi.Web.Common.BusinessObject.SurveyInfoBO BO = new Common.BusinessObject.SurveyInfoBO();
+                        Epi.Web.Common.BusinessObject.SurveyInfoBO BO = new Epi.Web.Common.BusinessObject.SurveyInfoBO();
 
                         BO.SurveyId = SurveyId.ToString();
                         BO.ClosingDate =  pRequestMessage.ClosingDate;

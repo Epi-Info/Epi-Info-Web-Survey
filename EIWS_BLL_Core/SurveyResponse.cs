@@ -107,20 +107,31 @@ namespace Epi.Web.BLL
 
         public PageInfoBO GetResponseSurveySize(List<string> SurveyResponseIdList,string SurveyId, DateTime pClosingDate, int pSurveyType = -1, int pPageNumber = -1, int pPageSize = -1, int pResponseMaxSize = -1)
         {
-            PageInfoBO result = this.SurveyResponseDao.GetSurveyResponseSize(SurveyResponseIdList, SurveyId, pClosingDate, pSurveyType, pPageNumber, pPageSize, pResponseMaxSize);
+            List<SurveyResponseBO> SurveyResponseBOList = this.SurveyResponseDao.GetSurveyResponseSize(SurveyResponseIdList, SurveyId, pClosingDate, pSurveyType, pPageNumber, pPageSize, pResponseMaxSize);
+            PageInfoBO result = new PageInfoBO();
+
+            result = Epi.Web.BLL.Common.GetSurveySizeById(SurveyResponseBOList, pResponseMaxSize);
             return result;
         }
 
         public PageInfoBO GetSurveyResponseBySurveyIdSize(List<string> SurveyIdList, Guid UserPublishKey, int PageNumber = -1, int PageSize = -1, int ResponseMaxSize = -1)
         {
-            PageInfoBO result = this.SurveyResponseDao.GetSurveyResponseBySurveyIdSize(SurveyIdList, UserPublishKey, PageNumber, PageSize, ResponseMaxSize);
+            List<SurveyResponseBO> SurveyResponseBOList = this.SurveyResponseDao.GetSurveyResponseBySurveyIdSize(SurveyIdList, UserPublishKey, PageNumber, PageSize, ResponseMaxSize);
+
+            PageInfoBO result = new PageInfoBO();
+
+            result = Epi.Web.BLL.Common.GetSurveySizeById(SurveyResponseBOList, ResponseMaxSize);
             return result;
+         
         }
         public PageInfoBO GetSurveyResponseSize(List<string> SurveyResponseIdList, Guid UserPublishKey, int PageNumber = -1, int PageSize = -1, int ResponseMaxSize = -1) {
 
-            PageInfoBO result = this.SurveyResponseDao.GetSurveyResponseSize(SurveyResponseIdList, UserPublishKey, PageNumber, PageSize, ResponseMaxSize);
+            List<SurveyResponseBO> SurveyResponseBOList = this.SurveyResponseDao.GetSurveyResponseSize(SurveyResponseIdList, UserPublishKey, PageNumber, PageSize, ResponseMaxSize);
+
+            PageInfoBO result = new PageInfoBO();
+
+            result = Epi.Web.BLL.Common.GetSurveySizeById(SurveyResponseBOList, ResponseMaxSize);
             return result;
-        
         }
     }
 }
