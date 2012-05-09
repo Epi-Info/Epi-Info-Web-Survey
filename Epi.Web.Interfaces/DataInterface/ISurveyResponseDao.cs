@@ -29,7 +29,7 @@ namespace Epi.Web.Interfaces.DataInterfaces
         /// <returns>SurveyResponse.</returns>
         List<SurveyResponseBO> GetSurveyResponseBySurveyId(List<string> SurveyIdList, Guid UserPublishKey, int PageNumber = -1, int PageSize = -1);
 
-        List<SurveyResponseBO> GetSurveyResponseBySurveyIdSize(List<string> SurveyIdList, Guid UserPublishKey, int PageNumber = -1, int PageSize = -1, int ResponseMaxSize = -1);
+        List<SurveyResponseBO> GetSurveyResponseBySurveyIdSize(List<string> SurveyIdList, Guid UserPublishKey,  int PageNumber = -1, int PageSize = -1, int ResponseMaxSize = -1);
         
         /// <summary>
         /// Get SurveyResponses based on criteria.
@@ -38,7 +38,7 @@ namespace Epi.Web.Interfaces.DataInterfaces
         /// <returns>SurveyResponse.</returns>
         List<SurveyResponseBO> GetSurveyResponse(List<string> SurveyAnswerIdList, string pSurveyId, DateTime pDateCompleted, int pStatusId = -1, int PageNumber = -1, int PageSize = -1);
 
-        List<SurveyResponseBO> GetSurveyResponseSize(List<string> SurveyAnswerIdList, string pSurveyId, DateTime pDateCompleted, int pStatusId = -1, int PageNumber = -1, int PageSize = -1, int ResponseMaxSize = -1);
+        List<SurveyResponseBO> GetSurveyResponseSize(List<string> SurveyAnswerIdList, string pSurveyId, DateTime pDateCompleted,  int pStatusId = -1, int PageNumber = -1, int PageSize = -1, int ResponseMaxSize = -1);
         /// <summary>
         /// Gets a sorted list of all SurveyResponses.
         /// </summary>

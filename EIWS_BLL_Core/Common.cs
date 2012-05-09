@@ -9,7 +9,7 @@ namespace Epi.Web.BLL
     {
 
         //SurveyResponseBO
-        public static PageInfoBO GetSurveySizeById(List<SurveyResponseBO> resultRows, int ResponseMaxSize = -1)
+        public static PageInfoBO GetSurveySize(List<SurveyResponseBO> resultRows, int BandwidthUsageFactor, int ResponseMaxSize = -1)
         {
 
            PageInfoBO result = new PageInfoBO();
@@ -25,9 +25,9 @@ namespace Epi.Web.BLL
                 ResponsesTotalsize = (int)resultRows.Select(x => x.TemplateXMLSize).Sum();
 
                 AvgResponseSize = (int)resultRows.Select(x => x.TemplateXMLSize).Average();
-                NumberOfResponsPerPage = (int)Math.Ceiling((ResponseMaxSize / 2) / AvgResponseSize);
+               // NumberOfResponsPerPage = (int)Math.Ceiling((ResponseMaxSize * (BandwidthUsageFactor/100)) / AvgResponseSize);
 
-
+                NumberOfResponsPerPage = (int)Math.Ceiling((int)(ResponseMaxSize * (BandwidthUsageFactor * 0.01)) / AvgResponseSize);
                 result.PageSize = (int)Math.Ceiling(NumberOfResponsPerPage);
                 result.NumberOfPages = (int)Math.Ceiling(NumberOfRows / NumberOfResponsPerPage);
             }
@@ -38,7 +38,7 @@ namespace Epi.Web.BLL
         }
 
         //SurveyInfoBO
-        public static PageInfoBO GetSurveySizeById(List<SurveyInfoBO> resultRows, int ResponseMaxSize = -1)
+        public static PageInfoBO GetSurveySize(List<SurveyInfoBO> resultRows, int BandwidthUsageFactor, int ResponseMaxSize = -1)
         {
 
             PageInfoBO result = new PageInfoBO();
@@ -54,8 +54,9 @@ namespace Epi.Web.BLL
                 ResponsesTotalsize = (int)resultRows.Select(x => x.TemplateXMLSize).Sum();
 
                 AvgResponseSize = (int)resultRows.Select(x => x.TemplateXMLSize).Average();
-                NumberOfResponsPerPage = (int)Math.Ceiling((ResponseMaxSize / 2) / AvgResponseSize);
+               // NumberOfResponsPerPage = (int)Math.Ceiling((ResponseMaxSize * (BandwidthUsageFactor / 100)) / AvgResponseSize);
 
+                NumberOfResponsPerPage = (int)Math.Ceiling((int)(ResponseMaxSize * (BandwidthUsageFactor * 0.01)) / AvgResponseSize);
 
                 result.PageSize = (int)Math.Ceiling(NumberOfResponsPerPage);
                 result.NumberOfPages = (int)Math.Ceiling(NumberOfRows / NumberOfResponsPerPage);
