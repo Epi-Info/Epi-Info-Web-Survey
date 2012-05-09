@@ -65,7 +65,9 @@ namespace Epi.Web.BLL
 
         public bool IsSurveyInfoValidByOrgKeyAndPublishKey(string SurveyId, string Okey, Guid publishKey)
         {
-            List<SurveyInfoBO> result = this.SurveyInfoDao.GetSurveyInfoByOrgKeyAndPublishKey(SurveyId,Okey,publishKey);
+
+            string EncryptedKey = Epi.Web.Common.Security.Cryptography.Encrypt(Okey);
+            List<SurveyInfoBO> result = this.SurveyInfoDao.GetSurveyInfoByOrgKeyAndPublishKey(SurveyId, EncryptedKey, publishKey);
             if (result != null && result.Count > 0)
             {
                 return true;
@@ -84,15 +86,16 @@ namespace Epi.Web.BLL
         /// <returns>SurveyInfo.</returns>
         public List<SurveyInfoBO> GetSurveyInfo(List<string> SurveyInfoIdList, DateTime pClosingDate, string Okey, int pSurveyType = -1, int pPageNumber = -1, int pPageSize = -1)
         {
-            List<SurveyInfoBO> result = this.SurveyInfoDao.GetSurveyInfo(SurveyInfoIdList, pClosingDate, Okey, pSurveyType, pPageNumber, pPageSize);
+            string EncryptedKey = Epi.Web.Common.Security.Cryptography.Encrypt(Okey);
+            List<SurveyInfoBO> result = this.SurveyInfoDao.GetSurveyInfo(SurveyInfoIdList, pClosingDate, EncryptedKey, pSurveyType, pPageNumber, pPageSize);
             return result;
         }
         public PageInfoBO GetSurveySizeInfo(List<string> SurveyInfoIdList, DateTime pClosingDate, string Okey, int BandwidthUsageFactor, int pSurveyType = -1, int pPageNumber = -1, int pPageSize = -1, int pResponseMaxSize = -1)
         {
-             
 
+            string EncryptedKey = Epi.Web.Common.Security.Cryptography.Encrypt(Okey);
 
-            List<SurveyInfoBO> SurveyInfoBOList = this.SurveyInfoDao.GetSurveySizeInfo(SurveyInfoIdList, pClosingDate, Okey, pSurveyType, pPageNumber, pPageSize, pResponseMaxSize);
+            List<SurveyInfoBO> SurveyInfoBOList = this.SurveyInfoDao.GetSurveySizeInfo(SurveyInfoIdList, pClosingDate, EncryptedKey, pSurveyType, pPageNumber, pPageSize, pResponseMaxSize);
 
             PageInfoBO result = new PageInfoBO();
 
