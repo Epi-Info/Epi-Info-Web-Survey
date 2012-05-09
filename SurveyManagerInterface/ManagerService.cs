@@ -342,11 +342,13 @@ namespace Epi.Web.WCF.SurveyService
 
                         int ResponseMaxSize = Int32.Parse(ConfigurationManager.AppSettings["maxBytesPerRead"]);
 
+                        int BandwidthUsageFactor = Int32.Parse(ConfigurationManager.AppSettings["BandwidthUsageFactor"]);
+
                         if (pRequest.Criteria.ReturnSizeInfoOnly == true)
                         {
                             // call BLL with a list of records 
 
-                            PageInfoBO PageInfoBO = Implementation.GetResponseSurveySize(IdList, criteria.SurveyId, criteria.DateCompleted, criteria.StatusId, -1, -1, ResponseMaxSize);
+                            PageInfoBO PageInfoBO = Implementation.GetResponseSurveySize(IdList, criteria.SurveyId,  criteria.DateCompleted,BandwidthUsageFactor, criteria.StatusId, -1, -1, ResponseMaxSize);
 
                            
 
