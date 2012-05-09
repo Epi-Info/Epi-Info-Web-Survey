@@ -57,13 +57,14 @@ namespace Epi.Web.BLL
         //Validate Admin
         public bool ValidateAdmin(string AdminKey, OrganizationBO OrganizationBO)
         {
+            string EncryptedAdminKey = Epi.Web.Common.Security.Cryptography.Decrypt(AdminKey);
            
             bool ISValidUser = false;
 
-            if (!string.IsNullOrEmpty(AdminKey) && !string.IsNullOrEmpty(OrganizationBO.AdminId.ToString()))
+            if (!string.IsNullOrEmpty(EncryptedAdminKey) && !string.IsNullOrEmpty(OrganizationBO.AdminId.ToString()))
             {
 
-                if (AdminKey == OrganizationBO.AdminId.ToString())
+                if (EncryptedAdminKey == OrganizationBO.AdminId.ToString())
                 {
                     ISValidUser = true;
 
@@ -78,9 +79,9 @@ namespace Epi.Web.BLL
         }
 
         //Validate Organization
-        public bool ValidateOrganization(string EncryptedKey)
+        public bool ValidateOrganization(string  Key)
         {
-           
+            string EncryptedKey = Epi.Web.Common.Security.Cryptography.Encrypt(Key);
             OrganizationBO OrganizationBO =  GetOrganizationByKey(EncryptedKey);
             bool ISValidOrg = false;
 
