@@ -77,7 +77,25 @@ namespace Epi.Web.BLL
             return ISValidUser;
         }
 
+        //Validate Organization
+        public bool ValidateOrganization(string EncryptedKey)
+        {
+            OrganizationBO OrganizationBO =  GetOrganizationByKey(EncryptedKey);
+            bool ISValidOrg = false;
 
+            if (OrganizationBO != null)
+                {
+                   ISValidOrg = true;
+
+
+                }
+                else
+                {
+                    ISValidOrg = false;
+                }
+          
+            return ISValidOrg;
+        }
 
 
     }
