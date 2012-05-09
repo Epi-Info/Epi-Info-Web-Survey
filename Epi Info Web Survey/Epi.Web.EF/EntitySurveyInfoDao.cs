@@ -292,35 +292,14 @@ namespace Epi.Web.EF
         /// </summary>
         /// <param name="SurveyInfoId">Unique SurveyInfo identifier.</param>
         /// <returns>PageInfoBO.</returns>
-        public PageInfoBO GetSurveySizeInfo(List<string> SurveyInfoIdList, int PageNumber = -1, int PageSize = -1, int ResponseMaxSize = -1)
+        public List<SurveyInfoBO> GetSurveySizeInfo(List<string> SurveyInfoIdList, int PageNumber = -1, int PageSize = -1, int ResponseMaxSize = -1)
         {
-            PageInfoBO result = new PageInfoBO();
+           
 
             List<SurveyInfoBO> resultRows = GetSurveyInfo(SurveyInfoIdList, PageNumber, PageSize);
 
-            int NumberOfRows = 0;
-            int ResponsesTotalsize = 0;
-            decimal AvgResponseSize = 0;
-            decimal NumberOfResponsPerPage = 0;
-
-
-
-            if (resultRows.Count > 0)
-            {
-
-                NumberOfRows = resultRows.Count;
-                ResponsesTotalsize = (int)resultRows.Select(x => x.TemplateXMLSize).Sum();
-
-                AvgResponseSize = (int)resultRows.Select(x => x.TemplateXMLSize).Average();
-
-
-                NumberOfResponsPerPage = (int)Math.Ceiling((ResponseMaxSize / 2) / AvgResponseSize);
-
-
-                result.PageSize = (int)Math.Ceiling(NumberOfResponsPerPage);
-                result.NumberOfPages = (int)Math.Ceiling(NumberOfRows / NumberOfResponsPerPage);
-            }
-                return result;
+           
+            return resultRows;
            
 
         }
@@ -331,34 +310,17 @@ namespace Epi.Web.EF
         /// </summary>
         /// <param name="SurveyInfoId">Unique SurveyInfo identifier.</param>
         /// <returns>PageInfoBO.</returns>
-        public PageInfoBO GetSurveySizeInfo(List<string> SurveyInfoIdList, DateTime pClosingDate,string Okey, int pSurveyType = -1, int PageNumber = -1, int PageSize = -1, int ResponseMaxSize = -1)
+        public List<SurveyInfoBO> GetSurveySizeInfo(List<string> SurveyInfoIdList, DateTime pClosingDate, string Okey, int pSurveyType = -1, int PageNumber = -1, int PageSize = -1, int ResponseMaxSize = -1)
         {
 
-            PageInfoBO result = new PageInfoBO();
+           
 
             List<SurveyInfoBO> resultRows =  GetSurveyInfo(SurveyInfoIdList, pClosingDate,Okey, pSurveyType, PageNumber, PageSize);
 
-            int NumberOfRows = 0;
-            int ResponsesTotalsize = 0;
-            decimal AvgResponseSize = 0;
-            decimal NumberOfResponsPerPage = 0;
-
-            if (resultRows.Count > 0)
-            {
-                NumberOfRows = resultRows.Count;
-                ResponsesTotalsize = (int)resultRows.Select(x => x.TemplateXMLSize).Sum();
-
-                AvgResponseSize = (int)resultRows.Select(x => x.TemplateXMLSize).Average();
-                NumberOfResponsPerPage = (int)Math.Ceiling((ResponseMaxSize / 2) / AvgResponseSize);
-
-
-                result.PageSize = (int)Math.Ceiling(NumberOfResponsPerPage);
-                result.NumberOfPages = (int)Math.Ceiling(NumberOfRows / NumberOfResponsPerPage);
-            }
             
 
 
-            return result;
+            return resultRows;
         }
 
         private static int CompareByDateCreated(SurveyInfoBO x, SurveyInfoBO y)
