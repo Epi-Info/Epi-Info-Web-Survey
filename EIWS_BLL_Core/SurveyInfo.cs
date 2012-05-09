@@ -51,9 +51,15 @@ namespace Epi.Web.BLL
         }
 
         public PageInfoBO GetSurveySizeInfo(List<string> pIdList, int pResponseMaxSize = -1)
-        {
-            PageInfoBO result = this.SurveyInfoDao.GetSurveySizeInfo(pIdList, -1, -1, pResponseMaxSize);
+        { 
+            List<SurveyInfoBO> SurveyInfoBOList = this.SurveyInfoDao.GetSurveySizeInfo(pIdList, -1, -1, pResponseMaxSize);
+
+            PageInfoBO result = new PageInfoBO();
+
+            result = Epi.Web.BLL.Common.GetSurveySizeById(SurveyInfoBOList, pResponseMaxSize);
             return result;
+
+
         }
 
 
@@ -83,8 +89,16 @@ namespace Epi.Web.BLL
         }
         public PageInfoBO GetSurveySizeInfo(List<string> SurveyInfoIdList, DateTime pClosingDate, string Okey, int pSurveyType = -1, int pPageNumber = -1, int pPageSize = -1, int pResponseMaxSize = -1)
         {
-            PageInfoBO result = this.SurveyInfoDao.GetSurveySizeInfo(SurveyInfoIdList, pClosingDate, Okey,pSurveyType, pPageNumber, pPageSize, pResponseMaxSize);
+             
+
+
+            List<SurveyInfoBO> SurveyInfoBOList = this.SurveyInfoDao.GetSurveySizeInfo(SurveyInfoIdList, pClosingDate, Okey, pSurveyType, pPageNumber, pPageSize, pResponseMaxSize);
+
+            PageInfoBO result = new PageInfoBO();
+
+            result = Epi.Web.BLL.Common.GetSurveySizeById(SurveyInfoBOList, pResponseMaxSize);
             return result;
+
         }
       
         public SurveyInfoBO InsertSurveyInfo(SurveyInfoBO pValue)
