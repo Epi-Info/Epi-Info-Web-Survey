@@ -110,22 +110,20 @@ namespace Epi.Web.WCF.SurveyService
                 Epi.Web.Interfaces.DataInterfaces.IOrganizationDao surveyInfoDao1 = entityDaoFactory1;
 
                 Epi.Web.BLL.Organization implementation1 = new Epi.Web.BLL.Organization(surveyInfoDao1);
-                string EncryptedKey = Cryptography.Encrypt(pRequest.Criteria.OrganizationKey.ToString());
-                
-               bool ISValidOrg = implementation1.ValidateOrganization(EncryptedKey);
+                bool ISValidOrg = implementation1.ValidateOrganization(pRequest.Criteria.OrganizationKey.ToString());
 
            if (ISValidOrg)
                 {
                     if (pRequest.Criteria.ReturnSizeInfoOnly == true)
                     {
                         // add BandwidthUsageFactor
-                        PageInfoBO PageInfoBO = implementation.GetSurveySizeInfo(SurveyIdList, criteria.ClosingDate, Cryptography.Encrypt(criteria.OrganizationKey.ToString()), BandwidthUsageFactor, criteria.SurveyType, criteria.PageNumber, criteria.PageSize, ResponseMaxSize);
+                        PageInfoBO PageInfoBO = implementation.GetSurveySizeInfo(SurveyIdList, criteria.ClosingDate, criteria.OrganizationKey.ToString(), BandwidthUsageFactor, criteria.SurveyType, criteria.PageNumber, criteria.PageSize, ResponseMaxSize);
                         result.PageSize = PageInfoBO.PageSize;
                         result.NumberOfPages = PageInfoBO.NumberOfPages;
                     }
                     else
                     {
-                        SurveyBOList = implementation.GetSurveyInfo(SurveyIdList, criteria.ClosingDate, Cryptography.Encrypt(criteria.OrganizationKey.ToString()), criteria.SurveyType, criteria.PageNumber, criteria.PageSize);//Default 
+                        SurveyBOList = implementation.GetSurveyInfo(SurveyIdList, criteria.ClosingDate, criteria.OrganizationKey.ToString(), criteria.SurveyType, criteria.PageNumber, criteria.PageSize);//Default 
                         foreach (SurveyInfoBO surveyInfoBO in SurveyBOList)
                         {
 
@@ -264,8 +262,8 @@ namespace Epi.Web.WCF.SurveyService
                 Epi.Web.Interfaces.DataInterfaces.IOrganizationDao surveyInfoDao1 = entityDaoFactory1;
 
                 Epi.Web.BLL.Organization implementation1 = new Epi.Web.BLL.Organization(surveyInfoDao1);
-                string EncryptedKey = Cryptography.Encrypt(pRequest.Criteria.OrganizationKey.ToString());
-                bool ISValidOrg = implementation1.ValidateOrganization(EncryptedKey);
+                
+                bool ISValidOrg = implementation1.ValidateOrganization(pRequest.Criteria.OrganizationKey.ToString());
 
 
                 
@@ -298,12 +296,12 @@ namespace Epi.Web.WCF.SurveyService
                     //List<string> SurveyIdList = new List<string>();
 
                     //SurveyIdList.Add(criteria.SurveyId);
-                    string orgkeyencrypted = Cryptography.Encrypt(criteria.OrganizationKey.ToString());
+                   
 
                     bool validSurvey = false;
                    // if (string.IsNullOrEmpty(criteria.SurveyId.ToString()))
                    // {
-                        validSurvey = SurveyInfo.IsSurveyInfoValidByOrgKeyAndPublishKey(criteria.SurveyId, orgkeyencrypted, criteria.UserPublishKey);
+                    validSurvey = SurveyInfo.IsSurveyInfoValidByOrgKeyAndPublishKey(criteria.SurveyId, criteria.OrganizationKey.ToString(), criteria.UserPublishKey);
 
                     //}
 
@@ -552,7 +550,7 @@ namespace Epi.Web.WCF.SurveyService
 
         public OrganizationResponse GetOrganization(OrganizationRequest request)
         {
-            string AdmiKey = Cryptography.Decrypt(ConfigurationManager.AppSettings["AdminKey"]);
+            string AdmiKey = ConfigurationManager.AppSettings["AdminKey"];
 
             try
             {
@@ -599,7 +597,7 @@ namespace Epi.Web.WCF.SurveyService
 
         public OrganizationResponse GetOrganizationInfo(OrganizationRequest request)
         {
-            string AdmiKey = Cryptography.Decrypt(ConfigurationManager.AppSettings["AdminKey"]);
+            string AdmiKey =  ConfigurationManager.AppSettings["AdminKey"] ;
 
             try
             {
@@ -649,7 +647,7 @@ namespace Epi.Web.WCF.SurveyService
 
         public OrganizationResponse GetOrganizationNames(OrganizationRequest request)
         {
-            string AdmiKey = Cryptography.Decrypt(ConfigurationManager.AppSettings["AdminKey"]);
+            string AdmiKey =  ConfigurationManager.AppSettings["AdminKey"] ;
 
             try
             {
@@ -702,7 +700,7 @@ namespace Epi.Web.WCF.SurveyService
           
             try
             {
-               string  AdmiKey = Cryptography.Decrypt(ConfigurationManager.AppSettings["AdminKey"]);
+               string  AdmiKey =  ConfigurationManager.AppSettings["AdminKey"] ;
                
                 Epi.Web.Interfaces.DataInterfaces.IOrganizationDao IOrganizationDao = new EF.EntityOrganizationDao();
                 Epi.Web.BLL.Organization Implementation = new Epi.Web.BLL.Organization(IOrganizationDao);
@@ -741,7 +739,7 @@ namespace Epi.Web.WCF.SurveyService
 
         public OrganizationResponse GetOrganizationByKey(OrganizationRequest request)
         {
-            string AdmiKey = Cryptography.Decrypt(ConfigurationManager.AppSettings["AdminKey"]);
+            string AdmiKey =  ConfigurationManager.AppSettings["AdminKey"] ;
 
             try
             {
@@ -792,7 +790,7 @@ namespace Epi.Web.WCF.SurveyService
 
             try
             {
-                string AdmiKey = Cryptography.Decrypt(ConfigurationManager.AppSettings["AdminKey"]);
+                string AdmiKey =  ConfigurationManager.AppSettings["AdminKey"] ;
 
                 Epi.Web.Interfaces.DataInterfaces.IOrganizationDao IOrganizationDao = new EF.EntityOrganizationDao();
                 Epi.Web.BLL.Organization Implementation = new Epi.Web.BLL.Organization(IOrganizationDao);
