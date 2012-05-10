@@ -82,14 +82,21 @@ IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[
 ALTER TABLE [dbo].[SurveyMetaData] DROP CONSTRAINT [FK_SurveyMetaData_lk_SurveyType]
 GO
 
-IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_SurveyMetaData_SurveySecurityKey]') AND parent_object_id = OBJECT_ID(N'[dbo].[SurveyMetaData]'))
-ALTER TABLE [dbo].[SurveyMetaData] DROP CONSTRAINT [FK_SurveyMetaData_SurveySecurityKey]
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_SurveyMetaData_Organization]') AND parent_object_id = OBJECT_ID(N'[dbo].[SurveyMetaData]'))
+ALTER TABLE [dbo].[SurveyMetaData] DROP CONSTRAINT [FK_SurveyMetaData_Organization]
+GO
+
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_SurveyMetaData_DateCreated]') AND type = 'D')
+BEGIN
+ALTER TABLE [dbo].[SurveyMetaData] DROP CONSTRAINT [DF_SurveyMetaData_DateCreated]
+END
+
 GO
 
 USE [OSELS_EIWS]
 GO
 
-/****** Object:  Table [dbo].[SurveyMetaData]    Script Date: 04/20/2012 11:26:33 ******/
+/****** Object:  Table [dbo].[SurveyMetaData]    Script Date: 05/10/2012 14:53:15 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[SurveyMetaData]') AND type in (N'U'))
 DROP TABLE [dbo].[SurveyMetaData]
 GO
@@ -97,7 +104,7 @@ GO
 USE [OSELS_EIWS]
 GO
 
-/****** Object:  Table [dbo].[SurveyMetaData]    Script Date: 04/20/2012 11:26:33 ******/
+/****** Object:  Table [dbo].[SurveyMetaData]    Script Date: 05/10/2012 14:53:15 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -117,7 +124,8 @@ CREATE TABLE [dbo].[SurveyMetaData](
 	[ExitText] [nvarchar](max) NULL,
 	[UserPublishKey] [uniqueidentifier] NULL,
 	[TemplateXMLSize] [bigint] NULL,
-	[SecurityKey] [uniqueidentifier] NULL,
+	[DateCreated] [datetime2](7) NOT NULL,
+	[OrganizationId] [int] NULL,
  CONSTRAINT [PK_SurveyMetaData] PRIMARY KEY CLUSTERED 
 (
 	[SurveyId] ASC
@@ -133,11 +141,14 @@ GO
 ALTER TABLE [dbo].[SurveyMetaData] CHECK CONSTRAINT [FK_SurveyMetaData_lk_SurveyType]
 GO
 
-ALTER TABLE [dbo].[SurveyMetaData]  WITH CHECK ADD  CONSTRAINT [FK_SurveyMetaData_SurveySecurityKey] FOREIGN KEY([SecurityKey])
-REFERENCES [dbo].[SurveySecurityKey] ([SecurityKey])
+ALTER TABLE [dbo].[SurveyMetaData]  WITH CHECK ADD  CONSTRAINT [FK_SurveyMetaData_Organization] FOREIGN KEY([OrganizationId])
+REFERENCES [dbo].[Organization] ([OrganizationId])
 GO
 
-ALTER TABLE [dbo].[SurveyMetaData] CHECK CONSTRAINT [FK_SurveyMetaData_SurveySecurityKey]
+ALTER TABLE [dbo].[SurveyMetaData] CHECK CONSTRAINT [FK_SurveyMetaData_Organization]
+GO
+
+ALTER TABLE [dbo].[SurveyMetaData] ADD  CONSTRAINT [DF_SurveyMetaData_DateCreated]  DEFAULT (getdate()) FOR [DateCreated]
 GO
 
 
@@ -164,7 +175,7 @@ GO
 USE [OSELS_EIWS]
 GO
 
-/****** Object:  Table [dbo].[SurveyResponse]    Script Date: 04/20/2012 11:28:21 ******/
+/****** Object:  Table [dbo].[SurveyResponse]    Script Date: 05/10/2012 14:56:37 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[SurveyResponse]') AND type in (N'U'))
 DROP TABLE [dbo].[SurveyResponse]
 GO
@@ -172,7 +183,7 @@ GO
 USE [OSELS_EIWS]
 GO
 
-/****** Object:  Table [dbo].[SurveyResponse]    Script Date: 04/20/2012 11:28:22 ******/
+/****** Object:  Table [dbo].[SurveyResponse]    Script Date: 05/10/2012 14:56:38 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -182,13 +193,13 @@ GO
 CREATE TABLE [dbo].[SurveyResponse](
 	[ResponseId] [uniqueidentifier] NOT NULL,
 	[SurveyId] [uniqueidentifier] NOT NULL,
-	[DateLastUpdated] [datetime2](7) NOT NULL,
+	[DateUpdated] [datetime2](7) NOT NULL,
 	[DateCompleted] [datetime2](7) NULL,
 	[StatusId] [int] NOT NULL,
 	[ResponseXML] [xml] NOT NULL,
 	[ResponsePasscode] [nvarchar](30) NULL,
-	[ResponseXMLSize] [uniqueidentifier] NULL,
-	[SortNumber] [bigint] IDENTITY(1,1) NOT NULL,
+	[ResponseXMLSize] [bigint] NULL,
+	[DateCreated] [datetime2](7) NOT NULL,
  CONSTRAINT [PK_SurveyResponse] PRIMARY KEY CLUSTERED 
 (
 	[ResponseId] ASC
@@ -211,47 +222,49 @@ GO
 ALTER TABLE [dbo].[SurveyResponse] CHECK CONSTRAINT [FK_SurveyResponse_SurveyMetaData]
 GO
 
-ALTER TABLE [dbo].[SurveyResponse] ADD  CONSTRAINT [DF_SurveyResponse_DateLastUpdated]  DEFAULT (getdate()) FOR [DateLastUpdated]
+ALTER TABLE [dbo].[SurveyResponse] ADD  CONSTRAINT [DF_SurveyResponse_DateLastUpdated]  DEFAULT (getdate()) FOR [DateUpdated]
 GO
 
-/************************************************SurveySecurityKey*********************************************************************/
+
+
+/************************************************Organization*********************************************************************/
 
 USE [OSELS_EIWS]
 GO
 
-/****** Object:  Table [dbo].[SurveySecurityKey]    Script Date: 04/20/2012 11:29:51 ******/
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[SurveySecurityKey]') AND type in (N'U'))
-DROP TABLE [dbo].[SurveySecurityKey]
+/****** Object:  Table [dbo].[Organization]    Script Date: 05/10/2012 14:58:20 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Organization]') AND type in (N'U'))
+DROP TABLE [dbo].[Organization]
 GO
 
 USE [OSELS_EIWS]
 GO
 
-/****** Object:  Table [dbo].[SurveySecurityKey]    Script Date: 04/20/2012 11:29:52 ******/
+/****** Object:  Table [dbo].[Organization]    Script Date: 05/10/2012 14:58:20 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
 
-SET ANSI_PADDING ON
-GO
-
-CREATE TABLE [dbo].[SurveySecurityKey](
-	[SecurityKey] [uniqueidentifier] NOT NULL,
-	[UserName] [nvarchar](30) NOT NULL,
-	[Department] [nvarchar](50) NULL,
-	[UserType] [char](10) NULL,
- CONSTRAINT [PK_SurveySecurityKey] PRIMARY KEY CLUSTERED 
+CREATE TABLE [dbo].[Organization](
+	[OrganizationId] [int] IDENTITY(1,1) NOT NULL,
+	[OrganizationKey] [nvarchar](500) NOT NULL,
+	[Organization] [nvarchar](200) NOT NULL,
+	[IsEnabled] [bit] NOT NULL,
+ CONSTRAINT [PK_Organization] PRIMARY KEY CLUSTERED 
 (
-	[SecurityKey] ASC
+	[OrganizationId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY],
+UNIQUE NONCLUSTERED 
+(
+	[Organization] ASC
 )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 
 GO
 
-SET ANSI_PADDING OFF
-GO
+
 
 
 
