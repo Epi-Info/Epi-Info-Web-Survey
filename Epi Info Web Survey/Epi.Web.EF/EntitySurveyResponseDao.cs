@@ -90,6 +90,7 @@ namespace Epi.Web.EF
 
             List<SurveyResponseBO> result = new List<SurveyResponseBO>();
 
+            try {
             foreach (string surveyResponseId in SurveyIdList.Distinct())
             {
                 Guid Id = new Guid(surveyResponseId);
@@ -100,7 +101,11 @@ namespace Epi.Web.EF
                     result.Add(Mapper.Map(Context.SurveyResponses.FirstOrDefault(x => x.SurveyId == Id )));
                 }
             }
-
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
+            }
 
             if (PageNumber > 0 && PageSize > 0)
             {
@@ -163,12 +168,13 @@ namespace Epi.Web.EF
                     }
                     catch (Exception ex)
                     {
-                        // do nothing for now
+                        throw (ex);
                     }
                 }
             }
             else
             {
+                try{
                 using (var Context = DataObjectFactory.CreateContext())
                 {
                     if (!string.IsNullOrEmpty(pSurveyId))
@@ -178,6 +184,11 @@ namespace Epi.Web.EF
                     }
                     
                    
+                }
+                }
+                catch (Exception ex)
+                {
+                    throw (ex);
                 }
             }
 
@@ -247,6 +258,8 @@ namespace Epi.Web.EF
         /// <param name="SurveyResponse">SurveyResponse.</param>
         public  void InsertSurveyResponse(SurveyResponseBO SurveyResponse)
         {
+            try
+            {
             using (var Context = DataObjectFactory.CreateContext() ) 
             {
                 SurveyResponse SurveyResponseEntity = Mapper.ToEF(SurveyResponse);
@@ -254,7 +267,11 @@ namespace Epi.Web.EF
                
                 Context.SaveChanges();
             }
-
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
+            }
              
         }
 
@@ -264,6 +281,7 @@ namespace Epi.Web.EF
         /// <param name="SurveyResponse">SurveyResponse.</param>
         public void UpdateSurveyResponse(SurveyResponseBO SurveyResponse)
         {
+            try{
             Guid Id = new Guid(SurveyResponse.ResponseId);
 
         //Update Survey
@@ -285,6 +303,11 @@ namespace Epi.Web.EF
                 DataRow.ResponseXMLSize = RemoveWhitespace(SurveyResponse.XML).Length; 
                 Context.SaveChanges();
             }
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
+            }
         }
         public static string RemoveWhitespace(string xml)
         {
@@ -295,7 +318,8 @@ namespace Epi.Web.EF
         }
         public void UpdatePassCode(UserAuthenticationRequestBO passcodeBO) {
 
-
+            try 
+            {
             Guid Id = new Guid(passcodeBO.ResponseId);
 
             //Update Survey
@@ -309,6 +333,11 @@ namespace Epi.Web.EF
                 
                 DataRow.ResponsePasscode = passcodeBO.PassCode;
                 Context.SaveChanges();
+            }
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
             }
         }
         public UserAuthenticationResponseBO GetAuthenticationResponse(UserAuthenticationRequestBO UserAuthenticationRequestBO)
