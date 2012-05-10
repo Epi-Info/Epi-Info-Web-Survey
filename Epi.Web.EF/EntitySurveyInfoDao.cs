@@ -25,6 +25,7 @@ namespace Epi.Web.EF
             List<SurveyInfoBO> result = new List<SurveyInfoBO>();
             if (SurveyInfoIdList.Count > 0)
             {
+                try{
                 foreach (string surveyInfoId in SurveyInfoIdList.Distinct())
                 {
                     Guid Id = new Guid(surveyInfoId);
@@ -34,12 +35,23 @@ namespace Epi.Web.EF
                         result.Add(Mapper.Map(Context.SurveyMetaDatas.FirstOrDefault(x => x.SurveyId == Id)));
                     }
                 }
+                }
+                catch (Exception ex)
+                {
+                    throw (ex);
+                }
             }
             else
             {
+                try{
                 using (var Context = DataObjectFactory.CreateContext())
                 {
                     result = Mapper.Map(Context.SurveyMetaDatas.ToList());
+                }
+                }
+                catch (Exception ex)
+                {
+                    throw (ex);
                 }
             }
 
@@ -79,23 +91,32 @@ namespace Epi.Web.EF
             List<SurveyMetaData> responseList = new List<SurveyMetaData>();
 
             int  OrganizationId =0;
-
+            try {
             using (var Context = DataObjectFactory.CreateContext())
             {
                
                 OrganizationId =  Context.Organizations.FirstOrDefault(x => x.OrganizationKey == Okey).OrganizationId;
             }
-
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
+            }
 
             if (SurveyInfoIdList.Count > 0)
             {
                 foreach (string surveyInfoId in SurveyInfoIdList.Distinct())
                 {
                     Guid Id = new Guid(surveyInfoId);
-
-                    using (var Context = DataObjectFactory.CreateContext())
+                    try{
+                            using (var Context = DataObjectFactory.CreateContext())
+                            {
+                                responseList.Add(Context.SurveyMetaDatas.FirstOrDefault(x => x.SurveyId == Id && x.OrganizationId == OrganizationId));
+                            }
+                    }
+                    catch (Exception ex)
                     {
-                        responseList.Add(Context.SurveyMetaDatas.FirstOrDefault(x => x.SurveyId == Id && x.OrganizationId == OrganizationId));
+                        throw (ex);
                     }
                 }
             }
@@ -181,24 +202,34 @@ namespace Epi.Web.EF
             List<SurveyMetaData> responseList = new List<SurveyMetaData>();
 
             int OrganizationId = 0;
-
+            try{
             using (var Context = DataObjectFactory.CreateContext())
             {
 
                 OrganizationId = Context.Organizations.FirstOrDefault(x => x.OrganizationKey == Okey).OrganizationId;
             }
-
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
+            }
             if (!string.IsNullOrEmpty(SurveyId))
             {
+                try{
                  Guid Id = new Guid(SurveyId);
                 using (var Context = DataObjectFactory.CreateContext())
                     {
                         responseList.Add(Context.SurveyMetaDatas.FirstOrDefault(x => x.SurveyId == Id && x.OrganizationId == OrganizationId && x.UserPublishKey == publishKey));
                         result = Mapper.Map(responseList);
-                     } 
+                     }
+                }
+                catch (Exception ex)
+                {
+                    throw (ex);
+                }
             }
 
-             
+            
                 
            
             return result;
@@ -218,26 +249,34 @@ namespace Epi.Web.EF
         public  void InsertSurveyInfo(SurveyInfoBO SurveyInfo)
         {
            int OrganizationId = 0;
-            using (var Context = DataObjectFactory.CreateContext() ) 
+           try
+           {
+               using (var Context = DataObjectFactory.CreateContext())
+               {
+
+                   //retrieve OrganizationId based on OrganizationKey
+                   using (var ContextOrg = DataObjectFactory.CreateContext())
+                   {
+                       string OrgKey = Epi.Web.Common.Security.Cryptography.Encrypt(SurveyInfo.OrganizationKey.ToString());
+                       OrganizationId = ContextOrg.Organizations.FirstOrDefault(x => x.OrganizationKey == OrgKey).OrganizationId;
+                   }
+
+
+
+                   SurveyInfo.TemplateXMLSize = RemoveWhitespace(SurveyInfo.XML).Length;
+                   SurveyInfo.DateCreated = DateTime.Now;
+
+                   var SurveyMetaDataEntity = Mapper.Map(SurveyInfo);
+                   SurveyMetaDataEntity.OrganizationId = OrganizationId;
+                   Context.AddToSurveyMetaDatas(SurveyMetaDataEntity);
+
+                   Context.SaveChanges();
+               }
+            
+              }
+            catch (Exception ex)
             {
-
-                //retrieve OrganizationId based on OrganizationKey
-                using (var ContextOrg = DataObjectFactory.CreateContext())
-                {
-                    string OrgKey = Epi.Web.Common.Security.Cryptography.Encrypt(SurveyInfo.OrganizationKey.ToString());
-                    OrganizationId = ContextOrg.Organizations.FirstOrDefault(x => x.OrganizationKey == OrgKey).OrganizationId;
-                }
-
-
-                
-                SurveyInfo.TemplateXMLSize = RemoveWhitespace(SurveyInfo.XML).Length;
-                SurveyInfo.DateCreated = DateTime.Now;
-                
-                var SurveyMetaDataEntity = Mapper.Map(SurveyInfo);
-                SurveyMetaDataEntity.OrganizationId = OrganizationId;
-                Context.AddToSurveyMetaDatas(SurveyMetaDataEntity);
-               
-                Context.SaveChanges();
+                throw (ex);
             }
         }
 
@@ -247,6 +286,7 @@ namespace Epi.Web.EF
         /// <param name="SurveyInfo">SurveyInfo.</param>
         public void UpdateSurveyInfo(SurveyInfoBO SurveyInfo)
         { 
+            try{
             Guid Id = new Guid(SurveyInfo.SurveyId);
 
             //Update Survey
@@ -272,7 +312,11 @@ namespace Epi.Web.EF
                 Context.SaveChanges();
             }
 
-        
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
+            }
         }
 
         /// <summary>
