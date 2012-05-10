@@ -27,7 +27,7 @@ namespace Epi.Web.EF
         {
 
            List<OrganizationBO> OrganizationBO = new  List<OrganizationBO>();
-
+            try{
            using (var Context = DataObjectFactory.CreateContext())
            {
                var Query = from response in Context.Organizations
@@ -42,6 +42,11 @@ namespace Epi.Web.EF
                
                }
            }
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
+            }
             return OrganizationBO;
         }
 
@@ -50,7 +55,7 @@ namespace Epi.Web.EF
         {
 
             List<OrganizationBO> OrganizationBO = new List<OrganizationBO>();
-
+            try{
             using (var Context = DataObjectFactory.CreateContext())
             {
                var Query = (from response in Context.Organizations
@@ -66,6 +71,11 @@ namespace Epi.Web.EF
 
                 }
             }
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
+            }
             return OrganizationBO;
         }
 
@@ -74,7 +84,7 @@ namespace Epi.Web.EF
         {
 
              OrganizationBO OrganizationBO = new  OrganizationBO ();
-
+            try{
             using (var Context = DataObjectFactory.CreateContext())
             {
                 var Query = (from response in Context.Organizations
@@ -90,13 +100,18 @@ namespace Epi.Web.EF
                 }
                  
             }
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
+            }
             return OrganizationBO;
         }
         public List<OrganizationBO> GetOrganizationNames()
         {
 
             List<OrganizationBO> OrganizationBO = new List<OrganizationBO>();
-
+            try{
             using (var Context = DataObjectFactory.CreateContext())
             {
                 var Query = (from response in Context.Organizations
@@ -112,6 +127,11 @@ namespace Epi.Web.EF
 
                 }
             }
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
+            }
             return OrganizationBO;
         }
 
@@ -120,7 +140,7 @@ namespace Epi.Web.EF
         {
 
             List<OrganizationBO> OrganizationBO = new List<OrganizationBO>();
-
+            try{
             using (var Context = DataObjectFactory.CreateContext())
             {
                 var Query = (from response in Context.Organizations
@@ -137,6 +157,11 @@ namespace Epi.Web.EF
 
                 }
             }
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
+            }
             return OrganizationBO;
         }
 
@@ -149,6 +174,7 @@ namespace Epi.Web.EF
         /// <param name="Organization">Organization.</param>
         public  void InsertOrganization(OrganizationBO Organization)
         {
+            try{
             using (var Context = DataObjectFactory.CreateContext())
             {
                 Organization OrganizationEntity = Mapper.ToEF(Organization);
@@ -156,7 +182,11 @@ namespace Epi.Web.EF
 
                 Context.SaveChanges();
             }
-
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
+            }
              
         }
 
@@ -168,6 +198,7 @@ namespace Epi.Web.EF
         {
        
         ////Update Survey
+            try{
             using (var Context = DataObjectFactory.CreateContext())
             {
                 var Query = from response in Context.Organizations
@@ -179,6 +210,11 @@ namespace Epi.Web.EF
               
                 DataRow.IsEnabled =  Organization.IsEnabled ;
                 Context.SaveChanges();
+            }
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
             }
         }
      
