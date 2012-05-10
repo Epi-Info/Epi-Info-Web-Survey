@@ -4,7 +4,7 @@ GO
 /****** Object:  Table [dbo].[lk_Status]    Script Date: 02/07/2012 15:39:59 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[lk_Status]') AND type in (N'U'))
 DROP TABLE [dbo].[lk_Status]
-GO
+GO 
 
 USE [OSELS_EIWS]
 GO
