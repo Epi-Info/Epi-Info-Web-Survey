@@ -226,6 +226,8 @@
     <Content Include="Scripts\jquery-ui-1.8.11.js" />
     <Content Include="Scripts\jquery-ui-1.8.11.min.js" />
     <Content Include="Scripts\jquery-ui-1.8.16.custom.min.js" />
+    <Content Include="Scripts\jquery-ui-sliderAccess.js" />
+    <Content Include="Scripts\jquery-ui-timepicker-addon.js" />
     <Content Include="Scripts\jquery.bgiframe-2.1.2.js" />
     <Content Include="Scripts\jquery.Epi.Survey.Components.js" />
     <Content Include="Scripts\jquery.number_format.js" />
