@@ -146,6 +146,11 @@ namespace Epi.Web.MVC.Utility
                                 //                                             pName, pType, pSource
                                 //VariableDefinitions.AppendLine(string.Format(defineNumberFormat, _FieldTypeID.Attribute("Name").Value, "number", "datasource", Value)); 
                                 break;
+                            case "8": //TimePicker
+                                 var _timePickerValue = Value;
+                                form.AddFields(GetTimePicker(_FieldTypeID, _Width, _Height, SurveyAnswer, _timePickerValue));
+
+                                break;
                             case "10"://CheckBox
 
                                 var _CheckBoxValue = Value;
@@ -554,6 +559,44 @@ namespace Epi.Web.MVC.Utility
             return DatePicker;
 
         }
+
+        private static TimePicker GetTimePicker(XElement _FieldTypeID, double _Width, double _Height, string SurveyAnswer, string _ControlValue)
+        {
+
+            var TimePicker = new TimePicker
+            {
+                Title = _FieldTypeID.Attribute("Name").Value,
+                Prompt = _FieldTypeID.Attribute("PromptText").Value,
+                DisplayOrder = int.Parse(_FieldTypeID.Attribute("TabIndex").Value),
+                Required = _FieldTypeID.Attribute("IsRequired").Value == "True" ? true : false,
+                //RequiredMessage = _FieldTypeID.Attribute("PromptText").Value + " is required",
+                RequiredMessage = "This field is required",
+                Key = _FieldTypeID.Attribute("Name").Value,
+                PromptTop = _Height * double.Parse(_FieldTypeID.Attribute("PromptTopPositionPercentage").Value),
+                PromptLeft = _Width * double.Parse(_FieldTypeID.Attribute("PromptLeftPositionPercentage").Value),
+                Top = _Height * double.Parse(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value),
+                Left = _Width * double.Parse(_FieldTypeID.Attribute("ControlLeftPositionPercentage").Value),
+                PromptWidth = _Width * double.Parse(_FieldTypeID.Attribute("ControlWidthPercentage").Value),
+                ControlWidth = _Width * double.Parse(_FieldTypeID.Attribute("ControlWidthPercentage").Value),
+                fontstyle = _FieldTypeID.Attribute("PromptFontStyle").Value,
+                fontSize = double.Parse(_FieldTypeID.Attribute("PromptFontSize").Value),
+                fontfamily = _FieldTypeID.Attribute("PromptFontFamily").Value,
+                IsRequired = bool.Parse(_FieldTypeID.Attribute("IsRequired").Value),
+                IsReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value),
+                Lower = _FieldTypeID.Attribute("Lower").Value,
+                Upper = _FieldTypeID.Attribute("Upper").Value,
+                Value = _ControlValue,
+                IsHidden = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "HiddenFieldsList"),
+                IsHighlighted = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "HighlightedFieldsList"),
+                IsDisabled = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "DisabledFieldsList"),
+                Pattern = _FieldTypeID.Attribute("Pattern").Value
+
+            };
+            return TimePicker;
+
+        }
+
+
         private static Select GetDropDown(XElement _FieldTypeID, double _Width, double _Height, string SurveyAnswer, string _ControlValue, string DropDownValues, int FieldTypeId)
         {
                         

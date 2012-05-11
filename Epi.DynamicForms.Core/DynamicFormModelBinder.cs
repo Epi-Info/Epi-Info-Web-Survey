@@ -39,6 +39,11 @@ namespace MvcDynamicForms
                     var datepickerField = (DatePickerField)dynField;
                     datepickerField.Value = postedForm[key];
                 }
+                else if (dynField is TimePickerField)
+                {
+                    var timepickerField = (TimePickerField)dynField;
+                    timepickerField.Value = postedForm[key];
+                }
 
                 else if (dynField is ListField)
                 {
