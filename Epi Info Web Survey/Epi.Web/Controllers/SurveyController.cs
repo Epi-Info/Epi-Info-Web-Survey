@@ -9,6 +9,7 @@ using System.Xml.Linq;
 using System.Xml.XPath;
 using Epi.Core.EnterInterpreter;
 using System.Web.Security;
+using System.Text.RegularExpressions;
 namespace Epi.Web.MVC.Controllers
 {
         [Authorize]
@@ -44,44 +45,48 @@ namespace Epi.Web.MVC.Controllers
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")] 
         public ActionResult Index(string responseId, int PageNumber = 0)
         {
-
-
             try
             {
-                 
-               
-                Epi.Web.Common.DTO.SurveyAnswerDTO surveyAnswerDTO = GetSurveyAnswer(responseId);
-                SurveyInfoModel surveyInfoModel = _isurveyFacade.GetSurveyInfoModel(surveyAnswerDTO.SurveyId);
-                PreValidationResultEnum ValidationTest = PreValidateResponse(Mapper.ToSurveyAnswerModel(surveyAnswerDTO), surveyInfoModel);
-                if (PageNumber == 0)
-                {
-                    PageNumber = GetSurveyPageNumber(surveyAnswerDTO.XML.ToString());
 
-                }
-                else { 
-                
-                
-                }
-                
-
-                switch(ValidationTest)
+                if (!IsGuid(responseId))
                 {
-                    case PreValidationResultEnum.SurveyIsPastClosingDate:
-                        return View("SurveyClosedError");
-                    case PreValidationResultEnum.SurveyIsAlreadyCompleted:
-                        return View("IsSubmitedError");
-                    case PreValidationResultEnum.Success:
-                    default:
-                        var form = _isurveyFacade.GetSurveyFormData(surveyAnswerDTO.SurveyId, PageNumber, surveyAnswerDTO);
-                        // if redirect then perform server validation before displaying
-                        if (TempData.ContainsKey("isredirect") && !string.IsNullOrWhiteSpace(TempData["isredirect"].ToString()))
-                        {
-                            form.Validate();
-                        }
-                        this.SetCurrentPage(surveyAnswerDTO, PageNumber);
-                        return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
+                    return View(Epi.Web.MVC.Constants.Constant.EXCEPTION_PAGE);
                 }
-            }
+
+                    Epi.Web.Common.DTO.SurveyAnswerDTO surveyAnswerDTO = GetSurveyAnswer(responseId);
+                    SurveyInfoModel surveyInfoModel = _isurveyFacade.GetSurveyInfoModel(surveyAnswerDTO.SurveyId);
+                    PreValidationResultEnum ValidationTest = PreValidateResponse(Mapper.ToSurveyAnswerModel(surveyAnswerDTO), surveyInfoModel);
+                    if (PageNumber == 0)
+                    {
+                        PageNumber = GetSurveyPageNumber(surveyAnswerDTO.XML.ToString());
+
+                    }
+                    else
+                    {
+
+
+                    }
+
+
+                    switch (ValidationTest)
+                    {
+                        case PreValidationResultEnum.SurveyIsPastClosingDate:
+                            return View("SurveyClosedError");
+                        case PreValidationResultEnum.SurveyIsAlreadyCompleted:
+                            return View("IsSubmitedError");
+                        case PreValidationResultEnum.Success:
+                        default:
+                            var form = _isurveyFacade.GetSurveyFormData(surveyAnswerDTO.SurveyId, PageNumber, surveyAnswerDTO);
+                            // if redirect then perform server validation before displaying
+                            if (TempData.ContainsKey("isredirect") && !string.IsNullOrWhiteSpace(TempData["isredirect"].ToString()))
+                            {
+                                form.Validate();
+                            }
+                            this.SetCurrentPage(surveyAnswerDTO, PageNumber);
+                            return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
+                    }
+                }
+            
             catch (Exception ex)
             {
                 return View(Epi.Web.MVC.Constants.Constant.EXCEPTION_PAGE);
@@ -455,7 +460,18 @@ namespace Epi.Web.MVC.Controllers
             {
                 return Json(false);
             }
-        } 
+        }
+
+        private bool IsGuid(string expression)
+        {
+            if (expression != null)
+            {
+                Regex guidRegEx = new Regex(@"^(\{{0,1}([0-9a-fA-F]){8}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){12}\}{0,1})$");
+
+                return guidRegEx.IsMatch(expression);
+            }
+            return false;
+        }
 
 
     }
