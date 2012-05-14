@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Epi.Web.Common.BusinessObject;
 using Epi.Web.Common.Criteria;
+using System.Configuration;
 
 
 namespace Epi.Web.BLL
@@ -63,16 +64,17 @@ namespace Epi.Web.BLL
 
         }
         //Validate Admin
-        public bool ValidateAdmin(string AdminKey, OrganizationBO OrganizationBO)
+        public bool ValidateAdmin(string AdminKeyToValidate)
         {
+            string AdminKey = ConfigurationManager.AppSettings["AdminKey"];
             string EncryptedAdminKey = Epi.Web.Common.Security.Cryptography.Decrypt(AdminKey);
            
             bool ISValidUser = false;
 
-            if (!string.IsNullOrEmpty(EncryptedAdminKey) && !string.IsNullOrEmpty(OrganizationBO.AdminId.ToString()))
+            if (!string.IsNullOrEmpty(EncryptedAdminKey) && !string.IsNullOrEmpty(AdminKeyToValidate))
             {
 
-                if (EncryptedAdminKey == OrganizationBO.AdminId.ToString())
+                if (EncryptedAdminKey == AdminKeyToValidate)
                 {
                     ISValidUser = true;
 
