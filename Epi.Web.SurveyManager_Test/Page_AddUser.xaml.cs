@@ -71,7 +71,8 @@ namespace Epi.Web.SurveyManager.Client
                             Request.Organization.IsEnabled = true;
                             Request.Organization.AdminId = new Guid(passwordBox1.Password);
                             Request.Organization.Organization = OrganizationtextBox1.Text;
-                            Request.Organization.OrganizationKey = Cryptography.Encrypt(this.GeneratedkeytextBox1.Text);
+                            //Request.Organization.OrganizationKey = Cryptography.Encrypt(this.GeneratedkeytextBox1.Text);
+                            Request.Organization.OrganizationKey =  this.GeneratedkeytextBox1.Text.ToString();
                             Epi.Web.Common.Message.OrganizationResponse Result = client.SetOrganization(Request);
                             MessagerichTextBox1.Document.Blocks.Clear();
                             OrganizationtextBox1.Clear();
@@ -156,8 +157,8 @@ namespace Epi.Web.SurveyManager.Client
                                 for (int i = 0; i < Result.OrganizationList.Count; i++)
                                 {
 
-                                    EditOtextBox1.Text = Cryptography.Decrypt(Result.OrganizationList[i].OrganizationKey.ToString());
-
+                                   // EditOtextBox1.Text = Cryptography.Decrypt(Result.OrganizationList[i].OrganizationKey.ToString());
+                                    EditOtextBox1.Text = Result.OrganizationList[i].OrganizationKey.ToString() ;
                                     this.ONameEditTextBox1.Text = Result.OrganizationList[i].Organization;
                                     this.checkBox1.IsChecked = Result.OrganizationList[i].IsEnabled;
                                 }
@@ -290,7 +291,8 @@ namespace Epi.Web.SurveyManager.Client
                             }
                             Request.Organization.AdminId = new Guid(passwordBox1.Password);
                             Request.Organization.Organization = ONameEditTextBox1.Text;
-                            Request.Organization.OrganizationKey = Cryptography.Encrypt(EditOtextBox1.Text);
+                            //Request.Organization.OrganizationKey = Cryptography.Encrypt(EditOtextBox1.Text);
+                            Request.Organization.OrganizationKey =  EditOtextBox1.Text.ToString() ;
                             Epi.Web.Common.Message.OrganizationResponse Result = client.UpdateOrganizationInfo(Request);
                            
                            
