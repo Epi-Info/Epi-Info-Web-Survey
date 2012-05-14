@@ -20,7 +20,7 @@ namespace Epi.Web.BLL
 
         public OrganizationBO GetOrganizationByKey(string OrganizationKey)
         {
-
+            OrganizationKey = Epi.Web.Common.Security.Cryptography.Encrypt(OrganizationKey);
             OrganizationBO result = this.OrganizationDao.GetOrganizationInfoByKey(OrganizationKey);
             return result;
         }
@@ -28,6 +28,13 @@ namespace Epi.Web.BLL
         {
 
             List<OrganizationBO> result = this.OrganizationDao.GetOrganizationKeys(OrganizationName);
+            foreach (OrganizationBO _result in result)
+            {
+
+                _result.OrganizationKey = Epi.Web.Common.Security.Cryptography.Decrypt(_result.OrganizationKey);
+            
+            }
+
             return result;
         }
         public List<OrganizationBO> GetOrganizationInfo()
@@ -44,13 +51,14 @@ namespace Epi.Web.BLL
         }
         public void InsertOrganizationInfo(OrganizationBO OrganizationBO)
         {
+            OrganizationBO.OrganizationKey = Epi.Web.Common.Security.Cryptography.Encrypt(OrganizationBO.OrganizationKey);
 
             this.OrganizationDao.InsertOrganization(OrganizationBO);
              
         }
         public void UpdateOrganizationInfo(OrganizationBO OrganizationBO)
         {
-
+            OrganizationBO.OrganizationKey = Epi.Web.Common.Security.Cryptography.Encrypt(OrganizationBO.OrganizationKey);
             this.OrganizationDao.UpdateOrganization(OrganizationBO);
 
         }
