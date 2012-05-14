@@ -757,7 +757,9 @@ namespace Epi.Web.WCF.SurveyService
                     if (!ValidRequest(request, response, Validate.All))
                         return response;
 
-                    OrganizationBO OrganizationBO = Implementation.GetOrganizationByKey(Cryptography.Encrypt(Organization.OrganizationKey).ToString());
+                   // OrganizationBO OrganizationBO = Implementation.GetOrganizationByKey(Cryptography.Encrypt(Organization.OrganizationKey).ToString());
+
+                    OrganizationBO OrganizationBO = Implementation.GetOrganizationByKey( Organization.OrganizationKey .ToString());
                     response.OrganizationList = new List<OrganizationDTO>();
 
                     (response.OrganizationList).Add(Mapper.ToDataTransferObjects(OrganizationBO));
