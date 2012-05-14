@@ -11,6 +11,7 @@ using Epi.Web.Common.Criteria;
 using Epi.Web.Common.ObjectMapping;
 using Epi.Web.Common.BusinessObject;
 using Epi.Web.Common.Exception;
+using Epi.Web.BLL;
 
 using System.Configuration;
 using Epi.Web.Common.Security;
@@ -559,7 +560,7 @@ namespace Epi.Web.WCF.SurveyService
                  OrganizationBO Organization = Mapper.ToBusinessObject(request.Organization);
                  var response = new OrganizationResponse(request.RequestId);
 
-                 if (Implementation.ValidateAdmin(request.AdminSecurityKey.ToString()))
+                 if ( Utility.ValidateAdmin(request.AdminSecurityKey.ToString()))
                  {
 
                      // Validate client tag, access token, and user credentials
@@ -605,7 +606,7 @@ namespace Epi.Web.WCF.SurveyService
                 OrganizationBO Organization = Mapper.ToBusinessObject(request.Organization);
                 var response = new OrganizationResponse(request.RequestId);
 
-                if (Implementation.ValidateAdmin(request.AdminSecurityKey.ToString()))
+                if ( Utility.ValidateAdmin(request.AdminSecurityKey.ToString()))
                 {
 
                     // Validate client tag, access token, and user credentials
@@ -653,7 +654,7 @@ namespace Epi.Web.WCF.SurveyService
                 OrganizationBO Organization = Mapper.ToBusinessObject(request.Organization);
                 var response = new OrganizationResponse(request.RequestId);
 
-                if (Implementation.ValidateAdmin(request.AdminSecurityKey.ToString()))
+                if ( Utility.ValidateAdmin(request.AdminSecurityKey.ToString()))
                 {
 
                     // Validate client tag, access token, and user credentials
@@ -702,7 +703,7 @@ namespace Epi.Web.WCF.SurveyService
                 var Organization = Mapper.ToBusinessObject(request.Organization);
                 var response = new OrganizationResponse(request.RequestId);
                 // Validate client tag, access token, and user credentials
-                if (Implementation.ValidateAdmin(request.AdminSecurityKey.ToString()))
+                if ( Utility.ValidateAdmin(request.AdminSecurityKey.ToString()))
                 {
                     
 
@@ -737,11 +738,12 @@ namespace Epi.Web.WCF.SurveyService
             {
                 Epi.Web.Interfaces.DataInterfaces.IOrganizationDao IOrganizationDao = new EF.EntityOrganizationDao();
                 Epi.Web.BLL.Organization Implementation = new Epi.Web.BLL.Organization(IOrganizationDao);
+               
                 // Transform SurveyInfo data transfer object to SurveyInfo business object
                 OrganizationBO Organization = Mapper.ToBusinessObject(request.Organization);
                 var response = new OrganizationResponse(request.RequestId);
 
-                if (Implementation.ValidateAdmin(request.AdminSecurityKey.ToString()))
+                if ( Utility.ValidateAdmin(request.AdminSecurityKey.ToString()))
                 {
 
                     // Validate client tag, access token, and user credentials
@@ -788,7 +790,7 @@ namespace Epi.Web.WCF.SurveyService
                 var Organization = Mapper.ToBusinessObject(request.Organization);
                 var response = new OrganizationResponse(request.RequestId);
                 // Validate client tag, access token, and user credentials
-                if (Implementation.ValidateAdmin(request.AdminSecurityKey.ToString()))
+                if ( Utility.ValidateAdmin(request.AdminSecurityKey.ToString()))
                 {
 
 

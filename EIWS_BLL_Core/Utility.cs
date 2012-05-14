@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Epi.Web.Common.BusinessObject;
+using System.Configuration;
 namespace Epi.Web.BLL
 {
-    public class Common
+    public class Utility
     {
 
         //SurveyResponseBO
@@ -66,8 +67,37 @@ namespace Epi.Web.BLL
 
             return result;
         }
+
+
+
+        //Validate Admin
+        public static bool ValidateAdmin(string AdminKeyToValidate)
+        {
+            string AdminKey = ConfigurationManager.AppSettings["AdminKey"];
+            string EncryptedAdminKey = Epi.Web.Common.Security.Cryptography.Decrypt(AdminKey);
+
+            bool ISValidUser = false;
+
+            if (!string.IsNullOrEmpty(EncryptedAdminKey) && !string.IsNullOrEmpty(AdminKeyToValidate))
+            {
+
+                if (EncryptedAdminKey == AdminKeyToValidate)
+                {
+                    ISValidUser = true;
+
+
+                }
+                else
+                {
+                    ISValidUser = false;
+                }
+            }
+            return ISValidUser;
+        }
+
         
-         
+
+
 
     }
 }
