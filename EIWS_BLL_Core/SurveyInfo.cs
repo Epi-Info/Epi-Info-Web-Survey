@@ -56,7 +56,7 @@ namespace Epi.Web.BLL
 
             PageInfoBO result = new PageInfoBO();
 
-            result = Epi.Web.BLL.Common.GetSurveySize(SurveyInfoBOList,BandwidthUsageFactor, pResponseMaxSize);
+            result = Epi.Web.BLL.Utility.GetSurveySize(SurveyInfoBOList,BandwidthUsageFactor, pResponseMaxSize);
             return result;
 
 
@@ -99,7 +99,7 @@ namespace Epi.Web.BLL
 
             PageInfoBO result = new PageInfoBO();
 
-            result = Epi.Web.BLL.Common.GetSurveySize(SurveyInfoBOList, BandwidthUsageFactor, pResponseMaxSize);
+            result = Epi.Web.BLL.Utility.GetSurveySize(SurveyInfoBOList, BandwidthUsageFactor, pResponseMaxSize);
             return result;
 
         }

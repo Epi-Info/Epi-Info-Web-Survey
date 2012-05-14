@@ -21,9 +21,8 @@ namespace Epi.Web.BLL
 
         public OrganizationBO GetOrganizationByKey(string OrganizationKey)
         {
-            OrganizationKey = Epi.Web.Common.Security.Cryptography.Encrypt(OrganizationKey);
-            OrganizationBO result = this.OrganizationDao.GetOrganizationInfoByKey(OrganizationKey);
-            return result;
+             OrganizationBO result =  GetOrganizationObjByKey(OrganizationKey);
+             return result;
         }
         public List<OrganizationBO> GetOrganizationKey(string OrganizationName)
         {
@@ -63,52 +62,33 @@ namespace Epi.Web.BLL
             this.OrganizationDao.UpdateOrganization(OrganizationBO);
 
         }
-        //Validate Admin
-        public bool ValidateAdmin(string AdminKeyToValidate)
-        {
-            string AdminKey = ConfigurationManager.AppSettings["AdminKey"];
-            string EncryptedAdminKey = Epi.Web.Common.Security.Cryptography.Decrypt(AdminKey);
-           
-            bool ISValidUser = false;
-
-            if (!string.IsNullOrEmpty(EncryptedAdminKey) && !string.IsNullOrEmpty(AdminKeyToValidate))
-            {
-
-                if (EncryptedAdminKey == AdminKeyToValidate)
-                {
-                    ISValidUser = true;
-
-
-                }
-                else
-                {
-                    ISValidUser = false;
-                }
-            }
-            return ISValidUser;
-        }
 
         //Validate Organization
-        public bool ValidateOrganization(string  Key)
+        public bool ValidateOrganization(string Key)
         {
-            string EncryptedKey = Epi.Web.Common.Security.Cryptography.Encrypt(Key);
-            OrganizationBO OrganizationBO =  GetOrganizationByKey(EncryptedKey);
+            //string EncryptedKey = Epi.Web.Common.Security.Cryptography.Encrypt(Key);
+            OrganizationBO OrganizationBO = GetOrganizationObjByKey(Key);
             bool ISValidOrg = false;
 
             if (OrganizationBO != null)
-                {
-                   ISValidOrg = true;
+            {
+                ISValidOrg = true;
 
 
-                }
-                else
-                {
-                    ISValidOrg = false;
-                }
-          
+            }
+            else
+            {
+                ISValidOrg = false;
+            }
+
             return ISValidOrg;
         }
 
-
+        private OrganizationBO GetOrganizationObjByKey(string OrganizationKey)
+        {
+            OrganizationKey = Epi.Web.Common.Security.Cryptography.Encrypt(OrganizationKey);
+            OrganizationBO result = this.OrganizationDao.GetOrganizationInfoByKey(OrganizationKey);
+            return result;
+        }
     }
 }
