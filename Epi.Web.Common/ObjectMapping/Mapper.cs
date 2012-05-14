@@ -44,7 +44,7 @@ namespace Epi.Web.Common.ObjectMapping
                  IsEnabled = pDTO.IsEnabled,
                  Organization = pDTO.Organization,
                  OrganizationKey = pDTO.OrganizationKey,
-                  AdminId = pDTO.AdminId,
+                 // AdminId = pDTO.AdminId,
                   
             };
         }
@@ -54,7 +54,7 @@ namespace Epi.Web.Common.ObjectMapping
 
             return new OrganizationDTO
             {
-                AdminId = pBO.AdminId,
+              //  AdminId = pBO.AdminId,
                 IsEnabled = pBO.IsEnabled,
                 Organization = pBO.Organization,
                 OrganizationKey = pBO.OrganizationKey

@@ -21,5 +21,7 @@ namespace Epi.Web.Common.Message
         /// </summary>
         [DataMember]
         public OrganizationDTO Organization;
+        [DataMember]
+        public Guid AdminSecurityKey;
     }
 }
