@@ -69,7 +69,7 @@ namespace Epi.Web.SurveyManager.Client
                         if (!string.IsNullOrEmpty(GeneratedkeytextBox1.Text.ToString()))
                         {
                             Request.Organization.IsEnabled = true;
-                            Request.Organization.AdminId = new Guid(passwordBox1.Password);
+                            Request.AdminSecurityKey = new Guid(passwordBox1.Password);
                             Request.Organization.Organization = OrganizationtextBox1.Text;
                             //Request.Organization.OrganizationKey = Cryptography.Encrypt(this.GeneratedkeytextBox1.Text);
                             Request.Organization.OrganizationKey =  this.GeneratedkeytextBox1.Text.ToString();
@@ -142,7 +142,7 @@ namespace Epi.Web.SurveyManager.Client
                         if (!string.IsNullOrEmpty(OnamelistBox1.SelectedItem.ToString()))
                         {
                             Request.Organization.Organization = this.OnamelistBox1.SelectedItem.ToString();
-                            Request.Organization.AdminId = new Guid(passwordBox1.Password);
+                            Request.AdminSecurityKey = new Guid(passwordBox1.Password);
                             Epi.Web.Common.Message.OrganizationResponse Result = client.GetOrganization(Request);
                             EditOtextBox1.Clear();
                             ONameEditTextBox1.Clear();
@@ -232,7 +232,7 @@ namespace Epi.Web.SurveyManager.Client
                     if (!string.IsNullOrEmpty(passwordBox1.Password.ToString()) && IsGuid(passwordBox1.Password.ToString()))
                     {
 
-                        Request.Organization.AdminId = new Guid(passwordBox1.Password);
+                        Request.AdminSecurityKey = new Guid(passwordBox1.Password);
                         Request.Organization.OrganizationKey = EditOtextBox1.Text;
                         Epi.Web.Common.Message.OrganizationResponse Result = client.GetOrganizationByKey(Request);
                         if (Result.OrganizationList != null)
@@ -289,7 +289,7 @@ namespace Epi.Web.SurveyManager.Client
                             }else{
                                   Request.Organization.IsEnabled = false;
                             }
-                            Request.Organization.AdminId = new Guid(passwordBox1.Password);
+                            Request.AdminSecurityKey = new Guid(passwordBox1.Password);
                             Request.Organization.Organization = ONameEditTextBox1.Text;
                             //Request.Organization.OrganizationKey = Cryptography.Encrypt(EditOtextBox1.Text);
                             Request.Organization.OrganizationKey =  EditOtextBox1.Text.ToString() ;
@@ -333,7 +333,7 @@ namespace Epi.Web.SurveyManager.Client
                 if (!string.IsNullOrEmpty(passwordBox1.Password.ToString()) && IsGuid(passwordBox1.Password.ToString()))
                 {
 
-                    Request.Organization.AdminId = new Guid(passwordBox1.Password);
+                    Request.AdminSecurityKey = new Guid(passwordBox1.Password);
                     // Epi.Web.Common.Message.OrganizationResponse Result = client.GetOrganizationInfo(Request);
                     Epi.Web.Common.Message.OrganizationResponse Result = client.GetOrganizationNames(Request);
 

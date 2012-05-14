@@ -550,8 +550,7 @@ namespace Epi.Web.WCF.SurveyService
 
         public OrganizationResponse GetOrganization(OrganizationRequest request)
         {
-            string AdmiKey = ConfigurationManager.AppSettings["AdminKey"];
-
+           
             try
             {
                 Epi.Web.Interfaces.DataInterfaces.IOrganizationDao IOrganizationDao = new EF.EntityOrganizationDao();
@@ -560,7 +559,7 @@ namespace Epi.Web.WCF.SurveyService
                  OrganizationBO Organization = Mapper.ToBusinessObject(request.Organization);
                  var response = new OrganizationResponse(request.RequestId);
 
-                 if (Implementation.ValidateAdmin(AdmiKey, Organization))
+                 if (Implementation.ValidateAdmin(request.AdminSecurityKey.ToString()))
                  {
 
                      // Validate client tag, access token, and user credentials
@@ -597,8 +596,7 @@ namespace Epi.Web.WCF.SurveyService
 
         public OrganizationResponse GetOrganizationInfo(OrganizationRequest request)
         {
-            string AdmiKey =  ConfigurationManager.AppSettings["AdminKey"] ;
-
+            
             try
             {
                 Epi.Web.Interfaces.DataInterfaces.IOrganizationDao IOrganizationDao = new EF.EntityOrganizationDao();
@@ -607,7 +605,7 @@ namespace Epi.Web.WCF.SurveyService
                 OrganizationBO Organization = Mapper.ToBusinessObject(request.Organization);
                 var response = new OrganizationResponse(request.RequestId);
 
-                if (Implementation.ValidateAdmin(AdmiKey, Organization))
+                if (Implementation.ValidateAdmin(request.AdminSecurityKey.ToString()))
                 {
 
                     // Validate client tag, access token, and user credentials
@@ -647,9 +645,7 @@ namespace Epi.Web.WCF.SurveyService
 
         public OrganizationResponse GetOrganizationNames(OrganizationRequest request)
         {
-            string AdmiKey =  ConfigurationManager.AppSettings["AdminKey"] ;
-
-            try
+           try
             {
                 Epi.Web.Interfaces.DataInterfaces.IOrganizationDao IOrganizationDao = new EF.EntityOrganizationDao();
                 Epi.Web.BLL.Organization Implementation = new Epi.Web.BLL.Organization(IOrganizationDao);
@@ -657,7 +653,7 @@ namespace Epi.Web.WCF.SurveyService
                 OrganizationBO Organization = Mapper.ToBusinessObject(request.Organization);
                 var response = new OrganizationResponse(request.RequestId);
 
-                if (Implementation.ValidateAdmin(AdmiKey, Organization))
+                if (Implementation.ValidateAdmin(request.AdminSecurityKey.ToString()))
                 {
 
                     // Validate client tag, access token, and user credentials
@@ -699,16 +695,14 @@ namespace Epi.Web.WCF.SurveyService
         {
           
             try
-            {
-               string  AdmiKey =  ConfigurationManager.AppSettings["AdminKey"] ;
-               
+            {                             
                 Epi.Web.Interfaces.DataInterfaces.IOrganizationDao IOrganizationDao = new EF.EntityOrganizationDao();
                 Epi.Web.BLL.Organization Implementation = new Epi.Web.BLL.Organization(IOrganizationDao);
                 // Transform SurveyInfo data transfer object to SurveyInfo business object
                 var Organization = Mapper.ToBusinessObject(request.Organization);
                 var response = new OrganizationResponse(request.RequestId);
                 // Validate client tag, access token, and user credentials
-                if (Implementation.ValidateAdmin(AdmiKey, Organization))
+                if (Implementation.ValidateAdmin(request.AdminSecurityKey.ToString()))
                 {
                     
 
@@ -739,9 +733,7 @@ namespace Epi.Web.WCF.SurveyService
 
         public OrganizationResponse GetOrganizationByKey(OrganizationRequest request)
         {
-            string AdmiKey =  ConfigurationManager.AppSettings["AdminKey"] ;
-
-            try
+           try
             {
                 Epi.Web.Interfaces.DataInterfaces.IOrganizationDao IOrganizationDao = new EF.EntityOrganizationDao();
                 Epi.Web.BLL.Organization Implementation = new Epi.Web.BLL.Organization(IOrganizationDao);
@@ -749,15 +741,13 @@ namespace Epi.Web.WCF.SurveyService
                 OrganizationBO Organization = Mapper.ToBusinessObject(request.Organization);
                 var response = new OrganizationResponse(request.RequestId);
 
-                if (Implementation.ValidateAdmin(AdmiKey, Organization))
+                if (Implementation.ValidateAdmin(request.AdminSecurityKey.ToString()))
                 {
 
                     // Validate client tag, access token, and user credentials
 
                     if (!ValidRequest(request, response, Validate.All))
                         return response;
-
-                   // OrganizationBO OrganizationBO = Implementation.GetOrganizationByKey(Cryptography.Encrypt(Organization.OrganizationKey).ToString());
 
                     OrganizationBO OrganizationBO = Implementation.GetOrganizationByKey( Organization.OrganizationKey .ToString());
                     response.OrganizationList = new List<OrganizationDTO>();
@@ -792,15 +782,13 @@ namespace Epi.Web.WCF.SurveyService
 
             try
             {
-                string AdmiKey =  ConfigurationManager.AppSettings["AdminKey"] ;
-
                 Epi.Web.Interfaces.DataInterfaces.IOrganizationDao IOrganizationDao = new EF.EntityOrganizationDao();
                 Epi.Web.BLL.Organization Implementation = new Epi.Web.BLL.Organization(IOrganizationDao);
                 // Transform SurveyInfo data transfer object to SurveyInfo business object
                 var Organization = Mapper.ToBusinessObject(request.Organization);
                 var response = new OrganizationResponse(request.RequestId);
                 // Validate client tag, access token, and user credentials
-                if (Implementation.ValidateAdmin(AdmiKey, Organization))
+                if (Implementation.ValidateAdmin(request.AdminSecurityKey.ToString()))
                 {
 
 
