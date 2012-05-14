@@ -617,6 +617,11 @@ public System.Collections.Specialized.NameValueCollection GlobalVariables;*/
                         var.ControlType = "datepicker";
                         //JavaScriptVariableDefinitions.AppendLine(string.Format(defineFormat, _FieldTypeID.Attribute("Name").Value, "number", "datasource", var.Expression)); 
                         break;
+                    case "8": //TimePicker
+                        var.DataType = DataType.Time;
+                        var.ControlType = "timepicker";
+
+                        break;
                     case "10"://CheckBox
                         var.DataType = DataType.Boolean;
                         var.ControlType = "checkbox";
@@ -714,6 +719,7 @@ public System.Collections.Specialized.NameValueCollection GlobalVariables;*/
                     case  "codes":
                     case "legalvalues":
                     case "datepicker":
+                    case "timepicker":
                     case "multiline":
                     case "textbox": 
                     default:
