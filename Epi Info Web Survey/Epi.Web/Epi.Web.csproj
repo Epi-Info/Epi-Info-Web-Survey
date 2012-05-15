@@ -263,7 +263,6 @@
     <Content Include="Unity.Mvc3.README.txt" />
     <Content Include="Views\Final\Index.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\Splash.cshtml" />
     <Content Include="Views\Shared\footer.htm" />
     <Content Include="Views\Survey\Index.cshtml" />
     <Content Include="Web.config">
@@ -298,6 +297,7 @@
     <Content Include="Views\Shared\IsSubmitedError.cshtml" />
     <Content Include="Views\Shared\SurveyClosedError.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\Home\Default.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Epi.DynamicForms.Core\Epi.Web.DynamicForms.Core.csproj">
