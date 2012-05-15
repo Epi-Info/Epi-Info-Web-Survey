@@ -29,10 +29,10 @@ namespace Epi.Web.MVC.Controllers
         }
 
 
-        //public ActionResult Splash()
-        //{
-        //    return View("Splash");
-        //}
+        public ActionResult Default()
+        {
+            return View("Default");
+        }
         /// <summary>
         /// Accept SurveyId as parameter, 
         /// 
