@@ -6,8 +6,8 @@
       mc:Ignorable="d" 
       d:DesignHeight="690" d:DesignWidth="630"
 	Title="DownLoad">
-
-    <Grid Height="692" Width="629"  >
+    <ScrollViewer HorizontalScrollBarVisibility="Auto">
+        <Grid Height="692" Width="629"   >
         <RichTextBox Height="59" HorizontalAlignment="Left" HorizontalScrollBarVisibility="Hidden" Margin="71,199,0,0" Name="SurveyInfoResponseTextBox" VerticalAlignment="Top" VerticalScrollBarVisibility="Visible" Width="468" />
         <Label Content="SurveyId" Height="28" HorizontalAlignment="Left" Margin="54,73,0,0" Name="label1" VerticalAlignment="Top" />
         <TextBox Height="23" HorizontalAlignment="Right" Margin="0,73,216,0" Name="SurveyCriteria_SurveyId" Uid="" VerticalAlignment="Top" Width="255" />
@@ -48,6 +48,6 @@
         <Button Click="DownloadSurveyAnswersButton_Click" Content="Download" Height="23" HorizontalAlignment="Left" Margin="473,518,0,0" Name="DownloadSurveyAnswersButton" VerticalAlignment="Top" Width="73" />
         <RichTextBox Height="114" Margin="56,547,83,0" Name="SurveyAnswerResponseTextBox" VerticalAlignment="Top" VerticalScrollBarVisibility="Visible" />
     </Grid>
-        
-  
+
+    </ScrollViewer>
 </Page>
