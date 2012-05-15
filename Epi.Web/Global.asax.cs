@@ -85,11 +85,11 @@ namespace Epi.Web.MVC
 
 
 
-            //routes.MapRoute(
-            //   "Default", // Route name
-            //   "{*url}", // URL with parameters
-            //   new { controller = "Home", action = "Splash", id = UrlParameter.Optional }
-            //  );
+            routes.MapRoute(
+               "Default", // Route name
+               "{*url}", // URL with parameters
+               new { controller = "Home", action = "Default", id = UrlParameter.Optional }
+              );
 
             //routes.MapRoute
             //(
