@@ -7,7 +7,7 @@
       d:DesignHeight="694" d:DesignWidth="631"
 	Title="Page_ManageSurvey">
 
-
+<ScrollViewer HorizontalScrollBarVisibility="Auto">
     <Grid Height="692" Width="629">
         <RichTextBox Height="146" HorizontalAlignment="Left" HorizontalScrollBarVisibility="Hidden" Margin="38,534,0,0" Name="SurveyInfoResponseTextBox" VerticalAlignment="Top" VerticalScrollBarVisibility="Visible" Width="544" />
         <GroupBox Background="#FFC7CBC3" Header="SurveyInfo Criteria" Height="131" HorizontalAlignment="Left" Margin="38,67,0,0" Name="groupBox1" VerticalAlignment="Top" Width="550">
@@ -68,4 +68,5 @@
         <ListBox Height="126" HorizontalAlignment="Left" Margin="38,204,0,0" Name="SearchResultListBox" VerticalAlignment="Top" Width="552" SelectionChanged="SearchResultListBox_SelectionChanged" />
         <Button Content="Add User" Height="30" HorizontalAlignment="Left" Margin="298,27,0,0" Name="AddUser" VerticalAlignment="Top" Width="144" Click="AddUser_click" />
     </Grid>
+    </ScrollViewer>
 </Page>

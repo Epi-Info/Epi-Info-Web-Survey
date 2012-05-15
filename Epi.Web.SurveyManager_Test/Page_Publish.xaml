@@ -6,7 +6,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="804" d:DesignWidth="650"
 	Title="Page_Publish">
-
+<ScrollViewer HorizontalScrollBarVisibility="Auto">
     <Grid Height="807" Width="642">
         <Grid.RowDefinitions>
             <RowDefinition Height="6*" />
@@ -72,4 +72,5 @@
         <Button Content="Manage Existing Surveys" Grid.Column="3" Grid.Row="1" Height="30" HorizontalAlignment="Left" Margin="4,1,0,0" Name="ManageSurveyButton" VerticalAlignment="Top" Width="140" Grid.ColumnSpan="2" Click="ManageSurveyButton_Click" />
         <Button Content="Add User" Grid.Column="4" Grid.Row="1" Height="30" HorizontalAlignment="Left" Margin="40,0,0,0" Name="AddUser" VerticalAlignment="Top" Width="162" Click="AddUser_click" />
     </Grid>
+    </ScrollViewer>
 </Page>
