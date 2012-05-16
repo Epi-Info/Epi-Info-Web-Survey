@@ -218,61 +218,54 @@ CCE_Context.prototype.resolve = function (pName)
     return cce_Symbol;
 }
 
-CCE_Context.prototype.getValue = function (pName) 
-{
+CCE_Context.prototype.getValue = function (pName) {
     var cce_Symbol = this.resolve(pName);
-    if (cce_Symbol != null) 
-    {
-        if (cce_Symbol.Source == "datasource") 
-        {
+    if (cce_Symbol != null) {
+        if (cce_Symbol.Source == "datasource") {
             var query = '#mvcdynamicfield_' + pName;
-            var fielName ='mvcdynamicfield_' + pName;
-            if (eval(document.getElementById(fielName)))
-            {
-               var field = $(query);
-               switch(cce_Symbol.Type)
-               {
-                case "yesno":
-                  if (field.val() == "1")
-                  {       
-                     return true; //"Yes";
-                  }
-                  else
-                  {
-                     return false; // "No";
-                  }
-                case "checkbox":
-                    if(field.is(':checked'))
-                    {
-                        return true;
-                    }
-                    else
-                    {
-                        return false;
-                    }
-                    
-                case "datepicker": //string has been converted to date for comparison with another date
-                   var datefield = new Date(field.val()).valueOf();
-                   return datefield;
-                case "numeric": //string has been converted to number to compare with another number
-                  var numericField = new Number(field.val()).valueOf();
-                  return numericField;
-                default:
-                  return field.val();
-              }          
+            var fielName = 'mvcdynamicfield_' + pName;
+            if (eval(document.getElementById(fielName))) {
+                var field = $(query);
+                switch (cce_Symbol.Type) {
+                    case "yesno":
+                        if (field.val() == "1") {
+                            return true; //"Yes";
+                        }
+                        else {
+                            return false; // "No";
+                        }
+                    case "checkbox":
+                        if (field.is(':checked')) {
+                            return true;
+                        }
+                        else {
+                            return false;
+                        }
+
+                    case "datepicker": //string has been converted to date for comparison with another date
+                        var datefield = new Date(field.val()).valueOf();
+                        return datefield;
+                    case "timepicker":
+                        var refDate = "01/01/1970 ";//It is a reference date 
+                        var dateTime = refDate + field.val();
+                        var timefield = new Date(dateTime).valueOf();
+                        return timefield;
+                    case "numeric": //string has been converted to number to compare with another number
+                        var numericField = new Number(field.val()).valueOf();
+                        return numericField;
+                    default:
+                        return field.val();
+                }
             }
-            else
-            {
-              return cce_Symbol.Value;
+            else {
+                return cce_Symbol.Value;
             }
         }
-        else 
-        {
+        else {
             return cce_Symbol.Value;
         }
     }
-    else
-    {
+    else {
         return null;
     }
 }
