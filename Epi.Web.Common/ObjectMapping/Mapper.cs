@@ -123,7 +123,7 @@ namespace Epi.Web.Common.ObjectMapping
                 DateUpdated = pBO.DateUpdated,
                 XML = pBO.XML,
                 DateCompleted = pBO.DateCompleted,
-              
+                DateCreated = pBO.DateCreated, 
                 Status = pBO.Status
             };
         }
@@ -152,6 +152,7 @@ namespace Epi.Web.Common.ObjectMapping
                 DateUpdated = pBO.DateUpdated,
                 XML = pBO.XML,
                 DateCompleted = pBO.DateCompleted,
+                DateCreated = pBO.DateCreated,
                 Status = pBO.Status
                 
             };
