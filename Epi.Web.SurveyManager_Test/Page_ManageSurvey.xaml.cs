@@ -53,7 +53,22 @@ namespace Epi.Web.SurveyManager.Client
                 Request.Criteria.SurveyType = int.Parse(((ListBoxItem)this.SurveyInfoCriteria_SurveyTypeListBox.Items[this.SurveyInfoCriteria_SurveyTypeListBox.SelectedIndex]).Tag.ToString());
             }
 
+            if (!string.IsNullOrEmpty(this.OrgTextBox1.Text))
+            {
 
+                Request.Criteria.OrganizationKey = new Guid(OrgTextBox1.Text);
+            }
+            else { 
+            
+            }
+            if (!string.IsNullOrEmpty(this.TextBoxPublish.Text))
+            {
+                Request.Criteria.UserPublishKey = new Guid(this.TextBoxPublish.Text);
+
+            }
+            else { 
+            
+                }
             SurveyInfoResponseTextBox.Document.Blocks.Clear();
             SearchResultListBox.Items.Clear();
 
@@ -81,7 +96,9 @@ namespace Epi.Web.SurveyManager.Client
                     //SurveyInfoResponseTextBox.AppendText(string.Format("{0} - {1} - {2}\n", SurveyInfo.SurveyId, SurveyInfo.SurveyName, SurveyInfo.ClosingDate));
                     //System.Collections.Generic.KeyValuePair<string, string> kvp = new KeyValuePair<string, string>(SurveyInfo.SurveyId,string.Format("{0} - {1} - {2}\n", SurveyInfo.SurveyId, SurveyInfo.SurveyName, SurveyInfo.ClosingDate));
 
-                    SearchResultListBox.Items.Add(string.Format("{0} - {1} - {2}\n", SurveyInfo.SurveyId, SurveyInfo.SurveyName, SurveyInfo.ClosingDate)); 
+                    SearchResultListBox.Items.Add(string.Format("{0} - {1} - {2}\n", SurveyInfo.SurveyId, SurveyInfo.SurveyName, SurveyInfo.ClosingDate));
+            
+                   
                     
                 }
             }
@@ -194,7 +211,22 @@ namespace Epi.Web.SurveyManager.Client
                 this.SurveyInfoList[this.selectedIndex].SurveyName = this.SurveyNameTextBox.Text;
                 this.SurveyInfoList[this.selectedIndex].SurveyNumber = this.SurveyNumberTextBox.Text;
                 //this.SurveyInfoList[this.selectedIndex].XML = new TextRange(this.TemplateXMLTextBox.Document.ContentStart, this.TemplateXMLTextBox.Document.ContentEnd).Text;
+                if (!string.IsNullOrEmpty(this.OrgTextBox1.Text))
+                { 
+                    this.SurveyInfoList[this.selectedIndex].OrganizationKey = new Guid(OrgTextBox1.Text);
+                }
+                else
+                {
 
+                }
+                if (!string.IsNullOrEmpty(this.TextBoxPublish.Text))
+                { 
+                    this.SurveyInfoList[this.selectedIndex].UserPublishKey = new Guid(this.TextBoxPublish.Text);
+                }
+                else
+                {
+
+                }
                 Request.SurveyInfoList.Add(this.SurveyInfoList[this.selectedIndex]);
 
                 try
@@ -202,7 +234,9 @@ namespace Epi.Web.SurveyManager.Client
                     Epi.Web.Common.Message.SurveyInfoResponse Result = client.SetSurveyInfo(Request);
 
 
-                    SurveyInfoResponseTextBox.AppendText("Succefully updated survey:");
+                   // SurveyInfoResponseTextBox.AppendText("Succefully updated survey:");
+                    SurveyInfoResponseTextBox.AppendText(Result.Message);
+
                     //SurveyInfoResponseTextBox.AppendText(Result.PublishInfo.IsPulished.ToString());
                     //SurveyInfoResponseTextBox.AppendText("\nURL: ");
                     //SurveyInfoResponseTextBox.AppendText(Result.PublishInfo.URL);
@@ -247,6 +281,11 @@ namespace Epi.Web.SurveyManager.Client
 
             Page_AddUser page_AddUser = new Page_AddUser();
             this.NavigationService.Navigate(page_AddUser);
+        }
+
+        private void SurveyInfoCriteria_SurveyTypeListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
 
     }

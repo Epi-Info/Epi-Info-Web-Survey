@@ -6,7 +6,7 @@ using Epi.Web.Common.BusinessObject;
 using System.Configuration;
 namespace Epi.Web.BLL
 {
-    public class Utility
+    public class Common
     {
 
         //SurveyResponseBO

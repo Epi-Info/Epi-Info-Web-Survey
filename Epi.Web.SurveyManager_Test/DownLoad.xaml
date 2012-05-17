@@ -7,47 +7,46 @@
       d:DesignHeight="690" d:DesignWidth="630"
 	Title="DownLoad">
     <ScrollViewer HorizontalScrollBarVisibility="Auto">
-        <Grid Height="692" Width="629"   >
-        <RichTextBox Height="59" HorizontalAlignment="Left" HorizontalScrollBarVisibility="Hidden" Margin="71,199,0,0" Name="SurveyInfoResponseTextBox" VerticalAlignment="Top" VerticalScrollBarVisibility="Visible" Width="468" />
-        <Label Content="SurveyId" Height="28" HorizontalAlignment="Left" Margin="54,73,0,0" Name="label1" VerticalAlignment="Top" />
-        <TextBox Height="23" HorizontalAlignment="Right" Margin="0,73,216,0" Name="SurveyCriteria_SurveyId" Uid="" VerticalAlignment="Top" Width="255" />
-        <Button Click="ClearSurveyCriteriaButton_Click" Content="Clear Criteria" Height="23" HorizontalAlignment="Left" Margin="464,170,0,0" Name="ClearSurveyCriteriaButton" VerticalAlignment="Top" Width="75" />
-        <CheckBox Content="Currently open" Height="16" HorizontalAlignment="Left" Margin="158,108,0,0" Name="SurveyCriteria_CurrentlyOpenCheckBox" VerticalAlignment="Top" />
-        <Label Content="Organization Key" Height="28" HorizontalAlignment="Left" Margin="54,131,0,0" Name="lblOrganizationKeySurveyInfo" VerticalAlignment="Top" Width="109" />
-        <PasswordBox Height="23" HorizontalAlignment="Left" Margin="158,133,0,0" Name="passOrganizationKeySurveyInfo" VerticalAlignment="Top" Width="255" />
-        <CheckBox Content="Is Size Request" Height="16" HorizontalAlignment="Left" Margin="158,177,0,0" Name="chkIsSizeRequestSurveyInfo" VerticalAlignment="Top" />
-        <Button  Click="DownloadSurveyInfoButton_Click" Content="Get Survey Information" Height="23" HorizontalAlignment="Left" Margin="321,170,0,0" Name="DownloadSurveyInfoButton" VerticalAlignment="Top" Width="137" />
+        <Grid Height="692" Width="627"   >
+        <RichTextBox Height="89" HorizontalAlignment="Left" HorizontalScrollBarVisibility="Hidden" Margin="74,218,0,0" Name="SurveyInfoResponseTextBox" VerticalAlignment="Top" VerticalScrollBarVisibility="Visible" Width="468" />
+        <Label Content="SurveyId" Height="28" HorizontalAlignment="Left" Margin="57,123,0,0" Name="label1" VerticalAlignment="Top" />
+        <TextBox Height="23" HorizontalAlignment="Right" Margin="0,123,213,0" Name="SurveyCriteria_SurveyId" Uid="" VerticalAlignment="Top" Width="255" />
+        <Button Click="ClearSurveyCriteriaButton_Click" Content="Clear Criteria" Height="23" HorizontalAlignment="Left" Margin="467,180,0,0" Name="ClearSurveyCriteriaButton" VerticalAlignment="Top" Width="75" />
+        <CheckBox Content="Currently open" Height="16" HorizontalAlignment="Left" Margin="161,158,0,0" Name="SurveyCriteria_CurrentlyOpenCheckBox" VerticalAlignment="Top" />
+            <CheckBox Content="Is Size Request" Height="16" HorizontalAlignment="Left" Margin="161,187,0,0" Name="chkIsSizeRequestSurveyInfo" VerticalAlignment="Top" />
+        <Button  Click="DownloadSurveyInfoButton_Click" Content="Get Survey Information" Height="23" HorizontalAlignment="Left" Margin="324,180,0,0" Name="DownloadSurveyInfoButton" VerticalAlignment="Top" Width="137" />
         <Button Click="button3_Click" Content="View Publish Client" Height="30" HorizontalAlignment="Left" Margin="10,10,0,0" Name="button3" VerticalAlignment="Top" Width="118" />
         <Button Click="ManageSurveyButton_Click"  Content="Manage Existing Surveys" Height="30" HorizontalAlignment="Left" Margin="134,10,0,0" Name="ManageSurveyButton" VerticalAlignment="Top" Width="150" />
         <Button Click="AddUser_click" Content="Add User" Height="30" HorizontalAlignment="Left" Margin="291,10,0,0" Name="button1" VerticalAlignment="Top" Width="162" />
-        <ListBox Height="51" HorizontalAlignment="Left" Margin="419,73,0,0" Name="SurveyInfoCriteria_SurveyTypeListBox" VerticalAlignment="Top" Width="120">
+        <ListBox Height="51" HorizontalAlignment="Left" Margin="422,123,0,0" Name="SurveyInfoCriteria_SurveyTypeListBox" VerticalAlignment="Top" Width="120">
             <ListBoxItem Content="All Survey Types" Tag="-1" />
             <ListBoxItem Content="Single Response" Tag="1" />
             <ListBoxItem Content="Multi Response" Tag="2" />
         </ListBox>
-        <GroupBox Header="SurveyAnswer Criteria" Height="416" HorizontalAlignment="Left" Margin="29,270,0,0" Name="groupBox3" VerticalAlignment="Top" Width="550" Background="#FFC2D2DE" Panel.ZIndex="-1">
+        <GroupBox Header="SurveyAnswer Criteria" Height="332" HorizontalAlignment="Left" Margin="30,327,0,0" Name="groupBox3" VerticalAlignment="Top" Width="550" Background="#FFC2D2DE" Panel.ZIndex="-1">
 
         </GroupBox>
-        <GroupBox Background="#FFC2D2DE" Header="SurveyInfo Criteria" Height="226" HorizontalAlignment="Left" Margin="27,46,0,0" Name="groupBox1" Panel.ZIndex="-1" VerticalAlignment="Top" Width="551" />
-        <Label Content="SurveyAnswerIdList" Height="28" HorizontalAlignment="Left" Margin="56,436,0,0" Name="label2" VerticalAlignment="Top" />
-        <Label Content="SurveyId" Height="28" HorizontalAlignment="Left" Margin="54,299,0,0" Name="label3" VerticalAlignment="Top" />
-        <TextBox Height="23" HorizontalAlignment="Left" Margin="180,296,0,0" Name="SurveyAnswerCriteria_SurveyIdTextBox" VerticalAlignment="Top" Width="227" />
-        <CheckBox Content="Only Completed" Height="16" HorizontalAlignment="Left" Margin="421,299,0,0" Name="OnlyCompletedCheckBox" VerticalAlignment="Top" Width="102" />
-        <ListBox Height="73" HorizontalAlignment="Left" Margin="180,468,0,0" Name="SurveyAnswerIdListBox" VerticalAlignment="Top" Width="282" />
-        <Label Content="Date Completed" Height="28" HorizontalAlignment="Left" Margin="56,397,0,0" Name="label4" VerticalAlignment="Top" />
-        <DatePicker Height="25" HorizontalAlignment="Left" Margin="180,400,0,0" Name="datePicker1" VerticalAlignment="Top" Width="134" />
-        <TextBox Height="26" HorizontalAlignment="Left" Margin="180,436,0,0" Name="AddAnswerIdTextBox" VerticalAlignment="Top" Width="282" />
-        <Button Click="AddSurveyAnswerIdButton_Click" Content="Add" Height="26" HorizontalAlignment="Right" Margin="0,436,85,0" Name="AddSurveyAnswerIdButton" VerticalAlignment="Top" Width="73" />
-        <CheckBox Content="Only Summary Data" Height="16" HorizontalAlignment="Left" IsEnabled="False" Margin="421,331,0,0" Name="checkBox2" VerticalAlignment="Top" />
-        <Button Click="ClearListButton_Click"  Content="Clear Criteria" Height="23" HorizontalAlignment="Left" Margin="473,477,0,0" Name="ClearListButton" VerticalAlignment="Top" Width="73" />
-        <Label Content="User Publish Key" Height="28" HorizontalAlignment="Left" Margin="56,331,0,0" Name="label5" VerticalAlignment="Top" Width="104" />
-        <PasswordBox Height="23" HorizontalAlignment="Left" Margin="180,331,0,0" Name="passUserPublishKeySurveyResponse" VerticalAlignment="Top" Width="227" />
-        <PasswordBox Height="23" HorizontalAlignment="Left" Margin="180,363,0,0" Name="passOrganizationKeySurveyResponse" VerticalAlignment="Top" Width="227" />
-        <Label Content="Organization Key" Height="28" HorizontalAlignment="Left" Margin="57,358,0,0" Name="lblOrganizationKeyResponse" VerticalAlignment="Top" Width="109" />
-        <CheckBox Content="Is Size Request" Height="16" HorizontalAlignment="Left" Margin="421,366,0,0" Name="chkIsSizeRequestSurveyResponse" VerticalAlignment="Top" />
-        <Button Click="DownloadSurveyAnswersButton_Click" Content="Download" Height="23" HorizontalAlignment="Left" Margin="473,518,0,0" Name="DownloadSurveyAnswersButton" VerticalAlignment="Top" Width="73" />
-        <RichTextBox Height="114" Margin="56,547,83,0" Name="SurveyAnswerResponseTextBox" VerticalAlignment="Top" VerticalScrollBarVisibility="Visible" />
-    </Grid>
+        <GroupBox Background="#FFC2D2DE" Header="SurveyInfo Criteria" Height="215" HorizontalAlignment="Left" Margin="30,106,0,0" Name="groupBox1" Panel.ZIndex="-1" VerticalAlignment="Top" Width="551"></GroupBox>
+            <Label Content="SurveyAnswerIdList" Height="28" HorizontalAlignment="Left" Margin="46,473,0,0" Name="label2" VerticalAlignment="Top" />
+        <Label Content="SurveyId" Height="28" HorizontalAlignment="Left" Margin="46,375,0,0" Name="label3" VerticalAlignment="Top" />
+        <TextBox Height="23" HorizontalAlignment="Left" Margin="170,377,0,0" Name="SurveyAnswerCriteria_SurveyIdTextBox" VerticalAlignment="Top" Width="253" />
+        <CheckBox Content="Only Completed" Height="16" HorizontalAlignment="Left" Margin="326,415,0,0" Name="OnlyCompletedCheckBox" VerticalAlignment="Top" Width="102" />
+        <ListBox Height="73" HorizontalAlignment="Left" Margin="170,505,0,0" Name="SurveyAnswerIdListBox" VerticalAlignment="Top" Width="282" />
+        <Label Content="Date Completed" Height="28" HorizontalAlignment="Left" Margin="46,434,0,0" Name="label4" VerticalAlignment="Top" />
+        <DatePicker Height="25" HorizontalAlignment="Left" Margin="170,437,0,0" Name="datePicker1" VerticalAlignment="Top" Width="134" />
+        <TextBox Height="26" HorizontalAlignment="Left" Margin="170,473,0,0" Name="AddAnswerIdTextBox" VerticalAlignment="Top" Width="282" />
+        <Button Click="AddSurveyAnswerIdButton_Click" Content="Add" Height="26" HorizontalAlignment="Right" Margin="0,473,95,0" Name="AddSurveyAnswerIdButton" VerticalAlignment="Top" Width="73" />
+        <CheckBox Content="Only Summary Data" Height="16" HorizontalAlignment="Left" IsEnabled="False" Margin="172,415,0,0" Name="checkBox2" VerticalAlignment="Top" />
+        <Button Click="ClearListButton_Click"  Content="Clear Criteria" Height="23" HorizontalAlignment="Left" Margin="463,514,0,0" Name="ClearListButton" VerticalAlignment="Top" Width="73" />
+        <Label Content="User Publish Key" Height="28" HorizontalAlignment="Left" Margin="46,346,0,0" Name="label5" VerticalAlignment="Top" Width="104" />
+        <PasswordBox Height="23" HorizontalAlignment="Left" Margin="172,346,0,0" Name="passUserPublishKeySurveyResponse" VerticalAlignment="Top" Width="255" />
+        <PasswordBox Height="23" HorizontalAlignment="Left" Margin="160,70,0,0" Name="passOrganizationKey" VerticalAlignment="Top" Width="255" PasswordChanged="passOrganizationKey_PasswordChanged" />
+        <Label Content="Organization Key" Height="28" HorizontalAlignment="Left" Margin="36,65,0,0" Name="lblOrganizationKeyResponse" VerticalAlignment="Top" Width="109" />
+        <CheckBox Content="Is Size Request" Height="16" HorizontalAlignment="Left" Margin="53,415,0,0" Name="chkIsSizeRequestSurveyResponse" VerticalAlignment="Top" />
+        <Button Click="DownloadSurveyAnswersButton_Click" Content="Download" Height="23" HorizontalAlignment="Left" Margin="463,555,0,0" Name="DownloadSurveyAnswersButton" VerticalAlignment="Top" Width="73" />
+        <RichTextBox Height="63" Margin="46,584,93,0" Name="SurveyAnswerResponseTextBox" VerticalAlignment="Top" VerticalScrollBarVisibility="Visible" />
+            <GroupBox Background="#FFC2D2DE" Header="Key" Name="groupBox2" Panel.ZIndex="-1" Width="551" Margin="28,51,50,584" />
+        </Grid>
 
     </ScrollViewer>
 </Page>

@@ -206,13 +206,22 @@ namespace Epi.Web.EF
             using (var Context = DataObjectFactory.CreateContext())
             {
 
-                OrganizationId = Context.Organizations.FirstOrDefault(x => x.OrganizationKey == Okey).OrganizationId;
+                var Query = (from response in Context.Organizations
+                             where response.OrganizationKey == Okey
+                             select response).SingleOrDefault();
+
+                if (Query != null) {
+                    OrganizationId = Query.OrganizationId;
+                }
+                
+
+               // OrganizationId = Context.Organizations.FirstOrDefault(x => x.OrganizationKey == Okey).OrganizationId;
             }
             }
-            catch (Exception ex)
-            {
-                throw (ex);
-            }
+           catch (Exception ex)
+           {
+               throw (ex);
+          }
             if (!string.IsNullOrEmpty(SurveyId))
             {
                 try{
@@ -220,7 +229,10 @@ namespace Epi.Web.EF
                 using (var Context = DataObjectFactory.CreateContext())
                     {
                         responseList.Add(Context.SurveyMetaDatas.FirstOrDefault(x => x.SurveyId == Id && x.OrganizationId == OrganizationId && x.UserPublishKey == publishKey));
-                        result = Mapper.Map(responseList);
+                        if (responseList[0] != null)
+                        {
+                            result = Mapper.Map(responseList);
+                        }
                      }
                 }
                 catch (Exception ex)

@@ -44,65 +44,108 @@ namespace Epi.Web.BLL
             if (pRequestMessage != null)
             {
 
-                if (! string.IsNullOrEmpty(pRequestMessage.SurveyNumber)  &&  ValidateOrganizationKey(pRequestMessage.OrganizationKey))
+                //if (! string.IsNullOrEmpty(pRequestMessage.SurveyNumber)  &&  ValidateOrganizationKey(pRequestMessage.OrganizationKey))
+                if (ValidateOrganizationKey(pRequestMessage.OrganizationKey))
                 {
-                    try
-                    {
 
-                        Epi.Web.Common.BusinessObject.SurveyInfoBO BO = new Epi.Web.Common.BusinessObject.SurveyInfoBO();
+                                        if (ValidateSurveyFields(pRequestMessage))
+                                        {
+                                            try
+                                            {
 
-                        BO.SurveyId = SurveyId.ToString();
-                        BO.ClosingDate =  pRequestMessage.ClosingDate;
+                                                Epi.Web.Common.BusinessObject.SurveyInfoBO BO = new Epi.Web.Common.BusinessObject.SurveyInfoBO();
 
-                        BO.IntroductionText = pRequestMessage.IntroductionText;
-                        BO.ExitText = pRequestMessage.ExitText;
-                        BO.DepartmentName = pRequestMessage.DepartmentName;
-                        BO.OrganizationName = pRequestMessage.OrganizationName;
+                                                BO.SurveyId = SurveyId.ToString();
+                                                BO.ClosingDate = pRequestMessage.ClosingDate;
 
-                        BO.SurveyNumber = pRequestMessage.SurveyNumber;
+                                                BO.IntroductionText = pRequestMessage.IntroductionText;
+                                                BO.ExitText = pRequestMessage.ExitText;
+                                                BO.DepartmentName = pRequestMessage.DepartmentName;
+                                                BO.OrganizationName = pRequestMessage.OrganizationName;
 
-                        BO.XML = pRequestMessage.XML;
+                                                BO.SurveyNumber = pRequestMessage.SurveyNumber;
 
-                        BO.SurveyName = pRequestMessage.SurveyName;
+                                                BO.XML = pRequestMessage.XML;
 
-                        BO.SurveyType = pRequestMessage.SurveyType;
-                        BO.UserPublishKey = pRequestMessage.UserPublishKey;
-                        BO.OrganizationKey = pRequestMessage.OrganizationKey;
-                        BO.OrganizationKey = pRequestMessage.OrganizationKey;
-                        BO.TemplateXMLSize = pRequestMessage.TemplateXMLSize;
-                        try
-                        {
-                           
-                            this.SurveyInfoDao.InsertSurveyInfo(BO);
-                        }
-                        catch (Exception ex)
-                        {
-                            System.Console.Write(ex.ToString());
-                            //Entities.ObjectStateManager.GetObjectStateEntry(SurveyMetaData).Delete();
+                                                BO.SurveyName = pRequestMessage.SurveyName;
 
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        throw (ex);
-
-                    }
+                                                BO.SurveyType = pRequestMessage.SurveyType;
+                                                BO.UserPublishKey = pRequestMessage.UserPublishKey;
+                                                BO.OrganizationKey = pRequestMessage.OrganizationKey;
+                                                BO.OrganizationKey = pRequestMessage.OrganizationKey;
+                                                BO.TemplateXMLSize = pRequestMessage.TemplateXMLSize;
 
 
-                    result.URL = GetURL(pRequestMessage, SurveyId);
-                    result.IsPulished = true;
+                                                this.SurveyInfoDao.InsertSurveyInfo(BO);
+                                                result.URL = GetURL(pRequestMessage, SurveyId);
+                                                result.IsPulished = true;
+                                            }
+                                            catch (Exception ex)
+                                            {
+                                                System.Console.Write(ex.ToString());
+                                                //Entities.ObjectStateManager.GetObjectStateEntry(SurveyMetaData).Delete();
+                                                result.URL = "";
+                                                result.IsPulished = false;
+                                                result.StatusText = "An Error has occurred while publishing your survey.";
+                                            }
+
+
+
+
+                                        }
+                                        else
+                                        {
+
+                                            result.URL = "";
+                                            result.IsPulished = false;
+                                            result.StatusText = "One or more survey required fields are missing values.";
+                                        }
+
                 }
-                else
-                {
+                else {
 
                     result.URL = "";
                     result.IsPulished = false;
-                    result.StatusText = "An Error has occurred while publishing your survey.";
+                    result.StatusText = "Organization Key is invalid.";
+                
                 }
-
-
             }
             return result;
+        }
+
+        private static bool ValidateSurveyFields(SurveyInfoBO pRequestMessage)
+        {
+
+            bool isValid = true;
+
+
+            if (pRequestMessage.ClosingDate == null)
+            {
+
+                isValid = false;
+
+            }
+            
+            else if (string.IsNullOrEmpty(pRequestMessage.XML))
+            {
+
+                isValid = false;
+            }
+            else if (string.IsNullOrEmpty(pRequestMessage.SurveyName))
+            {
+
+                isValid = false;
+            }
+            
+            else if ( string.IsNullOrEmpty(pRequestMessage.UserPublishKey.ToString()))
+            {
+
+                isValid = false;
+            }
+
+
+ 
+            return isValid;        
         }
      
         /// <summary>
