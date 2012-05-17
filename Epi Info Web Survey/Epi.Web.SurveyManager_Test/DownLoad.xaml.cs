@@ -43,13 +43,13 @@ namespace Epi.Web.SurveyManager.Client
 
 
             //Checking the Organization key guid is in correct format
-            if (!IsGuid(passOrganizationKeySurveyInfo.Password))
+            if (!IsGuid(passOrganizationKey.Password))
             {
                 MessageBox.Show("Organization key is not in correct format");
                 return;
             }
             //Assign the organization key
-            Request.Criteria.OrganizationKey = new Guid(passOrganizationKeySurveyInfo.Password);
+            Request.Criteria.OrganizationKey = new Guid(passOrganizationKey.Password);
 
 
 
@@ -201,13 +201,13 @@ namespace Epi.Web.SurveyManager.Client
 
 
             //Checking the Organization key guid is in correct format
-            if (!IsGuid(passOrganizationKeySurveyResponse.Password))
+            if (!IsGuid(passOrganizationKey.Password))
             {
                 MessageBox.Show("Organization key is not in correct format");
                 return;
             }
             //Assign the organization key
-            Request.Criteria.OrganizationKey = new Guid(passOrganizationKeySurveyResponse.Password);
+            Request.Criteria.OrganizationKey = new Guid(passOrganizationKey.Password);
 
 
 
@@ -346,6 +346,11 @@ namespace Epi.Web.SurveyManager.Client
                 return guidRegEx.IsMatch(expression);
             }
             return false;
+        }
+
+        private void passOrganizationKey_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+
         }
 
     }
