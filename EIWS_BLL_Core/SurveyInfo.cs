@@ -56,7 +56,7 @@ namespace Epi.Web.BLL
 
             PageInfoBO result = new PageInfoBO();
 
-            result = Epi.Web.BLL.Utility.GetSurveySize(SurveyInfoBOList,BandwidthUsageFactor, pResponseMaxSize);
+            result = Epi.Web.BLL.Common.GetSurveySize(SurveyInfoBOList,BandwidthUsageFactor, pResponseMaxSize);
             return result;
 
 
@@ -68,6 +68,8 @@ namespace Epi.Web.BLL
 
             string EncryptedKey = Epi.Web.Common.Security.Cryptography.Encrypt(Okey);
             List<SurveyInfoBO> result = this.SurveyInfoDao.GetSurveyInfoByOrgKeyAndPublishKey(SurveyId, EncryptedKey, publishKey);
+
+             
             if (result != null && result.Count > 0)
             {
                 return true;
@@ -99,7 +101,7 @@ namespace Epi.Web.BLL
 
             PageInfoBO result = new PageInfoBO();
 
-            result = Epi.Web.BLL.Utility.GetSurveySize(SurveyInfoBOList, BandwidthUsageFactor, pResponseMaxSize);
+            result = Epi.Web.BLL.Common.GetSurveySize(SurveyInfoBOList, BandwidthUsageFactor, pResponseMaxSize);
             return result;
 
         }
