@@ -192,37 +192,59 @@ namespace Epi.Web.WCF.SurveyService
                 // The Decorator Design Pattern. 
                 //using (TransactionDecorator transaction = new TransactionDecorator())
                 {
-                    if (request.Action == "Create")
-                    {
-                        Implementation.InsertSurveyInfo(SurveyInfo);
-                        response.SurveyInfoList.Add(Mapper.ToDataTransferObject(SurveyInfo));
-                    }
-                    else if (request.Action == "Update")
-                    {
-                        Implementation.UpdateSurveyInfo(SurveyInfo);
-                        response.SurveyInfoList.Add(Mapper.ToDataTransferObject(SurveyInfo));
-                    }
-                    else if (request.Action == "Delete")
-                    {
-                        var criteria = request.Criteria as SurveyInfoCriteria;
-                        var survey = Implementation.GetSurveyInfoById(SurveyInfo.SurveyId);
+                    
+                    bool validSurvey = false;
 
-                        try
+                    validSurvey = Implementation.IsSurveyInfoValidByOrgKeyAndPublishKey(SurveyInfo.SurveyId, SurveyInfo.OrganizationKey.ToString(), SurveyInfo.UserPublishKey);
+
+                     Epi.Web.Interfaces.DataInterfaces.IOrganizationDao entityDaoFactory1 = new EF.EntityOrganizationDao();
+                     Epi.Web.Interfaces.DataInterfaces.IOrganizationDao surveyInfoDao1 = entityDaoFactory1;
+                     Epi.Web.BLL.Organization implementation1 = new Epi.Web.BLL.Organization(surveyInfoDao1);
+                     bool ISValidOrg = implementation1.ValidateOrganization(SurveyInfo.OrganizationKey.ToString());
+
+                     if (ISValidOrg && validSurvey)
+                    {
+
+
+                        if (request.Action == "Create")
                         {
-                            if (Implementation.DeleteSurveyInfo(survey))
+                            Implementation.InsertSurveyInfo(SurveyInfo);
+                            response.SurveyInfoList.Add(Mapper.ToDataTransferObject(SurveyInfo));
+                        }
+                        else if (request.Action == "Update")
+                        {
+                            Implementation.UpdateSurveyInfo(SurveyInfo);
+                            response.SurveyInfoList.Add(Mapper.ToDataTransferObject(SurveyInfo));
+                            response.Message = "Successfully updated survey information.";
+                        }
+                        else if (request.Action == "Delete")
+                        {
+                            var criteria = request.Criteria as SurveyInfoCriteria;
+                            var survey = Implementation.GetSurveyInfoById(SurveyInfo.SurveyId);
+
+                            try
                             {
-                                response.RowsAffected = 1;
+                                if (Implementation.DeleteSurveyInfo(survey))
+                                {
+                                    response.RowsAffected = 1;
+                                }
+                                else
+                                {
+                                    response.RowsAffected = 0;
+                                }
                             }
-                            else
+                            catch
                             {
                                 response.RowsAffected = 0;
                             }
                         }
-                        catch
-                        {
-                            response.RowsAffected = 0;
-                        }
                     }
+                    else
+                    {
+
+                        response.Message = "SurveyId or Organization Key or Publish Key are invalid.";
+                    }
+
                 }
 
                 return response;
@@ -560,7 +582,7 @@ namespace Epi.Web.WCF.SurveyService
                  OrganizationBO Organization = Mapper.ToBusinessObject(request.Organization);
                  var response = new OrganizationResponse(request.RequestId);
 
-                 if ( Utility.ValidateAdmin(request.AdminSecurityKey.ToString()))
+                 if (Epi.Web.BLL.Common.ValidateAdmin(request.AdminSecurityKey.ToString()))
                  {
 
                      // Validate client tag, access token, and user credentials
@@ -606,7 +628,7 @@ namespace Epi.Web.WCF.SurveyService
                 OrganizationBO Organization = Mapper.ToBusinessObject(request.Organization);
                 var response = new OrganizationResponse(request.RequestId);
 
-                if ( Utility.ValidateAdmin(request.AdminSecurityKey.ToString()))
+                if (Epi.Web.BLL.Common.ValidateAdmin(request.AdminSecurityKey.ToString()))
                 {
 
                     // Validate client tag, access token, and user credentials
@@ -654,7 +676,7 @@ namespace Epi.Web.WCF.SurveyService
                 OrganizationBO Organization = Mapper.ToBusinessObject(request.Organization);
                 var response = new OrganizationResponse(request.RequestId);
 
-                if ( Utility.ValidateAdmin(request.AdminSecurityKey.ToString()))
+                if (Epi.Web.BLL.Common.ValidateAdmin(request.AdminSecurityKey.ToString()))
                 {
 
                     // Validate client tag, access token, and user credentials
@@ -703,7 +725,7 @@ namespace Epi.Web.WCF.SurveyService
                 var Organization = Mapper.ToBusinessObject(request.Organization);
                 var response = new OrganizationResponse(request.RequestId);
                 // Validate client tag, access token, and user credentials
-                if ( Utility.ValidateAdmin(request.AdminSecurityKey.ToString()))
+                if (Epi.Web.BLL.Common.ValidateAdmin(request.AdminSecurityKey.ToString()))
                 {
                     
 
@@ -743,7 +765,7 @@ namespace Epi.Web.WCF.SurveyService
                 OrganizationBO Organization = Mapper.ToBusinessObject(request.Organization);
                 var response = new OrganizationResponse(request.RequestId);
 
-                if ( Utility.ValidateAdmin(request.AdminSecurityKey.ToString()))
+                if (Epi.Web.BLL.Common.ValidateAdmin(request.AdminSecurityKey.ToString()))
                 {
 
                     // Validate client tag, access token, and user credentials
@@ -790,7 +812,7 @@ namespace Epi.Web.WCF.SurveyService
                 var Organization = Mapper.ToBusinessObject(request.Organization);
                 var response = new OrganizationResponse(request.RequestId);
                 // Validate client tag, access token, and user credentials
-                if ( Utility.ValidateAdmin(request.AdminSecurityKey.ToString()))
+                if (Epi.Web.BLL.Common.ValidateAdmin(request.AdminSecurityKey.ToString()))
                 {
 
 
