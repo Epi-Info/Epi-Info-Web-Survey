@@ -296,7 +296,8 @@ namespace Epi.Web.EF
               
 
                 DataRow.ResponseXML = SurveyResponse.XML;
-                DataRow.DateCompleted = DateTime.Now;
+                //DataRow.DateCompleted = DateTime.Now;
+                DataRow.DateCompleted = SurveyResponse.DateCompleted;
                 DataRow.StatusId = SurveyResponse.Status;
                 DataRow.DateUpdated = DateTime.Now;
              //   DataRow.ResponsePasscode = SurveyResponse.ResponsePassCode;

@@ -32,7 +32,8 @@ namespace Epi.Web.MVC.Utility
             bool AddRoot = false;
             surveyAnswerRequest.Criteria.SurveyAnswerIdList.Add(responseId.ToString());
             surveyAnswerDTO.ResponseId = responseId.ToString();
-            surveyAnswerDTO.DateCompleted = DateTime.Now;
+            //surveyAnswerDTO.DateCompleted = DateTime.Now;
+            surveyAnswerDTO.DateCreated = DateTime.Now;
             surveyAnswerDTO.SurveyId = surveyId;
             surveyAnswerDTO.Status = (int)Constant.Status.InProgress;
             surveyAnswerDTO.XML = surveyResponseXML.CreateResponseXml(surveyId, AddRoot,0,"").InnerXml;
@@ -151,6 +152,7 @@ namespace Epi.Web.MVC.Utility
             {
 
                 surveyAnswerRequest.SurveyAnswerList[0].Status = 3;
+                surveyAnswerRequest.SurveyAnswerList[0].DateCompleted = DateTime.Now;
                 Xdoc.Root.Attribute("LastPageVisited").Remove();
                 Xdoc.Root.Attribute("HiddenFieldsList").Remove();
                 Xdoc.Root.Attribute("HighlightedFieldsList").Remove();

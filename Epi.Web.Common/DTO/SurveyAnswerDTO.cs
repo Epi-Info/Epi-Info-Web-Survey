@@ -16,7 +16,9 @@ namespace Epi.Web.Common.DTO
         [DataMember]
         public DateTime DateUpdated { get; set; }
         [DataMember]
-        public DateTime DateCompleted { get; set; }
+        public DateTime? DateCompleted { get; set; }
+        [DataMember]
+        public DateTime DateCreated { get; set; }
         [DataMember]
         public int Status { get; set; }
         [DataMember]
