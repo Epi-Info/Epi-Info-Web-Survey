@@ -139,7 +139,7 @@ namespace Epi.Web.EF
                 XML = entity.ResponseXML,
                 Status = entity.StatusId,
                  DateUpdated = entity.DateUpdated,
-                DateCompleted = entity.DateCompleted.Value,
+                DateCompleted = entity.DateCompleted,
                 TemplateXMLSize = (long)entity.ResponseXMLSize,
                  DateCreated = entity.DateCreated,
             };
@@ -202,7 +202,8 @@ namespace Epi.Web.EF
                 StatusId = pBO.Status,
                  ResponseXMLSize = pBO.TemplateXMLSize,
                 DateUpdated = pBO.DateUpdated,
-                DateCompleted = pBO.DateCompleted
+                DateCompleted = pBO.DateCompleted,
+                DateCreated = pBO.DateCreated
 
             };
         }
