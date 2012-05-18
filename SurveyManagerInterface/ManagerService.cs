@@ -202,49 +202,57 @@ namespace Epi.Web.WCF.SurveyService
                      Epi.Web.BLL.Organization implementation1 = new Epi.Web.BLL.Organization(surveyInfoDao1);
                      bool ISValidOrg = implementation1.ValidateOrganization(SurveyInfo.OrganizationKey.ToString());
 
-                     if (ISValidOrg && validSurvey)
+                     if (ISValidOrg )
                     {
 
-
-                        if (request.Action == "Create")
-                        {
-                            Implementation.InsertSurveyInfo(SurveyInfo);
-                            response.SurveyInfoList.Add(Mapper.ToDataTransferObject(SurveyInfo));
-                        }
-                        else if (request.Action == "Update")
-                        {
-                            Implementation.UpdateSurveyInfo(SurveyInfo);
-                            response.SurveyInfoList.Add(Mapper.ToDataTransferObject(SurveyInfo));
-                            response.Message = "Successfully updated survey information.";
-                        }
-                        else if (request.Action == "Delete")
-                        {
-                            var criteria = request.Criteria as SurveyInfoCriteria;
-                            var survey = Implementation.GetSurveyInfoById(SurveyInfo.SurveyId);
-
-                            try
-                            {
-                                if (Implementation.DeleteSurveyInfo(survey))
+                                 if (validSurvey)
                                 {
-                                    response.RowsAffected = 1;
+
+
+                                    if (request.Action == "Create")
+                                    {
+                                        Implementation.InsertSurveyInfo(SurveyInfo);
+                                        response.SurveyInfoList.Add(Mapper.ToDataTransferObject(SurveyInfo));
+                                    }
+                                    else if (request.Action == "Update")
+                                    {
+                                        Implementation.UpdateSurveyInfo(SurveyInfo);
+                                        response.SurveyInfoList.Add(Mapper.ToDataTransferObject(SurveyInfo));
+                                        response.Message = SurveyInfo.StatusText;
+                                    }
+                                    else if (request.Action == "Delete")
+                                    {
+                                        var criteria = request.Criteria as SurveyInfoCriteria;
+                                        var survey = Implementation.GetSurveyInfoById(SurveyInfo.SurveyId);
+
+                                        try
+                                        {
+                                            if (Implementation.DeleteSurveyInfo(survey))
+                                            {
+                                                response.RowsAffected = 1;
+                                            }
+                                            else
+                                            {
+                                                response.RowsAffected = 0;
+                                            }
+                                        }
+                                        catch
+                                        {
+                                            response.RowsAffected = 0;
+                                        }
+                                    }
                                 }
                                 else
                                 {
-                                    response.RowsAffected = 0;
+
+                                    response.Message = "SurveyId And/or Publish Key are invalid.";
                                 }
-                            }
-                            catch
-                            {
-                                response.RowsAffected = 0;
-                            }
-                        }
                     }
-                    else
-                    {
+                     else
+                     {
 
-                        response.Message = "SurveyId or Organization Key or Publish Key are invalid.";
-                    }
-
+                         response.Message = "Organization Key is invalid.";
+                     }
                 }
 
                 return response;
