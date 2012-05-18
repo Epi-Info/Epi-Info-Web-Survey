@@ -18,10 +18,10 @@ using System.Runtime.Serialization;
 [assembly: EdmSchemaAttribute()]
 #region EDM Relationship Metadata
 
-[assembly: EdmRelationshipAttribute("EIWSModel", "FK_SurveyResponse_lk_Status", "lk_Status", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Epi.Web.EF.lk_Status), "SurveyResponse", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Epi.Web.EF.SurveyResponse), true)]
 [assembly: EdmRelationshipAttribute("EIWSModel", "FK_SurveyMetaData_lk_SurveyType", "lk_SurveyType", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Epi.Web.EF.lk_SurveyType), "SurveyMetaData", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Epi.Web.EF.SurveyMetaData), true)]
+[assembly: EdmRelationshipAttribute("EIWSModel", "FK_SurveyResponse_lk_Status", "lk_Status", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Epi.Web.EF.lk_Status), "SurveyResponse", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Epi.Web.EF.SurveyResponse), true)]
 [assembly: EdmRelationshipAttribute("EIWSModel", "FK_SurveyResponse_SurveyMetaData", "SurveyMetaData", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Epi.Web.EF.SurveyMetaData), "SurveyResponse", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Epi.Web.EF.SurveyResponse), true)]
-[assembly: EdmRelationshipAttribute("EIWSModel", "FK_SurveyMetaData_Organization", "Organization", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Epi.Web.EF.Organization), "SurveyMetaData", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Epi.Web.EF.SurveyMetaData), true)]
+[assembly: EdmRelationshipAttribute("EIWSModel", "FK_SurveyMetaData_Organization", "Organization", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Epi.Web.EF.Organization), "SurveyMetaData", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Epi.Web.EF.SurveyMetaData), true)]
 
 #endregion
 
@@ -613,19 +613,23 @@ namespace Epi.Web.EF
         /// <param name="surveyTypeId">Initial value of the SurveyTypeId property.</param>
         /// <param name="closingDate">Initial value of the ClosingDate property.</param>
         /// <param name="surveyName">Initial value of the SurveyName property.</param>
-        /// <param name="introductionText">Initial value of the IntroductionText property.</param>
         /// <param name="templateXML">Initial value of the TemplateXML property.</param>
+        /// <param name="userPublishKey">Initial value of the UserPublishKey property.</param>
+        /// <param name="templateXMLSize">Initial value of the TemplateXMLSize property.</param>
         /// <param name="dateCreated">Initial value of the DateCreated property.</param>
-        public static SurveyMetaData CreateSurveyMetaData(global::System.Guid surveyId, global::System.Int32 surveyTypeId, global::System.DateTime closingDate, global::System.String surveyName, global::System.String introductionText, global::System.String templateXML, global::System.DateTime dateCreated)
+        /// <param name="organizationId">Initial value of the OrganizationId property.</param>
+        public static SurveyMetaData CreateSurveyMetaData(global::System.Guid surveyId, global::System.Int32 surveyTypeId, global::System.DateTime closingDate, global::System.String surveyName, global::System.String templateXML, global::System.Guid userPublishKey, global::System.Int64 templateXMLSize, global::System.DateTime dateCreated, global::System.Int32 organizationId)
         {
             SurveyMetaData surveyMetaData = new SurveyMetaData();
             surveyMetaData.SurveyId = surveyId;
             surveyMetaData.SurveyTypeId = surveyTypeId;
             surveyMetaData.ClosingDate = closingDate;
             surveyMetaData.SurveyName = surveyName;
-            surveyMetaData.IntroductionText = introductionText;
             surveyMetaData.TemplateXML = templateXML;
+            surveyMetaData.UserPublishKey = userPublishKey;
+            surveyMetaData.TemplateXMLSize = templateXMLSize;
             surveyMetaData.DateCreated = dateCreated;
+            surveyMetaData.OrganizationId = organizationId;
             return surveyMetaData;
         }
 
@@ -806,7 +810,7 @@ namespace Epi.Web.EF
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String IntroductionText
         {
@@ -818,7 +822,7 @@ namespace Epi.Web.EF
             {
                 OnIntroductionTextChanging(value);
                 ReportPropertyChanging("IntroductionText");
-                _IntroductionText = StructuralObject.SetValidValue(value, false);
+                _IntroductionText = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("IntroductionText");
                 OnIntroductionTextChanged();
             }
@@ -878,9 +882,9 @@ namespace Epi.Web.EF
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Guid> UserPublishKey
+        public global::System.Guid UserPublishKey
         {
             get
             {
@@ -895,16 +899,16 @@ namespace Epi.Web.EF
                 OnUserPublishKeyChanged();
             }
         }
-        private Nullable<global::System.Guid> _UserPublishKey;
-        partial void OnUserPublishKeyChanging(Nullable<global::System.Guid> value);
+        private global::System.Guid _UserPublishKey;
+        partial void OnUserPublishKeyChanging(global::System.Guid value);
         partial void OnUserPublishKeyChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Int64> TemplateXMLSize
+        public global::System.Int64 TemplateXMLSize
         {
             get
             {
@@ -919,8 +923,8 @@ namespace Epi.Web.EF
                 OnTemplateXMLSizeChanged();
             }
         }
-        private Nullable<global::System.Int64> _TemplateXMLSize;
-        partial void OnTemplateXMLSizeChanging(Nullable<global::System.Int64> value);
+        private global::System.Int64 _TemplateXMLSize;
+        partial void OnTemplateXMLSizeChanging(global::System.Int64 value);
         partial void OnTemplateXMLSizeChanged();
     
         /// <summary>
@@ -950,9 +954,9 @@ namespace Epi.Web.EF
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Int32> OrganizationId
+        public global::System.Int32 OrganizationId
         {
             get
             {
@@ -967,8 +971,8 @@ namespace Epi.Web.EF
                 OnOrganizationIdChanged();
             }
         }
-        private Nullable<global::System.Int32> _OrganizationId;
-        partial void OnOrganizationIdChanging(Nullable<global::System.Int32> value);
+        private global::System.Int32 _OrganizationId;
+        partial void OnOrganizationIdChanging(global::System.Int32 value);
         partial void OnOrganizationIdChanged();
 
         #endregion
@@ -1094,8 +1098,9 @@ namespace Epi.Web.EF
         /// <param name="dateUpdated">Initial value of the DateUpdated property.</param>
         /// <param name="statusId">Initial value of the StatusId property.</param>
         /// <param name="responseXML">Initial value of the ResponseXML property.</param>
+        /// <param name="responseXMLSize">Initial value of the ResponseXMLSize property.</param>
         /// <param name="dateCreated">Initial value of the DateCreated property.</param>
-        public static SurveyResponse CreateSurveyResponse(global::System.Guid responseId, global::System.Guid surveyId, global::System.DateTime dateUpdated, global::System.Int32 statusId, global::System.String responseXML, global::System.DateTime dateCreated)
+        public static SurveyResponse CreateSurveyResponse(global::System.Guid responseId, global::System.Guid surveyId, global::System.DateTime dateUpdated, global::System.Int32 statusId, global::System.String responseXML, global::System.Int64 responseXMLSize, global::System.DateTime dateCreated)
         {
             SurveyResponse surveyResponse = new SurveyResponse();
             surveyResponse.ResponseId = responseId;
@@ -1103,6 +1108,7 @@ namespace Epi.Web.EF
             surveyResponse.DateUpdated = dateUpdated;
             surveyResponse.StatusId = statusId;
             surveyResponse.ResponseXML = responseXML;
+            surveyResponse.ResponseXMLSize = responseXMLSize;
             surveyResponse.DateCreated = dateCreated;
             return surveyResponse;
         }
@@ -1284,9 +1290,9 @@ namespace Epi.Web.EF
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Int64> ResponseXMLSize
+        public global::System.Int64 ResponseXMLSize
         {
             get
             {
@@ -1301,8 +1307,8 @@ namespace Epi.Web.EF
                 OnResponseXMLSizeChanged();
             }
         }
-        private Nullable<global::System.Int64> _ResponseXMLSize;
-        partial void OnResponseXMLSizeChanging(Nullable<global::System.Int64> value);
+        private global::System.Int64 _ResponseXMLSize;
+        partial void OnResponseXMLSizeChanging(global::System.Int64 value);
         partial void OnResponseXMLSizeChanged();
     
         /// <summary>

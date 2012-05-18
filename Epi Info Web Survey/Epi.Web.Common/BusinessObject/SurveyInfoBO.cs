@@ -22,8 +22,13 @@ namespace Epi.Web.Common.BusinessObject
         private Guid _OrganizationKey;
         private DateTime _ClosingDate;
         private DateTime _DateCreated;
-        
+        private string _StatusText;
 
+        public string StatusText
+        { 
+            get { return _StatusText; }
+            set { _StatusText = value; } 
+        }
         public string SurveyId
         {
             get { return _SurveyId; }
