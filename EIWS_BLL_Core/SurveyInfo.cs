@@ -118,7 +118,15 @@ namespace Epi.Web.BLL
         public SurveyInfoBO UpdateSurveyInfo(SurveyInfoBO pValue)
         {
             SurveyInfoBO result = pValue;
-            this.SurveyInfoDao.UpdateSurveyInfo(pValue);
+            if (ValidateSurveyFields(pValue))
+            {
+                this.SurveyInfoDao.UpdateSurveyInfo(pValue);
+                result.StatusText = "Successfully updated survey information.";
+            }else{
+                result.StatusText = "One or more survey required fields are missing values.";
+            
+            }
+            
             return result;
         }
 
@@ -131,6 +139,31 @@ namespace Epi.Web.BLL
 
             return result;
         }
+        private static bool ValidateSurveyFields(SurveyInfoBO pRequestMessage)
+        {
 
+            bool isValid = true;
+
+
+            if (pRequestMessage.ClosingDate == null)
+            {
+
+                isValid = false;
+
+            }
+
+           
+            else if (string.IsNullOrEmpty(pRequestMessage.SurveyName))
+            {
+
+                isValid = false;
+            }
+ 
+
+
+
+            return isValid;
+        }
+     
     }
 }

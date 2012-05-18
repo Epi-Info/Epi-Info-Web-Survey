@@ -34,7 +34,8 @@ namespace Epi.Web.EF
                 result.DateCreated = entity.DateCreated;
                 if (entity.UserPublishKey != null)
                 {
-                    result.UserPublishKey = (Guid)entity.UserPublishKey.Value;
+                   // result.UserPublishKey = (Guid)entity.UserPublishKey.Value;
+                    result.UserPublishKey = entity.UserPublishKey;
                 }
                 result.SurveyType = entity.SurveyTypeId; 
             
