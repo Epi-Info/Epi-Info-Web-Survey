@@ -126,7 +126,7 @@ namespace Epi.Web.BLL
 
             }
             
-            else if (string.IsNullOrEmpty(pRequestMessage.XML))
+            else if (string.IsNullOrEmpty(pRequestMessage.XML) || string.IsNullOrWhiteSpace(pRequestMessage.XML))
             {
 
                 isValid = false;
