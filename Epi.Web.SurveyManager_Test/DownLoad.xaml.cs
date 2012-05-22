@@ -194,7 +194,7 @@ namespace Epi.Web.SurveyManager.Client
 
             if ((bool)this.OnlyCompletedCheckBox.IsChecked)
             {
-                Request.Criteria.StatusId = 1;
+                Request.Criteria.StatusId = 3;
             }
             //chkIsSizeRequestSurveyResponse
 
