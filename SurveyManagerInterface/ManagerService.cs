@@ -739,9 +739,17 @@ namespace Epi.Web.WCF.SurveyService
 
                     if (!ValidRequest(request, response, Validate.All))
                         return response;
-                     Implementation.InsertOrganizationInfo(Organization);
+                    if (Implementation.OrganizationNameExists(Organization.Organization, Organization.OrganizationKey, "Create"))
+                    {
+                        response.Message = "Organization name exists";
+                    }
+                    else
+                    {
+                        Implementation.InsertOrganizationInfo(Organization);
 
-                     response.Message = "Successfully added organization Key";
+                        response.Message = "Successfully added organization Key";
+                    }
+                       
                     return response;
                 }
                 else {
@@ -826,9 +834,18 @@ namespace Epi.Web.WCF.SurveyService
 
                     if (!ValidRequest(request, response, Validate.All))
                         return response;
+
+                    if (Implementation.OrganizationNameExists(Organization.Organization, Organization.OrganizationKey, "Update"))
+                    {
+                        response.Message = "Organization name exists";
+                    }
+
+                    else
+                    {
+                        Implementation.UpdateOrganizationInfo(Organization);
+                        response.Message = "Successfully Updated organization Key";
+                    }
                     
-                    Implementation.UpdateOrganizationInfo(Organization);
-                    response.Message = "Successfully Updated organization Key";
                     return response;
                 }
                 else

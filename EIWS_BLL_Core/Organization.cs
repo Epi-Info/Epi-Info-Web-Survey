@@ -63,6 +63,8 @@ namespace Epi.Web.BLL
 
         }
 
+
+
         //Validate Organization
         public bool ValidateOrganization(string Key)
         {
@@ -82,6 +84,43 @@ namespace Epi.Web.BLL
             }
 
             return ISValidOrg;
+        }
+
+        /// <summary>
+        /// Checks whether a particular organization name already exists in database
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="organizationName"></param>
+        /// <returns></returns>
+        public bool OrganizationNameExists(string organizationName,string key, string operation)
+        {
+
+            bool orgExists = false;
+            key = Epi.Web.Common.Security.Cryptography.Encrypt(key);
+            List<OrganizationBO> orgBOList = GetOrganizationNames();
+            //first find if the whether the organization name exists in the database
+            foreach (OrganizationBO oBo in orgBOList)
+            {
+                if (oBo.Organization.ToLower() == organizationName.ToLower())
+                {
+                   orgExists = true;     
+                }
+            }
+
+            if (operation == "Update")
+            {
+                //for update if we are updating the organization name to the same value, we should let it pass
+                //so turning the value to false
+                OrganizationBO result = this.OrganizationDao.GetOrganizationInfoByKey(key);
+                if (organizationName.ToLower() == result.Organization.ToLower())
+                {
+                    orgExists = false;
+                }
+            }
+
+          
+
+            return orgExists;
         }
 
         private OrganizationBO GetOrganizationObjByKey(string OrganizationKey)
