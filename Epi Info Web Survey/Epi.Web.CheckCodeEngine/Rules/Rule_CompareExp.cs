@@ -81,7 +81,7 @@ namespace Epi.Core.EnterInterpreter.Rules
                 }
                 else if (op.Equals("LIKE", StringComparison.OrdinalIgnoreCase) && LHSO is String && RHSO is String)
                 {
-                    string testValue = "^" + ((String)RHSO).Replace("*", "\\w*") + "$";
+                    string testValue = "^" + ((String)RHSO).Replace("*", "(\\s|\\w)*") + "$";
                     System.Text.RegularExpressions.Regex re = new System.Text.RegularExpressions.Regex(testValue, System.Text.RegularExpressions.RegexOptions.IgnoreCase);
 
 
