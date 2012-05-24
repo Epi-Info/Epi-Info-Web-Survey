@@ -145,6 +145,10 @@ namespace MvcDynamicForms.Fields
                 {
                     ControlClass.Append("required,custom[date]]");
                 }
+                else
+                {
+                    ControlClass.Append("custom[date]]");
+                }
                 return ControlClass.ToString();
             }
          
