@@ -55,6 +55,15 @@ namespace Epi.Web.MVC.Controllers
 
               //  TempData[Epi.Web.MVC.Constants.Constant.RESPONSE_ID] = "";
                 SurveyInfoModel surveyInfoModel = _isurveyFacade.GetSurveyInfoModel(surveyid);
+
+                //showing line breaks in introduction text
+                System.Text.RegularExpressions.Regex regex = new System.Text.RegularExpressions.Regex(@"(\r\n|\r|\n)+");
+
+                string introText = regex.Replace(surveyInfoModel.IntroductionText.Replace(" ", "&nbsp;"), "<br />");
+
+                surveyInfoModel.IntroductionText = MvcHtmlString.Create(introText).ToString();
+
+
                 return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, surveyInfoModel);
             }
             catch (Exception ex)
