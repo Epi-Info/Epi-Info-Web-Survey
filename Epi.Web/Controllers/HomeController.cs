@@ -59,7 +59,7 @@ namespace Epi.Web.MVC.Controllers
                 //showing line breaks in introduction text
                 System.Text.RegularExpressions.Regex regex = new System.Text.RegularExpressions.Regex(@"(\r\n|\r|\n)+");
 
-                string introText = regex.Replace(surveyInfoModel.IntroductionText.Replace(" ", "&nbsp;"), "<br />");
+                string introText = regex.Replace(surveyInfoModel.IntroductionText.Replace("  ", " &nbsp;"), "<br />");
 
                 surveyInfoModel.IntroductionText = MvcHtmlString.Create(introText).ToString();
 
