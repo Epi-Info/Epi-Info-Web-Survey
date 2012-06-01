@@ -44,7 +44,7 @@ namespace MvcDynamicForms.Fields
 
                 System.Text.RegularExpressions.Regex regex = new System.Text.RegularExpressions.Regex(@"(\r\n|\r|\n)+");
 
-                string newText = regex.Replace(Html.Replace(" ", "&nbsp;"), "<br />");
+                string newText = regex.Replace(Html.Replace("  ", " &nbsp;"), "<br />");
 
                 Html = MvcHtmlString.Create(newText).ToString();
 
@@ -53,7 +53,7 @@ namespace MvcDynamicForms.Fields
                 StringBuilder StyleValues = new StringBuilder();
 
                 StyleValues.Append(GetContolStyle(_fontstyle.ToString(), _top.ToString(), _left.ToString(), Width.ToString(), Height.ToString(), IsHidden));
-                StyleValues.Append(";word-wrap:break-word;");
+                //StyleValues.Append(";word-wrap:break-word;");
                  wrapper.Attributes.Add(new KeyValuePair<string, string>("style", StyleValues.ToString()));
                
                 wrapper.InnerHtml = Html;
