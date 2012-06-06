@@ -633,7 +633,7 @@ namespace Epi.Web.MVC.Utility
                 };
 
 
-            DropDown.AddChoices(DropDownValues, ",");
+            DropDown.AddChoices(DropDownValues, "&#44;");
 
             //if (!string.IsNullOrWhiteSpace(_ControlValue))
             //{
@@ -672,7 +672,7 @@ namespace Epi.Web.MVC.Utility
 
                        // DropDownValues.Append(_SourceTableValue.LastAttribute.Value );
                         DropDownValues.Append(_SourceTableValue.FirstAttribute.Value);
-                        DropDownValues.Append(",");
+                        DropDownValues.Append("&#44;");
                     }
                 }
             }
