@@ -23,7 +23,7 @@ namespace Epi.Core.EnterInterpreter.Rules
         /// <returns>Returns the system time.</returns>
         public override object Execute()
         {
-            return DateTime.Now;
+            return new TimeSpan(DateTime.Now.Ticks);
         }
     }
 }
