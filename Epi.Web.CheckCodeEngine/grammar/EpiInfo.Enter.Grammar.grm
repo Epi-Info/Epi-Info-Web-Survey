@@ -184,7 +184,7 @@ Comment End = '*/'
 <Var_Type_Numeric> ::= 'NUMERIC'
 <Var_Type_Text_Input> ::= 'TEXTINPUT'
 <Var_Type_YN> ::= 'YN'
-<Var_Type_Date> ::= 'DATEFORMAT'
+<Var_Type_Date> ::= 'DATEFORMAT'| 'DATETIMEFORMAT' | 'TIMEFORMAT'
 
 
 !Zack for function*************************************************************
