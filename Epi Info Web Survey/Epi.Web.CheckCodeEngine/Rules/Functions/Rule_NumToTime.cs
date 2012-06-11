@@ -40,7 +40,7 @@ namespace Epi.Core.EnterInterpreter.Rules
                 {
                     if (Int32.TryParse(ParameterList[0].Execute().ToString(), out second))
                     {
-                        result = new DateTime(1300, 1, 1, hour, minute, second);
+                        result = new TimeSpan(hour, minute, second);
                     }
                 }
             }

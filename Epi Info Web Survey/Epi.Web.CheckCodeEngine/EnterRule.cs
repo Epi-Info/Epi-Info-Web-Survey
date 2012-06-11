@@ -111,23 +111,53 @@ namespace Epi.Core.EnterInterpreter
         protected EpiInfo.Plugin.DataType GetDataType(string typeName)
         {
             EpiInfo.Plugin.DataType type = EpiInfo.Plugin.DataType.Unknown;
-            try
-            {
-                /*
-                foreach (Epi.DataSets.AppDataSet.DataTypesRow row in AppData.Instance.DataTypesDataTable.Rows)
-                {
-                    // save a dereference
-                    string expression = row.Expression;
 
-                    if (!string.IsNullOrEmpty(expression) && (string.Compare(typeName, expression, true) == 0))
-                    {
-                        return (type = ((EpiInfo.Plugin.DataType)row.DataTypeId));
-                    }
-                }*/
-            }
-            catch (Exception)
+            if (!string.IsNullOrWhiteSpace(typeName))
             {
+                switch (typeName.ToUpper())
+                {
+                    case "NUMERIC":
+                    case "NUMBER":
+                        type = EpiInfo.Plugin.DataType.Number;
+                        break;
+                    case "TEXT":
+                    case "TEXTINPUT":
+                        type = EpiInfo.Plugin.DataType.Text;
+                        break;
+                    case "DATE":
+                    case "DATEFORMAT":
+                        type = EpiInfo.Plugin.DataType.Date;
+                        break;
+                    case "TIME":
+                    case "TIMEFORMAT":
+                        type = EpiInfo.Plugin.DataType.Time;
+                        break;
+                    case "DATETIME":
+                    case "DATETIMEFORMAT":
+                        type = EpiInfo.Plugin.DataType.DateTime;
+                        break;
+                    case "PHONENUMBER":
+                        type = EpiInfo.Plugin.DataType.PhoneNumber;
+                        break;
+                    case "BOOLEAN":
+                    case "YESNO":
+                    case "YN":
+                        type = EpiInfo.Plugin.DataType.Boolean;
+                        break;
+                    case "GUID":
+                        type = EpiInfo.Plugin.DataType.GUID;
+                        break;
+                    case "DLLOBJECT":
+                    case "OBJECT":
+                        type = EpiInfo.Plugin.DataType.Object;
+                        break;
+                    case "UNKNOWN":
+                    default:
+                        type = EpiInfo.Plugin.DataType.Unknown;
+                        break;
+                }
             }
+             
             return type;
         }
 
