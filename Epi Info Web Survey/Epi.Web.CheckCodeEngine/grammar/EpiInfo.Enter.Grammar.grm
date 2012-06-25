@@ -601,7 +601,7 @@ Comment End = '*/'
 
 <Field_Checkcode_Statement> ::=  Field Identifier <Begin_Before_statement> <Begin_After_statement> <Begin_Click_statement>  End-Field
 
-<View_Checkcode_Statement> ::= View <Begin_Before_statement> <Begin_After_statement> End-View
+<View_Checkcode_Statement> ::= View <Begin_Before_statement> <Begin_After_statement> End-View | Form <Begin_Before_statement> <Begin_After_statement> End-Form
 <Record_Checkcode_Statement> ::= Record <Begin_Before_statement> <Begin_After_statement> End-Record
 
 <Page_Checkcode_Statement> ::= Page Identifier <Begin_Before_statement> <Begin_After_statement> End-Page
