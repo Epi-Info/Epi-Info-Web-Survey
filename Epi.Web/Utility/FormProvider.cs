@@ -57,7 +57,7 @@ namespace Epi.Web.MVC.Utility
                                      //where _FieldTypeID.Attribute("Position").Value == (PageNumber - 1).ToString()
                                      select _FieldTypeID;
 
-
+                
                 double _Width, _Height;
                 _Width = GetWidth(xdoc);
                 _Height= GetHeight(xdoc);
@@ -249,7 +249,7 @@ namespace Epi.Web.MVC.Utility
 
 
 
-
+               
 
 
                 form.FormJavaScript = VariableDefinitions.ToString() + "\n" + JavaScript.ToString();
@@ -264,11 +264,23 @@ namespace Epi.Web.MVC.Utility
              
             try
             {
-                var _top = from Node in
-                               xdoc.Descendants("View")
-                           select Node.Attribute("Height").Value;
+                if (GetOrientation(xdoc) == "Portrait")
+                {
+                    var _top = from Node in
+                                   xdoc.Descendants("View")
+                               select Node.Attribute("Height").Value;
 
-                 return double.Parse(_top.First());
+                    return double.Parse(_top.First());
+                }
+                else {
+
+                    var _top = from Node in
+                                   xdoc.Descendants("View")
+                               select Node.Attribute("Width").Value;
+
+                    return double.Parse(_top.First());
+                
+                }
 
             }
             catch (System.Exception ex)
@@ -283,11 +295,23 @@ namespace Epi.Web.MVC.Utility
 
             try
             {
-                
-                var _left = (from Node in
-                                 xdoc.Descendants("View")
-                             select Node.Attribute("Width").Value);
-                return double.Parse(_left.First());
+                if (GetOrientation(xdoc) == "Portrait")
+                {
+                    var _left = (from Node in
+                                     xdoc.Descendants("View")
+                                 select Node.Attribute("Width").Value);
+                    return double.Parse(_left.First());
+                }
+                else
+                {
+
+                    var _top = from Node in
+                                   xdoc.Descendants("View")
+                               select Node.Attribute("Height").Value;
+
+                    return double.Parse(_top.First());
+
+                }
             }
             catch (System.Exception ex)
             {
@@ -295,6 +319,25 @@ namespace Epi.Web.MVC.Utility
                 return  1024;
             }
         }
+        // Orientation="Landscape"
+        public static string GetOrientation(XDocument xdoc)
+        {
+
+            try
+            {
+
+                var Orientation = (from Node in
+                                 xdoc.Descendants("View")
+                             select Node.Attribute("Orientation").Value);
+                return Orientation.First().ToString();
+            }
+            catch (System.Exception ex)
+            {
+
+                return null;
+            }
+        }
+
 
         public  static string GetControlValue( string Xml,string ControlName ) 
         {
