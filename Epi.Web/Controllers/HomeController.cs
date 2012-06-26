@@ -100,6 +100,8 @@ namespace Epi.Web.MVC.Controllers
  
                 MvcDynamicForms.Form form = _isurveyFacade.GetSurveyFormData(SurveyAnswer.SurveyId, 1, SurveyAnswer);
 
+                TempData["Width"] = form.Width + 100;
+
                 XDocument xdoc = XDocument.Parse(surveyInfoModel.XML);
                 XDocument xdocResponse = XDocument.Parse(SurveyAnswer.XML);
 
