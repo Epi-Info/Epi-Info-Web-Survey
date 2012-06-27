@@ -64,6 +64,9 @@ namespace Epi.Web.MVC.Controllers
                 surveyInfoModel.IntroductionText = MvcHtmlString.Create(introText).ToString();
 
 
+                XDocument xdoc = XDocument.Parse(surveyInfoModel.XML);
+                TempData["Width"] = GetWidth(xdoc) + 100;
+
                 return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, surveyInfoModel);
             }
             catch (Exception ex)
@@ -197,7 +200,54 @@ namespace Epi.Web.MVC.Controllers
 
             return _FieldsTypeIDs.Elements().Count();
         }
+      
+        public static double GetWidth(XDocument xdoc)
+        {
 
+            try
+            {
+                if (GetOrientation(xdoc) == "Portrait")
+                {
+                    var _left = (from Node in
+                                     xdoc.Descendants("View")
+                                 select Node.Attribute("Width").Value);
+                    return double.Parse(_left.First());
+                }
+                else
+                {
+
+                    var _top = from Node in
+                                   xdoc.Descendants("View")
+                               select Node.Attribute("Height").Value;
+
+                    return double.Parse(_top.First());
+
+                }
+            }
+            catch (System.Exception ex)
+            {
+
+                return 1024;
+            }
+        }
+        // Orientation="Landscape"
+        public static string GetOrientation(XDocument xdoc)
+        {
+
+            try
+            {
+
+                var Orientation = (from Node in
+                                       xdoc.Descendants("View")
+                                   select Node.Attribute("Orientation").Value);
+                return Orientation.First().ToString();
+            }
+            catch (System.Exception ex)
+            {
+
+                return null;
+            }
+        }
         //public  string UpdateResponseFromContext(XDocument RequestXml, Dictionary<string, string> ContextDetailList, string ResponseXml, Epi.Web.MVC.Models.SurveyInfoModel surveyModel, string ResponseID)
        
       
