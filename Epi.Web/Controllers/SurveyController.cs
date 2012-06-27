@@ -74,7 +74,7 @@ namespace Epi.Web.MVC.Controllers
                         case PreValidationResultEnum.Success:
                         default:
                             var form = _isurveyFacade.GetSurveyFormData(surveyAnswerDTO.SurveyId, PageNumber, surveyAnswerDTO);
-                            TempData["Width"] = form.Width + 100;
+                            TempData["Width"] = form.Width + 30;
                             // if redirect then perform server validation before displaying
                             if (TempData.ContainsKey("isredirect") && !string.IsNullOrWhiteSpace(TempData["isredirect"].ToString()))
                             {
@@ -206,7 +206,7 @@ namespace Epi.Web.MVC.Controllers
                             // Pass Code Logic  end 
                              _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId, form, SurveyAnswer, IsSubmited, IsSaved, PageNumber);
 
-                             TempData["Width"] = form.Width + 100;
+                             TempData["Width"] = form.Width + 30;
                                 return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
 
                         }
@@ -242,7 +242,7 @@ namespace Epi.Web.MVC.Controllers
                                     if (!form.Validate())
                                     {
                                         TempData["isredirect"] = "true";
-                                        TempData["Width"] = form.Width + 100;
+                                        TempData["Width"] = form.Width + 30;
                                         //  return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
                                         _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId, form, SurveyAnswer, IsSubmited, IsSaved, i);
                                         return RedirectToRoute(new { Controller = "Survey", Action = "Index", responseid = responseId, PageNumber = i.ToString() });
@@ -263,7 +263,7 @@ namespace Epi.Web.MVC.Controllers
                                 IsSubmited = true;//survey has been submited this will change the survey status to 3 - Completed
                                 _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId, form, SurveyAnswer, IsSubmited, IsSaved, PageNumber);
                                 FormsAuthentication.SignOut();
-                                TempData["Width"] = form.Width + 100;
+                                
                                 return RedirectToAction("Index", "Final", new { surveyId = surveyInfoModel.SurveyId });
                             }
                             else
@@ -281,7 +281,7 @@ namespace Epi.Web.MVC.Controllers
 
                                 SurveyAnswer = _isurveyFacade.GetSurveyAnswerResponse(responseId).SurveyResponseList[0];
                                 form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, PageNumber, SurveyAnswer);
-                                TempData["Width"] = form.Width + 100;
+                                TempData["Width"] = form.Width + 30;
                                 return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
                             }
 
@@ -296,13 +296,13 @@ namespace Epi.Web.MVC.Controllers
                             if (CurrentPageNum != PageNumber) // failed validation and navigating to different page// must keep url the same 
                             {
                                 TempData["isredirect"] = "true";
-                                TempData["Width"] = form.Width + 100;
+                                TempData["Width"] = form.Width + 30;
                                 return RedirectToAction("Index", "Survey", new { RequestId = form.ResponseId, PageNumber = CurrentPageNum });
                                  
                             }
                             else
                             {
-                                TempData["Width"] = form.Width + 100;
+                                TempData["Width"] = form.Width + 30;
                                 return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
                             }
                         }
