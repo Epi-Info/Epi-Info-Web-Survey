@@ -355,8 +355,9 @@ Comment End = '*/'
 <Dialog_Write_Statement>                    ::= DIALOG String Identifier WRITE <TitleOpt>
 <Dialog_Read_Filter_Statement>              ::= DIALOG String Identifier READ String <TitleOpt>
 <Dialog_Write_Filter_Statement>                 ::= DIALOG String Identifier WRITE String <TitleOpt>
-<Dialog_Date_Statement>                     ::= DIALOG String Identifier DATEFORMAT <TitleOpt>
-<Dialog_Date_Mask_Statement>                    ::= DIALOG String Identifier DATEFORMAT String <TitleOpt>
+<Dialog_Date_Statement>                     ::= DIALOG String Identifier DATEFORMAT <TitleOpt> | DIALOG String Identifier DATETIMEFORMAT <TitleOpt> | DIALOG String Identifier TIMEFORMAT <TitleOpt>
+<Dialog_Date_Mask_Statement>                    ::= DIALOG String Identifier DATEFORMAT String <TitleOpt> | DIALOG String Identifier DATETIMEFORMAT String <TitleOpt> | DIALOG String Identifier TIMEFORMAT String <TitleOpt>
+
 <TitleOpt>                          ::= <SimpleTitleOpt> 
 
 <SimpleTitleOpt>                        ::= TITLETEXT '=' String
