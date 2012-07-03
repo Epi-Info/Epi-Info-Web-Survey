@@ -248,13 +248,13 @@ namespace Epi.Web.MVC.Controllers
                                         return RedirectToRoute(new { Controller = "Survey", Action = "Index", responseid = responseId, PageNumber = i.ToString() });
                                     }
 
-                                    ///////////////////////////// Execute - Record After - start//////////////////////
-                                    else
-                                    {
-                                        form = Epi.Web.MVC.Utility.SurveyHelper.UpdateControlsValuesFromContext(form, ContextDetailList);
-                                        _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId, form, SurveyAnswer, false, false, i);
-                                    }
-                                    ///////////////////////////// Execute - Record After - End//////////////////////
+                                    /////////////////////////////// Execute - Record After - start//////////////////////
+                                    //else
+                                    //{
+                                    //    form = Epi.Web.MVC.Utility.SurveyHelper.UpdateControlsValuesFromContext(form, ContextDetailList);
+                                    //    _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId, form, SurveyAnswer, false, false, i);
+                                    //}
+                                    /////////////////////////////// Execute - Record After - End//////////////////////
                                 }
 
                                
