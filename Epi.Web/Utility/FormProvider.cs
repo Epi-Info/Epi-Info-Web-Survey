@@ -178,7 +178,7 @@ namespace Epi.Web.MVC.Utility
 
 
 
-                                form.AddFields(GetDropDown(_FieldTypeID, _Width, _Height, SurveyAnswer, _DropDownSelectedValueYN, "Yes,No", 11));
+                                form.AddFields(GetDropDown(_FieldTypeID, _Width, _Height, SurveyAnswer, _DropDownSelectedValueYN, "Yes&#;No", 11));
                                 //                                             pName, pType, pSource
                                 //VariableDefinitions.AppendLine(string.Format(defineFormat, _FieldTypeID.Attribute("Name").Value, "yesno", "datasource",Value)); 
 
@@ -675,9 +675,10 @@ namespace Epi.Web.MVC.Utility
 
                 };
 
-
-            DropDown.AddChoices(DropDownValues, "&#44;");
-
+        
+           
+                DropDown.AddChoices(DropDownValues, "&#;");
+            
             //if (!string.IsNullOrWhiteSpace(_ControlValue))
             //{
             //    DropDown.Choices[_ControlValue] = true;
@@ -715,7 +716,7 @@ namespace Epi.Web.MVC.Utility
 
                        // DropDownValues.Append(_SourceTableValue.LastAttribute.Value );
                         DropDownValues.Append(_SourceTableValue.FirstAttribute.Value);
-                        DropDownValues.Append("&#44;");
+                        DropDownValues.Append("&#;");
                     }
                 }
             }
