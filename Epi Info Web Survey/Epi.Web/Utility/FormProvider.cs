@@ -715,7 +715,7 @@ namespace Epi.Web.MVC.Utility
                     {
 
                        // DropDownValues.Append(_SourceTableValue.LastAttribute.Value );
-                        DropDownValues.Append(_SourceTableValue.FirstAttribute.Value);
+                        DropDownValues.Append(_SourceTableValue.FirstAttribute.Value.Trim());
                         DropDownValues.Append("&#;");
                     }
                 }
