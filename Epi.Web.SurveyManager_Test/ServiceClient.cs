@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.ServiceModel;
 using System.ServiceModel.Security;
+using System.Configuration;
 using Epi.Web.Common.Exception;
 
 namespace Epi.Web.SurveyManager.Client
@@ -19,6 +20,7 @@ namespace Epi.Web.SurveyManager.Client
 
                 if (pIsAuthenticated) // Windows Authentication
                 {
+                    /*
                     System.ServiceModel.BasicHttpBinding binding = new System.ServiceModel.BasicHttpBinding();
                     binding.Name = "BasicHttpBinding";
                     binding.CloseTimeout = new TimeSpan(0, 1, 0);
@@ -48,14 +50,15 @@ namespace Epi.Web.SurveyManager.Client
                     binding.Security.Message.ClientCredentialType = System.ServiceModel.BasicHttpMessageCredentialType.UserName;
 
                     System.ServiceModel.EndpointAddress endpoint = new System.ServiceModel.EndpointAddress(pEndPointAddress);
-
-                    result = new SurveyManagerService.ManagerServiceClient(binding, endpoint);
+                    */
+                    result = new SurveyManagerService.ManagerServiceClient();
 
                     result.ClientCredentials.Windows.AllowedImpersonationLevel = System.Security.Principal.TokenImpersonationLevel.Impersonation;
                     result.ChannelFactory.Credentials.Windows.ClientCredential = System.Net.CredentialCache.DefaultNetworkCredentials;
                 }
                 else
                 {
+                    /*
                     System.ServiceModel.WSHttpBinding binding = new System.ServiceModel.WSHttpBinding();
                     binding.Name = "WSHttpBinding";
                     binding.CloseTimeout = new TimeSpan(0, 1, 0);
@@ -88,10 +91,10 @@ namespace Epi.Web.SurveyManager.Client
                     binding.Security.Transport.Realm = string.Empty;
                     binding.Security.Message.ClientCredentialType = System.ServiceModel.MessageCredentialType.Windows;
                     binding.Security.Message.NegotiateServiceCredential = true;
-
+                    
                     System.ServiceModel.EndpointAddress endpoint = new System.ServiceModel.EndpointAddress(pEndPointAddress);
-
-                    result = new SurveyManagerService.ManagerServiceClient(binding, endpoint);
+*/
+                    result = new SurveyManagerService.ManagerServiceClient();
                 }
 
             }
@@ -120,6 +123,14 @@ namespace Epi.Web.SurveyManager.Client
                 throw ex;
             }
                 return result;
+        }
+
+        public static SurveyManagerService.ManagerServiceClient GetClient()
+        {
+            string pEndPointAddress = ConfigurationManager.AppSettings["EndPointAddress"];
+            bool pIsAuthenticated = ConfigurationManager.AppSettings["WindowsAuthentication"].Equals("True", StringComparison.OrdinalIgnoreCase);
+
+            return GetClient(pEndPointAddress, pIsAuthenticated); 
         }
     }
 }
