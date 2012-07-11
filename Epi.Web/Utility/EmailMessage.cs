@@ -15,7 +15,7 @@ namespace Epi.Web.Utility
         /// <param name="email"></param>
         /// <param name="response"></param>
         /// <returns></returns>
-        public static bool SendMessage(string emailAddress, string redirectUrl,string surveyName,string passCode)
+        public static bool SendMessage_VerifiedGoogle(string emailAddress, string redirectUrl,string surveyName,string passCode)
         {
             try
             {
@@ -42,6 +42,35 @@ namespace Epi.Web.Utility
                 smtp.EnableSsl = true;
 
                 smtp.Send(message);
+                return true;
+
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// the following method takes email and responseUrl as argument and email redirection url to the user 
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="response"></param>
+        /// <returns></returns>
+        public static bool SendMessage(string emailAddress, string redirectUrl, string surveyName, string passCode)
+        {
+            try
+            {
+                System.Net.Mail.MailMessage message = new System.Net.Mail.MailMessage();
+                message.To.Add(emailAddress);
+                message.Subject = "Link for Survey: " + surveyName; 
+                message.From = new System.Net.Mail.MailAddress(ConfigurationManager.AppSettings["EMAIL_FROM"].ToString());
+                message.Body = redirectUrl + " and Pass Code is: " + passCode;
+
+                System.Net.Mail.SmtpClient smtp = new System.Net.Mail.SmtpClient(ConfigurationManager.AppSettings["SMTP_HOST"].ToString());
+
+                smtp.Send(message);
+
                 return true;
 
             }
