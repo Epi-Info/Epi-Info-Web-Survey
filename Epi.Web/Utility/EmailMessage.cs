@@ -72,10 +72,9 @@ namespace Epi.Web.Utility
                     smtp.Credentials = new System.Net.NetworkCredential(ConfigurationManager.AppSettings["EMAIL_FROM"].ToString(), ConfigurationManager.AppSettings["EMAIL_PASSWORD"].ToString());
                 }
 
-                if (isUsingSSL)
-                {
-                    smtp.EnableSsl = true;
-                }
+                
+                smtp.EnableSsl = isUsingSSL;
+                
 
                 smtp.Send(message);
 
