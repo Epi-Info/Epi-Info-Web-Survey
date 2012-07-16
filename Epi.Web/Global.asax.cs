@@ -150,8 +150,13 @@ namespace Epi.Web.MVC
                         EventLog.CreateEventSource(sSource, sLog);
                     }
 
-                    EventLog.WriteEntry(sSource, sEvent,
-                    EventLogEntryType.Warning, 234);
+                    EventLog.WriteEntry
+                    (
+                            sSource,
+                            sEvent,
+                            EventLogEntryType.Warning,
+                            234
+                    );
                 }
             }
 
@@ -160,7 +165,11 @@ namespace Epi.Web.MVC
             {
                 if (s.ToUpper() == "TRUE")
                 {
-                    Epi.Web.Utility.EmailMessage.SendLogMessage("","Epi.Web.Survey - Exception", "");
+                    s = ConfigurationManager.AppSettings["LOGGING_ADMIN_EMAIL_ADDRESS"];
+                    if (!String.IsNullOrEmpty(s))
+                    {
+                        Epi.Web.Utility.EmailMessage.SendLogMessage(s, "Epi.Web.Survey - Exception", sEvent);
+                    }
                 }
             }
 
