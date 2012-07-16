@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using System.Diagnostics;
+using System.Configuration;
 
 namespace Epi.Web.MVC
 {
@@ -124,6 +126,44 @@ namespace Epi.Web.MVC
             RegisterRoutes(RouteTable.Routes);
 
             Bootstrapper.Initialise();
+        }
+
+        protected void Application_Error()
+        {
+            Exception exc = Server.GetLastError();
+
+            string sSource;
+            string sLog;
+            string sEvent;
+
+            sSource = "Epi.Web.Survey";
+            sLog = "Application";
+            sEvent = exc.Message;
+
+            string s = ConfigurationManager.AppSettings["LOGGING_USE_WINDOWS_EVENT_LOG"];
+            if (!String.IsNullOrEmpty(s))
+            {
+                if (s.ToUpper() == "TRUE")
+                {
+                    if (!EventLog.SourceExists(sSource))
+                    {
+                        EventLog.CreateEventSource(sSource, sLog);
+                    }
+
+                    EventLog.WriteEntry(sSource, sEvent,
+                    EventLogEntryType.Warning, 234);
+                }
+            }
+
+            s = ConfigurationManager.AppSettings["LOGGING_SEND_EMAIL_NOTIFICATION"];
+            if (!String.IsNullOrEmpty(s))
+            {
+                if (s.ToUpper() == "TRUE")
+                {
+                    Epi.Web.Utility.EmailMessage.SendLogMessage("","Epi.Web.Survey - Exception", "");
+                }
+            }
+
         }
     }
 }
