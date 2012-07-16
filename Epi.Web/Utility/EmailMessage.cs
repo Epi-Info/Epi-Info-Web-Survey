@@ -92,9 +92,8 @@ namespace Epi.Web.Utility
         /// the following method sends email messages from loggin errors 
         /// </summary>
         /// <param name="emailAddress">email address for sending message (email is NOT saved)</param>
-        /// <param name="redirectUrl">url for resuming the saved survey</param>
-        /// <param name="surveyName">Name of the survey</param>
-        /// <param name="passCode"> Code for accessing an unfinished survey </param>
+        /// <param name="pSubjectLine">subject text</param>
+        /// <param name="pMessage">Message body text</param>
         /// <returns></returns>
         public static bool SendLogMessage(string emailAddress, string pSubjectLine, string pMessage)
         {
@@ -166,5 +165,5 @@ namespace Epi.Web.Utility
         }
     }
 
-    }
+   
 }
