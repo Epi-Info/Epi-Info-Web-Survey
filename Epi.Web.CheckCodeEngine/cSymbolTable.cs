@@ -136,6 +136,11 @@ namespace Epi.Core.EnterInterpreter
             return result;
         }
 
+        public bool SymbolIsInScope(string pName)
+        {
+            return this._SymbolList.ContainsKey(pName);
+        }
+
         public Dictionary<string, EpiInfo.Plugin.IVariable> SymbolList { get { return this._SymbolList; } }
 
         public List<EpiInfo.Plugin.IVariable> FindVariables(EpiInfo.Plugin.VariableScope pScopeCombination, string pNamespace = null)
@@ -180,12 +185,9 @@ namespace Epi.Core.EnterInterpreter
             }
             else
             {
-
                 for (int i = 0; i < _SymbolList.Count; i++)
                 {
-
                     KeyValuePair<string, EpiInfo.Plugin.IVariable> kvp = _SymbolList.ElementAt(i);
-
                     if ((kvp.Value.VariableScope & pScopeCombination) > 0)
                     {
                         this.undefine(kvp.Key, pNamespace);
