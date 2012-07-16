@@ -130,49 +130,55 @@ namespace Epi.Web.MVC
 
         protected void Application_Error()
         {
-            Exception exc = Server.GetLastError();
-
-            string sSource;
-            string sLog;
-            string sEvent;
-
-            sSource = "Epi.Web.Survey";
-            sLog = "Application";
-            sEvent = exc.Message;
-
-            string s = ConfigurationManager.AppSettings["LOGGING_USE_WINDOWS_EVENT_LOG"];
-            if (!String.IsNullOrEmpty(s))
+            try
             {
-                if (s.ToUpper() == "TRUE")
-                {
-                    if (!EventLog.SourceExists(sSource))
-                    {
-                        EventLog.CreateEventSource(sSource, sLog);
-                    }
+                Exception exc = Server.GetLastError();
 
-                    EventLog.WriteEntry
-                    (
-                            sSource,
-                            sEvent,
-                            EventLogEntryType.Warning,
-                            234
-                    );
-                }
-            }
+                string sSource;
+                string sLog;
+                string sEvent;
 
-            s = ConfigurationManager.AppSettings["LOGGING_SEND_EMAIL_NOTIFICATION"];
-            if (!String.IsNullOrEmpty(s))
-            {
-                if (s.ToUpper() == "TRUE")
+                sSource = "Epi.Web.Survey";
+                sLog = "Application";
+                sEvent = exc.Message;
+
+                string s = ConfigurationManager.AppSettings["LOGGING_USE_WINDOWS_EVENT_LOG"];
+                if (!String.IsNullOrEmpty(s))
                 {
-                    s = ConfigurationManager.AppSettings["LOGGING_ADMIN_EMAIL_ADDRESS"];
-                    if (!String.IsNullOrEmpty(s))
+                    if (s.ToUpper() == "TRUE")
                     {
-                        Epi.Web.Utility.EmailMessage.SendLogMessage(s, "Epi.Web.Survey - Exception", sEvent);
+                        if (!EventLog.SourceExists(sSource))
+                        {
+                            EventLog.CreateEventSource(sSource, sLog);
+                        }
+
+                        EventLog.WriteEntry
+                        (
+                                sSource,
+                                sEvent,
+                                EventLogEntryType.Warning,
+                                234
+                        );
                     }
                 }
-            }
 
+                s = ConfigurationManager.AppSettings["LOGGING_SEND_EMAIL_NOTIFICATION"];
+                if (!String.IsNullOrEmpty(s))
+                {
+                    if (s.ToUpper() == "TRUE")
+                    {
+                        s = ConfigurationManager.AppSettings["LOGGING_ADMIN_EMAIL_ADDRESS"];
+                        if (!String.IsNullOrEmpty(s))
+                        {
+                            Epi.Web.Utility.EmailMessage.SendLogMessage(s, "Epi.Web.Survey - Exception", sEvent);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // do nothing
+            }
         }
     }
 }
