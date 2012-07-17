@@ -128,11 +128,19 @@ namespace Epi.Web.MVC
             Bootstrapper.Initialise();
         }
 
+
+        /// <summary>
+        ///  HKLM\SYSTEM\CurrentControlSet\services\eventlog needs to be set 
+        ///  in order to use the event log
+        /// </summary>
         protected void Application_Error()
         {
+
+            Exception exc = Server.GetLastError();
+
             try
             {
-                Exception exc = Server.GetLastError();
+                
 
                 string sSource;
                 string sLog;
@@ -142,27 +150,31 @@ namespace Epi.Web.MVC
                 sLog = "Application";
                 sEvent = exc.Message;
 
-                string s = ConfigurationManager.AppSettings["LOGGING_USE_WINDOWS_EVENT_LOG"];
-                if (!String.IsNullOrEmpty(s))
-                {
-                    if (s.ToUpper() == "TRUE")
-                    {
-                        if (!EventLog.SourceExists(sSource))
-                        {
-                            EventLog.CreateEventSource(sSource, sLog);
-                        }
 
-                        EventLog.WriteEntry
-                        (
-                                sSource,
-                                sEvent,
-                                EventLogEntryType.Warning,
-                                234
-                        );
-                    }
-                }
+                // This is disabled if customized event logging needs to happen then we need to add Registry Keys and EventId for the application
+                //string s = ConfigurationManager.AppSettings["LOGGING_USE_WINDOWS_EVENT_LOG"];
+                //if (!String.IsNullOrEmpty(s))
+                //{
+                //    if (s.ToUpper() == "TRUE")
+                //    {
+                //        ///HKLM\SYSTEM\CurrentControlSet\services\eventlog\Application
 
-                s = ConfigurationManager.AppSettings["LOGGING_SEND_EMAIL_NOTIFICATION"];
+                //        if (!EventLog.SourceExists(sSource))
+                //        {
+                //            EventLog.CreateEventSource(sSource, sLog);
+                //        }
+
+                //        EventLog.WriteEntry
+                //        (
+                //                sSource,
+                //                sEvent,
+                //                EventLogEntryType.Warning,
+                //                234
+                //        );
+                //    }
+                //}
+
+                string s = ConfigurationManager.AppSettings["LOGGING_SEND_EMAIL_NOTIFICATION"];
                 if (!String.IsNullOrEmpty(s))
                 {
                     if (s.ToUpper() == "TRUE")
@@ -177,7 +189,7 @@ namespace Epi.Web.MVC
             }
             catch (Exception ex)
             {
-                // do nothing
+                throw exc; // throw original exception for event log
             }
         }
     }
