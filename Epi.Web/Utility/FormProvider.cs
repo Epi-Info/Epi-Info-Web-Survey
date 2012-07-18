@@ -183,6 +183,15 @@ namespace Epi.Web.MVC.Utility
                                 //VariableDefinitions.AppendLine(string.Format(defineFormat, _FieldTypeID.Attribute("Name").Value, "yesno", "datasource",Value)); 
 
                                 break;
+                            case "12"://RadioList
+                                  var _GroupBoxValue1 = GetControlValue(SurveyAnswer, _FieldTypeID.Attribute("UniqueId").Value);
+                                form.AddFields(GetGroupBox(_FieldTypeID, _Width+12, _Height, SurveyAnswer, _GroupBoxValue1));
+                                var _RadioListSelectedValue1 = Value;
+                                string RadioListValues1 = "";
+                                RadioListValues1 =  _FieldTypeID.Attribute("List").Value ;
+                                form.AddFields(GetRadioList(_FieldTypeID, _Width, _Height, SurveyAnswer, _RadioListSelectedValue1, RadioListValues1));
+                               
+                                break;
                             case "17"://DropDown LegalValues
 
                                 string DropDownValues1 = "";
@@ -363,6 +372,58 @@ namespace Epi.Web.MVC.Utility
 
             return ControlValue;
         }
+
+        private static RadioList GetRadioList(XElement _FieldTypeID, double _Width, double _Height, string SurveyAnswer, string _ControlValue, string RadioListValues)
+        {
+
+            var RadioList = new RadioList();
+             
+                RadioList.Title = _FieldTypeID.Attribute("Name").Value;
+                RadioList.Prompt = _FieldTypeID.Attribute("PromptText").Value;
+                RadioList.DisplayOrder = int.Parse(_FieldTypeID.Attribute("TabIndex").Value);
+                RadioList.Required = _FieldTypeID.Attribute("IsRequired").Value == "True" ? true : false;
+                //RadioList.RequiredMessage = _FieldTypeID.Attribute("PromptText").Value + " is required",
+                RadioList.RequiredMessage = "This field is required";
+                RadioList.Key = _FieldTypeID.Attribute("Name").Value;
+                //RadioList.PromptTop = _Height * double.Parse(_FieldTypeID.Attribute("PromptTopPositionPercentage").Value);
+                //RadioList.PromptLeft = _Width * double.Parse(_FieldTypeID.Attribute("PromptLeftPositionPercentage").Value);
+                RadioList.Top = _Height * double.Parse(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value);
+                RadioList.Left = _Width * double.Parse(_FieldTypeID.Attribute("ControlLeftPositionPercentage").Value);
+                RadioList.PromptWidth = _Width * double.Parse(_FieldTypeID.Attribute("ControlWidthPercentage").Value);
+                RadioList.ControlWidth = _Width * double.Parse(_FieldTypeID.Attribute("ControlWidthPercentage").Value);
+                RadioList.fontstyle = _FieldTypeID.Attribute("PromptFontStyle").Value;
+                RadioList.fontSize = double.Parse(_FieldTypeID.Attribute("PromptFontSize").Value);
+                RadioList.fontfamily = _FieldTypeID.Attribute("PromptFontFamily").Value;
+                RadioList.IsRequired = bool.Parse(_FieldTypeID.Attribute("IsRequired").Value);
+                RadioList.IsReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value);
+                //RadioList.Lower = _FieldTypeID.Attribute("Lower").Value;
+                //RadioList.Upper = _FieldTypeID.Attribute("Upper").Value;
+                RadioList.Value = _ControlValue;
+                RadioList.IsHidden = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "HiddenFieldsList");
+                RadioList.IsHighlighted = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "HighlightedFieldsList");
+                RadioList.IsDisabled = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "DisabledFieldsList");
+                RadioList.ShowTextOnRight = bool.Parse(_FieldTypeID.Attribute("ShowTextOnRight").Value);
+                RadioList.Choices = GetChoices(_FieldTypeID.Attribute("List").Value.Split(',').ToList<string>());
+
+
+                double Ht = _Height * double.Parse(_FieldTypeID.Attribute("ControlHeightPercentage").Value) ;
+               double Wth = _Width * double.Parse(_FieldTypeID.Attribute("ControlWidthPercentage").Value) ;
+
+
+               if (Wth > Ht)
+                {
+                    RadioList.Orientation = (Orientation)1;
+                }
+                else
+                {
+
+                    RadioList.Orientation = (Orientation)0;
+                }
+             
+            return RadioList;
+
+        }
+
         private static NumericTextBox GetNumericTextBox(XElement _FieldTypeID, double _Width, double _Height, string SurveyAnswer, string _ControlValue)
         {
 
@@ -732,7 +793,7 @@ namespace Epi.Web.MVC.Utility
                     GroupBox.Title = _FieldTypeID.Attribute("Name").Value;
                     GroupBox.Prompt = _FieldTypeID.Attribute("PromptText").Value;
                     GroupBox.RequiredMessage = "This field is required";
-                    GroupBox.Key = _FieldTypeID.Attribute("Name").Value;
+                    GroupBox.Key = _FieldTypeID.Attribute("Name").Value + "_GroupBox";
                     GroupBox.PromptTop = _Height * double.Parse(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value) ;
                     GroupBox.PromptLeft = _Width * double.Parse(_FieldTypeID.Attribute("ControlLeftPositionPercentage").Value) ;
                     GroupBox.Top = _Height * double.Parse(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value);
@@ -889,7 +950,19 @@ namespace Epi.Web.MVC.Utility
         }
 
 
+        public static Dictionary<string, bool> GetChoices(List<string> List) {
 
+            Dictionary<string, bool> NewList = new Dictionary<string, bool>();
+            foreach (var _List in List)
+            {
+
+                NewList.Add(_List, false);
+            
+            }
+
+            return NewList;
+        
+        }
        
 
     }
