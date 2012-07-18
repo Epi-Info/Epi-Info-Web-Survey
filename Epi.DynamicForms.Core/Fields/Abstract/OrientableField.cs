@@ -16,7 +16,8 @@ namespace MvcDynamicForms.Fields
         protected string _horizontalClass = "MvcDynamicHorizontal";
         protected string _listClass = "MvcDynamicOrientableList";
         protected Orientation _orientation = Orientation.Vertical;
-
+        protected bool _showTextOnRight;
+        public string Value { get; set; }
         /// <summary>
         /// The direction that the choices will be displayed.
         /// </summary>
@@ -85,6 +86,18 @@ namespace MvcDynamicForms.Fields
             set
             {
                 _listClass = value;
+            }
+        }
+
+       public bool ShowTextOnRight
+        {
+            get
+            {
+                return _showTextOnRight;
+            }
+            set
+            {
+                _showTextOnRight = value;
             }
         }
     }

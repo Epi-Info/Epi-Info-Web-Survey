@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web.Mvc;
+using Epi.Core.EnterInterpreter;
 
 namespace MvcDynamicForms.Fields
 {
@@ -12,16 +13,17 @@ namespace MvcDynamicForms.Fields
     [Serializable]
     public class RadioList : OrientableField
     {
+        
         public override string RenderHtml()
         {
             var html = new StringBuilder();
             var inputName = _form.FieldPrefix + _key;
 
             // prompt label
-            var prompt = new TagBuilder("label");
-            prompt.Attributes.Add("class", _promptClass);
-            prompt.SetInnerText(Prompt);
-            html.Append(prompt.ToString());
+            //var prompt = new TagBuilder("label");
+            //prompt.Attributes.Add("class", _promptClass);
+            //prompt.SetInnerText(Prompt);
+            //html.Append(prompt.ToString());
 
             // error label
             if (!IsValid)
@@ -31,39 +33,84 @@ namespace MvcDynamicForms.Fields
                 error.SetInnerText(Error);
                 html.Append(error.ToString());
             }
-
+           
             // list of radio buttons            
             var ul = new TagBuilder("ul");
             ul.Attributes.Add("class", _orientation == Orientation.Vertical ? _verticalClass : _horizontalClass);
             ul.Attributes["class"] += " " + _listClass;
+            ul.Attributes.Add("style", "position:absolute;left:" + (_left).ToString() + "px;top:" + _top.ToString() + "px" + ";width:" + _ControlWidth.ToString() + "px" + ";height:" + _ControlHeight.ToString() + "px");
+           
+
             html.Append(ul.ToString(TagRenderMode.StartTag));
 
-            var choicesList = _choices.ToList();
+           var choicesList = _choices.ToList();
+           
             for (int i = 0; i < choicesList.Count; i++)
             {
                 string radId = inputName + i;
-
+               
                 // open list item
                 var li = new TagBuilder("li");
+                li.Attributes.Add ("style","float:left");
                 html.Append(li.ToString(TagRenderMode.StartTag));
+                // checkbox label
+                if (!_showTextOnRight)
+                {
+                    var Leftlbl = new TagBuilder("label");
+                   // Leftlbl.Attributes.Add("for", radId);
+                    Leftlbl.Attributes.Add("for", inputName);
+                    Leftlbl.Attributes.Add("class", _inputLabelClass);
+                    Leftlbl.Attributes.Add("Id", "label" + inputName + "_" + i);
+                    StringBuilder StyleValues = new StringBuilder();
+                    StyleValues.Append(GetRadioListStyle(_fontstyle.ToString(), null, null, null, null, IsHidden));
+                    Leftlbl.Attributes.Add("style", StyleValues.ToString());
+                    Leftlbl.SetInnerText(choicesList[i].Key);
+                    html.Append(Leftlbl.ToString());
+                     
+                }
 
                 // radio button input
                 var rad = new TagBuilder("input");
                 rad.Attributes.Add("type", "radio");
                 rad.Attributes.Add("name", inputName);
-                rad.Attributes.Add("id", radId);
-                rad.Attributes.Add("value", choicesList[i].Key);
-                if (choicesList[i].Value) rad.Attributes.Add("checked", "checked");
+                ////////////Check code start//////////////////
+                EnterRule FunctionObjectAfter = (EnterRule)_form.FormCheckCodeObj.GetCommand("level=field&event=after&identifier=" + _key);
+                if (FunctionObjectAfter != null && !FunctionObjectAfter.IsNull())
+                {
+
+                    rad.Attributes.Add("onblur", "return " + _key + "_after();"); //After
+                }
+                //EnterRule FunctionObjectBefore = (EnterRule)_form.FormCheckCodeObj.GetCommand("level=field&event=before&identifier=" + _key);
+                //if (FunctionObjectBefore != null && !FunctionObjectBefore.IsNull())
+                //{
+
+                //    rad.Attributes.Add("onfocus", "return " + _key + "_before();"); //Before
+                //}
+
+                ////////////Check code end//////////////////
+                rad.SetInnerText(choicesList[i].Key);
+                rad.Attributes.Add("value",  i.ToString());
+                rad.Attributes.Add("style", "display: inline"); 
+               //  if (choicesList[i].Value)
+
+                 if (Value == i.ToString()) rad.Attributes.Add("checked", "checked");
                 rad.MergeAttributes(_inputHtmlAttributes);
                 html.Append(rad.ToString(TagRenderMode.SelfClosing));
 
                 // checkbox label
-                var lbl = new TagBuilder("label");
-                lbl.Attributes.Add("for", radId);
-                lbl.Attributes.Add("class", _inputLabelClass);
-                lbl.SetInnerText(choicesList[i].Key);
-                html.Append(lbl.ToString());
-
+                if (_showTextOnRight)
+                {
+                    var rightlbl = new TagBuilder("label");
+                    rightlbl.Attributes.Add("for", inputName);
+                    rightlbl.Attributes.Add("class", _inputLabelClass);
+                    rightlbl.Attributes.Add("Id", "label" + inputName + "_" + i);
+                    StringBuilder StyleValues = new StringBuilder();
+                    StyleValues.Append(GetRadioListStyle(_fontstyle.ToString(), null, null, null, null, IsHidden));
+                    rightlbl.Attributes.Add("style", StyleValues.ToString());
+                    rightlbl.SetInnerText(choicesList[i].Key);
+                    html.Append(rightlbl.ToString());
+               
+                }
                 // close list item
                 html.Append(li.ToString(TagRenderMode.EndTag));
             }
