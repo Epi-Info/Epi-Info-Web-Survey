@@ -79,13 +79,13 @@ namespace Epi.Core.EnterInterpreter.Rules
                         result = false;
                     }
                 }
-                else if (op.Equals("LIKE", StringComparison.OrdinalIgnoreCase) && LHSO is String && RHSO is String)
+                else if (op.Equals("LIKE", StringComparison.OrdinalIgnoreCase))
                 {
-                    string testValue = "^" + ((String)RHSO).Replace("*", "(\\s|\\w)*") + "$";
+                    string testValue = "^" + RHSO.ToString().Replace("*", "(\\s|\\w)*") + "$";
                     System.Text.RegularExpressions.Regex re = new System.Text.RegularExpressions.Regex(testValue, System.Text.RegularExpressions.RegexOptions.IgnoreCase);
 
 
-                    if (re.IsMatch(((String)LHSO)))
+                    if (re.IsMatch(LHSO.ToString()))
                     {
                         result = true;
                     }
