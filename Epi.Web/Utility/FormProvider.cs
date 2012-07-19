@@ -411,14 +411,14 @@ namespace Epi.Web.MVC.Utility
 
 
                if (Wth > Ht)
-                {
-                    RadioList.Orientation = (Orientation)1;
-                }
-                else
-                {
+               {
+                   RadioList.Orientation = (Orientation)1;
+               }
+               else
+               {
 
-                    RadioList.Orientation = (Orientation)0;
-                }
+                   RadioList.Orientation = (Orientation)0;
+               }
              
             return RadioList;
 
