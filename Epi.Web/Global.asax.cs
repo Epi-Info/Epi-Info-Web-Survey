@@ -138,8 +138,8 @@ namespace Epi.Web.MVC
 
             Exception exc = Server.GetLastError();
 
-            try
-            {
+            //try
+            //{
                 
 
                 string sSource;
@@ -150,29 +150,6 @@ namespace Epi.Web.MVC
                 sLog = "Application";
                 sEvent = exc.Message;
 
-
-                // This is disabled if customized event logging needs to happen then we need to add Registry Keys and EventId for the application
-                //string s = ConfigurationManager.AppSettings["LOGGING_USE_WINDOWS_EVENT_LOG"];
-                //if (!String.IsNullOrEmpty(s))
-                //{
-                //    if (s.ToUpper() == "TRUE")
-                //    {
-                //        ///HKLM\SYSTEM\CurrentControlSet\services\eventlog\Application
-
-                //        if (!EventLog.SourceExists(sSource))
-                //        {
-                //            EventLog.CreateEventSource(sSource, sLog);
-                //        }
-
-                //        EventLog.WriteEntry
-                //        (
-                //                sSource,
-                //                sEvent,
-                //                EventLogEntryType.Warning,
-                //                234
-                //        );
-                //    }
-                //}
 
                 string s = ConfigurationManager.AppSettings["LOGGING_SEND_EMAIL_NOTIFICATION"];
                 if (!String.IsNullOrEmpty(s))
@@ -186,11 +163,14 @@ namespace Epi.Web.MVC
                         }
                     }
                 }
-            }
-            catch (Exception ex)
-            {
+
+
                 throw exc; // throw original exception for event log
-            }
+            //}
+            //catch (Exception ex)
+            //{
+            //    throw exc; // throw original exception for event log
+            //}
         }
     }
 }
