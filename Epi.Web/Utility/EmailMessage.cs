@@ -40,7 +40,7 @@ namespace Epi.Web.Utility
                 {
                     if (s.ToUpper() == "TRUE")
                     {
-                        isUsingSSL = true;
+                        isAuthenticated = true;
                     }
                 }
 
@@ -117,7 +117,7 @@ namespace Epi.Web.Utility
                 {
                     if (s.ToUpper() == "TRUE")
                     {
-                        isUsingSSL = true;
+                        isAuthenticated = true;
                     }
                 }
 
