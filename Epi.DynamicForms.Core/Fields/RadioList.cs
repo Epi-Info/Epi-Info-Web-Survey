@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Web.Mvc;
 using Epi.Core.EnterInterpreter;
+using System.Web.UI;
 
 namespace MvcDynamicForms.Fields
 {
@@ -18,13 +19,26 @@ namespace MvcDynamicForms.Fields
         {
             var html = new StringBuilder();
             var inputName = _form.FieldPrefix + _key;
-
+            var choicesList = _choices.ToList();
             // prompt label
             //var prompt = new TagBuilder("label");
             //prompt.Attributes.Add("class", _promptClass);
             //prompt.SetInnerText(Prompt);
             //html.Append(prompt.ToString());
-
+            ///////////////////
+            string Psize ;
+            int Largest =0;
+            for (int i = 0; i < choicesList.Count; i++)
+            {
+                Psize = choicesList[i].Key.Length.ToString();
+                if (choicesList[i].Key.Length > Largest)
+                {
+                    Largest = choicesList[i].Key.Length;
+                }
+            
+            }
+            int ControlWidth =(int) ((double)Largest * (double)fontSize)+3;
+            ///////////////////
             // error label
             if (!IsValid)
             {
@@ -38,12 +52,12 @@ namespace MvcDynamicForms.Fields
             var ul = new TagBuilder("ul");
             ul.Attributes.Add("class", _orientation == Orientation.Vertical ? _verticalClass : _horizontalClass);
             ul.Attributes["class"] += " " + _listClass;
-            ul.Attributes.Add("style", "position:absolute;left:" + (_left).ToString() + "px;top:" + _top.ToString() + "px" + ";width:" + _ControlWidth.ToString() + "px" + ";height:" + _ControlHeight.ToString() + "px");
+            ul.Attributes.Add("style", "position:absolute; left:" + (_left).ToString() + "px;top:" + _top.ToString() + "px" + ";width:" + _ControlWidth.ToString() + "px" + ";height:" + _ControlHeight.ToString() + "px");
            
 
             html.Append(ul.ToString(TagRenderMode.StartTag));
 
-           var choicesList = _choices.ToList();
+         
            
             for (int i = 0; i < choicesList.Count; i++)
             {
@@ -51,7 +65,7 @@ namespace MvcDynamicForms.Fields
                
                 // open list item
                 var li = new TagBuilder("li");
-                li.Attributes.Add ("style","float:left");
+                li.Attributes.Add("style", "float:left; width:" + ControlWidth.ToString() + "px");
                 html.Append(li.ToString(TagRenderMode.StartTag));
                 // checkbox label
                 if (!_showTextOnRight)
@@ -90,7 +104,7 @@ namespace MvcDynamicForms.Fields
                 ////////////Check code end//////////////////
                 rad.SetInnerText(choicesList[i].Key);
                 rad.Attributes.Add("value",  i.ToString());
-                rad.Attributes.Add("style", "display: inline"); 
+                rad.Attributes.Add("style", "display: inline;"); 
                //  if (choicesList[i].Value)
 
                  if (Value == i.ToString()) rad.Attributes.Add("checked", "checked");
