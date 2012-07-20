@@ -578,7 +578,7 @@ label.MvcDynamicFieldError
 ul.MvcDynamicOrientableList
 {
     list-style-type: none; /* prevents bullets from showing next to input elements */
-    padding:0 5px;
+    padding:0  5px;
     
 }
 
