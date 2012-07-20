@@ -6,6 +6,8 @@ using System.Web.Mvc;
 using Epi.Core.EnterInterpreter;
 using System.Web.UI;
 
+ 
+
 namespace MvcDynamicForms.Fields
 {
     /// <summary>
@@ -31,13 +33,18 @@ namespace MvcDynamicForms.Fields
             for (int i = 0; i < choicesList.Count; i++)
             {
                 Psize = choicesList[i].Key.Length.ToString();
-                if (choicesList[i].Key.Length > Largest)
-                {
-                    Largest = choicesList[i].Key.Length;
-                }
+                //if (choicesList[i].Key.Length > Largest)
+                //{
+                Largest = Largest + choicesList[i].Key.Length;
+                //}
             
             }
-            int ControlWidth =(int) ((double)Largest * (double)fontSize)+3;
+
+            Largest = Largest / choicesList.Count;
+
+            double ControlWidth = Largest * fontSize * 1.3;
+           
+
             ///////////////////
             // error label
             if (!IsValid)
@@ -52,7 +59,7 @@ namespace MvcDynamicForms.Fields
             var ul = new TagBuilder("ul");
             ul.Attributes.Add("class", _orientation == Orientation.Vertical ? _verticalClass : _horizontalClass);
             ul.Attributes["class"] += " " + _listClass;
-            ul.Attributes.Add("style", "position:absolute; left:" + (_left).ToString() + "px;top:" + _top.ToString() + "px" + ";width:" + _ControlWidth.ToString() + "px" + ";height:" + _ControlHeight.ToString() + "px");
+            ul.Attributes.Add("style", "position:absolute; left:" + (_left + (fontSize * 1.5)).ToString() + "px;top:" + (_top + (fontSize * 1.3)).ToString() + "px" + ";width:" + _ControlWidth.ToString() + "px" + ";height:" + _ControlHeight.ToString() + "px");
            
 
             html.Append(ul.ToString(TagRenderMode.StartTag));
@@ -65,7 +72,17 @@ namespace MvcDynamicForms.Fields
                
                 // open list item
                 var li = new TagBuilder("li");
-                li.Attributes.Add("style", "float:left; width:" + ControlWidth.ToString() + "px");
+
+                if (!_showTextOnRight)
+                {
+                    li.Attributes.Add("style", "float:left;text-align:Right; width:" + ControlWidth.ToString() + "px" + ";Height:" + (fontSize * 2.1).ToString() + "px");
+
+                }
+                else
+                {
+
+                    li.Attributes.Add("style", "float:left; width:" + ControlWidth.ToString() + "px" + ";Height:" + (fontSize * 2.1).ToString() + "px");
+                }
                 html.Append(li.ToString(TagRenderMode.StartTag));
                 // checkbox label
                 if (!_showTextOnRight)
@@ -134,6 +151,9 @@ namespace MvcDynamicForms.Fields
 
             var wrapper = new TagBuilder(_fieldWrapper);
             wrapper.Attributes["class"] = _fieldWrapperClass;
+            wrapper.Attributes.Add("style", "width:" + _ControlWidth.ToString() + "px" + ";height:" + _ControlHeight.ToString() + "px");
+           
+
             wrapper.InnerHtml = html.ToString();
             return wrapper.ToString();
         }
