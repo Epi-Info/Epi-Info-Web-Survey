@@ -49,7 +49,7 @@ namespace Epi.Core.EnterInterpreter.Rules
                 // no valid gender detected
                 return result;
             }
-
+             
             short gender = short.Parse(p5);
             double flag = 0; // unused
             /*
