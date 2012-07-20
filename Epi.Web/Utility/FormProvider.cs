@@ -404,6 +404,8 @@ namespace Epi.Web.MVC.Utility
                 RadioList.IsDisabled = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "DisabledFieldsList");
                 RadioList.ShowTextOnRight = bool.Parse(_FieldTypeID.Attribute("ShowTextOnRight").Value);
                 RadioList.Choices = GetChoices(_FieldTypeID.Attribute("List").Value.Split(',').ToList<string>());
+                RadioList.Width = _Width;
+               
 
 
                 double Ht = _Height * double.Parse(_FieldTypeID.Attribute("ControlHeightPercentage").Value) ;
