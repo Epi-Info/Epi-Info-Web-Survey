@@ -795,4 +795,12 @@ function CCE_RemoveFromFieldsList(FieldName,ListName) {
      }
  }
 
+
+function CCE_Year(pValue) 
+{
+
+}
+
+
+
 cce_Context = new CCE_Context();
