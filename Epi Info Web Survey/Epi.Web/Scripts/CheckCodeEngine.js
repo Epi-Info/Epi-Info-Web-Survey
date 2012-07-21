@@ -798,7 +798,8 @@ function CCE_RemoveFromFieldsList(FieldName,ListName) {
 
 function CCE_Year(pValue) 
 {
-
+    // assumes pValue is a Javascript Date object
+    return pValue.getFullYear();
 }
 
 
