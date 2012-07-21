@@ -44,11 +44,19 @@ namespace Epi.Core.EnterInterpreter.Rules
 
             if (p1 is DateTime)
             {
-                pJavaScriptBuilder.Append("CCE_Year(");
-                pJavaScriptBuilder.Append(p1.ToString());
-                pJavaScriptBuilder.Append(")");
+                pJavaScriptBuilder.Append("CCE_Year(new Date(");
+                pJavaScriptBuilder.Append(UnixTicks((DateTime)p1));
+                pJavaScriptBuilder.Append("))");
             }
 
+        }
+
+        public static double UnixTicks(this DateTime dt)
+        {
+            DateTime d1 = new DateTime(1970, 1, 1);
+            DateTime d2 = dt.ToUniversalTime();
+            TimeSpan ts = new TimeSpan(d2.Ticks - d1.Ticks);
+            return Math.Round(ts.TotalMilliseconds, 0);
         }
 
     }
