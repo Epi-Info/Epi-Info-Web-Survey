@@ -37,5 +37,19 @@ namespace Epi.Core.EnterInterpreter.Rules
 
             return result;
         }
+
+        public override void ToJavaScript(StringBuilder pJavaScriptBuilder)
+        {
+            object p1 = this.ParameterList[0].Execute();
+
+            if (p1 is DateTime)
+            {
+                pJavaScriptBuilder.Append("CCE_Year(");
+                pJavaScriptBuilder.Append(p1.ToString());
+                pJavaScriptBuilder.Append(")");
+            }
+
+        }
+
     }
 }
