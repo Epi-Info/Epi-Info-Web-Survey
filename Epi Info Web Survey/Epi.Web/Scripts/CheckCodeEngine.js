@@ -798,7 +798,6 @@ function CCE_RemoveFromFieldsList(FieldName,ListName) {
 
 function CCE_Year(pValue) 
 {
-    // assumes pValue is a Javascript Date object
     return pValue.getFullYear();
 }
 
@@ -810,6 +809,23 @@ function CCE_Years(pValue1, pValue2)
         pValue2.getMonth() < pValue1.getMonth() ||
         (pValue2.getMonth() == pValue1.getMonth() && pValue2.getDate() < pValue1.getDate())
     )
+    {
+        result--;
+    }
+    return result;
+}
+
+
+function CCE_Month(pValue) 
+{
+    return pValue.getMonth();
+}
+
+function CCE_Months(pValue1, pValue2) 
+{
+    var result = 12 * (pValue2.getFullYear() - pValue1.getFullYear()) + pValue2.getMonth() - pValue1.getMonth();
+
+    if (pValue2.getDate() < pValue1.getDate())
     {
         result--;
     }

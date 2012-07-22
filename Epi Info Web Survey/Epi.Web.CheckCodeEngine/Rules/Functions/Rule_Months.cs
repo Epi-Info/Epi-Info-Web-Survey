@@ -43,49 +43,18 @@ namespace Epi.Core.EnterInterpreter.Rules
                 }
 
                 result = monthsApart;
-                //int age = param2.Year - param1.Year;
-                //if
-                //(
-                //    param2.Month < param1.Month ||
-                //    (param2.Month == param1.Month && param2.Day < param1.Day)
-                //)
-                //{
-                //    age--;
-
-                //}
-
-                //age *= 12;
-
-                //int months;
-                //if (param2.Month > param1.Month)
-                //{
-                //    months = param2.Month - param1.Month;
-
-                //    if (param2.Day < param1.Day)
-                //    {
-                //        months--;
-                //    }
-                //}
-                //else if (param2.Month == param1.Month && param2.Day < param1.Day)
-                //{
-                //    months = 11;
-                //}
-                //else
-                //{
-                //    months = 12 - param1.Month;
-                //    months = months + param2.Month;
-
-                //    if (param2.Day < param1.Day)
-                //    {
-                //        months--;
-                //    }
-
-                //}
-
-                //result = age + months;
             }
 
             return result;
+        }
+
+        public override void ToJavaScript(StringBuilder pJavaScriptBuilder)
+        {
+            pJavaScriptBuilder.Append("CCE_Months(");
+            this.ParameterList[0].ToJavaScript(pJavaScriptBuilder);
+            pJavaScriptBuilder.Append(",");
+            this.ParameterList[1].ToJavaScript(pJavaScriptBuilder);
+            pJavaScriptBuilder.Append(")");
         }
     }
 }
