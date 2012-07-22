@@ -52,7 +52,7 @@ namespace Epi.Core.EnterInterpreter.Rules
             pJavaScriptBuilder.Append("Math.floor((Math.random() * ");
             this.ParameterList[1].ToJavaScript(pJavaScriptBuilder);
             pJavaScriptBuilder.Append(") + ");
-            this.ParameterList[1].ToJavaScript(pJavaScriptBuilder);
+            this.ParameterList[0].ToJavaScript(pJavaScriptBuilder);
             pJavaScriptBuilder.Append(")");
 
 
