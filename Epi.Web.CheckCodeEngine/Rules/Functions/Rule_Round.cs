@@ -48,6 +48,18 @@ namespace Epi.Core.EnterInterpreter.Rules
 
             return result;
         }
+
+        public override void ToJavaScript(StringBuilder pJavaScriptBuilder)
+        {
+
+            pJavaScriptBuilder.Append("CCE_Round(");
+            this.ParameterList[0].ToJavaScript(pJavaScriptBuilder);
+            pJavaScriptBuilder.Append(",");
+            this.ParameterList[1].ToJavaScript(pJavaScriptBuilder);
+            pJavaScriptBuilder.Append(")");
+
+
+        }
         
     }
 }
