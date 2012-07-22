@@ -44,6 +44,18 @@ namespace Epi.Core.EnterInterpreter.Rules
 
             return result;
         }
-        
+
+
+        public override void ToJavaScript(StringBuilder pJavaScriptBuilder)
+        {
+            //Math.floor((Math.random() * 10) + 1);
+            pJavaScriptBuilder.Append("Math.floor((Math.random() * ");
+            this.ParameterList[1].ToJavaScript(pJavaScriptBuilder);
+            pJavaScriptBuilder.Append(") + ");
+            this.ParameterList[1].ToJavaScript(pJavaScriptBuilder);
+            pJavaScriptBuilder.Append(")");
+
+
+        }
     }
 }
