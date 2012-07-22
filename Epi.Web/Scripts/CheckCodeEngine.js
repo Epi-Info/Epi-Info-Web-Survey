@@ -816,6 +816,14 @@ function CCE_Years(pValue1, pValue2)
     return result;
 }
 
+function CCE_Round(pValue1, pValue2) 
+{
+    var RoundModifier = 10 * pValue2;
+
+    var result = Math.round(pValue1 * RoundModifier) / RoundModifier;
+    return result;
+}
+
 
 
 cce_Context = new CCE_Context();
