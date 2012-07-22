@@ -807,7 +807,7 @@ function CCE_Years(pValue1, pValue2)
     var result = pValue2.getFullYear() - pValue1.getFullYear();
     if
     (
-        param2.Month < param1.Month ||
+        pValue2.getMonth() < pValue1.getMonth() ||
         (pValue2.getMonth() == pValue1.getMonth() && pValue2.getDate() < pValue1.getDate())
     )
     {
