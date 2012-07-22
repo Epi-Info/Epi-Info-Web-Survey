@@ -40,24 +40,13 @@ namespace Epi.Core.EnterInterpreter.Rules
 
         public override void ToJavaScript(StringBuilder pJavaScriptBuilder)
         {
-            object p1 = this.ParameterList[0].Execute();
 
-            if (p1 is DateTime)
-            {
-                pJavaScriptBuilder.Append("CCE_Year(new Date(");
-                pJavaScriptBuilder.Append(UnixTicks((DateTime)p1));
-                pJavaScriptBuilder.Append("))");
-            }
+            pJavaScriptBuilder.Append("CCE_Year(");
+            this.ParameterList[0].ToJavaScript(pJavaScriptBuilder);
+            pJavaScriptBuilder.Append(")");
 
         }
 
-        public static double UnixTicks(this DateTime dt)
-        {
-            DateTime d1 = new DateTime(1970, 1, 1);
-            DateTime d2 = dt.ToUniversalTime();
-            TimeSpan ts = new TimeSpan(d2.Ticks - d1.Ticks);
-            return Math.Round(ts.TotalMilliseconds, 0);
-        }
 
     }
 }
