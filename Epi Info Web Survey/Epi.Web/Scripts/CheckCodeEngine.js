@@ -795,19 +795,39 @@ function CCE_RemoveFromFieldsList(FieldName,ListName) {
      }
  }
 
+function isValidDate(pValue)
+{
+    var result = false;
+    if ( Object.prototype.toString.call(d) === "[object Date]" ) 
+    {
+        result = true;
+    }
+    return result;
+}
 
 function CCE_Year(pValue) 
 {
-    return pValue.getFullYear();
+
+    if(isValidDate(pValue))
+    {
+        return pValue.getFullYear();
+    }
+    else
+    {
+        return new Date(pValue).getFullYear();
+    }
 }
 
 function CCE_Years(pValue1, pValue2)
 {
-    var result = pValue2.getFullYear() - pValue1.getFullYear();
+    var date1 = new Date(pValue1);
+    var date2 = new Date(pValue2);
+
+    var result = date2.getFullYear() - date1.getFullYear();
     if
     (
-        pValue2.getMonth() < pValue1.getMonth() ||
-        (pValue2.getMonth() == pValue1.getMonth() && pValue2.getDate() < pValue1.getDate())
+        date2.getMonth() < date1.getMonth() ||
+        (date2.getMonth() == date1.getMonth() && date2.getDate() < date1.getDate())
     )
     {
         result--;
@@ -823,9 +843,12 @@ function CCE_Month(pValue)
 
 function CCE_Months(pValue1, pValue2) 
 {
-    var result = 12 * (pValue2.getFullYear() - pValue1.getFullYear()) + pValue2.getMonth() - pValue1.getMonth();
+    var date1 = new Date(pValue1);
+    var date2 = new Date(pValue2);
 
-    if (pValue2.getDate() < pValue1.getDate())
+    var result = 12 * (date2.getFullYear() - date1.getFullYear()) + date2.getMonth() - date1.getMonth();
+
+    if (date2.getDate() < date1.getDate())
     {
         result--;
     }
