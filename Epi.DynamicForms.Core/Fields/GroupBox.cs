@@ -28,14 +28,23 @@ namespace MvcDynamicForms.Fields
             string ErrorStyle = string.Empty;
             // prompt label
             var prompt = new TagBuilder("legend");
-
+           
             prompt.SetInnerText(Prompt);
             //prompt.Attributes.Add("for", inputName);
             //prompt.Attributes.Add("class", "EpiLabel");
 
             StringBuilder StyleValues = new StringBuilder();
             StyleValues.Append(GetStyle(_fontstyle.ToString() ));
-           prompt.Attributes.Add("style", StyleValues.ToString());
+
+            double PromptSize = Prompt.Length * fontSize;
+
+            if (PromptSize > this.ControlWidth )
+            {
+            prompt.Attributes.Add("style", StyleValues.ToString() + ";width:" + _ControlWidth.ToString() + "px" );
+            }else{
+              prompt.Attributes.Add("style", StyleValues.ToString()   );
+            
+            }
             //html.Append(prompt.ToString());
 
 
