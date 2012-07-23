@@ -838,7 +838,16 @@ function CCE_Years(pValue1, pValue2)
 
 function CCE_Month(pValue) 
 {
-    return pValue.getMonth();
+
+    if(isValidDate(pValue))
+    {
+        return pValue.getMonth();
+    }
+    else
+    {
+        return new Date(pValue).getMonth();
+    }
+    
 }
 
 function CCE_Months(pValue1, pValue2) 
