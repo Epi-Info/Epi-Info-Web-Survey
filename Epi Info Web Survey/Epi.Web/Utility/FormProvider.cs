@@ -382,11 +382,10 @@ namespace Epi.Web.MVC.Utility
                 RadioList.Prompt = _FieldTypeID.Attribute("PromptText").Value;
                 RadioList.DisplayOrder = int.Parse(_FieldTypeID.Attribute("TabIndex").Value);
                 RadioList.Required = _FieldTypeID.Attribute("IsRequired").Value == "True" ? true : false;
-                //RadioList.RequiredMessage = _FieldTypeID.Attribute("PromptText").Value + " is required",
+                
                 RadioList.RequiredMessage = "This field is required";
                 RadioList.Key = _FieldTypeID.Attribute("Name").Value;
-                //RadioList.PromptTop = _Height * double.Parse(_FieldTypeID.Attribute("PromptTopPositionPercentage").Value);
-                //RadioList.PromptLeft = _Width * double.Parse(_FieldTypeID.Attribute("PromptLeftPositionPercentage").Value);
+                 
                 RadioList.Top = _Height * double.Parse(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value);
                 RadioList.Left = _Width * double.Parse(_FieldTypeID.Attribute("ControlLeftPositionPercentage").Value);
                 RadioList.PromptWidth = _Width * double.Parse(_FieldTypeID.Attribute("ControlWidthPercentage").Value);
@@ -396,8 +395,7 @@ namespace Epi.Web.MVC.Utility
                 RadioList.fontfamily = _FieldTypeID.Attribute("PromptFontFamily").Value;
                 RadioList.IsRequired = bool.Parse(_FieldTypeID.Attribute("IsRequired").Value);
                 RadioList.IsReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value);
-                //RadioList.Lower = _FieldTypeID.Attribute("Lower").Value;
-                //RadioList.Upper = _FieldTypeID.Attribute("Upper").Value;
+             
                 RadioList.Value = _ControlValue;
                 RadioList.IsHidden = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "HiddenFieldsList");
                 RadioList.IsHighlighted = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "HighlightedFieldsList");
@@ -405,21 +403,17 @@ namespace Epi.Web.MVC.Utility
                 RadioList.ShowTextOnRight = bool.Parse(_FieldTypeID.Attribute("ShowTextOnRight").Value);
                 RadioList.Choices = GetChoices(_FieldTypeID.Attribute("List").Value.Split(',').ToList<string>());
                 RadioList.Width = _Width;
-               
+                RadioList.Height = _Height;
+                RadioList.Pattern = _FieldTypeID.Attribute("Pattern").Value.Split(',').ToList<string>();
 
-
-                double Ht = _Height * double.Parse(_FieldTypeID.Attribute("ControlHeightPercentage").Value) ;
-               double Wth = _Width * double.Parse(_FieldTypeID.Attribute("ControlWidthPercentage").Value) ;
-
-
-               if (Wth > Ht)
+               if (RadioList.Pattern[0] == "Vertical")
                {
-                   RadioList.Orientation = (Orientation)1;
+                   RadioList.Orientation = (Orientation)0;
                }
                else
                {
 
-                   RadioList.Orientation = (Orientation)0;
+                   RadioList.Orientation = (Orientation)1;
                }
              
             return RadioList;
