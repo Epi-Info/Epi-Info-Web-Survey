@@ -18,6 +18,20 @@ namespace MvcDynamicForms.Fields
         protected Orientation _orientation = Orientation.Vertical;
         protected bool _showTextOnRight;
         public string Value { get; set; }
+        protected List<string> _Pattern;
+
+
+        public List<string> Pattern
+        {
+            get
+            {
+                return _Pattern;
+            }
+            set
+            {
+                _Pattern = value;
+            }
+        }
         /// <summary>
         /// The direction that the choices will be displayed.
         /// </summary>
