@@ -138,17 +138,15 @@ namespace Epi.Web.MVC
 
             Exception exc = Server.GetLastError();
 
-            //try
-            //{
-                
-
-                string sSource;
-                string sLog;
+            try
+            {
+                //string sSource;
+                //string sLog;
                 string sEvent;
 
-                sSource = "Epi.Web.Survey";
-                sLog = "Application";
-                sEvent = exc.Message;
+                //sSource = "Epi.Web.Survey";
+                //sLog = "Application";
+                sEvent = exc.Message + "\n" + exc.StackTrace;
 
 
                 string s = ConfigurationManager.AppSettings["LOGGING_SEND_EMAIL_NOTIFICATION"];
@@ -164,13 +162,13 @@ namespace Epi.Web.MVC
                     }
                 }
 
+            }
+            catch (Exception ex)
+            {
+                // do nothing
+            }
 
-                throw exc; // throw original exception for event log
-            //}
-            //catch (Exception ex)
-            //{
-            //    throw exc; // throw original exception for event log
-            //}
+            this.Response.Redirect("/", true);
         }
     }
 }
