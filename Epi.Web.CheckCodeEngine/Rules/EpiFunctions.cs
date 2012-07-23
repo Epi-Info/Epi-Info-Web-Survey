@@ -278,7 +278,20 @@ namespace Epi.Core.EnterInterpreter.Rules
             return result;
         }
 
-        
+        public override void ToJavaScript(StringBuilder pJavaScriptBuilder)
+        {
+            if (string.IsNullOrEmpty(this.functionName))
+            {
+
+            }
+            else
+            {
+                if (this.functionCall != null)
+                {
+                    this.functionCall.ToJavaScript(pJavaScriptBuilder);
+                }
+            }
+        }
 
         #endregion
     }
