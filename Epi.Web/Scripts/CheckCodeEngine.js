@@ -253,6 +253,18 @@ CCE_Context.prototype.getValue = function (pName) {
                     case "numeric": //string has been converted to number to compare with another number
                         var numericField = new Number(field.val()).valueOf();
                         return numericField;
+                    case "radiobutton":
+                    var RadioFielName = '.' + fielName;
+                     var RadioButtonField =0; 
+                    $(RadioFielName).each(function(i, obj) {
+
+                        if ($(this).is(':checked')){
+                          RadioButtonField = new Number($(this).val()).valueOf();
+                        }
+                         });
+
+
+                    return RadioButtonField;
                     default:
                         return field.val();
                 }
