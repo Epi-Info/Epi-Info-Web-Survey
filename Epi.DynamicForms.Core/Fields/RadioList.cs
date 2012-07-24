@@ -66,7 +66,8 @@ namespace MvcDynamicForms.Fields
                     var Leftlbl = new TagBuilder("label");
                   
                     Leftlbl.Attributes.Add("for", inputName);
-                    Leftlbl.Attributes.Add("class", _inputLabelClass);
+                    //Leftlbl.Attributes.Add("class", _inputLabelClass);
+                    Leftlbl.Attributes.Add("class", "label" + inputName);  
                     Leftlbl.Attributes.Add("Id", "label" + inputName + "_" + i);
                     StringBuilder StyleValues1 = new StringBuilder();
                     StyleValues1.Append(GetRadioListStyle(_fontstyle.ToString(), null, null, null, null, IsHidden));
@@ -105,7 +106,8 @@ namespace MvcDynamicForms.Fields
                 {
                     var rightlbl = new TagBuilder("label");
                     rightlbl.Attributes.Add("for", inputName);
-                    rightlbl.Attributes.Add("class", _inputLabelClass);
+                   // rightlbl.Attributes.Add("class", _inputLabelClass);  
+                    rightlbl.Attributes.Add("class", "label" + inputName);  
                     rightlbl.Attributes.Add("Id", "label" + inputName + "_" + i);
                     StringBuilder StyleValues2 = new StringBuilder();
                     StyleValues2.Append(GetRadioListStyle(_fontstyle.ToString(), null, null, null, null, IsHidden));
