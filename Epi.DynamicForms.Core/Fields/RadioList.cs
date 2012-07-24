@@ -80,6 +80,8 @@ namespace MvcDynamicForms.Fields
                 var rad = new TagBuilder("input");
                 rad.Attributes.Add("type", "radio");
                 rad.Attributes.Add("name", inputName);
+                rad.Attributes.Add("class", inputName);
+               // rad.Attributes.Add("onClick", "return document.getElementById('" + inputName + "').value = this.value;"); //After
                 ////////////Check code start//////////////////
                 EnterRule FunctionObjectAfter = (EnterRule)_form.FormCheckCodeObj.GetCommand("level=field&event=after&identifier=" + _key);
                 if (FunctionObjectAfter != null && !FunctionObjectAfter.IsNull())
@@ -117,14 +119,17 @@ namespace MvcDynamicForms.Fields
             }
 
           
-            
+              // add hidden tag, so that a value always gets sent for select tags
+            var hidden = new TagBuilder("input");
+            hidden.Attributes.Add("type", "hidden");
+            hidden.Attributes.Add("id", inputName);
+            hidden.Attributes.Add("name", inputName);
+            hidden.Attributes.Add("value", string.Empty);          
+            html.Append(hidden.ToString(TagRenderMode.SelfClosing));
                             
 
             var wrapper = new TagBuilder(_fieldWrapper);
             wrapper.Attributes["class"] = _fieldWrapperClass;
-         
-           
-
             wrapper.InnerHtml = html.ToString();
             return wrapper.ToString();
         }
