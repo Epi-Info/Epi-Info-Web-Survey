@@ -35,10 +35,10 @@ function CCE_ProcessHideCommand(pCheckCodeList)
         for (var i = 0; i < pCheckCodeList.length; i++) 
         {
             var symbol = cce_Context.resolve(pCheckCodeList[i]);
-            
+            var query = null;
             if(symbol.Type == "radiobutton")
             {
-                var query = '.mvcdynamicfield_' + pCheckCodeList[i];
+                query = '.mvcdynamicfield_' + pCheckCodeList[i];
                 $(query).each(function(i, obj) 
                 {
                     $(query).hide();    
@@ -52,7 +52,7 @@ function CCE_ProcessHideCommand(pCheckCodeList)
             }
             else
             {
-                var query = '#mvcdynamicfield_' + pCheckCodeList[i];
+                query = '#mvcdynamicfield_' + pCheckCodeList[i];
                 //clear the control value before hiding
                 CCE_ClearControlValue(query);
 
@@ -152,10 +152,10 @@ function CCE_ProcessUnHideCommand(pCheckCodeList)
         for (var i = 0; i < pCheckCodeList.length; i++) 
         {
             var symbol = cce_Context.resolve(pCheckCodeList[i]);
-            
+            var query = null;
             if(symbol.Type == "radiobutton")
             {
-                var query = '.mvcdynamicfield_' + pCheckCodeList[i];
+                query = '.mvcdynamicfield_' + pCheckCodeList[i];
                 $(query).each(function(i, obj) 
                 {
                     $(query).show();    
@@ -169,7 +169,7 @@ function CCE_ProcessUnHideCommand(pCheckCodeList)
             }
             else
             {
-                var query = '#mvcdynamicfield_' + pCheckCodeList[i];
+                query = '#mvcdynamicfield_' + pCheckCodeList[i];
                 $(query).show();
                 query = '#labelmvcdynamicfield_' + pCheckCodeList[i];
                 $(query).show();
@@ -542,11 +542,9 @@ Rule_Hide.prototype.Execute = function ()
             }
             else
             {
-
-            
-             $(query).css("background-color", "white");
-             query = '#labelmvcdynamicfield_' + pCheckCodeList[i];
-             //CCE_AddToHilightedFieldsList(pCheckCodeList[i]);
+                 $(query).css("background-color", "white");
+                 query = '#labelmvcdynamicfield_' + pCheckCodeList[i];
+                 //CCE_AddToHilightedFieldsList(pCheckCodeList[i]);
              }
              CCE_RemoveFromFieldsList(pCheckCodeList[i], 'HighlightedFieldsList');
 
@@ -633,10 +631,8 @@ Rule_Hide.prototype.Execute = function ()
          //this.canvas.HideCheckCodeItems(controlsList);
          for (var i = 0; i < pCheckCodeList.length; i++) 
          {
-
-             var query = '#mvcdynamicfield_' + pCheckCodeList[i];
-
-             if(symbol.Type == "radiobutton")
+             var query = null;
+            if(symbol.Type == "radiobutton")
             {
                 query = '.mvcdynamicfield_' + pCheckCodeList[i];
                 $(query).each(function(i, obj) 
@@ -646,13 +642,11 @@ Rule_Hide.prototype.Execute = function ()
             }
             else
             {
- 
-             $(query).attr('disabled', 'disabled');
-             query = '#labelmvcdynamicfield_' + pCheckCodeList[i];
-             // $(query).hide();// no need to disable the label
-             // CCE_AddToDisabledFieldsList(pCheckCodeList[i]);
-             }
-              CCE_AddToFieldsList(pCheckCodeList[i], 'DisabledFieldsList');
+                query = '#mvcdynamicfield_' + pCheckCodeList[i];
+                $(query).attr('disabled', 'disabled');
+                query = '#labelmvcdynamicfield_' + pCheckCodeList[i];
+            }
+            CCE_AddToFieldsList(pCheckCodeList[i], 'DisabledFieldsList');
          }
      }
  }
@@ -729,10 +723,10 @@ Rule_Hide.prototype.Execute = function ()
      {
          for (var i = 0; i < pCheckCodeList.length; i++) 
          {
-             var query = '#mvcdynamicfield_' + pCheckCodeList[i];
+             var query = null;
 
              
-             if(symbol.Type == "radiobutton")
+            if(symbol.Type == "radiobutton")
             {
                 query = '.mvcdynamicfield_' + pCheckCodeList[i];
                 $(query).each(function(i, obj) 
@@ -742,12 +736,11 @@ Rule_Hide.prototype.Execute = function ()
             }
             else
             {
-             $(query).removeAttr('disabled');
-             query = '#labelmvcdynamicfield_' + pCheckCodeList[i];
-             //$(query).show();// don't do anything with label
-             // CCE_AddToDisabledFieldsList(pCheckCodeList[i]);
-             }
-             CCE_RemoveFromFieldsList(pCheckCodeList[i], 'DisabledFieldsList');
+                query = '#mvcdynamicfield_' + pCheckCodeList[i];
+                $(query).removeAttr('disabled');
+                query = '#labelmvcdynamicfield_' + pCheckCodeList[i];
+            }
+            CCE_RemoveFromFieldsList(pCheckCodeList[i], 'DisabledFieldsList');
          }
      }
  }
