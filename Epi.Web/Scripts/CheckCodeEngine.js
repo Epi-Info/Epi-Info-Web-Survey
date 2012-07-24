@@ -218,66 +218,78 @@ CCE_Context.prototype.resolve = function (pName)
     return cce_Symbol;
 }
 
-CCE_Context.prototype.getValue = function (pName) {
+CCE_Context.prototype.getValue = function (pName) 
+{
+    var value = null;
     var cce_Symbol = this.resolve(pName);
-    if (cce_Symbol != null) {
-        if (cce_Symbol.Source == "datasource") {
+    if (cce_Symbol != null) 
+    {
+        if (cce_Symbol.Source == "datasource") 
+        {
             var query = '#mvcdynamicfield_' + pName;
-            var fielName = 'mvcdynamicfield_' + pName;
-            if (eval(document.getElementById(fielName))) {
+            var fieldName = 'mvcdynamicfield_' + pName;
+            if (eval(document.getElementById(fieldName))) 
+            {
                 var field = $(query);
-                switch (cce_Symbol.Type) {
+                switch (cce_Symbol.Type) 
+                {
                     case "yesno":
-                        if (field.val() == "1") {
+                        if (field.val() == "1") 
+                        {
                             return true; //"Yes";
                         }
-                        else {
+                        else 
+                        {
                             return false; // "No";
                         }
                     case "checkbox":
-                        if (field.is(':checked')) {
+                        if (field.is(':checked')) 
+                        {
                             return true;
                         }
-                        else {
+                        else 
+                        {
                             return false;
                         }
 
                     case "datepicker": //string has been converted to date for comparison with another date
-                        var datefield = new Date(field.val()).valueOf();
-                        return datefield;
+                        value = new Date(field.val()).valueOf();
+                        return value;
                     case "timepicker":
                         var refDate = "01/01/1970 ";//It is a reference date 
                         var dateTime = refDate + field.val();
-                        var timefield = new Date(dateTime).valueOf();
-                        return timefield;
+                        value = new Date(dateTime).valueOf();
+                        return value;
                     case "numeric": //string has been converted to number to compare with another number
-                        var numericField = new Number(field.val()).valueOf();
-                        return numericField;
+                        value = new Number(field.val()).valueOf();
+                        return value;
                     case "radiobutton":
-                    var RadioFielName = '.' + fielName;
-                     var RadioButtonField =0; 
-                    $(RadioFielName).each(function(i, obj) {
-
-                        if ($(this).is(':checked')){
-                          RadioButtonField = new Number($(this).val()).valueOf();
-                        }
-                         });
-
-
-                    return RadioButtonField;
+                        var RadiofieldName = '.' + fieldName;
+                        value = -1; 
+                        $(RadiofieldName).each(function(i, obj) 
+                        {
+                            if ($(this).is(':checked'))
+                            {
+                              value = new Number($(this).val()).valueOf();
+                            }
+                        });
+                        return value;
                     default:
                         return field.val();
                 }
             }
-            else {
+            else 
+            {
                 return cce_Symbol.Value;
             }
         }
-        else {
+        else 
+        {
             return cce_Symbol.Value;
         }
     }
-    else {
+    else 
+    {
         return null;
     }
 }
