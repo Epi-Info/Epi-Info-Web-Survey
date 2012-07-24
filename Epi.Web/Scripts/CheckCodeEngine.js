@@ -34,18 +34,38 @@ function CCE_ProcessHideCommand(pCheckCodeList)
         //this.canvas.HideCheckCodeItems(controlsList);
         for (var i = 0; i < pCheckCodeList.length; i++) 
         {
+            var symbol = cce_Context.resolve(pCheckCodeList[i]);
             
-            var query = '#mvcdynamicfield_' + pCheckCodeList[i];
-             //clear the control value before hiding
-             CCE_ClearControlValue(query);
-            $(query).hide();
-            query = '#labelmvcdynamicfield_' + pCheckCodeList[i];
-            $(query).hide();
+            if(symbol.Type == "radiobutton")
+            {
+                var query = '.mvcdynamicfield_' + pCheckCodeList[i];
+                $(query).each(function(i, obj) 
+                {
+                    $(query).hide();    
+                });
+
+                query = '.labelmvcdynamicfield_' + pCheckCodeList[i];
+                $(query).each(function(i, obj) 
+                {
+                    $(query).hide();
+                });
+            }
+            else
+            {
+                var query = '#mvcdynamicfield_' + pCheckCodeList[i];
+                //clear the control value before hiding
+                CCE_ClearControlValue(query);
+
+                $(query).hide();
+                query = '#labelmvcdynamicfield_' + pCheckCodeList[i];
+                $(query).hide();
+            }
             //CCE_AddToHiddenFieldsList(pCheckCodeList[i]);
             CCE_AddToFieldsList(pCheckCodeList[i], 'HiddenFieldsList')
         }
     }
 }
+
 
 
 /// <summary>
@@ -58,6 +78,7 @@ function CCE_ProcessHideExceptCommand(pCheckCodeList)
     {
 
         var ControlList = new Array();
+        var RadioControlList = new Array();
 
         for(var i in cce_Context.symbolTable)
         {
@@ -130,17 +151,33 @@ function CCE_ProcessUnHideCommand(pCheckCodeList)
         //this.canvas.HideCheckCodeItems(controlsList);
         for (var i = 0; i < pCheckCodeList.length; i++) 
         {
+            var symbol = cce_Context.resolve(pCheckCodeList[i]);
+            
+            if(symbol.Type == "radiobutton")
+            {
+                var query = '.mvcdynamicfield_' + pCheckCodeList[i];
+                $(query).each(function(i, obj) 
+                {
+                    $(query).show();    
+                });
 
-            var query = '#mvcdynamicfield_' + pCheckCodeList[i];
-            $(query).show();
-            query = '#labelmvcdynamicfield_' + pCheckCodeList[i];
-            $(query).show();
-
+                query = '.labelmvcdynamicfield_' + pCheckCodeList[i];
+                $(query).each(function(i, obj) 
+                {
+                    $(query).show();
+                });
+            }
+            else
+            {
+                var query = '#mvcdynamicfield_' + pCheckCodeList[i];
+                $(query).show();
+                query = '#labelmvcdynamicfield_' + pCheckCodeList[i];
+                $(query).show();
+            }
             CCE_RemoveFromFieldsList(pCheckCodeList[i], 'HiddenFieldsList');
         }
     }
 }
-
 
 /// <summary>
 /// Processed the Hide Except command for check code execution
