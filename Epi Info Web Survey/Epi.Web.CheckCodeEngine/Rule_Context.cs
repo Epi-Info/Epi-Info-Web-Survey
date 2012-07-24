@@ -622,6 +622,7 @@ public System.Collections.Specialized.NameValueCollection GlobalVariables;*/
                         var.ControlType = "timepicker";
 
                         break;
+                   
                     case "10"://CheckBox
                         var.DataType = DataType.Boolean;
                         var.ControlType = "checkbox";
@@ -632,6 +633,12 @@ public System.Collections.Specialized.NameValueCollection GlobalVariables;*/
                         var.ControlType = "yesno";
                         //JavaScriptVariableDefinitions.AppendLine(string.Format(defineFormat, _FieldTypeID.Attribute("Name").Value, "yesno", "datasource", var.Expression)); 
                         break;
+                    case "12"://RadioButton
+                        var.DataType = DataType.Number;
+                        var.ControlType = "radiobutton";
+                        //JavaScriptVariableDefinitions.AppendLine(string.Format(defineFormat, _FieldTypeID.Attribute("Name").Value, "yesno", "datasource", var.Expression)); 
+                        break;
+
                     case "17"://DropDown LegalValues
                         var.DataType = DataType.Text;
                         var.ControlType = "legalvalues";
