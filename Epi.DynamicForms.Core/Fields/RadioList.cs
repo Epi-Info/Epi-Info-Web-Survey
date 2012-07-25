@@ -53,9 +53,9 @@ namespace MvcDynamicForms.Fields
                 double innerLeft = 0.0;
                 string radId = inputName + i;
                // if (Pattern != null && !string.IsNullOrEmpty(Pattern[0]))
-                if ((Pattern.Count ) == choicesList.Count +2)
+                if ((Pattern.Count ) == choicesList.Count )
                 {
-                    List<string> TopLeft = Pattern[i + 2].ToString().Split(':').ToList();
+                    List<string> TopLeft = Pattern[i].ToString().Split(':').ToList();
 
                     if (TopLeft.Count > 0)
                     {

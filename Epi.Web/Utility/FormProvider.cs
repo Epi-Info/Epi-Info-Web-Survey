@@ -377,7 +377,17 @@ namespace Epi.Web.MVC.Utility
         {
 
             var RadioList = new RadioList();
-             
+            string ListString = _FieldTypeID.Attribute("List").Value;
+            ListString = ListString.Replace("||","|");
+            List<string> Lists = ListString.Split('|').ToList<string>();
+
+
+            Dictionary<string, bool> Choices = new Dictionary<string, bool>();
+            
+            List<string>  Pattern = new List<string>();
+            Choices = GetChoices(Lists[0].Split(',').ToList<string>());
+            Pattern = Lists[1].Split(',').ToList<string>();
+
                 RadioList.Title = _FieldTypeID.Attribute("Name").Value;
                 RadioList.Prompt = _FieldTypeID.Attribute("PromptText").Value;
                 RadioList.DisplayOrder = int.Parse(_FieldTypeID.Attribute("TabIndex").Value);
@@ -401,12 +411,13 @@ namespace Epi.Web.MVC.Utility
                 RadioList.IsHighlighted = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "HighlightedFieldsList");
                 RadioList.IsDisabled = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "DisabledFieldsList");
                 RadioList.ShowTextOnRight = bool.Parse(_FieldTypeID.Attribute("ShowTextOnRight").Value);
-                RadioList.Choices = GetChoices(_FieldTypeID.Attribute("List").Value.Split(',').ToList<string>());
+                RadioList.Choices = Choices;
                 RadioList.Width = _Width;
                 RadioList.Height = _Height;
-                RadioList.Pattern = _FieldTypeID.Attribute("Pattern").Value.Split(',').ToList<string>();
+                RadioList.Pattern = Pattern;
 
-               if (RadioList.Pattern[0] == "Vertical")
+              // if (RadioList.Pattern[0] == "Vertical")
+                if (_Height > _Width)
                {
                    RadioList.Orientation = (Orientation)0;
                }
