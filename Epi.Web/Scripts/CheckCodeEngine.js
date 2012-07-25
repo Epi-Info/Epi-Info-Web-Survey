@@ -159,18 +159,22 @@ function CCE_ProcessUnHideCommand(pCheckCodeList)
         {
             var symbol = cce_Context.resolve(pCheckCodeList[i]);
             var query = null;
+           
             if(symbol.Type == "radiobutton")
             {
+             
                 query = '.mvcdynamicfield_' + pCheckCodeList[i];
                 $(query).each(function(i, obj) 
                 {
-                    $(query).show();    
+                   $(query).css("visibility", "	visible"); 
+                   $(query).show();
                 });
 
                 query = '.labelmvcdynamicfield_' + pCheckCodeList[i];
                 $(query).each(function(i, obj) 
                 {
-                    $(query).show();
+                   $(query).css("visibility", "	visible");
+                   $(query).show();
                 });
                  query = '#mvcdynamicfield_' + pCheckCodeList[i]+"_groupbox";
                 $(query).each(function(i, obj) 
@@ -447,7 +451,7 @@ Rule_Hide.prototype.Execute = function ()
 
          for (var i = 0; i < pCheckCodeList.length; i++) {
            var query = '#mvcdynamicfield_' + pCheckCodeList[i];
-
+           var symbol = cce_Context.resolve(pCheckCodeList[i]);
            if(symbol.Type == "radiobutton")
             {
                 query = '.labelmvcdynamicfield_' + pCheckCodeList[i];
@@ -543,12 +547,13 @@ Rule_Hide.prototype.Execute = function ()
          for (var i = 0; i < pCheckCodeList.length; i++) 
          {
           var query = '#mvcdynamicfield_' + pCheckCodeList[i];
+          var symbol = cce_Context.resolve(pCheckCodeList[i]);
            if(symbol.Type == "radiobutton")
             {
                 query = '.labelmvcdynamicfield_' + pCheckCodeList[i];
                 $(query).each(function(i, obj) 
                 {
-                    $(query).css("background-color","yellow");
+                    $(query).css("background-color","white");
                 });
             }
             else
@@ -642,7 +647,8 @@ Rule_Hide.prototype.Execute = function ()
          //this.canvas.HideCheckCodeItems(controlsList);
          for (var i = 0; i < pCheckCodeList.length; i++) 
          {
-             var query = null;
+             var query = null;  
+             var symbol = cce_Context.resolve(pCheckCodeList[i]);
             if(symbol.Type == "radiobutton")
             {
                 query = '.mvcdynamicfield_' + pCheckCodeList[i];
@@ -736,7 +742,7 @@ Rule_Hide.prototype.Execute = function ()
          {
              var query = null;
 
-             
+             var symbol = cce_Context.resolve(pCheckCodeList[i]);
             if(symbol.Type == "radiobutton")
             {
                 query = '.mvcdynamicfield_' + pCheckCodeList[i];
