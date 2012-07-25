@@ -210,6 +210,24 @@ namespace Epi.Web.MVC.Controllers
                                 return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
 
                         }
+                        else if (!string.IsNullOrEmpty(this.Request.Form["is_goto_action"]) && this.Request.Form["is_goto_action"].ToString().Equals("true", StringComparison.OrdinalIgnoreCase))
+                        {
+                            //This is a Navigation to a url
+                            form.HiddenFieldsList = this.Request.Form["HiddenFieldsList"].ToString();
+
+                            form.HighlightedFieldsList = this.Request.Form["HighlightedFieldsList"].ToString();
+
+                            form.DisabledFieldsList = this.Request.Form["DisabledFieldsList"].ToString();
+                            form.AssignList = this.Request.Form["AssignList"].ToString();
+
+
+                            _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId, form, SurveyAnswer, IsSubmited, IsSaved, PageNumber);
+
+                            SurveyAnswer = _isurveyFacade.GetSurveyAnswerResponse(responseId).SurveyResponseList[0];
+                            form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, PageNumber, SurveyAnswer);
+                            TempData["Width"] = form.Width + 30;
+                            return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
+                        }
                         else if (form.Validate())
                         {
                             if (!string.IsNullOrEmpty(Submitbutton))
