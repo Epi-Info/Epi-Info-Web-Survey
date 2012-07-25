@@ -30,8 +30,20 @@ namespace MvcDynamicForms.Fields
                 error.SetInnerText(Error);
                 html.Append(error.ToString());
             }
-       
-            
+            string IsHiddenStyle = "";
+            string IsHighlightedStyle = "";
+
+            if (_IsHidden)
+            {
+                IsHiddenStyle = "visibility:hidden";
+            }
+            if (_IsHighlighted)
+            {
+                IsHighlightedStyle = "background:yellow";
+            }
+
+
+          
           
            
             for (int i = 0; i < choicesList.Count; i++)
@@ -58,7 +70,7 @@ namespace MvcDynamicForms.Fields
                 var Div = new TagBuilder("Div");
                 Div.Attributes.Add("class", _orientation == Orientation.Vertical ? _verticalClass : _horizontalClass);
                 Div.Attributes["class"] += " " + _listClass;
-                Div.Attributes.Add("style", "position:absolute; left:" + (_left +   innerLeft ) + "px;top:" + (_top +   innerTop ) + "px" + ";width:" + _ControlWidth.ToString() + "px" + ";height:" + _ControlHeight.ToString() + "px");
+                Div.Attributes.Add("style", "position:absolute; left:" + (_left + innerLeft) + "px;top:" + (_top + innerTop) + "px" + ";width:" + _ControlWidth.ToString() + "px" + ";height:" + _ControlHeight.ToString() + "px" + ";" + IsHiddenStyle);
                 html.Append(Div.ToString(TagRenderMode.StartTag));
                
                 if (!_showTextOnRight)
@@ -71,7 +83,7 @@ namespace MvcDynamicForms.Fields
                     Leftlbl.Attributes.Add("Id", "label" + inputName + "_" + i);
                     StringBuilder StyleValues1 = new StringBuilder();
                     StyleValues1.Append(GetRadioListStyle(_fontstyle.ToString(), null, null, null, null, IsHidden));
-                    Leftlbl.Attributes.Add("style", StyleValues1.ToString());
+                    Leftlbl.Attributes.Add("style", StyleValues1.ToString() + ";" + IsHighlightedStyle);
                     Leftlbl.SetInnerText(choicesList[i].Key);
                     html.Append(Leftlbl.ToString());
                      
@@ -95,7 +107,10 @@ namespace MvcDynamicForms.Fields
                 rad.SetInnerText(choicesList[i].Key);
                 rad.Attributes.Add("value",  i.ToString());
                 rad.Attributes.Add("style", "display: inline;"); 
-             
+                if (_IsDisabled)
+                {
+                rad.Attributes.Add("disabled", "disabled");
+                }
 
                  if (Value == i.ToString()) rad.Attributes.Add("checked", "checked");
                 rad.MergeAttributes(_inputHtmlAttributes);
@@ -111,7 +126,7 @@ namespace MvcDynamicForms.Fields
                     rightlbl.Attributes.Add("Id", "label" + inputName + "_" + i);
                     StringBuilder StyleValues2 = new StringBuilder();
                     StyleValues2.Append(GetRadioListStyle(_fontstyle.ToString(), null, null, null, null, IsHidden));
-                    rightlbl.Attributes.Add("style", StyleValues2.ToString());
+                    rightlbl.Attributes.Add("style", StyleValues2.ToString() + ";" + IsHighlightedStyle);
                     rightlbl.SetInnerText(choicesList[i].Key);
                     html.Append(rightlbl.ToString());
                

@@ -26,6 +26,21 @@ namespace MvcDynamicForms.Fields
             var html = new StringBuilder();
             var inputName = _form.FieldPrefix + _key;
             string ErrorStyle = string.Empty;
+            string IsHiddenStyle = "";
+            string IsHighlightedStyle = "";
+
+
+            if (_IsHidden)
+            {
+                IsHiddenStyle = "display:none";
+            }
+            if (_IsHighlighted)
+            {
+                IsHighlightedStyle = "background:yellow";
+            }
+
+
+
             // prompt label
             var prompt = new TagBuilder("legend");
            
@@ -58,7 +73,7 @@ namespace MvcDynamicForms.Fields
             // txt.Attributes.Add("value", Value);
             txt.Attributes.Add("value", Value);
 
-            txt.Attributes.Add("style", "position:absolute;left:" + _left.ToString() + "px;top:" + _top.ToString() + "px" + ";width:" + _ControlWidth.ToString() + "px" + ";height:" + _ControlHeight.ToString() + "px" + ErrorStyle);
+            txt.Attributes.Add("style", "position:absolute;left:" + _left.ToString() + "px;top:" + _top.ToString() + "px" + ";width:" + _ControlWidth.ToString() + "px" + ";height:" + _ControlHeight.ToString() + "px;" + IsHiddenStyle);
 
             txt.MergeAttributes(_inputHtmlAttributes);
            // html.Append(txt.ToString(TagRenderMode.SelfClosing));
