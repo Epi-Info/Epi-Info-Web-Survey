@@ -908,6 +908,7 @@ function CCE_RemoveFromFieldsList(FieldName,ListName) {
          //get the url in the format of http://localhost/<Server>/survey/<ResponseID>
          currentUrl = processUrl(currentUrl, 'RedirectionUrl', "");
          $("#myform")[0].action = currentUrl + "/" + controlOrPage;
+         $("#myform")[0].is_goto_action.value = 'true';
          //detach the validation engine as we don't want to validate data to go to another page as directed by check code
          $('#myform').validationEngine('detach');
          $("#myform").submit();
