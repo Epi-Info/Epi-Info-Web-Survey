@@ -49,6 +49,12 @@ function CCE_ProcessHideCommand(pCheckCodeList)
                 {
                     $(query).hide();
                 });
+
+                 query = '#mvcdynamicfield_' + pCheckCodeList[i]+"_groupbox";
+                $(query).each(function(i, obj) 
+                {
+                    $(query).hide();
+                });
             }
             else
             {
@@ -162,6 +168,11 @@ function CCE_ProcessUnHideCommand(pCheckCodeList)
                 });
 
                 query = '.labelmvcdynamicfield_' + pCheckCodeList[i];
+                $(query).each(function(i, obj) 
+                {
+                    $(query).show();
+                });
+                 query = '#mvcdynamicfield_' + pCheckCodeList[i]+"_groupbox";
                 $(query).each(function(i, obj) 
                 {
                     $(query).show();
