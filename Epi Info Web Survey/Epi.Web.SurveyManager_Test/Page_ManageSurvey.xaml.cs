@@ -34,7 +34,7 @@ namespace Epi.Web.SurveyManager.Client
 
         private void DownloadSurveyInfoButton_Click(object sender, RoutedEventArgs e)
         {
-            SurveyManagerService.ManagerServiceClient client = new SurveyManagerService.ManagerServiceClient();
+            SurveyManagerService.ManagerServiceClient client = ServiceClient.GetClient();
 
             Epi.Web.Common.Message.SurveyInfoRequest Request = new Epi.Web.Common.Message.SurveyInfoRequest();
 
@@ -181,7 +181,7 @@ namespace Epi.Web.SurveyManager.Client
             {
                 SurveyInfoResponseTextBox.Document.Blocks.Clear();
 
-                SurveyManagerService.ManagerServiceClient client = new SurveyManagerService.ManagerServiceClient();
+                SurveyManagerService.ManagerServiceClient client = ServiceClient.GetClient();
 
                 Epi.Web.Common.Message.SurveyInfoRequest Request = new Epi.Web.Common.Message.SurveyInfoRequest();
                 Request.Action = "Update";
