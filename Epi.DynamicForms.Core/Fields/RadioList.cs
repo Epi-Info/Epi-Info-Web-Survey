@@ -101,7 +101,8 @@ namespace MvcDynamicForms.Fields
                 if (FunctionObjectAfter != null && !FunctionObjectAfter.IsNull())
                 {
 
-                    rad.Attributes.Add("onblur", "return " + _key + "_after();"); //After
+                   // rad.Attributes.Add("onblur", "return " + _key + "_after();"); //After
+                    rad.Attributes.Add("onclick", "return " + _key + "_after();"); //After
                 }
               
                 ////////////Check code end//////////////////
