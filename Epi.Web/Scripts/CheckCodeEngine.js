@@ -166,14 +166,16 @@ function CCE_ProcessUnHideCommand(pCheckCodeList)
                 query = '.mvcdynamicfield_' + pCheckCodeList[i];
                 $(query).each(function(i, obj) 
                 {
-                   $(query).css("visibility", "	visible"); 
+                  // $(query).css("visibility", "	visible");
+                   $(query).css("dispaly", "	inline"); 
                    $(query).show();
                 });
 
                 query = '.labelmvcdynamicfield_' + pCheckCodeList[i];
                 $(query).each(function(i, obj) 
                 {
-                   $(query).css("visibility", "	visible");
+                  // $(query).css("visibility", "	visible");
+                  $(query).css("dispaly", "	inline");
                    $(query).show();
                 });
                  query = '#mvcdynamicfield_' + pCheckCodeList[i]+"_groupbox";
