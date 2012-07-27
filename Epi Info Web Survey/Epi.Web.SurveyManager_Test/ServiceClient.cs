@@ -16,7 +16,7 @@ namespace Epi.Web.SurveyManager.Client
             SurveyManagerService.ManagerServiceClient result = null;
             try
             {
-
+                
 
                 if (pIsAuthenticated) // Windows Authentication
                 {
@@ -30,17 +30,17 @@ namespace Epi.Web.SurveyManager.Client
                     binding.AllowCookies = false;
                     binding.BypassProxyOnLocal = false;
                     binding.HostNameComparisonMode = System.ServiceModel.HostNameComparisonMode.StrongWildcard;
-                    binding.MaxBufferPoolSize = 524288;
-                    binding.MaxReceivedMessageSize = 65536;
+                    binding.MaxBufferPoolSize = long.Parse( ConfigurationManager.AppSettings["MaxBufferPoolSize"]);//524288;
+                    binding.MaxReceivedMessageSize = long.Parse(ConfigurationManager.AppSettings["MaxReceivedMessageSize"]); 
                     binding.MessageEncoding = System.ServiceModel.WSMessageEncoding.Text;
                     binding.TextEncoding = System.Text.Encoding.UTF8;
                     binding.TransferMode = System.ServiceModel.TransferMode.Buffered;
                     binding.UseDefaultWebProxy = true;
-                    binding.ReaderQuotas.MaxDepth = 32;
-                    binding.ReaderQuotas.MaxStringContentLength = 8192;
-                    binding.ReaderQuotas.MaxArrayLength = 16384;
-                    binding.ReaderQuotas.MaxBytesPerRead = 4096;
-                    binding.ReaderQuotas.MaxNameTableCharCount = 16384;
+                    binding.ReaderQuotas.MaxDepth = int.Parse(ConfigurationManager.AppSettings["MaxDepth"]);//32;
+                    binding.ReaderQuotas.MaxStringContentLength = int.Parse(ConfigurationManager.AppSettings["MaxStringContentLength"]);  //8192;
+                    binding.ReaderQuotas.MaxArrayLength = int.Parse(ConfigurationManager.AppSettings["MaxArrayLength"]); //16384;
+                    binding.ReaderQuotas.MaxBytesPerRead = int.Parse(ConfigurationManager.AppSettings["MaxBytesPerRead"]); //4096;
+                    binding.ReaderQuotas.MaxNameTableCharCount = int.Parse(ConfigurationManager.AppSettings["MaxNameTableCharCount"]); //16384;
 
                     binding.Security.Mode = System.ServiceModel.BasicHttpSecurityMode.TransportCredentialOnly;
                     binding.Security.Transport.ClientCredentialType = System.ServiceModel.HttpClientCredentialType.Windows;
@@ -67,18 +67,18 @@ namespace Epi.Web.SurveyManager.Client
                     binding.BypassProxyOnLocal = false;
                     binding.TransactionFlow = false;
                     binding.HostNameComparisonMode = System.ServiceModel.HostNameComparisonMode.StrongWildcard;
-                    binding.MaxBufferPoolSize = 524288;
-                    binding.MaxReceivedMessageSize = 65536;
+                    binding.MaxBufferPoolSize = long.Parse(ConfigurationManager.AppSettings["MaxBufferPoolSize"]);//524288;
+                    binding.MaxReceivedMessageSize = long.Parse(ConfigurationManager.AppSettings["MaxReceivedMessageSize"]); 
                     binding.MessageEncoding = System.ServiceModel.WSMessageEncoding.Text;
                     binding.TextEncoding = System.Text.Encoding.UTF8;
                     binding.UseDefaultWebProxy = true;
                     binding.AllowCookies = false;
 
-                    binding.ReaderQuotas.MaxDepth = 32;
-                    binding.ReaderQuotas.MaxStringContentLength = 8192;
-                    binding.ReaderQuotas.MaxArrayLength = 16384;
-                    binding.ReaderQuotas.MaxBytesPerRead = 4096;
-                    binding.ReaderQuotas.MaxNameTableCharCount = 16384;
+                    binding.ReaderQuotas.MaxDepth = int.Parse(ConfigurationManager.AppSettings["MaxDepth"]);//32;
+                    binding.ReaderQuotas.MaxStringContentLength = int.Parse(ConfigurationManager.AppSettings["MaxStringContentLength"]);  //8192;
+                    binding.ReaderQuotas.MaxArrayLength = int.Parse(ConfigurationManager.AppSettings["MaxArrayLength"]); //16384;
+                    binding.ReaderQuotas.MaxBytesPerRead = int.Parse(ConfigurationManager.AppSettings["MaxBytesPerRead"]); //4096;
+                    binding.ReaderQuotas.MaxNameTableCharCount = int.Parse(ConfigurationManager.AppSettings["MaxNameTableCharCount"]); //16384;
 
                     binding.ReliableSession.Ordered = true;
                     binding.ReliableSession.InactivityTimeout = new TimeSpan(0, 10, 0);
