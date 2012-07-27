@@ -605,4 +605,8 @@ label.MvcDynamicCheckboxPrompt {}
 
 /*  You can view html source or use a DOM inspector 
     to figure out how to select elements to style them. */
-    
+   
+ 
+select.expand {
+    width: auto;
+}
