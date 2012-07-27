@@ -110,12 +110,15 @@ namespace MvcDynamicForms.Fields
 
             ////////////Check code end//////////////////
 
-            
+
 
             if (_IsRequired == true)
             {
-                select.Attributes.Add("class", "validate[required] text-input");
+                select.Attributes.Add("class", "validate[required] text-input wide");
                 select.Attributes.Add("data-prompt-position", "topRight:10");
+            }
+            else {
+                select.Attributes.Add("class", "wide");
             }
             string IsHiddenStyle = "";
             string IsHighlightedStyle = "";
