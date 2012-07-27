@@ -510,7 +510,7 @@ namespace Epi.Web.MVC.Utility
                 Left = _Width * double.Parse(_FieldTypeID.Attribute("ControlLeftPositionPercentage").Value),
                 PromptWidth = _Width * double.Parse(_FieldTypeID.Attribute("ControlWidthPercentage").Value),
                 ControlWidth = _Width * double.Parse(_FieldTypeID.Attribute("ControlWidthPercentage").Value),
-                ControlHeight = _Width * double.Parse(_FieldTypeID.Attribute("ControlHeightPercentage").Value),
+                ControlHeight = _Height * double.Parse(_FieldTypeID.Attribute("ControlHeightPercentage").Value),
                 fontstyle = _FieldTypeID.Attribute("PromptFontStyle").Value,
                 fontSize = double.Parse(_FieldTypeID.Attribute("PromptFontSize").Value),
                 fontfamily = _FieldTypeID.Attribute("PromptFontFamily").Value,
