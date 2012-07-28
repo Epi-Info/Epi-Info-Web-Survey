@@ -1000,6 +1000,30 @@ function CCE_Round(pValue1, pValue2)
     return result;
 }
 
+function CCE_Day(pValue) 
+{
 
+    if(isValidDate(pValue))
+    {
+        return pValue.getDate();
+    }
+    else
+    {
+        return new Date(pValue).getDate();
+    }
+    
+}
+
+function CCE_Days(pValue1, pValue2) 
+{
+    var date1 = new Date(pValue1);
+    var date2 = new Date(pValue2);
+
+    var oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
+
+    var result = Math.round(Math.abs((date1.getTime() - date2.getTime())/(oneDay)));
+
+    return result;
+}
 
 cce_Context = new CCE_Context();
