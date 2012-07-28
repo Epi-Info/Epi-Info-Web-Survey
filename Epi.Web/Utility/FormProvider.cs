@@ -746,11 +746,11 @@ namespace Epi.Web.MVC.Utility
         
            
                 DropDown.AddChoices(DropDownValues, "&#;");
-            
-            //if (!string.IsNullOrWhiteSpace(_ControlValue))
-            //{
-            //    DropDown.Choices[_ControlValue] = true;
-            //}
+
+                if (!string.IsNullOrWhiteSpace(_ControlValue))
+                {
+                    DropDown.Choices[_ControlValue] = true;
+                }
 
             return DropDown;
         }
