@@ -36,6 +36,13 @@ namespace Epi.Core.EnterInterpreter.Rules
                 return null;
             }
         }
-        
+
+        public override void ToJavaScript(StringBuilder pJavaScriptBuilder)
+        {
+            pJavaScriptBuilder.Append("Math.abs(");
+            this.ParameterList[0].ToJavaScript(pJavaScriptBuilder);
+            pJavaScriptBuilder.Append(")");
+        }
+
     }
 }
