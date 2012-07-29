@@ -1026,4 +1026,27 @@ function CCE_Days(pValue1, pValue2)
     return result;
 }
 
+function CCE_Substring(pValue1, pValue2, pValue3) 
+{
+        var result = null;
+        var fullString = null;
+        var startIndex = 0;
+        var length = 0;
+
+        fullString = new String(pValue1);
+        startIndex = new Number(pValue2);
+        length = new Number(pValue3);
+
+        if (!(fullString == null && fullString !=""))
+        {
+            if (fullString.ToString().Length >= startIndex - 1 + length)
+            {
+                result = fullString.substring(startIndex - 1, length);
+            }
+        }
+
+        return result;
+}
+
+
 cce_Context = new CCE_Context();
