@@ -1054,4 +1054,15 @@ function CCE_Truncate(pValue)
     return pValue | 0; // bitwise operators convert operands to 32-bit integers
 }
 
+function CCE_SystemDate()
+{
+    return new Date();
+}
+
+
+function CCE_SystemTime()
+{
+    return new Date().getTime();
+}
+
 cce_Context = new CCE_Context();

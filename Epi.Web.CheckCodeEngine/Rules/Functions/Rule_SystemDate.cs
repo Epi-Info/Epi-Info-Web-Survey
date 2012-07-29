@@ -25,5 +25,11 @@ namespace Epi.Core.EnterInterpreter.Rules
         {
             return DateTime.Today;
         }
+
+        public override void ToJavaScript(StringBuilder pJavaScriptBuilder)
+        {
+            pJavaScriptBuilder.Append("CCE_SystemDate()");
+        }
+
     }
 }

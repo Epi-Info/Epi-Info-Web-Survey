@@ -27,5 +27,10 @@ namespace Epi.Core.EnterInterpreter.Rules
             TimeSpan result = new TimeSpan(temp.Hour, temp.Minute, temp.Second);
             return result;
         }
+
+        public override void ToJavaScript(StringBuilder pJavaScriptBuilder)
+        {
+            pJavaScriptBuilder.Append("CCE_SystemTime()");
+        }
     }
 }
