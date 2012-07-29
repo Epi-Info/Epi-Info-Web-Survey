@@ -1049,4 +1049,9 @@ function CCE_Substring(pValue1, pValue2, pValue3)
 }
 
 
+function CCE_Truncate(pValue)
+{
+    return pValue | 0; // bitwise operators convert operands to 32-bit integers
+}
+
 cce_Context = new CCE_Context();
