@@ -61,11 +61,11 @@
 
 
 
-           if ($.browser.msie && $.browser.version < 9) $('select.wide')
-                .bind('focus mouseover', function() { $(this).addClass('expand').removeClass('clicked'); })
-                .bind('click', function() { $(this).toggleClass('clicked'); })
-                .bind('mouseout', function() { if (!$(this).hasClass('clicked')) { $(this).removeClass('expand'); }})
-                .bind('blur', function() { $(this).removeClass('expand clicked'); });
+//           if ($.browser.msie && $.browser.version < 9) $('select.wide')
+//                .bind('focus mouseover', function() { $(this).addClass('expand').removeClass('clicked'); })
+//                .bind('click', function() { $(this).toggleClass('clicked'); })
+//                .bind('mouseout', function() { if (!$(this).hasClass('clicked')) { $(this).removeClass('expand'); }})
+//                .bind('blur', function() { $(this).removeClass('expand clicked'); });
 
 
 
@@ -76,7 +76,28 @@
       
      </script> 
  
-      
+      <!--[if lt IE 9]>
+	<script>
+		$(function() {
+		
+			var el;
+			
+			$("select.fix-me")
+				.each(function() {
+					el = $(this);
+					el.data("origWidth", el.outerWidth()) // IE 8 will take padding on selects
+				})
+			  .mouseenter(function(){
+			    $(this).css("width", "auto");
+			  })
+			  .bind("blur change", function(){
+			  	el = $(this);
+			    el.css("width", el.data("origWidth"));
+			  });
+		
+		});
+	</script>
+	<![endif]-->
 </head>
 <body>
      
