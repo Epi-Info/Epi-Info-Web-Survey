@@ -5,6 +5,8 @@ using System.Text;
 using System.Web.Mvc;
 using  System.Web;
 using Epi.Core.EnterInterpreter;
+using System.Drawing;
+
 namespace MvcDynamicForms.Fields
 {
     /// <summary>
@@ -109,16 +111,55 @@ namespace MvcDynamicForms.Fields
             }
 
             ////////////Check code end//////////////////
+            int LargestChoiseLength =0 ;
+            string measureString = "";
+            foreach (var choise in _choices) {
+
+                if (choise.Key.ToString().Length > LargestChoiseLength) 
+             {
+                 LargestChoiseLength = choise.Key.ToString().Length;
+
+                 measureString = choise.Key.ToString();
+             } 
+            
+            
+            }
+
+            LargestChoiseLength = LargestChoiseLength * _ControlFontSize;
+
+            Font stringFont = new Font(ControlFontStyle, _ControlFontSize);
+
+            SizeF size = new SizeF() ;
+            using (Graphics g = Graphics.FromHwnd(IntPtr.Zero))
+            {
+                  size = g.MeasureString(measureString.ToString(), stringFont);
+            }
 
 
+           
+          // stringSize = (int) Graphics.MeasureString(measureString.ToString(), stringFont).Width;
+        
 
             if (_IsRequired == true)
             {
-                select.Attributes.Add("class", "validate[required] text-input fix-me");
-                select.Attributes.Add("data-prompt-position", "topRight:10");
+                        if (size.Width > _ControlWidth)
+                        {
+                           select.Attributes.Add("class", "validate[required] text-input fix-me");
+                        }
+                        else
+                        {
+                           select.Attributes.Add("class", "validate[required] text-input");
+                        }
+                       select.Attributes.Add("data-prompt-position", "topRight:10");
             }
-            else {
-                select.Attributes.Add("class", "fix-me");
+            else 
+            {
+
+                        if (size.Width > _ControlWidth)
+                        {
+                            select.Attributes.Add("class", "fix-me");
+                        }
+                
             }
             string IsHiddenStyle = "";
             string IsHighlightedStyle = "";
