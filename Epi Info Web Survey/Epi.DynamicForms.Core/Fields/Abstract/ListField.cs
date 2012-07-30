@@ -13,6 +13,8 @@ namespace MvcDynamicForms.Fields
     {
         protected Dictionary<string, bool> _choices = new Dictionary<string, bool>();
         protected string _responseDelimiter = ", ";
+        protected int _ControlFontSize;
+        protected string _ControlFontStyle;
         
         /// <summary>
         /// The choices that the end user can choose from.
@@ -43,6 +45,31 @@ namespace MvcDynamicForms.Fields
             }
         }
         public int SelectType { get; set; }
+        public int ControlFontSize 
+        { 
+            get
+            {
+                return _ControlFontSize;
+            }
+            
+            set
+            {
+                _ControlFontSize = value;
+            } 
+        }
+
+        public string ControlFontStyle
+        {
+            get
+            {
+                return _ControlFontStyle;
+            }
+
+            set
+            {
+                _ControlFontStyle = value;
+            }
+        }
         public override string Response
         {
             get
