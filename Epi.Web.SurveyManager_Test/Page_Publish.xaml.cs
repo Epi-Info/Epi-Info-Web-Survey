@@ -41,7 +41,7 @@ namespace Epi.Web.SurveyManager.Client
             ServiceResponseTextBox.Document.Blocks.Clear();
             this.OpenURLButton.IsEnabled = false;
 
-            SurveyManagerService.ManagerServiceClient client = new SurveyManagerService.ManagerServiceClient();
+            SurveyManagerService.ManagerServiceClient client = ServiceClient.GetClient();
 
             Epi.Web.Common.Message.PublishRequest Request = new Epi.Web.Common.Message.PublishRequest();
             if (this.datePicker1.SelectedDate == null)
