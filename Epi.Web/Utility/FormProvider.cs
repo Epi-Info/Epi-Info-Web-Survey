@@ -738,7 +738,7 @@ namespace Epi.Web.MVC.Utility
                     IsHidden = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "HiddenFieldsList"),
                     IsHighlighted = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "HighlightedFieldsList"),
                     IsDisabled = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "DisabledFieldsList"),
-                    ControlFontSize = double.Parse(_FieldTypeID.Attribute("ControlFontSize").Value),
+                    ControlFontSize = float.Parse(_FieldTypeID.Attribute("ControlFontSize").Value),
                     ControlFontStyle = _FieldTypeID.Attribute("ControlFontStyle").Value,
                      
                     EmptyOption = "Select"
