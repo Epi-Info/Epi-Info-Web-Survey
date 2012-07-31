@@ -13,7 +13,7 @@ namespace MvcDynamicForms.Fields
     {
         protected Dictionary<string, bool> _choices = new Dictionary<string, bool>();
         protected string _responseDelimiter = ", ";
-        protected double _ControlFontSize;
+        protected float _ControlFontSize;
         protected string _ControlFontStyle;
         
         /// <summary>
@@ -45,7 +45,7 @@ namespace MvcDynamicForms.Fields
             }
         }
         public int SelectType { get; set; }
-        public double ControlFontSize 
+        public float ControlFontSize 
         { 
             get
             {
