@@ -90,7 +90,7 @@
 			  .mouseenter(function(){
 			    $(this).css("width", "auto");
 			  })
-			  .bind("blur change", function(){
+			  .bind("blur change", .mouseleave(function(){
 			  	el = $(this);
 			    el.css("width", el.data("origWidth"));
 			  });
