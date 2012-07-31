@@ -142,7 +142,7 @@ namespace MvcDynamicForms.Fields
 
             if (_IsRequired == true)
             {
-                        if (size.Width > _ControlWidth)
+                        if ((size.Width) > _ControlWidth)
                         {
                            select.Attributes.Add("class", "validate[required] text-input fix-me");
                         }
@@ -155,7 +155,7 @@ namespace MvcDynamicForms.Fields
             else 
             {
 
-                        if (size.Width > _ControlWidth)
+                        if ((size.Width) > _ControlWidth)
                         {
                             select.Attributes.Add("class", "fix-me");
                         }
@@ -175,7 +175,7 @@ namespace MvcDynamicForms.Fields
             {
                 select.Attributes.Add("disabled", "disabled");
             }
-            select.Attributes.Add("style", "position:absolute;left:" + _left.ToString() + "px;top:" + _top.ToString() + "px" + ";width:" + _ControlWidth.ToString() + "px" + ErrorStyle + ";" +IsHiddenStyle + ";" + IsHighlightedStyle);
+            select.Attributes.Add("style", "position:absolute;left:" + _left.ToString() + "px;top:" + _top.ToString() + "px" + ";width:" + _ControlWidth.ToString() + "px ; font-size:"+ _ControlFontSize +"pt;" + ErrorStyle + ";" +IsHiddenStyle + ";" + IsHighlightedStyle);
             select.MergeAttributes(_inputHtmlAttributes);
             html.Append(select.ToString(TagRenderMode.StartTag));
             // If readonly then add the following jquery script to make the field disabled 
