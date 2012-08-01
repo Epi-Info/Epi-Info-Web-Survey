@@ -16,12 +16,18 @@ namespace Epi.Web.Controllers
        [ValidateAntiForgeryToken]
         public JsonResult Notify(string emailAddress, string redirectUrl, string surveyName,string passCode)
         {
-            
-            if (EmailMessage.SendMessage(emailAddress,redirectUrl,surveyName,passCode))
+            try
             {
-                return Json(true);
-            }
-            else 
+                if (EmailMessage.SendMessage(emailAddress, redirectUrl, surveyName, passCode))
+                {
+                    return Json(true);
+                }
+                else
+                {
+                    return Json(false);
+                }
+             }
+            catch (Exception ex)
             {
                 return Json(false);
             }
