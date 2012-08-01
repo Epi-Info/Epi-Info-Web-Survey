@@ -39,7 +39,8 @@ namespace Epi.Web.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        
+      // [ValidateAntiForgeryToken]
         public JsonResult SignOut()
         {
             try
