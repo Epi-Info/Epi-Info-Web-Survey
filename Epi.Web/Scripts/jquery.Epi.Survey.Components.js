@@ -45,7 +45,8 @@ function SignOutAndRedirect(signoutUrl,homePageUrl) {
                 }
                 else {
 
-                    alert('Unable to sign out');
+                    //alert('Unable to sign out');
+                    window.location.href = homePageUrl; //rerirecting to home page
 
                 }
             },
