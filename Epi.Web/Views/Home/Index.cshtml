@@ -48,7 +48,7 @@
        @using (Html.BeginForm())
        { 
         
-            <div id="content">
+            <div id="content" style="margin-bottom:200px;">
                @if(Model.ClosingDate >= DateTime.Now)
                
                {
@@ -85,6 +85,18 @@
                }
                 
            </div>
+           
+           <div style="width:220px; padding:5px; border: 2px solid #04aeda; margin-right:10px; margin-left:590px; position:absolute; bottom:100px;">
+	            <div style="float:left; width:54px;">
+	                <img alt="" style="z-index:12;" src="@Url.Content("~/Content/images/video.png")"/>
+	            </div>
+	            <div style="float:right; vertical-align:top; text-align:left; padding-right:10px;">
+	                <span style="font: bold 10pt Segoe UI; color:#04aeda; "> Created using Epi Info 7</span><br/>
+	                <button class="watch" style="margin-top: 5px;">Watch Video</button>
+	            </div>
+	            <div style="clear:both;"></div>
+            </div>
+
                
      }
 
