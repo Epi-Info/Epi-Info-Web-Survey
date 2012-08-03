@@ -83,6 +83,15 @@
             height: 370,
             modal: true
         });
+
+         $("#VideoDialog").dialog({
+            autoOpen: false,
+            show: "blind",
+            hide: "blind",
+            resizable: false,
+            height: 370,
+            modal: true
+        });
         var responseUrl = GetRedirectionUrl();
         $('#url').val(responseUrl);
 
@@ -362,4 +371,11 @@
                 <p style="font-size: 8pt; padding: 5px; background: #ffffa8; margin-top:-5px;"><strong>Note:</strong> Your email address will not be saved and will only be used to send you the survey link.</p>
                </div>
 
+
+
+               <div id="VideoDialog" title = "Video Dialog">
+               
+               
+               
+               </div>
      
