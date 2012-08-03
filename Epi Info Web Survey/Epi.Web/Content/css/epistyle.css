@@ -610,3 +610,18 @@ label.MvcDynamicCheckboxPrompt {}
 select.expand {
     width: auto;
 }
+
+
+button.watch
+ {
+ border: 1px #04aeda solid;
+ 
+ padding: 3px 5px 3px 5px;
+ color:#fff;
+ font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+ font-size: 10pt;
+ font-weight:bold;
+ width: 148px;
+ 
+ background: #04aeda; 
+ }
