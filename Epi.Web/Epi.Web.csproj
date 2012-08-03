@@ -185,6 +185,7 @@
     <Content Include="Content\images\save.png" />
     <Content Include="Content\images\sign_warning.png" />
     <Content Include="Content\images\submit.png" />
+    <Content Include="Content\images\video.png" />
     <Content Include="Content\images\warn.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
