@@ -1064,5 +1064,7 @@ function CCE_SystemTime()
 {
     return new Date().getTime();
 }
-
+    function OpenVideoDialog(){
+       $("#VideoDialog").dialog("open");
+    }
 cce_Context = new CCE_Context();
