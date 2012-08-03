@@ -70,8 +70,20 @@ namespace MvcDynamicForms.Fields
             }
             if (_MaxLength.ToString() != "0" && !string.IsNullOrEmpty(_MaxLength.ToString()))
             {
-                txt.Attributes.Add("MaxLength", _MaxLength.ToString());
+                if (_MaxLength <= 255)
+                {
+                    txt.Attributes.Add("MaxLength", _MaxLength.ToString());
+                }
+                else
+                {
+                    txt.Attributes.Add("MaxLength", "255");
+                }
             }
+            else
+            {
+                txt.Attributes.Add("MaxLength", "255");
+            }
+
             string IsHiddenStyle = "";
             string IsHighlightedStyle = "";
            
