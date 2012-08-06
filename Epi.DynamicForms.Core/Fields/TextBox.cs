@@ -64,25 +64,22 @@ namespace MvcDynamicForms.Fields
             ////////////Check code end//////////////////
             
             txt.Attributes.Add("value", Value);
-            if(_IsRequired ==true){
-            txt.Attributes.Add("class", "validate[required] text-input");
-            txt.Attributes.Add("data-prompt-position", "topRight:15");
-            }
-            if (_MaxLength.ToString() != "0" && !string.IsNullOrEmpty(_MaxLength.ToString()))
+            if(_IsRequired ==true)
             {
-                if (_MaxLength <= 255)
-                {
-                    txt.Attributes.Add("MaxLength", _MaxLength.ToString());
-                }
-                else
-                {
-                    txt.Attributes.Add("MaxLength", "255");
-                }
+                txt.Attributes.Add("class", "validate[required] text-input");
+                txt.Attributes.Add("data-prompt-position", "topRight:15");
+            }
+
+            if (_MaxLength > 0 && _MaxLength <= 255)
+            {
+                txt.Attributes.Add("MaxLength", _MaxLength.ToString());
             }
             else
             {
                 txt.Attributes.Add("MaxLength", "255");
             }
+            
+            
 
             string IsHiddenStyle = "";
             string IsHighlightedStyle = "";
