@@ -1072,11 +1072,11 @@ function CCE_Hour(pValue)
 
     if(isValidDate(pValue))
     {
-        return pValue.getMinutes();
+        return pValue.getHours();
     }
     else
     {
-        return new Date(pValue).getMinutes();
+        return new Date(pValue).getHours();
     }
     
 }
@@ -1119,6 +1119,36 @@ function CCE_Minutes(pValue1, pValue2)
 
     return result;
 }
+
+
+function CCE_Second(pValue) 
+{
+
+    if(isValidDate(pValue))
+    {
+        return pValue.getSeconds();
+    }
+    else
+    {
+        return new Date(pValue).getSeconds();
+    }
+    
+}
+
+function CCE_Seconds(pValue1, pValue2) 
+{
+    var date1 = new Date(pValue1);
+    var date2 = new Date(pValue2);
+
+    var oneSecond = 1000; // milliseconds
+
+    var result = Math.round(Math.abs((date1.getTime() - date2.getTime())/(oneSecond)));
+
+    return result;
+}
+
+
+
 
 function OpenVideoDialog()
 {
