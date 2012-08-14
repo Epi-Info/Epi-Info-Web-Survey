@@ -1064,7 +1064,36 @@ function CCE_SystemTime()
 {
     return new Date().getTime();
 }
-    function OpenVideoDialog(){
-       $("#VideoDialog").dialog("open");
+
+function CCE_Minute(pValue) 
+{
+
+    if(isValidDate(pValue))
+    {
+        return pValue.getMinutes();
     }
+    else
+    {
+        return new Date(pValue).getMinutes();
+    }
+    
+}
+
+function CCE_Minutes(pValue1, pValue2) 
+{
+    var date1 = new Date(pValue1);
+    var date2 = new Date(pValue2);
+
+    var oneMinute = *60*1000; // seconds*milliseconds
+
+    var result = Math.round(Math.abs((date1.getTime() - date2.getTime())/(oneMinute)));
+
+    return result;
+}
+
+function OpenVideoDialog()
+{
+    $("#VideoDialog").dialog("open");
+}
+
 cce_Context = new CCE_Context();
