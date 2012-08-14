@@ -33,5 +33,11 @@ namespace Epi.Core.EnterInterpreter.Rules
 
             return result;
         }
+
+        public override void ToJavaScript(StringBuilder pJavaScriptBuilder)
+        {
+            this.ParameterList[0].ToJavaScript(pJavaScriptBuilder);
+            pJavaScriptBuilder.Append(".toUpperCase()");
+        }
     }
 }
