@@ -1065,6 +1065,35 @@ function CCE_SystemTime()
     return new Date().getTime();
 }
 
+
+
+function CCE_Hour(pValue) 
+{
+
+    if(isValidDate(pValue))
+    {
+        return pValue.getMinutes();
+    }
+    else
+    {
+        return new Date(pValue).getMinutes();
+    }
+    
+}
+
+function CCE_Hours(pValue1, pValue2) 
+{
+    var date1 = new Date(pValue1);
+    var date2 = new Date(pValue2);
+
+    var oneHour = 60*60*1000; // minutes * seconds*milliseconds
+
+    var result = Math.round(Math.abs((date1.getTime() - date2.getTime())/(oneHour)));
+
+    return result;
+}
+
+
 function CCE_Minute(pValue) 
 {
 
@@ -1084,7 +1113,7 @@ function CCE_Minutes(pValue1, pValue2)
     var date1 = new Date(pValue1);
     var date2 = new Date(pValue2);
 
-    var oneMinute = *60*1000; // seconds*milliseconds
+    var oneMinute = 60*1000; // seconds*milliseconds
 
     var result = Math.round(Math.abs((date1.getTime() - date2.getTime())/(oneMinute)));
 
