@@ -75,6 +75,50 @@ namespace Epi.Core.EnterInterpreter.Rules
         {
             return this.Dialog.Execute();
         }
+
+
+        public override void ToJavaScript(StringBuilder pJavaScriptBuilder)
+        {
+            string DialogType = Dialog.GetType().FullName;
+            DialogType = DialogType.Substring(DialogType.LastIndexOf('.') + 6);
+
+            switch (DialogType)
+            {
+                case "Simple_Dialog_Statement":
+                    pJavaScriptBuilder.Append("CCE_ContextOpenSimpleDialogBox('");
+                    pJavaScriptBuilder.Append(((RuleDialogBase)(this.Dialog)).TitleText.ToString());
+                    pJavaScriptBuilder.Append("', '");
+                    pJavaScriptBuilder.AppendLine(((RuleDialogBase)(this.Dialog)).Prompt.ToString() + "');");
+                    break;
+                case "Numeric_Dialog_Explicit_Statement":
+                case "Dialog_Date_Mask_Statement":
+                case "TextBox_Dialog_Statement":
+                case "YN_Dialog_Statement":
+                    pJavaScriptBuilder.Append(GetJavaScriptString("CCE_ContextOpenDialogBox").ToString());
+                    break;
+
+
+
+            }
+
+        }
+
+        public StringBuilder GetJavaScriptString(string FunctionName)
+        {
+            StringBuilder pJavaScriptBuilder = new StringBuilder();
+
+
+            pJavaScriptBuilder.Append(FunctionName + "('");
+            pJavaScriptBuilder.Append(((Rules.RuleDialogBase)(this.Dialog)).TitleText.ToString());
+            pJavaScriptBuilder.Append("', '");
+            pJavaScriptBuilder.Append(((RuleDialogBase)(this.Dialog)).MaskOpt.ToString());
+            pJavaScriptBuilder.Append("', '");
+            pJavaScriptBuilder.Append(((RuleDialogBase)(this.Dialog)).Identifier.ToString().ToLower());
+            pJavaScriptBuilder.Append("', '");
+            pJavaScriptBuilder.AppendLine(((RuleDialogBase)(this.Dialog)).Prompt.ToString() + "');");
+
+            return pJavaScriptBuilder;
+        }
     }
 
     public class Rule_Simple_Dialog_Statement : RuleDialogBase
@@ -430,17 +474,17 @@ namespace Epi.Core.EnterInterpreter.Rules
     /// </summary>
     public class RuleDialogBase : EnterRule 
     {
-        protected string mask = null;
-        protected string titleText = null;
-        protected string prompt = null;
+        protected string mask = "";
+        protected string titleText = "";
+        protected string prompt = "";
 
         protected string Filter { get; set; }
-        protected string Identifier { get; set; }
+        public string Identifier { get; set; }
         protected string Modifier { get; set; }
         protected string StringList { get; set; }
         protected string TitleOpt { get; set; }
 
-        protected string MaskOpt
+        public string MaskOpt
         {
             get { return mask; }
             set
@@ -455,7 +499,7 @@ namespace Epi.Core.EnterInterpreter.Rules
                 }
             }
         }
-        protected string Prompt 
+        public string Prompt 
         {
             get { return prompt; }
             set
@@ -470,7 +514,7 @@ namespace Epi.Core.EnterInterpreter.Rules
                 }
             }
         }
-        protected string TitleText
+        public string TitleText
         {
             get { return titleText; }
             set
