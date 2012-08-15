@@ -94,6 +94,42 @@
             width: 500,
             modal: true
         });
+
+
+        $("#SimpleDialogBox").dialog({
+            autoOpen: false,
+            show: "blind",
+            hide: "blind",
+            resizable: false,
+             height: 100,
+             width: 300,
+            modal: true 
+
+        });
+
+        
+          $("#DialogBox").dialog({
+            autoOpen: false,
+            show: "blind",
+            hide: "blind",
+            resizable: false,
+             height: 135,
+             width: 400,
+            modal: true 
+
+        });
+
+          
+         $("#ErrordialogBox").dialog({
+            autoOpen: false,
+            show: "blind",
+            hide: "blind",
+            resizable: false,
+           // height: 100,
+             width: 300,
+            modal: true
+        });
+
         var responseUrl = GetRedirectionUrl();
         $('#url').val(responseUrl);
 
@@ -374,11 +410,55 @@
                </div>
 
 
-
                @*<div id="VideoDialog" title = "How this survey was created!">
                
                <iframe width="480" height="360" src="http://www.youtube.com/embed/BgTJnSKQKIs?rel=0" frameborder="0" allowfullscreen></iframe>
                
                
-               </div>
-     *@
+               </div>*@
+
+
+                         
+
+              <div id="SimpleDialogBox" title="Error">
+	          <p><label id="SimpleDialogBoxPrempt">Prempt</label></p>
+              <p style="text-align:right;"> <button  id="SimpleDialogBoxButton" type="button" class="login" style="width:50px;" onclick="CCE_CloseSimpleDialogBox();">Ok</button></p>
+              </div>
+           
+
+
+
+          @* calendar(1)*@
+
+              <div id="DialogBox" title="Error">
+	          <p><label id="DialogBoxPrempt">Prempt</label></p>
+              <p> <input id="DialogBoxInput" type="text"  onclick="CCE_GetDateTimePicker();"  style="width: 240px;"/>
+             @* <input type="button" height="16px" width="16px"  onclick="CCE_GetDateTimePicker();" style="background-image:@Url.Content("~/Content/images/calendar(1).png")" name="calendar">*@
+               
+              </p>
+              <p style="text-align:left;"> 
+              <button  id="YesButton" type="button" class="login" style="width:50px;" onclick="CCE_YesNoClick('Yes');">Yes</button>&nbsp;
+              <button  id="NoButton" type="button" class="login" style="width:50px;" onclick="CCE_YesNoClick('No');">No</button>
+              </p>
+              <p style="text-align:right;"> 
+              <button  id="DialogBoxOkButton" type="button" class="login" style="width:50px;" onclick="CCE_DialogBoxOkButton_Click();">Ok</button>&nbsp;
+              <button  id="DialogBoxCancelButton" type="button" class="login" style="width:70px;" onclick="CCE_CloseDialogBox();">Cancel</button>
+              </p>
+              <input type="hidden"  id="DialogBoxHiddenField"  name="HiddenFieldsList" value=" " />
+              <input type="hidden"  id="DialogBoxType"  name="DialogBoxType" value=" " />
+              </div>
+              
+
+           
+
+
+             <div class="demo">
+        
+              <div id="ErrordialogBox" title="Error">
+             
+	          <p style="white-space:pre-wrap;"><label id="ErrordialogBoxPrempt">Prempt</label></p>
+              <p style="text-align:right;"> <button  id="ErrordialogBoxButton" type="button" class="login" style="width:50px;" onclick="CCE_CloseErrorDialogBox();">Ok</button></p>
+              </div>
+ 	         </div>
+              
+            
