@@ -1155,4 +1155,181 @@ function OpenVideoDialog()
     $("#VideoDialog").dialog("open");
 }
 
+
+
+/////////////////Simple  Dialogbox //////////////////////
+function CCE_ContextOpenSimpleDialogBox(Title,Prompt) 
+{
+        $('#ui-dialog-title-SimpledialogBox').text(Title.toString());
+        $('#SimpleDialogBoxPrempt').text(Prompt.toString());
+        $('#SimpleDialogBoxButton').text('Ok');
+        $("#SimpleDialogBox").dialog("open");
+}
+
+function CCE_CloseSimpleDialogBox() 
+{
+        $('#SimpleDialogBox').dialog("close");
+}
+
+/////////////////  Dialogbox ///////////////////////////////////
+function CCE_ContextOpenDialogBox(Title,MaskOpt,Identifier,Prompt) 
+{
+   
+        $('#ui-dialog-title-DialogBox').text(Title.toString());
+        $('#DialogBoxPrempt').text(Prompt.toString());
+        $('#DialogBoxOkButton').text('Ok');
+        $('#DialogBoxInput').datepicker( "hide" );
+         
+        $("#DialogBox").dialog("open");
+        $('#ui-timepicker-div').hide();
+
+        if(CCE_GetMaskedPattern(MaskOpt.toLocaleString()).toString() != "")
+        {
+            $('#DialogBoxInput').mask( CCE_GetMaskedPattern(MaskOpt.toLocaleString()).toString()); 
+        }
+
+        if(MaskOpt.toString() == "YN")
+        {
+            $('#DialogBoxOkButton').hide();
+            $('#DialogBoxCancelButton').hide();
+            $('#DialogBoxInput').hide();
+            $('#YesButton').show();
+            $('#NoButton').show();
+        }
+        else
+        {
+            $('#DialogBoxOkButton').show();
+            $('#DialogBoxCancelButton').show();
+            $('#YesButton').hide();
+            $('#NoButton').hide();
+        }
+        $('#DialogBoxHiddenField').val(Identifier); 
+        $('#DialogBoxType').val(CCE_GetDialogType(MaskOpt)); 
+        $('#DialogBoxInput').datepicker( "hide" );
+        $('#ui-timepicker-div').hide();
+          
+}
+
+function  CCE_DialogBoxOkButton_Click()
+{
+        var FieldName = '#mvcdynamicfield_'+ $('#DialogBoxHiddenField').val().toString();
+        var value =  $('#DialogBoxInput').val();
+        $(FieldName).val(value.toString());
+        $('#DialogBoxInput').val('');
+        $('#DialogBox').dialog("close");
+        $('#DialogBoxInput').datepicker( "hide" );
+        $('#ui-timepicker-div').hide();
+}
+
+function CCE_CloseDialogBox() 
+{
+        $('#DialogBox').dialog("close");
+}
+
+function CCE_GetDateTimePicker()
+{
+    if($('#DialogBoxType').val() =="Time")
+    {
+        $('#DialogBoxInput').timepicker({showSecond:true,timeFormat: 'hh:mm:ss'});
+    }
+
+    if($('#DialogBoxType').val() =="Date")
+    {
+        $('#DialogBoxInput').datepicker({changeMonth: true,changeYear: true});
+    }
+}
+
+function CCE_GetDialogType(Mask)
+{
+
+    var dialogType= "";
+    switch (Mask)
+    {
+                
+        case "MM-DD-YYYY":
+            dialogType = "Date";
+            break;
+        case "DD-MM-YYYY":
+            dialogType = "Date";
+            break;
+        case "YYYY-MM-DD":
+            dialogType = "Date";
+            break;
+        case "HH:MM AMPM":
+            dialogType = "Time";
+            break;
+                    
+                   
+    }
+    return dialogType;
+
+}
+
+ function  CCE_GetMaskedPattern(pattern)
+{
+    var maskedPattern = "";
+    switch (pattern)
+    {
+        case "#":
+            maskedPattern = "9";
+            break;
+        case "##":
+            maskedPattern = "99";
+            break;
+        case "###":
+            maskedPattern = "999";
+            break;
+        case "####":
+            maskedPattern = "9999" ;
+            break;
+        case "##.##":
+            maskedPattern = "99.99";
+            break;
+        case "##.###":
+            maskedPattern = "99.999";
+            break;
+        case "###-###-###-####":
+            maskedPattern = "999-999-999-9999";
+            break;
+        case "###-####":
+            maskedPattern = "999-9999";
+            break;
+        case "###-###-####":
+            maskedPattern = "999-999-9999";
+            break;
+            case "#-###-###-###-####":
+            maskedPattern = "9-999-999-999-9999";
+            break;
+
+//                case "DD-MM-YYYY":
+//                    maskedPattern = "99/99/9999";
+//                    break;
+//                case "YYYY-MM-DD":
+//                    maskedPattern = "9999/99/99";
+//                    break;
+//               case "HH:MM AMPM":
+//                    maskedPattern = "hh:mm:ss";
+//                    break;
+//                    
+                   
+    }
+    return maskedPattern;
+}
+
+function  CCE_YesNoClick(Val)
+{
+    var FieldName = '#mvcdynamicfield_'+ $('#DialogBoxHiddenField').val().toString();
+           
+    if (Val=="Yes")
+    {
+        $(FieldName).val('True');
+    }
+    else
+    {
+        $(FieldName).val('False');
+    }
+    $('#DialogBox').dialog("close");
+        
+}
+
 cce_Context = new CCE_Context();
