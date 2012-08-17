@@ -632,7 +632,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>http://localhost:22587/Epi.Web.ServiceHost/SurveyDataService.svc</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>lamtahrim01@ETIEXT.lan</Upn>
+          <Upn>agnihotris01@ETIEXT.lan</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
