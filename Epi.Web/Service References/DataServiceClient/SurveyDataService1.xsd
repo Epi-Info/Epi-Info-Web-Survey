@@ -30,6 +30,10 @@
         <xs:sequence>
           <xs:element minOccurs="0" name="ClosingDate" type="xs:dateTime" />
           <xs:element minOccurs="0" name="IncludeOrderStatistics" type="xs:boolean" />
+          <xs:element minOccurs="0" name="OrganizationKey" type="ser:guid" />
+          <xs:element minOccurs="0" name="PageNumber" type="xs:int" />
+          <xs:element minOccurs="0" name="PageSize" type="xs:int" />
+          <xs:element minOccurs="0" name="ReturnSizeInfoOnly" type="xs:boolean" />
           <xs:element xmlns:q2="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="SurveyIdList" nillable="true" type="q2:ArrayOfstring" />
           <xs:element minOccurs="0" name="SurveyType" type="xs:int" />
           <xs:element minOccurs="0" name="UserPublishKey" type="ser:guid" />
@@ -57,6 +61,7 @@
       <xs:element minOccurs="0" name="ExitText" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="IntroductionText" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="IsSuccess" type="xs:boolean" />
+      <xs:element minOccurs="0" name="OrganizationKey" type="ser:guid" />
       <xs:element minOccurs="0" name="OrganizationName" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="SurveyId" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="SurveyName" nillable="true" type="xs:string" />
@@ -71,6 +76,8 @@
     <xs:complexContent mixed="false">
       <xs:extension base="tns:ResponseBase">
         <xs:sequence>
+          <xs:element minOccurs="0" name="NumberOfPages" type="xs:int" />
+          <xs:element minOccurs="0" name="PageSize" type="xs:int" />
           <xs:element minOccurs="0" name="SurveyInfoList" nillable="true" type="tns:ArrayOfSurveyInfoDTO" />
         </xs:sequence>
       </xs:extension>
@@ -123,6 +130,10 @@
         <xs:sequence>
           <xs:element minOccurs="0" name="DateCompleted" type="xs:dateTime" />
           <xs:element minOccurs="0" name="IncludeOrderStatistics" type="xs:boolean" />
+          <xs:element minOccurs="0" name="OrganizationKey" type="ser:guid" />
+          <xs:element minOccurs="0" name="PageNumber" type="xs:int" />
+          <xs:element minOccurs="0" name="PageSize" type="xs:int" />
+          <xs:element minOccurs="0" name="ReturnSizeInfoOnly" type="xs:boolean" />
           <xs:element minOccurs="0" name="StatusId" type="xs:int" />
           <xs:element xmlns:q3="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="SurveyAnswerIdList" nillable="true" type="q3:ArrayOfstring" />
           <xs:element minOccurs="0" name="SurveyId" nillable="true" type="xs:string" />
@@ -140,7 +151,8 @@
   <xs:element name="ArrayOfSurveyAnswerDTO" nillable="true" type="tns:ArrayOfSurveyAnswerDTO" />
   <xs:complexType name="SurveyAnswerDTO">
     <xs:sequence>
-      <xs:element minOccurs="0" name="DateCompleted" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="DateCompleted" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="DateCreated" type="xs:dateTime" />
       <xs:element minOccurs="0" name="DateUpdated" type="xs:dateTime" />
       <xs:element minOccurs="0" name="ResponseId" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Status" type="xs:int" />
@@ -154,6 +166,8 @@
     <xs:complexContent mixed="false">
       <xs:extension base="tns:ResponseBase">
         <xs:sequence>
+          <xs:element minOccurs="0" name="NumberOfPages" type="xs:int" />
+          <xs:element minOccurs="0" name="PageSize" type="xs:int" />
           <xs:element minOccurs="0" name="SurveyResponseList" nillable="true" type="tns:ArrayOfSurveyAnswerDTO" />
         </xs:sequence>
       </xs:extension>
