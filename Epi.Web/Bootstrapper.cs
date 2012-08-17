@@ -4,6 +4,7 @@ using Unity.Mvc3;
 using Epi.Web.MVC;
 using Epi.Web.MVC;
 using Epi.Web.MVC.Utility;
+using System.Configuration;
 
 namespace Epi.Web.MVC
 {
@@ -29,7 +30,7 @@ namespace Epi.Web.MVC
             container
             .RegisterType<Epi.Web.DataServiceClient.IDataService, Epi.Web.DataServiceClient.DataServiceClient>()
            .Configure<InjectedMembers>()
-            .ConfigureInjectionFor<Epi.Web.DataServiceClient.DataServiceClient>(new InjectionConstructor("WSHttpBinding_IDataService"));
+            .ConfigureInjectionFor<Epi.Web.DataServiceClient.DataServiceClient>(new InjectionConstructor(ConfigurationManager.AppSettings["BINDING_USED"]));
            
             container.RegisterType<Epi.Web.Common.Message.SurveyInfoRequest, Epi.Web.Common.Message.SurveyInfoRequest>();
             container.RegisterType<Epi.Web.MVC.Repositories.Core.ISurveyInfoRepository, Epi.Web.MVC.Repositories.SurveyInfoRepository>();
