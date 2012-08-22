@@ -2,7 +2,27 @@
     ViewBag.Title = "Final Survey";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script type="text/javascript" >
 
+    $(document).ready(function () {
+        // a workaround for a flaw in the demo system (http://dev.jqueryui.com/ticket/4375), ignore!
+        
+       
+ 
+
+         $("#VideoDialog").dialog({
+            autoOpen: false,
+            show: "blind",
+            hide: "blind",
+            resizable: false,
+            height: 410,
+            width: 500,
+            modal: true
+        });
+
+          });
+
+</script>
  <div id="header">
             <h1>
                 @Model.SurveyName  
@@ -55,5 +75,22 @@
               
                 
            </div>
-               
+             <div style="width:220px; padding:5px; border: 2px solid #04aeda; margin-right:10px; margin-left:590px; position:absolute; bottom:100px;">
+	            <div style="float:left; width:54px;">
+	                <img alt="" style="z-index:12;" src="@Url.Content("~/Content/images/video.png")"/>
+	            </div>
+	            <div style="float:right; vertical-align:top; text-align:left; padding-right:10px;">
+	                <span style="font: bold 10pt Segoe UI; color:#04aeda;"> Created using Epi Info 7</span>
+	               <p style="margin-top:5px; margin-bottom:1px;"> <a onclick ="OpenVideoDialog();" class="watch">Watch Video</a></p>
+	            </div>
+	            <div style="clear:both;"></div>
+            </div>  
      }
+
+       <div id="VideoDialog" title = "How this survey was created!">
+               
+      <iframe width="480" height="360" src="http://www.youtube.com/embed/BgTJnSKQKIs?rel=0" frameborder="0" allowfullscreen></iframe>
+               
+               
+       </div>
+     
