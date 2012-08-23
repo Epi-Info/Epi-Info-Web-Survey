@@ -261,6 +261,7 @@
     <Content Include="Scripts\jquery.validationEngine-en.js" />
     <Content Include="Scripts\jquery.validationEngine.js" />
     <Content Include="Scripts\PIE.htc" />
+    <Content Include="SurveyDataService.svc" />
     <Content Include="Unity.Mvc3.README.txt" />
     <Content Include="Views\Final\Index.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
