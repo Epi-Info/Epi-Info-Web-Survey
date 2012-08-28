@@ -372,6 +372,12 @@ namespace Epi.Web.SurveyManager.Client
             
         
         }
+
+        private void ViewConfigButton_Click(object sender, RoutedEventArgs e)
+        {
+            Page_Configuration Page_Config = new Page_Configuration();
+            this.NavigationService.Navigate(Page_Config);
+        }
         
     }
 }
