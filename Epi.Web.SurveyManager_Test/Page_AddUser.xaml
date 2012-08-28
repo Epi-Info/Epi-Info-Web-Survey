@@ -43,6 +43,7 @@
             <GroupBox Header="Edit Organization Info" Height="100" HorizontalAlignment="Left" Margin="56,458,0,0" Name="groupBox4" VerticalAlignment="Top" Width="502">
                 <Grid />
             </GroupBox>
+            <Button Content="View Config" Height="28" HorizontalAlignment="Left" Margin="492,39,0,0" Name="ViewConfigButton" VerticalAlignment="Top" Width="86" Click="ViewConfigButton_Click" />
         </Grid>
     </ScrollViewer>
 </Page>
