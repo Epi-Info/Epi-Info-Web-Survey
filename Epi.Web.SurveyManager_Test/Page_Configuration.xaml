@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       mc:Ignorable="d" 
       d:DesignHeight="386" d:DesignWidth="416"
-	Title="Page_EnDe">
+	Title="Configuration Manager">
 
     <Grid Height="389" Width="420">
         <Grid.ColumnDefinitions>
@@ -40,12 +40,12 @@
                 </GroupBox>
             </Grid>
         </GroupBox>
-        <GroupBox Header="Encript Connection String" Height="182" HorizontalAlignment="Left" Margin="12,195,0,0" Name="groupBox2" VerticalAlignment="Top" Width="396" Grid.ColumnSpan="2">
+        <GroupBox Header="Encrypt Connection String" Height="182" HorizontalAlignment="Left" Margin="12,195,0,0" Name="groupBox2" VerticalAlignment="Top" Width="396" Grid.ColumnSpan="2">
             <Grid>
                 <TextBox Height="61" HorizontalAlignment="Left" Margin="4,6,0,0" Name="InputConnectionTextBox" VerticalAlignment="Top" Width="374" TextWrapping="Wrap" />
                 <TextBox Height="55" HorizontalAlignment="Left" Margin="4,73,0,0" Name="OutputConnectionTextBox" VerticalAlignment="Top" Width="374" TextWrapping="Wrap" />
                 <Button Content="Encrypt" Height="23" HorizontalAlignment="Left" Margin="303,134,0,0" Name="EncryptButton" VerticalAlignment="Top" Width="75" Click="EncryptButton_Click" />
-                <Button Content="Decrypt" Height="23" HorizontalAlignment="Left" Margin="221,134,0,0" Name="DecryptButton" VerticalAlignment="Top" Width="75" Click="DecryptButton_Click" />
+                <Button Content="Decrypt" Height="23" HorizontalAlignment="Left" Margin="221,134,0,0" Name="DecryptButton" VerticalAlignment="Top" Width="75" Click="DecryptButton_Click" Visibility="Hidden" />
             </Grid>
         </GroupBox>
         <CheckBox Content="Show Testing Features" Height="16" HorizontalAlignment="Left" Margin="12,164,0,0" Name="ShowTestFeatruesCheckBox" VerticalAlignment="Top" Width="136" Checked="ShowTestFeatruesCheckBox_Checked" Unchecked="ShowTestFeatruesCheckBox_Unchecked" />
