@@ -12,6 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Configuration;
+using Epi.Web.Common.Security;
 
 namespace Epi.Web.SurveyManager.Client
 {
@@ -75,10 +76,7 @@ namespace Epi.Web.SurveyManager.Client
             }
         }
 
-        private void EncryptButton_Click(object sender, RoutedEventArgs e)
-        {
 
-        }
 
         private void ShowTestFeatruesCheckBox_Checked(object sender, RoutedEventArgs e)
         {
@@ -139,6 +137,16 @@ namespace Epi.Web.SurveyManager.Client
                 config.Save(ConfigurationSaveMode.Modified);
                 ConfigurationManager.RefreshSection("appSettings");
             }
+        }
+
+
+        private void EncryptButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.OutputConnectionTextBox.Text = Cryptography.Encrypt(this.InputConnectionTextBox.Text);
+        }
+        private void DecryptButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.OutputConnectionTextBox.Text = Cryptography.Decrypt(this.InputConnectionTextBox.Text);
         }
         
     }
