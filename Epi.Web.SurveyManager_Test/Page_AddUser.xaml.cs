@@ -29,6 +29,28 @@ namespace Epi.Web.SurveyManager.Client
         {
             InitializeComponent();
             this.WindowTitle = "Add user";
+
+            string s = ConfigurationManager.AppSettings["SHOW_TESTING_FEATURES"];
+            if (!String.IsNullOrEmpty(s))
+            {
+                if (s.ToUpper() == "TRUE")
+                {
+                    this.ViewPublishClient.Visibility = System.Windows.Visibility.Visible;
+                    this.ManageSurveyButton.Visibility = System.Windows.Visibility.Visible;
+                    this.ViewDownloadClient.Visibility = System.Windows.Visibility.Visible;
+
+                }
+                else
+                {
+                    this.ViewPublishClient.Visibility = System.Windows.Visibility.Hidden;
+                    this.ManageSurveyButton.Visibility = System.Windows.Visibility.Hidden;
+                    this.ViewDownloadClient.Visibility = System.Windows.Visibility.Hidden;
+
+                }
+            }
+
+
+
         }
 
         private void ManageSurveyButton_Click(object sender, RoutedEventArgs e)
