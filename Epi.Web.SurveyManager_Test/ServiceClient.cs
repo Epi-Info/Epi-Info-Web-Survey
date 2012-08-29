@@ -159,7 +159,7 @@ namespace Epi.Web.SurveyManager.Client
         {
             string pEndPointAddress = ConfigurationManager.AppSettings["EndPointAddress"];
             bool pIsAuthenticated = false;
-
+            bool pIsWsHTTPBinding = true;
             string s = ConfigurationManager.AppSettings["Authentication_Use_Windows"];
             if (!String.IsNullOrEmpty(s))
             {
@@ -169,7 +169,21 @@ namespace Epi.Web.SurveyManager.Client
                 }
             }
 
-            return GetClient(pEndPointAddress, pIsAuthenticated); 
+
+            s = ConfigurationManager.AppSettings["WCF_BINDING_TYPE"];
+            if (!String.IsNullOrEmpty(s))
+            {
+                if (s.ToUpper() == "WSHTTP")
+                {
+                    pIsWsHTTPBinding = true;
+                }
+                else
+                {
+                    pIsWsHTTPBinding = false;
+                }
+            }
+
+            return GetClient(pEndPointAddress, pIsAuthenticated, pIsWsHTTPBinding); 
         }
     }
 }
