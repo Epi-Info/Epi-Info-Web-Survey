@@ -148,6 +148,53 @@ namespace Epi.Web.SurveyManager.Client
         {
             this.OutputConnectionTextBox.Text = Cryptography.Decrypt(this.InputConnectionTextBox.Text);
         }
+
+        private void PingButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.PingResultTextBox.Text = "";
+            string pEndPointAddress = this.EndPointURLTextBox.Text;
+            bool pIsAuthenticated = false;
+            bool pIsWsHTTPBinding = true;
+
+            if ((bool)this.YesRadioButton.IsChecked)
+            {
+                pIsAuthenticated = true;
+            }
+
+            if ((bool)this.wsHTTPRadioButton.IsChecked)
+            {
+                pIsWsHTTPBinding = true;
+            }
+            else
+            {
+                pIsWsHTTPBinding = false;
+            }
+            
+
+            try
+            {
+                SurveyManagerService.ManagerServiceClient Client = ServiceClient.GetClient(pEndPointAddress, pIsAuthenticated, pIsWsHTTPBinding);
+                Epi.Web.Common.Message.OrganizationRequest Request = new Epi.Web.Common.Message.OrganizationRequest();
+                var Result = Client.GetOrganization(Request);
+                this.PingResultTextBox.Text = "Succesfully Created Service Client";
+            }
+            catch(Exception ex)
+            {
+                this.PingResultTextBox.Text = "Failed to create Service Client:\n\n" + ex.Message;
+            }
+
+        }
+
+        private void YesRadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+            this.ProtocolGroupBox.IsEnabled = false;
+            this.BasicBindingRadioButton.IsChecked = true;
+        }
+
+        private void NoRadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+            this.ProtocolGroupBox.IsEnabled = true;
+        }
         
     }
 }
