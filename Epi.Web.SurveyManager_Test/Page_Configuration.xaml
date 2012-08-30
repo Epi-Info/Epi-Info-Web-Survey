@@ -3,20 +3,18 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      mc:Ignorable="d" 
-      d:DesignHeight="386" d:DesignWidth="416"
-	Title="Configuration Manager">
+      mc:Ignorable="d" Title="Configuration Manager" Height="600" Width="430">
 
-    <Grid Height="389" Width="420">
+    <Grid Height="602" Width="420">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="262*" />
+            <ColumnDefinition Width="250*" />
+            <ColumnDefinition Width="12*" />
             <ColumnDefinition Width="158*" />
         </Grid.ColumnDefinitions>
-        <GroupBox Header="Manager Service Url" Height="134" HorizontalAlignment="Left" Margin="12,12,0,0" Name="groupBox1" VerticalAlignment="Top" Width="396" Grid.ColumnSpan="2">
+        <GroupBox Header="Local Settings" Height="317" HorizontalAlignment="Left" Margin="12,12,0,0" Name="groupBox1" VerticalAlignment="Top" Width="396" Grid.ColumnSpan="3">
             <Grid>
-                <TextBox Height="49" HorizontalAlignment="Left" Margin="6,6,0,0" Name="EndPointURLTextBox" VerticalAlignment="Top" Width="372" TextWrapping="Wrap" />
-                <Button Content="update..." Height="23" HorizontalAlignment="Left" Margin="303,83,0,0" Name="UpdateConfigButton" VerticalAlignment="Top" Width="75" />
-                <GroupBox Header="Protocol" Height="43" HorizontalAlignment="Left" Margin="6,66,0,0" Name="ProtocolGroupBox" VerticalAlignment="Top" Width="130">
+                <TextBox Height="54" HorizontalAlignment="Left" Margin="6,29,0,0" Name="EndPointURLTextBox" VerticalAlignment="Top" Width="372" TextWrapping="Wrap" />
+                <GroupBox Header="Binding Protocol" Height="43" HorizontalAlignment="Left" Margin="248,83,0,0" Name="ProtocolGroupBox" VerticalAlignment="Top" Width="130">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="19*" />
@@ -27,20 +25,26 @@
                         <RadioButton Content="wsHTTP" Height="16" HorizontalAlignment="Left" Margin="32,6,0,0" Name="wsHTTPRadioButton" VerticalAlignment="Top" Grid.Column="2" />
                     </Grid>
                 </GroupBox>
-                <GroupBox Header="Windows Authentication" Height="42" HorizontalAlignment="Left" Margin="142,67,0,0" Name="UseWindowsAuthenticationGroupBox" VerticalAlignment="Top" Width="139">
+                <GroupBox Header="Windows Authentication" Height="42" HorizontalAlignment="Left" Margin="6,83,0,0" Name="UseWindowsAuthenticationGroupBox" VerticalAlignment="Top" Width="234">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="3*" />
                             <ColumnDefinition Width="20*" />
                             <ColumnDefinition Width="77*" />
                         </Grid.ColumnDefinitions>
-                        <RadioButton Content="Yes" Height="16" HorizontalAlignment="Left" Margin="16,7,0,0" Name="YesRadioButton" VerticalAlignment="Top" Grid.ColumnSpan="2" Grid.Column="1" />
-                        <RadioButton Content="No" Height="16" HorizontalAlignment="Left" Margin="44,7,0,0" Name="NoRadioButton" VerticalAlignment="Top" Grid.Column="2" />
+                        <RadioButton Content="Yes (requires basic protocol)" Height="16" HorizontalAlignment="Left" Margin="6,6,0,0" Name="YesRadioButton" VerticalAlignment="Top" Grid.ColumnSpan="3" Checked="YesRadioButton_Checked" />
+                        <RadioButton Content="No" Height="16" HorizontalAlignment="Left" Margin="128,7,0,0" Name="NoRadioButton" VerticalAlignment="Top" Grid.Column="2" Checked="NoRadioButton_Checked" />
                     </Grid>
                 </GroupBox>
+                <Button Content="Ping" Height="23" HorizontalAlignment="Left" Margin="303,227,0,0" Name="PingButton" VerticalAlignment="Top" Width="75" Click="PingButton_Click" />
+                <TextBox Height="74" HorizontalAlignment="Left" Margin="6,147,0,0" Name="PingResultTextBox" VerticalAlignment="Top" Width="372" TextWrapping="Wrap" />
+                <Label Content="Ping Result:" Height="28" HorizontalAlignment="Left" Margin="4,0,0,144" Name="label1" VerticalAlignment="Bottom" />
+                <Label Content="Manager Service URL:" Height="28" HorizontalAlignment="Left" Margin="0,6,0,0" Name="label2" VerticalAlignment="Top" />
+                <CheckBox Content="Show Web Service Testing Feature Pages" Height="16" HorizontalAlignment="Left" Margin="12,269,0,0" Name="ShowTestFeatruesCheckBox" VerticalAlignment="Top" Width="225" Checked="ShowTestFeatruesCheckBox_Checked" Unchecked="ShowTestFeatruesCheckBox_Unchecked" />
+                <Button Content="Update Local Settings..." Height="23" HorizontalAlignment="Left" Margin="254,262,0,0" Name="UpdateConfigButton" VerticalAlignment="Top" Width="124" Click="UpdateConfigButton_Click" />
             </Grid>
         </GroupBox>
-        <GroupBox Header="Encrypt Connection String" Height="182" HorizontalAlignment="Left" Margin="12,195,0,0" Name="groupBox2" VerticalAlignment="Top" Width="396" Grid.ColumnSpan="2">
+        <GroupBox Header="Encrypt Connection String" Height="182" HorizontalAlignment="Left" Margin="12,335,0,0" Name="groupBox2" VerticalAlignment="Top" Width="396" Grid.ColumnSpan="3">
             <Grid>
                 <TextBox Height="61" HorizontalAlignment="Left" Margin="4,6,0,0" Name="InputConnectionTextBox" VerticalAlignment="Top" Width="374" TextWrapping="Wrap" />
                 <TextBox Height="55" HorizontalAlignment="Left" Margin="4,73,0,0" Name="OutputConnectionTextBox" VerticalAlignment="Top" Width="374" TextWrapping="Wrap" />
@@ -48,6 +52,5 @@
                 <Button Content="Decrypt" Height="23" HorizontalAlignment="Left" Margin="221,134,0,0" Name="DecryptButton" VerticalAlignment="Top" Width="75" Click="DecryptButton_Click" Visibility="Hidden" />
             </Grid>
         </GroupBox>
-        <CheckBox Content="Show Testing Features" Height="16" HorizontalAlignment="Left" Margin="12,164,0,0" Name="ShowTestFeatruesCheckBox" VerticalAlignment="Top" Width="136" Checked="ShowTestFeatruesCheckBox_Checked" Unchecked="ShowTestFeatruesCheckBox_Unchecked" />
     </Grid>
 </Page>
