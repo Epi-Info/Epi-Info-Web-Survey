@@ -58,14 +58,14 @@ GO
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Organization]') AND type in (N'U'))
 DROP TABLE [dbo].[Organization]
 GO
-/****** Object:  User [EPIWS App User]    Script Date: 08/23/2012 14:02:28 ******/
-IF  EXISTS (SELECT * FROM sys.database_principals WHERE name = N'EPIWS App User')
-DROP USER [EPIWS App User]
-GO
-/****** Object:  User [EPIWS App User]    Script Date: 08/23/2012 14:02:28 ******/
-IF NOT EXISTS (SELECT * FROM sys.database_principals WHERE name = N'EPIWS App User')
-CREATE USER [EPIWS App User] FOR LOGIN [osels_epiws_appuser] WITH DEFAULT_SCHEMA=[dbo]
-GO
+--/****** Object:  User [EPIWS App User]    Script Date: 08/23/2012 14:02:28 ******/
+--IF  EXISTS (SELECT * FROM sys.database_principals WHERE name = N'EPIWS App User')
+--DROP USER [EPIWS App User]
+--GO
+--/****** Object:  User [EPIWS App User]    Script Date: 08/23/2012 14:02:28 ******/
+--IF NOT EXISTS (SELECT * FROM sys.database_principals WHERE name = N'EPIWS App User')
+--CREATE USER [EPIWS App User] FOR LOGIN [osels_epiws_appuser] WITH DEFAULT_SCHEMA=[dbo]
+--GO
 /****** Object:  Table [dbo].[Organization]    Script Date: 08/23/2012 14:02:28 ******/
 SET ANSI_NULLS ON
 GO
