@@ -227,6 +227,9 @@ namespace Epi.Core.EnterInterpreter.Rules
                     case "EPIWEEK":
                         functionCall = new Rule_EPIWEEK(pContext, T);
                         break;
+                    case "STRLEN":
+                        functionCall = new Rule_STRLEN(pContext, T);
+                        break;
                     default:
                         throw new Exception("Function name " + functionName.ToUpper() + " is not a recognized function.");
                 }

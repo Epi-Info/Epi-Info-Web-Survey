@@ -100,6 +100,7 @@
     <Compile Include="Rules\Functions\Rule_Seconds.cs" />
     <Compile Include="Rules\Functions\Rule_Sin.cs" />
     <Compile Include="Rules\Functions\Rule_Step.cs" />
+    <Compile Include="Rules\Functions\Rule_STRLEN.cs" />
     <Compile Include="Rules\Functions\Rule_Substring.cs" />
     <Compile Include="Rules\Functions\Rule_SystemDate.cs" />
     <Compile Include="Rules\Functions\Rule_SystemTime.cs" />
