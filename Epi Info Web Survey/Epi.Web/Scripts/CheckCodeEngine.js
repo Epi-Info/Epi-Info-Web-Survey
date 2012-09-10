@@ -1332,4 +1332,21 @@ function  CCE_YesNoClick(Val)
         
 }
 
+
+function CCE_StrLEN(pValue)
+{
+    if(pValue == null)
+    {
+        return 0;
+    }
+    else if(typeof(pValue) != "string")
+    {
+        return pValue.toString().length;
+    }
+    else
+    {
+        return pValue.length;
+    }
+}
+
 cce_Context = new CCE_Context();
