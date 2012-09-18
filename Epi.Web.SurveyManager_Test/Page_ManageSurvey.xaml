@@ -25,11 +25,11 @@
                     <ColumnDefinition Width="314*" />
                     <ColumnDefinition Width="93*" />
                 </Grid.ColumnDefinitions>-->
-                <Label Content="SurveyId" Height="28" HorizontalAlignment="Right" Margin="0,143,511,0" Name="label1" VerticalAlignment="Top" />
-        <Button Click="DownloadSurveyInfoButton_Click" Content="Get Survey Information" Height="25" HorizontalAlignment="Right" Margin="0,198,154,0" Name="DownloadSurveyInfoButton" VerticalAlignment="Top" Width="137" />
-                <Button Click="ClearSurveyCriteriaButton_Click" Content="Clear Criteria" Height="25" HorizontalAlignment="Left" Margin="501,198,0,0" Name="ClearSurveyCriteriaButton" VerticalAlignment="Top" Width="75" />
-                <CheckBox Content="Currently open" Height="16" HorizontalAlignment="Left" Margin="68,198,0,0" Name="SurveyCriteria_CurrentlyOpenCheckBox" VerticalAlignment="Top" />
-                <ListBox Height="47" HorizontalAlignment="Left" Margin="456,146,0,0" Name="SurveyInfoCriteria_SurveyTypeListBox" VerticalAlignment="Top" Width="120" SelectionChanged="SurveyInfoCriteria_SurveyTypeListBox_SelectionChanged">
+                <Label Content="Survey Id" Height="28" HorizontalAlignment="Right" Margin="0,147,511,0" Name="label1" VerticalAlignment="Top" />
+        <Button Click="DownloadSurveyInfoButton_Click" Content="Get Survey Information" Height="25" HorizontalAlignment="Right" Margin="0,202,154,0" Name="DownloadSurveyInfoButton" VerticalAlignment="Top" Width="137" />
+                <Button Click="ClearSurveyCriteriaButton_Click" Content="Clear Criteria" Height="25" HorizontalAlignment="Left" Margin="501,202,0,0" Name="ClearSurveyCriteriaButton" VerticalAlignment="Top" Width="75" />
+                <CheckBox Content="Currently open" Height="16" HorizontalAlignment="Left" Margin="184,206,0,0" Name="SurveyCriteria_CurrentlyOpenCheckBox" VerticalAlignment="Top" />
+                <ListBox Height="47" HorizontalAlignment="Left" Margin="456,150,0,0" Name="SurveyInfoCriteria_SurveyTypeListBox" VerticalAlignment="Top" Width="120" SelectionChanged="SurveyInfoCriteria_SurveyTypeListBox_SelectionChanged">
                     <ListBoxItem Content="All Survey Types" Tag="-1" />
                     <ListBoxItem Content="Single Response" Tag="1" />
                     <ListBoxItem Content="Multi Response" Tag="2" />
@@ -59,22 +59,22 @@
                 <Label Content="Organization Name" Height="23" HorizontalAlignment="Left" Margin="59,475,0,0" Name="label5" VerticalAlignment="Top" Width="129" />
                 <Label Content="Survey Number" HorizontalAlignment="Left" Margin="59,410,0,259" Name="label6" Width="99" />
                 <Label Content="Survey Name" Height="23" HorizontalAlignment="Left" Margin="59,375,0,0" Name="label15" VerticalAlignment="Top" />
-                <CheckBox Content="Is Single Response?" Height="16" HorizontalAlignment="Left" Margin="64,517,0,0" Name="IsSingleResponseCheckBox" Uid="IsSingleResponse" VerticalAlignment="Top" />
-                <Label Content="Closing Date:" Height="23" HorizontalAlignment="Left" Margin="208,513,0,0" Name="label4" VerticalAlignment="Top" />
+                <CheckBox Content="Is Single Response?" Height="16" HorizontalAlignment="Left" Margin="66,517,0,0" Name="IsSingleResponseCheckBox" Uid="IsSingleResponse" VerticalAlignment="Top" />
+                <Label Content="Closing Date:" Height="32" HorizontalAlignment="Left" Margin="208,513,0,0" Name="label4" VerticalAlignment="Top" Width="83" />
                 <DatePicker Height="23" HorizontalAlignment="Left" Margin="303,513,0,0" Name="datePicker1" VerticalAlignment="Top" Width="168" />
                 <Button Content="Update Survey Information" Height="25" HorizontalAlignment="Left" Margin="414,543,0,0" Name="UpdateSurveyButton" VerticalAlignment="Top" Width="158" Click="UpdateSurveyButton_Click" />
             <!--</Grid>-->
         <!--</GroupBox>-->
         <Button Content="Add User" Height="30" HorizontalAlignment="Left" Margin="298,27,0,0" Name="AddUser" VerticalAlignment="Top" Width="144" Click="AddUser_click" />
-            <TextBox  Height="23" Margin="161,80,179,585" MaxLength="36" Name="OrgTextBox1" />
-        <Label Content="Organization Key" Height="28" Margin="60,79,457,585" Name="label3" />
-            <GroupBox Background="#FFCBE581" Header="SurveyInfo Criteria" Name="groupBox2" Margin="44,116,32,388" Panel.ZIndex="-1"></GroupBox>
-        <TextBox Height="23" Name="SurveyCriteria_SurveyId" Uid="" Width="289" Margin="164,145,176,524" />
-        <ListBox Name="SearchResultListBox" SelectionChanged="SearchResultListBox_SelectionChanged" Margin="68,229,53,400" />
-            <GroupBox Background="#FFCBE581" Header="Survey Info" Name="groupBox3" Margin="44,302,31,34" Panel.ZIndex="-1" />
+            <TextBox  Height="23" Margin="182,86,179,583" MaxLength="36" Name="OrgTextBox1" />
+        <Label Content="Organization Key" Height="28" Margin="60,83,457,581" Name="label3" />
+            <GroupBox Background="#FFD6E0BA" Header="Survey Criteria" Name="groupBox2" Margin="44,121,32,383" Panel.ZIndex="-1" FontSize="13.333" FontWeight="Bold"></GroupBox>
+        <TextBox Height="23" Name="SurveyCriteria_SurveyId" Uid="" Margin="182,149,176,520" />
+        <ListBox Name="SearchResultListBox" SelectionChanged="SearchResultListBox_SelectionChanged" Margin="68,233,53,396" />
+            <GroupBox Background="#FFD6E0BA" Header="Survey Information" Name="groupBox3" Margin="44,314,31,22" Panel.ZIndex="-1" FontSize="13.333" FontWeight="Bold" />
         <Label Content="Publisher key" Height="28" HorizontalAlignment="Left" Margin="59,341,0,0" Name="label7" VerticalAlignment="Top" Width="99" />
         <TextBox Height="23" Margin="182,343,158,326" MaxLength="36" Name="TextBoxPublish" />
-            <GroupBox Background="#FFCBE581" Header="Keys" Name="groupBox1" Margin="44,63,31,574" Panel.ZIndex="-1"></GroupBox>
+            <GroupBox Background="#FFD6E0BA" Header="Keys" Name="groupBox1" Margin="44,64,31,573" Panel.ZIndex="-1" FontSize="13.333" FontWeight="Bold"></GroupBox>
         </Grid>
             </ScrollViewer>
 </Page>
