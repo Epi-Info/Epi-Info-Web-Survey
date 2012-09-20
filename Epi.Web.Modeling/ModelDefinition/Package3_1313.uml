@@ -1,0 +1,189 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm5="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ComponentDesigner" xmlns:dm9="http://schemas.microsoft.com/dsltools/SimpleShapesModel" xmlns:dm10="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ActivityDesigner" xmlns:dm11="http://schemas.microsoft.com/dsltools/LogicalClassDesigner" xmlns:dm12="http://schemas.microsoft.com/VisualStudio/TeamArchitect/SequenceDesigner"
+  dslVersion="1.0.0.0"
+  Id="04cbdce7-7cac-4faa-ad1c-1c2cd7bff5ac"
+  name="DTO"
+  visibility="Private" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
+  <referencesInternal>
+    <reference
+      Id="36b4ce17-0f75-4f0c-a296-4f6ed385de0b"
+      handle="viewcode://./CodeSchema_Namespace?Namespace=Epi.Web.Common.DTO"
+      tag="ViewCode" />
+  </referencesInternal>
+  <packagedElements>
+    <packageHasNamedElement>
+      <class
+        Id="4745381d-ab1e-4f8e-a8cc-757f90b811c9"
+        name="SurveyInfoDTO"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <referencesInternal>
+          <reference
+            Id="e1a6b1ef-1bf2-435f-ab8d-f89044ee9355"
+            handle="viewcode://./CodeSchema_Class?Assembly=&quot;file:///C:/Projects/EpiInfoWebSurvey/Epi Info Web Survey/Epi.Web.Common/bin/Debug/Epi.Web.Common.dll&quot; Namespace=Epi.Web.Common.DTO Type=SurveyInfoDTO"
+            tag="ViewCode" />
+        </referencesInternal>
+        <appliedStereotypesInternal>
+          <stereotypeInstance
+            Id="7c87f2b8-4890-479d-bd10-26ac59610c99"
+            name="class"
+            profile="CSharpProfile">
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="3c15320e-db48-4e92-9982-8482455b6aed">
+                <propertyInstance
+                  Id="23ef48f5-b6ec-4724-b807-3950bf67f5cf"
+                  name="ClrAttributes" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="b12176c7-f7aa-4de8-93d7-93348f2111d3">
+                <propertyInstance
+                  Id="7283ce55-0009-4990-b89e-e9d64b8c66a9"
+                  name="IsPartial"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="450def05-7beb-4143-b715-2ad2d99a95c6">
+                <propertyInstance
+                  Id="f85f7c31-5cb1-490a-84a1-9ba266681f1b"
+                  name="IsStatic"
+                  value="False" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="61d109df-b44e-4b85-8a49-b5b74b96f267">
+                <propertyInstance
+                  Id="4722d7aa-6826-481c-8fbf-9de00c801dd2"
+                  name="IsUnsafe"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="d3fa0c64-53a3-4a66-906e-ed4baac0dcb2">
+                <propertyInstance
+                  Id="0f473263-57a4-4bb3-abd6-dba9983391ab"
+                  name="PackageVisibility"
+                  value="internal" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="32c87c4d-7fde-467e-a6c6-864235be0c2f"
+        name="SurveyResponseDTO"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <referencesInternal>
+          <reference
+            Id="c1467205-aa10-4da2-b1c0-2d0bc69b1994"
+            handle="viewcode://./CodeSchema_Class?Assembly=&quot;file:///C:/Projects/EpiInfoWebSurvey/Epi Info Web Survey/Epi.Web.Common/bin/Debug/Epi.Web.Common.dll&quot; Namespace=Epi.Web.Common.DTO Type=SurveyResponseDTO"
+            tag="ViewCode" />
+        </referencesInternal>
+        <appliedStereotypesInternal>
+          <stereotypeInstance
+            Id="8688d7ac-f163-491d-8675-4da924803285"
+            name="class"
+            profile="CSharpProfile">
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="8eb265be-8e90-4ae0-a972-19c8523136df">
+                <propertyInstance
+                  Id="923ae1c7-8ba0-4216-a531-bee232af5f3a"
+                  name="ClrAttributes" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="7296ae6f-2d07-4324-9f1a-97646a8cd47a">
+                <propertyInstance
+                  Id="032a84cf-0d02-4086-9000-78ae2b1d9a8a"
+                  name="IsPartial"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="25cd7634-4b6e-47d6-98cd-90f5178c9660">
+                <propertyInstance
+                  Id="3c876eb5-d84f-48c0-b1c9-3a2748fbb7a6"
+                  name="IsStatic"
+                  value="False" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="a009f813-18a3-4923-b84a-a9c990b8211f">
+                <propertyInstance
+                  Id="817d3e0c-a110-4a0f-a0fb-0fc883982ccc"
+                  name="IsUnsafe"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="d98a0e55-9313-4752-9f46-067ae32d3228">
+                <propertyInstance
+                  Id="132150e0-7cb4-446c-8c7f-de806c195296"
+                  name="PackageVisibility"
+                  value="internal" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="723c079a-f4f9-4329-95ff-26e54d36870a"
+        name="PublishInfoDTO"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <referencesInternal>
+          <reference
+            Id="5b5dbb90-4ae7-4188-98ba-7e7cf451026b"
+            handle="viewcode://./CodeSchema_Class?Assembly=&quot;file:///C:/Projects/EpiInfoWebSurvey/Epi Info Web Survey/Epi.Web.Common/bin/Debug/Epi.Web.Common.dll&quot; Namespace=Epi.Web.Common.DTO Type=PublishInfoDTO"
+            tag="ViewCode" />
+        </referencesInternal>
+        <appliedStereotypesInternal>
+          <stereotypeInstance
+            Id="c16d3cf5-9346-443b-a23d-d0ae152b5d25"
+            name="class"
+            profile="CSharpProfile">
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="1ea33d95-69b7-4555-b108-41c8d8b28b69">
+                <propertyInstance
+                  Id="947069df-0467-42d3-beae-48918db714d7"
+                  name="ClrAttributes" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="40fd4da5-e866-4ac9-bd4b-68f5284cd428">
+                <propertyInstance
+                  Id="db052273-7b8b-4bfa-9f98-fbd5deba8974"
+                  name="IsPartial"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="5f9b62a9-e303-40dc-812b-f4f21bdcbef7">
+                <propertyInstance
+                  Id="24462e99-dcf3-40ed-bcd5-17a9540c3a23"
+                  name="IsStatic"
+                  value="False" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="344c8f98-0fce-462a-9c5e-76337eb138fa">
+                <propertyInstance
+                  Id="f888577f-2e99-49de-ac1c-68b9b54d31f6"
+                  name="IsUnsafe"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="7695216f-c34a-4932-b59a-cd8e53c6e5da">
+                <propertyInstance
+                  Id="584f378b-0bf0-4682-89b1-493024f677bf"
+                  name="PackageVisibility"
+                  value="internal" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+      </class>
+    </packageHasNamedElement>
+  </packagedElements>
+</package>

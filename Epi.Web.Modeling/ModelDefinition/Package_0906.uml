@@ -1,0 +1,385 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm5="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ComponentDesigner" xmlns:dm9="http://schemas.microsoft.com/dsltools/SimpleShapesModel" xmlns:dm10="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ActivityDesigner" xmlns:dm11="http://schemas.microsoft.com/dsltools/LogicalClassDesigner" xmlns:dm12="http://schemas.microsoft.com/VisualStudio/TeamArchitect/SequenceDesigner"
+  dslVersion="1.0.0.0"
+  Id="e44f0070-af46-4bef-9b47-c867f50ccc45"
+  name="MvcDynamicForms.Utilities" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
+  <packagedElements>
+    <packageHasNamedElement>
+      <class
+        Id="4404cb27-72a3-494d-83c1-fa8b22d96d50"
+        name="SerializationUtility"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <referencesInternal>
+          <reference
+            Id="d5e34943-c729-4489-b806-a9bcf16445ea"
+            handle="viewcode://./CodeSchema_Class?Assembly=&quot;file:///C:/Projects/EpiInfoWebSurvey/Epi Info Web Survey/Epi.DynamicForms.Core/bin/Debug/Epi.Web.DynamicForms.dll&quot; Namespace=MvcDynamicForms.Utilities Type=SerializationUtility"
+            tag="ViewCode" />
+        </referencesInternal>
+        <appliedStereotypesInternal>
+          <stereotypeInstance
+            Id="76b45286-9bfa-4334-a433-d413883e3fe2"
+            name="class"
+            profile="CSharpProfile">
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="57cbac3e-5e28-4f67-8ade-30623aad05f2">
+                <propertyInstance
+                  Id="386f3f7a-fe60-4834-8524-5964a1eff1b8"
+                  name="ClrAttributes" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="bffd8f88-a493-4375-a699-33438c8a58a3">
+                <propertyInstance
+                  Id="e0b05b92-9280-4902-9212-0e2605749482"
+                  name="IsPartial"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="d3af65c4-2359-40c9-bd42-f69f1efb2fbe">
+                <propertyInstance
+                  Id="3af9144d-c161-4836-866d-35f03a7949f9"
+                  name="IsStatic"
+                  value="True" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="13cefa02-b1dd-4dbe-bc6b-c42b72132269">
+                <propertyInstance
+                  Id="3c3aa9e7-dde3-428d-953b-99cf8b5f745d"
+                  name="IsUnsafe"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="28ac08fd-c092-48fb-8c4d-536df1b240cc">
+                <propertyInstance
+                  Id="4b75c55f-573c-4717-a8e4-9115d96d4de6"
+                  name="PackageVisibility"
+                  value="internal" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+        <ownedOperationsInternal>
+          <operation
+            Id="4e62b7c5-ebb3-447c-be37-332884987432"
+            name="Deserialize&lt;T&gt;"
+            isLeaf="false"
+            isStatic="true"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <referencesInternal>
+              <reference
+                Id="1d1335d2-6f16-4a63-9c72-8642d2c42c25"
+                handle="viewcode://./CodeSchema_Method?Assembly=&quot;file:///C:/Projects/EpiInfoWebSurvey/Epi Info Web Survey/Epi.DynamicForms.Core/bin/Debug/Epi.Web.DynamicForms.dll&quot; Namespace=MvcDynamicForms.Utilities Type=SerializationUtility Member=(Name=Deserialize GenericParameterCount=1 OverloadingParameters=[(Assembly=&quot;file:///C:/Program Files (x86)/Reference Assemblies/Microsoft/Framework/.NETFramework/v4.0/mscorlib.dll&quot; Namespace=System Type=String)])"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="72cce149-5bda-44db-bb94-bdd66f9c43c8"
+                name="method"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="a06e9b5f-87ab-4255-b0f2-35b2d5f510e7">
+                    <propertyInstance
+                      Id="d984cacb-b579-4771-8798-c7a364e13052"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="f6f50853-bf6f-40db-bd68-8f6b29b88a98">
+                    <propertyInstance
+                      Id="bd489e7e-52f9-4a8e-bd33-9f385c08fe33"
+                      name="IsPartial"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="eff38412-62f9-4f97-981c-882296fded66">
+                    <propertyInstance
+                      Id="a0817679-1784-4d8a-8119-0b565e21392b"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="847b96b9-d7b1-4204-a45d-34e69de4ab07">
+                    <propertyInstance
+                      Id="d8834fb0-2cf5-463e-9c02-1ffcb0b769ae"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="1c31490c-c6a7-428b-8164-815e579625f5">
+                    <propertyInstance
+                      Id="f080da6e-e53b-4912-ac4a-edaa4cc6f757"
+                      name="params"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="99bcc5de-6a2c-4439-b12b-e06ec48e7957"
+                  direction="Return">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="7147ff34-84e2-4e9e-a31a-e50e5c1c13fb"
+                      LastKnownName="T"
+                      LastKnownLocation="Package_0908.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="8d36c32a-e76d-40c3-99f7-38bea0e199fb"
+                  name="data"
+                  direction="In">
+                  <referencesInternal>
+                    <reference
+                      Id="612cbb3b-c05a-4f0e-91e4-9e258cf8f594"
+                      handle="viewcode://./CodeSchema_Parameter?Assembly=&quot;file:///C:/Projects/EpiInfoWebSurvey/Epi Info Web Survey/Epi.DynamicForms.Core/bin/Debug/Epi.Web.DynamicForms.dll&quot; Namespace=MvcDynamicForms.Utilities Type=SerializationUtility Member=(Name=Deserialize GenericParameterCount=1 OverloadingParameters=[(Assembly=&quot;file:///C:/Program Files (x86)/Reference Assemblies/Microsoft/Framework/.NETFramework/v4.0/mscorlib.dll&quot; Namespace=System Type=String)]) ParameterIdentifier=data"
+                      tag="ViewCode" />
+                  </referencesInternal>
+                  <type_NamedElement>
+                    <primitiveTypeMoniker
+                      Id="59259974-6d55-42c6-b7bd-763d77ac8ef9"
+                      LastKnownName="String"
+                      LastKnownLocation="Epi.Web.Modeling.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="4db0fdb9-7a72-46be-bc33-ebae74ff6838"
+            name="Serialize"
+            isLeaf="false"
+            isStatic="true"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <referencesInternal>
+              <reference
+                Id="13df08e8-c88d-409f-8204-76dfc3bb3940"
+                handle="viewcode://./CodeSchema_Method?Assembly=&quot;file:///C:/Projects/EpiInfoWebSurvey/Epi Info Web Survey/Epi.DynamicForms.Core/bin/Debug/Epi.Web.DynamicForms.dll&quot; Namespace=MvcDynamicForms.Utilities Type=SerializationUtility Member=(Name=Serialize OverloadingParameters=[(Assembly=&quot;file:///C:/Program Files (x86)/Reference Assemblies/Microsoft/Framework/.NETFramework/v4.0/mscorlib.dll&quot; Namespace=System Type=Object)])"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="9d92af62-9eb6-4a94-9857-d0f43df4859b"
+                name="method"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="4afcb8a4-6b36-4320-b6f5-5967e5f989bb">
+                    <propertyInstance
+                      Id="a19d829d-4aa2-4543-87b9-b577c7be2193"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="04396820-6820-4623-9440-abb0e6596116">
+                    <propertyInstance
+                      Id="56b9f97c-8090-4f1a-b70f-f31ed0dfcc63"
+                      name="IsPartial"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="3fdb6af3-2d50-4ed4-b39e-e49616843be1">
+                    <propertyInstance
+                      Id="adf542bf-268c-45c2-9c99-f9f1a77e7d7a"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="e337f256-6329-4ed0-b129-3d966192ac1f">
+                    <propertyInstance
+                      Id="7190e344-f063-43b5-bcd7-11b522ef6967"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="e44311d2-b8d2-48c4-a6aa-27b7f6b2fac5">
+                    <propertyInstance
+                      Id="82fb23a3-e040-49cb-99fb-7a6671997abb"
+                      name="params"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="20e9007e-19bb-4d22-8429-0d8e3834536f"
+                  direction="Return">
+                  <type_NamedElement>
+                    <primitiveTypeMoniker
+                      Id="59259974-6d55-42c6-b7bd-763d77ac8ef9"
+                      LastKnownName="String"
+                      LastKnownLocation="Epi.Web.Modeling.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="8fc82435-67a1-421e-98fc-7c1d5156fdbf"
+                  name="obj"
+                  direction="In">
+                  <referencesInternal>
+                    <reference
+                      Id="3eace9dd-be7c-4e32-b6d1-4a90220f7c81"
+                      handle="viewcode://./CodeSchema_Parameter?Assembly=&quot;file:///C:/Projects/EpiInfoWebSurvey/Epi Info Web Survey/Epi.DynamicForms.Core/bin/Debug/Epi.Web.DynamicForms.dll&quot; Namespace=MvcDynamicForms.Utilities Type=SerializationUtility Member=(Name=Serialize OverloadingParameters=[(Assembly=&quot;file:///C:/Program Files (x86)/Reference Assemblies/Microsoft/Framework/.NETFramework/v4.0/mscorlib.dll&quot; Namespace=System Type=Object)]) ParameterIdentifier=obj"
+                      tag="ViewCode" />
+                  </referencesInternal>
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="306954f5-c131-417d-9609-3686fe718fb5"
+                      LastKnownName="Object"
+                      LastKnownLocation="Package1_1353.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="5dea9470-3523-4e07-adf7-3016453bf69f"
+        name="MagicStrings"
+        visibility="Package"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <referencesInternal>
+          <reference
+            Id="87cb5806-922b-406b-adbb-de2a5422de74"
+            handle="viewcode://./CodeSchema_Class?Assembly=&quot;file:///C:/Projects/EpiInfoWebSurvey/Epi Info Web Survey/Epi.DynamicForms.Core/bin/Debug/Epi.Web.DynamicForms.dll&quot; Namespace=MvcDynamicForms.Utilities Type=MagicStrings"
+            tag="ViewCode" />
+        </referencesInternal>
+        <appliedStereotypesInternal>
+          <stereotypeInstance
+            Id="c76ab2ef-8ee7-4e00-99e7-bf6addaccc95"
+            name="class"
+            profile="CSharpProfile">
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="e05515c9-f977-4d79-925a-ab304e4c9fcc">
+                <propertyInstance
+                  Id="0eb44355-18fa-4ac9-a5bc-d8e0940c98d9"
+                  name="ClrAttributes" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="41a90bd5-d412-4d23-9691-99843834cee0">
+                <propertyInstance
+                  Id="01dcf1ad-0ed4-45c2-83e7-6666a1e8a07e"
+                  name="IsPartial"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="352fbd85-09d6-49f5-8740-489b1dee27f8">
+                <propertyInstance
+                  Id="62a5a9c8-5c4f-477d-b135-4d0c45e40b1b"
+                  name="IsStatic"
+                  value="True" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="25553e08-10e2-4de6-8cf8-a04c66ec2e88">
+                <propertyInstance
+                  Id="c909799d-7ce9-4a0c-8238-a49eb4c5ce11"
+                  name="IsUnsafe"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="c7150dec-d518-44c4-bd68-50a0577a98c3">
+                <propertyInstance
+                  Id="be61d86d-0b3d-4b69-b796-52990c9c960b"
+                  name="PackageVisibility"
+                  value="internal" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+        <ownedAttributesInternal>
+          <property
+            Id="fb077358-e776-4cf6-92c7-b598bd4adbbc"
+            name="MvcDynamicSerializedForm"
+            visibility="Package"
+            isLeaf="false"
+            isStatic="true"
+            isReadOnly="true"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <referencesInternal>
+              <reference
+                Id="8f177468-0e70-41fa-8e3e-447adf503e5b"
+                handle="viewcode://./CodeSchema_Property?Assembly=&quot;file:///C:/Projects/EpiInfoWebSurvey/Epi Info Web Survey/Epi.DynamicForms.Core/bin/Debug/Epi.Web.DynamicForms.dll&quot; Namespace=MvcDynamicForms.Utilities Type=MagicStrings Member=MvcDynamicSerializedForm"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="8b2f2855-304c-41fc-abe9-3c4230968efc"
+                name="property"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="df2430a0-45a7-49b3-b85c-c2fba35405eb">
+                    <propertyInstance
+                      Id="0b6ea09a-c308-4e43-8130-0c8d8c7aff9b"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="8549dc21-b754-4862-b85b-7af01dfff874">
+                    <propertyInstance
+                      Id="af28fb1f-8c3d-4097-b6cf-9d1a8f22e1ea"
+                      name="Get"
+                      value="package" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="86c8086e-8510-44b2-810a-5b81471d632e">
+                    <propertyInstance
+                      Id="879c9f86-01d0-4088-863d-b1d27364281e"
+                      name="HasBody"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="806f2350-f788-4bea-b657-286a96465cdb">
+                    <propertyInstance
+                      Id="edb61635-6ab6-4adb-aadf-d7a6c0980dd9"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="9310a3b1-5eb6-4508-bbbb-abd90fcb58c5">
+                    <propertyInstance
+                      Id="30a9caac-42fa-4e1d-acdd-ec10e0998719"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="73564d6d-fcc0-49d3-a26a-e6e77ebf2e94">
+                    <propertyInstance
+                      Id="4696cd68-3cf6-480f-ac90-9b6d27702eb0"
+                      name="Set"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <type_NamedElement>
+              <primitiveTypeMoniker
+                Id="59259974-6d55-42c6-b7bd-763d77ac8ef9"
+                LastKnownName="String"
+                LastKnownLocation="Epi.Web.Modeling.uml" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
+      </class>
+    </packageHasNamedElement>
+  </packagedElements>
+</package>
