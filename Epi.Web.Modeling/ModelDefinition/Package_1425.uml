@@ -1,0 +1,614 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm5="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ComponentDesigner" xmlns:dm9="http://schemas.microsoft.com/dsltools/SimpleShapesModel" xmlns:dm10="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ActivityDesigner" xmlns:dm11="http://schemas.microsoft.com/dsltools/LogicalClassDesigner" xmlns:dm12="http://schemas.microsoft.com/VisualStudio/TeamArchitect/SequenceDesigner"
+  dslVersion="1.0.0.0"
+  Id="f135ff5c-9cb6-40a1-9313-1af46bcecca2"
+  name="Package1" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
+  <packagedElements>
+    <packageHasNamedElement>
+      <class
+        Id="45083fad-2533-45ef-8ca9-73db56da8a82"
+        name="Mapper"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <referencesInternal>
+          <reference
+            Id="7721c506-aa88-41be-af7b-c522ae1b5419"
+            handle="viewcode://./CodeSchema_Class?Assembly=&quot;file:///C:/Projects/EpiInfoWebSurvey/Epi Info Web Survey/Epi.Web.Common/bin/Debug/Epi.Web.Common.dll&quot; Namespace=Epi.Web.Common.ObjectMapping Type=Mapper"
+            tag="ViewCode" />
+        </referencesInternal>
+        <appliedStereotypesInternal>
+          <stereotypeInstance
+            Id="593cca96-b930-4593-b9ac-dca3140e9e9f"
+            name="class"
+            profile="CSharpProfile">
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="01ca9656-3f71-46e5-b64d-49f7f417b8d2">
+                <propertyInstance
+                  Id="3ac186a3-762f-4965-9194-bc4614514397"
+                  name="ClrAttributes" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="7f1623b4-b0b5-4ca9-ac20-5ec34f16d17a">
+                <propertyInstance
+                  Id="fda73e91-1758-4446-b8c2-8faa717a964e"
+                  name="IsPartial"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="b40c2d4a-d102-4dd2-9ad5-d48cb6b53a8a">
+                <propertyInstance
+                  Id="6882df40-a996-429b-886f-02aa2b948e0d"
+                  name="IsStatic"
+                  value="True" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="4e8d78b7-1110-45d1-822d-2d463c40d0a2">
+                <propertyInstance
+                  Id="2917cbf6-52ce-4f35-bdd4-33d9262e7974"
+                  name="IsUnsafe"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="2b4409bc-5d5b-432a-ab1f-740e320ed8de">
+                <propertyInstance
+                  Id="a31a3311-dde4-42a4-b1b0-ebf657496a74"
+                  name="PackageVisibility"
+                  value="internal" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+        <ownedOperationsInternal>
+          <operation
+            Id="938517c7-0903-47ac-9ee1-81a14a5426b4"
+            name="ToDataTransferObject"
+            isLeaf="false"
+            isStatic="true"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <referencesInternal>
+              <reference
+                Id="65ad90eb-61f6-4829-9e54-46aae77c8d3d"
+                handle="viewcode://./CodeSchema_Method?Assembly=&quot;file:///C:/Projects/EpiInfoWebSurvey/Epi Info Web Survey/Epi.Web.Common/bin/Debug/Epi.Web.Common.dll&quot; Namespace=Epi.Web.Common.ObjectMapping Type=Mapper Member=(Name=ToDataTransferObject OverloadingParameters=[(Assembly=&quot;file:///C:/Projects/EpiInfoWebSurvey/Epi Info Web Survey/Epi.Web.Common/bin/Debug/Epi.Web.Common.dll&quot; Namespace=Epi.Web.Common.BusinessObject Type=SurveyInfoBO)])"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="f5904c84-990c-405c-9621-6e7752f68df6"
+                name="method"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="cc8f4f4c-a74e-40ce-b970-853445a214a5">
+                    <propertyInstance
+                      Id="c5ff6324-b8e2-4b2f-a7df-d162feda06b9"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="81e9352c-3fa2-4b2d-9684-cfedf7f39245">
+                    <propertyInstance
+                      Id="8d042762-fb6f-46a7-9943-8e128ab3a16d"
+                      name="IsPartial"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="b1761007-36e9-4e82-9e21-2381bcb488b6">
+                    <propertyInstance
+                      Id="55bf9e51-6f9f-44c8-8807-63b70112b69d"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="6976ab05-a198-48f4-a28d-eedd8e966ec3">
+                    <propertyInstance
+                      Id="57faef26-a99d-4c6d-b52d-539950ccde38"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="6b0b2c52-fa6a-42b3-bfcb-4cb381e9a6f4">
+                    <propertyInstance
+                      Id="9d3ed290-7426-4400-8a4e-98565cdf4e5e"
+                      name="params"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="72c0b68d-4d5d-4e15-9181-7ab7c7d2626f"
+                  direction="Return">
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="4745381d-ab1e-4f8e-a8cc-757f90b811c9"
+                      LastKnownName="SurveyInfoDTO"
+                      LastKnownLocation="Package3_1313.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="27bf499c-747a-4971-9b7b-57fb233736d6"
+                  name="pBO"
+                  direction="In">
+                  <referencesInternal>
+                    <reference
+                      Id="30479134-9446-42b4-860e-7d47a1b4b456"
+                      handle="viewcode://./CodeSchema_Parameter?Assembly=&quot;file:///C:/Projects/EpiInfoWebSurvey/Epi Info Web Survey/Epi.Web.Common/bin/Debug/Epi.Web.Common.dll&quot; Namespace=Epi.Web.Common.ObjectMapping Type=Mapper Member=(Name=ToDataTransferObject OverloadingParameters=[(Assembly=&quot;file:///C:/Projects/EpiInfoWebSurvey/Epi Info Web Survey/Epi.Web.Common/bin/Debug/Epi.Web.Common.dll&quot; Namespace=Epi.Web.Common.BusinessObject Type=SurveyInfoBO)]) ParameterIdentifier=pBO"
+                      tag="ViewCode" />
+                  </referencesInternal>
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="665d8ebb-cd27-4484-8271-2f257c2ccad7"
+                      LastKnownName="SurveyInfoBO"
+                      LastKnownLocation="Package_1353.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="61038cca-2379-4b06-9a5f-417829714156"
+            name="ToDataTransferObject"
+            isLeaf="false"
+            isStatic="true"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <referencesInternal>
+              <reference
+                Id="e92846a1-ed3e-41c4-818b-b9889614e700"
+                handle="viewcode://./CodeSchema_Method?Assembly=&quot;file:///C:/Projects/EpiInfoWebSurvey/Epi Info Web Survey/Epi.Web.Common/bin/Debug/Epi.Web.Common.dll&quot; Namespace=Epi.Web.Common.ObjectMapping Type=Mapper Member=(Name=ToDataTransferObject OverloadingParameters=[(Assembly=&quot;file:///C:/Projects/EpiInfoWebSurvey/Epi Info Web Survey/Epi.Web.Common/bin/Debug/Epi.Web.Common.dll&quot; Namespace=Epi.Web.Common.BusinessObject Type=SurveyRequestResultBO)])"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="8ef0128f-0d85-42cc-a6d4-a71b7880c9d0"
+                name="method"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="9ed89e7d-036d-4302-a989-02e7ab291e2c">
+                    <propertyInstance
+                      Id="07e00469-d36f-4357-bae5-6bbaecb5d04d"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="f8db5462-7faf-4c12-85c4-14375541d2cb">
+                    <propertyInstance
+                      Id="f77c815e-4cbb-4ffd-844d-700021ae33eb"
+                      name="IsPartial"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="128021d1-ac13-43eb-b668-a73d3793479c">
+                    <propertyInstance
+                      Id="4e2b55c7-1bb6-44c9-861f-9f3f1db9a56b"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="9fb893e2-d03f-414a-bf6c-03bd02bd457f">
+                    <propertyInstance
+                      Id="a1d1be61-028a-490d-a3d3-ca61564f2238"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="feffb78c-40b6-48ff-84e7-bbcea758deda">
+                    <propertyInstance
+                      Id="3735feb5-ddf2-4e0b-9a6c-030f3aa4b6c7"
+                      name="params"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="9b9ceb03-1e38-4296-b22b-6c758efdce45"
+                  direction="Return">
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="723c079a-f4f9-4329-95ff-26e54d36870a"
+                      LastKnownName="PublishInfoDTO"
+                      LastKnownLocation="Package3_1313.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="331779f7-a7b9-412f-b65b-4d992df4e417"
+                  name="pBO"
+                  direction="In">
+                  <referencesInternal>
+                    <reference
+                      Id="1c4d9fe5-5347-475e-80a7-2ff06739a78e"
+                      handle="viewcode://./CodeSchema_Parameter?Assembly=&quot;file:///C:/Projects/EpiInfoWebSurvey/Epi Info Web Survey/Epi.Web.Common/bin/Debug/Epi.Web.Common.dll&quot; Namespace=Epi.Web.Common.ObjectMapping Type=Mapper Member=(Name=ToDataTransferObject OverloadingParameters=[(Assembly=&quot;file:///C:/Projects/EpiInfoWebSurvey/Epi Info Web Survey/Epi.Web.Common/bin/Debug/Epi.Web.Common.dll&quot; Namespace=Epi.Web.Common.BusinessObject Type=SurveyRequestResultBO)]) ParameterIdentifier=pBO"
+                      tag="ViewCode" />
+                  </referencesInternal>
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="55448951-18ef-4810-baf6-c826e69fb172"
+                      LastKnownName="SurveyRequestResultBO"
+                      LastKnownLocation="Package_1353.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="657ea0aa-19a4-47b9-a33e-07f5ebb7be9b"
+            name="ToDataTransferObject"
+            isLeaf="false"
+            isStatic="true"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <referencesInternal>
+              <reference
+                Id="f76720f0-cd42-4020-a5c7-41b5cfa8a68e"
+                handle="viewcode://./CodeSchema_Method?Assembly=&quot;file:///C:/Projects/EpiInfoWebSurvey/Epi Info Web Survey/Epi.Web.Common/bin/Debug/Epi.Web.Common.dll&quot; Namespace=Epi.Web.Common.ObjectMapping Type=Mapper Member=(Name=ToDataTransferObject OverloadingParameters=[(Assembly=&quot;file:///C:/Projects/EpiInfoWebSurvey/Epi Info Web Survey/Epi.Web.Common/bin/Debug/Epi.Web.Common.dll&quot; Namespace=Epi.Web.Common.BusinessObject Type=SurveyResponseBO)])"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="4d591058-c300-4d02-8e47-4b4061fa771f"
+                name="method"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="cfbdacb7-7771-45da-8ab4-e3837dc3a562">
+                    <propertyInstance
+                      Id="b49da315-c534-4883-8931-6b4c0d6bb9f3"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="9cb780b0-6e66-4ab5-884a-02ca17f55aef">
+                    <propertyInstance
+                      Id="b25d5176-da8e-4f7d-a299-100596462342"
+                      name="IsPartial"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="85de628c-61df-48ba-a4ce-f076636ef721">
+                    <propertyInstance
+                      Id="ef47407c-8f94-4c52-b651-8f21c9158323"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="42a1e73d-7725-40d1-a312-b99e73fb55ab">
+                    <propertyInstance
+                      Id="9d0276cc-7c65-4831-a5d0-8a7d176c0553"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="4110272a-6e55-4947-afc3-dfd062a1ffcb">
+                    <propertyInstance
+                      Id="45007286-ab62-41f4-b2c6-da3df42634df"
+                      name="params"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="0b9165ab-d01f-4c01-bc54-1ed2879d8fb8"
+                  direction="Return">
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="32c87c4d-7fde-467e-a6c6-864235be0c2f"
+                      LastKnownName="SurveyResponseDTO"
+                      LastKnownLocation="Package3_1313.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="ade23ac9-28c6-458f-ab0f-64ccaed8b9de"
+                  name="pBO"
+                  direction="In">
+                  <referencesInternal>
+                    <reference
+                      Id="6c523aad-daf6-488b-aa09-744907927333"
+                      handle="viewcode://./CodeSchema_Parameter?Assembly=&quot;file:///C:/Projects/EpiInfoWebSurvey/Epi Info Web Survey/Epi.Web.Common/bin/Debug/Epi.Web.Common.dll&quot; Namespace=Epi.Web.Common.ObjectMapping Type=Mapper Member=(Name=ToDataTransferObject OverloadingParameters=[(Assembly=&quot;file:///C:/Projects/EpiInfoWebSurvey/Epi Info Web Survey/Epi.Web.Common/bin/Debug/Epi.Web.Common.dll&quot; Namespace=Epi.Web.Common.BusinessObject Type=SurveyResponseBO)]) ParameterIdentifier=pBO"
+                      tag="ViewCode" />
+                  </referencesInternal>
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="9ceddd5f-63cc-4064-ad35-af6118d24d10"
+                      LastKnownName="SurveyResponseBO"
+                      LastKnownLocation="Package_1353.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="367c8826-7349-4155-9385-3e06cd60e651"
+            name="ToDataTransferObject"
+            isLeaf="false"
+            isStatic="true"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <referencesInternal>
+              <reference
+                Id="a3b6b3e2-0dd5-43db-9e8f-af275573b6ed"
+                handle="viewcode://./CodeSchema_Method?Assembly=&quot;file:///C:/Projects/EpiInfoWebSurvey/Epi Info Web Survey/Epi.Web.Common/bin/Debug/Epi.Web.Common.dll&quot; Namespace=Epi.Web.Common.ObjectMapping Type=Mapper Member=(Name=ToDataTransferObject OverloadingParameters=[(Assembly=&quot;file:///C:/Projects/EpiInfoWebSurvey/Epi Info Web Survey/Epi.Web.Common/bin/Debug/Epi.Web.Common.dll&quot; Namespace=Epi.Web.Common.DTO Type=SurveyResponseDTO)])"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="b51f3863-b42a-4c2f-b7d7-56a84d893c43"
+                name="method"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="bf15839e-22da-41fa-855a-06b47654990c">
+                    <propertyInstance
+                      Id="7586aa6d-f45b-4876-84ae-34f04b03ec88"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="621266f4-a85f-47c1-94d8-59bdecc7e650">
+                    <propertyInstance
+                      Id="181827a8-21d7-4f20-813b-f50821c4de72"
+                      name="IsPartial"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="a79e2e3b-305b-4440-836d-f2dc40c0e288">
+                    <propertyInstance
+                      Id="2d0f7ad9-049a-44b5-9b47-aca0f6582b66"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="8b0b834b-2353-41ea-b885-49b73607001d">
+                    <propertyInstance
+                      Id="43c8ee5a-eca8-47f9-b581-14a7f74cb768"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="d19f6d23-f3f4-438c-8bcf-f7825f7c7fa1">
+                    <propertyInstance
+                      Id="4b25f90b-ed4c-4db7-b462-b598727004af"
+                      name="params"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="067b4dad-d7c2-4fbc-bbfe-3b9c27064de8"
+                  direction="Return">
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="9ceddd5f-63cc-4064-ad35-af6118d24d10"
+                      LastKnownName="SurveyResponseBO"
+                      LastKnownLocation="Package_1353.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="4d24e812-07f4-429a-9605-24e2282cf049"
+                  name="pBO"
+                  direction="In">
+                  <referencesInternal>
+                    <reference
+                      Id="691d002d-689e-4e52-ab06-5d22bca4951f"
+                      handle="viewcode://./CodeSchema_Parameter?Assembly=&quot;file:///C:/Projects/EpiInfoWebSurvey/Epi Info Web Survey/Epi.Web.Common/bin/Debug/Epi.Web.Common.dll&quot; Namespace=Epi.Web.Common.ObjectMapping Type=Mapper Member=(Name=ToDataTransferObject OverloadingParameters=[(Assembly=&quot;file:///C:/Projects/EpiInfoWebSurvey/Epi Info Web Survey/Epi.Web.Common/bin/Debug/Epi.Web.Common.dll&quot; Namespace=Epi.Web.Common.DTO Type=SurveyResponseDTO)]) ParameterIdentifier=pBO"
+                      tag="ViewCode" />
+                  </referencesInternal>
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="32c87c4d-7fde-467e-a6c6-864235be0c2f"
+                      LastKnownName="SurveyResponseDTO"
+                      LastKnownLocation="Package3_1313.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="f1a8af7b-fe90-487f-94cd-4dce77fc5e23"
+            name="ToBusinessObject"
+            isLeaf="false"
+            isStatic="true"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <referencesInternal>
+              <reference
+                Id="fce2dc1e-0642-4b01-b936-a886cbb0fdee"
+                handle="viewcode://./CodeSchema_Method?Assembly=&quot;file:///C:/Projects/EpiInfoWebSurvey/Epi Info Web Survey/Epi.Web.Common/bin/Debug/Epi.Web.Common.dll&quot; Namespace=Epi.Web.Common.ObjectMapping Type=Mapper Member=(Name=ToBusinessObject OverloadingParameters=[(Assembly=&quot;file:///C:/Projects/EpiInfoWebSurvey/Epi Info Web Survey/Epi.Web.Common/bin/Debug/Epi.Web.Common.dll&quot; Namespace=Epi.Web.Common.DTO Type=SurveyInfoDTO)])"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="6814d0f3-28e1-4b29-b552-7651ffa1e51b"
+                name="method"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="464a3a42-2586-4221-a8d1-47c48546f5fa">
+                    <propertyInstance
+                      Id="b2cc3528-275f-412d-a521-1ed6f24178c8"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="bf4637ba-e328-4bda-b320-95fd5015ecec">
+                    <propertyInstance
+                      Id="4bac5133-6bc7-4410-a291-7583ad019f3c"
+                      name="IsPartial"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="b2219408-b684-4596-8b4b-3aa9e3c39791">
+                    <propertyInstance
+                      Id="d45324e6-c943-499c-abf0-5db9dd9addca"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="58c11fa0-475f-49ee-9283-f8390a5790d7">
+                    <propertyInstance
+                      Id="eac9183a-d755-4286-9a64-3480ffcdfb6e"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="9e853ad7-540c-4ce1-8a4c-a88774b1ec67">
+                    <propertyInstance
+                      Id="5e35d15c-88f1-405c-a5e9-99c5feb4532a"
+                      name="params"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="3ed39438-ffae-476b-9dc8-c0b7b3971900"
+                  direction="Return">
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="665d8ebb-cd27-4484-8271-2f257c2ccad7"
+                      LastKnownName="SurveyInfoBO"
+                      LastKnownLocation="Package_1353.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="e221b767-711b-4969-aac6-1c3f3590d4df"
+                  name="pDTO"
+                  direction="In">
+                  <referencesInternal>
+                    <reference
+                      Id="e755f112-7c6c-4bcd-803a-a1c501e97a03"
+                      handle="viewcode://./CodeSchema_Parameter?Assembly=&quot;file:///C:/Projects/EpiInfoWebSurvey/Epi Info Web Survey/Epi.Web.Common/bin/Debug/Epi.Web.Common.dll&quot; Namespace=Epi.Web.Common.ObjectMapping Type=Mapper Member=(Name=ToBusinessObject OverloadingParameters=[(Assembly=&quot;file:///C:/Projects/EpiInfoWebSurvey/Epi Info Web Survey/Epi.Web.Common/bin/Debug/Epi.Web.Common.dll&quot; Namespace=Epi.Web.Common.DTO Type=SurveyInfoDTO)]) ParameterIdentifier=pDTO"
+                      tag="ViewCode" />
+                  </referencesInternal>
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="4745381d-ab1e-4f8e-a8cc-757f90b811c9"
+                      LastKnownName="SurveyInfoDTO"
+                      LastKnownLocation="Package3_1313.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="8d77fe91-1928-4c3a-9cc0-fe314207e8c5"
+            name="ToDataTransferObjects"
+            isLeaf="false"
+            isStatic="true"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <referencesInternal>
+              <reference
+                Id="d28fbef7-8ece-4262-9290-71f31f934d89"
+                handle="viewcode://./CodeSchema_Method?Assembly=&quot;file:///C:/Projects/EpiInfoWebSurvey/Epi Info Web Survey/Epi.Web.Common/bin/Debug/Epi.Web.Common.dll&quot; Namespace=Epi.Web.Common.ObjectMapping Type=Mapper Member=(Name=ToDataTransferObjects OverloadingParameters=[(Assembly=&quot;file:///C:/Program Files (x86)/Reference Assemblies/Microsoft/Framework/.NETFramework/v4.0/mscorlib.dll&quot; Namespace=System.Collections.Generic Type=(Name=IEnumerable GenericParameterCount=1 GenericArguments=[(Assembly=&quot;file:///C:/Projects/EpiInfoWebSurvey/Epi Info Web Survey/Epi.Web.Common/bin/Debug/Epi.Web.Common.dll&quot; Namespace=Epi.Web.Common.BusinessObject Type=SurveyInfoBO)]))])"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="c787fb82-2ead-4e09-a15b-534b3ad155f3"
+                name="method"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="aad76a7b-5628-4f2f-bb7c-4cd82b5a1e60">
+                    <propertyInstance
+                      Id="9d9e8c94-b4fc-4d46-9e6f-1c1482d5f474"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="e419142f-dbbe-4c2e-8e37-69175486abe7">
+                    <propertyInstance
+                      Id="e65dcecd-c103-4b81-be54-9fa4fefececc"
+                      name="IsPartial"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="7ecbb0f5-85fe-44e7-8d11-1f4941036f25">
+                    <propertyInstance
+                      Id="65147070-2647-4a48-b14b-2d1f0a275a70"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="2927d0de-9340-4987-9e2c-dde80d369603">
+                    <propertyInstance
+                      Id="4ad32364-5c25-4791-879e-b686bb3e862f"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="c3434edc-bad3-4ea5-a748-fb7980c551d3">
+                    <propertyInstance
+                      Id="bf6d2b5e-d074-46e3-99c0-d192a03e109c"
+                      name="params"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="d80a1c2b-59b4-4627-9980-8d5e640d9474"
+                  direction="Return">
+                  <type_NamedElement>
+                    <interfaceMoniker
+                      Id="d3f0bf18-3afd-429a-87ce-b26f0deea0ea"
+                      LastKnownName="IList&lt;SurveyInfoDTO&gt;"
+                      LastKnownLocation="Package2_1423.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="37661a2c-1b17-4888-b425-e98e164055ca"
+                  name="pBO"
+                  direction="In">
+                  <referencesInternal>
+                    <reference
+                      Id="1721a0b2-b2bc-4d82-8c55-207b672d4000"
+                      handle="viewcode://./CodeSchema_Parameter?Assembly=&quot;file:///C:/Projects/EpiInfoWebSurvey/Epi Info Web Survey/Epi.Web.Common/bin/Debug/Epi.Web.Common.dll&quot; Namespace=Epi.Web.Common.ObjectMapping Type=Mapper Member=(Name=ToDataTransferObjects OverloadingParameters=[(Assembly=&quot;file:///C:/Program Files (x86)/Reference Assemblies/Microsoft/Framework/.NETFramework/v4.0/mscorlib.dll&quot; Namespace=System.Collections.Generic Type=(Name=IEnumerable GenericParameterCount=1 GenericArguments=[(Assembly=&quot;file:///C:/Projects/EpiInfoWebSurvey/Epi Info Web Survey/Epi.Web.Common/bin/Debug/Epi.Web.Common.dll&quot; Namespace=Epi.Web.Common.BusinessObject Type=SurveyInfoBO)]))]) ParameterIdentifier=pBO"
+                      tag="ViewCode" />
+                  </referencesInternal>
+                  <type_NamedElement>
+                    <interfaceMoniker
+                      Id="cfe14c97-0f85-46df-8d14-106147210f3b"
+                      LastKnownName="IEnumerable&lt;SurveyInfoBO&gt;"
+                      LastKnownLocation="Package2_1423.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </packageHasNamedElement>
+  </packagedElements>
+</package>

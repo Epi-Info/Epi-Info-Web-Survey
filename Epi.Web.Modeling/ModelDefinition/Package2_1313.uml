@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm5="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ComponentDesigner" xmlns:dm9="http://schemas.microsoft.com/dsltools/SimpleShapesModel" xmlns:dm10="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ActivityDesigner" xmlns:dm11="http://schemas.microsoft.com/dsltools/LogicalClassDesigner" xmlns:dm12="http://schemas.microsoft.com/VisualStudio/TeamArchitect/SequenceDesigner"
+  dslVersion="1.0.0.0"
+  Id="3e42c3c5-5995-472f-ae35-af94eadf1d6f"
+  name="Common"
+  visibility="Private" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
+  <referencesInternal>
+    <reference
+      Id="da458540-bdb0-4fbf-b19f-db35225d02cf"
+      handle="viewcode://./CodeSchema_Namespace?Namespace=Epi.Web.Common"
+      tag="ViewCode" />
+  </referencesInternal>
+  <packagedElements>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="04cbdce7-7cac-4faa-ad1c-1c2cd7bff5ac"
+        LastKnownName="DTO"
+        LastKnownLocation="Package3_1313.uml" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="cdb091f7-18bc-4e20-951b-5c7ba7bd27f6"
+        LastKnownName="BusinessObject"
+        LastKnownLocation="Package_1353.uml" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="699c4ed1-c06b-4ad3-a79a-8186ac5f86da"
+        LastKnownName="Criteria"
+        LastKnownLocation="Package_1406.uml" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="528c7861-0267-4478-83c1-b398af886ee0"
+        LastKnownName="MessageBase"
+        LastKnownLocation="Package1_1419.uml" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="c7ccdea6-5985-4bbd-b4de-db7d109cca9c"
+        LastKnownName="Message"
+        LastKnownLocation="Package_1423.uml" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="5d10e092-121f-4981-a8cc-d34fea8eb20a"
+        LastKnownName="ObjectMapping"
+        LastKnownLocation="Package1_1425.uml" />
+    </packageHasNamedElement>
+  </packagedElements>
+</package>
