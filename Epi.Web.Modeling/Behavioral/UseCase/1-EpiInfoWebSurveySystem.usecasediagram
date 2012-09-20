@@ -7,17 +7,11 @@
     </comment>
   </ownedCommentsInternal>
   <profileInstances>
-    <packageHasProfileInstances Id="fb430de2-89d8-4eb4-b006-c6549a429acf">
-      <profileInstance Id="959608a9-cc75-4c4d-9cfc-f3bf79d7aa92" name="StandardProfileL2">
-        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+    <packageHasProfileInstances Id="7c177e25-3cd4-4890-a728-1e2c30d72814">
+      <profileInstance Id="39efffe6-acdd-4c33-b35d-8e495ecdf9a7" name="CSharpProfile">
+        <elementDefinition Id="db4513e1-8269-43fb-88f7-458a5cba77b0" />
       </profileInstance>
-      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
-    </packageHasProfileInstances>
-    <packageHasProfileInstances Id="f93d3ee4-9359-4729-8d96-958fc0457df6">
-      <profileInstance Id="87425968-c14b-466d-b171-9cb774fae8a1" name="StandardProfileL3">
-        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
-      </profileInstance>
-      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+      <elementDefinition Id="c2d726cf-e8bf-43b1-a6ef-713303241450" />
     </packageHasProfileInstances>
   </profileInstances>
   <packagedElements>
@@ -222,5 +216,19 @@
   </packagedElements>
   <package Id="61c9238c-a1c0-4942-842c-6ad432b7d409" name="Epi.Web.Modeling">
     <elementDefinition Id="daf1de51-1862-4459-9e4a-e7f71a55a436" />
+    <profileInstances>
+      <packageHasProfileInstances Id="fb430de2-89d8-4eb4-b006-c6549a429acf">
+        <profileInstance Id="959608a9-cc75-4c4d-9cfc-f3bf79d7aa92" name="StandardProfileL2">
+          <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+        </profileInstance>
+        <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+      </packageHasProfileInstances>
+      <packageHasProfileInstances Id="f93d3ee4-9359-4729-8d96-958fc0457df6">
+        <profileInstance Id="87425968-c14b-466d-b171-9cb774fae8a1" name="StandardProfileL3">
+          <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+        </profileInstance>
+        <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+      </packageHasProfileInstances>
+    </profileInstances>
   </package>
 </useCaseModelRoot>
