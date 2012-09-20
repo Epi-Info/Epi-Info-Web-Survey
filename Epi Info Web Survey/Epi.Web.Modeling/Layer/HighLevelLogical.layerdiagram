@@ -44,6 +44,11 @@
       </childLayers>
     </layer>
     <layer Id="c896cc99-6e95-42df-9440-cf61190c6696" name="Client">
+      <dependencyToLayers>
+        <dependencyFromLayerToLayer Id="08d48580-25e1-4275-b4a3-102f57ba1244" direction="Bidirectional">
+          <layerMoniker Id="605bb01a-0255-4057-a9b4-f7c3db0f1b16" />
+        </dependencyFromLayerToLayer>
+      </dependencyToLayers>
       <childLayers>
         <layer Id="486b5414-9d9d-451d-8fc3-1c93b1a4e36a" name=" Browser">
           <childLayers>
