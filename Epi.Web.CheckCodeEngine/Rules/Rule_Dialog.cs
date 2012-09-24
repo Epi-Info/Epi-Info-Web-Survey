@@ -88,7 +88,8 @@ namespace Epi.Core.EnterInterpreter.Rules
                     pJavaScriptBuilder.Append("CCE_ContextOpenSimpleDialogBox('");
                     pJavaScriptBuilder.Append(((RuleDialogBase)(this.Dialog)).TitleText.ToString());
                     pJavaScriptBuilder.Append("', '");
-                    pJavaScriptBuilder.AppendLine(((RuleDialogBase)(this.Dialog)).Prompt.ToString() + "');");
+                    pJavaScriptBuilder.Append(((RuleDialogBase)(this.Dialog)).Prompt.ToString() + "'" );
+                    pJavaScriptBuilder.Append(",id"+ ");");
                     break;
                 case "Numeric_Dialog_Explicit_Statement":
                 case "Dialog_Date_Mask_Statement":
