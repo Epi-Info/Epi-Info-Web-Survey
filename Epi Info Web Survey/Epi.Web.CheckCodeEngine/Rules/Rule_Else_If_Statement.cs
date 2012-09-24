@@ -59,17 +59,5 @@ namespace Epi.Core.EnterInterpreter.Rules
             return result;
         }
 
-        
-        private void ExecuteThenClause()
-        {
-            this.Statements1.Execute();
-        }
-        private void ExecuteElseClause()
-        {
-            if (this.Statements2 != null)
-            {
-                this.Statements2.Execute();
-            }
-        }
     }
 }
