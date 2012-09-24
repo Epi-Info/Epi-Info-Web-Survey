@@ -63,7 +63,7 @@ namespace Epi.Core.EnterInterpreter.Rules
 
         public override void ToJavaScript(StringBuilder pJavaScriptBuilder)
         {
-            pJavaScriptBuilder.AppendLine("_click()");
+            pJavaScriptBuilder.AppendLine("_click(id)");
             pJavaScriptBuilder.AppendLine("{");
 
             if (this.Statements != null)

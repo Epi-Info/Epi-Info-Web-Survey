@@ -6,7 +6,12 @@
 <div id="attention" style="margin: 10px">
             <img src="@Url.Content("~/Content/images/sign_warning.png")" alt="" style="vertical-align: middle;
                 padding-right: 10px;"/>
-        @System.Configuration.ConfigurationManager.AppSettings["SURVEY_NOT_EXISTS"]
+    @*    @System.Configuration.ConfigurationManager.AppSettings["SURVEY_NOT_EXISTS"]*@
+        <p>@TempData["exc"]</p>
+        <br>
+         <p>@TempData["exc1"]</p>
+         <br>
+          <p>@TempData["exc2"]</p>
 </div>
 
 

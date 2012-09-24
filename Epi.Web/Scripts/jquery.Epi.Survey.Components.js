@@ -19,7 +19,7 @@ function NotifyByEmail(emailAddress, redirectUrl, surveyName, postUrl,passCode) 
                     alert('An email has been sent with survey link.');
                 }
                 else {
-
+                
                     alert('Failed to send email to the participant');
 
                 }
@@ -68,6 +68,37 @@ function UpdateResponse(UpdateUrl,pName, pValue,responseId) {
             function (data) {
                 if (data === true) {
                  
+                }
+                else {
+
+                    alert('Unable to Update');
+
+                }
+            },
+            'json'
+        );
+}
+
+
+
+function SaveAndUpdate(UpdateUrl,pName, pValue,responseId) {
+     
+   
+    var user = {'Name': pName,
+        'Value': pValue,
+        'responseId':responseId,
+        __RequestVerificationToken: $("input[name=__RequestVerificationToken]").val()
+    };
+
+    $.post(
+            UpdateUrl,
+            user,
+            function (data) {
+                if (data === true) {
+                 //populate IsSaved and StatusId hidden fileds
+          
+            document.getElementById("HiddenStatusId").value =1;
+            document.getElementById("HiddenIsSaved").value = true;
                 }
                 else {
 
