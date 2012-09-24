@@ -1,0 +1,16 @@
+﻿@{
+    ViewBag.Title = "Exception.Mobile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="attention" style="margin: 10px">
+    <div class="image">
+            <img src="@Url.Content("~/Content/images/sign_warning.png")" alt="" style="vertical-align: middle;
+                padding-right: 5px; width:24px;"/>
+    </div>
+     <div class="message">
+        @System.Configuration.ConfigurationManager.AppSettings["SURVEY_NOT_EXISTS"]
+    </div>
+    <div style="clear: both;"></div> 
+</div>
+

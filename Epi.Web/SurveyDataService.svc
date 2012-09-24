@@ -1,1 +1,1 @@
-﻿<%@ ServiceHost Service="Epi.Web.WCF.SurveyService.DataService" %>
+﻿<%@ServiceHost Service="Epi.Web.WCF.SurveyService.DataService"%>

@@ -24,6 +24,7 @@ namespace MvcDynamicForms
         private string _PageId = "";
         public double Width { get; set; }
         public double Height { get; set; }
+        public bool IsMobile { get; set; }
         
         /// <summary>
         /// The html element that wraps all rendered html.
@@ -119,7 +120,15 @@ namespace MvcDynamicForms
         public string RenderHtml(bool formatHtml)
         {
             var formWrapper = new TagBuilder(_formWrapper);
-            formWrapper.Attributes.Add("style", string.Format("width:{0}px;height:{1}px;", this.Width,this.Height + 100)); 
+            if (IsMobile)
+            {
+            formWrapper.Attributes.Add("style",  "width:auto;height:auto;");
+            formWrapper.Attributes.Add("data-role", "fieldcontain");
+            formWrapper.Attributes.Add("data-ajax", "false");
+            }
+            else{
+             formWrapper.Attributes.Add("style", string.Format("width:{0}px;height:{1}px;", this.Width,this.Height + 100));
+            }
             formWrapper.Attributes["class"] = _formWrapperClass;
             var html = new StringBuilder(formWrapper.ToString(TagRenderMode.StartTag));
 
@@ -156,6 +165,9 @@ namespace MvcDynamicForms
 
             return html.ToString();*/
         }
+
+
+
         /// <summary>
         /// Returns a string containing the rendered html of every contained Field object. The html can optionally include the Form object's state serialized into a hidden field.
         /// </summary>
