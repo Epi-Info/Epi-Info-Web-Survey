@@ -9,6 +9,7 @@ namespace Epi.Web.MVC.Facade
 {
     public class SurveyFacade:ISurveyFacade
     {
+
         // declare ISurveyInfoRepository which inherits IRepository of SurveyInfoResponse object
         private ISurveyInfoRepository _iSurveyInfoRepository;
 
@@ -58,11 +59,21 @@ namespace Epi.Web.MVC.Facade
         /// <param name="pageNumber"></param>
         /// <param name="surveyAnswerDTO"></param>
         /// <returns></returns>
-        public MvcDynamicForms.Form GetSurveyFormData(string surveyId, int pageNumber, Epi.Web.Common.DTO.SurveyAnswerDTO surveyAnswerDTO)
+        public MvcDynamicForms.Form GetSurveyFormData(string surveyId, int pageNumber, Epi.Web.Common.DTO.SurveyAnswerDTO surveyAnswerDTO, bool IsMobileDevice)
         {
+
             //Get the SurveyInfoDTO
             Epi.Web.Common.DTO.SurveyInfoDTO surveyInfoDTO = SurveyHelper.GetSurveyInfoDTO(_surveyInfoRequest,_iSurveyInfoRepository,surveyId);
-            MvcDynamicForms.Form form = Epi.Web.MVC.Utility.FormProvider.GetForm(surveyInfoDTO, pageNumber, surveyAnswerDTO);
+            MvcDynamicForms.Form form = null;
+           
+            if (IsMobileDevice)
+            {
+                form = Epi.Web.MVC.Utility.MobileFormProvider.GetForm(surveyInfoDTO, pageNumber, surveyAnswerDTO);
+            }
+            else
+            {
+               form = Epi.Web.MVC.Utility.FormProvider.GetForm(surveyInfoDTO, pageNumber, surveyAnswerDTO);
+            }
             return form;
         }
         /// <summary>
