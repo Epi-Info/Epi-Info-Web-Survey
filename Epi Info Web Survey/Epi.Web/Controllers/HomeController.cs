@@ -64,12 +64,20 @@ namespace Epi.Web.MVC.Controllers
                 surveyInfoModel.IntroductionText = MvcHtmlString.Create(introText).ToString();
 
 
-              
+                
 
                 return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, surveyInfoModel);
             }
             catch (Exception ex)
             {
+                //Exception exc = Server.GetLastError();
+                //if ( exc != null)
+                //{
+                //    TempData["exc"] = exc.ToString();
+                //}
+                TempData["exc"] = ex.Message.ToString();
+                TempData["exc1"] = ex.Source.ToString();
+                TempData["exc2"] = ex.StackTrace.ToString();
                 return View(Epi.Web.MVC.Constants.Constant.EXCEPTION_PAGE);
             }
         }
@@ -88,6 +96,13 @@ namespace Epi.Web.MVC.Controllers
         {
             try
             {
+                bool IsMobileDevice = false;
+
+                IsMobileDevice = this.Request.Browser.IsMobileDevice;
+                if (IsMobileDevice == false)
+                {
+                    IsMobileDevice = Epi.Web.MVC.Utility.SurveyHelper.IsMobileDevice(this.Request.UserAgent.ToString());
+                }
                 FormsAuthentication.SetAuthCookie("BeginSurvey", false);
                 //put the ResponseId in Temp data for later use
                 //TempData[Epi.Web.MVC.Constants.Constant.RESPONSE_ID] = ResponseID.ToString();
@@ -99,8 +114,8 @@ namespace Epi.Web.MVC.Controllers
                 Epi.Web.Common.DTO.SurveyAnswerDTO SurveyAnswer = _isurveyFacade.CreateSurveyAnswer(surveyModel.SurveyId, ResponseID.ToString());
 
                 SurveyInfoModel surveyInfoModel = _isurveyFacade.GetSurveyInfoModel(SurveyAnswer.SurveyId);
- 
-                MvcDynamicForms.Form form = _isurveyFacade.GetSurveyFormData(SurveyAnswer.SurveyId, 1, SurveyAnswer);
+
+                MvcDynamicForms.Form form = _isurveyFacade.GetSurveyFormData(SurveyAnswer.SurveyId, 1, SurveyAnswer, IsMobileDevice);
 
                 TempData["Width"] = form.Width + 100;
 
@@ -146,7 +161,7 @@ namespace Epi.Web.MVC.Controllers
                 {
                     SurveyAnswer = _isurveyFacade.GetSurveyAnswerResponse(SurveyAnswer.ResponseId).SurveyResponseList[0];
 
-                    MvcDynamicForms.Form formRs = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, i, SurveyAnswer);
+                    MvcDynamicForms.Form formRs = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, i, SurveyAnswer, IsMobileDevice);
 
                     formRs = Epi.Web.MVC.Utility.SurveyHelper.UpdateControlsValuesFromContext(formRs, ContextDetailList);
                      

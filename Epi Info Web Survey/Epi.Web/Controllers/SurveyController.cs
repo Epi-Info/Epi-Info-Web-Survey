@@ -10,6 +10,10 @@ using System.Xml.XPath;
 using Epi.Core.EnterInterpreter;
 using System.Web.Security;
 using System.Text.RegularExpressions;
+using System.Web;
+
+using System.Web.Routing;
+using System.Web.WebPages;
 namespace Epi.Web.MVC.Controllers
 {
         [Authorize]
@@ -47,8 +51,13 @@ namespace Epi.Web.MVC.Controllers
         {
             try
             {
-
                
+                bool IsMobileDevice = false;
+                IsMobileDevice = this.Request.Browser.IsMobileDevice;
+                if (IsMobileDevice == false)
+                {
+                    IsMobileDevice = Epi.Web.MVC.Utility.SurveyHelper.IsMobileDevice(this.Request.UserAgent.ToString());
+                }
 
                     Epi.Web.Common.DTO.SurveyAnswerDTO surveyAnswerDTO = GetSurveyAnswer(responseId);
                     SurveyInfoModel surveyInfoModel = _isurveyFacade.GetSurveyInfoModel(surveyAnswerDTO.SurveyId);
@@ -73,7 +82,7 @@ namespace Epi.Web.MVC.Controllers
                             return View("IsSubmitedError");
                         case PreValidationResultEnum.Success:
                         default:
-                            var form = _isurveyFacade.GetSurveyFormData(surveyAnswerDTO.SurveyId, PageNumber, surveyAnswerDTO);
+                            var form = _isurveyFacade.GetSurveyFormData(surveyAnswerDTO.SurveyId, PageNumber, surveyAnswerDTO, IsMobileDevice);
                             TempData["Width"] = form.Width + 30;
                             // if redirect then perform server validation before displaying
                             if (TempData.ContainsKey("isredirect") && !string.IsNullOrWhiteSpace(TempData["isredirect"].ToString()))
@@ -81,6 +90,27 @@ namespace Epi.Web.MVC.Controllers
                                 form.Validate();
                             }
                             this.SetCurrentPage(surveyAnswerDTO, PageNumber);
+                            //PassCode start
+                            if (IsMobileDevice)
+                            {
+                                  Epi.Web.Common.Message.UserAuthenticationResponse AuthenticationResponse = _isurveyFacade.GetAuthenticationResponse(responseId);
+
+                                string strPassCode = Epi.Web.MVC.Utility.SurveyHelper.GetPassCode();
+                                if (string.IsNullOrEmpty(AuthenticationResponse.PassCode))
+                                {
+                                    _isurveyFacade.UpdatePassCode(responseId, strPassCode);
+                                }
+                                if (AuthenticationResponse.PassCode == null)
+                                {
+                                    form.PassCode = strPassCode;
+
+                                }
+                                else
+                                {
+                                    form.PassCode = AuthenticationResponse.PassCode;
+                                }
+                            }
+                            //passCode end
                             return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
                     }
                 }
@@ -99,7 +129,13 @@ namespace Epi.Web.MVC.Controllers
         public ActionResult Index(SurveyAnswerModel surveyAnswerModel, string Submitbutton, string Savebutton, string ContinueButton, string PreviousButton, int PageNumber = 0)
         {
             
-            string responseId = surveyAnswerModel.ResponseId;
+             string responseId = surveyAnswerModel.ResponseId;
+              bool IsMobileDevice = false;
+              IsMobileDevice = this.Request.Browser.IsMobileDevice;
+              if (IsMobileDevice == false)
+              {
+                  IsMobileDevice = Epi.Web.MVC.Utility.SurveyHelper.IsMobileDevice(this.Request.UserAgent.ToString());
+              } 
             try
             {
 
@@ -133,11 +169,11 @@ namespace Epi.Web.MVC.Controllers
                         {
                             if (ReffererPageNum != CurrentPageNum)
                             {
-                                form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, ReffererPageNum, SurveyAnswer);
+                                form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, ReffererPageNum, SurveyAnswer, IsMobileDevice);
                             }
                             else
                             {
-                                form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, CurrentPageNum, SurveyAnswer);
+                                form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, CurrentPageNum, SurveyAnswer, IsMobileDevice);
                             }
                             
                             UpdateModel(form);
@@ -145,13 +181,34 @@ namespace Epi.Web.MVC.Controllers
                         else
                         {
                             //get the survey form
-                            form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, GetSurveyPageNumber(SurveyAnswer.XML.ToString()), SurveyAnswer);
+                            form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, GetSurveyPageNumber(SurveyAnswer.XML.ToString()), SurveyAnswer, IsMobileDevice);
                             if (ReffererPageNum == CurrentPageNum)
                             {
                                 UpdateModel(form);
                             }
                         }
-                       
+                        //PassCode start
+                        if (IsMobileDevice)
+                        {
+                            Epi.Web.Common.Message.UserAuthenticationResponse AuthenticationResponse = _isurveyFacade.GetAuthenticationResponse(responseId);
+
+                            string strPassCode = Epi.Web.MVC.Utility.SurveyHelper.GetPassCode();
+                            if (string.IsNullOrEmpty(AuthenticationResponse.PassCode))
+                            {
+                                _isurveyFacade.UpdatePassCode(responseId, strPassCode);
+                            }
+                            if (AuthenticationResponse.PassCode == null)
+                            {
+                                form.PassCode = strPassCode;
+
+                            }
+                            else
+                            {
+                                form.PassCode = AuthenticationResponse.PassCode;
+                            }
+                            form.StatusId = SurveyAnswer.Status;
+                        }
+                        //passCode end
                         bool IsSubmited = false;
                         bool IsSaved = false;
 
@@ -170,7 +227,7 @@ namespace Epi.Web.MVC.Controllers
                         {
 
                             SurveyAnswer = _isurveyFacade.GetSurveyAnswerResponse(responseId).SurveyResponseList[0];
-                            form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, GetSurveyPageNumber(SurveyAnswer.XML.ToString()) == 0 ? 1 : GetSurveyPageNumber(SurveyAnswer.XML.ToString()), SurveyAnswer);
+                            form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, GetSurveyPageNumber(SurveyAnswer.XML.ToString()) == 0 ? 1 : GetSurveyPageNumber(SurveyAnswer.XML.ToString()), SurveyAnswer, IsMobileDevice);
                             //Update the model
                             UpdateModel(form);
 
@@ -224,7 +281,7 @@ namespace Epi.Web.MVC.Controllers
                             _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId, form, SurveyAnswer, IsSubmited, IsSaved, PageNumber);
 
                             SurveyAnswer = _isurveyFacade.GetSurveyAnswerResponse(responseId).SurveyResponseList[0];
-                            form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, PageNumber, SurveyAnswer);
+                            form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, PageNumber, SurveyAnswer, IsMobileDevice);
                             TempData["Width"] = form.Width + 30;
                             return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
                         }
@@ -256,7 +313,7 @@ namespace Epi.Web.MVC.Controllers
                                 // ReValidate All Pages
                                 for (int i = 1; i < form.NumberOfPages+1; i++)
                                 {
-                                    form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, i, SurveyAnswer);
+                                    form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, i, SurveyAnswer, IsMobileDevice);
                                     if (!form.Validate())
                                     {
                                         TempData["isredirect"] = "true";
@@ -298,8 +355,30 @@ namespace Epi.Web.MVC.Controllers
                                 _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId, form, SurveyAnswer, IsSubmited, IsSaved, PageNumber);
 
                                 SurveyAnswer = _isurveyFacade.GetSurveyAnswerResponse(responseId).SurveyResponseList[0];
-                                form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, PageNumber, SurveyAnswer);
+                                form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, PageNumber, SurveyAnswer, IsMobileDevice);
                                 TempData["Width"] = form.Width + 30;
+                                //PassCode start
+                                if (IsMobileDevice)
+                                {
+                                    Epi.Web.Common.Message.UserAuthenticationResponse AuthenticationResponse = _isurveyFacade.GetAuthenticationResponse(responseId);
+
+                                    string strPassCode = Epi.Web.MVC.Utility.SurveyHelper.GetPassCode();
+                                    if (string.IsNullOrEmpty(AuthenticationResponse.PassCode))
+                                    {
+                                        _isurveyFacade.UpdatePassCode(responseId, strPassCode);
+                                    }
+                                    if (AuthenticationResponse.PassCode == null)
+                                    {
+                                        form.PassCode = strPassCode;
+
+                                    }
+                                    else
+                                    {
+                                        form.PassCode = AuthenticationResponse.PassCode;
+                                    }
+                                    form.StatusId = SurveyAnswer.Status;
+                                }
+                                //passCode end
                                 return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
                             }
 
@@ -458,6 +537,9 @@ namespace Epi.Web.MVC.Controllers
         {
             try
             {
+                bool IsMobileDevice = false;
+
+                IsMobileDevice = this.Request.Browser.IsMobileDevice;
                 Epi.Web.Common.DTO.SurveyAnswerDTO SurveyAnswer = _isurveyFacade.GetSurveyAnswerResponse(responseId).SurveyResponseList[0];
 
                 SurveyInfoModel surveyInfoModel = _isurveyFacade.GetSurveyInfoModel(SurveyAnswer.SurveyId);
@@ -469,7 +551,7 @@ namespace Epi.Web.MVC.Controllers
                 {
                     SurveyAnswer = _isurveyFacade.GetSurveyAnswerResponse(SurveyAnswer.ResponseId).SurveyResponseList[0];
 
-                    MvcDynamicForms.Form formRs = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, i, SurveyAnswer);
+                    MvcDynamicForms.Form formRs = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, i, SurveyAnswer, IsMobileDevice);
 
                      formRs = Epi.Web.MVC.Utility.SurveyHelper.UpdateControlsValues(formRs, Name,Value);
 
@@ -484,7 +566,51 @@ namespace Epi.Web.MVC.Controllers
             }
         }
 
-        
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public JsonResult SaveSurvey(string Key, int Value, string responseId)
+        {
+            try
+            {
+                bool IsMobileDevice = false;
+                int PageNumber =  Value;
+                IsMobileDevice = this.Request.Browser.IsMobileDevice;
+                
+
+                Epi.Web.Common.DTO.SurveyAnswerDTO SurveyAnswer = _isurveyFacade.GetSurveyAnswerResponse(responseId).SurveyResponseList[0];
+
+                SurveyInfoModel surveyInfoModel = _isurveyFacade.GetSurveyInfoModel(SurveyAnswer.SurveyId);
+
+                 PreValidationResultEnum ValidationTest = PreValidateResponse(Mapper.ToSurveyAnswerModel(SurveyAnswer), surveyInfoModel);
+                var form = _isurveyFacade.GetSurveyFormData(SurveyAnswer.SurveyId, PageNumber, SurveyAnswer, IsMobileDevice);
+              
+                form.StatusId = SurveyAnswer.Status;
+                var IsSaved = form.IsSaved = true;
+                SurveyAnswer = _isurveyFacade.GetSurveyAnswerResponse(responseId).SurveyResponseList[0];
+                form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, GetSurveyPageNumber(SurveyAnswer.XML.ToString()) == 0 ? 1 : GetSurveyPageNumber(SurveyAnswer.XML.ToString()), SurveyAnswer, IsMobileDevice);
+                //Update the model
+                UpdateModel(form);
+
+                //form.HiddenFieldsList = this.Request.Form["HiddenFieldsList"].ToString();
+
+                //form.HighlightedFieldsList = this.Request.Form["HighlightedFieldsList"].ToString();
+
+                //form.DisabledFieldsList = this.Request.Form["DisabledFieldsList"].ToString();
+
+                //form.AssignList = this.Request.Form["AssignList"].ToString();
+
+
+            
+
+                _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId, form, SurveyAnswer, false, IsSaved, PageNumber);
+                
+                return Json(true);
+            }
+            catch (Exception ex)
+            {
+                return Json(false);
+            }
+        }
 
 
     }

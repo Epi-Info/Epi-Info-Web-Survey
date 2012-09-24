@@ -356,5 +356,37 @@ namespace Epi.Web.MVC.Utility
 
         }
 
+        public static bool IsMobileDevice(string RequestUserAgent)
+        {
+
+
+            if (RequestUserAgent.IndexOf("Opera Mobi", StringComparison.OrdinalIgnoreCase) >= 0 || RequestUserAgent.Contains("Opera Mobi"))
+            {
+                return true;
+            }
+            else if (RequestUserAgent.IndexOf("Android", StringComparison.OrdinalIgnoreCase) >= 0 || RequestUserAgent.Contains("Android"))
+            {
+                return true;
+            }
+            else if (RequestUserAgent.IndexOf("Mobile", StringComparison.OrdinalIgnoreCase) >= 0 || RequestUserAgent.Contains("Mobile"))
+            {
+                return true;
+            }
+            else if (RequestUserAgent.IndexOf("Phone", StringComparison.OrdinalIgnoreCase) >= 0 || RequestUserAgent.Contains("Phone"))
+            {
+                return true;
+            }
+            else if (RequestUserAgent.IndexOf("Opera Mini", StringComparison.OrdinalIgnoreCase) >= 0 || RequestUserAgent.Contains("Opera Mini"))
+            {
+                return true;
+            }
+            else 
+            {
+
+                return false;
+            }
+        
+        }
+
     }
 }
