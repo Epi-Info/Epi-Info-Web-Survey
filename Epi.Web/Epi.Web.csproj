@@ -135,7 +135,7 @@
       <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20505.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Mvc3">
-      <HintPath>..\packages\Unity.Mvc3.DLL.1.1\lib\net40\Unity.Mvc3.dll</HintPath>
+      <HintPath>..\packages\Unity.Mvc3.1.1\lib\Unity.Mvc3.dll</HintPath>
     </Reference>
     <Reference Include="WebGrease">
       <Private>True</Private>
