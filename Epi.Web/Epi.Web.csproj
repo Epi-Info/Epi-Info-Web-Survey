@@ -433,7 +433,6 @@
     <Content Include="Views\Home\Index.Android.cshtml" />
     <Content Include="Views\Home\Index.Opera.cshtml" />
     <Content Include="Views\Survey\Index.Android.cshtml" />
-    <Content Include="Views\Survey\Index.Opera.cshtml" />
     <Content Include="Views\Shared\_Layout.Opera.cshtml" />
     <Content Include="Views\Shared\_Layout.Android.cshtml" />
     <Content Include="Views\Final\Index.Android.cshtml" />
@@ -441,6 +440,7 @@
     <Content Include="Views\Shared\Exception.Opera.cshtml" />
     <Content Include="Views\Shared\Exception.Android.cshtml" />
     <Content Include="Views\Login\Index.Mobile.cshtml" />
+    <Content Include="Views\Survey\Index.Opera.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -503,7 +503,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>64982</DevelopmentServerPort>
+          <DevelopmentServerPort>55049</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost/Epi.Web</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
