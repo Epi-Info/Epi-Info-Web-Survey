@@ -66,7 +66,14 @@ namespace Epi.Core.EnterInterpreter.Rules
 
             if (this.Statements != null)
             {
-                this.Statements.ToJavaScript(pJavaScriptBuilder);
+                try
+                {
+                    this.Statements.ToJavaScript(pJavaScriptBuilder);
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
             }
 
 
