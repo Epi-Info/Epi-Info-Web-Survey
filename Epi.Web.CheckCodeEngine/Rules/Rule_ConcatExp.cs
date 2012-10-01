@@ -87,7 +87,8 @@ namespace Epi.Core.EnterInterpreter.Rules
                     this.AddExp.ToJavaScript(pJavaScriptBuilder);
                 }
                 pJavaScriptBuilder.Append("+");
-                if (this.AddExp is Rule_Value)
+               // if (this.AddExp is Rule_Value)
+               if (this.ConcatExp is Rule_Value)
                 {
                     WriteValueJavascript((Rule_Value)this.ConcatExp, pJavaScriptBuilder);
                 }
