@@ -60,6 +60,13 @@ namespace Epi.Core.EnterInterpreter.Rules
             return result;
         }
 
+        public override void ToJavaScript(StringBuilder pJavaScriptBuilder)
+        {
+            pJavaScriptBuilder.Append("CCE_DatePart(");
+            this.ParameterList[0].ToJavaScript(pJavaScriptBuilder);
+            pJavaScriptBuilder.Append(")");
+        }
+
         #endregion
     }
 
