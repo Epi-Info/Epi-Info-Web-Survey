@@ -37,6 +37,15 @@ namespace Epi.Core.EnterInterpreter.Rules
 
             return result;
         }
+
+
+
+        public override void ToJavaScript(StringBuilder pJavaScriptBuilder)
+        {
+            pJavaScriptBuilder.Append("Math.pow(Math.LOG10E,");
+            this.ParameterList[0].ToJavaScript(pJavaScriptBuilder);
+            pJavaScriptBuilder.Append(")");
+        }
         
     }
 }
