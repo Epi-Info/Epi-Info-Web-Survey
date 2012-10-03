@@ -1148,6 +1148,22 @@ function CCE_Seconds(pValue1, pValue2)
 }
 
 
+function CCE_DateDiff(pValue1, pValue2) 
+{
+    var date1 = new Date(pValue1);
+    var date2 = new Date(pValue2);
+
+     var result = date1.getTime() - date2.getTime();
+
+    return result;
+}
+
+
+function CCE_DatePart(pValue1) 
+{
+
+    return null;
+}
 
 
 function OpenVideoDialog()

@@ -93,6 +93,54 @@ namespace Epi.Core.EnterInterpreter.Rules
 
             return result;
         }
+
+        public override void ToJavaScript(StringBuilder pJavaScriptBuilder)
+        {
+            pJavaScriptBuilder.Append("CCE_DateDiff(");
+            this.ParameterList[0].ToJavaScript(pJavaScriptBuilder);
+            pJavaScriptBuilder.Append(",");
+            this.ParameterList[1].ToJavaScript(pJavaScriptBuilder);
+            pJavaScriptBuilder.Append(")");
+        }
+
+        /*
+        public object GetDateDiff(DateInterval interval, DateTime date1, DateTime date2)
+        {
+            object returnValue = null;
+            TimeSpan t;
+
+            object diff = 0.0;
+
+            //returns negative value if date1 is more recent
+            t = date2 - date1;
+
+            switch (interval)
+            {
+                case DateInterval.Second:
+                    diff = t.TotalSeconds;
+                    break;
+                case DateInterval.Minute:
+                    diff = t.TotalMinutes;
+                    break;
+                case DateInterval.Hour:
+                    diff = t.TotalHours;
+                    break;
+                case DateInterval.Day:
+                    diff = t.TotalDays;
+                    break;
+                case DateInterval.Month:
+                    diff = t.TotalDays / 365.25 * 12.0;
+                    break;
+                case DateInterval.Year:
+                    diff = t.TotalDays / 365.25;
+                    break;
+            }
+
+            returnValue = Convert.ToInt32(diff);
+            return returnValue;
+        }*/
+
+
         #endregion
     }
 }
