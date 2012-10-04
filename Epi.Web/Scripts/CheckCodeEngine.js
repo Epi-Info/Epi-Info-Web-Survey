@@ -361,11 +361,24 @@ CCE_Context.prototype.setValue = function (pName, pValue)
         if (eval(document.getElementById(FieldName)))
         {
             if(cce_Symbol.Source == "datasource")
+            {
+
+                switch (cce_Symbol.Type) 
                 {
-                   
-                    $(Jquery).val(pValue);
-                    cce_Symbol.Value = pValue;
+                   case "datepicker": //string has been converted to date for comparison with another date
+                        $(Jquery).datepicker("setDate", new Date(pValue));
+                        cce_Symbol.Value = pValue;
+                        break;
+                    case "timepicker":
+                        //$(Jquery).timepicker("setTime", new Date(pValue));
+                        //cce_Symbol.Value = pValue;
+                        //break;
+                   default:
+                        $(Jquery).val(pValue);
+                        cce_Symbol.Value = pValue;
+                        break;
                 }
+            }
         }
         else
         {
