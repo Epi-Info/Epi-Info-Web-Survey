@@ -79,6 +79,7 @@ namespace MvcDynamicForms.Fields
                 txt.Attributes.Add("disabled", "disabled");
             }
             txt.Attributes.Add("class", GetControlClass(Value));
+            txt.Attributes.Add("data-prompt-position", "topLeft:15");
             //txt.Attributes.Add("style", "position:absolute;left:" + _left.ToString() + "px;top:" + _top.ToString() + "px" + ";width:" + _ControlWidth.ToString() + "px" + ErrorStyle + ";" + IsHiddenStyle + ";" + IsHighlightedStyle);
 
             txt.Attributes.Add("style", "" + _ControlWidth.ToString() + "px" + ErrorStyle + ";" + IsHiddenStyle + ";" + IsHighlightedStyle);
@@ -134,6 +135,7 @@ namespace MvcDynamicForms.Fields
                 //   ControlClass.Append("customDate[date],future[" + GetRightDateFormat(Lower).ToString() + "],past[" + GetRightDateFormat(Upper).ToString() + "],");
                 //dateRange
                 ControlClass.Append("customDate[date],datePickerRange, " + GetRightDateFormat(Lower).ToString() + "," + GetRightDateFormat(Upper).ToString() + ",");
+
                 if (_IsRequired == true)
                 {
 
