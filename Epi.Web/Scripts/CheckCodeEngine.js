@@ -912,6 +912,8 @@ function CCE_RemoveFromFieldsList(FieldName,ListName) {
      {
          $(control).val('');
      }
+
+     CCE_Context.setValue(controlId,'');
  }
 
  //Go to a page or focus on a control on the same page
