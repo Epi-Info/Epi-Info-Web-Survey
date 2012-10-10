@@ -603,7 +603,9 @@ Rule_Hide.prototype.Execute = function ()
                 query = '.mvcdynamicfield_' + pCheckCodeList[i];
                 $(query).each(function(i, obj) 
                 {
-                    $(query).attr('disabled', 'disabled');
+                  $(query).attr('disabled', 'disabled');
+
+                  
                 });
             }
             else
@@ -611,6 +613,10 @@ Rule_Hide.prototype.Execute = function ()
                 query = '#mvcdynamicfield_' + pCheckCodeList[i];
                 $(query).attr('disabled', 'disabled');
                 query = '#labelmvcdynamicfield_' + pCheckCodeList[i];
+                if(symbol.Type == "checkbox")
+                { 
+                   $(query).attr('Style','color:#b3b3b3');
+                }
             }
             CCE_AddToFieldsList(pCheckCodeList[i], 'DisabledFieldsList');
          }
@@ -702,11 +708,13 @@ Rule_Hide.prototype.Execute = function ()
             }
             else
             {
-                query = '#mvcdynamicfield_' + pCheckCodeList[i];
-                $(query).removeAttr('disabled');
-               
-
-                query = '#labelmvcdynamicfield_' + pCheckCodeList[i];
+                 query = '#mvcdynamicfield_' + pCheckCodeList[i];
+                 $(query).removeAttr('disabled');
+                 query = '#labelmvcdynamicfield_' + pCheckCodeList[i];
+                 if(symbol.Type == "checkbox")
+                { 
+                   $(query).attr('Style','color:#000000');
+                }
             }
             CCE_RemoveFromFieldsList(pCheckCodeList[i], 'DisabledFieldsList');
          }
@@ -842,7 +850,8 @@ function CCE_RemoveFromFieldsList(FieldName,ListName) {
      var control = "#mvcdynamicfield_"+ controlId
      if ($(control).attr('type') == 'checkbox') 
      {
-         $(control).attr('checked', false);
+          $(control).attr('checked', false).checkboxradio("refresh");
+          $('.ui-checkbox').removeClass('ui-disabled');
      }
      else 
      {
