@@ -120,6 +120,7 @@ namespace MvcDynamicForms.Fields
                 IsHighlightedStyle = "background-color:yellow";
             }
 
+            
             if (_IsDisabled)
             {
                 chk.Attributes.Add("disabled", "disabled");
@@ -164,9 +165,13 @@ namespace MvcDynamicForms.Fields
             prompt.Attributes.Add("for", inputName);
             prompt.Attributes.Add("class", "EpiLabel");
             prompt.Attributes.Add("Id", "label" + inputName);
-            StringBuilder StyleValues = new StringBuilder();
-            StyleValues.Append(GetContolStyle(_fontstyle.ToString(), _Prompttop.ToString(), _Promptleft.ToString(), null, Height.ToString(), IsHidden));
+            //StringBuilder StyleValues = new StringBuilder();
+            //StyleValues.Append(GetContolStyle(_fontstyle.ToString(), _Prompttop.ToString(), _Promptleft.ToString(), null, Height.ToString(), IsHidden));
             //prompt.Attributes.Add("style", StyleValues.ToString());
+            if (_IsDisabled)
+            {
+                prompt.Attributes.Add("style", "color:#b3b3b3");
+            }
             html.Append(prompt.ToString());
             if (ReadOnly)
             {
