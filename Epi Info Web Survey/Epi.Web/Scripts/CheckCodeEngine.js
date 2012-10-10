@@ -903,13 +903,14 @@ function CCE_RemoveFromFieldsList(FieldName,ListName) {
  {
     
     //if control is a check box uncheck it otherwise clear the control value
-     if ($(controlId).attr('type') == 'checkbox') 
+     var control = "#mvcdynamicfield_"+ controlId
+     if ($(control).attr('type') == 'checkbox') 
      {
-         $(controlId).attr('checked', false);
+         $(control).attr('checked', false);
      }
      else 
      {
-         $(controlId).val('');
+         $(control).val('');
      }
  }
 
