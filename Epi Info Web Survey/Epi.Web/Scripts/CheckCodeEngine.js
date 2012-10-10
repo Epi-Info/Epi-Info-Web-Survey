@@ -903,17 +903,35 @@ function CCE_RemoveFromFieldsList(FieldName,ListName) {
  {
     
     //if control is a check box uncheck it otherwise clear the control value
-     var control = "#mvcdynamicfield_"+ controlId
-     if ($(control).attr('type') == 'checkbox') 
-     {
-         $(control).attr('checked', false);
-     }
-     else 
-     {
-         $(control).val('');
-     }
+    var cce_Symbol = this.resolve(pName);
+    if (cce_Symbol != null) 
+    {
+        cce_Symbol.Value = pValue;
 
-     CCE_Context.setValue(controlId,'');
+        var controlId = '#mvcdynamicfield_' + pName;
+        var FieldName = 'mvcdynamicfield_' + pName;
+        if (eval(document.getElementById(FieldName)))
+        {
+            if(cce_Symbol.Source == "datasource")
+            {
+
+                switch (cce_Symbol.Type) 
+                {
+                    case "checkbox":
+                        $(controlId).attr('checked', false);
+                        break;
+                    default:
+                        $(controlId).val('');
+                        break;
+
+                }
+            }
+        }
+        else
+        {
+            updateXml(pName, '') ;
+        }
+    }
  }
 
  //Go to a page or focus on a control on the same page
