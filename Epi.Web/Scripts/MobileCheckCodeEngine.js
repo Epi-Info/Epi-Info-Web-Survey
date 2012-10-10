@@ -262,13 +262,16 @@ CCE_Context.prototype.getValue = function (pName)
                         value = new Number(field.val()).valueOf();
                         return value;
                     case "radiobutton":
-                        var RadiofieldName = '.' + fieldName;
+                       var RadiofieldName = "." + fieldName;
+                         
                         value = -1; 
                         $(RadiofieldName).each(function(i, obj) 
                         {
+                          
                             if ($(this).is(':checked'))
                             {
                               value = new Number($(this).val()).valueOf();
+                              //value = $(this).val();
                             }
                         });
                         return value;
@@ -701,6 +704,8 @@ Rule_Hide.prototype.Execute = function ()
             {
                 query = '#mvcdynamicfield_' + pCheckCodeList[i];
                 $(query).removeAttr('disabled');
+               
+
                 query = '#labelmvcdynamicfield_' + pCheckCodeList[i];
             }
             CCE_RemoveFromFieldsList(pCheckCodeList[i], 'DisabledFieldsList');
@@ -834,14 +839,17 @@ function CCE_RemoveFromFieldsList(FieldName,ListName) {
  {
     
     //if control is a check box uncheck it otherwise clear the control value
-     if ($(controlId).attr('type') == 'checkbox') 
+     var control = "#mvcdynamicfield_"+ controlId
+     if ($(control).attr('type') == 'checkbox') 
      {
-         $(controlId).attr('checked', false);
+         $(control).attr('checked', false);
      }
      else 
      {
-         $(controlId).val('');
+         $(control).val('');
      }
+
+   //CCE_Context.setValue(controlId,'');
  }
 
  //Go to a page or focus on a control on the same page

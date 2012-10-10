@@ -53,6 +53,7 @@ namespace MvcDynamicForms.Fields
 
                 StyleValues.Append(GetMobileLiteralStyle(_fontstyle.ToString(), null, null, null, null, IsHidden));
                 //StyleValues.Append(";word-wrap:break-word;");
+                wrapper.Attributes.Add("data-role", "fieldcontain");
                 wrapper.Attributes.Add(new KeyValuePair<string, string>("style", StyleValues.ToString()));
 
                 wrapper.InnerHtml = Html;
@@ -112,13 +113,13 @@ namespace MvcDynamicForms.Fields
                 }
 
             }
-            CssStyles.Append(";font:");//1
-            if (!string.IsNullOrEmpty(FontStyle.ToString()))
-            {
+            //CssStyles.Append(";font:");//1
+            //if (!string.IsNullOrEmpty(FontStyle.ToString()))
+            //{
 
-                CssStyles.Append(FontStyle);//2
-                CssStyles.Append(" ");//3
-            }
+            //    CssStyles.Append(FontStyle);//2
+            //    CssStyles.Append(" ");//3
+            //}
             CssStyles.Append(FontWeight);
             CssStyles.Append(" ");
             CssStyles.Append(_fontSize.ToString() + "pt ");
