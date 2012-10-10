@@ -84,6 +84,7 @@ namespace MvcDynamicForms.Fields
                 var rad = new TagBuilder("input");
                 rad.Attributes.Add("type", "radio");
                 rad.Attributes.Add("name", inputName);
+                rad.Attributes.Add("class", inputName);
                 rad.Attributes.Add("id", radId);
                 
                 //StringBuilder RadioButton = new StringBuilder();
@@ -136,6 +137,7 @@ namespace MvcDynamicForms.Fields
             hidden.Attributes.Add("type", "hidden");
             hidden.Attributes.Add("id", inputName);
             hidden.Attributes.Add("name", inputName);
+            
             hidden.Attributes.Add("value", string.Empty);
             html.Append(hidden.ToString(TagRenderMode.SelfClosing));
 
