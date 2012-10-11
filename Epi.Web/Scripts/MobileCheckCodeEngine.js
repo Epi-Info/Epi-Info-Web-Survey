@@ -1089,7 +1089,11 @@ function CCE_Truncate(pValue)
 
 function CCE_SystemDate()
 {
-    return new Date();
+
+ var FormatedDate;
+ var date = new Date();
+ FormatedDate =date.getMonth()+ 1 +"/"+date.getDate()+"/"+date.getFullYear();
+ return FormatedDate ;
 }
 
 
