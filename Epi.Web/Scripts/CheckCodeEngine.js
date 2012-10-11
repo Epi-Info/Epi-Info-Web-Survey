@@ -899,14 +899,14 @@ function CCE_RemoveFromFieldsList(FieldName,ListName) {
  }
 
  //Clear the control value
- function CCE_ClearControlValue(controlId) 
+ function CCE_ClearControlValue(pName) 
  {
     
     //if control is a check box uncheck it otherwise clear the control value
-    var cce_Symbol = this.resolve(pName);
+    var cce_Symbol = cce_Context.resolve(pName);
     if (cce_Symbol != null) 
     {
-        cce_Symbol.Value = pValue;
+       // cce_Symbol.Value = pValue;
 
         var controlId = '#mvcdynamicfield_' + pName;
         var FieldName = 'mvcdynamicfield_' + pName;
