@@ -1026,11 +1026,16 @@ function CCE_Months(pValue1, pValue2)
     return result;
 }
 
-function CCE_Round(pValue1, pValue2) 
-{
-    var RoundModifier = 10 * pValue2;
+//function CCE_Round(pValue1, pValue2) 
+//{
+//    var RoundModifier = 10 * pValue2;
 
-    var result = Math.round(pValue1 * RoundModifier) / RoundModifier;
+//    var result = Math.round(pValue1 * RoundModifier) / RoundModifier;
+//    return result;
+//}
+function CCE_Round(pValue1 ) 
+{
+    var result = Math.round(pValue1)  ;
     return result;
 }
 
