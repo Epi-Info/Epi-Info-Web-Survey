@@ -924,7 +924,7 @@ function CCE_RemoveFromFieldsList(FieldName,ListName) {
 function isValidDate(pValue)
 {
     var result = false;
-    if ( Object.prototype.toString.call(d) === "[object Date]" ) 
+    if ( Object.prototype.toString.call(pValue) === "[object Date]" ) 
     {
         result = true;
     }
