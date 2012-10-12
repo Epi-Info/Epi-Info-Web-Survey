@@ -1093,15 +1093,166 @@ function CCE_SystemDate()
  var FormatedDate;
  var date = new Date();
  FormatedDate =date.getMonth()+ 1 +"/"+date.getDate()+"/"+date.getFullYear();
+ 
  return FormatedDate ;
 }
 
 
+//function CCE_SystemTime()
+//{
+//    return new Date().getTime();
+//}
 function CCE_SystemTime()
 {
-    return new Date().getTime();
+    //return new Date().getTime();
+var PMAM ="";
+var FormatedTime = "";
+var currentTime = new Date();
+var hours = currentTime.getHours();
+var minutes = currentTime.getMinutes();
+var seconds = currentTime.getSeconds();
+    if (minutes < 10)
+    {
+    minutes = "0" + minutes
+    }
+    if (seconds < 10)
+    {
+    seconds = "0" + seconds
+    }
+     
+    
+    if ( hours < 10 )  
+    {
+       hours = "0" + hours
+    }
+    if(hours > 11)
+    {
+       PMAM = "PM";
+    } else {
+       PMAM = "AM" ;
+    }
+    if (hours > 12) 
+    {
+        hours = hours - 12; 
+        if ( hours < 10 )  
+        {
+           hours = "0" + hours
+        } 
+    }
+    FormatedTime = hours + ":" + minutes + ":" + seconds + " " + PMAM;
+    return FormatedTime;
+
 }
-    function OpenVideoDialog(){
+  
+  
+  
+  
+function CCE_Hour(pValue) 
+{
+
+    if(isValidDate(pValue))
+    {
+        return pValue.getHours();
+    }
+    else
+    {
+        return new Date(pValue).getHours();
+    }
+    
+}
+
+function CCE_Hours(pValue1, pValue2) 
+{
+    var date1 = new Date(pValue1);
+    var date2 = new Date(pValue2);
+
+    var oneHour = 60*60*1000; // minutes * seconds*milliseconds
+
+    var result = Math.round(Math.abs((date1.getTime() - date2.getTime())/(oneHour)));
+
+    return result;
+}
+
+
+function CCE_Minute(pValue) 
+{
+
+    if(isValidDate(pValue))
+    {
+        return pValue.getMinutes();
+    }
+    else
+    {
+        return new Date(pValue).getMinutes();
+    }
+    
+}
+
+function CCE_Minutes(pValue1, pValue2) 
+{
+    var date1 = new Date(pValue1);
+    var date2 = new Date(pValue2);
+
+    var oneMinute = 60*1000; // seconds*milliseconds
+
+    var result = Math.round(Math.abs((date1.getTime() - date2.getTime())/(oneMinute)));
+
+    return result;
+}
+
+
+function CCE_Second(pValue) 
+{
+
+    if(isValidDate(pValue))
+    {
+        return pValue.getSeconds();
+    }
+    else
+    {
+        return new Date(pValue).getSeconds();
+    }
+    
+}
+
+function CCE_Seconds(pValue1, pValue2) 
+{
+    var date1 = new Date(pValue1);
+    var date2 = new Date(pValue2);
+
+    var oneSecond = 1000; // milliseconds
+
+    var result = Math.round(Math.abs((date1.getTime() - date2.getTime())/(oneSecond)));
+
+    return result;
+}
+
+
+function CCE_DateDiff(pValue1, pValue2) 
+{
+    var date1 = new Date(pValue1);
+    var date2 = new Date(pValue2);
+
+     var result = date1.getTime() - date2.getTime();
+
+    return result;
+}
+
+
+function CCE_DatePart(pValue1) 
+{
+
+    return null;
+}
+
+
+function OpenVideoDialog()
+{
+    $("#VideoDialog").dialog("open");
+}
+
+    
+function OpenVideoDialog(){
        $("#VideoDialog").dialog("open");
     }
      function OpenVideoDialogMobile(){
