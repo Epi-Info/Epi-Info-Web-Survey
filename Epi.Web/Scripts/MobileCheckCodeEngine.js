@@ -295,7 +295,6 @@ CCE_Context.prototype.getValue = function (pName)
     }
 }
 
-
 CCE_Context.prototype.setValue = function (pName, pValue) 
 {
     var cce_Symbol = this.resolve(pName);
@@ -308,11 +307,34 @@ CCE_Context.prototype.setValue = function (pName, pValue)
         if (eval(document.getElementById(FieldName)))
         {
             if(cce_Symbol.Source == "datasource")
+            {
+
+                switch (cce_Symbol.Type) 
                 {
-                   
-                    $(Jquery).val(pValue);
-                    cce_Symbol.Value = pValue;
+                   case "datepicker": //string has been converted to date for comparison with another date
+//                        $(Jquery).datepicker("setDate", new Date(pValue));
+//                        cce_Symbol.Value = pValue;
+                          var FormatedDate;
+                          var date = new Date();
+                          FormatedDate =date.getMonth()+ 1 +"/"+date.getDate()+"/"+date.getFullYear();
+                           cce_Symbol.Value = FormatedDate;
+                             $(Jquery).val(FormatedDate);
+                        break;
+                    case "timepicker":
+                       // $(Jquery).timepicker("setTime", new Date(pValue));
+                       //  cce_Symbol.Value = pValue;
+                         var FormatedTime;
+                         var date = new Date();
+                         FormatedTime = FormatTime(date);
+                         $(Jquery).val(FormatedTime);
+                         cce_Symbol.Value = FormatedTime;
+                        break;
+                   default:
+                        $(Jquery).val(pValue);
+                        cce_Symbol.Value = pValue;
+                        break;
                 }
+            }
         }
         else
         {
@@ -322,6 +344,7 @@ CCE_Context.prototype.setValue = function (pName, pValue)
         }
     }
 }
+
 
 function CCE_Symbol(pName, pType, pSource, pPageNumber, pValue) 
 {
@@ -1087,16 +1110,19 @@ function CCE_Truncate(pValue)
     return pValue | 0; // bitwise operators convert operands to 32-bit integers
 }
 
+//function CCE_SystemDate()
+//{
+
+// var FormatedDate;
+// var date = new Date();
+// FormatedDate =date.getMonth()+ 1 +"/"+date.getDate()+"/"+date.getFullYear();
+// 
+// return FormatedDate ;
+//}
 function CCE_SystemDate()
 {
-
- var FormatedDate;
- var date = new Date();
- FormatedDate =date.getMonth()+ 1 +"/"+date.getDate()+"/"+date.getFullYear();
- 
- return FormatedDate ;
+    return new Date();
 }
-
 
 //function CCE_SystemTime()
 //{
@@ -1104,43 +1130,7 @@ function CCE_SystemDate()
 //}
 function CCE_SystemTime()
 {
-    //return new Date().getTime();
-var PMAM ="";
-var FormatedTime = "";
-var currentTime = new Date();
-var hours = currentTime.getHours();
-var minutes = currentTime.getMinutes();
-var seconds = currentTime.getSeconds();
-    if (minutes < 10)
-    {
-    minutes = "0" + minutes
-    }
-    if (seconds < 10)
-    {
-    seconds = "0" + seconds
-    }
-     
-    
-    if ( hours < 10 )  
-    {
-       hours = "0" + hours
-    }
-    if(hours > 11)
-    {
-       PMAM = "PM";
-    } else {
-       PMAM = "AM" ;
-    }
-    if (hours > 12) 
-    {
-        hours = hours - 12; 
-        if ( hours < 10 )  
-        {
-           hours = "0" + hours
-        } 
-    }
-    FormatedTime = hours + ":" + minutes + ":" + seconds + " " + PMAM;
-    return FormatedTime;
+   return new Date().getTime();
 
 }
   
@@ -1243,6 +1233,49 @@ function CCE_DatePart(pValue1)
 {
 
     return null;
+}
+
+
+
+
+function FormatTime(currentTime)
+{
+var PMAM ="";
+var FormatedTime = "";
+var hours = currentTime.getHours();
+var minutes = currentTime.getMinutes();
+var seconds = currentTime.getSeconds();
+    if (minutes < 10)
+    {
+    minutes = "0" + minutes
+    }
+    if (seconds < 10)
+    {
+    seconds = "0" + seconds
+    }
+     
+    
+    if ( hours < 10 )  
+    {
+       hours = "0" + hours
+    }
+    if(hours > 11)
+    {
+       PMAM = "PM";
+    } else {
+       PMAM = "AM" ;
+    }
+    if (hours > 12) 
+    {
+        hours = hours - 12; 
+        if ( hours < 10 )  
+        {
+           hours = "0" + hours
+        } 
+    }
+    FormatedTime = hours + ":" + minutes + ":" + seconds + " " + PMAM;
+    return FormatedTime;
+
 }
 
 
