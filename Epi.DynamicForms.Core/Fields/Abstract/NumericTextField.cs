@@ -106,8 +106,10 @@ namespace MvcDynamicForms.Fields
                string regularExp = "^-?([0-9]*|\\d*\\.\\d{1}?\\d*)$";
                 var regex = new Regex(regularExp);
 
-                if (!regex.IsMatch(Value))
-                 
+                //if (!regex.IsMatch(Value))
+                
+                double testValue = 0.0;
+                if(!double.TryParse(Value, out testValue))
                 {
                     //invalid: it is not numeric
                     Error = "Value must be a number";
