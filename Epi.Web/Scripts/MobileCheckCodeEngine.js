@@ -424,23 +424,43 @@ Rule_Hide.prototype.Execute = function ()
          for (var i = 0; i < pCheckCodeList.length; i++) {
            var query = '#mvcdynamicfield_' + pCheckCodeList[i];
            var symbol = cce_Context.resolve(pCheckCodeList[i]);
-           if(symbol.Type == "radiobutton")
+           
+            switch (symbol.Type) 
             {
-                query = '.labelmvcdynamicfield_' + pCheckCodeList[i];
-                $(query).each(function(i, obj) 
-                {
-                    $(query).css("background-color","yellow");
-                });
-            }
-            else
-            {
+                case "radiobutton":
+                        
+                    query = '#mvcdynamicfield_' + pCheckCodeList[i] + "_fieldWrapper";
+                    $(query).find('span').css("background-color","yellow");
+                          
+                    break;
+                case "checkbox":
+                        
+                    query = '#mvcdynamicfield_' + pCheckCodeList[i] + "_fieldWrapper";
+                    $(query).find('span').css("background-color","yellow");
+                          
+                    break;
+                case "legalvalues":
+                    query = '#mvcdynamicfield_' + pCheckCodeList[i] + "_fieldWrapper";
+                    $(query).find('span').css("background-color","yellow");
+                    break;
+                case "datepicker":
+                    query = '#mvcdynamicfield_' + pCheckCodeList[i] + "_fieldWrapper";
+                    $(query).find('div').css("background-color","yellow");
+                        
+                    break;
+                case "timepicker":
+                    query = '#mvcdynamicfield_' + pCheckCodeList[i] + "_fieldWrapper";
+                    $(query).find('div').css("background-color","yellow");
+                    break;
 
-             $(query).css("background-color","yellow");
-             query = '#labelmvcdynamicfield_' + pCheckCodeList[i];
-            // $(query).hide();// no need to highlight the label
-             //CCE_AddToHilightedFieldsList(pCheckCodeList[i]);
-            
-             }
+                default:
+                    $(query).css("background-color","yellow");
+                    query = '#labelmvcdynamicfield_' + pCheckCodeList[i];
+                    break;
+
+            }
+
+ 
               CCE_AddToFieldsList(pCheckCodeList[i], 'HighlightedFieldsList');
          }
      }
