@@ -540,20 +540,40 @@ Rule_Hide.prototype.Execute = function ()
          {
           var query = '#mvcdynamicfield_' + pCheckCodeList[i];
           var symbol = cce_Context.resolve(pCheckCodeList[i]);
-           if(symbol.Type == "radiobutton")
+
+
+            switch (symbol.Type) 
             {
-                query = '.labelmvcdynamicfield_' + pCheckCodeList[i];
-                $(query).each(function(i, obj) 
-                {
+                case "radiobutton":
+                        
+                    query = '#mvcdynamicfield_' + pCheckCodeList[i] + "_fieldWrapper";
+                    $(query).find('span').removeAttr('Style');   
+                    break;
+                case "checkbox":
+                        
+                    query = '#mvcdynamicfield_' + pCheckCodeList[i] + "_fieldWrapper";
+                    $(query).find('span').removeAttr('Style');     
+                    break;
+                case "legalvalues":
+                    query = '#mvcdynamicfield_' + pCheckCodeList[i] + "_fieldWrapper";
+                    $(query).find('span').removeAttr('Style'); 
+                    break;
+               case "datepicker":
+                      query = '#mvcdynamicfield_' + pCheckCodeList[i] + "_fieldWrapper";
+                      $(query).find('div').css("background-color","white");
+                      break;
+                case "timepicker":
+                    query = '#mvcdynamicfield_' + pCheckCodeList[i] + "_fieldWrapper";
+                    $(query).find('div').css("background-color","white");
+                    break;
+
+                default:
                     $(query).css("background-color","white");
-                });
+                    query = '#labelmvcdynamicfield_' + pCheckCodeList[i];
+                    break;
+
             }
-            else
-            {
-                 $(query).css("background-color", "white");
-                 query = '#labelmvcdynamicfield_' + pCheckCodeList[i];
-                 //CCE_AddToHilightedFieldsList(pCheckCodeList[i]);
-             }
+ 
              CCE_RemoveFromFieldsList(pCheckCodeList[i], 'HighlightedFieldsList');
 
          }
