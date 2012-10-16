@@ -8,7 +8,11 @@ namespace Epi.Core.EnterInterpreter.Rules
 {
     public partial class Rule_Substring : EnterRule
     {
-        
+        object _result = null;
+        object _fullString = null;
+        object _startIndex = 0;
+        object _length = 0;
+
         private List<EnterRule> ParameterList = new List<EnterRule>();
 
 
@@ -25,24 +29,47 @@ namespace Epi.Core.EnterInterpreter.Rules
         /// <returns>object</returns>
         public override object Execute()
         {
-            object result = null;
-            object fullString = null;
-            object startIndex = 0;
-            object length = 0;
+            _result = null;
+            _fullString = null;
+            _startIndex = 0;
+            _length = 0;
 
-            fullString = this.ParameterList[0].Execute();
-            startIndex = this.ParameterList[1].Execute();
-            length = this.ParameterList[2].Execute();
+            _fullString = this.ParameterList[0].Execute();
 
-            if (!Util.IsEmpty(fullString))
+            if (!Util.IsEmpty(_fullString))
             {
-                if (fullString.ToString().Length >= int.Parse(startIndex.ToString()) - 1 + int.Parse(length.ToString()))
+                string fullString = _fullString.ToString();
+
+                _startIndex = this.ParameterList[1].Execute();
+                int start = int.Parse(_startIndex.ToString());
+
+
+                if (this.ParameterList.Count > 2)
                 {
-                    result = fullString.ToString().Substring(int.Parse(startIndex.ToString()) - 1, int.Parse(length.ToString()));
+                    _length = this.ParameterList[2].Execute();
+                }
+                else
+                {
+                    _length = fullString.Length;
+                }
+
+                int length = int.Parse(_length.ToString());
+
+                if (start + length > fullString.Length)
+                {
+                    length = fullString.Length - start + 1;
+                }
+                if (start < fullString.Length)
+                {
+                    _result = fullString.Substring(start - 1, length);
+                }
+                else
+                {
+                    _result = "";
                 }
             }
 
-            return result;
+            return _result;
         }
 
         public override void ToJavaScript(StringBuilder pJavaScriptBuilder)
