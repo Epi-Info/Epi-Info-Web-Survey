@@ -1074,13 +1074,30 @@ function CCE_Substring(pValue1, pValue2, pValue3)
 
         fullString = new String(pValue1);
         startIndex = new Number(pValue2);
-        length = new Number(pValue3);
 
         if (!(fullString == null && fullString !=""))
         {
-            if (fullString.ToString().Length >= startIndex - 1 + length)
+            if(pValue == null)
             {
-                result = fullString.substring(startIndex - 1, length);
+                length = fullString.length;
+            }
+            else
+            {
+               length = new Number(pValue3);
+            }
+
+            if (start + length > fullString.length)
+            {
+                length = fullString.length - start + 1;
+            }
+
+            if (start < fullString.length)
+            {
+                _result = fullString.substring(start - 1, length);
+            }
+            else
+            {
+                _result = "";
             }
         }
 
