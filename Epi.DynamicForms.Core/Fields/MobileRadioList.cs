@@ -118,7 +118,7 @@ namespace MvcDynamicForms.Fields
              
                     var rightlbl = new TagBuilder("label");
                     rightlbl.Attributes.Add("for", radId);
-                    
+                    rightlbl.Attributes.Add("class", "label" + inputName);
                     //StringBuilder StyleValues2 = new StringBuilder();
                     //StyleValues2.Append(GetRadioListStyle(_fontstyle.ToString(), null, null, null, null, IsHidden));
                     ////rightlbl.Attributes.Add("style", StyleValues2.ToString() + ";" + IsHighlightedStyle + ";" + IsHiddenStyle);
