@@ -642,7 +642,7 @@ Rule_Hide.prototype.Execute = function ()
      }
      catch (ex) 
      {
-
+      throw ex;
      }
  }
 
@@ -668,20 +668,8 @@ Rule_Hide.prototype.Execute = function ()
    switch (symbol.Type) 
             {
                 case "radiobutton":
-                    //$(query).checkboxradio('disable');
-                    query = '.mvcdynamicfield_' + pCheckCodeList[i];
-                    labelquery = '.labelmvcdynamicfield_' + pCheckCodeList[i];
-                    $(query).each(function(i, obj) 
-                    {
-                        $(query).attr('disabled', 'disabled');
-                        // $(query).attr('checked', '');
-                  
-                    });
-                        $(labelquery).each(function(i, obj) 
-                    {
-                            $(labelquery).attr('Style','color:#b3b3b3');
-                  
-                    });
+                    Query = '#mvcdynamicfield_' + pCheckCodeList[i] + "_fieldWrapper";
+                    $(Query).find('.ui-radio').addClass('ui-disabled'); 
                     break;
                 case "checkbox":
                         
@@ -789,14 +777,8 @@ query = '#mvcdynamicfield_' + pCheckCodeList[i];
    switch (symbol.Type) 
             {
                 case "radiobutton":
-                    //$(query).checkboxradio('enable');
-                    query = '.mvcdynamicfield_' + pCheckCodeList[i];
-                    labelquery = '.labelmvcdynamicfield_' + pCheckCodeList[i];
-                    $(query).each(function(i, obj) 
-                    {
-                         $(query).removeAttr('disabled');
-                         $(labelquery).removeAttr('Style');
-                    });
+                    Query = '#mvcdynamicfield_' + pCheckCodeList[i] + "_fieldWrapper";
+                    $(Query).find('.ui-radio').removeClass('ui-disabled'); 
                     break;
                 case "checkbox":
                         
