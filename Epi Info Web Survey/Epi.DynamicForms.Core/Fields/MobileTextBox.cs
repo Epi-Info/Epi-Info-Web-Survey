@@ -123,7 +123,7 @@ namespace MvcDynamicForms.Fields
 
              var wrapper = new TagBuilder(_fieldWrapper);
              wrapper.Attributes["class"] = _fieldWrapperClass;
-             wrapper.Attributes.Add("data-role", "fieldcontain");
+             //wrapper.Attributes.Add("data-role", "fieldcontain");
              if (_IsHidden)
              {
                  wrapper.Attributes["style"] = "display:none";
