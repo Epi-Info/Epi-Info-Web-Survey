@@ -88,7 +88,7 @@ namespace MvcDynamicForms.Fields
             txt.Attributes.Add("class", GetControlClass());
             txt.Attributes.Add("data-prompt-position", "topLeft:15");
             //txt.Attributes.Add("style", "position:absolute "+  ";color:#111; background-color:white ;width:" + _ControlWidth.ToString() + "px" + ErrorStyle + ";" + IsHiddenStyle + ";" + IsHighlightedStyle);
-            txt.Attributes.Add("style", "position:absolute " +  ErrorStyle + ";" + IsHiddenStyle + ";" + IsHighlightedStyle);
+            txt.Attributes.Add("style", "" +  ErrorStyle + ";" + IsHiddenStyle + ";" + IsHighlightedStyle);
             txt.MergeAttributes(_inputHtmlAttributes);
             html.Append(txt.ToString(TagRenderMode.SelfClosing));
 
