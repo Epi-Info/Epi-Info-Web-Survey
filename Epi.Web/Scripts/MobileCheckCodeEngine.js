@@ -661,26 +661,49 @@ Rule_Hide.prototype.Execute = function ()
          {
              var query = null;  
              var symbol = cce_Context.resolve(pCheckCodeList[i]);
-            if(symbol.Type == "radiobutton")
-            {
-                query = '.mvcdynamicfield_' + pCheckCodeList[i];
-                $(query).each(function(i, obj) 
-                {
-                  $(query).attr('disabled', 'disabled');
+ 
 
-                  
-                });
-            }
-            else
+
+  query = '#mvcdynamicfield_' + pCheckCodeList[i];
+   switch (symbol.Type) 
             {
-                query = '#mvcdynamicfield_' + pCheckCodeList[i];
-                $(query).attr('disabled', 'disabled');
-                query = '#labelmvcdynamicfield_' + pCheckCodeList[i];
-                if(symbol.Type == "checkbox")
-                { 
-                   $(query).attr('Style','color:#b3b3b3');
-                }
+                case "radiobutton":
+                    //$(query).checkboxradio('disable');
+                    query = '.mvcdynamicfield_' + pCheckCodeList[i];
+                    labelquery = '.labelmvcdynamicfield_' + pCheckCodeList[i];
+                    $(query).each(function(i, obj) 
+                    {
+                        $(query).attr('disabled', 'disabled');
+                        // $(query).attr('checked', '');
+                  
+                    });
+                        $(labelquery).each(function(i, obj) 
+                    {
+                            $(labelquery).attr('Style','color:#b3b3b3');
+                  
+                    });
+                    break;
+                case "checkbox":
+                        
+                    $(query).checkboxradio('disable');
+                    break;
+                case "legalvalues":
+                    $(query).selectmenu('disable');
+                    break;
+               case "datepicker":
+                     $(query).datebox('disable');
+                      break;
+                case "timepicker":
+                    $(query).datebox('disable');
+                    break;
+
+                default:
+                    $(query).textinput('disable');
+                    break;
+
             }
+
+
             CCE_AddToFieldsList(pCheckCodeList[i], 'DisabledFieldsList');
          }
      }
@@ -761,23 +784,38 @@ Rule_Hide.prototype.Execute = function ()
              var query = null;
 
              var symbol = cce_Context.resolve(pCheckCodeList[i]);
-            if(symbol.Type == "radiobutton")
+ 
+query = '#mvcdynamicfield_' + pCheckCodeList[i];
+   switch (symbol.Type) 
             {
-                query = '.mvcdynamicfield_' + pCheckCodeList[i];
-                $(query).each(function(i, obj) 
-                {
-                     $(query).removeAttr('disabled');
-                });
-            }
-            else
-            {
-                 query = '#mvcdynamicfield_' + pCheckCodeList[i];
-                 $(query).removeAttr('disabled');
-                 query = '#labelmvcdynamicfield_' + pCheckCodeList[i];
-                 if(symbol.Type == "checkbox")
-                { 
-                   $(query).attr('Style','color:#000000');
-                }
+                case "radiobutton":
+                    //$(query).checkboxradio('enable');
+                    query = '.mvcdynamicfield_' + pCheckCodeList[i];
+                    labelquery = '.labelmvcdynamicfield_' + pCheckCodeList[i];
+                    $(query).each(function(i, obj) 
+                    {
+                         $(query).removeAttr('disabled');
+                         $(labelquery).removeAttr('Style');
+                    });
+                    break;
+                case "checkbox":
+                        
+                    $(query).checkboxradio('enable');
+                    break;
+                case "legalvalues":
+                    $(query).selectmenu('enable');
+                    break;
+               case "datepicker":
+                     $(query).datebox('enable');
+                      break;
+                case "timepicker":
+                    $(query).datebox('enable');
+                    break;
+
+                default:
+                    $(query).textinput('enable');
+                    break;
+
             }
             CCE_RemoveFromFieldsList(pCheckCodeList[i], 'DisabledFieldsList');
          }
