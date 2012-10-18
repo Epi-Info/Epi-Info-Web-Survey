@@ -100,6 +100,7 @@
     <Compile Include="Fields\Literal.cs" />
     <Compile Include="Fields\MobileCheckBox.cs" />
     <Compile Include="Fields\MobileDatePicker.cs" />
+    <Compile Include="Fields\MobileGroupBox.cs" />
     <Compile Include="Fields\MobileLiteral.cs" />
     <Compile Include="Fields\MobileNumericTextBox.cs.cs" />
     <Compile Include="Fields\MobileRadioList.cs" />
