@@ -228,11 +228,15 @@ namespace Epi.Web.MVC.Utility
                                 //VariableDefinitions.AppendLine(string.Format(defineFormat, _FieldTypeID.Attribute("Name").Value, "commentlegal", "datasource",Value)); 
 
                                 break;
-                            //case "21"://GroupBox
-                            //    var _GroupBoxValue = GetControlValue(SurveyAnswer, _FieldTypeID.Attribute("UniqueId").Value);
-                            //    form.AddFields(GetGroupBox(_FieldTypeID, _Width, _Height, SurveyAnswer, _GroupBoxValue));
-                               
-                            //    break;
+                            case "21"://GroupBox
+                                //var _GroupBoxValue = GetControlValue(SurveyAnswer, _FieldTypeID.Attribute("UniqueId").Value);
+                                //form.AddFields(GetGroupBox(_FieldTypeID, _Width, _Height, SurveyAnswer, _GroupBoxValue));
+
+                                form.AddFields(GetGroupBox(_FieldTypeID, _Width, _Height, null));
+
+                              
+
+                                break;
                         }
                     }
 
@@ -798,32 +802,27 @@ namespace Epi.Web.MVC.Utility
 
             return DropDownValues.ToString();
         }
-        private static GroupBox GetGroupBox(XElement _FieldTypeID, double _Width, double _Height, string SurveyAnswer, string _ControlValue)
+        private static MobileGroupBox GetGroupBox(XElement _FieldTypeID, double _Width, double _Height, string SurveyAnswer)
         {
 
 
-            var GroupBox = new GroupBox();
+            var GroupBox = new MobileGroupBox();
 
-            GroupBox.Title = _FieldTypeID.Attribute("Name").Value;
-            GroupBox.Prompt = _FieldTypeID.Attribute("PromptText").Value;
-            GroupBox.RequiredMessage = "This field is required";
-            GroupBox.Key = _FieldTypeID.Attribute("Name").Value + "_GroupBox";
-            GroupBox.PromptTop = _Height * double.Parse(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value);
-            GroupBox.PromptLeft = _Width * double.Parse(_FieldTypeID.Attribute("ControlLeftPositionPercentage").Value);
-            GroupBox.Top = _Height * double.Parse(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value);
-            GroupBox.Left = _Width * double.Parse(_FieldTypeID.Attribute("ControlLeftPositionPercentage").Value);
-            //GroupBox.PromptWidth = _Width * double.Parse(_FieldTypeID.Attribute("ControlWidthPercentage").Value);
-            GroupBox.ControlHeight = _Height * double.Parse(_FieldTypeID.Attribute("ControlHeightPercentage").Value) - 12;
-            GroupBox.ControlWidth = _Width * double.Parse(_FieldTypeID.Attribute("ControlWidthPercentage").Value) - 12;
-            GroupBox.fontstyle = _FieldTypeID.Attribute("ControlFontStyle").Value;
-            GroupBox.fontSize = double.Parse(_FieldTypeID.Attribute("ControlFontSize").Value);
-            GroupBox.fontfamily = _FieldTypeID.Attribute("ControlFontFamily").Value;
-            GroupBox.ReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value);
-            GroupBox.IsHidden = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "HiddenFieldsList");
-            GroupBox.IsHighlighted = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "HighlightedFieldsList");
-            GroupBox.IsDisabled = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "DisabledFieldsList");
-
-
+            
+                GroupBox.FieldWrapper = "div";
+                GroupBox.Title = "";
+                GroupBox.Wrap = true;
+                GroupBox.Html = _FieldTypeID.Attribute("PromptText").Value;
+                GroupBox.Top = _Height * double.Parse(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value);
+                GroupBox.Left = _Width * double.Parse(_FieldTypeID.Attribute("ControlLeftPositionPercentage").Value);
+                GroupBox.CssClass = "EpiLabel";
+                GroupBox.fontSize = double.Parse(_FieldTypeID.Attribute("ControlFontSize").Value);
+                GroupBox.fontfamily = _FieldTypeID.Attribute("ControlFontFamily").Value;
+                GroupBox.fontstyle = _FieldTypeID.Attribute("ControlFontStyle").Value;
+                GroupBox.Height = _Height * double.Parse(_FieldTypeID.Attribute("ControlHeightPercentage").Value);
+                GroupBox.IsHidden = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "HiddenFieldsList");
+                GroupBox.Name = _FieldTypeID.Attribute("Name").Value;
+                GroupBox.Width = _Width * double.Parse(_FieldTypeID.Attribute("ControlWidthPercentage").Value);
 
 
             return GroupBox;
