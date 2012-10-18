@@ -53,7 +53,7 @@ namespace MvcDynamicForms.Fields
 
                 StyleValues.Append(GetMobileLiteralStyle(_fontstyle.ToString(), null, null, null, null, IsHidden));
                 //StyleValues.Append(";word-wrap:break-word;");
-                wrapper.Attributes.Add("data-role", "fieldcontain");
+               // wrapper.Attributes.Add("data-role", "fieldcontain");
                 wrapper.Attributes.Add(new KeyValuePair<string, string>("style", StyleValues.ToString()));
 
                 wrapper.InnerHtml = Html;
