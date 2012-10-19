@@ -651,3 +651,14 @@ text-decoration:none;
      background:white !important;
      padding: 10px !important;
  }
+
+/*div.ui-checkbox, div.ui-radio, .ui-btn select, .ui-Radio { font-weight:400;}*/
+.ui-btn-text { text-align:left !important;}
+
+div.EpiLabel[style*="font:"]{font-family:"Segoe UI",Tahoma,Geneva,Verdana !important; color: #333 !important; font-size-adjust:0.76 !important;}
+
+#url {height:60px !important;}
+
+/*.ui-btn-up-c {font-weight:400 !important;}*/
+
+span.ui-icon-arrow-d[style*="background-color: yellow;"]{background-color: #959595 !important;}
