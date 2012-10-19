@@ -27,7 +27,7 @@ namespace MvcDynamicForms.Fields
             prompt.Attributes.Add("Id", "label" + inputName);
             StringBuilder StyleValues = new StringBuilder();
             StyleValues.Append(GetContolStyle(_fontstyle.ToString(), _Prompttop.ToString(), _Promptleft.ToString(), null, Height.ToString(), IsHidden));
-            prompt.Attributes.Add("style", " width:99% !important");
+            prompt.Attributes.Add("style", "");
             html.Append(prompt.ToString());
             // error label
             if (!IsValid)
