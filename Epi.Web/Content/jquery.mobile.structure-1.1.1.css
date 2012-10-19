@@ -786,8 +786,8 @@ label.ui-submit { font-size: 16px; line-height: 1.4; font-weight: normal; margin
 .ui-controlgroup-horizontal .ui-controlgroup-last { margin-right: 0; }
 .ui-controlgroup .ui-checkbox label, .ui-controlgroup .ui-radio label { font-size: 16px; }
 @media all and (min-width: 450px){
-	.ui-field-contain .ui-controlgroup-label { vertical-align: top; display: inline-block; width: 20%; margin: 0 2% 0 0; }
-	.ui-field-contain .ui-controlgroup-controls { width: 60%; display: inline-block; }
+	.ui-field-contain .ui-controlgroup-label { vertical-align: top; display: inline-block; width: 90%; margin: 0 2% 0 0; }/*Updated width from 20 to 90*/
+	.ui-field-contain .ui-controlgroup-controls { width: 80%; display: inline-block; } /*Updated width from 60 to 80*/
 	.ui-field-contain .ui-controlgroup .ui-select { width: 100%; display: block; } 
 	.ui-field-contain .ui-controlgroup-horizontal .ui-select { width: auto; }
 	.ui-hide-label .ui-controlgroup-controls { width: 100%; }
@@ -822,6 +822,10 @@ label.ui-submit { font-size: 16px; line-height: 1.4; font-weight: normal; margin
 .ui-dialog { 
 	margin-top: -15px;
 }
+
+@media all and (min-width: 450px){
+.ui-checkbox { width: 80%; }/*Add class for checkbox to set width*/
+}
 .ui-checkbox, .ui-radio { position: relative; clear: both; margin: 0; z-index: 1; }
 .ui-checkbox .ui-btn, .ui-radio .ui-btn { margin: .5em 0; text-align: left; z-index: 2; }
 .ui-checkbox .ui-btn.ui-mini, .ui-radio .ui-btn.ui-mini { margin: .25em 0; }
@@ -843,7 +847,7 @@ label.ui-submit { font-size: 16px; line-height: 1.4; font-weight: normal; margin
 .ui-checkbox .ui-btn-icon-right .ui-icon, .ui-radio .ui-btn-icon-right .ui-icon { right: 15px; }
 .ui-checkbox .ui-mini.ui-btn-icon-right .ui-icon, .ui-radio .ui-mini.ui-btn-icon-right .ui-icon { right: 9px; }
 .ui-checkbox input,.ui-radio input { position:absolute; left:20px; top:50%; width: 10px; height: 10px; margin:-5px 0 0 0; outline: 0 !important; z-index: 1; }
-.ui-field-contain, fieldset.ui-field-contain { padding: .8em 0; margin: 0; border-width: 0 0 1px 0; overflow: visible; }
+.ui-field-contain, fieldset.ui-field-contain { padding: .8em 0; margin: 0; border-width: 0 0 0px 0; overflow: visible; }/*Updated Border-bottom from 1px to 0px*/
 .ui-field-contain:last-child { border-bottom-width: 0; }
 .ui-field-contain { max-width: 100%; } 
 @media all and (min-width: 450px){
@@ -880,8 +884,8 @@ label.ui-select { font-size: 16px; line-height: 1.4; font-weight: normal; margin
 .ui-li.ui-selectmenu-placeholder { display: none; }
 .ui-selectmenu .ui-header .ui-title { margin: 0.6em 46px 0.8em; }
 @media all and (min-width: 450px){
-	.ui-field-contain label.ui-select { vertical-align: top; display: inline-block; width: 20%; margin: 0 2% 0 0; }
-	.ui-field-contain .ui-select { width: 60%; display: inline-block; }
+	.ui-field-contain label.ui-select { vertical-align: top; display: inline-block; width: 90%; margin: 0 2% 0 0; } /*Updated Width from 20 to 90*/
+	.ui-field-contain .ui-select { width: 80%; display: inline-block; } /*Updated Width from 60 to 80*/
 	.ui-hide-label .ui-select { width: 100%; } 
 }
 .ui-selectmenu .ui-header h1:after { content: '.'; visibility: hidden; }
@@ -903,10 +907,10 @@ textarea.ui-input-text { height: 50px; -webkit-transition: height 200ms linear; 
 input.ui-mini, .ui-mini input, textarea.ui-mini { font-size: 14px; }
 textarea.ui-mini { height: 45px; }
 @media all and (min-width: 450px){
-	.ui-field-contain label.ui-input-text  { vertical-align: top; display: inline-block; width: 20%; margin: 0 2% 0 0 }
+	.ui-field-contain label.ui-input-text  { vertical-align: top; display: inline-block; width: 90%; margin: 0 2% 0 0 } /*Updated Width from 20 to 90*/
 	.ui-field-contain input.ui-input-text, 
 	.ui-field-contain textarea.ui-input-text, 
-	.ui-field-contain .ui-input-search { width: 60%; display: inline-block; } 
+	.ui-field-contain .ui-input-search { width: 80%; display: inline-block; } /*Updated Width from 60 to 80*/
 	.ui-hide-label input.ui-input-text, 
 	.ui-hide-label textarea.ui-input-text, 
 	.ui-hide-label .ui-input-search { width: 100%; }
