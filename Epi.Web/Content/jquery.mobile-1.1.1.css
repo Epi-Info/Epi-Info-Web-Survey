@@ -796,15 +796,15 @@ a.ui-link-inherit {
 /* Form field separator
 -----------------------------------------------------------------------------------------------------------*/
 .ui-br {
-	border-bottom: rgb(130,130,130);
+	/*border-bottom: rgb(130,130,130); /*Disabled Border-bottom*/
 	border-bottom: rgba(130,130,130,.3);
 	border-bottom-width: 1px;
-	border-bottom-style: solid;
+	border-bottom-style: solid;*/
 }
 /* Interaction cues
 -----------------------------------------------------------------------------------------------------------*/
 .ui-disabled {
-	opacity: 							.3;
+	opacity: .3;
 }
 .ui-disabled,
 .ui-disabled a {
