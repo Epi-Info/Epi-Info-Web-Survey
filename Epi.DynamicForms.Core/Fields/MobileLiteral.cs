@@ -113,7 +113,7 @@ namespace MvcDynamicForms.Fields
                 }
 
             }
-            //CssStyles.Append(";font:");//1
+            CssStyles.Append(";font:");//1
             //if (!string.IsNullOrEmpty(FontStyle.ToString()))
             //{
 
