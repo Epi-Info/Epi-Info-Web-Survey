@@ -240,6 +240,7 @@
     <Content Include="Content\css\MobilePage.css" />
     <Content Include="Content\css\overlay.png" />
     <Content Include="Content\css\page.css" />
+    <Content Include="Content\css\TabletEpiStyle.css" />
     <Content Include="Content\css\ui-lightness\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
     <Content Include="Content\css\ui-lightness\images\ui-bg_diagonals-thick_20_666666_40x40.png" />
     <Content Include="Content\css\ui-lightness\images\ui-bg_flat_10_000000_40x100.png" />
