@@ -102,8 +102,8 @@ namespace MvcDynamicForms.Fields
             txt.MergeAttributes(_inputHtmlAttributes);
             html.Append(txt.ToString(TagRenderMode.SelfClosing));
 
-            if (!string.IsNullOrEmpty(Pattern))
-            {
+            //if (!string.IsNullOrEmpty(Pattern))
+            //{
                 // adding scripts for date picker
                 var scripttimePicker = new TagBuilder("script");
                 //scriptDatePicker.InnerHtml = "$(function() { $('#" + inputName + "').datepicker({changeMonth: true,changeYear: true});});";
@@ -139,7 +139,7 @@ namespace MvcDynamicForms.Fields
                 }
 
                 html.Append(scripttimePicker.ToString(TagRenderMode.Normal));
-            }
+           // }
             
             //prevent date picker control to submit on enter click
             var scriptBuilder = new TagBuilder("script");
