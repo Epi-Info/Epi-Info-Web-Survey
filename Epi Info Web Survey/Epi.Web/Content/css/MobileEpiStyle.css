@@ -662,3 +662,7 @@ div.EpiLabel[style*="font:"]{font-family:"Segoe UI",Tahoma,Geneva,Verdana !impor
 /*.ui-btn-up-c {font-weight:400 !important;}*/
 
 span.ui-icon-arrow-d[style*="background-color: yellow;"]{background-color: #959595 !important;}
+
+span.ui-icon-checkbox-on[style*="background-color: yellow;"]{background-color: #4288b9 !important;}
+
+span.ui-icon-radio-on[style*="background-color: yellow;"]{background-color: #4288b9 !important;}
