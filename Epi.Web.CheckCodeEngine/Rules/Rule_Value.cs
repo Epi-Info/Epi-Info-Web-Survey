@@ -40,6 +40,10 @@ namespace Epi.Core.EnterInterpreter.Rules
                             this.VariableDataType = EpiInfo.Plugin.DataType.Date;
                             this.value = this.GetCommandElement(T.Tokens, 0);
                             break;
+                        case "<Literal_Time>":
+                            this.VariableDataType = EpiInfo.Plugin.DataType.Time;
+                            this.value = this.GetCommandElement(T.Tokens, 0);
+                            break;
                         case "<Literal>":
                         case "<Literal_String>":
                             this.VariableDataType = EpiInfo.Plugin.DataType.Text;
@@ -367,16 +371,14 @@ namespace Epi.Core.EnterInterpreter.Rules
                             }
                             break;
                         case EpiInfo.Plugin.DataType.Date:
+                        case EpiInfo.Plugin.DataType.DateTime:
                             pJavaScriptBuilder.Append(string.Format("new Date(\"{0}\").valueOf()",this.value.ToString()));
                             break;
-
-
                         case EpiInfo.Plugin.DataType.Number:
                             pJavaScriptBuilder.Append(string.Format("new Number({0}).valueOf()", this.value.ToString()));
                             break;
-                        case EpiInfo.Plugin.DataType.DateTime:
                         case EpiInfo.Plugin.DataType.Time:
-                            pJavaScriptBuilder.Append(this.value.ToString());
+                            pJavaScriptBuilder.Append(string.Format("new Date(\"01/01/1970 {0}\").valueOf()", this.value.ToString()));
                             break;
                         case EpiInfo.Plugin.DataType.Object:
                             if (this.value is EnterRule)
