@@ -153,7 +153,7 @@ namespace MvcDynamicForms.Fields
             {
                 if (_IsRequired == true)
                 {
-                    ControlClass.Append("required,custom[date]] text-input datepicker");
+                    ControlClass.Append("required,custom[date]] text-input datepicker({onClose:function(){setTimeout(" + _key + "_after,100);},changeMonth:true,changeYear:true});");
                 }
                 else
                 {
