@@ -94,12 +94,13 @@ namespace MvcDynamicForms.Fields
             {
                 //txt.Attributes.Add("class", "validate[custom[time],required] text-input datepicker");
                 txt.Attributes.Add("class", "validate[required,custom[time]] text-input datepicker");
-                txt.Attributes.Add("data-prompt-position", "topRight:15");
+                
+                txt.Attributes.Add("data-prompt-position", "topLeft:15");
             }
             else
             {
                 txt.Attributes.Add("class", "validate[custom[time]] text-input datepicker");
-                txt.Attributes.Add("data-prompt-position", "topRight:15");
+                txt.Attributes.Add("data-prompt-position", "topLeft:15");
             }
 
 
