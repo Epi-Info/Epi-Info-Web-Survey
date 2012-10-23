@@ -4,6 +4,7 @@ function CCE_Hide(pNameList, pIsExceptionList)
 {
         try
         {
+        if (eval(document.getElementById("IsMobile"))){
             if (pIsExceptionList)
             {
              CCE_ProcessHideExceptCommand(pNameList);
@@ -13,6 +14,7 @@ function CCE_Hide(pNameList, pIsExceptionList)
             {
                 CCE_ProcessHideCommand(pNameList);
                 
+            }
             }
         }
         catch (ex)
