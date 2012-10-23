@@ -108,6 +108,12 @@ namespace MvcDynamicForms.Fields
 
             var wrapper = new TagBuilder(_fieldWrapper);
             wrapper.Attributes["class"] = _fieldWrapperClass;
+            if (_IsHidden)
+            {
+                wrapper.Attributes["style"] = "display:none";
+
+            }
+            wrapper.Attributes["id"] = inputName + "_fieldWrapper";
             wrapper.InnerHtml = html.ToString();
             return wrapper.ToString();
         }

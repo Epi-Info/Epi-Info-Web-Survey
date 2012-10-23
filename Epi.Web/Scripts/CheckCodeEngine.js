@@ -34,40 +34,18 @@ function CCE_ProcessHideCommand(pCheckCodeList)
         //this.canvas.HideCheckCodeItems(controlsList);
         for (var i = 0; i < pCheckCodeList.length; i++) 
         {
-            var symbol = cce_Context.resolve(pCheckCodeList[i]);
-            var query = null;
-            if(symbol.Type == "radiobutton")
-            {
-                query = '.mvcdynamicfield_' + pCheckCodeList[i];
-                $(query).each(function(i, obj) 
-                {
-                    $(query).hide();    
-                });
-
-                query = '.labelmvcdynamicfield_' + pCheckCodeList[i];
-                $(query).each(function(i, obj) 
-                {
-                    $(query).hide();
-                });
-
-                 query = '#mvcdynamicfield_' + pCheckCodeList[i]+"_groupbox";
-                $(query).each(function(i, obj) 
-                {
-                    $(query).hide();
-                });
-            }
-            else
-            {
-                query = '#mvcdynamicfield_' + pCheckCodeList[i];
-                //clear the control value before hiding
-                CCE_ClearControlValue(query);
-
-                $(query).hide();
-                query = '#labelmvcdynamicfield_' + pCheckCodeList[i];
-                $(query).hide();
-            }
-            //CCE_AddToHiddenFieldsList(pCheckCodeList[i]);
-            CCE_AddToFieldsList(pCheckCodeList[i], 'HiddenFieldsList')
+             var symbol = cce_Context.resolve(pCheckCodeList[i]);
+             var query = null;
+             query = '#mvcdynamicfield_'  + pCheckCodeList[i] + "_fieldWrapper";
+             $(query).css("display","none");
+             if (!eval(document.getElementById("IsMobile"))){
+                 if (symbol.Type == "radiobutton")
+                 { 
+                 query = '#mvcdynamicfield_'  + pCheckCodeList[i] + "_groupbox_fieldWrapper";
+                 $(query).css("display","none");
+                 }
+             }
+             CCE_AddToFieldsList(pCheckCodeList[i], 'HiddenFieldsList')
         }
     }
 }
@@ -160,37 +138,16 @@ function CCE_ProcessUnHideCommand(pCheckCodeList)
             var symbol = cce_Context.resolve(pCheckCodeList[i]);
             var query = null;
            
-            if(symbol.Type == "radiobutton")
-            {
-             
-                query = '.mvcdynamicfield_' + pCheckCodeList[i];
-                $(query).each(function(i, obj) 
-                {
-                  // $(query).css("visibility", "	visible");
-                   $(query).css("dispaly", "	inline"); 
-                   $(query).show();
-                });
 
-                query = '.labelmvcdynamicfield_' + pCheckCodeList[i];
-                $(query).each(function(i, obj) 
-                {
-                  // $(query).css("visibility", "	visible");
-                  $(query).css("dispaly", "	inline");
-                   $(query).show();
-                });
-                 query = '#mvcdynamicfield_' + pCheckCodeList[i]+"_groupbox";
-                $(query).each(function(i, obj) 
-                {
-                    $(query).show();
-                });
-            }
-            else
-            {
-                query = '#mvcdynamicfield_' + pCheckCodeList[i];
-                $(query).show();
-                query = '#labelmvcdynamicfield_' + pCheckCodeList[i];
-                $(query).show();
-            }
+              query = '#mvcdynamicfield_'  + pCheckCodeList[i] + "_fieldWrapper";
+              $(query).removeAttr("style");
+               if (!eval(document.getElementById("IsMobile"))){
+                   if (symbol.Type == "radiobutton")
+                    {
+                    query = '#mvcdynamicfield_' + pCheckCodeList[i] + "_groupbox_fieldWrapper";
+                    $(query).removeAttr("style");
+                    }
+                } 
             CCE_RemoveFromFieldsList(pCheckCodeList[i], 'HiddenFieldsList');
         }
     }
@@ -318,7 +275,8 @@ CCE_Context.prototype.getValue = function (pName)
                         value = new Number(field.val()).valueOf();
                         return value;
                     case "radiobutton":
-                        var RadiofieldName = '.' + fieldName;
+                       var RadiofieldName = "." + fieldName;
+                         
                         value = -1; 
                         $(RadiofieldName).each(function(i, obj) 
                         {
@@ -366,12 +324,32 @@ CCE_Context.prototype.setValue = function (pName, pValue)
                 switch (cce_Symbol.Type) 
                 {
                    case "datepicker": //string has been converted to date for comparison with another date
-                        $(Jquery).datepicker("setDate", new Date(pValue));
-                        cce_Symbol.Value = pValue;
+
+                         if (eval(document.getElementById("IsMobile")))
+			 {
+                          var FormatedDate;
+                          var date = new Date();
+                          FormatedDate =date.getMonth()+ 1 +"/"+date.getDate()+"/"+date.getFullYear();
+                           cce_Symbol.Value = FormatedDate;
+                             $(Jquery).val(FormatedDate);
+			  }else{
+                          $(Jquery).datepicker("setDate", new Date(pValue));
+                          cce_Symbol.Value = pValue;
+			  
+			  }
                         break;
                     case "timepicker":
+                       if (eval(document.getElementById("IsMobile"))){
+                         var FormatedTime;
+                         var date = new Date();
+                         FormatedTime = FormatTime(date);
+                         $(Jquery).val(FormatedTime);
+                         cce_Symbol.Value = FormatedTime;
+			 }else{
                         $(Jquery).timepicker("setTime", new Date(pValue));
                         cce_Symbol.Value = pValue;
+			 
+			 }
                         break;
                    default:
                         $(Jquery).val(pValue);
@@ -467,6 +445,41 @@ Rule_Hide.prototype.Execute = function ()
          for (var i = 0; i < pCheckCodeList.length; i++) {
            var query = '#mvcdynamicfield_' + pCheckCodeList[i];
            var symbol = cce_Context.resolve(pCheckCodeList[i]);
+           if (eval(document.getElementById("IsMobile"))){
+            switch (symbol.Type) 
+            {
+                case "radiobutton":
+                        
+                    query = '#mvcdynamicfield_' + pCheckCodeList[i] + "_fieldWrapper";
+                    $(query).find('span').css("background-color","yellow");
+                          
+                    break;
+                case "checkbox":
+                        
+                    query = '#mvcdynamicfield_' + pCheckCodeList[i] + "_fieldWrapper";
+                    $(query).find('span').css("background-color","yellow");
+                          
+                    break;
+                case "legalvalues":
+                    query = '#mvcdynamicfield_' + pCheckCodeList[i] + "_fieldWrapper";
+                    $(query).find('span').css("background-color","yellow");
+                    break;
+                case "datepicker":
+                    query = '#mvcdynamicfield_' + pCheckCodeList[i] + "_fieldWrapper";
+                    $(query).find('div').css("background-color","yellow");
+                        
+                    break;
+                case "timepicker":
+                    query = '#mvcdynamicfield_' + pCheckCodeList[i] + "_fieldWrapper";
+                    $(query).find('div').css("background-color","yellow");
+                    break;
+
+                default:
+                    $(query).css("background-color","yellow");
+                    query = '#labelmvcdynamicfield_' + pCheckCodeList[i];
+                    break;
+                    }
+   }else{
            if(symbol.Type == "radiobutton")
             {
                 query = '.labelmvcdynamicfield_' + pCheckCodeList[i];
@@ -480,10 +493,11 @@ Rule_Hide.prototype.Execute = function ()
 
              $(query).css("background-color","yellow");
              query = '#labelmvcdynamicfield_' + pCheckCodeList[i];
-            // $(query).hide();// no need to highlight the label
-             //CCE_AddToHilightedFieldsList(pCheckCodeList[i]);
+            
             
              }
+}
+ 
               CCE_AddToFieldsList(pCheckCodeList[i], 'HighlightedFieldsList');
          }
      }
@@ -563,6 +577,39 @@ Rule_Hide.prototype.Execute = function ()
          {
           var query = '#mvcdynamicfield_' + pCheckCodeList[i];
           var symbol = cce_Context.resolve(pCheckCodeList[i]);
+
+if (eval(document.getElementById("IsMobile"))){
+            switch (symbol.Type) 
+            {
+                case "radiobutton":
+                        
+                    query = '#mvcdynamicfield_' + pCheckCodeList[i] + "_fieldWrapper";
+                    $(query).find('span').removeAttr('Style');   
+                    break;
+                case "checkbox":
+                        
+                    query = '#mvcdynamicfield_' + pCheckCodeList[i] + "_fieldWrapper";
+                    $(query).find('span').removeAttr('Style');     
+                    break;
+                case "legalvalues":
+                    query = '#mvcdynamicfield_' + pCheckCodeList[i] + "_fieldWrapper";
+                    $(query).find('span').removeAttr('Style'); 
+                    break;
+               case "datepicker":
+                      query = '#mvcdynamicfield_' + pCheckCodeList[i] + "_fieldWrapper";
+                      $(query).find('div').css("background-color","white");
+                      break;
+                case "timepicker":
+                    query = '#mvcdynamicfield_' + pCheckCodeList[i] + "_fieldWrapper";
+                    $(query).find('div').css("background-color","white");
+                    break;
+
+                default:
+                    $(query).css("background-color","white");
+                    query = '#labelmvcdynamicfield_' + pCheckCodeList[i];
+                    break;
+                    }
+}else{
            if(symbol.Type == "radiobutton")
             {
                 query = '.labelmvcdynamicfield_' + pCheckCodeList[i];
@@ -577,6 +624,8 @@ Rule_Hide.prototype.Execute = function ()
                  query = '#labelmvcdynamicfield_' + pCheckCodeList[i];
                  //CCE_AddToHilightedFieldsList(pCheckCodeList[i]);
              }
+        }
+ 
              CCE_RemoveFromFieldsList(pCheckCodeList[i], 'HighlightedFieldsList');
 
          }
@@ -645,7 +694,7 @@ Rule_Hide.prototype.Execute = function ()
      }
      catch (ex) 
      {
-
+      throw ex;
      }
  }
 
@@ -664,6 +713,37 @@ Rule_Hide.prototype.Execute = function ()
          {
              var query = null;  
              var symbol = cce_Context.resolve(pCheckCodeList[i]);
+ 
+
+if (eval(document.getElementById("IsMobile"))){
+  query = '#mvcdynamicfield_' + pCheckCodeList[i];
+   switch (symbol.Type) 
+            {
+                case "radiobutton":
+                    Query = '#mvcdynamicfield_' + pCheckCodeList[i] + "_fieldWrapper";
+                    $(Query).find('.ui-radio').addClass('ui-disabled'); 
+                    break;
+                case "checkbox":
+                        
+                    $(query).checkboxradio('disable');
+                    break;
+                case "legalvalues":
+                    $(query).selectmenu('disable');
+                    break;
+               case "datepicker":
+                     $(query).datebox('disable');
+                      break;
+                case "timepicker":
+                    $(query).datebox('disable');
+                    break;
+
+                default:
+                    $(query).textinput('disable');
+                    break;
+
+            }
+
+}else{
             if(symbol.Type == "radiobutton")
             {
                 query = '.mvcdynamicfield_' + pCheckCodeList[i];
@@ -678,6 +758,7 @@ Rule_Hide.prototype.Execute = function ()
                 $(query).attr('disabled', 'disabled');
                 query = '#labelmvcdynamicfield_' + pCheckCodeList[i];
             }
+}
             CCE_AddToFieldsList(pCheckCodeList[i], 'DisabledFieldsList');
          }
      }
@@ -758,6 +839,34 @@ Rule_Hide.prototype.Execute = function ()
              var query = null;
 
              var symbol = cce_Context.resolve(pCheckCodeList[i]);
+ if (eval(document.getElementById("IsMobile"))){
+query = '#mvcdynamicfield_' + pCheckCodeList[i];
+   switch (symbol.Type) 
+            {
+                case "radiobutton":
+                    Query = '#mvcdynamicfield_' + pCheckCodeList[i] + "_fieldWrapper";
+                    $(Query).find('.ui-radio').removeClass('ui-disabled'); 
+                    break;
+                case "checkbox":
+                        
+                    $(query).checkboxradio('enable');
+                    break;
+                case "legalvalues":
+                    $(query).selectmenu('enable');
+                    break;
+               case "datepicker":
+                     $(query).datebox('enable');
+                      break;
+                case "timepicker":
+                    $(query).datebox('enable');
+                    break;
+
+                default:
+                    $(query).textinput('enable');
+                    break;
+
+            }
+  }else{
             if(symbol.Type == "radiobutton")
             {
                 query = '.mvcdynamicfield_' + pCheckCodeList[i];
@@ -772,6 +881,7 @@ Rule_Hide.prototype.Execute = function ()
                 $(query).removeAttr('disabled');
                 query = '#labelmvcdynamicfield_' + pCheckCodeList[i];
             }
+}
             CCE_RemoveFromFieldsList(pCheckCodeList[i], 'DisabledFieldsList');
          }
      }
@@ -918,7 +1028,12 @@ function CCE_RemoveFromFieldsList(FieldName,ListName) {
                 switch (cce_Symbol.Type) 
                 {
                     case "checkbox":
-                        $(controlId).attr('checked', false);
+		    if (eval(document.getElementById("IsMobile"))){
+                          $(controlId).attr('checked', false).checkboxradio("refresh");
+                          $('.ui-checkbox').removeClass('ui-disabled');
+			  }else{
+                           $(controlId).attr('checked', false);
+			  }
                         break;
                     default:
                         $(controlId).val('');
@@ -1063,6 +1178,36 @@ function CCE_Days(pValue1, pValue2)
     var result = Math.round(Math.abs((date1.getTime() - date2.getTime())/(oneDay)));
 
     return result;
+}
+/////////////////Simple  Dialogbox //////////////////////
+function CCE_ContextOpenMobileSimpleDialogBox(Title,Prompt,id) 
+{
+        var passcode1 = '@Model.PassCode';
+   
+     
+                         $('#'+ id).simpledialog({
+                'mode' : 'blank',
+                'headerText' : Title,
+                'prompt': Title,
+                'forceInput': false,
+                'useModal':true,
+                'buttons' : {
+                              'OK': {
+                                click: function () {
+                                  $('#dialogoutput').text('OK');
+                                }
+                              }
+                       
+                            },
+                       'fullHTML': "<div id='SimpleDialogBox' title='"+ Title +"'><p><label id='SimpleDialogBoxPrempt'>"+ Prompt +"</label></p><p style='text-align:right;'><button  id='SimpleDialogBoxButton' type='button' style='width:100%;'onclick='CCE_CloseSimpleDialogBox("+ id.toString() +");'>Ok</button></p></div>"
+                  })
+}
+
+function CCE_CloseMobileSimpleDialogBox(id) 
+{
+        
+        $(id).simpledialog('close');
+       
 }
 
 function CCE_Substring(pValue1, pValue2, pValue3) 
@@ -1219,6 +1364,49 @@ function CCE_DatePart(pValue1)
 {
 
     return null;
+}
+
+
+
+
+function FormatTime(currentTime)
+{
+var PMAM ="";
+var FormatedTime = "";
+var hours = currentTime.getHours();
+var minutes = currentTime.getMinutes();
+var seconds = currentTime.getSeconds();
+    if (minutes < 10)
+    {
+    minutes = "0" + minutes
+    }
+    if (seconds < 10)
+    {
+    seconds = "0" + seconds
+    }
+     
+    
+    if ( hours < 10 )  
+    {
+       hours = "0" + hours
+    }
+    if(hours > 11)
+    {
+       PMAM = "PM";
+    } else {
+       PMAM = "AM" ;
+    }
+    if (hours > 12) 
+    {
+        hours = hours - 12; 
+        if ( hours < 10 )  
+        {
+           hours = "0" + hours
+        } 
+    }
+    FormatedTime = hours + ":" + minutes + ":" + seconds + " " + PMAM;
+    return FormatedTime;
+
 }
 
 
@@ -1421,4 +1609,9 @@ function CCE_StrLEN(pValue)
     }
 }
 
+     function OpenVideoDialogMobile(){
+//       $("#VideoDialog").popup('open', options);
+ //document.getElementById("VideoDialog").style.display ="true";
+ 
+    }
 cce_Context = new CCE_Context();
