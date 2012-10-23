@@ -1222,7 +1222,7 @@ function CCE_Substring(pValue1, pValue2, pValue3)
 
         if (!(fullString == null && fullString !=""))
         {
-            if(pValue == null)
+            if(pValue1 == null)
             {
                 length = fullString.length;
             }
@@ -1231,18 +1231,18 @@ function CCE_Substring(pValue1, pValue2, pValue3)
                length = new Number(pValue3);
             }
 
-            if (start + length > fullString.length)
+            if (startIndex + length > fullString.length)
             {
-                length = fullString.length - start + 1;
+                length = fullString.length - startIndex + 1;
             }
 
-            if (start < fullString.length)
+            if (startIndex < fullString.length)
             {
-                _result = fullString.substring(start - 1, length);
+                result = fullString.substring(startIndex - 1, length);
             }
             else
             {
-                _result = "";
+                result = "";
             }
         }
 
@@ -1590,6 +1590,18 @@ function  CCE_YesNoClick(Val)
     }
     $('#DialogBox').dialog("close");
         
+}
+
+function CCE_FindText(pValue1, pValue2)
+{
+    if(pValue1 != null && pValue2 != null)
+    {
+        return pValue1.to().indexOf(pValue2);
+    }
+    else
+    {
+        return -1;
+    }
 }
 
 
