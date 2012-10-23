@@ -615,12 +615,13 @@ if (eval(document.getElementById("IsMobile"))){
                 query = '.labelmvcdynamicfield_' + pCheckCodeList[i];
                 $(query).each(function(i, obj) 
                 {
-                    $(query).css("background-color","white");
+                  $(query).css("background-color", "");
                 });
             }
             else
             {
-                 $(query).css("background-color", "white");
+                $(query).css("background-color", "");
+               
                  query = '#labelmvcdynamicfield_' + pCheckCodeList[i];
                  //CCE_AddToHilightedFieldsList(pCheckCodeList[i]);
              }
