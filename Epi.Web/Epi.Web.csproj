@@ -432,19 +432,7 @@
     <Content Include="Views\Survey\Index.Mobile.cshtml" />
     <Content Include="Views\Final\Index.Mobile.cshtml" />
     <Content Include="Views\Shared\Exception.Mobile.cshtml" />
-    <Content Include="Views\Home\Index.Android.cshtml" />
-    <Content Include="Views\Home\Index.Opera.cshtml" />
-    <Content Include="Views\Survey\Index.Android.cshtml" />
-    <Content Include="Views\Shared\_Layout.Opera.cshtml" />
-    <Content Include="Views\Shared\_Layout.Android.cshtml" />
-    <Content Include="Views\Final\Index.Android.cshtml" />
-    <Content Include="Views\Final\Index.Opera.cshtml" />
-    <Content Include="Views\Shared\Exception.Opera.cshtml" />
-    <Content Include="Views\Shared\Exception.Android.cshtml" />
     <Content Include="Views\Login\Index.Mobile.cshtml" />
-    <Content Include="Views\Survey\Index.Opera.cshtml" />
-    <Content Include="Views\Login\Index.Android.cshtml" />
-    <Content Include="Views\Login\Index.Opera.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
