@@ -81,7 +81,7 @@
             show: "blind",
             hide: "blind",
             resizable: false,
-            height: 370,
+            height: 420,
             modal: true
         });
 
@@ -132,6 +132,8 @@
 
         var responseUrl = GetRedirectionUrl();
         $('#url').val(responseUrl);
+        var Subject ="Link for Survey: " + '@Model.SurveyInfo.SurveyName' ;
+        $('#Subject').val(Subject);
 
         var passcode = '@Model.PassCode';
         $('#spPassCode').text(passcode);
@@ -170,12 +172,14 @@
             //var surveyName = $("#_surveyName").val();
             var surveyName = '@Model.SurveyInfo.SurveyName';
             var passCode = $('#spPassCode').text();
+            var EmailSubject = $('#Subject').val();
+             
             //url to post for email to be sent
             var postUrl = '@Url.Action("Notify","Post")';
             if (ValidateEmail(emailAddress) && ValidateEmail(confirmemail)) {
                 if ($.trim(emailAddress) == $.trim(confirmemail)) {
                     //Call notify function to send notification
-                    NotifyByEmail(emailAddress, redirectUrl, surveyName, postUrl, passCode);
+                    NotifyByEmail(emailAddress, redirectUrl, surveyName, postUrl, passCode,EmailSubject);
                     //close the modal popup after processing
                     $("#dialog").dialog("close");
                 }
@@ -400,7 +404,7 @@
                   <hr/>
                   <p>Optionally enter your email address to have the Survey Link and Pass Code emailed to you.</p>
                   
-               
+               <p><span style="font-weight:bold;">Email Subject:</span><br /><textarea id="Subject" cols="65"  style="  height:30px;  white-space:pre; background:#d6e7f5; border:1px solid #aecfea; padding:4px; margin-top:4px;"></textarea></p>
                 
                 <p><label for="email">Email:</label> <input id="email" type="text" style="width: 200px; margin-left:48px;"/></p>
                   <p><label for="confirmemail">Confirm Email:</label> <input id="confirmemail" type="text" style="width: 200px;"/>

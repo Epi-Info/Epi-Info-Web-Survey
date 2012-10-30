@@ -14,11 +14,11 @@ namespace Epi.Web.Controllers
 
         [AcceptVerbs(HttpVerbs.Post)]
        [ValidateAntiForgeryToken]
-        public JsonResult Notify(string emailAddress, string redirectUrl, string surveyName,string passCode)
+        public JsonResult Notify(string emailAddress, string redirectUrl, string surveyName,string passCode, string EmailSubject)
         {
             try
             {
-                if (EmailMessage.SendMessage(emailAddress, redirectUrl, surveyName, passCode))
+                if (EmailMessage.SendMessage(emailAddress, redirectUrl, surveyName, passCode, EmailSubject))
                 {
                     return Json(true);
                 }
