@@ -18,7 +18,7 @@ namespace Epi.Web.Utility
         /// <param name="surveyName">Name of the survey</param>
         /// <param name="passCode"> Code for accessing an unfinished survey </param>
         /// <returns></returns>
-        public static bool SendMessage(string emailAddress, string redirectUrl, string surveyName, string passCode)
+        public static bool SendMessage(string emailAddress, string redirectUrl, string surveyName, string passCode, string EmailSubject)
         {
             try
             {
@@ -61,7 +61,7 @@ namespace Epi.Web.Utility
 
                 System.Net.Mail.MailMessage message = new System.Net.Mail.MailMessage();
                 message.To.Add(emailAddress);
-                message.Subject = "Link for Survey: " + surveyName; 
+                message.Subject = EmailSubject;      // "Link for Survey: " + surveyName; 
                 message.From = new System.Net.Mail.MailAddress(ConfigurationManager.AppSettings["EMAIL_FROM"].ToString());
                 message.Body = redirectUrl + " and Pass Code is: " + passCode;
                 System.Net.Mail.SmtpClient smtp = new System.Net.Mail.SmtpClient(ConfigurationManager.AppSettings["SMTP_HOST"].ToString());

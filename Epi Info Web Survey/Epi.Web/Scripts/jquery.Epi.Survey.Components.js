@@ -1,13 +1,14 @@
 ﻿
 
 
-function NotifyByEmail(emailAddress, redirectUrl, surveyName, postUrl,passCode) {
+function NotifyByEmail(emailAddress, redirectUrl, surveyName, postUrl,passCode,EmailSubject) {
     /*post email address and redirect url asynchronously to Post controller */
 
     var user = { 'emailAddress': emailAddress,
         'redirectUrl': redirectUrl,
         'surveyName': surveyName,
         'passCode':passCode,
+        'EmailSubject':EmailSubject,
         __RequestVerificationToken: $("input[name=__RequestVerificationToken]").val()
     };
 
