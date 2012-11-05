@@ -95,27 +95,27 @@
         var passcode = '@Model.PassCode';
         $('#spPassCode').text(passcode);
 
-        if ('@Model.IsSaved' == 'True') {
+//        if ('@Model.IsSaved' == 'True') {
 
-            if ('@Model.StatusId' == '1') { //if clicking the save button for the first time
-                $('#successContent').show();
-                $('#successContent').append('<div class="success"><div class="image"><img src="@Url.Content("~/Content/images/button_check.png")" style="vertical-align:middle; padding-right: 5px;  width:24px;" alt=""/></div><div class="message">Your survey has been saved.<p style="text-align:left;  margin-top:4px; margin-bottom:2px;"><button id="copy" type="button" name="copy" class="copylink">Get Survey Link & Pass Code</button></p></div><div style="clear:both;"></div></div>')
+//            if ('@Model.StatusId' == '1') { //if clicking the save button for the first time
+//                $('#successContent').show();
+//                $('#successContent').append('<div class="success"><div class="image"><img src="@Url.Content("~/Content/images/button_check.png")" style="vertical-align:middle; padding-right: 5px;  width:24px;" alt=""/></div><div class="message">Your survey has been saved.<p style="text-align:left;  margin-top:4px; margin-bottom:2px;"><button id="copy" type="button" name="copy" class="copylink">Get Survey Link & Pass Code</button></p></div><div style="clear:both;"></div></div>')
 
-                
+//                
 
-                //call your jquery modal popup method
-                $("#dialog").dialog("open");
-                
-            }
-            else {
+//                //call your jquery modal popup method
+//                $("#dialog").dialog("open");
+//                
+//            }
+//            else {
 
-                
+//                
 
-                $('#successContent').show(); //in subsequest click we just show that the survey has been saved not the modal popup
-                $('#successContent').append('<div class="success"><div class="image"><img src="@Url.Content("~/Content/images/button_check.png")" style="vertical-align:middle; padding-right: 5px;  width:24px;" alt=""/></div><div class="message">Your survey has been saved.<p style="text-align:left; margin-top:4px; margin-bottom:2px;"><button id="copy" type="button" name="copy" class="copylink">Get Survey Link & Pass Code</button></p></div><div style="clear:both;"></div></div>')
-            }
-            return true;
-        }
+//                $('#successContent').show(); //in subsequest click we just show that the survey has been saved not the modal popup
+//                $('#successContent').append('<div class="success"><div class="image"><img src="@Url.Content("~/Content/images/button_check.png")" style="vertical-align:middle; padding-right: 5px;  width:24px;" alt=""/></div><div class="message">Your survey has been saved.<p style="text-align:left; margin-top:4px; margin-bottom:2px;"><button id="copy" type="button" name="copy" class="copylink">Get Survey Link & Pass Code</button></p></div><div style="clear:both;"></div></div>')
+//            }
+//            return true;
+//        }
 
     });
 
@@ -168,7 +168,50 @@
         });
 
         
- 
+ /////////////////////Save Start///////////////////////
+
+   var IsSaved  =  document.getElementById("HiddenIsSaved").value;
+   var StatusId = document.getElementById("HiddenStatusId").value;
+   
+    var Subject ="Link for Survey: " + '@Model.SurveyInfo.SurveyName' ;
+    var passcode1 = '@Model.PassCode';
+    //if (StatusId == 'false' && '@Model.StatusId' != '2' ) { //if clicking the save button for the first time
+
+     if ('@Model.IsSaved' == 'True') 
+     {
+
+          
+              if ('@Model.StatusId' == '1' ) { //if clicking the save button for the first time    
+
+                         $('#Savebutton1').simpledialog({
+                'mode' : 'blank',
+                'prompt': false,
+                'forceInput': false,
+                'useModal':true,
+                'buttons' : {
+                              'OK': {
+                                click: function () {
+                                  $('#dialogoutput').text('OK');
+                                }
+                              }
+                       
+                            },
+                  'fullHTML': "<div class='success'><div class='image'><img src='../../Content/images/button_check.png' style='vertical-align: middle; padding-right:5px; width:24px;'alt=''/></div><div class='message' style='width:85% !important;'>Your Survey has been saved.</div><div style='clear:both;'></div></div>  <p><span style='font-weight:bold;'>Survey Link:</span><br /><textarea " + "value=" + GetRedirectionUrl().toString() + "  id='url' cols='65'  style='  height:45px;  white-space:pre; background:#d6e7f5; border:1px solid #aecfea; padding:4px; margin-top:4px;' readonly='readonly'>" + GetRedirectionUrl().toString() + "</textarea></p><p style='font-weight:bold;'>Pass Code: <span id='spPassCode' style='font-size:12pt; background:#d6e7f5; border:1px solid #aecfea; padding:4px 10px;'>" + passcode1 + "</span></p> <hr/> <p>Enter your email address to have the Survey Link and Pass Code emailed to you.</p><p><span style='font-weight:bold;'>Email Subject:</span><br /><textarea id='Subject' cols='65'  style='  height:30px;  white-space:pre; border:1px solid #aecfea; padding:4px; margin-top:4px;'>" + Subject +"</textarea></p><p><label for='email' style='font-weight:bold;'>Email:</label> <input id='email' type='email' /></p>  <p><label for='confirmemail'style='font-weight:bold;'>Confirm Email:</label> <input id='confirmemail' type='email' /><div align='center'> <a  onclick ='SendEmail();'  class='login'  style='width:50px; padding:8px 15px !important;'>Send Email</a></div></p>  <br /> <p style='font-size: 8pt; padding: 5px; background: #ffffa8; margin-top:-5px;'><strong>Note:</strong> Your email address will not be saved and will only be used to send you the survey link.</p>"
+                         })
+
+                 }
+
+     }
+     if ('@Model.StatusId' == '2' && document.getElementById("HiddensuccessContent").value == "false")
+     {
+                    document.getElementById("HiddensuccessContent").value = "true";
+                    $('#successContent').show();
+                    $('#successContent').append('<div class="success"><div class="image"><img src="@Url.Content("~/Content/images/button_check.png")" style="vertical-align:middle; padding-right: 5px; width:24px" alt=""/></div><div class="message"> Your survey has been saved.<p style="text-align:left; margin-top:4px; margin-bottom:2px;"><button id="Savebutton2" type="button"  class="copylink">Get Survey Link & Pass Code</button></p></div><div style="clear:both;"></div></div>')
+
+      }
+
+
+ ////////////////////Save End/////////////////////////
  
 
     });
@@ -213,7 +256,18 @@
  /*Clicking the save button to save the survey*/
  function Save() 
       {
-        SaveSurvey();
+       //SaveSurvey();
+             //debugger;
+        //set the is_save_action hidden variable value to true to indicate that save button has been clicked
+        $("#myform")[0].is_save_action.value = 'true';
+        //set the action path of the current form so when it is submitted by clicking the save button it posts to the path 
+        $("#myform")[0].action = window.location.href;
+        //detach the validation engine as we don't want to validate data on save button click
+        $('#myform').validationEngine('detach');
+        //posting the form
+        $('#myform').submit();
+        // return false;
+
       }
  function SaveSurvey()
  {
@@ -227,53 +281,51 @@
  }
  // save button dialog
    
-   $(document).delegate('#Savebutton1', 'click', function() {
+    $(document).delegate('#Savebutton1', 'click', function() {
 
-   var IsSaved  =  document.getElementById("HiddenIsSaved").value;
-   var StatusId = document.getElementById("HiddenStatusId").value;
-   
-    var Subject ="Link for Survey: " + '@Model.SurveyInfo.SurveyName' ;
-    var passcode1 = '@Model.PassCode';
-    if (StatusId == 'false' && '@Model.StatusId' != '2' ) { //if clicking the save button for the first time
-                
-                    $('#successContent').show();
-                    $('#successContent').append('<div class="success"><div class="image"><img src="@Url.Content("~/Content/images/button_check.png")" style="vertical-align:middle; padding-right: 5px;  width:24px;" alt=""/></div><div class="message">Your survey has been saved.<p style="text-align:left; margin-top:4px; margin-bottom:2px;"><button id="Savebutton2" type="button" name="copy" class="copylink">Get Survey Link & Pass Code</button></p></div><div style="clear:both;"></div></div>')
+//   var IsSaved  =  document.getElementById("HiddenIsSaved").value;
+//   var StatusId = document.getElementById("HiddenStatusId").value;
+//   
+//    var Subject ="Link for Survey: " + '@Model.SurveyInfo.SurveyName' ;
+//    var passcode1 = '@Model.PassCode';
+//    if (StatusId == 'false' && '@Model.StatusId' != '2' ) { //if clicking the save button for the first time
+//                
+//                    $('#successContent').show();
+//                    $('#successContent').append('<div class="success"><div class="image"><img src="@Url.Content("~/Content/images/button_check.png")" style="vertical-align:middle; padding-right: 5px;  width:24px;" alt=""/></div><div class="message">Your survey has been saved.<p style="text-align:left; margin-top:4px; margin-bottom:2px;"><button id="Savebutton2" type="button" name="copy" class="copylink">Get Survey Link & Pass Code</button></p></div><div style="clear:both;"></div></div>')
 
-                         $(this).simpledialog({
-                'mode' : 'blank',
-                'prompt': false,
-                'forceInput': false,
-                'useModal':true,
-                'buttons' : {
-                              'OK': {
-                                click: function () {
-                                  $('#dialogoutput').text('OK');
-                                }
-                              }
-                       
-                            },
-                      'fullHTML': "<div class='success'><div class='image'><img src='../../Content/images/button_check.png' style='vertical-align: middle; padding-right:5px; width:24px;'alt=''/></div><div class='message' style='width:85% !important;'>Your Survey has been saved.</div><div style='clear:both;'></div></div>  <p><span style='font-weight:bold;'>Survey Link:</span><br /><textarea " + "value=" + GetRedirectionUrl().toString() + "  id='url' cols='65'  style='  height:45px;  white-space:pre; background:#d6e7f5; border:1px solid #aecfea; padding:4px; margin-top:4px;' readonly='readonly'>" + GetRedirectionUrl().toString() + "</textarea></p><p style='font-weight:bold;'>Pass Code: <span id='spPassCode' style='font-size:12pt; background:#d6e7f5; border:1px solid #aecfea; padding:4px 10px;'>" + passcode1 + "</span></p> <hr/> <p>Enter your email address to have the Survey Link and Pass Code emailed to you.</p><p><span style='font-weight:bold;'>Email Subject:</span><br /><textarea id='Subject' cols='65'  style='  height:30px;  white-space:pre; border:1px solid #aecfea; padding:4px; margin-top:4px;'>" + Subject +"</textarea></p><p><label for='email' style='font-weight:bold;'>Email:</label> <input id='email' type='email' /></p>  <p><label for='confirmemail'style='font-weight:bold;'>Confirm Email:</label> <input id='confirmemail' type='email' /><div align='center'> <a  onclick ='SendEmail();'  class='login'  style='width:50px; padding:8px 15px !important;'>Send Email</a></div></p>  <br /> <p style='font-size: 8pt; padding: 5px; background: #ffffa8; margin-top:-5px;'><strong>Note:</strong> Your email address will not be saved and will only be used to send you the survey link.</p>"
-                         })
+//                         $(this).simpledialog({
+//                'mode' : 'blank',
+//                'prompt': false,
+//                'forceInput': false,
+//                'useModal':true,
+//                'buttons' : {
+//                              'OK': {
+//                                click: function () {
+//                                  $('#dialogoutput').text('OK');
+//                                }
+//                              }
+//                       
+//                            },
+//                      'fullHTML': "<div class='success'><div class='image'><img src='../../Content/images/button_check.png' style='vertical-align: middle; padding-right:5px; width:24px;'alt=''/></div><div class='message' style='width:85% !important;'>Your Survey has been saved.</div><div style='clear:both;'></div></div>  <p><span style='font-weight:bold;'>Survey Link:</span><br /><textarea " + "value=" + GetRedirectionUrl().toString() + "  id='url' cols='65'  style='  height:45px;  white-space:pre; background:#d6e7f5; border:1px solid #aecfea; padding:4px; margin-top:4px;' readonly='readonly'>" + GetRedirectionUrl().toString() + "</textarea></p><p style='font-weight:bold;'>Pass Code: <span id='spPassCode' style='font-size:12pt; background:#d6e7f5; border:1px solid #aecfea; padding:4px 10px;'>" + passcode1 + "</span></p> <hr/> <p>Enter your email address to have the Survey Link and Pass Code emailed to you.</p><p><span style='font-weight:bold;'>Email Subject:</span><br /><textarea id='Subject' cols='65'  style='  height:30px;  white-space:pre; border:1px solid #aecfea; padding:4px; margin-top:4px;'>" + Subject +"</textarea></p><p><label for='email' style='font-weight:bold;'>Email:</label> <input id='email' type='email' /></p>  <p><label for='confirmemail'style='font-weight:bold;'>Confirm Email:</label> <input id='confirmemail' type='email' /><div align='center'> <a  onclick ='SendEmail();'  class='login'  style='width:50px; padding:8px 15px !important;'>Send Email</a></div></p>  <br /> <p style='font-size: 8pt; padding: 5px; background: #ffffa8; margin-top:-5px;'><strong>Note:</strong> Your email address will not be saved and will only be used to send you the survey link.</p>"
+//                         })
 
-                 }
-                 if ('@Model.StatusId' == '2' && document.getElementById("HiddensuccessContent").value == "false"){
-                    document.getElementById("HiddensuccessContent").value = "true";
-                    $('#successContent').show();
-                    $('#successContent').append('<div class="success"><div class="image"><img src="@Url.Content("~/Content/images/button_check.png")" style="vertical-align:middle; padding-right: 5px; width:24px" alt=""/></div><div class="message"> Your survey has been saved.<p style="text-align:left; margin-top:4px; margin-bottom:2px;"><button id="Savebutton2" type="button"  class="copylink">Get Survey Link & Pass Code</button></p></div><div style="clear:both;"></div></div>')
+//                 }
+//                 if ('@Model.StatusId' == '2' && document.getElementById("HiddensuccessContent").value == "false"){
+//                    document.getElementById("HiddensuccessContent").value = "true";
+//                    $('#successContent').show();
+//                    $('#successContent').append('<div class="success"><div class="image"><img src="@Url.Content("~/Content/images/button_check.png")" style="vertical-align:middle; padding-right: 5px; width:24px" alt=""/></div><div class="message"> Your survey has been saved.<p style="text-align:left; margin-top:4px; margin-bottom:2px;"><button id="Savebutton2" type="button"  class="copylink">Get Survey Link & Pass Code</button></p></div><div style="clear:both;"></div></div>')
 
-                 }
+//                 }
 
          
-});
+ });
 
 
 
  $(document).delegate('#Savebutton2', 'click', function() {
-
- alert();
    
     var passcode1 = '@Model.PassCode';
-   
+    var Subject ="Link for Survey: " + '@Model.SurveyInfo.SurveyName' ;
      
                          $(this).simpledialog({
                 'mode' : 'blank',
