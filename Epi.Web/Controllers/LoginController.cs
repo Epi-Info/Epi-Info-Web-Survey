@@ -50,8 +50,40 @@ namespace Epi.Web.MVC.Controllers
            //parse and get the responseId
            responseId = GetResponseId(ReturnUrl);
 
+           Common.DTO.SurveyAnswerDTO  R = _isurveyFacade.GetSurveyAnswerResponse(responseId).SurveyResponseList[0];
+
+           // Get Last Page visited else send to page 1 - Begin
+
+           XDocument Xdoc = XDocument.Parse(R.XML);
+           int PageNumber = 0;
+           if (Xdoc.Root.Attribute("LastPageVisited") != null)
+           {
+               if (!int.TryParse(Xdoc.Root.Attribute("LastPageVisited").Value, out PageNumber))
+               {
+                   PageNumber = 1;
+               }
+           }
+           else
+           {
+               PageNumber = 1;
+           }
+
+           if (ReturnUrl.EndsWith("/"))
+           {
+               ReturnUrl = ReturnUrl + PageNumber.ToString();
+           }
+           else
+           {
+               ReturnUrl = ReturnUrl + "/" + PageNumber.ToString();
+           }
+
+
+           // Get Last Page visited else send to page 1 - End
+
+
+
            //get the surveyId
-           string SurveyId = _isurveyFacade.GetSurveyAnswerResponse(responseId).SurveyResponseList[0].SurveyId;
+           string SurveyId = R.SurveyId;
            //put surveyId in viewbag so can be retrieved in Login/Index.cshtml
            ViewBag.SurveyId = SurveyId;
 
@@ -96,8 +128,6 @@ namespace Epi.Web.MVC.Controllers
            }
            return responseId;
        }
-
-       
-      
+  
     }
 }
