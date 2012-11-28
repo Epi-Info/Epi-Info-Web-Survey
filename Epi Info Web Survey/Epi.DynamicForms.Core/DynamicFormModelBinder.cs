@@ -64,6 +64,11 @@ namespace MvcDynamicForms
                     var chkField = (CheckBox)dynField;
                     chkField.Checked = bool.Parse(postedForm.GetValues(key)[0]);
                 }
+                else if (dynField is MobileCheckBox)
+                {
+                    var chkField = (MobileCheckBox)dynField;
+                    chkField.Checked = bool.Parse(postedForm.GetValues(key)[0]);
+                }
             }
 
             return form;
