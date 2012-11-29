@@ -316,6 +316,7 @@ div.MvcFieldWrapper
 	/*white-space: pre;*/
 	white-space:normal;
 	display:block !important;
+	margin: 0.2em 0 0.5em 0;
 }
 #close:hover
 {
