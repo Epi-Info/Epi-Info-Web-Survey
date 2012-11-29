@@ -1265,7 +1265,9 @@ function CCE_ContextOpenMobileSimpleDialogBox(Title,Prompt,id)
                 'headerText' : Title,
                 'headerClose' : true,
                 'dialogAllow' : true,
-                'dialogForce' : true,
+                'useDialogForceTrue': true, 
+                'useDialogForceFalse': false,
+
                 'prompt': Title,
                 'forceInput': false,
                 'useModal':true,
