@@ -808,24 +808,27 @@ namespace Epi.Web.MVC.Utility
 
             var GroupBox = new MobileGroupBox();
 
-            
-                GroupBox.FieldWrapper = "div";
-                GroupBox.Title = "";
-                GroupBox.Wrap = true;
-                GroupBox.Html = _FieldTypeID.Attribute("PromptText").Value;
-                GroupBox.Top = _Height * double.Parse(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value);
-                GroupBox.Left = _Width * double.Parse(_FieldTypeID.Attribute("ControlLeftPositionPercentage").Value);
-                GroupBox.CssClass = "EpiLabel";
-                GroupBox.fontSize = double.Parse(_FieldTypeID.Attribute("ControlFontSize").Value);
-                GroupBox.fontfamily = _FieldTypeID.Attribute("ControlFontFamily").Value;
-                GroupBox.fontstyle = _FieldTypeID.Attribute("ControlFontStyle").Value;
-                GroupBox.Height = _Height * double.Parse(_FieldTypeID.Attribute("ControlHeightPercentage").Value);
-                GroupBox.IsHidden = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "HiddenFieldsList");
-                GroupBox.Name = _FieldTypeID.Attribute("Name").Value;
-                GroupBox.Width = _Width * double.Parse(_FieldTypeID.Attribute("ControlWidthPercentage").Value);
+            string[] TabIndex= _FieldTypeID.Attribute("TabIndex").Value.Split('.');
+           
+
+            GroupBox.FieldWrapper = "div";
+            GroupBox.Wrap = true;
+            GroupBox.DisplayOrder = int.Parse(TabIndex[0].ToString());
+            GroupBox.Html = _FieldTypeID.Attribute("PromptText").Value;
+            GroupBox.Top = _Height * double.Parse(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value);
+            GroupBox.Left = _Width * double.Parse(_FieldTypeID.Attribute("ControlLeftPositionPercentage").Value);
+            GroupBox.CssClass = "EpiLabel";
+            GroupBox.fontSize = double.Parse(_FieldTypeID.Attribute("ControlFontSize").Value);
+            GroupBox.fontfamily = _FieldTypeID.Attribute("ControlFontFamily").Value;
+            GroupBox.fontstyle = _FieldTypeID.Attribute("ControlFontStyle").Value;
+            GroupBox.Height = _Height * double.Parse(_FieldTypeID.Attribute("ControlHeightPercentage").Value);
+            GroupBox.IsHidden = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "HiddenFieldsList");
+            GroupBox.Name = _FieldTypeID.Attribute("Name").Value;
+            GroupBox.Width = _Width * double.Parse(_FieldTypeID.Attribute("ControlWidthPercentage").Value);
 
 
             return GroupBox;
+          
 
 
 
