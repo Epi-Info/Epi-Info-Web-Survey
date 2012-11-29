@@ -182,6 +182,11 @@ namespace Epi.Web.MVC.Controllers
                         {
                             //get the survey form
                             form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, GetSurveyPageNumber(SurveyAnswer.XML.ToString()), SurveyAnswer, IsMobileDevice);
+                            form.ClearAllErrors();
+                            if (ReffererPageNum == 0)
+                            {
+                                ReffererPageNum = int.Parse(StringNumber.Substring(0, 1));
+                            }
                             if (ReffererPageNum == CurrentPageNum)
                             {
                                 UpdateModel(form);
