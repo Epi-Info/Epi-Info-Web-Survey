@@ -47,7 +47,8 @@ namespace MvcDynamicForms.Fields
 
                 Html = MvcHtmlString.Create(newText).ToString();
 
-                wrapper.Attributes["ID"] = "labelmvcdynamicfield_" + Name.ToLower();
+               // wrapper.Attributes["ID"] = "labelmvcdynamicfield_" + Name.ToLower();
+                wrapper.Attributes["ID"] = "mvcdynamicfield_" + Name.ToLower() + "_fieldWrapper";
 
                 StringBuilder StyleValues = new StringBuilder();
 
