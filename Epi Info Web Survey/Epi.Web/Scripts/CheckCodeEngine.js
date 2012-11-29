@@ -37,7 +37,13 @@ function CCE_ProcessHideCommand(pCheckCodeList)
              var symbol = cce_Context.resolve(pCheckCodeList[i]);
              var query = null;
              query = '#mvcdynamicfield_'  + pCheckCodeList[i] + "_fieldWrapper";
-             $(query).css("display","none");
+               if (!eval(document.getElementById("IsMobile")))
+               {
+                  $(query).css("display","none");
+               }else{
+                 $(query).css("visibility","collapse");
+               }
+             
              if (!eval(document.getElementById("IsMobile"))){
                  if (symbol.Type == "radiobutton")
                  { 
@@ -127,6 +133,41 @@ function CCE_UnHide(pNameList, pIsExceptionList)
 /// Processes the Hide command for check code execution
 /// </summary>
 /// <param name="checkCodeList">A list of fields to hide</param>
+//function CCE_ProcessUnHideCommand(pCheckCodeList) 
+//{
+//    if (pCheckCodeList != null) 
+//    {
+//        //var controlsList = GetAssociatedControls(pCheckCodeList);
+//        //this.canvas.HideCheckCodeItems(controlsList);
+//        for (var i = 0; i < pCheckCodeList.length; i++) 
+//        {
+//            var symbol = cce_Context.resolve(pCheckCodeList[i]);
+//            var query = null;
+//           
+//            if (symbol.Type != "label")
+//              {
+//              query = '#mvcdynamicfield_'  + pCheckCodeList[i] + "_fieldWrapper";
+//              $(query).removeAttr("style");
+//              }
+
+//              if (!eval(document.getElementById("IsMobile"))){
+//                   if (symbol.Type == "radiobutton")
+//                    {
+//                    query = '#mvcdynamicfield_' + pCheckCodeList[i] + "_groupbox_fieldWrapper";
+//                    $(query).removeAttr("style");
+//                    }
+//                     if (symbol.Type == "label")
+//                    {
+//                    query = '#mvcdynamicfield_' + pCheckCodeList[i] + "_fieldWrapper";
+//                    //$(query).removeAttr("style");
+//                     $(query).css("display","block");
+//                     //$(query).css("visibility","visible");
+//                    }
+//                } 
+//            CCE_RemoveFromFieldsList(pCheckCodeList[i], 'HiddenFieldsList');
+//        }
+//    }
+//}
 function CCE_ProcessUnHideCommand(pCheckCodeList) 
 {
     if (pCheckCodeList != null) 
@@ -135,19 +176,52 @@ function CCE_ProcessUnHideCommand(pCheckCodeList)
         //this.canvas.HideCheckCodeItems(controlsList);
         for (var i = 0; i < pCheckCodeList.length; i++) 
         {
-            var symbol = cce_Context.resolve(pCheckCodeList[i]);
+            var cce_Symbol = cce_Context.resolve(pCheckCodeList[i]);
             var query = null;
-           
-
-              query = '#mvcdynamicfield_'  + pCheckCodeList[i] + "_fieldWrapper";
-              $(query).removeAttr("style");
-               if (!eval(document.getElementById("IsMobile"))){
-                   if (symbol.Type == "radiobutton")
+            var fieldName = null;
+            if (cce_Symbol != null) 
+            {
+                if (cce_Symbol.Source == "datasource") 
+                {
+                    switch (cce_Symbol.Type) 
                     {
-                    query = '#mvcdynamicfield_' + pCheckCodeList[i] + "_groupbox_fieldWrapper";
-                    $(query).removeAttr("style");
+                        case "label":
+                            fieldName = 'mvcdynamicfield_' + pCheckCodeList[i]+ "_fieldWrapper";
+                            if (eval(document.getElementById(fieldName))) 
+                            {
+                    
+                                query = '#mvcdynamicfield_'  + pCheckCodeList[i]+ "_fieldWrapper" ;
+                                if (!eval(document.getElementById("IsMobile"))){
+                                  $(query).css("display","block");
+                                  }else{
+                                  $(query).css("visibility","visible");
+                                  
+                                  }
+                              
+                            }
+                            break;
+                        default:
+                            fieldName = 'mvcdynamicfield_' + pCheckCodeList[i];
+                            if (eval(document.getElementById(fieldName))) 
+                            {
+                                query = '#mvcdynamicfield_'  + pCheckCodeList[i] + "_fieldWrapper";
+                                $(query).removeAttr("style");
+                                if (!eval(document.getElementById("IsMobile"))){
+                                    if (symbol.Type == "radiobutton")
+                                    {
+                                    query = '#mvcdynamicfield_' + pCheckCodeList[i] + "_groupbox_fieldWrapper";
+                                    $(query).removeAttr("style");
+                                    }
+                                } 
+                            }
+                        break;
                     }
-                } 
+                    
+                }
+            }
+
+
+              
             CCE_RemoveFromFieldsList(pCheckCodeList[i], 'HiddenFieldsList');
         }
     }
@@ -1189,6 +1263,9 @@ function CCE_ContextOpenMobileSimpleDialogBox(Title,Prompt,id)
                          $('#'+ id).simpledialog({
                 'mode' : 'blank',
                 'headerText' : Title,
+                'headerClose' : true,
+                'dialogAllow' : true,
+                'dialogForce' : true,
                 'prompt': Title,
                 'forceInput': false,
                 'useModal':true,
@@ -1200,8 +1277,10 @@ function CCE_ContextOpenMobileSimpleDialogBox(Title,Prompt,id)
                               }
                        
                             },
-                       'fullHTML': "<div id='SimpleDialogBox' title='"+ Title +"'><p><label id='SimpleDialogBoxPrempt'>"+ Prompt +"</label></p><p style='text-align:right;'><button  id='SimpleDialogBoxButton' type='button' style='width:100%;'onclick='CCE_CloseSimpleDialogBox("+ id.toString() +");'>Ok</button></p></div>"
+                       'fullHTML': "<div id='SimpleDialogBox' title='"+ Title +"'><p><label id='SimpleDialogBoxPrempt'>"+ Prompt +"</label></p><p style='text-align:right;'><button  id='SimpleDialogBoxButton' type='button' style='width:100%;'onclick='CCE_CloseMobileSimpleDialogBox("+ id.toString() +");'>Ok</button></p></div>"
                   })
+ 
+ 
 }
 
 function CCE_CloseMobileSimpleDialogBox(id) 
@@ -1419,19 +1498,27 @@ function OpenVideoDialog()
 
 
 /////////////////Simple  Dialogbox //////////////////////
-function CCE_ContextOpenSimpleDialogBox(Title,Prompt) 
+function CCE_ContextOpenSimpleDialogBox(Title,Prompt,id) 
 {
+ if (!eval(document.getElementById("IsMobile")))
+    {
         $('#ui-dialog-title-SimpledialogBox').text(Title.toString());
+        $('.ui-dialog-title').text(Title.toString());
         $('#SimpleDialogBoxPrempt').text(Prompt.toString());
         $('#SimpleDialogBoxButton').text('Ok');
         $("#SimpleDialogBox").dialog("open");
+     }else{
+     
+     CCE_ContextOpenMobileSimpleDialogBox(Title,Prompt,id) 
+     
+     }
 }
 
 function CCE_CloseSimpleDialogBox() 
 {
         $('#SimpleDialogBox').dialog("close");
 }
-
+ 
 /////////////////  Dialogbox ///////////////////////////////////
 function CCE_ContextOpenDialogBox(Title,MaskOpt,Identifier,Prompt) 
 {
