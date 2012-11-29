@@ -200,6 +200,21 @@ function CCE_ProcessUnHideCommand(pCheckCodeList)
                               
                             }
                             break;
+                            case "groupbox":
+                             fieldName = 'mvcdynamicfield_' + pCheckCodeList[i]+ "_fieldWrapper";
+                            if (eval(document.getElementById(fieldName))) 
+                            {
+                    
+                                query = '#mvcdynamicfield_'  + pCheckCodeList[i]+ "_fieldWrapper" ;
+                                if (!eval(document.getElementById("IsMobile"))){
+                                  $(query).css("display","block");
+                                  }else{
+                                  $(query).css("visibility","visible");
+                                  
+                                  }
+                              
+                            }
+                            break;
                         default:
                             fieldName = 'mvcdynamicfield_' + pCheckCodeList[i];
                             if (eval(document.getElementById(fieldName))) 

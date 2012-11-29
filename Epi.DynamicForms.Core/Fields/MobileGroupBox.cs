@@ -7,7 +7,7 @@ using System.Web.Mvc;
 namespace MvcDynamicForms.Fields
 {
       [Serializable]
-    public class MobileGroupBox : TextField
+    public class MobileGroupBox : Field
     {
 
         /// <summary>
@@ -44,7 +44,8 @@ namespace MvcDynamicForms.Fields
 
                 Html = MvcHtmlString.Create(newText).ToString();
 
-                wrapper.Attributes["ID"] = "labelmvcdynamicfield_" + Name.ToLower();
+                //wrapper.Attributes["ID"] = "labelmvcdynamicfield_" + Name.ToLower();
+                wrapper.Attributes["ID"] = "mvcdynamicfield_" + Name.ToLower() + "_fieldWrapper";
 
                 StringBuilder StyleValues = new StringBuilder();
 
