@@ -51,6 +51,7 @@ namespace MvcDynamicForms.Fields
 
                 StyleValues.Append(GetMobileLiteralStyle(_fontstyle.ToString(), null, null, null, null, IsHidden));
                 //StyleValues.Append(";word-wrap:break-word;");
+
                 // wrapper.Attributes.Add("data-role", "fieldcontain");
                 wrapper.Attributes.Add(new KeyValuePair<string, string>("style", StyleValues.ToString()));
 
@@ -80,7 +81,7 @@ namespace MvcDynamicForms.Fields
             //    CssStyles.Append("position:absolute;left:" + Left +
             //            "px;top:" + Top + "px" + ";width:" + Width + "px" + ";Height:" + Height + "px");
             //}
-
+            CssStyles.Append("border-bottom: 2px solid #4e9689;color: #4e9689;font-size: 18px;font-weight: bold;line-height: 2em;");
             foreach (string Style in Styles)
             {
                 switch (Style.ToString())
