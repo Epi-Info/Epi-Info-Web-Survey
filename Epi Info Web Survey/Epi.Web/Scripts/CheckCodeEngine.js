@@ -99,7 +99,7 @@ function CCE_ProcessHideCommand(pCheckCodeList)
                                 query = '#mvcdynamicfield_'  + pCheckCodeList[i] + "_fieldWrapper";
                                 $(query).css("display","none");
                                 if (!eval(document.getElementById("IsMobile"))){
-                                    if (symbol.Type == "radiobutton")
+                                    if (cce_Symbol.Type == "radiobutton")
                                     {
                                     query = '#mvcdynamicfield_' + pCheckCodeList[i] + "_groupbox_fieldWrapper";
                                     $(query).css("display","none");
@@ -204,6 +204,7 @@ function CCE_ProcessUnHideCommand(pCheckCodeList)
         //var controlsList = GetAssociatedControls(pCheckCodeList);
         //this.canvas.HideCheckCodeItems(controlsList);
         for (var i = 0; i < pCheckCodeList.length; i++) 
+        
         {
             var cce_Symbol = cce_Context.resolve(pCheckCodeList[i]);
             var query = null;
@@ -246,32 +247,56 @@ function CCE_ProcessUnHideCommand(pCheckCodeList)
                             }
                             break;
                         default:
-                            fieldName = 'mvcdynamicfield_' + pCheckCodeList[i];
+                            fieldName = 'mvcdynamicfield_'  + pCheckCodeList[i] + "_fieldWrapper";//'mvcdynamicfield_' + pCheckCodeList[i];
                             if (eval(document.getElementById(fieldName))) 
                             {
                                 query = '#mvcdynamicfield_'  + pCheckCodeList[i] + "_fieldWrapper";
-                                $(query).removeAttr("style");
+                                  
+                                 
+                                  if (!eval(document.getElementById("IsMobile")))
+                                  { 
+                                  //Div
+                                     query = '#mvcdynamicfield_'  + pCheckCodeList[i] + "_fieldWrapper";
+                                     $(query).removeAttr("style");
+                                   // Control
+                                     query = '#mvcdynamicfield_'  + pCheckCodeList[i] ;
+                                     $(query).css("display","block");
+                                     
+                                      //Label
+                                     query = '#labelmvcdynamicfield_'  + pCheckCodeList[i] ;
+                                     $(query).css("display","block");
+                                     
+                                   }else{
+                                    query = '#mvcdynamicfield_'  + pCheckCodeList[i] + "_fieldWrapper";
+                                    $(query).css("display","block");
+                                  
+                                   }
+                               } 
+
+
                                 if (!eval(document.getElementById("IsMobile"))){
-                                    if (symbol.Type == "radiobutton")
+                                    if (cce_Symbol.Type == "radiobutton")
                                     {
                                     query = '#mvcdynamicfield_' + pCheckCodeList[i] + "_groupbox_fieldWrapper";
-                                    $(query).removeAttr("style");
+                                     $(query).css("display","block");
                                     }
                                 } 
                             }
-                        break;
+                       // break;
                     }
                     
+
                 }
+
+                 CCE_RemoveFromFieldsList(pCheckCodeList[i], 'HiddenFieldsList');
             }
 
 
               
-            CCE_RemoveFromFieldsList(pCheckCodeList[i], 'HiddenFieldsList');
+           // CCE_RemoveFromFieldsList(pCheckCodeList[i], 'HiddenFieldsList');
         }
     }
-}
-
+ 
 /// <summary>
 /// Processed the Hide Except command for check code execution
 /// </summary>
