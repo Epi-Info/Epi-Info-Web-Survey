@@ -802,8 +802,8 @@ namespace Epi.Web.MVC.Utility
                     GroupBox.Title = _FieldTypeID.Attribute("Name").Value;
                     GroupBox.Prompt = _FieldTypeID.Attribute("PromptText").Value;
                     GroupBox.RequiredMessage = "This field is required";
-                    //GroupBox.Key = _FieldTypeID.Attribute("Name").Value + "_GroupBox";
-                    GroupBox.Key = _FieldTypeID.Attribute("Name").Value;
+                    GroupBox.Key = _FieldTypeID.Attribute("Name").Value + "_GroupBox";
+                    //GroupBox.Key = _FieldTypeID.Attribute("Name").Value;
                     GroupBox.PromptTop = _Height * double.Parse(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value) ;
                     GroupBox.PromptLeft = _Width * double.Parse(_FieldTypeID.Attribute("ControlLeftPositionPercentage").Value) ;
                     GroupBox.Top = _Height * double.Parse(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value);

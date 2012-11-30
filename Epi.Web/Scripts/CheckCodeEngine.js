@@ -34,24 +34,87 @@ function CCE_ProcessHideCommand(pCheckCodeList)
         //this.canvas.HideCheckCodeItems(controlsList);
         for (var i = 0; i < pCheckCodeList.length; i++) 
         {
-             var symbol = cce_Context.resolve(pCheckCodeList[i]);
-             var query = null;
-             query = '#mvcdynamicfield_'  + pCheckCodeList[i] + "_fieldWrapper";
-               if (!eval(document.getElementById("IsMobile")))
-               {
-                  $(query).css("display","none");
-               }else{
-                 $(query).css("visibility","collapse");
-               }
-             
-             if (!eval(document.getElementById("IsMobile"))){
-                 if (symbol.Type == "radiobutton")
-                 { 
-                 query = '#mvcdynamicfield_'  + pCheckCodeList[i] + "_groupbox_fieldWrapper";
-                 $(query).css("display","none");
-                 }
-             }
-             CCE_AddToFieldsList(pCheckCodeList[i], 'HiddenFieldsList')
+//             var symbol = cce_Context.resolve(pCheckCodeList[i]);
+//             var query = null;
+//             query = '#mvcdynamicfield_'  + pCheckCodeList[i] + "_fieldWrapper";
+//               if (!eval(document.getElementById("IsMobile")))
+//               {
+//                  $(query).css("display","none");
+//               }else{
+//                 $(query).css("visibility","collapse");
+//               }
+//             
+//             if (!eval(document.getElementById("IsMobile"))){
+//                 if (symbol.Type == "radiobutton")
+//                 { 
+//                 query = '#mvcdynamicfield_'  + pCheckCodeList[i] + "_groupbox_fieldWrapper";
+//                 $(query).css("display","none");
+//                 }
+//             }
+//             CCE_AddToFieldsList(pCheckCodeList[i], 'HiddenFieldsList')
+  var cce_Symbol = cce_Context.resolve(pCheckCodeList[i]);
+            var query = null;
+            var fieldName = null;
+            if (cce_Symbol != null) 
+            {
+                if (cce_Symbol.Source == "datasource") 
+                {
+                    switch (cce_Symbol.Type) 
+                    {
+                        case "label":
+                            fieldName = 'mvcdynamicfield_' + pCheckCodeList[i]+ "_fieldWrapper";
+                            if (eval(document.getElementById(fieldName))) 
+                            {
+                    
+                                query = '#mvcdynamicfield_'  + pCheckCodeList[i]+ "_fieldWrapper" ;
+                                if (!eval(document.getElementById("IsMobile"))){
+                                  $(query).css("display","none");
+                                  }else{
+                                  $(query).css("visibility","collapse");
+                                  
+                                  }
+                              
+                            }
+                            break;
+                            case "groupbox":
+                            //mvcdynamicfield_groupebox1_groupbox_fieldWrapper
+                             fieldName = 'mvcdynamicfield_' + pCheckCodeList[i]+ "_groupbox_fieldWrapper";
+                            if (eval(document.getElementById(fieldName))) 
+                            {
+                    
+                                query = '#mvcdynamicfield_'  + pCheckCodeList[i]+ "_groupbox_fieldWrapper" ;
+                                if (!eval(document.getElementById("IsMobile"))){
+                                 $(query).css("display","none");
+                                  }else{
+                                  $(query).css("visibility","collapse");
+                                  
+                                  }
+                              
+                            }
+                            break;
+                        default:
+                            fieldName = 'mvcdynamicfield_' + pCheckCodeList[i];
+                            if (eval(document.getElementById(fieldName))) 
+                            {
+                                query = '#mvcdynamicfield_'  + pCheckCodeList[i] + "_fieldWrapper";
+                                $(query).css("display","none");
+                                if (!eval(document.getElementById("IsMobile"))){
+                                    if (symbol.Type == "radiobutton")
+                                    {
+                                    query = '#mvcdynamicfield_' + pCheckCodeList[i] + "_groupbox_fieldWrapper";
+                                    $(query).css("display","none");
+                                    }
+                                } 
+                            }
+                        break;
+                    }
+                    
+                }
+            }
+
+
+              
+            CCE_AddToFieldsList(pCheckCodeList[i], 'HiddenFieldsList')
         }
     }
 }
@@ -133,41 +196,7 @@ function CCE_UnHide(pNameList, pIsExceptionList)
 /// Processes the Hide command for check code execution
 /// </summary>
 /// <param name="checkCodeList">A list of fields to hide</param>
-//function CCE_ProcessUnHideCommand(pCheckCodeList) 
-//{
-//    if (pCheckCodeList != null) 
-//    {
-//        //var controlsList = GetAssociatedControls(pCheckCodeList);
-//        //this.canvas.HideCheckCodeItems(controlsList);
-//        for (var i = 0; i < pCheckCodeList.length; i++) 
-//        {
-//            var symbol = cce_Context.resolve(pCheckCodeList[i]);
-//            var query = null;
-//           
-//            if (symbol.Type != "label")
-//              {
-//              query = '#mvcdynamicfield_'  + pCheckCodeList[i] + "_fieldWrapper";
-//              $(query).removeAttr("style");
-//              }
-
-//              if (!eval(document.getElementById("IsMobile"))){
-//                   if (symbol.Type == "radiobutton")
-//                    {
-//                    query = '#mvcdynamicfield_' + pCheckCodeList[i] + "_groupbox_fieldWrapper";
-//                    $(query).removeAttr("style");
-//                    }
-//                     if (symbol.Type == "label")
-//                    {
-//                    query = '#mvcdynamicfield_' + pCheckCodeList[i] + "_fieldWrapper";
-//                    //$(query).removeAttr("style");
-//                     $(query).css("display","block");
-//                     //$(query).css("visibility","visible");
-//                    }
-//                } 
-//            CCE_RemoveFromFieldsList(pCheckCodeList[i], 'HiddenFieldsList');
-//        }
-//    }
-//}
+ 
 function CCE_ProcessUnHideCommand(pCheckCodeList) 
 {
     if (pCheckCodeList != null) 
@@ -201,11 +230,12 @@ function CCE_ProcessUnHideCommand(pCheckCodeList)
                             }
                             break;
                             case "groupbox":
-                             fieldName = 'mvcdynamicfield_' + pCheckCodeList[i]+ "_fieldWrapper";
+                            //mvcdynamicfield_groupebox1_groupbox_fieldWrapper
+                             fieldName = 'mvcdynamicfield_' + pCheckCodeList[i]+ "_groupbox_fieldWrapper";
                             if (eval(document.getElementById(fieldName))) 
                             {
                     
-                                query = '#mvcdynamicfield_'  + pCheckCodeList[i]+ "_fieldWrapper" ;
+                                query = '#mvcdynamicfield_'  + pCheckCodeList[i]+ "_groupbox_fieldWrapper" ;
                                 if (!eval(document.getElementById("IsMobile"))){
                                   $(query).css("display","block");
                                   }else{
