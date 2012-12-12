@@ -88,7 +88,7 @@ namespace Epi.Core.EnterInterpreter.Rules
                     pJavaScriptBuilder.Append("CCE_ContextOpenSimpleDialogBox('");
                     pJavaScriptBuilder.Append(((RuleDialogBase)(this.Dialog)).TitleText.ToString());
                     pJavaScriptBuilder.Append("', '");
-                    pJavaScriptBuilder.Append(((RuleDialogBase)(this.Dialog)).Prompt.ToString().Replace("'","\'") + "'" );
+                    pJavaScriptBuilder.Append(((RuleDialogBase)(this.Dialog)).Prompt.ToString().Replace("'","\\'") + "'" );
                     pJavaScriptBuilder.Append(",id"+ ");");
                     break;
                 case "Numeric_Dialog_Explicit_Statement":
