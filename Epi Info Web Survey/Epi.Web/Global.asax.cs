@@ -83,25 +83,15 @@ namespace Epi.Web.MVC
             {
                 //string sSource;
                 //string sLog;
-                string sEvent;
+               // string sEvent;
 
                 //sSource = "Epi.Web.Survey";
                 //sLog = "Application";
-                sEvent = exc.Message + "\n" + exc.StackTrace;
-
-
-                string s = ConfigurationManager.AppSettings["LOGGING_SEND_EMAIL_NOTIFICATION"];
-                if (!String.IsNullOrEmpty(s))
-                {
-                    if (s.ToUpper() == "TRUE")
-                    {
-                        s = ConfigurationManager.AppSettings["LOGGING_ADMIN_EMAIL_ADDRESS"];
-                        if (!String.IsNullOrEmpty(s))
-                        {
-                            Epi.Web.Utility.EmailMessage.SendLogMessage(s, "Epi.Web.Survey - Exception", sEvent);
-                        }
-                    }
-                }
+                //sEvent = exc.Message + "\n" + exc.StackTrace;
+                 
+                            Epi.Web.Utility.EmailMessage.SendLogMessage(exc);
+                           
+                    
 
             }
             catch (Exception ex)
@@ -113,3 +103,4 @@ namespace Epi.Web.MVC
         }
     }
 }
+

@@ -11,7 +11,7 @@ using Epi.Core.EnterInterpreter;
 using System.Web.Security;
 using System.Text.RegularExpressions;
 using System.Web;
-
+using System.Configuration;
 using System.Web.Routing;
 using System.Web.WebPages;
 namespace Epi.Web.MVC.Controllers
@@ -117,6 +117,9 @@ namespace Epi.Web.MVC.Controllers
             
             catch (Exception ex)
             {
+                
+                            Epi.Web.Utility.EmailMessage.SendLogMessage( ex, this.HttpContext);
+               
                 return View(Epi.Web.MVC.Constants.Constant.EXCEPTION_PAGE);
             }
             //}
@@ -416,6 +419,8 @@ namespace Epi.Web.MVC.Controllers
 
             catch (Exception ex)
             {
+                  Epi.Web.Utility.EmailMessage.SendLogMessage(  ex, this.HttpContext);
+             
                 return View(Epi.Web.MVC.Constants.Constant.EXCEPTION_PAGE);
             }
             
