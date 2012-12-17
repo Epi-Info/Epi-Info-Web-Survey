@@ -8,7 +8,7 @@ using System.Configuration;
 namespace Epi.Web.Utility
 {
     public class EmailMessage
-    {
+    { 
 
         /// <summary>
         /// the following method takes email and responseUrl as argument and email redirection url to the user 
