@@ -116,7 +116,7 @@ namespace Epi.Core.EnterInterpreter.Rules
             pJavaScriptBuilder.Append("', '");
             pJavaScriptBuilder.Append(((RuleDialogBase)(this.Dialog)).Identifier.ToString().ToLower());
             pJavaScriptBuilder.Append("', '");
-            pJavaScriptBuilder.AppendLine(((RuleDialogBase)(this.Dialog)).Prompt.ToString().Replace("'", "\'") + "');");
+            pJavaScriptBuilder.AppendLine(((RuleDialogBase)(this.Dialog)).Prompt.ToString().Replace("'", "\\'") + "');");
 
             return pJavaScriptBuilder;
         }
