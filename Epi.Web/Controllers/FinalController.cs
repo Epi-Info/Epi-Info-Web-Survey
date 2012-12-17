@@ -3,6 +3,7 @@ using Epi.Web.MVC.Facade;
 using Epi.Web.MVC.Models;
 using System;
 using System.Web.Security;
+using System.Configuration;
 namespace Epi.Web.MVC.Controllers
 {
     public class FinalController : Controller
@@ -37,6 +38,9 @@ namespace Epi.Web.MVC.Controllers
             }
             catch (Exception ex)
             {
+                
+                            Epi.Web.Utility.EmailMessage.SendLogMessage( ex, this.HttpContext);
+                   
                 return View(Epi.Web.MVC.Constants.Constant.EXCEPTION_PAGE);
             }
         }
@@ -62,6 +66,9 @@ namespace Epi.Web.MVC.Controllers
             }
             catch (Exception ex)
             {
+              
+                            Epi.Web.Utility.EmailMessage.SendLogMessage(  ex, this.HttpContext);
+                 
                 return View(Epi.Web.MVC.Constants.Constant.EXCEPTION_PAGE);
             }
 

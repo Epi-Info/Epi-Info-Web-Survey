@@ -4,6 +4,8 @@ using Epi.Web.MVC.Facade;
 using Epi.Web.MVC.Models;
 using System.Collections.Generic;
 using System.Text;
+using System.Configuration;
+ 
 namespace Epi.Web.Controllers
 {
     public class ResponseController : Controller
@@ -28,6 +30,9 @@ namespace Epi.Web.Controllers
             }
             catch (Exception ex)
             {
+              
+                Epi.Web.Utility.EmailMessage.SendLogMessage( ex, this.HttpContext);
+               
                 return RedirectToAction(Epi.Web.MVC.Constants.Constant.EXCEPTION_PAGE);
             }
        

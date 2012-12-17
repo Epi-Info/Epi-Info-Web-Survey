@@ -8,6 +8,7 @@ using System.Linq;
 using Epi.Core.EnterInterpreter;
 using System.Collections.Generic;
 using System.Web.Security;
+using System.Configuration;
  
 
 namespace Epi.Web.MVC.Controllers
@@ -75,9 +76,11 @@ namespace Epi.Web.MVC.Controllers
                 //{
                 //    TempData["exc"] = exc.ToString();
                 //}
-                TempData["exc"] = ex.Message.ToString();
-                TempData["exc1"] = ex.Source.ToString();
-                TempData["exc2"] = ex.StackTrace.ToString();
+                //TempData["exc"] = ex.Message.ToString();
+                //TempData["exc1"] = ex.Source.ToString();
+                //TempData["exc2"] = ex.StackTrace.ToString();
+               Epi.Web.Utility.EmailMessage.SendLogMessage(    ex, this.HttpContext);
+                    
                 return View(Epi.Web.MVC.Constants.Constant.EXCEPTION_PAGE);
             }
         }
@@ -179,6 +182,10 @@ namespace Epi.Web.MVC.Controllers
             }
             catch (Exception ex)
             {
+
+               
+                Epi.Web.Utility.EmailMessage.SendLogMessage(    ex, this.HttpContext);
+                  
                 return View(Epi.Web.MVC.Constants.Constant.EXCEPTION_PAGE);
             }
          }
