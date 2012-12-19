@@ -81,6 +81,13 @@ namespace MvcDynamicForms.Fields
             txt.MergeAttributes(_inputHtmlAttributes);
             html.Append(txt.ToString(TagRenderMode.SelfClosing));
 
+            // If readonly then add the following jquery script to make the field disabled 
+            if (ReadOnly)
+            {
+                var scriptReadOnlyText = new TagBuilder("script");
+                scriptReadOnlyText.InnerHtml = "$(function(){$('#" + inputName + "').attr('disabled','disabled')});";
+                html.Append(scriptReadOnlyText.ToString(TagRenderMode.Normal));
+            }
             // adding scripts for date picker
             var scriptDatePicker = new TagBuilder("script");
             //scriptDatePicker.InnerHtml = "$(function() { $('#" + inputName + "').datepicker({changeMonth: true,changeYear: true});});";
