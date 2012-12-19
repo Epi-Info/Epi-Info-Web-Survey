@@ -673,6 +673,7 @@ namespace Epi.Web.MVC.Utility
                 IsHidden = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "HiddenFieldsList"),
                 IsHighlighted = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "HighlightedFieldsList"),
                 IsDisabled = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "DisabledFieldsList"),
+                ReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value),
                 Pattern = _FieldTypeID.Attribute("Pattern").Value
 
             };
@@ -709,6 +710,7 @@ namespace Epi.Web.MVC.Utility
                 IsHidden = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "HiddenFieldsList"),
                 IsHighlighted = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "HighlightedFieldsList"),
                 IsDisabled = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "DisabledFieldsList"),
+                ReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value),
                 Pattern = _FieldTypeID.Attribute("Pattern").Value
 
             };
