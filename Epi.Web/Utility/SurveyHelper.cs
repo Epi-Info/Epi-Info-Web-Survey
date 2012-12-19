@@ -293,7 +293,18 @@ namespace Epi.Web.MVC.Utility
                 {
                     if (!string.IsNullOrEmpty(field.Value.Expression))
                     {
-                        ContextDetailList[field.Key] = field.Value.Expression;
+                        if (field.Value.DataType.ToString() == "Date")
+                        {
+        
+                            var  datetemp =  string.Format("{0:MM/dd/yyyy}", field.Value.Expression.ToString());
+                            DateTime date = new DateTime();
+                            date = Convert.ToDateTime(datetemp);
+                            ContextDetailList[field.Key] = date.Date.ToString("MM/dd/yyyy");
+                        }
+                        else
+                        {
+                            ContextDetailList[field.Key] = field.Value.Expression;
+                        }
                     }
                 }
             }
