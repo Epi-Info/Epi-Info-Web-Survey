@@ -12,7 +12,7 @@ namespace MvcDynamicForms.Fields
     [Serializable]
     public class TimePicker : TimePickerField
     {
-        public override string RenderHtml()
+        public override string RenderHtml() 
         {
             var html = new StringBuilder();
             var inputName = _form.FieldPrefix + _key;
