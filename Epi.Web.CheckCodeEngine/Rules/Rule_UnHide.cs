@@ -44,8 +44,27 @@ namespace Epi.Core.EnterInterpreter.Rules
             }
             else
             {
+
+                string[] NewIdentifierList = null;
+                if (this.IdentifierList.Length == 1 && this.IdentifierList[0] == "*" && this.IsExceptList == false)
+                {
+                    int i = 0;
+                    List<EpiInfo.Plugin.IVariable> temp = this.Context.CurrentScope.FindVariables(EpiInfo.Plugin.VariableScope.DataSource);
+                    NewIdentifierList = new string[temp.Count];
+                    foreach (EpiInfo.Plugin.IVariable v in temp)
+                    {
+                        NewIdentifierList[i] = v.Name;
+                        i++;
+                    }
+                }
+                else
+                {
+                    NewIdentifierList = this.IdentifierList;
+                }
+
+
                 Dictionary<string, string> FieldChecker = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
-                foreach (string s in this.IdentifierList)
+                foreach (string s in NewIdentifierList)
                 {
                     if (!FieldChecker.ContainsKey(s))
                     {
@@ -72,8 +91,26 @@ namespace Epi.Core.EnterInterpreter.Rules
 
         public override void ToJavaScript(StringBuilder pJavaScriptBuilder)
         {
+
+            string[] NewIdentifierList = null;
+            if (this.IdentifierList.Length == 1 && this.IdentifierList[0] == "*" && this.IsExceptList == false)
+            {
+                int i = 0;
+                List<EpiInfo.Plugin.IVariable> temp = this.Context.CurrentScope.FindVariables(EpiInfo.Plugin.VariableScope.DataSource);
+                this.IdentifierList = new string[temp.Count];
+                foreach (EpiInfo.Plugin.IVariable v in temp)
+                {
+                    this.IdentifierList[i] = v.Name;
+                    i++;
+                }
+            }
+            else
+            {
+                NewIdentifierList = this.IdentifierList;
+            }
+
             pJavaScriptBuilder.AppendLine("var List = new Array();");
-            foreach (string fieldName in IdentifierList)
+            foreach (string fieldName in NewIdentifierList)
             {
                 pJavaScriptBuilder.AppendLine(string.Format("List.push('{0}');", fieldName.ToLower()));
             }
