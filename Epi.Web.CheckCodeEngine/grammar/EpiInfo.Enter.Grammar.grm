@@ -1,7 +1,7 @@
 
-"Name"                  = Epi Info 7 Grammar
-"Version"               = 2.0
-"Author"                = Epi Info Rewrite Team LM-ESAS jhaines
+"Name"                  = 'Epi Info 7 Grammar'
+"Version"               = '2.0'
+"Author"                = 'Epi Info Rewrite Team LM-ESAS jhaines'
 "Case Sensitive"            = False 
 "Start Symbol"              = <Program>
 
@@ -449,7 +449,7 @@ Comment End = '*/'
 
 
 !***                Unhide Statement            ***!
-<Unhide_Some_Statement> ::= UNHIDE <IdentifierList>
+<Unhide_Some_Statement> ::= UNHIDE <IdentifierList> | UNHIDE '*'
 <Unhide_Except_Statement> ::= UNHIDE '*' EXCEPT <IdentifierList>
 
 !***                End                 ***!
