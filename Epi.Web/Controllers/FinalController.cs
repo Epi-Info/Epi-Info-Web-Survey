@@ -31,6 +31,13 @@ namespace Epi.Web.MVC.Controllers
             {
                 
                 SurveyInfoModel surveyInfoModel = _isurveyFacade.GetSurveyInfoModel(surveyId);
+
+                System.Text.RegularExpressions.Regex regex = new System.Text.RegularExpressions.Regex(@"(\r\n|\r|\n)+");
+
+                string exitText = regex.Replace(surveyInfoModel.ExitText.Replace("  ", " &nbsp;"), "<br />");
+
+                surveyInfoModel.ExitText = MvcHtmlString.Create(exitText).ToString();
+
                 return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, surveyInfoModel);
 
                 //}
