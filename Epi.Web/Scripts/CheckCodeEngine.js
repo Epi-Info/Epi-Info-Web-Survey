@@ -389,7 +389,11 @@ CCE_Context.prototype.getValue = function (pName)
                 switch (cce_Symbol.Type) 
                 {
                     case "yesno":
-                        if (field.val() == "1") 
+                        if(field.val() == "") 
+                        {
+                           return null; 
+                        }
+                        else if (field.val() == "1") 
                         {
                             return true; //"Yes";
                         }
