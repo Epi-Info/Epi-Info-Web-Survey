@@ -469,6 +469,12 @@ namespace Epi.Core.EnterInterpreter
                     case "<Disable_Statement>":
                         result = new Rule_Disable(pContext, NT);
                         break;
+                    case "<Set_Required_Statement>":
+                        result = new Rule_SetRequired(pContext, NT);
+                        break;
+                    case "<Set_Not_Required_Statement>":
+                        result = new Rule_SetNOTRequired(pContext, NT);
+                        break;
                     case "<Value>":
                     default:
                         result = new Rule_Value(pContext, NT);
