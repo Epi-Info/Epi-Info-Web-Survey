@@ -58,7 +58,7 @@ public System.Collections.Specialized.NameValueCollection GlobalVariables;*/
         public List<string> _HiddenFieldList;
         public List<string> _HighlightedFieldList;
         public List<string> _DisabledFieldList;
-
+        public List<string> _RequiredFieldList;
 
         public string HiddenFieldList
         {
@@ -126,8 +126,28 @@ public System.Collections.Specialized.NameValueCollection GlobalVariables;*/
             }
         }
 
-
-
+        public string RequiredFieldList
+        {
+            get
+            {
+                StringBuilder result = new StringBuilder();
+                foreach (string s in _RequiredFieldList)
+                {
+                    result.Append(s);
+                    result.Append(',');
+                }
+                return result.ToString();
+            }
+            set
+            {
+                string[] list = value.Split(',');
+                _RequiredFieldList.Clear();
+                foreach (string s in list)
+                {
+                    _RequiredFieldList.Add(s.ToLower());
+                }
+            }
+        }
 
         private string[] parseGetCommandSearchText(string pSearchText)
         {
