@@ -39,9 +39,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>.\CalithaLib.dll</HintPath>
     </Reference>
-    <Reference Include="EpiInfo.Plugin, Version=7.0.9.8, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="EpiInfo.Plugin, Version=7.1.1.5, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>.\EpiInfo.Plugin.dll</HintPath>
+      <HintPath>..\..\..\Epi Info 7\EpiInfoPlugin\bin\Debug\EpiInfo.Plugin.dll</HintPath>
     </Reference>
     <Reference Include="GoldParserEngine, Version=1.13.2403.14266, Culture=neutral, PublicKeyToken=6fe80ec331a66ec8, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -157,6 +157,8 @@
     <Compile Include="Rules\Rule_Program.cs" />
     <Compile Include="Rules\Rule_Quit.cs" />
     <Compile Include="Rules\Rule_Record_Checkcode_Statement.cs" />
+    <Compile Include="Rules\Rule_SetNOTRequired.cs" />
+    <Compile Include="Rules\Rule_SetRequired.cs" />
     <Compile Include="Rules\Rule_Statement.cs" />
     <Compile Include="Rules\Rule_Statements.cs" />
     <Compile Include="Rules\Rule_Subroutine_Statement.cs" />
