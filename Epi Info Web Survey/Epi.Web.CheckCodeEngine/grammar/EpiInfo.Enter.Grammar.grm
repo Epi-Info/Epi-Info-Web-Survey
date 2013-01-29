@@ -133,6 +133,8 @@ Comment End = '*/'
                 | <Wait_For_Statement>
                 | <Wait_For_Exit_Statement>
                 | <Wait_For_File_Exists_Statement>
+                |<Set_Required_Statement>
+                |<Set_Not_Required_Statement>
 
   
 
@@ -184,7 +186,7 @@ Comment End = '*/'
 <Var_Type_Numeric> ::= 'NUMERIC'
 <Var_Type_Text_Input> ::= 'TEXTINPUT'
 <Var_Type_YN> ::= 'YN'
-<Var_Type_Date> ::= 'DATEFORMAT'| 'DATETIMEFORMAT' | 'TIMEFORMAT'
+<Var_Type_Date> ::= 'DATEFORMAT' | 'DATETIMEFORMAT' | 'TIMEFORMAT'
 
 
 !Zack for function*************************************************************
@@ -271,6 +273,9 @@ Comment End = '*/'
 
 !***            AutoSearch Statement                ***!
 <Auto_Search_Statement>                     ::= AUTOSEARCH <IdentifierList> 
+                                            |AUTOSEARCH <IdentifierList> Always
+                                            |AUTOSEARCH <IdentifierList> DisplayList <IdentifierList> 
+                                            |AUTOSEARCH <IdentifierList> DisplayList <IdentifierList> Always
 !***            End                     ***!
 
 ! -------------------------- BEEP --------------------------------------------------
@@ -402,7 +407,9 @@ Comment End = '*/'
                                             | ENABLE '*' EXCEPT <IdentifierList>
 <Disable_Statement>                       ::= DISABLE <IdentifierList>
                                             | DISABLE '*' EXCEPT <IdentifierList>
-
+<Set_Required_Statement>                       ::= Set-Required <IdentifierList> | Set-Required '*'                                            
+<Set_Not_Required_Statement>                       ::= Set-Not-Required <IdentifierList> | Set-Not-Required '*'
+                                               
 !***                End                 ***!
 
 
