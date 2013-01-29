@@ -23,8 +23,44 @@ namespace Epi.Core.EnterInterpreter.Rules
         /// <returns>null</returns>
         public override object Execute()
         {
+            if (this.IdentifierList.Length == 1 && this.IdentifierList[0] == "*")
+            {
+                List<EpiInfo.Plugin.IVariable> variableList = this.Context.CurrentScope.FindVariables(EpiInfo.Plugin.VariableScope.DataSource);
+                this.IdentifierList = new string[variableList.Count];
+                int i = 0;
+                foreach (EpiInfo.Plugin.IVariable field in variableList)
+                {
+                    this.IdentifierList[i] = field.Name.ToLower();
+                    i++;
+                }
+            }
+
             this.Context.EnterCheckCodeInterface.SetNotRequired(this.IdentifierList);
             return null;
+        }
+
+        public override void ToJavaScript(StringBuilder pJavaScriptBuilder)
+        {
+            pJavaScriptBuilder.AppendLine("var List = new Array();");
+
+            if (this.IdentifierList.Length == 1 && this.IdentifierList[0] == "*")
+            {
+                List<EpiInfo.Plugin.IVariable> variableList = this.Context.CurrentScope.FindVariables(EpiInfo.Plugin.VariableScope.DataSource);
+                foreach (EpiInfo.Plugin.IVariable field in variableList)
+                {
+                    pJavaScriptBuilder.AppendLine(string.Format("List.push('{0}');", field.Name.ToLower()));
+                }
+            }
+            else
+            {
+                foreach (string fieldName in IdentifierList)
+                {
+                    pJavaScriptBuilder.AppendLine(string.Format("List.push('{0}');", fieldName.ToLower()));
+                }
+            }
+
+            pJavaScriptBuilder.AppendLine("CCE_Set_NOT_Required(List);");
+
         }
     }
 }
