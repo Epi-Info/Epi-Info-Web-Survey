@@ -1835,4 +1835,18 @@ function CCE_StrLEN(pValue)
  //document.getElementById("VideoDialog").style.display ="true";
  
     }
+
+
+
+function CCE_Set_Required(pNameList)
+{
+
+}
+
+function CCE_Set_NOT_Required(pNameList)
+{
+
+}
+
+
 cce_Context = new CCE_Context();
