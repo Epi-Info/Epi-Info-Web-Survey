@@ -35,7 +35,13 @@ namespace Epi.Core.EnterInterpreter.Rules
                 }
             }
 
-            this.Context.EnterCheckCodeInterface.SetNotRequired(this.IdentifierList);
+            foreach (string s in this.IdentifierList)
+            {
+                if (this.Context._RequiredFieldList.Contains(s.ToLower()))
+                {
+                    this.Context._RequiredFieldList.Remove(s.ToLower());
+                }
+            }
             return null;
         }
 
