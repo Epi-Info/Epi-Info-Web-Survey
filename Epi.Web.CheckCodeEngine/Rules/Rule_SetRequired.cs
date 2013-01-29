@@ -10,7 +10,7 @@ namespace Epi.Core.EnterInterpreter.Rules
     {
         string[] IdentifierList = null;
 
-        public Rule_SetRequired(Rule_Context pContext, NonterminalToken pToken)
+        public Rule_SetRequired(Rule_Context pContext, NonterminalToken pToken) : base(pContext)
         {
             this.IdentifierList = this.IdentifierList = this.GetCommandElement(pToken.Tokens, 1).ToString().Split(' '); 
         }
