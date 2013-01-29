@@ -33,7 +33,14 @@ namespace Epi.Core.EnterInterpreter.Rules
                 }
             }
 
-            this.Context.EnterCheckCodeInterface.SetRequired(this.IdentifierList);
+            foreach (string s in this.IdentifierList)
+            {
+                if (!this.Context._RequiredFieldList.Contains(s.ToLower()))
+                {
+                    this.Context._RequiredFieldList.Add(s.ToLower());
+                }
+            }
+
             return null;
         }
 
