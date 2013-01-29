@@ -413,15 +413,39 @@ CCE_Context.prototype.getValue = function (pName)
 
                     case "datepicker": //string has been converted to date for comparison with another date
                         value = new Date(field.val()).valueOf();
+                        if(value == "")
+                        {
+                            return null;
+                        }
+                        else
+                        {
+                            return value;
+                        }
                         return value;
                     case "timepicker":
                         var refDate = "01/01/1970 ";//It is a reference date 
                         var dateTime = refDate + field.val();
                         value = new Date(dateTime).valueOf();
+                                                if(value == "")
+                        {
+                            return null;
+                        }
+                        else
+                        {
+                            return value;
+                        }
                         return value;
                     case "numeric": //string has been converted to number to compare with another number
                         value = new Number(field.val()).valueOf();
-                        return value;
+                        if(value == "")
+                        {
+                            return null;
+                        }
+                        else
+                        {
+                            return value;
+                        }
+                        
                     case "radiobutton":
                        var RadiofieldName = "." + fieldName;
                          
@@ -435,7 +459,8 @@ CCE_Context.prototype.getValue = function (pName)
                         });
                         return value;
                     default:
-                        return field.val();
+                        return value;
+                        
                 }
             }
             else 
@@ -472,33 +497,52 @@ CCE_Context.prototype.setValue = function (pName, pValue)
                 switch (cce_Symbol.Type) 
                 {
                    case "datepicker": //string has been converted to date for comparison with another date
-
                          if (eval(document.getElementById("IsMobile")))
-			 {
-                          var FormatedDate;
-                          var date = new Date();
-                          FormatedDate =date.getMonth()+ 1 +"/"+date.getDate()+"/"+date.getFullYear();
-                           cce_Symbol.Value = FormatedDate;
-                             $(Jquery).val(FormatedDate);
-			  }else{
-                          $(Jquery).datepicker("setDate", new Date(pValue));
-                          cce_Symbol.Value = pValue;
+			             {
+                                      var FormatedDate;
+                                      var date = new Date();
+                                      FormatedDate =date.getMonth()+ 1 +"/"+date.getDate()+"/"+date.getFullYear();
+                                       cce_Symbol.Value = FormatedDate;
+                                         $(Jquery).val(FormatedDate);
+			              }else{
+                                      $(Jquery).datepicker("setDate", new Date(pValue));
+                                      cce_Symbol.Value = pValue;
 			  
-			  }
-                        break;
-                    case "timepicker":
-                       if (eval(document.getElementById("IsMobile"))){
-                         var FormatedTime;
-                         var date = new Date();
-                         FormatedTime = FormatTime(date);
-                         $(Jquery).val(FormatedTime);
-                         cce_Symbol.Value = FormatedTime;
-			 }else{
-                        $(Jquery).timepicker("setTime", new Date(pValue));
-                        cce_Symbol.Value = pValue;
+			              }
+                                    break;
+                                case "timepicker":
+                                   if (eval(document.getElementById("IsMobile"))){
+                                     var FormatedTime;
+                                     var date = new Date();
+                                     FormatedTime = FormatTime(date);
+                                     $(Jquery).val(FormatedTime);
+                                     cce_Symbol.Value = FormatedTime;
+			             }else{
+                                    $(Jquery).timepicker("setTime", new Date(pValue));
+                                    cce_Symbol.Value = pValue;
 			 
-			 }
+			             }
                         break;
+                    case "yesno":
+                        $(Jquery).val(pValue);
+                        cce_Symbol.Value = pValue;
+                        if(pValue == "") 
+                            {
+                               return null; 
+                               $(Jquery).val(null);
+                                cce_Symbol.Value = null;
+                            }
+                            else if (pValue) 
+                            {
+                                return true; //"Yes";
+                                $(Jquery).val(true);
+                                cce_Symbol.Value = true;
+                            }
+                            else 
+                            {
+                                $(Jquery).val(false);
+                                cce_Symbol.Value = false;
+                            }
                    default:
                         $(Jquery).val(pValue);
                         cce_Symbol.Value = pValue;
@@ -514,6 +558,7 @@ CCE_Context.prototype.setValue = function (pName, pValue)
         }
     }
 }
+
 
 function CCE_Symbol(pName, pType, pSource, pPageNumber, pValue) 
 {

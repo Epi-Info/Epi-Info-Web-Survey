@@ -33,5 +33,6 @@ namespace Epi.Core.EnterInterpreter
         public string Namespace { get { return this._Namespace; } set { this._Namespace = value; } }
         public string ControlType { get { return this._ControlType; } set { this._ControlType = value; } }
         public string PageNumber { get { return this._PageNumber; } set { this._PageNumber = value; } }
+        public string Prompt { get; set; }
     }
 }
