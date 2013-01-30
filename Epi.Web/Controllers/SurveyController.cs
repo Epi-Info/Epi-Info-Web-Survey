@@ -226,6 +226,8 @@ namespace Epi.Web.MVC.Controllers
                          
                             form.DisabledFieldsList = this.Request.Form["DisabledFieldsList"].ToString();
 
+                            form.RequiredFieldsList = this.Request.Form["RequiredFieldsList"].ToString();
+
                             form.AssignList = this.Request.Form["AssignList"].ToString();
                          
                         _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId, form, SurveyAnswer, IsSubmited, IsSaved, PageNumber);
@@ -244,6 +246,8 @@ namespace Epi.Web.MVC.Controllers
                             form.HighlightedFieldsList = this.Request.Form["HighlightedFieldsList"].ToString();
                             
                             form.DisabledFieldsList = this.Request.Form["DisabledFieldsList"].ToString();
+
+                            form.RequiredFieldsList = this.Request.Form["RequiredFieldsList"].ToString();
 
                             form.AssignList = this.Request.Form["AssignList"].ToString();
 
@@ -283,6 +287,9 @@ namespace Epi.Web.MVC.Controllers
                             form.HighlightedFieldsList = this.Request.Form["HighlightedFieldsList"].ToString();
 
                             form.DisabledFieldsList = this.Request.Form["DisabledFieldsList"].ToString();
+
+                            form.RequiredFieldsList = this.Request.Form["RequiredFieldsList"].ToString();
+
                             form.AssignList = this.Request.Form["AssignList"].ToString();
 
 
@@ -293,7 +300,7 @@ namespace Epi.Web.MVC.Controllers
                             TempData["Width"] = form.Width + 30;
                             return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
                         }
-                        else if (form.Validate())
+                        else if (form.Validate(form.RequiredFieldsList))
                         {
                             if (!string.IsNullOrEmpty(Submitbutton))
                             {
@@ -322,7 +329,7 @@ namespace Epi.Web.MVC.Controllers
                                 for (int i = 1; i < form.NumberOfPages+1; i++)
                                 {
                                     form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, i, SurveyAnswer, IsMobileDevice);
-                                    if (!form.Validate())
+                                    if (!form.Validate(form.RequiredFieldsList))
                                     {
                                         TempData["isredirect"] = "true";
                                         TempData["Width"] = form.Width + 30;
@@ -357,6 +364,9 @@ namespace Epi.Web.MVC.Controllers
                                  form.HighlightedFieldsList = this.Request.Form["HighlightedFieldsList"].ToString();
                                 
                                  form.DisabledFieldsList = this.Request.Form["DisabledFieldsList"].ToString();
+
+                                 form.RequiredFieldsList = this.Request.Form["RequiredFieldsList"].ToString();
+
                                  form.AssignList = this.Request.Form["AssignList"].ToString();
                                  
 
