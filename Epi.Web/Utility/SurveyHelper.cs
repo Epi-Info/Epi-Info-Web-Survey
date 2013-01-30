@@ -110,6 +110,13 @@ namespace Epi.Web.MVC.Utility
                    Xdoc.Root.Attribute("DisabledFieldsList").Value = form.DisabledFieldsList.ToString();
 
                }
+               if (form.RequiredFieldsList != null)
+               {
+
+                   Xdoc.Root.Attribute("RequiredFieldsList").Value = "";
+                   Xdoc.Root.Attribute("RequiredFieldsList").Value = form.RequiredFieldsList.ToString();
+
+               }
                //  AssignList 
                List<KeyValuePair<string, String>> FieldsList = new List<KeyValuePair<string, string>>();
               
@@ -157,7 +164,7 @@ namespace Epi.Web.MVC.Utility
                 Xdoc.Root.Attribute("HiddenFieldsList").Remove();
                 Xdoc.Root.Attribute("HighlightedFieldsList").Remove();
                 Xdoc.Root.Attribute("DisabledFieldsList").Remove();
-               
+                Xdoc.Root.Attribute("RequiredFieldsList").Remove(); 
                 RemovePageNumAtt(Xdoc);
             }
             if (IsSaved)

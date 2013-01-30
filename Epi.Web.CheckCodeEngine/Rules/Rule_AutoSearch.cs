@@ -48,7 +48,7 @@ namespace Epi.Core.EnterInterpreter.Rules
         /// <returns>object</returns>
         public override object Execute()
         {
-            this.Context.EnterCheckCodeInterface.AutoSearch(this.IdentifierList, this.DisplayList, this.AlwaysShow);
+            //this.Context.EnterCheckCodeInterface.AutoSearch(this.IdentifierList, this.DisplayList, this.AlwaysShow);
             return null;
         }
     }

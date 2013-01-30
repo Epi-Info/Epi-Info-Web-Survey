@@ -1838,14 +1838,78 @@ function CCE_StrLEN(pValue)
 
 
 
-function CCE_Set_Required(pNameList)
+function CCE_Set_Required(fNameList)
 {
+  try 
+         {
+             if (fNameList != null) 
+             {
+         
+                for (var i = 0; i < fNameList.length; i++) 
+                {
+                    var query = null;  
+                   
+                     query = '#mvcdynamicfield_' + fNameList[i];
+                     var symbol = cce_Context.resolve(fNameList[i]);
+                     switch (symbol.Type) 
+                            {
+                                case "textbox":
+                                    
+                                    $(query).addClass('validate[required] text-input');
+                                    break;
 
+                                default:
+                                  $(query).addClass('validate[required]');
+                                    break;
+
+                            }
+
+                     CCE_AddToFieldsList(fNameList[i], 'RequiredFieldsList');
+                   
+                }
+             }
+         }
+         catch (ex) 
+         {
+
+         }
 }
 
-function CCE_Set_NOT_Required(pNameList)
+function CCE_Set_NOT_Required(fNameList)
 {
+try 
+         {
+             if (fNameList != null) 
+             {
 
+             for (var i = 0; i < fNameList.length; i++) 
+                {
+          
+                 var query = null;  
+                  
+                     query = '#mvcdynamicfield_' + fNameList[i];
+                     var symbol = cce_Context.resolve(fNameList[i]);
+                     switch (symbol.Type) 
+                            {
+                                case "textbox":
+                                    
+                                    $(query).removeClass('validate[required] text-input');
+                                    break;
+
+                                default:
+                                    $(query).removeClass('validate[required]');
+                                    break;
+
+                            }
+
+                   CCE_RemoveFromFieldsList(fNameList[i], 'RequiredFieldsList');
+                }
+             }
+         }
+         catch (ex) 
+         {
+
+         }
 }
 
 
