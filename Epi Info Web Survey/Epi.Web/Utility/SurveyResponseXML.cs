@@ -87,7 +87,8 @@ namespace Epi.Web.MVC.Utility
               root.SetAttribute("HiddenFieldsList","");
               root.SetAttribute("HighlightedFieldsList", "");
               root.SetAttribute("DisabledFieldsList", "");
-              
+              root.SetAttribute("RequiredFieldsList", "");
+
               xml.AppendChild(root);
               }
 

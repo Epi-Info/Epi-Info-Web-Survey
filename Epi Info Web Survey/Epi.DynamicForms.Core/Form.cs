@@ -100,13 +100,15 @@ namespace MvcDynamicForms
         /// Validates each InputField object contained in the Fields collection. Validation also causes the Error property to be set for each InputField object.
         /// </summary>
         /// <returns>Returns true if every InputField object is valid. False is returned otherwise.</returns>
-        public bool Validate()
+        public bool Validate(string RequiredFieldsList = "" )
         {
             bool isValid = true;
 
             foreach (var field in InputFields)
+
                 if (!field.Validate())
                     isValid = false;
+             
             return isValid;
         }
 
@@ -326,6 +328,11 @@ namespace MvcDynamicForms
             set;
         }
         public string AssignList
+        {
+            get;
+            set;
+        }
+        public string RequiredFieldsList
         {
             get;
             set;

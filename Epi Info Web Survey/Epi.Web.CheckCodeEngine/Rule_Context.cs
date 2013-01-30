@@ -335,7 +335,7 @@ public System.Collections.Specialized.NameValueCollection GlobalVariables;*/
             this._HiddenFieldList = new List<string>();
             this._HighlightedFieldList = new List<string>();
             this._DisabledFieldList = new List<string>();
-
+            this._RequiredFieldList = new List<string>();
 
            //this.DefineVariablesCheckCode = new Rule_DefineVariables_Statement();
 
