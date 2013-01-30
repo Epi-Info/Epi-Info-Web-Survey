@@ -1856,15 +1856,22 @@ function CCE_Set_Required(fNameList)
                                 case "textbox":
                                     
                                     $(query).addClass('validate[required] text-input');
+                                     CCE_AddToFieldsList(fNameList[i], 'RequiredFieldsList');
                                     break;
 
                                 default:
-                                  $(query).addClass('validate[required]');
+                                 if (symbol.Type != "checkbox")
+                                    {
+
+                                     $(query).addClass('validate[required]');
+                                     CCE_AddToFieldsList(fNameList[i], 'RequiredFieldsList');
+                                     
+                                    }
                                     break;
 
                             }
 
-                     CCE_AddToFieldsList(fNameList[i], 'RequiredFieldsList');
+                    
                    
                 }
              }
@@ -1894,15 +1901,20 @@ try
                                 case "textbox":
                                     
                                     $(query).removeClass('validate[required] text-input');
+                                     CCE_RemoveFromFieldsList(fNameList[i], 'RequiredFieldsList');
                                     break;
 
                                 default:
+                                    if (symbol.Type != "checkbox")
+                                    {
                                     $(query).removeClass('validate[required]');
+                                     CCE_RemoveFromFieldsList(fNameList[i], 'RequiredFieldsList');
+                                    }
                                     break;
 
                             }
 
-                   CCE_RemoveFromFieldsList(fNameList[i], 'RequiredFieldsList');
+                  
                 }
              }
          }
