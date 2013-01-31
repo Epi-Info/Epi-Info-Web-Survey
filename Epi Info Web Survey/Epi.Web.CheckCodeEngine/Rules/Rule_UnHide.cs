@@ -110,7 +110,10 @@ namespace Epi.Core.EnterInterpreter.Rules
             }
 
             pJavaScriptBuilder.AppendLine("var List = new Array();");
-            foreach (string fieldName in NewIdentifierList)
+
+            List<string> FieldList = new List<string>(NewIdentifierList);
+            this.Context.ExpandGroupVariables(FieldList, ref this.IsExceptList);
+            foreach (string fieldName in FieldList)
             {
                 pJavaScriptBuilder.AppendLine(string.Format("List.push('{0}');", fieldName.ToLower()));
             }
