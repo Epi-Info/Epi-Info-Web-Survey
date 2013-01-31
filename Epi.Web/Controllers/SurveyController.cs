@@ -87,7 +87,7 @@ namespace Epi.Web.MVC.Controllers
                             // if redirect then perform server validation before displaying
                             if (TempData.ContainsKey("isredirect") && !string.IsNullOrWhiteSpace(TempData["isredirect"].ToString()))
                             {
-                                form.Validate( GetRequiredList(surveyAnswerDTO.XML.ToString()));
+                                form.Validate(form.RequiredFieldsList);
                             }
                             this.SetCurrentPage(surveyAnswerDTO, PageNumber);
                             //PassCode start
@@ -232,6 +232,7 @@ namespace Epi.Web.MVC.Controllers
                          
                         _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId, form, SurveyAnswer, IsSubmited, IsSaved, PageNumber);
 
+                    
 
                         if (!string.IsNullOrEmpty(this.Request.Form["is_save_action"]) && this.Request.Form["is_save_action"].ToString().Equals("true", StringComparison.OrdinalIgnoreCase))
                         {
@@ -251,6 +252,7 @@ namespace Epi.Web.MVC.Controllers
 
                             form.AssignList = this.Request.Form["AssignList"].ToString();
 
+                     
                             
                             IsSaved = form.IsSaved = true;
                             form.StatusId = SurveyAnswer.Status;
@@ -300,6 +302,7 @@ namespace Epi.Web.MVC.Controllers
                             TempData["Width"] = form.Width + 30;
                             return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
                         }
+                             
                         else if (form.Validate(form.RequiredFieldsList))
                         {
                             if (!string.IsNullOrEmpty(Submitbutton))
