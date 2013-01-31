@@ -680,8 +680,9 @@ public System.Collections.Specialized.NameValueCollection GlobalVariables;*/
                     case "21"://GroupBox
                         var.DataType = DataType.Unknown;
                         var.ControlType = "groupbox";
+                        var.Expression = _FieldTypeID.Attribute("List").Value;
                         //List="Otherpleasespecify,DoubleHearingProtectionWearingEarPlugsandMuffsatthesametime,FittedEarPlugs,EarMuffs,DisposableEarPlugs,FullFaceAirPurifyingCartridgeRespirator,FullFaceorHoodSuppliedAirRespirator,HalfFaceAirPurifyingCartridgeRespirator,DisposibleRespiratorDustMask,WeldingHelmetwithDarkFacePlate,ProtectiveLongSleeveJacket,HeatResistantandFlameRetardantClothing,HeavyLeatherGloves,InsulatedGloves,FaceShield,DarkGoggles,Goggles,None2"
-                        string[] IdentifierList = _FieldTypeID.Attribute("List").Value.Split(',');
+                        string[] IdentifierList = var.Expression.Split(',');
                         string Identifier = _FieldTypeID.Attribute("Name").Value;
                         if (this.GroupVariableList.ContainsKey(Identifier))
                         {
@@ -762,6 +763,9 @@ public System.Collections.Specialized.NameValueCollection GlobalVariables;*/
                     case "numeric":
                         pJavaScriptBuilder.AppendLine(string.Format(defineNumberFormat, var.Name, var.ControlType, DataSource, var.PageNumber, var.Expression));
                         break;
+                    case "groupbox":
+                        pJavaScriptBuilder.AppendLine(string.Format(defineFormat, var.Name, var.ControlType, DataSource, var.PageNumber, var.Expression));
+                        break;
                     case "commentlegal":
                     case  "codes":
                     case "legalvalues":
@@ -769,6 +773,7 @@ public System.Collections.Specialized.NameValueCollection GlobalVariables;*/
                     case "timepicker":
                     case "multiline":
                     case "textbox": 
+                    
                     default:
                         pJavaScriptBuilder.AppendLine(string.Format(defineFormat, var.Name, var.ControlType, DataSource, var.PageNumber, var.Expression));
                         break;
