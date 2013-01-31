@@ -105,10 +105,14 @@ namespace MvcDynamicForms
             bool isValid = true;
 
             foreach (var field in InputFields)
-
+            {
+                if (RequiredFieldsList.Contains(field.Key.ToString()))
+                {
+                    field.Required = true;
+               }
                 if (!field.Validate())
                     isValid = false;
-             
+            }
             return isValid;
         }
 
