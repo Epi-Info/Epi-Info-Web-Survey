@@ -87,7 +87,7 @@ namespace Epi.Web.MVC.Controllers
                             // if redirect then perform server validation before displaying
                             if (TempData.ContainsKey("isredirect") && !string.IsNullOrWhiteSpace(TempData["isredirect"].ToString()))
                             {
-                                form.Validate();
+                                form.Validate( GetRequiredList(surveyAnswerDTO.XML.ToString()));
                             }
                             this.SetCurrentPage(surveyAnswerDTO, PageNumber);
                             //PassCode start
@@ -550,6 +550,14 @@ namespace Epi.Web.MVC.Controllers
             }
 
             return List;
+        }
+
+        public static string GetRequiredList(string Xml) {
+            XDocument Xdoc = XDocument.Parse(Xml);
+            string list = Xdoc.Root.Attribute("RequiredFieldsList").Value;
+
+
+            return list;
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
