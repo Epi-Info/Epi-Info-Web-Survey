@@ -1860,7 +1860,7 @@ function CCE_Set_Required(fNameList)
                                     break;
 
                                 default:
-                                 if (symbol.Type != "checkbox")
+                                 if (symbol.Type != "checkbox" && symbol.Type != "radiobutton")
                                     {
 
                                      $(query).addClass('validate[required]');
@@ -1905,7 +1905,7 @@ try
                                     break;
 
                                 default:
-                                    if (symbol.Type != "checkbox")
+                                    if (symbol.Type != "checkbox" && symbol.Type != "radiobutton")
                                     {
                                     $(query).removeClass('validate[required]');
                                      CCE_RemoveFromFieldsList(fNameList[i], 'RequiredFieldsList');
