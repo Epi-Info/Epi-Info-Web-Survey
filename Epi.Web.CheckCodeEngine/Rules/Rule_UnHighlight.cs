@@ -75,7 +75,9 @@ namespace Epi.Core.EnterInterpreter.Rules
         public override void ToJavaScript(StringBuilder pJavaScriptBuilder)
         {
             pJavaScriptBuilder.AppendLine("var List = new Array();");
-            foreach (string fieldName in IdentifierList)
+            List<string> FieldList = new List<string>(this.IdentifierList);
+            this.Context.ExpandGroupVariables(FieldList, ref this.IsExceptList);
+            foreach (string fieldName in FieldList)
             {
                 pJavaScriptBuilder.AppendLine(string.Format("List.push('{0}');", fieldName.ToLower()));
             }
