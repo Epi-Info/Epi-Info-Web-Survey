@@ -28,6 +28,7 @@ namespace Epi.Core.EnterInterpreter
 public System.Collections.Specialized.NameValueCollection GlobalVariables;*/
         public System.Collections.Generic.Dictionary<string, string> StandardVariables;
         public System.Collections.Generic.Dictionary<string, string> AssignVariableCheck;
+        public Dictionary<string, List<string>> GroupVariableList;
         //private IMemoryRegion memoryRegion;
         private IScope currentScope;
 
@@ -338,6 +339,8 @@ public System.Collections.Specialized.NameValueCollection GlobalVariables;*/
             this._RequiredFieldList = new List<string>();
 
            //this.DefineVariablesCheckCode = new Rule_DefineVariables_Statement();
+            this.GroupVariableList = new Dictionary<string, List<string>>(StringComparer.OrdinalIgnoreCase);
+
 
             this.Page_Checkcode = new Dictionary<string, EnterRule>(StringComparer.OrdinalIgnoreCase);
             this.Field_Checkcode = new Dictionary<string, EnterRule>(StringComparer.OrdinalIgnoreCase);
@@ -677,6 +680,23 @@ public System.Collections.Specialized.NameValueCollection GlobalVariables;*/
                     case "21"://GroupBox
                         var.DataType = DataType.Unknown;
                         var.ControlType = "groupbox";
+                        //List="Otherpleasespecify,DoubleHearingProtectionWearingEarPlugsandMuffsatthesametime,FittedEarPlugs,EarMuffs,DisposableEarPlugs,FullFaceAirPurifyingCartridgeRespirator,FullFaceorHoodSuppliedAirRespirator,HalfFaceAirPurifyingCartridgeRespirator,DisposibleRespiratorDustMask,WeldingHelmetwithDarkFacePlate,ProtectiveLongSleeveJacket,HeatResistantandFlameRetardantClothing,HeavyLeatherGloves,InsulatedGloves,FaceShield,DarkGoggles,Goggles,None2"
+                        string[] IdentifierList = _FieldTypeID.Attribute("List").Value.Split(',');
+                        string Identifier = _FieldTypeID.Attribute("Name").Value;
+                        if (this.GroupVariableList.ContainsKey(Identifier))
+                        {
+                            this.GroupVariableList[Identifier].Clear();
+                        }
+                        else
+                        {
+                            this.GroupVariableList.Add(Identifier, new List<string>());
+                        }
+
+                        foreach (string s in IdentifierList)
+                        {
+                            this.GroupVariableList[Identifier].Add(s);
+                        }
+
                         break;
                 }
                 this.DefineVariable(var);
@@ -758,6 +778,91 @@ public System.Collections.Specialized.NameValueCollection GlobalVariables;*/
             }
         }
 
+        public void ExpandGroupVariables(List<string> pIdentifierList, ref bool pIsExceptionList)
+        {
+            List<string> result = new List<string>();
+            List<EpiInfo.Plugin.IVariable> List = this.Scope.FindVariables(VariableScope.DataSource | VariableScope.Standard);
+
+            for (int i = 0; i < pIdentifierList.Count; i++)
+            {
+                pIdentifierList[i] = pIdentifierList[i].ToUpper();
+            }
+
+            if (pIdentifierList.Count == 1 && pIdentifierList[0] == "*")
+            {
+                pIdentifierList.Clear();
+
+                foreach (DataColumn C in List)
+                {
+                    pIdentifierList.Add(C.ColumnName.ToUpper());
+                }
+            }
+
+
+            if (pIsExceptionList)
+            {
+                List<string> List2 = new List<string>();
+
+
+                foreach (DataColumn C in List)
+                {
+                    List2.Add(C.ColumnName.ToUpper());
+                }
+
+
+                foreach (string s in pIdentifierList)
+                {
+                    if (this.GroupVariableList.ContainsKey(s))
+                    {
+                        List<string> GroupVarList = this.GroupVariableList[s];
+                        foreach (string Variable in GroupVarList)
+                        {
+                            if (List2.Contains(Variable.ToUpper()))
+                            {
+                                List2.Remove(Variable.ToUpper());
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (List2.Contains(s.ToUpper()))
+                        {
+
+                            List2.Remove(s.ToUpper());
+                        }
+                    }
+                }
+                pIdentifierList.Clear();
+
+                foreach (string s in List2)
+                {
+                    pIdentifierList.Add(s);
+                }
+
+
+                pIsExceptionList = false;
+            }
+            else
+            {
+                foreach (KeyValuePair<string, List<string>> GroupVarList in this.GroupVariableList)
+                {
+                    if (pIdentifierList.Contains(GroupVarList.Key.ToUpper()))
+                    {
+                        pIdentifierList.Remove(GroupVarList.Key.ToUpper());
+
+                        foreach (string Variable in GroupVarList.Value)
+                        {
+                            if (!pIdentifierList.Contains(Variable.ToUpper()))
+                            {
+                                pIdentifierList.Add(Variable.ToUpper());
+                            }
+
+                        }
+                    }
+                }
+            }
+
+        }
 
         public void GetSubroutineJavaScript(StringBuilder pJavaScriptBuilder)
         {
