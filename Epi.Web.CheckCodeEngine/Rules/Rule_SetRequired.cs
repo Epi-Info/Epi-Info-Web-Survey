@@ -51,17 +51,21 @@ namespace Epi.Core.EnterInterpreter.Rules
             if (this.IdentifierList.Length == 1 && this.IdentifierList[0] == "*")
             {
                 List<EpiInfo.Plugin.IVariable> variableList = this.Context.CurrentScope.FindVariables(EpiInfo.Plugin.VariableScope.DataSource);
+                this.IdentifierList = new string[variableList.Count];
+                int i = 0;
                 foreach (EpiInfo.Plugin.IVariable field in variableList)
                 {
-                    pJavaScriptBuilder.AppendLine(string.Format("List.push('{0}');", field.Name.ToLower()));
+                    this.IdentifierList[i] = field.Name.ToLower();
+                    i++;
                 }
             }
-            else
+
+            List<string> FieldList = new List<string>(this.IdentifierList);
+            bool isExcept = false;
+            this.Context.ExpandGroupVariables(FieldList, ref isExcept);
+            foreach (string fieldName in FieldList)
             {
-                foreach (string fieldName in IdentifierList)
-                {
-                    pJavaScriptBuilder.AppendLine(string.Format("List.push('{0}');", fieldName.ToLower()));
-                }
+                pJavaScriptBuilder.AppendLine(string.Format("List.push('{0}');", fieldName.ToLower()));
             }
 
             pJavaScriptBuilder.AppendLine("CCE_Set_Required(List);");
