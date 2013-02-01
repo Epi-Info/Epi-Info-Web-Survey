@@ -118,11 +118,40 @@ namespace Epi.Web.MVC.Controllers
 
                 SurveyInfoModel surveyInfoModel = _isurveyFacade.GetSurveyInfoModel(SurveyAnswer.SurveyId);
 
+
+                XDocument xdoc = XDocument.Parse(surveyInfoModel.XML);
+
                 MvcDynamicForms.Form form = _isurveyFacade.GetSurveyFormData(SurveyAnswer.SurveyId, 1, SurveyAnswer, IsMobileDevice);
+
+                var _FieldsTypeIDs = from _FieldTypeID in
+                                         xdoc.Descendants("Field")
+                                     //where _FieldTypeID.Attribute("Position").Value == (PageNumber - 1).ToString()
+                                     select _FieldTypeID;
+                // Adding Required fileds from MetaData to the list
+                foreach (var _FieldTypeID in _FieldsTypeIDs)
+                {
+                    if (bool.Parse(_FieldTypeID.Attribute("IsRequired").Value))
+                    {
+                        if (!form.RequiredFieldsList.Contains(_FieldTypeID.Attribute("Name").Value))
+                        {
+                            if (form.RequiredFieldsList != "")
+                            {
+                                form.RequiredFieldsList = form.RequiredFieldsList + "," + _FieldTypeID.Attribute("Name").Value;
+                            }
+                            else
+                            {
+                                form.RequiredFieldsList = _FieldTypeID.Attribute("Name").Value;
+                            }
+                        }
+                    }
+
+                }
+
+
+                
 
                 TempData["Width"] = form.Width + 100;
 
-                XDocument xdoc = XDocument.Parse(surveyInfoModel.XML);
                 XDocument xdocResponse = XDocument.Parse(SurveyAnswer.XML);
 
                 XElement ViewElement = xdoc.XPathSelectElement("Template/Project/View");
