@@ -385,7 +385,9 @@ CCE_Context.prototype.getValue = function (pName)
             var fieldName = 'mvcdynamicfield_' + pName;
             if (eval(document.getElementById(fieldName))) 
             {
+               
                 var field = $(query);
+                 value = field.val();
                 switch (cce_Symbol.Type) 
                 {
                     case "yesno":
