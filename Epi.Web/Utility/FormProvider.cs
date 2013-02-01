@@ -78,27 +78,7 @@ namespace Epi.Web.MVC.Utility
                 form.HighlightedFieldsList = xdocResponse.Root.Attribute("HighlightedFieldsList").Value;
                 form.DisabledFieldsList = xdocResponse.Root.Attribute("DisabledFieldsList").Value;
                 form.RequiredFieldsList = xdocResponse.Root.Attribute("RequiredFieldsList").Value;
-                // Adding Required fileds from MetaData to the list
-                foreach (var _FieldTypeID in _FieldsTypeIDs)
-                {
-                    if (bool.Parse(_FieldTypeID.Attribute("IsRequired").Value))
-                    {
-                        if (!form.RequiredFieldsList.Contains(_FieldTypeID.Attribute("Name").Value))
-                        {
-                            if (form.RequiredFieldsList != "")
-                            {
-                                form.RequiredFieldsList = form.RequiredFieldsList + "," + _FieldTypeID.Attribute("Name").Value;
-                            }
-                            else 
-                            {
-                                form.RequiredFieldsList =  _FieldTypeID.Attribute("Name").Value;
-                            }
-                        }
-                        
-                
-                    }
-                
-                }
+
                 form.FormCheckCodeObj = form.GetCheckCodeObj(xdoc, xdocResponse, checkcode);
 
            
@@ -615,7 +595,7 @@ namespace Epi.Web.MVC.Utility
                 fontfamily = _FieldTypeID.Attribute("PromptFontFamily").Value,
                // IsRequired = bool.Parse(_FieldTypeID.Attribute("IsRequired").Value),
                 IsRequired = GetRequiredControlState(form.RequiredFieldsList.ToString(), _FieldTypeID.Attribute("Name").Value, "RequiredFieldsList"),
-                Required = GetRequiredControlState(form.RequiredFieldsList.ToString(), _FieldTypeID.Attribute("Name").Value, "RequiredFieldsList"),
+                  Required = GetRequiredControlState(form.RequiredFieldsList.ToString(), _FieldTypeID.Attribute("Name").Value, "RequiredFieldsList"),
                  
                 IsReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value),
                 MaxLength = int.Parse(_FieldTypeID.Attribute("MaxLength").Value),
