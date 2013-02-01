@@ -4,6 +4,10 @@ using Epi.Web.MVC.Models;
 using System;
 using System.Web.Security;
 using System.Configuration;
+using System.Xml;
+using System.Xml.Linq;
+using System.Xml.XPath;
+using System.Linq;
 namespace Epi.Web.MVC.Controllers
 {
     public class FinalController : Controller
@@ -62,13 +66,57 @@ namespace Epi.Web.MVC.Controllers
 
             try
             {
+                bool IsMobileDevice = false;
+
+                IsMobileDevice = this.Request.Browser.IsMobileDevice;
+                if (IsMobileDevice == false)
+                {
+                    IsMobileDevice = Epi.Web.MVC.Utility.SurveyHelper.IsMobileDevice(this.Request.UserAgent.ToString());
+                }
 
                 FormsAuthentication.SetAuthCookie("BeginSurvey", false);
                 
                 Guid responseId = Guid.NewGuid();
 
 
-                _isurveyFacade.CreateSurveyAnswer(surveyId, responseId.ToString());
+                Epi.Web.Common.DTO.SurveyAnswerDTO SurveyAnswer = _isurveyFacade.CreateSurveyAnswer(surveyId, responseId.ToString());
+
+
+
+
+                SurveyInfoModel surveyInfoModel = _isurveyFacade.GetSurveyInfoModel(SurveyAnswer.SurveyId);
+
+
+                XDocument xdoc = XDocument.Parse(surveyInfoModel.XML);
+
+                MvcDynamicForms.Form form = _isurveyFacade.GetSurveyFormData(SurveyAnswer.SurveyId, 1, SurveyAnswer, IsMobileDevice);
+
+                var _FieldsTypeIDs = from _FieldTypeID in
+                                         xdoc.Descendants("Field")
+                                         select _FieldTypeID;
+
+
+                // Adding Required fileds from MetaData to the list
+                foreach (var _FieldTypeID in _FieldsTypeIDs)
+                {
+                    if (bool.Parse(_FieldTypeID.Attribute("IsRequired").Value))
+                    {
+                        if (!form.RequiredFieldsList.Contains(_FieldTypeID.Attribute("Name").Value))
+                        {
+                            if (form.RequiredFieldsList != "")
+                            {
+                                form.RequiredFieldsList = form.RequiredFieldsList + "," + _FieldTypeID.Attribute("Name").Value.ToLower();
+                            }
+                            else
+                            {
+                                form.RequiredFieldsList = _FieldTypeID.Attribute("Name").Value.ToLower();
+                            }
+                        }
+                    }
+
+                }
+                _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, SurveyAnswer.ResponseId, form, SurveyAnswer, false, false, 1);
+
                 return RedirectToRoute(new { Controller = "Survey", Action = "Index", responseId = responseId, PageNumber = 1 });
             }
             catch (Exception ex)

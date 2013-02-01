@@ -103,15 +103,35 @@ namespace MvcDynamicForms
         public bool Validate(string RequiredFieldsList = "" )
         {
             bool isValid = true;
-
+           
+             
             foreach (var field in InputFields)
             {
-                if (!string.IsNullOrEmpty(RequiredFieldsList) && RequiredFieldsList.Contains(field.Key.ToString()))
+                if (!string.IsNullOrEmpty(RequiredFieldsList))
                 {
-                    field.Required = true;
+                    var RequiredList = RequiredFieldsList.Split(',');
+                    bool _Required = false;
+                    foreach (var item in RequiredList)
+                    {
+                        if (item == field.Key.ToString())
+                        {
+                            _Required = true;
+
+                        }
+
+                    }
+
+                    if (_Required)
+                    {
+                        field.Required = true;
+                    }
+                    else
+                    {
+
+                        field.Required = false;
+                    }
                 }
-                else 
-                {
+                else {
                     field.Required = false;
                 }
               if (!field.Validate())

@@ -136,11 +136,11 @@ namespace Epi.Web.MVC.Controllers
                         {
                             if (form.RequiredFieldsList != "")
                             {
-                                form.RequiredFieldsList = form.RequiredFieldsList + "," + _FieldTypeID.Attribute("Name").Value;
+                                form.RequiredFieldsList = form.RequiredFieldsList + "," + _FieldTypeID.Attribute("Name").Value.ToLower();
                             }
                             else
                             {
-                                form.RequiredFieldsList = _FieldTypeID.Attribute("Name").Value;
+                                form.RequiredFieldsList = _FieldTypeID.Attribute("Name").Value.ToLower();
                             }
                         }
                     }
@@ -195,7 +195,7 @@ namespace Epi.Web.MVC.Controllers
                     SurveyAnswer = _isurveyFacade.GetSurveyAnswerResponse(SurveyAnswer.ResponseId).SurveyResponseList[0];
 
                     MvcDynamicForms.Form formRs = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, i, SurveyAnswer, IsMobileDevice);
-
+                    formRs.RequiredFieldsList = form.RequiredFieldsList;
                     formRs = Epi.Web.MVC.Utility.SurveyHelper.UpdateControlsValuesFromContext(formRs, ContextDetailList);
                      
                     _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, SurveyAnswer.ResponseId, formRs, SurveyAnswer, false, false, i);
