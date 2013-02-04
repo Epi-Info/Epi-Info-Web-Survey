@@ -116,6 +116,7 @@ namespace MvcDynamicForms
                         if (item == field.Key.ToString())
                         {
                             _Required = true;
+                            break;
 
                         }
 
