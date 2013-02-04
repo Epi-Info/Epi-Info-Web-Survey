@@ -1213,44 +1213,58 @@ function CCE_RemoveFromFieldsList(FieldName,ListName) {
  }
 
  //Clear the control value
- function CCE_ClearControlValue(pName) 
+ function CCE_ClearControlValue(pCheckCodeList) 
  {
-    
-    //if control is a check box uncheck it otherwise clear the control value
-    var cce_Symbol = cce_Context.resolve(pName);
-    if (cce_Symbol != null) 
-    {
-       // cce_Symbol.Value = pValue;
-
-        var controlId = '#mvcdynamicfield_' + pName;
-        var FieldName = 'mvcdynamicfield_' + pName;
-        if (eval(document.getElementById(FieldName)))
-        {
-            if(cce_Symbol.Source == "datasource")
-            {
-
-                switch (cce_Symbol.Type) 
+     if (pCheckCodeList != null) 
+     {
+           var ControlList = new Array();
+         for (var i = 0; i < pCheckCodeList.length; i++) 
+         {
+                //if control is a check box uncheck it otherwise clear the control value
+                var cce_Symbol = cce_Context.resolve(pCheckCodeList[i]);
+                if (cce_Symbol != null) 
                 {
-                    case "checkbox":
-		    if (eval(document.getElementById("IsMobile"))){
-                          $(controlId).attr('checked', false).checkboxradio("refresh");
-                          $('.ui-checkbox').removeClass('ui-disabled');
-			  }else{
-                           $(controlId).attr('checked', false);
-			  }
-                        break;
-                    default:
-                        $(controlId).val('');
-                        break;
+                   // cce_Symbol.Value = pValue;
 
+                    var controlId = '#mvcdynamicfield_' + pCheckCodeList[i];
+                    var FieldName = 'mvcdynamicfield_' + pCheckCodeList[i];
+                    if (eval(document.getElementById(FieldName)))
+                    {
+                        if(cce_Symbol.Source == "datasource")
+                        {
+
+                            switch (cce_Symbol.Type) 
+                            {
+                                case "checkbox":
+		                if (eval(document.getElementById("IsMobile"))){
+                                      $(controlId).attr('checked', false).checkboxradio("refresh");
+                                      $('.ui-checkbox').removeClass('ui-disabled');
+			              }else{
+                                       $(controlId).attr('checked', false);
+			              }
+                                    break;
+                                default:
+                                    $(controlId).val('');
+                                    break;
+
+                            }
+                        }
+                    }
+                    else
+                    {
+                       // updateXml(pCheckCodeList[i], '') ;
+                       ControlList.push(pCheckCodeList[i]);
+                    }
                 }
-            }
-        }
-        else
-        {
-            updateXml(pName, '') ;
-        }
-    }
+             }
+
+             if( ControlList.length > 0)
+             {
+             updateXml(ControlList, '') 
+             
+             }
+
+          }
  }
 
  //Go to a page or focus on a control on the same page

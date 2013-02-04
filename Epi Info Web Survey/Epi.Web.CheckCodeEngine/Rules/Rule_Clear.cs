@@ -29,18 +29,33 @@ namespace Epi.Core.EnterInterpreter.Rules
             return null;
         }
 
-
+         
         public override void ToJavaScript(StringBuilder pJavaScriptBuilder)
         {
-
-            foreach (string s in this.IdentifierList)
+            List<string> FieldList = new List<string>(this.IdentifierList);
+            bool IsExceptList = false;
+            this.Context.ExpandGroupVariables(FieldList, ref IsExceptList);
+            pJavaScriptBuilder.AppendLine("var List = new Array();");
+          /*  foreach (string s in  FieldList)
             {
                 pJavaScriptBuilder.Append("CCE_ClearControlValue('");
                 pJavaScriptBuilder.Append(s.ToLower());
                 pJavaScriptBuilder.AppendLine("');");
+            }*/
+
+            foreach (string fieldName in FieldList)
+            {
+                pJavaScriptBuilder.AppendLine(string.Format("List.push('{0}');", fieldName.ToLower()));
             }
-
-
+            
+            if ( IsExceptList)
+            {
+                pJavaScriptBuilder.AppendLine("CCE_ClearControlValue(List,true);");
+            }
+            else
+            {
+                pJavaScriptBuilder.AppendLine("CCE_ClearControlValue(List,false);");
+            }
 
         }
 
