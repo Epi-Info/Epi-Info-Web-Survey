@@ -1447,7 +1447,7 @@ function CCE_Substring(pValue1, pValue2, pValue3)
                 length = fullString.length - startIndex + 1;
             }
 
-            if (startIndex < fullString.length)
+            if (startIndex <= fullString.length)
             {
                 result = fullString.substring(startIndex - 1, length);
             }

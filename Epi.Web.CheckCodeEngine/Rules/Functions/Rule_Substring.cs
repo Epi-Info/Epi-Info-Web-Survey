@@ -59,7 +59,7 @@ namespace Epi.Core.EnterInterpreter.Rules
                 {
                     length = fullString.Length - start + 1;
                 }
-                if (start < fullString.Length)
+                if (start <= fullString.Length)
                 {
                     _result = fullString.Substring(start - 1, length);
                 }
