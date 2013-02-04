@@ -248,9 +248,19 @@
  function updateXml(pName, pValue) {
  
    
+       
             var UpdateUrl = '@Url.Action("UpdateResponseXml","Survey")';
+            var NList = "";
+             for (var i = 0; i < NameList.length; i++) 
+           {
+               if (NList == ""){
+                    NList = NameList[i]
+               }else{
+                 NList = NList + "," +NameList[i];
+               }
            
-            UpdateResponse(UpdateUrl,pName, pValue,'@Model.ResponseId');
+           }
+            UpdateResponse(UpdateUrl,NList, pValue,'@Model.ResponseId');
             
             }
  /*Clicking the save button to save the survey*/

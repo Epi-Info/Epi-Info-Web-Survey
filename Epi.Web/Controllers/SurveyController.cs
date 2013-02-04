@@ -564,30 +564,42 @@ namespace Epi.Web.MVC.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public JsonResult UpdateResponseXml(string Name, string Value, string responseId)
+        public JsonResult UpdateResponseXml(string NameList, string Value, string responseId)
         {
+           
             try
             {
-                bool IsMobileDevice = false;
-
-                IsMobileDevice = this.Request.Browser.IsMobileDevice;
-                Epi.Web.Common.DTO.SurveyAnswerDTO SurveyAnswer = _isurveyFacade.GetSurveyAnswerResponse(responseId).SurveyResponseList[0];
-
-                SurveyInfoModel surveyInfoModel = _isurveyFacade.GetSurveyInfoModel(SurveyAnswer.SurveyId);
-
-                int NumberOfPages = Epi.Web.MVC.Utility.SurveyHelper.GetNumberOfPags(SurveyAnswer.XML);
-                    
-                     
-                for (int i = NumberOfPages; i > 0; i--)
+                if (!string.IsNullOrEmpty(NameList))
                 {
-                    SurveyAnswer = _isurveyFacade.GetSurveyAnswerResponse(SurveyAnswer.ResponseId).SurveyResponseList[0];
+                    string[] _NameList = null;
 
-                    MvcDynamicForms.Form formRs = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, i, SurveyAnswer, IsMobileDevice);
 
-                     formRs = Epi.Web.MVC.Utility.SurveyHelper.UpdateControlsValues(formRs, Name,Value);
+                    _NameList = NameList.Split(',');
 
-                    _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, SurveyAnswer.ResponseId, formRs, SurveyAnswer, false, false, i);
+                    bool IsMobileDevice = false;
 
+                    IsMobileDevice = this.Request.Browser.IsMobileDevice;
+                    Epi.Web.Common.DTO.SurveyAnswerDTO SurveyAnswer = _isurveyFacade.GetSurveyAnswerResponse(responseId).SurveyResponseList[0];
+
+                    SurveyInfoModel surveyInfoModel = _isurveyFacade.GetSurveyInfoModel(SurveyAnswer.SurveyId);
+
+                    int NumberOfPages = Epi.Web.MVC.Utility.SurveyHelper.GetNumberOfPags(SurveyAnswer.XML);
+
+                    foreach (string Name in _NameList)
+                    {
+                        for (int i = NumberOfPages; i > 0; i--)
+                        {
+                            SurveyAnswer = _isurveyFacade.GetSurveyAnswerResponse(SurveyAnswer.ResponseId).SurveyResponseList[0];
+
+                            MvcDynamicForms.Form formRs = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, i, SurveyAnswer, IsMobileDevice);
+
+                            formRs = Epi.Web.MVC.Utility.SurveyHelper.UpdateControlsValues(formRs, Name, Value);
+
+                            _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, SurveyAnswer.ResponseId, formRs, SurveyAnswer, false, false, i);
+
+                        }
+                    }
+                    return Json(true);
                 }
                 return Json(true);
             }

@@ -57,7 +57,7 @@ function SignOutAndRedirect(signoutUrl,homePageUrl) {
 function UpdateResponse(UpdateUrl,pName, pValue,responseId) {
     //post to the UpdateResponse action method and signout after that redirect to home page
    
-    var user = {'Name': pName,
+    var user = {'NameList': pName,
         'Value': pValue,
         'responseId':responseId,
         __RequestVerificationToken: $("input[name=__RequestVerificationToken]").val()
