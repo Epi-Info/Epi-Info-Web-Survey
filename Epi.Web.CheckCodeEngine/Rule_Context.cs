@@ -696,6 +696,7 @@ public System.Collections.Specialized.NameValueCollection GlobalVariables;*/
                         foreach (string s in IdentifierList)
                         {
                             this.GroupVariableList[Identifier].Add(s);
+                            this.GroupVariableList[Identifier].Add(Identifier);
                         }
 
                         break;
