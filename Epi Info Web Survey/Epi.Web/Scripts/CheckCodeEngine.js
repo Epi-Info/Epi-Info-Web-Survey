@@ -461,14 +461,14 @@ CCE_Context.prototype.getValue = function (pName)
                         });
                         return value;
                     default:
-                    if(value == "")
+                  /*  if(value == "")
                         {
                             return null;
                         }
                         else
                         {
                             return value;
-                        }
+                        }*/
                         return value;
                         
                 }
