@@ -48,14 +48,7 @@ namespace Epi.Core.EnterInterpreter.Rules
                 pJavaScriptBuilder.AppendLine(string.Format("List.push('{0}');", fieldName.ToLower()));
             }
             
-            if ( IsExceptList)
-            {
-                pJavaScriptBuilder.AppendLine("CCE_ClearControlValue(List,true);");
-            }
-            else
-            {
-                pJavaScriptBuilder.AppendLine("CCE_ClearControlValue(List,false);");
-            }
+            pJavaScriptBuilder.AppendLine("CCE_ClearControlValue(List,false);");
 
         }
 
