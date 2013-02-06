@@ -1225,24 +1225,38 @@ function CCE_RemoveFromFieldsList(FieldName,ListName) {
                 if (cce_Symbol != null) 
                 {
                    // cce_Symbol.Value = pValue;
-
+                    cce_Symbol.Value = null;
                     var controlId = '#mvcdynamicfield_' + pCheckCodeList[i];
                     var FieldName = 'mvcdynamicfield_' + pCheckCodeList[i];
                     if (eval(document.getElementById(FieldName)))
                     {
                         if(cce_Symbol.Source == "datasource")
                         {
-
                             switch (cce_Symbol.Type) 
                             {
                                 case "checkbox":
-		                if (eval(document.getElementById("IsMobile"))){
-                                      $(controlId).attr('checked', false).checkboxradio("refresh");
-                                      $('.ui-checkbox').removeClass('ui-disabled');
-			              }else{
-                                       $(controlId).attr('checked', false);
-			              }
+		                            if (eval(document.getElementById("IsMobile")))
+                                    {
+                                                  $(controlId).attr('checked', false).checkboxradio("refresh");
+                                                  $('.ui-checkbox').removeClass('ui-disabled');
+			                          }
+                                      else
+                                      {
+                                                   $(controlId).attr('checked', false);
+			                          }
+                                      $(controlId).val('');
                                     break;
+                                 case "radiobutton":
+                                   var RadiofieldName = "." + FieldName;
+                                    value = -1; 
+                                    $(RadiofieldName).each(function(i, obj) 
+                                    {
+                                        if ($(this).is(':checked'))
+                                        {
+                                            $(this).attr('checked', false);
+                                        }
+                                    });
+                                    $(controlId).val('');
                                 default:
                                     $(controlId).val('');
                                     break;
@@ -1250,22 +1264,10 @@ function CCE_RemoveFromFieldsList(FieldName,ListName) {
                             }
                         }
                     }
-                    else
-                    {
-                       // updateXml(pCheckCodeList[i], '') ;
-                       ControlList.push(pCheckCodeList[i]);
-                    }
                 }
              }
-
-             if( ControlList.length > 0)
-             {
-             updateXml(ControlList, '') 
-             
-             }
-
-          }
- }
+        }
+   }
 
  //Go to a page or focus on a control on the same page
 
@@ -1926,6 +1928,8 @@ try
                                     
                                     $(query).removeClass('validate[required] text-input');
                                      CCE_RemoveFromFieldsList(fNameList[i], 'RequiredFieldsList');
+                                     var prompt = $(query+"formError");
+                                     prompt.hide();
                                     break;
 
                                 default:
@@ -1933,6 +1937,9 @@ try
                                     {
                                     $(query).removeClass('validate[required]');
                                      CCE_RemoveFromFieldsList(fNameList[i], 'RequiredFieldsList');
+                                     $(query+"formError");
+                                     var prompt = $(query+"formError");
+                                     prompt.hide();
                                     }
                                     break;
 
