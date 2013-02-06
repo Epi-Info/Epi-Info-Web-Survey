@@ -36,12 +36,6 @@ namespace Epi.Core.EnterInterpreter.Rules
             bool IsExceptList = false;
             this.Context.ExpandGroupVariables(FieldList, ref IsExceptList);
             pJavaScriptBuilder.AppendLine("var List = new Array();");
-          /*  foreach (string s in  FieldList)
-            {
-                pJavaScriptBuilder.Append("CCE_ClearControlValue('");
-                pJavaScriptBuilder.Append(s.ToLower());
-                pJavaScriptBuilder.AppendLine("');");
-            }*/
 
             foreach (string fieldName in FieldList)
             {
