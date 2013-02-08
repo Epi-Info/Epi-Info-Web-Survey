@@ -1928,8 +1928,7 @@ try
                                     
                                     $(query).removeClass('validate[required] text-input');
                                      CCE_RemoveFromFieldsList(fNameList[i], 'RequiredFieldsList');
-                                     var prompt = $(query+"formError");
-                                     prompt.hide();
+                                     $(query).validationEngine('hidePrompt');
                                     break;
 
                                 default:
@@ -1938,8 +1937,7 @@ try
                                     $(query).removeClass('validate[required]');
                                      CCE_RemoveFromFieldsList(fNameList[i], 'RequiredFieldsList');
                                      $(query+"formError");
-                                     var prompt = $(query+"formError");
-                                     prompt.hide();
+                                     $(query).validationEngine('hidePrompt');
                                     }
                                     break;
 
