@@ -57,9 +57,10 @@ namespace MvcDynamicForms.Fields
 
             ////////////Check code end//////////////////
             txt.SetInnerText(Value);
+            txt.Attributes.Add("class", GetControlClass() + "text-input");
             if (_IsRequired == true)
             {
-                txt.Attributes.Add("class", "validate[required] text-input");
+               // txt.Attributes.Add("class", "validate[required] text-input");
                 txt.Attributes.Add("data-prompt-position", "topRight:15");
             }
             string IsHiddenStyle = "";
@@ -101,5 +102,26 @@ namespace MvcDynamicForms.Fields
             wrapper.InnerHtml = html.ToString();
             return wrapper.ToString();
         }
+
+        public string GetControlClass()
+        {
+
+            StringBuilder ControlClass = new StringBuilder();
+
+            ControlClass.Append("validate[");
+
+
+            if (_IsRequired == true)
+            {
+
+                ControlClass.Append("required");
+
+            }
+            ControlClass.Append("]");
+
+            return ControlClass.ToString();
+
+        }
     }
+
 }
