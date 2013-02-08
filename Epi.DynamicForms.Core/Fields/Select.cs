@@ -144,17 +144,17 @@ namespace MvcDynamicForms.Fields
             {
                         if ((size.Width) > _ControlWidth)
                         {
-                           select.Attributes.Add("class", "validate[required] text-input fix-me");
+                            select.Attributes.Add("class", GetControlClass() + "text-input fix-me");
                         }
                         else
                         {
-                           select.Attributes.Add("class", "validate[required] text-input");
+                            select.Attributes.Add("class", GetControlClass() + "text-input");
                         }
                        select.Attributes.Add("data-prompt-position", "topRight:10");
             }
             else 
             {
-
+                        select.Attributes.Add("class", GetControlClass() + "text-input fix-me");
                         if ((size.Width) > _ControlWidth)
                         {
                             select.Attributes.Add("class", "fix-me");
@@ -281,6 +281,25 @@ namespace MvcDynamicForms.Fields
             wrapper.Attributes["id"] = inputName + "_fieldWrapper";
             wrapper.InnerHtml = html.ToString();
             return wrapper.ToString();
+        }
+        public string GetControlClass()
+        {
+
+            StringBuilder ControlClass = new StringBuilder();
+
+            ControlClass.Append("validate[");
+
+
+            if (_IsRequired == true)
+            {
+
+                ControlClass.Append("required");
+
+            }
+            ControlClass.Append("]");
+
+            return ControlClass.ToString();
+
         }
     }
 }
