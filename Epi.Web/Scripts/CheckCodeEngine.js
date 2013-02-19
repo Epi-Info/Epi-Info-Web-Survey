@@ -667,6 +667,14 @@ Rule_Hide.prototype.Execute = function ()
                     query = '#mvcdynamicfield_' + pCheckCodeList[i] + "_fieldWrapper";
                     $(query).find('span').css("background-color","yellow");
                     break;
+                case "yesno":
+                    query = '#mvcdynamicfield_' + pCheckCodeList[i] + "_fieldWrapper";
+                    $(query).find('span').css("background-color","yellow");
+                    break;
+                case "commentlegal":
+                    query = '#mvcdynamicfield_' + pCheckCodeList[i] + "_fieldWrapper";
+                    $(query).find('span').css("background-color","yellow");
+                    break;
                 case "datepicker":
                     query = '#mvcdynamicfield_' + pCheckCodeList[i] + "_fieldWrapper";
                     $(query).find('div').css("background-color","yellow");
@@ -797,6 +805,14 @@ if (eval(document.getElementById("IsMobile"))){
                 case "legalvalues":
                     query = '#mvcdynamicfield_' + pCheckCodeList[i] + "_fieldWrapper";
                     $(query).find('span').removeAttr('Style'); 
+                    break;
+                 case "yesno":
+                    query = '#mvcdynamicfield_' + pCheckCodeList[i] + "_fieldWrapper";
+                      $(query).find('span').removeAttr('Style'); 
+                    break;
+                case "commentlegal":
+                    query = '#mvcdynamicfield_' + pCheckCodeList[i] + "_fieldWrapper";
+                      $(query).find('span').removeAttr('Style'); 
                     break;
                case "datepicker":
                       query = '#mvcdynamicfield_' + pCheckCodeList[i] + "_fieldWrapper";
