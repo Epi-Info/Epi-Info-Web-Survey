@@ -950,6 +950,12 @@ if (eval(document.getElementById("IsMobile"))){
                 case "legalvalues":
                     $(query).selectmenu('disable');
                     break;
+                case "yesno":
+                    $(query).selectmenu('disable');
+                    break;
+                case "commentlegal":
+                    $(query).selectmenu('disable');
+                    break;
                case "datepicker":
                      $(query).datebox('disable');
                       break;
@@ -1072,6 +1078,12 @@ query = '#mvcdynamicfield_' + pCheckCodeList[i];
                     $(query).checkboxradio('enable');
                     break;
                 case "legalvalues":
+                    $(query).selectmenu('enable');
+                    break;
+               case "yesno":
+                    $(query).selectmenu('enable');
+                    break;
+                case "commentlegal":
                     $(query).selectmenu('enable');
                     break;
                case "datepicker":
