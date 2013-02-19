@@ -68,7 +68,11 @@
 //                .bind('blur', function() { $(this).removeClass('expand clicked'); });
 
 
-               $('form:first *:input[type!=hidden]:first').focus();
+               var firstControl = $('form *:input[type!=hidden]:enabled:first');
+               if(firstControl != null)
+               {
+                    firstControl.focus();
+               }
 
 
        });
