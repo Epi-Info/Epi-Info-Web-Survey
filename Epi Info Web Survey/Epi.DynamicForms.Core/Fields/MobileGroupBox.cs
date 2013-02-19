@@ -34,7 +34,7 @@ namespace MvcDynamicForms.Fields
                 }
                 else
                 {
-                    wrapper.Attributes["class"] = this._cssClass;
+                 //   wrapper.Attributes["class"] = this._cssClass;
                 }
 
 
