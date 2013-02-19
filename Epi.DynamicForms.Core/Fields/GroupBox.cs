@@ -73,7 +73,7 @@ namespace MvcDynamicForms.Fields
             // txt.Attributes.Add("value", Value);
             txt.Attributes.Add("value", Value);
 
-            txt.Attributes.Add("style", "position:absolute;left:" + _left.ToString() + "px;top:" + _top.ToString() + "px" + ";width:" + _ControlWidth.ToString() + "px" + ";height:" + _ControlHeight.ToString() + "px;" + IsHiddenStyle);
+            txt.Attributes.Add("style", "position:absolute;left:" + _left.ToString() + "px;top:" + _top.ToString() + "px" + ";width:" + _ControlWidth.ToString() + "px" + ";height:" + _ControlHeight.ToString() + "px;");// + IsHiddenStyle);
 
             txt.MergeAttributes(_inputHtmlAttributes);
            // html.Append(txt.ToString(TagRenderMode.SelfClosing));

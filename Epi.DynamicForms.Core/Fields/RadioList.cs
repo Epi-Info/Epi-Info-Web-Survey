@@ -36,7 +36,7 @@ namespace MvcDynamicForms.Fields
             if (_IsHidden)
             {
                 //IsHiddenStyle = "visibility:hidden";
-                IsHiddenStyle = "display:none";
+               // IsHiddenStyle = "display:none";
             }
             if (_IsHighlighted)
             {
