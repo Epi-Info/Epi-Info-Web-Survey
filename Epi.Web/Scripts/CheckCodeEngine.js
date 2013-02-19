@@ -241,7 +241,7 @@ function CCE_ProcessUnHideCommand(pCheckCodeList)
                                   $(query).css("display","block");
                                   }else{
                                   $(query).css("visibility","visible");
-                                  
+                                    $(query).css("display","");
                                   }
                               
                             }
