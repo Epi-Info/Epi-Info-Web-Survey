@@ -1275,17 +1275,64 @@ function CCE_RemoveFromFieldsList(FieldName,ListName) {
                                       $(controlId).val('');
                                     break;
                                  case "radiobutton":
-                                   var RadiofieldName = "." + FieldName;
-                                    value = -1; 
-                                    $(RadiofieldName).each(function(i, obj) 
+                                  if (eval(document.getElementById("IsMobile")))
                                     {
-                                        if ($(this).is(':checked'))
-                                        {
-                                            $(this).attr('checked', false);
-                                        }
-                                    });
-                                    $(controlId).val('');
-                                default:
+                                      var Radiofield = controlId + "_fieldWrapper";
+                                      var label  =".label" + FieldName ;
+
+                                      $(Radiofield).find(label).removeClass('ui-radio-on'); //1
+                                      $(Radiofield).find(label).addClass('ui-radio-off'); //2
+
+                                    $(Radiofield).find('.ui-icon-radio-on').addClass('RadioTemp'); //1
+                                    $(Radiofield).find('.ui-icon-radio-on').removeClass('ui-icon-radio-on'); //2
+                                    $(Radiofield).find('.RadioTemp').addClass('ui-icon-radio-off'); //3
+                                    $(Radiofield).find('.ui-icon-radio-off').removeClass('RadioTemp'); //4 keep them in this order
+                                    }
+                                    else
+                                    {
+                                           var RadiofieldName = "." + FieldName;
+                                            value = -1; 
+                                            $(RadiofieldName).each(function(i, obj) 
+                                            {
+                                                if ($(this).is(':checked'))
+                                                {
+                                                    $(this).attr('checked', false);
+                                                }
+                                            });
+                                            $(controlId).val('');
+                                    }
+                                    break;
+                                  case "legalvalues":
+                                   if (eval(document.getElementById("IsMobile")))
+                                         {  
+                                           $(controlId).val('');
+                                          $(controlId).selectmenu('refresh');
+                                         }
+                                         else
+                                         {$(controlId).val('');}
+                                        break;
+                                  case "yesno":
+                                     if (eval(document.getElementById("IsMobile")))
+                                         {  
+                                         
+                                          $(controlId).val('');
+                                          $(controlId).selectmenu('refresh');
+
+                                         
+                                         }
+                                         else
+                                         {$(controlId).val('');}
+                                        break;
+                                  case "commentlegal":
+                                    if (eval(document.getElementById("IsMobile")))
+                                         {  
+                                           $(controlId).val('');
+                                          $(controlId).selectmenu('refresh');
+                                         }
+                                         else
+                                         {$(controlId).val('');}
+                                        break;
+                                  default:
                                     $(controlId).val('');
                                     break;
 
