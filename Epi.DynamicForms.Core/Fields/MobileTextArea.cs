@@ -27,6 +27,7 @@ namespace MvcDynamicForms.Fields
             prompt.Attributes.Add("Id", "label" + inputName);
             StringBuilder StyleValues = new StringBuilder();
             StyleValues.Append(GetContolStyle(_fontstyle.ToString(), _Prompttop.ToString(), _Promptleft.ToString(), null, Height.ToString(), IsHidden));
+            
             prompt.Attributes.Add("style", "");
             html.Append(prompt.ToString());
             // error label
@@ -78,7 +79,9 @@ namespace MvcDynamicForms.Fields
                 txt.Attributes.Add("disabled", "disabled");
             }
             //txt.Attributes.Add("style", "position:absolute;left:" + _left.ToString() + "px;top:" + _top.ToString() + "px" + ";width:" + _ControlWidth.ToString() + "px" + ";height:" + _ControlHeight.ToString() + "px" + ErrorStyle + ";" + IsHiddenStyle + ";" + IsHighlightedStyle);
-            txt.Attributes.Add("style", "height:" + _ControlHeight.ToString() + "px" + ErrorStyle + ";" + IsHiddenStyle + ";" + IsHighlightedStyle);
+           // txt.Attributes.Add("style", "height:" + _ControlHeight.ToString() + "px" + ErrorStyle + ";" + IsHiddenStyle + ";" + IsHighlightedStyle);
+            txt.Attributes.Add("style", "height:" + "100" + "px" + ErrorStyle + ";" + IsHiddenStyle + ";" + IsHighlightedStyle);
+            
             txt.MergeAttributes(_inputHtmlAttributes);
             html.Append(txt.ToString());
 
