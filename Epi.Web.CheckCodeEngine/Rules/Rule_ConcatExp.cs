@@ -78,24 +78,49 @@ namespace Epi.Core.EnterInterpreter.Rules
             }
             else
             {
-                if (this.AddExp is Rule_Value)
+
+                /*::= <Add Exp> '&' <Concat Exp>
+                    | <Add Exp>*/
+
+
+                if (this.ConcatExp != null)
                 {
-                    WriteValueJavascript((Rule_Value)this.AddExp, pJavaScriptBuilder);
+                    if (this.AddExp is Rule_Value)
+                    {
+                        WriteValueJavascript((Rule_Value)this.AddExp, pJavaScriptBuilder);
+                    }
+                    else
+                    {
+                        this.AddExp.ToJavaScript(pJavaScriptBuilder);
+                    }
+
+                    pJavaScriptBuilder.Append("+");
+
+                    if (this.ConcatExp is Rule_Value)
+                    {
+                        WriteValueJavascript((Rule_Value)this.ConcatExp, pJavaScriptBuilder);
+                    }
+                    else
+                    {
+                        this.ConcatExp.ToJavaScript(pJavaScriptBuilder);
+                    }
+
                 }
                 else
                 {
-                    this.AddExp.ToJavaScript(pJavaScriptBuilder);
+                    if (this.AddExp is Rule_Value)
+                    {
+                        WriteValueJavascript((Rule_Value)this.AddExp, pJavaScriptBuilder);
+                    }
+                    else
+                    {
+                        this.AddExp.ToJavaScript(pJavaScriptBuilder);
+                    }
                 }
-                pJavaScriptBuilder.Append("+");
-               // if (this.AddExp is Rule_Value)
-               if (this.ConcatExp is Rule_Value)
-                {
-                    WriteValueJavascript((Rule_Value)this.ConcatExp, pJavaScriptBuilder);
-                }
-                else
-                {
-                    this.ConcatExp.ToJavaScript(pJavaScriptBuilder);
-                }
+
+
+                
+
             }
 
         }
@@ -120,7 +145,6 @@ namespace Epi.Core.EnterInterpreter.Rules
                         case EpiInfo.Plugin.DataType.Text:
                         case EpiInfo.Plugin.DataType.GUID:
                             pValue.ToJavaScript(pJavaScriptBuilder);
-                            pJavaScriptBuilder.Append("+\"\"");
                             break;
                         default:
                             pValue.ToJavaScript(pJavaScriptBuilder);
@@ -132,7 +156,6 @@ namespace Epi.Core.EnterInterpreter.Rules
             {
                 if (pValue.VariableDataType != EpiInfo.Plugin.DataType.Unknown)
                 {
-                    pValue.ToJavaScript(pJavaScriptBuilder);
                     switch (pValue.VariableDataType)
                     {
                         case EpiInfo.Plugin.DataType.Boolean:
@@ -141,8 +164,6 @@ namespace Epi.Core.EnterInterpreter.Rules
                         case EpiInfo.Plugin.DataType.Number:
                         case EpiInfo.Plugin.DataType.Time:
                             pValue.ToJavaScript(pJavaScriptBuilder);
-                            pJavaScriptBuilder.Append("+\"\"");
-
                             break;
                         case EpiInfo.Plugin.DataType.Text:
                         default:
