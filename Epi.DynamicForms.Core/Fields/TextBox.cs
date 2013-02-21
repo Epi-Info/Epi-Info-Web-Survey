@@ -64,7 +64,8 @@ namespace MvcDynamicForms.Fields
             ////////////Check code end//////////////////
             
             txt.Attributes.Add("value", Value);
-            txt.Attributes.Add("class", GetControlClass() + "text-input");
+            //txt.Attributes.Add("class", GetControlClass() + "text-input");
+            txt.Attributes.Add("class", GetControlClass());
             if(_IsRequired)
             {
               //  txt.Attributes.Add("class",   GetControlClass() + "text-input");
