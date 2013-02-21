@@ -937,6 +937,7 @@ if (eval(document.getElementById("IsMobile"))){
 
 if (eval(document.getElementById("IsMobile"))){
   query = '#mvcdynamicfield_' + pCheckCodeList[i];
+  Labelquery = '#labelmvcdynamicfield_' + pCheckCodeList[i];
    switch (symbol.Type) 
             {
                 case "radiobutton":
@@ -944,8 +945,14 @@ if (eval(document.getElementById("IsMobile"))){
                     $(Query).find('.ui-radio').addClass('ui-disabled'); 
                     break;
                 case "checkbox":
+                       
+                       
+                    Query = '#mvcdynamicfield_' + pCheckCodeList[i] + "_fieldWrapper";
+                    $(Query).find('.ui-checkbox').addClass('ui-disabled'); 
+                       
                         
-                    $(query).checkboxradio('disable');
+                   // $(query).checkboxradio('disable');
+                   //  $(Labelquery).css("color","lightGray")
                     break;
                 case "legalvalues":
                     $(query).selectmenu('disable');
@@ -1067,6 +1074,7 @@ if (eval(document.getElementById("IsMobile"))){
              var symbol = cce_Context.resolve(pCheckCodeList[i]);
  if (eval(document.getElementById("IsMobile"))){
 query = '#mvcdynamicfield_' + pCheckCodeList[i];
+ Labelquery = '#labelmvcdynamicfield_' + pCheckCodeList[i];
    switch (symbol.Type) 
             {
                 case "radiobutton":
@@ -1076,6 +1084,7 @@ query = '#mvcdynamicfield_' + pCheckCodeList[i];
                 case "checkbox":
                         
                     $(query).checkboxradio('enable');
+                      $(Labelquery).css("color","Black")
                     break;
                 case "legalvalues":
                     $(query).selectmenu('enable');
@@ -1264,9 +1273,19 @@ function CCE_RemoveFromFieldsList(FieldName,ListName) {
                             {
                                 case "checkbox":
 		                            if (eval(document.getElementById("IsMobile")))
-                                    {
+                                    {        
+                                          var checkboxfield = controlId + "_fieldWrapper";
+                                           if (! $(checkboxfield).find('ui-disabled'))
+                                           {
                                                   $(controlId).attr('checked', false).checkboxradio("refresh");
-                                                  $('.ui-checkbox').removeClass('ui-disabled');
+                                           }else{
+                                           
+                                                 $(controlId).attr('checked', false).checkboxradio("refresh");//1
+                                                 $(checkboxfield).find('.ui-checkbox').removeClass('ui-disabled');//2
+                                                 $(checkboxfield).find('.ui-checkbox').addClass('ui-disabled');//3 Keep them in this order
+                                           }
+
+                                             //     $('.ui-checkbox').removeClass('ui-disabled');
 			                          }
                                       else
                                       {
@@ -1982,7 +2001,40 @@ function CCE_Set_Required(fNameList)
 
          }
 }
+  ///////Update Controls State Start//////
 
+  function CCE_Set_Update_HighlightedControls_State(Items)
+{
+
+            var HighlightedFieldsArray = new Array();
+            
+            HighlightedFieldsArray = Items.split(',');
+            HighlightedFieldsArray.splice(0, 1);
+        
+            if (HighlightedFieldsArray.length >0)
+            {
+              CCE_Highlight(HighlightedFieldsArray ,false);
+            }
+              
+}
+
+  
+ 
+  function CCE_Set_Update_DisabledControls_State(Items)
+{
+
+            var DisabledFieldsListArray = new Array();
+            
+            DisabledFieldsListArray = Items.split(',');
+            DisabledFieldsListArray.splice(0, 1);
+        
+            if (DisabledFieldsListArray.length >0)
+            {
+              CCE_Disable(DisabledFieldsListArray ,false);
+            }
+              
+}
+       ///////Update Controls State end//////
 function CCE_Set_NOT_Required(fNameList)
 {
 try 

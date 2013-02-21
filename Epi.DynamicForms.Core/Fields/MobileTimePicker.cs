@@ -78,10 +78,10 @@ namespace MvcDynamicForms.Fields
             //{
             //    IsHiddenStyle = "display:none";
             //}
-            if (_IsHighlighted)
+          /*  if (_IsHighlighted)
             {
                 IsHighlightedStyle = "background-color:yellow";
-            }
+            }*/
 
             if (_IsDisabled)
             {

@@ -233,7 +233,7 @@ namespace Epi.Web.MVC.Utility
                                 //var _GroupBoxValue = GetControlValue(SurveyAnswer, _FieldTypeID.Attribute("UniqueId").Value);
                                 //form.AddFields(GetGroupBox(_FieldTypeID, _Width, _Height, SurveyAnswer, _GroupBoxValue));
 
-                                form.AddFields(GetGroupBox(_FieldTypeID, _Width, _Height, null));
+                                form.AddFields(GetGroupBox(_FieldTypeID, _Width, _Height, SurveyAnswer));
 
                               
 
