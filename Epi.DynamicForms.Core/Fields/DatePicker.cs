@@ -156,11 +156,13 @@ namespace MvcDynamicForms.Fields
             {
                 if (_IsRequired == true)
                 {
-                    ControlClass.Append("required,custom[date]] text-input datepicker");
+                   // ControlClass.Append("required,custom[date]] text-input datepicker");
+                    ControlClass.Append("required,custom[date]]  datepicker");
                 }
                 else
                 {
-                    ControlClass.Append("custom[date]] text-input datepicker");
+                    //ControlClass.Append("custom[date]] text-input datepicker");
+                    ControlClass.Append("custom[date]]  datepicker");
                 }
                 return ControlClass.ToString();
             }
