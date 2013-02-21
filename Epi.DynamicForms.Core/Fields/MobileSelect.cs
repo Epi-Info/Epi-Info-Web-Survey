@@ -179,10 +179,10 @@ namespace MvcDynamicForms.Fields
             //{
             //    IsHiddenStyle = "display:none";
             //}
-            if (_IsHighlighted)
+         /* if (_IsHighlighted)
             {
-                IsHighlightedStyle = "background-color:yellow";
-            }
+            IsHighlightedStyle = "background-color:yellow";
+           }*/
 
             if (_IsDisabled)
             {
@@ -289,14 +289,33 @@ namespace MvcDynamicForms.Fields
 
             var wrapper = new TagBuilder(_fieldWrapper);
             wrapper.Attributes["class"] = _fieldWrapperClass;
-            if (_IsHidden)
+         if (_IsHidden)
             {
                 wrapper.Attributes["style"] = "display:none";
                 
             }
+           
+            //wrapper.Attributes["style"] = GetStyle( _IsHidden,  _IsHighlighted);
+
             wrapper.Attributes["id"] = inputName + "_fieldWrapper";
             wrapper.InnerHtml = html.ToString();
             return wrapper.ToString();
+        }
+        public string GetStyle(bool _IsHidden, bool _IsHighlighted)
+        {
+
+            string Style = "";
+            if (_IsHidden)
+            {
+                Style += " display:none";
+
+            }
+            if (_IsHighlighted)
+            {
+                Style += " background-color:yellow";
+            }
+
+            return  Style;
         }
     }
 }
