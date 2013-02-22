@@ -156,21 +156,39 @@ namespace MvcDynamicForms.Fields
                            
                             foreach (var choice in _choices)
                             {
-                                 
 
-                               
-                                if (choice.Key == value)
+
+                                if (value.IndexOf('-') == -1)
                                 {
-                                    choices19.Add(choice.Key.ToString(), true);
-                                 
+                                    if (choice.Key.Split('-')[0] == value)
+                                    {
+                                        choices19.Add(choice.Key.ToString(), true);
+
+                                    }
+                                    else
+                                    {
+                                        choices19.Add(choice.Key.ToString(), false);
+                                    }
                                 }
-                                else {
-                                    choices19.Add(choice.Key.ToString(), false);
+                                else
+                                {
+
+                                    if (choice.Key == value)
+                                    {
+                                        choices19.Add(choice.Key.ToString(), true);
+
+                                    }
+                                    else
+                                    {
+                                        choices19.Add(choice.Key.ToString(), false);
+                                    }
                                 }
                                 
                             }
                             Choices = choices19;
                             break;
+
+
                     }
                 }
                 
