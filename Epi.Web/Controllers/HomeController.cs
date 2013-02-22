@@ -159,37 +159,10 @@ namespace Epi.Web.MVC.Controllers
 
                 form.FormCheckCodeObj = form.GetCheckCodeObj(xdoc, xdocResponse, checkcode);
 
-                EnterRule FunctionObject_B = (EnterRule)form.FormCheckCodeObj.GetCommand("level=record&event=before&identifier=");
-               
 
-
-
-                if (FunctionObject_B != null && !FunctionObject_B.IsNull())
-                {
-                    try
-                    {
-                        FunctionObject_B.Execute();
-                        
-                        // field list
-                        form.HiddenFieldsList = FunctionObject_B.Context.HiddenFieldList;
-                        form.HighlightedFieldsList = FunctionObject_B.Context.HighlightedFieldList;
-                        form.DisabledFieldsList = FunctionObject_B.Context.DisabledFieldList;
-                        form.RequiredFieldsList = FunctionObject_B.Context.RequiredFieldList;
-                        _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, ResponseID.ToString(), form, SurveyAnswer, false, false, 1);
-                    }
-                    catch (Exception ex)
-                    {
-                        // do nothing so that processing
-                        // can continue
-                    }
-                }
-                ///////////////////////////// Execute - Record Before - start//////////////////////
-
-              
                 Dictionary<string, string> ContextDetailList = new Dictionary<string, string>();
-                ContextDetailList = Epi.Web.MVC.Utility.SurveyHelper.GetContextDetailList(FunctionObject_B);
 
-              int NumberOfPages = GetNumberOfPages(XDocument.Parse(surveyInfoModel.XML)); 
+                int NumberOfPages = GetNumberOfPages(XDocument.Parse(surveyInfoModel.XML)); 
                 for (int i = NumberOfPages; i > 0; i--)
                 {
                     SurveyAnswer = _isurveyFacade.GetSurveyAnswerResponse(SurveyAnswer.ResponseId).SurveyResponseList[0];
@@ -201,6 +174,39 @@ namespace Epi.Web.MVC.Controllers
                     _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, SurveyAnswer.ResponseId, formRs, SurveyAnswer, false, false, i);
 
                 }
+
+
+                ///////////////////////////// Execute - Record Before - start//////////////////////
+                EnterRule FunctionObject_B = (EnterRule)form.FormCheckCodeObj.GetCommand("level=record&event=before&identifier=");
+                if (FunctionObject_B != null && !FunctionObject_B.IsNull())
+                {
+                    try
+                    {
+                        FunctionObject_B.Execute();
+                        
+                        // field list
+                        form.HiddenFieldsList = FunctionObject_B.Context.HiddenFieldList;
+                        form.HighlightedFieldsList = FunctionObject_B.Context.HighlightedFieldList;
+                        form.DisabledFieldsList = FunctionObject_B.Context.DisabledFieldList;
+                        form.RequiredFieldsList = FunctionObject_B.Context.RequiredFieldList;
+
+                        
+                        ContextDetailList = Epi.Web.MVC.Utility.SurveyHelper.GetContextDetailList(FunctionObject_B);
+                        form = Epi.Web.MVC.Utility.SurveyHelper.UpdateControlsValuesFromContext(form, ContextDetailList);
+
+                        _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, ResponseID.ToString(), form, SurveyAnswer, false, false, 0);
+                    }
+                    catch (Exception ex)
+                    {
+                        // do nothing so that processing
+                        // can continue
+                    }
+                }
+
+
+              
+               ///Dictionary<string, string> ContextDetailList = Epi.Web.MVC.Utility.SurveyHelper.GetContextDetailList(FunctionObject_B);
+
                 SurveyAnswer = _isurveyFacade.GetSurveyAnswerResponse(SurveyAnswer.ResponseId).SurveyResponseList[0];
 
                 ///////////////////////////// Execute - Record Before - End//////////////////////
