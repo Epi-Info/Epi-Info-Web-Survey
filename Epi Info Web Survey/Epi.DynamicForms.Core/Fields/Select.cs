@@ -157,11 +157,11 @@ namespace MvcDynamicForms.Fields
             }
             else 
             {
-                        select.Attributes.Add("class", GetControlClass() + "text-input fix-me");
-                        //if ((size.Width) > _ControlWidth)
-                        //{
-                        //    select.Attributes.Add("class", "fix-me");
-                        //}
+                        //select.Attributes.Add("class", GetControlClass() + "text-input fix-me");
+                    if ((size.Width) > _ControlWidth)
+                    {
+                        select.Attributes.Add("class", "fix-me");
+                    }
                 
             }
             string IsHiddenStyle = "";
