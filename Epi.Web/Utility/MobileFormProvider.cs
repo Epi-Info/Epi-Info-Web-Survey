@@ -425,7 +425,7 @@ namespace Epi.Web.MVC.Utility
             RadioList.Width = _Width;
             RadioList.Height = _Height;
             RadioList.Pattern = Pattern;
-
+            RadioList.ChoicesList = ListString;
             // if (RadioList.Pattern[0] == "Vertical")
             if (_Height > _Width)
             {
