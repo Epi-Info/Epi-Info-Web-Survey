@@ -2035,6 +2035,79 @@ function CCE_Set_Required(fNameList)
               
 }
        ///////Update Controls State end//////
+       //////Enable all controls before leaving the page start ////////
+
+function CCE_ProcessEnableAllControls(List) 
+ {
+
+  var pCheckCodeList = new Array();
+    pCheckCodeList = List.split(',');
+    pCheckCodeList.splice(0, 1);
+
+     if (pCheckCodeList != null) 
+     {
+         for (var i = 0; i < pCheckCodeList.length; i++) 
+         {
+             var query = null;
+
+             var symbol = cce_Context.resolve(pCheckCodeList[i]);
+ if (eval(document.getElementById("IsMobile"))){
+   query = '#mvcdynamicfield_' + pCheckCodeList[i];
+   Labelquery = '#labelmvcdynamicfield_' + pCheckCodeList[i];
+   switch (symbol.Type) 
+            {
+                case "radiobutton":
+                    Query = '#mvcdynamicfield_' + pCheckCodeList[i] + "_fieldWrapper";
+                    $(Query).find('.ui-radio').removeClass('ui-disabled'); 
+                    break;
+                case "checkbox":
+                        
+                    $(query).checkboxradio('enable');
+                      $(Labelquery).css("color","Black")
+                    break;
+                case "legalvalues":
+                    $(query).selectmenu('enable');
+                    break;
+               case "yesno":
+                    $(query).selectmenu('enable');
+                    break;
+                case "commentlegal":
+                    $(query).selectmenu('enable');
+                    break;
+               case "datepicker":
+                     $(query).datebox('enable');
+                      break;
+                case "timepicker":
+                    $(query).datebox('enable');
+                    break;
+
+                default:
+                    $(query).textinput('enable');
+                    break;
+
+            }
+  }else{
+            if(symbol.Type == "radiobutton")
+            {
+                query = '.mvcdynamicfield_' + pCheckCodeList[i];
+                $(query).each(function(i, obj) 
+                {
+                     $(query).removeAttr('disabled');
+                });
+            }
+            else
+            {
+                query = '#mvcdynamicfield_' + pCheckCodeList[i];
+                $(query).removeAttr('disabled');
+                query = '#labelmvcdynamicfield_' + pCheckCodeList[i];
+            }
+}
+         
+         }
+     }
+ }
+  //////Enable all controls before leaving the page start ////////
+
 function CCE_Set_NOT_Required(fNameList)
 {
 try 

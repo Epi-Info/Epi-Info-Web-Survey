@@ -274,6 +274,13 @@
  /*Clicking the save button to save the survey*/
  function Save() 
       {
+        var DisabledFieldsList = $('#DisabledFieldsList').val();
+         
+        if (DisabledFieldsList.length > 0)
+        {
+        CCE_ProcessEnableAllControls(DisabledFieldsList) ;
+        }
+
        //SaveSurvey();
              //debugger;
         //set the is_save_action hidden variable value to true to indicate that save button has been clicked
@@ -366,6 +373,18 @@
          
 });
 
+$(function() {
+     $('#myform').submit( function() {
+        
+        var DisabledFieldsList = $('#DisabledFieldsList').val();
+        //alert(" " + DisabledFieldsList);
+        if (DisabledFieldsList.length > 0)
+        {
+        CCE_ProcessEnableAllControls(DisabledFieldsList) ;
+        }
+         return true;
+     });
+});
  
 </script>
 
