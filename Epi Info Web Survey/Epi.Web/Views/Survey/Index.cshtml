@@ -28,7 +28,14 @@
      
     /*Clicking the save button to save the survey*/
     function Save() {
-        //debugger;
+
+   
+        var DisabledFieldsList = $('#DisabledFieldsList').val();
+         
+        if (DisabledFieldsList.length > 0)
+        {
+        CCE_ProcessEnableAllControls(DisabledFieldsList) ;
+        }
         //set the is_save_action hidden variable value to true to indicate that save button has been clicked
         $("#myform")[0].is_save_action.value = 'true';
         //set the action path of the current form so when it is submitted by clicking the save button it posts to the path 
@@ -233,7 +240,17 @@
             
             }
  
- 
+ $(function() {
+     $('#myform').submit( function() {
+        
+        var DisabledFieldsList = $('#DisabledFieldsList').val();
+        if (DisabledFieldsList.length > 0)
+        {
+        CCE_ProcessEnableAllControls(DisabledFieldsList) ;
+        }
+         return true;
+     });
+});
    
 </script>
 
