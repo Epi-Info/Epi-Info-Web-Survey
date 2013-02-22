@@ -16,13 +16,27 @@ namespace MvcDynamicForms.Fields
     [Serializable]
     public class RadioList : OrientableField
     {
-        
+        private string _ChoicesList;
+
+        public string ChoicesList
+        {
+            get
+            {
+                return _ChoicesList;
+            }
+
+            set
+            {
+                _ChoicesList = value;
+            }
+        }
         public override string RenderHtml()
         {
             var html = new StringBuilder();
             var inputName = _form.FieldPrefix + _key;
             var choicesList = _choices.ToList();
-     
+            var choicesList1 = GetChoices(_ChoicesList);
+            choicesList = choicesList1.ToList();
             if (!IsValid)
             {
                 var error = new TagBuilder("label");
@@ -157,6 +171,32 @@ namespace MvcDynamicForms.Fields
             wrapper.Attributes["id"] = inputName + "_fieldWrapper";
             wrapper.InnerHtml = html.ToString();
             return wrapper.ToString();
+        }
+
+        private Dictionary<string, bool> GetChoices(string _ChoicesList)
+        {
+            string ListString = _ChoicesList;
+            ListString = ListString.Replace("||", "|");
+            List<string> Lists = ListString.Split('|').ToList<string>();
+
+            Dictionary<string, bool> Choices = new Dictionary<string, bool>();
+            Choices = GetChoices(Lists[0].Split(',').ToList<string>());
+            return Choices;
+        }
+
+        public static Dictionary<string, bool> GetChoices(List<string> List)
+        {
+
+            Dictionary<string, bool> NewList = new Dictionary<string, bool>();
+            foreach (var _List in List)
+            {
+
+                NewList.Add(_List, false);
+
+            }
+
+            return NewList;
+
         }
     }
 }
