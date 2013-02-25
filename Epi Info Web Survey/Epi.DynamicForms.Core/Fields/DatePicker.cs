@@ -94,16 +94,26 @@ namespace MvcDynamicForms.Fields
             /*Checkcode control after event...for datepicker, the onblur event fires on selecting a date from calender. Since the datepicker control itself is tied to after event which was firing before the datepicker
              textbox is populated the comparison was not working. For this reason, the control after steps are interjected inside datepicker onClose event, so the after event is fired when the datepicker is populated 
              */
+            var MinYear = -110;
+            var MaxYear = 10;
+            if (!string.IsNullOrEmpty(Lower) && !string.IsNullOrEmpty(Upper))
+            {
+                int Year_Lower = GetYear(Lower,Pattern);
+                int Year_Upper = GetYear(Upper, Pattern);
+
+                MinYear = -(DateTime.Now.Year - Year_Lower);
+                MaxYear =Year_Upper - DateTime.Now.Year ;
+            }
             if (FunctionObjectAfter != null && !FunctionObjectAfter.IsNull())
             {
                 //scriptDatePicker.InnerHtml = "$('#" + inputName + "').datepicker({onClose:function(){" + _key + "_after();},changeMonth:true,changeYear:true});";
                 //Note: datepicker seems to have a command inst.input.focus(); (I think) called after the onClose callback which resets the focus to the original input element. I'm wondering if there is way round this with bind(). 
                 //http://stackoverflow.com/questions/7087987/change-the-focus-on-jqueryui-datepicker-on-close
-                scriptDatePicker.InnerHtml = "$('#" + inputName + "').datepicker({onClose:function(){setTimeout(" + _key + "_after,100);},changeMonth:true,changeYear:true});";
+                scriptDatePicker.InnerHtml = "$('#" + inputName + "').datepicker({onClose:function(){setTimeout(" + _key + "_after,100);},changeMonth:true,changeYear:true,yearRange:'" + MinYear + ":+" + MaxYear + "'});";
             }
             else
             {
-                scriptDatePicker.InnerHtml = "$('#" + inputName + "').datepicker({changeMonth: true,changeYear: true});";
+                scriptDatePicker.InnerHtml = "$('#" + inputName + "').datepicker({changeMonth: true,changeYear: true,yearRange:'" + MinYear + ":+" + MaxYear + "'});";
             }
              html.Append(scriptDatePicker.ToString(TagRenderMode.Normal));
 
@@ -135,12 +145,12 @@ namespace MvcDynamicForms.Fields
             ControlClass.Append("validate[");
 
 
-            if ((!string.IsNullOrEmpty(GetRightDateFormat(Lower).ToString()) && (!string.IsNullOrEmpty(GetRightDateFormat(Upper).ToString()))))
+            if ((!string.IsNullOrEmpty(GetRightDateFormat(Lower,Pattern).ToString()) && (!string.IsNullOrEmpty(GetRightDateFormat(Upper,Pattern).ToString()))))
             {
 
                 //   ControlClass.Append("customDate[date],future[" + GetRightDateFormat(Lower).ToString() + "],past[" + GetRightDateFormat(Upper).ToString() + "],");
                 //dateRange
-                ControlClass.Append("customDate[date],datePickerRange, " + GetRightDateFormat(Lower).ToString() + "," + GetRightDateFormat(Upper).ToString() + ",");
+                ControlClass.Append("customDate[date],datePickerRange, " + GetRightDateFormat(Lower,Pattern).ToString() + "," + GetRightDateFormat(Upper,Pattern).ToString() + ",");
                 if (_IsRequired == true)
                 {
 
@@ -170,7 +180,7 @@ namespace MvcDynamicForms.Fields
 
         }
 
-        public string GetRightDateFormat(string Date)
+        public string GetRightDateFormat(string Date ,string pattern)
         {
             StringBuilder NewDateFormat = new StringBuilder();
 
@@ -190,9 +200,20 @@ namespace MvcDynamicForms.Fields
                     splitChar = '/';
                 }
                 string[] dateList = Date.Split((char)splitChar);
-                MM = dateList[0];
-                DD = dateList[1];
-                YYYY = dateList[2];
+                switch (pattern.ToString())
+                {
+                    case "YYYY-MM-DD":
+                         MM = dateList[1];
+                         DD = dateList[2];
+                         YYYY = dateList[0];
+                         break;
+                    case "MM-DD-YYYY":
+                         MM = dateList[0];
+                         DD = dateList[1];
+                         YYYY = dateList[2];
+                         break;
+                }  
+               
                 NewDateFormat.Append(YYYY);
                 NewDateFormat.Append('/');
                 NewDateFormat.Append(MM);
@@ -205,7 +226,47 @@ namespace MvcDynamicForms.Fields
 
             }
             return NewDateFormat.ToString();
-        } 
+        }
+        public int GetYear(string Date, string pattern)
+        {
+          
+            string YYYY = "";
+            char splitChar = '/';
+            if (!string.IsNullOrEmpty(Date))
+            {
+                if (Date.Contains('-'))
+                {
+                    splitChar = '-';
+                }
+                else if (Date.Contains('/'))
+                {
 
+                    splitChar = '/';
+                }
+                string[] dateList = Date.Split((char)splitChar);
+                switch (pattern.ToString())
+                {
+                    case "YYYY-MM-DD":
+                       
+                        YYYY = dateList[0];
+                        break;
+                    case "MM-DD-YYYY":
+                       
+                        YYYY = dateList[2];
+                        break;
+                }
+
+               
+            }
+            int Year;
+            bool result = Int32.TryParse(YYYY, out Year);
+             if (result){
+                 return Year;
+             }
+             else
+             {
+                 return 0; 
+             }
+        } 
     }
 }

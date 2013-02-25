@@ -119,7 +119,7 @@ namespace MvcDynamicForms.Fields
                         //if the date is either less than the lower limit or greater than the upper limit raise error
                         if ((DateTime.Parse(Value) < DateTime.Parse(Lower)) || (DateTime.Parse(Value) > DateTime.Parse(Upper)))
                         {
-                            Error = string.Format("Date must be in between {0} and {1}", GetDateFormat(Lower), GetDateFormat(Upper));
+                            Error = string.Format("Date must be in between {0} and {1}", GetDateFormat(Lower, Pattern), GetDateFormat(Upper, Pattern));
                             return false;
                         }
                     }
@@ -127,13 +127,13 @@ namespace MvcDynamicForms.Fields
                     //invalid: checking for lower limit
                     if ((!string.IsNullOrEmpty(Lower)) && (DateTime.Parse(Value) < DateTime.Parse(Lower)))
                     {
-                        Error = string.Format("Date can not be less than {0}", GetDateFormat(Lower));
+                        Error = string.Format("Date can not be less than {0}", GetDateFormat(Lower, Pattern));
                         return false;
                     }
                     //invalid: checking the upper limit 
                     if ((!string.IsNullOrEmpty(Upper)) && (DateTime.Parse(Value) > DateTime.Parse(Upper)))
                     {
-                        Error = string.Format("Date can not be greater than {0}", GetDateFormat(Upper));
+                        Error = string.Format("Date can not be greater than {0}", GetDateFormat(Upper, Pattern));
                         return false;
                     }
 
@@ -146,8 +146,7 @@ namespace MvcDynamicForms.Fields
 
         }
 
-
-        public string GetDateFormat(string Date)
+        public string GetDateFormat(string Date, string pattern)
         {
             StringBuilder NewDateFormat = new StringBuilder();
 
@@ -167,9 +166,20 @@ namespace MvcDynamicForms.Fields
                     splitChar = '/';
                 }
                 string[] dateList = Date.Split((char)splitChar);
-                MM = dateList[0];
-                DD = dateList[1];
-                YYYY = dateList[2];
+                switch (pattern.ToString())
+                {
+                    case "YYYY-MM-DD":
+                        MM = dateList[1];
+                        DD = dateList[2];
+                        YYYY = dateList[0];
+                        break;
+                    case "MM-DD-YYYY":
+                        MM = dateList[0];
+                        DD = dateList[1];
+                        YYYY = dateList[2];
+                        break;
+                }
+
                 NewDateFormat.Append(MM);
                 NewDateFormat.Append('/');
                 NewDateFormat.Append(DD);
@@ -182,7 +192,7 @@ namespace MvcDynamicForms.Fields
 
             }
             return NewDateFormat.ToString();
-        } 
+        }
 
 
 
