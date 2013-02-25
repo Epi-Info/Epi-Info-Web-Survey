@@ -137,12 +137,12 @@ namespace MvcDynamicForms.Fields
             ControlClass.Append("validate[");
 
 
-            if ((!string.IsNullOrEmpty(GetRightDateFormat(Lower).ToString()) && (!string.IsNullOrEmpty(GetRightDateFormat(Upper).ToString()))))
+            if ((!string.IsNullOrEmpty(GetRightDateFormat(Lower,Pattern).ToString()) && (!string.IsNullOrEmpty(GetRightDateFormat(Upper,Pattern).ToString()))))
             {
 
                 //   ControlClass.Append("customDate[date],future[" + GetRightDateFormat(Lower).ToString() + "],past[" + GetRightDateFormat(Upper).ToString() + "],");
                 //dateRange
-                ControlClass.Append("customDate[date],datePickerRange, " + GetRightDateFormat(Lower).ToString() + "," + GetRightDateFormat(Upper).ToString() + ",");
+                ControlClass.Append("customDate[date],datePickerRange, " + GetRightDateFormat(Lower,Pattern).ToString() + "," + GetRightDateFormat(Upper,Pattern).ToString() + ",");
 
                 if (_IsRequired == true)
                 {
@@ -171,7 +171,7 @@ namespace MvcDynamicForms.Fields
 
         }
 
-        public string GetRightDateFormat(string Date)
+        public string GetRightDateFormat(string Date, string pattern)
         {
             StringBuilder NewDateFormat = new StringBuilder();
 
@@ -191,9 +191,20 @@ namespace MvcDynamicForms.Fields
                     splitChar = '/';
                 }
                 string[] dateList = Date.Split((char)splitChar);
-                MM = dateList[0];
-                DD = dateList[1];
-                YYYY = dateList[2];
+                switch (pattern.ToString())
+                {
+                    case "YYYY-MM-DD":
+                        MM = dateList[1];
+                        DD = dateList[2];
+                        YYYY = dateList[0];
+                        break;
+                    case "MM-DD-YYYY":
+                        MM = dateList[0];
+                        DD = dateList[1];
+                        YYYY = dateList[2];
+                        break;
+                }
+
                 NewDateFormat.Append(YYYY);
                 NewDateFormat.Append('/');
                 NewDateFormat.Append(MM);
