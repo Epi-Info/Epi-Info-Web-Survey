@@ -84,6 +84,7 @@
     <Compile Include="Rules\Functions\Rule_Format.cs" />
     <Compile Include="Rules\Functions\Rule_Hour.cs" />
     <Compile Include="Rules\Functions\Rule_Hours.cs" />
+    <Compile Include="Rules\Functions\Rule_LineBreak.cs" />
     <Compile Include="Rules\Functions\Rule_LN_Func.cs" />
     <Compile Include="Rules\Functions\Rule_LOG_Func.cs" />
     <Compile Include="Rules\Functions\Rule_Minute.cs" />
