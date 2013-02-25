@@ -182,6 +182,9 @@ namespace Epi.Core.EnterInterpreter.Rules
                     case "EXP":
                         functionCall = new Rule_Exp_Func(pContext, T);
                         break;
+                    case "LINEBREAK":
+                        functionCall = new Rule_LineBreak(pContext, T);
+                        break;
                     case "LN":
                         functionCall = new Rule_LN_Func(pContext, T);
                         break;
