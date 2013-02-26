@@ -151,18 +151,24 @@ namespace MvcDynamicForms.Fields
                         else
                         {
                            // select.Attributes.Add("class", GetControlClass() + "text-input");
-                            select.Attributes.Add("class", GetControlClass());
+                            select.Attributes.Add("class", GetControlClass()  );
                         }
                        select.Attributes.Add("data-prompt-position", "topRight:10");
             }
             else 
             {
                         //select.Attributes.Add("class", GetControlClass() + "text-input fix-me");
-                    if ((size.Width) > _ControlWidth)
-                    {
-                        select.Attributes.Add("class", "fix-me");
-                    }
-                
+                if ((size.Width) > _ControlWidth)
+                {
+                    select.Attributes.Add("class", GetControlClass() +"fix-me ");
+                }
+                else
+                {
+
+                    select.Attributes.Add("class", GetControlClass() );
+                }
+                select.Attributes.Add("data-prompt-position", "topRight:10");
+                 
             }
             string IsHiddenStyle = "";
             string IsHighlightedStyle = "";
