@@ -35,7 +35,7 @@ namespace MvcDynamicForms.Fields
             {
                 //Add new Error to the error Obj
 
-                ErrorStyle = ";border-color: red";
+               // ErrorStyle = ";border-color: red";
 
             }
 
