@@ -113,10 +113,10 @@ body
 #exit
  {
  float: right;
- width: 12%;
+/* width: 12%;*/
  position:relative;
  vertical-align:middle;
- margin-right: -10px;
+/* margin-right: -10px;*/
  }
 /*---*/
 /*Div Style for Previous, Save, Continue*/
@@ -150,12 +150,12 @@ body
  
 #nav
 {
-width: 90%;
+width: 100%;
 text-align: center;
 border-top: 1px solid #244640;
 margin: 0 auto;
-padding: 0.8em 1.2em;
-position:absolute;
+padding: 0.8em 0;
+position:relative;
 bottom:80px;
 /*clear:both;*/
 }
@@ -165,8 +165,8 @@ bottom:80px;
  {
  position:absolute;
  bottom:0px;
- width: 98%;
- padding: .5em;
+ width: 100%;
+/**/ padding: .5em 0;
  color: #333;
  background-color: #f4fce8;
  border-top: 1px solid #4e9689;
@@ -186,11 +186,13 @@ bottom:80px;
  {
  float:left;
  width: 55%;
+ /**/margin-left: 10px;
  }
 
 #footright
  {
  float: right;
+ /**/margin-right: 10px;
  }
 
 button.exitsurvey:hover,  button.save:hover, button.prev:hover, button.next:hover, button.begin:hover, button.submits:hover, button.login:hover, a.returnto:hover
