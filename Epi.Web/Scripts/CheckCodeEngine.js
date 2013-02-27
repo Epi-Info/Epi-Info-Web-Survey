@@ -584,12 +584,10 @@ CCE_Context.prototype.setValue = function (pName, pValue)
                      case "radiobutton":  
                          query = '.labelmvcdynamicfield_' + pName + "_" + pValue.toString() ;
                         var  Classquery = ".mvcdynamicfield_"+ pName;
-                          $(query).closest(Classquery).css("background-color","yellow");
-                             //$(Jquery).val(pValue);
+                          //$(query).closest(Classquery).css("background-color","yellow");
                              $(Classquery).prop('value', pValue.toString()).prop('checked',true);
                              $(Jquery).val(pValue);
                               cce_Symbol.Value = pValue;
-                            //$('#' + newcol).prop('checked',true);
                             break;
                    default:
                         $(Jquery).val(pValue);
