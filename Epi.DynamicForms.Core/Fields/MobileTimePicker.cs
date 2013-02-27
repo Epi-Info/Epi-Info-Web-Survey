@@ -164,7 +164,18 @@ namespace MvcDynamicForms.Fields
             //html.Append(scriptBuilder.ToString(TagRenderMode.Normal));
 
             var wrapper = new TagBuilder(_fieldWrapper);
-            wrapper.Attributes["class"] = _fieldWrapperClass;
+            //wrapper.Attributes["class"] = _fieldWrapperClass;
+
+            if (!IsValid)
+            {
+
+                wrapper.Attributes["class"] = _fieldWrapperClass + " TimePickerNotValid";
+            }
+            else
+            {
+                wrapper.Attributes["class"] = _fieldWrapperClass;
+
+            }
             if (_IsHidden)
             {
                 wrapper.Attributes["style"] = "display:none";
