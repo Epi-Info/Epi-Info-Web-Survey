@@ -554,6 +554,22 @@ CCE_Context.prototype.setValue = function (pName, pValue)
                                 $(Jquery).val(false);
                                 cce_Symbol.Value = false;
                             }
+                            break;
+                      case "checkbox":  
+                        cce_Symbol.Value = pValue;
+                         if (pValue) 
+                            {
+                               
+                                $(Jquery).prop('checked', true).checkboxradio('refresh');
+                                cce_Symbol.Value = true;
+                            }
+                            else 
+                            {
+                                $(Jquery).prop('checked', false).checkboxradio('refresh');
+                                cce_Symbol.Value = false;
+                            }
+                        
+                            break;
                    default:
                         $(Jquery).val(pValue);
                         cce_Symbol.Value = pValue;
