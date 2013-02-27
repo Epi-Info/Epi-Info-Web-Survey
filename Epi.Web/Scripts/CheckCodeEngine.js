@@ -559,16 +559,34 @@ CCE_Context.prototype.setValue = function (pName, pValue)
                         cce_Symbol.Value = pValue;
                          if (pValue) 
                             {
-                               
+                            if (eval(document.getElementById("IsMobile")))
+                             {
                                 $(Jquery).prop('checked', true).checkboxradio('refresh');
                                 cce_Symbol.Value = true;
+                             }else{
+                                 $(Jquery).prop('checked', true) ;
+                                cce_Symbol.Value = true;
+                             }
                             }
                             else 
                             {
+                               if (eval(document.getElementById("IsMobile")))
+                             {
                                 $(Jquery).prop('checked', false).checkboxradio('refresh');
                                 cce_Symbol.Value = false;
+                             }else{
+                                 $(Jquery).prop('checked', false) ;
+                                cce_Symbol.Value = false;
+                             }
                             }
                         
+                            break;
+                     case "radiobutton":  
+                         query = '.labelmvcdynamicfield_' + pName + "_" + pValue.toString() ;
+                        var  Classquery = ".mvcdynamicfield_"+ pName;
+                          $(query).closest(Classquery).css("background-color","yellow");
+                            
+                            //$('#' + newcol).prop('checked',true);
                             break;
                    default:
                         $(Jquery).val(pValue);
