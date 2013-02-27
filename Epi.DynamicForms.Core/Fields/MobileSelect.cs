@@ -292,7 +292,17 @@ namespace MvcDynamicForms.Fields
 
 
             var wrapper = new TagBuilder(_fieldWrapper);
-            wrapper.Attributes["class"] = _fieldWrapperClass;
+
+            if (!IsValid)
+            {
+
+                wrapper.Attributes["class"] = _fieldWrapperClass + " SelectNotValid";
+            }
+            else
+            {
+                wrapper.Attributes["class"] = _fieldWrapperClass;
+
+            }
          if (_IsHidden)
             {
                 wrapper.Attributes["style"] = "display:none";
