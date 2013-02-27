@@ -168,14 +168,20 @@
         });
 
         ///////Update Controls State Start///////
-        
-
-
-        CCE_Set_Update_HighlightedControls_State(document.getElementById("HighlightedFieldsList").value );
+     CCE_Set_Update_HighlightedControls_State(document.getElementById("HighlightedFieldsList").value );
          CCE_Set_Update_DisabledControls_State(document.getElementById("DisabledFieldsList").value);
+  ///////Update Controls State end///////
 
-           
-       ///////Update Controls State end///////
+
+
+  ///////////Adding Red Border for none valid controls start ///////////////////
+  
+    $('.SelectNotValid').find('.ui-btn').css("border-color","red");
+    $('.TimePickerNotValid').find('.ui-input-datebox').css("border-color","red");
+    $('.DatePickerNotValid').find('.ui-input-datebox').css("border-color","red");
+      
+ ///////////Adding Red Border for none valid controls end ///////////////////
+
  /////////////////////Save Start///////////////////////
 
    var IsSaved  =  document.getElementById("HiddenIsSaved").value;
