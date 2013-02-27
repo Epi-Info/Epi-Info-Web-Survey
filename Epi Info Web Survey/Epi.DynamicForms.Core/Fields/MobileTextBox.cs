@@ -39,7 +39,7 @@ namespace MvcDynamicForms.Fields
              if (!IsValid)
              {
                  //Add new Error to the error Obj
-                // ErrorStyle = ";border-color: red";
+                 ErrorStyle = ";border-color: red";
              }
 
              // input element
