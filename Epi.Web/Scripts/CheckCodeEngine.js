@@ -588,7 +588,12 @@ CCE_Context.prototype.setValue = function (pName, pValue)
                             {
                                 if ($(this).val() == pValue)
                                 {
-                                    $(this).prop('checked',true);
+                                   if (eval(document.getElementById("IsMobile")))
+                                    {
+                                    $(this).prop('checked',true).checkboxradio('refresh');
+                                    }else{
+                                     $(this).prop('checked',true);
+                                    }
                                 }
                             });
 
