@@ -32,6 +32,7 @@ function CCE_ProcessHideCommand(pCheckCodeList)
     {
         //var controlsList = GetAssociatedControls(pCheckCodeList);
         //this.canvas.HideCheckCodeItems(controlsList);
+        $(".formError").remove();
         for (var i = 0; i < pCheckCodeList.length; i++) 
         {
 //             var symbol = cce_Context.resolve(pCheckCodeList[i]);
