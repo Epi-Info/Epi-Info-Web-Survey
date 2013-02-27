@@ -65,7 +65,8 @@ namespace Epi.Core.EnterInterpreter.Rules
             bool isExcept = false;
             this.Context.ExpandGroupVariables(FieldList, ref isExcept);
 
-            foreach (string fieldName in this.IdentifierList)
+            //foreach (string fieldName in this.IdentifierList)
+            foreach (string fieldName in FieldList)
             {
                 pJavaScriptBuilder.AppendLine(string.Format("List.push('{0}');", fieldName.ToLower()));
             }
