@@ -585,7 +585,10 @@ CCE_Context.prototype.setValue = function (pName, pValue)
                          query = '.labelmvcdynamicfield_' + pName + "_" + pValue.toString() ;
                         var  Classquery = ".mvcdynamicfield_"+ pName;
                           $(query).closest(Classquery).css("background-color","yellow");
-                            
+                             //$(Jquery).val(pValue);
+                             $(Classquery).prop('value', pValue.toString()).prop('checked',true);
+                             $(Jquery).val(pValue);
+                              cce_Symbol.Value = pValue;
                             //$('#' + newcol).prop('checked',true);
                             break;
                    default:
