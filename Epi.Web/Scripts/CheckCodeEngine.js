@@ -583,7 +583,6 @@ CCE_Context.prototype.setValue = function (pName, pValue)
                             break;
                      case "radiobutton":  
                             var RadiofieldName = "." + FieldName;
-                            value = -1; 
                             $(RadiofieldName).each(function(i, obj) 
                             {
                                 if ($(this).val() == pValue)
