@@ -556,7 +556,6 @@ CCE_Context.prototype.setValue = function (pName, pValue)
                             }
                             break;
                       case "checkbox":  
-                        cce_Symbol.Value = pValue;
                          if (pValue) 
                             {
                             if (eval(document.getElementById("IsMobile")))
