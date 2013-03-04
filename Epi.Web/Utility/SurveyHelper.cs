@@ -296,21 +296,23 @@ namespace Epi.Web.MVC.Utility
             if (FunctionObject != null && !FunctionObject.IsNull())
             {
 
-                foreach (var field in FunctionObject.Context.CurrentScope.SymbolList)
+                foreach (KeyValuePair<string, EpiInfo.Plugin.IVariable> kvp in FunctionObject.Context.CurrentScope.SymbolList)
                 {
-                    if (!string.IsNullOrEmpty(field.Value.Expression))
+                    EpiInfo.Plugin.IVariable field = kvp.Value;
+
+                    if (!string.IsNullOrEmpty(field.Expression))
                     {
-                        if (field.Value.DataType.ToString() == "Date")
+                        if (field.DataType == EpiInfo.Plugin.DataType.Date)
                         {
         
-                            var  datetemp =  string.Format("{0:MM/dd/yyyy}", field.Value.Expression.ToString());
+                            var  datetemp =  string.Format("{0:MM/dd/yyyy}", field.Expression);
                             DateTime date = new DateTime();
                             date = Convert.ToDateTime(datetemp);
-                            ContextDetailList[field.Key] = date.Date.ToString("MM/dd/yyyy");
+                            ContextDetailList[kvp.Key] = date.Date.ToString("MM/dd/yyyy");
                         }
                         else
                         {
-                            ContextDetailList[field.Key] = field.Value.Expression;
+                            ContextDetailList[kvp.Key] = field.Expression;
                         }
                     }
                 }
