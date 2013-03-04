@@ -36,7 +36,7 @@ namespace Epi.Core.EnterInterpreter.Rules
 
             return result;
         }
-
+         
 
         public override void ToJavaScript(StringBuilder pJavaScriptBuilder)
         {
