@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using Epi.Web.Utility;
 using System.Web.Security;
+using System.Text;
+using System.Text.RegularExpressions;
 namespace Epi.Web.Controllers
 {
     public class PostController : Controller
@@ -18,7 +20,7 @@ namespace Epi.Web.Controllers
         {
             try
             {
-                if (EmailMessage.SendMessage(emailAddress, redirectUrl, surveyName, passCode, EmailSubject))
+                if (EmailMessage.SendMessage(emailAddress, redirectUrl, UnescapeCodes(surveyName), passCode, UnescapeCodes(EmailSubject)))
                 {
                     return Json(true);
                 }
@@ -53,8 +55,24 @@ namespace Epi.Web.Controllers
                 return Json(false);
             }
         }
-       
 
+        public static string UnescapeCodes(string src)
+        {
+           src = Uri.UnescapeDataString(src);
+           var rx = new Regex("\\\\([0-9A-Fa-f]+)");
+            var res = new StringBuilder();
+            var pos = 0;
+            foreach (Match m in rx.Matches(src))
+            {
+                res.Append(src.Substring(pos, m.Index));
+                pos = m.Index + m.Length;
+                res.Append((char)Convert.ToInt32(m.Groups[1].ToString(), 16));
+            }
+            res.Append(src.Substring(pos));
+
+
+            return res.ToString();
+        }
       
     }
 }
