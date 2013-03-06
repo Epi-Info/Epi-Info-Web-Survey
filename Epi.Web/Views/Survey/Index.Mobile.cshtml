@@ -128,10 +128,12 @@
             var redirectUrl = GetRedirectionUrl();
             //var surveyName = $("#_surveyName").val();
             var surveyName = '@Model.SurveyInfo.SurveyName';
+            surveyName = "H";//ReplaceString(surveyName);
             var passCode = $('#spPassCode').text();
             //url to post for email to be sent
             var postUrl = '@Url.Action("Notify","Post")';
             var EmailSubject = $('#Subject').val();
+            EmailSubject = "H";//ReplaceString(EmailSubject);
             if (ValidateEmail(emailAddress) && ValidateEmail(confirmemail)) {
                 if ($.trim(emailAddress) == $.trim(confirmemail)) {
                     //Call notify function to send notification
@@ -236,8 +238,10 @@
             var redirectUrl = GetRedirectionUrl();
             //var surveyName = $("#_surveyName").val();
             var surveyName = '@Model.SurveyInfo.SurveyName';
+             surveyName = ReplaceString(surveyName).toString();
             var passCode = $('#spPassCode').text();
             var EmailSubject = $('#Subject').val();
+             EmailSubject = ReplaceString(EmailSubject).toString();
             //url to post for email to be sent
             var postUrl = '@Url.Action("Notify","Post")';
             if (ValidateEmail(emailAddress) && ValidateEmail(confirmemail)) {
@@ -392,6 +396,11 @@ $(function() {
      });
 });
  
+ 
+function ReplaceString(string){
+
+  return string.replace( /&amp;/g,"&").replace(/&gt;/g ,">").replace( /&lt;/g,"<").replace(/&quot;/g, "\"").replace(/&#39;/g, "'");
+}
 </script>
 
 <div id="header">
