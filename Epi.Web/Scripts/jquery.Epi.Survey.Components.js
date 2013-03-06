@@ -6,9 +6,9 @@ function NotifyByEmail(emailAddress, redirectUrl, surveyName, postUrl,passCode,E
 
     var user = { 'emailAddress': emailAddress,
         'redirectUrl': redirectUrl,
-        'surveyName': surveyName,
+        'surveyName': escape(surveyName),
         'passCode':passCode,
-        'EmailSubject':EmailSubject,
+        'EmailSubject':escape(EmailSubject),
         __RequestVerificationToken: $("input[name=__RequestVerificationToken]").val()
     };
 

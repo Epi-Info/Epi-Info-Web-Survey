@@ -139,8 +139,10 @@
 
         var responseUrl = GetRedirectionUrl();
         $('#url').val(responseUrl);
-        var Subject ="Link for Survey: " + '@Model.SurveyInfo.SurveyName' ;
-        $('#Subject').val(Subject);
+        var Subject ="Link for Survey: " +'@Model.SurveyInfo.SurveyName' ;
+           Subject = ReplaceString(Subject);
+       $('#Subject').val(Subject);
+          
 
         var passcode = '@Model.PassCode';
         $('#spPassCode').text(passcode);
@@ -177,16 +179,25 @@
             var confirmemail = $("#confirmemail").val();
             var redirectUrl = GetRedirectionUrl();
             //var surveyName = $("#_surveyName").val();
-            var surveyName = '@Model.SurveyInfo.SurveyName';
+           
+
+              var surveyName = '@Model.SurveyInfo.SurveyName';
+
+              surveyName = ReplaceString(surveyName);
+            
+           
+
             var passCode = $('#spPassCode').text();
             var EmailSubject = $('#Subject').val();
-             
+           EmailSubject = ReplaceString(EmailSubject);
+
             //url to post for email to be sent
             var postUrl = '@Url.Action("Notify","Post")';
             if (ValidateEmail(emailAddress) && ValidateEmail(confirmemail)) {
                 if ($.trim(emailAddress) == $.trim(confirmemail)) {
                     //Call notify function to send notification
-                    NotifyByEmail(emailAddress, redirectUrl, surveyName, postUrl, passCode,EmailSubject);
+                  NotifyByEmail(emailAddress, redirectUrl, surveyName, postUrl, passCode,EmailSubject);
+                    
                     //close the modal popup after processing
                     $("#dialog").dialog("close");
                 }
@@ -239,6 +250,11 @@
             UpdateResponse(UpdateUrl,NList, pValue,'@Model.ResponseId');
             
             }
+
+function ReplaceString(string){
+
+  return string.replace( /&amp;/g,"&").replace(/&gt;/g ,">").replace( /&lt;/g,"<").replace(/&quot;/g, "\"").replace(/&#39;/g, "'");
+}
  
  $(function() {
      $('#myform').submit( function() {
