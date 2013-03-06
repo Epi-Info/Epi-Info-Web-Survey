@@ -405,7 +405,9 @@ namespace Epi.Web.MVC.Utility
                 RadioList.fontfamily = _FieldTypeID.Attribute("PromptFontFamily").Value;
                // RadioList.IsRequired = bool.Parse(_FieldTypeID.Attribute("IsRequired").Value);
                 RadioList.IsReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value);
-             
+                RadioList.InputFieldfontstyle = _FieldTypeID.Attribute("ControlFontStyle").Value;
+                RadioList.InputFieldfontSize = double.Parse(_FieldTypeID.Attribute("ControlFontSize").Value);
+                RadioList.InputFieldfontfamily = _FieldTypeID.Attribute("ControlFontFamily").Value;
                 RadioList.Value = _ControlValue;
                 RadioList.IsHidden = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "HiddenFieldsList");
                 RadioList.IsHighlighted = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "HighlightedFieldsList");
@@ -518,6 +520,11 @@ namespace Epi.Web.MVC.Utility
                 fontstyle = _FieldTypeID.Attribute("PromptFontStyle").Value,
                 fontSize = double.Parse(_FieldTypeID.Attribute("PromptFontSize").Value),
                 fontfamily = _FieldTypeID.Attribute("PromptFontFamily").Value,
+
+                InputFieldfontstyle = _FieldTypeID.Attribute("ControlFontStyle").Value,
+                InputFieldfontSize = double.Parse(_FieldTypeID.Attribute("ControlFontSize").Value),
+                InputFieldfontfamily = _FieldTypeID.Attribute("ControlFontFamily").Value,
+
                // IsRequired = bool.Parse(_FieldTypeID.Attribute("IsRequired").Value),
                 IsRequired = GetRequiredControlState(form.RequiredFieldsList.ToString(), _FieldTypeID.Attribute("Name").Value, "RequiredFieldsList"),
                 Required = GetRequiredControlState(form.RequiredFieldsList.ToString(), _FieldTypeID.Attribute("Name").Value, "RequiredFieldsList"),
@@ -596,7 +603,10 @@ namespace Epi.Web.MVC.Utility
                // IsRequired = bool.Parse(_FieldTypeID.Attribute("IsRequired").Value),
                 IsRequired = GetRequiredControlState(form.RequiredFieldsList.ToString(), _FieldTypeID.Attribute("Name").Value, "RequiredFieldsList"),
                   Required = GetRequiredControlState(form.RequiredFieldsList.ToString(), _FieldTypeID.Attribute("Name").Value, "RequiredFieldsList"),
-                 
+                InputFieldfontstyle = _FieldTypeID.Attribute("ControlFontStyle").Value,
+                InputFieldfontSize = double.Parse(_FieldTypeID.Attribute("ControlFontSize").Value),
+                InputFieldfontfamily = _FieldTypeID.Attribute("ControlFontFamily").Value,
+
                 IsReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value),
                 MaxLength = int.Parse(_FieldTypeID.Attribute("MaxLength").Value),
                 IsHidden = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "HiddenFieldsList"),
@@ -669,7 +679,9 @@ namespace Epi.Web.MVC.Utility
                 //IsRequired = bool.Parse(_FieldTypeID.Attribute("IsRequired").Value),
                 IsRequired = GetRequiredControlState(form.RequiredFieldsList.ToString(), _FieldTypeID.Attribute("Name").Value, "RequiredFieldsList"),
                 Required = GetRequiredControlState(form.RequiredFieldsList.ToString(), _FieldTypeID.Attribute("Name").Value, "RequiredFieldsList"),
-                
+                InputFieldfontstyle = _FieldTypeID.Attribute("ControlFontStyle").Value,
+                InputFieldfontSize = double.Parse(_FieldTypeID.Attribute("ControlFontSize").Value),
+                InputFieldfontfamily = _FieldTypeID.Attribute("ControlFontFamily").Value,
                 IsReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value),
                 Lower = _FieldTypeID.Attribute("Lower").Value,
                 Upper = _FieldTypeID.Attribute("Upper").Value,
@@ -709,7 +721,9 @@ namespace Epi.Web.MVC.Utility
                 //IsRequired = bool.Parse(_FieldTypeID.Attribute("IsRequired").Value),
                 IsRequired = GetRequiredControlState(form.RequiredFieldsList.ToString(), _FieldTypeID.Attribute("Name").Value, "RequiredFieldsList"),
                 Required = GetRequiredControlState(form.RequiredFieldsList.ToString(), _FieldTypeID.Attribute("Name").Value, "RequiredFieldsList"),
-                
+                InputFieldfontstyle = _FieldTypeID.Attribute("ControlFontStyle").Value,
+                InputFieldfontSize = double.Parse(_FieldTypeID.Attribute("ControlFontSize").Value),
+                InputFieldfontfamily = _FieldTypeID.Attribute("ControlFontFamily").Value,
                 IsReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value),
                 Lower = _FieldTypeID.Attribute("Lower").Value,
                 Upper = _FieldTypeID.Attribute("Upper").Value,
@@ -751,7 +765,9 @@ namespace Epi.Web.MVC.Utility
                     //IsRequired = bool.Parse(_FieldTypeID.Attribute("IsRequired").Value),
                     DropDown.IsRequired = GetRequiredControlState(form.RequiredFieldsList.ToString(), _FieldTypeID.Attribute("Name").Value, "RequiredFieldsList");
                     DropDown.Required =GetRequiredControlState(form.RequiredFieldsList.ToString(), _FieldTypeID.Attribute("Name").Value, "RequiredFieldsList");
-                    
+                    DropDown.InputFieldfontstyle = _FieldTypeID.Attribute("ControlFontStyle").Value;
+                    DropDown.InputFieldfontSize = double.Parse(_FieldTypeID.Attribute("ControlFontSize").Value);
+                    DropDown.InputFieldfontfamily = _FieldTypeID.Attribute("ControlFontFamily").Value;
                     DropDown.IsReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value);
                     DropDown.ShowEmptyOption = true;
                     DropDown.SelectType=FieldTypeId;
