@@ -98,7 +98,8 @@ namespace MvcDynamicForms.Fields
                     Leftlbl.Attributes.Add("Id", "label" + inputName + "_" + i);
                     StringBuilder StyleValues1 = new StringBuilder();
                     StyleValues1.Append(GetRadioListStyle(_fontstyle.ToString(), null, null, null, null, IsHidden));
-                    Leftlbl.Attributes.Add("style", StyleValues1.ToString() + ";" + IsHighlightedStyle + ";" + IsHiddenStyle);
+                    string InputFieldStyle_L = GetInputFieldStyle(_InputFieldfontstyle.ToString(), _InputFieldfontSize, _InputFieldfontfamily.ToString());
+                    Leftlbl.Attributes.Add("style", StyleValues1.ToString() + ";" + IsHighlightedStyle + ";" + IsHiddenStyle + ";" + InputFieldStyle_L);
                     Leftlbl.SetInnerText(choicesList[i].Key);
                     html.Append(Leftlbl.ToString());
                      
@@ -142,7 +143,8 @@ namespace MvcDynamicForms.Fields
                     rightlbl.Attributes.Add("Id", "label" + inputName + "_" + i);
                     StringBuilder StyleValues2 = new StringBuilder();
                     StyleValues2.Append(GetRadioListStyle(_fontstyle.ToString(), null, null, null, null, IsHidden));
-                    rightlbl.Attributes.Add("style", StyleValues2.ToString() + ";" + IsHighlightedStyle + ";" + IsHiddenStyle);
+                    string InputFieldStyle_R = GetInputFieldStyle(_InputFieldfontstyle.ToString(), _InputFieldfontSize, _InputFieldfontfamily.ToString());
+                    rightlbl.Attributes.Add("style", StyleValues2.ToString() + ";" + IsHighlightedStyle + ";" + IsHiddenStyle + ";" + InputFieldStyle_R);
                     rightlbl.SetInnerText(choicesList[i].Key);
                     html.Append(rightlbl.ToString());
                
