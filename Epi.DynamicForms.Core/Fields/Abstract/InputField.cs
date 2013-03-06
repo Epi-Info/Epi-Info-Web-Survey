@@ -24,6 +24,9 @@ namespace MvcDynamicForms.Fields
         protected Boolean _IsRequired;
         protected Boolean _IsReadOnly;
         protected int _MaxLength;
+        protected string _InputFieldfontstyle;
+        protected double _InputFieldfontSize;
+        protected string _InputFieldfontfamily;
 
         protected Dictionary<string, string> _inputHtmlAttributes = new Dictionary<string, string>();
         /// <summary>
@@ -154,5 +157,97 @@ namespace MvcDynamicForms.Fields
         public Boolean IsRequired { get { return this._IsRequired; } set {   this._IsRequired =value; } }
         public Boolean IsReadOnly { get { return this._IsReadOnly; } set {   this._IsReadOnly = value; }}
         public int MaxLength { get { return this._MaxLength; } set { this._MaxLength = value; } }
+
+      //  protected string InputFieldfontstyle;
+      //  protected string InputFieldfontSize;
+       // protected string InputFieldfontfamily;
+        public string InputFieldfontstyle { get { return this._InputFieldfontstyle; } set { this._InputFieldfontstyle = value; } }
+        public double InputFieldfontSize { get { return this._InputFieldfontSize; } set { this._InputFieldfontSize = value; } }
+        public string InputFieldfontfamily { get { return this._InputFieldfontfamily; } set { this._InputFieldfontfamily = value; } }
+
+        public string GetInputFieldStyle(string ControlFontStyle, double ControlFontSize, string ControlFontFamily)
+        {
+
+            StringBuilder FontStyle = new StringBuilder();
+            StringBuilder FontWeight = new StringBuilder();
+            StringBuilder TextDecoration = new StringBuilder();
+            StringBuilder CssStyles = new StringBuilder();
+
+            char[] delimiterChars = { ' ', ',' };
+            string[] Styles = ControlFontStyle.Split(delimiterChars);
+
+
+            foreach (string Style in Styles)
+            {
+                switch (Style.ToString())
+                {
+                    case "Italic":
+                        FontStyle.Append(Style.ToString());
+                        break;
+                    case "Oblique":
+                        FontStyle.Append(Style.ToString());
+
+                        break;
+
+                }
+
+            }
+            foreach (string Style in Styles)
+            {
+                switch (Style.ToString())
+                {
+                    case "Bold":
+                        FontWeight.Append(Style.ToString());
+                        break;
+                    case "Normal":
+                        FontWeight.Append(Style.ToString());
+                        break;
+                    default:
+                        FontWeight.Append("Normal");
+                        break;
+
+                }
+
+            }
+            CssStyles.Append(";font:");//1
+            if (!string.IsNullOrEmpty(FontStyle.ToString()))
+            {
+
+                CssStyles.Append(FontStyle);//2
+                CssStyles.Append(" ");//3
+            }
+            CssStyles.Append(FontWeight);
+            CssStyles.Append(" ");
+            CssStyles.Append(this._InputFieldfontSize.ToString() + "pt ");
+            CssStyles.Append(" ");
+            CssStyles.Append(this._InputFieldfontfamily.ToString());
+
+            foreach (string Style in Styles)
+            {
+                switch (Style.ToString())
+                {
+                    case "Strikeout":
+                        TextDecoration.Append("line-through");
+                        break;
+                    case "Underline":
+                        TextDecoration.Append(Style.ToString());
+
+                        break;
+
+                }
+
+            }
+
+            if (!string.IsNullOrEmpty(TextDecoration.ToString()))
+            {
+                CssStyles.Append(";text-decoration:");
+            }
+
+            CssStyles.Append(TextDecoration);
+
+
+            return CssStyles.ToString();
+
+        }
     }
 }
