@@ -182,6 +182,11 @@ namespace Epi.Web.MVC.Controllers
                 {
                     try
                     {
+                        FunctionObject_B.Context.HiddenFieldList  = form.HiddenFieldsList;
+                        FunctionObject_B.Context.HighlightedFieldList = form.HighlightedFieldsList;
+                        FunctionObject_B.Context.DisabledFieldList = form.DisabledFieldsList;
+                        FunctionObject_B.Context.RequiredFieldList = form.RequiredFieldsList;
+
                         FunctionObject_B.Execute();
                         
                         // field list
