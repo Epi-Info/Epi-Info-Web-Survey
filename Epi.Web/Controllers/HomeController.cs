@@ -160,9 +160,12 @@ namespace Epi.Web.MVC.Controllers
                 form.FormCheckCodeObj = form.GetCheckCodeObj(xdoc, xdocResponse, checkcode);
 
 
+                SurveyAnswer.XML = CreateResponseDocument(xdoc, SurveyAnswer.XML);
+                _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, SurveyAnswer.ResponseId, form, SurveyAnswer, false, false, 0);
+
                 Dictionary<string, string> ContextDetailList = new Dictionary<string, string>();
 
-                int NumberOfPages = GetNumberOfPages(XDocument.Parse(surveyInfoModel.XML)); 
+                /*int NumberOfPages = GetNumberOfPages(XDocument.Parse(surveyInfoModel.XML)); 
                 for (int i = NumberOfPages; i > 0; i--)
                 {
                     SurveyAnswer = _isurveyFacade.GetSurveyAnswerResponse(SurveyAnswer.ResponseId).SurveyResponseList[0];
@@ -173,8 +176,9 @@ namespace Epi.Web.MVC.Controllers
                      
                     _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, SurveyAnswer.ResponseId, formRs, SurveyAnswer, false, false, i);
 
-                }
+                }*/
 
+                
 
                 ///////////////////////////// Execute - Record Before - start//////////////////////
                 EnterRule FunctionObject_B = (EnterRule)form.FormCheckCodeObj.GetCommand("level=record&event=before&identifier=");
@@ -262,7 +266,15 @@ namespace Epi.Web.MVC.Controllers
 
             return _FieldsTypeIDs.Elements().Count();
         }
-      
+
+
+        private string CreateResponseDocument(XDocument pMetaData, String pXML)
+        {
+            XDocument xdocResponse = XDocument.Parse(pXML);
+
+
+            return xdocResponse.ToString();
+        }
       
         //public  string UpdateResponseFromContext(XDocument RequestXml, Dictionary<string, string> ContextDetailList, string ResponseXml, Epi.Web.MVC.Models.SurveyInfoModel surveyModel, string ResponseID)
        
