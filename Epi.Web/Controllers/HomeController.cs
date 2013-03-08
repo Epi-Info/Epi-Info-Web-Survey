@@ -64,9 +64,6 @@ namespace Epi.Web.MVC.Controllers
 
                 surveyInfoModel.IntroductionText = MvcHtmlString.Create(introText).ToString();
 
-
-                
-
                 return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, surveyInfoModel);
             }
             catch (Exception ex)
@@ -139,10 +136,6 @@ namespace Epi.Web.MVC.Controllers
 
                 form.FormCheckCodeObj = form.GetCheckCodeObj(xdoc, xdocResponse, checkcode);
 
-                
-
-               
-
                 ///////////////////////////// Execute - Record Before - start//////////////////////
                 Dictionary<string, string> ContextDetailList = new Dictionary<string, string>();
                 EnterRule FunctionObject_B = (EnterRule)form.FormCheckCodeObj.GetCommand("level=record&event=before&identifier=");
@@ -152,10 +145,7 @@ namespace Epi.Web.MVC.Controllers
                     {
                         SurveyAnswer.XML = CreateResponseDocument(xdoc, SurveyAnswer.XML);
                          
-                        form.RequiredFieldsList = RequiredList;
-
-                       
-
+                        form.RequiredFieldsList = this.RequiredList;
                         FunctionObject_B.Context.HiddenFieldList = form.HiddenFieldsList;
                         FunctionObject_B.Context.HighlightedFieldList = form.HighlightedFieldsList;
                         FunctionObject_B.Context.DisabledFieldList = form.DisabledFieldsList;
@@ -181,7 +171,9 @@ namespace Epi.Web.MVC.Controllers
                         // do nothing so that processing
                         // can continue
                     }
-                }else{
+                }
+                else
+                {
 
 
                     SurveyAnswer.XML = CreateResponseDocument(xdoc, SurveyAnswer.XML);
@@ -189,11 +181,6 @@ namespace Epi.Web.MVC.Controllers
                     _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, SurveyAnswer.ResponseId, form, SurveyAnswer, false, false, 0);
                        
                 }
-                 
-
-
-              
-               ///Dictionary<string, string> ContextDetailList = Epi.Web.MVC.Utility.SurveyHelper.GetContextDetailList(FunctionObject_B);
 
                 SurveyAnswer = _isurveyFacade.GetSurveyAnswerResponse(SurveyAnswer.ResponseId).SurveyResponseList[0];
 
