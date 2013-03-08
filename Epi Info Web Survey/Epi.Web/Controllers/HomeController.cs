@@ -18,8 +18,8 @@ namespace Epi.Web.MVC.Controllers
 
         //declare  SurveyFacade
         private Epi.Web.MVC.Facade.ISurveyFacade _isurveyFacade;
-        
-       
+        private IEnumerable<XElement> PageFields;
+        private  string RequiredList ="";
         /// <summary>
         /// injecting surveyFacade to the constructor 
         /// </summary>
@@ -127,27 +127,7 @@ namespace Epi.Web.MVC.Controllers
                                          xdoc.Descendants("Field")
                                      //where _FieldTypeID.Attribute("Position").Value == (PageNumber - 1).ToString()
                                      select _FieldTypeID;
-                // Adding Required fileds from MetaData to the list
-                foreach (var _FieldTypeID in _FieldsTypeIDs)
-                {
-                    if (bool.Parse(_FieldTypeID.Attribute("IsRequired").Value))
-                    {
-                        if (!form.RequiredFieldsList.Contains(_FieldTypeID.Attribute("Name").Value))
-                        {
-                            if (form.RequiredFieldsList != "")
-                            {
-                                form.RequiredFieldsList = form.RequiredFieldsList + "," + _FieldTypeID.Attribute("Name").Value.ToLower();
-                            }
-                            else
-                            {
-                                form.RequiredFieldsList = _FieldTypeID.Attribute("Name").Value.ToLower();
-                            }
-                        }
-                    }
-
-                }
-
-
+                
                 
 
                 TempData["Width"] = form.Width + 100;
@@ -159,58 +139,57 @@ namespace Epi.Web.MVC.Controllers
 
                 form.FormCheckCodeObj = form.GetCheckCodeObj(xdoc, xdocResponse, checkcode);
 
-
-                SurveyAnswer.XML = CreateResponseDocument(xdoc, SurveyAnswer.XML);
-                _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, SurveyAnswer.ResponseId, form, SurveyAnswer, false, false, 0);
-
-                Dictionary<string, string> ContextDetailList = new Dictionary<string, string>();
-
-                /*int NumberOfPages = GetNumberOfPages(XDocument.Parse(surveyInfoModel.XML)); 
-                for (int i = NumberOfPages; i > 0; i--)
-                {
-                    SurveyAnswer = _isurveyFacade.GetSurveyAnswerResponse(SurveyAnswer.ResponseId).SurveyResponseList[0];
-
-                    MvcDynamicForms.Form formRs = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, i, SurveyAnswer, IsMobileDevice);
-                    formRs.RequiredFieldsList = form.RequiredFieldsList;
-                    formRs = Epi.Web.MVC.Utility.SurveyHelper.UpdateControlsValuesFromContext(formRs, ContextDetailList);
-                     
-                    _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, SurveyAnswer.ResponseId, formRs, SurveyAnswer, false, false, i);
-
-                }*/
-
                 
 
+               
+
                 ///////////////////////////// Execute - Record Before - start//////////////////////
+                Dictionary<string, string> ContextDetailList = new Dictionary<string, string>();
                 EnterRule FunctionObject_B = (EnterRule)form.FormCheckCodeObj.GetCommand("level=record&event=before&identifier=");
                 if (FunctionObject_B != null && !FunctionObject_B.IsNull())
                 {
                     try
                     {
-                        FunctionObject_B.Context.HiddenFieldList  = form.HiddenFieldsList;
+                        SurveyAnswer.XML = CreateResponseDocument(xdoc, SurveyAnswer.XML);
+                         
+                        form.RequiredFieldsList = RequiredList;
+
+                       
+
+                        FunctionObject_B.Context.HiddenFieldList = form.HiddenFieldsList;
                         FunctionObject_B.Context.HighlightedFieldList = form.HighlightedFieldsList;
                         FunctionObject_B.Context.DisabledFieldList = form.DisabledFieldsList;
                         FunctionObject_B.Context.RequiredFieldList = form.RequiredFieldsList;
 
                         FunctionObject_B.Execute();
-                        
+
                         // field list
                         form.HiddenFieldsList = FunctionObject_B.Context.HiddenFieldList;
                         form.HighlightedFieldsList = FunctionObject_B.Context.HighlightedFieldList;
                         form.DisabledFieldsList = FunctionObject_B.Context.DisabledFieldList;
                         form.RequiredFieldsList = FunctionObject_B.Context.RequiredFieldList;
 
-                        
+
                         ContextDetailList = Epi.Web.MVC.Utility.SurveyHelper.GetContextDetailList(FunctionObject_B);
                         form = Epi.Web.MVC.Utility.SurveyHelper.UpdateControlsValuesFromContext(form, ContextDetailList);
 
                         _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, ResponseID.ToString(), form, SurveyAnswer, false, false, 0);
+                        
                     }
                     catch (Exception ex)
                     {
                         // do nothing so that processing
                         // can continue
                     }
+                }else{
+
+
+                    SurveyAnswer.XML = CreateResponseDocument(xdoc, SurveyAnswer.XML);
+                    form.RequiredFieldsList = RequiredList;
+                    _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, SurveyAnswer.ResponseId, form, SurveyAnswer, false, false, 0);
+                       
                 }
+                 
 
 
               
@@ -268,17 +247,148 @@ namespace Epi.Web.MVC.Controllers
         }
 
 
-        private string CreateResponseDocument(XDocument pMetaData, String pXML)
+        private string CreateResponseDocument(XDocument pMetaData, string pXML)
         {
-            XDocument xdocResponse = XDocument.Parse(pXML);
+            XDocument XmlResponse = new XDocument();
 
 
-            return xdocResponse.ToString();
+           
+            
+
+            int NumberOfPages = GetNumberOfPages(pMetaData);
+           for (int i = 0; NumberOfPages > i-1; i++)
+           {
+
+
+                var _FieldsTypeIDs = from _FieldTypeID in
+                                         pMetaData.Descendants("Field")
+                                   where _FieldTypeID.Attribute("Position").Value == (i-1).ToString()
+                                     
+                                     select _FieldTypeID;
+                PageFields = _FieldsTypeIDs;
+
+                XDocument CurrentPageXml = ToXDocument(CreateResponseXml("", false, i, ""));
+               // XmlResponse = ToXDocument(CreateResponseXml("", true, 0, ""));
+        
+                if (i == 0)
+                {
+                    XmlResponse = ToXDocument(CreateResponseXml("", true, i, ""));
+                }
+                else { 
+                    XmlResponse = MergeXml(XmlResponse, CurrentPageXml, i);  
+                 }
+
+                
+            }
+              
+            return XmlResponse.ToString();
         }
       
         //public  string UpdateResponseFromContext(XDocument RequestXml, Dictionary<string, string> ContextDetailList, string ResponseXml, Epi.Web.MVC.Models.SurveyInfoModel surveyModel, string ResponseID)
-       
-      
 
+        public XmlDocument CreateResponseXml(string SurveyId, bool AddRoot, int CurrentPage, string Pageid  )
+        {
+
+
+          //  Dictionary<string, string> ResponseDetailList = new Dictionary<string, string>();
+
+            XmlDocument xml = new XmlDocument();
+            XmlElement root = xml.CreateElement("SurveyResponse");
+
+            if (CurrentPage == 0)
+            {
+
+                root.SetAttribute("SurveyId", SurveyId);
+                root.SetAttribute("LastPageVisited", "1");
+                root.SetAttribute("HiddenFieldsList", "");
+                root.SetAttribute("HighlightedFieldsList", "");
+                root.SetAttribute("DisabledFieldsList", "");
+                root.SetAttribute("RequiredFieldsList", "");
+
+                xml.AppendChild(root);
+            }
+
+            XmlElement PageRoot = xml.CreateElement("Page");
+            if (CurrentPage != 0)
+            {
+
+
+                PageRoot.SetAttribute("PageNumber", CurrentPage.ToString());
+                PageRoot.SetAttribute("PageId", Pageid);//Added PageId Attribute to the page node
+                xml.AppendChild(PageRoot);
+            }
+
+           // foreach (KeyValuePair<string, string> pair in ResponseDetailList)
+           // XElement
+
+            foreach (var Field in this.PageFields)
+            {
+                XmlElement child = xml.CreateElement(Epi.Web.MVC.Constants.Constant.RESPONSE_DETAILS);
+                child.SetAttribute("QuestionName", Field.Attribute("Name").Value);
+                child.InnerText = Field.Value;
+                PageRoot.AppendChild(child);
+                //Start Adding required controls to the list
+                SetRequiredList(Field);
+            }
+
+
+            return xml;
+        }
+        public static XDocument ToXDocument( XmlDocument xmlDocument)
+        {
+            using (var nodeReader = new XmlNodeReader(xmlDocument))
+            {
+                nodeReader.MoveToContent();
+                return XDocument.Load(nodeReader);
+            }
+        }
+        public static XDocument MergeXml(XDocument SavedXml, XDocument CurrentPageResponseXml, int Pagenumber)
+        {
+
+            XDocument xdoc = XDocument.Parse(SavedXml.ToString());
+            XElement oldXElement = xdoc.XPathSelectElement("SurveyResponse/Page[@PageNumber = '" + Pagenumber.ToString() + "']");
+
+
+            if (oldXElement == null)
+            {
+                SavedXml.Root.Add(CurrentPageResponseXml.Elements());
+                return SavedXml;
+            }
+
+            else
+            {
+                oldXElement.Remove();
+                xdoc.Root.Add(CurrentPageResponseXml.Elements());
+                return xdoc;
+            }
+
+
+        }
+
+        public void   SetRequiredList(XElement _Fields)
+        {
+
+            
+
+          
+            if (bool.Parse(_Fields.Attribute("IsRequired").Value))
+                {
+                    if (!RequiredList.Contains(_Fields.Attribute("Name").Value))
+                    {
+                        if (RequiredList != "")
+                        {
+                            RequiredList = RequiredList + "," + _Fields.Attribute("Name").Value.ToLower();
+                        }
+                        else
+                        {
+                            RequiredList = _Fields.Attribute("Name").Value.ToLower();
+                        }
+                    }
+                }
+
+        
+            
+             
+        }
     }
 }
