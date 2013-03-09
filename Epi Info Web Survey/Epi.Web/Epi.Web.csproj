@@ -170,6 +170,8 @@
     <Compile Include="Models\SurveyInfoModel.cs" />
     <Compile Include="Models\SurveyResponseModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\IntegratedSurveyAnswerRepository.cs" />
+    <Compile Include="Repositories\IntegratedSurveyInfoRepository.cs" />
     <Compile Include="Repositories\Core\Criterion.cs" />
     <Compile Include="Repositories\Core\IRepository.cs" />
     <Compile Include="Repositories\Core\ISurveyInfoRepository.cs" />
