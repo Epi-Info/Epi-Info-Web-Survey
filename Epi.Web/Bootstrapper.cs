@@ -10,8 +10,23 @@ namespace Epi.Web.MVC
 {
     public static class Bootstrapper
     {
+        public static bool IsIntegrated = false;
+
         public static void Initialise()
         {
+            string s = ConfigurationManager.AppSettings["INTEGRATED_SERVICE_MODE"];
+            if (!string.IsNullOrEmpty(s))
+            {
+                if (s.Equals("TRUE",System.StringComparison.OrdinalIgnoreCase))
+                {
+                    IsIntegrated = true;
+                }
+                else
+                {
+                    IsIntegrated = false;
+                }
+            }
+
             var container = BuildUnityContainer();
 
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
@@ -33,12 +48,26 @@ namespace Epi.Web.MVC
             .ConfigureInjectionFor<Epi.Web.DataServiceClient.DataServiceClient>(new InjectionConstructor(ConfigurationManager.AppSettings["ENDPOINT_USED"]));
            
             container.RegisterType<Epi.Web.Common.Message.SurveyInfoRequest, Epi.Web.Common.Message.SurveyInfoRequest>();
-            container.RegisterType<Epi.Web.MVC.Repositories.Core.ISurveyInfoRepository, Epi.Web.MVC.Repositories.SurveyInfoRepository>();
-
+            if (IsIntegrated)
+            {
+                container.RegisterType<Epi.Web.MVC.Repositories.Core.ISurveyInfoRepository, Epi.Web.MVC.Repositories.IntegratedSurveyInfoRepository>();
+            }
+            else
+            {
+                container.RegisterType<Epi.Web.MVC.Repositories.Core.ISurveyInfoRepository, Epi.Web.MVC.Repositories.SurveyInfoRepository>();
+            }
 
             container.RegisterType<Epi.Web.Common.Message.SurveyAnswerRequest, Epi.Web.Common.Message.SurveyAnswerRequest>();
-            container.RegisterType<Epi.Web.MVC.Repositories.Core.ISurveyAnswerRepository, Epi.Web.MVC.Repositories.SurveyAnswerRepository>();
-            
+
+            if (IsIntegrated)
+            {
+                container.RegisterType<Epi.Web.MVC.Repositories.Core.ISurveyAnswerRepository, Epi.Web.MVC.Repositories.IntegratedSurveyAnswerRepository>();
+            }
+            else
+            {
+                container.RegisterType<Epi.Web.MVC.Repositories.Core.ISurveyAnswerRepository, Epi.Web.MVC.Repositories.SurveyAnswerRepository>();
+            }
+            container.RegisterType<Epi.Web.WCF.SurveyService.IDataService, Epi.Web.WCF.SurveyService.DataService>();
             container.RegisterType<SurveyResponseXML, SurveyResponseXML>()
                 .Configure<InjectedMembers>()
                 .ConfigureInjectionFor<SurveyResponseXML>(new InjectionConstructor());
