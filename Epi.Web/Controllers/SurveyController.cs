@@ -188,7 +188,14 @@ namespace Epi.Web.MVC.Controllers
                             form.ClearAllErrors();
                             if (ReffererPageNum == 0)
                             {
-                                ReffererPageNum = int.Parse(StringNumber.Substring(0, 1));
+                                int index = 1;
+                                if (StringNumber.Contains("?RequestId="))
+                                {
+                                     index = StringNumber.IndexOf("?");
+                                }
+                                 
+                                    ReffererPageNum = int.Parse(StringNumber.Substring(0, index));
+                                
                             }
                             if (ReffererPageNum == CurrentPageNum)
                             {
