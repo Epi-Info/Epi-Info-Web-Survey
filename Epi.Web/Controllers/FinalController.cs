@@ -8,6 +8,9 @@ using System.Xml;
 using System.Xml.Linq;
 using System.Xml.XPath;
 using System.Linq;
+using System.Web;
+using System.Web.Caching;
+using System.Web.UI;
 namespace Epi.Web.MVC.Controllers
 {
     public class FinalController : Controller
@@ -34,8 +37,8 @@ namespace Epi.Web.MVC.Controllers
             try
             {
                 
-                SurveyInfoModel surveyInfoModel = _isurveyFacade.GetSurveyInfoModel(surveyId);
-
+               // SurveyInfoModel surveyInfoModel = _isurveyFacade.GetSurveyInfoModel(surveyId);
+                SurveyInfoModel surveyInfoModel = GetSurveyInfo(surveyId);
                 System.Text.RegularExpressions.Regex regex = new System.Text.RegularExpressions.Regex(@"(\r\n|\r|\n)+");
 
                 string exitText = regex.Replace(surveyInfoModel.ExitText.Replace("  ", " &nbsp;"), "<br />");
@@ -82,8 +85,8 @@ namespace Epi.Web.MVC.Controllers
 
 
 
-                SurveyInfoModel surveyInfoModel = _isurveyFacade.GetSurveyInfoModel(SurveyAnswer.SurveyId);
-
+                //SurveyInfoModel surveyInfoModel = _isurveyFacade.GetSurveyInfoModel(SurveyAnswer.SurveyId);
+                SurveyInfoModel surveyInfoModel = GetSurveyInfo(SurveyAnswer.SurveyId);
 
                 XDocument xdoc = XDocument.Parse(surveyInfoModel.XML);
 
@@ -126,6 +129,25 @@ namespace Epi.Web.MVC.Controllers
             }
 
         }
+        public SurveyInfoModel GetSurveyInfo(string SurveyId)
+        {
 
+            var CacheObj = HttpRuntime.Cache.Get(SurveyId);
+            if (CacheObj == null)
+            {
+
+                SurveyInfoModel surveyInfoModel = _isurveyFacade.GetSurveyInfoModel(SurveyId);
+                HttpRuntime.Cache.Insert(SurveyId, surveyInfoModel, null, Cache.NoAbsoluteExpiration, TimeSpan.FromDays(1));
+
+                return surveyInfoModel;
+            }
+            else
+            {
+                return (SurveyInfoModel)CacheObj;
+
+            }
+
+
+        }
     }
 }
