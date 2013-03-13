@@ -9,6 +9,9 @@ using Epi.Core.EnterInterpreter;
 using System.Collections.Generic;
 using System.Web.Security;
 using System.Configuration;
+using System.Web;
+using System.Web.Caching;
+using System.Web.UI;
  
 
 namespace Epi.Web.MVC.Controllers
@@ -55,8 +58,8 @@ namespace Epi.Web.MVC.Controllers
                
 
               //  TempData[Epi.Web.MVC.Constants.Constant.RESPONSE_ID] = "";
-                SurveyInfoModel surveyInfoModel = _isurveyFacade.GetSurveyInfoModel(surveyid);
-
+                //SurveyInfoModel surveyInfoModel = _isurveyFacade.GetSurveyInfoModel(surveyid);
+                 SurveyInfoModel surveyInfoModel =GetSurveyInfo(surveyid);
                 //showing line breaks in introduction text
                 System.Text.RegularExpressions.Regex regex = new System.Text.RegularExpressions.Regex(@"(\r\n|\r|\n)+");
 
@@ -113,8 +116,8 @@ namespace Epi.Web.MVC.Controllers
                 // create the first survey response
                 Epi.Web.Common.DTO.SurveyAnswerDTO SurveyAnswer = _isurveyFacade.CreateSurveyAnswer(surveyModel.SurveyId, ResponseID.ToString());
 
-                SurveyInfoModel surveyInfoModel = _isurveyFacade.GetSurveyInfoModel(SurveyAnswer.SurveyId);
-
+               // SurveyInfoModel surveyInfoModel = _isurveyFacade.GetSurveyInfoModel(SurveyAnswer.SurveyId);
+                 SurveyInfoModel surveyInfoModel =GetSurveyInfo(SurveyAnswer.SurveyId);
 
                 XDocument xdoc = XDocument.Parse(surveyInfoModel.XML);
 
@@ -377,5 +380,27 @@ namespace Epi.Web.MVC.Controllers
             
              
         }
+         public SurveyInfoModel GetSurveyInfo(string SurveyId)
+        {
+
+           var CacheObj = HttpRuntime.Cache.Get(SurveyId);
+           if (CacheObj ==null)
+           {
+
+                      SurveyInfoModel surveyInfoModel = _isurveyFacade.GetSurveyInfoModel(SurveyId);
+                      HttpRuntime.Cache.Insert(SurveyId, surveyInfoModel, null, Cache.NoAbsoluteExpiration, TimeSpan.FromDays(1));
+             
+                   return surveyInfoModel;
+              }
+              else
+              
+              {
+                  return (SurveyInfoModel)CacheObj;
+      
+              }
+                     
+        
+        }
+    
     }
 }
