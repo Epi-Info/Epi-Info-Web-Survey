@@ -13,7 +13,8 @@ namespace Epi.Web.MVC.Utility
 {
     public static class FormProvider
     {
-      
+
+        
         public static Form GetForm(object SurveyMetaData ,int PageNumber, Epi.Web.Common.DTO.SurveyAnswerDTO _SurveyAnswer)
         {
             string SurveyAnswer;
@@ -61,7 +62,7 @@ namespace Epi.Web.MVC.Utility
                 double _Width, _Height;
                 _Width = GetWidth(xdoc);
                 _Height= GetHeight(xdoc);
-                form.PageId = GetPageId(XML,PageNumber );
+                form.PageId = GetPageId(xdoc, PageNumber);
                 form.Width = _Width;
                 form.Height = _Height;
                 //Add checkcode to Form
@@ -84,8 +85,8 @@ namespace Epi.Web.MVC.Utility
            
                 form.FormCheckCodeObj.GetVariableJavaScript(VariableDefinitions);
                 form.FormCheckCodeObj.GetSubroutineJavaScript(VariableDefinitions);
-                
-                string PageName = GetPageName(XML, PageNumber);
+
+                string PageName = GetPageName(xdoc, PageNumber);
 
 
                 //Generate page level Java script (Before)
@@ -95,7 +96,7 @@ namespace Epi.Web.MVC.Utility
               
                 foreach (var _FieldTypeID in _FieldsTypeIDs)
                 {
-                    var Value = GetControlValue(SurveyAnswer, _FieldTypeID.Attribute("Name").Value);
+                    var Value = GetControlValue(xdocResponse, _FieldTypeID.Attribute("Name").Value);
                  
                     JavaScript.Append(GetFormJavaScript(checkcode, form, _FieldTypeID.Attribute("Name").Value));
 
@@ -111,13 +112,13 @@ namespace Epi.Web.MVC.Utility
                             case "1": // textbox
 
                                 var _TextBoxValue = Value;
-                                form.AddFields(GetTextBox(_FieldTypeID, _Width, _Height, SurveyAnswer, _TextBoxValue,form));
+                                form.AddFields(GetTextBox(_FieldTypeID, _Width, _Height, xdocResponse, _TextBoxValue, form));
                                 //                                             pName, pType, pSource
                                 //VariableDefinitions.AppendLine(string.Format(defineFormat, _FieldTypeID.Attribute("Name").Value,"textbox","datasource",Value)); 
                                 break;
 
                             case "2"://Label/Title
-                                form.AddFields(GetLabel(_FieldTypeID, _Width, _Height, SurveyAnswer));
+                                form.AddFields(GetLabel(_FieldTypeID, _Width, _Height, xdocResponse));
                                 //                                             pName, pType, pSource
                                 //VariableDefinitions.AppendLine(string.Format(defineFormat, _FieldTypeID.Attribute("Name").Value, "lable", "datasource",Value)); 
                                 break;
@@ -127,14 +128,14 @@ namespace Epi.Web.MVC.Utility
                             case "4"://MultiLineTextBox
 
                                 var _TextAreaValue = Value;
-                                form.AddFields(GetTextArea(_FieldTypeID, _Width, _Height, SurveyAnswer, _TextAreaValue,form));
+                                form.AddFields(GetTextArea(_FieldTypeID, _Width, _Height, xdocResponse, _TextAreaValue, form));
                                 //                                             pName, pType, pSource
                                 //VariableDefinitions.AppendLine(string.Format(defineFormat, _FieldTypeID.Attribute("Name").Value, "multiline", "datasource",Value)); 
                                 break;
                             case "5"://NumericTextBox
 
                                 var _NumericTextBoxValue = Value;
-                                form.AddFields(GetNumericTextBox(_FieldTypeID, _Width, _Height, SurveyAnswer, _NumericTextBoxValue,form));
+                                form.AddFields(GetNumericTextBox(_FieldTypeID, _Width, _Height, xdocResponse, _NumericTextBoxValue, form));
                                 //                                             pName, pType, pSource
                                 //VariableDefinitions.AppendLine(string.Format(defineNumberFormat, _FieldTypeID.Attribute("Name").Value, "number", "datasource", Value)); 
                                 break;
@@ -142,19 +143,19 @@ namespace Epi.Web.MVC.Utility
                             case "7"://NumericTextBox
 
                                 var _DatePickerValue = Value;
-                                form.AddFields(GetDatePicker(_FieldTypeID, _Width, _Height, SurveyAnswer, _DatePickerValue,form));
+                                form.AddFields(GetDatePicker(_FieldTypeID, _Width, _Height, xdocResponse, _DatePickerValue, form));
                                 //                                             pName, pType, pSource
                                 //VariableDefinitions.AppendLine(string.Format(defineNumberFormat, _FieldTypeID.Attribute("Name").Value, "number", "datasource", Value)); 
                                 break;
                             case "8": //TimePicker
                                  var _timePickerValue = Value;
-                                form.AddFields(GetTimePicker(_FieldTypeID, _Width, _Height, SurveyAnswer, _timePickerValue,form));
+                                 form.AddFields(GetTimePicker(_FieldTypeID, _Width, _Height, xdocResponse, _timePickerValue, form));
 
                                 break;
                             case "10"://CheckBox
 
                                 var _CheckBoxValue = Value;
-                                form.AddFields(GetCheckBox(_FieldTypeID, _Width, _Height, SurveyAnswer, _CheckBoxValue));
+                                form.AddFields(GetCheckBox(_FieldTypeID, _Width, _Height, xdocResponse, _CheckBoxValue));
                                 //                                             pName, pType, pSource
                                 //VariableDefinitions.AppendLine(string.Format(defineFormat, _FieldTypeID.Attribute("Name").Value, "checkbox", "datasource",Value)); 
                                 break;
@@ -178,18 +179,18 @@ namespace Epi.Web.MVC.Utility
 
 
 
-                                form.AddFields(GetDropDown(_FieldTypeID, _Width, _Height, SurveyAnswer, _DropDownSelectedValueYN, "Yes&#;No", 11,form));
+                                form.AddFields(GetDropDown(_FieldTypeID, _Width, _Height, xdocResponse, _DropDownSelectedValueYN, "Yes&#;No", 11, form));
                                 //                                             pName, pType, pSource
                                 //VariableDefinitions.AppendLine(string.Format(defineFormat, _FieldTypeID.Attribute("Name").Value, "yesno", "datasource",Value)); 
 
                                 break;
                             case "12"://RadioList
-                                  var _GroupBoxValue1 = GetControlValue(SurveyAnswer, _FieldTypeID.Attribute("UniqueId").Value);
-                                form.AddFields(GetGroupBox(_FieldTypeID, _Width+12, _Height, SurveyAnswer, _GroupBoxValue1));
+                                var _GroupBoxValue1 = GetControlValue(xdocResponse, _FieldTypeID.Attribute("UniqueId").Value);
+                                form.AddFields(GetGroupBox(_FieldTypeID, _Width + 12, _Height, xdocResponse, _GroupBoxValue1));
                                 var _RadioListSelectedValue1 = Value;
                                 string RadioListValues1 = "";
                                 RadioListValues1 =  _FieldTypeID.Attribute("List").Value ;
-                                form.AddFields(GetRadioList(_FieldTypeID, _Width, _Height, SurveyAnswer, _RadioListSelectedValue1, RadioListValues1,form));
+                                form.AddFields(GetRadioList(_FieldTypeID, _Width, _Height, xdocResponse, _RadioListSelectedValue1, RadioListValues1, form));
                                
                                 break;
                             case "17"://DropDown LegalValues
@@ -197,7 +198,7 @@ namespace Epi.Web.MVC.Utility
                                 string DropDownValues1 = "";
                                 DropDownValues1 = GetDropDownValues(xdoc, _FieldTypeID.Attribute("Name").Value, _FieldTypeID.Attribute("SourceTableName").Value);
                                 var _DropDownSelectedValue1 = Value;
-                                form.AddFields(GetDropDown(_FieldTypeID, _Width, _Height, SurveyAnswer, _DropDownSelectedValue1, DropDownValues1, 17,form));
+                                form.AddFields(GetDropDown(_FieldTypeID, _Width, _Height, xdocResponse, _DropDownSelectedValue1, DropDownValues1, 17, form));
                                 //                                             pName, pType, pSource
                                 //VariableDefinitions.AppendLine(string.Format(defineFormat, _FieldTypeID.Attribute("Name").Value, "legalvalue", "datasource",Value)); 
 
@@ -207,7 +208,7 @@ namespace Epi.Web.MVC.Utility
                                 string DropDownValues2 = "";
                                 DropDownValues2 = GetDropDownValues(xdoc, _FieldTypeID.Attribute("Name").Value, _FieldTypeID.Attribute("SourceTableName").Value);
                                 var _DropDownSelectedValue2 = Value;
-                                form.AddFields(GetDropDown(_FieldTypeID, _Width, _Height, SurveyAnswer, _DropDownSelectedValue2, DropDownValues2, 18,form));
+                                form.AddFields(GetDropDown(_FieldTypeID, _Width, _Height, xdocResponse, _DropDownSelectedValue2, DropDownValues2, 18, form));
                                 //                                             pName, pType, pSource
                                 //VariableDefinitions.AppendLine(string.Format(defineFormat, _FieldTypeID.Attribute("Name").Value, "code", "datasource",Value)); 
 
@@ -217,14 +218,14 @@ namespace Epi.Web.MVC.Utility
                                 string DropDownValues = "";
                                 DropDownValues = GetDropDownValues(xdoc, _FieldTypeID.Attribute("Name").Value, _FieldTypeID.Attribute("SourceTableName").Value);
                                 var _DropDownSelectedValue = Value;
-                                form.AddFields(GetDropDown(_FieldTypeID, _Width, _Height, SurveyAnswer, _DropDownSelectedValue, DropDownValues, 19,form));
+                                form.AddFields(GetDropDown(_FieldTypeID, _Width, _Height, xdocResponse, _DropDownSelectedValue, DropDownValues, 19, form));
                                 //                                             pName, pType, pSource
                                 //VariableDefinitions.AppendLine(string.Format(defineFormat, _FieldTypeID.Attribute("Name").Value, "commentlegal", "datasource",Value)); 
 
                                 break;
                             case "21"://GroupBox
-                                var _GroupBoxValue = GetControlValue(SurveyAnswer, _FieldTypeID.Attribute("UniqueId").Value);
-                                form.AddFields(GetGroupBox(_FieldTypeID, _Width, _Height, SurveyAnswer, _GroupBoxValue));
+                                var _GroupBoxValue = GetControlValue(xdocResponse, _FieldTypeID.Attribute("UniqueId").Value);
+                                form.AddFields(GetGroupBox(_FieldTypeID, _Width, _Height, xdocResponse, _GroupBoxValue));
                                 //                                             pName, pType, pSource
                                 //VariableDefinitions.AppendLine(string.Format(defineFormat, _FieldTypeID.Attribute("Name").Value, "", "datasource",Value)); 
                                 break;
@@ -348,15 +349,15 @@ namespace Epi.Web.MVC.Utility
         }
 
 
-        public  static string GetControlValue( string Xml,string ControlName ) 
+        public static string GetControlValue(XDocument xdoc, string ControlName) 
         {
 
             string ControlValue = "";
 
-            if (!string.IsNullOrEmpty(Xml))
+            if (!string.IsNullOrEmpty(xdoc.ToString()))
             {
 
-                XDocument xdoc = XDocument.Parse(Xml);
+                //XDocument xdoc = XDocument.Parse(Xml);
 
 
                 var _ControlValues = from _ControlValue in
@@ -373,7 +374,7 @@ namespace Epi.Web.MVC.Utility
             return ControlValue;
         }
 
-        private static RadioList GetRadioList(XElement _FieldTypeID, double _Width, double _Height, string SurveyAnswer, string _ControlValue, string RadioListValues, Form form)
+        private static RadioList GetRadioList(XElement _FieldTypeID, double _Width, double _Height, XDocument SurveyAnswer, string _ControlValue, string RadioListValues, Form form)
         {
 
             var RadioList = new RadioList();
@@ -435,7 +436,7 @@ namespace Epi.Web.MVC.Utility
 
         }
 
-        private static NumericTextBox GetNumericTextBox(XElement _FieldTypeID, double _Width, double _Height, string SurveyAnswer, string _ControlValue, Form form)
+        private static NumericTextBox GetNumericTextBox(XElement _FieldTypeID, double _Width, double _Height, XDocument SurveyAnswer, string _ControlValue, Form form)
         {
 
             var NumericTextBox = new NumericTextBox
@@ -472,7 +473,7 @@ namespace Epi.Web.MVC.Utility
             return NumericTextBox;
 
         }
-        private static Literal GetLabel(XElement _FieldTypeID, double _Width, double _Height,string SurveyAnswer)
+        private static Literal GetLabel(XElement _FieldTypeID, double _Width, double _Height, XDocument SurveyAnswer)
         {
 
 
@@ -497,7 +498,7 @@ namespace Epi.Web.MVC.Utility
             return Label;
 
         }
-        private static TextArea GetTextArea(XElement _FieldTypeID, double _Width, double _Height, string SurveyAnswer, string _ControlValue,Form form)
+        private static TextArea GetTextArea(XElement _FieldTypeID, double _Width, double _Height, XDocument SurveyAnswer, string _ControlValue, Form form)
         {
 
 
@@ -540,7 +541,7 @@ namespace Epi.Web.MVC.Utility
             return TextArea;
 
         }
-        private static Hidden GetHiddenField(XElement _FieldTypeID, double _Width, double _Height, string SurveyAnswer, string _ControlValue)
+        private static Hidden GetHiddenField(XElement _FieldTypeID, double _Width, double _Height, XDocument SurveyAnswer, string _ControlValue)
         {
 
 
@@ -578,7 +579,7 @@ namespace Epi.Web.MVC.Utility
         }
 
 
-        private static TextBox GetTextBox(XElement _FieldTypeID, double _Width, double _Height, string SurveyAnswer, string _ControlValue,Form form)
+        private static TextBox GetTextBox(XElement _FieldTypeID, double _Width, double _Height, XDocument SurveyAnswer, string _ControlValue, Form form)
         {
 
 
@@ -620,7 +621,7 @@ namespace Epi.Web.MVC.Utility
             return TextBox;
 
         }
-        private static CheckBox GetCheckBox(XElement _FieldTypeID, double _Width, double _Height, string SurveyAnswer, string _ControlValue)
+        private static CheckBox GetCheckBox(XElement _FieldTypeID, double _Width, double _Height, XDocument SurveyAnswer, string _ControlValue)
         {
 
 
@@ -655,7 +656,7 @@ namespace Epi.Web.MVC.Utility
             return CheckBox;
         
         }
-        private static DatePicker GetDatePicker(XElement _FieldTypeID, double _Width, double _Height, string SurveyAnswer, string _ControlValue,Form form)
+        private static DatePicker GetDatePicker(XElement _FieldTypeID, double _Width, double _Height, XDocument SurveyAnswer, string _ControlValue, Form form)
         {
 
             var DatePicker = new DatePicker
@@ -697,7 +698,7 @@ namespace Epi.Web.MVC.Utility
 
         }
 
-        private static TimePicker GetTimePicker(XElement _FieldTypeID, double _Width, double _Height, string SurveyAnswer, string _ControlValue,Form form)
+        private static TimePicker GetTimePicker(XElement _FieldTypeID, double _Width, double _Height, XDocument SurveyAnswer, string _ControlValue, Form form)
         {
 
             var TimePicker = new TimePicker
@@ -740,7 +741,7 @@ namespace Epi.Web.MVC.Utility
         }
 
 
-        private static Select GetDropDown(XElement _FieldTypeID, double _Width, double _Height, string SurveyAnswer, string _ControlValue, string DropDownValues, int FieldTypeId,Form form)
+        private static Select GetDropDown(XElement _FieldTypeID, double _Width, double _Height, XDocument SurveyAnswer, string _ControlValue, string DropDownValues, int FieldTypeId, Form form)
         {
 
 
@@ -793,16 +794,16 @@ namespace Epi.Web.MVC.Utility
 
             return DropDown;
         }
-         
-        public static   string  GetDropDownValues(XDocument Xml, string ControlName,string TableName)
+
+        public static string GetDropDownValues(XDocument xdoc, string ControlName, string TableName)
         {
             StringBuilder DropDownValues = new StringBuilder();
-           
 
-            if (!string.IsNullOrEmpty(Xml.ToString()))
+
+            if (!string.IsNullOrEmpty(xdoc.ToString()))
             {
 
-                XDocument xdoc = XDocument.Parse(Xml.ToString());
+               // XDocument xdoc = XDocument.Parse(Xml.ToString());
 
 
                 var _ControlValues = from _ControlValue in
@@ -830,7 +831,7 @@ namespace Epi.Web.MVC.Utility
 
             return DropDownValues.ToString();
         }
-        private static GroupBox GetGroupBox(XElement _FieldTypeID, double _Width, double _Height, string SurveyAnswer, string _ControlValue)
+        private static GroupBox GetGroupBox(XElement _FieldTypeID, double _Width, double _Height, XDocument SurveyAnswer, string _ControlValue)
         {
 
 
@@ -877,14 +878,14 @@ namespace Epi.Web.MVC.Utility
         }
 
         //check if the control should be hidden
-        public static bool GetControlState(string Xml, string ControlName,string ListName)
+        public static bool GetControlState(XDocument xdoc, string ControlName, string ListName)
         {
 
             bool _Val = false;
 
-            if (!string.IsNullOrEmpty(Xml))
+            if (!string.IsNullOrEmpty(xdoc.ToString()))
             {
-                XDocument xdoc = XDocument.Parse(Xml);
+               // XDocument xdoc = XDocument.Parse(Xml);
 
                 if (!string.IsNullOrEmpty(xdoc.Root.Attribute(ListName).Value.ToString()))
                 {
@@ -940,9 +941,9 @@ namespace Epi.Web.MVC.Utility
             return _Val;
         }
       //get pegeid for xml
-        public static string GetPageId(string Xml, int PageNumber)
+        public static string GetPageId(XDocument xdoc, int PageNumber)
         {
-            XDocument xdoc = XDocument.Parse(Xml);
+          //  XDocument xdoc = XDocument.Parse(Xml);
 
             XElement XElement = xdoc.XPathSelectElement("Template/Project/View/Page[@Position = '" + (PageNumber - 1).ToString() + "']");
             
@@ -951,9 +952,9 @@ namespace Epi.Web.MVC.Utility
             return   XElement.Attribute("PageId").Value.ToString();
         }
 
-        public static string GetPageName(string Xml, int PageNumber)
+        public static string GetPageName(XDocument xdoc, int PageNumber)
         {
-            XDocument xdoc = XDocument.Parse(Xml);
+            //XDocument xdoc = XDocument.Parse(Xml);
 
             XElement XElement = xdoc.XPathSelectElement("Template/Project/View/Page[@Position = '" + (PageNumber - 1).ToString() + "']");
 

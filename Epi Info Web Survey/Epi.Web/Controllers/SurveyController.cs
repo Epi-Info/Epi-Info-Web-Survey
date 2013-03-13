@@ -11,9 +11,11 @@ using Epi.Core.EnterInterpreter;
 using System.Web.Security;
 using System.Text.RegularExpressions;
 using System.Web;
+using System.Web.UI;
 using System.Configuration;
 using System.Web.Routing;
 using System.Web.WebPages;
+using System.Web.Caching;
 namespace Epi.Web.MVC.Controllers
 {
         [Authorize]
@@ -46,7 +48,7 @@ namespace Epi.Web.MVC.Controllers
  
         [HttpGet]
 
-        [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")] 
+      //  [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")] 
         public ActionResult Index(string responseId, int PageNumber = 0)
         {
             try
@@ -60,7 +62,9 @@ namespace Epi.Web.MVC.Controllers
                 }
 
                     Epi.Web.Common.DTO.SurveyAnswerDTO surveyAnswerDTO = GetSurveyAnswer(responseId);
-                    SurveyInfoModel surveyInfoModel = _isurveyFacade.GetSurveyInfoModel(surveyAnswerDTO.SurveyId);
+                   
+                   // SurveyInfoModel surveyInfoModel = _isurveyFacade.GetSurveyInfoModel(surveyAnswerDTO.SurveyId);
+                    SurveyInfoModel surveyInfoModel = GetSurveyInfo(surveyAnswerDTO.SurveyId);
                     PreValidationResultEnum ValidationTest = PreValidateResponse(Mapper.ToSurveyAnswerModel(surveyAnswerDTO), surveyInfoModel);
                     if (PageNumber == 0)
                     {
@@ -126,7 +130,7 @@ namespace Epi.Web.MVC.Controllers
             //return null;
         }
         [HttpPost]
-        [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
+      //  [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
         [ValidateAntiForgeryToken]
         //public ActionResult Index(SurveyInfoModel surveyInfoModel, string Submitbutton, string Savebutton, string ContinueButton, string PreviousButton, int PageNumber = 1)
         public ActionResult Index(SurveyAnswerModel surveyAnswerModel, string Submitbutton, string Savebutton, string ContinueButton, string PreviousButton, int PageNumber = 0)
@@ -144,7 +148,9 @@ namespace Epi.Web.MVC.Controllers
 
                 Epi.Web.Common.DTO.SurveyAnswerDTO SurveyAnswer = _isurveyFacade.GetSurveyAnswerResponse(responseId).SurveyResponseList[0];
 
-                SurveyInfoModel surveyInfoModel = _isurveyFacade.GetSurveyInfoModel(SurveyAnswer.SurveyId);
+               // SurveyInfoModel surveyInfoModel = _isurveyFacade.GetSurveyInfoModel(SurveyAnswer.SurveyId);
+                object temp = System.Web.HttpContext.Current.Cache;
+                SurveyInfoModel surveyInfoModel = GetSurveyInfo(SurveyAnswer.SurveyId);
 
                 PreValidationResultEnum ValidationTest = PreValidateResponse(Mapper.ToSurveyAnswerModel(SurveyAnswer), surveyInfoModel);
              
@@ -589,8 +595,8 @@ namespace Epi.Web.MVC.Controllers
                     IsMobileDevice = this.Request.Browser.IsMobileDevice;
                     Epi.Web.Common.DTO.SurveyAnswerDTO SurveyAnswer = _isurveyFacade.GetSurveyAnswerResponse(responseId).SurveyResponseList[0];
 
-                    SurveyInfoModel surveyInfoModel = _isurveyFacade.GetSurveyInfoModel(SurveyAnswer.SurveyId);
-
+                  //  SurveyInfoModel surveyInfoModel = _isurveyFacade.GetSurveyInfoModel(SurveyAnswer.SurveyId);
+                    SurveyInfoModel surveyInfoModel = GetSurveyInfo(SurveyAnswer.SurveyId); 
                     int NumberOfPages = Epi.Web.MVC.Utility.SurveyHelper.GetNumberOfPags(SurveyAnswer.XML);
 
                     foreach (string Name in _NameList)
@@ -630,8 +636,8 @@ namespace Epi.Web.MVC.Controllers
 
                 Epi.Web.Common.DTO.SurveyAnswerDTO SurveyAnswer = _isurveyFacade.GetSurveyAnswerResponse(responseId).SurveyResponseList[0];
 
-                SurveyInfoModel surveyInfoModel = _isurveyFacade.GetSurveyInfoModel(SurveyAnswer.SurveyId);
-
+                //SurveyInfoModel surveyInfoModel = _isurveyFacade.GetSurveyInfoModel(SurveyAnswer.SurveyId);
+                SurveyInfoModel surveyInfoModel = GetSurveyInfo(SurveyAnswer.SurveyId); 
                  PreValidationResultEnum ValidationTest = PreValidateResponse(Mapper.ToSurveyAnswerModel(SurveyAnswer), surveyInfoModel);
                 var form = _isurveyFacade.GetSurveyFormData(SurveyAnswer.SurveyId, PageNumber, SurveyAnswer, IsMobileDevice);
               
@@ -664,5 +670,27 @@ namespace Epi.Web.MVC.Controllers
         }
 
 
+ //[OutputCache(Duration = int.MaxValue, VaryByParam = "SurveyId", Location = OutputCacheLocation.Server)]
+  public SurveyInfoModel GetSurveyInfo(string SurveyId)
+        {
+
+           var CacheObj = HttpRuntime.Cache.Get(SurveyId);
+           if (CacheObj ==null)
+           {
+
+                      SurveyInfoModel surveyInfoModel = _isurveyFacade.GetSurveyInfoModel(SurveyId);
+                      HttpRuntime.Cache.Insert(SurveyId, surveyInfoModel, null, Cache.NoAbsoluteExpiration, TimeSpan.FromDays(1));
+             
+                   return surveyInfoModel;
+              }
+              else
+              
+              {
+                  return (SurveyInfoModel)CacheObj;
+      
+              }
+                     
+        
+        }
     }
 }
