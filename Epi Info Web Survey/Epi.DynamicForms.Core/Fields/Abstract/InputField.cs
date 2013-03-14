@@ -202,9 +202,7 @@ namespace MvcDynamicForms.Fields
                     case "Normal":
                         FontWeight.Append(Style.ToString());
                         break;
-                    default:
-                        FontWeight.Append("Normal");
-                        break;
+                    
 
                 }
 
