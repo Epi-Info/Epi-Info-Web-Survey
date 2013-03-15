@@ -234,8 +234,6 @@ namespace Epi.Web.MVC.Utility
 
                 }
 
- 
-
                 //var gender = new RadioList
                 //{
                 //    DisplayOrder = 30,

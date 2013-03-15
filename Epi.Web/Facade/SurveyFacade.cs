@@ -7,7 +7,7 @@ using Epi.Web.MVC.Models;
 using Epi.Web.MVC.Facade;
 namespace Epi.Web.MVC.Facade
 {
-    public class SurveyFacade:ISurveyFacade
+    public class SurveyFacade : ISurveyFacade
     {
 
         // declare ISurveyInfoRepository which inherits IRepository of SurveyInfoResponse object
@@ -15,6 +15,7 @@ namespace Epi.Web.MVC.Facade
 
         // declare ISurveyResponseRepository which inherits IRepository of SurveyResponseResponse object
         private ISurveyAnswerRepository _iSurveyAnswerRepository;
+        public ISurveyAnswerRepository GetSurveyAnswerRepository() { return this._iSurveyAnswerRepository; } 
 
         //declare SurveyInfoRequest
         private Epi.Web.Common.Message.SurveyInfoRequest _surveyInfoRequest;

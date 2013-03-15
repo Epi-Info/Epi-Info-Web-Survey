@@ -165,7 +165,17 @@ namespace Epi.Web.MVC.Controllers
                         MvcDynamicForms.Form form;
                         int CurrentPageNum = GetSurveyPageNumber(SurveyAnswer.XML.ToString());
                         int ReffererPageNum;
-                        string url = this.Request.UrlReferrer.ToString();
+
+                        string url = "";
+                        if (this.Request.UrlReferrer == null)
+                        {
+                            url = this.Request.Url.ToString();
+                        }
+                        else
+                        {
+                            url = this.Request.UrlReferrer.ToString();
+                        }
+                        
                         int LastIndex = url.LastIndexOf("/");
                         string StringNumber = null;
                         if (url.Length - LastIndex + 1 <= url.Length)
@@ -445,13 +455,12 @@ namespace Epi.Web.MVC.Controllers
             }
 
             surveyAnswerDTO.XML = Xdoc.ToString();
-            
-            Epi.Web.MVC.Repositories.SurveyAnswerRepository iSurveyAnswerRepository = new Repositories.SurveyAnswerRepository(new DataServiceClient.DataServiceClient());
+
             Epi.Web.Common.Message.SurveyAnswerRequest  sar = new Common.Message.SurveyAnswerRequest();
             sar.Action = "Update";
             sar.SurveyAnswerList.Add(surveyAnswerDTO);
 
-            iSurveyAnswerRepository.SaveSurveyAnswer(sar);
+            this._isurveyFacade.GetSurveyAnswerRepository().SaveSurveyAnswer(sar);
 
         }
 
