@@ -232,16 +232,8 @@ namespace Epi.Web.MVC.Controllers
                         //passCode end
                         bool IsSubmited = false;
                         bool IsSaved = false;
-
-                            form.HiddenFieldsList = this.Request.Form["HiddenFieldsList"].ToString();
                          
-                            form.HighlightedFieldsList = this.Request.Form["HighlightedFieldsList"].ToString();
-                         
-                            form.DisabledFieldsList = this.Request.Form["DisabledFieldsList"].ToString();
-
-                            form.RequiredFieldsList = this.Request.Form["RequiredFieldsList"].ToString();
-
-                            form.AssignList = this.Request.Form["AssignList"].ToString();
+                            form = SetLists(form);
                          
                         _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId, form, SurveyAnswer, IsSubmited, IsSaved, PageNumber);
 
@@ -255,17 +247,7 @@ namespace Epi.Web.MVC.Controllers
                             //Update the model
                             UpdateModel(form);
 
-                            form.HiddenFieldsList = this.Request.Form["HiddenFieldsList"].ToString();
-                            
-                            form.HighlightedFieldsList = this.Request.Form["HighlightedFieldsList"].ToString();
-                            
-                            form.DisabledFieldsList = this.Request.Form["DisabledFieldsList"].ToString();
-
-                            form.RequiredFieldsList = this.Request.Form["RequiredFieldsList"].ToString();
-
-                            form.AssignList = this.Request.Form["AssignList"].ToString();
-
-                     
+                            form = SetLists(form);
                             
                             IsSaved = form.IsSaved = true;
                             form.StatusId = SurveyAnswer.Status;
@@ -297,16 +279,9 @@ namespace Epi.Web.MVC.Controllers
                         else if (!string.IsNullOrEmpty(this.Request.Form["is_goto_action"]) && this.Request.Form["is_goto_action"].ToString().Equals("true", StringComparison.OrdinalIgnoreCase))
                         {
                             //This is a Navigation to a url
-                            form.HiddenFieldsList = this.Request.Form["HiddenFieldsList"].ToString();
+                           
 
-                            form.HighlightedFieldsList = this.Request.Form["HighlightedFieldsList"].ToString();
-
-                            form.DisabledFieldsList = this.Request.Form["DisabledFieldsList"].ToString();
-
-                            form.RequiredFieldsList = this.Request.Form["RequiredFieldsList"].ToString();
-
-                            form.AssignList = this.Request.Form["AssignList"].ToString();
-
+                            form = SetLists(form);
 
                             _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId, form, SurveyAnswer, IsSubmited, IsSaved, PageNumber);
 
@@ -376,16 +351,9 @@ namespace Epi.Web.MVC.Controllers
                             else
                             {
                                 //This is a Navigation to a url
-                                 form.HiddenFieldsList = this.Request.Form["HiddenFieldsList"].ToString();
                                
-                                 form.HighlightedFieldsList = this.Request.Form["HighlightedFieldsList"].ToString();
-                                
-                                 form.DisabledFieldsList = this.Request.Form["DisabledFieldsList"].ToString();
 
-                                 form.RequiredFieldsList = this.Request.Form["RequiredFieldsList"].ToString();
-
-                                 form.AssignList = this.Request.Form["AssignList"].ToString();
-                                 
+                                 form = SetLists(form);
 
                                 _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId, form, SurveyAnswer, IsSubmited, IsSaved, PageNumber);
 
@@ -648,16 +616,7 @@ namespace Epi.Web.MVC.Controllers
                 //Update the model
                 UpdateModel(form);
 
-                //form.HiddenFieldsList = this.Request.Form["HiddenFieldsList"].ToString();
-
-                //form.HighlightedFieldsList = this.Request.Form["HighlightedFieldsList"].ToString();
-
-                //form.DisabledFieldsList = this.Request.Form["DisabledFieldsList"].ToString();
-
-                //form.AssignList = this.Request.Form["AssignList"].ToString();
-
-
-            
+                
 
                 _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId, form, SurveyAnswer, false, IsSaved, PageNumber);
                 
@@ -674,7 +633,7 @@ namespace Epi.Web.MVC.Controllers
   public SurveyInfoModel GetSurveyInfo(string SurveyId)
         {
 
-           var CacheObj = HttpRuntime.Cache.Get(SurveyId);
+          /* var CacheObj = HttpRuntime.Cache.Get(SurveyId);
            if (CacheObj ==null)
            {
 
@@ -688,9 +647,24 @@ namespace Epi.Web.MVC.Controllers
               {
                   return (SurveyInfoModel)CacheObj;
       
-              }
-                     
+              }*/
+            SurveyInfoModel surveyInfoModel = _isurveyFacade.GetSurveyInfoModel(SurveyId);
+            return surveyInfoModel;  
         
         }
+          public MvcDynamicForms.Form SetLists(MvcDynamicForms.Form form) {
+
+              form.HiddenFieldsList = this.Request.Form["HiddenFieldsList"].ToString();
+
+              form.HighlightedFieldsList = this.Request.Form["HighlightedFieldsList"].ToString();
+
+              form.DisabledFieldsList = this.Request.Form["DisabledFieldsList"].ToString();
+
+              form.RequiredFieldsList = this.Request.Form["RequiredFieldsList"].ToString();
+
+              form.AssignList = this.Request.Form["AssignList"].ToString();
+
+              return form;
+          } 
     }
 }
