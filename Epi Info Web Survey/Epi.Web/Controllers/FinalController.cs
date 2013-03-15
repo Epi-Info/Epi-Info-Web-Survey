@@ -132,7 +132,7 @@ namespace Epi.Web.MVC.Controllers
         public SurveyInfoModel GetSurveyInfo(string SurveyId)
         {
 
-            var CacheObj = HttpRuntime.Cache.Get(SurveyId);
+           /* var CacheObj = HttpRuntime.Cache.Get(SurveyId);
             if (CacheObj == null)
             {
 
@@ -145,9 +145,10 @@ namespace Epi.Web.MVC.Controllers
             {
                 return (SurveyInfoModel)CacheObj;
 
-            }
+            }*/
 
-
+            SurveyInfoModel surveyInfoModel = _isurveyFacade.GetSurveyInfoModel(SurveyId);
+            return surveyInfoModel;
         }
     }
 }
