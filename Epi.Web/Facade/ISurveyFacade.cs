@@ -19,6 +19,7 @@ namespace Epi.Web.MVC.Facade
         UserAuthenticationResponse ValidateUser(string responseId, string passcode);
         void UpdatePassCode(string responseId, string passcode);
         UserAuthenticationResponse GetAuthenticationResponse(string responseId);
+        ISurveyAnswerRepository GetSurveyAnswerRepository();
 
     }
 }
