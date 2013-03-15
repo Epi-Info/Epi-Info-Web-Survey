@@ -8,6 +8,7 @@ using Epi.Web.Common.Message;
 using Epi.Web.Common.Exception;
 using System.ServiceModel;
 using Epi.Web.DataServiceClient;
+using System.Web.Caching;
 namespace Epi.Web.MVC.Repositories
 {
     public class SurveyInfoRepository : RepositoryBase, ISurveyInfoRepository
@@ -30,11 +31,33 @@ namespace Epi.Web.MVC.Repositories
         public SurveyInfoResponse GetSurveyInfo(SurveyInfoRequest pRequest)
         {
 
+
             try
             {
                 //SurveyInfoResponse result = Client.GetSurveyInfo(pRequest);
-                SurveyInfoResponse result = _iDataService.GetSurveyInfo(pRequest);
-                return result;
+                //SurveyInfoResponse result = _iDataService.GetSurveyInfo(pRequest);
+                SurveyInfoResponse result = null;
+                string SurveyId = pRequest.Criteria.SurveyIdList[0].ToString();
+                var CacheObj = HttpRuntime.Cache.Get(SurveyId);
+
+                if (CacheObj == null)
+                {
+                    result = (SurveyInfoResponse)_iDataService.GetSurveyInfo(pRequest);
+
+                    HttpRuntime.Cache.Insert(SurveyId, result, null, Cache.NoAbsoluteExpiration, TimeSpan.FromDays(1));
+
+                    return result;
+                }
+                else
+                {
+
+
+                    return (SurveyInfoResponse)CacheObj;
+
+                }
+
+ 
+                // return result;
             }
             catch (FaultException<CustomFaultException> cfe)
             {
