@@ -609,8 +609,8 @@ CCE_Context.prototype.setValue = function (pName, pValue)
         else
         {
         
-        updateXml(pName, pValue) ;
-        
+        //updateXml(pName, pValue) ;
+        CreateHiddenField(pName , pValue)
         }
     }
 }
@@ -1300,7 +1300,8 @@ function CCE_RemoveFromFieldsList(FieldName,ListName) {
  {
      if (pCheckCodeList != null) 
      {
-           var ControlList = new Array();
+          // var ControlList = new Array();
+             var ControlList = "";
          for (var i = 0; i < pCheckCodeList.length; i++) 
          {
                 //if control is a check box uncheck it otherwise clear the control value
@@ -1404,8 +1405,27 @@ function CCE_RemoveFromFieldsList(FieldName,ListName) {
                             }
                         }
                     }
+                    else
+                    {
+                    
+                      if(ControlList.length == 0)
+                      {
+                       ControlList = pCheckCodeList[i];
+                      }
+                      else
+                      {
+                      ControlList =  ControlList +","+ pCheckCodeList[i];
+                    
+                      }
+                     //updateXml(pCheckCodeList[i], '') ;
+                    
+                    }
                 }
              }
+        }
+        if(ControlList.length > 0){
+        updateXml(ControlList, '') ;
+       //CreateHiddenField(ControlList , '')
         }
    }
 
@@ -2205,5 +2225,26 @@ try
          }
 }
 
+///Create Hidden filed 
+
+function CreateHiddenField(FiledName , FieldValue)
+{
+    if (!eval(document.getElementById("hidden_"+FiledName)))
+    {
+       /* var input = document.createElement("input");
+        input.setAttribute("type","hidden")
+        input.setAttribute("id","hidden_"+FiledName)
+        input.setAttribute("value",FieldValue)
+        document.getElementById("myform").appendChild(input);*/
+        $('<input>').attr({
+        type: 'hidden',
+        id: 'hidden_'+FiledName,
+        value: FieldValue
+          }).appendTo('form');
+
+        alert(document.getElementById("hidden_"+FiledName).value)
+    }
+ 
+}
 
 cce_Context = new CCE_Context();
