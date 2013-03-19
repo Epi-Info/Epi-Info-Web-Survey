@@ -20,63 +20,80 @@ namespace MvcDynamicForms
             foreach (var key in postedForm.AllKeys.Where(x => x.StartsWith(form.FieldPrefix)))
             {
                 string fieldKey = key.Remove(0, form.FieldPrefix.Length);
-                InputField dynField = form.InputFields.Single(f => f.Key == fieldKey);
-
-                if (dynField is TextField)
+                try
                 {
-                    var txtField = (TextField)dynField;
-                    txtField.Value = postedForm[key];
-                }
+                    InputField dynField = form.InputFields.Single(f => f.Key == fieldKey);
 
-                else if (dynField is NumericTextField)
-                {
-                    var numerictxtField = (NumericTextField)dynField;
-                    numerictxtField.Value = postedForm[key]; 
-                }
-
-                else if (dynField is DatePickerField)
-                {
-                    var datepickerField = (DatePickerField)dynField;
-                    datepickerField.Value = postedForm[key];
-                }
-                else if (dynField is TimePickerField)
-                {
-                    var timepickerField = (TimePickerField)dynField;
-                    timepickerField.Value = postedForm[key];
-                }
-
-                else if (dynField is ListField)
-                {
-                    var lstField = (ListField)dynField;
-
-                    // clear all choice selections                    
-                    foreach (string k in lstField.Choices.Keys.ToList())
-                        lstField.Choices[k] = false;
-
-                    // set current selections
-                    foreach (string value in postedForm.GetValues(key))
-                        lstField.Choices[value] = true;
-
-                    lstField.Choices.Remove("");
-                }
-                else if (dynField is CheckBox)
-                {
-                    var chkField = (CheckBox)dynField;
-
-                    bool test;
-                    if (bool.TryParse(postedForm.GetValues(key)[0], out test))
+                    if (dynField is TextField)
                     {
-                        chkField.Checked = test;
+                        var txtField = (TextField)dynField;
+                        txtField.Value = postedForm[key];
+                    }
+
+                    else if (dynField is NumericTextField)
+                    {
+                        var numerictxtField = (NumericTextField)dynField;
+                        numerictxtField.Value = postedForm[key];
+                    }
+
+                    else if (dynField is DatePickerField)
+                    {
+                        var datepickerField = (DatePickerField)dynField;
+                        datepickerField.Value = postedForm[key];
+                    }
+                    else if (dynField is TimePickerField)
+                    {
+                        var timepickerField = (TimePickerField)dynField;
+                        timepickerField.Value = postedForm[key];
+                    }
+
+                    else if (dynField is ListField)
+                    {
+                        var lstField = (ListField)dynField;
+
+                        // clear all choice selections                    
+                        foreach (string k in lstField.Choices.Keys.ToList())
+                            lstField.Choices[k] = false;
+
+                        // set current selections
+                        foreach (string value in postedForm.GetValues(key))
+                            lstField.Choices[value] = true;
+
+                        lstField.Choices.Remove("");
+                    }
+                    else if (dynField is CheckBox)
+                    {
+                        var chkField = (CheckBox)dynField;
+
+                        bool test;
+                        if (bool.TryParse(postedForm.GetValues(key)[0], out test))
+                        {
+                            chkField.Checked = test;
+                        }
+                    }
+                    else if (dynField is MobileCheckBox)
+                    {
+                        var chkField = (MobileCheckBox)dynField;
+                        bool test;
+                        if (bool.TryParse(postedForm.GetValues(key)[0], out test))
+                        {
+                            chkField.Checked = test;
+                        }
                     }
                 }
-                else if (dynField is MobileCheckBox)
+                catch (System.InvalidOperationException ex)
                 {
-                    var chkField = (MobileCheckBox)dynField;
-                    bool test;
-                    if (bool.TryParse(postedForm.GetValues(key)[0], out test))
-                    {
-                        chkField.Checked = test;
-                    }
+                    form.AddFields
+                    ( new Field []  
+                    { new Hidden
+                        {
+                            Title = fieldKey,
+                            Key = fieldKey,
+                            IsPlaceHolder = false,
+                            Value =  postedForm[key]
+                        }
+                        }
+                    );
                 }
             }
 
