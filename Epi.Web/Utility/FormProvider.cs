@@ -103,7 +103,7 @@ namespace Epi.Web.MVC.Utility
 
                     if (_FieldTypeID.Attribute("Position").Value != (PageNumber - 1).ToString())
                     {
-                    //    form.AddFields(GetHiddenField(_FieldTypeID, _Width, _Height, SurveyAnswer, Value));
+                        //form.AddFields(GetHiddenField(_FieldTypeID, _Width, _Height, SurveyAnswer, Value));
                    }
                    else
                    {
