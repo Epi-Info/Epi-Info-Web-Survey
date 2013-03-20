@@ -314,7 +314,7 @@ namespace Epi.Web.MVC.Controllers
             foreach (var Field in this.PageFields)
             {
                 XmlElement child = xml.CreateElement(Epi.Web.MVC.Constants.Constant.RESPONSE_DETAILS);
-                child.SetAttribute("QuestionName", Field.Attribute("Name").Value.ToUpper());
+                child.SetAttribute("QuestionName", Field.Attribute("Name").Value);
                 child.InnerText = Field.Value;
                 PageRoot.AppendChild(child);
                 //Start Adding required controls to the list
