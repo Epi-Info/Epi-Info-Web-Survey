@@ -503,7 +503,7 @@ CCE_Context.prototype.setValue = function (pName, pValue)
 
         if (!eval(document.getElementById(FieldName)))
         {
-            CreateHiddenField(FieldName);
+            CreateHiddenField(FieldName, cce_Symbol.Type);
         }
 
         if(cce_Symbol.Source == "datasource")
@@ -564,27 +564,37 @@ CCE_Context.prototype.setValue = function (pName, pValue)
                     case "checkbox":  
                         if (pValue) 
                         {
-                        if (eval(document.getElementById("IsMobile")))
+                            if (eval(document.getElementById("IsMobile")))
                             {
-                            $(Jquery).prop('checked', true).checkboxradio('refresh');
-                            cce_Symbol.Value = true;
-                            }else{
+                                $(Jquery).prop('checked', true).checkboxradio('refresh');
+                                cce_Symbol.Value = true;
+                            }
+                            else
+                            {
                                 $(Jquery).prop('checked', true) ;
-                            cce_Symbol.Value = true;
+                                cce_Symbol.Value = true;
                             }
                         }
                         else 
                         {
                             if (eval(document.getElementById("IsMobile")))
                             {
-                            $(Jquery).prop('checked', false).checkboxradio('refresh');
-                            cce_Symbol.Value = false;
-                            }else{
-                                $(Jquery).prop('checked', false) ;
-                            cce_Symbol.Value = false;
+                                $(Jquery).prop('checked', false).checkboxradio('refresh');
+                                cce_Symbol.Value = false;
                             }
+                            else
+                            {
+                                $(Jquery).prop('checked', false) ;
+                                cce_Symbol.Value = false;
+                            }
+                            
                         }
-                        
+
+                         if($(Jquery + "[value]"))
+                         {
+                             $(Jquery).prop('value', cce_Symbol.Value);
+                         }
+                         //alert(document.getElementById(FieldName).value)
                         break;
                     case "radiobutton":  
                         var RadiofieldName = "." + FieldName;
@@ -2244,9 +2254,9 @@ try
 
 ///Create Hidden filed 
 
-function CreateHiddenField(FieldName)
+function CreateHiddenField(pFieldName, pFieldType)
 {
-    if (!eval(document.getElementById(FieldName)))
+    if (!eval(document.getElementById(pFieldName)))
     {
        /* var input = document.createElement("input");
         input.setAttribute("type","hidden")
@@ -2255,9 +2265,10 @@ function CreateHiddenField(FieldName)
         document.getElementById("myform").appendChild(input);*/
         $('<input>').attr({
         type: 'hidden',
-        id: FieldName,
-        name: FieldName,
+        id: pFieldName,
+        name: pFieldName,
         value: null,
+        fieldtype: pFieldType 
           }).appendTo('form');
 
        

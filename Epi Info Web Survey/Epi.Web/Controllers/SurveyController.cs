@@ -194,13 +194,16 @@ namespace Epi.Web.MVC.Controllers
                             {
                                 form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, CurrentPageNum, SurveyAnswer, IsMobileDevice);
                             }
-                            /*/ capture new hidden fields and save to the response
-                            var postedForm = this.ControllerContext.RequestContext.HttpContext.Request.Form;
-                            foreach (var key in postedForm.AllKeys.Where(x => x.StartsWith(form.FieldPrefix)))
+
+                            if(IsMobileDevice)
                             {
-                                string fieldKey = key.Remove(0, form.FieldPrefix.Length);
+                                Epi.Web.MVC.Utility.MobileFormProvider.UpdateHiddenFields(form, XDocument.Parse(surveyInfoModel.XML), XDocument.Parse(SurveyAnswer.XML), this.ControllerContext.RequestContext.HttpContext.Request.Form);
                             }
-                            */
+                            else
+                            {
+                                Epi.Web.MVC.Utility.FormProvider.UpdateHiddenFields(form, XDocument.Parse(surveyInfoModel.XML), XDocument.Parse(SurveyAnswer.XML), this.ControllerContext.RequestContext.HttpContext.Request.Form);
+                            }
+
                             UpdateModel(form);
                         }
                         else
