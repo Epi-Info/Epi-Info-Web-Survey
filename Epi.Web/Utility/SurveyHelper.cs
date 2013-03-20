@@ -58,11 +58,6 @@ namespace Epi.Web.MVC.Utility
                 // 2 a. update the current survey answer request
                 surveyAnswerRequest.SurveyAnswerList = surveyAnswerResponse.SurveyResponseList;
 
-                
-           
-   
-            
-
                 surveyResponseXML.Add(form);
                 XDocument SavedXml = XDocument.Parse(surveyAnswerDTO.XML);
                 bool AddRoot = false;
@@ -123,31 +118,39 @@ namespace Epi.Web.MVC.Utility
                FieldsList = GetHiddenFieldsList(form);
                if (FieldsList != null)
                {
-                    XElement XElement = null;
+
+                    IEnumerable <XElement> XElementList = Xdoc.XPathSelectElements("SurveyResponse/Page/ResponseDetail");
 
                     for (var i = 0; i < FieldsList.Count; i++)
+                    {
+                        foreach (XElement Element in XElementList)
+                        {
+                            if (Element.Attribute("QuestionName").Value.ToString().Equals(FieldsList[i].Key, StringComparison.OrdinalIgnoreCase))
+                            {
+                                Element.Value = FieldsList[i].Value;
+                                break;
+                            }
+                        }
+                        /*
+                        if (!string.IsNullOrEmpty(FieldsList[i].Key))
                         {
 
 
-                            if (!string.IsNullOrEmpty(FieldsList[i].Key))
+                            //string FieldName = ListArray[i].Substring(0, ListArray[i].IndexOf('?')).ToString();
+                            //XElement = Xdoc.XPathSelectElement("SurveyResponse/Page/ResponseDetail[@QuestionName = '" + FieldName.ToUpper() + "']");
+                            //string Value = ListArray[i].Split('?')[1];
+                            //XElement.Value = HttpUtility.HtmlDecode(Value);
+
+                            string FieldName = FieldsList[i].Key;
+                            XElement = Xdoc.XPathSelectElement("SurveyResponse/Page/ResponseDetail[@QuestionName = '" + FieldName.ToUpper() + "']");
+                            string Value = FieldsList[i].Value;
+                            if ( XElement != null)
                             {
-
-
-                                //string FieldName = ListArray[i].Substring(0, ListArray[i].IndexOf('?')).ToString();
-                                //XElement = Xdoc.XPathSelectElement("SurveyResponse/Page/ResponseDetail[@QuestionName = '" + FieldName.ToUpper() + "']");
-                                //string Value = ListArray[i].Split('?')[1];
-                                //XElement.Value = HttpUtility.HtmlDecode(Value);
-
-                                string FieldName = FieldsList[i].Key;
-                                XElement = Xdoc.XPathSelectElement("SurveyResponse/Page/ResponseDetail[@QuestionName = '" + FieldName.ToUpper() + "']");
-                                string Value = FieldsList[i].Value;
-                                if ( XElement != null)
-                                {
-                                XElement.Value =  Value ;
-                                }
-                               
+                            XElement.Value =  Value ;
                             }
-                        }
+                               
+                        }*/
+                    }
                    
                }
 
