@@ -125,7 +125,10 @@ namespace Epi.Web.MVC.Utility
                         {
                             if (Element.Attribute("QuestionName").Value.ToString().Equals(FieldsList[i].Key, StringComparison.OrdinalIgnoreCase))
                             {
-                                Element.Value = FieldsList[i].Value;
+                                if (FieldsList[i].Value != null)
+                                {
+                                    Element.Value = FieldsList[i].Value;
+                                }
                                 break;
                             }
                         }

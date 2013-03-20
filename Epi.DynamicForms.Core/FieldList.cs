@@ -11,6 +11,7 @@ namespace MvcDynamicForms
     public class FieldList : IList<Field>
     {
         private List<Field> _fields = new List<Field>();
+        //public Dictionary<string, int> FieldIndex = new Dictionary<string, int>();
         internal Form Form { get; set; }
 
         internal FieldList(Form form)
