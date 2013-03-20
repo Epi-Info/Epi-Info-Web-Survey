@@ -189,20 +189,29 @@ namespace Epi.Web.MVC.Controllers
                             if (ReffererPageNum != CurrentPageNum)
                             {
                                 form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, ReffererPageNum, SurveyAnswer, IsMobileDevice);
+                                if (IsMobileDevice)
+                                {
+                                    Epi.Web.MVC.Utility.MobileFormProvider.UpdateHiddenFields(ReffererPageNum, form, XDocument.Parse(surveyInfoModel.XML), XDocument.Parse(SurveyAnswer.XML), this.ControllerContext.RequestContext.HttpContext.Request.Form);
+                                }
+                                else
+                                {
+                                    Epi.Web.MVC.Utility.FormProvider.UpdateHiddenFields(ReffererPageNum, form, XDocument.Parse(surveyInfoModel.XML), XDocument.Parse(SurveyAnswer.XML), this.ControllerContext.RequestContext.HttpContext.Request.Form);
+                                }
                             }
                             else
                             {
                                 form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, CurrentPageNum, SurveyAnswer, IsMobileDevice);
+                                if (IsMobileDevice)
+                                {
+                                    Epi.Web.MVC.Utility.MobileFormProvider.UpdateHiddenFields(CurrentPageNum, form, XDocument.Parse(surveyInfoModel.XML), XDocument.Parse(SurveyAnswer.XML), this.ControllerContext.RequestContext.HttpContext.Request.Form);
+                                }
+                                else
+                                {
+                                    Epi.Web.MVC.Utility.FormProvider.UpdateHiddenFields(CurrentPageNum, form, XDocument.Parse(surveyInfoModel.XML), XDocument.Parse(SurveyAnswer.XML), this.ControllerContext.RequestContext.HttpContext.Request.Form);
+                                }
                             }
 
-                            if(IsMobileDevice)
-                            {
-                                Epi.Web.MVC.Utility.MobileFormProvider.UpdateHiddenFields(form, XDocument.Parse(surveyInfoModel.XML), XDocument.Parse(SurveyAnswer.XML), this.ControllerContext.RequestContext.HttpContext.Request.Form);
-                            }
-                            else
-                            {
-                                Epi.Web.MVC.Utility.FormProvider.UpdateHiddenFields(form, XDocument.Parse(surveyInfoModel.XML), XDocument.Parse(SurveyAnswer.XML), this.ControllerContext.RequestContext.HttpContext.Request.Form);
-                            }
+
 
                             UpdateModel(form);
                         }
