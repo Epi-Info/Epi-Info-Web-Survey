@@ -118,9 +118,7 @@ namespace Epi.Web.MVC.Utility
                FieldsList = GetHiddenFieldsList(form);
                if (FieldsList != null)
                {
-
                     IEnumerable <XElement> XElementList = Xdoc.XPathSelectElements("SurveyResponse/Page/ResponseDetail");
-
                     for (var i = 0; i < FieldsList.Count; i++)
                     {
                         foreach (XElement Element in XElementList)
@@ -131,27 +129,7 @@ namespace Epi.Web.MVC.Utility
                                 break;
                             }
                         }
-                        /*
-                        if (!string.IsNullOrEmpty(FieldsList[i].Key))
-                        {
-
-
-                            //string FieldName = ListArray[i].Substring(0, ListArray[i].IndexOf('?')).ToString();
-                            //XElement = Xdoc.XPathSelectElement("SurveyResponse/Page/ResponseDetail[@QuestionName = '" + FieldName.ToUpper() + "']");
-                            //string Value = ListArray[i].Split('?')[1];
-                            //XElement.Value = HttpUtility.HtmlDecode(Value);
-
-                            string FieldName = FieldsList[i].Key;
-                            XElement = Xdoc.XPathSelectElement("SurveyResponse/Page/ResponseDetail[@QuestionName = '" + FieldName.ToUpper() + "']");
-                            string Value = FieldsList[i].Value;
-                            if ( XElement != null)
-                            {
-                            XElement.Value =  Value ;
-                            }
-                               
-                        }*/
                     }
-                   
                }
 
                        
@@ -172,16 +150,12 @@ namespace Epi.Web.MVC.Utility
             }
             if (IsSaved)
             {
-
                 surveyAnswerRequest.SurveyAnswerList[0].Status = 2;
-
             }
             surveyAnswerRequest.SurveyAnswerList[0].XML = Xdoc.ToString();
             
             iSurveyAnswerRepository.SaveSurveyAnswer(surveyAnswerRequest);
-           
-
-           
+          
         }
         //Remove PageNumber attribute
         private static void RemovePageNumAtt(XDocument Xdoc)
