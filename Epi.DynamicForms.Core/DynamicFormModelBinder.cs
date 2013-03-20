@@ -83,17 +83,19 @@ namespace MvcDynamicForms
                 }
                 catch (System.InvalidOperationException ex)
                 {
-                    form.AddFields
-                    ( new Field []  
-                    { new Hidden
-                        {
-                            Title = fieldKey,
-                            Key = fieldKey,
-                            IsPlaceHolder = true,
-                            Value =  postedForm[key]
-                        }
-                        }
-                    );
+
+                    //continue;
+                    //form.AddFields
+                    //(new Field[]  
+                    //    { new Hidden
+                    //    {
+                    //        Title = fieldKey,
+                    //        Key = fieldKey,
+                    //        IsPlaceHolder = true,
+                    //        Value =  postedForm[key]
+                    //    }
+                    //    }
+                    //);
                 }
             }
 
