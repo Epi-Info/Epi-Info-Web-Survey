@@ -89,7 +89,7 @@ namespace MvcDynamicForms
                         {
                             Title = fieldKey,
                             Key = fieldKey,
-                            IsPlaceHolder = false,
+                            IsPlaceHolder = true,
                             Value =  postedForm[key]
                         }
                         }
