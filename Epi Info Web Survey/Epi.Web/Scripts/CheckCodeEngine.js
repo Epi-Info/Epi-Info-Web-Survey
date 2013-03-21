@@ -500,12 +500,20 @@ CCE_Context.prototype.setValue = function (pName, pValue)
 
         var Jquery = '#mvcdynamicfield_' + pName;
         var FieldName = 'mvcdynamicfield_' + pName;
+         var IsHidden = false;
+         
+
 
         if (!eval(document.getElementById(FieldName)))
         {
             CreateHiddenField(FieldName, cce_Symbol.Type);
+           
         }
-
+        var ControlType = $(Jquery).attr('type');
+       if (ControlType== 'hidden')
+       {
+           IsHidden =true;
+       }
         if(cce_Symbol.Source == "datasource")
         {
             switch (cce_Symbol.Type) 
@@ -526,7 +534,7 @@ CCE_Context.prototype.setValue = function (pName, pValue)
 			  
 			            }
                                 break;
-                            case "timepicker":
+                       case "timepicker":
                                 if (eval(document.getElementById("IsMobile"))){
                                     var FormatedTime;
                                     var date = new Date();
@@ -545,19 +553,30 @@ CCE_Context.prototype.setValue = function (pName, pValue)
                     cce_Symbol.Value = pValue;
                     if(pValue == "") 
                         {
+                            if(!IsHidden)
+                            {
                             return null; 
+                          
                             $(Jquery).val(null);
+                            }
                             cce_Symbol.Value = null;
                         }
                         else if (pValue) 
-                        {
+                        {   
+                           if(!IsHidden)
+                            {
                             return true; //"Yes";
+                             
                             $(Jquery).val(true);
+                            }
                             cce_Symbol.Value = true;
                         }
                         else 
                         {
+                           if(!IsHidden)
+                            {
                             $(Jquery).val(false);
+                            }
                             cce_Symbol.Value = false;
                         }
                         break;
@@ -566,7 +585,10 @@ CCE_Context.prototype.setValue = function (pName, pValue)
                         {
                             if (eval(document.getElementById("IsMobile")))
                             {
+                              if(!IsHidden)
+                              {
                                 $(Jquery).prop('checked', true).checkboxradio('refresh');
+                              }
                                 cce_Symbol.Value = true;
                             }
                             else
@@ -579,7 +601,10 @@ CCE_Context.prototype.setValue = function (pName, pValue)
                         {
                             if (eval(document.getElementById("IsMobile")))
                             {
+                               if(!IsHidden)
+                                {
                                 $(Jquery).prop('checked', false).checkboxradio('refresh');
+                                }
                                 cce_Symbol.Value = false;
                             }
                             else
@@ -604,7 +629,10 @@ CCE_Context.prototype.setValue = function (pName, pValue)
                             {
                                 if (eval(document.getElementById("IsMobile")))
                                 {
+                                if(!IsHidden)
+                                 {
                                 $(this).prop('checked',true).checkboxradio('refresh');
+                                 }
                                 }else{
                                     $(this).prop('checked',true);
                                 }
@@ -1343,10 +1371,14 @@ function CCE_RemoveFromFieldsList(FieldName,ListName) {
                       var IsHidden = false;
                         if (!eval(document.getElementById(FieldName)))
                         {
-                             IsHidden = true;
+                             
                             CreateHiddenField(FieldName, cce_Symbol.Type);
                         }
-
+                         var ControlType = $(controlId).attr('type');
+                       if (ControlType== 'hidden')
+                       {
+                           IsHidden =true;
+                       }
                    // if (eval(document.getElementById(FieldName)))
                    // {
                         if(cce_Symbol.Source == "datasource")
