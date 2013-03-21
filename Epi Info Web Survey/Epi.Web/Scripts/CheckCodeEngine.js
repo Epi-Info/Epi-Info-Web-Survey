@@ -1309,7 +1309,7 @@ function CCE_RemoveFromFieldsList(FieldName,ListName) {
  }
 
   //Clear the control value
- function CCE_ClearControlValue(pCheckCodeList) 
+/* function CCE_ClearControlValue(pCheckCodeList) 
  {
      if (pCheckCodeList != null) 
      {
@@ -1318,9 +1318,9 @@ function CCE_RemoveFromFieldsList(FieldName,ListName) {
                 cce_Context.setValue(pCheckCodeList[i], null);
          }
     }
-}
+}*/
 
-/*
+ 
  //Clear the control value
  function CCE_ClearControlValue(pCheckCodeList) 
  {
@@ -1338,8 +1338,17 @@ function CCE_RemoveFromFieldsList(FieldName,ListName) {
                     cce_Symbol.Value = null;
                     var controlId = '#mvcdynamicfield_' + pCheckCodeList[i];
                     var FieldName = 'mvcdynamicfield_' + pCheckCodeList[i];
-                    if (eval(document.getElementById(FieldName)))
-                    {
+
+                     
+                      var IsHidden = false;
+                        if (!eval(document.getElementById(FieldName)))
+                        {
+                             IsHidden = true;
+                            CreateHiddenField(FieldName, cce_Symbol.Type);
+                        }
+
+                   // if (eval(document.getElementById(FieldName)))
+                   // {
                         if(cce_Symbol.Source == "datasource")
                         {
                             switch (cce_Symbol.Type) 
@@ -1349,13 +1358,18 @@ function CCE_RemoveFromFieldsList(FieldName,ListName) {
                                     {        
                                           var checkboxfield = controlId + "_fieldWrapper";
                                            if (! $(checkboxfield).find('ui-disabled'))
-                                           {
+                                           { 
+                                               if  (!IsHidden)
+                                                 {
                                                   $(controlId).attr('checked', false).checkboxradio("refresh");
+                                                  }
                                            }else{
-                                           
+                                                 if  (!IsHidden)
+                                                 {
                                                  $(controlId).attr('checked', false).checkboxradio("refresh");//1
                                                  $(checkboxfield).find('.ui-checkbox').removeClass('ui-disabled');//2
                                                  $(checkboxfield).find('.ui-checkbox').addClass('ui-disabled');//3 Keep them in this order
+                                                 }
                                            }
 
                                              //     $('.ui-checkbox').removeClass('ui-disabled');
@@ -1398,7 +1412,10 @@ function CCE_RemoveFromFieldsList(FieldName,ListName) {
                                    if (eval(document.getElementById("IsMobile")))
                                          {  
                                            $(controlId).val('');
-                                          $(controlId).selectmenu('refresh');
+                                           if  (!IsHidden)
+                                                 {
+                                                 $(controlId).selectmenu('refresh');
+                                                 }
                                          }
                                          else
                                          {$(controlId).val('');}
@@ -1408,7 +1425,10 @@ function CCE_RemoveFromFieldsList(FieldName,ListName) {
                                          {  
                                          
                                           $(controlId).val('');
-                                          $(controlId).selectmenu('refresh');
+                                          if  (!IsHidden)
+                                                 {
+                                                 $(controlId).selectmenu('refresh');
+                                                 }
 
                                          
                                          }
@@ -1419,7 +1439,10 @@ function CCE_RemoveFromFieldsList(FieldName,ListName) {
                                     if (eval(document.getElementById("IsMobile")))
                                          {  
                                            $(controlId).val('');
-                                          $(controlId).selectmenu('refresh');
+                                         if  (!IsHidden)
+                                                 {
+                                                 $(controlId).selectmenu('refresh');
+                                                 }
                                          }
                                          else
                                          {$(controlId).val('');}
@@ -1430,7 +1453,7 @@ function CCE_RemoveFromFieldsList(FieldName,ListName) {
 
                             }
                         }
-                    }
+                    //}
                     else
                     {
                     
@@ -1454,7 +1477,7 @@ function CCE_RemoveFromFieldsList(FieldName,ListName) {
        //CreateHiddenField(ControlList , '')
         }
    }
-*/
+ 
 
  //Go to a page or focus on a control on the same page
 
