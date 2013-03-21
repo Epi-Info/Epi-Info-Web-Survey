@@ -172,12 +172,12 @@ namespace Epi.Web.MVC.Utility
 
                                 var _DropDownSelectedValueYN = Value;
 
-                                if (_DropDownSelectedValueYN == "1")
+                                if (_DropDownSelectedValueYN == "1" || _DropDownSelectedValueYN == "true")
                                 {
                                     _DropDownSelectedValueYN = "Yes";
                                 }
 
-                                if (_DropDownSelectedValueYN == "0")
+                                if (_DropDownSelectedValueYN == "0" ||  _DropDownSelectedValueYN == "false")
                                 {
 
                                     _DropDownSelectedValueYN = "No";

@@ -170,7 +170,7 @@ namespace Epi.Web.MVC.Utility
                                     _DropDownSelectedValueYN = "Yes";
                                 }
 
-                                if (_DropDownSelectedValueYN == "0")
+                                if (_DropDownSelectedValueYN == "0" || _DropDownSelectedValueYN == "false")
                                 {
 
                                     _DropDownSelectedValueYN = "No";
