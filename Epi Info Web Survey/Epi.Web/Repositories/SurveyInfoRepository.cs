@@ -44,7 +44,7 @@ namespace Epi.Web.MVC.Repositories
                 {
                     result = (SurveyInfoResponse)_iDataService.GetSurveyInfo(pRequest);
 
-                    HttpRuntime.Cache.Insert(SurveyId, result, null, Cache.NoAbsoluteExpiration, TimeSpan.FromDays(1));
+                    HttpRuntime.Cache.Insert(SurveyId, result, null, Cache.NoAbsoluteExpiration, TimeSpan.FromMinutes(20));
 
                     return result;
                 }
