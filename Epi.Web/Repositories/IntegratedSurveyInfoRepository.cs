@@ -9,6 +9,7 @@ using Epi.Web.Common.Exception;
 using System.ServiceModel;
 using Epi.Web.DataServiceClient;
 using System.Web.Caching;
+using System.Configuration;
 namespace Epi.Web.MVC.Repositories
 {
     public class IntegratedSurveyInfoRepository : RepositoryBase, ISurveyInfoRepository
@@ -39,26 +40,40 @@ namespace Epi.Web.MVC.Repositories
                 string SurveyId = pRequest.Criteria.SurveyIdList[0].ToString();
                 var CacheObj =   HttpRuntime.Cache.Get(SurveyId);
 
-                if (CacheObj == null)
+                int CacheDuration = 0;
+                int.TryParse(ConfigurationManager.AppSettings["CACHE_DURATION"].ToString(), out CacheDuration);
+                string CacheIsOn = ConfigurationManager.AppSettings["CACHE_IS_ON"];//false;
+                string IsCacheSlidingExpiration = ConfigurationManager.AppSettings["CACHE_SLIDING_EXPIRATION"].ToString();
+
+                if (CacheIsOn.ToUpper() == "TRUE")
                 {
-                    result = (SurveyInfoResponse)_iDataService.GetSurveyInfo(pRequest);
+                    if (CacheObj == null)
+                    {
+                        result = (SurveyInfoResponse)_iDataService.GetSurveyInfo(pRequest);
 
-                    HttpRuntime.Cache.Insert(SurveyId, result, null, Cache.NoAbsoluteExpiration, TimeSpan.FromMinutes(20));
+                        if (IsCacheSlidingExpiration.ToUpper() == "TRUE")
+                        {
+                            HttpRuntime.Cache.Insert(SurveyId, result, null, DateTime.Now.AddMinutes(CacheDuration), Cache.NoSlidingExpiration);
+                        }
+                        else
+                        {
+                            HttpRuntime.Cache.Insert(SurveyId, result, null, Cache.NoAbsoluteExpiration, TimeSpan.FromMinutes(CacheDuration));
+                        }
+                        return result;
+                    }
+                    else
+                    {
 
-                    return result;
+
+                        return (SurveyInfoResponse)CacheObj;
+
+                    }
                 }
                 else
                 {
-
-
-                    return (SurveyInfoResponse)CacheObj;
-
+                    result = (SurveyInfoResponse)_iDataService.GetSurveyInfo(pRequest);
+                    return result;
                 }
-                     
-
-
-
-
 
 
 
