@@ -256,22 +256,37 @@ function CCE_ProcessUnHideCommand(pCheckCodeList)
                                  
                                   if (!eval(document.getElementById("IsMobile")))
                                   { 
-                                  //Div
-                                     query = '#mvcdynamicfield_'  + pCheckCodeList[i] + "_fieldWrapper";
-                                     $(query).removeAttr("style");
-                                   // Control
-                                     query = '#mvcdynamicfield_'  + pCheckCodeList[i] ;
-                                     $(query).css("display","block");
+                                      //Div
+                                         query = '#mvcdynamicfield_'  + pCheckCodeList[i] + "_fieldWrapper";
+                                         $(query).removeAttr("style");
+                                       // Control
+                                         query = '#mvcdynamicfield_'  + pCheckCodeList[i] ;
+                                         $(query).css("display","block");
                                      
-                                      //Label
-                                     query = '#labelmvcdynamicfield_'  + pCheckCodeList[i] ;
-                                     $(query).css("display","block");
+                                          //Label
+                                         query = '#labelmvcdynamicfield_'  + pCheckCodeList[i] ;
+                                         $(query).css("display","block");
                                      
-                                   }else{
-                                    query = '#mvcdynamicfield_'  + pCheckCodeList[i] + "_fieldWrapper";
-                                    $(query).css("display","block");
-                                  
                                    }
+                                   else
+                                   {   
+                                      if (cce_Symbol.Type == "checkbox"){
+                                       
+                                        query = '#mvcdynamicfield_'  + pCheckCodeList[i] + "_fieldWrapper";
+                                        $(query).css("display","block");
+                                         $(query).find('.ui-checkbox').addClass('u');
+                                          $(query).find('.ui-checkbox').removeClass('u');
+                                           
+                                        $(query).find('.ui-checkbox').removeClass('ui-disabled');
+
+                                       $("input[type='checkbox']").checkboxradio("refresh");
+                                        }
+                                        else
+                                        {
+                                         query = '#mvcdynamicfield_'  + pCheckCodeList[i] + "_fieldWrapper";
+                                        $(query).css("display","block"); 
+                                        }
+                                    }
                                } 
 
 
@@ -281,6 +296,8 @@ function CCE_ProcessUnHideCommand(pCheckCodeList)
                                     query = '#mvcdynamicfield_' + pCheckCodeList[i] + "_groupbox_fieldWrapper";
                                      $(query).css("display","block");
                                     }
+                                   
+                                
                                 } 
                             }
                        // break;
@@ -1393,16 +1410,18 @@ function CCE_RemoveFromFieldsList(FieldName,ListName) {
                                           var checkboxfield = controlId + "_fieldWrapper";
                                            if (! $(checkboxfield).find('ui-disabled'))
                                            { 
-                                               if  (!IsHidden)
-                                                 {
+                                                 if  (!IsHidden)
+                                                  {
                                                   $(controlId).attr('checked', false).checkboxradio("refresh");
                                                   }
-                                           }else{
+                                           }
+                                           else
+                                           {
                                                  if  (!IsHidden)
                                                  {
                                                  $(controlId).attr('checked', false).checkboxradio("refresh");//1
                                                  $(checkboxfield).find('.ui-checkbox').removeClass('ui-disabled');//2
-                                                 $(checkboxfield).find('.ui-checkbox').addClass('ui-disabled');//3 Keep them in this order
+                                                // $(checkboxfield).find('.ui-checkbox').addClass('ui-disabled');//3 Keep them in this order
                                                  }
                                            }
 
