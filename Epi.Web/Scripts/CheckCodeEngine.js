@@ -1605,7 +1605,7 @@ function CCE_Month(pValue)
     }
     else
     {
-        return new Date(pValue).getMonth();
+        return new Date(pValue).getMonth() + 1;//I added 1 because getMonth() returns the index  of the month.
     }
     
 }
