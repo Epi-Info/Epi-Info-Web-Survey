@@ -1188,7 +1188,9 @@ query = '#mvcdynamicfield_' + pCheckCodeList[i];
                 case "timepicker":
                     $(query).datebox('enable');
                     break;
-
+               case "groupbox":
+                   
+                    break;
                 default:
                     $(query).textinput('enable');
                     break;
