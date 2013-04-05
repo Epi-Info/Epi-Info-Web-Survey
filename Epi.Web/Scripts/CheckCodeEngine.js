@@ -1388,7 +1388,7 @@ function CCE_RemoveFromFieldsList(FieldName,ListName) {
 
                      
                       var IsHidden = false;
-                        if (!eval(document.getElementById(FieldName)))
+                        if (!eval(document.getElementById(FieldName)) && cce_Symbol.Type != "groupbox")
                         {
                              
                             CreateHiddenField(FieldName, cce_Symbol.Type);
@@ -1421,7 +1421,7 @@ function CCE_RemoveFromFieldsList(FieldName,ListName) {
                                                  {
                                                  $(controlId).attr('checked', false).checkboxradio("refresh");//1
                                                  $(checkboxfield).find('.ui-checkbox').removeClass('ui-disabled');//2
-                                                // $(checkboxfield).find('.ui-checkbox').addClass('ui-disabled');//3 Keep them in this order
+                                                 $(checkboxfield).find('.ui-checkbox').addClass('ui-disabled');//3 Keep them in this order
                                                  }
                                            }
 
@@ -1500,6 +1500,9 @@ function CCE_RemoveFromFieldsList(FieldName,ListName) {
                                          else
                                          {$(controlId).val('');}
                                         break;
+                                     case "groupbox":
+                                     break;
+
                                   default:
                                     $(controlId).val('');
                                     break;
