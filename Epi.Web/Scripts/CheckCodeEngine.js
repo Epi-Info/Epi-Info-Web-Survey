@@ -1529,7 +1529,7 @@ function CCE_RemoveFromFieldsList(FieldName,ListName) {
              }
         }
         if(ControlList.length > 0){
-        updateXml(ControlList, '') ;
+        //updateXml(ControlList, '') ;
        //CreateHiddenField(ControlList , '')
         }
    }
