@@ -238,7 +238,7 @@ function CCE_ProcessUnHideCommand(pCheckCodeList)
                             {
                     
                                 query = '#mvcdynamicfield_'  + pCheckCodeList[i]+ "_groupbox_fieldWrapper" ;
-                                if (!eval(document.getElementById("IsMobile"))){
+                              if (!eval(document.getElementById("IsMobile"))){
                                   $(query).css("display","block");
                                   }else{
                                   $(query).css("visibility","visible");
@@ -1050,13 +1050,9 @@ if (eval(document.getElementById("IsMobile"))){
                     break;
                 case "checkbox":
                        
-                       
-                    Query = '#mvcdynamicfield_' + pCheckCodeList[i] + "_fieldWrapper";
-                    $(Query).find('.ui-checkbox').addClass('ui-disabled'); 
-                       
-                        
-                   // $(query).checkboxradio('disable');
-                   //  $(Labelquery).css("color","lightGray")
+                    var checkboxcontrolId = '#mvcdynamicfield_' + pCheckCodeList[i] ;
+                     $(checkboxcontrolId).attr("disabled", true);
+ 
                     break;
                 case "legalvalues":
                     $(query).selectmenu('disable');
@@ -1073,6 +1069,8 @@ if (eval(document.getElementById("IsMobile"))){
                 case "timepicker":
                     $(query).datebox('disable');
                     break;
+                //case "groupbox":
+                  // break;
 
                 default:
                     $(query).textinput('disable');
@@ -1189,6 +1187,8 @@ query = '#mvcdynamicfield_' + pCheckCodeList[i];
                         
                     $(query).checkboxradio('enable');
                       $(Labelquery).css("color","Black")
+                       
+
                     break;
                 case "legalvalues":
                     $(query).selectmenu('enable');
@@ -1408,7 +1408,9 @@ function CCE_RemoveFromFieldsList(FieldName,ListName) {
 		                            if (eval(document.getElementById("IsMobile")))
                                     {        
                                           var checkboxfield = controlId + "_fieldWrapper";
-                                           if (! $(checkboxfield).find('ui-disabled'))
+                                          // var IsDisabled = $(checkboxfield).find('ui-disabled');
+                                      var IsDisabled = $(checkboxfield).hasClass('ui-disabled');
+                                           if (! IsDisabled)
                                            { 
                                                  if  (!IsHidden)
                                                   {
