@@ -13,6 +13,7 @@ using Epi.Web.Common.BusinessObject;
 using Epi.Web.Common.Exception;
 namespace Epi.Web.WCF.SurveyService
 {
+    [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerSession, ConcurrencyMode = ConcurrencyMode.Multiple)]
     public class DataService : IDataService
     {
 
