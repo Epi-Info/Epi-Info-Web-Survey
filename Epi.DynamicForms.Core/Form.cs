@@ -160,7 +160,7 @@ namespace MvcDynamicForms
             formWrapper.Attributes.Add("data-ajax", "false");
             }
             else{
-             formWrapper.Attributes.Add("style", string.Format("width:{0}px;height:{1}px;", this.Width,this.Height));
+             formWrapper.Attributes.Add("style", string.Format("width:{0}px;height:{1}px;", this.Width,this.Height + 100));
             }
             formWrapper.Attributes["class"] = _formWrapperClass;
             var html = new StringBuilder(formWrapper.ToString(TagRenderMode.StartTag));
