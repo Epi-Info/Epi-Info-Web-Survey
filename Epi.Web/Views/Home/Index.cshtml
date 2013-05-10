@@ -48,12 +48,12 @@
        @using (Html.BeginForm())
        { 
         
-            <div id="content" style="margin-bottom:200px;">
+            <div id="content" style="margin-bottom:200px; padding-left:10px;">
                @if(Model.ClosingDate >= DateTime.Now)
                
                {
-                        <h2>
-                            Welcome!</h2>
+                       @* <h2>
+                            Welcome!</h2>*@
                           <br />
                         <div>
                            @Html.Raw(Model.IntroductionText)

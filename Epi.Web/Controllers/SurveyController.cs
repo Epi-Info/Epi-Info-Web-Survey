@@ -87,7 +87,7 @@ namespace Epi.Web.MVC.Controllers
                         case PreValidationResultEnum.Success:
                         default:
                             var form = _isurveyFacade.GetSurveyFormData(surveyAnswerDTO.SurveyId, PageNumber, surveyAnswerDTO, IsMobileDevice);
-                            TempData["Width"] = form.Width;
+                            TempData["Width"] = form.Width + 5;
                             // if redirect then perform server validation before displaying
                             if (TempData.ContainsKey("isredirect") && !string.IsNullOrWhiteSpace(TempData["isredirect"].ToString()))
                             {
@@ -300,7 +300,7 @@ namespace Epi.Web.MVC.Controllers
                             // Pass Code Logic  end 
                              _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId, form, SurveyAnswer, IsSubmited, IsSaved, PageNumber);
 
-                             TempData["Width"] = form.Width;
+                             TempData["Width"] = form.Width + 5;
                                 return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
 
                         }
@@ -315,7 +315,7 @@ namespace Epi.Web.MVC.Controllers
 
                             SurveyAnswer = _isurveyFacade.GetSurveyAnswerResponse(responseId).SurveyResponseList[0];
                             form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, PageNumber, SurveyAnswer, IsMobileDevice);
-                            TempData["Width"] = form.Width;
+                            TempData["Width"] = form.Width + 5;
                             return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
                         }
                              
@@ -352,7 +352,7 @@ namespace Epi.Web.MVC.Controllers
                                     if (!form.Validate(form.RequiredFieldsList))
                                     {
                                         TempData["isredirect"] = "true";
-                                        TempData["Width"] = form.Width;
+                                        TempData["Width"] = form.Width + 5;
                                         //  return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
                                         _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId, form, SurveyAnswer, IsSubmited, IsSaved, i);
                                         return RedirectToRoute(new { Controller = "Survey", Action = "Index", responseid = responseId, PageNumber = i.ToString() });
@@ -387,7 +387,7 @@ namespace Epi.Web.MVC.Controllers
 
                                 SurveyAnswer = _isurveyFacade.GetSurveyAnswerResponse(responseId).SurveyResponseList[0];
                                 form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, PageNumber, SurveyAnswer, IsMobileDevice);
-                                TempData["Width"] = form.Width;
+                                TempData["Width"] = form.Width + 5;
                                 //PassCode start
                                 if (IsMobileDevice)
                                 {
@@ -424,13 +424,13 @@ namespace Epi.Web.MVC.Controllers
                             if (CurrentPageNum != PageNumber) // failed validation and navigating to different page// must keep url the same 
                             {
                                 TempData["isredirect"] = "true";
-                                TempData["Width"] = form.Width;
+                                TempData["Width"] = form.Width + 5;
                                 return RedirectToAction("Index", "Survey", new { RequestId = form.ResponseId, PageNumber = CurrentPageNum });
                                  
                             }
                             else
                             {
-                                TempData["Width"] = form.Width;
+                                TempData["Width"] = form.Width + 5;
                                 return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
                             }
                         }
