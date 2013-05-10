@@ -13,7 +13,8 @@ body
 #container
  {
  width: 840px;
- min-height: 99%;
+/* min-height: 99%;*/
+min-height:30%;
  position:relative;
  margin: auto;
  background-color: #fff;
@@ -27,6 +28,11 @@ body
  box-shadow: 10px 10px 5px #bfbfbf;
  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 /*behavior: url('../Scripts/PIE.htc');*/
+/*background-image:url('../images/bgdraft.png');
+background-repeat:repeat-y;
+background-position: center center;
+background-size: stretch;
+background-origin:content-box;*/
  }
  
 #header
@@ -50,10 +56,11 @@ body
 #content
  {
  clear:both;
- margin-left: 0.5em;
- margin-right: 0.5em;
- padding: 1em;
- font: 10pt;
+ margin-left: 0.1em;
+ margin-right: 0.1em;
+ 
+ /*padding: 1em;*/
+ /*font: 10pt;*/
 /* padding-bottom:80px; */
  }
 
@@ -67,9 +74,9 @@ body
  {
   /*width:800px; 
   height:1200px;*/
-  min-height:600px;
+  /*min-height:600px;*/
   display:block; 
-  border:1px solid white; 
+ /* border:1px solid white; */
   position:relative;  
  }
  
@@ -79,7 +86,7 @@ body
  border-right: 1px solid #4e9689 inset;
  padding: 0.5em;
  font-size: 9pt;
- margin-bottom: 1em;
+/* margin-bottom: 1em;*/
  background: #87d69b;
  }
 /*DIv Style for Splash Page*/
@@ -150,13 +157,14 @@ body
  
 #nav
 {
-width: 100%;
+width: 95%;
 text-align: center;
-border-top: 1px solid #244640;
+/*border-top: 1px solid #244640;*/
 margin: 0 auto;
-padding: 0.8em 0;
+padding: 0em 0.5em 0.5em 0.5em;
 position:relative;
-bottom:80px;
+bottom: 100px;
+/*bottom:80px;*/
 /*clear:both;*/
 }
 
@@ -232,26 +240,30 @@ button.save, button.prev, button.next, button.begin, button.login
 button.save
 {
     background-image: url('../images/save.png');
-    background-position:22px center;
+    background-position:10px center;
     background-repeat: repeat-x;
     background-repeat:no-repeat;
     padding-left:20px;
+    width:120px;
 }
 
 button.prev
 {
   background-image: url('../images/arrow_left.png');
-  background-position:25px center;
+  background-position:10px center;
   background-repeat:no-repeat;
-  padding-left:40px;
+  padding-left:25px;
   text-align:left;
+  width:110px;
+ 
 }
 
 button.next
 {
   background-image: url('../images/arrow_right.png');
-  background-position:109px center;
+  background-position:84px center;
   background-repeat:no-repeat;
+  width:110px;
     /*padding-left:20px;*/
 }
 
@@ -297,9 +309,10 @@ button.exitsurvey
  {
  border: 1px solid #4d8000; 
  background: #e6ffbf; 
- margin-bottom: 10px; 
+/* margin-bottom: 100px; 
  margin-left: 0.5em; 
- margin-right: 0.5em; 
+ margin-right: 0.5em; */
+ margin: 1em;
  padding: 10px;
  font-size: 10pt;
  font-weight: bold;
@@ -322,7 +335,9 @@ button.submits
  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
  font-size: 10pt;
  font-weight:bold;
- width: 160px;
+ max-width: 160px;
+ width:100%;
+ padding-left:10px;
  border: 1px solid rgba(0,0,0,0.5);
  background: #bfe7ea; 
  background: rgba(191,231,234,0.6); 
@@ -560,7 +575,7 @@ div.MvcDynamicForm {}
    and nearly all class names of rendered Html  */
 div.MvcFieldWrapper
 {    
-    margin-bottom: 2em; /* provides spacing between fields */
+   /* margin-bottom: 2em;  provides spacing between fields */
 }
 
 /* These are used to style the labels that accompany
