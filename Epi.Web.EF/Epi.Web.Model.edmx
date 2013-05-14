@@ -49,7 +49,7 @@
           </Key>
           <Property Name="OrganizationId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="OrganizationKey" Type="nvarchar" Nullable="false" MaxLength="500" />
-          <Property Name="Organization" Type="nvarchar" Nullable="false" MaxLength="200" />
+          <Property Name="Organization" Type="nvarchar" Nullable="false" MaxLength="400" />
           <Property Name="IsEnabled" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="SurveyMetaData">
@@ -70,6 +70,10 @@
           <Property Name="TemplateXMLSize" Type="bigint" Nullable="false" />
           <Property Name="DateCreated" Type="datetime2" Nullable="false" />
           <Property Name="OrganizationId" Type="int" Nullable="false" />
+          <Property Name="TestMode" Type="bit" Nullable="false" />
+          <Property Name="StartDate" Type="datetime2" Nullable="false" />
+          <Property Name="LogoLocation" Type="varchar" MaxLength="50" />
+          <Property Name="LogoURL" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="SurveyResponse">
           <Key>
@@ -82,7 +86,7 @@
           <Property Name="StatusId" Type="int" Nullable="false" />
           <Property Name="ResponseXML" Type="xml" Nullable="false" />
           <Property Name="ResponsePasscode" Type="nvarchar" MaxLength="30" />
-          <Property Name="ResponseXMLSize" Type="bigint" Nullable="false" />
+          <Property Name="ResponseXMLSize" Type="bigint" />
           <Property Name="DateCreated" Type="datetime2" Nullable="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
@@ -218,6 +222,10 @@
           <NavigationProperty Name="lk_SurveyType" Relationship="EIWSModel.FK_SurveyMetaData_lk_SurveyType" FromRole="SurveyMetaData" ToRole="lk_SurveyType" />
           <NavigationProperty Name="SurveyResponses" Relationship="EIWSModel.FK_SurveyResponse_SurveyMetaData" FromRole="SurveyMetaData" ToRole="SurveyResponse" />
           <NavigationProperty Name="Organization" Relationship="EIWSModel.FK_SurveyMetaData_Organization" FromRole="SurveyMetaData" ToRole="Organization" />
+          <Property Type="Boolean" Name="TestMode" Nullable="false" />
+          <Property Type="DateTime" Name="StartDate" Nullable="false" />
+          <Property Type="String" Name="LogoLocation" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="LogoURL" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_SurveyMetaData_lk_SurveyType">
           <End Type="EIWSModel.lk_SurveyType" Role="lk_SurveyType" Multiplicity="1" />
@@ -329,6 +337,10 @@
           <EntitySetMapping Name="SurveyMetaDatas">
             <EntityTypeMapping TypeName="EIWSModel.SurveyMetaData">
               <MappingFragment StoreEntitySet="SurveyMetaData">
+                <ScalarProperty Name="LogoURL" ColumnName="LogoURL" />
+                <ScalarProperty Name="LogoLocation" ColumnName="LogoLocation" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="TestMode" ColumnName="TestMode" />
                 <ScalarProperty Name="OrganizationId" ColumnName="OrganizationId" />
                 <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
                 <ScalarProperty Name="TemplateXMLSize" ColumnName="TemplateXMLSize" />
