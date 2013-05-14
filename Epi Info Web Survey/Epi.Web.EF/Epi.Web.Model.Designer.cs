@@ -618,7 +618,9 @@ namespace Epi.Web.EF
         /// <param name="templateXMLSize">Initial value of the TemplateXMLSize property.</param>
         /// <param name="dateCreated">Initial value of the DateCreated property.</param>
         /// <param name="organizationId">Initial value of the OrganizationId property.</param>
-        public static SurveyMetaData CreateSurveyMetaData(global::System.Guid surveyId, global::System.Int32 surveyTypeId, global::System.DateTime closingDate, global::System.String surveyName, global::System.String templateXML, global::System.Guid userPublishKey, global::System.Int64 templateXMLSize, global::System.DateTime dateCreated, global::System.Int32 organizationId)
+        /// <param name="testMode">Initial value of the TestMode property.</param>
+        /// <param name="startDate">Initial value of the StartDate property.</param>
+        public static SurveyMetaData CreateSurveyMetaData(global::System.Guid surveyId, global::System.Int32 surveyTypeId, global::System.DateTime closingDate, global::System.String surveyName, global::System.String templateXML, global::System.Guid userPublishKey, global::System.Int64 templateXMLSize, global::System.DateTime dateCreated, global::System.Int32 organizationId, global::System.Boolean testMode, global::System.DateTime startDate)
         {
             SurveyMetaData surveyMetaData = new SurveyMetaData();
             surveyMetaData.SurveyId = surveyId;
@@ -630,6 +632,8 @@ namespace Epi.Web.EF
             surveyMetaData.TemplateXMLSize = templateXMLSize;
             surveyMetaData.DateCreated = dateCreated;
             surveyMetaData.OrganizationId = organizationId;
+            surveyMetaData.TestMode = testMode;
+            surveyMetaData.StartDate = startDate;
             return surveyMetaData;
         }
 
@@ -974,6 +978,102 @@ namespace Epi.Web.EF
         private global::System.Int32 _OrganizationId;
         partial void OnOrganizationIdChanging(global::System.Int32 value);
         partial void OnOrganizationIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean TestMode
+        {
+            get
+            {
+                return _TestMode;
+            }
+            set
+            {
+                OnTestModeChanging(value);
+                ReportPropertyChanging("TestMode");
+                _TestMode = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("TestMode");
+                OnTestModeChanged();
+            }
+        }
+        private global::System.Boolean _TestMode;
+        partial void OnTestModeChanging(global::System.Boolean value);
+        partial void OnTestModeChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime StartDate
+        {
+            get
+            {
+                return _StartDate;
+            }
+            set
+            {
+                OnStartDateChanging(value);
+                ReportPropertyChanging("StartDate");
+                _StartDate = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("StartDate");
+                OnStartDateChanged();
+            }
+        }
+        private global::System.DateTime _StartDate;
+        partial void OnStartDateChanging(global::System.DateTime value);
+        partial void OnStartDateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String LogoLocation
+        {
+            get
+            {
+                return _LogoLocation;
+            }
+            set
+            {
+                OnLogoLocationChanging(value);
+                ReportPropertyChanging("LogoLocation");
+                _LogoLocation = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("LogoLocation");
+                OnLogoLocationChanged();
+            }
+        }
+        private global::System.String _LogoLocation;
+        partial void OnLogoLocationChanging(global::System.String value);
+        partial void OnLogoLocationChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String LogoURL
+        {
+            get
+            {
+                return _LogoURL;
+            }
+            set
+            {
+                OnLogoURLChanging(value);
+                ReportPropertyChanging("LogoURL");
+                _LogoURL = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("LogoURL");
+                OnLogoURLChanged();
+            }
+        }
+        private global::System.String _LogoURL;
+        partial void OnLogoURLChanging(global::System.String value);
+        partial void OnLogoURLChanged();
 
         #endregion
     
