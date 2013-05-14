@@ -13,7 +13,6 @@ namespace Epi.Web.WCF.SurveyService
     [ServiceContract]
     public interface IDataService
     {
-
         [OperationContract]
         [FaultContract(typeof(CustomFaultException))]
 
