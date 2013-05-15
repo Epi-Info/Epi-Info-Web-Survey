@@ -74,7 +74,10 @@ namespace Epi.Web.BLL
                                                 BO.OrganizationKey = pRequestMessage.OrganizationKey;
                                                 BO.OrganizationKey = pRequestMessage.OrganizationKey;
                                                 BO.TemplateXMLSize = pRequestMessage.TemplateXMLSize;
-
+                                                BO.IsTestMode = pRequestMessage.IsTestMode;
+                                                BO.StartDate = pRequestMessage.StartDate;
+                                                BO.LogoLocation = pRequestMessage.LogoLocation;
+                                                BO.LogoURL = pRequestMessage.LogoURL;
 
                                                 this.SurveyInfoDao.InsertSurveyInfo(BO);
                                                 result.URL = GetURL(pRequestMessage, SurveyId);
