@@ -73,5 +73,22 @@ namespace Epi.Web.Common.Criteria
         /// </summary>
         [DataMember]
         public bool IncludeOrderStatistics { get; set; }
+
+
+        [DataMember]
+        public bool IsTestMode { get; set; }
+
+
+        [DataMember]
+        public DateTime StartDate { get; set; }
+
+        [DataMember]
+        public string LogoLocation { get; set; }
+
+        [DataMember]
+        public string LogoURL { get; set; }
+
+
+
     }
 }
