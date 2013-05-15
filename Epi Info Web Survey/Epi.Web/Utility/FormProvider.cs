@@ -31,9 +31,14 @@ namespace Epi.Web.MVC.Utility
             form.ResponseId = _SurveyAnswer.ResponseId;
 
             form.SurveyInfo = (Epi.Web.Common.DTO.SurveyInfoDTO)(SurveyMetaData);
+            //Watermark 
+            if (form.SurveyInfo.TestMode)
+            {
+                form.TestModeStyleClass = "TestMode";
+            }
            
             string XML = form.SurveyInfo.XML;
-            
+           
             form.CurrentPage = PageNumber;
             if (string.IsNullOrEmpty(XML))
             {
