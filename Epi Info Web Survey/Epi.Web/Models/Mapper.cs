@@ -33,9 +33,13 @@ namespace Epi.Web.MVC.Models
                 IsSuccess = SurveyInfoDTO.IsSuccess,
                 SurveyType = SurveyInfoDTO.SurveyType,
                 ClosingDate = SurveyInfoDTO.ClosingDate,
-                UserPublishKey = SurveyInfoDTO.UserPublishKey
-
+                UserPublishKey = SurveyInfoDTO.UserPublishKey,
+                TestMode = SurveyInfoDTO.TestMode,
+                StartDate = SurveyInfoDTO.StartDate,
+                LogoLocation = SurveyInfoDTO.LogoLocation,
+                LogoURL = SurveyInfoDTO.LogoURL
             };
+
         }
 
         /// <summary>
@@ -58,7 +62,11 @@ namespace Epi.Web.MVC.Models
                 XML = SurveyInfoModel.XML,
                 IsSuccess = SurveyInfoModel.IsSuccess,
                 ClosingDate = SurveyInfoModel.ClosingDate,
-                UserPublishKey = SurveyInfoModel.UserPublishKey
+                UserPublishKey = SurveyInfoModel.UserPublishKey,
+                TestMode = SurveyInfoModel.TestMode,
+                StartDate = SurveyInfoModel.StartDate,
+                LogoLocation = SurveyInfoModel.LogoLocation,
+                LogoURL = SurveyInfoModel.LogoURL
             };
         }
 
