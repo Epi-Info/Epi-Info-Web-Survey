@@ -84,7 +84,7 @@ namespace Epi.Web.EF
         /// </summary>
         /// <param name="SurveyInfoId">Unique SurveyInfo identifier.</param>
         /// <returns>SurveyInfo.</returns>
-        public List<SurveyInfoBO> GetSurveyInfo(List<string> SurveyInfoIdList, DateTime pClosingDate,string Okey ,int pSurveyType = -1, int PageNumber = -1, int PageSize = -1)
+        public List<SurveyInfoBO> GetSurveyInfo(List<string> SurveyInfoIdList, DateTime pClosingDate,string pOrganizationKey ,int pSurveyType = -1, int PageNumber = -1, int PageSize = -1)
         {
             List<SurveyInfoBO> result = new List<SurveyInfoBO>();
 
@@ -95,7 +95,7 @@ namespace Epi.Web.EF
             using (var Context = DataObjectFactory.CreateContext())
             {
                
-                OrganizationId =  Context.Organizations.FirstOrDefault(x => x.OrganizationKey == Okey).OrganizationId;
+                OrganizationId =  Context.Organizations.FirstOrDefault(x => x.OrganizationKey == pOrganizationKey).OrganizationId;
             }
             }
             catch (Exception ex)
@@ -130,7 +130,7 @@ namespace Epi.Web.EF
             }
 
 
-            if (responseList[0] != null && responseList.Count > 0)
+            if (responseList.Count > 0 && responseList[0] != null)
             {
 
                 if (pSurveyType > -1)
@@ -320,6 +320,7 @@ namespace Epi.Web.EF
                 DataRow.SurveyTypeId = SurveyInfo.SurveyType;
                 DataRow.UserPublishKey = SurveyInfo.UserPublishKey;
                 DataRow.TemplateXMLSize = RemoveWhitespace(SurveyInfo.XML).Length;
+                
 
                 Context.SaveChanges();
             }
