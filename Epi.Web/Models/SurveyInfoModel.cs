@@ -21,6 +21,10 @@ namespace Epi.Web.MVC.Models
         private string _XML;
         private bool _IsSuccess;
         private DateTime _ClosingDate;
+        private DateTime _StartDate;
+        private  string _LogoURL;
+        private string _LogoLocation;
+        private bool _TestMode;
         private int _SurveyType;
 
         private Guid _UserPublishKey;
@@ -100,6 +104,27 @@ namespace Epi.Web.MVC.Models
         { 
             get { return _UserPublishKey; } 
             set { this._UserPublishKey = value; } 
+        }
+        public DateTime StartDate
+        {
+            get { return _StartDate; }
+            set { _StartDate = value; }
+        }
+        
+        public string LogoURL
+        {
+            get { return _LogoURL; }
+            set { _LogoURL = value; }
+        }
+        public string LogoLocation
+        {
+            get { return _LogoLocation; }
+            set { _LogoLocation = value; }
+        }
+        public bool TestMode
+        {
+            get { return _TestMode; }
+            set { _TestMode = value; }
         }
     }
 }

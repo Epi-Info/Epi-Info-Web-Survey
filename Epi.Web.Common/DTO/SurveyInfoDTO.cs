@@ -22,7 +22,10 @@ namespace Epi.Web.Common.DTO
         private DateTime _ClosingDate;
         private Guid _UserPublishKey;
         private Guid _OrganizationKey;
-
+        private DateTime _StartDate;
+        private  string _LogoURL;
+        private string _LogoLocation;
+        private bool _TestMode;
         [DataMember]
         public string SurveyId
         {
@@ -112,5 +115,30 @@ namespace Epi.Web.Common.DTO
             get { return _OrganizationKey; }
             set { _OrganizationKey = value; }
         }
+          [DataMember]
+          public DateTime StartDate
+        {
+            get { return _StartDate; }
+            set { _StartDate = value; }
+        }
+          [DataMember]
+        public string LogoURL
+        {
+            get { return _LogoURL; }
+            set { _LogoURL = value; }
+        }
+          [DataMember]
+        public string LogoLocation
+        {
+            get { return _LogoLocation; }
+            set { _LogoLocation = value; }
+        }
+          [DataMember]
+        public bool TestMode
+        {
+            get { return _TestMode; }
+            set { _TestMode = value; }
+        }
+    
     }
 }
