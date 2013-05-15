@@ -23,6 +23,10 @@ namespace Epi.Web.Common.BusinessObject
         private DateTime _ClosingDate;
         private DateTime _DateCreated;
         private string _StatusText;
+        private bool _IsTestMode;
+        private DateTime _StartDate;
+        private string _LogoLocation;
+        private string _LogoURL;
 
         public string StatusText
         { 
@@ -116,5 +120,36 @@ namespace Epi.Web.Common.BusinessObject
             get { return _DateCreated; }
             set{ _DateCreated = value;}
         }
+
+        [DataMember]
+        public bool IsTestMode
+        {
+            get { return _IsTestMode; }
+            set { _IsTestMode = value; }
+        }
+
+
+        [DataMember]
+        public DateTime StartDate
+        {
+            get { return _StartDate; }
+            set { _StartDate = value; }
+        }
+
+        [DataMember]
+        public string LogoLocation
+        {
+            get { return _LogoLocation; }
+            set { _LogoLocation = value; }
+        }
+
+        [DataMember]
+        public string LogoURL
+        {
+            get { return _LogoURL; }
+            set { _LogoURL = value; }
+        }
+
+
     }
 }
