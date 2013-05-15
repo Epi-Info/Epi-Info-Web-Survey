@@ -25,6 +25,9 @@ namespace MvcDynamicForms
         public double Width { get; set; }
         public double Height { get; set; }
         public bool IsMobile { get; set; }
+
+        private string _TestModeStyleClass = "";
+
         
         /// <summary>
         /// The html element that wraps all rendered html.
@@ -400,8 +403,18 @@ namespace MvcDynamicForms
         }
         public string FormJavaScript { get; set; }
 
-
-        
+ 
+        public string TestModeStyleClass
+        {
+            get
+            {
+                return _TestModeStyleClass;
+            }
+            set
+            {
+                _TestModeStyleClass = value;
+            }
+        }
 
 
     }
