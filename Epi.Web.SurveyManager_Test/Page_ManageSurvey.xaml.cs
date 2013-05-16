@@ -11,7 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using System.Xml;
 using System.ServiceModel;
 using Epi.Web.Common.Exception;
 
@@ -80,8 +80,11 @@ namespace Epi.Web.SurveyManager.Client
             this.OrganizationTextBox.Text = "";
             this.datePicker1.SelectedDate = DateTime.Now;
             this.IsSingleResponseCheckBox.IsChecked = false;
-
-
+            this.IsTestMode.IsChecked = false;
+            this.IntroductionTextBox.Document.Blocks.Clear();
+            this.ExitTextTextBox.Document.Blocks.Clear();
+            this.TemplateXMLTextBox.Document.Blocks.Clear();
+            this.datePicker2.SelectedDate = DateTime.Now;
             try
             {
                 Epi.Web.Common.Message.SurveyInfoResponse Result = client.GetSurveyInfo(Request);
@@ -286,6 +289,104 @@ namespace Epi.Web.SurveyManager.Client
         private void SurveyInfoCriteria_SurveyTypeListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
+        }
+        private void ClearTemplateButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.TemplateFileLabel.Content = "No Survey Template file is selected.";
+            TemplateXMLTextBox.Document.Blocks.Clear();
+        }
+        private void FindFileButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Configure open file dialog box
+            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+            dlg.FileName = ""; // Default file name
+            dlg.DefaultExt = ".xml"; // Default file extension
+            dlg.Filter = "xml documents (.xml)|*.xml"; // Filter files by extension
+
+            // Show open file dialog box
+            Nullable<bool> result = dlg.ShowDialog();
+
+            // Process open file dialog box results
+            if (result == true)
+            {
+                // Open document
+                string filename = dlg.FileName;
+
+                this.TemplateFileLabel.Content = filename;
+
+                XmlDocument xmlDoc = new XmlDocument();
+
+                xmlDoc.Load(filename);
+
+                TemplateXMLTextBox.Document.Blocks.Clear();
+                TemplateXMLTextBox.AppendText(xmlDoc.InnerXml);
+            }
+        }
+        private void ClearIntroButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.IntroFileLabel.Content = "No Intro Text file is selected.";
+            IntroductionTextBox.Document.Blocks.Clear();
+        }
+        private void FindIntroTextButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Configure open file dialog box
+            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+            dlg.FileName = ""; // Default file name
+            dlg.DefaultExt = ""; // Default file extension
+            dlg.Filter = "html or text documents |*.*"; // Filter files by extension
+
+            // Show open file dialog box
+            Nullable<bool> result = dlg.ShowDialog();
+
+            // Process open file dialog box results
+            if (result == true)
+            {
+                // Open document
+                string filename = dlg.FileName;
+
+                this.IntroFileLabel.Content = filename;
+                System.IO.TextReader textReader = System.IO.File.OpenText(filename);
+
+
+                IntroductionTextBox.Document.Blocks.Clear();
+                IntroductionTextBox.AppendText(textReader.ReadToEnd());
+
+                textReader.Close();
+
+            }
+        }
+        private void FindExtiTextButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Configure open file dialog box
+            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+            dlg.FileName = ""; // Default file name
+            dlg.DefaultExt = ""; // Default file extension
+            dlg.Filter = "html or text documents |*.*"; // Filter files by extension
+
+            // Show open file dialog box
+            Nullable<bool> result = dlg.ShowDialog();
+
+            // Process open file dialog box results
+            if (result == true)
+            {
+                // Open document
+                string filename = dlg.FileName;
+
+                this.ExitTextLabel.Content = filename;
+                System.IO.TextReader textReader = System.IO.File.OpenText(filename);
+
+
+                ExitTextTextBox.Document.Blocks.Clear();
+                ExitTextTextBox.AppendText(textReader.ReadToEnd());
+
+                textReader.Close();
+
+            }
+        }
+        private void ClearExitTextButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.ExitTextLabel.Content = "No Exit Text file is selected.";
+            ExitTextTextBox.Document.Blocks.Clear();
         }
 
     }
