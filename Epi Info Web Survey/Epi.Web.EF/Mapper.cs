@@ -32,6 +32,10 @@ namespace Epi.Web.EF
                 result.ClosingDate = entity.ClosingDate;
                 result.TemplateXMLSize = (long) entity.TemplateXMLSize;
                 result.DateCreated = entity.DateCreated;
+                result.IsTestMode = entity.TestMode;
+                result.StartDate = entity.StartDate;
+                result.LogoLocation = entity.LogoLocation;
+                result.LogoURL = entity.LogoURL;
                 if (entity.UserPublishKey != null)
                 {
                    // result.UserPublishKey = (Guid)entity.UserPublishKey.Value;
@@ -78,7 +82,10 @@ namespace Epi.Web.EF
                 SurveyTypeId = businessobject.SurveyType,
                 TemplateXMLSize = businessobject.TemplateXMLSize,
                 DateCreated = businessobject.DateCreated,
-                
+                TestMode = businessobject.IsTestMode,
+                StartDate = businessobject.StartDate,
+                LogoLocation = businessobject.LogoLocation,
+                LogoURL = businessobject.LogoURL,
                
                 
 
