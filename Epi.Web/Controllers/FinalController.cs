@@ -43,8 +43,12 @@ namespace Epi.Web.MVC.Controllers
 
                 string exitText = regex.Replace(surveyInfoModel.ExitText.Replace("  ", " &nbsp;"), "<br />");
                 surveyInfoModel.ExitText = MvcHtmlString.Create(exitText).ToString();
+                if (surveyInfoModel.TestMode)
+                {
+                    surveyInfoModel.TestModeStyleClass = "draft";
+                }
                 return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, surveyInfoModel);
-
+               
                 //}
                 //return null;
             }
