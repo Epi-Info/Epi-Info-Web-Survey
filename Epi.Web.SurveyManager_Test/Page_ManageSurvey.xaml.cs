@@ -165,6 +165,11 @@ namespace Epi.Web.SurveyManager.Client
                     this.SurveyNumberTextBox.Text = this.SurveyInfoList[this.selectedIndex].SurveyNumber;
                     this.OrganizationTextBox.Text = this.SurveyInfoList[this.selectedIndex].OrganizationName;
                     this.datePicker1.SelectedDate = this.SurveyInfoList[this.selectedIndex].ClosingDate;
+                    this.datePicker2.SelectedDate = this.SurveyInfoList[this.selectedIndex].StartDate;
+                    this.IntroductionTextBox.AppendText( this.SurveyInfoList[this.selectedIndex].IntroductionText);
+                    this.ExitTextTextBox.AppendText(this.SurveyInfoList[this.selectedIndex].ExitText);
+                    this.TemplateXMLTextBox.AppendText(this.SurveyInfoList[this.selectedIndex].XML);
+                    this.TextBoxPublish.Text = this.SurveyInfoList[this.selectedIndex].UserPublishKey.ToString();
                     if (this.SurveyInfoList[this.selectedIndex].SurveyType == 1)
                     {
                         this.IsSingleResponseCheckBox.IsChecked = true;
@@ -172,6 +177,14 @@ namespace Epi.Web.SurveyManager.Client
                     else
                     {
                         this.IsSingleResponseCheckBox.IsChecked = false;
+                    }
+                    if (this.SurveyInfoList[this.selectedIndex].IsTestMode == true)
+                    {
+                        this.IsTestMode.IsChecked = true;
+                    }
+                    else
+                    {
+                        this.IsTestMode.IsChecked = false;
                     }
                 }
 
