@@ -34,7 +34,7 @@ namespace Epi.Web.MVC.Utility
             //Watermark 
             if (form.SurveyInfo.IsTestMode)
             {
-                form.TestModeStyleClass = "TestMode";
+                form.TestModeStyleClass = "draft";
             }
            
             string XML = form.SurveyInfo.XML;

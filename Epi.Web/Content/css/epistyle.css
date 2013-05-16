@@ -642,3 +642,17 @@ a.watch
  cursor:pointer;
  background: #04aeda; 
  }
+ 
+.draft
+{
+    background-image:url('../images/DRAFT.png');
+    background-repeat:no-repeat;
+    background-position: center 20px;
+    background-size: 65%;
+    background-origin:content-box;
+}
+ 
+ .final
+{
+     background-image: none !important;
+}
