@@ -26,7 +26,7 @@ namespace Epi.Web.MVC.Models
         private string _LogoLocation;
         private bool _TestMode;
         private int _SurveyType;
-
+        private string _TestModeStyleClass;
         private Guid _UserPublishKey;
 
         public string SurveyId
@@ -125,6 +125,12 @@ namespace Epi.Web.MVC.Models
         {
             get { return _TestMode; }
             set { _TestMode = value; }
+        }
+        
+        public string TestModeStyleClass
+        {
+            get { return _TestModeStyleClass; }
+            set { _TestModeStyleClass = value; }
         }
     }
 }

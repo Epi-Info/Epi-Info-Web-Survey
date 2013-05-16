@@ -66,7 +66,10 @@ namespace Epi.Web.MVC.Controllers
                 string introText = regex.Replace(surveyInfoModel.IntroductionText.Replace("  ", " &nbsp;"), "<br />");
 
                 surveyInfoModel.IntroductionText = MvcHtmlString.Create(introText).ToString();
-
+                if (surveyInfoModel.TestMode)
+                {
+                    surveyInfoModel.TestModeStyleClass = "draft";
+                }
                 return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, surveyInfoModel);
             }
             catch (Exception ex)
