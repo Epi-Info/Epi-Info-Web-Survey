@@ -78,18 +78,18 @@
                 <br />
                 </div>
                    
-             if (Model.StartDate < DateTime.Now)
+            /* if (Model.StartDate < DateTime.Now)
                 { 
                      
-                   /* <div id="attention">
+                    <div id="attention">
                          <img src="@Url.Content("~/Content/images/sign_warning.png")" alt="" style="vertical-align: middle;
                             padding-right: 10px;" />
                        Survey has not yet started.
                         <p style="text-align:center">Survey Starting Date: @string.Format("{0:dddd, MMMM d, yyyy}", Model.StartDate)</p>
-                    </div>*/
-                 
-                 } else
-                 {
+                    </div>
+
+               } else
+                 {*/
                    
                         <div id="attention">
                              <img src="@Url.Content("~/Content/images/sign_warning.png")" alt="" style="vertical-align: middle;
@@ -98,7 +98,7 @@
                             assistance.
                             <p style="text-align:center">Survey Closing Date: @string.Format("{0:dddd, MMMM d, yyyy}", Model.ClosingDate)</p>
                         </div>
-                   }
+                  // }
                }
              
            </div>
