@@ -70,7 +70,7 @@
             <GroupBox Background="#FFD6E0BA" Header="Survey Criteria" Name="groupBox2" Margin="44,115,17,439" Panel.ZIndex="-1" FontSize="13.333" FontWeight="Bold"></GroupBox>
         <TextBox Height="23" Name="SurveyCriteria_SurveyId" Uid="" Margin="178,136,180,533" />
         <ListBox Name="SearchResultListBox" SelectionChanged="SearchResultListBox_SelectionChanged" Margin="60,199,61,447" />
-            <GroupBox Background="#FFD6E0BA" Header="Survey Information" Name="groupBox3" Margin="662,338,-587,-2" Panel.ZIndex="-1" FontSize="13.333" FontWeight="Bold" />
+          
         <Label Content="Publisher key" Height="28" HorizontalAlignment="Left" Margin="45,267,0,0" Name="label7" VerticalAlignment="Top" Width="80" />
         <TextBox Height="23" Margin="130,267,281,402" MaxLength="36" Name="TextBoxPublish" />
             <GroupBox Background="#FFD6E0BA" Header="Keys" Name="groupBox1" Margin="44,64,17,573" Panel.ZIndex="-1" FontSize="13.333" FontWeight="Bold">

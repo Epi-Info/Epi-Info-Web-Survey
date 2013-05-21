@@ -212,8 +212,8 @@ namespace Epi.Web.SurveyManager.Client
                 }
 
                 this.SurveyInfoList[this.selectedIndex].DepartmentName = this.DepartmentTextBox.Text;
-                //this.SurveyInfoList[this.selectedIndex].IntroductionText = new TextRange(this.IntroductionTextBox.Document.ContentStart, this.IntroductionTextBox.Document.ContentEnd).Text;
-                //this.SurveyInfoList[this.selectedIndex].ExitText = new TextRange(this.ExitTextTextBox.Document.ContentStart, this.ExitTextTextBox.Document.ContentEnd).Text;
+                this.SurveyInfoList[this.selectedIndex].IntroductionText = new TextRange(this.IntroductionTextBox.Document.ContentStart, this.IntroductionTextBox.Document.ContentEnd).Text;
+                this.SurveyInfoList[this.selectedIndex].ExitText = new TextRange(this.ExitTextTextBox.Document.ContentStart, this.ExitTextTextBox.Document.ContentEnd).Text;
                 if ((bool)this.IsSingleResponseCheckBox.IsChecked)
                 {
                     this.SurveyInfoList[this.selectedIndex].SurveyType = 1;
@@ -226,7 +226,17 @@ namespace Epi.Web.SurveyManager.Client
                 this.SurveyInfoList[this.selectedIndex].OrganizationName = this.OrganizationTextBox.Text;
                 this.SurveyInfoList[this.selectedIndex].SurveyName = this.SurveyNameTextBox.Text;
                 this.SurveyInfoList[this.selectedIndex].SurveyNumber = this.SurveyNumberTextBox.Text;
-                //this.SurveyInfoList[this.selectedIndex].XML = new TextRange(this.TemplateXMLTextBox.Document.ContentStart, this.TemplateXMLTextBox.Document.ContentEnd).Text;
+                 
+                if ( this.IsTestMode.IsChecked == true)
+                {
+                     
+                    this.SurveyInfoList[this.selectedIndex].IsTestMode = true;
+                }
+                else
+                {
+                    this.SurveyInfoList[this.selectedIndex].IsTestMode = false;
+                }
+                this.SurveyInfoList[this.selectedIndex].XML = new TextRange(this.TemplateXMLTextBox.Document.ContentStart, this.TemplateXMLTextBox.Document.ContentEnd).Text;
                 if (!string.IsNullOrEmpty(this.OrgTextBox1.Text))
                 { 
                     this.SurveyInfoList[this.selectedIndex].OrganizationKey = new Guid(OrgTextBox1.Text);
