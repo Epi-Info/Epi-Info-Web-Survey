@@ -25,16 +25,17 @@ namespace Epi.Web.EF
             List<SurveyInfoBO> result = new List<SurveyInfoBO>();
             if (SurveyInfoIdList.Count > 0)
             {
-                try{
-                foreach (string surveyInfoId in SurveyInfoIdList.Distinct())
+                try
                 {
-                    Guid Id = new Guid(surveyInfoId);
-
-                    using (var Context = DataObjectFactory.CreateContext())
+                    foreach (string surveyInfoId in SurveyInfoIdList.Distinct())
                     {
-                        result.Add(Mapper.Map(Context.SurveyMetaDatas.FirstOrDefault(x => x.SurveyId == Id)));
+                        Guid Id = new Guid(surveyInfoId);
+
+                        using (var Context = DataObjectFactory.CreateContext())
+                        {
+                            result.Add(Mapper.Map(Context.SurveyMetaDatas.FirstOrDefault(x => x.SurveyId == Id)));
+                        }
                     }
-                }
                 }
                 catch (Exception ex)
                 {
@@ -43,20 +44,18 @@ namespace Epi.Web.EF
             }
             else
             {
-                try{
-                using (var Context = DataObjectFactory.CreateContext())
+                try
                 {
-                    result = Mapper.Map(Context.SurveyMetaDatas.ToList());
-                }
+                    using (var Context = DataObjectFactory.CreateContext())
+                    {
+                        result = Mapper.Map(Context.SurveyMetaDatas.ToList());
+                    }
                 }
                 catch (Exception ex)
                 {
                     throw (ex);
                 }
             }
-
-
-            
 
             // remove the items to skip
             // remove the items after the page size
@@ -140,7 +139,6 @@ namespace Epi.Web.EF
                     responseList = statusList;
                 }
 
-
                 if (OrganizationId > 0)
                 {
                     List<SurveyMetaData> OIdList = new List<SurveyMetaData>();
@@ -161,23 +159,11 @@ namespace Epi.Web.EF
                 }
                 result = Mapper.Map(responseList);
 
-
                 // remove the items to skip
                 // remove the items after the page size
                 if (PageNumber > 0 && PageSize > 0)
                 {
                     result.Sort(CompareByDateCreated);
-                    // remove the items to skip
-
-                    //List<SurveyInfoBO> temp = new List<SurveyInfoBO>();
-
-                    //foreach (var item in result.Skip((PageNumber * PageSize) - PageSize).Take(PageSize))
-                    //{
-
-                    //    temp.Add(item);
-
-                    //}
-                    //result = temp.ToList();
 
                     if (PageNumber * PageSize - PageSize > 0)
                     {
@@ -193,8 +179,6 @@ namespace Epi.Web.EF
             return result;
         }
 
-
-
         public List<SurveyInfoBO> GetSurveyInfoByOrgKeyAndPublishKey(string SurveyId, string Okey, Guid publishKey)
         {
             List<SurveyInfoBO> result = new List<SurveyInfoBO>();
@@ -202,54 +186,48 @@ namespace Epi.Web.EF
             List<SurveyMetaData> responseList = new List<SurveyMetaData>();
 
             int OrganizationId = 0;
-            try{
-            using (var Context = DataObjectFactory.CreateContext())
+            try
             {
+                using (var Context = DataObjectFactory.CreateContext())
+                {
 
-                var Query = (from response in Context.Organizations
-                             where response.OrganizationKey == Okey
-                             select response).SingleOrDefault();
+                    var Query = (from response in Context.Organizations
+                                 where response.OrganizationKey == Okey
+                                 select response).SingleOrDefault();
 
-                if (Query != null) {
-                    OrganizationId = Query.OrganizationId;
-                }
+                    if (Query != null) {
+                        OrganizationId = Query.OrganizationId;
+                    }
                 
-
-               // OrganizationId = Context.Organizations.FirstOrDefault(x => x.OrganizationKey == Okey).OrganizationId;
-            }
+                }
             }
            catch (Exception ex)
            {
                throw (ex);
-          }
-            if (!string.IsNullOrEmpty(SurveyId))
-            {
-                try{
-                 Guid Id = new Guid(SurveyId);
-                using (var Context = DataObjectFactory.CreateContext())
+           }
+           
+           if (!string.IsNullOrEmpty(SurveyId))
+           {
+                try
+                {
+                    Guid Id = new Guid(SurveyId);
+                    using (var Context = DataObjectFactory.CreateContext())
                     {
                         responseList.Add(Context.SurveyMetaDatas.FirstOrDefault(x => x.SurveyId == Id && x.OrganizationId == OrganizationId && x.UserPublishKey == publishKey));
                         if (responseList[0] != null)
                         {
                             result = Mapper.Map(responseList);
                         }
-                     }
+                    }
                 }
                 catch (Exception ex)
                 {
                     throw (ex);
                 }
-            }
+           }
 
-            
-                
-           
             return result;
         }
-
-        
-
-
 
         /// <summary>
         /// Inserts a new SurveyInfo. 
@@ -273,8 +251,6 @@ namespace Epi.Web.EF
                        OrganizationId = ContextOrg.Organizations.FirstOrDefault(x => x.OrganizationKey == OrgKey).OrganizationId;
                    }
 
-
-
                    SurveyInfo.TemplateXMLSize = RemoveWhitespace(SurveyInfo.XML).Length;
                    SurveyInfo.DateCreated = DateTime.Now;
 
@@ -284,8 +260,7 @@ namespace Epi.Web.EF
 
                    Context.SaveChanges();
                }
-            
-              }
+            }
             catch (Exception ex)
             {
                 throw (ex);
@@ -298,35 +273,36 @@ namespace Epi.Web.EF
         /// <param name="SurveyInfo">SurveyInfo.</param>
         public void UpdateSurveyInfo(SurveyInfoBO SurveyInfo)
         { 
-            try{
-            Guid Id = new Guid(SurveyInfo.SurveyId);
-
-            //Update Survey
-            using (var Context = DataObjectFactory.CreateContext())
+            try
             {
-                var Query = from response in Context.SurveyMetaDatas
-                            where response.SurveyId == Id
-                            select response;
+                Guid Id = new Guid(SurveyInfo.SurveyId);
 
-                var DataRow = Query.Single();
-                DataRow.SurveyName = SurveyInfo.SurveyName;
-                DataRow.SurveyNumber = SurveyInfo.SurveyNumber;
-                DataRow.TemplateXML = SurveyInfo.XML;
-                DataRow.IntroductionText = SurveyInfo.IntroductionText;
-                DataRow.ExitText = SurveyInfo.ExitText;
-                DataRow.OrganizationName = SurveyInfo.OrganizationName;
-                DataRow.DepartmentName = SurveyInfo.DepartmentName;
-                DataRow.ClosingDate = SurveyInfo.ClosingDate;
-                DataRow.SurveyTypeId = SurveyInfo.SurveyType;
-                DataRow.UserPublishKey = SurveyInfo.UserPublishKey;
-                DataRow.TemplateXMLSize = RemoveWhitespace(SurveyInfo.XML).Length;
-                DataRow.TestMode = SurveyInfo.IsTestMode;
-                DataRow.StartDate = SurveyInfo.StartDate;
-                DataRow.LogoLocation = SurveyInfo.LogoLocation;
-                DataRow.LogoURL = SurveyInfo.LogoURL;
+                //Update Survey
+                using (var Context = DataObjectFactory.CreateContext())
+                {
+                    var Query = from response in Context.SurveyMetaDatas
+                                where response.SurveyId == Id
+                                select response;
 
-                Context.SaveChanges();
-            }
+                    var DataRow = Query.Single();
+                    DataRow.SurveyName = SurveyInfo.SurveyName;
+                    DataRow.SurveyNumber = SurveyInfo.SurveyNumber;
+                    DataRow.TemplateXML = SurveyInfo.XML;
+                    DataRow.IntroductionText = SurveyInfo.IntroductionText;
+                    DataRow.ExitText = SurveyInfo.ExitText;
+                    DataRow.OrganizationName = SurveyInfo.OrganizationName;
+                    DataRow.DepartmentName = SurveyInfo.DepartmentName;
+                    DataRow.ClosingDate = SurveyInfo.ClosingDate;
+                    DataRow.SurveyTypeId = SurveyInfo.SurveyType;
+                    DataRow.UserPublishKey = SurveyInfo.UserPublishKey;
+                    DataRow.TemplateXMLSize = RemoveWhitespace(SurveyInfo.XML).Length;
+                    DataRow.TestMode = SurveyInfo.IsTestMode;
+                    DataRow.StartDate = SurveyInfo.StartDate;
+                    DataRow.LogoLocation = SurveyInfo.LogoLocation;
+                    DataRow.LogoURL = SurveyInfo.LogoURL;
+
+                    Context.SaveChanges();
+                }
 
             }
             catch (Exception ex)
@@ -343,25 +319,17 @@ namespace Epi.Web.EF
         {
 
            //Delete Survey
-       
-       }
+        }
 
-
-                /// <summary>
+        /// <summary>
         /// Gets SurveyInfo Size Data on a list of ids
         /// </summary>
         /// <param name="SurveyInfoId">Unique SurveyInfo identifier.</param>
         /// <returns>PageInfoBO.</returns>
         public List<SurveyInfoBO> GetSurveySizeInfo(List<string> SurveyInfoIdList,int PageNumber = -1, int PageSize = -1, int ResponseMaxSize = -1)
         {
-           
-
             List<SurveyInfoBO> resultRows = GetSurveyInfo(SurveyInfoIdList, PageNumber, PageSize);
-
-           
             return resultRows;
-           
-
         }
 
 
@@ -372,14 +340,7 @@ namespace Epi.Web.EF
         /// <returns>PageInfoBO.</returns>
         public List<SurveyInfoBO> GetSurveySizeInfo(List<string> SurveyInfoIdList, DateTime pClosingDate, string Okey,  int pSurveyType = -1, int PageNumber = -1, int PageSize = -1, int ResponseMaxSize = -1)
         {
-
-           
-
             List<SurveyInfoBO> resultRows =  GetSurveyInfo(SurveyInfoIdList, pClosingDate,Okey, pSurveyType, PageNumber, PageSize);
-
-            
-
-
             return resultRows;
         }
 
