@@ -48,7 +48,7 @@
        @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "myform", @class = @Model.TestModeStyleClass.ToString() }))
        { 
         
-            <div id="content" style="margin-bottom:200px; padding-left:10px;">
+            <div id="content" style="margin-bottom:200px; padding-left:10px; min-height:375px;">
                @if ((Model.ClosingDate >= DateTime.Now)) //&& Model.StartDate >= DateTime.Now)
                {
                        @* <h2>
