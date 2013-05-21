@@ -26,11 +26,26 @@
 
 </script>
  
- <div id="header">
+ 
+ @if (@Model.TestModeStyleClass != "")
+ {
+          <div id="header" class="TestHeader">
+  
             <h1>
-                @Model.SurveyName </h1>
-             
-        </div>
+                @Model.SurveyName 
+            </h1>
+      
+          </div>
+ }
+ else { 
+             <div id="header"  >
+               <h1>
+                   @Model.SurveyName 
+               </h1>
+      
+             </div>
+ 
+ }
         <div id="infobox">
             <div id="surveyno">
                 <span class="boldlabel">Survey #:</span> <span>

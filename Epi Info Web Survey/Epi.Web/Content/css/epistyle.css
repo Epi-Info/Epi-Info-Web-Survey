@@ -659,8 +659,14 @@ a.watch
      background-image: none !important;
 }
 
-#header h1:after
+/*#header h1:after
 {
     content:"DRAFT";
     color:Blue
-}
+}*/
+.TestHeader h1:after
+{
+    content:"DRAFT";
+    color:Blue
+    
+    }

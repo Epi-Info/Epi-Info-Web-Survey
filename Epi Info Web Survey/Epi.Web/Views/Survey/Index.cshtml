@@ -269,14 +269,28 @@ function ReplaceString(string){
 });
    
 </script>
-
-<div id="header">
+ @if (@Model.TestModeStyleClass != "")
+ {
+<div id="header" class="TestHeader">
+  
             <h1>
                 @Model.SurveyInfo.SurveyName 
                  
                 </h1>
+      
+ </div>
+ }
+ else { 
+ <div id="header"  >
+  
+            <h1>
+                @Model.SurveyInfo.SurveyName 
+                 
+                </h1>
+      
  </div>
  
+ }
 
     <div id="infobox">
         <div id="pages" class="pages">
@@ -284,17 +298,17 @@ function ReplaceString(string){
 
 
          @if (Model.NumberOfPages > 0)
-          {
-              int num = 0;
-              
-              
+         {
+             int num = 0;
+
+
 
              for (int i = 1; Model.NumberOfPages > i - 1; i++)
-              {
-                  
-                  num = i;  
-                    if (i == 1 && Model.CurrentPage >1)
-                        {   
+             {
+
+                 num = i;
+                 if (i == 1 && Model.CurrentPage > 1)
+                 {   
                              
                            
                            @*<a  style="background-image: url('@Url.Content("~/Content/images/prev.png")'); background-repeat:no-repeat; background-position:center; width:13px;"   href="@string.Format("../../Survey/{0}/{1}", Model.ResponseId, Model.CurrentPage - 1)"    class="nextprev" title="Previous Page">
@@ -304,18 +318,18 @@ function ReplaceString(string){
                           &nbsp;&nbsp;&nbsp;
                               </a>  
                             
-                        }
+                 }
 
 
 
 
-                    if (Model.CurrentPage == i)
-                    {  
+                 if (Model.CurrentPage == i)
+                 {  
           <span class="current">@num</span>
           
-                    }
-                    else
-                    {  
+                 }
+                 else
+                 {  
 
        
          
@@ -325,9 +339,9 @@ function ReplaceString(string){
 
                    
                     
-                    }
+                 }
 
-              }
+             }
 
              if (Model.CurrentPage != Model.NumberOfPages)
              {  
@@ -342,7 +356,7 @@ function ReplaceString(string){
           
              }
 
-          } 
+         } 
 
 
  
@@ -382,7 +396,7 @@ function ReplaceString(string){
              
              
              
-        @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "myform",@class =@Model.TestModeStyleClass.ToString() }))
+        @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "myform", @class = @Model.TestModeStyleClass.ToString() }))
         {  
            
               
