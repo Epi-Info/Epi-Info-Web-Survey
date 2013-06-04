@@ -81,6 +81,26 @@ namespace Epi.Web.BLL
         }
 
 
+
+        public bool IsSurveyInfoValidByOrgKey(string SurveyId, string pOrganizationKey)
+        {
+
+            string EncryptedKey = Epi.Web.Common.Security.Cryptography.Encrypt(pOrganizationKey);
+            List<SurveyInfoBO> result = this.SurveyInfoDao.GetSurveyInfoByOrgKey(SurveyId, EncryptedKey);
+
+
+            if (result != null && result.Count > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+
+
       /// <summary>
         /// Gets SurveyInfo based on criteria
         /// </summary>

@@ -194,8 +194,9 @@ namespace Epi.Web.WCF.SurveyService
                 {
                     
                     bool validSurvey = false;
-
-                    validSurvey = Implementation.IsSurveyInfoValidByOrgKeyAndPublishKey(SurveyInfo.SurveyId, SurveyInfo.OrganizationKey.ToString(), SurveyInfo.UserPublishKey);
+                    //GetSurveyInfoByOrgKey
+                    //validSurvey = Implementation.IsSurveyInfoValidByOrgKeyAndPublishKey(SurveyInfo.SurveyId, SurveyInfo.OrganizationKey.ToString(), SurveyInfo.UserPublishKey);
+                    validSurvey = Implementation.IsSurveyInfoValidByOrgKey(SurveyInfo.SurveyId, SurveyInfo.OrganizationKey.ToString());
 
                      Epi.Web.Interfaces.DataInterfaces.IOrganizationDao entityDaoFactory1 = new EF.EntityOrganizationDao();
                      Epi.Web.Interfaces.DataInterfaces.IOrganizationDao surveyInfoDao1 = entityDaoFactory1;
