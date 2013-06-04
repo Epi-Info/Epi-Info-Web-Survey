@@ -7,6 +7,7 @@ using Epi.Web.Utility;
 using System.Web.Security;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Configuration;
 namespace Epi.Web.Controllers
 {
     public class PostController : Controller
@@ -20,7 +21,14 @@ namespace Epi.Web.Controllers
         {
             try
             {
-                if (EmailMessage.SendMessage(emailAddress, redirectUrl, UnescapeCodes(surveyName), passCode, UnescapeCodes(EmailSubject)))
+                Epi.Web.Common.Email.Email EmailObj = new Common.Email.Email();
+                EmailObj.Body = redirectUrl + " and Pass Code is: " + passCode;
+                EmailObj.From = ConfigurationManager.AppSettings["EMAIL_FROM"].ToString();
+                EmailObj.Subject = EmailSubject;
+                EmailObj.To.Add(emailAddress);
+
+
+                if (Epi.Web.Common.Email.EmailHandler.SendMessage(EmailObj))
                 {
                     return Json(true);
                 }
