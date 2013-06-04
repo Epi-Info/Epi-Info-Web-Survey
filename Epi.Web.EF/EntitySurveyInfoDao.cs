@@ -229,6 +229,62 @@ namespace Epi.Web.EF
             return result;
         }
 
+
+        public List<SurveyInfoBO> GetSurveyInfoByOrgKey(string SurveyId, string Okey)
+        {
+            List<SurveyInfoBO> result = new List<SurveyInfoBO>();
+
+            List<SurveyMetaData> responseList = new List<SurveyMetaData>();
+
+            int OrganizationId = 0;
+            try
+            {
+                using (var Context = DataObjectFactory.CreateContext())
+                {
+
+                    var Query = (from response in Context.Organizations
+                                 where response.OrganizationKey == Okey
+                                 select response).SingleOrDefault();
+
+                    if (Query != null)
+                    {
+                        OrganizationId = Query.OrganizationId;
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
+            }
+
+            if (!string.IsNullOrEmpty(SurveyId))
+            {
+                try
+                {
+                    Guid Id = new Guid(SurveyId);
+                    using (var Context = DataObjectFactory.CreateContext())
+                    {
+                        responseList.Add(Context.SurveyMetaDatas.FirstOrDefault(x => x.SurveyId == Id && x.OrganizationId == OrganizationId));
+                        if (responseList[0] != null)
+                        {
+                            result = Mapper.Map(responseList);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw (ex);
+                }
+            }
+
+            return result;
+        }
+
+
+
+
+
         /// <summary>
         /// Inserts a new SurveyInfo. 
         /// </summary>
