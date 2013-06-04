@@ -7,7 +7,7 @@ using System.Net;
 using System.Configuration;
 namespace Epi.Web.Utility
 {
-    public class EmailMessage
+    public class ExceptionMessage
     { 
 
         /// <summary>
@@ -18,7 +18,7 @@ namespace Epi.Web.Utility
         /// <param name="surveyName">Name of the survey</param>
         /// <param name="passCode"> Code for accessing an unfinished survey </param>
         /// <returns></returns>
-        public static bool SendMessage(string emailAddress, string redirectUrl, string surveyName, string passCode, string EmailSubject)
+      public static bool SendMessage(string emailAddress, string redirectUrl, string surveyName, string passCode, string EmailSubject)
         {
             try
             {
@@ -86,7 +86,7 @@ namespace Epi.Web.Utility
                 return false;
             }
         }
-
+      
 
                 /// <summary>
         /// the following method sends email messages from loggin errors 

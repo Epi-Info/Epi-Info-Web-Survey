@@ -185,7 +185,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="Utility\EmailMessage.cs" />
+    <Compile Include="Utility\ExceptionMessage.cs" />
     <Compile Include="Utility\FormProvider.cs" />
     <Compile Include="Utility\MobileFormProvider.cs" />
     <Compile Include="Utility\SurveyHelper.cs" />
