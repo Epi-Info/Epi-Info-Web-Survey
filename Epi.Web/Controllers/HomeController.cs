@@ -62,10 +62,12 @@ namespace Epi.Web.MVC.Controllers
                  SurveyInfoModel surveyInfoModel =GetSurveyInfo(surveyid);
                 //showing line breaks in introduction text
                 System.Text.RegularExpressions.Regex regex = new System.Text.RegularExpressions.Regex(@"(\r\n|\r|\n)+");
-
+                if (surveyInfoModel.IntroductionText != null)
+                {
                 string introText = regex.Replace(surveyInfoModel.IntroductionText.Replace("  ", " &nbsp;"), "<br />");
 
                 surveyInfoModel.IntroductionText = MvcHtmlString.Create(introText).ToString();
+                }
                 if (surveyInfoModel.TestMode)
                 {
                     surveyInfoModel.TestModeStyleClass = "draft";
