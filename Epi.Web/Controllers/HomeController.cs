@@ -72,6 +72,10 @@ namespace Epi.Web.MVC.Controllers
                 {
                     surveyInfoModel.TestModeStyleClass = "draft";
                 }
+                else {
+
+                    surveyInfoModel.TestModeStyleClass = "final";
+                }
                 return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, surveyInfoModel);
             }
             catch (Exception ex)
