@@ -122,7 +122,7 @@ namespace Epi.Web.MVC.Controllers
             catch (Exception ex)
             {
                 
-                            Epi.Web.Utility.EmailMessage.SendLogMessage( ex, this.HttpContext);
+                            Epi.Web.Utility.ExceptionMessage.SendLogMessage( ex, this.HttpContext);
                
                 return View(Epi.Web.MVC.Constants.Constant.EXCEPTION_PAGE);
             }
@@ -442,7 +442,7 @@ namespace Epi.Web.MVC.Controllers
 
             catch (Exception ex)
             {
-                  Epi.Web.Utility.EmailMessage.SendLogMessage(  ex, this.HttpContext);
+                  Epi.Web.Utility.ExceptionMessage.SendLogMessage(  ex, this.HttpContext);
              
                 return View(Epi.Web.MVC.Constants.Constant.EXCEPTION_PAGE);
             }

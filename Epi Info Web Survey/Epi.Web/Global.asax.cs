@@ -89,7 +89,7 @@ namespace Epi.Web.MVC
                 //sLog = "Application";
                 //sEvent = exc.Message + "\n" + exc.StackTrace;
                  
-                            Epi.Web.Utility.EmailMessage.SendLogMessage(exc);
+                            Epi.Web.Utility.ExceptionMessage.SendLogMessage(exc);
                            
                     
 

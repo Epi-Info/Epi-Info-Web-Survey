@@ -31,7 +31,7 @@ namespace Epi.Web.Controllers
             catch (Exception ex)
             {
               
-                Epi.Web.Utility.EmailMessage.SendLogMessage( ex, this.HttpContext);
+                Epi.Web.Utility.ExceptionMessage.SendLogMessage( ex, this.HttpContext);
                
                 return RedirectToAction(Epi.Web.MVC.Constants.Constant.EXCEPTION_PAGE);
             }
