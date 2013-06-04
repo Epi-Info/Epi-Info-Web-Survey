@@ -88,7 +88,7 @@ namespace Epi.Web.MVC.Controllers
                 //TempData["exc"] = ex.Message.ToString();
                 //TempData["exc1"] = ex.Source.ToString();
                 //TempData["exc2"] = ex.StackTrace.ToString();
-               Epi.Web.Utility.EmailMessage.SendLogMessage(    ex, this.HttpContext);
+               Epi.Web.Utility.ExceptionMessage.SendLogMessage(    ex, this.HttpContext);
                     
                 return View(Epi.Web.MVC.Constants.Constant.EXCEPTION_PAGE);
             }
@@ -207,7 +207,7 @@ namespace Epi.Web.MVC.Controllers
             {
 
                
-                Epi.Web.Utility.EmailMessage.SendLogMessage(    ex, this.HttpContext);
+                Epi.Web.Utility.ExceptionMessage.SendLogMessage(    ex, this.HttpContext);
                   
                 return View(Epi.Web.MVC.Constants.Constant.EXCEPTION_PAGE);
             }
