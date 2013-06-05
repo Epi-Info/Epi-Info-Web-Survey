@@ -62,18 +62,11 @@ namespace Epi.Web.Common.Email
                 }
 
                 System.Net.Mail.MailMessage message = new System.Net.Mail.MailMessage();
-                if (Email.To.Count>1)
+                foreach (string item in Email.To)
                 {
-                    foreach (string item in Email.To)
-                    {
-                        message.To.Add(item + ",");
-                    }
+                    message.To.Add(item);
                 }
-                else
-                {
-                 message.To.Add(Email.To[0]);
-                
-                }
+
                 message.Subject = Email.Subject;
                 message.From =  new System.Net.Mail.MailAddress(Email.From.ToString());
                 message.Body = Email.Body;  
