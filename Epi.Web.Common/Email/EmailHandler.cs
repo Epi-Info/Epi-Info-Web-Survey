@@ -62,13 +62,21 @@ namespace Epi.Web.Common.Email
                 }
 
                 System.Net.Mail.MailMessage message = new System.Net.Mail.MailMessage();
-                foreach (string item in Email.To)
+                if (Email.To.Count>1)
                 {
-                    message.To.Add(item + " ,");
+                    foreach (string item in Email.To)
+                    {
+                        message.To.Add(item + ",");
+                    }
+                }
+                else
+                {
+                 message.To.Add(Email.To[0]);
+                
                 }
                 message.Subject = Email.Subject;
                 message.From =  new System.Net.Mail.MailAddress(Email.From.ToString());
-                message.Body = Email.Body;//redirectUrl + " and Pass Code is: " + passCode;
+                message.Body = Email.Body;  
                 System.Net.Mail.SmtpClient smtp = new System.Net.Mail.SmtpClient(ConfigurationManager.AppSettings["SMTP_HOST"].ToString());
                 smtp.Port = SMTPPort;
 

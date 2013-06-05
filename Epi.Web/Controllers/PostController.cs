@@ -25,8 +25,9 @@ namespace Epi.Web.Controllers
                 EmailObj.Body = redirectUrl + " and Pass Code is: " + passCode;
                 EmailObj.From = ConfigurationManager.AppSettings["EMAIL_FROM"].ToString();
                 EmailObj.Subject = EmailSubject;
-                EmailObj.To.Add(emailAddress);
-
+                List<string> tempList = new List<string>(); 
+                tempList.Add(emailAddress);
+                EmailObj.To = tempList ;
 
                 if (Epi.Web.Common.Email.EmailHandler.SendMessage(EmailObj))
                 {
