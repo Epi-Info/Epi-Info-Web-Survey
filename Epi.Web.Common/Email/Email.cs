@@ -8,12 +8,12 @@ namespace Epi.Web.Common.Email
     public class Email
     {
 
-        private List<string> _To;
+        private  List<string> _To;
         private string _From;
         private string _Body;
         private string _Subject;
 
-        public List<string> To 
+        public   List<string> To 
         {
             get { return _To; }
             set { _To = value; }
