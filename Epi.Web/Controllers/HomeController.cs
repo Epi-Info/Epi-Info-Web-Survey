@@ -125,8 +125,14 @@ namespace Epi.Web.MVC.Controllers
                 // create the first survey response
                 Epi.Web.Common.DTO.SurveyAnswerDTO SurveyAnswer = _isurveyFacade.CreateSurveyAnswer(surveyModel.SurveyId, ResponseID.ToString());
 
+
+
+                
                // SurveyInfoModel surveyInfoModel = _isurveyFacade.GetSurveyInfoModel(SurveyAnswer.SurveyId);
                  SurveyInfoModel surveyInfoModel =GetSurveyInfo(SurveyAnswer.SurveyId);
+
+                // set the survey answer to be production or test 
+                 SurveyAnswer.IsProductionMode = ! surveyInfoModel.TestMode;
 
                 XDocument xdoc = XDocument.Parse(surveyInfoModel.XML);
 
