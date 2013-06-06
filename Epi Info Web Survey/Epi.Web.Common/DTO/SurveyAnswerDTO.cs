@@ -25,6 +25,10 @@ namespace Epi.Web.Common.DTO
         public string XML { get; set; }
         [DataMember]
         public Guid UserPublishKey { get; set; }
+
+        [DataMember]
+        public bool IsProductionMode { get; set; }
+
        
     }
 }
