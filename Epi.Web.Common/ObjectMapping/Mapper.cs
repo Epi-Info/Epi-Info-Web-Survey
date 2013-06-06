@@ -132,7 +132,8 @@ namespace Epi.Web.Common.ObjectMapping
                 XML = pBO.XML,
                 DateCompleted = pBO.DateCompleted,
                 DateCreated = pBO.DateCreated, 
-                Status = pBO.Status
+                Status = pBO.Status,
+                IsProductionMode = pBO.IsProductionMode
             };
         }
         public static List<SurveyAnswerDTO> ToDataTransferObject(List<SurveyResponseBO> pSurveyResposneList)
@@ -151,17 +152,18 @@ namespace Epi.Web.Common.ObjectMapping
         /// </summary>
         /// <param name="SurveyInfo">A SurveyResponseDTO business object.</param>
         /// /// <returns>A SurveyResponseBO.</returns>
-        public static SurveyResponseBO ToBusinessObject(SurveyAnswerDTO pBO)
+        public static SurveyResponseBO ToBusinessObject(SurveyAnswerDTO pDTO)
         {
             return new SurveyResponseBO
             {
-                SurveyId = pBO.SurveyId,
-                ResponseId = pBO.ResponseId,
-                DateUpdated = pBO.DateUpdated,
-                XML = pBO.XML,
-                DateCompleted = pBO.DateCompleted,
-                DateCreated = pBO.DateCreated,
-                Status = pBO.Status
+                SurveyId = pDTO.SurveyId,
+                ResponseId = pDTO.ResponseId,
+                DateUpdated = pDTO.DateUpdated,
+                XML = pDTO.XML,
+                DateCompleted = pDTO.DateCompleted,
+                DateCreated = pDTO.DateCreated,
+                Status = pDTO.Status,
+                IsProductionMode = pDTO.IsProductionMode
                 
             };
         }
