@@ -424,10 +424,10 @@
           <ConnectorPoint PointX="5.5" PointY="2.6631982421874993" />
           <ConnectorPoint PointX="6.625" PointY="2.6631982421874993" />
         </AssociationConnector>
-        <EntityTypeShape EntityType="EIWSModel.Organization" Width="1.5" PointX="3.375" PointY="6.875" Height="1.9802864583333308" />
+        <EntityTypeShape EntityType="EIWSModel.Organization" Width="1.5" PointX="3.5" PointY="6.5" Height="1.9802864583333308" />
         <AssociationConnector Association="EIWSModel.FK_SurveyMetaData_Organization" >
-          <ConnectorPoint PointX="4.4375" PointY="6.875" />
-          <ConnectorPoint PointX="4.4375" PointY="5.1629036458333326" />
+          <ConnectorPoint PointX="4.5" PointY="6.5" />
+          <ConnectorPoint PointX="4.5" PointY="5.932109375" />
         </AssociationConnector>
         </Diagram>
     </Diagrams>
