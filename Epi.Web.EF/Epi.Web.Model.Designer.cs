@@ -1200,7 +1200,8 @@ namespace Epi.Web.EF
         /// <param name="responseXML">Initial value of the ResponseXML property.</param>
         /// <param name="responseXMLSize">Initial value of the ResponseXMLSize property.</param>
         /// <param name="dateCreated">Initial value of the DateCreated property.</param>
-        public static SurveyResponse CreateSurveyResponse(global::System.Guid responseId, global::System.Guid surveyId, global::System.DateTime dateUpdated, global::System.Int32 statusId, global::System.String responseXML, global::System.Int64 responseXMLSize, global::System.DateTime dateCreated)
+        /// <param name="isProductionMode">Initial value of the IsProductionMode property.</param>
+        public static SurveyResponse CreateSurveyResponse(global::System.Guid responseId, global::System.Guid surveyId, global::System.DateTime dateUpdated, global::System.Int32 statusId, global::System.String responseXML, global::System.Int64 responseXMLSize, global::System.DateTime dateCreated, global::System.Boolean isProductionMode)
         {
             SurveyResponse surveyResponse = new SurveyResponse();
             surveyResponse.ResponseId = responseId;
@@ -1210,6 +1211,7 @@ namespace Epi.Web.EF
             surveyResponse.ResponseXML = responseXML;
             surveyResponse.ResponseXMLSize = responseXMLSize;
             surveyResponse.DateCreated = dateCreated;
+            surveyResponse.IsProductionMode = isProductionMode;
             return surveyResponse;
         }
 
@@ -1434,6 +1436,30 @@ namespace Epi.Web.EF
         private global::System.DateTime _DateCreated;
         partial void OnDateCreatedChanging(global::System.DateTime value);
         partial void OnDateCreatedChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean IsProductionMode
+        {
+            get
+            {
+                return _IsProductionMode;
+            }
+            set
+            {
+                OnIsProductionModeChanging(value);
+                ReportPropertyChanging("IsProductionMode");
+                _IsProductionMode = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("IsProductionMode");
+                OnIsProductionModeChanged();
+            }
+        }
+        private global::System.Boolean _IsProductionMode;
+        partial void OnIsProductionModeChanging(global::System.Boolean value);
+        partial void OnIsProductionModeChanged();
 
         #endregion
     
