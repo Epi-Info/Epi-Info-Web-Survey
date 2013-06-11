@@ -868,5 +868,27 @@ namespace Epi.Web.WCF.SurveyService
 
         }
 
+         public  bool IsValidOrgKey(SurveyInfoRequest request){
+
+              try
+            {
+             Epi.Web.Interfaces.DataInterfaces.ISurveyInfoDao surveyInfoDao = new EF.EntitySurveyInfoDao();
+             Epi.Web.BLL.SurveyInfo Implementation = new Epi.Web.BLL.SurveyInfo(surveyInfoDao);
+             bool validSurvey = false;
+             //var SurveyInfo = Mapper.ToBusinessObject(request.SurveyInfoList[0]);
+             
+             validSurvey = Implementation.IsSurveyInfoValidByOrgKey(request.Criteria.SurveyIdList[0].ToString(),request.Criteria.OrganizationKey.ToString());
+             return validSurvey;
+            }
+              catch (Exception ex)
+              {
+                  CustomFaultException customFaultException = new CustomFaultException();
+                  customFaultException.CustomMessage = ex.Message;
+                  customFaultException.Source = ex.Source;
+                  customFaultException.StackTrace = ex.StackTrace;
+                  customFaultException.HelpLink = ex.HelpLink;
+                  throw new FaultException<CustomFaultException>(customFaultException);
+              }
+         }
     }
 }
