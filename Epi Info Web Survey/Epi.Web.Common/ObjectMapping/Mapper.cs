@@ -100,7 +100,8 @@ namespace Epi.Web.Common.ObjectMapping
                 IsTestMode = pBO.IsTestMode,
                 StartDate = pBO.StartDate,
                 LogoLocation = pBO.LogoLocation,
-                LogoURL = pBO.LogoURL
+                LogoURL = pBO.LogoURL,
+                UserPublishKey = pBO.UserPublishKey
 
                
 
