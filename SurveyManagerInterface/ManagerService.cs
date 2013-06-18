@@ -872,12 +872,31 @@ namespace Epi.Web.WCF.SurveyService
 
               try
             {
-             Epi.Web.Interfaces.DataInterfaces.ISurveyInfoDao surveyInfoDao = new EF.EntitySurveyInfoDao();
-             Epi.Web.BLL.SurveyInfo Implementation = new Epi.Web.BLL.SurveyInfo(surveyInfoDao);
+             
              bool validSurvey = false;
              //var SurveyInfo = Mapper.ToBusinessObject(request.SurveyInfoList[0]);
-             
-             validSurvey = Implementation.IsSurveyInfoValidByOrgKey(request.Criteria.SurveyIdList[0].ToString(),request.Criteria.OrganizationKey.ToString());
+             if (request.Criteria.SurveyIdList.Count == 0)
+             {
+                Epi.Web.Interfaces.DataInterfaces.IOrganizationDao organizationDao = new EF.EntityOrganizationDao();
+                Epi.Web.BLL.Organization Implementation = new Epi.Web.BLL.Organization(organizationDao);
+                Epi.Web.Common.BusinessObject.OrganizationBO ogranizationBO = Implementation.GetOrganizationByKey(request.Criteria.OrganizationKey.ToString());
+                if (ogranizationBO == null)
+                {
+                    validSurvey = false;
+                }
+                else
+                {
+                    validSurvey = true;
+                }
+
+
+             }
+             else
+             {
+                Epi.Web.Interfaces.DataInterfaces.ISurveyInfoDao surveyInfoDao = new EF.EntitySurveyInfoDao();
+                Epi.Web.BLL.SurveyInfo Implementation = new Epi.Web.BLL.SurveyInfo(surveyInfoDao);
+                validSurvey = Implementation.IsSurveyInfoValidByOrgKey(request.Criteria.SurveyIdList[0].ToString(), request.Criteria.OrganizationKey.ToString());
+             }
              return validSurvey;
             }
               catch (Exception ex)
