@@ -88,6 +88,7 @@ background-origin:content-box;*/
  font-size: 9pt;
 /* margin-bottom: 1em;*/
  background: #87d69b;
+ min-height:20px;
  }
 /*DIv Style for Splash Page*/
 #surveyno
@@ -100,15 +101,17 @@ background-origin:content-box;*/
 
 #orgn
  {
- float: left;
- width: 33%;
+ float: right;
+ width: 55%;
  white-space:normal;
  word-wrap: break-word;
-  text-align:center;
+  text-align:right;
  }
 
 #dept
  {
+ display:none;
+ visibility:collapse;
  float: right;
  width: 33%;
  text-align: right;
@@ -666,7 +669,7 @@ a.watch
 }*/
 .TestHeader h1:after
 {
-    content:"DRAFT";
-    color:Blue
+   /* content:"DRAFT";
+    color:Blue*/
     
     }
