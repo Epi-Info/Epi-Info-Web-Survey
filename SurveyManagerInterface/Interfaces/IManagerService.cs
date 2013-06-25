@@ -18,6 +18,10 @@ namespace Epi.Web.WCF.SurveyService
 
         [OperationContract]
         [FaultContract(typeof(CustomFaultException))]
+        PublishResponse RePublishSurvey(PublishRequest pRequestMessage);
+
+        [OperationContract]
+        [FaultContract(typeof(CustomFaultException))]
         SurveyInfoResponse GetSurveyInfo(SurveyInfoRequest pRequest);
 
         [OperationContract]
