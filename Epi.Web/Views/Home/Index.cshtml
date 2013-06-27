@@ -47,23 +47,21 @@
  
  }
         <div id="infobox">
-         @if (@Model.SurveyNumber == "" || @Model.SurveyNumber == "Your Survey ID")
+        @if (@Model.SurveyNumber != null)
                 {
-                }
-                else{
                     <div id="surveyno">
                         <span class="boldlabel">Survey #:</span> <span>
                            @Model.SurveyNumber</span></div>
                 }
+         @if (@Model.OrganizationName != null)  
+         {
+                  <div id="orgn">
+                    <span class="boldlabel">Organization:</span> <span>
+                    @Model.OrganizationName</span></div>
+         }
+         
             
-            @if (@Model.OrganizationName == "" || @Model.OrganizationName == "Your Organization Name")
-                {
-                }
-                else{
-                    <div id="orgn">
-                        <span class="boldlabel">Organization:</span> <span>
-                        @Model.OrganizationName</span></div>
-                }
+           
            @* <div id="dept">
                 <span class="boldlabel">Department:</span> <span>
                    @Model.DepartmentName</span></div>*@
@@ -90,7 +88,7 @@
                                 Begin Survey</button>
 
                         </p>
-                       //<p style="text-align:center; font-size:9pt;">Survey Starting Date: @string.Format("{0:dddd, MMMM d, yyyy}", Model.StartDate)</p>
+                   //<p style="text-align:center; font-size:9pt;">Survey Starting Date: @string.Format("{0:dddd, MMMM d, yyyy}", Model.StartDate)</p>
                           
                        <p style="text-align:center;font-size:9pt;">Survey Closing Date: @string.Format("{0:dddd, MMMM d, yyyy}", Model.ClosingDate)</p>
                         
@@ -104,7 +102,7 @@
                 <br />
                 </div>
                    
-            /* if (Model.StartDate < DateTime.Now)
+                   /* if (Model.StartDate < DateTime.Now)
                 { 
                      
                     <div id="attention">
@@ -124,7 +122,7 @@
                             assistance.
                             <p style="text-align:center">Survey Closing Date: @string.Format("{0:dddd, MMMM d, yyyy}", Model.ClosingDate)</p>
                         </div>
-                  // }
+                   // }
                }
              
            </div>
