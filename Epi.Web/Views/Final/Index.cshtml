@@ -44,23 +44,19 @@
  }
 
           <div id="infobox">
-            @if (@Model.SurveyNumber == "" || @Model.SurveyNumber == "Your Survey ID")
-                    {
-                    }
-                    else{
-                        <div id="surveyno">
-                            <span class="boldlabel">Survey #:</span> <span>
-                               @Model.SurveyNumber</span></div>
-                    }
-            
-                @if (@Model.OrganizationName == "" || @Model.OrganizationName == "Your Organization Name")
-                    {
-                    }
-                    else{
-                        <div id="orgn">
-                            <span class="boldlabel">Organization:</span> <span>
-                            @Model.OrganizationName</span></div>
-                    }
+            @if (@Model.SurveyNumber != null)
+                {
+                    <div id="surveyno">
+                        <span class="boldlabel">Survey #:</span> <span>
+                           @Model.SurveyNumber</span></div>
+                }
+         @if (@Model.OrganizationName != null)  
+         {
+                  <div id="orgn">
+                    <span class="boldlabel">Organization:</span> <span>
+                    @Model.OrganizationName</span></div>
+         }
+         
                @* <div id="dept">
                     <span class="boldlabel">Department:</span> <span>
                        @Model.DepartmentName</span></div>*@

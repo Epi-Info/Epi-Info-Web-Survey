@@ -95,22 +95,19 @@
                         
                         <p>&nbsp;</p>
                    <div style="margin: 0 auto; text-align:center;">
-                        @if (@Model.SurveyNumber == "" || @Model.SurveyNumber == "Your Survey ID")
-                        {
-                        }
-                        else{
-                            <div>
-                                <span class="boldlabel">Survey #:</span> <span>
-                                   @Model.SurveyNumber</span></div>
-                        }
-                        @if (@Model.OrganizationName == "" || @Model.OrganizationName == "Your Organization Name")
-                        {
-                        }
-                        else{
-                            <div>
-                                <span class="boldlabel">Organization:</span> <span>
-                                @Model.OrganizationName</span></div>
-                        }
+                        @if (@Model.SurveyNumber != null)
+                                {
+                                    <div>
+                                        <span class="boldlabel">Survey #:</span> <span>
+                                           @Model.SurveyNumber</span></div>
+                                }
+                         @if (@Model.OrganizationName != null)  
+                         {
+                                  <div>
+                                    <span class="boldlabel">Organization:</span> <span>
+                                    @Model.OrganizationName</span></div>
+                         }
+         
                         @*<div>
                             <span class="boldlabel">Survey #:</span> <span>
                                @Model.SurveyNumber</span></div>
