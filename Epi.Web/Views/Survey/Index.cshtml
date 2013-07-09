@@ -108,7 +108,7 @@
 	        autoOpen: false,
 	        modal: true,
 	        width: 400,
-	        height: 200,
+	        height: 160,
 	        closeOnEscape: false,
 	        draggable: false,
 	        resizable: false,
@@ -123,7 +123,7 @@
 	            "click": function () {
 	                $(this).dialog('close');
 	            },
-	            "class": 'login'
+	            "class": 'dialogbtn'
 	        }]
 
 
@@ -158,7 +158,7 @@
 	            show: "blind",
 	            hide: "blind",
 	            resizable: false,
-	            // height: 100,
+	            height: 190,
 	            width: 420,
 	            modal: true,
 	            buttons:[{
@@ -168,12 +168,12 @@
 	                        var homePageUrl = '@Url.Action("Index","Home")' + '/' + '@Model.SurveyInfo.SurveyId';  
 	                        SignOutAndRedirect(signoutUrl, homePageUrl);
 	                        $(this).dialog("close");},
-                      "class": 'login'
+	                    "class": 'dialogbtn'
 	                    
 	                },{
 	                "text":'Stay on this page',
                     "click":  function () {$(this).dialog('close');},
-                    "class": 'login'
+                    "class": 'dialogbtn'
 	                
 	                  }]
 
@@ -593,7 +593,7 @@ function ReplaceString(string){
 			  
               <div id="TimeOutdialog" title="Your session is about to expire!">
 	            <p>
-		            <span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 50px 0;"></span>
+		            <span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
 		            You will be logged off in <span id="dialog-countdown" style="font-weight:bold"></span>
 	            </p>
 
