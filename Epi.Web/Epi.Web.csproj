@@ -338,6 +338,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\autoNumeric-1.7.4.js" />
     <Content Include="Scripts\CheckCodeEngine.js" />
+    <Content Include="Scripts\idle-timer.js" />
     <Content Include="Scripts\jqm-datebox.core.js" />
     <Content Include="Scripts\jqm-datebox.mode.flipbox.js" />
     <Content Include="Scripts\jqm-docs.js" />
@@ -360,6 +361,8 @@
     <Content Include="Scripts\jquery-ui-timepicker-addon.js" />
     <Content Include="Scripts\jquery.bgiframe-2.1.2.js" />
     <Content Include="Scripts\jquery.Epi.Survey.Components.js" />
+    <Content Include="Scripts\jquery.idletimeout.js" />
+    <Content Include="Scripts\jquery.idletimer.js" />
     <Content Include="Scripts\jquery.js" />
     <Content Include="Scripts\jquery.maskedinput-1.3.js" />
     <Content Include="Scripts\jquery.mobile-1.0b3.js" />
