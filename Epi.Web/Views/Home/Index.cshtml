@@ -73,7 +73,7 @@
        { 
         
             <div id="content" style="margin-bottom:200px; padding-left:10px; min-height:375px;">
-               @if ((Model.ClosingDate >= DateTime.Now)) //&& Model.StartDate >= DateTime.Now)
+               @if (Model.ClosingDate >= DateTime.Now && Model.StartDate <= DateTime.Now)
                {
                        @* <h2>
                             Welcome!</h2>*@
@@ -88,42 +88,43 @@
                                 Begin Survey</button>
 
                         </p>
-                   //<p style="text-align:center; font-size:9pt;">Survey Starting Date: @string.Format("{0:dddd, MMMM d, yyyy}", Model.StartDate)</p>
+                       <p style="text-align:center; font-size:9pt;">Survey Starting Date: @string.Format("{0:f}", Model.StartDate)</p>
                           
-                       <p style="text-align:center;font-size:9pt;">Survey Closing Date: @string.Format("{0:dddd, MMMM d, yyyy}", Model.ClosingDate)</p>
+                       <p style="text-align:center;font-size:9pt;">Survey Closing Date: @string.Format("{0:f}", Model.ClosingDate)</p>
                         
                         
                    
                }
 
                else
-               { 
+                   { 
                 <div>
                 <br />
                 </div>
                    
-                   /* if (Model.StartDate < DateTime.Now)
-                { 
+                   if (Model.StartDate > DateTime.Now)
+                       { 
                      
                     <div id="attention">
                          <img src="@Url.Content("~/Content/images/sign_warning.png")" alt="" style="vertical-align: middle;
                             padding-right: 10px;" />
                        Survey has not yet started.
-                        <p style="text-align:center">Survey Starting Date: @string.Format("{0:dddd, MMMM d, yyyy}", Model.StartDate)</p>
+                        <p style="text-align:center">Survey Starting Date: @string.Format("{0:f}", Model.StartDate)</p>
                     </div>
 
-               } else
-                 {*/
+                       }
+                   if (Model.ClosingDate < DateTime.Now)
+                       {
                    
                         <div id="attention">
                              <img src="@Url.Content("~/Content/images/sign_warning.png")" alt="" style="vertical-align: middle;
                                 padding-right: 10px;" />
                             This survey is currently closed. Please contact the author of this survey for further
                             assistance.
-                            <p style="text-align:center">Survey Closing Date: @string.Format("{0:dddd, MMMM d, yyyy}", Model.ClosingDate)</p>
+                            <p style="text-align:center">Survey Closing Date: @string.Format("{0:f}", Model.ClosingDate)</p>
                         </div>
-                   // }
-               }
+                       }
+                   }
              
            </div>
            
