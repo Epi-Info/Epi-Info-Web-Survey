@@ -508,171 +508,147 @@ CCE_Context.prototype.getValue = function (pName)
 }
 
 
-CCE_Context.prototype.setValue = function (pName, pValue) 
-{
+CCE_Context.prototype.setValue = function (pName, pValue) {
     var cce_Symbol = this.resolve(pName);
-    if (cce_Symbol != null) 
-    {
+
+    if (cce_Symbol != null) {
         cce_Symbol.Value = pValue;
 
         var Jquery = '#mvcdynamicfield_' + pName;
         var FieldName = 'mvcdynamicfield_' + pName;
-         var IsHidden = false;
-         
+        var IsHidden = false;
 
-
-        if (!eval(document.getElementById(FieldName)))
-        {
+        if (!eval(document.getElementById(FieldName))) {
             CreateHiddenField(FieldName, cce_Symbol.Type);
-           
         }
         var ControlType = $(Jquery).attr('type');
-       if (ControlType== 'hidden')
-       {
-           IsHidden =true;
-       }
-        if(cce_Symbol.Source == "datasource")
-        {
-            switch (cce_Symbol.Type) 
-            {
+
+        if (ControlType == 'hidden') {
+            IsHidden = true;
+        }
+
+        if (cce_Symbol.Source == "datasource") {
+            switch (cce_Symbol.Type) {
                 case "datepicker": //string has been converted to date for comparison with another date
-                        if (eval(document.getElementById("IsMobile")))
-			            {
-                                    var FormatedDate;
-                                    var date = new Date();
-                                    FormatedDate =date.getMonth()+ 1 +"/"+date.getDate()+"/"+date.getFullYear();
-                                    cce_Symbol.Value = FormatedDate;
-                                        $(Jquery).val(FormatedDate);
-			            }
-                        else
-                        {
-                                    $(Jquery).datepicker("setDate", new Date(pValue));
-                                    cce_Symbol.Value = pValue;
-			  
-			            }
-                                break;
-                       case "timepicker":
-                                if (eval(document.getElementById("IsMobile"))){
-                                    var FormatedTime;
-                                    var date = new Date();
-                                    FormatedTime = FormatTime(date);
-                                    $(Jquery).val(FormatedTime);
-                                    cce_Symbol.Value = FormatedTime;
-			            }
-                        else
-                        {
-                                $(Jquery).timepicker("setTime", new Date(pValue));
-                                cce_Symbol.Value = pValue;
-			            }
+
+                    if (eval(document.getElementById("IsMobile"))) {
+                        var FormatedDate;
+                        var date = new Date();
+                        FormatedDate = date.getMonth() + 1 + "/" + date.getDate() + "/" + date.getFullYear();
+                        cce_Symbol.Value = FormatedDate;
+                        $(Jquery).val(FormatedDate);
+                    }
+                    else {
+                        $(Jquery).datepicker("setDate", new Date(pValue));
+                        cce_Symbol.Value = pValue;
+                    }
+
                     break;
+
+                case "timepicker":
+
+                    if (eval(document.getElementById("IsMobile"))) {
+                        var FormatedTime;
+                        var date = new Date();
+                        FormatedTime = FormatTime(date);
+                        $(Jquery).val(FormatedTime);
+                        cce_Symbol.Value = FormatedTime;
+                    }
+                    else {
+                        $(Jquery).timepicker("setTime", new Date(pValue));
+                        cce_Symbol.Value = pValue;
+                    }
+                    break;
+
                 case "yesno":
+
                     $(Jquery).val(pValue);
                     cce_Symbol.Value = pValue;
-                    if(pValue == "") 
-                        {
-                            if(!IsHidden)
-                            {
-                            return null; 
-                          
+                    if (pValue == "") {
+                        if (!IsHidden) {
+                            return null;
                             $(Jquery).val(null);
-                            }
-                            cce_Symbol.Value = null;
                         }
-                        else if (pValue) 
-                        {   
-                           if(!IsHidden)
-                            {
+
+                        cce_Symbol.Value = null;
+                    }
+                    else if (pValue) {
+                        if (!IsHidden) {
                             return true; //"Yes";
-                             
                             $(Jquery).val(true);
+                        }
+
+                        cce_Symbol.Value = true;
+                    }
+                    else {
+                        if (!IsHidden) {
+                            $(Jquery).val(false);
+                        }
+                        cce_Symbol.Value = false;
+                    }
+                    break;
+
+                case "checkbox":
+
+                    if (pValue) {
+                        if (eval(document.getElementById("IsMobile"))) {
+                            if (!IsHidden) {
+                                $(Jquery).prop('checked', true).checkboxradio('refresh');
                             }
                             cce_Symbol.Value = true;
                         }
-                        else 
-                        {
-                           if(!IsHidden)
-                            {
-                            $(Jquery).val(false);
+                        else {
+                            $(Jquery).prop('checked', true);
+                            cce_Symbol.Value = true;
+                        }
+                    }
+                    else {
+                        if (eval(document.getElementById("IsMobile"))) {
+                            if (!IsHidden) {
+                                $(Jquery).prop('checked', false).checkboxradio('refresh');
                             }
                             cce_Symbol.Value = false;
                         }
-                        break;
-                    case "checkbox":  
-                        if (pValue) 
-                        {
-                            if (eval(document.getElementById("IsMobile")))
-                            {
-                              if(!IsHidden)
-                              {
-                                $(Jquery).prop('checked', true).checkboxradio('refresh');
-                              }
-                                cce_Symbol.Value = true;
-                            }
-                            else
-                            {
-                                $(Jquery).prop('checked', true) ;
-                                cce_Symbol.Value = true;
+                        else {
+                            $(Jquery).prop('checked', false);
+                            cce_Symbol.Value = false;
+                        }
+                    }
+
+                    if ($(Jquery + "[value]")) {
+                        $(Jquery).prop('value', cce_Symbol.Value);
+                    }
+
+                    break;
+
+                case "radiobutton":
+
+                    var RadiofieldName = "." + FieldName;
+                    $(RadiofieldName).each(function (i, obj) {
+                        if ($(this).val() == pValue) {
+                            if (eval(document.getElementById("IsMobile"))) {
+                                if (!IsHidden) {
+                                    $(this).prop('checked', true).checkboxradio('refresh');
+                                }
+                            } else {
+                                $(this).prop('checked', true);
                             }
                         }
-                        else 
-                        {
-                            if (eval(document.getElementById("IsMobile")))
-                            {
-                               if(!IsHidden)
-                                {
-                                $(Jquery).prop('checked', false).checkboxradio('refresh');
-                                }
-                                cce_Symbol.Value = false;
-                            }
-                            else
-                            {
-                                $(Jquery).prop('checked', false) ;
-                                cce_Symbol.Value = false;
-                            }
-                            
-                        }
+                    });
 
-                         if($(Jquery + "[value]"))
-                         {
-                             $(Jquery).prop('value', cce_Symbol.Value);
-                         }
-                         //alert(document.getElementById(FieldName).value)
-                        break;
-                    case "radiobutton":  
-                        var RadiofieldName = "." + FieldName;
-                        $(RadiofieldName).each(function(i, obj) 
-                        {
-                            if ($(this).val() == pValue)
-                            {
-                                if (eval(document.getElementById("IsMobile")))
-                                {
-                                if(!IsHidden)
-                                 {
-                                $(this).prop('checked',true).checkboxradio('refresh');
-                                 }
-                                }else{
-                                    $(this).prop('checked',true);
-                                }
-                            }
-                        });
+                    $(Jquery).val(pValue);
+                    cce_Symbol.Value = pValue;
 
+                    break;
 
-                            $(Jquery).val(pValue);
-                            cce_Symbol.Value = pValue;
-                        break;
                 default:
                     $(Jquery).val(pValue);
                     cce_Symbol.Value = pValue;
-                    //alert(document.getElementById(FieldName).value)
                     break;
             }
-
-             
         }
-
     }
 }
-
 
 function CCE_Symbol(pName, pType, pSource, pPageNumber, pValue) 
 {
