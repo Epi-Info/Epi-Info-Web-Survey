@@ -101,9 +101,9 @@ namespace Epi.Web.MVC.Utility
               
                 foreach (var _FieldTypeID in _FieldsTypeIDs)
                 {
-                    var Value = GetControlValue(xdocResponse, _FieldTypeID.Attribute("Name").Value.Trim());
+                    var Value = GetControlValue(xdocResponse, _FieldTypeID.Attribute("Name").Value);
 
-                    JavaScript.Append(GetFormJavaScript(checkcode, form, _FieldTypeID.Attribute("Name").Value.Trim()));
+                    JavaScript.Append(GetFormJavaScript(checkcode, form, _FieldTypeID.Attribute("Name").Value));
 
 
                     if (_FieldTypeID.Attribute("Position").Value != (PageNumber - 1).ToString())
@@ -197,7 +197,7 @@ namespace Epi.Web.MVC.Utility
                             case "17"://DropDown LegalValues
 
                                 string DropDownValues1 = "";
-                                DropDownValues1 = GetDropDownValues(xdoc, _FieldTypeID.Attribute("Name").Value.Trim(), _FieldTypeID.Attribute("SourceTableName").Value);
+                                DropDownValues1 = GetDropDownValues(xdoc, _FieldTypeID.Attribute("Name").Value, _FieldTypeID.Attribute("SourceTableName").Value);
                                 var _DropDownSelectedValue1 = Value;
                                 form.AddFields(GetDropDown(_FieldTypeID, _Width, _Height, xdocResponse, _DropDownSelectedValue1, DropDownValues1, 17, form));
                                 //                                             pName, pType, pSource
@@ -207,7 +207,7 @@ namespace Epi.Web.MVC.Utility
                             case "18"://DropDown Codes
 
                                 string DropDownValues2 = "";
-                                DropDownValues2 = GetDropDownValues(xdoc, _FieldTypeID.Attribute("Name").Value.Trim(), _FieldTypeID.Attribute("SourceTableName").Value);
+                                DropDownValues2 = GetDropDownValues(xdoc, _FieldTypeID.Attribute("Name").Value, _FieldTypeID.Attribute("SourceTableName").Value);
                                 var _DropDownSelectedValue2 = Value;
                                 form.AddFields(GetDropDown(_FieldTypeID, _Width, _Height, xdocResponse, _DropDownSelectedValue2, DropDownValues2, 18, form));
                                 //                                             pName, pType, pSource
@@ -217,7 +217,7 @@ namespace Epi.Web.MVC.Utility
                             case "19"://DropDown CommentLegal
 
                                 string DropDownValues = "";
-                                DropDownValues = GetDropDownValues(xdoc, _FieldTypeID.Attribute("Name").Value.Trim(), _FieldTypeID.Attribute("SourceTableName").Value);
+                                DropDownValues = GetDropDownValues(xdoc, _FieldTypeID.Attribute("Name").Value, _FieldTypeID.Attribute("SourceTableName").Value);
                                 var _DropDownSelectedValue = Value;
                                 form.AddFields(GetDropDown(_FieldTypeID, _Width, _Height, xdocResponse, _DropDownSelectedValue, DropDownValues, 19, form));
                                 //                                             pName, pType, pSource
@@ -388,13 +388,13 @@ namespace Epi.Web.MVC.Utility
             Choices = GetChoices(Lists[0].Split(',').ToList<string>());
             Pattern = Lists[1].Split(',').ToList<string>();
 
-                RadioList.Title = _FieldTypeID.Attribute("Name").Value.Trim();
+                RadioList.Title = _FieldTypeID.Attribute("Name").Value;
                 RadioList.Prompt = _FieldTypeID.Attribute("PromptText").Value;
                 RadioList.DisplayOrder = int.Parse(_FieldTypeID.Attribute("TabIndex").Value);
                 RadioList.Required = _FieldTypeID.Attribute("IsRequired").Value == "True" ? true : false;
                 
                 RadioList.RequiredMessage = "This field is required";
-                RadioList.Key = _FieldTypeID.Attribute("Name").Value.Trim();
+                RadioList.Key = _FieldTypeID.Attribute("Name").Value;
                  
                 RadioList.Top = _Height * double.Parse(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value);
                 RadioList.Left = _Width * double.Parse(_FieldTypeID.Attribute("ControlLeftPositionPercentage").Value);
@@ -409,9 +409,9 @@ namespace Epi.Web.MVC.Utility
                 RadioList.InputFieldfontSize = double.Parse(_FieldTypeID.Attribute("ControlFontSize").Value);
                 RadioList.InputFieldfontfamily = _FieldTypeID.Attribute("ControlFontFamily").Value;
                 RadioList.Value = _ControlValue;
-                RadioList.IsHidden = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value.Trim(), "HiddenFieldsList");
-                RadioList.IsHighlighted = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value.Trim(), "HighlightedFieldsList");
-                RadioList.IsDisabled = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value.Trim(), "DisabledFieldsList");
+                RadioList.IsHidden = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "HiddenFieldsList");
+                RadioList.IsHighlighted = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "HighlightedFieldsList");
+                RadioList.IsDisabled = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "DisabledFieldsList");
                 RadioList.IsRequired = GetRequiredControlState(form.RequiredFieldsList.ToString(), _FieldTypeID.Attribute("Name").Value, "RequiredFieldsList");
                                                                                                            
                 RadioList.ShowTextOnRight = bool.Parse(_FieldTypeID.Attribute("ShowTextOnRight").Value);
@@ -440,13 +440,13 @@ namespace Epi.Web.MVC.Utility
 
             var NumericTextBox = new NumericTextBox
             {
-                Title = _FieldTypeID.Attribute("Name").Value.Trim(),
+                Title = _FieldTypeID.Attribute("Name").Value,
                 Prompt = _FieldTypeID.Attribute("PromptText").Value,
                 DisplayOrder = int.Parse(_FieldTypeID.Attribute("TabIndex").Value),
                 //Required =  _FieldTypeID.Attribute("IsRequired").Value == "True"?true:false ,
                 //RequiredMessage = _FieldTypeID.Attribute("PromptText").Value + " is required",
                 RequiredMessage =  "This field is required",
-                Key = _FieldTypeID.Attribute("Name").Value.Trim(),
+                Key = _FieldTypeID.Attribute("Name").Value,
                 PromptTop = _Height * double.Parse(_FieldTypeID.Attribute("PromptTopPositionPercentage").Value),
                 PromptLeft = _Width * double.Parse(_FieldTypeID.Attribute("PromptLeftPositionPercentage").Value),
                 Top = _Height * double.Parse(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value),
@@ -457,15 +457,15 @@ namespace Epi.Web.MVC.Utility
                 fontSize = double.Parse(_FieldTypeID.Attribute("PromptFontSize").Value),
                 fontfamily = _FieldTypeID.Attribute("PromptFontFamily").Value,
                // IsRequired = bool.Parse(_FieldTypeID.Attribute("IsRequired").Value),
-                IsRequired = GetRequiredControlState(form.RequiredFieldsList.ToString(), _FieldTypeID.Attribute("Name").Value.Trim(), "RequiredFieldsList"),
-                Required = GetRequiredControlState(form.RequiredFieldsList.ToString(), _FieldTypeID.Attribute("Name").Value.Trim(), "RequiredFieldsList"),
+                IsRequired = GetRequiredControlState(form.RequiredFieldsList.ToString(), _FieldTypeID.Attribute("Name").Value, "RequiredFieldsList"),
+                Required = GetRequiredControlState(form.RequiredFieldsList.ToString(), _FieldTypeID.Attribute("Name").Value, "RequiredFieldsList"),
                 IsReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value),
                 Lower = _FieldTypeID.Attribute("Lower").Value,
                 Upper = _FieldTypeID.Attribute("Upper").Value,
                 Value = _ControlValue,
-                IsHidden = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value.Trim(), "HiddenFieldsList"),
-                IsHighlighted = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value.Trim(), "HighlightedFieldsList"),
-                IsDisabled = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value.Trim(), "DisabledFieldsList"),
+                IsHidden = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "HiddenFieldsList"),
+                IsHighlighted = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "HighlightedFieldsList"),
+                IsDisabled = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "DisabledFieldsList"),
                 Pattern = _FieldTypeID.Attribute("Pattern").Value
                 
             };
@@ -489,7 +489,7 @@ namespace Epi.Web.MVC.Utility
                 fontfamily = _FieldTypeID.Attribute("ControlFontFamily").Value,
                 fontstyle = _FieldTypeID.Attribute("ControlFontStyle").Value,
                 Height = _Height * double.Parse(_FieldTypeID.Attribute("ControlHeightPercentage").Value),
-                IsHidden = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value.Trim(), "HiddenFieldsList"),
+                IsHidden = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "HiddenFieldsList"),
                 Name =_FieldTypeID.Attribute("Name").Value,
                 Width = _Width * double.Parse(_FieldTypeID.Attribute("ControlWidthPercentage").Value)
 
@@ -503,13 +503,13 @@ namespace Epi.Web.MVC.Utility
 
             var TextArea = new TextArea
             {
-                Title = _FieldTypeID.Attribute("Name").Value.Trim(),
+                Title = _FieldTypeID.Attribute("Name").Value,
                 Prompt = _FieldTypeID.Attribute("PromptText").Value,
                 DisplayOrder = int.Parse(_FieldTypeID.Attribute("TabIndex").Value),
                 //Required = _FieldTypeID.Attribute("IsRequired").Value == "True" ? true : false,
                 //RequiredMessage = _FieldTypeID.Attribute("PromptText").Value + " is required",
                 RequiredMessage = "This field is required",
-                Key = _FieldTypeID.Attribute("Name").Value.Trim(),
+                Key = _FieldTypeID.Attribute("Name").Value,
                 PromptTop = _Height * double.Parse(_FieldTypeID.Attribute("PromptTopPositionPercentage").Value),
                 PromptLeft = _Width * double.Parse(_FieldTypeID.Attribute("PromptLeftPositionPercentage").Value),
                 Top = _Height * double.Parse(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value),
@@ -526,13 +526,13 @@ namespace Epi.Web.MVC.Utility
                 InputFieldfontfamily = _FieldTypeID.Attribute("ControlFontFamily").Value,
 
                // IsRequired = bool.Parse(_FieldTypeID.Attribute("IsRequired").Value),
-                IsRequired = GetRequiredControlState(form.RequiredFieldsList.ToString(), _FieldTypeID.Attribute("Name").Value.Trim(), "RequiredFieldsList"),
-                Required = GetRequiredControlState(form.RequiredFieldsList.ToString(), _FieldTypeID.Attribute("Name").Value.Trim(), "RequiredFieldsList"),
+                IsRequired = GetRequiredControlState(form.RequiredFieldsList.ToString(), _FieldTypeID.Attribute("Name").Value, "RequiredFieldsList"),
+                Required = GetRequiredControlState(form.RequiredFieldsList.ToString(), _FieldTypeID.Attribute("Name").Value, "RequiredFieldsList"),
                 
                 IsReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value),
-                IsHidden = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value.Trim(), "HiddenFieldsList"),
-                IsHighlighted = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value.Trim(), "HighlightedFieldsList"),
-                IsDisabled = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value.Trim(), "DisabledFieldsList"),
+                IsHidden = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "HiddenFieldsList"),
+                IsHighlighted = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "HighlightedFieldsList"),
+                IsDisabled = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "DisabledFieldsList"),
                 Value = _ControlValue
 
 
@@ -544,7 +544,7 @@ namespace Epi.Web.MVC.Utility
         {
             var result = new Hidden
             {
-                Title = _FieldTypeID.Attribute("Name").Value.Trim(),
+                Title = _FieldTypeID.Attribute("Name").Value,
                 Key = _FieldTypeID.Attribute("Name").Value,
                 IsPlaceHolder = true,
                 Value = _ControlValue
@@ -557,7 +557,7 @@ namespace Epi.Web.MVC.Utility
         {
             var TextBox = new TextBox
             {
-                Title = _FieldTypeID.Attribute("Name").Value.Trim(),
+                Title = _FieldTypeID.Attribute("Name").Value,
                 Prompt = _FieldTypeID.Attribute("PromptText").Value.Trim(),
                 DisplayOrder = int.Parse(_FieldTypeID.Attribute("TabIndex").Value),
                 RequiredMessage = "This field is required",
@@ -571,17 +571,17 @@ namespace Epi.Web.MVC.Utility
                 fontstyle = _FieldTypeID.Attribute("PromptFontStyle").Value,
                 fontSize = double.Parse(_FieldTypeID.Attribute("PromptFontSize").Value),
                 fontfamily = _FieldTypeID.Attribute("PromptFontFamily").Value,
-                IsRequired = GetRequiredControlState(form.RequiredFieldsList.ToString(), _FieldTypeID.Attribute("Name").Value.Trim(), "RequiredFieldsList"),
-                Required = GetRequiredControlState(form.RequiredFieldsList.ToString(), _FieldTypeID.Attribute("Name").Value.Trim(), "RequiredFieldsList"),
+                IsRequired = GetRequiredControlState(form.RequiredFieldsList.ToString(), _FieldTypeID.Attribute("Name").Value, "RequiredFieldsList"),
+                Required = GetRequiredControlState(form.RequiredFieldsList.ToString(), _FieldTypeID.Attribute("Name").Value, "RequiredFieldsList"),
                 InputFieldfontstyle = _FieldTypeID.Attribute("ControlFontStyle").Value,
                 InputFieldfontSize = double.Parse(_FieldTypeID.Attribute("ControlFontSize").Value),
                 InputFieldfontfamily = _FieldTypeID.Attribute("ControlFontFamily").Value,
 
                 IsReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value),
                 MaxLength = int.Parse(_FieldTypeID.Attribute("MaxLength").Value),
-                IsHidden = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value.Trim(), "HiddenFieldsList"),
-                IsHighlighted = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value.Trim(), "HighlightedFieldsList"),
-                IsDisabled = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value.Trim(), "DisabledFieldsList"),
+                IsHidden = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "HiddenFieldsList"),
+                IsHighlighted = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "HighlightedFieldsList"),
+                IsDisabled = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "DisabledFieldsList"),
                 Value = _ControlValue
             };
 
@@ -597,7 +597,7 @@ namespace Epi.Web.MVC.Utility
                 Prompt = _FieldTypeID.Attribute("PromptText").Value,
                 DisplayOrder = int.Parse(_FieldTypeID.Attribute("TabIndex").Value),
                 RequiredMessage = "This field is required",
-                Key = _FieldTypeID.Attribute("Name").Value.Trim(),
+                Key = _FieldTypeID.Attribute("Name").Value,
                 PromptTop = _Height * double.Parse(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value)+2,
                 PromptLeft = _Width * double.Parse(_FieldTypeID.Attribute("ControlLeftPositionPercentage").Value)+20,
                 Top = _Height * double.Parse(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value),
@@ -609,9 +609,9 @@ namespace Epi.Web.MVC.Utility
                 fontstyle = _FieldTypeID.Attribute("PromptFontStyle").Value,
                 fontSize = double.Parse(_FieldTypeID.Attribute("PromptFontSize").Value),
                 fontfamily = _FieldTypeID.Attribute("PromptFontFamily").Value,
-                IsHidden = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value.Trim(), "HiddenFieldsList"),
-                IsHighlighted = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value.Trim(), "HighlightedFieldsList"),
-                IsDisabled = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value.Trim(), "DisabledFieldsList"),
+                IsHidden = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "HiddenFieldsList"),
+                IsHighlighted = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "HighlightedFieldsList"),
+                IsDisabled = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "DisabledFieldsList"),
                 ReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value) 
                  
               
@@ -627,13 +627,13 @@ namespace Epi.Web.MVC.Utility
 
             var DatePicker = new DatePicker
             {
-                Title = _FieldTypeID.Attribute("Name").Value.Trim(),
+                Title = _FieldTypeID.Attribute("Name").Value,
                 Prompt = _FieldTypeID.Attribute("PromptText").Value,
                 DisplayOrder = int.Parse(_FieldTypeID.Attribute("TabIndex").Value),
               //  Required = _FieldTypeID.Attribute("IsRequired").Value == "True" ? true : false,
                 //RequiredMessage = _FieldTypeID.Attribute("PromptText").Value + " is required",
                 RequiredMessage = "This field is required",
-                Key = _FieldTypeID.Attribute("Name").Value.Trim(),
+                Key = _FieldTypeID.Attribute("Name").Value,
                 PromptTop = _Height * double.Parse(_FieldTypeID.Attribute("PromptTopPositionPercentage").Value),
                 PromptLeft = _Width * double.Parse(_FieldTypeID.Attribute("PromptLeftPositionPercentage").Value),
                 Top = _Height * double.Parse(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value),
@@ -644,8 +644,8 @@ namespace Epi.Web.MVC.Utility
                 fontSize = double.Parse(_FieldTypeID.Attribute("PromptFontSize").Value),
                 fontfamily = _FieldTypeID.Attribute("PromptFontFamily").Value,
                 //IsRequired = bool.Parse(_FieldTypeID.Attribute("IsRequired").Value),
-                IsRequired = GetRequiredControlState(form.RequiredFieldsList.ToString(), _FieldTypeID.Attribute("Name").Value.Trim(), "RequiredFieldsList"),
-                Required = GetRequiredControlState(form.RequiredFieldsList.ToString(), _FieldTypeID.Attribute("Name").Value.Trim(), "RequiredFieldsList"),
+                IsRequired = GetRequiredControlState(form.RequiredFieldsList.ToString(), _FieldTypeID.Attribute("Name").Value, "RequiredFieldsList"),
+                Required = GetRequiredControlState(form.RequiredFieldsList.ToString(), _FieldTypeID.Attribute("Name").Value, "RequiredFieldsList"),
                 InputFieldfontstyle = _FieldTypeID.Attribute("ControlFontStyle").Value,
                 InputFieldfontSize = double.Parse(_FieldTypeID.Attribute("ControlFontSize").Value),
                 InputFieldfontfamily = _FieldTypeID.Attribute("ControlFontFamily").Value,
@@ -653,9 +653,9 @@ namespace Epi.Web.MVC.Utility
                 Lower = _FieldTypeID.Attribute("Lower").Value,
                 Upper = _FieldTypeID.Attribute("Upper").Value,
                 Value = _ControlValue,
-                IsHidden = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value.Trim(), "HiddenFieldsList"),
-                IsHighlighted = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value.Trim(), "HighlightedFieldsList"),
-                IsDisabled = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value.Trim(), "DisabledFieldsList"),
+                IsHidden = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "HiddenFieldsList"),
+                IsHighlighted = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "HighlightedFieldsList"),
+                IsDisabled = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "DisabledFieldsList"),
                 ReadOnly= bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value),
                 Pattern = _FieldTypeID.Attribute("Pattern").Value
 
@@ -675,7 +675,7 @@ namespace Epi.Web.MVC.Utility
                // Required = _FieldTypeID.Attribute("IsRequired").Value == "True" ? true : false,
                 //RequiredMessage = _FieldTypeID.Attribute("PromptText").Value + " is required",
                 RequiredMessage = "This field is required",
-                Key = _FieldTypeID.Attribute("Name").Value.Trim(),
+                Key = _FieldTypeID.Attribute("Name").Value,
                 PromptTop = _Height * double.Parse(_FieldTypeID.Attribute("PromptTopPositionPercentage").Value),
                 PromptLeft = _Width * double.Parse(_FieldTypeID.Attribute("PromptLeftPositionPercentage").Value),
                 Top = _Height * double.Parse(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value),
@@ -686,8 +686,8 @@ namespace Epi.Web.MVC.Utility
                 fontSize = double.Parse(_FieldTypeID.Attribute("PromptFontSize").Value),
                 fontfamily = _FieldTypeID.Attribute("PromptFontFamily").Value,
                 //IsRequired = bool.Parse(_FieldTypeID.Attribute("IsRequired").Value),
-                IsRequired = GetRequiredControlState(form.RequiredFieldsList.ToString(), _FieldTypeID.Attribute("Name").Value.Trim(), "RequiredFieldsList"),
-                Required = GetRequiredControlState(form.RequiredFieldsList.ToString(), _FieldTypeID.Attribute("Name").Value.Trim(), "RequiredFieldsList"),
+                IsRequired = GetRequiredControlState(form.RequiredFieldsList.ToString(), _FieldTypeID.Attribute("Name").Value, "RequiredFieldsList"),
+                Required = GetRequiredControlState(form.RequiredFieldsList.ToString(), _FieldTypeID.Attribute("Name").Value, "RequiredFieldsList"),
                 InputFieldfontstyle = _FieldTypeID.Attribute("ControlFontStyle").Value,
                 InputFieldfontSize = double.Parse(_FieldTypeID.Attribute("ControlFontSize").Value),
                 InputFieldfontfamily = _FieldTypeID.Attribute("ControlFontFamily").Value,
@@ -695,9 +695,9 @@ namespace Epi.Web.MVC.Utility
                 Lower = _FieldTypeID.Attribute("Lower").Value,
                 Upper = _FieldTypeID.Attribute("Upper").Value,
                 Value = _ControlValue,
-                IsHidden = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value.Trim(), "HiddenFieldsList"),
-                IsHighlighted = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value.Trim(), "HighlightedFieldsList"),
-                IsDisabled = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value.Trim(), "DisabledFieldsList"),
+                IsHidden = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "HiddenFieldsList"),
+                IsHighlighted = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "HighlightedFieldsList"),
+                IsDisabled = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "DisabledFieldsList"),
                 ReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value),
                 Pattern = _FieldTypeID.Attribute("Pattern").Value
 
@@ -714,12 +714,12 @@ namespace Epi.Web.MVC.Utility
 
             Select DropDown = new Select();
 
-            DropDown.Title = _FieldTypeID.Attribute("Name").Value.Trim();
+            DropDown.Title = _FieldTypeID.Attribute("Name").Value;
                     DropDown.Prompt = _FieldTypeID.Attribute("PromptText").Value;
                     DropDown.DisplayOrder = int.Parse(_FieldTypeID.Attribute("TabIndex").Value);
                    // DropDown.Required = _FieldTypeID.Attribute("IsRequired").Value == "True" ? true : false;
                     DropDown.RequiredMessage = "This field is required";
-                    DropDown.Key = _FieldTypeID.Attribute("Name").Value.Trim();
+                    DropDown.Key = _FieldTypeID.Attribute("Name").Value;
                     DropDown.PromptTop = _Height * double.Parse(_FieldTypeID.Attribute("PromptTopPositionPercentage").Value);
                     DropDown.PromptLeft = _Width * double.Parse(_FieldTypeID.Attribute("PromptLeftPositionPercentage").Value);
                     DropDown.Top = _Height * double.Parse(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value);
@@ -730,8 +730,8 @@ namespace Epi.Web.MVC.Utility
                     DropDown.fontSize = double.Parse(_FieldTypeID.Attribute("PromptFontSize").Value);
                     DropDown.fontfamily = _FieldTypeID.Attribute("PromptFontFamily").Value;
                     //IsRequired = bool.Parse(_FieldTypeID.Attribute("IsRequired").Value),
-                    DropDown.IsRequired = GetRequiredControlState(form.RequiredFieldsList.ToString(), _FieldTypeID.Attribute("Name").Value.Trim(), "RequiredFieldsList");
-                    DropDown.Required = GetRequiredControlState(form.RequiredFieldsList.ToString(), _FieldTypeID.Attribute("Name").Value.Trim(), "RequiredFieldsList");
+                    DropDown.IsRequired = GetRequiredControlState(form.RequiredFieldsList.ToString(), _FieldTypeID.Attribute("Name").Value, "RequiredFieldsList");
+                    DropDown.Required = GetRequiredControlState(form.RequiredFieldsList.ToString(), _FieldTypeID.Attribute("Name").Value, "RequiredFieldsList");
                     DropDown.InputFieldfontstyle = _FieldTypeID.Attribute("ControlFontStyle").Value;
                     DropDown.InputFieldfontSize = double.Parse(_FieldTypeID.Attribute("ControlFontSize").Value);
                     DropDown.InputFieldfontfamily = _FieldTypeID.Attribute("ControlFontFamily").Value;
@@ -739,9 +739,9 @@ namespace Epi.Web.MVC.Utility
                     DropDown.ShowEmptyOption = true;
                     DropDown.SelectType=FieldTypeId;
                     DropDown.SelectedValue = _ControlValue;
-                    DropDown.IsHidden = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value.Trim(), "HiddenFieldsList");
-                    DropDown.IsHighlighted = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value.Trim(), "HighlightedFieldsList");
-                    DropDown.IsDisabled = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value.Trim(), "DisabledFieldsList");
+                    DropDown.IsHidden = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "HiddenFieldsList");
+                    DropDown.IsHighlighted = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "HighlightedFieldsList");
+                    DropDown.IsDisabled = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "DisabledFieldsList");
                     DropDown.ControlFontSize = float.Parse(_FieldTypeID.Attribute("ControlFontSize").Value);
                     DropDown.ControlFontStyle = _FieldTypeID.Attribute("ControlFontStyle").Value;
                      
@@ -803,10 +803,10 @@ namespace Epi.Web.MVC.Utility
 
             var GroupBox = new GroupBox();
 
-            GroupBox.Title = _FieldTypeID.Attribute("Name").Value.Trim();
+            GroupBox.Title = _FieldTypeID.Attribute("Name").Value;
                     GroupBox.Prompt = _FieldTypeID.Attribute("PromptText").Value;
                     GroupBox.RequiredMessage = "This field is required";
-                    GroupBox.Key = _FieldTypeID.Attribute("Name").Value.Trim() + "_GroupBox";
+                    GroupBox.Key = _FieldTypeID.Attribute("Name").Value + "_GroupBox";
                     //GroupBox.Key = _FieldTypeID.Attribute("Name").Value;
                     GroupBox.PromptTop = _Height * double.Parse(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value) ;
                     GroupBox.PromptLeft = _Width * double.Parse(_FieldTypeID.Attribute("ControlLeftPositionPercentage").Value) ;
@@ -819,9 +819,9 @@ namespace Epi.Web.MVC.Utility
                     GroupBox.fontSize = double.Parse(_FieldTypeID.Attribute("ControlFontSize").Value);
                     GroupBox.fontfamily = _FieldTypeID.Attribute("ControlFontFamily").Value;
                    // GroupBox.ReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value);
-                    GroupBox.IsHidden = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value.Trim(), "HiddenFieldsList");
-                    GroupBox.IsHighlighted = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value.Trim(), "HighlightedFieldsList");
-                    GroupBox.IsDisabled = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value.Trim(), "DisabledFieldsList");
+                    GroupBox.IsHidden = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "HiddenFieldsList");
+                    GroupBox.IsHighlighted = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "HighlightedFieldsList");
+                    GroupBox.IsDisabled = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "DisabledFieldsList");
                      
 
 
@@ -926,7 +926,7 @@ namespace Epi.Web.MVC.Utility
 
 
 
-            return XElement.Attribute("Name").Value.Trim().ToString();
+            return XElement.Attribute("Name").Value.ToString();
         }
 
         public static string GetFormJavaScript(string CheckCode, Form form, string controlName)
@@ -1028,7 +1028,7 @@ namespace Epi.Web.MVC.Utility
                 {
                     string fieldKey = key.Remove(0, form.FieldPrefix.Length);
 
-                    if (fieldKey.Equals(_FieldTypeID.Attribute("Name").Value.Trim(), StringComparison.OrdinalIgnoreCase))
+                    if (fieldKey.Equals(_FieldTypeID.Attribute("Name").Value, StringComparison.OrdinalIgnoreCase))
                     {
                         Value = pPostedForm[key];
                         IsFound = true;
@@ -1104,21 +1104,21 @@ namespace Epi.Web.MVC.Utility
 
                         case "17": //DropDown LegalValues
                             string DropDownValues1 = "";
-                            DropDownValues1 = GetDropDownValues(xdoc, _FieldTypeID.Attribute("Name").Value.Trim(), _FieldTypeID.Attribute("SourceTableName").Value);
+                            DropDownValues1 = GetDropDownValues(xdoc, _FieldTypeID.Attribute("Name").Value, _FieldTypeID.Attribute("SourceTableName").Value);
                             var _DropDownSelectedValue1 = Value;
                             field = GetDropDown(_FieldTypeID, _Width, _Height, xdocResponse, _DropDownSelectedValue1, DropDownValues1, 17, form);
                             break;
 
                         case "18": //DropDown Codes
                             string DropDownValues2 = "";
-                            DropDownValues2 = GetDropDownValues(xdoc, _FieldTypeID.Attribute("Name").Value.Trim(), _FieldTypeID.Attribute("SourceTableName").Value);
+                            DropDownValues2 = GetDropDownValues(xdoc, _FieldTypeID.Attribute("Name").Value, _FieldTypeID.Attribute("SourceTableName").Value);
                             var _DropDownSelectedValue2 = Value;
                             field = GetDropDown(_FieldTypeID, _Width, _Height, xdocResponse, _DropDownSelectedValue2, DropDownValues2, 18, form);
                             break;
                         
                         case "19": //DropDown CommentLegal
                             string DropDownValues = "";
-                            DropDownValues = GetDropDownValues(xdoc, _FieldTypeID.Attribute("Name").Value.Trim(), _FieldTypeID.Attribute("SourceTableName").Value);
+                            DropDownValues = GetDropDownValues(xdoc, _FieldTypeID.Attribute("Name").Value, _FieldTypeID.Attribute("SourceTableName").Value);
                             var _DropDownSelectedValue = Value;
                             field = GetDropDown(_FieldTypeID, _Width, _Height, xdocResponse, _DropDownSelectedValue, DropDownValues, 19, form);
                             break;
