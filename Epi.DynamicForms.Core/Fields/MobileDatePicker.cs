@@ -43,7 +43,7 @@ namespace MvcDynamicForms.Fields
             txt.Attributes.Add("type", "date");
             txt.Attributes.Add("Theme", "b");
             txt.Attributes.Add("data-role", "datebox");
-            txt.Attributes.Add("data-options", "{\"mode\": \"flipbox\", \"pickPageButtonTheme\": \"e\", \"pickPageInputTheme\":\"e\", \"pickPageFlipButtonTheme\":\"a\", \"pickPageTheme\":\"e\" ,  \"useNewStyle\":true}");
+            txt.Attributes.Add("data-options", "{\"mode\": \"datebox\", \"pickPageButtonTheme\": \"e\", \"pickPageInputTheme\":\"e\", \"pickPageFlipButtonTheme\":\"a\", \"pickPageTheme\":\"e\" ,  \"useNewStyle\":true}");
             txt.Attributes.Add("value", Value);
             ////////////Check code start//////////////////
             EnterRule FunctionObjectAfter = (EnterRule)_form.FormCheckCodeObj.GetCommand("level=field&event=after&identifier=" + _key);
