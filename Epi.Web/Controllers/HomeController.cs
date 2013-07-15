@@ -12,17 +12,15 @@ using System.Configuration;
 using System.Web;
 using System.Web.Caching;
 using System.Web.UI;
- 
 
 namespace Epi.Web.MVC.Controllers
 {
     public class HomeController : Controller
     {
-
-        //declare  SurveyFacade
         private Epi.Web.MVC.Facade.ISurveyFacade _isurveyFacade;
         private IEnumerable<XElement> PageFields;
         private  string RequiredList ="";
+
         /// <summary>
         /// injecting surveyFacade to the constructor 
         /// </summary>
@@ -32,11 +30,11 @@ namespace Epi.Web.MVC.Controllers
             _isurveyFacade = isurveyFacade;
         }
 
-
         public ActionResult Default()
         {
             return View("Default");
         }
+
         /// <summary>
         /// Accept SurveyId as parameter, 
         /// 
@@ -45,58 +43,37 @@ namespace Epi.Web.MVC.Controllers
         /// </summary>
         /// <param name="surveyid"></param>
         /// <returns></returns>
-        
-        
         [HttpGet]
         public ActionResult Index(string surveyid)
         {
-            /*TO DO: Later we will pass an empty SurveyInfoDTO object and validate it here something like
-             if surveyInfodto.SurveyName== null then go to the exception page*/
             try
             {
-               // FormsAuthentication.SignOut();
-               
-
-              //  TempData[Epi.Web.MVC.Constants.Constant.RESPONSE_ID] = "";
-                //SurveyInfoModel surveyInfoModel = _isurveyFacade.GetSurveyInfoModel(surveyid);
-                 SurveyInfoModel surveyInfoModel =GetSurveyInfo(surveyid);
-                //showing line breaks in introduction text
+                SurveyInfoModel surveyInfoModel = GetSurveyInfo(surveyid);
                 System.Text.RegularExpressions.Regex regex = new System.Text.RegularExpressions.Regex(@"(\r\n|\r|\n)+");
+                
                 if (surveyInfoModel.IntroductionText != null)
                 {
-                string introText = regex.Replace(surveyInfoModel.IntroductionText.Replace("  ", " &nbsp;"), "<br />");
-
-                surveyInfoModel.IntroductionText = MvcHtmlString.Create(introText).ToString();
+                    string introText = regex.Replace(surveyInfoModel.IntroductionText.Replace("  ", " &nbsp;"), "<br />");
+                    surveyInfoModel.IntroductionText = MvcHtmlString.Create(introText).ToString();
                 }
+                
                 if (surveyInfoModel.TestMode)
                 {
                     surveyInfoModel.TestModeStyleClass = "draft";
                 }
-                else {
-
+                else
+                {
                     surveyInfoModel.TestModeStyleClass = "final";
                 }
+
                 return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, surveyInfoModel);
             }
             catch (Exception ex)
             {
-                //Exception exc = Server.GetLastError();
-                //if ( exc != null)
-                //{
-                //    TempData["exc"] = exc.ToString();
-                //}
-                //TempData["exc"] = ex.Message.ToString();
-                //TempData["exc1"] = ex.Source.ToString();
-                //TempData["exc2"] = ex.StackTrace.ToString();
-               Epi.Web.Utility.ExceptionMessage.SendLogMessage(    ex, this.HttpContext);
-                    
+                Epi.Web.Utility.ExceptionMessage.SendLogMessage(ex, this.HttpContext);
                 return View(Epi.Web.MVC.Constants.Constant.EXCEPTION_PAGE);
             }
         }
-
-
-
-       
 
         /// <summary>
         /// redirecting to Survey controller to action method Index
@@ -108,42 +85,32 @@ namespace Epi.Web.MVC.Controllers
         {
             try
             {
-                bool IsMobileDevice = false;
-
-                IsMobileDevice = this.Request.Browser.IsMobileDevice;
+                bool IsMobileDevice = this.Request.Browser.IsMobileDevice;
+                
                 if (IsMobileDevice == false)
                 {
                     IsMobileDevice = Epi.Web.MVC.Utility.SurveyHelper.IsMobileDevice(this.Request.UserAgent.ToString());
                 }
+                
                 FormsAuthentication.SetAuthCookie("BeginSurvey", false);
-                //put the ResponseId in Temp data for later use
-                //TempData[Epi.Web.MVC.Constants.Constant.RESPONSE_ID] = ResponseID.ToString();
 
                 //create the responseid
                 Guid ResponseID = Guid.NewGuid();
                 TempData[Epi.Web.MVC.Constants.Constant.RESPONSE_ID] = ResponseID.ToString();
+ 
                 // create the first survey response
                 Epi.Web.Common.DTO.SurveyAnswerDTO SurveyAnswer = _isurveyFacade.CreateSurveyAnswer(surveyModel.SurveyId, ResponseID.ToString());
-
-
-
-                
-               // SurveyInfoModel surveyInfoModel = _isurveyFacade.GetSurveyInfoModel(SurveyAnswer.SurveyId);
-                 SurveyInfoModel surveyInfoModel =GetSurveyInfo(SurveyAnswer.SurveyId);
+                SurveyInfoModel surveyInfoModel = GetSurveyInfo(SurveyAnswer.SurveyId);
 
                 // set the survey answer to be production or test 
-                 SurveyAnswer.IsProductionMode = ! surveyInfoModel.TestMode;
-
+                SurveyAnswer.IsProductionMode = !surveyInfoModel.TestMode;
                 XDocument xdoc = XDocument.Parse(surveyInfoModel.XML);
 
                 MvcDynamicForms.Form form = _isurveyFacade.GetSurveyFormData(SurveyAnswer.SurveyId, 1, SurveyAnswer, IsMobileDevice);
 
                 var _FieldsTypeIDs = from _FieldTypeID in
-                                         xdoc.Descendants("Field")
-                                     //where _FieldTypeID.Attribute("Position").Value == (PageNumber - 1).ToString()
+                                     xdoc.Descendants("Field")
                                      select _FieldTypeID;
-                
-                
 
                 TempData["Width"] = form.Width + 100;
 
@@ -182,7 +149,6 @@ namespace Epi.Web.MVC.Controllers
                         form = Epi.Web.MVC.Utility.SurveyHelper.UpdateControlsValuesFromContext(form, ContextDetailList);
 
                         _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, ResponseID.ToString(), form, SurveyAnswer, false, false, 0);
-                        
                     }
                     catch (Exception ex)
                     {
@@ -192,51 +158,40 @@ namespace Epi.Web.MVC.Controllers
                 }
                 else
                 {
-
-
                     SurveyAnswer.XML = CreateResponseDocument(xdoc, SurveyAnswer.XML);
                     form.RequiredFieldsList = RequiredList;
                     _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, SurveyAnswer.ResponseId, form, SurveyAnswer, false, false, 0);
-                       
                 }
 
                 SurveyAnswer = _isurveyFacade.GetSurveyAnswerResponse(SurveyAnswer.ResponseId).SurveyResponseList[0];
 
                 ///////////////////////////// Execute - Record Before - End//////////////////////
-                 
-
                 //string page;
                 // return RedirectToAction(Epi.Web.Models.Constants.Constant.INDEX, Epi.Web.Models.Constants.Constant.SURVEY_CONTROLLER, new {id="page" });
                 return RedirectToAction(Epi.Web.MVC.Constants.Constant.INDEX, Epi.Web.MVC.Constants.Constant.SURVEY_CONTROLLER, new { responseid = ResponseID, PageNumber = 1 });
             }
             catch (Exception ex)
             {
-
-               
                 Epi.Web.Utility.ExceptionMessage.SendLogMessage(    ex, this.HttpContext);
-                  
                 return View(Epi.Web.MVC.Constants.Constant.EXCEPTION_PAGE);
             }
-         }
+        }
 
         private Epi.Web.Common.DTO.SurveyAnswerDTO GetCurrentSurveyAnswer()
         {
             Epi.Web.Common.DTO.SurveyAnswerDTO result = null;
 
-            if (TempData.ContainsKey(Epi.Web.MVC.Constants.Constant.RESPONSE_ID) && TempData[Epi.Web.MVC.Constants.Constant.RESPONSE_ID] != null
-                                                                               && !string.IsNullOrEmpty(TempData[Epi.Web.MVC.Constants.Constant.RESPONSE_ID].ToString()))
+            if (TempData.ContainsKey(Epi.Web.MVC.Constants.Constant.RESPONSE_ID) 
+                && TempData[Epi.Web.MVC.Constants.Constant.RESPONSE_ID] != null
+                && !string.IsNullOrEmpty(TempData[Epi.Web.MVC.Constants.Constant.RESPONSE_ID].ToString())
+                )
             {
-
                 string responseId = TempData[Epi.Web.MVC.Constants.Constant.RESPONSE_ID].ToString();
-
 
                 //TODO: Now repopulating the TempData (by reassigning to responseId) so it persisits, later we will need to find a better 
                 //way to replace it. 
                 TempData[Epi.Web.MVC.Constants.Constant.RESPONSE_ID] = responseId;
                 return _isurveyFacade.GetSurveyAnswerResponse(responseId).SurveyResponseList[0];
-
-
-
             }
 
             return result;
@@ -244,59 +199,42 @@ namespace Epi.Web.MVC.Controllers
         private static int GetNumberOfPages(XDocument Xml)
         {
             var _FieldsTypeIDs = from _FieldTypeID in
-                                     Xml.Descendants("View")
-
+                                 Xml.Descendants("View")
                                  select _FieldTypeID;
 
             return _FieldsTypeIDs.Elements().Count();
         }
 
-
         private string CreateResponseDocument(XDocument pMetaData, string pXML)
         {
             XDocument XmlResponse = new XDocument();
-
-
-           
-            
-
             int NumberOfPages = GetNumberOfPages(pMetaData);
-           for (int i = 0; NumberOfPages > i-1; i++)
-           {
-
-
+            for (int i = 0; NumberOfPages > i-1; i++)
+            {
                 var _FieldsTypeIDs = from _FieldTypeID in
-                                         pMetaData.Descendants("Field")
-                                   where _FieldTypeID.Attribute("Position").Value == (i-1).ToString()
-                                     
+                                     pMetaData.Descendants("Field")
+                                     where _FieldTypeID.Attribute("Position").Value == (i-1).ToString()
                                      select _FieldTypeID;
+
                 PageFields = _FieldsTypeIDs;
 
                 XDocument CurrentPageXml = ToXDocument(CreateResponseXml("", false, i, ""));
-               // XmlResponse = ToXDocument(CreateResponseXml("", true, 0, ""));
         
                 if (i == 0)
                 {
                     XmlResponse = ToXDocument(CreateResponseXml("", true, i, ""));
                 }
-                else { 
+                else
+                { 
                     XmlResponse = MergeXml(XmlResponse, CurrentPageXml, i);  
-                 }
-
-                
+                }
             }
               
             return XmlResponse.ToString();
         }
       
-        //public  string UpdateResponseFromContext(XDocument RequestXml, Dictionary<string, string> ContextDetailList, string ResponseXml, Epi.Web.MVC.Models.SurveyInfoModel surveyModel, string ResponseID)
-
         public XmlDocument CreateResponseXml(string SurveyId, bool AddRoot, int CurrentPage, string Pageid  )
         {
-
-
-          //  Dictionary<string, string> ResponseDetailList = new Dictionary<string, string>();
-
             XmlDocument xml = new XmlDocument();
             XmlElement root = xml.CreateElement("SurveyResponse");
 
@@ -322,9 +260,6 @@ namespace Epi.Web.MVC.Controllers
                 PageRoot.SetAttribute("PageId", Pageid);//Added PageId Attribute to the page node
                 xml.AppendChild(PageRoot);
             }
-
-           // foreach (KeyValuePair<string, string> pair in ResponseDetailList)
-           // XElement
 
             foreach (var Field in this.PageFields)
             {
@@ -353,7 +288,6 @@ namespace Epi.Web.MVC.Controllers
             XDocument xdoc = XDocument.Parse(SavedXml.ToString());
             XElement oldXElement = xdoc.XPathSelectElement("SurveyResponse/Page[@PageNumber = '" + Pagenumber.ToString() + "']");
 
-
             if (oldXElement == null)
             {
                 SavedXml.Root.Add(CurrentPageResponseXml.Elements());
@@ -366,18 +300,17 @@ namespace Epi.Web.MVC.Controllers
                 xdoc.Root.Add(CurrentPageResponseXml.Elements());
                 return xdoc;
             }
-
-
         }
 
-        public void   SetRequiredList(XElement _Fields)
+        public void SetRequiredList(XElement _Fields)
         {
-
+            bool isRequired = false;
+            string value = _Fields.Attribute("IsRequired").Value;
             
-
-          
-            if (bool.Parse(_Fields.Attribute("IsRequired").Value))
-                {
+            if (bool.TryParse(value, out isRequired))
+            {
+                if (isRequired)
+                { 
                     if (!RequiredList.Contains(_Fields.Attribute("Name").Value))
                     {
                         if (RequiredList != "")
@@ -390,32 +323,13 @@ namespace Epi.Web.MVC.Controllers
                         }
                     }
                 }
-
-        
-            
-             
+            }
         }
-         public SurveyInfoModel GetSurveyInfo(string SurveyId)
+         
+        public SurveyInfoModel GetSurveyInfo(string SurveyId)
         {
-
-       /*    var CacheObj = HttpRuntime.Cache.Get(SurveyId);
-           if (CacheObj ==null)
-           {
-
-                      SurveyInfoModel surveyInfoModel = _isurveyFacade.GetSurveyInfoModel(SurveyId);
-                      HttpRuntime.Cache.Insert(SurveyId, surveyInfoModel, null, Cache.NoAbsoluteExpiration, TimeSpan.FromDays(1));
-             
-                   return surveyInfoModel;
-              }
-              else
-              
-              {
-                  return (SurveyInfoModel)CacheObj;
-      
-              }*/
             SurveyInfoModel surveyInfoModel = _isurveyFacade.GetSurveyInfoModel(SurveyId);
             return surveyInfoModel;
         }
-    
     }
 }
