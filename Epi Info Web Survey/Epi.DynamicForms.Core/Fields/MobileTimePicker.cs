@@ -42,7 +42,7 @@ namespace MvcDynamicForms.Fields
             txt.Attributes.Add("id", inputName);
             txt.Attributes.Add("type", "date");
             txt.Attributes.Add("data-role", "datebox");
-            txt.Attributes.Add("data-options", "{\"mode\": \"timeflipbox\" , \"themeInput\":\"e\" , \"themeButton\" : \"e\", \"pickPageButtonTheme\": \"e\", \"pickPageInputTheme\":\"e\", \"pickPageFlipButtonTheme\":\"a\", \"pickPageTheme\":\"e\"}");
+            txt.Attributes.Add("data-options", "{\"mode\": \"timebox\" , \"themeInput\":\"e\" , \"themeButton\" : \"e\", \"pickPageButtonTheme\": \"e\", \"pickPageInputTheme\":\"e\", \"pickPageFlipButtonTheme\":\"a\", \"pickPageTheme\":\"e\"}");
             //txt.Attributes.Add("data-theme", "pickPageInputTheme");
            
             
