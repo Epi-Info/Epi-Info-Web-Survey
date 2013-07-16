@@ -240,7 +240,6 @@ namespace Epi.Web.MVC.Controllers
 
             if (CurrentPage == 0)
             {
-
                 root.SetAttribute("SurveyId", SurveyId);
                 root.SetAttribute("LastPageVisited", "1");
                 root.SetAttribute("HiddenFieldsList", "");
@@ -254,8 +253,6 @@ namespace Epi.Web.MVC.Controllers
             XmlElement PageRoot = xml.CreateElement("Page");
             if (CurrentPage != 0)
             {
-
-
                 PageRoot.SetAttribute("PageNumber", CurrentPage.ToString());
                 PageRoot.SetAttribute("PageId", Pageid);//Added PageId Attribute to the page node
                 xml.AppendChild(PageRoot);
@@ -271,9 +268,9 @@ namespace Epi.Web.MVC.Controllers
                 SetRequiredList(Field);
             }
 
-
             return xml;
         }
+
         public static XDocument ToXDocument( XmlDocument xmlDocument)
         {
             using (var nodeReader = new XmlNodeReader(xmlDocument))
@@ -282,9 +279,9 @@ namespace Epi.Web.MVC.Controllers
                 return XDocument.Load(nodeReader);
             }
         }
+        
         public static XDocument MergeXml(XDocument SavedXml, XDocument CurrentPageResponseXml, int Pagenumber)
         {
-
             XDocument xdoc = XDocument.Parse(SavedXml.ToString());
             XElement oldXElement = xdoc.XPathSelectElement("SurveyResponse/Page[@PageNumber = '" + Pagenumber.ToString() + "']");
 
