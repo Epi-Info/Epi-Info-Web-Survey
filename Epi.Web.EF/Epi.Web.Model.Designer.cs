@@ -8,12 +8,13 @@
 //------------------------------------------------------------------------------
 
 using System;
+using System.ComponentModel;
+using System.Data.EntityClient;
 using System.Data.Objects;
 using System.Data.Objects.DataClasses;
-using System.Data.EntityClient;
-using System.ComponentModel;
-using System.Xml.Serialization;
+using System.Linq;
 using System.Runtime.Serialization;
+using System.Xml.Serialization;
 
 [assembly: EdmSchemaAttribute()]
 #region EDM Relationship Metadata
@@ -168,8 +169,25 @@ namespace Epi.Web.EF
             }
         }
         private ObjectSet<Organization> _Organizations;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Admin> Admins
+        {
+            get
+            {
+                if ((_Admins == null))
+                {
+                    _Admins = base.CreateObjectSet<Admin>("Admins");
+                }
+                return _Admins;
+            }
+        }
+        private ObjectSet<Admin> _Admins;
 
         #endregion
+
         #region AddTo Methods
     
         /// <summary>
@@ -219,14 +237,157 @@ namespace Epi.Web.EF
         {
             base.AddObject("Organizations", organization);
         }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Admins EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToAdmins(Admin admin)
+        {
+            base.AddObject("Admins", admin);
+        }
 
         #endregion
+
     }
-    
 
     #endregion
-    
+
     #region Entities
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="EIWSModel", Name="Admin")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class Admin : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new Admin object.
+        /// </summary>
+        /// <param name="adminId">Initial value of the AdminId property.</param>
+        /// <param name="adminEmail">Initial value of the AdminEmail property.</param>
+        /// <param name="organizationId">Initial value of the OrganizationId property.</param>
+        /// <param name="isActive">Initial value of the IsActive property.</param>
+        public static Admin CreateAdmin(global::System.Guid adminId, global::System.String adminEmail, global::System.Int32 organizationId, global::System.Boolean isActive)
+        {
+            Admin admin = new Admin();
+            admin.AdminId = adminId;
+            admin.AdminEmail = adminEmail;
+            admin.OrganizationId = organizationId;
+            admin.IsActive = isActive;
+            return admin;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Guid AdminId
+        {
+            get
+            {
+                return _AdminId;
+            }
+            set
+            {
+                if (_AdminId != value)
+                {
+                    OnAdminIdChanging(value);
+                    ReportPropertyChanging("AdminId");
+                    _AdminId = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("AdminId");
+                    OnAdminIdChanged();
+                }
+            }
+        }
+        private global::System.Guid _AdminId;
+        partial void OnAdminIdChanging(global::System.Guid value);
+        partial void OnAdminIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String AdminEmail
+        {
+            get
+            {
+                return _AdminEmail;
+            }
+            set
+            {
+                OnAdminEmailChanging(value);
+                ReportPropertyChanging("AdminEmail");
+                _AdminEmail = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("AdminEmail");
+                OnAdminEmailChanged();
+            }
+        }
+        private global::System.String _AdminEmail;
+        partial void OnAdminEmailChanging(global::System.String value);
+        partial void OnAdminEmailChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 OrganizationId
+        {
+            get
+            {
+                return _OrganizationId;
+            }
+            set
+            {
+                OnOrganizationIdChanging(value);
+                ReportPropertyChanging("OrganizationId");
+                _OrganizationId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("OrganizationId");
+                OnOrganizationIdChanged();
+            }
+        }
+        private global::System.Int32 _OrganizationId;
+        partial void OnOrganizationIdChanging(global::System.Int32 value);
+        partial void OnOrganizationIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean IsActive
+        {
+            get
+            {
+                return _IsActive;
+            }
+            set
+            {
+                OnIsActiveChanging(value);
+                ReportPropertyChanging("IsActive");
+                _IsActive = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("IsActive");
+                OnIsActiveChanged();
+            }
+        }
+        private global::System.Boolean _IsActive;
+        partial void OnIsActiveChanging(global::System.Boolean value);
+        partial void OnIsActiveChanged();
+
+        #endregion
+
+    
+    }
     
     /// <summary>
     /// No Metadata Documentation available.
@@ -252,6 +413,7 @@ namespace Epi.Web.EF
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -306,6 +468,7 @@ namespace Epi.Web.EF
         partial void OnStatusChanged();
 
         #endregion
+
     
         #region Navigation Properties
     
@@ -332,6 +495,7 @@ namespace Epi.Web.EF
         }
 
         #endregion
+
     }
     
     /// <summary>
@@ -356,6 +520,7 @@ namespace Epi.Web.EF
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -410,6 +575,7 @@ namespace Epi.Web.EF
         partial void OnSurveyTypeChanged();
 
         #endregion
+
     
         #region Navigation Properties
     
@@ -436,6 +602,7 @@ namespace Epi.Web.EF
         }
 
         #endregion
+
     }
     
     /// <summary>
@@ -455,17 +622,20 @@ namespace Epi.Web.EF
         /// <param name="organizationKey">Initial value of the OrganizationKey property.</param>
         /// <param name="organization1">Initial value of the Organization1 property.</param>
         /// <param name="isEnabled">Initial value of the IsEnabled property.</param>
-        public static Organization CreateOrganization(global::System.Int32 organizationId, global::System.String organizationKey, global::System.String organization1, global::System.Boolean isEnabled)
+        /// <param name="isHostOrganization">Initial value of the IsHostOrganization property.</param>
+        public static Organization CreateOrganization(global::System.Int32 organizationId, global::System.String organizationKey, global::System.String organization1, global::System.Boolean isEnabled, global::System.Boolean isHostOrganization)
         {
             Organization organization = new Organization();
             organization.OrganizationId = organizationId;
             organization.OrganizationKey = organizationKey;
             organization.Organization1 = organization1;
             organization.IsEnabled = isEnabled;
+            organization.IsHostOrganization = isHostOrganization;
             return organization;
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -566,8 +736,33 @@ namespace Epi.Web.EF
         private global::System.Boolean _IsEnabled;
         partial void OnIsEnabledChanging(global::System.Boolean value);
         partial void OnIsEnabledChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean IsHostOrganization
+        {
+            get
+            {
+                return _IsHostOrganization;
+            }
+            set
+            {
+                OnIsHostOrganizationChanging(value);
+                ReportPropertyChanging("IsHostOrganization");
+                _IsHostOrganization = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("IsHostOrganization");
+                OnIsHostOrganizationChanged();
+            }
+        }
+        private global::System.Boolean _IsHostOrganization;
+        partial void OnIsHostOrganizationChanging(global::System.Boolean value);
+        partial void OnIsHostOrganizationChanged();
 
         #endregion
+
     
         #region Navigation Properties
     
@@ -594,6 +789,7 @@ namespace Epi.Web.EF
         }
 
         #endregion
+
     }
     
     /// <summary>
@@ -638,6 +834,7 @@ namespace Epi.Web.EF
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -1076,6 +1273,7 @@ namespace Epi.Web.EF
         partial void OnLogoURLChanged();
 
         #endregion
+
     
         #region Navigation Properties
     
@@ -1178,6 +1376,7 @@ namespace Epi.Web.EF
         }
 
         #endregion
+
     }
     
     /// <summary>
@@ -1216,6 +1415,7 @@ namespace Epi.Web.EF
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -1462,6 +1662,7 @@ namespace Epi.Web.EF
         partial void OnIsProductionModeChanged();
 
         #endregion
+
     
         #region Navigation Properties
     
@@ -1542,6 +1743,7 @@ namespace Epi.Web.EF
         }
 
         #endregion
+
     }
     
     /// <summary>
@@ -1570,6 +1772,7 @@ namespace Epi.Web.EF
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -1696,9 +1899,11 @@ namespace Epi.Web.EF
         partial void OndefinitionChanged();
 
         #endregion
+
     
     }
 
     #endregion
+
     
 }
