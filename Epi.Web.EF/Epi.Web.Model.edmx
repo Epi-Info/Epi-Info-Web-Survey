@@ -6,6 +6,7 @@
     <edmx:StorageModels>
     <Schema Namespace="EIWSModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="EIWSModelStoreContainer">
+          <EntitySet Name="Admin" EntityType="EIWSModel.Store.Admin" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="lk_Status" EntityType="EIWSModel.Store.lk_Status" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="lk_SurveyType" EntityType="EIWSModel.Store.lk_SurveyType" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Organization" EntityType="EIWSModel.Store.Organization" store:Type="Tables" Schema="dbo" />
@@ -29,6 +30,15 @@
             <End Role="SurveyResponse" EntitySet="SurveyResponse" />
           </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="AdminId" />
+          </Key>
+          <Property Name="AdminId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="AdminEmail" Type="varchar" Nullable="false" MaxLength="300" />
+          <Property Name="OrganizationId" Type="int" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="lk_Status">
           <Key>
             <PropertyRef Name="StatusId" />
@@ -51,6 +61,7 @@
           <Property Name="OrganizationKey" Type="nvarchar" Nullable="false" MaxLength="500" />
           <Property Name="Organization" Type="nvarchar" Nullable="false" MaxLength="400" />
           <Property Name="IsEnabled" Type="bit" Nullable="false" />
+          <Property Name="IsHostOrganization" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="SurveyMetaData">
           <Key>
@@ -175,6 +186,7 @@
             <End Role="Organization" EntitySet="Organizations" />
             <End Role="SurveyMetaData" EntitySet="SurveyMetaDatas" />
           </AssociationSet>
+          <EntitySet Name="Admins" EntityType="EIWSModel.Admin" />
           </EntityContainer>
         <EntityType Name="lk_Status">
           <Key>
@@ -290,6 +302,7 @@
           <Property Type="String" Name="Organization1" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Type="Boolean" Name="IsEnabled" Nullable="false" />
           <NavigationProperty Name="SurveyMetaDatas" Relationship="EIWSModel.FK_SurveyMetaData_Organization" FromRole="Organization" ToRole="SurveyMetaData" />
+          <Property Type="Boolean" Name="IsHostOrganization" Nullable="false" />
         </EntityType>
         <Association Name="FK_SurveyMetaData_Organization">
           <End Type="EIWSModel.Organization" Role="Organization" Multiplicity="1" />
@@ -303,6 +316,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="AdminId" />
+          </Key>
+          <Property Type="Guid" Name="AdminId" Nullable="false" />
+          <Property Type="String" Name="AdminEmail" Nullable="false" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="OrganizationId" Nullable="false" />
+          <Property Type="Boolean" Name="IsActive" Nullable="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -379,10 +401,21 @@
           <EntitySetMapping Name="Organizations">
             <EntityTypeMapping TypeName="EIWSModel.Organization">
               <MappingFragment StoreEntitySet="Organization">
+                <ScalarProperty Name="IsHostOrganization" ColumnName="IsHostOrganization" />
                 <ScalarProperty Name="IsEnabled" ColumnName="IsEnabled" />
                 <ScalarProperty Name="Organization1" ColumnName="Organization" />
                 <ScalarProperty Name="OrganizationKey" ColumnName="OrganizationKey" />
                 <ScalarProperty Name="OrganizationId" ColumnName="OrganizationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Admins">
+            <EntityTypeMapping TypeName="EIWSModel.Admin">
+              <MappingFragment StoreEntitySet="Admin">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="OrganizationId" ColumnName="OrganizationId" />
+                <ScalarProperty Name="AdminEmail" ColumnName="AdminEmail" />
+                <ScalarProperty Name="AdminId" ColumnName="AdminId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -429,6 +462,7 @@
           <ConnectorPoint PointX="4.5" PointY="6.5" />
           <ConnectorPoint PointX="4.5" PointY="5.932109375" />
         </AssociationConnector>
+        <EntityTypeShape EntityType="EIWSModel.Admin" Width="1.5" PointX="6.375" PointY="5.75" Height="1.7879850260416674" />
         </Diagram>
     </Diagrams>
   </Designer>

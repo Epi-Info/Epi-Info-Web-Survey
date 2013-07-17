@@ -228,7 +228,23 @@ namespace Epi.Web.Common.ObjectMapping
             if (pBO == null) return null;
             return pBO.Select(c => ToDataTransferObject(c)).ToList();
         }
-        
+
+        public static AdminDTO ToAdminDTO(AdminBO AdminBO)
+            
+            {
+
+           
+
+            return new AdminDTO
+            {
+                 
+                 AdminEmail = AdminBO.AdminEmail,
+                 IsActive = AdminBO.IsActive,
+                 OrganizationId = AdminBO.OrganizationId
+
+            };
+            
+            }
 
     }
 }
