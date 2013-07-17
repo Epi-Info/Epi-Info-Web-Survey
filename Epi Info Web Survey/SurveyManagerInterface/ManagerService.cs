@@ -948,5 +948,41 @@ namespace Epi.Web.WCF.SurveyService
                   throw new FaultException<CustomFaultException>(customFaultException);
               }
          }
+
+         public AdminResponse GetOrganizationAdmins(AdminRequest request) 
+             {
+
+             var response = new AdminResponse();
+
+            try{
+
+             Epi.Web.Interfaces.DataInterfaces.IAdminDao AdminDao = new EF.EntityAdminDao();
+             Epi.Web.BLL.Admin Implementation = new Epi.Web.BLL.Admin(AdminDao);
+            List<AdminBO> adminBO = Implementation.GetAdminInfoByOrgKey(request.OrganizationKey.ToString());
+            AdminDTO AdminDTO = new AdminDTO();
+            response.AdminList = new List<AdminDTO>();
+            foreach (AdminBO Item in adminBO)
+                {
+               
+                AdminDTO = Mapper.ToAdminDTO(Item);
+               (response.AdminList).Add(AdminDTO);
+
+                }
+
+
+
+            return response;
+             }
+             catch (Exception ex)
+              {
+                  CustomFaultException customFaultException = new CustomFaultException();
+                  customFaultException.CustomMessage = ex.Message;
+                  customFaultException.Source = ex.Source;
+                  customFaultException.StackTrace = ex.StackTrace;
+                  customFaultException.HelpLink = ex.HelpLink;
+                  throw new FaultException<CustomFaultException>(customFaultException);
+              }
+             }
+
     }
 }
