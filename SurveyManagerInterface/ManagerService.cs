@@ -253,8 +253,15 @@ namespace Epi.Web.WCF.SurveyService
                                         Implementation.UpdateSurveyInfo(SurveyInfo);
                                         response.SurveyInfoList.Add(Mapper.ToDataTransferObject(SurveyInfo));
                                         response.Message = SurveyInfo.StatusText;
-                                        SendEmailToAdmins(SurveyInfo);
+                                         
                                     }
+                                    else if (request.Action == "UpdateMode")
+                                        {
+                                        Implementation.UpdateSurveyInfo(SurveyInfo);
+                                        response.SurveyInfoList.Add(Mapper.ToDataTransferObject(SurveyInfo));
+                                        response.Message = SurveyInfo.StatusText;
+                                        SendEmailToAdmins(SurveyInfo);
+                                        }
                                     else if (request.Action == "Delete")
                                     {
                                         var criteria = request.Criteria as SurveyInfoCriteria;
