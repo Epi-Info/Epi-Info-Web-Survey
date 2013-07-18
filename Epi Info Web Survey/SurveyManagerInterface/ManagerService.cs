@@ -253,6 +253,7 @@ namespace Epi.Web.WCF.SurveyService
                                         Implementation.UpdateSurveyInfo(SurveyInfo);
                                         response.SurveyInfoList.Add(Mapper.ToDataTransferObject(SurveyInfo));
                                         response.Message = SurveyInfo.StatusText;
+                                        SendEmailToAdmins(SurveyInfo);
                                     }
                                     else if (request.Action == "Delete")
                                     {
@@ -983,6 +984,29 @@ namespace Epi.Web.WCF.SurveyService
                   throw new FaultException<CustomFaultException>(customFaultException);
               }
              }
+
+         public void SendEmailToAdmins(SurveyInfoBO SurveyInfo)
+            {
+            Epi.Web.Common.Message.AdminRequest AdminRequest = new Web.Common.Message.AdminRequest();
+            Epi.Web.Common.Message.AdminResponse AdminResult = new Web.Common.Message.AdminResponse();
+            AdminRequest.OrganizationKey = new Guid(SurveyInfo.OrganizationKey.ToString()).ToString();
+
+            List<string> AdminList = new List<string>();
+            AdminResult = GetOrganizationAdmins(AdminRequest);
+
+            foreach (var item in AdminResult.AdminList)
+                {
+                AdminList.Add(item.AdminEmail);
+                }
+            
+            Epi.Web.Common.Email.Email Email = new Web.Common.Email.Email();
+            Email.Body = "The following survey has been promoted to FINAL mode:\n Title:" + SurveyInfo.SurveyName + " \n Survey ID:" + SurveyInfo.SurveyId + " \nOrganization:" + SurveyInfo.OrganizationName + "\n Start Date & Time:" + SurveyInfo.StartDate + "\n Closing Date & Time:" + SurveyInfo.ClosingDate + " \n \n \n  Thank you.";
+            Email.From = ConfigurationManager.AppSettings["EMAIL_FROM"];
+            Email.To = AdminList;
+            Email.Subject = "Survey -" + SurveyInfo.SurveyName + " has been promoted to FINAL";
+            bool success = Epi.Web.Common.Email.EmailHandler.SendMessage(Email);
+            
+            }
 
     }
 }
