@@ -44,13 +44,13 @@
  }
 
           <div id="infobox">
-            @if (@Model.SurveyNumber != null)
+            @if (!string.IsNullOrWhiteSpace(@Model.SurveyNumber))
                 {
                     <div id="surveyno">
                         <span class="boldlabel">Survey #:</span> <span>
                            @Model.SurveyNumber</span></div>
                 }
-         @if (@Model.OrganizationName != null)  
+         @if (!string.IsNullOrWhiteSpace(@Model.OrganizationName))  
          {
                   <div id="orgn">
                     <span class="boldlabel">Organization:</span> <span>
