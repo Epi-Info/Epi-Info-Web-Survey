@@ -667,3 +667,31 @@ span.ui-icon-arrow-d[style*="background-color: yellow;"]{background-color: #9595
 span.ui-icon-checkbox-on[style*="background-color: yellow;"]{background-color: #4288b9 !important;}
 
 span.ui-icon-radio-on[style*="background-color: yellow;"]{background-color: #4288b9 !important;}
+
+.draft
+{
+   background-image:url('../images/DRAFT.png');
+    background-repeat:no-repeat;
+    background-position: center top;
+    background-size: 100%;
+    background-origin:content-box;
+    background-repeat:repeat-y;
+   
+}
+ 
+ .final
+{
+     background-image: none !important;
+}
+
+/*#header h1:after
+{
+    content:"DRAFT";
+    color:Blue
+}*/
+.TestHeader h1:after
+{
+    /*content:"DRAFT";
+    color:Blue;*/
+    
+    }
