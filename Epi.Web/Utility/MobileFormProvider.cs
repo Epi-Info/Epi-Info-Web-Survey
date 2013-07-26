@@ -34,6 +34,11 @@ namespace Epi.Web.MVC.Utility
             string XML = form.SurveyInfo.XML;
 
             form.CurrentPage = PageNumber;
+            if (form.SurveyInfo.IsTestMode)
+                {
+                form.TestModeStyleClass = "draft";
+                }
+           
             XDocument xdoc = XDocument.Parse(XML);
             if (string.IsNullOrEmpty(XML))
             {
