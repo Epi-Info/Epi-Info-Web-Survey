@@ -36,8 +36,10 @@
     </div>
     <div style="clear:both;"></div>
 </div>
-@using (Html.BeginForm())
-       { 
+ 		 
+		@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "myform", @class = @Model.TestModeStyleClass.ToString() }))
+		{ 
+    
         
             <div id="content" style="margin-bottom:200px;">
                @if (Model.ClosingDate.Date >= DateTime.Now.Date && Model.SurveyType == 2)

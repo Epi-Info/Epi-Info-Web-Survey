@@ -62,15 +62,35 @@
 //});
 </script>
  
- <div id="header">
+@* <div id="header">
             <h1>
                 @Model.SurveyName </h1>
              
-        </div>
-        
-
-       @using (Html.BeginForm())
-       { 
+        </div>*@
+         @if (@Model.TestModeStyleClass != "")
+          {
+              <div id="header" class="TestHeader">
+  
+                <h1>
+                    @Model.SurveyName 
+                </h1>
+      
+              </div>
+           }
+         else 
+         { 
+             <div id="header"  >
+               <h1>
+                   @Model.SurveyName 
+               </h1>
+      
+             </div>
+ 
+       }
+       		 
+		@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "myform", @class = @Model.TestModeStyleClass.ToString() }))
+		{ 
+     
         
             <div id="content" style="margin-bottom:200px;">
                @if(Model.ClosingDate >= DateTime.Now)

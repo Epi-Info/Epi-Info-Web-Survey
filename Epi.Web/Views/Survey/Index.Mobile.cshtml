@@ -498,7 +498,9 @@ function ReplaceString(string){
         </div>
     </div>
      } 
-        @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "myform" }))
+     		 
+		@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "myform", @class = @Model.TestModeStyleClass.ToString() }))
+	
         {  
            
               
