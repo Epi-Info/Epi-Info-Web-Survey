@@ -41,6 +41,12 @@ namespace Epi.Web.MVC
             ); // Parameter defaults
 
             routes.MapRoute
+         (
+             null, // Route name
+             "Test/{surveyid}", // URL with parameters
+             new { controller = "Test", action = "Index", surveyid = UrlParameter.Optional }
+         ); // Parameter defaults
+            routes.MapRoute
      (
        null,                                              // Route name
        "Survey/UpdateResponseXml/{id}",                           // URL with parameters
