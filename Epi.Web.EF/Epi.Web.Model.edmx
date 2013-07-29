@@ -13,6 +13,10 @@
           <EntitySet Name="SurveyMetaData" EntityType="EIWSModel.Store.SurveyMetaData" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="SurveyResponse" EntityType="EIWSModel.Store.SurveyResponse" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="sysdiagrams" EntityType="EIWSModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Admin_Organization" Association="EIWSModel.Store.FK_Admin_Organization">
+            <End Role="Organization" EntitySet="Organization" />
+            <End Role="Admin" EntitySet="Admin" />
+          </AssociationSet>
           <AssociationSet Name="FK_SurveyMetaData_lk_SurveyType" Association="EIWSModel.Store.FK_SurveyMetaData_lk_SurveyType">
             <End Role="lk_SurveyType" EntitySet="lk_SurveyType" />
             <End Role="SurveyMetaData" EntitySet="SurveyMetaData" />
@@ -38,6 +42,7 @@
           <Property Name="AdminEmail" Type="varchar" Nullable="false" MaxLength="300" />
           <Property Name="OrganizationId" Type="int" Nullable="false" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="Notify" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="lk_Status">
           <Key>
@@ -111,6 +116,18 @@
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
+        <Association Name="FK_Admin_Organization">
+          <End Role="Organization" Type="EIWSModel.Store.Organization" Multiplicity="1" />
+          <End Role="Admin" Type="EIWSModel.Store.Admin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="OrganizationId" />
+            </Principal>
+            <Dependent Role="Admin">
+              <PropertyRef Name="OrganizationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_SurveyMetaData_lk_SurveyType">
           <End Role="lk_SurveyType" Type="EIWSModel.Store.lk_SurveyType" Multiplicity="1" />
           <End Role="SurveyMetaData" Type="EIWSModel.Store.SurveyMetaData" Multiplicity="*" />
@@ -159,6 +176,36 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="fn_diagramobjects" ReturnType="int" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -187,6 +234,10 @@
             <End Role="SurveyMetaData" EntitySet="SurveyMetaDatas" />
           </AssociationSet>
           <EntitySet Name="Admins" EntityType="EIWSModel.Admin" />
+          <AssociationSet Name="FK_Admin_Organization" Association="EIWSModel.FK_Admin_Organization">
+            <End Role="Organization" EntitySet="Organizations" />
+            <End Role="Admin" EntitySet="Admins" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="lk_Status">
           <Key>
@@ -303,6 +354,7 @@
           <Property Type="Boolean" Name="IsEnabled" Nullable="false" />
           <NavigationProperty Name="SurveyMetaDatas" Relationship="EIWSModel.FK_SurveyMetaData_Organization" FromRole="Organization" ToRole="SurveyMetaData" />
           <Property Type="Boolean" Name="IsHostOrganization" Nullable="false" />
+          <NavigationProperty Name="Admins" Relationship="EIWSModel.FK_Admin_Organization" FromRole="Organization" ToRole="Admin" />
         </EntityType>
         <Association Name="FK_SurveyMetaData_Organization">
           <End Type="EIWSModel.Organization" Role="Organization" Multiplicity="1" />
@@ -324,7 +376,21 @@
           <Property Type="String" Name="AdminEmail" Nullable="false" MaxLength="300" FixedLength="false" Unicode="false" />
           <Property Type="Int32" Name="OrganizationId" Nullable="false" />
           <Property Type="Boolean" Name="IsActive" Nullable="false" />
+          <Property Type="Boolean" Name="Notify" Nullable="false" />
+          <NavigationProperty Name="Organization" Relationship="EIWSModel.FK_Admin_Organization" FromRole="Admin" ToRole="Organization" />
         </EntityType>
+        <Association Name="FK_Admin_Organization">
+          <End Type="EIWSModel.Organization" Role="Organization" Multiplicity="1" />
+          <End Type="EIWSModel.Admin" Role="Admin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="OrganizationId" />
+            </Principal>
+            <Dependent Role="Admin">
+              <PropertyRef Name="OrganizationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -412,6 +478,7 @@
           <EntitySetMapping Name="Admins">
             <EntityTypeMapping TypeName="EIWSModel.Admin">
               <MappingFragment StoreEntitySet="Admin">
+                <ScalarProperty Name="Notify" ColumnName="Notify" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="OrganizationId" ColumnName="OrganizationId" />
                 <ScalarProperty Name="AdminEmail" ColumnName="AdminEmail" />
@@ -462,7 +529,11 @@
           <ConnectorPoint PointX="4.5" PointY="6.5" />
           <ConnectorPoint PointX="4.5" PointY="5.932109375" />
         </AssociationConnector>
-        <EntityTypeShape EntityType="EIWSModel.Admin" Width="1.5" PointX="6.375" PointY="5.75" Height="1.7879850260416674" />
+        <EntityTypeShape EntityType="EIWSModel.Admin" Width="1.5" PointX="6.5" PointY="5.875" Height="1.7879850260416674" />
+        <AssociationConnector Association="EIWSModel.FK_Admin_Organization" >
+          <ConnectorPoint PointX="5" PointY="7.2737939453125" />
+          <ConnectorPoint PointX="6.5" PointY="7.2737939453125" />
+        </AssociationConnector>
         </Diagram>
     </Diagrams>
   </Designer>

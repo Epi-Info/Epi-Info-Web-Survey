@@ -23,6 +23,7 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("EIWSModel", "FK_SurveyResponse_lk_Status", "lk_Status", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Epi.Web.EF.lk_Status), "SurveyResponse", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Epi.Web.EF.SurveyResponse), true)]
 [assembly: EdmRelationshipAttribute("EIWSModel", "FK_SurveyResponse_SurveyMetaData", "SurveyMetaData", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Epi.Web.EF.SurveyMetaData), "SurveyResponse", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Epi.Web.EF.SurveyResponse), true)]
 [assembly: EdmRelationshipAttribute("EIWSModel", "FK_SurveyMetaData_Organization", "Organization", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Epi.Web.EF.Organization), "SurveyMetaData", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Epi.Web.EF.SurveyMetaData), true)]
+[assembly: EdmRelationshipAttribute("EIWSModel", "FK_Admin_Organization", "Organization", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Epi.Web.EF.Organization), "Admin", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Epi.Web.EF.Admin), true)]
 
 #endregion
 
@@ -271,13 +272,15 @@ namespace Epi.Web.EF
         /// <param name="adminEmail">Initial value of the AdminEmail property.</param>
         /// <param name="organizationId">Initial value of the OrganizationId property.</param>
         /// <param name="isActive">Initial value of the IsActive property.</param>
-        public static Admin CreateAdmin(global::System.Guid adminId, global::System.String adminEmail, global::System.Int32 organizationId, global::System.Boolean isActive)
+        /// <param name="notify">Initial value of the Notify property.</param>
+        public static Admin CreateAdmin(global::System.Guid adminId, global::System.String adminEmail, global::System.Int32 organizationId, global::System.Boolean isActive, global::System.Boolean notify)
         {
             Admin admin = new Admin();
             admin.AdminId = adminId;
             admin.AdminEmail = adminEmail;
             admin.OrganizationId = organizationId;
             admin.IsActive = isActive;
+            admin.Notify = notify;
             return admin;
         }
 
@@ -383,10 +386,76 @@ namespace Epi.Web.EF
         private global::System.Boolean _IsActive;
         partial void OnIsActiveChanging(global::System.Boolean value);
         partial void OnIsActiveChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean Notify
+        {
+            get
+            {
+                return _Notify;
+            }
+            set
+            {
+                OnNotifyChanging(value);
+                ReportPropertyChanging("Notify");
+                _Notify = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Notify");
+                OnNotifyChanged();
+            }
+        }
+        private global::System.Boolean _Notify;
+        partial void OnNotifyChanging(global::System.Boolean value);
+        partial void OnNotifyChanged();
 
         #endregion
 
     
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("EIWSModel", "FK_Admin_Organization", "Organization")]
+        public Organization Organization
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Organization>("EIWSModel.FK_Admin_Organization", "Organization").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Organization>("EIWSModel.FK_Admin_Organization", "Organization").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Organization> OrganizationReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Organization>("EIWSModel.FK_Admin_Organization", "Organization");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Organization>("EIWSModel.FK_Admin_Organization", "Organization", value);
+                }
+            }
+        }
+
+        #endregion
+
     }
     
     /// <summary>
@@ -784,6 +853,28 @@ namespace Epi.Web.EF
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<SurveyMetaData>("EIWSModel.FK_SurveyMetaData_Organization", "SurveyMetaData", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("EIWSModel", "FK_Admin_Organization", "Admin")]
+        public EntityCollection<Admin> Admins
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Admin>("EIWSModel.FK_Admin_Organization", "Admin");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Admin>("EIWSModel.FK_Admin_Organization", "Admin", value);
                 }
             }
         }

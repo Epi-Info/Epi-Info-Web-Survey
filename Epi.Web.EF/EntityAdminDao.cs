@@ -39,7 +39,7 @@ namespace Epi.Web.EF
                         }
 
                     var AdminQuery = (from response in Context.Admins
-                                      where response.OrganizationId == OrgId && response.IsActive == true
+                                      where response.OrganizationId == OrgId && response.IsActive == true && response.Notify == true 
                                  select new { response });
 
                     foreach (var row in AdminQuery)
