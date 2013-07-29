@@ -15,7 +15,7 @@ using System.Web.Caching;
 using System.Web.UI;
 using Epi.Web.EF;
 using System.ServiceModel.Description;
-
+using Epi.Web.Common.Security; 
 namespace Epi.Web.MVC.Controllers
 {
     public class TestController : Controller
@@ -50,7 +50,12 @@ namespace Epi.Web.MVC.Controllers
                 {
                 
                
-                string _connectionString = ConfigurationManager.AppSettings["TEST_CONNECTION_STRING"];
+               // string _connectionString = ConfigurationManager.AppSettings["TEST_CONNECTION_STRING"];
+                string connectionStringName = "EIWSADO";
+
+                //Decrypt connection string here
+                string _connectionString = Cryptography.Decrypt(ConfigurationManager.ConnectionStrings[connectionStringName].ConnectionString);
+          
                // string _connectionString ="Data Source=ETIDHAP56-SQL;Initial Catalog=OSELS_EIWS;User ID=SA;Password=put6uQ";
                 using (var conn = new System.Data.SqlClient.SqlConnection(_connectionString))
                 using (var cmd = conn.CreateCommand())
