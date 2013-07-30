@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "Survey Home";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    
 }
 
 <script type="text/javascript" >
@@ -149,5 +150,12 @@
                
        </div>
      
+ 
+
+     @{if (ViewBag.Omniture.IsEnabled == true)
+        { 
+         Html.RenderPartial("OmniturePartial");  
+        } 
+        }
      <br>
  
