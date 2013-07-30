@@ -48,6 +48,7 @@ namespace Epi.Web.MVC.Controllers
         {
             try
             {
+            string SurveyMode="";
                 SurveyInfoModel surveyInfoModel = GetSurveyInfo(surveyid);
                 System.Text.RegularExpressions.Regex regex = new System.Text.RegularExpressions.Regex(@"(\r\n|\r|\n)+");
                 
@@ -60,11 +61,20 @@ namespace Epi.Web.MVC.Controllers
                 if (surveyInfoModel.TestMode)
                 {
                     surveyInfoModel.TestModeStyleClass = "draft";
+                    SurveyMode = "draft";
                 }
                 else
                 {
                     surveyInfoModel.TestModeStyleClass = "final";
+                    SurveyMode = "final";
                 }
+
+                Omniture OmnitureObj = Epi.Web.MVC.Utility.OmnitureHelper.GetSettings(SurveyMode);
+ 
+                    ViewBag.Omniture = OmnitureObj;
+ 
+                 
+              
 
                 return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, surveyInfoModel);
             }

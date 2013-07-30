@@ -168,6 +168,7 @@
     </Compile>
     <Compile Include="Models\Mapper.cs" />
     <Compile Include="Models\Message.cs" />
+    <Compile Include="Models\Omniture.cs" />
     <Compile Include="Models\PassCodeModel.cs" />
     <Compile Include="Models\SurveyInfoModel.cs" />
     <Compile Include="Models\SurveyResponseModel.cs" />
@@ -190,6 +191,7 @@
     <Compile Include="Utility\ExceptionMessage.cs" />
     <Compile Include="Utility\FormProvider.cs" />
     <Compile Include="Utility\MobileFormProvider.cs" />
+    <Compile Include="Utility\OmnitureHelper.cs" />
     <Compile Include="Utility\SurveyHelper.cs" />
     <Compile Include="Utility\SurveyResponseXML.cs" />
     <Compile Include="Utility\ValidateResponse.cs" />
@@ -444,6 +446,7 @@
     <Content Include="Views\Shared\Exception.Mobile.cshtml" />
     <Content Include="Views\Login\Index.Mobile.cshtml" />
     <Content Include="Views\Test\Index.cshtml" />
+    <Content Include="Views\Home\OmniturePartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
