@@ -1,0 +1,32 @@
+﻿@{
+    ViewBag.Title = "View.Mobile";
+}
+
+<div>
+
+<label id="DataBaseTest" >Data Base Test: @Model.DBTestStatus</label>
+</div>
+<br />
+
+<div>
+
+<label id="EFTest" >Entity connection string Test: @Model.EFTestStatus</label>
+</div>
+<br />
+<div>
+
+<label id="DataServiceTest" >Data Service Test: @Model.STestStatus</label>
+</div>
+
+<div>
+        <p>@TempData["exc"]</p>
+        <br>
+         <p>@TempData["exc1"]</p>
+         <br>
+          <p>@TempData["exc2"]</p>
+
+   
+
+    
+ 
+</div>
