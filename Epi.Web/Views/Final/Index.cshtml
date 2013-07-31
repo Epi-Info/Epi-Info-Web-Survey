@@ -118,3 +118,8 @@
                
        </div>
      
+          @{if (ViewBag.Omniture.IsEnabled == true)
+        { 
+         Html.RenderPartial("OmniturePartial");  
+        } 
+        }
