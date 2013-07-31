@@ -11,9 +11,9 @@ namespace Epi.Web.MVC.Utility
         {
 
 
-        public static Omniture GetSettings(string SurveyMode) 
-            { 
-            
+        public static Omniture GetSettings(string SurveyMode, bool IsMobileDevice) 
+            {
+         
             Omniture OmnitureObj = new Omniture();
             string IsEnabled = ConfigurationManager.AppSettings["OMNITURE_IS_ENABLED"];
             if (IsEnabled.ToUpper() == "TRUE")
@@ -25,7 +25,15 @@ namespace Epi.Web.MVC.Utility
                 OmnitureObj.TopicLevelJs = ConfigurationManager.AppSettings["OMNITURE_TOPIC_LEVEL_JS"];
                 OmnitureObj.SCodeJs = ConfigurationManager.AppSettings["OMNITURE_S_CODE_JS"];
                 OmnitureObj.MetricUrl = ConfigurationManager.AppSettings["OMNITURE_METRIC_URL"];
-                OmnitureObj.ChannelName = ConfigurationManager.AppSettings["OMNITURE_CHANNEL_NAME"] + "_" + SurveyMode.ToString();
+                if (IsMobileDevice)
+                    {
+                      OmnitureObj.ChannelName = ConfigurationManager.AppSettings["OMNITURE_CHANNEL_NAME"] + "_" + SurveyMode.ToString().ToUpper()+"_MOBILE";
+                    }
+                else
+                    {
+                      OmnitureObj.ChannelName = ConfigurationManager.AppSettings["OMNITURE_CHANNEL_NAME"] + "_" + SurveyMode.ToString();
+                    
+                    }
                 }
             else 
                 {
