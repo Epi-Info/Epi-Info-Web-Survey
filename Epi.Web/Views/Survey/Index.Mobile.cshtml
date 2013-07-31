@@ -95,6 +95,7 @@
             width: 500,
             modal: true
         });
+        
         var responseUrl = GetRedirectionUrl();
         $('#url').val(responseUrl);
 
@@ -158,14 +159,7 @@
             }
         });
 
-        /*Exit the survey */
-        $("#close").click(function () {
-            
-            var signoutUrl = '@Url.Action("SignOut","Post")';
-            var homePageUrl = '@Url.Action("Index","Home")' + '/' + '@Model.SurveyInfo.SurveyId';  
-           
-            SignOutAndRedirect(signoutUrl, homePageUrl);
-        });
+        
 
 
         /*Open the modal popup on link click*/
@@ -389,6 +383,48 @@
          
 });
 
+
+
+$(document).delegate('#close', 'click', function () {
+
+    $(this).simpledialog({
+        'mode': 'blank',
+        'prompt': false,
+        'forceInput': false,
+        'useModal': true,
+        'buttons': {
+                'OK': {
+                    click: function () {
+                        $('#dialogoutput').text('OK');
+                    }
+                }
+
+                    },
+
+
+         'fullHTML': "<div id=\"exitdialog\" title=\"Exit Survey\" ><p style=\"font-size:1.20em; font-weight:600;\">Are you sure you want to exit this Survey? </p><p style=\"font-size:1.20em; font-weight:300;\">Any unsaved changes will be lost!<br /></p><p><div align='right'> <a  onclick ='ExitSurvey();'  class='login'  style='width:50px; padding:8px 15px !important;'>Exit Survey</a>        <a class='login'  style='width:50px; padding:8px 15px !important;'rel='close'   id='simpleclose'>Cancel</a></div></p>"
+        })
+
+ });
+     
+
+function CloseDialog() {
+
+
+    $(this).dialog("close");
+
+}
+/*Exit the survey */
+ function ExitSurvey() {
+
+    var signoutUrl = '@Url.Action("SignOut","Post")';
+    var homePageUrl = '@Url.Action("Index","Home")' + '/' + '@Model.SurveyInfo.SurveyId';
+
+    SignOutAndRedirect(signoutUrl, homePageUrl);
+}
+
+
+
 $(function() {
      $('#myform').submit( function() {
         
@@ -472,8 +508,8 @@ function ReplaceString(string){
 	  
     <div align="right">
         @*<button  class="MobileExitSurvey"    type="submit" id="close">Exit Survey</button>*@
-       @* <a id="close" class="exitsurvey" onclick="Submit();">Exit</a>*@
-         <a id="close" class="exitsurvey" onclick="Submit();"  href="@Url.RouteUrl(null, new { controller = "Home", action = "Index", SurveyId = Model.SurveyInfo.SurveyId })">Exit</a>
+       <a id="close" class="exitsurvey">Exit</a>
+       @* <a id="close" class="exitsurvey" onclick="Submit();"  href="@Url.RouteUrl(null, new { controller = "Home", action = "Index", SurveyId = Model.SurveyInfo.SurveyId })">Exit</a>*@
     </div>
     <div style="clear: both;">
     </div>
