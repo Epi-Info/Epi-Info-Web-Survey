@@ -446,7 +446,7 @@
     <Content Include="Views\Shared\Exception.Mobile.cshtml" />
     <Content Include="Views\Login\Index.Mobile.cshtml" />
     <Content Include="Views\Test\Index.cshtml" />
-    <Content Include="Views\Home\OmniturePartial.cshtml" />
+    <Content Include="Views\Shared\OmniturePartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
