@@ -31,6 +31,7 @@ namespace Epi.Web.MVC.Controllers
         {
             try
             {
+                string SurveyMode = "";
                 SurveyInfoModel surveyInfoModel = GetSurveyInfo(surveyId);
                 System.Text.RegularExpressions.Regex regex = new System.Text.RegularExpressions.Regex(@"(\r\n|\r|\n)+");
 
@@ -45,7 +46,11 @@ namespace Epi.Web.MVC.Controllers
                 {
                     surveyInfoModel.TestModeStyleClass = "final";
                 }
+                bool IsMobileDevice = false;
+                IsMobileDevice = this.Request.Browser.IsMobileDevice;
+                Omniture OmnitureObj = Epi.Web.MVC.Utility.OmnitureHelper.GetSettings(SurveyMode, IsMobileDevice);
 
+                ViewBag.Omniture = OmnitureObj;
                 return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, surveyInfoModel);
             }
             catch (Exception ex)
