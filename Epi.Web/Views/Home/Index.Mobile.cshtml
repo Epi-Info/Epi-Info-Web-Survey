@@ -200,3 +200,9 @@
               <span style="font: bold 10pt Segoe UI; color:#04aeda; ">  Epi Info 7</span> 
                
        </div>*@
+
+       @{if (ViewBag.Omniture.IsEnabled == true)
+        { 
+         Html.RenderPartial("OmniturePartial");  
+        } 
+        }

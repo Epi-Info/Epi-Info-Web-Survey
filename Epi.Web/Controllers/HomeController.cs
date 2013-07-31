@@ -68,8 +68,9 @@ namespace Epi.Web.MVC.Controllers
                     surveyInfoModel.TestModeStyleClass = "final";
                     SurveyMode = "final";
                 }
-
-                Omniture OmnitureObj = Epi.Web.MVC.Utility.OmnitureHelper.GetSettings(SurveyMode);
+                bool IsMobileDevice = false;
+                IsMobileDevice = this.Request.Browser.IsMobileDevice;
+                Omniture OmnitureObj = Epi.Web.MVC.Utility.OmnitureHelper.GetSettings(SurveyMode, IsMobileDevice);
  
                     ViewBag.Omniture = OmnitureObj;
  
