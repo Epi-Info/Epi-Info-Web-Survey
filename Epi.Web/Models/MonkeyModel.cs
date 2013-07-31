@@ -5,7 +5,7 @@ using System.Web;
 
 namespace Epi.Web.MVC.Models
     {
-    public class TestModel
+    public class MonkeyModel
         {
         private string _DataBaseTestStatus;
         public string DBTestStatus 
