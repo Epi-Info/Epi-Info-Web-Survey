@@ -18,7 +18,7 @@ using System.ServiceModel.Description;
 using Epi.Web.Common.Security; 
 namespace Epi.Web.MVC.Controllers
 {
-    public class TestController : Controller
+    public class MonkeyController : Controller
     {
        //declare  SurveyFacade
         private Epi.Web.MVC.Facade.ISurveyFacade _isurveyFacade;
@@ -29,7 +29,7 @@ namespace Epi.Web.MVC.Controllers
         /// injecting surveyFacade to the constructor 
         /// </summary>
         /// <param name="surveyFacade"></param>
-        public TestController(Epi.Web.MVC.Facade.ISurveyFacade isurveyFacade)
+        public MonkeyController(Epi.Web.MVC.Facade.ISurveyFacade isurveyFacade)
         {
             _isurveyFacade = isurveyFacade;
         }
@@ -45,7 +45,7 @@ namespace Epi.Web.MVC.Controllers
         [HttpGet]
         public ActionResult Index(string surveyid)
             {
-            TestModel TestModel = new TestModel();
+            MonkeyModel TestModel = new MonkeyModel();
             try
                 {
                 
