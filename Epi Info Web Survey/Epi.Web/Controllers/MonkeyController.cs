@@ -82,8 +82,8 @@ namespace Epi.Web.MVC.Controllers
                 {
               
                 TestModel.DBTestStatus = TestResultEnum.Error.ToString();
-                TestModel.STestStatus = "Incomplete!! ";
-                TestModel.EFTestStatus = "Incomplete!! ";
+                TestModel.STestStatus = "Incomplete";
+                TestModel.EFTestStatus = "Incomplete";
                 TempData["exc" ] = ex.Message.ToString();
                 TempData["exc1"] = ex.Source.ToString();
                 TempData["exc2"] = ex.StackTrace.ToString();
@@ -110,6 +110,7 @@ namespace Epi.Web.MVC.Controllers
 
 
                 TestModel.EFTestStatus = TestResultEnum.Error.ToString();
+                TestModel.STestStatus = "Incomplete";
                 TempData["exc"] = ex.Message.ToString();
                 TempData["exc1"] = ex.Source.ToString();
                 TempData["exc2"] = ex.StackTrace.ToString();
@@ -135,7 +136,7 @@ namespace Epi.Web.MVC.Controllers
                 
                
                 TestModel.STestStatus = TestResultEnum.Error.ToString();
-                TestModel.EFTestStatus = "Incomplete!! ";
+                
                 TempData["exc"] = ex.Message.ToString();
                 TempData["exc1"] = ex.Source.ToString();
                 TempData["exc2"] = ex.StackTrace.ToString();
