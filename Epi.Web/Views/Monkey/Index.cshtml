@@ -4,30 +4,29 @@
 }
 
 
-
-
-
-<div>
-
-<label id="DataBaseTest" >Data Base Test: @Model.DBTestStatus</label>
-</div>
-<br />
-
-<div>
-
-<label id="EFTest" >Entity connection string Test: @Model.EFTestStatus</label>
-</div>
-<br />
-<div>
-
-<label id="DataServiceTest" >Data Service Test: @Model.STestStatus</label>
-</div>
-
-<div>
-        <p>@TempData["exc"]</p>
-        <br>
-         <p>@TempData["exc1"]</p>
-         <br>
-          <p>@TempData["exc2"]</p>
+<div id="header"><h1>Manager Service Test Results</h1></div>
+<div id="content" style="padding: 20px 20px 80px;">
+    <div id="attention" style="margin:1em 1em 1em 0;">
+        <div>
+            <label style="font-weight:normal !important;">Data Base Test: </label>
+            @*<img src="../../Content/images/button_check.png"  alt="" style="width:20px; vertical-align:text-top;"/>&nbsp;*@
+            <label id="DataBaseTest">@Model.DBTestStatus</label>
+        </div> <br />
+        <div>
+            <label style="font-weight:normal !important;">Entity connection string Test: </label>
+            @*<img src="../../Content/images/error1.png"  alt="" style="width:20px; vertical-align:text-top;"/>&nbsp;*@
+            <label id="EFTest" >@Model.EFTestStatus</label>
+        </div> <br />
+        <div>
+            <label style="font-weight:normal !important;">Data Service Test: </label>
+            @*<img src="../../Content/images/button_check.png"  alt="" style="width:20px; vertical-align:text-top;"/>&nbsp;*@
+            <label id="DataServiceTest" >@Model.STestStatus</label>
+        </div> 
+        <div style="font-weight:normal !important;">
+             <p>@TempData["exc"]</p>
+             <p>@TempData["exc1"]</p>
+             <p>@TempData["exc2"]</p>
+        </div>
+    </div>
 
 </div>
