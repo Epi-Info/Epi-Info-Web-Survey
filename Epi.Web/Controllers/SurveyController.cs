@@ -16,6 +16,10 @@ using System.Configuration;
 using System.Web.Routing;
 using System.Web.WebPages;
 using System.Web.Caching;
+using System.Reflection;
+using System.Diagnostics;
+using System.Reflection;
+using System.Diagnostics;
 namespace Epi.Web.MVC.Controllers
 {
         [Authorize]
@@ -53,7 +57,9 @@ namespace Epi.Web.MVC.Controllers
         {
             try
             {
-               
+                string version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+                ViewBag.Version = version;
+
                 bool IsMobileDevice = false;
                 IsMobileDevice = this.Request.Browser.IsMobileDevice;
                 if (IsMobileDevice == false)
@@ -135,7 +141,8 @@ namespace Epi.Web.MVC.Controllers
         //public ActionResult Index(SurveyInfoModel surveyInfoModel, string Submitbutton, string Savebutton, string ContinueButton, string PreviousButton, int PageNumber = 1)
         public ActionResult Index(SurveyAnswerModel surveyAnswerModel, string Submitbutton, string Savebutton, string ContinueButton, string PreviousButton, int PageNumber = 0)
         {
-            
+             string version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+             ViewBag.Version = version;
              string responseId = surveyAnswerModel.ResponseId;
               bool IsMobileDevice = false;
               IsMobileDevice = this.Request.Browser.IsMobileDevice;
