@@ -9,7 +9,8 @@ using System.Xml.Linq;
 using System.Xml.XPath;
 using Epi.Core.EnterInterpreter;
 using System.Web.Security;
-
+using System.Reflection;
+using System.Diagnostics;
 
 namespace Epi.Web.MVC.Controllers
 {
@@ -31,7 +32,9 @@ namespace Epi.Web.MVC.Controllers
        [HttpGet]
         public ActionResult Index(string responseId, string ReturnUrl)
         {
-
+        string version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+        ViewBag.Version = version;
+               
            //get the responseId
             responseId = GetResponseId(ReturnUrl);
             //get the surveyId

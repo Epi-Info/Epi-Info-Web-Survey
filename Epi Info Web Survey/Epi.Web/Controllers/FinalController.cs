@@ -11,6 +11,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Caching;
 using System.Web.UI;
+using System.Reflection;
+using System.Diagnostics;
 namespace Epi.Web.MVC.Controllers
 {
     public class FinalController : Controller
@@ -29,8 +31,12 @@ namespace Epi.Web.MVC.Controllers
         [HttpGet]
         public ActionResult Index(string surveyId, string final)
         {
+            
             try
             {
+                string version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+                ViewBag.Version = version;
+
                 string SurveyMode = "";
                 SurveyInfoModel surveyInfoModel = GetSurveyInfo(surveyId);
                 System.Text.RegularExpressions.Regex regex = new System.Text.RegularExpressions.Regex(@"(\r\n|\r|\n)+");

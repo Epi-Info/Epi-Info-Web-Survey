@@ -1,5 +1,4 @@
 ﻿using System;
-using System;
 using System.Web.Mvc;
 using Epi.Web.MVC.Models;
 using System.Xml;
@@ -15,7 +14,9 @@ using System.Web.Caching;
 using System.Web.UI;
 using Epi.Web.EF;
 using System.ServiceModel.Description;
-using Epi.Web.Common.Security; 
+using Epi.Web.Common.Security;
+using System.Reflection;
+using System.Diagnostics;
 namespace Epi.Web.MVC.Controllers
 {
     public class MonkeyController : Controller
@@ -48,7 +49,9 @@ namespace Epi.Web.MVC.Controllers
             MonkeyModel TestModel = new MonkeyModel();
             try
                 {
-                
+
+                string version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+                ViewBag.Version = version;
                
                // string _connectionString = ConfigurationManager.AppSettings["TEST_CONNECTION_STRING"];
                 string connectionStringName = "EIWSADO";
