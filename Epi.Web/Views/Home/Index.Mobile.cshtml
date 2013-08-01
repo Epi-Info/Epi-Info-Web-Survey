@@ -116,13 +116,13 @@
                         
                         <p>&nbsp;</p>
                    <div style="margin: 0 auto; text-align:center;">
-                        @if (@Model.SurveyNumber != null)
+                         @if (!string.IsNullOrWhiteSpace(@Model.SurveyNumber))
                             {
                                     <div>
                                         <span class="boldlabel">Survey #:</span> <span>
                                            @Model.SurveyNumber</span></div>
                             }
-                         @if (@Model.OrganizationName != null)
+                        @if (!string.IsNullOrWhiteSpace(@Model.OrganizationName)) 
                              {
                                   <div>
                                     <span class="boldlabel">Organization:</span> <span>
