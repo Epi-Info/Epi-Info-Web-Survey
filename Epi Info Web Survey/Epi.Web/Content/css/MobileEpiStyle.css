@@ -50,6 +50,7 @@ body
  padding: 1em;
  font: 10pt;
  margin-bottom: 50px !important;
+ min-height:125px;
 /* padding-bottom:80px; */
  }
  
@@ -187,7 +188,7 @@ clear:both;
 #footleft
  {
  float:left;
- width: 55%;
+ width: 40%;
  }
 
 #footright
@@ -670,10 +671,10 @@ span.ui-icon-radio-on[style*="background-color: yellow;"]{background-color: #428
 
 .draft
 {
-   background-image:url('../images/DRAFT.png');
+    background-image:url('../images/draft.png'); 
     background-repeat:no-repeat;
     background-position: center top;
-    background-size: 100%;
+    background-size: 80% 120px;
     background-origin:content-box;
     background-repeat:repeat-y;
    
