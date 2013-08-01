@@ -1,6 +1,7 @@
 ﻿@model Epi.Web.MVC.Models.SurveyInfoModel
 @{
-    ViewBag.Title = "Survey Home";
+    ViewBag.Title = "Survey Home" + " - "+ 
+        Model.SurveyName + " - " + Model.TestModeStyleClass;
     Layout = "~/Views/Shared/_Layout.cshtml";
     
 }
