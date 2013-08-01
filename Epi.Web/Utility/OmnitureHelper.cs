@@ -25,15 +25,16 @@ namespace Epi.Web.MVC.Utility
                 OmnitureObj.TopicLevelJs = ConfigurationManager.AppSettings["OMNITURE_TOPIC_LEVEL_JS"];
                 OmnitureObj.SCodeJs = ConfigurationManager.AppSettings["OMNITURE_S_CODE_JS"];
                 OmnitureObj.MetricUrl = ConfigurationManager.AppSettings["OMNITURE_METRIC_URL"];
-                if (IsMobileDevice)
-                    {
-                      OmnitureObj.ChannelName = ConfigurationManager.AppSettings["OMNITURE_CHANNEL_NAME"] + "_" + SurveyMode.ToString().ToUpper()+"_MOBILE";
-                    }
-                else
-                    {
-                      OmnitureObj.ChannelName = ConfigurationManager.AppSettings["OMNITURE_CHANNEL_NAME"] + "_" + SurveyMode.ToString();
+                OmnitureObj.ChannelName = ConfigurationManager.AppSettings["OMNITURE_CHANNEL_NAME"];
+                //if (IsMobileDevice)
+                //    {
+                //      OmnitureObj.ChannelName = ConfigurationManager.AppSettings["OMNITURE_CHANNEL_NAME"] + "_" + SurveyMode.ToString().ToUpper()+"_MOBILE";
+                //    }
+                //else
+                //    {
+                //      OmnitureObj.ChannelName = ConfigurationManager.AppSettings["OMNITURE_CHANNEL_NAME"] + "_" + SurveyMode.ToString();
                     
-                    }
+                //    }
                 }
             else 
                 {
