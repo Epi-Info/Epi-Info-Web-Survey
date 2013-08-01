@@ -26,5 +26,11 @@ namespace Epi.Web.MVC.Models
             get { return _EFTestStatus; }
             set { _EFTestStatus = value; }
             }
+        private bool _IsManagerServiceTest;
+        public bool IsManagerServiceTest
+            {
+            get { return _IsManagerServiceTest; }
+            set { _IsManagerServiceTest = value; }
+            }
         }
     }
