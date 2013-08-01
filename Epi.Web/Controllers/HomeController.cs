@@ -12,7 +12,8 @@ using System.Configuration;
 using System.Web;
 using System.Web.Caching;
 using System.Web.UI;
-
+using System.Reflection;
+using System.Diagnostics;
 namespace Epi.Web.MVC.Controllers
 {
     public class HomeController : Controller
@@ -73,9 +74,9 @@ namespace Epi.Web.MVC.Controllers
                 Omniture OmnitureObj = Epi.Web.MVC.Utility.OmnitureHelper.GetSettings(SurveyMode, IsMobileDevice);
  
                     ViewBag.Omniture = OmnitureObj;
- 
                  
-              
+                    string version =   Assembly.GetExecutingAssembly().GetName().Version.ToString();
+                    ViewBag.Version = version;
 
                 return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, surveyInfoModel);
             }
