@@ -59,8 +59,8 @@ namespace Epi.Web.WCF.SurveyService
         [FaultContract(typeof(CustomFaultException))]
         bool IsValidOrgKey(SurveyInfoRequest pRequest);
 
-        [OperationContract]
-        [FaultContract(typeof(CustomFaultException))]
-        AdminResponse GetOrganizationAdmins(AdminRequest request); 
+        //[OperationContract]
+        //[FaultContract(typeof(CustomFaultException))]
+        //AdminResponse GetOrganizationAdmins(AdminRequest request); 
     }
 }

@@ -194,7 +194,9 @@ namespace Epi.Web.WCF.SurveyService
             try
             {
                 Epi.Web.Interfaces.DataInterfaces.ISurveyInfoDao surveyInfoDao = new EF.EntitySurveyInfoDao();
+                Epi.Web.Interfaces.DataInterfaces.IAdminDao AdminDao = new EF.EntityAdminDao();
                 Epi.Web.BLL.SurveyInfo Implementation = new Epi.Web.BLL.SurveyInfo(surveyInfoDao);
+                Epi.Web.BLL.Admin ImplementationAdmin = new Epi.Web.BLL.Admin(AdminDao);
 
 
                 var response = new SurveyInfoResponse(request.RequestId);
@@ -260,7 +262,7 @@ namespace Epi.Web.WCF.SurveyService
                                         Implementation.UpdateSurveyInfo(SurveyInfo);
                                         response.SurveyInfoList.Add(Mapper.ToDataTransferObject(SurveyInfo));
                                         response.Message = SurveyInfo.StatusText;
-                                        SendEmailToAdmins(SurveyInfo);
+                                        ImplementationAdmin.SendEmailToAdmins(SurveyInfo);
                                         }
                                     else if (request.Action == "Delete")
                                     {
@@ -957,63 +959,7 @@ namespace Epi.Web.WCF.SurveyService
               }
          }
 
-         public AdminResponse GetOrganizationAdmins(AdminRequest request) 
-             {
-
-             var response = new AdminResponse();
-
-            try{
-
-             Epi.Web.Interfaces.DataInterfaces.IAdminDao AdminDao = new EF.EntityAdminDao();
-             Epi.Web.BLL.Admin Implementation = new Epi.Web.BLL.Admin(AdminDao);
-            List<AdminBO> adminBO = Implementation.GetAdminInfoByOrgKey(request.OrganizationKey.ToString());
-            AdminDTO AdminDTO = new AdminDTO();
-            response.AdminList = new List<AdminDTO>();
-            foreach (AdminBO Item in adminBO)
-                {
-               
-                AdminDTO = Mapper.ToAdminDTO(Item);
-               (response.AdminList).Add(AdminDTO);
-
-                }
-
-
-
-            return response;
-             }
-             catch (Exception ex)
-              {
-                  CustomFaultException customFaultException = new CustomFaultException();
-                  customFaultException.CustomMessage = ex.Message;
-                  customFaultException.Source = ex.Source;
-                  customFaultException.StackTrace = ex.StackTrace;
-                  customFaultException.HelpLink = ex.HelpLink;
-                  throw new FaultException<CustomFaultException>(customFaultException);
-              }
-             }
-
-         public void SendEmailToAdmins(SurveyInfoBO SurveyInfo)
-            {
-            Epi.Web.Common.Message.AdminRequest AdminRequest = new Web.Common.Message.AdminRequest();
-            Epi.Web.Common.Message.AdminResponse AdminResult = new Web.Common.Message.AdminResponse();
-            AdminRequest.OrganizationKey = new Guid(SurveyInfo.OrganizationKey.ToString()).ToString();
-
-            List<string> AdminList = new List<string>();
-            AdminResult = GetOrganizationAdmins(AdminRequest);
-
-            foreach (var item in AdminResult.AdminList)
-                {
-                AdminList.Add(item.AdminEmail);
-                }
-            
-            Epi.Web.Common.Email.Email Email = new Web.Common.Email.Email();
-            Email.Body = "The following survey has been promoted to FINAL mode:\n Title:" + SurveyInfo.SurveyName + " \n Survey ID:" + SurveyInfo.SurveyId + " \nOrganization:" + SurveyInfo.OrganizationName + "\n Start Date & Time:" + SurveyInfo.StartDate + "\n Closing Date & Time:" + SurveyInfo.ClosingDate + " \n \n \n  Thank you.";
-            Email.From = ConfigurationManager.AppSettings["EMAIL_FROM"];
-            Email.To = AdminList;
-            Email.Subject = "Survey -" + SurveyInfo.SurveyName + " has been promoted to FINAL";
-            bool success = Epi.Web.Common.Email.EmailHandler.SendMessage(Email);
-            
-            }
+       
 
     }
 }
