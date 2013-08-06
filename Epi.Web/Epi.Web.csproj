@@ -188,11 +188,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="Service References\ManagerServiceClient\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
     <Compile Include="Utility\ExceptionMessage.cs" />
     <Compile Include="Utility\FormProvider.cs" />
     <Compile Include="Utility\MobileFormProvider.cs" />
@@ -416,13 +411,6 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <None Include="Service References\ManagerServiceClient\SurveyManagerService.disco" />
-    <None Include="Service References\ManagerServiceClient\configuration91.svcinfo" />
-    <None Include="Service References\ManagerServiceClient\configuration.svcinfo" />
-    <None Include="Service References\ManagerServiceClient\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
     <Content Include="SurveyDataService.svc" />
     <Content Include="SurveyManagerService.svc" />
     <Content Include="Unity.Mvc3.README.txt" />
@@ -460,22 +448,6 @@
     <Content Include="Views\Monkey\Index.cshtml" />
     <Content Include="Views\Shared\OmniturePartial.cshtml" />
     <Content Include="Views\Monkey\View.Mobile.cshtml" />
-    <None Include="Service References\ManagerServiceClient\ManagerService.wsdl" />
-    <None Include="Service References\ManagerServiceClient\SurveyManagerService.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ManagerServiceClient\SurveyManagerService1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ManagerServiceClient\SurveyManagerService2.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ManagerServiceClient\SurveyManagerService3.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ManagerServiceClient\SurveyManagerService4.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <Content Include="Views\Shared\FooterPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -515,7 +487,6 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\DataServiceClient\" />
-    <WCFMetadataStorage Include="Service References\ManagerServiceClient\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\DataServiceClient\DataService.wsdl" />
