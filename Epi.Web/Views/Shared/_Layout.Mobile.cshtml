@@ -110,21 +110,7 @@
 
             @RenderBody()		
         </div>
-        <div id="footer">
-        <div id="footleft">
-            <span style="font-size: 8pt;">Powered by:</span>
-            <img alt="Epi Info 7" height="42" src="@Url.Content("~/Content/images/epi.png")" width="42" align="middle" />
-            <div style="font-size: 8pt; margin-top: -13px;">@ViewBag.Version</div> 
-        </div>
-        @*<div id="footcenter">
-        </div>*@
-        <div id="footright">
-            <img alt="Centers for Disease Control and Prevention" height="42" src="@Url.Content("~/Content/images/cdclogo.png")" width="71" />
-            <img src="@Url.Content("~/Content/images/logo_dhhs.gif")" alt="Department of Health and Human Services" height="42" />
-        </div>
-        <div style="clear: both;">
-        </div>
-    </div>
+        @Html.Partial("FooterPartial")
         </div>
     </div>
      
