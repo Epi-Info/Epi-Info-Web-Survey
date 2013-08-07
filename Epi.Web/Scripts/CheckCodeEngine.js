@@ -1028,7 +1028,7 @@ if (eval(document.getElementById("IsMobile"))){
                        
                     var checkboxcontrolId = '#mvcdynamicfield_' + pCheckCodeList[i] ;
                      $(checkboxcontrolId).attr("disabled", true);
- 
+                     $(Labelquery).css("color", "LightGray")
                     break;
                 case "legalvalues":
                     $(query).selectmenu('disable');
