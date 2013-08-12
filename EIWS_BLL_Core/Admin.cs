@@ -60,9 +60,7 @@ namespace Epi.Web.BLL
 
            public void SendEmailToAdmins(SurveyInfoBO SurveyInfo)
                {
-               Epi.Web.Common.Message.AdminRequest AdminRequest = new Web.Common.Message.AdminRequest();
-               Epi.Web.Common.Message.AdminResponse AdminResult = new Web.Common.Message.AdminResponse();
-               AdminRequest.OrganizationKey = new Guid(SurveyInfo.OrganizationKey.ToString()).ToString();
+
                 List<AdminBO> AdminBOList = new  List<AdminBO>();
                List<string> AdminList = new List<string>();
               
