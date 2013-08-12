@@ -82,11 +82,7 @@ namespace Epi.Web.Common.Criteria
         [DataMember]
         public DateTime StartDate { get; set; }
 
-        [DataMember]
-        public string LogoLocation { get; set; }
-
-        [DataMember]
-        public string LogoURL { get; set; }
+       
 
 
 
