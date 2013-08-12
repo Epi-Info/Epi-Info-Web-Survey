@@ -35,8 +35,7 @@ namespace Epi.Web.Common.ObjectMapping
                 OrganizationKey = pDTO.OrganizationKey,
                  IsTestMode = pDTO.IsTestMode,
                  StartDate  = pDTO.StartDate,
-                 LogoLocation = pDTO.LogoLocation,
-                 LogoURL = pDTO.LogoURL
+                 
             };
         }
 
@@ -99,8 +98,7 @@ namespace Epi.Web.Common.ObjectMapping
                 ClosingDate = pBO.ClosingDate,
                 IsTestMode = pBO.IsTestMode,
                 StartDate = pBO.StartDate,
-                LogoLocation = pBO.LogoLocation,
-                LogoURL = pBO.LogoURL,
+                
                 UserPublishKey = pBO.UserPublishKey
 
                

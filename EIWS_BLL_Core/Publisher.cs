@@ -76,8 +76,7 @@ namespace Epi.Web.BLL
                                                 BO.TemplateXMLSize = pRequestMessage.TemplateXMLSize;
                                                 BO.IsTestMode = pRequestMessage.IsTestMode;
                                                 BO.StartDate = pRequestMessage.StartDate;
-                                                BO.LogoLocation = pRequestMessage.LogoLocation;
-                                                BO.LogoURL = pRequestMessage.LogoURL;
+                                                
 
                                                 this.SurveyInfoDao.InsertSurveyInfo(BO);
                                                 result.URL = GetURL(pRequestMessage, SurveyId);
@@ -159,8 +158,7 @@ namespace Epi.Web.BLL
                             BO.TemplateXMLSize = pRequestMessage.TemplateXMLSize;
                             BO.IsTestMode = pRequestMessage.IsTestMode;
                             BO.StartDate = pRequestMessage.StartDate;
-                            BO.LogoLocation = pRequestMessage.LogoLocation;
-                            BO.LogoURL = pRequestMessage.LogoURL;
+                           
 
                             this.SurveyInfoDao.UpdateSurveyInfo(BO);
                             result.URL = GetURL(pRequestMessage, SurveyId);

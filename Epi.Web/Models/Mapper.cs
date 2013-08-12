@@ -36,8 +36,7 @@ namespace Epi.Web.MVC.Models
                 UserPublishKey = SurveyInfoDTO.UserPublishKey,
                 TestMode = SurveyInfoDTO.IsTestMode,
                 StartDate = SurveyInfoDTO.StartDate,
-                LogoLocation = SurveyInfoDTO.LogoLocation,
-                LogoURL = SurveyInfoDTO.LogoURL
+               
             };
 
         }
@@ -65,8 +64,7 @@ namespace Epi.Web.MVC.Models
                 UserPublishKey = SurveyInfoModel.UserPublishKey,
                 IsTestMode = SurveyInfoModel.TestMode,
                 StartDate = SurveyInfoModel.StartDate,
-                LogoLocation = SurveyInfoModel.LogoLocation,
-                LogoURL = SurveyInfoModel.LogoURL
+                
             };
         }
 

@@ -354,8 +354,7 @@ namespace Epi.Web.EF
                     DataRow.TemplateXMLSize = RemoveWhitespace(SurveyInfo.XML).Length;
                     DataRow.TestMode = SurveyInfo.IsTestMode;
                     DataRow.StartDate = SurveyInfo.StartDate;
-                    DataRow.LogoLocation = SurveyInfo.LogoLocation;
-                    DataRow.LogoURL = SurveyInfo.LogoURL;
+                   
 
                     Context.SaveChanges();
                 }
