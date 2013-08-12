@@ -81,8 +81,6 @@
     <Compile Include="DTO\SurveyAnswerDTO.cs" />
     <Compile Include="Email\Email.cs" />
     <Compile Include="Exception\CustomFaultException.cs" />
-    <Compile Include="Message\AdminRequest.cs" />
-    <Compile Include="Message\AdminResponse.cs" />
     <Compile Include="Message\Base\AcknowledgeType.cs" />
     <Compile Include="Message\Base\PersistType.cs" />
     <Compile Include="Message\Base\RequestBase.cs" />
