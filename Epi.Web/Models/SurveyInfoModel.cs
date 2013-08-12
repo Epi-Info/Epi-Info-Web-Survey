@@ -22,8 +22,6 @@ namespace Epi.Web.MVC.Models
         private bool _IsSuccess;
         private DateTime _ClosingDate;
         private DateTime _StartDate;
-        private  string _LogoURL;
-        private string _LogoLocation;
         private bool _TestMode;
         private int _SurveyType;
         private string _TestModeStyleClass;
@@ -111,16 +109,7 @@ namespace Epi.Web.MVC.Models
             set { _StartDate = value; }
         }
         
-        public string LogoURL
-        {
-            get { return _LogoURL; }
-            set { _LogoURL = value; }
-        }
-        public string LogoLocation
-        {
-            get { return _LogoLocation; }
-            set { _LogoLocation = value; }
-        }
+        
         public bool TestMode
         {
             get { return _TestMode; }
