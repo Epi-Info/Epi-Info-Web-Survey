@@ -59,37 +59,7 @@ namespace Epi.Web.WCF.SurveyService
         }
 
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="pRequestMessage"></param>
-        /// <returns></returns>
-        public PublishResponse RePublishSurvey(PublishRequest pRequest)
-        {
-            try
-            {
-                PublishResponse result = new PublishResponse(pRequest.RequestId);
-                Epi.Web.Interfaces.DataInterfaces.ISurveyInfoDao SurveyInfoDao = new EF.EntitySurveyInfoDao();
-                Epi.Web.Interfaces.DataInterfaces.IOrganizationDao OrganizationDao = new EF.EntityOrganizationDao();
-
-
-                Epi.Web.BLL.Publisher Implementation = new Epi.Web.BLL.Publisher(SurveyInfoDao, OrganizationDao);
-                SurveyInfoBO surveyInfoBO = Mapper.ToBusinessObject(pRequest.SurveyInfo);
-                SurveyRequestResultBO surveyRequestResultBO = Implementation.RePublishSurvey(surveyInfoBO);
-                result.PublishInfo = Mapper.ToDataTransferObject(surveyRequestResultBO);
-
-                return result;
-            }
-            catch (Exception ex)
-            {
-                CustomFaultException customFaultException = new CustomFaultException();
-                customFaultException.CustomMessage = ex.Message;
-                customFaultException.Source = ex.Source;
-                customFaultException.StackTrace = ex.StackTrace;
-                customFaultException.HelpLink = ex.HelpLink;
-                throw new FaultException<CustomFaultException>(customFaultException);
-            }
-        }
+       
 
 
         /// <summary>
