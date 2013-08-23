@@ -19,7 +19,7 @@ using System.Reflection;
 using System.Diagnostics;
 namespace Epi.Web.MVC.Controllers
 {
-    public class MonkeyController : Controller
+    public class EIWSTController : Controller
     {
        //declare  SurveyFacade
         private Epi.Web.MVC.Facade.ISurveyFacade _isurveyFacade;
@@ -30,7 +30,7 @@ namespace Epi.Web.MVC.Controllers
         /// injecting surveyFacade to the constructor 
         /// </summary>
         /// <param name="surveyFacade"></param>
-        public MonkeyController(Epi.Web.MVC.Facade.ISurveyFacade isurveyFacade)
+        public EIWSTController(Epi.Web.MVC.Facade.ISurveyFacade isurveyFacade)
         {
             _isurveyFacade = isurveyFacade;
         }
@@ -46,7 +46,7 @@ namespace Epi.Web.MVC.Controllers
         [HttpGet]
         public ActionResult Index(string surveyid)
             {
-            MonkeyModel TestModel = new MonkeyModel();
+            EIWSTModel TestModel = new EIWSTModel();
             try
                 {
 
