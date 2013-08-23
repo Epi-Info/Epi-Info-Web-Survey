@@ -43,16 +43,16 @@ namespace Epi.Web.MVC
             routes.MapRoute
          (
              null, // Route name
-             "Monkey/DataService/{surveyid}", // URL with parameters
-             new { controller = "Monkey", action = "Index", surveyid = UrlParameter.Optional }
+             "EIWST/DataService/{surveyid}", // URL with parameters
+             new { controller = "EIWST", action = "Index", surveyid = UrlParameter.Optional }
          ); // Parameter defaults
 
-            routes.MapRoute
-       (
-           null, // Route name
-           "Monkey/ManagerService", // URL with parameters
-           new { controller = "Monkey", action = "TestManagerService" }
-       ); // Parameter defaults
+       //     routes.MapRoute
+       //(
+       //    null, // Route name
+       //    "EIWST/ManagerService", // URL with parameters
+       //    new { controller = "EIWST", action = "TestManagerService" }
+       //); // Parameter defaults
             routes.MapRoute
      (
        null,                                              // Route name
