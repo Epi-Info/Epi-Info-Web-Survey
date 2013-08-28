@@ -1,6 +1,6 @@
 ﻿@{
     ViewBag.Title = "Final Survey" + " - " +
-        Model.SurveyName + " - " + Model.TestModeStyleClass + " - Mobile";
+        Model.SurveyName + " - " + Model.IsDraftModeStyleClass + " - Mobile";
     
 }
 
@@ -38,7 +38,7 @@
     <div style="clear:both;"></div>
 </div>
  		 
-		@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "myform", @class = @Model.TestModeStyleClass.ToString() }))
+		@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "myform", @class = @Model.IsDraftModeStyleClass.ToString() }))
 		{ 
     
         

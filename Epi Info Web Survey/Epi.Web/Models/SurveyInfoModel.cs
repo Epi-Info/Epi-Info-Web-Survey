@@ -22,9 +22,9 @@ namespace Epi.Web.MVC.Models
         private bool _IsSuccess;
         private DateTime _ClosingDate;
         private DateTime _StartDate;
-        private bool _TestMode;
+        private bool _IsDraftMode;
         private int _SurveyType;
-        private string _TestModeStyleClass;
+        private string _IsDraftModeStyleClass;
         private Guid _UserPublishKey;
 
         public string SurveyId
@@ -110,16 +110,16 @@ namespace Epi.Web.MVC.Models
         }
         
         
-        public bool TestMode
+        public bool IsDraftMode
         {
-            get { return _TestMode; }
-            set { _TestMode = value; }
+            get { return _IsDraftMode; }
+            set { _IsDraftMode = value; }
         }
         
-        public string TestModeStyleClass
+        public string IsDraftModeStyleClass
         {
-            get { return _TestModeStyleClass; }
-            set { _TestModeStyleClass = value; }
+            get { return _IsDraftModeStyleClass; }
+            set { _IsDraftModeStyleClass = value; }
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿@{
      
     ViewBag.Title = "Final Survey" + " - " +
-        Model.SurveyName + " - " + Model.TestModeStyleClass;
+        Model.SurveyName + " - " + Model.IsDraftModeStyleClass;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <script type="text/javascript" >
@@ -25,7 +25,7 @@
           });
 
 </script>
-  @if (@Model.TestModeStyleClass != "")
+  @if (@Model.IsDraftModeStyleClass != "")
  {
           <div id="header" class="TestHeader">
   
@@ -81,7 +81,7 @@
 </div>
 
     
- @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "myform", @class = @Model.TestModeStyleClass.ToString() }))
+ @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "myform", @class = @Model.IsDraftModeStyleClass.ToString() }))
  { 
         
             <div id="content" style="min-height:200px;">
