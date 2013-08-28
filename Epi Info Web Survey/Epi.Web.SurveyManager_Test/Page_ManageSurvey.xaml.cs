@@ -178,7 +178,7 @@ namespace Epi.Web.SurveyManager.Client
                     {
                         this.IsSingleResponseCheckBox.IsChecked = false;
                     }
-                    if (this.SurveyInfoList[this.selectedIndex].IsTestMode == true)
+                    if (this.SurveyInfoList[this.selectedIndex].IsDraftMode == true)
                     {
                         this.IsTestMode.IsChecked = true;
                     }
@@ -230,11 +230,11 @@ namespace Epi.Web.SurveyManager.Client
                 if ( this.IsTestMode.IsChecked == true)
                 {
                      
-                    this.SurveyInfoList[this.selectedIndex].IsTestMode = true;
+                    this.SurveyInfoList[this.selectedIndex].IsDraftMode = true;
                 }
                 else
                 {
-                    this.SurveyInfoList[this.selectedIndex].IsTestMode = false;
+                    this.SurveyInfoList[this.selectedIndex].IsDraftMode = false;
                 }
                 this.SurveyInfoList[this.selectedIndex].XML = new TextRange(this.TemplateXMLTextBox.Document.ContentStart, this.TemplateXMLTextBox.Document.ContentEnd).Text;
                 if (!string.IsNullOrEmpty(this.OrgTextBox1.Text))
