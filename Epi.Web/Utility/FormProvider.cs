@@ -32,9 +32,9 @@ namespace Epi.Web.MVC.Utility
 
             form.SurveyInfo = (Epi.Web.Common.DTO.SurveyInfoDTO)(SurveyMetaData);
             //Watermark 
-            if (form.SurveyInfo.IsTestMode)
+            if (form.SurveyInfo.IsDraftMode)
             {
-                form.TestModeStyleClass = "draft";
+                form.IsDraftModeStyleClass = "draft";
             }
            
             string XML = form.SurveyInfo.XML;

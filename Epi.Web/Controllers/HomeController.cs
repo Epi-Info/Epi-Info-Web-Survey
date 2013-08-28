@@ -59,14 +59,14 @@ namespace Epi.Web.MVC.Controllers
                     surveyInfoModel.IntroductionText = MvcHtmlString.Create(introText).ToString();
                 }
                 
-                if (surveyInfoModel.TestMode)
+                if (surveyInfoModel.IsDraftMode)
                 {
-                    surveyInfoModel.TestModeStyleClass = "draft";
+                    surveyInfoModel.IsDraftModeStyleClass = "draft";
                     SurveyMode = "draft";
                 }
                 else
                 {
-                    surveyInfoModel.TestModeStyleClass = "final";
+                    surveyInfoModel.IsDraftModeStyleClass = "final";
                     SurveyMode = "final";
                 }
                 bool IsMobileDevice = false;
@@ -115,7 +115,7 @@ namespace Epi.Web.MVC.Controllers
                 SurveyInfoModel surveyInfoModel = GetSurveyInfo(SurveyAnswer.SurveyId);
 
                 // set the survey answer to be production or test 
-                SurveyAnswer.IsProductionMode = !surveyInfoModel.TestMode;
+                SurveyAnswer.IsDraftMode = surveyInfoModel.IsDraftMode;
                 XDocument xdoc = XDocument.Parse(surveyInfoModel.XML);
 
                 MvcDynamicForms.Form form = _isurveyFacade.GetSurveyFormData(SurveyAnswer.SurveyId, 1, SurveyAnswer, IsMobileDevice);

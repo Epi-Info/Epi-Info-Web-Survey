@@ -26,7 +26,7 @@ namespace MvcDynamicForms
         public double Height { get; set; }
         public bool IsMobile { get; set; }
 
-        private string _TestModeStyleClass = "";
+        private string _IsDraftModeStyleClass = "";
 
         
         /// <summary>
@@ -404,15 +404,15 @@ namespace MvcDynamicForms
         public string FormJavaScript { get; set; }
 
  
-        public string TestModeStyleClass
+        public string IsDraftModeStyleClass
         {
             get
             {
-                return _TestModeStyleClass;
+                return _IsDraftModeStyleClass;
             }
             set
             {
-                _TestModeStyleClass = value;
+                _IsDraftModeStyleClass = value;
             }
         }
 

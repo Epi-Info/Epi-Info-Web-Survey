@@ -302,6 +302,7 @@ namespace Epi.Web.EF
                 DataRow.StatusId = SurveyResponse.Status;
                 DataRow.DateUpdated = DateTime.Now;
              //   DataRow.ResponsePasscode = SurveyResponse.ResponsePassCode;
+                DataRow.IsDraftMode = SurveyResponse.IsDraftMode;
                 DataRow.ResponseXMLSize = RemoveWhitespace(SurveyResponse.XML).Length; 
                 Context.SaveChanges();
             }

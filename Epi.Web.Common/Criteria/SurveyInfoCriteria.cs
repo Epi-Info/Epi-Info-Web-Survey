@@ -76,7 +76,7 @@ namespace Epi.Web.Common.Criteria
 
 
         [DataMember]
-        public bool IsTestMode { get; set; }
+        public bool IsDraftMode { get; set; }
 
 
         [DataMember]

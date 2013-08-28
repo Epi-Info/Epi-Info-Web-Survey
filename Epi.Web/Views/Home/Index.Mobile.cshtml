@@ -1,6 +1,6 @@
 ﻿@{
     ViewBag.Title = "Survey Home" + " - " +
-        Model.SurveyName + " - " + Model.TestModeStyleClass + " - Mobile";
+        Model.SurveyName + " - " + Model.IsDraftModeStyleClass + " - Mobile";
     
 }
 
@@ -68,7 +68,7 @@
                 @Model.SurveyName </h1>
              
         </div>*@
-         @if (@Model.TestModeStyleClass != "")
+         @if (@Model.IsDraftModeStyleClass != "")
           {
               <div id="header" class="TestHeader">
   
@@ -89,7 +89,7 @@
  
        }
        		 
-		@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "myform", @class = @Model.TestModeStyleClass.ToString() }))
+		@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "myform", @class = @Model.IsDraftModeStyleClass.ToString() }))
 		{ 
      
         

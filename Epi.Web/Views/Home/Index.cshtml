@@ -1,7 +1,7 @@
 ﻿@model Epi.Web.MVC.Models.SurveyInfoModel
 @{
     ViewBag.Title = "Survey Home" + " - "+ 
-        Model.SurveyName + " - " + Model.TestModeStyleClass;
+        Model.SurveyName + " - " + Model.IsDraftModeStyleClass;
     Layout = "~/Views/Shared/_Layout.cshtml";
     
 }
@@ -29,7 +29,7 @@
 </script>
  
  
- @if (@Model.TestModeStyleClass != "")
+ @if (@Model.IsDraftModeStyleClass != "")
  {
           <div id="header" class="TestHeader">
   
@@ -71,7 +71,7 @@
             </div>
         </div>
 
-       @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "myform", @class = @Model.TestModeStyleClass.ToString() }))
+       @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "myform", @class = @Model.IsDraftModeStyleClass.ToString() }))
        { 
         
             <div id="content" style="margin-bottom:200px; padding-left:10px; min-height:375px;">

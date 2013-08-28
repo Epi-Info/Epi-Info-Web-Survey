@@ -23,7 +23,7 @@ namespace Epi.Web.Common.BusinessObject
         public string XML { get; set; }
         public long TemplateXMLSize { get; set; }
         public DateTime DateCreated { get; set; }
-        public bool IsProductionMode { get; set; }
+        public bool IsDraftMode { get; set; }
         
        
     }

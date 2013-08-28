@@ -27,7 +27,7 @@ namespace Epi.Web.Common.DTO
         public Guid UserPublishKey { get; set; }
 
         [DataMember]
-        public bool IsProductionMode { get; set; }
+        public bool IsDraftMode { get; set; }
 
        
     }
