@@ -99,6 +99,7 @@ namespace Epi.Web.MVC.Controllers
                             {
                                 form.Validate(form.RequiredFieldsList);
                             }
+                            surveyAnswerDTO.IsDraftMode = surveyInfoModel.IsDraftMode;
                             this.SetCurrentPage(surveyAnswerDTO, PageNumber);
                             //PassCode start
                             if (IsMobileDevice)
@@ -159,6 +160,8 @@ namespace Epi.Web.MVC.Controllers
                 object temp = System.Web.HttpContext.Current.Cache;
                 SurveyInfoModel surveyInfoModel = GetSurveyInfo(SurveyAnswer.SurveyId);
 
+                //////////////////////UpDate Survey Mode//////////////////////////
+                SurveyAnswer.IsDraftMode = surveyInfoModel.IsDraftMode;
                 PreValidationResultEnum ValidationTest = PreValidateResponse(Mapper.ToSurveyAnswerModel(SurveyAnswer), surveyInfoModel);
              
                 switch (ValidationTest)
@@ -278,6 +281,9 @@ namespace Epi.Web.MVC.Controllers
                         {
 
                             SurveyAnswer = _isurveyFacade.GetSurveyAnswerResponse(responseId).SurveyResponseList[0];
+                            //////////////////////UpDate Survey Mode//////////////////////////
+                            SurveyAnswer.IsDraftMode = surveyInfoModel.IsDraftMode;
+
                             form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, GetSurveyPageNumber(SurveyAnswer.XML.ToString()) == 0 ? 1 : GetSurveyPageNumber(SurveyAnswer.XML.ToString()), SurveyAnswer, IsMobileDevice);
                             //Update the model
                             UpdateModel(form);
@@ -351,6 +357,8 @@ namespace Epi.Web.MVC.Controllers
                                 ContextDetailList = Epi.Web.MVC.Utility.SurveyHelper.GetContextDetailList(FunctionObject_A);
 
                                 SurveyAnswer = _isurveyFacade.GetSurveyAnswerResponse(responseId).SurveyResponseList[0];
+                                //////////////////////UpDate Survey Mode//////////////////////////
+                                SurveyAnswer.IsDraftMode = surveyInfoModel.IsDraftMode;
                                 // ReValidate All Pages
                                 for (int i = 1; i < form.NumberOfPages+1; i++)
                                 {
@@ -374,9 +382,10 @@ namespace Epi.Web.MVC.Controllers
                                     /////////////////////////////// Execute - Record After - End//////////////////////
                                 }
 
-                               
 
-                                
+
+                                //////////////////////UpDate Survey Mode//////////////////////////
+                                SurveyAnswer.IsDraftMode = surveyInfoModel.IsDraftMode;
                                 IsSubmited = true;//survey has been submited this will change the survey status to 3 - Completed
                                 _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId, form, SurveyAnswer, IsSubmited, IsSaved, PageNumber);
                                 FormsAuthentication.SignOut();
@@ -386,7 +395,9 @@ namespace Epi.Web.MVC.Controllers
                             else
                             {
                                 //This is a Navigation to a url
-                               
+
+                            //////////////////////UpDate Survey Mode//////////////////////////
+                            SurveyAnswer.IsDraftMode = surveyInfoModel.IsDraftMode;
 
                                  form = SetLists(form);
 

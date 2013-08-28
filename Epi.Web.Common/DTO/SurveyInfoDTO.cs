@@ -22,7 +22,7 @@ namespace Epi.Web.Common.DTO
         private DateTime _ClosingDate;
         private Guid _UserPublishKey;
         private Guid _OrganizationKey;
-        private bool _IsTestMode;
+        private bool _IsDraftMode;
         private DateTime _StartDate;
       
 
@@ -117,10 +117,10 @@ namespace Epi.Web.Common.DTO
         }
 
         [DataMember]
-        public bool IsTestMode
+        public bool IsDraftMode
         {
-            get { return _IsTestMode; }
-            set { _IsTestMode = value; }
+            get { return _IsDraftMode; }
+            set { _IsDraftMode = value; }
         }
 
 

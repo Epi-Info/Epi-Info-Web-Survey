@@ -170,6 +170,22 @@ namespace Epi.Web.EF
             }
         }
         private ObjectSet<Admin> _Admins;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<sysdiagram> sysdiagrams
+        {
+            get
+            {
+                if ((_sysdiagrams == null))
+                {
+                    _sysdiagrams = base.CreateObjectSet<sysdiagram>("sysdiagrams");
+                }
+                return _sysdiagrams;
+            }
+        }
+        private ObjectSet<sysdiagram> _sysdiagrams;
 
         #endregion
 
@@ -221,6 +237,14 @@ namespace Epi.Web.EF
         public void AddToAdmins(Admin admin)
         {
             base.AddObject("Admins", admin);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the sysdiagrams EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddTosysdiagrams(sysdiagram sysdiagram)
+        {
+            base.AddObject("sysdiagrams", sysdiagram);
         }
 
         #endregion
@@ -881,9 +905,9 @@ namespace Epi.Web.EF
         /// <param name="templateXMLSize">Initial value of the TemplateXMLSize property.</param>
         /// <param name="dateCreated">Initial value of the DateCreated property.</param>
         /// <param name="organizationId">Initial value of the OrganizationId property.</param>
-        /// <param name="testMode">Initial value of the TestMode property.</param>
         /// <param name="startDate">Initial value of the StartDate property.</param>
-        public static SurveyMetaData CreateSurveyMetaData(global::System.Guid surveyId, global::System.Int32 surveyTypeId, global::System.DateTime closingDate, global::System.String surveyName, global::System.String templateXML, global::System.Guid userPublishKey, global::System.Int64 templateXMLSize, global::System.DateTime dateCreated, global::System.Int32 organizationId, global::System.Boolean testMode, global::System.DateTime startDate)
+        /// <param name="isDraftMode">Initial value of the IsDraftMode property.</param>
+        public static SurveyMetaData CreateSurveyMetaData(global::System.Guid surveyId, global::System.Int32 surveyTypeId, global::System.DateTime closingDate, global::System.String surveyName, global::System.String templateXML, global::System.Guid userPublishKey, global::System.Int64 templateXMLSize, global::System.DateTime dateCreated, global::System.Int32 organizationId, global::System.DateTime startDate, global::System.Boolean isDraftMode)
         {
             SurveyMetaData surveyMetaData = new SurveyMetaData();
             surveyMetaData.SurveyId = surveyId;
@@ -895,8 +919,8 @@ namespace Epi.Web.EF
             surveyMetaData.TemplateXMLSize = templateXMLSize;
             surveyMetaData.DateCreated = dateCreated;
             surveyMetaData.OrganizationId = organizationId;
-            surveyMetaData.TestMode = testMode;
             surveyMetaData.StartDate = startDate;
+            surveyMetaData.IsDraftMode = isDraftMode;
             return surveyMetaData;
         }
 
@@ -1248,30 +1272,6 @@ namespace Epi.Web.EF
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Boolean TestMode
-        {
-            get
-            {
-                return _TestMode;
-            }
-            set
-            {
-                OnTestModeChanging(value);
-                ReportPropertyChanging("TestMode");
-                _TestMode = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("TestMode");
-                OnTestModeChanged();
-            }
-        }
-        private global::System.Boolean _TestMode;
-        partial void OnTestModeChanging(global::System.Boolean value);
-        partial void OnTestModeChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
         public global::System.DateTime StartDate
         {
             get
@@ -1290,6 +1290,30 @@ namespace Epi.Web.EF
         private global::System.DateTime _StartDate;
         partial void OnStartDateChanging(global::System.DateTime value);
         partial void OnStartDateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean IsDraftMode
+        {
+            get
+            {
+                return _IsDraftMode;
+            }
+            set
+            {
+                OnIsDraftModeChanging(value);
+                ReportPropertyChanging("IsDraftMode");
+                _IsDraftMode = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("IsDraftMode");
+                OnIsDraftModeChanged();
+            }
+        }
+        private global::System.Boolean _IsDraftMode;
+        partial void OnIsDraftModeChanging(global::System.Boolean value);
+        partial void OnIsDraftModeChanged();
 
         #endregion
 
@@ -1418,8 +1442,8 @@ namespace Epi.Web.EF
         /// <param name="responseXML">Initial value of the ResponseXML property.</param>
         /// <param name="responseXMLSize">Initial value of the ResponseXMLSize property.</param>
         /// <param name="dateCreated">Initial value of the DateCreated property.</param>
-        /// <param name="isProductionMode">Initial value of the IsProductionMode property.</param>
-        public static SurveyResponse CreateSurveyResponse(global::System.Guid responseId, global::System.Guid surveyId, global::System.DateTime dateUpdated, global::System.Int32 statusId, global::System.String responseXML, global::System.Int64 responseXMLSize, global::System.DateTime dateCreated, global::System.Boolean isProductionMode)
+        /// <param name="isDraftMode">Initial value of the IsDraftMode property.</param>
+        public static SurveyResponse CreateSurveyResponse(global::System.Guid responseId, global::System.Guid surveyId, global::System.DateTime dateUpdated, global::System.Int32 statusId, global::System.String responseXML, global::System.Int64 responseXMLSize, global::System.DateTime dateCreated, global::System.Boolean isDraftMode)
         {
             SurveyResponse surveyResponse = new SurveyResponse();
             surveyResponse.ResponseId = responseId;
@@ -1429,7 +1453,7 @@ namespace Epi.Web.EF
             surveyResponse.ResponseXML = responseXML;
             surveyResponse.ResponseXMLSize = responseXMLSize;
             surveyResponse.DateCreated = dateCreated;
-            surveyResponse.IsProductionMode = isProductionMode;
+            surveyResponse.IsDraftMode = isDraftMode;
             return surveyResponse;
         }
 
@@ -1661,24 +1685,24 @@ namespace Epi.Web.EF
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Boolean IsProductionMode
+        public global::System.Boolean IsDraftMode
         {
             get
             {
-                return _IsProductionMode;
+                return _IsDraftMode;
             }
             set
             {
-                OnIsProductionModeChanging(value);
-                ReportPropertyChanging("IsProductionMode");
-                _IsProductionMode = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("IsProductionMode");
-                OnIsProductionModeChanged();
+                OnIsDraftModeChanging(value);
+                ReportPropertyChanging("IsDraftMode");
+                _IsDraftMode = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("IsDraftMode");
+                OnIsDraftModeChanged();
             }
         }
-        private global::System.Boolean _IsProductionMode;
-        partial void OnIsProductionModeChanging(global::System.Boolean value);
-        partial void OnIsProductionModeChanged();
+        private global::System.Boolean _IsDraftMode;
+        partial void OnIsDraftModeChanging(global::System.Boolean value);
+        partial void OnIsDraftModeChanged();
 
         #endregion
 
@@ -1763,6 +1787,163 @@ namespace Epi.Web.EF
 
         #endregion
 
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="EIWSModel", Name="sysdiagram")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class sysdiagram : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new sysdiagram object.
+        /// </summary>
+        /// <param name="name">Initial value of the name property.</param>
+        /// <param name="principal_id">Initial value of the principal_id property.</param>
+        /// <param name="diagram_id">Initial value of the diagram_id property.</param>
+        public static sysdiagram Createsysdiagram(global::System.String name, global::System.Int32 principal_id, global::System.Int32 diagram_id)
+        {
+            sysdiagram sysdiagram = new sysdiagram();
+            sysdiagram.name = name;
+            sysdiagram.principal_id = principal_id;
+            sysdiagram.diagram_id = diagram_id;
+            return sysdiagram;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String name
+        {
+            get
+            {
+                return _name;
+            }
+            set
+            {
+                OnnameChanging(value);
+                ReportPropertyChanging("name");
+                _name = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("name");
+                OnnameChanged();
+            }
+        }
+        private global::System.String _name;
+        partial void OnnameChanging(global::System.String value);
+        partial void OnnameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 principal_id
+        {
+            get
+            {
+                return _principal_id;
+            }
+            set
+            {
+                Onprincipal_idChanging(value);
+                ReportPropertyChanging("principal_id");
+                _principal_id = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("principal_id");
+                Onprincipal_idChanged();
+            }
+        }
+        private global::System.Int32 _principal_id;
+        partial void Onprincipal_idChanging(global::System.Int32 value);
+        partial void Onprincipal_idChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 diagram_id
+        {
+            get
+            {
+                return _diagram_id;
+            }
+            set
+            {
+                if (_diagram_id != value)
+                {
+                    Ondiagram_idChanging(value);
+                    ReportPropertyChanging("diagram_id");
+                    _diagram_id = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("diagram_id");
+                    Ondiagram_idChanged();
+                }
+            }
+        }
+        private global::System.Int32 _diagram_id;
+        partial void Ondiagram_idChanging(global::System.Int32 value);
+        partial void Ondiagram_idChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> version
+        {
+            get
+            {
+                return _version;
+            }
+            set
+            {
+                OnversionChanging(value);
+                ReportPropertyChanging("version");
+                _version = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("version");
+                OnversionChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _version;
+        partial void OnversionChanging(Nullable<global::System.Int32> value);
+        partial void OnversionChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.Byte[] definition
+        {
+            get
+            {
+                return StructuralObject.GetValidValue(_definition);
+            }
+            set
+            {
+                OndefinitionChanging(value);
+                ReportPropertyChanging("definition");
+                _definition = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("definition");
+                OndefinitionChanged();
+            }
+        }
+        private global::System.Byte[] _definition;
+        partial void OndefinitionChanging(global::System.Byte[] value);
+        partial void OndefinitionChanged();
+
+        #endregion
+
+    
     }
 
     #endregion

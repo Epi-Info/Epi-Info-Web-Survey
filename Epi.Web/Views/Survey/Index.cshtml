@@ -347,7 +347,7 @@ function ReplaceString(string){
 });
    
 </script>
- @if (@Model.TestModeStyleClass != "")
+ @if (@Model.IsDraftModeStyleClass != "")
  {
 <div id="header" class="TestHeader">
   
@@ -474,7 +474,7 @@ function ReplaceString(string){
 			 
 			 
 			 
-		@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "myform", @class = @Model.TestModeStyleClass.ToString() }))
+		@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "myform", @class = @Model.IsDraftModeStyleClass.ToString() }))
 		{  
 		   
 			  
