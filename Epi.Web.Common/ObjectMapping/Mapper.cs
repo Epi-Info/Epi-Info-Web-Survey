@@ -33,7 +33,7 @@ namespace Epi.Web.Common.ObjectMapping
                 UserPublishKey=pDTO.UserPublishKey,
                 SurveyType = pDTO.SurveyType,
                 OrganizationKey = pDTO.OrganizationKey,
-                 IsTestMode = pDTO.IsTestMode,
+                 IsDraftMode = pDTO.IsDraftMode,
                  StartDate  = pDTO.StartDate,
                  
             };
@@ -96,7 +96,7 @@ namespace Epi.Web.Common.ObjectMapping
                 DepartmentName = pBO.DepartmentName,
                 SurveyType =pBO.SurveyType,
                 ClosingDate = pBO.ClosingDate,
-                IsTestMode = pBO.IsTestMode,
+                IsDraftMode = pBO.IsDraftMode,
                 StartDate = pBO.StartDate,
                 
                 UserPublishKey = pBO.UserPublishKey
@@ -132,7 +132,7 @@ namespace Epi.Web.Common.ObjectMapping
                 DateCompleted = pBO.DateCompleted,
                 DateCreated = pBO.DateCreated, 
                 Status = pBO.Status,
-                IsProductionMode = pBO.IsProductionMode
+                IsDraftMode = pBO.IsDraftMode
             };
         }
         public static List<SurveyAnswerDTO> ToDataTransferObject(List<SurveyResponseBO> pSurveyResposneList)
@@ -162,7 +162,7 @@ namespace Epi.Web.Common.ObjectMapping
                 DateCompleted = pDTO.DateCompleted,
                 DateCreated = pDTO.DateCreated,
                 Status = pDTO.Status,
-                IsProductionMode = pDTO.IsProductionMode
+                IsDraftMode = pDTO.IsDraftMode
                 
             };
         }

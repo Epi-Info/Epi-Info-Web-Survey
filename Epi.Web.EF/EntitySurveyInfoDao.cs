@@ -352,7 +352,7 @@ namespace Epi.Web.EF
                     DataRow.SurveyTypeId = SurveyInfo.SurveyType;
                     DataRow.UserPublishKey = SurveyInfo.UserPublishKey;
                     DataRow.TemplateXMLSize = RemoveWhitespace(SurveyInfo.XML).Length;
-                    DataRow.TestMode = SurveyInfo.IsTestMode;
+                    DataRow.IsDraftMode = SurveyInfo.IsDraftMode;
                     DataRow.StartDate = SurveyInfo.StartDate;
                    
 

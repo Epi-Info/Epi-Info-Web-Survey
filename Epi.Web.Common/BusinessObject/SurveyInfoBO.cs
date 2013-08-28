@@ -23,7 +23,7 @@ namespace Epi.Web.Common.BusinessObject
         private DateTime _ClosingDate;
         private DateTime _DateCreated;
         private string _StatusText;
-        private bool _IsTestMode;
+        private bool _IsDraftMode;
         private DateTime _StartDate;
         
 
@@ -121,10 +121,10 @@ namespace Epi.Web.Common.BusinessObject
         }
 
         [DataMember]
-        public bool IsTestMode
+        public bool IsDraftMode
         {
-            get { return _IsTestMode; }
-            set { _IsTestMode = value; }
+            get { return _IsDraftMode; }
+            set { _IsDraftMode = value; }
         }
 
 

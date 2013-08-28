@@ -32,7 +32,7 @@ namespace Epi.Web.EF
                 result.ClosingDate = entity.ClosingDate;
                 result.TemplateXMLSize = (long) entity.TemplateXMLSize;
                 result.DateCreated = entity.DateCreated;
-                result.IsTestMode = entity.TestMode;
+                result.IsDraftMode = entity.IsDraftMode;
                 result.StartDate = entity.StartDate;
                 
                 if (entity.UserPublishKey != null)
@@ -81,7 +81,7 @@ namespace Epi.Web.EF
                 SurveyTypeId = businessobject.SurveyType,
                 TemplateXMLSize = businessobject.TemplateXMLSize,
                 DateCreated = businessobject.DateCreated,
-                TestMode = businessobject.IsTestMode,
+                IsDraftMode = businessobject.IsDraftMode,
                 StartDate = businessobject.StartDate,
                
                
@@ -209,7 +209,8 @@ namespace Epi.Web.EF
                  ResponseXMLSize = pBO.TemplateXMLSize,
                 DateUpdated = pBO.DateUpdated,
                 DateCompleted = pBO.DateCompleted,
-                DateCreated = pBO.DateCreated
+                DateCreated = pBO.DateCreated,
+                IsDraftMode = pBO.IsDraftMode
 
             };
         }

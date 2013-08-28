@@ -156,7 +156,8 @@ namespace Epi.Web.MVC.Utility
                 surveyAnswerRequest.SurveyAnswerList[0].Status = 2;
             }
             surveyAnswerRequest.SurveyAnswerList[0].XML = Xdoc.ToString();
-            
+            /////Update Survey Mode ////////////////////
+            surveyAnswerRequest.SurveyAnswerList[0].IsDraftMode = surveyAnswerDTO.IsDraftMode;
             iSurveyAnswerRepository.SaveSurveyAnswer(surveyAnswerRequest);
           
         }

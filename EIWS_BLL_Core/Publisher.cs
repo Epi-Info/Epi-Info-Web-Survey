@@ -74,7 +74,7 @@ namespace Epi.Web.BLL
                                                 BO.OrganizationKey = pRequestMessage.OrganizationKey;
                                                 BO.OrganizationKey = pRequestMessage.OrganizationKey;
                                                 BO.TemplateXMLSize = pRequestMessage.TemplateXMLSize;
-                                                BO.IsTestMode = pRequestMessage.IsTestMode;
+                                                BO.IsDraftMode = pRequestMessage.IsDraftMode;
                                                 BO.StartDate = pRequestMessage.StartDate;
                                                 
 
@@ -156,7 +156,7 @@ namespace Epi.Web.BLL
                             BO.OrganizationKey = pRequestMessage.OrganizationKey;
                             BO.OrganizationKey = pRequestMessage.OrganizationKey;
                             BO.TemplateXMLSize = pRequestMessage.TemplateXMLSize;
-                            BO.IsTestMode = pRequestMessage.IsTestMode;
+                            BO.IsDraftMode = pRequestMessage.IsDraftMode;
                             BO.StartDate = pRequestMessage.StartDate;
                            
 

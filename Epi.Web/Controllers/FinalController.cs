@@ -44,13 +44,13 @@ namespace Epi.Web.MVC.Controllers
                 string exitText = regex.Replace(surveyInfoModel.ExitText.Replace("  ", " &nbsp;"), "<br />");
                 surveyInfoModel.ExitText = MvcHtmlString.Create(exitText).ToString();
 
-                if (surveyInfoModel.TestMode)
+                if (surveyInfoModel.IsDraftMode)
                 {
-                    surveyInfoModel.TestModeStyleClass = "draft";
+                    surveyInfoModel.IsDraftModeStyleClass = "draft";
                 }
                 else
                 {
-                    surveyInfoModel.TestModeStyleClass = "final";
+                    surveyInfoModel.IsDraftModeStyleClass = "final";
                 }
                 bool IsMobileDevice = false;
                 IsMobileDevice = this.Request.Browser.IsMobileDevice;

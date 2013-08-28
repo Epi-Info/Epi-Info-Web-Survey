@@ -34,7 +34,7 @@ namespace Epi.Web.MVC.Models
                 SurveyType = SurveyInfoDTO.SurveyType,
                 ClosingDate = SurveyInfoDTO.ClosingDate,
                 UserPublishKey = SurveyInfoDTO.UserPublishKey,
-                TestMode = SurveyInfoDTO.IsTestMode,
+                IsDraftMode = SurveyInfoDTO.IsDraftMode,
                 StartDate = SurveyInfoDTO.StartDate,
                
             };
@@ -62,7 +62,7 @@ namespace Epi.Web.MVC.Models
                 IsSuccess = SurveyInfoModel.IsSuccess,
                 ClosingDate = SurveyInfoModel.ClosingDate,
                 UserPublishKey = SurveyInfoModel.UserPublishKey,
-                IsTestMode = SurveyInfoModel.TestMode,
+                IsDraftMode = SurveyInfoModel.IsDraftMode,
                 StartDate = SurveyInfoModel.StartDate,
                 
             };
