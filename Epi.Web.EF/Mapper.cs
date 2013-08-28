@@ -148,6 +148,7 @@ namespace Epi.Web.EF
                 DateCompleted = entity.DateCompleted,
                 TemplateXMLSize = (long)entity.ResponseXMLSize,
                  DateCreated = entity.DateCreated,
+                 IsDraftMode = entity.IsDraftMode ,
             };
         }
 
