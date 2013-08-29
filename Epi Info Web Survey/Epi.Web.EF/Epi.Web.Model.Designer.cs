@@ -8,13 +8,12 @@
 //------------------------------------------------------------------------------
 
 using System;
-using System.ComponentModel;
-using System.Data.EntityClient;
 using System.Data.Objects;
 using System.Data.Objects.DataClasses;
-using System.Linq;
-using System.Runtime.Serialization;
+using System.Data.EntityClient;
+using System.ComponentModel;
 using System.Xml.Serialization;
+using System.Runtime.Serialization;
 
 [assembly: EdmSchemaAttribute()]
 #region EDM Relationship Metadata
@@ -188,7 +187,6 @@ namespace Epi.Web.EF
         private ObjectSet<sysdiagram> _sysdiagrams;
 
         #endregion
-
         #region AddTo Methods
     
         /// <summary>
@@ -248,11 +246,11 @@ namespace Epi.Web.EF
         }
 
         #endregion
-
     }
+    
 
     #endregion
-
+    
     #region Entities
     
     /// <summary>
@@ -285,7 +283,6 @@ namespace Epi.Web.EF
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -412,7 +409,6 @@ namespace Epi.Web.EF
         partial void OnNotifyChanged();
 
         #endregion
-
     
         #region Navigation Properties
     
@@ -455,7 +451,6 @@ namespace Epi.Web.EF
         }
 
         #endregion
-
     }
     
     /// <summary>
@@ -482,7 +477,6 @@ namespace Epi.Web.EF
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -537,7 +531,6 @@ namespace Epi.Web.EF
         partial void OnStatusChanged();
 
         #endregion
-
     
         #region Navigation Properties
     
@@ -564,7 +557,6 @@ namespace Epi.Web.EF
         }
 
         #endregion
-
     }
     
     /// <summary>
@@ -589,7 +581,6 @@ namespace Epi.Web.EF
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -644,7 +635,6 @@ namespace Epi.Web.EF
         partial void OnSurveyTypeChanged();
 
         #endregion
-
     
         #region Navigation Properties
     
@@ -671,7 +661,6 @@ namespace Epi.Web.EF
         }
 
         #endregion
-
     }
     
     /// <summary>
@@ -704,7 +693,6 @@ namespace Epi.Web.EF
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -831,7 +819,6 @@ namespace Epi.Web.EF
         partial void OnIsHostOrganizationChanged();
 
         #endregion
-
     
         #region Navigation Properties
     
@@ -880,7 +867,6 @@ namespace Epi.Web.EF
         }
 
         #endregion
-
     }
     
     /// <summary>
@@ -925,7 +911,6 @@ namespace Epi.Web.EF
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -1316,7 +1301,6 @@ namespace Epi.Web.EF
         partial void OnIsDraftModeChanged();
 
         #endregion
-
     
         #region Navigation Properties
     
@@ -1419,7 +1403,6 @@ namespace Epi.Web.EF
         }
 
         #endregion
-
     }
     
     /// <summary>
@@ -1458,7 +1441,6 @@ namespace Epi.Web.EF
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -1705,7 +1687,6 @@ namespace Epi.Web.EF
         partial void OnIsDraftModeChanged();
 
         #endregion
-
     
         #region Navigation Properties
     
@@ -1786,7 +1767,6 @@ namespace Epi.Web.EF
         }
 
         #endregion
-
     }
     
     /// <summary>
@@ -1815,7 +1795,6 @@ namespace Epi.Web.EF
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -1942,11 +1921,9 @@ namespace Epi.Web.EF
         partial void OndefinitionChanged();
 
         #endregion
-
     
     }
 
     #endregion
-
     
 }
