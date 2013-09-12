@@ -19,11 +19,11 @@ namespace Epi.Web.MVC
             {
                 if (s.Equals("TRUE",System.StringComparison.OrdinalIgnoreCase))
                 {
-                    IsIntegrated = true;
+                     IsIntegrated = true;
                 }
                 else
                 {
-                    IsIntegrated = false;
+                     IsIntegrated = false;
                 }
             }
 
