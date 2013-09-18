@@ -19,28 +19,31 @@ namespace Epi.Web.EF
             List<AdminBO> AdminList = new List<AdminBO>();
       
             int OrgId = 0;
-         
+            int AdminOrgId = 0;
             try
                 {
                 using (var Context = DataObjectFactory.CreateContext())
                     {
                     var OrgQuery = (from response in Context.Organizations
                                  where response.OrganizationKey == gOrgKeyEncrypted
-                                 select new { response.OrganizationId }).Distinct();
+                                    select new { response.OrganizationId }).First();
 
+                    OrgId = OrgQuery.OrganizationId;
 
-                    var DataRow = OrgQuery.Distinct();
-                    foreach (var Row in DataRow)
-                        {
+                  
 
-                       
-                        OrgId = Row.OrganizationId;
-                        
-                        }
+                    var AdminOrgQuery = (from response in Context.Organizations
+                                         where response.IsHostOrganization == true
+                                         select new { response.OrganizationId }).First();
+                    AdminOrgId = AdminOrgQuery.OrganizationId;
+                    
 
                     var AdminQuery = (from response in Context.Admins
-                                      where response.OrganizationId == OrgId && response.IsActive == true && response.Notify == true 
+                                      where response.OrganizationId == OrgId  && response.IsActive == true && response.Notify == true 
                                  select new { response });
+                    var AdminQuery1 = (from response in Context.Admins
+                                      where  response.OrganizationId == AdminOrgId && response.IsActive == true && response.Notify == true
+                                      select new { response });
 
                     foreach (var row in AdminQuery)
                         {
@@ -50,6 +53,15 @@ namespace Epi.Web.EF
                         
                         AdminList.Add(AdminBO);
                         
+                        }
+                    foreach (var row in AdminQuery1)
+                        {
+                        AdminBO AdminBO = new Common.BusinessObject.AdminBO();
+                        AdminBO.AdminEmail = row.response.AdminEmail;
+                        AdminBO.IsActive = row.response.IsActive;
+
+                        AdminList.Add(AdminBO);
+
                         }
                     }
                 }
@@ -71,7 +83,7 @@ namespace Epi.Web.EF
             List<AdminBO> AdminList = new List<AdminBO>();
              return AdminList;
             }
-        public void InsertAdmin(AdminBO Admin) { }
+        public void InsertAdmin(AdminBO Admin) {}
 
 
        public  void UpdateAdmin(AdminBO Admin) { }
