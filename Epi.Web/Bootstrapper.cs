@@ -53,6 +53,8 @@ namespace Epi.Web.MVC
                     .ConfigureInjectionFor<SurveyResponseXML>(new InjectionConstructor());
 
                 container.RegisterType<Epi.Web.MVC.Repositories.Core.ISurveyInfoRepository, Epi.Web.MVC.Repositories.IntegratedSurveyInfoRepository>();
+
+                container.RegisterType<Epi.Web.MVC.Repositories.Core.IOrganizationAccountRepository, Epi.Web.MVC.Repositories.IntegratedOrganizationAccountRepository>();
             }
             else
             {

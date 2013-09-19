@@ -83,13 +83,59 @@ namespace Epi.Web.EF
             List<AdminBO> AdminList = new List<AdminBO>();
              return AdminList;
             }
-        public void InsertAdmin(AdminBO Admin) {}
+        public void InsertAdmin(AdminBO Admin) {
+
+        try
+            {
+            using (var Context = DataObjectFactory.CreateContext())
+                {
+                Admin AdminEntity = Mapper.ToEF(Admin);
+                Context.AddToAdmins(AdminEntity);
+
+                Context.SaveChanges();
+                }
+            }
+        catch (Exception ex)
+            {
+            throw (ex);
+            }
+            
+            
+            }
 
 
        public  void UpdateAdmin(AdminBO Admin) { }
 
 
         public void DeleteAdmin(AdminBO Admin) { }
+        public List<AdminBO> GetAdminEmails()
+            {
+
+            List<AdminBO> AdminBO = new List<AdminBO>();
+            try
+                {
+                using (var Context = DataObjectFactory.CreateContext())
+                    {
+                    var Query = (from response in Context.Admins
+
+                                 select new { response.AdminEmail }).Distinct();
+
+
+                    var DataRow = Query.Distinct();
+                    foreach (var Row in DataRow)
+                        {
+
+                        AdminBO.Add(Mapper.MapAdminEmail(Row.AdminEmail));
+
+                        }
+                    }
+                }
+            catch (Exception ex)
+                {
+                throw (ex);
+                }
+            return AdminBO;
+            }
 
         }
     }

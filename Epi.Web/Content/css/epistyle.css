@@ -696,3 +696,30 @@ button.dialogbtn
  -moz-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3) !important;
   /*behavior: url('../Scripts/PIE.htc');*/
  }
+ 
+ /*style="background-color:#5E80B5 ; height:35px; width:120px; font-weight:bold; color:White; border-radius:8px; border:0px; margin-left :50px;*/
+ 
+ button.account
+ {
+ border: 1px #4e9689 solid !important;
+ -moz-border-radius: 10px !important;
+ -webkit-border-radius: 10px !important;
+ -khtml-border-radius: 10px !important;
+ border-radius: 8px !important;
+ /*padding: 3px 5px 3px 5px !important;*/
+ color:#FFF !important;
+ font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif !important;
+ font-size: 10pt !important;
+ font-weight:bold !important;
+ width: 150px !important;
+ border: 1px solid rgba(0,0,0,0.5) !important;
+ background: #5E80B5 !important; 
+ height:35px;
+ /*
+ box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3) !important;
+ -o-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3) !important;
+ -webkit-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3) !important;
+ -moz-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3) !important;
+  */
+/*behavior: url('../Scripts/PIE.htc');*/
+ }
