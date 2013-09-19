@@ -168,8 +168,8 @@ namespace Epi.Web.EF
             {
                 Organization = entity.Organization1,
                 IsEnabled = entity.IsEnabled,
-                OrganizationKey = entity.OrganizationKey
-
+                OrganizationKey = entity.OrganizationKey,
+                OrganizationId = entity.OrganizationId
 
             };
         }
@@ -183,6 +183,16 @@ namespace Epi.Web.EF
 
             };
         }
+        internal static AdminBO MapAdminEmail(string AdminEmail)
+            {
+            return new AdminBO
+            {
+                AdminEmail = AdminEmail
+
+
+
+            };
+            }
         internal static Organization ToEF(OrganizationBO pBo)
         {
             return new Organization
@@ -194,6 +204,20 @@ namespace Epi.Web.EF
 
             };
         }
+
+        internal static Admin ToEF(AdminBO pBo)
+            {
+                    return new Admin
+                    {
+                         AdminEmail = pBo.AdminEmail,
+                         AdminId = pBo.AdminId,
+                         IsActive = pBo.IsActive,
+                         Notify = pBo.Notify,
+                         OrganizationId = pBo.OrganizationId,
+
+
+                    };
+            }
         /// <summary>
         /// Maps SurveyInfoBO business object to SurveyMetaData entity.
         /// </summary>
