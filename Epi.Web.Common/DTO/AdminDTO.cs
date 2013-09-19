@@ -8,10 +8,10 @@ namespace Epi.Web.Common.DTO
    public class AdminDTO
        {
        private string _AdminEmail;
-       private string _OrganizationId;
+       private int _OrganizationId;
        private bool _IsActive;
-
-       
+       private bool _Notify;
+       private Guid _AdminId;
        public string AdminEmail
            {
            get { return _AdminEmail; }
@@ -19,7 +19,7 @@ namespace Epi.Web.Common.DTO
            }
 
       
-       public string OrganizationId
+       public int OrganizationId
            {
            get { return _OrganizationId; }
            set { _OrganizationId = value; }
@@ -31,7 +31,15 @@ namespace Epi.Web.Common.DTO
            get { return _IsActive; }
            set { _IsActive = value; }
            }
-
-
+       public bool Notify
+           {
+           get { return _Notify; }
+           set { _Notify = value; }
+           }
+       public Guid AdminId
+           {
+           get { return _AdminId; }
+           set { _AdminId = value; }
+           }
        }
     }

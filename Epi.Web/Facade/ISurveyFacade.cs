@@ -20,6 +20,6 @@ namespace Epi.Web.MVC.Facade
         void UpdatePassCode(string responseId, string passcode);
         UserAuthenticationResponse GetAuthenticationResponse(string responseId);
         ISurveyAnswerRepository GetSurveyAnswerRepository();
-
+        OrganizationAccountResponse CreateAccount(OrganizationAccountRequest AccountRequest);
     }
 }
