@@ -107,8 +107,19 @@ namespace Epi.Web.MVC
              new { controller = "Post", action = "SignOut", id = "" }
              );  // Parameter defaults
 
-
-
+            routes.MapRoute
+                      (
+                        null,                                              // Route name
+                        "Account",                           // URL with parameters
+                        new { controller = "Account", action = "Index" }
+                        );  // Parameter defaults
+            routes.MapRoute
+                     (
+                       null,                                              // Route name
+                       "Account/CreateAccount",                           // URL with parameters
+                       new { controller = "Account", action = "CreateAccount" }
+                       );   
+           
             //routes.MapRoute(
             //   "Default", // Route name
             //   "{*url}", // URL with parameters

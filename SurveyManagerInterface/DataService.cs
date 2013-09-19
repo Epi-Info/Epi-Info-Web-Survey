@@ -528,6 +528,48 @@ namespace Epi.Web.WCF.SurveyService
             return result;
         }
 
+        public OrganizationAccountResponse CreateAccount(OrganizationAccountRequest pRequest) 
+            {
+            OrganizationAccountResponse OrgAccountResponse = new OrganizationAccountResponse();
+            Epi.Web.Interfaces.DataInterfaces.IAdminDao AdminDao = new EF.EntityAdminDao();
+            Epi.Web.BLL.Admin ImplementationAdmin = new Epi.Web.BLL.Admin(AdminDao);
+            Epi.Web.Interfaces.DataInterfaces.IOrganizationDao IOrganizationDao = new EF.EntityOrganizationDao();
+            Epi.Web.BLL.Organization Implementation = new Epi.Web.BLL.Organization(IOrganizationDao);
+            bool IsOrgExists = false;
+            bool IsAdminExists = false;
+            var Organization = Mapper.ToBusinessObject(pRequest.Organization);
+            var Admin = Mapper.ToBusinessObject(pRequest.Admin);
+            try
+                {
 
+               IsOrgExists = Implementation.OrganizationNameExists(pRequest.Organization.Organization, pRequest.Organization.OrganizationKey, "");
+               IsAdminExists = ImplementationAdmin.AdminEmailExists(pRequest.Admin.AdminEmail.ToString());
+               if (!IsOrgExists && !IsAdminExists)
+                   {
+                   Implementation.InsertOrganizationInfo(Organization);
+                   var OrganizationKey = Epi.Web.Common.Security.Cryptography.Decrypt(Organization.OrganizationKey);
+                   OrganizationBO OrganizationBO = Implementation.GetOrganizationByKey(OrganizationKey);
+
+                   Admin.OrganizationId = OrganizationBO.OrganizationId;
+                   ImplementationAdmin.InsertAdminInfo(Admin);
+
+                   ImplementationAdmin.NotifyAdminAccountCreation(Admin, Organization);
+                   ImplementationAdmin.EmailApplicant(Admin, Organization);
+
+                   OrgAccountResponse.Message = "Success";
+                   }
+               else {
+                      OrgAccountResponse.Message = "Exists";
+                   }
+                }
+            catch (Exception ex)
+                {
+                OrgAccountResponse.Message = "Error";
+                
+                }
+            return OrgAccountResponse;
+            
+            
+            }
     }
 }

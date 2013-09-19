@@ -33,6 +33,8 @@ namespace Epi.Web.MVC.Facade
         //declare SurveyResponseXML object
         private SurveyResponseXML _surveyResponseXML;
 
+        private OrganizationAccountResponse _OrganizationAccountResponse;
+        private IOrganizationAccountRepository _iOrgAccountRepository;
         /// <summary>
         /// Injectinting ISurveyInfoRepository through Constructor
         /// </summary>
@@ -40,7 +42,7 @@ namespace Epi.Web.MVC.Facade
         public SurveyFacade(ISurveyInfoRepository iSurveyInfoRepository, ISurveyAnswerRepository iSurveyResponseRepository,
                                   Epi.Web.Common.Message.SurveyInfoRequest surveyInfoRequest, Epi.Web.Common.Message.SurveyAnswerRequest surveyResponseRequest,
                                   Common.DTO.SurveyAnswerDTO surveyAnswerDTO,
-                                   SurveyResponseXML surveyResponseXML, UserAuthenticationRequest surveyAuthenticationRequest, Epi.Web.Common.DTO.PassCodeDTO PassCodeDTO)
+                                   SurveyResponseXML surveyResponseXML, UserAuthenticationRequest surveyAuthenticationRequest, Epi.Web.Common.DTO.PassCodeDTO PassCodeDTO, IOrganizationAccountRepository iOrgAccountRepository)
         {
             _iSurveyInfoRepository = iSurveyInfoRepository;
             _iSurveyAnswerRepository = iSurveyResponseRepository;
@@ -50,6 +52,7 @@ namespace Epi.Web.MVC.Facade
             _surveyResponseXML = surveyResponseXML;
             _surveyAuthenticationRequest = surveyAuthenticationRequest;
             _PassCodeDTO = PassCodeDTO;
+            _iOrgAccountRepository = iOrgAccountRepository;
         }
 
         /// <summary>
@@ -150,5 +153,13 @@ namespace Epi.Web.MVC.Facade
             UserAuthenticationResponse AuthenticationResponse = _iSurveyAnswerRepository.GetAuthenticationResponse(_surveyAuthenticationRequest);
             return AuthenticationResponse;
         }
+
+        public OrganizationAccountResponse CreateAccount(OrganizationAccountRequest AccountRequest) 
+            
+            {
+            OrganizationAccountResponse OrganizationAccountResponse = _iOrgAccountRepository.CreateAccount(AccountRequest);
+            return OrganizationAccountResponse;
+            
+            }
     }
 }

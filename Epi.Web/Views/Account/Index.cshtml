@@ -1,0 +1,129 @@
+﻿@model string
+@{
+    ViewBag.Title = "Index";
+}
+
+<script type="text/javascript">
+
+
+
+    $(document).ready(function () {
+        // a workaround for a flaw in the demo system (http://dev.jqueryui.com/ticket/4375), ignore!
+        $('.success').hide();
+        $('#CreateAccount').attr("disabled", "disabled");
+        $('#TermOfUse').hide();
+
+          $("#TermOfUseLable").click(function () {
+        if ($('#TermOfUse').is(":visible")) {
+            $('#TermOfUse').hide();
+            }else{
+
+            $('#TermOfUse').show();
+            }
+        });
+
+        $("#IagreeBox").change(function () {
+            if (this.checked) {
+                $('#CreateAccount').removeAttr("disabled");
+            } else {
+
+                $('#CreateAccount').attr("disabled", "disabled");
+            }
+        });
+    });
+
+    
+
+    function CreateAccount() {
+   
+        var EmailAddress = $('#Email').val();
+        var EmailAddress2 =  $('#ConfirmEmail').val();
+        var OrganizationName = $('#OrganizationName').val();
+        var postUrl = '/Account/CreateAccount'; 
+        
+        var user = { 'EmailAddress': EmailAddress,
+        'OrganizationName': OrganizationName
+   };
+   
+        if (ValidateEmail(EmailAddress) && ValidateEmail(EmailAddress2)) {
+            if ($.trim(EmailAddress) == $.trim(EmailAddress2)) {
+                $.post(
+                postUrl,
+                user,
+                function (data) {
+                    if (data === true) {
+                        // alert('An email has been sent with survey link.');
+                        $('#AccountForm').hide();
+                        $('.success').show();
+                    }
+                    else {
+                        if (data === 'Exists') {
+                            alert('The email address or the organization name provided already exists.');
+                                 $('.success').hide();
+                             }
+                             else
+                             {
+                                  alert('Failed to Create an account.');
+                                 $('.success').hide();
+                             }
+                    }
+                },
+                'json'
+            );
+            }else{
+              alert('The email address did not match.');
+            }
+
+        }
+        else
+        {
+            alert('Enter a valid email address!');
+        }
+    }
+    
+</script>
+
+<div style="height:550px;">
+<div  id="AccountForm" style="height:250px; width:450px; background-color:#EBEFF5;border:0.5px solid; border-radius:15px; border-color:lightGray">
+
+
+    
+    <label  style="  padding-left:30px; font-family:Arial; font-size:80%" id="OrganizationNamelabel">Organization Name:</label><br>
+    <input type="text" id="OrganizationName" style="padding-left:10px; margin-left :22px; width:330px ; border-color:Black; border:1px"/><br>
+  
+   
+    <label  style=" padding-left:30px; font-family:Arial; font-size:small" id="Email?abel">Email Address:</label><br>
+    <input type="text" id="Email" style="padding-left:10px ;margin-left:22px;  width:330px;border-color:Black; border:1px   "/><br>
+  
+  
+    <label style=" padding-left:30px; font-family:Arial; font-size:small" id="ConfirmEmailLabel ">Confirm Email Address:</label><br>
+    <input type="text" id="ConfirmEmail" style="padding-left:10px ;margin-left:22px;  width:330px ;border-color:Black; border:1px"/><br>
+   
+  
+ 
+    <input type="checkbox" id="IagreeBox" style="padding-left:30px" />
+    <label style="font-family:Arial; font-size:small" id="IagreeBoxLabel ">I agree to the <span style="font-weight:bold;">Terms of Service and the conditions of use</span></label>
+ 
+    <p>
+    <input class="account" type="button" id="CreateAccount" value="Create Account" onclick="CreateAccount();" style=" margin-left:100px" />
+     <input class="account" type="button" id="Cancel" value="Cancel" style=" margin-left :50px" />
+    </p>
+</div>
+<div class="success" style="margin:1em;">
+ Your account has been created.
+    <div class="image"><img src="@Url.Content("~/Content/images/button_check.png")" style="vertical-align: middle; padding-right: 10px;" alt=""/>
+   
+    </div>
+    <div class="message">
+        You will soon receive an email with account information to start publishing surveys from your organization. 
+    </div>
+    <div style="clear:both;"></div>
+</div>
+<div id="TermOfUseLable" >
++View term Of Use:  
+</div><br/>
+<div id="TermOfUse">
+
+@Model.ToString();
+</div>
+</div>
