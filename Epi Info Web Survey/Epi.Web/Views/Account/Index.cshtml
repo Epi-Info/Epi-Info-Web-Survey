@@ -180,7 +180,7 @@
     <div id="TOU">
         <h2 class="h2header">Terms of service and conditions of use</h2>
         <div class="termsofuse">
-            @Model.ToString();
+            @Html.Raw(Model.ToString())
         </div>
     </div>
 </div>
