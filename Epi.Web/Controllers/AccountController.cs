@@ -74,20 +74,20 @@ namespace Epi.Web.MVC.Controllers
                 Guid AdminKey = Guid.NewGuid();
 
                 AdminDTO.AdminEmail = EmailAddress;
-                AdminDTO.AdminId = AdminKey;
-                if (ApplicantValidation.ToUpper() == "TRUE")
-                    {
-                        AdminDTO.IsActive = false;
-                        AdminDTO.Notify = false;
-                        OrganizationDTO.IsEnabled = false;
-                    }
-                else
-                    {
+               // AdminDTO.AdminId = AdminKey;
+                //if (ApplicantValidation.ToUpper() == "TRUE")
+                //    {
+                //        AdminDTO.IsActive = false;
+                //       // AdminDTO.Notify = false;
+                //        OrganizationDTO.IsEnabled = false;
+                //    }
+                //else
+                //    {
                         AdminDTO.IsActive = true;
-                        AdminDTO.Notify = true;
+                      //  AdminDTO.Notify = true;
                         OrganizationDTO.IsEnabled = true;
                     
-                    }
+                   // }
                 OrganizationDTO.Organization = OrganizationName;
                
                 OrganizationDTO.OrganizationKey = OrgKey.ToString();

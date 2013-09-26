@@ -56,9 +56,9 @@ namespace Epi.Web.Common.ObjectMapping
             {
                  AdminEmail = pDTO.AdminEmail,
                  IsActive = pDTO.IsActive,
-                 Notify = pDTO.Notify,
+                // Notify = pDTO.Notify,
                  OrganizationId = pDTO.OrganizationId,
-                 AdminId = pDTO.AdminId
+                 //AdminId = pDTO.AdminId
 
             };
             }

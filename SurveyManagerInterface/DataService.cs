@@ -550,12 +550,10 @@ namespace Epi.Web.WCF.SurveyService
                    var OrganizationKey = Epi.Web.Common.Security.Cryptography.Decrypt(Organization.OrganizationKey);
                    OrganizationBO OrganizationBO = Implementation.GetOrganizationByKey(OrganizationKey);
 
-                   Admin.OrganizationId = OrganizationBO.OrganizationId;
-                   ImplementationAdmin.InsertAdminInfo(Admin);
+                   Admin.OrganizationId = OrganizationBO.OrganizationId.ToString();
+                   ImplementationAdmin.InsertAdminInfo(Admin, Organization);
 
-                   ImplementationAdmin.NotifyAdminAccountCreation(Admin, Organization);
-                   ImplementationAdmin.EmailApplicant(Admin, Organization);
-
+                   
                    OrgAccountResponse.Message = "Success";
                    }
                else {
