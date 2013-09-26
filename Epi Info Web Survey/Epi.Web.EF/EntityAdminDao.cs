@@ -84,12 +84,16 @@ namespace Epi.Web.EF
              return AdminList;
             }
         public void InsertAdmin(AdminBO Admin) {
-
+       
+         
         try
             {
             using (var Context = DataObjectFactory.CreateContext())
                 {
                 Admin AdminEntity = Mapper.ToEF(Admin);
+                
+              
+
                 Context.AddToAdmins(AdminEntity);
 
                 Context.SaveChanges();
