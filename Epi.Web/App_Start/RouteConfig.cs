@@ -110,15 +110,15 @@ namespace Epi.Web.MVC
             routes.MapRoute
                       (
                         null,                                              // Route name
-                        "Account",                           // URL with parameters
-                        new { controller = "Account", action = "Index" }
+                        "Account/{emailaddress}",                           // URL with parameters
+                        new { controller = "Account", action = "Index", emailaddress = UrlParameter.Optional }
                         );  // Parameter defaults
-            routes.MapRoute
-                     (
-                       null,                                              // Route name
-                       "Account/CreateAccount",                           // URL with parameters
-                       new { controller = "Account", action = "CreateAccount" }
-                       );   
+            //routes.MapRoute
+            //         (
+            //           null,                                              // Route name
+            //           "Account/Index",                           // URL with parameters
+            //           new { controller = "Account", action = "Index" }
+            //           );   
            
             //routes.MapRoute(
             //   "Default", // Route name
