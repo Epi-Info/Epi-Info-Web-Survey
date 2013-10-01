@@ -25,6 +25,7 @@ using Epi.Web.Common.Message;
 using Epi.Web.Common.DTO;
 namespace Epi.Web.MVC.Controllers
 {
+  
     public class AccountController : Controller
     {
     private Epi.Web.MVC.Facade.ISurveyFacade _isurveyFacade;
@@ -43,7 +44,7 @@ namespace Epi.Web.MVC.Controllers
            ViewBag.Version = version;
            string filepath = Server.MapPath("\\Content\\Text\\TermOfUse.txt");
            string content = string.Empty;
-           object Obj = new object();
+           AccountInfo Obj = new AccountInfo();
            try
                {
                using (var stream = new StreamReader(filepath))
@@ -55,64 +56,82 @@ namespace Epi.Web.MVC.Controllers
                {
  
                }
-           Obj = content;
+         ViewData["TermOfUse"] = content;
            return View(Obj);
         }
-       [HttpPost]
-        public JsonResult CreateAccount(string EmailAddress, string OrganizationName) 
+        [HttpPost]
+
+        public ActionResult Index(Epi.Web.MVC.Models.AccountInfo AccountInfo) 
             {
+            string filepath = Server.MapPath("\\Content\\Text\\TermOfUse.txt");
+            string content = string.Empty;
+
             string ApplicantValidation = ConfigurationManager.AppSettings["APPLICANT_VALIDATION_IS_ENABLED"];
+            try
+                {
+                using (var stream = new StreamReader(filepath))
+                    {
+                    content = stream.ReadToEnd();
+                    }
+                }
+            catch (Exception exc)
+                {
+
+                }
+            ViewData["TermOfUse"] = content;
            
-        
             try
                 {
                 OrganizationAccountResponse Response = new OrganizationAccountResponse();
                 OrganizationAccountRequest Request = new OrganizationAccountRequest();
                 AdminDTO AdminDTO = new AdminDTO();
-                OrganizationDTO OrganizationDTO = new  OrganizationDTO();
+                OrganizationDTO OrganizationDTO = new OrganizationDTO();
                 Guid OrgKey = Guid.NewGuid();
                 Guid AdminKey = Guid.NewGuid();
 
-                AdminDTO.AdminEmail = EmailAddress;
-               // AdminDTO.AdminId = AdminKey;
-                //if (ApplicantValidation.ToUpper() == "TRUE")
-                //    {
-                //        AdminDTO.IsActive = false;
-                //       // AdminDTO.Notify = false;
-                //        OrganizationDTO.IsEnabled = false;
-                //    }
-                //else
-                //    {
-                        AdminDTO.IsActive = true;
-                      //  AdminDTO.Notify = true;
-                        OrganizationDTO.IsEnabled = true;
-                    
-                   // }
-                OrganizationDTO.Organization = OrganizationName;
-               
+                AdminDTO.AdminEmail = AccountInfo.Email;
+                AdminDTO.IsActive = true;
+                OrganizationDTO.IsEnabled = true;
+
+
+                OrganizationDTO.Organization = AccountInfo.OrgName;
+
                 OrganizationDTO.OrganizationKey = OrgKey.ToString();
 
                 Request.Organization = OrganizationDTO;
                 Request.Admin = AdminDTO;
 
+                if(ModelState.IsValid){
 
-                Response = _isurveyFacade.CreateAccount(Request);
+                        Response = _isurveyFacade.CreateAccount(Request);
+                    
+                    }
+                else
+                    {
+                    
+                      return View(AccountInfo);
+                    }
 
                 if (Response.Message.ToUpper() == "SUCCESS")
                     {
-                    return Json(true);
+                    AccountInfo.Status = "SUCCESS";
+                    return View(AccountInfo);
                     }
-                else{
-                return Json("Exists");
+                else
+                    {
+                    ModelState.AddModelError("Error", "This organization name and/or email address already exists.");
+                   
+                    return View(AccountInfo);
                     }
 
 
-          
-             }
+
+                }
             catch (Exception ex)
-            {
-                return Json(false);
-            }
-            }
+                {
+                ModelState.AddModelError("Error", "An error occurred while trying to create an account. Please try again later.");
+                return View(AccountInfo);
+                }
+           }
     }
 }
