@@ -1,4 +1,4 @@
-﻿@model string
+﻿@model Epi.Web.MVC.Models.AccountInfo
 @{
     ViewBag.Title = "Index";
 }
@@ -9,7 +9,7 @@
 
     $(document).ready(function () {
         // a workaround for a flaw in the demo system (http://dev.jqueryui.com/ticket/4375), ignore!
-        $('.success').hide();
+       // $('.success').hide();
         $('#CreateAccount').attr("disabled", "disabled");
         $('#TermOfUse').hide();
 
@@ -33,56 +33,8 @@
     });
 
     
-
-    function CreateAccount() {
-   
-        var EmailAddress = $('#Email').val();
-        var EmailAddress2 =  $('#ConfirmEmail').val();
-        var OrganizationName = $('#OrganizationName').val();
-        var postUrl = '/Account/CreateAccount'; 
-        
-        var user = { 'EmailAddress': EmailAddress,
-        'OrganizationName': OrganizationName
-   };
-   
-        if (ValidateEmail(EmailAddress) && ValidateEmail(EmailAddress2)) {
-            if ($.trim(EmailAddress) == $.trim(EmailAddress2)) {
-                $.post(
-                postUrl,
-                user,
-                function (data) {
-                    if (data === true) {
-                        // alert('An email has been sent with survey link.');
-                        $('#AccountForm').hide();
-                        $('#IntroForm').hide();
-                        $('#TOU').hide();
-                        $('#head').hide();
-                        $('.success').show();
-                    }
-                    else {
-                        if (data === 'Exists') {
-                            alert('The email address or the organization name provided already exists.');
-                                 $('.success').hide();
-                             }
-                             else
-                             {
-                                  alert('Failed to Create an account.');
-                                 $('.success').hide();
-                             }
-                    }
-                },
-                'json'
-            );
-            }else{
-              alert('The email address did not match.');
-            }
-
-        }
-        else
-        {
-            alert('Enter a valid email address!');
-        }
-    }
+ 
+    
     
 </script>
 <style>
@@ -122,9 +74,43 @@
      -moz-box-shadow: 0 2px 6px rgba(0,0,0,0.1), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);         
      }
      [disabled]:hover {background-color:#dfdfce;}
+     .Account
+     {
+        width:350px;
+        height:24px;
+        font: 14px Segoe UI; 
+      }
+    .field-validation-error {
+    color: #ff0000;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+.input-validation-error {
+    border: 1px solid #ff0000;
+    background-color: #ffeeee;
+}
+
+.validation-summary-errors {
+    font-weight: bold;
+    color: #ff0000;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+}
 </style>
+
+  @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "myform", @class ="" }))
+      { 
 <div id="header"><h1>Epi Info Web Survey </h1></div>
 <div id="content" style="margin:1em;">
+
+ @if (Model.Status != "SUCCESS")
+     {
     <div id="head">
         <h1 class="pageheader">Create Account</h1>
     </div>
@@ -143,27 +129,44 @@
     </div>
     <div  id="AccountForm" class="accountdiv" style="">
         <p>
+            @Html.ValidationMessage("Error")<br>
             <label class="accountlabel" id="OrganizationNamelabel">Organization Name:</label><br>
-            <input type="text" for="OrganizationNamelabel" id="OrganizationName" style="width:350px; height:24px; font: 14px Segoe UI;"/><br>
+         
+          @Html.TextBoxFor(m => m.OrgName, new { @class = "Account" }) <br>
+          @Html.ValidationMessageFor(m => m.OrgName, null, new { @class = "required" })
         </p>
         <p>
             <label class="accountlabel"  id="Emaillabel">Email Address:</label><br>
-            <input type="text" for="Emaillabel" id="Email" style="width:350px; height:24px; font: 14px Segoe UI;"/><br>
+          
+            @Html.TextBoxFor(m => m.Email, new { @class = "Account" }) <br>
+             @Html.ValidationMessageFor(m => m.Email, null, new { @class = "required" })
         </p>
         <p>
             <label class="accountlabel" id="ConfirmEmailLabel ">Confirm Email Address:</label><br>
-            <input type="text" for="ConfirmEmailLabel" id="ConfirmEmail" style="width:350px; height:24px; font: 14px Segoe UI;"/><br>
+           
+             @Html.TextBoxFor(m => m.ConfirmEmail, new { @class = "Account" }) <br>
+              @Html.ValidationMessageFor(m => m.ConfirmEmail, null, new { @class = "required" })
         </p>
         <p>
             <input type="checkbox" id="IagreeBox" for="IagreeBoxLabel" />
             <label class="accountlabel" id="IagreeBoxLabel" style="width:330px;"><span style="font-weight:normal !important;">I agree to the</span> <span style="font-weight:bold;">Terms of service and conditions of use</span></label>
         </p>
         <p>
-            <input class="submits create" type="button" id="CreateAccount" value="Create Account" onclick="CreateAccount();" style="margin-right:90px;" />
-        @*    <input class="submits" type="button" id="Cancel" value="Cancel"  /> *@           
+            <input class="submits create" type="submit" id="CreateAccount" value="Create Account"   style="margin-right:90px;" />
+           
         </p>
     </div>
     <div style="clear:both;"></div>
+     <div id="TOU">
+        <h2 class="h2header">Terms of service and conditions of use</h2>
+        <div class="termsofuse">
+          @Html.Raw(ViewData["TermOfUse"].ToString())
+        </div>
+    </div>
+    
+
+    </div>
+     }else{
     <div class="success" style="margin:1em;">
      
         <div class="image" >
@@ -176,12 +179,9 @@
         </div>
         <div style="clear:both;"></div>
     </div>
-    
-    <div id="TOU">
-        <h2 class="h2header">Terms of service and conditions of use</h2>
-        <div class="termsofuse">
-            @Html.Raw(Model.ToString())
-        </div>
-    </div>
+     }
+   
+     
 </div>
-</div>
+
+      }
