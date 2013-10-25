@@ -42,7 +42,7 @@ namespace Epi.Web.MVC.Controllers
         {
            string version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
            ViewBag.Version = version;
-           string filepath = Server.MapPath("\\Content\\Text\\TermOfUse.txt");
+           string filepath = Server.MapPath("~\\Content\\Text\\TermOfUse.txt");
            string content = string.Empty;
            AccountInfo Obj = new AccountInfo();
            try
