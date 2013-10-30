@@ -24,7 +24,7 @@ namespace Epi.Web.Controllers
                 Epi.Web.Common.Email.Email EmailObj = new Common.Email.Email();
                 EmailObj.Body = redirectUrl + " and Pass Code is: " + passCode;
                 EmailObj.From = ConfigurationManager.AppSettings["EMAIL_FROM"].ToString();
-                EmailObj.Subject = "Link for Survey: " + surveyName;// EmailSubject;
+                EmailObj.Subject = "Link for Survey: " + surveyName.Replace("%20", " ");
                 List<string> tempList = new List<string>(); 
                 tempList.Add(emailAddress);
                 EmailObj.To = tempList ;
