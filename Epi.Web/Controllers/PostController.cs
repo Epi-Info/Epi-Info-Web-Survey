@@ -17,14 +17,14 @@ namespace Epi.Web.Controllers
 
         [AcceptVerbs(HttpVerbs.Post)]
        [ValidateAntiForgeryToken]
-        public JsonResult Notify(string emailAddress, string redirectUrl, string surveyName,string passCode, string EmailSubject)
+        public JsonResult Notify(string emailAddress, string redirectUrl, string surveyName,string passCode, string emailSubject)
         {
             try
             {
                 Epi.Web.Common.Email.Email EmailObj = new Common.Email.Email();
                 EmailObj.Body = redirectUrl + " and Pass Code is: " + passCode;
                 EmailObj.From = ConfigurationManager.AppSettings["EMAIL_FROM"].ToString();
-                EmailObj.Subject = "Link for Survey: " + surveyName.Replace("%20", " ");
+                EmailObj.Subject = emailSubject.Replace("%20", " ").Replace("%3A", ":");
                 List<string> tempList = new List<string>(); 
                 tempList.Add(emailAddress);
                 EmailObj.To = tempList ;
