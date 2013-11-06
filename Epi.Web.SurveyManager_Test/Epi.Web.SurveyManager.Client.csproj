@@ -58,12 +58,17 @@
     <ApplicationIcon>App.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DatabaseApplication">
+      <HintPath>..\..\..\..\Users\lamtahrim01\Desktop\DatabaseApplication\DatabaseApplication\DatabaseApplication\bin\Debug\DatabaseApplication.exe</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Activities" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Activities" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -96,6 +101,14 @@
     </Compile>
     <Compile Include="Page_Publish.xaml.cs">
       <DependentUpon>Page_Publish.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ResponseClient.xaml.cs">
+      <DependentUpon>ResponseClient.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\SurveyManagerServiceV2\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="Service References\SurveyManagerService\Reference.cs">
       <AutoGen>True</AutoGen>
@@ -135,6 +148,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="ResponseClient.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -158,6 +175,7 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Properties\DataSources\Epi.Web.Common.Message.OrganizationResponse.datasource" />
+    <None Include="Properties\DataSources\Epi.Web.Common.Message.PreFilledAnswerResponse.datasource" />
     <None Include="Properties\DataSources\Epi.Web.Common.Message.PublishResponse.datasource" />
     <None Include="Properties\DataSources\Epi.Web.Common.Message.SurveyAnswerResponse.datasource" />
     <None Include="Properties\DataSources\Epi.Web.Common.Message.SurveyInfoResponse.datasource" />
@@ -166,7 +184,26 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
-    <None Include="Service References\SurveyManagerService\Service.wsdl" />
+    <None Include="Service References\SurveyManagerServiceV2\ManagerServiceV2.wsdl" />
+    <None Include="Service References\SurveyManagerServiceV2\SurveyManagerServiceV2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SurveyManagerServiceV2\SurveyManagerServiceV21.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SurveyManagerServiceV2\SurveyManagerServiceV22.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SurveyManagerServiceV2\SurveyManagerServiceV23.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SurveyManagerServiceV2\SurveyManagerServiceV24.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SurveyManagerServiceV2\SurveyManagerServiceV25.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SurveyManagerService\ManagerService.wsdl" />
     <None Include="Service References\SurveyManagerService\SurveyManagerService.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -185,24 +222,6 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadataStorage Include="Service References\SurveyManagerService\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\SurveyManagerService\SurveyManagerService.disco" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\SurveyManagerService\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\SurveyManagerService\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\SurveyManagerService\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Epi.Web.Common\Epi.Web.Common.csproj">
@@ -238,6 +257,40 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="App.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\SurveyManagerServiceV2\" />
+    <WCFMetadataStorage Include="Service References\SurveyManagerService\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\SurveyManagerService\SurveyManagerService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\SurveyManagerService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\SurveyManagerService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\SurveyManagerService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\SurveyManagerServiceV2\SurveyManagerServiceV2.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\SurveyManagerServiceV2\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\SurveyManagerServiceV2\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\SurveyManagerServiceV2\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
