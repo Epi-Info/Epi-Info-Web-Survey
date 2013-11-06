@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Epi.Web.Common.BusinessObject;
-
+using System.Xml;
+using System.Xml.Linq;
 namespace Epi.Web.BLL
 {
     public class SurveyResponse
@@ -134,5 +135,38 @@ namespace Epi.Web.BLL
             result = Epi.Web.BLL.Common.GetSurveySize(SurveyResponseBOList, BandwidthUsageFactor, ResponseMaxSize);
             return result;
         }
+
+        public string CreateResponseXml(List<SurveyInfoBO> SurveyBOList, Epi.Web.Common.Message.PreFilledAnswerRequest request)
+            
+            {
+            string ResponseXml;
+            XDocument SurveyXml = new XDocument();
+            foreach (var item in SurveyBOList)
+                {
+                SurveyXml = XDocument.Parse(item.XML);
+                }
+            Epi.Web.Common.Xml.SurveyResponseXML Implementation = new Web.Common.Xml.SurveyResponseXML(request, SurveyXml);
+            ResponseXml = Implementation.CreateResponseDocument(SurveyXml).ToString();
+            return ResponseXml;
+            }
+        public Dictionary<string, string> ValidateResponse(List<SurveyInfoBO> SurveyBOList, Epi.Web.Common.Message.PreFilledAnswerRequest request)
+            {
+             
+            XDocument SurveyXml = new XDocument();
+            foreach (var item in SurveyBOList)
+                {
+                SurveyXml = XDocument.Parse(item.XML);
+                }
+              Dictionary<string, string> MessageList = new Dictionary<string, string>();
+              Dictionary<string, string> FieldNotFoundList = new Dictionary<string, string>();
+              Dictionary<string, string> WrongFieldTypeList = new Dictionary<string, string>();
+            Epi.Web.Common.Xml.SurveyResponseXML Implementation = new Web.Common.Xml.SurveyResponseXML(request, SurveyXml);
+            FieldNotFoundList = Implementation.ValidateResponseFileds();
+            WrongFieldTypeList = Implementation.ValidateResponseFiledTypes();
+            MessageList = MessageList.Union(FieldNotFoundList).Union(WrongFieldTypeList).ToDictionary(k => k.Key, v => v.Value);
+            return MessageList;
+
+
+            }
     }
 }
