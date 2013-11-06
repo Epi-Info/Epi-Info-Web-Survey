@@ -407,6 +407,7 @@
     </None>
     <Content Include="SurveyDataService.svc" />
     <Content Include="SurveyManagerService.svc" />
+    <Content Include="SurveyManagerServiceV2.svc" />
     <Content Include="Unity.Mvc3.README.txt" />
     <Content Include="Views\Shared\footer.htm" />
     <Content Include="Views\Shared\header.htm" />
