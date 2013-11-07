@@ -111,11 +111,9 @@ namespace Epi.Web.SurveyManager.Client
               {
               string Key = textBox1.Text;
               string Value = textBox2.Text;
-
-              row = KeyValuesTable.NewRow();
               ((System.Data.DataRowView)(listView1.SelectedItem)).Row[0] = Key;
               ((System.Data.DataRowView)(listView1.SelectedItem)).Row[1] = Value;
-              KeyValuesTable.Rows.Add(row);
+            
               ShowData();
                }
             }
@@ -141,6 +139,8 @@ namespace Epi.Web.SurveyManager.Client
                 Epi.Web.Common.Message.PreFilledAnswerRequest Request = new Epi.Web.Common.Message.PreFilledAnswerRequest();
                 Guid OrganizationGuid = new Guid(passwordBox1.Password);
                 Guid SurveyGuid = new Guid(SurveyId.Text);
+                Guid UserPublishKey = new Guid(this.UserPublishKey.Text);
+
                 Dictionary<string, string> Values = new Dictionary<string, string>();
 
                 foreach (var item in listView1.Items)
@@ -152,6 +152,7 @@ namespace Epi.Web.SurveyManager.Client
 
                 Request.AnswerInfo.OrganizationKey = OrganizationGuid;
                 Request.AnswerInfo.SurveyId = SurveyGuid;
+                Request.AnswerInfo.UserPublishKey = UserPublishKey;
                 Request.AnswerInfo.SurveyQuestionAnswerList = Values;
                 var Result = Client.SetSurveyAnswer(Request);
                 
@@ -183,6 +184,11 @@ namespace Epi.Web.SurveyManager.Client
                 }
 
 
+            }
+
+        private void button2_Click(object sender, RoutedEventArgs e)
+            {
+            this.Result.Document.Blocks.Clear();
             }
         }
       

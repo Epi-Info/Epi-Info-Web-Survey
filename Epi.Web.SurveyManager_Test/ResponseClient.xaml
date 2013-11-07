@@ -49,6 +49,7 @@
                         </ListView>
                     </Grid>
                     <Label Content="Key/Values:" Height="28" HorizontalAlignment="Left" Margin="7,74,0,0" Name="label1" VerticalAlignment="Top" />
+                    <Button Content="Clear Response" Height="23" HorizontalAlignment="Left" Margin="401,502,0,0" Name="button2" VerticalAlignment="Top" Width="136" Click="button2_Click" />
                 </Grid>
         </GroupBox>
         </Grid>
