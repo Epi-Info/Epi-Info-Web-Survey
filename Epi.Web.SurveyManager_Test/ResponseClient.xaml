@@ -12,7 +12,7 @@
         <my:Boolean x:Key="CanUserDeleteRows1">True</my:Boolean>
     </Page.Resources>
     <ScrollViewer HorizontalScrollBarVisibility="Auto">
-    <Grid>
+        <Grid HorizontalAlignment="Left" VerticalAlignment="Top">
         <Grid.RowDefinitions>
             <RowDefinition />
         </Grid.RowDefinitions>
@@ -20,8 +20,8 @@
         <Button Content="View Download Client" Height="30" HorizontalAlignment="Left" Margin="10,10,0,0" Name="button1" VerticalAlignment="Top" Width="134" Click="button1_Click" />
         <Button Content="Manage Existing Surveys" Height="30" HorizontalAlignment="Left" Margin="163,10,0,0" Name="ManageSurveyButton" VerticalAlignment="Top" Width="140" Click="ManageSurveyButton_Click" />
         <Button Content="Add User" Height="30" HorizontalAlignment="Left" Margin="317,10,0,0" Name="AddUser" VerticalAlignment="Top" Width="162" Click="AddUser_Click" />
-        <GroupBox Background="#FFCC00" FontWeight="Bold" Header="Response Info" Margin="13,67,66,672" Name="groupBox2">
-            <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="635">
+        <GroupBox HorizontalAlignment="Left" VerticalAlignment="Top" Background="#FFCC00" FontWeight="Bold" Header="Response Info" Margin="13,67,66,672" Name="groupBox2" Width="600">
+            <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Height="635">
                 <Label Content="Survey ID:" Height="28" HorizontalAlignment="Left" Margin="7,12,0,594" Name="label3" Width="126.313" />
                 <TextBox AutoWordSelection="True" Background="White" Height="23" HorizontalAlignment="Left" Margin="154,12,0,0" Name="SurveyId" VerticalAlignment="Top" Width="307.687" />
                     <Label Content="User Publish Key:" Height="28" HorizontalAlignment="Left" Margin="7,44,0,562" Name="label4" Width="138" />
