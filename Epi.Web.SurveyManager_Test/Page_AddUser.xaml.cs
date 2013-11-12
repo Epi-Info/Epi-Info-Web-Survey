@@ -24,7 +24,7 @@ namespace Epi.Web.SurveyManager.Client
     public partial class Page_AddUser : Page
     {
         private static string _ConfigurationAdminCode;
-
+        string ServiceVersion = ConfigurationManager.AppSettings["ServiceVersion"];
         public Page_AddUser()
         {
             InitializeComponent();
@@ -76,8 +76,10 @@ namespace Epi.Web.SurveyManager.Client
         private void AddOrganization_Click(object sender, RoutedEventArgs e)
         {
             MessagerichTextBox1.Document.Blocks.Clear();
-            SurveyManagerService.ManagerServiceClient client = ServiceClient.GetClient();
+            
             Epi.Web.Common.Message.OrganizationRequest Request = new Epi.Web.Common.Message.OrganizationRequest();
+           
+           
             MessagerichTextBox1.Foreground = Brushes.Red;
 
 
@@ -95,15 +97,37 @@ namespace Epi.Web.SurveyManager.Client
                             Request.Organization.Organization = OrganizationtextBox1.Text;
                             //Request.Organization.OrganizationKey = Cryptography.Encrypt(this.GeneratedkeytextBox1.Text);
                             Request.Organization.OrganizationKey =  this.GeneratedkeytextBox1.Text.ToString();
-                            Epi.Web.Common.Message.OrganizationResponse Result = client.SetOrganization(Request);
-                            MessagerichTextBox1.Document.Blocks.Clear();
-                            OrganizationtextBox1.Clear();
-                            GeneratedkeytextBox1.Clear();
-                            if (Result.Message.ToString().Contains("Successfully"))
-                            {
-                                MessagerichTextBox1.Foreground = Brushes.Green;
-                            } 
-                            MessagerichTextBox1.AppendText(Result.Message.ToString());
+                           // Epi.Web.Common.Message.OrganizationResponse Result = client.SetOrganization(Request);
+
+                            if (ServiceVersion == "V1")
+                                {
+                                SurveyManagerService.ManagerServiceClient Client = ServiceClient.GetClient();
+
+                                Epi.Web.Common.Message.OrganizationResponse Result = Client.SetOrganization(Request);
+                                MessagerichTextBox1.Document.Blocks.Clear();
+                                OrganizationtextBox1.Clear();
+                                GeneratedkeytextBox1.Clear();
+                                if (Result.Message.ToString().Contains("Successfully"))
+                                    {
+                                    MessagerichTextBox1.Foreground = Brushes.Green;
+                                    }
+                                MessagerichTextBox1.AppendText(Result.Message.ToString());
+                                }
+                            else if (ServiceVersion == "V2")
+                                {
+                                SurveyManagerServiceV2.ManagerServiceV2Client Client = ServiceClient.GetClientV2();
+
+                                Epi.Web.Common.Message.OrganizationResponse Result = Client.SetOrganization(Request);
+                                MessagerichTextBox1.Document.Blocks.Clear();
+                                OrganizationtextBox1.Clear();
+                                GeneratedkeytextBox1.Clear();
+                                if (Result.Message.ToString().Contains("Successfully"))
+                                    {
+                                    MessagerichTextBox1.Foreground = Brushes.Green;
+                                    }
+                                MessagerichTextBox1.AppendText(Result.Message.ToString());
+                                }
+                             
                         }
                         else
                         {
@@ -148,8 +172,8 @@ namespace Epi.Web.SurveyManager.Client
         private void GetKey_Clik(object sender, RoutedEventArgs e)
         {
 
-            SurveyManagerService.ManagerServiceClient client = ServiceClient.GetClient();
-            Epi.Web.Common.Message.OrganizationRequest Request = new Epi.Web.Common.Message.OrganizationRequest();
+            //SurveyManagerService.ManagerServiceClient client = ServiceClient.GetClient();
+            //Epi.Web.Common.Message.OrganizationRequest Request = new Epi.Web.Common.Message.OrganizationRequest();
 
             this.ONameEditTextBox1.Clear();
             this.checkBox1.IsChecked = false;
@@ -163,30 +187,65 @@ namespace Epi.Web.SurveyManager.Client
                     {
                         if (!string.IsNullOrEmpty(OnamelistBox1.SelectedItem.ToString()))
                         {
-                            Request.Organization.Organization = this.OnamelistBox1.SelectedItem.ToString();
-                            Request.AdminSecurityKey = new Guid(passwordBox1.Password);
-                            Epi.Web.Common.Message.OrganizationResponse Result = client.GetOrganization(Request);
-                            EditOtextBox1.Clear();
-                            ONameEditTextBox1.Clear();
-                            if (Result.Message != null)
+                        if (ServiceVersion=="V1")
                             {
-                                richTextBox1.AppendText(Result.Message.ToString());
-                            }
+                                    SurveyManagerService.ManagerServiceClient client = ServiceClient.GetClient();
+                                    Epi.Web.Common.Message.OrganizationRequest Request = new Epi.Web.Common.Message.OrganizationRequest();
+                                    Request.Organization.Organization = this.OnamelistBox1.SelectedItem.ToString();
+                                    Request.AdminSecurityKey = new Guid(passwordBox1.Password);
+                                    Epi.Web.Common.Message.OrganizationResponse Result = client.GetOrganization(Request);
+                                    EditOtextBox1.Clear();
+                                    ONameEditTextBox1.Clear();
+                                    if (Result.Message != null)
+                                    {
+                                        richTextBox1.AppendText(Result.Message.ToString());
+                                    }
 
-                            if (Result.OrganizationList != null)
-                            {
+                                    if (Result.OrganizationList != null)
+                                    {
 
-                                for (int i = 0; i < Result.OrganizationList.Count; i++)
-                                {
+                                        for (int i = 0; i < Result.OrganizationList.Count; i++)
+                                        {
 
-                                   // EditOtextBox1.Text = Cryptography.Decrypt(Result.OrganizationList[i].OrganizationKey.ToString());
-                                    EditOtextBox1.Text = Result.OrganizationList[i].OrganizationKey.ToString() ;
-                                    this.ONameEditTextBox1.Text = Result.OrganizationList[i].Organization;
-                                    this.checkBox1.IsChecked = Result.OrganizationList[i].IsEnabled;
-                                }
+                                           // EditOtextBox1.Text = Cryptography.Decrypt(Result.OrganizationList[i].OrganizationKey.ToString());
+                                            EditOtextBox1.Text = Result.OrganizationList[i].OrganizationKey.ToString() ;
+                                            this.ONameEditTextBox1.Text = Result.OrganizationList[i].Organization;
+                                            this.checkBox1.IsChecked = Result.OrganizationList[i].IsEnabled;
+                                        }
                                 
-                            }
-                           
+                                    }
+                               }
+
+                        else if (ServiceVersion == "V2")
+                                
+                                {
+                                SurveyManagerServiceV2.ManagerServiceV2Client client = ServiceClient.GetClientV2();
+                                Epi.Web.Common.Message.OrganizationRequest Request = new Epi.Web.Common.Message.OrganizationRequest();
+                                Request.Organization.Organization = this.OnamelistBox1.SelectedItem.ToString();
+                                Request.AdminSecurityKey = new Guid(passwordBox1.Password);
+                                Epi.Web.Common.Message.OrganizationResponse Result = client.GetOrganization(Request);
+                                EditOtextBox1.Clear();
+                                ONameEditTextBox1.Clear();
+                                if (Result.Message != null)
+                                    {
+                                    richTextBox1.AppendText(Result.Message.ToString());
+                                    }
+
+                                if (Result.OrganizationList != null)
+                                    {
+
+                                    for (int i = 0; i < Result.OrganizationList.Count; i++)
+                                        {
+
+                                        // EditOtextBox1.Text = Cryptography.Decrypt(Result.OrganizationList[i].OrganizationKey.ToString());
+                                        EditOtextBox1.Text = Result.OrganizationList[i].OrganizationKey.ToString();
+                                        this.ONameEditTextBox1.Text = Result.OrganizationList[i].Organization;
+                                        this.checkBox1.IsChecked = Result.OrganizationList[i].IsEnabled;
+                                        }
+
+                                    }
+                                
+                                }
                         }
                         else
                         {
@@ -244,9 +303,7 @@ namespace Epi.Web.SurveyManager.Client
         {
             //if (!string.IsNullOrEmpty(EditOtextBox1.Text))
             //{
-                SurveyManagerService.ManagerServiceClient client = ServiceClient.GetClient();
-                Epi.Web.Common.Message.OrganizationRequest Request = new Epi.Web.Common.Message.OrganizationRequest();
-
+                
                 richTextBox1.Document.Blocks.Clear();
                 try
                 {
@@ -254,20 +311,49 @@ namespace Epi.Web.SurveyManager.Client
                     if (!string.IsNullOrEmpty(passwordBox1.Password.ToString()) && IsGuid(passwordBox1.Password.ToString()))
                     {
 
-                        Request.AdminSecurityKey = new Guid(passwordBox1.Password);
-                        Request.Organization.OrganizationKey = EditOtextBox1.Text;
-                        Epi.Web.Common.Message.OrganizationResponse Result = client.GetOrganizationByKey(Request);
-                        if (Result.OrganizationList != null)
-                        {
-
-                            for (int i = 0; i < Result.OrganizationList.Count; i++)
+                        
+                        if (ServiceVersion == "V1")
                             {
+                            SurveyManagerService.ManagerServiceClient client = ServiceClient.GetClient();
+                            Epi.Web.Common.Message.OrganizationRequest Request = new Epi.Web.Common.Message.OrganizationRequest();
 
-                                this.ONameEditTextBox1.Text = Result.OrganizationList[i].Organization;
-                                this.checkBox1.IsChecked = Result.OrganizationList[i].IsEnabled;
+                            Request.AdminSecurityKey = new Guid(passwordBox1.Password);
+                            Request.Organization.OrganizationKey = EditOtextBox1.Text;
+                            Epi.Web.Common.Message.OrganizationResponse Result = client.GetOrganizationByKey(Request);
+                            if (Result.OrganizationList != null)
+                                {
+
+                                for (int i = 0; i < Result.OrganizationList.Count; i++)
+                                    {
+
+                                    this.ONameEditTextBox1.Text = Result.OrganizationList[i].Organization;
+                                    this.checkBox1.IsChecked = Result.OrganizationList[i].IsEnabled;
+                                    }
+
+                                }
                             }
 
-                        }
+                        else if (ServiceVersion == "V2")
+                            {
+                            SurveyManagerServiceV2.ManagerServiceV2Client client = ServiceClient.GetClientV2();
+                            Epi.Web.Common.Message.OrganizationRequest Request = new Epi.Web.Common.Message.OrganizationRequest();
+
+                            Request.AdminSecurityKey = new Guid(passwordBox1.Password);
+                            Request.Organization.OrganizationKey = EditOtextBox1.Text;
+                            Epi.Web.Common.Message.OrganizationResponse Result = client.GetOrganizationByKey(Request);
+                            if (Result.OrganizationList != null)
+                                {
+
+                                for (int i = 0; i < Result.OrganizationList.Count; i++)
+                                    {
+
+                                    this.ONameEditTextBox1.Text = Result.OrganizationList[i].Organization;
+                                    this.checkBox1.IsChecked = Result.OrganizationList[i].IsEnabled;
+                                    }
+
+                                }
+                            }
+
                       
                     }
                     else
@@ -293,7 +379,7 @@ namespace Epi.Web.SurveyManager.Client
         private void Save_Click(object sender, RoutedEventArgs e)
         {
             MessagerichTextBox1.Document.Blocks.Clear();
-            SurveyManagerService.ManagerServiceClient client = ServiceClient.GetClient();
+            //SurveyManagerService.ManagerServiceClient client = ServiceClient.GetClient();
             Epi.Web.Common.Message.OrganizationRequest Request = new Epi.Web.Common.Message.OrganizationRequest();
             richTextBox1.Foreground = Brushes.Red;
             richTextBox1.Document.Blocks.Clear();
@@ -304,27 +390,65 @@ namespace Epi.Web.SurveyManager.Client
                 if (!string.IsNullOrEmpty(passwordBox1.Password.ToString()) && IsGuid(passwordBox1.Password.ToString()))
                 {
 
-                   
-                            if (checkBox1.IsChecked == true)
-                            {
-                                Request.Organization.IsEnabled = true;
-                            }else{
-                                  Request.Organization.IsEnabled = false;
-                            }
-                            Request.AdminSecurityKey = new Guid(passwordBox1.Password);
-                            Request.Organization.Organization = ONameEditTextBox1.Text;
-                            //Request.Organization.OrganizationKey = Cryptography.Encrypt(EditOtextBox1.Text);
-                            Request.Organization.OrganizationKey =  EditOtextBox1.Text.ToString() ;
-                            Epi.Web.Common.Message.OrganizationResponse Result = client.UpdateOrganizationInfo(Request);
-                           
-                           
-                            if (Result.Message.ToString().Contains("Successfully"))
-                            {
-                                richTextBox1.Foreground = Brushes.Green;
-                                GetOrganizationNames();
-                                this.OnamelistBox1.SelectedItem = Request.Organization.Organization;
-                            }
-                            richTextBox1.AppendText(Result.Message.ToString());
+                    
+                            if (ServiceVersion == "V1")
+                                {
+                                SurveyManagerService.ManagerServiceClient client = ServiceClient.GetClient();
+                                if (checkBox1.IsChecked == true)
+                                    {
+                                    Request.Organization.IsEnabled = true;
+                                    }
+                                else
+                                    {
+                                    Request.Organization.IsEnabled = false;
+                                    }
+                                Request.AdminSecurityKey = new Guid(passwordBox1.Password);
+                                Request.Organization.Organization = ONameEditTextBox1.Text;
+                                //Request.Organization.OrganizationKey = Cryptography.Encrypt(EditOtextBox1.Text);
+                                Request.Organization.OrganizationKey = EditOtextBox1.Text.ToString();
+                                Epi.Web.Common.Message.OrganizationResponse Result = client.UpdateOrganizationInfo(Request);
+
+
+                                if (Result.Message.ToString().Contains("Successfully"))
+                                    {
+                                    richTextBox1.Foreground = Brushes.Green;
+                                    GetOrganizationNames();
+                                    this.OnamelistBox1.SelectedItem = Request.Organization.Organization;
+                                    }
+                                richTextBox1.AppendText(Result.Message.ToString());
+
+                                }
+
+                            else if (ServiceVersion == "V2")
+                                {
+                                SurveyManagerServiceV2.ManagerServiceV2Client client = ServiceClient.GetClientV2();
+                                if (checkBox1.IsChecked == true)
+                                    {
+                                    Request.Organization.IsEnabled = true;
+                                    }
+                                else
+                                    {
+                                    Request.Organization.IsEnabled = false;
+                                    }
+                                Request.AdminSecurityKey = new Guid(passwordBox1.Password);
+                                Request.Organization.Organization = ONameEditTextBox1.Text;
+                                //Request.Organization.OrganizationKey = Cryptography.Encrypt(EditOtextBox1.Text);
+                                Request.Organization.OrganizationKey = EditOtextBox1.Text.ToString();
+                                Epi.Web.Common.Message.OrganizationResponse Result = client.UpdateOrganizationInfo(Request);
+
+
+                                if (Result.Message.ToString().Contains("Successfully"))
+                                    {
+                                    richTextBox1.Foreground = Brushes.Green;
+                                    GetOrganizationNames();
+                                    this.OnamelistBox1.SelectedItem = Request.Organization.Organization;
+                                    }
+                                richTextBox1.AppendText(Result.Message.ToString());
+
+                                }
+
+
+
                         
                 }
                 else
@@ -344,7 +468,7 @@ namespace Epi.Web.SurveyManager.Client
         public void GetOrganizationNames()
         {
 
-            SurveyManagerService.ManagerServiceClient client = ServiceClient.GetClient();
+           
             Epi.Web.Common.Message.OrganizationRequest Request = new Epi.Web.Common.Message.OrganizationRequest();
 
             richTextBox1.Document.Blocks.Clear();
@@ -355,27 +479,60 @@ namespace Epi.Web.SurveyManager.Client
                 if (!string.IsNullOrEmpty(passwordBox1.Password.ToString()) && IsGuid(passwordBox1.Password.ToString()))
                 {
 
-                    Request.AdminSecurityKey = new Guid(passwordBox1.Password);
-                    // Epi.Web.Common.Message.OrganizationResponse Result = client.GetOrganizationInfo(Request);
-                    Epi.Web.Common.Message.OrganizationResponse Result = client.GetOrganizationNames(Request);
-
-
-                    OnamelistBox1.Items.Clear();
-                    if (Result.Message != null)
-                    {
-                        richTextBox1.AppendText(Result.Message.ToString());
-                    }
-                    if (Result.OrganizationList != null)
-                    {
-
-                        for (int i = 0; i < Result.OrganizationList.Count; i++)
+            
+                    if (ServiceVersion == "V1")
                         {
+                        Request.AdminSecurityKey = new Guid(passwordBox1.Password);
+                        SurveyManagerService.ManagerServiceClient client = ServiceClient.GetClient();
+                        Epi.Web.Common.Message.OrganizationResponse Result = client.GetOrganizationNames(Request);
 
-                            this.OnamelistBox1.Items.Add(Result.OrganizationList[i].Organization);
+
+                        OnamelistBox1.Items.Clear();
+                        if (Result.Message != null)
+                            {
+                            richTextBox1.AppendText(Result.Message.ToString());
+                            }
+                        if (Result.OrganizationList != null)
+                            {
+
+                            for (int i = 0; i < Result.OrganizationList.Count; i++)
+                                {
+
+                                this.OnamelistBox1.Items.Add(Result.OrganizationList[i].Organization);
+
+                                }
+                            this.OnamelistBox1.SelectedIndex = 0;
+                            }
 
                         }
-                        this.OnamelistBox1.SelectedIndex = 0;
-                    }
+
+                    else if (ServiceVersion == "V2")
+                        {
+                        Request.AdminSecurityKey = new Guid(passwordBox1.Password);
+                        SurveyManagerServiceV2.ManagerServiceV2Client client = ServiceClient.GetClientV2();
+                        Epi.Web.Common.Message.OrganizationResponse Result = client.GetOrganizationNames(Request);
+
+
+                        OnamelistBox1.Items.Clear();
+                        if (Result.Message != null)
+                            {
+                            richTextBox1.AppendText(Result.Message.ToString());
+                            }
+                        if (Result.OrganizationList != null)
+                            {
+
+                            for (int i = 0; i < Result.OrganizationList.Count; i++)
+                                {
+
+                                this.OnamelistBox1.Items.Add(Result.OrganizationList[i].Organization);
+
+                                }
+                            this.OnamelistBox1.SelectedIndex = 0;
+                            }
+
+                        }
+
+
 
                 }
                 else

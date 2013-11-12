@@ -11,6 +11,8 @@ namespace Epi.Web.SurveyManager.Client
 {
     public class ServiceClient
     {
+         
+
         public static SurveyManagerService.ManagerServiceClient GetClient(string pEndPointAddress, bool pIsAuthenticated, bool pIsWsHttpBinding = true)
         {
             SurveyManagerService.ManagerServiceClient result = null;

@@ -21,12 +21,14 @@ namespace Epi.Web.SurveyManager.Client
     /// </summary>
     public partial class Page_Configuration : Page
     {
+        string ServiceVersion = ConfigurationManager.AppSettings["ServiceVersion"];
         public Page_Configuration()
         {
             InitializeComponent();
 
 
            string s = ConfigurationManager.AppSettings["EndPointAddress"];
+      
             if (!String.IsNullOrEmpty(s))
             {
                 EndPointURLTextBox.Text = s;
@@ -173,9 +175,21 @@ namespace Epi.Web.SurveyManager.Client
 
             try
             {
-            SurveyManagerService.ManagerServiceClient Client = ServiceClient.GetClient(pEndPointAddress, pIsAuthenticated, pIsWsHTTPBinding);
-            Epi.Web.Common.Message.OrganizationRequest Request = new Epi.Web.Common.Message.OrganizationRequest();
-            var Result = Client.GetOrganization(Request);
+          
+
+            if (ServiceVersion =="V1")
+                {
+                    SurveyManagerService.ManagerServiceClient Client = ServiceClient.GetClient(pEndPointAddress, pIsAuthenticated, pIsWsHTTPBinding);
+                    Epi.Web.Common.Message.OrganizationRequest Request = new Epi.Web.Common.Message.OrganizationRequest();
+                     var Result  = Client.GetOrganization(Request);
+                }
+            else if (ServiceVersion == "V2")
+                {
+                     SurveyManagerServiceV2.ManagerServiceV2Client Client = ServiceClient.GetClientV2(pEndPointAddress, pIsAuthenticated, pIsWsHTTPBinding);
+                     Epi.Web.Common.Message.OrganizationRequest Request = new Epi.Web.Common.Message.OrganizationRequest();
+                     var Result  = Client.GetOrganization(Request);
+                 }  
+           
             this.PingResultTextBox.Text = "Successfully Created Service Client";
             
             this.PingResultTextBox.Text = "Successfully Created Service Client";
