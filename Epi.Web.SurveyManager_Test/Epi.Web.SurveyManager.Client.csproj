@@ -20,7 +20,7 @@
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>publish\</PublishUrl>
+    <PublishUrl>C:\WorkSpace\Deployment\X\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -30,9 +30,10 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationRevision>1</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
@@ -56,6 +57,18 @@
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>App.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>8129D1B97E8677ED3AA8EA8D227603EE5AD998EC</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>Epi.Web.SurveyManager.Client_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DatabaseApplication">
@@ -174,6 +187,7 @@
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Epi.Web.SurveyManager.Client_TemporaryKey.pfx" />
     <None Include="Properties\DataSources\Epi.Web.Common.Message.OrganizationResponse.datasource" />
     <None Include="Properties\DataSources\Epi.Web.Common.Message.PreFilledAnswerResponse.datasource" />
     <None Include="Properties\DataSources\Epi.Web.Common.Message.PublishResponse.datasource" />
