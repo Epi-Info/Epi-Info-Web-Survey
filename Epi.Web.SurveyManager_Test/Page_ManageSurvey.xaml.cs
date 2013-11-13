@@ -22,7 +22,7 @@ namespace Epi.Web.SurveyManager.Client
     /// </summary>
     public partial class Page_ManageSurvey : Page
     {
-        string ServiceVersion = ConfigurationManager.AppSettings["ServiceVersion"];
+        
         public Page_ManageSurvey()
         {
             InitializeComponent();
@@ -99,7 +99,9 @@ namespace Epi.Web.SurveyManager.Client
 
 
 
-            if (ServiceVersion == "V1")
+            int ServiceVersion = ServiceClient.GetServiceVersion();
+
+            if (ServiceVersion == 1)
                 {
                 SurveyManagerService.ManagerServiceClient client = ServiceClient.GetClient();
                 Epi.Web.Common.Message.SurveyInfoResponse Result = client.GetSurveyInfo(Request);
@@ -121,7 +123,7 @@ namespace Epi.Web.SurveyManager.Client
                     }
                 }
 
-            else if (ServiceVersion == "V2")
+            else if (ServiceVersion == 2)
                 {
                 SurveyManagerServiceV2.ManagerServiceV2Client client = ServiceClient.GetClientV2();
                 Epi.Web.Common.Message.SurveyInfoResponse Result = client.GetSurveyInfo(Request);
@@ -302,7 +304,9 @@ namespace Epi.Web.SurveyManager.Client
                 try
                 {
 
-                if (ServiceVersion == "V1")
+                int ServiceVersion = ServiceClient.GetServiceVersion();
+
+                if (ServiceVersion == 1)
                     {
                     SurveyManagerService.ManagerServiceClient client = ServiceClient.GetClient();
                     Epi.Web.Common.Message.SurveyInfoResponse Result = client.SetSurveyInfo(Request);
@@ -310,7 +314,7 @@ namespace Epi.Web.SurveyManager.Client
                     SurveyInfoResponseTextBox.AppendText(Result.Message);
                     }
 
-                else if (ServiceVersion == "V2")
+                else if (ServiceVersion == 2)
                     {
                     SurveyManagerServiceV2.ManagerServiceV2Client client = ServiceClient.GetClientV2();
                     Epi.Web.Common.Message.SurveyInfoResponse Result = client.SetSurveyInfo(Request);
