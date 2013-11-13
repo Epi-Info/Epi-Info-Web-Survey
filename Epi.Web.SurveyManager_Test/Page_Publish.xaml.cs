@@ -26,7 +26,7 @@ namespace Epi.Web.SurveyManager.Client
     {
         String URL;
         public Guid UserPublishKey;
-        string ServiceVersion = ConfigurationManager.AppSettings["ServiceVersion"];
+        
         public Page_Publish()
         {
             InitializeComponent();
@@ -94,9 +94,9 @@ namespace Epi.Web.SurveyManager.Client
             {
 
 
+            int ServiceVersion =   ServiceClient.GetServiceVersion();
 
-
-            if (ServiceVersion == "V1")
+            if (ServiceVersion == 1)
                 {
                 SurveyManagerService.ManagerServiceClient client = ServiceClient.GetClient();
                 Epi.Web.Common.Message.PublishResponse Result = client.PublishSurvey(Request);
@@ -114,7 +114,7 @@ namespace Epi.Web.SurveyManager.Client
                 this.OpenURLButton.IsEnabled = Result.PublishInfo.IsPulished;
                 }
 
-            else if (ServiceVersion == "V2")
+            else if (ServiceVersion == 2)
                 {
                 SurveyManagerServiceV2.ManagerServiceV2Client client = ServiceClient.GetClientV2();
                 Epi.Web.Common.Message.PublishResponse Result = client.PublishSurvey(Request);
