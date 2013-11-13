@@ -24,7 +24,7 @@ namespace Epi.Web.SurveyManager.Client
     public partial class Page_AddUser : Page
     {
         private static string _ConfigurationAdminCode;
-        string ServiceVersion = ConfigurationManager.AppSettings["ServiceVersion"];
+         
         public Page_AddUser()
         {
             InitializeComponent();
@@ -99,7 +99,9 @@ namespace Epi.Web.SurveyManager.Client
                             Request.Organization.OrganizationKey =  this.GeneratedkeytextBox1.Text.ToString();
                            // Epi.Web.Common.Message.OrganizationResponse Result = client.SetOrganization(Request);
 
-                            if (ServiceVersion == "V1")
+                            int ServiceVersion = ServiceClient.GetServiceVersion();
+
+                            if (ServiceVersion == 1)
                                 {
                                 SurveyManagerService.ManagerServiceClient Client = ServiceClient.GetClient();
 
@@ -113,7 +115,7 @@ namespace Epi.Web.SurveyManager.Client
                                     }
                                 MessagerichTextBox1.AppendText(Result.Message.ToString());
                                 }
-                            else if (ServiceVersion == "V2")
+                            else if (ServiceVersion == 2)
                                 {
                                 SurveyManagerServiceV2.ManagerServiceV2Client Client = ServiceClient.GetClientV2();
 
@@ -187,7 +189,9 @@ namespace Epi.Web.SurveyManager.Client
                     {
                         if (!string.IsNullOrEmpty(OnamelistBox1.SelectedItem.ToString()))
                         {
-                        if (ServiceVersion=="V1")
+                        int ServiceVersion = ServiceClient.GetServiceVersion();
+
+                        if (ServiceVersion == 1)
                             {
                                     SurveyManagerService.ManagerServiceClient client = ServiceClient.GetClient();
                                     Epi.Web.Common.Message.OrganizationRequest Request = new Epi.Web.Common.Message.OrganizationRequest();
@@ -216,7 +220,7 @@ namespace Epi.Web.SurveyManager.Client
                                     }
                                }
 
-                        else if (ServiceVersion == "V2")
+                        else if (ServiceVersion == 2 )
                                 
                                 {
                                 SurveyManagerServiceV2.ManagerServiceV2Client client = ServiceClient.GetClientV2();
@@ -311,9 +315,11 @@ namespace Epi.Web.SurveyManager.Client
                     if (!string.IsNullOrEmpty(passwordBox1.Password.ToString()) && IsGuid(passwordBox1.Password.ToString()))
                     {
 
-                        
-                        if (ServiceVersion == "V1")
-                            {
+
+                    int ServiceVersion = ServiceClient.GetServiceVersion();
+
+                    if (ServiceVersion == 1)
+                        {
                             SurveyManagerService.ManagerServiceClient client = ServiceClient.GetClient();
                             Epi.Web.Common.Message.OrganizationRequest Request = new Epi.Web.Common.Message.OrganizationRequest();
 
@@ -333,7 +339,7 @@ namespace Epi.Web.SurveyManager.Client
                                 }
                             }
 
-                        else if (ServiceVersion == "V2")
+                        else if (ServiceVersion == 2)
                             {
                             SurveyManagerServiceV2.ManagerServiceV2Client client = ServiceClient.GetClientV2();
                             Epi.Web.Common.Message.OrganizationRequest Request = new Epi.Web.Common.Message.OrganizationRequest();
@@ -390,9 +396,11 @@ namespace Epi.Web.SurveyManager.Client
                 if (!string.IsNullOrEmpty(passwordBox1.Password.ToString()) && IsGuid(passwordBox1.Password.ToString()))
                 {
 
-                    
-                            if (ServiceVersion == "V1")
-                                {
+
+                int ServiceVersion = ServiceClient.GetServiceVersion();
+
+                if (ServiceVersion == 1)
+                    {
                                 SurveyManagerService.ManagerServiceClient client = ServiceClient.GetClient();
                                 if (checkBox1.IsChecked == true)
                                     {
@@ -419,7 +427,7 @@ namespace Epi.Web.SurveyManager.Client
 
                                 }
 
-                            else if (ServiceVersion == "V2")
+                            else if (ServiceVersion == 2)
                                 {
                                 SurveyManagerServiceV2.ManagerServiceV2Client client = ServiceClient.GetClientV2();
                                 if (checkBox1.IsChecked == true)
@@ -479,9 +487,11 @@ namespace Epi.Web.SurveyManager.Client
                 if (!string.IsNullOrEmpty(passwordBox1.Password.ToString()) && IsGuid(passwordBox1.Password.ToString()))
                 {
 
-            
-                    if (ServiceVersion == "V1")
-                        {
+
+                int ServiceVersion = ServiceClient.GetServiceVersion();
+
+                if (ServiceVersion == 1)
+                    {
                         Request.AdminSecurityKey = new Guid(passwordBox1.Password);
                         SurveyManagerService.ManagerServiceClient client = ServiceClient.GetClient();
                         Epi.Web.Common.Message.OrganizationResponse Result = client.GetOrganizationNames(Request);
@@ -506,7 +516,7 @@ namespace Epi.Web.SurveyManager.Client
 
                         }
 
-                    else if (ServiceVersion == "V2")
+                    else if (ServiceVersion == 2)
                         {
                         Request.AdminSecurityKey = new Guid(passwordBox1.Password);
                         SurveyManagerServiceV2.ManagerServiceV2Client client = ServiceClient.GetClientV2();

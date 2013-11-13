@@ -11,8 +11,12 @@ namespace Epi.Web.SurveyManager.Client
 {
     public class ServiceClient
     {
-         
 
+        public enum Version
+            {
+            SurveyManagerService = 1,
+            SurveyManagerServiceV2 = 2,
+            }
         public static SurveyManagerService.ManagerServiceClient GetClient(string pEndPointAddress, bool pIsAuthenticated, bool pIsWsHttpBinding = true)
         {
             SurveyManagerService.ManagerServiceClient result = null;
@@ -361,5 +365,25 @@ namespace Epi.Web.SurveyManager.Client
                 }
             return result;
             }
-    }
+
+        public static int GetServiceVersion() {
+
+        string EndPointAddress = ConfigurationManager.AppSettings["EndPointAddress"];
+        int ServiceVersion = 0;
+
+        if (EndPointAddress.Contains(((Version)2).ToString()))
+            {
+            ServiceVersion = (int) Version.SurveyManagerServiceV2;
+            }
+        else 
+            {
+
+            ServiceVersion = (int)Version.SurveyManagerService;
+            }
+           return ServiceVersion;
+            
+            }
+        }
+
+
 }
