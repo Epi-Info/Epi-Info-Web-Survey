@@ -1,0 +1,549 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SequenceDesignerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm5="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" xmlns:dm9="http://schemas.microsoft.com/dsltools/SimpleShapesModel" xmlns:dm10="http://schemas.microsoft.com/dsltools/UseCaseModel" xmlns:dm11="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ActivityDesigner" dslVersion="1.0.0.0" Id="4b7ff8ff-b92f-4d26-a75d-d1a42048a770" name="Accessing Survey" linkedPackageId="7956cafe-d3a9-444f-b1af-c38d3e329305" xmlns="http://schemas.microsoft.com/VisualStudio/TeamArchitect/SequenceDesigner">
+  <profileInstances>
+    <packageHasProfileInstances Id="d0652793-83c2-429f-a1ce-4d71febdd83e">
+      <profileInstance Id="49e575ed-6993-4a25-8076-27d140fa82b8" name="StandardProfileL2">
+        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+      </profileInstance>
+      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances Id="17a6cf64-ac39-4799-91b5-8648589788f5">
+      <profileInstance Id="785e3b23-cccf-4a60-a7aa-91ea5e21a510" name="StandardProfileL3">
+        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+      </profileInstance>
+      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <packageHasNamedElement>
+      <interaction Id="d5b58843-07d5-459e-afdb-ff088d03fb49" name="Accessing Survey" collapseFragmentsFlag="false" isActiveClass="false" isAbstract="false" isLeaf="false" isReentrant="false">
+        <elementDefinition Id="9d5632a1-f1c0-414d-9196-2ac65a631906" />
+        <fragments>
+          <behaviorExecutionSpecification Id="21c6a26c-5eae-479a-bcb3-5312d3880a08" name="BehaviorExecutionSpecification1">
+            <elementDefinition Id="3b72bbf3-18d8-4233-b715-39a83b1cf02e" />
+            <coveredLifelines>
+              <lifelineMoniker Id="8c17c6da-a582-4179-aac6-647365f39f66" LastKnownName="Web UI" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker Id="5bf1ab34-5f08-481a-9fe3-f7f0dcaff552" LastKnownName="ExecutionOccurrenceSpecification2" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker Id="c0dbffbf-355d-4c76-b90f-fa3d8bf2fa0d" LastKnownName="ExecutionOccurrenceSpecification1" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker Id="0b61d00a-38a5-4e87-b2b4-158f01da107e" LastKnownName="MessageOccurrenceSpecification2" />
+              <messageOccurrenceSpecificationMoniker Id="89e90735-fac8-4e18-9f7e-5c6a70026310" LastKnownName="MessageOccurrenceSpecification19" />
+              <messageOccurrenceSpecificationMoniker Id="7bcbdc80-3641-46d4-ac2b-6825c11d2cc3" LastKnownName="MessageOccurrenceSpecification22" />
+              <messageOccurrenceSpecificationMoniker Id="3848151c-2c39-4f15-961a-eb426f3e9726" LastKnownName="MessageOccurrenceSpecification3" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification Id="c0dbffbf-355d-4c76-b90f-fa3d8bf2fa0d" name="ExecutionOccurrenceSpecification1">
+            <elementDefinition Id="0af4b3d4-0a9a-4710-a80c-ba7eb370182d" />
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker Id="ae5a31d8-bd3d-47f9-8997-b11c9e1af36d" LastKnownName="ExecutionEvent" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker Id="8c17c6da-a582-4179-aac6-647365f39f66" LastKnownName="Web UI" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification Id="0b61d00a-38a5-4e87-b2b4-158f01da107e" name="MessageOccurrenceSpecification2">
+            <elementDefinition Id="df2ec861-ddda-417a-bf4b-cbc14b6f4cfd" />
+            <covered>
+              <lifelineMoniker Id="8c17c6da-a582-4179-aac6-647365f39f66" LastKnownName="Web UI" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification Id="5af00d45-ce8c-41ad-9d25-ed4ee0700fa2" name="MessageOccurrenceSpecification1">
+            <elementDefinition Id="0fa83eeb-0d01-4201-8069-e3ab13370fb9" />
+            <covered>
+              <lifelineMoniker Id="508af796-2cdd-4a97-9183-3d287721274e" LastKnownName="Survery Participant" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <behaviorExecutionSpecification Id="b11d1ff9-321d-4207-a0ea-05563498712f" name="BehaviorExecutionSpecification6">
+            <elementDefinition Id="7f3117b2-b521-4726-9c63-bab10ada52d3" />
+            <coveredLifelines>
+              <lifelineMoniker Id="ec5a32cd-48d3-49dd-8716-30cb372ff95e" LastKnownName="Survey Manager Service" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker Id="796caed7-f663-4852-9cca-bd4a1ae8697a" LastKnownName="ExecutionOccurrenceSpecification12" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker Id="3c4b70a6-2255-4954-b195-c7d322fe99fc" LastKnownName="ExecutionOccurrenceSpecification11" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker Id="319abf73-369a-4b3c-9980-b982c1a710fe" LastKnownName="MessageOccurrenceSpecification20" />
+              <messageOccurrenceSpecificationMoniker Id="f9d042bf-90e5-4b63-8cbc-22fffcd0d86a" LastKnownName="MessageOccurrenceSpecification23" />
+              <messageOccurrenceSpecificationMoniker Id="94548e77-d9f5-43f7-a512-bc6debdd69c6" LastKnownName="MessageOccurrenceSpecification26" />
+              <messageOccurrenceSpecificationMoniker Id="0c22ffee-a082-4580-b4cd-bcad2a959292" LastKnownName="MessageOccurrenceSpecification21" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification Id="3c4b70a6-2255-4954-b195-c7d322fe99fc" name="ExecutionOccurrenceSpecification11">
+            <elementDefinition Id="f1a2efe8-c17b-4661-bf9d-d139e66a673e" />
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker Id="4d6aa853-11c8-4e47-957f-cdd1fbed9db3" LastKnownName="ExecutionEvent" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker Id="ec5a32cd-48d3-49dd-8716-30cb372ff95e" LastKnownName="Survey Manager Service" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification Id="319abf73-369a-4b3c-9980-b982c1a710fe" name="MessageOccurrenceSpecification20">
+            <elementDefinition Id="25f13308-91bb-4506-8bca-5d0b35f5c581" />
+            <covered>
+              <lifelineMoniker Id="ec5a32cd-48d3-49dd-8716-30cb372ff95e" LastKnownName="Survey Manager Service" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification Id="89e90735-fac8-4e18-9f7e-5c6a70026310" name="MessageOccurrenceSpecification19">
+            <elementDefinition Id="10be64d0-05fb-4f48-9fda-1b926c092472" />
+            <covered>
+              <lifelineMoniker Id="8c17c6da-a582-4179-aac6-647365f39f66" LastKnownName="Web UI" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <behaviorExecutionSpecification Id="0c1ac899-ae29-4e2f-8b95-b09aed16591f" name="BehaviorExecutionSpecification7">
+            <elementDefinition Id="14c96fde-406c-456a-9a03-f05ca4e70929" />
+            <coveredLifelines>
+              <lifelineMoniker Id="3c21038f-d4f0-4789-a964-f9e06bdc7311" LastKnownName="Survey Info Business Entity" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker Id="ab8340d3-c465-4a36-a262-28f848ab27b1" LastKnownName="ExecutionOccurrenceSpecification14" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker Id="ac8c26bf-9d94-4532-be91-7a9ef9cf1caf" LastKnownName="ExecutionOccurrenceSpecification13" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker Id="9c30692e-3831-479a-8910-ef894e2ae0e1" LastKnownName="MessageOccurrenceSpecification24" />
+              <messageOccurrenceSpecificationMoniker Id="2557e89d-3630-4236-b5e1-0b33e943cdc6" LastKnownName="MessageOccurrenceSpecification27" />
+              <messageOccurrenceSpecificationMoniker Id="c8566395-0ba0-4b92-826a-46647787fd3a" LastKnownName="MessageOccurrenceSpecification30" />
+              <messageOccurrenceSpecificationMoniker Id="f5b31e23-4738-429b-9a87-d546d754d1ba" LastKnownName="MessageOccurrenceSpecification25" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification Id="ac8c26bf-9d94-4532-be91-7a9ef9cf1caf" name="ExecutionOccurrenceSpecification13">
+            <elementDefinition Id="a5023801-fd9f-47cb-a1ed-94aad9842c99" />
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker Id="4dbcd393-c94d-49b7-93e7-657ed526d219" LastKnownName="ExecutionEvent" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker Id="3c21038f-d4f0-4789-a964-f9e06bdc7311" LastKnownName="Survey Info Business Entity" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification Id="9c30692e-3831-479a-8910-ef894e2ae0e1" name="MessageOccurrenceSpecification24">
+            <elementDefinition Id="3c72b346-df94-42de-bdae-1a2cfb1b41d7" />
+            <covered>
+              <lifelineMoniker Id="3c21038f-d4f0-4789-a964-f9e06bdc7311" LastKnownName="Survey Info Business Entity" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification Id="f9d042bf-90e5-4b63-8cbc-22fffcd0d86a" name="MessageOccurrenceSpecification23">
+            <elementDefinition Id="a4120301-7625-4d50-b743-7fb54b8719ca" />
+            <covered>
+              <lifelineMoniker Id="ec5a32cd-48d3-49dd-8716-30cb372ff95e" LastKnownName="Survey Manager Service" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <behaviorExecutionSpecification Id="e2683fc7-f712-41a4-8056-c5c78314c6d5" name="BehaviorExecutionSpecification8">
+            <elementDefinition Id="b815cd5a-8303-4c39-a74b-eb436304c5c2" />
+            <coveredLifelines>
+              <lifelineMoniker Id="04cbe869-af62-4a9f-9f05-bc941b473107" LastKnownName="Survery Info Repository" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker Id="81fad3c0-6299-4393-9e5c-112cecf10252" LastKnownName="ExecutionOccurrenceSpecification16" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker Id="3c4b1b3d-5e37-4749-82e3-09990bff0deb" LastKnownName="ExecutionOccurrenceSpecification15" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker Id="42e54db7-bd10-42fc-ae34-07f6552fb4ef" LastKnownName="MessageOccurrenceSpecification28" />
+              <messageOccurrenceSpecificationMoniker Id="3a8bc173-9593-4260-bfbd-a2ca87ff2f37" LastKnownName="MessageOccurrenceSpecification31" />
+              <messageOccurrenceSpecificationMoniker Id="c982a9f5-91a4-4655-8b58-ca2824c2cce5" LastKnownName="MessageOccurrenceSpecification34" />
+              <messageOccurrenceSpecificationMoniker Id="19102565-c305-4087-abdb-c36886d151b1" LastKnownName="MessageOccurrenceSpecification29" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification Id="3c4b1b3d-5e37-4749-82e3-09990bff0deb" name="ExecutionOccurrenceSpecification15">
+            <elementDefinition Id="18f13846-2abf-4584-a841-e49ae1d579d5" />
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker Id="86ca088c-e3ad-4655-b20f-af059a224b00" LastKnownName="ExecutionEvent" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker Id="04cbe869-af62-4a9f-9f05-bc941b473107" LastKnownName="Survery Info Repository" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification Id="2557e89d-3630-4236-b5e1-0b33e943cdc6" name="MessageOccurrenceSpecification27">
+            <elementDefinition Id="2929cb21-a43e-4a71-baf2-be09598ea618" />
+            <covered>
+              <lifelineMoniker Id="3c21038f-d4f0-4789-a964-f9e06bdc7311" LastKnownName="Survey Info Business Entity" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification Id="42e54db7-bd10-42fc-ae34-07f6552fb4ef" name="MessageOccurrenceSpecification28">
+            <elementDefinition Id="6cdbc79f-16ee-4498-9601-c07e1fdd15da" />
+            <covered>
+              <lifelineMoniker Id="04cbe869-af62-4a9f-9f05-bc941b473107" LastKnownName="Survery Info Repository" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <behaviorExecutionSpecification Id="797e2e13-7c34-4d09-a860-0af699838fbd" name="BehaviorExecutionSpecification9">
+            <elementDefinition Id="9299da27-4128-47c5-8731-119950bd64fc" />
+            <coveredLifelines>
+              <lifelineMoniker Id="e7d6ea3a-09b9-4265-b559-a6f71f261b47" LastKnownName="Survey Meta Data Store" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker Id="cb39b453-9057-489e-95a3-2b422cd3b3c8" LastKnownName="ExecutionOccurrenceSpecification18" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker Id="4c64bb7b-94c9-490f-ab04-bb44a52d549d" LastKnownName="ExecutionOccurrenceSpecification17" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker Id="96a4a2b9-6c2b-4ccc-9e54-f6124ccd9250" LastKnownName="MessageOccurrenceSpecification32" />
+              <messageOccurrenceSpecificationMoniker Id="f545c450-67a2-4b51-b4c9-08950323483b" LastKnownName="MessageOccurrenceSpecification33" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification Id="4c64bb7b-94c9-490f-ab04-bb44a52d549d" name="ExecutionOccurrenceSpecification17">
+            <elementDefinition Id="416fd768-369e-4abb-9fa4-169887e466d3" />
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker Id="8eaa9c68-096e-4b72-b00f-3eb1e4915480" LastKnownName="ExecutionEvent" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker Id="e7d6ea3a-09b9-4265-b559-a6f71f261b47" LastKnownName="Survey Meta Data Store" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification Id="96a4a2b9-6c2b-4ccc-9e54-f6124ccd9250" name="MessageOccurrenceSpecification32">
+            <elementDefinition Id="a02cbe97-b717-4816-8c9d-ec62d90694d9" />
+            <covered>
+              <lifelineMoniker Id="e7d6ea3a-09b9-4265-b559-a6f71f261b47" LastKnownName="Survey Meta Data Store" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification Id="3a8bc173-9593-4260-bfbd-a2ca87ff2f37" name="MessageOccurrenceSpecification31">
+            <elementDefinition Id="cd7e69b3-befd-4d49-8195-5c823a883b49" />
+            <covered>
+              <lifelineMoniker Id="04cbe869-af62-4a9f-9f05-bc941b473107" LastKnownName="Survery Info Repository" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification Id="f545c450-67a2-4b51-b4c9-08950323483b" name="MessageOccurrenceSpecification33">
+            <elementDefinition Id="6921c514-c2ad-4c63-bd38-c4d349fd643c" />
+            <covered>
+              <lifelineMoniker Id="e7d6ea3a-09b9-4265-b559-a6f71f261b47" LastKnownName="Survey Meta Data Store" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification Id="c982a9f5-91a4-4655-8b58-ca2824c2cce5" name="MessageOccurrenceSpecification34">
+            <elementDefinition Id="14e6d626-5728-419c-ac7a-39a72bfd3d3d" />
+            <covered>
+              <lifelineMoniker Id="04cbe869-af62-4a9f-9f05-bc941b473107" LastKnownName="Survery Info Repository" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification Id="cb39b453-9057-489e-95a3-2b422cd3b3c8" name="ExecutionOccurrenceSpecification18">
+            <elementDefinition Id="73627b62-631c-455f-af05-f6e132e929d6" />
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker Id="3ed7c549-6b27-4ac3-9c16-871e9a56d513" LastKnownName="ExecutionEvent" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker Id="e7d6ea3a-09b9-4265-b559-a6f71f261b47" LastKnownName="Survey Meta Data Store" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification Id="c8566395-0ba0-4b92-826a-46647787fd3a" name="MessageOccurrenceSpecification30">
+            <elementDefinition Id="bc79d362-e98d-4d89-8aac-0e54839a4bba" />
+            <covered>
+              <lifelineMoniker Id="3c21038f-d4f0-4789-a964-f9e06bdc7311" LastKnownName="Survey Info Business Entity" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification Id="19102565-c305-4087-abdb-c36886d151b1" name="MessageOccurrenceSpecification29">
+            <elementDefinition Id="f7e9d223-693c-4459-b0ad-ecfc3f5c500a" />
+            <covered>
+              <lifelineMoniker Id="04cbe869-af62-4a9f-9f05-bc941b473107" LastKnownName="Survery Info Repository" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification Id="81fad3c0-6299-4393-9e5c-112cecf10252" name="ExecutionOccurrenceSpecification16">
+            <elementDefinition Id="e0101d10-0d77-4823-ab0e-55032051a6fb" />
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker Id="79a0b655-48b5-4b0b-a342-f7615d8c5a90" LastKnownName="ExecutionEvent" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker Id="04cbe869-af62-4a9f-9f05-bc941b473107" LastKnownName="Survery Info Repository" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification Id="f5b31e23-4738-429b-9a87-d546d754d1ba" name="MessageOccurrenceSpecification25">
+            <elementDefinition Id="1543a5ed-ba14-485a-95b4-12278ddd8288" />
+            <covered>
+              <lifelineMoniker Id="3c21038f-d4f0-4789-a964-f9e06bdc7311" LastKnownName="Survey Info Business Entity" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification Id="94548e77-d9f5-43f7-a512-bc6debdd69c6" name="MessageOccurrenceSpecification26">
+            <elementDefinition Id="3414185b-2702-40ef-b760-9fbe30fa7cf8" />
+            <covered>
+              <lifelineMoniker Id="ec5a32cd-48d3-49dd-8716-30cb372ff95e" LastKnownName="Survey Manager Service" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification Id="ab8340d3-c465-4a36-a262-28f848ab27b1" name="ExecutionOccurrenceSpecification14">
+            <elementDefinition Id="172e7eb4-f4aa-4ccf-b08c-0d43c1c285db" />
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker Id="03b3f845-5ec2-4891-a9fe-346705030951" LastKnownName="ExecutionEvent" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker Id="3c21038f-d4f0-4789-a964-f9e06bdc7311" LastKnownName="Survey Info Business Entity" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification Id="7bcbdc80-3641-46d4-ac2b-6825c11d2cc3" name="MessageOccurrenceSpecification22">
+            <elementDefinition Id="8f7e51bb-8955-4610-b4ef-ab08506c78cc" />
+            <covered>
+              <lifelineMoniker Id="8c17c6da-a582-4179-aac6-647365f39f66" LastKnownName="Web UI" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification Id="0c22ffee-a082-4580-b4cd-bcad2a959292" name="MessageOccurrenceSpecification21">
+            <elementDefinition Id="4c23c401-715d-46aa-9ac0-2a646fd97505" />
+            <covered>
+              <lifelineMoniker Id="ec5a32cd-48d3-49dd-8716-30cb372ff95e" LastKnownName="Survey Manager Service" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification Id="796caed7-f663-4852-9cca-bd4a1ae8697a" name="ExecutionOccurrenceSpecification12">
+            <elementDefinition Id="b593f012-5635-4274-a0af-c00086eeb4c5" />
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker Id="2e9d2239-0dfc-41d0-8932-999fd35d4e27" LastKnownName="ExecutionEvent" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker Id="ec5a32cd-48d3-49dd-8716-30cb372ff95e" LastKnownName="Survey Manager Service" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification Id="e906aa5b-3c01-44c4-bb2a-b422368d4346" name="MessageOccurrenceSpecification4">
+            <elementDefinition Id="cb9f4e5e-2365-4765-addf-7c0a64c60a60" />
+            <covered>
+              <lifelineMoniker Id="508af796-2cdd-4a97-9183-3d287721274e" LastKnownName="Survery Participant" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification Id="3848151c-2c39-4f15-961a-eb426f3e9726" name="MessageOccurrenceSpecification3">
+            <elementDefinition Id="3b97d110-c2bd-44fc-83e1-2c02634a29ad" />
+            <covered>
+              <lifelineMoniker Id="8c17c6da-a582-4179-aac6-647365f39f66" LastKnownName="Web UI" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification Id="5bf1ab34-5f08-481a-9fe3-f7f0dcaff552" name="ExecutionOccurrenceSpecification2">
+            <elementDefinition Id="057ef061-37ce-4c7b-8efc-9c7b85cb5a99" />
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker Id="aede7e0c-586b-46e5-a95d-f7a2aa890fd9" LastKnownName="ExecutionEvent" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker Id="8c17c6da-a582-4179-aac6-647365f39f66" LastKnownName="Web UI" />
+            </covered>
+          </executionOccurrenceSpecification>
+        </fragments>
+        <lifelines>
+          <lifeline Id="508af796-2cdd-4a97-9183-3d287721274e" name="Survery Participant" isActor="true" lifelineDisplayName="Survery Participant">
+            <elementDefinition Id="62e488d8-b2fa-428d-85dd-7d8c6e89a6e2" />
+            <represents>
+              <propertyMoniker Id="e749a448-55f2-4ad3-955a-47043929c8b5" />
+            </represents>
+            <topLevelOccurrences>
+              <messageOccurrenceSpecificationMoniker Id="5af00d45-ce8c-41ad-9d25-ed4ee0700fa2" LastKnownName="MessageOccurrenceSpecification1" />
+              <messageOccurrenceSpecificationMoniker Id="e906aa5b-3c01-44c4-bb2a-b422368d4346" LastKnownName="MessageOccurrenceSpecification4" />
+            </topLevelOccurrences>
+          </lifeline>
+          <lifeline Id="8c17c6da-a582-4179-aac6-647365f39f66" name="Web UI" isActor="false" lifelineDisplayName="Web UI">
+            <elementDefinition Id="8724a869-ca45-4d4a-9f22-42fede36684a" />
+            <topLevelOccurrences>
+              <executionOccurrenceSpecificationMoniker Id="c0dbffbf-355d-4c76-b90f-fa3d8bf2fa0d" LastKnownName="ExecutionOccurrenceSpecification1" />
+              <executionOccurrenceSpecificationMoniker Id="5bf1ab34-5f08-481a-9fe3-f7f0dcaff552" LastKnownName="ExecutionOccurrenceSpecification2" />
+            </topLevelOccurrences>
+          </lifeline>
+          <lifeline Id="ec5a32cd-48d3-49dd-8716-30cb372ff95e" name="Survey Manager Service" isActor="false" lifelineDisplayName="Survey Manager Service">
+            <elementDefinition Id="8c44458d-d14d-4368-a53e-47060b97e3f3" />
+            <topLevelOccurrences>
+              <executionOccurrenceSpecificationMoniker Id="3c4b70a6-2255-4954-b195-c7d322fe99fc" LastKnownName="ExecutionOccurrenceSpecification11" />
+              <executionOccurrenceSpecificationMoniker Id="796caed7-f663-4852-9cca-bd4a1ae8697a" LastKnownName="ExecutionOccurrenceSpecification12" />
+            </topLevelOccurrences>
+          </lifeline>
+          <lifeline Id="3c21038f-d4f0-4789-a964-f9e06bdc7311" name="Survey Info Business Entity" isActor="false" lifelineDisplayName="Survey Info Business Entity">
+            <elementDefinition Id="f796ff75-30c8-4ef3-ba11-fcc764ceddfb" />
+            <topLevelOccurrences>
+              <executionOccurrenceSpecificationMoniker Id="ac8c26bf-9d94-4532-be91-7a9ef9cf1caf" LastKnownName="ExecutionOccurrenceSpecification13" />
+              <executionOccurrenceSpecificationMoniker Id="ab8340d3-c465-4a36-a262-28f848ab27b1" LastKnownName="ExecutionOccurrenceSpecification14" />
+            </topLevelOccurrences>
+          </lifeline>
+          <lifeline Id="04cbe869-af62-4a9f-9f05-bc941b473107" name="Survery Info Repository" isActor="false" lifelineDisplayName="Survery Info Repository">
+            <elementDefinition Id="46c40a12-61e4-417d-87a8-aac89b84f473" />
+            <topLevelOccurrences>
+              <executionOccurrenceSpecificationMoniker Id="3c4b1b3d-5e37-4749-82e3-09990bff0deb" LastKnownName="ExecutionOccurrenceSpecification15" />
+              <executionOccurrenceSpecificationMoniker Id="81fad3c0-6299-4393-9e5c-112cecf10252" LastKnownName="ExecutionOccurrenceSpecification16" />
+            </topLevelOccurrences>
+          </lifeline>
+          <lifeline Id="e7d6ea3a-09b9-4265-b559-a6f71f261b47" name="Survey Meta Data Store" isActor="false" lifelineDisplayName="Survey Meta Data Store">
+            <elementDefinition Id="d855a0b3-9bdd-4655-8807-cdf88090658e" />
+            <topLevelOccurrences>
+              <executionOccurrenceSpecificationMoniker Id="4c64bb7b-94c9-490f-ab04-bb44a52d549d" LastKnownName="ExecutionOccurrenceSpecification17" />
+              <executionOccurrenceSpecificationMoniker Id="cb39b453-9057-489e-95a3-2b422cd3b3c8" LastKnownName="ExecutionOccurrenceSpecification18" />
+            </topLevelOccurrences>
+          </lifeline>
+        </lifelines>
+        <messages>
+          <message Id="6efe8ea3-24c2-4c3c-9885-02ff454be168" name="Open Survey" messageKind="Complete" messageSort="SynchCall" createSelfMessage="false">
+            <elementDefinition Id="43936e61-fb58-43bb-ae9b-14d0e06a12cd" />
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker Id="5af00d45-ce8c-41ad-9d25-ed4ee0700fa2" LastKnownName="MessageOccurrenceSpecification1" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker Id="0b61d00a-38a5-4e87-b2b4-158f01da107e" LastKnownName="MessageOccurrenceSpecification2" />
+            </receiveEvent>
+          </message>
+          <message Id="f8f1a104-0b2c-4e44-8ffa-a6cd4a6be14d" name="Get Survey Info by ID" messageKind="Complete" messageSort="SynchCall" createSelfMessage="false">
+            <elementDefinition Id="0c79089b-3db1-4aaa-8ab7-eb6bc02c17c5" />
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker Id="89e90735-fac8-4e18-9f7e-5c6a70026310" LastKnownName="MessageOccurrenceSpecification19" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker Id="319abf73-369a-4b3c-9980-b982c1a710fe" LastKnownName="MessageOccurrenceSpecification20" />
+            </receiveEvent>
+          </message>
+          <message Id="8b54ff99-8289-4bde-9d08-22639999c0ab" name="Get Survey Info by ID" messageKind="Complete" messageSort="SynchCall" createSelfMessage="false">
+            <elementDefinition Id="8b333fe9-d554-49b2-be07-55c6750695a1" />
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker Id="f9d042bf-90e5-4b63-8cbc-22fffcd0d86a" LastKnownName="MessageOccurrenceSpecification23" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker Id="9c30692e-3831-479a-8910-ef894e2ae0e1" LastKnownName="MessageOccurrenceSpecification24" />
+            </receiveEvent>
+          </message>
+          <message Id="0554f090-47b2-4390-966e-1ea91dabf7d9" name="Get Survey Info" messageKind="Complete" messageSort="SynchCall" createSelfMessage="false">
+            <elementDefinition Id="a4085cf7-8b0f-4a7a-8151-240fb436abd5" />
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker Id="2557e89d-3630-4236-b5e1-0b33e943cdc6" LastKnownName="MessageOccurrenceSpecification27" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker Id="42e54db7-bd10-42fc-ae34-07f6552fb4ef" LastKnownName="MessageOccurrenceSpecification28" />
+            </receiveEvent>
+          </message>
+          <message Id="4d68a1c2-6707-45ac-ad2b-8650771c12d7" name="Send Survey ID" messageKind="Complete" messageSort="SynchCall" createSelfMessage="false">
+            <elementDefinition Id="7095e097-1e01-48d9-9c71-3c9a1b62f83c" />
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker Id="3a8bc173-9593-4260-bfbd-a2ca87ff2f37" LastKnownName="MessageOccurrenceSpecification31" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker Id="96a4a2b9-6c2b-4ccc-9e54-f6124ccd9250" LastKnownName="MessageOccurrenceSpecification32" />
+            </receiveEvent>
+          </message>
+          <message Id="873345fc-300b-46ce-826e-71362e4cfa1e" name="&lt;&lt;return Survey entity&gt;&gt;" messageKind="Complete" messageSort="Reply" createSelfMessage="false">
+            <elementDefinition Id="38ee2183-7be0-41a1-932d-84f674c04161" />
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker Id="f545c450-67a2-4b51-b4c9-08950323483b" LastKnownName="MessageOccurrenceSpecification33" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker Id="c982a9f5-91a4-4655-8b58-ca2824c2cce5" LastKnownName="MessageOccurrenceSpecification34" />
+            </receiveEvent>
+          </message>
+          <message Id="7cd6e3f0-0a4e-44a8-a7aa-a3d5e559221a" name="&lt;&lt;return Survey Info&gt;&gt;" messageKind="Complete" messageSort="Reply" createSelfMessage="false">
+            <elementDefinition Id="dcb4f989-b3ca-4e29-8199-4b2aac26b9e7" />
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker Id="19102565-c305-4087-abdb-c36886d151b1" LastKnownName="MessageOccurrenceSpecification29" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker Id="c8566395-0ba0-4b92-826a-46647787fd3a" LastKnownName="MessageOccurrenceSpecification30" />
+            </receiveEvent>
+          </message>
+          <message Id="a1f62227-ab03-4d2f-b7df-ebd0fafefbb0" name="&lt;&lt;return Survey Info&gt;&gt;" messageKind="Complete" messageSort="Reply" createSelfMessage="false">
+            <elementDefinition Id="4b5d33cf-7139-4372-9636-2c72e0933d13" />
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker Id="f5b31e23-4738-429b-9a87-d546d754d1ba" LastKnownName="MessageOccurrenceSpecification25" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker Id="94548e77-d9f5-43f7-a512-bc6debdd69c6" LastKnownName="MessageOccurrenceSpecification26" />
+            </receiveEvent>
+          </message>
+          <message Id="9290cd50-64d9-4690-a05b-1f4adc7b8c5b" name="&lt;&lt;return Info&gt;&gt;" messageKind="Complete" messageSort="Reply" createSelfMessage="false">
+            <elementDefinition Id="b21ba9a1-e1ec-467b-b207-836811df06e9" />
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker Id="0c22ffee-a082-4580-b4cd-bcad2a959292" LastKnownName="MessageOccurrenceSpecification21" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker Id="7bcbdc80-3641-46d4-ac2b-6825c11d2cc3" LastKnownName="MessageOccurrenceSpecification22" />
+            </receiveEvent>
+          </message>
+          <message Id="b969079d-dd84-4e21-af6e-7c788fd4726a" name="&lt;&lt;return Survey Home View&gt;&gt;" messageKind="Complete" messageSort="Reply" createSelfMessage="false">
+            <elementDefinition Id="faa3b0a2-6cb7-4de4-8c91-26b5095c74fb" />
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker Id="3848151c-2c39-4f15-961a-eb426f3e9726" LastKnownName="MessageOccurrenceSpecification3" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker Id="e906aa5b-3c01-44c4-bb2a-b422368d4346" LastKnownName="MessageOccurrenceSpecification4" />
+            </receiveEvent>
+          </message>
+        </messages>
+        <ownedAttributesInternal>
+          <property Id="e749a448-55f2-4ad3-955a-47043929c8b5" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="db717510-b27f-4daf-965a-bb01213a4ec1" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="58d5ee67-2343-46ff-8206-9adda7aa1a97" LastKnownName="Survery Participant" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
+      </interaction>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="58d5ee67-2343-46ff-8206-9adda7aa1a97" name="Survery Participant" isAbstract="false" isLeaf="false" cachedFullName="Epi.Web.Modeling::Survery Participant">
+        <elementDefinition Id="bd93dd00-339e-4d35-b12e-59219412cfdb" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent Id="ae5a31d8-bd3d-47f9-8997-b11c9e1af36d" name="ExecutionEvent">
+        <elementDefinition Id="0352a0f9-2907-4073-a1a8-ccbab525e81c" />
+      </executionEvent>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent Id="aede7e0c-586b-46e5-a95d-f7a2aa890fd9" name="ExecutionEvent">
+        <elementDefinition Id="76c07389-b59d-4bc2-9658-10799959386c" />
+      </executionEvent>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent Id="4d6aa853-11c8-4e47-957f-cdd1fbed9db3" name="ExecutionEvent">
+        <elementDefinition Id="2ccbf2af-6e68-4218-a0d5-486b9d4c4d56" />
+      </executionEvent>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent Id="2e9d2239-0dfc-41d0-8932-999fd35d4e27" name="ExecutionEvent">
+        <elementDefinition Id="3725351c-8f73-413e-b55c-a0c6c0d00a40" />
+      </executionEvent>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent Id="4dbcd393-c94d-49b7-93e7-657ed526d219" name="ExecutionEvent">
+        <elementDefinition Id="7d321dc1-508f-4912-b325-93250eaeb4ca" />
+      </executionEvent>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent Id="03b3f845-5ec2-4891-a9fe-346705030951" name="ExecutionEvent">
+        <elementDefinition Id="1f135ce8-8cb3-4768-8661-163d3e1ab012" />
+      </executionEvent>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent Id="86ca088c-e3ad-4655-b20f-af059a224b00" name="ExecutionEvent">
+        <elementDefinition Id="aa1256f3-8844-4205-9c2e-7846746f47d1" />
+      </executionEvent>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent Id="79a0b655-48b5-4b0b-a342-f7615d8c5a90" name="ExecutionEvent">
+        <elementDefinition Id="91d53c22-1d7c-4cc0-bb94-30cbd6d35d21" />
+      </executionEvent>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent Id="8eaa9c68-096e-4b72-b00f-3eb1e4915480" name="ExecutionEvent">
+        <elementDefinition Id="bcf32b88-ec6d-4541-931d-36a6b6b8bbcc" />
+      </executionEvent>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent Id="3ed7c549-6b27-4ac3-9c16-871e9a56d513" name="ExecutionEvent">
+        <elementDefinition Id="ae79dc97-4705-4e45-9551-579358b2ad41" />
+      </executionEvent>
+    </packageHasNamedElement>
+  </packagedElements>
+  <package Id="7956cafe-d3a9-444f-b1af-c38d3e329305" name="Epi.Web.Modeling">
+    <elementDefinition Id="daf1de51-1862-4459-9e4a-e7f71a55a436" />
+  </package>
+</SequenceDesignerModel>
