@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<layerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/SimpleShapesModel" dslVersion="1.0.0.0" Id="b8bcad3c-4898-489a-b310-5538383cd21a" xmlns="http://schemas.microsoft.com/VisualStudio/TeamArchitect/LayerDesigner">
+  <layers>
+    <layer Id="605bb01a-0255-4057-a9b4-f7c3db0f1b16" name="Web Server">
+      <childLayers>
+        <layer Id="50afb952-8bb2-42a3-adcd-23a3a6b8352c" name="Business Layer">
+          <childLayers>
+            <layer Id="132ffc4b-1eb2-492a-af25-3243600e094a" name="Business Objects" />
+            <layer Id="53085456-b96b-4471-bcff-21753f794053" name="Business Entities" />
+            <layer Id="07043cd6-c1d1-4b08-a293-301004538343" name="Business Interfaces" />
+          </childLayers>
+        </layer>
+        <layer Id="fe53d00a-a69d-4b4c-b57f-db667ccca31b" name="Data Layer">
+          <childLayers>
+            <layer Id="9611b20c-b47f-4ed1-90f9-e27ffd768cb5" name="Data Access Components" />
+            <layer Id="b6cee329-f194-4058-9529-86c7ef7eb46d" name="Data Helpers/ Utilities" />
+            <layer Id="b052214e-11ce-40f0-9f50-9130bf87cb00" name="Data Access Interfaces" />
+          </childLayers>
+        </layer>
+        <layer Id="cf6f9815-ceab-45d4-8f7d-5b685e1fd559" name="Cross Cutting">
+          <childLayers>
+            <layer Id="bf221a2a-208c-416d-bc55-504d398d4cb0" name="Security" />
+            <layer Id="15637215-fd16-4aee-9d18-3d0b8f121952" name="Communication" />
+            <layer Id="0319d55f-9956-48b5-ad10-b9f0ea18bcdf" name="Operational Management" />
+          </childLayers>
+        </layer>
+        <layer Id="43b15c19-0014-48d6-a310-01441c2bbe83" name="Presentation Layer">
+          <childLayers>
+            <layer Id="6f8c2d06-5024-4f3f-a362-dc8dd1aab458" name="UI Components" />
+            <layer Id="20de6649-501c-47fc-9c39-ab44d904b9da" name="UI Process Components" />
+          </childLayers>
+        </layer>
+        <layer Id="b591affe-3b2a-48f4-82ac-f8db929c1507" name="Services Layer">
+          <childLayers>
+            <layer Id="a507fe0f-3da3-4545-a484-8f4bd0314688" name="Service Interfaces" />
+            <layer Id="c06aeec1-0e30-4701-af01-96cfd2af1d16" name="Message Types" />
+          </childLayers>
+        </layer>
+        <layer Id="ae5d7b83-39cc-4e66-befb-6f7fd2e9087b" name="Hosting Layer">
+          <childLayers>
+            <layer Id="c6cdf6fd-76cc-4654-b6cb-2b3356db7428" name="Service Interface" />
+          </childLayers>
+        </layer>
+      </childLayers>
+    </layer>
+    <layer Id="c896cc99-6e95-42df-9440-cf61190c6696" name="Client">
+      <dependencyToLayers>
+        <dependencyFromLayerToLayer Id="08d48580-25e1-4275-b4a3-102f57ba1244" direction="Bidirectional">
+          <layerMoniker Id="605bb01a-0255-4057-a9b4-f7c3db0f1b16" />
+        </dependencyFromLayerToLayer>
+      </dependencyToLayers>
+      <childLayers>
+        <layer Id="486b5414-9d9d-451d-8fc3-1c93b1a4e36a" name=" Browser">
+          <childLayers>
+            <layer Id="0b0a6c37-da55-421c-b4fe-918596d39b63" name="Rendering" />
+            <layer Id="5dba88cb-902f-4e7e-92cc-c9bea57bdfd7" name="JavaScript Libraries">
+              <childLayers>
+                <layer Id="38a2e9a3-5c62-4818-b1e0-483268453639" name="Validation libraries" />
+                <layer Id="1f8d687d-d4ce-48f2-b02b-736c27f5073f" name="Control library / Extenders" />
+                <layer Id="7cceb276-14cc-45e7-93be-2cd095dfb655" name="Service communicator" />
+              </childLayers>
+            </layer>
+          </childLayers>
+        </layer>
+      </childLayers>
+    </layer>
+  </layers>
+</layerModel>
