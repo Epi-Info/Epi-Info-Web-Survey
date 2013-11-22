@@ -1,0 +1,248 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<componentModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm5="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" xmlns:dm9="http://schemas.microsoft.com/dsltools/SimpleShapesModel" xmlns:dm10="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ActivityDesigner" xmlns:dm11="http://schemas.microsoft.com/dsltools/LogicalClassDesigner" dslVersion="1.0.0.0" Id="7deb36da-b8df-483a-a715-323475fe3ff6" name="EpiInfoWebSurveyFunctionalDecomposition" linkedPackageId="dd6f445d-529d-4944-ab50-6162f4e3b75c" xmlns="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ComponentDesigner">
+  <profileInstances>
+    <packageHasProfileInstances Id="ea0cd0fc-0be8-4fe6-b751-5c593ed410c1">
+      <profileInstance Id="3934c6c4-d93e-4219-b612-10ac17c515f8" name="StandardProfileL2">
+        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+      </profileInstance>
+      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances Id="b275ce9b-73c5-4751-ab63-1b33e9355b9e">
+      <profileInstance Id="10153baa-a404-491a-a1bd-8271ef332621" name="StandardProfileL3">
+        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+      </profileInstance>
+      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances Id="76aeda68-fa94-4699-8267-c2c2d48b7b4f">
+      <profileInstance Id="7a31e44c-76ac-421f-85ef-0a473cd2eacb" name="CSharpProfile">
+        <elementDefinition Id="db4513e1-8269-43fb-88f7-458a5cba77b0" />
+      </profileInstance>
+      <elementDefinition Id="c2d726cf-e8bf-43b1-a6ef-713303241450" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <componentModelHasComponents>
+      <component Id="63936aac-4e3d-488d-a42d-63d6ab55228f" name="Web Survey Website" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="6dbe50fe-2c32-4fe9-9bc3-111d58295117" />
+        <ownedAttributesInternal>
+          <requiredInterface Id="a4c203ad-3327-4885-afdf-a67632458fe3" name="Port1" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isService="false" isBehavior="false">
+            <elementDefinition Id="d758de9f-4fc2-4dca-b283-875104fc3c02" />
+            <suppliersInternal>
+              <dependency Id="0aa19e65-a169-4f2f-bdbc-1f6f2e98657d">
+                <providedInterfaceMoniker Id="07af1dde-09aa-4ea5-b844-122041bb0d7c" LastKnownName="Port1" />
+                <elementDefinition Id="1ce2a194-e2a6-4ecd-a149-0da10cb1862d" />
+              </dependency>
+            </suppliersInternal>
+            <type_NamedElement>
+              <interfaceMoniker Id="864b33b3-bb30-416a-836e-1b6176406427" LastKnownName="Lookup Survey" />
+            </type_NamedElement>
+          </requiredInterface>
+          <requiredInterface Id="bd76d769-27fe-4dbb-abfa-bdba2a255a6c" name="Port2" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isService="false" isBehavior="false">
+            <elementDefinition Id="c1ebbbbe-3437-4416-ad73-a8a68ca5731b" />
+            <suppliersInternal>
+              <dependency Id="a18aa0c8-217d-4f2e-ae6a-1533b6ab7d49">
+                <providedInterfaceMoniker Id="07af1dde-09aa-4ea5-b844-122041bb0d7c" LastKnownName="Port1" />
+                <elementDefinition Id="8a91051e-144b-4830-8274-b04cda97052f" />
+              </dependency>
+            </suppliersInternal>
+            <type_NamedElement>
+              <interfaceMoniker Id="fb384fb2-f62e-4780-b233-88b2d87eec02" LastKnownName="Manage Survey" />
+            </type_NamedElement>
+          </requiredInterface>
+          <part Id="28b3ccf7-b40d-4bd3-9b29-c0453940d862" name="Repository" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="Composite" isComposite="true">
+            <elementDefinition Id="0b546a9f-62b2-42e1-9f7b-aa8ba821eab0" />
+            <type_NamedElement>
+              <componentMoniker Id="d6cf6b37-96b7-4a2d-aac6-1d7b2883c9e4" LastKnownName="Component3" />
+            </type_NamedElement>
+          </part>
+          <part Id="56abc000-7f45-4e32-8463-ff24695526b3" name="Survey Info Repository" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="Composite" isComposite="true">
+            <elementDefinition Id="480637db-8e2a-4297-8a5d-5866469d1b45" />
+            <targetNamedElementsInternal>
+              <connector Id="34cca4ba-fa32-4a9d-afe3-d99fed315955" isLeaf="false" isStatic="false">
+                <requiredInterfaceMoniker Id="a4c203ad-3327-4885-afdf-a67632458fe3" LastKnownName="Port1" />
+                <relationshipOwnedElementsInternal>
+                  <connectorHasConnectorEnds>
+                    <connectorEnd Id="63357f77-cb35-48db-b14a-bd7fda086a6d">
+                      <elementDefinition Id="e652ebfe-c1d8-467b-bacd-3c86a410d7f1" />
+                      <portWithPart>
+                        <requiredInterfaceMoniker Id="8724cc79-369c-4f08-a19c-b5250a18c301" LastKnownName="Port1" />
+                      </portWithPart>
+                    </connectorEnd>
+                  </connectorHasConnectorEnds>
+                  <connectorHasConnectorEnds>
+                    <connectorEnd Id="9ecc8f43-37f4-44d4-903e-9cd74ea72636">
+                      <elementDefinition Id="36ea850c-f6b6-48b4-aece-0e02a78287fa" />
+                    </connectorEnd>
+                  </connectorHasConnectorEnds>
+                </relationshipOwnedElementsInternal>
+                <elementDefinition Id="ae99cf50-c8ad-48b1-9342-e03daf9d64a1" />
+              </connector>
+            </targetNamedElementsInternal>
+            <type_NamedElement>
+              <componentMoniker Id="ff647864-a956-4b8f-836b-d705d5d56831" LastKnownName="Component4" />
+            </type_NamedElement>
+          </part>
+        </ownedAttributesInternal>
+      </component>
+    </componentModelHasComponents>
+    <componentModelHasComponents>
+      <component Id="de1f2e86-93c2-41f2-ac91-859e8ed38c9e" name="Data Manage Service" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="340075d2-cd52-4bf0-a527-65877b748b65" />
+        <suppliersInternal>
+          <dependency Id="86a3a5a6-50bd-4fe5-bb7e-8473488cbb29">
+            <providedInterfaceMoniker Id="bda278e1-9b3f-4f5f-8d68-a8dc7a85ae85" LastKnownName="Port1" />
+            <elementDefinition Id="9f98e7ef-a87f-4056-9b5c-3f9322ce5971" />
+          </dependency>
+        </suppliersInternal>
+        <ownedAttributesInternal>
+          <providedInterface Id="07af1dde-09aa-4ea5-b844-122041bb0d7c" name="Port1" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isService="false" isBehavior="false">
+            <elementDefinition Id="ee0c8303-4431-4e98-a69d-20c7e8ed8047" />
+            <type_NamedElement>
+              <interfaceMoniker Id="0f20081f-df0e-474f-8249-bcd493ec42fa" LastKnownName="Data Service" />
+            </type_NamedElement>
+          </providedInterface>
+        </ownedAttributesInternal>
+      </component>
+    </componentModelHasComponents>
+    <modelContainsNamedElements>
+      <Interface Id="0f20081f-df0e-474f-8249-bcd493ec42fa" name="Data Service" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="18797903-d94e-4c25-9e62-5747cf00e5ce" />
+      </Interface>
+    </modelContainsNamedElements>
+    <modelContainsNamedElements>
+      <Interface Id="864b33b3-bb30-416a-836e-1b6176406427" name="Lookup Survey" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="15cc9ca4-a178-4e4a-96df-820003bf51d0" />
+      </Interface>
+    </modelContainsNamedElements>
+    <modelContainsNamedElements>
+      <Interface Id="fb384fb2-f62e-4780-b233-88b2d87eec02" name="Manage Survey" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="c1346ded-c0af-40d8-b15b-ce79c6990088" />
+      </Interface>
+    </modelContainsNamedElements>
+    <componentModelHasComponents>
+      <component Id="a3b69fe3-c49f-4d24-9657-7cc141aeb4d5" name="Survey Business " isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="4b88ed97-fa19-4d11-8916-007007dc4165" />
+        <suppliersInternal>
+          <dependency Id="183d961b-95a6-46d9-bd60-fffd68ab03e5">
+            <providedInterfaceMoniker Id="141a1af8-3854-4a56-81cc-43c4eed2849c" LastKnownName="Port1" />
+            <elementDefinition Id="82e39f68-dcd2-42cf-ae41-18dcce7df081" />
+          </dependency>
+        </suppliersInternal>
+        <ownedAttributesInternal>
+          <providedInterface Id="bda278e1-9b3f-4f5f-8d68-a8dc7a85ae85" name="Port1" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isService="false" isBehavior="false">
+            <elementDefinition Id="cc814191-d43a-43c6-affd-008604fa1b73" />
+            <type_NamedElement>
+              <interfaceMoniker Id="4f976add-b9e5-4522-b9c7-cbb24dfb9b41" LastKnownName="Survey Objects" />
+            </type_NamedElement>
+          </providedInterface>
+          <providedInterface Id="e7e262a4-09c6-4c9e-8e48-e1dc52e48111" name="Port2" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isService="false" isBehavior="false">
+            <elementDefinition Id="9d0928cd-eff1-45b1-8251-b7804a8778ce" />
+            <type_NamedElement>
+              <interfaceMoniker Id="aa736ac3-54bf-414a-bad1-75fac7907785" LastKnownName="Publisher Objects" />
+            </type_NamedElement>
+          </providedInterface>
+        </ownedAttributesInternal>
+      </component>
+    </componentModelHasComponents>
+    <modelContainsNamedElements>
+      <Interface Id="4f976add-b9e5-4522-b9c7-cbb24dfb9b41" name="Survey Objects" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="b9c75b46-3fc9-4c9d-8c1f-f87a19735cd6" />
+      </Interface>
+    </modelContainsNamedElements>
+    <componentModelHasComponents>
+      <component Id="c2989f3f-63ee-4271-91f5-4451dd98a983" name="Survey Manager Service" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="4d44c7f9-ec1e-4875-a124-c034b1a3ce70" />
+        <suppliersInternal>
+          <dependency Id="d89134a2-29eb-44fe-b124-9f1bb3b141fd">
+            <providedInterfaceMoniker Id="e7e262a4-09c6-4c9e-8e48-e1dc52e48111" LastKnownName="Port2" />
+            <elementDefinition Id="ce496c31-0c1b-4fb6-b7d2-c10c6011ef58" />
+          </dependency>
+        </suppliersInternal>
+      </component>
+    </componentModelHasComponents>
+    <modelContainsNamedElements>
+      <Interface Id="aa736ac3-54bf-414a-bad1-75fac7907785" name="Publisher Objects" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="29a550cf-8e8a-4752-ab22-6eb247085b23" />
+      </Interface>
+    </modelContainsNamedElements>
+    <componentModelHasComponents>
+      <component Id="c8960d46-c69b-4526-a59e-a5ad44c0c4c3" name="SurveyStore" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="1ea6e1dd-a706-4054-9afe-cdfd9902aee0" />
+        <ownedAttributesInternal>
+          <providedInterface Id="141a1af8-3854-4a56-81cc-43c4eed2849c" name="Port1" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isService="false" isBehavior="false">
+            <elementDefinition Id="ddcaaf44-df62-4493-bec4-d948ca9379bb" />
+            <type_NamedElement>
+              <interfaceMoniker Id="c27e46d3-f6dd-49a2-b651-4cca0a36d0cd" LastKnownName="DaoFactory" />
+            </type_NamedElement>
+          </providedInterface>
+          <part Id="78d1cc6f-9d86-4788-b146-8827db1a5c87" name="Survey Info Repo" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="Composite" isComposite="true">
+            <elementDefinition Id="57b3b0b7-e85d-445e-bec3-e15053364346" />
+            <type_NamedElement>
+              <componentMoniker Id="c6d135d0-84b0-448d-9b2e-d89adbc551d3" LastKnownName="Component1" />
+            </type_NamedElement>
+          </part>
+          <part Id="6c95b710-2f2c-43a7-a96b-ef2d843bb81b" name="SurveyResponse Repo" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="Composite" isComposite="true">
+            <elementDefinition Id="127cab0a-32d7-48ab-a11f-f9eb67a5c05c" />
+            <type_NamedElement>
+              <componentMoniker Id="612bdb8f-f3b9-459b-a6df-63bf57b93f8e" LastKnownName="Component2" />
+            </type_NamedElement>
+          </part>
+        </ownedAttributesInternal>
+      </component>
+    </componentModelHasComponents>
+    <modelContainsNamedElements>
+      <Interface Id="c27e46d3-f6dd-49a2-b651-4cca0a36d0cd" name="DaoFactory" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="2858fd81-1724-4c10-861a-a4ce41e16786" />
+      </Interface>
+    </modelContainsNamedElements>
+    <componentModelHasComponents>
+      <component Id="c6d135d0-84b0-448d-9b2e-d89adbc551d3" name="Component1" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="ec9eaaec-9e50-43de-bb91-1476820bdc36" />
+      </component>
+    </componentModelHasComponents>
+    <componentModelHasComponents>
+      <component Id="612bdb8f-f3b9-459b-a6df-63bf57b93f8e" name="Component2" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="cc775f16-53fd-425f-81a9-41c58989f298" />
+      </component>
+    </componentModelHasComponents>
+    <componentModelHasComponents>
+      <component Id="d6cf6b37-96b7-4a2d-aac6-1d7b2883c9e4" name="Component3" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="2f96e1c3-36ba-45e1-b1d7-6bea661bfb08" />
+        <ownedAttributesInternal>
+          <providedInterface Id="1e5027d1-8ade-43c7-bd25-90455bba11d2" name="Port1" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isService="false" isBehavior="false">
+            <elementDefinition Id="3bcaef12-ac42-444d-9993-0d707f9f6327" />
+            <type_NamedElement>
+              <interfaceMoniker Id="cf56ba09-e617-4b95-a33b-09ee6c21b7e1" LastKnownName="Repository" />
+            </type_NamedElement>
+          </providedInterface>
+        </ownedAttributesInternal>
+      </component>
+    </componentModelHasComponents>
+    <componentModelHasComponents>
+      <component Id="ff647864-a956-4b8f-836b-d705d5d56831" name="Component4" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="66109c49-7200-4597-abd2-19a7f47b3bef" />
+        <ownedAttributesInternal>
+          <requiredInterface Id="8724cc79-369c-4f08-a19c-b5250a18c301" name="Port1" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isService="false" isBehavior="false">
+            <elementDefinition Id="2b152293-e4c9-4f8b-b54e-8a68a67c5afa" />
+            <type_NamedElement>
+              <interfaceMoniker Id="df935608-1b52-4994-8f6e-2c8a59822e95" LastKnownName="Survey Info" />
+            </type_NamedElement>
+          </requiredInterface>
+        </ownedAttributesInternal>
+      </component>
+    </componentModelHasComponents>
+    <modelContainsNamedElements>
+      <Interface Id="df935608-1b52-4994-8f6e-2c8a59822e95" name="Survey Info" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="4ba419ed-b38d-4825-b655-38b0ae710d30" />
+      </Interface>
+    </modelContainsNamedElements>
+    <modelContainsNamedElements>
+      <Interface Id="cf56ba09-e617-4b95-a33b-09ee6c21b7e1" name="Repository" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="0b5a544a-3942-49a4-9d8e-0672e42b9fac" />
+      </Interface>
+    </modelContainsNamedElements>
+  </packagedElements>
+  <package Id="dd6f445d-529d-4944-ab50-6162f4e3b75c" name="Epi.Web.Modeling">
+    <elementDefinition Id="daf1de51-1862-4459-9e4a-e7f71a55a436" />
+  </package>
+</componentModel>
