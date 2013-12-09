@@ -266,6 +266,7 @@
     <Content Include="Content\images\black_arrow2.png" />
     <Content Include="Content\images\button_check.png" />
     <Content Include="Content\images\cdclogo.png" />
+    <Content Include="Content\images\codebk.png" />
     <Content Include="Content\images\DRAFT.png" />
     <Content Include="Content\images\epi.png" />
     <Content Include="Content\images\error.png" />
