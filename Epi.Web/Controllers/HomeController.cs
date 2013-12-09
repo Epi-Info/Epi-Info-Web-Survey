@@ -69,6 +69,24 @@ namespace Epi.Web.MVC.Controllers
                     surveyInfoModel.IsDraftModeStyleClass = "final";
                     SurveyMode = "final";
                 }
+
+                //create the responseid
+                Guid ResponseID = Guid.NewGuid();
+                TempData[Epi.Web.MVC.Constants.Constant.RESPONSE_ID] = ResponseID.ToString();
+
+                //// create the first survey response
+                Epi.Web.Common.DTO.SurveyAnswerDTO SurveyAnswer = _isurveyFacade.CreateSurveyAnswer(surveyid, ResponseID.ToString());
+                // Pass Code Logic  start 
+                Epi.Web.Common.Message.UserAuthenticationResponse AuthenticationResponse = _isurveyFacade.GetAuthenticationResponse(ResponseID.ToString());
+
+                string strPassCode = Epi.Web.MVC.Utility.SurveyHelper.GetPassCode();
+                if (string.IsNullOrEmpty(AuthenticationResponse.PassCode))
+                {
+                _isurveyFacade.UpdatePassCode(ResponseID.ToString(), strPassCode);
+                }
+                surveyInfoModel.PassCode = strPassCode;
+                // Pass Code Logic  end 
+                
                 bool IsMobileDevice = false;
                 IsMobileDevice = this.Request.Browser.IsMobileDevice;
                 Omniture OmnitureObj = Epi.Web.MVC.Utility.OmnitureHelper.GetSettings(SurveyMode, IsMobileDevice);
@@ -107,11 +125,15 @@ namespace Epi.Web.MVC.Controllers
                 FormsAuthentication.SetAuthCookie("BeginSurvey", false);
 
                 //create the responseid
-                Guid ResponseID = Guid.NewGuid();
-                TempData[Epi.Web.MVC.Constants.Constant.RESPONSE_ID] = ResponseID.ToString();
+                //Guid ResponseID = Guid.NewGuid();
+                //TempData[Epi.Web.MVC.Constants.Constant.RESPONSE_ID] = ResponseID.ToString();
  
-                // create the first survey response
-                Epi.Web.Common.DTO.SurveyAnswerDTO SurveyAnswer = _isurveyFacade.CreateSurveyAnswer(surveyModel.SurveyId, ResponseID.ToString());
+                //// create the first survey response
+                //Epi.Web.Common.DTO.SurveyAnswerDTO SurveyAnswer = _isurveyFacade.CreateSurveyAnswer(surveyModel.SurveyId, ResponseID.ToString());
+
+                string ResponseID = TempData[Epi.Web.MVC.Constants.Constant.RESPONSE_ID].ToString();
+                Epi.Web.Common.Message.SurveyAnswerResponse SurveyAnswerResponse = _isurveyFacade.GetSurveyAnswerResponse(ResponseID);
+                Epi.Web.Common.DTO.SurveyAnswerDTO SurveyAnswer = SurveyAnswerResponse.SurveyResponseList[0];
                 SurveyInfoModel surveyInfoModel = GetSurveyInfo(SurveyAnswer.SurveyId);
 
                 // set the survey answer to be production or test 
