@@ -13,6 +13,9 @@ namespace Epi.Web.MVC.Models
         private string _ConfirmEmail;
         private string _OrgName;
         private string _Status;
+        private string _FirstName;
+        private string _LastName;
+        private string _PhoneNumber;
          [Required(ErrorMessage = "Email is required.")]
          [RegularExpression(@"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$", ErrorMessage = "Invalid email address.")]
         public string Email
@@ -38,6 +41,25 @@ namespace Epi.Web.MVC.Models
               {
               get { return _Status; }
               set { _Status = value; }
+              }
+        [Required(ErrorMessage = "First Name is required.")]
+          public string FirstName
+              {
+              get { return _FirstName; }
+              set { _FirstName = value; }
+              }
+          [Required(ErrorMessage = "Last Name is required.")]
+          public string LastName
+              {
+              get { return _LastName; }
+              set { _LastName = value; }
+              }
+          [Required(ErrorMessage = "Phone Number is required.")]
+          [RegularExpression(@"^\D?(\d{3})\D?\D?(\d{3})\D?(\d{4})$", ErrorMessage = "Invalid Phone Number.")]
+          public string PhoneNumber
+              {
+              get { return _PhoneNumber; }
+              set { _PhoneNumber = value; }
               }
         }
     }
