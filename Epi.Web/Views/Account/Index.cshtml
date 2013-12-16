@@ -135,6 +135,32 @@
           @Html.TextBoxFor(m => m.OrgName, new { @class = "Account" }) <br>
           @Html.ValidationMessageFor(m => m.OrgName, null, new { @class = "required" })
         </p>
+
+
+         <p>
+            <label class="accountlabel"  id="LastName">Last Name:</label><br>
+          
+            @Html.TextBoxFor(m => m.LastName, new { @class = "Account" }) <br>
+             @Html.ValidationMessageFor(m => m.LastName, null, new { @class = "required" })
+        </p>
+        <p>
+            <label class="accountlabel"  id="FirstName">First Name:</label><br>
+          
+            @Html.TextBoxFor(m => m.FirstName, new { @class = "Account" }) <br>
+             @Html.ValidationMessageFor(m => m.FirstName, null, new { @class = "required" })
+        </p>
+
+         <p>
+            <label class="accountlabel"  id="PhoneNumber">Phone Number:</label><br>
+          
+            @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "Account" }) <br>
+             @Html.ValidationMessageFor(m => m.PhoneNumber, null, new { @class = "required" })
+        </p>
+
+
+
+
+
         <p>
             <label class="accountlabel"  id="Emaillabel">Email Address:</label><br>
           
