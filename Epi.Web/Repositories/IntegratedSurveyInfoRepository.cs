@@ -31,14 +31,12 @@ namespace Epi.Web.MVC.Repositories
         /// <returns></returns>
         public SurveyInfoResponse GetSurveyInfo(SurveyInfoRequest pRequest)
         {
-
             try
             {
-                //SurveyInfoResponse result = Client.GetSurveyInfo(pRequest);
-                //SurveyInfoResponse result = _iDataService.GetSurveyInfo(pRequest);
-                SurveyInfoResponse result =null;
+                SurveyInfoResponse surveyInfo = null;
                 string SurveyId = pRequest.Criteria.SurveyIdList[0].ToString();
-                var CacheObj =   HttpRuntime.Cache.Get(SurveyId);
+
+                SurveyInfoResponse cachedSurveyInfo = (SurveyInfoResponse)HttpRuntime.Cache.Get(SurveyId);
 
                 int CacheDuration = 0;
                 int.TryParse(ConfigurationManager.AppSettings["CACHE_DURATION"].ToString(), out CacheDuration);
@@ -47,39 +45,32 @@ namespace Epi.Web.MVC.Repositories
 
                 if (CacheIsOn.ToUpper() == "TRUE")
                 {
-                    if (CacheObj == null)
+                    if (cachedSurveyInfo == null)
                     {
-                        result = (SurveyInfoResponse)_iDataService.GetSurveyInfo(pRequest);
-
+                        surveyInfo = (SurveyInfoResponse)_iDataService.GetSurveyInfo(pRequest);
+                        ProxyDependency proxyDependency = new ProxyDependency(SurveyId);
+                        
                         if (IsCacheSlidingExpiration.ToUpper() == "TRUE")
                         {
-                           
-                            HttpRuntime.Cache.Insert(SurveyId, result, null, Cache.NoAbsoluteExpiration, TimeSpan.FromMinutes(CacheDuration));
+
+                            HttpRuntime.Cache.Insert(SurveyId, surveyInfo, proxyDependency, Cache.NoAbsoluteExpiration, TimeSpan.FromMinutes(CacheDuration));
                         }
                         else
                         {
-                            HttpRuntime.Cache.Insert(SurveyId, result, null, DateTime.Now.AddMinutes(CacheDuration), Cache.NoSlidingExpiration);
-                            
+                            HttpRuntime.Cache.Insert(SurveyId, surveyInfo, proxyDependency, DateTime.Now.AddMinutes(CacheDuration), Cache.NoSlidingExpiration);
                         }
-                        return result;
                     }
                     else
                     {
-
-
-                        return (SurveyInfoResponse)CacheObj;
-
+                        surveyInfo = (SurveyInfoResponse)cachedSurveyInfo;
                     }
                 }
                 else
                 {
-                    result = (SurveyInfoResponse)_iDataService.GetSurveyInfo(pRequest);
-                    return result;
+                    surveyInfo = (SurveyInfoResponse)_iDataService.GetSurveyInfo(pRequest);
                 }
 
-
-
-               // return result;
+                return surveyInfo;
             }
             catch (FaultException<CustomFaultException> cfe)
             {

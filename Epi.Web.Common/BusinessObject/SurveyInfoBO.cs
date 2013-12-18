@@ -32,6 +32,8 @@ namespace Epi.Web.Common.BusinessObject
             get { return _StatusText; }
             set { _StatusText = value; } 
         }
+
+
         public string SurveyId
         {
             get { return _SurveyId; }
