@@ -42,18 +42,20 @@ namespace Epi.Web.MVC
             //ConfigureInjectionFor is the API to configure injection for a particular type e.g. DataServiceClient proxy class
             //InjectionConstructor: creates an instance of Microsoft.Practices.Unity.InjectionConstructor that looks for a constructor with the given set of parameters
             // e.g. container.RegisterType<ITestService, TestService>();            
-            
+
             container.RegisterType<Epi.Web.Common.Message.SurveyInfoRequest, Epi.Web.Common.Message.SurveyInfoRequest>();
+            container.RegisterType<Epi.Web.Common.Message.CacheDependencyRequest, Epi.Web.Common.Message.CacheDependencyRequest>();
+
             if (IsIntegrated)
             {
-
                 container.RegisterType<Epi.Web.WCF.SurveyService.IDataService, Epi.Web.WCF.SurveyService.DataService>();
+                
                 container.RegisterType<SurveyResponseXML, SurveyResponseXML>()
                     .Configure<InjectedMembers>()
                     .ConfigureInjectionFor<SurveyResponseXML>(new InjectionConstructor());
 
                 container.RegisterType<Epi.Web.MVC.Repositories.Core.ISurveyInfoRepository, Epi.Web.MVC.Repositories.IntegratedSurveyInfoRepository>();
-
+                container.RegisterType<Epi.Web.MVC.Repositories.Core.ICacheDependencyRepository, Epi.Web.MVC.Repositories.IntegratedCacheDependencyRepository>();
                 container.RegisterType<Epi.Web.MVC.Repositories.Core.IOrganizationAccountRepository, Epi.Web.MVC.Repositories.IntegratedOrganizationAccountRepository>();
             }
             else

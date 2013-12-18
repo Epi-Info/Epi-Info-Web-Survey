@@ -21,15 +21,19 @@ namespace Epi.Web.EF
             get { return new EntitySurveyInfoDao(); }
         }
 
+        public ICacheDependencyInfoDao CacheDependencyInfoDao
+        {
+            get { return new EntityCacheDependencyInfoDao(); }
+        }
 
         public ISurveyResponseDao SurveyResponseDao
         {
             get { return new EntitySurveyResponseDao(); }  
         }
 
-        public IOrganizationDao OrganizationDao {
-            get{return new EntityOrganizationDao();}
-        
+        public IOrganizationDao OrganizationDao 
+        {
+            get { return new EntityOrganizationDao(); }
         }
     }
 }
