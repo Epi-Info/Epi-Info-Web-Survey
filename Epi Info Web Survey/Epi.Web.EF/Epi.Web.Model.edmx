@@ -43,6 +43,9 @@
           <Property Name="OrganizationId" Type="int" Nullable="false" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
           <Property Name="Notify" Type="bit" Nullable="false" />
+          <Property Name="LastName" Type="varchar" MaxLength="150" />
+          <Property Name="FirstName" Type="varchar" MaxLength="150" />
+          <Property Name="PhoneNumber" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="lk_Status">
           <Key>
@@ -88,6 +91,7 @@
           <Property Name="OrganizationId" Type="int" Nullable="false" />
           <Property Name="IsDraftMode" Type="bit" Nullable="false" />
           <Property Name="StartDate" Type="datetime2" Nullable="false" />
+          <Property Name="LastUpdate" Type="datetime2" />
         </EntityType>
         <EntityType Name="SurveyResponse">
           <Key>
@@ -174,6 +178,13 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <!--Errors Found During Generation:
+      warning 6013: The table/view 'OSELS_EIWS.dbo.xxresponses' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+      
+      <EntityType Name="xxresponses">
+        <Property Name="Question" Type="varchar" MaxLength="50" />
+        <Property Name="Response" Type="varchar" MaxLength="50" />
+      </EntityType>-->
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -246,6 +257,7 @@
           <NavigationProperty Name="Organization" Relationship="EIWSModel.FK_SurveyMetaData_Organization" FromRole="SurveyMetaData" ToRole="Organization" />
           <Property Type="DateTime" Name="StartDate" Nullable="false" />
           <Property Type="Boolean" Name="IsDraftMode" Nullable="false" />
+          <Property Type="DateTime" Name="LastUpdate" />
         </EntityType>
         <Association Name="FK_SurveyMetaData_lk_SurveyType">
           <End Type="EIWSModel.lk_SurveyType" Role="lk_SurveyType" Multiplicity="1" />
@@ -334,6 +346,9 @@
           <Property Type="Boolean" Name="IsActive" Nullable="false" />
           <Property Type="Boolean" Name="Notify" Nullable="false" />
           <NavigationProperty Name="Organization" Relationship="EIWSModel.FK_Admin_Organization" FromRole="Admin" ToRole="Organization" />
+          <Property Type="String" Name="LastName" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="FirstName" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="PhoneNumber" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_Admin_Organization">
           <End Type="EIWSModel.Organization" Role="Organization" Multiplicity="1" />
@@ -382,6 +397,7 @@
           <EntitySetMapping Name="SurveyMetaDatas">
             <EntityTypeMapping TypeName="EIWSModel.SurveyMetaData">
               <MappingFragment StoreEntitySet="SurveyMetaData">
+                <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
                 <ScalarProperty Name="IsDraftMode" ColumnName="IsDraftMode" />
                 <ScalarProperty Name="StartDate" ColumnName="StartDate" />
                 <ScalarProperty Name="OrganizationId" ColumnName="OrganizationId" />
@@ -431,6 +447,9 @@
           <EntitySetMapping Name="Admins">
             <EntityTypeMapping TypeName="EIWSModel.Admin">
               <MappingFragment StoreEntitySet="Admin">
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
                 <ScalarProperty Name="Notify" ColumnName="Notify" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="OrganizationId" ColumnName="OrganizationId" />
@@ -473,7 +492,7 @@
       <Diagram Name="Epi.Web.Model">
         <EntityTypeShape EntityType="EIWSModel.lk_Status" Width="1.5" PointX="11" PointY="2" Height="1.5956835937499996" />
         <EntityTypeShape EntityType="EIWSModel.lk_SurveyType" Width="1.5" PointX="0.875" PointY="2" Height="1.5956835937499996" />
-        <EntityTypeShape EntityType="EIWSModel.SurveyMetaData" Width="1.5" PointX="4" PointY="0.875" Height="4.6725065104166656" />
+        <EntityTypeShape EntityType="EIWSModel.SurveyMetaData" Width="1.5" PointX="4" PointY="0.875" Height="4.8648079427083317" />
         <AssociationConnector Association="EIWSModel.FK_SurveyMetaData_lk_SurveyType" >
           <ConnectorPoint PointX="2.375" PointY="2.797841796875" />
           <ConnectorPoint PointX="4" PointY="2.797841796875" />
@@ -490,7 +509,7 @@
         <EntityTypeShape EntityType="EIWSModel.Organization" Width="1.5" PointX="3.5" PointY="6.5" Height="1.9802864583333308" />
         <AssociationConnector Association="EIWSModel.FK_SurveyMetaData_Organization" >
           <ConnectorPoint PointX="4.5" PointY="6.5" />
-          <ConnectorPoint PointX="4.5" PointY="5.5475065104166656" />
+          <ConnectorPoint PointX="4.5" PointY="5.7398079427083317" />
         </AssociationConnector>
         <EntityTypeShape EntityType="EIWSModel.Admin" Width="1.5" PointX="6.5" PointY="5.875" Height="1.7879850260416674" />
         <AssociationConnector Association="EIWSModel.FK_Admin_Organization" >
