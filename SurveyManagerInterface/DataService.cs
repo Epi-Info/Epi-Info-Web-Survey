@@ -22,6 +22,45 @@ namespace Epi.Web.WCF.SurveyService
         //private ShoppingCart _shoppingCart;
         private string _userName;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="pRequest"></param>
+        /// <returns></returns>
+        public CacheDependencyResponse GetCacheDependencyInfo(CacheDependencyRequest pRequest)
+        {
+            try
+            {
+                CacheDependencyResponse response = new CacheDependencyResponse();
+
+                Epi.Web.Interfaces.DataInterfaces.IDaoFactory entityDaoFactory = new EF.EntityDaoFactory();
+                Epi.Web.Interfaces.DataInterfaces.ICacheDependencyInfoDao cacheDependencyInfoDao = entityDaoFactory.CacheDependencyInfoDao;
+                Epi.Web.BLL.CacheDependencyInfo cacheDependencyInfo = new Epi.Web.BLL.CacheDependencyInfo(cacheDependencyInfoDao);
+
+                List<CacheDependencyBO> bo = cacheDependencyInfo.GetCacheDependencyInfo();
+                List<CacheDependencyDTO> dto = Mapper.ToDataTransferObject(bo);
+
+                Dictionary<string, DateTime> dictionary = new Dictionary<string, DateTime>();
+
+                foreach (CacheDependencyDTO item in dto)
+                {
+                    dictionary.Add(item.SurveyId, item.LastUpdate);
+                }
+
+                response.SurveyDependency = dictionary;
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                CustomFaultException customFaultException = new CustomFaultException();
+                customFaultException.CustomMessage = ex.Message;
+                customFaultException.Source = ex.Source;
+                customFaultException.StackTrace = ex.StackTrace;
+                customFaultException.HelpLink = ex.HelpLink;
+                throw new FaultException<CustomFaultException>(customFaultException);
+            }
+        }
 
         /// <summary>
         /// 

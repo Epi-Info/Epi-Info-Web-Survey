@@ -40,7 +40,6 @@ namespace Epi.Web.MVC
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             //DisplayModeProvider.Instance.Modes.Insert(0, new DefaultDisplayMode("Android") { ContextCondition = (context => context.Request.UserAgent.IndexOf("Android", StringComparison.OrdinalIgnoreCase) >= 0) });
             //DisplayModeProvider.Instance.Modes.Insert(0, new DefaultDisplayMode("Opera") { ContextCondition = (context => context.Request.UserAgent.IndexOf("Opera Mobi", StringComparison.OrdinalIgnoreCase) >= 0) });
-              
 
             DisplayModeProvider.Instance.Modes.Insert(0, new DefaultDisplayMode("Mobile") { ContextCondition = (context => context.Request.UserAgent.IndexOf("Android", StringComparison.OrdinalIgnoreCase) >= 0) });
             DisplayModeProvider.Instance.Modes.Insert(0, new DefaultDisplayMode("Mobile") { ContextCondition = (context => context.Request.UserAgent.IndexOf("Opera Mobi", StringComparison.OrdinalIgnoreCase) >= 0) });
@@ -62,11 +61,7 @@ namespace Epi.Web.MVC
             //                                    || ctx.Request.UserAgent.IndexOf("Opera Mini", StringComparison.OrdinalIgnoreCase) >= 0)) 
             //});
 
-
-           
-            
-           
-          
+            ProxyDependencyReference.Initialise();
         }
 
 

@@ -137,40 +137,47 @@ namespace Epi.Web.MVC.Controllers
             //return null;
         }
         [HttpPost]
-      //  [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
         [ValidateAntiForgeryToken]
-        //public ActionResult Index(SurveyInfoModel surveyInfoModel, string Submitbutton, string Savebutton, string ContinueButton, string PreviousButton, int PageNumber = 1)
         public ActionResult Index(SurveyAnswerModel surveyAnswerModel, string Submitbutton, string Savebutton, string ContinueButton, string PreviousButton, int PageNumber = 0)
         {
-             string version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
-             ViewBag.Version = version;
-             string responseId = surveyAnswerModel.ResponseId;
-              bool IsMobileDevice = false;
-              IsMobileDevice = this.Request.Browser.IsMobileDevice;
-              if (IsMobileDevice == false)
-              {
-                  IsMobileDevice = Epi.Web.MVC.Utility.SurveyHelper.IsMobileDevice(this.Request.UserAgent.ToString());
-              } 
+            ActionResult actionResult = null;
+            
+            string version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            ViewBag.Version = version;
+            string responseId = surveyAnswerModel.ResponseId;
+            bool IsMobileDevice = false;
+            IsMobileDevice = this.Request.Browser.IsMobileDevice;
+
+            if (IsMobileDevice == false)
+            {
+                IsMobileDevice = Epi.Web.MVC.Utility.SurveyHelper.IsMobileDevice(this.Request.UserAgent.ToString());
+            } 
+            
+            Epi.Web.Common.DTO.SurveyAnswerDTO SurveyAnswer = _isurveyFacade.GetSurveyAnswerResponse(responseId).SurveyResponseList[0];
+            SurveyInfoModel surveyInfoModel = GetSurveyInfo(SurveyAnswer.SurveyId);
+            string cacheKey = SurveyAnswer.SurveyId + "<page>" + PageNumber;
+            
             try
             {
+                actionResult = (ActionResult)HttpRuntime.Cache.Get(cacheKey);
 
-                Epi.Web.Common.DTO.SurveyAnswerDTO SurveyAnswer = _isurveyFacade.GetSurveyAnswerResponse(responseId).SurveyResponseList[0];
+                if (actionResult != null)
+                {
+                    return actionResult;
+                }
 
-               // SurveyInfoModel surveyInfoModel = _isurveyFacade.GetSurveyInfoModel(SurveyAnswer.SurveyId);
-                object temp = System.Web.HttpContext.Current.Cache;
-                SurveyInfoModel surveyInfoModel = GetSurveyInfo(SurveyAnswer.SurveyId);
-
-                //////////////////////UpDate Survey Mode//////////////////////////
                 SurveyAnswer.IsDraftMode = surveyInfoModel.IsDraftMode;
                 PreValidationResultEnum ValidationTest = PreValidateResponse(Mapper.ToSurveyAnswerModel(SurveyAnswer), surveyInfoModel);
              
                 switch (ValidationTest)
                 {
                     case PreValidationResultEnum.SurveyIsPastClosingDate:
-                        return View("SurveyClosedError");
+                        actionResult = View("SurveyClosedError");
+                        break;
                     case PreValidationResultEnum.SurveyIsAlreadyCompleted:
-                        return View("IsSubmitedError");
-                    case PreValidationResultEnum.Success:
+                        actionResult = View("IsSubmitedError");
+                        break;
+                    //case PreValidationResultEnum.Success:
                     default:
                         MvcDynamicForms.Form form;
                         int CurrentPageNum = GetSurveyPageNumber(SurveyAnswer.XML.ToString());
@@ -314,7 +321,7 @@ namespace Epi.Web.MVC.Controllers
                              _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId, form, SurveyAnswer, IsSubmited, IsSaved, PageNumber);
 
                              TempData["Width"] = form.Width + 5;
-                                return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
+                             actionResult = View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
 
                         }
                         else if (!string.IsNullOrEmpty(this.Request.Form["is_goto_action"]) && this.Request.Form["is_goto_action"].ToString().Equals("true", StringComparison.OrdinalIgnoreCase))
@@ -329,15 +336,13 @@ namespace Epi.Web.MVC.Controllers
                             SurveyAnswer = _isurveyFacade.GetSurveyAnswerResponse(responseId).SurveyResponseList[0];
                             form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, PageNumber, SurveyAnswer, IsMobileDevice);
                             TempData["Width"] = form.Width + 5;
-                            return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
+                            actionResult = View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
                         }
                              
                         else if (form.Validate(form.RequiredFieldsList))
                         {
                             if (!string.IsNullOrEmpty(Submitbutton))
                             {
-
-
 
                                 // execute after event
                                 EnterRule FunctionObject_A = (EnterRule)form.FormCheckCodeObj.GetCommand("level=record&event=after&identifier=");
@@ -370,7 +375,7 @@ namespace Epi.Web.MVC.Controllers
                                         TempData["Width"] = form.Width + 5;
                                         //  return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
                                         _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId, form, SurveyAnswer, IsSubmited, IsSaved, i);
-                                        return RedirectToRoute(new { Controller = "Survey", Action = "Index", responseid = responseId, PageNumber = i.ToString() });
+                                        actionResult = RedirectToRoute(new { Controller = "Survey", Action = "Index", responseid = responseId, PageNumber = i.ToString() });
                                     }
 
                                     /////////////////////////////// Execute - Record After - start//////////////////////
@@ -389,8 +394,8 @@ namespace Epi.Web.MVC.Controllers
                                 IsSubmited = true;//survey has been submited this will change the survey status to 3 - Completed
                                 _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId, form, SurveyAnswer, IsSubmited, IsSaved, PageNumber);
                                 FormsAuthentication.SignOut();
-                                
-                                return RedirectToAction("Index", "Final", new { surveyId = surveyInfoModel.SurveyId });
+
+                                actionResult = RedirectToAction("Index", "Final", new { surveyId = surveyInfoModel.SurveyId });
                             }
                             else
                             {
@@ -428,7 +433,7 @@ namespace Epi.Web.MVC.Controllers
                                     form.StatusId = SurveyAnswer.Status;
                                 }
                                 //passCode end
-                                return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
+                                actionResult = View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
                             }
 
                         }
@@ -436,35 +441,34 @@ namespace Epi.Web.MVC.Controllers
                         {
                             //Invalid Data - stay on same page
                             CurrentPageNum = GetSurveyPageNumber(SurveyAnswer.XML.ToString()) ;
-                           
-
 
                             if (CurrentPageNum != PageNumber) // failed validation and navigating to different page// must keep url the same 
                             {
                                 TempData["isredirect"] = "true";
                                 TempData["Width"] = form.Width + 5;
-                                return RedirectToAction("Index", "Survey", new { RequestId = form.ResponseId, PageNumber = CurrentPageNum });
-                                 
+                                actionResult = RedirectToAction("Index", "Survey", new { RequestId = form.ResponseId, PageNumber = CurrentPageNum });
                             }
                             else
                             {
                                 TempData["Width"] = form.Width + 5;
-                                return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
+                                actionResult = View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
                             }
                         }
 
+                        break;
                 }
-
-               
             }
 
             catch (Exception ex)
             {
-                  Epi.Web.Utility.ExceptionMessage.SendLogMessage(  ex, this.HttpContext);
-             
-                return View(Epi.Web.MVC.Constants.Constant.EXCEPTION_PAGE);
+                Epi.Web.Utility.ExceptionMessage.SendLogMessage(  ex, this.HttpContext);
+                actionResult = View(Epi.Web.MVC.Constants.Constant.EXCEPTION_PAGE);
             }
+
+            ProxyDependency proxyDependency = new ProxyDependency(SurveyAnswer.SurveyId);
+            HttpRuntime.Cache.Insert(cacheKey, actionResult, proxyDependency);
             
+            return actionResult;
         }
 
  
