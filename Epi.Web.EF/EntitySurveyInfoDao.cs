@@ -354,7 +354,7 @@ namespace Epi.Web.EF
                     DataRow.TemplateXMLSize = RemoveWhitespace(SurveyInfo.XML).Length;
                     DataRow.IsDraftMode = SurveyInfo.IsDraftMode;
                     DataRow.StartDate = SurveyInfo.StartDate;
-                   
+                    DataRow.LastUpdate = DateTime.Now;
 
                     Context.SaveChanges();
                 }

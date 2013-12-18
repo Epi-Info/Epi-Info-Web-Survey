@@ -42,8 +42,6 @@ namespace Epi.Web.EF
                 }
                 result.SurveyType = entity.SurveyTypeId; 
             
-
-
             return result;
         }
 
@@ -57,6 +55,32 @@ namespace Epi.Web.EF
             }
 
             return result;
+        }
+
+        internal static void Map(SurveyMetaData entity, out CacheDependencyBO cacheDependencyBO)
+        {
+            cacheDependencyBO = new CacheDependencyBO();
+
+            cacheDependencyBO.SurveyId = entity.SurveyId.ToString();
+
+            if (entity.LastUpdate == null)
+            {
+                entity.LastUpdate = entity.DateCreated;
+            }
+
+            cacheDependencyBO.LastUpdate = (DateTime)entity.LastUpdate;
+        }
+
+        internal static void Map(List<SurveyMetaData> entities, out List<CacheDependencyBO> list)
+        {
+            list = new List<CacheDependencyBO>();
+
+            foreach (SurveyMetaData surveyMetaData in entities)
+            {
+                CacheDependencyBO cacheDependencyBO = new CacheDependencyBO();
+                Map(surveyMetaData, out cacheDependencyBO);
+                list.Add(cacheDependencyBO);
+            }
         }
 
         /// <summary>
