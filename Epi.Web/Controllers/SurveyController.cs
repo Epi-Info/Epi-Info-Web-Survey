@@ -159,7 +159,7 @@ namespace Epi.Web.MVC.Controllers
             
             try
             {
-                actionResult = (ActionResult)HttpRuntime.Cache.Get(cacheKey);
+                actionResult = Utility.Cache.Get(cacheKey) as ActionResult;
 
                 if (actionResult != null)
                 {
@@ -465,8 +465,7 @@ namespace Epi.Web.MVC.Controllers
                 actionResult = View(Epi.Web.MVC.Constants.Constant.EXCEPTION_PAGE);
             }
 
-            ProxyDependency proxyDependency = new ProxyDependency(SurveyAnswer.SurveyId);
-            HttpRuntime.Cache.Insert(cacheKey, actionResult, proxyDependency);
+            Utility.Cache.Insert(cacheKey, actionResult, SurveyAnswer.SurveyId);
             
             return actionResult;
         }
@@ -481,8 +480,6 @@ namespace Epi.Web.MVC.Controllers
             int.TryParse(PageNum, out CurrentPage);
             return CurrentPage;
         }
-
-
 
 
         private void SetCurrentPage(Epi.Web.Common.DTO.SurveyAnswerDTO surveyAnswerDTO, int PageNumber)
