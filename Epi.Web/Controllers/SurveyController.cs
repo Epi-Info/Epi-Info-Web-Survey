@@ -155,17 +155,9 @@ namespace Epi.Web.MVC.Controllers
             
             Epi.Web.Common.DTO.SurveyAnswerDTO SurveyAnswer = _isurveyFacade.GetSurveyAnswerResponse(responseId).SurveyResponseList[0];
             SurveyInfoModel surveyInfoModel = GetSurveyInfo(SurveyAnswer.SurveyId);
-            string cacheKey = SurveyAnswer.SurveyId + "<page>" + PageNumber;
             
             try
             {
-                actionResult = Utility.Cache.Get(cacheKey) as ActionResult;
-
-                if (actionResult != null)
-                {
-                    return actionResult;
-                }
-
                 SurveyAnswer.IsDraftMode = surveyInfoModel.IsDraftMode;
                 PreValidationResultEnum ValidationTest = PreValidateResponse(Mapper.ToSurveyAnswerModel(SurveyAnswer), surveyInfoModel);
              
@@ -464,8 +456,6 @@ namespace Epi.Web.MVC.Controllers
                 Epi.Web.Utility.ExceptionMessage.SendLogMessage(  ex, this.HttpContext);
                 actionResult = View(Epi.Web.MVC.Constants.Constant.EXCEPTION_PAGE);
             }
-
-            Utility.Cache.Insert(cacheKey, actionResult, SurveyAnswer.SurveyId);
             
             return actionResult;
         }
