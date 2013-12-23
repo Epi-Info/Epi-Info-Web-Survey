@@ -10,6 +10,7 @@ using System.ServiceModel;
 using Epi.Web.DataServiceClient;
 using System.Web.Caching;
 using System.Configuration;
+
 namespace Epi.Web.MVC.Repositories
 {
     public class IntegratedSurveyInfoRepository : RepositoryBase, ISurveyInfoRepository
@@ -33,42 +34,18 @@ namespace Epi.Web.MVC.Repositories
         {
             try
             {
-                SurveyInfoResponse surveyInfo = null;
-                string SurveyId = pRequest.Criteria.SurveyIdList[0].ToString();
+                string surveyKey = pRequest.Criteria.SurveyIdList[0].ToString();
 
-                SurveyInfoResponse cachedSurveyInfo = (SurveyInfoResponse)HttpRuntime.Cache.Get(SurveyId);
+                SurveyInfoResponse surveyInfo = Utility.Cache.Get(surveyKey) as SurveyInfoResponse;
 
-                int CacheDuration = 0;
-                int.TryParse(ConfigurationManager.AppSettings["CACHE_DURATION"].ToString(), out CacheDuration);
-                string CacheIsOn = ConfigurationManager.AppSettings["CACHE_IS_ON"];//false;
-                string IsCacheSlidingExpiration = ConfigurationManager.AppSettings["CACHE_SLIDING_EXPIRATION"].ToString();
-
-                if (CacheIsOn.ToUpper() == "TRUE")
+                if (surveyInfo != null)
                 {
-                    if (cachedSurveyInfo == null)
-                    {
-                        surveyInfo = (SurveyInfoResponse)_iDataService.GetSurveyInfo(pRequest);
-                        ProxyDependency proxyDependency = new ProxyDependency(SurveyId);
-                        
-                        if (IsCacheSlidingExpiration.ToUpper() == "TRUE")
-                        {
+                    return surveyInfo;
+                }
 
-                            HttpRuntime.Cache.Insert(SurveyId, surveyInfo, proxyDependency, Cache.NoAbsoluteExpiration, TimeSpan.FromMinutes(CacheDuration));
-                        }
-                        else
-                        {
-                            HttpRuntime.Cache.Insert(SurveyId, surveyInfo, proxyDependency, DateTime.Now.AddMinutes(CacheDuration), Cache.NoSlidingExpiration);
-                        }
-                    }
-                    else
-                    {
-                        surveyInfo = (SurveyInfoResponse)cachedSurveyInfo;
-                    }
-                }
-                else
-                {
-                    surveyInfo = (SurveyInfoResponse)_iDataService.GetSurveyInfo(pRequest);
-                }
+                surveyInfo = (SurveyInfoResponse)_iDataService.GetSurveyInfo(pRequest);
+
+                Utility.Cache.Insert(surveyKey, surveyInfo);
 
                 return surveyInfo;
             }
