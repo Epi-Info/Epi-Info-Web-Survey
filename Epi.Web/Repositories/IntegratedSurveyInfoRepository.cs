@@ -6,6 +6,7 @@ using Epi.Web.MVC.Repositories.Core;
 using Epi.Web.DataServiceClient;
 using Epi.Web.Common.Message;
 using Epi.Web.Common.Exception;
+using Epi.Web.Utility;
 using System.ServiceModel;
 using Epi.Web.DataServiceClient;
 using System.Web.Caching;
@@ -15,9 +16,6 @@ namespace Epi.Web.MVC.Repositories
 {
     public class IntegratedSurveyInfoRepository : RepositoryBase, ISurveyInfoRepository
     {
-
-
-
         private Epi.Web.WCF.SurveyService.IDataService _iDataService;
 
         public IntegratedSurveyInfoRepository(Epi.Web.WCF.SurveyService.IDataService iDataService)
@@ -25,18 +23,13 @@ namespace Epi.Web.MVC.Repositories
             _iDataService = iDataService;
         }
         
-        /// <summary>
-        /// Calling the proxy client to fetch a SurveyInfoResponse object
-        /// </summary>
-        /// <param name="surveyid"></param>
-        /// <returns></returns>
         public SurveyInfoResponse GetSurveyInfo(SurveyInfoRequest pRequest)
         {
             try
             {
                 string surveyKey = pRequest.Criteria.SurveyIdList[0].ToString();
 
-                SurveyInfoResponse surveyInfo = Utility.Cache.Get(surveyKey) as SurveyInfoResponse;
+                SurveyInfoResponse surveyInfo = CacheUtility.Get(surveyKey) as SurveyInfoResponse;
 
                 if (surveyInfo != null)
                 {
@@ -45,7 +38,7 @@ namespace Epi.Web.MVC.Repositories
 
                 surveyInfo = (SurveyInfoResponse)_iDataService.GetSurveyInfo(pRequest);
 
-                Utility.Cache.Insert(surveyKey, surveyInfo);
+                CacheUtility.Insert(surveyKey, surveyInfo);
 
                 return surveyInfo;
             }
@@ -72,56 +65,55 @@ namespace Epi.Web.MVC.Repositories
         }
 
         #region stubcode
-            public List<Common.DTO.SurveyInfoDTO> GetList(Criterion criterion = null)
-            {
-                throw new NotImplementedException();
-            }
+        public List<Common.DTO.SurveyInfoDTO> GetList(Criterion criterion = null)
+        {
+            throw new NotImplementedException();
+        }
 
-            public Common.DTO.SurveyInfoDTO Get(int id)
-            {
-                throw new NotImplementedException();
-            }
+        public Common.DTO.SurveyInfoDTO Get(int id)
+        {
+            throw new NotImplementedException();
+        }
 
-            public int GetCount(Criterion criterion = null)
-            {
-                throw new NotImplementedException();
-            }
+        public int GetCount(Criterion criterion = null)
+        {
+            throw new NotImplementedException();
+        }
 
-            public void Insert(Common.DTO.SurveyInfoDTO t)
-            {
-                throw new NotImplementedException();
-            }
+        public void Insert(Common.DTO.SurveyInfoDTO t)
+        {
+            throw new NotImplementedException();
+        }
 
-            public void Update(Common.DTO.SurveyInfoDTO t)
-            {
-                throw new NotImplementedException();
-            }
+        public void Update(Common.DTO.SurveyInfoDTO t)
+        {
+            throw new NotImplementedException();
+        }
 
-            public void Delete(int id)
-            {
-                throw new NotImplementedException();
-            } 
+        public void Delete(int id)
+        {
+            throw new NotImplementedException();
+        } 
         #endregion
 
+        List<SurveyInfoResponse> IRepository<SurveyInfoResponse>.GetList(Criterion criterion = null)
+        {
+            throw new NotImplementedException();
+        }
 
-            List<SurveyInfoResponse> IRepository<SurveyInfoResponse>.GetList(Criterion criterion = null)
-            {
-                throw new NotImplementedException();
-            }
+        SurveyInfoResponse IRepository<SurveyInfoResponse>.Get(int id)
+        {
+            throw new NotImplementedException();
+        }
 
-            SurveyInfoResponse IRepository<SurveyInfoResponse>.Get(int id)
-            {
-                throw new NotImplementedException();
-            }
+        public void Insert(SurveyInfoResponse t)
+        {
+            throw new NotImplementedException();
+        }
 
-            public void Insert(SurveyInfoResponse t)
-            {
-                throw new NotImplementedException();
-            }
-
-            public void Update(SurveyInfoResponse t)
-            {
-                throw new NotImplementedException();
-            }
+        public void Update(SurveyInfoResponse t)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

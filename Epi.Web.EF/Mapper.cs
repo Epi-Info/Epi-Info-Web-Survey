@@ -37,7 +37,6 @@ namespace Epi.Web.EF
                 
                 if (entity.UserPublishKey != null)
                 {
-                   // result.UserPublishKey = (Guid)entity.UserPublishKey.Value;
                     result.UserPublishKey = entity.UserPublishKey;
                 }
                 result.SurveyType = entity.SurveyTypeId; 
@@ -45,6 +44,15 @@ namespace Epi.Web.EF
             return result;
         }
 
+        internal static CacheDependencyBO MapDependency(SurveyMetaData entity)
+        {
+            CacheDependencyBO cacheDependencyBO = new CacheDependencyBO();
+
+            cacheDependencyBO.SurveyId = entity.SurveyId.ToString();
+            cacheDependencyBO.LastUpdate = (DateTime)entity.LastUpdate;
+
+            return cacheDependencyBO;
+        }
 
         internal static List<SurveyInfoBO> Map(List<SurveyMetaData> entities)
         {
