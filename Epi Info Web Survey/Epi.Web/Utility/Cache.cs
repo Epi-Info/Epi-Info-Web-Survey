@@ -5,9 +5,9 @@ using System.Web;
 using System.Web.Mvc;
 using System.Configuration;
 
-namespace Epi.Web.MVC.Utility
+namespace Epi.Web.Utility
 {
-    public static class Cache
+    public static class CacheUtility
     {
         static bool _cacheIsOn = false;
         static bool _useSlidingExpiration = false;

@@ -13,8 +13,18 @@ namespace Epi.Web.Common.Message
         [DataMember]
         public Dictionary<string, System.DateTime> SurveyDependency;
 
+        [DataMember]
+        public List<CacheDependencyDTO> CacheDependencyList;
+
         public CacheDependencyResponse() 
         {
+            CacheDependencyList = new List<CacheDependencyDTO>();
+            SurveyDependency = new Dictionary<string, System.DateTime>();
+        }
+
+        public CacheDependencyResponse(List<string> cachedSurveyKeys) : base() 
+        {
+            CacheDependencyList = new List<CacheDependencyDTO>();
             SurveyDependency = new Dictionary<string, System.DateTime>(); 
         }
     }

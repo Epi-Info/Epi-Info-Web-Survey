@@ -9,5 +9,6 @@ namespace Epi.Web.Interfaces.DataInterfaces
     public interface ICacheDependencyInfoDao
     {
         List<CacheDependencyBO> GetCacheDependencyInfo();
+        List<CacheDependencyBO> GetCacheDependencyInfo(List<string> surveyKeys);
     }
 }
