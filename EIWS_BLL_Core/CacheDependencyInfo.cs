@@ -16,9 +16,9 @@ namespace Epi.Web.BLL
             _cacheDependencyInfoDao = cacheDependencyInfoDao;
         }
 
-        public List<CacheDependencyBO> GetCacheDependencyInfo()
+        public List<CacheDependencyBO> GetCacheDependencyInfo(List<string> surveyKeys)
         {
-            List<CacheDependencyBO> result = _cacheDependencyInfoDao.GetCacheDependencyInfo();
+            List<CacheDependencyBO> result = _cacheDependencyInfoDao.GetCacheDependencyInfo(surveyKeys);
             return result;
         }
     }
