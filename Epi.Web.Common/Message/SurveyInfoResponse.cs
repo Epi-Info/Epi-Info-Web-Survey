@@ -37,8 +37,10 @@ namespace Epi.Web.Common.Message
         /// Overloaded Constructor for SurveyInfoResponse. Sets CorrelationId.
         /// </summary>
         /// <param name="correlationId"></param>
-        public SurveyInfoResponse(string correlationId) : base(correlationId) { this.SurveyInfoList = new List<SurveyInfoDTO>(); }
-
+        public SurveyInfoResponse(string correlationId) : base(correlationId) 
+        { 
+            this.SurveyInfoList = new List<SurveyInfoDTO>(); 
+        }
 
         /// <summary>
         /// Single SurveyInfo

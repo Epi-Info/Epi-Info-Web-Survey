@@ -47,7 +47,7 @@ namespace Epi.Web
 
             if (_reference.TryGetValue(identifier, out value) == false)
             {
-                value = new DependencyReferenceToken(DateTime.Now);
+                value = new DependencyReferenceToken(DateTime.MinValue);
                 _reference.Add(identifier, value);
             }
             
@@ -59,15 +59,15 @@ namespace Epi.Web
             Epi.Web.WCF.SurveyService.IDataService dataService;
             dataService = new Epi.Web.WCF.SurveyService.DataService();
             CacheDependencyRequest request = new CacheDependencyRequest();
+            request.Criteria.SurveyIdList = new List<string>(_reference.Keys);
             CacheDependencyResponse cacheDependencyResponse = (CacheDependencyResponse)dataService.GetCacheDependencyInfo(request);
-
             Dictionary<string, DateTime> response = cacheDependencyResponse.SurveyDependency;
 
             foreach(KeyValuePair<string, DateTime> kvp in response)
             {
                 if (_reference.ContainsKey(kvp.Key))
                 {
-                    _reference[kvp.Key].SetTimeStamp(kvp.Value);
+                    _reference[kvp.Key].ChangeIfGreater(kvp.Value);
                 }
                 else
                 {
@@ -91,7 +91,7 @@ namespace Epi.Web
             _timeStamp = dateTime;
         }
 
-        public void SetTimeStamp(DateTime dateTime)
+        public void ChangeIfGreater(DateTime dateTime)
         {
             if (dateTime > _timeStamp)
             {

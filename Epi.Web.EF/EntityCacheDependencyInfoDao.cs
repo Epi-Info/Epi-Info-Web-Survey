@@ -11,11 +11,33 @@ namespace Epi.Web.EF
         public List<CacheDependencyBO> GetCacheDependencyInfo()
         {
             List<CacheDependencyBO> result = new List<CacheDependencyBO>();
+            return result;
+        }
+        
+        public List<CacheDependencyBO> GetCacheDependencyInfo(List<string> surveyKeys)
+        {
+            List<CacheDependencyBO> result = new List<CacheDependencyBO>();
 
-            using (var Context = DataObjectFactory.CreateContext())
+            if (surveyKeys.Count > 0)
             {
-                List<SurveyMetaData> list = (List<SurveyMetaData>)(Context.SurveyMetaDatas.ToList());
-                Mapper.Map(list, out result);
+                try
+                {
+                    foreach (string key in surveyKeys)
+                    {
+                        Guid guid = new Guid(key);
+
+                        using (var Context = DataObjectFactory.CreateContext())
+                        {
+                            SurveyMetaData surveyMetaDatas = Context.SurveyMetaDatas.FirstOrDefault(x => x.SurveyId == guid);
+                            CacheDependencyBO cacheDependencyBO = Mapper.MapDependency(surveyMetaDatas);
+                            result.Add(cacheDependencyBO);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw (ex);
+                }
             }
 
             return result;
