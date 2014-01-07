@@ -309,6 +309,7 @@ namespace Epi.Web.EF
 
                    SurveyInfo.TemplateXMLSize = RemoveWhitespace(SurveyInfo.XML).Length;
                    SurveyInfo.DateCreated = DateTime.Now;
+                   SurveyInfo.LastUpdate = DateTime.Now;
 
                    var SurveyMetaDataEntity = Mapper.Map(SurveyInfo);
                    SurveyMetaDataEntity.OrganizationId = OrganizationId;
