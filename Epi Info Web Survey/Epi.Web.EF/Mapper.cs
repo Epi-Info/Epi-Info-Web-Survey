@@ -49,7 +49,11 @@ namespace Epi.Web.EF
             CacheDependencyBO cacheDependencyBO = new CacheDependencyBO();
 
             cacheDependencyBO.SurveyId = entity.SurveyId.ToString();
-            cacheDependencyBO.LastUpdate = (DateTime)entity.LastUpdate;
+
+            if (entity.LastUpdate != null)
+            { 
+                cacheDependencyBO.LastUpdate = (DateTime)entity.LastUpdate;
+            }
 
             return cacheDependencyBO;
         }
@@ -115,13 +119,8 @@ namespace Epi.Web.EF
                 DateCreated = businessobject.DateCreated,
                 IsDraftMode = businessobject.IsDraftMode,
                 StartDate = businessobject.StartDate,
-               
-               
-                
-
             };
         }
-
 
         /// <summary>
         /// Maps SurveyMetaData entity to SurveyInfoBO business object.

@@ -22,17 +22,16 @@ namespace Epi.Web.Common.BusinessObject
         private Guid _OrganizationKey;
         private DateTime _ClosingDate;
         private DateTime _DateCreated;
+        private DateTime _LastUpdate;
         private string _StatusText;
         private bool _IsDraftMode;
         private DateTime _StartDate;
         
-
         public string StatusText
         { 
             get { return _StatusText; }
             set { _StatusText = value; } 
         }
-
 
         public string SurveyId
         {
@@ -57,21 +56,17 @@ namespace Epi.Web.Common.BusinessObject
             set { _SurveyName = value; }
         }
 
-
         public string OrganizationName
         {
             get { return _OrganizationName; }
             set { _OrganizationName = value; }
         }
 
-
         public string DepartmentName
         {
             get { return _DepartmentName; }
             set { _DepartmentName = value; }
         }
-
-
 
         public string IntroductionText
         {
@@ -90,7 +85,6 @@ namespace Epi.Web.Common.BusinessObject
             get { return _XML; }
             set { _XML = value; }
         }
-
 
         public DateTime ClosingDate
         {
@@ -122,6 +116,12 @@ namespace Epi.Web.Common.BusinessObject
             set{ _DateCreated = value;}
         }
 
+        public DateTime LastUpdate
+        {
+            get { return _LastUpdate; }
+            set { _LastUpdate = value; }
+        }
+
         [DataMember]
         public bool IsDraftMode
         {
@@ -129,16 +129,11 @@ namespace Epi.Web.Common.BusinessObject
             set { _IsDraftMode = value; }
         }
 
-
         [DataMember]
         public DateTime StartDate
         {
             get { return _StartDate; }
             set { _StartDate = value; }
         }
-
-        
-
-
     }
 }
