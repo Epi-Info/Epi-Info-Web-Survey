@@ -220,6 +220,7 @@ namespace MvcDynamicForms
             foreach (var inputField in InputFields)
                 inputField.ClearError();
         }
+        
         /// <summary>
         /// This method provides a convenient way of adding multiple Field objects at once.
         /// </summary>
@@ -229,27 +230,9 @@ namespace MvcDynamicForms
             foreach (var field in fields)
             {
                 _fields.Add(field);
-                /*
-                if(field is InputField)
-                {
-
-                    InputField inputField = field as InputField;
-                    if (_fields.FieldIndex.ContainsKey(inputField.Key))
-                    {
-                        _fields[_fields.FieldIndex[inputField.Key]] = field;
-                    }
-                    else
-                    {
-                        _fields.Add(field);
-                        _fields.FieldIndex.Add(inputField.Key, _fields.Count - 1);
-                    }
-                }
-                else
-                {
-                    _fields.Add(field);
-                }*/
             }
         }
+
         /// <summary>
         /// Provides a convenient way the end users' responses to each InputField
         /// </summary>
