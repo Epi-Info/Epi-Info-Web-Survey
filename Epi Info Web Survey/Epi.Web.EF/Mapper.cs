@@ -248,8 +248,9 @@ namespace Epi.Web.EF
                          IsActive = pBo.IsActive,
                          Notify = false,
                          OrganizationId = pBo.OrganizationId,
-
-
+                         FirstName = pBo.FirstName,
+                         LastName = pBo.LastName,
+                         PhoneNumber = pBo.PhoneNumber,
                     };
             }
         /// <summary>

@@ -14,7 +14,9 @@ namespace Epi.Web.Common.BusinessObject
         private bool _IsActive;
         private bool _Notify;
         private Guid _AdminId;
-
+        private string _FirstName;
+        private string _LastName;
+        private string _PhoneNumber;
         [DataMember]
         public string AdminEmail
             {
@@ -46,6 +48,24 @@ namespace Epi.Web.Common.BusinessObject
             {
             get { return _AdminId; }
             set { _AdminId = value; }
+            }
+          [DataMember]
+        public string FirstName
+            {
+            get { return _FirstName; }
+            set { _FirstName = value; }
+            }
+          [DataMember]
+        public string LastName
+            {
+            get { return _LastName; }
+            set { _LastName = value; }
+            }
+          [DataMember]
+        public string PhoneNumber
+            {
+            get { return _PhoneNumber; }
+            set { _PhoneNumber = value; }
             }
         }
     }
