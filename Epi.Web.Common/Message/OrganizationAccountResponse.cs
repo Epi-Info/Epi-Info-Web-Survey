@@ -14,8 +14,9 @@ namespace Epi.Web.Common.Message
 
   
          [DataMember]
-         public string Message;
-
+         public string AdminMessage;
+         [DataMember]
+         public string OrgMessage;
          /// <summary>
          /// OrganizationInfo object.
          /// </summary>
