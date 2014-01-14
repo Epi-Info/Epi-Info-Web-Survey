@@ -6,6 +6,8 @@ using System.Web.Mvc;
 using MvcDynamicForms.Fields;
 using MvcDynamicForms.Utilities;
 using System.Xml.Linq;
+using Epi.Web.Common.DTO; 
+using Epi.Core.EnterInterpreter;
 
 namespace MvcDynamicForms
 {
@@ -14,20 +16,19 @@ namespace MvcDynamicForms
     /// </summary>
     [Serializable]
     [ModelBinder(typeof(DynamicFormModelBinder))]
-    public class Form
+    public class Form : ICloneable
     {
         private string _formWrapper = "div";
         private string _formWrapperClass = "MvcDynamicForm";
         private string _fieldPrefix = "MvcDynamicField_";
         private FieldList _fields;
-        private Epi.Web.Common.DTO.SurveyInfoDTO _SurveyInfo;
+        private SurveyInfoDTO _SurveyInfo;
         private string _PageId = "";
         public double Width { get; set; }
         public double Height { get; set; }
         public bool IsMobile { get; set; }
 
         private string _IsDraftModeStyleClass = "";
-
         
         /// <summary>
         /// The html element that wraps all rendered html.
@@ -95,10 +96,17 @@ namespace MvcDynamicForms
                 return _fields.OfType<InputField>();
             }
         }
+        
         public Form()
         {
             _fields = new FieldList(this);
         }
+
+        public object Clone()
+        {
+            return MemberwiseClone();
+        }
+        
         /// <summary>
         /// Validates each InputField object contained in the Fields collection. Validation also causes the Error property to be set for each InputField object.
         /// </summary>
@@ -120,9 +128,7 @@ namespace MvcDynamicForms
                         {
                             _Required = true;
                             break;
-
                         }
-
                     }
 
                     if (_Required)
