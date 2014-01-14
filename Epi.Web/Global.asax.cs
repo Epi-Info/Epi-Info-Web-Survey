@@ -71,28 +71,13 @@ namespace Epi.Web.MVC
         /// </summary>
         protected void Application_Error()
         {
-
             Exception exc = Server.GetLastError();
 
             try
             {
-                //string sSource;
-                //string sLog;
-               // string sEvent;
-
-                //sSource = "Epi.Web.Survey";
-                //sLog = "Application";
-                //sEvent = exc.Message + "\n" + exc.StackTrace;
-                 
-                            Epi.Web.Utility.ExceptionMessage.SendLogMessage(exc);
-                           
-                    
-
+                Epi.Web.Utility.ExceptionMessage.SendLogMessage(exc);
             }
-            catch (Exception ex)
-            {
-                // do nothing
-            }
+            catch { }
 
             this.Response.Redirect("/", true);
         }
