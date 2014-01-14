@@ -33,8 +33,8 @@ namespace MvcDynamicForms.Fields
                 _regexMessage = value;
             }
         }
+
         public  string Value{ get; set; }
-       //public string Value { get { return _Value; } set { _Value = value; } }
 
         public override string Response
         {
@@ -43,8 +43,8 @@ namespace MvcDynamicForms.Fields
             {
               Value = value;   
             }
-            
         }
+
         public override bool Validate()
         {
             /*If readonly don't perform any validation check and make required = false and validate = true*/
@@ -87,7 +87,5 @@ namespace MvcDynamicForms.Fields
             string XML ="<ResponseDetail QuestionId='"+_key + "'>" + Response +"<ResponseDetail>";
             return XML;
         }
-
-        
     }
 }

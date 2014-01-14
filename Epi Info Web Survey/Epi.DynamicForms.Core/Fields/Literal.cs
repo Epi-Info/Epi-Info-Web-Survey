@@ -17,7 +17,6 @@ namespace MvcDynamicForms.Fields
         /// Determines whether the rendered html will be wrapped by another element.
         /// </summary>
         /// 
-
         public string Name { get; set; }
         public bool Wrap { get; set; }
         /// <summary>
@@ -28,7 +27,6 @@ namespace MvcDynamicForms.Fields
         public override string RenderHtml()
         {
             if (Wrap)
-            
             {
                 
                 var wrapper = new TagBuilder(_fieldWrapper);
