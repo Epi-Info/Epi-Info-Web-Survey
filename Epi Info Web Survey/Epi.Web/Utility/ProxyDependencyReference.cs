@@ -47,7 +47,7 @@ namespace Epi.Web
 
             if (_reference.TryGetValue(identifier, out value) == false)
             {
-                value = new DependencyReferenceToken(DateTime.MinValue);
+                value = new DependencyReferenceToken(DateTime.Now);
                 _reference.Add(identifier, value);
             }
             
