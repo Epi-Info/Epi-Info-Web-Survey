@@ -50,8 +50,7 @@ namespace Epi.Web.MVC.Utility
                 {
                     XDocument xdocMetadata = XDocument.Parse(xml);
 
-                    var _FieldsTypeIDs = from _FieldTypeID in
-                                         xdocMetadata.Descendants("Field")
+                    var _FieldsTypeIDs = from _FieldTypeID in xdocMetadata.Descendants("Field")
                                          select _FieldTypeID;
 
                     double width, height;
@@ -137,10 +136,10 @@ namespace Epi.Web.MVC.Utility
                                     break;
 
                                 case "12":
-                                    RadioList radioList = GetRadioList(fieldElement, width, height, form);
-                                    form.AddFields(radioList);
                                     GroupBox optionsContainer = GetOptionGroupBox(fieldElement, width + 12, height);
                                     form.AddFields(optionsContainer);
+                                    RadioList radioList = GetRadioList(fieldElement, width, height, form);
+                                    form.AddFields(radioList);
                                     break;
 
                                 case "17": // LegalValues
@@ -158,7 +157,7 @@ namespace Epi.Web.MVC.Utility
                                     form.AddFields(GetDropDown(fieldElement, width, height, dropDownValues, 19, form));
                                     break;
 
-                                case "21":
+                                case "21": //GroupBox
                                     GroupBox groupBox = GetGroupBox(fieldElement, width, height);
                                     form.AddFields(groupBox);
                                     break;
@@ -174,12 +173,12 @@ namespace Epi.Web.MVC.Utility
 
             Form clone = form.Clone() as Form;
             clone.ResponseId = surveyAnswer.ResponseId;
-            FormProvider.SetStates(ref clone, surveyAnswer);
+            FormProvider.SetStates(clone, surveyAnswer);
 
             return clone;
         }
 
-        public static void SetStates(ref Form form, SurveyAnswerDTO answer)
+        public static void SetStates(Form form, SurveyAnswerDTO answer)
         {
             XDocument xdocResponse = XDocument.Parse(answer.XML);
 
@@ -373,12 +372,12 @@ namespace Epi.Web.MVC.Utility
         {
             var RadioList = new RadioList();
             string ListString = _FieldTypeID.Attribute("List").Value;
-            ListString = ListString.Replace("||","|");
+            ListString = ListString.Replace("||", "|");
             List<string> Lists = ListString.Split('|').ToList<string>();
 
             Dictionary<string, bool> Choices = new Dictionary<string, bool>();
-            
-            List<string>  Pattern = new List<string>();
+
+            List<string> Pattern = new List<string>();
             Choices = GetChoices(Lists[0].Split(',').ToList<string>());
             Pattern = Lists[1].Split(',').ToList<string>();
 
@@ -386,10 +385,10 @@ namespace Epi.Web.MVC.Utility
             RadioList.Prompt = _FieldTypeID.Attribute("PromptText").Value;
             RadioList.DisplayOrder = int.Parse(_FieldTypeID.Attribute("TabIndex").Value);
             RadioList.Required = _FieldTypeID.Attribute("IsRequired").Value == "True" ? true : false;
-                
+
             RadioList.RequiredMessage = "This field is required";
             RadioList.Key = _FieldTypeID.Attribute("Name").Value;
-                 
+
             RadioList.Top = _Height * double.Parse(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value);
             RadioList.Left = _Width * double.Parse(_FieldTypeID.Attribute("ControlLeftPositionPercentage").Value);
             RadioList.PromptWidth = _Width * double.Parse(_FieldTypeID.Attribute("ControlWidthPercentage").Value);
@@ -397,13 +396,14 @@ namespace Epi.Web.MVC.Utility
             RadioList.fontstyle = _FieldTypeID.Attribute("PromptFontStyle").Value;
             RadioList.fontSize = double.Parse(_FieldTypeID.Attribute("PromptFontSize").Value);
             RadioList.fontfamily = _FieldTypeID.Attribute("PromptFontFamily").Value;
+
             RadioList.IsReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value);
             RadioList.InputFieldfontstyle = _FieldTypeID.Attribute("ControlFontStyle").Value;
             RadioList.InputFieldfontSize = double.Parse(_FieldTypeID.Attribute("ControlFontSize").Value);
             RadioList.InputFieldfontfamily = _FieldTypeID.Attribute("ControlFontFamily").Value;
 
             RadioList.IsRequired = GetRequiredControlState(form.RequiredFieldsList.ToString(), _FieldTypeID.Attribute("Name").Value, "RequiredFieldsList");
-                                                                                                           
+
             RadioList.ShowTextOnRight = bool.Parse(_FieldTypeID.Attribute("ShowTextOnRight").Value);
             RadioList.Choices = Choices;
             RadioList.Width = _Width;
@@ -420,7 +420,7 @@ namespace Epi.Web.MVC.Utility
 
                 RadioList.Orientation = (Orientation)1;
             }
-             
+
             return RadioList;
         }
 
@@ -702,39 +702,45 @@ namespace Epi.Web.MVC.Utility
 
             return DropDownValues.ToString();
         }
-        
+
         private static GroupBox GetGroupBox(XElement fieldTypeID, double width, double height)
         {
             GroupBox GroupBox = new GroupBox();
+
             GroupBox.fontstyle = fieldTypeID.Attribute("ControlFontStyle").Value;
             GroupBox.fontSize = double.Parse(fieldTypeID.Attribute("ControlFontSize").Value);
             GroupBox.fontfamily = fieldTypeID.Attribute("ControlFontFamily").Value;
-            AssignCommonGroupProperties(fieldTypeID, width, height, GroupBox);
+
+            AssignCommonGroupProperties(fieldTypeID, width, height,  GroupBox);
+
             return GroupBox;
         }
 
         private static GroupBox GetOptionGroupBox(XElement fieldTypeID, double width, double height)
         {
-            GroupBox groupBox = new GroupBox();
-            groupBox.fontstyle = fieldTypeID.Attribute("PromptFontStyle").Value;
-            groupBox.fontSize = double.Parse(fieldTypeID.Attribute("PromptFontSize").Value);
-            groupBox.fontfamily = fieldTypeID.Attribute("PromptFontFamily").Value;
-            AssignCommonGroupProperties(fieldTypeID, width, height, groupBox);
-            return groupBox;
+            GroupBox GroupBox = new GroupBox();
+
+            GroupBox.fontstyle = fieldTypeID.Attribute("PromptFontStyle").Value;
+            GroupBox.fontSize = double.Parse(fieldTypeID.Attribute("PromptFontSize").Value);
+            GroupBox.fontfamily = fieldTypeID.Attribute("PromptFontFamily").Value;
+
+            AssignCommonGroupProperties(fieldTypeID, width, height,  GroupBox);
+
+            return GroupBox;
         }
 
-        private static void AssignCommonGroupProperties(XElement fieldTypeID, double width, double height, GroupBox groupBox)
+        private static void AssignCommonGroupProperties(XElement fieldTypeID, double width, double height, GroupBox GroupBox)
         {
-            groupBox.Title = fieldTypeID.Attribute("Name").Value;
-            groupBox.Prompt = fieldTypeID.Attribute("PromptText").Value;
-            groupBox.RequiredMessage = "This field is required";
-            groupBox.Key = fieldTypeID.Attribute("Name").Value + "_GroupBox";
-            groupBox.PromptTop = height * double.Parse(fieldTypeID.Attribute("ControlTopPositionPercentage").Value);
-            groupBox.PromptLeft = width * double.Parse(fieldTypeID.Attribute("ControlLeftPositionPercentage").Value);
-            groupBox.Top = height * double.Parse(fieldTypeID.Attribute("ControlTopPositionPercentage").Value);
-            groupBox.Left = width * double.Parse(fieldTypeID.Attribute("ControlLeftPositionPercentage").Value);
-            groupBox.ControlHeight = height * double.Parse(fieldTypeID.Attribute("ControlHeightPercentage").Value) - 12;
-            groupBox.ControlWidth = width * double.Parse(fieldTypeID.Attribute("ControlWidthPercentage").Value) - 12;
+            GroupBox.Title = fieldTypeID.Attribute("Name").Value;
+            GroupBox.Prompt = fieldTypeID.Attribute("PromptText").Value;
+            GroupBox.RequiredMessage = "This field is required";
+            GroupBox.Key = fieldTypeID.Attribute("Name").Value + "_GroupBox";
+            GroupBox.PromptTop = height * double.Parse(fieldTypeID.Attribute("ControlTopPositionPercentage").Value);
+            GroupBox.PromptLeft = width * double.Parse(fieldTypeID.Attribute("ControlLeftPositionPercentage").Value);
+            GroupBox.Top = height * double.Parse(fieldTypeID.Attribute("ControlTopPositionPercentage").Value);
+            GroupBox.Left = width * double.Parse(fieldTypeID.Attribute("ControlLeftPositionPercentage").Value);
+            GroupBox.ControlHeight = height * double.Parse(fieldTypeID.Attribute("ControlHeightPercentage").Value) - 12;
+            GroupBox.ControlWidth = width * double.Parse(fieldTypeID.Attribute("ControlWidthPercentage").Value) - 12;
         }
 
         private static int GetNumberOfPages(XDocument Xml)
@@ -952,7 +958,7 @@ namespace Epi.Web.MVC.Utility
                             field = GetDropDown(fieldElement, width, height, "Yes&#;No", 11, form);
                             break;
 
-                        case "12":
+                        case "12": //RadioList
                             field = GetRadioList(fieldElement, width, height, form);
                             break;
 
@@ -971,7 +977,7 @@ namespace Epi.Web.MVC.Utility
                             field = GetDropDown(fieldElement, width, height, commentLegal, 19, form);
                             break;
 
-                        case "21":
+                        case "21": //GroupBox
                             field = GetGroupBox(fieldElement, width, height);
                             break;
                     }
