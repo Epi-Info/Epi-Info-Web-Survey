@@ -85,7 +85,8 @@ namespace Epi.Web.MVC.Utility
                     {
                         var Value = GetControlValue(xdocResponse, fieldElement.Attribute("Name").Value);
                         string dropDownValues = "";
-                        JavaScript.Append(GetFormJavaScript(checkcode, form, fieldElement.Attribute("Name").Value));
+                        string formJavaScript = GetFormJavaScript(checkcode, form, fieldElement.Attribute("Name").Value);
+                        JavaScript.Append(formJavaScript);
 
                         if (fieldElement.Attribute("Position").Value != (pageNumber - 1).ToString())
                         {
@@ -140,6 +141,11 @@ namespace Epi.Web.MVC.Utility
                                     form.AddFields(optionsContainer);
                                     RadioList radioList = GetRadioList(fieldElement, width, height, form);
                                     form.AddFields(radioList);
+                                    break;
+
+                                case "13":
+                                    CommandButton commandButton = GetCommandButton(fieldElement, width, height);
+                                    form.AddFields(commandButton);
                                     break;
 
                                 case "17": // LegalValues
@@ -219,6 +225,10 @@ namespace Epi.Web.MVC.Utility
                 SetFieldStates(xdocResponse, field);
                 string isChecked = GetControlValue(xdocResponse, ((InputField)field).Title);
                 ((CheckBox)field).Checked = isChecked == "Yes" ? true : isChecked == "true" ? true : false;
+            }
+            else if (field is CommandButton)
+            {
+                SetFieldStates(xdocResponse, field);
             }
             else if (field is GroupBox)
             {
@@ -574,6 +584,23 @@ namespace Epi.Web.MVC.Utility
             };
  
             return CheckBox;
+        }
+
+        private static CommandButton GetCommandButton(XElement fieldElement, double width, double height)
+        {
+            CommandButton commandButton = new CommandButton();
+            commandButton.Title = fieldElement.Attribute("PromptText").Value;
+            commandButton.DisplayOrder = int.Parse(fieldElement.Attribute("TabIndex").Value);
+            commandButton.Prompt = fieldElement.Attribute("PromptText").Value;
+            commandButton.Key = fieldElement.Attribute("Name").Value;
+            commandButton.Top = height * double.Parse(fieldElement.Attribute("ControlTopPositionPercentage").Value);
+            commandButton.Left = width * double.Parse(fieldElement.Attribute("ControlLeftPositionPercentage").Value);
+            commandButton.Width = width * double.Parse(fieldElement.Attribute("ControlWidthPercentage").Value);
+            commandButton.Height = height * double.Parse(fieldElement.Attribute("ControlHeightPercentage").Value);
+            commandButton.fontstyle = fieldElement.Attribute("ControlFontStyle").Value;
+            commandButton.fontSize = double.Parse(fieldElement.Attribute("ControlFontSize").Value);
+            commandButton.fontfamily = fieldElement.Attribute("ControlFontFamily").Value;
+            return commandButton;
         }
 
         private static DatePicker GetDatePicker(XElement _FieldTypeID, double _Width, double _Height, Form form)
