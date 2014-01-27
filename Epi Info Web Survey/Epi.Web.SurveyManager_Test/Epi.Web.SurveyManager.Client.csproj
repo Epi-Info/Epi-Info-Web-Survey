@@ -192,6 +192,7 @@
     <None Include="Properties\DataSources\Epi.Web.Common.Message.PreFilledAnswerResponse.datasource" />
     <None Include="Properties\DataSources\Epi.Web.Common.Message.PublishResponse.datasource" />
     <None Include="Properties\DataSources\Epi.Web.Common.Message.SurveyAnswerResponse.datasource" />
+    <None Include="Properties\DataSources\Epi.Web.Common.Message.SurveyControlsResponse.datasource" />
     <None Include="Properties\DataSources\Epi.Web.Common.Message.SurveyInfoResponse.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -212,9 +213,6 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\SurveyManagerServiceV2\SurveyManagerServiceV24.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\SurveyManagerServiceV2\SurveyManagerServiceV25.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\SurveyManagerService\ManagerService.wsdl" />

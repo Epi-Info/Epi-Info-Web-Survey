@@ -67,6 +67,11 @@ namespace Epi.Web.SurveyManager.Client.SurveyManagerServiceV2 {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IManagerServiceV2/SetSurveyAnswer", ReplyAction="http://tempuri.org/IManagerServiceV2/SetSurveyAnswerResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(Epi.Web.Common.Exception.CustomFaultException), Action="http://tempuri.org/IManagerServiceV2/SetSurveyAnswerCustomFaultExceptionFault", Name="CustomFaultException", Namespace="http://www.yourcompany.com/types/")]
         Epi.Web.Common.Message.PreFilledAnswerResponse SetSurveyAnswer(Epi.Web.Common.Message.PreFilledAnswerRequest pRequestMessage);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IManagerServiceV2/GetSurveyControlList", ReplyAction="http://tempuri.org/IManagerServiceV2/GetSurveyControlListResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Epi.Web.Common.Exception.CustomFaultException), Action="http://tempuri.org/IManagerServiceV2/GetSurveyControlListCustomFaultExceptionFaul" +
+            "t", Name="CustomFaultException", Namespace="http://www.yourcompany.com/types/")]
+        Epi.Web.Common.Message.SurveyControlsResponse GetSurveyControlList(Epi.Web.Common.Message.SurveyControlsRequest pRequestMessage);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -146,6 +151,10 @@ namespace Epi.Web.SurveyManager.Client.SurveyManagerServiceV2 {
         
         public Epi.Web.Common.Message.PreFilledAnswerResponse SetSurveyAnswer(Epi.Web.Common.Message.PreFilledAnswerRequest pRequestMessage) {
             return base.Channel.SetSurveyAnswer(pRequestMessage);
+        }
+        
+        public Epi.Web.Common.Message.SurveyControlsResponse GetSurveyControlList(Epi.Web.Common.Message.SurveyControlsRequest pRequestMessage) {
+            return base.Channel.GetSurveyControlList(pRequestMessage);
         }
     }
 }
