@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
- 
+using System.Configuration;
 using System.Web.Mvc;
 namespace Epi.Web.MVC.Models
     {
-    public class AccountInfo
+    public class AccountInfoModel
         {
         private string _Email;
         private string _ConfirmEmail;
@@ -16,6 +16,7 @@ namespace Epi.Web.MVC.Models
         private string _FirstName;
         private string _LastName;
         private string _PhoneNumber;
+     
          [Required(ErrorMessage = "Email is required.")]
          [RegularExpression(@"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$", ErrorMessage = "Invalid email address.")]
         public string Email
@@ -61,5 +62,7 @@ namespace Epi.Web.MVC.Models
               get { return _PhoneNumber; }
               set { _PhoneNumber = value; }
               }
+           
+
         }
     }
