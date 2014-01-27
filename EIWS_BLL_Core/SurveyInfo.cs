@@ -200,7 +200,7 @@ namespace Epi.Web.BLL
         private List<Web.Common.DTO.SurveyControlDTO> GetSurveyControls(SurveyInfoBO SurveyInfoBO)
             {
             List<Web.Common.DTO.SurveyControlDTO> List = new List<Web.Common.DTO.SurveyControlDTO>();
-            Web.Common.DTO.SurveyControlDTO SurveyControlDTO = new Web.Common.DTO.SurveyControlDTO();
+           
             XDocument xdoc = XDocument.Parse(SurveyInfoBO.XML);
 
 
@@ -210,6 +210,7 @@ namespace Epi.Web.BLL
             
             foreach (var _FieldTypeID in _FieldsTypeIDs)
                 {
+                Web.Common.DTO.SurveyControlDTO SurveyControlDTO = new Web.Common.DTO.SurveyControlDTO();
                 SurveyControlDTO.ControlId = _FieldTypeID.Attribute("Name").Value.ToString();
                 SurveyControlDTO.ControlPrompt = _FieldTypeID.Attribute("PromptText").Value.ToString();
                 SurveyControlDTO.ControlType = GetControlType(_FieldTypeID.Attribute("FieldTypeId").Value);
