@@ -44,6 +44,11 @@ namespace Epi.Web.MVC.Controllers
                 string exitText = regex.Replace(surveyInfoModel.ExitText.Replace("  ", " &nbsp;"), "<br />");
                 surveyInfoModel.ExitText = MvcHtmlString.Create(exitText).ToString();
 
+                string strPassCode = Epi.Web.MVC.Utility.SurveyHelper.GetPassCode();
+
+                surveyInfoModel.PassCode = strPassCode;
+                TempData["PassCode"] = strPassCode;
+
                 if (surveyInfoModel.IsDraftMode)
                 {
                     surveyInfoModel.IsDraftModeStyleClass = "draft";
@@ -81,6 +86,17 @@ namespace Epi.Web.MVC.Controllers
                 FormsAuthentication.SetAuthCookie("BeginSurvey", false);
                 Guid responseId = Guid.NewGuid();
                 Epi.Web.Common.DTO.SurveyAnswerDTO SurveyAnswer = _isurveyFacade.CreateSurveyAnswer(surveyId, responseId.ToString());
+
+                // Pass Code Logic  start 
+                Epi.Web.Common.Message.UserAuthenticationResponse AuthenticationResponse = _isurveyFacade.GetAuthenticationResponse(responseId.ToString());
+
+                string strPassCode = Epi.Web.MVC.Utility.SurveyHelper.GetPassCode();
+                if (string.IsNullOrEmpty(AuthenticationResponse.PassCode))
+                    {
+                    _isurveyFacade.UpdatePassCode(responseId.ToString(), TempData["PassCode"].ToString());
+                    }
+
+
                 SurveyInfoModel surveyInfoModel = GetSurveyInfo(SurveyAnswer.SurveyId);
                 XDocument xdoc = XDocument.Parse(surveyInfoModel.XML);
                 MvcDynamicForms.Form form = _isurveyFacade.GetSurveyFormData(SurveyAnswer.SurveyId, 1, SurveyAnswer, IsMobileDevice);
