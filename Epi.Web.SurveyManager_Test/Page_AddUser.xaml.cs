@@ -39,6 +39,7 @@ namespace Epi.Web.SurveyManager.Client
                     this.ManageSurveyButton.Visibility = System.Windows.Visibility.Visible;
                     this.ViewDownloadClient.Visibility = System.Windows.Visibility.Visible;
                     this.ResponseClientbutton.Visibility = System.Windows.Visibility.Visible;
+                    this.SurveyControls.Visibility = System.Windows.Visibility.Visible;
                 }
                 else
                 {
@@ -46,6 +47,7 @@ namespace Epi.Web.SurveyManager.Client
                     this.ManageSurveyButton.Visibility = System.Windows.Visibility.Hidden;
                     this.ViewDownloadClient.Visibility = System.Windows.Visibility.Hidden;
                     this.ResponseClientbutton.Visibility = System.Windows.Visibility.Hidden;
+                    this.SurveyControls.Visibility = System.Windows.Visibility.Hidden;
                 }
             }
 
@@ -572,6 +574,12 @@ namespace Epi.Web.SurveyManager.Client
             {
             ResponseClient ResponseClient = new ResponseClient();
             this.NavigationService.Navigate(ResponseClient);
+            }
+
+        private void SurveyControls_Click(object sender, RoutedEventArgs e)
+            {
+            Page_GetSurveyControls SurveyControls = new Page_GetSurveyControls();
+            this.NavigationService.Navigate(SurveyControls);
             }
         
     }
