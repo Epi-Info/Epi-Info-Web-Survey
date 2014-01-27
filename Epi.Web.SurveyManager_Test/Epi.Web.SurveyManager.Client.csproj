@@ -109,6 +109,9 @@
     <Compile Include="Page_Configuration.xaml.cs">
       <DependentUpon>Page_Configuration.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Page_GetSurveyControls.xaml.cs">
+      <DependentUpon>Page_GetSurveyControls.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Page_ManageSurvey.xaml.cs">
       <DependentUpon>Page_ManageSurvey.xaml</DependentUpon>
     </Compile>
@@ -150,6 +153,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Page_Configuration.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Page_GetSurveyControls.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
