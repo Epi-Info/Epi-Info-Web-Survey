@@ -183,4 +183,18 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetSurveyControlList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q26="http://www.yourcompany.com/types/" minOccurs="0" name="pRequestMessage" nillable="true" type="q26:SurveyControlsRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSurveyControlListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q27="http://www.yourcompany.com/types/" minOccurs="0" name="GetSurveyControlListResult" nillable="true" type="q27:SurveyControlsResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>
