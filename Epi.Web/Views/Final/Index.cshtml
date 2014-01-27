@@ -87,7 +87,9 @@
             <div id="content" style="min-height:200px;">
                @if (Model.ClosingDate.Date >= DateTime.Now.Date && Model.SurveyType == 2)
                {
-                     
+                        <div id="passcodebox" style="">@Model.PassCode</div>
+                        <div id="codebk" style="">Please note down this pass code in<br />reference to your survey response.</div>
+                        <p></p> 
                         <p>
                             <button id="beginsurvey" class="begin green" type="submit">
                                Start Survey Again</button>
@@ -111,7 +113,7 @@
 	            </div>
 	            <div style="clear:both;"></div>
             </div>  *@
- }
+    }
 
       @* <div id="VideoDialog" title = "How this survey was created!">
                
