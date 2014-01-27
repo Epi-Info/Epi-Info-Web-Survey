@@ -16,5 +16,8 @@ namespace Epi.Web.WCF.SurveyService
         [OperationContract]
         [FaultContract(typeof(CustomFaultException))]
         PreFilledAnswerResponse SetSurveyAnswer(PreFilledAnswerRequest pRequestMessage);
+        [OperationContract]
+        [FaultContract(typeof(CustomFaultException))]
+        SurveyControlsResponse GetSurveyControlList(SurveyControlsRequest pRequestMessage);
         }
     }
