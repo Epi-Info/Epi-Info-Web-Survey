@@ -45,6 +45,7 @@
             </GroupBox>
             <Button Content="View Config" Height="28" HorizontalAlignment="Left" Margin="493,18,0,0" Name="ViewConfigButton" VerticalAlignment="Top" Width="86" Click="ViewConfigButton_Click" />
             <Button Content="Response Client" Height="27" HorizontalAlignment="Left" Margin="35,53,0,0" Name="ResponseClientbutton" Click="ResponseClient_Click" VerticalAlignment="Top" Width="117" />
+            <Button Content="Survey Controls" Height="27" HorizontalAlignment="Left" Margin="158,53,0,0" Name="SurveyControls" Click="SurveyControls_Click" VerticalAlignment="Top" Width="150" />
         </Grid>
     </ScrollViewer>
 </Page>
