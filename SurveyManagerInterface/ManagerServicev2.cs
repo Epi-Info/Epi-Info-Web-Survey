@@ -60,6 +60,7 @@ namespace Epi.Web.WCF.SurveyService
                 }
             catch (Exception ex)
                 {
+                SurveyControlsResponse.Message = "Error";
                 throw ex;
                 }
 
