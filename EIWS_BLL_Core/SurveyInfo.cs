@@ -190,11 +190,22 @@ namespace Epi.Web.BLL
         public Web.Common.Message.SurveyControlsResponse GetSurveyControlList(string SurveyId)
             {
             Web.Common.Message.SurveyControlsResponse SurveyControlsResponse = new Web.Common.Message.SurveyControlsResponse();
-            SurveyInfoBO SurveyInfoBO = new SurveyInfoBO(); 
-            SurveyInfoBO = GetSurveyInfoById(SurveyId);
+            if (!string.IsNullOrEmpty(SurveyId))
+                {
+            SurveyInfoBO SurveyInfoBO = new SurveyInfoBO();
+            try
+                {
+                SurveyInfoBO = GetSurveyInfoById(SurveyId);
+                }
+            catch(Exception ex)
+                {
+                SurveyControlsResponse.Message = "Survey doesn’t exist.";
+                
+                }
             List<Web.Common.DTO.SurveyControlDTO> SurveyControlList = new List<Web.Common.DTO.SurveyControlDTO>();
             SurveyControlList = GetSurveyControls(SurveyInfoBO);
             SurveyControlsResponse.SurveyControlList = SurveyControlList;
+                }
             return SurveyControlsResponse;
             }
         private List<Web.Common.DTO.SurveyControlDTO> GetSurveyControls(SurveyInfoBO SurveyInfoBO)
