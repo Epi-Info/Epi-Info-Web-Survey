@@ -13,6 +13,7 @@
     .logbody label { display:inline-block !important; width:70px; vertical-align:middle;}
     .logbody input { display:inline-block !important; width:100px; vertical-align:middle;}
     .logbody .ui-btn { display:inline-block !important; width: 80px; display:inline-block !important; margin:0px 10px; vertical-align:middle;}
+    #foothide {visibility:visible; display:block;}
 }
 
 @media screen and (min-width: 599px) and (max-width: 800px) 
@@ -24,6 +25,7 @@
     .ui-checkbox { width:80% !important;}
     .ui-controlgroup-label,label.ui-select  { width:80% !important;}
    /* .ui-disabled, .ui-disabled a { width: 80% !important;}*/
+   #foothide {visibility:visible; display:block;}
 }
 
 @media screen and (min-width: 800px) /*and (max-width: 1025px) */
@@ -37,4 +39,5 @@
     .ui-field-contain input.ui-input-text, .ui-field-contain textarea.ui-input-text, .ui-field-contain .ui-input-search { width: 60% !important;}
      a.ui-btn-icon-notext {float:right;}
      .ui-input-datebox {width:58% !important;}
+     #foothide {visibility:visible; display:block;}
 } 
