@@ -91,7 +91,7 @@ namespace MvcDynamicForms.Fields
 
         public override string RenderHtml()
         {
-            var inputName = _form.FieldPrefix + _key;
+            var inputName = _fieldPrefix + _key;
             var html = new StringBuilder();
             string ErrorStyle = string.Empty;
 
@@ -134,27 +134,21 @@ namespace MvcDynamicForms.Fields
             chk.Attributes.Add("style", ""+ ErrorStyle + ";" + IsHiddenStyle + ";" + IsHighlightedStyle);
 
             chk.MergeAttributes(_inputHtmlAttributes);
-            ////////////Check code start//////////////////
-            EnterRule FunctionObjectAfter = (EnterRule)_form.FormCheckCodeObj.GetCommand("level=field&event=after&identifier=" + _key);
+
             if (FunctionObjectAfter != null && !FunctionObjectAfter.IsNull())
             {
                 chk.Attributes.Add("onblur", "return " + _key + "_after(this.id);"); //After
             }
-            EnterRule FunctionObjectBefore = (EnterRule)_form.FormCheckCodeObj.GetCommand("level=field&event=before&identifier=" + _key);
+
             if (FunctionObjectBefore != null && !FunctionObjectBefore.IsNull())
             {
                 chk.Attributes.Add("onfocus", "return " + _key + "_before(this.id);"); //Before
             }
 
-
-            EnterRule FunctionObjectClick = (EnterRule)_form.FormCheckCodeObj.GetCommand("level=field&event=click&identifier=" + _key);
             if (FunctionObjectClick != null && !FunctionObjectClick.IsNull())
             {
                 chk.Attributes.Add("onclick", "return " + _key + "_click(this.id);");
             }
-
-
-
 
             ////////////Check code end//////////////////
             html.Append(chk.ToString(TagRenderMode.SelfClosing));

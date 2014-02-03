@@ -15,7 +15,7 @@ namespace MvcDynamicForms.Fields
         public override string RenderHtml() 
         {
             var html = new StringBuilder();
-            var inputName = _form.FieldPrefix + _key;
+            var inputName = _fieldPrefix + _key;
             string ErrorStyle = string.Empty;
             // prompt label
             var prompt = new TagBuilder("label");
@@ -42,9 +42,7 @@ namespace MvcDynamicForms.Fields
             txt.Attributes.Add("id", inputName);
             txt.Attributes.Add("type", "text");
             txt.Attributes.Add("value", Value);
-            ////////////Check code start//////////////////
-            EnterRule FunctionObjectAfter = (EnterRule)_form.FormCheckCodeObj.GetCommand("level=field&event=after&identifier=" + _key);
-            //if Pattern is empty and the control has after event then treat it like a text box
+
             if (string.IsNullOrEmpty(Pattern))
             {
                 if (FunctionObjectAfter != null && !FunctionObjectAfter.IsNull())
@@ -52,13 +50,11 @@ namespace MvcDynamicForms.Fields
                     txt.Attributes.Add("onblur", "return " + _key + "_after();"); //After
                 }
             }
-            EnterRule FunctionObjectBefore = (EnterRule)_form.FormCheckCodeObj.GetCommand("level=field&event=before&identifier=" + _key);
+
             if (FunctionObjectBefore != null && !FunctionObjectBefore.IsNull())
             {
                 txt.Attributes.Add("onfocus", "return " + _key + "_before();"); //Before
             }
-
-            ////////////Check code end//////////////////
 
             if (_MaxLength.ToString() != "0" && !string.IsNullOrEmpty(_MaxLength.ToString()))
             {

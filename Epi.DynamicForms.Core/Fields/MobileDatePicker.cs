@@ -15,7 +15,7 @@ namespace MvcDynamicForms.Fields
         public override string RenderHtml()
         {
             var html = new StringBuilder();
-            var inputName = _form.FieldPrefix + _key;
+            var inputName = _fieldPrefix + _key;
             string ErrorStyle = string.Empty;
             // prompt label
             var prompt = new TagBuilder("label");
@@ -44,22 +44,17 @@ namespace MvcDynamicForms.Fields
             txt.Attributes.Add("Theme", "b");
             txt.Attributes.Add("data-role", "datebox");
             txt.Attributes.Add("data-options", "{\"mode\": \"datebox\", \"pickPageButtonTheme\": \"e\", \"pickPageInputTheme\":\"e\", \"pickPageFlipButtonTheme\":\"a\", \"pickPageTheme\":\"e\" ,  \"useNewStyle\":true}");
-            txt.Attributes.Add("value", Value);
-            ////////////Check code start//////////////////
-            EnterRule FunctionObjectAfter = (EnterRule)_form.FormCheckCodeObj.GetCommand("level=field&event=after&identifier=" + _key);
+            txt.Attributes.Add("value", Response);
+
             if (FunctionObjectAfter != null && !FunctionObjectAfter.IsNull())
             {
-                //txt.Attributes.Add("onblur", "return " + _key + "_after();"); //After
                 txt.Attributes.Add("onchange", "return " + _key + "_after();"); //After
             }
-            EnterRule FunctionObjectBefore = (EnterRule)_form.FormCheckCodeObj.GetCommand("level=field&event=before&identifier=" + _key);
+
             if (FunctionObjectBefore != null && !FunctionObjectBefore.IsNull())
             {
                 txt.Attributes.Add("onfocus", "return " + _key + "_before(this.id);"); //Before
             }
-
-          //  txt.Attributes.Add("onchange", "return this.focus();"); //After
-            ////////////Check code end//////////////////
 
             if (_MaxLength.ToString() != "0" && !string.IsNullOrEmpty(_MaxLength.ToString()))
             {
@@ -80,7 +75,7 @@ namespace MvcDynamicForms.Fields
             {
                 txt.Attributes.Add("disabled", "disabled");
             }
-            txt.Attributes.Add("class", GetControlClass(Value));
+            txt.Attributes.Add("class", GetControlClass(Response));
             txt.Attributes.Add("data-prompt-position", "topLeft:15");
             //txt.Attributes.Add("style", "position:absolute;left:" + _left.ToString() + "px;top:" + _top.ToString() + "px" + ";width:" + _ControlWidth.ToString() + "px" + ErrorStyle + ";" + IsHiddenStyle + ";" + IsHighlightedStyle);
 

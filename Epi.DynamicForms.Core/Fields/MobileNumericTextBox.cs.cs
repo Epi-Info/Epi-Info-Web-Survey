@@ -17,7 +17,7 @@ namespace MvcDynamicForms.Fields
         public override string RenderHtml()
         {
             var html = new StringBuilder();
-            var inputName = _form.FieldPrefix + _key;
+            var inputName = _fieldPrefix + _key;
             string ErrorStyle = string.Empty;
             // prompt label
             var prompt = new TagBuilder("label");
@@ -68,23 +68,17 @@ namespace MvcDynamicForms.Fields
                 txt.Attributes.Add("disabled", "disabled");
             }
 
-
-
-            // txt.Attributes.Add("value", Value);
-            ////////////Check code start//////////////////
-            EnterRule FunctionObjectAfter = (EnterRule)_form.FormCheckCodeObj.GetCommand("level=field&event=after&identifier=" + _key);
             if (FunctionObjectAfter != null && !FunctionObjectAfter.IsNull())
             {
                 txt.Attributes.Add("onblur", "return " + _key + "_after(this.id);"); //After
             }
-            EnterRule FunctionObjectBefore = (EnterRule)_form.FormCheckCodeObj.GetCommand("level=field&event=before&identifier=" + _key);
+
             if (FunctionObjectBefore != null && !FunctionObjectBefore.IsNull())
             {
                 txt.Attributes.Add("onfocus", "return " + _key + "_before(this.id);"); //Before
             }
 
-            ////////////Check code end//////////////////
-            txt.Attributes.Add("value", Value);
+            txt.Attributes.Add("value", Response);
             txt.Attributes.Add("class", GetControlClass());
             txt.Attributes.Add("data-prompt-position", "topLeft:15");
             //txt.Attributes.Add("style", "position:absolute "+  ";color:#111; background-color:white ;width:" + _ControlWidth.ToString() + "px" + ErrorStyle + ";" + IsHiddenStyle + ";" + IsHighlightedStyle);

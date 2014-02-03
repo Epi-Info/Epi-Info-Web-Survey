@@ -32,7 +32,7 @@ namespace MvcDynamicForms.Fields
         public override string RenderHtml()
         {
             var html = new StringBuilder();
-            var inputName = _form.FieldPrefix + _key;
+            var inputName = _fieldPrefix + _key;
             var choicesList = _choices.ToList();
             var choicesList1 = GetChoices(_choicesList);
             choicesList = choicesList1.ToList();
@@ -102,14 +102,10 @@ namespace MvcDynamicForms.Fields
                 radioTag.Attributes.Add("name", inputName);
                 radioTag.Attributes.Add("class", inputName);
 
-                ////////////Check code start//////////////////
-                EnterRule FunctionObjectAfter = (EnterRule)_form.FormCheckCodeObj.GetCommand("level=field&event=after&identifier=" + _key);
-
                 if (FunctionObjectAfter != null && !FunctionObjectAfter.IsNull())
                 {
                     radioTag.Attributes.Add("onclick", "return " + _key + "_after();"); 
                 }
-                ////////////Check code end//////////////////
 
                 radioTag.SetInnerText(choicesList[i].Key);
                 radioTag.Attributes.Add("value", i.ToString());

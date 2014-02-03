@@ -59,7 +59,7 @@ namespace MvcDynamicForms.Fields
         {
             var html = new StringBuilder();
 
-            var inputName = _form.FieldPrefix + _key;
+            var inputName = _fieldPrefix + _key;
             string ErrorStyle = string.Empty;
             
             // prompt
@@ -83,47 +83,35 @@ namespace MvcDynamicForms.Fields
             prompt.Attributes.Add("style", StyleValues.ToString());
             html.Append(prompt.ToString());
 
-            // error label
             if (!IsValid)
             {
-                //Add new Error to the error Obj
-
                 ErrorStyle = ";border-color: red";
-             
             }
 
-            // open select element
             var select = new TagBuilder("select");
             select.Attributes.Add("id", inputName);
             select.Attributes.Add("name", inputName);
-            ////////////Check code start//////////////////
-            EnterRule FunctionObjectAfter = (EnterRule)_form.FormCheckCodeObj.GetCommand("level=field&event=after&identifier=" + _key);
+
             if (FunctionObjectAfter != null && !FunctionObjectAfter.IsNull())
             {
-
-              //  select.Attributes.Add("onblur", "return " + _key + "_after();"); //After
                 select.Attributes.Add("onchange", "return " + _key + "_after();"); //After
             }
-            EnterRule FunctionObjectBefore = (EnterRule)_form.FormCheckCodeObj.GetCommand("level=field&event=before&identifier=" + _key);
+
             if (FunctionObjectBefore != null && !FunctionObjectBefore.IsNull())
             {
-
                 select.Attributes.Add("onfocus", "return " + _key + "_before();"); //Before
             }
 
-            ////////////Check code end//////////////////
             int LargestChoiseLength =0 ;
             string measureString = "";
-            foreach (var choise in _choices) {
-
+            
+            foreach (var choise in _choices) 
+            {
                 if (choise.Key.ToString().Length > LargestChoiseLength) 
-             {
-                 LargestChoiseLength = choise.Key.ToString().Length;
-
-                 measureString = choise.Key.ToString();
-             } 
-            
-            
+                {
+                    LargestChoiseLength = choise.Key.ToString().Length;
+                    measureString = choise.Key.ToString();
+                } 
             }
 
            // LargestChoiseLength = LargestChoiseLength * _ControlFontSize;

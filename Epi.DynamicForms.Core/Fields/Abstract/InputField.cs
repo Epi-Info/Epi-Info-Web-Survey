@@ -17,7 +17,7 @@ namespace MvcDynamicForms.Fields
         protected double _PromptWidth;
         protected double _ControlWidth;
         protected double _ControlHeight;
-        protected string _key = Guid.NewGuid().ToString();
+
         protected string _requiredMessage = "Required";
         protected string _promptClass = "MvcDynamicFieldPrompt";
         protected string _errorClass = "MvcDynamicFieldError";
@@ -29,20 +29,8 @@ namespace MvcDynamicForms.Fields
         protected string _InputFieldfontfamily;
 
         protected Dictionary<string, string> _inputHtmlAttributes = new Dictionary<string, string>();
-        /// <summary>
-        /// Used to identify each InputField when performing model binding.
-        /// </summary>
-        public string Key
-        {
-            get
-            {
-                return _key;
-            }
-            set
-            {
-                _key = value.ToLower();
-            }
-        }
+
+        
         /// <summary>
         /// Used to identify InputFields when working with end users' responses.
         /// </summary>
@@ -68,7 +56,7 @@ namespace MvcDynamicForms.Fields
         /// <summary>
         /// String representing the user's response to the field.
         /// </summary>
-        public abstract string Response { get; set; }
+        public virtual string Response { get; set; }
         /// <summary>
         /// Whether the field must be completed to be valid.
         /// </summary>

@@ -15,6 +15,7 @@ namespace MvcDynamicForms.Fields
         protected string _responseDelimiter = ", ";
         protected float _ControlFontSize;
         protected string _ControlFontStyle;
+        private string _selectedValue = string.Empty;
         
         /// <summary>
         /// The choices that the end user can choose from.
@@ -223,6 +224,17 @@ namespace MvcDynamicForms.Fields
                 .ToList()
                 .ForEach(c => _choices.Add(c, false));
         }
-        public string SelectedValue{ get;set;}
+
+        public string SelectedValue
+        {
+            get
+            {
+                return _selectedValue;
+            }
+            set
+            {
+                _selectedValue = value;
+            }
+        }
     }
 }
