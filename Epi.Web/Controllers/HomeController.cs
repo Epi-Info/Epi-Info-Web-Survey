@@ -118,16 +118,20 @@ namespace Epi.Web.MVC.Controllers
                 
                 FormsAuthentication.SetAuthCookie("BeginSurvey", false);
 
-               
+                string ResponseID = string.Empty;
+                object tempDataValue;
 
-                string ResponseID = TempData[Epi.Web.MVC.Constants.Constant.RESPONSE_ID].ToString();
+                if (TempData.TryGetValue(Epi.Web.MVC.Constants.Constant.RESPONSE_ID, out tempDataValue))
+                {
+                    ResponseID = (string)tempDataValue;
+                }
+                else
+                {
 
-                // create the first survey response
+                }
+
                 Epi.Web.Common.DTO.SurveyAnswerDTO SurveyAnswer = _isurveyFacade.CreateSurveyAnswer(surveyModel.SurveyId, ResponseID.ToString());
-
-
                 
-                // Pass Code Logic  start 
                 Epi.Web.Common.Message.UserAuthenticationResponse AuthenticationResponse = _isurveyFacade.GetAuthenticationResponse(ResponseID.ToString());
 
                 string strPassCode = Epi.Web.MVC.Utility.SurveyHelper.GetPassCode();

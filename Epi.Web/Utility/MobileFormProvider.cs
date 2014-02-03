@@ -472,7 +472,7 @@ namespace Epi.Web.MVC.Utility
                  MobileNumericTextBox.IsReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value);
                  MobileNumericTextBox.Lower = _FieldTypeID.Attribute("Lower").Value;
                  MobileNumericTextBox.Upper = _FieldTypeID.Attribute("Upper").Value;
-                 MobileNumericTextBox.Value = _ControlValue;
+                 MobileNumericTextBox.Response = _ControlValue;
                  MobileNumericTextBox.IsHidden = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "HiddenFieldsList");
                  MobileNumericTextBox.IsHighlighted = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "HighlightedFieldsList");
                  MobileNumericTextBox.IsDisabled = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "DisabledFieldsList");
@@ -535,7 +535,7 @@ namespace Epi.Web.MVC.Utility
                 IsHidden = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "HiddenFieldsList"),
                 IsHighlighted = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "HighlightedFieldsList"),
                 IsDisabled = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "DisabledFieldsList"),
-                Value = _ControlValue
+                Response = _ControlValue
 
 
             };
@@ -570,7 +570,7 @@ namespace Epi.Web.MVC.Utility
                 IsPlaceHolder = true,
                 //IsHighlighted = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "HighlightedFieldsList"),
                 //IsDisabled = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "DisabledFieldsList"),
-                Value = _ControlValue
+                Response = _ControlValue
 
 
 
@@ -608,7 +608,7 @@ namespace Epi.Web.MVC.Utility
                   TextBox.IsHidden = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "HiddenFieldsList");
                   TextBox.IsHighlighted = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "HighlightedFieldsList");
                   TextBox.IsDisabled = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "DisabledFieldsList");
-                  TextBox.Value = _ControlValue;
+                  TextBox.Response = _ControlValue;
 
 
 
@@ -676,7 +676,7 @@ namespace Epi.Web.MVC.Utility
                 IsReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value),
                 Lower = _FieldTypeID.Attribute("Lower").Value,
                 Upper = _FieldTypeID.Attribute("Upper").Value,
-                Value = _ControlValue,
+                Response = _ControlValue,
                 IsHidden = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "HiddenFieldsList"),
                 IsHighlighted = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "HighlightedFieldsList"),
                 IsDisabled = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "DisabledFieldsList"),

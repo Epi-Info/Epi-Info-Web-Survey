@@ -15,7 +15,7 @@ namespace MvcDynamicForms.Fields
         public override string RenderHtml()
         {
             var html = new StringBuilder();
-            var inputName = _form.FieldPrefix + _key;
+            var inputName = _fieldPrefix + _key;
             string ErrorStyle = string.Empty;
             // prompt label
             var prompt = new TagBuilder("label");
@@ -41,21 +41,13 @@ namespace MvcDynamicForms.Fields
             txt.Attributes.Add("name", inputName);
             txt.Attributes.Add("id", inputName);
             txt.Attributes.Add("type", "text");
-            txt.Attributes.Add("value", Value);
-            ////////////Check code start//////////////////
-            EnterRule FunctionObjectAfter = (EnterRule)_form.FormCheckCodeObj.GetCommand("level=field&event=after&identifier=" + _key);
-            //if (FunctionObjectAfter != null && !FunctionObjectAfter.IsNull())
-            //{ 
-                //txt.Attributes.Add("onblur", "return " + _key + "_after();"); //After
-            //}
-            EnterRule FunctionObjectBefore = (EnterRule)_form.FormCheckCodeObj.GetCommand("level=field&event=before&identifier=" + _key);
+            txt.Attributes.Add("value", Response);
+
             if (FunctionObjectBefore != null && !FunctionObjectBefore.IsNull())
             { 
                 txt.Attributes.Add("onfocus", "return " + _key + "_before();"); //Before
             }
-
-            ////////////Check code end//////////////////
-            
+                       
             if (_MaxLength.ToString() != "0" && !string.IsNullOrEmpty(_MaxLength.ToString()))
             {
                 txt.Attributes.Add("MaxLength", _MaxLength.ToString());
@@ -75,7 +67,7 @@ namespace MvcDynamicForms.Fields
             {
                 txt.Attributes.Add("disabled", "disabled");
             }
-            txt.Attributes.Add("class", GetControlClass(Value));
+            txt.Attributes.Add("class", GetControlClass(Response));
 
             string InputFieldStyle = GetInputFieldStyle(_InputFieldfontstyle.ToString(), _InputFieldfontSize, _InputFieldfontfamily.ToString());
             txt.Attributes.Add("style", "position:absolute;left:" + _left.ToString() + "px;top:" + _top.ToString() + "px" + ";width:" + _ControlWidth.ToString() + "px" + ErrorStyle + ";" + IsHiddenStyle + ";" + IsHighlightedStyle + ";" + InputFieldStyle);            

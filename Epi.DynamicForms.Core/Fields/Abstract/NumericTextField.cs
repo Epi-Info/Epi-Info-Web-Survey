@@ -33,14 +33,6 @@ namespace MvcDynamicForms.Fields
                 _regexMessage = value;
             }
         }
-       public string Value { get; set; }
-        //public string Value { get { return _Value; } set { _Value = value; } }
-        public override string Response
-        {
-            get { return Value; }
-            set { Value = value; }
-             
-        }
 
         //Declaring the min value for decimal
         private string _lower;
@@ -109,7 +101,7 @@ namespace MvcDynamicForms.Fields
                 //if (!regex.IsMatch(Value))
                 
                 double testValue = 0.0;
-                if(!double.TryParse(Value, out testValue))
+                if(!double.TryParse(Response, out testValue))
                 {
                     //invalid: it is not numeric
                     Error = "Value must be a number";
@@ -123,7 +115,7 @@ namespace MvcDynamicForms.Fields
                     if ((!string.IsNullOrEmpty(Lower)) && (!string.IsNullOrEmpty(Upper)))
                     {
                         //if the number is either less than the lower limit or greater than the upper limit raise error
-                        if ((decimal.Parse(Value) < decimal.Parse(Lower)) || (decimal.Parse(Value) > decimal.Parse(Upper)))
+                        if ((decimal.Parse(Response) < decimal.Parse(Lower)) || (decimal.Parse(Response) > decimal.Parse(Upper)))
                         {
                             Error = string.Format("Number must be in between {0} and {1}", Lower, Upper);
                             return false;
@@ -131,13 +123,13 @@ namespace MvcDynamicForms.Fields
                     }
 
                     //invalid: checking for lower limit
-                    if ((!string.IsNullOrEmpty(Lower)) && (decimal.Parse(Value) < decimal.Parse(Lower)))
+                    if ((!string.IsNullOrEmpty(Lower)) && (decimal.Parse(Response) < decimal.Parse(Lower)))
                     {
                         Error = string.Format("Number can not be less than {0}", Lower);
                         return false;
                     }
                     //invalid: checking the upper limit 
-                    if ((!string.IsNullOrEmpty(Upper)) && (decimal.Parse(Value) > decimal.Parse(Upper)))
+                    if ((!string.IsNullOrEmpty(Upper)) && (decimal.Parse(Response) > decimal.Parse(Upper)))
                     {
                         Error = string.Format("Number can not be greater than {0}", Upper);
                         return false;

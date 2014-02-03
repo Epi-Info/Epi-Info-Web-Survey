@@ -34,17 +34,6 @@ namespace MvcDynamicForms.Fields
             }
         }
 
-        public  string Value{ get; set; }
-
-        public override string Response
-        {
-            get { return Value; }
-            set
-            {
-              Value = value;   
-            }
-        }
-
         public override bool Validate()
         {
             /*If readonly don't perform any validation check and make required = false and validate = true*/
@@ -54,6 +43,7 @@ namespace MvcDynamicForms.Fields
                 ClearError();
                 return true;
             }
+
             if (string.IsNullOrEmpty(Response))
             {
                 if (Required)
@@ -68,22 +58,19 @@ namespace MvcDynamicForms.Fields
                 if (!string.IsNullOrEmpty(RegularExpression))
                 {
                     var regex = new Regex(RegularExpression);
-                    if (!regex.IsMatch(Value))
+                    if (!regex.IsMatch(Response))
                     {
-                        // invalid: has regex and response doesn't match
                         Error = RegexMessage;
                         return false;
                     }
                 }
             }
 
-            // is valid
             ClearError();
             return true;
         }
         public override string GetXML()
         {
-
             string XML ="<ResponseDetail QuestionId='"+_key + "'>" + Response +"<ResponseDetail>";
             return XML;
         }

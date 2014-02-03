@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using MvcDynamicForms.Fields;
 using MvcDynamicForms.Utilities;
 using System.Xml.Linq;
+using Epi.Web.Common;
 using Epi.Web.Common.DTO; 
 using Epi.Core.EnterInterpreter;
 
@@ -18,10 +19,11 @@ namespace MvcDynamicForms
     [ModelBinder(typeof(DynamicFormModelBinder))]
     public class Form : ICloneable
     {
-        private string _formWrapper = "div";
-        private string _formWrapperClass = "MvcDynamicForm";
-        private string _fieldPrefix = "MvcDynamicField_";
-        private FieldList _fields;
+        private string _formWrapper = Constant.WRAPPER;
+        private string _formWrapperClass = Constant.FORMWRAPPERCLASS;
+        private string _fieldPrefix = Constant.FIELDPREFIX;
+
+        private Dictionary<string, Field> _fields;
         private SurveyInfoDTO _SurveyInfo;
         private string _PageId = "";
         public double Width { get; set; }
@@ -58,16 +60,15 @@ namespace MvcDynamicForms
                 _formWrapperClass = value;
             }
         }
-        /// <summary>
-        /// A collection of Field objects.
-        /// </summary>
-        public FieldList Fields
+
+        public Dictionary<string, Field> Fields
         {
             get
             {
                 return _fields;
             }
         }
+
         /// <summary>
         /// Gets or sets the string that is used to prefix html input elements' id and name attributes.
         /// </summary>
@@ -93,13 +94,13 @@ namespace MvcDynamicForms
         {
             get
             {
-                return _fields.OfType<InputField>();
+                return _fields.Values.OfType<InputField>();
             }
         }
         
         public Form()
         {
-            _fields = new FieldList(this);
+            _fields = new Dictionary<string, Field>();
         }
 
         public object Clone()
@@ -114,7 +115,6 @@ namespace MvcDynamicForms
         public bool Validate(string RequiredFieldsList = "" )
         {
             bool isValid = true;
-           
              
             foreach (var field in InputFields)
             {
@@ -122,6 +122,7 @@ namespace MvcDynamicForms
                 {
                     var RequiredList = RequiredFieldsList.Split(',');
                     bool _Required = false;
+
                     foreach (var item in RequiredList)
                     {
                         if (item == field.Key.ToString())
@@ -137,22 +138,22 @@ namespace MvcDynamicForms
                     }
                     else
                     {
-
                         field.Required = false;
                     }
                 }
-                else {
+                else 
+                {
                     field.Required = false;
                 }
-              if (!field.Validate())
-              {
-                  isValid = false;
-              }
+              
+                if (!field.Validate())
+                {
+                    isValid = false;
+                }
             }
+            
             return isValid;
         }
-
-
         
         /// <summary>
         /// Returns a string containing the rendered html of every contained Field object. The html can optionally include the Form object's state serialized into a hidden field.
@@ -162,24 +163,29 @@ namespace MvcDynamicForms
         public string RenderHtml(bool formatHtml)
         {
             var formWrapper = new TagBuilder(_formWrapper);
+            
             if (IsMobile)
             {
-            formWrapper.Attributes.Add("style",  "width:auto;height:auto;");
-            formWrapper.Attributes.Add("data-role", "fieldcontain");
-            formWrapper.Attributes.Add("data-ajax", "false");
+                formWrapper.Attributes.Add("style",  "width:auto;height:auto;");
+                formWrapper.Attributes.Add("data-role", "fieldcontain");
+                formWrapper.Attributes.Add("data-ajax", "false");
             }
-            else{
-             formWrapper.Attributes.Add("style", string.Format("width:{0}px;height:{1}px;", this.Width,this.Height + 100));
+            else
+            {
+                formWrapper.Attributes.Add("style", string.Format("width:{0}px;height:{1}px;", this.Width, this.Height + 100));
             }
+            
             formWrapper.Attributes["class"] = _formWrapperClass;
-            var html = new StringBuilder(formWrapper.ToString(TagRenderMode.StartTag));
+            StringBuilder html = new StringBuilder(formWrapper.ToString(TagRenderMode.StartTag));
 
-            foreach (var field in _fields.OrderBy(x => x.DisplayOrder))
+            foreach (Field field in _fields.Values.OrderBy(x => x.DisplayOrder))
+            { 
                 html.Append(field.RenderHtml());
+            }
 
             if (Serialize)
             {
-                var hdn = new TagBuilder("input");
+                TagBuilder hdn = new TagBuilder("input");
                 hdn.Attributes["type"] = "hidden";
                 hdn.Attributes["id"] = MagicStrings.MvcDynamicSerializedForm;
                 hdn.Attributes["name"] = MagicStrings.MvcDynamicSerializedForm;
@@ -188,27 +194,8 @@ namespace MvcDynamicForms
             }
 
             html.Append(formWrapper.ToString(TagRenderMode.EndTag));
-
             return html.ToString();
-
-            /*
-            if (formatHtml)
-            {
-                try
-                {
-                    var xml = XDocument.Parse(html.ToString());
-                    return xml.ToString();
-                }
-                catch (Exception ex)
-                {
-                    return html.ToString();
-                }
-            }
-
-            return html.ToString();*/
         }
-
-
 
         /// <summary>
         /// Returns a string containing the rendered html of every contained Field object. The html can optionally include the Form object's state serialized into a hidden field.
@@ -235,7 +222,7 @@ namespace MvcDynamicForms
         {
             foreach (var field in fields)
             {
-                _fields.Add(field);
+                _fields.Add(field.Name, field);
             }
         }
 
