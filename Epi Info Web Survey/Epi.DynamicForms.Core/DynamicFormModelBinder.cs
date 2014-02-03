@@ -29,19 +29,19 @@ namespace MvcDynamicForms
                         if (dynField is TextField)
                         {
                             var txtField = (TextField)dynField;
-                            txtField.Value = postedForm[key];
+                            txtField.Response = postedForm[key];
                         }
 
                         else if (dynField is NumericTextField)
                         {
                             var numerictxtField = (NumericTextField)dynField;
-                            numerictxtField.Value = postedForm[key];
+                            numerictxtField.Response = postedForm[key];
                         }
 
                         else if (dynField is DatePickerField)
                         {
                             var datepickerField = (DatePickerField)dynField;
-                            datepickerField.Value = postedForm[key];
+                            datepickerField.Response = postedForm[key];
                         }
                         else if (dynField is TimePickerField)
                         {

@@ -25,9 +25,13 @@ namespace Epi.Web.MVC.Utility
         /// <param name="surveyAnswerDTO"></param>
         /// <param name="surveyResponseXML"></param>
         /// <param name="iSurveyAnswerRepository"></param>
-        public static Epi.Web.Common.DTO.SurveyAnswerDTO CreateSurveyResponse(string surveyId, string responseId, SurveyAnswerRequest surveyAnswerRequest,
-                                          Common.DTO.SurveyAnswerDTO surveyAnswerDTO,
-                                          SurveyResponseXML surveyResponseXML, ISurveyAnswerRepository iSurveyAnswerRepository)
+        public static Epi.Web.Common.DTO.SurveyAnswerDTO CreateSurveyResponse(
+            string surveyId, 
+            string responseId, 
+            SurveyAnswerRequest surveyAnswerRequest,
+            Common.DTO.SurveyAnswerDTO surveyAnswerDTO,
+            SurveyResponseXML surveyResponseXML, 
+            ISurveyAnswerRepository iSurveyAnswerRepository)
         {
             bool AddRoot = false;
             surveyAnswerRequest.Criteria.SurveyAnswerIdList.Add(responseId.ToString());
@@ -44,10 +48,18 @@ namespace Epi.Web.MVC.Utility
             return surveyAnswerDTO;
         }
 
-        public static void UpdateSurveyResponse(SurveyInfoModel surveyInfoModel,MvcDynamicForms.Form form, SurveyAnswerRequest surveyAnswerRequest,
-                                                             SurveyResponseXML surveyResponseXML,
-                                                            ISurveyAnswerRepository iSurveyAnswerRepository,
-                                                             SurveyAnswerResponse surveyAnswerResponse, string responseId, Epi.Web.Common.DTO.SurveyAnswerDTO surveyAnswerDTO, bool IsSubmited, bool IsSaved,int  PageNumber)
+        public static void UpdateSurveyResponse(
+            SurveyInfoModel surveyInfoModel,
+            MvcDynamicForms.Form form, 
+            SurveyAnswerRequest surveyAnswerRequest,
+            SurveyResponseXML surveyResponseXML,
+            ISurveyAnswerRepository iSurveyAnswerRepository,
+            SurveyAnswerResponse surveyAnswerResponse, 
+            string responseId, 
+            Epi.Web.Common.DTO.SurveyAnswerDTO surveyAnswerDTO, 
+            bool IsSubmited, 
+            bool IsSaved,
+            int  PageNumber)
         {
             // 1 Get the record for the current survey response
             // 2 update the current survey response

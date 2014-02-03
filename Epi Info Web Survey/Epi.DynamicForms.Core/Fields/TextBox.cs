@@ -16,7 +16,7 @@ namespace MvcDynamicForms.Fields
         public override string RenderHtml()
         {
             var html = new StringBuilder();
-            var inputName = _form.FieldPrefix + _key;
+            var inputName = _fieldPrefix + _key;
             string ErrorStyle = string.Empty;
             var prompt = new TagBuilder("label");
             
@@ -38,21 +38,18 @@ namespace MvcDynamicForms.Fields
             txt.Attributes.Add("name", inputName);
             txt.Attributes.Add("id", inputName);
             txt.Attributes.Add("type", "text");
-            
-            EnterRule FunctionObjectAfter = (EnterRule)_form.FormCheckCodeObj.GetCommand("level=field&event=after&identifier=" + _key);
-            if (FunctionObjectAfter != null && !FunctionObjectAfter.IsNull() )
+
+            if (FunctionObjectAfter != null && !FunctionObjectAfter.IsNull())
             {
                 txt.Attributes.Add("onblur", "return " + _key + "_after();"); //After
             }
 
-            EnterRule FunctionObjectBefore = (EnterRule)_form.FormCheckCodeObj.GetCommand("level=field&event=before&identifier=" + _key);
             if (FunctionObjectBefore != null && !FunctionObjectBefore.IsNull())
             {
-                    
                 txt.Attributes.Add("onfocus", "return "+ _key + "_before();"); //Before
             }
-           
-            txt.Attributes.Add("value", Value);
+
+            txt.Attributes.Add("value", Response);
             txt.Attributes.Add("class", GetControlClass());
 
             if(_IsRequired)

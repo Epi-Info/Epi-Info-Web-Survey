@@ -59,7 +59,7 @@ namespace MvcDynamicForms.Fields
         {
             var html = new StringBuilder();
 
-            var inputName = _form.FieldPrefix + _key;
+            var inputName = _fieldPrefix + _key;
             string ErrorStyle = string.Empty;
 
 
@@ -106,39 +106,27 @@ namespace MvcDynamicForms.Fields
             var select = new TagBuilder("select");
             select.Attributes.Add("id", inputName);
             select.Attributes.Add("name", inputName);
-            //select.Attributes.Add("data-mini", "true");
-            ////////////Check code start//////////////////
-            EnterRule FunctionObjectAfter = (EnterRule)_form.FormCheckCodeObj.GetCommand("level=field&event=after&identifier=" + _key);
+
             if (FunctionObjectAfter != null && !FunctionObjectAfter.IsNull())
             {
-
                 select.Attributes.Add("onchange", "return " + _key + "_after(this.id);"); //After
             }
-            EnterRule FunctionObjectBefore = (EnterRule)_form.FormCheckCodeObj.GetCommand("level=field&event=before&identifier=" + _key);
+
             if (FunctionObjectBefore != null && !FunctionObjectBefore.IsNull())
             {
-
                 select.Attributes.Add("onfocus", "return " + _key + "_before(this.id);"); //Before
             }
 
-            ////////////Check code end//////////////////
             int LargestChoiseLength = 0;
             string measureString = "";
             foreach (var choise in _choices)
             {
-
                 if (choise.Key.ToString().Length > LargestChoiseLength)
                 {
                     LargestChoiseLength = choise.Key.ToString().Length;
-
                     measureString = choise.Key.ToString();
                 }
-
-
             }
-
-            // LargestChoiseLength = LargestChoiseLength * _ControlFontSize;
-
             Font stringFont = new Font(ControlFontStyle, _ControlFontSize);
 
             SizeF size = new SizeF();

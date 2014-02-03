@@ -33,7 +33,7 @@ namespace MvcDynamicForms.Fields
         public override string RenderHtml()
         {
             var html = new StringBuilder();
-            var inputName = _form.FieldPrefix + _key;
+            var inputName = _fieldPrefix + _key;
             var choicesList = _choices.ToList();
          
             var choicesList1 = GetChoices(_ChoicesList);
@@ -103,25 +103,14 @@ namespace MvcDynamicForms.Fields
                 rad.Attributes.Add("class", inputName);
                 rad.Attributes.Add("id", radId);
                 
-                //StringBuilder RadioButton = new StringBuilder();
-                //RadioButton.Append("<input type='Radio'");
-                //RadioButton.Append(" name='" + inputName + "'");
-                //RadioButton.Append(" id='" + radId + "'/>");
-
-                
-                ////////////Check code start//////////////////
-                EnterRule FunctionObjectAfter = (EnterRule)_form.FormCheckCodeObj.GetCommand("level=field&event=after&identifier=" + _key);
                 if (FunctionObjectAfter != null && !FunctionObjectAfter.IsNull())
                 {
-
-                    // rad.Attributes.Add("onblur", "return " + _key + "_after();"); //After
                     rad.Attributes.Add("onclick", "return " + _key + "_after(this.id);"); //After
                 }
 
-                ////////////Check code end//////////////////
                 rad.SetInnerText(choicesList[i].Key);
                 rad.Attributes.Add("value", i.ToString());
-               // rad.Attributes.Add("style", IsHiddenStyle);
+
                 if (_IsDisabled)
                 {
                     rad.Attributes.Add("disabled", "disabled");

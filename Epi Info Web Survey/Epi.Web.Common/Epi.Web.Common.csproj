@@ -71,6 +71,7 @@
     <Compile Include="BusinessRule\ValidateRequired.cs" />
     <Compile Include="BusinessRule\ValidationDataType.cs" />
     <Compile Include="BusinessRule\ValidationOperator.cs" />
+    <Compile Include="Constant.cs" />
     <Compile Include="Criteria\CacheDependencyCriteria.cs" />
     <Compile Include="Criteria\OrganizationCriteria.cs" />
     <Compile Include="Criteria\SurveyAnswerCriteria.cs" />
