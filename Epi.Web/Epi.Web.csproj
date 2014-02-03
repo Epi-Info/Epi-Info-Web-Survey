@@ -218,6 +218,7 @@
     <Content Include="bin\Unity.Mvc3.dll" />
     <Content Include="bin\WebGrease.dll" />
     <Content Include="Content\css\demos.css" />
+    <Content Include="Content\css\epistyle-blue.css" />
     <Content Include="Content\css\epistyle.css" />
     <Content Include="Content\css\images\check.gif" />
     <Content Include="Content\css\images\ui-bg_flat_0_aaaaaa_40x100.png" />
@@ -243,6 +244,7 @@
     <Content Include="Content\css\jquery.ui.core.css" />
     <Content Include="Content\css\jquery.ui.dialog.css" />
     <Content Include="Content\css\jquery.ui.theme.css" />
+    <Content Include="Content\css\mobile-epistyle-blue.css" />
     <Content Include="Content\css\MobileEpiStyle.css" />
     <Content Include="Content\css\MobilePage.css" />
     <Content Include="Content\css\overlay.png" />

@@ -188,7 +188,7 @@ clear:both;
 #footleft
  {
  float:left;
- width: 40%;
+ width: 42%;
  }
 
 #footright
@@ -716,7 +716,10 @@ span.ui-icon-radio-on[style*="background-color: yellow;"]{background-color: #428
 {
      background-image: none !important;
 }
-
+#foothide {visibility:collapse; display:none;}
+#version {display:block !important;}
+#version span{display: none;}
+#version:before {content: 'V ';}
 /*#header h1:after
 {
     content:"DRAFT";
