@@ -204,6 +204,7 @@ bottom: 100px;
  {
  float: right;
  /**/margin-right: 10px;
+ margin-top:-3px;
  }
 
 button.exitsurvey:hover,  button.save:hover, button.prev:hover, button.next:hover, button.begin:hover, button.submits:hover, button.login:hover, a.returnto:hover
@@ -743,3 +744,10 @@ button.dialogbtn
  
 /* .ui-priority-secondary { opacity: 1.0 !important; font-weight: bold !important;}
  button.ui-state-default { color:#1c94c4 !important;}*/
+/*input[type=text]:focus, textarea:focus, select:focus{ border: 1px solid rgba(255, 216, 81, 43) !important; outline: 1px solid rgba(255, 216, 81, 43) !important; background-color: #ffffce;}
+input[type=checkbox]:focus, input[type=radio]:focus  { outline:2px solid rgba(255, 216, 81, 43) !important; background-color: #ffffce;}
+input[type=checkbox]:checked{background-color: #ffffce;}
+input[type="checkbox"] { min-width:13px !important;}
+
+input[type=text]:disabled, textarea:disabled, select:disabled { color:#808080; background-color:#c5c5c5; }*/
+
