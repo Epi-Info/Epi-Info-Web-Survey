@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web.Mvc;
+using Epi.Web.Common;
 
 namespace MvcDynamicForms.Fields
 {
@@ -24,7 +25,7 @@ namespace MvcDynamicForms.Fields
         public override string RenderHtml()
         {
             StringBuilder htmlBuilder = new StringBuilder();
-            var inputName = _form.FieldPrefix + _key;
+            var inputName = Constant.FIELDPREFIX + _key;
             string ErrorStyle = string.Empty;
 
             TagBuilder legendTag = new TagBuilder("legend");
@@ -51,7 +52,7 @@ namespace MvcDynamicForms.Fields
             fieldsetTag.Attributes.Add("name", inputName);
             fieldsetTag.Attributes.Add("id", inputName);
             fieldsetTag.Attributes.Add("type", "text");
-            fieldsetTag.Attributes.Add("value", Value);
+            fieldsetTag.Attributes.Add("value", Response);
             
             fieldsetTag.Attributes.Add("style", 
                 "position:absolute;" + 

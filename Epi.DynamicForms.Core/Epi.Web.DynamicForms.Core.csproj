@@ -88,7 +88,6 @@
     <Compile Include="Fields\Abstract\DatePickerField.cs" />
     <Compile Include="Fields\Abstract\ListField.cs" />
     <Compile Include="Fields\Abstract\Field.cs" />
-    <Compile Include="FieldList.cs" />
     <Compile Include="Fields\Abstract\NumericTextField.cs" />
     <Compile Include="Fields\Abstract\OrientableField.cs" />
     <Compile Include="Fields\Abstract\TimePickerField.cs" />
