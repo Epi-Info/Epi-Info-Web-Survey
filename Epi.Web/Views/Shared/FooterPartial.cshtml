@@ -7,14 +7,29 @@
                 <div id="version" style="font-size: 8pt; margin-top: -17px; display:inline-block; "><span>Version: </span>@ViewBag.Version</div>
         </div>
         <div id="footright">
+        @if (System.Configuration.ConfigurationManager.AppSettings["TECHNICAL_SUPPORT_IS_ENABLED"].ToUpper() == "TRUE")
+            {
             <div id="foothide" style="float:left;font-size: 9pt; margin-right: 20px;line-height: 120%;">
+
+            
                 <strong>Technical Support</strong><br />
           
-                <img src="@Url.Content("~/Content/images/email1.png")" width="16"  alt="" style="vertical-align:middle;" /> <a href="#">abcd@ghy.com</a> <br />
-                <img src="@Url.Content("~/Content/images/phone.png")"  height="14"  alt="" style="vertical-align:middle;" />&nbsp; 678-890-6789 ext. 1234     </div>
-                <img src="@Url.Content("~/Content/images/cstelogo.jpg")" height="42"  alt="Centers for Disease Control and Prevention"  />
+                <img src="@Url.Content("~/Content/images/email1.png")" width="16"  alt="" style="vertical-align:middle;" /> <a href="#">@System.Configuration.ConfigurationManager.AppSettings["TECHNICAL_SUPPORT_EMAIL"]
+
+                </a> <br />
+                <img src="@Url.Content("~/Content/images/phone.png")"  height="14"  alt="" style="vertical-align:middle;" />&nbsp;@System.Configuration.ConfigurationManager.AppSettings["TECHNICAL_SUPPORT_PHONE"]
+
+                 </div>
+            
+                <img src="@Url.Content(@System.Configuration.ConfigurationManager.AppSettings["FOOTER_LOGO_PATH"].ToString())" height="42"  alt="Centers for Disease Control and Prevention"  />
                  @* <img src="@Url.Content("~/Content/images/logo_dhhs.gif")" height="42" alt="Department of Health and Human Services"  />*@
-           
+            }
+        else { 
+            
+            <img src="@Url.Content("~/Content/images/cdclogo.png")" height="42"  width="71" alt="Centers for Disease Control and Prevention"  />
+            <img src="@Url.Content("~/Content/images/logo_dhhs.gif")" height="42" alt="Department of Health and Human Services"  />
+            
+            }
         </div>
         <div style="clear: both;"></div>
     </div>
