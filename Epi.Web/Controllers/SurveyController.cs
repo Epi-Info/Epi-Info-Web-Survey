@@ -172,79 +172,58 @@ namespace Epi.Web.MVC.Controllers
                     //case PreValidationResultEnum.Success:
                     default:
                         MvcDynamicForms.Form form;
-                        int CurrentPageNum = GetSurveyPageNumber(SurveyAnswer.XML.ToString());
-                        int ReffererPageNum;
-
-                        string url = "";
-                        if (this.Request.UrlReferrer == null)
-                        {
-                            url = this.Request.Url.ToString();
-                        }
-                        else
-                        {
-                            url = this.Request.UrlReferrer.ToString();
-                        }
-                        
+                        int pageNumber;
+                        string url = this.Request.Url.ToString();
                         int LastIndex = url.LastIndexOf("/");
                         string StringNumber = null;
+
                         if (url.Length - LastIndex + 1 <= url.Length)
                         {
                             StringNumber = url.Substring(LastIndex, url.Length - LastIndex);
                             StringNumber = StringNumber.Trim('/');
                         }
 
-                        if (int.TryParse(StringNumber, out ReffererPageNum))
+                        if (int.TryParse(StringNumber, out pageNumber))
                         {
-                            if (ReffererPageNum != CurrentPageNum)
+                            form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, pageNumber, SurveyAnswer, IsMobileDevice);
+
+                            if (IsMobileDevice)
                             {
-                                form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, ReffererPageNum, SurveyAnswer, IsMobileDevice);
-                                if (IsMobileDevice)
-                                {
-                                    Epi.Web.MVC.Utility.MobileFormProvider.UpdateHiddenFields(ReffererPageNum, form, XDocument.Parse(surveyInfoModel.XML), XDocument.Parse(SurveyAnswer.XML), this.ControllerContext.RequestContext.HttpContext.Request.Form);
-                                }
-                                else
-                                {
-                                    Epi.Web.MVC.Utility.FormProvider.UpdateHiddenFields(ReffererPageNum, form, XDocument.Parse(surveyInfoModel.XML), XDocument.Parse(SurveyAnswer.XML), this.ControllerContext.RequestContext.HttpContext.Request.Form);
-                                }
+                                //Epi.Web.MVC.Utility.MobileFormProvider.UpdateHiddenFields(ReffererPageNum, form, XDocument.Parse(surveyInfoModel.XML), XDocument.Parse(SurveyAnswer.XML), this.ControllerContext.RequestContext.HttpContext.Request.Form);
                             }
                             else
                             {
-                                form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, CurrentPageNum, SurveyAnswer, IsMobileDevice);
-                                if (IsMobileDevice)
-                                {
-                                    Epi.Web.MVC.Utility.MobileFormProvider.UpdateHiddenFields(CurrentPageNum, form, XDocument.Parse(surveyInfoModel.XML), XDocument.Parse(SurveyAnswer.XML), this.ControllerContext.RequestContext.HttpContext.Request.Form);
-                                }
-                                else
-                                {
-                                    Epi.Web.MVC.Utility.FormProvider.UpdateHiddenFields(CurrentPageNum, form, XDocument.Parse(surveyInfoModel.XML), XDocument.Parse(SurveyAnswer.XML), this.ControllerContext.RequestContext.HttpContext.Request.Form);
-                                }
+                                var postedForm = this.ControllerContext.RequestContext.HttpContext.Request.Form;
+                                Epi.Web.MVC.Utility.FormProvider.UpdateHiddenFields(pageNumber, form, XDocument.Parse(surveyInfoModel.XML), XDocument.Parse(SurveyAnswer.XML), postedForm);
                             }
-
-
 
                             UpdateModel(form);
                         }
                         else
                         {
-                            //get the survey form
                             form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, GetSurveyPageNumber(SurveyAnswer.XML.ToString()), SurveyAnswer, IsMobileDevice);
                             form.ClearAllErrors();
+
+                            int ReffererPageNum = 0;
+                            int CurrentPageNum = 0;
+
                             if (ReffererPageNum == 0)
                             {
                                 int index = 1;
                                 if (StringNumber.Contains("?RequestId="))
                                 {
-                                     index = StringNumber.IndexOf("?");
+                                    index = StringNumber.IndexOf("?");
                                 }
-                                 
-                                    ReffererPageNum = int.Parse(StringNumber.Substring(0, index));
-                                
+
+                                ReffererPageNum = int.Parse(StringNumber.Substring(0, index));
+
                             }
                             if (ReffererPageNum == CurrentPageNum)
                             {
                                 UpdateModel(form);
                             }
                         }
+
                         //PassCode start
                         if (IsMobileDevice)
                         {
@@ -432,7 +411,7 @@ namespace Epi.Web.MVC.Controllers
                         else
                         {
                             //Invalid Data - stay on same page
-                            CurrentPageNum = GetSurveyPageNumber(SurveyAnswer.XML.ToString()) ;
+                            int CurrentPageNum = GetSurveyPageNumber(SurveyAnswer.XML.ToString()) ;
 
                             if (CurrentPageNum != PageNumber) // failed validation and navigating to different page// must keep url the same 
                             {
