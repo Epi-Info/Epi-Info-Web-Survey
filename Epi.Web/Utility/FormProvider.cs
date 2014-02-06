@@ -187,8 +187,13 @@ namespace Epi.Web.MVC.Utility
                 if (form.Fields.Keys.Contains(kvp.Key))
                 { 
                     Field field = form.Fields[kvp.Key];
-
-                    if (field is InputField)
+                    
+                    if (field is ListField)
+                    {
+                        ((ListField)field).Response = kvp.Value;
+                        ((Select)field).SelectedValue = ((ListField)field).Response;
+                    }
+                    else if (field is InputField)
                     {
                         ((InputField)field).Response = kvp.Value;
                     }
@@ -196,36 +201,6 @@ namespace Epi.Web.MVC.Utility
                     if (field is CheckBox)
                     {
                         ((CheckBox)field).Checked = ((InputField)field).Response == "Yes" ? true : ((InputField)field).Response == "true" ? true : false;
-                    }
-                    else if (field is Select)
-                    {
-                        switch (((Select)field).SelectType.ToString())
-                        {
-                            case "11":
-                                if (((InputField)field).Response == "1" || ((InputField)field).Response == "true")
-                                {
-                                    ((InputField)field).Response = "Yes";
-                                }
-
-                                if (((InputField)field).Response == "0" || ((InputField)field).Response == "false")
-                                {
-                                    ((InputField)field).Response = "No";
-                                }
-
-                                ((Select)field).SelectedValue = kvp.Value;
-                                break;
-
-                            case "17":
-                            case "18":
-                            case "19":
-                                ((Select)field).SelectedValue = kvp.Value;
-                                break;
-                        }
-
-                        //if (!string.IsNullOrWhiteSpace(((Select)field).SelectedValue))
-                        //{
-                        //    ((Select)field).Choices[((Select)field).SelectedValue] = true;
-                        //}
                     }
                 }
             }
@@ -752,34 +727,6 @@ namespace Epi.Web.MVC.Utility
             return _Val;
         }
 
-        //public static bool GetRequiredControlState(string Requiredlist, string ControlName, string ListName)
-        //{
-        //    bool _Val = false;
-
-        //    if (!string.IsNullOrEmpty(Requiredlist))
-        //    {
-        //        if (!string.IsNullOrEmpty(Requiredlist))
-        //        {
-        //            string List = Requiredlist;
-        //            string[] ListArray = List.Split(',');
-        //            for (var i = 0; i < ListArray.Length; i++)
-        //            {
-        //                if (ListArray[i].ToLower() == ControlName.ToLower())
-        //                {
-        //                    _Val = true;
-        //                    break;
-        //                }
-        //                else
-        //                {
-        //                    _Val = false;
-        //                }
-        //            }
-        //        }
-        //    }
-
-        //    return _Val;
-        //}
-
         public static string GetPageId(XDocument xdoc, int PageNumber)
         {
             XElement XElement = xdoc.XPathSelectElement("Template/Project/View/Page[@Position = '" + (PageNumber - 1).ToString() + "']");
@@ -927,33 +874,33 @@ namespace Epi.Web.MVC.Utility
                             field = GetCheckBox(fieldElement, form);
                             break;
 
-                        case "11": // Yes/No
+                        case "11": 
                             field = GetDropDown(fieldElement, "Yes&#;No", 11, form);
                             break;
 
-                        case "12": //RadioList
+                        case "12": 
                             field = GetRadioList(fieldElement, form);
                             break;
 
-                        case "17": // LegalValues
+                        case "17": 
                             string legalValues = GetDropDownValues(xdocMetadata, fieldElement.Attribute("Name").Value, fieldElement.Attribute("SourceTableName").Value);
                             field = GetDropDown(fieldElement, legalValues, 17, form);
                             ((Select)field).SelectedValue = value.Trim(new char[]{','});
                             break;
 
-                        case "18": // Codes
+                        case "18": 
                             string codes = GetDropDownValues(xdocMetadata, fieldElement.Attribute("Name").Value, fieldElement.Attribute("SourceTableName").Value);
                             field = GetDropDown(fieldElement, codes, 18, form);
                             ((Select)field).SelectedValue = value.Trim(new char[] { ',' });
                             break;
 
-                        case "19": // CommentLegal
+                        case "19": 
                             string commentLegal = GetDropDownValues(xdocMetadata, fieldElement.Attribute("Name").Value, fieldElement.Attribute("SourceTableName").Value);
                             field = GetDropDown(fieldElement, commentLegal, 19, form);
                             ((Select)field).SelectedValue = value.Trim(new char[] { ',' });
                             break;
 
-                        case "21": //GroupBox
+                        case "21": 
                             field = GetGroupBox(fieldElement, form);
                             break;
                     }
@@ -1009,7 +956,7 @@ namespace Epi.Web.MVC.Utility
                             field = GetCheckBox(fieldElement, form);
                             break;
 
-                        case "11": // Yes/No
+                        case "11":
                             field = GetDropDown(fieldElement, "Yes&#;No", 11, form);
                             break;
 
@@ -1023,22 +970,22 @@ namespace Epi.Web.MVC.Utility
                             field = GetCommandButton(fieldElement, form);
                             break;
 
-                        case "17": // LegalValues
+                        case "17": 
                             dropDownValues = GetDropDownValues(form.XDocMetadata, fieldElement.Attribute("Name").Value, fieldElement.Attribute("SourceTableName").Value);
                             field = GetDropDown(fieldElement, dropDownValues, 17, form);
                             break;
 
-                        case "18": // Codes
+                        case "18": 
                             dropDownValues = GetDropDownValues(form.XDocMetadata, fieldElement.Attribute("Name").Value, fieldElement.Attribute("SourceTableName").Value);
                             field = GetDropDown(fieldElement, dropDownValues, 18, form);
                             break;
 
-                        case "19": // CommentLegal
+                        case "19":
                             dropDownValues = GetDropDownValues(form.XDocMetadata, fieldElement.Attribute("Name").Value, fieldElement.Attribute("SourceTableName").Value);
                             field = GetDropDown(fieldElement, dropDownValues, 19, form);
                             break;
 
-                        case "21": //GroupBox
+                        case "21": 
                             field = GetGroupBox(fieldElement, form);
                             break;
                     }

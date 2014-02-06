@@ -31,6 +31,7 @@ namespace MvcDynamicForms.Fields
                 _choices = value;
             }
         }
+        
         /// <summary>
         /// The text used to delimit multiple choices from the end user.
         /// </summary>
@@ -75,7 +76,6 @@ namespace MvcDynamicForms.Fields
         {
             get
             {
-                // builds a delimited list of the responses
                 var value = new StringBuilder();
 
                 foreach (var choice in _choices)
@@ -87,114 +87,102 @@ namespace MvcDynamicForms.Fields
             }
             set 
             {
-                 
-                    switch (this.SelectType.ToString())
-                    {
-                        case "11"://Yes/No
-
-                            Dictionary<string, bool> choices11 = new Dictionary<string, bool>();
+                switch (this.SelectType.ToString())
+                {
+                    case "11":
+                        Dictionary<string, bool> yesno = new Dictionary<string, bool>();
                            
-                            foreach (var choice in _choices)
+                        foreach (var choice in _choices)
+                        {
+                            string choiceValue = value.ToLower();
+
+                            if (choiceValue == "1" || choiceValue == "true" || choiceValue == "yes")
                             {
-
-                                string choiceValue = value == "True" ? "Yes" : "No";
-
-                                if (choice.Key == choiceValue)
-                                {
-                                    choices11.Add(choice.Key.ToString(), true);
-
-                                }
-                                else {
-                                    choices11.Add(choice.Key.ToString(), false);
-                                }
-                                
+                                choiceValue = "Yes";
                             }
-                            Choices = choices11;
-                            break;
-                        case "17"://DropDown LegalValues
-                           Dictionary<string, bool> choices17 = new Dictionary<string, bool>();
-                           
-                            foreach (var choice in _choices)
+                            else
                             {
-                                 
-
-                               
-                                if (choice.Key == value)
-                                {
-                                    choices17.Add(choice.Key.ToString(), true);
-
-                                }
-                                else {
-                                    choices17.Add(choice.Key.ToString(), false);
-                                }
-                                
+                                choiceValue = "No";
                             }
-                            Choices = choices17;
-                            break;
-                        case "18":
-                         Dictionary<string, bool> choices18 = new Dictionary<string, bool>();
-                           
-                            foreach (var choice in _choices)
+
+                            if (choice.Key == choiceValue)
                             {
-                                 
-
-                               
-                                if (choice.Key == value)
-                                {
-                                    choices18.Add(choice.Key.ToString(), true);
-
-                                }
-                                else {
-                                    choices18.Add(choice.Key.ToString(), false);
-                                }
-                                
+                                yesno.Add(choice.Key.ToString(), true);
                             }
-                            Choices = choices18;
-
-                            break;
-                        case "19"://Comment Legal
-                          Dictionary<string, bool> choices19 = new Dictionary<string, bool>();
-                           
-                            foreach (var choice in _choices)
+                            else 
                             {
+                                yesno.Add(choice.Key.ToString(), false);
+                            }
+                        }
+                        
+                        Choices = yesno;
+                        break;
 
+                    case "17":
+                        Dictionary<string, bool> legalValues = new Dictionary<string, bool>();
+                        foreach (var choice in _choices)
+                        {
+                            if (choice.Key == value)
+                            {
+                                legalValues.Add(choice.Key.ToString(), true);
+                            }
+                            else 
+                            {
+                                legalValues.Add(choice.Key.ToString(), false);
+                            }
+                                
+                        }
+                        Choices = legalValues;
+                        break;
 
-                                if (value.IndexOf('-') == -1)
+                    case "18":
+                        Dictionary<string, bool> codes = new Dictionary<string, bool>();
+                        foreach (var choice in _choices)
+                        {
+                            if (choice.Key == value)
+                            {
+                                codes.Add(choice.Key.ToString(), true);
+                            }
+                            else 
+                            {
+                                codes.Add(choice.Key.ToString(), false);
+                            }
+                                
+                        }
+                        Choices = codes;
+                        break;
+
+                    case "19":
+                        Dictionary<string, bool> commentLegal = new Dictionary<string, bool>();
+                        foreach (var choice in _choices)
+                        {
+                            if (value.IndexOf('-') == -1)
+                            {
+                                if (choice.Key.Split('-')[0].Trim() == value)
                                 {
-                                    if (choice.Key.Split('-')[0] == value)
-                                    {
-                                        choices19.Add(choice.Key.ToString(), true);
-
-                                    }
-                                    else
-                                    {
-                                        choices19.Add(choice.Key.ToString(), false);
-                                    }
+                                    commentLegal.Add(choice.Key.ToString(), true);
                                 }
                                 else
                                 {
-
-                                    if (choice.Key == value)
-                                    {
-                                        choices19.Add(choice.Key.ToString(), true);
-
-                                    }
-                                    else
-                                    {
-                                        choices19.Add(choice.Key.ToString(), false);
-                                    }
+                                    commentLegal.Add(choice.Key.ToString(), false);
                                 }
-                                
                             }
-                            Choices = choices19;
-                            break;
-
-
+                            else
+                            {
+                                if (choice.Key == value)
+                                {
+                                    commentLegal.Add(choice.Key.ToString(), true);
+                                }
+                                else
+                                {
+                                    commentLegal.Add(choice.Key.ToString(), false);
+                                }
+                            }
+                        }
+                        Choices = commentLegal;
+                        break;
                     }
                 }
-                
-                       
-                        
             }
         
         public override bool Validate()
