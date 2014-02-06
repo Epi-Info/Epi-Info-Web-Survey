@@ -132,6 +132,9 @@ namespace Epi.Web.MVC.Utility
                             case "DisabledFieldsList":
                                 DisabledFieldsList = reader.Value.Split(new char[] { ',' }).ToList<string>();
                                 break;
+                            case "RequiredFieldsList":
+                                RequiredFieldsList = reader.Value.Split(new char[] { ',' }).ToList<string>();
+                                break;
                         }
                     }
                 }
@@ -140,7 +143,8 @@ namespace Epi.Web.MVC.Utility
                     if (reader.IsEmptyElement == false && reader.NodeType != XmlNodeType.EndElement)
                     {
                         string fieldName = reader.GetAttribute("QuestionName");
-                        string fieldValue = reader.ReadElementContentAsString();
+                        reader.MoveToContent();
+                        string fieldValue = reader.ReadString();
                         fieldValues.Add(fieldName.ToLower(), fieldValue);
                     }
                 }
@@ -167,6 +171,14 @@ namespace Epi.Web.MVC.Utility
                 if (form.Fields.Keys.Contains(fieldName.ToLower()))
                 {
                     form.Fields[fieldName].IsDisabled = true;
+                }
+            }
+
+            foreach (string fieldName in RequiredFieldsList)
+            {
+                if (form.Fields.Keys.Contains(fieldName.ToLower()))
+                {
+                    ((InputField)form.Fields[fieldName]).IsRequired = true;
                 }
             }
 
@@ -200,20 +212,20 @@ namespace Epi.Web.MVC.Utility
                                     ((InputField)field).Response = "No";
                                 }
 
-                                ((Select)field).SelectedValue = ((InputField)field).Response;
+                                ((Select)field).SelectedValue = kvp.Value;
                                 break;
 
                             case "17":
                             case "18":
                             case "19":
-                                ((Select)field).SelectedValue = ((InputField)field).Response;
+                                ((Select)field).SelectedValue = kvp.Value;
                                 break;
                         }
 
-                        if (!string.IsNullOrWhiteSpace(((Select)field).SelectedValue))
-                        {
-                            ((Select)field).Choices[((Select)field).SelectedValue] = true;
-                        }
+                        //if (!string.IsNullOrWhiteSpace(((Select)field).SelectedValue))
+                        //{
+                        //    ((Select)field).Choices[((Select)field).SelectedValue] = true;
+                        //}
                     }
                 }
             }
@@ -351,7 +363,8 @@ namespace Epi.Web.MVC.Utility
             field.InputFieldfontSize = double.Parse(_FieldTypeID.Attribute("ControlFontSize").Value);
             field.InputFieldfontfamily = _FieldTypeID.Attribute("ControlFontFamily").Value;
 
-            field.IsRequired = GetRequiredControlState(form.RequiredFieldsList.ToString(), _FieldTypeID.Attribute("Name").Value, "RequiredFieldsList");
+            field.IsRequired = bool.Parse(_FieldTypeID.Attribute("IsRequired").Value);
+            field.Required = bool.Parse(_FieldTypeID.Attribute("IsRequired").Value);
 
             field.ShowTextOnRight = bool.Parse(_FieldTypeID.Attribute("ShowTextOnRight").Value);
             field.Choices = Choices;
@@ -366,7 +379,6 @@ namespace Epi.Web.MVC.Utility
             }
             else
             {
-
                 field.Orientation = (Orientation)1;
             }
 
@@ -377,29 +389,28 @@ namespace Epi.Web.MVC.Utility
 
         private static NumericTextBox GetNumericTextBox(XElement _FieldTypeID, Form form)
         {
-            var field = new NumericTextBox
-            {
-                Title = _FieldTypeID.Attribute("Name").Value,
-                Prompt = _FieldTypeID.Attribute("PromptText").Value,
-                DisplayOrder = int.Parse(_FieldTypeID.Attribute("TabIndex").Value),
-                RequiredMessage =  "This field is required",
-                Key = _FieldTypeID.Attribute("Name").Value,
-                PromptTop = form.Height * double.Parse(_FieldTypeID.Attribute("PromptTopPositionPercentage").Value),
-                PromptLeft = form.Width * double.Parse(_FieldTypeID.Attribute("PromptLeftPositionPercentage").Value),
-                Top = form.Height * double.Parse(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value),
-                Left = form.Width * double.Parse(_FieldTypeID.Attribute("ControlLeftPositionPercentage").Value),
-                PromptWidth = form.Width * double.Parse(_FieldTypeID.Attribute("ControlWidthPercentage").Value),
-                ControlWidth = form.Width * double.Parse(_FieldTypeID.Attribute("ControlWidthPercentage").Value),
-                fontstyle = _FieldTypeID.Attribute("PromptFontStyle").Value,
-                fontSize = double.Parse(_FieldTypeID.Attribute("PromptFontSize").Value),
-                fontfamily = _FieldTypeID.Attribute("PromptFontFamily").Value,
-                IsRequired = GetRequiredControlState(form.RequiredFieldsList.ToString(), _FieldTypeID.Attribute("Name").Value, "RequiredFieldsList"),
-                Required = GetRequiredControlState(form.RequiredFieldsList.ToString(), _FieldTypeID.Attribute("Name").Value, "RequiredFieldsList"),
-                IsReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value),
-                Lower = _FieldTypeID.Attribute("Lower").Value,
-                Upper = _FieldTypeID.Attribute("Upper").Value,
-                Pattern = _FieldTypeID.Attribute("Pattern").Value
-            };
+            NumericTextBox field = new NumericTextBox();
+            
+            field.Title = _FieldTypeID.Attribute("Name").Value;
+            field.Prompt = _FieldTypeID.Attribute("PromptText").Value;
+            field.DisplayOrder = int.Parse(_FieldTypeID.Attribute("TabIndex").Value);
+            field.RequiredMessage =  "This field is required";
+            field.Key = _FieldTypeID.Attribute("Name").Value;
+            field.PromptTop = form.Height * double.Parse(_FieldTypeID.Attribute("PromptTopPositionPercentage").Value);
+            field.PromptLeft = form.Width * double.Parse(_FieldTypeID.Attribute("PromptLeftPositionPercentage").Value);
+            field.Top = form.Height * double.Parse(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value);
+            field.Left = form.Width * double.Parse(_FieldTypeID.Attribute("ControlLeftPositionPercentage").Value);
+            field.PromptWidth = form.Width * double.Parse(_FieldTypeID.Attribute("ControlWidthPercentage").Value);
+            field.ControlWidth = form.Width * double.Parse(_FieldTypeID.Attribute("ControlWidthPercentage").Value);
+            field.fontstyle = _FieldTypeID.Attribute("PromptFontStyle").Value;
+            field.fontSize = double.Parse(_FieldTypeID.Attribute("PromptFontSize").Value);
+            field.fontfamily = _FieldTypeID.Attribute("PromptFontFamily").Value;
+            field.IsRequired = bool.Parse(_FieldTypeID.Attribute("IsRequired").Value);
+            field.Required = bool.Parse(_FieldTypeID.Attribute("IsRequired").Value);
+            field.IsReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value);
+            field.Lower = _FieldTypeID.Attribute("Lower").Value;
+            field.Upper = _FieldTypeID.Attribute("Upper").Value;
+            field.Pattern = _FieldTypeID.Attribute("Pattern").Value;
 
             field.Name = _FieldTypeID.Attribute("Name").Value;
             SetFieldCommon(field, form);
@@ -408,22 +419,20 @@ namespace Epi.Web.MVC.Utility
 
         private static Literal GetLabel(XElement _FieldTypeID, Form form)
         {
-            var field = new Literal
-            {
-                FieldWrapper = "div",
-                Wrap = true,
-                DisplayOrder = int.Parse(_FieldTypeID.Attribute("TabIndex").Value),
-                Html = _FieldTypeID.Attribute("PromptText").Value,
-                Top = form.Height * double.Parse(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value),
-                Left = form.Width * double.Parse(_FieldTypeID.Attribute("ControlLeftPositionPercentage").Value),
-                CssClass = "EpiLabel",
-                fontSize = double.Parse(_FieldTypeID.Attribute("ControlFontSize").Value),
-                fontfamily = _FieldTypeID.Attribute("ControlFontFamily").Value,
-                fontstyle = _FieldTypeID.Attribute("ControlFontStyle").Value,
-                Height = form.Height * double.Parse(_FieldTypeID.Attribute("ControlHeightPercentage").Value),
-                Name =_FieldTypeID.Attribute("Name").Value,
-                Width = form.Width * double.Parse(_FieldTypeID.Attribute("ControlWidthPercentage").Value)
-            };
+            Literal field = new Literal();
+            field.FieldWrapper = "div";
+            field.Wrap = true;
+            field.DisplayOrder = int.Parse(_FieldTypeID.Attribute("TabIndex").Value);
+            field.Html = _FieldTypeID.Attribute("PromptText").Value;
+            field.Top = form.Height * double.Parse(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value);
+            field.Left = form.Width * double.Parse(_FieldTypeID.Attribute("ControlLeftPositionPercentage").Value);
+            field.CssClass = "EpiLabel";
+            field.fontSize = double.Parse(_FieldTypeID.Attribute("ControlFontSize").Value);
+            field.fontfamily = _FieldTypeID.Attribute("ControlFontFamily").Value;
+            field.fontstyle = _FieldTypeID.Attribute("ControlFontStyle").Value;
+            field.Height = form.Height * double.Parse(_FieldTypeID.Attribute("ControlHeightPercentage").Value);
+            field.Name =_FieldTypeID.Attribute("Name").Value;
+            field.Width = form.Width * double.Parse(_FieldTypeID.Attribute("ControlWidthPercentage").Value);
 
             field.Name = _FieldTypeID.Attribute("Name").Value;
             SetFieldCommon(field, form);
@@ -432,33 +441,28 @@ namespace Epi.Web.MVC.Utility
         
         private static TextArea GetTextArea(XElement _FieldTypeID, Form form)
         {
-            var field = new TextArea
-            {
-                Title = _FieldTypeID.Attribute("Name").Value,
-                Prompt = _FieldTypeID.Attribute("PromptText").Value,
-                DisplayOrder = int.Parse(_FieldTypeID.Attribute("TabIndex").Value),
-                RequiredMessage = "This field is required",
-                Key = _FieldTypeID.Attribute("Name").Value,
-                PromptTop = form.Height * double.Parse(_FieldTypeID.Attribute("PromptTopPositionPercentage").Value),
-                PromptLeft = form.Width * double.Parse(_FieldTypeID.Attribute("PromptLeftPositionPercentage").Value),
-                Top = form.Height * double.Parse(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value),
-                Left = form.Width * double.Parse(_FieldTypeID.Attribute("ControlLeftPositionPercentage").Value),
-                PromptWidth = form.Width * double.Parse(_FieldTypeID.Attribute("ControlWidthPercentage").Value),
-                ControlWidth = form.Width * double.Parse(_FieldTypeID.Attribute("ControlWidthPercentage").Value),
-                ControlHeight = form.Height * double.Parse(_FieldTypeID.Attribute("ControlHeightPercentage").Value),
-                fontstyle = _FieldTypeID.Attribute("PromptFontStyle").Value,
-                fontSize = double.Parse(_FieldTypeID.Attribute("PromptFontSize").Value),
-                fontfamily = _FieldTypeID.Attribute("PromptFontFamily").Value,
-
-                InputFieldfontstyle = _FieldTypeID.Attribute("ControlFontStyle").Value,
-                InputFieldfontSize = double.Parse(_FieldTypeID.Attribute("ControlFontSize").Value),
-                InputFieldfontfamily = _FieldTypeID.Attribute("ControlFontFamily").Value,
-
-                IsRequired = GetRequiredControlState(form.RequiredFieldsList.ToString(), _FieldTypeID.Attribute("Name").Value, "RequiredFieldsList"),
-                Required = GetRequiredControlState(form.RequiredFieldsList.ToString(), _FieldTypeID.Attribute("Name").Value, "RequiredFieldsList"),
-                
-                IsReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value)
-            };
+            TextArea field = new TextArea();
+            field.Title = _FieldTypeID.Attribute("Name").Value;
+            field.Prompt = _FieldTypeID.Attribute("PromptText").Value;
+            field.DisplayOrder = int.Parse(_FieldTypeID.Attribute("TabIndex").Value);
+            field.RequiredMessage = "This field is required";
+            field.Key = _FieldTypeID.Attribute("Name").Value;
+            field.PromptTop = form.Height * double.Parse(_FieldTypeID.Attribute("PromptTopPositionPercentage").Value);
+            field.PromptLeft = form.Width * double.Parse(_FieldTypeID.Attribute("PromptLeftPositionPercentage").Value);
+            field.Top = form.Height * double.Parse(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value);
+            field.Left = form.Width * double.Parse(_FieldTypeID.Attribute("ControlLeftPositionPercentage").Value);
+            field.PromptWidth = form.Width * double.Parse(_FieldTypeID.Attribute("ControlWidthPercentage").Value);
+            field.ControlWidth = form.Width * double.Parse(_FieldTypeID.Attribute("ControlWidthPercentage").Value);
+            field.ControlHeight = form.Height * double.Parse(_FieldTypeID.Attribute("ControlHeightPercentage").Value);
+            field.fontstyle = _FieldTypeID.Attribute("PromptFontStyle").Value;
+            field.fontSize = double.Parse(_FieldTypeID.Attribute("PromptFontSize").Value);
+            field.fontfamily = _FieldTypeID.Attribute("PromptFontFamily").Value;
+            field.InputFieldfontstyle = _FieldTypeID.Attribute("ControlFontStyle").Value;
+            field.InputFieldfontSize = double.Parse(_FieldTypeID.Attribute("ControlFontSize").Value);
+            field.InputFieldfontfamily = _FieldTypeID.Attribute("ControlFontFamily").Value;
+            field.IsRequired = bool.Parse(_FieldTypeID.Attribute("IsRequired").Value);
+            field.Required = bool.Parse(_FieldTypeID.Attribute("IsRequired").Value);
+            field.IsReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value);
 
             field.Name = _FieldTypeID.Attribute("Name").Value;
             SetFieldCommon(field, form);
@@ -467,14 +471,11 @@ namespace Epi.Web.MVC.Utility
         
         private static Hidden GetHiddenField(XElement _FieldTypeID, XDocument SurveyAnswer, string _ControlValue, Form form)
         {
-            var field = new Hidden
-            {
-                Title = _FieldTypeID.Attribute("Name").Value,
-                Key = _FieldTypeID.Attribute("Name").Value,
-                IsPlaceHolder = true,
-                Response = _ControlValue
-            };
-
+            Hidden field = new Hidden();
+            field.Title = _FieldTypeID.Attribute("Name").Value;
+            field.Key = _FieldTypeID.Attribute("Name").Value;
+            field.IsPlaceHolder = true;
+            field.Response = _ControlValue;
             field.Name = _FieldTypeID.Attribute("Name").Value;
             SetFieldCommon(field, form);
             return field;
@@ -483,7 +484,6 @@ namespace Epi.Web.MVC.Utility
         private static TextBox GetTextBox(XElement _FieldTypeID, Form form)
         {
             TextBox field = new TextBox();
-
             field.Title = _FieldTypeID.Attribute("Name").Value;
             field.Prompt = _FieldTypeID.Attribute("PromptText").Value.Trim();
             field.DisplayOrder = int.Parse(_FieldTypeID.Attribute("TabIndex").Value);
@@ -498,8 +498,8 @@ namespace Epi.Web.MVC.Utility
             field.fontstyle = _FieldTypeID.Attribute("PromptFontStyle").Value;
             field.fontSize = double.Parse(_FieldTypeID.Attribute("PromptFontSize").Value);
             field.fontfamily = _FieldTypeID.Attribute("PromptFontFamily").Value;
-            field.IsRequired = GetRequiredControlState(form.RequiredFieldsList.ToString(), _FieldTypeID.Attribute("Name").Value, "RequiredFieldsList");
-            field.Required = GetRequiredControlState(form.RequiredFieldsList.ToString(), _FieldTypeID.Attribute("Name").Value, "RequiredFieldsList");
+            field.IsRequired = bool.Parse(_FieldTypeID.Attribute("IsRequired").Value);
+            field.Required = bool.Parse(_FieldTypeID.Attribute("IsRequired").Value);
             field.InputFieldfontstyle = _FieldTypeID.Attribute("ControlFontStyle").Value;
             field.InputFieldfontSize = double.Parse(_FieldTypeID.Attribute("ControlFontSize").Value);
             field.InputFieldfontfamily = _FieldTypeID.Attribute("ControlFontFamily").Value;
@@ -514,25 +514,22 @@ namespace Epi.Web.MVC.Utility
 
         private static CheckBox GetCheckBox(XElement _FieldTypeID, Form form)
         {
-            var field = new CheckBox
-            {
-                Title = _FieldTypeID.Attribute("Name").Value,
-                Prompt = _FieldTypeID.Attribute("PromptText").Value,
-                DisplayOrder = int.Parse(_FieldTypeID.Attribute("TabIndex").Value),
-                RequiredMessage = "This field is required",
-                Key = _FieldTypeID.Attribute("Name").Value,
-                PromptTop = form.Height * double.Parse(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value) + 2,
-                PromptLeft = form.Width * double.Parse(_FieldTypeID.Attribute("ControlLeftPositionPercentage").Value) + 20,
-                Top = form.Height * double.Parse(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value),
-                Left = form.Width * double.Parse(_FieldTypeID.Attribute("ControlLeftPositionPercentage").Value),
-                PromptWidth = form.Width * double.Parse(_FieldTypeID.Attribute("ControlWidthPercentage").Value),
-                ControlWidth = 10,
-                fontstyle = _FieldTypeID.Attribute("PromptFontStyle").Value,
-                fontSize = double.Parse(_FieldTypeID.Attribute("PromptFontSize").Value),
-                fontfamily = _FieldTypeID.Attribute("PromptFontFamily").Value,
-                ReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value) 
-            };
-
+            CheckBox field = new CheckBox();
+            field.Title = _FieldTypeID.Attribute("Name").Value;
+            field.Prompt = _FieldTypeID.Attribute("PromptText").Value;
+            field.DisplayOrder = int.Parse(_FieldTypeID.Attribute("TabIndex").Value);
+            field.RequiredMessage = "This field is required";
+            field.Key = _FieldTypeID.Attribute("Name").Value;
+            field.PromptTop = form.Height * double.Parse(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value) + 2;
+            field.PromptLeft = form.Width * double.Parse(_FieldTypeID.Attribute("ControlLeftPositionPercentage").Value) + 20;
+            field.Top = form.Height * double.Parse(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value);
+            field.Left = form.Width * double.Parse(_FieldTypeID.Attribute("ControlLeftPositionPercentage").Value);
+            field.PromptWidth = form.Width * double.Parse(_FieldTypeID.Attribute("ControlWidthPercentage").Value);
+            field.ControlWidth = 10;
+            field.fontstyle = _FieldTypeID.Attribute("PromptFontStyle").Value;
+            field.fontSize = double.Parse(_FieldTypeID.Attribute("PromptFontSize").Value);
+            field.fontfamily = _FieldTypeID.Attribute("PromptFontFamily").Value;
+            field.ReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value);
             field.Name = _FieldTypeID.Attribute("Name").Value;
             SetFieldCommon(field, form);
             return field;
@@ -559,34 +556,31 @@ namespace Epi.Web.MVC.Utility
 
         private static DatePicker GetDatePicker(XElement _FieldTypeID, Form form)
         {
-            var field = new DatePicker
-            {
-                Title = _FieldTypeID.Attribute("Name").Value,
-                Prompt = _FieldTypeID.Attribute("PromptText").Value,
-                DisplayOrder = int.Parse(_FieldTypeID.Attribute("TabIndex").Value),
-                RequiredMessage = "This field is required",
-                Key = _FieldTypeID.Attribute("Name").Value,
-                PromptTop = form.Height * double.Parse(_FieldTypeID.Attribute("PromptTopPositionPercentage").Value),
-                PromptLeft = form.Width * double.Parse(_FieldTypeID.Attribute("PromptLeftPositionPercentage").Value),
-                Top = form.Height * double.Parse(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value),
-                Left = form.Width * double.Parse(_FieldTypeID.Attribute("ControlLeftPositionPercentage").Value),
-                PromptWidth = form.Width * double.Parse(_FieldTypeID.Attribute("ControlWidthPercentage").Value),
-                ControlWidth = form.Width * double.Parse(_FieldTypeID.Attribute("ControlWidthPercentage").Value),
-                fontstyle = _FieldTypeID.Attribute("PromptFontStyle").Value,
-                fontSize = double.Parse(_FieldTypeID.Attribute("PromptFontSize").Value),
-                fontfamily = _FieldTypeID.Attribute("PromptFontFamily").Value,
-                IsRequired = GetRequiredControlState(form.RequiredFieldsList.ToString(), _FieldTypeID.Attribute("Name").Value, "RequiredFieldsList"),
-                Required = GetRequiredControlState(form.RequiredFieldsList.ToString(), _FieldTypeID.Attribute("Name").Value, "RequiredFieldsList"),
-                InputFieldfontstyle = _FieldTypeID.Attribute("ControlFontStyle").Value,
-                InputFieldfontSize = double.Parse(_FieldTypeID.Attribute("ControlFontSize").Value),
-                InputFieldfontfamily = _FieldTypeID.Attribute("ControlFontFamily").Value,
-                IsReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value),
-                Lower = _FieldTypeID.Attribute("Lower").Value,
-                Upper = _FieldTypeID.Attribute("Upper").Value,
-                ReadOnly= bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value),
-                Pattern = _FieldTypeID.Attribute("Pattern").Value
-            };
-
+            DatePicker field = new DatePicker();
+            field.Title = _FieldTypeID.Attribute("Name").Value;
+            field.Prompt = _FieldTypeID.Attribute("PromptText").Value;
+            field.DisplayOrder = int.Parse(_FieldTypeID.Attribute("TabIndex").Value);
+            field.RequiredMessage = "This field is required";
+            field.Key = _FieldTypeID.Attribute("Name").Value;
+            field.PromptTop = form.Height * double.Parse(_FieldTypeID.Attribute("PromptTopPositionPercentage").Value);
+            field.PromptLeft = form.Width * double.Parse(_FieldTypeID.Attribute("PromptLeftPositionPercentage").Value);
+            field.Top = form.Height * double.Parse(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value);
+            field.Left = form.Width * double.Parse(_FieldTypeID.Attribute("ControlLeftPositionPercentage").Value);
+            field.PromptWidth = form.Width * double.Parse(_FieldTypeID.Attribute("ControlWidthPercentage").Value);
+            field.ControlWidth = form.Width * double.Parse(_FieldTypeID.Attribute("ControlWidthPercentage").Value);
+            field.fontstyle = _FieldTypeID.Attribute("PromptFontStyle").Value;
+            field.fontSize = double.Parse(_FieldTypeID.Attribute("PromptFontSize").Value);
+            field.fontfamily = _FieldTypeID.Attribute("PromptFontFamily").Value;
+            field.IsRequired = bool.Parse(_FieldTypeID.Attribute("IsRequired").Value);
+            field.Required = bool.Parse(_FieldTypeID.Attribute("IsRequired").Value);
+            field.InputFieldfontstyle = _FieldTypeID.Attribute("ControlFontStyle").Value;
+            field.InputFieldfontSize = double.Parse(_FieldTypeID.Attribute("ControlFontSize").Value);
+            field.InputFieldfontfamily = _FieldTypeID.Attribute("ControlFontFamily").Value;
+            field.IsReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value);
+            field.Lower = _FieldTypeID.Attribute("Lower").Value;
+            field.Upper = _FieldTypeID.Attribute("Upper").Value;
+            field.ReadOnly= bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value);
+            field.Pattern = _FieldTypeID.Attribute("Pattern").Value;
             field.Name = _FieldTypeID.Attribute("Name").Value;
             SetFieldCommon(field, form);
             return field;
@@ -594,34 +588,31 @@ namespace Epi.Web.MVC.Utility
 
         private static TimePicker GetTimePicker(XElement _FieldTypeID, Form form)
         {
-            var field = new TimePicker
-            {
-                Title = _FieldTypeID.Attribute("Name").Value,
-                Prompt = _FieldTypeID.Attribute("PromptText").Value,
-                DisplayOrder = int.Parse(_FieldTypeID.Attribute("TabIndex").Value),
-                RequiredMessage = "This field is required",
-                Key = _FieldTypeID.Attribute("Name").Value,
-                PromptTop = form.Height * double.Parse(_FieldTypeID.Attribute("PromptTopPositionPercentage").Value),
-                PromptLeft = form.Width * double.Parse(_FieldTypeID.Attribute("PromptLeftPositionPercentage").Value),
-                Top = form.Height * double.Parse(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value),
-                Left = form.Width * double.Parse(_FieldTypeID.Attribute("ControlLeftPositionPercentage").Value),
-                PromptWidth = form.Width * double.Parse(_FieldTypeID.Attribute("ControlWidthPercentage").Value),
-                ControlWidth = form.Width * double.Parse(_FieldTypeID.Attribute("ControlWidthPercentage").Value),
-                fontstyle = _FieldTypeID.Attribute("PromptFontStyle").Value,
-                fontSize = double.Parse(_FieldTypeID.Attribute("PromptFontSize").Value),
-                fontfamily = _FieldTypeID.Attribute("PromptFontFamily").Value,
-                IsRequired = GetRequiredControlState(form.RequiredFieldsList.ToString(), _FieldTypeID.Attribute("Name").Value, "RequiredFieldsList"),
-                Required = GetRequiredControlState(form.RequiredFieldsList.ToString(), _FieldTypeID.Attribute("Name").Value, "RequiredFieldsList"),
-                InputFieldfontstyle = _FieldTypeID.Attribute("ControlFontStyle").Value,
-                InputFieldfontSize = double.Parse(_FieldTypeID.Attribute("ControlFontSize").Value),
-                InputFieldfontfamily = _FieldTypeID.Attribute("ControlFontFamily").Value,
-                IsReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value),
-                Lower = _FieldTypeID.Attribute("Lower").Value,
-                Upper = _FieldTypeID.Attribute("Upper").Value,
-                ReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value),
-                Pattern = _FieldTypeID.Attribute("Pattern").Value
-            };
-
+            TimePicker field = new TimePicker();
+            field.Title = _FieldTypeID.Attribute("Name").Value;
+            field.Prompt = _FieldTypeID.Attribute("PromptText").Value;
+            field.DisplayOrder = int.Parse(_FieldTypeID.Attribute("TabIndex").Value);
+            field.RequiredMessage = "This field is required";
+            field.Key = _FieldTypeID.Attribute("Name").Value;
+            field.PromptTop = form.Height * double.Parse(_FieldTypeID.Attribute("PromptTopPositionPercentage").Value);
+            field.PromptLeft = form.Width * double.Parse(_FieldTypeID.Attribute("PromptLeftPositionPercentage").Value);
+            field.Top = form.Height * double.Parse(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value);
+            field.Left = form.Width * double.Parse(_FieldTypeID.Attribute("ControlLeftPositionPercentage").Value);
+            field.PromptWidth = form.Width * double.Parse(_FieldTypeID.Attribute("ControlWidthPercentage").Value);
+            field.ControlWidth = form.Width * double.Parse(_FieldTypeID.Attribute("ControlWidthPercentage").Value);
+            field.fontstyle = _FieldTypeID.Attribute("PromptFontStyle").Value;
+            field.fontSize = double.Parse(_FieldTypeID.Attribute("PromptFontSize").Value);
+            field.fontfamily = _FieldTypeID.Attribute("PromptFontFamily").Value;
+            field.IsRequired = bool.Parse(_FieldTypeID.Attribute("IsRequired").Value);
+            field.Required = bool.Parse(_FieldTypeID.Attribute("IsRequired").Value);
+            field.InputFieldfontstyle = _FieldTypeID.Attribute("ControlFontStyle").Value;
+            field.InputFieldfontSize = double.Parse(_FieldTypeID.Attribute("ControlFontSize").Value);
+            field.InputFieldfontfamily = _FieldTypeID.Attribute("ControlFontFamily").Value;
+            field.IsReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value);
+            field.Lower = _FieldTypeID.Attribute("Lower").Value;
+            field.Upper = _FieldTypeID.Attribute("Upper").Value;
+            field.ReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value);
+            field.Pattern = _FieldTypeID.Attribute("Pattern").Value;
             field.Name = _FieldTypeID.Attribute("Name").Value;
             SetFieldCommon(field, form);
             return field;
@@ -646,8 +637,8 @@ namespace Epi.Web.MVC.Utility
             field.fontstyle = _FieldTypeID.Attribute("PromptFontStyle").Value;
             field.fontSize = double.Parse(_FieldTypeID.Attribute("PromptFontSize").Value);
             field.fontfamily = _FieldTypeID.Attribute("PromptFontFamily").Value;
-            field.IsRequired = GetRequiredControlState(form.RequiredFieldsList.ToString(), _FieldTypeID.Attribute("Name").Value, "RequiredFieldsList");
-            field.Required = GetRequiredControlState(form.RequiredFieldsList.ToString(), _FieldTypeID.Attribute("Name").Value, "RequiredFieldsList");
+            field.IsRequired = bool.Parse(_FieldTypeID.Attribute("IsRequired").Value);
+            field.Required = bool.Parse(_FieldTypeID.Attribute("IsRequired").Value);
             field.InputFieldfontstyle = _FieldTypeID.Attribute("ControlFontStyle").Value;
             field.InputFieldfontSize = double.Parse(_FieldTypeID.Attribute("ControlFontSize").Value);
             field.InputFieldfontfamily = _FieldTypeID.Attribute("ControlFontFamily").Value;
@@ -761,33 +752,33 @@ namespace Epi.Web.MVC.Utility
             return _Val;
         }
 
-        public static bool GetRequiredControlState(string Requiredlist, string ControlName, string ListName)
-        {
-            bool _Val = false;
+        //public static bool GetRequiredControlState(string Requiredlist, string ControlName, string ListName)
+        //{
+        //    bool _Val = false;
 
-            if (!string.IsNullOrEmpty(Requiredlist))
-            {
-                if (!string.IsNullOrEmpty(Requiredlist))
-                {
-                    string List = Requiredlist;
-                    string[] ListArray = List.Split(',');
-                    for (var i = 0; i < ListArray.Length; i++)
-                    {
-                        if (ListArray[i].ToLower() == ControlName.ToLower())
-                        {
-                            _Val = true;
-                            break;
-                        }
-                        else
-                        {
-                            _Val = false;
-                        }
-                    }
-                }
-            }
+        //    if (!string.IsNullOrEmpty(Requiredlist))
+        //    {
+        //        if (!string.IsNullOrEmpty(Requiredlist))
+        //        {
+        //            string List = Requiredlist;
+        //            string[] ListArray = List.Split(',');
+        //            for (var i = 0; i < ListArray.Length; i++)
+        //            {
+        //                if (ListArray[i].ToLower() == ControlName.ToLower())
+        //                {
+        //                    _Val = true;
+        //                    break;
+        //                }
+        //                else
+        //                {
+        //                    _Val = false;
+        //                }
+        //            }
+        //        }
+        //    }
 
-            return _Val;
-        }
+        //    return _Val;
+        //}
 
         public static string GetPageId(XDocument xdoc, int PageNumber)
         {
@@ -947,16 +938,19 @@ namespace Epi.Web.MVC.Utility
                         case "17": // LegalValues
                             string legalValues = GetDropDownValues(xdocMetadata, fieldElement.Attribute("Name").Value, fieldElement.Attribute("SourceTableName").Value);
                             field = GetDropDown(fieldElement, legalValues, 17, form);
+                            ((Select)field).SelectedValue = value.Trim(new char[]{','});
                             break;
 
                         case "18": // Codes
                             string codes = GetDropDownValues(xdocMetadata, fieldElement.Attribute("Name").Value, fieldElement.Attribute("SourceTableName").Value);
                             field = GetDropDown(fieldElement, codes, 18, form);
+                            ((Select)field).SelectedValue = value.Trim(new char[] { ',' });
                             break;
 
                         case "19": // CommentLegal
                             string commentLegal = GetDropDownValues(xdocMetadata, fieldElement.Attribute("Name").Value, fieldElement.Attribute("SourceTableName").Value);
                             field = GetDropDown(fieldElement, commentLegal, 19, form);
+                            ((Select)field).SelectedValue = value.Trim(new char[] { ',' });
                             break;
 
                         case "21": //GroupBox
@@ -980,89 +974,76 @@ namespace Epi.Web.MVC.Utility
 
             foreach (var fieldElement in form.FieldsTypeIDs)
             {
-                if (fieldElement.Attribute("Position").Value != (pageNumber - 1).ToString())
+                if (fieldElement.Attribute("Position").Value == (pageNumber - 1).ToString())
                 {
-                }
-                else
-                {
+                    MvcDynamicForms.Fields.Field field = null;
+
                     switch (fieldElement.Attribute("FieldTypeId").Value)
                     {
                         case "1":
                         case "3":
-                            TextBox textBox = GetTextBox(fieldElement, form);
-                            form.Fields.Add(textBox.Name.ToLower(), textBox);
+                            field = GetTextBox(fieldElement, form);
                             break;
 
                         case "2":
-                            Literal literal = GetLabel(fieldElement, form);
-                            form.Fields.Add(literal.Name.ToLower(), literal);
+                            field = GetLabel(fieldElement, form);
                             break;
 
                         case "4":
-                            TextArea textArea = GetTextArea(fieldElement, form);
-                            form.Fields.Add(textArea.Name.ToLower(), textArea);
+                            field = GetTextArea(fieldElement, form);
                             break;
 
                         case "5":
-                            NumericTextBox numericTextBox = GetNumericTextBox(fieldElement, form);
-                            form.Fields.Add(numericTextBox.Name.ToLower(), numericTextBox);
+                            field = GetNumericTextBox(fieldElement, form);
                             break;
 
                         case "7":
-                            DatePicker datePicker = GetDatePicker(fieldElement, form);
-                            form.Fields.Add(datePicker.Name.ToLower(), datePicker);
+                            field = GetDatePicker(fieldElement, form);
                             break;
 
                         case "8":
-                            TimePicker timePicker = GetTimePicker(fieldElement, form);
-                            form.Fields.Add(timePicker.Name.ToLower(), timePicker);
+                            field = GetTimePicker(fieldElement, form);
                             break;
 
                         case "10":
-                            CheckBox checkBox = GetCheckBox(fieldElement, form);
-                            form.Fields.Add(checkBox.Name.ToLower(), checkBox);
+                            field = GetCheckBox(fieldElement, form);
                             break;
 
                         case "11": // Yes/No
-                            Select select = GetDropDown(fieldElement, "Yes&#;No", 11, form);
-                            form.Fields.Add(select.Name.ToLower(), select);
+                            field = GetDropDown(fieldElement, "Yes&#;No", 11, form);
                             break;
 
                         case "12":
                             GroupBox optionsContainer = GetOptionGroupBox(fieldElement, form);
                             form.Fields.Add(optionsContainer.Name.ToLower(), optionsContainer);
-                            RadioList radioList = GetRadioList(fieldElement, form);
-                            form.Fields.Add(radioList.Name.ToLower(), radioList);
+                            field = GetRadioList(fieldElement, form);
                             break;
 
                         case "13":
-                            CommandButton commandButton = GetCommandButton(fieldElement, form);
-                            form.Fields.Add(commandButton.Name.ToLower(), commandButton);
+                            field = GetCommandButton(fieldElement, form);
                             break;
 
                         case "17": // LegalValues
                             dropDownValues = GetDropDownValues(form.XDocMetadata, fieldElement.Attribute("Name").Value, fieldElement.Attribute("SourceTableName").Value);
-                            Select legalValueDropDown = GetDropDown(fieldElement, dropDownValues, 17, form);
-                            form.Fields.Add(legalValueDropDown.Name.ToLower(), legalValueDropDown);
+                            field = GetDropDown(fieldElement, dropDownValues, 17, form);
                             break;
 
                         case "18": // Codes
                             dropDownValues = GetDropDownValues(form.XDocMetadata, fieldElement.Attribute("Name").Value, fieldElement.Attribute("SourceTableName").Value);
-                            Select codesDropDown = GetDropDown(fieldElement, dropDownValues, 18, form);
-                            form.Fields.Add(codesDropDown.Name.ToLower(), codesDropDown);
+                            field = GetDropDown(fieldElement, dropDownValues, 18, form);
                             break;
 
                         case "19": // CommentLegal
                             dropDownValues = GetDropDownValues(form.XDocMetadata, fieldElement.Attribute("Name").Value, fieldElement.Attribute("SourceTableName").Value);
-                            Select commentLegalDropDown = GetDropDown(fieldElement, dropDownValues, 19, form);
-                            form.Fields.Add(commentLegalDropDown.Name.ToLower(), commentLegalDropDown);
+                            field = GetDropDown(fieldElement, dropDownValues, 19, form);
                             break;
 
                         case "21": //GroupBox
-                            GroupBox groupBox = GetGroupBox(fieldElement, form);
-                            form.Fields.Add(groupBox.Name.ToLower(), groupBox);
+                            field = GetGroupBox(fieldElement, form);
                             break;
                     }
+
+                    form.Fields.Add(field.Name.ToLower(), field);
                 }
             }
         }
