@@ -64,23 +64,22 @@ namespace MvcDynamicForms.Fields
         /// <returns></returns>
         public override bool Validate()
         {
-            /*If readonly don't perform any validation check and make required = false and validate = true*/
             if (ReadOnly)
             {
                 Required = false;
                 ClearError();
                 return true;
             }
-            //if response have character "_" or only "." it is not required, so assign Response = ""
-            if ((Response.IndexOf("_") != -1) ||((Response.IndexOf(".") != -1 && Response.Length ==1)))
+
+            if (Response == null || (Response.IndexOf("_") != -1) ||((Response.IndexOf(".") != -1 && Response.Length ==1)))
             {
                 Response = string.Empty;
             }
+            
             if (string.IsNullOrEmpty(Response))
             {
                 if (Required)
                 {
-                    // invalid: is required and no response has been given
                     Error = RequiredMessage;
                     return false;
                 }
