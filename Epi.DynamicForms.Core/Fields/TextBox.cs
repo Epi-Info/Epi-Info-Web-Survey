@@ -7,9 +7,6 @@ using Epi.Core.EnterInterpreter;
 
 namespace MvcDynamicForms.Fields
 {
-    /// <summary>
-    /// Represents an html textbox input element.
-    /// </summary>
     [Serializable]
     public class TextBox : TextField
     {
@@ -122,9 +119,7 @@ namespace MvcDynamicForms.Fields
             
             if (_IsRequired == true)
             {
-
                 ControlClass.Append("required");
-
             }
 
             ControlClass.Append("]");

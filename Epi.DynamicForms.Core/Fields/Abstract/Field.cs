@@ -103,7 +103,7 @@ namespace MvcDynamicForms.Fields
         /// <summary>
         /// The relative position that the field is rendered to html.
         /// </summary>
-        public int DisplayOrder { get; set; }
+        public double DisplayOrder { get; set; }
         
         /// <summary>
         /// Renders the field as html.

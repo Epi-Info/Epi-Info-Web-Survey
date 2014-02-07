@@ -11,14 +11,13 @@ namespace MvcDynamicForms.Fields
     /// Represents an html textarea element.
     /// </summary>
     [Serializable]
-    public class MobileTextArea : TextField
+    public class MobileTextArea : TextArea
     {
         public override string RenderHtml()
         {
             var html = new StringBuilder();
             var inputName = _fieldPrefix + _key;
             string ErrorStyle = string.Empty;
-            //prompt label
             var prompt = new TagBuilder("label");
 
             prompt.SetInnerText(Prompt);
@@ -30,16 +29,12 @@ namespace MvcDynamicForms.Fields
             
             prompt.Attributes.Add("style", "");
             html.Append(prompt.ToString());
-            // error label
+
             if (!IsValid)
             {
-                //Add new Error to the error Obj
-
                  ErrorStyle = ";border-color: red";
-
             }
 
-            // input element
             var txt = new TagBuilder("textarea");
             txt.Attributes.Add("name", inputName);
             txt.Attributes.Add("id", inputName);
@@ -55,17 +50,16 @@ namespace MvcDynamicForms.Fields
             }
 
             txt.SetInnerText(Response);
+
             if (_IsRequired == true)
             {
                 txt.Attributes.Add("class", "validate[required] text-input");
                 txt.Attributes.Add("data-prompt-position", "topRight:15");
             }
+            
             string IsHiddenStyle = "";
             string IsHighlightedStyle = "";
-            //if (_IsHidden)
-            //{
-            //    IsHiddenStyle = "display:none";
-            //}
+
             if (_IsHighlighted)
             {
                 IsHighlightedStyle = "background-color:yellow";
@@ -75,15 +69,11 @@ namespace MvcDynamicForms.Fields
             {
                 txt.Attributes.Add("disabled", "disabled");
             }
-            //txt.Attributes.Add("style", "position:absolute;left:" + _left.ToString() + "px;top:" + _top.ToString() + "px" + ";width:" + _ControlWidth.ToString() + "px" + ";height:" + _ControlHeight.ToString() + "px" + ErrorStyle + ";" + IsHiddenStyle + ";" + IsHighlightedStyle);
-           // txt.Attributes.Add("style", "height:" + _ControlHeight.ToString() + "px" + ErrorStyle + ";" + IsHiddenStyle + ";" + IsHighlightedStyle);
             txt.Attributes.Add("style", "height:" + "100" + "px" + ErrorStyle + ";" + IsHiddenStyle + ";" + IsHighlightedStyle);
             
             txt.MergeAttributes(_inputHtmlAttributes);
             html.Append(txt.ToString());
 
-
-            // If readonly then add the following jquery script to make the field disabled 
             if (ReadOnly)
             {
                 var scriptReadOnlyText = new TagBuilder("script");
@@ -93,11 +83,13 @@ namespace MvcDynamicForms.Fields
 
             var wrapper = new TagBuilder(_fieldWrapper);
             wrapper.Attributes["class"] = _fieldWrapperClass;
+
             if (_IsHidden)
             {
                 wrapper.Attributes["style"] = "display:none";
                
             }
+
             wrapper.Attributes["id"] = inputName + "_fieldWrapper";
             wrapper.InnerHtml = html.ToString();
             return wrapper.ToString();
