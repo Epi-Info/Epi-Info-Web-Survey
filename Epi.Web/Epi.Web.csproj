@@ -186,6 +186,7 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="Utility\CacheUtility.cs" />
+    <Compile Include="Utility\FormProviderBase.cs" />
     <Compile Include="Utility\ExceptionMessage.cs" />
     <Compile Include="Utility\FormProvider.cs" />
     <Compile Include="Utility\MobileFormProvider.cs" />

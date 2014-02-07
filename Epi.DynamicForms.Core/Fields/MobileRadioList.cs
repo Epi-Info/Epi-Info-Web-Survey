@@ -6,37 +6,18 @@ using System.Web.Mvc;
 using Epi.Core.EnterInterpreter;
 using System.Web.UI;
 
-
-
 namespace MvcDynamicForms.Fields
 {
-    /// <summary>
-    /// Represents a list of html radio button inputs.
-    /// </summary>
     [Serializable]
-    public class MobileRadioList : OrientableField
+    public class MobileRadioList : RadioList
     {
-        private string _ChoicesList;
-
-        public string ChoicesList
-        {
-            get
-            {
-                return _ChoicesList;
-            }
-
-            set
-            {
-                _ChoicesList = value;
-            }
-        }
         public override string RenderHtml()
         {
             var html = new StringBuilder();
             var inputName = _fieldPrefix + _key;
             var choicesList = _choices.ToList();
-         
-            var choicesList1 = GetChoices(_ChoicesList);
+
+            var choicesList1 = GetChoices(ChoicesList);
             choicesList = choicesList1.ToList();
 
             if (!IsValid)
@@ -49,19 +30,10 @@ namespace MvcDynamicForms.Fields
             string IsHiddenStyle = "";
             string IsHighlightedStyle = "";
 
-            //if (_IsHidden)
-            //{
-            //    //IsHiddenStyle = "visibility:hidden";
-            //    IsHiddenStyle = "display:none";
-            //}
             if (_IsHighlighted)
             {
                 IsHighlightedStyle = "background:yellow";
             }
-
-            //var Div = new TagBuilder("div");
-            //Div.Attributes.Add("data-role", "fieldcontain");
-            //html.Append(Div.ToString(TagRenderMode.StartTag));
 
             var fieldset = new TagBuilder("fieldset");
             fieldset.Attributes.Add("data-role", "controlgroup");
@@ -72,10 +44,6 @@ namespace MvcDynamicForms.Fields
               
             legend.SetInnerText(Prompt);
             html.Append(legend.ToString());
-
-          
-
-         
          
             for (int i = 0; i < choicesList.Count; i++)
             {
@@ -83,7 +51,7 @@ namespace MvcDynamicForms.Fields
                 double innerTop = 0.0;
                 double innerLeft = 0.0;
                 string radId = inputName + i;
-                // if (Pattern != null && !string.IsNullOrEmpty(Pattern[0]))
+
                 if ((Pattern.Count) == choicesList.Count)
                 {
                     List<string> TopLeft = Pattern[i].ToString().Split(':').ToList();
@@ -92,10 +60,8 @@ namespace MvcDynamicForms.Fields
                     {
                         innerTop = double.Parse(TopLeft[0]) * Height;
                         innerLeft = double.Parse(TopLeft[1]) * Width;
-
                     }
                 }
-
  
                 var rad = new TagBuilder("input");
                 rad.Attributes.Add("type", "radio");
@@ -120,24 +86,15 @@ namespace MvcDynamicForms.Fields
                 rad.MergeAttributes(_inputHtmlAttributes);
                 html.Append(rad.ToString(TagRenderMode.SelfClosing));
 
-             
-                    var rightlbl = new TagBuilder("label");
-                    rightlbl.Attributes.Add("for", radId);
-                    rightlbl.Attributes.Add("class", "label" + inputName);
-                    //StringBuilder StyleValues2 = new StringBuilder();
-                    //StyleValues2.Append(GetRadioListStyle(_fontstyle.ToString(), null, null, null, null, IsHidden));
-                    ////rightlbl.Attributes.Add("style", StyleValues2.ToString() + ";" + IsHighlightedStyle + ";" + IsHiddenStyle);
-                    //rightlbl.Attributes.Add("style",  "" + IsHighlightedStyle + ";" + IsHiddenStyle);
-                    rightlbl.SetInnerText(choicesList[i].Key);
-                    html.Append(rightlbl.ToString());
-
-                 
+                var rightlbl = new TagBuilder("label");
+                rightlbl.Attributes.Add("for", radId);
+                rightlbl.Attributes.Add("class", "label" + inputName);
+                rightlbl.SetInnerText(choicesList[i].Key);
+                html.Append(rightlbl.ToString());
             }
           
             html.Append(fieldset.ToString(TagRenderMode.EndTag));
-            //html.Append(Div.ToString(TagRenderMode.EndTag));
 
-            // add hidden tag, so that a value always gets sent for select tags
             var hidden = new TagBuilder("input");
             hidden.Attributes.Add("type", "hidden");
             hidden.Attributes.Add("id", inputName);
@@ -153,38 +110,13 @@ namespace MvcDynamicForms.Fields
                 wrapper.Attributes["style"] = "display:none";
                 
             }
+            
             wrapper.Attributes["id"] = inputName + "_fieldWrapper";
             wrapper.InnerHtml = html.ToString();
+            
             return wrapper.ToString();
-
-           
-
         }
 
-        private Dictionary<string, bool> GetChoices(string _ChoicesList)
-        {
-            string ListString = _ChoicesList;
-            ListString = ListString.Replace("||", "|");
-            List<string> Lists = ListString.Split('|').ToList<string>();
 
-            Dictionary<string, bool> Choices = new Dictionary<string, bool>();
-            Choices = GetChoices(Lists[0].Split(',').ToList<string>());
-            return Choices;
-        }
-
-        public static Dictionary<string, bool> GetChoices(List<string> List)
-        {
-
-            Dictionary<string, bool> NewList = new Dictionary<string, bool>();
-            foreach (var _List in List)
-            {
-
-                NewList.Add(_List, false);
-
-            }
-
-            return NewList;
-
-        }
     }
 }

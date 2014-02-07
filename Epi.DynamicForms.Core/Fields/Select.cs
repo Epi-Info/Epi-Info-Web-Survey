@@ -9,9 +9,6 @@ using System.Drawing;
 
 namespace MvcDynamicForms.Fields
 {
-    /// <summary>
-    /// Represents an html select element.
-    /// </summary>
     [Serializable]
     public class Select : ListField
     {
