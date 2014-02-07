@@ -10,7 +10,7 @@ namespace MvcDynamicForms.Fields
     /// Represents a single html checkbox input field.
     /// </summary>
     [Serializable]
-    public class MobileCheckBox : InputField
+    public class MobileCheckBox : CheckBox
     {
         private string _checkedValue = "Yes";
         private string _uncheckedValue = "No";
@@ -69,22 +69,11 @@ namespace MvcDynamicForms.Fields
                         Checked = false;
                         break;
                 }
-
             }
         }
 
         public override bool Validate()
         {
-            /*
-            if (Required && !Checked)
-            {
-                // Isn't valid
-                Error = _requiredMessage;
-                return false;
-            }
-
-            // Is Valid
-            */
             ClearError();
             return true;
         }
@@ -95,78 +84,63 @@ namespace MvcDynamicForms.Fields
             var html = new StringBuilder();
             string ErrorStyle = string.Empty;
 
-            // error label
             if (!IsValid)
             {
-                //Add new Error to the error Obj
                 ErrorStyle = ";border-color: red";
             }
 
-            // checkbox input
-            var chk = new TagBuilder("input");
-            chk.Attributes.Add("id", inputName);
-            chk.Attributes.Add("name", inputName);
-            chk.Attributes.Add("type", "checkbox");
-            if (Checked) chk.Attributes.Add("checked", "checked");
-            chk.Attributes.Add("value", bool.TrueString);
+            var checkboxTag = new TagBuilder("input");
+            checkboxTag.Attributes.Add("id", inputName);
+            checkboxTag.Attributes.Add("name", inputName);
+            checkboxTag.Attributes.Add("type", "checkbox");
+
+            if (Checked)
+            {
+                checkboxTag.Attributes.Add("checked", "checked");
+            }
+
+            checkboxTag.Attributes.Add("value", bool.TrueString);
+            
             string IsHiddenStyle = "";
             string IsHighlightedStyle = "";
-            //if (_IsHidden)
-            //{
-            //    IsHiddenStyle = "display:none";
-            //}
+
             if (_IsHighlighted)
             {
                 IsHighlightedStyle = "background-color:yellow";
             }
-
             
             if (_IsDisabled)
             {
-                chk.Attributes.Add("disabled", "disabled");
+                checkboxTag.Attributes.Add("disabled", "disabled");
             }
-            ////////////Check code start//////////////////
-            // chk.Attributes.Add("onfocus", "EventArray.push('" + Prompt + "Befor')");//befor
-            //chk.Attributes.Add("onblur", "EventArray.push('" + Prompt + "After')");//After
-            ////////////Check code end//////////////////
 
-          //  chk.Attributes.Add("style", "position:absolute;left:" + _left.ToString() + "px;top:" + _top.ToString() + "px" + ";width:" + _ControlWidth.ToString() + "px" + ErrorStyle + ";" + IsHiddenStyle + ";" + IsHighlightedStyle);
-            chk.Attributes.Add("style", ""+ ErrorStyle + ";" + IsHiddenStyle + ";" + IsHighlightedStyle);
-
-            chk.MergeAttributes(_inputHtmlAttributes);
+            checkboxTag.Attributes.Add("style", "" + ErrorStyle + ";" + IsHiddenStyle + ";" + IsHighlightedStyle);
+            checkboxTag.MergeAttributes(_inputHtmlAttributes);
 
             if (FunctionObjectAfter != null && !FunctionObjectAfter.IsNull())
             {
-                chk.Attributes.Add("onblur", "return " + _key + "_after(this.id);"); //After
+                checkboxTag.Attributes.Add("onblur", "return " + _key + "_after(this.id);"); //After
             }
 
             if (FunctionObjectBefore != null && !FunctionObjectBefore.IsNull())
             {
-                chk.Attributes.Add("onfocus", "return " + _key + "_before(this.id);"); //Before
+                checkboxTag.Attributes.Add("onfocus", "return " + _key + "_before(this.id);"); //Before
             }
 
             if (FunctionObjectClick != null && !FunctionObjectClick.IsNull())
             {
-                chk.Attributes.Add("onclick", "return " + _key + "_click(this.id);");
+                checkboxTag.Attributes.Add("onclick", "return " + _key + "_click(this.id);");
             }
 
-            ////////////Check code end//////////////////
-            html.Append(chk.ToString(TagRenderMode.SelfClosing));
+            html.Append(checkboxTag.ToString(TagRenderMode.SelfClosing));
 
-            // prompt label
             var prompt = new TagBuilder("label");
             prompt.SetInnerText(Prompt);
             prompt.Attributes.Add("for", inputName);
             prompt.Attributes.Add("class", "EpiLabel");
             prompt.Attributes.Add("Id", "label" + inputName);
-            //StringBuilder StyleValues = new StringBuilder();
-            //StyleValues.Append(GetContolStyle(_fontstyle.ToString(), _Prompttop.ToString(), _Promptleft.ToString(), null, Height.ToString(), IsHidden));
-            //prompt.Attributes.Add("style", StyleValues.ToString());
-            //if (_IsDisabled)
-            //{
-            //    prompt.Attributes.Add("style", "color:#b3b3b3");
-            //}
             html.Append(prompt.ToString());
+
             if (ReadOnly)
             {
                 var scriptReadOnlyText = new TagBuilder("script");
@@ -174,27 +148,12 @@ namespace MvcDynamicForms.Fields
                 html.Append(scriptReadOnlyText.ToString(TagRenderMode.Normal));
             }
 
-            // hidden input (so that value is posted when checkbox is unchecked)
             var hdn = new TagBuilder("input");
             hdn.Attributes.Add("type", "hidden");
             hdn.Attributes.Add("id", inputName + "_hidden");
             hdn.Attributes.Add("name", inputName);
             hdn.Attributes.Add("value", bool.FalseString);
-            ////////////Check code start//////////////////
-            //EnterRule FunctionObjectAfter = (EnterRule)_form.FormCheckCodeObj.GetCommand("level=field&event=after&identifier=" + _key);
-            //if (FunctionObjectAfter != null && !FunctionObjectAfter.IsNull())
-            //{
-            //    hdn.Attributes.Add("onblur", "return " + _key + "_after();"); //After
-            //}
-            //EnterRule FunctionObjectBefore = (EnterRule)_form.FormCheckCodeObj.GetCommand("level=field&event=before&identifier=" + _key);
-            //if (FunctionObjectBefore != null && !FunctionObjectBefore.IsNull())
-            //{ 
-            //    hdn.Attributes.Add("onfocus", "return " + _key + "_before();"); //Before
-            //}
-
-            ////////////Check code end//////////////////
             html.Append(hdn.ToString(TagRenderMode.SelfClosing));
-
 
             //prevent check box control to submit on enter click
             var scriptBuilder = new TagBuilder("script");

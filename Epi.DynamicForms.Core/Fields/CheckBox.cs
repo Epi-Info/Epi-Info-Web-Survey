@@ -75,16 +75,6 @@ namespace MvcDynamicForms.Fields
 
         public override bool Validate()
         {
-            /*
-            if (Required && !Checked)
-            {
-                // Isn't valid
-                Error = _requiredMessage;
-                return false;
-            }
-
-            // Is Valid
-            */
             ClearError();
             return true;
         }
@@ -95,14 +85,11 @@ namespace MvcDynamicForms.Fields
             var html = new StringBuilder();
             string ErrorStyle = string.Empty;
 
-            // error label
             if (!IsValid)
             {
-                //Add new Error to the error Obj
                 ErrorStyle = ";border-color: red";
             }
 
-            // checkbox input
             var chk = new TagBuilder("input");
             chk.Attributes.Add("id", inputName);
             chk.Attributes.Add("name", inputName);
@@ -111,10 +98,12 @@ namespace MvcDynamicForms.Fields
             chk.Attributes.Add("value", bool.TrueString);
             string IsHiddenStyle = "";
             string IsHighlightedStyle = "";
+
             if (_IsHidden)
             {
                 IsHiddenStyle = "display:none";
             }
+            
             if (_IsHighlighted)
             {
                 IsHighlightedStyle = "background-color:yellow";
@@ -124,10 +113,6 @@ namespace MvcDynamicForms.Fields
             {
                 chk.Attributes.Add("disabled", "disabled");
             }
-            ////////////Check code start//////////////////
-           // chk.Attributes.Add("onfocus", "EventArray.push('" + Prompt + "Befor')");//befor
-            //chk.Attributes.Add("onblur", "EventArray.push('" + Prompt + "After')");//After
-            ////////////Check code end//////////////////
 
             chk.Attributes.Add("style", "position:absolute;left:" + _left.ToString() + "px;top:" + _top.ToString() + "px" + ";width:" + _ControlWidth.ToString() + "px" + ErrorStyle + ";" + IsHiddenStyle + ";" + IsHighlightedStyle);            
           

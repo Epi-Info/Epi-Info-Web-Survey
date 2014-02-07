@@ -12,6 +12,7 @@ using Epi.Core.EnterInterpreter;
 
 namespace Epi.Web.MVC.Utility
 {
+    [Obsolete]
     public class MobileFormProvider
     {
         public static Form GetForm(object SurveyMetaData, int PageNumber, Epi.Web.Common.DTO.SurveyAnswerDTO _SurveyAnswer)

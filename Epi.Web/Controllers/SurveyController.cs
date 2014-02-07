@@ -186,16 +186,7 @@ namespace Epi.Web.MVC.Controllers
                         if (int.TryParse(StringNumber, out pageNumber))
                         {
                             form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, pageNumber, SurveyAnswer, IsMobileDevice);
-
-                            if (IsMobileDevice)
-                            {
-                                //Epi.Web.MVC.Utility.MobileFormProvider.UpdateHiddenFields(ReffererPageNum, form, XDocument.Parse(surveyInfoModel.XML), XDocument.Parse(SurveyAnswer.XML), this.ControllerContext.RequestContext.HttpContext.Request.Form);
-                            }
-                            else
-                            {
-                                var postedForm = this.ControllerContext.RequestContext.HttpContext.Request.Form;
-                                Epi.Web.MVC.Utility.FormProvider.UpdateHiddenFields(pageNumber, form, XDocument.Parse(surveyInfoModel.XML), XDocument.Parse(SurveyAnswer.XML), postedForm);
-                            }
+                            //Epi.Web.MVC.Utility.FormProvider.UpdateHiddenFields(pageNumber, form, XDocument.Parse(surveyInfoModel.XML), XDocument.Parse(SurveyAnswer.XML), this.ControllerContext.RequestContext.HttpContext.Request.Form);
 
                             UpdateModel(form);
                         }
