@@ -8,9 +8,6 @@ using System.Web.UI;
 
 namespace MvcDynamicForms.Fields
 {
-    /// <summary>
-    /// Represents a list of html radio button inputs.
-    /// </summary>
     [Serializable]
     public class RadioList : OrientableField
     {
@@ -50,8 +47,6 @@ namespace MvcDynamicForms.Fields
 
             if (_IsHidden)
             {
-                //IsHiddenStyle = "visibility:hidden";
-               // IsHiddenStyle = "display:none";
             }
             
             if (_IsHighlighted)
@@ -161,27 +156,26 @@ namespace MvcDynamicForms.Fields
             return wrapper.ToString();
         }
 
-        private Dictionary<string, bool> GetChoices(string choicesList)
+        protected Dictionary<string, bool> GetChoices(string _ChoicesList)
         {
-            string listString = choicesList;
-            listString = listString.Replace("||", "|");
-            List<string> list = listString.Split('|').ToList<string>();
+            string ListString = _ChoicesList;
+            ListString = ListString.Replace("||", "|");
+            List<string> Lists = ListString.Split('|').ToList<string>();
 
             Dictionary<string, bool> Choices = new Dictionary<string, bool>();
-            Choices = GetChoices(list[0].Split(',').ToList<string>());
+            Choices = GetChoices(Lists[0].Split(',').ToList<string>());
             return Choices;
         }
 
-        public static Dictionary<string, bool> GetChoices(List<string> list)
+        protected static Dictionary<string, bool> GetChoices(List<string> List)
         {
-            Dictionary<string, bool> newList = new Dictionary<string, bool>();
-
-            foreach (string choice in list)
+            Dictionary<string, bool> NewList = new Dictionary<string, bool>();
+            foreach (var _List in List)
             {
-                newList.Add(choice, false);
-            }
+                NewList.Add(_List, false);
 
-            return newList;
+            }
+            return NewList;
         }
     }
 }

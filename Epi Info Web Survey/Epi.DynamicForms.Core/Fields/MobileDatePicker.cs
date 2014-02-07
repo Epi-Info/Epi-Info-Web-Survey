@@ -10,7 +10,7 @@ namespace MvcDynamicForms.Fields
     /// Represents a datepicker whichis is a textbox and the datepicker.
     /// </summary>
     [Serializable]
-    public class MobileDatePicker : DatePickerField
+    public class MobileDatePicker : DatePicker
     {
         public override string RenderHtml()
         {
@@ -26,17 +26,14 @@ namespace MvcDynamicForms.Fields
 
             StringBuilder StyleValues = new StringBuilder();
             StyleValues.Append(GetContolStyle(_fontstyle.ToString(), _Prompttop.ToString(), _Promptleft.ToString(), null, Height.ToString(), _IsHidden));
-          //  prompt.Attributes.Add("style", StyleValues.ToString());
+
             html.Append(prompt.ToString());
 
-            // error label
             if (!IsValid)
             {
                 ErrorStyle = ";border-color: red";
-
             }
 
-            // input element
             var txt = new TagBuilder("input");
             txt.Attributes.Add("name", inputName);
             txt.Attributes.Add("id", inputName);
@@ -60,16 +57,9 @@ namespace MvcDynamicForms.Fields
             {
                 txt.Attributes.Add("MaxLength", _MaxLength.ToString());
             }
+
             string IsHiddenStyle = "";
             string IsHighlightedStyle = "";
-            //if (_IsHidden)
-            //{
-            //    IsHiddenStyle = "display:none";
-            //}
-            /*if (_IsHighlighted)
-            {
-                IsHighlightedStyle = "background-color:yellow";
-            }*/
 
             if (_IsDisabled)
             {
@@ -77,41 +67,21 @@ namespace MvcDynamicForms.Fields
             }
             txt.Attributes.Add("class", GetControlClass(Response));
             txt.Attributes.Add("data-prompt-position", "topLeft:15");
-            //txt.Attributes.Add("style", "position:absolute;left:" + _left.ToString() + "px;top:" + _top.ToString() + "px" + ";width:" + _ControlWidth.ToString() + "px" + ErrorStyle + ";" + IsHiddenStyle + ";" + IsHighlightedStyle);
-
+            
             txt.Attributes.Add("style", "" + _ControlWidth.ToString() + "px" + ErrorStyle + ";" + IsHiddenStyle + ";" + IsHighlightedStyle);
 
             txt.MergeAttributes(_inputHtmlAttributes);
             html.Append(txt.ToString(TagRenderMode.SelfClosing));
-            // If readonly then add the following jquery script to make the field disabled 
+
             if (ReadOnly)
             {
                 var scriptReadOnlyText = new TagBuilder("script");
                 scriptReadOnlyText.InnerHtml = "$(function(){$('#" + inputName + "').attr('disabled','disabled')});";
                 html.Append(scriptReadOnlyText.ToString(TagRenderMode.Normal));
             }
-            // adding scripts for date picker
-            //var scriptDatePicker = new TagBuilder("script");
-            
-            //if (FunctionObjectAfter != null && !FunctionObjectAfter.IsNull())
-            //{
-               
-            //    scriptDatePicker.InnerHtml = "$('#" + inputName + "').datepicker({onClose:function(){setTimeout(" + _key + "_after,100);},changeMonth:true,changeYear:true});";
-            //}
-            //else
-            //{
-            //    scriptDatePicker.InnerHtml = "$('#" + inputName + "').datepicker({changeMonth: true,changeYear: true});";
-            //}
-            //html.Append(scriptDatePicker.ToString(TagRenderMode.Normal));
-
-            //prevent date picker control to submit on enter click
-            //var scriptBuilder = new TagBuilder("script");
-            //scriptBuilder.InnerHtml = "$('#" + inputName + "').BlockEnter('" + inputName + "');";
-            //scriptBuilder.ToString(TagRenderMode.Normal);
-            //html.Append(scriptBuilder.ToString(TagRenderMode.Normal));
 
             var wrapper = new TagBuilder(_fieldWrapper);
-            //wrapper.Attributes["class"] = _fieldWrapperClass;
+
             if (!IsValid)
             {
 
@@ -132,33 +102,23 @@ namespace MvcDynamicForms.Fields
             return wrapper.ToString();
         }
 
-
         public string GetControlClass(string Value)
         {
-
-
             StringBuilder ControlClass = new StringBuilder();
-
             ControlClass.Append("validate[");
-
 
             if ((!string.IsNullOrEmpty(GetRightDateFormat(Lower,Pattern).ToString()) && (!string.IsNullOrEmpty(GetRightDateFormat(Upper,Pattern).ToString()))))
             {
-
-                //   ControlClass.Append("customDate[date],future[" + GetRightDateFormat(Lower).ToString() + "],past[" + GetRightDateFormat(Upper).ToString() + "],");
-                //dateRange
                 ControlClass.Append("customDate[date],datePickerRange, " + GetRightDateFormat(Lower,Pattern).ToString() + "," + GetRightDateFormat(Upper,Pattern).ToString() + ",");
 
                 if (_IsRequired == true)
                 {
-
-                    ControlClass.Append("required"); // working fine
+                    ControlClass.Append("required"); 
 
                 }
                 ControlClass.Append("] text-input datepicker");
 
                 return ControlClass.ToString();
-
             }
             else
             {
@@ -170,10 +130,9 @@ namespace MvcDynamicForms.Fields
                 {
                     ControlClass.Append("custom[date]] text-input datepicker");
                 }
+
                 return ControlClass.ToString();
             }
-
-
         }
 
         public string GetRightDateFormat(string Date, string pattern)
@@ -184,6 +143,7 @@ namespace MvcDynamicForms.Fields
             string DD = "";
             string YYYY = "";
             char splitChar = '/';
+
             if (!string.IsNullOrEmpty(Date))
             {
                 if (Date.Contains('-'))
@@ -223,6 +183,5 @@ namespace MvcDynamicForms.Fields
             }
             return NewDateFormat.ToString();
         }
-
     }
 }

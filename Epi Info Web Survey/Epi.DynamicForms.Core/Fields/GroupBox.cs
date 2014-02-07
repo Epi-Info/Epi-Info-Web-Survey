@@ -7,19 +7,10 @@ using Epi.Web.Common;
 
 namespace MvcDynamicForms.Fields
 {
-    /// <summary>
-    /// Represents html to be rendered on the form.
-    /// </summary>
     [Serializable]
     public class GroupBox : TextField
     {
-        /// <summary>
-        /// Determines whether the rendered html will be wrapped by another element.
-        /// </summary>
         public bool Wrap { get; set; }
-        /// <summary>
-        /// The html to be rendered on the form.
-        /// </summary>
         public string Html { get; set; }
 
         public override string RenderHtml()
