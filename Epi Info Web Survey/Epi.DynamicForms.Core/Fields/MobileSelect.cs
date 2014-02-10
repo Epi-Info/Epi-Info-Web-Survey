@@ -12,33 +12,6 @@ namespace MvcDynamicForms.Fields
     [Serializable]
     public class MobileSelect : Select
     {
-        public int Size
-        {
-            get
-            {
-                string size;
-                return _inputHtmlAttributes.TryGetValue("size", out size) ? int.Parse(size) : 1;
-            }
-            set { _inputHtmlAttributes["size"] = value.ToString(); }
-        }
-
-        public bool MultipleSelection
-        {
-            get
-            {
-                string multiple;
-                if (_inputHtmlAttributes.TryGetValue("multiple", out multiple))
-                {
-                    return multiple.ToLower() == "multiple";
-                }
-                return false;
-            }
-            set { _inputHtmlAttributes["multiple"] = value.ToString(); }
-        }
-
-        public string EmptyOption { get; set; }
-        public bool ShowEmptyOption { get; set; }
-
         public override string RenderHtml()
         {
             var html = new StringBuilder();
@@ -81,12 +54,12 @@ namespace MvcDynamicForms.Fields
             int LargestChoiseLength = 0;
             string measureString = "";
 
-            foreach (var choise in _choices)
+            foreach (var choice in _choices)
             {
-                if (choise.Key.ToString().Length > LargestChoiseLength)
+                if (choice.Key.ToString().Length > LargestChoiseLength)
                 {
-                    LargestChoiseLength = choise.Key.ToString().Length;
-                    measureString = choise.Key.ToString();
+                    LargestChoiseLength = choice.Key.ToString().Length;
+                    measureString = choice.Key.ToString();
                 }
             }
             
@@ -194,17 +167,23 @@ namespace MvcDynamicForms.Fields
                     foreach (var choice in _choices)
                     {
                         var opt = new TagBuilder("option");
+
                         if (choice.Key.Contains("-"))
                         {
-                            opt.Attributes.Add("value", choice.Key.Remove(choice.Key.IndexOf("-")));
+                            string[] keyValue = choice.Key.Split(new char[] { '-' });
+                            string comment = keyValue[0].Trim();
+                            string description = keyValue[1].Trim();
 
-                            if (choice.Value || choice.Key.Remove(choice.Key.IndexOf("-")) == SelectedValue.ToString())
+                            opt.Attributes.Add("value", comment);
+
+                            if (choice.Value || comment == SelectedValue.ToString())
                             {
                                 opt.Attributes.Add("selected", "selected");
                             }
 
-                            opt.SetInnerText(choice.Key.Substring(choice.Key.IndexOf("-") + 1));
+                            opt.SetInnerText(description);
                         }
+
                         html.Append(opt.ToString());
                     }
                     break;
@@ -238,6 +217,7 @@ namespace MvcDynamicForms.Fields
             wrapper.InnerHtml = html.ToString();
             return wrapper.ToString();
         }
+
         public string GetStyle(bool _IsHidden, bool _IsHighlighted)
         {
             string Style = "";
