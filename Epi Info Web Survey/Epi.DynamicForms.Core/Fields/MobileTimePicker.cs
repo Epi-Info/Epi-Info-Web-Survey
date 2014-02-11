@@ -22,7 +22,7 @@ namespace MvcDynamicForms.Fields
             prompt.Attributes.Add("class", "EpiLabel");
 
             StringBuilder StyleValues = new StringBuilder();
-            StyleValues.Append(GetContolStyle(_fontstyle.ToString(), _Prompttop.ToString(), _Promptleft.ToString(), null, Height.ToString(), _IsHidden));
+            StyleValues.Append(GetControlStyle(_fontstyle.ToString(), _Prompttop.ToString(), _Promptleft.ToString(), null, Height.ToString(), _IsHidden));
             html.Append(prompt.ToString());
 
             if (!IsValid)

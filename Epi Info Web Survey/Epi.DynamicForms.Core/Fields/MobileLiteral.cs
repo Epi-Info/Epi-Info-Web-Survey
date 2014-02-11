@@ -10,42 +10,7 @@ namespace MvcDynamicForms.Fields
     [Serializable]
     public class MobileLiteral : Literal
     {
-        public string Name { get; set; }
-        public bool Wrap { get; set; }
-        public string Html { get; set; }
-
-        public override string RenderHtml()
-        {
-            if (Wrap)
-            {
-                var wrapper = new TagBuilder(_fieldWrapper);
-                if (string.IsNullOrEmpty(this._cssClass))
-                {
-                    wrapper.Attributes["class"] = _fieldWrapperClass;
-                }
-                else
-                {
-                    wrapper.Attributes["class"] = this._cssClass;
-                }
-
-
-                System.Text.RegularExpressions.Regex regex = new System.Text.RegularExpressions.Regex(@"(\r\n|\r|\n)+");
-                string newText = regex.Replace(Html.Replace("  ", " &nbsp;"), "<br />");
-                Html = MvcHtmlString.Create(newText).ToString();
-                wrapper.Attributes["ID"] = "mvcdynamicfield_" + Name.ToLower() + "_fieldWrapper";
-
-                StringBuilder StyleValues = new StringBuilder();
-                StyleValues.Append(GetMobileLiteralStyle(_fontstyle.ToString(), null, null, null, null, IsHidden));
-                wrapper.Attributes.Add(new KeyValuePair<string, string>("style", StyleValues.ToString()));
-                wrapper.InnerHtml = Html;
-
-                return wrapper.ToString();
-            }
-         
-            return Html;
-        }
-        
-        public string GetMobileLiteralStyle(string ControlFontStyle, string Top, string Left, string Width, string Height, bool IsHidden)
+        public override string GetControlStyle(string ControlFontStyle, string top, string left, string width, string height, bool isHidden)
         {
             StringBuilder FontStyle = new StringBuilder();
             StringBuilder FontWeight = new StringBuilder();
