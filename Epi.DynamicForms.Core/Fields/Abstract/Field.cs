@@ -132,7 +132,7 @@ namespace MvcDynamicForms.Fields
         /// </summary>
         /// <param name="ControlFontStyle"></param>
         /// <returns></returns>
-        public string GetContolStyle(string ControlFontStyle, string Top, string Left, string Width, string Height, bool IsHidden)
+        public virtual string GetControlStyle(string ControlFontStyle, string Top, string Left, string Width, string Height, bool IsHidden)
         {
             StringBuilder FontStyle = new StringBuilder();
             StringBuilder FontWeight = new StringBuilder();
