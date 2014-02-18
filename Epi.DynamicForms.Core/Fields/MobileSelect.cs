@@ -117,7 +117,7 @@ namespace MvcDynamicForms.Fields
                 html.Append(opt.ToString());
             }
 
-            switch (this.SelectType.ToString())
+            switch (FieldTypeId.ToString())
             {
                 case "11":
                     foreach (var choice in _choices)
