@@ -76,11 +76,11 @@ namespace Epi.Web.MVC.Controllers
         {
             try
             {
-                bool IsMobileDevice = this.Request.Browser.IsMobileDevice;
+                bool isMobileDevice = this.Request.Browser.IsMobileDevice;
 
-                if (IsMobileDevice == false)
+                if (isMobileDevice == false)
                 {
-                    IsMobileDevice = Epi.Web.MVC.Utility.SurveyHelper.IsMobileDevice(this.Request.UserAgent.ToString());
+                    isMobileDevice = Epi.Web.MVC.Utility.SurveyHelper.IsMobileDevice(this.Request.UserAgent.ToString());
                 }
 
                 FormsAuthentication.SetAuthCookie("BeginSurvey", false);
@@ -99,7 +99,7 @@ namespace Epi.Web.MVC.Controllers
 
                 SurveyInfoModel surveyInfoModel = GetSurveyInfo(SurveyAnswer.SurveyId);
                 XDocument xdoc = XDocument.Parse(surveyInfoModel.XML);
-                MvcDynamicForms.Form form = _isurveyFacade.GetSurveyFormData(SurveyAnswer.SurveyId, 1, SurveyAnswer, IsMobileDevice);
+                MvcDynamicForms.Form form = _isurveyFacade.GetSurveyFormData(SurveyAnswer.SurveyId, 1, SurveyAnswer, isMobileDevice);
 
                 var _FieldsTypeIDs = from _FieldTypeID in
                                      xdoc.Descendants("Field")

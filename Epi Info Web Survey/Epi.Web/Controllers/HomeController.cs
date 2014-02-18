@@ -149,7 +149,7 @@ namespace Epi.Web.MVC.Controllers
                 SurveyAnswer.IsDraftMode = surveyInfoModel.IsDraftMode;
                 XDocument xdoc = XDocument.Parse(surveyInfoModel.XML);
 
-                MvcDynamicForms.Form form = _isurveyFacade.GetSurveyFormData(SurveyAnswer.SurveyId, 1, SurveyAnswer, IsMobileDevice);
+                MvcDynamicForms.Form form = _isurveyFacade.GetSurveyFormData(SurveyAnswer.SurveyId, 1, SurveyAnswer, IsMobileDevice, "homeController");
 
                 var _FieldsTypeIDs = from _FieldTypeID in
                                      xdoc.Descendants("Field")

@@ -20,7 +20,7 @@ namespace MvcDynamicForms.Fields
         /// <summary>
         /// The choices that the end user can choose from.
         /// </summary>
-        public Dictionary<string, bool> Choices
+        public Dictionary<string, bool> ChoiceKeyValuePairs
         {
             get
             {
@@ -46,7 +46,7 @@ namespace MvcDynamicForms.Fields
                 _responseDelimiter = value;
             }
         }
-        public int SelectType { get; set; }
+
         public float ControlFontSize 
         { 
             get
@@ -87,7 +87,7 @@ namespace MvcDynamicForms.Fields
             }
             set 
             {
-                switch (this.SelectType.ToString())
+                switch (FieldTypeId.ToString())
                 {
                     case "11":
                         Dictionary<string, bool> yesno = new Dictionary<string, bool>();
@@ -114,8 +114,30 @@ namespace MvcDynamicForms.Fields
                                 yesno.Add(choice.Key.ToString(), false);
                             }
                         }
-                        
-                        Choices = yesno;
+
+                        ChoiceKeyValuePairs = yesno;
+                        break;
+
+                    case "12":
+                        Dictionary<string, bool> options = new Dictionary<string, bool>();
+                        List<KeyValuePair<string, bool>> list = _choices.ToList();
+
+                        for (int i = 0; i < list.Count; i++)
+                        {
+                            int index = -1;
+                            int.TryParse(value, out index);
+
+                            if (i == index)
+                            {
+                                options.Add(list[i].Key.ToString(), true);
+                            }
+                            else
+                            {
+                                options.Add(list[i].Key.ToString(), false);
+                            }
+                        }
+
+                        ChoiceKeyValuePairs = options;
                         break;
 
                     case "17":
@@ -132,7 +154,8 @@ namespace MvcDynamicForms.Fields
                             }
                                 
                         }
-                        Choices = legalValues;
+                        
+                        ChoiceKeyValuePairs = legalValues;
                         break;
 
                     case "18":
@@ -149,7 +172,8 @@ namespace MvcDynamicForms.Fields
                             }
                                 
                         }
-                        Choices = codes;
+                        
+                        ChoiceKeyValuePairs = codes;
                         break;
 
                     case "19":
@@ -179,7 +203,8 @@ namespace MvcDynamicForms.Fields
                                 }
                             }
                         }
-                        Choices = commentLegal;
+                        
+                        ChoiceKeyValuePairs = commentLegal;
                         break;
                     }
                 }
