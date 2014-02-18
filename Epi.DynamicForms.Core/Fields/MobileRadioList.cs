@@ -15,11 +15,8 @@ namespace MvcDynamicForms.Fields
         {
             var html = new StringBuilder();
             var inputName = _fieldPrefix + _key;
-            var choicesList = _choices.ToList();
-
-            var choicesList1 = GetChoices(ChoicesList);
-            choicesList = choicesList1.ToList();
-
+            List<KeyValuePair<string, bool>> choiceList = ChoiceKeyValuePairs.ToList();
+            
             if (!IsValid)
             {
                 var error = new TagBuilder("label");
@@ -44,17 +41,17 @@ namespace MvcDynamicForms.Fields
               
             legend.SetInnerText(Prompt);
             html.Append(legend.ToString());
-         
-            for (int i = 0; i < choicesList.Count; i++)
+
+            for (int i = 0; i < choiceList.Count; i++)
             {
 
                 double innerTop = 0.0;
                 double innerLeft = 0.0;
                 string radId = inputName + i;
 
-                if ((Pattern.Count) == choicesList.Count)
+                if ((Locations.Count) == choiceList.Count)
                 {
-                    List<string> TopLeft = Pattern[i].ToString().Split(':').ToList();
+                    List<string> TopLeft = Locations[i].ToString().Split(':').ToList();
 
                     if (TopLeft.Count > 0)
                     {
@@ -74,7 +71,7 @@ namespace MvcDynamicForms.Fields
                     rad.Attributes.Add("onclick", "return " + _key + "_after(this.id);"); //After
                 }
 
-                rad.SetInnerText(choicesList[i].Key);
+                rad.SetInnerText(choiceList[i].Key);
                 rad.Attributes.Add("value", i.ToString());
 
                 if (_IsDisabled)
@@ -82,14 +79,18 @@ namespace MvcDynamicForms.Fields
                     rad.Attributes.Add("disabled", "disabled");
                 }
 
-                if (Value == i.ToString()) rad.Attributes.Add("checked", "checked");
+                if (Response == i.ToString())
+                {
+                    rad.Attributes.Add("checked", "checked");
+                }
+
                 rad.MergeAttributes(_inputHtmlAttributes);
                 html.Append(rad.ToString(TagRenderMode.SelfClosing));
 
                 var rightlbl = new TagBuilder("label");
                 rightlbl.Attributes.Add("for", radId);
                 rightlbl.Attributes.Add("class", "label" + inputName);
-                rightlbl.SetInnerText(choicesList[i].Key);
+                rightlbl.SetInnerText(choiceList[i].Key);
                 html.Append(rightlbl.ToString());
             }
           
@@ -105,10 +106,10 @@ namespace MvcDynamicForms.Fields
 
             var wrapper = new TagBuilder(_fieldWrapper);
             wrapper.Attributes["class"] = _fieldWrapperClass;
+
             if (_IsHidden)
             {
                 wrapper.Attributes["style"] = "display:none";
-                
             }
             
             wrapper.Attributes["id"] = inputName + "_fieldWrapper";
@@ -116,7 +117,5 @@ namespace MvcDynamicForms.Fields
             
             return wrapper.ToString();
         }
-
-
     }
 }

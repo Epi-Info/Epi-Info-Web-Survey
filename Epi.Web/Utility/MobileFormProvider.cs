@@ -423,16 +423,16 @@ namespace Epi.Web.MVC.Utility
             RadioList.IsRequired =  GetRequiredControlState(form.RequiredFieldsList.ToString(), _FieldTypeID.Attribute("Name").Value, "RequiredFieldsList");//bool.Parse(_FieldTypeID.Attribute("IsRequired").Value);
             RadioList.IsReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value);
 
-            RadioList.Value = _ControlValue;
+            //RadioList.Value = _ControlValue;
             RadioList.IsHidden = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "HiddenFieldsList");
             RadioList.IsHighlighted = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "HighlightedFieldsList");
             RadioList.IsDisabled = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "DisabledFieldsList");
             RadioList.ShowTextOnRight = bool.Parse(_FieldTypeID.Attribute("ShowTextOnRight").Value);
-            RadioList.Choices = Choices;
+            //RadioList.Choices = Choices;
             RadioList.Width = _Width;
             RadioList.Height = _Height;
-            RadioList.Pattern = Pattern;
-            RadioList.ChoicesList = ListString;
+            //RadioList.Pattern = Pattern;
+            //RadioList.ChoicesList = ListString;
             // if (RadioList.Pattern[0] == "Vertical")
             if (_Height > _Width)
             {
@@ -752,7 +752,7 @@ namespace Epi.Web.MVC.Utility
                 IsRequired =GetRequiredControlState(form.RequiredFieldsList.ToString(), _FieldTypeID.Attribute("Name").Value, "RequiredFieldsList"),// bool.Parse(_FieldTypeID.Attribute("IsRequired").Value),
                 IsReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value),
                 ShowEmptyOption = true,
-                SelectType = FieldTypeId,
+                //ListType = FieldTypeId,
                 SelectedValue = _ControlValue,
                 IsHidden = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "HiddenFieldsList"),
                 IsHighlighted = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "HighlightedFieldsList"),
@@ -770,7 +770,7 @@ namespace Epi.Web.MVC.Utility
 
             if (!string.IsNullOrWhiteSpace(_ControlValue))
             {
-                DropDown.Choices[_ControlValue] = true;
+                DropDown.ChoiceKeyValuePairs[_ControlValue] = true;
             }
 
             return DropDown;

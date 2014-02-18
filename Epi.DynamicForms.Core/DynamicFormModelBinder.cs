@@ -48,20 +48,21 @@ namespace MvcDynamicForms
                             var timepickerField = (TimePickerField)dynField;
                             timepickerField.Value = postedForm[key];
                         }
-
                         else if (dynField is ListField)
                         {
-                            var lstField = (ListField)dynField;
+                            var listField = (ListField)dynField;
 
-                            // clear all choice selections                    
-                            foreach (string k in lstField.Choices.Keys.ToList())
-                                lstField.Choices[k] = false;
+                            foreach (string choiceKey in listField.ChoiceKeyValuePairs.Keys.ToList())
+                            {
+                                listField.ChoiceKeyValuePairs[choiceKey] = false;
+                            }
 
-                            // set current selections
                             foreach (string value in postedForm.GetValues(key))
-                                lstField.Choices[value] = true;
+                            {
+                                listField.ChoiceKeyValuePairs[value] = true;
+                            }
 
-                            lstField.Choices.Remove("");
+                            listField.ChoiceKeyValuePairs.Remove("");
                         }
                         else if (dynField is CheckBox)
                         {

@@ -10,7 +10,7 @@ namespace Epi.Web.MVC.Facade
     public interface ISurveyFacade
     {
 
-        MvcDynamicForms.Form GetSurveyFormData(string surveyId, int pageNumber, Epi.Web.Common.DTO.SurveyAnswerDTO surveyAnswerDTO, bool IsMobileDevice);
+        MvcDynamicForms.Form GetSurveyFormData(string surveyId, int pageNumber, Epi.Web.Common.DTO.SurveyAnswerDTO surveyAnswerDTO, bool isDevice = false, string calledThereby = "");
         Epi.Web.Common.DTO.SurveyAnswerDTO  CreateSurveyAnswer(string surveyId, string responseId);
         void UpdateSurveyResponse(SurveyInfoModel surveyInfoModel, string responseId, MvcDynamicForms.Form form, Epi.Web.Common.DTO.SurveyAnswerDTO surveyAnswerDTO, bool IsSubmited, bool IsSaved, int PageNumber);
         

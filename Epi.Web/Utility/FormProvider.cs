@@ -17,7 +17,7 @@ namespace Epi.Web.MVC.Utility
 {
     public class FormProvider : FormProviderBase
     {
-        public static Form GetForm(SurveyInfoDTO surveyInfo, int pageNumber, SurveyAnswerDTO surveyAnswer, bool isMobile = false)
+        public static Form GetForm(SurveyInfoDTO surveyInfo, int pageNumber, SurveyAnswerDTO surveyAnswer, bool isMobile = false, string calledThereby = "")
         {
             Form form = new Form();
 
@@ -27,6 +27,11 @@ namespace Epi.Web.MVC.Utility
             string cacheKey = surveyId +
                 ",page:" + pageNumber.ToString() +
                 ",mobile:" + isMobileText;
+
+            //if (calledThereby != "")
+            //{
+            //    cacheKey += cacheKey + "," + calledThereby;
+            //}
 
             form = CacheUtility.Get(cacheKey) as Form;
 
@@ -103,15 +108,30 @@ namespace Epi.Web.MVC.Utility
                 CacheUtility.Insert(cacheKey, form, surveyId);
             }
 
-            Form clone = form.Clone() as Form;
-            clone.ResponseId = surveyAnswer.ResponseId;
-
-            if (surveyAnswer.XML.Contains("ResponseDetail"))
+            if (CacheUtility.CacheIsOn && false)
             {
-                FormProvider.SetStates(clone, surveyAnswer);
-            }
+                Form clone = form.Clone() as Form;
+                clone.ResponseId = surveyAnswer.ResponseId;
 
-            return clone;
+                if (surveyAnswer.XML.Contains("ResponseDetail"))
+                {
+                    SetStates(clone, surveyAnswer);
+                }
+
+                return clone;
+            }
+            else
+            {
+                form.ResponseId = surveyAnswer.ResponseId;
+                FieldStateReset(form);
+
+                if (surveyAnswer.XML.Contains("ResponseDetail"))
+                {
+                    SetStates(form, surveyAnswer);
+                }
+                
+                return form;
+            }
         }
     }
 }
