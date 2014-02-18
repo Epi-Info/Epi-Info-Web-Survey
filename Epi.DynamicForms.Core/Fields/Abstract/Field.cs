@@ -43,6 +43,8 @@ namespace MvcDynamicForms.Fields
             set { _name = value; }
         }
 
+        public int FieldTypeId { get; set; }
+
         public EnterRule FunctionObjectAfter
         {
             get { return _functionObjectAfter; }

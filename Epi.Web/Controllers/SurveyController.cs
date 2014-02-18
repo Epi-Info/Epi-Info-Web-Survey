@@ -44,45 +44,42 @@ namespace Epi.Web.MVC.Controllers
         
                 
        
-       /// <summary>
-       /// create the new resposeid and put it in temp data. create the form object. create the first survey response
-       /// </summary>
-       /// <param name="surveyId"></param>
-       /// <returns></returns>
+        /// <summary>
+        /// create the new resposeid and put it in temp data. create the form object. create the first survey response
+        /// </summary>
+        /// <param name="surveyId"></param>
+        /// <returns></returns>
  
         [HttpGet]
-
-      //  [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")] 
-        public ActionResult Index(string responseId, int PageNumber = 0)
+        public ActionResult Index(string responseId, int pageNumber = 0)
         {
             try
             {
+                string calledThereby = "SurveyController.Index[HttpGet]";
                 string version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
                 ViewBag.Version = version;
 
-                bool IsMobileDevice = false;
-                IsMobileDevice = this.Request.Browser.IsMobileDevice;
-                if (IsMobileDevice == false)
+                bool isMobileDevice = false;
+                isMobileDevice = this.Request.Browser.IsMobileDevice;
+                
+                if (isMobileDevice == false)
                 {
-                    IsMobileDevice = Epi.Web.MVC.Utility.SurveyHelper.IsMobileDevice(this.Request.UserAgent.ToString());
+                    isMobileDevice = Epi.Web.MVC.Utility.SurveyHelper.IsMobileDevice(this.Request.UserAgent.ToString());
                 }
 
-                    Epi.Web.Common.DTO.SurveyAnswerDTO surveyAnswerDTO = GetSurveyAnswer(responseId);
+                Epi.Web.Common.DTO.SurveyAnswerDTO surveyAnswerDTO = GetSurveyAnswer(responseId);
                    
-                   // SurveyInfoModel surveyInfoModel = _isurveyFacade.GetSurveyInfoModel(surveyAnswerDTO.SurveyId);
-                    SurveyInfoModel surveyInfoModel = GetSurveyInfo(surveyAnswerDTO.SurveyId);
-                    PreValidationResultEnum ValidationTest = PreValidateResponse(Mapper.ToSurveyAnswerModel(surveyAnswerDTO), surveyInfoModel);
-                    if (PageNumber == 0)
-                    {
-                        PageNumber = GetSurveyPageNumber(surveyAnswerDTO.XML.ToString());
-
-                    }
-                    else
-                    {
-
-
-                    }
-
+                SurveyInfoModel surveyInfoModel = GetSurveyInfo(surveyAnswerDTO.SurveyId);
+                PreValidationResultEnum ValidationTest = PreValidateResponse(Mapper.ToSurveyAnswerModel(surveyAnswerDTO), surveyInfoModel);
+                
+                if(pageNumber == 0)
+                {
+                    pageNumber = GetSurveyPageNumber(surveyAnswerDTO.XML.ToString());
+                }
+                else
+                {
+                
+                }
 
                     switch (ValidationTest)
                     {
@@ -92,7 +89,7 @@ namespace Epi.Web.MVC.Controllers
                             return View("IsSubmitedError");
                         case PreValidationResultEnum.Success:
                         default:
-                            var form = _isurveyFacade.GetSurveyFormData(surveyAnswerDTO.SurveyId, PageNumber, surveyAnswerDTO, IsMobileDevice);
+                            var form = _isurveyFacade.GetSurveyFormData(surveyAnswerDTO.SurveyId, pageNumber, surveyAnswerDTO, isMobileDevice);
                             TempData["Width"] = form.Width + 5;
                             // if redirect then perform server validation before displaying
                             if (TempData.ContainsKey("isredirect") && !string.IsNullOrWhiteSpace(TempData["isredirect"].ToString()))
@@ -100,9 +97,9 @@ namespace Epi.Web.MVC.Controllers
                                 form.Validate(form.RequiredFieldsList);
                             }
                             surveyAnswerDTO.IsDraftMode = surveyInfoModel.IsDraftMode;
-                            this.SetCurrentPage(surveyAnswerDTO, PageNumber);
+                            this.SetCurrentPage(surveyAnswerDTO, pageNumber);
                             //PassCode start
-                            if (IsMobileDevice)
+                            if (isMobileDevice)
                             {
                                   Epi.Web.Common.Message.UserAuthenticationResponse AuthenticationResponse = _isurveyFacade.GetAuthenticationResponse(responseId);
 
@@ -171,9 +168,20 @@ namespace Epi.Web.MVC.Controllers
                         break;
                     //case PreValidationResultEnum.Success:
                     default:
-                        MvcDynamicForms.Form form;
+                        MvcDynamicForms.Form form;    
+                        int CurrentPageNum = GetSurveyPageNumber(SurveyAnswer.XML.ToString());
                         int pageNumber;
-                        string url = this.Request.Url.ToString();
+
+                        string url = "";
+                        if (this.Request.UrlReferrer == null)
+                        {
+                            url = this.Request.Url.ToString();
+                        }
+                        else
+                        {
+                            url = this.Request.UrlReferrer.ToString();
+                        }
+
                         int LastIndex = url.LastIndexOf("/");
                         string StringNumber = null;
 
@@ -185,7 +193,18 @@ namespace Epi.Web.MVC.Controllers
 
                         if (int.TryParse(StringNumber, out pageNumber))
                         {
-                            form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, pageNumber, SurveyAnswer, IsMobileDevice);
+                            if (pageNumber != CurrentPageNum)
+                            {
+                                form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, pageNumber, SurveyAnswer, IsMobileDevice);
+                                Epi.Web.MVC.Utility.FormProvider.UpdateHiddenFields(pageNumber, form, XDocument.Parse(surveyInfoModel.XML), XDocument.Parse(SurveyAnswer.XML), this.ControllerContext.RequestContext.HttpContext.Request.Form);
+                            }
+                            else
+                            {
+                                form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, CurrentPageNum, SurveyAnswer, IsMobileDevice);
+                                Epi.Web.MVC.Utility.FormProvider.UpdateHiddenFields(CurrentPageNum, form, XDocument.Parse(surveyInfoModel.XML), XDocument.Parse(SurveyAnswer.XML), this.ControllerContext.RequestContext.HttpContext.Request.Form);
+                            }
+                            
+                            //form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, pageNumber, SurveyAnswer, IsMobileDevice);
                             //Epi.Web.MVC.Utility.FormProvider.UpdateHiddenFields(pageNumber, form, XDocument.Parse(surveyInfoModel.XML), XDocument.Parse(SurveyAnswer.XML), this.ControllerContext.RequestContext.HttpContext.Request.Form);
 
                             UpdateModel(form);
@@ -195,27 +214,24 @@ namespace Epi.Web.MVC.Controllers
                             form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, GetSurveyPageNumber(SurveyAnswer.XML.ToString()), SurveyAnswer, IsMobileDevice);
                             form.ClearAllErrors();
 
-                            int ReffererPageNum = 0;
-                            int CurrentPageNum = 0;
-
-                            if (ReffererPageNum == 0)
+                            if (pageNumber == 0)
                             {
                                 int index = 1;
+
                                 if (StringNumber.Contains("?RequestId="))
                                 {
                                     index = StringNumber.IndexOf("?");
                                 }
 
-                                ReffererPageNum = int.Parse(StringNumber.Substring(0, index));
-
+                                pageNumber = int.Parse(StringNumber.Substring(0, index));
                             }
-                            if (ReffererPageNum == CurrentPageNum)
+
+                            if (pageNumber == CurrentPageNum)
                             {
                                 UpdateModel(form);
                             }
                         }
 
-                        //PassCode start
                         if (IsMobileDevice)
                         {
                             Epi.Web.Common.Message.UserAuthenticationResponse AuthenticationResponse = _isurveyFacade.GetAuthenticationResponse(responseId);
@@ -329,8 +345,8 @@ namespace Epi.Web.MVC.Controllers
                                 // ReValidate All Pages
                                 for (int i = 1; i < form.NumberOfPages+1; i++)
                                 {
-                                    //form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, i, SurveyAnswer, IsMobileDevice);
-                                    form = Epi.Web.MVC.Utility.FormProvider.GetForm(form.SurveyInfo, i, SurveyAnswer);
+                                    form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, i, SurveyAnswer, IsMobileDevice);
+                                    //form = Epi.Web.MVC.Utility.FormProvider.GetForm(form.SurveyInfo, i, SurveyAnswer, string.Empty);
                                     if (!form.Validate(form.RequiredFieldsList))
                                     {
                                         TempData["isredirect"] = "true";
@@ -402,7 +418,7 @@ namespace Epi.Web.MVC.Controllers
                         else
                         {
                             //Invalid Data - stay on same page
-                            int CurrentPageNum = GetSurveyPageNumber(SurveyAnswer.XML.ToString()) ;
+                            CurrentPageNum = GetSurveyPageNumber(SurveyAnswer.XML.ToString()) ;
 
                             if (CurrentPageNum != PageNumber) // failed validation and navigating to different page// must keep url the same 
                             {

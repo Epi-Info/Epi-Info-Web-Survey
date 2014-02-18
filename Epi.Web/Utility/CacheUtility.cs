@@ -15,6 +15,11 @@ namespace Epi.Web.Utility
 
         static bool initialized = false;
 
+        static public bool CacheIsOn
+        {
+            get{ return _cacheIsOn; }
+        }
+
         static private void Initialize()
         {
             if (initialized) return;

@@ -11,28 +11,34 @@ namespace MvcDynamicForms.Fields
     [Serializable]
     public class RadioList : OrientableField
     {
-        private string _choicesList;
+        private string _options_position_string;
 
-        public string ChoicesList
+        public string Options_Positions
         {
-            get
-            {
-                return _choicesList;
-            }
-
             set
             {
-                _choicesList = value;
+                _options_position_string = value;
+
+                string pipeString = _options_position_string.Replace("||", "|");
+                List<string> lists = pipeString.Split('|').ToList<string>();
+                string options = lists[0];
+                string locations = lists[1];
+
+                ChoiceKeyValuePairs.Clear();
+                foreach (var option in options.Split(',').ToList<string>())
+                {
+                    ChoiceKeyValuePairs.Add(option, false);
+                }
+
+                Locations = locations.Split(',').ToList<string>();
             }
         }
 
         public override string RenderHtml()
         {
-            var html = new StringBuilder();
-            var inputName = _fieldPrefix + _key;
-            var choicesList = _choices.ToList();
-            var choicesList1 = GetChoices(_choicesList);
-            choicesList = choicesList1.ToList();
+            StringBuilder html = new StringBuilder();
+            string inputName = _fieldPrefix + _key;
+            List<KeyValuePair<string, bool>> choiceList = ChoiceKeyValuePairs.ToList();
 
             if (!IsValid)
             {
@@ -53,16 +59,16 @@ namespace MvcDynamicForms.Fields
             {
                 IsHighlightedStyle = "background:yellow";
             }
-           
-            for (int i = 0; i < choicesList.Count; i++)
+
+            for (int i = 0; i < choiceList.Count; i++)
             {
                 double innerTop = 0.0;
                 double innerLeft = 0.0;
                 string radId = inputName + i;
 
-                if ((Pattern.Count ) == choicesList.Count )
+                if ((Locations.Count) == choiceList.Count)
                 {
-                    List<string> TopLeft = Pattern[i].ToString().Split(':').ToList();
+                    List<string> TopLeft = Locations[i].ToString().Split(':').ToList();
 
                     if (TopLeft.Count > 0)
                     {
@@ -88,7 +94,7 @@ namespace MvcDynamicForms.Fields
                     StyleValues1.Append(GetRadioListStyle(_fontstyle.ToString(), null, null, null, null, IsHidden));
                     string InputFieldStyle_L = GetInputFieldStyle(_InputFieldfontstyle.ToString(), _InputFieldfontSize, _InputFieldfontfamily.ToString());
                     Leftlbl.Attributes.Add("style", StyleValues1.ToString() + ";" + IsHighlightedStyle + ";" + IsHiddenStyle + ";" + InputFieldStyle_L);
-                    Leftlbl.SetInnerText(choicesList[i].Key);
+                    Leftlbl.SetInnerText(choiceList[i].Key);
                     html.Append(Leftlbl.ToString());
                 }
 
@@ -102,7 +108,7 @@ namespace MvcDynamicForms.Fields
                     radioTag.Attributes.Add("onclick", "return " + _key + "_after();"); 
                 }
 
-                radioTag.SetInnerText(choicesList[i].Key);
+                radioTag.SetInnerText(choiceList[i].Key);
                 radioTag.Attributes.Add("value", i.ToString());
                 radioTag.Attributes.Add("style", IsHiddenStyle); 
                 
@@ -111,7 +117,7 @@ namespace MvcDynamicForms.Fields
                     radioTag.Attributes.Add("disabled", "disabled");
                 }
 
-                if (Value == i.ToString())
+                if (Response == choiceList[i].Key)
                 {
                     radioTag.Attributes.Add("checked", "checked");
                 }
@@ -129,7 +135,7 @@ namespace MvcDynamicForms.Fields
                     StyleValues2.Append(GetRadioListStyle(_fontstyle.ToString(), null, null, null, null, IsHidden));
                     string InputFieldStyle_R = GetInputFieldStyle(_InputFieldfontstyle.ToString(), _InputFieldfontSize, _InputFieldfontfamily.ToString());
                     rightlbl.Attributes.Add("style", StyleValues2.ToString() + ";" + IsHighlightedStyle + ";" + IsHiddenStyle + ";" + InputFieldStyle_R);
-                    rightlbl.SetInnerText(choicesList[i].Key);
+                    rightlbl.SetInnerText(choiceList[i].Key);
                     html.Append(rightlbl.ToString());
                 }
 
@@ -154,28 +160,6 @@ namespace MvcDynamicForms.Fields
             wrapper.Attributes["id"] = inputName + "_fieldWrapper";
             wrapper.InnerHtml = html.ToString();
             return wrapper.ToString();
-        }
-
-        protected Dictionary<string, bool> GetChoices(string _ChoicesList)
-        {
-            string ListString = _ChoicesList;
-            ListString = ListString.Replace("||", "|");
-            List<string> Lists = ListString.Split('|').ToList<string>();
-
-            Dictionary<string, bool> Choices = new Dictionary<string, bool>();
-            Choices = GetChoices(Lists[0].Split(',').ToList<string>());
-            return Choices;
-        }
-
-        protected static Dictionary<string, bool> GetChoices(List<string> List)
-        {
-            Dictionary<string, bool> NewList = new Dictionary<string, bool>();
-            foreach (var _List in List)
-            {
-                NewList.Add(_List, false);
-
-            }
-            return NewList;
         }
     }
 }

@@ -17,6 +17,22 @@ namespace Epi.Web.MVC.Utility
 {
     public class FormProviderBase
     {
+        public static void FieldStateReset(Form form)
+        {
+            foreach (Field field in form.Fields.Values)
+            {
+                if (field is Literal) continue;
+                
+                field.IsDisabled = false;
+                field.IsHidden = false;
+                field.IsHighlighted = false;
+                ((InputField)field).IsRequired = false;
+                ((InputField)field).IsReadOnly = false;
+
+                ((InputField)field).Response = string.Empty;
+            }
+        }
+
         public static void SetStates(Form form, SurveyAnswerDTO answer)
         {
             Dictionary<string, string> fieldValues = new Dictionary<string, string>();
@@ -104,7 +120,12 @@ namespace Epi.Web.MVC.Utility
                 {
                     Field field = form.Fields[kvp.Key];
 
-                    if (field is ListField)
+                    if (field is RadioList)
+                    {
+                        ((RadioList)field).Response = kvp.Value;
+                        ((RadioList)field).SelectedValue = kvp.Value; // ((ListField)field).Choices[int.Parse(kvp.Value)];
+                    }
+                    else if (field is ListField)
                     {
                         ((ListField)field).Response = kvp.Value;
                         ((Select)field).SelectedValue = ((ListField)field).Response;
@@ -118,6 +139,25 @@ namespace Epi.Web.MVC.Utility
                     {
                         ((CheckBox)field).Checked = ((InputField)field).Response == "Yes" ? true : ((InputField)field).Response == "true" ? true : false;
                     }
+
+                    //if (field is Select)
+                    //{
+                    //    ((Select)field).SelectedValue = kvp.Value;
+
+                    //    if (!string.IsNullOrWhiteSpace(kvp.Value))
+                    //    {
+                    //        ((ListField)field).ChoiceKeyValuePairs[kvp.Value] = true;
+                    //    }
+                    //}
+                    //else if (field is RadioList)
+                    //{
+                    //    ((RadioList)field).SelectedValue = kvp.Value;
+
+                    //    if (!string.IsNullOrWhiteSpace(kvp.Value))
+                    //    {
+                    //        ((RadioList)field).ChoiceKeyValuePairs[kvp.Value] = true;
+                    //    }
+                    //}
                 }
             }
         }
@@ -193,7 +233,7 @@ namespace Epi.Web.MVC.Utility
             }
         }
 
-        protected static RadioList GetRadioList(XElement _FieldTypeID, Form form)
+        protected static RadioList GetRadioList(XElement _FieldTypeID, int fieldTypeId, Form form)
         {
             InputField field;
 
@@ -205,16 +245,6 @@ namespace Epi.Web.MVC.Utility
             {
                 field = new RadioList();
             }
-
-            string ListString = _FieldTypeID.Attribute("List").Value;
-            ListString = ListString.Replace("||", "|");
-            List<string> Lists = ListString.Split('|').ToList<string>();
-
-            Dictionary<string, bool> Choices = new Dictionary<string, bool>();
-
-            List<string> Pattern = new List<string>();
-            Choices = GetChoices(Lists[0].Split(',').ToList<string>());
-            Pattern = Lists[1].Split(',').ToList<string>();
 
             field.Title = _FieldTypeID.Attribute("Name").Value;
             field.Prompt = _FieldTypeID.Attribute("PromptText").Value;
@@ -242,12 +272,10 @@ namespace Epi.Web.MVC.Utility
             field.Width = form.Width;
             field.Height = form.Height;
             field.Name = _FieldTypeID.Attribute("Name").Value;
-
+            field.FieldTypeId = fieldTypeId;
 
             ((RadioList)field).ShowTextOnRight = bool.Parse(_FieldTypeID.Attribute("ShowTextOnRight").Value);
-            ((RadioList)field).Choices = Choices;
-            ((RadioList)field).Pattern = Pattern;
-            ((RadioList)field).ChoicesList = ListString;
+            ((RadioList)field).Options_Positions = _FieldTypeID.Attribute("List").Value; ;
 
             if (form.Height > form.Width)
             {
@@ -605,10 +633,10 @@ namespace Epi.Web.MVC.Utility
             field.InputFieldfontfamily = _FieldTypeID.Attribute("ControlFontFamily").Value;
             field.IsReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value);
             field.Name = _FieldTypeID.Attribute("Name").Value;
+            field.FieldTypeId = FieldTypeId;
             SetFieldCommon(field, form);
 
             ((Select)field).ShowEmptyOption = true;
-            ((Select)field).SelectType = FieldTypeId;
             ((Select)field).ControlFontSize = float.Parse(_FieldTypeID.Attribute("ControlFontSize").Value);
             ((Select)field).ControlFontStyle = _FieldTypeID.Attribute("ControlFontStyle").Value;
 
@@ -895,7 +923,7 @@ namespace Epi.Web.MVC.Utility
                             break;
 
                         case "12": 
-                            field = GetRadioList(fieldElement, form);
+                            field = GetRadioList(fieldElement, 12, form);
                             break;
 
                         case "17": 
@@ -981,7 +1009,7 @@ namespace Epi.Web.MVC.Utility
                                 GroupBox optionsContainer = GetOptionGroupBox(fieldElement, form);
                                 form.Fields.Add(optionsContainer.Name.ToLower() + "groupbox", optionsContainer);
                             }
-                            field = GetRadioList(fieldElement, form);
+                            field = GetRadioList(fieldElement, 12, form);
                             break;
 
                         case "13":
