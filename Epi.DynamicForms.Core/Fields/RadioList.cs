@@ -60,21 +60,18 @@ namespace MvcDynamicForms.Fields
                 IsHighlightedStyle = "background:yellow";
             }
 
-            for (int i = 0; i < choiceList.Count; i++)
+            for (int i = 0; i < Locations.Count; i++)
             {
                 double innerTop = 0.0;
                 double innerLeft = 0.0;
                 string radId = inputName + i;
 
-                if ((Locations.Count) == choiceList.Count)
-                {
-                    List<string> TopLeft = Locations[i].ToString().Split(':').ToList();
+                List<string> TopLeft = Locations[i].ToString().Split(':').ToList();
 
-                    if (TopLeft.Count > 0)
-                    {
-                        innerTop = double.Parse(TopLeft[0]) * Height;
-                        innerLeft = double.Parse(TopLeft[1]) * Width;
-                    }
+                if (TopLeft.Count > 0)
+                {
+                    innerTop = double.Parse(TopLeft[0]) * Height;
+                    innerLeft = double.Parse(TopLeft[1]) * Width;
                 }
 
                 TagBuilder divTag = new TagBuilder("div");

@@ -108,30 +108,19 @@ namespace Epi.Web.MVC.Utility
                 CacheUtility.Insert(cacheKey, form, surveyId);
             }
 
-            if (CacheUtility.CacheIsOn && false)
+            if (CacheUtility.CacheIsOn)
             {
-                Form clone = form.Clone() as Form;
-                clone.ResponseId = surveyAnswer.ResponseId;
-
-                if (surveyAnswer.XML.Contains("ResponseDetail"))
-                {
-                    SetStates(clone, surveyAnswer);
-                }
-
-                return clone;
-            }
-            else
-            {
-                form.ResponseId = surveyAnswer.ResponseId;
                 FieldStateReset(form);
-
-                if (surveyAnswer.XML.Contains("ResponseDetail"))
-                {
-                    SetStates(form, surveyAnswer);
-                }
-                
-                return form;
             }
+
+            form.ResponseId = surveyAnswer.ResponseId;
+
+            if (surveyAnswer.XML.Contains("ResponseDetail"))
+            {
+                SetStates(form, surveyAnswer);
+            }
+
+            return form;
         }
     }
 }
