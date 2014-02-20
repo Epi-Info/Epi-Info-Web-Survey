@@ -107,10 +107,10 @@ namespace Epi.Web.MVC.Utility
 
                 CacheUtility.Insert(cacheKey, form, surveyId);
             }
-
-            if (CacheUtility.CacheIsOn)
+            else
             {
-                FieldStateReset(form);
+                form.Fields.Clear();
+                AddFormFields(pageNumber, form);
             }
 
             form.ResponseId = surveyAnswer.ResponseId;
