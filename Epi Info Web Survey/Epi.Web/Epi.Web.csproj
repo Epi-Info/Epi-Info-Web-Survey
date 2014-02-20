@@ -189,7 +189,6 @@
     <Compile Include="Utility\FormProviderBase.cs" />
     <Compile Include="Utility\ExceptionMessage.cs" />
     <Compile Include="Utility\FormProvider.cs" />
-    <Compile Include="Utility\MobileFormProvider.cs" />
     <Compile Include="Utility\OmnitureHelper.cs" />
     <Compile Include="Utility\ProxyDependency.cs" />
     <Compile Include="Utility\ProxyDependencyReference.cs" />

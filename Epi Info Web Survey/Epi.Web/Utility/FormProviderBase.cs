@@ -17,22 +17,6 @@ namespace Epi.Web.MVC.Utility
 {
     public class FormProviderBase
     {
-        public static void FieldStateReset(Form form)
-        {
-            foreach (Field field in form.Fields.Values)
-            {
-                if (field is Literal) continue;
-                
-                field.IsDisabled = false;
-                field.IsHidden = false;
-                field.IsHighlighted = false;
-                ((InputField)field).IsRequired = false;
-                ((InputField)field).IsReadOnly = false;
-
-                ((InputField)field).Response = string.Empty;
-            }
-        }
-
         public static void SetStates(Form form, SurveyAnswerDTO answer)
         {
             Dictionary<string, string> fieldValues = new Dictionary<string, string>();
@@ -123,7 +107,7 @@ namespace Epi.Web.MVC.Utility
                     if (field is RadioList)
                     {
                         ((RadioList)field).Response = kvp.Value;
-                        ((RadioList)field).SelectedValue = kvp.Value; // ((ListField)field).Choices[int.Parse(kvp.Value)];
+                        ((RadioList)field).SelectedValue = kvp.Value; 
                     }
                     else if (field is ListField)
                     {
@@ -139,25 +123,6 @@ namespace Epi.Web.MVC.Utility
                     {
                         ((CheckBox)field).Checked = ((InputField)field).Response == "Yes" ? true : ((InputField)field).Response == "true" ? true : false;
                     }
-
-                    //if (field is Select)
-                    //{
-                    //    ((Select)field).SelectedValue = kvp.Value;
-
-                    //    if (!string.IsNullOrWhiteSpace(kvp.Value))
-                    //    {
-                    //        ((ListField)field).ChoiceKeyValuePairs[kvp.Value] = true;
-                    //    }
-                    //}
-                    //else if (field is RadioList)
-                    //{
-                    //    ((RadioList)field).SelectedValue = kvp.Value;
-
-                    //    if (!string.IsNullOrWhiteSpace(kvp.Value))
-                    //    {
-                    //        ((RadioList)field).ChoiceKeyValuePairs[kvp.Value] = true;
-                    //    }
-                    //}
                 }
             }
         }
@@ -859,9 +824,6 @@ namespace Epi.Web.MVC.Utility
 
         public static void UpdateHiddenFields(int currentPage, Form form, XDocument xdocMetadata, XDocument xdocResponse, System.Collections.Specialized.NameValueCollection postedForm)
         {
-            double width = 1024;
-            double height = 768;
-
             var fieldElementList = from fieldElements in xdocMetadata.Descendants("Field")
                                    where fieldElements.Parent.Attribute("Position").Value != (currentPage - 1).ToString()
                                    select fieldElements;
