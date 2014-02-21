@@ -475,6 +475,36 @@ namespace Epi.Web.MVC.Utility
             return (CommandButton)field;
         }
 
+        protected static CommandButton GetRelateButton(XElement fieldElement, Form form)
+        {
+            InputField field;
+
+            if (form.IsMobile)
+            {
+                field = new MobileCommandButton();
+            }
+            else
+            {
+                field = new CommandButton();
+            }
+
+            field.Title = fieldElement.Attribute("PromptText").Value;
+            field.DisplayOrder = int.Parse(fieldElement.Attribute("TabIndex").Value);
+            field.Prompt = fieldElement.Attribute("PromptText").Value;
+            field.Key = fieldElement.Attribute("Name").Value;
+            field.Name = fieldElement.Attribute("Name").Value;
+            field.Top = form.Height * double.Parse(fieldElement.Attribute("ControlTopPositionPercentage").Value);
+            field.Left = form.Width * double.Parse(fieldElement.Attribute("ControlLeftPositionPercentage").Value);
+            field.Width = form.Width * double.Parse(fieldElement.Attribute("ControlWidthPercentage").Value);
+            field.Height = form.Height * double.Parse(fieldElement.Attribute("ControlHeightPercentage").Value);
+            field.fontstyle = fieldElement.Attribute("ControlFontStyle").Value;
+            field.fontSize = double.Parse(fieldElement.Attribute("ControlFontSize").Value);
+            field.fontfamily = fieldElement.Attribute("ControlFontFamily").Value;
+            SetFieldCommon(field, form);
+
+            return (CommandButton)field;
+        }
+
         protected static DatePicker GetDatePicker(XElement _FieldTypeID, Form form)
         {
             InputField field;
@@ -906,6 +936,10 @@ namespace Epi.Web.MVC.Utility
                             ((Select)field).SelectedValue = value.Trim(new char[] { ',' });
                             break;
 
+                        case "20":
+                            field = GetRelateButton(fieldElement, form);
+                            break;
+
                         case "21": 
                             field = GetGroupBox(fieldElement, form);
                             break;
@@ -991,6 +1025,10 @@ namespace Epi.Web.MVC.Utility
                         case "19":
                             dropDownValues = GetDropDownValues(form.XDocMetadata, fieldElement.Attribute("Name").Value, fieldElement.Attribute("SourceTableName").Value);
                             field = GetDropDown(fieldElement, dropDownValues, 19, form);
+                            break;
+
+                        case "20":
+                            field = GetRelateButton(fieldElement, form);
                             break;
 
                         case "21": 

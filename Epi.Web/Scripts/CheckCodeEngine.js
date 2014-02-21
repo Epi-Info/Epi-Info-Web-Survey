@@ -564,25 +564,27 @@ CCE_Context.prototype.setValue = function (pName, pValue) {
 
                     $(Jquery).val(pValue);
                     cce_Symbol.Value = pValue;
-                    if (pValue == "") {
-                        if (!IsHidden) {
-                            return null;
+                    if (pValue == "") 
+                    {
+                        if (!IsHidden) 
+                        {
                             $(Jquery).val(null);
                         }
-
                         cce_Symbol.Value = null;
                     }
-                    else if (pValue) {
-                        if (!IsHidden) {
-                            return true; //"Yes";
-                            $(Jquery).val(true);
+                    else if (pValue) 
+                    {
+                        if (!IsHidden) 
+                        {
+                            $(Jquery).val("1");
                         }
-
                         cce_Symbol.Value = true;
                     }
-                    else {
-                        if (!IsHidden) {
-                            $(Jquery).val(false);
+                    else 
+                    {
+                        if (!IsHidden) 
+                        {
+                            $(Jquery).val("0");
                         }
                         cce_Symbol.Value = false;
                     }
