@@ -17,7 +17,7 @@ namespace Epi.Web.MVC.Utility
 {
     public class FormProvider : FormProviderBase
     {
-        public static Form GetForm(SurveyInfoDTO surveyInfo, int pageNumber, SurveyAnswerDTO surveyAnswer, bool isMobile = false, string calledThereby = "")
+        public static Form GetForm(SurveyInfoDTO surveyInfo, int pageNumber, SurveyAnswerDTO surveyAnswer, bool isMobile = false)
         {
             Form form = new Form();
 
@@ -27,11 +27,6 @@ namespace Epi.Web.MVC.Utility
             string cacheKey = surveyId +
                 ",page:" + pageNumber.ToString() +
                 ",mobile:" + isMobileText;
-
-            //if (calledThereby != "")
-            //{
-            //    cacheKey += cacheKey + "," + calledThereby;
-            //}
 
             form = CacheUtility.Get(cacheKey) as Form;
 
