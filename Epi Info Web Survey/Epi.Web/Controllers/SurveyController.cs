@@ -305,8 +305,8 @@ namespace Epi.Web.MVC.Controllers
 
                                 for (int i = 1; i < form.NumberOfPages+1; i++)
                                 {
-                                    //form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, i, SurveyAnswer, isMobileDevice);
-                                    form = Epi.Web.MVC.Utility.FormProvider.GetForm(form.SurveyInfo, i, SurveyAnswer, isMobileDevice, string.Empty);
+                                    form = Epi.Web.MVC.Utility.FormProvider.GetForm(form.SurveyInfo, i, SurveyAnswer, isMobileDevice);
+
                                     if (!form.Validate(form.RequiredFieldsList))
                                     {
                                         TempData["isredirect"] = "true";
