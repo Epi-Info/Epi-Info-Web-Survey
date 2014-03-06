@@ -115,6 +115,8 @@ namespace Epi.Web.MVC.Utility
                 SetStates(form, surveyAnswer);
             }
 
+            form.IsSaved = false;
+
             return form;
         }
     }
