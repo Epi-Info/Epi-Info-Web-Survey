@@ -70,7 +70,19 @@ namespace Epi.Web.MVC.Utility
             {
                 if (form.Fields.Keys.Contains(fieldName.ToLower()))
                 {
-                    form.Fields[fieldName].IsHidden = true;
+                    Field field = form.Fields[fieldName];
+
+                    field.IsHidden = true;
+
+                    if (field is RadioList)
+                    {
+                        string fieldNameCandidate = field.Name + "groupbox";
+
+                        if (form.Fields.Keys.Contains(fieldNameCandidate.ToLower()))
+                        {
+                            form.Fields[fieldNameCandidate.ToLower()].IsHidden = true;
+                        }
+                    }
                 }
             }
 
