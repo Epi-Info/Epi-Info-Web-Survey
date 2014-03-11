@@ -109,13 +109,16 @@ namespace Epi.Web.MVC.Utility
             }
 
             form.ResponseId = surveyAnswer.ResponseId;
+            form.DisabledFieldsList = string.Empty;
+            form.HiddenFieldsList = string.Empty;
+            form.HighlightedFieldsList = string.Empty;
+            form.RequiredFieldsList = string.Empty;
+            form.IsSaved = false;
 
             if (surveyAnswer.XML.Contains("ResponseDetail"))
             {
                 SetStates(form, surveyAnswer);
             }
-
-            form.IsSaved = false;
 
             return form;
         }
