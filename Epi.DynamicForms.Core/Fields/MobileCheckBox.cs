@@ -12,72 +12,6 @@ namespace MvcDynamicForms.Fields
     [Serializable]
     public class MobileCheckBox : CheckBox
     {
-        private string _checkedValue = "Yes";
-        private string _uncheckedValue = "No";
-        new private string _promptClass = "MvcDynamicCheckboxPrompt";
-
-        /// <summary>
-        /// The text to be used as the user's response when they check the checkbox.
-        /// </summary>
-        public string CheckedValue
-        {
-            get
-            {
-                return _checkedValue;
-            }
-            set
-            {
-                _checkedValue = value;
-            }
-        }
-        /// <summary>
-        /// The text to be used as the user's response when they do not check the checkbox.
-        /// </summary>
-        public string UncheckedValue
-        {
-            get
-            {
-                return _uncheckedValue;
-            }
-            set
-            {
-                _uncheckedValue = value;
-            }
-        }
-        /// <summary>
-        /// The state of the checkbox.
-        /// </summary>
-        public bool Checked { get; set; }
-
-        public override string Response
-        {
-            get
-            {
-                return Checked ? _checkedValue : _uncheckedValue;
-            }
-            set
-            {
-                switch (value.ToLower())
-                {
-                    case "yes":
-                    case "true":
-                        Checked = true;
-                        break;
-                    case "no":
-                    case "false":
-                    default:
-                        Checked = false;
-                        break;
-                }
-            }
-        }
-
-        public override bool Validate()
-        {
-            ClearError();
-            return true;
-        }
-
         public override string RenderHtml()
         {
             var inputName = _fieldPrefix + _key;
@@ -163,11 +97,13 @@ namespace MvcDynamicForms.Fields
 
             var wrapper = new TagBuilder(_fieldWrapper);
             wrapper.Attributes["class"] = _fieldWrapperClass;
+            
             if (_IsHidden)
             {
                 wrapper.Attributes["style"] = "display:none";
               
             }
+            
             wrapper.Attributes["id"] = inputName + "_fieldWrapper";
             wrapper.InnerHtml = html.ToString();
             return wrapper.ToString();
