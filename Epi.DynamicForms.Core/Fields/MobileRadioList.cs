@@ -83,7 +83,7 @@ namespace MvcDynamicForms.Fields
                     radioTag.Attributes.Add("disabled", "disabled");
                 }
 
-                if (Response == i.ToString())
+                if (Response == choiceList[i].Key)
                 {
                     radioTag.Attributes.Add("checked", "checked");
                 }
