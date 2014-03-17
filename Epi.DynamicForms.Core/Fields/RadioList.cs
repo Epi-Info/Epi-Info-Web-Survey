@@ -60,7 +60,7 @@ namespace MvcDynamicForms.Fields
                 IsHighlightedStyle = "background:yellow";
             }
 
-            for (int i = 0; i < Locations.Count; i++)
+            for (int i = 0; i < choiceList.Count; i++)
             {
                 double innerTop = 0.0;
                 double innerLeft = 0.0;
@@ -102,7 +102,12 @@ namespace MvcDynamicForms.Fields
 
                 if (FunctionObjectAfter != null && !FunctionObjectAfter.IsNull())
                 {
-                    radioTag.Attributes.Add("onclick", "return " + _key + "_after();"); 
+                    radioTag.Attributes.Add("onblur", "return " + _key + "_after();"); 
+                }
+
+                if (FunctionObjectClick != null && !FunctionObjectClick.IsNull())
+                {
+                    radioTag.Attributes.Add("onclick", "return " + _key + "_click();");
                 }
 
                 radioTag.SetInnerText(choiceList[i].Key);

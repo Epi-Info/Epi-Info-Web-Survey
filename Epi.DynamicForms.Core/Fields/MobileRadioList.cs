@@ -44,7 +44,6 @@ namespace MvcDynamicForms.Fields
 
             for (int i = 0; i < choiceList.Count; i++)
             {
-
                 double innerTop = 0.0;
                 double innerLeft = 0.0;
                 string radId = inputName + i;
@@ -59,33 +58,38 @@ namespace MvcDynamicForms.Fields
                         innerLeft = double.Parse(TopLeft[1]) * Width;
                     }
                 }
- 
-                var rad = new TagBuilder("input");
-                rad.Attributes.Add("type", "radio");
-                rad.Attributes.Add("name", inputName);
-                rad.Attributes.Add("class", inputName);
-                rad.Attributes.Add("id", radId);
-                
+
+                var radioTag = new TagBuilder("input");
+                radioTag.Attributes.Add("type", "radio");
+                radioTag.Attributes.Add("name", inputName);
+                radioTag.Attributes.Add("class", inputName);
+                radioTag.Attributes.Add("id", radId);
+
                 if (FunctionObjectAfter != null && !FunctionObjectAfter.IsNull())
                 {
-                    rad.Attributes.Add("onclick", "return " + _key + "_after(this.id);"); //After
+                    radioTag.Attributes.Add("onblur", "return " + _key + "_after();");
                 }
 
-                rad.SetInnerText(choiceList[i].Key);
-                rad.Attributes.Add("value", i.ToString());
+                if (FunctionObjectClick != null && !FunctionObjectClick.IsNull())
+                {
+                    radioTag.Attributes.Add("onclick", "return " + _key + "_click();");
+                }
+
+                radioTag.SetInnerText(choiceList[i].Key);
+                radioTag.Attributes.Add("value", i.ToString());
 
                 if (_IsDisabled)
                 {
-                    rad.Attributes.Add("disabled", "disabled");
+                    radioTag.Attributes.Add("disabled", "disabled");
                 }
 
                 if (Response == i.ToString())
                 {
-                    rad.Attributes.Add("checked", "checked");
+                    radioTag.Attributes.Add("checked", "checked");
                 }
 
-                rad.MergeAttributes(_inputHtmlAttributes);
-                html.Append(rad.ToString(TagRenderMode.SelfClosing));
+                radioTag.MergeAttributes(_inputHtmlAttributes);
+                html.Append(radioTag.ToString(TagRenderMode.SelfClosing));
 
                 var rightlbl = new TagBuilder("label");
                 rightlbl.Attributes.Add("for", radId);
