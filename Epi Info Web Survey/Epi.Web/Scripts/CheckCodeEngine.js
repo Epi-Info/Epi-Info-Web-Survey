@@ -562,31 +562,44 @@ CCE_Context.prototype.setValue = function (pName, pValue) {
 
                 case "yesno":
 
-                    $(Jquery).val(pValue);
-                    cce_Symbol.Value = pValue;
-                    if (pValue == "") 
-                    {
-                        if (!IsHidden) 
-                        {
+                    if (pValue == "") {
+                        if (eval(document.getElementById("IsMobile"))) {
+                            if (!IsHidden) {
+                                $(Jquery).val(null).attr("selected", null);
+                                $(Jquery).selectmenu('refresh', null);
+                                cce_Symbol.Value = null;
+                            }
+                        }
+                        else {
                             $(Jquery).val(null);
+                            cce_Symbol.Value = null;
                         }
-                        cce_Symbol.Value = null;
                     }
-                    else if (pValue) 
-                    {
-                        if (!IsHidden) 
-                        {
+                    else if (pValue) {
+                        if (eval(document.getElementById("IsMobile"))) {
+                            if (!IsHidden) {
+                                $(Jquery).val('1').attr("selected", "Yes");
+                                $(Jquery).selectmenu('refresh', true);
+                                cce_Symbol.Value = true;
+                            }
+                        }
+                        else {
                             $(Jquery).val("1");
+                            cce_Symbol.Value = true;
                         }
-                        cce_Symbol.Value = true;
                     }
-                    else 
-                    {
-                        if (!IsHidden) 
-                        {
-                            $(Jquery).val("0");
+                    else {
+                        if (eval(document.getElementById("IsMobile"))) {
+                            if (!IsHidden) {
+                                $(Jquery).val('0').attr("selected", "No");
+                                $(Jquery).selectmenu('refresh', true);
+                                cce_Symbol.Value = false;
+                            }
                         }
-                        cce_Symbol.Value = false;
+                        else {
+                            $(Jquery).val("0");
+                            cce_Symbol.Value = false;
+                        }
                     }
                     break;
 
