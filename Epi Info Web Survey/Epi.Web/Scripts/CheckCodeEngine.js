@@ -637,13 +637,12 @@ CCE_Context.prototype.setValue = function (pName, pValue) {
                     break;
 
                 case "radiobutton":
-
                     var RadiofieldName = "." + FieldName;
                     $(RadiofieldName).each(function (i, obj) {
                         if ($(this).val() == pValue) {
                             if (eval(document.getElementById("IsMobile"))) {
                                 if (!IsHidden) {
-                                    $(this).prop('checked', true).checkboxradio('refresh');
+                                    $(this).prop('checked', true).selectmenu('refresh', true);
                                 }
                             } else {
                                 $(this).prop('checked', true);
@@ -654,6 +653,13 @@ CCE_Context.prototype.setValue = function (pName, pValue) {
                     $(Jquery).val(pValue);
                     cce_Symbol.Value = pValue;
 
+                    break;
+
+                case "commentlegal":
+                case "legalvalues":
+                    $(Jquery).val(pValue).attr("selected", true);
+                    $(Jquery).selectmenu('refresh', true);
+                    cce_Symbol.Value = pValue;
                     break;
 
                 default:
