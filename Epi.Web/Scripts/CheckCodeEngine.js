@@ -637,29 +637,36 @@ CCE_Context.prototype.setValue = function (pName, pValue) {
                     break;
 
                 case "radiobutton":
-                    var RadiofieldName = "." + FieldName;
-                    $(RadiofieldName).each(function (i, obj) {
-                        if ($(this).val() == pValue) {
-                            if (eval(document.getElementById("IsMobile"))) {
-                                if (!IsHidden) {
-                                    $(this).prop('checked', true).selectmenu('refresh', true);
-                                }
-                            } else {
+                    if (eval(document.getElementById("IsMobile"))) {
+                        var selector = "input[id='" + FieldName + pValue + "'";
+                        $(selector).prop("checked", true).checkboxradio("refresh");
+                        $("input[type='radio']").attr("checked", true).checkboxradio("refresh"); 
+                    } else {
+                        var RadiofieldName = "." + FieldName;
+                        $(RadiofieldName).each(function (i, obj) {
+                            if ($(this).val() == pValue) {
                                 $(this).prop('checked', true);
                             }
-                        }
-                    });
-
-                    $(Jquery).val(pValue);
+                        });
+                        $(Jquery).val(pValue);
+                    }
                     cce_Symbol.Value = pValue;
-
                     break;
 
                 case "commentlegal":
                 case "legalvalues":
-                    $(Jquery).val(pValue).attr("selected", true);
-                    $(Jquery).selectmenu('refresh', true);
-                    cce_Symbol.Value = pValue;
+                    if (eval(document.getElementById("IsMobile"))) {
+                        if (!IsHidden) {
+                            $(Jquery).val(pValue).attr("selected", true);
+                            $(Jquery).selectmenu('refresh', true);
+                            cce_Symbol.Value = pValue;
+                        } else {
+                            cce_Symbol.Value = pValue;
+                        }
+                    } else {
+                        $(Jquery).val(pValue);
+                        cce_Symbol.Value = pValue;
+                    }
                     break;
 
                 default:
