@@ -15,6 +15,11 @@ namespace Epi.Web.Common.DTO
        private string _FirstName;
        private string _LastName;
        private string _PhoneNumber;
+       private string _AdressLine1;
+       private string _AdressLine2;
+       private string _City;
+       private int _StateId;
+       private string _Zip;
        public string AdminEmail
            {
            get { return _AdminEmail; }
@@ -61,5 +66,35 @@ namespace Epi.Web.Common.DTO
            get { return _PhoneNumber; }
            set { _PhoneNumber = value; }
            }
+       public string AdressLine1
+           {
+           get { return _AdressLine1; }
+           set { _AdressLine1 = value; }
+           }
+       public string AdressLine2
+           {
+           get { return _AdressLine2; }
+           set { _AdressLine2 = value; }
+           }
+       
+       public string City
+           {
+           get { return _City; }
+           set { _City = value; }
+           }
+
+       
+       public int StateId
+           {
+           get { return _StateId; }
+           set { _StateId = value; }
+           }
+        
+       public string Zip
+           {
+           get { return _Zip; }
+           set { _Zip = value; }
+           }
+
        }
     }

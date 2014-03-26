@@ -40,6 +40,9 @@ namespace Epi.Web.MVC.Controllers
         //[ValidateAntiForgeryToken]
         public ActionResult Index()
         {
+        OrganizationAccountResponse Response = new OrganizationAccountResponse();
+        OrganizationAccountRequest Request = new OrganizationAccountRequest();
+      
            string version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
            ViewBag.Version = version;
            string filepath = Server.MapPath("~\\Content\\Text\\TermOfUse.txt");
@@ -58,6 +61,16 @@ namespace Epi.Web.MVC.Controllers
  
                }
          ViewData["TermOfUse"] = content;
+
+             Response = _isurveyFacade.GetStateList(Request);
+            //Model.States.Add(new SelectListItem { Text = "Select a State", Value = "0" });
+
+            foreach (var item in Response.StateList)
+                {
+                
+                Model.States.Add(new SelectListItem { Text =item.StateName, Value =item.StateId.ToString() });
+                }
+         
          return View(Model);
         }
         [HttpPost]
@@ -80,10 +93,11 @@ namespace Epi.Web.MVC.Controllers
 
                 }
             ViewData["TermOfUse"] = content;
-           
+          
             try
                 {
                 OrganizationAccountResponse Response = new OrganizationAccountResponse();
+                OrganizationAccountResponse StateResponse = new OrganizationAccountResponse();
                 OrganizationAccountRequest Request = new OrganizationAccountRequest();
                 AdminDTO AdminDTO = new AdminDTO();
                 OrganizationDTO OrganizationDTO = new OrganizationDTO();
@@ -94,6 +108,11 @@ namespace Epi.Web.MVC.Controllers
                 AdminDTO.FirstName = AccountInfo.FirstName;
                 AdminDTO.LastName = AccountInfo.LastName;
                 AdminDTO.PhoneNumber = AccountInfo.PhoneNumber;
+                AdminDTO.AdressLine1 = AccountInfo.AdressLine1;
+                AdminDTO.AdressLine2 = AccountInfo.AdressLine2;
+                AdminDTO.City = AccountInfo.City;
+                AdminDTO.StateId = AccountInfo.SelectedState;
+                AdminDTO.Zip = AccountInfo.Zip;
                 AdminDTO.IsActive = true;
                 OrganizationDTO.IsEnabled = true;
 
@@ -109,9 +128,20 @@ namespace Epi.Web.MVC.Controllers
                     this.ModelState.Remove("LastName");
                     this.ModelState.Remove("FirstName");
                     this.ModelState.Remove("PhoneNumber");
-                  
-                    }
 
+                    this.ModelState.Remove("AddressLine1");
+                    this.ModelState.Remove("AddressLine2");
+                    this.ModelState.Remove("City");
+                    this.ModelState.Remove("State");
+                    this.ModelState.Remove("Zip");
+                    }
+                StateResponse = _isurveyFacade.GetStateList(Request);
+                
+                foreach (var item in StateResponse.StateList)
+                    {
+
+                    AccountInfo.States.Add(new SelectListItem { Text = item.StateName, Value = item.StateId.ToString() });
+                    }
                 if(ModelState.IsValid){
 
                         Response = _isurveyFacade.CreateAccount(Request);

@@ -152,5 +152,12 @@ namespace Epi.Web.MVC.Facade
             return OrganizationAccountResponse;
             
             }
+        public OrganizationAccountResponse GetStateList(OrganizationAccountRequest Request) 
+            {
+
+            OrganizationAccountResponse OrganizationAccountResponse = _iOrgAccountRepository.GetStateList(Request);
+            return OrganizationAccountResponse;
+            
+            }
     }
 }

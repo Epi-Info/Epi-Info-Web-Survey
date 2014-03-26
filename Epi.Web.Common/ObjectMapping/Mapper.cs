@@ -60,7 +60,11 @@ namespace Epi.Web.Common.ObjectMapping
                 // Notify = pDTO.Notify,
                  OrganizationId = pDTO.OrganizationId,
                  //AdminId = pDTO.AdminId
-
+                StateId = pDTO.StateId,
+                 AdressLine1 = pDTO.AdressLine1,
+                 AdressLine2 = pDTO.AdressLine2,
+                 City = pDTO.City,
+                 Zip = pDTO.Zip,
             };
             }
         public static OrganizationDTO ToDataTransferObjects(OrganizationBO pBO)
@@ -318,5 +322,19 @@ namespace Epi.Web.Common.ObjectMapping
             return PassCodeDTO;
             }
 
+
+        public static List<StateDTO> ToStateDTO(List<StateBO> list)
+            {
+            List<StateDTO>  DTOList = new List<StateDTO>();
+           foreach (var item in list){
+
+           StateDTO StateDTO = new StateDTO();
+           StateDTO.StateCode = item.StateCode;
+           StateDTO.StateId = item.StateId; 
+           StateDTO.StateName = item.StateName;
+           DTOList.Add(StateDTO);
+               }
+           return DTOList;
+            }
     }
 }
