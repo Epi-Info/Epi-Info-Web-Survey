@@ -145,6 +145,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Models\StateModel.cs" />
     <Compile Include="Repositories\CacheDependencyRepository.cs" />
     <Compile Include="Constants\Constant.cs" />
     <Compile Include="Controllers\AccountController.cs" />

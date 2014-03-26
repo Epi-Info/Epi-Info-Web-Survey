@@ -104,7 +104,7 @@
 }
 </style>
 
-  @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "myform", @class ="" }))
+  @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "myform", @class = "" }))
       { 
 <div id="header"><h1>Epi Info Web Survey </h1></div>
 <div id="content" style="margin:1em;">
@@ -158,6 +158,40 @@
              @Html.ValidationMessageFor(m => m.PhoneNumber, null, new { @class = "required" })
         </p>
 
+            
+      <p>
+            <label class="accountlabel"  id="AddressLine1">Address Line 1:</label><br>
+          
+            @Html.TextBoxFor(m => m.AdressLine1, new { @class = "Account" }) <br>
+             @Html.ValidationMessageFor(m => m.AdressLine1, null, new { @class = "required" })
+        </p>
+        <p>
+            <label class="accountlabel"  id="AddressLine2">Address Line 2:</label><br>
+          
+            @Html.TextBoxFor(m => m.AdressLine2, new { @class = "Account" }) <br>
+             @Html.ValidationMessageFor(m => m.AdressLine2, null, null)
+        </p>
+        <p>
+            <label class="accountlabel"  id="City">City:</label><br>
+          
+            @Html.TextBoxFor(m => m.City, new { @class = "Account" }) <br>
+             @Html.ValidationMessageFor(m => m.City, null, new { @class = "required" })
+        </p>
+
+         <p>
+            <label class="accountlabel"  id="State">State:</label><br>
+          
+            @Html.DropDownListFor(m => m.SelectedState, Model.States, "-- Select A State --", new { @class = "Account" }) <br>
+             @Html.ValidationMessageFor(m => m.SelectedState, null, new { @class = "required" })
+        </p>
+            
+         <p>
+            <label class="accountlabel"  id="Zip">Zip Code:</label><br>
+          
+            @Html.TextBoxFor(m => m.Zip, new { @class = "Account" }) <br>
+             @Html.ValidationMessageFor(m => m.Zip, null, new { @class = "required" })
+        </p>
+
             }
 
 
@@ -193,7 +227,9 @@
     
 
     </div>
-     }else{
+     }
+ else
+     {
     <div class="success" style="margin:1em;">
      
         <div class="image" >

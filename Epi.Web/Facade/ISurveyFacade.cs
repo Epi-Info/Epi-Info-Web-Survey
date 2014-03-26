@@ -21,5 +21,7 @@ namespace Epi.Web.MVC.Facade
         UserAuthenticationResponse GetAuthenticationResponse(string responseId);
         ISurveyAnswerRepository GetSurveyAnswerRepository();
         OrganizationAccountResponse CreateAccount(OrganizationAccountRequest AccountRequest);
+
+        OrganizationAccountResponse GetStateList(OrganizationAccountRequest Request);
     }
 }

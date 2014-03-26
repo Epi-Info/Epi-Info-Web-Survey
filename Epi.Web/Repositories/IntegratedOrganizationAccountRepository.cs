@@ -27,7 +27,14 @@ namespace Epi.Web.MVC.Repositories
              Response = _iDataService.CreateAccount(Request);
              return Response;
              }
+         public OrganizationAccountResponse GetStateList(OrganizationAccountRequest Request) {
 
+
+         OrganizationAccountResponse Response = new OrganizationAccountResponse();
+         Response = _iDataService.GetStateList(Request);
+         return Response;
+             
+             }
 
 
          #region stubcode
