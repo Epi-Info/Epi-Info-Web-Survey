@@ -251,6 +251,7 @@ namespace Epi.Web.EF
                          FirstName = pBo.FirstName,
                          LastName = pBo.LastName,
                          PhoneNumber = pBo.PhoneNumber,
+                         AddressId = pBo.AddressId,
                     };
             }
         /// <summary>
@@ -285,5 +286,27 @@ namespace Epi.Web.EF
             };
         
         }
+
+        internal static StateBO Map(State Row)
+            {
+            StateBO StateBO = new StateBO();
+            StateBO.StateCode = Row.StateCode;
+            StateBO.StateName = Row.StateName;
+            StateBO.StateId = Row.StateProvinceId;
+            return StateBO;
+            }
+
+        internal static Address ToAddressEF(AdminBO Admin)
+            {
+            return new Address
+            {
+
+                AddressLine1 = Admin.AdressLine1,
+                AddressLine2 = Admin.AdressLine2,
+                City = Admin.City,
+                StateProvinceId = Admin.StateId,
+                PostalCode = Admin.Zip
+            };
+            }
     }
 }
