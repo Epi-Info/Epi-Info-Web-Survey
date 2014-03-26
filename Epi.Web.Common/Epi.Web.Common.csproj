@@ -83,6 +83,8 @@
     <Compile Include="DTO\PageInfoDTO.cs" />
     <Compile Include="DTO\PassCodeDTO.cs" />
     <Compile Include="DTO\PreFilledAnswerDTO.cs" />
+    <Compile Include="BusinessObject\StateBO.cs" />
+    <Compile Include="DTO\StateDTO.cs" />
     <Compile Include="DTO\SurveyAnswerDTO.cs" />
     <Compile Include="DTO\SurveyControlDTO.cs" />
     <Compile Include="Email\Email.cs" />

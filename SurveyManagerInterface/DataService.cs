@@ -569,5 +569,30 @@ namespace Epi.Web.WCF.SurveyService
             
             
             }
+
+
+
+        public OrganizationAccountResponse GetStateList(OrganizationAccountRequest Request) 
+            {
+
+            OrganizationAccountResponse OrgAccountResponse = new OrganizationAccountResponse();
+
+            try
+                {
+                
+                Epi.Web.Interfaces.DataInterfaces.IStateDao StateDao = new EF.EntityStateDao();
+                Epi.Web.BLL.Account Implementation = new Epi.Web.BLL.Account(StateDao);
+                 
+               OrgAccountResponse.StateList= Mapper.ToStateDTO(Implementation.GetStateList());
+
+
+                }
+            catch (Exception ex)
+                {
+                throw ex;
+                }
+            return OrgAccountResponse;
+            
+            }
     }
 }
