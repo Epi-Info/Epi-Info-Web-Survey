@@ -1,0 +1,80 @@
+﻿@model Epi.Web.MVC.Models.PrintResponseModel
+
+@{
+    ViewBag.Title = "Print";
+}
+<style>
+ th,td
+{
+border:1px solid black;
+ 
+}
+ .printable {
+border: 1px dotted #CCCCCC ;
+padding: 10px 10px 10px 10px ;
+}
+</style>
+
+<script language="javascript" type="text/javascript">
+        function Print(divID) {
+          
+//            var divElements = document.getElementById(divID).innerHTML;
+//           
+//          var oldPage = document.body.innerHTML;
+//            document.body.innerHTML =
+//              "<html><head><title></title></head><body>" +
+//              divElements + "</body>";
+//             window.print();
+
+            //          document.body.innerHTML = oldPage;
+
+            $(".printable").print();
+             
+            return (false);
+
+        }
+    </script>
+ 
+  <div id="Print" align="right">
+					<button class="submits"  name="PrintButton" id="PrintButton" onclick="Print('printable')" type="button" >Print &nbsp; </button>
+					</div>     
+<div id="printable" class = "printable">
+<h2>Survey Name: @Model.SurveyName </h2>
+<h2>Date: @Model.CurrentDate </h2>
+ @for (int i = 1; Model.NumberOfPages + 1 > i; i++)
+     {
+     
+ <h2>Page Number: @i</h2>
+<table>
+
+  <tr>
+    <th>Question</th>
+    <th>Answer</th>
+     
+  </tr>
+  
+      @foreach (var item in Model.ResponseList)
+          {
+          if (item.PageNumber == i)
+              {
+           <tr>
+                 <th align =left>@item.Question</th>
+                 <th align= left>@item.Value</th>
+     
+           </tr>
+              }
+
+
+          }
+            
+     
+</table>
+     }
+
+                             
+</div>
+<br />
+ <div id="Print" align="right">
+					<button class="submits"  name="PrintButton2" id="PrintButton2" onclick="Print('printable')" type="button" >Print &nbsp; </button>
+					</div>    
+
