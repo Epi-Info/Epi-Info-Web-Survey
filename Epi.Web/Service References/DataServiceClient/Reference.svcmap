@@ -26,6 +26,7 @@
     <MetadataFile FileName="DataService.wsdl" MetadataType="Wsdl" ID="9f20f0dd-7534-4b65-b0c9-a1b8bf307f53" SourceId="1" SourceUrl="http://localhost:22587/Epi.Web.ServiceHost/SurveyDataService.svc?wsdl" />
     <MetadataFile FileName="SurveyDataService2.xsd" MetadataType="Schema" ID="27257016-43b4-42de-b771-a3bda41f9dea" SourceId="1" SourceUrl="http://localhost:22587/Epi.Web.ServiceHost/SurveyDataService.svc?xsd=xsd0" />
     <MetadataFile FileName="SurveyDataService3.xsd" MetadataType="Schema" ID="13f924c5-b254-4b27-b5f2-5ffc7a42e6b2" SourceId="1" SourceUrl="http://localhost:22587/Epi.Web.ServiceHost/SurveyDataService.svc?xsd=xsd1" />
+    <MetadataFile FileName="SurveyDataService44.xsd" MetadataType="Schema" ID="8f10051b-47b5-46e2-8eb7-c8b522ac2c08" SourceId="1" SourceUrl="http://localhost:22587/Epi.Web.ServiceHost/SurveyDataService.svc?xsd=xsd4" />
     <MetadataFile FileName="SurveyDataService.disco" MetadataType="Disco" ID="b973780f-53bf-40dc-a717-24b3edd6ad64" SourceId="1" SourceUrl="http://localhost:22587/Epi.Web.ServiceHost/SurveyDataService.svc?disco" />
   </Metadata>
   <Extensions>

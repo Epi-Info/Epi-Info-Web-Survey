@@ -159,5 +159,11 @@ namespace Epi.Web.MVC.Facade
             return OrganizationAccountResponse;
             
             }
+        public SurveyControlsResponse GetSurveyControlList(SurveyControlsRequest pRequestMessage)
+        {
+        SurveyControlsResponse SurveyControlsResponse = _iSurveyInfoRepository.GetSurveyControlList(pRequestMessage);
+
+        return SurveyControlsResponse;
+        }
     }
 }
