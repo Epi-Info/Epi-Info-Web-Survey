@@ -23,5 +23,7 @@ namespace Epi.Web.MVC.Facade
         OrganizationAccountResponse CreateAccount(OrganizationAccountRequest AccountRequest);
 
         OrganizationAccountResponse GetStateList(OrganizationAccountRequest Request);
+
+        SurveyControlsResponse GetSurveyControlList(SurveyControlsRequest pRequestMessage);
     }
 }

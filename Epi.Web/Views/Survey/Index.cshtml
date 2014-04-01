@@ -212,6 +212,15 @@
 	        width: 300,
 	        modal: true
 	    });
+	    $("#PrintdialogBox").dialog({
+	        autoOpen: false,
+	        show: "blind",
+	        hide: "blind",
+	        resizable: false,
+	         height: 700,
+	        width: 700,
+	        modal: true
+	    });
 
 	    var responseUrl = GetRedirectionUrl();
 	    $('#url').val(responseUrl);
@@ -306,10 +315,35 @@
 	        return false;
 	    });
 
+	    $('#Print').click(function () {
+	        GetPrintView();
+         
+	    });
 
 
 	});
- 
+	function GetPrintView() {
+
+	    var signoutUrl = '@Url.Action("GetPrintView", "Survey")' + '?ResponseId=' + '@Model.ResponseId';
+
+	    $.ajax({
+	        url: signoutUrl,
+	        type: 'GET',
+	        contentType: 'application/json; charset=utf-8',
+	        //data: JSON.stringify(model),
+	        async: false,
+	        success: successFunc,
+	        Error: errorFunc
+	    });
+	    function successFunc(data) {
+	        $('#PrintdialogBox').html(data);
+	        $("#PrintdialogBox").dialog("open");
+	        
+	    }
+	    function errorFunc(data) {
+	        alert('failed');
+	    }
+	}
  
  function updateXml(NameList, pValue) {
  
@@ -519,16 +553,21 @@ function ReplaceString(string){
 			   <div id="next" align="right"> 
 			  <button class="submits" type="submit"  name="Submitbutton" value="Submit" >
 			  Submit Survey &nbsp; </button>
+              
 			  </div>
-			   }
-			   else
-			   {
+           <div id="next" align="right"> 
+              <button   id="Print"class="submits" type="button"  name="Printbutton" value="Print" >
+			  Print Survey &nbsp; </button>
+			  </div>
+               }
+      else
+          {
 				   
 					<div id="next" align="right">
 					<button class="next"  name="ContinueButton" id="ContinueButton" onclick="Continue();" type="button" >Continue &nbsp; </button>
 					</div>
 											
-			   }
+          }
 
 			  </div>    
 		   
@@ -622,4 +661,7 @@ function ReplaceString(string){
 			  </div>
 			 </div>
 			  
-			
+			 
+             <div id="PrintdialogBox" title="Print">
+			 
+			 </div>
