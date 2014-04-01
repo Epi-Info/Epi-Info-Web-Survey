@@ -584,6 +584,26 @@ namespace Epi.Web.MVC.Controllers
             form.AssignList = this.Request.Form["AssignList"].ToString();
 
             return form;
-        } 
+        }
+
+    //GetPrintView
+        [HttpGet]
+
+        public ActionResult GetPrintView(string ResponseId) 
+            {
+            
+            Common.Message.SurveyAnswerResponse answerResponse = _isurveyFacade.GetSurveyAnswerResponse(ResponseId);
+            SurveyInfoModel surveyInfoModel = GetSurveyInfo(answerResponse.SurveyResponseList[0].SurveyId); 
+
+            PrintResponseModel PrintResponseModel = new PrintResponseModel();
+            Common.Message.SurveyControlsRequest Request = new Common.Message.SurveyControlsRequest();
+            Request.SurveyId = answerResponse.SurveyResponseList[0].SurveyId;
+            Common.Message.SurveyControlsResponse List = _isurveyFacade.GetSurveyControlList(Request);
+            PrintResponseModel.ResponseList = Epi.Web.MVC.Utility.SurveyHelper.GetQuestionAnswerList(answerResponse.SurveyResponseList[0].XML, List);
+            PrintResponseModel.NumberOfPages = Epi.Web.MVC.Utility.SurveyHelper.GetNumberOfPags(answerResponse.SurveyResponseList[0].XML);
+            PrintResponseModel.SurveyName = surveyInfoModel.SurveyName;
+            PrintResponseModel.CurrentDate = DateTime.Now.ToString();
+            return PartialView("Print", PrintResponseModel);
+            }
     }
 }

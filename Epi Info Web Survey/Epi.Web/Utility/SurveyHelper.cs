@@ -401,5 +401,56 @@ namespace Epi.Web.MVC.Utility
         
         }
 
+
+        internal static List<PrintModel> GetQuestionAnswerList(string ResponseXml, SurveyControlsResponse List)
+            {
+
+            List<PrintModel> QuestionAnswerList = new List<PrintModel>();
+            int NumberOfPages = GetNumberOfPags(ResponseXml);
+
+
+            XDocument xdoc = XDocument.Parse(ResponseXml);
+
+
+            
+
+            for (int i=1; NumberOfPages + 1 > i  ;i++ )
+                {
+
+                var _FieldsTypeIDs = from _FieldTypeID in
+                                     xdoc.Descendants("Page")
+                                    
+                                     where _FieldTypeID.Attribute("PageNumber").Value == (i).ToString()
+                                     select _FieldTypeID;
+
+                var _PageFieldsTypeIDs = from _FieldTypeID1 in
+                                             _FieldsTypeIDs.Descendants("ResponseDetail")
+                                         
+                                         select _FieldTypeID1;
+
+
+                foreach (var item in _PageFieldsTypeIDs)
+                    {
+                   
+                    string ControlId  = item.Attribute("QuestionName").Value;
+                   
+                    string Question = List.SurveyControlList.Single(x => x.ControlId == ControlId).ControlPrompt;
+                    PrintModel PrintModel = new PrintModel();
+
+                    PrintModel.PageNumber = i;
+                    PrintModel.Question = Question;
+                    PrintModel.Value = item.Value;
+
+                    QuestionAnswerList.Add(PrintModel);
+                    
+                    }
+
+                }
+
+
+
+            return QuestionAnswerList;
+
+            }
     }
 }
