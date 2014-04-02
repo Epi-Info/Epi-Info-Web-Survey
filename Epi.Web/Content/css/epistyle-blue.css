@@ -21,6 +21,7 @@
 
 #infobox
 {
+    background:#eeeff3;
     background-image: linear-gradient(to bottom, #fbfbfc, #e6e7ed);
     -webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.8) inset;
     -moz-box-shadow: 0 1px 0 rgba(255,255,255,.8) inset;
