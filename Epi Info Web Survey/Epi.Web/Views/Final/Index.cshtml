@@ -84,7 +84,7 @@
  @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "myform", @class = @Model.IsDraftModeStyleClass.ToString() }))
  { 
         
-            <div id="content" style="min-height:200px;">
+            <div id="content" style="min-height:200px; padding-bottom: 250px;">
                @if (Model.ClosingDate.Date >= DateTime.Now.Date && Model.SurveyType == 2)
                {
                         <div id="passcodebox" style="">@Model.PassCode</div>
