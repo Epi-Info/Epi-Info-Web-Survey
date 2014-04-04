@@ -145,6 +145,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Controllers\PrintController.cs" />
     <Compile Include="Models\PrintModel.cs" />
     <Compile Include="Models\PrintResponseModel.cs" />
     <Compile Include="Models\StateModel.cs" />
@@ -496,6 +497,7 @@
     <None Include="Service References\DataServiceClient\SurveyDataService44.xsd">
       <SubType>Designer</SubType>
     </None>
+    <Content Include="Views\Print\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
