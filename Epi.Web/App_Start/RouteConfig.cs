@@ -79,6 +79,12 @@ namespace Epi.Web.MVC
                 ); // Parameter defaults
 
 
+            routes.MapRoute
+           (
+               null, // Route name
+               "Print/{responseid}", // URL with parameters
+               new { controller = "Print", action = "Index", responseid = UrlParameter.Optional }
+           ); // Parameter defaults
 
             routes.MapRoute
               (
