@@ -234,6 +234,7 @@ namespace Epi.Web.MVC.Controllers
                         form = SetLists(form);
                          
                         _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId, form, SurveyAnswer, IsSubmited, IsSaved, PageNumber);
+                        //is_print_action
 
                         if (!string.IsNullOrEmpty(this.Request.Form["is_save_action"]) && this.Request.Form["is_save_action"].ToString().Equals("true", StringComparison.OrdinalIgnoreCase))
                         {
@@ -268,6 +269,39 @@ namespace Epi.Web.MVC.Controllers
                             actionResult = View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
                             return actionResult;
                         }
+                        else if (!string.IsNullOrEmpty(this.Request.Form["is_print_action"]) && this.Request.Form["is_print_action"].ToString().Equals("true", StringComparison.OrdinalIgnoreCase))
+                            {
+                            SurveyAnswer = _isurveyFacade.GetSurveyAnswerResponse(responseId).SurveyResponseList[0];
+                            SurveyAnswer.IsDraftMode = surveyInfoModel.IsDraftMode;
+                            form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, GetSurveyPageNumber(SurveyAnswer.XML.ToString()) == 0 ? 1 : GetSurveyPageNumber(SurveyAnswer.XML.ToString()), SurveyAnswer, isMobileDevice);
+                            UpdateModel(form);
+                            form = SetLists(form);
+
+                            IsSaved = form.IsSaved = true;
+                            form.StatusId = SurveyAnswer.Status;
+
+                            Epi.Web.Common.Message.UserAuthenticationResponse AuthenticationResponse = _isurveyFacade.GetAuthenticationResponse(responseId);
+
+                            string strPassCode = Epi.Web.MVC.Utility.SurveyHelper.GetPassCode();
+                            if (string.IsNullOrEmpty(AuthenticationResponse.PassCode))
+                                {
+                                _isurveyFacade.UpdatePassCode(responseId, strPassCode);
+                                }
+                            if (AuthenticationResponse.PassCode == null)
+                                {
+                                form.PassCode = strPassCode;
+                                }
+                            else
+                                {
+                                form.PassCode = AuthenticationResponse.PassCode;
+                                }
+
+                            _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId, form, SurveyAnswer, IsSubmited, IsSaved, PageNumber);
+
+                            TempData["Width"] = form.Width + 5;
+                            actionResult = RedirectToAction("Index", "Print", new { responseId = responseId ,target = "_blank"}); 
+                            return actionResult;
+                            }
                         else if (!string.IsNullOrEmpty(this.Request.Form["is_goto_action"]) && this.Request.Form["is_goto_action"].ToString().Equals("true", StringComparison.OrdinalIgnoreCase))
                         {
                             form = SetLists(form);

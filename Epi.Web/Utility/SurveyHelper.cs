@@ -431,9 +431,12 @@ namespace Epi.Web.MVC.Utility
 
                 foreach (var item in _PageFieldsTypeIDs)
                     {
-                   
+
                     string ControlId  = item.Attribute("QuestionName").Value;
-                   
+                    bool Type = (bool) List.SurveyControlList.Any(x => x.ControlId == ControlId && x.ControlType != "Literal" && x.ControlType != "GroupBox");
+
+                    if (Type)
+                        {
                     string Question = List.SurveyControlList.Single(x => x.ControlId == ControlId).ControlPrompt;
                     PrintModel PrintModel = new PrintModel();
 
@@ -442,7 +445,7 @@ namespace Epi.Web.MVC.Utility
                     PrintModel.Value = item.Value;
 
                     QuestionAnswerList.Add(PrintModel);
-                    
+                        }
                     }
 
                 }
