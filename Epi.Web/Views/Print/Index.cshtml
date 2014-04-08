@@ -79,7 +79,13 @@ table {
 <br />
  
 <div id="Print1" align="right">
+
+@if(!@Model.IsFromFinal){
    <span class="current">@Html.ActionLink("Return To Survey", "Index", "Survey", new { responseid = Model.ResponseId, PageNumber = Model.NumberOfPages }, null)</span>
+    }else{
+
+   <span class="current">@Html.ActionLink("Return To Final Page.", "Index", "Final", new { surveyid = Model.SurveyId, responseid = Model.ResponseId }, null)</span>
+    }
 	<button class="exitsurvey"  name="PrintButton" id="PrintButton" onclick="Print('printable')" type="button" >Print</button>
 </div>
 <br />

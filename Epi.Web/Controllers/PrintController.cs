@@ -36,7 +36,7 @@ namespace Epi.Web.MVC.Controllers
         }
  
         [HttpGet]
-        public ActionResult Index(string responseId )
+        public ActionResult Index(string responseId ,bool FromFinal)
         {
         Common.Message.SurveyAnswerResponse answerResponse = _isurveyFacade.GetSurveyAnswerResponse(responseId);
         SurveyInfoModel surveyInfoModel = GetSurveyInfo(answerResponse.SurveyResponseList[0].SurveyId);
@@ -51,6 +51,8 @@ namespace Epi.Web.MVC.Controllers
         PrintResponseModel.SurveyName = surveyInfoModel.SurveyName;
         PrintResponseModel.CurrentDate = DateTime.Now.ToString();
         PrintResponseModel.ResponseId = responseId;
+        PrintResponseModel.SurveyId = surveyInfoModel.SurveyId;
+        PrintResponseModel.IsFromFinal = FromFinal;
         return View("Index", PrintResponseModel);
         }
 
