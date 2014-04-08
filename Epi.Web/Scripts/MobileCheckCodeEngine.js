@@ -995,7 +995,7 @@ function CCE_RemoveFromFieldsList(FieldName,ListName) {
          $("#myform")[0].action = currentUrl + "/" + controlOrPage;
          $("#myform")[0].is_goto_action.value = 'true';
          //detach the validation engine as we don't want to validate data to go to another page as directed by check code
-         $('#myform').validationEngine('detach');
+       //  $('#myform').validationEngine('detach');
          $("#myform").submit();
      }
      else 
