@@ -60,7 +60,20 @@ namespace MvcDynamicForms.Fields
                 IsHighlightedStyle = "background:yellow";
             }
 
-            for (int i = 0; i < choiceList.Count; i++)
+            if (choiceList.Count == Locations.Count + 1)
+            {
+                string strindex = choiceList[Locations.Count].Key;
+                bool bodex = choiceList[Locations.Count].Value;
+                int index;
+
+                if (int.TryParse(strindex, out index))
+                {
+                    KeyValuePair<string, bool> newKvp = new KeyValuePair<string, bool>(choiceList[index].Key,bodex);
+                    choiceList[index] = newKvp;
+                }
+            }
+            
+            for (int i = 0; i < Locations.Count; i++)
             {
                 double innerTop = 0.0;
                 double innerLeft = 0.0;
@@ -119,7 +132,7 @@ namespace MvcDynamicForms.Fields
                     radioTag.Attributes.Add("disabled", "disabled");
                 }
 
-                if (Response == choiceList[i].Key)
+                if (choiceList[i].Value == true)
                 {
                     radioTag.Attributes.Add("checked", "checked");
                 }
