@@ -13,5 +13,7 @@ namespace Epi.Web.MVC.Models
         public string SurveyName { get; set; }
         public string CurrentDate { get; set; }
         public string ResponseId { get; set; }
+        public string SurveyId { get; set; }
+        public bool IsFromFinal { get; set; }
         }
     }

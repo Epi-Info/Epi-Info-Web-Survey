@@ -299,7 +299,7 @@ namespace Epi.Web.MVC.Controllers
                             _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId, form, SurveyAnswer, IsSubmited, IsSaved, PageNumber);
 
                             TempData["Width"] = form.Width + 5;
-                            actionResult = RedirectToAction("Index", "Print", new { responseId = responseId ,target = "_blank"}); 
+                            actionResult = RedirectToAction("Index", "Print", new { responseId = responseId, FromFinal = false}); 
                             return actionResult;
                             }
                         else if (!string.IsNullOrEmpty(this.Request.Form["is_goto_action"]) && this.Request.Form["is_goto_action"].ToString().Equals("true", StringComparison.OrdinalIgnoreCase))
@@ -354,9 +354,9 @@ namespace Epi.Web.MVC.Controllers
                                 SurveyAnswer.IsDraftMode = surveyInfoModel.IsDraftMode;
                                 IsSubmited = true;//survey has been submited this will change the survey status to 3 - Completed
                                 _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId, form, SurveyAnswer, IsSubmited, IsSaved, PageNumber);
-                                FormsAuthentication.SignOut();
+                                //FormsAuthentication.SignOut();
 
-                                actionResult = RedirectToAction("Index", "Final", new { surveyId = surveyInfoModel.SurveyId });
+                                actionResult = RedirectToAction("Index", "Final", new { surveyId = surveyInfoModel.SurveyId ,responseId = responseId });
                                 return actionResult;
                             }
                             else
