@@ -22,8 +22,31 @@
             modal: true
         });
 
+        $('#Print').click(function () {
+            GetPrintView();
+
+        });
+
           });
 
+
+
+    function GetPrintView() {
+
+        
+
+        $("#myform")[0].is_print_action.value = 'true';
+
+        $("#myform")[0].ResponseId.value = '@ViewBag.ResponseId';
+
+        $("#myform")[0].action = window.location.href;
+
+
+        
+
+        $("form").submit();
+
+    }
 </script>
   @if (@Model.IsDraftModeStyleClass != "")
  {
@@ -100,9 +123,11 @@
                         <p style="text-align:center; font-size:9pt;">Survey Closing Date: @string.Format("{0:dddd, MMMM d, yyyy}", Model.ClosingDate)</p>
                }
                
-              
+              <button   id="Print"class="exitsurvey" type="button"  name="Printbutton" value="Print" style="height:30px; padding: 3px 5px 3px 5px; vertical-align:bottom;" >Print</button>
                 
            </div>
+     	<input type="hidden"  name="is_print_action" value="false" />
+        <input type="hidden"  name="ResponseId" value="false" />
              @*<div style="width:220px; padding:5px; border: 2px solid #04aeda; margin-right:10px; margin-left:590px; margin-bottom:130px; margin-top:130px; bottom:0px; position:relative;">
 	            <div style="float:left; width:54px;">
 	                <img alt="" style="z-index:12;" src="@Url.Content("~/Content/images/video.png")"/>
