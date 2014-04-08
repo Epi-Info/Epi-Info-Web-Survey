@@ -4,12 +4,29 @@
     ViewBag.Title = "Print";
 }
 
-<style type="text/css" media="screen, print">
+<style type="text/css" media="print">
+ #Print1, #Print2 {display:none; visibility:collapse;}
+ .printable {margin-top: -50px;}
 
+</style>
+<style type="text/css" media="screen, print">
+body{background:none;}
+
+#container
+{
+    width:100% important; padding:20px; border: none;
+    -moz-border-radius: 0px;
+ border-radius: 0px;
+ -moz-box-shadow: none;
+ -webkit-box-shadow: none;
+ box-shadow: none;
+ }
+
+#footer {display:none; visibility:collapse;}
 .printable {
 border: 1px dotted #CCCCCC ;
 padding: 10px 10px 10px 10px ;
-margin-top: -50px;
+/*margin-top: -50px;*/
 }
 
 .surveyinfo 
@@ -48,6 +65,7 @@ table {
 		vertical-align:top;
 		max-width: 140px;
 		border: 1px solid #ccc !important;
+		width:50%;
 		
 	}
 	
@@ -79,14 +97,22 @@ table {
 <br />
  
 <div id="Print1" align="right">
+    <div style="float:left;">
 
 @if(!@Model.IsFromFinal){
-   <span class="current">@Html.ActionLink("Return To Survey", "Index", "Survey", new { responseid = Model.ResponseId, PageNumber = Model.NumberOfPages }, null)</span>
-    }else{
+   <span class="current">@Html.ActionLink("Return To Survey", "Index", "Survey", new { responseid = Model.ResponseId, PageNumber = Model.NumberOfPages }, new {@class = "returnto"})</span>
 
-   <span class="current">@Html.ActionLink("Return To Final Page.", "Index", "Final", new { surveyid = Model.SurveyId, responseid = Model.ResponseId }, null)</span>
-    }
-	<button class="exitsurvey"  name="PrintButton" id="PrintButton" onclick="Print('printable')" type="button" >Print</button>
+}
+else
+{
+
+   <span class="current">@Html.ActionLink("Return To Final Page.", "Index", "Final", new { surveyid = Model.SurveyId, responseid = Model.ResponseId }, new {@class = "returnto"})</span>
+}
+</div>
+    <div style="float:right;">
+	    <button class="exitsurvey"  name="PrintButton" id="PrintButton" onclick="Print('printable')" type="button" >Print</button>
+    </div>
+    <div style="clear:both;"></div>
 </div>
 <br />
 <div id="recordstable" class="printable">
