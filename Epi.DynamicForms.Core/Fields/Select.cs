@@ -101,7 +101,7 @@ namespace MvcDynamicForms.Fields
                 size = g.MeasureString(measureString.ToString(), stringFont);
             }
 
-            if (_IsRequired == true)
+            if (Required == true)
             {
                 if ((size.Width) > _ControlWidth)
                 {
@@ -264,7 +264,7 @@ namespace MvcDynamicForms.Fields
             StringBuilder ControlClass = new StringBuilder();
             ControlClass.Append("validate[");
 
-            if (_IsRequired == true)
+            if (Required == true)
             {
                 ControlClass.Append("required");
             }

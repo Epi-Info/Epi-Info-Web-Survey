@@ -78,7 +78,7 @@ namespace MvcDynamicForms.Fields
             //todo: add validation
             //txt.Attributes.Add("class", GetControlClass(Value));
 
-            if (_IsRequired == true)
+            if (Required == true)
             {
                 //txt.Attributes.Add("class", "validate[custom[time],required] text-input datepicker");
                 //txt.Attributes.Add("class", "validate[required,custom[time]] text-input datepicker");
@@ -181,7 +181,7 @@ namespace MvcDynamicForms.Fields
                 //dateRange
                 ControlClass.Append("customDate[date],datePickerRange, " + GetRightDateFormat(Lower).ToString() + "," + GetRightDateFormat(Upper).ToString() + ",");
             }
-            if (_IsRequired == true)
+            if (Required == true)
             {
 
                 ControlClass.Append("required"); // working fine
