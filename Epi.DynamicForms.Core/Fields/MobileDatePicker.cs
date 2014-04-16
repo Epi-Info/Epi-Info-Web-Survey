@@ -111,7 +111,7 @@ namespace MvcDynamicForms.Fields
             {
                 ControlClass.Append("customDate[date],datePickerRange, " + GetRightDateFormat(Lower,Pattern).ToString() + "," + GetRightDateFormat(Upper,Pattern).ToString() + ",");
 
-                if (_IsRequired == true)
+                if (Required == true)
                 {
                     ControlClass.Append("required"); 
 
@@ -122,7 +122,7 @@ namespace MvcDynamicForms.Fields
             }
             else
             {
-                if (_IsRequired == true)
+                if (Required == true)
                 {
                     ControlClass.Append("required,custom[date]] text-input datepicker({onClose:function(){setTimeout(" + _key + "_after,100);},changeMonth:true,changeYear:true});");
                 }

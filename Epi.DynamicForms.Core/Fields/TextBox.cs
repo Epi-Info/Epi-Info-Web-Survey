@@ -49,7 +49,7 @@ namespace MvcDynamicForms.Fields
             txt.Attributes.Add("value", Response);
             txt.Attributes.Add("class", GetControlClass());
 
-            if(_IsRequired)
+            if (Required)
             {
                 txt.Attributes.Add("data-prompt-position", "topRight:15");
             }
@@ -116,8 +116,8 @@ namespace MvcDynamicForms.Fields
         {
             StringBuilder ControlClass = new StringBuilder();
             ControlClass.Append("validate[");
-            
-            if (_IsRequired == true)
+
+            if (Required == true)
             {
                 ControlClass.Append("required");
             }
