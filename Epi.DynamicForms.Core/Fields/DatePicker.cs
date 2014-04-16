@@ -145,7 +145,7 @@ namespace MvcDynamicForms.Fields
                 //   ControlClass.Append("customDate[date],future[" + GetRightDateFormat(Lower).ToString() + "],past[" + GetRightDateFormat(Upper).ToString() + "],");
                 //dateRange
                 ControlClass.Append("customDate[date],datePickerRange, " + GetRightDateFormat(Lower,Pattern).ToString() + "," + GetRightDateFormat(Upper,Pattern).ToString() + ",");
-                if (_IsRequired == true)
+                if (Required == true)
                 {
 
                     ControlClass.Append("required"); // working fine
@@ -158,7 +158,7 @@ namespace MvcDynamicForms.Fields
             }
             else
             {
-                if (_IsRequired == true)
+                if (Required == true)
                 {
                    // ControlClass.Append("required,custom[date]] text-input datepicker");
                     ControlClass.Append("required,custom[date]]  datepicker");

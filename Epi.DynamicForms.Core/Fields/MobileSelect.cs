@@ -71,7 +71,7 @@ namespace MvcDynamicForms.Fields
                 size = g.MeasureString(measureString.ToString(), stringFont);
             }
 
-            if (_IsRequired == true)
+            if (Required == true)
             {
                 if ((size.Width) > _ControlWidth)
                 {

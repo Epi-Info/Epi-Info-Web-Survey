@@ -139,7 +139,7 @@ namespace MvcDynamicForms.Fields
                 ControlClass.Append("min[" + Lower + "],max[" + Upper + "],");
             }
 
-            if (_IsRequired == true)
+            if (Required == true)
             {
                 ControlClass.Append("required");
             }
