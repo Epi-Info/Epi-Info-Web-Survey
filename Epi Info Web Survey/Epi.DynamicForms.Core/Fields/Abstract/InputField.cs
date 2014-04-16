@@ -21,8 +21,7 @@ namespace MvcDynamicForms.Fields
         protected string _requiredMessage = "Required";
         protected string _promptClass = "MvcDynamicFieldPrompt";
         protected string _errorClass = "MvcDynamicFieldError";
-        protected Boolean _IsRequired;
-        protected Boolean _IsReadOnly;
+
         protected int _MaxLength;
         protected string _InputFieldfontstyle;
         protected double _InputFieldfontSize;
@@ -142,8 +141,6 @@ namespace MvcDynamicForms.Fields
         public double ControlWidth { get { return this._ControlWidth; } set { this._ControlWidth = value; } }
        
         public double ControlHeight { get { return this._ControlHeight; } set { this._ControlHeight = value; } }
-        public Boolean IsRequired { get { return this._IsRequired; } set {   this._IsRequired =value; } }
-        public Boolean IsReadOnly { get { return this._IsReadOnly; } set {   this._IsReadOnly = value; }}
         public int MaxLength { get { return this._MaxLength; } set { this._MaxLength = value; } }
 
         public string InputFieldfontstyle { get { return this._InputFieldfontstyle; } set { this._InputFieldfontstyle = value; } }

@@ -106,7 +106,7 @@ namespace Epi.Web.MVC.Utility
             {
                 if (form.Fields.Keys.Contains(fieldName.ToLower()))
                 {
-                    ((InputField)form.Fields[fieldName]).IsRequired = true;
+                    ((InputField)form.Fields[fieldName]).Required = true;
                 }
             }
 
@@ -239,12 +239,11 @@ namespace Epi.Web.MVC.Utility
             field.fontSize = double.Parse(_FieldTypeID.Attribute("PromptFontSize").Value);
             field.fontfamily = _FieldTypeID.Attribute("PromptFontFamily").Value;
 
-            field.IsReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value);
+            field.ReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value);
             field.InputFieldfontstyle = _FieldTypeID.Attribute("ControlFontStyle").Value;
             field.InputFieldfontSize = double.Parse(_FieldTypeID.Attribute("ControlFontSize").Value);
             field.InputFieldfontfamily = _FieldTypeID.Attribute("ControlFontFamily").Value;
 
-            field.IsRequired = bool.Parse(_FieldTypeID.Attribute("IsRequired").Value);
             field.Required = bool.Parse(_FieldTypeID.Attribute("IsRequired").Value);
             field.Width = form.Width;
             field.Height = form.Height;
@@ -295,9 +294,8 @@ namespace Epi.Web.MVC.Utility
             field.fontstyle = _FieldTypeID.Attribute("PromptFontStyle").Value;
             field.fontSize = double.Parse(_FieldTypeID.Attribute("PromptFontSize").Value);
             field.fontfamily = _FieldTypeID.Attribute("PromptFontFamily").Value;
-            field.IsRequired = bool.Parse(_FieldTypeID.Attribute("IsRequired").Value);
             field.Required = bool.Parse(_FieldTypeID.Attribute("IsRequired").Value);
-            field.IsReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value);
+            field.ReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value);
 
             field.Name = _FieldTypeID.Attribute("Name").Value;
             SetFieldCommon(field, form);
@@ -373,9 +371,8 @@ namespace Epi.Web.MVC.Utility
             field.InputFieldfontstyle = _FieldTypeID.Attribute("ControlFontStyle").Value;
             field.InputFieldfontSize = double.Parse(_FieldTypeID.Attribute("ControlFontSize").Value);
             field.InputFieldfontfamily = _FieldTypeID.Attribute("ControlFontFamily").Value;
-            field.IsRequired = bool.Parse(_FieldTypeID.Attribute("IsRequired").Value);
             field.Required = bool.Parse(_FieldTypeID.Attribute("IsRequired").Value);
-            field.IsReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value);
+            field.ReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value);
             field.Name = _FieldTypeID.Attribute("Name").Value;
             SetFieldCommon(field, form);
 
@@ -409,12 +406,11 @@ namespace Epi.Web.MVC.Utility
             field.fontstyle = _FieldTypeID.Attribute("PromptFontStyle").Value;
             field.fontSize = double.Parse(_FieldTypeID.Attribute("PromptFontSize").Value);
             field.fontfamily = _FieldTypeID.Attribute("PromptFontFamily").Value;
-            field.IsRequired = bool.Parse(_FieldTypeID.Attribute("IsRequired").Value);
             field.Required = bool.Parse(_FieldTypeID.Attribute("IsRequired").Value);
             field.InputFieldfontstyle = _FieldTypeID.Attribute("ControlFontStyle").Value;
             field.InputFieldfontSize = double.Parse(_FieldTypeID.Attribute("ControlFontSize").Value);
             field.InputFieldfontfamily = _FieldTypeID.Attribute("ControlFontFamily").Value;
-            field.IsReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value);
+            field.ReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value);
             field.MaxLength = int.Parse(_FieldTypeID.Attribute("MaxLength").Value);
 
             field.Name = _FieldTypeID.Attribute("Name").Value;
@@ -544,12 +540,10 @@ namespace Epi.Web.MVC.Utility
             field.fontstyle = _FieldTypeID.Attribute("PromptFontStyle").Value;
             field.fontSize = double.Parse(_FieldTypeID.Attribute("PromptFontSize").Value);
             field.fontfamily = _FieldTypeID.Attribute("PromptFontFamily").Value;
-            field.IsRequired = bool.Parse(_FieldTypeID.Attribute("IsRequired").Value);
             field.Required = bool.Parse(_FieldTypeID.Attribute("IsRequired").Value);
             field.InputFieldfontstyle = _FieldTypeID.Attribute("ControlFontStyle").Value;
             field.InputFieldfontSize = double.Parse(_FieldTypeID.Attribute("ControlFontSize").Value);
             field.InputFieldfontfamily = _FieldTypeID.Attribute("ControlFontFamily").Value;
-            field.IsReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value);
             field.ReadOnly= bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value);
             field.Name = _FieldTypeID.Attribute("Name").Value;
             SetFieldCommon(field, form);
@@ -588,12 +582,10 @@ namespace Epi.Web.MVC.Utility
             field.fontstyle = _FieldTypeID.Attribute("PromptFontStyle").Value;
             field.fontSize = double.Parse(_FieldTypeID.Attribute("PromptFontSize").Value);
             field.fontfamily = _FieldTypeID.Attribute("PromptFontFamily").Value;
-            field.IsRequired = bool.Parse(_FieldTypeID.Attribute("IsRequired").Value);
             field.Required = bool.Parse(_FieldTypeID.Attribute("IsRequired").Value);
             field.InputFieldfontstyle = _FieldTypeID.Attribute("ControlFontStyle").Value;
             field.InputFieldfontSize = double.Parse(_FieldTypeID.Attribute("ControlFontSize").Value);
             field.InputFieldfontfamily = _FieldTypeID.Attribute("ControlFontFamily").Value;
-            field.IsReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value);
             field.ReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value);
             field.Name = _FieldTypeID.Attribute("Name").Value;
             SetFieldCommon(field, form);
@@ -633,12 +625,11 @@ namespace Epi.Web.MVC.Utility
             field.fontstyle = _FieldTypeID.Attribute("PromptFontStyle").Value;
             field.fontSize = double.Parse(_FieldTypeID.Attribute("PromptFontSize").Value);
             field.fontfamily = _FieldTypeID.Attribute("PromptFontFamily").Value;
-            field.IsRequired = bool.Parse(_FieldTypeID.Attribute("IsRequired").Value);
             field.Required = bool.Parse(_FieldTypeID.Attribute("IsRequired").Value);
             field.InputFieldfontstyle = _FieldTypeID.Attribute("ControlFontStyle").Value;
             field.InputFieldfontSize = double.Parse(_FieldTypeID.Attribute("ControlFontSize").Value);
             field.InputFieldfontfamily = _FieldTypeID.Attribute("ControlFontFamily").Value;
-            field.IsReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value);
+            field.ReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value);
             field.Name = _FieldTypeID.Attribute("Name").Value;
             field.FieldTypeId = FieldTypeId;
             SetFieldCommon(field, form);

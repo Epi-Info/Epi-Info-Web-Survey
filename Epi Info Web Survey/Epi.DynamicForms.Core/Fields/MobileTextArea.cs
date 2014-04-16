@@ -51,7 +51,7 @@ namespace MvcDynamicForms.Fields
 
             txt.SetInnerText(Response);
 
-            if (_IsRequired == true)
+            if (Required == true)
             {
                 txt.Attributes.Add("class", "validate[required] text-input");
                 txt.Attributes.Add("data-prompt-position", "topRight:15");
