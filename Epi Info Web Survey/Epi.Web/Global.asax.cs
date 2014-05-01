@@ -9,7 +9,7 @@ using System.Web.Routing;
 using System.Diagnostics;
 using System.Configuration;
 using System.Web;
- 
+using ImranB.ModelBindingFix;
 using System.Web.Routing;
 using System.Web.WebPages;
  
@@ -62,6 +62,8 @@ namespace Epi.Web.MVC
             //});
 
             ProxyDependencyReference.Initialise();
+            Fixer.FixModelBindingIssue();
+
         }
 
 
