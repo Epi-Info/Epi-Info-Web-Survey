@@ -50,7 +50,18 @@ namespace Epi.Web.Common.ObjectMapping
                   
             };
         }
+        public static AdminBO ToBusinessObject(AdminDTO pDTO)
+            {
+            return new AdminBO
+            {
+                 AdminEmail = pDTO.AdminEmail,
+                 IsActive = pDTO.IsActive,
+                 Notify = pDTO.Notify,
+                 OrganizationId = pDTO.OrganizationId,
+                 AdminId = pDTO.AdminId
 
+            };
+            }
         public static OrganizationDTO ToDataTransferObjects(OrganizationBO pBO)
         {
 

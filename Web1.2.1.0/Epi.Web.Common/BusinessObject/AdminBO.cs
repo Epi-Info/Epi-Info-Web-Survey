@@ -10,8 +10,10 @@ namespace Epi.Web.Common.BusinessObject
     public class AdminBO
         {
         private string _AdminEmail;
-        private string _OrganizationId;
+        private int _OrganizationId;
         private bool _IsActive;
+        private bool _Notify;
+        private Guid _AdminId;
 
         [DataMember]
         public string AdminEmail
@@ -21,7 +23,7 @@ namespace Epi.Web.Common.BusinessObject
             }
 
         [DataMember]
-        public string OrganizationId
+        public int OrganizationId
             {
             get { return _OrganizationId; }
             set { _OrganizationId = value; }
@@ -33,7 +35,17 @@ namespace Epi.Web.Common.BusinessObject
             get { return _IsActive; }
             set { _IsActive = value; }
             }
-
-
+        [DataMember]
+        public bool Notify
+            {
+            get { return _Notify; }
+            set { _Notify = value; }
+            }
+        [DataMember]
+        public Guid AdminId
+            {
+            get { return _AdminId; }
+            set { _AdminId = value; }
+            }
         }
     }

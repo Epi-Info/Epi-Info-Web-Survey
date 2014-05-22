@@ -85,6 +85,8 @@
     <Compile Include="Message\Base\PersistType.cs" />
     <Compile Include="Message\Base\RequestBase.cs" />
     <Compile Include="Message\Base\ResponseBase.cs" />
+    <Compile Include="Message\OrganizationAccountRequest.cs" />
+    <Compile Include="Message\OrganizationAccountResponse.cs" />
     <Compile Include="Message\OrganizationRequest.cs" />
     <Compile Include="Message\OrganizationResponse.cs" />
     <Compile Include="Message\UserAuthenticationRequest.cs" />
