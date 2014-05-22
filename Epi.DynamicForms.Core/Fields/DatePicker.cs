@@ -15,7 +15,7 @@ namespace MvcDynamicForms.Fields
         public override string RenderHtml()
         {
             var html = new StringBuilder();
-            var inputName = _fieldPrefix + _key;
+            var inputName = _form.FieldPrefix + _key;
             string ErrorStyle = string.Empty;
             // prompt label
             var prompt = new TagBuilder("label");
@@ -25,7 +25,7 @@ namespace MvcDynamicForms.Fields
             prompt.Attributes.Add("class", "EpiLabel");
 
             StringBuilder StyleValues = new StringBuilder();
-            StyleValues.Append(GetControlStyle(_fontstyle.ToString(), _Prompttop.ToString(), _Promptleft.ToString(), null, Height.ToString(), _IsHidden));
+            StyleValues.Append(GetContolStyle(_fontstyle.ToString(), _Prompttop.ToString(), _Promptleft.ToString(), null, Height.ToString(),_IsHidden));
             prompt.Attributes.Add("style", StyleValues.ToString());
             html.Append(prompt.ToString());
 
@@ -41,13 +41,21 @@ namespace MvcDynamicForms.Fields
             txt.Attributes.Add("name", inputName);
             txt.Attributes.Add("id", inputName);
             txt.Attributes.Add("type", "text");
-            txt.Attributes.Add("value", Response);
-
+            txt.Attributes.Add("value", Value);
+            ////////////Check code start//////////////////
+            EnterRule FunctionObjectAfter = (EnterRule)_form.FormCheckCodeObj.GetCommand("level=field&event=after&identifier=" + _key);
+            //if (FunctionObjectAfter != null && !FunctionObjectAfter.IsNull())
+            //{ 
+                //txt.Attributes.Add("onblur", "return " + _key + "_after();"); //After
+            //}
+            EnterRule FunctionObjectBefore = (EnterRule)_form.FormCheckCodeObj.GetCommand("level=field&event=before&identifier=" + _key);
             if (FunctionObjectBefore != null && !FunctionObjectBefore.IsNull())
             { 
                 txt.Attributes.Add("onfocus", "return " + _key + "_before();"); //Before
             }
-                       
+
+            ////////////Check code end//////////////////
+            
             if (_MaxLength.ToString() != "0" && !string.IsNullOrEmpty(_MaxLength.ToString()))
             {
                 txt.Attributes.Add("MaxLength", _MaxLength.ToString());
@@ -67,7 +75,7 @@ namespace MvcDynamicForms.Fields
             {
                 txt.Attributes.Add("disabled", "disabled");
             }
-            txt.Attributes.Add("class", GetControlClass(Response));
+            txt.Attributes.Add("class", GetControlClass(Value));
 
             string InputFieldStyle = GetInputFieldStyle(_InputFieldfontstyle.ToString(), _InputFieldfontSize, _InputFieldfontfamily.ToString());
             txt.Attributes.Add("style", "position:absolute;left:" + _left.ToString() + "px;top:" + _top.ToString() + "px" + ";width:" + _ControlWidth.ToString() + "px" + ErrorStyle + ";" + IsHiddenStyle + ";" + IsHighlightedStyle + ";" + InputFieldStyle);            
@@ -145,7 +153,7 @@ namespace MvcDynamicForms.Fields
                 //   ControlClass.Append("customDate[date],future[" + GetRightDateFormat(Lower).ToString() + "],past[" + GetRightDateFormat(Upper).ToString() + "],");
                 //dateRange
                 ControlClass.Append("customDate[date],datePickerRange, " + GetRightDateFormat(Lower,Pattern).ToString() + "," + GetRightDateFormat(Upper,Pattern).ToString() + ",");
-                if (Required == true)
+                if (_IsRequired == true)
                 {
 
                     ControlClass.Append("required"); // working fine
@@ -158,7 +166,7 @@ namespace MvcDynamicForms.Fields
             }
             else
             {
-                if (Required == true)
+                if (_IsRequired == true)
                 {
                    // ControlClass.Append("required,custom[date]] text-input datepicker");
                     ControlClass.Append("required,custom[date]]  datepicker");

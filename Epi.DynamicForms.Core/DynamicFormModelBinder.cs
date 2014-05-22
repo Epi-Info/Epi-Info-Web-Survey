@@ -29,40 +29,39 @@ namespace MvcDynamicForms
                         if (dynField is TextField)
                         {
                             var txtField = (TextField)dynField;
-                            txtField.Response = postedForm[key];
+                            txtField.Value = postedForm[key];
                         }
 
                         else if (dynField is NumericTextField)
                         {
                             var numerictxtField = (NumericTextField)dynField;
-                            numerictxtField.Response = postedForm[key];
+                            numerictxtField.Value = postedForm[key];
                         }
 
                         else if (dynField is DatePickerField)
                         {
                             var datepickerField = (DatePickerField)dynField;
-                            datepickerField.Response = postedForm[key];
+                            datepickerField.Value = postedForm[key];
                         }
                         else if (dynField is TimePickerField)
                         {
                             var timepickerField = (TimePickerField)dynField;
                             timepickerField.Value = postedForm[key];
                         }
+
                         else if (dynField is ListField)
                         {
-                            var listField = (ListField)dynField;
+                            var lstField = (ListField)dynField;
 
-                            foreach (string choiceKey in listField.ChoiceKeyValuePairs.Keys.ToList())
-                            {
-                                listField.ChoiceKeyValuePairs[choiceKey] = false;
-                            }
+                            // clear all choice selections                    
+                            foreach (string k in lstField.Choices.Keys.ToList())
+                                lstField.Choices[k] = false;
 
+                            // set current selections
                             foreach (string value in postedForm.GetValues(key))
-                            {
-                                listField.ChoiceKeyValuePairs[value] = true;
-                            }
+                                lstField.Choices[value] = true;
 
-                            listField.ChoiceKeyValuePairs.Remove("");
+                            lstField.Choices.Remove("");
                         }
                         else if (dynField is CheckBox)
                         {

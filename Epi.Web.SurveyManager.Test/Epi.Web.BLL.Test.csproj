@@ -63,6 +63,10 @@
     <Compile Include="SurveyDataProvider.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\EIWS_BLL_Core\Epi.Web.BLL.csproj">
+      <Project>{D49B7A21-644B-49D7-9A5D-387BF31EAFE5}</Project>
+      <Name>Epi.Web.BLL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Epi.DynamicForms.Core\Epi.Web.DynamicForms.Core.csproj">
       <Project>{9624E64A-013F-41E8-84BA-C34EE744685E}</Project>
       <Name>Epi.Web.DynamicForms.Core</Name>

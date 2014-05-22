@@ -29,7 +29,7 @@ namespace Epi.Web.MVC
             routes.IgnoreRoute
             (
                 "{*staticfile}",
-                new { staticfile = @".*\.(jpg|gif|jpeg|png|js|css|htm|html|htc|php)$" }
+                new { staticfile = @".*\.(jpg|gif|jpeg|png|js|css|htm|html|htc)$" }
             );
 
 
@@ -65,12 +65,7 @@ namespace Epi.Web.MVC
                    "Survey/SaveSurvey/{id}",                           // URL with parameters
                    new { controller = "Survey", action = "SaveSurvey", id = "" }
                    ); 
-            
-                 routes.MapRoute (
-                   null,                                              // Route name
-                   "Survey/GetPrintView/{id}",                           // URL with parameters
-                   new { controller = "Survey", action = "GetPrintView", id = "" }
-                   ); 
+
             routes.MapRoute
                 (
                     null, // Route name
@@ -79,12 +74,6 @@ namespace Epi.Web.MVC
                 ); // Parameter defaults
 
 
-            routes.MapRoute
-           (
-               null, // Route name
-               "Print/{responseid}", // URL with parameters
-               new { controller = "Print", action = "Index", responseid = UrlParameter.Optional }
-           ); // Parameter defaults
 
             routes.MapRoute
               (
@@ -118,19 +107,8 @@ namespace Epi.Web.MVC
              new { controller = "Post", action = "SignOut", id = "" }
              );  // Parameter defaults
 
-            routes.MapRoute
-                      (
-                        null,                                              // Route name
-                        "Account/{emailaddress}",                           // URL with parameters
-                        new { controller = "Account", action = "Index", emailaddress = UrlParameter.Optional }
-                        );  // Parameter defaults
-            //routes.MapRoute
-            //         (
-            //           null,                                              // Route name
-            //           "Account/Index",                           // URL with parameters
-            //           new { controller = "Account", action = "Index" }
-            //           );   
-           
+
+
             //routes.MapRoute(
             //   "Default", // Route name
             //   "{*url}", // URL with parameters

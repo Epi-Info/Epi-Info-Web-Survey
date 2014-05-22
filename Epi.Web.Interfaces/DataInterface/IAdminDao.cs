@@ -11,7 +11,7 @@ namespace Epi.Web.Interfaces.DataInterfaces
       
         List<AdminBO> GetAdminInfoByOrgKey(string gOrgKeyEncrypted);
         List<AdminBO> GetAdminInfoByOrgId(int OrgId);
-        List<AdminBO> GetAdminEmails();
+
         void InsertAdmin(AdminBO Admin);
 
          
@@ -20,6 +20,5 @@ namespace Epi.Web.Interfaces.DataInterfaces
          
         void DeleteAdmin(AdminBO Admin);
 
-        AdminBO  GetAdminEmailByAdminId(string AdminEmail);
         }
     }

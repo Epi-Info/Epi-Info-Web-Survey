@@ -413,9 +413,7 @@ namespace Epi.Web.WCF.SurveyService
                                         IdList,
                                         criteria.SurveyId,
                                         criteria.DateCompleted,
-                                        criteria.StatusId, 
-                                        pRequest.Criteria.PageNumber,
-                                        pRequest.Criteria.PageSize
+                                        criteria.StatusId
                                     );
 
  

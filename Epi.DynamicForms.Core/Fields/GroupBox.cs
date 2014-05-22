@@ -3,73 +3,99 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web.Mvc;
-using Epi.Web.Common;
 
 namespace MvcDynamicForms.Fields
 {
+    /// <summary>
+    /// Represents html to be rendered on the form.
+    /// </summary>
     [Serializable]
     public class GroupBox : TextField
     {
+        /// <summary>
+        /// Determines whether the rendered html will be wrapped by another element.
+        /// </summary>
         public bool Wrap { get; set; }
+        /// <summary>
+        /// The html to be rendered on the form.
+        /// </summary>
         public string Html { get; set; }
 
         public override string RenderHtml()
         {
-            StringBuilder htmlBuilder = new StringBuilder();
-            var inputName = Constant.FIELDPREFIX + _key;
+            var html = new StringBuilder();
+            var inputName = _form.FieldPrefix + _key;
             string ErrorStyle = string.Empty;
+            string IsHiddenStyle = "";
+            string IsHighlightedStyle = "";
 
-            TagBuilder legendTag = new TagBuilder("legend");
 
-            string prompt = Prompt.Replace("\r\n", "<br/>");
-            legendTag.InnerHtml = "<span>" + prompt + "</span>";
-            legendTag.Attributes.Add("class", "optionPrompt");
-            StringBuilder styleValues = new StringBuilder();
-            styleValues.Append(GetStyle(_fontstyle.ToString()));
-            
-            double legendWidth = _ControlWidth - 12;
-            double legendLeft = 16;
-            double legendTop = 0 -_fontSize;
-
-            legendTag.Attributes.Add("style", 
-                "position:absolute;" +
-                "left:" + legendLeft.ToString() + "px;" + 
-                "top:" + legendTop.ToString() + "px;" + 
-                "width:" + legendWidth.ToString() + "px;" +
-                styleValues.ToString());
-
-            TagBuilder fieldsetTag = new TagBuilder("fieldset");
-            fieldsetTag.InnerHtml = legendTag.ToString();
-            fieldsetTag.Attributes.Add("name", inputName);
-            fieldsetTag.Attributes.Add("id", inputName);
-            fieldsetTag.Attributes.Add("type", "text");
-            fieldsetTag.Attributes.Add("value", Response);
-            
-            fieldsetTag.Attributes.Add("style", 
-                "position:absolute;" + 
-                "left:" + _left.ToString() + "px;" + 
-                "top:" + _top.ToString() + "px;" + 
-                "width:" + _ControlWidth.ToString() + "px;" +
-                "height:" + _ControlHeight.ToString() + "px;");
-            
-            fieldsetTag.MergeAttributes(_inputHtmlAttributes);
-            htmlBuilder.Append(fieldsetTag.ToString());
-
-            TagBuilder wrapperTag = new TagBuilder(_fieldWrapper);
-            wrapperTag.Attributes["class"] = _fieldWrapperClass;
-            
             if (_IsHidden)
             {
-                wrapperTag.Attributes["style"] = "display:none";
+                IsHiddenStyle = "display:none";
+            }
+            if (_IsHighlighted)
+            {
+                IsHighlightedStyle = "background:yellow";
             }
 
-            wrapperTag.Attributes["id"] = inputName + "_fieldWrapper";
-            wrapperTag.InnerHtml = htmlBuilder.ToString();
-            return wrapperTag.ToString();
-        }
 
+
+            // prompt label
+            var prompt = new TagBuilder("legend");
+           
+            prompt.SetInnerText(Prompt);
+            //prompt.Attributes.Add("for", inputName);
+            //prompt.Attributes.Add("class", "EpiLabel");
+
+            StringBuilder StyleValues = new StringBuilder();
+            StyleValues.Append(GetStyle(_fontstyle.ToString() ));
+
+            double PromptSize = Prompt.Length * fontSize;
+
+            if (PromptSize > this.ControlWidth )
+            {
+            prompt.Attributes.Add("style", StyleValues.ToString() + ";width:" + _ControlWidth.ToString() + "px" );
+            }else{
+              prompt.Attributes.Add("style", StyleValues.ToString()   );
+            
+            }
+            //html.Append(prompt.ToString());
+
+
+            var txt = new TagBuilder("fieldset");
+            //var Subtxt = new TagBuilder("legend");
+            //Subtxt.InnerHtml = Prompt;
+            txt.InnerHtml= prompt.ToString();
+            txt.Attributes.Add("name", inputName);
+            txt.Attributes.Add("id", inputName);
+            txt.Attributes.Add("type", "text");
+            // txt.Attributes.Add("value", Value);
+            txt.Attributes.Add("value", Value);
+
+            txt.Attributes.Add("style", "position:absolute;left:" + _left.ToString() + "px;top:" + _top.ToString() + "px" + ";width:" + _ControlWidth.ToString() + "px" + ";height:" + _ControlHeight.ToString() + "px;");// + IsHiddenStyle);
+
+            txt.MergeAttributes(_inputHtmlAttributes);
+           // html.Append(txt.ToString(TagRenderMode.SelfClosing));
+            html.Append(txt.ToString());
+
+            
+
+
+            var wrapper = new TagBuilder(_fieldWrapper);
+            wrapper.Attributes["class"] = _fieldWrapperClass;
+            if (_IsHidden)
+            {
+                wrapper.Attributes["style"] = "display:none";
+
+            }
+            wrapper.Attributes["id"] = inputName + "_fieldWrapper";
+            wrapper.InnerHtml = html.ToString();
+            return wrapper.ToString();
+        }
         public string GetStyle(string ControlFontStyle )
         {
+
             StringBuilder FontStyle = new StringBuilder();
             StringBuilder FontWeight = new StringBuilder();
             StringBuilder TextDecoration = new StringBuilder();
@@ -87,10 +113,12 @@ namespace MvcDynamicForms.Fields
                         break;
                     case "Oblique":
                         FontStyle.Append(Style.ToString());
-                        break;
-                }
-            }
 
+                        break;
+
+                }
+
+            }
             foreach (string Style in Styles)
             {
                 switch (Style.ToString())
@@ -100,18 +128,19 @@ namespace MvcDynamicForms.Fields
                         break;
                     case "Normal":
                         FontWeight.Append(Style.ToString());
-                        break;
-                }
-            }
 
-            CssStyles.Append("font:");
-            
+                        break;
+
+                }
+
+            }
+            CssStyles.Append("font:");//1
             if (!string.IsNullOrEmpty(FontStyle.ToString()))
             {
-                CssStyles.Append(FontStyle);
-                CssStyles.Append(" ");
-            }
 
+                CssStyles.Append(FontStyle);//2
+                CssStyles.Append(" ");//3
+            }
             CssStyles.Append(FontWeight);
             CssStyles.Append(" ");
             CssStyles.Append(_fontSize.ToString() + "pt ");
@@ -127,8 +156,11 @@ namespace MvcDynamicForms.Fields
                         break;
                     case "Underline":
                         TextDecoration.Append(Style.ToString());
+
                         break;
+
                 }
+
             }
 
             if (!string.IsNullOrEmpty(TextDecoration.ToString()))
@@ -138,7 +170,10 @@ namespace MvcDynamicForms.Fields
 
             CssStyles.Append(TextDecoration);
 
+
             return CssStyles.ToString();
+
         }
+
     }
 }

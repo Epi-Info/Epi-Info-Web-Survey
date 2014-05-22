@@ -11,7 +11,6 @@ namespace Epi.Web.BLL
    public class Admin
         {
 
-
        public Epi.Web.Interfaces.DataInterfaces.IAdminDao AdminDao;
 
            public Admin(Epi.Web.Interfaces.DataInterfaces.IAdminDao pAdminDao)
@@ -79,7 +78,5 @@ namespace Epi.Web.BLL
                bool success = Epi.Web.Common.Email.EmailHandler.SendMessage(Email);
 
                }
-
-           
         }
     }

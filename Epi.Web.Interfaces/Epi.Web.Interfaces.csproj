@@ -44,10 +44,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataInterface\ICacheDependencyInfoDao.cs" />
     <Compile Include="DataInterface\IAdminDao.cs" />
     <Compile Include="DataInterface\IOrganizationDao.cs" />
-    <Compile Include="DataInterface\IStateDao.cs" />
     <Compile Include="DataInterface\ISurveyResponseDao.cs" />
     <Compile Include="DataInterface\ISurveyInfoDao.cs" />
     <Compile Include="DataInterface\IDaoFactory.cs" />

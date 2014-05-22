@@ -48,10 +48,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EntityCacheDependencyInfoDao.cs" />
     <Compile Include="EntityAdminDao.cs" />
     <Compile Include="EntityOrganizationDao.cs" />
-    <Compile Include="EntityStateDao.cs" />
     <Compile Include="EntitySurveyResponseDao.cs" />
     <Compile Include="DataObjectFactory.cs" />
     <Compile Include="EntityDaoFactory.cs" />

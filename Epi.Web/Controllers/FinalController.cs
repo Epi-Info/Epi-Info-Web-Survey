@@ -29,7 +29,7 @@ namespace Epi.Web.MVC.Controllers
         }
 
         [HttpGet]
-        public ActionResult Index(string surveyId, string final, string responseId)
+        public ActionResult Index(string surveyId, string final)
         {
             
             try
@@ -44,11 +44,6 @@ namespace Epi.Web.MVC.Controllers
                 string exitText = regex.Replace(surveyInfoModel.ExitText.Replace("  ", " &nbsp;"), "<br />");
                 surveyInfoModel.ExitText = MvcHtmlString.Create(exitText).ToString();
 
-                string strPassCode = Epi.Web.MVC.Utility.SurveyHelper.GetPassCode();
-
-                surveyInfoModel.PassCode = strPassCode;
-                TempData["PassCode"] = strPassCode;
-
                 if (surveyInfoModel.IsDraftMode)
                 {
                     surveyInfoModel.IsDraftModeStyleClass = "draft";
@@ -60,7 +55,7 @@ namespace Epi.Web.MVC.Controllers
                 bool IsMobileDevice = false;
                 IsMobileDevice = this.Request.Browser.IsMobileDevice;
                 Omniture OmnitureObj = Epi.Web.MVC.Utility.OmnitureHelper.GetSettings(SurveyMode, IsMobileDevice);
-                ViewBag.ResponseId = responseId; 
+
                 ViewBag.Omniture = OmnitureObj;
                 return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, surveyInfoModel);
             }
@@ -76,36 +71,19 @@ namespace Epi.Web.MVC.Controllers
         {
             try
             {
-                bool isMobileDevice = this.Request.Browser.IsMobileDevice;
+                bool IsMobileDevice = this.Request.Browser.IsMobileDevice;
 
-                if (isMobileDevice == false)
+                if (IsMobileDevice == false)
                 {
-                    isMobileDevice = Epi.Web.MVC.Utility.SurveyHelper.IsMobileDevice(this.Request.UserAgent.ToString());
+                    IsMobileDevice = Epi.Web.MVC.Utility.SurveyHelper.IsMobileDevice(this.Request.UserAgent.ToString());
                 }
-                if (!string.IsNullOrEmpty(this.Request.Form["is_print_action"]) && this.Request.Form["is_print_action"].ToString().Equals("true", StringComparison.OrdinalIgnoreCase))
-                    {
-                    string ResponseId = this.Request.Form["ResponseId"];
-                    ActionResult actionResult = RedirectToAction("Index", "Print", new { responseId = ResponseId , FromFinal = true});
-                    return actionResult;
-                    }
-                FormsAuthentication.SignOut();
+
                 FormsAuthentication.SetAuthCookie("BeginSurvey", false);
                 Guid responseId = Guid.NewGuid();
                 Epi.Web.Common.DTO.SurveyAnswerDTO SurveyAnswer = _isurveyFacade.CreateSurveyAnswer(surveyId, responseId.ToString());
-
-                // Pass Code Logic  start 
-                Epi.Web.Common.Message.UserAuthenticationResponse AuthenticationResponse = _isurveyFacade.GetAuthenticationResponse(responseId.ToString());
-
-                string strPassCode = Epi.Web.MVC.Utility.SurveyHelper.GetPassCode();
-                if (string.IsNullOrEmpty(AuthenticationResponse.PassCode))
-                    {
-                    _isurveyFacade.UpdatePassCode(responseId.ToString(), TempData["PassCode"].ToString());
-                    }
-
-
                 SurveyInfoModel surveyInfoModel = GetSurveyInfo(SurveyAnswer.SurveyId);
                 XDocument xdoc = XDocument.Parse(surveyInfoModel.XML);
-                MvcDynamicForms.Form form = _isurveyFacade.GetSurveyFormData(SurveyAnswer.SurveyId, 1, SurveyAnswer, isMobileDevice);
+                MvcDynamicForms.Form form = _isurveyFacade.GetSurveyFormData(SurveyAnswer.SurveyId, 1, SurveyAnswer, IsMobileDevice);
 
                 var _FieldsTypeIDs = from _FieldTypeID in
                                      xdoc.Descendants("Field")

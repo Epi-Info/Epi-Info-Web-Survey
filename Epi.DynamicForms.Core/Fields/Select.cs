@@ -9,9 +9,15 @@ using System.Drawing;
 
 namespace MvcDynamicForms.Fields
 {
+    /// <summary>
+    /// Represents an html select element.
+    /// </summary>
     [Serializable]
     public class Select : ListField
     {
+        /// <summary>
+        /// The number of options to display at a time.
+        /// </summary>
         public int Size
         {
             get
@@ -21,7 +27,9 @@ namespace MvcDynamicForms.Fields
             }
             set { _inputHtmlAttributes["size"] = value.ToString(); }
         }
-
+        /// <summary>
+        /// Determines whether the select element will accept multiple selections.
+        /// </summary>
         public bool MultipleSelection
         {
             get
@@ -36,106 +44,137 @@ namespace MvcDynamicForms.Fields
             set { _inputHtmlAttributes["multiple"] = value.ToString(); }
         }
 
+        //public int SelectType { get; set; }
+        /// <summary>
+        /// The text to be rendered as the first option in the select list when ShowEmptyOption is set to true.
+        /// </summary>
+        /// 
         public string EmptyOption { get; set; }
+        /// <summary>
+        /// Determines whether a valueless option is rendered as the first option in the list.
+        /// </summary>
         public bool ShowEmptyOption { get; set; }
 
         public override string RenderHtml()
         {
             var html = new StringBuilder();
 
-            var inputName = _fieldPrefix + _key;
+            var inputName = _form.FieldPrefix + _key;
             string ErrorStyle = string.Empty;
             
+            // prompt
             var prompt = new TagBuilder("label");
+
             System.Text.RegularExpressions.Regex regex = new System.Text.RegularExpressions.Regex(@"(\r\n|\r|\n)+");
+
             string newText = regex.Replace(Prompt.Replace(" ", "&nbsp;"), "<br />");
+
             string NewPromp = System.Web.Mvc.MvcHtmlString.Create(newText).ToString();
+
 
             prompt.InnerHtml=NewPromp;
             prompt.Attributes.Add("for", inputName);
             prompt.Attributes.Add("class", "EpiLabel");
             prompt.Attributes.Add("Id", "label" + inputName);
+
             
             StringBuilder StyleValues = new StringBuilder();
-            StyleValues.Append(GetControlStyle(_fontstyle.ToString(), _Prompttop.ToString(), _Promptleft.ToString(), null, Height.ToString(),_IsHidden));
+            StyleValues.Append(GetContolStyle(_fontstyle.ToString(), _Prompttop.ToString(), _Promptleft.ToString(), null, Height.ToString(),_IsHidden));
             prompt.Attributes.Add("style", StyleValues.ToString());
             html.Append(prompt.ToString());
 
+            // error label
             if (!IsValid)
             {
+                //Add new Error to the error Obj
+
                 ErrorStyle = ";border-color: red";
+             
             }
 
+            // open select element
             var select = new TagBuilder("select");
             select.Attributes.Add("id", inputName);
             select.Attributes.Add("name", inputName);
-
+            ////////////Check code start//////////////////
+            EnterRule FunctionObjectAfter = (EnterRule)_form.FormCheckCodeObj.GetCommand("level=field&event=after&identifier=" + _key);
             if (FunctionObjectAfter != null && !FunctionObjectAfter.IsNull())
             {
+
+              //  select.Attributes.Add("onblur", "return " + _key + "_after();"); //After
                 select.Attributes.Add("onchange", "return " + _key + "_after();"); //After
             }
-
+            EnterRule FunctionObjectBefore = (EnterRule)_form.FormCheckCodeObj.GetCommand("level=field&event=before&identifier=" + _key);
             if (FunctionObjectBefore != null && !FunctionObjectBefore.IsNull())
             {
+
                 select.Attributes.Add("onfocus", "return " + _key + "_before();"); //Before
             }
 
+            ////////////Check code end//////////////////
             int LargestChoiseLength =0 ;
             string measureString = "";
+            foreach (var choise in _choices) {
+
+                if (choise.Key.ToString().Length > LargestChoiseLength) 
+             {
+                 LargestChoiseLength = choise.Key.ToString().Length;
+
+                 measureString = choise.Key.ToString();
+             } 
             
-            foreach (var choice in _choices) 
-            {
-                if (choice.Key.ToString().Length > LargestChoiseLength) 
-                {
-                    LargestChoiseLength = choice.Key.ToString().Length;
-                    measureString = choice.Key.ToString();
-                } 
+            
             }
+
+           // LargestChoiseLength = LargestChoiseLength * _ControlFontSize;
 
             Font stringFont = new Font(ControlFontStyle, _ControlFontSize);
 
             SizeF size = new SizeF() ;
-            
             using (Graphics g = Graphics.FromHwnd(IntPtr.Zero))
             {
-                size = g.MeasureString(measureString.ToString(), stringFont);
+                  size = g.MeasureString(measureString.ToString(), stringFont);
             }
 
-            if (Required == true)
-            {
-                if ((size.Width) > _ControlWidth)
-                {
-                    select.Attributes.Add("class", GetControlClass() + "fix-me");
-                }
-                else
-                {
-                    select.Attributes.Add("class", GetControlClass()  );
-                }
 
-                select.Attributes.Add("data-prompt-position", "topRight:10");
+           
+          // stringSize = (int) Graphics.MeasureString(measureString.ToString(), stringFont).Width;
+        
+
+            if (_IsRequired == true)
+            {
+                        if ((size.Width) > _ControlWidth)
+                        {
+                           // select.Attributes.Add("class", GetControlClass() + "text-input fix-me");
+                            select.Attributes.Add("class", GetControlClass() + "fix-me");
+                        }
+                        else
+                        {
+                           // select.Attributes.Add("class", GetControlClass() + "text-input");
+                            select.Attributes.Add("class", GetControlClass()  );
+                        }
+                       select.Attributes.Add("data-prompt-position", "topRight:10");
             }
             else 
             {
+                        //select.Attributes.Add("class", GetControlClass() + "text-input fix-me");
                 if ((size.Width) > _ControlWidth)
                 {
                     select.Attributes.Add("class", GetControlClass() +"fix-me ");
                 }
                 else
                 {
+
                     select.Attributes.Add("class", GetControlClass() );
                 }
-                
                 select.Attributes.Add("data-prompt-position", "topRight:10");
                  
             }
             string IsHiddenStyle = "";
             string IsHighlightedStyle = "";
-
-            if(_IsHidden)
-            {
+            if(_IsHidden){
                 IsHiddenStyle = "display:none";
             }
-            
             if (_IsHighlighted)
             {
                 IsHighlightedStyle = "background-color:yellow";
@@ -145,12 +184,11 @@ namespace MvcDynamicForms.Fields
             {
                 select.Attributes.Add("disabled", "disabled");
             }
-            
             string InputFieldStyle = GetInputFieldStyle(_InputFieldfontstyle.ToString(), _InputFieldfontSize, _InputFieldfontfamily.ToString());
             select.Attributes.Add("style", "position:absolute;left:" + _left.ToString() + "px;top:" + _top.ToString() + "px" + ";width:" + _ControlWidth.ToString() + "px ; font-size:" + _ControlFontSize + "pt;" + ErrorStyle + ";" + IsHiddenStyle + ";" + IsHighlightedStyle + ";" + InputFieldStyle);
             select.MergeAttributes(_inputHtmlAttributes);
             html.Append(select.ToString(TagRenderMode.StartTag));
-
+            // If readonly then add the following jquery script to make the field disabled 
             if (ReadOnly)
             {
                 var scriptReadOnlyText = new TagBuilder("script");
@@ -158,6 +196,7 @@ namespace MvcDynamicForms.Fields
                 html.Append(scriptReadOnlyText.ToString(TagRenderMode.Normal));
             }
 
+            // initial empty option
             if (ShowEmptyOption)
             {
                 var opt = new TagBuilder("option");
@@ -166,7 +205,9 @@ namespace MvcDynamicForms.Fields
                 html.Append(opt.ToString());
             }
 
-            switch (FieldTypeId.ToString())
+            // options
+
+            switch (this.SelectType.ToString())
             {
                 case "11":
                     foreach (var choice in _choices)
@@ -188,6 +229,7 @@ namespace MvcDynamicForms.Fields
                             opt.SetInnerText(choice.Key);
                             html.Append(opt.ToString());
                         }
+                        
                     }
                     break;
                 case "17":
@@ -238,8 +280,10 @@ namespace MvcDynamicForms.Fields
                     break;
             }
  
+            // close select element
             html.Append(select.ToString(TagRenderMode.EndTag));
 
+            // add hidden tag, so that a value always gets sent for select tags
             var hidden = new TagBuilder("input");
             hidden.Attributes.Add("type", "hidden");
             hidden.Attributes.Add("id", inputName + "_hidden");
@@ -258,19 +302,24 @@ namespace MvcDynamicForms.Fields
             wrapper.InnerHtml = html.ToString();
             return wrapper.ToString();
         }
-
         public string GetControlClass()
         {
+
             StringBuilder ControlClass = new StringBuilder();
+
             ControlClass.Append("validate[");
 
-            if (Required == true)
-            {
-                ControlClass.Append("required");
-            }
 
+            if (_IsRequired == true)
+            {
+
+                ControlClass.Append("required");
+
+            }
             ControlClass.Append("]");
+
             return ControlClass.ToString();
+
         }
     }
 }

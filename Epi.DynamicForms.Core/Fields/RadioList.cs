@@ -6,40 +6,37 @@ using System.Web.Mvc;
 using Epi.Core.EnterInterpreter;
 using System.Web.UI;
 
+ 
+
 namespace MvcDynamicForms.Fields
 {
+    /// <summary>
+    /// Represents a list of html radio button inputs.
+    /// </summary>
     [Serializable]
     public class RadioList : OrientableField
     {
-        private string _options_position_string;
+        private string _ChoicesList;
 
-        public string Options_Positions
+        public string ChoicesList
         {
+            get
+            {
+                return _ChoicesList;
+            }
+
             set
             {
-                _options_position_string = value;
-
-                string pipeString = _options_position_string.Replace("||", "|");
-                List<string> lists = pipeString.Split('|').ToList<string>();
-                string options = lists[0];
-                string locations = lists[1];
-
-                ChoiceKeyValuePairs.Clear();
-                foreach (var option in options.Split(',').ToList<string>())
-                {
-                    ChoiceKeyValuePairs.Add(option, false);
-                }
-
-                Locations = locations.Split(',').ToList<string>();
+                _ChoicesList = value;
             }
         }
-
         public override string RenderHtml()
         {
-            StringBuilder html = new StringBuilder();
-            string inputName = _fieldPrefix + _key;
-            List<KeyValuePair<string, bool>> choiceList = ChoiceKeyValuePairs.ToList();
-
+            var html = new StringBuilder();
+            var inputName = _form.FieldPrefix + _key;
+            var choicesList = _choices.ToList();
+            var choicesList1 = GetChoices(_ChoicesList);
+            choicesList = choicesList1.ToList();
             if (!IsValid)
             {
                 var error = new TagBuilder("label");
@@ -47,129 +44,161 @@ namespace MvcDynamicForms.Fields
                 error.SetInnerText(Error);
                 html.Append(error.ToString());
             }
-            
             string IsHiddenStyle = "";
             string IsHighlightedStyle = "";
 
             if (_IsHidden)
             {
+                //IsHiddenStyle = "visibility:hidden";
+               // IsHiddenStyle = "display:none";
             }
-            
             if (_IsHighlighted)
             {
                 IsHighlightedStyle = "background:yellow";
             }
 
-            if (choiceList.Count == Locations.Count + 1)
-            {
-                string strindex = choiceList[Locations.Count].Key;
-                bool bodex = choiceList[Locations.Count].Value;
-                int index;
 
-                if (int.TryParse(strindex, out index))
-                {
-                    KeyValuePair<string, bool> newKvp = new KeyValuePair<string, bool>(choiceList[index].Key,bodex);
-                    choiceList[index] = newKvp;
-                }
-            }
-            
-            for (int i = 0; i < Locations.Count; i++)
+          
+          
+           
+            for (int i = 0; i < choicesList.Count; i++)
             {
+
                 double innerTop = 0.0;
                 double innerLeft = 0.0;
                 string radId = inputName + i;
-
-                List<string> TopLeft = Locations[i].ToString().Split(':').ToList();
-
-                if (TopLeft.Count > 0)
+               // if (Pattern != null && !string.IsNullOrEmpty(Pattern[0]))
+                if ((Pattern.Count ) == choicesList.Count )
                 {
-                    innerTop = double.Parse(TopLeft[0]) * Height;
-                    innerLeft = double.Parse(TopLeft[1]) * Width;
+                    List<string> TopLeft = Pattern[i].ToString().Split(':').ToList();
+
+                    if (TopLeft.Count > 0)
+                    {
+                        innerTop = double.Parse(TopLeft[0]) * Height;
+                        innerLeft = double.Parse(TopLeft[1]) * Width;
+
+                    }
                 }
 
-                TagBuilder divTag = new TagBuilder("div");
-                divTag.Attributes.Add("class", _orientation == Orientation.Vertical ? _verticalClass : _horizontalClass);
-                divTag.Attributes["class"] += " " + _listClass;
-                divTag.Attributes.Add("style", "position:absolute; left:" + (_left + innerLeft) + "px;top:" + (_top + innerTop) + "px" + ";width:" + _ControlWidth.ToString() + "px" + ";height:" + _ControlHeight.ToString() + "px");
-                html.Append(divTag.ToString(TagRenderMode.StartTag));
+               
+
+                var Div = new TagBuilder("Div");
+                Div.Attributes.Add("class", _orientation == Orientation.Vertical ? _verticalClass : _horizontalClass);
+                Div.Attributes["class"] += " " + _listClass;
+                Div.Attributes.Add("style", "position:absolute; left:" + (_left + innerLeft) + "px;top:" + (_top + innerTop) + "px" + ";width:" + _ControlWidth.ToString() + "px" + ";height:" + _ControlHeight.ToString() + "px" );
+                html.Append(Div.ToString(TagRenderMode.StartTag));
                
                 if (!_showTextOnRight)
                 {
                     var Leftlbl = new TagBuilder("label");
                   
                     Leftlbl.Attributes.Add("for", inputName);
+                    //Leftlbl.Attributes.Add("class", _inputLabelClass);
                     Leftlbl.Attributes.Add("class", "label" + inputName);  
                     Leftlbl.Attributes.Add("Id", "label" + inputName + "_" + i);
                     StringBuilder StyleValues1 = new StringBuilder();
                     StyleValues1.Append(GetRadioListStyle(_fontstyle.ToString(), null, null, null, null, IsHidden));
                     string InputFieldStyle_L = GetInputFieldStyle(_InputFieldfontstyle.ToString(), _InputFieldfontSize, _InputFieldfontfamily.ToString());
                     Leftlbl.Attributes.Add("style", StyleValues1.ToString() + ";" + IsHighlightedStyle + ";" + IsHiddenStyle + ";" + InputFieldStyle_L);
-                    Leftlbl.SetInnerText(choiceList[i].Key);
+                    Leftlbl.SetInnerText(choicesList[i].Key);
                     html.Append(Leftlbl.ToString());
+                     
                 }
 
-                TagBuilder radioTag = new TagBuilder("input");
-                radioTag.Attributes.Add("type", "radio");
-                radioTag.Attributes.Add("name", inputName);
-                radioTag.Attributes.Add("class", inputName);
-
-                if (FunctionObjectClick != null && !FunctionObjectClick.IsNull())
+                // radio button input
+                var rad = new TagBuilder("input");
+                rad.Attributes.Add("type", "radio");
+                rad.Attributes.Add("name", inputName);
+                rad.Attributes.Add("class", inputName);
+               // rad.Attributes.Add("onClick", "return document.getElementById('" + inputName + "').value = this.value;"); //After
+                ////////////Check code start//////////////////
+                EnterRule FunctionObjectAfter = (EnterRule)_form.FormCheckCodeObj.GetCommand("level=field&event=after&identifier=" + _key);
+                if (FunctionObjectAfter != null && !FunctionObjectAfter.IsNull())
                 {
-                    radioTag.Attributes.Add("onclick", "return " + _key + "_after();");
-                }
 
-                radioTag.SetInnerText(choiceList[i].Key);
-                radioTag.Attributes.Add("value", i.ToString());
-                radioTag.Attributes.Add("style", IsHiddenStyle); 
-                
+                   // rad.Attributes.Add("onblur", "return " + _key + "_after();"); //After
+                    rad.Attributes.Add("onclick", "return " + _key + "_after();"); //After
+                }
+              
+                ////////////Check code end//////////////////
+                rad.SetInnerText(choicesList[i].Key);
+                rad.Attributes.Add("value",  i.ToString());
+                rad.Attributes.Add("style",  IsHiddenStyle); 
                 if (_IsDisabled)
                 {
-                    radioTag.Attributes.Add("disabled", "disabled");
+                rad.Attributes.Add("disabled", "disabled");
                 }
 
-                if (choiceList[i].Value == true)
-                {
-                    radioTag.Attributes.Add("checked", "checked");
-                }
+                 if (Value == i.ToString()) rad.Attributes.Add("checked", "checked");
+                rad.MergeAttributes(_inputHtmlAttributes);
+                html.Append(rad.ToString(TagRenderMode.SelfClosing));
 
-                radioTag.MergeAttributes(_inputHtmlAttributes);
-                html.Append(radioTag.ToString(TagRenderMode.SelfClosing));
-
+                // checkbox label
                 if (_showTextOnRight)
                 {
                     var rightlbl = new TagBuilder("label");
                     rightlbl.Attributes.Add("for", inputName);
+                   // rightlbl.Attributes.Add("class", _inputLabelClass);  
                     rightlbl.Attributes.Add("class", "label" + inputName);  
                     rightlbl.Attributes.Add("Id", "label" + inputName + "_" + i);
                     StringBuilder StyleValues2 = new StringBuilder();
                     StyleValues2.Append(GetRadioListStyle(_fontstyle.ToString(), null, null, null, null, IsHidden));
                     string InputFieldStyle_R = GetInputFieldStyle(_InputFieldfontstyle.ToString(), _InputFieldfontSize, _InputFieldfontfamily.ToString());
                     rightlbl.Attributes.Add("style", StyleValues2.ToString() + ";" + IsHighlightedStyle + ";" + IsHiddenStyle + ";" + InputFieldStyle_R);
-                    rightlbl.SetInnerText(choiceList[i].Key);
+                    rightlbl.SetInnerText(choicesList[i].Key);
                     html.Append(rightlbl.ToString());
+               
                 }
-
-                html.Append(divTag.ToString(TagRenderMode.EndTag));
+               
+                html.Append(Div.ToString(TagRenderMode.EndTag));
             }
 
+          
+              // add hidden tag, so that a value always gets sent for select tags
             var hidden = new TagBuilder("input");
             hidden.Attributes.Add("type", "hidden");
             hidden.Attributes.Add("id", inputName);
             hidden.Attributes.Add("name", inputName);
             hidden.Attributes.Add("value", string.Empty);          
             html.Append(hidden.ToString(TagRenderMode.SelfClosing));
+                            
 
             var wrapper = new TagBuilder(_fieldWrapper);
             wrapper.Attributes["class"] = _fieldWrapperClass;
-            
             if (_IsHidden)
             {
                 wrapper.Attributes["style"] = "display:none";
-            }
 
+            }
             wrapper.Attributes["id"] = inputName + "_fieldWrapper";
             wrapper.InnerHtml = html.ToString();
             return wrapper.ToString();
+        }
+
+        private Dictionary<string, bool> GetChoices(string _ChoicesList)
+        {
+            string ListString = _ChoicesList;
+            ListString = ListString.Replace("||", "|");
+            List<string> Lists = ListString.Split('|').ToList<string>();
+
+            Dictionary<string, bool> Choices = new Dictionary<string, bool>();
+            Choices = GetChoices(Lists[0].Split(',').ToList<string>());
+            return Choices;
+        }
+
+        public static Dictionary<string, bool> GetChoices(List<string> List)
+        {
+
+            Dictionary<string, bool> NewList = new Dictionary<string, bool>();
+            foreach (var _List in List)
+            {
+
+                NewList.Add(_List, false);
+
+            }
+
+            return NewList;
+
         }
     }
 }

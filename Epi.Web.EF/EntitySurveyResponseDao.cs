@@ -145,8 +145,7 @@ namespace Epi.Web.EF
         /// <returns>SurveyResponse.</returns>
         public List<SurveyResponseBO> GetSurveyResponse(List<string> SurveyAnswerIdList, string pSurveyId, DateTime pDateCompleted, int pStatusId = -1, int PageNumber = -1, int PageSize = -1)
         {
-         List<SurveyResponseBO> Finalresult = new List<SurveyResponseBO>();
-         IEnumerable<SurveyResponseBO> result;
+            List<SurveyResponseBO> result = new List<SurveyResponseBO>();
             List<SurveyResponse> responseList = new List<SurveyResponse>();
 
             if (SurveyAnswerIdList.Count > 0)
@@ -218,48 +217,25 @@ namespace Epi.Web.EF
                 responseList = dateList;
             }
 
-           
-          
-                
-                //if (PageNumber > 0 && PageSize > 0)
-                //{
-                //    result.Sort(CompareByDateCreated);
-                //    // remove the items to skip
-                //    if (PageNumber * PageSize - PageSize > 0)
-                //    {
-                //        result.RemoveRange(0, PageSize);
-                //    }
+            result = Mapper.Map(responseList);
 
-                //    if (PageNumber * PageSize < result.Count)
-                //    {
-                //        result.RemoveRange(PageNumber * PageSize, result.Count - PageNumber * PageSize);
-                //    }
-                //}
-
-            if(PageSize!=-1 && PageNumber != -1){
-             result = Mapper.Map(responseList);
-               result = result.Skip((PageNumber - 1) * PageSize).Take(PageSize);
-                foreach(var item in result)
-                    {
-                    Finalresult.Add(item);
-                
-                    }
-                    return Finalresult;
-                }
-            else
+            if (PageNumber > 0 && PageSize > 0)
+            {
+                result.Sort(CompareByDateCreated);
+                // remove the items to skip
+                if (PageNumber * PageSize - PageSize > 0)
                 {
-
-               
-               Finalresult = Mapper.Map(responseList);
-
-                  
-                return Finalresult;
+                    result.RemoveRange(0, PageSize);
                 }
-           
-              
-           
 
-            
+                if (PageNumber * PageSize < result.Count)
+                {
+                    result.RemoveRange(PageNumber * PageSize, result.Count - PageNumber * PageSize);
+                }
+            }
+
+
+            return result;
         }
 
 

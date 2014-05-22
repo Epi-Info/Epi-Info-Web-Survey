@@ -88,13 +88,12 @@
     <Compile Include="Fields\Abstract\DatePickerField.cs" />
     <Compile Include="Fields\Abstract\ListField.cs" />
     <Compile Include="Fields\Abstract\Field.cs" />
+    <Compile Include="FieldList.cs" />
     <Compile Include="Fields\Abstract\NumericTextField.cs" />
     <Compile Include="Fields\Abstract\OrientableField.cs" />
     <Compile Include="Fields\Abstract\TimePickerField.cs" />
     <Compile Include="Fields\CheckBox.cs" />
     <Compile Include="Fields\CheckBoxList.cs" />
-    <Compile Include="Fields\CommandButton.cs" />
-    <Compile Include="Fields\MobileCommandButton.cs" />
     <Compile Include="Fields\Hidden.cs" />
     <Compile Include="Fields\DatePicker.cs" />
     <Compile Include="Fields\GroupBox.cs" />

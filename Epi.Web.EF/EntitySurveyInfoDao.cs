@@ -309,7 +309,6 @@ namespace Epi.Web.EF
 
                    SurveyInfo.TemplateXMLSize = RemoveWhitespace(SurveyInfo.XML).Length;
                    SurveyInfo.DateCreated = DateTime.Now;
-                   SurveyInfo.LastUpdate = DateTime.Now;
 
                    var SurveyMetaDataEntity = Mapper.Map(SurveyInfo);
                    SurveyMetaDataEntity.OrganizationId = OrganizationId;
@@ -355,7 +354,7 @@ namespace Epi.Web.EF
                     DataRow.TemplateXMLSize = RemoveWhitespace(SurveyInfo.XML).Length;
                     DataRow.IsDraftMode = SurveyInfo.IsDraftMode;
                     DataRow.StartDate = SurveyInfo.StartDate;
-                    DataRow.LastUpdate = DateTime.Now;
+                   
 
                     Context.SaveChanges();
                 }

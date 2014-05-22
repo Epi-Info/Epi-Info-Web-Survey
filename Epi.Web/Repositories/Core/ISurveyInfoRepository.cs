@@ -13,7 +13,5 @@ namespace Epi.Web.MVC.Repositories.Core
     public interface ISurveyInfoRepository: IRepository<Epi.Web.Common.Message.SurveyInfoResponse>
     {
         SurveyInfoResponse GetSurveyInfo(SurveyInfoRequest pRequestId);
-
-        SurveyControlsResponse GetSurveyControlList(SurveyControlsRequest pRequestMessage);
     }
 }

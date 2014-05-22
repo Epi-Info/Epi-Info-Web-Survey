@@ -21,7 +21,7 @@ namespace MvcDynamicForms.Fields
         public override string RenderHtml()
         {
             var html = new StringBuilder();
-            var inputName = _fieldPrefix + _key;
+            var inputName = _form.FieldPrefix + _key;
             string ErrorStyle = string.Empty;
             /*
             // prompt label
@@ -64,7 +64,7 @@ namespace MvcDynamicForms.Fields
                 }*/
 
             ////////////Check code end//////////////////
-            txt.Attributes.Add("value", Response);
+            txt.Attributes.Add("value", Value);
             /*
             if(_IsRequired ==true){
             txt.Attributes.Add("class", "validate[required] text-input");

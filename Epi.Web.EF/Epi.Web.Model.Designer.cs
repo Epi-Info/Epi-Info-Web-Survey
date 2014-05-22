@@ -8,13 +8,12 @@
 //------------------------------------------------------------------------------
 
 using System;
-using System.ComponentModel;
-using System.Data.EntityClient;
 using System.Data.Objects;
 using System.Data.Objects.DataClasses;
-using System.Linq;
-using System.Runtime.Serialization;
+using System.Data.EntityClient;
+using System.ComponentModel;
 using System.Xml.Serialization;
+using System.Runtime.Serialization;
 
 [assembly: EdmSchemaAttribute()]
 #region EDM Relationship Metadata
@@ -24,7 +23,6 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("EIWSModel", "FK_SurveyResponse_SurveyMetaData", "SurveyMetaData", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Epi.Web.EF.SurveyMetaData), "SurveyResponse", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Epi.Web.EF.SurveyResponse), true)]
 [assembly: EdmRelationshipAttribute("EIWSModel", "FK_SurveyMetaData_Organization", "Organization", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Epi.Web.EF.Organization), "SurveyMetaData", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Epi.Web.EF.SurveyMetaData), true)]
 [assembly: EdmRelationshipAttribute("EIWSModel", "FK_Admin_Organization", "Organization", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Epi.Web.EF.Organization), "Admin", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Epi.Web.EF.Admin), true)]
-[assembly: EdmRelationshipAttribute("EIWSModel", "FK_Admin_Address", "Address", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Epi.Web.EF.Address), "Admin", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Epi.Web.EF.Admin), true)]
 
 #endregion
 
@@ -187,41 +185,8 @@ namespace Epi.Web.EF
             }
         }
         private ObjectSet<sysdiagram> _sysdiagrams;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<Address> Addresses
-        {
-            get
-            {
-                if ((_Addresses == null))
-                {
-                    _Addresses = base.CreateObjectSet<Address>("Addresses");
-                }
-                return _Addresses;
-            }
-        }
-        private ObjectSet<Address> _Addresses;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<State> States
-        {
-            get
-            {
-                if ((_States == null))
-                {
-                    _States = base.CreateObjectSet<State>("States");
-                }
-                return _States;
-            }
-        }
-        private ObjectSet<State> _States;
 
         #endregion
-
         #region AddTo Methods
     
         /// <summary>
@@ -279,241 +244,14 @@ namespace Epi.Web.EF
         {
             base.AddObject("sysdiagrams", sysdiagram);
         }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the Addresses EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToAddresses(Address address)
-        {
-            base.AddObject("Addresses", address);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the States EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToStates(State state)
-        {
-            base.AddObject("States", state);
-        }
 
         #endregion
-
     }
+    
 
     #endregion
-
+    
     #region Entities
-    
-    /// <summary>
-    /// No Metadata Documentation available.
-    /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="EIWSModel", Name="Address")]
-    [Serializable()]
-    [DataContractAttribute(IsReference=true)]
-    public partial class Address : EntityObject
-    {
-        #region Factory Method
-    
-        /// <summary>
-        /// Create a new Address object.
-        /// </summary>
-        /// <param name="addressId">Initial value of the AddressId property.</param>
-        /// <param name="addressLine1">Initial value of the AddressLine1 property.</param>
-        /// <param name="city">Initial value of the City property.</param>
-        /// <param name="stateProvinceId">Initial value of the StateProvinceId property.</param>
-        /// <param name="postalCode">Initial value of the PostalCode property.</param>
-        public static Address CreateAddress(global::System.Int32 addressId, global::System.String addressLine1, global::System.String city, global::System.Int32 stateProvinceId, global::System.String postalCode)
-        {
-            Address address = new Address();
-            address.AddressId = addressId;
-            address.AddressLine1 = addressLine1;
-            address.City = city;
-            address.StateProvinceId = stateProvinceId;
-            address.PostalCode = postalCode;
-            return address;
-        }
-
-        #endregion
-
-        #region Primitive Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 AddressId
-        {
-            get
-            {
-                return _AddressId;
-            }
-            set
-            {
-                if (_AddressId != value)
-                {
-                    OnAddressIdChanging(value);
-                    ReportPropertyChanging("AddressId");
-                    _AddressId = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("AddressId");
-                    OnAddressIdChanged();
-                }
-            }
-        }
-        private global::System.Int32 _AddressId;
-        partial void OnAddressIdChanging(global::System.Int32 value);
-        partial void OnAddressIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String AddressLine1
-        {
-            get
-            {
-                return _AddressLine1;
-            }
-            set
-            {
-                OnAddressLine1Changing(value);
-                ReportPropertyChanging("AddressLine1");
-                _AddressLine1 = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("AddressLine1");
-                OnAddressLine1Changed();
-            }
-        }
-        private global::System.String _AddressLine1;
-        partial void OnAddressLine1Changing(global::System.String value);
-        partial void OnAddressLine1Changed();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String AddressLine2
-        {
-            get
-            {
-                return _AddressLine2;
-            }
-            set
-            {
-                OnAddressLine2Changing(value);
-                ReportPropertyChanging("AddressLine2");
-                _AddressLine2 = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("AddressLine2");
-                OnAddressLine2Changed();
-            }
-        }
-        private global::System.String _AddressLine2;
-        partial void OnAddressLine2Changing(global::System.String value);
-        partial void OnAddressLine2Changed();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String City
-        {
-            get
-            {
-                return _City;
-            }
-            set
-            {
-                OnCityChanging(value);
-                ReportPropertyChanging("City");
-                _City = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("City");
-                OnCityChanged();
-            }
-        }
-        private global::System.String _City;
-        partial void OnCityChanging(global::System.String value);
-        partial void OnCityChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 StateProvinceId
-        {
-            get
-            {
-                return _StateProvinceId;
-            }
-            set
-            {
-                OnStateProvinceIdChanging(value);
-                ReportPropertyChanging("StateProvinceId");
-                _StateProvinceId = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("StateProvinceId");
-                OnStateProvinceIdChanged();
-            }
-        }
-        private global::System.Int32 _StateProvinceId;
-        partial void OnStateProvinceIdChanging(global::System.Int32 value);
-        partial void OnStateProvinceIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String PostalCode
-        {
-            get
-            {
-                return _PostalCode;
-            }
-            set
-            {
-                OnPostalCodeChanging(value);
-                ReportPropertyChanging("PostalCode");
-                _PostalCode = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("PostalCode");
-                OnPostalCodeChanged();
-            }
-        }
-        private global::System.String _PostalCode;
-        partial void OnPostalCodeChanging(global::System.String value);
-        partial void OnPostalCodeChanged();
-
-        #endregion
-
-    
-        #region Navigation Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("EIWSModel", "FK_Admin_Address", "Admin")]
-        public EntityCollection<Admin> Admins
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Admin>("EIWSModel.FK_Admin_Address", "Admin");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Admin>("EIWSModel.FK_Admin_Address", "Admin", value);
-                }
-            }
-        }
-
-        #endregion
-
-    }
     
     /// <summary>
     /// No Metadata Documentation available.
@@ -545,7 +283,6 @@ namespace Epi.Web.EF
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -670,105 +407,8 @@ namespace Epi.Web.EF
         private global::System.Boolean _Notify;
         partial void OnNotifyChanging(global::System.Boolean value);
         partial void OnNotifyChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String LastName
-        {
-            get
-            {
-                return _LastName;
-            }
-            set
-            {
-                OnLastNameChanging(value);
-                ReportPropertyChanging("LastName");
-                _LastName = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("LastName");
-                OnLastNameChanged();
-            }
-        }
-        private global::System.String _LastName;
-        partial void OnLastNameChanging(global::System.String value);
-        partial void OnLastNameChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String FirstName
-        {
-            get
-            {
-                return _FirstName;
-            }
-            set
-            {
-                OnFirstNameChanging(value);
-                ReportPropertyChanging("FirstName");
-                _FirstName = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("FirstName");
-                OnFirstNameChanged();
-            }
-        }
-        private global::System.String _FirstName;
-        partial void OnFirstNameChanging(global::System.String value);
-        partial void OnFirstNameChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String PhoneNumber
-        {
-            get
-            {
-                return _PhoneNumber;
-            }
-            set
-            {
-                OnPhoneNumberChanging(value);
-                ReportPropertyChanging("PhoneNumber");
-                _PhoneNumber = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("PhoneNumber");
-                OnPhoneNumberChanged();
-            }
-        }
-        private global::System.String _PhoneNumber;
-        partial void OnPhoneNumberChanging(global::System.String value);
-        partial void OnPhoneNumberChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.Int32> AddressId
-        {
-            get
-            {
-                return _AddressId;
-            }
-            set
-            {
-                OnAddressIdChanging(value);
-                ReportPropertyChanging("AddressId");
-                _AddressId = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("AddressId");
-                OnAddressIdChanged();
-            }
-        }
-        private Nullable<global::System.Int32> _AddressId;
-        partial void OnAddressIdChanging(Nullable<global::System.Int32> value);
-        partial void OnAddressIdChanged();
 
         #endregion
-
     
         #region Navigation Properties
     
@@ -809,47 +449,8 @@ namespace Epi.Web.EF
                 }
             }
         }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("EIWSModel", "FK_Admin_Address", "Address")]
-        public Address Address
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Address>("EIWSModel.FK_Admin_Address", "Address").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Address>("EIWSModel.FK_Admin_Address", "Address").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<Address> AddressReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Address>("EIWSModel.FK_Admin_Address", "Address");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Address>("EIWSModel.FK_Admin_Address", "Address", value);
-                }
-            }
-        }
 
         #endregion
-
     }
     
     /// <summary>
@@ -876,7 +477,6 @@ namespace Epi.Web.EF
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -931,7 +531,6 @@ namespace Epi.Web.EF
         partial void OnStatusChanged();
 
         #endregion
-
     
         #region Navigation Properties
     
@@ -958,7 +557,6 @@ namespace Epi.Web.EF
         }
 
         #endregion
-
     }
     
     /// <summary>
@@ -983,7 +581,6 @@ namespace Epi.Web.EF
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -1038,7 +635,6 @@ namespace Epi.Web.EF
         partial void OnSurveyTypeChanged();
 
         #endregion
-
     
         #region Navigation Properties
     
@@ -1065,7 +661,6 @@ namespace Epi.Web.EF
         }
 
         #endregion
-
     }
     
     /// <summary>
@@ -1098,7 +693,6 @@ namespace Epi.Web.EF
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -1225,7 +819,6 @@ namespace Epi.Web.EF
         partial void OnIsHostOrganizationChanged();
 
         #endregion
-
     
         #region Navigation Properties
     
@@ -1274,116 +867,6 @@ namespace Epi.Web.EF
         }
 
         #endregion
-
-    }
-    
-    /// <summary>
-    /// No Metadata Documentation available.
-    /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="EIWSModel", Name="State")]
-    [Serializable()]
-    [DataContractAttribute(IsReference=true)]
-    public partial class State : EntityObject
-    {
-        #region Factory Method
-    
-        /// <summary>
-        /// Create a new State object.
-        /// </summary>
-        /// <param name="stateProvinceId">Initial value of the StateProvinceId property.</param>
-        /// <param name="stateCode">Initial value of the StateCode property.</param>
-        /// <param name="stateName">Initial value of the StateName property.</param>
-        public static State CreateState(global::System.Int32 stateProvinceId, global::System.String stateCode, global::System.String stateName)
-        {
-            State state = new State();
-            state.StateProvinceId = stateProvinceId;
-            state.StateCode = stateCode;
-            state.StateName = stateName;
-            return state;
-        }
-
-        #endregion
-
-        #region Primitive Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 StateProvinceId
-        {
-            get
-            {
-                return _StateProvinceId;
-            }
-            set
-            {
-                if (_StateProvinceId != value)
-                {
-                    OnStateProvinceIdChanging(value);
-                    ReportPropertyChanging("StateProvinceId");
-                    _StateProvinceId = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("StateProvinceId");
-                    OnStateProvinceIdChanged();
-                }
-            }
-        }
-        private global::System.Int32 _StateProvinceId;
-        partial void OnStateProvinceIdChanging(global::System.Int32 value);
-        partial void OnStateProvinceIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String StateCode
-        {
-            get
-            {
-                return _StateCode;
-            }
-            set
-            {
-                OnStateCodeChanging(value);
-                ReportPropertyChanging("StateCode");
-                _StateCode = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("StateCode");
-                OnStateCodeChanged();
-            }
-        }
-        private global::System.String _StateCode;
-        partial void OnStateCodeChanging(global::System.String value);
-        partial void OnStateCodeChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String StateName
-        {
-            get
-            {
-                return _StateName;
-            }
-            set
-            {
-                OnStateNameChanging(value);
-                ReportPropertyChanging("StateName");
-                _StateName = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("StateName");
-                OnStateNameChanged();
-            }
-        }
-        private global::System.String _StateName;
-        partial void OnStateNameChanging(global::System.String value);
-        partial void OnStateNameChanged();
-
-        #endregion
-
-    
     }
     
     /// <summary>
@@ -1428,7 +911,6 @@ namespace Epi.Web.EF
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -1817,33 +1299,8 @@ namespace Epi.Web.EF
         private global::System.Boolean _IsDraftMode;
         partial void OnIsDraftModeChanging(global::System.Boolean value);
         partial void OnIsDraftModeChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.DateTime> LastUpdate
-        {
-            get
-            {
-                return _LastUpdate;
-            }
-            set
-            {
-                OnLastUpdateChanging(value);
-                ReportPropertyChanging("LastUpdate");
-                _LastUpdate = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("LastUpdate");
-                OnLastUpdateChanged();
-            }
-        }
-        private Nullable<global::System.DateTime> _LastUpdate;
-        partial void OnLastUpdateChanging(Nullable<global::System.DateTime> value);
-        partial void OnLastUpdateChanged();
 
         #endregion
-
     
         #region Navigation Properties
     
@@ -1946,7 +1403,6 @@ namespace Epi.Web.EF
         }
 
         #endregion
-
     }
     
     /// <summary>
@@ -1985,7 +1441,6 @@ namespace Epi.Web.EF
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -2232,7 +1687,6 @@ namespace Epi.Web.EF
         partial void OnIsDraftModeChanged();
 
         #endregion
-
     
         #region Navigation Properties
     
@@ -2313,7 +1767,6 @@ namespace Epi.Web.EF
         }
 
         #endregion
-
     }
     
     /// <summary>
@@ -2342,7 +1795,6 @@ namespace Epi.Web.EF
         }
 
         #endregion
-
         #region Primitive Properties
     
         /// <summary>
@@ -2469,11 +1921,9 @@ namespace Epi.Web.EF
         partial void OndefinitionChanged();
 
         #endregion
-
     
     }
 
     #endregion
-
     
 }

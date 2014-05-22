@@ -1,6 +1,6 @@
 ﻿@model Epi.Web.MVC.Models.SurveyInfoModel
 @{
-    ViewBag.Title = "Survey Home" + " - " +
+    ViewBag.Title = "Survey Home" + " - "+ 
         Model.SurveyName + " - " + Model.IsDraftModeStyleClass;
     Layout = "~/Views/Shared/_Layout.cshtml";
     
@@ -27,7 +27,6 @@
           });
 
 </script>
-
  
  
  @if (@Model.IsDraftModeStyleClass != "")
@@ -40,8 +39,7 @@
       
           </div>
  }
- else
- { 
+ else { 
              <div id="header"  >
                <h1>
                    @Model.SurveyName 
@@ -51,13 +49,13 @@
  
  }
         <div id="infobox">
-        @if (!string.IsNullOrWhiteSpace(@Model.SurveyNumber))
-        {
+        @if (!string.IsNullOrWhiteSpace(@Model.SurveyNumber)  )
+                {
                     <div id="surveyno">
                         <span class="boldlabel">Survey #:</span> <span>
                            @Model.SurveyNumber</span></div>
-        }
-         @if (!string.IsNullOrWhiteSpace(@Model.OrganizationName))
+                }
+         @if (!string.IsNullOrWhiteSpace(@Model.OrganizationName))  
          {
                   <div id="orgn">
                     <span class="boldlabel">Organization:</span> <span>
@@ -87,12 +85,6 @@
                             <br />
                         </div>
                         <p></p>
-                   <p></p>
-                        <p></p> <p>&nbsp;</p>
-                        
-                        <div id="passcodebox" style="">@Model.PassCode</div>
-                        <div id="codebk" style="">Please note down this pass code in<br />reference to your survey response.</div>
-                        <p></p> 
                         <p>
                             <button id="beginsurvey" class="begin green" type="submit">
                                 Begin Survey</button>
@@ -101,32 +93,19 @@
                        <p style="text-align:center; font-size:9pt;">Survey Starting Date: @string.Format("{0:f}", Model.StartDate)</p>
                           
                        <p style="text-align:center;font-size:9pt;">Survey Closing Date: @string.Format("{0:f}", Model.ClosingDate)</p>
-                       <br /> 
-               if (System.Configuration.ConfigurationManager.AppSettings["SHOW_HOME_LOGO"].ToUpper() == "TRUE")
-                   {
-                       <div style="margin:50px auto 0 auto; text-align:center;" >
-                         
-                         <img src="@Url.Content(@System.Configuration.ConfigurationManager.AppSettings["HOME_LOGO_PATH"].ToString())" alt="" style="width:300px;" />
-
-                       </div> 
-                   }
-                       @*<div style="text-align:center; margin:0px auto;font-size: 9pt; line-height: 120%; ">
-                       <strong>Technical Support</strong><br />
-          
-           <img src="@Url.Content("~/Content/images/email1.png")" width="16"  alt="" style="vertical-align:middle;" /> <a href="#">abcd@ghy.com</a> <br />
-           <img src="@Url.Content("~/Content/images/phone.png")"  height="14"  alt="" style="vertical-align:middle;" />&nbsp; 678-890-6789 ext. 1234     </div>
-           *@
-                  
+                        
+                        
+                   
                }
 
                else
-               { 
+                   { 
                 <div>
                 <br />
                 </div>
                    
                    if (Model.StartDate > DateTime.Now)
-                   { 
+                       { 
                      
                     <div id="attention">
                          <img src="@Url.Content("~/Content/images/sign_warning.png")" alt="" style="vertical-align: middle;
@@ -135,9 +114,9 @@
                         <p style="text-align:center">Survey Starting Date: @string.Format("{0:f}", Model.StartDate)</p>
                     </div>
 
-                   }
+                       }
                    if (Model.ClosingDate < DateTime.Now)
-                   {
+                       {
                    
                         <div id="attention">
                              <img src="@Url.Content("~/Content/images/sign_warning.png")" alt="" style="vertical-align: middle;
@@ -146,8 +125,8 @@
                             assistance.
                             <p style="text-align:center">Survey Closing Date: @string.Format("{0:f}", Model.ClosingDate)</p>
                         </div>
+                       }
                    }
-               }
              
            </div>
            
@@ -175,9 +154,9 @@
  
 
      @{if (ViewBag.Omniture.IsEnabled == true)
-       {
-           Html.RenderPartial("OmniturePartial");
-       } 
+        { 
+         Html.RenderPartial("OmniturePartial");  
+        } 
         }
      <br>
  

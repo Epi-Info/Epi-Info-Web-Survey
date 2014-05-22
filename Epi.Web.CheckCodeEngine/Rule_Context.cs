@@ -662,11 +662,6 @@ public System.Collections.Specialized.NameValueCollection GlobalVariables;*/
                         //JavaScriptVariableDefinitions.AppendLine(string.Format(defineFormat, _FieldTypeID.Attribute("Name").Value, "yesno", "datasource", var.Expression)); 
                         break;
 
-                    case "13": //CommandButton
-                        var.DataType = DataType.Text;
-                        var.ControlType = "commandbutton";
-                        break;
-
                     case "17"://DropDown LegalValues
                         var.DataType = DataType.Text;
                         var.ControlType = "legalvalues";
@@ -779,7 +774,6 @@ public System.Collections.Specialized.NameValueCollection GlobalVariables;*/
                     case "timepicker":
                     case "multiline":
                     case "textbox": 
-                    case "commandbutton":
                     
                     default:
                         pJavaScriptBuilder.AppendLine(string.Format(defineFormat, var.Name, var.ControlType, DataSource, var.PageNumber, var.Expression));

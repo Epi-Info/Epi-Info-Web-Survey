@@ -104,10 +104,6 @@
                             <br />
                         </div>
                         <p></p>
-                        <p></p> <p>&nbsp;</p>
-                        <p style="margin: 0 auto; font-size:9pt; text-align:center; color:#af463a;">Please note down this pass code in reference to your survey response.</p>
-                        <div style="background:#d6dfec; border:1px solid #8ca1c7; padding: 4px 8px; border-radius:10px; font-size: 16pt; font-weight:bold; text-align:center; width: 70px; margin:5px auto 20px;">@Model.PassCode</div>
-                        <p></p>    
                         <p style="width: 250px; min-width:120px; margin: 0 auto;">
                          
                                 <button id="beginsurvey" class="ui-btn-hidden" data-theme="e" type="submit" aria-disabled="false" > Begin Survey</button>
@@ -122,17 +118,17 @@
                         <p>&nbsp;</p>
                    <div style="margin: 0 auto; text-align:center;">
                          @if (!string.IsNullOrWhiteSpace(@Model.SurveyNumber))
-                         {
+                            {
                                     <div>
                                         <span class="boldlabel">Survey #:</span> <span>
                                            @Model.SurveyNumber</span></div>
-                         }
-                        @if (!string.IsNullOrWhiteSpace(@Model.OrganizationName))
-                        {
+                            }
+                        @if (!string.IsNullOrWhiteSpace(@Model.OrganizationName)) 
+                             {
                                   <div>
                                     <span class="boldlabel">Organization:</span> <span>
                                     @Model.OrganizationName</span></div>
-                        }
+                             }
          
                         @*<div>
                             <span class="boldlabel">Survey #:</span> <span>
@@ -146,23 +142,15 @@
                         <div style="clear: both;">
                         </div>
                     </div>
-                    <br /> 
-                     if (System.Configuration.ConfigurationManager.AppSettings["SHOW_HOME_LOGO"].ToUpper() == "TRUE")
-                         {
-                       <div style="margin:50px auto 0 auto; text-align:center;" >
-                          
-                         <img src="@Url.Content(@System.Configuration.ConfigurationManager.AppSettings["HOME_LOGO_PATH"].ToString())" alt="CSTE" style="width:300px;" />
-                        
-                       </div> 
-                         }
+                   
                }
 
                 else
-                { 
+                    { 
                 <div>
                 </div>
                     if (Model.StartDate > DateTime.Now)
-                    { 
+                        { 
                               <div id="attention">
                          <img src="@Url.Content("~/Content/images/sign_warning.png")" alt="" style="vertical-align: middle;
                             padding-right: 10px;" />
@@ -170,9 +158,9 @@
                         <p style="text-align:center">Survey Starting Date: @string.Format("{0:f}", Model.StartDate)</p>
                     </div>
 
-                    }
-                    if (Model.ClosingDate < DateTime.Now)
-                    {
+                        }
+                        if (Model.ClosingDate < DateTime.Now)
+                       {
                    
                         <div id="attention">
                              <img src="@Url.Content("~/Content/images/sign_warning.png")" alt="" style="vertical-align: middle;
@@ -181,8 +169,8 @@
                             assistance.
                             <p style="text-align:center">Survey Closing Date: @string.Format("{0:f}", Model.ClosingDate)</p>
                         </div>
+                       }
                     }
-                }
                 
            </div>
            
@@ -205,7 +193,7 @@
             </div>*@
 
                
-        }
+     }
 
      @* <div id="VideoDialog"  title = "How this survey was created!">
                

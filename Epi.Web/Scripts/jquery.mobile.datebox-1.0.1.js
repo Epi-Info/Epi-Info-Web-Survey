@@ -151,7 +151,7 @@
 				timeFieldOrder: ['h', 'i', 'a'],
 				slideFieldOrder: ['y', 'm', 'd'],
 				//dateFormat: '%Y-%m-%d',
-                dateFormat: '%m/%d/%Y',
+                dateFormat: '%m/%d/20%y',
 				useArabicIndic: false,
 				isRTL: false,
 				calStartDay: 0,

@@ -69,18 +69,6 @@ namespace Epi.Web.MVC.Controllers
                     surveyInfoModel.IsDraftModeStyleClass = "final";
                     SurveyMode = "final";
                 }
-
-                //create the responseid
-                Guid ResponseID = Guid.NewGuid();
-                TempData[Epi.Web.MVC.Constants.Constant.RESPONSE_ID] = ResponseID.ToString();
-
-               
-                string strPassCode = Epi.Web.MVC.Utility.SurveyHelper.GetPassCode();
-               
-                surveyInfoModel.PassCode = strPassCode;
-                TempData["PassCode"] = strPassCode;
-            
-                
                 bool IsMobileDevice = false;
                 IsMobileDevice = this.Request.Browser.IsMobileDevice;
                 Omniture OmnitureObj = Epi.Web.MVC.Utility.OmnitureHelper.GetSettings(SurveyMode, IsMobileDevice);
@@ -118,38 +106,19 @@ namespace Epi.Web.MVC.Controllers
                 
                 FormsAuthentication.SetAuthCookie("BeginSurvey", false);
 
-                string ResponseID = string.Empty;
-                object tempDataValue;
-
-                if (TempData.TryGetValue(Epi.Web.MVC.Constants.Constant.RESPONSE_ID, out tempDataValue))
-                {
-                    ResponseID = (string)tempDataValue;
-                }
-                else
-                {
-
-                }
-
+                //create the responseid
+                Guid ResponseID = Guid.NewGuid();
+                TempData[Epi.Web.MVC.Constants.Constant.RESPONSE_ID] = ResponseID.ToString();
+ 
+                // create the first survey response
                 Epi.Web.Common.DTO.SurveyAnswerDTO SurveyAnswer = _isurveyFacade.CreateSurveyAnswer(surveyModel.SurveyId, ResponseID.ToString());
-                
-                Epi.Web.Common.Message.UserAuthenticationResponse AuthenticationResponse = _isurveyFacade.GetAuthenticationResponse(ResponseID.ToString());
-
-                string strPassCode = Epi.Web.MVC.Utility.SurveyHelper.GetPassCode();
-                if (string.IsNullOrEmpty(AuthenticationResponse.PassCode))
-                    {
-                    _isurveyFacade.UpdatePassCode(ResponseID.ToString(),  TempData["PassCode"].ToString());
-                    }
-
-
-                Epi.Web.Common.Message.SurveyAnswerResponse SurveyAnswerResponse = _isurveyFacade.GetSurveyAnswerResponse(ResponseID);
-                SurveyAnswer = SurveyAnswerResponse.SurveyResponseList[0];
                 SurveyInfoModel surveyInfoModel = GetSurveyInfo(SurveyAnswer.SurveyId);
 
                 // set the survey answer to be production or test 
                 SurveyAnswer.IsDraftMode = surveyInfoModel.IsDraftMode;
                 XDocument xdoc = XDocument.Parse(surveyInfoModel.XML);
 
-                MvcDynamicForms.Form form = _isurveyFacade.GetSurveyFormData(SurveyAnswer.SurveyId, 1, SurveyAnswer, IsMobileDevice, "homeController");
+                MvcDynamicForms.Form form = _isurveyFacade.GetSurveyFormData(SurveyAnswer.SurveyId, 1, SurveyAnswer, IsMobileDevice);
 
                 var _FieldsTypeIDs = from _FieldTypeID in
                                      xdoc.Descendants("Field")

@@ -22,68 +22,31 @@ namespace Epi.Web.WCF.SurveyService
         //private ShoppingCart _shoppingCart;
         private string _userName;
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="pRequest"></param>
-        /// <returns></returns>
-        public CacheDependencyResponse GetCacheDependencyInfo(CacheDependencyRequest cacheDependencyRequest)
-        {
-            try
-            {
-                List<string> surveyKeys = cacheDependencyRequest.Criteria.SurveyIdList; 
-                
-                CacheDependencyResponse response = new CacheDependencyResponse(surveyKeys);
-                Epi.Web.Interfaces.DataInterfaces.IDaoFactory entityDaoFactory = new EF.EntityDaoFactory();
-                Epi.Web.Interfaces.DataInterfaces.ICacheDependencyInfoDao cacheDependencyInfoDao = entityDaoFactory.CacheDependencyInfoDao;
-                Epi.Web.BLL.CacheDependencyInfo cacheDependencyInfo = new Epi.Web.BLL.CacheDependencyInfo(cacheDependencyInfoDao);
-
-                List<CacheDependencyBO> bo = cacheDependencyInfo.GetCacheDependencyInfo(surveyKeys);
-                List<CacheDependencyDTO> dto = Mapper.ToDataTransferObject(bo);
-
-                Dictionary<string, DateTime> dictionary = new Dictionary<string, DateTime>();
-
-                foreach (CacheDependencyDTO item in dto)
-                {
-                    dictionary.Add(item.SurveyId, item.LastUpdate);
-                }
-
-                response.SurveyDependency = dictionary;
-
-                return response;
-            }
-            catch (Exception ex)
-            {
-                CustomFaultException customFaultException = new CustomFaultException();
-                customFaultException.CustomMessage = ex.Message;
-                customFaultException.Source = ex.Source;
-                customFaultException.StackTrace = ex.StackTrace;
-                customFaultException.HelpLink = ex.HelpLink;
-                throw new FaultException<CustomFaultException>(customFaultException);
-            }
-        }
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="pRequest"></param>
         /// <returns></returns>
-        public SurveyInfoResponse GetSurveyInfo(SurveyInfoRequest surveyInfoRequest)
+        public SurveyInfoResponse GetSurveyInfo(SurveyInfoRequest pRequest)
         {
             try
             {
-                SurveyInfoResponse response = new SurveyInfoResponse(surveyInfoRequest.RequestId);
+                SurveyInfoResponse result = new SurveyInfoResponse(pRequest.RequestId);
+                //Epi.Web.Interfaces.DataInterfaces.ISurveyInfoDao surveyInfoDao = new EF.EntitySurveyInfoDao();
+                //Epi.Web.BLL.SurveyInfo implementation = new Epi.Web.BLL.SurveyInfo(surveyInfoDao);
 
                 Epi.Web.Interfaces.DataInterfaces.IDaoFactory entityDaoFactory = new EF.EntityDaoFactory();
                 Epi.Web.Interfaces.DataInterfaces.ISurveyInfoDao surveyInfoDao = entityDaoFactory.SurveyInfoDao;
-                Epi.Web.BLL.SurveyInfo surveyInfo = new Epi.Web.BLL.SurveyInfo(surveyInfoDao);
+                Epi.Web.BLL.SurveyInfo implementation = new Epi.Web.BLL.SurveyInfo(surveyInfoDao);
 
-                if (!ValidRequest(surveyInfoRequest, response, Validate.All))
+                // Validate client tag, access token, and user credentials
+                if (!ValidRequest(pRequest, result, Validate.All))
                 {
-                    return response;
+                    return result;
                 }
 
-                var criteria = surveyInfoRequest.Criteria as SurveyInfoCriteria;
+                var criteria = pRequest.Criteria as SurveyInfoCriteria;
                 string sort = criteria.SortExpression;
                 List<string> SurveyIdList = new List<string>();
                 foreach (string id in criteria.SurveyIdList)
@@ -91,11 +54,28 @@ namespace Epi.Web.WCF.SurveyService
                     SurveyIdList.Add(id.ToUpper());
                 }
 
-                List<SurveyInfoBO> bo = surveyInfo.GetSurveyInfoById(SurveyIdList);
 
-                response.SurveyInfoList = Mapper.ToDataTransferObject(bo);
+                //if (request.LoadOptions.Contains("SurveyInfos"))
+                //{
+                //    IEnumerable<SurveyInfoDTO> SurveyInfos;
+                //    if (!criteria.IncludeOrderStatistics)
+                //    {
+                //        SurveyInfos = Implementation.GetSurveyInfos(sort);
+                //    }
+                //    else
+                //    {
+                //        SurveyInfos = Implementation.GetSurveyInfosWithOrderStatistics(sort);
+                //    }
 
-                return response;
+                //    response.SurveyInfos = SurveyInfos.Select(c => Mapper.ToDataTransferObject(c)).ToList();
+                //}
+
+                //if (pRequest.LoadOptions.Contains("SurveyInfo"))
+                //{
+                result.SurveyInfoList = Mapper.ToDataTransferObject(implementation.GetSurveyInfoById(SurveyIdList));
+                //}
+
+                return result;
             }
             catch (Exception ex)
             {
@@ -548,80 +528,6 @@ namespace Epi.Web.WCF.SurveyService
             return result;
         }
 
-        public OrganizationAccountResponse CreateAccount(OrganizationAccountRequest pRequest) 
-            {
-            OrganizationAccountResponse OrgAccountResponse = new OrganizationAccountResponse();
-           
-            try {
-                Epi.Web.Interfaces.DataInterfaces.IAdminDao AdminDao = new EF.EntityAdminDao();
-                Epi.Web.Interfaces.DataInterfaces.IOrganizationDao OrganizationDao = new EF.EntityOrganizationDao();
-                Epi.Web.BLL.Account Implementation = new Epi.Web.BLL.Account(AdminDao, OrganizationDao);
-                var Organization = Mapper.ToBusinessObject(pRequest.Organization);
-                var Admin = Mapper.ToBusinessObject(pRequest.Admin);
-                OrgAccountResponse.Message = Implementation.CreateAccount(pRequest.AccountType, Admin, Organization);
-
-            }
-            catch (Exception ex) 
-                { 
-                throw ex; 
-                }
-            return OrgAccountResponse;
-            
-            
-            }
-
-
-
-        public OrganizationAccountResponse GetStateList(OrganizationAccountRequest Request) 
-            {
-
-            OrganizationAccountResponse OrgAccountResponse = new OrganizationAccountResponse();
-
-            try
-                {
-                
-                Epi.Web.Interfaces.DataInterfaces.IStateDao StateDao = new EF.EntityStateDao();
-                Epi.Web.BLL.Account Implementation = new Epi.Web.BLL.Account(StateDao);
-                 
-               OrgAccountResponse.StateList= Mapper.ToStateDTO(Implementation.GetStateList());
-
-
-                }
-            catch (Exception ex)
-                {
-                throw ex;
-                }
-            return OrgAccountResponse;
-            
-            }
-
-        public SurveyControlsResponse GetSurveyControlList(SurveyControlsRequest pRequestMessage)
-            {
-
-            SurveyControlsResponse SurveyControlsResponse = new SurveyControlsResponse();
-
-            try
-                {
-
-
-                Epi.Web.Interfaces.DataInterfaces.ISurveyInfoDao ISurveyInfoDao = new EF.EntitySurveyInfoDao();
-                Epi.Web.BLL.SurveyInfo Implementation = new Epi.Web.BLL.SurveyInfo(ISurveyInfoDao);
-                SurveyControlsResponse = Implementation.GetSurveyControlList(pRequestMessage.SurveyId);
-
-                }
-            catch (Exception ex)
-                {
-                SurveyControlsResponse.Message = "Error";
-                throw ex;
-                }
-
-
-
-
-
-
-            return SurveyControlsResponse;
-            }
 
     }
 }

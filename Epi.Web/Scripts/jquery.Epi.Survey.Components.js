@@ -1,34 +1,33 @@
 ﻿
 
 
-function NotifyByEmail(emailAddress, redirectUrl, surveyName, postUrl, passCode, emailSubject) 
-{
-    var user =
-    {   
-        'emailAddress': emailAddress,
+function NotifyByEmail(emailAddress, redirectUrl, surveyName, postUrl,passCode,EmailSubject) {
+    /*post email address and redirect url asynchronously to Post controller */
+
+    var user = { 'emailAddress': emailAddress,
         'redirectUrl': redirectUrl,
         'surveyName': escape(surveyName),
         'passCode':passCode,
-        'EmailSubject': emailSubject,
+        'EmailSubject':escape(EmailSubject),
         __RequestVerificationToken: $("input[name=__RequestVerificationToken]").val()
     };
 
     $.post(
             postUrl,
             user,
-            function (data) 
-            {
-                if (data === true) 
-                {
+            function (data) {
+                if (data === true) {
                     alert('An email has been sent with survey link.');
                 }
-                else 
-                {
+                else {
+                
                     alert('Failed to send email to the participant');
+
                 }
             },
             'json'
         );
+
 }
 
 function SignOutAndRedirect(signoutUrl,homePageUrl) {

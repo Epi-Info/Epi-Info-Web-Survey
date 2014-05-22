@@ -16,7 +16,7 @@ namespace MvcDynamicForms.Fields
         public override string RenderHtml()
         {
             var html = new StringBuilder();
-            var inputName = _fieldPrefix + _key;
+            var inputName = _form.FieldPrefix + _key;
             string ErrorStyle = string.Empty;
              //prompt label
             var prompt = new TagBuilder("label");
@@ -26,7 +26,7 @@ namespace MvcDynamicForms.Fields
             prompt.Attributes.Add("class", "EpiLabel");
             prompt.Attributes.Add("Id", "label" + inputName);
             StringBuilder StyleValues = new StringBuilder();
-            StyleValues.Append(GetControlStyle(_fontstyle.ToString(), _Prompttop.ToString(), _Promptleft.ToString(), null, Height.ToString(), IsHidden));
+            StyleValues.Append(GetContolStyle(_fontstyle.ToString(), _Prompttop.ToString(), _Promptleft.ToString(), null, Height.ToString(),IsHidden));
             prompt.Attributes.Add("style", StyleValues.ToString());
             html.Append(prompt.ToString());
             // error label
@@ -42,21 +42,24 @@ namespace MvcDynamicForms.Fields
             var txt = new TagBuilder("textarea");
             txt.Attributes.Add("name", inputName);
             txt.Attributes.Add("id", inputName);
-
+           // txt.SetInnerText(Value);
+            ////////////Check code start//////////////////
+            EnterRule FunctionObjectAfter = (EnterRule)_form.FormCheckCodeObj.GetCommand("level=field&event=after&identifier=" + _key);
             if (FunctionObjectAfter != null && !FunctionObjectAfter.IsNull())
             {
                 txt.Attributes.Add("onblur", "return " + _key + "_after();"); //After
             }
-
+            EnterRule FunctionObjectBefore = (EnterRule)_form.FormCheckCodeObj.GetCommand("level=field&event=before&identifier=" + _key);
             if (FunctionObjectBefore != null && !FunctionObjectBefore.IsNull())
             { 
                 txt.Attributes.Add("onfocus", "return " + _key + "_before();"); //Before
             }
 
-            txt.SetInnerText(Response);
+            ////////////Check code end//////////////////
+            txt.SetInnerText(Value);
             //txt.Attributes.Add("class", GetControlClass() + "text-input");
             txt.Attributes.Add("class", GetControlClass()  );
-            if (Required == true)
+            if (_IsRequired == true)
             {
                // txt.Attributes.Add("class", "validate[required] text-input");
                 txt.Attributes.Add("data-prompt-position", "topRight:15");
@@ -110,7 +113,7 @@ namespace MvcDynamicForms.Fields
             ControlClass.Append("validate[");
 
 
-            if (Required == true)
+            if (_IsRequired == true)
             {
 
                 ControlClass.Append("required");

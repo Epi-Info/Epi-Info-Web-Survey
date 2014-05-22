@@ -17,19 +17,32 @@ namespace MvcDynamicForms.Fields
         protected double _PromptWidth;
         protected double _ControlWidth;
         protected double _ControlHeight;
-
+        protected string _key = Guid.NewGuid().ToString();
         protected string _requiredMessage = "Required";
         protected string _promptClass = "MvcDynamicFieldPrompt";
         protected string _errorClass = "MvcDynamicFieldError";
-
+        protected Boolean _IsRequired;
+        protected Boolean _IsReadOnly;
         protected int _MaxLength;
         protected string _InputFieldfontstyle;
         protected double _InputFieldfontSize;
         protected string _InputFieldfontfamily;
 
         protected Dictionary<string, string> _inputHtmlAttributes = new Dictionary<string, string>();
-
-        
+        /// <summary>
+        /// Used to identify each InputField when performing model binding.
+        /// </summary>
+        public string Key
+        {
+            get
+            {
+                return _key;
+            }
+            set
+            {
+                _key = value.ToLower();
+            }
+        }
         /// <summary>
         /// Used to identify InputFields when working with end users' responses.
         /// </summary>
@@ -55,7 +68,7 @@ namespace MvcDynamicForms.Fields
         /// <summary>
         /// String representing the user's response to the field.
         /// </summary>
-        public virtual string Response { get; set; }
+        public abstract string Response { get; set; }
         /// <summary>
         /// Whether the field must be completed to be valid.
         /// </summary>
@@ -141,14 +154,20 @@ namespace MvcDynamicForms.Fields
         public double ControlWidth { get { return this._ControlWidth; } set { this._ControlWidth = value; } }
        
         public double ControlHeight { get { return this._ControlHeight; } set { this._ControlHeight = value; } }
+        public Boolean IsRequired { get { return this._IsRequired; } set {   this._IsRequired =value; } }
+        public Boolean IsReadOnly { get { return this._IsReadOnly; } set {   this._IsReadOnly = value; }}
         public int MaxLength { get { return this._MaxLength; } set { this._MaxLength = value; } }
 
+      //  protected string InputFieldfontstyle;
+      //  protected string InputFieldfontSize;
+       // protected string InputFieldfontfamily;
         public string InputFieldfontstyle { get { return this._InputFieldfontstyle; } set { this._InputFieldfontstyle = value; } }
         public double InputFieldfontSize { get { return this._InputFieldfontSize; } set { this._InputFieldfontSize = value; } }
         public string InputFieldfontfamily { get { return this._InputFieldfontfamily; } set { this._InputFieldfontfamily = value; } }
 
         public string GetInputFieldStyle(string ControlFontStyle, double ControlFontSize, string ControlFontFamily)
         {
+
             StringBuilder FontStyle = new StringBuilder();
             StringBuilder FontWeight = new StringBuilder();
             StringBuilder TextDecoration = new StringBuilder();
@@ -156,6 +175,7 @@ namespace MvcDynamicForms.Fields
 
             char[] delimiterChars = { ' ', ',' };
             string[] Styles = ControlFontStyle.Split(delimiterChars);
+
 
             foreach (string Style in Styles)
             {
@@ -166,10 +186,12 @@ namespace MvcDynamicForms.Fields
                         break;
                     case "Oblique":
                         FontStyle.Append(Style.ToString());
-                        break;
-                }
-            }
 
+                        break;
+
+                }
+
+            }
             foreach (string Style in Styles)
             {
                 switch (Style.ToString())
@@ -180,18 +202,18 @@ namespace MvcDynamicForms.Fields
                     case "Normal":
                         FontWeight.Append(Style.ToString());
                         break;
-                }
-            }
+                    
 
+                }
+
+            }
             CssStyles.Append(";font:");//1
-            
             if (!string.IsNullOrEmpty(FontStyle.ToString()))
             {
 
                 CssStyles.Append(FontStyle);//2
                 CssStyles.Append(" ");//3
             }
-            
             CssStyles.Append(FontWeight);
             CssStyles.Append(" ");
             CssStyles.Append(this._InputFieldfontSize.ToString() + "pt ");
@@ -207,8 +229,11 @@ namespace MvcDynamicForms.Fields
                         break;
                     case "Underline":
                         TextDecoration.Append(Style.ToString());
+
                         break;
+
                 }
+
             }
 
             if (!string.IsNullOrEmpty(TextDecoration.ToString()))
@@ -218,7 +243,9 @@ namespace MvcDynamicForms.Fields
 
             CssStyles.Append(TextDecoration);
 
+
             return CssStyles.ToString();
+
         }
     }
 }

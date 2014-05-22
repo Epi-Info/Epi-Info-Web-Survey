@@ -22,31 +22,8 @@
             modal: true
         });
 
-        $('#Print').click(function () {
-            GetPrintView();
-
-        });
-
           });
 
-
-
-    function GetPrintView() {
-
-        
-
-        $("#myform")[0].is_print_action.value = 'true';
-
-        $("#myform")[0].ResponseId.value = '@ViewBag.ResponseId';
-
-        $("#myform")[0].action = window.location.href;
-
-
-        
-
-        $("form").submit();
-
-    }
 </script>
   @if (@Model.IsDraftModeStyleClass != "")
  {
@@ -90,7 +67,7 @@
     </div>
 <div class="success" style="margin:1em;">
     <div class="image"><img src="@Url.Content("~/Content/images/button_check.png")" style="vertical-align: middle; padding-right: 10px;" alt=""/></div>
-    <div class="message" style="float:left !important; width: 80% !important;">
+    <div class="message">
         @if(string.IsNullOrWhiteSpace(Model.ExitText)) 
         {
             @System.Configuration.ConfigurationManager.AppSettings["SURVEY_SUBMISSION_MESSAGE"];
@@ -100,9 +77,6 @@
             @Html.Raw(@Model.ExitText);
         }
     </div>
-    <div style="float:right; text-align:right;">
-        <button   id="Print"class="exitsurvey" type="button"  name="Printbutton" value="Print" style="height:30px; padding: 3px 5px 3px 5px; vertical-align:bottom;" >Print</button>
-    </div>
     <div style="clear:both;"></div>
 </div>
 
@@ -110,12 +84,10 @@
  @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "myform", @class = @Model.IsDraftModeStyleClass.ToString() }))
  { 
         
-            <div id="content" style="min-height:200px; padding-bottom: 250px;">
+            <div id="content" style="min-height:200px;">
                @if (Model.ClosingDate.Date >= DateTime.Now.Date && Model.SurveyType == 2)
                {
-                        <div id="passcodebox" style="">@Model.PassCode</div>
-                        <div id="codebk" style="">Please note down this pass code in<br />reference to your survey response.</div>
-                        <p></p> 
+                     
                         <p>
                             <button id="beginsurvey" class="begin green" type="submit">
                                Start Survey Again</button>
@@ -129,8 +101,6 @@
               
                 
            </div>
-     	<input type="hidden"  name="is_print_action" value="false" />
-        <input type="hidden"  name="ResponseId" value="false" />
              @*<div style="width:220px; padding:5px; border: 2px solid #04aeda; margin-right:10px; margin-left:590px; margin-bottom:130px; margin-top:130px; bottom:0px; position:relative;">
 	            <div style="float:left; width:54px;">
 	                <img alt="" style="z-index:12;" src="@Url.Content("~/Content/images/video.png")"/>
@@ -141,7 +111,7 @@
 	            </div>
 	            <div style="clear:both;"></div>
             </div>  *@
-    }
+ }
 
       @* <div id="VideoDialog" title = "How this survey was created!">
                

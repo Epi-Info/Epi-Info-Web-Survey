@@ -3,8 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Epi.Web.Common;
-using Epi.Core.EnterInterpreter;
 
 namespace MvcDynamicForms.Fields
 {
@@ -14,9 +12,9 @@ namespace MvcDynamicForms.Fields
     [Serializable]
     public abstract class Field
     {
-        protected string _fieldWrapper = Constant.WRAPPER;
-        protected string _fieldWrapperClass = Constant.FIELDWRAPPERCLASS;
-        protected string _fieldPrefix = Constant.FIELDPREFIX;
+        protected string _fieldWrapper = "div";
+        protected Form _form;
+        protected string _fieldWrapperClass = "MvcFieldWrapper";
 
         protected double _top;
         protected double _left;
@@ -30,51 +28,21 @@ namespace MvcDynamicForms.Fields
         protected bool _IsHighlighted;
         protected bool _IsDisabled;
         protected bool _IsPlaceHolder;
-        protected string _name;
-        protected string _key = Guid.NewGuid().ToString();
-
-        protected EnterRule _functionObjectAfter;
-        protected EnterRule _functionObjectBefore;
-        protected EnterRule _functionObjectClick;
-
-        public string Name
-        {
-            get { return _name; }
-            set { _name = value; }
-        }
-
-        public int FieldTypeId { get; set; }
-
-        public EnterRule FunctionObjectAfter
-        {
-            get { return _functionObjectAfter; }
-            set { _functionObjectAfter = value; }
-        }
-
-        public EnterRule FunctionObjectBefore
-        {
-            get { return _functionObjectBefore; }
-            set { _functionObjectBefore = value; }
-        }
-
-        public EnterRule FunctionObjectClick
-        {
-            get { return _functionObjectClick; }
-            set { _functionObjectClick = value; }
-        }
-
-        public string Key
+        internal Form Form
         {
             get
             {
-                return _key;
+                return _form;
             }
             set
             {
-                _key = value.ToLower();
+                _form = value;
             }
         }
-
+        /// <summary>
+        /// The html element that will be used to wrap fields when they are rendered as html.
+        /// </summary>
+    
         public string FieldWrapper
         {
             get
@@ -86,7 +54,6 @@ namespace MvcDynamicForms.Fields
                 _fieldWrapper = value;
             }
         }
-
         /// <summary>
         /// The class attribute of the wrapping html element.
         /// </summary>
@@ -101,17 +68,16 @@ namespace MvcDynamicForms.Fields
                 _fieldWrapperClass = value;
             }
         }     
-        
         /// <summary>
         /// The relative position that the field is rendered to html.
         /// </summary>
-        public double DisplayOrder { get; set; }
-        
+        public int DisplayOrder { get; set; }
         /// <summary>
         /// Renders the field as html.
         /// </summary>
         /// <returns>Returns a string containing the rendered html of the Field object.</returns>
         public abstract string RenderHtml();
+       
 
         public double Top { get { return this._top; } set { this._top = value; } }
         public double Left { get { return this._left; } set { this._left = value; } }
@@ -134,8 +100,9 @@ namespace MvcDynamicForms.Fields
         /// </summary>
         /// <param name="ControlFontStyle"></param>
         /// <returns></returns>
-        public virtual string GetControlStyle(string ControlFontStyle, string Top, string Left, string Width, string Height, bool IsHidden)
+        public string GetContolStyle(string ControlFontStyle, string Top, string Left, string Width, string Height, bool IsHidden)
         {
+
             StringBuilder FontStyle = new StringBuilder();
             StringBuilder FontWeight = new StringBuilder();
             StringBuilder TextDecoration = new StringBuilder();
@@ -147,6 +114,7 @@ namespace MvcDynamicForms.Fields
             {
                 CssStyles.Append("position:absolute;left:" + Left +
                     "px;top:" + Top + "px" + ";Height:" + Height + "px");
+
             }
             else
             {
@@ -163,11 +131,12 @@ namespace MvcDynamicForms.Fields
                         break;
                     case "Oblique":
                         FontStyle.Append(Style.ToString());
+
                         break;
+
                 }
 
             }
-            
             foreach (string Style in Styles)
             {
                 switch (Style.ToString())
@@ -177,18 +146,19 @@ namespace MvcDynamicForms.Fields
                         break;
                     case "Normal":
                         FontWeight.Append(Style.ToString());
+
                         break;
+
                 }
+
             }
-
             CssStyles.Append(";font:");//1
-
             if (!string.IsNullOrEmpty(FontStyle.ToString()))
             {
+
                 CssStyles.Append(FontStyle);//2
                 CssStyles.Append(" ");//3
             }
-            
             CssStyles.Append(FontWeight);
             CssStyles.Append(" ");
             CssStyles.Append(_fontSize.ToString() + "pt ");
@@ -204,27 +174,30 @@ namespace MvcDynamicForms.Fields
                         break;
                     case "Underline":
                         TextDecoration.Append(Style.ToString());
+
                         break;
+
                 }
+
             }
 
             if (!string.IsNullOrEmpty(TextDecoration.ToString()))
             {
                 CssStyles.Append(";text-decoration:");
             }
-
             if (IsHidden)
             {
                 CssStyles.Append(";display:none");
             }
-            
             CssStyles.Append(TextDecoration);
 
-            return CssStyles.ToString();
-        }
 
+            return CssStyles.ToString();
+
+        }
         public string GetRadioListStyle(string ControlFontStyle, string Top, string Left, string Width, string Height, bool IsHidden)
         {
+
             StringBuilder FontStyle = new StringBuilder();
             StringBuilder FontWeight = new StringBuilder();
             StringBuilder TextDecoration = new StringBuilder();
@@ -242,8 +215,11 @@ namespace MvcDynamicForms.Fields
                         break;
                     case "Oblique":
                         FontStyle.Append(Style.ToString());
+
                         break;
+
                 }
+
             }
             foreach (string Style in Styles)
             {
@@ -254,18 +230,19 @@ namespace MvcDynamicForms.Fields
                         break;
                     case "Normal":
                         FontWeight.Append(Style.ToString());
-                        break;
-                }
-            }
 
+                        break;
+
+                }
+
+            }
             CssStyles.Append(";font:");//1
-            
             if (!string.IsNullOrEmpty(FontStyle.ToString()))
             {
+
                 CssStyles.Append(FontStyle);//2
                 CssStyles.Append(" ");//3
             }
-
             CssStyles.Append(FontWeight);
             CssStyles.Append(" ");
             CssStyles.Append(_fontSize.ToString() + "pt ");
@@ -281,27 +258,29 @@ namespace MvcDynamicForms.Fields
                         break;
                     case "Underline":
                         TextDecoration.Append(Style.ToString());
+
                         break;
+
                 }
+
             }
 
             if (!string.IsNullOrEmpty(TextDecoration.ToString()))
             {
                 CssStyles.Append(";text-decoration:");
             }
-
             if (IsHidden)
             {
                 CssStyles.Append(";display:none");
             }
-            
             CssStyles.Append(";display:inline");
             CssStyles.Append(TextDecoration);
+            
 
             return CssStyles.ToString();
 
         }
-
         public virtual string GetXML() { return ""; }
+
     }
 }

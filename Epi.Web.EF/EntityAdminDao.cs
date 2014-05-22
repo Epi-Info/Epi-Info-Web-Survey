@@ -19,31 +19,28 @@ namespace Epi.Web.EF
             List<AdminBO> AdminList = new List<AdminBO>();
       
             int OrgId = 0;
-            int AdminOrgId = 0;
+         
             try
                 {
                 using (var Context = DataObjectFactory.CreateContext())
                     {
                     var OrgQuery = (from response in Context.Organizations
                                  where response.OrganizationKey == gOrgKeyEncrypted
-                                    select new { response.OrganizationId }).First();
+                                 select new { response.OrganizationId }).Distinct();
 
-                    OrgId = OrgQuery.OrganizationId;
 
-                  
+                    var DataRow = OrgQuery.Distinct();
+                    foreach (var Row in DataRow)
+                        {
 
-                    var AdminOrgQuery = (from response in Context.Organizations
-                                         where response.IsHostOrganization == true
-                                         select new { response.OrganizationId }).First();
-                    AdminOrgId = AdminOrgQuery.OrganizationId;
-                    
+                       
+                        OrgId = Row.OrganizationId;
+                        
+                        }
 
                     var AdminQuery = (from response in Context.Admins
-                                      where response.OrganizationId == OrgId  && response.IsActive == true && response.Notify == true 
+                                      where response.OrganizationId == OrgId && response.IsActive == true && response.Notify == true 
                                  select new { response });
-                    var AdminQuery1 = (from response in Context.Admins
-                                      where  response.OrganizationId == AdminOrgId && response.IsActive == true && response.Notify == true
-                                      select new { response });
 
                     foreach (var row in AdminQuery)
                         {
@@ -53,15 +50,6 @@ namespace Epi.Web.EF
                         
                         AdminList.Add(AdminBO);
                         
-                        }
-                    foreach (var row in AdminQuery1)
-                        {
-                        AdminBO AdminBO = new Common.BusinessObject.AdminBO();
-                        AdminBO.AdminEmail = row.response.AdminEmail;
-                        AdminBO.IsActive = row.response.IsActive;
-
-                        AdminList.Add(AdminBO);
-
                         }
                     }
                 }
@@ -83,131 +71,13 @@ namespace Epi.Web.EF
             List<AdminBO> AdminList = new List<AdminBO>();
              return AdminList;
             }
-        public void InsertAdmin(AdminBO Admin) {
-        // Insert Address 
-        using (var Context = DataObjectFactory.CreateContext())
-            {
-            Address AddressEntity = Mapper.ToAddressEF(Admin);
-
-
-
-            Context.AddToAddresses(AddressEntity);
-
-            Context.SaveChanges();
-
-
-
-            }
-            // Get AddressId
-        try
-            {
-            using (var Context = DataObjectFactory.CreateContext())
-                {
-                var Query = (from Address in Context.Addresses
-                             where Address.AddressLine1 == Admin.AdressLine1 && Address.City == Admin.City && Address.StateProvinceId == Admin.StateId && Address.PostalCode == Admin.Zip   
-                             select new { Address.AddressId }).Distinct();
-
-
-                var DataRow = Query.Distinct();
-                foreach (var Row in DataRow)
-                    {
-
-                    Admin.AddressId = Row.AddressId;
-                    break;
-                    }
-                }
-            }
-        catch (Exception ex)
-            {
-            throw (ex);
-            }
-        try
-            {
-            using (var Context = DataObjectFactory.CreateContext())
-                {
-                Admin AdminEntity = Mapper.ToEF(Admin);
-                
-              
-
-                Context.AddToAdmins(AdminEntity);
-
-                Context.SaveChanges();
-
-
-
-                }
-          
-            }
-        catch (Exception ex)
-            {
-            throw (ex);
-            }
-            
-            
-            }
+        public void InsertAdmin(AdminBO Admin) { }
 
 
        public  void UpdateAdmin(AdminBO Admin) { }
 
 
         public void DeleteAdmin(AdminBO Admin) { }
-        public List<AdminBO> GetAdminEmails()
-            {
-
-            List<AdminBO> AdminBO = new List<AdminBO>();
-            try
-                {
-                using (var Context = DataObjectFactory.CreateContext())
-                    {
-                    var Query = (from response in Context.Admins
-
-                                 select new { response.AdminEmail }).Distinct();
-
-
-                    var DataRow = Query.Distinct();
-                    foreach (var Row in DataRow)
-                        {
-
-                        AdminBO.Add(Mapper.MapAdminEmail(Row.AdminEmail));
-
-                        }
-                    }
-                }
-            catch (Exception ex)
-                {
-                throw (ex);
-                }
-            return AdminBO;
-            }
-
-        public AdminBO GetAdminEmailByAdminId(string AdminEmail)
-            {
-
-             AdminBO AdminBO = new AdminBO();
-            try
-                {
-                using (var Context = DataObjectFactory.CreateContext())
-                    {
-                    var Query = (from response in Context.Admins
-                                 where response.AdminEmail == AdminEmail
-                                 select new { response.AdminEmail }).Distinct();
-
-
-                    var DataRow = Query.Distinct();
-                    foreach (var Row in DataRow)
-                        {
-
-                        AdminBO  = Mapper.MapAdminEmail(Row.AdminEmail) ;
-
-                        }
-                    }
-                }
-            catch (Exception ex)
-                {
-                throw (ex);
-                }
-            return AdminBO;
-            }
 
         }
     }

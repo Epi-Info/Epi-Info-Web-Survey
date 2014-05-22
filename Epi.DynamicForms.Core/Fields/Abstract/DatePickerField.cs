@@ -13,12 +13,13 @@ namespace MvcDynamicForms.Fields
     public abstract class DatePickerField : InputField
     {
         private string _regexMessage = "Invalid";
+        private string _ControlValue;
+    
 
         /// <summary>
         /// A regular expression that will be applied to the user's text respone for validation.
         /// </summary>
         public string RegularExpression { get; set; }
-
         /// <summary>
         /// The error message that is displayed to the user when their response does no match the regular expression.
         /// </summary>
@@ -33,13 +34,19 @@ namespace MvcDynamicForms.Fields
                 _regexMessage = value;
             }
         }
+        public string Value { get; set; }
+        //public string Value { get { return _Value; } set { _Value = value; } }
+        public override string Response
+        {
+            get { return Value; }
+            set { Value = value; }
+
+        }
 
         //Declaring the min value for decimal
         private string _lower;
-        
         //Declaring the max value for decimal
         private string _upper;
-        
         //Declaring the pattern field
         private string _pattern;
 
@@ -96,7 +103,7 @@ namespace MvcDynamicForms.Fields
                 string regularExp = "^(((((((0?[13578])|(1[02]))[\\.\\-/]?((0?[1-9])|([12]\\d)|(3[01])))|(((0?[469])|(11))[\\.\\-/]?((0?[1-9])|([12]\\d)|(30)))|((0?2)[\\.\\-/]?((0?[1-9])|(1\\d)|(2[0-8]))))[\\.\\-/]?(((19)|(20))?([\\d][\\d]))))|((0?2)[\\.\\-/]?(29)[\\.\\-/]?(((19)|(20))?(([02468][048])|([13579][26])))))$";
                 var regex = new Regex(regularExp);
 
-                if (!regex.IsMatch(Response))
+                if (!regex.IsMatch(Value))
                 {
                     //invalid: it is not a valid date matching the above regular expression
                     Error = "Value must be a valid date";
@@ -110,7 +117,7 @@ namespace MvcDynamicForms.Fields
                     if ((!string.IsNullOrEmpty(Lower)) && (!string.IsNullOrEmpty(Upper)))
                     {
                         //if the date is either less than the lower limit or greater than the upper limit raise error
-                        if ((DateTime.Parse(Response) < DateTime.Parse(Lower)) || (DateTime.Parse(Response) > DateTime.Parse(Upper)))
+                        if ((DateTime.Parse(Value) < DateTime.Parse(Lower)) || (DateTime.Parse(Value) > DateTime.Parse(Upper)))
                         {
                             Error = string.Format("Date must be in between {0} and {1}", GetDateFormat(Lower, Pattern), GetDateFormat(Upper, Pattern));
                             return false;
@@ -118,13 +125,13 @@ namespace MvcDynamicForms.Fields
                     }
 
                     //invalid: checking for lower limit
-                    if ((!string.IsNullOrEmpty(Lower)) && (DateTime.Parse(Response) < DateTime.Parse(Lower)))
+                    if ((!string.IsNullOrEmpty(Lower)) && (DateTime.Parse(Value) < DateTime.Parse(Lower)))
                     {
                         Error = string.Format("Date can not be less than {0}", GetDateFormat(Lower, Pattern));
                         return false;
                     }
                     //invalid: checking the upper limit 
-                    if ((!string.IsNullOrEmpty(Upper)) && (DateTime.Parse(Response) > DateTime.Parse(Upper)))
+                    if ((!string.IsNullOrEmpty(Upper)) && (DateTime.Parse(Value) > DateTime.Parse(Upper)))
                     {
                         Error = string.Format("Date can not be greater than {0}", GetDateFormat(Upper, Pattern));
                         return false;

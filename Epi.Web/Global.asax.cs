@@ -9,7 +9,7 @@ using System.Web.Routing;
 using System.Diagnostics;
 using System.Configuration;
 using System.Web;
-using ImranB.ModelBindingFix;
+ 
 using System.Web.Routing;
 using System.Web.WebPages;
  
@@ -40,6 +40,7 @@ namespace Epi.Web.MVC
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             //DisplayModeProvider.Instance.Modes.Insert(0, new DefaultDisplayMode("Android") { ContextCondition = (context => context.Request.UserAgent.IndexOf("Android", StringComparison.OrdinalIgnoreCase) >= 0) });
             //DisplayModeProvider.Instance.Modes.Insert(0, new DefaultDisplayMode("Opera") { ContextCondition = (context => context.Request.UserAgent.IndexOf("Opera Mobi", StringComparison.OrdinalIgnoreCase) >= 0) });
+              
 
             DisplayModeProvider.Instance.Modes.Insert(0, new DefaultDisplayMode("Mobile") { ContextCondition = (context => context.Request.UserAgent.IndexOf("Android", StringComparison.OrdinalIgnoreCase) >= 0) });
             DisplayModeProvider.Instance.Modes.Insert(0, new DefaultDisplayMode("Mobile") { ContextCondition = (context => context.Request.UserAgent.IndexOf("Opera Mobi", StringComparison.OrdinalIgnoreCase) >= 0) });
@@ -61,9 +62,11 @@ namespace Epi.Web.MVC
             //                                    || ctx.Request.UserAgent.IndexOf("Opera Mini", StringComparison.OrdinalIgnoreCase) >= 0)) 
             //});
 
-            ProxyDependencyReference.Initialise();
-            Fixer.FixModelBindingIssue();
 
+           
+            
+           
+          
         }
 
 
@@ -73,13 +76,28 @@ namespace Epi.Web.MVC
         /// </summary>
         protected void Application_Error()
         {
+
             Exception exc = Server.GetLastError();
 
             try
             {
-                Epi.Web.Utility.ExceptionMessage.SendLogMessage(exc);
+                //string sSource;
+                //string sLog;
+               // string sEvent;
+
+                //sSource = "Epi.Web.Survey";
+                //sLog = "Application";
+                //sEvent = exc.Message + "\n" + exc.StackTrace;
+                 
+                            Epi.Web.Utility.ExceptionMessage.SendLogMessage(exc);
+                           
+                    
+
             }
-            catch { }
+            catch (Exception ex)
+            {
+                // do nothing
+            }
 
             this.Response.Redirect("/", true);
         }

@@ -33,8 +33,6 @@ namespace Epi.Web.MVC.Facade
         //declare SurveyResponseXML object
         private SurveyResponseXML _surveyResponseXML;
 
-        private OrganizationAccountResponse _OrganizationAccountResponse;
-        private IOrganizationAccountRepository _iOrgAccountRepository;
         /// <summary>
         /// Injectinting ISurveyInfoRepository through Constructor
         /// </summary>
@@ -42,7 +40,7 @@ namespace Epi.Web.MVC.Facade
         public SurveyFacade(ISurveyInfoRepository iSurveyInfoRepository, ISurveyAnswerRepository iSurveyResponseRepository,
                                   Epi.Web.Common.Message.SurveyInfoRequest surveyInfoRequest, Epi.Web.Common.Message.SurveyAnswerRequest surveyResponseRequest,
                                   Common.DTO.SurveyAnswerDTO surveyAnswerDTO,
-                                   SurveyResponseXML surveyResponseXML, UserAuthenticationRequest surveyAuthenticationRequest, Epi.Web.Common.DTO.PassCodeDTO PassCodeDTO, IOrganizationAccountRepository iOrgAccountRepository)
+                                   SurveyResponseXML surveyResponseXML, UserAuthenticationRequest surveyAuthenticationRequest, Epi.Web.Common.DTO.PassCodeDTO PassCodeDTO)
         {
             _iSurveyInfoRepository = iSurveyInfoRepository;
             _iSurveyAnswerRepository = iSurveyResponseRepository;
@@ -52,7 +50,6 @@ namespace Epi.Web.MVC.Facade
             _surveyResponseXML = surveyResponseXML;
             _surveyAuthenticationRequest = surveyAuthenticationRequest;
             _PassCodeDTO = PassCodeDTO;
-            _iOrgAccountRepository = iOrgAccountRepository;
         }
 
         /// <summary>
@@ -63,12 +60,21 @@ namespace Epi.Web.MVC.Facade
         /// <param name="pageNumber"></param>
         /// <param name="surveyAnswerDTO"></param>
         /// <returns></returns>
-        public MvcDynamicForms.Form GetSurveyFormData(string surveyId, int pageNumber, Epi.Web.Common.DTO.SurveyAnswerDTO surveyAnswerDTO, bool isMobileDevice = false, string callerThereby = "")
+        public MvcDynamicForms.Form GetSurveyFormData(string surveyId, int pageNumber, Epi.Web.Common.DTO.SurveyAnswerDTO surveyAnswerDTO, bool IsMobileDevice)
         {
+
+            //Get the SurveyInfoDTO
             Epi.Web.Common.DTO.SurveyInfoDTO surveyInfoDTO = SurveyHelper.GetSurveyInfoDTO(_surveyInfoRequest,_iSurveyInfoRepository,surveyId);
             MvcDynamicForms.Form form = null;
-            form = Epi.Web.MVC.Utility.FormProvider.GetForm(surveyInfoDTO, pageNumber, surveyAnswerDTO, isMobileDevice);
-
+           
+            if (IsMobileDevice)
+            {
+                form = Epi.Web.MVC.Utility.MobileFormProvider.GetForm(surveyInfoDTO, pageNumber, surveyAnswerDTO);
+            }
+            else
+            {
+               form = Epi.Web.MVC.Utility.FormProvider.GetForm(surveyInfoDTO, pageNumber, surveyAnswerDTO);
+            }
             return form;
         }
         /// <summary>
@@ -143,27 +149,6 @@ namespace Epi.Web.MVC.Facade
             _surveyAuthenticationRequest.SurveyResponseId = responseId;
             UserAuthenticationResponse AuthenticationResponse = _iSurveyAnswerRepository.GetAuthenticationResponse(_surveyAuthenticationRequest);
             return AuthenticationResponse;
-        }
-
-        public OrganizationAccountResponse CreateAccount(OrganizationAccountRequest AccountRequest) 
-            
-            {
-            OrganizationAccountResponse OrganizationAccountResponse = _iOrgAccountRepository.CreateAccount(AccountRequest);
-            return OrganizationAccountResponse;
-            
-            }
-        public OrganizationAccountResponse GetStateList(OrganizationAccountRequest Request) 
-            {
-
-            OrganizationAccountResponse OrganizationAccountResponse = _iOrgAccountRepository.GetStateList(Request);
-            return OrganizationAccountResponse;
-            
-            }
-        public SurveyControlsResponse GetSurveyControlList(SurveyControlsRequest pRequestMessage)
-        {
-        SurveyControlsResponse SurveyControlsResponse = _iSurveyInfoRepository.GetSurveyControlList(pRequestMessage);
-
-        return SurveyControlsResponse;
         }
     }
 }

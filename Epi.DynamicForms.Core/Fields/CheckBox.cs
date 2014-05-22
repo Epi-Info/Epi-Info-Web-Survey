@@ -75,21 +75,34 @@ namespace MvcDynamicForms.Fields
 
         public override bool Validate()
         {
+            /*
+            if (Required && !Checked)
+            {
+                // Isn't valid
+                Error = _requiredMessage;
+                return false;
+            }
+
+            // Is Valid
+            */
             ClearError();
             return true;
         }
 
         public override string RenderHtml()
         {
-            var inputName = _fieldPrefix + _key;
+            var inputName = _form.FieldPrefix + _key;
             var html = new StringBuilder();
             string ErrorStyle = string.Empty;
 
+            // error label
             if (!IsValid)
             {
+                //Add new Error to the error Obj
                 ErrorStyle = ";border-color: red";
             }
 
+            // checkbox input
             var chk = new TagBuilder("input");
             chk.Attributes.Add("id", inputName);
             chk.Attributes.Add("name", inputName);
@@ -98,12 +111,10 @@ namespace MvcDynamicForms.Fields
             chk.Attributes.Add("value", bool.TrueString);
             string IsHiddenStyle = "";
             string IsHighlightedStyle = "";
-
             if (_IsHidden)
             {
                 IsHiddenStyle = "display:none";
             }
-            
             if (_IsHighlighted)
             {
                 IsHighlightedStyle = "background-color:yellow";
@@ -113,26 +124,37 @@ namespace MvcDynamicForms.Fields
             {
                 chk.Attributes.Add("disabled", "disabled");
             }
+            ////////////Check code start//////////////////
+           // chk.Attributes.Add("onfocus", "EventArray.push('" + Prompt + "Befor')");//befor
+            //chk.Attributes.Add("onblur", "EventArray.push('" + Prompt + "After')");//After
+            ////////////Check code end//////////////////
 
             chk.Attributes.Add("style", "position:absolute;left:" + _left.ToString() + "px;top:" + _top.ToString() + "px" + ";width:" + _ControlWidth.ToString() + "px" + ErrorStyle + ";" + IsHiddenStyle + ";" + IsHighlightedStyle);            
           
             chk.MergeAttributes(_inputHtmlAttributes);
-
+            ////////////Check code start//////////////////
+            EnterRule FunctionObjectAfter = (EnterRule)_form.FormCheckCodeObj.GetCommand("level=field&event=after&identifier=" + _key);
             if (FunctionObjectAfter != null && !FunctionObjectAfter.IsNull())
             {
-                chk.Attributes.Add("onblur", "return " + _key + "_after();"); 
+                chk.Attributes.Add("onblur", "return " + _key + "_after();"); //After
             }
-            
+            EnterRule FunctionObjectBefore = (EnterRule)_form.FormCheckCodeObj.GetCommand("level=field&event=before&identifier=" + _key);
             if (FunctionObjectBefore != null && !FunctionObjectBefore.IsNull())
             {
-                chk.Attributes.Add("onfocus", "return " + _key + "_before();"); 
+                chk.Attributes.Add("onfocus", "return " + _key + "_before();"); //Before
             }
 
+
+            EnterRule FunctionObjectClick = (EnterRule)_form.FormCheckCodeObj.GetCommand("level=field&event=click&identifier=" + _key);
             if (FunctionObjectClick != null && !FunctionObjectClick.IsNull())
             {
                 chk.Attributes.Add("onclick", "return " + _key + "_click();"); 
             }
 
+
+
+
+            ////////////Check code end//////////////////
             html.Append(chk.ToString(TagRenderMode.SelfClosing));
 
             // prompt label
@@ -142,7 +164,7 @@ namespace MvcDynamicForms.Fields
             prompt.Attributes.Add("class", "EpiLabel");
             prompt.Attributes.Add("Id", "label" + inputName);
             StringBuilder StyleValues = new StringBuilder();
-            StyleValues.Append(GetControlStyle(_fontstyle.ToString(), _Prompttop.ToString(), _Promptleft.ToString(), null, Height.ToString(), IsHidden));
+            StyleValues.Append(GetContolStyle(_fontstyle.ToString(), _Prompttop.ToString(), _Promptleft.ToString(), null, Height.ToString(), IsHidden));
             prompt.Attributes.Add("style", StyleValues.ToString());
             html.Append(prompt.ToString());
             if (ReadOnly)

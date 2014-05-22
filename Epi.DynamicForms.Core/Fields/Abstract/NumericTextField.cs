@@ -33,6 +33,14 @@ namespace MvcDynamicForms.Fields
                 _regexMessage = value;
             }
         }
+       public string Value { get; set; }
+        //public string Value { get { return _Value; } set { _Value = value; } }
+        public override string Response
+        {
+            get { return Value; }
+            set { Value = value; }
+             
+        }
 
         //Declaring the min value for decimal
         private string _lower;
@@ -64,22 +72,23 @@ namespace MvcDynamicForms.Fields
         /// <returns></returns>
         public override bool Validate()
         {
+            /*If readonly don't perform any validation check and make required = false and validate = true*/
             if (ReadOnly)
             {
                 Required = false;
                 ClearError();
                 return true;
             }
-
-            if (Response == null || (Response.IndexOf("_") != -1) ||((Response.IndexOf(".") != -1 && Response.Length ==1)))
+            //if response have character "_" or only "." it is not required, so assign Response = ""
+            if ((Response.IndexOf("_") != -1) ||((Response.IndexOf(".") != -1 && Response.Length ==1)))
             {
                 Response = string.Empty;
             }
-            
             if (string.IsNullOrEmpty(Response))
             {
                 if (Required)
                 {
+                    // invalid: is required and no response has been given
                     Error = RequiredMessage;
                     return false;
                 }
@@ -100,7 +109,7 @@ namespace MvcDynamicForms.Fields
                 //if (!regex.IsMatch(Value))
                 
                 double testValue = 0.0;
-                if(!double.TryParse(Response, out testValue))
+                if(!double.TryParse(Value, out testValue))
                 {
                     //invalid: it is not numeric
                     Error = "Value must be a number";
@@ -114,7 +123,7 @@ namespace MvcDynamicForms.Fields
                     if ((!string.IsNullOrEmpty(Lower)) && (!string.IsNullOrEmpty(Upper)))
                     {
                         //if the number is either less than the lower limit or greater than the upper limit raise error
-                        if ((decimal.Parse(Response) < decimal.Parse(Lower)) || (decimal.Parse(Response) > decimal.Parse(Upper)))
+                        if ((decimal.Parse(Value) < decimal.Parse(Lower)) || (decimal.Parse(Value) > decimal.Parse(Upper)))
                         {
                             Error = string.Format("Number must be in between {0} and {1}", Lower, Upper);
                             return false;
@@ -122,13 +131,13 @@ namespace MvcDynamicForms.Fields
                     }
 
                     //invalid: checking for lower limit
-                    if ((!string.IsNullOrEmpty(Lower)) && (decimal.Parse(Response) < decimal.Parse(Lower)))
+                    if ((!string.IsNullOrEmpty(Lower)) && (decimal.Parse(Value) < decimal.Parse(Lower)))
                     {
                         Error = string.Format("Number can not be less than {0}", Lower);
                         return false;
                     }
                     //invalid: checking the upper limit 
-                    if ((!string.IsNullOrEmpty(Upper)) && (decimal.Parse(Response) > decimal.Parse(Upper)))
+                    if ((!string.IsNullOrEmpty(Upper)) && (decimal.Parse(Value) > decimal.Parse(Upper)))
                     {
                         Error = string.Format("Number can not be greater than {0}", Upper);
                         return false;

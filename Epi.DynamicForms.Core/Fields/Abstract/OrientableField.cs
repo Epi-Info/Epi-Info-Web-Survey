@@ -17,17 +17,19 @@ namespace MvcDynamicForms.Fields
         protected string _listClass = "MvcDynamicOrientableList";
         protected Orientation _orientation = Orientation.Vertical;
         protected bool _showTextOnRight;
-        private List<string> _locations;
+        public string Value { get; set; }
+        protected List<string> _Pattern;
 
-        public List<string> Locations
+
+        public List<string> Pattern
         {
             get
             {
-                return _locations;
+                return _Pattern;
             }
             set
             {
-                _locations = value;
+                _Pattern = value;
             }
         }
         /// <summary>
