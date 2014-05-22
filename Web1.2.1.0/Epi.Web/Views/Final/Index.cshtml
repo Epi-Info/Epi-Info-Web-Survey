@@ -1,0 +1,127 @@
+﻿@{
+     
+    ViewBag.Title = "Final Survey" + " - " +
+        Model.SurveyName + " - " + Model.IsDraftModeStyleClass;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script type="text/javascript" >
+
+    $(document).ready(function () {
+        // a workaround for a flaw in the demo system (http://dev.jqueryui.com/ticket/4375), ignore!
+        
+       
+ 
+
+         $("#VideoDialog").dialog({
+            autoOpen: false,
+            show: "blind",
+            hide: "blind",
+            resizable: false,
+            height: 410,
+            width: 500,
+            modal: true
+        });
+
+          });
+
+</script>
+  @if (@Model.IsDraftModeStyleClass != "")
+ {
+          <div id="header" class="TestHeader">
+  
+            <h1>
+                @Model.SurveyName 
+            </h1>
+      
+          </div>
+ }
+ else { 
+             <div id="header"  >
+               <h1>
+                   @Model.SurveyName 
+               </h1>
+      
+             </div>
+ 
+ }
+
+          <div id="infobox">
+            @if (!string.IsNullOrWhiteSpace(@Model.SurveyNumber))
+                {
+                    <div id="surveyno">
+                        <span class="boldlabel">Survey #:</span> <span>
+                           @Model.SurveyNumber</span></div>
+                }
+         @if (!string.IsNullOrWhiteSpace(@Model.OrganizationName))  
+         {
+                  <div id="orgn">
+                    <span class="boldlabel">Organization:</span> <span>
+                    @Model.OrganizationName</span></div>
+         }
+         
+               @* <div id="dept">
+                    <span class="boldlabel">Department:</span> <span>
+                       @Model.DepartmentName</span></div>*@
+        <div style="clear: both;">
+        </div>
+    </div>
+<div class="success" style="margin:1em;">
+    <div class="image"><img src="@Url.Content("~/Content/images/button_check.png")" style="vertical-align: middle; padding-right: 10px;" alt=""/></div>
+    <div class="message">
+        @if(string.IsNullOrWhiteSpace(Model.ExitText)) 
+        {
+            @System.Configuration.ConfigurationManager.AppSettings["SURVEY_SUBMISSION_MESSAGE"];
+        } 
+        else 
+        {
+            @Html.Raw(@Model.ExitText);
+        }
+    </div>
+    <div style="clear:both;"></div>
+</div>
+
+    
+ @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "myform", @class = @Model.IsDraftModeStyleClass.ToString() }))
+ { 
+        
+            <div id="content" style="min-height:200px;">
+               @if (Model.ClosingDate.Date >= DateTime.Now.Date && Model.SurveyType == 2)
+               {
+                     
+                        <p>
+                            <button id="beginsurvey" class="begin green" type="submit">
+                               Start Survey Again</button>
+
+                        </p>
+                        <p style="text-align:center; font-size:9pt;">Survey Starting Date: @string.Format("{0:dddd, MMMM d, yyyy}", Model.StartDate)</p>
+                    
+                        <p style="text-align:center; font-size:9pt;">Survey Closing Date: @string.Format("{0:dddd, MMMM d, yyyy}", Model.ClosingDate)</p>
+               }
+               
+              
+                
+           </div>
+             @*<div style="width:220px; padding:5px; border: 2px solid #04aeda; margin-right:10px; margin-left:590px; margin-bottom:130px; margin-top:130px; bottom:0px; position:relative;">
+	            <div style="float:left; width:54px;">
+	                <img alt="" style="z-index:12;" src="@Url.Content("~/Content/images/video.png")"/>
+	            </div>
+	            <div style="float:right; vertical-align:top; text-align:left; padding-right:10px;">
+	                <span style="font: bold 10pt Segoe UI; color:#04aeda;"> Created using Epi Info 7</span>
+	               <p style="margin-top:5px; margin-bottom:1px;"> <a onclick ="OpenVideoDialog();" class="watch">Watch Video</a></p>
+	            </div>
+	            <div style="clear:both;"></div>
+            </div>  *@
+ }
+
+      @* <div id="VideoDialog" title = "How this survey was created!">
+               
+      <iframe width="480" height="360" src="http://www.youtube.com/embed/BgTJnSKQKIs?rel=0" frameborder="0" allowfullscreen></iframe>
+               
+               
+       </div>*@
+     
+          @{if (ViewBag.Omniture.IsEnabled == true)
+        { 
+         Html.RenderPartial("OmniturePartial");  
+        } 
+        }

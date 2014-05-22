@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="05e3f407-a1d1-4796-a7b3-69e9cad5ea92" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:22587/Epi.Web.ServiceHost/SurveyDataService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="SurveyDataService.xsd" MetadataType="Schema" ID="f4a48390-28e4-4ac8-b523-4dd402cfaad3" SourceId="1" SourceUrl="http://localhost:22587/Epi.Web.ServiceHost/SurveyDataService.svc?xsd=xsd3" />
+    <MetadataFile FileName="SurveyDataService1.xsd" MetadataType="Schema" ID="8e59f220-8b47-4138-9078-9147b047096e" SourceId="1" SourceUrl="http://localhost:22587/Epi.Web.ServiceHost/SurveyDataService.svc?xsd=xsd2" />
+    <MetadataFile FileName="DataService.wsdl" MetadataType="Wsdl" ID="9f20f0dd-7534-4b65-b0c9-a1b8bf307f53" SourceId="1" SourceUrl="http://localhost:22587/Epi.Web.ServiceHost/SurveyDataService.svc?wsdl" />
+    <MetadataFile FileName="SurveyDataService2.xsd" MetadataType="Schema" ID="27257016-43b4-42de-b771-a3bda41f9dea" SourceId="1" SourceUrl="http://localhost:22587/Epi.Web.ServiceHost/SurveyDataService.svc?xsd=xsd0" />
+    <MetadataFile FileName="SurveyDataService3.xsd" MetadataType="Schema" ID="13f924c5-b254-4b27-b5f2-5ffc7a42e6b2" SourceId="1" SourceUrl="http://localhost:22587/Epi.Web.ServiceHost/SurveyDataService.svc?xsd=xsd1" />
+    <MetadataFile FileName="SurveyDataService.disco" MetadataType="Disco" ID="b973780f-53bf-40dc-a717-24b3edd6ad64" SourceId="1" SourceUrl="http://localhost:22587/Epi.Web.ServiceHost/SurveyDataService.svc?disco" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

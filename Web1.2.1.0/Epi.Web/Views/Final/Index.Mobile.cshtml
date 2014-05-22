@@ -1,0 +1,82 @@
+﻿@{
+    ViewBag.Title = "Final Survey" + " - " +
+        Model.SurveyName + " - " + Model.IsDraftModeStyleClass + " - Mobile";
+    
+}
+
+ <div id="header">
+            <h1>
+                @Model.SurveyName  
+                </h1>
+        </div>
+
+         <br />
+         @*<div id="surveyno">
+            <span class="boldlabel">Survey #:</span> <span>
+                @Model.SurveyNumber</span></div>
+        <div id="orgn">
+            <span class="boldlabel">Organization:</span> <span>
+                @Model.OrganizationName</span></div>
+        <div id="dept">
+            <span class="boldlabel">Department:</span> <span>
+                @Model.DepartmentName</span></div>
+        <div style="clear: both;">
+        </div>
+    </div>*@
+<div class="success">
+    <div class="image"><img src="@Url.Content("~/Content/images/button_check.png")" style="vertical-align: middle; padding-right: 5px; width:24px;" alt=""/></div>
+    <div class="message"  style="vertical-align: middle !important;">
+        @if(string.IsNullOrWhiteSpace(Model.ExitText)) 
+        {
+            @System.Configuration.ConfigurationManager.AppSettings["SURVEY_SUBMISSION_MESSAGE"];
+        } 
+        else 
+        {
+             @Html.Raw(@Model.ExitText);
+        }
+    </div>
+    <div style="clear:both;"></div>
+</div>
+ 		 
+		@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "myform", @class = @Model.IsDraftModeStyleClass.ToString() }))
+		{ 
+    
+        
+            <div id="content" style="margin-bottom:200px;">
+               @if (Model.ClosingDate.Date >= DateTime.Now.Date && Model.SurveyType == 2)
+               
+               {
+                     
+                         <p style="width: 250px; min-width:120px; margin: 0 auto;">
+                            <button id="beginsurvey"  class="ui-btn-hidden" data-theme="e" type="submit" aria-disabled="false" >
+                               Start Survey Again</button>
+
+                        </p>
+                        <p style="text-align:center; font-size:9pt;">Survey Closing Date: @string.Format("{0:dddd, MMMM d, yyyy}", Model.ClosingDate)</p>
+                    <p>&nbsp;</p>
+                   <div style="margin: 0 auto; text-align:center;">
+                        <div>
+                            <span class="boldlabel">Survey #:</span> <span>
+                               @Model.SurveyNumber</span></div>
+                        <div>
+                            <span class="boldlabel">Organization:</span> <span>
+                                @Model.OrganizationName</span></div>
+                        <div>
+                            <span class="boldlabel">Department:</span> <span>
+                               @Model.DepartmentName</span></div>
+                        <div style="clear: both;">
+                        </div>
+                    </div>
+               }
+               
+              <div style="clear:both;"></div>
+                
+           </div>
+               
+     }
+
+          @{if (ViewBag.Omniture.IsEnabled == true)
+        { 
+         Html.RenderPartial("OmniturePartial");  
+        } 
+        }

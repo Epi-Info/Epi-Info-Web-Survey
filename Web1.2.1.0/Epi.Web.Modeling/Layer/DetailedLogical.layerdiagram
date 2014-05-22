@@ -1,0 +1,203 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<layerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/SimpleShapesModel" dslVersion="1.0.0.0" Id="a11c5b3a-cc8e-4349-bac2-157d50ae12b0" xmlns="http://schemas.microsoft.com/VisualStudio/TeamArchitect/LayerDesigner">
+  <comments>
+    <comment Id="e7511f3a-7f04-4f85-91e1-1f5875fef04b" name="Comment1">
+      <body>Classes written using jQuery
+1. Validation libraries will extend custom validation annotations implemented in C#.
+2. Control library / extenders that can wrap up certain controls from jQuery UI or dojo framework
+3. Service communicators will wrap up the asynchronous calls that can be made through javaScript classes. Will be implemented using jQuery syntax.</body>
+      <layerElements>
+        <linkFromCommentToLayerElement>
+          <layerMoniker Id="466e1be0-544a-41b6-9d31-601c4a0155d1" />
+        </linkFromCommentToLayerElement>
+      </layerElements>
+    </comment>
+    <comment Id="7073a052-9411-414d-8798-eb08ce951cf4" name="Comment2">
+      <body>Presentation Layer
+- Components: All controls that need to be created dynamically are implemented in Epi.Web.DynamicForms.Core. 
+Patterns: Factory
+
+- UI is implemented using ASP.NET MVC  technology. 
+~ Patterns: MVC, Repository, Inversion of Control (IoC)
+~ IoC container: Microsoft Unity IoC for MVC (Unity.MVC3)
+
+- UI Tests are written using NUnit
+~ Test framework: NUnit V2.5.10
+~ Test Helper: Visual NUnit, NUnit test harness
+
+
+
+</body>
+      <layerElements>
+        <linkFromCommentToLayerElement>
+          <layerMoniker Id="e09fd8cb-95ed-4f4c-92d5-3f4a2b52d23b" />
+        </linkFromCommentToLayerElement>
+      </layerElements>
+    </comment>
+    <comment Id="30731885-fa45-4536-9a6f-c4b5d6c9dea4" name="Comment3">
+      <body>Hosting Layer
+- IIS will be the host for the WCF Services. There will be two host for
+WCF Service exposing two different end points
+
+- Survey Manager Service Host: This host will expos the endpoint that will allows Epi Info 7 to publish and download the surveys.
+
+- Survey Data Entry Service Host: This host will expose endpoint that will allow Epi Info Web Survey application to exchange data collected using the web application</body>
+      <layerElements>
+        <linkFromCommentToLayerElement>
+          <layerMoniker Id="4be7ddd8-696b-401e-b229-4c8749916cb1" />
+        </linkFromCommentToLayerElement>
+      </layerElements>
+    </comment>
+    <comment Id="54589218-df75-48b3-ba24-cccf394ccf19" name="Comment4">
+      <body>Service Layer
+- Service layer is implemented as a WCF Service Library. It has two interfaces. 
+
+- ISurveyManagerService exposes contract that will be used by Epi Info desktop application to upload and download survey.
+
+- IDataEntryService exposes contracts that will be used by Epi Info Web Survey applicaiton
+
+- Patterns used: Remote Facade, Service Layer, Request-Response, Data Transfer Object (DTO) 
+
+
+</body>
+      <layerElements>
+        <linkFromCommentToLayerElement>
+          <layerMoniker Id="836a8300-c23e-46ab-a3cf-811638cda4d3" />
+        </linkFromCommentToLayerElement>
+      </layerElements>
+    </comment>
+    <comment Id="8ad37b66-1273-43f8-9d54-77e716939876" name="Comment5">
+      <body>Business Layer
+Business Layer encapsulates all the business processing needed by the contracts exposed in the endpoint.
+
+- Pattern used: Inversion of Control (IoC)</body>
+      <layerElements>
+        <linkFromCommentToLayerElement>
+          <layerMoniker Id="104692ce-d2f4-4dc5-8498-f57cef3feb08" />
+        </linkFromCommentToLayerElement>
+      </layerElements>
+    </comment>
+    <comment Id="6f75a104-794a-4e57-988f-e622006c7653" name="Comment6">
+      <body>Data Layer
+- One of the data layer is implemented using Entity Framework. 
+
+Data layer is left flexible so that it can easily be expanded to use ADO.NET and can be expanded to integrate any other data source
+
+- Patterns used: Factory, Repository
+</body>
+      <layerElements>
+        <linkFromCommentToLayerElement>
+          <layerMoniker Id="c2e2da63-00e5-4a4d-81e7-95934dc5d06f" />
+        </linkFromCommentToLayerElement>
+      </layerElements>
+    </comment>
+  </comments>
+  <layers>
+    <layer Id="d546762f-7719-4115-8928-5442b92e6327" name="Web Server">
+      <childLayers>
+        <layer Id="104692ce-d2f4-4dc5-8498-f57cef3feb08" name="Business Layer">
+          <dependencyToLayers>
+            <dependencyFromLayerToLayer Id="10791071-0ef8-46d8-917e-fbaae66b4c31" direction="Forward">
+              <layerMoniker Id="6bbc70f3-97af-4085-be29-c964fbbda6f9" />
+            </dependencyFromLayerToLayer>
+          </dependencyToLayers>
+          <childLayers>
+            <layer Id="e4e90f4f-0fbf-4c7e-a44f-2b7fa6c9d0a1" name="Epi.Web.BLL" />
+          </childLayers>
+        </layer>
+        <layer Id="c2e2da63-00e5-4a4d-81e7-95934dc5d06f" name="Data Layer">
+          <dependencyToLayers>
+            <dependencyFromLayerToLayer Id="96a90f53-5776-4884-bb67-b86ec4c6811a" direction="Forward">
+              <layerMoniker Id="6bbc70f3-97af-4085-be29-c964fbbda6f9" />
+            </dependencyFromLayerToLayer>
+          </dependencyToLayers>
+          <childLayers>
+            <layer Id="ba9924d2-5375-470c-a03c-279a175b984a" name="Epi.Web.EF" />
+          </childLayers>
+        </layer>
+        <layer Id="6bbc70f3-97af-4085-be29-c964fbbda6f9" name="Framework">
+          <childLayers>
+            <layer Id="dfa05336-ac99-4087-ab47-9e1d9a5be5c9" name="Epi.Web.Common">
+              <childLayers>
+                <layer Id="78789fa3-0b78-4c66-bafc-11f114c7fc34" name="Epi.Web.Common.DTO" />
+                <layer Id="d8a6920a-726d-4834-b87d-290dfbc1db04" name="Epi.Web.Common.BusinessObject" />
+              </childLayers>
+            </layer>
+            <layer Id="989a390d-e9bc-430c-8f7b-68d5f87b660b" name="Epi.Web.Interfaces">
+              <childLayers>
+                <layer Id="f4ac82d6-3aea-4493-b2cb-ec3235ec27c6" name="Epi.Web.Interfaces.DataInterfaces" />
+                <layer Id="1bc66ae8-58b0-46af-8304-3838e94b6c03" name="Epi.Web.Interface.BusinessInterfaces" />
+              </childLayers>
+            </layer>
+          </childLayers>
+        </layer>
+        <layer Id="e09fd8cb-95ed-4f4c-92d5-3f4a2b52d23b" name="Presentation Layer">
+          <dependencyToLayers>
+            <dependencyFromLayerToLayer Id="bef7bab5-2ca9-4d41-ac3a-3bec5a389a47" direction="Bidirectional">
+              <layerMoniker Id="4be7ddd8-696b-401e-b229-4c8749916cb1" />
+            </dependencyFromLayerToLayer>
+          </dependencyToLayers>
+          <childLayers>
+            <layer Id="4a76fbc8-035f-40ae-828a-39f5c365105f" name="Epi.Web.DynamicForms.Core">
+              <dependencyToLayers>
+                <dependencyFromLayerToLayer Id="23f55051-fc07-46e2-8dc2-f61699b5dd7c" direction="Bidirectional">
+                  <layerMoniker Id="3ca26a64-c68f-44a1-aa64-7098c0600ab9" />
+                </dependencyFromLayerToLayer>
+              </dependencyToLayers>
+            </layer>
+            <layer Id="3ca26a64-c68f-44a1-aa64-7098c0600ab9" name="Epi.Web" />
+          </childLayers>
+        </layer>
+        <layer Id="836a8300-c23e-46ab-a3cf-811638cda4d3" name="Services Layer">
+          <dependencyToLayers>
+            <dependencyFromLayerToLayer Id="46b62f06-7d9b-4225-84d7-1ef72ee15e6a" direction="Forward">
+              <layerMoniker Id="6bbc70f3-97af-4085-be29-c964fbbda6f9" />
+            </dependencyFromLayerToLayer>
+          </dependencyToLayers>
+          <childLayers>
+            <layer Id="0e5713d3-4b21-48a0-9e7a-b69c87b66204" name="Epi.Web.SurveyManager" />
+          </childLayers>
+        </layer>
+        <layer Id="4be7ddd8-696b-401e-b229-4c8749916cb1" name="Hosting Layer">
+          <dependencyToLayers>
+            <dependencyFromLayerToLayer Id="b6029f90-d2cc-4be2-9ba0-18987d4212d6" direction="Bidirectional">
+              <layerMoniker Id="836a8300-c23e-46ab-a3cf-811638cda4d3" />
+            </dependencyFromLayerToLayer>
+          </dependencyToLayers>
+          <childLayers>
+            <layer Id="ac9b6a4e-f381-4606-a311-9d770b5989a3" name="Epi.Web.SurveyManagerServiceHost" />
+            <layer Id="890b3edd-1b72-43aa-91c5-d0aa5f6fc1e2" name="Epi.Web.SurveyDataEntryServiceHost" />
+          </childLayers>
+        </layer>
+        <layer Id="03074230-04b0-4162-9652-0894520777b9" name="Cross Cutting">
+          <childLayers>
+            <layer Id="c413ab99-10c8-4372-859d-6dc3276b0033" name="Security" />
+            <layer Id="424bef79-593b-4417-a3d7-2ccad3786c92" name="Communication" />
+            <layer Id="6b16c2b3-7dbf-472d-a13d-5a454ad2f3b4" name="Operational Management" />
+          </childLayers>
+        </layer>
+      </childLayers>
+    </layer>
+    <layer Id="7a655e39-b0a0-4061-a13c-90cb71ce6f31" name="Client">
+      <dependencyToLayers>
+        <dependencyFromLayerToLayer Id="e2e378d7-04f2-4747-9783-600fef93874f" direction="Bidirectional">
+          <layerMoniker Id="e09fd8cb-95ed-4f4c-92d5-3f4a2b52d23b" />
+        </dependencyFromLayerToLayer>
+      </dependencyToLayers>
+      <childLayers>
+        <layer Id="ba785de4-0bf2-48ab-8298-01e229351597" name=" Browser">
+          <childLayers>
+            <layer Id="cb2f5c93-3f9e-4a7e-be72-1411b5a13317" name="Rendering" />
+            <layer Id="466e1be0-544a-41b6-9d31-601c4a0155d1" name="JavaScript Libraries">
+              <childLayers>
+                <layer Id="04279a19-c6b8-409d-80c0-8791594397a8" name="Validation libraries" />
+                <layer Id="48833eee-a4e4-440b-aa18-096fd47171ce" name="Control library / Extenders" />
+                <layer Id="a50e620a-3643-42e3-ae4b-1a00c0c6f934" name="Service communicator" />
+              </childLayers>
+            </layer>
+          </childLayers>
+        </layer>
+      </childLayers>
+    </layer>
+  </layers>
+</layerModel>

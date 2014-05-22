@@ -1,0 +1,9 @@
+﻿@{
+    ViewBag.Title = "IsSubmitedError";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div id="attention" style="margin: 10px">
+            <img src="@Url.Content("~/Content/images/sign_warning.png")" alt="" style="vertical-align: middle;
+                padding-right: 10px;"/>
+       @System.Configuration.ConfigurationManager.AppSettings["SURVEY_CLOSED_MESSAGE"]
+</div>

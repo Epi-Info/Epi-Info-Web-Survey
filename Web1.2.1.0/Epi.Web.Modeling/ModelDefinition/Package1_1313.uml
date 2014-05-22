@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm5="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ComponentDesigner" xmlns:dm9="http://schemas.microsoft.com/dsltools/SimpleShapesModel" xmlns:dm10="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ActivityDesigner" xmlns:dm11="http://schemas.microsoft.com/dsltools/LogicalClassDesigner" xmlns:dm12="http://schemas.microsoft.com/VisualStudio/TeamArchitect/SequenceDesigner"
+  dslVersion="1.0.0.0"
+  Id="00ac6404-1b73-48f4-9008-639f659be9e4"
+  name="Web"
+  visibility="Private" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
+  <referencesInternal>
+    <reference
+      Id="5126b17a-5834-4b9f-a177-89f472df3b23"
+      handle="viewcode://./CodeSchema_Namespace?Namespace=Epi.Web"
+      tag="ViewCode" />
+  </referencesInternal>
+  <packagedElements>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="3e42c3c5-5995-472f-ae35-af94eadf1d6f"
+        LastKnownName="Common"
+        LastKnownLocation="Package2_1313.uml" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="eea8e535-daf8-4948-b9b7-8d4f9f24ae01"
+        LastKnownName="Interfaces"
+        LastKnownLocation="Package1_1628.uml" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="857cbd4d-e43d-4c70-a5e8-3a961bbc0c64"
+        LastKnownName="BLL"
+        LastKnownLocation="Package1_1636.uml" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="f9f95de4-4b84-4c48-a371-eb6b77a3ae46"
+        LastKnownName="EF"
+        LastKnownLocation="Package_1641.uml" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="ca2b960d-b23a-465c-bb58-1e650e1a735a"
+        LastKnownName="WCF"
+        LastKnownLocation="Package_1656.uml" />
+    </packageHasNamedElement>
+  </packagedElements>
+</package>

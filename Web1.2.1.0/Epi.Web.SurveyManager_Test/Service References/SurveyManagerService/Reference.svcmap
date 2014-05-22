@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="2a1db185-7889-4d50-8cb8-26c9b292ad08" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:22587/Epi.Web.ServiceHost/SurveyManagerService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="SurveyManagerService3.xsd" MetadataType="Schema" ID="3160b85c-24bb-4ffa-b5f2-70674b7ef86e" SourceId="1" SourceUrl="http://localhost:22587/Epi.Web.ServiceHost/SurveyManagerService.svc?xsd=xsd3" />
+    <MetadataFile FileName="SurveyManagerService4.xsd" MetadataType="Schema" ID="db31a379-531b-40b5-a75e-2f524fe32ac2" SourceId="1" SourceUrl="http://localhost:22587/Epi.Web.ServiceHost/SurveyManagerService.svc?xsd=xsd4" />
+    <MetadataFile FileName="Service.wsdl" MetadataType="Wsdl" ID="05f155bf-3485-4208-a2f3-f086c67ab24b" SourceId="1" SourceUrl="http://localhost:22587/Epi.Web.ServiceHost/SurveyManagerService.svc?wsdl" />
+    <MetadataFile FileName="SurveyManagerService.disco" MetadataType="Disco" ID="ec195c42-38f5-42d3-8957-272fe4eecdbc" SourceId="1" SourceUrl="http://localhost:22587/Epi.Web.ServiceHost/SurveyManagerService.svc?disco" />
+    <MetadataFile FileName="SurveyManagerService1.xsd" MetadataType="Schema" ID="8f8f9c2b-21d7-4667-9558-ed53953faa7a" SourceId="1" SourceUrl="http://localhost:22587/Epi.Web.ServiceHost/SurveyManagerService.svc?xsd=xsd0" />
+    <MetadataFile FileName="SurveyManagerService.xsd" MetadataType="Schema" ID="77919178-6da3-475e-8ef6-cddee986eade" SourceId="1" SourceUrl="http://localhost:22587/Epi.Web.ServiceHost/SurveyManagerService.svc?xsd=xsd2" />
+    <MetadataFile FileName="SurveyManagerService2.xsd" MetadataType="Schema" ID="acf74f37-a827-48f2-8a23-4d38485c8103" SourceId="1" SourceUrl="http://localhost:22587/Epi.Web.ServiceHost/SurveyManagerService.svc?xsd=xsd1" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

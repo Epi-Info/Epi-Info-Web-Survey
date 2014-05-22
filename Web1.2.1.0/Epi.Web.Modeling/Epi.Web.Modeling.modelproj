@@ -1,0 +1,312 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{897fc9b3-7277-451d-bec4-22e76639bd16}</ProjectGuid>
+    <ArchitectureToolsVersion>1.0.0.0</ArchitectureToolsVersion>
+    <Name>Epi.Web.Modeling</Name>
+    <RootNamespace>Epi.Web.Modeling</RootNamespace>
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v10.0\ArchitectureTools\Microsoft.VisualStudio.TeamArchitect.ModelingProject.targets" />
+  <ItemGroup>
+    <Content Include="Behavioral\Activity\1-EpiInfoSystem.activitydiagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Behavioral\Activity\1-EpiInfoSystem.activitydiagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>Behavioral\Activity\1-EpiInfoSystem.activitydiagram</DependentUpon>
+    </Content>
+    <Content Include="Behavioral\Activity\2-EpiInfoWebSurveyDataCollection.activitydiagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Behavioral\Activity\2-EpiInfoWebSurveyDataCollection.activitydiagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>Behavioral\Activity\2-EpiInfoWebSurveyDataCollection.activitydiagram</DependentUpon>
+    </Content>
+    <Content Include="Behavioral\Sequence\CreateSurveyForm.classdiagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Behavioral\Sequence\CreateSurveyForm.classdiagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>Behavioral\Sequence\CreateSurveyForm.classdiagram</DependentUpon>
+    </Content>
+    <Content Include="Behavioral\Sequence\PublishingSurvey.sequencediagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Behavioral\Sequence\PublishingSurvey.sequencediagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>Behavioral\Sequence\PublishingSurvey.sequencediagram</DependentUpon>
+    </Content>
+    <Content Include="Behavioral\Sequence\AccessingSurvey.sequencediagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Behavioral\Sequence\AccessingSurvey.sequencediagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>Behavioral\Sequence\AccessingSurvey.sequencediagram</DependentUpon>
+    </Content>
+    <Content Include="Behavioral\Sequence\StartSurvey.sequencediagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Behavioral\Sequence\StartSurvey.sequencediagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>Behavioral\Sequence\StartSurvey.sequencediagram</DependentUpon>
+    </Content>
+    <Content Include="Behavioral\UseCase\3-EpiInfoWebSurvey.usecasediagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Behavioral\UseCase\3-EpiInfoWebSurvey.usecasediagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>Behavioral\UseCase\3-EpiInfoWebSurvey.usecasediagram</DependentUpon>
+    </Content>
+    <Content Include="Behavioral\UseCase\2-EpiInfoWebSurveyManager.usecasediagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Behavioral\UseCase\2-EpiInfoWebSurveyManager.usecasediagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>Behavioral\UseCase\2-EpiInfoWebSurveyManager.usecasediagram</DependentUpon>
+    </Content>
+    <Content Include="Behavioral\UseCase\1-EpiInfoWebSurveySystem.usecasediagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Behavioral\UseCase\1-EpiInfoWebSurveySystem.usecasediagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>Behavioral\UseCase\1-EpiInfoWebSurveySystem.usecasediagram</DependentUpon>
+    </Content>
+    <Content Include="ModelDefinition\Package1_0900.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModelDefinition\Package1_1313.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModelDefinition\Package1_1353.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModelDefinition\Package1_1419.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModelDefinition\Package1_1423.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModelDefinition\Package1_1425.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModelDefinition\Package1_1628.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModelDefinition\Package1_1636.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModelDefinition\Package1_1641.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModelDefinition\Package1_1656.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModelDefinition\Package2_0900.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModelDefinition\Package2_1313.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModelDefinition\Package2_1423.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModelDefinition\Package2_1628.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModelDefinition\Package2_1641.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModelDefinition\Package3_1313.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModelDefinition\Package3_1641.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModelDefinition\Package4_1641.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModelDefinition\Package_0858.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModelDefinition\Package_0900.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModelDefinition\Package_0904.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModelDefinition\Package_0906.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModelDefinition\Package_0908.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModelDefinition\Package_1248.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModelDefinition\Package_1313.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModelDefinition\Package_1338.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModelDefinition\Package_1341.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModelDefinition\Package_1350.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModelDefinition\Package_1353.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModelDefinition\Package_1400.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModelDefinition\Package_1405.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModelDefinition\Package_1406.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModelDefinition\Package_1410.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModelDefinition\Package_1419.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModelDefinition\Package_1420.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModelDefinition\Package_1423.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModelDefinition\Package_1425.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModelDefinition\Package_1627.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModelDefinition\Package_1628.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModelDefinition\Package_1636.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModelDefinition\Package_1640.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModelDefinition\Package_1641.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModelDefinition\Package_1655.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModelDefinition\Package_1656.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Structural\Class\Epi.Web.BLL.classdiagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Structural\Class\Epi.Web.BLL.classdiagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>Structural\Class\Epi.Web.BLL.classdiagram</DependentUpon>
+    </Content>
+    <Content Include="Structural\Class\Epi.Web.Common.classdiagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Structural\Class\Epi.Web.Common.BusinessObject.classdiagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>Structural\Class\Epi.Web.Common.classdiagram</DependentUpon>
+    </Content>
+    <Content Include="Structural\Class\Epi.Web.EF.classdiagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Structural\Class\Epi.Web.EF.classdiagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>Structural\Class\Epi.Web.EF.classdiagram</DependentUpon>
+    </Content>
+    <Content Include="Structural\Class\Epi.Web.Interfaces.classdiagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Structural\Class\Epi.Web.Interfaces.classdiagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>Structural\Class\Epi.Web.Interfaces.classdiagram</DependentUpon>
+    </Content>
+    <Content Include="Structural\Class\Epi.Web.MvcDynamicForms.classdiagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Structural\Class\Epi.Web.MvcDynamicForms.classdiagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>Structural\Class\Epi.Web.MvcDynamicForms.classdiagram</DependentUpon>
+    </Content>
+    <Content Include="Structural\Class\Epi.Web.WCF.SurveyService.classdiagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Structural\Class\Epi.Web.WCF.SurveyService.classdiagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>Structural\Class\Epi.Web.WCF.SurveyService.classdiagram</DependentUpon>
+    </Content>
+    <Content Include="Structural\Component\EpiInfoWebSurveyFunctionalDecomposition.componentdiagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Structural\Component\EpiInfoWebSurveyFunctionalDecomposition.componentdiagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>Structural\Component\EpiInfoWebSurveyFunctionalDecomposition.componentdiagram</DependentUpon>
+    </Content>
+    <Content Include="Structural\Component\EpiInfoWebSurveySystemDependencies.componentdiagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Structural\Component\EpiInfoWebSurveySystemDependencies.componentdiagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>Structural\Component\EpiInfoWebSurveySystemDependencies.componentdiagram</DependentUpon>
+    </Content>
+    <Folder Include="Behavioral\Activity\" />
+    <Folder Include="Behavioral\Sequence" />
+    <Folder Include="Behavioral\UseCase\" />
+    <Folder Include="ModelDefinition\" />
+    <Content Include="ModelDefinition\Epi.Web.Modeling.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Folder Include="Behavioral" />
+    <Folder Include="Layer" />
+    <Folder Include="Structural" />
+    <Folder Include="Structural\Component" />
+    <Folder Include="Structural\Class" />
+  </ItemGroup>
+  <ItemGroup>
+    <Validate Include="Layer\DetailedLogical.layerdiagram">
+      <SubType>Content</SubType>
+    </Validate>
+    <Validate Include="Layer\DetailedLogical.layerdiagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>Layer\DetailedLogical.layerdiagram</DependentUpon>
+    </Validate>
+    <Validate Include="Layer\DetailedLogical.layerdiagram.suppressions">
+      <SubType>Content</SubType>
+      <DependentUpon>Layer\DetailedLogical.layerdiagram</DependentUpon>
+    </Validate>
+    <Validate Include="Layer\HighLevelLogical.layerdiagram">
+      <SubType>Content</SubType>
+    </Validate>
+    <Validate Include="Layer\HighLevelLogical.layerdiagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>Layer\HighLevelLogical.layerdiagram</DependentUpon>
+    </Validate>
+    <Validate Include="Layer\HighLevelLogical.layerdiagram.suppressions">
+      <SubType>Content</SubType>
+      <DependentUpon>Layer\HighLevelLogical.layerdiagram</DependentUpon>
+    </Validate>
+  </ItemGroup>
+</Project>
