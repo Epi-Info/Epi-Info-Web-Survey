@@ -541,7 +541,7 @@ a.returnto
 .tooltip {
     display:none;
     background:url('../images/black_arrow2.png') no-repeat;
-   background-position: -5px 10px;
+    background-position: -5px 10px;
     font-size:9pt;
     font-family:Segoe UI;
     font-weight:bold;
@@ -561,14 +561,23 @@ a.returnto
    .ui-datepicker .ui-datepicker-buttonpane {font-size:65%;}         
 
 
-/*FieldSet Style*/
-fieldset
-{
+fieldset {
     border:1px solid #c4c4c4;
     padding:2px;
 }
 
+legend {
+    white-space: normal; 
+    width: 100%;
+    margin-left: -7px;
+}
 
+legend span 
+{
+    background-color: white;
+    float:left;
+    display:block;
+}
 
 /* This wraps all html rendered by Mvc Dynamic Forms */
 div.MvcDynamicForm {}
