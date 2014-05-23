@@ -12,12 +12,18 @@ namespace Epi.Web.BLL
         {
           private Epi.Web.Interfaces.DataInterfaces.IAdminDao AdminDao;
           private Epi.Web.Interfaces.DataInterfaces.IOrganizationDao OrganizationDao;
-
+          private Epi.Web.Interfaces.DataInterfaces.IStateDao StateDao;
           public Account(Epi.Web.Interfaces.DataInterfaces.IAdminDao pAdminDao,Epi.Web.Interfaces.DataInterfaces.IOrganizationDao pOrganizationDao)
             {
                this.AdminDao = pAdminDao;
                this.OrganizationDao = pOrganizationDao;
             }
+
+          public Account(  Epi.Web.Interfaces.DataInterfaces.IStateDao pStateDao)
+              {
+              this.StateDao = pStateDao;
+               
+              }
           private bool AdminEmailExists(string AdminEmail)
               {
 
@@ -237,6 +243,12 @@ namespace Epi.Web.BLL
                             break;
                         }
                   return Message;
+              }
+
+          public List<StateBO> GetStateList()
+              {
+              List<StateBO> result = this.StateDao.GetStateList();  
+              return result;
               }
         }
     }

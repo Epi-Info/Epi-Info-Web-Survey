@@ -15,8 +15,11 @@ namespace Epi.Web.WCF.SurveyService
     {
         [OperationContract]
         [FaultContract(typeof(CustomFaultException))]
-
         SurveyInfoResponse GetSurveyInfo(SurveyInfoRequest pRequest);
+
+        [OperationContract]
+        [FaultContract(typeof(CustomFaultException))]
+        CacheDependencyResponse GetCacheDependencyInfo(CacheDependencyRequest pRequest);
 
         [OperationContract]
         [FaultContract(typeof(CustomFaultException))]
@@ -29,15 +32,24 @@ namespace Epi.Web.WCF.SurveyService
         [OperationContract]
         [FaultContract(typeof(CustomFaultException))]
         UserAuthenticationResponse PassCodeLogin(UserAuthenticationRequest pRequest);
+
         [OperationContract]
         [FaultContract(typeof(CustomFaultException))]
         UserAuthenticationResponse SetPassCode(UserAuthenticationRequest pRequest);
+        
         [OperationContract]
         [FaultContract(typeof(CustomFaultException))]
         UserAuthenticationResponse GetAuthenticationResponse(UserAuthenticationRequest pRequest);
+        
         [OperationContract]
         [FaultContract(typeof(CustomFaultException))]
         OrganizationAccountResponse CreateAccount(OrganizationAccountRequest pRequest);
-    }
+        [OperationContract]
+        [FaultContract(typeof(CustomFaultException))]
+        OrganizationAccountResponse GetStateList(OrganizationAccountRequest Request);
 
+        [OperationContract]
+        [FaultContract(typeof(CustomFaultException))]
+        SurveyControlsResponse GetSurveyControlList(SurveyControlsRequest pRequestMessage);
+    }
 }

@@ -27,6 +27,8 @@ namespace Epi.Web.Common.Message
          /// </summary>
          [DataMember]
          public  AdminDTO  AdminList;
+         [DataMember]
+         public List<StateDTO> StateList;
 
         }
     }

@@ -25,9 +25,13 @@ namespace Epi.Web.MVC.Utility
         /// <param name="surveyAnswerDTO"></param>
         /// <param name="surveyResponseXML"></param>
         /// <param name="iSurveyAnswerRepository"></param>
-        public static Epi.Web.Common.DTO.SurveyAnswerDTO CreateSurveyResponse(string surveyId, string responseId, SurveyAnswerRequest surveyAnswerRequest,
-                                          Common.DTO.SurveyAnswerDTO surveyAnswerDTO,
-                                          SurveyResponseXML surveyResponseXML, ISurveyAnswerRepository iSurveyAnswerRepository)
+        public static Epi.Web.Common.DTO.SurveyAnswerDTO CreateSurveyResponse(
+            string surveyId, 
+            string responseId, 
+            SurveyAnswerRequest surveyAnswerRequest,
+            Common.DTO.SurveyAnswerDTO surveyAnswerDTO,
+            SurveyResponseXML surveyResponseXML, 
+            ISurveyAnswerRepository iSurveyAnswerRepository)
         {
             bool AddRoot = false;
             surveyAnswerRequest.Criteria.SurveyAnswerIdList.Add(responseId.ToString());
@@ -44,10 +48,18 @@ namespace Epi.Web.MVC.Utility
             return surveyAnswerDTO;
         }
 
-        public static void UpdateSurveyResponse(SurveyInfoModel surveyInfoModel,MvcDynamicForms.Form form, SurveyAnswerRequest surveyAnswerRequest,
-                                                             SurveyResponseXML surveyResponseXML,
-                                                            ISurveyAnswerRepository iSurveyAnswerRepository,
-                                                             SurveyAnswerResponse surveyAnswerResponse, string responseId, Epi.Web.Common.DTO.SurveyAnswerDTO surveyAnswerDTO, bool IsSubmited, bool IsSaved,int  PageNumber)
+        public static void UpdateSurveyResponse(
+            SurveyInfoModel surveyInfoModel,
+            MvcDynamicForms.Form form, 
+            SurveyAnswerRequest surveyAnswerRequest,
+            SurveyResponseXML surveyResponseXML,
+            ISurveyAnswerRepository iSurveyAnswerRepository,
+            SurveyAnswerResponse surveyAnswerResponse, 
+            string responseId, 
+            Epi.Web.Common.DTO.SurveyAnswerDTO surveyAnswerDTO, 
+            bool IsSubmited, 
+            bool IsSaved,
+            int  PageNumber)
         {
             // 1 Get the record for the current survey response
             // 2 update the current survey response
@@ -149,7 +161,7 @@ namespace Epi.Web.MVC.Utility
                 Xdoc.Root.Attribute("HighlightedFieldsList").Remove();
                 Xdoc.Root.Attribute("DisabledFieldsList").Remove();
                 Xdoc.Root.Attribute("RequiredFieldsList").Remove(); 
-                RemovePageNumAtt(Xdoc);
+                //RemovePageNumAtt(Xdoc);
             }
             if (IsSaved)
             {
@@ -389,5 +401,59 @@ namespace Epi.Web.MVC.Utility
         
         }
 
+
+        internal static List<PrintModel> GetQuestionAnswerList(string ResponseXml, SurveyControlsResponse List)
+            {
+
+            List<PrintModel> QuestionAnswerList = new List<PrintModel>();
+            int NumberOfPages = GetNumberOfPags(ResponseXml);
+
+
+            XDocument xdoc = XDocument.Parse(ResponseXml);
+
+
+            
+
+            for (int i=1; NumberOfPages + 1 > i  ;i++ )
+                {
+
+                var _FieldsTypeIDs = from _FieldTypeID in
+                                     xdoc.Descendants("Page")
+                                    
+                                     where _FieldTypeID.Attribute("PageNumber").Value == (i).ToString()
+                                     select _FieldTypeID;
+
+                var _PageFieldsTypeIDs = from _FieldTypeID1 in
+                                             _FieldsTypeIDs.Descendants("ResponseDetail")
+                                         
+                                         select _FieldTypeID1;
+
+
+                foreach (var item in _PageFieldsTypeIDs)
+                    {
+
+                    string ControlId  = item.Attribute("QuestionName").Value;
+                    bool Type = (bool) List.SurveyControlList.Any(x => x.ControlId == ControlId && x.ControlType != "Literal" && x.ControlType != "GroupBox");
+
+                    if (Type)
+                        {
+                    string Question = List.SurveyControlList.Single(x => x.ControlId == ControlId).ControlPrompt;
+                    PrintModel PrintModel = new PrintModel();
+
+                    PrintModel.PageNumber = i;
+                    PrintModel.Question = Question;
+                    PrintModel.Value = item.Value;
+
+                    QuestionAnswerList.Add(PrintModel);
+                        }
+                    }
+
+                }
+
+
+
+            return QuestionAnswerList;
+
+            }
     }
 }

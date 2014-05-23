@@ -60,7 +60,11 @@ namespace Epi.Web.Common.ObjectMapping
                 // Notify = pDTO.Notify,
                  OrganizationId = pDTO.OrganizationId,
                  //AdminId = pDTO.AdminId
-
+                StateId = pDTO.StateId,
+                 AdressLine1 = pDTO.AdressLine1,
+                 AdressLine2 = pDTO.AdressLine2,
+                 City = pDTO.City,
+                 Zip = pDTO.Zip,
             };
             }
         public static OrganizationDTO ToDataTransferObjects(OrganizationBO pBO)
@@ -106,17 +110,18 @@ namespace Epi.Web.Common.ObjectMapping
                 ExitText = pBO.ExitText,
                 OrganizationName = pBO.OrganizationName,
                 DepartmentName = pBO.DepartmentName,
-                SurveyType =pBO.SurveyType,
+                SurveyType = pBO.SurveyType,
                 ClosingDate = pBO.ClosingDate,
                 IsDraftMode = pBO.IsDraftMode,
                 StartDate = pBO.StartDate,
-                
+
                 UserPublishKey = pBO.UserPublishKey
 
-               
+
 
             };
         }
+
         public static List<SurveyInfoDTO> ToDataTransferObject(List<SurveyInfoBO> pSurveyInfoList)
         {
             List<SurveyInfoDTO> result = new List<SurveyInfoDTO>();
@@ -126,6 +131,25 @@ namespace Epi.Web.Common.ObjectMapping
             };
 
             return result;
+        }
+
+        public static CacheDependencyDTO ToDataTransferObject(CacheDependencyBO pBO)
+        {
+            return new CacheDependencyDTO
+            {
+                SurveyId = pBO.SurveyId,
+                LastUpdate = pBO.LastUpdate
+            };
+        }
+
+        public static List<CacheDependencyDTO> ToDataTransferObject(List<CacheDependencyBO> pSurveyInfoList)
+        {
+            List<CacheDependencyDTO> list = new List<CacheDependencyDTO>();
+            foreach (CacheDependencyBO surveyInfo in pSurveyInfoList)
+            {
+                list.Add(ToDataTransferObject(surveyInfo));
+            };
+            return list;
         }
 
         /// <summary>
@@ -298,5 +322,19 @@ namespace Epi.Web.Common.ObjectMapping
             return PassCodeDTO;
             }
 
+
+        public static List<StateDTO> ToStateDTO(List<StateBO> list)
+            {
+            List<StateDTO>  DTOList = new List<StateDTO>();
+           foreach (var item in list){
+
+           StateDTO StateDTO = new StateDTO();
+           StateDTO.StateCode = item.StateCode;
+           StateDTO.StateId = item.StateId; 
+           StateDTO.StateName = item.StateName;
+           DTOList.Add(StateDTO);
+               }
+           return DTOList;
+            }
     }
 }

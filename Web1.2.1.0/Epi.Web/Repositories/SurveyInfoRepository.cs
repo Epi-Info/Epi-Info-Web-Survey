@@ -102,7 +102,34 @@ namespace Epi.Web.MVC.Repositories
                 throw ex;
             }
         }
-
+        public SurveyControlsResponse GetSurveyControlList(SurveyControlsRequest pRequest)
+            {
+            try
+                {
+                SurveyControlsResponse ControlListObj = _iDataService.GetSurveyControlList(pRequest);
+                return ControlListObj;
+                }
+            catch (FaultException<CustomFaultException> cfe)
+                {
+                throw cfe;
+                }
+            catch (FaultException fe)
+                {
+                throw fe;
+                }
+            catch (CommunicationException ce)
+                {
+                throw ce;
+                }
+            catch (TimeoutException te)
+                {
+                throw te;
+                }
+            catch (Exception ex)
+                {
+                throw ex;
+                }
+            }
         #region stubcode
             public List<Common.DTO.SurveyInfoDTO> GetList(Criterion criterion = null)
             {

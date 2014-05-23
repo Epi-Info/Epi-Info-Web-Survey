@@ -17,6 +17,12 @@ namespace Epi.Web.Common.BusinessObject
         private string _FirstName;
         private string _LastName;
         private string _PhoneNumber;
+        private string _AdressLine1;
+        private string _AdressLine2;
+        private string _City;
+        private int _StateId;
+        private string _Zip;
+        private int _AddressId;
         [DataMember]
         public string AdminEmail
             {
@@ -67,5 +73,41 @@ namespace Epi.Web.Common.BusinessObject
             get { return _PhoneNumber; }
             set { _PhoneNumber = value; }
             }
+         [DataMember]
+          public string AdressLine1
+              {
+              get { return _AdressLine1; }
+              set { _AdressLine1 = value; }
+              }
+         [DataMember]
+          public string AdressLine2
+              {
+              get { return _AdressLine2; }
+              set { _AdressLine2 = value; }
+              }
+         [DataMember]
+          public string City
+              {
+              get { return _City; }
+              set { _City = value; }
+              }
+         [DataMember]
+         public int StateId
+              {
+              get { return _StateId; }
+              set { _StateId = value; }
+              }
+         [DataMember]
+          public string Zip
+              {
+              get { return _Zip; }
+              set { _Zip = value; }
+              }
+         [DataMember]
+         public int AddressId
+             {
+             get { return _AddressId; }
+             set { _AddressId = value; }
+             }
         }
     }
