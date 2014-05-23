@@ -55,7 +55,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Account.cs" />
     <Compile Include="Admin.cs" />
+    <Compile Include="CacheDependencyInfo.cs" />
     <Compile Include="Utility.cs" />
     <Compile Include="Organization.cs" />
     <Compile Include="Publisher.cs" />

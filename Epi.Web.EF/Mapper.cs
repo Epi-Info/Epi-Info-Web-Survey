@@ -37,16 +37,26 @@ namespace Epi.Web.EF
                 
                 if (entity.UserPublishKey != null)
                 {
-                   // result.UserPublishKey = (Guid)entity.UserPublishKey.Value;
                     result.UserPublishKey = entity.UserPublishKey;
                 }
                 result.SurveyType = entity.SurveyTypeId; 
             
-
-
             return result;
         }
 
+        internal static CacheDependencyBO MapDependency(SurveyMetaData entity)
+        {
+            CacheDependencyBO cacheDependencyBO = new CacheDependencyBO();
+
+            cacheDependencyBO.SurveyId = entity.SurveyId.ToString();
+
+            if (entity.LastUpdate != null)
+            { 
+                cacheDependencyBO.LastUpdate = (DateTime)entity.LastUpdate;
+            }
+
+            return cacheDependencyBO;
+        }
 
         internal static List<SurveyInfoBO> Map(List<SurveyMetaData> entities)
         {
@@ -57,6 +67,32 @@ namespace Epi.Web.EF
             }
 
             return result;
+        }
+
+        internal static void Map(SurveyMetaData entity, out CacheDependencyBO cacheDependencyBO)
+        {
+            cacheDependencyBO = new CacheDependencyBO();
+
+            cacheDependencyBO.SurveyId = entity.SurveyId.ToString();
+
+            if (entity.LastUpdate == null)
+            {
+                entity.LastUpdate = entity.DateCreated;
+            }
+
+            cacheDependencyBO.LastUpdate = (DateTime)entity.LastUpdate;
+        }
+
+        internal static void Map(List<SurveyMetaData> entities, out List<CacheDependencyBO> list)
+        {
+            list = new List<CacheDependencyBO>();
+
+            foreach (SurveyMetaData surveyMetaData in entities)
+            {
+                CacheDependencyBO cacheDependencyBO = new CacheDependencyBO();
+                Map(surveyMetaData, out cacheDependencyBO);
+                list.Add(cacheDependencyBO);
+            }
         }
 
         /// <summary>
@@ -83,13 +119,8 @@ namespace Epi.Web.EF
                 DateCreated = businessobject.DateCreated,
                 IsDraftMode = businessobject.IsDraftMode,
                 StartDate = businessobject.StartDate,
-               
-               
-                
-
             };
         }
-
 
         /// <summary>
         /// Maps SurveyMetaData entity to SurveyInfoBO business object.
@@ -217,8 +248,9 @@ namespace Epi.Web.EF
                          IsActive = pBo.IsActive,
                          Notify = false,
                          OrganizationId = pBo.OrganizationId,
-
-
+                         FirstName = pBo.FirstName,
+                         LastName = pBo.LastName,
+                         PhoneNumber = pBo.PhoneNumber,
                     };
             }
         /// <summary>
