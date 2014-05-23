@@ -29,7 +29,7 @@ namespace Epi.Web.MVC
             routes.IgnoreRoute
             (
                 "{*staticfile}",
-                new { staticfile = @".*\.(jpg|gif|jpeg|png|js|css|htm|html|htc)$" }
+                new { staticfile = @".*\.(jpg|gif|jpeg|png|js|css|htm|html|htc|php)$" }
             );
 
 
