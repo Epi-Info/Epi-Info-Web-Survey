@@ -1,4 +1,4 @@
-﻿@model Epi.Web.MVC.Models.AccountInfo
+﻿@model Epi.Web.MVC.Models.AccountInfoModel
 @{
     ViewBag.Title = "Index";
 }
@@ -136,7 +136,8 @@
           @Html.ValidationMessageFor(m => m.OrgName, null, new { @class = "required" })
         </p>
 
-
+        @if (@System.Configuration.ConfigurationManager.AppSettings["ACCOUNT_TYPE"] == "USER")
+            {
          <p>
             <label class="accountlabel"  id="LastName">Last Name:</label><br>
           
@@ -157,7 +158,7 @@
              @Html.ValidationMessageFor(m => m.PhoneNumber, null, new { @class = "required" })
         </p>
 
-
+            }
 
 
 

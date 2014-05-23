@@ -44,7 +44,8 @@ namespace Epi.Web.MVC.Controllers
            ViewBag.Version = version;
            string filepath = Server.MapPath("~\\Content\\Text\\TermOfUse.txt");
            string content = string.Empty;
-           AccountInfo Obj = new AccountInfo();
+           AccountInfoModel Model = new AccountInfoModel();
+          // Model.AccountType = ConfigurationManager.AppSettings["ACCOUNT_TYPE"];
            try
                {
                using (var stream = new StreamReader(filepath))
@@ -57,15 +58,15 @@ namespace Epi.Web.MVC.Controllers
  
                }
          ViewData["TermOfUse"] = content;
-           return View(Obj);
+         return View(Model);
         }
         [HttpPost]
 
-        public ActionResult Index(Epi.Web.MVC.Models.AccountInfo AccountInfo) 
+        public ActionResult Index(Epi.Web.MVC.Models.AccountInfoModel AccountInfo) 
             {
             string filepath = Server.MapPath("\\Content\\Text\\TermOfUse.txt");
             string content = string.Empty;
-
+            string AccountType = ConfigurationManager.AppSettings["ACCOUNT_TYPE"];
             string ApplicantValidation = ConfigurationManager.AppSettings["APPLICANT_VALIDATION_IS_ENABLED"];
             try
                 {
@@ -100,9 +101,16 @@ namespace Epi.Web.MVC.Controllers
                 OrganizationDTO.Organization = AccountInfo.OrgName;
 
                 OrganizationDTO.OrganizationKey = OrgKey.ToString();
-                Request.AccountType = ConfigurationManager.AppSettings["ACCOUNT_TYPE"];
+                Request.AccountType = AccountType;
                 Request.Organization = OrganizationDTO;
                 Request.Admin = AdminDTO;
+                if (AccountType.ToUpper() !="USER")
+                    {
+                    this.ModelState.Remove("LastName");
+                    this.ModelState.Remove("FirstName");
+                    this.ModelState.Remove("PhoneNumber");
+                  
+                    }
 
                 if(ModelState.IsValid){
 
@@ -122,8 +130,14 @@ namespace Epi.Web.MVC.Controllers
                     }
                 else
                     {
-                    ModelState.AddModelError("Error", "This organization name and/or email address already exists.");
-                   
+                    if (AccountType.ToUpper() == "USER")
+                        {
+                        ModelState.AddModelError("Error", "This organization name and/or email address already exists.");
+                        }
+                    else
+                        {
+                        ModelState.AddModelError("Error", "This organization name already exists.");
+                        }
                     return View(AccountInfo);
                     }
 

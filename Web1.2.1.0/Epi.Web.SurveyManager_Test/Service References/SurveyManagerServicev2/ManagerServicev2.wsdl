@@ -7,7 +7,6 @@
       <xsd:import schemaLocation="http://localhost:22587/Epi.Web.ServiceHost/SurveyManagerServiceV2.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import schemaLocation="http://localhost:22587/Epi.Web.ServiceHost/SurveyManagerServiceV2.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
       <xsd:import schemaLocation="http://localhost:22587/Epi.Web.ServiceHost/SurveyManagerServiceV2.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/Epi.Web.Common.DTO" />
-      <xsd:import schemaLocation="http://localhost:22587/Epi.Web.ServiceHost/SurveyManagerServiceV2.svc?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/System.Collections.Generic" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IManagerServiceV2_PublishSurvey_InputMessage">
@@ -127,6 +126,15 @@
   <wsdl:message name="IManagerServiceV2_SetSurveyAnswer_CustomFaultExceptionFault_FaultMessage">
     <wsdl:part xmlns:q13="http://www.yourcompany.com/types/" name="detail" element="q13:CustomFaultException" />
   </wsdl:message>
+  <wsdl:message name="IManagerServiceV2_GetSurveyControlList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSurveyControlList" />
+  </wsdl:message>
+  <wsdl:message name="IManagerServiceV2_GetSurveyControlList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSurveyControlListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IManagerServiceV2_GetSurveyControlList_CustomFaultExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q14="http://www.yourcompany.com/types/" name="detail" element="q14:CustomFaultException" />
+  </wsdl:message>
   <wsdl:portType name="IManagerServiceV2">
     <wsdl:operation name="PublishSurvey">
       <wsdl:input wsaw:Action="http://tempuri.org/IManagerService/PublishSurvey" message="tns:IManagerServiceV2_PublishSurvey_InputMessage" />
@@ -192,6 +200,11 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IManagerServiceV2/SetSurveyAnswer" message="tns:IManagerServiceV2_SetSurveyAnswer_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IManagerServiceV2/SetSurveyAnswerResponse" message="tns:IManagerServiceV2_SetSurveyAnswer_OutputMessage" />
       <wsdl:fault wsaw:Action="http://tempuri.org/IManagerServiceV2/SetSurveyAnswerCustomFaultExceptionFault" name="CustomFaultExceptionFault" message="tns:IManagerServiceV2_SetSurveyAnswer_CustomFaultExceptionFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSurveyControlList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IManagerServiceV2/GetSurveyControlList" message="tns:IManagerServiceV2_GetSurveyControlList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IManagerServiceV2/GetSurveyControlListResponse" message="tns:IManagerServiceV2_GetSurveyControlList_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IManagerServiceV2/GetSurveyControlListCustomFaultExceptionFault" name="CustomFaultExceptionFault" message="tns:IManagerServiceV2_GetSurveyControlList_CustomFaultExceptionFault_FaultMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IManagerServiceV2" type="tns:IManagerServiceV2">
@@ -342,6 +355,18 @@
     </wsdl:operation>
     <wsdl:operation name="SetSurveyAnswer">
       <soap:operation soapAction="http://tempuri.org/IManagerServiceV2/SetSurveyAnswer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="CustomFaultExceptionFault">
+        <soap:fault use="literal" name="CustomFaultExceptionFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetSurveyControlList">
+      <soap:operation soapAction="http://tempuri.org/IManagerServiceV2/GetSurveyControlList" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

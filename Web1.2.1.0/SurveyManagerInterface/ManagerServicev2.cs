@@ -45,6 +45,31 @@ namespace Epi.Web.WCF.SurveyService
             }
 
 
-         
+        public SurveyControlsResponse GetSurveyControlList(SurveyControlsRequest pRequestMessage) { 
+            
+            SurveyControlsResponse SurveyControlsResponse = new SurveyControlsResponse();
+
+            try
+                {
+
+
+                Epi.Web.Interfaces.DataInterfaces.ISurveyInfoDao ISurveyInfoDao = new EF.EntitySurveyInfoDao();
+                Epi.Web.BLL.SurveyInfo Implementation = new Epi.Web.BLL.SurveyInfo(ISurveyInfoDao);
+                SurveyControlsResponse = Implementation.GetSurveyControlList(pRequestMessage.SurveyId);
+                
+                }
+            catch (Exception ex)
+                {
+                SurveyControlsResponse.Message = "Error";
+                throw ex;
+                }
+
+
+
+
+
+
+            return SurveyControlsResponse;
+            }
         }
     }

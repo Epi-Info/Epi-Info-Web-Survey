@@ -166,31 +166,74 @@ namespace Epi.Web.BLL
               }
           public string CreateAccount(string AccountType, AdminBO AdminBO, OrganizationBO OrganizationBO) 
               {
-              bool IsOrgExists = false;
-              bool IsAdminExists = false;
+              bool OrgExists = false;
+              bool AdminExists = false;
               string Message = "";
-              IsOrgExists = this.OrganizationNameExists(OrganizationBO.Organization, OrganizationBO.OrganizationKey, "");
-              IsAdminExists = this.AdminEmailExists(AdminBO.AdminEmail.ToString());
+              OrgExists = this.OrganizationNameExists(OrganizationBO.Organization, OrganizationBO.OrganizationKey, "");
+              AdminExists = this.AdminEmailExists(AdminBO.AdminEmail.ToString());
+              if (AdminExists)
+                  {
+                  var AdminOrganization = "";
+                  
+                  }
               var Organization = OrganizationBO;
               var Admin = AdminBO;
                   switch (AccountType.ToUpper())
                         {
                         case "USER":   //The combination of Admin email and organization name should  be unique 
-                            if (!IsOrgExists && !IsAdminExists)
+                            try
                                 {
-                                InsertOrganizationInfo(Organization);
-                                var OrganizationKey = Epi.Web.Common.Security.Cryptography.Decrypt(Organization.OrganizationKey);
-                                OrganizationBO OrgBO = GetOrganizationByKey(OrganizationBO.OrganizationKey);
 
-                                Admin.OrganizationId = OrgBO.OrganizationId;
-                                InsertAdminInfo(Admin, Organization);
-                                Message = "Success";
-                                
+                                if (!OrgExists && !AdminExists)
+                                    {
+                                    InsertOrganizationInfo(Organization);
+                                    var OrganizationKey = Epi.Web.Common.Security.Cryptography.Decrypt(Organization.OrganizationKey);
+                                    OrganizationBO OrgBO = GetOrganizationByKey(OrganizationKey);
+
+                                    Admin.OrganizationId = OrgBO.OrganizationId;
+                                    InsertAdminInfo(Admin, Organization);
+                                    Message = "Success";
+
+                                    }
+                                else 
+                                    {
+                                    Message = "Error";
+                                    
+                                    
+                                    }
+
+                               
                                 }
-
-
+                            catch (Exception ex)
+                            {
+                              Message = "Error";
+                               throw ex;
+                              }
                             break;
                         case "ORGANIZATION"://Only the organization name should be unique
+                            try {
+                            if (!OrgExists)
+                                {
+                                    InsertOrganizationInfo(Organization);
+                                    var OrganizationKey = Epi.Web.Common.Security.Cryptography.Decrypt(Organization.OrganizationKey);
+                                    OrganizationBO OrgBO = GetOrganizationByKey(OrganizationKey);
+
+                                    Admin.OrganizationId = OrgBO.OrganizationId;
+                                    InsertAdminInfo(Admin, Organization);
+                                    Message = "Success";
+
+                                }
+                            else
+                                {
+                                Message = "Error";
+
+
+                                }
+                                }
+                            catch (Exception ex)
+                            {
+                            throw ex;
+                              }
                             break;
                         }
                   return Message;
