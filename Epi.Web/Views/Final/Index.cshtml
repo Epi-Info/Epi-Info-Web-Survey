@@ -90,7 +90,7 @@
     </div>
 <div class="success" style="margin:1em;">
     <div class="image"><img src="@Url.Content("~/Content/images/button_check.png")" style="vertical-align: middle; padding-right: 10px;" alt=""/></div>
-    <div class="message">
+    <div class="message" style="float:left !important; width: 80% !important;">
         @if(string.IsNullOrWhiteSpace(Model.ExitText)) 
         {
             @System.Configuration.ConfigurationManager.AppSettings["SURVEY_SUBMISSION_MESSAGE"];
@@ -99,6 +99,9 @@
         {
             @Html.Raw(@Model.ExitText);
         }
+    </div>
+    <div style="float:right; text-align:right;">
+        <button   id="Print"class="exitsurvey" type="button"  name="Printbutton" value="Print" style="height:30px; padding: 3px 5px 3px 5px; vertical-align:bottom;" >Print</button>
     </div>
     <div style="clear:both;"></div>
 </div>
@@ -123,7 +126,7 @@
                         <p style="text-align:center; font-size:9pt;">Survey Closing Date: @string.Format("{0:dddd, MMMM d, yyyy}", Model.ClosingDate)</p>
                }
                
-              <button   id="Print"class="exitsurvey" type="button"  name="Printbutton" value="Print" style="height:30px; padding: 3px 5px 3px 5px; vertical-align:bottom;" >Print</button>
+              
                 
            </div>
      	<input type="hidden"  name="is_print_action" value="false" />
