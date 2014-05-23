@@ -14,7 +14,7 @@ using System.Windows.Shapes;
 using System.Xml;
 using System.ServiceModel;
 using Epi.Web.Common.Exception;
-
+using System.Configuration;
 namespace Epi.Web.SurveyManager.Client
 {
     /// <summary>
@@ -22,6 +22,7 @@ namespace Epi.Web.SurveyManager.Client
     /// </summary>
     public partial class Page_ManageSurvey : Page
     {
+        
         public Page_ManageSurvey()
         {
             InitializeComponent();
@@ -34,8 +35,16 @@ namespace Epi.Web.SurveyManager.Client
 
         private void DownloadSurveyInfoButton_Click(object sender, RoutedEventArgs e)
         {
-            SurveyManagerService.ManagerServiceClient client = ServiceClient.GetClient();
+            
+            //if (ServiceVersion == "V1")
+            //    {
+            //    SurveyManagerService.ManagerServiceClient client = ServiceClient.GetClient();
+            //    }
 
+            //else if (ServiceVersion == "V2")
+            //    {
+            //    SurveyManagerServiceV2.ManagerServiceV2Client client = ServiceClient.GetClientV2();
+            //    }
             Epi.Web.Common.Message.SurveyInfoRequest Request = new Epi.Web.Common.Message.SurveyInfoRequest();
 
             if (!string.IsNullOrEmpty(this.SurveyCriteria_SurveyId.Text.Trim()))
@@ -87,6 +96,14 @@ namespace Epi.Web.SurveyManager.Client
             this.datePicker2.SelectedDate = DateTime.Now;
             try
             {
+
+
+
+            int ServiceVersion = ServiceClient.GetServiceVersion();
+
+            if (ServiceVersion == 1)
+                {
+                SurveyManagerService.ManagerServiceClient client = ServiceClient.GetClient();
                 Epi.Web.Common.Message.SurveyInfoResponse Result = client.GetSurveyInfo(Request);
                 SurveyInfoList = Result.SurveyInfoList;
                 SearchResultListBox.Items.Clear();
@@ -95,15 +112,44 @@ namespace Epi.Web.SurveyManager.Client
 
                 SurveyInfoResponseTextBox.AppendText(string.Format("{0} - records. \n\n", Result.SurveyInfoList.Count));
                 foreach (Epi.Web.Common.DTO.SurveyInfoDTO SurveyInfo in SurveyInfoList)
-                {
+                    {
                     //SurveyInfoResponseTextBox.AppendText(string.Format("{0} - {1} - {2}\n", SurveyInfo.SurveyId, SurveyInfo.SurveyName, SurveyInfo.ClosingDate));
                     //System.Collections.Generic.KeyValuePair<string, string> kvp = new KeyValuePair<string, string>(SurveyInfo.SurveyId,string.Format("{0} - {1} - {2}\n", SurveyInfo.SurveyId, SurveyInfo.SurveyName, SurveyInfo.ClosingDate));
 
                     SearchResultListBox.Items.Add(string.Format("{0} - {1} - {2}\n", SurveyInfo.SurveyId, SurveyInfo.SurveyName, SurveyInfo.ClosingDate));
-            
-                   
-                    
+
+
+
+                    }
                 }
+
+            else if (ServiceVersion == 2)
+                {
+                SurveyManagerServiceV2.ManagerServiceV2Client client = ServiceClient.GetClientV2();
+                Epi.Web.Common.Message.SurveyInfoResponse Result = client.GetSurveyInfo(Request);
+                SurveyInfoList = Result.SurveyInfoList;
+                SearchResultListBox.Items.Clear();
+
+
+
+                SurveyInfoResponseTextBox.AppendText(string.Format("{0} - records. \n\n", Result.SurveyInfoList.Count));
+                foreach (Epi.Web.Common.DTO.SurveyInfoDTO SurveyInfo in SurveyInfoList)
+                    {
+                    //SurveyInfoResponseTextBox.AppendText(string.Format("{0} - {1} - {2}\n", SurveyInfo.SurveyId, SurveyInfo.SurveyName, SurveyInfo.ClosingDate));
+                    //System.Collections.Generic.KeyValuePair<string, string> kvp = new KeyValuePair<string, string>(SurveyInfo.SurveyId,string.Format("{0} - {1} - {2}\n", SurveyInfo.SurveyId, SurveyInfo.SurveyName, SurveyInfo.ClosingDate));
+
+                    SearchResultListBox.Items.Add(string.Format("{0} - {1} - {2}\n", SurveyInfo.SurveyId, SurveyInfo.SurveyName, SurveyInfo.ClosingDate));
+
+
+
+                    }
+                }
+
+
+
+
+
+              
             }
             catch (FaultException<CustomFaultException> cfe)
             {
@@ -197,7 +243,7 @@ namespace Epi.Web.SurveyManager.Client
             {
                 SurveyInfoResponseTextBox.Document.Blocks.Clear();
 
-                SurveyManagerService.ManagerServiceClient client = ServiceClient.GetClient();
+               
 
                 Epi.Web.Common.Message.SurveyInfoRequest Request = new Epi.Web.Common.Message.SurveyInfoRequest();
                 Request.Action = "Update";
@@ -257,19 +303,26 @@ namespace Epi.Web.SurveyManager.Client
 
                 try
                 {
+
+                int ServiceVersion = ServiceClient.GetServiceVersion();
+
+                if (ServiceVersion == 1)
+                    {
+                    SurveyManagerService.ManagerServiceClient client = ServiceClient.GetClient();
                     Epi.Web.Common.Message.SurveyInfoResponse Result = client.SetSurveyInfo(Request);
 
-
-                   // SurveyInfoResponseTextBox.AppendText("Succefully updated survey:");
                     SurveyInfoResponseTextBox.AppendText(Result.Message);
+                    }
 
-                    //SurveyInfoResponseTextBox.AppendText(Result.PublishInfo.IsPulished.ToString());
-                    //SurveyInfoResponseTextBox.AppendText("\nURL: ");
-                    //SurveyInfoResponseTextBox.AppendText(Result.PublishInfo.URL);
-                    //SurveyInfoResponseTextBox.AppendText("\nStatus Text: ");
-                    //SurveyInfoResponseTextBox.AppendText(Result.PublishInfo.StatusText);
+                else if (ServiceVersion == 2)
+                    {
+                    SurveyManagerServiceV2.ManagerServiceV2Client client = ServiceClient.GetClientV2();
+                    Epi.Web.Common.Message.SurveyInfoResponse Result = client.SetSurveyInfo(Request);
 
-                    
+                    SurveyInfoResponseTextBox.AppendText(Result.Message);
+                    }
+
+ 
 
                 }
                 catch (FaultException<CustomFaultException> cfe)

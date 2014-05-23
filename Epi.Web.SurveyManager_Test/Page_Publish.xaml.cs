@@ -15,6 +15,7 @@ using System.Xml;
 using System.ServiceModel;
 using Epi.Web.Common.Exception;
 using System.Text.RegularExpressions;
+using System.Configuration;
 
 namespace Epi.Web.SurveyManager.Client
 {
@@ -25,6 +26,7 @@ namespace Epi.Web.SurveyManager.Client
     {
         String URL;
         public Guid UserPublishKey;
+        
         public Page_Publish()
         {
             InitializeComponent();
@@ -41,7 +43,7 @@ namespace Epi.Web.SurveyManager.Client
             ServiceResponseTextBox.Document.Blocks.Clear();
             this.OpenURLButton.IsEnabled = false;
 
-            SurveyManagerService.ManagerServiceClient client = ServiceClient.GetClient();
+           // SurveyManagerService.ManagerServiceClient client = ServiceClient.GetClient();
 
             Epi.Web.Common.Message.PublishRequest Request = new Epi.Web.Common.Message.PublishRequest();
             if (this.datePicker1.SelectedDate == null)
@@ -90,6 +92,13 @@ namespace Epi.Web.SurveyManager.Client
             Request.SurveyInfo.OrganizationKey = gOrganizationkey;
             try
             {
+
+
+            int ServiceVersion =   ServiceClient.GetServiceVersion();
+
+            if (ServiceVersion == 1)
+                {
+                SurveyManagerService.ManagerServiceClient client = ServiceClient.GetClient();
                 Epi.Web.Common.Message.PublishResponse Result = client.PublishSurvey(Request);
 
                 passOrganizationKey.Password = string.Empty;
@@ -103,6 +112,31 @@ namespace Epi.Web.SurveyManager.Client
                 ServiceResponseTextBox.AppendText("\n User Publish Key: ");
                 ServiceResponseTextBox.AppendText(UserPublishKey.ToString());
                 this.OpenURLButton.IsEnabled = Result.PublishInfo.IsPulished;
+                }
+
+            else if (ServiceVersion == 2)
+                {
+                SurveyManagerServiceV2.ManagerServiceV2Client client = ServiceClient.GetClientV2();
+                Epi.Web.Common.Message.PublishResponse Result = client.PublishSurvey(Request);
+
+                passOrganizationKey.Password = string.Empty;
+                URL = Result.PublishInfo.URL;
+                ServiceResponseTextBox.AppendText("is published: ");
+                ServiceResponseTextBox.AppendText(Result.PublishInfo.IsPulished.ToString());
+                ServiceResponseTextBox.AppendText("\nURL: ");
+                ServiceResponseTextBox.AppendText(Result.PublishInfo.URL);
+                ServiceResponseTextBox.AppendText("\nStatus Text: ");
+                ServiceResponseTextBox.AppendText(Result.PublishInfo.StatusText);
+                ServiceResponseTextBox.AppendText("\n User Publish Key: ");
+                ServiceResponseTextBox.AppendText(UserPublishKey.ToString());
+                this.OpenURLButton.IsEnabled = Result.PublishInfo.IsPulished;
+                }
+
+
+
+
+
+             
                 
             }
             catch (FaultException<CustomFaultException> cfe)

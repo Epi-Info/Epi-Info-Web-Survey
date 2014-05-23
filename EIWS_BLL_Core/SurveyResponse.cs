@@ -3,11 +3,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Epi.Web.Common.BusinessObject;
-
+using System.Xml;
+using System.Xml.Linq;
+using System.Configuration;
+using Epi.Web.Common.Message;
+using Epi.Web.Common.ObjectMapping;
+using Epi.Web.Interfaces.DataInterfaces;
+using Epi.Web.Common.Xml;
+using Epi.Web.Common.DTO;
 namespace Epi.Web.BLL
 {
     public class SurveyResponse
     {
+
+        public enum Message
+            {
+              Failed = 1,
+              Success = 2,
+           
+            }
         private Epi.Web.Interfaces.DataInterfaces.ISurveyResponseDao SurveyResponseDao;
 
         public SurveyResponse(Epi.Web.Interfaces.DataInterfaces.ISurveyResponseDao pSurveyResponseDao)
@@ -134,5 +148,148 @@ namespace Epi.Web.BLL
             result = Epi.Web.BLL.Common.GetSurveySize(SurveyResponseBOList, BandwidthUsageFactor, ResponseMaxSize);
             return result;
         }
+
+        private string CreateResponseXml(Epi.Web.Common.Message.PreFilledAnswerRequest request, List<SurveyInfoBO> SurveyBOList)
+            
+            {
+           
+            string ResponseXml;
+          
+            XDocument SurveyXml = new XDocument();
+
+            foreach (var item in SurveyBOList)
+                {
+                SurveyXml = XDocument.Parse(item.XML);
+                }
+             SurveyResponseXML Implementation = new  SurveyResponseXML(request, SurveyXml);
+            ResponseXml = Implementation.CreateResponseDocument(SurveyXml).ToString();
+
+
+            return ResponseXml;
+            }
+        private Dictionary<string, string> ValidateResponse(List<SurveyInfoBO> SurveyBOList,  PreFilledAnswerRequest request)
+            {
+             
+            XDocument SurveyXml = new XDocument();
+            foreach (var item in SurveyBOList)
+                {
+                SurveyXml = XDocument.Parse(item.XML);
+                }
+              Dictionary<string, string> MessageList = new Dictionary<string, string>();
+              Dictionary<string, string> FieldNotFoundList = new Dictionary<string, string>();
+              Dictionary<string, string> WrongFieldTypeList = new Dictionary<string, string>();
+            SurveyResponseXML Implementation = new  SurveyResponseXML(request, SurveyXml);
+            FieldNotFoundList = Implementation.ValidateResponseFileds();
+            WrongFieldTypeList = Implementation.ValidateResponseFiledTypes();
+            MessageList = MessageList.Union(FieldNotFoundList).Union(WrongFieldTypeList).ToDictionary(k => k.Key, v => v.Value);
+            return MessageList;
+
+
+            }
+        private List<SurveyInfoBO> GetSurveyInfo( PreFilledAnswerRequest request)
+            {
+            
+            List<string> SurveyIdList = new List<string>();
+            string SurveyId =request.AnswerInfo.SurveyId.ToString();
+            string OrganizationId = request.AnswerInfo.OrganizationKey.ToString();
+            Guid UserPublishKey = request.AnswerInfo.UserPublishKey;
+            List<SurveyInfoBO> SurveyBOList = new List<SurveyInfoBO>();
+
+
+           
+            SurveyIdList.Add(SurveyId);
+ 
+            Epi.Web.Common.Message.SurveyInfoRequest pRequest = new Epi.Web.Common.Message.SurveyInfoRequest();
+            var criteria = pRequest.Criteria as Epi.Web.Common.Criteria.SurveyInfoCriteria;
+
+             IDaoFactory entityDaoFactory = new EF.EntityDaoFactory();
+             ISurveyInfoDao surveyInfoDao = entityDaoFactory.SurveyInfoDao;
+             SurveyInfo implementation = new  SurveyInfo(surveyInfoDao);
+
+            SurveyBOList = implementation.GetSurveyInfo(SurveyIdList, criteria.ClosingDate, OrganizationId, criteria.SurveyType, criteria.PageNumber, criteria.PageSize);//Default 
+               
+            return SurveyBOList;
+
+            }
+        public  PreFilledAnswerResponse SetSurveyAnswer( PreFilledAnswerRequest request)
+            {
+            string SurveyId = request.AnswerInfo.SurveyId.ToString();
+            string OrganizationId = request.AnswerInfo.OrganizationKey.ToString();
+            Guid UserPublishKey = request.AnswerInfo.UserPublishKey;
+            Dictionary<string, string> ErrorMessageList = new Dictionary<string, string>();
+            PreFilledAnswerResponse response;
+            
+
+            SurveyResponseBO SurveyResponse = new SurveyResponseBO();
+            UserAuthenticationRequestBO UserAuthenticationRequestBO = new  UserAuthenticationRequestBO();
+
+            bool IsValidOrgKeyAndPublishKey = IsSurveyInfoValidByOrgKeyAndPublishKey(SurveyId, OrganizationId, UserPublishKey);
+
+
+            if (IsValidOrgKeyAndPublishKey)
+                {
+                //Get Survey Info (MetaData)
+                List<SurveyInfoBO> SurveyBOList = GetSurveyInfo(request);
+                //Build Survey Response Xml
+
+                string Xml = CreateResponseXml(request, SurveyBOList);
+                //Validate Response values
+
+                ErrorMessageList = ValidateResponse(SurveyBOList, request);
+
+                if (ErrorMessageList.Count() > 0)
+                    {
+                    response = new Epi.Web.Common.Message.PreFilledAnswerResponse();
+                    response.ErrorMessageList = ErrorMessageList;
+                    response.Status = ((Message)1).ToString();
+                    }
+                else
+                    {
+                    //Insert Survey Response
+
+                    SurveyResponse = InsertSurveyResponse( Mapper.ToBusinessObject(Xml, request.AnswerInfo.SurveyId.ToString()));
+
+                    //Save PassCode
+
+                    UserAuthenticationRequestBO =  Mapper.ToBusinessObject(SurveyResponse.ResponseId);
+                    SavePassCode(UserAuthenticationRequestBO);
+
+                    //return Response
+                    string ResponseUrl = ConfigurationManager.AppSettings["ResponseURL"];
+                    response = new  PreFilledAnswerResponse( Mapper.ToDataTransferObjects(UserAuthenticationRequestBO));
+                    response.SurveyResponseUrl = ResponseUrl + UserAuthenticationRequestBO.ResponseId;
+                    response.Status = ((Message)2).ToString(); ;
+
+                    }
+                }
+            else
+                {
+                PassCodeDTO DTOList = new   PassCodeDTO();
+                response = new PreFilledAnswerResponse(DTOList);
+                ErrorMessageList.Add("Keys", "Organization key and/or User publish key are invalid.");
+                response.ErrorMessageList = ErrorMessageList;
+                response.Status = ((Message)1).ToString(); 
+                }
+            return response;
+            }
+        private bool IsSurveyInfoValidByOrgKeyAndPublishKey(string SurveyId, string Orgkey, Guid publishKey)
+            {
+            IDaoFactory entityDaoFactory = new EF.EntityDaoFactory();
+            ISurveyInfoDao surveyInfoDao = entityDaoFactory.SurveyInfoDao;
+
+            string EncryptedKey = Epi.Web.Common.Security.Cryptography.Encrypt(Orgkey.ToString());
+            List<SurveyInfoBO> result = surveyInfoDao.GetSurveyInfoByOrgKeyAndPublishKey(SurveyId.ToString(), EncryptedKey, publishKey);
+
+
+            if (result != null && result.Count > 0)
+                {
+                return true;
+                }
+            else
+                {
+                return false;
+                }
+            }
+        
     }
 }
