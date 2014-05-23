@@ -141,5 +141,34 @@ namespace Epi.Web.EF
             return AdminBO;
             }
 
+        public AdminBO GetAdminEmailByAdminId(string AdminEmail)
+            {
+
+             AdminBO AdminBO = new AdminBO();
+            try
+                {
+                using (var Context = DataObjectFactory.CreateContext())
+                    {
+                    var Query = (from response in Context.Admins
+                                 where response.AdminEmail == AdminEmail
+                                 select new { response.AdminEmail }).Distinct();
+
+
+                    var DataRow = Query.Distinct();
+                    foreach (var Row in DataRow)
+                        {
+
+                        AdminBO  = Mapper.MapAdminEmail(Row.AdminEmail) ;
+
+                        }
+                    }
+                }
+            catch (Exception ex)
+                {
+                throw (ex);
+                }
+            return AdminBO;
+            }
+
         }
     }

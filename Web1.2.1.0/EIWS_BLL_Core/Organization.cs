@@ -92,42 +92,44 @@ namespace Epi.Web.BLL
         /// <param name="key"></param>
         /// <param name="organizationName"></param>
         /// <returns></returns>
-        public bool OrganizationNameExists(string organizationName,string key, string operation)
-        {
+        public bool OrganizationNameExists(string organizationName, string key, string operation)
+            {
 
             bool orgExists = false;
             key = Epi.Web.Common.Security.Cryptography.Encrypt(key);
             List<OrganizationBO> orgBOList = GetOrganizationNames();
             //first find if the whether the organization name exists in the database
             foreach (OrganizationBO oBo in orgBOList)
-            {
-                if (oBo.Organization.ToLower() == organizationName.ToLower())
                 {
-                   orgExists = true;     
+                if (oBo.Organization.ToLower() == organizationName.ToLower())
+                    {
+                    orgExists = true;
+                    }
                 }
-            }
 
             if (operation == "Update")
-            {
+                {
                 //for update if we are updating the organization name to the same value, we should let it pass
                 //so turning the value to false
                 OrganizationBO result = this.OrganizationDao.GetOrganizationInfoByKey(key);
                 if (organizationName.ToLower() == result.Organization.ToLower())
-                {
+                    {
                     orgExists = false;
+                    }
                 }
-            }
 
-          
+
 
             return orgExists;
-        }
+            }
 
         private OrganizationBO GetOrganizationObjByKey(string OrganizationKey)
-        {
+            {
             OrganizationKey = Epi.Web.Common.Security.Cryptography.Encrypt(OrganizationKey);
             OrganizationBO result = this.OrganizationDao.GetOrganizationInfoByKey(OrganizationKey);
             return result;
-        }
+            }
+
+         
     }
 }

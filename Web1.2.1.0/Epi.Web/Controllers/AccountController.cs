@@ -90,6 +90,9 @@ namespace Epi.Web.MVC.Controllers
                 Guid AdminKey = Guid.NewGuid();
 
                 AdminDTO.AdminEmail = AccountInfo.Email;
+                AdminDTO.FirstName = AccountInfo.FirstName;
+                AdminDTO.LastName = AccountInfo.LastName;
+                AdminDTO.PhoneNumber = AccountInfo.PhoneNumber;
                 AdminDTO.IsActive = true;
                 OrganizationDTO.IsEnabled = true;
 
@@ -97,7 +100,7 @@ namespace Epi.Web.MVC.Controllers
                 OrganizationDTO.Organization = AccountInfo.OrgName;
 
                 OrganizationDTO.OrganizationKey = OrgKey.ToString();
-
+                Request.AccountType = ConfigurationManager.AppSettings["ACCOUNT_TYPE"];
                 Request.Organization = OrganizationDTO;
                 Request.Admin = AdminDTO;
 

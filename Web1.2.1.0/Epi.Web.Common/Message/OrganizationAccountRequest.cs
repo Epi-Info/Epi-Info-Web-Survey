@@ -23,6 +23,7 @@ namespace Epi.Web.Common.Message
         public OrganizationDTO Organization;
         [DataMember]
         public AdminDTO Admin;
-
+        [DataMember]
+        public string AccountType;
         }
     }

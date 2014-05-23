@@ -12,6 +12,9 @@ namespace Epi.Web.Common.DTO
        private bool _IsActive;
        private bool _Notify;
        private Guid _AdminId;
+       private string _FirstName;
+       private string _LastName;
+       private string _PhoneNumber;
        public string AdminEmail
            {
            get { return _AdminEmail; }
@@ -40,6 +43,23 @@ namespace Epi.Web.Common.DTO
            {
            get { return _AdminId; }
            set { _AdminId = value; }
+           }
+       public string FirstName
+           {
+           get { return _FirstName; }
+           set { _FirstName = value; }
+           }
+       
+       public string LastName
+           {
+           get { return _LastName; }
+           set { _LastName = value; }
+           }
+      
+       public string PhoneNumber
+           {
+           get { return _PhoneNumber; }
+           set { _PhoneNumber = value; }
            }
        }
     }
