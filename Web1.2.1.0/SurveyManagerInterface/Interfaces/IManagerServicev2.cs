@@ -9,12 +9,12 @@ using Epi.Web.Common.Message;
 using Epi.Web.Common.Exception;
 
 namespace Epi.Web.WCF.SurveyService
-{
-    [ServiceContract]
-    public interface IManagerServicev2
     {
+    [ServiceContract]
+    interface IManagerServiceV2 : IManagerService
+        {
         [OperationContract]
         [FaultContract(typeof(CustomFaultException))]
-        PublishResponse RePublishSurvey(PublishRequest pRequestMessage);
+        PreFilledAnswerResponse SetSurveyAnswer(PreFilledAnswerRequest pRequestMessage);
+        }
     }
-}

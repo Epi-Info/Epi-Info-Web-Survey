@@ -207,12 +207,15 @@ namespace Epi.Web.EF
 
         internal static Admin ToEF(AdminBO pBo)
             {
+            Guid AdminId = Guid.NewGuid();
+            //int id;
+           // int.TryParse(pBo.OrganizationId, out id);
                     return new Admin
                     {
                          AdminEmail = pBo.AdminEmail,
-                         AdminId = pBo.AdminId,
+                         AdminId = AdminId,
                          IsActive = pBo.IsActive,
-                         Notify = pBo.Notify,
+                         Notify = false,
                          OrganizationId = pBo.OrganizationId,
 
 

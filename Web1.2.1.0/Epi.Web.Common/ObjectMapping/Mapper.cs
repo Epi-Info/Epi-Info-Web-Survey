@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using Epi.Web.Common.BusinessObject;
 using Epi.Web.Common.DTO;
 using Epi.Web.Common.Message;
-
+using System;
+using System.Configuration;
 namespace Epi.Web.Common.ObjectMapping
 {
     /// <summary>
@@ -56,9 +57,9 @@ namespace Epi.Web.Common.ObjectMapping
             {
                  AdminEmail = pDTO.AdminEmail,
                  IsActive = pDTO.IsActive,
-                 Notify = pDTO.Notify,
+                // Notify = pDTO.Notify,
                  OrganizationId = pDTO.OrganizationId,
-                 AdminId = pDTO.AdminId
+                 //AdminId = pDTO.AdminId
 
             };
             }
@@ -253,6 +254,48 @@ namespace Epi.Web.Common.ObjectMapping
 
             };
             
+            }
+        public static SurveyResponseBO ToBusinessObject(string Xml , string SurveyId)
+            {
+            Guid SurveyResponseId = Guid.NewGuid();
+            return new SurveyResponseBO
+            {
+
+                SurveyId = SurveyId,
+                ResponseId = SurveyResponseId.ToString(),
+                XML = Xml,
+                DateCreated = DateTime.Now,
+                Status = 2,
+                IsDraftMode = false
+
+            };
+
+
+            }
+
+        public static UserAuthenticationRequestBO ToBusinessObject(string ResponseId)
+            {
+           
+            Guid NewGuid = Guid.NewGuid();
+            return new UserAuthenticationRequestBO
+            {
+
+                PassCode = (NewGuid.ToString()).Substring(0, 4),
+                ResponseId = ResponseId
+
+            };
+            }
+
+        public static PassCodeDTO ToDataTransferObjects(UserAuthenticationRequestBO UserAuthenticationRequestBO)
+            {
+          
+            PassCodeDTO PassCodeDTO = new DTO.PassCodeDTO();
+            PassCodeDTO.PassCode = UserAuthenticationRequestBO.PassCode.ToString();
+            PassCodeDTO.ResponseId =  UserAuthenticationRequestBO.ResponseId;
+
+
+
+            return PassCodeDTO;
             }
 
     }

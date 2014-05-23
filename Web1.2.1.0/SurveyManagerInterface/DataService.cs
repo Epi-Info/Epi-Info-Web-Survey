@@ -551,11 +551,9 @@ namespace Epi.Web.WCF.SurveyService
                    OrganizationBO OrganizationBO = Implementation.GetOrganizationByKey(OrganizationKey);
 
                    Admin.OrganizationId = OrganizationBO.OrganizationId;
-                   ImplementationAdmin.InsertAdminInfo(Admin);
+                   ImplementationAdmin.InsertAdminInfo(Admin, Organization);
 
-                   ImplementationAdmin.NotifyAdminAccountCreation(Admin, Organization);
-                   ImplementationAdmin.EmailApplicant(Admin, Organization);
-
+                   
                    OrgAccountResponse.Message = "Success";
                    }
                else {

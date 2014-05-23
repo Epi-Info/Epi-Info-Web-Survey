@@ -80,11 +80,14 @@ namespace Epi.Web.BLL
 
                }
 
-           public void InsertAdminInfo(AdminBO AdminBO)
+           public void InsertAdminInfo(AdminBO Admin, OrganizationBO Organization)
                {
-                 this.AdminDao.InsertAdmin(AdminBO);
+               
+                 this.AdminDao.InsertAdmin(Admin);
+                 NotifyAdminAccountCreation(Admin, Organization);
+                 EmailApplicant(Admin, Organization);
                }
-           public void NotifyAdminAccountCreation(AdminBO AdminBO , OrganizationBO Organization)
+           private void NotifyAdminAccountCreation(AdminBO AdminBO , OrganizationBO Organization)
                {
                string NotifyAdmin = ConfigurationManager.AppSettings["NOTIFY_ADMIN_IS_ENABLED"];
                string AdminEmail = ConfigurationManager.AppSettings["LOGGING_ADMIN_EMAIL_ADDRESS"];
@@ -113,7 +116,7 @@ namespace Epi.Web.BLL
                      bool success = Epi.Web.Common.Email.EmailHandler.SendMessage(Email);
                    }
                }
-           public void EmailApplicant(AdminBO AdminBO, OrganizationBO Organization)
+           private void EmailApplicant(AdminBO AdminBO, OrganizationBO Organization)
                {
               
                string AdminEmail = ConfigurationManager.AppSettings["LOGGING_ADMIN_EMAIL_ADDRESS"];

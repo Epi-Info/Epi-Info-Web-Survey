@@ -78,6 +78,7 @@
     <Compile Include="DTO\OrganizationDTO.cs" />
     <Compile Include="DTO\PageInfoDTO.cs" />
     <Compile Include="DTO\PassCodeDTO.cs" />
+    <Compile Include="DTO\PreFilledAnswerDTO.cs" />
     <Compile Include="DTO\SurveyAnswerDTO.cs" />
     <Compile Include="Email\Email.cs" />
     <Compile Include="Exception\CustomFaultException.cs" />
@@ -89,6 +90,8 @@
     <Compile Include="Message\OrganizationAccountResponse.cs" />
     <Compile Include="Message\OrganizationRequest.cs" />
     <Compile Include="Message\OrganizationResponse.cs" />
+    <Compile Include="Message\PreFilledAnswerRequest.cs" />
+    <Compile Include="Message\PreFilledAnswerResponse.cs" />
     <Compile Include="Message\UserAuthenticationRequest.cs" />
     <Compile Include="Message\SurveyAnswerRequest.cs" />
     <Compile Include="Message\SurveyAnswerResponse.cs" />
@@ -111,6 +114,7 @@
     <Compile Include="Security\Cryptography.cs" />
     <Compile Include="Security\PasswordGenerator.cs" />
     <Compile Include="Email\EmailHandler.cs" />
+    <Compile Include="Xml\SurveyResponseXML.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
