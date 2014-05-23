@@ -15,6 +15,7 @@ namespace Epi.Web.Common.Xml
         Dictionary<string, string> ResponseDetailList = new Dictionary<string, string>();
         Dictionary<string, string> SurveyFileds = new Dictionary<string, string>();
         IEnumerable<XElement> PageFields;
+        private string RequiredList = "";
 
         public SurveyResponseXML(PreFilledAnswerRequest Request, XDocument SurveyXml) 
             {
@@ -120,6 +121,7 @@ namespace Epi.Web.Common.Xml
             PageRoot = SetResponseValues(PageRoot, xml);
             return xml;
             }
+
         private static XDocument MergeXml(XDocument SavedXml, XDocument CurrentPageResponseXml, int Pagenumber)
             {
 
@@ -173,11 +175,11 @@ namespace Epi.Web.Common.Xml
 
                 PageFields = _FieldsTypeIDs;
 
-                XDocument CurrentPageXml = ToXDocument(CreateResponseXml("", false, i, ""));
+                XDocument CurrentPageXml = ToXDocument(CreateResponseXml("", false, i, i.ToString()));
 
                 if (i == 0)
                     {
-                    XmlResponse = ToXDocument(CreateResponseXml("", true, i, ""));
+                    XmlResponse = ToXDocument(CreateResponseXml("", true, i, i.ToString()));
                     }
                 else
                     {
@@ -185,7 +187,7 @@ namespace Epi.Web.Common.Xml
                     }
                 PageFields = null;
                 }
-
+            XmlResponse.Root.SetAttributeValue("RequiredFieldsList", RequiredList);
             return XmlResponse.ToString();
             }
 
@@ -194,28 +196,53 @@ namespace Epi.Web.Common.Xml
          
             foreach (var Field in this.PageFields)
                 {
-                XmlElement child = xml.CreateElement("ResponseDetail");
-                child.SetAttribute("QuestionName", Field.Attribute("Name").Value);
-                foreach (KeyValuePair<string, string> pair in this.ResponseDetailList)
+                SetRequiredList(Field);
+                if (IsValidType(Field.Attribute("FieldTypeId").Value))
                     {
-                    if (Field.Attribute("Name").Value == pair.Key)
-                        {
+                        XmlElement child = xml.CreateElement("ResponseDetail");
+                        child.SetAttribute("QuestionName", Field.Attribute("Name").Value);
+                        foreach (KeyValuePair<string, string> pair in this.ResponseDetailList)
+                            {
+                            if (Field.Attribute("Name").Value == pair.Key)
+                                {
 
-                        child.InnerText = pair.Value;
-                        break;
-                        }
-                    else
-                        {
-                        child.InnerText = Field.Value;
-                        }
+                                child.InnerText = pair.Value;
+                                break;
+                                }
+                            else
+                                {
+                                child.InnerText = Field.Value;
+                                }
+                            }
+
+                        PageRoot.AppendChild(child);
                     }
-
-                PageRoot.AppendChild(child);
-
                 }
             return PageRoot ;  
             }
+        public void SetRequiredList(XElement _Fields)
+            {
+            bool isRequired = false;
+            string value = _Fields.Attribute("IsRequired").Value;
 
+            if (bool.TryParse(value, out isRequired))
+                {
+                if (isRequired)
+                    {
+                    if (!RequiredList.Contains(_Fields.Attribute("Name").Value))
+                        {
+                        if (RequiredList != "")
+                            {
+                            RequiredList = RequiredList + "," + _Fields.Attribute("Name").Value.ToLower();
+                            }
+                        else
+                            {
+                            RequiredList = _Fields.Attribute("Name").Value.ToLower();
+                            }
+                        }
+                    }
+                }
+            }
         public Dictionary<string, string> ValidateResponseFileds()
             {
            
@@ -352,5 +379,37 @@ namespace Epi.Web.Common.Xml
                 }
             return bol;
             }
+
+
+
+
+        private bool IsValidType( string Type)
+            {
+            bool IsValidType = true;
+            try
+                {
+                switch (Type)
+                    {
+                  
+
+                    case "2"://Label/Title
+                        IsValidType = false;
+                        break;
+                    case "3"://Label
+                        IsValidType = false;
+                        break;
+                   
+                    }
+
+                return IsValidType;
+                }
+            catch
+                {
+                return false;
+
+                }
+
+            }
+
        }
     }
