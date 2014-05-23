@@ -8,12 +8,13 @@
 //------------------------------------------------------------------------------
 
 using System;
+using System.ComponentModel;
+using System.Data.EntityClient;
 using System.Data.Objects;
 using System.Data.Objects.DataClasses;
-using System.Data.EntityClient;
-using System.ComponentModel;
-using System.Xml.Serialization;
+using System.Linq;
 using System.Runtime.Serialization;
+using System.Xml.Serialization;
 
 [assembly: EdmSchemaAttribute()]
 #region EDM Relationship Metadata
@@ -187,6 +188,7 @@ namespace Epi.Web.EF
         private ObjectSet<sysdiagram> _sysdiagrams;
 
         #endregion
+
         #region AddTo Methods
     
         /// <summary>
@@ -246,11 +248,11 @@ namespace Epi.Web.EF
         }
 
         #endregion
+
     }
-    
 
     #endregion
-    
+
     #region Entities
     
     /// <summary>
@@ -283,6 +285,7 @@ namespace Epi.Web.EF
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -407,8 +410,81 @@ namespace Epi.Web.EF
         private global::System.Boolean _Notify;
         partial void OnNotifyChanging(global::System.Boolean value);
         partial void OnNotifyChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String LastName
+        {
+            get
+            {
+                return _LastName;
+            }
+            set
+            {
+                OnLastNameChanging(value);
+                ReportPropertyChanging("LastName");
+                _LastName = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("LastName");
+                OnLastNameChanged();
+            }
+        }
+        private global::System.String _LastName;
+        partial void OnLastNameChanging(global::System.String value);
+        partial void OnLastNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String FirstName
+        {
+            get
+            {
+                return _FirstName;
+            }
+            set
+            {
+                OnFirstNameChanging(value);
+                ReportPropertyChanging("FirstName");
+                _FirstName = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("FirstName");
+                OnFirstNameChanged();
+            }
+        }
+        private global::System.String _FirstName;
+        partial void OnFirstNameChanging(global::System.String value);
+        partial void OnFirstNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String PhoneNumber
+        {
+            get
+            {
+                return _PhoneNumber;
+            }
+            set
+            {
+                OnPhoneNumberChanging(value);
+                ReportPropertyChanging("PhoneNumber");
+                _PhoneNumber = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("PhoneNumber");
+                OnPhoneNumberChanged();
+            }
+        }
+        private global::System.String _PhoneNumber;
+        partial void OnPhoneNumberChanging(global::System.String value);
+        partial void OnPhoneNumberChanged();
 
         #endregion
+
     
         #region Navigation Properties
     
@@ -451,6 +527,7 @@ namespace Epi.Web.EF
         }
 
         #endregion
+
     }
     
     /// <summary>
@@ -477,6 +554,7 @@ namespace Epi.Web.EF
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -531,6 +609,7 @@ namespace Epi.Web.EF
         partial void OnStatusChanged();
 
         #endregion
+
     
         #region Navigation Properties
     
@@ -557,6 +636,7 @@ namespace Epi.Web.EF
         }
 
         #endregion
+
     }
     
     /// <summary>
@@ -581,6 +661,7 @@ namespace Epi.Web.EF
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -635,6 +716,7 @@ namespace Epi.Web.EF
         partial void OnSurveyTypeChanged();
 
         #endregion
+
     
         #region Navigation Properties
     
@@ -661,6 +743,7 @@ namespace Epi.Web.EF
         }
 
         #endregion
+
     }
     
     /// <summary>
@@ -693,6 +776,7 @@ namespace Epi.Web.EF
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -819,6 +903,7 @@ namespace Epi.Web.EF
         partial void OnIsHostOrganizationChanged();
 
         #endregion
+
     
         #region Navigation Properties
     
@@ -867,6 +952,7 @@ namespace Epi.Web.EF
         }
 
         #endregion
+
     }
     
     /// <summary>
@@ -911,6 +997,7 @@ namespace Epi.Web.EF
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -1299,8 +1386,33 @@ namespace Epi.Web.EF
         private global::System.Boolean _IsDraftMode;
         partial void OnIsDraftModeChanging(global::System.Boolean value);
         partial void OnIsDraftModeChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> LastUpdate
+        {
+            get
+            {
+                return _LastUpdate;
+            }
+            set
+            {
+                OnLastUpdateChanging(value);
+                ReportPropertyChanging("LastUpdate");
+                _LastUpdate = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("LastUpdate");
+                OnLastUpdateChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _LastUpdate;
+        partial void OnLastUpdateChanging(Nullable<global::System.DateTime> value);
+        partial void OnLastUpdateChanged();
 
         #endregion
+
     
         #region Navigation Properties
     
@@ -1403,6 +1515,7 @@ namespace Epi.Web.EF
         }
 
         #endregion
+
     }
     
     /// <summary>
@@ -1441,6 +1554,7 @@ namespace Epi.Web.EF
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -1687,6 +1801,7 @@ namespace Epi.Web.EF
         partial void OnIsDraftModeChanged();
 
         #endregion
+
     
         #region Navigation Properties
     
@@ -1767,6 +1882,7 @@ namespace Epi.Web.EF
         }
 
         #endregion
+
     }
     
     /// <summary>
@@ -1795,6 +1911,7 @@ namespace Epi.Web.EF
         }
 
         #endregion
+
         #region Primitive Properties
     
         /// <summary>
@@ -1921,9 +2038,11 @@ namespace Epi.Web.EF
         partial void OndefinitionChanged();
 
         #endregion
+
     
     }
 
     #endregion
+
     
 }

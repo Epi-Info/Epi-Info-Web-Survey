@@ -382,7 +382,7 @@ em { color: red; font-weight: bold; padding-right: .25em; }
 
 /*Buttons & links*/
 
-a.prev:active, a.next:active, a.exitsurvey:active, a.save:active, a.submits:active, .ui-btn-down-submit1, .ui-btn-down-save1
+a.prev:active, a.next:active, a.exitsurvey:active, a.save:active, a.submits:active, .ui-btn-down-submit1, .ui-btn-down-save1, .ui-btn-down-save23, .ui-btn-hover-save23
  {
  cursor: pointer;
  opacity: 0.8;
@@ -487,12 +487,12 @@ a.submits
  background: #e5e5e5;
  background: rgba(255,255,255,0.9);
  width: 80px;
- padding: 0.625em 8px;
+ padding: 0.7em;
  font-size: 8pt;
  font-weight:bold;
  /*height: 26px;*/
  color: #333 !important;
- vertical-align:text-bottom;
+ vertical-align:middle;
  text-decoration: none;
  box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(158,158,158,0.3);
  -o-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(158,158,158,0.3);
@@ -610,6 +610,38 @@ a.login
     background-repeat:no-repeat;
    padding:9px 15px 8px 15px;
   
+  vertical-align:middle;
+    text-decoration:none;
+ }
+ .ui-btn-up-save23, .ui-btn-hover-save23
+ {
+     cursor: pointer;
+     margin: 0px 10px 0 2px !important;
+ border: 1px #4e9689 solid;
+ -moz-border-radius: 4px;
+ -webkit-border-radius: 4px;
+ -khtml-border-radius: 4px;
+ border-radius: 4px;
+ padding: 3px 5px 3px 5px;
+ color:#244640 !important;
+ font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+ /*font-size: 10pt;*/
+ font-weight:bold;
+/* padding-top:10px;*/
+ /*width: 90px;*/
+ border: 1px solid rgba(0,0,0,0.5);
+ background: #d4eab3; 
+ background: rgba(195,255,104,0.6); 
+ background-size:24px 24px;
+ box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
+ -o-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
+ -webkit-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
+ -moz-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
+  background-image: url('../images/save.png');
+    background-position:center center;
+    background-repeat: repeat-x;
+    background-repeat:no-repeat;
+  padding: 1px 5px 3px 5px;
   vertical-align:middle;
     text-decoration:none;
  }
