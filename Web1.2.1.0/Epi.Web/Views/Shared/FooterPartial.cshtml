@@ -4,11 +4,52 @@
         <div id="footleft">
             <span style="font-size: 8pt;">Powered by:</span>
             <img src="@Url.Content("~/Content/images/epi.png")" width="42px" height="42" align="middle" alt="Epi Info 7" />
+                <div id="version" style="font-size: 8pt; margin-top: -17px; display:inline-block; "><span>Version: </span>@ViewBag.Version</div>
+        </div>
+        <div id="footright">
+        @if (System.Configuration.ConfigurationManager.AppSettings["TECHNICAL_SUPPORT_IS_ENABLED"].ToUpper() == "TRUE")
+            {
+            <div id="foothide" style="float:left;font-size: 9pt; margin-right: 20px;line-height: 120%;">
+
+            
+                <strong>Technical Support</strong><br />
+          
+                <img src="@Url.Content("~/Content/images/email1.png")" width="16"  alt="" style="vertical-align:middle;margin-top: -3px;" /> <a href="mailto:@System.Configuration.ConfigurationManager.AppSettings["TECHNICAL_SUPPORT_EMAIL"]">@System.Configuration.ConfigurationManager.AppSettings["TECHNICAL_SUPPORT_EMAIL"]
+
+                </a> <br />
+                <img src="@Url.Content("~/Content/images/phone.png")"  height="14"  alt="" style="vertical-align:middle;margin-top: -6px;" />&nbsp;@System.Configuration.ConfigurationManager.AppSettings["TECHNICAL_SUPPORT_PHONE"]
+
+                 </div>
+            
+                <img src="@Url.Content(@System.Configuration.ConfigurationManager.AppSettings["FOOTER_LOGO_PATH"].ToString())" height="42"  alt=""  />
+                 @* <img src="@Url.Content("~/Content/images/logo_dhhs.gif")" height="42" alt="Department of Health and Human Services"  />*@
+            }
+        else { 
+            
+            <img src="@Url.Content("~/Content/images/cdclogo.png")" height="42"  width="71" alt="Centers for Disease Control and Prevention"  />
+            <img src="@Url.Content("~/Content/images/logo_dhhs.gif")" height="42" alt="Department of Health and Human Services"  />
+            
+            }
+        </div>
+        <div style="clear: both;"></div>
+    </div>
+    
+
+   @* <div id="footer">
+        <div id="footleft">
+            <span style="font-size: 8pt;">Powered by:</span>
+            <img src="@Url.Content("~/Content/images/epi.png")" width="42px" height="42" align="middle" alt="Epi Info 7" />
                 <div style="font-size: 8pt; margin-top: -20px; display: inline-block;"> Version: @ViewBag.Version</div>
         </div>
         <div id="footright">
             <img src="@Url.Content("~/Content/images/cdclogo.png")" height="42"  width="71" alt="Centers for Disease Control and Prevention"  />
             <img src="@Url.Content("~/Content/images/logo_dhhs.gif")" height="42" alt="Department of Health and Human Services"  />
+
+
+
+
+
+
         </div>
         <div style="clear: both;"></div>
-    </div>
+    </div>*@
