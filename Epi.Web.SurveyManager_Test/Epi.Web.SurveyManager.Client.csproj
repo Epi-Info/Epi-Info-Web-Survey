@@ -109,6 +109,9 @@
     <Compile Include="Page_Configuration.xaml.cs">
       <DependentUpon>Page_Configuration.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Page_GetSurveyControls.xaml.cs">
+      <DependentUpon>Page_GetSurveyControls.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Page_ManageSurvey.xaml.cs">
       <DependentUpon>Page_ManageSurvey.xaml</DependentUpon>
     </Compile>
@@ -153,6 +156,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Page_GetSurveyControls.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Page_ManageSurvey.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -192,6 +199,7 @@
     <None Include="Properties\DataSources\Epi.Web.Common.Message.PreFilledAnswerResponse.datasource" />
     <None Include="Properties\DataSources\Epi.Web.Common.Message.PublishResponse.datasource" />
     <None Include="Properties\DataSources\Epi.Web.Common.Message.SurveyAnswerResponse.datasource" />
+    <None Include="Properties\DataSources\Epi.Web.Common.Message.SurveyControlsResponse.datasource" />
     <None Include="Properties\DataSources\Epi.Web.Common.Message.SurveyInfoResponse.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -212,9 +220,6 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\SurveyManagerServiceV2\SurveyManagerServiceV24.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\SurveyManagerServiceV2\SurveyManagerServiceV25.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\SurveyManagerService\ManagerService.wsdl" />

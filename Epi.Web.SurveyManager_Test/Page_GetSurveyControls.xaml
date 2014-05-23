@@ -1,0 +1,39 @@
+﻿<Page x:Class="Epi.Web.SurveyManager.Client.Page_GetSurveyControls"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="600" d:DesignWidth="600"
+	Title="Page_GetSurveyControls">
+
+    <!--<Page.Resources>
+        <my:Boolean x:Key="CanUserAddRows1">True</my:Boolean>
+        <my:Boolean x:Key="CanUserDeleteRows1">True</my:Boolean>
+    </Page.Resources>-->
+    <ScrollViewer HorizontalScrollBarVisibility="Auto">
+        <Grid HorizontalAlignment="Left" VerticalAlignment="Top">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Label FontWeight="Bold" Content="Survey Controls Client" Height="39" HorizontalAlignment="Left" Margin="0,48,0,0" Name="label2" VerticalAlignment="Top" Width="152" />
+            <Button Content="View Download Client" Height="30" HorizontalAlignment="Left" Margin="10,10,0,0" Name="button1" VerticalAlignment="Top" Width="134" Click="button1_Click" />
+            <Button Content="Manage Existing Surveys" Height="30" HorizontalAlignment="Left" Margin="163,10,0,0" Name="ManageSurveyButton" VerticalAlignment="Top" Width="140" Click="ManageSurveyButton_Click" />
+            <Button Content="Add User" Height="30" HorizontalAlignment="Left" Margin="317,10,0,0" Name="AddUser" VerticalAlignment="Top" Width="162" Click="AddUser_Click" />
+            <GroupBox HorizontalAlignment="Left" VerticalAlignment="Top" Background="#FFCC00" FontWeight="Bold" Header="" Margin="13,86,0,0" Name="groupBox2" Width="600" Height="639">
+                <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Height="635">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0*" />
+                        <ColumnDefinition Width="0*" />
+                        <ColumnDefinition Width="54*" />
+                        <ColumnDefinition Width="275*" />
+                    </Grid.ColumnDefinitions>
+                    <Label Content="Survey ID:" Height="28" HorizontalAlignment="Left" Margin="7,12,0,594" Name="label3" Width="126.313" Grid.ColumnSpan="2" Grid.Column="2" />
+                    <TextBox AutoWordSelection="True" Background="White" Height="23" HorizontalAlignment="Left" Margin="11,12,0,0" Name="SurveyId" VerticalAlignment="Top" Width="318" Grid.Column="2" Grid.ColumnSpan="2" />
+                    <Button Content="Get Control Names" Height="23" HorizontalAlignment="Left" Margin="11,75,0,0" Name="button3" VerticalAlignment="Top" Width="318" Grid.Column="2" Click="button3_Click" Grid.ColumnSpan="2" />
+                    <RichTextBox Height="353" HorizontalAlignment="Left" HorizontalScrollBarVisibility="Hidden" Margin="11,115,0,0" Name="ControlsInfo" VerticalAlignment="Top" VerticalScrollBarVisibility="Visible" Width="539" Grid.ColumnSpan="2" Grid.Column="2" />
+                </Grid>
+            </GroupBox>
+        </Grid>
+    </ScrollViewer>
+</Page>
