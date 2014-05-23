@@ -562,31 +562,44 @@ CCE_Context.prototype.setValue = function (pName, pValue) {
 
                 case "yesno":
 
-                    $(Jquery).val(pValue);
-                    cce_Symbol.Value = pValue;
-                    if (pValue == "") 
-                    {
-                        if (!IsHidden) 
-                        {
+                    if (pValue == "") {
+                        if (eval(document.getElementById("IsMobile"))) {
+                            if (!IsHidden) {
+                                $(Jquery).val(null).attr("selected", null);
+                                $(Jquery).selectmenu('refresh', null);
+                                cce_Symbol.Value = null;
+                            }
+                        }
+                        else {
                             $(Jquery).val(null);
+                            cce_Symbol.Value = null;
                         }
-                        cce_Symbol.Value = null;
                     }
-                    else if (pValue) 
-                    {
-                        if (!IsHidden) 
-                        {
+                    else if (pValue) {
+                        if (eval(document.getElementById("IsMobile"))) {
+                            if (!IsHidden) {
+                                $(Jquery).val('1').attr("selected", "Yes");
+                                $(Jquery).selectmenu('refresh', true);
+                                cce_Symbol.Value = true;
+                            }
+                        }
+                        else {
                             $(Jquery).val("1");
+                            cce_Symbol.Value = true;
                         }
-                        cce_Symbol.Value = true;
                     }
-                    else 
-                    {
-                        if (!IsHidden) 
-                        {
-                            $(Jquery).val("0");
+                    else {
+                        if (eval(document.getElementById("IsMobile"))) {
+                            if (!IsHidden) {
+                                $(Jquery).val('0').attr("selected", "No");
+                                $(Jquery).selectmenu('refresh', true);
+                                cce_Symbol.Value = false;
+                            }
                         }
-                        cce_Symbol.Value = false;
+                        else {
+                            $(Jquery).val("0");
+                            cce_Symbol.Value = false;
+                        }
                     }
                     break;
 
@@ -624,23 +637,36 @@ CCE_Context.prototype.setValue = function (pName, pValue) {
                     break;
 
                 case "radiobutton":
-
-                    var RadiofieldName = "." + FieldName;
-                    $(RadiofieldName).each(function (i, obj) {
-                        if ($(this).val() == pValue) {
-                            if (eval(document.getElementById("IsMobile"))) {
-                                if (!IsHidden) {
-                                    $(this).prop('checked', true).checkboxradio('refresh');
-                                }
-                            } else {
+                    if (eval(document.getElementById("IsMobile"))) {
+                        var selector = "input[id='" + FieldName + pValue + "'";
+                        $(selector).prop("checked", true).checkboxradio("refresh");
+                        $("input[type='radio']").attr("checked", true).checkboxradio("refresh"); 
+                    } else {
+                        var RadiofieldName = "." + FieldName;
+                        $(RadiofieldName).each(function (i, obj) {
+                            if ($(this).val() == pValue) {
                                 $(this).prop('checked', true);
                             }
-                        }
-                    });
-
-                    $(Jquery).val(pValue);
+                        });
+                        $(Jquery).val(pValue);
+                    }
                     cce_Symbol.Value = pValue;
+                    break;
 
+                case "commentlegal":
+                case "legalvalues":
+                    if (eval(document.getElementById("IsMobile"))) {
+                        if (!IsHidden) {
+                            $(Jquery).val(pValue).attr("selected", true);
+                            $(Jquery).selectmenu('refresh', true);
+                            cce_Symbol.Value = pValue;
+                        } else {
+                            cce_Symbol.Value = pValue;
+                        }
+                    } else {
+                        $(Jquery).val(pValue);
+                        cce_Symbol.Value = pValue;
+                    }
                     break;
 
                 default:
@@ -1527,8 +1553,9 @@ function CCE_RemoveFromFieldsList(FieldName,ListName) {
          $("#myform")[0].action = currentUrl + "/" + controlOrPage;
          $("#myform")[0].is_goto_action.value = 'true';
          //detach the validation engine as we don't want to validate data to go to another page as directed by check code
-         $('#myform').validationEngine('detach');
+       //  $('#myform').validationEngine('detach');
          $("#myform").submit();
+       
      }
      else 
      {

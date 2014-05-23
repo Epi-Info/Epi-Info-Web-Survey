@@ -84,8 +84,43 @@ namespace Epi.Web.EF
              return AdminList;
             }
         public void InsertAdmin(AdminBO Admin) {
-       
-         
+        // Insert Address 
+        using (var Context = DataObjectFactory.CreateContext())
+            {
+            Address AddressEntity = Mapper.ToAddressEF(Admin);
+
+
+
+            Context.AddToAddresses(AddressEntity);
+
+            Context.SaveChanges();
+
+
+
+            }
+            // Get AddressId
+        try
+            {
+            using (var Context = DataObjectFactory.CreateContext())
+                {
+                var Query = (from Address in Context.Addresses
+                             where Address.AddressLine1 == Admin.AdressLine1 && Address.City == Admin.City && Address.StateProvinceId == Admin.StateId && Address.PostalCode == Admin.Zip   
+                             select new { Address.AddressId }).Distinct();
+
+
+                var DataRow = Query.Distinct();
+                foreach (var Row in DataRow)
+                    {
+
+                    Admin.AddressId = Row.AddressId;
+                    break;
+                    }
+                }
+            }
+        catch (Exception ex)
+            {
+            throw (ex);
+            }
         try
             {
             using (var Context = DataObjectFactory.CreateContext())
@@ -97,7 +132,11 @@ namespace Epi.Web.EF
                 Context.AddToAdmins(AdminEntity);
 
                 Context.SaveChanges();
+
+
+
                 }
+          
             }
         catch (Exception ex)
             {

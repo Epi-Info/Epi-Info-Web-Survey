@@ -29,7 +29,7 @@ namespace Epi.Web.MVC.Controllers
         }
 
         [HttpGet]
-        public ActionResult Index(string surveyId, string final)
+        public ActionResult Index(string surveyId, string final, string responseId)
         {
             
             try
@@ -60,7 +60,7 @@ namespace Epi.Web.MVC.Controllers
                 bool IsMobileDevice = false;
                 IsMobileDevice = this.Request.Browser.IsMobileDevice;
                 Omniture OmnitureObj = Epi.Web.MVC.Utility.OmnitureHelper.GetSettings(SurveyMode, IsMobileDevice);
-
+                ViewBag.ResponseId = responseId; 
                 ViewBag.Omniture = OmnitureObj;
                 return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, surveyInfoModel);
             }
@@ -76,13 +76,19 @@ namespace Epi.Web.MVC.Controllers
         {
             try
             {
-                bool IsMobileDevice = this.Request.Browser.IsMobileDevice;
+                bool isMobileDevice = this.Request.Browser.IsMobileDevice;
 
-                if (IsMobileDevice == false)
+                if (isMobileDevice == false)
                 {
-                    IsMobileDevice = Epi.Web.MVC.Utility.SurveyHelper.IsMobileDevice(this.Request.UserAgent.ToString());
+                    isMobileDevice = Epi.Web.MVC.Utility.SurveyHelper.IsMobileDevice(this.Request.UserAgent.ToString());
                 }
-
+                if (!string.IsNullOrEmpty(this.Request.Form["is_print_action"]) && this.Request.Form["is_print_action"].ToString().Equals("true", StringComparison.OrdinalIgnoreCase))
+                    {
+                    string ResponseId = this.Request.Form["ResponseId"];
+                    ActionResult actionResult = RedirectToAction("Index", "Print", new { responseId = ResponseId , FromFinal = true});
+                    return actionResult;
+                    }
+                FormsAuthentication.SignOut();
                 FormsAuthentication.SetAuthCookie("BeginSurvey", false);
                 Guid responseId = Guid.NewGuid();
                 Epi.Web.Common.DTO.SurveyAnswerDTO SurveyAnswer = _isurveyFacade.CreateSurveyAnswer(surveyId, responseId.ToString());
@@ -99,7 +105,7 @@ namespace Epi.Web.MVC.Controllers
 
                 SurveyInfoModel surveyInfoModel = GetSurveyInfo(SurveyAnswer.SurveyId);
                 XDocument xdoc = XDocument.Parse(surveyInfoModel.XML);
-                MvcDynamicForms.Form form = _isurveyFacade.GetSurveyFormData(SurveyAnswer.SurveyId, 1, SurveyAnswer, IsMobileDevice);
+                MvcDynamicForms.Form form = _isurveyFacade.GetSurveyFormData(SurveyAnswer.SurveyId, 1, SurveyAnswer, isMobileDevice);
 
                 var _FieldsTypeIDs = from _FieldTypeID in
                                      xdoc.Descendants("Field")

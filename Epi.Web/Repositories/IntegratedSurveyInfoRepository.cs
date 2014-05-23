@@ -6,17 +6,16 @@ using Epi.Web.MVC.Repositories.Core;
 using Epi.Web.DataServiceClient;
 using Epi.Web.Common.Message;
 using Epi.Web.Common.Exception;
+using Epi.Web.Utility;
 using System.ServiceModel;
 using Epi.Web.DataServiceClient;
 using System.Web.Caching;
 using System.Configuration;
+
 namespace Epi.Web.MVC.Repositories
 {
     public class IntegratedSurveyInfoRepository : RepositoryBase, ISurveyInfoRepository
     {
-
-
-
         private Epi.Web.WCF.SurveyService.IDataService _iDataService;
 
         public IntegratedSurveyInfoRepository(Epi.Web.WCF.SurveyService.IDataService iDataService)
@@ -24,62 +23,24 @@ namespace Epi.Web.MVC.Repositories
             _iDataService = iDataService;
         }
         
-        /// <summary>
-        /// Calling the proxy client to fetch a SurveyInfoResponse object
-        /// </summary>
-        /// <param name="surveyid"></param>
-        /// <returns></returns>
         public SurveyInfoResponse GetSurveyInfo(SurveyInfoRequest pRequest)
         {
-
             try
             {
-                //SurveyInfoResponse result = Client.GetSurveyInfo(pRequest);
-                //SurveyInfoResponse result = _iDataService.GetSurveyInfo(pRequest);
-                SurveyInfoResponse result =null;
-                string SurveyId = pRequest.Criteria.SurveyIdList[0].ToString();
-                var CacheObj =   HttpRuntime.Cache.Get(SurveyId);
+                string surveyKey = pRequest.Criteria.SurveyIdList[0].ToString();
 
-                int CacheDuration = 0;
-                int.TryParse(ConfigurationManager.AppSettings["CACHE_DURATION"].ToString(), out CacheDuration);
-                string CacheIsOn = ConfigurationManager.AppSettings["CACHE_IS_ON"];//false;
-                string IsCacheSlidingExpiration = ConfigurationManager.AppSettings["CACHE_SLIDING_EXPIRATION"].ToString();
+                SurveyInfoResponse surveyInfo = CacheUtility.Get(surveyKey) as SurveyInfoResponse;
 
-                if (CacheIsOn.ToUpper() == "TRUE")
+                if (surveyInfo != null)
                 {
-                    if (CacheObj == null)
-                    {
-                        result = (SurveyInfoResponse)_iDataService.GetSurveyInfo(pRequest);
-
-                        if (IsCacheSlidingExpiration.ToUpper() == "TRUE")
-                        {
-                           
-                            HttpRuntime.Cache.Insert(SurveyId, result, null, Cache.NoAbsoluteExpiration, TimeSpan.FromMinutes(CacheDuration));
-                        }
-                        else
-                        {
-                            HttpRuntime.Cache.Insert(SurveyId, result, null, DateTime.Now.AddMinutes(CacheDuration), Cache.NoSlidingExpiration);
-                            
-                        }
-                        return result;
-                    }
-                    else
-                    {
-
-
-                        return (SurveyInfoResponse)CacheObj;
-
-                    }
-                }
-                else
-                {
-                    result = (SurveyInfoResponse)_iDataService.GetSurveyInfo(pRequest);
-                    return result;
+                    return surveyInfo;
                 }
 
+                surveyInfo = (SurveyInfoResponse)_iDataService.GetSurveyInfo(pRequest);
 
+                CacheUtility.Insert(surveyKey, surveyInfo);
 
-               // return result;
+                return surveyInfo;
             }
             catch (FaultException<CustomFaultException> cfe)
             {
@@ -102,58 +63,85 @@ namespace Epi.Web.MVC.Repositories
                 throw ex;
             }
         }
-
+        public SurveyControlsResponse GetSurveyControlList(SurveyControlsRequest pRequest)
+            {
+            try
+                {
+                SurveyControlsResponse ControlListObj = _iDataService.GetSurveyControlList(pRequest);
+                return ControlListObj;
+                }
+            catch (FaultException<CustomFaultException> cfe)
+                {
+                throw cfe;
+                }
+            catch (FaultException fe)
+                {
+                throw fe;
+                }
+            catch (CommunicationException ce)
+                {
+                throw ce;
+                }
+            catch (TimeoutException te)
+                {
+                throw te;
+                }
+            catch (Exception ex)
+                {
+                throw ex;
+                }
+            }
+        
         #region stubcode
-            public List<Common.DTO.SurveyInfoDTO> GetList(Criterion criterion = null)
-            {
-                throw new NotImplementedException();
-            }
+        public List<Common.DTO.SurveyInfoDTO> GetList(Criterion criterion = null)
+        {
+            throw new NotImplementedException();
+        }
 
-            public Common.DTO.SurveyInfoDTO Get(int id)
-            {
-                throw new NotImplementedException();
-            }
+        public Common.DTO.SurveyInfoDTO Get(int id)
+        {
+            throw new NotImplementedException();
+        }
 
-            public int GetCount(Criterion criterion = null)
-            {
-                throw new NotImplementedException();
-            }
+        public int GetCount(Criterion criterion = null)
+        {
+            throw new NotImplementedException();
+        }
 
-            public void Insert(Common.DTO.SurveyInfoDTO t)
-            {
-                throw new NotImplementedException();
-            }
+        public void Insert(Common.DTO.SurveyInfoDTO t)
+        {
+            throw new NotImplementedException();
+        }
 
-            public void Update(Common.DTO.SurveyInfoDTO t)
-            {
-                throw new NotImplementedException();
-            }
+        public void Update(Common.DTO.SurveyInfoDTO t)
+        {
+            throw new NotImplementedException();
+        }
 
-            public void Delete(int id)
-            {
-                throw new NotImplementedException();
-            } 
+        public void Delete(int id)
+        {
+            throw new NotImplementedException();
+        } 
         #endregion
 
+        List<SurveyInfoResponse> IRepository<SurveyInfoResponse>.GetList(Criterion criterion = null)
+        {
+            throw new NotImplementedException();
+        }
 
-            List<SurveyInfoResponse> IRepository<SurveyInfoResponse>.GetList(Criterion criterion = null)
-            {
-                throw new NotImplementedException();
-            }
+        SurveyInfoResponse IRepository<SurveyInfoResponse>.Get(int id)
+        {
+            throw new NotImplementedException();
+        }
 
-            SurveyInfoResponse IRepository<SurveyInfoResponse>.Get(int id)
-            {
-                throw new NotImplementedException();
-            }
+        public void Insert(SurveyInfoResponse t)
+        {
+            throw new NotImplementedException();
+        }
 
-            public void Insert(SurveyInfoResponse t)
-            {
-                throw new NotImplementedException();
-            }
-
-            public void Update(SurveyInfoResponse t)
-            {
-                throw new NotImplementedException();
-            }
+        public void Update(SurveyInfoResponse t)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

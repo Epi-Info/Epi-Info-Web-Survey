@@ -63,21 +63,12 @@ namespace Epi.Web.MVC.Facade
         /// <param name="pageNumber"></param>
         /// <param name="surveyAnswerDTO"></param>
         /// <returns></returns>
-        public MvcDynamicForms.Form GetSurveyFormData(string surveyId, int pageNumber, Epi.Web.Common.DTO.SurveyAnswerDTO surveyAnswerDTO, bool IsMobileDevice)
+        public MvcDynamicForms.Form GetSurveyFormData(string surveyId, int pageNumber, Epi.Web.Common.DTO.SurveyAnswerDTO surveyAnswerDTO, bool isMobileDevice = false, string callerThereby = "")
         {
-
-            //Get the SurveyInfoDTO
             Epi.Web.Common.DTO.SurveyInfoDTO surveyInfoDTO = SurveyHelper.GetSurveyInfoDTO(_surveyInfoRequest,_iSurveyInfoRepository,surveyId);
             MvcDynamicForms.Form form = null;
-           
-            if (IsMobileDevice)
-            {
-                form = Epi.Web.MVC.Utility.MobileFormProvider.GetForm(surveyInfoDTO, pageNumber, surveyAnswerDTO);
-            }
-            else
-            {
-               form = Epi.Web.MVC.Utility.FormProvider.GetForm(surveyInfoDTO, pageNumber, surveyAnswerDTO);
-            }
+            form = Epi.Web.MVC.Utility.FormProvider.GetForm(surveyInfoDTO, pageNumber, surveyAnswerDTO, isMobileDevice);
+
             return form;
         }
         /// <summary>
@@ -161,5 +152,18 @@ namespace Epi.Web.MVC.Facade
             return OrganizationAccountResponse;
             
             }
+        public OrganizationAccountResponse GetStateList(OrganizationAccountRequest Request) 
+            {
+
+            OrganizationAccountResponse OrganizationAccountResponse = _iOrgAccountRepository.GetStateList(Request);
+            return OrganizationAccountResponse;
+            
+            }
+        public SurveyControlsResponse GetSurveyControlList(SurveyControlsRequest pRequestMessage)
+        {
+        SurveyControlsResponse SurveyControlsResponse = _iSurveyInfoRepository.GetSurveyControlList(pRequestMessage);
+
+        return SurveyControlsResponse;
+        }
     }
 }

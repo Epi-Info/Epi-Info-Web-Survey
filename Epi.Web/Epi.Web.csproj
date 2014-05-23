@@ -145,6 +145,10 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Controllers\PrintController.cs" />
+    <Compile Include="Models\PrintModel.cs" />
+    <Compile Include="Models\PrintResponseModel.cs" />
+    <Compile Include="Models\StateModel.cs" />
     <Compile Include="Repositories\CacheDependencyRepository.cs" />
     <Compile Include="Constants\Constant.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -407,10 +411,12 @@
     <Content Include="Scripts\MobileCheckCodeEngine.js" />
     <Content Include="Scripts\modernizr-2.0.6-development-only.js" />
     <Content Include="Scripts\PIE.htc" />
+    <Content Include="Scripts\Print.js" />
     <Content Include="Scripts\_references.js" />
     <None Include="Properties\DataSources\Epi.Web.Common.Message.CacheDependencyResponse.datasource" />
     <None Include="Properties\DataSources\Epi.Web.Common.Message.OrganizationAccountResponse.datasource" />
     <None Include="Properties\DataSources\Epi.Web.Common.Message.SurveyAnswerResponse.datasource" />
+    <None Include="Properties\DataSources\Epi.Web.Common.Message.SurveyControlsResponse.datasource" />
     <None Include="Properties\DataSources\Epi.Web.Common.Message.SurveyInfoResponse.datasource" />
     <None Include="Properties\DataSources\Epi.Web.Common.Message.UserAuthenticationResponse.datasource" />
     <None Include="Service References\DataServiceClient\Epi.Web.MVC.DataServiceClient.CacheDependencyResponse.datasource">
@@ -481,6 +487,17 @@
     <None Include="Service References\DataServiceClient\SurveyDataService41.xsd">
       <SubType>Designer</SubType>
     </None>
+    <Content Include="Views\Survey\Print.cshtml" />
+    <None Include="Service References\DataServiceClient\SurveyDataService42.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DataServiceClient\SurveyDataService43.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DataServiceClient\SurveyDataService44.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Views\Print\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

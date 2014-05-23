@@ -9,5 +9,7 @@ namespace Epi.Web.MVC.Repositories.Core
         {
 
         OrganizationAccountResponse CreateAccount(OrganizationAccountRequest Request);
+
+        OrganizationAccountResponse GetStateList(OrganizationAccountRequest Request);
         }   
     }

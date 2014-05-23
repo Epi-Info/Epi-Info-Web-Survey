@@ -212,6 +212,15 @@
 	        width: 300,
 	        modal: true
 	    });
+	    $("#PrintdialogBox").dialog({
+	        autoOpen: false,
+	        show: "blind",
+	        hide: "blind",
+	        resizable: false,
+	         height: 500,
+	        width: 700,
+	        modal: true
+	    });
 
 	    var responseUrl = GetRedirectionUrl();
 	    $('#url').val(responseUrl);
@@ -306,10 +315,43 @@
 	        return false;
 	    });
 
+	    $('#Print').click(function () {
+	        GetPrintView();
+         
+	    });
 
 
 	});
- 
+	function GetPrintView() {
+
+//	    var signoutUrl = '@Url.Action("GetPrintView", "Survey")' + '?ResponseId=' + '@Model.ResponseId';
+
+//	    $.ajax({
+//	        url: signoutUrl,
+//	        type: 'GET',
+//	        contentType: 'application/json; charset=utf-8',
+//	        //data: JSON.stringify(model),
+//	        async: false,
+//	        success: successFunc,
+//	        Error: errorFunc
+//	    	    });
+//	  
+//	    function successFunc(data) {
+//	        $('#PrintdialogBox').html(data);
+//	        $("#PrintdialogBox").dialog("open");
+//	        
+//	    }
+//	    function errorFunc(data) {
+//	        alert('failed');
+	    //	    }
+
+	    $("#myform")[0].is_print_action.value = 'true';
+	   
+	    $("#myform")[0].action = window.location.href;
+        $('#myform').submit();
+
+	  
+	}
  
  function updateXml(NameList, pValue) {
  
@@ -494,41 +536,50 @@ function ReplaceString(string){
 			<input type="hidden"  id="RequiredFieldsList"  name="RequiredFieldsList" value="@Model.RequiredFieldsList" />
 			 <input type="hidden"  id="AssignList"  name="AssignList" value="@Model.AssignList" />
 			<input type="hidden"  name="is_save_action" value="false" />
+          	<input type="hidden"  name="is_print_action" value="false" />
 			<input type="hidden"  name="is_goto_action" value="false" /> 
 			 
 			 
 			<div id="nav">
 			<div id="prev" align="left">&nbsp;
 			 @if (Model.CurrentPage != 1)
-			 {  
+        {  
 				
 			  
 			  
 			  <button class="prev" id="PreviousButton" value="PreviousButton" onclick="Previous();"  name="PreviousButton"  type="button" > &nbsp; Previous</button>
-			 }
+        }
 			 </div>
 			 
 
 			 <div id="savediv" align="center">
 			 <button class="save"  title="Click this button to finish the survey later. Use the survey link and pass code provided to return to the survey at a later time." type="button" id ="Savebutton" onclick="Save();" name="Savebutton" value="save"> &nbsp; Finish later</button>
-			 </div>
+			 @if (Model.CurrentPage == Model.NumberOfPages)
+                {  
+                    <button   id="Print"class="exitsurvey" type="button"  name="Printbutton" value="Print" style="height:30px; padding: 3px 5px 3px 5px; vertical-align:bottom;" >Print</button>
+                }
+            </div>
 				 
 			  
 			   @if (Model.CurrentPage == Model.NumberOfPages)
-			   {  
+          {  
 			   <div id="next" align="right"> 
 			  <button class="submits" type="submit"  name="Submitbutton" value="Submit" >
 			  Submit Survey &nbsp; </button>
+              
 			  </div>
-			   }
-			   else
-			   {
+           
+              
+			  
+               }
+      else
+          {
 				   
 					<div id="next" align="right">
 					<button class="next"  name="ContinueButton" id="ContinueButton" onclick="Continue();" type="button" >Continue &nbsp; </button>
 					</div>
 											
-			   }
+          }
 
 			  </div>    
 		   
@@ -622,4 +673,7 @@ function ReplaceString(string){
 			  </div>
 			 </div>
 			  
-			
+			 
+             <div id="PrintdialogBox" title="Print">
+			 
+			 </div>
