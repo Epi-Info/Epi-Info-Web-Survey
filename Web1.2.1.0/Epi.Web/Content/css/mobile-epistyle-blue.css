@@ -139,3 +139,13 @@ a.prev, a.next, a.save, .ui-btn-up-save1, .ui-btn-up-submit1, a.login {
  {
      margin-top: 2px;
  }
+ 
+ 
+ @media screen and (min-width: 599px) /*and (max-width: 1025px) */
+{
+    
+    /*LogIn Page*/ .returnto { width:250px !important; margin: 10px 45px;}
+    .Logsin { border: 1px solid #1F3B53 !important; }
+    .LogHead { background: #5C53AC !important; color: #fff !important; border-bottom: 1px solid #1F3B53 !important;}
+    
+}
