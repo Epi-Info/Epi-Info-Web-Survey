@@ -28,11 +28,11 @@ namespace Epi.Web.MVC.Utility
                 ",page:" + pageNumber.ToString() +
                 ",mobile:" + isMobileText;
 
-            //dpb FORM CACHING form = CacheUtility.Get(cacheKey) as Form;
+            form = CacheUtility.Get(cacheKey) as Form;
 
-            //dpb FORM CACHING if (form == null)
-            //dpb FORM CACHING {
-            //dpb FORM CACHING     form = new Form();
+            if (form == null)
+            {
+                form = new Form();
 
                 if (isMobile)
                 {
@@ -99,9 +99,9 @@ namespace Epi.Web.MVC.Utility
                     AddFormFields(pageNumber, form);
                     form.FormJavaScript = VariableDefinitions.ToString() + "\n" + JavaScript.ToString();
 
-                //dpb FORM CACHING }
+                }
 
-                //dpb FORM CACHING CacheUtility.Insert(cacheKey, form, surveyId);
+                CacheUtility.Insert(cacheKey, form, surveyId);
             }
             else
             {
