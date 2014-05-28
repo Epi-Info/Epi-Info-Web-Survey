@@ -19,7 +19,7 @@ namespace Epi.Web.MVC.Utility
     {
         public static Form GetForm(SurveyInfoDTO surveyInfo, int pageNumber, SurveyAnswerDTO surveyAnswer, bool isMobile = false)
         {
-            Form form = new Form();
+            Form form = null;
 
             string surveyId = surveyInfo.SurveyId;
             string isMobileText = isMobile ? "true" : "false";
@@ -28,7 +28,12 @@ namespace Epi.Web.MVC.Utility
                 ",page:" + pageNumber.ToString() +
                 ",mobile:" + isMobileText;
 
-            form = CacheUtility.Get(cacheKey) as Form;
+            bool enableFormCaching = false;
+
+            if (enableFormCaching)
+            {
+                form = CacheUtility.Get(cacheKey) as Form;
+            }
 
             if (form == null)
             {
@@ -101,7 +106,10 @@ namespace Epi.Web.MVC.Utility
 
                 }
 
-                CacheUtility.Insert(cacheKey, form, surveyId);
+                if (enableFormCaching)
+                {
+                    CacheUtility.Insert(cacheKey, form, surveyId);
+                }
             }
             else
             {
