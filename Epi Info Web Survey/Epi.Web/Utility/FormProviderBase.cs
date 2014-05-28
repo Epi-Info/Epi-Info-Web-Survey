@@ -960,6 +960,7 @@ namespace Epi.Web.MVC.Utility
         protected static void AddFormFields(int pageNumber, Form form)
         {
             string dropDownValues = "";
+            form.Fields.Clear();
 
             foreach (var fieldElement in form.FieldsTypeIDs)
             {
