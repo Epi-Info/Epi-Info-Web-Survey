@@ -113,14 +113,14 @@ namespace MvcDynamicForms.Fields
                 radioTag.Attributes.Add("name", inputName);
                 radioTag.Attributes.Add("class", inputName);
 
-                if (FunctionObjectClick != null && !FunctionObjectClick.IsNull())
+                if (FunctionObjectAfter != null && !FunctionObjectAfter.IsNull())
                 {
                     radioTag.Attributes.Add("onclick", "return " + _key + "_after();");
                 }
 
                 radioTag.SetInnerText(choiceList[i].Key);
                 radioTag.Attributes.Add("value", i.ToString());
-                radioTag.Attributes.Add("style", IsHiddenStyle); 
+                radioTag.Attributes.Add("style", IsHiddenStyle);
                 
                 if (_IsDisabled)
                 {
