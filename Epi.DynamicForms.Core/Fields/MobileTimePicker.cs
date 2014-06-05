@@ -74,17 +74,21 @@ namespace MvcDynamicForms.Fields
                 txt.Attributes.Add("data-prompt-position", "topLeft:15");
             }
 
+            if (ReadOnly)
+                {
+                txt.Attributes.Add("disabled", "disabled");
+                }
             txt.Attributes.Add("style", "" + ErrorStyle + ";" + IsHiddenStyle + ";" + IsHighlightedStyle);
 
             txt.MergeAttributes(_inputHtmlAttributes);
             html.Append(txt.ToString(TagRenderMode.SelfClosing));
 
-            if (ReadOnly)
-            {
-                var scriptReadOnlyText = new TagBuilder("script");
-                scriptReadOnlyText.InnerHtml = "$(function(){$('#" + inputName + "').attr('disabled','disabled')});";
-                html.Append(scriptReadOnlyText.ToString(TagRenderMode.Normal));
-            }
+            //if (ReadOnly)
+            //{
+            //    var scriptReadOnlyText = new TagBuilder("script");
+            //    scriptReadOnlyText.InnerHtml = "$(function(){$('#" + inputName + "').attr('disabled','disabled')});";
+            //    html.Append(scriptReadOnlyText.ToString(TagRenderMode.Normal));
+            //}
 
             var wrapper = new TagBuilder(_fieldWrapper);
 
