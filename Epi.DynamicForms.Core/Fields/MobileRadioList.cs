@@ -65,7 +65,8 @@ namespace MvcDynamicForms.Fields
                 radioTag.Attributes.Add("class", inputName);
                 radioTag.Attributes.Add("id", radId);
 
-                if (FunctionObjectClick != null && !FunctionObjectClick.IsNull())
+             //   if (FunctionObjectClick != null && !FunctionObjectClick.IsNull())
+                if (FunctionObjectClick != null)
                 {
                     radioTag.Attributes.Add("onclick", "return " + _key + "_after();");
                 }
