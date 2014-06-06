@@ -85,6 +85,9 @@ namespace Epi.Web.MVC.Utility
                     XDocument xdocResponse = XDocument.Parse(surveyAnswer.XML);
 
                     form.RequiredFieldsList = xdocResponse.Root.Attribute("RequiredFieldsList").Value;
+                    form.HiddenFieldsList = xdocResponse.Root.Attribute("HiddenFieldsList").Value;
+                    form.HighlightedFieldsList = xdocResponse.Root.Attribute("HighlightedFieldsList").Value;
+                    form.DisabledFieldsList = xdocResponse.Root.Attribute("DisabledFieldsList").Value;
 
                     form.FormCheckCodeObj = form.GetCheckCodeObj(form.XDocMetadata, xdocResponse, checkcode);
                     form.FormCheckCodeObj.GetVariableJavaScript(VariableDefinitions);
@@ -118,9 +121,7 @@ namespace Epi.Web.MVC.Utility
             }
 
             form.ResponseId = surveyAnswer.ResponseId;
-            form.DisabledFieldsList = string.Empty;
-            form.HiddenFieldsList = string.Empty;
-            form.HighlightedFieldsList = string.Empty;
+         
             form.IsSaved = false;
 
             if (surveyAnswer.XML.Contains("ResponseDetail"))
