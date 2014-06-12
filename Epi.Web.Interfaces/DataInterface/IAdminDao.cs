@@ -21,5 +21,7 @@ namespace Epi.Web.Interfaces.DataInterfaces
         void DeleteAdmin(AdminBO Admin);
 
         AdminBO  GetAdminEmailByAdminId(string AdminEmail);
+
+        void InsertAdminInfo(AdminBO Admin);
         }
     }
