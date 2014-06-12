@@ -15,9 +15,9 @@
           <EntitySet Name="SurveyMetaData" EntityType="EIWSModel.Store.SurveyMetaData" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="SurveyResponse" EntityType="EIWSModel.Store.SurveyResponse" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="sysdiagrams" EntityType="EIWSModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
-          <AssociationSet Name="FK_Admin_Address" Association="EIWSModel.Store.FK_Admin_Address">
-            <End Role="Address" EntitySet="Address" />
+          <AssociationSet Name="FK_Address_Admin" Association="EIWSModel.Store.FK_Address_Admin">
             <End Role="Admin" EntitySet="Admin" />
+            <End Role="Address" EntitySet="Address" />
           </AssociationSet>
           <AssociationSet Name="FK_Admin_Organization" Association="EIWSModel.Store.FK_Admin_Organization">
             <End Role="Organization" EntitySet="Organization" />
@@ -50,6 +50,7 @@
           <Property Name="City" Type="nvarchar" Nullable="false" MaxLength="30" />
           <Property Name="StateProvinceId" Type="int" Nullable="false" />
           <Property Name="PostalCode" Type="nvarchar" Nullable="false" MaxLength="15" />
+          <Property Name="AdminId" Type="uniqueidentifier" />
         </EntityType>
         <EntityType Name="Admin">
           <Key>
@@ -63,7 +64,6 @@
           <Property Name="LastName" Type="varchar" MaxLength="150" />
           <Property Name="FirstName" Type="varchar" MaxLength="150" />
           <Property Name="PhoneNumber" Type="varchar" MaxLength="50" />
-          <Property Name="AddressId" Type="int" />
         </EntityType>
         <EntityType Name="lk_Status">
           <Key>
@@ -144,15 +144,15 @@
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
-        <Association Name="FK_Admin_Address">
-          <End Role="Address" Type="EIWSModel.Store.Address" Multiplicity="0..1" />
-          <End Role="Admin" Type="EIWSModel.Store.Admin" Multiplicity="*" />
+        <Association Name="FK_Address_Admin">
+          <End Role="Admin" Type="EIWSModel.Store.Admin" Multiplicity="0..1" />
+          <End Role="Address" Type="EIWSModel.Store.Address" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Address">
-              <PropertyRef Name="AddressId" />
+            <Principal Role="Admin">
+              <PropertyRef Name="AdminId" />
             </Principal>
-            <Dependent Role="Admin">
-              <PropertyRef Name="AddressId" />
+            <Dependent Role="Address">
+              <PropertyRef Name="AdminId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -216,6 +216,36 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="fn_diagramobjects" ReturnType="int" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -242,16 +272,16 @@
             <End Role="Organization" EntitySet="Organizations" />
             <End Role="SurveyMetaData" EntitySet="SurveyMetaDatas" />
           </AssociationSet>
-          <EntitySet Name="Admins" EntityType="EIWSModel.Admin" />
-          <AssociationSet Name="FK_Admin_Organization" Association="EIWSModel.FK_Admin_Organization">
-            <End Role="Organization" EntitySet="Organizations" />
-            <End Role="Admin" EntitySet="Admins" />
-          </AssociationSet>
           <EntitySet Name="sysdiagrams" EntityType="EIWSModel.sysdiagram" />
           <EntitySet Name="Addresses" EntityType="EIWSModel.Address" />
           <EntitySet Name="States" EntityType="EIWSModel.State" />
-          <AssociationSet Name="FK_Admin_Address" Association="EIWSModel.FK_Admin_Address">
+          <EntitySet Name="Admins" EntityType="EIWSModel.Admin" />
+          <AssociationSet Name="FK_Address_Admin" Association="EIWSModel.FK_Address_Admin">
+            <End Role="Admin" EntitySet="Admins" />
             <End Role="Address" EntitySet="Addresses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Admin_Organization" Association="EIWSModel.FK_Admin_Organization">
+            <End Role="Organization" EntitySet="Organizations" />
             <End Role="Admin" EntitySet="Admins" />
           </AssociationSet>
           </EntityContainer>
@@ -373,34 +403,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="Admin">
-          <Key>
-            <PropertyRef Name="AdminId" />
-          </Key>
-          <Property Type="Guid" Name="AdminId" Nullable="false" />
-          <Property Type="String" Name="AdminEmail" Nullable="false" MaxLength="300" FixedLength="false" Unicode="false" />
-          <Property Type="Int32" Name="OrganizationId" Nullable="false" />
-          <Property Type="Boolean" Name="IsActive" Nullable="false" />
-          <Property Type="Boolean" Name="Notify" Nullable="false" />
-          <NavigationProperty Name="Organization" Relationship="EIWSModel.FK_Admin_Organization" FromRole="Admin" ToRole="Organization" />
-          <Property Type="String" Name="LastName" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="FirstName" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="PhoneNumber" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Type="Int32" Name="AddressId" />
-          <NavigationProperty Name="Address" Relationship="EIWSModel.FK_Admin_Address" FromRole="Admin" ToRole="Address" />
-        </EntityType>
-        <Association Name="FK_Admin_Organization">
-          <End Type="EIWSModel.Organization" Role="Organization" Multiplicity="1" />
-          <End Type="EIWSModel.Admin" Role="Admin" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Organization">
-              <PropertyRef Name="OrganizationId" />
-            </Principal>
-            <Dependent Role="Admin">
-              <PropertyRef Name="OrganizationId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="sysdiagram">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -421,7 +423,8 @@
           <Property Type="String" Name="City" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Type="Int32" Name="StateProvinceId" Nullable="false" />
           <Property Type="String" Name="PostalCode" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Admins" Relationship="EIWSModel.FK_Admin_Address" FromRole="Address" ToRole="Admin" />
+          <Property Type="Guid" Name="AdminId" />
+          <NavigationProperty Name="Admin" Relationship="EIWSModel.FK_Address_Admin" FromRole="Address" ToRole="Admin" />
         </EntityType>
         <EntityType Name="State">
           <Key>
@@ -431,15 +434,42 @@
           <Property Type="String" Name="StateCode" Nullable="false" MaxLength="2" FixedLength="true" Unicode="false" />
           <Property Type="String" Name="StateName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
-        <Association Name="FK_Admin_Address">
-          <End Type="EIWSModel.Address" Role="Address" Multiplicity="0..1" />
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="AdminId" />
+          </Key>
+          <Property Type="Guid" Name="AdminId" Nullable="false" />
+          <Property Type="String" Name="AdminEmail" Nullable="false" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="OrganizationId" Nullable="false" />
+          <Property Type="Boolean" Name="IsActive" Nullable="false" />
+          <Property Type="Boolean" Name="Notify" Nullable="false" />
+          <Property Type="String" Name="LastName" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="FirstName" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="PhoneNumber" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Addresses" Relationship="EIWSModel.FK_Address_Admin" FromRole="Admin" ToRole="Address" />
+          <NavigationProperty Name="Organization" Relationship="EIWSModel.FK_Admin_Organization" FromRole="Admin" ToRole="Organization" />
+        </EntityType>
+        <Association Name="FK_Address_Admin">
+          <End Type="EIWSModel.Admin" Role="Admin" Multiplicity="0..1" />
+          <End Type="EIWSModel.Address" Role="Address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Admin">
+              <PropertyRef Name="AdminId" />
+            </Principal>
+            <Dependent Role="Address">
+              <PropertyRef Name="AdminId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Admin_Organization">
+          <End Type="EIWSModel.Organization" Role="Organization" Multiplicity="1" />
           <End Type="EIWSModel.Admin" Role="Admin" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Address">
-              <PropertyRef Name="AddressId" />
+            <Principal Role="Organization">
+              <PropertyRef Name="OrganizationId" />
             </Principal>
             <Dependent Role="Admin">
-              <PropertyRef Name="AddressId" />
+              <PropertyRef Name="OrganizationId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -515,21 +545,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Admins">
-            <EntityTypeMapping TypeName="EIWSModel.Admin">
-              <MappingFragment StoreEntitySet="Admin">
-                <ScalarProperty Name="AddressId" ColumnName="AddressId" />
-                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="Notify" ColumnName="Notify" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="OrganizationId" ColumnName="OrganizationId" />
-                <ScalarProperty Name="AdminEmail" ColumnName="AdminEmail" />
-                <ScalarProperty Name="AdminId" ColumnName="AdminId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="sysdiagrams">
             <EntityTypeMapping TypeName="EIWSModel.sysdiagram">
               <MappingFragment StoreEntitySet="sysdiagrams">
@@ -544,6 +559,7 @@
           <EntitySetMapping Name="Addresses">
             <EntityTypeMapping TypeName="EIWSModel.Address">
               <MappingFragment StoreEntitySet="Address">
+                <ScalarProperty Name="AdminId" ColumnName="AdminId" />
                 <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
                 <ScalarProperty Name="StateProvinceId" ColumnName="StateProvinceId" />
                 <ScalarProperty Name="City" ColumnName="City" />
@@ -559,6 +575,20 @@
                 <ScalarProperty Name="StateName" ColumnName="StateName" />
                 <ScalarProperty Name="StateCode" ColumnName="StateCode" />
                 <ScalarProperty Name="StateProvinceId" ColumnName="StateProvinceId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Admins">
+            <EntityTypeMapping TypeName="EIWSModel.Admin">
+              <MappingFragment StoreEntitySet="Admin">
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Notify" ColumnName="Notify" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="OrganizationId" ColumnName="OrganizationId" />
+                <ScalarProperty Name="AdminEmail" ColumnName="AdminEmail" />
+                <ScalarProperty Name="AdminId" ColumnName="AdminId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -582,7 +612,7 @@
     </Options>
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
-      <Diagram Name="Epi.Web.Model">
+      <Diagram Name="Epi.Web.Model" ZoomLevel="88">
         <EntityTypeShape EntityType="EIWSModel.lk_Status" Width="1.5" PointX="11" PointY="2" Height="1.5956835937499996" />
         <EntityTypeShape EntityType="EIWSModel.lk_SurveyType" Width="1.5" PointX="0.875" PointY="2" Height="1.5956835937499996" />
         <EntityTypeShape EntityType="EIWSModel.SurveyMetaData" Width="1.5" PointX="4" PointY="0.875" Height="4.8648079427083317" />
@@ -604,17 +634,17 @@
           <ConnectorPoint PointX="4.5" PointY="6.5" />
           <ConnectorPoint PointX="4.5" PointY="5.7398079427083317" />
         </AssociationConnector>
-        <EntityTypeShape EntityType="EIWSModel.Admin" Width="1.5" PointX="6.5" PointY="5.875" Height="1.7879850260416674" />
-        <AssociationConnector Association="EIWSModel.FK_Admin_Organization" >
-          <ConnectorPoint PointX="5" PointY="7.6824446614583337" />
-          <ConnectorPoint PointX="6.5" PointY="7.6824446614583337" />
-        </AssociationConnector>
         <EntityTypeShape EntityType="EIWSModel.sysdiagram" Width="1.5" PointX="0.75" PointY="4.75" Height="1.9802864583333317" />
         <EntityTypeShape EntityType="EIWSModel.Address" Width="1.5" PointX="9.125" PointY="7.75" Height="2.3648893229166674" />
         <EntityTypeShape EntityType="EIWSModel.State" Width="1.5" PointX="2.75" PointY="9.75" Height="1.5956835937499996" />
-        <AssociationConnector Association="EIWSModel.FK_Admin_Address" >
-          <ConnectorPoint PointX="9.125" PointY="8.3795475260416659" />
-          <ConnectorPoint PointX="8" PointY="8.3795475260416659" />
+        <EntityTypeShape EntityType="EIWSModel.Admin" Width="1.5" PointX="5.75" PointY="7.25" Height="2.9417936197916674" />
+        <AssociationConnector Association="EIWSModel.FK_Address_Admin" >
+          <ConnectorPoint PointX="7.25" PointY="8.9708968098958337" />
+          <ConnectorPoint PointX="9.125" PointY="8.9708968098958337" />
+        </AssociationConnector>
+        <AssociationConnector Association="EIWSModel.FK_Admin_Organization" >
+          <ConnectorPoint PointX="5" PointY="8.0574446614583337" />
+          <ConnectorPoint PointX="5.75" PointY="8.0574446614583337" />
         </AssociationConnector>
         </Diagram>
     </Diagrams>
