@@ -251,7 +251,7 @@ namespace Epi.Web.EF
                          FirstName = pBo.FirstName,
                          LastName = pBo.LastName,
                          PhoneNumber = pBo.PhoneNumber,
-                         AddressId = pBo.AddressId,
+                       //  AddressId = pBo.AddressId,
                     };
             }
         /// <summary>
@@ -296,7 +296,7 @@ namespace Epi.Web.EF
             return StateBO;
             }
 
-        internal static Address ToAddressEF(AdminBO Admin)
+        internal static   Address ToAddressEF(AdminBO Admin)
             {
             return new Address
             {

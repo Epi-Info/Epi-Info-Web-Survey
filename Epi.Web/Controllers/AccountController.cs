@@ -129,8 +129,8 @@ namespace Epi.Web.MVC.Controllers
                     this.ModelState.Remove("FirstName");
                     this.ModelState.Remove("PhoneNumber");
 
-                    this.ModelState.Remove("AddressLine1");
-                    this.ModelState.Remove("AddressLine2");
+                    this.ModelState.Remove("AdressLine1");
+                    
                     this.ModelState.Remove("City");
                     this.ModelState.Remove("State");
                     this.ModelState.Remove("Zip");
