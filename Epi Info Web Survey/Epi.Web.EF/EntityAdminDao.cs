@@ -146,7 +146,32 @@ namespace Epi.Web.EF
             
             }
 
+        public void InsertAdminInfo(AdminBO Admin) {
 
+        try
+            {
+            using (var Context = DataObjectFactory.CreateContext())
+                {
+                Admin AdminEntity = Mapper.ToEF(Admin);
+
+
+
+                Context.AddToAdmins(AdminEntity);
+
+                Context.SaveChanges();
+
+
+
+                }
+
+            }
+        catch (Exception ex)
+            {
+            throw (ex);
+            }
+            
+            
+            }
        public  void UpdateAdmin(AdminBO Admin) { }
 
 

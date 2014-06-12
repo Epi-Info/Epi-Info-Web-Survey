@@ -125,13 +125,22 @@ namespace Epi.Web.BLL
                   bool success = Epi.Web.Common.Email.EmailHandler.SendMessage(Email);
                   }
               }
-          private void InsertAdminInfo(AdminBO Admin, OrganizationBO Organization)
+          private void InsertAdminInfo(AdminBO Admin, OrganizationBO Organization, string AccountType)
               {
-
-              this.AdminDao.InsertAdmin(Admin);
+              switch (AccountType.ToUpper())
+                  {
+                  case "USER":   //The combination of Admin email and organization name should  be unique 
+                      this.AdminDao.InsertAdmin(Admin);
+                      break;
+                  case "ORGANIZATION"://Only the organization name should be unique
+                      this.AdminDao.InsertAdminInfo(Admin);
+                      break;
+                  }
+             
               NotifyAdminAccountCreation(Admin, Organization);
               EmailApplicant(Admin, Organization);
               }
+
           private void EmailApplicant(AdminBO AdminBO, OrganizationBO Organization)
               {
 
@@ -197,7 +206,7 @@ namespace Epi.Web.BLL
                                     OrganizationBO OrgBO = GetOrganizationByKey(OrganizationKey);
 
                                     Admin.OrganizationId = OrgBO.OrganizationId;
-                                    InsertAdminInfo(Admin, Organization);
+                                    InsertAdminInfo(Admin, Organization, AccountType);
                                     Message = "Success";
 
                                     }
@@ -225,7 +234,7 @@ namespace Epi.Web.BLL
                                     OrganizationBO OrgBO = GetOrganizationByKey(OrganizationKey);
 
                                     Admin.OrganizationId = OrgBO.OrganizationId;
-                                    InsertAdminInfo(Admin, Organization);
+                                    InsertAdminInfo(Admin, Organization, AccountType);
                                     Message = "Success";
 
                                 }

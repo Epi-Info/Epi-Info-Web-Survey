@@ -23,8 +23,8 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("EIWSModel", "FK_SurveyResponse_lk_Status", "lk_Status", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Epi.Web.EF.lk_Status), "SurveyResponse", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Epi.Web.EF.SurveyResponse), true)]
 [assembly: EdmRelationshipAttribute("EIWSModel", "FK_SurveyResponse_SurveyMetaData", "SurveyMetaData", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Epi.Web.EF.SurveyMetaData), "SurveyResponse", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Epi.Web.EF.SurveyResponse), true)]
 [assembly: EdmRelationshipAttribute("EIWSModel", "FK_SurveyMetaData_Organization", "Organization", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Epi.Web.EF.Organization), "SurveyMetaData", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Epi.Web.EF.SurveyMetaData), true)]
+[assembly: EdmRelationshipAttribute("EIWSModel", "FK_Address_Admin", "Admin", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Epi.Web.EF.Admin), "Address", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Epi.Web.EF.Address), true)]
 [assembly: EdmRelationshipAttribute("EIWSModel", "FK_Admin_Organization", "Organization", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Epi.Web.EF.Organization), "Admin", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Epi.Web.EF.Admin), true)]
-[assembly: EdmRelationshipAttribute("EIWSModel", "FK_Admin_Address", "Address", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Epi.Web.EF.Address), "Admin", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Epi.Web.EF.Admin), true)]
 
 #endregion
 
@@ -159,22 +159,6 @@ namespace Epi.Web.EF
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<Admin> Admins
-        {
-            get
-            {
-                if ((_Admins == null))
-                {
-                    _Admins = base.CreateObjectSet<Admin>("Admins");
-                }
-                return _Admins;
-            }
-        }
-        private ObjectSet<Admin> _Admins;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         public ObjectSet<sysdiagram> sysdiagrams
         {
             get
@@ -219,6 +203,22 @@ namespace Epi.Web.EF
             }
         }
         private ObjectSet<State> _States;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Admin> Admins
+        {
+            get
+            {
+                if ((_Admins == null))
+                {
+                    _Admins = base.CreateObjectSet<Admin>("Admins");
+                }
+                return _Admins;
+            }
+        }
+        private ObjectSet<Admin> _Admins;
 
         #endregion
 
@@ -265,14 +265,6 @@ namespace Epi.Web.EF
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the Admins EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToAdmins(Admin admin)
-        {
-            base.AddObject("Admins", admin);
-        }
-    
-        /// <summary>
         /// Deprecated Method for adding a new object to the sysdiagrams EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddTosysdiagrams(sysdiagram sysdiagram)
@@ -294,6 +286,14 @@ namespace Epi.Web.EF
         public void AddToStates(State state)
         {
             base.AddObject("States", state);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Admins EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToAdmins(Admin admin)
+        {
+            base.AddObject("Admins", admin);
         }
 
         #endregion
@@ -483,6 +483,30 @@ namespace Epi.Web.EF
         private global::System.String _PostalCode;
         partial void OnPostalCodeChanging(global::System.String value);
         partial void OnPostalCodeChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Guid> AdminId
+        {
+            get
+            {
+                return _AdminId;
+            }
+            set
+            {
+                OnAdminIdChanging(value);
+                ReportPropertyChanging("AdminId");
+                _AdminId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("AdminId");
+                OnAdminIdChanged();
+            }
+        }
+        private Nullable<global::System.Guid> _AdminId;
+        partial void OnAdminIdChanging(Nullable<global::System.Guid> value);
+        partial void OnAdminIdChanged();
 
         #endregion
 
@@ -495,18 +519,34 @@ namespace Epi.Web.EF
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("EIWSModel", "FK_Admin_Address", "Admin")]
-        public EntityCollection<Admin> Admins
+        [EdmRelationshipNavigationPropertyAttribute("EIWSModel", "FK_Address_Admin", "Admin")]
+        public Admin Admin
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Admin>("EIWSModel.FK_Admin_Address", "Admin");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Admin>("EIWSModel.FK_Address_Admin", "Admin").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Admin>("EIWSModel.FK_Address_Admin", "Admin").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Admin> AdminReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Admin>("EIWSModel.FK_Address_Admin", "Admin");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Admin>("EIWSModel.FK_Admin_Address", "Admin", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Admin>("EIWSModel.FK_Address_Admin", "Admin", value);
                 }
             }
         }
@@ -742,35 +782,33 @@ namespace Epi.Web.EF
         private global::System.String _PhoneNumber;
         partial void OnPhoneNumberChanging(global::System.String value);
         partial void OnPhoneNumberChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.Int32> AddressId
-        {
-            get
-            {
-                return _AddressId;
-            }
-            set
-            {
-                OnAddressIdChanging(value);
-                ReportPropertyChanging("AddressId");
-                _AddressId = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("AddressId");
-                OnAddressIdChanged();
-            }
-        }
-        private Nullable<global::System.Int32> _AddressId;
-        partial void OnAddressIdChanging(Nullable<global::System.Int32> value);
-        partial void OnAddressIdChanged();
 
         #endregion
 
     
         #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("EIWSModel", "FK_Address_Admin", "Address")]
+        public EntityCollection<Address> Addresses
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Address>("EIWSModel.FK_Address_Admin", "Address");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Address>("EIWSModel.FK_Address_Admin", "Address", value);
+                }
+            }
+        }
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -806,44 +844,6 @@ namespace Epi.Web.EF
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Organization>("EIWSModel.FK_Admin_Organization", "Organization", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("EIWSModel", "FK_Admin_Address", "Address")]
-        public Address Address
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Address>("EIWSModel.FK_Admin_Address", "Address").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Address>("EIWSModel.FK_Admin_Address", "Address").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<Address> AddressReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Address>("EIWSModel.FK_Admin_Address", "Address");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Address>("EIWSModel.FK_Admin_Address", "Address", value);
                 }
             }
         }
