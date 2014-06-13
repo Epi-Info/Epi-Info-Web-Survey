@@ -65,6 +65,9 @@ namespace Epi.Web.Common.ObjectMapping
                  AdressLine2 = pDTO.AdressLine2,
                  City = pDTO.City,
                  Zip = pDTO.Zip,
+                 LastName = pDTO.LastName,
+                 FirstName = pDTO.FirstName ,
+                 PhoneNumber =pDTO.PhoneNumber,
             };
             }
         public static OrganizationDTO ToDataTransferObjects(OrganizationBO pBO)
