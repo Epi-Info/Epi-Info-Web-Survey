@@ -84,6 +84,63 @@ namespace Epi.Web.EF
              return AdminList;
             }
         public void InsertAdmin(AdminBO Admin) {
+
+
+
+        try
+            {
+            using (var Context = DataObjectFactory.CreateContext())
+                {
+                Admin AdminEntity = Mapper.ToEF(Admin);
+
+
+
+                Context.AddToAdmins(AdminEntity);
+
+                Context.SaveChanges();
+
+
+
+                }
+
+            }
+        catch (Exception ex)
+            {
+            throw (ex);
+            }
+
+
+
+      
+            // Get Admin Id 
+        try
+            {
+            
+
+
+            using (var Context = DataObjectFactory.CreateContext())
+                {
+                var Query = (from _Admin in Context.Admins
+                             where _Admin.AdminEmail == Admin.AdminEmail && _Admin.FirstName == Admin.FirstName && Admin.LastName == _Admin.LastName
+                             select new { _Admin.AdminId }).Distinct();
+
+
+                var DataRow = Query.Distinct();
+                foreach (var Row in DataRow)
+                    {
+
+                    Admin.AdminId = Row.AdminId;
+                    break;
+                    }
+
+                }
+
+            }
+        catch (Exception ex)
+            {
+            throw (ex);
+            }
+
         // Insert Address 
         using (var Context = DataObjectFactory.CreateContext())
             {
@@ -98,51 +155,6 @@ namespace Epi.Web.EF
 
 
             }
-            // Get AddressId
-        try
-            {
-            using (var Context = DataObjectFactory.CreateContext())
-                {
-                var Query = (from Address in Context.Addresses
-                             where Address.AddressLine1 == Admin.AdressLine1 && Address.City == Admin.City && Address.StateProvinceId == Admin.StateId && Address.PostalCode == Admin.Zip   
-                             select new { Address.AddressId }).Distinct();
-
-
-                var DataRow = Query.Distinct();
-                foreach (var Row in DataRow)
-                    {
-
-                    Admin.AddressId = Row.AddressId;
-                    break;
-                    }
-                }
-            }
-        catch (Exception ex)
-            {
-            throw (ex);
-            }
-        try
-            {
-            using (var Context = DataObjectFactory.CreateContext())
-                {
-                Admin AdminEntity = Mapper.ToEF(Admin);
-                
-              
-
-                Context.AddToAdmins(AdminEntity);
-
-                Context.SaveChanges();
-
-
-
-                }
-          
-            }
-        catch (Exception ex)
-            {
-            throw (ex);
-            }
-            
             
             }
 
