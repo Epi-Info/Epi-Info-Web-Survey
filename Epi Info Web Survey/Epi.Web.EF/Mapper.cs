@@ -305,7 +305,8 @@ namespace Epi.Web.EF
                 AddressLine2 = Admin.AdressLine2,
                 City = Admin.City,
                 StateProvinceId = Admin.StateId,
-                PostalCode = Admin.Zip
+                PostalCode = Admin.Zip,
+                AdminId = Admin.AdminId
             };
             }
     }
