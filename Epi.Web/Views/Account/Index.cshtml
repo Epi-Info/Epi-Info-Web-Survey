@@ -43,7 +43,7 @@
     .accountdiv {float:right; width:400px; background:#EBEFF5; border:1px solid #bfbfbf; border-radius:15px; padding:10px 10px 10px 20px;}
     .introdiv {float:left; width:355px; padding:0 10px 0 0;}
     .accountlabel {font: 14px Segoe UI; font-weight:600;}
-    .termsofuse {width:790px; padding:5px; height: 300px; border:2px solid #bfbfbf; font: 12px Arial; line-height:1.8em; overflow:auto;}
+    .termsofuse {width:790px; padding:5px; height: 300px; border:2px solid #bfbfbf; overflow:auto;}
     .submits {
      border: 1px #4e9689 solid;
      -moz-border-radius: 10px;
@@ -221,7 +221,9 @@
      <div id="TOU">
         <h2 class="h2header">Terms of service and conditions of use</h2>
         <div class="termsofuse">
+        
           @Html.Raw(ViewData["TermOfUse"].ToString())
+          
         </div>
     </div>
     
