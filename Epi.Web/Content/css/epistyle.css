@@ -64,11 +64,11 @@ background-origin:content-box;*/
 /* padding-bottom:80px; */
  }
 
-#content h2
+/*#content h2
  {
  font-size: 12pt;
  font-weight: bold;
- }
+ }*/
  
 .MvcDynamicForm
  {
@@ -191,7 +191,7 @@ bottom: 100px;
  /*behavior: url('../Scripts/PIE.htc');*/
  }
 
-#content h2 { margin: 0 0 .5em 0; }
+/*#content h2 { margin: 0 0 .5em 0; }*/
 
 #footleft
  {
