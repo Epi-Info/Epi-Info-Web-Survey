@@ -77,7 +77,7 @@ namespace Epi.Web.MVC.Controllers
 
         public ActionResult Index(Epi.Web.MVC.Models.AccountInfoModel AccountInfo) 
             {
-            string filepath = Server.MapPath("\\Content\\Text\\TermOfUse.txt");
+            string filepath = Server.MapPath("~\\Content\\Text\\TermOfUse.txt");
             string content = string.Empty;
             string AccountType = ConfigurationManager.AppSettings["ACCOUNT_TYPE"];
             string ApplicantValidation = ConfigurationManager.AppSettings["APPLICANT_VALIDATION_IS_ENABLED"];
