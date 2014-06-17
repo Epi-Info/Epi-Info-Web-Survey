@@ -124,13 +124,14 @@
         <h2 class="h2header" style="text-indent: 0 !important;">How it works</h2>
         <p>
             Complete the information and create an account for your organization.
-            You will then receive an email with configuration settings to publish surveys to the web using Epi Info 7™. You can then start publishing your surveys.
+            You will then receive an email with configuration settings to publish surveys to the web using Epi Info™ 7. You can then start publishing your surveys.
         </p>
     </div>
     <div  id="AccountForm" class="accountdiv" style="">
+        <p style="text-align:right;margin-top: 0;margin-bottom: -32px; font-size: 9pt; font-weight:bold;">* Required Fields.</p>
         <p>
             @Html.ValidationMessage("Error")<br>
-            <label class="accountlabel" id="OrganizationNamelabel">Organization Name:</label><br>
+            <label class="accountlabel" id="OrganizationNamelabel">* Organization Name:</label><br>
          
           @Html.TextBoxFor(m => m.OrgName, new { @class = "Account" }) <br>
           @Html.ValidationMessageFor(m => m.OrgName, null, new { @class = "required" })
@@ -139,20 +140,20 @@
         @if (@System.Configuration.ConfigurationManager.AppSettings["ACCOUNT_TYPE"] == "USER")
             {
          <p>
-            <label class="accountlabel"  id="LastName">Last Name:</label><br>
+            <label class="accountlabel"  id="LastName">* Last Name:</label><br>
           
             @Html.TextBoxFor(m => m.LastName, new { @class = "Account" }) <br>
              @Html.ValidationMessageFor(m => m.LastName, null, new { @class = "required" })
         </p>
         <p>
-            <label class="accountlabel"  id="FirstName">First Name:</label><br>
+            <label class="accountlabel"  id="FirstName">* First Name:</label><br>
           
             @Html.TextBoxFor(m => m.FirstName, new { @class = "Account" }) <br>
              @Html.ValidationMessageFor(m => m.FirstName, null, new { @class = "required" })
         </p>
 
          <p>
-            <label class="accountlabel"  id="PhoneNumber">Phone Number:</label><br>
+            <label class="accountlabel"  id="PhoneNumber">* Phone Number:</label><br>
           
             @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "Account" }) <br>
              @Html.ValidationMessageFor(m => m.PhoneNumber, null, new { @class = "required" })
@@ -160,7 +161,7 @@
 
             
       <p>
-            <label class="accountlabel"  id="AddressLine1">Address Line 1:</label><br>
+            <label class="accountlabel"  id="AddressLine1">* Address Line 1:</label><br>
           
             @Html.TextBoxFor(m => m.AdressLine1, new { @class = "Account" }) <br>
              @Html.ValidationMessageFor(m => m.AdressLine1, null, new { @class = "required" })
@@ -172,21 +173,21 @@
              @Html.ValidationMessageFor(m => m.AdressLine2, null, null)
         </p>
         <p>
-            <label class="accountlabel"  id="City">City:</label><br>
+            <label class="accountlabel"  id="City">* City:</label><br>
           
             @Html.TextBoxFor(m => m.City, new { @class = "Account" }) <br>
              @Html.ValidationMessageFor(m => m.City, null, new { @class = "required" })
         </p>
 
          <p>
-            <label class="accountlabel"  id="State">State:</label><br>
+            <label class="accountlabel"  id="State">* State:</label><br>
           
             @Html.DropDownListFor(m => m.SelectedState, Model.States, "-- Select A State --", new { @class = "Account" }) <br>
              @Html.ValidationMessageFor(m => m.SelectedState, null, new { @class = "required" })
         </p>
             
          <p>
-            <label class="accountlabel"  id="Zip">Zip Code:</label><br>
+            <label class="accountlabel"  id="Zip">* Zip Code:</label><br>
           
             @Html.TextBoxFor(m => m.Zip, new { @class = "Account" }) <br>
              @Html.ValidationMessageFor(m => m.Zip, null, new { @class = "required" })
@@ -197,13 +198,13 @@
 
 
         <p>
-            <label class="accountlabel"  id="Emaillabel">Email Address:</label><br>
+            <label class="accountlabel"  id="Emaillabel">* Email Address:</label><br>
           
             @Html.TextBoxFor(m => m.Email, new { @class = "Account" }) <br>
              @Html.ValidationMessageFor(m => m.Email, null, new { @class = "required" })
         </p>
         <p>
-            <label class="accountlabel" id="ConfirmEmailLabel ">Confirm Email Address:</label><br>
+            <label class="accountlabel" id="ConfirmEmailLabel ">* Confirm Email Address:</label><br>
            
              @Html.TextBoxFor(m => m.ConfirmEmail, new { @class = "Account" }) <br>
               @Html.ValidationMessageFor(m => m.ConfirmEmail, null, new { @class = "required" })
