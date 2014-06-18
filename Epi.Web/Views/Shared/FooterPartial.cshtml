@@ -9,7 +9,7 @@
         <div id="footright">
         @if (System.Configuration.ConfigurationManager.AppSettings["TECHNICAL_SUPPORT_IS_ENABLED"].ToUpper() == "TRUE")
             {
-            <div id="foothide" style="float:left;font-size: 9pt; margin-right: 20px;line-height: 120%;">
+               <div id="foothide" style="float:left;font-size: 9pt; margin-right: 20px;line-height: 120%;">
 
             
                 <strong>Technical Support</strong><br />
@@ -21,13 +21,19 @@
 
                  </div>
             
-                <img src="@Url.Content(@System.Configuration.ConfigurationManager.AppSettings["FOOTER_LOGO_PATH"].ToString())" height="42"  alt=""  />
-                 @* <img src="@Url.Content("~/Content/images/logo_dhhs.gif")" height="42" alt="Department of Health and Human Services"  />*@
+                
+                 
             }
-        else { 
             
-            <img src="@Url.Content("~/Content/images/cdclogo.png")" height="42"  width="71" alt="Centers for Disease Control and Prevention"  />
-            <img src="@Url.Content("~/Content/images/logo_dhhs.gif")" height="42" alt="Department of Health and Human Services"  />
+            @if (!string.IsNullOrEmpty(@System.Configuration.ConfigurationManager.AppSettings["FOOTER_LOGO_PATH"].ToString()))
+            {
+                <img src="@Url.Content(@System.Configuration.ConfigurationManager.AppSettings["FOOTER_LOGO_PATH"].ToString())" height="42"  alt=""  />
+            }
+            else 
+            { 
+            
+                <img src="@Url.Content("~/Content/images/cdclogo.png")" height="42"  width="71" alt="Centers for Disease Control and Prevention"  />
+                <img src="@Url.Content("~/Content/images/logo_dhhs.gif")" height="42" alt="Department of Health and Human Services"  />
             
             }
         </div>
