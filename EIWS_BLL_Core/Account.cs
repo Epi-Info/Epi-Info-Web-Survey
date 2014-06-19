@@ -99,7 +99,7 @@ namespace Epi.Web.BLL
           private void NotifyAdminAccountCreation(AdminBO AdminBO, OrganizationBO Organization)
               {
               string NotifyAdmin = ConfigurationManager.AppSettings["NOTIFY_ADMIN_IS_ENABLED"];
-              string AdminEmail = ConfigurationManager.AppSettings["LOGGING_ADMIN_EMAIL_ADDRESS"];
+              string AdminEmail = ConfigurationManager.AppSettings["NOTIFY_ADMIN_EMAIL"];
 
               string strOrgKeyDecrypted = Epi.Web.Common.Security.Cryptography.Decrypt(Organization.OrganizationKey.ToString());
               // List<AdminBO> AdminBOList = new List<AdminBO>();
@@ -144,7 +144,7 @@ namespace Epi.Web.BLL
           private void EmailApplicant(AdminBO AdminBO, OrganizationBO Organization)
               {
 
-              string AdminEmail = ConfigurationManager.AppSettings["LOGGING_ADMIN_EMAIL_ADDRESS"];
+              string AdminEmail = ConfigurationManager.AppSettings["SYSTEM_ADMIN_EMAIL"];
               string ApplicantValidation = ConfigurationManager.AppSettings["APPLICANT_VALIDATION_IS_ENABLED"];
               List<string> AdminList = new List<string>();
               string strOrgKeyDecrypted = Epi.Web.Common.Security.Cryptography.Decrypt(Organization.OrganizationKey.ToString());
@@ -156,16 +156,17 @@ namespace Epi.Web.BLL
               StringBuilder Body = new StringBuilder();
               Body.Append("Organization Name:" + Organization.Organization + "\nOrganization Key: " + strOrgKeyDecrypted);
               Body.Append("\n\nPlease follow the steps below in order to start publishing  forms to the web.");
-              Body.Append("\n\tStep1:Open Epi Info 7");
-              Body.Append("\n\tStep2:On the Main Menu, click on “Tools” and select “Options”");
-              Body.Append("\n\tStep3:On the Options dialog, click on the “Web Survey” Tab.");
-              Body.Append("\n\tStep4:On the Web Survey tab, enter the following information.");
+              Body.Append("\n\tStep 1:Download and install the latest version of Epi Info™ 7 from:" + ConfigurationManager.AppSettings["EPI_INFO_DOWNLOAD_URL"]);
+              Body.Append("\n\tStep 2:On the Main Menu, click on “Tools” and select “Options”");
+              Body.Append("\n\tStep 3:On the Options dialog, click on the “Web Survey” Tab.");
+              Body.Append("\n\tStep 4:On the Web Survey tab, enter the following information.");
 
               Body.Append("\n\t\t-Endpoint Address:" + ConfigurationManager.AppSettings["ENDPOINT_ADDRESS"] + "\n\t\t-Connect using Windows Authentication:  " + ConfigurationManager.AppSettings["WINDOW_AUTHENTICATION"]);
               Body.Append("\n\t\t-Binding Protocol:" + ConfigurationManager.AppSettings["BINDING_PROTOCOL"]);
 
-              Body.Append("\n\tStep5:Click “OK’ button.");
-              Body.Append("\n\nPlease contact your system administrator " + AdminEmail + " in case of any questions.");
+              Body.Append("\n\tStep 5:Click “OK’ button.");
+              Body.Append("\n\tOrganization key provided here is to be used in Epi Info™ 7 during publish process.");
+              Body.Append("\n\nPlease contact the system administrator " + AdminEmail + " for any questions.");
               Body.Append("\n\nThank you.");
 
               Epi.Web.Common.Email.Email Email = new Web.Common.Email.Email();
