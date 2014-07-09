@@ -1437,7 +1437,7 @@ function CCE_RemoveFromFieldsList(FieldName,ListName) {
                                       {
                                                    $(controlId).attr('checked', false);
 			                          }
-                                      $(controlId).val('');
+                                    //  $(controlId).val('');
                                     break;
                                  case "radiobutton":
                                   if (eval(document.getElementById("IsMobile")))
