@@ -285,6 +285,7 @@
     <Content Include="Content\images\button_check.png" />
     <Content Include="Content\images\cdclogo.png" />
     <Content Include="Content\images\codebk.png" />
+    <Content Include="Content\images\cstelogo.jpg" />
     <Content Include="Content\images\DRAFT.png" />
     <Content Include="Content\images\epi.png" />
     <Content Include="Content\images\error.png" />
@@ -500,6 +501,7 @@
       <SubType>Designer</SubType>
     </None>
     <Content Include="Views\Print\Index.cshtml" />
+    <Content Include="Views\Account\AccessDenied.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
