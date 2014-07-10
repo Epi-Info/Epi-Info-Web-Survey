@@ -42,7 +42,7 @@ namespace Epi.Web.MVC.Controllers
         {
         OrganizationAccountResponse Response = new OrganizationAccountResponse();
         OrganizationAccountRequest Request = new OrganizationAccountRequest();
-      
+        string AccountType = ConfigurationManager.AppSettings["ACCOUNT_TYPE"];
            string version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
            ViewBag.Version = version;
            string filepath = Server.MapPath("~\\Content\\Text\\TermOfUse.txt");
@@ -70,8 +70,17 @@ namespace Epi.Web.MVC.Controllers
                 
                 Model.States.Add(new SelectListItem { Text =item.StateName, Value =item.StateId.ToString() });
                 }
+            if (string.IsNullOrEmpty(AccountType))
+                {
+               return View("AccessDenied");
+                
+                }
+            else
+                {
+
+                return View(Model);
+                }
          
-         return View(Model);
         }
         [HttpPost]
 
