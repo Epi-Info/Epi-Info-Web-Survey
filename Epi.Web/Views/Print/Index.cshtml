@@ -125,8 +125,8 @@ else
     
     <table id="printtable">
       <tr>
-        <th scope="col">Prompt</th>
-        <th scope="col">Response</th>
+        <th scope="col">Question</th>
+        <th scope="col">Answer</th>
       </tr>
       @foreach (var item in Model.ResponseList)
       {
@@ -144,6 +144,18 @@ else
 </div>
 <br />
 <div id="Print2" align="right">
+<div style="float:left;">
+
+@if(!@Model.IsFromFinal){
+   <span class="current">@Html.ActionLink("Return To Survey", "Index", "Survey", new { responseid = Model.ResponseId, PageNumber = Model.NumberOfPages }, new {@class = "returnto"})</span>
+
+}
+else
+{
+
+   <span class="current">@Html.ActionLink("Return To Final Page.", "Index", "Final", new { surveyid = Model.SurveyId, responseid = Model.ResponseId }, new {@class = "returnto"})</span>
+}
+</div>
 	<button class="exitsurvey"  name="PrintButton2" id="PrintButton2" onclick="Print('printable')" type="button" >Print</button>
 </div>    
 
