@@ -207,7 +207,7 @@ bottom: 100px;
  margin-top:-3px;
  }
 
-button.exitsurvey:hover,  button.save:hover, button.prev:hover, button.next:hover, button.begin:hover, button.submits:hover, button.login:hover, a.returnto:hover
+button.exitsurvey:hover,  button.save:hover, button.prev:hover, button.next:hover, button.begin:hover, button.submits:hover, button.login:hover, a.returnto:hover, button.printbottom:hover 
  {
  cursor: pointer;
  opacity: 0.8;
@@ -295,6 +295,32 @@ button.exitsurvey
  height: 26px;
  /*behavior: url('../Scripts/PIE.htc');*/
  }
+ 
+ button.printbottom
+ {
+   border: 1px #4e9689 solid;
+ -moz-border-radius: 10px;
+ -webkit-border-radius: 10px;
+ -khtml-border-radius: 10px;
+ border-radius: 10px;
+ padding: 3px 5px 3px 5px;
+ color:#244640;
+ font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+ font-size: 10pt;
+ font-weight:bold;
+ width: 80px;
+ cursor:pointer;
+ border: 1px solid rgba(0,0,0,0.5);
+ background: #e5e5e5; 
+ background: rgba(255,255,255,0.9); 
+ box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
+ -o-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
+ -webkit-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
+ -moz-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
+ 
+ 
+ }
+ 
  
  button.begin
  {
@@ -742,8 +768,10 @@ button.dialogbtn
      margin:5px auto 20px;
  }
  
-/* .ui-priority-secondary { opacity: 1.0 !important; font-weight: bold !important;}
- button.ui-state-default { color:#1c94c4 !important;}*/
+.ui-priority-secondary { opacity: 1.0 !important; filter:Alpha(Opacity=100) !important; font-weight: bold !important; color: #3f3f3f !important;}
+.ui-priority-primary { color: #3f3f3f !important;}
+
+/*printbottom button.ui-state-default { color:#1c94c4 !important;}*/
 input[type=text]:focus, textarea:focus, select:focus{ border: 1px solid rgba(255, 216, 81, 43) !important; outline: 1px solid rgba(255, 216, 81, 43) !important; background-color: #ffffce;}
 input[type=checkbox]:focus, input[type=radio]:focus  { outline:2px solid rgba(255, 216, 81, 43) !important; background-color: #ffffce;}
 input[type=checkbox]:checked{background-color: #ffffce;}
