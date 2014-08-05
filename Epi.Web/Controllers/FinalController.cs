@@ -62,6 +62,8 @@ namespace Epi.Web.MVC.Controllers
                 Omniture OmnitureObj = Epi.Web.MVC.Utility.OmnitureHelper.GetSettings(SurveyMode, IsMobileDevice);
                 ViewBag.ResponseId = responseId; 
                 ViewBag.Omniture = OmnitureObj;
+                FormsAuthentication.SignOut();
+                FormsAuthentication.SetAuthCookie("BeginSurvey", false);
                 return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, surveyInfoModel);
             }
             catch (Exception ex)
@@ -88,8 +90,8 @@ namespace Epi.Web.MVC.Controllers
                     ActionResult actionResult = RedirectToAction("Index", "Print", new { responseId = ResponseId , FromFinal = true});
                     return actionResult;
                     }
-                FormsAuthentication.SignOut();
-                FormsAuthentication.SetAuthCookie("BeginSurvey", false);
+                //FormsAuthentication.SignOut();
+                //FormsAuthentication.SetAuthCookie("BeginSurvey", false);
                 Guid responseId = Guid.NewGuid();
                 Epi.Web.Common.DTO.SurveyAnswerDTO SurveyAnswer = _isurveyFacade.CreateSurveyAnswer(surveyId, responseId.ToString());
 

@@ -434,6 +434,7 @@ namespace Epi.Web.MVC.Utility
 
                     string ControlId  = item.Attribute("QuestionName").Value;
                     bool Type = (bool) List.SurveyControlList.Any(x => x.ControlId == ControlId && x.ControlType != "Literal" && x.ControlType != "GroupBox");
+                    bool YesNoType = (bool)List.SurveyControlList.Any(x => x.ControlId == ControlId && x.ControlType == "YesNo");
 
                     if (Type)
                         {
@@ -442,8 +443,22 @@ namespace Epi.Web.MVC.Utility
 
                     PrintModel.PageNumber = i;
                     PrintModel.Question = Question;
-                    PrintModel.Value = item.Value;
+                    if (!YesNoType)
+                        {
+                            PrintModel.Value = item.Value;
+                        }
+                    else{
+                    if (item.Value == "1")
+                                {
+                                PrintModel.Value = "Yes";
+                                }
+                            else
+                                {
 
+                                PrintModel.Value = "No";
+                                }
+                            
+                        }
                     QuestionAnswerList.Add(PrintModel);
                         }
                     }
