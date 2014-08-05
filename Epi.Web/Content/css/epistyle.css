@@ -777,7 +777,7 @@ input[type=checkbox]:focus, input[type=radio]:focus  { outline:2px solid rgba(25
 input[type=checkbox]:checked{background-color: #ffffce;}
 input[type="checkbox"] { min-width:13px !important;}
 
-input[type=text]:disabled, textarea:disabled, select:disabled { color:#808080; background-color:#c5c5c5; }
+input[type=text]:disabled, textarea:disabled, select:disabled { color:#3f3f3f; background-color:#c5c5c5; }
 
 
 
