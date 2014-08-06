@@ -562,45 +562,74 @@ CCE_Context.prototype.setValue = function (pName, pValue) {
 
                 case "yesno":
 
-                    if (pValue == "") {
-                        if (eval(document.getElementById("IsMobile"))) {
-                            if (!IsHidden) {
-                                $(Jquery).val(null).attr("selected", null);
-                                $(Jquery).selectmenu('refresh', null);
-                                cce_Symbol.Value = null;
-                            }
-                        }
-                        else {
-                            $(Jquery).val(null);
-                            cce_Symbol.Value = null;
-                        }
-                    }
-                    else if (pValue) {
-                        if (eval(document.getElementById("IsMobile"))) {
-                            if (!IsHidden) {
+                    //                    if (pValue != " ") {
+                    //                        if (eval(document.getElementById("IsMobile"))) {
+                    //                            if (!IsHidden) {
+                    //                                $(Jquery).val(null).attr("selected", null);
+                    //                                $(Jquery).selectmenu('refresh', null);
+                    //                                cce_Symbol.Value = null;
+                    //                            }
+                    //                        }
+                    //                        else {
+                    //                            $(Jquery).val(null);
+                    //                            cce_Symbol.Value = null;
+                    //                        }
+                    //                    }
+                    //                    else 
+                    if (pValue) 
+                    {
+                        if (eval(document.getElementById("IsMobile"))) 
+                        {
+                            if (!IsHidden)
+                             {
                                 $(Jquery).val('1').attr("selected", "Yes");
                                 $(Jquery).selectmenu('refresh', true);
                                 cce_Symbol.Value = true;
                             }
                         }
-                        else {
+                        else 
+                        {
                             $(Jquery).val("1");
                             cce_Symbol.Value = true;
                         }
                     }
-                    else {
-                        if (eval(document.getElementById("IsMobile"))) {
-                            if (!IsHidden) {
+                    else if (!pValue && pValue != null) 
+                    {
+                        if (eval(document.getElementById("IsMobile"))) 
+                        {
+                            if (!IsHidden) 
+                            {
                                 $(Jquery).val('0').attr("selected", "No");
                                 $(Jquery).selectmenu('refresh', true);
                                 cce_Symbol.Value = false;
                             }
                         }
-                        else {
+                        else 
+                        {
                             $(Jquery).val("0");
                             cce_Symbol.Value = false;
                         }
-                    }
+                    } 
+                    else 
+                    { 
+                     
+                        if (eval(document.getElementById("IsMobile"))) 
+                        {
+                            if (!IsHidden)
+                             {
+                                $(Jquery).val(null).attr("selected", null);
+                                $(Jquery).selectmenu('refresh', null);
+                                cce_Symbol.Value = null;
+                            }
+                        }
+                        else 
+                        {
+                            $(Jquery).val(null);
+                            cce_Symbol.Value = null;
+                        }
+                  }
+                    
+                     
                     break;
 
                 case "checkbox":
@@ -640,7 +669,7 @@ CCE_Context.prototype.setValue = function (pName, pValue) {
                     if (eval(document.getElementById("IsMobile"))) {
                         var selector = "input[id='" + FieldName + pValue + "'";
                         $(selector).prop("checked", true).checkboxradio("refresh");
-                        $("input[type='radio']").attr("checked", true).checkboxradio("refresh"); 
+                        $("input[type='radio']").attr("checked", true).checkboxradio("refresh");
                     } else {
                         var RadiofieldName = "." + FieldName;
                         $(RadiofieldName).each(function (i, obj) {
