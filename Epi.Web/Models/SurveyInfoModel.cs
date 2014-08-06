@@ -27,6 +27,7 @@ namespace Epi.Web.MVC.Models
         private string _IsDraftModeStyleClass;
         private Guid _UserPublishKey;
         private string _PassCode;
+        private string _ResponseId;
         public string SurveyId
         {
             get { return _SurveyId; }
@@ -128,6 +129,11 @@ namespace Epi.Web.MVC.Models
             get { return _PassCode; }
             set { _PassCode = value; }
             }
-
+      
+        public string ResponseId
+            {
+            get { return _ResponseId; }
+            set { _ResponseId = value; }
+            }
     }
 }
