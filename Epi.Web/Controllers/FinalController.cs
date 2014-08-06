@@ -63,7 +63,8 @@ namespace Epi.Web.MVC.Controllers
                 ViewBag.ResponseId = responseId; 
                 ViewBag.Omniture = OmnitureObj;
                 FormsAuthentication.SignOut();
-                FormsAuthentication.SetAuthCookie("BeginSurvey", false);
+              //  FormsAuthentication.SetAuthCookie("BeginSurvey", false);
+                
                 return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, surveyInfoModel);
             }
             catch (Exception ex)
