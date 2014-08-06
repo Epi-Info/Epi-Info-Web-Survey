@@ -14,6 +14,7 @@ using System.Web.Caching;
 using System.Web.UI;
 using System.Reflection;
 using System.Diagnostics;
+
 namespace Epi.Web.MVC.Controllers
 {
     public class HomeController : Controller
@@ -73,7 +74,7 @@ namespace Epi.Web.MVC.Controllers
                 //create the responseid
                 Guid ResponseID = Guid.NewGuid();
                 TempData[Epi.Web.MVC.Constants.Constant.RESPONSE_ID] = ResponseID.ToString();
-
+                surveyInfoModel.ResponseId = ResponseID.ToString();
                
                 string strPassCode = Epi.Web.MVC.Utility.SurveyHelper.GetPassCode();
                
@@ -118,17 +119,25 @@ namespace Epi.Web.MVC.Controllers
                 
                 FormsAuthentication.SetAuthCookie("BeginSurvey", false);
 
-                string ResponseID = string.Empty;
-                object tempDataValue;
 
-                if (TempData.TryGetValue(Epi.Web.MVC.Constants.Constant.RESPONSE_ID, out tempDataValue))
-                {
-                    ResponseID = (string)tempDataValue;
-                }
-                else
-                {
 
-                }
+
+
+
+
+
+
+                string ResponseID = surveyModel.ResponseId;//string.Empty;
+                //object tempDataValue;
+
+                //if (TempData.TryGetValue(Epi.Web.MVC.Constants.Constant.RESPONSE_ID, out tempDataValue))
+                //{
+                //    ResponseID = (string)tempDataValue;
+                //}
+                //else
+                //{
+
+                //}
 
                 Epi.Web.Common.DTO.SurveyAnswerDTO SurveyAnswer = _isurveyFacade.CreateSurveyAnswer(surveyModel.SurveyId, ResponseID.ToString());
                 
@@ -137,7 +146,8 @@ namespace Epi.Web.MVC.Controllers
                 string strPassCode = Epi.Web.MVC.Utility.SurveyHelper.GetPassCode();
                 if (string.IsNullOrEmpty(AuthenticationResponse.PassCode))
                     {
-                    _isurveyFacade.UpdatePassCode(ResponseID.ToString(),  TempData["PassCode"].ToString());
+                    //_isurveyFacade.UpdatePassCode(ResponseID.ToString(),  TempData["PassCode"].ToString());
+                    _isurveyFacade.UpdatePassCode(ResponseID.ToString(), surveyModel.PassCode);
                     }
 
 
