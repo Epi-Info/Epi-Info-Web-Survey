@@ -725,7 +725,7 @@ public System.Collections.Specialized.NameValueCollection GlobalVariables;*/
             {
                 ControlValue = _ControlValue.Value;
             }
-            
+            ControlValue = ControlValue.Replace("\n", " ");
 
             return ControlValue;
         }
