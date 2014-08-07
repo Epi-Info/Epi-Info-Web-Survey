@@ -141,22 +141,23 @@ namespace MvcDynamicForms.Fields
                 IsHighlightedStyle = "background-color:yellow";
             }
              
-            if (_IsDisabled)
-            {
-                select.Attributes.Add("disabled", "disabled");
-            }
+            //if (_IsDisabled)
+            //{
+            //    select.Attributes.Add("disabled", "disabled");
+            //}
             
             string InputFieldStyle = GetInputFieldStyle(_InputFieldfontstyle.ToString(), _InputFieldfontSize, _InputFieldfontfamily.ToString());
             select.Attributes.Add("style", "position:absolute;left:" + _left.ToString() + "px;top:" + _top.ToString() + "px" + ";width:" + _ControlWidth.ToString() + "px ; font-size:" + _ControlFontSize + "pt;" + ErrorStyle + ";" + IsHiddenStyle + ";" + IsHighlightedStyle + ";" + InputFieldStyle);
             select.MergeAttributes(_inputHtmlAttributes);
             html.Append(select.ToString(TagRenderMode.StartTag));
 
-            if (ReadOnly)
-            {
+            if (ReadOnly || _IsDisabled)
+                {
                 var scriptReadOnlyText = new TagBuilder("script");
-                scriptReadOnlyText.InnerHtml = "$(function(){$('#" + inputName + "').attr('disabled','disabled')});";
+                //scriptReadOnlyText.InnerHtml = "$(function(){$('#" + inputName + "').attr('disabled','disabled')});";
+                scriptReadOnlyText.InnerHtml = "$(function(){  var List = new Array();List.push('" + _key + "');CCE_Disable(List, false);});";
                 html.Append(scriptReadOnlyText.ToString(TagRenderMode.Normal));
-            }
+                }
 
             if (ShowEmptyOption)
             {
