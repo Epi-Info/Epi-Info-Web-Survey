@@ -779,5 +779,5 @@ input[type="checkbox"] { min-width:13px !important;}
 
 input[type=text]:disabled, textarea:disabled, select:disabled { color:#3f3f3f; background-color:#c5c5c5; }
 
-
+#ui-datepicker-div {z-index:6000 !important;}
 
