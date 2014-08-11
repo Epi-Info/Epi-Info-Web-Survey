@@ -58,10 +58,10 @@ namespace MvcDynamicForms.Fields
             string IsHiddenStyle = "";
             string IsHighlightedStyle = "";
 
-            if (_IsDisabled)
-            {
-                txt.Attributes.Add("disabled", "disabled");
-            }
+            //if (_IsDisabled)
+            //{
+            //    txt.Attributes.Add("disabled", "disabled");
+            //}
 
             if (Required == true)
             {
@@ -74,10 +74,18 @@ namespace MvcDynamicForms.Fields
                 txt.Attributes.Add("data-prompt-position", "topLeft:15");
             }
 
-            if (ReadOnly)
+            //if (ReadOnly)
+            //    {
+            //    txt.Attributes.Add("disabled", "disabled");
+            //    }
+            if (ReadOnly || _IsDisabled)
                 {
-                txt.Attributes.Add("disabled", "disabled");
+                var scriptReadOnlyText = new TagBuilder("script");
+                //scriptReadOnlyText.InnerHtml = "$(function(){$('#" + inputName + "').attr('disabled','disabled')});";
+                scriptReadOnlyText.InnerHtml = "$(function(){  var List = new Array();List.push('" + _key + "');CCE_Disable(List, false);});";
+                html.Append(scriptReadOnlyText.ToString(TagRenderMode.Normal));
                 }
+
             txt.Attributes.Add("style", "" + ErrorStyle + ";" + IsHiddenStyle + ";" + IsHighlightedStyle);
 
             txt.MergeAttributes(_inputHtmlAttributes);
