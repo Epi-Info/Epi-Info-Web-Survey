@@ -61,18 +61,25 @@ namespace MvcDynamicForms.Fields
             string IsHiddenStyle = "";
             string IsHighlightedStyle = "";
 
-            if (_IsDisabled)
-            {
-                txt.Attributes.Add("disabled", "disabled");
-            }
+            //if (_IsDisabled)
+            //{
+            //    txt.Attributes.Add("disabled", "disabled");
+            //}
             txt.Attributes.Add("class", GetControlClass(Response));
             txt.Attributes.Add("data-prompt-position", "topLeft:15");
             
             txt.Attributes.Add("style", "" + _ControlWidth.ToString() + "px" + ErrorStyle + ";" + IsHiddenStyle + ";" + IsHighlightedStyle);
-            if (ReadOnly)
-                {
+            //if (ReadOnly)
+            //    {
                 
-                txt.Attributes.Add("disabled", "disabled");
+            //    txt.Attributes.Add("disabled", "disabled");
+            //    }
+            if (ReadOnly || _IsDisabled)
+                {
+                var scriptReadOnlyText = new TagBuilder("script");
+                //scriptReadOnlyText.InnerHtml = "$(function(){$('#" + inputName + "').attr('disabled','disabled')});";
+                scriptReadOnlyText.InnerHtml = "$(function(){  var List = new Array();List.push('" + _key + "');CCE_Disable(List, false);});";
+                html.Append(scriptReadOnlyText.ToString(TagRenderMode.Normal));
                 }
 
             txt.MergeAttributes(_inputHtmlAttributes);

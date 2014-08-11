@@ -70,21 +70,23 @@ namespace MvcDynamicForms.Fields
                 IsHighlightedStyle = "background-color:yellow";
             }
 
-            if (_IsDisabled)
-            {
-                txt.Attributes.Add("disabled", "disabled");
-            }
+            //if (_IsDisabled)
+            //{
+            //    txt.Attributes.Add("disabled", "disabled");
+            //}
 
             txt.Attributes.Add("style", "" + ErrorStyle + ";" + IsHiddenStyle + ";" + IsHighlightedStyle );
             txt.MergeAttributes(_inputHtmlAttributes);
             html.Append(txt.ToString(TagRenderMode.SelfClosing));
 
-            if (ReadOnly)
-            {
+            if (ReadOnly || _IsDisabled)
+                {
                 var scriptReadOnlyText = new TagBuilder("script");
-                scriptReadOnlyText.InnerHtml = "$(function(){$('#" + inputName + "').attr('disabled','disabled')});";
+                //scriptReadOnlyText.InnerHtml = "$(function(){$('#" + inputName + "').attr('disabled','disabled')});";
+                scriptReadOnlyText.InnerHtml = "$(function(){  var List = new Array();List.push('" + _key + "');CCE_Disable(List, false);});";
                 html.Append(scriptReadOnlyText.ToString(TagRenderMode.Normal));
-            }
+                }
+
 
             var scriptBuilder = new TagBuilder("script");
             scriptBuilder.InnerHtml = "$('#" + inputName + "').BlockEnter('" + inputName + "');";
