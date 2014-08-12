@@ -71,14 +71,14 @@ namespace Epi.Web.MVC.Controllers
                PageNumber = 1;
            }
 
-           if (ReturnUrl.EndsWith("/"))
-           {
-               ReturnUrl = ReturnUrl + PageNumber.ToString();
-           }
-           else
-           {
-               ReturnUrl = ReturnUrl + "/" + PageNumber.ToString();
-           }
+           //if (ReturnUrl.EndsWith("/"))
+           //{
+           //    ReturnUrl = ReturnUrl + PageNumber.ToString();
+           //}
+           //else
+           //{
+           //    ReturnUrl = ReturnUrl + "/" + PageNumber.ToString();
+           //}
 
 
            // Get Last Page visited else send to page 1 - End

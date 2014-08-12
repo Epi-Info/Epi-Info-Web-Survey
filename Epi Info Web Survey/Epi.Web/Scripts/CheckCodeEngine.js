@@ -533,7 +533,7 @@ CCE_Context.prototype.setValue = function (pName, pValue) {
 
                     if (eval(document.getElementById("IsMobile"))) {
                         var FormatedDate;
-                        var date = new Date();
+                        var date = new Date(cce_Symbol.Value);
                         FormatedDate = date.getMonth() + 1 + "/" + date.getDate() + "/" + date.getFullYear();
                         cce_Symbol.Value = FormatedDate;
                         $(Jquery).val(FormatedDate);
@@ -549,7 +549,7 @@ CCE_Context.prototype.setValue = function (pName, pValue) {
 
                     if (eval(document.getElementById("IsMobile"))) {
                         var FormatedTime;
-                        var date = new Date();
+                        var date = new Date(cce_Symbol.Value);
                         FormatedTime = FormatTime(date);
                         $(Jquery).val(FormatedTime);
                         cce_Symbol.Value = FormatedTime;
@@ -667,9 +667,13 @@ CCE_Context.prototype.setValue = function (pName, pValue) {
 
                 case "radiobutton":
                     if (eval(document.getElementById("IsMobile"))) {
-                        var selector = "input[id='" + FieldName + pValue + "'";
+                       // var selector = "input[id='" + FieldName + pValue + "'";
+                        var selector = "#" + FieldName + pValue + "";
+
+
                         $(selector).prop("checked", true).checkboxradio("refresh");
-                        $("input[type='radio']").attr("checked", true).checkboxradio("refresh");
+                        $("input[type='radio']").checkboxradio("refresh");
+                      
                     } else {
                         var RadiofieldName = "." + FieldName;
                         $(RadiofieldName).each(function (i, obj) {
