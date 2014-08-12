@@ -701,6 +701,8 @@ span.ui-icon-checkbox-on[style*="background-color: yellow;"]{background-color: #
 
 span.ui-icon-radio-on[style*="background-color: yellow;"]{background-color: #4288b9 !important;}
 
+.ui-select .ui-disabled {opacity:0.6 !important;}
+
 .draft
 {
     background-image:url('../images/draft.png'); 
