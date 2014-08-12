@@ -47,13 +47,7 @@ namespace MvcDynamicForms.Fields
             //{
             //    checkboxTag.Attributes.Add("disabled", "disabled");
             //}
-            if (ReadOnly || _IsDisabled)
-                {
-                var scriptReadOnlyText = new TagBuilder("script");
-                //scriptReadOnlyText.InnerHtml = "$(function(){$('#" + inputName + "').attr('disabled','disabled')});";
-                scriptReadOnlyText.InnerHtml = "$(function(){  var List = new Array();List.push('" + _key + "');CCE_Disable(List, false);});";
-                html.Append(scriptReadOnlyText.ToString(TagRenderMode.Normal));
-                }
+
             checkboxTag.Attributes.Add("style", "" + ErrorStyle + ";" + IsHiddenStyle + ";" + IsHighlightedStyle);
             checkboxTag.MergeAttributes(_inputHtmlAttributes);
 
@@ -83,13 +77,19 @@ namespace MvcDynamicForms.Fields
             prompt.Attributes.Add("Id", "label" + inputName);
             html.Append(prompt.ToString());
 
-            if (ReadOnly)
-            {
+            //if (ReadOnly)
+            //{
+            //    var scriptReadOnlyText = new TagBuilder("script");
+            //    scriptReadOnlyText.InnerHtml = "$(function(){$('#" + inputName + "').attr('disabled','disabled')});";
+            //    html.Append(scriptReadOnlyText.ToString(TagRenderMode.Normal));
+            //}
+            if (ReadOnly || _IsDisabled)
+                {
                 var scriptReadOnlyText = new TagBuilder("script");
-                scriptReadOnlyText.InnerHtml = "$(function(){$('#" + inputName + "').attr('disabled','disabled')});";
+                //scriptReadOnlyText.InnerHtml = "$(function(){$('#" + inputName + "').attr('disabled','disabled')});";
+                scriptReadOnlyText.InnerHtml = "$(function(){  var List = new Array();List.push('" + _key + "');CCE_Disable(List, false);});";
                 html.Append(scriptReadOnlyText.ToString(TagRenderMode.Normal));
-            }
-
+                }
             var hdn = new TagBuilder("input");
             hdn.Attributes.Add("type", "hidden");
             hdn.Attributes.Add("id", inputName + "_hidden");
