@@ -148,7 +148,7 @@ namespace Epi.Web.MVC.Controllers
                     default:
                         MvcDynamicForms.Form form;    
                         int CurrentPageNum = GetSurveyPageNumber(SurveyAnswer.XML.ToString());
-                        int pageNumber;
+                        int NewPageNumber;
 
                         string url = "";
                         if (this.Request.UrlReferrer == null)
@@ -169,12 +169,12 @@ namespace Epi.Web.MVC.Controllers
                             StringNumber = StringNumber.Trim('/');
                         }
 
-                        if (int.TryParse(StringNumber, out pageNumber))
+                        if (int.TryParse(StringNumber, out NewPageNumber))
                         {
-                            if (pageNumber != CurrentPageNum)
+                        if (NewPageNumber != CurrentPageNum)
                             {
-                                form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, pageNumber, SurveyAnswer, isMobileDevice);
-                                Epi.Web.MVC.Utility.FormProvider.UpdateHiddenFields(pageNumber, form, XDocument.Parse(surveyInfoModel.XML), XDocument.Parse(SurveyAnswer.XML), this.ControllerContext.RequestContext.HttpContext.Request.Form);
+                            form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, NewPageNumber, SurveyAnswer, isMobileDevice);
+                            Epi.Web.MVC.Utility.FormProvider.UpdateHiddenFields(NewPageNumber, form, XDocument.Parse(surveyInfoModel.XML), XDocument.Parse(SurveyAnswer.XML), this.ControllerContext.RequestContext.HttpContext.Request.Form);
                             }
                             else
                             {
@@ -189,7 +189,7 @@ namespace Epi.Web.MVC.Controllers
                             form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, GetSurveyPageNumber(SurveyAnswer.XML.ToString()), SurveyAnswer, isMobileDevice);
                             form.ClearAllErrors();
 
-                            if (pageNumber == 0)
+                            if (PageNumber == 0)
                             {
                                 int index = 1;
 
@@ -198,10 +198,10 @@ namespace Epi.Web.MVC.Controllers
                                     index = StringNumber.IndexOf("?");
                                 }
 
-                                pageNumber = int.Parse(StringNumber.Substring(0, index));
+                                PageNumber = int.Parse(StringNumber.Substring(0, index));
                             }
 
-                            if (pageNumber == CurrentPageNum)
+                            if (PageNumber == CurrentPageNum)
                             {
                                 UpdateModel(form);
                             }

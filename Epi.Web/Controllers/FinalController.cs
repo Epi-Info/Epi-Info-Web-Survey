@@ -92,7 +92,7 @@ namespace Epi.Web.MVC.Controllers
                     return actionResult;
                     }
                 //FormsAuthentication.SignOut();
-                //FormsAuthentication.SetAuthCookie("BeginSurvey", false);
+                FormsAuthentication.SetAuthCookie("BeginSurvey", false);
                 Guid responseId = Guid.NewGuid();
                 Epi.Web.Common.DTO.SurveyAnswerDTO SurveyAnswer = _isurveyFacade.CreateSurveyAnswer(surveyId, responseId.ToString());
 
