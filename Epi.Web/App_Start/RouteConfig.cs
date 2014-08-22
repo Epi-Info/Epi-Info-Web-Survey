@@ -80,6 +80,14 @@ namespace Epi.Web.MVC
 
 
             routes.MapRoute
+         (
+             null, // Route name
+             "Survey/{responseid}", // URL with parameters
+             new { controller = "Survey", action = "Index", responseid = UrlParameter.Optional}
+         ); // Parameter defaults
+
+
+            routes.MapRoute
            (
                null, // Route name
                "Print/{responseid}", // URL with parameters
