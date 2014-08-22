@@ -168,7 +168,12 @@ namespace Epi.Web.MVC.Controllers
                             StringNumber = url.Substring(LastIndex, url.Length - LastIndex);
                             StringNumber = StringNumber.Trim('/');
                         }
-
+                        if (StringNumber.Contains("?RequestId="))
+                            {
+                             
+                            StringNumber = StringNumber.Substring(0, StringNumber.IndexOf("?"));
+                              
+                            }
                         if (int.TryParse(StringNumber, out NewPageNumber))
                         {
                         if (NewPageNumber != CurrentPageNum)
@@ -200,6 +205,13 @@ namespace Epi.Web.MVC.Controllers
 
                                 PageNumber = int.Parse(StringNumber.Substring(0, index));
                             }
+                            else 
+                                {
+                                  form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, CurrentPageNum, SurveyAnswer, isMobileDevice);
+                                Epi.Web.MVC.Utility.FormProvider.UpdateHiddenFields(CurrentPageNum, form, XDocument.Parse(surveyInfoModel.XML), XDocument.Parse(SurveyAnswer.XML), this.ControllerContext.RequestContext.HttpContext.Request.Form);
+                                
+                                  UpdateModel(form);
+                                }
 
                             if (PageNumber == CurrentPageNum)
                             {
