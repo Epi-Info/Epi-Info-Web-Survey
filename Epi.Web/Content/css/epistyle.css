@@ -207,7 +207,7 @@ bottom: 100px;
  margin-top:-3px;
  }
 
-button.exitsurvey:hover,  button.save:hover, button.prev:hover, button.next:hover, button.begin:hover, button.submits:hover, button.login:hover, a.returnto:hover, button.printbottom:hover 
+button.exitsurvey:hover,  button.save:hover,  button.savetop:hover, button.prev:hover, button.next:hover, button.begin:hover, button.submits:hover, button.login:hover, a.returnto:hover, button.printbottom:hover 
  {
  cursor: pointer;
  opacity: 0.8;
@@ -218,7 +218,7 @@ img.button
  vertical-align:text-top;
  }
  
-button.save, button.prev, button.next, button.begin, button.login
+button.save, button.prev, button.next, button.begin, button.login, button.savetop
  {
  border: 1px #4e9689 solid;
  -moz-border-radius: 10px;
@@ -250,6 +250,8 @@ button.save
     padding-left:20px;
     width:120px;
 }
+
+button.savetop {width: 40px !important; text-align: center; padding: 3px 5px 1px 5px !important; margin-top: -1px; vertical-align: middle;}
 
 button.prev
 {
