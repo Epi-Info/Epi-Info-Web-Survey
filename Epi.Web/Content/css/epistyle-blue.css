@@ -89,6 +89,12 @@ button.save
     height: 30px;
 }
 
+button.savetop
+{
+   
+    height: 30px;
+}
+
 button.next 
 {
     background-image: url('../images/arrow_right.png') !important;
