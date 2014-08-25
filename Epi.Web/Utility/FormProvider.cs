@@ -51,7 +51,7 @@ namespace Epi.Web.MVC.Utility
                 {
                     form.IsDraftModeStyleClass = "draft";
                 }
-
+                form.StatusId = surveyAnswer.Status;
                 string xml = form.SurveyInfo.XML;
                 form.CurrentPage = pageNumber;
 
