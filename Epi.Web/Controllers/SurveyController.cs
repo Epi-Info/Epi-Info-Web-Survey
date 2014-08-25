@@ -16,8 +16,7 @@ using System.Configuration;
 using System.Web.Routing;
 using System.Web.WebPages;
 using System.Web.Caching;
-using System.Reflection;
-using System.Diagnostics;
+ 
 using System.Reflection;
 using System.Diagnostics;
 namespace Epi.Web.MVC.Controllers
@@ -26,7 +25,8 @@ namespace Epi.Web.MVC.Controllers
     public class SurveyController : Controller
     {
         private ISurveyFacade _isurveyFacade;
-        
+        private string RequiredList;
+        private IEnumerable<XElement> PageFields;
         public SurveyController(ISurveyFacade isurveyFacade)
         {
             _isurveyFacade = isurveyFacade;
@@ -100,6 +100,42 @@ namespace Epi.Web.MVC.Controllers
                                 form.PassCode = AuthenticationResponse.PassCode;
                             }
                         }
+
+                        ///////////////////////////// Execute - Record Before - start//////////////////////
+                Dictionary<string, string> ContextDetailList = new Dictionary<string, string>();
+                EnterRule FunctionObject_B = (EnterRule)form.FormCheckCodeObj.GetCommand("level=record&event=before&identifier=");
+                if (FunctionObject_B != null && !FunctionObject_B.IsNull())
+                    {
+                    try
+                        {
+                       // SurveyAnswer.XML = CreateResponseDocument(xdoc, SurveyAnswer.XML);
+
+                      // form.RequiredFieldsList = this.RequiredList;
+                        FunctionObject_B.Context.HiddenFieldList = form.HiddenFieldsList;
+                        FunctionObject_B.Context.HighlightedFieldList = form.HighlightedFieldsList;
+                        FunctionObject_B.Context.DisabledFieldList = form.DisabledFieldsList;
+                        FunctionObject_B.Context.RequiredFieldList = form.RequiredFieldsList;
+
+                        FunctionObject_B.Execute();
+
+                        // field list
+                        form.HiddenFieldsList = FunctionObject_B.Context.HiddenFieldList;
+                        form.HighlightedFieldsList = FunctionObject_B.Context.HighlightedFieldList;
+                        form.DisabledFieldsList = FunctionObject_B.Context.DisabledFieldList;
+                        form.RequiredFieldsList = FunctionObject_B.Context.RequiredFieldList;
+
+
+                        ContextDetailList = Epi.Web.MVC.Utility.SurveyHelper.GetContextDetailList(FunctionObject_B);
+                        form = Epi.Web.MVC.Utility.SurveyHelper.UpdateControlsValuesFromContext(form, ContextDetailList);
+
+                        _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId.ToString(), form, surveyAnswerDTO, false, false, 0);
+                        }
+                    catch (Exception ex)
+                        {
+                        // do nothing so that processing
+                        // can continue
+                        }
+                    }
                         
                         return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
                 }
@@ -651,5 +687,7 @@ namespace Epi.Web.MVC.Controllers
             PrintResponseModel.CurrentDate = DateTime.Now.ToString();
             return PartialView("Print", PrintResponseModel);
             }
+
+      
     }
 }
