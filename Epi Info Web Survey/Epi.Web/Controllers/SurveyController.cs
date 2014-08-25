@@ -102,41 +102,43 @@ namespace Epi.Web.MVC.Controllers
                         }
 
                         ///////////////////////////// Execute - Record Before - start//////////////////////
-                Dictionary<string, string> ContextDetailList = new Dictionary<string, string>();
-                EnterRule FunctionObject_B = (EnterRule)form.FormCheckCodeObj.GetCommand("level=record&event=before&identifier=");
-                if (FunctionObject_B != null && !FunctionObject_B.IsNull())
-                    {
-                    try
-                        {
-                       // SurveyAnswer.XML = CreateResponseDocument(xdoc, SurveyAnswer.XML);
+                        if (form.StatusId != 1)
+                            {
+                            Dictionary<string, string> ContextDetailList = new Dictionary<string, string>();
+                            EnterRule FunctionObject_B = (EnterRule)form.FormCheckCodeObj.GetCommand("level=record&event=before&identifier=");
+                            if (FunctionObject_B != null && !FunctionObject_B.IsNull())
+                                {
+                                try
+                                    {
+                                    // SurveyAnswer.XML = CreateResponseDocument(xdoc, SurveyAnswer.XML);
 
-                      // form.RequiredFieldsList = this.RequiredList;
-                        FunctionObject_B.Context.HiddenFieldList = form.HiddenFieldsList;
-                        FunctionObject_B.Context.HighlightedFieldList = form.HighlightedFieldsList;
-                        FunctionObject_B.Context.DisabledFieldList = form.DisabledFieldsList;
-                        FunctionObject_B.Context.RequiredFieldList = form.RequiredFieldsList;
+                                    // form.RequiredFieldsList = this.RequiredList;
+                                    FunctionObject_B.Context.HiddenFieldList = form.HiddenFieldsList;
+                                    FunctionObject_B.Context.HighlightedFieldList = form.HighlightedFieldsList;
+                                    FunctionObject_B.Context.DisabledFieldList = form.DisabledFieldsList;
+                                    FunctionObject_B.Context.RequiredFieldList = form.RequiredFieldsList;
 
-                        FunctionObject_B.Execute();
+                                    FunctionObject_B.Execute();
 
-                        // field list
-                        form.HiddenFieldsList = FunctionObject_B.Context.HiddenFieldList;
-                        form.HighlightedFieldsList = FunctionObject_B.Context.HighlightedFieldList;
-                        form.DisabledFieldsList = FunctionObject_B.Context.DisabledFieldList;
-                        form.RequiredFieldsList = FunctionObject_B.Context.RequiredFieldList;
+                                    // field list
+                                    form.HiddenFieldsList = FunctionObject_B.Context.HiddenFieldList;
+                                    form.HighlightedFieldsList = FunctionObject_B.Context.HighlightedFieldList;
+                                    form.DisabledFieldsList = FunctionObject_B.Context.DisabledFieldList;
+                                    form.RequiredFieldsList = FunctionObject_B.Context.RequiredFieldList;
 
 
-                        ContextDetailList = Epi.Web.MVC.Utility.SurveyHelper.GetContextDetailList(FunctionObject_B);
-                        form = Epi.Web.MVC.Utility.SurveyHelper.UpdateControlsValuesFromContext(form, ContextDetailList);
+                                    ContextDetailList = Epi.Web.MVC.Utility.SurveyHelper.GetContextDetailList(FunctionObject_B);
+                                    form = Epi.Web.MVC.Utility.SurveyHelper.UpdateControlsValuesFromContext(form, ContextDetailList);
 
-                        _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId.ToString(), form, surveyAnswerDTO, false, false, 0);
-                        }
-                    catch (Exception ex)
-                        {
-                        // do nothing so that processing
-                        // can continue
-                        }
-                    }
-                        
+                                    _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId.ToString(), form, surveyAnswerDTO, false, false, 0);
+                                    }
+                                catch (Exception ex)
+                                    {
+                                    // do nothing so that processing
+                                    // can continue
+                                    }
+                                }
+                            }
                         return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
                 }
             }
