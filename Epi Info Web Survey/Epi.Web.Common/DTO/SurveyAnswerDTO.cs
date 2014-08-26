@@ -29,6 +29,9 @@ namespace Epi.Web.Common.DTO
         [DataMember]
         public bool IsDraftMode { get; set; }
 
+        [DataMember]
+        public bool RecordBeforeFlag { get; set; }
+
        
     }
 }
