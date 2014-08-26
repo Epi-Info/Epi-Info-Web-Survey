@@ -100,9 +100,9 @@ namespace Epi.Web.MVC.Controllers
                                 form.PassCode = AuthenticationResponse.PassCode;
                             }
                         }
-
+                        bool RecordBeforeFlug = GetRecordBeforeFlag(surveyAnswerDTO.XML.ToString());
                         ///////////////////////////// Execute - Record Before - start//////////////////////
-                        if (form.StatusId != 1)
+                        if (form.StatusId != 1 && RecordBeforeFlug == false)
                             {
                             Dictionary<string, string> ContextDetailList = new Dictionary<string, string>();
                             EnterRule FunctionObject_B = (EnterRule)form.FormCheckCodeObj.GetCommand("level=record&event=before&identifier=");
@@ -129,6 +129,7 @@ namespace Epi.Web.MVC.Controllers
 
                                     ContextDetailList = Epi.Web.MVC.Utility.SurveyHelper.GetContextDetailList(FunctionObject_B);
                                     form = Epi.Web.MVC.Utility.SurveyHelper.UpdateControlsValuesFromContext(form, ContextDetailList);
+                                    surveyAnswerDTO.RecordBeforeFlag = true;
 
                                     _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId.ToString(), form, surveyAnswerDTO, false, false, 0);
                                     }
@@ -148,6 +149,20 @@ namespace Epi.Web.MVC.Controllers
                 return View(Epi.Web.MVC.Constants.Constant.EXCEPTION_PAGE);
             }
         }
+
+        private bool GetRecordBeforeFlag(string Xml)
+            {
+            bool Flag = false;
+            XDocument xdoc = XDocument.Parse( Xml);
+
+
+            if (!string.IsNullOrEmpty(xdoc.Root.Attribute("RecordBeforeFlag").Value))
+                {
+                Flag =  true;
+                }
+
+            return Flag;
+            }
 
         [HttpPost]
         [ValidateAntiForgeryToken]

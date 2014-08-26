@@ -299,7 +299,7 @@ namespace Epi.Web.MVC.Controllers
                 root.SetAttribute("HighlightedFieldsList", "");
                 root.SetAttribute("DisabledFieldsList", "");
                 root.SetAttribute("RequiredFieldsList", "");
-
+                root.SetAttribute("RecordBeforeFlag", "");
                 xml.AppendChild(root);
             }
 
