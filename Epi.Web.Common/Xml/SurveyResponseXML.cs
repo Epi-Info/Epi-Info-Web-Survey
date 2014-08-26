@@ -105,7 +105,7 @@ namespace Epi.Web.Common.Xml
                 root.SetAttribute("HighlightedFieldsList", "");
                 root.SetAttribute("DisabledFieldsList", "");
                 root.SetAttribute("RequiredFieldsList", "");
-
+                root.SetAttribute("RecordBeforeFlag", "");
                 xml.AppendChild(root);
                 }
 

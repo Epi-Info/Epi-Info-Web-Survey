@@ -124,6 +124,11 @@ namespace Epi.Web.MVC.Utility
                    Xdoc.Root.Attribute("RequiredFieldsList").Value = form.RequiredFieldsList.ToString();
 
                }
+               if (surveyAnswerDTO.RecordBeforeFlag)
+                   {
+                   Xdoc.Root.Attribute("RecordBeforeFlag").Value = "True";
+                
+                   }
                //  AssignList 
                List<KeyValuePair<string, String>> FieldsList = new List<KeyValuePair<string, string>>();
               
@@ -160,7 +165,8 @@ namespace Epi.Web.MVC.Utility
                 Xdoc.Root.Attribute("HiddenFieldsList").Remove();
                 Xdoc.Root.Attribute("HighlightedFieldsList").Remove();
                 Xdoc.Root.Attribute("DisabledFieldsList").Remove();
-                Xdoc.Root.Attribute("RequiredFieldsList").Remove(); 
+                Xdoc.Root.Attribute("RequiredFieldsList").Remove();
+                Xdoc.Root.Attribute("RecordBeforeFlag").Remove();
                 //RemovePageNumAtt(Xdoc);
             }
             if (IsSaved)
