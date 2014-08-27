@@ -102,7 +102,7 @@ namespace Epi.Web.MVC.Controllers
                         }
                         bool RecordBeforeFlug = GetRecordBeforeFlag(surveyAnswerDTO.XML.ToString());
                         ///////////////////////////// Execute - Record Before - start//////////////////////
-                        if (form.StatusId != 1 && RecordBeforeFlug == false)
+                        if (RecordBeforeFlug == false)
                             {
                             Dictionary<string, string> ContextDetailList = new Dictionary<string, string>();
                             EnterRule FunctionObject_B = (EnterRule)form.FormCheckCodeObj.GetCommand("level=record&event=before&identifier=");
