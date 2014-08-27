@@ -244,32 +244,14 @@ namespace Epi.Web.MVC.Controllers
                         }
                         else
                         {
-                            form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, GetSurveyPageNumber(SurveyAnswer.XML.ToString()), SurveyAnswer, isMobileDevice);
-                            form.ClearAllErrors();
 
-                            if (PageNumber == 0)
-                            {
-                                int index = 1;
 
-                                if (StringNumber.Contains("?RequestId="))
-                                {
-                                    index = StringNumber.IndexOf("?");
-                                }
+                        form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, CurrentPageNum, SurveyAnswer, isMobileDevice);
+                        form.ClearAllErrors();
+                        Epi.Web.MVC.Utility.FormProvider.UpdateHiddenFields(CurrentPageNum, form, XDocument.Parse(surveyInfoModel.XML), XDocument.Parse(SurveyAnswer.XML), this.ControllerContext.RequestContext.HttpContext.Request.Form);
 
-                                PageNumber = int.Parse(StringNumber.Substring(0, index));
-                            }
-                            else 
-                                {
-                                  form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, CurrentPageNum, SurveyAnswer, isMobileDevice);
-                                Epi.Web.MVC.Utility.FormProvider.UpdateHiddenFields(CurrentPageNum, form, XDocument.Parse(surveyInfoModel.XML), XDocument.Parse(SurveyAnswer.XML), this.ControllerContext.RequestContext.HttpContext.Request.Form);
-                                
-                                  UpdateModel(form);
-                                }
+                        UpdateModel(form);
 
-                            if (PageNumber == CurrentPageNum)
-                            {
-                                UpdateModel(form);
-                            }
                         }
 
                         if (isMobileDevice)

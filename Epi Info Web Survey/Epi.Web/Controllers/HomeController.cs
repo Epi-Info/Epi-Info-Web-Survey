@@ -200,7 +200,7 @@ namespace Epi.Web.MVC.Controllers
 
                         ContextDetailList = Epi.Web.MVC.Utility.SurveyHelper.GetContextDetailList(FunctionObject_B);
                         form = Epi.Web.MVC.Utility.SurveyHelper.UpdateControlsValuesFromContext(form, ContextDetailList);
-
+                        SurveyAnswer.RecordBeforeFlag = true;
                         _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, ResponseID.ToString(), form, SurveyAnswer, false, false, 0);
                     }
                     catch (Exception ex)
