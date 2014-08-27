@@ -132,6 +132,9 @@ namespace Epi.Web.MVC.Controllers
                                     surveyAnswerDTO.RecordBeforeFlag = true;
 
                                     _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId.ToString(), form, surveyAnswerDTO, false, false, 0);
+                                    //Getting the updated Xml and load the form from the new Response XML
+                                    surveyAnswerDTO = GetSurveyAnswer(responseId);
+                                    form = _isurveyFacade.GetSurveyFormData(surveyAnswerDTO.SurveyId, pageNumber, surveyAnswerDTO, isMobileDevice);
                                     }
                                 catch (Exception ex)
                                     {
@@ -140,6 +143,7 @@ namespace Epi.Web.MVC.Controllers
                                     }
                                 }
                             }
+
                         return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
                 }
             }
