@@ -56,13 +56,22 @@ namespace MvcDynamicForms
                             {
                                 listField.ChoiceKeyValuePairs[choiceKey] = false;
                             }
+                            var choiceArray = listField.ChoiceKeyValuePairs.Keys.ToArray();
 
+                          
                             foreach (string value in postedForm.GetValues(key))
                             {
-                                listField.ChoiceKeyValuePairs[value] = true;
+                           //listField.ChoiceKeyValuePairs[value] = true;
+                            if (!string.IsNullOrEmpty(value))
+                                {
+                                var Key = choiceArray[int.Parse(value)];
+                                listField.ChoiceKeyValuePairs[Key] = true;
+                                }
+
+
                             }
 
-                            listField.ChoiceKeyValuePairs.Remove("");
+                           //listField.ChoiceKeyValuePairs.Remove("");
                         }
                         else if (dynField is CheckBox)
                         {
