@@ -121,20 +121,21 @@ namespace MvcDynamicForms.Fields
                     case "12":
                         Dictionary<string, bool> options = new Dictionary<string, bool>();
                         List<KeyValuePair<string, bool>> list = _choices.ToList();
-
-                        for (int i = 0; i < list.Count; i++)
+                       
+                    for (int i = 0; i < list.Count; i++)
                         {
-                            int index = -1;
-                            int.TryParse(value, out index);
+                           /// int index = -1;
+                           // int.TryParse(value, out index);
 
-                            if (i == index)
-                            {
+                            if (list[i].Key == value)
+                                {
                                 options.Add(list[i].Key.ToString(), true);
-                            }
+                                }
                             else
-                            {
+                                {
                                 options.Add(list[i].Key.ToString(), false);
-                            }
+                                }
+                            
                         }
 
                         ChoiceKeyValuePairs = options;
