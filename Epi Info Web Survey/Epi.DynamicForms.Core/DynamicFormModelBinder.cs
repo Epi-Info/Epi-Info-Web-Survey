@@ -62,10 +62,19 @@ namespace MvcDynamicForms
                             foreach (string value in postedForm.GetValues(key))
                             {
                            //listField.ChoiceKeyValuePairs[value] = true;
+                                int temp =-1 ;
                             if (!string.IsNullOrEmpty(value))
                                 {
-                                var Key = choiceArray[int.Parse(value)];
-                                listField.ChoiceKeyValuePairs[Key] = true;
+                                     
+                                if ( int.TryParse(value, out temp))
+                                    {
+                                     var Key = choiceArray[int.Parse(value)];
+                                     listField.ChoiceKeyValuePairs[Key] = true;
+                                    }
+                                else
+                                    {
+                                    listField.ChoiceKeyValuePairs[value] = true;
+                                    }
                                 }
 
 
