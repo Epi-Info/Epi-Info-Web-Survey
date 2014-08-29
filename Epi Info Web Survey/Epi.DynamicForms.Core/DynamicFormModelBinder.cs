@@ -65,8 +65,8 @@ namespace MvcDynamicForms
                                 int temp =-1 ;
                             if (!string.IsNullOrEmpty(value))
                                 {
-                                     
-                                if ( int.TryParse(value, out temp))
+
+                                if (int.TryParse(value, out temp) && temp < choiceArray.Count())
                                     {
                                      var Key = choiceArray[int.Parse(value)];
                                      listField.ChoiceKeyValuePairs[Key] = true;
