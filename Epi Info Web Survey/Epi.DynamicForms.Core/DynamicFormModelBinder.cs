@@ -48,6 +48,27 @@ namespace MvcDynamicForms
                             var timepickerField = (TimePickerField)dynField;
                             timepickerField.Value = postedForm[key];
                         }
+                        else if (dynField is MobileRadioList)
+                            {
+                            var listField = (MobileRadioList)dynField;
+
+                            foreach (string choiceKey in listField.ChoiceKeyValuePairs.Keys.ToList())
+                                {
+                                listField.ChoiceKeyValuePairs[choiceKey] = false;
+                                }
+                            var choiceArray = listField.ChoiceKeyValuePairs.Keys.ToArray();
+
+
+                            foreach (string value in postedForm.GetValues(key))
+                                {
+                                if (!string.IsNullOrEmpty(value))
+                                    {
+                                     var _Key = choiceArray[int.Parse(value)];
+                                     listField.ChoiceKeyValuePairs[_Key] = true;
+                                    }
+
+                                }
+                            }
                         else if (dynField is ListField)
                         {
                             var listField = (ListField)dynField;
@@ -61,27 +82,36 @@ namespace MvcDynamicForms
                           
                             foreach (string value in postedForm.GetValues(key))
                             {
-                           //listField.ChoiceKeyValuePairs[value] = true;
-                                int temp =-1 ;
-                            if (!string.IsNullOrEmpty(value))
-                                {
+                           listField.ChoiceKeyValuePairs[value] = true;
+                            //    int temp =-1 ;
+                            //if (!string.IsNullOrEmpty(value))
+                            //    {
 
-                                if (int.TryParse(value, out temp) && temp < choiceArray.Count())
-                                    {
-                                     var Key = choiceArray[int.Parse(value)];
-                                     listField.ChoiceKeyValuePairs[Key] = true;
-                                    }
-                                else
-                                    {
-                                    listField.ChoiceKeyValuePairs[value] = true;
-                                    }
-                                }
+                            //    if (int.TryParse(value, out temp) && choiceArray.Count()> temp)
+                            //        {
+
+                            //         var _Key = choiceArray[int.Parse(value)];
+                            //         if (!int.TryParse(_Key, out temp))
+                            //            {
+                            //            listField.ChoiceKeyValuePairs[_Key] = true;
+                            //            }
+                            //        else
+                            //            {
+                            //             listField.ChoiceKeyValuePairs[value] = true;
+                            //            }
+                            //        }
+                            //    else
+                            //        {
+                            //        listField.ChoiceKeyValuePairs[value] = true;
+                            //        }
+                            //    }
 
 
                             }
 
-                           //listField.ChoiceKeyValuePairs.Remove("");
+                           listField.ChoiceKeyValuePairs.Remove("");
                         }
+                       
                         else if (dynField is CheckBox)
                         {
                             var chkField = (CheckBox)dynField;
