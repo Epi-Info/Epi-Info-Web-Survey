@@ -57,15 +57,18 @@
                         <p style="text-align:center; font-size:9pt;">Survey Closing Date: @string.Format("{0:dddd, MMMM d, yyyy}", Model.ClosingDate)</p>
                     <p>&nbsp;</p>
                    <div style="margin: 0 auto; text-align:center;">
-                        <div>
-                            <span class="boldlabel">Survey #:</span> <span>
-                               @Model.SurveyNumber</span></div>
-                        <div>
-                            <span class="boldlabel">Organization:</span> <span>
-                                @Model.OrganizationName</span></div>
-                        <div>
-                            <span class="boldlabel">Department:</span> <span>
-                               @Model.DepartmentName</span></div>
+                        @if (!string.IsNullOrWhiteSpace(@Model.SurveyNumber))
+                         {
+                                    <div>
+                                        <span class="boldlabel">Survey #:</span> <span>
+                                           @Model.SurveyNumber</span></div>
+                         }
+                        @if (!string.IsNullOrWhiteSpace(@Model.OrganizationName))
+                        {
+                                  <div>
+                                    <span class="boldlabel">Organization:</span> <span>
+                                    @Model.OrganizationName</span></div>
+                        }
                         <div style="clear: both;">
                         </div>
                     </div>
