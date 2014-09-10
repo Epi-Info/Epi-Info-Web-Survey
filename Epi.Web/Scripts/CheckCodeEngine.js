@@ -457,15 +457,15 @@ CCE_Context.prototype.getValue = function (pName)
                         return value;
                     case "numeric": //string has been converted to number to compare with another number
                         value = new Number(field.val()).valueOf();
-                        if(value == "")
-                        {
-                            return null;
-                        }
-                        else
-                        {
-                            return value;
-                        }
-                        
+//                        if(value == "")
+//                        {
+//                            return null;
+//                        }
+//                        else
+//                        {
+//                            return value;
+//                        }
+                        return value;
                     case "radiobutton":
                        var RadiofieldName = "." + fieldName;
                          
