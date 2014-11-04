@@ -1,0 +1,232 @@
+﻿@model Epi.Web.MVC.Models.OrgAdminInfoModel
+@{
+    ViewBag.Title = "Epi Info™ Web Enter - Site Administration";// + " - "+ 
+    // Model.SurveyName + " - " + Model.IsDraftModeStyleClass;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .pageheader {font: 24px Segoe UI; color:#286655;}
+    .h2header {font: 18px Segoe UI; color:#286655; font-weight:400; margin: 15px 0 0 0 !important;}
+    .accountdiv {float:right; width:400px; background:#EBEFF5; border:1px solid #bfbfbf; border-radius:15px; padding:10px 10px 10px 20px;}
+    .introdiv {float:left; width:355px; padding:0 10px 0 0;}
+    .accountlabel {font: 14px Segoe UI; font-weight:600;}
+    .termsofuse {width:790px; padding:5px; height: 300px; border:2px solid #bfbfbf; overflow:auto;}
+    .submits {
+     border: 1px #4e9689 solid;
+     -moz-border-radius: 10px;
+     -webkit-border-radius: 10px;
+     -khtml-border-radius: 10px;
+     border-radius: 10px;
+     padding: 3px 5px 3px 5px;
+     color:#3f3f3f;
+     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+     font-size: 10pt;
+     font-weight:bold;
+     padding-left:10px;
+     height: 35px;
+     width:100px;
+     cursor:pointer;
+     border: 1px solid rgba(0,0,0,0.5);
+     box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
+     -o-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
+     -webkit-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
+     -moz-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
+     }
+     .submits:hover { background: #ffc;}
+     .create {background: #5880b3; background: rgba(88,128,179,0.6); max-width: 160px; width:100%;}
+     [disabled] { color:#737882; background-color:#dfdfce;
+         box-shadow: 0 2px 6px rgba(0,0,0,0.1), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3); 
+         -o-box-shadow: 0 2px 6px rgba(0,0,0,0.1), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
+     -webkit-box-shadow: 0 2px 6px rgba(0,0,0,0.1), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
+     -moz-box-shadow: 0 2px 6px rgba(0,0,0,0.1), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);         
+     }
+     [disabled]:hover {background-color:#dfdfce;}
+     .Account
+     {
+        width:350px;
+        height:24px;
+        font: 14px Segoe UI; 
+      }
+    .field-validation-error {
+    color: #ff0000;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+.input-validation-error {
+    border: 1px solid #ff0000;
+    background-color: #ffeeee;
+}
+
+.validation-summary-errors {
+    font-weight: bold;
+    color: #ff0000;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+
+</style>
+ 
+<link  href="@Url.Content("~/Content/css/eweAdmin.css")" rel="Stylesheet" type="text/css" />
+   <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+@*<script type="text/javascript" language="javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script type="text/javascript" language="javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>  *@
+<script type="text/javascript" language="javascript">
+//    $(document).ready(function () {
+
+//        $('#persons').keyup(function () {
+
+//            var UpdateUrl = '@Url.Action("AutoComplete", "AdminOrganization")'+"?term=" + $('#persons').val()  ;
+
+//            $.ajax({
+//                url: UpdateUrl,
+//                type: 'POST',
+//                contentType: 'application/json; charset=utf-8',
+//                //data: "{}",
+//                dataType: "json",
+//                //cache: false,
+//                async: false,
+//                success: successFunc,
+//                error: errorFunc
+//            });
+//            $.ajaxSetup({ cache: false });
+//            function successFunc(data) {
+//               
+//                var availableTags = data;
+//                $('#persons').autocomplete({ source: availableTags });
+//            }
+//            function errorFunc(data) {
+//                alert('failed');
+//            }
+
+
+
+// 
+//        });
+//    });
+   
+
+
+</script>
+<div id="pageHeader">
+	<div id="pageTitleAdmin">
+		@*<h2 class="adminnav ">@Html.ActionLink("Organizations", "Index", "Admin", null, null)</h2>&nbsp;&nbsp;
+		<h2 class="adminnav admincurrent">Users</h2>*@
+	</div>
+ 
+	
+	<div id="userwelcome">
+		Welcome <strong>@Session["UserFirstName"] @Session["UserLastName"]</strong>&nbsp; | &nbsp;
+	  @*  <a href="#">Log Out</a>*@
+	  
+	  @Html.ActionLink("Home", "Index", "Home", null, null) &nbsp; | &nbsp;
+	  @Html.ActionLink("Log Out", "LogOut", "Home", null, null)	
+	</div>
+	<div style="clear: both;"></div>
+</div>
+
+<div id="content" style="margin:15px 0 200px; padding-left: 10px; min-height: 375px;">
+
+	<div id="formtitle" style="display:block;">
+    @if(Model.IsEditMode){
+		<h2 class="surveyTitle">Edit Organizations</h2>
+        }else{
+        <h2 class="surveyTitle">Add Organizations</h2>
+        }
+	</div>
+	<div style="clear:both;"></div>
+
+	<div class="datagrid">
+
+ @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "myform", @class = "" }))
+     {
+	@*@Html.ValidationSummary(true, "Please correct the errors and try again.")*@
+
+	<fieldset style="width:800px">
+		<legend>UserModels</legend>
+		<ol class="leftlist">
+			<li>
+				<h3>Organization Details.</h3>
+                  @Html.ValidationMessage("Error")<br>
+			</li>
+			<li>
+          
+				@*@Html.LabelFor(m => m.OrganizationModel.Organization)
+				@Html.TextBoxFor(m => m.OrgName)*@
+                 @*@Html.ValidationMessage("Error") *@
+               <label class="accountlabel" id="OrganizationNamelabel">* Organization Name:</label> 
+                 @Html.TextBoxFor(m => m.OrgName, new { @class = "Account" }) <br>
+                @Html.ValidationMessageFor(m => m.OrgName, null, new { @class = "required" })
+                
+
+			</li>
+			<li>
+           
+               <label class="accountlabel"  id="Activelabel"> @Html.CheckBoxFor(m => m.IsOrgEnabled , new { @checked = "checked" }) 
+               Organization is Enabled</label> 
+               @Html.ValidationMessageFor(m => m.IsOrgEnabled, null, new { @class = "required" })
+               
+			</li>
+			 
+		</ol>
+ 
+
+         @if (!Model.IsEditMode)
+             {
+		<ol class="rightlist">
+			<li>
+				<h3>Administrator Information.</h3>
+			</li>
+             <li>
+               <label class="accountlabel" id="AdminEmaillabel">* Admin Email:</label> 
+				  @Html.TextBoxFor(m => m.AdminEmail, new { @id = "persons", @class = "Account" }) <br>
+                @Html.ValidationMessageFor(m => m.AdminEmail, null, new { @class = "required" })
+			</li>
+			 
+			<li>
+             <label class="accountlabel" id="ConfirmAdminEmaillabel">* Confirm Admin Email:</label> 
+				  @Html.TextBoxFor(m => m.ConfirmAdminEmail, new { @class = "Account" }) <br>
+                @Html.ValidationMessageFor(m => m.ConfirmAdminEmail, null, new { @class = "required" })
+			<li></li>
+			<li>
+              <label class="accountlabel" id="AdminFirstNamelabel">* Admin First Name:</label> 
+			  @Html.TextBoxFor(m => m.AdminFirstName, new { @class = "Account" }) <br>
+                @Html.ValidationMessageFor(m => m.AdminFirstName, null, new { @class = "required" })
+			</li>
+			<li>
+              <label class="accountlabel" id="AdminLastNamelabel">* Admin Last Name:</label> 
+				  @Html.TextBoxFor(m => m.AdminLastName, new { @class = "Account" }) <br>
+                @Html.ValidationMessageFor(m => m.AdminLastName, null, new { @class = "required" })
+			</li>
+			
+		</ol>
+             }
+		<div>
+        <div style="clear:both;"></div>
+         @if (!Model.IsEditMode)
+             {
+		     <input type="submit" value="Create" id="Create"/>
+             }
+         else 
+             { 
+              <input type="submit" value="Update" id="Update"/>
+             
+             }
+		@*<input type="button" onclick="Cancel();" value="Cancel"  style="margin-left:20px;"/>*@
+         @Html.ActionLink("Cancel", "OrgList", "AdminOrganization", null, new { @class = "cancelbtn" })
+
+        
+		</div>
+	</fieldset>
+}
+
+	
+	
+	  
+	</div>
+	<div style="clear:both; visibility:collapse;"></div>
+</div>

@@ -1,0 +1,304 @@
+﻿@model Epi.Web.MVC.Models.FormResponseInfoModel
+<div id="formtitle">
+    <h2 class="surveyTitle" style="line-height: 120%;">@Model.FormInfoModel.FormName
+    </h2>
+    <!--<hr class="hr1" />-->
+</div>
+<script>
+    $(document).ready(function () {
+        $("#btnsearch").click(function () {
+            $("#searchbox").toggle();
+        });
+    });
+</script>
+<div id="editsettings">
+    @if (Model.FormInfoModel.IsSQLProject)
+    {
+        <button id="btnsearch" onclick="" class="default search" type="button">
+            Search</button> 
+    }
+    @if (Model.FormInfoModel.IsOwner)
+    {
+        <span>&nbsp;&nbsp;</span>
+        <button id="btneditsettings" onclick="GetSettings()" class="default settings" type="button">
+            Settings</button>
+    }
+</div>
+<div style="clear: both">
+</div>
+@*<div id="infobox1">
+   
+    <div id="create">
+        <span>Created by:</span> <span class="boldlabel">@Model.FormInfoModel.OwnerFName @Model.FormInfoModel.OwnerLName
+        </span>
+    </div>
+    
+    
+    @{
+        if (@Model.FormInfoModel.IsDraftMode)
+            {
+        <div id="mode">
+            <span>Mode:</span> <span class="boldlabel">Staging</span></div>
+            }
+        else
+            {
+                               
+        <div id="mode">
+            <span>Mode:</span> <span class="boldlabel">Production</span></div> 
+                               
+                               
+            }
+    }
+    
+    <div style="clear: both;">
+    </div>
+</div>*@
+<div id="searchbox" style="display: none;">
+    <div class="searchrow">
+        @*<select>
+            <option>Select</option>
+        </select>*@ @*     <select id="columns1" style="width: 172px;">
+                           @foreach (var item in Model.Columns)
+                           {
+				            <option value="@item.Value.ToString()">@item.Value.ToString()</option>
+                           }
+				
+				            
+			            </select>*@ @* @Html.DropDownList("columns1", Model.SearchColumns)*@
+        @Html.DropDownListFor(m => m.SearchModel.SearchCol1, Model.SearchColumns1, string.Empty)
+        @Html.TextBoxFor(m => m.SearchModel.Value1, string.Empty)
+        @*  <input type="text" id="val1" />*@
+    </div>
+    <div class="searchrow">
+        @*  <select>
+            <option>Select</option>
+        </select>*@ @* <select id="columns2" style="width: 172px;">
+                           @foreach (var item in Model.Columns)
+                           {
+				            <option value="@item.Value.ToString()">@item.Value.ToString()</option>
+                           }
+				
+				            
+			            </select>*@ @* @Html.DropDownList("columns2", Model.SearchColumns)
+        <input type="text"  id="val2"/>*@
+        @Html.DropDownListFor(m => m.SearchModel.SearchCol2, Model.SearchColumns2, string.Empty)
+        @Html.TextBoxFor(m => m.SearchModel.Value2, string.Empty)
+    </div>
+    <div class="searchrow">
+        @*<select>
+            <option>Select</option>
+        </select>*@ @* <select id="columns3" style="width: 172px;">
+                           @foreach (var item in Model.Columns)
+                           {
+				            <option value="@item.Value.ToString()">@item.Value.ToString()</option>
+                           }
+				
+				            
+			            </select>*@ @*    @Html.DropDownList("columns3", Model.SearchColumns)
+        <input type="text"  id="val3"/>*@
+        @Html.DropDownListFor(m => m.SearchModel.SearchCol3, Model.SearchColumns3, string.Empty)
+        @Html.TextBoxFor(m => m.SearchModel.Value3, string.Empty)
+    </div>
+    <div class="searchrow">
+        @* <select>
+            <option>Select</option>
+        </select>*@ @*<select id="columns4" style="width: 172px;">
+                           @foreach (var item in Model.Columns)
+                           {
+				            <option value="@item.Value.ToString()">@item.Value.ToString()</option>
+                           }
+				
+				            
+			            </select>*@ @* @Html.DropDownList("columns4", Model.SearchColumns)
+        <input type="text" id="val4" />*@
+        @Html.DropDownListFor(m => m.SearchModel.SearchCol4, Model.SearchColumns4, string.Empty)
+        @Html.TextBoxFor(m => m.SearchModel.Value4, string.Empty)
+    </div>
+    <div class="searchrow" style="display: inline-block; margin-right: 15px;">
+        @* <select>
+            <option>Select</option>
+        </select>*@ @*  <select id="columns5" style="width: 172px;">
+                           @foreach (var item in Model.Columns)
+                           {
+				            <option value="@item.Value.ToString()">@item.Value.ToString()</option>
+                           }
+				
+				            
+			            </select>*@ @*        @Html.DropDownList("columns5", Model.SearchColumns)
+        <input type="text"  id="val5"/>*@
+        @Html.DropDownListFor(m => m.SearchModel.SearchCol5, Model.SearchColumns5, string.Empty)
+        @Html.TextBoxFor(m => m.SearchModel.Value5, string.Empty)
+    </div>
+    <button class="default" style="width: 80px;" name="Search">
+        Go</button>
+    <button class="default" name="ResetSearch">
+        Reset</button>
+</div>
+@{
+    WebGrid webGrid = new WebGrid(rowsPerPage: 20,
+        canSort: false, canPage: false, ajaxUpdateContainerId: "recordstable"); // Model.SurveyAnswerResponse.pageSize
+    webGrid.Bind(Model.ResponsesList, autoSortAndPage: false, rowCount: Model.NumberOfResponses); //Model.SurveyAnswerResponse.pageSize * Model.ResponsesList.Count TBD
+}
+<div id="recordscontent" style="margin-top: 20px;">
+    <!--style="display:inline-block;"-->
+    <div id="addnew">
+        <button  type="submit"  name="AddNewFormId" class="default record" value="@Model.FormInfoModel.FormId">
+            Add New Record
+        </button>
+    </div>
+    @if (Model.FormInfoModel.IsSQLProject)
+    {
+        <div id="tableSort" style="vertical-align: middle;">
+            <select id="columns" style="width: 172px;">
+                @*<option value="0" selected="selected">Sort by:</option>*@
+                @foreach (var item in Model.Columns)
+                {
+                    if (@item.Value.ToString() == @Model.sortfield)
+                    {
+                    <option value="@item.Value.ToString()" selected= selected >@item.Value.ToString()</option>
+                    }
+                    else
+                    {
+                    <option value="@item.Value.ToString()" >@item.Value.ToString()</option>
+                    }
+                }
+            </select>
+            @* <select style="vertical-align:middle;">
+
+        <option>Sort by</option>
+        <option>Column1</option>
+    </select>*@
+            <button id="SortASC" class="default" style="height: 35px; margin: -7px 0 0;">
+                <img src="~/Content/images/Sort-Ascending.png" style="width: 18px; vertical-align: middle;" /></button>
+            <button id="SortDESC" class="default" style="height: 35px; margin: -7px 0 0;">
+                <img src="~/Content/images/Sort-Descending.png" style="width: 18px; vertical-align: middle;" /></button>
+        </div>
+    }
+   
+    <div style="clear: both; margin-bottom: 10px; padding: 10px 0 0;">
+     @if (Model.FormInfoModel.IsSQLProject && Model.SearchModel.SearchCol1 != null)
+    {
+        <div id="searchmsg" style="display:block;">
+            <h4 style="margin: 2px 0 20px 0; background:#ffdead; padding:5px 5px 8px 5px; color:#794800; ">
+                Only showing records matching your search criteria. &nbsp;&nbsp;&nbsp;
+                <button class="default" name="ResetSearch" style="float:right;">Reset Search</button>
+            </h4>
+        </div>
+         }
+        <div id="NumberOfRecords" style="float: left;">
+            <div>
+                @{
+                    if (Model.NumberOfPages == 0)
+                    {
+                    <span class="boldlabel" style="font-size: 14pt;">0 Records </span>
+                    }
+                    else
+                    {
+@*<span >Showing</span>*@
+                    <span class="boldlabel" style="font-size: 14pt;">@(
+ Model.CurrentPage * Model.PageSize - (Model.PageSize - 1))
+                        -
+                        @if (Model.CurrentPage * Model.PageSize < Model.NumberOfResponses)
+                        {
+                            @(Model.CurrentPage * Model.PageSize)
+                        }
+                        else
+                        {
+                            @Model.NumberOfResponses
+                        }</span>
+                    <span>of </span><span class="boldlabel" style="font-size: 14pt;">@Model.NumberOfResponses
+                    </span>
+                    }
+                }
+            </div>
+            
+            @* <span>Total Records:</span> <span class="boldlabel" style="font-size: 14pt;">@Model.NumberOfResponses</span>*@
+        </div>
+        <!--<div id="paging" >
+                    <button class="default paging">
+                        <img alt="Previous" src="~/Content/images/prev.png" a  lign="middle" /></button>
+                    &nbsp; <span class="boldlabel">21-40 of 80</span> &nbsp;
+                    <button class="default paging">
+                        <img alt="Next" src="~/Content/images/next.png" align="middle" /></button>
+                        
+                </div>-->
+        <div id="paging">
+            @{
+                    
+                if (Model.NumberOfPages > 1)
+                {
+                <div id='pager'>
+                    @Html.Partial("PagerPartial", Model)
+                </div>  
+                }
+
+
+            }
+        </div>
+        <div style="clear: both; margin-bottom: 10px;">
+        </div>
+        <div id="recordstable">
+            @{
+       
+                var gridColumns = new List<WebGridColumn>();
+
+                gridColumns.Add(webGrid.Column(header: "",
+                 format: (item) => new HtmlString("<button name='EditForm' type='submit'  class='default edit'  id='" + item.Column0 + "'value='" + item.Column0 + "'>Open</button> " +
+                "<button name='DeleteButton' type='submit'  class='default edit'  id='" + item.Column0 + "'value='" + item.Column0 + "'> Delete</button>"
+                                                                                                       )));
+                if (Model.Columns.Count >= 1)
+                {
+                    gridColumns.Add(webGrid.Column("Column1", (Model.Columns.Count >= 1) ? Model.Columns[0].Value : ""));
+                }
+                if (Model.Columns.Count >= 2)
+                {
+                    gridColumns.Add(webGrid.Column("Column2", (Model.Columns.Count >= 2) ? Model.Columns[1].Value : ""));
+                }
+                if (Model.Columns.Count >= 3)
+                {
+                    gridColumns.Add(webGrid.Column("Column3", (Model.Columns.Count >= 3) ? Model.Columns[2].Value : ""));
+                }
+                if (Model.Columns.Count >= 4)
+                {
+                    gridColumns.Add(webGrid.Column("Column4", (Model.Columns.Count >= 4) ? Model.Columns[3].Value : ""));
+                }
+                if (Model.Columns.Count >= 5)
+                {
+                    gridColumns.Add(webGrid.Column("Column5", (Model.Columns.Count >= 5) ? Model.Columns[4].Value : ""));
+                }
+                @webGrid.GetHtml(columns: gridColumns);
+
+               
+            }
+            @Html.Hidden("hidFormId", @Model.FormInfoModel.FormId)
+            @Html.Hidden("hidPageNumber", @Model.CurrentPage)
+            @{
+                if (Model.NumberOfPages == 0)
+                {
+                <div class="zerorec">
+                    No records found.</div>
+                }
+            }
+        </div>
+        <div id="paging">
+            @{
+                    
+                if (Model.NumberOfPages > 1)
+                {
+                <div id='pager2'>
+                    @*@Html.Partial("~\\views\\shared\\PagerPartial.cshtml", Model)*@
+                    @Html.Partial("PagerPartial", Model)
+                </div>  
+                }
+
+
+            }
+        </div>
+    </div>
+@*  <script type="text/javascript">
+var formId =  document.getElementById('hidFormId').value; //$('#hidFormId').val();
+var pageId = $('#hidPageNumber').val();
+  var returnUrl = 'returnUrl=' + formId + '/' + pageId; 
+  var redirectTimeout = @FormsAuthentication.Timeout.TotalMilliseconds
+  var redirectTimeoutHandle = setTimeout(function() { window.location.href = '@FormsAuthentication.LoginUrl' + '?'+ returnUrl; }, redirectTimeout);
+</script>*@ 

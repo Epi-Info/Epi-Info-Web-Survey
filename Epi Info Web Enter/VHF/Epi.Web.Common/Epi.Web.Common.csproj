@@ -1,0 +1,154 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{6E2F059B-C1CD-401F-8A63-DC2933CFB0D8}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Epi.Web.Enter.Common</RootNamespace>
+    <AssemblyName>Epi.Web.Enter.Common</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BusinessObject\AdminBO.cs" />
+    <Compile Include="BusinessObject\BusinessObject.cs" />
+    <Compile Include="BusinessObject\DbConnectionStringBO.cs" />
+    <Compile Include="BusinessObject\FormInfoBO.cs" />
+    <Compile Include="BusinessObject\FormSettingBO.cs" />
+    <Compile Include="BusinessObject\FormsHierarchyBO.cs" />
+    <Compile Include="BusinessObject\OrganizationBO.cs" />
+    <Compile Include="BusinessObject\PageInfoBO.cs" />
+    <Compile Include="BusinessObject\ResponseXmlBO.cs" />
+    <Compile Include="BusinessObject\UserAuthenticationRequestBO.cs" />
+    <Compile Include="BusinessObject\SurveyInfoBO.cs" />
+    <Compile Include="BusinessObject\SurveyRequestBO.cs" />
+    <Compile Include="BusinessObject\SurveyRequestResultBO.cs" />
+    <Compile Include="BusinessObject\SurveyResponseBO.cs" />
+    <Compile Include="BusinessObject\UserAuthenticationResponseBO.cs" />
+    <Compile Include="BusinessObject\UserBO.cs" />
+    <Compile Include="BusinessRule\BusinessRule.cs" />
+    <Compile Include="BusinessRule\ValidateCompare.cs" />
+    <Compile Include="BusinessRule\ValidateCreditcard.cs" />
+    <Compile Include="BusinessRule\ValidateEmail.cs" />
+    <Compile Include="BusinessRule\ValidateId.cs" />
+    <Compile Include="BusinessRule\ValidateIPAddress.cs" />
+    <Compile Include="BusinessRule\ValidateLength.cs" />
+    <Compile Include="BusinessRule\ValidateRange.cs" />
+    <Compile Include="BusinessRule\ValidateRegex.cs" />
+    <Compile Include="BusinessRule\ValidateRequired.cs" />
+    <Compile Include="BusinessRule\ValidationDataType.cs" />
+    <Compile Include="BusinessRule\ValidationOperator.cs" />
+    <Compile Include="Constants\Constant.cs" />
+    <Compile Include="Criteria\FormInfoCriteria.cs" />
+    <Compile Include="Criteria\OrganizationCriteria.cs" />
+    <Compile Include="Criteria\SurveyAnswerCriteria.cs" />
+    <Compile Include="Criteria\Criteria.cs" />
+    <Compile Include="Criteria\SurveyInfoCriteria.cs" />
+    <Compile Include="DTO\AdminDTO.cs" />
+    <Compile Include="DTO\FormInfoDTO.cs" />
+    <Compile Include="DTO\FormResponseInfoDTO.cs" />
+    <Compile Include="DTO\FormSettingDTO.cs" />
+    <Compile Include="DTO\FormsHierarchyDTO.cs" />
+    <Compile Include="DTO\OrganizationDTO.cs" />
+    <Compile Include="DTO\PageInfoDTO.cs" />
+    <Compile Include="DTO\PassCodeDTO.cs" />
+    <Compile Include="DTO\PreFilledAnswerDTO.cs" />
+    <Compile Include="DTO\ResponseXmlDTO.cs" />
+    <Compile Include="DTO\SurveyAnswerDTO.cs" />
+    <Compile Include="DTO\SurveyControlDTO.cs" />
+    <Compile Include="DTO\UserDTO.cs" />
+    <Compile Include="Email\Email.cs" />
+    <Compile Include="Exception\CustomFaultException.cs" />
+    <Compile Include="Extension\LinqExtensions.cs" />
+    <Compile Include="Helper\RelatedFormsObj.cs" />
+    <Compile Include="Message\Base\AcknowledgeType.cs" />
+    <Compile Include="Message\Base\PersistType.cs" />
+    <Compile Include="Message\Base\RequestBase.cs" />
+    <Compile Include="Message\Base\ResponseBase.cs" />
+    <Compile Include="Message\FormResponseInfoRequest.cs" />
+    <Compile Include="Message\FormResponseInfoResponse.cs" />
+    <Compile Include="Message\FormSettingRequest.cs" />
+    <Compile Include="Message\FormSettingResponse.cs" />
+    <Compile Include="Message\FormsHierarchyRequest.cs" />
+    <Compile Include="Message\FormsHierarchyResponse.cs" />
+    <Compile Include="Message\FormsInfoRequest.cs" />
+    <Compile Include="Message\FormsInfoResponse.cs" />
+    <Compile Include="Message\OrganizationRequest.cs" />
+    <Compile Include="Message\OrganizationResponse.cs" />
+    <Compile Include="Message\PreFilledAnswerRequest.cs" />
+    <Compile Include="Message\PreFilledAnswerResponse.cs" />
+    <Compile Include="Message\UserAuthenticationRequest.cs" />
+    <Compile Include="Message\SurveyAnswerRequest.cs" />
+    <Compile Include="Message\SurveyAnswerResponse.cs" />
+    <Compile Include="Message\LoginRequest.cs" />
+    <Compile Include="Message\LoginResponse.cs" />
+    <Compile Include="Message\LogoutRequest.cs" />
+    <Compile Include="Message\LogoutResponse.cs" />
+    <Compile Include="Message\PublishRequest.cs" />
+    <Compile Include="Message\PublishResponse.cs" />
+    <Compile Include="Message\SurveyInfoRequest.cs" />
+    <Compile Include="Message\SurveyInfoResponse.cs" />
+    <Compile Include="Message\SurveyRequest.cs" />
+    <Compile Include="DTO\PublishInfoDTO.cs" />
+    <Compile Include="DTO\SurveyInfoDTO.cs" />
+    <Compile Include="Message\TokenRequest.cs" />
+    <Compile Include="Message\TokenResponse.cs" />
+    <Compile Include="Message\UserAuthenticationResponse.cs" />
+    <Compile Include="Message\UserRequest.cs" />
+    <Compile Include="Message\UserResponse.cs" />
+    <Compile Include="ObjectMapping\Mapper.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Security\Cryptography.cs" />
+    <Compile Include="Security\PasswordGenerator.cs" />
+    <Compile Include="Email\EmailHandler.cs" />
+    <Compile Include="Security\PasswordHasher.cs" />
+    <Compile Include="Xml\SurveyResponseXML.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

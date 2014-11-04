@@ -1,0 +1,8 @@
+﻿<NavigationWindow x:Class="Epi.Web.SurveyManager.Client.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Epi.Web.SurveyManager.Client" Height="750" Width="665" Source="Page_AddUser.xaml"  >
+   
+</NavigationWindow>
+
+ 

@@ -1,0 +1,33 @@
+﻿@model  IEnumerable < Epi.Web.MVC.Models.UserModel >
+  <table class="sortable">
+
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Active</th>
+                <th>Role</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+        @foreach (var user in Model){
+            <tr>
+                <td>@user.FirstName</td>
+                <td>@user.LastName</td>
+                <td>@user.Email</td>
+                <td>@user.IsActive</td>
+                <td>@user.Role</td>
+                <td>
+                <span >
+                    @Html.ActionLink("Edit", "UserInfo", "AdminUser", new { userid = user.UserId, iseditmode = true , orgid = ViewBag.SelectedOrg }, null)	
+                </span>
+                </td> 
+
+              
+            </tr>
+            }
+        </tbody>
+    </table>

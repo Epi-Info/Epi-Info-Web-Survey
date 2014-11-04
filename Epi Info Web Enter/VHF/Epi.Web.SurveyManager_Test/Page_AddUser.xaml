@@ -1,0 +1,50 @@
+﻿<Page x:Class="Epi.Web.SurveyManager.Client.Page_AddUser"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="690" d:DesignWidth="630"
+	Title="AddUser">
+    <ScrollViewer HorizontalScrollBarVisibility="Auto">
+        <Grid Height="692" Width="629"  >
+
+
+            <GroupBox Header="Add Organization " Height="180" HorizontalAlignment="Left" Margin="33,154,0,0" Name="groupBox2" VerticalAlignment="Top" Width="551" Background="#FFE5E19E" FontSize="13.333" FontWeight="Bold"></GroupBox>
+            <Button Content="View Publish Client" Height="30" HorizontalAlignment="Left" Margin="35,12,0,0" Name="ViewPublishClient" VerticalAlignment="Top" Width="118"  Click="ViewPublishClien_Click" />
+            <Button Content="Manage Existing Surveys" Height="30" HorizontalAlignment="Left" Margin="157,12,0,0" Name="ManageSurveyButton" VerticalAlignment="Top" Width="150"  Click="ManageSurveyButton_Click" />
+            <Button Content="View Download Client" Height="30" HorizontalAlignment="Left" Margin="313,12,0,0" Name="ViewDownloadClient" VerticalAlignment="Top" Width="162" Click="ViewDownloadClient_Click" />
+            <Button Content="Add Key" Height="23" HorizontalAlignment="Right" Margin="0,245,129,0" Name="Add" VerticalAlignment="Top" Width="130" Click="AddOrganization_Click" />
+            <Button Content="Response Client" Height="27" HorizontalAlignment="Left" Margin="36,48,0,0" Name="ResponseClientbutton" Click="ResponseClient_Click" VerticalAlignment="Top" Width="117" />
+            <Label Content="Organization Name:" Height="28" Margin="48,180,0,484" Name="label2" HorizontalAlignment="Left" Width="126.313" />
+            <TextBox Height="23" HorizontalAlignment="Left" Margin="192.313,185,0,0" Name="OrganizationtextBox1" VerticalAlignment="Top" Width="307.687" Background="White" AutoWordSelection="True" />
+            <Label Content="Organization Key:" Height="28" Margin="48,209,0,455" Name="label3" HorizontalAlignment="Left" Width="158" />
+            <TextBox Height="23" HorizontalAlignment="Right" Margin="0,214,129,0" Name="GeneratedkeytextBox1" VerticalAlignment="Top" Width="307.687" IsReadOnly="True" Background="#FFD8D5D5"></TextBox>
+            <GroupBox Header="Admin Key" Name="groupBox1" Width="551" Background="#FFE5E19E" Margin="33,82,45,544" FontWeight="Bold"/>
+            <PasswordBox Height="23" Name="passwordBox1" Margin="192.313,110,129,559" MaxLength="36" />
+            <Label Content="Admin Key:" Height="28" Name="label1" Margin="48,105,491,559" />
+            <Button Content="Generate Key" Height="23" HorizontalAlignment="Left" Margin="193,245,0,0" Name="GenerateKey" VerticalAlignment="Top" Width="130" Click="GenerateKey_Clik" />
+            <GroupBox Header="Get Organization Key" Height="305" HorizontalAlignment="Left" Margin="35,346,0,0" Name="groupBox3" VerticalAlignment="Top" Width="551" Background="#FFE5E19E" FontSize="13.333" FontWeight="Bold">
+
+            </GroupBox>
+            <Label Content="Organization Name:" Height="28" HorizontalAlignment="Left" Margin="48,390,0,274" Name="label4" Width="126.313" />
+            <Button Content="Copy" Height="23" Margin="514,423,71,0" Name="GetKey" VerticalAlignment="Top" Click="Copy_Clik" ToolTip="Copy to Clipboard" />
+            <Label Content="Organization Key:" Height="28" HorizontalAlignment="Left" Margin="48,418,0,246" Name="label5" Width="158" />
+            <RichTextBox Height="49" HorizontalAlignment="Left" Margin="192.313,274,0,0" Name="MessagerichTextBox1" VerticalAlignment="Top" Width="307.687" Foreground="#FFF20909" VerticalScrollBarVisibility="Visible" />
+            <Label Content="Message:" Height="28" HorizontalAlignment="Left" Margin="48,274,0,0" Name="label6" VerticalAlignment="Top" />
+            <Button Content="Get Organization Names" Height="23" HorizontalAlignment="Left" Margin="334.59,361,0,0" Name="button1" VerticalAlignment="Top" Width="165.41" Click="GetOrganizationNames_Clik" />
+            <ComboBox   Height="25" HorizontalAlignment="Left" Margin="192.313,390,0,0" Name="OnamelistBox1" VerticalAlignment="Top" Width="307.687" AllowDrop="True" SelectionChanged="GetKey_Clik" SelectedIndex="0" />
+            <RichTextBox Foreground="#FFF20909" Height="49" HorizontalAlignment="Left" Margin="192.313,564,0,0" Name="richTextBox1" VerticalAlignment="Top" VerticalScrollBarVisibility="Visible" Width="307.687" />
+            <Label Content="Message:" Height="28" HorizontalAlignment="Left" Margin="48,564,0,0" Name="label7" VerticalAlignment="Top" />
+            <Label Content="Organization Name:" Height="28" HorizontalAlignment="Left" Margin="49,485,0,179" Name="label8" Width="117" />
+            <TextBox AutoWordSelection="True" Background="White" Height="23" HorizontalAlignment="Left" Margin="192.313,490,0,0" Name="ONameEditTextBox1" VerticalAlignment="Top" Width="307.687" />
+            <CheckBox Content="Is Enabled" Height="16" HorizontalAlignment="Left" Margin="193,521,0,0" Name="checkBox1" VerticalAlignment="Top" />
+            <Button  Click="Save_Click" Content="Update" Height="23" Margin="410,518,131,0" Name="Savebutton" ToolTip="Copy to Clipboard" VerticalAlignment="Top" />
+            <TextBox Background="#FFD8D5D5" Height="23" HorizontalAlignment="Right" IsReadOnly="True" Margin="0,423,129,0" Name="EditOtextBox1" VerticalAlignment="Top" Width="307.687" />
+            <GroupBox Header="Edit Organization Info" Height="100" HorizontalAlignment="Left" Margin="42,458,0,0" Name="groupBox4" VerticalAlignment="Top" Width="513">
+                <Grid />
+            </GroupBox>
+            <Button Content="View Config" Height="28" HorizontalAlignment="Left" Margin="481,12,0,0" Name="ViewConfigButton" VerticalAlignment="Top" Width="86" Click="ViewConfigButton_Click" />
+        </Grid>
+    </ScrollViewer>
+</Page>

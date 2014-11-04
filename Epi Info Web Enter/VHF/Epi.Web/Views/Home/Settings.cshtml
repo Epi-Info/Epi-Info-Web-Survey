@@ -1,0 +1,209 @@
+﻿@model List<Epi.Web.MVC.Models.SettingsInfoModel>
+<div id="formtitle">
+	<h2 class="surveyTitle">@Model[0].FormName </h2>
+</div>
+<div id="editsettings">
+	@*<button id="btneditsettings"  onclick="" class="default settings" type="button">Records</button>*@
+</div>
+<div style="clear: both"></div>
+<div id="infobox1">   
+	<div id="create"><span>Created by:</span> <span class="boldlabel">@Model[0].FormOwnerFirstName  @Model[0].FormOwnerLastName </span></div>
+	<div id="mode"><span>Mode:</span> @*<span class="boldlabel">Staging</span>*@
+	 
+	@if(!Model[0].IsDraftMode)
+		{
+		   
+	  <span class="boldlabel">Production</span>
+	  
+		}
+ else
+	 {
+		<span class="boldlabel">Staging </span>
+		
+	 }
+  
+	
+	</div>
+	<div style="clear: both;"></div>
+</div>
+<div id="settingscontent">
+	<h3 class="surveyTitle" style="margin: 0 0 .3em 0;">Form Settings</h3>
+	 <br> 
+
+	@*<div id="recordcolumns">
+	<div id="mode">
+       <p style="margin-bottom: 1px;"> <label style="font-weight:bold;font-size: 0.9em;">Mode:</label><br /> @*<span class="boldlabel">Staging</span>*@
+	    <select name="Mode" id="FormMode" onchange="SetSettingMode()">
+	@if (!Model[0].IsDraftMode)
+	 {
+		  <option value="0"  selected ="selected">Production</option>
+		  <option value="1">Staging</option>
+	 }
+ else
+	 {
+		  <option value="0"  selected ="selected">Production</option>
+		  <option value="1" selected ="selected">Staging</option>
+		
+	 }
+   </select> 
+       </p>
+       <p style="margin-bottom: 4px;font-weight:bold;font-size: 0.9em;">Select up to 5 columns to display when viewing the list of records.</p>
+        @foreach (var FormModel in Model)
+            {
+            
+        <p style="margin-bottom: 4px;font-weight:bold;font-size: 0.9em;">Form Name: @FormModel.FormName</p>
+		<div id="columnselect">
+			<div id="available">
+				<label for="s_@FormModel.FormId">Available Columns:</label>
+				<br />
+				<select id="s_@FormModel.FormId" size="10" multiple="multiple">
+			   
+		 @foreach (var item in FormModel.FormControlNameList)
+		  {
+					<option value="@item.Value">@item.Value</option>
+		  }
+				</select>
+			</div>
+			<div id="swapbtn">
+				@*<a href="#" onclick="listbox_moveacross('s', 'SelectedColumns',true)">&#x25BA;</a>*@
+				<button id="Rightbutton_@FormModel.FormId" class="default" type="button" onclick="listbox_moveacross('s_@FormModel.FormId', 'SelectedColumns_@FormModel.FormId',true)">&#x25BA;</button>
+				<br /><br />
+				@*<a href="#" onclick="listbox_moveacross('SelectedColumns', 's',false)">&#x25C4;</a>*@
+				<button id="leftbutton_@FormModel.FormId" class="default" type="button" onclick="listbox_moveacross('SelectedColumns_@FormModel.FormId', 's_@FormModel.FormId',false)">&#x25C4;</button>
+			</div>
+			<div id="selected">
+				<label for="s">Columns to Display: (Max 5)</label>
+				<br />
+				<select id="SelectedColumns_@FormModel.FormId" class="SelectedColumns" size="5" multiple="multiple" name="SelectedColumns_@FormModel.FormId" >
+					 @foreach (var item in FormModel.SelectedControlNameList)
+		           {
+					<option value="@item.Value">@item.Value</option>
+					}
+				</select> 
+			</div>
+			<div id="updown">
+				@*<a href="#" onclick="listbox_move('SelectedColumns', 'up')">&#x25B2;</a> *@
+				  <button id="Up1_@FormModel.FormId" class="default" type="button" onclick="listbox_move('SelectedColumns_@FormModel.FormId', 'up')">&#x25B2;</button>
+				<br /><br />
+				@*<a href="#" onclick="listbox_move('SelectedColumns', 'down')">&#x25BC;</a>*@
+				<button id="down1_@FormModel.FormId" class="default" type="button" onclick="listbox_move('SelectedColumns_@FormModel.FormId', 'down')">&#x25BC;</button>
+			</div>
+			<div style="clear:both;"></div>
+		</div>
+            } 
+		<p style="margin-bottom: 4px;font-weight:bold;font-size: 0.9em;">Assign Users to your Form</p>
+		<div id="UserSelect">
+			<div id="available1">
+				<label for="Assigned">Available Users:</label>
+				<br />
+				<select id="Assigned" size="10" multiple="multiple">
+			   
+					 @foreach (var item in Model[0].UserList)
+		  {
+					<option value="@item.Value">@item.Value</option>
+		  }
+				</select>
+			</div>
+			<div id="swapbtn">
+				@*<a href="#" onclick="listbox_moveacross('Assigned', 'SelectedUser',false)">&#x25BA;</a>*@
+				  <button id="button3" class="default" type="button" onclick="listbox_moveacross('Assigned', 'SelectedUser',false)">&#x25BA;</button>
+				<br /><br />
+				@*<a href="#" onclick="listbox_moveacross('SelectedUser', 'Assigned',false)">&#x25C4;</a>*@
+				<button id="button4" class="default" type="button" onclick="listbox_moveacross('SelectedUser', 'Assigned',false)">&#x25C4;</button>
+			</div>
+			<div id="selected1">
+				<label for="Assigned">Assigned Users:</label>
+				<br />
+				<select id="SelectedUser" size="5" multiple="multiple" name="SelectedUser" >
+					 @foreach (var item in Model[0].AssignedUserList)
+				{
+					<option value="@item.Value">@item.Value</option>
+					}
+				</select>
+			</div>
+			<div id="updown">
+				@*<a href="#" onclick="listbox_move('SelectedUser', 'up')">&#x25B2;</a> *@
+				   <button id="Up2" class="default" type="button" onclick="listbox_move('SelectedUser', 'up')">&#x25B2;</button>
+				<br /><br />
+				@*<a href="#" onclick="listbox_move('SelectedUser', 'down')">&#x25BC;</a>*@
+				<button id="down2" class="default" type="button" onclick="listbox_move('SelectedUser', 'down')">&#x25BC;</button>
+			</div>
+			<div style="clear:both;"></div>
+		</div>
+
+	</div>
+    <div style="clear: both;"></div>
+	
+		
+
+	
+	@*</div>*@
+	<div class="formbutton1" style="margin:20px 0px;">
+		<button class="default savesettings" onclick="SaveSettings()" type="button">Save Settings</button>
+		&nbsp;&nbsp;&nbsp;&nbsp;
+		<button class="default cancelsettings" onclick="CancelChange()" type="button">Cancel</button>
+	</div>
+	<div style="clear: both"></div>
+@*</div>*@
+<script type="text/javascript">
+	function listbox_move(listID, direction) {
+		 
+		var listbox = document.getElementById(listID); var selIndex = listbox.selectedIndex; 
+		if (-1 == selIndex) { alert("Please select an option to move."); return; }
+		var increment = -1; if (direction == 'up')
+			increment = -1; else
+			increment = 1; if ((selIndex + increment) < 0 || (selIndex + increment) > (listbox.options.length - 1)) { return; }
+		var selValue = listbox.options[selIndex].value; var selText = listbox.options[selIndex].text; listbox.options[selIndex].value = listbox.options[selIndex + increment].value
+		listbox.options[selIndex].text = listbox.options[selIndex + increment].text
+		listbox.options[selIndex + increment].value = selValue; listbox.options[selIndex + increment].text = selText; listbox.selectedIndex = selIndex + increment;
+		
+	}
+	function listbox_moveacross(sourceID, destID, Selecting) {
+	  
+		var src = document.getElementById(sourceID);
+		var dest = document.getElementById(destID);
+		for (var count = 0; count < src.options.length; count++) 
+		{
+			if (src.options[count].selected == true) 
+			{
+				var option = src.options[count];
+				var newOption = document.createElement("option");
+				newOption.value = option.value;
+				 newOption.text = option.text;
+				newOption.selected = true;
+				try {
+
+					if (Selecting) {
+						if (dest.options.length < 5) {
+							dest.add(newOption, null);
+							src.remove(count, null);
+						}
+						else {
+							alert("You can only select up to 5 columns.");
+							return;
+						}
+					}
+					else
+					 {
+						 dest.add(newOption, null);
+						 src.remove(count, null);
+					
+					 }
+				} 
+				catch (error) 
+				{
+					dest.add(newOption); 
+					src.remove(count);
+				 }
+				count--;
+			}
+		} 
+		
+	}
+	function listbox_selectall(listID, isSelect) 
+	{
+		var listbox = document.getElementById(listID);
+		for (var count = 0; count < listbox.options.length; count++)
+		{ listbox.options[count].selected = isSelect; }
+	  }
+	</script>

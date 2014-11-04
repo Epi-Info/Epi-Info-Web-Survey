@@ -1,0 +1,46 @@
+﻿@model Epi.Web.MVC.Models.ExceptionModel
+@{
+    ViewBag.Title = "Exception.Mobile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script>
+    $(document).ready(function () {
+        $("#showhide").click(function () {
+            $("#errorDetails").toggle();
+        });
+    });
+</script>
+<div id="attention" style="margin: 10px">
+    <div class="image">
+        <img src="@Url.Content("~/Content/images/sign_warning.png")" alt="" style="vertical-align: middle;
+                padding-right: 5px; width:24px;"/>
+    </div>
+    <div class="message">
+       @*@System.Configuration.ConfigurationManager.AppSettings["SURVEY_NOT_EXISTS"]*@
+        @System.Configuration.ConfigurationManager.AppSettings["UNKNOWN_ERROR_MESSAGE"]
+        @* @Html.ActionLink("Click here to go Home", "Index","Home", null, null)*@
+    </div>
+    <div style="clear: both;">
+    </div>
+</div>
+<div id="relatenav" style="padding-bottom: 10px; display: inline-block; margin: 10px;">
+    @if (Session["RootFormId"] != null)
+    {
+        @Html.ActionLink("Return to Home", "Index", "FormResponse", new { formid = Session["RootFormId"], Pagenumber = Session["Pagenumber"] }, new { @class = "returnto" })
+    }
+    else
+    {    
+        @Html.ActionLink("Log Out", "LogOut", "FormResponse", null, new { @class = "returnto" })
+    }
+</div>
+@if (Convert.ToInt16(Session["UserHighestRole"].ToString()) > 1)
+{
+    <div style="margin: 10px">
+        <a id="showhide" href="#">Show/Hide Details</a></div>
+    <div id="errorDetails" style="border: 1px solid #ffca0a; margin: 20px 0.5em 10px;
+        padding: 10px; display: none;">
+       Stack Trace: @Model.ExceptionDetail
+       Message : @Model.Message
+    </div>
+ 
+}

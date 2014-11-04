@@ -1,0 +1,172 @@
+﻿@model Epi.Web.MVC.Models.UserModel
+@{
+    ViewBag.Title = "Epi Info™ Web Enter - Site Administration";// + " - "+ 
+    // Model.SurveyName + " - " + Model.IsDraftModeStyleClass;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="@Url.Content("~/Content/css/eweAdmin.css")" rel="Stylesheet" type="text/css" />
+<div id="pageHeader">
+    <div id="pageTitleAdmin">
+        @*<h2 class="adminnav">@Html.ActionLink("Organizations", "OrgList", "AdminOrganization", null, new { @class = "orgbtn" })</h2>&nbsp;&nbsp;
+		<h2 class="adminnav">@Html.ActionLink("Users", "UserList", "AdminUser", null, new { @class = "userbtn" })</h2>*@
+    </div>
+    <div id="userwelcome">
+        Welcome <strong>@Session["UserFirstName"] @Session["UserLastName"]</strong>&nbsp;
+        | &nbsp; @*  <a href="#">Log Out</a>*@
+        @Html.ActionLink("Home", "Index", "Home", null, null) &nbsp; | &nbsp;
+        @Html.ActionLink("Log Out", "LogOut", "Home", null, null)
+    </div>
+    <div style="clear: both;">
+    </div>
+</div>
+<div id="content" style="margin: 15px 0 200px; padding-left: 10px; min-height: 375px;">
+    <div id="formtitle" style="display: block;">
+        @if (Model.IsEditMode)
+        {
+            <h2 class="surveyTitle">
+                Edit Users</h2>
+        }
+        else
+        {
+            <h2 class="surveyTitle">
+                Add Users</h2>
+        }
+    </div>
+    <div style="clear: both;">
+    </div>
+    <div class="datagrid">
+        @using (Html.BeginForm())
+        {
+@*@Html.ValidationSummary(true, "Please correct the errors and try again.")*@
+ 
+            var disable_attr = false;
+                 if ((Model.IsEditMode && Model.Email == Session["UserEmailAddress"].ToString()))
+                {
+                    disable_attr = true;
+                }
+            <fieldset style="width: 800px">
+                <legend>UserModels</legend>
+                <ol class="leftlist">
+                    <li>
+                        <h3>
+                            User Information</h3>
+                        @Html.ValidationMessage("Error")<br>
+                    </li>
+                    <li>
+                        <label class="accountlabel" id="Emaillabel">
+                            * Email:</label>
+                            @if (disable_attr)
+                            {
+                                @Html.TextBoxFor(m => m.Email, new { @class = "Account", @disabled = "disabled" })
+                            }
+                            else
+                            {
+                                  @Html.TextBoxFor(m => m.Email, new { @class = "Account" })  
+                            }
+                        
+                        <br>
+                        @Html.ValidationMessageFor(m => m.Email, null, new { @class = "required" })
+                    </li>
+                    <li>
+                        <label class="accountlabel" id="FirstNamelabel">
+                            * First Name:</label>
+                        @Html.TextBoxFor(m => m.FirstName, new { @class = "Account" })
+                        <br>
+                        @Html.ValidationMessageFor(m => m.FirstName, null, new { @class = "required" })
+                    </li>
+                    <li>
+                        <label class="accountlabel" id="LastNamelabel">
+                            * Last Name:</label>
+                        @Html.TextBoxFor(m => m.LastName, new { @class = "Account" })
+                        <br>
+                        @Html.ValidationMessageFor(m => m.LastName, null, new { @class = "required" })
+                    </li>
+                    <li></li>
+                </ol>
+              
+                    <ol class="rightlist" >
+                        <li>
+                            <h3>
+                                Organization Details @*<span>Org Name 1</span>*@</h3>
+                        </li>
+                        <li>@*<label>Role</label>
+				@Html.TextBoxFor(m => m.LastName)*@
+                            <label class="accountlabel" id="Rolelabel">
+                                Role in Organization:</label>
+                            @*  <select id="OrgList" onchange="GetList()">
+                        <option value= '1'>User</option>
+                        <option value= '2'>Organization Admin</option>
+                        <option value= '3'>Admin</option>
+                  </select> *@
+                            @if (disable_attr)
+                            {
+                                @Html.DropDownListFor(model => model.Role, new SelectList(
+                  new List<Object>{
+                       new { value = 1, text = "User"  },
+                       new { value = 2 , text = "Organization Admin" },
+                       //new { value = 3 , text = "Admin"}
+                    },
+                  "value",
+                  "text",
+1), new
+{
+    disabled = "disabled"
+})
+                            }
+                            else
+                            {
+                                    @Html.DropDownListFor(model => model.Role, new SelectList(
+                  new List<Object>{
+                       new { value = 1, text = "User"  },
+                       new { value = 2 , text = "Organization Admin" },
+                       //new { value = 3 , text = "Admin"}
+                    },
+                  "value",
+                  "text",
+1), new
+{
+
+})
+                            }
+                        </li>
+                        <li></li>
+                        <li>
+                            <label class="accountlabel" id="Activelabel">
+                            @if (disable_attr)
+                            {
+                              @Html.CheckBoxFor(m => m.IsActive, new { @checked = "checked", @disabled = "disabled" })   
+                            }
+                            else
+                            {
+                                     @Html.CheckBoxFor(m => m.IsActive, new { @checked = "checked" })
+                            }
+                                User is Active</label>
+                        </li>
+                        <li></li>
+                    </ol>
+                
+@*<li>
+				@Html.CheckBoxFor(m => m.AdminNotifications)
+				@Html.LabelFor(m => m.AdminNotifications, new { @style = "display:inline-block;" })
+			</li>*@
+                <div>
+                    <div style="clear: both;">
+                    </div>
+                    @if (!@Model.IsEditMode)
+                    {
+                        <input type="submit" value="Create" id="Create" />
+                    }
+                    else
+                    { 
+                        <input type="submit" value="Update" id="Update" />
+             
+                    }
+                    @*<input type="submit" value="Cancel"  style="margin-left:20px;"/>*@
+                    @Html.ActionLink("Cancel", "UserList", "AdminUser", null, new { @class = "cancelbtn" })
+                </div>
+            </fieldset>
+        }
+    </div>
+    <div style="clear: both; visibility: collapse;">
+    </div>
+</div>

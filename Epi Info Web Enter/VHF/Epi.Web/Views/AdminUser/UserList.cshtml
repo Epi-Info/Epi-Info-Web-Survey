@@ -1,0 +1,112 @@
+﻿@model Epi.Web.MVC.Models.UserOrgModel
+@{
+    ViewBag.Title = "Epi Info™ Web Enter - Site Administration";// + " - "+ 
+    // Model.SurveyName + " - " + Model.IsDraftModeStyleClass;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="@Url.Content("~/Content/css/eweAdmin.css")" rel="Stylesheet" type="text/css" />
+<div id="pageHeader">
+    <div id="pageTitleAdmin">
+        @if (Model.UserHighestRole == 3)
+        {
+            <h2 class="adminnav">@Html.ActionLink("Organizations", "OrgList", "AdminOrganization", null, new { @class = "orgbtn" })</h2>
+            <span>&nbsp;&nbsp;</span>
+        }
+        <h2 class="adminnav">@Html.ActionLink("Users", "UserList", "AdminUser", null, new { @class = "userbtn" })</h2>
+    </div>
+    <script type="text/javascript">
+
+        function GetList() {
+
+            var element = document.getElementById("OrgList");
+            var OrgId = element.options[element.selectedIndex].value;
+            
+            $("#UserList").show();
+            $.ajax({
+                url: '@Url.Action("GetUserList", "AdminUser")' + '?orgid=' + OrgId.toString(),
+                type: 'GET',
+                contentType: 'application/json; charset=utf-8',
+                //data: JSON.stringify(model),
+                success: successFunc,
+                error: errorFunc
+            });
+            $.ajaxSetup({ cache: false });
+
+            function successFunc(data, status) {
+
+                $("#UserList").html(data);
+                $("#success").hide();
+            }
+
+            function errorFunc() {
+                alert('error');
+            }
+        }
+     
+ 
+    </script>
+    <div id="userwelcome">
+        Welcome <strong>@Session["UserFirstName"] @Session["UserLastName"]</strong>&nbsp;
+        | &nbsp; @*  <a href="#">Log Out</a>*@
+        @Html.ActionLink("Home", "Index", "Home", null, null) &nbsp; | &nbsp;
+        @Html.ActionLink("Log Out", "LogOut", "Home", null, null)
+    </div>
+    <div style="clear: both;">
+    </div>
+</div>
+<div id="content" style="margin: 15px 0 200px; padding-left: 10px; min-height: 375px;">
+    <div id="formtitleadmin" style="display: block;">
+        <h2 class="surveyTitle">
+            Manage Users</h2>
+    </div>
+    <div style="clear: both;">
+    </div>
+    <div class="datagrid">
+        @if (!string.IsNullOrEmpty(Model.Message))
+        {
+            <div id="success">
+                <span>@Model.Message</span>
+            </div>
+        }
+        <div style="clear: both;">
+        </div>
+        <div class="userorg">
+            <label>
+                <strong>Organization:</strong></label>
+            <select id="OrgList" onchange="GetList()">
+                @foreach (var Org in Model.OrgList)
+                {
+                    if (Org.OrganizationId == Convert.ToInt16(Session["CurrentOrgId"]))
+                    {
+                    <option value= '@Org.OrganizationId' selected>@Org.Organization</option>
+                    }
+                    else
+                    {
+                    <option value= '@Org.OrganizationId'>@Org.Organization</option>
+                    }
+
+
+                }
+            </select>
+        </div>
+        <div id="adminpaging">
+            <div style="float: right;">
+                @Html.ActionLink("Add New User", "UserInfo", "AdminUser", new { userid = -1, iseditmode = false, orgid = ViewBag.SelectedOrg }, null)
+            </div>
+            @*<div style="float:right;">
+			<a href="#"><span>Previous</span></a>
+			<span>1 - 20 of 40</span></a>
+			<a href="#"><span>Next</span></a>
+		</div>*@
+            <div style="clear: both;">
+            </div>
+        </div>
+        <div style="clear: both;">
+        </div>
+        <div id="UserList">
+            @Html.Partial("PartialUserList", Model.UserList)
+        </div>
+    </div>
+    <div style="clear: both; visibility: collapse;">
+    </div>
+</div>

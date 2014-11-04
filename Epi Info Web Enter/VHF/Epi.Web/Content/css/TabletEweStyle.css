@@ -1,0 +1,65 @@
+﻿
+@media screen and (min-width: 599px) /*and (max-width: 1025px) */
+{
+   /*Log In Page*/
+    #loginform{float: left;width: 90%; padding: 10px 5px 10px 20px; border:1px solid #4d74a4; margin: 10px 30px 30px 0; height: 260px;}
+    #loginform input[type="password"],  #loginform input[type="text"] {width:260px; }
+    /*#loginform button {height: 30px; padding: 4px 6px 4px 4px; margin-left:2px; width:80px; font-size:12pt; font-weight:bold;}*/
+    #loginform .ui-btn-up-submit2, #loginform .ui-btn-hover-submit2{width: 254px;}
+
+    #welcome {float: left; font-size: 12pt; display:inline-block; width: 90%; padding: 0px 5px 10px 20px; border:1px solid #4d74a4; background:#e1eef4; margin:20px 0px 0 0; }
+    #TOU{margin: 10px 30px 0 0;}
+    .termsofuse {padding:5px; /*height: 300px;*/ border:1px solid #4d74a4; font: 12px "Segoe UI"; line-height:1.8em; overflow:auto;}
+    .h2header {font: 20px Segoe UI; color:#4d74a4; font-weight:400; margin-bottom: 5px;}
+  
+    /*ForgotPassword*/
+    #forgotpwd{width: 90%; padding: 10px 5px 10px 20px; border:1px solid #4d74a4; margin: -10px 30px 30px 0; }
+    #forgotpwd input[type="password"], #forgotpwd input[type="text"] {width:95%; }
+    /*#loginform button {height: 30px; padding: 4px 6px 4px 4px; margin-left:2px; width:80px; font-size:12pt; font-weight:bold;}*/
+    #forgotpwd .ui-btn-up-submit2, #forgotpwd .ui-btn-hover-submit2{width: 80px;  display:inline-block;}
+    #forgotpwd .ui-btn-inner {font-size:9pt; padding:3px 4px;}
+
+    /*ResetPassword*/
+    #resetpwd{float: left; width: 90%; padding: 10px 5px 10px 20px; border:1px solid #4d74a4; margin: 10px 30px 30px 0; }
+    #resetpwd input[type="password"], #resetpwd input[type="text"] {width:95%; }
+    /*#loginform button {height: 30px; padding: 4px 6px 4px 4px; margin-left:2px; width:80px; font-size:12pt; font-weight:bold;}*/
+    #resetpwd .ui-btn-up-submit2, #resetpwd .ui-btn-hover-submit2{width: 80px;  display:inline-block;}
+    #resetpwd .ui-btn-inner {font-size:9pt; padding:3px 4px;}
+    #pwdpolicy {float: left; font-size: 12pt; display:inline-block; width: 90%; padding: 0px 5px 10px 20px; border:1px solid #4d74a4; background:#e1eef4; margin:20px 0px 0 0; }
+    #editsettings {float:left; margin-top: -8px !important;}
+    #tableSort {float:right; text-align:right;}
+    .ui-btn-up-defsearch, .ui-btn-hover-defsearch {padding:4px 0 2px 0;}
+}
+
+@media screen and (min-width: 599px) and (max-width: 800px) 
+{
+   
+}
+
+@media screen and (min-width: 775px) /*and (max-width: 1025px) */
+{
+    /*Log In Page*/
+    #loginform{float: left;width: 310px; padding: 10px 5px 10px 20px; border:1px solid #4d74a4; margin: 10px 30px 30px 0; height: 260px;}
+    #loginform input[type="password"], #loginform input[type="text"] {width:260px; }
+    /*#loginform button {height: 30px; padding: 4px 6px 4px 4px; margin-left:2px; width:80px; font-size:12pt; font-weight:bold;}*/
+    #loginform .ui-btn-up-submit2, #loginform .ui-btn-hover-submit2 {width: 254px;}
+    
+    #welcome {float: left; font-size: 12pt; display:inline-block; width: 310px; padding: 0px 5px 10px 20px; border:1px solid #4d74a4; background:#e1eef4; margin:10px 0px 0 0; height: 270px;}
+    #TOU{margin-top:20px; margin: 10px 30px 0 0;}
+    .termsofuse {width:704px; padding:5px; /*height: 300px;*/ border:1px solid #4d74a4; font: 12px "Segoe UI"; line-height:1.8em; overflow:auto;}
+   .validation-summary-errors { width:704px;}
+   
+    /*ForgotPassword*/
+    #forgotpwd{width: 80%; padding: 10px 30px 10px 20px; border:1px solid #4d74a4; margin: -10px 30px 30px 0; }
+    #forgotpwd input[type="password"],  #forgotpwd input[type="text"] {width:95%; }
+    /*#loginform button {height: 30px; padding: 4px 6px 4px 4px; margin-left:2px; width:80px; font-size:12pt; font-weight:bold;}*/
+    #forgotpwd .ui-btn-up-submit2, #forgotpwd .ui-btn-hover-submit2{width: 120px;  display:inline-block;}
+    
+   /*ResetPassword*/
+    #resetpwd{float:left; width: 360px; padding: 10px 30px 10px 20px; border:1px solid #4d74a4; margin: 10px 30px 30px 0; }
+    #resetpwd input[type="password"],  #resetpwd input[type="text"] {width:95%; }
+    /*#loginform button {height: 30px; padding: 4px 6px 4px 4px; margin-left:2px; width:80px; font-size:12pt; font-weight:bold;}*/
+    #resetpwd .ui-btn-up-submit2, #resetpwd .ui-btn-hover-submit2{width: 120px;  display:inline-block;}
+    #pwdpolicy {float: left; font-size: 11pt; display:inline-block; width: 380px; padding: 0px 5px 10px 20px; border:1px solid #4d74a4; background:#e1eef4; margin:10px 0px 0 0; height: 289px;}
+    
+} 

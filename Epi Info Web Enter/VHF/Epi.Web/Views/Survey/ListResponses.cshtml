@@ -1,0 +1,168 @@
+﻿@model Epi.Web.MVC.Models.SurveyModel  
+ <div id="formtitle" style="margin: 10px 0 0 0;">
+   <h2 class="surveyTitle" style="margin: 7px 0 .2em 0;">@Model.Form.SurveyInfo.SurveyName
+    </h2>
+    <!--<hr class="hr1" />-->
+</div>
+
+@*@if (Model.FormResponseInfoModel.FormInfoModel.IsOwner)
+    {
+    <div id="editsettings">
+    <button id="btneditsettings"  onclick="GetSettings()" class="default settings" type="button">
+        Settings</button>
+     </div>
+    }*@
+<div style="clear: both">
+</div>
+<div id="infobox1" style="margin: 20px 0 10px 0;">
+    @*<div id="create">
+                    <span>Created by:</span> <span class="boldlabel">@Model.FormInfoModel.UserId</span></div>*@
+@*    <div id="create">
+        <span>Created by:</span> <span class="boldlabel">@Model.FormResponseInfoModel.FormInfoModel.OwnerFName @Model.FormResponseInfoModel.FormInfoModel.OwnerLName
+        </span>
+    </div>*@
+    
+    @*<div id="status">
+                    <span>Status:</span> <span class="boldlabel">Active</span></div>
+*@
+@*    @{
+        if (@Model.FormResponseInfoModel.FormInfoModel.IsDraftMode)
+            {
+        <div id="mode">
+            <span>Mode:</span> <span class="boldlabel">Staging</span></div>
+            }
+        else
+            {
+                               
+        <div id="mode">
+            <span>Mode:</span> <span class="boldlabel">Production</span></div> 
+                               
+                               
+            }
+    }*@
+    <div id="NumberOfRecords" style="float: right">
+        <div>
+        @{
+            
+            if (Model.FormResponseInfoModel.NumberOfResponses == 1)
+                {
+             <span class="boldlabel" style="font-size: 1em;">@Model.FormResponseInfoModel.NumberOfResponses Record </span>
+                }
+            else { 
+                 <span class="boldlabel" style="font-size: 1em;">@Model.FormResponseInfoModel.NumberOfResponses Records </span>
+                }
+           @* if (Model.FormResponseInfoModel.NumberOfPages == 0)
+                {
+                <span class="boldlabel" style="font-size: 14pt;">0 Records </span>
+                }
+            else
+                {*@
+                 @*<span >Showing</span>*@
+        @*<span class="boldlabel" style="font-size: 14pt;">    @(
+ Model.FormResponseInfoModel.CurrentPage * Model.FormResponseInfoModel.PageSize - (Model.FormResponseInfoModel.PageSize - 1))
+            -
+            @if (Model.FormResponseInfoModel.CurrentPage * Model.FormResponseInfoModel.PageSize < Model.FormResponseInfoModel.NumberOfResponses)
+                {
+                @(Model.FormResponseInfoModel.CurrentPage * Model.FormResponseInfoModel.PageSize)
+                }
+            else
+                {
+                @Model.FormResponseInfoModel.NumberOfResponses
+                }</span>
+           <span> of </span><span class="boldlabel" style="font-size: 14pt;">@Model.FormResponseInfoModel.NumberOfResponses </span>
+                }*@
+                }
+       
+    </div>
+       @* <span>Total Records:</span> <span class="boldlabel" style="font-size: 14pt;">@Model.NumberOfResponses</span>*@</div>
+    <div style="clear: both;">
+    </div>
+</div>
+@{
+    WebGrid webGrid = new WebGrid(rowsPerPage: 20,
+        canSort: false, canPage: false, ajaxUpdateContainerId: "recordstable"); // Model.SurveyAnswerResponse.pageSize
+    webGrid.Bind(Model.FormResponseInfoModel.ResponsesList, autoSortAndPage: false, rowCount: Model.FormResponseInfoModel.NumberOfResponses); //Model.SurveyAnswerResponse.pageSize * Model.ResponsesList.Count TBD
+}
+<div id="recordscontent">
+    <!--style="display:inline-block;"-->
+    <div id="addnew">
+        <button  type="submit"  onclick="AddChild(@HttpContext.Current.Session["RequestedViewId"]);" name="AddNewFormId" class="default record" style="width:165px !important; font-size: 1.15em;" >
+            Add New Record
+        </button>
+    </div>
+    <!--<div id="paging" >
+                    <button class="default paging">
+                        <img alt="Previous" src="~/Content/images/prev.png" a  lign="middle" /></button>
+                    &nbsp; <span class="boldlabel">21-40 of 80</span> &nbsp;
+                    <button class="default paging">
+                        <img alt="Next" src="~/Content/images/next.png" align="middle" /></button>
+                        
+                </div>-->
+   
+    <div style="clear: both; margin-bottom: 10px;">
+    </div>
+    <div id="recordstable">
+        @{
+       
+            var gridColumns = new List<WebGridColumn>();
+
+            gridColumns.Add(webGrid.Column(header: "",
+             format: (item) => new HtmlString("<button name='EditForm'  type='button'  class='default edit'  id='" + item.Column0 + "'value='" + item.Column0 + "' style='height:24px; padding:0;'>Open</button> " +
+            "<button name='DeleteButton' type='button'  class='default edit'  id='" + item.Column0 + "'value='" + item.Column0 + "' style='height:24px; padding:0;'> Delete</button>"
+                                                                                                   )));
+            if (Model.FormResponseInfoModel.Columns.Count >= 1)
+                {
+                gridColumns.Add(webGrid.Column("Column1", (Model.FormResponseInfoModel.Columns.Count >= 1) ? Model.FormResponseInfoModel.Columns[0].Value : ""));
+                }
+            if (Model.FormResponseInfoModel.Columns.Count >= 2)
+                {
+                gridColumns.Add(webGrid.Column("Column2", (Model.FormResponseInfoModel.Columns.Count >= 2) ? Model.FormResponseInfoModel.Columns[1].Value : ""));
+                }
+            if (Model.FormResponseInfoModel.Columns.Count >= 3)
+                {
+                gridColumns.Add(webGrid.Column("Column3", (Model.FormResponseInfoModel.Columns.Count >= 3) ? Model.FormResponseInfoModel.Columns[2].Value : ""));
+                }
+            if (Model.FormResponseInfoModel.Columns.Count >= 4)
+                {
+                gridColumns.Add(webGrid.Column("Column4", (Model.FormResponseInfoModel.Columns.Count >= 4) ? Model.FormResponseInfoModel.Columns[3].Value : ""));
+                }
+            if (Model.FormResponseInfoModel.Columns.Count >= 5)
+                {
+                gridColumns.Add(webGrid.Column("Column5", (Model.FormResponseInfoModel.Columns.Count >= 5) ? Model.FormResponseInfoModel.Columns[4].Value : ""));
+                }
+        @webGrid.GetHtml(columns: gridColumns);
+
+               
+                }
+        @Html.Hidden("hidFormId", @Model.FormResponseInfoModel.FormInfoModel.FormId)
+        @Html.Hidden("hidPageNumber", @Model.FormResponseInfoModel.CurrentPage)
+     @*   @{
+            if (Model.FormResponseInfoModel.NumberOfPages == 0)
+                {
+                <div class="zerorec">No records have been created.</div>
+                }
+        }*@
+    </div>
+    <div id="paging">
+        @{
+                    
+            if (Model.FormResponseInfoModel.NumberOfPages > 1)
+                {
+            <div id='pager2'>
+                @*@Html.Partial("~\\views\\shared\\PagerPartial.cshtml", Model)*@
+                @Html.Partial("PagerPartial", Model)
+            </div>  
+                }
+
+
+        }
+    </div>
+</div>
+       @*  <script type="text/javascript">
+var formId =  document.getElementById('hidFormId').value; //$('#hidFormId').val();
+var pageId = $('#hidPageNumber').val();
+  var returnUrl = 'returnUrl=' + formId + '/' + pageId; 
+  var redirectTimeout = @FormsAuthentication.Timeout.TotalMilliseconds
+  var redirectTimeoutHandle = setTimeout(function() { window.location.href = '@FormsAuthentication.LoginUrl' + '?'+ returnUrl; }, redirectTimeout);
+</script>*@
+

@@ -1,0 +1,73 @@
+﻿@model IEnumerable<Epi.Web.MVC.Models.FormInfoModel>
+@*<p>
+    @Html.ActionLink("Create New", "Create")
+</p>*@
+<div class="divcontents">
+    @foreach (var item in Model)
+    {
+    var divClass = "metro-tile " + " Org-" + item.OrganizationId + " metro-tile2 ";
+
+        if (item.IsOwner)
+        {
+            divClass += " metro-design ";
+        }
+        else
+        {
+            divClass += " metro-collect ";
+        }
+
+        if (item.IsDraftMode)
+        {
+
+            divClass += " metro-staging";
+        }
+        else
+        {
+            divClass += " metro-prod";
+        }
+@*<a href="@Url.RouteUrl(null, new { controller = "Home", action = "Index", formid = item.FormId })" >*@
+@*<a onclick="document.getElementById('formsList').submit()" href="#">*@
+  <button  class="@divClass" type="button" id="@item.FormId" data-FormId="@item.FormId" data-theme="@divClass" value="@item.FormName">
+          <h3>@item.FormName</h3>
+          <span class="buttontext">Created By: @item.OwnerFName @item.OwnerLName</span>
+          <span class="buttontext">@{
+        if (@item.IsDraftMode)
+            {
+       
+           <span> Mode: Staging</span>
+            }
+        else
+            {
+                               
+        
+            <span>Mode: Production</span>
+                               
+                               
+            }
+    }</span>
+  </button>
+        
+              
+            
+@* @Ajax.ActionLink(@item.FormName, "ReadResponseInfo", "Home", new AjaxOptions
+   {
+       UpdateTargetId = "right",
+       InsertionMode = InsertionMode.Replace,
+       HttpMethod = "Post"
+   })      *@
+        
+       @* @Html.ActionLink(
+    @item.FormName,
+    "ReadResponseInfo",
+    "Home",
+
+    new { formid = @item.FormId },
+              new { @class = @divClass }
+)            ;  *@                                   
+         
+       
+                
+    }
+
+    
+</div>

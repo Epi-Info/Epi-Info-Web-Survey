@@ -1,0 +1,91 @@
+﻿@model Epi.Web.MVC.Models.OrgListModel
+@{
+    ViewBag.Title = "Epi Info™ Web Enter - Site Administration";// + " - "+ 
+	// Model.SurveyName + " - " + Model.IsDraftModeStyleClass;
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+ <link href="@Url.Content("~/Content/css/eweAdmin.css")" rel="Stylesheet" type="text/css" />
+<div id="pageHeader">
+	<div id="pageTitleAdmin">
+		<h2 class="adminnav">@Html.ActionLink("Organizations", "OrgList", "AdminOrganization", null, new { @class = "orgbtn" })</h2>
+
+        <span>&nbsp;&nbsp;</span>
+		<h2 class="adminnav">@Html.ActionLink("Users", "UserList", "AdminUser", null, new { @class = "userbtn" })</h2>
+
+	</div>
+ 
+	
+	<div id="userwelcome">
+		Welcome <strong>@Session["UserFirstName"] @Session["UserLastName"]</strong>&nbsp; | &nbsp;
+	  @*  <a href="#">Log Out</a>*@
+	  
+	  @Html.ActionLink("Home", "Index", "Home", null, null) &nbsp; | &nbsp;
+	  @Html.ActionLink("Log Out", "LogOut", "Home", null, null)	
+	</div>
+	<div style="clear: both;"></div>
+</div>
+
+<div id="content" style="margin:15px 0 200px; padding-left: 10px; min-height: 375px;">
+
+    <div id="formtitleadmin" style="display:block; ">
+        <h2 class="surveyTitle">Manage Organizations</h2>
+    </div>
+    <div style="clear:both;"></div>
+
+    <div class="datagrid">
+    @if(!string.IsNullOrEmpty(Model.Message))
+        {
+          <div id="success" >
+           <span>@Model.Message</span>    
+          </div>
+        }
+    <div style="clear:both;"></div>
+
+    <div id="adminpaging">
+		<div>
+			@*@Html.ActionLink("Add New Organization","OrgInfo","AdminOrganization")*@
+             @Html.ActionLink("Add New Organization", "OrgInfo", "AdminOrganization", new { orgkey = -1, iseditmode = false }, null)	
+		</div>
+		@*<div style="float:right;">
+			<a href="#"><span>Previous</span></a>
+			<span>1 - 20 of 40</span></a>
+			<a href="#"><span>Next</span></a>
+		</div>*@
+        <div style="clear:both;"></div>
+	</div>
+    
+    
+	    <table class="sortable">
+
+		<thead>
+			<tr>
+				<th>Organization</th>
+				<th>Org Key</th>
+				<th>Active</th>
+                
+				<th>Actions</th>
+			</tr>
+		</thead>
+
+		<tbody>
+        @foreach (var item in Model.OrganizationList)
+            {
+			<tr>
+				<td>@item.Organization</td>
+				<td>@item.OrganizationKey</td>
+				<td>@item.IsEnabled</td>
+                <td><span > 
+                @Html.ActionLink("Edit", "OrgInfo", "AdminOrganization", new { orgkey = item.OrganizationKey, iseditmode = true }, null)	
+                </span>
+                
+                </td>
+			</tr>
+            }
+		
+		</tbody>
+	</table>
+    
+    <div style="clear:both; visibility:collapse;"></div>
+</div><!--End Content Div-->
+@*
+@Html.ActionLink("Add Org","OrgInfo","Admin")*@

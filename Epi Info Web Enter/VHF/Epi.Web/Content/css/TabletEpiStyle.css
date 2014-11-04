@@ -1,0 +1,40 @@
+﻿
+@media screen and (min-width: 599px) /*and (max-width: 1025px) */
+{
+    #container { width:90%; margin:0 auto; font-size: max(11px, 0.9em); max-width: 1024px;}
+    #myform { width:97%;}
+    .MvcDynamicMobileForm { padding-left: 1.5em;}
+
+    /*LogIn Page*/
+    .returnto { width:250px !important; margin: 10px 45px;}
+    .Logsin { width: 60%; border: 1px solid #4e9689; -moz-border-radius: 10px; -webkit-border-radius: 10px; -khtml-border-radius: 10px; border-radius: 10px; }
+    .LogHead { background:#87d69b; padding-top:5px; padding-left:20px; -moz-border-radius: 10px 10px 0 0; border-radius: 10px 10px 0 0; border-bottom: 1px solid #4e9689;}
+    .logbody { padding:0px 20px 20px 20px;}
+    .logbody label { display:inline-block !important; width:70px; vertical-align:middle;}
+    .logbody input { display:inline-block !important; width:100px; vertical-align:middle;}
+    .logbody .ui-btn { display:inline-block !important; width: 80px; display:inline-block !important; margin:0px 10px; vertical-align:middle;}
+}
+
+@media screen and (min-width: 599px) and (max-width: 800px) 
+{
+    .ui-select { width:80% !important;}
+    .ui-btn-text { text-align:left !important;}
+    input, textarea { width:80% !important;}
+    .ui-controlgroup-controls { width:80% !important;}
+    .ui-checkbox { width:80% !important;}
+    .ui-controlgroup-label,label.ui-select  { width:80% !important;}
+   /* .ui-disabled, .ui-disabled a { width: 80% !important;}*/
+}
+
+@media screen and (min-width: 800px) /*and (max-width: 1025px) */
+{
+    .ui-select { width:60% !important;}
+    .ui-btn-text { text-align:left !important;}
+    .ui-controlgroup-controls { width:60% !important;}
+    .ui-checkbox { width:60% !important;}
+    .ui-controlgroup-label, label.ui-select {width:60% !important;}
+   /* .ui-disabled, .ui-disabled a { width: 60% !important;}*/
+    .ui-field-contain input.ui-input-text, .ui-field-contain textarea.ui-input-text, .ui-field-contain .ui-input-search { width: 60% !important;}
+     a.ui-btn-icon-notext {float:right;}
+     .ui-input-datebox {width:58% !important;}
+} 

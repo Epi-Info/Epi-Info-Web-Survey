@@ -1,0 +1,939 @@
+﻿
+@{
+    ViewBag.Title = "Epi Info™ Web Enter - Form";
+}
+
+<style>
+.ui-datebox-controls span.ui-btn-inner  {padding-bottom: 28px !important; }
+.ui-datebox-controls a span.ui-btn-inner  {padding-bottom: 10px !important; }
+ .ui-datebox-controls div {width:70px !important; margin:0 0.2em !important;
+</style>
+
+<script type="text/javascript">
+  var redirectTimeout = @FormsAuthentication.Timeout.TotalMilliseconds
+  var redirectTimeoutHandle = setTimeout(function() { window.location.href = '@FormsAuthentication.LoginUrl'; }, redirectTimeout);
+</script>
+<script type="text/javascript">
+ 
+    //Check Code Logic start
+     @Html.Raw(Model.Form.FormJavaScript)
+    //Check code logic end
+
+ 
+
+
+
+</script>
+  
+   <script type="text/javascript">
+
+//   $(function () {
+//           $("#savediv button[title]").tooltip();
+//       });
+ </script>  
+<script type="text/javascript">
+
+     
+    
+    /*Clicking the continue button*/
+
+    function Submit(){
+    
+      $('#myform').submit();
+   
+    }
+    function AddNewChild(ViewId) {
+
+        $("#myform")[0].Get_Child_action.value = 'true';
+
+        $("#myform")[0].action = window.location.href;
+
+
+        $('#myform').submit();
+
+    }
+    function DoNotSave() {
+
+
+        $("#myform")[0].Do_Not_Save_action.value = 'true';
+
+        $("#myform")[0].action = window.location.href;
+
+
+        $('#myform').submit();
+    }
+    function Continue() {
+        //debugger;
+        var presentUrl;
+        var pageNumber;
+        var actionUrlC;
+        presentUrl = '@Url.Action("Index","Survey")';
+        pageNumber = '@Model.Form.CurrentPage';
+        actionUrlC = processUrl(presentUrl, 'ContinueUrl', pageNumber);
+        $("#myform")[0].action = actionUrlC;
+        $("#myform").submit();
+        
+    }
+    
+    /*Clicking the previous button*/
+    function Previous() {
+        //debugger;
+        var presentUrl;
+        var pageNumber;
+        var actionUrlP;
+        presentUrl = '@Url.Action("Index","Survey")';
+        pageNumber = '@Model.Form.CurrentPage';
+        actionUrlP = processUrl(presentUrl, 'PreviousUrl', pageNumber);
+        $("#myform")[0].action = actionUrlP;
+        $("#myform").submit();
+    }
+
+    function OpenRelateNavigationDialog() {
+        //$("#RelateNavigation").dialog("open");
+    }
+    function CloseRelateNavigationDialog() {
+
+       // $("#RelateNavigation").dialog("close");
+    }
+    function NavigateToChild(ViewId) {
+       
+        $('#RelateButtonWasClicked_Temp').val(ViewId)
+        $('#RelateButtonWasClicked').val(ViewId);
+        var temp = HasResponse(ViewId);
+       
+        if (temp) {
+
+            ReadResponse(ViewId);
+
+        }
+        else {
+            // Save();//Save Current page.
+            AddNewChild(ViewId);
+            // AddChild(ViewId);
+        }
+
+    }
+
+    function HasResponse(ViewId) {
+        var signoutUrl = '@Url.Action("HasResponse", "Survey")' + '?SurveyId=' + '@Model.Form.SurveyInfo.SurveyId' + '&ViewId=' + ViewId + '&ResponseId=' + '@Model.Form.ResponseId';
+        var HasResponse;
+        $.ajax({
+            url: signoutUrl,
+            type: 'POST',
+            contentType: 'application/json; charset=utf-8',
+            //data: "{}",
+            dataType: "json",
+            //cache: false,
+            async: false,
+            success: successFunc,
+            error: errorFunc
+        });
+        function successFunc(data) {
+            HasResponse = data
+        }
+        function errorFunc(data) {
+            alert('failed');
+        }
+        return HasResponse;
+
+    }
+ 
+    function ReadResponse(ViewId) {
+
+
+//        var signoutUrl = '@Url.Action("ReadResponseInfo", "Survey")' + '?SurveyId=' + '@Model.Form.SurveyInfo.SurveyId' + '&ViewId=' + ViewId + '&ResponseId=' + '@Model.Form.ResponseId' + '&FormValuesHasChanged=' + $('#FormHasChanged').val() + '&CurrentPage=' + '@Model.Form.CurrentPage';
+
+//     
+
+//        $.ajax({
+//            url: signoutUrl,
+//            type: 'GET',
+//            contentType: 'application/json; charset=utf-8',
+//            //data: JSON.stringify(model),
+//            async: false,
+//            success: successFunc,
+//            Error: errorFunc
+//        });
+
+
+//        function successFunc(data) {
+
+//           // $('#RelateNavigation').html(data);
+//            //OpenRelateNavigationDialog();
+
+//        }
+
+//        function errorFunc() {
+//            alert('error');
+//                }
+
+
+        $("#myform")[0].Read_Response_action.value = 'true';
+
+        $("#myform")[0].action = window.location.href;
+
+
+        $('#myform').submit();
+
+
+
+
+    }
+
+    function AddChild(ViewId) {
+        
+        $('#FormHasChanged').val('True');
+        var signoutUrl = '@Url.Action("AddChild", "Survey")' + '?SurveyId=' + '@Model.Form.SurveyInfo.SurveyId' + '&ViewId=' + ViewId + '&ResponseId=' + '@Model.Form.ResponseId' + '&FormValuesHasChanged=' + $('#FormHasChanged').val() + '&CurrentPage=' + '@Model.Form.CurrentPage';
+
+        $.ajax({
+            url: signoutUrl,
+            type: 'POST',
+            contentType: 'application/json; charset=utf-8',
+            //  data: $('#myform').serialize(),
+            //data:JSON.stringify(model),
+            dataType: "json",
+            //cache: false,
+            async: false,
+            success: successFunc,
+            error: errorFunc
+        });
+        function successFunc(data) {
+            //$(this).dialog("close");
+
+            var tem = 'responseId =' + data;
+            var homePageUrl = '@Url.Action("Index", "Survey",new { responseId= "RId", PageNumber = "1" })';
+            homePageUrl = homePageUrl.replace("RId", data.toString());
+
+            window.location.href = homePageUrl;
+        }
+        function errorFunc(data) {
+            alert('failed');
+        }
+
+
+    }
+    function GoHome() {
+
+
+        $("#myform")[0].Go_Home_action.value = 'true';
+
+        $("#myform")[0].action = window.location.href;
+
+
+        $('#myform').submit();
+
+    }
+
+    function GoOneLevelUp() {
+
+        $("#myform")[0].Go_One_Level_Up_action.value = 'true';
+
+        $("#myform")[0].action = window.location.href;
+
+
+        $('#myform').submit();
+
+    }
+
+    $(document).ready(function () {
+
+
+//        $("#mvcdynamicfield_relatetochild1").bind("click", function (event, ui) {
+//           // alert();
+//        });
+
+        $("#dialog").dialog({
+            autoOpen: false,
+            show: "blind",
+            hide: "blind",
+            resizable: false,
+            height: 370,
+            modal: true
+        });
+
+        $("#VideoDialog").dialog({
+            autoOpen: false,
+            show: "blind",
+            hide: "blind",
+            resizable: false,
+            height: 410,
+            width: 500,
+            modal: true
+        });
+        $("#RelateNavigation").dialog({
+            autoOpen: false,
+            show: "blind",
+            hide: "blind",
+            resizable: false,
+            height: 410,
+            width: 'auto',
+            modal: true
+        });
+        var responseUrl = GetRedirectionUrl();
+        $('#url').val(responseUrl);
+
+        var passcode = '@Model.Form.PassCode';
+        $('#spPassCode').text(passcode);
+
+        //        if ('@Model.Form.IsSaved' == 'True') {
+
+        //            if ('@Model.Form.StatusId' == '1') { //if clicking the save button for the first time
+        //                $('#successContent').show();
+        //                $('#successContent').append('<div class="success"><div class="image"><img src="@Url.Content("~/Content/images/button_check.png")" style="vertical-align:middle; padding-right: 5px;  width:24px;" alt=""/></div><div class="message">Your survey has been saved.<p style="text-align:left;  margin-top:4px; margin-bottom:2px;"><button id="copy" type="button" name="copy" class="copylink">Get Survey Link & Pass Code</button></p></div><div style="clear:both;"></div></div>')
+
+        //                
+
+        //                //call your jquery modal popup method
+        //                $("#dialog").dialog("open");
+        //                
+        //            }
+        //            else {
+
+        //                
+
+        //                $('#successContent').show(); //in subsequest click we just show that the survey has been saved not the modal popup
+        //                $('#successContent').append('<div class="success"><div class="image"><img src="@Url.Content("~/Content/images/button_check.png")" style="vertical-align:middle; padding-right: 5px;  width:24px;" alt=""/></div><div class="message">Your survey has been saved.<p style="text-align:left; margin-top:4px; margin-bottom:2px;"><button id="copy" type="button" name="copy" class="copylink">Get Survey Link & Pass Code</button></p></div><div style="clear:both;"></div></div>')
+        //            }
+        //            return true;
+        //        }
+
+    });
+
+    $(document).ready(function () {
+
+        $('#formdisplay').live("click", function () {
+            CCE_HasFormValuesChanged();
+
+        })
+        jQuery('a').click(function (event) {
+            CCE_HasFormValuesChanged();
+        });
+
+        $('input').change(function () {
+
+            CCE_HasFormValuesChanged();
+        });
+        $('textarea').change(function () {
+
+            CCE_HasFormValuesChanged();
+        });
+
+      //  $('.ui-btn-hidden').removeClass("ui-btn-hidden");
+
+        $("#send").click(function () {
+
+            var emailAddress = $("#email").val();
+            var confirmemail = $("#confirmemail").val();
+            var redirectUrl = GetRedirectionUrl();
+            //var surveyName = $("#_surveyName").val();
+            var surveyName = '@Model.Form.SurveyInfo.SurveyName';
+            surveyName = "H"; //ReplaceString(surveyName);
+            var passCode = $('#spPassCode').text();
+            //url to post for email to be sent
+            var postUrl = '@Url.Action("Notify","Post")';
+            var EmailSubject = $('#Subject').val();
+            EmailSubject = "H"; //ReplaceString(EmailSubject);
+            if (ValidateEmail(emailAddress) && ValidateEmail(confirmemail)) {
+                if ($.trim(emailAddress) == $.trim(confirmemail)) {
+                    //Call notify function to send notification
+                    NotifyByEmail(emailAddress, redirectUrl, surveyName, postUrl, passCode, EmailSubject);
+                    //close the modal popup after processing
+                    $("#dialog").dialog("close");
+                }
+                else {
+                    alert("The email address did not match.");
+                }
+
+            }
+            else {
+                // $('#email').after('<span class="error">Enter a valid email address.</span>');
+                alert('Enter a valid email address!');
+            }
+        });
+
+        /*Open the modal popup on link click*/
+        $('#copy').click(function () {
+            $("#dialog").dialog("open");
+            $('#url').val(GetRedirectionUrl());
+            return false;
+        });
+
+        ///////Update Controls State Start///////
+        CCE_Set_Update_HighlightedControls_State(document.getElementById("HighlightedFieldsList").value);
+        CCE_Set_Update_DisabledControls_State(document.getElementById("DisabledFieldsList").value);
+        ///////Update Controls State end///////
+
+
+
+        ///////////Adding Red Border for none valid controls start ///////////////////
+
+        $('.SelectNotValid').find('.ui-btn').css("border-color", "red");
+        $('.TimePickerNotValid').find('.ui-input-datebox').css("border-color", "red");
+        $('.DatePickerNotValid').find('.ui-input-datebox').css("border-color", "red");
+
+        ///////////Adding Red Border for none valid controls end ///////////////////
+
+        /////////////////////Save Start///////////////////////
+
+        var IsSaved = document.getElementById("HiddenIsSaved").value;
+        var StatusId = document.getElementById("HiddenStatusId").value;
+
+        var Subject = "Link for Survey: " + '@Model.Form.SurveyInfo.SurveyName';
+        var passcode1 = '@Model.Form.PassCode';
+        //if (StatusId == 'false' && '@Model.Form.StatusId' != '2' ) { //if clicking the save button for the first time
+
+        if ('@Model.Form.IsSaved' == 'True') {
+
+
+            if ('@Model.Form.StatusId' == '1') { //if clicking the save button for the first time    
+
+                $('#Savebutton1').simpledialog({
+                    'mode': 'blank',
+                    'prompt': false,
+                    'forceInput': false,
+                    'useModal': true,
+                    'buttons': {
+                        'OK': {
+                            click: function () {
+                                $('#dialogoutput').text('OK');
+                            }
+                        }
+
+                    },
+                    'fullHTML': "<div class='success'><div class='image'><img src='../../Content/images/button_check.png' style='vertical-align: middle; padding-right:5px; width:24px;'alt=''/></div><div class='message' style='width:85% !important;'>Your Survey has been saved.</div><div style='clear:both;'></div></div>  <p><span style='font-weight:bold;'>Survey Link:</span><br /><textarea " + "value=" + GetRedirectionUrl().toString() + "  id='url' cols='65'  style='  height:45px;  white-space:pre; background:#d6e7f5; border:1px solid #aecfea; padding:4px; margin-top:4px;' readonly='readonly'>" + GetRedirectionUrl().toString() + "</textarea></p><p style='font-weight:bold;'>Pass Code: <span id='spPassCode' style='font-size:12pt; background:#d6e7f5; border:1px solid #aecfea; padding:4px 10px;'>" + passcode1 + "</span></p> <hr/> <p>Enter your email address to have the Survey Link and Pass Code emailed to you.</p><p><span style='font-weight:bold;'>Email Subject:</span><br /><textarea id='Subject' cols='65'  style='  height:30px;  white-space:pre; border:1px solid #aecfea; padding:4px; margin-top:4px;'>" + Subject + "</textarea></p><p><label for='email' style='font-weight:bold;'>Email:</label> <input id='email' type='email' /></p>  <p><label for='confirmemail'style='font-weight:bold;'>Confirm Email:</label> <input id='confirmemail' type='email' /><div align='center'> <a  onclick ='SendEmail();'  class='login'  style='width:50px; padding:8px 15px !important;'>Send Email</a></div></p>  <br /> <p style='font-size: 8pt; padding: 5px; background: #ffffa8; margin-top:-5px;'><strong>Note:</strong> Your email address will not be saved and will only be used to send you the survey link.</p>"
+                })
+
+            }
+
+        }
+        //     if ('@Model.Form.StatusId' == '2' && document.getElementById("HiddensuccessContent").value == "false")
+        //     {
+        //                    document.getElementById("HiddensuccessContent").value = "true";
+        //                    $('#successContent').show();
+        //                    $('#successContent').append('<div class="success"><div class="image"><img src="@Url.Content("~/Content/images/button_check.png")" style="vertical-align:middle; padding-right: 5px; width:24px" alt=""/></div><div class="message"> Your survey has been saved.<p style="text-align:left; margin-top:4px; margin-bottom:2px;"><button id="Savebutton2" type="button"  class="copylink">Get Survey Link & Pass Code</button></p></div><div style="clear:both;"></div></div>')
+
+        //      }
+
+
+        ////////////////////Save End/////////////////////////
+
+
+    });
+ function SendEmail(){
+ 
+  var emailAddress = $("#email").val();
+            var confirmemail = $("#confirmemail").val();
+            var redirectUrl = GetRedirectionUrl();
+            //var surveyName = $("#_surveyName").val();
+            var surveyName = '@Model.Form.SurveyInfo.SurveyName';
+             surveyName = ReplaceString(surveyName).toString();
+            var passCode = $('#spPassCode').text();
+            var EmailSubject = $('#Subject').val();
+             EmailSubject = ReplaceString(EmailSubject).toString();
+            //url to post for email to be sent
+            var postUrl = '@Url.Action("Notify","Post")';
+            if (ValidateEmail(emailAddress) && ValidateEmail(confirmemail)) {
+                if ($.trim(emailAddress) == $.trim(confirmemail)) {
+                    //Call notify function to send notification
+                    NotifyByEmail(emailAddress, redirectUrl, surveyName, postUrl, passCode,EmailSubject);
+                    //close the modal popup after processing
+                    $("#dialog").dialog("close");
+                }
+                else {
+                    alert("The email address did not match.");
+                }
+
+            }
+            else {
+                // $('#email').after('<span class="error">Enter a valid email address.</span>');
+                alert('Enter a valid email address!');
+            }
+ 
+ }
+ 
+ function updateXml(pName, pValue) {
+ 
+   
+       
+            var UpdateUrl = '@Url.Action("UpdateResponseXml","Survey")';
+            var NList = "";
+             for (var i = 0; i < NameList.length; i++) 
+           {
+               if (NList == ""){
+                    NList = NameList[i]
+               }else{
+                 NList = NList + "," +NameList[i];
+               }
+           
+           }
+         UpdateResponse(UpdateUrl, NList, pValue, '@Model.Form.ResponseId');
+            
+            }
+ /*Clicking the save button to save the survey*/
+ function Save() 
+      {
+        var DisabledFieldsList = $('#DisabledFieldsList').val();
+         
+        if (DisabledFieldsList.length > 0)
+        {
+        CCE_ProcessEnableAllControls(DisabledFieldsList) ;
+        }
+
+       //SaveSurvey();
+             //debugger;
+        //set the is_save_action hidden variable value to true to indicate that save button has been clicked
+        $("#myform")[0].is_save_action.value = 'true';
+        //set the action path of the current form so when it is submitted by clicking the save button it posts to the path 
+        $("#myform")[0].action = window.location.href;
+        //detach the validation engine as we don't want to validate data on save button click
+        $('#myform').validationEngine('detach');
+        //posting the form
+        $('#myform').submit();
+        // return false;
+
+      }
+ function SaveSurvey()
+ {
+ 
+   var StatusId = document.getElementById("HiddenStatusId").value;
+   if ((StatusId == 'false' || '@Model.Form.StatusId' == '1') && '@Model.Form.StatusId' != '2') 
+  { 
+    var UpdateUrl = '@Url.Action("SaveSurvey", "Survey")';
+    SaveAndUpdate(UpdateUrl, "PageNumber", '@Model.Form.CurrentPage', '@Model.Form.ResponseId');
+    }
+ }
+ // save button dialog
+   
+    $(document).delegate('#Savebutton1', 'click', function() {
+
+//   var IsSaved  =  document.getElementById("HiddenIsSaved").value;
+//   var StatusId = document.getElementById("HiddenStatusId").value;
+//   
+        //    var Subject ="Link for Survey: " + '@Model.Form.SurveyInfo.SurveyName' ;
+        //    var passcode1 = '@Model.Form.PassCode';
+        //    if (StatusId == 'false' && '@Model.Form.StatusId' != '2' ) { //if clicking the save button for the first time
+//                
+//                    $('#successContent').show();
+//                    $('#successContent').append('<div class="success"><div class="image"><img src="@Url.Content("~/Content/images/button_check.png")" style="vertical-align:middle; padding-right: 5px;  width:24px;" alt=""/></div><div class="message">Your survey has been saved.<p style="text-align:left; margin-top:4px; margin-bottom:2px;"><button id="Savebutton2" type="button" name="copy" class="copylink">Get Survey Link & Pass Code</button></p></div><div style="clear:both;"></div></div>')
+
+//                         $(this).simpledialog({
+//                'mode' : 'blank',
+//                'prompt': false,
+//                'forceInput': false,
+//                'useModal':true,
+//                'buttons' : {
+//                              'OK': {
+//                                click: function () {
+//                                  $('#dialogoutput').text('OK');
+//                                }
+//                              }
+//                       
+//                            },
+//                      'fullHTML': "<div class='success'><div class='image'><img src='../../Content/images/button_check.png' style='vertical-align: middle; padding-right:5px; width:24px;'alt=''/></div><div class='message' style='width:85% !important;'>Your Survey has been saved.</div><div style='clear:both;'></div></div>  <p><span style='font-weight:bold;'>Survey Link:</span><br /><textarea " + "value=" + GetRedirectionUrl().toString() + "  id='url' cols='65'  style='  height:45px;  white-space:pre; background:#d6e7f5; border:1px solid #aecfea; padding:4px; margin-top:4px;' readonly='readonly'>" + GetRedirectionUrl().toString() + "</textarea></p><p style='font-weight:bold;'>Pass Code: <span id='spPassCode' style='font-size:12pt; background:#d6e7f5; border:1px solid #aecfea; padding:4px 10px;'>" + passcode1 + "</span></p> <hr/> <p>Enter your email address to have the Survey Link and Pass Code emailed to you.</p><p><span style='font-weight:bold;'>Email Subject:</span><br /><textarea id='Subject' cols='65'  style='  height:30px;  white-space:pre; border:1px solid #aecfea; padding:4px; margin-top:4px;'>" + Subject +"</textarea></p><p><label for='email' style='font-weight:bold;'>Email:</label> <input id='email' type='email' /></p>  <p><label for='confirmemail'style='font-weight:bold;'>Confirm Email:</label> <input id='confirmemail' type='email' /><div align='center'> <a  onclick ='SendEmail();'  class='login'  style='width:50px; padding:8px 15px !important;'>Send Email</a></div></p>  <br /> <p style='font-size: 8pt; padding: 5px; background: #ffffa8; margin-top:-5px;'><strong>Note:</strong> Your email address will not be saved and will only be used to send you the survey link.</p>"
+//                         })
+
+//                 }
+        //                 if ('@Model.Form.StatusId' == '2' && document.getElementById("HiddensuccessContent").value == "false"){
+//                    document.getElementById("HiddensuccessContent").value = "true";
+//                    $('#successContent').show();
+//                    $('#successContent').append('<div class="success"><div class="image"><img src="@Url.Content("~/Content/images/button_check.png")" style="vertical-align:middle; padding-right: 5px; width:24px" alt=""/></div><div class="message"> Your survey has been saved.<p style="text-align:left; margin-top:4px; margin-bottom:2px;"><button id="Savebutton2" type="button"  class="copylink">Get Survey Link & Pass Code</button></p></div><div style="clear:both;"></div></div>')
+
+//                 }
+
+         
+ });
+
+
+
+ $(document).delegate('#Savebutton2', 'click', function() {
+
+     var passcode1 = '@Model.Form.PassCode';
+     var Subject = "Link for Survey: " + '@Model.Form.SurveyInfo.SurveyName';
+     
+                         $(this).simpledialog({
+                'mode' : 'blank',
+                'prompt': false,
+                'forceInput': false,
+                'useModal':true,
+                'buttons' : {
+                              'OK': {
+                                click: function () {
+                                  $('#dialogoutput').text('OK');
+                                }
+                              }
+                       
+                            },
+                      'fullHTML': "<div class='success'><div class='image'><img src='../../Content/images/button_check.png' style='vertical-align: middle; padding-right:5px; width:24px;'alt=''/></div><div class='message' style='width:85% !important;'>Your Survey has been saved.</div><div style='clear:both;'></div></div>  <p><span style='font-weight:bold;'>Survey Link:</span><br /><textarea " + "value=" + GetRedirectionUrl().toString() + "  id='url' cols='65'  style='  height:45px;  white-space:pre; background:#d6e7f5; border:1px solid #aecfea; padding:4px; margin-top:4px;' readonly='readonly'>" + GetRedirectionUrl().toString() + "</textarea></p><p style='font-weight:bold;'>Pass Code: <span id='spPassCode' style='font-size:12pt; background:#d6e7f5; border:1px solid #aecfea; padding:4px 10px;'>" + passcode1 + "</span></p> <hr/> <p>Enter your email address to have the Survey Link and Pass Code emailed to you.</p><p><span style='font-weight:bold;'>Email Subject:</span><br /><textarea id='Subject' cols='65'  style='  height:30px;  white-space:pre; border:1px solid #aecfea; padding:4px; margin-top:4px;'>"+ Subject +"</textarea></p><p><label for='email' style='font-weight:bold;'>Email:</label> <input id='email' type='email' /></p>  <p><label for='confirmemail' style='font-weight:bold;'>Confirm Email:</label> <input id='confirmemail' type='email' /><div align='center'> <a  onclick ='SendEmail();'  class='login'  style='width:50px; padding:8px 15px !important;'>Send Email</a></div></p>  <br /> <p style='font-size: 8pt; padding: 5px; background: #ffffa8; margin-top:-5px;'><strong>Note:</strong> Your email address will not be saved and will only be used to send you the survey link.</p>"
+                         })
+
+               
+
+         
+});
+
+
+
+$(document).delegate('#close', 'click', function () {
+    CCE_HasFormValuesChanged();
+    if ($('#FormHasChanged').val() == 'True') {
+        $(this).simpledialog({
+            'mode': 'blank',
+            'prompt': false,
+            'forceInput': false,
+            'useModal': true,
+            'buttons': {
+                'OK': {
+                    click: function () {
+                        $('#dialogoutput').text('OK');
+                        alert(test);
+                    }
+                }
+
+            },
+
+
+            'fullHTML': "<div id=\"exitdialog\" title=\"Exit Record\" ><p style=\"font-size:1.20em; font-weight:400;\">Do you want to save the record before exiting?</p><p style=\"font-size:1.20em; font-weight:300;\"></p><p><div align='right' id='exitbtns'> <a  onclick=\"SaveForm();\"  class='login'  style='width:50px; padding:4px 5px !important; border: 1px solid #1f3b53 !important; background: #5c53ac !important; color:#fff !important; text-shadow: none !important;'>Save</a>        <a class='login' onclick ='ExitSurvey();'  style='width:50px; padding:4px 5px !important; border: 1px solid #1f3b53 !important; background: #5c53ac !important; color:#fff !important; text-shadow: none !important;'  id='simpleclose' >Don't Save</a> <a class='login'   style='width:50px; padding:4px 5px !important; border: 1px solid #1f3b53 !important; background: #5c53ac !important; color:#fff !important; text-shadow: none !important;'rel='close'   id='simpleclose' >Cancel</a></div></p>"
+        })
+    } else {
+        //        var homePageUrl = '@Url.Action("Index", "Home")' + '/' + '@Model.Form.SurveyInfo.SurveyId';
+        //        window.location.href = homePageUrl;
+        ExitSurvey();
+
+    }
+});
+
+$(document).delegate('#close1', 'click', function () {
+
+    CCE_HasFormValuesChanged();
+    if ($('#FormHasChanged').val() == 'True') {
+        $(this).simpledialog({
+            'mode': 'blank',
+            'prompt': false,
+            'forceInput': false,
+            'useModal': true,
+            'buttons': {
+                'OK': {
+                    click: function () {
+                        $('#dialogoutput').text('OK');
+                        alert(test);
+                    }
+                }
+
+            },
+
+
+            'fullHTML': "<div id=\"exitdialog\" title=\"Exit Record\" ><p style=\"font-size:1.20em; font-weight:400;\">Do you want to update the record before exiting?</p><p style=\"font-size:1.20em; font-weight:300;\"></p><p><div align='right' id='exitbtns'> <a onclick=\"SaveForm();\"  class='login'  style='width:50px; padding:4px 5px !important; border: 1px solid #1f3b53 !important; background: #5c53ac !important; color:#fff !important; text-shadow: none !important;'>Save</a>        <a class='login' onclick ='ExitSurvey();'    style='width:50px; padding:4px 5px !important; border: 1px solid #1f3b53 !important; background: #5c53ac !important; color:#fff !important; text-shadow: none !important;'rel='close'   id='simpleclose' >Don't Save</a> <a class='login'   style='width:50px; padding:4px 5px !important; border: 1px solid #1f3b53 !important; background: #5c53ac !important; color:#fff !important; text-shadow: none !important;'rel='close'   id='simpleclose' >Cancel</a></div></p>"
+        })
+    } else {
+        //        var homePageUrl = '@Url.Action("Index", "Home")' + '/' + '@Model.Form.SurveyInfo.SurveyId';
+        //        window.location.href = homePageUrl;
+        ExitSurvey();
+    }
+});  
+
+function CloseDialog() {
+
+
+    $(this).dialog("close");
+
+}
+
+
+/*Exit the survey */
+function ExitSurvey() {
+   
+//      var signoutUrl = '@Url.Action("Delete", "Survey")';
+//      //var homePageUrl = '@Url.Action("Index", "FormResponse")' + '/' + '@Model.Form.SurveyInfo.SurveyId';
+//      //var homePageUrl = 'FormResponse/Index' + '/' + '@Model.Form.SurveyInfo.SurveyId';
+//      //alert(homePageUrl);
+//      $.ajax({
+//          url: signoutUrl,
+//          type: 'POST',
+//          contentType: 'application/json; charset=utf-8',
+//          dataType: "json",
+//          async: false,
+//          success: successFunc,
+//          error: errorFunc
+//      });
+//      function successFunc(data) {
+//           
+//         // var homePageUrl = '@Url.Action("Index", "FormResponse")' + '/' + data;
+//          // window.location.href = homePageUrl;
+//           
+    //      }
+
+    DoNotSave();
+}
+
+function errorFunc(data) {
+    alert('failed');
+}
+
+
+
+$(function() {
+     $('#myform').submit( function() {
+        
+        var DisabledFieldsList = $('#DisabledFieldsList').val();
+        //alert(" " + DisabledFieldsList);
+        if (DisabledFieldsList.length > 0)
+        {
+        CCE_ProcessEnableAllControls(DisabledFieldsList) ;
+        }
+         return true;
+     });
+});
+ 
+ 
+function ReplaceString(string){
+
+  return string.replace( /&amp;/g,"&").replace(/&gt;/g ,">").replace( /&lt;/g,"<").replace(/&quot;/g, "\"").replace(/&#39;/g, "'");
+}
+/*Save the survey */
+ 
+function SaveForm() {
+    var DisabledFieldsList = $('#DisabledFieldsList').val();
+
+    if (DisabledFieldsList.length > 0) {
+        CCE_ProcessEnableAllControls(DisabledFieldsList);
+    }
+
+    //SaveSurvey();
+    //debugger;
+    //set the is_save_action hidden variable value to true to indicate that save button has been clicked
+    $("#myform")[0].is_save_action.value = 'false';
+    $("#myform")[0].is_save_action_Mobile.value = 'true';
+    //set the action path of the current form so when it is submitted by clicking the save button it posts to the path 
+    $("#myform")[0].action = window.location.href;
+    //detach the validation engine as we don't want to validate data on save button click
+    $('#myform').validationEngine('detach');
+    //posting the form
+    $('#myform').submit();
+    // return false;
+
+}
+
+</script>
+
+<div id="pageHeader">
+  	<div id="pageTitle"><h2>@Model.Form.SurveyInfo.SurveyName</h2></div>
+   	<div id="userwelcome">Welcome <strong>@Session["UserFirstName"]&nbsp; @Session["UserLastName"]</strong>&nbsp; | &nbsp;
+    @*<a href="#">Log Out</a>*@
+    @Html.ActionLink("Log Out", "LogOut", "Survey", null, null)	
+    </div>
+  	<div style="clear:both;"></div>
+</div>  
+
+<div id="content" class="recordcontentdiv" style="margin:20px auto 0;">
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "myform", @class = "" }))
+	
+{  
+ <div id="formdisplay" class="@Model.Form.IsDraftModeStyleClass.ToString()" style="">
+  @if (@Model.Form.SurveyInfo.SurveyId != @Session["RootFormId"].ToString())
+     {
+	<div id="relatenav" style="padding-bottom:10px;">
+            @* <button class=""   id ="Home" type="button" onclick="GoHome()" name="Home"  >  Main Record</button>
+            <button class=""   id ="LevelUp" type="button" onclick="GoOneLevelUp()" name="Home" > Back</button>*@
+            <div style="float:left;"><a class="exitsurvey" onclick="GoHome();" style="background: #00B050;"  title="Main Record"><img src="../../Content/images/root.png" style="width:16px; vertical-align: text-top;"/> Main Record</a> </div>
+            <div style="float:right;"><a  class="exitsurvey" onclick="GoOneLevelUp();" style="background: #00B050;"  title="Back"><img src="../../Content/images/uplevel.png" style="width:16px;  vertical-align: text-bottom;"/> Back</a> </div>
+            <div style="clear:both;"></div>   
+               
+        </div>
+     }
+<div id="infobox">
+        <div id="pages" class="pages">
+
+
+         @if (Model.Form.NumberOfPages > 0)
+          {
+              int num = 0;
+
+
+
+              for (int i = 1; Model.Form.NumberOfPages > i - 1; i++)
+              {
+                  
+                          num = i;
+                          if (i == 1 && Model.Form.CurrentPage > 1)
+                                {  
+                                <a  onclick="Submit();" style="background-image: url('@Url.Content("~/Content/images/prev.png")'); background-repeat:no-repeat; background-position:center;"   href="@Url.RouteUrl(null, new { controller = "Survey", action = "Index", responseid = Model.Form.ResponseId, PageNumber = Model.Form.CurrentPage - 1 })"  class="nextprev" title="Previous Page">
+                                                &nbsp;&nbsp;&nbsp; </a>  
+                                @* <a href="@Url.RouteUrl(null, new { controller = "Survey", action = "Index", responseid = Model.ResponseId, PageNumber = Model.CurrentPage - 1 })" onclick="Submit();" data-role="button" data-inline="true" data-theme="e" data-mini="true" data-icon="arrow-l" 
+                                    data-iconpos="notext"  >
+                                    Previous</a>*@
+                            
+                                }
+
+                            if (Model.Form.CurrentPage == i)
+                            {  
+                                   <span class="current">@num of @Model.Form.NumberOfPages</span>
+                            }
+
+
+              }
+
+          if (Model.Form.CurrentPage != Model.Form.NumberOfPages)
+             {  
+                  
+                     
+            <a  id="anchorNext" onclick="Submit();"  style="background-image: url('@Url.Content("~/Content/images/next.png")');  background-repeat:no-repeat; background-position:center;" href="@Url.RouteUrl(null, new { controller = "Survey", action = "Index", responseid = Model.Form.ResponseId, PageNumber = Model.Form.CurrentPage + 1 })" class="nextprev" title="Go to Next Page">
+                &nbsp;&nbsp;&nbsp; </a> 
+@*   <a id="anchorNext" onclick="Submit();"  href="@Url.RouteUrl(null, new { controller = "Survey", action = "Index", responseid = Model.Form.ResponseId, PageNumber = Model.CurrentPage + 1 })" data-role="button" data-inline="true" data-theme="e" data-mini="true" data-icon="arrow-r" data-iconpos="notext">
+                            Next
+                            </a>*@
+           
+           
+             }
+
+          } 
+           
+           
+            
+      
+      </div>
+      
+       
+	     <div id="exit" align="right" style="vertical-align:middle;">
+        @*<button  class="MobileExitSurvey"    type="submit" id="close">Exit Survey</button>*@
+        <button data-role="button" data-theme="submit2" data-inline="true" type="submit"  name="Submitbutton" value="Submit" > Save & Close </button>
+       @* <a id="close" class="exitsurvey">Delete @*<img src="../../Content/images/close.png" alt="Save & Close" style="border:none; width: 15px; vertical-align:middle; padding-bottom:3px;" /> </a>*@
+       @* <a id="close" class="exitsurvey" onclick="Submit();"  href="@Url.RouteUrl(null, new { controller = "Home", action = "Index", SurveyId = Model.SurveyInfo.SurveyId })">Exit</a>*@
+       
+     @if (ViewBag.Edit == "Edit")
+            { 
+               <a id="close1" class="exitsurvey">Exit</a>
+            }
+        else
+            {
+               <a id="close" class="exitsurvey">Exit</a>
+
+            }
+    </div>
+    
+    <div style="clear: both;">
+    </div>
+</div>
+@*<div id="content">*@
+<div id="successContent">
+</div>
+ 
+@if (!string.IsNullOrEmpty(Model.Form.GetErrorSummary()))
+    { 
+    <div class="errormsg">
+        <div class="image">
+            <img src="@Url.Content("~/Content/images/error.png")" style="vertical-align: middle; padding-right: 5px; width:24px;" alt=""/>
+        </div>
+        <div class="message">
+            <span style="font-weight: bold; font-size: 10pt;">Please correct the following errors
+                before continuing:</span>
+            <br />
+            @Html.Raw(Model.Form.GetErrorSummary())
+        </div>
+        <div style="clear: both;">
+        </div>
+    </div>
+    } 
+     		 
+		
+          
+              
+             @Html.AntiForgeryToken() 
+        
+            
+             @Html.Raw(Model.Form.RenderHtml(true))
+            
+           
+             
+           
+            <input type="hidden"  id="HiddenFieldsList"  name="HiddenFieldsList" value="@Model.Form.HiddenFieldsList" />
+            <input type="hidden"  id="HighlightedFieldsList"  name="HighlightedFieldsList" value="@Model.Form.HighlightedFieldsList" />
+            <input type="hidden"  id="DisabledFieldsList"  name="DisabledFieldsList" value="@Model.Form.DisabledFieldsList" />
+            <input type="hidden"  id="RequiredFieldsList"  name="RequiredFieldsList" value="@Model.Form.RequiredFieldsList" />
+            <input type="hidden"  id="AssignList"  name="AssignList" value="@Model.Form.AssignList" />
+   	        <input type="hidden"  name="is_save_action" value="false" />
+            <input type="hidden"  name="is_save_action_Mobile" value="false" />
+            <input type="hidden"  name="is_goto_action" value="false" /> 
+            <input type="hidden"  name="Get_Child_action" value="false" />
+            <input type="hidden"  name="Read_Response_action" value="false" />
+            <input type="hidden"  name="Go_Home_action" value="false" />
+            <input type="hidden"  name="Go_One_Level_Up_action" value="false" />
+            <input type="hidden"  name="Do_Not_Save_action" value="false" />
+	        <input type="hidden"  id="RelateButtonWasClicked"  name="Requested_View_Id" value="@HttpContext.Current.Session["RequestedViewId"]" /> 
+            <input type="hidden"  id="RelateButtonWasClicked_Temp"  name="Requested_View_Id_Temp" value="@HttpContext.Current.Session["RequestedViewId"]" /> 
+            <input type="hidden"  name="HiddenStatusId" id="HiddenStatusId" value="false" />
+            <input type="hidden"  name="HiddenIsSaved" id="HiddenIsSaved" value="false" /> 
+            <input type="hidden"  name="HiddensuccessContent" id="HiddensuccessContent" value="false" /> 
+            <input type="hidden"  id="FormHasChanged"  name="Form_Has_Changed" value="@Model.Form.FormValuesHasChanged" /> 
+
+
+             <div id="nav">
+                    <div id="pagesbottom">
+                            <div id="prev" align="left">&nbsp;
+                   
+             @if (Model.Form.CurrentPage != 1)
+                 {  
+              <a  onclick="Submit();" style="" href="@Url.RouteUrl(null, new { controller = "Survey", action = "Index", responseid = Model.Form.ResponseId, PageNumber = Model.Form.CurrentPage - 1 })"  class="prev" title="Previous Page">&nbsp;</a> 
+             @* <button class="prev" id="PreviousButton" value="PreviousButton" onclick="Previous();"  name="PreviousButton"  type="button" > &nbsp; Previous</button>*@
+                 }
+             </div>
+	 		 
+                            <div id="savediv" align="center">
+                             @*<a  onclick="Save();" style="" class="save" title="Click this button to finish the survey later. Use the survey link and pass code provided to return to the survey at a later time.">&nbsp;</a> *@
+                             @*<button type="button"  onclick="Save();" id ="Savebutton1" name="Savebutton" value="save" data-role="button" data-theme="save1" data-inline="true" data-iconpos="notext"></button>*@
+                                    @*onclick="Save();"*@
+                                    <button data-role="button" data-theme="submit1" data-iconpos="notext" type="submit"  name="Submitbutton1" value="Submit"><img src="~/Content/images/saveset.png" alt="Save"/>Save</button>
+                                    <button data-role="button" data-theme="submit12" data-inline="true" type="submit"  name="Submitbutton" value="Submit">Save & Close</button>
+                             </div>
+
+                           @if (Model.Form.CurrentPage == Model.Form.NumberOfPages)
+                               {  
+                           <!--<div id="next" align="right" style="margin-top:-8px !important;" > 
+                           @*<a  name="Submitbutton" onclick="Submit();" class="submits" >Submit</a>*@
+                          <button data-role="button" data-theme="submit1" data-inline="true" type="submit"  name="Submitbutton" value="Submit" >Submit</button>
+                          </div>-->
+                               }
+                           else
+                               {
+                                            <div id="next" align="right">
+                            <a onclick="Submit();"  style="" href="@Url.RouteUrl(null, new { controller = "Survey", action = "Index", responseid = Model.Form.ResponseId, PageNumber = Model.Form.CurrentPage + 1 })" class="next" title="Next Page">&nbsp;</a> 
+                            @*<button class="next"  name="ContinueButton" id="ContinueButton" onclick="Continue();" type="button" >Continue &nbsp; </button>*@
+                            </div>
+                               }
+                           <div style="clear:both"></div>
+                            
+               </div>
+               <div style="height:40px;">
+                            <div id="savediv" align="center" style="margin: 20px auto 0  35%; text-align:center;">               
+                                    
+                             </div>         
+               </div>
+      </div>    
+
+
+
+ </div>
+}<!--EndForm-->
+</div><!--End Conten tDiv-->
+
+   <div id="RelateNavigation" title="View Related Records" >
+        
+			 </div>
+
+
+@* </div>*@ @*<div id="dialog" title="Your Survey has been saved." data-role="popup">
+                   <p>Please copy and save the <span style="font-weight:bold;">Survey Link</span> and <span style="font-weight:bold;">Pass Code</span> in order to return to the survey at a later time.</p>
+                <p><span style="font-weight:bold;">Survey Link:</span><br /><textarea id="url" cols="65"  style="  height:30px;  white-space:pre; background:#d6e7f5; border:1px solid #aecfea; padding:4px; margin-top:4px;" readonly="readonly"></textarea></p>
+                
+               <p style="font-weight:bold;">Pass Code: <span id="spPassCode" style="font-size:12pt; background:#d6e7f5; border:1px solid #aecfea; padding:4px 10px;"></span></p>
+                  <hr/>
+                  <p>Optionally enter your email address to have the Survey Link and Pass Code emailed to you.</p>
+                  
+               
+                
+                <p><label for="email">Email:</label> <input id="email" type="text" style="width: 200px; margin-left:48px;"/></p>
+                  <p><label for="confirmemail">Confirm Email:</label> <input id="confirmemail" type="text" style="width: 200px;"/>
+                  <button id="send" type="button" class="login" style="width:50px">Send</button></p>
+                <br />
+                <p style="font-size: 8pt; padding: 5px; background: #ffffa8; margin-top:-5px;"><strong>Note:</strong> Your email address will not be saved and will only be used to send you the survey link.</p>
+    </div>
+ *@

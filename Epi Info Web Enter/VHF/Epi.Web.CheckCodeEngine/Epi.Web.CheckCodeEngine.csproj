@@ -1,0 +1,195 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{6B084882-EF4F-4CF0-85B1-1E8C357AE822}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Epi.Web.CheckCodeEngine</RootNamespace>
+    <AssemblyName>Epi.Web.CheckCodeEngine</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CalithaLib, Version=1.13.2403.14266, Culture=neutral, PublicKeyToken=6fe80ec331a66ec8, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\CalithaLib.dll</HintPath>
+    </Reference>
+    <Reference Include="EpiInfo.Plugin, Version=7.1.1.5, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Epi Info 7\EpiInfoPlugin\bin\Debug\EpiInfo.Plugin.dll</HintPath>
+    </Reference>
+    <Reference Include="GoldParserEngine, Version=1.13.2403.14266, Culture=neutral, PublicKeyToken=6fe80ec331a66ec8, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\GoldParserEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="cAST.cs" />
+    <Compile Include="cCOMDLL.cs" />
+    <Compile Include="cNETDLL.cs" />
+    <Compile Include="cSymbol.cs" />
+    <Compile Include="cSymbolTable.cs" />
+    <Compile Include="EnterRule.cs" />
+    <Compile Include="EpiInfo7EventGrammar.cs" />
+    <Compile Include="IDLLClass.cs" />
+    <Compile Include="IEnterCheckCode.cs" />
+    <Compile Include="PluginVariable.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Rules\EpiFunctions.cs" />
+    <Compile Include="Rules\Functions\Rule_Abs.cs" />
+    <Compile Include="Rules\Functions\Rule_Cos.cs" />
+    <Compile Include="Rules\Functions\Rule_DateDiff.cs" />
+    <Compile Include="Rules\Functions\Rule_DatePart.cs" />
+    <Compile Include="Rules\Functions\Rule_Day.cs" />
+    <Compile Include="Rules\Functions\Rule_Days.cs" />
+    <Compile Include="Rules\Functions\Rule_Environ.cs" />
+    <Compile Include="Rules\Functions\Rule_EPIWEEK.cs" />
+    <Compile Include="Rules\Functions\Rule_Exists.cs" />
+    <Compile Include="Rules\Functions\Rule_Exp_Func.cs" />
+    <Compile Include="Rules\Functions\Rule_FileDate.cs" />
+    <Compile Include="Rules\Functions\Rule_FindText.cs" />
+    <Compile Include="Rules\Functions\Rule_Format.cs" />
+    <Compile Include="Rules\Functions\Rule_Hour.cs" />
+    <Compile Include="Rules\Functions\Rule_Hours.cs" />
+    <Compile Include="Rules\Functions\Rule_LineBreak.cs" />
+    <Compile Include="Rules\Functions\Rule_LN_Func.cs" />
+    <Compile Include="Rules\Functions\Rule_LOG_Func.cs" />
+    <Compile Include="Rules\Functions\Rule_Minute.cs" />
+    <Compile Include="Rules\Functions\Rule_Minutes.cs" />
+    <Compile Include="Rules\Functions\Rule_Month.cs" />
+    <Compile Include="Rules\Functions\Rule_Months.cs" />
+    <Compile Include="Rules\Functions\Rule_NumToDate.cs" />
+    <Compile Include="Rules\Functions\Rule_NumToTime.cs" />
+    <Compile Include="Rules\Functions\Rule_PFROMZ.cs" />
+    <Compile Include="Rules\Functions\Rule_RecordCount.cs" />
+    <Compile Include="Rules\Functions\Rule_Rnd.cs" />
+    <Compile Include="Rules\Functions\Rule_Round.cs" />
+    <Compile Include="Rules\Functions\Rule_Second.cs" />
+    <Compile Include="Rules\Functions\Rule_Seconds.cs" />
+    <Compile Include="Rules\Functions\Rule_Sin.cs" />
+    <Compile Include="Rules\Functions\Rule_Step.cs" />
+    <Compile Include="Rules\Functions\Rule_STRLEN.cs" />
+    <Compile Include="Rules\Functions\Rule_Substring.cs" />
+    <Compile Include="Rules\Functions\Rule_SystemDate.cs" />
+    <Compile Include="Rules\Functions\Rule_SystemTime.cs" />
+    <Compile Include="Rules\Functions\Rule_Tan.cs" />
+    <Compile Include="Rules\Functions\Rule_TRUNC.cs" />
+    <Compile Include="Rules\Functions\Rule_TxtToDate.cs" />
+    <Compile Include="Rules\Functions\Rule_TxtToNum.cs" />
+    <Compile Include="Rules\Functions\Rule_UpperCase.cs" />
+    <Compile Include="Rules\Functions\Rule_Year.cs" />
+    <Compile Include="Rules\Functions\Rule_Years.cs" />
+    <Compile Include="Rules\Functions\Rule_ZSCORE.cs" />
+    <Compile Include="Rules\Rule_AddExp.cs" />
+    <Compile Include="Rules\Rule_Always.cs" />
+    <Compile Include="Rules\Rule_AndExp.cs" />
+    <Compile Include="Rules\Rule_Assign.cs" />
+    <Compile Include="Rules\Rule_Assign_DLL_Statement.cs" />
+    <Compile Include="Rules\Rule_AutoSearch.cs" />
+    <Compile Include="Rules\Rule_Beep.cs" />
+    <Compile Include="Rules\Rule_Begin_After_Statement.cs" />
+    <Compile Include="Rules\Rule_Begin_Before_Statement.cs" />
+    <Compile Include="Rules\Rule_Begin_Click_Statement.cs" />
+    <Compile Include="Rules\Rule_Call.cs" />
+    <Compile Include="Rules\Rule_CheckCodeBlock.cs" />
+    <Compile Include="Rules\Rule_CheckCodeBlocks.cs" />
+    <Compile Include="Rules\Rule_Clear.cs" />
+    <Compile Include="Rules\Rule_CommentLine.cs" />
+    <Compile Include="Rules\Rule_CompareExp.cs" />
+    <Compile Include="Rules\Rule_ConcatExp.cs" />
+    <Compile Include="Rules\Rule_Define.cs" />
+    <Compile Include="Rules\Rule_DefineVariables_Statement.cs" />
+    <Compile Include="Rules\Rule_Define_Statement_Group.cs" />
+    <Compile Include="Rules\Rule_Define_Statement_Type.cs" />
+    <Compile Include="Rules\Rule_Dialog.cs" />
+    <Compile Include="Rules\Rule_Disable.cs" />
+    <Compile Include="Rules\Rule_DLL_Statement.cs" />
+    <Compile Include="Rules\Rule_Else_If_Statement.cs" />
+    <Compile Include="Rules\Rule_Enable.cs" />
+    <Compile Include="Rules\Rule_Execute.cs" />
+    <Compile Include="Rules\Rule_Expression.cs" />
+    <Compile Include="Rules\Rule_ExprList.cs" />
+    <Compile Include="Rules\Rule_Field_Checkcode_Statement.cs" />
+    <Compile Include="Rules\Rule_Geocode.cs" />
+    <Compile Include="Rules\Rule_GoTo.cs" />
+    <Compile Include="Rules\Rule_Help.cs" />
+    <Compile Include="Rules\Rule_Hide.cs" />
+    <Compile Include="Rules\Rule_Highlight.cs" />
+    <Compile Include="Rules\Rule_If_Then_Else_End.cs" />
+    <Compile Include="Rules\Rule_MultExp.cs" />
+    <Compile Include="Rules\Rule_NegateExp.cs" />
+    <Compile Include="Rules\Rule_NewRecord.cs" />
+    <Compile Include="Rules\Rule_NotExp.cs" />
+    <Compile Include="Rules\Rule_Page_Checkcode_Statement.cs" />
+    <Compile Include="Rules\Rule_PowExp.cs" />
+    <Compile Include="Rules\Rule_Program.cs" />
+    <Compile Include="Rules\Rule_Quit.cs" />
+    <Compile Include="Rules\Rule_Record_Checkcode_Statement.cs" />
+    <Compile Include="Rules\Rule_SetNOTRequired.cs" />
+    <Compile Include="Rules\Rule_SetRequired.cs" />
+    <Compile Include="Rules\Rule_Statement.cs" />
+    <Compile Include="Rules\Rule_Statements.cs" />
+    <Compile Include="Rules\Rule_Subroutine_Statement.cs" />
+    <Compile Include="Rules\Rule_Undefine.cs" />
+    <Compile Include="Rules\Rule_UnHide.cs" />
+    <Compile Include="Rules\Rule_UnHighlight.cs" />
+    <Compile Include="Rules\Rule_Value.cs" />
+    <Compile Include="Rules\Rule_View_Checkcode_Statement.cs" />
+    <Compile Include="Rule_Context.cs" />
+    <Compile Include="Util.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="ClassDiagram1.cd" />
+    <None Include="CommandProcess.cd" />
+    <None Include="Framework.cd" />
+    <EmbeddedResource Include="grammar\EpiInfo.Enter.Grammar.cgt" />
+    <None Include="grammar\EpiInfo.Enter.Grammar.grm" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="CalithaLib.dll" />
+    <Content Include="EpiInfo.Plugin.dll" />
+    <Content Include="GoldParserEngine.dll" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

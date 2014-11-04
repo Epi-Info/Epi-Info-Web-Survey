@@ -1,0 +1,551 @@
+﻿.MvcDynamicForm
+ {
+  /*width:800px; 
+  height:1200px;*/
+  /*min-height:600px;*/
+  display:block; 
+ /* border:1px solid white; */
+  position:relative;  
+ }
+ 
+
+/*---*/
+/*Div Style for pagination*/
+#exit
+ {
+ float: right;
+/* width: 12%;*/
+ position:relative;
+ vertical-align:middle;
+/* margin-right: -10px;*/
+ }
+/*---*/
+/*Div Style for Previous, Save, Continue*/
+#prev
+ {
+ float: left;
+ width: 33%;
+ vertical-align:middle;
+ }
+
+#savediv
+ {
+ float: left;
+ width: 33%;
+ margin: auto;
+ vertical-align:middle;
+ }
+
+#next
+ {
+ float: right;
+ width: 33%;
+ vertical-align:middle;
+ }
+/*---*/
+
+
+#nav
+{
+width: 95%;
+text-align: center;
+/*border-top: 1px solid #244640;*/
+margin: 0 auto;
+padding: 0em 0.5em 0.5em 0.5em;
+position:relative;
+bottom: 100px;
+/*bottom:80px;*/
+/*clear:both;*/
+}
+
+
+button.exitsurvey:hover,  button.save:hover, button.prev:hover, button.next:hover, button.begin:hover, button.submits:hover, button.login:hover, a.returnto:hover
+ {
+ cursor: pointer;
+ opacity: 0.8;
+ }
+
+img.button 
+ {
+ vertical-align:text-top;
+ }
+ 
+button.save, button.prev, button.next, button.begin, button.login
+ {
+ border: 1px #4e9689 solid;
+ -moz-border-radius: 10px;
+ -webkit-border-radius: 10px;
+ -khtml-border-radius: 10px;
+ border-radius: 10px;
+ padding: 3px 5px 3px 5px;
+ color:#244640;
+ font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+ font-size: 10pt;
+ font-weight:bold;
+ width: 150px;
+ border: 1px solid rgba(0,0,0,0.5);
+ background: #d4eab3; 
+ background: rgba(195,255,104,0.6); 
+ box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
+ -o-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
+ -webkit-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
+ -moz-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
+  /*behavior: url('../Scripts/PIE.htc');*/
+ }
+
+button.save
+{
+    background-image: url('../images/save.png');
+    background-position:10px center;
+    background-repeat: repeat-x;
+    background-repeat:no-repeat;
+    padding-left:20px;
+    width:120px;
+}
+
+button.prev
+{
+  background-image: url('../images/arrow_left.png');
+  background-position:10px center;
+  background-repeat:no-repeat;
+  padding-left:25px;
+  text-align:left;
+  width:110px;
+ 
+}
+
+button.next
+{
+  background-image: url('../images/arrow_right.png');
+  background-position:84px center;
+  background-repeat:no-repeat;
+  width:110px;
+    /*padding-left:20px;*/
+}
+
+button.submits
+{
+  background-image: url('../images/submit.png') !important;
+  background-position:129px center !important;
+  background-repeat:no-repeat !important;
+    /*padding-left:20px;*/
+}
+
+button.exitsurvey
+ {
+ border: 1px #4e9689 solid;
+ -moz-border-radius: 10px;
+ -webkit-border-radius: 10px;
+ -khtml-border-radius: 10px;
+ border-radius: 10px;
+ background: #e5e5e5;
+ background: rgba(255,255,255,0.9);
+ width: 80px;
+ padding: 2px;
+ font-size: 8pt;
+ font-weight:bold;
+ height: 26px;
+ /*behavior: url('../Scripts/PIE.htc');*/
+ }
+ 
+ button.begin
+ {
+ display: block;
+ font-size: 12pt;				
+ font-weight: bold;
+ letter-spacing: 1px;
+ padding: 4px 10px 8px 10px;
+ margin: 0 auto;
+ width: 200px;
+ height: 40px;
+ text-align: center;
+ }
+
+.success
+ {
+ border: 1px solid #4d8000; 
+ background: #e6ffbf; 
+/* margin-bottom: 100px; 
+ margin-left: 0.5em; 
+ margin-right: 0.5em; */
+ margin: 1em;
+ padding: 10px;
+ font-size: 10pt;
+ font-weight: bold;
+ -moz-border-radius: 10px;
+ -webkit-border-radius: 10px;
+ -khtml-border-radius: 10px;
+ border-radius: 10px;
+/*behavior: url('../Scripts/PIE.htc');*/
+ }
+
+button.submits
+ {
+ border: 1px #4e9689 solid;
+ -moz-border-radius: 10px;
+ -webkit-border-radius: 10px;
+ -khtml-border-radius: 10px;
+ border-radius: 10px;
+ padding: 3px 5px 3px 5px;
+ color:#244640;
+ font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+ font-size: 10pt;
+ font-weight:bold;
+ max-width: 160px;
+ width:100%;
+ padding-left:10px;
+ border: 1px solid rgba(0,0,0,0.5);
+ background: #bfe7ea; 
+ background: rgba(191,231,234,0.6); 
+ box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
+ -o-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
+ -webkit-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
+ -moz-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
+/*behavior: url('../Scripts/PIE.htc');*/
+ }
+
+  #attention
+ {
+ border: 1px solid #ffca0a; 
+ background: #fff5c1; 
+ margin-bottom: 10px; 
+ margin-left: 0.5em; 
+ margin-right: 0.5em; 
+ padding: 10px;
+ font-size: 10pt;
+ font-weight: bold;
+ -moz-border-radius: 10px;
+ -webkit-border-radius: 10px;
+ -khtml-border-radius: 10px;
+ border-radius: 10px;
+/*behavior: url('../Scripts/PIE.htc');*/
+ }
+ /*Form Styles*/
+ 
+.EpiLabel  {
+	/*position:absolute;*/
+	color: #000;   
+	font-family: "Segoe UI", Tahoma, Geneva, Verdana, AriaL, sans-serif;  
+	font-size: 10pt;  
+	/*white-space: pre;*/
+	white-space:normal;
+	display:block;
+}
+
+ textarea
+ {
+     resize: none; 
+ }
+ 
+/*.error {
+    font: normal 12px arial;
+    padding: 3px;
+    margin: 3px;
+    background : #ffffff;
+    border: 1px solid #c00;
+}
+.error {
+    background: none repeat scroll 0 0 #FBE1DD;
+    border: 1px solid #E6482D;
+    border-radius: 10px 10px 10px 10px;
+    font-size: 10pt;
+   /* font-weight: bold;
+    margin-bottom: 10px;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+    padding: 10px;
+}*/
+
+.image
+{
+float:left;
+width:40px;
+}
+
+ .errormsg
+{
+border: 1px solid #e6482d; 
+ background: #fbe1dd; 
+ margin-bottom: 10px; 
+ margin-left: 0.5em; 
+ margin-right: 0.5em; 
+ padding: 10px;
+font-size: 9pt;
+-moz-border-radius: 10px;
+-webkit-border-radius: 10px;
+-khtml-border-radius: 10px;
+border-radius: 10px;
+/*behavior: url('../Scripts/PIE.htc');*/
+}
+
+.message
+{
+float:right;
+width: 94%;
+vertical-align: top;
+}
+
+button.copylink
+{
+   background-color:transparent;
+   border:none;
+   color: #0a2695;
+   text-decoration: underline;
+   cursor:pointer;
+   padding-left: 20px;
+   font-family: Segoe UI;
+   font-weight:bold;
+ }
+ 
+ button.copylink:hover
+{
+   text-decoration: none;
+     
+ }
+ 
+/*Styles for Log In Page*/
+.Logsin
+{
+  width: 340px; 
+  border: 1px solid #4e9689;  
+  -moz-border-radius: 10px; 
+  -webkit-border-radius: 10px; 
+  -khtml-border-radius: 10px; 
+  border-radius: 10px; 
+  /*behavior: url('../Scripts/PIE.htc');*/
+  margin-left:auto;
+  margin-right:auto;
+}
+
+.LogHead
+{
+    background:#87d69b; 
+    padding-top:5px; 
+    padding-left:20px; 
+    -moz-border-radius: 10px 10px 0 0; 
+    border-radius: 10px 10px 0 0; 
+    /*behavior: url('../Scripts/PIE.htc');*/
+}
+
+.logbody
+{
+    padding:0px 20px 40px 20px;
+}
+
+.validation-summary-errors
+{
+    
+    background: #fbe1dd;
+    border: 1px solid #e6482d;
+    padding:3px 5px 3px 2px;
+    margin:5px 0 10px 0;
+    -moz-border-radius: 10px; 
+    border-radius: 10px; 
+    /*behavior: url('../Scripts/PIE.htc');*/
+}
+.validation-summary-errors li
+{
+   
+   background-image: url('../images/error2.png') !important;
+  background-position:1px center !important;
+  background-repeat:no-repeat !important;
+     font-size: 10pt;
+    font-weight: bold;
+    color: #000;
+    list-style-type:none;
+    margin-left:2px;
+    padding-left: 30px;
+    font-size:9pt;
+    
+}
+
+.validation-summary-errors ul
+{
+    margin:2px 0 2px 0; 
+    padding:0px;
+    
+}
+
+a.returnto
+ {
+ border: 1px #4e9689 solid;
+ -moz-border-radius: 10px;
+ -webkit-border-radius: 10px;
+ -khtml-border-radius: 10px;
+ border-radius: 10px;
+ padding: 5px 15px 5px 15px;
+ color:#244640;
+ font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+ font-size: 10pt;
+ font-weight:bold;
+ width: 150px;
+ border: 1px solid rgba(0,0,0,0.5);
+ background: #d4eab3; 
+ background: rgba(195,255,104,0.6); 
+ box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
+ -o-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
+ -webkit-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
+ -moz-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
+  text-decoration: none;
+  /*behavior: url('../Scripts/PIE.htc');*/
+ }
+
+/*Tooltip Styles*/
+.tooltip {
+    display:none;
+    background:url('../images/black_arrow2.png') no-repeat;
+   background-position: -5px 10px;
+    font-size:9pt;
+    font-family:Segoe UI;
+    font-weight:bold;
+    height:80px;
+    width:150px;
+    padding:26px 22px 20px 38px;
+    color:#333;
+  }
+
+/*for TimePicker*/
+   .ui-timepicker-div .ui-widget-header { margin-bottom: 8px;font-size:75%; }
+   .ui-timepicker-div dl { text-align: left;font-size:75%; }
+   .ui-timepicker-div dl dt { height: 20px; margin-bottom: -20px;font-size:11px; }
+   .ui-timepicker-div dl dd { margin: 0 10px 10px 65px; font-size:11px; font-weight:bold;}
+   .ui-timepicker-div td { font-size: 1em;font-size:75%; }
+   .ui-tpicker-grid-label { background: none; border: none; margin: 0; padding: 0;font-size:75%; }          
+   .ui-datepicker .ui-datepicker-buttonpane {font-size:65%;}         
+
+
+/*FieldSet Style*/
+fieldset
+{
+    border:1px solid #c4c4c4;
+    padding:2px;
+}
+
+
+
+/* This wraps all html rendered by Mvc Dynamic Forms */
+div.MvcDynamicForm {}
+
+/* By default, every field is wrapped with this.
+   The developer can modify the wrapping element
+   and nearly all class names of rendered Html  */
+div.MvcFieldWrapper
+{    
+   /* margin-bottom: 2em;  provides spacing between fields */
+}
+
+/* These are used to style the labels that accompany
+   your input elements. */
+label.MvcDynamicFieldPrompt, label.MvcDynamicFieldError
+{
+    display: block; /* causes labels to appear above their input elements */
+}
+
+label.MvcDynamicFieldError
+{
+    color:Red; /* ERROR! */
+}
+
+/* Used to style the unordered lists that contain
+   radio button lists and checkbox lists */
+ul.MvcDynamicOrientableList
+{
+    list-style-type: none; /* prevents bullets from showing next to input elements */
+    padding:0  0px;
+    
+}
+
+ul.MvcDynamicOrientableList label
+{
+    display:inline;
+}
+
+/*  Used to style the list fields that can
+    go in either vertical or horizontal directions
+    (CheckboxList & RadioList) */
+ul.MvcDynamicHorizontal li
+{
+    display:inline; /* causs list items to display horizontally */
+    
+    white-space:nowrap;
+    /*margin-right:0.5em; /* provides spacing between input elements */
+}
+
+/* Other unused selectors. These should be self-explanatory by now. */
+ul.MvcDynamicVertical {}
+ul.MvcDynamicVertical li {}
+label.MvcDynamicCheckboxPrompt {}
+
+/*  You can view html source or use a DOM inspector 
+    to figure out how to select elements to style them. */
+   
+ 
+select.expand {
+    width: auto;
+}
+
+
+a.watch
+ {
+ border: 1px #04aeda solid;
+ margin-top: 15px;
+ padding: 3px 33px;
+ color:#fff;
+ font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+ font-size: 10pt;
+ font-weight:bold;
+ width: 148px;
+ cursor:pointer;
+ background: #04aeda; 
+ }
+ 
+.draft
+{
+   background-image:url('../images/DRAFT.png');
+    background-repeat:no-repeat;
+    background-position: center top;
+    background-size: 100%;
+    background-origin:content-box;
+    background-repeat:repeat-y;
+   
+}
+ 
+ .final
+{
+     background-image: none !important;
+}
+
+/*#header h1:after
+{
+    content:"DRAFT";
+    color:Blue
+}*/
+.TestHeader h1:after
+{
+   /* content:"DRAFT";
+    color:Blue*/
+    
+    }
+    
+button.dialogbtn
+ {
+ border: 1px #4e9689 solid !important;
+ -moz-border-radius: 10px !important;
+ -webkit-border-radius: 10px !important;
+ -khtml-border-radius: 10px !important;
+ border-radius: 10px !important;
+ padding: 3px 5px 3px 5px !important;
+ color:#244640 !important;
+ font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif !important;
+ font-size: 10pt !important;
+ font-weight:bold !important;
+ width: 150px !important;
+ border: 1px solid rgba(0,0,0,0.5) !important;
+ background: #d4eab3 !important; 
+ background: rgba(195,255,104,0.6) !important; 
+ box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3) !important;
+ -o-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3) !important;
+ -webkit-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3) !important;
+ -moz-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3) !important;
+  /*behavior: url('../Scripts/PIE.htc');*/
+ }

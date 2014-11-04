@@ -1,0 +1,60 @@
+﻿@model Epi.Web.MVC.Models.ExceptionModel
+@{
+    ViewBag.Title = "Exception";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script>
+    $(document).ready(function () {
+        $("#showhide").click(function () {
+            $("#errorDetails").toggle();
+        });
+    });
+</script>
+<div id="pageHeader">
+    <div id="pageTitle">
+        <h2>
+            Oops... An Error has Occured</h2>
+    </div>
+    @*<div id="userwelcome">
+        Welcome <strong>John</strong>&nbsp; | &nbsp;<a href="#">Log Out</a></div>
+    <div style="clear: both;">
+    </div>*@
+</div>
+<div id="content" style="min-height: 375px;">
+    <div id="attention" style="margin: 10px">
+        <img src="@Url.Content("~/Content/images/sign_warning.png")" alt="" style="vertical-align: middle;
+                padding-right: 10px;"/>
+        @*@System.Configuration.ConfigurationManager.AppSettings["SURVEY_NOT_EXISTS"]*@
+        @System.Configuration.ConfigurationManager.AppSettings["UNKNOWN_ERROR_MESSAGE"]
+        <div style="float: right;">
+            <a id="showhide" href="#">Show/Hide Details</a></div>
+        @* @Html.ActionLink("Log Out", "LogOut", "FormResponse", null, null)*@ @*<p>@TempData["exc"]</p>
+        <br>
+         <p>@TempData["exc1"]</p>
+         <br>
+          <p>@TempData["exc2"]</p>*@
+    </div>
+    <div style="clear: both;">
+    </div>
+    <div id="relatenav" style="padding-bottom: 10px; display: inline-block; margin: 10px;">
+        @if (Session["RootFormId"] != null)
+        {
+            @Html.ActionLink("Return to Home", "Index", "Home", new { surveyid = Session["RootFormId"] }, new { @class = "returnto" })
+        }
+        else
+        {    
+            @Html.ActionLink("Log Out", "LogOut", "Home", null, new { @class = "returnto" })
+        }
+        
+    </div>
+    @if (Convert.ToInt16(Session["UserHighestRole"].ToString()) > 1)
+    {
+        <div style="margin: 10px">
+            <a id="showhide" href="#">Show/Hide Details</a></div>
+        <div id="errorDetails" style="border: 1px solid #ffca0a; margin: 20px 0.5em 10px;
+            padding: 10px; display: none;">
+           Stack Trace: @Model.ExceptionDetail
+           Message: @Model.Message
+        </div>   
+    }
+</div>

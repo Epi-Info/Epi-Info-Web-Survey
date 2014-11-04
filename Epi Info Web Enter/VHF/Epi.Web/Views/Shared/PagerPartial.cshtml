@@ -1,0 +1,86 @@
+﻿@model Epi.Web.MVC.Models.FormResponseInfoModel
+
+                            @if (Model.CurrentPage != 1)// this section builds the previous link
+                            {
+                            @Html.Raw(" " + @Html.ActionLink(
+                                                            "<", 
+                                                            "Index",
+                                                                              new { formid = Model.FormInfoModel.FormId, pagenumber = Model.CurrentPage - 1, sort = Model.sortOrder, sortfield = Model.sortfield },
+                                                                     new { name = "lnkPager", data_formid = Model.FormInfoModel.FormId, data_pagenumber = Model.CurrentPage - 1, data_sort = Model.sortOrder, data_sortfield = Model.sortfield }) + " ");
+                            }
+
+  @{ var NumberOfPagesDisplayedOnPage = 5;// Number of pages should be displayed of the page, last page however shows  6 pages    
+  }                      
+                                
+                            @if (Model.NumberOfPages < NumberOfPagesDisplayedOnPage)//This section builds the links if number of pages are less than 5.
+                            {
+                                for (int page = 1; page <= Model.NumberOfPages; page++)
+                                {
+                                    if (Model.CurrentPage == page)
+                                    {
+                            @Html.Raw("<span>" + page + "</span>");
+                                    }
+                                    else
+                                    {
+                            @Html.Raw(" " + @Html.ActionLink(page.ToString(), "Index", new { formid = Model.FormInfoModel.FormId, pagenumber = page, sort= Model.sortOrder, sortfield = Model.sortfield },
+
+                                                                       new { name = "lnkPager", data_formid = Model.FormInfoModel.FormId, data_pagenumber = page, data_sort = Model.sortOrder, data_sortfield=Model.sortfield }) + " ");
+                                    }
+                                }
+                            }
+                            else //if they are greator than 5
+                                if (Model.CurrentPage < NumberOfPagesDisplayedOnPage) // this section builds the links for first 5 pages.
+                                {
+
+
+                                    for (int page = 1; page < NumberOfPagesDisplayedOnPage; page++)
+                                    {
+                                        if (Model.CurrentPage == page)
+                                        {
+                            @Html.Raw("<span>" + page + "</span>");
+                                        }
+                                        else
+                                        {
+                            @Html.Raw(" " + @Html.ActionLink(page.ToString(), "Index", new { formid = Model.FormInfoModel.FormId, pagenumber = page, sort = Model.sortOrder, sortfield = Model.sortfield },
+
+                                                                                            new { name = "lnkPager", data_formid = Model.FormInfoModel.FormId, data_pagenumber = page, data_sort = Model.sortOrder, data_sortfield = Model.sortfield }) + " ");
+                                        }
+
+
+                                    }
+                                }
+                                else //this section builds the middle section of number of pages;
+                                    if (Model.CurrentPage >= NumberOfPagesDisplayedOnPage && Model.NumberOfPages > Model.CurrentPage + NumberOfPagesDisplayedOnPage)
+                                    {
+                            @Html.Raw(" " + @Html.ActionLink((Model.CurrentPage - 2).ToString(), "Index", new { formid = Model.FormInfoModel.FormId, pagenumber = Model.CurrentPage - 2, sort = Model.sortOrder, sortfield = Model.sortfield }, new { name = "lnkPager", data_formid = Model.FormInfoModel.FormId, data_pagenumber = Model.CurrentPage - 2, data_sort = Model.sortOrder, data_sortfield = Model.sortfield }) + " "); 
+                            @Html.Raw(" " + @Html.ActionLink((Model.CurrentPage - 1).ToString(), "Index", new { formid = Model.FormInfoModel.FormId, pagenumber = (Model.CurrentPage - 1), sort = Model.sortOrder, sortfield = Model.sortfield }, new { name = "lnkPager", data_formid = Model.FormInfoModel.FormId, data_pagenumber = Model.CurrentPage - 1, data_sort = Model.sortOrder, data_sortfield = Model.sortfield }) + " ");
+                            @Html.Raw("<span>" + Model.CurrentPage + "</span>");
+                            @Html.Raw(" " + @Html.ActionLink((Model.CurrentPage + 1).ToString(), "Index", new { formid = Model.FormInfoModel.FormId, pagenumber = (Model.CurrentPage + 1), sort = Model.sortOrder, sortfield = Model.sortfield }, new { name = "lnkPager", data_formid = Model.FormInfoModel.FormId, data_pagenumber = Model.CurrentPage + 1, data_sort = Model.sortOrder, data_sortfield = Model.sortfield }) + " ");
+                            @Html.Raw(" " + @Html.ActionLink((Model.CurrentPage + 2).ToString(), "Index", new { formid = Model.FormInfoModel.FormId, pagenumber = (Model.CurrentPage + 2), sort = Model.sortOrder, sortfield = Model.sortfield }, new { name = "lnkPager", data_formid = Model.FormInfoModel.FormId, data_pagenumber = Model.CurrentPage + 2, data_sort = Model.sortOrder, data_sortfield = Model.sortfield }) + " ");
+                                    }
+
+                                    else
+                                    {// this section builds the links for for last 5 pages.
+                                        for (int page = Model.NumberOfPages - NumberOfPagesDisplayedOnPage + 1; page <= Model.NumberOfPages; page++)
+                                        {
+                                            if (Model.CurrentPage == page)
+                                            {
+                            @Html.Raw("<span>" + page + "</span>");
+                                            }
+                                            else
+                                            {
+                            @Html.Raw(" " + @Html.ActionLink(page.ToString(), "Index", new { formid = Model.FormInfoModel.FormId, pagenumber = page, sort = Model.sortOrder, sortfield = Model.sortfield },
+
+                                                                                                new { name = "lnkPager", data_formid = Model.FormInfoModel.FormId, data_pagenumber = page, data_sort = Model.sortOrder, data_sortfield = Model.sortfield }) + " ");
+                                            }
+                                        }
+
+
+
+                                    }
+
+                            @if (Model.CurrentPage != Model.NumberOfPages)//this section builds the link for next page.
+                            {
+                            @Html.Raw(" " + @Html.ActionLink(">", "Index", new { formid = Model.FormInfoModel.FormId, pagenumber = Model.CurrentPage + 1, sort = Model.sortOrder, sortfield = Model.sortfield }, new { name = "lnkPager", data_formid = Model.FormInfoModel.FormId, data_pagenumber = Model.CurrentPage + 1, data_sort = Model.sortOrder, data_sortfield = Model.sortfield }) + " ");
+                            }
+ 

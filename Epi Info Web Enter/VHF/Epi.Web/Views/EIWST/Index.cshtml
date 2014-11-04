@@ -1,0 +1,92 @@
+﻿@{
+    ViewBag.Title = "Index";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@if (Model.IsManagerServiceTest)
+    {
+      <div id="header"><h1>Manager Service Test Results</h1></div>
+     <div id="attention" style="margin:1em 1em 1em 0;">
+        <div>
+            <label style="font-weight:normal !important;">Data Service Test: </label>
+            @*<img src="../../Content/images/button_check.png"  alt="" style="width:20px; vertical-align:text-top;"/>&nbsp;*@
+            <label id="DataServiceTest" >@Model.STestStatus</label>
+        </div> 
+      
+        <div style="font-weight:normal !important;">
+             <p>@TempData["exc"]</p>
+             <p>@TempData["exc1"]</p>
+             <p>@TempData["exc2"]</p>
+        </div>
+    </div>
+    }
+else
+    {
+     <div id="header"><h1>Data Service and Database Test Results</h1></div>
+   
+<div id="content" style="padding: 20px 20px 80px;">
+    <div id="attention" style="margin:1em 1em 1em 0;">
+        <div>
+            <label style="font-weight:normal !important;">Database Test: </label>
+            
+            @if (@Model.DBTestStatus=="Success")
+                {
+                  <img src="../../Content/images/button_check.png"  alt="" style="width:20px; vertical-align:text-top;"/>
+                }
+               @if (@Model.DBTestStatus=="Error")
+                {
+                  <img src="../../Content/images/error1.png"  alt="" style="width:20px; vertical-align:text-top;"/>
+                } 
+               
+                  @if (@Model.DBTestStatus == "Incomplete")
+                {
+                  <img src="../../Content/images/sign_warning.png"  alt="" style="width:20px; vertical-align:text-top;"/>
+                } 
+                &nbsp; 
+            <label id="DataBaseTest">@Model.DBTestStatus</label>
+        </div> <br />
+        <div>
+            <label style="font-weight:normal !important;">Entity connection string Test: </label>
+             @if (@Model.EFTestStatus == "Success")
+                {
+                  <img src="../../Content/images/button_check.png"  alt="" style="width:20px; vertical-align:text-top;"/>
+                }
+               @if (@Model.EFTestStatus == "Error")
+                {
+                  <img src="../../Content/images/error1.png"  alt="" style="width:20px; vertical-align:text-top;"/>
+                } 
+               
+                  @if (@Model.EFTestStatus == "Incomplete")
+                {
+                  <img src="../../Content/images/sign_warning.png"  alt="" style="width:20px; vertical-align:text-top;"/>
+                } 
+                &nbsp;
+            <label id="EFTest" >@Model.EFTestStatus</label>
+        </div> <br />
+        <div>
+            <label style="font-weight:normal !important;">Data Service Test: </label>
+              @if (@Model.STestStatus == "Success")
+                {
+                  <img src="../../Content/images/button_check.png"  alt="" style="width:20px; vertical-align:text-top;"/>
+                }
+               @if (@Model.STestStatus == "Error")
+                {
+                  <img src="../../Content/images/error1.png"  alt="" style="width:20px; vertical-align:text-top;"/>
+                } 
+               
+                  @if (@Model.STestStatus == "Incomplete")
+                {
+                  <img src="../../Content/images/sign_warning.png"  alt="" style="width:20px; vertical-align:text-top;"/>
+                } 
+                &nbsp;
+            <label id="DataServiceTest" >@Model.STestStatus</label>
+        </div> 
+      
+        <div style="font-weight:normal !important;">
+             <p>@TempData["exc"]</p>
+             <p>@TempData["exc1"]</p>
+             <p>@TempData["exc2"]</p>
+        </div>
+    </div>
+
+</div>
+    }

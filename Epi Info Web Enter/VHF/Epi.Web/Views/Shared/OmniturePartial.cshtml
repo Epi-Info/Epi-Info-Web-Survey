@@ -1,0 +1,35 @@
+﻿<!-- xxxxxxxxxxxxxxxxxx METRICS code begins here xxxxxxxxxxxxxxxxxxxxxxxxxxx-->
+<div id="metrics">
+	<!-- SiteCatalyst code version: H.21. -->
+	<script language="JavaScript" type="text/javascript" src="@ViewBag.Omniture.TopicLevelJs"></script>
+	<script language="JavaScript" type="text/javascript" src="@ViewBag.Omniture.SCodeJs"></script>
+	<script language="JavaScript" type="text/javascript">
+
+	    //<!-- InstanceBeginEditable name="metrics"-->
+	    s.pageName = document.title;
+	    s.channel = "@ViewBag.Omniture.ChannelName";
+
+	    //<!-- InstanceEndEditable -->
+	    siteCatalyst.setLevel1("@ViewBag.Omniture.Level1");
+	    siteCatalyst.setLevel1("@ViewBag.Omniture.Level2");
+	    siteCatalyst.setLevel1("@ViewBag.Omniture.Level3");
+	    s.prop2 = window.location.href;
+	    s.prop26 = document.title;
+	    s.prop30 = document.title;
+	    s.prop31 = window.location.href;
+	    s.prop46 = window.location.href;
+	    s.server = window.location.hostname;
+
+	    // Update the level variables here.
+	    updateVariables(s);
+
+	    /************* DO NOT ALTER ANYTHING BELOW THIS LINE ! **************/
+	    var s_code = s.t(); if (s_code) document.write(s_code); //--></script>
+	<script language="JavaScript" type="text/javascript"><!--
+	    if (navigator.appVersion.indexOf('MSIE') >= 0) document.write(unescape('%3C') + '\!-' + '-');
+	//--></script><noscript><a href="http://www.omniture.com" title="Web Analytics"><img
+	src="@ViewBag.Omniture.MetricUrl"
+	height="1" width="1" border="0" alt="Web Analytics" /></a></noscript><!--/DO NOT REMOVE/-->
+	<!-- End SiteCatalyst code version: H.21. -->
+</div>
+<!-- xxxxxxxxxxxxxxxxxx METRICS code ends here xxxxxxxxxxxxxxxxxxxxxxxxxxx-->

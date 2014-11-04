@@ -1,0 +1,56 @@
+﻿@model Epi.Web.MVC.Models.UserLoginModel
+
+@{
+    ViewBag.Title = "Epi Info™ Web Enter - Log In";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div id="pageHeader">
+    <div id="pageTitle">
+        <h2>Log In</h2>
+    </div>
+    <div id="userwelcome"></div>
+    <div style="clear: both;"></div>
+</div>
+
+
+<div id="content" style="margin:1em;">
+    
+    
+    <div class="Logsin">
+        @using (Html.BeginForm())
+        {
+     
+        @Html.ValidationSummary(true, "Please correct the errors and try again.")
+                <div id="welcome" >
+                    <h3>Welcome to Epi Info™ Web Enter!</h3>
+                    <p>The Epi Info™ Web Enter System is a data collection tool for public health professionals.  </p>
+                    <ul style="margin:-5px 5px 5px 20px; padding:0; line-height:1.5em;">
+                    <li style="margin:0px 0px 10px 0px;">Collect  data for variety of public health events.</li>
+                    <li>Manage the data on the web using your PC or mobile devices.</li>    
+                    </ul>
+                </div>
+                <div id="loginform" style="margin-bottom:2px; font-size:12pt; font-weight:bold;display: block;">
+                     <h3>Log In</h3>
+                     <label for="Email" style="display: block;" >Email:</label>
+                     @Html.TextBoxFor(m => m.UserName)
+                    <label for="Passcode" style="display: block;margin-top:10px;" >Password:</label>
+                    @Html.PasswordFor(m => m.Password)
+                    <p><button type="submit" value="Log in" class="default">Log In</button><br /><br />
+                    @Html.ActionLink("Forgot Password?", "ForgotPassword", "Login")</p>
+                </div>
+          } 
+       
+    </div>
+    
+    <div style="clear:both;"></div>
+    <div id="TOU">
+        <h2 class="h2header">Terms of service and conditions of use</h2>
+        <div class="termsofuse">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse accumsan egestas diam at tempus. Quisque mattis fringilla tortor, dapibus varius ligula aliquet non. Fusce a volutpat ligula. Mauris tincidunt imperdiet nibh sit amet volutpat. Curabitur vehicula faucibus odio, a pharetra quam semper et. Integer felis mi, dignissim in lectus vitae, sollicitudin vulputate mi. Quisque quis felis nunc. Mauris rhoncus tristique sapien vel rhoncus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pellentesque malesuada felis in faucibus. Quisque tristique cursus sodales. Phasellus feugiat felis pretium erat fringilla faucibus. In non nunc accumsan, lobortis mauris ac, porta neque. Proin auctor condimentum interdum. Quisque bibendum, metus id tristique tristique, libero sapien iaculis tellus, non mollis eros orci id magna. Donec blandit quam id consectetur elementum. Etiam velit ligula, lacinia a mattis vitae, facilisis et massa. Curabitur eu eros non urna porttitor ornare. Morbi vitae enim a neque viverra commodo eget vel nisl. Aliquam sagittis, justo vitae fringilla molestie, urna augue consectetur nisl, eget sagittis risus ipsum non enim.
+        </div>
+    </div>
+   
+</div>

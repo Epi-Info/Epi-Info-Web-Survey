@@ -1,0 +1,750 @@
+﻿@model Epi.Web.MVC.Models.FormModel
+@{
+    ViewBag.Title = "Epi Info™ Web Enter - Home";// + " - "+ 
+	// Model.SurveyName + " - " + Model.IsDraftModeStyleClass;
+	Layout = "~/Views/Shared/_Layout.cshtml";
+	
+}
+@*<script type="text/javascript" >
+
+	  $(document).ready(function () {
+		  // a workaround for a flaw in the demo system (http://dev.jqueryui.com/ticket/4375), ignore!
+
+
+
+
+		  $("#VideoDialog").dialog({
+			  autoOpen: false,
+			  show: "blind",
+			  hide: "blind",
+			  resizable: false,
+			  height: 410,
+			  width: 500,
+			  modal: true
+		  });
+
+	  });
+
+</script>*@
+
+
+<script type="text/jscript">
+
+
+
+    $(function () {
+
+        $("#exitdialog").dialog({
+            autoOpen: false,
+            show: "blind",
+            hide: "blind",
+            resizable: false,
+            height: 150,
+            width: 420,
+            modal: true,
+            buttons: [{
+
+                "text": 'Yes',
+                "click": function () {
+                    $.ajax({
+
+                        //    url: 'Home/Delete/'+ $("#exitdialog").data('ResponseId') + '/' + '@ViewBag.UserId',
+                        url: '@Url.Action("Delete","Home")' + '?ResponseId=' + $("#exitdialog").data('ResponseId'),
+                        type: 'POST',
+                        cache: false,
+                        contentType: 'application/json; charset=utf-8',
+                        success: successFunc,
+                        error: errorFunc
+                    });
+
+                    //                    $.ajaxSetup({ cache: false });
+
+                    function successFunc(data, status) {
+                        $("#exitdialog").dialog("close");
+                        ReadResponses($('#hidFormId').val(), $('#hidPageNumber').val(), '', '');
+                    }
+
+                    function errorFunc() {
+                        alert('error');
+                    }
+
+                },
+                "class": 'dialogbtn'
+
+            }, {
+                "text": 'No',
+                "click": function () {
+                    $(this).dialog("close");
+                },
+                "class": 'dialogbtn'
+
+            }]
+
+        });
+
+
+        $(document).on("click", "button[name='DeleteButton']", function (e) {
+            e.preventDefault();
+            $("#exitdialog")
+						.data('ResponseId', $(this).attr("value"))
+						.dialog("open");
+
+        });
+
+
+
+        $("button[class*='metro-tile']").click(function (e) {
+            e.preventDefault();
+            if ('@Model.SelectedForm' == "") {
+                $("button[class*='metro-tile']").removeClass('metro-set');
+                SetSettingButtonValue($(this).attr('data-FormId'));
+                $(this).addClass('metro-set');
+                ResetSearchFields();
+                ReadResponses($(this).attr('data-FormId'), 1, '', '');
+            }
+            else {
+                if ($("#FORM_SELECTED_HIDDEN").val() == "") {
+                    $("button[class*='metro-tile']").removeClass('metro-set');
+                    SetSettingButtonValue('@Model.SelectedForm');
+                    $('#' + '@Model.SelectedForm').addClass('metro-set');
+                    $("#FORM_SELECTED_HIDDEN").val('@Model.SelectedForm');
+                    ReadResponses('@Model.SelectedForm', '@Session["PageNumber"]', '', '');
+
+                    //test 
+                }
+                else {
+
+                    $("button[class*='metro-tile']").removeClass('metro-set');
+                    SetSettingButtonValue($(this).attr('data-FormId'));
+                    $(this).addClass('metro-set');
+                    //  $("#FORM_SELECTED_HIDDEN").val('');
+                    ResetSearchFields();
+                    ReadResponses($(this).attr('data-FormId'), 1, '', '');
+                }
+
+            }
+            $("#right").show();
+            //alert('1');
+            //            $.ajax({
+            //                url: '@Url.Action("ReadResponseInfo","Home")' + '?formid=' + $(this).attr('data-FormId'),
+            //                type: 'GET',
+            //                contentType: 'application/json; charset=utf-8',
+            //                //data: JSON.stringify(model),
+            //                success: successFunc,
+            //                error: errorFunc
+            //            });
+            //            $.ajaxSetup({ cache: false });
+
+            //            function successFunc(data, status) {
+            //                $('#right').html(data);
+            //            }
+
+            //            function errorFunc() {
+            //                alert('error');
+            //            }
+
+            //            ReadResponses($(this).attr('data-FormId'), 1, '', '');
+            //return page to the top when a form is selected if the list of forms is too long.
+            $("html, body").animate({ scrollTop: 0 }, "slow");
+            return false;
+        });
+
+
+
+        $(document).on("click", "button[name='Search']", function (e) {
+            e.preventDefault();
+            $("#right").show();
+            var formid = $('#hidFormId').val();
+            var pageNumber = $('#hidPageNumber').val();
+            //            Sort = 'ASC';
+            //            SortField = $("#columns").val(); // 'PetsName';
+            var Sort = $("#FORM_SORTORDER_HIDDEN").val();
+            var SortField = $("#FORM_SORTFIELD_HIDDEN").val();
+            ReadResponses(formid, 1, Sort, SortField);
+
+            //            $.ajax({
+            //                url: '@Url.Action("ReadSortedResponseInfo","Home")' + '?formid=' + formid + "&page=1&sort=" + Sort + "&sortfield=" + SortField
+            //                + ReadSearchFields() ,
+            //                type: 'GET',
+            //                contentType: 'application/json; charset=utf-8',
+            //                //data: JSON.stringify(model),
+            //                success: successFunc,
+            //                error: errorFunc
+            //            });
+            //            $.ajaxSetup({ cache: false });
+
+            //            function successFunc(data, status) {
+            //                $('#right').html(data);
+            //            }
+
+            //            function errorFunc() {
+            //                alert('error');
+            //            }
+
+        });
+
+        $(document).on("click", "button[name='ResetSearch']", function (e) {
+            e.preventDefault();
+            $("#right").show();
+            var formid = $('#hidFormId').val();
+            var pageNumber = $('#hidPageNumber').val();
+            var Sort = ''; // $("#FORM_SORTORDER_HIDDEN").val();
+            var SortField = ''; //$("#FORM_SORTFIELD_HIDDEN").val();
+
+            var col1 = '';
+            var val1 = '';
+            var col2 = '';
+            var val2 = '';
+            var col3 = '';
+            var val3 = '';
+            var col4 = '';
+            var val4 = '';
+            var col5 = '';
+            var val5 = '';
+
+            $.ajax({
+                url: '@Url.Action("ReadSortedResponseInfo","Home")' + '?formid=' + formid + "&page=1&sort=" + Sort + "&sortfield=" + SortField
+                + "&col1=" + col1 + "&val1=" + val1 + "&col2=" + col2 + "&val2=" + val2 + "&col3=" + col3 + "&val3=" + val3 + "&col4=" + col4 + "&val4=" + val4 + "&col5=" + col5 + "&val5=" + val5,
+                cache: false,
+                type: 'GET',
+                contentType: 'application/json; charset=utf-8',
+                //data: JSON.stringify(model),
+                success: successFunc,
+                error: errorFunc
+            });
+            //            $.ajaxSetup({ cache: false });
+
+            function successFunc(data, status) {
+                $('#right').html(data);
+            }
+
+            function errorFunc() {
+                alert('error');
+            }
+
+        });
+
+        //Sort by Logic for ASC and DESC button clicks
+
+        $(document).on("click", "button[id='SortASC']", function (e) {
+            e.preventDefault();
+            $("#right").show();
+            var formid = $('#hidFormId').val();
+            var pageNumber = $('#hidPageNumber').val();
+            var Sort = 'ASC';
+            var SortField = $("#columns").val(); // 'PetsName';
+            $("#FORM_SORTORDER_HIDDEN").val(Sort);
+            $("#FORM_SORTFIELD_HIDDEN").val(SortField);
+            ReadResponses(formid, 1, Sort, SortField);
+
+            //            $.ajax({
+            //                url: '@Url.Action("ReadSortedResponseInfo","Home")' + '?formid=' + formid + "&page=1&sort=" + Sort + "&sortfield=" + SortField + ReadSearchFields(),
+            //                type: 'GET',
+            //                contentType: 'application/json; charset=utf-8',
+            //                //data: JSON.stringify(model),
+            //                success: successFunc,
+            //                error: errorFunc
+            //            });
+            //            $.ajaxSetup({ cache: false });
+
+            //            function successFunc(data, status) {
+            //                $('#right').html(data);
+            //            }
+
+            //            function errorFunc() {
+            //                alert('error');
+            //            }
+
+        });
+
+        $(document).on("click", "button[id='SortDESC']", function (e) {
+            e.preventDefault();
+            $("#right").show();
+            var formid = $('#hidFormId').val();
+            var pageNumber = $('#hidPageNumber').val();
+            var Sort = 'DESC';
+            var SortField = $("#columns").val(); // 'PetsName';
+            $("#FORM_SORTORDER_HIDDEN").val(Sort);
+            $("#FORM_SORTFIELD_HIDDEN").val(SortField);
+            ReadResponses(formid, 1, Sort, SortField);
+
+            //            $.ajax({
+            //                url: '@Url.Action("ReadSortedResponseInfo","Home")' + '?formid=' + formid + "&page=1&sort=" + Sort + "&sortfield=" + SortField + ReadSearchFields(),
+            //                type: 'GET',
+            //                contentType: 'application/json; charset=utf-8',
+            //                //data: JSON.stringify(model),
+            //                success: successFunc,
+            //                error: errorFunc
+            //            });
+            //            $.ajaxSetup({ cache: false });
+
+            //            function successFunc(data, status) {
+            //                $('#right').html(data);
+            //            }
+
+            //            function errorFunc() {
+            //                alert('error');
+            //            }
+
+        });
+
+
+        /////////////////////
+
+
+
+
+        //////////////////////
+        $(document).on("click", "a[name='lnkPager']", function (e) {
+            e.preventDefault();
+
+            var sortOrder = $(this).attr('data-sort');
+            var sortField = $(this).attr('data-sortfield');
+
+            if (sortOrder == undefined) {
+                sortOrder = '';
+            }
+
+            if (sortField == undefined) {
+                sortField = '';
+            }
+
+            ReadResponses($(this).attr('data-formid'), $(this).attr('data-pagenumber'), sortOrder, sortField);
+
+        });
+
+
+
+
+        $("#dropdown-1").change(function () {
+
+            var OrgId = $("#dropdown-2").val();
+
+            FilterRecords(this, OrgId);
+            //FilterRecordsByOrg(OrgId);
+            $("#right").hide();
+            $("button[class*='metro-tile']").removeClass('metro-set');
+
+            $("button:visible").triggerHandler('click');
+
+
+        });
+
+        $("#dropdown-2").change(function () {
+
+            var src = $(this).val();
+
+            FilterRecordsByOrg(src);
+            $("#dropdown-1").val('3');
+        });
+
+        //  $("button:visible").triggerHandler('click');
+
+    });
+
+    
+
+    $(document).ready(function () {
+        // e.preventDefault();
+        //$(this).addClass('metro-set');
+        var ActionUrl = "";
+        var Url = window.location.pathname;
+        var ResultUrl = "";
+        if (Url.indexOf("/") != -1)
+            ResultUrl = Url.substring(Url.lastIndexOf("/") + 1);
+        else
+            ResultUrl = Url;
+
+        var FieldId = "#" + ResultUrl
+        //alert(ResultUrl);
+        if (ResultUrl.toUpperCase() != "HOME" && ResultUrl.toUpperCase() != "INDEX") {
+
+            $("button[class*='metro-tile']").removeClass('metro-set');
+            $(FieldId).addClass('metro-set');
+            //ActionUrl = '@Url.Action("ReadSortedResponseInfo","Home")' + "?formid=" + ResultUrl + "&page=1";
+            //            ReadResponse(ActionUrl);
+            //ReadResponses(ResultUrl, 1, '', '');
+        }
+        else {
+
+          //  $("button:visible").triggerHandler('click');
+
+        }
+        //Use of Organization filter
+        var OrgId = $("#dropdown-2").val();
+
+        FilterRecordsByOrg(OrgId);
+
+        $("#right").show();
+
+        // setup the dialog
+        $("#TimeOutdialog").dialog({
+            autoOpen: false,
+            modal: true,
+            width: 400,
+            height: 160,
+            closeOnEscape: false,
+            draggable: false,
+            resizable: false,
+            /* buttons: {
+            'Continue Session': function () {
+            $(this).dialog('close');
+            }
+            }*/
+
+            buttons: [{
+                "text": 'Continue Session',
+                "click": function () {
+                    $(this).dialog('close');
+                },
+                "class": 'dialogbtn'
+            }]
+
+
+        });
+        // cache a reference to the countdown element so we don't have to query the DOM for it on each ping.
+        var $countdown = $("#dialog-countdown");
+
+        // start the idle timer plugin
+        $.idleTimeout('#TimeOutdialog', 'div.ui-dialog-buttonpane button:first', {
+            idleAfter: 900,
+            pollingInterval: 2,
+            keepAliveURL: 'keepalive.php',
+            serverResponseEquals: 'OK',
+            onTimeout: function () {
+                //window.location = "timeout.htm";
+                window.location = '@Url.Action("Index","Login")';
+                //'/Login';
+
+                //GetRedirectionUrl() + '/1';
+                //'~/Login/Index'; 
+
+
+            },
+            onIdle: function () {
+                $(this).dialog("open");
+            },
+            onCountdown: function (counter) {
+                $countdown.html(counter); // update the counter
+            }
+        });
+
+    });
+
+    function ReadSearchFields() {
+        var col1 = $("#SearchModel_SearchCol1").val();
+        var val1 = $("#SearchModel_Value1").val();
+        var col2 = $("#SearchModel_SearchCol2").val();
+        var val2 = $("#SearchModel_Value2").val();
+        var col3 = $("#SearchModel_SearchCol3").val();
+        var val3 = $("#SearchModel_Value3").val();
+        var col4 = $("#SearchModel_SearchCol4").val();
+        var val4 = $("#SearchModel_Value4").val();
+        var col5 = $("#SearchModel_SearchCol5").val();
+        var val5 = $("#SearchModel_Value5").val();
+        return "&col1=" + col1 + "&val1=" + val1 + "&col2=" + col2 + "&val2=" + val2 + "&col3=" + col3 + "&val3=" + val3 + "&col4=" + col4 + "&val4=" + val4 + "&col5=" + col5 + "&val5=" + val5;
+    }
+
+    function ResetSearchFields() {
+        $("#SearchModel_SearchCol1").val('');
+        $("#SearchModel_Value1").val('');
+        $("#SearchModel_SearchCol2").val('');
+        $("#SearchModel_Value2").val('');
+        $("#SearchModel_SearchCol3").val('');
+        $("#SearchModel_Value3").val('');
+        $("#SearchModel_SearchCol4").val('');
+        $("#SearchModel_Value4").val('');
+        $("#SearchModel_SearchCol5").val('');
+        $("#SearchModel_Value5").val('');
+    }
+    function ReadResponses(formid, pagenumber, sortOrder, sortField) {
+        $.ajax({
+            //url: '@Url.Action("ReadSortedResponseInfo","Home")' + '?formid=' + formid + "&page=" + pagenumber + "&sort=" + sortOrder + "&sortfield=" + sortField,
+            url: '@Url.Action("ReadSortedResponseInfo","Home")' + '?formid=' + formid + '&page=' + pagenumber + '&sort=' + sortOrder + '&sortfield=' + sortField
+                + ReadSearchFields(),
+           cache: false,
+            type: 'GET',
+            contentType: 'application/json; charset=utf-8',
+            //data: JSON.stringify(model),
+            success: successFunc
+        });
+
+//        $.ajaxSetup({ cache: false });
+
+        function successFunc(data, status) {
+            $('#right').html(data);
+        }
+
+        function errorFunc() {
+            alert('error');
+        }
+    }
+function ReadResponse(ActionUrl) {
+
+		var Url = window.location.pathname;
+		var Formid = "";
+		if (Url.indexOf("/") != -1) 
+		{
+			Formid = Url.substring(Url.lastIndexOf("/") + 1);
+			SetSettingButtonValue(Formid);
+		}
+		$.ajax({
+			url: ActionUrl,
+			type: 'GET',
+			cache: false,
+			contentType: 'application/json; charset=utf-8',
+			//data: JSON.stringify(model),
+			success: successFunc,
+			Error: errorFunc
+		});
+//		$.ajaxSetup({ cache: false });
+
+		function successFunc(data, status) {
+		    $('#right').html(data);
+		   
+		}
+
+		function errorFunc() {
+			alert('error');
+		}
+
+	}
+
+	function GetSettings() 
+	{
+		var ActionUrl = '@Url.Action("GetSettings","Home")' + '?formid=' + $("#FORM_ID_HIDDEN").val();
+		 $.ajax({
+			 url: ActionUrl,
+			 type: 'GET',
+			 cache: false,
+			 contentType: 'application/json; charset=utf-8',
+			 //data: JSON.stringify(model),
+			 success: successFunc,
+			 Error: errorFunc
+		 });
+//		 $.ajaxSetup({ cache: false });
+
+		 function successFunc(data, status) {
+		     $('#right').html(data);
+
+		 }
+
+		 function errorFunc() {
+			 alert('error');
+		 }
+
+}
+function SaveSettings() {
+
+    var validation = true;
+    $('.SelectedColumns').each(function () {
+
+        if (this.length == 0)
+         {
+            validation = false;
+         }
+    });
+
+    //if ($('select.SelectedColumns option').length > 0) {
+    if (validation) {
+	                $('.SelectedColumns option').prop('selected', true);
+	                $('#SelectedUser option').prop('selected', true);
+	                var ActionUrl = '@Url.Action("SaveSettings","Home")' + '?formid=' + $("#FORM_ID_HIDDEN").val();
+	                var _form = $("#formsList").serialize();
+	                //alert(form);
+	                $.ajax({
+		                url: ActionUrl,
+		                type: 'POST',
+		                cache: false,
+		                //contentType: 'application/json; charset=utf-8',
+		                data: _form,
+		                dataType: "html",
+		                success: successFunc,
+		                Error: errorFunc
+                    });
+
+		        }
+		        else {
+		            alert('User should select at least one column for each form.');
+		            $('select.SelectedColumns option').focus();
+		        }
+
+ 
+//	$.ajaxSetup({ cache: false });
+
+	function successFunc(data, status) {
+	    $('#right').html(data);
+	    $('#dropdown-1').focus();
+	    var FormId = $("#FORM_ID_HIDDEN").val();
+	    var FormMode = $("#FORM_MODE_HIDDEN").val();
+
+        if(FormMode =="Production"){
+
+            $('#' + FormId).removeClass("metro-staging");
+            $('#' + FormId).addClass("metro-prod");
+        }
+	    if (FormMode =="Staging") {
+	        $('#' + FormId).removeClass("metro-prod")
+	        $('#' + FormId).addClass("metro-staging");
+            }
+	}
+
+	                function errorFunc() {
+		                alert('error');
+	                }
+//    }
+// else
+//     {
+//         alert('User should select at least one column.');
+//         $('select#SelectedColumns option').focus();
+//    }
+}
+//CancelChange
+	function CancelChange() 
+	{
+	    //alert();
+//		var ActionUrl = '@Url.Action("ReadSortedResponseInfo","Home")' + '?formid=' + $("#FORM_ID_HIDDEN").val();
+	    //		ReadResponse(ActionUrl);
+	    ReadResponses($("#FORM_ID_HIDDEN").val(), 1, '', '');
+		$('#dropdown-1').focus();
+	}
+	function SetSettingButtonValue(formid) 
+	{
+	    $("#FORM_ID_HIDDEN").val(formid);
+	   
+	}
+
+	function SetSettingMode() {
+	     
+	    $("#FORM_MODE_HIDDEN").val($('#FormMode').find(":selected").text());
+
+	}
+</script>
+<script>
+	$(document).ajaxStop(function () {
+
+		var leftHeight = $("#left").height();
+		var rightHeight = $("#right").height();
+		if (leftHeight < rightHeight)
+         {
+             // $("#right").height(leftHeight)
+             $("#left").height(rightHeight)
+          }
+		else 
+        {
+           // $("#left").height(rightHeight) 
+        }
+	});
+
+</script>
+<div id="pageHeader">
+	<div id="pageTitle">
+		<h2>
+			Home</h2>
+	</div>
+ 
+	
+	<div id="userwelcome">
+		Welcome <strong>@Model.UserFirstName&nbsp;@Model.UserLastName </strong>&nbsp; | &nbsp;
+	  @*  <a href="#">Log Out</a>*@
+	  
+     @if ( Model.UserHighestRole == 3)
+      {
+      @Html.ActionLink("Site Administration", "OrgList", "AdminOrganization", null, null);
+       <span>&nbsp; | &nbsp;</span> 
+      }
+      
+      @if (Model.UserHighestRole == 2)
+      {
+      @Html.ActionLink("Site Administration", "UserList", "AdminUser", null, null);
+       <span>&nbsp; | &nbsp;</span> 
+      }
+
+      @Html.ActionLink("Log Out", "LogOut", "Home", null, null)	
+	</div>
+	<div style="clear: both;">
+	</div>
+</div>
+<div id="content" style="@*margin-bottom: 200px;*@ padding-left: 10px; min-height: 375px; min-width:1200px; margin: 0 !important;">
+
+	@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "formsList" }))
+	{
+		
+	
+		<div class="section group" id="main">
+			<div id="left" class="col span_1_of_3" style="width: 317px !important; margin:0 !important;">
+                <div id="leftarrangeby" style="float: left; vertical-align: middle; margin-bottom: 10px; padding-bottom: 10px; border-bottom: 5px solid White; vertical-align: middle;">
+		            <span class="css3-metro-dropdown">
+			            <select id="dropdown-2" style="width: 172px;">
+			               @* <option value="0" selected="selected" disabled="disabled">Arrange by:</option>*@
+                           @foreach(var item in Model.OrganizationList){
+				            <option value="@item.OrganizationId">@item.Organization</option>
+                               }
+				
+				            @*	<option value="3">Last Saved Forms First</option>*@
+			            </select>
+		            </span>
+                    <span class="css3-metro-dropdown">
+			            <select id="dropdown-1" style="width: 131px;">
+			               @* <option value="0" selected="selected" disabled="disabled">Arrange by:</option>*@
+				            <option value="1">My Forms</option>
+				            <option value="2">Forms Assigned to Me</option>
+				            <option value="3" selected="selected">All Forms</option>
+				            @*	<option value="3">Last Saved Forms First</option>*@
+			            </select>
+		            </span>
+	            </div>
+				@Html.Partial("ListForms", Model.FormList)
+                <div id="rightlegend" style="font-size: 9pt; vertical-align: baseline; color:#fff; margin-top: 15px;">
+		            <div id="Div1" style="">
+			            <img alt="" src="~/Content/images/designlegend1.png" align="middle" style="width: 16px;
+				            vertical-align: middle;" />
+			            My Forms</div>
+		            <div id="Div2" style="">
+			            <img alt="" src="~/Content/images/collectlegend1.png" align="middle" style="width: 16px;
+				            vertical-align: middle;" />
+			            Forms Assigned to Me</div>
+		            <div id="Div4" style="">
+			            <img alt="" src="~/Content/images/prod1.png" align="middle" style="width: 16px;
+				            vertical-align: middle;" />
+			            Forms in Production</div>
+		            <div id="Div3" style="">
+			            <img alt="" src="~/Content/images/staging1.png" align="middle" style="width: 16px;
+				            vertical-align: middle;" />
+			            Forms in Staging</div>
+	            </div>
+			</div>
+			<div id="right" class="col span_1_of_3" style="background: white; min-width: 800px; margin:0 !important;">
+			   @* @Html.Partial("ListResponses", Model)*@
+			</div>
+		  <div style=""clear:both"></div>
+		</div>
+	}
+	<div id="settingscontent" style="height:0;">
+	   
+	</div>
+	<div id="exitdialog" title="Delete Record" >
+
+			
+			   <p style="font-size:1.20em; font-weight:600;">Are you sure you want to delete this record? </p>
+				
+			 
+		   </div>
+</div>
+ <div id="TimeOutdialog" title="Your session is about to expire!">
+				<p>
+					<span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
+					You will be logged off in <span id="dialog-countdown" style="font-weight:bold"></span>
+				</p>
+
+				<p>Do you want to continue your session?</p>
+			 </div>
+<input id="FORM_ID_HIDDEN" type="hidden" />
+<input id="FORM_MODE_HIDDEN" type="hidden" />
+<input id="FORM_SELECTED_HIDDEN" type="hidden" />
+<input id="FORM_SEARCH_HIDDEN" type="hidden" />
+<input id="FORM_SORTORDER_HIDDEN" type="hidden" />
+<input id="FORM_SORTFIELD_HIDDEN" type="hidden" />
+@*</div>  
+  </div> *@ 
+		 

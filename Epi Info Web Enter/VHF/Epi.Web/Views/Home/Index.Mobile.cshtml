@@ -1,0 +1,150 @@
+﻿@model Epi.Web.MVC.Models.FormModel
+@{
+    ViewBag.Title = "Epi Info™ Web Enter - Home"; //+ " - " +
+       // Model.SurveyName + " - " + Model.IsDraftModeStyleClass + " - Mobile";  
+}
+
+<script type="text/javascript">
+  var redirectTimeout = @FormsAuthentication.Timeout.TotalMilliseconds
+  var redirectTimeoutHandle = setTimeout(function() { window.location.href = '@FormsAuthentication.LoginUrl'; }, redirectTimeout);
+</script>
+
+<script>
+
+    $(function () {
+
+        $("#dropdown-1").change(function () {
+            FilterRecords(this);
+            
+            // $("#right").hide();
+            // $("button[class*='metro-tile']").removeClass('metro-set');
+            //$("button:visible").triggerHandler('click');
+        });
+
+       
+        //$("button:visible").triggerHandler('click');
+
+    });
+    $(document).ready(function () {
+     
+       // alert('@Model.OrganizationList[0].OrganizationId');
+        FilterRecordsByOrgMobile('@Model.OrganizationList[0].OrganizationId');
+
+    });
+    function FilterFormRecords(ctrl) 
+   {
+       var src = $(ctrl).val();
+        FilterRecordsByOrgMobile(src);
+    }
+</script>
+
+<style>
+
+#leftarrangeby .ui-select {display:inline-block !important;}
+#leftarrangeby .ui-select:nth-of-type(1) {width:51%; max-width:300px;}
+#leftarrangeby .ui-select:nth-of-type(2) {width:45%; max-width:220px;}
+</style>
+ 
+<div id="pageHeader">
+  	<div id="pageTitle"><h2>Home</h2></div>
+   	<div id="userwelcome">Welcome <strong>@Session["UserFirstName"]&nbsp; @Session["UserLastName"]</strong>&nbsp; | &nbsp;
+  @*  <a href="#">Log Out</a>*@
+  @Html.ActionLink("Log Out", "LogOut", "Home", null, null)	
+    </div>
+
+  	<div style="clear:both;"></div>
+</div> 
+
+     
+        
+<div id="content" style="margin-bottom:200px; padding:5px;">
+     <div id="leftarrangeby" style="vertical-align:middle; font-size:10pt !important; margin-top:15px;">
+            <select name="dropdown-2" style="vertical-align:middle; font-size:10pt !important; display:inline-block;" data-theme="submit2" onchange="FilterFormRecords(this);">
+               @* <option value="0" selected="selected" disabled="disabled">Arrange by:</option>*@
+                           @foreach(var item in Model.OrganizationList){
+				            <option value="@item.OrganizationId">@item.Organization</option>
+                               }
+				
+				            @*	<option value="3">Last Saved Forms First</option>*@
+            </select>
+        
+            <select name="dropdown-1" style="vertical-align:middle; font-size:10pt !important; display:inline-block;" data-theme="submit2" onchange="FilterRecords(this,$('#dropdown-2').val());">
+               @* <option value="0" selected="selected" disabled="disabled">Arrange by:</option>*@
+                <option value="1">My Forms</option>        
+                <option value="2">Forms Assigned to Me</option>
+                <option value="3" selected="selected">All Forms</option>
+            </select>
+                  
+     </div>
+     <div style="clear:both;"></div>
+
+    
+      @using (Html.BeginForm("Index", "FormResponse", FormMethod.Get, new { id = "form" }))
+      {
+      <div class="section group" id="main">
+            <div id="left" class="col span_1_of_3">
+               @Html.Partial("ListForms", Model.FormList)
+	        </div>
+	        
+	  </div> 
+      <div id="rightlegend" style="clear:both;font-size: 9pt; vertical-align: baseline; margin-top: 22px;">
+                <div id="Div1" style="display: block; margin-right: 30px; margin-top: 5px;">
+                    <img alt="" src="~/Content/images/designlegend1.png" align="middle" style="width: 16px;
+                        vertical-align: middle;" />
+                    My Forms</div>
+                <div id="Div2" style="display: block; margin-right: 30px; margin-top: 5px;">
+                    <img alt="" src="~/Content/images/collectlegend1.png" align="middle" style="width: 16px;
+                        vertical-align: middle;" />
+                    Forms Assigned to Me</div>
+                <div id="Div4" style="display: block; margin-right: 30px; margin-top: 5px;">
+                    <img alt="" src="~/Content/images/prodlegend1.png" align="middle" style="width: 16px;
+                        vertical-align: middle;" />
+                    Forms in Production</div>
+                <div id="Div3" style="display: block; margin-top: 5px;">
+                    <img alt="" src="~/Content/images/staginglegend1.png" align="middle" style="width: 16px;
+                        vertical-align: middle;" />
+                    Staging</div>
+      </div>
+      }
+     @*@if (Model.ClosingDate >= DateTime.Now && Model.StartDate <= DateTime.Now)
+      {
+                      
+            <p style="width: 250px; min-width:120px; margin: 0 auto;"><button id="beginsurvey" class="ui-btn-hidden" data-theme="e" type="submit" aria-disabled="false" > Begin Survey</button></p>
+      }
+
+     else
+        { 
+               
+        if (Model.StartDate > DateTime.Now)
+            { 
+                <div id="attention">
+                        <img src="@Url.Content("~/Content/images/sign_warning.png")" alt="" style="vertical-align: middle; padding-right: 10px;" /> 
+                        Survey has not yet started.
+                        <p style="text-align:center">Survey Starting Date: @string.Format("{0:f}", Model.StartDate)</p>
+                </div>
+
+            }
+            if (Model.ClosingDate < DateTime.Now)
+                {
+                   
+                <div id="attention">
+                        <img src="@Url.Content("~/Content/images/sign_warning.png")" alt="" style="vertical-align: middle; padding-right: 10px;" />
+                        This survey is currently closed. Please contact the author of this survey for further assistance.
+                        <p style="text-align:center">Survey Closing Date: @string.Format("{0:f}", Model.ClosingDate)</p>
+                </div>
+                }
+        }*@
+                
+    </div>
+           
+        
+
+   
+
+     
+
+    @{if (ViewBag.Omniture.IsEnabled == true)
+    { 
+        Html.RenderPartial("OmniturePartial");  
+    } 
+}

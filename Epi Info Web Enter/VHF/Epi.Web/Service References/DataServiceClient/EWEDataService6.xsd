@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/Epi.Web.Enter.Common.Criteria" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Epi.Web.Enter.Common.Criteria" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:22587/Epi.Web.ServiceHost/EWEDataService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:import schemaLocation="http://localhost:22587/Epi.Web.ServiceHost/EWEDataService.svc?xsd=xsd2" namespace="http://www.yourcompany.com/types/" />
+  <xs:complexType name="FormInfoCriteria">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q1="http://www.yourcompany.com/types/" base="q1:Criteria">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="DateCreatedMax" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="DateCreatedMin" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="FormName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="OrganizationKey" type="ser:guid" />
+          <xs:element minOccurs="0" name="UserId" type="xs:int" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="FormInfoCriteria" nillable="true" type="tns:FormInfoCriteria" />
+</xs:schema>

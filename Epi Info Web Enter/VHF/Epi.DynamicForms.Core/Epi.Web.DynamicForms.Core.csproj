@@ -1,0 +1,169 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{9624E64A-013F-41E8-84BA-C34EE744685E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Epi.Web.DynamicForms</RootNamespace>
+    <AssemblyName>Epi.Web.DynamicForms</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EpiInfo.Plugin">
+      <HintPath>..\Epi.Web\bin\EpiInfo.Plugin.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.Routing">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DynamicFormModelBinder.cs" />
+    <Compile Include="Enums\Orientation.cs" />
+    <Compile Include="ErrorSummary.cs" />
+    <Compile Include="Fields\Abstract\DatePickerField.cs" />
+    <Compile Include="Fields\Abstract\ListField.cs" />
+    <Compile Include="Fields\Abstract\Field.cs" />
+    <Compile Include="FieldList.cs" />
+    <Compile Include="Fields\Abstract\NumericTextField.cs" />
+    <Compile Include="Fields\Abstract\OrientableField.cs" />
+    <Compile Include="Fields\Abstract\TimePickerField.cs" />
+    <Compile Include="Fields\CheckBox.cs" />
+    <Compile Include="Fields\CheckBoxList.cs" />
+    <Compile Include="Fields\Hidden.cs" />
+    <Compile Include="Fields\DatePicker.cs" />
+    <Compile Include="Fields\GroupBox.cs" />
+    <Compile Include="Fields\Literal.cs" />
+    <Compile Include="Fields\MobileCheckBox.cs" />
+    <Compile Include="Fields\MobileDatePicker.cs" />
+    <Compile Include="Fields\MobileGroupBox.cs" />
+    <Compile Include="Fields\MobileLiteral.cs" />
+    <Compile Include="Fields\MobileNumericTextBox.cs.cs" />
+    <Compile Include="Fields\MobileRadioList.cs" />
+    <Compile Include="Fields\MobileRelateButton.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Fields\MobileSelect.cs" />
+    <Compile Include="Fields\MobileTextArea.cs" />
+    <Compile Include="Fields\MobileTextBox.cs" />
+    <Compile Include="Fields\MobileTimePicker.cs" />
+    <Compile Include="Fields\NumericTextBox.cs" />
+    <Compile Include="Fields\RadioList.cs" />
+    <Compile Include="Fields\RelateButton.cs" />
+    <Compile Include="Fields\Select.cs" />
+    <Compile Include="Fields\TextArea.cs" />
+    <Compile Include="Fields\TextBox.cs" />
+    <Compile Include="Enums\FieldType.cs" />
+    <Compile Include="Fields\TimePicker.cs" />
+    <Compile Include="Form.cs" />
+    <Compile Include="Fields\Abstract\InputField.cs" />
+    <Compile Include="MagicStrings.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Fields\Abstract\TextField.cs" />
+    <Compile Include="Response.cs" />
+    <Compile Include="SerializationUtility.cs" />
+    <Compile Include="WebMsgBox.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Epi.Web.CheckCodeEngine\Epi.Web.CheckCodeEngine.csproj">
+      <Project>{6B084882-EF4F-4CF0-85B1-1E8C357AE822}</Project>
+      <Name>Epi.Web.CheckCodeEngine</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Epi.Web.Common\Epi.Web.Common.csproj">
+      <Project>{6E2F059B-C1CD-401F-8A63-DC2933CFB0D8}</Project>
+      <Name>Epi.Web.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

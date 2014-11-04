@@ -1,0 +1,188 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script type="text/javascript"> 
+$(function() {
+		// a workaround for a flaw in the demo system (http://dev.jqueryui.com/ticket/4375), ignore!
+        
+         $("#dialog").dialog({
+             autoOpen: false,
+             show: "blind",
+            // hide: "explode",
+             resizable: false,
+		     height:250,
+		     modal: true,
+         });
+         
+         if($('#_showModalPopup').val() == 'True')
+         {
+
+           //call your jquery modal popup method
+           $("#dialog").dialog("open");
+             return true;
+          }
+	});
+
+    function myfunction()
+         {
+            $("#dialog").dialog("close");
+         }
+</script>
+
+<div id="header">
+            <h1>
+                Survey Name- @Model.SurveyInfo.SurveyName 
+                 
+                </h1>
+ </div>
+ 
+
+    <div id="infobox">
+        <div class="pages">
+
+
+
+         @if (Model.NumberOfPages > 0)
+          {
+              int num = 0;
+              
+              
+
+             for (int i = 1; Model.NumberOfPages > i - 1; i++)
+              {
+                  
+                  num = i;  
+                    if (i == 1 && Model.CurrentPage >1)
+                        {   
+                              <a  style="background-image: url('/Content/images/prev.png'); background-repeat:no-repeat; background-position:center; width:13px;"   href="@string.Format("{0}://{1}/survey/{2}/{3}", ViewContext.HttpContext.Request.Url.Scheme, ViewContext.HttpContext.Request.Url.Authority,  Model.SurveyInfo.SurveyId,Model.CurrentPage-1)"    class="nextprev" title="Previous Page">
+                          &nbsp;&nbsp;&nbsp;
+                              </a>
+                       
+            
+                        }
+                    
+
+
+
+         if (Model.CurrentPage == i)
+            {  
+          <span class="current">@num</span>
+          
+            }
+            else
+            {  
+
+       
+         
+                    <a href="@string.Format("{0}://{1}/survey/{2}/{3}", ViewContext.HttpContext.Request.Url.Scheme, ViewContext.HttpContext.Request.Url.Authority, Model.SurveyInfo.SurveyId, num) " title="Go to page"   >@num</a> 
+
+                    
+              }  
+
+        }  
+
+          if (Model.CurrentPage != Model.NumberOfPages )
+            {  
+                  
+         <a    style="background-image: url('/Content/images/next.png');  background-repeat:no-repeat; background-position:center; width:13px;" href="@string.Format("{0}://{1}/survey/{2}/{3}", ViewContext.HttpContext.Request.Url.Scheme, ViewContext.HttpContext.Request.Url.Authority,  Model.SurveyInfo.SurveyId, Model.CurrentPage+1)" class="nextprev" title="Go to Next Page">
+        &nbsp;&nbsp;&nbsp;
+         </a>
+          
+            }
+             
+          } 
+
+
+ 
+      
+      </div>
+	   
+	  <div id="exit">
+      <button class="exitsurvey" type="submit">Exit Survey</button>
+      
+      </div>
+	  <div style="clear:both;"></div>
+	 </div>
+
+	<div id="content">
+
+     @if (!string.IsNullOrEmpty(Model.GetErrorSummary()))
+        { 
+        <div class="errormsg">
+            
+            <div class="image">
+                <img src="../../Content/images/error.png" style="vertical-align: middle; padding-right: 10px;" alt=""/>
+            </div>
+            <div class="message">
+              <span style="font-weight:bold; font-size:10pt;">Please correct the following errors before continuing:</span>
+                <br/>
+               
+                 @Html.Raw(Model.GetErrorSummary())
+            </div>
+            <div style="clear: both;">
+            </div>
+
+        </div>
+         } 
+        @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "myform" }))
+        {  
+            <br />
+              
+             @Html.AntiForgeryToken()  
+             @Html.Raw(Model.RenderHtml(true))
+             
+            @* @Html.HiddenFor(model => model.SaveClicked, new { id = "_showModalPopup" })*@
+             
+               <div class="demo">
+              <div id="dialog" title="Your Survey has been saved.">
+	            <p>Please copy and save the survey link to access the survey at a later time.</p>
+ 	            <p><input id="url" type="text" style="width: 250px;"/>
+ 	            <button>Copy Link</button></p>
+ 	            <hr/>
+ 	            <p>Optionally enter your email address to have the survey link emailed to you.</p>
+ 	            <p><label for="email">Email:</label> <input id="email" type="text" style="width: 150px;"/>
+ 	            <button id="send" type="submit" name="send1" value="send2" onclick="myfunction();">Send</button></p>
+                <br />
+                <p style="font-size: 8pt; padding: 5px; background: #ffffa8;"><strong>Note:</strong> Your email address will not be saved and only used to send the survey link.</p>
+               </div>
+            </div> 
+           
+   	           
+	        <div id="nav">
+
+             @if (Model.CurrentPage != 1)
+             {  
+		        
+              <div id="prev" align="left"><button class="prev" value="PreviousButton"  name="PreviousButton"  type="button" onclick="@string.Format("document.forms[0].action = '{0}://{1}/survey/{2}/{3}'; $('#myform').submit();", ViewContext.HttpContext.Request.Url.Scheme, ViewContext.HttpContext.Request.Url.Authority, Model.SurveyInfo.SurveyId, Model.CurrentPage - 1)"><img class="button" src="../../Content/images/arrow_left.png"> Previous</button>
+              
+              </div>
+             }
+	 		 <div id="savediv" align="center"><button class="save" type="submit" name="Savebutton" value="save"><img class="button" src="../../Content/images/save.png" alt=""/> Save</button>
+             </div>
+                
+              
+               @if (Model.CurrentPage == Model.NumberOfPages)
+               {  
+               <div id="next" align="right"> 
+              <button class="submits" type="submit"  name="Submitbutton" value="Submit" >
+              Submit Survey </button>
+              </div>
+               }
+               else
+               {
+                    <div id="prev" align="right">
+                    <button class="next"  name="ContinueButton" type="button" onclick="@string.Format("document.forms[0].action = '{0}://{1}/survey/{2}/{3}'; $('#myform').submit();", ViewContext.HttpContext.Request.Url.Scheme, ViewContext.HttpContext.Request.Url.Authority, Model.SurveyInfo.SurveyId, Model.CurrentPage + 1)">Continue <img class="button" src="../../Content/images/arrow_right.png"></button>
+                    </div>
+                      
+               }
+
+
+
+
+             
+           </div> 
+           
+        }
+        

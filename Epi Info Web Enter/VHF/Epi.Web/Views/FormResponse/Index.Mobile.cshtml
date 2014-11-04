@@ -1,0 +1,483 @@
+﻿@model Epi.Web.MVC.Models.FormResponseInfoModel
+@{
+    ViewBag.Title = "Epi Info™ Web Enter - Form Details"; //+ " - " +
+      // Model.SurveyName + " - " + Model.IsDraftModeStyleClass + " - Mobile";  
+}
+<script type="text/javascript">
+var formId =  document.getElementById('hidFormId').value; //$('#hidFormId').val();
+var pageId = $('#hidPageNumber').val();
+  var returnUrl = 'returnUrl=' + formId + '/' + pageId; 
+  var redirectTimeout = @FormsAuthentication.Timeout.TotalMilliseconds
+  var redirectTimeoutHandle = setTimeout(function() { window.location.href = '@FormsAuthentication.LoginUrl' + '?'+ returnUrl; }, redirectTimeout);
+</script>
+<script type="text/javascript">
+
+    function ReadSearchFields() {
+        var col1 = $("#SearchModel_SearchCol1").val();
+        var val1 = $("#SearchModel_Value1").val();
+        var col2 = $("#SearchModel_SearchCol2").val();
+        var val2 = $("#SearchModel_Value2").val();
+        var col3 = $("#SearchModel_SearchCol3").val();
+        var val3 = $("#SearchModel_Value3").val();
+        var col4 = $("#SearchModel_SearchCol4").val();
+        var val4 = $("#SearchModel_Value4").val();
+        var col5 = $("#SearchModel_SearchCol5").val();
+        var val5 = $("#SearchModel_Value5").val();
+        return "&col1=" + col1 + "&val1=" + val1 + "&col2=" + col2 + "&val2=" + val2 + "&col3=" + col3 + "&val3=" + val3 + "&col4=" + col4 + "&val4=" + val4 + "&col5=" + col5 + "&val5=" + val5;
+    }
+
+    function ResetSearchFields() {
+        $("#SearchModel_SearchCol1").val('');
+        $("#SearchModel_Value1").val('');
+        $("#SearchModel_SearchCol2").val('');
+        $("#SearchModel_Value2").val('');
+        $("#SearchModel_SearchCol3").val('');
+        $("#SearchModel_Value3").val('');
+        $("#SearchModel_SearchCol4").val('');
+        $("#SearchModel_Value4").val('');
+        $("#SearchModel_SearchCol5").val('');
+        $("#SearchModel_Value5").val('');
+    }
+
+    //    function ReadSortInfo() {
+    //        var Sort = 'ASC';
+    //        var SortField = $("#columns").val();
+    //        return "&sort=" + Sort + "&sortfield=" + SortField;
+    //    }
+    $(document).delegate("button[name='SortASC']", 'click', function (e) {
+        //    $(document).on("click", "button[id='SortASC']", function (e) {
+        e.preventDefault();
+        var Sort = 'ASC';
+        var searchQString = ReadSearchFields();
+        var SortField = $("#columns").val();
+        var homePageUrl = '@Url.Action("Index", "FormResponse", new { formid = @Model.FormInfoModel.FormId, ViewId = @Model.ViewId, Pagenumber = 1 })';
+        window.location.href = homePageUrl + searchQString + "&sort=" + Sort + "&sortfield=" + SortField;
+    });
+
+    $(document).delegate("a[name='lnkPager']", 'click', function (e) {
+        e.preventDefault();
+
+        var sortOrder = $(this).attr('data-sort');
+        var sortField = $(this).attr('data-sortfield');
+        var searchQString = ReadSearchFields();
+        var Url = $(this).attr('href');
+
+        if (sortOrder == undefined) {
+            sortOrder = '';
+        }
+
+        if (sortField == undefined) {
+            sortField = '';
+        }
+
+        // var Url = '@Url.Action("Index", "FormResponse", new { formid = @Model.FormInfoModel.FormId, ViewId = @Model.ViewId, Pagenumber = @Model.CurrentPage })';
+        Url = Url + searchQString; // +"&sort=" + sortOrder + "&sortfield=" + sortField;
+        window.location.href = Url;
+
+    });
+
+    $(document).delegate("button[name='SortDESC']", 'click', function (e) {
+        //    $(document).on("click", "button[id='SortDESC']", function (e) {
+        e.preventDefault();
+        var Sort = 'DESC';
+        var searchQString = ReadSearchFields();
+        var SortField = $("#columns").val();
+        var homePageUrl = '@Url.Action("Index", "FormResponse", new { formid = @Model.FormInfoModel.FormId, ViewId = @Model.ViewId, Pagenumber = 1 })';
+        window.location.href = homePageUrl + searchQString + "&sort=" + Sort + "&sortfield=" + SortField;
+    });
+
+    $(document).delegate("button[name='Search']", 'click', function (e) {
+        //$(document).on("click", "button[name='Search']", function (e) {
+        e.preventDefault();
+        var searchQString = ReadSearchFields();
+        //        var sortQString = ReadSortInfo();
+        var homePageUrl = '@Url.Action("Index", "FormResponse", new { formid = @Model.FormInfoModel.FormId, ViewId = @Model.ViewId, Pagenumber = @Model.CurrentPage })';
+        window.location.href = homePageUrl + searchQString; // +sortQString;
+
+    });
+
+    $(document).delegate("button[name='ResetSearch']", 'click', function (e) {
+        //$(document).on("click", "button[name='Search']", function (e) {
+        e.preventDefault();
+        ResetSearchFields();
+        var searchQString = "&reset=true"
+        var homePageUrl = '@Url.Action("Index", "FormResponse", new { formid = @Model.FormInfoModel.FormId, ViewId = @Model.ViewId, Pagenumber = @Model.CurrentPage })';
+        window.location.href = homePageUrl + searchQString;
+
+    });
+
+
+
+    //Following code prevents the default behav of DeleteButton, sets the value of hidden field to the value of button click(ResponseId).
+    //displays a dialog, on confirmation deletes the row through ajax call and refreshes the page.
+    $(document).delegate("button[name='DeleteButton']", 'click', function (e) {
+        e.preventDefault();
+        $("input[id=hidSelectedResponseId]").val($(this).val());
+        $(this).simpledialog({
+            'mode': 'blank',
+            'prompt': false,
+            'forceInput': false,
+            'useModal': true,
+            'buttons': {
+                'OK': {
+                    click: function () {
+                        $('#dialogoutput').text('OK');
+                        alert(test);
+                    }
+                }
+
+            },
+
+
+            'fullHTML': "<div id=\"exitdialog\" title=\"Delete Record\" ><p id='simpletext' style=\"font-size:1.20em; font-weight:400;\">Are you sure you want to delete this record?</p><p style=\"font-size:1.20em; font-weight:300;\"></p><p><div align='right' id='exitbtns'> <a id='simpleyes' onclick ='ExitSurvey();'  class='login'  style='width:50px; padding:8px 5px !important; border: 1px solid #1f3b53 !important; background: #5c53ac !important; color:#fff !important; text-shadow: none !important;'>Yes</a>        <a class='login'   style='width:50px; padding:8px 5px !important; border: 1px solid #1f3b53 !important; background: #5c53ac !important; color:#fff !important; text-shadow: none !important;'rel='close'   id='simpleclose' \">No</a></div></p>"
+        })
+
+
+    });
+    //DeleteBranchButton
+    $(document).delegate("button[name='DeleteBranchButton']", 'click', function (e) {
+        e.preventDefault();
+
+        var RID = $(this).val()
+        $("#hidSelectedResponseId").val(RID);
+        //  alert( $("#hidSelectedResponseId").val() +"simo");
+        $(this).simpledialog({
+            'mode': 'blank',
+            'prompt': false,
+            'forceInput': false,
+            'useModal': true,
+            'buttons': {
+                'OK': {
+                    click: function () {
+                        $('#dialogoutput').text('OK');
+                        alert(test);
+                    }
+                }
+
+            },
+
+
+            'fullHTML': "<div id=\"exitdialog\" title=\"Delete Record\" ><p id='simpletext' style=\"font-size:1.20em; font-weight:400;\">Are you sure you want to delete this record?</p><p style=\"font-size:1.20em; font-weight:300;\"></p><p><div align='right' id='exitbtns'> <a id='simpleyes' onclick ='DeleteBranch();'  class='login'  style='width:50px; padding:8px 5px !important; border: 1px solid #1f3b53 !important; background: #5c53ac !important; color:#fff !important; text-shadow: none !important;'>Yes</a>        <a class='login'   style='width:50px; padding:8px 5px !important; border: 1px solid #1f3b53 !important; background: #5c53ac !important; color:#fff !important; text-shadow: none !important;'rel='close'   id='simpleclose' \">No</a></div></p>"
+        })
+
+
+    });
+
+    function ExitSurvey() {
+
+
+        var signoutUrl = '@Url.Action("Delete", "FormResponse")' + '?ResponseId=' + $("input[id=hidSelectedResponseId]").val() + '&surveyid=' + '@Model.FormInfoModel.FormId';
+        $.ajax({
+            url: signoutUrl,
+            type: 'POST',
+            contentType: 'application/json; charset=utf-8',
+            dataType: "json",
+            async: true,
+            success: successFunc,
+            error: errorFunc
+        });
+
+
+    }
+
+    function successFunc(data) {
+
+        //var homePageUrl = '@Url.Action("Index", "FormResponse")' + '/' + getQueryStringValue()["formid"].toString();
+        //var homePageUrl = '@Url.Action("Index", "Survey", new { responseId = "RId", PageNumber = "1" })';
+        //homePageUrl = homePageUrl.replace("RId", data.toString());
+        //window.location.href = window.location.href;
+
+        var homePageUrl = '@Url.Action("Index", "FormResponse", new { ViewId = @Model.ViewId, FormId = @Model.FormInfoModel.FormId })';
+
+        window.location.href = homePageUrl;
+
+    }
+
+    function errorFunc(data) {
+        alert('failed to delete');
+    }
+
+    function DeleteBranch() {
+
+        var signoutUrl = '@Url.Action("DeleteBranch", "FormResponse", new { ResponseId = "RId" })';
+        signoutUrl = signoutUrl.replace("RId", $("#hidSelectedResponseId").val());
+        $.ajax({
+            url: signoutUrl,
+            type: 'POST',
+            contentType: 'application/json; charset=utf-8',
+            dataType: "json",
+            async: true,
+            success: successFunc1,
+            error: errorFunc
+        });
+
+
+    }
+    function successFunc1(data) {
+
+
+
+        //var homePageUrl = '@Url.Action("Index", "FormResponse", new { ViewId = @Model.ViewId })';
+        var homePageUrl = '@Url.Action("Index", "FormResponse", new { ViewId = @Model.ViewId, Pagenumber = @Model.CurrentPage })';
+        //homePageUrl = homePageUrl.replace("RId", $('#ParentResponseId').val().toString());
+        // alert(homePageUrl);
+        window.location.href = homePageUrl;
+
+    }
+    function getQueryStringValue() {
+        var QueryString = [], hash;
+        var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+        for (var i = 0; i < hashes.length; i++) {
+            hash = hashes[i].split('=');
+            QueryString.push(hash[0]);
+            QueryString[hash[0]] = hash[1];
+        }
+
+        return QueryString;
+    }
+</script>
+<script>
+    $(document).ready(function () {
+        $("#btnsearch").click(function () {
+            $("#searchbox").toggle();
+        });
+    });
+</script>
+<style>
+    ui-icon-arrow-u
+    {
+        margin: 11px 8px !important;
+    }
+</style>
+<div id="pageHeader">
+    <div id="pageTitle">
+        <h2>
+            Home</h2>
+    </div>
+    <div id="userwelcome">
+        Welcome <strong>@Session["UserFirstName"]&nbsp; @Session["UserLastName"]</strong>&nbsp;
+        | &nbsp; @*  <a href="#">Log Out</a>*@
+        @Html.ActionLink("Log Out", "LogOut", "FormResponse", null, null)
+    </div>
+    <div style="clear: both;">
+    </div>
+</div>
+<div id="content" style="margin-bottom: 200px;">
+    @if (Model.ViewId == 0)
+    {
+        @Html.ActionLink("Return to Forms List", "Index", "Home", new object { }, new { @class = "backlink" })
+    }
+    @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "formsList" }))
+    { 
+        <div class="section group" id="main">
+            @if (Model.ViewId != 0)
+            {
+@*  <a  class="exitsurvey" onclick="GoOneLevelUp();"   title="Back">Cancel</a>*@
+                <div id="addnew">
+                    <button  type="submit"  name="Cancel"  value="@Model.CurrentPage" data-theme="backrecord" >
+                        Return to Form
+                    </button>
+                </div>
+            }
+            <div id="right" class="col span_1_of_3" style="background: white; padding: 10px;">
+                <div id="formtitle">
+                    <h2 class="surveyTitle">@Model.FormInfoModel.FormName</h2>
+                </div>
+                @{
+            WebGrid webGrid = new WebGrid(rowsPerPage: 20,
+                canSort: false, ajaxUpdateContainerId: "recordstable"); // Model.SurveyAnswerResponse.pageSize
+            // webGrid.Pager(WebGridPagerModes.NextPrevious);
+            webGrid.Bind(Model.ResponsesList, autoSortAndPage: true, rowCount: Model.NumberOfResponses);
+                }
+                @* @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "formsList" }))
+                { *@
+                <div style="max-width: 720px;">
+                    <div id="infobox1">
+                        @if (!string.IsNullOrEmpty(@Model.FormInfoModel.OwnerFName) && !string.IsNullOrEmpty(@Model.FormInfoModel.OwnerLName))
+                        { 
+                            <div id="create">
+                                <span>Created by:</span> <span class="boldlabel">@Model.FormInfoModel.OwnerFName @Model.FormInfoModel.OwnerLName
+                                </span>
+                            </div>
+                        }
+@*      <div id="status">
+                    <span>Status:</span> <span class="boldlabel">Active</span></div>*@
+                        @{
+                        if (@Model.FormInfoModel.IsDraftMode)
+                        {
+                            <div id="mode">
+                                <span>Mode:</span> <span class="boldlabel">Staging</span></div>
+                            <div id="NumberOfRecords" style="display: block;">
+                                <span>Total Records:</span> <span class="boldlabel" style="font-size: 14pt;">@Model.NumberOfResponses</span></div>
+                        }
+                        else
+                        {
+                               
+                            <div id="mode">
+                                <span>Mode:</span> <span class="boldlabel">Production</span></div> 
+                        
+                            <div id="NumberOfRecords" style="display: block;">
+                                <span>Total Records:</span> <span class="boldlabel" style="font-size: 14pt;">@Model.NumberOfResponses</span></div>
+                               
+                               
+                        }
+                        }
+                        <div style="clear: both;">
+                        </div>
+                    </div>
+                    @if (Model.FormInfoModel.IsSQLProject)
+                    {
+                        <div id="tableSort" style="vertical-align: middle; margin-bottom: 20px; min-width: 300px;">
+                            <select id="columns" data-inline="true" data-theme="submit2">
+                                @*<option value="0" selected="selected">Sort by:</option>*@
+                                @foreach (var item in Model.Columns)
+                                {
+                                    if (@item.Value.ToString() == @Model.sortfield)
+                                    {
+                                    <option value="@item.Value.ToString()" selected= selected >@item.Value.ToString()</option>
+                                    }
+                                    else
+                                    {
+                                    <option value="@item.Value.ToString()" >@item.Value.ToString()</option>
+                                    }
+                                }
+                            </select>
+                            @*<a href="index.html" id="SortASC"  data-role="button" data-theme="submit2" data-inline="true"><img src="~/Content/images/Sort-Ascending.png" style="width:20px; vertical-align:middle;"/></a>
+                        <a href="index.html" id="SortDESC"  data-role="button" data-theme="submit2" data-inline="true"><img src="~/Content/images/Sort-Descending.png" style="width:20px; vertical-align:middle;"/></a>*@
+                            @*<button data-role="button" data-theme="submit2" name="SortASC"  onclick="" type="submit">
+                            ASC</button>*@
+                            <button type="button" data-theme="submit2" data-inline="true" name="SortASC">
+                                &#x25B2;</button>
+                            <button type="button" data-theme="submit2" data-inline="true" name="SortDESC">
+                                &#x25BC;</button>
+                        </div>
+                        <div id="editsettings" style="">
+                            <button id="btnsearch" data-theme="defsearch" onclick="" type="button">
+                                Search</button>
+                        </div>
+                        }
+                    <div style="clear: both;">
+                    </div>
+                    @if (Model.SearchModel != null)
+                    {
+                        <div id="searchbox" style="display: none;">
+                            <div class="searchrow">
+                                @*  <select><option>Select</option></select>
+                        <input type="text" id="val1" />*@
+                                @Html.DropDownListFor(m => m.SearchModel.SearchCol1, Model.SearchColumns1, string.Empty)
+                                @Html.TextBoxFor(m => m.SearchModel.Value1, string.Empty)
+                            </div>
+                            <div class="searchrow">
+                                @* <select><option>Select</option></select>
+                        <input type="text" id="val1" />*@
+                                @Html.DropDownListFor(m => m.SearchModel.SearchCol2, Model.SearchColumns2, string.Empty)
+                                @Html.TextBoxFor(m => m.SearchModel.Value2, string.Empty)
+                            </div>
+                            <div class="searchrow">
+                                @Html.DropDownListFor(m => m.SearchModel.SearchCol3, Model.SearchColumns3, string.Empty)
+                                @Html.TextBoxFor(m => m.SearchModel.Value3, string.Empty)
+                            </div>
+                            <div class="searchrow">
+                                @Html.DropDownListFor(m => m.SearchModel.SearchCol4, Model.SearchColumns4, string.Empty)
+                                @Html.TextBoxFor(m => m.SearchModel.Value4, string.Empty)
+                            </div>
+                            <div class="searchrow" style="border: none !important;">
+                                @Html.DropDownListFor(m => m.SearchModel.SearchCol5, Model.SearchColumns5, string.Empty)
+                                @Html.TextBoxFor(m => m.SearchModel.Value5, string.Empty)
+                            </div>
+                            <button type="button" data-theme="defbtn" name="Search">
+                                Go</button>
+                            <button type="button " data-theme="defbtn" name="ResetSearch">
+                                Reset</button>
+                        </div>
+                    }
+                    @if (Model.FormInfoModel.IsSQLProject && Model.SearchModel.SearchCol1 != null)
+                    {
+                        <div id="searchmsg" style="display: block;">
+                            <h4 style="margin: 2px 0 20px 0; background: #ffdead; padding: 5px; color: #794800;">
+                                Only showing records matching your search criteria. &nbsp;&nbsp;&nbsp;
+                                <button type="button " data-theme="defbtnreset" name="ResetSearch" style="float: right;">
+                                    Reset</button>
+                                <div style="clear: both;">
+                                </div>
+                            </h4>
+                        </div>
+                    }
+                    <div id="addnew">
+                        <button  type="submit"  name="AddNewFormId"  value="@Model.FormInfoModel.FormId" data-theme="defrecord" >
+                            Add New Record
+                        </button>
+                    </div>
+                    <div style="clear: both;">
+                    </div>
+                </div>
+                <div style="clear: both">
+                </div>
+                <div id="recordscontent">
+                    <div style="clear: both; margin-bottom: 10px;">
+                    </div>
+                    <div id="recordstable">
+                        @if (Model.ResponsesList.Count > 0)
+                        {
+                            if (Model.NumberOfPages > 1 && Model.ViewId == 0)
+                            {
+                            <div id='pager1'>
+                                @*Html.Partial("~\\views\\shared\\PagerPartial.cshtml", Model)*@
+                                @Html.Partial("PagerPartial", Model)
+                            </div>
+                            }
+        
+                            @Html.Raw("<ul>")
+                            for (int i = 0; i < Model.ResponsesList.Count(); i++)
+                            {
+                            @Html.Raw("<li class='mobilerow'>");
+                                                               if (Model.ViewId == 0)
+                                                               {                 
+                            @Html.Raw("<div class='mobilewrap'>" + "<div  class='mobilevalue' style='width:100%; text-align:right;'>" + "<button data-role='button' data-theme='submit2' data-inline='true' type='submit' name='EditForm'  id='" + Model.ResponsesList[i].Column0 + "'value='" + Model.ResponsesList[i].Column0 + "'>Open</button> &nbsp;" + "<button data-role='button' data-theme='submit2' data-inline='true' type='submit' name='DeleteButton'  id='" + Model.ResponsesList[i].Column0 + "'value='" + Model.ResponsesList[i].Column0 + "'>Delete</button>" + " " + "</div><div style='clear: both;'></div></div>");
+                                                               }
+                                                               else
+                                                               { 
+                            @Html.Raw("<div class='mobilewrap'>" + "<div  class='mobilevalue' style='width:100%; text-align:right;'>" + "<button data-role='button' data-theme='submit2' data-inline='true' type='submit' name='EditForm'  id='" + Model.ResponsesList[i].Column0 + "'value='" + Model.ResponsesList[i].Column0 + "'>Open</button> &nbsp;" + "<button data-role='button' data-theme='submit2' data-inline='true' type='submit' name='DeleteBranchButton'  id='" + Model.ResponsesList[i].Column0 + "'value='" + Model.ResponsesList[i].Column0 + "'>Delete</button>" + " " + "</div><div style='clear: both;'></div></div>");
+
+                                                               }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+                            @Html.Raw("<div class='mobilewrap'><div class='mobileheader'>" + Model.Columns[0].Value + ":</div> <div class='mobilevalue'>" + Model.ResponsesList[i].Column1 + "</div><div style='clear: both;'></div></div>");
+                                                                                                                                                                                                                                            if (Model.Columns.Count >= 2)
+                                                                                                                                                                                                                                            { 
+                            @Html.Raw("<div class='mobilewrap'><div class='mobileheader'>" + Model.Columns[1].Value + ":</div> <div class='mobilevalue'>" + Model.ResponsesList[i].Column2 + "</div><div style='clear: both;'></div></div>");
+                                                                                                                                                                                                                                            }
+                                                                                                                                                                                                                                            if (Model.Columns.Count >= 3)
+                                                                                                                                                                                                                                            { 
+                            @Html.Raw("<div class='mobilewrap'><div class='mobileheader'>" + Model.Columns[2].Value + ":</div> <div class='mobilevalue'>" + Model.ResponsesList[i].Column3 + "</div><div style='clear: both;'></div></div>");
+                                                                                                                                                                                                                                            }
+
+                                                                                                                                                                                                                                            if (Model.Columns.Count >= 4)
+                                                                                                                                                                                                                                            { 
+                            @Html.Raw("<div class='mobilewrap'><div class='mobileheader'>" + Model.Columns[3].Value + ":</div> <div class='mobilevalue'>" + Model.ResponsesList[i].Column4 + "</div><div style='clear: both;'></div></div>");
+                                                                                                                                                                                                                                            }
+
+                                                                                                                                                                                                                                            if (Model.Columns.Count >= 5)
+                                                                                                                                                                                                                                            { 
+                            @Html.Raw("<div class='mobilewrap'><div class='mobileheader'>" + Model.Columns[4].Value + ":</div> <div class='mobilevalue'>" + Model.ResponsesList[i].Column5 + "</div><div style='clear: both;'></div></div>");
+                                                                                                                                                                                                                                            }
+                           
+                            @Html.Raw("</li>")
+                            }
+                            @Html.Raw("</ul>")
+
+                            if (Model.NumberOfPages > 1 && Model.ViewId == 0)
+                            {
+                            <div id='pager2'>
+                                @*Html.Partial("~\\views\\shared\\PagerPartial.cshtml", Model)*@
+                                @Html.Partial("PagerPartial", Model)
+                            </div>
+                            }
+                        }
+                    </div>
+                </div>
+                <input type="hidden"  id="ParentResponseId"  name="Parent_Response_Id" value="@Model.ParentResponseId" />
+                <input type="hidden" id="hidSelectedResponseId" name="hidSelectedResponseId" value="" />
+                @* @Html.Hidden("hidSelectedResponseId")*@ @*}*@
+            </div>
+        </div>
+    }
+</div>
