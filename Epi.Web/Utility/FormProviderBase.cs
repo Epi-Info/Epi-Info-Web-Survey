@@ -118,8 +118,15 @@ namespace Epi.Web.MVC.Utility
 
                     if (field is RadioList)
                     {
-                        ((RadioList)field).Response = kvp.Value;
-                        ((RadioList)field).SelectedValue = kvp.Value; 
+                    var Choices = ((MvcDynamicForms.Fields.ListField)(field)).ChoiceKeyValuePairs.ToList();
+                    int Index = 0;
+                    int.TryParse(kvp.Value.ToString(),out Index);
+
+                        //((RadioList)field).Response = kvp.Value;
+                        //((RadioList)field).SelectedValue = kvp.Value; 
+
+                    ((RadioList)field).Response = Choices[Index].Key;
+                    ((RadioList)field).SelectedValue = Choices[Index].Key;
                     }
                     else if (field is ListField)
                     {
@@ -249,7 +256,7 @@ namespace Epi.Web.MVC.Utility
             field.Height = form.Height;
             field.Name = _FieldTypeID.Attribute("Name").Value;
             field.FieldTypeId = fieldTypeId;
-
+            
             ((RadioList)field).ShowTextOnRight = bool.Parse(_FieldTypeID.Attribute("ShowTextOnRight").Value);
             ((RadioList)field).Options_Positions = _FieldTypeID.Attribute("List").Value; ;
 
