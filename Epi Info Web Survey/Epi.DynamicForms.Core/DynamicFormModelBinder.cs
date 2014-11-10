@@ -48,48 +48,48 @@ namespace MvcDynamicForms
                             var timepickerField = (TimePickerField)dynField;
                             timepickerField.Value = postedForm[key];
                         }
-                        else if (dynField is MobileRadioList )
-                            {
-                            var listField = (MobileRadioList)dynField;
+                        //else if (dynField is MobileRadioList )
+                        //    {
+                        //    var listField = (MobileRadioList)dynField;
 
-                            foreach (string choiceKey in listField.ChoiceKeyValuePairs.Keys.ToList())
-                                {
-                                listField.ChoiceKeyValuePairs[choiceKey] = false;
-                                }
-                            var choiceArray = listField.ChoiceKeyValuePairs.Keys.ToArray();
-
-
-                            foreach (string value in postedForm.GetValues(key))
-                                {
-                                if (!string.IsNullOrEmpty(value))
-                                    {
-                                    var _Key = choiceArray[int.Parse(value)];
-                                    listField.ChoiceKeyValuePairs[_Key] = true;
-                                    }
-
-                                }
-                            }
-                        else if (dynField is RadioList  )
-                            {
-                            var listField = (RadioList)dynField;
-
-                            foreach (string choiceKey in listField.ChoiceKeyValuePairs.Keys.ToList())
-                                {
-                                listField.ChoiceKeyValuePairs[choiceKey] = false;
-                                }
-                            var choiceArray = listField.ChoiceKeyValuePairs.Keys.ToArray();
+                        //    foreach (string choiceKey in listField.ChoiceKeyValuePairs.Keys.ToList())
+                        //        {
+                        //        listField.ChoiceKeyValuePairs[choiceKey] = false;
+                        //        }
+                        //    var choiceArray = listField.ChoiceKeyValuePairs.Keys.ToArray();
 
 
-                            foreach (string value in postedForm.GetValues(key))
-                                {
-                                if (!string.IsNullOrEmpty(value))
-                                    {
-                                    var _Key = choiceArray[int.Parse(value)];
-                                    listField.ChoiceKeyValuePairs[_Key] = true;
-                                    }
+                        //    foreach (string value in postedForm.GetValues(key))
+                        //        {
+                        //        if (!string.IsNullOrEmpty(value))
+                        //            {
+                        //            var _Key = choiceArray[int.Parse(value)];
+                        //            listField.ChoiceKeyValuePairs[_Key] = true;
+                        //            }
 
-                                }
-                            }
+                        //        }
+                        //    }
+                        //else if (dynField is RadioList  )
+                        //    {
+                        //    var listField = (RadioList)dynField;
+
+                        //    foreach (string choiceKey in listField.ChoiceKeyValuePairs.Keys.ToList())
+                        //        {
+                        //        listField.ChoiceKeyValuePairs[choiceKey] = false;
+                        //        }
+                        //    var choiceArray = listField.ChoiceKeyValuePairs.Keys.ToArray();
+
+
+                        //    foreach (string value in postedForm.GetValues(key))
+                        //        {
+                        //        if (!string.IsNullOrEmpty(value))
+                        //            {
+                        //            var _Key = choiceArray[int.Parse(value)];
+                        //            listField.ChoiceKeyValuePairs[_Key] = true;
+                        //            }
+
+                        //        }
+                        //    }
                         else if (dynField is ListField)
                         {
                             var listField = (ListField)dynField;
