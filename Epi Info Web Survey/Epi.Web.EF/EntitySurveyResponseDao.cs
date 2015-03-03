@@ -143,7 +143,7 @@ namespace Epi.Web.EF
         /// </summary>
         /// <param name="SurveyResponseId">Unique SurveyResponse identifier.</param>
         /// <returns>SurveyResponse.</returns>
-        public List<SurveyResponseBO> GetSurveyResponse(List<string> SurveyAnswerIdList, string pSurveyId, DateTime pDateCompleted, int pStatusId = -1, int PageNumber = -1, int PageSize = -1)
+        public List<SurveyResponseBO> GetSurveyResponse(List<string> SurveyAnswerIdList, string pSurveyId, DateTime pDateCompleted, bool pIsDraftMode = false,int pStatusId = -1, int PageNumber = -1, int PageSize = -1)
         {
          List<SurveyResponseBO> Finalresult = new List<SurveyResponseBO>();
          IEnumerable<SurveyResponseBO> result;
@@ -181,7 +181,17 @@ namespace Epi.Web.EF
                     if (!string.IsNullOrEmpty(pSurveyId))
                     {
                         Guid Id = new Guid(pSurveyId);
-                        responseList = Context.SurveyResponses.Where(x => x.SurveyId == Id).ToList();
+                       // responseList = Context.SurveyResponses.Where(x => x.SurveyId == Id).ToList();
+                        if (pStatusId>0)
+                        {
+                        responseList = Context.SurveyResponses.Where(x => x.SurveyId == Id && x.StatusId == pStatusId && x.IsDraftMode == pIsDraftMode).ToList();
+                        }
+                        else{
+                            pStatusId = -1;
+                         responseList = Context.SurveyResponses.Where(x => x.SurveyId == Id  && x.IsDraftMode == pIsDraftMode).ToList();
+                        
+                        }
+
                     }
                     
                    
@@ -263,11 +273,11 @@ namespace Epi.Web.EF
         }
 
 
-        public List<SurveyResponseBO> GetSurveyResponseSize(List<string> SurveyAnswerIdList, string pSurveyId, DateTime pDateCompleted, int pStatusId = -1, int PageNumber = -1, int PageSize = -1, int ResponseMaxSize = -1)
+        public List<SurveyResponseBO> GetSurveyResponseSize(List<string> SurveyAnswerIdList, string pSurveyId, DateTime pDateCompleted,bool pIsDraftMode = false,int pStatusId = -1, int PageNumber = -1, int PageSize = -1, int ResponseMaxSize = -1)
         {
-          
 
-            List<SurveyResponseBO> resultRows =  GetSurveyResponse(SurveyAnswerIdList,  pSurveyId,pDateCompleted,pStatusId , PageNumber ,  PageSize );
+
+            List<SurveyResponseBO> resultRows = GetSurveyResponse(SurveyAnswerIdList, pSurveyId, pDateCompleted, pIsDraftMode,pStatusId, PageNumber, PageSize);
  
 
             return resultRows;
@@ -412,9 +422,36 @@ namespace Epi.Web.EF
             return x.DateCreated.CompareTo(y.DateCreated);
         }
 
-    
 
 
+        public void UpdateRecordStatus(SurveyResponseBO SurveyResponseBO)
+        {
+
+            try
+            {
+                Guid Id = new Guid(SurveyResponseBO.ResponseId);
+
+                
+                using (var Context = DataObjectFactory.CreateContext())
+                {
+                    var Query = from response in Context.SurveyResponses
+                                where response.ResponseId == Id
+                                select response;
+
+                    var DataRow = Query.Single();
+
+                    DataRow.StatusId = SurveyResponseBO.Status;
+
+
+                    Context.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
+            }
+        
+        }
        
     }
 

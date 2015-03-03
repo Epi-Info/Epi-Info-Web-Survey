@@ -77,5 +77,12 @@ namespace Epi.Web.Common.Criteria
 
        [DataMember]
        public Guid OrganizationKey { get; set; }
+
+       /// <summary>
+       /// Number of Records per page
+       /// </summary>
+       [DataMember]
+       public bool IsDraftMode { get; set; }
+
     }
 }

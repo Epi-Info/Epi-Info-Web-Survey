@@ -368,10 +368,12 @@ namespace Epi.Web.WCF.SurveyService
 
 
                         List<string> IdList = new List<string>();
-
-                        foreach (string id in criteria.SurveyAnswerIdList)
+                        if (criteria.SurveyAnswerIdList != null)
                         {
-                            IdList.Add(id.ToUpper());
+                            foreach (string id in criteria.SurveyAnswerIdList)
+                            {
+                                IdList.Add(id.ToUpper());
+                            }
                         }
                         //string sort = criteria.SortExpression;
 
@@ -398,7 +400,7 @@ namespace Epi.Web.WCF.SurveyService
                         {
                             // call BLL with a list of records 
 
-                            PageInfoBO PageInfoBO = Implementation.GetResponseSurveySize(IdList, criteria.SurveyId,  criteria.DateCompleted,BandwidthUsageFactor, criteria.StatusId, -1, -1, ResponseMaxSize);
+                            PageInfoBO PageInfoBO = Implementation.GetResponseSurveySize(IdList, criteria.SurveyId,  criteria.DateCompleted,BandwidthUsageFactor,criteria.IsDraftMode, criteria.StatusId, -1, -1, ResponseMaxSize);
 
                            
 
@@ -413,6 +415,7 @@ namespace Epi.Web.WCF.SurveyService
                                         IdList,
                                         criteria.SurveyId,
                                         criteria.DateCompleted,
+                                        criteria.IsDraftMode,
                                         criteria.StatusId, 
                                         pRequest.Criteria.PageNumber,
                                         pRequest.Criteria.PageSize
