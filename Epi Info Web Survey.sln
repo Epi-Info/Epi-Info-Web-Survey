@@ -1,6 +1,8 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30501.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epi.Web", "Epi.Web\Epi.Web.csproj", "{91794FFF-48C0-414F-933E-34412A29EEAC}"
 	ProjectSection(ProjectDependencies) = postProject
 		{BEFC85E4-F3A3-4108-9575-4EF1A004364E} = {BEFC85E4-F3A3-4108-9575-4EF1A004364E}
@@ -33,9 +35,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epi.Web.CheckCodeEngine", "Epi.Web.CheckCodeEngine\Epi.Web.CheckCodeEngine.csproj", "{6B084882-EF4F-4CF0-85B1-1E8C357AE822}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epi.WebApi", "Epi.WebApi\Epi.WebApi.csproj", "{0857FA00-4AF8-4BF2-9E51-8EDD39EA5F6C}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 13
+		SccNumberOfProjects = 14
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs04
 		SccLocalPath0 = .
@@ -75,6 +79,9 @@ Global
 		SccProjectUniqueName12 = Epi.Web.CheckCodeEngine\\Epi.Web.CheckCodeEngine.csproj
 		SccProjectName12 = Epi.Web.CheckCodeEngine
 		SccLocalPath12 = Epi.Web.CheckCodeEngine
+		SccProjectUniqueName13 = Epi.WebApi\\Epi.WebApi.csproj
+		SccProjectName13 = Epi.WebApi
+		SccLocalPath13 = Epi.WebApi
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -197,6 +204,16 @@ Global
 		{6B084882-EF4F-4CF0-85B1-1E8C357AE822}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{6B084882-EF4F-4CF0-85B1-1E8C357AE822}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{6B084882-EF4F-4CF0-85B1-1E8C357AE822}.Release|x86.ActiveCfg = Release|Any CPU
+		{0857FA00-4AF8-4BF2-9E51-8EDD39EA5F6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0857FA00-4AF8-4BF2-9E51-8EDD39EA5F6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0857FA00-4AF8-4BF2-9E51-8EDD39EA5F6C}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{0857FA00-4AF8-4BF2-9E51-8EDD39EA5F6C}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{0857FA00-4AF8-4BF2-9E51-8EDD39EA5F6C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{0857FA00-4AF8-4BF2-9E51-8EDD39EA5F6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0857FA00-4AF8-4BF2-9E51-8EDD39EA5F6C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0857FA00-4AF8-4BF2-9E51-8EDD39EA5F6C}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{0857FA00-4AF8-4BF2-9E51-8EDD39EA5F6C}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{0857FA00-4AF8-4BF2-9E51-8EDD39EA5F6C}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
