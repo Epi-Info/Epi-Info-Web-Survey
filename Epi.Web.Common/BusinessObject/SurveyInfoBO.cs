@@ -26,7 +26,8 @@ namespace Epi.Web.Common.BusinessObject
         private string _StatusText;
         private bool _IsDraftMode;
         private DateTime _StartDate;
-        
+        public string _DBConnectionString { get; set; }
+        public bool _IsSqlProject { get; set; }
         public string StatusText
         { 
             get { return _StatusText; }
@@ -135,5 +136,22 @@ namespace Epi.Web.Common.BusinessObject
             get { return _StartDate; }
             set { _StartDate = value; }
         }
+
+        [DataMember]
+        public bool IsSqlProject
+        {
+            get { return _IsSqlProject; }
+            set { _IsSqlProject = value; }
+        }
+        [DataMember]
+        public string DBConnectionString
+        {
+            get { return _DBConnectionString; }
+            set { _DBConnectionString = value; }
+        }
+
+
+
+        
     }
 }
