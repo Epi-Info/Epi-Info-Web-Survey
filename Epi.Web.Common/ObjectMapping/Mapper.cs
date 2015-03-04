@@ -36,7 +36,8 @@ namespace Epi.Web.Common.ObjectMapping
                 OrganizationKey = pDTO.OrganizationKey,
                  IsDraftMode = pDTO.IsDraftMode,
                  StartDate  = pDTO.StartDate,
-                 
+                DBConnectionString = pDTO.DBConnectionString,
+                IsSqlProject = pDTO.IsSqlProject,
             };
         }
 

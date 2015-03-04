@@ -310,7 +310,7 @@ namespace Epi.Web.EF
                    SurveyInfo.TemplateXMLSize = RemoveWhitespace(SurveyInfo.XML).Length;
                    SurveyInfo.DateCreated = DateTime.Now;
                    SurveyInfo.LastUpdate = DateTime.Now;
-
+                   SurveyInfo.IsSqlProject = SurveyInfo.IsSqlProject;
                    var SurveyMetaDataEntity = Mapper.Map(SurveyInfo);
                    SurveyMetaDataEntity.OrganizationId = OrganizationId;
                    Context.AddToSurveyMetaDatas(SurveyMetaDataEntity);
@@ -356,6 +356,7 @@ namespace Epi.Web.EF
                     DataRow.IsDraftMode = SurveyInfo.IsDraftMode;
                     DataRow.StartDate = SurveyInfo.StartDate;
                     DataRow.LastUpdate = DateTime.Now;
+                    DataRow.IsSQLProject = SurveyInfo.IsSqlProject;
 
                     Context.SaveChanges();
                 }
@@ -411,6 +412,54 @@ namespace Epi.Web.EF
             xml = regex.Replace(xml, "><");
 
             return xml.Trim();
+        }
+
+        public void InsertConnectionString(DbConnectionStringBO ConnectionString)
+        {
+            try
+            {
+
+
+                using (var Context = DataObjectFactory.CreateContext())
+                {
+                    //Context.usp_AddDatasource(ConnectionString.DatasourceServerName, ConnectionString.DatabaseType, ConnectionString.InitialCatalog, ConnectionString.PersistSecurityInfo, ConnectionString.DatabaseUserID, ConnectionString.SurveyId, ConnectionString.Password);
+
+                    //Context.SaveChanges();
+                    Context.AddToEIDatasources(Mapper.Map(ConnectionString));
+                    Context.SaveChanges();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
+            }
+        }
+        public void UpdateConnectionString(DbConnectionStringBO ConnectionString)
+        {
+            try
+            {
+
+
+                using (var Context = DataObjectFactory.CreateContext())
+                {
+                    var Query = from DataSource in Context.EIDatasources
+                                where DataSource.SurveyId == ConnectionString.SurveyId
+                                select DataSource;
+
+                    var DataRow = Query.Single();
+                    DataRow = Mapper.Map(ConnectionString);
+
+                    Context.AddToEIDatasources(DataRow);
+
+                    Context.SaveChanges();
+
+                }
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
+            }
         }
     }
 }

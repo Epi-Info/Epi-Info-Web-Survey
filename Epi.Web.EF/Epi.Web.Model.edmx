@@ -4,52 +4,17 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="EIWSModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
-        <EntityContainer Name="EIWSModelStoreContainer">
-          <EntitySet Name="Address" EntityType="EIWSModel.Store.Address" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Admin" EntityType="EIWSModel.Store.Admin" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="lk_Status" EntityType="EIWSModel.Store.lk_Status" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="lk_SurveyType" EntityType="EIWSModel.Store.lk_SurveyType" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Organization" EntityType="EIWSModel.Store.Organization" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="States" EntityType="EIWSModel.Store.States" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="SurveyMetaData" EntityType="EIWSModel.Store.SurveyMetaData" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="SurveyResponse" EntityType="EIWSModel.Store.SurveyResponse" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="sysdiagrams" EntityType="EIWSModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
-          <AssociationSet Name="FK_Address_Admin" Association="EIWSModel.Store.FK_Address_Admin">
-            <End Role="Admin" EntitySet="Admin" />
-            <End Role="Address" EntitySet="Address" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Admin_Organization" Association="EIWSModel.Store.FK_Admin_Organization">
-            <End Role="Organization" EntitySet="Organization" />
-            <End Role="Admin" EntitySet="Admin" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SurveyMetaData_lk_SurveyType" Association="EIWSModel.Store.FK_SurveyMetaData_lk_SurveyType">
-            <End Role="lk_SurveyType" EntitySet="lk_SurveyType" />
-            <End Role="SurveyMetaData" EntitySet="SurveyMetaData" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SurveyMetaData_Organization" Association="EIWSModel.Store.FK_SurveyMetaData_Organization">
-            <End Role="Organization" EntitySet="Organization" />
-            <End Role="SurveyMetaData" EntitySet="SurveyMetaData" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SurveyResponse_lk_Status" Association="EIWSModel.Store.FK_SurveyResponse_lk_Status">
-            <End Role="lk_Status" EntitySet="lk_Status" />
-            <End Role="SurveyResponse" EntitySet="SurveyResponse" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SurveyResponse_SurveyMetaData" Association="EIWSModel.Store.FK_SurveyResponse_SurveyMetaData">
-            <End Role="SurveyMetaData" EntitySet="SurveyMetaData" />
-            <End Role="SurveyResponse" EntitySet="SurveyResponse" />
-          </AssociationSet>
-        </EntityContainer>
+    <Schema Namespace="EIWSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityType Name="Address">
           <Key>
             <PropertyRef Name="AddressId" />
           </Key>
-          <Property Name="AddressId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="AddressLine1" Type="nvarchar" Nullable="false" MaxLength="60" />
+          <Property Name="AddressId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AddressLine1" Type="nvarchar" MaxLength="60" Nullable="false" />
           <Property Name="AddressLine2" Type="nvarchar" MaxLength="60" />
-          <Property Name="City" Type="nvarchar" Nullable="false" MaxLength="30" />
+          <Property Name="City" Type="nvarchar" MaxLength="30" Nullable="false" />
           <Property Name="StateProvinceId" Type="int" Nullable="false" />
-          <Property Name="PostalCode" Type="nvarchar" Nullable="false" MaxLength="15" />
+          <Property Name="PostalCode" Type="nvarchar" MaxLength="15" Nullable="false" />
           <Property Name="AdminId" Type="uniqueidentifier" />
         </EntityType>
         <EntityType Name="Admin">
@@ -57,7 +22,7 @@
             <PropertyRef Name="AdminId" />
           </Key>
           <Property Name="AdminId" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="AdminEmail" Type="varchar" Nullable="false" MaxLength="300" />
+          <Property Name="AdminEmail" Type="varchar" MaxLength="300" Nullable="false" />
           <Property Name="OrganizationId" Type="int" Nullable="false" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
           <Property Name="Notify" Type="bit" Nullable="false" />
@@ -65,12 +30,52 @@
           <Property Name="FirstName" Type="varchar" MaxLength="150" />
           <Property Name="PhoneNumber" Type="varchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="EIDatasource">
+          <Key>
+            <PropertyRef Name="DatasourceID" />
+          </Key>
+          <Property Name="DatasourceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DatasourceServerName" Type="varchar" MaxLength="300" />
+          <Property Name="DatabaseType" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="InitialCatalog" Type="varchar" MaxLength="300" />
+          <Property Name="PersistSecurityInfo" Type="varchar" MaxLength="50" />
+          <Property Name="SurveyId" Type="uniqueidentifier" />
+          <Property Name="DatabaseUserID" Type="varchar" MaxLength="200" />
+          <Property Name="Password" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'OSELS_EIWS.dbo.ErrorLog' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ErrorLog">
+          <Key>
+            <PropertyRef Name="ErrorDate" />
+          </Key>
+          <Property Name="ErrorDate" Type="datetime" Nullable="false" />
+          <Property Name="SurveyId" Type="uniqueidentifier" />
+          <Property Name="ResponseId" Type="uniqueidentifier" />
+          <Property Name="Comment" Type="nvarchar(max)" />
+          <Property Name="ERROR_NUMBER" Type="int" />
+          <Property Name="ERROR_MESSAGE" Type="nvarchar" MaxLength="4000" />
+          <Property Name="ERROR_SEVERITY" Type="int" />
+          <Property Name="ERROR_STATE" Type="int" />
+          <Property Name="ERROR_PROCEDURE" Type="nvarchar" MaxLength="1128" />
+          <Property Name="ERROR_LINE" Type="int" />
+          <Property Name="ErrorText" Type="nvarchar(max)" />
+          <Property Name="ErrorText2" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="lk_RecordSource">
+          <Key>
+            <PropertyRef Name="RecordSourceId" />
+          </Key>
+          <Property Name="RecordSourceId" Type="int" Nullable="false" />
+          <Property Name="RecordSource" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="RecordSourceDescription" Type="nvarchar" MaxLength="100" />
+        </EntityType>
         <EntityType Name="lk_Status">
           <Key>
             <PropertyRef Name="StatusId" />
           </Key>
           <Property Name="StatusId" Type="int" Nullable="false" />
-          <Property Name="Status" Type="nvarchar" Nullable="false" MaxLength="20" />
+          <Property Name="Status" Type="nvarchar" MaxLength="20" Nullable="false" />
         </EntityType>
         <EntityType Name="lk_SurveyType">
           <Key>
@@ -83,9 +88,9 @@
           <Key>
             <PropertyRef Name="OrganizationId" />
           </Key>
-          <Property Name="OrganizationId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="OrganizationKey" Type="nvarchar" Nullable="false" MaxLength="500" />
-          <Property Name="Organization" Type="nvarchar" Nullable="false" MaxLength="400" />
+          <Property Name="OrganizationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrganizationKey" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Organization" Type="nvarchar" MaxLength="400" Nullable="false" />
           <Property Name="IsEnabled" Type="bit" Nullable="false" />
           <Property Name="IsHostOrganization" Type="bit" Nullable="false" />
         </EntityType>
@@ -94,8 +99,8 @@
             <PropertyRef Name="StateProvinceId" />
           </Key>
           <Property Name="StateProvinceId" Type="int" Nullable="false" />
-          <Property Name="StateCode" Type="char" Nullable="false" MaxLength="2" />
-          <Property Name="StateName" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="StateCode" Type="char" MaxLength="2" Nullable="false" />
+          <Property Name="StateName" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="SurveyMetaData">
           <Key>
@@ -104,8 +109,8 @@
           <Property Name="SurveyId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="SurveyNumber" Type="nvarchar" MaxLength="50" />
           <Property Name="SurveyTypeId" Type="int" Nullable="false" />
-          <Property Name="ClosingDate" Type="datetime2" Nullable="false" />
-          <Property Name="SurveyName" Type="nvarchar" Nullable="false" MaxLength="500" />
+          <Property Name="ClosingDate" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="SurveyName" Type="nvarchar" MaxLength="500" Nullable="false" />
           <Property Name="OrganizationName" Type="nvarchar" MaxLength="500" />
           <Property Name="DepartmentName" Type="nvarchar" MaxLength="500" />
           <Property Name="IntroductionText" Type="nvarchar(max)" />
@@ -113,11 +118,35 @@
           <Property Name="ExitText" Type="nvarchar(max)" />
           <Property Name="UserPublishKey" Type="uniqueidentifier" Nullable="false" />
           <Property Name="TemplateXMLSize" Type="bigint" Nullable="false" />
-          <Property Name="DateCreated" Type="datetime2" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="OrganizationId" Type="int" Nullable="false" />
           <Property Name="IsDraftMode" Type="bit" Nullable="false" />
-          <Property Name="StartDate" Type="datetime2" Nullable="false" />
-          <Property Name="LastUpdate" Type="datetime2" />
+          <Property Name="StartDate" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="LastUpdate" Type="datetime2" Precision="7" />
+          <Property Name="IsSQLProject" Type="bit" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'OSELS_EIWS.dbo.SurveyMetaDataTransform' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="SurveyMetaDataTransform">
+          <Key>
+            <PropertyRef Name="SurveyId" />
+            <PropertyRef Name="TableName" />
+            <PropertyRef Name="FieldName" />
+            <PropertyRef Name="FieldTypeId" />
+          </Key>
+          <Property Name="SurveyId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="TableName" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="BaseTableName" Type="nvarchar" MaxLength="500" />
+          <Property Name="PageId" Type="int" />
+          <Property Name="FieldName" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="FieldTypeId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SurveyMetaDataView">
+          <Key>
+            <PropertyRef Name="SurveyId" />
+          </Key>
+          <Property Name="SurveyId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ViewTableName" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="SurveyResponse">
           <Key>
@@ -125,28 +154,29 @@
           </Key>
           <Property Name="ResponseId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="SurveyId" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="DateUpdated" Type="datetime2" Nullable="false" />
-          <Property Name="DateCompleted" Type="datetime2" />
+          <Property Name="DateUpdated" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="DateCompleted" Type="datetime2" Precision="7" />
           <Property Name="StatusId" Type="int" Nullable="false" />
           <Property Name="ResponseXML" Type="xml" Nullable="false" />
           <Property Name="ResponsePasscode" Type="nvarchar" MaxLength="30" />
           <Property Name="ResponseXMLSize" Type="bigint" />
-          <Property Name="DateCreated" Type="datetime2" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="IsDraftMode" Type="bit" Nullable="false" />
+          <Property Name="RecordSourceId" Type="int" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
           </Key>
-          <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <Association Name="FK_Address_Admin">
-          <End Role="Admin" Type="EIWSModel.Store.Admin" Multiplicity="0..1" />
-          <End Role="Address" Type="EIWSModel.Store.Address" Multiplicity="*" />
+          <End Role="Admin" Type="Self.Admin" Multiplicity="0..1" />
+          <End Role="Address" Type="Self.Address" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Admin">
               <PropertyRef Name="AdminId" />
@@ -157,8 +187,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Admin_Organization">
-          <End Role="Organization" Type="EIWSModel.Store.Organization" Multiplicity="1" />
-          <End Role="Admin" Type="EIWSModel.Store.Admin" Multiplicity="*" />
+          <End Role="Organization" Type="Self.Organization" Multiplicity="1" />
+          <End Role="Admin" Type="Self.Admin" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Organization">
               <PropertyRef Name="OrganizationId" />
@@ -168,9 +198,23 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Datasource_SurveyMetaData">
+          <End Role="SurveyMetaData" Type="Self.SurveyMetaData" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="EIDatasource" Type="Self.EIDatasource" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SurveyMetaData">
+              <PropertyRef Name="SurveyId" />
+            </Principal>
+            <Dependent Role="EIDatasource">
+              <PropertyRef Name="SurveyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_SurveyMetaData_lk_SurveyType">
-          <End Role="lk_SurveyType" Type="EIWSModel.Store.lk_SurveyType" Multiplicity="1" />
-          <End Role="SurveyMetaData" Type="EIWSModel.Store.SurveyMetaData" Multiplicity="*" />
+          <End Role="lk_SurveyType" Type="Self.lk_SurveyType" Multiplicity="1" />
+          <End Role="SurveyMetaData" Type="Self.SurveyMetaData" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="lk_SurveyType">
               <PropertyRef Name="SurveyTypeId" />
@@ -181,8 +225,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_SurveyMetaData_Organization">
-          <End Role="Organization" Type="EIWSModel.Store.Organization" Multiplicity="1" />
-          <End Role="SurveyMetaData" Type="EIWSModel.Store.SurveyMetaData" Multiplicity="*" />
+          <End Role="Organization" Type="Self.Organization" Multiplicity="1" />
+          <End Role="SurveyMetaData" Type="Self.SurveyMetaData" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Organization">
               <PropertyRef Name="OrganizationId" />
@@ -192,9 +236,35 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_SurveyMetaDataTransform_SurveyMetaData">
+          <End Role="SurveyMetaData" Type="Self.SurveyMetaData" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SurveyMetaDataTransform" Type="Self.SurveyMetaDataTransform" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SurveyMetaData">
+              <PropertyRef Name="SurveyId" />
+            </Principal>
+            <Dependent Role="SurveyMetaDataTransform">
+              <PropertyRef Name="SurveyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SurveyResponse_lk_RecordSource">
+          <End Role="lk_RecordSource" Type="Self.lk_RecordSource" Multiplicity="0..1" />
+          <End Role="SurveyResponse" Type="Self.SurveyResponse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="lk_RecordSource">
+              <PropertyRef Name="RecordSourceId" />
+            </Principal>
+            <Dependent Role="SurveyResponse">
+              <PropertyRef Name="RecordSourceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_SurveyResponse_lk_Status">
-          <End Role="lk_Status" Type="EIWSModel.Store.lk_Status" Multiplicity="1" />
-          <End Role="SurveyResponse" Type="EIWSModel.Store.SurveyResponse" Multiplicity="*" />
+          <End Role="lk_Status" Type="Self.lk_Status" Multiplicity="1" />
+          <End Role="SurveyResponse" Type="Self.SurveyResponse" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="lk_Status">
               <PropertyRef Name="StatusId" />
@@ -205,8 +275,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_SurveyResponse_SurveyMetaData">
-          <End Role="SurveyMetaData" Type="EIWSModel.Store.SurveyMetaData" Multiplicity="1" />
-          <End Role="SurveyResponse" Type="EIWSModel.Store.SurveyResponse" Multiplicity="*" />
+          <End Role="SurveyMetaData" Type="Self.SurveyMetaData" Multiplicity="1" />
+          <End Role="SurveyResponse" Type="Self.SurveyResponse" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="SurveyMetaData">
               <PropertyRef Name="SurveyId" />
@@ -216,7 +286,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Function Name="fn_diagramobjects" ReturnType="int" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
         <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
           <Parameter Name="owner_id" Type="int" Mode="In" />
@@ -246,6 +316,82 @@
           <Parameter Name="owner_id" Type="int" Mode="In" />
           <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
         </Function>
+        <EntityContainer Name="EIWSModelStoreContainer">
+          <EntitySet Name="Address" EntityType="Self.Address" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EIDatasource" EntityType="Self.EIDatasource" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="lk_RecordSource" EntityType="Self.lk_RecordSource" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="lk_Status" EntityType="Self.lk_Status" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="lk_SurveyType" EntityType="Self.lk_SurveyType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Organization" EntityType="Self.Organization" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="States" EntityType="Self.States" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SurveyMetaData" EntityType="Self.SurveyMetaData" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SurveyMetaDataView" EntityType="Self.SurveyMetaDataView" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SurveyResponse" EntityType="Self.SurveyResponse" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ErrorLog" EntityType="Self.ErrorLog" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[ErrorLog].[ErrorDate] AS [ErrorDate], 
+[ErrorLog].[SurveyId] AS [SurveyId], 
+[ErrorLog].[ResponseId] AS [ResponseId], 
+[ErrorLog].[Comment] AS [Comment], 
+[ErrorLog].[ERROR_NUMBER] AS [ERROR_NUMBER], 
+[ErrorLog].[ERROR_MESSAGE] AS [ERROR_MESSAGE], 
+[ErrorLog].[ERROR_SEVERITY] AS [ERROR_SEVERITY], 
+[ErrorLog].[ERROR_STATE] AS [ERROR_STATE], 
+[ErrorLog].[ERROR_PROCEDURE] AS [ERROR_PROCEDURE], 
+[ErrorLog].[ERROR_LINE] AS [ERROR_LINE], 
+[ErrorLog].[ErrorText] AS [ErrorText], 
+[ErrorLog].[ErrorText2] AS [ErrorText2]
+FROM [dbo].[ErrorLog] AS [ErrorLog]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="SurveyMetaDataTransform" EntityType="Self.SurveyMetaDataTransform" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[SurveyMetaDataTransform].[SurveyId] AS [SurveyId], 
+[SurveyMetaDataTransform].[TableName] AS [TableName], 
+[SurveyMetaDataTransform].[BaseTableName] AS [BaseTableName], 
+[SurveyMetaDataTransform].[PageId] AS [PageId], 
+[SurveyMetaDataTransform].[FieldName] AS [FieldName], 
+[SurveyMetaDataTransform].[FieldTypeId] AS [FieldTypeId]
+FROM [dbo].[SurveyMetaDataTransform] AS [SurveyMetaDataTransform]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Address_Admin" Association="Self.FK_Address_Admin">
+            <End Role="Admin" EntitySet="Admin" />
+            <End Role="Address" EntitySet="Address" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Admin_Organization" Association="Self.FK_Admin_Organization">
+            <End Role="Organization" EntitySet="Organization" />
+            <End Role="Admin" EntitySet="Admin" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Datasource_SurveyMetaData" Association="Self.FK_Datasource_SurveyMetaData">
+            <End Role="SurveyMetaData" EntitySet="SurveyMetaData" />
+            <End Role="EIDatasource" EntitySet="EIDatasource" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SurveyMetaData_lk_SurveyType" Association="Self.FK_SurveyMetaData_lk_SurveyType">
+            <End Role="lk_SurveyType" EntitySet="lk_SurveyType" />
+            <End Role="SurveyMetaData" EntitySet="SurveyMetaData" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SurveyMetaData_Organization" Association="Self.FK_SurveyMetaData_Organization">
+            <End Role="Organization" EntitySet="Organization" />
+            <End Role="SurveyMetaData" EntitySet="SurveyMetaData" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SurveyMetaDataTransform_SurveyMetaData" Association="Self.FK_SurveyMetaDataTransform_SurveyMetaData">
+            <End Role="SurveyMetaData" EntitySet="SurveyMetaData" />
+            <End Role="SurveyMetaDataTransform" EntitySet="SurveyMetaDataTransform" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SurveyResponse_lk_RecordSource" Association="Self.FK_SurveyResponse_lk_RecordSource">
+            <End Role="lk_RecordSource" EntitySet="lk_RecordSource" />
+            <End Role="SurveyResponse" EntitySet="SurveyResponse" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SurveyResponse_lk_Status" Association="Self.FK_SurveyResponse_lk_Status">
+            <End Role="lk_Status" EntitySet="lk_Status" />
+            <End Role="SurveyResponse" EntitySet="SurveyResponse" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SurveyResponse_SurveyMetaData" Association="Self.FK_SurveyResponse_SurveyMetaData">
+            <End Role="SurveyMetaData" EntitySet="SurveyMetaData" />
+            <End Role="SurveyResponse" EntitySet="SurveyResponse" />
+          </AssociationSet>
+        </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -284,6 +430,23 @@
             <End Role="Organization" EntitySet="Organizations" />
             <End Role="Admin" EntitySet="Admins" />
           </AssociationSet>
+          <EntitySet Name="EIDatasources" EntityType="EIWSModel.EIDatasource" />
+          <EntitySet Name="lk_RecordSource" EntityType="EIWSModel.lk_RecordSource" />
+          <EntitySet Name="SurveyMetaDataViews" EntityType="EIWSModel.SurveyMetaDataView" />
+          <EntitySet Name="ErrorLogs" EntityType="EIWSModel.ErrorLog" />
+          <EntitySet Name="SurveyMetaDataTransforms" EntityType="EIWSModel.SurveyMetaDataTransform" />
+          <AssociationSet Name="FK_Datasource_SurveyMetaData" Association="EIWSModel.FK_Datasource_SurveyMetaData">
+            <End Role="SurveyMetaData" EntitySet="SurveyMetaDatas" />
+            <End Role="EIDatasource" EntitySet="EIDatasources" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SurveyResponse_lk_RecordSource" Association="EIWSModel.FK_SurveyResponse_lk_RecordSource">
+            <End Role="lk_RecordSource" EntitySet="lk_RecordSource" />
+            <End Role="SurveyResponse" EntitySet="SurveyResponses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SurveyMetaDataTransform_SurveyMetaData" Association="EIWSModel.FK_SurveyMetaDataTransform_SurveyMetaData">
+            <End Role="SurveyMetaData" EntitySet="SurveyMetaDatas" />
+            <End Role="SurveyMetaDataTransform" EntitySet="SurveyMetaDataTransforms" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="lk_Status">
           <Key>
@@ -308,7 +471,7 @@
           <Property Type="Guid" Name="SurveyId" Nullable="false" />
           <Property Type="String" Name="SurveyNumber" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Type="Int32" Name="SurveyTypeId" Nullable="false" />
-          <Property Type="DateTime" Name="ClosingDate" Nullable="false" />
+          <Property Type="DateTime" Name="ClosingDate" Nullable="false" Precision="7" />
           <Property Type="String" Name="SurveyName" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="OrganizationName" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="DepartmentName" MaxLength="500" FixedLength="false" Unicode="true" />
@@ -317,14 +480,17 @@
           <Property Type="String" Name="ExitText" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Type="Guid" Name="UserPublishKey" Nullable="false" />
           <Property Type="Int64" Name="TemplateXMLSize" Nullable="false" />
-          <Property Type="DateTime" Name="DateCreated" Nullable="false" />
+          <Property Type="DateTime" Name="DateCreated" Nullable="false" Precision="7" />
           <Property Type="Int32" Name="OrganizationId" Nullable="false" />
           <NavigationProperty Name="lk_SurveyType" Relationship="EIWSModel.FK_SurveyMetaData_lk_SurveyType" FromRole="SurveyMetaData" ToRole="lk_SurveyType" />
           <NavigationProperty Name="SurveyResponses" Relationship="EIWSModel.FK_SurveyResponse_SurveyMetaData" FromRole="SurveyMetaData" ToRole="SurveyResponse" />
           <NavigationProperty Name="Organization" Relationship="EIWSModel.FK_SurveyMetaData_Organization" FromRole="SurveyMetaData" ToRole="Organization" />
-          <Property Type="DateTime" Name="StartDate" Nullable="false" />
+          <Property Type="DateTime" Name="StartDate" Nullable="false" Precision="7" />
           <Property Type="Boolean" Name="IsDraftMode" Nullable="false" />
-          <Property Type="DateTime" Name="LastUpdate" />
+          <Property Type="DateTime" Name="LastUpdate" Precision="7" />
+          <Property Name="IsSQLProject" Type="Boolean" />
+          <NavigationProperty Name="EIDatasources" Relationship="EIWSModel.FK_Datasource_SurveyMetaData" FromRole="SurveyMetaData" ToRole="EIDatasource" />
+          <NavigationProperty Name="SurveyMetaDataTransforms" Relationship="EIWSModel.FK_SurveyMetaDataTransform_SurveyMetaData" FromRole="SurveyMetaData" ToRole="SurveyMetaDataTransform" />
         </EntityType>
         <Association Name="FK_SurveyMetaData_lk_SurveyType">
           <End Type="EIWSModel.lk_SurveyType" Role="lk_SurveyType" Multiplicity="1" />
@@ -344,16 +510,18 @@
           </Key>
           <Property Type="Guid" Name="ResponseId" Nullable="false" />
           <Property Type="Guid" Name="SurveyId" Nullable="false" />
-          <Property Type="DateTime" Name="DateUpdated" Nullable="false" />
-          <Property Type="DateTime" Name="DateCompleted" />
+          <Property Type="DateTime" Name="DateUpdated" Nullable="false" Precision="7" />
+          <Property Type="DateTime" Name="DateCompleted" Precision="7" />
           <Property Type="Int32" Name="StatusId" Nullable="false" />
           <Property Type="String" Name="ResponseXML" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="ResponsePasscode" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Type="Int64" Name="ResponseXMLSize" Nullable="false" />
-          <Property Type="DateTime" Name="DateCreated" Nullable="false" />
+          <Property Type="Int64" Name="ResponseXMLSize" />
+          <Property Type="DateTime" Name="DateCreated" Nullable="false" Precision="7" />
           <NavigationProperty Name="lk_Status" Relationship="EIWSModel.FK_SurveyResponse_lk_Status" FromRole="SurveyResponse" ToRole="lk_Status" />
           <NavigationProperty Name="SurveyMetaData" Relationship="EIWSModel.FK_SurveyResponse_SurveyMetaData" FromRole="SurveyResponse" ToRole="SurveyMetaData" />
           <Property Type="Boolean" Name="IsDraftMode" Nullable="false" />
+          <Property Name="RecordSourceId" Type="Int32" />
+          <NavigationProperty Name="lk_RecordSource" Relationship="EIWSModel.FK_SurveyResponse_lk_RecordSource" FromRole="SurveyResponse" ToRole="lk_RecordSource" />
         </EntityType>
         <Association Name="FK_SurveyResponse_lk_Status">
           <End Type="EIWSModel.lk_Status" Role="lk_Status" Multiplicity="1" />
@@ -385,7 +553,7 @@
           </Key>
           <Property Type="Int32" Name="OrganizationId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="String" Name="OrganizationKey" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="Organization1" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Organization1" Nullable="false" MaxLength="400" FixedLength="false" Unicode="true" />
           <Property Type="Boolean" Name="IsEnabled" Nullable="false" />
           <NavigationProperty Name="SurveyMetaDatas" Relationship="EIWSModel.FK_SurveyMetaData_Organization" FromRole="Organization" ToRole="SurveyMetaData" />
           <Property Type="Boolean" Name="IsHostOrganization" Nullable="false" />
@@ -473,6 +641,108 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="EIDatasource">
+          <Key>
+            <PropertyRef Name="DatasourceID" />
+          </Key>
+          <Property Name="DatasourceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DatasourceServerName" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="DatabaseType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="InitialCatalog" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="PersistSecurityInfo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SurveyId" Type="Guid" />
+          <Property Name="DatabaseUserID" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="SurveyMetaData" Relationship="EIWSModel.FK_Datasource_SurveyMetaData" FromRole="EIDatasource" ToRole="SurveyMetaData" />
+        </EntityType>
+        <EntityType Name="lk_RecordSource">
+          <Key>
+            <PropertyRef Name="RecordSourceId" />
+          </Key>
+          <Property Name="RecordSourceId" Type="Int32" Nullable="false" />
+          <Property Name="RecordSource" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RecordSourceDescription" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="SurveyResponses" Relationship="EIWSModel.FK_SurveyResponse_lk_RecordSource" FromRole="lk_RecordSource" ToRole="SurveyResponse" />
+        </EntityType>
+        <EntityType Name="SurveyMetaDataView">
+          <Key>
+            <PropertyRef Name="SurveyId" />
+          </Key>
+          <Property Name="SurveyId" Type="Guid" Nullable="false" />
+          <Property Name="ViewTableName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="ErrorLog">
+          <Key>
+            <PropertyRef Name="ErrorDate" />
+          </Key>
+          <Property Name="ErrorDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="SurveyId" Type="Guid" />
+          <Property Name="ResponseId" Type="Guid" />
+          <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ERROR_NUMBER" Type="Int32" />
+          <Property Name="ERROR_MESSAGE" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="ERROR_SEVERITY" Type="Int32" />
+          <Property Name="ERROR_STATE" Type="Int32" />
+          <Property Name="ERROR_PROCEDURE" Type="String" MaxLength="1128" FixedLength="false" Unicode="true" />
+          <Property Name="ERROR_LINE" Type="Int32" />
+          <Property Name="ErrorText" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ErrorText2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="SurveyMetaDataTransform">
+          <Key>
+            <PropertyRef Name="SurveyId" />
+            <PropertyRef Name="TableName" />
+            <PropertyRef Name="FieldName" />
+            <PropertyRef Name="FieldTypeId" />
+          </Key>
+          <Property Name="SurveyId" Type="Guid" Nullable="false" />
+          <Property Name="TableName" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="BaseTableName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="PageId" Type="Int32" />
+          <Property Name="FieldName" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="FieldTypeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="SurveyMetaData" Relationship="EIWSModel.FK_SurveyMetaDataTransform_SurveyMetaData" FromRole="SurveyMetaDataTransform" ToRole="SurveyMetaData" />
+        </EntityType>
+        <Association Name="FK_Datasource_SurveyMetaData">
+          <End Type="EIWSModel.SurveyMetaData" Role="SurveyMetaData" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="EIWSModel.EIDatasource" Role="EIDatasource" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SurveyMetaData">
+              <PropertyRef Name="SurveyId" />
+            </Principal>
+            <Dependent Role="EIDatasource">
+              <PropertyRef Name="SurveyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SurveyResponse_lk_RecordSource">
+          <End Type="EIWSModel.lk_RecordSource" Role="lk_RecordSource" Multiplicity="0..1" />
+          <End Type="EIWSModel.SurveyResponse" Role="SurveyResponse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="lk_RecordSource">
+              <PropertyRef Name="RecordSourceId" />
+            </Principal>
+            <Dependent Role="SurveyResponse">
+              <PropertyRef Name="RecordSourceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SurveyMetaDataTransform_SurveyMetaData">
+          <End Type="EIWSModel.SurveyMetaData" Role="SurveyMetaData" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="EIWSModel.SurveyMetaDataTransform" Role="SurveyMetaDataTransform" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SurveyMetaData">
+              <PropertyRef Name="SurveyId" />
+            </Principal>
+            <Dependent Role="SurveyMetaDataTransform">
+              <PropertyRef Name="SurveyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -498,6 +768,7 @@
           <EntitySetMapping Name="SurveyMetaDatas">
             <EntityTypeMapping TypeName="EIWSModel.SurveyMetaData">
               <MappingFragment StoreEntitySet="SurveyMetaData">
+                <ScalarProperty Name="IsSQLProject" ColumnName="IsSQLProject" />
                 <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
                 <ScalarProperty Name="IsDraftMode" ColumnName="IsDraftMode" />
                 <ScalarProperty Name="StartDate" ColumnName="StartDate" />
@@ -521,6 +792,7 @@
           <EntitySetMapping Name="SurveyResponses">
             <EntityTypeMapping TypeName="EIWSModel.SurveyResponse">
               <MappingFragment StoreEntitySet="SurveyResponse">
+                <ScalarProperty Name="RecordSourceId" ColumnName="RecordSourceId" />
                 <ScalarProperty Name="IsDraftMode" ColumnName="IsDraftMode" />
                 <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
                 <ScalarProperty Name="ResponseXMLSize" ColumnName="ResponseXMLSize" />
@@ -592,6 +864,67 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="EIDatasources">
+            <EntityTypeMapping TypeName="EIWSModel.EIDatasource">
+              <MappingFragment StoreEntitySet="EIDatasource">
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="DatabaseUserID" ColumnName="DatabaseUserID" />
+                <ScalarProperty Name="SurveyId" ColumnName="SurveyId" />
+                <ScalarProperty Name="PersistSecurityInfo" ColumnName="PersistSecurityInfo" />
+                <ScalarProperty Name="InitialCatalog" ColumnName="InitialCatalog" />
+                <ScalarProperty Name="DatabaseType" ColumnName="DatabaseType" />
+                <ScalarProperty Name="DatasourceServerName" ColumnName="DatasourceServerName" />
+                <ScalarProperty Name="DatasourceID" ColumnName="DatasourceID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="lk_RecordSource">
+            <EntityTypeMapping TypeName="EIWSModel.lk_RecordSource">
+              <MappingFragment StoreEntitySet="lk_RecordSource">
+                <ScalarProperty Name="RecordSourceDescription" ColumnName="RecordSourceDescription" />
+                <ScalarProperty Name="RecordSource" ColumnName="RecordSource" />
+                <ScalarProperty Name="RecordSourceId" ColumnName="RecordSourceId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SurveyMetaDataViews">
+            <EntityTypeMapping TypeName="EIWSModel.SurveyMetaDataView">
+              <MappingFragment StoreEntitySet="SurveyMetaDataView">
+                <ScalarProperty Name="ViewTableName" ColumnName="ViewTableName" />
+                <ScalarProperty Name="SurveyId" ColumnName="SurveyId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ErrorLogs">
+            <EntityTypeMapping TypeName="EIWSModel.ErrorLog">
+              <MappingFragment StoreEntitySet="ErrorLog">
+                <ScalarProperty Name="ErrorText2" ColumnName="ErrorText2" />
+                <ScalarProperty Name="ErrorText" ColumnName="ErrorText" />
+                <ScalarProperty Name="ERROR_LINE" ColumnName="ERROR_LINE" />
+                <ScalarProperty Name="ERROR_PROCEDURE" ColumnName="ERROR_PROCEDURE" />
+                <ScalarProperty Name="ERROR_STATE" ColumnName="ERROR_STATE" />
+                <ScalarProperty Name="ERROR_SEVERITY" ColumnName="ERROR_SEVERITY" />
+                <ScalarProperty Name="ERROR_MESSAGE" ColumnName="ERROR_MESSAGE" />
+                <ScalarProperty Name="ERROR_NUMBER" ColumnName="ERROR_NUMBER" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="ResponseId" ColumnName="ResponseId" />
+                <ScalarProperty Name="SurveyId" ColumnName="SurveyId" />
+                <ScalarProperty Name="ErrorDate" ColumnName="ErrorDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SurveyMetaDataTransforms">
+            <EntityTypeMapping TypeName="EIWSModel.SurveyMetaDataTransform">
+              <MappingFragment StoreEntitySet="SurveyMetaDataTransform">
+                <ScalarProperty Name="FieldTypeId" ColumnName="FieldTypeId" />
+                <ScalarProperty Name="FieldName" ColumnName="FieldName" />
+                <ScalarProperty Name="PageId" ColumnName="PageId" />
+                <ScalarProperty Name="BaseTableName" ColumnName="BaseTableName" />
+                <ScalarProperty Name="TableName" ColumnName="TableName" />
+                <ScalarProperty Name="SurveyId" ColumnName="SurveyId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -608,6 +941,7 @@
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="True" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="UseLegacyProvider" Value="True" />
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->
@@ -646,6 +980,14 @@
           <ConnectorPoint PointX="5" PointY="8.0574446614583337" />
           <ConnectorPoint PointX="5.75" PointY="8.0574446614583337" />
         </AssociationConnector>
+        <EntityTypeShape EntityType="EIWSModel.EIDatasource" Width="1.5" PointX="6.25" PointY="14.125" />
+        <EntityTypeShape EntityType="EIWSModel.lk_RecordSource" Width="1.5" PointX="4.375" PointY="18" />
+        <EntityTypeShape EntityType="EIWSModel.SurveyMetaDataView" Width="1.5" PointX="9.375" PointY="4.75" />
+        <EntityTypeShape EntityType="EIWSModel.ErrorLog" Width="1.5" PointX="11.375" PointY="4.75" />
+        <EntityTypeShape EntityType="EIWSModel.SurveyMetaDataTransform" Width="1.5" PointX="6.25" PointY="11" />
+        <AssociationConnector Association="EIWSModel.FK_Datasource_SurveyMetaData" />
+        <AssociationConnector Association="EIWSModel.FK_SurveyResponse_lk_RecordSource" />
+        <AssociationConnector Association="EIWSModel.FK_SurveyMetaDataTransform_SurveyMetaData" />
         </Diagram>
     </Diagrams>
   </Designer>
