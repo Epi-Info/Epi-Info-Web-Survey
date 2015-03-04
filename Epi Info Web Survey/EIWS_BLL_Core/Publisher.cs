@@ -5,7 +5,9 @@ using System.Text;
 using System.Reflection;
 using System.Xml;
 using Epi.Web.Common.BusinessObject;
-
+using System.Xml;
+using System.Xml.Linq;
+using System.Data.SqlClient;
 namespace Epi.Web.BLL
 {
    /// <summary>
@@ -76,11 +78,21 @@ namespace Epi.Web.BLL
                                                 BO.TemplateXMLSize = pRequestMessage.TemplateXMLSize;
                                                 BO.IsDraftMode = pRequestMessage.IsDraftMode;
                                                 BO.StartDate = pRequestMessage.StartDate;
-                                                
+
+                                                BO.IsSqlProject = pRequestMessage.IsSqlProject;
 
                                                 this.SurveyInfoDao.InsertSurveyInfo(BO);
                                                 result.URL = GetURL(pRequestMessage, SurveyId);
                                                 result.IsPulished = true;
+                                                //Insert Connection string..
+                                                if (pRequestMessage.IsSqlProject)
+                                                {
+                                                    DbConnectionStringBO DbConnectionStringBO = new DbConnectionStringBO();
+                                                    DbConnectionStringBO = GetConnection(pRequestMessage.DBConnectionString);
+                                                    DbConnectionStringBO.SurveyId = SurveyId;
+                                                    this.SurveyInfoDao.InsertConnectionString(DbConnectionStringBO);
+                                                }
+
                                             }
                                             catch (Exception ex)
                                             {
@@ -158,11 +170,21 @@ namespace Epi.Web.BLL
                             BO.TemplateXMLSize = pRequestMessage.TemplateXMLSize;
                             BO.IsDraftMode = pRequestMessage.IsDraftMode;
                             BO.StartDate = pRequestMessage.StartDate;
-                           
+                            BO.IsSqlProject = pRequestMessage.IsSqlProject;
 
                             this.SurveyInfoDao.UpdateSurveyInfo(BO);
                             result.URL = GetURL(pRequestMessage, SurveyId);
                             result.IsPulished = true;
+                            //Updateing Connection string..
+                            if (pRequestMessage.IsSqlProject)
+                            {
+                                DbConnectionStringBO DbConnectionStringBO = new DbConnectionStringBO();
+                                DbConnectionStringBO = GetConnection(pRequestMessage.DBConnectionString);
+                                DbConnectionStringBO.SurveyId = SurveyId;
+                              //  this.SurveyInfoDao.InsertConnectionString(DbConnectionStringBO);
+                                this.SurveyInfoDao.UpdateConnectionString(DbConnectionStringBO);
+                            }
+
                         }
                         catch (Exception ex)
                         {
@@ -269,8 +291,23 @@ namespace Epi.Web.BLL
             return URL.ToString();
         }
         #endregion
-        
-        
+
+        private DbConnectionStringBO GetConnection(string ConnectionString)
+        {
+            DbConnectionStringBO DbConnectionStringBO = new Epi.Web.Common.BusinessObject.DbConnectionStringBO();
+            //string connStr = "Data Source=SERVERx;Initial Catalog=DBx;User ID=u;Password=p";
+            // string connStr =  "Data Source=ETIEX-022/SQLEXPRESS;Initial Catalog=TestEpi;Integrated Security=True";
+            var csb = new SqlConnectionStringBuilder(ConnectionString);
+
+            DbConnectionStringBO.DatasourceServerName = csb.DataSource;
+            DbConnectionStringBO.InitialCatalog = csb.InitialCatalog;
+            DbConnectionStringBO.Password = csb.Password;
+            DbConnectionStringBO.DatabaseUserID = csb.UserID;
+            DbConnectionStringBO.PersistSecurityInfo = csb.IntegratedSecurity.ToString();
+
+            DbConnectionStringBO.DatabaseType = "SQL";
+            return DbConnectionStringBO;
+        }
       
     }
 }

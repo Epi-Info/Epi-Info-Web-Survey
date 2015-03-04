@@ -309,5 +309,18 @@ namespace Epi.Web.EF
                 AdminId = Admin.AdminId
             };
             }
+        internal static EIDatasource Map(DbConnectionStringBO ConnectionString)
+        {
+            EIDatasource Datasource = new EIDatasource();
+            Datasource.DatabaseType = ConnectionString.DatabaseType;
+            Datasource.DatabaseUserID = ConnectionString.DatabaseUserID;
+            Datasource.DatasourceID = ConnectionString.DatasourceID;
+            Datasource.DatasourceServerName = ConnectionString.DatasourceServerName;
+            Datasource.InitialCatalog = ConnectionString.InitialCatalog;
+            Datasource.Password = ConnectionString.Password;
+            Datasource.SurveyId = ConnectionString.SurveyId;
+            Datasource.PersistSecurityInfo = ConnectionString.PersistSecurityInfo;
+            return Datasource;
+        }
     }
 }
