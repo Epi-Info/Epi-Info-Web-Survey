@@ -99,5 +99,18 @@ namespace Epi.Web.Interfaces.DataInterfaces
         /// </summary>
         /// <param name="SurveyInfo">SurveyInfo.</param>
          void DeleteSurveyInfo(SurveyInfoBO SurveyInfo);
+
+         /// <summary>
+         /// Deletes a SurveyInfo
+         /// </summary>
+         /// <param name="SurveyInfo">SurveyInfo.</param>
+         void InsertConnectionString(DbConnectionStringBO ConnectionString);
+
+
+         /// <summary>
+         /// Deletes a SurveyInfo
+         /// </summary>
+         /// <param name="SurveyInfo">SurveyInfo.</param>
+         void UpdateConnectionString(DbConnectionStringBO ConnectionString);
     }
 }

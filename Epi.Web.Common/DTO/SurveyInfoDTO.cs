@@ -24,7 +24,8 @@ namespace Epi.Web.Common.DTO
         private Guid _OrganizationKey;
         private bool _IsDraftMode;
         private DateTime _StartDate;
-      
+        private bool _IsSqlProject;
+        private string _DBConnectionString;
 
         [DataMember]
         public string SurveyId
@@ -131,7 +132,18 @@ namespace Epi.Web.Common.DTO
             set { _StartDate = value; }
         }
 
-         
+        [DataMember]
+        public bool IsSqlProject
+        {
+            get { return _IsSqlProject; }
+            set { _IsSqlProject = value; }
+        }
+        [DataMember]
+        public string DBConnectionString
+        {
+            get { return _DBConnectionString; }
+            set { _DBConnectionString = value; }
+        }
 
     }
 }
