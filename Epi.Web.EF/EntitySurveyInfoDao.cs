@@ -450,7 +450,7 @@ namespace Epi.Web.EF
                     var DataRow = Query.Single();
                     DataRow = Mapper.Map(ConnectionString);
 
-                    Context.AddToEIDatasources(DataRow);
+                    
 
                     Context.SaveChanges();
 
