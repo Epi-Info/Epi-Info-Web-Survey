@@ -188,7 +188,7 @@ namespace Epi.Web.EF
                         }
                         else{
                             pStatusId = -1;
-                         responseList = Context.SurveyResponses.Where(x => x.SurveyId == Id  && x.IsDraftMode == pIsDraftMode).ToList();
+                         responseList = Context.SurveyResponses.Where(x => x.SurveyId == Id && x.StatusId != 4  && x.IsDraftMode == pIsDraftMode).ToList();
                         
                         }
 
