@@ -422,6 +422,7 @@
     <None Include="Properties\DataSources\Epi.Web.Common.Message.SurveyControlsResponse.datasource" />
     <None Include="Properties\DataSources\Epi.Web.Common.Message.SurveyInfoResponse.datasource" />
     <None Include="Properties\DataSources\Epi.Web.Common.Message.UserAuthenticationResponse.datasource" />
+    <None Include="Properties\PublishProfiles\Profile1.pubxml" />
     <None Include="Service References\DataServiceClient\Epi.Web.MVC.DataServiceClient.CacheDependencyResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -447,6 +448,7 @@
     <Content Include="SurveyDataService.svc" />
     <Content Include="SurveyManagerService.svc" />
     <Content Include="SurveyManagerServiceV2.svc" />
+    <Content Include="SurveyManagerServiceV3.svc" />
     <Content Include="Unity.Mvc3.README.txt" />
     <Content Include="Views\Shared\footer.htm" />
     <Content Include="Views\Shared\header.htm" />
