@@ -440,7 +440,17 @@ namespace Epi.Web.EF
 
                     var DataRow = Query.Single();
 
-                    DataRow.StatusId = SurveyResponseBO.Status;
+                    if (DataRow.StatusId == 3 && SurveyResponseBO.Status==4)
+                     {
+
+                           DataRow.StatusId = SurveyResponseBO.Status;
+                     }
+
+                    if (  SurveyResponseBO.Status != 4)
+                    {
+
+                        DataRow.StatusId = SurveyResponseBO.Status;
+                    }
 
 
                     Context.SaveChanges();
