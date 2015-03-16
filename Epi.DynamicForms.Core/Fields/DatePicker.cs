@@ -167,7 +167,7 @@ namespace MvcDynamicForms.Fields
                 else
                 {
                     //ControlClass.Append("custom[date]] text-input datepicker");
-                    ControlClass.Append("custom[date]]  datepicker");
+                    ControlClass.Append("custom[date]] isdate datepicker");
                 }
                 return ControlClass.ToString();
             }
