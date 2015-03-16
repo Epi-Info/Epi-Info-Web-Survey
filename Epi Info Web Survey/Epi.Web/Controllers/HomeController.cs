@@ -270,8 +270,16 @@ namespace Epi.Web.MVC.Controllers
                                      select _FieldTypeID;
 
                 PageFields = _FieldsTypeIDs;
+                var PageId = "";
 
-                XDocument CurrentPageXml = ToXDocument(CreateResponseXml("", false, i, ""));
+                if (PageFields.Count()>0)
+                {
+                      PageId = PageFields.First().Attribute("PageId").Value;
+                }
+
+             //   XmlElement temp = (XmlElement) _FieldsTypeIDs.First();
+
+                XDocument CurrentPageXml = ToXDocument(CreateResponseXml("", false, i,PageId));
         
                 if (i == 0)
                 {
