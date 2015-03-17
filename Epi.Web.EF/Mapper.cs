@@ -119,6 +119,7 @@ namespace Epi.Web.EF
                 DateCreated = businessobject.DateCreated,
                 IsDraftMode = businessobject.IsDraftMode,
                 StartDate = businessobject.StartDate,
+                IsSQLProject = businessobject._IsSqlProject
             };
         }
 
