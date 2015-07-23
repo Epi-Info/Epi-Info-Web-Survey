@@ -184,11 +184,11 @@ namespace Epi.Web.EF
                        // responseList = Context.SurveyResponses.Where(x => x.SurveyId == Id).ToList();
                         if (pStatusId>0)
                         {
-                        responseList = Context.SurveyResponses.Where(x => x.SurveyId == Id && x.StatusId == pStatusId && x.IsDraftMode == pIsDraftMode).ToList();
+                        responseList = Context.SurveyResponses.Where(x => x.SurveyId == Id && x.StatusId == pStatusId && x.IsDraftMode == pIsDraftMode).OrderBy(x=>x.DateCompleted).ToList();
                         }
                         else{
                             pStatusId = -1;
-                         responseList = Context.SurveyResponses.Where(x => x.SurveyId == Id && x.StatusId != 4  && x.IsDraftMode == pIsDraftMode).ToList();
+                            responseList = Context.SurveyResponses.Where(x => x.SurveyId == Id && x.StatusId != 4 && x.IsDraftMode == pIsDraftMode).OrderBy(x => x.DateCompleted).ToList();
                         
                         }
 
