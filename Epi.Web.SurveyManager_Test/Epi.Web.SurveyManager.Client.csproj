@@ -69,7 +69,7 @@
     <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DatabaseApplication">
@@ -195,7 +195,6 @@
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Epi.Web.SurveyManager.Client_TemporaryKey.pfx" />
     <None Include="Properties\DataSources\Epi.Web.Common.Message.OrganizationResponse.datasource" />
     <None Include="Properties\DataSources\Epi.Web.Common.Message.PreFilledAnswerResponse.datasource" />
     <None Include="Properties\DataSources\Epi.Web.Common.Message.PublishResponse.datasource" />
