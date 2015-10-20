@@ -182,16 +182,31 @@ namespace Epi.Web.EF
                     {
                         Guid Id = new Guid(pSurveyId);
                        // responseList = Context.SurveyResponses.Where(x => x.SurveyId == Id).ToList();
-                        if (pStatusId>0)
-                        {
-                        responseList = Context.SurveyResponses.Where(x => x.SurveyId == Id && x.StatusId == pStatusId && x.IsDraftMode == pIsDraftMode).OrderBy(x=>x.DateCompleted).ToList();
-                        }
-                        else{
-                            pStatusId = -1;
-                            responseList = Context.SurveyResponses.Where(x => x.SurveyId == Id && x.StatusId != 4 && x.IsDraftMode == pIsDraftMode).OrderBy(x => x.DateCompleted).ToList();
+                        //if (pStatusId>0)
+                        //{
+                        //responseList = Context.SurveyResponses.Where(x => x.SurveyId == Id && x.StatusId == pStatusId && x.IsDraftMode == pIsDraftMode).OrderBy(x=>x.DateCompleted).ToList();
+                        //}
+                        //else{
+                        //    pStatusId = -1;
+                        //    responseList = Context.SurveyResponses.Where(x => x.SurveyId == Id && x.StatusId != 4 && x.IsDraftMode == pIsDraftMode).OrderBy(x => x.DateCompleted).ToList();
                         
+                        //}
+                        if (pStatusId == 0) // All 2,3,and 4 if available
+                        {
+                        responseList = Context.SurveyResponses.Where(x => x.SurveyId == Id  && x.IsDraftMode == pIsDraftMode).OrderBy(x=>x.DateCompleted).ToList();
                         }
+                        if (pStatusId == 3) // Only 3
+                        {
+                            
+                            responseList = Context.SurveyResponses.Where(x => x.SurveyId == Id && x.StatusId == pStatusId && x.IsDraftMode == pIsDraftMode).OrderBy(x => x.DateCompleted).ToList();
 
+                        }
+                       if (pStatusId == 4) //   3 and 4
+                       {
+
+                           responseList = Context.SurveyResponses.Where(x => x.SurveyId == Id && x.StatusId == pStatusId && x.StatusId == 3 && x.IsDraftMode == pIsDraftMode).OrderBy(x => x.DateCompleted).ToList();
+
+                       }
                     }
                     
                    
@@ -212,12 +227,12 @@ namespace Epi.Web.EF
             //    responseList = surveyList;
             //}
 
-            if (pStatusId > -1)
-            {
-                List<SurveyResponse> statusList = new List<SurveyResponse>();
-                statusList.AddRange(responseList.Where(x => x.StatusId == pStatusId));
-                responseList = statusList;
-            }
+            //if (pStatusId > -1)
+            //{
+            //    List<SurveyResponse> statusList = new List<SurveyResponse>();
+            //    statusList.AddRange(responseList.Where(x => x.StatusId == pStatusId));
+            //    responseList = statusList;
+            //}
 
             if (pDateCompleted > DateTime.MinValue)
             {
