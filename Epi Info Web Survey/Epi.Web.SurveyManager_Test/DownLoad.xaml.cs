@@ -166,6 +166,8 @@ namespace Epi.Web.SurveyManager.Client
 
             Epi.Web.Common.Message.SurveyAnswerRequest Request = new Epi.Web.Common.Message.SurveyAnswerRequest();
 
+            
+
             foreach (string id in SurveyAnswerIdListBox.Items)
             {
                 Request.Criteria.SurveyAnswerIdList.Add(id);
