@@ -41,7 +41,29 @@ namespace Epi.Web.MVC.Controllers
              string SurveyId = _isurveyFacade.GetSurveyAnswerResponse(responseId).SurveyResponseList[0].SurveyId;
              //put surveyId in viewbag so can be retrieved in Login/Index.cshtml
              ViewBag.SurveyId = SurveyId;
-            return View("Index");
+             if (string.IsNullOrEmpty(GetPassCode(ReturnUrl)))
+             {
+                 return View("Index");
+             }
+             else {
+
+                 Epi.Web.Common.Message.UserAuthenticationResponse result = _isurveyFacade.ValidateUser(responseId, GetPassCode(ReturnUrl));
+
+                 if (result.UserIsValid)
+                 {
+                     FormsAuthentication.SetAuthCookie(GetPassCode(ReturnUrl), false);
+                     
+
+
+                     return Redirect(ReturnUrl);
+                 }
+                 else
+                 {
+                    
+                     return View();
+                 }
+             }
+           
         }
        [HttpPost]
       
@@ -131,6 +153,16 @@ namespace Epi.Web.MVC.Controllers
            }
            return responseId;
        }
-  
+        private  string  GetPassCode(string returnUrl)
+        {
+           
+            string[] expressions = returnUrl.Split('/');
+
+            if (expressions.Length >3)
+            {
+                return expressions[3];
+            }
+            else { return ""; }
+        }
     }
 }
