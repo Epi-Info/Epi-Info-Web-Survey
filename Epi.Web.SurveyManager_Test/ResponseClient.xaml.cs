@@ -24,7 +24,7 @@ namespace Epi.Web.SurveyManager.Client
         DataColumn column;
         DataRow row;
         DataView view;
-
+        private string Url;
         public ResponseClient()
             {
             InitializeComponent();
@@ -155,8 +155,8 @@ namespace Epi.Web.SurveyManager.Client
                 Request.AnswerInfo.UserPublishKey = UserPublishKey;
                 Request.AnswerInfo.SurveyQuestionAnswerList = Values;
                 var Result = Client.SetSurveyAnswer(Request);
-                
-            
+
+                  this.Url = Result.SurveyResponseUrl + "/" + Result.SurveyResponsePassCode;
 
                 if (Result.Status == "Success")
                       {
@@ -190,6 +190,12 @@ namespace Epi.Web.SurveyManager.Client
             {
             this.Result.Document.Blocks.Clear();
             }
+
+        private void OpenResponse_Click(object sender, RoutedEventArgs e)
+        {
+
+            System.Diagnostics.Process.Start(this.Url);
+        }
         }
       
         }

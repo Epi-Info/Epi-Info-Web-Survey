@@ -50,6 +50,7 @@
                     </Grid>
                     <Label Content="Key/Values:" Height="28" HorizontalAlignment="Left" Margin="7,74,0,0" Name="label1" VerticalAlignment="Top" />
                     <Button Content="Clear Response" Height="23" HorizontalAlignment="Left" Margin="401,502,0,0" Name="button2" VerticalAlignment="Top" Width="136" Click="button2_Click" />
+                    <Button Name="OpenResponse" Content="Open Response" HorizontalAlignment="Left" Margin="26,502,0,0" VerticalAlignment="Top" Width="119" Click="OpenResponse_Click"/>
                 </Grid>
         </GroupBox>
         </Grid>
