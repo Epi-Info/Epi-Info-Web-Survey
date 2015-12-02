@@ -326,8 +326,6 @@ namespace Epi.Web.SurveyManager.Client
 
                     binding.Security.Message.ClientCredentialType = System.ServiceModel.BasicHttpMessageCredentialType.UserName;
 
-                   
-
                     result = new SurveyManagerServiceV2.ManagerServiceV2Client(binding, endpoint);
                     result.ClientCredentials.Windows.AllowedImpersonationLevel = System.Security.Principal.TokenImpersonationLevel.Impersonation;
                     result.ChannelFactory.Credentials.Windows.ClientCredential = System.Net.CredentialCache.DefaultNetworkCredentials;
@@ -384,8 +382,8 @@ namespace Epi.Web.SurveyManager.Client
                         binding.Security.Message.NegotiateServiceCredential = true;
 
                       
-
                         result = new SurveyManagerServiceV2.ManagerServiceV2Client(binding, endpoint);
+
 
                         }
                     else
@@ -425,10 +423,13 @@ namespace Epi.Web.SurveyManager.Client
 
 
                         }
-
-                       
-
+                                               
                         result = new SurveyManagerServiceV2.ManagerServiceV2Client(binding, endpoint);
+                        System.Net.ServicePointManager.ServerCertificateValidationCallback +=
+                           (se, cert, chain, sslerror) =>
+                           {
+                               return true;
+                           };
                         }
                     }
                 }
