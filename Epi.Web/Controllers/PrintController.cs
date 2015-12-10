@@ -20,6 +20,7 @@ using System.Reflection;
 using System.Diagnostics;
 using System.Reflection;
 using System.Diagnostics;
+using Epi.Web.MVC.Utility;
 namespace Epi.Web.MVC.Controllers
     {
     [Authorize]
@@ -45,9 +46,11 @@ namespace Epi.Web.MVC.Controllers
         Common.Message.SurveyControlsRequest Request = new Common.Message.SurveyControlsRequest();
         Request.SurveyId = answerResponse.SurveyResponseList[0].SurveyId;
         Common.Message.SurveyControlsResponse List = _isurveyFacade.GetSurveyControlList(Request);
-          
-        PrintResponseModel.ResponseList = Epi.Web.MVC.Utility.SurveyHelper.GetQuestionAnswerList(answerResponse.SurveyResponseList[0].XML, List);
-        PrintResponseModel.NumberOfPages = Epi.Web.MVC.Utility.SurveyHelper.GetNumberOfPags(answerResponse.SurveyResponseList[0].XML);
+
+        var QuestionAnswerList = SurveyHelper.GetQuestionAnswerList(answerResponse.SurveyResponseList[0].XML, List);
+
+        PrintResponseModel.ResponseList = SurveyHelper.SetCommentLegalValues(QuestionAnswerList, List, surveyInfoModel);
+        PrintResponseModel.NumberOfPages = SurveyHelper.GetNumberOfPags(answerResponse.SurveyResponseList[0].XML);
         PrintResponseModel.SurveyName = surveyInfoModel.SurveyName;
         PrintResponseModel.CurrentDate = DateTime.Now.ToString();
         PrintResponseModel.ResponseId = responseId;
