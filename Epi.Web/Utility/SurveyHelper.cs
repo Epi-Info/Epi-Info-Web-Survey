@@ -12,6 +12,7 @@ using System.Web;
 using System.Collections.Generic;
 using System.Xml.XPath;
 using System.Text.RegularExpressions;
+using System.Text;
 namespace Epi.Web.MVC.Utility
 {
     public class SurveyHelper
@@ -476,5 +477,86 @@ namespace Epi.Web.MVC.Utility
             return QuestionAnswerList;
 
             }
+
+        internal static List<PrintModel> SetCommentLegalValues(List<PrintModel> QuestionAnswerList, SurveyControlsResponse List, SurveyInfoModel surveyInfoModel)
+        {
+            try
+            {
+                XDocument xdoc = XDocument.Parse(surveyInfoModel.XML);
+                var CommentLegals = List.SurveyControlList.Where(x => x.ControlType == "CommentLegal");
+                if (CommentLegals.Count() > 0)
+                {
+                    foreach (var item in CommentLegals)
+                    {
+                        List<string> CommentLegalValues = GetCommentLegalValues(xdoc, item.ControlId);
+                        PrintModel AnswerValue = QuestionAnswerList.Where(x => x.Question == item.ControlPrompt).Single();
+                        QuestionAnswerList = SetValues(CommentLegalValues, AnswerValue, QuestionAnswerList);
+                    }
+
+
+                }
+            }
+            catch (Exception ex){
+                throw ex;
+            }
+
+            return QuestionAnswerList;
+        }
+
+        private static List<PrintModel> SetValues(List<string> CommentLegalValues, PrintModel AnswerValue, List<PrintModel> QuestionAnswerList)
+        {
+            string NewValue = CommentLegalValues.Where(x => x.Contains(AnswerValue.Value)).Single();
+            NewValue = NewValue.Split('-')[1];
+            QuestionAnswerList.Remove(AnswerValue);
+            AnswerValue.Value = NewValue;
+            QuestionAnswerList.Add(AnswerValue);
+
+            return QuestionAnswerList;
+        }
+        public static List<string> GetCommentLegalValues(XDocument xdocMetadata, string Name)
+        {
+            List<string> commentLegal = new List<string>();
+           
+            var fieldElementList = from fieldElements in xdocMetadata.Descendants("Field")
+                                   where fieldElements.Attribute("Name").Value == Name
+                                   select fieldElements;
+
+            foreach (var fieldElement in fieldElementList)
+            { 
+                              commentLegal =  GetValuesList(xdocMetadata, fieldElement.Attribute("Name").Value, fieldElement.Attribute("SourceTableName").Value);
+                            break;
+            }
+            return commentLegal;
+        }
+
+        private static List<string> GetValuesList(XDocument xdoc, string ControlName, string TableName)
+        {
+            StringBuilder DropDownValues = new StringBuilder();
+
+            if (!string.IsNullOrEmpty(xdoc.ToString()))
+            {
+                var _ControlValues = from _ControlValue in xdoc.Descendants("SourceTable")
+                                     where _ControlValue.Attribute("TableName").Value == TableName.ToString()
+                                     select _ControlValue;
+
+                foreach (var _ControlValue in _ControlValues)
+                {
+                    var _SourceTableValues = from _SourceTableValue in _ControlValues.Descendants("Item")
+                                             select _SourceTableValue;
+
+                    foreach (var _SourceTableValue in _SourceTableValues)
+                    {
+                        DropDownValues.Append(_SourceTableValue.FirstAttribute.Value.Trim());
+                        DropDownValues.Append("&#;");
+                    }
+                }
+            }
+
+            return DropDownValues.ToString().Split("&#;".ToCharArray(), StringSplitOptions.RemoveEmptyEntries)
+                .Distinct()
+                .ToList();
+        }
+
+
     }
 }
