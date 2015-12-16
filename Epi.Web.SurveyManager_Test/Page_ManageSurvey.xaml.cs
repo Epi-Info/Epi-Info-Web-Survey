@@ -146,6 +146,27 @@ namespace Epi.Web.SurveyManager.Client
                 }
 
 
+            else if (ServiceVersion == 3)
+            {
+                SurveyManagerServiceV3.ManagerServiceV3Client client = ServiceClient.GetClientV3();
+                Epi.Web.Common.Message.SurveyInfoResponse Result = client.GetSurveyInfo(Request);
+                SurveyInfoList = Result.SurveyInfoList;
+                SearchResultListBox.Items.Clear();
+
+
+
+                SurveyInfoResponseTextBox.AppendText(string.Format("{0} - records. \n\n", Result.SurveyInfoList.Count));
+                foreach (Epi.Web.Common.DTO.SurveyInfoDTO SurveyInfo in SurveyInfoList)
+                {
+                    //SurveyInfoResponseTextBox.AppendText(string.Format("{0} - {1} - {2}\n", SurveyInfo.SurveyId, SurveyInfo.SurveyName, SurveyInfo.ClosingDate));
+                    //System.Collections.Generic.KeyValuePair<string, string> kvp = new KeyValuePair<string, string>(SurveyInfo.SurveyId,string.Format("{0} - {1} - {2}\n", SurveyInfo.SurveyId, SurveyInfo.SurveyName, SurveyInfo.ClosingDate));
+
+                    SearchResultListBox.Items.Add(string.Format("{0} - {1} - {2}\n", SurveyInfo.SurveyId, SurveyInfo.SurveyName, SurveyInfo.ClosingDate));
+
+
+
+                }
+            }
 
 
 
@@ -322,7 +343,13 @@ namespace Epi.Web.SurveyManager.Client
                     SurveyInfoResponseTextBox.AppendText(Result.Message);
                     }
 
- 
+                else if (ServiceVersion == 3)
+                {
+                    SurveyManagerServiceV3.ManagerServiceV3Client client = ServiceClient.GetClientV3();
+                    Epi.Web.Common.Message.SurveyInfoResponse Result = client.SetSurveyInfo(Request);
+
+                    SurveyInfoResponseTextBox.AppendText(Result.Message);
+                }
 
                 }
                 catch (FaultException<CustomFaultException> cfe)

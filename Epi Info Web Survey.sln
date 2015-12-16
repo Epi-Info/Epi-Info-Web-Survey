@@ -17,6 +17,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epi.Web.WCF.SurveyService", "SurveyManagerInterface\Epi.Web.WCF.SurveyService.csproj", "{31F91938-2997-4650-8D36-71C845F1071D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epi.Web.SurveyManager.Client", "Epi.Web.SurveyManager_Test\Epi.Web.SurveyManager.Client.csproj", "{13D8FD8D-1403-4C84-823A-1E27806CAC30}"
+	ProjectSection(ProjectDependencies) = postProject
+		{91794FFF-48C0-414F-933E-34412A29EEAC} = {91794FFF-48C0-414F-933E-34412A29EEAC}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epi.Web.BLL.Test", "Epi.Web.SurveyManager.Test\Epi.Web.BLL.Test.csproj", "{163A960D-721D-4C43-B4D9-66522FFA3BAE}"
 EndProject
