@@ -131,6 +131,20 @@ namespace Epi.Web.SurveyManager.Client
                                     }
                                 MessagerichTextBox1.AppendText(Result.Message.ToString());
                                 }
+                             else if (ServiceVersion == 3)
+                                {
+                                SurveyManagerServiceV3.ManagerServiceV3Client Client = ServiceClient.GetClientV3();
+
+                                Epi.Web.Common.Message.OrganizationResponse Result = Client.SetOrganization(Request);
+                                MessagerichTextBox1.Document.Blocks.Clear();
+                                OrganizationtextBox1.Clear();
+                                GeneratedkeytextBox1.Clear();
+                                if (Result.Message.ToString().Contains("Successfully"))
+                                    {
+                                    MessagerichTextBox1.Foreground = Brushes.Green;
+                                    }
+                                MessagerichTextBox1.AppendText(Result.Message.ToString());
+                                }
                              
                         }
                         else
@@ -252,7 +266,39 @@ namespace Epi.Web.SurveyManager.Client
                                     }
                                 
                                 }
-                        }
+                            else if (ServiceVersion == 3 )
+                                
+                                {
+                                SurveyManagerServiceV3.ManagerServiceV3Client client = ServiceClient.GetClientV3();
+                                Epi.Web.Common.Message.OrganizationRequest Request = new Epi.Web.Common.Message.OrganizationRequest();
+                                Request.Organization.Organization = this.OnamelistBox1.SelectedItem.ToString();
+                                Request.AdminSecurityKey = new Guid(passwordBox1.Password);
+                                Epi.Web.Common.Message.OrganizationResponse Result = client.GetOrganization(Request);
+                                EditOtextBox1.Clear();
+                                ONameEditTextBox1.Clear();
+                                if (Result.Message != null)
+                                    {
+                                    richTextBox1.AppendText(Result.Message.ToString());
+                                    }
+
+                                if (Result.OrganizationList != null)
+                                    {
+
+                                    for (int i = 0; i < Result.OrganizationList.Count; i++)
+                                        {
+
+                                        // EditOtextBox1.Text = Cryptography.Decrypt(Result.OrganizationList[i].OrganizationKey.ToString());
+                                        EditOtextBox1.Text = Result.OrganizationList[i].OrganizationKey.ToString();
+                                        this.ONameEditTextBox1.Text = Result.OrganizationList[i].Organization;
+                                        this.checkBox1.IsChecked = Result.OrganizationList[i].IsEnabled;
+                                        }
+
+                                    }
+                                
+                                }
+                             }
+                          }
+
                         else
                         {
 

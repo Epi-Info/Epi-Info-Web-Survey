@@ -190,8 +190,13 @@ namespace Epi.Web.SurveyManager.Client
                      SurveyManagerServiceV2.ManagerServiceV2Client Client = ServiceClient.GetClientV2(pEndPointAddress, pIsAuthenticated, pIsWsHTTPBinding);
                      Epi.Web.Common.Message.OrganizationRequest Request = new Epi.Web.Common.Message.OrganizationRequest();
                      var Result  = Client.GetOrganization(Request);
-                 }  
-           
+                 }
+            else if (ServiceVersion == 3)
+            {
+                SurveyManagerServiceV3.ManagerServiceV3Client Client = ServiceClient.GetClientV3(pEndPointAddress, pIsAuthenticated, pIsWsHTTPBinding);
+                Epi.Web.Common.Message.OrganizationRequest Request = new Epi.Web.Common.Message.OrganizationRequest();
+                var Result = Client.GetOrganization(Request);
+            }  
             this.PingResultTextBox.Text = "Successfully Created Service Client";
             
             this.PingResultTextBox.Text = "Successfully Created Service Client";
