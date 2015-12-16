@@ -131,7 +131,23 @@ namespace Epi.Web.SurveyManager.Client
                 ServiceResponseTextBox.AppendText(UserPublishKey.ToString());
                 this.OpenURLButton.IsEnabled = Result.PublishInfo.IsPulished;
                 }
+            else if (ServiceVersion == 3)
+            {
+                SurveyManagerServiceV3.ManagerServiceV3Client client = ServiceClient.GetClientV3();
+                Epi.Web.Common.Message.PublishResponse Result = client.PublishSurvey(Request);
 
+                passOrganizationKey.Password = string.Empty;
+                URL = Result.PublishInfo.URL;
+                ServiceResponseTextBox.AppendText("is published: ");
+                ServiceResponseTextBox.AppendText(Result.PublishInfo.IsPulished.ToString());
+                ServiceResponseTextBox.AppendText("\nURL: ");
+                ServiceResponseTextBox.AppendText(Result.PublishInfo.URL);
+                ServiceResponseTextBox.AppendText("\nStatus Text: ");
+                ServiceResponseTextBox.AppendText(Result.PublishInfo.StatusText);
+                ServiceResponseTextBox.AppendText("\n User Publish Key: ");
+                ServiceResponseTextBox.AppendText(UserPublishKey.ToString());
+                this.OpenURLButton.IsEnabled = Result.PublishInfo.IsPulished;
+            }
 
 
 
