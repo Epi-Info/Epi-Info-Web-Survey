@@ -25,7 +25,7 @@ namespace Epi.Web.SurveyManager.Client
         public Page_Configuration()
         {
             InitializeComponent();
-
+            this.WindowTitle = "Configuration";
 
            string s = ConfigurationManager.AppSettings["EndPointAddress"];
       
