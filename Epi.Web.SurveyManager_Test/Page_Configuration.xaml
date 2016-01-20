@@ -11,13 +11,13 @@
             <ColumnDefinition Width="12*" />
             <ColumnDefinition Width="158*" />
         </Grid.ColumnDefinitions>
-        <GroupBox  Height="332" HorizontalAlignment="Left" Margin="12,12,0,0" Name="groupBox1" VerticalAlignment="Top" Width="396" Grid.ColumnSpan="3" Background="#FFE7CDC1">
-        	<GroupBox.Header>
-        		<TextBlock Text="Local Settings" FontSize="13.333" FontWeight="Bold" ></TextBlock>    	
-			</GroupBox.Header>
+        <GroupBox  Height="531" HorizontalAlignment="Left" Margin="10,10,0,0" Name="groupBox1" VerticalAlignment="Top" Width="396" Grid.ColumnSpan="3" Background="#FFE7CDC1">
+            <GroupBox.Header>
+                <TextBlock Text="Local Settings" FontSize="13.333" FontWeight="Bold" ></TextBlock>
+            </GroupBox.Header>
             <Grid>
-                <TextBox Height="54" HorizontalAlignment="Left" Margin="6,29,0,0" Name="EndPointURLTextBox" VerticalAlignment="Top" Width="372" TextWrapping="Wrap" />
-                <GroupBox Header="Binding Protocol" Height="48" HorizontalAlignment="Left" Margin="248,87,0,0" Name="ProtocolGroupBox" VerticalAlignment="Top" Width="130">
+                <TextBox Height="121" HorizontalAlignment="Left" Margin="6,29,0,0" Name="EndPointURLTextBox" VerticalAlignment="Top" Width="372" TextWrapping="Wrap" />
+                <GroupBox Header="Binding Protocol" Height="48" HorizontalAlignment="Left" Margin="254,155,0,0" Name="ProtocolGroupBox" VerticalAlignment="Top" Width="130">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="19*" />
@@ -28,7 +28,7 @@
                         <RadioButton Content="wsHTTP" Height="16" HorizontalAlignment="Left" Margin="32,6,0,0" Name="wsHTTPRadioButton" VerticalAlignment="Top" Grid.Column="2" />
                     </Grid>
                 </GroupBox>
-                <GroupBox Header="Windows Authentication" Height="48" HorizontalAlignment="Left" Margin="6,87,0,0" Name="UseWindowsAuthenticationGroupBox" VerticalAlignment="Top" Width="234">
+                <GroupBox Header="Windows Authentication" Height="48" HorizontalAlignment="Left" Margin="2,155,0,0" Name="UseWindowsAuthenticationGroupBox" VerticalAlignment="Top" Width="234">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="3*" />
@@ -39,19 +39,19 @@
                         <RadioButton Content="No" Height="16" HorizontalAlignment="Left" Margin="128,7,0,0" Name="NoRadioButton" VerticalAlignment="Top" Grid.Column="2" Checked="NoRadioButton_Checked" />
                     </Grid>
                 </GroupBox>
-                <Button Content="Ping" Height="23" HorizontalAlignment="Left" Margin="303,239,0,0" Name="PingButton" VerticalAlignment="Top" Width="75" Click="PingButton_Click" />
-                <TextBox Height="74" HorizontalAlignment="Left" Margin="6,159,0,0" Name="PingResultTextBox" VerticalAlignment="Top" Width="372" TextWrapping="Wrap" />
-                <Label Content="Ping Result:" Height="28" HorizontalAlignment="Left" Margin="4,0,0,144" Name="label1" VerticalAlignment="Bottom" />
+                <Button Content="Ping" Height="23" HorizontalAlignment="Left" Margin="306,410,0,0" Name="PingButton" VerticalAlignment="Top" Width="75" Click="PingButton_Click" />
+                <TextBox Height="144" HorizontalAlignment="Left" Margin="2,261,0,0" Name="PingResultTextBox" VerticalAlignment="Top" Width="372" TextWrapping="Wrap" />
+                <Label Content="Ping Result:" Height="28" HorizontalAlignment="Left" Margin="10,0,0,236.8" Name="label1" VerticalAlignment="Bottom" />
                 <Label Content="Manager Service URL:" Height="28" HorizontalAlignment="Left" Margin="0,6,0,0" Name="label2" VerticalAlignment="Top" />
-                <CheckBox Content="Show Web Service Testing Feature Pages" Height="16" HorizontalAlignment="Left" Margin="7,283.267,0,0" Name="ShowTestFeatruesCheckBox" VerticalAlignment="Top" Width="233" Checked="ShowTestFeatruesCheckBox_Checked" Unchecked="ShowTestFeatruesCheckBox_Unchecked" />
-                <Button Content="Update Local Settings..." Height="23" HorizontalAlignment="Left" Margin="248,279,0,0" Name="UpdateConfigButton" VerticalAlignment="Top" Width="130" Click="UpdateConfigButton_Click" />
+                <CheckBox Content="Show Web Service Testing Feature Pages" Height="16" HorizontalAlignment="Left" Margin="10,454,0,0" Name="ShowTestFeatruesCheckBox" VerticalAlignment="Top" Width="233" Checked="ShowTestFeatruesCheckBox_Checked" Unchecked="ShowTestFeatruesCheckBox_Unchecked" />
+                <Button Content="Update Local Settings..." Height="23" HorizontalAlignment="Left" Margin="251,450,0,0" Name="UpdateConfigButton" VerticalAlignment="Top" Width="130" Click="UpdateConfigButton_Click" />
             </Grid>
         </GroupBox>
-        <GroupBox Height="198" HorizontalAlignment="Left" Margin="12,365,0,0" Name="groupBox2" VerticalAlignment="Top" Width="396" Grid.ColumnSpan="3" Background="#FFE7CDC1">
+        <GroupBox  Visibility="Collapsed" Height="198" HorizontalAlignment="Left" Margin="12,365,0,0" Name="groupBox2" VerticalAlignment="Top" Width="396" Grid.ColumnSpan="3" Background="#FFE7CDC1">
             <GroupBox.Header>
-        		<TextBlock Text="Encrypt Connection String" FontSize="13.333" FontWeight="Bold" ></TextBlock>    	
-			</GroupBox.Header>
-			<Grid Margin="0,7,0,-7">
+                <TextBlock Text="Encrypt Connection String" FontSize="13.333" FontWeight="Bold" ></TextBlock>
+            </GroupBox.Header>
+            <Grid Margin="0,7,0,-7">
                 <TextBox Height="61" HorizontalAlignment="Left" Margin="4,6,0,0" Name="InputConnectionTextBox" VerticalAlignment="Top" Width="374" TextWrapping="Wrap" />
                 <TextBox Height="55" HorizontalAlignment="Left" Margin="4,73,0,0" Name="OutputConnectionTextBox" VerticalAlignment="Top" Width="374" TextWrapping="Wrap" />
                 <Button Content="Encrypt" Height="23" HorizontalAlignment="Left" Margin="303,134,0,0" Name="EncryptButton" VerticalAlignment="Top" Width="75" Click="EncryptButton_Click" />
