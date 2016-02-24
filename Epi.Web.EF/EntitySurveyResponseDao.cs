@@ -204,7 +204,7 @@ namespace Epi.Web.EF
                        if (pStatusId == 4) //   3 and 4
                        {
 
-                           responseList = Context.SurveyResponses.Where(x => x.SurveyId == Id && x.StatusId == pStatusId && x.StatusId == 3 && x.IsDraftMode == pIsDraftMode).OrderBy(x => x.DateCompleted).ToList();
+                           responseList = Context.SurveyResponses.Where(x => x.SurveyId == Id && (x.StatusId == pStatusId || x.StatusId == 3)&& x.IsDraftMode == pIsDraftMode).OrderBy(x => x.DateCompleted).ToList();
 
                        }
                     }
