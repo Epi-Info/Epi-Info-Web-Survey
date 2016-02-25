@@ -1962,12 +1962,15 @@ function OpenVideoDialog()
 function CCE_ContextOpenSimpleDialogBox(Title,Prompt,id) 
 {
  if (!eval(document.getElementById("IsMobile")))
-    {
+ {
+
         $('#ui-dialog-title-SimpledialogBox').text(Title.toString());
         $('.ui-dialog-title').text(Title.toString());
         $('#SimpleDialogBoxPrempt').text(Prompt.toString());
         $('#SimpleDialogBoxButton').text('Ok');
+     setTimeout(function () {
         $("#SimpleDialogBox").dialog("open");
+      }, 100);
      }else{
      
      CCE_ContextOpenMobileSimpleDialogBox(Title,Prompt,id) 
