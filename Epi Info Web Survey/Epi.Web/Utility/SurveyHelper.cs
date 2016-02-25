@@ -505,10 +505,13 @@ namespace Epi.Web.MVC.Utility
 
         private static List<PrintModel> SetValues(List<string> CommentLegalValues, PrintModel AnswerValue, List<PrintModel> QuestionAnswerList)
         {
+            if (!string.IsNullOrEmpty(AnswerValue.Value))
+            {
             string NewValue = CommentLegalValues.Where(x => x.Contains(AnswerValue.Value)).Single();
             NewValue = NewValue.Split('-')[1];
             QuestionAnswerList.Remove(AnswerValue);
             AnswerValue.Value = NewValue;
+            }
             QuestionAnswerList.Add(AnswerValue);
 
             return QuestionAnswerList;
