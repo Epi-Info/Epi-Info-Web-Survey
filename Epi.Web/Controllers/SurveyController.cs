@@ -302,7 +302,7 @@ namespace Epi.Web.MVC.Controllers
                             SurveyAnswer = _isurveyFacade.GetSurveyAnswerResponse(responseId).SurveyResponseList[0];
                             SurveyAnswer.IsDraftMode = surveyInfoModel.IsDraftMode;
                             form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, GetSurveyPageNumber(SurveyAnswer.XML.ToString()) == 0 ? 1 : GetSurveyPageNumber(SurveyAnswer.XML.ToString()), SurveyAnswer, isMobileDevice);
-                            UpdateModel(form);
+                           // UpdateModel(form);
                             form = SetLists(form);
                             
                             IsSaved = form.IsSaved = true;
