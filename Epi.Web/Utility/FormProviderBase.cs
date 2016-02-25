@@ -298,6 +298,9 @@ namespace Epi.Web.MVC.Utility
             field.Left = form.Width * double.Parse(_FieldTypeID.Attribute("ControlLeftPositionPercentage").Value);
             field.PromptWidth = form.Width * double.Parse(_FieldTypeID.Attribute("ControlWidthPercentage").Value);
             field.ControlWidth = form.Width * double.Parse(_FieldTypeID.Attribute("ControlWidthPercentage").Value);
+            field.InputFieldfontstyle = _FieldTypeID.Attribute("ControlFontStyle").Value;
+            field.InputFieldfontSize = double.Parse(_FieldTypeID.Attribute("ControlFontSize").Value);
+            field.InputFieldfontfamily = _FieldTypeID.Attribute("ControlFontFamily").Value;
             field.fontstyle = _FieldTypeID.Attribute("PromptFontStyle").Value;
             field.fontSize = double.Parse(_FieldTypeID.Attribute("PromptFontSize").Value);
             field.fontfamily = _FieldTypeID.Attribute("PromptFontFamily").Value;
