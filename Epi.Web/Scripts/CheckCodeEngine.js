@@ -526,7 +526,7 @@ CCE_Context.prototype.setValue = function (pName, pValue) {
         if (ControlType == 'hidden') {
             IsHidden = true;
         }
-
+        // setTimeout(function () { 
         if (cce_Symbol.Source == "datasource") {
             switch (cce_Symbol.Type) {
                 case "datepicker": //string has been converted to date for comparison with another date
@@ -576,6 +576,7 @@ CCE_Context.prototype.setValue = function (pName, pValue) {
                     //                        }
                     //                    }
                     //                    else 
+                  //  setTimeout(function () { 
                     if (pValue) 
                     {
                         if (eval(document.getElementById("IsMobile"))) 
@@ -629,7 +630,7 @@ CCE_Context.prototype.setValue = function (pName, pValue) {
                         }
                   }
                     
-                     
+                   // }, 250);
                     break;
 
                 case "checkbox":
@@ -688,6 +689,7 @@ CCE_Context.prototype.setValue = function (pName, pValue) {
 
                 case "commentlegal":
                 case "legalvalues":
+                   // setTimeout(function () {
                     if (eval(document.getElementById("IsMobile"))) {
                         if (!IsHidden) {
                             $(Jquery).val(pValue).attr("selected", true);
@@ -700,14 +702,20 @@ CCE_Context.prototype.setValue = function (pName, pValue) {
                         $(Jquery).val(pValue);
                         cce_Symbol.Value = pValue;
                     }
+                   /// }, 250);
                     break;
-
+                case "label":
+                    Jquery = Jquery + '_fieldWrapper';
+                    $(Jquery).html(pValue);
+                    cce_Symbol.Value = pValue;
+                    break;
                 default:
                     $(Jquery).val(pValue);
                     cce_Symbol.Value = pValue;
                     break;
             }
         }
+     //   }, 500);
     }
 }
 
