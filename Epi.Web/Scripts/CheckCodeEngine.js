@@ -1992,7 +1992,9 @@ function CCE_ContextOpenDialogBox(Title,MaskOpt,Identifier,Prompt)
         $('#DialogBoxOkButton').text('Ok');
         $('#DialogBoxInput').datepicker( "hide" );
          
-        $("#DialogBox").dialog("open");
+        setTimeout(function () {
+            $("#DialogBox").dialog("open");
+        }, 100);
         $('#ui-timepicker-div').hide();
 
         if(CCE_GetMaskedPattern(MaskOpt.toLocaleString()).toString() != "")
