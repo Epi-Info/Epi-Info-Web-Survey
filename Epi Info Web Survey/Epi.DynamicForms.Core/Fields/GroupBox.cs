@@ -50,7 +50,9 @@ namespace MvcDynamicForms.Fields
                 "left:" + _left.ToString() + "px;" + 
                 "top:" + _top.ToString() + "px;" + 
                 "width:" + _ControlWidth.ToString() + "px;" +
-                "height:" + _ControlHeight.ToString() + "px;");
+                "height:" + _ControlHeight.ToString() + "px;" +
+                "background:" + _BackgroundColor
+                );
             
             fieldsetTag.MergeAttributes(_inputHtmlAttributes);
             htmlBuilder.Append(fieldsetTag.ToString());
