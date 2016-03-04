@@ -26,7 +26,7 @@ namespace MvcDynamicForms.Fields
         protected string _InputFieldfontstyle;
         protected double _InputFieldfontSize;
         protected string _InputFieldfontfamily;
-
+        protected string _BackgroundColor;
         protected Dictionary<string, string> _inputHtmlAttributes = new Dictionary<string, string>();
 
         
@@ -146,6 +146,8 @@ namespace MvcDynamicForms.Fields
         public string InputFieldfontstyle { get { return this._InputFieldfontstyle; } set { this._InputFieldfontstyle = value; } }
         public double InputFieldfontSize { get { return this._InputFieldfontSize; } set { this._InputFieldfontSize = value; } }
         public string InputFieldfontfamily { get { return this._InputFieldfontfamily; } set { this._InputFieldfontfamily = value; } }
+
+        public string BackgroundColor { get { return this._BackgroundColor; } set { this._BackgroundColor = value; } }
 
         public string GetInputFieldStyle(string ControlFontStyle, double ControlFontSize, string ControlFontFamily)
         {

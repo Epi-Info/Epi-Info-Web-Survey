@@ -12,6 +12,7 @@ using System.Xml.XPath;
 using Epi.Core.EnterInterpreter;
 using Epi.Web.Common.DTO;
 using Epi.Web.Utility;
+using System.Drawing;
 
 namespace Epi.Web.MVC.Utility
 {
@@ -679,7 +680,16 @@ namespace Epi.Web.MVC.Utility
 
                     foreach (var _SourceTableValue in _SourceTableValues)
                     {
-                        DropDownValues.Append(_SourceTableValue.Attribute(CodeColumnName).Value.Trim());
+                        if (!string.IsNullOrEmpty(CodeColumnName))
+                        {
+                              DropDownValues.Append(_SourceTableValue.Attribute(CodeColumnName.ToLower()).Value.Trim());
+                        }
+                        else
+                        {
+                               DropDownValues.Append(_SourceTableValue.Attributes().FirstOrDefault().Value.Trim());
+                        
+                        
+                        }
                         DropDownValues.Append("&#;");
                     }
                 }
@@ -704,6 +714,12 @@ namespace Epi.Web.MVC.Utility
             field.fontstyle = fieldTypeID.Attribute("ControlFontStyle").Value;
             field.fontSize = double.Parse(fieldTypeID.Attribute("ControlFontSize").Value);
             field.fontfamily = fieldTypeID.Attribute("ControlFontFamily").Value;
+            if (fieldTypeID.Attribute("BackgroundColor") != null)
+            {
+                var color = Color.FromArgb((int)(int.Parse(fieldTypeID.Attribute("BackgroundColor").Value)) + unchecked((int)0xFF000000));
+               string HexValue = string.Format("#{0:X2}{1:X2}{2:X2}", color.R, color.G, color.B);
+               field.BackgroundColor = HexValue;
+            }
             AssignCommonGroupProperties(fieldTypeID, form.Width, form.Height, field as GroupBox, form);
             return (GroupBox)field;
         }
@@ -725,6 +741,12 @@ namespace Epi.Web.MVC.Utility
             field.fontSize = double.Parse(fieldTypeID.Attribute("PromptFontSize").Value);
             field.fontfamily = fieldTypeID.Attribute("PromptFontFamily").Value;
             AssignCommonGroupProperties(fieldTypeID, form.Width + 12, form.Height, field as GroupBox, form);
+            if (fieldTypeID.Attribute("BackgroundColor") != null)
+            {
+                var color = Color.FromArgb((int)(int.Parse(fieldTypeID.Attribute("BackgroundColor").Value)) + unchecked((int)0xFF000000));
+                string HexValue = string.Format("#{0:X2}{1:X2}{2:X2}", color.R, color.G, color.B);
+                field.BackgroundColor = HexValue;
+            }
             return (GroupBox)field;
         }
 
@@ -743,6 +765,9 @@ namespace Epi.Web.MVC.Utility
             groupBox.Left = form.Width * double.Parse(fieldTypeID.Attribute("ControlLeftPositionPercentage").Value);
             groupBox.ControlHeight = form.Height * double.Parse(fieldTypeID.Attribute("ControlHeightPercentage").Value) - 12;
             groupBox.ControlWidth = form.Width * double.Parse(fieldTypeID.Attribute("ControlWidthPercentage").Value) - 12;
+         
+                
+           
             SetFieldCommon(groupBox, form);
         }
 
