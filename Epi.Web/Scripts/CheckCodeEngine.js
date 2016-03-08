@@ -433,7 +433,7 @@ CCE_Context.prototype.getValue = function (pName)
 
                     case "datepicker": //string has been converted to date for comparison with another date
                         value = new Date(field.val()).valueOf();
-                        if(value == "")
+                        if (value == "" || isNaN(value))
                         {
                             return null;
                         }
@@ -446,7 +446,7 @@ CCE_Context.prototype.getValue = function (pName)
                         var refDate = "01/01/1970 ";//It is a reference date 
                         var dateTime = refDate + field.val();
                         value = new Date(dateTime).valueOf();
-                                                if(value == "")
+                        if (value == "" || isNaN(value))
                         {
                             return null;
                         }
