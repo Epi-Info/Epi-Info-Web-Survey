@@ -17,10 +17,11 @@ namespace Epi.Web.MVC.Utility
 {
     public class FormProvider : FormProviderBase
     {
-        public static Form GetForm(SurveyInfoDTO surveyInfo, int pageNumber, SurveyAnswerDTO surveyAnswer, bool isMobile = false)
+        public static Form GetForm(SurveyInfoDTO surveyInfo, int pageNumber, SurveyAnswerDTO surveyAnswer, bool isMobile = false, bool IsAndroid = false)
+            
         {
             Form form = null;
-
+            
             string surveyId = surveyInfo.SurveyId;
             string isMobileText = isMobile ? "true" : "false";
 
@@ -38,7 +39,7 @@ namespace Epi.Web.MVC.Utility
             if (form == null)
             {
                 form = new Form();
-
+                form.IsAndroid = IsAndroid;
                 if (isMobile)
                 {
                     form.IsMobile = isMobile;

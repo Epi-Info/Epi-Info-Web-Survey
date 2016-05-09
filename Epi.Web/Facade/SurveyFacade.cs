@@ -63,11 +63,11 @@ namespace Epi.Web.MVC.Facade
         /// <param name="pageNumber"></param>
         /// <param name="surveyAnswerDTO"></param>
         /// <returns></returns>
-        public MvcDynamicForms.Form GetSurveyFormData(string surveyId, int pageNumber, Epi.Web.Common.DTO.SurveyAnswerDTO surveyAnswerDTO, bool isMobileDevice = false, string callerThereby = "")
+        public MvcDynamicForms.Form GetSurveyFormData(string surveyId, int pageNumber, Epi.Web.Common.DTO.SurveyAnswerDTO surveyAnswerDTO, bool isMobileDevice = false, string callerThereby = "", bool IsAndroid = false)
         {
             Epi.Web.Common.DTO.SurveyInfoDTO surveyInfoDTO = SurveyHelper.GetSurveyInfoDTO(_surveyInfoRequest,_iSurveyInfoRepository,surveyId);
             MvcDynamicForms.Form form = null;
-            form = Epi.Web.MVC.Utility.FormProvider.GetForm(surveyInfoDTO, pageNumber, surveyAnswerDTO, isMobileDevice);
+            form = Epi.Web.MVC.Utility.FormProvider.GetForm(surveyInfoDTO, pageNumber, surveyAnswerDTO, isMobileDevice, IsAndroid);
 
             return form;
         }
@@ -164,6 +164,29 @@ namespace Epi.Web.MVC.Facade
         SurveyControlsResponse SurveyControlsResponse = _iSurveyInfoRepository.GetSurveyControlList(pRequestMessage);
 
         return SurveyControlsResponse;
+        }
+        public SurveyInfoResponse PublishExcelSurvey(SurveyInfoRequest Request) {
+
+            SurveyInfoResponse SurveyInfoResponse = _iSurveyInfoRepository.PublishExcelSurvey(Request);
+            return SurveyInfoResponse;
+        }
+
+        public SurveyAnswerResponse GetSurveyAnswerResponse(SurveyAnswerRequest Request)
+        {
+
+            SurveyAnswerResponse surveyAnswerResponse = _iSurveyAnswerRepository.GetSurveyAnswer(Request);
+            return surveyAnswerResponse;
+        }
+        public bool ValidateOrganization(OrganizationRequest Request)
+        {
+            bool IsValid = _iSurveyInfoRepository.ValidateOrganization(Request);
+            return IsValid;
+        }
+        public SurveyInfoResponse GetAllSurveysByOrgKey(string OrgKey) 
+        {
+
+            SurveyInfoResponse SurveyInfoResponse = _iSurveyInfoRepository.GetAllSurveysByOrgKey(OrgKey);
+            return SurveyInfoResponse;
         }
     }
 }

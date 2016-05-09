@@ -40,10 +40,11 @@ namespace Epi.Web.MVC.Controllers
                 string SurveyMode = "";
                 SurveyInfoModel surveyInfoModel = GetSurveyInfo(surveyId);
                 System.Text.RegularExpressions.Regex regex = new System.Text.RegularExpressions.Regex(@"(\r\n|\r|\n)+");
-
+                if (surveyInfoModel.ExitText != null)
+                {
                 string exitText = regex.Replace(surveyInfoModel.ExitText.Replace("  ", " &nbsp;"), "<br />");
                 surveyInfoModel.ExitText = MvcHtmlString.Create(exitText).ToString();
-
+                }
                 string strPassCode = Epi.Web.MVC.Utility.SurveyHelper.GetPassCode();
 
                 surveyInfoModel.PassCode = strPassCode;

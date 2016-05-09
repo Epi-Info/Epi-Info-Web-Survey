@@ -5,7 +5,7 @@ using System.Web;
 using System.Configuration;
 using System.ServiceModel;
 using System.ServiceModel.Configuration;
-using Epi.Web.DataServiceClient;
+//using Epi.Web.DataServiceClient;
 namespace Epi.Web.MVC.Repositories.Core
 {
     /// <summary>

@@ -49,7 +49,7 @@ namespace Epi.Web.MVC
             if (IsIntegrated)
             {
                 container.RegisterType<Epi.Web.WCF.SurveyService.IDataService, Epi.Web.WCF.SurveyService.DataService>();
-                
+                container.RegisterType<Epi.Web.WCF.SurveyService.IManagerServiceV4 , Epi.Web.WCF.SurveyService.ManagerServiceV4>();
                 container.RegisterType<SurveyResponseXML, SurveyResponseXML>()
                     .Configure<InjectedMembers>()
                     .ConfigureInjectionFor<SurveyResponseXML>(new InjectionConstructor());
@@ -60,9 +60,9 @@ namespace Epi.Web.MVC
             }
             else
             {
-                container.RegisterType<Epi.Web.DataServiceClient.IDataService, Epi.Web.DataServiceClient.DataServiceClient>()
+                container.RegisterType<Epi.Web.MVC.DataServiceClient.IDataService, Epi.Web.MVC.DataServiceClient.DataServiceClient>()
                 .Configure<InjectedMembers>()
-                .ConfigureInjectionFor<Epi.Web.DataServiceClient.DataServiceClient>(new InjectionConstructor(ConfigurationManager.AppSettings["ENDPOINT_USED"]));
+                .ConfigureInjectionFor<Epi.Web.MVC.DataServiceClient.DataServiceClient>(new InjectionConstructor(ConfigurationManager.AppSettings["ENDPOINT_USED"]));
                 container.RegisterType<Epi.Web.MVC.Repositories.Core.ISurveyInfoRepository, Epi.Web.MVC.Repositories.SurveyInfoRepository>();
             }
 

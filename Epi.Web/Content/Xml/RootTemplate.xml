@@ -1,0 +1,16 @@
+﻿
+<Template Name="ExcelBasedForms" Description="" CreateDate="Wednesday, February 10, 2016 9:56:37 AM" Level="Project">
+<Project Id="" Name="ExcelBasedForms" Location="" Description="" EpiVersion="" CreateDate="" ControlFontBold="False" 
+         ControlFontItalics="False" ControlFontName="Arial" ControlFontSize="10.25" DefaultLabelAlign="Vertical" DefaultPageHeight="1016" 
+         DefaultPageOrientation="Portrait" DefaultPageWidth="780" EditorFontBold="False" EditorFontItalics="False" EditorFontName="Verdana" EditorFontSize="8.25">
+  <CollectedData>
+    <Database Source="" DataDriver="" />
+  </CollectedData>
+  <Metadata Source="" />
+  <EnterMakeviewInterpreter Source="Epi.Core.EnterInterpreter" />
+  <View ViewId="1" Name="ExcelBasedForm" IsRelatedView="False" CheckCode="" Width="549" Height="780" Orientation="Landscape" LabelAlign="Vertical">
+    
+  </View>
+</Project>
+<Backgrounds TableName="Backgrounds" />
+</Template>

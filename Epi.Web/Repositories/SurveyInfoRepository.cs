@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Epi.Web.MVC.Repositories.Core;
-using Epi.Web.DataServiceClient;
+using Epi.Web.MVC.DataServiceClient;
 using Epi.Web.Common.Message;
 using Epi.Web.Common.Exception;
 using System.ServiceModel;
-using Epi.Web.DataServiceClient;
+//using Epi.Web.WCF.SurveyService;
 using System.Web.Caching;
 using System.Configuration;
 
@@ -18,11 +18,12 @@ namespace Epi.Web.MVC.Repositories
 
 
 
-        private Epi.Web.DataServiceClient.IDataService _iDataService;
-
-        public SurveyInfoRepository(Epi.Web.DataServiceClient.IDataService iDataService)
+        private   IDataService _iDataService;
+        private Epi.Web.WCF.SurveyService.IManagerServiceV4 _iManagerService;
+        public SurveyInfoRepository(IDataService iDataService, Epi.Web.WCF.SurveyService.IManagerServiceV4 iManagerService)
         {
             _iDataService = iDataService;
+            _iManagerService = iManagerService;
         }
         
         /// <summary>
@@ -130,6 +131,92 @@ namespace Epi.Web.MVC.Repositories
                 throw ex;
                 }
             }
+        public SurveyInfoResponse PublishExcelSurvey(SurveyInfoRequest pRequest)
+        {
+            try
+            {
+                SurveyInfoResponse ControlListObj = _iManagerService.SetSurveyInfo(pRequest);
+                return ControlListObj;
+            }
+            catch (FaultException<CustomFaultException> cfe)
+            {
+                throw cfe;
+            }
+            catch (FaultException fe)
+            {
+                throw fe;
+            }
+            catch (CommunicationException ce)
+            {
+                throw ce;
+            }
+            catch (TimeoutException te)
+            {
+                throw te;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public bool ValidateOrganization(OrganizationRequest Request)
+        {
+            try
+            {
+                bool IsValid =  _iManagerService.ValidateOrganization(Request);
+                return IsValid;
+            }
+            catch (FaultException<CustomFaultException> cfe)
+            {
+                throw cfe;
+            }
+            catch (FaultException fe)
+            {
+                throw fe;
+            }
+            catch (CommunicationException ce)
+            {
+                throw ce;
+            }
+            catch (TimeoutException te)
+            {
+                throw te;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public SurveyInfoResponse GetAllSurveysByOrgKey(string OrgKey)
+        {
+            try
+            {
+                SurveyInfoResponse SurveyInfoResponse =  _iManagerService.GetAllSurveysByOrgKey(OrgKey);
+                return SurveyInfoResponse;
+            }
+            catch (FaultException<CustomFaultException> cfe)
+            {
+                throw cfe;
+            }
+            catch (FaultException fe)
+            {
+                throw fe;
+            }
+            catch (CommunicationException ce)
+            {
+                throw ce;
+            }
+            catch (TimeoutException te)
+            {
+                throw te;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+ 
         #region stubcode
             public List<Common.DTO.SurveyInfoDTO> GetList(Criterion criterion = null)
             {

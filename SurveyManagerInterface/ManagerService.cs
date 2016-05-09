@@ -210,6 +210,10 @@ namespace Epi.Web.WCF.SurveyService
 
                      if (ISValidOrg )
                     {
+                        if (request.Criteria.FileInputStream != null)
+                        {
+                            validSurvey = true;
+                        }
 
                                  if (validSurvey)
                                 {
@@ -217,13 +221,35 @@ namespace Epi.Web.WCF.SurveyService
 
                                     if (request.Action == "Create")
                                     {
-                                        Implementation.InsertSurveyInfo(SurveyInfo);
-                                        response.SurveyInfoList.Add(Mapper.ToDataTransferObject(SurveyInfo));
+                                        if (request.Criteria.FileInputStream == null)
+                                        {
+                                            Implementation.InsertSurveyInfo(SurveyInfo);
+                                            response.SurveyInfoList.Add(Mapper.ToDataTransferObject(SurveyInfo));
+                                        }
+                                        else
+                                        {
+                                            // Excel 
+                                            string SurveyFile = Implementation.GetSurveyXml(request.Criteria.FileInputStream);
+                                            SurveyInfo.XML = SurveyFile;
+                                            Implementation.InsertSurveyInfo(SurveyInfo);
+                                            response.SurveyInfoList.Add(Mapper.ToDataTransferObject(SurveyInfo));
+                                        }
                                     }
                                     else if (request.Action == "Update")
                                     {
-                                        Implementation.UpdateSurveyInfo(SurveyInfo);
-                                        response.SurveyInfoList.Add(Mapper.ToDataTransferObject(SurveyInfo));
+                                        if (request.Criteria.FileInputStream == null)
+                                        {
+                                            Implementation.UpdateSurveyInfo(SurveyInfo);
+                                            response.SurveyInfoList.Add(Mapper.ToDataTransferObject(SurveyInfo));
+                                        }
+                                        else
+                                        {
+                                            // Excel 
+                                            string SurveyFile = Implementation.GetSurveyXml(request.Criteria.FileInputStream);
+                                            SurveyInfo.XML = SurveyFile;
+                                            Implementation.UpdateSurveyInfo(SurveyInfo);
+                                            response.SurveyInfoList.Add(Mapper.ToDataTransferObject(SurveyInfo));
+                                        }
                                         response.Message = SurveyInfo.StatusText;
                                          
                                     }

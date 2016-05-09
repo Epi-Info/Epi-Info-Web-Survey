@@ -64,7 +64,10 @@
         $("#myform").submit();
     }
 
-   
+    $(document).bind('mobileinit', function () {
+        $.mobile.selectmenu.prototype.options.nativeMenu = false;
+        alert();
+    });
 
     $(document).ready(function () {
         // a workaround for a flaw in the demo system (http://dev.jqueryui.com/ticket/4375), ignore!
@@ -75,7 +78,14 @@
 
       //  $( "#myform" ).validate();
 
-
+        ////
+        //alert('');
+        //$("select").attr('data-role', 'main');
+        //$("select").attr('data-native-menu', 'false');
+        //$("select").selectmenu('refresh');
+       // $.mobile.selectmenu.prototype.options.nativeMenu = false;
+        
+        ////
 
         $("#dialog").dialog({
             autoOpen: false,

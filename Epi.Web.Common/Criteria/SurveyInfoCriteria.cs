@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 using System.Collections.Generic;
-
+using System.Web;
 namespace Epi.Web.Common.Criteria
 {
     /// <summary>
@@ -84,7 +84,8 @@ namespace Epi.Web.Common.Criteria
 
        
 
-
+        [DataMember]
+        public HttpPostedFileBase FileInputStream  { get; set; }
 
     }
 }
