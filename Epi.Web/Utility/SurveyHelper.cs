@@ -446,10 +446,13 @@ namespace Epi.Web.MVC.Utility
                     if (Type)
                         {
                     string Question = List.SurveyControlList.Single(x => x.ControlId == ControlId).ControlPrompt;
+                    string ControlType = List.SurveyControlList.Single(x => x.ControlId == ControlId).ControlType;
                     PrintModel PrintModel = new PrintModel();
 
                     PrintModel.PageNumber = i;
                     PrintModel.Question = Question;
+                    PrintModel.ControlName = ControlId;
+                    PrintModel.ControlType =  ControlType;
                     if (!YesNoType)
                         {
                             PrintModel.Value = item.Value;

@@ -40,8 +40,12 @@ namespace Epi.Web.MVC.Controllers
             {
                 string calledThereby = "SurveyController.Index[HttpGet]";
                 string version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+                bool IsAndroid = false;
                 ViewBag.Version = version;
-
+                if (this.Request.UserAgent.IndexOf("Android", StringComparison.OrdinalIgnoreCase) >= 0)
+                {
+                    IsAndroid = true;
+                }
                 bool isMobileDevice = false;
                 isMobileDevice = this.Request.Browser.IsMobileDevice;
                 
@@ -70,7 +74,7 @@ namespace Epi.Web.MVC.Controllers
 
                     case PreValidationResultEnum.Success:
                     default:
-                        var form = _isurveyFacade.GetSurveyFormData(surveyAnswerDTO.SurveyId, pageNumber, surveyAnswerDTO, isMobileDevice);
+                        var form = _isurveyFacade.GetSurveyFormData(surveyAnswerDTO.SurveyId, pageNumber, surveyAnswerDTO, isMobileDevice,"",IsAndroid);
                         TempData["Width"] = form.Width + 5;
 
                         if (TempData.ContainsKey("isredirect") && !string.IsNullOrWhiteSpace(TempData["isredirect"].ToString()))
@@ -144,7 +148,7 @@ namespace Epi.Web.MVC.Controllers
                                     _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId.ToString(), form, surveyAnswerDTO, false, false, 0);
                                     //Getting the updated Xml and load the form from the new Response XML
                                     surveyAnswerDTO = GetSurveyAnswer(responseId);
-                                    form = _isurveyFacade.GetSurveyFormData(surveyAnswerDTO.SurveyId, pageNumber, surveyAnswerDTO, isMobileDevice);
+                                    form = _isurveyFacade.GetSurveyFormData(surveyAnswerDTO.SurveyId, pageNumber, surveyAnswerDTO, isMobileDevice,"",IsAndroid);
                                     }
                                 catch (Exception ex)
                                     {
@@ -183,7 +187,9 @@ namespace Epi.Web.MVC.Controllers
         public ActionResult Index(SurveyAnswerModel surveyAnswerModel, string Submitbutton, string Savebutton, string ContinueButton, string PreviousButton, int PageNumber = 0)
         {
             ActionResult actionResult = null;
+            bool IsAndroid = false;
             
+           
             string version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
             ViewBag.Version = version;
             string responseId = surveyAnswerModel.ResponseId;
@@ -193,8 +199,12 @@ namespace Epi.Web.MVC.Controllers
             if (isMobileDevice == false)
             {
                 isMobileDevice = Epi.Web.MVC.Utility.SurveyHelper.IsMobileDevice(this.Request.UserAgent.ToString());
-            } 
+            }
             
+            if (this.Request.UserAgent.IndexOf("Android", StringComparison.OrdinalIgnoreCase) >= 0)
+            {
+                IsAndroid = true;
+            }
             try
             {
                 Epi.Web.Common.DTO.SurveyAnswerDTO SurveyAnswer = _isurveyFacade.GetSurveyAnswerResponse(responseId).SurveyResponseList[0];
@@ -245,12 +255,12 @@ namespace Epi.Web.MVC.Controllers
                         {
                         if (NewPageNumber != CurrentPageNum)
                             {
-                            form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, NewPageNumber, SurveyAnswer, isMobileDevice);
+                            form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, NewPageNumber, SurveyAnswer, isMobileDevice,"",IsAndroid );
                             Epi.Web.MVC.Utility.FormProvider.UpdateHiddenFields(NewPageNumber, form, XDocument.Parse(surveyInfoModel.XML), XDocument.Parse(SurveyAnswer.XML), this.ControllerContext.RequestContext.HttpContext.Request.Form);
                             }
                             else
                             {
-                                form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, CurrentPageNum, SurveyAnswer, isMobileDevice);
+                                form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, CurrentPageNum, SurveyAnswer, isMobileDevice,"",IsAndroid);
                                 Epi.Web.MVC.Utility.FormProvider.UpdateHiddenFields(CurrentPageNum, form, XDocument.Parse(surveyInfoModel.XML), XDocument.Parse(SurveyAnswer.XML), this.ControllerContext.RequestContext.HttpContext.Request.Form);
                             }
                             
@@ -260,7 +270,7 @@ namespace Epi.Web.MVC.Controllers
                         {
 
 
-                        form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, CurrentPageNum, SurveyAnswer, isMobileDevice);
+                        form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, CurrentPageNum, SurveyAnswer, isMobileDevice,"",IsAndroid );
                         form.ClearAllErrors();
                         Epi.Web.MVC.Utility.FormProvider.UpdateHiddenFields(CurrentPageNum, form, XDocument.Parse(surveyInfoModel.XML), XDocument.Parse(SurveyAnswer.XML), this.ControllerContext.RequestContext.HttpContext.Request.Form);
 
@@ -301,8 +311,8 @@ namespace Epi.Web.MVC.Controllers
                         {
                             SurveyAnswer = _isurveyFacade.GetSurveyAnswerResponse(responseId).SurveyResponseList[0];
                             SurveyAnswer.IsDraftMode = surveyInfoModel.IsDraftMode;
-                            form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, GetSurveyPageNumber(SurveyAnswer.XML.ToString()) == 0 ? 1 : GetSurveyPageNumber(SurveyAnswer.XML.ToString()), SurveyAnswer, isMobileDevice);
-                           // UpdateModel(form);
+                            form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, GetSurveyPageNumber(SurveyAnswer.XML.ToString()) == 0 ? 1 : GetSurveyPageNumber(SurveyAnswer.XML.ToString()), SurveyAnswer, isMobileDevice,"",IsAndroid);
+                            UpdateModel(form);
                             form = SetLists(form);
                             
                             IsSaved = form.IsSaved = true;
@@ -334,7 +344,7 @@ namespace Epi.Web.MVC.Controllers
                             {
                             SurveyAnswer = _isurveyFacade.GetSurveyAnswerResponse(responseId).SurveyResponseList[0];
                             SurveyAnswer.IsDraftMode = surveyInfoModel.IsDraftMode;
-                            form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, GetSurveyPageNumber(SurveyAnswer.XML.ToString()) == 0 ? 1 : GetSurveyPageNumber(SurveyAnswer.XML.ToString()), SurveyAnswer, isMobileDevice);
+                            form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, GetSurveyPageNumber(SurveyAnswer.XML.ToString()) == 0 ? 1 : GetSurveyPageNumber(SurveyAnswer.XML.ToString()), SurveyAnswer, isMobileDevice,"",IsAndroid );
                             UpdateModel(form);
                             form = SetLists(form);
 
@@ -370,7 +380,7 @@ namespace Epi.Web.MVC.Controllers
                             _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId, form, SurveyAnswer, IsSubmited, IsSaved, PageNumber);
 
                             SurveyAnswer = _isurveyFacade.GetSurveyAnswerResponse(responseId).SurveyResponseList[0];
-                            form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, PageNumber, SurveyAnswer, isMobileDevice);
+                            form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, PageNumber, SurveyAnswer, isMobileDevice,"",IsAndroid );
                             TempData["Width"] = form.Width + 5;
                             actionResult = View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
                             return actionResult;
@@ -429,7 +439,7 @@ namespace Epi.Web.MVC.Controllers
                                 Common.Message.SurveyAnswerResponse answerResponse = _isurveyFacade.GetSurveyAnswerResponse(responseId);
                                 SurveyAnswer = answerResponse.SurveyResponseList[0];
                                 
-                                form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, PageNumber, SurveyAnswer, isMobileDevice);
+                                form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, PageNumber, SurveyAnswer, isMobileDevice,"",IsAndroid );
                                 form = SetLists(form);
                                 
                                 TempData["Width"] = form.Width + 5;
