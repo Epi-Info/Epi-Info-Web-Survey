@@ -1,0 +1,17 @@
+﻿<SurveyResponse SurveyId="" LastPageVisited="5" HiddenFieldsList="" HighlightedFieldsList="" DisabledFieldsList="" RequiredFieldsList="patient_name,onset_date" RecordBeforeFlag="">
+  <Page PageNumber="3" PageId="3">
+    <ResponseDetail QuestionName="sex">Male</ResponseDetail>
+  </Page>
+  <Page PageNumber="4" PageId="4">
+    <ResponseDetail QuestionName="pregnant" />
+  </Page>
+  <Page PageNumber="1" PageId="1">
+    <ResponseDetail QuestionName="patient_name">bnm</ResponseDetail>
+  </Page>
+  <Page PageNumber="5" PageId="5">
+    <ResponseDetail QuestionName="onset_date">02/17/2016</ResponseDetail>
+  </Page>
+  <Page PageNumber="2" PageId="2">
+    <ResponseDetail QuestionName="age">77</ResponseDetail>
+  </Page>
+</SurveyResponse>

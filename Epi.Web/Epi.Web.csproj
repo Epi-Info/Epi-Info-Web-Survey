@@ -15,11 +15,19 @@
     <AssemblyName>Epi.Web.MVC</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>false</UseIISExpress>
+    <UseIISExpress>true</UseIISExpress>
     <SccProjectName>%24/EpiInfoWebSurvey/Epi Info Web Survey/Epi.Web</SccProjectName>
     <SccLocalPath>.</SccLocalPath>
     <SccAuxPath>https://tfs.codeplex.com/tfs/tfs04</SccAuxPath>
     <SccProvider>{4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}</SccProvider>
+    <IISExpressSSLPort>
+    </IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
+    <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
+    <UseGlobalApplicationHostFile />
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -43,10 +51,28 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\EpiInfo.Plugin.dll</HintPath>
     </Reference>
+    <Reference Include="EPPlus">
+      <HintPath>..\packages\EPPlus.4.0.5\lib\net20\EPPlus.dll</HintPath>
+    </Reference>
     <Reference Include="ImranB.ModelBindingFix">
       <HintPath>..\packages\ImranB.ModelBindingFix.1.1.0\lib\ImranB.ModelBindingFix.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Data.Edm, Version=5.6.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.Data.Edm.5.6.2\lib\net40\Microsoft.Data.Edm.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Data.OData, Version=5.6.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.Data.OData.5.6.2\lib\net40\Microsoft.Data.OData.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Data.Services.Client, Version=5.6.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.Data.Services.Client.5.6.2\lib\net40\Microsoft.Data.Services.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\CommonServiceLocator.1.0\lib\NET35\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
@@ -59,8 +85,21 @@
     <Reference Include="Microsoft.Web.Mvc.FixedDisplayModes, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Mvc.FixedDisplayModes.1.0.1\lib\net40\Microsoft.Web.Mvc.FixedDisplayModes.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.WindowsAzure.Configuration">
+      <HintPath>..\packages\Microsoft.WindowsAzure.ConfigurationManager.2.0.3\lib\net40\Microsoft.WindowsAzure.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAzure.Diagnostics, Version=2.8.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAzure.ServiceRuntime, Version=2.7.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAzure.Storage">
+      <HintPath>..\packages\WindowsAzure.Storage.4.3.0\lib\net40\Microsoft.WindowsAzure.Storage.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.5.0.8\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -78,6 +117,10 @@
     <Reference Include="System.Runtime.Caching" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Spatial, Version=5.6.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\System.Spatial.5.6.2\lib\net40\System.Spatial.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -146,9 +189,11 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Controllers\SurveyManagerController.cs" />
     <Compile Include="Controllers\PrintController.cs" />
     <Compile Include="Models\PrintModel.cs" />
     <Compile Include="Models\PrintResponseModel.cs" />
+    <Compile Include="Models\PublishModel.cs" />
     <Compile Include="Models\StateModel.cs" />
     <Compile Include="Repositories\CacheDependencyRepository.cs" />
     <Compile Include="Constants\Constant.cs" />
@@ -184,11 +229,16 @@
     <Compile Include="Repositories\Core\Criterion.cs" />
     <Compile Include="Repositories\Core\IRepository.cs" />
     <Compile Include="Repositories\Core\ISurveyInfoRepository.cs" />
-    <Compile Include="Repositories\Core\ISurveyResponseRepository.cs" />
+    <Compile Include="Repositories\Core\ISurveyAnswerRepository.cs" />
     <Compile Include="Repositories\Core\RepositoryBase.cs" />
     <Compile Include="Repositories\SurveyAnswerRepository.cs" />
     <Compile Include="Repositories\SurveyInfoRepository.cs" />
     <Compile Include="Service References\DataServiceClient\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\SurveyManagerServiceV4\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -227,6 +277,7 @@
     <Content Include="bin\System.Web.WebPages.Razor.dll" />
     <Content Include="bin\Unity.Mvc3.dll" />
     <Content Include="bin\WebGrease.dll" />
+    <Content Include="Content\CheckCode\IFElse.txt" />
     <Content Include="Content\css\demos.css" />
     <Content Include="Content\css\epistyle-blue.css" />
     <Content Include="Content\css\epistyle.css" />
@@ -285,7 +336,6 @@
     <Content Include="Content\images\button_check.png" />
     <Content Include="Content\images\cdclogo.png" />
     <Content Include="Content\images\codebk.png" />
-    <Content Include="Content\images\cstelogo.jpg" />
     <Content Include="Content\images\DRAFT.png" />
     <Content Include="Content\images\epi.png" />
     <Content Include="Content\images\error.png" />
@@ -297,6 +347,7 @@
     <Content Include="Content\images\icons-18-white.png" />
     <Content Include="Content\images\icons-36-black.png" />
     <Content Include="Content\images\icons-36-white.png" />
+    <Content Include="Content\images\info.png" />
     <Content Include="Content\images\logo_dhhs.gif" />
     <Content Include="Content\images\next.png" />
     <Content Include="Content\images\next_d.png" />
@@ -352,6 +403,13 @@
     <Content Include="Content\themes\D.min.css" />
     <Content Include="Content\themes\EpiTheme.css" />
     <Content Include="Content\themes\EpiTheme.min.css" />
+    <Content Include="Content\Xml\PageTemplate.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Content\Xml\Response.xml" />
+    <Content Include="Content\Xml\RootTemplate.xml" />
+    <Content Include="Content\Xml\SourceTable.xml" />
+    <Content Include="Content\Xml\SurveyXml.xml" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\autoNumeric-1.7.4.js" />
@@ -416,27 +474,47 @@
     <Content Include="Scripts\PIE.htc" />
     <Content Include="Scripts\Print.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="Content\Text\Doc2.pdf" />
+    <Content Include="Content\Text\Survey.xlsx" />
     <None Include="Properties\DataSources\Epi.Web.Common.Message.CacheDependencyResponse.datasource" />
     <None Include="Properties\DataSources\Epi.Web.Common.Message.OrganizationAccountResponse.datasource" />
+    <Content Include="Properties\DataSources\Epi.Web.Common.Message.OrganizationResponse.datasource" />
+    <Content Include="Properties\DataSources\Epi.Web.Common.Message.PreFilledAnswerResponse.datasource" />
+    <Content Include="Properties\DataSources\Epi.Web.Common.Message.PublishResponse1.datasource" />
     <None Include="Properties\DataSources\Epi.Web.Common.Message.SurveyAnswerResponse.datasource" />
     <None Include="Properties\DataSources\Epi.Web.Common.Message.SurveyControlsResponse.datasource" />
     <None Include="Properties\DataSources\Epi.Web.Common.Message.SurveyInfoResponse.datasource" />
     <None Include="Properties\DataSources\Epi.Web.Common.Message.UserAuthenticationResponse.datasource" />
+    <None Include="Properties\PublishProfiles\EIWS %282%29.pubxml" />
+    <None Include="Properties\PublishProfiles\EIWS.pubxml" />
+    <None Include="Properties\PublishProfiles\EIWSSandbox.pubxml" />
     <None Include="Properties\PublishProfiles\Profile1.pubxml" />
-    <None Include="Service References\DataServiceClient\Epi.Web.MVC.DataServiceClient.CacheDependencyResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
+    <None Include="Service References\DataServiceClient\DataService.wsdl" />
+    <None Include="Service References\DataServiceClient\SurveyDataService.xsd">
+      <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\DataServiceClient\Epi.Web.MVC.DataServiceClient.OrganizationAccountResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
+    <None Include="Service References\DataServiceClient\SurveyDataService1.xsd">
+      <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\DataServiceClient\Epi.Web.MVC.DataServiceClient.SurveyAnswerResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
+    <None Include="Service References\DataServiceClient\SurveyDataService2.xsd">
+      <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\DataServiceClient\Epi.Web.MVC.DataServiceClient.SurveyInfoResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
+    <None Include="Service References\DataServiceClient\SurveyDataService3.xsd">
+      <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\DataServiceClient\Epi.Web.MVC.DataServiceClient.UserAuthenticationResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
+    <None Include="Service References\DataServiceClient\SurveyDataService4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DataServiceClient\SurveyDataService5.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SurveyManagerServiceV4\ManagerServiceV4.wsdl" />
+    <None Include="Service References\SurveyManagerServiceV4\SurveyManagerServiceV4.disco" />
+    <None Include="Service References\SurveyManagerServiceV4\configuration91.svcinfo" />
+    <None Include="Service References\SurveyManagerServiceV4\configuration.svcinfo" />
+    <None Include="Service References\SurveyManagerServiceV4\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <None Include="Service References\DataServiceClient\SurveyDataService.disco" />
     <None Include="Service References\DataServiceClient\configuration91.svcinfo" />
@@ -449,6 +527,7 @@
     <Content Include="SurveyManagerService.svc" />
     <Content Include="SurveyManagerServiceV2.svc" />
     <Content Include="SurveyManagerServiceV3.svc" />
+    <Content Include="SurveyManagerServiceV4.svc" />
     <Content Include="Unity.Mvc3.README.txt" />
     <Content Include="Views\Shared\footer.htm" />
     <Content Include="Views\Shared\header.htm" />
@@ -486,27 +565,33 @@
     <Content Include="Views\EIWST\View.Mobile.cshtml" />
     <Content Include="Views\Shared\FooterPartial.cshtml" />
     <Content Include="Views\Account\Index.cshtml" />
-    <None Include="Service References\DataServiceClient\SurveyDataService4.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\DataServiceClient\SurveyDataService41.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <Content Include="Views\Survey\Print.cshtml" />
-    <None Include="Service References\DataServiceClient\SurveyDataService42.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\DataServiceClient\SurveyDataService43.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\DataServiceClient\SurveyDataService44.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <Content Include="Views\Print\Index.cshtml" />
     <Content Include="Views\Account\AccessDenied.cshtml" />
+    <Content Include="Views\SurveyManager\Index.cshtml" />
+    <Content Include="Views\DownLoad\Index.cshtml" />
+    <None Include="Service References\SurveyManagerServiceV4\SurveyManagerServiceV4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SurveyManagerServiceV4\SurveyManagerServiceV41.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SurveyManagerServiceV4\SurveyManagerServiceV42.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SurveyManagerServiceV4\SurveyManagerServiceV43.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SurveyManagerServiceV4\SurveyManagerServiceV44.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SurveyManagerServiceV4\SurveyManagerServiceV45.xsd">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="obj\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -524,7 +609,7 @@
       <Name>Epi.Web.CheckCodeEngine</Name>
     </ProjectReference>
     <ProjectReference Include="..\Epi.Web.Common\Epi.Web.Common.csproj">
-      <Project>{6E2F059B-C1CD-401F-8A63-DC2933CFB0D8}</Project>
+      <Project>{6e2f059b-c1cd-401f-8a63-dc2933cfb0d8}</Project>
       <Name>Epi.Web.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\Epi.Web.EF\Epi.Web.EF.csproj">
@@ -532,31 +617,17 @@
       <Name>Epi.Web.EF</Name>
     </ProjectReference>
     <ProjectReference Include="..\Epi.Web.Interfaces\Epi.Web.Interfaces.csproj">
-      <Project>{B8AF69BD-3CE1-4AA5-875D-3FB87C7FCE44}</Project>
+      <Project>{b8af69bd-3ce1-4aa5-875d-3fb87c7fce44}</Project>
       <Name>Epi.Web.Interfaces</Name>
     </ProjectReference>
     <ProjectReference Include="..\SurveyManagerInterface\Epi.Web.WCF.SurveyService.csproj">
-      <Project>{31F91938-2997-4650-8D36-71C845F1071D}</Project>
+      <Project>{31f91938-2997-4650-8d36-71c845f1071d}</Project>
       <Name>Epi.Web.WCF.SurveyService</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\DataServiceClient\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\DataServiceClient\DataService.wsdl" />
-    <None Include="Service References\DataServiceClient\SurveyDataService.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\DataServiceClient\SurveyDataService1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\DataServiceClient\SurveyDataService2.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\DataServiceClient\SurveyDataService3.xsd">
-      <SubType>Designer</SubType>
-    </None>
+    <WCFMetadataStorage Include="Service References\SurveyManagerServiceV4\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -572,11 +643,27 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <SaveServerSettingsInUserFile>True</SaveServerSettingsInUserFile>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:59584/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

@@ -30,6 +30,7 @@ namespace MvcDynamicForms.Fields
         protected bool _IsHighlighted;
         protected bool _IsDisabled;
         protected bool _IsPlaceHolder;
+        protected bool _IsAndroidfield;
         protected string _name;
         protected string _key = Guid.NewGuid().ToString();
 
@@ -126,7 +127,8 @@ namespace MvcDynamicForms.Fields
         public bool IsHidden { get { return this._IsHidden; } set { this._IsHidden = value; } }
         public bool IsHighlighted { get { return this._IsHighlighted; } set { this._IsHighlighted = value; } }
         public bool IsDisabled { get { return this._IsDisabled; } set { this._IsDisabled = value; } }
-
+        public bool IsAndroidfield { get { return this._IsAndroidfield; } set { this._IsAndroidfield = value; } }
+         
         public bool IsPlaceHolder  { get { return this._IsPlaceHolder; } set { this._IsPlaceHolder = value; } }
         
         /// <summary>

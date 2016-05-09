@@ -15,5 +15,11 @@ namespace Epi.Web.MVC.Repositories.Core
         SurveyInfoResponse GetSurveyInfo(SurveyInfoRequest pRequestId);
 
         SurveyControlsResponse GetSurveyControlList(SurveyControlsRequest pRequestMessage);
+
+        SurveyInfoResponse PublishExcelSurvey(SurveyInfoRequest pRequest);
+
+        bool ValidateOrganization(OrganizationRequest Request);
+
+        SurveyInfoResponse GetAllSurveysByOrgKey(string OrgKey);
     }
 }

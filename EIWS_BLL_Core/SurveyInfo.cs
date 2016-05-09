@@ -6,6 +6,7 @@ using Epi.Web.Common.BusinessObject;
 using Epi.Web.Common.Criteria;
 using System.Xml;
 using System.Xml.Linq;
+using System.Web;
 namespace Epi.Web.BLL
 {
 
@@ -208,6 +209,16 @@ namespace Epi.Web.BLL
                 }
             return SurveyControlsResponse;
             }
+
+        public string GetSurveyXml(HttpPostedFileBase NewFile ) {
+            using (var package = new OfficeOpenXml.ExcelPackage(NewFile.InputStream))
+            {
+                OfficeOpenXml.ExcelWorkbook workbook = package.Workbook;
+
+                return   Epi.Web.Common.Xml.SurveyXml.BuildXml(workbook).ToString();
+            }  
+        
+        }
         private List<Web.Common.DTO.SurveyControlDTO> GetSurveyControls(SurveyInfoBO SurveyInfoBO)
             {
             List<Web.Common.DTO.SurveyControlDTO> List = new List<Web.Common.DTO.SurveyControlDTO>();
@@ -297,5 +308,25 @@ namespace Epi.Web.BLL
             return ControlType;
             }
 
+
+        public bool ValidateOrganization(Web.Common.Message.OrganizationRequest Request)
+        {
+            bool IsValid = false;
+            string EncryptedKey = Epi.Web.Common.Security.Cryptography.Encrypt(Request.Organization.OrganizationKey);
+            int OrgId = this.SurveyInfoDao.GetOrganizationId(EncryptedKey);
+            if (OrgId!=-1)
+            {
+                IsValid = true;
+
+            }
+            return IsValid;
+        }
+
+        public List<SurveyInfoBO> GetAllSurveysByOrgKey(string OrgKey)
+        {
+            string EncryptedKey = Epi.Web.Common.Security.Cryptography.Encrypt(OrgKey);
+            List<SurveyInfoBO> SurveyInfoResponse = this.SurveyInfoDao.GetAllSurveysByOrgKey(EncryptedKey);
+            return SurveyInfoResponse;
+        }
     }
 }
