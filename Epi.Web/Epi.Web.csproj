@@ -347,7 +347,6 @@
     <Content Include="Content\images\icons-18-white.png" />
     <Content Include="Content\images\icons-36-black.png" />
     <Content Include="Content\images\icons-36-white.png" />
-    <Content Include="Content\images\info.png" />
     <Content Include="Content\images\logo_dhhs.gif" />
     <Content Include="Content\images\next.png" />
     <Content Include="Content\images\next_d.png" />
@@ -569,7 +568,6 @@
     <Content Include="Views\Print\Index.cshtml" />
     <Content Include="Views\Account\AccessDenied.cshtml" />
     <Content Include="Views\SurveyManager\Index.cshtml" />
-    <Content Include="Views\DownLoad\Index.cshtml" />
     <None Include="Service References\SurveyManagerServiceV4\SurveyManagerServiceV4.xsd">
       <SubType>Designer</SubType>
     </None>
