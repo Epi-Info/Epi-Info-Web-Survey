@@ -54,6 +54,13 @@ namespace Epi.Web.MVC
        //    new { controller = "EIWST", action = "TestManagerService" }
        //); // Parameter defaults
             routes.MapRoute
+           (
+           null, // Route name
+           "SurveyManager/{surveyid}", // URL with parameters
+           new { controller = "SurveyManager", action = "Index", surveyid = UrlParameter.Optional }
+          ); // Parameter defaults
+       
+            routes.MapRoute
      (
        null,                                              // Route name
        "Survey/UpdateResponseXml/{id}",                           // URL with parameters

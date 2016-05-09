@@ -10,7 +10,7 @@ using Epi.Web.Common.Exception;
 namespace Epi.Web.WCF.SurveyService
 {
     [ServiceContract]
-    interface IManagerServiceV3:IManagerServiceV2
+    public interface IManagerServiceV3:IManagerServiceV2
     {
         [OperationContract]
         [FaultContract(typeof(CustomFaultException))]

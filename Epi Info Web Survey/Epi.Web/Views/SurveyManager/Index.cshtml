@@ -1,0 +1,446 @@
+﻿@model Epi.Web.MVC.Models.PublishModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .pageheader {
+        font: 24px Segoe UI;
+        color: #286655;
+    }
+
+    .h2header {
+        font: 18px Segoe UI;
+        color: #286655;
+        font-weight: 400;
+        margin: 15px 0 0 0 !important;
+    }
+
+    .accountdiv {
+        float:none;
+        align-self:center;
+        /*width: 500px;*/
+        background: #EBEFF5;
+        border: 1px solid #bfbfbf;
+        border-radius: 15px;
+        padding: 10px 10px 10px 20px;
+    }
+     .accountdiv2 {
+        float:none;
+        /*width: 700px;*/
+        background: #EBEFF5;
+        border: 1px solid #bfbfbf;
+        border-radius: 15px;
+        padding: 10px 10px 10px 20px;
+    }
+    .introdiv {
+        float: left;
+        width: 355px;
+        padding: 0 10px 0 0;
+    }
+
+    .accountlabel {
+        font: 14px Segoe UI;
+        font-weight: 600;
+    }
+
+    .termsofuse {
+        width: 790px;
+        padding: 5px;
+        height: 300px;
+        border: 2px solid #bfbfbf;
+        overflow: auto;
+    }
+
+    .submits {
+        border: 1px #4e9689 solid;
+        -moz-border-radius: 10px;
+        -webkit-border-radius: 10px;
+        -khtml-border-radius: 10px;
+        border-radius: 10px;
+        padding: 3px 5px 3px 5px;
+        color: #3f3f3f;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        font-size: 10pt;
+        font-weight: bold;
+        padding-left: 10px;
+        height: 35px;
+        width: 50px;
+        cursor: pointer;
+        border: 1px solid rgba(0,0,0,0.5);
+        box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
+        -o-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
+        -webkit-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
+        -moz-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
+    }
+
+        .submits:hover {
+            background: #ffc;
+        }
+
+    .create {
+        background: #5880b3;
+        background: rgba(88,128,179,0.6);
+        max-width: 160px;
+        width: 100%;
+    }
+     .create1 {
+        background: #5880b3;
+        background: rgba(88,128,179,0.6);
+        
+    }
+    [disabled] {
+        color: #737882;
+        background-color: #dfdfce;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.1), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
+        -o-box-shadow: 0 2px 6px rgba(0,0,0,0.1), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
+        -webkit-box-shadow: 0 2px 6px rgba(0,0,0,0.1), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
+        -moz-box-shadow: 0 2px 6px rgba(0,0,0,0.1), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
+    }
+
+        [disabled]:hover {
+            background-color: #dfdfce;
+        }
+
+/*div.upload input {
+    display: block !important;
+    width: 157px !important;
+    height: 57px !important;
+    opacity: 0 !important;
+    overflow: hidden !important;
+}
+ input[type="file"] {
+    display: none;
+}*/
+ .custom-file-upload {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+}
+    .Account {
+        width: 350px;
+        height: 24px;
+        font: 14px Segoe UI;
+    }
+
+    .field-validation-error {
+        color: #ff0000;
+    }
+
+    .field-validation-valid {
+        display: none;
+    }
+
+    .input-validation-error {
+        border: 1px solid #ff0000;
+        background-color: #ffeeee;
+    }
+
+    .validation-summary-errors {
+        font-weight: bold;
+        color: #ff0000;
+    }
+
+    .validation-summary-valid {
+        display: none;
+    }
+     
+    
+</style>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $('#SurveyIdDiv').hide();
+       //$('#PublishDiv').hide();
+       //$('#DownLoadDiv').hide();
+       //$('#RequiredLable').hide();
+        //   alert($('#ExistingSurvey_Hidden').val());
+        if ($('#ExistingSurvey_Hidden').val() == 'True')
+        {
+
+            $('#ExistingSurvey').attr('checked', 'checked');
+            $('#SurveyIdDiv').show();
+            
+        }
+
+        ('#Path').val('');
+        ('#Newfile').val('');
+
+
+       
+
+    });
+
+
+
+    function OpenFile()
+    {
+        
+            $('a[href$=".xlsx"]').prop('target', '_blank');
+         
+    }
+    function HidUnhidSurveyId(value) {
+
+
+        if ($('#ExistingSurvey').is(':checked')) {
+            $('#SurveyIdDiv').show();
+        } else {
+            $('#SurveyIdDiv').hide();
+
+        }
+    }
+ 
+                   
+       
+    function ChangeText(oFileInput, sTargetID) {
+
+        document.getElementById(sTargetID).value = oFileInput.value;
+    }
+    function OpenSurvey(SurveyURL)
+    {
+        
+        window.open(SurveyURL);
+    }
+    function copyToClipboard() {
+
+        var copyTextarea = document.getElementById('FormInfo');
+      //  alert(copyTextarea);
+        copyTextarea.select();
+
+        try {
+            var successful = document.execCommand('copy');
+            var msg = successful ? 'successful' : 'unsuccessful';
+            console.log('Copying text command was ' + msg);
+        } catch (err) {
+            console.log('Oops, unable to copy');
+        }
+    }
+   
+</script>
+
+<div>
+    @using (Html.BeginForm("Index", "SurveyManager",null ,FormMethod.Post, new {  enctype = "multipart/form-data" }))
+    {
+        <div id="header"><h1 style="text-indent: 0 !important; font-family:Segoe UI !important;">Epi Info™ Web Survey </h1></div>
+        <div>
+       
+           
+            
+        <p style="text-align:left;margin-top: 0;margin-bottom: 0px; font-size: 9pt; font-weight:bold;">
+            @Html.ValidationMessage("Error")
+        </p>
+    </div>
+    
+      
+
+        if (!Model.SuccessfulPublish)
+        {
+            if(!Model.IsValidOrg){
+                <div id="contentOrganization" style="margin:1em; margin-top:50px">
+                <div id="OrgnizationDiv" class="accountdiv" style="margin-bottom: 100px; align-self:center">
+                    <p style="text-align:center;margin-top: 0;margin-bottom: 0px; font-size: 12pt; font-weight:bold;">
+                        Welcome to Epi Info Survey Manager
+
+                    </p>
+                    <p style="text-align:center;margin-top: 0;margin-bottom: 0px;  font-size: 9pt; font-weight:bold;">
+                        Enter an Organization Key or a Personal Key to begin
+                    </p>
+                    <br>
+                    <br>
+                    @*<p style="text-align:right;margin-top: 0;margin-bottom: -29px; font-size: 9pt; font-weight:bold;">* indicates required fields</p>
+
+                    *@
+                    <p style="text-align:center; margin-left:15px">
+
+                        @*<label class="accountlabel" id="OrgKeylabel">*Organization Key:</label><br>*@
+                        @Html.TextBoxFor(m => m.OrganizationKey, new { @class = "Account" })
+                        <input class="submits create" style="width:70px; height:31px" type="submit" name="ValidateOrganization" id="ValidateOrganization" onclick=" " value="Submit" /><br>
+                        @Html.ValidationMessageFor(m => m.OrganizationKey, null, new { @class = "required" })
+ 
+                    </p>
+                </div>
+            </div>
+                }
+                else
+                {
+                <br>
+    <p id="RequiredLable" style="text-align:right;margin-top: 0;margin-bottom: -29px; margin-right:10px;font-size: 9pt; font-weight:bold;">* indicates required fields</p>
+
+                <div id="contentPublish" style="margin:1em;">
+                    <p style="text-align:left;margin-top: 0;margin-bottom: 10px; font-size: 20pt; font-weight:bold;">
+                        Publish a survey
+
+                    </p>
+                    <div id="PublishDiv" class="accountdiv" style="margin-bottom:10px; align-self:center;">
+                        <p  >
+                           
+                            <label class="accountlabel" id="FilePath">*Excel based survey:</label><a onclick="OpenFile()" href="~/Content/Text/Survey.xlsx">Excel Template</a><br>
+                            @*<input id="Path" class="Account" type="text" value=""   >*@
+
+                            @Html.TextBoxFor(m => m.Path, new { @class = "Account" })
+
+                            @*<label for="file-upload" class="submits create"   onclick="javascript: document.getElementById('Newfile').click();">
+                                Browse
+                            </label>*@
+                            <input for="file-upload" class="submits create" style="width:70px; height:31px" type="button" id="PublishButton" onclick="javascript: document.getElementById('Newfile').click();" value="Browse" /><br>
+                           
+                            @Html.ValidationMessageFor(m => m.Path, null, new { @class = "required" })
+                            <input id="Newfile" type="file" style='visibility: hidden;' name="Newfile" accept=".xls,.xlsx,.csv" onchange="ChangeText(this, 'Path');" />
+
+
+                        </p>
+                        <p>
+
+                            <label class="accountlabel" id="SurveyNamelabel">*Survey Name:</label><br>
+                            @Html.TextBoxFor(m => m.SurveyName, new { @class = "Account" }) <br>
+                            @Html.ValidationMessageFor(m => m.SurveyName, null, new { @class = "required" })
+
+
+                        </p>
+                        <p  >
+
+                            <label style="text-align:left" class="accountlabel" id="SurveyNamelabel">*End Date:</label><br>
+                            @Html.TextBoxFor(m => m.EndDate, new { @class = "Account validate[required,custom[date]]  datepicker" }) <br>
+                            @Html.ValidationMessageFor(m => m.EndDate, null, new { @class = "required" })
+
+
+                        </p>
+                        <script>$('#EndDate').datepicker({ changeMonth: true, changeYear: true, yearRange: '-110:+10' });</script>
+                        <script>    $('#EndDate').BlockEnter('EndDate');</script>
+
+                        @*<p>
+                            <input type="checkbox" id="ExistingSurvey" value="@Model.UpdateExisting" name="ExistingSurvey" for="ExistingSurveyLabel" onclick="HidUnhidSurveyId(this)" />
+
+                            <label class="accountlabel" id="ExistingSurveyLabel" style="width:330px;">
+                                <span style="font-weight:normal !important;">Update Existing Survey</span>
+                            </label>
+                            <div id="SurveyIdDiv">
+                                <label class="accountlabel" id="SurveyIdlabel">*Survey Id:</label><br>
+
+                                @Html.TextBoxFor(m => m.SurveyKey, new { @class = "Account" }) <br>
+                                @Html.ValidationMessageFor(m => m.SurveyKey, null)
+                                <br>
+                                <label class="accountlabel" id="SecurityTokenlabel">*Security Token:</label><br>
+
+                                @Html.TextBoxFor(m => m.UserPublishKey, new { @class = "Account" }) <br>
+                                @Html.ValidationMessageFor(m => m.UserPublishKey, null)
+
+
+                            </div>
+
+                        </p>*@
+                        <p >
+                            <input class="submits create" type="submit" name="PublishSurvey" id="PublishSurvey" value="Publish" style="margin-right:90px;" />
+
+                        </p>
+                        <input type="hidden" id="ExistingSurvey_Hidden" value="@Model.UpdateExisting.ToString()" />
+                    </div>
+                </div>
+    <p id="RequiredLable" style="text-align:right;margin-top: 0;margin-bottom: -29px; margin-right:10px;font-size: 9pt; font-weight:bold;">* indicates required fields</p>
+
+                <div id="contentDownLoad" style="margin:1em;">
+        <p style="text-align:left;margin-top: 0;margin-bottom: 10px; font-size: 20pt; font-weight:bold;">
+            Download responses
+        </p>
+        <div id="DownLoadDiv" class="accountdiv" style="margin-bottom: 100px; align-self:center">
+            @*<p style="text-align:center;margin-top: 0;margin-bottom: 0px; font-size: 9pt; font-weight:bold;">
+                    Epi Info Web Survey Download Tool (.CSV)
+                </p>
+                <br><br>
+                <p style="text-align:right;margin-top: 0;margin-bottom: -29px; font-size: 9pt; font-weight:bold;">* indicates required fields</p>*@
+
+            <p>
+
+                <div>
+                    @*<label class="accountlabel" id="OrgKeylabel">*Organization Key:</label><br>
+                        @Html.TextBoxFor(m => m.OrganizationKey, new { @class = "Account" }) <br>
+                        @Html.ValidationMessageFor(m => m.OrganizationKey, null, new { @class = "required" })<br>*@
+
+                    <label class="accountlabel" id="SurveyIdlabel">*Survey Id:</label><br>
+
+                   
+                    @Html.DropDownListFor(m => m.SurveyKey, new SelectList(ViewBag.SurveyNameList1, "Value", "Text", 0),"Select Survey", new { @class = "Account" })<br>
+
+                    @Html.ValidationMessageFor(m => m.SurveyKey, null)
+
+                    <label class="accountlabel" id="SecurityTokenlabel">*Security Token:</label><br>
+
+                    @Html.TextBoxFor(m => m.UserPublishKey, new { @class = "Account" }) <br>
+                    @Html.ValidationMessageFor(m => m.UserPublishKey, null)<br>
+
+                    <label class="accountlabel" id="FileName">*Survey Mode:</label><br>
+
+
+                    @Html.DropDownListFor(model => model.SurveyMode, new SelectList(
+                                       new List<Object> { new { value = "0", text = "Draft" }, new { value = "1", text = "Final" }, }, "value", "text", 2), new { @class = "Account" })<br>
+                    @Html.ValidationMessageFor(m => m.SurveyMode, null)
+
+                    <label class="accountlabel" id="FileName">*File Name:</label><br>
+
+                        @Html.TextBoxFor(m => m.FileName, new { @class = "Account" }) <br>
+                        @Html.ValidationMessageFor(m => m.FileName, null)
+
+                </div>
+                @*<div id="spinner">
+                        Working on your request...
+                    </div>*@
+            </p>
+
+            <p>
+                <input class="submits create" type="submit"   name="DownLoadResponse" id="DownLoadResponse" value="DownLoad" style="margin-right:90px;" />
+
+            </p>
+
+        </div>
+    </div>
+               }
+        }
+        else
+        {
+            
+                <div id="SuccessfullPublishcontent" style="margin:1em;">
+
+                    <div class="accountdiv" style="margin-bottom: 100px;">
+
+
+
+                        <p style="text-align:left;margin-top: 0; font-size: 9pt; font-weight:bold; color:green">
+
+                            <label class="accountlabel" id="SuccessfullPublish">Your Form  has been published!  </label><br>
+
+
+                        </p>
+                        <p>
+                            <label class="accountlabel" style="  font-size: 9pt; font-weight:bold; color:red " id="PublishedSurveyInfo">Important: </label>
+                            <label id="PublishedSurveyInfo">Please copy and save the Form ID and Security Token to download collected responses. </label><br>
+
+                        </p>
+                        <p>
+                            <textarea id="FormInfo" readonly="readonly" style="width:600px;height:100px ; align-content:flex-end">
+Survey Name: @Model.SurveyName
+Survey Id: @Model.SurveyKey
+Security Token: @Model.UserPublishKey
+Survey URL: @Model.SurveyURL
+Survey End Date: @Model.EndDate
+                            </textarea>
+
+                        </p>
+
+
+                        <p>
+                            <input class="submits create" onclick="OpenSurvey('@Model.SurveyURL')" type="button" id="LaunchSurvey" value="Launch Survey" />
+                            <input class="submits create  " type="button" onclick="copyToClipboard()" id="Copy" value="Copy All to Clipboard" />
+                        </p>
+
+                    </div>
+
+
+
+                </div>
+        }
+            
+             
+          }
+</div>
+   

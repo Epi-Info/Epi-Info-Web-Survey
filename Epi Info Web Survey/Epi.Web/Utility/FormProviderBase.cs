@@ -422,7 +422,10 @@ namespace Epi.Web.MVC.Utility
             field.InputFieldfontSize = double.Parse(_FieldTypeID.Attribute("ControlFontSize").Value);
             field.InputFieldfontfamily = _FieldTypeID.Attribute("ControlFontFamily").Value;
             field.ReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value);
+            if (!string.IsNullOrEmpty(_FieldTypeID.Attribute("MaxLength").Value))
+            {
             field.MaxLength = int.Parse(_FieldTypeID.Attribute("MaxLength").Value);
+            }
 
             field.Name = _FieldTypeID.Attribute("Name").Value;
             SetFieldCommon(field, form);
@@ -643,6 +646,7 @@ namespace Epi.Web.MVC.Utility
             field.ReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value);
             field.Name = _FieldTypeID.Attribute("Name").Value;
             field.FieldTypeId = FieldTypeId;
+            field.IsAndroidfield = form.IsAndroid;
             SetFieldCommon(field, form);
 
             ((Select)field).ShowEmptyOption = true;
@@ -682,7 +686,8 @@ namespace Epi.Web.MVC.Utility
                     {
                         if (!string.IsNullOrEmpty(CodeColumnName))
                         {
-                              DropDownValues.Append(_SourceTableValue.Attribute(CodeColumnName.ToLower()).Value.Trim());
+                            XElement XElement =  XElement.Parse(_SourceTableValue.ToString().ToLower());
+                            DropDownValues.Append(XElement.Attribute(CodeColumnName.ToLower()).Value.Trim());
                         }
                         else
                         {

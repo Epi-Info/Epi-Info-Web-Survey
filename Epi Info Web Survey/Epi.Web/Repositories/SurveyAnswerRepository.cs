@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Epi.Web.MVC.Repositories.Core;
-using Epi.Web.DataServiceClient;
+using Epi.Web.MVC.DataServiceClient;
 using Epi.Web.Common.Message;
 using Epi.Web.Common.Exception;
 using System.ServiceModel;
-using Epi.Web.DataServiceClient;
+ 
 
 namespace Epi.Web.MVC.Repositories
 {
@@ -16,11 +16,12 @@ namespace Epi.Web.MVC.Repositories
 
 
 
-        private Epi.Web.DataServiceClient.IDataService _iDataService;
-
-        public SurveyAnswerRepository(Epi.Web.DataServiceClient.IDataService iDataService)
+        private  DataServiceClient.IDataService _iDataService;
+    private Epi.Web.WCF.SurveyService.IManagerServiceV4 _iManagerService;
+        public SurveyAnswerRepository(DataServiceClient.IDataService iDataService , Epi.Web.WCF.SurveyService.IManagerServiceV4 iManagerService)
         {
             _iDataService = iDataService;
+             _iManagerService = iManagerService;
         }
         
         /// <summary>
@@ -28,12 +29,20 @@ namespace Epi.Web.MVC.Repositories
         /// </summary>
         /// <param name="surveyid"></param>
         /// <returns></returns>
-        public SurveyAnswerResponse GetSurveyAnswer(SurveyAnswerRequest pRequest)
+        public  SurveyAnswerResponse GetSurveyAnswer( SurveyAnswerRequest pRequest)
         {
             try
             {
                 //SurveyResponseResponse result = Client.GetSurveyResponse(pRequest);
-                SurveyAnswerResponse result = _iDataService.GetSurveyAnswer(pRequest);
+                 SurveyAnswerResponse result = new  Epi.Web.Common.Message.SurveyAnswerResponse();
+                if (!pRequest.Criteria.IsDownLoadFromApp)
+                {
+                result = _iDataService.GetSurveyAnswer(pRequest);
+                }
+                else
+                {
+                  result = _iManagerService.GetSurveyAnswer(pRequest);
+                }
                 return result;
             }
             catch (FaultException<CustomFaultException> cfe)

@@ -179,6 +179,84 @@ namespace Epi.Web.EF
             return result;
         }
 
+        public int GetOrganizationId(string OrgKey) {
+
+            int OrganizationId = -1;
+            try
+            {
+                using (var Context = DataObjectFactory.CreateContext())
+                {
+
+                    var Query = (from response in Context.Organizations
+                                 where response.OrganizationKey == OrgKey
+                                 select response).SingleOrDefault();
+
+                    if (Query != null)
+                    {
+                        OrganizationId = Query.OrganizationId;
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
+            }
+
+            return OrganizationId;
+        
+        }
+
+       
+        public List<SurveyInfoBO> GetAllSurveysByOrgKey(string Okey)
+        {
+            List<SurveyInfoBO> result = new List<SurveyInfoBO>();
+
+            List<SurveyMetaData> responseList = new List<SurveyMetaData>();
+
+            int OrganizationId = 0;
+            try
+            {
+                using (var Context = DataObjectFactory.CreateContext())
+                {
+
+                    var Query = (from response in Context.Organizations
+                                 where response.OrganizationKey == Okey
+                                 select response).SingleOrDefault();
+
+                    if (Query != null)
+                    {
+                        OrganizationId = Query.OrganizationId;
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
+            }
+
+           
+                try
+                {
+                    
+                    using (var Context = DataObjectFactory.CreateContext())
+                    {
+                       responseList= Context.SurveyMetaDatas.Where(x =>  x.OrganizationId == OrganizationId ).ToList();
+                       if (responseList.Count() > 0 && responseList[0] != null)
+                        {
+                            result = Mapper.Map(responseList);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw (ex);
+                }
+             
+
+            return result;
+        }
         public List<SurveyInfoBO> GetSurveyInfoByOrgKeyAndPublishKey(string SurveyId, string Okey, Guid publishKey)
         {
             List<SurveyInfoBO> result = new List<SurveyInfoBO>();

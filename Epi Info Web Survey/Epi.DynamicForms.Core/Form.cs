@@ -28,7 +28,7 @@ namespace MvcDynamicForms
         private string _PageId = "";
         public double Width { get; set; }
         public double Height { get; set; }
-        
+        public bool IsAndroid { get   ; set;  }
         public bool IsMobile { get; set; }
         public System.Collections.Generic.IEnumerable<System.Xml.Linq.XElement> FieldsTypeIDs { get; set; }
         public XDocument XDocMetadata { get; set; }

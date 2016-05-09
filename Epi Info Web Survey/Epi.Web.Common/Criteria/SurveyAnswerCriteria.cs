@@ -83,6 +83,8 @@ namespace Epi.Web.Common.Criteria
        /// </summary>
        [DataMember]
        public bool IsDraftMode { get; set; }
+       [DataMember]
+       public bool IsDownLoadFromApp { get; set; }
 
     }
 }

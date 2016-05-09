@@ -112,5 +112,9 @@ namespace Epi.Web.Interfaces.DataInterfaces
          /// </summary>
          /// <param name="SurveyInfo">SurveyInfo.</param>
          void UpdateConnectionString(DbConnectionStringBO ConnectionString);
+
+         int GetOrganizationId(string OrgKey);
+
+         List<SurveyInfoBO> GetAllSurveysByOrgKey(string OrgKey);
     }
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="05e3f407-a1d1-4796-a7b3-69e9cad5ea92" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="7c1140c0-c197-4563-ba3e-720528554631" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <EnableDataBinding>true</EnableDataBinding>
@@ -18,16 +18,17 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost:22587/Epi.Web.ServiceHost/SurveyDataService.svc" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://localhost:59584/SurveyDataService.svc" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="SurveyDataService.xsd" MetadataType="Schema" ID="f4a48390-28e4-4ac8-b523-4dd402cfaad3" SourceId="1" SourceUrl="http://localhost:22587/Epi.Web.ServiceHost/SurveyDataService.svc?xsd=xsd3" />
-    <MetadataFile FileName="SurveyDataService1.xsd" MetadataType="Schema" ID="8e59f220-8b47-4138-9078-9147b047096e" SourceId="1" SourceUrl="http://localhost:22587/Epi.Web.ServiceHost/SurveyDataService.svc?xsd=xsd2" />
-    <MetadataFile FileName="DataService.wsdl" MetadataType="Wsdl" ID="9f20f0dd-7534-4b65-b0c9-a1b8bf307f53" SourceId="1" SourceUrl="http://localhost:22587/Epi.Web.ServiceHost/SurveyDataService.svc?wsdl" />
-    <MetadataFile FileName="SurveyDataService2.xsd" MetadataType="Schema" ID="27257016-43b4-42de-b771-a3bda41f9dea" SourceId="1" SourceUrl="http://localhost:22587/Epi.Web.ServiceHost/SurveyDataService.svc?xsd=xsd0" />
-    <MetadataFile FileName="SurveyDataService3.xsd" MetadataType="Schema" ID="13f924c5-b254-4b27-b5f2-5ffc7a42e6b2" SourceId="1" SourceUrl="http://localhost:22587/Epi.Web.ServiceHost/SurveyDataService.svc?xsd=xsd1" />
-    <MetadataFile FileName="SurveyDataService44.xsd" MetadataType="Schema" ID="8f10051b-47b5-46e2-8eb7-c8b522ac2c08" SourceId="1" SourceUrl="http://localhost:22587/Epi.Web.ServiceHost/SurveyDataService.svc?xsd=xsd4" />
-    <MetadataFile FileName="SurveyDataService.disco" MetadataType="Disco" ID="b973780f-53bf-40dc-a717-24b3edd6ad64" SourceId="1" SourceUrl="http://localhost:22587/Epi.Web.ServiceHost/SurveyDataService.svc?disco" />
+    <MetadataFile FileName="SurveyDataService.xsd" MetadataType="Schema" ID="8210459d-ce04-4b60-98ab-84b42c2ad947" SourceId="1" SourceUrl="http://localhost:59584/SurveyDataService.svc?xsd=xsd4" />
+    <MetadataFile FileName="SurveyDataService1.xsd" MetadataType="Schema" ID="cfa45d8e-7241-4eaa-b82e-f47e3cef1a19" SourceId="1" SourceUrl="http://localhost:59584/SurveyDataService.svc?xsd=xsd5" />
+    <MetadataFile FileName="SurveyDataService2.xsd" MetadataType="Schema" ID="82379c59-a89b-4c18-987f-9420a91a786f" SourceId="1" SourceUrl="http://localhost:59584/SurveyDataService.svc?xsd=xsd0" />
+    <MetadataFile FileName="SurveyDataService3.xsd" MetadataType="Schema" ID="51081159-8067-4e3d-b7c2-2a13609f5001" SourceId="1" SourceUrl="http://localhost:59584/SurveyDataService.svc?xsd=xsd1" />
+    <MetadataFile FileName="SurveyDataService4.xsd" MetadataType="Schema" ID="cf79a9a9-bd84-473d-914e-97e5e1892585" SourceId="1" SourceUrl="http://localhost:59584/SurveyDataService.svc?xsd=xsd2" />
+    <MetadataFile FileName="SurveyDataService5.xsd" MetadataType="Schema" ID="2bf4e2b6-41b3-4ea3-9f47-9aab5c65bb2d" SourceId="1" SourceUrl="http://localhost:59584/SurveyDataService.svc?xsd=xsd3" />
+    <MetadataFile FileName="DataService.wsdl" MetadataType="Wsdl" ID="3cda1b3b-1650-40e9-9db3-6a090f716159" SourceId="1" SourceUrl="http://localhost:59584/SurveyDataService.svc?wsdl" />
+    <MetadataFile FileName="SurveyDataService.disco" MetadataType="Disco" ID="1bebda6d-43d1-4931-9e73-bdf86089565d" SourceId="1" SourceUrl="http://localhost:59584/SurveyDataService.svc?disco" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

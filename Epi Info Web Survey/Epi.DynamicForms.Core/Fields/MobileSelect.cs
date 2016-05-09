@@ -41,6 +41,16 @@ namespace MvcDynamicForms.Fields
             select.Attributes.Add("id", inputName);
             select.Attributes.Add("name", inputName);
 
+            if (this.IsAndroidfield)
+            {
+                select.Attributes.Add("data-role", "main");
+                select.Attributes.Add("data-native-menu", "false");
+            }
+            //select.Attributes.Add("data-corners",  "true");
+            //select.Attributes.Add("data-icon", "arrow-d");
+            //select.Attributes.Add("data-shadow", "true");
+            //select.Attributes.Add("data-iconshadow", "true");
+            //select.Attributes.Add("data-theme", "c");
             if (FunctionObjectAfter != null && !FunctionObjectAfter.IsNull())
             {
                 select.Attributes.Add("onchange", "return " + _key + "_after(this.id);"); //After
