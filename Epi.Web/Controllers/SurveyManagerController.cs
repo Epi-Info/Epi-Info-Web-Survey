@@ -18,6 +18,7 @@ using System.Configuration;
 using Epi.Web.Common.Criteria;
 using Epi.Web.MVC.Utility;
 using System.Diagnostics;
+using System.Reflection;
 namespace Epi.Web.MVC.Controllers
 {
     public class SurveyManagerController : Controller
@@ -32,6 +33,7 @@ namespace Epi.Web.MVC.Controllers
         public ActionResult Index()
         {
             PublishModel Model = new PublishModel();
+            ViewBag.Version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
             
             return View("Index",Model);
             
@@ -41,7 +43,7 @@ namespace Epi.Web.MVC.Controllers
         {
             try
             {
-               
+                ViewBag.Version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
 
                 if (!string.IsNullOrEmpty(ValidateOrganization))
