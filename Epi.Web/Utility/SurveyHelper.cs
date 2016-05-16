@@ -65,8 +65,7 @@ namespace Epi.Web.MVC.Utility
             // 1 Get the record for the current survey response
             // 2 update the current survey response
             // 3 save the current survey response
-            if (!IsSubmited)
-            {
+            
 
                 // 2 a. update the current survey answer request
                 surveyAnswerRequest.SurveyAnswerList = surveyAnswerResponse.SurveyResponseList;
@@ -88,7 +87,7 @@ namespace Epi.Web.MVC.Utility
                 {
                     surveyAnswerRequest.SurveyAnswerList[0].XML = MergeXml(SavedXml, CurrentPageResponseXml, form.CurrentPage).ToString();
                 }
-            }
+           
                 ////Update page number before saving response XML
 
                 XDocument Xdoc = XDocument.Parse(surveyAnswerRequest.SurveyAnswerList[0].XML);
