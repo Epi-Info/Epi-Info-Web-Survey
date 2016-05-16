@@ -253,6 +253,7 @@ namespace Epi.Web.MVC.Controllers
                             }
                         if (int.TryParse(StringNumber, out NewPageNumber))
                         {
+                            
                         if (NewPageNumber != CurrentPageNum)
                             {
                             form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, NewPageNumber, SurveyAnswer, isMobileDevice,"",IsAndroid );
@@ -434,16 +435,21 @@ namespace Epi.Web.MVC.Controllers
                             {
                                 SurveyAnswer.IsDraftMode = surveyInfoModel.IsDraftMode;
 
-                                _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId, form, SurveyAnswer, IsSubmited, IsSaved, PageNumber);
+                                
 
                                 Common.Message.SurveyAnswerResponse answerResponse = _isurveyFacade.GetSurveyAnswerResponse(responseId);
                                 SurveyAnswer = answerResponse.SurveyResponseList[0];
+
+                                form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, CurrentPageNum, SurveyAnswer, isMobileDevice, "", IsAndroid);
                                 
-                                form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, PageNumber, SurveyAnswer, isMobileDevice,"",IsAndroid );
                                 form = SetLists(form);
-                                
+                                 _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId, form, SurveyAnswer, IsSubmited, IsSaved, PageNumber); // To update Current Page
+                               
+                            
                                 TempData["Width"] = form.Width + 5;
 
+
+                                form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, PageNumber, SurveyAnswer, isMobileDevice, "", IsAndroid); // To load Next Page
                                 if (isMobileDevice)
                                 {
                                     Epi.Web.Common.Message.UserAuthenticationResponse AuthenticationResponse = _isurveyFacade.GetAuthenticationResponse(responseId);
