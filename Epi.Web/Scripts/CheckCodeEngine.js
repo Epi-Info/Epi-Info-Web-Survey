@@ -496,7 +496,13 @@ CCE_Context.prototype.getValue = function (pName)
             {
                 switch (cce_Symbol.Type) {
 
-
+                    case "checkbox":
+                        if (cce_Symbol.Value == "Yes") {
+                            return true;
+                        }
+                        else {
+                            return false;
+                        }
                     case "datepicker": //string has been converted to date for comparison with another date
                         value = new Date(cce_Symbol.Value).valueOf();
                         if (value == "" || isNaN(value)) {
