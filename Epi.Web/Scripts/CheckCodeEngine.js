@@ -487,13 +487,43 @@ CCE_Context.prototype.getValue = function (pName)
                         {
                             return value;
                         }*/
+                        
                         return value;
                         
                 }
             }
             else 
             {
-                return cce_Symbol.Value;
+                switch (cce_Symbol.Type) {
+
+
+                    case "datepicker": //string has been converted to date for comparison with another date
+                        value = new Date(cce_Symbol.Value).valueOf();
+                        if (value == "" || isNaN(value)) {
+                            return null;
+                        }
+                        else {
+                            return value;
+                        }
+                        return value;
+                    case "timepicker":
+                        var refDate = "01/01/1970 ";//It is a reference date 
+                        var dateTime = refDate + cce_Symbol.Value;
+                        value = new Date(dateTime).valueOf();
+                        if (value == "" || isNaN(value)) {
+                            return null;
+                        }
+                        else {
+                            return value;
+                        }
+                        return value;
+
+                    default:
+
+                        return cce_Symbol.Value;
+
+                }
+                
             }
         }
         else 
