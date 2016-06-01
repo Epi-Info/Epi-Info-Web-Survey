@@ -687,7 +687,13 @@ namespace Epi.Web.MVC.Utility
                         if (!string.IsNullOrEmpty(CodeColumnName))
                         {
                             XElement XElement =  XElement.Parse(_SourceTableValue.ToString().ToLower());
+                           try{
                             DropDownValues.Append(XElement.Attribute(CodeColumnName.ToLower()).Value.Trim());
+                            }
+                           catch (Exception ex)
+                             {
+                             DropDownValues.Append(_SourceTableValue.Attributes().FirstOrDefault().Value.Trim());
+                            }
                         }
                         else
                         {
