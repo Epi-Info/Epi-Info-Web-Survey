@@ -301,11 +301,11 @@
 	    /*Exit the survey */
 	    $("#close").click(function () {
 	        $("#exitdialog").dialog("open");
-	      /*  if (!$("#exitdialog").dialog("open")) {
-	            var signoutUrl = '@Url.Action("SignOut","Post")';
-	            var homePageUrl = '@Url.Action("Index","Home")' + '/' + '@Model.SurveyInfo.SurveyId'; //'http://wwwn.cdc.gov/epiinfo/';
-	            SignOutAndRedirect(signoutUrl, homePageUrl);
-	        }*/
+	      //  if (!$("#exitdialog").dialog("open")) {
+	         //   var signoutUrl = '@Url.Action("SignOut","Post")';
+	           // var homePageUrl = '@Url.Action("Index","Home")' + '/' + '@Model.SurveyInfo.SurveyId';  
+	         //   SignOutAndRedirect(signoutUrl, homePageUrl);
+	       // }
 	    });
 
 
@@ -345,7 +345,7 @@
 //	    function errorFunc(data) {
 //	        alert('failed');
 	    //	    }
-
+	    
 	    $("#myform")[0].is_print_action.value = 'true';
 	   
 	    $("#myform")[0].action = window.location.href;

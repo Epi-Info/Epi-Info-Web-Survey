@@ -491,7 +491,7 @@ namespace Epi.Web.MVC.Utility
                     foreach (var item in CommentLegals)
                     {
                         List<string> CommentLegalValues = GetCommentLegalValues(xdoc, item.ControlId);
-                        PrintModel AnswerValue = QuestionAnswerList.Where(x => x.Question == item.ControlPrompt).Single();
+                        PrintModel AnswerValue = QuestionAnswerList.Where(x => x.ControlName == item.ControlId).Single();
                         QuestionAnswerList = SetValues(CommentLegalValues, AnswerValue, QuestionAnswerList);
                     }
 
