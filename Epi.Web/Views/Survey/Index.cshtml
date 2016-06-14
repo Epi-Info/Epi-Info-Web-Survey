@@ -166,7 +166,8 @@
 	                
 	                   "text":'Exit Survey',
                        "click":  function () { var signoutUrl = '@Url.Action("SignOut","Post")';
-	                        var homePageUrl = '@Url.Action("Index","Home")' + '/' + '@Model.SurveyInfo.SurveyId';  
+                           //var homePageUrl = '@Url.Action("Index","Home")' + '/' + '@Model.SurveyInfo.SurveyId';  
+                           var homePageUrl = '@System.Configuration.ConfigurationManager.AppSettings["ExitURL"]'
 	                        SignOutAndRedirect(signoutUrl, homePageUrl);
 	                        $(this).dialog("close");},
 	                    "class": 'dialogbtn'
