@@ -158,11 +158,21 @@ namespace Epi.Web.MVC.Controllers
            
             string[] expressions = returnUrl.Split('/');
 
-            if (expressions.Length >3)
+            var Value = expressions[expressions.Length - 1];
+            Guid Result ;
+            if (Guid.TryParse(Value, out Result))
+             {
+                 return "";
+             }
+            else if (Value.Length == 4)
             {
-                return expressions[3];
+                return Value;
+
             }
-            else { return ""; }
+            else {
+
+                return "";
+            }
         }
     }
 }
