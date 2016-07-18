@@ -306,9 +306,10 @@ namespace Epi.Web.Common.Xml
                     break;
 
                 case "7":// 7 DatePicker
-                   
+                    IsValidType = true;
                     break;
                 case "8": //TimePicker
+                    IsValidType = true;
                     break;
                 case "10"://CheckBox
                     IsValidType = IsYesNo(Value);
@@ -321,15 +322,16 @@ namespace Epi.Web.Common.Xml
                     IsValidType = IsNumeric(Value);
                     break;
                 case "17"://DropDown LegalValues
-
+                    IsValidType = true;
                     break;
                 case "18"://DropDown Codes
-
+                    IsValidType = true;
                     break;
                 case "19"://DropDown CommentLegal
-
+                    IsValidType = true;
                     break;
                 case "21"://GroupBox
+
                     break;
                 }
 
