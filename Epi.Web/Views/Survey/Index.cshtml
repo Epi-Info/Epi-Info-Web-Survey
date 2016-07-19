@@ -1,681 +1,691 @@
 ﻿@model MvcDynamicForms.Form
 @{
-	ViewBag.Title = "Survey";
-	Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Survey";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @*<script src="../../Scripts/jquery-1.5.1-vsdoc.js" type="text/javascript"></script>*@
 
 <script type="text/javascript">
- 
-	//Check Code Logic start
-	 @Html.Raw(Model.FormJavaScript)
-	//Check code logic end
 
- 
+    //Check Code Logic start
+    @Html.Raw(Model.FormJavaScript)
+    //Check code logic end
+
+
 
 
 
 </script>
-   
-   <script type="text/javascript">
 
-   $(function () {
-		   $("#savediv button[title]").tooltip();
-	   });
- </script>  
 <script type="text/javascript">
 
-	 
-	/*Clicking the save button to save the survey*/
-	function Save() {
-
-   
-		var DisabledFieldsList = $('#DisabledFieldsList').val();
-		 
-		if (DisabledFieldsList.length > 0)
-		{
-		CCE_ProcessEnableAllControls(DisabledFieldsList) ;
-		}
-		//set the is_save_action hidden variable value to true to indicate that save button has been clicked
-		$("#myform")[0].is_save_action.value = 'true';
-		//set the action path of the current form so when it is submitted by clicking the save button it posts to the path 
-		$("#myform")[0].action = window.location.href;
-		//detach the validation engine as we don't want to validate data on save button click
-		$('#myform').validationEngine('detach');
-		//posting the form
-		$('#myform').submit();
-		// return false;
-
-	}
-	/*Clicking the continue button*/
-
-	function Continue() {
-		//debugger;
-		var presentUrl;
-		var pageNumber;
-		var actionUrlC;
-		presentUrl = '@Url.Action("Index","Survey")';
-		pageNumber = '@Model.CurrentPage';
-		actionUrlC = processUrl(presentUrl, 'ContinueUrl', pageNumber);
-		$("#myform")[0].action = actionUrlC;
-		$("#myform").submit();
-		
-	}
-	
-	/*Clicking the previous button*/
-	function Previous() {
-		//debugger;
-		var presentUrl;
-		var pageNumber;
-		var actionUrlP;
-		presentUrl = '@Url.Action("Index","Survey")';
-		pageNumber = '@Model.CurrentPage';
-		actionUrlP = processUrl(presentUrl, 'PreviousUrl', pageNumber);
-		$("#myform")[0].action = actionUrlP;
-		$("#myform").submit();
-	}
+    $(function () {
+        $("#savediv button[title]").tooltip();
+    });
+</script>
+<script type="text/javascript">
 
 
+    /*Clicking the save button to save the survey*/
+    function Save() {
 
-	$(document).ready(function () {
-	    // a workaround for a flaw in the demo system (http://dev.jqueryui.com/ticket/4375), ignore!
 
-	    //$("#Savebutton").tooltip();
+        var DisabledFieldsList = $('#DisabledFieldsList').val();
+
+        if (DisabledFieldsList.length > 0) {
+            CCE_ProcessEnableAllControls(DisabledFieldsList);
+        }
+        //set the is_save_action hidden variable value to true to indicate that save button has been clicked
+        $("#myform")[0].is_save_action.value = 'true';
+        //set the action path of the current form so when it is submitted by clicking the save button it posts to the path
+        $("#myform")[0].action = window.location.href;
+        //detach the validation engine as we don't want to validate data on save button click
+        $('#myform').validationEngine('detach');
+        //posting the form
+        $('#myform').submit();
+        // return false;
+
+    }
+    /*Clicking the continue button*/
+
+    function Continue() {
+        //debugger;
+        var presentUrl;
+        var pageNumber;
+        var actionUrlC;
+        presentUrl = '@Url.Action("Index","Survey")';
+        pageNumber = '@Model.CurrentPage';
+        actionUrlC = processUrl(presentUrl, 'ContinueUrl', pageNumber);
+        $("#myform")[0].action = actionUrlC;
+        $("#myform").submit();
+
+    }
+
+    /*Clicking the previous button*/
+    function Previous() {
+        //debugger;
+        var presentUrl;
+        var pageNumber;
+        var actionUrlP;
+        presentUrl = '@Url.Action("Index","Survey")';
+        pageNumber = '@Model.CurrentPage';
+        actionUrlP = processUrl(presentUrl, 'PreviousUrl', pageNumber);
+        $("#myform")[0].action = actionUrlP;
+        $("#myform").submit();
+    }
 
 
 
+    $(document).ready(function () {
+        // a workaround for a flaw in the demo system (http://dev.jqueryui.com/ticket/4375), ignore!
 
-	    $("#dialog").dialog({
-	        autoOpen: false,
-	        show: "blind",
-	        hide: "blind",
-	        resizable: false,
-	        height: 420,
-	        modal: true
-	    });
+        //$("#Savebutton").tooltip();
 
-	    $("#VideoDialog").dialog({
-	        autoOpen: false,
-	        show: "blind",
-	        hide: "blind",
-	        resizable: false,
-	        height: 410,
-	        width: 500,
-	        modal: true
-	    });
-	    // setup the dialog
-	    $("#TimeOutdialog").dialog({
-	        autoOpen: false,
-	        modal: true,
-	        width: 400,
-	        height: 160,
-	        closeOnEscape: false,
-	        draggable: false,
-	        resizable: false,
-	        /* buttons: {
+
+
+
+        $("#dialog").dialog({
+            autoOpen: false,
+            show: "blind",
+            hide: "blind",
+            resizable: false,
+            height: 420,
+            modal: true
+        });
+
+        $("#VideoDialog").dialog({
+            autoOpen: false,
+            show: "blind",
+            hide: "blind",
+            resizable: false,
+            height: 410,
+            width: 500,
+            modal: true
+        });
+        // setup the dialog
+        $("#TimeOutdialog").dialog({
+            autoOpen: false,
+            modal: true,
+            width: 400,
+            height: 160,
+            closeOnEscape: false,
+            draggable: false,
+            resizable: false,
+            /* buttons: {
 	        'Continue Session': function () {
 	        $(this).dialog('close');
 	        }
 	        }*/
 
-	        buttons: [{
-	            "text": 'Continue Session',
-	            "click": function () {
-	                $(this).dialog('close');
-	            },
-	            "class": 'dialogbtn'
-	        }]
+            buttons: [{
+                "text": 'Continue Session',
+                "click": function () {
+                    $(this).dialog('close');
+                },
+                "class": 'dialogbtn'
+            }]
 
 
-	    });
-	    // cache a reference to the countdown element so we don't have to query the DOM for it on each ping.
-	    var $countdown = $("#dialog-countdown");
+        });
+        // cache a reference to the countdown element so we don't have to query the DOM for it on each ping.
+        var $countdown = $("#dialog-countdown");
 
-	    // start the idle timer plugin
-	    $.idleTimeout('#TimeOutdialog', 'div.ui-dialog-buttonpane button:first', {
-	        idleAfter: 900,
-	        pollingInterval: 2,
-	        keepAliveURL: 'keepalive.php',
-	        serverResponseEquals: 'OK',
-	        onTimeout: function () {
-	            //window.location = "timeout.htm";
-	            //window.location = GetRedirectionUrl() + '/1';
-	            window.location = GetRedirectionUrl() ;
-	            //'~/Login/Index'; 
+        // start the idle timer plugin
+        $.idleTimeout('#TimeOutdialog', 'div.ui-dialog-buttonpane button:first', {
+            idleAfter: 900,
+            pollingInterval: 2,
+            keepAliveURL: 'keepalive.php',
+            serverResponseEquals: 'OK',
+            onTimeout: function () {
+                //window.location = "timeout.htm";
+                //window.location = GetRedirectionUrl() + '/1';
+                window.location = GetRedirectionUrl();
+                //'~/Login/Index';
 
 
-	        },
-	        onIdle: function () {
-	            $(this).dialog("open");
-	        },
-	        onCountdown: function (counter) {
-	            $countdown.html(counter); // update the counter
-	        }
-	    });
+            },
+            onIdle: function () {
+                $(this).dialog("open");
+            },
+            onCountdown: function (counter) {
+                $countdown.html(counter); // update the counter
+            }
+        });
 
-	    $(function () {
-	        $("#exitdialog").dialog({
-	            autoOpen: false,
-	            show: "blind",
-	            hide: "blind",
-	            resizable: false,
-	            height: 190,
-	            width: 420,
-	            modal: true,
-	            buttons:[{
-	                
-	                   "text":'Exit Survey',
-                       "click":  function () { var signoutUrl = '@Url.Action("SignOut","Post")';
-                           //var homePageUrl = '@Url.Action("Index","Home")' + '/' + '@Model.SurveyInfo.SurveyId';  
-                           var homePageUrl = '@System.Configuration.ConfigurationManager.AppSettings["ExitURL"]'
-	                        SignOutAndRedirect(signoutUrl, homePageUrl);
-	                        $(this).dialog("close");},
-	                    "class": 'dialogbtn'
-	                    
-	                },{
-	                "text":'Stay on this page',
-                    "click":  function () {$(this).dialog('close');},
+        $(function () {
+            $("#exitdialog").dialog({
+                autoOpen: false,
+                show: "blind",
+                hide: "blind",
+                resizable: false,
+                height: 190,
+                width: 420,
+                modal: true,
+                buttons: [{
+
+                    "text": 'Exit Survey',
+                    "click": function () {
+                        var signoutUrl = '@Url.Action("SignOut","Post")';
+
+                        var homePageUrl = '@System.Configuration.ConfigurationManager.AppSettings["ExitURL"]'
+                        if (homePageUrl == "" || homePageUrl == " " || homePageUrl == null) {
+
+                            homePageUrl = '@Url.Action("Index","Home")' + '/' + '@Model.SurveyInfo.SurveyId';
+                        }
+
+                        SignOutAndRedirect(signoutUrl, homePageUrl);
+                        $(this).dialog("close");
+                    },
                     "class": 'dialogbtn'
-	                
-	                  }]
 
-	        });
-	    });
-	    $("#SimpleDialogBox").dialog({
-	        autoOpen: false,
-	        show: "blind",
-	        hide: "blind",
-	        resizable: false,
-	        height: 140,
-	        width: 300,
-	        modal: true
+                }, {
+                    "text": 'Stay on this page',
+                    "click": function () { $(this).dialog('close'); },
+                    "class": 'dialogbtn'
 
-	    });
+                }]
 
+            });
+        });
+        $("#SimpleDialogBox").dialog({
+            autoOpen: false,
+            show: "blind",
+            hide: "blind",
+            resizable: false,
+            height: 140,
+            width: 300,
+            modal: true
 
-	    $("#DialogBox").dialog({
-	        autoOpen: false,
-	        show: "blind",
-	        hide: "blind",
-	        resizable: false,
-	        height: 135,
-	        width: 400,
-	        modal: true
-
-	    });
+        });
 
 
-	    $("#ErrordialogBox").dialog({
-	        autoOpen: false,
-	        show: "blind",
-	        hide: "blind",
-	        resizable: false,
-	        // height: 100,
-	        width: 300,
-	        modal: true
-	    });
-	    $("#PrintdialogBox").dialog({
-	        autoOpen: false,
-	        show: "blind",
-	        hide: "blind",
-	        resizable: false,
-	         height: 500,
-	        width: 700,
-	        modal: true
-	    });
+        $("#DialogBox").dialog({
+            autoOpen: false,
+            show: "blind",
+            hide: "blind",
+            resizable: false,
+            height: 135,
+            width: 400,
+            modal: true
 
-	    var responseUrl = GetRedirectionUrl();
-	    $('#url').val(responseUrl);
-	    var Subject = "Link for Survey: " + '@Model.SurveyInfo.SurveyName';
-	    Subject = ReplaceString(Subject);
-	    $('#Subject').val(Subject);
+        });
 
 
-	    var passcode = '@Model.PassCode';
-	    $('#spPassCode').text(passcode);
+        $("#ErrordialogBox").dialog({
+            autoOpen: false,
+            show: "blind",
+            hide: "blind",
+            resizable: false,
+            // height: 100,
+            width: 300,
+            modal: true
+        });
+        $("#PrintdialogBox").dialog({
+            autoOpen: false,
+            show: "blind",
+            hide: "blind",
+            resizable: false,
+            height: 500,
+            width: 700,
+            modal: true
+        });
 
-	    if ('@Model.IsSaved' == 'True') {
+        var responseUrl = GetRedirectionUrl();
+        $('#url').val(responseUrl);
+        var Subject = "Link for Survey: " + '@Model.SurveyInfo.SurveyName';
+        Subject = ReplaceString(Subject);
+        $('#Subject').val(Subject);
 
-	        if ('@Model.StatusId' == '1') { //if clicking the save button for the first time
-	            $('#successContent').show();
-	            $('#successContent').append('<div class="success"><img src="@Url.Content("~/Content/images/button_check.png")" style="vertical-align:middle; padding-right: 10px;" alt=""/> Your survey has been saved.<button id="copy" type="button" name="copy" class="copylink">Get Survey Link & Pass Code</button></div>')
 
+        var passcode = '@Model.PassCode';
+        $('#spPassCode').text(passcode);
 
+        if ('@Model.IsSaved' == 'True') {
 
-	            //call your jquery modal popup method
-	            $("#dialog").dialog("open");
-
-	        }
-	        else {
+            if ('@Model.StatusId' == '1') { //if clicking the save button for the first time
+                $('#successContent').show();
+                $('#successContent').append('<div class="success"><img src="@Url.Content("~/Content/images/button_check.png")" style="vertical-align:middle; padding-right: 10px;" alt=""/> Your survey has been saved.<button id="copy" type="button" name="copy" class="copylink">Get Survey Link & Pass Code</button></div>')
 
 
 
-	            $('#successContent').show(); //in subsequest click we just show that the survey has been saved not the modal popup
-	            $('#successContent').append('<div class="success"><img src="@Url.Content("~/Content/images/button_check.png")" style="vertical-align:middle; padding-right: 10px;" alt=""/> Your survey has been saved.<button id="copy" type="button" name="copy" class="copylink">Get Survey Link & Pass Code</button></div>')
-	        }
-	        return true;
-	    }
+                //call your jquery modal popup method
+                $("#dialog").dialog("open");
 
-	});
-
-	$(document).ready(function () {
-
-	    $("#send").click(function () {
-
-	        var emailAddress = $("#email").val();
-	        var confirmemail = $("#confirmemail").val();
-	        var redirectUrl = GetRedirectionUrl();
-	        //var surveyName = $("#_surveyName").val();
-
-
-	        var surveyName = '@Model.SurveyInfo.SurveyName';
-
-	        surveyName = ReplaceString(surveyName);
+            }
+            else {
 
 
 
-	        var passCode = $('#spPassCode').text();
-	        var EmailSubject = $('#Subject').val();
-	        EmailSubject = ReplaceString(EmailSubject);
+                $('#successContent').show(); //in subsequest click we just show that the survey has been saved not the modal popup
+                $('#successContent').append('<div class="success"><img src="@Url.Content("~/Content/images/button_check.png")" style="vertical-align:middle; padding-right: 10px;" alt=""/> Your survey has been saved.<button id="copy" type="button" name="copy" class="copylink">Get Survey Link & Pass Code</button></div>')
+            }
+            return true;
+        }
 
-	        //url to post for email to be sent
-	        var postUrl = '@Url.Action("Notify","Post")';
-	        if (ValidateEmail(emailAddress) && ValidateEmail(confirmemail)) {
-	            if ($.trim(emailAddress) == $.trim(confirmemail)) {
-	                //Call notify function to send notification
-	                NotifyByEmail(emailAddress, redirectUrl, surveyName, postUrl, passCode, EmailSubject);
+    });
 
-	                //close the modal popup after processing
-	                $("#dialog").dialog("close");
-	            }
-	            else {
-	                alert("The email address did not match.");
-	            }
+    $(document).ready(function () {
 
-	        }
-	        else {
-	            // $('#email').after('<span class="error">Enter a valid email address.</span>');
-	            alert('Enter a valid email address!');
-	        }
-	    });
+        $("#send").click(function () {
 
-	    /*Exit the survey */
-	    $("#close").click(function () {
-	        $("#exitdialog").dialog("open");
-	      //  if (!$("#exitdialog").dialog("open")) {
-	         //   var signoutUrl = '@Url.Action("SignOut","Post")';
-	           // var homePageUrl = '@Url.Action("Index","Home")' + '/' + '@Model.SurveyInfo.SurveyId';  
-	         //   SignOutAndRedirect(signoutUrl, homePageUrl);
-	       // }
-	    });
+            var emailAddress = $("#email").val();
+            var confirmemail = $("#confirmemail").val();
+            var redirectUrl = GetRedirectionUrl();
+            //var surveyName = $("#_surveyName").val();
 
 
-	    /*Open the modal popup on link click*/
-	    $('#copy').click(function () {
-	        $("#dialog").dialog("open");
-	        $('#url').val(GetRedirectionUrl());
-	        return false;
-	    });
+            var surveyName = '@Model.SurveyInfo.SurveyName';
 
-	    $('#Print').click(function () {
-	        GetPrintView();
-         
-	    });
+            surveyName = ReplaceString(surveyName);
 
 
-	});
-	function GetPrintView() {
 
-//	    var signoutUrl = '@Url.Action("GetPrintView", "Survey")' + '?ResponseId=' + '@Model.ResponseId';
+            var passCode = $('#spPassCode').text();
+            var EmailSubject = $('#Subject').val();
+            EmailSubject = ReplaceString(EmailSubject);
 
-//	    $.ajax({
-//	        url: signoutUrl,
-//	        type: 'GET',
-//	        contentType: 'application/json; charset=utf-8',
-//	        //data: JSON.stringify(model),
-//	        async: false,
-//	        success: successFunc,
-//	        Error: errorFunc
-//	    	    });
-//	  
-//	    function successFunc(data) {
-//	        $('#PrintdialogBox').html(data);
-//	        $("#PrintdialogBox").dialog("open");
-//	        
-//	    }
-//	    function errorFunc(data) {
-//	        alert('failed');
-	    //	    }
-	    
-	    $("#myform")[0].is_print_action.value = 'true';
-	   
-	    $("#myform")[0].action = window.location.href;
+            //url to post for email to be sent
+            var postUrl = '@Url.Action("Notify","Post")';
+            if (ValidateEmail(emailAddress) && ValidateEmail(confirmemail)) {
+                if ($.trim(emailAddress) == $.trim(confirmemail)) {
+                    //Call notify function to send notification
+                    NotifyByEmail(emailAddress, redirectUrl, surveyName, postUrl, passCode, EmailSubject);
+
+                    //close the modal popup after processing
+                    $("#dialog").dialog("close");
+                }
+                else {
+                    alert("The email address did not match.");
+                }
+
+            }
+            else {
+                // $('#email').after('<span class="error">Enter a valid email address.</span>');
+                alert('Enter a valid email address!');
+            }
+        });
+
+        /*Exit the survey */
+        $("#close").click(function () {
+            $("#exitdialog").dialog("open");
+            //  if (!$("#exitdialog").dialog("open")) {
+            //   var signoutUrl = '@Url.Action("SignOut","Post")';
+            // var homePageUrl = '@Url.Action("Index","Home")' + '/' + '@Model.SurveyInfo.SurveyId';
+            //   SignOutAndRedirect(signoutUrl, homePageUrl);
+            // }
+        });
+
+
+        /*Open the modal popup on link click*/
+        $('#copy').click(function () {
+            $("#dialog").dialog("open");
+            $('#url').val(GetRedirectionUrl());
+            return false;
+        });
+
+        $('#Print').click(function () {
+            GetPrintView();
+
+        });
+
+
+    });
+    function GetPrintView() {
+
+        //	    var signoutUrl = '@Url.Action("GetPrintView", "Survey")' + '?ResponseId=' + '@Model.ResponseId';
+
+        //	    $.ajax({
+        //	        url: signoutUrl,
+        //	        type: 'GET',
+        //	        contentType: 'application/json; charset=utf-8',
+        //	        //data: JSON.stringify(model),
+        //	        async: false,
+        //	        success: successFunc,
+        //	        Error: errorFunc
+        //	    	    });
+        //
+        //	    function successFunc(data) {
+        //	        $('#PrintdialogBox').html(data);
+        //	        $("#PrintdialogBox").dialog("open");
+        //
+        //	    }
+        //	    function errorFunc(data) {
+        //	        alert('failed');
+        //	    }
+
+        $("#myform")[0].is_print_action.value = 'true';
+
+        $("#myform")[0].action = window.location.href;
         $('#myform').submit();
 
-	  
-	}
- 
- function updateXml(NameList, pValue) {
- 
-   
-			var UpdateUrl = '@Url.Action("UpdateResponseXml","Survey")';
-			var NList = "";
-			 for (var i = 0; i < NameList.length; i++) 
-		   {
-			   if (NList == ""){
-					NList = NameList[i]
-			   }else{
-				 NList = NList + "," +NameList[i];
-			   }
-		   
-		   }
-			UpdateResponse(UpdateUrl,NList, pValue,'@Model.ResponseId');
-			
-			}
 
-function ReplaceString(string){
+    }
 
-  return string.replace( /&amp;/g,"&").replace(/&gt;/g ,">").replace( /&lt;/g,"<").replace(/&quot;/g, "\"").replace(/&#39;/g, "'");
-}
- 
- $(function() {
-	 $('#myform').submit( function() {
-		
-		var DisabledFieldsList = $('#DisabledFieldsList').val();
-		if (DisabledFieldsList.length > 0)
-		{
-		CCE_ProcessEnableAllControls(DisabledFieldsList) ;
-		}
-		 return true;
-	 });
-});
-   
-</script>
- @if (@Model.IsDraftModeStyleClass != "")
- {
-<div id="header" class="TestHeader">
-  
-			<h1>
-				@Model.SurveyInfo.SurveyName 
-				 
-				</h1>
-	  
- </div>
- }
- else { 
- <div id="header"  >
-  
-			<h1>
-				@Model.SurveyInfo.SurveyName 
-				 
-				</h1>
-	  
- </div>
- 
- }
-
-	<div id="infobox">
-		<div id="pages" class="pages">
+    function updateXml(NameList, pValue) {
 
 
+        var UpdateUrl = '@Url.Action("UpdateResponseXml","Survey")';
+        var NList = "";
+        for (var i = 0; i < NameList.length; i++) {
+            if (NList == "") {
+                NList = NameList[i]
+            } else {
+                NList = NList + "," + NameList[i];
+            }
 
-		 @if (Model.NumberOfPages > 0)
-		 {
-			 int num = 0;
-
-
-
-			 for (int i = 1; Model.NumberOfPages > i - 1; i++)
-			 {
-
-				 num = i;
-				 if (i == 1 && Model.CurrentPage > 1)
-				 {   
-							 
-						   
-						   @*<a  style="background-image: url('@Url.Content("~/Content/images/prev.png")'); background-repeat:no-repeat; background-position:center; width:13px;"   href="@string.Format("../../Survey/{0}/{1}", Model.ResponseId, Model.CurrentPage - 1)"    class="nextprev" title="Previous Page">
-						  &nbsp;&nbsp;&nbsp;
-							  </a>*@
-						   <a  style="background-image: url('@Url.Content("~/Content/images/prev.png")'); background-repeat:no-repeat; background-position:center; width:13px;"   href="@Url.RouteUrl(null, new { controller = "Survey", action = "Index", responseid = Model.ResponseId, PageNumber = Model.CurrentPage - 1 })"    class="nextprev" title="Previous Page">
-						  &nbsp;&nbsp;&nbsp;
-							  </a>  
-							
-				 }
-
-
-
-
-				 if (Model.CurrentPage == i)
-				 {  
-		  <span class="current">@num</span>
-		  
-				 }
-				 else
-				 {  
-
-	   
-		 
-					
-					
-					@Html.ActionLink(num.ToString(), "Index", "Survey", new { responseid = Model.ResponseId, PageNumber = num }, null)
-
-				   
-					
-				 }
-
-			 }
-
-			 if (Model.CurrentPage != Model.NumberOfPages)
-			 {  
-				  
-		@* <a  id="anchorNext"   style="background-image: url('@Url.Content("~/Content/images/next.png")');  background-repeat:no-repeat; background-position:center; width:13px;" href="@string.Format("../../Survey/{0}/{1}", Model.ResponseId, Model.CurrentPage + 1)" class="nextprev" title="Go to Next Page">
-		&nbsp;&nbsp;&nbsp;
-		 </a>*@
-		  <a  id="anchorNext"   style="background-image: url('@Url.Content("~/Content/images/next.png")');  background-repeat:no-repeat; background-position:center; width:13px;" href="@Url.RouteUrl(null, new { controller = "Survey", action = "Index", responseid = Model.ResponseId, PageNumber = Model.CurrentPage + 1 })" class="nextprev" title="Go to Next Page">
-		&nbsp;&nbsp;&nbsp;
-		 </a>      
-			
-		  
-			 }
-
-		 } 
-
-
- 
-	  
-	  </div>
-	   
-	  <div id="exit">
-    @*  <button class="save" type="submit" id="save2" style="background-image: none !important; width: 40px !important; text-align: center; padding: 3px 5px 1px 5px !important; margin-top: -1px; vertical-align: middle;"><img src="../../Content/images/save.png" alt="" /></button>
-	 *@
-      <button class="savetop"   type="button" id ="Savebutton2" onclick="Save();" name="Savebutton" value="save" style="width: 40px !important; text-align: center; padding: 3px 5px 1px 5px !important; margin-top: -1px; vertical-align: middle;"><img src="@Url.Content("~/Content/images/save.png")" alt="Finish Later" /></button>
-      <button class="exitsurvey" type="submit" id="close">Exit Survey</button>
-	  
-	  </div>
-	  <div style="clear:both;"></div>
-	 </div>
-
-	<div id="content">
-		 <div id="successContent">
-		 
-		 </div>
-	 @if (!string.IsNullOrEmpty(Model.GetErrorSummary()))
-	 { 
-		<div class="errormsg">
-			
-			<div class="image">
-				<img src="@Url.Content("~/Content/images/error.png")" style="vertical-align: middle; padding-right: 10px;" alt=""/>
-			</div>
-			<div class="message">
-			  <span style="font-weight:bold; font-size:10pt;">Please correct the following errors before continuing:</span>
-				<br/>
-			   
-				 @Html.Raw(Model.GetErrorSummary())
-			</div>
-			<div style="clear: both;">
-			</div>
-
-		</div>
-	 } 
-	  
-			 
-			 
-			 
-		@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "myform", @class = @Model.IsDraftModeStyleClass.ToString() }))
-		{  
-		   
-			  
-			 @Html.AntiForgeryToken() 
-			 
-			 @Html.Raw(Model.RenderHtml(true))
-			
-
-			 
-		   
-			<input type="hidden"  id="HiddenFieldsList"  name="HiddenFieldsList" value="@Model.HiddenFieldsList" />
-			<input type="hidden"  id="HighlightedFieldsList"  name="HighlightedFieldsList" value="@Model.HighlightedFieldsList" />
-			<input type="hidden"  id="DisabledFieldsList"  name="DisabledFieldsList" value="@Model.DisabledFieldsList" />
-			<input type="hidden"  id="RequiredFieldsList"  name="RequiredFieldsList" value="@Model.RequiredFieldsList" />
-			 <input type="hidden"  id="AssignList"  name="AssignList" value="@Model.AssignList" />
-			<input type="hidden"  name="is_save_action" value="false" />
-          	<input type="hidden"  name="is_print_action" value="false" />
-			<input type="hidden"  name="is_goto_action" value="false" /> 
-			 
-			 
-			<div id="nav">
-			<div id="prev" align="left">&nbsp;
-			 @if (Model.CurrentPage != 1)
-        {  
-				
-			  
-			  
-			  <button class="prev" id="PreviousButton" value="PreviousButton" onclick="Previous();"  name="PreviousButton"  type="button" > &nbsp; Previous</button>
         }
-			 </div>
-			 
+        UpdateResponse(UpdateUrl, NList, pValue, '@Model.ResponseId');
 
-			 <div id="savediv" align="center">
-			 <button class="save"  title="Click this button to finish the survey later. Use the survey link and pass code provided to return to the survey at a later time." type="button" id ="Savebutton" onclick="Save();" name="Savebutton" value="save"> &nbsp; Finish later</button>
-			 @if (Model.CurrentPage == Model.NumberOfPages)
-                {  
-                    <button   id="Print"class="printbottom" type="button"  name="Printbutton" value="Print" style="" >Print</button>
+    }
+
+    function ReplaceString(string) {
+
+        return string.replace(/&amp;/g, "&").replace(/&gt;/g, ">").replace(/&lt;/g, "<").replace(/&quot;/g, "\"").replace(/&#39;/g, "'");
+    }
+
+    $(function () {
+        $('#myform').submit(function () {
+
+            var DisabledFieldsList = $('#DisabledFieldsList').val();
+            if (DisabledFieldsList.length > 0) {
+                CCE_ProcessEnableAllControls(DisabledFieldsList);
+            }
+            return true;
+        });
+    });
+
+</script>
+@if (@Model.IsDraftModeStyleClass != "")
+{
+    <div id="header" class="TestHeader">
+
+        <h1>
+            @Model.SurveyInfo.SurveyName
+
+        </h1>
+
+    </div>
+}
+else
+{
+    <div id="header">
+
+        <h1>
+            @Model.SurveyInfo.SurveyName
+
+        </h1>
+
+    </div>
+
+}
+
+<div id="infobox">
+    <div id="pages" class="pages">
+
+
+
+        @if (Model.NumberOfPages > 0)
+        {
+            int num = 0;
+
+
+
+            for (int i = 1; Model.NumberOfPages > i - 1; i++)
+            {
+
+                num = i;
+                if (i == 1 && Model.CurrentPage > 1)
+                {
+
+
+                    @*<a  style="background-image: url('@Url.Content("~/Content/images/prev.png")'); background-repeat:no-repeat; background-position:center; width:13px;"   href="@string.Format("../../Survey/{0}/{1}", Model.ResponseId, Model.CurrentPage - 1)"    class="nextprev" title="Previous Page">
+                        &nbsp;&nbsp;&nbsp;
+                            </a>*@
+                    <a style="background-image: url('@Url.Content("~/Content/images/prev.png")'); background-repeat:no-repeat; background-position:center; width:13px;" href="@Url.RouteUrl(null, new { controller = "Survey", action = "Index", responseid = Model.ResponseId, PageNumber = Model.CurrentPage - 1 })" class="nextprev" title="Previous Page">
+                        &nbsp;&nbsp;&nbsp;
+                    </a>
+
+                }
+
+
+
+
+                if (Model.CurrentPage == i)
+                {
+                    <span class="current">@num</span>
+
+                }
+                else
+                {
+
+
+
+
+
+                    @Html.ActionLink(num.ToString(), "Index", "Survey", new { responseid = Model.ResponseId, PageNumber = num }, null)
+
+
+
+                }
+
+            }
+
+            if (Model.CurrentPage != Model.NumberOfPages)
+            {
+
+                @* <a  id="anchorNext"   style="background-image: url('@Url.Content("~/Content/images/next.png")');  background-repeat:no-repeat; background-position:center; width:13px;" href="@string.Format("../../Survey/{0}/{1}", Model.ResponseId, Model.CurrentPage + 1)" class="nextprev" title="Go to Next Page">
+                    &nbsp;&nbsp;&nbsp;
+                     </a>*@
+                <a id="anchorNext" style="background-image: url('@Url.Content("~/Content/images/next.png")');  background-repeat:no-repeat; background-position:center; width:13px;" href="@Url.RouteUrl(null, new { controller = "Survey", action = "Index", responseid = Model.ResponseId, PageNumber = Model.CurrentPage + 1 })" class="nextprev" title="Go to Next Page">
+                    &nbsp;&nbsp;&nbsp;
+                </a>
+
+
+            }
+
+        }
+
+
+
+
+    </div>
+
+    <div id="exit">
+        @*  <button class="save" type="submit" id="save2" style="background-image: none !important; width: 40px !important; text-align: center; padding: 3px 5px 1px 5px !important; margin-top: -1px; vertical-align: middle;"><img src="../../Content/images/save.png" alt="" /></button>
+        *@
+        <button class="savetop" type="button" id="Savebutton2" onclick="Save();" name="Savebutton" value="save" style="width: 40px !important; text-align: center; padding: 3px 5px 1px 5px !important; margin-top: -1px; vertical-align: middle;"><img src="@Url.Content("~/Content/images/save.png")" alt="Finish Later" /></button>
+        <button class="exitsurvey" type="submit" id="close">Exit Survey</button>
+
+    </div>
+    <div style="clear:both;"></div>
+</div>
+
+<div id="content">
+    <div id="successContent">
+
+    </div>
+    @if (!string.IsNullOrEmpty(Model.GetErrorSummary()))
+    {
+        <div class="errormsg">
+
+            <div class="image">
+                <img src="@Url.Content("~/Content/images/error.png")" style="vertical-align: middle; padding-right: 10px;" alt="" />
+            </div>
+            <div class="message">
+                <span style="font-weight:bold; font-size:10pt;">Please correct the following errors before continuing:</span>
+                <br />
+
+                @Html.Raw(Model.GetErrorSummary())
+            </div>
+            <div style="clear: both;">
+            </div>
+
+        </div>
+    }
+
+
+
+
+    @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "myform", @class = @Model.IsDraftModeStyleClass.ToString() }))
+    {
+
+
+        @Html.AntiForgeryToken()
+
+        @Html.Raw(Model.RenderHtml(true))
+
+
+
+
+        <input type="hidden" id="HiddenFieldsList" name="HiddenFieldsList" value="@Model.HiddenFieldsList" />
+        <input type="hidden" id="HighlightedFieldsList" name="HighlightedFieldsList" value="@Model.HighlightedFieldsList" />
+        <input type="hidden" id="DisabledFieldsList" name="DisabledFieldsList" value="@Model.DisabledFieldsList" />
+        <input type="hidden" id="RequiredFieldsList" name="RequiredFieldsList" value="@Model.RequiredFieldsList" />
+        <input type="hidden" id="AssignList" name="AssignList" value="@Model.AssignList" />
+        <input type="hidden" name="is_save_action" value="false" />
+        <input type="hidden" name="is_print_action" value="false" />
+        <input type="hidden" name="is_goto_action" value="false" />
+
+
+        <div id="nav">
+            <div id="prev" align="left">
+                &nbsp;
+                @if (Model.CurrentPage != 1)
+                {
+
+
+
+                    <button class="prev" id="PreviousButton" value="PreviousButton" onclick="Previous();" name="PreviousButton" type="button"> &nbsp; Previous</button>
                 }
             </div>
-				 
-			  
-			   @if (Model.CurrentPage == Model.NumberOfPages)
-          {  
-			   <div id="next" align="right"> 
-			  <button class="submits" type="submit"  name="Submitbutton" value="Submit" >
-			  Submit Survey &nbsp; </button>
-              
-			  </div>
-           
-              
-			  
-               }
-      else
-          {
-				   
-					<div id="next" align="right">
-					<button class="next"  name="ContinueButton" id="ContinueButton" onclick="Continue();" type="button" >Continue &nbsp; </button>
-					</div>
-											
-          }
-
-			  </div>    
-		   
-		}
-	   
-	 </div>
 
 
-	 
-	<div id="dialog" title="Your Survey has been saved.">
-				   <p>Please copy and save the <span style="font-weight:bold;">Survey Link</span> and <span style="font-weight:bold;">Pass Code</span> in order to return to the survey at a later time.</p>
-				<p><span style="font-weight:bold;">Survey Link:</span><br /><textarea id="url" cols="65"  style="  height:30px;  white-space:pre; background:#d6e7f5; border:1px solid #aecfea; padding:4px; margin-top:4px;" readonly="readonly"></textarea></p>
-				
-			   <p style="font-weight:bold;">Pass Code: <span id="spPassCode" style="font-size:12pt; background:#d6e7f5; border:1px solid #aecfea; padding:4px 10px;"></span></p>
-				  <hr/>
-				  <p>Optionally enter your email address to have the Survey Link and Pass Code emailed to you.</p>
-				  
-			   <p><span style="font-weight:bold;">Email Subject:</span><br /><textarea id="Subject" cols="65"  style="  height:30px;  white-space:pre;  border:1px solid #aecfea; padding:4px; margin-top:4px;"></textarea></p>
-				
-				<p><label for="email"  style="font-weight:bold;">Email:</label> <input id="email" type="text" style="width: 200px; margin-left:55px;"/></p>
-				  <p><label for="confirmemail" style="font-weight:bold;">Confirm Email:</label> <input id="confirmemail" type="text" style="width: 200px;"/>
-				  <button id="send" type="button" class="login" style="width:50px">Send</button></p>
-				<br />
-				<p style="font-size: 8pt; padding: 5px; background: #ffffa8; margin-top:-5px;"><strong>Note:</strong> Your email address will not be saved and will only be used to send you the survey link.</p>
-			   </div>
+            <div id="savediv" align="center">
+                <button class="save" title="Click this button to finish the survey later. Use the survey link and pass code provided to return to the survey at a later time." type="button" id="Savebutton" onclick="Save();" name="Savebutton" value="save"> &nbsp; Finish later</button>
+                @if (Model.CurrentPage == Model.NumberOfPages)
+                {
+                    <button id="Print" class="printbottom" type="button" name="Printbutton" value="Print" style="">Print</button>
+                }
+            </div>
 
 
-			   @*<div id="VideoDialog" title = "How this survey was created!">
-			   
-			   <iframe width="480" height="360" src="http://www.youtube.com/embed/BgTJnSKQKIs?rel=0" frameborder="0" allowfullscreen></iframe>
-			   
-			   
-			   </div>*@
+            @if (Model.CurrentPage == Model.NumberOfPages)
+            {
+                <div id="next" align="right">
+                    <button class="submits" type="submit" name="Submitbutton" value="Submit">
+                        Submit Survey &nbsp;
+                    </button>
 
-
-						 
-
-			  <div id="SimpleDialogBox" title="Error">
-			  <p><label id="SimpleDialogBoxPrempt">Prempt</label></p>
-			  <p style="text-align:right;"> <button  id="SimpleDialogBoxButton" type="button" class="login" style="width:50px;" onclick="CCE_CloseSimpleDialogBox();">Ok</button></p>
-			  </div>
-		   
+                </div>
 
 
 
-		  @* calendar(1)*@
+            }
+            else
+            {
 
-			  <div id="DialogBox" title="Error">
-			  <p><label id="DialogBoxPrempt">Prempt</label></p>
-			  <p> <input id="DialogBoxInput" type="text"  onclick="CCE_GetDateTimePicker();"  style="width: 240px;"/>
-			 @* <input type="button" height="16px" width="16px"  onclick="CCE_GetDateTimePicker();" style="background-image:@Url.Content("~/Content/images/calendar(1).png")" name="calendar">*@
-			   
-			  </p>
-			  <p style="text-align:left;"> 
-			  <button  id="YesButton" type="button" class="login" style="width:50px;" onclick="CCE_YesNoClick('Yes');">Yes</button>&nbsp;
-			  <button  id="NoButton" type="button" class="login" style="width:50px;" onclick="CCE_YesNoClick('No');">No</button>
-			  </p>
-			  <p style="text-align:right;"> 
-			  <button  id="DialogBoxOkButton" type="button" class="login" style="width:50px;" onclick="CCE_DialogBoxOkButton_Click();">Ok</button>&nbsp;
-			  <button  id="DialogBoxCancelButton" type="button" class="login" style="width:70px;" onclick="CCE_CloseDialogBox();">Cancel</button>
-			  </p>
-			  <input type="hidden"  id="DialogBoxHiddenField"  name="HiddenFieldsList" value=" " />
-			  <input type="hidden"  id="DialogBoxType"  name="DialogBoxType" value=" " />
-			  </div>
-			  
-              <div id="TimeOutdialog" title="Your session is about to expire!">
-	            <p>
-		            <span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
-		            You will be logged off in <span id="dialog-countdown" style="font-weight:bold"></span>
-	            </p>
+                <div id="next" align="right">
+                    <button class="next" name="ContinueButton" id="ContinueButton" onclick="Continue();" type="button">Continue &nbsp; </button>
+                </div>
 
-	            <p>Do you want to continue your session?</p>
-             </div>
-		   
-            <div id="exitdialog" title="Exit Survey" >
-               <p style="font-size:1.20em; font-weight:bold;">Are you sure you want to exit the Survey? </p>
-               <p style="font-size:1.20em; font-weight:bold;">Any unsaved changes will be lost!</p>
-              <!-- <p style="text-align:center;">
-                   <button  id="exitBtn" type="button" class="login" style="width:140px; height:30px;" onclick="">Exit Survey</button>&nbsp;
-                   <button  id="stayBtn" type="button" class="login" style="width:140px; height:30px; margin-left:10px;" onclick="">Stay on this page</button>
-               </p> -->
-           </div>
+            }
+
+        </div>
+
+    }
+
+</div>
 
 
-			 <div class="demo">
-		
-			  <div id="ErrordialogBox" title="Error">
-			 
-			  <p style="white-space:pre-wrap;"><label id="ErrordialogBoxPrempt">Prempt</label></p>
-			  <p style="text-align:right;"> <button  id="ErrordialogBoxButton" type="button" class="login" style="width:50px;" onclick="CCE_CloseErrorDialogBox();">Ok</button></p>
-			  </div>
-			 </div>
-			  
-			 
-             <div id="PrintdialogBox" title="Print">
-			 
-			 </div>
+
+<div id="dialog" title="Your Survey has been saved.">
+    <p>Please copy and save the <span style="font-weight:bold;">Survey Link</span> and <span style="font-weight:bold;">Pass Code</span> in order to return to the survey at a later time.</p>
+    <p><span style="font-weight:bold;">Survey Link:</span><br /><textarea id="url" cols="65" style="  height:30px;  white-space:pre; background:#d6e7f5; border:1px solid #aecfea; padding:4px; margin-top:4px;" readonly="readonly"></textarea></p>
+
+    <p style="font-weight:bold;">Pass Code: <span id="spPassCode" style="font-size:12pt; background:#d6e7f5; border:1px solid #aecfea; padding:4px 10px;"></span></p>
+    <hr />
+    <p>Optionally enter your email address to have the Survey Link and Pass Code emailed to you.</p>
+
+    <p><span style="font-weight:bold;">Email Subject:</span><br /><textarea id="Subject" cols="65" style="  height:30px;  white-space:pre;  border:1px solid #aecfea; padding:4px; margin-top:4px;"></textarea></p>
+
+    <p><label for="email" style="font-weight:bold;">Email:</label> <input id="email" type="text" style="width: 200px; margin-left:55px;" /></p>
+    <p>
+        <label for="confirmemail" style="font-weight:bold;">Confirm Email:</label> <input id="confirmemail" type="text" style="width: 200px;" />
+        <button id="send" type="button" class="login" style="width:50px">Send</button>
+    </p>
+    <br />
+    <p style="font-size: 8pt; padding: 5px; background: #ffffa8; margin-top:-5px;"><strong>Note:</strong> Your email address will not be saved and will only be used to send you the survey link.</p>
+</div>
+
+
+@*<div id="VideoDialog" title = "How this survey was created!">
+
+    <iframe width="480" height="360" src="http://www.youtube.com/embed/BgTJnSKQKIs?rel=0" frameborder="0" allowfullscreen></iframe>
+
+
+    </div>*@
+
+
+
+
+<div id="SimpleDialogBox" title="Error">
+    <p><label id="SimpleDialogBoxPrempt">Prempt</label></p>
+    <p style="text-align:right;"> <button id="SimpleDialogBoxButton" type="button" class="login" style="width:50px;" onclick="CCE_CloseSimpleDialogBox();">Ok</button></p>
+</div>
+
+
+
+
+@* calendar(1)*@
+
+<div id="DialogBox" title="Error">
+    <p><label id="DialogBoxPrempt">Prempt</label></p>
+    <p>
+        <input id="DialogBoxInput" type="text" onclick="CCE_GetDateTimePicker();" style="width: 240px;" />
+        @* <input type="button" height="16px" width="16px"  onclick="CCE_GetDateTimePicker();" style="background-image:@Url.Content("~/Content/images/calendar(1).png")" name="calendar">*@
+
+    </p>
+    <p style="text-align:left;">
+        <button id="YesButton" type="button" class="login" style="width:50px;" onclick="CCE_YesNoClick('Yes');">Yes</button>&nbsp;
+        <button id="NoButton" type="button" class="login" style="width:50px;" onclick="CCE_YesNoClick('No');">No</button>
+    </p>
+    <p style="text-align:right;">
+        <button id="DialogBoxOkButton" type="button" class="login" style="width:50px;" onclick="CCE_DialogBoxOkButton_Click();">Ok</button>&nbsp;
+        <button id="DialogBoxCancelButton" type="button" class="login" style="width:70px;" onclick="CCE_CloseDialogBox();">Cancel</button>
+    </p>
+    <input type="hidden" id="DialogBoxHiddenField" name="HiddenFieldsList" value=" " />
+    <input type="hidden" id="DialogBoxType" name="DialogBoxType" value=" " />
+</div>
+
+<div id="TimeOutdialog" title="Your session is about to expire!">
+    <p>
+        <span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
+        You will be logged off in <span id="dialog-countdown" style="font-weight:bold"></span>
+    </p>
+
+    <p>Do you want to continue your session?</p>
+</div>
+
+<div id="exitdialog" title="Exit Survey">
+    <p style="font-size:1.20em; font-weight:bold;">Are you sure you want to exit the Survey? </p>
+    <p style="font-size:1.20em; font-weight:bold;">Any unsaved changes will be lost!</p>
+    <!-- <p style="text-align:center;">
+         <button  id="exitBtn" type="button" class="login" style="width:140px; height:30px;" onclick="">Exit Survey</button>&nbsp;
+         <button  id="stayBtn" type="button" class="login" style="width:140px; height:30px; margin-left:10px;" onclick="">Stay on this page</button>
+     </p> -->
+</div>
+
+
+<div class="demo">
+
+    <div id="ErrordialogBox" title="Error">
+
+        <p style="white-space:pre-wrap;"><label id="ErrordialogBoxPrempt">Prempt</label></p>
+        <p style="text-align:right;"> <button id="ErrordialogBoxButton" type="button" class="login" style="width:50px;" onclick="CCE_CloseErrorDialogBox();">Ok</button></p>
+    </div>
+</div>
+
+
+<div id="PrintdialogBox" title="Print">
+
+</div>

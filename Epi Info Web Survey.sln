@@ -29,9 +29,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epi.Web.CheckCodeEngine", "Epi.Web.CheckCodeEngine\Epi.Web.CheckCodeEngine.csproj", "{6B084882-EF4F-4CF0-85B1-1E8C357AE822}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epi.Web.SurveyManager.Client", "Epi.Web.SurveyManager_Test\Epi.Web.SurveyManager.Client.csproj", "{13D8FD8D-1403-4C84-823A-1E27806CAC30}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 10
+		SccNumberOfProjects = 11
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs04
 		SccLocalPath0 = .
@@ -62,6 +64,9 @@ Global
 		SccProjectUniqueName9 = Epi.Web.CheckCodeEngine\\Epi.Web.CheckCodeEngine.csproj
 		SccProjectName9 = Epi.Web.CheckCodeEngine
 		SccLocalPath9 = Epi.Web.CheckCodeEngine
+		SccProjectUniqueName10 = Epi.Web.SurveyManager_Test\\Epi.Web.SurveyManager.Client.csproj
+		SccProjectName10 = Epi.Web.SurveyManager_Test
+		SccLocalPath10 = Epi.Web.SurveyManager_Test
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -162,6 +167,16 @@ Global
 		{6B084882-EF4F-4CF0-85B1-1E8C357AE822}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{6B084882-EF4F-4CF0-85B1-1E8C357AE822}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{6B084882-EF4F-4CF0-85B1-1E8C357AE822}.Release|x86.ActiveCfg = Release|Any CPU
+		{13D8FD8D-1403-4C84-823A-1E27806CAC30}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{13D8FD8D-1403-4C84-823A-1E27806CAC30}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{13D8FD8D-1403-4C84-823A-1E27806CAC30}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{13D8FD8D-1403-4C84-823A-1E27806CAC30}.Debug|x86.ActiveCfg = Debug|x86
+		{13D8FD8D-1403-4C84-823A-1E27806CAC30}.Debug|x86.Build.0 = Debug|x86
+		{13D8FD8D-1403-4C84-823A-1E27806CAC30}.Release|Any CPU.ActiveCfg = Release|x86
+		{13D8FD8D-1403-4C84-823A-1E27806CAC30}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{13D8FD8D-1403-4C84-823A-1E27806CAC30}.Release|Mixed Platforms.Build.0 = Release|x86
+		{13D8FD8D-1403-4C84-823A-1E27806CAC30}.Release|x86.ActiveCfg = Release|x86
+		{13D8FD8D-1403-4C84-823A-1E27806CAC30}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
