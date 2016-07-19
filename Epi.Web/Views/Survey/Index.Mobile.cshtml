@@ -429,7 +429,11 @@ function CloseDialog() {
 
     var signoutUrl = '@Url.Action("SignOut","Post")';
     //var homePageUrl = '@Url.Action("Index","Home")' + '/' + '@Model.SurveyInfo.SurveyId';
-     var homePageUrl ='@System.Configuration.ConfigurationManager.AppSettings["ExitURL"]'
+     var homePageUrl = '@System.Configuration.ConfigurationManager.AppSettings["ExitURL"]'
+     if (homePageUrl == "" || homePageUrl == " " || homePageUrl == null) {
+         homePageUrl = '@Url.Action("Index","Home")' + '/' + '@Model.SurveyInfo.SurveyId';
+     }
+
     SignOutAndRedirect(signoutUrl, homePageUrl);
 }
 

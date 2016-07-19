@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
   <!-- EF Runtime content -->
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="EIWSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+    <Schema Namespace="EIWSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Address">
           <Key>
             <PropertyRef Name="AddressId" />
@@ -317,19 +317,19 @@ warning 6002: The table/view 'OSELS_EIWS.dbo.SurveyMetaDataTransform' does not h
           <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
         </Function>
         <EntityContainer Name="EIWSModelStoreContainer">
-          <EntitySet Name="Address" EntityType="Self.Address" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="EIDatasource" EntityType="Self.EIDatasource" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="lk_RecordSource" EntityType="Self.lk_RecordSource" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="lk_Status" EntityType="Self.lk_Status" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="lk_SurveyType" EntityType="Self.lk_SurveyType" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Organization" EntityType="Self.Organization" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="States" EntityType="Self.States" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="SurveyMetaData" EntityType="Self.SurveyMetaData" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="SurveyMetaDataView" EntityType="Self.SurveyMetaDataView" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="SurveyResponse" EntityType="Self.SurveyResponse" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ErrorLog" EntityType="Self.ErrorLog" store:Type="Tables" store:Schema="dbo">
+          <EntitySet Name="Address" EntityType="Self.Address" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="EIDatasource" EntityType="Self.EIDatasource" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="lk_RecordSource" EntityType="Self.lk_RecordSource" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="lk_Status" EntityType="Self.lk_Status" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="lk_SurveyType" EntityType="Self.lk_SurveyType" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="Organization" EntityType="Self.Organization" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="States" EntityType="Self.States" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="SurveyMetaData" EntityType="Self.SurveyMetaData" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="SurveyMetaDataView" EntityType="Self.SurveyMetaDataView" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="SurveyResponse" EntityType="Self.SurveyResponse" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="ErrorLog" EntityType="Self.ErrorLog" store:Type="Tables" store:Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator">
             <DefiningQuery>SELECT 
 [ErrorLog].[ErrorDate] AS [ErrorDate], 
 [ErrorLog].[SurveyId] AS [SurveyId], 
@@ -345,7 +345,7 @@ warning 6002: The table/view 'OSELS_EIWS.dbo.SurveyMetaDataTransform' does not h
 [ErrorLog].[ErrorText2] AS [ErrorText2]
 FROM [dbo].[ErrorLog] AS [ErrorLog]</DefiningQuery>
           </EntitySet>
-          <EntitySet Name="SurveyMetaDataTransform" EntityType="Self.SurveyMetaDataTransform" store:Type="Tables" store:Schema="dbo">
+          <EntitySet Name="SurveyMetaDataTransform" EntityType="Self.SurveyMetaDataTransform" store:Type="Tables" store:Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator">
             <DefiningQuery>SELECT 
 [SurveyMetaDataTransform].[SurveyId] AS [SurveyId], 
 [SurveyMetaDataTransform].[TableName] AS [TableName], 
@@ -395,8 +395,8 @@ FROM [dbo].[SurveyMetaDataTransform] AS [SurveyMetaDataTransform]</DefiningQuery
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="EIWSModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
-        <EntityContainer Name="EIWSEntities" annotation:LazyLoadingEnabled="true">
+      <Schema Namespace="EIWSModel" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2009/11/edm" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+        <EntityContainer Name="EIWSEntities" annotation:LazyLoadingEnabled="true" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
           <EntitySet Name="lk_Status" EntityType="EIWSModel.lk_Status" />
           <EntitySet Name="lk_SurveyType" EntityType="EIWSModel.lk_SurveyType" />
           <EntitySet Name="SurveyMetaDatas" EntityType="EIWSModel.SurveyMetaData" />
@@ -551,7 +551,7 @@ FROM [dbo].[SurveyMetaDataTransform] AS [SurveyMetaDataTransform]</DefiningQuery
           <Key>
             <PropertyRef Name="OrganizationId" />
           </Key>
-          <Property Type="Int32" Name="OrganizationId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="OrganizationId" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
           <Property Type="String" Name="OrganizationKey" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="Organization1" Nullable="false" MaxLength="400" FixedLength="false" Unicode="true" />
           <Property Type="Boolean" Name="IsEnabled" Nullable="false" />
@@ -577,7 +577,7 @@ FROM [dbo].[SurveyMetaDataTransform] AS [SurveyMetaDataTransform]</DefiningQuery
           </Key>
           <Property Type="String" Name="name" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Type="Int32" Name="principal_id" Nullable="false" />
-          <Property Type="Int32" Name="diagram_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="diagram_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
           <Property Type="Int32" Name="version" />
           <Property Type="Binary" Name="definition" MaxLength="Max" FixedLength="false" />
         </EntityType>
@@ -585,7 +585,7 @@ FROM [dbo].[SurveyMetaDataTransform] AS [SurveyMetaDataTransform]</DefiningQuery
           <Key>
             <PropertyRef Name="AddressId" />
           </Key>
-          <Property Type="Int32" Name="AddressId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="AddressId" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
           <Property Type="String" Name="AddressLine1" Nullable="false" MaxLength="60" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="AddressLine2" MaxLength="60" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="City" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
@@ -645,7 +645,7 @@ FROM [dbo].[SurveyMetaDataTransform] AS [SurveyMetaDataTransform]</DefiningQuery
           <Key>
             <PropertyRef Name="DatasourceID" />
           </Key>
-          <Property Name="DatasourceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DatasourceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
           <Property Name="DatasourceServerName" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
           <Property Name="DatabaseType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="InitialCatalog" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
@@ -747,7 +747,7 @@ FROM [dbo].[SurveyMetaDataTransform] AS [SurveyMetaDataTransform]</DefiningQuery
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
-      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="EIWSModelStoreContainer" CdmEntityContainer="EIWSEntities">
           <EntitySetMapping Name="lk_Status">
             <EntityTypeMapping TypeName="EIWSModel.lk_Status">
@@ -930,7 +930,7 @@ FROM [dbo].[SurveyMetaDataTransform] AS [SurveyMetaDataTransform]</DefiningQuery
     </edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
-  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <Connection>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
@@ -950,21 +950,21 @@ FROM [dbo].[SurveyMetaDataTransform] AS [SurveyMetaDataTransform]</DefiningQuery
         <EntityTypeShape EntityType="EIWSModel.lk_Status" Width="1.5" PointX="11" PointY="2" Height="1.5956835937499996" />
         <EntityTypeShape EntityType="EIWSModel.lk_SurveyType" Width="1.5" PointX="0.875" PointY="2" Height="1.5956835937499996" />
         <EntityTypeShape EntityType="EIWSModel.SurveyMetaData" Width="1.5" PointX="4" PointY="0.875" Height="4.8648079427083317" />
-        <AssociationConnector Association="EIWSModel.FK_SurveyMetaData_lk_SurveyType" >
+        <AssociationConnector Association="EIWSModel.FK_SurveyMetaData_lk_SurveyType">
           <ConnectorPoint PointX="2.375" PointY="2.797841796875" />
           <ConnectorPoint PointX="4" PointY="2.797841796875" />
         </AssociationConnector>
         <EntityTypeShape EntityType="EIWSModel.SurveyResponse" Width="1.5" PointX="6.625" PointY="1" Height="3.3263964843749996" />
-        <AssociationConnector Association="EIWSModel.FK_SurveyResponse_lk_Status" >
+        <AssociationConnector Association="EIWSModel.FK_SurveyResponse_lk_Status">
           <ConnectorPoint PointX="11" PointY="2.797841796875" />
           <ConnectorPoint PointX="8.125" PointY="2.797841796875" />
         </AssociationConnector>
-        <AssociationConnector Association="EIWSModel.FK_SurveyResponse_SurveyMetaData" >
+        <AssociationConnector Association="EIWSModel.FK_SurveyResponse_SurveyMetaData">
           <ConnectorPoint PointX="5.5" PointY="2.6631982421875" />
           <ConnectorPoint PointX="6.625" PointY="2.6631982421875" />
         </AssociationConnector>
         <EntityTypeShape EntityType="EIWSModel.Organization" Width="1.5" PointX="3.5" PointY="6.5" Height="1.9802864583333308" />
-        <AssociationConnector Association="EIWSModel.FK_SurveyMetaData_Organization" >
+        <AssociationConnector Association="EIWSModel.FK_SurveyMetaData_Organization">
           <ConnectorPoint PointX="4.5" PointY="6.5" />
           <ConnectorPoint PointX="4.5" PointY="5.7398079427083317" />
         </AssociationConnector>
@@ -972,11 +972,11 @@ FROM [dbo].[SurveyMetaDataTransform] AS [SurveyMetaDataTransform]</DefiningQuery
         <EntityTypeShape EntityType="EIWSModel.Address" Width="1.5" PointX="9.125" PointY="7.75" Height="2.3648893229166674" />
         <EntityTypeShape EntityType="EIWSModel.State" Width="1.5" PointX="2.75" PointY="9.75" Height="1.5956835937499996" />
         <EntityTypeShape EntityType="EIWSModel.Admin" Width="1.5" PointX="5.75" PointY="7.25" Height="2.9417936197916674" />
-        <AssociationConnector Association="EIWSModel.FK_Address_Admin" >
+        <AssociationConnector Association="EIWSModel.FK_Address_Admin">
           <ConnectorPoint PointX="7.25" PointY="8.9708968098958337" />
           <ConnectorPoint PointX="9.125" PointY="8.9708968098958337" />
         </AssociationConnector>
-        <AssociationConnector Association="EIWSModel.FK_Admin_Organization" >
+        <AssociationConnector Association="EIWSModel.FK_Admin_Organization">
           <ConnectorPoint PointX="5" PointY="8.0574446614583337" />
           <ConnectorPoint PointX="5.75" PointY="8.0574446614583337" />
         </AssociationConnector>
