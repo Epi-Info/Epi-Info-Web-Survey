@@ -52,8 +52,8 @@ namespace Epi.Web.MVC.Controllers
                  if (result.UserIsValid)
                  {
                      FormsAuthentication.SetAuthCookie(GetPassCode(ReturnUrl), false);
-                     
 
+                     ReturnUrl = GetRedirectUrl(ReturnUrl);
 
                      return Redirect(ReturnUrl);
                  }
@@ -65,6 +65,29 @@ namespace Epi.Web.MVC.Controllers
              }
            
         }
+
+       private string GetRedirectUrl(string ReturnUrl)
+       {
+           string[] expressions = ReturnUrl.Split('/');
+
+           var Value = expressions[expressions.Length - 1];
+           Guid Result;
+           if (Guid.TryParse(Value, out Result))
+           {
+               return "";
+           }
+           else if (Value.Length == 4)
+           {
+
+               return ReturnUrl.Replace("/"+Value, "/1");
+
+           }
+           else
+           {
+
+               return "";
+           }
+       }
        [HttpPost]
       
        public ActionResult Index(PassCodeModel Model, string responseId, string ReturnUrl)
