@@ -38,12 +38,14 @@ namespace Epi.Web.MVC.Controllers
         {
             try
             {
-                if (pageNumber.ToString().Length == 4)
+                // Check if URL has passcode
+                string PassCode = this.Request.FilePath.ToString().Substring(this.Request.FilePath.ToString().LastIndexOf('/') + 1);
+                if (PassCode.Length == 4)
                 {
-                     
-                    string RedirectURL = this.Request.FilePath.ToString().Replace(pageNumber.ToString(), "1");
+                     string RedirectURL = this.Request.FilePath.ToString().Replace(PassCode, "1");
                     return Redirect(RedirectURL);
                 }
+                //
                 string calledThereby = "SurveyController.Index[HttpGet]";
                 string version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
                 bool IsAndroid = false;
