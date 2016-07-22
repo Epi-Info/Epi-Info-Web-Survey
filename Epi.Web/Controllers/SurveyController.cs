@@ -38,6 +38,12 @@ namespace Epi.Web.MVC.Controllers
         {
             try
             {
+                if (pageNumber.ToString().Length == 4)
+                {
+                     
+                    string RedirectURL = this.Request.FilePath.ToString().Replace(pageNumber.ToString(), "1");
+                    return Redirect(RedirectURL);
+                }
                 string calledThereby = "SurveyController.Index[HttpGet]";
                 string version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
                 bool IsAndroid = false;
@@ -819,5 +825,7 @@ namespace Epi.Web.MVC.Controllers
                 return xdoc;
                 }
             }
+
+        
     }
 }
