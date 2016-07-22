@@ -1869,8 +1869,8 @@ function CCE_Hours(pValue1, pValue2)
 
     var oneHour = 60*60*1000; // minutes * seconds*milliseconds
 
-    var result = Math.round(Math.abs((date1.getTime() - date2.getTime())/(oneHour)));
-
+    //var result = Math.round(Math.abs((date1.getTime() - date2.getTime())/(oneHour)));
+    var result = Math.round((date2.getTime() - date1.getTime()) / (oneDay));
     return result;
 }
 
@@ -1896,8 +1896,8 @@ function CCE_Minutes(pValue1, pValue2)
 
     var oneMinute = 60*1000; // seconds*milliseconds
 
-    var result = Math.round(Math.abs((date1.getTime() - date2.getTime())/(oneMinute)));
-
+   // var result = Math.round(Math.abs((date1.getTime() - date2.getTime())/(oneMinute)));
+    var result = Math.round((date2.getTime() - date1.getTime()) / (oneDay));
     return result;
 }
 
@@ -1923,8 +1923,8 @@ function CCE_Seconds(pValue1, pValue2)
 
     var oneSecond = 1000; // milliseconds
 
-    var result = Math.round(Math.abs((date1.getTime() - date2.getTime())/(oneSecond)));
-
+    //var result = Math.round(Math.abs((date1.getTime() - date2.getTime())/(oneSecond)));
+    var result = Math.round((date2.getTime() - date1.getTime()) / (oneDay));
     return result;
 }
 
