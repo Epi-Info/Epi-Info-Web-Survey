@@ -54,13 +54,13 @@ namespace MvcDynamicForms.Fields
             if (FunctionObjectAfter != null && !FunctionObjectAfter.IsNull())
             {
                 //checkboxTag.Attributes.Add("onblur", "return " + _key + "_after(this.id);"); //After
-                 checkboxTag.Attributes.Add("onclick", "return " + _key + "_click(this.id);");
+                checkboxTag.Attributes.Add("onclick", "return " + _key + "_after(this.id);");
             }
 
             if (FunctionObjectBefore != null && !FunctionObjectBefore.IsNull())
             {
                 //checkboxTag.Attributes.Add("onfocus", "return " + _key + "_before(this.id);"); //Before
-                 checkboxTag.Attributes.Add("onclick", "return " + _key + "_click(this.id);");
+                checkboxTag.Attributes.Add("onclick", "return " + _key + "_before(this.id);");
             }
 
             if (FunctionObjectClick != null && !FunctionObjectClick.IsNull())
