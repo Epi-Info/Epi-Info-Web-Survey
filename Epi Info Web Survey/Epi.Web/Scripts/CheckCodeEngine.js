@@ -567,11 +567,14 @@ CCE_Context.prototype.setValue = function (pName, pValue) {
             switch (cce_Symbol.Type) {
                 case "datepicker": //string has been converted to date for comparison with another date
 
-                  //  if (eval(document.getElementById("IsMobile"))) {
-                        var FormatedDate;
-                        var date = new Date(cce_Symbol.Value);
-                        FormatedDate = date.getMonth() + 1 + "/" + date.getDate() + "/" + date.getFullYear();
-                        cce_Symbol.Value = FormatedDate;
+                    //  if (eval(document.getElementById("IsMobile"))) {
+                    var FormatedDate;
+                    if (cce_Symbol.Value != null && cce_Symbol.Value !="")
+                    {
+                   var date = new Date(cce_Symbol.Value);
+                    FormatedDate = date.getMonth() + 1 + "/" + date.getDate() + "/" + date.getFullYear();
+                    cce_Symbol.Value = FormatedDate;
+                       } 
                         $(Jquery).val(FormatedDate);
                     //}
                     //else {
