@@ -182,7 +182,7 @@ namespace MvcDynamicForms.Fields
 
                         if (choice.Key.Contains("-"))
                         {
-                            string[] keyValue = choice.Key.Split(new char[] { '-' });
+                            string[] keyValue = choice.Key.Split(new char[] { '-' },2);
                             string comment = keyValue[0].Trim();
                             string description = keyValue[1].Trim();
 
