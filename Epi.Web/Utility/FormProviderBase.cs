@@ -123,6 +123,16 @@ namespace Epi.Web.MVC.Utility
                     int Index = 0;
                     int.TryParse(kvp.Value.ToString(),out Index);
 
+
+                    for (int i = 0; Choices.Count() > i;i++ )
+                    {
+                        if (Choices[i].Key == kvp.Value.ToString())
+                        {
+                            Index = i;
+
+                        }
+
+                    }
                         //((RadioList)field).Response = kvp.Value;
                         //((RadioList)field).SelectedValue = kvp.Value; 
 
