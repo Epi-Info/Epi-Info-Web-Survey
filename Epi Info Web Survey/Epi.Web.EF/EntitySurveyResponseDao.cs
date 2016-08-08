@@ -26,6 +26,7 @@ namespace Epi.Web.EF
         public List<SurveyResponseBO> GetSurveyResponse(List<string> SurveyResponseIdList, Guid UserPublishKey, int PageNumber = -1, int PageSize = -1)
         {
 
+
             List<SurveyResponseBO> result = new List<SurveyResponseBO>();
 
             if (SurveyResponseIdList.Count > 0)
@@ -191,6 +192,7 @@ namespace Epi.Web.EF
                         //    responseList = Context.SurveyResponses.Where(x => x.SurveyId == Id && x.StatusId != 4 && x.IsDraftMode == pIsDraftMode).OrderBy(x => x.DateCompleted).ToList();
                         
                         //}
+                        // New client Epi info version 7.2
                         if (pStatusId == 0) // All 2,3,and 4 if available
                         {
                         responseList = Context.SurveyResponses.Where(x => x.SurveyId == Id  && x.IsDraftMode == pIsDraftMode).OrderBy(x=>x.DateCompleted).ToList();
@@ -207,6 +209,12 @@ namespace Epi.Web.EF
                            responseList = Context.SurveyResponses.Where(x => x.SurveyId == Id && (x.StatusId == pStatusId || x.StatusId == 3)&& x.IsDraftMode == pIsDraftMode).OrderBy(x => x.DateCompleted).ToList();
 
                        }
+                        // Old client Epi info version 7.1.5.2
+                       if (pStatusId == -1) // All 2,3,and 4 if available
+                       {
+                           responseList = Context.SurveyResponses.Where(x => x.SurveyId == Id ).OrderBy(x => x.DateCompleted).ToList();
+                       }
+
                     }
                     
                    
