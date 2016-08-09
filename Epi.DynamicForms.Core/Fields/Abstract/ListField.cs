@@ -233,15 +233,20 @@ namespace MvcDynamicForms.Fields
         {
             
                 if (string.IsNullOrEmpty(choices)) return;
-
-                choices.Split(delimiter.ToCharArray(), StringSplitOptions.RemoveEmptyEntries)
-                    .Distinct()
-                    .ToList()
-                    .ForEach(c => _choices.Add(c, false));
-            if(Sort)
-            {
-                choices.ToList().Sort();
-            }
+                if (!Sort)
+                {
+                    choices.Split(delimiter.ToCharArray(), StringSplitOptions.RemoveEmptyEntries)
+                        .Distinct()
+                        .ToList() 
+                        .ForEach(c => _choices.Add(c, false));
+                }
+                else
+                {
+                    choices.Split(delimiter.ToCharArray(), StringSplitOptions.RemoveEmptyEntries)
+                     .Distinct()
+                     .ToList().OrderBy(a=>a).ToList()
+                     .ForEach(c => _choices.Add(c, false));
+               }
             
         }
 
