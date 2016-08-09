@@ -326,7 +326,7 @@ namespace Epi.Web.MVC.Controllers
                             
                             IsSaved = form.IsSaved = true;
                             form.StatusId = SurveyAnswer.Status;
-
+                            UpdateModel(form);
                             Epi.Web.Common.Message.UserAuthenticationResponse AuthenticationResponse = _isurveyFacade.GetAuthenticationResponse(responseId);
 
                             string strPassCode = Epi.Web.MVC.Utility.SurveyHelper.GetPassCode();
@@ -416,7 +416,7 @@ namespace Epi.Web.MVC.Controllers
 
                                 SurveyAnswer = _isurveyFacade.GetSurveyAnswerResponse(responseId).SurveyResponseList[0];
                                 SurveyAnswer.IsDraftMode = surveyInfoModel.IsDraftMode;
-
+                                UpdateModel(form);
                                 for (int i = 1; i < form.NumberOfPages+1; i++)
                                 {
                                     form = Epi.Web.MVC.Utility.FormProvider.GetForm(form.SurveyInfo, i, SurveyAnswer, isMobileDevice);
@@ -433,6 +433,7 @@ namespace Epi.Web.MVC.Controllers
 
                                 SurveyAnswer.IsDraftMode = surveyInfoModel.IsDraftMode;
                                 IsSubmited = true;//survey has been submited this will change the survey status to 3 - Completed
+                                UpdateModel(form);
                                 _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId, form, SurveyAnswer, IsSubmited, IsSaved, PageNumber);
                                 //FormsAuthentication.SignOut();
 
