@@ -148,7 +148,7 @@ namespace MvcDynamicForms.Fields
         public string InputFieldfontfamily { get { return this._InputFieldfontfamily; } set { this._InputFieldfontfamily = value; } }
 
         public string BackgroundColor { get { return this._BackgroundColor; } set { this._BackgroundColor = value; } }
-
+        public bool Sort { get; set; }
         public string GetInputFieldStyle(string ControlFontStyle, double ControlFontSize, string ControlFontFamily)
         {
             StringBuilder FontStyle = new StringBuilder();
