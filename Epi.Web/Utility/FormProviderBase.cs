@@ -665,7 +665,7 @@ namespace Epi.Web.MVC.Utility
             ((Select)field).ControlFontStyle = _FieldTypeID.Attribute("ControlFontStyle").Value;
 
             ((Select)field).EmptyOption = "Select";
-            ((Select)field).AddChoices(DropDownValues, "&#;");
+            ((Select)field).AddChoices(DropDownValues, "&#;", field.Sort);
 
             return (Select)field;
         }
