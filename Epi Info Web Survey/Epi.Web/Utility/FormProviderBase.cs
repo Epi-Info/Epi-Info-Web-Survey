@@ -657,7 +657,13 @@ namespace Epi.Web.MVC.Utility
             field.Name = _FieldTypeID.Attribute("Name").Value;
             field.FieldTypeId = FieldTypeId;
             field.IsAndroidfield = form.IsAndroid;
-            field.Sort = bool.Parse(_FieldTypeID.Attribute("Sort").Value); ;
+            if (!string.IsNullOrEmpty(_FieldTypeID.Attribute("Sort").Value))
+            {
+                field.Sort = bool.Parse(_FieldTypeID.Attribute("Sort").Value);
+            }
+            else { 
+               field.Sort = false;
+            }
             SetFieldCommon(field, form);
 
             ((Select)field).ShowEmptyOption = true;
