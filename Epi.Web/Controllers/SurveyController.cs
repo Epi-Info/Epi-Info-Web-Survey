@@ -34,7 +34,7 @@ namespace Epi.Web.MVC.Controllers
         }
  
         [HttpGet]
-        public ActionResult Index(string responseId, int pageNumber = 0)
+        public ActionResult Index(string responseId, int pageNumber = 0,bool issaved = false)
         {
             try
             {
@@ -165,7 +165,22 @@ namespace Epi.Web.MVC.Controllers
                                     }
                                 }
                             }
+                        if (this.Request.Url.ToString().Contains('?'))
+                        {
+                      
+                        Uri uri = new Uri(this.Request.Url.ToString());
+                        form.RedirectURL =  uri.GetLeftPart(UriPartial.Path);
+                        }
+                        form.IsSaved = issaved;
+                        if (Session["PassCode"]!=null)
+                        form.PassCode = Session["PassCode"].ToString();
+                       
+                        if (issaved)
+                        {
 
+                            form.StatusId = 1;
+                           
+                        }
                         return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
                 }
             }
@@ -326,7 +341,7 @@ namespace Epi.Web.MVC.Controllers
                             
                             IsSaved = form.IsSaved = true;
                             form.StatusId = SurveyAnswer.Status;
-                            UpdateModel(form);
+                            
                             Epi.Web.Common.Message.UserAuthenticationResponse AuthenticationResponse = _isurveyFacade.GetAuthenticationResponse(responseId);
 
                             string strPassCode = Epi.Web.MVC.Utility.SurveyHelper.GetPassCode();
@@ -342,12 +357,15 @@ namespace Epi.Web.MVC.Controllers
                             {
                                 form.PassCode = AuthenticationResponse.PassCode;
                             }
-
+                            Session["PassCode"] = form.PassCode;
+                            form = SetLists(form);
+                            UpdateModel(form);
                             _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId, form, SurveyAnswer, IsSubmited, IsSaved, PageNumber);
 
                             TempData["Width"] = form.Width + 5;
-                            actionResult = View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
-                            return actionResult;
+                          //  actionResult = View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
+                          //  return actionResult;
+                            return RedirectToAction("Index", "Survey", new { RequestId = form.ResponseId, PageNumber = CurrentPageNum,IsSaved = true });
                         }
                         else if (!string.IsNullOrEmpty(this.Request.Form["is_print_action"]) && this.Request.Form["is_print_action"].ToString().Equals("true", StringComparison.OrdinalIgnoreCase))
                             {
@@ -452,6 +470,7 @@ namespace Epi.Web.MVC.Controllers
                                 form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, CurrentPageNum, SurveyAnswer, isMobileDevice, "", IsAndroid);
                                 
                                 form = SetLists(form);
+                                UpdateModel(form);
                                  _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId, form, SurveyAnswer, IsSubmited, IsSaved, PageNumber); // To update Current Page
                                
                             
