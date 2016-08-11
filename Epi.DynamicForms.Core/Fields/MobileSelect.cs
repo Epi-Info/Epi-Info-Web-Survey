@@ -213,11 +213,11 @@ namespace MvcDynamicForms.Fields
 
             if (!IsValid)
             {
-                wrapper.Attributes["class"] = _fieldWrapperClass + " SelectNotValid";
+                wrapper.Attributes["class"] = _fieldWrapperClass + " SelectNotValid" + " ui-field-contain";
             }
             else
             {
-                wrapper.Attributes["class"] = _fieldWrapperClass;
+                wrapper.Attributes["class"] = _fieldWrapperClass + " ui-field-contain";
             }
             
             if (_IsHidden)
