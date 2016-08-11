@@ -51,21 +51,32 @@ namespace MvcDynamicForms.Fields
             checkboxTag.Attributes.Add("style", "" + ErrorStyle + ";" + IsHiddenStyle + ";" + IsHighlightedStyle);
             checkboxTag.MergeAttributes(_inputHtmlAttributes);
 
+            var FunctionCalls ="";
+
             if (FunctionObjectAfter != null && !FunctionObjectAfter.IsNull())
             {
                 //checkboxTag.Attributes.Add("onblur", "return " + _key + "_after(this.id);"); //After
-                checkboxTag.Attributes.Add("onclick", "return " + _key + "_after(this.id);");
+               // checkboxTag.Attributes.Add("onclick", "return " + _key + "_after(this.id);");
+                FunctionCalls += _key + "_after(this.id); ";
             }
 
             if (FunctionObjectBefore != null && !FunctionObjectBefore.IsNull())
             {
                 //checkboxTag.Attributes.Add("onfocus", "return " + _key + "_before(this.id);"); //Before
-                checkboxTag.Attributes.Add("onclick", "return " + _key + "_before(this.id);");
+               /// checkboxTag.Attributes.Add("onclick", "return " + _key + "_before(this.id);");
+                FunctionCalls += _key + "_before(this.id); ";
             }
 
             if (FunctionObjectClick != null && !FunctionObjectClick.IsNull())
             {
-                checkboxTag.Attributes.Add("onclick", "return " + _key + "_click(this.id);");
+               // checkboxTag.Attributes.Add("onclick", "return " + _key + "_click(this.id);");
+                FunctionCalls += _key + "_click(this.id); ";
+            }
+
+            if (!string.IsNullOrEmpty(FunctionCalls))
+            {
+            checkboxTag.Attributes.Add("onclick", "return " + FunctionCalls);
+            
             }
 
             html.Append(checkboxTag.ToString(TagRenderMode.SelfClosing));
