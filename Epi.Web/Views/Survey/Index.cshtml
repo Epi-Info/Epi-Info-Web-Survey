@@ -231,7 +231,7 @@
         });
 
         var responseUrl = GetRedirectionUrl();
-        $('#url').val(responseUrl);
+        $('#url').val('@Model.RedirectURL');
         var Subject = "Link for Survey: " + '@Model.SurveyInfo.SurveyName';
         Subject = ReplaceString(Subject);
         $('#Subject').val(Subject);
@@ -319,7 +319,8 @@
         /*Open the modal popup on link click*/
         $('#copy').click(function () {
             $("#dialog").dialog("open");
-            $('#url').val(GetRedirectionUrl());
+           // $('#url').val(GetRedirectionUrl());
+            $('#url').val('@Model.RedirectURL');
             return false;
         });
 
