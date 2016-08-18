@@ -31,7 +31,21 @@ namespace MvcDynamicForms.Fields
             StringBuilder StyleValues = new StringBuilder();
             prompt.Attributes.Add("style", "display:block !important; ");
             html.Append(prompt.ToString());
-
+            var OuterDiv = new TagBuilder("div");
+            if (this.IsAndroidfield)
+            {
+                 
+                OuterDiv.Attributes.Add("class", "mainselection");
+                OuterDiv.SetInnerText("");
+                html.Append(OuterDiv.ToString(TagRenderMode.StartTag));
+            }
+            if (this.IsAndroidfield)
+            {
+                var Div = new TagBuilder("div");
+                Div.Attributes.Add("class", "arrow_icon");
+                Div.SetInnerText("");
+                html.Append(Div.ToString());
+            }
             if (!IsValid)
             {
                 ErrorStyle = ";border-color: red";
@@ -43,7 +57,7 @@ namespace MvcDynamicForms.Fields
 
             if (this.IsAndroidfield)
             {
-                select.Attributes.Add("data-role", "main");
+                select.Attributes.Add("data-role", "none");
                 select.Attributes.Add("data-native-menu", "false");
             }
             //select.Attributes.Add("data-corners",  "true");
@@ -85,11 +99,11 @@ namespace MvcDynamicForms.Fields
             {
                 if ((size.Width) > _ControlWidth)
                 {
-                    select.Attributes.Add("class", "validate[required] text-input fix-me");
+                    select.Attributes.Add("class", "validate[required] text-input fix-me   ");
                 }
                 else
                 {
-                    select.Attributes.Add("class", "validate[required] text-input");
+                    select.Attributes.Add("class", "validate[required] text-input   ");
                 }
                 select.Attributes.Add("data-prompt-position", "topLeft:10");
             }
@@ -97,8 +111,9 @@ namespace MvcDynamicForms.Fields
             {
                 if ((size.Width) > _ControlWidth)
                 {
-                    select.Attributes.Add("class", "fix-me");
+                    select.Attributes.Add("class", "fix-me   ");
                 }
+                
             }
             string IsHiddenStyle = "";
             string IsHighlightedStyle = "";
@@ -119,7 +134,16 @@ namespace MvcDynamicForms.Fields
                 scriptReadOnlyText.InnerHtml = "$(function(){  var List = new Array();List.push('" + _key + "');CCE_Disable(List, false);});";
                 html.Append(scriptReadOnlyText.ToString(TagRenderMode.Normal));
                 }
+            //var optgroup = new TagBuilder("optgroup ");
+            //if (this.IsAndroidfield)
+            //{
+ 
 
+            //    optgroup.Attributes.Add("label", null);
+            //    optgroup.SetInnerText("");
+            //   // html.Append(optgroup.ToString());
+            //    html.Append(optgroup.ToString(TagRenderMode.StartTag));
+            //}
 
             if (ShowEmptyOption)
             {
@@ -200,8 +224,17 @@ namespace MvcDynamicForms.Fields
                     }
                     break;
             }
-
+            //if (this.IsAndroidfield)
+            //{
+                
+            //    html.Append(optgroup.ToString(TagRenderMode.EndTag));
+            //}
             html.Append(select.ToString(TagRenderMode.EndTag));
+            if (this.IsAndroidfield)
+            {
+ 
+                html.Append(OuterDiv.ToString(TagRenderMode.EndTag));
+            }
             var hidden = new TagBuilder("input");
             hidden.Attributes.Add("type", "hidden");
             hidden.Attributes.Add("id", inputName + "_hidden");
@@ -210,14 +243,18 @@ namespace MvcDynamicForms.Fields
             html.Append(hidden.ToString(TagRenderMode.SelfClosing));
 
             var wrapper = new TagBuilder(_fieldWrapper);
-
+            string AndroidClasses = "";
+            if (this.IsAndroidfield)
+            {
+                AndroidClasses = " ui-field-contain   ";
+            }
             if (!IsValid)
             {
-                wrapper.Attributes["class"] = _fieldWrapperClass + " SelectNotValid" + " ui-field-contain";
+                wrapper.Attributes["class"] = _fieldWrapperClass + " SelectNotValid" + AndroidClasses + "   ";
             }
             else
             {
-                wrapper.Attributes["class"] = _fieldWrapperClass + " ui-field-contain";
+                wrapper.Attributes["class"] = _fieldWrapperClass + AndroidClasses + "   ";
             }
             
             if (_IsHidden)
