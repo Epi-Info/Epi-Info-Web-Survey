@@ -509,8 +509,8 @@ namespace Epi.Web.MVC.Utility
         {
             if (!string.IsNullOrEmpty(AnswerValue.Value))
             {
-            string NewValue = CommentLegalValues.Where(x => x.Contains(AnswerValue.Value)).Single();
-            NewValue = NewValue.Split('-')[1];
+            string NewValue = CommentLegalValues.Where(x => x.StartsWith(AnswerValue.Value + "-")).Single();
+            NewValue = NewValue.Split(new char[] { '-' }, 2)[1]; // Split(new char[] { '-' }, 2)
             QuestionAnswerList.Remove(AnswerValue);
             AnswerValue.Value = NewValue;
             }
