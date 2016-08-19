@@ -32,21 +32,21 @@ namespace MvcDynamicForms.Fields
             prompt.Attributes.Add("style", "display:block !important; ");
             html.Append(prompt.ToString());
             var OuterDiv = new TagBuilder("div");
-            if (this.IsAndroidfield)
-            {
+            //if (this.IsAndroidfield)
+            //{
                  
                 OuterDiv.Attributes.Add("class", "mainselection");
                 OuterDiv.Attributes.Add("id", inputName + "_mainselection");
                 OuterDiv.SetInnerText("");
                 html.Append(OuterDiv.ToString(TagRenderMode.StartTag));
-            }
-            if (this.IsAndroidfield)
-            {
+            //}
+           // if (this.IsAndroidfield)
+           // {
                 var Div = new TagBuilder("div");
                 Div.Attributes.Add("class", "arrow_icon");
                 Div.SetInnerText("");
                 html.Append(Div.ToString());
-            }
+            //}
             if (!IsValid)
             {
                 ErrorStyle = ";border-color: red";
@@ -56,11 +56,11 @@ namespace MvcDynamicForms.Fields
             select.Attributes.Add("id", inputName);
             select.Attributes.Add("name", inputName);
 
-            if (this.IsAndroidfield)
-            {
+            //if (this.IsAndroidfield)
+            //{
                 select.Attributes.Add("data-role", "none");
                 select.Attributes.Add("data-native-menu", "false");
-            }
+           // }
             //select.Attributes.Add("data-corners",  "true");
             //select.Attributes.Add("data-icon", "arrow-d");
             //select.Attributes.Add("data-shadow", "true");
@@ -239,11 +239,11 @@ namespace MvcDynamicForms.Fields
             //    html.Append(optgroup.ToString(TagRenderMode.EndTag));
             //}
             html.Append(select.ToString(TagRenderMode.EndTag));
-            if (this.IsAndroidfield)
-            {
+          //  if (this.IsAndroidfield)
+           // {
  
                 html.Append(OuterDiv.ToString(TagRenderMode.EndTag));
-            }
+           // }
             var hidden = new TagBuilder("input");
             hidden.Attributes.Add("type", "hidden");
             hidden.Attributes.Add("id", inputName + "_hidden");
@@ -253,10 +253,10 @@ namespace MvcDynamicForms.Fields
 
             var wrapper = new TagBuilder(_fieldWrapper);
             string AndroidClasses = "";
-            if (this.IsAndroidfield)
-            {
+           // if (this.IsAndroidfield)
+           // {
                 AndroidClasses = " ui-field-contain   ";
-            }
+           // }
             if (!IsValid)
             {
                 wrapper.Attributes["class"] = _fieldWrapperClass + " SelectNotValid" + AndroidClasses + "   ";
