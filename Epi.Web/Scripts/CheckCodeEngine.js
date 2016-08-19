@@ -856,15 +856,24 @@ Rule_Hide.prototype.Execute = function ()
                     break;
                 case "legalvalues":
                     query = '#mvcdynamicfield_' + pCheckCodeList[i] + "_fieldWrapper";
-                    $(query).find('span').css("background-color","yellow");
+                    $(query).find('span').css("background-color", "yellow");
+                    //mainselection
+                    query = '#mvcdynamicfield_' + pCheckCodeList[i] ;
+                   $(query).css("background-color", "yellow");
                     break;
                 case "yesno":
                     query = '#mvcdynamicfield_' + pCheckCodeList[i] + "_fieldWrapper";
-                    $(query).find('span').css("background-color","yellow");
+                    $(query).find('span').css("background-color", "yellow");
+                    //mainselection
+                    query = '#mvcdynamicfield_' + pCheckCodeList[i] ;
+                    $(query).css("background-color", "yellow");
                     break;
                 case "commentlegal":
                     query = '#mvcdynamicfield_' + pCheckCodeList[i] + "_fieldWrapper";
-                    $(query).find('span').css("background-color","yellow");
+                    $(query).find('span').css("background-color", "yellow");
+                    //mainselection
+                    query = '#mvcdynamicfield_' + pCheckCodeList[i] ;
+                    $(query).css("background-color", "yellow");
                     break;
                 case "datepicker":
                     query = '#mvcdynamicfield_' + pCheckCodeList[i] + "_fieldWrapper";
@@ -995,15 +1004,24 @@ if (eval(document.getElementById("IsMobile"))){
                     break;
                 case "legalvalues":
                     query = '#mvcdynamicfield_' + pCheckCodeList[i] + "_fieldWrapper";
-                    $(query).find('span').removeAttr('Style'); 
+                    $(query).find('span').removeAttr('Style');
+                    //mainselection
+                    query = '#mvcdynamicfield_' + pCheckCodeList[i];
+                    $(query).removeAttr('Style');
                     break;
                  case "yesno":
                     query = '#mvcdynamicfield_' + pCheckCodeList[i] + "_fieldWrapper";
-                      $(query).find('span').removeAttr('Style'); 
+                    $(query).find('span').removeAttr('Style');
+                     //mainselection
+                    query = '#mvcdynamicfield_' + pCheckCodeList[i];
+                    $(query).removeAttr('Style');
                     break;
                 case "commentlegal":
                     query = '#mvcdynamicfield_' + pCheckCodeList[i] + "_fieldWrapper";
-                      $(query).find('span').removeAttr('Style'); 
+                    $(query).find('span').removeAttr('Style');
+                    //mainselection
+                    query = '#mvcdynamicfield_' + pCheckCodeList[i];
+                    $(query).removeAttr('Style');
                     break;
                case "datepicker":
                       query = '#mvcdynamicfield_' + pCheckCodeList[i] + "_fieldWrapper";
