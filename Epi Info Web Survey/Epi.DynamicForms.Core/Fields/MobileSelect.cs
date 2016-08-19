@@ -36,6 +36,7 @@ namespace MvcDynamicForms.Fields
             {
                  
                 OuterDiv.Attributes.Add("class", "mainselection");
+                OuterDiv.Attributes.Add("id", inputName + "_mainselection");
                 OuterDiv.SetInnerText("");
                 html.Append(OuterDiv.ToString(TagRenderMode.StartTag));
             }
@@ -117,7 +118,15 @@ namespace MvcDynamicForms.Fields
             }
             string IsHiddenStyle = "";
             string IsHighlightedStyle = "";
+            if (_IsHidden)
+            {
+                IsHiddenStyle = "display:none";
+            }
 
+            if (_IsHighlighted)
+            {
+                IsHighlightedStyle = "background-color:yellow";
+            }
             //if (_IsDisabled)
             //{
             //    select.Attributes.Add("disabled", "disabled");
@@ -256,7 +265,7 @@ namespace MvcDynamicForms.Fields
             {
                 wrapper.Attributes["class"] = _fieldWrapperClass + AndroidClasses + "   ";
             }
-            
+         
             if (_IsHidden)
             {
                 wrapper.Attributes["style"] = "display:none";
