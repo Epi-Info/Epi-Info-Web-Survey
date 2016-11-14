@@ -111,7 +111,8 @@ namespace Epi.Web.Common.Xml
                 SourceTableXml.Load(SourceTableXmlpath);
                 XDocument XSourceTable = ToXDocument(SourceTableXml);
                 XElement SourceTableElement = XSourceTable.XPathSelectElement("SourceTable");
-                var TableName = SourceTableElement.Attribute("TableName").Value;
+                SourceTableElement.SetAttributeValue("TableName", "code" + NewPage.Variable_Name);
+                var TableName = SourceTableElement.Attribute("TableName").Value;              
                 FiledElement.SetAttributeValue("SourceTableName", TableName);
                 FiledElement.SetAttributeValue("CodeColumnName", NewPage.Variable_Name);
                 FiledElement.SetAttributeValue("TextColumnName", NewPage.Variable_Name);
@@ -152,7 +153,7 @@ namespace Epi.Web.Common.Xml
             SourceTableXml.Load(SourceTableXmlpath);
             XDocument XSourceTable = ToXDocument(SourceTableXml);
             XElement SourceTableElement = XSourceTable.XPathSelectElement("SourceTable");
-
+            SourceTableElement.SetAttributeValue("TableName", "code" + NewPage.Variable_Name);
             // SourceTableElement.SetAttributeValue("TableName", NewPage.List_Values[0]);
             for (int i = 1; NewPage.List_Values.Count() > i; i++)
             {
