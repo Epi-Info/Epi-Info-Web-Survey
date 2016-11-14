@@ -248,7 +248,7 @@ namespace Epi.Web.MVC.Controllers
 
 
                     ///////////////////////////////////////////
-                    string path = Directory.GetParent(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)).FullName;
+                 //   string path = Directory.GetParent(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)).FullName;
                     if (Model.SurveyMode.ToString() == "1")
                     {
                         IsDraftMode = false;
@@ -258,10 +258,10 @@ namespace Epi.Web.MVC.Controllers
                         IsDraftMode = true;
 
                     }
-                    if (Environment.OSVersion.Version.Major >= 6)
-                    {
-                        path = Directory.GetParent(path).ToString();
-                    }
+                   // if (Environment.OSVersion.Version.Major >= 6)
+                   // {
+                       // path = Directory.GetParent(path).ToString();
+                    //}
 
 
 
@@ -283,6 +283,7 @@ namespace Epi.Web.MVC.Controllers
                     {
                         if (PageSize > 0)
                         {
+                            var Sheet = package.Workbook.Worksheets.Add("Sheet1");
                             for (int i = 1; SurveyAnswerResponse.NumberOfPages > i - 1; i++)
                             {
                                 SurveyAnswerRequest = SetMessageObject(false, Model.SurveyKey, new Guid(Model.UserPublishKey), Model.OrganizationKey, IsDraftMode, 0, i, PageSize);
@@ -291,29 +292,30 @@ namespace Epi.Web.MVC.Controllers
 
                                 foreach (var item in Response.SurveyResponseList)
                                 {
-
+                                  //  var item = Response.SurveyResponseList[0];
                                     var ResponseValueList = SurveyHelper.GetQuestionAnswerList(item.XML, List);
                                     if (InitialSetupCounter == 0)
                                     {
                                         NumberOfPages = SurveyHelper.GetNumberOfPags(item.XML);
                                         InitialSetupCounter++;
+                                        int col = 1;
                                         for (int j = 1; NumberOfPages > j - 1; j++)
                                         {
 
-                                            int col = 1;
-                                            var ws = package.Workbook.Worksheets.FirstOrDefault(x => x.Name == "Page" + j);
-                                            if (ws == null)
-                                            {
-                                                var sheet = package.Workbook.Worksheets.Add("Page" + j);
-                                            }
+                                            
+                                           // var ws = package.Workbook.Worksheets.FirstOrDefault(x => x.Name == "Page" + j);
+                                           // if (ws == null)
+                                            //{
+                                                //var sheet = package.Workbook.Worksheets.Add("Page" + j);
+                                           // }
                                             var List1 = ResponseValueList.Where(x => x.PageNumber == j).ToList();
 
-                                            var Sheet = package.Workbook.Worksheets["Page" + j];
+                                           // var Sheet = package.Workbook.Worksheets["Page" + j];
 
                                             foreach (var item1 in List1)
                                             {
-
-                                                Sheet.Cells[1, col].Value = item1.ControlName;
+                                                Row = 1;
+                                                Sheet.Cells[Row, col].Value = item1.ControlName;
                                                 switch (item1.ControlType)
                                                 {
                                                     case "NumericTextBox":
@@ -326,23 +328,26 @@ namespace Epi.Web.MVC.Controllers
 
                                                         break;
                                                 }
+                                                Sheet.Cells[Row+1, col].Value = item1.Value;
                                                 col++;
                                             }
 
 
                                         }
+                                        Row++;
 
                                     }//if
                                     else
                                     {
+                                        int col = 1;
                                         for (int j = 1; NumberOfPages > j - 1; j++)
                                         {
 
 
                                             var List2 = ResponseValueList.Where(x => x.PageNumber == j).ToList();
 
-                                            var Sheet = package.Workbook.Worksheets["Page" + j];
-                                            int col = 1;
+                                            //var Sheet = package.Workbook.Worksheets["Page" + j];
+                                           // int col = 1;
                                             foreach (var ListItem in List2)
                                             {
 
