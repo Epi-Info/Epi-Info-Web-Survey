@@ -116,5 +116,7 @@ namespace Epi.Web.Interfaces.DataInterfaces
          int GetOrganizationId(string OrgKey);
 
          List<SurveyInfoBO> GetAllSurveysByOrgKey(string OrgKey);
+
+         void ValidateServername(SurveyInfoBO pRequestMessage);
     }
 }

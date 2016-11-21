@@ -388,7 +388,7 @@ namespace Epi.Web.EF
                    SurveyInfo.TemplateXMLSize = RemoveWhitespace(SurveyInfo.XML).Length;
                    SurveyInfo.DateCreated = DateTime.Now;
                    SurveyInfo.LastUpdate = DateTime.Now;
-                   SurveyInfo.IsSqlProject = SurveyInfo.IsSqlProject;
+                   SurveyInfo.IsSqlProject = SurveyInfo.IsSqlProject;                   
                    var SurveyMetaDataEntity = Mapper.Map(SurveyInfo);
                    SurveyMetaDataEntity.OrganizationId = OrganizationId;
                    Context.AddToSurveyMetaDatas(SurveyMetaDataEntity);
@@ -537,6 +537,19 @@ namespace Epi.Web.EF
             catch (Exception ex)
             {
                 throw (ex);
+            }
+        }
+
+        public void ValidateServername(SurveyInfoBO pRequestMessage)
+        {
+            var Context = DataObjectFactory.CreateContext();
+            string eweAdostring = Context.Connection.ConnectionString.Substring(Context.Connection.ConnectionString.ToLower().IndexOf("data source="), Context.Connection.ConnectionString.Substring(Context.Connection.ConnectionString.ToLower().IndexOf("data source=")).IndexOf(";"));
+
+            string epiDBstring = pRequestMessage.DBConnectionString.Substring(0, pRequestMessage.DBConnectionString.IndexOf(";"));
+
+            if (eweAdostring.ToLower() != epiDBstring.ToLower())
+            {
+                pRequestMessage.IsSqlProject = false;
             }
         }
     }
