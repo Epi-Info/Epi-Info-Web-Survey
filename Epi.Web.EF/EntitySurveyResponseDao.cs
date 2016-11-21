@@ -321,6 +321,14 @@ namespace Epi.Web.EF
             using (var Context = DataObjectFactory.CreateContext() ) 
             {
                 SurveyResponse SurveyResponseEntity = Mapper.ToEF(SurveyResponse);
+                try
+                {
+                    SurveyResponseEntity.RecordSourceId = Context.lk_RecordSource.Where(u => u.RecordSource == "EIWS").Select(u => u.RecordSourceId).SingleOrDefault();
+                }
+                catch(Exception)
+                {
+
+                }
                 Context.AddToSurveyResponses(SurveyResponseEntity);
                
                 Context.SaveChanges();

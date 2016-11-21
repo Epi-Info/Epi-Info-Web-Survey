@@ -802,8 +802,9 @@ namespace Epi.Web.MVC.Controllers
             XmlElement PageRoot = xml.CreateElement("Page");
             if (CurrentPage != 0)
                 {
-                PageRoot.SetAttribute("PageNumber", CurrentPage.ToString());
+                PageRoot.SetAttribute("PageNumber", CurrentPage.ToString());               
                 PageRoot.SetAttribute("PageId", Pageid);//Added PageId Attribute to the page node
+                PageRoot.SetAttribute("MetaDataPageId", Pageid.ToString());
                 xml.AppendChild(PageRoot);
                 }
 
