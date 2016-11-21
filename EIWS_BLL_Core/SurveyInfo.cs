@@ -142,6 +142,11 @@ namespace Epi.Web.BLL
             SurveyInfoBO result = pValue;
             if (ValidateSurveyFields(pValue))
             {
+                if (result.IsSqlProject == true)
+                {
+                    this.SurveyInfoDao.ValidateServername(pValue);
+                    result.IsSqlProject = pValue.IsSqlProject;
+                }
                 this.SurveyInfoDao.UpdateSurveyInfo(pValue);
                 result.StatusText = "Successfully updated survey information.";
             }else{

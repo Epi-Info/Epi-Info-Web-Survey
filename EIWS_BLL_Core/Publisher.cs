@@ -53,8 +53,8 @@ namespace Epi.Web.BLL
                                         if (ValidateSurveyFields(pRequestMessage))
                                         {
                                             try
-                                            {
-
+                                            {                                               
+                                              
                                                 Epi.Web.Common.BusinessObject.SurveyInfoBO BO = new Epi.Web.Common.BusinessObject.SurveyInfoBO();
 
                                                 BO.SurveyId = SurveyId.ToString();
@@ -78,6 +78,10 @@ namespace Epi.Web.BLL
                                                 BO.TemplateXMLSize = pRequestMessage.TemplateXMLSize;
                                                 BO.IsDraftMode = pRequestMessage.IsDraftMode;
                                                 BO.StartDate = pRequestMessage.StartDate;
+                                                if (pRequestMessage.IsSqlProject)
+                                                {
+                                                    this.SurveyInfoDao.ValidateServername(pRequestMessage);
+                                                }
 
                                                 BO.IsSqlProject = pRequestMessage.IsSqlProject;
 
@@ -170,6 +174,10 @@ namespace Epi.Web.BLL
                             BO.TemplateXMLSize = pRequestMessage.TemplateXMLSize;
                             BO.IsDraftMode = pRequestMessage.IsDraftMode;
                             BO.StartDate = pRequestMessage.StartDate;
+                            if (pRequestMessage.IsSqlProject)
+                            {
+                                this.SurveyInfoDao.ValidateServername(pRequestMessage);
+                            }
                             BO.IsSqlProject = pRequestMessage.IsSqlProject;
 
                             this.SurveyInfoDao.UpdateSurveyInfo(BO);
@@ -180,7 +188,7 @@ namespace Epi.Web.BLL
                             {
                                 DbConnectionStringBO DbConnectionStringBO = new DbConnectionStringBO();
                                 DbConnectionStringBO = GetConnection(pRequestMessage.DBConnectionString);
-                                DbConnectionStringBO.SurveyId = SurveyId;
+                                DbConnectionStringBO.SurveyId = SurveyId;                                
                               //  this.SurveyInfoDao.InsertConnectionString(DbConnectionStringBO);
                                 this.SurveyInfoDao.UpdateConnectionString(DbConnectionStringBO);
                             }
