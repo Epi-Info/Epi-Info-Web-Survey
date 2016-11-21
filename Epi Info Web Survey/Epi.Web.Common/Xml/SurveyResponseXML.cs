@@ -112,8 +112,9 @@ namespace Epi.Web.Common.Xml
             XmlElement PageRoot = xml.CreateElement("Page");
             if (CurrentPage != 0)
                 {
-                PageRoot.SetAttribute("PageNumber", CurrentPage.ToString());
-                PageRoot.SetAttribute("PageId", Pageid); 
+                PageRoot.SetAttribute("PageNumber", CurrentPage.ToString());               
+                PageRoot.SetAttribute("PageId", Pageid);
+                PageRoot.SetAttribute("MetaDataPageId", Pageid.ToString()); 
                 xml.AppendChild(PageRoot);
                 }
 
