@@ -150,7 +150,16 @@
 </style>
 <script type="text/javascript">
     $(document).ready(function () {
-
+        
+        if ($('#PublishDivState').val() == "True") {
+            Toggle('PublishDivExpand');
+        }
+        if ($('#RePublishDivState').val() == "True") {
+            Toggle('RePublishDivExpand');
+        }
+        if ($('#DownLoadDivState').val() == "True") {
+            Toggle('DownloadDivExpand');
+        }
         $('#SurveyIdDiv').hide();
        //$('#PublishDiv').hide();
        //$('#DownLoadDiv').hide();
@@ -166,10 +175,9 @@
 
         ('#Path').val('');
         ('#Newfile').val('');
-
-
+ 
        
-
+        
     });
 
 
@@ -217,11 +225,109 @@
         }
     }
    
+    //('PublishDivExpand')
+    function Toggle(Obj){
+       
+        switch (Obj){
+            case "PublishDivExpand":
+                $('.Publishcollaps').removeAttr("style");
+                $('.Publishcollaps').css({ "cursor": "pointer"});
+                $('.Publishexpand').css({ "display": "none", "visibility": "collapse" });
+                $('#RequiredLable').css({ "display": "", "visibility": "" });
+                $('#PublishDiv').css({ "display": "", "visibility": "" });
+                $('#PublishDivState').val('true');
+            break;
+            case "PublishDivCollaps":
+                $('#PublishDivState').val('false');
+                $('.Publishcollaps').css({ "display": "none", "visibility": "collapse" });
+                $('.Publishexpand').removeAttr("style");
+                $('.Publishexpand').css({ "cursor": "pointer" });
+                $('#RequiredLable').css({ "display": "none", "visibility": "collapse" });
+                $('#PublishDiv').css({ "display": "none", "visibility": "collapse" });
+                break;
+            case "RePublishDivExpand":
+                $('#RePublishDivState').val('true');
+                $('.RePublishcollaps').removeAttr("style");
+                $('.RePublishcollaps').css({ "cursor": "pointer" });
+                $('.RePublishexpand').css({ "display": "none", "visibility": "collapse" });
+                $('#RequiredLable1').css({ "display": "", "visibility": "" });
+                $('#RePublishDiv').css({ "display": "", "visibility": "" });
+                break;
+            case "RePublishDivCollaps":
+                $('#RePublishDivState').val('false');
+                $('.RePublishcollaps').css({ "display": "none", "visibility": "collapse" });
+                $('.RePublishexpand').removeAttr("style");
+                $('.RePublishexpand').css({ "cursor": "pointer" });
+                $('#RequiredLable1').css({ "display": "none", "visibility": "collapse" });
+                $('#RePublishDiv').css({ "display": "none", "visibility": "collapse" });
+                break;
+            case "DownloadDivExpand":
+                $('#DownLoadDivState').val('true');
+                $('.Downloadcollaps').removeAttr("style");
+                $('.Downloadcollaps').css({ "cursor": "pointer" });
+                $('.Downloadexpand').css({ "display": "none", "visibility": "collapse" });
+                $('#RequiredLable2').css({ "display": "", "visibility": "" });
+                $('#DownLoadDiv').css({ "display": "", "visibility": "" });
+                break;
+            case "DownloadDivCollaps":
+                $('#DownLoadDivState').val('false');
+                $('.Downloadcollaps').css({ "display": "none", "visibility": "collapse" });
+                $('.Downloadexpand').removeAttr("style");
+                $('.Downloadexpand').css({ "cursor": "pointer" });
+                $('#RequiredLable2').css({ "display": "none", "visibility": "collapse" });
+                $('#DownLoadDiv').css({ "display": "none", "visibility": "collapse" });
+                break;
+         default:
+        }
+    
+    
+    }
+    function GetSurveyInfo()
+    {
+        var SurveyId = $('#RepublishSurveyKey').val();
+         
+        var ActionUrl = '@Url.Action("GetSurveyInfo", "SurveyManager")' + '?surveyid=' + SurveyId;
+         
+        $.ajax({
+            url: ActionUrl,
+            type: 'POST',
+            contentType: 'application/json; charset=utf-8',
+            //  data: $('#myform').serialize(),
+            //data:JSON.stringify(model),
+            dataType: "json",
+            //cache: false,
+            async: false,
+            success: successFunc,
+            error: errorFunc
+        });
+        function successFunc(data) 
+        {
+            
+            $('#EndDateUpdate').val(data.EndDate);
+            $('#RePublishSurveyName').val(data.SurveyName);
+            
+            if (data.IsDraft)
+            {
+                $('#RepublishSurveyMode').val(0);
+            }
+            else
+            {
+                $('#RepublishSurveyMode').val(1);
+            }
+        }
+        function errorFunc(data) {
+            alert('failed');
+        }
+     
+    }
+
 </script>
 
-<div>
+<div style="height:900px ; overflow:auto">
+
     @using (Html.BeginForm("Index", "SurveyManager",null ,FormMethod.Post, new {  enctype = "multipart/form-data" }))
     {
+        
         <div id="header"><h1 style="text-indent: 0 !important; font-family:Segoe UI !important;">Epi Info™ Web Survey </h1></div>
         <div>
        
@@ -265,15 +371,20 @@
                 else
                 {
                 <br>
-    <p id="RequiredLable" style="text-align:right;margin-top: 0;margin-bottom: -29px; margin-right:10px;font-size: 9pt; font-weight:bold;">* indicates required fields</p>
+             <p id="RequiredLable" style="text-align:right;margin-top: 0;margin-bottom: -29px; margin-right:10px;font-size: 9pt; font-weight:bold;display:none; visibility:collapse">* indicates required fields</p>
 
                 <div id="contentPublish" style="margin:1em;">
-                    <p style="text-align:left;margin-top: 0;margin-bottom: 10px; font-size: 20pt; font-weight:bold;">
-                        Publish a survey
+                     
+                    <p style="text-align:left;margin-top: 0;margin-bottom: 10px; font-size: 20pt; font-weight:bold; ">
+                        <img src="~/Content/images/Toggle-collapse-alt_green.png" style="display:none;visibility:collapse ;cursor:pointer" class="Publishcollaps" onclick="Toggle('PublishDivCollaps')" />
+                        <img src="~/Content/images/Toggle-expand-alt_green.png" style="cursor:pointer" class="Publishexpand" onclick="Toggle('PublishDivExpand')" />
+
+                       Publish a new survey
 
                     </p>
-                    <div id="PublishDiv" class="accountdiv" style="margin-bottom:10px; align-self:center;">
-                        <p  >
+                   
+                    <div id="PublishDiv" class="accountdiv" style="margin-bottom:10px; align-self:center; display:none; visibility:collapse">
+                        <p>
                            
                             <label class="accountlabel" id="FilePath">*Excel based survey:</label><a onclick="OpenFile()" href="~/Content/Text/Survey.xlsx">Excel Template</a><br>
                             @*<input id="Path" class="Account" type="text" value=""   >*@
@@ -337,13 +448,90 @@
                         <input type="hidden" id="ExistingSurvey_Hidden" value="@Model.UpdateExisting.ToString()" />
                     </div>
                 </div>
-    <p id="RequiredLable" style="text-align:right;margin-top: 0;margin-bottom: -29px; margin-right:10px;font-size: 9pt; font-weight:bold;">* indicates required fields</p>
 
-                <div id="contentDownLoad" style="margin:1em;">
+
+
+    <p id="RequiredLable1" style="text-align:right;margin-top: 0;margin-bottom: -29px; margin-right:10px;font-size: 9pt; font-weight:bold;display:none; visibility:collapse">* indicates required fields</p>
+
+    <div id="contentRePublish" style="margin:1em;">
         <p style="text-align:left;margin-top: 0;margin-bottom: 10px; font-size: 20pt; font-weight:bold;">
+            <img src="~/Content/images/Toggle-collapse-alt_green.png" style="display:none;visibility:collapse;cursor:pointer" class="RePublishcollaps" onclick="Toggle('RePublishDivCollaps')" />
+            <img src="~/Content/images/Toggle-expand-alt_green.png" style="cursor:pointer" class="RePublishexpand" onclick="Toggle('RePublishDivExpand')" />
+
+            RePublish a survey
+
+        </p>
+        <div id="RePublishDiv" class="accountdiv" style="margin-bottom:10px; align-self:center; display:none; visibility:collapse ">
+            <p>
+
+                <label class="accountlabel" id="FilePath1">*Excel based survey:</label><a onclick="OpenFile()" href="~/Content/Text/Survey.xlsx">Excel Template</a><br>
+                @*<input id="Path" class="Account" type="text" value=""   >*@
+
+                @Html.TextBoxFor(m => m.RepublishPath, new { @class = "Account" })
+
+                @*<label for="file-upload" class="submits create"   onclick="javascript: document.getElementById('Newfile').click();">
+                        Browse
+                    </label>*@
+                <input for="file-upload" class="submits create" style="width:70px; height:31px" type="button" id="RePublishButton" onclick="javascript: document.getElementById('Newfile1').click();" value="Browse" /><br>
+
+                @Html.ValidationMessageFor(m => m.RepublishPath, null, new { @class = "required" })
+                <input id="Newfile1" type="file" style='visibility: hidden;' name="Newfile1" accept=".xls,.xlsx,.csv" onchange="ChangeText(this, 'RepublishPath');" />
+
+
+            </p>
+            <label class="accountlabel" id="SurveyIdlabel1">*Survey Id:</label><br>
+
+
+            @Html.DropDownListFor(m => m.RepublishSurveyKey, new SelectList(ViewBag.SurveyNameList1, "Value", "Text", 0), "Select Survey", new { @class = "Account", @onchange = "GetSurveyInfo()"  })<br>
+
+            @Html.ValidationMessageFor(m => m.RepublishSurveyKey, null)
+            <br>
+          @if(!Model.IsAuthenticated){
+            <label class="accountlabel" id="SecurityTokenlabel1">*Security Token:</label><br>
+
+            @Html.TextBoxFor(m => m.RepublishUserPublishKey, new { @class = "Account" }) <br>
+            @Html.ValidationMessageFor(m => m.RepublishUserPublishKey, null)<br>
+                }
+            <label class="accountlabel" id="FileName1">Survey Mode:</label><br>
+
+
+            @Html.DropDownListFor(model => model.RepublishSurveyMode, new SelectList(
+                                       new List<Object> { new { value = "0", text = "Draft" }, new { value = "1", text = "Final" }, }, "value", "text", 2), new { @class = "Account" })<br>
+            @Html.ValidationMessageFor(m => m.RepublishSurveyMode, null)
+            <p>
+
+                <label style="text-align:left" class="accountlabel" id="SurveyNamelabel1">End Date:</label><br>
+                @Html.TextBoxFor(m => m.EndDateUpdate, new { @class = "Account validate[required,custom[date]]  datepicker" }) <br>
+                @Html.ValidationMessageFor(m => m.EndDateUpdate, null, new { @class = "required" })
+
+
+            </p>
+            <script>$('#EndDateUpdate').datepicker({ changeMonth: true, changeYear: true, yearRange: '-110:+10' });</script>
+            <script>    $('#EndDateUpdate').BlockEnter('EndDateUpdate');</script>
+
+            
+            <p>
+                <input class="submits create" type="submit" name="RePublishSurvey" id="RePublishSurvey" value="RePublish" style="margin-right:90px;" />
+
+            </p>
+            <input type="hidden" id="ExistingSurvey_Hidden1" value="@Model.UpdateExisting.ToString()" />
+            <input type="hidden" id="RePublishSurveyName" value="" name="RePublishSurveyName" />
+        </div>
+    </div>
+
+
+
+
+    <p id="RequiredLable2" style="text-align:right;margin-top: 0;margin-bottom: -29px; margin-right:10px;font-size: 9pt; font-weight:bold;display:none; visibility:collapse">* indicates required fields</p>
+
+   <div id="contentDownLoad" style="margin:1em;">
+        <p style="text-align:left;margin-top: 0;margin-bottom: 10px; font-size: 20pt; font-weight:bold;">
+            <img src="~/Content/images/Toggle-collapse-alt_green.png" style="display:none;visibility:collapse;cursor:pointer" class="Downloadcollaps" onclick="Toggle('DownloadDivCollaps')" />
+            <img src="~/Content/images/Toggle-expand-alt_green.png" style="cursor:pointer" class="Downloadexpand" onclick="Toggle('DownloadDivExpand')" />
+
             Download responses
         </p>
-        <div id="DownLoadDiv" class="accountdiv" style="margin-bottom: 100px; align-self:center">
+        <div id="DownLoadDiv" class="accountdiv" style="margin-bottom: 100px; align-self:center ;display:none; visibility:collapse">
             @*<p style="text-align:center;margin-top: 0;margin-bottom: 0px; font-size: 9pt; font-weight:bold;">
                     Epi Info Web Survey Download Tool (.CSV)
                 </p>
@@ -363,12 +551,12 @@
                     @Html.DropDownListFor(m => m.SurveyKey, new SelectList(ViewBag.SurveyNameList1, "Value", "Text", 0),"Select Survey", new { @class = "Account" })<br>
 
                     @Html.ValidationMessageFor(m => m.SurveyKey, null)
-
+                    @if(!Model.IsAuthenticated){
                     <label class="accountlabel" id="SecurityTokenlabel">*Security Token:</label><br>
 
                     @Html.TextBoxFor(m => m.UserPublishKey, new { @class = "Account" }) <br>
                     @Html.ValidationMessageFor(m => m.UserPublishKey, null)<br>
-
+                    }
                     <label class="accountlabel" id="FileName">*Survey Mode:</label><br>
 
 
@@ -439,8 +627,11 @@ Survey End Date: @Model.EndDate
 
                 </div>
         }
-            
-             
-          }
+        <input type="hidden" id="RePublishDivState" value="@Model.RePublishDivState.ToString()" name="RePublishDivState" />
+        <input type="hidden" id="PublishDivState" value="@Model.PublishDivState.ToString()" name="PublishDivState" />
+        <input type="hidden" id="DownLoadDivState" value="@Model.DownLoadDivState.ToString()" name="DownLoadDivState" />
+
+    }
+   
 </div>
    

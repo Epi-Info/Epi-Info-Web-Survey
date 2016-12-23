@@ -21,7 +21,7 @@ namespace Epi.Web.Common.Message
          /// OrganizationInfo object.
          /// </summary>
          [DataMember]
-         public  OrganizationDTO  OrganizationList;
+         public  OrganizationDTO  OrganizationDTO;
          /// <summary>
          /// Admin object.
          /// </summary>

@@ -10,14 +10,18 @@ namespace Epi.Web.MVC.Models
     public class PublishModel
     {
         private string _Path;
+        private string _RepublishPath;
         private string _OrganizationKey;
         private string _SurveyKey;
+        private string _RepublishSurveyKey;
         private bool _UpdateExisting;
         private string _EndDate;
+        private string _EndDateUpdate;
         private string _SurveyName;
         private bool  _SuccessfulPublish;
         private string _FileName;
         private string _UserPublishKey;
+        private string _RepublishUserPublishKey;
         private List<string> _SurveyNameList;
          
         public PublishModel()
@@ -30,6 +34,14 @@ namespace Epi.Web.MVC.Models
             {
                 get { return _Path; }
                 set { _Path = value; }
+            }
+
+
+        [Required(ErrorMessage = "File path is required.")]  
+        public string RepublishPath
+            {
+                get { return _RepublishPath; }
+                set { _RepublishPath = value; }
             }
          [Required(ErrorMessage = "Organization key is required.")]
          [RegularExpression(@"^(\{){0,1}[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}(\}){0,1}$", ErrorMessage = "Invalid Organization key.")]
@@ -46,7 +58,14 @@ namespace Epi.Web.MVC.Models
              get { return _UserPublishKey; }
              set { _UserPublishKey = value; } 
          }
+         [Required(ErrorMessage = "Security Token is required.")]
+         [RegularExpression(@"^(\{){0,1}[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}(\}){0,1}$", ErrorMessage = "Invalid Security Token.")]
 
+         public string RepublishUserPublishKey
+         {
+             get { return _RepublishUserPublishKey; }
+             set { _RepublishUserPublishKey = value; }
+         }
          // [RegularExpression(@"^(\{){0,1}[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}(\}){0,1}$", ErrorMessage = "Invalid Organization key.")]
          
          //[Required(ErrorMessage = "Survey Id is required.")]
@@ -56,7 +75,11 @@ namespace Epi.Web.MVC.Models
              get { return _SurveyKey; }
              set { _SurveyKey = value; }
          }
-
+        public string RepublishSurveyKey
+        {
+            get { return _RepublishSurveyKey; }
+            set { _RepublishSurveyKey = value; }
+        }
          public bool UpdateExisting
          {
              get { return _UpdateExisting; }
@@ -68,6 +91,12 @@ namespace Epi.Web.MVC.Models
              get { return _EndDate; }
              set { _EndDate = value; }
          }
+      //[Required(ErrorMessage = "End Date is required.")]
+       public string EndDateUpdate
+       {
+           get { return _EndDateUpdate; }
+           set { _EndDateUpdate = value; }
+       }
          [Required(ErrorMessage = "Survey Name is required.")]
          public string SurveyName
          {
@@ -99,7 +128,13 @@ namespace Epi.Web.MVC.Models
          public string TimeElapsed { get; set; }
          public int RecordCount { get; set; }
          public string SurveyMode { get; set; }
+         public string RepublishSurveyMode { get; set; }
          public bool IsValidOrg { get; set; }
+         public bool IsDraft { get; set; }
+         public bool RePublishDivState { get; set; }
+         public bool PublishDivState { get; set; }
+         public bool DownLoadDivState { get; set; }
+         public bool IsAuthenticated { get; set; }
           
     }
 }
