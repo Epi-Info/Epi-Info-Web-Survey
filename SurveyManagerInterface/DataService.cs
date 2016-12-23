@@ -591,7 +591,25 @@ namespace Epi.Web.WCF.SurveyService
             
             }
 
+        public OrganizationAccountResponse GetUserOrgId(OrganizationAccountRequest Request)
+        {
+            OrganizationAccountResponse  Response = new OrganizationAccountResponse();
 
+            try
+            {
+                Epi.Web.Interfaces.DataInterfaces.IAdminDao AdminDao = new EF.EntityAdminDao();
+                Epi.Web.Interfaces.DataInterfaces.IOrganizationDao OrganizationDao = new EF.EntityOrganizationDao();
+                Epi.Web.BLL.Account Implementation = new Epi.Web.BLL.Account(AdminDao, OrganizationDao);
+                Response.OrganizationDTO = new OrganizationDTO();
+                Response.OrganizationDTO.OrganizationKey = Implementation.GetUserOrgId(Request.Admin.AdminEmail);
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return Response;
+        }
 
         public OrganizationAccountResponse GetStateList(OrganizationAccountRequest Request) 
             {

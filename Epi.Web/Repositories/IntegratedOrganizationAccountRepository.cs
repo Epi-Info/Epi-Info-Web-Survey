@@ -35,7 +35,14 @@ namespace Epi.Web.MVC.Repositories
          return Response;
              
              }
+         public OrganizationAccountResponse GetUserOrgId(OrganizationAccountRequest Request) {
 
+
+             OrganizationAccountResponse Response = new OrganizationAccountResponse();
+             Response = _iDataService.GetUserOrgId(Request);
+             return Response;
+         
+         }
 
          #region stubcode
          public List<Common.DTO.SurveyInfoDTO> GetList(Criterion criterion = null)

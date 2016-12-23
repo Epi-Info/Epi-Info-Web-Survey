@@ -51,5 +51,8 @@ namespace Epi.Web.WCF.SurveyService
         [OperationContract]
         [FaultContract(typeof(CustomFaultException))]
         SurveyControlsResponse GetSurveyControlList(SurveyControlsRequest pRequestMessage);
+        [OperationContract]
+        [FaultContract(typeof(CustomFaultException))]
+        OrganizationAccountResponse GetUserOrgId(OrganizationAccountRequest Request);
     }
 }

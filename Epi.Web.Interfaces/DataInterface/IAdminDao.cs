@@ -23,5 +23,7 @@ namespace Epi.Web.Interfaces.DataInterfaces
         AdminBO  GetAdminEmailByAdminId(string AdminEmail);
 
         void InsertAdminInfo(AdminBO Admin);
+
+        string GetAdminOrgKeyByEmail(string UserEmail);
         }
     }

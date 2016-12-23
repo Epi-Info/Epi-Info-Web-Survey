@@ -246,5 +246,29 @@ namespace Epi.Web.EF
             return AdminBO;
             }
 
+        public string GetAdminOrgKeyByEmail(string UserEmail) {
+            var OrgKey = "";
+            try
+            {
+                using (var Context = DataObjectFactory.CreateContext())
+                {
+                    var Query = (from response in Context.Admins
+                                 where response.AdminEmail == UserEmail
+                                 select new { response.Organization.OrganizationKey }).Distinct();
+
+                    foreach (var item in Query)
+                     {
+                           OrgKey = item.OrganizationKey.ToString();
+                         break;
+                     }
+                   
+                }
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
+            }
+            return OrgKey;
+        }
         }
     }

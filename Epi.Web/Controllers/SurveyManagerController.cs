@@ -19,6 +19,10 @@ using Epi.Web.Common.Criteria;
 using Epi.Web.MVC.Utility;
 using System.Diagnostics;
 using System.Reflection;
+using System.Text;
+
+
+using System.Web.Security;
 namespace Epi.Web.MVC.Controllers
 {
     public class SurveyManagerController : Controller
@@ -34,26 +38,100 @@ namespace Epi.Web.MVC.Controllers
         {
             PublishModel Model = new PublishModel();
             ViewBag.Version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            var IsAuthenticated = System.Web.HttpContext.Current.User.Identity.IsAuthenticated;
+            Session["IsAuthenticated"] = false;
+            if (IsAuthenticated)
+            {
+                Session["IsAuthenticated"] = Model.IsAuthenticated = IsAuthenticated;
+                //check if the user exists 
+                var UserName = System.Web.HttpContext.Current.User.Identity.Name;
+                OrganizationAccountRequest Request = new OrganizationAccountRequest();
+                Request.Admin = new AdminDTO();
+                Request.Admin.AdminEmail = UserName;
+                OrganizationAccountResponse Response = this._isurveyFacade.GetUserOrgId(Request);
+                var OrgId = "";
+                if (!string.IsNullOrEmpty(Response.OrganizationDTO.OrganizationKey))
+                {
             
-            return View("Index",Model);
+                  OrgId=  Epi.Web.Common.Security.Cryptography.Decrypt(Response.OrganizationDTO.OrganizationKey);
+                }
+                if (Epi.Web.MVC.Utility.SurveyHelper.IsGuid(OrgId))
+                {
+                    Model.OrganizationKey = OrgId;  
+                    Model.IsValidOrg = ValidateOrganizationId(Model.OrganizationKey);
+
+                    if (!Model.IsValidOrg)
+                    {
+                        ModelState.AddModelError("OrganizationKey", "Organization Key does not exist.");
+                    }
+                    else
+                    {
+                        Session["OrgId"] = Model.OrganizationKey;
+                      
+                        ViewBag.SurveyNameList1 = GetAllSurveysByOrgId(Model.OrganizationKey); ;
+                    }
+
+                    
+                }
+                else { 
+                // create a new account 
+                    Request.AccountType = "ORGANIZATION";
+                      Request.Admin.IsActive = true;
+                      Request.Admin.Notify = false;
+                      Request.Organization = new OrganizationDTO();
+                      Request.Organization.Organization = UserName.Replace("\\"," ") + "_Organization";
+                      Request.Organization.IsEnabled = true;
+                      Guid OrgKey = Guid.NewGuid();
+                      Request.Organization.OrganizationKey = OrgKey.ToString();
+                    
+                      Response = this._isurveyFacade.CreateAccount(Request);
+                      if (Response.Message == "Success")
+                      {
+                          Model.OrganizationKey = OrgKey.ToString();
+                          Model.IsValidOrg = ValidateOrganizationId(Model.OrganizationKey);
+
+                          if (!Model.IsValidOrg)
+                          {
+                              ModelState.AddModelError("OrganizationKey", "Organization Key does not exist.");
+                          }
+                          else
+                          {
+                              Session["OrgId"] = Model.OrganizationKey;
+
+                              ViewBag.SurveyNameList1 = GetAllSurveysByOrgId(Model.OrganizationKey); ;
+                          }
+                      }
+                   }
+                Model.PublishDivState = true;
+                return View("Index", Model);
+            }
+            else {
+                Model.PublishDivState = true;
+                return View("Index", Model);
+            }
+           
             
         }
         [HttpPost]
-         public ActionResult Index(PublishModel Model, string PublishSurvey, string DownLoadResponse, string ValidateOrganization, HttpPostedFileBase Newfile, string  SurveyName)
+         public ActionResult Index(PublishModel Model, string PublishSurvey, string DownLoadResponse, string ValidateOrganization, HttpPostedFileBase Newfile1, HttpPostedFileBase Newfile, string SurveyName, string RePublishSurvey, string RePublishSurveyName)
         {
             try
             {
                 ViewBag.Version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
-
+                bool IsAuthenticated = Model.IsAuthenticated = bool.Parse(Session["IsAuthenticated"].ToString());
 
                 if (!string.IsNullOrEmpty(ValidateOrganization))
                 {
                     ModelState["FileName"].Errors.Clear();
                     ModelState["SurveyName"].Errors.Clear();
-                    
+                    ModelState["RepublishUserPublishKey"].Errors.Clear();
                     ModelState["UserPublishKey"].Errors.Clear();
                     ModelState["Path"].Errors.Clear();
+                    ModelState["RepublishPath"].Errors.Clear();
                     ModelState["EndDate"].Errors.Clear();
+                    ModelState["RePublishDivState"].Errors.Clear();
+                    ModelState["PublishDivState"].Errors.Clear();
+                    ModelState["DownLoadDivState"].Errors.Clear();
                     if (ModelState.IsValid)
                     {
                         Model.IsValidOrg = ValidateOrganizationId(Model.OrganizationKey);
@@ -92,6 +170,8 @@ namespace Epi.Web.MVC.Controllers
                     ModelState["FileName"].Errors.Clear();
                     ModelState["OrganizationKey"].Errors.Clear();
                     ModelState["UserPublishKey"].Errors.Clear();
+                    ModelState["RepublishUserPublishKey"].Errors.Clear();
+                    ModelState["RepublishPath"].Errors.Clear();
                     if (ModelState.IsValid)
                     {
                         var response = DoPublish(Model, Newfile);
@@ -115,18 +195,86 @@ namespace Epi.Web.MVC.Controllers
 
                     return View(Model);
                 }
+                // RePublish start
+                if (!string.IsNullOrEmpty(RePublishSurvey))
+                {
+                    Model.IsValidOrg = true;
+                    Model.OrganizationKey = Session["OrgId"].ToString();
+                    //  Model.SurveyNameList = GetAllSurveysByOrgId(Model.OrganizationKey);
+
+                    
+                        Model.UpdateExisting = true;
+                        if (string.IsNullOrEmpty(Model.RepublishSurveyKey))
+                        {
+                            ModelState.AddModelError("RepublishSurveyKey", "Survey Id is required.");
+                        }
+
+                        
+                    ModelState["SurveyName"].Errors.Clear(); 
+                    ModelState["FileName"].Errors.Clear();
+                    ModelState["OrganizationKey"].Errors.Clear();
+                    ModelState["UserPublishKey"].Errors.Clear();
+                    if (IsAuthenticated)
+                    {
+                    ModelState["RePublishUserPublishKey"].Errors.Clear();
+                    }
+                    ModelState["Path"].Errors.Clear();
+                    ModelState["EndDate"].Errors.Clear();
+                    if (ModelState.IsValid)
+                    {
+                       
+                        Model.SurveyName = RePublishSurveyName;
+                        if (IsAuthenticated)
+                        {
+                            Model.UserPublishKey = GetUserPublishKey(Model.SurveyKey.ToString());
+                        }
+                        var response = DoPublish(Model, Newfile1);
+                        Model.SuccessfulPublish = true;
+                        Model.SurveyKey = response.SurveyInfoList[0].SurveyId.ToString();
+                        if (!IsAuthenticated)
+                        {
+                            Model.UserPublishKey = response.SurveyInfoList[0].UserPublishKey.ToString();
+                        }
+                        Model.SurveyURL = ConfigurationManager.AppSettings["URL"] + response.SurveyInfoList[0].SurveyId.ToString();
+                    }
+                    else
+                    {
+
+                        // ModelState.AddModelError("Error", "Please validate the information provided and try publishing again.");
+                        //  Model.Path = "";
+                        Model.SuccessfulPublish = false;
+                        ViewBag.SurveyNameList1 = GetAllSurveysByOrgId(Model.OrganizationKey); ;
+                        return View("Index", Model);
+
+
+                    }
+
+
+                    return View(Model);
+                }
+                // RePublish End
+
                 if (!string.IsNullOrEmpty(DownLoadResponse))
                 {
                      Model.IsValidOrg = true;
                      Model.OrganizationKey = Session["OrgId"].ToString();
                     // Model.SurveyNameList = GetAllSurveysByOrgId(Model.OrganizationKey);
-                     
+                     if (string.IsNullOrEmpty(Model.SurveyKey))
+                     {
+                         ModelState.AddModelError("SurveyKey", "Survey Id is required.");
+                     }
                     //ModelState["FileName"].Errors.Clear();
-                    ModelState["SurveyKey"].Errors.Clear();
+                   // ModelState["SurveyKey"].Errors.Clear();
                     ModelState["OrganizationKey"].Errors.Clear();
                     ModelState["SurveyName"].Errors.Clear();
                     ModelState["Path"].Errors.Clear();
                     ModelState["EndDate"].Errors.Clear();
+                    ModelState["RepublishPath"].Errors.Clear();
+                    ModelState["RepublishUserPublishKey"].Errors.Clear();
+                    if (IsAuthenticated)
+                    {
+                        ModelState["UserPublishKey"].Errors.Clear();
+                    }
                     if (ModelState.IsValid)
                     {
                         DoDownLoad(Model);
@@ -148,6 +296,12 @@ namespace Epi.Web.MVC.Controllers
             return View("Index", Model);
         }
 
+        private string GetUserPublishKey(string surveyid)
+        {
+            var SurveyInfo = this._isurveyFacade.GetSurveyInfoModel(surveyid);
+            return SurveyInfo.UserPublishKey.ToString();
+        }
+
         private SurveyInfoResponse DoPublish(PublishModel Model, HttpPostedFileBase Newfile)
         {
 
@@ -159,19 +313,23 @@ namespace Epi.Web.MVC.Controllers
             SurveyRequest.Criteria.FileInputStream = Newfile;
             SurveyInfoDTO.OrganizationKey = SurveyRequest.Criteria.OrganizationKey = new Guid(Model.OrganizationKey);
             SurveyInfoDTO.SurveyName = Model.SurveyName;
-
+            SurveyInfoDTO.StartDate = DateTime.Now;
             SurveyInfoDTO.SurveyType = SurveyRequest.Criteria.SurveyType = 1;
-            SurveyInfoDTO.ClosingDate = DateTime.Parse(Model.EndDate);
+            
             if (Model.UpdateExisting)
             {
-                SurveyInfoDTO.SurveyId =  Model.SurveyKey;
+                SurveyInfoDTO.SurveyId =  Model.RepublishSurveyKey;
+                SurveyInfoDTO.IsDraftMode = Model.IsDraft;
+                SurveyInfoDTO.ClosingDate = DateTime.Parse(Model.EndDateUpdate);
+                SurveyInfoDTO.SurveyName = Model.SurveyName;
                 SurveyRequest.SurveyInfoList.Add(SurveyInfoDTO);
-                SurveyInfoDTO.UserPublishKey = new Guid(Model.UserPublishKey);
+                SurveyInfoDTO.UserPublishKey = new Guid(Model.RepublishUserPublishKey);
                 SurveyRequest.Action = "Update";
             }
             else
             {
                 SurveyInfoDTO.SurveyId = Guid.NewGuid().ToString() ;
+                SurveyInfoDTO.ClosingDate = DateTime.Parse(Model.EndDate);
                 SurveyRequest.SurveyInfoList.Add(SurveyInfoDTO);
                 SurveyInfoDTO.UserPublishKey = SurveyRequest.Criteria.UserPublishKey = Guid.NewGuid();
                 SurveyRequest.Action = "Create";
@@ -217,6 +375,7 @@ namespace Epi.Web.MVC.Controllers
         private ActionResult DoDownLoad(PublishModel Model)
         {
             string Newfile = Model.FileName + ".CSV";
+            bool IsAuthenticated = Model.IsAuthenticated = bool.Parse(Session["IsAuthenticated"].ToString());
             if (string.IsNullOrEmpty(Model.SurveyKey))
             {
                 ModelState.AddModelError("SurveyKey", "Survey Id is required."); ;
@@ -229,7 +388,10 @@ namespace Epi.Web.MVC.Controllers
 
             ModelState["Path"].Errors.Clear();
             ModelState["SurveyName"].Errors.Clear();
-
+            if (IsAuthenticated)
+            {
+                ModelState["UserPublishKey"].Errors.Clear();
+            }
             if (ModelState.IsValid)
             {
                 Stopwatch stopwatch = new Stopwatch();
@@ -268,6 +430,10 @@ namespace Epi.Web.MVC.Controllers
                     // FullPath = path + @"\Downloads\" + FileName;
                     FullPath = @Model.Path;
                     ///get  Response size
+                    if (IsAuthenticated)
+                    {
+                        Model.UserPublishKey = GetUserPublishKey(Model.SurveyKey.ToString());
+                    }
                     SurveyAnswerRequest SurveyAnswerRequest = SetMessageObject(true, Model.SurveyKey, new Guid(Model.UserPublishKey), Model.OrganizationKey, IsDraftMode, 0);
                     SurveyAnswerResponse SurveyAnswerResponse = new Common.Message.SurveyAnswerResponse();
                     SurveyAnswerResponse = _isurveyFacade.GetSurveyAnswerResponse(SurveyAnswerRequest);
@@ -429,6 +595,31 @@ namespace Epi.Web.MVC.Controllers
 
             return Request;
         }
-      
+        [HttpPost]
+        public JsonResult GetSurveyInfo(string surveyid) 
+        {
+
+            var SurveyInfo = this._isurveyFacade.GetSurveyInfoModel(surveyid);
+            PublishModel Model = new PublishModel();
+            Model.EndDate = AddLeadingZero(SurveyInfo.ClosingDate.Month.ToString()) + "/" + AddLeadingZero(SurveyInfo.ClosingDate.Day.ToString()) + "/" + SurveyInfo.ClosingDate.Year;
+            Model.IsDraft = SurveyInfo.IsDraftMode;
+            Model.SurveyName = SurveyInfo.SurveyName;
+            return Json(Model);
+        
+        }
+        private string AddLeadingZero(string value) 
+        {
+            string NewValue = "";
+            if (value.Count()<2)
+            {
+                NewValue = "0" + value;
+            }
+            else
+            {
+
+                NewValue = value;
+            }
+            return NewValue;
+        }
     }
 }
