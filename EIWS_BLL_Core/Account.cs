@@ -260,5 +260,11 @@ namespace Epi.Web.BLL
               List<StateBO> result = this.StateDao.GetStateList();  
               return result;
               }
+
+          public string GetUserOrgId(string UserEmail)
+          {
+              string OrgId = this.AdminDao.GetAdminOrgKeyByEmail(UserEmail);
+              return OrgId;
+          }
         }
     }

@@ -30,5 +30,6 @@ namespace Epi.Web.MVC.Facade
         SurveyAnswerResponse GetSurveyAnswerResponse(SurveyAnswerRequest responseId);
         bool ValidateOrganization(OrganizationRequest Request);
         SurveyInfoResponse GetAllSurveysByOrgKey(string OrgKey);
+        OrganizationAccountResponse GetUserOrgId(OrganizationAccountRequest Request);
     }
 }
