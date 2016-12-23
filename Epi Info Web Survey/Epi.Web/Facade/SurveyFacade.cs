@@ -188,5 +188,13 @@ namespace Epi.Web.MVC.Facade
             SurveyInfoResponse SurveyInfoResponse = _iSurveyInfoRepository.GetAllSurveysByOrgKey(OrgKey);
             return SurveyInfoResponse;
         }
+
+        public OrganizationAccountResponse GetUserOrgId(OrganizationAccountRequest Request) {
+            OrganizationAccountResponse Response = new OrganizationAccountResponse();
+
+            Response = _iOrgAccountRepository.GetUserOrgId(Request);
+           
+            return Response;
+        }
     }
 }
