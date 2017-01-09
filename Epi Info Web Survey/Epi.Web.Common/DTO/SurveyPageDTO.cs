@@ -76,5 +76,11 @@ namespace Epi.Web.Common.DTO
             get { return _Description; }
             set { _Description = value; }
         }
+        private int _Counter;
+        public int Counter
+        {
+            get { return _Counter; }
+            set { _Counter = value; }
+        }
     }
 }
