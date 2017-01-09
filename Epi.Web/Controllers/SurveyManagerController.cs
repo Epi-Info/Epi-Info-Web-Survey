@@ -226,7 +226,7 @@ namespace Epi.Web.MVC.Controllers
                         Model.SurveyName = RePublishSurveyName;
                         if (IsAuthenticated)
                         {
-                            Model.UserPublishKey = GetUserPublishKey(Model.SurveyKey.ToString());
+                            Model.RepublishUserPublishKey = GetUserPublishKey(Model.RepublishSurveyKey.ToString());
                         }
                         var response = DoPublish(Model, Newfile1);
                         Model.SuccessfulPublish = true;
