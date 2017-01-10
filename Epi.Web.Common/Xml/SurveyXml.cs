@@ -116,6 +116,8 @@ namespace Epi.Web.Common.Xml
             
             }
             // GroupBox Title
+            if (!string.IsNullOrEmpty(NewPage.Title))
+            {
             FiledElement = XPage.XPathSelectElement("Page/Field[@Name='Title']");
             FiledElement.SetAttributeValue("Name", NewPage.Variable_Name + "_Title");
             FiledElement.SetAttributeValue("PromptText", NewPage.Title);
@@ -135,25 +137,37 @@ namespace Epi.Web.Common.Xml
 
                 FiledElement.SetAttributeValue("ControlHeightPercentage", GetPositionValue(NewPage.List_Values.Count(), 0.14, 0.05).ToString());
             }
-
-            // Description
-            FiledElement = XPage.XPathSelectElement("Page/Field[@Name='Description']");
-            FiledElement.SetAttributeValue("Name", NewPage.Variable_Name + "_Description");
-            FiledElement.SetAttributeValue("PromptText", NewPage.Description);
-            FiledElement.SetAttributeValue("PageId", NewPage.PageId);
-            FiledElement.SetAttributeValue("FieldTypeId", 2);
-            FiledElement.SetAttributeValue("UniqueId", Guid.NewGuid().ToString());
-            FiledElement.SetAttributeValue("PageName", NewPage.PageName);
-            FiledElement.SetAttributeValue("Position", NewPage.PageId - 1);
-            FiledElement.SetAttributeValue("FieldId", NewPage.PageId + 5);
-            if (NewPage.Question_Type == 12  )
-            {
-                FiledElement.SetAttributeValue("ControlTopPositionPercentage", GetPositionValue(NewPage.List_Values.Count(), 0.14,0.04).ToString());
+            }else{
+                FiledElement = XPage.XPathSelectElement("Page/Field[@Name='Title']");
+                FiledElement.Remove();
+            
             }
-            if (  NewPage.Question_Type == 10)
+            // Description
+            if (!string.IsNullOrEmpty(NewPage.Description))
             {
+                FiledElement = XPage.XPathSelectElement("Page/Field[@Name='Description']");
+                FiledElement.SetAttributeValue("Name", NewPage.Variable_Name + "_Description");
+                FiledElement.SetAttributeValue("PromptText", NewPage.Description);
+                FiledElement.SetAttributeValue("PageId", NewPage.PageId);
+                FiledElement.SetAttributeValue("FieldTypeId", 2);
+                FiledElement.SetAttributeValue("UniqueId", Guid.NewGuid().ToString());
+                FiledElement.SetAttributeValue("PageName", NewPage.PageName);
+                FiledElement.SetAttributeValue("Position", NewPage.PageId - 1);
+                FiledElement.SetAttributeValue("FieldId", NewPage.PageId + 5);
+                if (NewPage.Question_Type == 12)
+                {
+                    FiledElement.SetAttributeValue("ControlTopPositionPercentage", GetPositionValue(NewPage.List_Values.Count(), 0.14, 0.04).ToString());
+                }
+                if (NewPage.Question_Type == 10)
+                {
 
-                FiledElement.SetAttributeValue("ControlTopPositionPercentage", GetPositionValue(NewPage.List_Values.Count(), 0.14, 0.05).ToString());
+                    FiledElement.SetAttributeValue("ControlTopPositionPercentage", GetPositionValue(NewPage.List_Values.Count(), 0.14, 0.05).ToString());
+                }
+            }
+            else {
+                FiledElement = XPage.XPathSelectElement("Page/Field[@Name='Description']");
+                FiledElement.Remove();
+            
             }
             // Add page element to Xml
             XElement XmlElement = NewXmlDoc.XPathSelectElement("Template/Project/View");
@@ -258,11 +272,25 @@ namespace Epi.Web.Common.Xml
             XElement SourceTableElement = XSourceTable.XPathSelectElement("SourceTable");
             SourceTableElement.SetAttributeValue("TableName", "code" + NewPage.Variable_Name);
             // SourceTableElement.SetAttributeValue("TableName", NewPage.List_Values[0]);
-            for (int i = 1; NewPage.List_Values.Count() > i; i++)
+            if (NewPage.Question_Type == 17)
+            {
+                for (int i = 1; NewPage.List_Values.Count() > i; i++)
+                {
+                    XElement ItemElement = new XElement("Item");
+                    ItemElement.SetAttributeValue(NewPage.List_Values[0], NewPage.List_Values[i]);
+                    SourceTableElement.Add(ItemElement);
+                }
+            }
+            else
+            {
+            for (int i = 0; NewPage.List_Values.Count()-1 > i; i++)
             {
                 XElement ItemElement = new XElement("Item");
-                ItemElement.SetAttributeValue(NewPage.List_Values[0], NewPage.List_Values[i]);
+                var AttributeName = NewPage.List_Values[0].Replace(" ", "_");
+                ItemElement.SetAttributeValue(AttributeName, NewPage.List_Values[i]);
                 SourceTableElement.Add(ItemElement);
+            }
+            
             }
             return SourceTableElement;
         }

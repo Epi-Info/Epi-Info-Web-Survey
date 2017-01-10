@@ -176,9 +176,13 @@ namespace Epi.Web.MVC.Controllers
                     {
                         var response = DoPublish(Model, Newfile);
                         Model.SuccessfulPublish = true;
+                        if (response.SurveyInfoList.Count()>0)
+                        {
                         Model.SurveyKey = response.SurveyInfoList[0].SurveyId.ToString();
                         Model.UserPublishKey = response.SurveyInfoList[0].UserPublishKey.ToString();
                         Model.SurveyURL = ConfigurationManager.AppSettings["URL"] + response.SurveyInfoList[0].SurveyId.ToString();
+                        }
+                       
                     }
                     else
                     {
