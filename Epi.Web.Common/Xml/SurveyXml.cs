@@ -102,17 +102,18 @@ namespace Epi.Web.Common.Xml
             else
             {
                 int count = 1;
+                var Variable_Name = NewPage.Variable_Name;
             foreach (var checkbox in NewPage.List_Values)
             {
 
                 NewPage.Question = checkbox;
-                NewPage.Variable_Name = "checkbox_" + checkbox;
+                NewPage.Variable_Name = "checkbox_" + checkbox.Replace(" ","_");
                 NewPage.Counter = count;
                 FiledElement = AddControlXml(NewPage);
                 PageElement.Add(FiledElement);
                 count++;
             }
-            
+            NewPage.Variable_Name = Variable_Name;
             
             }
             // GroupBox Title
@@ -346,7 +347,8 @@ namespace Epi.Web.Common.Xml
                 //
                 if (xlWorksheet.Cells[row, 4] != null && xlWorksheet.Cells[row, 4].Text != "")
                 {
-                    Page.Variable_Name = xlWorksheet.Cells[row, 4].Text;
+
+                    Page.Variable_Name = xlWorksheet.Cells[row, 4].Text.Replace(" ","_");
                 }
                 if (xlWorksheet.Cells[row, 5] != null && xlWorksheet.Cells[row, 5].Text != "")
                 {
