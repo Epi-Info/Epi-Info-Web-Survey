@@ -64,7 +64,7 @@ namespace Epi.Web.Common.Xml
                 XElement XmlElement = AddPageXml(NewXmlDoc, NewPage);
 
 
-                if (NewPage.List_Values != null && NewPage.List_Values.Count() > 0)
+                if (NewPage.List_Values != null && NewPage.List_Values.Count() > 0 && NewPage.Question_Type == 17)
                 {
                     XElement SourceTableElement = AddSourceTableXml(NewPage);
                     XElement TemplaitElement = NewXmlDoc.XPathSelectElement("Template");
