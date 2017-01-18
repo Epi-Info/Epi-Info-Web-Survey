@@ -28,7 +28,7 @@ namespace Epi.Web.MVC.Controllers
     public class SurveyManagerController : Controller
     {
        private ISurveyFacade _isurveyFacade;
-       public string FullPath = ""; 
+       public string FullPath = "";      
         public SurveyManagerController(ISurveyFacade isurveyFacade)
         {
             _isurveyFacade = isurveyFacade;
@@ -38,8 +38,9 @@ namespace Epi.Web.MVC.Controllers
         {
             PublishModel Model = new PublishModel();
             ViewBag.Version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
-            var IsAuthenticated = System.Web.HttpContext.Current.User.Identity.IsAuthenticated;
+            var IsAuthenticated = System.Web.HttpContext.Current.User.Identity.IsAuthenticated;         
             Session["IsAuthenticated"] = false;
+            Session["IsNewOrg"] = false;
             if (IsAuthenticated)
             {
                 Session["IsAuthenticated"] = Model.IsAuthenticated = IsAuthenticated;
@@ -54,7 +55,7 @@ namespace Epi.Web.MVC.Controllers
                 {
             
                   OrgId=  Epi.Web.Common.Security.Cryptography.Decrypt(Response.OrganizationDTO.OrganizationKey);
-                }
+                }             
                 if (Epi.Web.MVC.Utility.SurveyHelper.IsGuid(OrgId))
                 {
                     Model.OrganizationKey = OrgId;  
@@ -97,12 +98,12 @@ namespace Epi.Web.MVC.Controllers
                           else
                           {
                               Session["OrgId"] = Model.OrganizationKey;
-
+                              ViewBag.IsNewOrg =  Session["IsNewOrg"] = true;
                               ViewBag.SurveyNameList1 = GetAllSurveysByOrgId(Model.OrganizationKey); ;
                           }
                       }
                    }
-                Model.PublishDivState = true;
+                Model.PublishDivState = true; 
                 return View("Index", Model);
             }
             else {
@@ -119,7 +120,7 @@ namespace Epi.Web.MVC.Controllers
             {
                 ViewBag.Version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
                 bool IsAuthenticated = Model.IsAuthenticated = bool.Parse(Session["IsAuthenticated"].ToString());
-
+                ViewBag.IsNewOrg = Session["IsNewOrg"]; ViewBag.Org = "OrganizationKey:";
                 if (!string.IsNullOrEmpty(ValidateOrganization))
                 {
                     ModelState["FileName"].Errors.Clear();
@@ -324,7 +325,7 @@ namespace Epi.Web.MVC.Controllers
             {
                 SurveyInfoDTO.SurveyId =  Model.RepublishSurveyKey;
                 SurveyInfoDTO.IsDraftMode = Model.IsDraft;
-                SurveyInfoDTO.ClosingDate = DateTime.Parse(Model.EndDateUpdate);
+                SurveyInfoDTO.ClosingDate = DateTime.Parse(Model.EndDateUpdate); Model.EndDate = Model.EndDateUpdate;
                 SurveyInfoDTO.SurveyName = Model.SurveyName;
                 SurveyRequest.SurveyInfoList.Add(SurveyInfoDTO);
                 SurveyInfoDTO.UserPublishKey = new Guid(Model.RepublishUserPublishKey);
