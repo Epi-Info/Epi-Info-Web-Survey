@@ -611,8 +611,12 @@ Survey Id: @Model.SurveyKey
 Security Token: @Model.UserPublishKey
 Survey URL: @Model.SurveyURL
 Survey End Date: @Model.EndDate
+                                @if (ViewBag.IsNewOrg)
+                                {
+                                    @ViewBag.Org  @Model.OrganizationKey                                                                
+                                }
                             </textarea>
-
+                           
                         </p>
 
 
