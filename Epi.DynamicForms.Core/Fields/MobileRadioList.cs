@@ -64,11 +64,18 @@ namespace MvcDynamicForms.Fields
                 radioTag.Attributes.Add("name", inputName);
                 radioTag.Attributes.Add("class", inputName);
                 radioTag.Attributes.Add("id", radId);
+           
+                if (FunctionObjectAfter != null)
+                {
+                    //radioTag.Attributes.Add("onclick", "return " + _key + "_after();");
+                    radioTag.Attributes.Add("onchange", "return " + _key + "_after(this.id);"); //After
+                }
 
-             //   if (FunctionObjectClick != null && !FunctionObjectClick.IsNull())
+                //   if (FunctionObjectClick != null && !FunctionObjectClick.IsNull())
                 if (FunctionObjectClick != null)
                 {
-                    radioTag.Attributes.Add("onclick", "return " + _key + "_after();");
+                    //radioTag.Attributes.Add("onclick", "return " + _key + "_after();");
+                    radioTag.Attributes.Add("onclick", "return " + _key + "_click(this.id);"); //click
                 }
 
                 radioTag.SetInnerText(choiceList[i].Key);

@@ -117,6 +117,10 @@ namespace MvcDynamicForms.Fields
                 {
                     radioTag.Attributes.Add("onclick", "return " + _key + "_after();");
                 }
+                if (FunctionObjectClick != null && !FunctionObjectClick.IsNull())
+                {
+                    radioTag.Attributes.Add("onclick", "return " + _key + "_click();"); //click
+                }
 
                 radioTag.SetInnerText(choiceList[i].Key);
                 radioTag.Attributes.Add("value", i.ToString());

@@ -75,6 +75,11 @@ namespace MvcDynamicForms.Fields
             {
                 select.Attributes.Add("onfocus", "return " + _key + "_before(this.id);"); //Before
             }
+          
+            if (FunctionObjectClick != null && !FunctionObjectClick.IsNull())
+            {
+                select.Attributes.Add("onclick", "return " + _key + "_click(this.id);"); //click
+            }
 
             int LargestChoiseLength = 0;
             string measureString = "";
