@@ -4,6 +4,15 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <style>
+    .TermsSpan {
+         cursor:pointer;
+     color:blue;
+     text-decoration:underline;
+    }
+    /*.TermsSpan:hover {
+     text-decoration:none;
+     text-shadow: 1px 1px 1px #555;
+}*/
     .pageheader {
         font: 24px Segoe UI;
         color: #286655;
@@ -151,6 +160,18 @@
 <script type="text/javascript">
     $(document).ready(function () {
         
+
+        $("#TermsDialog").dialog({
+            autoOpen: false,
+            show: "blind",
+            hide: "blind",
+            resizable: false,
+            height: 600,
+            width: 500,
+             
+            modal: true
+        });
+
         if ($('#PublishDivState').val() == "True") {
             Toggle('PublishDivExpand');
         }
@@ -175,18 +196,46 @@
 
         ('#Path').val('');
         ('#Newfile').val('');
- 
-       
+   
         
     });
 
+    function EnablePublishButton(obj) {
+       // alert();
+        //Term of use
+       // $('#PublishSurvey').prop("disabled", true);
+        //$('#TermOfUse').hide();
 
+        //$("#TermOfUseLable").click(function () {
+        //    if ($('#TermOfUse').is(":visible")) {
+        //        $('#TermOfUse').hide();
+        //    } else {
+
+        //        $('#TermOfUse').show();
+        //    }
+        //});
+
+        
+            if (obj.checked) {
+                $('#PublishSurvey').prop("disabled", false);
+            } else {
+
+                $('#PublishSurvey').prop("disabled", true);
+            }
+        
+    }
 
     function OpenFile()
     {
         
             $('a[href$=".xlsx"]').prop('target', '_blank');
          
+    }
+    function OpenFile_txt() {
+        
+    
+        $("#TermsDialog").dialog("open");
+        $("span.ui-dialog-title").text('Terms of service and conditions of use');
     }
     function HidUnhidSurveyId(value) {
 
@@ -385,16 +434,18 @@
                    
                     <div id="PublishDiv" class="accountdiv" style="margin-bottom:10px; align-self:center; display:none; visibility:collapse">
                         <p>
-                           
+
                             <label class="accountlabel" id="FilePath">*Excel based survey:</label><a onclick="OpenFile()" href="~/Content/Text/Survey.xlsx">Excel Template</a><br>
                             @*<input id="Path" class="Account" type="text" value=""   >*@
 
                             @Html.TextBoxFor(m => m.Path, new { @class = "Account" })
 
                             @*<label for="file-upload" class="submits create"   onclick="javascript: document.getElementById('Newfile').click();">
-                                Browse
-                            </label>*@
-                            <input for="file-upload" class="submits create" style="width:70px; height:31px" type="button" id="PublishButton" onclick="javascript: document.getElementById('Newfile').click();" value="Browse" /><br>
+                Browse
+            </label>*@
+                            <input for="file-upload" class="submits create" style="width:70px; height:31px" type="button" id="PublishButton" onclick="javascript: document.getElementById('Newfile').click();" value="Browse" />
+                            
+                            <br>
                            
                             @Html.ValidationMessageFor(m => m.Path, null, new { @class = "required" })
                             <input id="Newfile" type="file" style='visibility: hidden;' name="Newfile" accept=".xls,.xlsx,.csv" onchange="ChangeText(this, 'Path');" />
@@ -441,9 +492,24 @@
                             </div>
 
                         </p>*@
-                        <p >
-                            <input class="submits create" type="submit" name="PublishSurvey" id="PublishSurvey" value="Publish" style="margin-right:90px;" />
+                        <p>
+                 @if(Model.IsAuthenticated)
+                   {
+                            <input class="submits create" type="submit" disabled="disabled" name="PublishSurvey" id="PublishSurvey" value="Publish" style="margin-right:90px;" />
+                      
+                            <input type="checkbox" id="IagreeBox" for="IagreeBoxLabel"  onchange="EnablePublishButton(this);" />
+                            <label class="accountlabel" id="IagreeBoxLabel" style="width:330px;"><span style="font-weight:normal !important;">I agree to the</span> 
+                            <span class="TermsSpan" style="font-weight:bold;" onclick="OpenFile_txt()">
+                                 Terms of service and conditions of use 
+                                
+                            </span>
+                            </label>
+                   }
+                 else
+                 {
+                    <input class="submits create" type="submit"  name="PublishSurvey" id="PublishSurvey" value="Publish" style="margin-right:90px;" />
 
+                 }
                         </p>
                         <input type="hidden" id="ExistingSurvey_Hidden" value="@Model.UpdateExisting.ToString()" />
                     </div>
@@ -636,6 +702,8 @@ Survey End Date: @Model.EndDate
         <input type="hidden" id="DownLoadDivState" value="@Model.DownLoadDivState.ToString()" name="DownLoadDivState" />
 
     }
-   
+    <div id="TermsDialog">
+        @Html.Raw(ViewData["TermOfUse1"].ToString())
+    </div>
 </div>
-   
+  
