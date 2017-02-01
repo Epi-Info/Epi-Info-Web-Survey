@@ -36,11 +36,25 @@ namespace Epi.Web.MVC.Controllers
          [HttpGet]
         public ActionResult Index()
         {
+            string content = string.Empty;
             PublishModel Model = new PublishModel();
             ViewBag.Version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
             var IsAuthenticated = System.Web.HttpContext.Current.User.Identity.IsAuthenticated;         
             Session["IsAuthenticated"] = false;
             Session["IsNewOrg"] = false;
+            string filepath = Server.MapPath("~\\Content\\Text\\TermOfUse.txt");
+            try
+            {
+                using (var stream = new StreamReader(filepath))
+                {
+                    content = stream.ReadToEnd();
+                }
+            }
+            catch (Exception exc)
+            {
+
+            }
+            ViewData["TermOfUse1"] = content;
             if (IsAuthenticated)
             {
                 Session["IsAuthenticated"] = Model.IsAuthenticated = IsAuthenticated;
@@ -116,6 +130,23 @@ namespace Epi.Web.MVC.Controllers
         [HttpPost]
          public ActionResult Index(PublishModel Model, string PublishSurvey, string DownLoadResponse, string ValidateOrganization, HttpPostedFileBase Newfile1, HttpPostedFileBase Newfile, string SurveyName, string RePublishSurvey, string RePublishSurveyName)
         {
+
+            string filepath = Server.MapPath("~\\Content\\Text\\TermOfUse.txt");
+            try
+            {
+                using (var stream = new StreamReader(filepath))
+                {
+                    string content = stream.ReadToEnd();
+                    ViewData["TermOfUse1"] = content;
+                }
+            }
+            catch (Exception exc)
+            {
+
+            }
+            
+
+
             try
             {
                 ViewBag.Version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
