@@ -443,9 +443,9 @@ CCE_Context.prototype.getValue = function (pName)
                         }
                         return value;
                     case "timepicker":
-                        var refDate = "01/01/1970 ";//It is a reference date 
-                        var dateTime = refDate + field.val();
-                        value = new Date(dateTime).valueOf();
+                        var refDate = CCE_GetTodaysDate();//It is a reference date 
+                        var dateTime = refDate + " "+field.val();
+                        value = new Date(dateTime).getTime();
                         if (value == "" || isNaN(value))
                         {
                             return null;
@@ -513,9 +513,9 @@ CCE_Context.prototype.getValue = function (pName)
                         }
                         return value;
                     case "timepicker":
-                        var refDate = "01/01/1970 ";//It is a reference date 
-                        var dateTime = refDate + cce_Symbol.Value;
-                        value = new Date(dateTime).valueOf();
+                        var refDate = CCE_GetTodaysDate();//It is a reference date 
+                        var dateTime = refDate +" "+ value;
+                        value = new Date(dateTime).getTime();
                         if (value == "" || isNaN(value)) {
                             return null;
                         }
@@ -541,6 +541,24 @@ CCE_Context.prototype.getValue = function (pName)
     {
         return null;
     }
+}
+
+function CCE_GetTodaysDate() {
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1; //January is 0!
+    var yyyy = today.getFullYear();
+
+    if (dd < 10) {
+        dd = '0' + dd
+    }
+
+    if (mm < 10) {
+        mm = '0' + mm
+    }
+
+    today = mm + '/' + dd + '/' + yyyy;
+    return today;
 }
 
 
@@ -1858,13 +1876,15 @@ function CCE_Truncate(pValue)
 
 function CCE_SystemDate()
 {
-    return new Date();
+    var SystemDate = new Date();
+    return SystemDate;
 }
 
 
 function CCE_SystemTime()
 {
-    return new Date().getTime();
+    var SystemTime = new Date().getTime();
+    return SystemTime;
 }
 
 
