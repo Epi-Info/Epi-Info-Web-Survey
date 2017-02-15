@@ -196,14 +196,14 @@
 
         ('#Path').val('');
         ('#Newfile').val('');
-   
+ 
+            
+        });    
         
-    });
-
     function EnablePublishButton(obj) {
-       // alert();
+        // alert();
         //Term of use
-       // $('#PublishSurvey').prop("disabled", true);
+        // $('#PublishSurvey').prop("disabled", true);
         //$('#TermOfUse').hide();
 
         //$("#TermOfUseLable").click(function () {
@@ -215,160 +215,163 @@
         //    }
         //});
 
-        
-            if (obj.checked) {
-                $('#PublishSurvey').prop("disabled", false);
-            } else {
 
-                $('#PublishSurvey').prop("disabled", true);
-            }
-        
-    }
-
-    function OpenFile()
-    {
-        
-            $('a[href$=".xlsx"]').prop('target', '_blank');
-         
-    }
-    function OpenFile_txt() {
-        
-    
-        $("#TermsDialog").dialog("open");
-        $("span.ui-dialog-title").text('Terms of service and conditions of use');
-    }
-    function HidUnhidSurveyId(value) {
-
-
-        if ($('#ExistingSurvey').is(':checked')) {
-            $('#SurveyIdDiv').show();
+        if (obj.checked) {
+            $('#PublishSurvey').prop("disabled", false);
         } else {
-            $('#SurveyIdDiv').hide();
-
+            $('#PublishSurvey').prop("disabled", true);
         }
-    }
- 
-                   
-       
-    function ChangeText(oFileInput, sTargetID) {
-
-        document.getElementById(sTargetID).value = oFileInput.value;
-    }
-    function OpenSurvey(SurveyURL)
-    {
         
-        window.open(SurveyURL);
     }
-    function copyToClipboard() {
+            function clear() {
+                document.getElementById('valerr').innerHTML = '';
+            }
 
-        var copyTextarea = document.getElementById('FormInfo');
-      //  alert(copyTextarea);
-        copyTextarea.select();
+            function OpenFile()
+            {
+            $('a[href$=".xlsx"]').prop('target', '_blank');
 
-        try {
-            var successful = document.execCommand('copy');
-            var msg = successful ? 'successful' : 'unsuccessful';
-            console.log('Copying text command was ' + msg);
-        } catch (err) {
-            console.log('Oops, unable to copy');
         }
-    }
-   
-    //('PublishDivExpand')
-    function Toggle(Obj){
-       
-        switch (Obj){
-            case "PublishDivExpand":
-                $('.Publishcollaps').removeAttr("style");
-                $('.Publishcollaps').css({ "cursor": "pointer"});
-                $('.Publishexpand').css({ "display": "none", "visibility": "collapse" });
-                $('#RequiredLable').css({ "display": "", "visibility": "" });
-                $('#PublishDiv').css({ "display": "", "visibility": "" });
-                $('#PublishDivState').val('true');
-            break;
-            case "PublishDivCollaps":
-                $('#PublishDivState').val('false');
-                $('.Publishcollaps').css({ "display": "none", "visibility": "collapse" });
-                $('.Publishexpand').removeAttr("style");
-                $('.Publishexpand').css({ "cursor": "pointer" });
-                $('#RequiredLable').css({ "display": "none", "visibility": "collapse" });
-                $('#PublishDiv').css({ "display": "none", "visibility": "collapse" });
-                break;
-            case "RePublishDivExpand":
-                $('#RePublishDivState').val('true');
-                $('.RePublishcollaps').removeAttr("style");
-                $('.RePublishcollaps').css({ "cursor": "pointer" });
-                $('.RePublishexpand').css({ "display": "none", "visibility": "collapse" });
-                $('#RequiredLable1').css({ "display": "", "visibility": "" });
-                $('#RePublishDiv').css({ "display": "", "visibility": "" });
-                break;
-            case "RePublishDivCollaps":
-                $('#RePublishDivState').val('false');
-                $('.RePublishcollaps').css({ "display": "none", "visibility": "collapse" });
-                $('.RePublishexpand').removeAttr("style");
-                $('.RePublishexpand').css({ "cursor": "pointer" });
-                $('#RequiredLable1').css({ "display": "none", "visibility": "collapse" });
-                $('#RePublishDiv').css({ "display": "none", "visibility": "collapse" });
-                break;
-            case "DownloadDivExpand":
-                $('#DownLoadDivState').val('true');
-                $('.Downloadcollaps').removeAttr("style");
-                $('.Downloadcollaps').css({ "cursor": "pointer" });
-                $('.Downloadexpand').css({ "display": "none", "visibility": "collapse" });
-                $('#RequiredLable2').css({ "display": "", "visibility": "" });
-                $('#DownLoadDiv').css({ "display": "", "visibility": "" });
-                break;
-            case "DownloadDivCollaps":
-                $('#DownLoadDivState').val('false');
-                $('.Downloadcollaps').css({ "display": "none", "visibility": "collapse" });
-                $('.Downloadexpand').removeAttr("style");
-                $('.Downloadexpand').css({ "cursor": "pointer" });
-                $('#RequiredLable2').css({ "display": "none", "visibility": "collapse" });
-                $('#DownLoadDiv').css({ "display": "none", "visibility": "collapse" });
-                break;
-         default:
+        function OpenFile_txt() {
+
+
+            $("#TermsDialog").dialog("open");
+            $("span.ui-dialog-title").text('Terms of service and conditions of use');
         }
-    
-    
-    }
-    function GetSurveyInfo()
-    {
-        var SurveyId = $('#RepublishSurveyKey').val();
-         
-        var ActionUrl = '@Url.Action("GetSurveyInfo", "SurveyManager")' + '?surveyid=' + SurveyId;
-         
-        $.ajax({
-            url: ActionUrl,
-            type: 'POST',
-            contentType: 'application/json; charset=utf-8',
-            //  data: $('#myform').serialize(),
-            //data:JSON.stringify(model),
-            dataType: "json",
-            //cache: false,
-            async: false,
-            success: successFunc,
-            error: errorFunc
-        });
-        function successFunc(data) 
+        function HidUnhidSurveyId(value) {
+
+
+            if ($('#ExistingSurvey').is(':checked')) {
+                $('#SurveyIdDiv').show();
+            } else {
+                $('#SurveyIdDiv').hide();
+
+            }
+        }
+
+
+
+        function ChangeText(oFileInput, sTargetID) {
+
+            document.getElementById(sTargetID).value = oFileInput.value;
+        }
+        function OpenSurvey(SurveyURL) {
+
+            window.open(SurveyURL);
+        }
+        function copyToClipboard() {
+
+            var copyTextarea = document.getElementById('FormInfo');           
+            copyTextarea.select();                            
+            try {                               
+                var successful = document.execCommand('copy');           
+                var msg = successful ? 'successful' : 'unsuccessful';
+                console.log('Copying text command was ' + msg);                                 
+            } catch (err) {               
+                console.log('Oops, unable to copy');
+               alert("Your browser doesn't support copying towards the clipboard. Copy the text manually.")
+            }           
+        }
+
+
+
+
+
+        //('PublishDivExpand')
+        function Toggle(Obj){
+
+            switch (Obj){
+                case "PublishDivExpand":
+                    $('.Publishcollaps').removeAttr("style");
+                    $('.Publishcollaps').css({ "cursor": "pointer"});
+                    $('.Publishexpand').css({ "display": "none", "visibility": "collapse" });
+                    $('#RequiredLable').css({ "display": "", "visibility": "" });
+                    $('#PublishDiv').css({ "display": "", "visibility": "" });
+                    $('#PublishDivState').val('true');
+                    break;
+                case "PublishDivCollaps":
+                    $('#PublishDivState').val('false');
+                    $('.Publishcollaps').css({ "display": "none", "visibility": "collapse" });
+                    $('.Publishexpand').removeAttr("style");
+                    $('.Publishexpand').css({ "cursor": "pointer" });
+                    $('#RequiredLable').css({ "display": "none", "visibility": "collapse" });
+                    $('#PublishDiv').css({ "display": "none", "visibility": "collapse" });
+                    break;
+                case "RePublishDivExpand":
+                    $('#RePublishDivState').val('true');
+                    $('.RePublishcollaps').removeAttr("style");
+                    $('.RePublishcollaps').css({ "cursor": "pointer" });
+                    $('.RePublishexpand').css({ "display": "none", "visibility": "collapse" });
+                    $('#RequiredLable1').css({ "display": "", "visibility": "" });
+                    $('#RePublishDiv').css({ "display": "", "visibility": "" });
+                    break;
+                case "RePublishDivCollaps":
+                    $('#RePublishDivState').val('false');
+                    $('.RePublishcollaps').css({ "display": "none", "visibility": "collapse" });
+                    $('.RePublishexpand').removeAttr("style");
+                    $('.RePublishexpand').css({ "cursor": "pointer" });
+                    $('#RequiredLable1').css({ "display": "none", "visibility": "collapse" });
+                    $('#RePublishDiv').css({ "display": "none", "visibility": "collapse" });
+                    break;
+                case "DownloadDivExpand":
+                    $('#DownLoadDivState').val('true');
+                    $('.Downloadcollaps').removeAttr("style");
+                    $('.Downloadcollaps').css({ "cursor": "pointer" });
+                    $('.Downloadexpand').css({ "display": "none", "visibility": "collapse" });
+                    $('#RequiredLable2').css({ "display": "", "visibility": "" });
+                    $('#DownLoadDiv').css({ "display": "", "visibility": "" });
+                    break;
+                case "DownloadDivCollaps":
+                    $('#DownLoadDivState').val('false');
+                    $('.Downloadcollaps').css({ "display": "none", "visibility": "collapse" });
+                    $('.Downloadexpand').removeAttr("style");
+                    $('.Downloadexpand').css({ "cursor": "pointer" });
+                    $('#RequiredLable2').css({ "display": "none", "visibility": "collapse" });
+                    $('#DownLoadDiv').css({ "display": "none", "visibility": "collapse" });
+                    break;
+                default:
+            }
+
+
+        }
+        function GetSurveyInfo()
         {
-            
-            $('#EndDateUpdate').val(data.EndDate);
-            $('#RePublishSurveyName').val(data.SurveyName);
-            
-            if (data.IsDraft)
+            var SurveyId = $('#RepublishSurveyKey').val();
+
+            var ActionUrl = '@Url.Action("GetSurveyInfo", "SurveyManager")' + '?surveyid=' + SurveyId;
+
+            $.ajax({
+                url: ActionUrl,
+                type: 'POST',
+                contentType: 'application/json; charset=utf-8',
+                //  data: $('#myform').serialize(),
+                //data:JSON.stringify(model),
+                dataType: "json",
+                //cache: false,
+                async: false,
+                success: successFunc,
+                error: errorFunc
+            });
+            function successFunc(data)
             {
-                $('#RepublishSurveyMode').val(0);
+
+                $('#EndDateUpdate').val(data.EndDate);
+                $('#RePublishSurveyName').val(data.SurveyName);
+
+                if (data.IsDraft)
+                {
+                    $('#RepublishSurveyMode').val(0);
+                }
+                else
+                {
+                    $('#RepublishSurveyMode').val(1);
+                }
             }
-            else
-            {
-                $('#RepublishSurveyMode').val(1);
+            function errorFunc(data) {
+                alert('failed');
             }
         }
-        function errorFunc(data) {
-            alert('failed');
-        }
-     
-    }
+    
 
 </script>
 
@@ -382,7 +385,7 @@
        
            
             
-        <p style="text-align:left;margin-top: 0;margin-bottom: 0px; font-size: 9pt; font-weight:bold;">
+        <p id="valerr" style="text-align:left;margin-top: 0;margin-bottom: 0px; font-size: 9pt; font-weight:bold;">
             @Html.ValidationMessage("Error")
         </p>
     </div>
@@ -434,15 +437,15 @@
                    
                     <div id="PublishDiv" class="accountdiv" style="margin-bottom:10px; align-self:center; display:none; visibility:collapse">
                         <p>
-
+                           
                             <label class="accountlabel" id="FilePath">*Excel based survey:</label><a onclick="OpenFile()" href="~/Content/Text/Survey.xlsx">Excel Template</a><br>
                             @*<input id="Path" class="Account" type="text" value=""   >*@
 
                             @Html.TextBoxFor(m => m.Path, new { @class = "Account" })
 
                             @*<label for="file-upload" class="submits create"   onclick="javascript: document.getElementById('Newfile').click();">
-                Browse
-            </label>*@
+                                Browse
+                            </label>*@
                             <input for="file-upload" class="submits create" style="width:70px; height:31px" type="button" id="PublishButton" onclick="javascript: document.getElementById('Newfile').click();" value="Browse" />
                             
                             <br>
@@ -642,7 +645,7 @@
             </p>
 
             <p>
-                <input class="submits create" type="submit"   name="DownLoadResponse" id="DownLoadResponse" value="DownLoad" style="margin-right:90px;" />
+                <input class="submits create" type="submit" onclick="clear()"   name="DownLoadResponse" id="DownLoadResponse" value="DownLoad" style="margin-right:90px;" />
 
             </p>
 
@@ -672,11 +675,11 @@
                         </p>
                         <p>
                             <textarea id="FormInfo" readonly="readonly" style="width:600px;height:100px ; align-content:flex-end">
-Survey Name: @Model.SurveyName
-Survey Id: @Model.SurveyKey
-Security Token: @Model.UserPublishKey
-Survey URL: @Model.SurveyURL
-Survey End Date: @Model.EndDate
+Survey Name: @Model.SurveyName   
+Survey Id: @Model.SurveyKey   
+Security Token: @Model.UserPublishKey   
+Survey URL: @Model.SurveyURL  
+Survey End Date: @Model.EndDate  
                                 @if (ViewBag.IsNewOrg)
                                 {
                                     @ViewBag.Org  @Model.OrganizationKey                                                                
@@ -706,4 +709,4 @@ Survey End Date: @Model.EndDate
         @Html.Raw(ViewData["TermOfUse1"].ToString())
     </div>
 </div>
-  
+   
