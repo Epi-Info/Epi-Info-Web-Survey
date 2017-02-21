@@ -18,6 +18,16 @@ namespace Epi.Web.Controllers
         {
             try
             {
+                if (redirectUrl.Contains("&IsSaved=True"))
+                {
+                    redirectUrl = redirectUrl.Replace("&IsSaved=True","");
+                
+                }
+                if (redirectUrl.Contains("&IsSaved=False"))
+                {
+                    redirectUrl = redirectUrl.Replace("&IsSaved=False", "");
+
+                }
                 Epi.Web.Common.Email.Email EmailObj = new Common.Email.Email();
                 EmailObj.Body = redirectUrl + " and Pass Code is: " + passCode;
                 EmailObj.From = ConfigurationManager.AppSettings["EMAIL_FROM"].ToString();
