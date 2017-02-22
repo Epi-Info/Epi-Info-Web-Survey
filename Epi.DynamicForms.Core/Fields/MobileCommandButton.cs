@@ -21,9 +21,7 @@ namespace MvcDynamicForms.Fields
             commandButtonTag.Attributes.Add("value", Prompt);
             commandButtonTag.Attributes.Add("id", name);
             commandButtonTag.Attributes.Add("name", name);
-            commandButtonTag.Attributes.Add("type", "button");
-            string InputFieldStyle = GetInputFieldStyle(_InputFieldfontstyle.ToString(), _InputFieldfontSize, _InputFieldfontfamily.ToString());
-            commandButtonTag.Attributes.Add("style", InputFieldStyle);
+            commandButtonTag.Attributes.Add("type", "button");          
 
             string IsHiddenStyle = "";
             string IsHighlightedStyle = "";

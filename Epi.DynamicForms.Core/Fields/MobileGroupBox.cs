@@ -48,9 +48,8 @@ namespace MvcDynamicForms.Fields
 
             char[] delimiterChars = { ' ', ',' };
             string[] Styles = ControlFontStyle.Split(delimiterChars);
-            //CssStyles.Append("border-bottom: 2px solid #4e9689;color: #4e9689;font-size: 18px;font-weight: bold;line-height: 2em;");
-
-            CssStyles.Append("border-bottom: 2px solid #4e9689;color: #4e9689;font-weight: bold;line-height: 2em;font:");
+            CssStyles.Append("border-bottom: 2px solid #4e9689;color: #4e9689;font-size: 18px;font-weight: bold;line-height: 2em;");
+            
 
             foreach (string Style in Styles)
             {

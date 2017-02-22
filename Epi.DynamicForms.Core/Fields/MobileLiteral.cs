@@ -17,7 +17,7 @@ namespace MvcDynamicForms.Fields
             StringBuilder TextDecoration = new StringBuilder();
             StringBuilder CssStyles = new StringBuilder();
 
-            char[] delimiterChars = { ' ', ',' };
+          /*  char[] delimiterChars = { ' ', ',' };
             string[] Styles = ControlFontStyle.Split(delimiterChars);
 
             foreach (string Style in Styles)
@@ -76,7 +76,13 @@ namespace MvcDynamicForms.Fields
                 CssStyles.Append(";display:none");
             }
             
-            CssStyles.Append(TextDecoration);
+            CssStyles.Append(TextDecoration);*/
+
+         //   prompt.Attributes.Add("for", inputName);
+           // CssStyles.Append("class= EpiLabel");
+           // prompt.Attributes.Add("Id", "label" + inputName);
+
+            CssStyles.Append(" width: auto");
 
             return CssStyles.ToString();
         }

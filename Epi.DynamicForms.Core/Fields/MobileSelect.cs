@@ -27,12 +27,8 @@ namespace MvcDynamicForms.Fields
             prompt.Attributes.Add("for", inputName);
             prompt.Attributes.Add("class", "select");
             prompt.Attributes.Add("Id", "label" + inputName);
-
-            StringBuilder StyleValues = new StringBuilder();
-           // prompt.Attributes.Add("style", "display:block !important; ");          
-            StyleValues.Append(GetControlStyle(_fontstyle.ToString(), _Prompttop.ToString(), _Promptleft.ToString(), null, Height.ToString(), _IsHidden));
-           //StyleValues.Append(GetMobileLiteralStyle(_fontstyle.ToString(), null, null, null, null, IsHidden));
-            prompt.Attributes.Add("style", StyleValues.ToString());
+            
+            prompt.Attributes.Add("style", "display:block !important; ");           
             html.Append(prompt.ToString());
             var OuterDiv = new TagBuilder("div");
             //if (this.IsAndroidfield)
@@ -58,9 +54,7 @@ namespace MvcDynamicForms.Fields
             var select = new TagBuilder("select");
             select.Attributes.Add("id", inputName);
             select.Attributes.Add("name", inputName);
-
-            string InputFieldStyle = GetInputFieldStyle(_InputFieldfontstyle.ToString(), _InputFieldfontSize, _InputFieldfontfamily.ToString());
-           // if (string.IsNullOrEmpty(ErrorStyle))                         
+                                 
             //if (this.IsAndroidfield)
             //{
                 select.Attributes.Add("data-role", "none");
@@ -141,7 +135,7 @@ namespace MvcDynamicForms.Fields
             //{
             //    select.Attributes.Add("disabled", "disabled");
             //}              
-            select.Attributes.Add("style", "" + ErrorStyle + ";" + IsHiddenStyle + ";" + IsHighlightedStyle + InputFieldStyle);
+            select.Attributes.Add("style", "" + ErrorStyle + ";" + IsHiddenStyle + ";" + IsHighlightedStyle);
             select.MergeAttributes(_inputHtmlAttributes);
             html.Append(select.ToString(TagRenderMode.StartTag));
 
@@ -168,7 +162,7 @@ namespace MvcDynamicForms.Fields
                 var opt = new TagBuilder("option");
                 opt.Attributes.Add("value", null);
                 opt.SetInnerText(EmptyOption);
-                opt.Attributes.Add("style", "" + InputFieldStyle);
+                opt.Attributes.Add("style", "");
                 html.Append(opt.ToString());
             }
 
@@ -178,7 +172,7 @@ namespace MvcDynamicForms.Fields
                     foreach (var choice in _choices)
                     {
                         var opt = new TagBuilder("option");
-                        opt.Attributes.Add("style", "" + InputFieldStyle);
+                        opt.Attributes.Add("style", "");
                         var optSelectedVale = "";
                         if (!string.IsNullOrEmpty(SelectedValue.ToString()))
                         {
@@ -201,7 +195,7 @@ namespace MvcDynamicForms.Fields
                     foreach (var choice in _choices)
                     {
                         var opt = new TagBuilder("option");
-                        opt.Attributes.Add("style", "" + InputFieldStyle);
+                        opt.Attributes.Add("style", "" );
                         opt.Attributes.Add("value", choice.Key);
                         if (choice.Key == SelectedValue.ToString()) opt.Attributes.Add("selected", "selected");
                         opt.SetInnerText(choice.Key);
@@ -213,7 +207,7 @@ namespace MvcDynamicForms.Fields
                     foreach (var choice in _choices)
                     {
                         var opt = new TagBuilder("option");
-                        opt.Attributes.Add("style", "" + InputFieldStyle);
+                        opt.Attributes.Add("style", "");
                         opt.Attributes.Add("value", choice.Key);
                         if (choice.Key == SelectedValue.ToString()) opt.Attributes.Add("selected", "selected");
                         opt.SetInnerText(choice.Key);
@@ -225,7 +219,7 @@ namespace MvcDynamicForms.Fields
                     foreach (var choice in _choices)
                     {
                         var opt = new TagBuilder("option");
-                        opt.Attributes.Add("style", "" + InputFieldStyle);
+                        opt.Attributes.Add("style", "" );
                         if (choice.Key.Contains("-"))
                         {
                             string[] keyValue = choice.Key.Split(new char[] { '-' },2);
@@ -303,164 +297,7 @@ namespace MvcDynamicForms.Fields
             }
 
             return  Style;
-        }
-
-        public string GetMobileLiteralStyle(string ControlFontStyle, string Top, string Left, string Width, string Height, bool IsHidden)
-        {
-            StringBuilder FontStyle = new StringBuilder();
-            StringBuilder FontWeight = new StringBuilder();
-            StringBuilder TextDecoration = new StringBuilder();
-            StringBuilder CssStyles = new StringBuilder();
-
-            char[] delimiterChars = { ' ', ',' };
-            string[] Styles = ControlFontStyle.Split(delimiterChars);
-           // CssStyles.Append("border-bottom: 2px solid #4e9689;color: #4e9689;font-size: 18px;font-weight: bold;line-height: 2em;");
-            CssStyles.Append("width: auto");
-
-            foreach (string Style in Styles)
-            {
-                switch (Style.ToString())
-                {
-                    case "Italic":
-                        FontStyle.Append(Style.ToString());
-                        break;
-
-                    case "Oblique":
-                        FontStyle.Append(Style.ToString());
-                        break;
-                }
-            }
-
-            foreach (string Style in Styles)
-            {
-                switch (Style.ToString())
-                {
-                    case "Bold":
-                        FontWeight.Append(Style.ToString());
-                        break;
-
-                    case "Normal":
-                        FontWeight.Append(Style.ToString());
-                        break;
-                }
-            }
-
-            CssStyles.Append(FontWeight);
-            CssStyles.Append(" ");
-            CssStyles.Append(_fontSize.ToString() + "pt ");
-            CssStyles.Append(" ");
-            CssStyles.Append(_fontfamily.ToString());
-
-            foreach (string Style in Styles)
-            {
-                switch (Style.ToString())
-                {
-                    case "Strikeout":
-                        TextDecoration.Append("line-through");
-                        break;
-
-                    case "Underline":
-                        TextDecoration.Append(Style.ToString());
-                        break;
-                }
-            }
-
-            if (!string.IsNullOrEmpty(TextDecoration.ToString()))
-            {
-                CssStyles.Append(";text-decoration:");
-            }
-
-            if (IsHidden)
-            {
-                CssStyles.Append(";display:none");
-            }
-
-            CssStyles.Append(TextDecoration);
-
-            return CssStyles.ToString();
-        }
-
-
-        public override string GetControlStyle(string ControlFontStyle, string Top, string Left, string Width, string Height, bool IsHidden)
-        {
-            StringBuilder FontStyle = new StringBuilder();
-            StringBuilder FontWeight = new StringBuilder();
-            StringBuilder TextDecoration = new StringBuilder();
-            StringBuilder CssStyles = new StringBuilder();
-
-            char[] delimiterChars = { ' ', ',' };
-            string[] Styles = ControlFontStyle.Split(delimiterChars);
-            
-          //  CssStyles.Append("width: auto");
-
-            foreach (string Style in Styles)
-            {
-                switch (Style.ToString())
-                {
-                    case "Italic":
-                        FontStyle.Append(Style.ToString());
-                        break;
-                    case "Oblique":
-                        FontStyle.Append(Style.ToString());
-                        break;
-                }
-
-            }
-
-            foreach (string Style in Styles)
-            {
-                switch (Style.ToString())
-                {
-                    case "Bold":
-                        FontWeight.Append(Style.ToString());
-                        break;
-                    case "Normal":
-                        FontWeight.Append(Style.ToString());
-                        break;
-                }
-            }
-
-            CssStyles.Append(" font:");//1
-
-            if (!string.IsNullOrEmpty(FontStyle.ToString()))
-            {
-                CssStyles.Append(FontStyle);//2
-                CssStyles.Append(" ");//3
-            }
-
-            CssStyles.Append(FontWeight);
-            CssStyles.Append(" ");
-            CssStyles.Append(_fontSize.ToString() + "pt ");
-            CssStyles.Append(" ");
-            CssStyles.Append(_fontfamily.ToString());
-
-            foreach (string Style in Styles)
-            {
-                switch (Style.ToString())
-                {
-                    case "Strikeout":
-                        TextDecoration.Append("line-through");
-                        break;
-                    case "Underline":
-                        TextDecoration.Append(Style.ToString());
-                        break;
-                }
-            }
-
-            if (!string.IsNullOrEmpty(TextDecoration.ToString()))
-            {
-                CssStyles.Append(";text-decoration:");
-            }
-
-            if (IsHidden)
-            {
-                CssStyles.Append(";display:none");
-            }
-
-            CssStyles.Append(TextDecoration);
-
-            return CssStyles.ToString();
-        }
+        }        
     }
 
 
