@@ -21,8 +21,8 @@
     <SccAuxPath>https://tfs.codeplex.com/tfs/tfs04</SccAuxPath>
     <SccProvider>{4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}</SccProvider>
     <IISExpressSSLPort>44300</IISExpressSSLPort>
-    <IISExpressAnonymousAuthentication>disabled</IISExpressAnonymousAuthentication>
-    <IISExpressWindowsAuthentication>enabled</IISExpressWindowsAuthentication>
+    <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
     <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
     <UseGlobalApplicationHostFile />
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
@@ -360,6 +360,8 @@
     <Content Include="Content\images\save.png" />
     <Content Include="Content\images\sign_warning.png" />
     <Content Include="Content\images\submit.png" />
+    <Content Include="Content\images\Toggle-collapse-alt_green.png" />
+    <Content Include="Content\images\Toggle-expand-alt_green.png" />
     <Content Include="Content\images\video.png" />
     <Content Include="Content\images\warn.png" />
     <Content Include="Content\jquery.mobile-1.0b3.css" />
@@ -475,13 +477,10 @@
     <Content Include="Scripts\PIE.htc" />
     <Content Include="Scripts\Print.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Content\Text\Doc2.pdf" />
     <Content Include="Content\Text\Survey.xlsx" />
     <None Include="Properties\DataSources\Epi.Web.Common.Message.CacheDependencyResponse.datasource" />
     <None Include="Properties\DataSources\Epi.Web.Common.Message.OrganizationAccountResponse.datasource" />
     <Content Include="Properties\DataSources\Epi.Web.Common.Message.OrganizationResponse.datasource" />
-    <Content Include="Properties\DataSources\Epi.Web.Common.Message.PreFilledAnswerResponse.datasource" />
-    <Content Include="Properties\DataSources\Epi.Web.Common.Message.PublishResponse1.datasource" />
     <None Include="Properties\DataSources\Epi.Web.Common.Message.SurveyAnswerResponse.datasource" />
     <None Include="Properties\DataSources\Epi.Web.Common.Message.SurveyControlsResponse.datasource" />
     <None Include="Properties\DataSources\Epi.Web.Common.Message.SurveyInfoResponse.datasource" />
