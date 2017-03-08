@@ -283,7 +283,7 @@
           <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/Epi.Web.Common.DTO" minOccurs="0" name="AdminList" nillable="true" type="q9:AdminDTO" />
           <xs:element minOccurs="0" name="AdminMessage" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="OrgMessage" nillable="true" type="xs:string" />
-          <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/Epi.Web.Common.DTO" minOccurs="0" name="OrganizationList" nillable="true" type="q10:OrganizationDTO" />
+          <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/Epi.Web.Common.DTO" minOccurs="0" name="OrganizationDTO" nillable="true" type="q10:OrganizationDTO" />
           <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/Epi.Web.Common.DTO" minOccurs="0" name="StateList" nillable="true" type="q11:ArrayOfStateDTO" />
         </xs:sequence>
       </xs:extension>
@@ -311,4 +311,20 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="SurveyControlsResponse" nillable="true" type="tns:SurveyControlsResponse" />
+  <xs:complexType name="SourceTablesRequest">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:RequestBase">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="SourceTablesRequest" nillable="true" type="tns:SourceTablesRequest" />
+  <xs:complexType name="SourceTablesResponse">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:RequestBase">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="SourceTablesResponse" nillable="true" type="tns:SourceTablesResponse" />
 </xs:schema>

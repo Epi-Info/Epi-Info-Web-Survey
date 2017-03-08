@@ -7,6 +7,8 @@ using System.Collections.Generic;
 //using System.Linq.Dynamic;
 using Epi.Web.Interfaces.DataInterfaces;
 using Epi.Web.Common.BusinessObject;
+using System.Data.SqlClient;
+using System.Data;
 
 namespace Epi.Web.EF
 {
@@ -552,5 +554,111 @@ namespace Epi.Web.EF
                 pRequestMessage.IsSqlProject = false;
             }
         }
+       public void InsertSourceTable(string SourcetableXml, string SourcetableName, string FormId)
+       {
+
+            
+           string ConnectionString = DataObjectFactory._ADOConnectionString;
+           SqlConnection Connection = new SqlConnection(ConnectionString);
+           
+         
+             Connection.Open();
+            // SqlCommand Command = new SqlCommand(Query, EWEConnection);
+                SqlCommand Command = new SqlCommand();
+                Command.Connection = Connection;
+              try
+               {
+                   Guid Id = new Guid(FormId);
+                Command.CommandType = CommandType.Text;
+                //Command.CommandText = "Insert into Sourcetables (SourceTableName, FormId,SourceTableXml) values ('@SourceTableName','@FormId','@SourceTableXml')";
+                //Command.Parameters.AddWithValue("SourceTableName", SourcetableName);
+                //Command.Parameters.AddWithValue("FormId", Id);
+                //Command.Parameters.AddWithValue("SourceTableXml", SourcetableXml);
+
+
+              Command.CommandText = "Insert into Sourcetables (SourceTableName, FormId,SourceTableXml) values ('" + SourcetableName + "','" + FormId + "','" + SourcetableXml.Replace("'","''")  + "')";
+               
+                Command.ExecuteNonQuery();
+                //SqlDataAdapter  Adapter = new SqlDataAdapter( Command);
+
+               // DataSet  DS = new DataSet();
+
+               
+
+               
+                      
+                     Connection.Close();
+                }
+                catch (Exception)
+                {
+                    Connection.Close();
+                    
+                }
+
+       
+       }
+       public void UpdateSourceTable(string SourcetableXml, string SourcetableName, string FormId)
+       {
+           string ConnectionString = DataObjectFactory._ADOConnectionString;
+           SqlConnection Connection = new SqlConnection(ConnectionString);
+
+
+           Connection.Open();
+           // SqlCommand Command = new SqlCommand(Query, EWEConnection);
+           SqlCommand Command = new SqlCommand();
+           Command.Connection = Connection;
+           try
+           {
+               Guid Id = new Guid(FormId);
+               Command.CommandType = CommandType.Text;
+
+
+               Command.CommandText = "UPDATE Sourcetables  SET SourceTableXml ='" + SourcetableXml.Replace("'", "''") + "'  where FormId =" + "'" + FormId + "' And  SourcetableName='" + SourcetableName + "'";
+
+               Command.ExecuteNonQuery();
+                
+
+               Connection.Close();
+           }
+           catch (Exception)
+           {
+               Connection.Close();
+
+           }
+       
+       
+       }
+       public List<SourceTableBO> GetSourceTables(string FormId)
+       {
+           List<SourceTableBO> result = new List<SourceTableBO>();
+           string ConnectionString = DataObjectFactory._ADOConnectionString;
+           SqlConnection Connection = new SqlConnection(ConnectionString);
+
+
+           Connection.Open();
+          
+           SqlCommand Command = new SqlCommand();
+           Command.Connection = Connection;
+           try
+           {
+              Command.CommandType = CommandType.Text;
+              Command.CommandText = "select * from Sourcetables  where  FormId ='" + FormId+"'";
+             // Command.ExecuteNonQuery();
+              SqlDataAdapter  Adapter = new SqlDataAdapter( Command);
+              DataSet  DS = new DataSet();
+              Adapter.Fill(DS);
+               if(DS.Tables.Count>0){
+              result = Mapper.MapToSourceTableBO(DS.Tables[0]);
+               }
+              Connection.Close();
+           }
+           catch (Exception)
+           {
+               Connection.Close();
+
+           }
+
+           return result;
+       }
     }
 }

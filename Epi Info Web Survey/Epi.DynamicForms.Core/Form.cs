@@ -22,7 +22,7 @@ namespace MvcDynamicForms
         private string _formWrapper = Constant.WRAPPER;
         private string _formWrapperClass = Constant.FORMWRAPPERCLASS;
         private string _fieldPrefix = Constant.FIELDPREFIX;
-
+       
         private Dictionary<string, Field> _fields;
         private SurveyInfoDTO _SurveyInfo;
         private string _PageId = "";
@@ -32,7 +32,7 @@ namespace MvcDynamicForms
         public bool IsMobile { get; set; }
         public System.Collections.Generic.IEnumerable<System.Xml.Linq.XElement> FieldsTypeIDs { get; set; }
         public XDocument XDocMetadata { get; set; }
-        
+        public List<SourceTableDTO> SourceTableList { get; set; }
         private string _IsDraftModeStyleClass = "";
         
         /// <summary>

@@ -333,5 +333,12 @@ namespace Epi.Web.BLL
             List<SurveyInfoBO> SurveyInfoResponse = this.SurveyInfoDao.GetAllSurveysByOrgKey(EncryptedKey);
             return SurveyInfoResponse;
         }
+        public List<SourceTableBO> GetSourceTables( string SurveyId)
+        {
+            List<SourceTableBO> List = new List<SourceTableBO>();
+            List = this.SurveyInfoDao.GetSourceTables(SurveyId);
+
+            return List;
+        }
     }
 }
