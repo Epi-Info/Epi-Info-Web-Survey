@@ -12,6 +12,7 @@ namespace MvcDynamicForms.Fields
     [Serializable]
     public class Select : ListField
     {
+        
         public int Size
         {
             get
@@ -76,7 +77,20 @@ namespace MvcDynamicForms.Fields
             }
             if (FunctionObjectClick != null && !FunctionObjectClick.IsNull())
             {
-                select.Attributes.Add("onchange", "return " + _key + "_click();"); //click
+                if( this.RelateCondition)
+                {
+                    select.Attributes.Add("onchange", "return SetCodes_Val(this,'" + "null" + "','" + _key + "');" + _key + "_click();"); //click
+                }
+                else
+                {
+                    select.Attributes.Add("onchange", "return " + _key + "_click();"); //click
+                }
+            }
+            else {
+                if (this.RelateCondition)
+                {
+                    select.Attributes.Add("onchange", "return SetCodes_Val(this,'" + "null"+ "','" + _key + "');"  ); //click
+                }
             }
             if (FunctionObjectBefore != null && !FunctionObjectBefore.IsNull())
             {
