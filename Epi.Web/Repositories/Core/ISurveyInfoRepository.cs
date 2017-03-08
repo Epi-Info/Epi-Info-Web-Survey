@@ -21,5 +21,6 @@ namespace Epi.Web.MVC.Repositories.Core
         bool ValidateOrganization(OrganizationRequest Request);
 
         SurveyInfoResponse GetAllSurveysByOrgKey(string OrgKey);
+        SourceTablesResponse GetSourceTables(SourceTablesRequest Request);
     }
 }

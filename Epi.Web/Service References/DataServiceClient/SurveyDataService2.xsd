@@ -141,4 +141,32 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetUserOrgId">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q21="http://www.yourcompany.com/types/" minOccurs="0" name="Request" nillable="true" type="q21:OrganizationAccountRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetUserOrgIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q22="http://www.yourcompany.com/types/" minOccurs="0" name="GetUserOrgIdResult" nillable="true" type="q22:OrganizationAccountResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSourceTables">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q23="http://www.yourcompany.com/types/" minOccurs="0" name="Request" nillable="true" type="q23:SourceTablesRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSourceTablesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q24="http://www.yourcompany.com/types/" minOccurs="0" name="GetSourceTablesResult" nillable="true" type="q24:SourceTablesResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

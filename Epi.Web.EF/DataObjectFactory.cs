@@ -10,7 +10,7 @@ namespace Epi.Web.EF
     public static class DataObjectFactory
     {
         private static readonly string _connectionString;
-
+        public static readonly string _ADOConnectionString;
         /// <summary>
         /// Static constructor. Reads the connectionstring from web.config just once.
         /// </summary>
@@ -20,9 +20,10 @@ namespace Epi.Web.EF
             {
                 //  string connectionStringName = ConfigurationManager.AppSettings.Get("ConnectionStringName");
                 string connectionStringName = "EIWSEntities";
-
+                string AdoConnectionStringName = "EIWSADO";
                 //Decrypt connection string here
                 _connectionString = Cryptography.Decrypt(ConfigurationManager.ConnectionStrings[connectionStringName].ConnectionString);
+                _ADOConnectionString = Cryptography.Decrypt(ConfigurationManager.ConnectionStrings[AdoConnectionStringName].ConnectionString);
             }
             catch (Exception ex) 
                 {

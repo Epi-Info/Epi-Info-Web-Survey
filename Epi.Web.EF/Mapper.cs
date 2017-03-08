@@ -323,5 +323,23 @@ namespace Epi.Web.EF
             Datasource.PersistSecurityInfo = ConnectionString.PersistSecurityInfo;
             return Datasource;
         }
+        internal static List<SourceTableBO> MapToSourceTableBO(System.Data.DataTable dataTable)
+        {
+            List<SourceTableBO> List = new List<SourceTableBO>();
+          
+
+            for (int i = 0; i < dataTable.Rows.Count; i++)
+            {
+                 SourceTableBO SourceTableBO = new SourceTableBO();
+                 SourceTableBO.TableName = dataTable.Rows[i][0].ToString();
+                 SourceTableBO.TableXml = dataTable.Rows[i][2].ToString();
+                 
+
+
+                List.Add(SourceTableBO);
+            }
+            return List;
+            
+        }
     }
 }

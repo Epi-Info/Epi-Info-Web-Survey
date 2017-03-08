@@ -38,7 +38,7 @@ namespace Epi.Web.BLL
         }
         public SurveyRequestResultBO PublishSurvey(SurveyInfoBO  pRequestMessage)
         {
-
+            string _Xml = pRequestMessage.XML;
             SurveyRequestResultBO result = new SurveyRequestResultBO();
 
             var SurveyId = Guid.NewGuid();
@@ -67,7 +67,9 @@ namespace Epi.Web.BLL
 
                                                 BO.SurveyNumber = pRequestMessage.SurveyNumber;
 
-                                                BO.XML = pRequestMessage.XML;
+                                                 XDocument xdoc = XDocument.Parse(pRequestMessage.XML);
+                                                 xdoc.Descendants().Where(e => e.Name == "SourceTable").Remove();
+                                                 BO.XML = xdoc.ToString();
 
                                                 BO.SurveyName = pRequestMessage.SurveyName;
 
@@ -96,7 +98,7 @@ namespace Epi.Web.BLL
                                                     DbConnectionStringBO.SurveyId = SurveyId;
                                                     this.SurveyInfoDao.InsertConnectionString(DbConnectionStringBO);
                                                 }
-
+                                                      SetSourceTable(_Xml, SurveyId.ToString());
                                             }
                                             catch (Exception ex)
                                             {
@@ -136,7 +138,7 @@ namespace Epi.Web.BLL
         {
 
             SurveyRequestResultBO result = new SurveyRequestResultBO();
-
+            string _Xml = pRequestMessage.XML;
             var SurveyId = new Guid(pRequestMessage.SurveyId);
 
             if (pRequestMessage != null)
@@ -162,8 +164,10 @@ namespace Epi.Web.BLL
                             BO.OrganizationName = pRequestMessage.OrganizationName;
 
                             BO.SurveyNumber = pRequestMessage.SurveyNumber;
-
-                            BO.XML = pRequestMessage.XML;
+                            XDocument xdoc = XDocument.Parse(pRequestMessage.XML);
+                            xdoc.Descendants().Where(e => e.Name == "SourceTable").Remove();
+                            BO.XML = xdoc.ToString();
+                          
 
                             BO.SurveyName = pRequestMessage.SurveyName;
 
@@ -181,6 +185,7 @@ namespace Epi.Web.BLL
                             BO.IsSqlProject = pRequestMessage.IsSqlProject;
 
                             this.SurveyInfoDao.UpdateSurveyInfo(BO);
+                             ReSetSourceTable(_Xml, SurveyId.ToString());
                             result.URL = GetURL(pRequestMessage, SurveyId);
                             result.IsPulished = true;
                             //Updateing Connection string..
@@ -315,6 +320,30 @@ namespace Epi.Web.BLL
 
             DbConnectionStringBO.DatabaseType = "SQL";
             return DbConnectionStringBO;
+        }
+        private void SetSourceTable(string Xml , string FormId)
+        {
+            
+            XDocument xdoc1 = XDocument.Parse(Xml);
+            foreach (XElement Xelement in xdoc1.Descendants("Template").Elements("SourceTable"))
+            {
+              //  Xelement.ToString()
+                string SourcetableName = Xelement.Attribute("TableName").Value;
+                this.SurveyInfoDao.InsertSourceTable(Xelement.ToString(), SourcetableName, FormId);
+            }
+            
+        }
+        private void ReSetSourceTable(string Xml, string FormId)
+        {
+
+            XDocument xdoc1 = XDocument.Parse(Xml);
+            foreach (XElement Xelement in xdoc1.Descendants("Template").Elements("SourceTable"))
+            {
+                //  Xelement.ToString()
+                string SourcetableName = Xelement.Attribute("TableName").Value;
+                this.SurveyInfoDao.UpdateSourceTable(Xelement.ToString(), SourcetableName, FormId);
+            }
+
         }
       
     }

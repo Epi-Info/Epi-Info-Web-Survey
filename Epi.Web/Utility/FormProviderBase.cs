@@ -683,7 +683,7 @@ namespace Epi.Web.MVC.Utility
             field.FunctionObjectClick = (EnterRule)form.FormCheckCodeObj.GetCommand("level=field&event=click&identifier=" + field.Key);
         }
 
-        private static string GetDropDownValues(XDocument xdoc, string ControlName, string TableName, string CodeColumnName)
+        private static string GetDropDownValues(XDocument xdoc, string ControlName, string TableName, string CodeColumnName, List<SourceTableDTO> SourceTable = null)
         {
             StringBuilder DropDownValues = new StringBuilder();
 
@@ -692,7 +692,18 @@ namespace Epi.Web.MVC.Utility
                 var _ControlValues = from _ControlValue in xdoc.Descendants("SourceTable")
                                      where _ControlValue.Attribute("TableName").Value == TableName.ToString()
                                      select _ControlValue;
-
+                if (_ControlValues.Count()==0)
+                {
+                     if ( SourceTable!= null && SourceTable.Count() > 0)
+                                {
+                                    var SourceTableXml1 = SourceTable.Where(x => x.TableName == TableName.ToString()).Select(y => y.TableXml).ToList() ;
+                                    XDocument SourceTableXml =   XDocument.Parse(SourceTableXml1[0].ToString());
+                                    _ControlValues = from _ControlValue in SourceTableXml.Descendants("SourceTable")
+                                                    where _ControlValue.Attribute("TableName").Value == TableName.ToString()
+                                                    select _ControlValue;
+                                }
+                
+                }
                 foreach (var _ControlValue in _ControlValues)
                 {
                     var _SourceTableValues = from _SourceTableValue in _ControlValues.Descendants("Item")
@@ -997,19 +1008,19 @@ namespace Epi.Web.MVC.Utility
                             break;
 
                         case "17":
-                            string legalValues = GetDropDownValues(xdocMetadata, fieldElement.Attribute("Name").Value, fieldElement.Attribute("SourceTableName").Value, fieldElement.Attribute("CodeColumnName").Value);
+                            string legalValues = GetDropDownValues(xdocMetadata, fieldElement.Attribute("Name").Value, fieldElement.Attribute("SourceTableName").Value, fieldElement.Attribute("CodeColumnName").Value, form.SourceTableList);
                             field = GetDropDown(fieldElement, legalValues, 17, form);
                             ((Select)field).SelectedValue = value.Trim(new char[]{','});
                             break;
 
                         case "18":
-                            string codes = GetDropDownValues(xdocMetadata, fieldElement.Attribute("Name").Value, fieldElement.Attribute("SourceTableName").Value, fieldElement.Attribute("CodeColumnName").Value);
+                            string codes = GetDropDownValues(xdocMetadata, fieldElement.Attribute("Name").Value, fieldElement.Attribute("SourceTableName").Value, fieldElement.Attribute("CodeColumnName").Value, form.SourceTableList);
                             field = GetDropDown(fieldElement, codes, 18, form);
                             ((Select)field).SelectedValue = value.Trim(new char[] { ',' });
                             break;
 
                         case "19":
-                            string commentLegal = GetDropDownValues(xdocMetadata, fieldElement.Attribute("Name").Value, fieldElement.Attribute("SourceTableName").Value, fieldElement.Attribute("CodeColumnName").Value);
+                            string commentLegal = GetDropDownValues(xdocMetadata, fieldElement.Attribute("Name").Value, fieldElement.Attribute("SourceTableName").Value, fieldElement.Attribute("CodeColumnName").Value,form.SourceTableList);
                             field = GetDropDown(fieldElement, commentLegal, 19, form);
                             ((Select)field).SelectedValue = value.Trim(new char[] { ',' });
                             break;
@@ -1092,17 +1103,18 @@ namespace Epi.Web.MVC.Utility
                             break;
 
                         case "17":
-                            dropDownValues = GetDropDownValues(form.XDocMetadata, fieldElement.Attribute("Name").Value, fieldElement.Attribute("SourceTableName").Value, fieldElement.Attribute("CodeColumnName").Value);
+                            dropDownValues = GetDropDownValues(form.XDocMetadata, fieldElement.Attribute("Name").Value, fieldElement.Attribute("SourceTableName").Value, fieldElement.Attribute("CodeColumnName").Value, form.SourceTableList);
                             field = GetDropDown(fieldElement, dropDownValues, 17, form);
                             break;
 
                         case "18":
-                            dropDownValues = GetDropDownValues(form.XDocMetadata, fieldElement.Attribute("Name").Value, fieldElement.Attribute("SourceTableName").Value, fieldElement.Attribute("CodeColumnName").Value);
+                            dropDownValues = GetDropDownValues(form.XDocMetadata, fieldElement.Attribute("Name").Value, fieldElement.Attribute("SourceTableName").Value, fieldElement.Attribute("CodeColumnName").Value, form.SourceTableList);
                             field = GetDropDown(fieldElement, dropDownValues, 18, form);
                             break;
 
                         case "19":
-                            dropDownValues = GetDropDownValues(form.XDocMetadata, fieldElement.Attribute("Name").Value, fieldElement.Attribute("SourceTableName").Value, fieldElement.Attribute("CodeColumnName").Value);
+
+                            dropDownValues = GetDropDownValues(form.XDocMetadata, fieldElement.Attribute("Name").Value, fieldElement.Attribute("SourceTableName").Value, fieldElement.Attribute("CodeColumnName").Value, form.SourceTableList);
                             field = GetDropDown(fieldElement, dropDownValues, 19, form);
                             break;
 
