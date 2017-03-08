@@ -17,7 +17,7 @@ namespace Epi.Web.MVC.Utility
 {
     public class FormProvider : FormProviderBase
     {
-        public static Form GetForm(SurveyInfoDTO surveyInfo, int pageNumber, SurveyAnswerDTO surveyAnswer, bool isMobile = false, bool IsAndroid = false)
+        public static Form GetForm(SurveyInfoDTO surveyInfo, int pageNumber, SurveyAnswerDTO surveyAnswer, bool isMobile = false, bool IsAndroid = false, List<SourceTableDTO> SourceTableList = null)
             
         {
             Form form = null;
@@ -93,6 +93,8 @@ namespace Epi.Web.MVC.Utility
                     form.FormCheckCodeObj = form.GetCheckCodeObj(form.XDocMetadata, xdocResponse, checkcode);
                     form.FormCheckCodeObj.GetVariableJavaScript(VariableDefinitions);
                     form.FormCheckCodeObj.GetSubroutineJavaScript(VariableDefinitions);
+
+                    form.SourceTableList = SourceTableList;
 
                     string pageName = GetPageName(form.XDocMetadata, pageNumber);
 

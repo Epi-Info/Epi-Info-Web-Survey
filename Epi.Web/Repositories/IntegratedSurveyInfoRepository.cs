@@ -230,5 +230,75 @@ namespace Epi.Web.MVC.Repositories
         {
             throw new NotImplementedException();
         }
+            public SourceTablesResponse GetSourceTables(SourceTablesRequest pRequest)
+            {
+
+               
+                try
+                {
+                    string SurveyId = pRequest.SurveyId + "_SourceTables";
+                    var CacheObj = HttpRuntime.Cache.Get(SurveyId);
+                    SourceTablesResponse result = new SourceTablesResponse();
+                    string CacheIsOn = ConfigurationManager.AppSettings["CACHE_IS_ON"]; ;
+                    string IsCacheSlidingExpiration = ConfigurationManager.AppSettings["CACHE_SLIDING_EXPIRATION"].ToString();
+                    int CacheDuration = 0;
+                    int.TryParse(ConfigurationManager.AppSettings["CACHE_DURATION"].ToString(), out CacheDuration);
+
+                    if (CacheIsOn.ToUpper() == "TRUE")
+                    {
+                        if (CacheObj == null)
+                        {
+                            result = (SourceTablesResponse)_iDataService.GetSourceTables(pRequest); 
+
+                            if (IsCacheSlidingExpiration.ToUpper() == "TRUE")
+                            {
+
+                                HttpRuntime.Cache.Insert(SurveyId, result, null, Cache.NoAbsoluteExpiration, TimeSpan.FromMinutes(CacheDuration));
+                            }
+                            else
+                            {
+                                HttpRuntime.Cache.Insert(SurveyId, result, null, DateTime.Now.AddMinutes(CacheDuration), Cache.NoSlidingExpiration);
+
+                            }
+                            return result;
+                        }
+                        else
+                        {
+
+
+                            return (SourceTablesResponse)CacheObj;
+
+                        }
+                    }
+                    else
+                    {
+                        result = (SourceTablesResponse)_iDataService.GetSourceTables(pRequest);
+                        return result;
+
+                    }
+
+                }
+                catch (FaultException<CustomFaultException> cfe)
+                {
+                    throw cfe;
+                }
+                catch (FaultException fe)
+                {
+                    throw fe;
+                }
+                catch (CommunicationException ce)
+                {
+                    throw ce;
+                }
+                catch (TimeoutException te)
+                {
+                    throw te;
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            
+            }
     }
 }

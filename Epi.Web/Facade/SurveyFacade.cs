@@ -63,11 +63,21 @@ namespace Epi.Web.MVC.Facade
         /// <param name="pageNumber"></param>
         /// <param name="surveyAnswerDTO"></param>
         /// <returns></returns>
-        public MvcDynamicForms.Form GetSurveyFormData(string surveyId, int pageNumber, Epi.Web.Common.DTO.SurveyAnswerDTO surveyAnswerDTO, bool isMobileDevice = false, string callerThereby = "", bool IsAndroid = false)
+        public MvcDynamicForms.Form GetSurveyFormData(string surveyId, int pageNumber, Epi.Web.Common.DTO.SurveyAnswerDTO surveyAnswerDTO, bool isMobileDevice = false, string callerThereby = "", bool IsAndroid = false, bool GetSourceTables = true)
         {
+            SourceTablesResponse Response = new SourceTablesResponse();
+            SourceTablesRequest Request = new  SourceTablesRequest();
+            if (GetSourceTables)
+            {
+
+                    Request.SurveyId = surveyId;
+                    Response = _iSurveyInfoRepository.GetSourceTables(Request);//Pain Point 
+
+                 
+            }
             Epi.Web.Common.DTO.SurveyInfoDTO surveyInfoDTO = SurveyHelper.GetSurveyInfoDTO(_surveyInfoRequest,_iSurveyInfoRepository,surveyId);
             MvcDynamicForms.Form form = null;
-            form = Epi.Web.MVC.Utility.FormProvider.GetForm(surveyInfoDTO, pageNumber, surveyAnswerDTO, isMobileDevice, IsAndroid);
+            form = Epi.Web.MVC.Utility.FormProvider.GetForm(surveyInfoDTO, pageNumber, surveyAnswerDTO, isMobileDevice, IsAndroid, Response.List);
 
             return form;
         }
@@ -194,6 +204,15 @@ namespace Epi.Web.MVC.Facade
 
             Response = _iOrgAccountRepository.GetUserOrgId(Request);
            
+            return Response;
+        }
+        public SourceTablesResponse GetSourceTables(string surveyId)
+        {
+            SourceTablesResponse Response = new SourceTablesResponse();
+            SourceTablesRequest Request = new SourceTablesRequest();
+
+            Request.SurveyId = surveyId;
+            Response = _iSurveyInfoRepository.GetSourceTables(Request);//Pain Point 
             return Response;
         }
     }

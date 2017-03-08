@@ -76,7 +76,7 @@ namespace MvcDynamicForms.Fields
             }
             if (FunctionObjectClick != null && !FunctionObjectClick.IsNull())
             {
-                select.Attributes.Add("onclick", "return " + _key + "_click();"); //click
+                select.Attributes.Add("onchange", "return " + _key + "_click();"); //click
             }
             if (FunctionObjectBefore != null && !FunctionObjectBefore.IsNull())
             {
