@@ -68,7 +68,10 @@ namespace Epi.Web.MVC.Controllers
                    
                 SurveyInfoModel surveyInfoModel = GetSurveyInfo(surveyAnswerDTO.SurveyId);
                 PreValidationResultEnum ValidationTest = PreValidateResponse(Mapper.ToSurveyAnswerModel(surveyAnswerDTO), surveyInfoModel);
-                
+
+
+                Session["RootFormId"] = surveyInfoModel.SurveyId;
+
                 if(pageNumber == 0)
                 {
                     pageNumber = GetSurveyPageNumber(surveyAnswerDTO.XML.ToString());
@@ -855,6 +858,7 @@ namespace Epi.Web.MVC.Controllers
         [HttpGet]
         public JsonResult GetCodesValue(string SourceTableName= "", string SelectedValue="",string SurveyId="") 
         {
+            SurveyId = Session["RootFormId"].ToString();
             string CacheIsOn = ConfigurationManager.AppSettings["CACHE_IS_ON"]; ;
             string IsCacheSlidingExpiration = ConfigurationManager.AppSettings["CACHE_SLIDING_EXPIRATION"].ToString();
             int CacheDuration = 0;

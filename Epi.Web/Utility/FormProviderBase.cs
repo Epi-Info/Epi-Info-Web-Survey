@@ -624,7 +624,7 @@ namespace Epi.Web.MVC.Utility
         protected static Select GetDropDown(XElement _FieldTypeID, string DropDownValues, int FieldTypeId, Form form)
         {
             InputField field;
-
+            
             if (form.IsMobile)
             {
                 field = new MobileSelect();
@@ -669,7 +669,14 @@ namespace Epi.Web.MVC.Utility
             ((Select)field).ShowEmptyOption = true;
             ((Select)field).ControlFontSize = float.Parse(_FieldTypeID.Attribute("ControlFontSize").Value);
             ((Select)field).ControlFontStyle = _FieldTypeID.Attribute("ControlFontStyle").Value;
+            if (FieldTypeId == 18)
+            {
+                ((Select)field).RelateCondition = true;
+            }
+            else {
 
+                ((Select)field).RelateCondition = false;
+            }
             ((Select)field).EmptyOption = "Select";
             ((Select)field).AddChoices(DropDownValues, "&#;", field.Sort);
 
@@ -1010,6 +1017,7 @@ namespace Epi.Web.MVC.Utility
                         case "17":
                             string legalValues = GetDropDownValues(xdocMetadata, fieldElement.Attribute("Name").Value, fieldElement.Attribute("SourceTableName").Value, fieldElement.Attribute("CodeColumnName").Value, form.SourceTableList);
                             field = GetDropDown(fieldElement, legalValues, 17, form);
+                           
                             ((Select)field).SelectedValue = value.Trim(new char[]{','});
                             break;
 
