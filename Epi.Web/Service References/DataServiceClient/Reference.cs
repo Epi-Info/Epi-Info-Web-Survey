@@ -55,6 +55,14 @@ namespace Epi.Web.MVC.DataServiceClient {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/GetSurveyControlList", ReplyAction="http://tempuri.org/IDataService/GetSurveyControlListResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(Epi.Web.Common.Exception.CustomFaultException), Action="http://tempuri.org/IDataService/GetSurveyControlListCustomFaultExceptionFault", Name="CustomFaultException", Namespace="http://www.yourcompany.com/types/")]
         Epi.Web.Common.Message.SurveyControlsResponse GetSurveyControlList(Epi.Web.Common.Message.SurveyControlsRequest pRequestMessage);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/GetUserOrgId", ReplyAction="http://tempuri.org/IDataService/GetUserOrgIdResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Epi.Web.Common.Exception.CustomFaultException), Action="http://tempuri.org/IDataService/GetUserOrgIdCustomFaultExceptionFault", Name="CustomFaultException", Namespace="http://www.yourcompany.com/types/")]
+        Epi.Web.Common.Message.OrganizationAccountResponse GetUserOrgId(Epi.Web.Common.Message.OrganizationAccountRequest Request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/GetSourceTables", ReplyAction="http://tempuri.org/IDataService/GetSourceTablesResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Epi.Web.Common.Exception.CustomFaultException), Action="http://tempuri.org/IDataService/GetSourceTablesCustomFaultExceptionFault", Name="CustomFaultException", Namespace="http://www.yourcompany.com/types/")]
+        Epi.Web.Common.Message.SourceTablesResponse GetSourceTables(Epi.Web.Common.Message.SourceTablesRequest Request);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -122,6 +130,14 @@ namespace Epi.Web.MVC.DataServiceClient {
         
         public Epi.Web.Common.Message.SurveyControlsResponse GetSurveyControlList(Epi.Web.Common.Message.SurveyControlsRequest pRequestMessage) {
             return base.Channel.GetSurveyControlList(pRequestMessage);
+        }
+        
+        public Epi.Web.Common.Message.OrganizationAccountResponse GetUserOrgId(Epi.Web.Common.Message.OrganizationAccountRequest Request) {
+            return base.Channel.GetUserOrgId(Request);
+        }
+        
+        public Epi.Web.Common.Message.SourceTablesResponse GetSourceTables(Epi.Web.Common.Message.SourceTablesRequest Request) {
+            return base.Channel.GetSourceTables(Request);
         }
     }
 }

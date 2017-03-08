@@ -661,6 +661,16 @@ namespace Epi.Web.WCF.SurveyService
 
             return SurveyControlsResponse;
             }
+        public SourceTablesResponse GetSourceTables(SourceTablesRequest Request) {
 
+            SourceTablesResponse DropDownsResponse = new SourceTablesResponse();
+            Epi.Web.Interfaces.DataInterfaces.IDaoFactory entityDaoFactory = new EF.EntityDaoFactory();
+            Epi.Web.Interfaces.DataInterfaces.ISurveyInfoDao surveyInfoDao = entityDaoFactory.SurveyInfoDao;
+            Epi.Web.BLL.SurveyInfo Implementation = new Epi.Web.BLL.SurveyInfo(surveyInfoDao);
+
+            DropDownsResponse.List = Mapper.ToSourceTableDTO(Implementation.GetSourceTables(Request.SurveyId));
+            return DropDownsResponse;
+        
+        }
     }
 }

@@ -20,6 +20,8 @@ using System.Web.Caching;
 using System.Linq;
 using System.Reflection;
 using System.Diagnostics;
+using Epi.Web.Common.Message;
+using Epi.Web.Common.DTO;
 namespace Epi.Web.MVC.Controllers
 {
     [Authorize]
@@ -850,5 +852,74 @@ namespace Epi.Web.MVC.Controllers
             }
 
         
+        [HttpGet]
+        public JsonResult GetCodesValue(string SourceTableName= "", string SelectedValue="",string SurveyId="") 
+        {
+            string CacheIsOn = ConfigurationManager.AppSettings["CACHE_IS_ON"]; ;
+            string IsCacheSlidingExpiration = ConfigurationManager.AppSettings["CACHE_SLIDING_EXPIRATION"].ToString();
+            int CacheDuration = 0;
+            int.TryParse(ConfigurationManager.AppSettings["CACHE_DURATION"].ToString(), out CacheDuration);
+
+            var TableCode = Regex.Replace(SourceTableName.ToString(), @"[^0-9a-zA-Z]+", "");
+            TableCode = Regex.Replace(TableCode, @"\s+", "");
+            var CacheId = SurveyId + "_SourceTables";
+            SourceTablesResponse CacheObj = (SourceTablesResponse)HttpRuntime.Cache.Get(CacheId);
+           
+           
+
+            if (CacheIsOn.ToUpper() == "TRUE")
+            {
+                if (CacheObj == null)
+                {
+                    var SourceTables = _isurveyFacade.GetSourceTables(Session["RootFormId"].ToString());
+                    CacheObj = (SourceTablesResponse)SourceTables;
+                    if (IsCacheSlidingExpiration.ToUpper() == "TRUE")
+                    {
+
+                        HttpRuntime.Cache.Insert(CacheId, SourceTables, null, Cache.NoAbsoluteExpiration, TimeSpan.FromMinutes(CacheDuration));
+                    }
+                    else
+                    {
+                        HttpRuntime.Cache.Insert(CacheId, SourceTables, null, DateTime.Now.AddMinutes(CacheDuration), Cache.NoSlidingExpiration);
+
+                    }
+                }
+               
+            }
+            else {
+                var SourceTables = _isurveyFacade.GetSourceTables(Session["RootFormId"].ToString());
+                CacheObj = (SourceTablesResponse)SourceTables;
+            
+            }
+            
+            try
+            {
+              
+                SourceTableDTO Table = CacheObj.List.Where(x => x.TableName.Contains(SourceTableName.ToString())).Single();
+                XDocument Xdoc = XDocument.Parse(Table.TableXml);
+                var _ControlValues = from _ControlValue in Xdoc.Descendants("Item")
+                                     where _ControlValue.Attributes().SingleOrDefault(xa => string.Equals(xa.Name.LocalName, SourceTableName,
+                                     StringComparison.InvariantCultureIgnoreCase)).Value == SelectedValue.ToString()
+                                     select _ControlValue;
+
+                 var Attributes = _ControlValues.Attributes().ToList();
+                Dictionary<string,string> List = new  Dictionary<string,string>();
+                 foreach (var Attribute in Attributes)
+                {
+                    List.Add(Attribute.Name.LocalName.ToLower(), Attribute.Value);
+                }
+
+
+
+                 return Json(List, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(false);
+                //throw ex;
+            }
+           
+        
+        }
     }
 }

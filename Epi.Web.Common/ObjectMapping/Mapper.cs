@@ -340,5 +340,18 @@ namespace Epi.Web.Common.ObjectMapping
                }
            return DTOList;
             }
+        public static List<SourceTableDTO> ToSourceTableDTO(List<SourceTableBO> list)
+        {
+            List<SourceTableDTO> DTOList = new List<SourceTableDTO>();
+           
+            foreach (var item in list)
+            {
+                SourceTableDTO SourceTableDTO = new SourceTableDTO();
+                SourceTableDTO.TableName = item.TableName;
+                SourceTableDTO.TableXml  = item.TableXml ;
+                DTOList.Add(SourceTableDTO);
+           }
+            return DTOList;
+        }
     }
 }

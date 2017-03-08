@@ -118,5 +118,9 @@ namespace Epi.Web.Interfaces.DataInterfaces
          List<SurveyInfoBO> GetAllSurveysByOrgKey(string OrgKey);
 
          void ValidateServername(SurveyInfoBO pRequestMessage);
+         void InsertSourceTable(string SourcetableXml, string SourcetableName, string FormId);
+         List<SourceTableBO> GetSourceTables(string SurveyId);
+
+         void UpdateSourceTable(string p, string SourcetableName, string FormId);
     }
 }

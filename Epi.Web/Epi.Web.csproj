@@ -481,6 +481,7 @@
     <None Include="Properties\DataSources\Epi.Web.Common.Message.CacheDependencyResponse.datasource" />
     <None Include="Properties\DataSources\Epi.Web.Common.Message.OrganizationAccountResponse.datasource" />
     <Content Include="Properties\DataSources\Epi.Web.Common.Message.OrganizationResponse.datasource" />
+    <Content Include="Properties\DataSources\Epi.Web.Common.Message.SourceTablesResponse.datasource" />
     <None Include="Properties\DataSources\Epi.Web.Common.Message.SurveyAnswerResponse.datasource" />
     <None Include="Properties\DataSources\Epi.Web.Common.Message.SurveyControlsResponse.datasource" />
     <None Include="Properties\DataSources\Epi.Web.Common.Message.SurveyInfoResponse.datasource" />
