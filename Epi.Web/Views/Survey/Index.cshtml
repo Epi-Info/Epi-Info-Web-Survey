@@ -394,7 +394,37 @@
             return true;
         });
     });
+    function SetCodes_Val(obj, SurveyId, TableName) {
 
+
+        var signoutUrl = '@Url.Action("GetCodesValue","Survey")' + '?SourceTableName=' + TableName + '&SelectedValue=' + obj.value + '&SurveyId=' + SurveyId;
+
+        $.ajax({
+            url: signoutUrl,
+            type: 'GET',
+            contentType: 'application/json; charset=utf-8',
+            dataType: "json",
+            async: false,
+            success: successFunc,
+            error: errorFunc
+        });
+
+
+        function successFunc(data, status) {
+
+            $.each(data, function (key, value) {
+                var Query = "#mvcdynamicfield_" + key;
+                // alert(Query);
+                $(Query).val(value);
+            });
+        }
+
+        function errorFunc() {
+            alert('error');
+        }
+
+
+    }
 </script>
 @if (@Model.IsDraftModeStyleClass != "")
 {

@@ -16,7 +16,19 @@ namespace MvcDynamicForms.Fields
         protected float _ControlFontSize;
         protected string _ControlFontStyle;
         private string _selectedValue = string.Empty;
-        
+        protected bool _RelateCondition;
+
+        public bool RelateCondition
+        {
+            get
+            {
+                return _RelateCondition;
+            }
+            set
+            {
+                _RelateCondition = value;
+            }
+        }
         /// <summary>
         /// The choices that the end user can choose from.
         /// </summary>
