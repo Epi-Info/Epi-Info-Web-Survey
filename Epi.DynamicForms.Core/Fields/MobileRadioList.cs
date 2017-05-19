@@ -16,6 +16,8 @@ namespace MvcDynamicForms.Fields
             var html = new StringBuilder();
             var inputName = _fieldPrefix + _key;
             List<KeyValuePair<string, bool>> choiceList = ChoiceKeyValuePairs.ToList();
+            var selectedValue = string.Empty;
+            var IsAfterControl = false;
             
             if (!IsValid)
             {
@@ -71,7 +73,8 @@ namespace MvcDynamicForms.Fields
                 if (FunctionObjectAfter != null)
                 {
                     //radioTag.Attributes.Add("onclick", "return " + _key + "_after();");
-                    radioTag.Attributes.Add("onchange", "return " + _key + "_after(this.id);"); //After
+                    radioTag.Attributes.Add("onchange", "$('#" + inputName + "').val('" + i.ToString() + "');return " + _key + "_after(this.id);"); //After
+                    IsAfterControl = true;
                 }
 
                 //   if (FunctionObjectClick != null && !FunctionObjectClick.IsNull())
@@ -79,8 +82,12 @@ namespace MvcDynamicForms.Fields
                 {
                     //radioTag.Attributes.Add("onclick", "return " + _key + "_after();");
                     radioTag.Attributes.Add("onclick", "return " + _key + "_click(this.id);"); //click
+                    IsAfterControl = true;
                 }
-
+                if (!IsAfterControl)
+                {
+                    radioTag.Attributes.Add("onchange", "$('#" + inputName + "').val('" + i.ToString() + "');"); //click
+                }
                 radioTag.SetInnerText(choiceList[i].Key);
                 radioTag.Attributes.Add("value", i.ToString());
 
@@ -92,6 +99,7 @@ namespace MvcDynamicForms.Fields
                 if (Response == choiceList[i].Key)
                 {
                     radioTag.Attributes.Add("checked", "checked");
+                    selectedValue = i.ToString();
                 }
 
                 radioTag.MergeAttributes(_inputHtmlAttributes);
@@ -110,8 +118,8 @@ namespace MvcDynamicForms.Fields
             hidden.Attributes.Add("type", "hidden");
             hidden.Attributes.Add("id", inputName);
             hidden.Attributes.Add("name", inputName);
-            
-            hidden.Attributes.Add("value", string.Empty);
+
+            hidden.Attributes.Add("value", selectedValue);
             html.Append(hidden.ToString(TagRenderMode.SelfClosing));
 
             var wrapper = new TagBuilder(_fieldWrapper);
