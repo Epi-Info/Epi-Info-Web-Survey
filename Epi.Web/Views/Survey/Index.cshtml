@@ -73,7 +73,11 @@
         $("#myform")[0].action = actionUrlP;
         $("#myform").submit();
     }
+    function ChangeDatePickerFormat(dateformat) {
+        dateformat = dateformat.toLocaleLowerCase().toString();      
+        $(".datepicker").datepicker("option", "dateFormat", dateformat);
 
+    }
 
 
     $(document).ready(function () {
@@ -81,7 +85,15 @@
 
         //$("#Savebutton").tooltip();
 
-
+       var DateFormat = '@Model.CurrentCultureDateFormat'
+        DateFormat = DateFormat.toLocaleLowerCase().toString();
+        //var dateFormat1 = $(".datepicker").datepicker("option", "dateFormat");
+        var dateFormat1 = $(".datepicker").val();
+        //  alert("DateFormat: " + DateFormat + "/// dateFormat1: " + dateFormat1)
+        //alert(dateFormat1);
+        if (dateFormat1 == "") {
+            $(".datepicker").datepicker("option", "dateFormat", DateFormat);
+        }
 
 
         $("#dialog").dialog({
@@ -319,7 +331,7 @@
         /*Open the modal popup on link click*/
         $('#copy').click(function () {
             $("#dialog").dialog("open");
-           // $('#url').val(GetRedirectionUrl());
+            // $('#url').val(GetRedirectionUrl());
             $('#url').val('@Model.RedirectURL');
             return false;
         });

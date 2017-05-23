@@ -34,7 +34,7 @@ namespace MvcDynamicForms.Fields
             }
         }
 
-        public override bool Validate()
+        public override bool Validate(string DateFormat)
         {
             /*If readonly don't perform any validation check and make required = false and validate = true*/
             if (ReadOnly)

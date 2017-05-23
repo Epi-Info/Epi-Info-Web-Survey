@@ -1,8 +1,8 @@
-(function($){
-    $.fn.validationEngineLanguage = function(){
+(function ($) {
+    $.fn.validationEngineLanguage = function () {
     };
     $.validationEngineLanguage = {
-        newLang: function(){
+        newLang: function () {
             $.validationEngineLanguage.allRules = {
                 "required": { // Add your regex rules here, you can take telephone as an example
                     "regex": "none",
@@ -21,7 +21,7 @@
                     "alertText": "* Invalid ",
                     "alertText2": "Date Time Range"
                 },
-                 "datePickerRange": {
+                "datePickerRange": {
                     "regex": "none",
                     "alertText": "Date must be in between"
                 },
@@ -35,7 +35,7 @@
                     "alertText": "* Maximum ",
                     "alertText2": " characters allowed"
                 },
-				"groupRequired": {
+                "groupRequired": {
                     "regex": "none",
                     "alertText": "* You must fill one of the following fields"
                 },
@@ -54,7 +54,7 @@
                 "future": {
                     "regex": "none",
                     "alertText": "* Date past "
-                },	
+                },
                 "maxCheckbox": {
                     "regex": "none",
                     "alertText": "* Maximum ",
@@ -93,15 +93,23 @@
                     "alertText": "* Invalid floating decimal number"
                 },
                 "date": {
-                    //"regex": /^(((((((0?[13578])|(1[02]))[\.\-/]?((0?[1-9])|([12]\d)|(3[01])))|(((0?[469])|(11))[\.\-/]?((0?[1-9])|([12]\d)|(30)))|((0?2)[\.\-/]?((0?[1-9])|(1\d)|(2[0-8]))))[\.\-/]?(((19)|(20))?([\d][\d]))))|((0?2)[\.\-/]?(29)[\.\-/]?(((19)|(20))?(([02468][048])|([13579][26])))))$/,
-                    "regex": /^(([1-9])|(0[1-9])|(1[0-2]))\/(([0-9])|([0-2][0-9])|(3[0-1]))\/(([0-9][0-9])|([1-2][0,9][0-9][0-9]))$/,
+                    "regex": /^(((((((0?[13578])|(1[02]))[\.\-/]?((0?[1-9])|([12]\d)|(3[01])))|(((0?[469])|(11))[\.\-/]?((0?[1-9])|([12]\d)|(30)))|((0?2)[\.\-/]?((0?[1-9])|(1\d)|(2[0-8]))))[\.\-/]?(((19)|(20))?([\d][\d]))))|((0?2)[\.\-/]?(29)[\.\-/]?(((19)|(20))?(([02468][048])|([13579][26])))))$/,
+                    //"regex": /^(([1-9])|(0[1-9])|(1[0-2]))\/(([0-9])|([0-2][0-9])|(3[0-1]))\/(([0-9][0-9])|([1-2][0,9][0-9][0-9]))$/,
                     "alertText": "* Invalid date, must be in MM/DD/YYYY format"
                 },
+                "M/D/YYYY": {
+                    "regex": /^(((((((0?[13578])|(1[02]))[\.\-/]?((0?[1-9])|([12]\d)|(3[01])))|(((0?[469])|(11))[\.\-/]?((0?[1-9])|([12]\d)|(30)))|((0?2)[\.\-/]?((0?[1-9])|(1\d)|(2[0-8]))))[\.\-/]?(((19)|(20))?([\d][\d]))))|((0?2)[\.\-/]?(29)[\.\-/]?(((19)|(20))?(([02468][048])|([13579][26])))))$/,
+                    //"regex": /^(([1-9])|(0[1-9])|(1[0-2]))\/(([0-9])|([0-2][0-9])|(3[0-1]))\/(([0-9][0-9])|([1-2][0,9][0-9][0-9]))$/,
+                    "alertText": "* Invalid date, must be in MM/DD/YYYY format"
+                },
+                "DD/MM/YYYY": {                    
+                    "regex": /^(((((0[1-9])|(1\d)|(2[0-8]))\/((0[1-9])|(1[0-2])))|((31\/((0[13578])|(1[02])))|((29|30)\/((0[1,3-9])|(1[0-2])))))\/((20[0-9][0-9])|(19[0-9][0-9])))|((29\/02\/(19|20)(([02468][048])|([13579][26]))))$/,
 
+                    "alertText": "* Invalid date, must be in DD/MM/YYYY format"
+                },
                 "time": {
-                    // "regex": /^(\d{1,2}):(\d{2})(:(\d{2}))?(\s?(AM|am|PM|pm))?$/,
-                    "regex": /^\d{2,}:(?:[0-5]\d):(?:[0-5]\d)$/ ,
-                 "alertText": "* Invalid time format"
+                    "regex": /^(\d{1,2}):(\d{2})(:(\d{2}))?(\s?(AM|am|PM|pm))?$/,
+                    "alertText": "* Invalid time format"
                 },
 
                 "ipv4": {
@@ -132,7 +140,7 @@
                     "alertText": "* This user is already taken",
                     "alertTextLoad": "* Validating, please wait"
                 },
-				"ajaxUserCallPhp": {
+                "ajaxUserCallPhp": {
                     "url": "phpajax/ajaxValidateFieldUser.php",
                     // you may want to pass extra data on the ajax call
                     "extraData": "name=eric",
@@ -151,35 +159,35 @@
                     // speaks by itself
                     "alertTextLoad": "* Validating, please wait"
                 },
-				 "ajaxNameCallPhp": {
-	                    // remote json service location
-	                    "url": "phpajax/ajaxValidateFieldName.php",
-	                    // error
-	                    "alertText": "* This name is already taken",
-	                    // speaks by itself
-	                    "alertTextLoad": "* Validating, please wait"
-	                },
+                "ajaxNameCallPhp": {
+                    // remote json service location
+                    "url": "phpajax/ajaxValidateFieldName.php",
+                    // error
+                    "alertText": "* This name is already taken",
+                    // speaks by itself
+                    "alertTextLoad": "* Validating, please wait"
+                },
                 "validate2fields": {
                     "alertText": "* Please input HELLO"
                 },
-	            //tls warning:homegrown not fielded 
-                "dateFormat":{
+                //tls warning:homegrown not fielded 
+                "dateFormat": {
                     "regex": /^\d{4}[\/\-](0?[1-9]|1[012])[\/\-](0?[1-9]|[12][0-9]|3[01])$|^(?:(?:(?:0?[13578]|1[02])(\/|-)31)|(?:(?:0?[1,3-9]|1[0-2])(\/|-)(?:29|30)))(\/|-)(?:[1-9]\d\d\d|\d[1-9]\d\d|\d\d[1-9]\d|\d\d\d[1-9])$|^(?:(?:0?[1-9]|1[0-2])(\/|-)(?:0?[1-9]|1\d|2[0-8]))(\/|-)(?:[1-9]\d\d\d|\d[1-9]\d\d|\d\d[1-9]\d|\d\d\d[1-9])$|^(0?2(\/|-)29)(\/|-)(?:(?:0[48]00|[13579][26]00|[2468][048]00)|(?:\d\d)?(?:0[48]|[2468][048]|[13579][26]))$/,
                     "alertText": "* Invalid Date"
                 },
                 //tls warning:homegrown not fielded 
-				"dateTimeFormat": {
-	                "regex": /^\d{4}[\/\-](0?[1-9]|1[012])[\/\-](0?[1-9]|[12][0-9]|3[01])\s+(1[012]|0?[1-9]){1}:(0?[1-5]|[0-6][0-9]){1}:(0?[0-6]|[0-6][0-9]){1}\s+(am|pm|AM|PM){1}$|^(?:(?:(?:0?[13578]|1[02])(\/|-)31)|(?:(?:0?[1,3-9]|1[0-2])(\/|-)(?:29|30)))(\/|-)(?:[1-9]\d\d\d|\d[1-9]\d\d|\d\d[1-9]\d|\d\d\d[1-9])$|^((1[012]|0?[1-9]){1}\/(0?[1-9]|[12][0-9]|3[01]){1}\/\d{2,4}\s+(1[012]|0?[1-9]){1}:(0?[1-5]|[0-6][0-9]){1}:(0?[0-6]|[0-6][0-9]){1}\s+(am|pm|AM|PM){1})$/,
+                "dateTimeFormat": {
+                    "regex": /^\d{4}[\/\-](0?[1-9]|1[012])[\/\-](0?[1-9]|[12][0-9]|3[01])\s+(1[012]|0?[1-9]){1}:(0?[1-5]|[0-6][0-9]){1}:(0?[0-6]|[0-6][0-9]){1}\s+(am|pm|AM|PM){1}$|^(?:(?:(?:0?[13578]|1[02])(\/|-)31)|(?:(?:0?[1,3-9]|1[0-2])(\/|-)(?:29|30)))(\/|-)(?:[1-9]\d\d\d|\d[1-9]\d\d|\d\d[1-9]\d|\d\d\d[1-9])$|^((1[012]|0?[1-9]){1}\/(0?[1-9]|[12][0-9]|3[01]){1}\/\d{2,4}\s+(1[012]|0?[1-9]){1}:(0?[1-5]|[0-6][0-9]){1}:(0?[0-6]|[0-6][0-9]){1}\s+(am|pm|AM|PM){1})$/,
                     "alertText": "* Invalid Date or Date Format",
                     "alertText2": "Expected Format: ",
-                    "alertText3": "mm/dd/yyyy hh:mm:ss AM|PM or ", 
+                    "alertText3": "mm/dd/yyyy hh:mm:ss AM|PM or ",
                     "alertText4": "yyyy-mm-dd hh:mm:ss AM|PM"
-	            }
+                }
             };
-            
+
         }
     };
 
     $.validationEngineLanguage.newLang();
-    
+
 })(jQuery);

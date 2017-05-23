@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Web.Mvc;
 using Epi.Core.EnterInterpreter;
+using System.Globalization;
+using System.Threading;
+
 namespace MvcDynamicForms.Fields
 {
     /// <summary>
@@ -112,6 +115,14 @@ namespace MvcDynamicForms.Fields
             }
              html.Append(scriptDatePicker.ToString(TagRenderMode.Normal));
 
+            CultureInfo currentCulture = Thread.CurrentThread.CurrentCulture;
+            string DateFormat = currentCulture.DateTimeFormat.ShortDatePattern;
+            DateFormat = DateFormat.Remove(DateFormat.IndexOf("y"), 2);
+
+            var scriptDatePicker1 = new TagBuilder("script");
+            scriptDatePicker1.InnerHtml = "$('#" + inputName + "').change(function() { ChangeDatePickerFormat('" + DateFormat + "');});";
+            html.Append(scriptDatePicker1.ToString(TagRenderMode.Normal));
+
             //prevent date picker control to submit on enter click
             var scriptBuilder = new TagBuilder("script");
             scriptBuilder.InnerHtml = "$('#" + inputName + "').BlockEnter('" + inputName + "');";
@@ -133,8 +144,9 @@ namespace MvcDynamicForms.Fields
 
         public string GetControlClass(string Value)
         {
-             
- 
+            CultureInfo currentCulture = Thread.CurrentThread.CurrentCulture;
+            string DateFormat = currentCulture.DateTimeFormat.ShortDatePattern;
+
             StringBuilder ControlClass = new StringBuilder();
 
             ControlClass.Append("validate[");
@@ -161,13 +173,13 @@ namespace MvcDynamicForms.Fields
             {
                 if (Required == true)
                 {
-                   // ControlClass.Append("required,custom[date]] text-input datepicker");
-                    ControlClass.Append("required,custom[date]]  datepicker");
+                    // ControlClass.Append("required,custom[date]] text-input datepicker");
+                    ControlClass.Append("required,custom[" + DateFormat.ToUpper() + "]]  datepicker ");
                 }
                 else
                 {
                     //ControlClass.Append("custom[date]] text-input datepicker");
-                    ControlClass.Append("custom[date]] isdate datepicker");
+                    ControlClass.Append("custom[" + DateFormat.ToUpper() + "]]  datepicker ");
                 }
                 return ControlClass.ToString();
             }
@@ -175,7 +187,7 @@ namespace MvcDynamicForms.Fields
 
         }
 
-        public string GetRightDateFormat(string Date ,string pattern)
+        public string GetRightDateFormat(string Date, string pattern)
         {
             StringBuilder NewDateFormat = new StringBuilder();
 
@@ -198,17 +210,17 @@ namespace MvcDynamicForms.Fields
                 switch (pattern.ToString())
                 {
                     case "YYYY-MM-DD":
-                         MM = dateList[1];
-                         DD = dateList[2];
-                         YYYY = dateList[0];
-                         break;
+                        MM = dateList[1];
+                        DD = dateList[2];
+                        YYYY = dateList[0];
+                        break;
                     case "MM-DD-YYYY":
-                         MM = dateList[0];
-                         DD = dateList[1];
-                         YYYY = dateList[2];
-                         break;
-                }  
-               
+                        MM = dateList[0];
+                        DD = dateList[1];
+                        YYYY = dateList[2];
+                        break;
+                }
+
                 NewDateFormat.Append(YYYY);
                 NewDateFormat.Append('/');
                 NewDateFormat.Append(MM);
@@ -224,7 +236,7 @@ namespace MvcDynamicForms.Fields
         }
         public int GetYear(string Date, string pattern)
         {
-          
+
             string YYYY = "";
             char splitChar = '/';
             if (!string.IsNullOrEmpty(Date))
@@ -242,26 +254,27 @@ namespace MvcDynamicForms.Fields
                 switch (pattern.ToString())
                 {
                     case "YYYY-MM-DD":
-                       
+
                         YYYY = dateList[0];
                         break;
                     case "MM-DD-YYYY":
-                       
+
                         YYYY = dateList[2];
                         break;
                 }
 
-               
+
             }
             int Year;
             bool result = Int32.TryParse(YYYY, out Year);
-             if (result){
-                 return Year;
-             }
-             else
-             {
-                 return 0; 
-             }
-        } 
+            if (result)
+            {
+                return Year;
+            }
+            else
+            {
+                return 0;
+            }
+        }
     }
 }
