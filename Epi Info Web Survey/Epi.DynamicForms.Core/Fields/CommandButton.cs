@@ -77,7 +77,7 @@ namespace MvcDynamicForms.Fields
             return wrapper.ToString();
         }
 
-        public override bool Validate()
+        public override bool Validate(string DateFormat)
         {
             ClearError();
             return true;
