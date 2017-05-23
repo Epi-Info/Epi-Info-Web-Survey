@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Globalization;
+using System.Threading;
 
 namespace Epi.Web.MVC.Models
 {
@@ -28,6 +30,15 @@ namespace Epi.Web.MVC.Models
         private Guid _UserPublishKey;
         private string _PassCode;
         private string _ResponseId;
+        private string _CurrentCultureDateFormat;
+
+        //public SurveyInfoModel()
+        //{
+        //    //CultureInfo currentCulture = Thread.CurrentThread.CurrentCulture;
+            //string DateFormat = currentCulture.DateTimeFormat.ShortDatePattern;
+            //DateFormat = DateFormat.Remove(DateFormat.IndexOf("y"), 2);
+            //_CurrentCultureDateFormat = DateFormat;
+        //}
         public string SurveyId
         {
             get { return _SurveyId; }

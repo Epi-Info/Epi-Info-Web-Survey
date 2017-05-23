@@ -13,6 +13,7 @@ using Epi.Core.EnterInterpreter;
 using Epi.Web.Common.DTO;
 using Epi.Web.Utility;
 using System.Drawing;
+using System.Globalization;
 
 namespace Epi.Web.MVC.Utility
 {
@@ -167,7 +168,7 @@ namespace Epi.Web.MVC.Utility
                                xdoc.Descendants("View")
                                select Node.Attribute("Height").Value;
 
-                    return double.Parse(top.First());
+                    return ParseDouble(top.First());
                 }
                 else 
                 {
@@ -175,7 +176,7 @@ namespace Epi.Web.MVC.Utility
                                xdoc.Descendants("View")
                                select Node.Attribute("Width").Value;
 
-                    return double.Parse(top.First());
+                    return ParseDouble(top.First());
                 }
             }
             catch
@@ -194,7 +195,7 @@ namespace Epi.Web.MVC.Utility
                                  xdoc.Descendants("View")
                                  select Node.Attribute("Width").Value);
 
-                    return double.Parse(_left.First());
+                    return ParseDouble(_left.First());
                 }
                 else
                 {
@@ -203,7 +204,7 @@ namespace Epi.Web.MVC.Utility
                                xdoc.Descendants("View")
                                select Node.Attribute("Height").Value;
 
-                    return double.Parse(_top.First());
+                    return ParseDouble(_top.First());
                 }
             }
             catch
@@ -249,17 +250,17 @@ namespace Epi.Web.MVC.Utility
             field.RequiredMessage = "This field is required";
             field.Key = _FieldTypeID.Attribute("Name").Value;
 
-            field.Top = form.Height * double.Parse(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value);
-            field.Left = form.Width * double.Parse(_FieldTypeID.Attribute("ControlLeftPositionPercentage").Value);
-            field.PromptWidth = form.Width * double.Parse(_FieldTypeID.Attribute("ControlWidthPercentage").Value);
-            field.ControlWidth = form.Width * double.Parse(_FieldTypeID.Attribute("ControlWidthPercentage").Value);
+            field.Top = form.Height * ParseDouble(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value);
+            field.Left = form.Width * ParseDouble(_FieldTypeID.Attribute("ControlLeftPositionPercentage").Value);
+            field.PromptWidth = form.Width * ParseDouble(_FieldTypeID.Attribute("ControlWidthPercentage").Value);
+            field.ControlWidth = form.Width * ParseDouble(_FieldTypeID.Attribute("ControlWidthPercentage").Value);
             field.fontstyle = _FieldTypeID.Attribute("PromptFontStyle").Value;
-            field.fontSize = double.Parse(_FieldTypeID.Attribute("PromptFontSize").Value);
+            field.fontSize = ParseDouble(_FieldTypeID.Attribute("PromptFontSize").Value);
             field.fontfamily = _FieldTypeID.Attribute("PromptFontFamily").Value;
 
             field.ReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value);
             field.InputFieldfontstyle = _FieldTypeID.Attribute("ControlFontStyle").Value;
-            field.InputFieldfontSize = double.Parse(_FieldTypeID.Attribute("ControlFontSize").Value);
+            field.InputFieldfontSize = ParseDouble(_FieldTypeID.Attribute("ControlFontSize").Value);
             field.InputFieldfontfamily = _FieldTypeID.Attribute("ControlFontFamily").Value;
 
             field.Required = bool.Parse(_FieldTypeID.Attribute("IsRequired").Value);
@@ -303,17 +304,17 @@ namespace Epi.Web.MVC.Utility
             field.DisplayOrder = int.Parse(_FieldTypeID.Attribute("TabIndex").Value);
             field.RequiredMessage =  "This field is required";
             field.Key = _FieldTypeID.Attribute("Name").Value;
-            field.PromptTop = form.Height * double.Parse(_FieldTypeID.Attribute("PromptTopPositionPercentage").Value);
-            field.PromptLeft = form.Width * double.Parse(_FieldTypeID.Attribute("PromptLeftPositionPercentage").Value);
-            field.Top = form.Height * double.Parse(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value);
-            field.Left = form.Width * double.Parse(_FieldTypeID.Attribute("ControlLeftPositionPercentage").Value);
-            field.PromptWidth = form.Width * double.Parse(_FieldTypeID.Attribute("ControlWidthPercentage").Value);
-            field.ControlWidth = form.Width * double.Parse(_FieldTypeID.Attribute("ControlWidthPercentage").Value);
+            field.PromptTop = form.Height * ParseDouble(_FieldTypeID.Attribute("PromptTopPositionPercentage").Value);
+            field.PromptLeft = form.Width * ParseDouble(_FieldTypeID.Attribute("PromptLeftPositionPercentage").Value);
+            field.Top = form.Height * ParseDouble(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value);
+            field.Left = form.Width * ParseDouble(_FieldTypeID.Attribute("ControlLeftPositionPercentage").Value);
+            field.PromptWidth = form.Width * ParseDouble(_FieldTypeID.Attribute("ControlWidthPercentage").Value);
+            field.ControlWidth = form.Width * ParseDouble(_FieldTypeID.Attribute("ControlWidthPercentage").Value);
             field.InputFieldfontstyle = _FieldTypeID.Attribute("ControlFontStyle").Value;
-            field.InputFieldfontSize = double.Parse(_FieldTypeID.Attribute("ControlFontSize").Value);
+            field.InputFieldfontSize = ParseDouble(_FieldTypeID.Attribute("ControlFontSize").Value);
             field.InputFieldfontfamily = _FieldTypeID.Attribute("ControlFontFamily").Value;
             field.fontstyle = _FieldTypeID.Attribute("PromptFontStyle").Value;
-            field.fontSize = double.Parse(_FieldTypeID.Attribute("PromptFontSize").Value);
+            field.fontSize = ParseDouble(_FieldTypeID.Attribute("PromptFontSize").Value);
             field.fontfamily = _FieldTypeID.Attribute("PromptFontFamily").Value;
             field.Required = bool.Parse(_FieldTypeID.Attribute("IsRequired").Value);
             field.ReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value);
@@ -343,15 +344,15 @@ namespace Epi.Web.MVC.Utility
 
             field.FieldWrapper = "div";
             field.DisplayOrder = int.Parse(_FieldTypeID.Attribute("TabIndex").Value);
-            field.Top = form.Height * double.Parse(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value);
-            field.Left = form.Width * double.Parse(_FieldTypeID.Attribute("ControlLeftPositionPercentage").Value);
+            field.Top = form.Height * ParseDouble(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value);
+            field.Left = form.Width * ParseDouble(_FieldTypeID.Attribute("ControlLeftPositionPercentage").Value);
             field.CssClass = "EpiLabel";
-            field.fontSize = double.Parse(_FieldTypeID.Attribute("ControlFontSize").Value);
+            field.fontSize = ParseDouble(_FieldTypeID.Attribute("ControlFontSize").Value);
             field.fontfamily = _FieldTypeID.Attribute("ControlFontFamily").Value;
             field.fontstyle = _FieldTypeID.Attribute("ControlFontStyle").Value;
-            field.Height = form.Height * double.Parse(_FieldTypeID.Attribute("ControlHeightPercentage").Value);
+            field.Height = form.Height * ParseDouble(_FieldTypeID.Attribute("ControlHeightPercentage").Value);
             field.Name =_FieldTypeID.Attribute("Name").Value;
-            field.Width = form.Width * double.Parse(_FieldTypeID.Attribute("ControlWidthPercentage").Value);
+            field.Width = form.Width * ParseDouble(_FieldTypeID.Attribute("ControlWidthPercentage").Value);
             field.Name = _FieldTypeID.Attribute("Name").Value;
             SetFieldCommon(field, form);
 
@@ -379,18 +380,18 @@ namespace Epi.Web.MVC.Utility
             field.DisplayOrder = int.Parse(_FieldTypeID.Attribute("TabIndex").Value);
             field.RequiredMessage = "This field is required";
             field.Key = _FieldTypeID.Attribute("Name").Value;
-            field.PromptTop = form.Height * double.Parse(_FieldTypeID.Attribute("PromptTopPositionPercentage").Value);
-            field.PromptLeft = form.Width * double.Parse(_FieldTypeID.Attribute("PromptLeftPositionPercentage").Value);
-            field.Top = form.Height * double.Parse(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value);
-            field.Left = form.Width * double.Parse(_FieldTypeID.Attribute("ControlLeftPositionPercentage").Value);
-            field.PromptWidth = form.Width * double.Parse(_FieldTypeID.Attribute("ControlWidthPercentage").Value);
-            field.ControlWidth = form.Width * double.Parse(_FieldTypeID.Attribute("ControlWidthPercentage").Value);
-            field.ControlHeight = form.Height * double.Parse(_FieldTypeID.Attribute("ControlHeightPercentage").Value);
+            field.PromptTop = form.Height * ParseDouble(_FieldTypeID.Attribute("PromptTopPositionPercentage").Value);
+            field.PromptLeft = form.Width * ParseDouble(_FieldTypeID.Attribute("PromptLeftPositionPercentage").Value);
+            field.Top = form.Height * ParseDouble(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value);
+            field.Left = form.Width * ParseDouble(_FieldTypeID.Attribute("ControlLeftPositionPercentage").Value);
+            field.PromptWidth = form.Width * ParseDouble(_FieldTypeID.Attribute("ControlWidthPercentage").Value);
+            field.ControlWidth = form.Width * ParseDouble(_FieldTypeID.Attribute("ControlWidthPercentage").Value);
+            field.ControlHeight = form.Height * ParseDouble(_FieldTypeID.Attribute("ControlHeightPercentage").Value);
             field.fontstyle = _FieldTypeID.Attribute("PromptFontStyle").Value;
-            field.fontSize = double.Parse(_FieldTypeID.Attribute("PromptFontSize").Value);
+            field.fontSize = ParseDouble(_FieldTypeID.Attribute("PromptFontSize").Value);
             field.fontfamily = _FieldTypeID.Attribute("PromptFontFamily").Value;
             field.InputFieldfontstyle = _FieldTypeID.Attribute("ControlFontStyle").Value;
-            field.InputFieldfontSize = double.Parse(_FieldTypeID.Attribute("ControlFontSize").Value);
+            field.InputFieldfontSize = ParseDouble(_FieldTypeID.Attribute("ControlFontSize").Value);
             field.InputFieldfontfamily = _FieldTypeID.Attribute("ControlFontFamily").Value;
             field.Required = bool.Parse(_FieldTypeID.Attribute("IsRequired").Value);
             field.ReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value);
@@ -418,18 +419,18 @@ namespace Epi.Web.MVC.Utility
             field.DisplayOrder = int.Parse(_FieldTypeID.Attribute("TabIndex").Value);
             field.RequiredMessage = "This field is required";
             field.Key = _FieldTypeID.Attribute("Name").Value;
-            field.PromptTop = form.Height * double.Parse(_FieldTypeID.Attribute("PromptTopPositionPercentage").Value);
-            field.PromptLeft = form.Width * double.Parse(_FieldTypeID.Attribute("PromptLeftPositionPercentage").Value);
-            field.Top = form.Height * double.Parse(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value);
-            field.Left = form.Width * double.Parse(_FieldTypeID.Attribute("ControlLeftPositionPercentage").Value);
-            field.PromptWidth = form.Width * double.Parse(_FieldTypeID.Attribute("ControlWidthPercentage").Value);
-            field.ControlWidth = form.Width * double.Parse(_FieldTypeID.Attribute("ControlWidthPercentage").Value);
+            field.PromptTop = form.Height * ParseDouble(_FieldTypeID.Attribute("PromptTopPositionPercentage").Value);
+            field.PromptLeft = form.Width * ParseDouble(_FieldTypeID.Attribute("PromptLeftPositionPercentage").Value);
+            field.Top = form.Height * ParseDouble(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value);
+            field.Left = form.Width * ParseDouble(_FieldTypeID.Attribute("ControlLeftPositionPercentage").Value);
+            field.PromptWidth = form.Width * ParseDouble(_FieldTypeID.Attribute("ControlWidthPercentage").Value);
+            field.ControlWidth = form.Width * ParseDouble(_FieldTypeID.Attribute("ControlWidthPercentage").Value);
             field.fontstyle = _FieldTypeID.Attribute("PromptFontStyle").Value;
-            field.fontSize = double.Parse(_FieldTypeID.Attribute("PromptFontSize").Value);
+            field.fontSize = ParseDouble(_FieldTypeID.Attribute("PromptFontSize").Value);
             field.fontfamily = _FieldTypeID.Attribute("PromptFontFamily").Value;
             field.Required = bool.Parse(_FieldTypeID.Attribute("IsRequired").Value);
             field.InputFieldfontstyle = _FieldTypeID.Attribute("ControlFontStyle").Value;
-            field.InputFieldfontSize = double.Parse(_FieldTypeID.Attribute("ControlFontSize").Value);
+            field.InputFieldfontSize = ParseDouble(_FieldTypeID.Attribute("ControlFontSize").Value);
             field.InputFieldfontfamily = _FieldTypeID.Attribute("ControlFontFamily").Value;
             field.ReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value);
             if (!string.IsNullOrEmpty(_FieldTypeID.Attribute("MaxLength").Value))
@@ -461,14 +462,14 @@ namespace Epi.Web.MVC.Utility
             field.DisplayOrder = int.Parse(_FieldTypeID.Attribute("TabIndex").Value);
             field.RequiredMessage = "This field is required";
             field.Key = _FieldTypeID.Attribute("Name").Value;
-            field.PromptTop = form.Height * double.Parse(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value) + 2;
-            field.PromptLeft = form.Width * double.Parse(_FieldTypeID.Attribute("ControlLeftPositionPercentage").Value) + 20;
-            field.Top = form.Height * double.Parse(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value);
-            field.Left = form.Width * double.Parse(_FieldTypeID.Attribute("ControlLeftPositionPercentage").Value);
-            field.PromptWidth = form.Width * double.Parse(_FieldTypeID.Attribute("ControlWidthPercentage").Value);
+            field.PromptTop = form.Height * ParseDouble(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value) + 2;
+            field.PromptLeft = form.Width * ParseDouble(_FieldTypeID.Attribute("ControlLeftPositionPercentage").Value) + 20;
+            field.Top = form.Height * ParseDouble(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value);
+            field.Left = form.Width * ParseDouble(_FieldTypeID.Attribute("ControlLeftPositionPercentage").Value);
+            field.PromptWidth = form.Width * ParseDouble(_FieldTypeID.Attribute("ControlWidthPercentage").Value);
             field.ControlWidth = 10;
             field.fontstyle = _FieldTypeID.Attribute("PromptFontStyle").Value;
-            field.fontSize = double.Parse(_FieldTypeID.Attribute("PromptFontSize").Value);
+            field.fontSize = ParseDouble(_FieldTypeID.Attribute("PromptFontSize").Value);
             field.fontfamily = _FieldTypeID.Attribute("PromptFontFamily").Value;
             field.ReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value);
             field.Name = _FieldTypeID.Attribute("Name").Value;
@@ -495,12 +496,12 @@ namespace Epi.Web.MVC.Utility
             field.Prompt = fieldElement.Attribute("PromptText").Value;
             field.Key = fieldElement.Attribute("Name").Value;
             field.Name = fieldElement.Attribute("Name").Value;
-            field.Top = form.Height * double.Parse(fieldElement.Attribute("ControlTopPositionPercentage").Value);
-            field.Left = form.Width * double.Parse(fieldElement.Attribute("ControlLeftPositionPercentage").Value);
-            field.Width = form.Width * double.Parse(fieldElement.Attribute("ControlWidthPercentage").Value);
-            field.Height = form.Height * double.Parse(fieldElement.Attribute("ControlHeightPercentage").Value);
+            field.Top = form.Height * ParseDouble(fieldElement.Attribute("ControlTopPositionPercentage").Value);
+            field.Left = form.Width * ParseDouble(fieldElement.Attribute("ControlLeftPositionPercentage").Value);
+            field.Width = form.Width * ParseDouble(fieldElement.Attribute("ControlWidthPercentage").Value);
+            field.Height = form.Height * ParseDouble(fieldElement.Attribute("ControlHeightPercentage").Value);
             field.fontstyle = fieldElement.Attribute("ControlFontStyle").Value;
-            field.fontSize = double.Parse(fieldElement.Attribute("ControlFontSize").Value);
+            field.fontSize = ParseDouble(fieldElement.Attribute("ControlFontSize").Value);
             field.fontfamily = fieldElement.Attribute("ControlFontFamily").Value;
             SetFieldCommon(field, form);
             
@@ -525,12 +526,12 @@ namespace Epi.Web.MVC.Utility
             field.Prompt = fieldElement.Attribute("PromptText").Value;
             field.Key = fieldElement.Attribute("Name").Value;
             field.Name = fieldElement.Attribute("Name").Value;
-            field.Top = form.Height * double.Parse(fieldElement.Attribute("ControlTopPositionPercentage").Value);
-            field.Left = form.Width * double.Parse(fieldElement.Attribute("ControlLeftPositionPercentage").Value);
-            field.Width = form.Width * double.Parse(fieldElement.Attribute("ControlWidthPercentage").Value);
-            field.Height = form.Height * double.Parse(fieldElement.Attribute("ControlHeightPercentage").Value);
+            field.Top = form.Height * ParseDouble(fieldElement.Attribute("ControlTopPositionPercentage").Value);
+            field.Left = form.Width * ParseDouble(fieldElement.Attribute("ControlLeftPositionPercentage").Value);
+            field.Width = form.Width * ParseDouble(fieldElement.Attribute("ControlWidthPercentage").Value);
+            field.Height = form.Height * ParseDouble(fieldElement.Attribute("ControlHeightPercentage").Value);
             field.fontstyle = fieldElement.Attribute("ControlFontStyle").Value;
-            field.fontSize = double.Parse(fieldElement.Attribute("ControlFontSize").Value);
+            field.fontSize = ParseDouble(fieldElement.Attribute("ControlFontSize").Value);
             field.fontfamily = fieldElement.Attribute("ControlFontFamily").Value;
             SetFieldCommon(field, form);
 
@@ -555,18 +556,18 @@ namespace Epi.Web.MVC.Utility
             field.DisplayOrder = int.Parse(_FieldTypeID.Attribute("TabIndex").Value);
             field.RequiredMessage = "This field is required";
             field.Key = _FieldTypeID.Attribute("Name").Value;
-            field.PromptTop = form.Height * double.Parse(_FieldTypeID.Attribute("PromptTopPositionPercentage").Value);
-            field.PromptLeft = form.Width * double.Parse(_FieldTypeID.Attribute("PromptLeftPositionPercentage").Value);
-            field.Top = form.Height * double.Parse(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value);
-            field.Left = form.Width * double.Parse(_FieldTypeID.Attribute("ControlLeftPositionPercentage").Value);
-            field.PromptWidth = form.Width * double.Parse(_FieldTypeID.Attribute("ControlWidthPercentage").Value);
-            field.ControlWidth = form.Width * double.Parse(_FieldTypeID.Attribute("ControlWidthPercentage").Value);
+            field.PromptTop = form.Height * ParseDouble(_FieldTypeID.Attribute("PromptTopPositionPercentage").Value);
+            field.PromptLeft = form.Width * ParseDouble(_FieldTypeID.Attribute("PromptLeftPositionPercentage").Value);
+            field.Top = form.Height * ParseDouble(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value);
+            field.Left = form.Width * ParseDouble(_FieldTypeID.Attribute("ControlLeftPositionPercentage").Value);
+            field.PromptWidth = form.Width * ParseDouble(_FieldTypeID.Attribute("ControlWidthPercentage").Value);
+            field.ControlWidth = form.Width * ParseDouble(_FieldTypeID.Attribute("ControlWidthPercentage").Value);
             field.fontstyle = _FieldTypeID.Attribute("PromptFontStyle").Value;
-            field.fontSize = double.Parse(_FieldTypeID.Attribute("PromptFontSize").Value);
+            field.fontSize = ParseDouble(_FieldTypeID.Attribute("PromptFontSize").Value);
             field.fontfamily = _FieldTypeID.Attribute("PromptFontFamily").Value;
             field.Required = bool.Parse(_FieldTypeID.Attribute("IsRequired").Value);
             field.InputFieldfontstyle = _FieldTypeID.Attribute("ControlFontStyle").Value;
-            field.InputFieldfontSize = double.Parse(_FieldTypeID.Attribute("ControlFontSize").Value);
+            field.InputFieldfontSize = ParseDouble(_FieldTypeID.Attribute("ControlFontSize").Value);
             field.InputFieldfontfamily = _FieldTypeID.Attribute("ControlFontFamily").Value;
             field.ReadOnly= bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value);
             field.Name = _FieldTypeID.Attribute("Name").Value;
@@ -597,18 +598,18 @@ namespace Epi.Web.MVC.Utility
             field.DisplayOrder = int.Parse(_FieldTypeID.Attribute("TabIndex").Value);
             field.RequiredMessage = "This field is required";
             field.Key = _FieldTypeID.Attribute("Name").Value;
-            field.PromptTop = form.Height * double.Parse(_FieldTypeID.Attribute("PromptTopPositionPercentage").Value);
-            field.PromptLeft = form.Width * double.Parse(_FieldTypeID.Attribute("PromptLeftPositionPercentage").Value);
-            field.Top = form.Height * double.Parse(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value);
-            field.Left = form.Width * double.Parse(_FieldTypeID.Attribute("ControlLeftPositionPercentage").Value);
-            field.PromptWidth = form.Width * double.Parse(_FieldTypeID.Attribute("ControlWidthPercentage").Value);
-            field.ControlWidth = form.Width * double.Parse(_FieldTypeID.Attribute("ControlWidthPercentage").Value);
+            field.PromptTop = form.Height * ParseDouble(_FieldTypeID.Attribute("PromptTopPositionPercentage").Value);
+            field.PromptLeft = form.Width * ParseDouble(_FieldTypeID.Attribute("PromptLeftPositionPercentage").Value);
+            field.Top = form.Height * ParseDouble(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value);
+            field.Left = form.Width * ParseDouble(_FieldTypeID.Attribute("ControlLeftPositionPercentage").Value);
+            field.PromptWidth = form.Width * ParseDouble(_FieldTypeID.Attribute("ControlWidthPercentage").Value);
+            field.ControlWidth = form.Width * ParseDouble(_FieldTypeID.Attribute("ControlWidthPercentage").Value);
             field.fontstyle = _FieldTypeID.Attribute("PromptFontStyle").Value;
-            field.fontSize = double.Parse(_FieldTypeID.Attribute("PromptFontSize").Value);
+            field.fontSize = ParseDouble(_FieldTypeID.Attribute("PromptFontSize").Value);
             field.fontfamily = _FieldTypeID.Attribute("PromptFontFamily").Value;
             field.Required = bool.Parse(_FieldTypeID.Attribute("IsRequired").Value);
             field.InputFieldfontstyle = _FieldTypeID.Attribute("ControlFontStyle").Value;
-            field.InputFieldfontSize = double.Parse(_FieldTypeID.Attribute("ControlFontSize").Value);
+            field.InputFieldfontSize = ParseDouble(_FieldTypeID.Attribute("ControlFontSize").Value);
             field.InputFieldfontfamily = _FieldTypeID.Attribute("ControlFontFamily").Value;
             field.ReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value);
             field.Name = _FieldTypeID.Attribute("Name").Value;
@@ -640,18 +641,18 @@ namespace Epi.Web.MVC.Utility
             field.DisplayOrder = int.Parse(_FieldTypeID.Attribute("TabIndex").Value);
             field.RequiredMessage = "This field is required";
             field.Key = _FieldTypeID.Attribute("Name").Value;
-            field.PromptTop = form.Height * double.Parse(_FieldTypeID.Attribute("PromptTopPositionPercentage").Value);
-            field.PromptLeft = form.Width * double.Parse(_FieldTypeID.Attribute("PromptLeftPositionPercentage").Value);
-            field.Top = form.Height * double.Parse(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value);
-            field.Left = form.Width * double.Parse(_FieldTypeID.Attribute("ControlLeftPositionPercentage").Value);
-            field.PromptWidth = form.Width * double.Parse(_FieldTypeID.Attribute("ControlWidthPercentage").Value);
-            field.ControlWidth = form.Width * double.Parse(_FieldTypeID.Attribute("ControlWidthPercentage").Value);
+            field.PromptTop = form.Height * ParseDouble(_FieldTypeID.Attribute("PromptTopPositionPercentage").Value);
+            field.PromptLeft = form.Width * ParseDouble(_FieldTypeID.Attribute("PromptLeftPositionPercentage").Value);
+            field.Top = form.Height * ParseDouble(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value);
+            field.Left = form.Width * ParseDouble(_FieldTypeID.Attribute("ControlLeftPositionPercentage").Value);
+            field.PromptWidth = form.Width * ParseDouble(_FieldTypeID.Attribute("ControlWidthPercentage").Value);
+            field.ControlWidth = form.Width * ParseDouble(_FieldTypeID.Attribute("ControlWidthPercentage").Value);
             field.fontstyle = _FieldTypeID.Attribute("PromptFontStyle").Value;
-            field.fontSize = double.Parse(_FieldTypeID.Attribute("PromptFontSize").Value);
+            field.fontSize = ParseDouble(_FieldTypeID.Attribute("PromptFontSize").Value);
             field.fontfamily = _FieldTypeID.Attribute("PromptFontFamily").Value;
             field.Required = bool.Parse(_FieldTypeID.Attribute("IsRequired").Value);
             field.InputFieldfontstyle = _FieldTypeID.Attribute("ControlFontStyle").Value;
-            field.InputFieldfontSize = double.Parse(_FieldTypeID.Attribute("ControlFontSize").Value);
+            field.InputFieldfontSize = ParseDouble(_FieldTypeID.Attribute("ControlFontSize").Value);
             field.InputFieldfontfamily = _FieldTypeID.Attribute("ControlFontFamily").Value;
             field.ReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value);
             field.Name = _FieldTypeID.Attribute("Name").Value;
@@ -760,7 +761,7 @@ namespace Epi.Web.MVC.Utility
             }
 
             field.fontstyle = fieldTypeID.Attribute("ControlFontStyle").Value;
-            field.fontSize = double.Parse(fieldTypeID.Attribute("ControlFontSize").Value);
+            field.fontSize = ParseDouble(fieldTypeID.Attribute("ControlFontSize").Value);
             field.fontfamily = fieldTypeID.Attribute("ControlFontFamily").Value;
             if (fieldTypeID.Attribute("BackgroundColor") != null)
             {
@@ -786,7 +787,7 @@ namespace Epi.Web.MVC.Utility
             }
 
             field.fontstyle = fieldTypeID.Attribute("PromptFontStyle").Value;
-            field.fontSize = double.Parse(fieldTypeID.Attribute("PromptFontSize").Value);
+            field.fontSize = ParseDouble(fieldTypeID.Attribute("PromptFontSize").Value);
             field.fontfamily = fieldTypeID.Attribute("PromptFontFamily").Value;
             AssignCommonGroupProperties(fieldTypeID, form.Width + 12, form.Height, field as GroupBox, form);
             if (fieldTypeID.Attribute("BackgroundColor") != null)
@@ -800,19 +801,19 @@ namespace Epi.Web.MVC.Utility
 
         protected static void AssignCommonGroupProperties(XElement fieldTypeID, double _Width, double _Height, GroupBox groupBox, Form form)
         {
-            groupBox.DisplayOrder = double.Parse(fieldTypeID.Attribute("TabIndex").Value);
+            groupBox.DisplayOrder = ParseDouble(fieldTypeID.Attribute("TabIndex").Value);
             groupBox.Html = fieldTypeID.Attribute("PromptText").Value;
             groupBox.Name = fieldTypeID.Attribute("Name").Value;
             groupBox.Title = fieldTypeID.Attribute("Name").Value;
             groupBox.Prompt = fieldTypeID.Attribute("PromptText").Value;
             groupBox.RequiredMessage = "This field is required";
             groupBox.Key = fieldTypeID.Attribute("Name").Value + "_GroupBox";
-            groupBox.PromptTop = form.Height * double.Parse(fieldTypeID.Attribute("ControlTopPositionPercentage").Value);
-            groupBox.PromptLeft = form.Width * double.Parse(fieldTypeID.Attribute("ControlLeftPositionPercentage").Value);
-            groupBox.Top = form.Height * double.Parse(fieldTypeID.Attribute("ControlTopPositionPercentage").Value);
-            groupBox.Left = form.Width * double.Parse(fieldTypeID.Attribute("ControlLeftPositionPercentage").Value);
-            groupBox.ControlHeight = form.Height * double.Parse(fieldTypeID.Attribute("ControlHeightPercentage").Value) - 12;
-            groupBox.ControlWidth = form.Width * double.Parse(fieldTypeID.Attribute("ControlWidthPercentage").Value) - 12;
+            groupBox.PromptTop = form.Height * ParseDouble(fieldTypeID.Attribute("ControlTopPositionPercentage").Value);
+            groupBox.PromptLeft = form.Width * ParseDouble(fieldTypeID.Attribute("ControlLeftPositionPercentage").Value);
+            groupBox.Top = form.Height * ParseDouble(fieldTypeID.Attribute("ControlTopPositionPercentage").Value);
+            groupBox.Left = form.Width * ParseDouble(fieldTypeID.Attribute("ControlLeftPositionPercentage").Value);
+            groupBox.ControlHeight = form.Height * ParseDouble(fieldTypeID.Attribute("ControlHeightPercentage").Value) - 12;
+            groupBox.ControlWidth = form.Width * ParseDouble(fieldTypeID.Attribute("ControlWidthPercentage").Value) - 12;
          
                 
            
@@ -1138,6 +1139,20 @@ namespace Epi.Web.MVC.Utility
                     form.Fields.Add(field.Name.ToLower(), field);
                 }
             }
+        }
+
+        public static double ParseDouble(string ParseString)
+        {
+            double result;
+            try
+            {
+                double.TryParse(ParseString, out result);
+            }
+            catch(Exception ex)
+            {
+                double.TryParse(ParseString, System.Globalization.NumberStyles.Any, CultureInfo.InvariantCulture, out result);
+            }
+            return result;
         }
     }
 }
