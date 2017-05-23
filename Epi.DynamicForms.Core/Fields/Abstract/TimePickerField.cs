@@ -71,7 +71,7 @@ namespace MvcDynamicForms.Fields
         /// Server Side validation for Numeric TextBox  
         /// </summary>
         /// <returns></returns>
-        public override bool Validate()
+        public override bool Validate(string Dateformat)
         {
             /*If readonly don't perform any validation check and make required = false and validate = true*/
             if (ReadOnly)

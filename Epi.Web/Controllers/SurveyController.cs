@@ -22,6 +22,8 @@ using System.Reflection;
 using System.Diagnostics;
 using Epi.Web.Common.Message;
 using Epi.Web.Common.DTO;
+using System.Globalization;
+using System.Threading;
 namespace Epi.Web.MVC.Controllers
 {
     [Authorize]
@@ -40,6 +42,8 @@ namespace Epi.Web.MVC.Controllers
         {
             try
             {
+                CultureInfo currentCulture = Thread.CurrentThread.CurrentCulture;
+
                 // Check if URL has passcode
                 string PassCode = this.Request.FilePath.ToString().Substring(this.Request.FilePath.ToString().LastIndexOf('/') + 1);
                 if (PassCode.Length == 4)
@@ -88,8 +92,10 @@ namespace Epi.Web.MVC.Controllers
                     case PreValidationResultEnum.Success:
                     default:
                         var form = _isurveyFacade.GetSurveyFormData(surveyAnswerDTO.SurveyId, pageNumber, surveyAnswerDTO, isMobileDevice,"",IsAndroid);
+                       
                         TempData["Width"] = form.Width + 5;
 
+                       
                         if (TempData.ContainsKey("isredirect") && !string.IsNullOrWhiteSpace(TempData["isredirect"].ToString()))
                         {
                             form.Validate(form.RequiredFieldsList);
@@ -186,6 +192,11 @@ namespace Epi.Web.MVC.Controllers
                             form.StatusId = 1;
                            
                         }
+
+                        string DateFormat = currentCulture.DateTimeFormat.ShortDatePattern;
+                        DateFormat = DateFormat.Remove(DateFormat.IndexOf("y"), 2);                      
+                        form.CurrentCultureDateFormat = DateFormat;
+
                         return View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
                 }
             }
@@ -213,7 +224,7 @@ namespace Epi.Web.MVC.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Index(SurveyAnswerModel surveyAnswerModel, string Submitbutton, string Savebutton, string ContinueButton, string PreviousButton, int PageNumber = 0)
-        {
+        {            
             ActionResult actionResult = null;
             bool IsAndroid = false;
             
@@ -291,8 +302,8 @@ namespace Epi.Web.MVC.Controllers
                             {
                                 form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, CurrentPageNum, SurveyAnswer, isMobileDevice,"",IsAndroid);
                                 Epi.Web.MVC.Utility.FormProvider.UpdateHiddenFields(CurrentPageNum, form, XDocument.Parse(surveyInfoModel.XML), XDocument.Parse(SurveyAnswer.XML), this.ControllerContext.RequestContext.HttpContext.Request.Form);
-                            }
-                            
+                            }                         
+
                             UpdateModel(form);
                         }
                         else
@@ -302,8 +313,8 @@ namespace Epi.Web.MVC.Controllers
                         form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, CurrentPageNum, SurveyAnswer, isMobileDevice,"",IsAndroid );
                         form.ClearAllErrors();
                         Epi.Web.MVC.Utility.FormProvider.UpdateHiddenFields(CurrentPageNum, form, XDocument.Parse(surveyInfoModel.XML), XDocument.Parse(SurveyAnswer.XML), this.ControllerContext.RequestContext.HttpContext.Request.Form);
-
-                        UpdateModel(form);
+                                                       
+                            UpdateModel(form);
 
                         }
 
@@ -417,7 +428,7 @@ namespace Epi.Web.MVC.Controllers
                             actionResult = View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
                             return actionResult;
                         }
-                        else if (form.Validate(form.RequiredFieldsList))
+                        else if (form.Validate(form.CurrentCultureDateFormat,form.RequiredFieldsList))
                         {
                             if (!string.IsNullOrEmpty(Submitbutton))
                             {
