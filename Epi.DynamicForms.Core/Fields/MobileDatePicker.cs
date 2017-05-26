@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Web.Mvc;
 using Epi.Core.EnterInterpreter;
+using System.Globalization;
+using System.Threading;
 namespace MvcDynamicForms.Fields
 {
     /// <summary>
@@ -17,6 +19,9 @@ namespace MvcDynamicForms.Fields
             var html = new StringBuilder();
             var inputName = _fieldPrefix + _key;
             string ErrorStyle = string.Empty;
+            CultureInfo currentCulture = Thread.CurrentThread.CurrentCulture;
+            string DateFormat = currentCulture.DateTimeFormat.ShortDatePattern;
+            DateFormat = DateFormat.Remove(DateFormat.IndexOf("y"), 2);
             // prompt label
             var prompt = new TagBuilder("label");
             prompt.SetInnerText(Prompt);
@@ -33,7 +38,7 @@ namespace MvcDynamicForms.Fields
             {
                 ErrorStyle = ";border-color: red";
             }
-
+            var NewDateFormat = GetRightDateFormat(Response, "YYYY-MM-DD", DateFormat);
             var txt = new TagBuilder("input");
             txt.Attributes.Add("name", inputName);
             txt.Attributes.Add("id", inputName);
@@ -41,7 +46,7 @@ namespace MvcDynamicForms.Fields
             txt.Attributes.Add("Theme", "b");
             txt.Attributes.Add("data-role", "datebox");
             txt.Attributes.Add("data-options", "{\"mode\": \"datebox\", \"pickPageButtonTheme\": \"e\", \"pickPageInputTheme\":\"e\", \"pickPageFlipButtonTheme\":\"a\", \"pickPageTheme\":\"e\" ,  \"useNewStyle\":true}");
-            txt.Attributes.Add("value", Response);
+            txt.Attributes.Add("value", NewDateFormat);
            
             if (FunctionObjectAfter != null && !FunctionObjectAfter.IsNull())
             {
@@ -148,7 +153,7 @@ namespace MvcDynamicForms.Fields
             }
         }
 
-        public string GetRightDateFormat(string Date, string pattern)
+        public string GetRightDateFormat(string Date, string patternIn, string patternOut = "")
         {
             StringBuilder NewDateFormat = new StringBuilder();
 
@@ -156,11 +161,11 @@ namespace MvcDynamicForms.Fields
             string DD = "";
             string YYYY = "";
             char splitChar = '/';
-
             if (!string.IsNullOrEmpty(Date))
             {
                 if (Date.Contains('-'))
                 {
+                    splitChar = ' ';
                     splitChar = '-';
                 }
                 else
@@ -169,7 +174,7 @@ namespace MvcDynamicForms.Fields
                     splitChar = '/';
                 }
                 string[] dateList = Date.Split((char)splitChar);
-                switch (pattern.ToString())
+                switch (patternIn.ToString())
                 {
                     case "YYYY-MM-DD":
                         MM = dateList[1];
@@ -182,12 +187,41 @@ namespace MvcDynamicForms.Fields
                         YYYY = dateList[2];
                         break;
                 }
-
-                NewDateFormat.Append(YYYY);
-                NewDateFormat.Append('/');
-                NewDateFormat.Append(MM);
-                NewDateFormat.Append('/');
-                NewDateFormat.Append(DD);
+                if (string.IsNullOrEmpty(patternOut))
+                {
+                    NewDateFormat.Append(YYYY);
+                    NewDateFormat.Append('/');
+                    NewDateFormat.Append(MM);
+                    NewDateFormat.Append('/');
+                    NewDateFormat.Append(DD);
+                }
+                else
+                {
+                    switch (patternOut.ToString())
+                    {
+                        case "dd/mm/yyyy":
+                            NewDateFormat.Append(DD);
+                            NewDateFormat.Append('/');
+                            NewDateFormat.Append(MM);
+                            NewDateFormat.Append('/');
+                            NewDateFormat.Append(YYYY);
+                            break;
+                        case "mm/dd/yyyy":
+                            NewDateFormat.Append(MM);
+                            NewDateFormat.Append('/');
+                            NewDateFormat.Append(DD);
+                            NewDateFormat.Append('/');
+                            NewDateFormat.Append(YYYY);
+                            break;
+                        case "M/d/yy":
+                            NewDateFormat.Append(MM);
+                            NewDateFormat.Append('/');
+                            NewDateFormat.Append(DD);
+                            NewDateFormat.Append('/');
+                            NewDateFormat.Append(YYYY);
+                            break;
+                    }
+                }
             }
             else
             {
