@@ -2,7 +2,8 @@
 using System.Web.Mvc;
 using MvcDynamicForms.Fields;
 using MvcDynamicForms.Utilities;
-
+using System;
+ 
 namespace MvcDynamicForms
 {
     class DynamicFormModelBinder : IModelBinder
@@ -41,7 +42,9 @@ namespace MvcDynamicForms
                         else if (dynField is DatePickerField)
                         {
                             var datepickerField = (DatePickerField)dynField;
-                            datepickerField.Response = postedForm[key];
+                           // datepickerField.Response = DateTimeOffset.Parse(postedForm[key]).UtcDateTime.ToString()  ;
+                            string date = DateTimeOffset.Parse(postedForm[key]).ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'");
+                            datepickerField.Response = date.Remove(date.IndexOf('T'));
                         }
                         else if (dynField is TimePickerField)
                         {
