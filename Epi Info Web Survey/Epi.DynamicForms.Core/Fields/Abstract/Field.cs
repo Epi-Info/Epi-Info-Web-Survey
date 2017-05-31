@@ -17,7 +17,7 @@ namespace MvcDynamicForms.Fields
         protected string _fieldWrapper = Constant.WRAPPER;
         protected string _fieldWrapperClass = Constant.FIELDWRAPPERCLASS;
         protected string _fieldPrefix = Constant.FIELDPREFIX;
-
+        protected Form _form;
         protected double _top;
         protected double _left;
         protected string _cssClass;
@@ -37,6 +37,17 @@ namespace MvcDynamicForms.Fields
         protected EnterRule _functionObjectAfter;
         protected EnterRule _functionObjectBefore;
         protected EnterRule _functionObjectClick;
+        internal Form Form
+        {
+            get
+            {
+                return _form;
+            }
+            set
+            {
+                _form = value;
+            }
+        }
 
         public string Name
         {
