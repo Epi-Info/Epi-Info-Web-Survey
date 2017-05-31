@@ -243,7 +243,11 @@ namespace MvcDynamicForms
         {
             foreach (var field in fields)
             {
-                _fields.Add(field.Name, field);
+                if (!string.IsNullOrEmpty(field.Name))
+                {
+                    field.Form = this;
+                    _fields.Add(field.Name, field);
+                }
             }
         }
 

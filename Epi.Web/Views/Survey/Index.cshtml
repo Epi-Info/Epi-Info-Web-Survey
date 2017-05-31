@@ -4,7 +4,15 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @*<script src="../../Scripts/jquery-1.5.1-vsdoc.js" type="text/javascript"></script>*@
+<style>
+    .Search {
 
+        background-image: url(@Url.Content("~/Content/images/icon-search-black.png"));
+        background-repeat: no-repeat;
+        background-position: right;
+        outline: 0;
+    }
+</style>
 <script type="text/javascript">
 
     //Check Code Logic start
@@ -24,6 +32,7 @@
     });
 </script>
 <script type="text/javascript">
+
 
 
     /*Clicking the save button to save the survey*/
@@ -375,7 +384,7 @@
     }
 
     function updateXml(NameList, pValue) {
-
+        debugger;
 
         var UpdateUrl = '@Url.Action("UpdateResponseXml","Survey")';
         var NList = "";
@@ -406,10 +415,16 @@
             return true;
         });
     });
-    function SetCodes_Val(obj, SurveyId, TableName) {
-
-
-        var signoutUrl = '@Url.Action("GetCodesValue","Survey")' + '?SourceTableName=' + TableName + '&SelectedValue=' + obj.value + '&SurveyId=' + SurveyId;
+    function SetCodes_Val(obj, SurveyId, TableName, AutoComplete) {
+        debugger;
+        $('#' + obj.id).val(obj.value);     
+        var availableTags = [obj.value];
+        var signoutUrl = "";
+        if (AutoComplete) {
+            signoutUrl = '@Url.Action("GetCodesValue","Survey")' + '?SourceTableName=' + TableName + '&SelectedValue=' + obj + '&SurveyId=' + SurveyId;
+        } else {
+            signoutUrl = '@Url.Action("GetCodesValue","Survey")' + '?SourceTableName=' + TableName + '&SelectedValue=' + obj.value + '&SurveyId=' + SurveyId;
+        }
 
         $.ajax({
             url: signoutUrl,
@@ -423,11 +438,52 @@
 
 
         function successFunc(data, status) {
-
             $.each(data, function (key, value) {
                 var Query = "#mvcdynamicfield_" + key;
                 // alert(Query);
                 $(Query).val(value);
+            });
+        }
+
+        function errorFunc() {
+            alert('error');
+        }
+
+
+    }
+
+    function GetAutoComplete_Val(obj, SurveyId, TableName) {
+
+        var availableTags = new Array();
+        var signoutUrl = '@Url.Action("GetAutoCompleteList", "Survey")' + '?SourceTableName=' + TableName + '&SelectedValue=' + obj.value + '&SurveyId=' + SurveyId;
+
+        $.ajax({
+            url: signoutUrl,
+            type: 'GET',
+            contentType: 'application/json; charset=utf-8',
+            dataType: "json",
+            async: false,
+            success: successFunc,
+            error: errorFunc
+        });
+
+
+        function successFunc(data, status) {
+            debugger
+            var Query = "#mvcdynamicfield_" + TableName;
+            $.each(data, function (key, value) {
+                debugger;
+                availableTags.push(value);
+
+
+            });
+
+            $(Query).autocomplete({
+                source: availableTags,
+                select: function (event, ui) {
+                    debugger;
+                    SetCodes_Val(ui.item.label, SurveyId, TableName, true);
+                },
             });
         }
 
