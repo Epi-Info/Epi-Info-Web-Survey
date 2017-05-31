@@ -27,12 +27,17 @@ namespace MvcDynamicForms
 
                     if (dynField != default(InputField))
                     {
-                        if (dynField is TextField)
+                       
+                        if (dynField is AutoComplete)
+                        {
+                            var txtField = (AutoComplete)dynField;
+                            txtField.Response = postedForm[key].TrimEnd(',');
+                        }
+                        else  if (dynField is TextField)
                         {
                             var txtField = (TextField)dynField;
                             txtField.Response = postedForm[key];
                         }
-
                         else if (dynField is NumericTextField)
                         {
                             var numerictxtField = (NumericTextField)dynField;
@@ -130,6 +135,11 @@ namespace MvcDynamicForms
                             {
                                 chkField.Checked = test;
                             }
+                        }
+                        else if (dynField is AutoComplete)
+                        {
+                            var AutoCompleteField = (AutoComplete)dynField;
+                            AutoCompleteField.Value = postedForm[key];
                         }
                     }
                 }

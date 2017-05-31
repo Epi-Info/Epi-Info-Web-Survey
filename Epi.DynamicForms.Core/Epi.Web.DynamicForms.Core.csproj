@@ -62,6 +62,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -94,6 +95,9 @@
     <Compile Include="Fields\Abstract\NumericTextField.cs" />
     <Compile Include="Fields\Abstract\OrientableField.cs" />
     <Compile Include="Fields\Abstract\TimePickerField.cs" />
+    <Compile Include="Fields\AutoComplete.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Fields\CheckBox.cs" />
     <Compile Include="Fields\CheckBoxList.cs" />
     <Compile Include="Fields\CommandButton.cs" />

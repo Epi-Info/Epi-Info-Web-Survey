@@ -17,7 +17,7 @@ namespace MvcDynamicForms.Fields
         protected double _PromptWidth;
         protected double _ControlWidth;
         protected double _ControlHeight;
-
+        protected Boolean _IsRequired;
         protected string _requiredMessage = "Required";
         protected string _promptClass = "MvcDynamicFieldPrompt";
         protected string _errorClass = "MvcDynamicFieldError";
@@ -60,6 +60,8 @@ namespace MvcDynamicForms.Fields
         /// Whether the field must be completed to be valid.
         /// </summary>
         public bool Required { get; set; }
+
+        public Boolean IsRequired { get { return this._IsRequired; } set { this._IsRequired = value; } }
 
         /// <summary>
         /// Whether the field is readonly. If the field is readonly then the required = false
@@ -121,6 +123,7 @@ namespace MvcDynamicForms.Fields
                 _inputHtmlAttributes = value;
             }
         }
+        public string Value { get; set; }
         /// <summary>
         /// Validates the user's response.
         /// </summary>

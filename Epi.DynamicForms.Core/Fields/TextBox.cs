@@ -10,6 +10,7 @@ namespace MvcDynamicForms.Fields
     [Serializable]
     public class TextBox : TextField
     {
+        public bool Iscodes { get; set; }
         public override string RenderHtml()
         {
             var html = new StringBuilder();
@@ -80,6 +81,16 @@ namespace MvcDynamicForms.Fields
             //{
             //    txt.Attributes.Add("disabled", "disabled");
             //}
+            if (this.Iscodes)
+            {
+
+
+                txt.Attributes.Add("onkeyup", "return GetAutoComplete_Val(this,'" + _form.SurveyInfo.SurveyId + "','" + _key + "');"); //click
+                txt.Attributes.Add("onpaste", "return GetAutoComplete_Val(this,'" + _form.SurveyInfo.SurveyId + "','" + _key + "');"); //click
+                txt.Attributes.Add("oninput", "return GetAutoComplete_Val(this,'" + _form.SurveyInfo.SurveyId + "','" + _key + "');"); //click
+                txt.Attributes.Add("onchange", "return GetAutoComplete_Val(this,'" + _form.SurveyInfo.SurveyId + "','" + _key + "');"); //click
+
+            }
 
             string InputFieldStyle = GetInputFieldStyle(_InputFieldfontstyle.ToString(), _InputFieldfontSize, _InputFieldfontfamily.ToString());
             txt.Attributes.Add("style", "position:absolute;left:" + _left.ToString() + "px;top:" + _top.ToString() + "px" + ";width:" + _ControlWidth.ToString() + "px" + ErrorStyle + ";" + IsHiddenStyle + ";" + IsHighlightedStyle + ";" + InputFieldStyle);            

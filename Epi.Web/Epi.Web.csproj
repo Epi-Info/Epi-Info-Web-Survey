@@ -279,6 +279,7 @@
     <Content Include="bin\Unity.Mvc3.dll" />
     <Content Include="bin\WebGrease.dll" />
     <Content Include="Content\CheckCode\IFElse.txt" />
+    <Content Include="Content\css\awesomplete.css" />
     <Content Include="Content\css\demos.css" />
     <Content Include="Content\css\epistyle-blue.css" />
     <Content Include="Content\css\epistyle.css" />
@@ -416,6 +417,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\autoNumeric-1.7.4.js" />
+    <Content Include="Scripts\awesomplete.js" />
     <Content Include="Scripts\CheckCodeEngine.js" />
     <Content Include="Scripts\idle-timer.js" />
     <Content Include="Scripts\jqm-datebox.core.js" />
