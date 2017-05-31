@@ -76,7 +76,7 @@ namespace MvcDynamicForms.Fields
             StringBuilder FontWeight = new StringBuilder();
             StringBuilder TextDecoration = new StringBuilder();
             StringBuilder CssStyles = new StringBuilder();
-
+           
             char[] delimiterChars = { ' ', ',' };
             string[] Styles = ControlFontStyle.Split(delimiterChars);
              
