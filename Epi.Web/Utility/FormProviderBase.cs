@@ -168,7 +168,7 @@ namespace Epi.Web.MVC.Utility
                                xdoc.Descendants("View")
                                select Node.Attribute("Height").Value;
 
-                    return ParseDouble(top.First());
+                    return double.Parse(top.First());
                 }
                 else 
                 {
@@ -176,7 +176,7 @@ namespace Epi.Web.MVC.Utility
                                xdoc.Descendants("View")
                                select Node.Attribute("Width").Value;
 
-                    return ParseDouble(top.First());
+                    return double.Parse(top.First());
                 }
             }
             catch
@@ -195,7 +195,7 @@ namespace Epi.Web.MVC.Utility
                                  xdoc.Descendants("View")
                                  select Node.Attribute("Width").Value);
 
-                    return ParseDouble(_left.First());
+                    return double.Parse(_left.First());
                 }
                 else
                 {
@@ -204,7 +204,7 @@ namespace Epi.Web.MVC.Utility
                                xdoc.Descendants("View")
                                select Node.Attribute("Height").Value;
 
-                    return ParseDouble(_top.First());
+                    return double.Parse(_top.First());
                 }
             }
             catch
@@ -705,10 +705,13 @@ namespace Epi.Web.MVC.Utility
                      if ( SourceTable!= null && SourceTable.Count() > 0)
                                 {
                                     var SourceTableXml1 = SourceTable.Where(x => x.TableName == TableName.ToString()).Select(y => y.TableXml).ToList() ;
+                                    if (SourceTableXml1.Count()>0)
+                                    {
                                     XDocument SourceTableXml =   XDocument.Parse(SourceTableXml1[0].ToString());
                                     _ControlValues = from _ControlValue in SourceTableXml.Descendants("SourceTable")
                                                     where _ControlValue.Attribute("TableName").Value == TableName.ToString()
                                                     select _ControlValue;
+                         }
                                 }
                 
                 }
@@ -1144,11 +1147,26 @@ namespace Epi.Web.MVC.Utility
         public static double ParseDouble(string ParseString)
         {
             double result;
+             
             try
             {
-                double.TryParse(ParseString, out result);
+
+                if (ParseString.Contains(','))
+                {
+                    var NewValue = ParseString.Replace(',', '.');
+                  //  double.TryParse(NewValue, System.Globalization.NumberStyles.Any, CultureInfo.InvariantCulture, out result);
+                 // result = Math.Ceiling(result);
+                    double.TryParse(NewValue, System.Globalization.NumberStyles.Any, CultureInfo.InvariantCulture, out result);
+                }
+                else {
+                    double.TryParse(ParseString, out result);
+                //    result = Math.Ceiling(result);
+                
+                }
+            
+               // double.TryParse(ParseString, System.Globalization.NumberStyles.Any, CultureInfo.InvariantCulture, out result);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 double.TryParse(ParseString, System.Globalization.NumberStyles.Any, CultureInfo.InvariantCulture, out result);
             }
