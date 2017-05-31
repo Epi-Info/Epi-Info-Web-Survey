@@ -107,7 +107,8 @@ namespace Epi.Web.MVC.Utility
                         JavaScript.Append(formJavaScript);
                     }
 
-                    AddFormFields(pageNumber, form);
+
+                    AddFormFields(pageNumber, form, surveyAnswer, SourceTableList);
                     form.FormJavaScript = VariableDefinitions.ToString() + "\n" + JavaScript.ToString();
 
                 }
@@ -120,7 +121,7 @@ namespace Epi.Web.MVC.Utility
             else
             {
                 form.Fields.Clear();
-                AddFormFields(pageNumber, form);
+                AddFormFields(pageNumber, form,surveyAnswer);
             }
 
             form.ResponseId = surveyAnswer.ResponseId;
