@@ -1299,7 +1299,7 @@ namespace Epi.Web.MVC.Utility
 
                             dropDownValues = GetDropDownValues(form.XDocMetadata, fieldElement.Attribute("Name").Value, fieldElement.Attribute("SourceTableName").Value, fieldElement.Attribute("CodeColumnName").Value, form.SourceTableList);
                             var dropdown = GetDropDown(fieldElement, dropDownValues, 18, form);
-                            if (dropdown.ChoiceKeyValuePairs.Count() > 1)
+                            if (dropdown.ChoiceKeyValuePairs.Count() > 100)
                             {
                                 field = GetAutoComplete(fieldElement, _Width, _Height, xdocResponse, Value, dropDownValues, 1, form);
                             }
