@@ -690,7 +690,7 @@ namespace Epi.Web.MVC.Utility
 
 
             Select DropDown = new Select();
-
+            DropDown.Name = _FieldTypeID.Attribute("Name").Value;
             DropDown.Title = _FieldTypeID.Attribute("Name").Value;
             DropDown.Prompt = _FieldTypeID.Attribute("PromptText").Value;
             DropDown.DisplayOrder = int.Parse(_FieldTypeID.Attribute("TabIndex").Value);
@@ -1283,12 +1283,11 @@ namespace Epi.Web.MVC.Utility
                         case "17":
 
                             string DropDownValues1 = "";
-                            if (SourceTableList != null && SourceTableList.Count() > 0)
-                            {
+                          
                                 var SourceTableXml1 = SourceTableList.Where(x => x.TableName == fieldElement.Attribute("SourceTableName").Value).Select(y => y.TableXml).ToList();
 
                                 DropDownValues1 = GetDropDownValues(XDocument.Parse(SourceTableXml1[0].ToString()), fieldElement.Attribute("Name").Value, fieldElement.Attribute("SourceTableName").Value, fieldElement.Attribute("CodeColumnName").Value, SourceTableList);
-                            }
+                            
                             var _DropDownSelectedValue1 = Value;
                             form.AddFields(GetDropDown(fieldElement, _Width, _Height, xdocResponse, _DropDownSelectedValue1, DropDownValues1, 17, form));
 
