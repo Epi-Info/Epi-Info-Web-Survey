@@ -41,7 +41,15 @@ namespace MvcDynamicForms
                         else if (dynField is NumericTextField)
                         {
                             var numerictxtField = (NumericTextField)dynField;
-                            numerictxtField.Response = postedForm[key];
+
+                            if (postedForm[key].Contains(","))
+                            {
+                                numerictxtField.Response = postedForm[key].Replace(",", ".");
+                            }
+                            else
+                            {
+                                numerictxtField.Response = postedForm[key];
+                            }
                         }
 
                         else if (dynField is DatePickerField)
