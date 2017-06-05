@@ -56,7 +56,7 @@ namespace MvcDynamicForms
                         {
                             var datepickerField = (DatePickerField)dynField;
                            // datepickerField.Response = DateTimeOffset.Parse(postedForm[key]).UtcDateTime.ToString()  ;
-                            if (dynField.Value != null)
+                            if (!string.IsNullOrEmpty(postedForm[key]))
                             {
                             string date = DateTimeOffset.Parse(postedForm[key]).ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'");
                             datepickerField.Response = date.Remove(date.IndexOf('T'));
