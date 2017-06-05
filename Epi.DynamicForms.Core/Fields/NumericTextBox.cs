@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Web.Mvc;
 using Epi.Core.EnterInterpreter;
+using System.Globalization;
+
 namespace MvcDynamicForms.Fields
 {
     [Serializable]
@@ -15,7 +17,7 @@ namespace MvcDynamicForms.Fields
             var inputName = _fieldPrefix + _key;
             string ErrorStyle = string.Empty;
             var prompt = new TagBuilder("label");
-            
+
             prompt.SetInnerText(Prompt);
             prompt.Attributes.Add("for", inputName);
             prompt.Attributes.Add("Id", "label" + inputName);
@@ -29,38 +31,38 @@ namespace MvcDynamicForms.Fields
 
             if (!IsValid)
             {
-                 ErrorStyle = ";border-color: red";
+                ErrorStyle = ";border-color: red";
             }
-            
+
             var txt = new TagBuilder("input");
             txt.Attributes.Add("name", inputName);
             txt.Attributes.Add("id", inputName);
             txt.Attributes.Add("type", "text");
             string IsHiddenStyle = "";
             string IsHighlightedStyle = "";
- 
+
             if (_IsHidden)
             {
                 IsHiddenStyle = "display:none";
             }
-            
+
             if (_IsHighlighted)
             {
                 IsHighlightedStyle = "background-color:yellow";
             }
-             
+
             //if (_IsDisabled)
             //{
             //    txt.Attributes.Add("disabled", "disabled");
             //}
-            
+
             if (FunctionObjectAfter != null && !FunctionObjectAfter.IsNull())
-            { 
+            {
                 txt.Attributes.Add("onblur", "return " + _key + "_after();"); //After
             }
 
             if (FunctionObjectBefore != null && !FunctionObjectBefore.IsNull())
-            { 
+            {
                 txt.Attributes.Add("onfocus", "return " + _key + "_before();"); //Before
             }
 
@@ -86,24 +88,36 @@ namespace MvcDynamicForms.Fields
             html.Append(txt.ToString(TagRenderMode.SelfClosing));
 
             var scriptNumeric = new TagBuilder("script");
-            scriptNumeric.InnerHtml = "$(function() { $('#" + inputName + "').numeric();});";
+            string uiSep = CultureInfo.CurrentUICulture.NumberFormat.NumberDecimalSeparator;
+
+            if (uiSep == ".")
+            {
+                scriptNumeric.InnerHtml = "$(function() { $('#" + inputName + "').numeric();});";
+            }
+            else
+            {
+                string temp = "\"" + uiSep + "\"";
+
+                scriptNumeric.InnerHtml = "$(function() { $('#" + inputName + "').numeric({ decimal :" + temp + "});});";
+            }
+
             html.Append(scriptNumeric.ToString(TagRenderMode.Normal));
 
             if (!string.IsNullOrEmpty(Pattern))
             {
                 string maskedPatternEq = GetMaskedPattern(Pattern);
                 var scriptMaskedInput = new TagBuilder("script");
-                scriptMaskedInput.InnerHtml = "$(function() { $('#" + inputName + "').mask('"+maskedPatternEq+"');});";
+                scriptMaskedInput.InnerHtml = "$(function() { $('#" + inputName + "').mask('" + maskedPatternEq + "');});";
                 html.Append(scriptMaskedInput.ToString(TagRenderMode.Normal));
             }
 
             if (ReadOnly || _IsDisabled)
-                {
+            {
                 var scriptReadOnlyText = new TagBuilder("script");
                 //scriptReadOnlyText.InnerHtml = "$(function(){$('#" + inputName + "').attr('disabled','disabled')});";
                 scriptReadOnlyText.InnerHtml = "$(function(){  var List = new Array();List.push('" + _key + "');CCE_Disable(List, false);});";
                 html.Append(scriptReadOnlyText.ToString(TagRenderMode.Normal));
-                }
+            }
 
             var scriptBuilder = new TagBuilder("script");
             scriptBuilder.InnerHtml = "$('#" + inputName + "').BlockEnter('" + inputName + "');";
@@ -120,7 +134,6 @@ namespace MvcDynamicForms.Fields
             }
             wrapper.Attributes["id"] = inputName + "_fieldWrapper";
             wrapper.InnerHtml = html.ToString();
-            
             return wrapper.ToString();
         }
 
@@ -151,8 +164,8 @@ namespace MvcDynamicForms.Fields
 
             return maskedPattern;
         }
-        
-        public string GetControlClass() 
+
+        public string GetControlClass()
         {
 
             StringBuilder ControlClass = new StringBuilder();

@@ -121,30 +121,46 @@ namespace Epi.Web.MVC.Utility
 
                     if (field is RadioList)
                     {
-                    var Choices = ((MvcDynamicForms.Fields.ListField)(field)).ChoiceKeyValuePairs.ToList();
-                    int Index = 0;
-                    int.TryParse(kvp.Value.ToString(),out Index);
+                        var Choices = ((MvcDynamicForms.Fields.ListField)(field)).ChoiceKeyValuePairs.ToList();
+                        int Index = 0;
+                        int.TryParse(kvp.Value.ToString(), out Index);
 
 
-                    for (int i = 0; Choices.Count() > i;i++ )
-                    {
-                        if (Choices[i].Key == kvp.Value.ToString())
+                        for (int i = 0; Choices.Count() > i; i++)
                         {
-                            Index = i;
+                            if (Choices[i].Key == kvp.Value.ToString())
+                            {
+                                Index = i;
+
+                            }
 
                         }
-
-                    }
                         //((RadioList)field).Response = kvp.Value;
                         //((RadioList)field).SelectedValue = kvp.Value; 
 
                     ((RadioList)field).Response = Choices[Index].Key;
-                    ((RadioList)field).SelectedValue = Choices[Index].Key;
+                        ((RadioList)field).SelectedValue = Choices[Index].Key;
                     }
                     else if (field is ListField)
                     {
                         ((ListField)field).Response = kvp.Value;
                         ((Select)field).SelectedValue = ((ListField)field).Response;
+                    }
+                    else if (field is NumericTextBox)
+                    {
+                        string uiSep = CultureInfo.CurrentUICulture.NumberFormat.NumberDecimalSeparator;
+                        string Value = kvp.Value;
+                        if (uiSep == ".")
+                        {
+                            Value = Value.Replace(",", ".");
+                        }
+                        else
+                        {
+                            Value = Value.Replace(".", ",");
+                        }
+
+                            ((NumericTextBox)field).Response = Value;
+
                     }
                     else if (field is InputField)
                     {

@@ -65,7 +65,7 @@ namespace MvcDynamicForms.Fields
         /// Server Side validation for Numeric TextBox  
         /// </summary>
         /// <returns></returns>
-        public override bool Validate(string DateFormat)
+        public override bool Validate()
         {
             /*If readonly don't perform any validation check and make required = false and validate = true*/
             if (ReadOnly)
@@ -94,25 +94,10 @@ namespace MvcDynamicForms.Fields
                      Matches: 01/01/2001 | 1/1/1999 | 10/20/2080 
                      Non-Matches: 13/01/2001 | 1/1/1800 | 10/32/2080 
                  */
+                //mm/dd/yyyy
+                //string regularExp = "^(((((((0?[13578])|(1[02]))[\\.\\-/]?((0?[1-9])|([12]\\d)|(3[01])))|(((0?[469])|(11))[\\.\\-/]?((0?[1-9])|([12]\\d)|(30)))|((0?2)[\\.\\-/]?((0?[1-9])|(1\\d)|(2[0-8]))))[\\.\\-/]?(((19)|(20))?([\\d][\\d]))))|((0?2)[\\.\\-/]?(29)[\\.\\-/]?(((19)|(20))?(([02468][048])|([13579][26])))))$";
 
-                string regularExp = string.Empty;
-
-                if (DateFormat.ToLower().ToString() == "mm/dd/yy")
-                {
-                    regularExp = "^(((((((0?[13578])|(1[02]))[\\.\\-/]?((0?[1-9])|([12]\\d)|(3[01])))|(((0?[469])|(11))[\\.\\-/]?((0?[1-9])|([12]\\d)|(30)))|((0?2)[\\.\\-/]?((0?[1-9])|(1\\d)|(2[0-8]))))[\\.\\-/]?(((19)|(20))?([\\d][\\d]))))|((0?2)[\\.\\-/]?(29)[\\.\\-/]?(((19)|(20))?(([02468][048])|([13579][26])))))$";
-                }
-                else if (DateFormat.ToLower().ToString() == "yy/mm/dd")
-                {
-                    regularExp = "^[0-9]{4}-(((0[13578]|(10|12))-(0[1-9]|[1-2][0-9]|3[0-1]))|(02-(0[1-9]|[1-2][0-9]))|((0[469]|11)-(0[1-9]|[1-2][0-9]|30)))$";
-                }
-                else if (DateFormat.ToLower().ToString() == "dd/mm/yy")
-                {
-                    regularExp = @"^(((0[1-9]|[12]\d|3[01])\/(0[13578]|1[02])\/((19|[2-9]\d)\d{2}))|((0[1-9]|[12]\d|30)\/(0[13456789]|1[012])\/((19|[2-9]\d)\d{2}))|((0[1-9]|1\d|2[0-8])\/02\/((19|[2-9]\d)\d{2}))|(29\/02\/((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00))))$";
-                }
-                else
-                {
-                    regularExp = string.Empty;
-                }
+                string regularExp = "^[0-9]{4}-(((0[13578]|(10|12))-(0[1-9]|[1-2][0-9]|3[0-1]))|(02-(0[1-9]|[1-2][0-9]))|((0[469]|11)-(0[1-9]|[1-2][0-9]|30)))$";
 
                 var regex = new Regex(regularExp);
 

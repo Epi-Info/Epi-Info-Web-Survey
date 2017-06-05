@@ -240,6 +240,13 @@ namespace MvcDynamicForms.Fields
                             NewDateFormat.Append('/');
                             NewDateFormat.Append(YYYY);
                             break;
+                        case "dd/MM/yy":
+                            NewDateFormat.Append(DD);
+                            NewDateFormat.Append('/');
+                            NewDateFormat.Append(MM);
+                            NewDateFormat.Append('/');
+                            NewDateFormat.Append(YYYY);
+                            break;
                         case "mm/dd/yyyy":
                             NewDateFormat.Append(MM);
                             NewDateFormat.Append('/');
