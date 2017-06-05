@@ -84,7 +84,7 @@
     }
     function ChangeDatePickerFormat(dateformat) {
         dateformat = dateformat.toLocaleLowerCase().toString();      
-        $(".datepicker").datepicker("option", "dateFormat", dateformat);
+        $(".IsDate").datepicker("option", "dateFormat", dateformat);
 
     }
 
@@ -97,12 +97,12 @@
        var DateFormat = '@Model.CurrentCultureDateFormat'
         DateFormat = DateFormat.toLocaleLowerCase().toString();
         //var dateFormat1 = $(".datepicker").datepicker("option", "dateFormat");
-        var dateFormat1 = $(".datepicker").val();
+        var dateFormat1 = $(".IsDate").val();
         //  alert("DateFormat: " + DateFormat + "/// dateFormat1: " + dateFormat1)
         //alert(dateFormat1);
         if (dateFormat1 == "") {
             
-            $(".datepicker").datepicker("option", "dateFormat", DateFormat);
+            $(".IsDate").datepicker("option", "dateFormat", DateFormat);
         }
 
 
