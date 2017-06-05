@@ -151,7 +151,7 @@ namespace MvcDynamicForms.Fields
 
             StringBuilder ControlClass = new StringBuilder();
 
-            ControlClass.Append("validate[");
+            ControlClass.Append("IsDate validate[");
 
 
             if ((!string.IsNullOrEmpty(GetRightDateFormat(Lower,Pattern).ToString()) && (!string.IsNullOrEmpty(GetRightDateFormat(Upper,Pattern).ToString()))))
