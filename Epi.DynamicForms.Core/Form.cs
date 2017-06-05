@@ -133,7 +133,7 @@ namespace MvcDynamicForms
         /// Validates each InputField object contained in the Fields collection. Validation also causes the Error property to be set for each InputField object.
         /// </summary>
         /// <returns>Returns true if every InputField object is valid. False is returned otherwise.</returns>
-        public bool Validate(string DateFormat,string RequiredFieldsList = "" )
+        public bool Validate(string RequiredFieldsList = "" )
         {
             bool isValid = true;
              
@@ -167,7 +167,7 @@ namespace MvcDynamicForms
                     field.Required = false;
                 }
               
-                if (!field.Validate(DateFormat))
+                if (!field.Validate())
                 {
                     isValid = false;
                 }

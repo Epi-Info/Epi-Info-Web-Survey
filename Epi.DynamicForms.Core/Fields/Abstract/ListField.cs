@@ -224,7 +224,7 @@ namespace MvcDynamicForms.Fields
                 }
             }
         
-        public override bool Validate(string DateFormat)
+        public override bool Validate()
         {
             if (Required && !_choices.Values.Contains(true))
             {
