@@ -246,7 +246,7 @@ namespace MvcDynamicForms
                 if (!string.IsNullOrEmpty(field.Name))
                 {
                     field.Form = this;
-                    _fields.Add(field.Name, field);
+                    _fields.Add(field.Name.ToLower(), field);
                 }
             }
         }
