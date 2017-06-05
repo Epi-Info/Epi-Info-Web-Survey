@@ -83,8 +83,9 @@
         $("#myform").submit();
     }
     function ChangeDatePickerFormat(dateformat) {
+        
         dateformat = dateformat.toLocaleLowerCase().toString();      
-        $(".IsDate").datepicker("option", "dateFormat", dateformat);
+        $("#" + this.id).datepicker("option", "dateFormat", dateformat);
 
     }
 
