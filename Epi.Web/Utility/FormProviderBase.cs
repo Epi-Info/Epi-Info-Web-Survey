@@ -115,7 +115,8 @@ namespace Epi.Web.MVC.Utility
 
             foreach (KeyValuePair<string, string> kvp in fieldValues)
             {
-                if (form.Fields.Keys.Contains(kvp.Key))
+                var NewList = form.Fields.Keys.ToList().ConvertAll(d => d.ToLower());
+                if (NewList.Contains(kvp.Key))
                 {
                     Field field = form.Fields[kvp.Key];
 
@@ -1218,7 +1219,7 @@ namespace Epi.Web.MVC.Utility
                     if (field != null)
                     {
                         field.IsPlaceHolder = true;
-                        form.Fields.Add(field.Name, field);
+                        form.Fields.Add(field.Name.ToLower(), field);
                     }
                 }
             }
