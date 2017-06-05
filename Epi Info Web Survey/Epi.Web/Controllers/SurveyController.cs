@@ -428,7 +428,7 @@ namespace Epi.Web.MVC.Controllers
                             actionResult = View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, form);
                             return actionResult;
                         }
-                        else if (form.Validate(form.CurrentCultureDateFormat,form.RequiredFieldsList))
+                        else if (form.Validate(form.RequiredFieldsList))
                         {
                             if (!string.IsNullOrEmpty(Submitbutton))
                             {

@@ -128,7 +128,7 @@ namespace MvcDynamicForms.Fields
         /// Validates the user's response.
         /// </summary>
         /// <returns></returns>
-        public abstract bool Validate(string DateFormat);
+        public abstract bool Validate();
         /// <summary>
         /// Removes the message stored in the Error property.
         /// </summary>

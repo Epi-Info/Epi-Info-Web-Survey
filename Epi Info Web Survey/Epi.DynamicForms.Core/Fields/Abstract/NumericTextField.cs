@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -14,7 +15,7 @@ namespace MvcDynamicForms.Fields
     {
         private string _regexMessage = "Invalid";
         private string _ControlValue;
-     
+
         /// <summary>
         /// A regular expression that will be applied to the user's text respone for validation.
         /// </summary>
@@ -62,7 +63,7 @@ namespace MvcDynamicForms.Fields
         /// Server Side validation for Numeric TextBox  
         /// </summary>
         /// <returns></returns>
-        public override bool Validate(string DateFormat)
+        public override bool Validate()
         {
             if (ReadOnly)
             {
@@ -71,11 +72,11 @@ namespace MvcDynamicForms.Fields
                 return true;
             }
 
-            if (Response == null || (Response.IndexOf("_") != -1) ||((Response.IndexOf(".") != -1 && Response.Length ==1)))
+            if (Response == null || (Response.IndexOf("_") != -1) || ((Response.IndexOf(".") != -1 && Response.Length == 1)))
             {
                 Response = string.Empty;
             }
-            
+
             if (string.IsNullOrEmpty(Response))
             {
                 if (Required)
@@ -93,14 +94,16 @@ namespace MvcDynamicForms.Fields
                  This will be usefull in money related fields or decimal fields. (www.regexlib.com)  */
                 /*** Matches  .568 | 8578 | 1234567.1234567 ****/
                 /**** Non-Matches: 568. | 56.89.36 | 5.3.6.9.6 *****/
-               // string regularExp = "^([0-9]*|\\d*\\.\\d{1}?\\d*)$";
-               //string regularExp = "^-?([0-9]*|\\d*\\.\\d{1}?\\d*)$";
-               // var regex = new Regex(regularExp);
+                // string regularExp = "^([0-9]*|\\d*\\.\\d{1}?\\d*)$";
+                //string regularExp = "^-?([0-9]*|\\d*\\.\\d{1}?\\d*)$";
+                // var regex = new Regex(regularExp);
 
                 //if (!regex.IsMatch(Value))
-                
+
                 double testValue = 0.0;
-                if(!double.TryParse(Response, out testValue))
+                CultureInfo us = new CultureInfo("en-US");
+
+                if (!double.TryParse(Response, NumberStyles.Any, CultureInfo.InvariantCulture, out testValue))
                 {
                     //invalid: it is not numeric
                     Error = "Value must be a number";
@@ -143,7 +146,7 @@ namespace MvcDynamicForms.Fields
 
         }
 
-       
+
 
 
 
