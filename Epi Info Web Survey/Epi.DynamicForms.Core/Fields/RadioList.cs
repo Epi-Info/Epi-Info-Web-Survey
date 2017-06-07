@@ -84,8 +84,8 @@ namespace MvcDynamicForms.Fields
 
                 if (TopLeft.Count > 0)
                 {
-                    innerTop = double.Parse(TopLeft[0]) * Height;
-                    innerLeft = double.Parse(TopLeft[1]) * Width;
+                    innerTop = double.Parse(TopLeft[0].ToString()) * Height;
+                    innerLeft = double.Parse(TopLeft[1].ToString()) * Width;
                 }
 
                 TagBuilder divTag = new TagBuilder("div");
