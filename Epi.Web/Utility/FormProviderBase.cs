@@ -1300,11 +1300,12 @@ namespace Epi.Web.MVC.Utility
                         case "17":
 
                             string DropDownValues1 = "";
-                          
+                            if (SourceTableList != null)
+                            {
                                 var SourceTableXml1 = SourceTableList.Where(x => x.TableName == fieldElement.Attribute("SourceTableName").Value).Select(y => y.TableXml).ToList();
 
                                 DropDownValues1 = GetDropDownValues(XDocument.Parse(SourceTableXml1[0].ToString()), fieldElement.Attribute("Name").Value, fieldElement.Attribute("SourceTableName").Value, fieldElement.Attribute("CodeColumnName").Value, SourceTableList);
-                            
+                          }
                             var _DropDownSelectedValue1 = Value;
                             form.AddFields(GetDropDown(fieldElement, _Width, _Height, xdocResponse, _DropDownSelectedValue1, DropDownValues1, 17, form));
 
