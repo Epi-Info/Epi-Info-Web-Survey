@@ -117,7 +117,7 @@ namespace MvcDynamicForms.Fields
                 if (FunctionObjectAfter != null && !FunctionObjectAfter.IsNull())
                 {
                     //radioTag.Attributes.Add("onchange", "$('#" + inputName + "').parent().next().find('input[type=hidden]')[0].value='" + i.ToString() + "'; return " + _key + "_after();"); //After
-                    radioTag.Attributes.Add("onclick", "$('#" + inputName + "').val('" + i.ToString() + "');return " + _key + "_after();");
+                    radioTag.Attributes.Add("onchange", "$('#" + inputName + "').val('" + i.ToString() + "');return " + _key + "_after();");
                     IsAfterControl = true;
                 }
                 if (FunctionObjectClick != null && !FunctionObjectClick.IsNull())
