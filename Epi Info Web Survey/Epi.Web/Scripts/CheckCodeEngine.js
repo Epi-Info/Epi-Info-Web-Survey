@@ -457,15 +457,23 @@ CCE_Context.prototype.getValue = function (pName)
                         return value;
                     case "numeric": //string has been converted to number to compare with another number
                         value = new Number(field.val()).valueOf();
-//                        if(value == "")
-//                        {
-//                            return null;
-//                        }
-//                        else
-//                        {
-//                            return value;
-//                        }
-                        return value;
+                       
+                        if (value == "" || isNaN(value))
+                        {
+                            if (value==0)
+                            {
+                                return value;
+                            }
+                            else
+                            {
+                                return null;
+                            }
+                        }
+                        else
+                        {
+                            return value;
+                        }
+                        
                     case "radiobutton":
                        var RadiofieldName = "." + fieldName;
                          
@@ -615,8 +623,27 @@ CCE_Context.prototype.setValue = function (pName, pValue) {
                         cce_Symbol.Value = FormatedTime;
                     }
                     else {
-                        $(Jquery).timepicker("setTime", new Date(pValue));
-                        cce_Symbol.Value = pValue;
+                       
+                        var str = cce_Symbol.Value.toString();
+                        //var nincluded= str.includes(":");
+                        var array = str.split(':');
+                        if (array != null && array.length>1)
+                        {
+                             
+                             $(Jquery).val(cce_Symbol.Value)
+                            // $(Jquery).timepicker("set   cce_Symbol.Value = pValue;
+                            cce_Symbol.Value = pValue;
+                          }
+                        else {
+                            
+                            var FormatedTime;
+                            var date = new Date(cce_Symbol.Value);
+                            FormatedTime = FormatTime(date);
+                           
+                            $(Jquery).val(FormatedTime);
+                            cce_Symbol.Value = FormatedTime;
+                           }
+                       
                     }
                     break;
 
@@ -909,22 +936,29 @@ Rule_Hide.prototype.Execute = function ()
                     break;
                     }
    }else{
-           if(symbol.Type == "radiobutton")
-            {
-                query = '.labelmvcdynamicfield_' + pCheckCodeList[i];
-                $(query).each(function(i, obj) 
-                {
-                    $(query).css("background-color","yellow");
-                });
-            }
-            else
-            {
+               switch (symbol.Type) {
+                   case "radiobutton":
 
-             $(query).css("background-color","yellow");
-             query = '#labelmvcdynamicfield_' + pCheckCodeList[i];
-            
-            
-             }
+                       query = '.labelmvcdynamicfield_' + pCheckCodeList[i];
+                       $(query).each(function (i, obj) {
+                           $(query).css("background-color", "yellow");
+                       });
+
+                       break;
+                   case "checkbox":
+
+                       query = '#labelmvcdynamicfield_' + pCheckCodeList[i];
+                      
+                       $(query).css("background-color", "yellow");
+                      
+                       break;
+
+
+                   default:
+                       $(query).css("background-color", "yellow");
+                       //query = '#labelmvcdynamicfield_' + pCheckCodeList[i];
+                       break;
+               }
 }
  
               CCE_AddToFieldsList(pCheckCodeList[i], 'HighlightedFieldsList');
@@ -1056,21 +1090,28 @@ if (eval(document.getElementById("IsMobile"))){
                     break;
                     }
 }else{
-           if(symbol.Type == "radiobutton")
-            {
-                query = '.labelmvcdynamicfield_' + pCheckCodeList[i];
-                $(query).each(function(i, obj) 
-                {
-                  $(query).css("background-color", "");
-                });
-            }
-            else
-            {
+    switch (symbol.Type) {
+        case "radiobutton":
+
+            query = '.labelmvcdynamicfield_' + pCheckCodeList[i];
+            $(query).each(function (i, obj) {
                 $(query).css("background-color", "");
-               
-                 query = '#labelmvcdynamicfield_' + pCheckCodeList[i];
-                 //CCE_AddToHilightedFieldsList(pCheckCodeList[i]);
-             }
+            });
+            break;
+        case "checkbox":
+
+            query = '#labelmvcdynamicfield_' + pCheckCodeList[i];
+            $(query).css("background-color", "");
+
+            break;
+
+
+        default:
+            $(query).css("background-color", "");
+
+            //query = '#labelmvcdynamicfield_' + pCheckCodeList[i];
+            break;
+    }
         }
  
              CCE_RemoveFromFieldsList(pCheckCodeList[i], 'HighlightedFieldsList');
@@ -1176,21 +1217,32 @@ if (eval(document.getElementById("IsMobile"))){
                     var checkboxcontrolId = '#mvcdynamicfield_' + pCheckCodeList[i] ;
                      $(checkboxcontrolId).attr("disabled", true);
                      $(Labelquery).css("color", "LightGray")
+                     break;
+               case "yesno":
+               case "legalvalues":
+               case "commentlegal":
+                  //  $(query).selectmenu();
+                   // $(query).selectmenu('disable');
+                   $(query).attr("disabled", "disabled");
                     break;
-                case "legalvalues":
-                    $(query).selectmenu('disable');
-                    break;
-                case "yesno":
-                    $(query).selectmenu('disable');
-                    break;
-                case "commentlegal":
-                    $(query).selectmenu('disable');
-                    break;
+              // case "yesno":
+              //    //  $(query).selectmenu();
+              //      $(query).selectmenu('disable');
+              //      break;
+              //case "commentlegal":
+              //     // $(query).selectmenu();
+              //      $(query).selectmenu('disable');
+                   //      break;
+               case "label":
+                      break;
                case "datepicker":
                      $(query).datebox('disable');
                       break;
                 case "timepicker":
                     $(query).datebox('disable');
+                    break;
+                case "relatebutton":
+                    $(query).button('disable');
                     break;
                 //case "groupbox":
                   // break;
@@ -1313,15 +1365,21 @@ query = '#mvcdynamicfield_' + pCheckCodeList[i];
                        
 
                     break;
+                case "yesno":
                 case "legalvalues":
-                    $(query).selectmenu('enable');
-                    break;
-               case "yesno":
-                    $(query).selectmenu('enable');
-                    break;
                 case "commentlegal":
-                    $(query).selectmenu('enable');
+                   // $(query).selectmenu();
+                    //$(query).selectmenu('enable');
+                    $(query).attr('disabled', false);
                     break;
+       //case "yesno":
+       //            // $(query).selectmenu();
+       //             $(query).selectmenu('enable');
+       //             break;
+       //case "commentlegal":
+       //           //  $(query).selectmenu();
+       //             $(query).selectmenu('enable');
+       //             break;
                case "datepicker":
                      $(query).datebox('enable');
                       break;
@@ -1330,6 +1388,11 @@ query = '#mvcdynamicfield_' + pCheckCodeList[i];
                     break;
                case "groupbox":
                    
+                   break;
+               case "relatebutton":
+                   $(query).button('enable');
+                   break;
+              case "label":
                     break;
                 default:
                     $(query).textinput('enable');
@@ -1591,7 +1654,8 @@ function CCE_RemoveFromFieldsList(FieldName,ListName) {
                                          {  
                                            $(controlId).val('');
                                            if  (!IsHidden)
-                                                 {
+                                           {
+                                               $(controlId).selectmenu();
                                                  $(controlId).selectmenu('refresh');
                                                  }
                                          }
@@ -1604,7 +1668,8 @@ function CCE_RemoveFromFieldsList(FieldName,ListName) {
                                          
                                           $(controlId).val('');
                                           if  (!IsHidden)
-                                                 {
+                                          {
+                                              $(controlId).selectmenu();
                                                  $(controlId).selectmenu('refresh');
                                                  }
 
@@ -1618,7 +1683,8 @@ function CCE_RemoveFromFieldsList(FieldName,ListName) {
                                          {  
                                            $(controlId).val('');
                                          if  (!IsHidden)
-                                                 {
+                                         {
+                                             $(controlId).selectmenu();
                                                  $(controlId).selectmenu('refresh');
                                                  }
                                          }
@@ -1666,9 +1732,12 @@ function CCE_RemoveFromFieldsList(FieldName,ListName) {
  {
      if (parseInt(controlOrPage) == controlOrPage) 
      {
-         var currentUrl = window.location.href;
+         var currentUrl = location.href;
          //get the url in the format of http://localhost/<Server>/survey/<ResponseID>
+         var StringArray = currentUrl.split('?')
+         currentUrl = StringArray[0];
          currentUrl = processUrl(currentUrl, 'RedirectionUrl', "");
+        
          $("#myform")[0].action = currentUrl + "/" + controlOrPage;
          $("#myform")[0].is_goto_action.value = 'true';
          //detach the validation engine as we don't want to validate data to go to another page as directed by check code
@@ -2374,13 +2443,16 @@ function CCE_ProcessEnableAllControls(List)
                                     $(query).checkboxradio('enable');
                                       $(Labelquery).css("color","Black")
                                     break;
-                                case "legalvalues":
+                       case "legalvalues":
+                                    $(query).selectmenu();
                                     $(query).selectmenu('enable');
                                     break;
-                               case "yesno":
+                       case "yesno":
+                                    $(query).selectmenu();
                                     $(query).selectmenu('enable');
                                     break;
-                                case "commentlegal":
+                       case "commentlegal":
+                                    $(query).selectmenu();
                                     $(query).selectmenu('enable');
                                     break;
                                case "datepicker":
@@ -2487,5 +2559,82 @@ function CreateHiddenField(pFieldName, pFieldType)
     }
  
 }
+//Check the form values has changed 
+function CCE_HasFormValuesChanged() 
+{
+   // alert(num);
+   // var count = Object.size(cce_Context.symbolTable);
+    var obj = cce_Context.symbolTable;
+    //for (var i = 0; i < count; i++)
+    var key;
+    for (key in obj)
+         {
+             var symbol = obj[key];
+             var symbol_name = key.toLowerCase();  //symbol.Name.toLowerCase();
+             var symbol_value;
+             symbol_value = symbol.Value;
+           
 
+            if (symbol.Source == "datasource")
+             {
+                var HasChanged = false;
+                if (eval(document.getElementById("mvcdynamicfield_" + symbol_name.toString()))) {
+                    var ControlName = '#mvcdynamicfield_' + symbol_name;
+                    var CurrentValue;
+
+
+                    if (symbol.Type == "checkbox") {
+                        var isChecked = $(ControlName).prop('checked');
+                        //alert("isChecked:   " + isChecked + "  symbol_value:" + symbol_value);
+                         
+                        if (isChecked)
+                        {
+                         CurrentValue ="Yes";
+                        }
+                        else
+                        {
+                            CurrentValue = "No";
+                        }
+                        
+                        if (symbol_value.toString().toLowerCase() == "true" || symbol_value.toString().toLowerCase() == "yes") {
+                            symbol_value = "Yes";
+                        }
+                        // if (symbol_value == "false" || symbol_value == "no")
+                       else
+                         {
+                            symbol_value = "No";
+                        }
+                         
+                    }
+                    else 
+                    {
+
+                        CurrentValue = $(ControlName).val();
+                    }
+
+
+                    if (CurrentValue != symbol_value) 
+                       {
+                            HasChanged = true;
+                       
+                        }
+
+
+                        if (HasChanged)
+                         {
+                             $('#FormHasChanged').val('True');
+                            // alert($('#FormHasChanged').val());
+                        }
+                    }
+             }
+         
+        }// for loop
+    }
+ 
+
+
+  
+
+
+        
 cce_Context = new CCE_Context();
