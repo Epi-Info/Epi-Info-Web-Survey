@@ -224,7 +224,12 @@ namespace Epi.Web.MVC.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Index(SurveyAnswerModel surveyAnswerModel, string Submitbutton, string Savebutton, string ContinueButton, string PreviousButton, int PageNumber = 0)
-        {            
+        {
+            CultureInfo currentCulture = Thread.CurrentThread.CurrentCulture;
+            string DateFormat = currentCulture.DateTimeFormat.ShortDatePattern;
+            DateFormat = DateFormat.Remove(DateFormat.IndexOf("y"), 2);
+           
+
             ActionResult actionResult = null;
             bool IsAndroid = false;
             
@@ -262,7 +267,9 @@ namespace Epi.Web.MVC.Controllers
                         break;
                         
                     default:
-                        MvcDynamicForms.Form form;    
+                        MvcDynamicForms.Form form= new MvcDynamicForms.Form();
+                        form.CurrentCultureDateFormat = DateFormat;
+
                         int CurrentPageNum = GetSurveyPageNumber(SurveyAnswer.XML.ToString());
                         int NewPageNumber;
 
