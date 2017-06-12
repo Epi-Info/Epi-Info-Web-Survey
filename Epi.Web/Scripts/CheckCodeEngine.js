@@ -1880,7 +1880,7 @@ function CCE_ContextOpenMobileSimpleDialogBox(Title,Prompt,id)
         var passcode1 = '@Model.PassCode';
    
      
-                         $('#'+ id).simpledialog2({
+                         $('#'+ id).simpledialog({
                 //'mode' : 'blank',
                 //'headerText' : Title,
                 //'headerClose' : true,
@@ -1914,7 +1914,7 @@ function CCE_ContextOpenMobileSimpleDialogBox(Title,Prompt,id)
 function CCE_CloseMobileSimpleDialogBox(id) 
 {
         
-        $(id).simpledialog2('close');
+        $(id).simpledialog('close');
        
 }
 
