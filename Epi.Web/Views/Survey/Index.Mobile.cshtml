@@ -399,7 +399,8 @@
 
         $(this).simpledialog({
             'mode': 'blank',
-            'prompt': false,
+            'headerText': "Close1",
+         //   'prompt': "tste",
             'forceInput': false,
             'useModal': true,
             'buttons': {
@@ -410,11 +411,9 @@
                 }
 
             },
-
-
             'fullHTML': "<div id=\"exitdialog\" title=\"Exit Survey\" ><p style=\"font-size:1.20em; font-weight:600;\">Are you sure you want to exit this Survey? </p><p style=\"font-size:1.20em; font-weight:300;\">Any unsaved changes will be lost!<br /></p><p><div align='right'> <a  onclick ='ExitSurvey();'  class='login'  style='width:50px; padding:8px 15px !important;'>Exit Survey</a>        <a class='login'  style='width:50px; padding:8px 15px !important;'rel='close'   id='simpleclose'>Cancel</a></div></p>"
         })
-
+       
     });
 
 
@@ -456,6 +455,41 @@
 
         return string.replace(/&amp;/g, "&").replace(/&gt;/g, ">").replace(/&lt;/g, "<").replace(/&quot;/g, "\"").replace(/&#39;/g, "'");
     }
+
+
+    function SetCodes_Val(obj, SurveyId, TableName) {
+
+
+        var signoutUrl = '@Url.Action("GetCodesValue","Survey")' + '?SourceTableName=' + TableName + '&SelectedValue=' + obj.value + '&SurveyId=' + SurveyId;
+
+        $.ajax({
+            url: signoutUrl,
+            type: 'GET',
+            contentType: 'application/json; charset=utf-8',
+            dataType: "json",
+            async: false,
+            success: successFunc,
+            error: errorFunc
+        });
+
+
+        function successFunc(data, status) {
+
+            $.each(data, function (key, value) {
+                var Query = "#mvcdynamicfield_" + key;
+                // alert(Query);
+                $(Query).val(value);
+            });
+        }
+
+        function errorFunc() {
+            alert('error');
+        }
+
+
+    }
+
+
 </script>
 
 <div id="header">
