@@ -39,7 +39,7 @@ namespace MvcDynamicForms.Fields
             if (!IsValid)
             {
                 ErrorStyle = ";border-color: red";
-                
+
             }
 
             // input element
@@ -51,10 +51,10 @@ namespace MvcDynamicForms.Fields
             txt.Attributes.Add("value", NewDateFormat);
 
             if (FunctionObjectBefore != null && !FunctionObjectBefore.IsNull())
-            { 
+            {
                 txt.Attributes.Add("onfocus", "return " + _key + "_before();"); //Before
             }
-                       
+
             if (_MaxLength.ToString() != "0" && !string.IsNullOrEmpty(_MaxLength.ToString()))
             {
                 txt.Attributes.Add("MaxLength", _MaxLength.ToString());
@@ -69,7 +69,7 @@ namespace MvcDynamicForms.Fields
             {
                 IsHighlightedStyle = "background-color:yellow";
             }
-             
+
             //if (_IsDisabled)
             //{
             //    txt.Attributes.Add("disabled", "disabled");
@@ -77,19 +77,19 @@ namespace MvcDynamicForms.Fields
             txt.Attributes.Add("class", GetControlClass(Response));
 
             string InputFieldStyle = GetInputFieldStyle(_InputFieldfontstyle.ToString(), _InputFieldfontSize, _InputFieldfontfamily.ToString());
-            txt.Attributes.Add("style", "position:absolute;left:" + _left.ToString() + "px;top:" + _top.ToString() + "px" + ";width:" + _ControlWidth.ToString() + "px" + ErrorStyle + ";" + IsHiddenStyle + ";" + IsHighlightedStyle + ";" + InputFieldStyle);            
+            txt.Attributes.Add("style", "position:absolute;left:" + _left.ToString() + "px;top:" + _top.ToString() + "px" + ";width:" + _ControlWidth.ToString() + "px" + ErrorStyle + ";" + IsHiddenStyle + ";" + IsHighlightedStyle + ";" + InputFieldStyle);
 
             txt.MergeAttributes(_inputHtmlAttributes);
             html.Append(txt.ToString(TagRenderMode.SelfClosing));
 
             // If readonly then add the following jquery script to make the field disabled 
             if (ReadOnly || _IsDisabled)
-                {
+            {
                 var scriptReadOnlyText = new TagBuilder("script");
                 //scriptReadOnlyText.InnerHtml = "$(function(){$('#" + inputName + "').attr('disabled','disabled')});";
                 scriptReadOnlyText.InnerHtml = "$(function(){  var List = new Array();List.push('" + _key + "');CCE_Disable(List, false);});";
                 html.Append(scriptReadOnlyText.ToString(TagRenderMode.Normal));
-                }
+            }
             // adding scripts for date picker
             var scriptDatePicker = new TagBuilder("script");
             //scriptDatePicker.InnerHtml = "$(function() { $('#" + inputName + "').datepicker({changeMonth: true,changeYear: true});});";
@@ -100,11 +100,11 @@ namespace MvcDynamicForms.Fields
             var MaxYear = 10;
             if (!string.IsNullOrEmpty(Lower) && !string.IsNullOrEmpty(Upper))
             {
-                int Year_Lower = GetYear(Lower,Pattern);
+                int Year_Lower = GetYear(Lower, Pattern);
                 int Year_Upper = GetYear(Upper, Pattern);
 
                 MinYear = -(DateTime.Now.Year - Year_Lower);
-                MaxYear =Year_Upper - DateTime.Now.Year ;
+                MaxYear = Year_Upper - DateTime.Now.Year;
             }
             if (FunctionObjectAfter != null && !FunctionObjectAfter.IsNull())
             {
@@ -117,9 +117,9 @@ namespace MvcDynamicForms.Fields
             {
                 scriptDatePicker.InnerHtml = "$('#" + inputName + "').datepicker({changeMonth: true,changeYear: true,yearRange:'" + MinYear + ":+" + MaxYear + "'});";
             }
-             html.Append(scriptDatePicker.ToString(TagRenderMode.Normal));
+            html.Append(scriptDatePicker.ToString(TagRenderMode.Normal));
 
-           
+
 
             var scriptDatePicker1 = new TagBuilder("script");
             scriptDatePicker1.InnerHtml = "$('#" + inputName + "').change(function() { ChangeDatePickerFormat('" + DateFormat + "');});";
@@ -154,12 +154,12 @@ namespace MvcDynamicForms.Fields
             ControlClass.Append("IsDate validate[");
 
 
-            if ((!string.IsNullOrEmpty(GetRightDateFormat(Lower,Pattern).ToString()) && (!string.IsNullOrEmpty(GetRightDateFormat(Upper,Pattern).ToString()))))
+            if ((!string.IsNullOrEmpty(GetRightDateFormat(Lower, Pattern).ToString()) && (!string.IsNullOrEmpty(GetRightDateFormat(Upper, Pattern).ToString()))))
             {
 
                 //   ControlClass.Append("customDate[date],future[" + GetRightDateFormat(Lower).ToString() + "],past[" + GetRightDateFormat(Upper).ToString() + "],");
                 //dateRange
-                ControlClass.Append("customDate[date],datePickerRange, " + GetRightDateFormat(Lower,Pattern).ToString() + "," + GetRightDateFormat(Upper,Pattern).ToString() + ",");
+                ControlClass.Append("customDate[date],datePickerRange, " + GetRightDateFormat(Lower, Pattern).ToString() + "," + GetRightDateFormat(Upper, Pattern).ToString() + ",");
                 if (Required == true)
                 {
 
@@ -185,11 +185,11 @@ namespace MvcDynamicForms.Fields
                 }
                 return ControlClass.ToString();
             }
-         
+
 
         }
 
-        public string GetRightDateFormat(string Date, string patternIn,string patternOut ="")
+        public string GetRightDateFormat(string Date, string patternIn, string patternOut = "")
         {
             StringBuilder NewDateFormat = new StringBuilder();
 
@@ -201,7 +201,7 @@ namespace MvcDynamicForms.Fields
             {
                 if (Date.Contains('-'))
                 {
-                    splitChar=' ';
+                    splitChar = ' ';
                     splitChar = '-';
                 }
                 else
@@ -225,12 +225,14 @@ namespace MvcDynamicForms.Fields
                 }
                 if (string.IsNullOrEmpty(patternOut))
                 {
-                NewDateFormat.Append(YYYY);
-                NewDateFormat.Append('/');
-                NewDateFormat.Append(MM);
-                NewDateFormat.Append('/');
-                NewDateFormat.Append(DD);
-                }else{
+                    NewDateFormat.Append(YYYY);
+                    NewDateFormat.Append('/');
+                    NewDateFormat.Append(MM);
+                    NewDateFormat.Append('/');
+                    NewDateFormat.Append(DD);
+                }
+                else
+                {
                     switch (patternOut.ToString())
                     {
                         case "dd/mm/yyyy":
@@ -255,12 +257,114 @@ namespace MvcDynamicForms.Fields
                             NewDateFormat.Append(YYYY);
                             break;
                         case "M/d/yy":
-                             NewDateFormat.Append(MM);
+                            NewDateFormat.Append(MM);
                             NewDateFormat.Append('/');
                             NewDateFormat.Append(DD);
                             NewDateFormat.Append('/');
                             NewDateFormat.Append(YYYY);
                             break;
+                        case "yy/MM/dd":
+                            NewDateFormat.Append(YYYY);
+                            NewDateFormat.Append('/');
+                            NewDateFormat.Append(MM);
+                            NewDateFormat.Append('/');
+                            NewDateFormat.Append(DD);
+                            break;
+                        case "d/M/yy":
+                            NewDateFormat.Append(DD);
+                            NewDateFormat.Append('/');
+                            NewDateFormat.Append(MM);
+                            NewDateFormat.Append('/');
+                            NewDateFormat.Append(YYYY);
+                            break;
+                        //.
+                        case "dd.mm.yyyy":
+                            NewDateFormat.Append(DD);
+                            NewDateFormat.Append('.');
+                            NewDateFormat.Append(MM);
+                            NewDateFormat.Append('.');
+                            NewDateFormat.Append(YYYY);
+                            break;
+                        case "dd.MM.yy":
+                            NewDateFormat.Append(DD);
+                            NewDateFormat.Append('.');
+                            NewDateFormat.Append(MM);
+                            NewDateFormat.Append('.');
+                            NewDateFormat.Append(YYYY);
+                            break;
+                        case "d.M.yy":
+                            NewDateFormat.Append(DD);
+                            NewDateFormat.Append('.');
+                            NewDateFormat.Append(MM);
+                            NewDateFormat.Append('.');
+                            NewDateFormat.Append(YYYY);
+                            break;
+
+                        case "mm.dd.yyyy":
+                            NewDateFormat.Append(MM);
+                            NewDateFormat.Append('.');
+                            NewDateFormat.Append(DD);
+                            NewDateFormat.Append('.');
+                            NewDateFormat.Append(YYYY);
+                            break;
+                        case "M.d.yy":
+                            NewDateFormat.Append(MM);
+                            NewDateFormat.Append('.');
+                            NewDateFormat.Append(DD);
+                            NewDateFormat.Append('.');
+                            NewDateFormat.Append(YYYY);
+                            break;
+                        case "yy.MM.dd":
+                            NewDateFormat.Append(YYYY);
+                            NewDateFormat.Append('.');
+                            NewDateFormat.Append(MM);
+                            NewDateFormat.Append('.');
+                            NewDateFormat.Append(DD);
+                            break;
+                        //-
+                        case "dd-mm-yyyy":
+                            NewDateFormat.Append(DD);
+                            NewDateFormat.Append('-');
+                            NewDateFormat.Append(MM);
+                            NewDateFormat.Append('-');
+                            NewDateFormat.Append(YYYY);
+                            break;
+                        case "dd-MM-yy":
+                            NewDateFormat.Append(DD);
+                            NewDateFormat.Append('-');
+                            NewDateFormat.Append(MM);
+                            NewDateFormat.Append('-');
+                            NewDateFormat.Append(YYYY);
+                            break;
+                        case "mm-dd-yyyy":
+                            NewDateFormat.Append(MM);
+                            NewDateFormat.Append('-');
+                            NewDateFormat.Append(DD);
+                            NewDateFormat.Append('-');
+                            NewDateFormat.Append(YYYY);
+                            break;
+                        case "M-d-yy":
+                            NewDateFormat.Append(MM);
+                            NewDateFormat.Append('-');
+                            NewDateFormat.Append(DD);
+                            NewDateFormat.Append('-');
+                            NewDateFormat.Append(YYYY);
+                            break;
+                        case "yy-MM-dd":
+                            NewDateFormat.Append(YYYY);
+                            NewDateFormat.Append('-');
+                            NewDateFormat.Append(MM);
+                            NewDateFormat.Append('-');
+                            NewDateFormat.Append(DD);
+                            break;
+                        case "d-M-yy":
+                            NewDateFormat.Append(DD);
+                            NewDateFormat.Append('-');
+                            NewDateFormat.Append(MM);
+                            NewDateFormat.Append('-');
+                            NewDateFormat.Append(YYYY);
+                            break;
+
                     }
                 }
             }
