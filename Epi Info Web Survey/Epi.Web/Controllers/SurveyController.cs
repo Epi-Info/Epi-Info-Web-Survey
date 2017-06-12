@@ -458,9 +458,14 @@ namespace Epi.Web.MVC.Controllers
                                 SurveyAnswer = _isurveyFacade.GetSurveyAnswerResponse(responseId).SurveyResponseList[0];
                                 SurveyAnswer.IsDraftMode = surveyInfoModel.IsDraftMode;
                                 UpdateModel(form);
+
+
+                                SourceTablesResponse SourceTables = _isurveyFacade.GetSourceTables(form.SurveyInfo.SurveyId);
+                                
+                                
                                 for (int i = 1; i < form.NumberOfPages+1; i++)
                                 {
-                                    form = Epi.Web.MVC.Utility.FormProvider.GetForm(form.SurveyInfo, i, SurveyAnswer, isMobileDevice);
+                                    form = Epi.Web.MVC.Utility.FormProvider.GetForm(form.SurveyInfo, i, SurveyAnswer, isMobileDevice,IsAndroid,SourceTables.List);
 
                                     if (!form.Validate(form.RequiredFieldsList))
                                     {
@@ -684,7 +689,7 @@ namespace Epi.Web.MVC.Controllers
 
                             formRs = Epi.Web.MVC.Utility.SurveyHelper.UpdateControlsValues(formRs, name, value);
 
-                            _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, SurveyAnswer.ResponseId, formRs, SurveyAnswer, false, false, i);
+                            _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, SurveyAnswer.ResponseId, formRs, SurveyAnswer, false, true, i);
 
                         }
                     }

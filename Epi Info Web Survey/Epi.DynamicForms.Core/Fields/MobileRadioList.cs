@@ -59,8 +59,8 @@ namespace MvcDynamicForms.Fields
 
                     if (TopLeft.Count > 0)
                     {
-                        innerTop = double.Parse(TopLeft[0]) * Height;
-                        innerLeft = double.Parse(TopLeft[1]) * Width;
+                        innerTop = ParseDouble(TopLeft[0]) * Height;
+                        innerLeft = ParseDouble(TopLeft[1]) * Width;
                     }
                 }
 

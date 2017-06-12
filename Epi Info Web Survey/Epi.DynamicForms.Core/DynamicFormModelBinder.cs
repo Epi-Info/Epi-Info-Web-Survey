@@ -33,6 +33,11 @@ namespace MvcDynamicForms
                             var txtField = (AutoComplete)dynField;
                             txtField.Response = postedForm[key].TrimEnd(',');
                         }
+                        else if (dynField is MobileAutoComplete)
+                        {
+                            var AutoCompleteField = (MobileAutoComplete)dynField;
+                            AutoCompleteField.Response = postedForm[key].TrimEnd(',');
+                        }
                         else  if (dynField is TextField)
                         {
                             var txtField = (TextField)dynField;
@@ -147,11 +152,7 @@ namespace MvcDynamicForms
                                 chkField.Checked = test;
                             }
                         }
-                        else if (dynField is AutoComplete)
-                        {
-                            var AutoCompleteField = (AutoComplete)dynField;
-                            AutoCompleteField.Value = postedForm[key];
-                        }
+                        
                     }
                 }
                 catch (System.InvalidOperationException ex)
