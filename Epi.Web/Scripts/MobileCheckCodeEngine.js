@@ -1140,7 +1140,7 @@ function CCE_ContextOpenSimpleDialogBox(Title,Prompt,id)
 function CCE_CloseSimpleDialogBox(id) 
 {
         
-        $(id).simpledialog('close');
+        $(id).simpledialog2('close');
        
 }
 
