@@ -108,7 +108,7 @@ namespace Epi.Web.MVC.Utility
                     }
 
 
-                    AddFormFields(pageNumber, form, surveyAnswer, SourceTableList);
+                    AddFormFields(pageNumber, form, surveyAnswer, SourceTableList,isMobile);
                     form.FormJavaScript = VariableDefinitions.ToString() + "\n" + JavaScript.ToString();
 
                 }

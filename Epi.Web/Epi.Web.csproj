@@ -474,6 +474,7 @@
     <Content Include="Scripts\jquery.validationEngine.js" />
     <Content Include="Scripts\knockout-2.0.0.debug.js" />
     <Content Include="Scripts\knockout-2.0.0.js" />
+    <Content Include="Scripts\mobileautocomplete.js" />
     <Content Include="Scripts\MobileCheckCodeEngine.js" />
     <Content Include="Scripts\modernizr-2.0.6-development-only.js" />
     <Content Include="Scripts\PIE.htc" />
@@ -596,7 +597,9 @@
     <Folder Include="obj\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="packages.config" />
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
