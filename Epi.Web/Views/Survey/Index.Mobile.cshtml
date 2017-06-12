@@ -457,10 +457,17 @@
     }
 
 
-    function SetCodes_Val(obj, SurveyId, TableName) {
+    function SetCodes_Val(obj, SurveyId, TableName, AutoComplete) {
 
 
-        var signoutUrl = '@Url.Action("GetCodesValue","Survey")' + '?SourceTableName=' + TableName + '&SelectedValue=' + obj.value + '&SurveyId=' + SurveyId;
+        $('#' + obj.id).val(obj.value);
+        var availableTags = [obj.value];
+        var signoutUrl = "";
+        if (AutoComplete) {
+            signoutUrl = '@Url.Action("GetCodesValue","Survey")' + '?SourceTableName=' + TableName + '&SelectedValue=' + obj + '&SurveyId=' + SurveyId;
+        } else {
+            signoutUrl = '@Url.Action("GetCodesValue","Survey")' + '?SourceTableName=' + TableName + '&SelectedValue=' + obj.value + '&SurveyId=' + SurveyId;
+        }
 
         $.ajax({
             url: signoutUrl,
@@ -489,6 +496,46 @@
 
     }
 
+    function GetAutoComplete_Val(obj, SurveyId, TableName) {
+
+        var availableTags = new Array();
+        var signoutUrl = '@Url.Action("GetAutoCompleteList", "Survey")' + '?SourceTableName=' + TableName + '&SelectedValue=' + obj.value + '&SurveyId=' + SurveyId;
+
+        $.ajax({
+            url: signoutUrl,
+            type: 'GET',
+            contentType: 'application/json; charset=utf-8',
+            dataType: "json",
+            async: false,
+            success: successFunc,
+            error: errorFunc
+        });
+
+
+        function successFunc(data, status) {
+            var Query = "#mvcdynamicfield_" + TableName;
+            $.each(data, function (key, value) {
+                //debugger;
+                availableTags.push(value);
+
+
+            });
+
+            $(Query).autocomplete({
+                source: availableTags,
+                select: function (event, ui) {
+
+                    SetCodes_Val(ui.item.label, SurveyId, TableName, true);
+                },
+            });
+        }
+
+        function errorFunc() {
+            alert('error');
+        }
+
+
+    }
 
 </script>
 
