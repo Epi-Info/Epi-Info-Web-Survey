@@ -775,6 +775,20 @@ CCE_Context.prototype.setValue = function (pName, pValue) {
                     break;
 
                 case "commentlegal":
+                    if (eval(document.getElementById("IsMobile"))) {
+                        if (!IsHidden) {
+                            $(Jquery).val(pValue).attr("selected", true);
+                           // $(Jquery).selectmenu('refresh', true);
+                            cce_Symbol.Value = pValue;
+                        } else {
+                            cce_Symbol.Value = pValue;
+                        }
+                    } else {
+                        $(Jquery).val(pValue);
+                        cce_Symbol.Value = pValue;
+                    }
+                    /// }, 250);
+                    break;
                 case "legalvalues":
                    // setTimeout(function () {
                     if (eval(document.getElementById("IsMobile"))) {
@@ -1866,17 +1880,21 @@ function CCE_ContextOpenMobileSimpleDialogBox(Title,Prompt,id)
         var passcode1 = '@Model.PassCode';
    
      
-                         $('#'+ id).simpledialog({
-                'mode' : 'blank',
-                'headerText' : Title,
-                'headerClose' : true,
-                'dialogAllow' : true,
-                'useDialogForceTrue': true, 
-                'useDialogForceFalse': false,
-
-                'prompt': Title,
-                'forceInput': false,
-                'useModal':true,
+                         $('#'+ id).simpledialog2({
+                //'mode' : 'blank',
+                //'headerText' : Title,
+                //'headerClose' : true,
+                //'dialogAllow' : true,
+                //'useDialogForceTrue': true, 
+                //'useDialogForceFalse': false,
+                //'cleanOnClose': true,
+                //'prompt': Title,
+                //'forceInput': false,
+                             //'useModal':true,
+                             mode: 'button',
+                             headerText: Title,
+                             headerClose: true,
+                             buttonPrompt: Prompt,
                 'buttons' : {
                               'OK': {
                                 click: function () {
@@ -1884,8 +1902,10 @@ function CCE_ContextOpenMobileSimpleDialogBox(Title,Prompt,id)
                                 }
                               }
                        
-                            },
-                       'fullHTML': "<div id='SimpleDialogBox' title='"+ Title +"'><p><label id='SimpleDialogBoxPrempt'>"+ Prompt +"</label></p><p style='text-align:right;'><button  id='SimpleDialogBoxButton' type='button' style='width:100%;'onclick='CCE_CloseMobileSimpleDialogBox("+ id.toString() +");'>Ok</button></p></div>"
+                },
+                icon: "delete",
+                theme: "c"
+                      // 'fullHTML': "<div id='SimpleDialogBox' title='"+ Title +"'><p><label id='SimpleDialogBoxPrempt'>"+ Prompt +"</label></p><p style='text-align:right;'><button  id='SimpleDialogBoxButton' type='button' style='width:100%;'onclick='CCE_CloseMobileSimpleDialogBox("+ id.toString() +");'>Ok</button></p></div>"
                   })
  
  
@@ -1894,7 +1914,7 @@ function CCE_ContextOpenMobileSimpleDialogBox(Title,Prompt,id)
 function CCE_CloseMobileSimpleDialogBox(id) 
 {
         
-        $(id).simpledialog('close');
+        $(id).simpledialog2('close');
        
 }
 
@@ -2117,9 +2137,11 @@ function CCE_ContextOpenSimpleDialogBox(Title,Prompt,id)
         $('.ui-dialog-title').text(Title.toString());
         $('#SimpleDialogBoxPrempt').text(Prompt.toString());
         $('#SimpleDialogBoxButton').text('Ok');
-     setTimeout(function () {
-        $("#SimpleDialogBox").dialog("open");
-      }, 100);
+        setTimeout(function () {
+          
+            $("#SimpleDialogBox").dialog('option', 'title', Title.toString());
+            $("#SimpleDialogBox").dialog("open");
+        }, 100);
      }else{
      
      CCE_ContextOpenMobileSimpleDialogBox(Title,Prompt,id) 

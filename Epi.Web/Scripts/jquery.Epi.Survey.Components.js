@@ -1,35 +1,103 @@
 ﻿
+function PopulateDiv(id, name) {
+  
+}
+
+function FilterRecords(ctrl , OrgId ) {
+    var src = $(ctrl).val();
+      //alert(src);
+    //$("#imagePreview").html(src ? "<img src='" + src + "'>" : "");
+    if (src == 1) {
+        $(".metro-collect").hide();
+        $(".metro-design-Shared").hide();
+        $(".metro-design").show();
+        
+    }
+
+    if (src == 2) {
+        $(".metro-design").hide();
+        $(".metro-design-Shared").hide();
+        $(".metro-collect").show();
+         
+    }
+    if (src == 3) {
+        $(".metro-design").show();
+        $(".metro-collect").show();
+        $(".metro-design-Shared").show();
+    }
+    if(src==4){
+       
+        $(".metro-design-Shared").show();
+        $(".metro-design").hide();
+        $(".metro-collect").hide();
+    }
 
 
-function NotifyByEmail(emailAddress, redirectUrl, surveyName, postUrl, passCode, emailSubject) 
-{
-    var user =
-    {   
-        'emailAddress': emailAddress,
+    $(".NotSelectedOrg").hide();
+}
+
+function FilterRecordsByOrg(src) {
+    //alert("src" + src);
+    $("button[class*='metro-tile']").addClass('NotSelectedOrg');
+    $(".metro-tile2").hide();
+    $(".Org-" + src.toString()).show();
+    $(".Org-" + src.toString()).removeClass('NotSelectedOrg');
+    $("#right").hide();
+    $("button[class*='metro-tile']").removeClass('metro-set');
+    $("button:visible").triggerHandler('click');
+}
+
+function FilterRecordsByOrgMobile(ctrl) {
+   
+    //alert(src);
+    $("button[class*='metro-tile']").addClass('NotSelectedOrg');
+    $(".metro-tile2").hide();
+    $(".Org-" + ctrl.toString()).show();
+    $(".Org-" + ctrl.toString()).removeClass('NotSelectedOrg');
+    $("#right").hide();
+    $("button[class*='metro-tile']").removeClass('metro-set');
+}
+
+
+
+function NotifyByEmail(emailAddress, redirectUrl, surveyName, postUrl,passCode,EmailSubject) {
+    /*post email address and redirect url asynchronously to Post controller */
+
+    var user = { 'emailAddress': emailAddress,
         'redirectUrl': redirectUrl,
         'surveyName': escape(surveyName),
         'passCode':passCode,
-        'EmailSubject': emailSubject,
+        'EmailSubject':escape(EmailSubject),
         __RequestVerificationToken: $("input[name=__RequestVerificationToken]").val()
     };
 
     $.post(
             postUrl,
             user,
-            function (data) 
-            {
-                if (data === true) 
-                {
+            function (data) {
+                if (data === true) {
                     alert('An email has been sent with survey link.');
                 }
-                else 
-                {
+                else {
+                
                     alert('Failed to send email to the participant');
+
                 }
             },
             'json'
         );
-}
+
+        }
+
+        function AjaxCallToActionMethod(url, method, sucessFunc) {
+            $.ajax({
+                url: url,
+                type: method,
+                contentType: 'application/json; charset=utf-8',
+                //data: JSON.stringify(model)
+                sucess: successFunc
+            });
+        }
 
 function SignOutAndRedirect(signoutUrl,homePageUrl) {
     //post to the login/SignOut action method and signout after that redirect to home page
