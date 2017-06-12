@@ -703,10 +703,16 @@ namespace Epi.Web.MVC.Utility
         }
         private static Select GetDropDown(XElement _FieldTypeID, double _Width, double _Height, XDocument SurveyAnswer, string _ControlValue, string DropDownValues, int FieldTypeId, Form form)
         {
+            Select DropDown;
 
-
-
-            Select DropDown = new Select();
+            if (form.IsMobile)
+            {
+                DropDown = new MobileSelect();
+            }
+            else
+            {
+                DropDown = new Select();
+            }
             DropDown.Name = _FieldTypeID.Attribute("Name").Value;
             DropDown.Title = _FieldTypeID.Attribute("Name").Value;
             DropDown.Prompt = _FieldTypeID.Attribute("PromptText").Value;
@@ -877,7 +883,7 @@ namespace Epi.Web.MVC.Utility
                             XElement XElement = XElement.Parse(_SourceTableValue.ToString());
                            try{
                            // DropDownValues.Append(XElement.Attribute(CodeColumnName.ToLower()).Value.Trim());
-                            DropDownValues.Append(XElement.Attribute(CodeColumnName).Value.Trim());
+                            DropDownValues.Append(XElement.Attribute(CodeColumnName.ToLower()).Value.Trim());
                             }
                            catch (Exception ex)
                              {
@@ -1225,7 +1231,7 @@ namespace Epi.Web.MVC.Utility
             }
         }
 
-        protected static void AddFormFields(int pageNumber, Form form, SurveyAnswerDTO _SurveyAnswer, List<SourceTableDTO> SourceTableList = null)
+        protected static void AddFormFields(int pageNumber, Form form, SurveyAnswerDTO _SurveyAnswer, List<SourceTableDTO> SourceTableList = null, bool isMobile = false)
         {
             string XML = form.SurveyInfo.XML;
             string dropDownValues = "";
@@ -1316,9 +1322,17 @@ namespace Epi.Web.MVC.Utility
 
                             dropDownValues = GetDropDownValues(form.XDocMetadata, fieldElement.Attribute("Name").Value, fieldElement.Attribute("SourceTableName").Value, fieldElement.Attribute("CodeColumnName").Value, form.SourceTableList);
                             var dropdown = GetDropDown(fieldElement, dropDownValues, 18, form);
-                            if (dropdown.ChoiceKeyValuePairs.Count() > 100)
+                            if ((isMobile && dropdown.ChoiceKeyValuePairs.Count > 24) || (!isMobile && dropdown.ChoiceKeyValuePairs.Count > 100))
                             {
-                                field = GetAutoComplete(fieldElement, _Width, _Height, xdocResponse, Value, dropDownValues, 1, form);
+                              
+                                if (isMobile)
+                                {
+                                    field = GetMobileAutoComplete(fieldElement, _Width, _Height, xdocResponse, Value, dropDownValues, 1, form);
+                                }
+                                else
+                                {
+                                    field = GetAutoComplete(fieldElement, _Width, _Height, xdocResponse, Value, dropDownValues, 1, form);
+                                }
                             }
                             else
                             {
@@ -1409,6 +1423,59 @@ namespace Epi.Web.MVC.Utility
             return _Val;
         }
 
+        private static MobileAutoComplete GetMobileAutoComplete(XElement _FieldTypeID, double _Width, double _Height, XDocument SurveyAnswer, string _ControlValue, string DropDownValues, int FieldTypeId, Form form)
+        {
+
+
+
+            MobileAutoComplete DropDown = new MobileAutoComplete();
+            DropDown.Name = _FieldTypeID.Attribute("Name").Value;
+            DropDown.Title = _FieldTypeID.Attribute("Name").Value;
+            DropDown.Prompt = _FieldTypeID.Attribute("PromptText").Value;
+            DropDown.DisplayOrder = int.Parse(_FieldTypeID.Attribute("TabIndex").Value);
+            // DropDown.Required = _FieldTypeID.Attribute("IsRequired").Value == "True" ? true : false;
+            DropDown.RequiredMessage = "This field is required";
+            DropDown.Key = _FieldTypeID.Attribute("Name").Value;
+            DropDown.PromptTop = _Height * ParseDouble(_FieldTypeID.Attribute("PromptTopPositionPercentage").Value);
+            DropDown.PromptLeft = _Width * ParseDouble(_FieldTypeID.Attribute("PromptLeftPositionPercentage").Value);
+            DropDown.Top = _Height * ParseDouble(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value);
+            DropDown.Left = _Width * ParseDouble(_FieldTypeID.Attribute("ControlLeftPositionPercentage").Value);
+            DropDown.PromptWidth = _Width * ParseDouble(_FieldTypeID.Attribute("ControlWidthPercentage").Value);
+            DropDown.ControlWidth = _Width * ParseDouble(_FieldTypeID.Attribute("ControlWidthPercentage").Value);
+            DropDown.fontstyle = _FieldTypeID.Attribute("PromptFontStyle").Value;
+            DropDown.fontSize = ParseDouble(_FieldTypeID.Attribute("PromptFontSize").Value);
+            DropDown.fontfamily = _FieldTypeID.Attribute("PromptFontFamily").Value;
+            //IsRequired = bool.Parse(_FieldTypeID.Attribute("IsRequired").Value),
+            DropDown.IsRequired = GetRequiredControlState(form.RequiredFieldsList.ToString(), _FieldTypeID.Attribute("Name").Value, "RequiredFieldsList");
+            DropDown.Required = GetRequiredControlState(form.RequiredFieldsList.ToString(), _FieldTypeID.Attribute("Name").Value, "RequiredFieldsList");
+            DropDown.InputFieldfontstyle = _FieldTypeID.Attribute("ControlFontStyle").Value;
+            DropDown.InputFieldfontSize = ParseDouble(_FieldTypeID.Attribute("ControlFontSize").Value);
+            DropDown.InputFieldfontfamily = _FieldTypeID.Attribute("ControlFontFamily").Value;
+            DropDown.ReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value);
+            DropDown.ShowEmptyOption = true;
+            DropDown.SelectType = FieldTypeId;
+            DropDown.SelectedValue = _ControlValue;
+            DropDown.IsHidden = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "HiddenFieldsList");
+            DropDown.IsHighlighted = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "HighlightedFieldsList");
+            DropDown.IsDisabled = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "DisabledFieldsList");
+            DropDown.ControlFontSize = ParseFloat(_FieldTypeID.Attribute("ControlFontSize").Value);
+            DropDown.ControlFontStyle = _FieldTypeID.Attribute("ControlFontStyle").Value;
+            DropDown.RelateCondition = _FieldTypeID.Attribute("RelateCondition").Value;
+            DropDown.EmptyOption = "Select";
+            DropDown.FieldTypeId = FieldTypeId;
+
+            DropDown.Value = _ControlValue;
+            DropDown.Response = _ControlValue;
+
+            DropDown.AddChoices(DropDownValues, "&#;");
+
+            if (!string.IsNullOrWhiteSpace(_ControlValue))
+            {
+                DropDown.Choices[_ControlValue] = true;
+            }
+
+            return DropDown;
+        }
         private static AutoComplete GetAutoComplete(XElement _FieldTypeID, double _Width, double _Height, XDocument SurveyAnswer, string _ControlValue, string DropDownValues, int FieldTypeId, Form form)
         {
 
