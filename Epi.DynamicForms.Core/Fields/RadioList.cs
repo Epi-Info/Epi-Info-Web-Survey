@@ -5,6 +5,7 @@ using System.Text;
 using System.Web.Mvc;
 using Epi.Core.EnterInterpreter;
 using System.Web.UI;
+using System.Globalization;
 
 namespace MvcDynamicForms.Fields
 {
@@ -84,8 +85,8 @@ namespace MvcDynamicForms.Fields
 
                 if (TopLeft.Count > 0)
                 {
-                    innerTop = double.Parse(TopLeft[0].ToString()) * Height;
-                    innerLeft = double.Parse(TopLeft[1].ToString()) * Width;
+                    innerTop = Math.Truncate(ParseDouble(TopLeft[0].ToString()) * Height);
+                    innerLeft = Math.Truncate(ParseDouble(TopLeft[1].ToString()) * Width);
                 }
 
                 TagBuilder divTag = new TagBuilder("div");
@@ -182,6 +183,37 @@ namespace MvcDynamicForms.Fields
             wrapper.Attributes["id"] = inputName + "_fieldWrapper";
             wrapper.InnerHtml = html.ToString();
             return wrapper.ToString();
+        }
+        public static double ParseDouble(string ParseString)
+        {
+            double result;
+
+            try
+            {
+
+                if (ParseString.Contains(','))
+                {
+                    var NewValue = ParseString.Replace(',', '.');
+                    //  double.TryParse(NewValue, System.Globalization.NumberStyles.Any, CultureInfo.InvariantCulture, out result);
+                    // result = Math.Ceiling(result);
+                    double.TryParse(NewValue, System.Globalization.NumberStyles.Any, CultureInfo.CreateSpecificCulture("en-US"), out result);
+                   
+                }
+                else
+                {
+                    double.TryParse(ParseString, System.Globalization.NumberStyles.Any, CultureInfo.CreateSpecificCulture("en-US"), out result);
+                    //    result = Math.Ceiling(result);
+                   
+
+                }
+
+                // double.TryParse(ParseString, System.Globalization.NumberStyles.Any, CultureInfo.InvariantCulture, out result);
+            }
+            catch (Exception ex)
+            {
+                double.TryParse(ParseString, System.Globalization.NumberStyles.Any, CultureInfo.InvariantCulture, out result);
+            }
+            return result;
         }
     }
 }
