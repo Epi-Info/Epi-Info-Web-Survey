@@ -686,7 +686,7 @@ namespace Epi.Web.MVC.Utility
             SetFieldCommon(field, form);
 
             ((Select)field).ShowEmptyOption = true;
-            ((Select)field).ControlFontSize = float.Parse(_FieldTypeID.Attribute("ControlFontSize").Value);
+            ((Select)field).ControlFontSize = ParseFloat(_FieldTypeID.Attribute("ControlFontSize").Value);
             ((Select)field).ControlFontStyle = _FieldTypeID.Attribute("ControlFontStyle").Value;
             if (FieldTypeId == 18)
             {
@@ -714,20 +714,20 @@ namespace Epi.Web.MVC.Utility
             // DropDown.Required = _FieldTypeID.Attribute("IsRequired").Value == "True" ? true : false;
             DropDown.RequiredMessage = "This field is required";
             DropDown.Key = _FieldTypeID.Attribute("Name").Value;
-            DropDown.PromptTop = _Height * double.Parse(_FieldTypeID.Attribute("PromptTopPositionPercentage").Value);
-            DropDown.PromptLeft = _Width * double.Parse(_FieldTypeID.Attribute("PromptLeftPositionPercentage").Value);
-            DropDown.Top = _Height * double.Parse(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value);
-            DropDown.Left = _Width * double.Parse(_FieldTypeID.Attribute("ControlLeftPositionPercentage").Value);
-            DropDown.PromptWidth = _Width * double.Parse(_FieldTypeID.Attribute("ControlWidthPercentage").Value);
-            DropDown.ControlWidth = _Width * double.Parse(_FieldTypeID.Attribute("ControlWidthPercentage").Value);
+            DropDown.PromptTop = _Height * ParseDouble(_FieldTypeID.Attribute("PromptTopPositionPercentage").Value);
+            DropDown.PromptLeft = _Width * ParseDouble(_FieldTypeID.Attribute("PromptLeftPositionPercentage").Value);
+            DropDown.Top = _Height * ParseDouble(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value);
+            DropDown.Left = _Width * ParseDouble(_FieldTypeID.Attribute("ControlLeftPositionPercentage").Value);
+            DropDown.PromptWidth = _Width * ParseDouble(_FieldTypeID.Attribute("ControlWidthPercentage").Value);
+            DropDown.ControlWidth = _Width * ParseDouble(_FieldTypeID.Attribute("ControlWidthPercentage").Value);
             DropDown.fontstyle = _FieldTypeID.Attribute("PromptFontStyle").Value;
-            DropDown.fontSize = double.Parse(_FieldTypeID.Attribute("PromptFontSize").Value);
+            DropDown.fontSize = ParseDouble(_FieldTypeID.Attribute("PromptFontSize").Value);
             DropDown.fontfamily = _FieldTypeID.Attribute("PromptFontFamily").Value;
             //IsRequired = bool.Parse(_FieldTypeID.Attribute("IsRequired").Value),
             DropDown.IsRequired = GetRequiredControlState(form.RequiredFieldsList.ToString(), _FieldTypeID.Attribute("Name").Value, "RequiredFieldsList");
             DropDown.Required = GetRequiredControlState(form.RequiredFieldsList.ToString(), _FieldTypeID.Attribute("Name").Value, "RequiredFieldsList");
             DropDown.InputFieldfontstyle = _FieldTypeID.Attribute("ControlFontStyle").Value;
-            DropDown.InputFieldfontSize = double.Parse(_FieldTypeID.Attribute("ControlFontSize").Value);
+            DropDown.InputFieldfontSize = ParseDouble(_FieldTypeID.Attribute("ControlFontSize").Value);
             DropDown.InputFieldfontfamily = _FieldTypeID.Attribute("ControlFontFamily").Value;
             DropDown.ReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value);
             DropDown.ShowEmptyOption = true;
@@ -736,7 +736,7 @@ namespace Epi.Web.MVC.Utility
             DropDown.IsHidden = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "HiddenFieldsList");
             DropDown.IsHighlighted = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "HighlightedFieldsList");
             DropDown.IsDisabled = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "DisabledFieldsList");
-            DropDown.ControlFontSize = float.Parse(_FieldTypeID.Attribute("ControlFontSize").Value);
+            DropDown.ControlFontSize = ParseFloat(_FieldTypeID.Attribute("ControlFontSize").Value);
             DropDown.ControlFontStyle = _FieldTypeID.Attribute("ControlFontStyle").Value;
             // DropDown.RelateCondition = bool.Parse(_FieldTypeID.Attribute("RelateCondition").Value);
             //  DropDown.RelateCondition = !string.IsNullOrEmpty(_FieldTypeID.Attribute("RelateCondition").Value) ? bool.Parse(_FieldTypeID.Attribute("RelateCondition").Value) : false;
@@ -1422,20 +1422,20 @@ namespace Epi.Web.MVC.Utility
             // DropDown.Required = _FieldTypeID.Attribute("IsRequired").Value == "True" ? true : false;
             DropDown.RequiredMessage = "This field is required";
             DropDown.Key = _FieldTypeID.Attribute("Name").Value;
-            DropDown.PromptTop = _Height * double.Parse(_FieldTypeID.Attribute("PromptTopPositionPercentage").Value);
-            DropDown.PromptLeft = _Width * double.Parse(_FieldTypeID.Attribute("PromptLeftPositionPercentage").Value);
-            DropDown.Top = _Height * double.Parse(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value);
-            DropDown.Left = _Width * double.Parse(_FieldTypeID.Attribute("ControlLeftPositionPercentage").Value);
-            DropDown.PromptWidth = _Width * double.Parse(_FieldTypeID.Attribute("ControlWidthPercentage").Value);
-            DropDown.ControlWidth = _Width * double.Parse(_FieldTypeID.Attribute("ControlWidthPercentage").Value);
+            DropDown.PromptTop = _Height * ParseDouble(_FieldTypeID.Attribute("PromptTopPositionPercentage").Value);
+            DropDown.PromptLeft = _Width * ParseDouble(_FieldTypeID.Attribute("PromptLeftPositionPercentage").Value);
+            DropDown.Top = _Height * ParseDouble(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value);
+            DropDown.Left = _Width * ParseDouble(_FieldTypeID.Attribute("ControlLeftPositionPercentage").Value);
+            DropDown.PromptWidth = _Width * ParseDouble(_FieldTypeID.Attribute("ControlWidthPercentage").Value);
+            DropDown.ControlWidth = _Width * ParseDouble(_FieldTypeID.Attribute("ControlWidthPercentage").Value);
             DropDown.fontstyle = _FieldTypeID.Attribute("PromptFontStyle").Value;
-            DropDown.fontSize = double.Parse(_FieldTypeID.Attribute("PromptFontSize").Value);
+            DropDown.fontSize = ParseDouble(_FieldTypeID.Attribute("PromptFontSize").Value);
             DropDown.fontfamily = _FieldTypeID.Attribute("PromptFontFamily").Value;
             //IsRequired = bool.Parse(_FieldTypeID.Attribute("IsRequired").Value),
             DropDown.IsRequired = GetRequiredControlState(form.RequiredFieldsList.ToString(), _FieldTypeID.Attribute("Name").Value, "RequiredFieldsList");
             DropDown.Required = GetRequiredControlState(form.RequiredFieldsList.ToString(), _FieldTypeID.Attribute("Name").Value, "RequiredFieldsList");
             DropDown.InputFieldfontstyle = _FieldTypeID.Attribute("ControlFontStyle").Value;
-            DropDown.InputFieldfontSize = double.Parse(_FieldTypeID.Attribute("ControlFontSize").Value);
+            DropDown.InputFieldfontSize = ParseDouble(_FieldTypeID.Attribute("ControlFontSize").Value);
             DropDown.InputFieldfontfamily = _FieldTypeID.Attribute("ControlFontFamily").Value;
             DropDown.ReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value);
             DropDown.ShowEmptyOption = true;
@@ -1444,7 +1444,7 @@ namespace Epi.Web.MVC.Utility
             DropDown.IsHidden = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "HiddenFieldsList");
             DropDown.IsHighlighted = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "HighlightedFieldsList");
             DropDown.IsDisabled = GetControlState(SurveyAnswer, _FieldTypeID.Attribute("Name").Value, "DisabledFieldsList");
-            DropDown.ControlFontSize = float.Parse(_FieldTypeID.Attribute("ControlFontSize").Value);
+            DropDown.ControlFontSize = ParseFloat(_FieldTypeID.Attribute("ControlFontSize").Value);
             DropDown.ControlFontStyle = _FieldTypeID.Attribute("ControlFontStyle").Value;
             DropDown.RelateCondition = _FieldTypeID.Attribute("RelateCondition").Value;
             DropDown.EmptyOption = "Select";
@@ -1466,28 +1466,57 @@ namespace Epi.Web.MVC.Utility
         public static double ParseDouble(string ParseString)
         {
             double result;
-             
+
             try
             {
 
                 if (ParseString.Contains(','))
                 {
                     var NewValue = ParseString.Replace(',', '.');
-                  //  double.TryParse(NewValue, System.Globalization.NumberStyles.Any, CultureInfo.InvariantCulture, out result);
-                 // result = Math.Ceiling(result);
-                    double.TryParse(NewValue, System.Globalization.NumberStyles.Any, CultureInfo.InvariantCulture, out result);
+                    //  double.TryParse(NewValue, System.Globalization.NumberStyles.Any, CultureInfo.InvariantCulture, out result);
+                    // result = Math.Ceiling(result);
+                    double.TryParse(NewValue, System.Globalization.NumberStyles.Any, CultureInfo.CreateSpecificCulture("en-US"), out result);
+
                 }
-                else {
-                    double.TryParse(ParseString, out result);
-                //    result = Math.Ceiling(result);
-                
+                else
+                {
+                    double.TryParse(ParseString, System.Globalization.NumberStyles.Any, CultureInfo.CreateSpecificCulture("en-US"), out result);
+                    //    result = Math.Ceiling(result);
+
+
                 }
-            
-               // double.TryParse(ParseString, System.Globalization.NumberStyles.Any, CultureInfo.InvariantCulture, out result);
+
+                // double.TryParse(ParseString, System.Globalization.NumberStyles.Any, CultureInfo.InvariantCulture, out result);
             }
             catch (Exception ex)
             {
                 double.TryParse(ParseString, System.Globalization.NumberStyles.Any, CultureInfo.InvariantCulture, out result);
+            }
+            return result;
+        }
+
+        public static float ParseFloat(string ParseString)
+        {
+            float result;
+
+            try
+            {
+
+                if (ParseString.Contains(','))
+                {
+                    var NewValue = ParseString.Replace(',', '.');
+                    float.TryParse(NewValue, System.Globalization.NumberStyles.Any, CultureInfo.CreateSpecificCulture("en-US"), out result);
+
+                }
+                else
+                {
+                    float.TryParse(ParseString, System.Globalization.NumberStyles.Any, CultureInfo.CreateSpecificCulture("en-US"), out result);
+                   
+                }                
+            }
+            catch (Exception ex)
+            {
+                float.TryParse(ParseString, System.Globalization.NumberStyles.Any, CultureInfo.InvariantCulture, out result);
             }
             return result;
         }
