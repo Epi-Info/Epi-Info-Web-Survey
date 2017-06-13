@@ -122,7 +122,7 @@ namespace MvcDynamicForms.Fields
 
 
             var scriptDatePicker1 = new TagBuilder("script");
-            scriptDatePicker1.InnerHtml = "$('#" + inputName + "').change(function() { ChangeDatePickerFormat('" + DateFormat + "');});";
+            scriptDatePicker1.InnerHtml = "$('#" + inputName + "').change(function() { ChangeDatePickerFormat('" + DateFormat + "','#" + inputName + "');});";
             html.Append(scriptDatePicker1.ToString(TagRenderMode.Normal));
 
             //prevent date picker control to submit on enter click

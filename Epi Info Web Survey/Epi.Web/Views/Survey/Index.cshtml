@@ -82,10 +82,10 @@
         $("#myform")[0].action = actionUrlP;
         $("#myform").submit();
     }
-    function ChangeDatePickerFormat(dateformat) {
+    function ChangeDatePickerFormat(dateformat,controlVal) {
         
         dateformat = dateformat.toLocaleLowerCase().toString();      
-        $("#" + this.id).datepicker("option", "dateFormat", dateformat);
+        $(controlVal).datepicker("option", "dateFormat", dateformat);
 
     }
 
