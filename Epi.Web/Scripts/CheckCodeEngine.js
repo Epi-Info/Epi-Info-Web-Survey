@@ -2100,12 +2100,12 @@ var seconds = currentTime.getSeconds();
     {
        hours = "0" + hours
     }
-    if(hours > 11)
-    {
-       PMAM = "PM";
-    } else {
-       PMAM = "AM" ;
-    }
+    //if(hours > 11)
+    //{
+    //   PMAM = "PM";
+    //} else {
+    //   PMAM = "AM" ;
+    //}
     if (hours > 12) 
     {
         hours = hours - 12; 
