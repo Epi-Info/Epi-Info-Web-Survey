@@ -23,7 +23,8 @@ namespace MvcDynamicForms.Fields
                 string pipeString = _options_position_string.Replace("||", "|");
                 List<string> lists = pipeString.Split('|').ToList<string>();
                 string options = lists[0];
-                string locations = lists[1];
+                string locations = lists[1].Replace(",",".");
+                locations = locations.Replace("..", ",.");
 
                 ChoiceKeyValuePairs.Clear();
                 foreach (var option in options.Split(',').ToList<string>())
@@ -86,6 +87,11 @@ namespace MvcDynamicForms.Fields
                 if (TopLeft.Count > 0)
                 {
                     innerTop = Math.Truncate(ParseDouble(TopLeft[0].ToString()) * Height);
+                    
+                }
+
+                if (TopLeft.Count > 1)
+                {
                     innerLeft = Math.Truncate(ParseDouble(TopLeft[1].ToString()) * Width);
                 }
 
