@@ -2081,44 +2081,68 @@ function CCE_DatePart(pValue1)
 
 function FormatTime(currentTime)
 {
-var PMAM ="";
-var FormatedTime = "";
-var hours = currentTime.getHours();
-var minutes = currentTime.getMinutes();
-var seconds = currentTime.getSeconds();
-    if (minutes < 10)
-    {
-    minutes = "0" + minutes
-    }
-    if (seconds < 10)
-    {
-    seconds = "0" + seconds
-    }
+    currentTime = currentTime.toString();
+    var time = currentTime.match(/(\d+):(\d+):(\d+) (\w)/);
+    var PMAM = "";
+    var FormatedTime = "";
+
+    var hours = Number(time[1]);
+    var minutes = Number(time[2]);
+    var seconds = Number(time[3]);
+    var meridian = time[4].toLowerCase();
+
+    //if (minutes < 10)
+    //{
+    //minutes = "0" + minutes
+    //}
+    //if (seconds < 10)
+    //{
+    //seconds = "0" + seconds
+    //}
      
     
-    if ( hours < 10 )  
-    {
-       hours = "0" + hours
-    }
+    //if ( hours < 10 )  
+    //{
+    //   hours = "0" + hours
+    //}
     //if(hours > 11)
     //{
     //   PMAM = "PM";
     //} else {
     //   PMAM = "AM" ;
     //}
-    if (hours > 12) 
-    {
-        hours = hours - 12; 
-        if ( hours < 10 )  
-        {
-           hours = "0" + hours
-        } 
+    //if (hours > 12) 
+    //{
+    //    hours = hours - 12; 
+    //    if ( hours < 10 )  
+    //    {
+    //       hours = "0" + hours
+    //    } 
+    //}
+
+
+    if (meridian == 'p' && hours < 12) {
+        hours = hours + 12;
+    }
+    else if (meridian == 'a' && hours == 12) {
+        hours = hours - 12;
+    }
+
+    if (hours < 10) {
+        hours = "0" + hours;
+    }
+
+    if (minutes < 10) {
+        minutes = "0" + minutes;
+    }
+
+    if (seconds < 10) {
+        seconds = "0" + seconds;
     }
     FormatedTime = hours + ":" + minutes + ":" + seconds + " " + PMAM;
     return FormatedTime;
 
 }
-
 
 function OpenVideoDialog()
 {
