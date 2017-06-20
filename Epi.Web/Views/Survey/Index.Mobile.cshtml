@@ -3,34 +3,82 @@
 }
 
 <style>
-.ui-datebox-controls span.ui-btn-inner  {padding-bottom: 28px !important; }
-.ui-datebox-controls a span.ui-btn-inner  {padding-bottom: 10px !important; }
+    .ui-datebox-controls span.ui-btn-inner {
+        padding-bottom: 28px !important;
+    }
+
+    .ui-datebox-controls a span.ui-btn-inner {
+        padding-bottom: 10px !important;
+    }
+
     .ui-datebox-controls div {
         width: 70px !important;
         margin: 0 0.2em !important;
     }
-    
-    
 </style>
 
 <script type="text/javascript">
- 
+
     //Check Code Logic start
      @Html.Raw(Model.FormJavaScript)
     //Check code logic end
 
- 
+    var isShift = false;
 
 
+    function DateFormat(txt, keyCode) {
+        if (keyCode == 16)
+            isShift = true;
+
+        if (txt.value.length == 10 && keyCode != 8 && keyCode != 46) {
+            return false;
+        }
+
+        //Validate that its Numeric
+        if (keyCode < 65 || (keyCode > 90 && keyCode < 97) || keyCode > 122) {
+
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    function ValidateDate(txt, keyCode) {
+        if (keyCode == 16)
+            isShift = false;
+        var val = txt.value;
+
+        if (val.length == 10) {
+            var splits = val.split("/");
+            var dt = new Date(splits[0] + "/" + splits[1] + "/" + splits[2]);
+
+            //Validation for Dates
+            if (dt.getDate() == splits[1] && dt.getMonth() + 1 == splits[0]
+                && dt.getFullYear() == splits[2]) {
+
+            }
+            else {
+                alert("Invalid Date");
+
+                return;
+            }
+
+
+        }
+        else if (val.length < 10) {
+            alert("Required mm/dd/yyyy format. Slashes will come up automatically.");
+        }
+    }
 
 </script>
-  
-   <script type="text/javascript">
 
-//   $(function () {
-//           $("#savediv button[title]").tooltip();
-//       });
- </script>  
+<script type="text/javascript">
+
+    //   $(function () {
+    //           $("#savediv button[title]").tooltip();
+    //       });
+</script>
 <script type="text/javascript">
 
 
@@ -81,14 +129,14 @@
 
 
 
-      //  $( "#myform" ).validate();
+        //  $( "#myform" ).validate();
 
         ////
         //alert('');
         //$("select").attr('data-role', 'main');
         //$("select").attr('data-native-menu', 'false');
         //$("select").selectmenu('refresh');
-       // $.mobile.selectmenu.prototype.options.nativeMenu = false;
+        // $.mobile.selectmenu.prototype.options.nativeMenu = false;
 
         ////
 
@@ -101,7 +149,7 @@
             modal: true
         });
 
-         $("#VideoDialog").dialog({
+        $("#VideoDialog").dialog({
             autoOpen: false,
             show: "blind",
             hide: "blind",
@@ -112,7 +160,7 @@
         });
 
         var responseUrl = GetRedirectionUrl();
-       // $('#url').val(responseUrl);
+        // $('#url').val(responseUrl);
         $('#url').val('@Model.RedirectURL');
 
         var passcode = '@Model.PassCode';
@@ -145,7 +193,7 @@
     $(document).ready(function () {
 
 
- 
+
 
 
         $("#send").click(function () {
@@ -405,7 +453,7 @@
         $(this).simpledialog({
             'mode': 'blank',
             'headerText': "Close1",
-         //   'prompt': "tste",
+            //   'prompt': "tste",
             'forceInput': false,
             'useModal': true,
             'buttons': {
@@ -418,7 +466,7 @@
             },
             'fullHTML': "<div id=\"exitdialog\" title=\"Exit Survey\" ><p style=\"font-size:1.20em; font-weight:600;\">Are you sure you want to exit this Survey? </p><p style=\"font-size:1.20em; font-weight:300;\">Any unsaved changes will be lost!<br /></p><p><div align='right'> <a  onclick ='ExitSurvey();'  class='login'  style='width:50px; padding:8px 15px !important;'>Exit Survey</a>        <a class='login'  style='width:50px; padding:8px 15px !important;'rel='close'   id='simpleclose'>Cancel</a></div></p>"
         })
-       
+
     });
 
 
@@ -545,71 +593,73 @@
 </script>
 
 <div id="header">
-            <h1>
-                @Model.SurveyInfo.SurveyName 
-                 
-                </h1>
- </div>
- 
+    <h1>
+        @Model.SurveyInfo.SurveyName
 
-    <div id="infobox">
-        <div id="pages" class="pages">
+    </h1>
+</div>
 
 
-
-         @if (Model.NumberOfPages > 0)
-          {
-              int num = 0;
-              
-              
-
-             for (int i = 1; Model.NumberOfPages > i - 1; i++)
-              {
-                  
-                          num = i;  
-                            if (i == 1 && Model.CurrentPage >1)
-                                {  
-            <a  onclick="Submit();" style="background-image: url('@Url.Content("~/Content/images/prev.png")'); background-repeat:no-repeat; background-position:center;"   href="@Url.RouteUrl(null, new { controller = "Survey", action = "Index", responseid = Model.ResponseId, PageNumber = Model.CurrentPage - 1 })"  class="nextprev" title="Previous Page">
-                &nbsp;&nbsp;&nbsp; </a>  
-@* <a href="@Url.RouteUrl(null, new { controller = "Survey", action = "Index", responseid = Model.ResponseId, PageNumber = Model.CurrentPage - 1 })" onclick="Submit();" data-role="button" data-inline="true" data-theme="e" data-mini="true" data-icon="arrow-l" 
-                                    data-iconpos="notext"  >
-                                    Previous</a>*@
-                            
-                                }
-
-                            if (Model.CurrentPage == i)
-                            {  
-                                   <span class="current">@num of @Model.NumberOfPages</span>
-                            }
+<div id="infobox">
+    <div id="pages" class="pages">
 
 
-              }
 
-             if (Model.CurrentPage != Model.NumberOfPages)
-             {  
-                  
-                     
-            <a  id="anchorNext" onclick="Submit();"  style="background-image: url('@Url.Content("~/Content/images/next.png")');  background-repeat:no-repeat; background-position:center;" href="@Url.RouteUrl(null, new { controller = "Survey", action = "Index", responseid = Model.ResponseId, PageNumber = Model.CurrentPage + 1 })" class="nextprev" title="Go to Next Page">
-                &nbsp;&nbsp;&nbsp; </a> 
-@*   <a id="anchorNext" onclick="Submit();"  href="@Url.RouteUrl(null, new { controller = "Survey", action = "Index", responseid = Model.ResponseId, PageNumber = Model.CurrentPage + 1 })" data-role="button" data-inline="true" data-theme="e" data-mini="true" data-icon="arrow-r" data-iconpos="notext">
-                            Next
-                            </a>*@
-           
-           
-             }
+        @if (Model.NumberOfPages > 0)
+        {
+            int num = 0;
 
-          } 
-           
-           
-            
-      
-      </div>
-	  
+
+
+            for (int i = 1; Model.NumberOfPages > i - 1; i++)
+            {
+
+                num = i;
+                if (i == 1 && Model.CurrentPage > 1)
+                {
+                    <a onclick="Submit();" style="background-image: url('@Url.Content("~/Content/images/prev.png")'); background-repeat:no-repeat; background-position:center;" href="@Url.RouteUrl(null, new { controller = "Survey", action = "Index", responseid = Model.ResponseId, PageNumber = Model.CurrentPage - 1 })" class="nextprev" title="Previous Page">
+                        &nbsp;&nbsp;&nbsp;
+                    </a>
+                    @* <a href="@Url.RouteUrl(null, new { controller = "Survey", action = "Index", responseid = Model.ResponseId, PageNumber = Model.CurrentPage - 1 })" onclick="Submit();" data-role="button" data-inline="true" data-theme="e" data-mini="true" data-icon="arrow-l"
+                        data-iconpos="notext"  >
+                        Previous</a>*@
+
+                }
+
+                if (Model.CurrentPage == i)
+                {
+                    <span class="current">@num of @Model.NumberOfPages</span>
+                }
+
+
+            }
+
+            if (Model.CurrentPage != Model.NumberOfPages)
+            {
+
+
+                <a id="anchorNext" onclick="Submit();" style="background-image: url('@Url.Content("~/Content/images/next.png")');  background-repeat:no-repeat; background-position:center;" href="@Url.RouteUrl(null, new { controller = "Survey", action = "Index", responseid = Model.ResponseId, PageNumber = Model.CurrentPage + 1 })" class="nextprev" title="Go to Next Page">
+                    &nbsp;&nbsp;&nbsp;
+                </a>
+                @*   <a id="anchorNext" onclick="Submit();"  href="@Url.RouteUrl(null, new { controller = "Survey", action = "Index", responseid = Model.ResponseId, PageNumber = Model.CurrentPage + 1 })" data-role="button" data-inline="true" data-theme="e" data-mini="true" data-icon="arrow-r" data-iconpos="notext">
+                    Next
+                    </a>*@
+
+
+            }
+
+        }
+
+
+
+
+    </div>
+
     <div align="right">
         @*<button  class="MobileExitSurvey"    type="submit" id="close">Exit Survey</button>*@
-        <button type="button"  onclick="Save();" id ="Savebutton1" name="Savebutton" value="save" data-role="button" data-theme="save23" data-inline="true" data-iconpos="notext"></button>
-       <a id="close" class="exitsurvey">Exit</a>
-       @* <a id="close" class="exitsurvey" onclick="Submit();"  href="@Url.RouteUrl(null, new { controller = "Home", action = "Index", SurveyId = Model.SurveyInfo.SurveyId })">Exit</a>*@
+        <button type="button" onclick="Save();" id="Savebutton1" name="Savebutton" value="save" data-role="button" data-theme="save23" data-inline="true" data-iconpos="notext"></button>
+        <a id="close" class="exitsurvey">Exit</a>
+        @* <a id="close" class="exitsurvey" onclick="Submit();"  href="@Url.RouteUrl(null, new { controller = "Home", action = "Index", SurveyId = Model.SurveyInfo.SurveyId })">Exit</a>*@
     </div>
     <div style="clear: both;">
     </div>
@@ -617,97 +667,99 @@
 @*<div id="content">*@
 <div id="successContent">
 </div>
- 
+
 @if (!string.IsNullOrEmpty(Model.GetErrorSummary()))
-{ 
+{
     <div class="errormsg">
         <div class="image">
-            <img src="@Url.Content("~/Content/images/error.png")" style="vertical-align: middle; padding-right: 5px; width:24px;" alt=""/>
+            <img src="@Url.Content("~/Content/images/error.png")" style="vertical-align: middle; padding-right: 5px; width:24px;" alt="" />
         </div>
         <div class="message">
-            <span style="font-weight: bold; font-size: 10pt;">Please correct the following errors
-                before continuing:</span>
+            <span style="font-weight: bold; font-size: 10pt;">
+                Please correct the following errors
+                before continuing:
+            </span>
             <br />
             @Html.Raw(Model.GetErrorSummary())
         </div>
         <div style="clear: both;">
         </div>
     </div>
-     } 
-     		 
-		@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "myform", @class = @Model.IsDraftModeStyleClass.ToString() }))
-	
-        {  
-           
-              
-             @Html.AntiForgeryToken() 
-        
-            
-         @Html.Raw(Model.RenderHtml(true))
-            
-           
-             
-           
-            <input type="hidden"  id="HiddenFieldsList"  name="HiddenFieldsList" value="@Model.HiddenFieldsList" />
-            <input type="hidden"  id="HighlightedFieldsList"  name="HighlightedFieldsList" value="@Model.HighlightedFieldsList" />
-            <input type="hidden"  id="DisabledFieldsList"  name="DisabledFieldsList" value="@Model.DisabledFieldsList" />
-            <input type="hidden"  id="RequiredFieldsList"  name="RequiredFieldsList" value="@Model.RequiredFieldsList" />
-             <input type="hidden"  id="AssignList"  name="AssignList" value="@Model.AssignList" />
-   	        <input type="hidden"  name="is_save_action" value="false" />
-            <input type="hidden"  name="is_goto_action" value="false" /> 
-             
-            <input type="hidden"  name="HiddenStatusId" id="HiddenStatusId" value="false" />
-            <input type="hidden"  name="HiddenIsSaved" id="HiddenIsSaved" value="false" /> 
-               <input type="hidden"  name="HiddensuccessContent" id="HiddensuccessContent" value="false" /> 
-            
-             <div id="nav">
-                    <div id="pagesbottom">
-            <div id="prev" align="left">&nbsp;
-             @if (Model.CurrentPage != 1)
-             {  
-              <a  onclick="Submit();" style="" href="@Url.RouteUrl(null, new { controller = "Survey", action = "Index", responseid = Model.ResponseId, PageNumber = Model.CurrentPage - 1 })"  class="prev" title="Previous Page">&nbsp;</a> 
-             @* <button class="prev" id="PreviousButton" value="PreviousButton" onclick="Previous();"  name="PreviousButton"  type="button" > &nbsp; Previous</button>*@
-             }
-             </div>
-	 		 
-             <div id="savediv" align="center">
-             @*<a  onclick="Save();" style="" class="save" title="Click this button to finish the survey later. Use the survey link and pass code provided to return to the survey at a later time.">&nbsp;</a> *@
-             <button type="button"  onclick="Save();" id ="Savebutton1" name="Savebutton" value="save" data-role="button" data-theme="save1" data-inline="true" data-iconpos="notext"></button>
-                    @*onclick="Save();"*@
-             </div>
+}
 
-               @if (Model.CurrentPage == Model.NumberOfPages)
-               {  
-               <div id="next" align="right" style="margin-top:-8px !important;" > 
-               @*<a  name="Submitbutton" onclick="Submit();" class="submits" >Submit</a>*@
-              <button data-role="button" data-theme="submit1" data-inline="true" type="submit"  name="Submitbutton" value="Submit" >Submit</button>
-              </div>
-               }
-               else
-               {
-                    <div id="next" align="right">
-                    <a onclick="Submit();"  style="" href="@Url.RouteUrl(null, new { controller = "Survey", action = "Index", responseid = Model.ResponseId, PageNumber = Model.CurrentPage + 1 })" class="next" title="Next Page">&nbsp;</a> 
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "myform", @class = @Model.IsDraftModeStyleClass.ToString() }))
+{
+
+
+    @Html.AntiForgeryToken()
+
+
+    @Html.Raw(Model.RenderHtml(true))
+
+
+
+
+    <input type="hidden" id="HiddenFieldsList" name="HiddenFieldsList" value="@Model.HiddenFieldsList" />
+    <input type="hidden" id="HighlightedFieldsList" name="HighlightedFieldsList" value="@Model.HighlightedFieldsList" />
+    <input type="hidden" id="DisabledFieldsList" name="DisabledFieldsList" value="@Model.DisabledFieldsList" />
+    <input type="hidden" id="RequiredFieldsList" name="RequiredFieldsList" value="@Model.RequiredFieldsList" />
+    <input type="hidden" id="AssignList" name="AssignList" value="@Model.AssignList" />
+    <input type="hidden" name="is_save_action" value="false" />
+    <input type="hidden" name="is_goto_action" value="false" />
+
+    <input type="hidden" name="HiddenStatusId" id="HiddenStatusId" value="false" />
+    <input type="hidden" name="HiddenIsSaved" id="HiddenIsSaved" value="false" />
+    <input type="hidden" name="HiddensuccessContent" id="HiddensuccessContent" value="false" />
+
+    <div id="nav">
+        <div id="pagesbottom">
+            <div id="prev" align="left">
+                &nbsp;
+                @if (Model.CurrentPage != 1)
+                {
+                    <a onclick="Submit();" style="" href="@Url.RouteUrl(null, new { controller = "Survey", action = "Index", responseid = Model.ResponseId, PageNumber = Model.CurrentPage - 1 })" class="prev" title="Previous Page">&nbsp;</a>
+                    @* <button class="prev" id="PreviousButton" value="PreviousButton" onclick="Previous();"  name="PreviousButton"  type="button" > &nbsp; Previous</button>*@
+                }
+            </div>
+
+            <div id="savediv" align="center">
+                @*<a  onclick="Save();" style="" class="save" title="Click this button to finish the survey later. Use the survey link and pass code provided to return to the survey at a later time.">&nbsp;</a> *@
+                <button type="button" onclick="Save();" id="Savebutton1" name="Savebutton" value="save" data-role="button" data-theme="save1" data-inline="true" data-iconpos="notext"></button>
+                @*onclick="Save();"*@
+            </div>
+
+            @if (Model.CurrentPage == Model.NumberOfPages)
+            {
+                <div id="next" align="right" style="margin-top:-8px !important;">
+                    @*<a  name="Submitbutton" onclick="Submit();" class="submits" >Submit</a>*@
+                    <button data-role="button" data-theme="submit1" data-inline="true" type="submit" name="Submitbutton" value="Submit">Submit</button>
+                </div>
+            }
+            else
+            {
+                <div id="next" align="right">
+                    <a onclick="Submit();" style="" href="@Url.RouteUrl(null, new { controller = "Survey", action = "Index", responseid = Model.ResponseId, PageNumber = Model.CurrentPage + 1 })" class="next" title="Next Page">&nbsp;</a>
                     @*<button class="next"  name="ContinueButton" id="ContinueButton" onclick="Continue();" type="button" >Continue &nbsp; </button>*@
-                    </div>
-               }
-               </div>
-      </div>    
+                </div>
+            }
+        </div>
+    </div>
 
 }
 @* </div>*@ @*<div id="dialog" title="Your Survey has been saved." data-role="popup">
                    <p>Please copy and save the <span style="font-weight:bold;">Survey Link</span> and <span style="font-weight:bold;">Pass Code</span> in order to return to the survey at a later time.</p>
                 <p><span style="font-weight:bold;">Survey Link:</span><br /><textarea id="url" cols="65"  style="  height:30px;  white-space:pre; background:#d6e7f5; border:1px solid #aecfea; padding:4px; margin-top:4px;" readonly="readonly"></textarea></p>
-                
+
                <p style="font-weight:bold;">Pass Code: <span id="spPassCode" style="font-size:12pt; background:#d6e7f5; border:1px solid #aecfea; padding:4px 10px;"></span></p>
                   <hr/>
                   <p>Optionally enter your email address to have the Survey Link and Pass Code emailed to you.</p>
-                  
-               
-                
+
+
+
                 <p><label for="email">Email:</label> <input id="email" type="text" style="width: 200px; margin-left:48px;"/></p>
                   <p><label for="confirmemail">Confirm Email:</label> <input id="confirmemail" type="text" style="width: 200px;"/>
                   <button id="send" type="button" class="login" style="width:50px">Send</button></p>
                 <br />
                 <p style="font-size: 8pt; padding: 5px; background: #ffffa8; margin-top:-5px;"><strong>Note:</strong> Your email address will not be saved and will only be used to send you the survey link.</p>
     </div>
- *@
+*@
