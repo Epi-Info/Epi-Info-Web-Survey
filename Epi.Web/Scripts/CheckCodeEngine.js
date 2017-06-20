@@ -2139,7 +2139,7 @@ function FormatTime(currentTime)
     if (seconds < 10) {
         seconds = "0" + seconds;
     }
-    FormatedTime = hours + ":" + minutes + ":" + seconds + " " + PMAM;
+    FormatedTime = hours + ":" + minutes + ":" + seconds ;//+ " " + PMAM;
     return FormatedTime;
 
 }
