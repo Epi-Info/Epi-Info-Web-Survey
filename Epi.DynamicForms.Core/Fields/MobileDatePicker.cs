@@ -47,7 +47,8 @@ namespace MvcDynamicForms.Fields
             txt.Attributes.Add("data-role", "datebox");
             txt.Attributes.Add("data-options", "{\"mode\": \"datebox\", \"pickPageButtonTheme\": \"e\", \"pickPageInputTheme\":\"e\", \"pickPageFlipButtonTheme\":\"a\", \"pickPageTheme\":\"e\" ,  \"useNewStyle\":true}");
             txt.Attributes.Add("value", NewDateFormat);
-           
+            txt.Attributes.Add("onkeydown ", "return DateFormat(this, event.keyCode);");
+          
             if (FunctionObjectAfter != null && !FunctionObjectAfter.IsNull())
             {
                 txt.Attributes.Add("onchange", "return " + _key + "_after();"); //After
