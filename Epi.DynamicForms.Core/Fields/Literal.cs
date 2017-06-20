@@ -36,7 +36,7 @@ namespace MvcDynamicForms.Fields
                 wrapper.Attributes["ID"] = "mvcdynamicfield_" + Name.ToLower() + "_fieldWrapper";
                 StringBuilder StyleValues = new StringBuilder();
 
-                StyleValues.Append(GetControlStyle(_fontstyle.ToString(), _top.ToString(), _left.ToString(), Width.ToString(), Height.ToString(), IsHidden));
+                StyleValues.Append(GetControlStyle(_fontstyle.ToString(), Math.Truncate(_top).ToString(), Math.Truncate(_left).ToString(), Math.Truncate(Width).ToString(), Math.Truncate(Height).ToString(), IsHidden));
                 wrapper.Attributes.Add(new KeyValuePair<string, string>("style", StyleValues.ToString()));
                 wrapper.InnerHtml = Html;
 
