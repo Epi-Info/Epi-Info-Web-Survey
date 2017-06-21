@@ -1879,34 +1879,27 @@ function CCE_ContextOpenMobileSimpleDialogBox(Title,Prompt,id)
 {
         var passcode1 = '@Model.PassCode';
    
-     
-                         $('#'+ id).simpledialog({
-                //'mode' : 'blank',
-                //'headerText' : Title,
-                //'headerClose' : true,
-                //'dialogAllow' : true,
-                //'useDialogForceTrue': true, 
-                //'useDialogForceFalse': false,
-                //'cleanOnClose': true,
-                //'prompt': Title,
-                //'forceInput': false,
-                             //'useModal':true,
-                             mode: 'button',
-                             headerText: Title,
-                             headerClose: true,
-                             buttonPrompt: Prompt,
-                'buttons' : {
+                    $('#'+id).simpledialog({
+                'mode': 'blank',
+                'headerText': Title,
+                'headerClose': true,
+                'dialogAllow': true,
+                'useDialogForceTrue': true,
+                'useDialogForceFalse': false,
+
+                'prompt': Title,
+                'forceInput': false,
+                'useModal': true,
+                'buttons': {
                               'OK': {
-                                click: function () {
+                        click: function () {
                                   $('#dialogoutput').text('OK');
-                                }
+                }
                               }
-                       
-                },
-                icon: "delete",
-                theme: "c"
-                      // 'fullHTML': "<div id='SimpleDialogBox' title='"+ Title +"'><p><label id='SimpleDialogBoxPrempt'>"+ Prompt +"</label></p><p style='text-align:right;'><button  id='SimpleDialogBoxButton' type='button' style='width:100%;'onclick='CCE_CloseMobileSimpleDialogBox("+ id.toString() +");'>Ok</button></p></div>"
-                  })
+
+                            },
+                       'fullHTML': "<div id='SimpleDialogBox' title='"+Title +"'><p><label id='SimpleDialogBoxPrempt'>"+Prompt +"</label></p><p style='text-align:right;'><button  id='SimpleDialogBoxButton' type='button' style='width:100%;'onclick='CCE_CloseMobileSimpleDialogBox("+id.toString() +");'>Ok</button></p></div>"
+                })
  
  
 }
@@ -2156,7 +2149,7 @@ function CCE_ContextOpenSimpleDialogBox(Title,Prompt,id)
 {
  if (!eval(document.getElementById("IsMobile")))
  {
-
+     
         $('#ui-dialog-title-SimpledialogBox').text(Title.toString());
         $('.ui-dialog-title').text(Title.toString());
         $('#SimpleDialogBoxPrempt').text(Prompt.toString());
