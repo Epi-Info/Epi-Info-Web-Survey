@@ -74,9 +74,8 @@ body
    background: transparent;
    font-size: 20px;
    padding: 7px 10px;
-   width: 100%;
+   width: 80%;
    /*height:85px;*/
-   *width: 100%;
    background-image: none;
    *background: #ffffff;
    -webkit-appearance: none;
@@ -97,7 +96,7 @@ body
    background-color: #ffffff;
    overflow:hidden;
    font-size: 20px;
-   width:100%;
+   width:80%;
    height:35px;
    -moz-border-radius: 0.4em 0.4em 0.4em 0.4em;
    -webkit-border-radius: 0.4em 0.4em 0.4em 0.4em;
