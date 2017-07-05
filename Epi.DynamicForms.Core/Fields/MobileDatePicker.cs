@@ -33,12 +33,16 @@ namespace MvcDynamicForms.Fields
            // StyleValues.Append(GetControlStyle(_fontstyle.ToString(), _Prompttop.ToString(), _Promptleft.ToString(), null, Height.ToString(), _IsHidden));
            // prompt.Attributes.Add("style", StyleValues.ToString());
             html.Append(prompt.ToString());
-
+            var NewDateFormat = string.Empty;
             if (!IsValid)
             {
                 ErrorStyle = ";border-color: red";
+                NewDateFormat = Response;
             }
-            var NewDateFormat = GetRightDateFormat(Response, "YYYY-MM-DD", DateFormat);
+            else
+            {
+                NewDateFormat = GetRightDateFormat(Response, "YYYY-MM-DD", DateFormat);
+            }
             var txt = new TagBuilder("input");
             txt.Attributes.Add("name", inputName);
             txt.Attributes.Add("id", inputName);
