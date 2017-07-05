@@ -60,12 +60,17 @@ namespace MvcDynamicForms
                         else if (dynField is DatePickerField)
                         {
                             var datepickerField = (DatePickerField)dynField;
+                            DateTime dt;
                            // datepickerField.Response = DateTimeOffset.Parse(postedForm[key]).UtcDateTime.ToString()  ;
-                            if (!string.IsNullOrEmpty(postedForm[key]))
-                            {
-                            string date = DateTimeOffset.Parse(postedForm[key]).ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'");
-                            datepickerField.Response = date.Remove(date.IndexOf('T'));
-                            }
+                              var isValidDate=DateTime.TryParse(postedForm[key], out dt);
+                              if (!string.IsNullOrEmpty(postedForm[key]) && isValidDate)
+                              {
+                                  string date = DateTimeOffset.Parse(postedForm[key]).ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'");
+                                  datepickerField.Response = date.Remove(date.IndexOf('T'));
+                              }
+                              else {
+                                  datepickerField.Response = postedForm[key];
+                              }
                         }
                         else if (dynField is TimePickerField)
                         {
