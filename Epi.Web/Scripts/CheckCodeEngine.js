@@ -430,19 +430,18 @@ CCE_Context.prototype.getValue = function (pName)
                         {
                             return false;
                         }
-
                     case "datepicker": //string has been converted to date for comparison with another date
                         value = new Date(field.val()).valueOf();
-                        if (value == "" || isNaN(value))
-                        {
-                            return null;
+                  
+                        if (value == "" || isNaN(value)) {
+                            return field.val();
                         }
-                        else
-                        {
+                        else {
                             return value;
                         }
                         return value;
                     case "timepicker":
+                        
                         var refDate = CCE_GetTodaysDate();//It is a reference date 
                         var dateTime = refDate + " "+field.val();
                         value = new Date(dateTime).getTime();
@@ -513,6 +512,7 @@ CCE_Context.prototype.getValue = function (pName)
                         }
                     case "datepicker": //string has been converted to date for comparison with another date
                         value = new Date(cce_Symbol.Value).valueOf();
+                   
                         if (value == "" || isNaN(value)) {
                             return null;
                         }
@@ -592,7 +592,7 @@ CCE_Context.prototype.setValue = function (pName, pValue) {
         if (cce_Symbol.Source == "datasource") {
             switch (cce_Symbol.Type) {
                 case "datepicker": //string has been converted to date for comparison with another date
-
+                   
                     //  if (eval(document.getElementById("IsMobile"))) {
                     var FormatedDate;
                     if (cce_Symbol.Value != null && cce_Symbol.Value !="")
@@ -935,6 +935,7 @@ Rule_Hide.prototype.Execute = function ()
                     $(query).css("background-color", "yellow");
                     break;
                 case "datepicker":
+                    
                     query = '#mvcdynamicfield_' + pCheckCodeList[i] + "_fieldWrapper";
                     $(query).find('div').css("background-color","yellow");
                         
@@ -1089,7 +1090,8 @@ if (eval(document.getElementById("IsMobile"))){
                     query = '#mvcdynamicfield_' + pCheckCodeList[i];
                     $(query).removeAttr('Style');
                     break;
-               case "datepicker":
+                case "datepicker":
+                    
                       query = '#mvcdynamicfield_' + pCheckCodeList[i] + "_fieldWrapper";
                       $(query).find('div').css("background-color","white");
                       break;
@@ -1500,7 +1502,7 @@ query = '#mvcdynamicfield_' + pCheckCodeList[i];
 
 //function CCE_AddToHiddenFieldsList(FieldName) 
 //{
-//    debugger;
+//    
 //var HiddenFieldsList =document.getElementById("HiddenFieldsList").value.toString()
 //if (HiddenFieldsList != "" && HiddenFieldsList.indexOf(FieldName.toString())== -1)
 //    
@@ -1573,6 +1575,7 @@ function CCE_RemoveFromFieldsList(FieldName,ListName) {
  {
      if (pCheckCodeList != null) 
      {
+         
           // var ControlList = new Array();
              var ControlList = "";
          for (var i = 0; i < pCheckCodeList.length; i++) 
@@ -1708,7 +1711,8 @@ function CCE_RemoveFromFieldsList(FieldName,ListName) {
                                      case "groupbox":
                                      break;
 
-                                  default:
+                                default:
+                                    
                                     $(controlId).val('');
                                     break;
 
@@ -1744,6 +1748,7 @@ function CCE_RemoveFromFieldsList(FieldName,ListName) {
 
  function CCE_GoToControlOrPage(controlOrPage) 
  {
+     
      if (parseInt(controlOrPage) == controlOrPage) 
      {
          var currentUrl = location.href;
@@ -1768,7 +1773,8 @@ function CCE_RemoveFromFieldsList(FieldName,ListName) {
  }
 
 function isValidDate(pValue)
-{
+ {
+    
     var result = false;
     if ( Object.prototype.toString.call(pValue) === "[object Date]" ) 
     {
@@ -2494,7 +2500,8 @@ function CCE_ProcessEnableAllControls(List)
                                     $(query).selectmenu();
                                     $(query).selectmenu('enable');
                                     break;
-                               case "datepicker":
+                       case "datepicker":
+                           
                                      $(query).datebox('enable');
                                       break;
                                 case "timepicker":

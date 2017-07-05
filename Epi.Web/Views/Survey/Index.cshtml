@@ -401,8 +401,6 @@
     }
 
     function updateXml(NameList, pValue) {
-        debugger;
-
         var UpdateUrl = '@Url.Action("UpdateResponseXml","Survey")';
         var NList = "";
         for (var i = 0; i < NameList.length; i++) {
@@ -486,10 +484,8 @@
 
 
         function successFunc(data, status) {
-            debugger
             var Query = "#mvcdynamicfield_" + TableName;
             $.each(data, function (key, value) {
-                debugger;
                 availableTags.push(value);
 
 
@@ -498,7 +494,6 @@
             $(Query).autocomplete({
                 source: availableTags,
                 select: function (event, ui) {
-                    debugger;
                     SetCodes_Val(ui.item.label, SurveyId, TableName, true);
                 },
             });
