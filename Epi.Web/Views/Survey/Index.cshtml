@@ -11,7 +11,22 @@
         background-repeat: no-repeat;
         background-position: right;
         outline: 0;
+   
     }
+
+    input.Search::-ms-expand {
+        display:none!important;
+    }
+
+   input.Search::-ms-clear{
+        display:none;
+
+    }
+
+    input.Search::-webkit-calendar-picker-indicator {
+        display: none;
+    }
+
 </style>
 <script type="text/javascript">
 
@@ -418,7 +433,7 @@
         });
     });
     function SetCodes_Val(obj, SurveyId, TableName, AutoComplete) {
-        debugger;
+        //debugger;
         $('#' + obj.id).val(obj.value);     
         var availableTags = [obj.value];
         var signoutUrl = "";
