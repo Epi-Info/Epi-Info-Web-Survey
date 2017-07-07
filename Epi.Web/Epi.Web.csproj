@@ -452,6 +452,7 @@
     <Content Include="Scripts\jquery.mobile-1.1.1.min.js" />
     <Content Include="Scripts\jquery.mobile.datebox-1.0.1.js" />
     <Content Include="Scripts\jquery.mobile.simpledialog.min.js" />
+    <Content Include="Scripts\jquery.mobile.simpledialog2.min.js" />
     <Content Include="Scripts\jquery.number_format.js" />
     <Content Include="Scripts\jquery.numeric.js" />
     <Content Include="Scripts\jquery.PreventEnter.js" />
