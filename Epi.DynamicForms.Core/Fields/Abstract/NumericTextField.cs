@@ -100,9 +100,9 @@ namespace MvcDynamicForms.Fields
 
                 //if (!regex.IsMatch(Value))
 
-                double testValue = 0.0;
+                double testValue = 0.0; string Value = Response; string lower = Lower; string upper = Upper;
                 CultureInfo us = new CultureInfo("en-US");
-
+                string uiSep = CultureInfo.CurrentUICulture.NumberFormat.NumberDecimalSeparator;
                 if (!double.TryParse(Response, NumberStyles.Any, CultureInfo.InvariantCulture, out testValue))
                 {
                     //invalid: it is not numeric
@@ -117,24 +117,68 @@ namespace MvcDynamicForms.Fields
                     if ((!string.IsNullOrEmpty(Lower)) && (!string.IsNullOrEmpty(Upper)))
                     {
                         //if the number is either less than the lower limit or greater than the upper limit raise error
-                        if ((decimal.Parse(Response) < decimal.Parse(Lower)) || (decimal.Parse(Response) > decimal.Parse(Upper)))
+                        /*if ((decimal.Parse(Response) < decimal.Parse(Lower)) || (decimal.Parse(Response) > decimal.Parse(Upper)))
                         {
                             Error = string.Format("Number must be in between {0} and {1}", Lower, Upper);
                             return false;
+                        }*/
+                                             
+                        if (uiSep == ".")
+                        {
+                            if ((decimal.Parse(Response) < decimal.Parse(Lower)) || (decimal.Parse(Response) > decimal.Parse(Upper)))
+                            {
+                                Error = string.Format("Number must be in between {0} and {1}", Lower, Upper);
+                                return false;
+                            }
+                        }
+                        else
+                        {
+                            Value = Response.Replace(".", ",");
+                            lower = Lower.Replace(".", ",");
+                            upper = Upper.Replace(".", ",");
+                            if ((decimal.Parse(Value) < decimal.Parse(lower)) || (decimal.Parse(Value) > decimal.Parse(upper)))
+                            {
+                                Error = string.Format("Number must be in between {0} and {1}", lower, upper);
+                                return false;
+                            }
+
+                        }
+                       
+
+                    }
+                    if (uiSep == ".")
+                    {
+                        //invalid: checking for lower limit
+                        if ((!string.IsNullOrEmpty(Lower)) && (decimal.Parse(Response) < decimal.Parse(Lower)))
+                        {
+                            Error = string.Format("Number can not be less than {0}", Lower);
+                            return false;
+                        }
+                        //invalid: checking the upper limit 
+                        if ((!string.IsNullOrEmpty(Upper)) && (decimal.Parse(Response) > decimal.Parse(Upper)))
+                        {
+                            Error = string.Format("Number can not be greater than {0}", Upper);
+                            return false;
                         }
                     }
+                    else
+                    {
+                        Value = Response.Replace(".", ",");
+                        lower = Lower.Replace(".", ",");
+                        upper = Upper.Replace(".", ",");
 
-                    //invalid: checking for lower limit
-                    if ((!string.IsNullOrEmpty(Lower)) && (decimal.Parse(Response) < decimal.Parse(Lower)))
-                    {
-                        Error = string.Format("Number can not be less than {0}", Lower);
-                        return false;
-                    }
-                    //invalid: checking the upper limit 
-                    if ((!string.IsNullOrEmpty(Upper)) && (decimal.Parse(Response) > decimal.Parse(Upper)))
-                    {
-                        Error = string.Format("Number can not be greater than {0}", Upper);
-                        return false;
+                        if ((!string.IsNullOrEmpty(Lower)) && (decimal.Parse(Value) < decimal.Parse(lower)))
+                        {
+                            Error = string.Format("Number can not be less than {0}", lower);
+                            return false;
+                        }
+                        //invalid: checking the upper limit 
+                        if ((!string.IsNullOrEmpty(Upper)) && (decimal.Parse(Value) > decimal.Parse(upper)))
+                        {
+                            Error = string.Format("Number can not be greater than {0}", upper);
+                            return false;
+                        }
+
                     }
 
 
