@@ -233,7 +233,7 @@ namespace MvcDynamicForms.Fields
                 }
                 else
                 {
-                    switch (patternOut.ToString())
+                    switch (patternOut.ToString().ToLower())
                     {
                         case "dd/mm/yyyy":
                             NewDateFormat.Append(DD);
@@ -242,21 +242,14 @@ namespace MvcDynamicForms.Fields
                             NewDateFormat.Append('/');
                             NewDateFormat.Append(YYYY);
                             break;
-                        case "dd/MM/yy":
+                        case "dd/mm/yy":
                             NewDateFormat.Append(DD);
                             NewDateFormat.Append('/');
                             NewDateFormat.Append(MM);
                             NewDateFormat.Append('/');
                             NewDateFormat.Append(YYYY);
-                            break;
-                        case "DD/MM/YY":
-                            NewDateFormat.Append(DD);
-                            NewDateFormat.Append('/');
-                            NewDateFormat.Append(MM);
-                            NewDateFormat.Append('/');
-                            NewDateFormat.Append(YYYY);
-                            break;
-                        case "D/M/YY":
+                            break;                      
+                        case "d/m/yy":
                             NewDateFormat.Append(DD);
                             NewDateFormat.Append('/');
                             NewDateFormat.Append(MM);
@@ -269,28 +262,21 @@ namespace MvcDynamicForms.Fields
                             NewDateFormat.Append(DD);
                             NewDateFormat.Append('/');
                             NewDateFormat.Append(YYYY);
-                            break;
-                        case "M/d/yy":
+                            break;                       
+                        case "m/d/yy":
                             NewDateFormat.Append(MM);
                             NewDateFormat.Append('/');
                             NewDateFormat.Append(DD);
                             NewDateFormat.Append('/');
                             NewDateFormat.Append(YYYY);
                             break;
-                        case "yy/MM/dd":
+                        case "yy/mm/dd":
                             NewDateFormat.Append(YYYY);
                             NewDateFormat.Append('/');
                             NewDateFormat.Append(MM);
                             NewDateFormat.Append('/');
                             NewDateFormat.Append(DD);
-                            break;
-                        case "d/M/yy":
-                            NewDateFormat.Append(DD);
-                            NewDateFormat.Append('/');
-                            NewDateFormat.Append(MM);
-                            NewDateFormat.Append('/');
-                            NewDateFormat.Append(YYYY);
-                            break;
+                            break;                      
                         //.
                         case "dd.mm.yyyy":
                             NewDateFormat.Append(DD);
@@ -299,42 +285,21 @@ namespace MvcDynamicForms.Fields
                             NewDateFormat.Append('.');
                             NewDateFormat.Append(YYYY);
                             break;
-                        case "dd.MM.yy":
+                        case "dd.mm.yy":
                             NewDateFormat.Append(DD);
                             NewDateFormat.Append('.');
                             NewDateFormat.Append(MM);
                             NewDateFormat.Append('.');
                             NewDateFormat.Append(YYYY);
-                            break;
-                        case "d.M.yy":
-                            NewDateFormat.Append(DD);
-                            NewDateFormat.Append('.');
-                            NewDateFormat.Append(MM);
-                            NewDateFormat.Append('.');
-                            NewDateFormat.Append(YYYY);
-                            break;
-                        case "DD.MM.YY":
-                            NewDateFormat.Append(DD);
-                            NewDateFormat.Append('.');
-                            NewDateFormat.Append(MM);
-                            NewDateFormat.Append('.');
-                            NewDateFormat.Append(YYYY);
-                            break;
-                        case "D.M.YY":
-                            NewDateFormat.Append(DD);
-                            NewDateFormat.Append('.');
-                            NewDateFormat.Append(MM);
-                            NewDateFormat.Append('.');
-                            NewDateFormat.Append(YYYY);
-                            break;
+                            break;                                             
                         case "mm.dd.yyyy":
                             NewDateFormat.Append(MM);
                             NewDateFormat.Append('.');
                             NewDateFormat.Append(DD);
                             NewDateFormat.Append('.');
                             NewDateFormat.Append(YYYY);
-                            break;
-                        case "M.d.yy":
+                            break;                      
+                        case "m.d.yy":
                             NewDateFormat.Append(MM);
                             NewDateFormat.Append('.');
                             NewDateFormat.Append(DD);
@@ -356,21 +321,14 @@ namespace MvcDynamicForms.Fields
                             NewDateFormat.Append('-');
                             NewDateFormat.Append(YYYY);
                             break;
-                        case "dd-MM-yy":
+                        case "dd-mm-yy":
                             NewDateFormat.Append(DD);
                             NewDateFormat.Append('-');
                             NewDateFormat.Append(MM);
                             NewDateFormat.Append('-');
                             NewDateFormat.Append(YYYY);
-                            break;
-                        case "DD-MM-YY":
-                            NewDateFormat.Append(DD);
-                            NewDateFormat.Append('-');
-                            NewDateFormat.Append(MM);
-                            NewDateFormat.Append('-');
-                            NewDateFormat.Append(YYYY);
-                            break;
-                        case "D-M-YY":
+                            break;                      
+                        case "d-m-yy":
                             NewDateFormat.Append(DD);
                             NewDateFormat.Append('-');
                             NewDateFormat.Append(MM);
@@ -383,28 +341,21 @@ namespace MvcDynamicForms.Fields
                             NewDateFormat.Append(DD);
                             NewDateFormat.Append('-');
                             NewDateFormat.Append(YYYY);
-                            break;
-                        case "M-d-yy":
+                            break;                       
+                        case "m-d-yy":
                             NewDateFormat.Append(MM);
                             NewDateFormat.Append('-');
                             NewDateFormat.Append(DD);
                             NewDateFormat.Append('-');
                             NewDateFormat.Append(YYYY);
                             break;
-                        case "yy-MM-dd":
+                        case "yy-mm-dd":
                             NewDateFormat.Append(YYYY);
                             NewDateFormat.Append('-');
                             NewDateFormat.Append(MM);
                             NewDateFormat.Append('-');
                             NewDateFormat.Append(DD);
-                            break;
-                        case "d-M-yy":
-                            NewDateFormat.Append(DD);
-                            NewDateFormat.Append('-');
-                            NewDateFormat.Append(MM);
-                            NewDateFormat.Append('-');
-                            NewDateFormat.Append(YYYY);
-                            break;
+                            break;                      
 
                     }
                 }

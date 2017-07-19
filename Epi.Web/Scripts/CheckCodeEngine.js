@@ -456,21 +456,18 @@ CCE_Context.prototype.getValue = function (pName)
                         }
                         return value;
                     case "numeric": //string has been converted to number to compare with another number
-                        value = new Number(field.val()).valueOf();
-                       
-                        if (value == "" || isNaN(value))
-                        {
-                            if (value==0)
-                            {
+                        var validNumber = field.val();
+                        value = new Number(validNumber.replace(',', '.')).valueOf();
+
+                        if (value == "" || isNaN(value)) {
+                            if (value == 0) {
                                 return value;
                             }
-                            else
-                            {
+                            else {
                                 return null;
                             }
                         }
-                        else
-                        {
+                        else {
                             return value;
                         }
                         
@@ -571,9 +568,9 @@ function CCE_GetTodaysDate() {
 }
 
 
-CCE_Context.prototype.setValue = function (pName, pValue) {
-    var cce_Symbol = this.resolve(pName);
-
+CCE_Context.prototype.setValue = function (pName,pValue,dateformat,NumberSep) {
+    var cce_Symbol = this.resolve(pName);    
+    
     if (cce_Symbol != null) {
         cce_Symbol.Value = pValue;
 
@@ -598,10 +595,71 @@ CCE_Context.prototype.setValue = function (pName, pValue) {
                     var FormatedDate;
                     if (cce_Symbol.Value != null && cce_Symbol.Value !="")
                     {
-                   var date = new Date(cce_Symbol.Value);
-                    FormatedDate = date.getMonth() + 1 + "/" + date.getDate() + "/" + date.getFullYear();
-                    cce_Symbol.Value = FormatedDate;
-                       } 
+                        if (Date.parse(cce_Symbol.Value))
+                        {
+                            var date = new Date(cce_Symbol.Value);
+                            switch (dateformat.toLowerCase()) {
+                                case "dd/mm/yyyy":
+                                    FormatedDate = (date.getDate() < 10 ? "0" + date.getDate() : date.getDate()) + "/" + ((date.getMonth() + 1) < 10 ? "0" + (date.getMonth() + 1) : (date.getMonth() + 1)) + "/" + date.getFullYear();
+                                    break;
+                                case "d/m/yyyy":
+                                    FormatedDate = (date.getDate() < 10 ? date.getDate() : date.getDate()) + "/" + ((date.getMonth() + 1) < 10 ?   (date.getMonth() + 1) : (date.getMonth() + 1)) + "/" + date.getFullYear();
+                                    break;
+                                case "mm/dd/yyyy":
+                                    FormatedDate = ((date.getMonth() + 1) < 10 ? "0" + (date.getMonth() + 1) : (date.getMonth() + 1)) + "/" + (date.getDate() < 10 ? "0" + date.getDate() : date.getDate()) + "/" + date.getFullYear();
+                                    break;
+                                case "mm/dd/yy":
+                                    FormatedDate = ((date.getMonth() + 1) < 10 ? "0" + (date.getMonth() + 1) : (date.getMonth() + 1)) + "/" + (date.getDate() < 10 ? "0" + date.getDate() : date.getDate()) + "/" + date.getFullYear();
+                                    break;
+                                case "m/d/yyyy":
+                                    FormatedDate = ((date.getMonth() + 1) < 10 ?  (date.getMonth() + 1) : (date.getMonth() + 1)) + "/" + (date.getDate() < 10 ?  date.getDate() : date.getDate()) + "/" + date.getFullYear();
+                                    break;
+                                case "yyyy/mm/dd":
+                                    FormatedDate = date.getFullYear() + "/" + (date.getMonth() + 1) > 10 ? "0" + (date.getMonth() + 1) : (date.getMonth() + 1) + "/" + (date.getDate() > 10 ? "0" + date.getDate() : date.getDate());
+                                    break;
+                                case "dd-mm-yyyy":
+                                    FormatedDate = (date.getDate() > 10 ? "0" + date.getDate() : date.getDate()) + "-" + (date.getMonth() + 1) > 10 ? "0" + (date.getMonth() + 1) : (date.getMonth() + 1) + "-" + date.getFullYear();
+                                    break;
+                                case "d-m-yyyy":
+                                    FormatedDate = (date.getDate() > 10 ?  date.getDate() : date.getDate()) + "-" + (date.getMonth() + 1) > 10 ?  (date.getMonth() + 1) : (date.getMonth() + 1) + "-" + date.getFullYear();
+                                    break;
+                                case "mm-dd-yyyy":
+                                    FormatedDate = (date.getMonth() + 1) > 10 ? "0" + (date.getMonth() + 1) : (date.getMonth() + 1) + "-" + (date.getDate() > 10 ? "0" + date.getDate() : date.getDate()) + "-" + date.getFullYear();
+                                    break;
+                                case "m-d-yyyy":
+                                    FormatedDate = (date.getMonth() + 1) > 10 ?  (date.getMonth() + 1) : (date.getMonth() + 1) + "-" + (date.getDate() > 10 ?  date.getDate() : date.getDate()) + "-" + date.getFullYear();
+                                    break;
+                                case "yyyy-mm-dd":
+                                    FormatedDate = date.getFullYear() + "-" + (date.getMonth() + 1) > 10 ? "0" + (date.getMonth() + 1) : (date.getMonth() + 1) + "-" + (date.getDate() > 10 ? "0" + date.getDate() : date.getDate());
+                                    break;
+                                case "dd.mm.yyyy":
+                                    FormatedDate = (date.getDate() > 10 ? "0" + date.getDate() : date.getDate()) + "." + (date.getMonth() + 1) > 10 ? "0" + (date.getMonth() + 1) : (date.getMonth() + 1) + "." + date.getFullYear();
+                                    break;
+                                case "d.m.yyyy":
+                                    FormatedDate = (date.getDate() > 10 ?  date.getDate() : date.getDate()) + "." + (date.getMonth() + 1) > 10 ?  (date.getMonth() + 1) : (date.getMonth() + 1) + "." + date.getFullYear();
+                                    break;
+                                case "mm.dd.yyyy":
+                                    FormatedDate = (date.getMonth() + 1) > 10 ? "0" + (date.getMonth() + 1) : (date.getMonth() + 1) + "." + (date.getDate() > 10 ? "0" + date.getDate() : date.getDate()) + "." + date.getFullYear();
+                                    break;
+                                case "m.d.yyyy":
+                                    FormatedDate = (date.getMonth() + 1) > 10 ?  (date.getMonth() + 1) : (date.getMonth() + 1) + "." + (date.getDate() > 10 ?  date.getDate() : date.getDate()) + "." + date.getFullYear();
+                                    break;
+                                case "yyyy.mm.dd":
+                                    FormatedDate = date.getFullYear() + "." + (date.getMonth() + 1) > 10 ? "0" + (date.getMonth() + 1) : (date.getMonth() + 1) + "." + (date.getDate() > 10 ? "0" + date.getDate() : date.getDate());
+                                    break;
+                                default:
+                                    FormatedDate = cce_Symbol.Value;
+                                    break;
+
+                            }
+                        }
+                        else {
+                            FormatedDate= cce_Symbol.Value;
+                        }
+                        
+                       
+                        cce_Symbol.Value = FormatedDate;
+                    }                    
                         $(Jquery).val(FormatedDate);
                     //}
                     //else {
@@ -811,6 +869,14 @@ CCE_Context.prototype.setValue = function (pName, pValue) {
                     $(Jquery).html(pValue);
                     cce_Symbol.Value = pValue;
                     break;
+                case "numeric":                    
+                    if (NumberSep == ",") {
+                        pValue = pValue.toString().replace('.', ',')
+                        cce_Symbol.Value = pValue;
+                    }
+                    else {
+                        cce_Symbol.Value = pValue;
+                    }
                 default:
                     $(Jquery).val(pValue);
                     cce_Symbol.Value = pValue;
@@ -1092,9 +1158,8 @@ if (eval(document.getElementById("IsMobile"))){
                     $(query).removeAttr('Style');
                     break;
                 case "datepicker":
-                    
-                      query = '#mvcdynamicfield_' + pCheckCodeList[i] + "_fieldWrapper";
-                      $(query).find('div').css("background-color","white");
+                    query = '#mvcdynamicfield_' + pCheckCodeList[i] + "_fieldWrapper";
+                    $(query).find('div').css("background-color", "white");
                       break;
                 case "timepicker":
                     query = '#mvcdynamicfield_' + pCheckCodeList[i] + "_fieldWrapper";
@@ -1858,7 +1923,6 @@ function CCE_Round(pValue1 )
 
 function CCE_Day(pValue) 
 {
-
     if(isValidDate(pValue))
     {
         return pValue.getDate();
