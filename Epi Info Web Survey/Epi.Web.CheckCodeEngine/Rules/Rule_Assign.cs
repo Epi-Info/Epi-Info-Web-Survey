@@ -4,6 +4,8 @@ using System.Text;
 using com.calitha.goldparser;
 //using Epi.Data;
 using EpiInfo.Plugin;
+using System.Globalization;
+using System.Threading;
 
 namespace Epi.Core.EnterInterpreter.Rules
 {
@@ -177,10 +179,19 @@ namespace Epi.Core.EnterInterpreter.Rules
 
         public override void ToJavaScript(StringBuilder pJavaScriptBuilder)
         {
+            CultureInfo currentCulture = Thread.CurrentThread.CurrentCulture;
+            string uiSep = currentCulture.NumberFormat.NumberDecimalSeparator;
+            string DateFormat = currentCulture.DateTimeFormat.ShortDatePattern;
+
             pJavaScriptBuilder.Append("cce_Context.setValue('");
             pJavaScriptBuilder.Append(this.QualifiedId.ToLower());
             pJavaScriptBuilder.Append("', ");
             this.value.ToJavaScript(pJavaScriptBuilder);
+            pJavaScriptBuilder.Append(", '");
+            pJavaScriptBuilder.Append(DateFormat + "'");
+            pJavaScriptBuilder.Append(", '");
+            pJavaScriptBuilder.Append(uiSep + "'");
+
             pJavaScriptBuilder.AppendLine(");");
         }
 
