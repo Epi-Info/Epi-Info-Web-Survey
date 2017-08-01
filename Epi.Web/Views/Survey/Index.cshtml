@@ -100,7 +100,7 @@
     function ChangeDatePickerFormat(dateformat,controlVal) {
         
         dateformat = dateformat.toLocaleLowerCase().toString();      
-        $(controlVal).datepicker("option", "dateFormat", dateformat);
+        $("#" + this.id).datepicker("option", "dateFormat", dateformat);
 
     }
 
