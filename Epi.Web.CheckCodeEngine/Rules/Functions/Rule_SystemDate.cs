@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using com.calitha.goldparser;
+using System.Threading;
+using System.Globalization;
 
 namespace Epi.Core.EnterInterpreter.Rules
 {
@@ -28,7 +30,16 @@ namespace Epi.Core.EnterInterpreter.Rules
 
         public override void ToJavaScript(StringBuilder pJavaScriptBuilder)
         {
-            pJavaScriptBuilder.Append("CCE_SystemDate()");
+            //pJavaScriptBuilder.Append("CCE_SystemDate()");
+
+
+            CultureInfo currentCulture = Thread.CurrentThread.CurrentCulture;
+            string uiSep = currentCulture.NumberFormat.NumberDecimalSeparator;
+            string DateFormat = currentCulture.DateTimeFormat.ShortDatePattern;
+
+            pJavaScriptBuilder.Append("CCE_SystemDate('");
+            pJavaScriptBuilder.Append(DateFormat.ToLower() + "'");
+            pJavaScriptBuilder.AppendLine(")");
         }
 
     }

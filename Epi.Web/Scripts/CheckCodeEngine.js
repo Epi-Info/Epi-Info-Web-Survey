@@ -432,7 +432,7 @@ CCE_Context.prototype.getValue = function (pName)
                             return false;
                         }
                     case "datepicker": //string has been converted to date for comparison with another date
-                        value = new Date(field.val()).valueOf();
+                        value = field.val();
                   
                         if (value == "" || isNaN(value)) {
                             return field.val();
@@ -589,87 +589,15 @@ CCE_Context.prototype.setValue = function (pName,pValue,dateformat,NumberSep) {
         // setTimeout(function () { 
         if (cce_Symbol.Source == "datasource") {
             switch (cce_Symbol.Type) {
-                case "datepicker": //string has been converted to date for comparison with another date
-                   
+                case "datepicker": //string has been converted to date for comparison with another date                    
                     //  if (eval(document.getElementById("IsMobile"))) {
                     var FormatedDate;
-                    if (cce_Symbol.Value != null && cce_Symbol.Value !="")
-                    {
-                        if (Date.parse(cce_Symbol.Value))
-                        {
-                            var date = new Date(cce_Symbol.Value);
-                            switch (dateformat.toLowerCase()) {
-                                case "dd/mm/yyyy":
-                                    FormatedDate = (date.getDate() < 10 ? "0" + date.getDate() : date.getDate()) + "/" + ((date.getMonth() + 1) < 10 ? "0" + (date.getMonth() + 1) : (date.getMonth() + 1)) + "/" + date.getFullYear();
-                                    break;
-                                case "d/m/yyyy":
-                                    FormatedDate = (date.getDate() < 10 ? date.getDate() : date.getDate()) + "/" + ((date.getMonth() + 1) < 10 ?   (date.getMonth() + 1) : (date.getMonth() + 1)) + "/" + date.getFullYear();
-                                    break;
-                                case "mm/dd/yyyy":
-                                    FormatedDate = ((date.getMonth() + 1) < 10 ? "0" + (date.getMonth() + 1) : (date.getMonth() + 1)) + "/" + (date.getDate() < 10 ? "0" + date.getDate() : date.getDate()) + "/" + date.getFullYear();
-                                    break;
-                                case "mm/dd/yy":
-                                    FormatedDate = ((date.getMonth() + 1) < 10 ? "0" + (date.getMonth() + 1) : (date.getMonth() + 1)) + "/" + (date.getDate() < 10 ? "0" + date.getDate() : date.getDate()) + "/" + date.getFullYear();
-                                    break;
-                                case "m/d/yyyy":
-                                    FormatedDate = ((date.getMonth() + 1) < 10 ?  (date.getMonth() + 1) : (date.getMonth() + 1)) + "/" + (date.getDate() < 10 ?  date.getDate() : date.getDate()) + "/" + date.getFullYear();
-                                    break;
-                                case "yyyy/mm/dd":
-                                    FormatedDate = date.getFullYear() + "/" + (date.getMonth() + 1) > 10 ? "0" + (date.getMonth() + 1) : (date.getMonth() + 1) + "/" + (date.getDate() > 10 ? "0" + date.getDate() : date.getDate());
-                                    break;
-                                case "dd-mm-yyyy":
-                                    FormatedDate = (date.getDate() > 10 ? "0" + date.getDate() : date.getDate()) + "-" + (date.getMonth() + 1) > 10 ? "0" + (date.getMonth() + 1) : (date.getMonth() + 1) + "-" + date.getFullYear();
-                                    break;
-                                case "d-m-yyyy":
-                                    FormatedDate = (date.getDate() > 10 ?  date.getDate() : date.getDate()) + "-" + (date.getMonth() + 1) > 10 ?  (date.getMonth() + 1) : (date.getMonth() + 1) + "-" + date.getFullYear();
-                                    break;
-                                case "mm-dd-yyyy":
-                                    FormatedDate = (date.getMonth() + 1) > 10 ? "0" + (date.getMonth() + 1) : (date.getMonth() + 1) + "-" + (date.getDate() > 10 ? "0" + date.getDate() : date.getDate()) + "-" + date.getFullYear();
-                                    break;
-                                case "m-d-yyyy":
-                                    FormatedDate = (date.getMonth() + 1) > 10 ?  (date.getMonth() + 1) : (date.getMonth() + 1) + "-" + (date.getDate() > 10 ?  date.getDate() : date.getDate()) + "-" + date.getFullYear();
-                                    break;
-                                case "yyyy-mm-dd":
-                                    FormatedDate = date.getFullYear() + "-" + (date.getMonth() + 1) > 10 ? "0" + (date.getMonth() + 1) : (date.getMonth() + 1) + "-" + (date.getDate() > 10 ? "0" + date.getDate() : date.getDate());
-                                    break;
-                                case "dd.mm.yyyy":
-                                    FormatedDate = (date.getDate() > 10 ? "0" + date.getDate() : date.getDate()) + "." + (date.getMonth() + 1) > 10 ? "0" + (date.getMonth() + 1) : (date.getMonth() + 1) + "." + date.getFullYear();
-                                    break;
-                                case "d.m.yyyy":
-                                    FormatedDate = (date.getDate() > 10 ?  date.getDate() : date.getDate()) + "." + (date.getMonth() + 1) > 10 ?  (date.getMonth() + 1) : (date.getMonth() + 1) + "." + date.getFullYear();
-                                    break;
-                                case "mm.dd.yyyy":
-                                    FormatedDate = (date.getMonth() + 1) > 10 ? "0" + (date.getMonth() + 1) : (date.getMonth() + 1) + "." + (date.getDate() > 10 ? "0" + date.getDate() : date.getDate()) + "." + date.getFullYear();
-                                    break;
-                                case "m.d.yyyy":
-                                    FormatedDate = (date.getMonth() + 1) > 10 ?  (date.getMonth() + 1) : (date.getMonth() + 1) + "." + (date.getDate() > 10 ?  date.getDate() : date.getDate()) + "." + date.getFullYear();
-                                    break;
-                                case "yyyy.mm.dd":
-                                    FormatedDate = date.getFullYear() + "." + (date.getMonth() + 1) > 10 ? "0" + (date.getMonth() + 1) : (date.getMonth() + 1) + "." + (date.getDate() > 10 ? "0" + date.getDate() : date.getDate());
-                                    break;
-                                default:
-                                    FormatedDate = cce_Symbol.Value;
-                                    break;
+                    if (cce_Symbol.Value != null && cce_Symbol.Value != "") {
 
-                            }
-                        }
-                        else {
-                            FormatedDate= cce_Symbol.Value;
-                        }
-                        
-                       
-                        cce_Symbol.Value = FormatedDate;
-                    }                    
-                        $(Jquery).val(FormatedDate);
-                    //}
-                    //else {
-                    
-                            
-                    //        $(Jquery).datepicker("setDate", new Date(pValue));
-                    
-                    //    cce_Symbol.Value = pValue;
-                    //}
-
+                        $(Jquery).val(cce_Symbol.Value);
+                    } else {
+                        $(Jquery).val("");
+                    }
                     break;
 
                 case "timepicker":
@@ -2026,10 +1954,65 @@ function CCE_Truncate(pValue)
     return pValue | 0; // bitwise operators convert operands to 32-bit integers
 }
 
-function CCE_SystemDate()
-{
-    var SystemDate = new Date();
-    return SystemDate;
+function CCE_SystemDate(dateformat)
+{ 
+    var date = new Date();
+    var FormatedDate;
+    switch (dateformat.toLowerCase()) {
+        case "dd/mm/yyyy":
+            FormatedDate = (date.getDate() < 10 ? "0" + date.getDate() : date.getDate()) + "/" + ((date.getMonth() + 1) < 10 ? "0" + (date.getMonth() + 1) : (date.getMonth() + 1)) + "/" + date.getFullYear();
+            break;
+        case "d/m/yyyy":
+            FormatedDate = (date.getDate() < 10 ? date.getDate() : date.getDate()) + "/" + ((date.getMonth() + 1) < 10 ? (date.getMonth() + 1) : (date.getMonth() + 1)) + "/" + date.getFullYear();
+            break;
+        case "mm/dd/yyyy":
+            FormatedDate = ((date.getMonth() + 1) < 10 ? "0" + (date.getMonth() + 1) : (date.getMonth() + 1)) + "/" + (date.getDate() < 10 ? "0" + date.getDate() : date.getDate()) + "/" + date.getFullYear();
+            break;
+        case "mm/dd/yy":
+            FormatedDate = ((date.getMonth() + 1) < 10 ? "0" + (date.getMonth() + 1) : (date.getMonth() + 1)) + "/" + (date.getDate() < 10 ? "0" + date.getDate() : date.getDate()) + "/" + date.getFullYear();
+            break;
+        case "m/d/yyyy":
+            FormatedDate = ((date.getMonth() + 1) < 10 ? (date.getMonth() + 1) : (date.getMonth() + 1)) + "/" + (date.getDate() < 10 ? date.getDate() : date.getDate()) + "/" + date.getFullYear();
+            break;
+        case "yyyy/mm/dd":
+            FormatedDate = date.getFullYear() + "/" + (date.getMonth() + 1) > 10 ? "0" + (date.getMonth() + 1) : (date.getMonth() + 1) + "/" + (date.getDate() > 10 ? "0" + date.getDate() : date.getDate());
+            break;
+        case "dd-mm-yyyy":
+            FormatedDate = (date.getDate() > 10 ? "0" + date.getDate() : date.getDate()) + "-" + (date.getMonth() + 1) > 10 ? "0" + (date.getMonth() + 1) : (date.getMonth() + 1) + "-" + date.getFullYear();
+            break;
+        case "d-m-yyyy":
+            FormatedDate = (date.getDate() > 10 ? date.getDate() : date.getDate()) + "-" + (date.getMonth() + 1) > 10 ? (date.getMonth() + 1) : (date.getMonth() + 1) + "-" + date.getFullYear();
+            break;
+        case "mm-dd-yyyy":
+            FormatedDate = (date.getMonth() + 1) > 10 ? "0" + (date.getMonth() + 1) : (date.getMonth() + 1) + "-" + (date.getDate() > 10 ? "0" + date.getDate() : date.getDate()) + "-" + date.getFullYear();
+            break;
+        case "m-d-yyyy":
+            FormatedDate = (date.getMonth() + 1) > 10 ? (date.getMonth() + 1) : (date.getMonth() + 1) + "-" + (date.getDate() > 10 ? date.getDate() : date.getDate()) + "-" + date.getFullYear();
+            break;
+        case "yyyy-mm-dd":
+            FormatedDate = date.getFullYear() + "-" + (date.getMonth() + 1) > 10 ? "0" + (date.getMonth() + 1) : (date.getMonth() + 1) + "-" + (date.getDate() > 10 ? "0" + date.getDate() : date.getDate());
+            break;
+        case "dd.mm.yyyy":
+            FormatedDate = (date.getDate() > 10 ? "0" + date.getDate() : date.getDate()) + "." + (date.getMonth() + 1) > 10 ? "0" + (date.getMonth() + 1) : (date.getMonth() + 1) + "." + date.getFullYear();
+            break;
+        case "d.m.yyyy":
+            FormatedDate = (date.getDate() > 10 ? date.getDate() : date.getDate()) + "." + (date.getMonth() + 1) > 10 ? (date.getMonth() + 1) : (date.getMonth() + 1) + "." + date.getFullYear();
+            break;
+        case "mm.dd.yyyy":
+            FormatedDate = (date.getMonth() + 1) > 10 ? "0" + (date.getMonth() + 1) : (date.getMonth() + 1) + "." + (date.getDate() > 10 ? "0" + date.getDate() : date.getDate()) + "." + date.getFullYear();
+            break;
+        case "m.d.yyyy":
+            FormatedDate = (date.getMonth() + 1) > 10 ? (date.getMonth() + 1) : (date.getMonth() + 1) + "." + (date.getDate() > 10 ? date.getDate() : date.getDate()) + "." + date.getFullYear();
+            break;
+        case "yyyy.mm.dd":
+            FormatedDate = date.getFullYear() + "." + (date.getMonth() + 1) > 10 ? "0" + (date.getMonth() + 1) : (date.getMonth() + 1) + "." + (date.getDate() > 10 ? "0" + date.getDate() : date.getDate());
+            break;
+        default:
+            FormatedDate = cce_Symbol.Value;
+            break;
+    }
+
+    return FormatedDate;
 }
 
 
