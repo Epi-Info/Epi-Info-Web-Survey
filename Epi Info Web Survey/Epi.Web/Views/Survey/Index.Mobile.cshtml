@@ -278,7 +278,7 @@
 
 
             if ('@Model.StatusId' == '1') { //if clicking the save button for the first time
-
+         
                 $('#Savebutton1').simpledialog2({
                     'mode': 'blank',
                     'prompt': false,
@@ -292,7 +292,7 @@
                         }
 
                     },
-                    'blankContent': "<div class='success'><div class='image'><img src='../../Content/images/button_check.png' style='vertical-align: middle; padding-right:5px; width:24px;'alt=''/></div><div class='message' style='width:85% !important;'>Your Survey has been saved.</div><div style='clear:both;'></div></div>  <p><span style='font-weight:bold;'>Survey Link:</span><br /><textarea " + "value=" + GetRedirectionUrl().toString() + "  id='url' cols='65'  style='  height:45px;  white-space:pre; background:#d6e7f5; border:1px solid #aecfea; padding:4px; margin-top:4px;' readonly='readonly'>" + GetRedirectionUrl().toString() + "</textarea></p><p style='font-weight:bold;'>Pass Code: <span id='spPassCode' style='font-size:12pt; background:#d6e7f5; border:1px solid #aecfea; padding:4px 10px;'>" + passcode1 + "</span></p> <hr/> <p>Enter your email address to have the Survey Link and Pass Code emailed to you.</p><p><span style='font-weight:bold;'>Email Subject:</span><br /><textarea id='Subject' cols='65'  style='  height:30px;  white-space:pre; border:1px solid #aecfea; padding:4px; margin-top:4px;'>" + Subject + "</textarea></p><p><label for='email' style='font-weight:bold;'>Email:</label> <input id='email' type='email' /></p>  <p><label for='confirmemail'style='font-weight:bold;'>Confirm Email:</label> <input id='confirmemail' type='email' /><div align='center'> <a  onclick ='SendEmail();'  class='login'  style='width:50px; padding:8px 15px !important;'>Send Email</a></div></p>  <br /> <p style='font-size: 8pt; padding: 5px; background: #ffffa8; margin-top:-5px;'><strong>Note:</strong> Your email address will not be saved and will only be used to send you the survey link.</p>"
+                    'blankContent': "<div class='success'><div class='image'><img src='../../Content/images/button_check.png' style='vertical-align: middle; padding-right:5px; width:24px;'alt=''/></div><div class='message' style='width:85% !important;'>Your Survey has been saved.</div><div style='clear:both;'></div></div>  <p><span style='font-weight:bold;'>Survey Link:</span><br /><textarea " + "value=" + GetRedirectionUrl().toString() + "  id='url' cols='65'  class='surveryLinkTxtArea' readonly='readonly'>" + GetRedirectionUrl().toString() + "</textarea></p><p style='font-weight:bold;'>Pass Code: <span id='spPassCode' class='passcodeBox1'>" + passcode1 + "</span></p> <hr/> <p>Enter your email address to have the Survey Link and Pass Code emailed to you.</p><p><span style='font-weight:bold;'>Email Subject:</span><br /><textarea id='Subject' cols='65'  style='  height:30px;  white-space:pre; border:1px solid #aecfea; padding:4px; margin-top:4px;'>" + Subject + "</textarea></p><p><label for='email' style='font-weight:bold;'>Email:</label> <input id='email' type='email' /></p>  <p><label for='confirmemail'style='font-weight:bold;'>Confirm Email:</label> <input id='confirmemail' type='email' /><div align='center'> <a  onclick ='SendEmail();'  class='login'  style='width:50px; padding:8px 15px !important;'>Send Email</a></div></p>  <br /> <p style='font-size: 8pt; padding: 5px; background: #ffffa8; margin-top:-5px;'><strong>Note:</strong> Your email address will not be saved and will only be used to send you the survey link.</p>"
                 })
 
             }
@@ -449,7 +449,7 @@
                 }
 
             },
-            'blankContent': "<div class='success'><div class='image'><img src='../../Content/images/button_check.png' style='vertical-align: middle; padding-right:5px; width:24px;'alt=''/></div><div class='message' style='width:85% !important;'>Your Survey has been saved.</div><div style='clear:both;'></div></div>  <p><span style='font-weight:bold;'>Survey Link:</span><br /><textarea " + "value=" + GetRedirectionUrl().toString() + "  id='url' cols='65'  style='  height:45px;  white-space:pre; background:#d6e7f5; border:1px solid #aecfea; padding:4px; margin-top:4px;' readonly='readonly'>" + GetRedirectionUrl().toString() + "</textarea></p><p style='font-weight:bold;'>Pass Code: <span id='spPassCode' style='font-size:12pt; background:#d6e7f5; border:1px solid #aecfea; padding:4px 10px;'>" + passcode1 + "</span></p> <hr/> <p>Enter your email address to have the Survey Link and Pass Code emailed to you.</p><p><span style='font-weight:bold;'>Email Subject:</span><br /><textarea id='Subject' cols='65'  style='  height:30px;  white-space:pre; border:1px solid #aecfea; padding:4px; margin-top:4px;'>" + Subject + "</textarea></p><p><label for='email' style='font-weight:bold;'>Email:</label> <input id='email' type='email' /></p>  <p><label for='confirmemail' style='font-weight:bold;'>Confirm Email:</label> <input id='confirmemail' type='email' /><div align='center'> <a  onclick ='SendEmail();'  class='login'  style='width:50px; padding:8px 15px !important;'>Send Email</a></div></p>  <br /> <p style='font-size: 8pt; padding: 5px; background: #ffffa8; margin-top:-5px;'><strong>Note:</strong> Your email address will not be saved and will only be used to send you the survey link.</p>"
+            'blankContent': "<div class='success'><div class='image'><img src='../../Content/images/button_check.png' style='vertical-align: middle; padding-right:5px; width:24px;'alt=''/></div><div class='message' style='width:85% !important;'>Your Survey has been saved.</div><div style='clear:both;'></div></div>  <p><span style='font-weight:bold;'>Survey Link:</span><br /><textarea " + "value=" + GetRedirectionUrl().toString() + "  id='url' cols='65' class='surveryLinkTxtArea' readonly='readonly'>" + GetRedirectionUrl().toString() + "</textarea></p><p style='font-weight:bold;'>Pass Code: <span id='spPassCode' class='passcodeBox1'>" + passcode1 + "</span></p> <hr/> <p>Enter your email address to have the Survey Link and Pass Code emailed to you.</p><p><span style='font-weight:bold;'>Email Subject:</span><br /><textarea id='Subject' cols='65'  style='  height:30px;  white-space:pre; border:1px solid #aecfea; padding:4px; margin-top:4px;'>" + Subject + "</textarea></p><p><label for='email' style='font-weight:bold;'>Email:</label> <input id='email' type='email' /></p>  <p><label for='confirmemail' style='font-weight:bold;'>Confirm Email:</label> <input id='confirmemail' type='email' /><div align='center'> <a  onclick ='SendEmail();'  class='login'  style='width:50px; padding:8px 15px !important;'>Send Email</a></div></p>  <br /> <p style='font-size: 8pt; padding: 5px; background: #ffffa8; margin-top:-5px;'><strong>Note:</strong> Your email address will not be saved and will only be used to send you the survey link.</p>"
         })
 
 
@@ -475,7 +475,7 @@
                 }
 
             },
-            'blankContent': "<div id=\"exitdialog\" title=\"Exit Survey\" ><p style=\"font-size:1.20em; font-weight:600;\">Are you sure you want to exit this Survey? </p><p style=\"font-size:1.20em; font-weight:300;\">Any unsaved changes will be lost!<br /></p><p><div align='right'> <a  onclick ='ExitSurvey();'  class='login'  style='width:50px; padding:8px 15px !important;'>Exit Survey</a>        <a class='login'  style='width:50px; padding:8px 15px !important;'rel='close'   id='simpleclose'>Cancel</a></div></p>"
+            'blankContent': "<div id=\"exitdialog\" title=\"Exit Survey\" ><p style=\"font-size:1.0em; font-weight:600;\">Are you sure you want to exit this Survey? </p><p style=\"font-size:1.0em; font-weight:300;\">Any unsaved changes will be lost!<br /></p><p><div align='right'> <a  onclick ='ExitSurvey();'  class='login'  style='width:50px; padding:8px 15px !important;'>Exit Survey</a>        <a class='login'  style='width:50px; padding:8px 15px !important;'rel='close'   id='simpleclose'>Cancel</a></div></p>"
         })
 
     });
@@ -628,7 +628,7 @@
                 num = i;
                 if (i == 1 && Model.CurrentPage > 1)
                 {
-                    <a onclick="Submit();" style="background-image: url('@Url.Content("~/Content/images/prev.png")'); background-repeat:no-repeat; background-position:center;" href="@Url.RouteUrl(null, new { controller = "Survey", action = "Index", responseid = Model.ResponseId, PageNumber = Model.CurrentPage - 1 })" class="nextprev" title="Previous Page">
+                    <a onclick="Submit();" href="@Url.RouteUrl(null, new { controller = "Survey", action = "Index", responseid = Model.ResponseId, PageNumber = Model.CurrentPage - 1 })" class="nextprev prevArrow" title="Previous Page">
                         &nbsp;&nbsp;&nbsp;
                     </a>
                     @* <a href="@Url.RouteUrl(null, new { controller = "Survey", action = "Index", responseid = Model.ResponseId, PageNumber = Model.CurrentPage - 1 })" onclick="Submit();" data-role="button" data-inline="true" data-theme="e" data-mini="true" data-icon="arrow-l"
@@ -649,7 +649,7 @@
             {
 
 
-                <a id="anchorNext" onclick="Submit();" style="background-image: url('@Url.Content("~/Content/images/next.png")');  background-repeat:no-repeat; background-position:center;" href="@Url.RouteUrl(null, new { controller = "Survey", action = "Index", responseid = Model.ResponseId, PageNumber = Model.CurrentPage + 1 })" class="nextprev" title="Go to Next Page">
+                <a id="anchorNext" onclick="Submit();" href="@Url.RouteUrl(null, new { controller = "Survey", action = "Index", responseid = Model.ResponseId, PageNumber = Model.CurrentPage + 1 })" class="nextprev nextArrow" title="Go to Next Page">
                     &nbsp;&nbsp;&nbsp;
                 </a>
                 @*   <a id="anchorNext" onclick="Submit();"  href="@Url.RouteUrl(null, new { controller = "Survey", action = "Index", responseid = Model.ResponseId, PageNumber = Model.CurrentPage + 1 })" data-role="button" data-inline="true" data-theme="e" data-mini="true" data-icon="arrow-r" data-iconpos="notext">
