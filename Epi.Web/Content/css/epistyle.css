@@ -7,7 +7,7 @@
 
 body 
  {
- background-image:url('../images/bgMainDropShadowGradient.png');
+ background: linear-gradient(to right, #fbfbfc, #e5e5e5);
  }
  
 #container
@@ -20,12 +20,13 @@ min-height:30%;
  background-color: #fff;
  color: #333;
  border: 1px solid #4e9689;
+ margin-top:15px;
  line-height: 130%;
- -moz-border-radius: 10px;
+ /*-moz-border-radius: 10px;
  border-radius: 10px;
  -moz-box-shadow: 10px 10px 5px #888;
  -webkit-box-shadow: 10px 10px 5px #888;
- box-shadow: 10px 10px 5px #bfbfbf;
+ box-shadow: 10px 10px 5px #bfbfbf;*/
  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 /*behavior: url('../Scripts/PIE.htc');*/
 /*background-image:url('../images/bgdraft.png');
@@ -38,11 +39,12 @@ background-origin:content-box;*/
 #header
  {
  padding: 0.5em 0.5em 1.0em .5em;
- background-color: #bfe7ea;
- border-bottom: 1px solid #4e9689;
- -moz-border-radius: 10px 10px 0 0;
+ background-color: #40A19E;
+ border-bottom: 1px solid #80c0be;
+ /*-moz-border-radius: 10px 10px 0 0;
  border-radius: 10px 10px 0 0;
- /*behavior: url('../Scripts/PIE.htc');*/
+ behavior: url('../Scripts/PIE.htc');*/
+ color: #ffffff;
  }
 
 #header h1
@@ -87,7 +89,7 @@ background-origin:content-box;*/
  padding: 0.5em;
  font-size: 9pt;
 /* margin-bottom: 1em;*/
- background: #87d69b;
+ background: linear-gradient(to bottom, #fbfbfc, #e6e7ed);
  min-height:20px;
  }
 /*DIv Style for Splash Page*/
@@ -153,6 +155,20 @@ background-origin:content-box;*/
  }
 /*---*/
 
+
+
+.pages a#anchorPrev {
+ background-image: url('/Content/images/prev_classic.png');
+ background-repeat:no-repeat;
+ background-position:center;
+}
+
+.pages a#anchorNext {
+ background-image: url('/Content/images/next_classic.png');
+ background-repeat:no-repeat;
+ background-position:center;
+}
+
 .boldlabel
  {
  font-weight: bold;	
@@ -179,15 +195,15 @@ bottom: 100px;
  width: 100%;
 /**/ padding: .5em 0;
  color: #333;
- background-color: #f4fce8;
+ background: linear-gradient(to bottom, #e6e7ed, #fbfbfc);
  border-top: 1px solid #4e9689;
- -moz-border-radius: 0 0 10px 10px;
- border-radius: 0 0 10px 10px;
+ /*-moz-border-radius: 0 0 10px 10px;
+ border-radius: 0 0 10px 10px;*/
  height: 40px;
  vertical-align:middle;
- -moz-box-shadow: -1px -1px 0px 0px #888;
+ /*-moz-box-shadow: -1px -1px 0px 0px #888;
  -webkit-box-shadow: 1px -1px 0px 0px #888;
- box-shadow: 0px -1px 1px 0px #888;
+ box-shadow: 0px -1px 1px 0px #888;*/
  /*behavior: url('../Scripts/PIE.htc');*/
  }
 
@@ -210,7 +226,8 @@ bottom: 100px;
 button.exitsurvey:hover,  button.save:hover,  button.savetop:hover, button.prev:hover, button.next:hover, button.begin:hover, button.submits:hover, button.login:hover, a.returnto:hover, button.printbottom:hover 
  {
  cursor: pointer;
- opacity: 0.8;
+ background-color: #339a98;
+ /*opacity: 0.8;*/
  }
 
 img.button 
@@ -221,23 +238,23 @@ img.button
 button.save, button.prev, button.next, button.begin, button.login, button.savetop
  {
  border: 1px #4e9689 solid;
- -moz-border-radius: 10px;
+ /*-moz-border-radius: 10px;
  -webkit-border-radius: 10px;
  -khtml-border-radius: 10px;
- border-radius: 10px;
+ border-radius: 10px;*/
  padding: 3px 5px 3px 5px;
- color:#244640;
+ color:#ffffff;
  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
  font-size: 10pt;
  font-weight:bold;
  width: 150px;
- border: 1px solid rgba(0,0,0,0.5);
- background: #d4eab3; 
+ background: #00827e; 
+/*border: 1px solid rgba(0,0,0,0.5);
  background: rgba(195,255,104,0.6); 
  box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
- -o-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
+ -o-box-shadow: 0 2px 6px rgba(0,0,0,0.5),  0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
  -webkit-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
- -moz-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
+ -moz-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);*/
   /*behavior: url('../Scripts/PIE.htc');*/
  }
 
@@ -275,8 +292,8 @@ button.next
 
 button.submits
 {
-  background-image: url('../images/submit.png') !important;
-  background-position:129px center !important;
+  background-image: url('../images/checkmark.png') !important;
+  background-position:10px center !important;
   background-repeat:no-repeat !important;
     /*padding-left:20px;*/
 }
@@ -284,41 +301,42 @@ button.submits
 button.exitsurvey
  {
  border: 1px #4e9689 solid;
- -moz-border-radius: 10px;
+ /*-moz-border-radius: 10px;
  -webkit-border-radius: 10px;
  -khtml-border-radius: 10px;
- border-radius: 10px;
- background: #e5e5e5;
- background: rgba(255,255,255,0.9);
+ border-radius: 10px;*/
+ background: #00827e;
+ /*background: rgba(255,255,255,0.9);*/
  width: 80px;
  padding: 2px;
  font-size: 8pt;
  font-weight:bold;
- height: 26px;
+ height: 25px;
+ color: #ffffff;
  /*behavior: url('../Scripts/PIE.htc');*/
  }
  
  button.printbottom
  {
    border: 1px #4e9689 solid;
- -moz-border-radius: 10px;
+ /*-moz-border-radius: 10px;
  -webkit-border-radius: 10px;
  -khtml-border-radius: 10px;
- border-radius: 10px;
+ border-radius: 10px;*/
  padding: 3px 5px 3px 5px;
- color:#244640;
+ color:#ffffff;
  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
  font-size: 10pt;
  font-weight:bold;
  width: 80px;
  cursor:pointer;
- border: 1px solid rgba(0,0,0,0.5);
- background: #e5e5e5; 
- background: rgba(255,255,255,0.9); 
- box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
+ border: 1px solid #4e9689 );
+ background: #00827e; 
+ /*background: rgba(255,255,255,0.9); */
+ /*box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
  -o-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
  -webkit-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
- -moz-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
+ -moz-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);*/
  
  
  }
@@ -339,48 +357,48 @@ button.exitsurvey
 
 .success
  {
- border: 1px solid #4d8000; 
- background: #e6ffbf; 
-/* margin-bottom: 100px; 
+ border: 2px solid #69bc45; 
+ /*background: #e6ffbf; 
+ margin-bottom: 100px; 
  margin-left: 0.5em; 
  margin-right: 0.5em; */
  margin: 1em;
  padding: 10px;
  font-size: 10pt;
  font-weight: bold;
- -moz-border-radius: 10px;
+ /*-moz-border-radius: 10px;
  -webkit-border-radius: 10px;
  -khtml-border-radius: 10px;
  border-radius: 10px;
-/*behavior: url('../Scripts/PIE.htc');*/
+behavior: url('../Scripts/PIE.htc');*/
  }
 
 button.submits
  {
  border: 1px #4e9689 solid;
- -moz-border-radius: 10px;
+ /*-moz-border-radius: 10px;
  -webkit-border-radius: 10px;
  -khtml-border-radius: 10px;
- border-radius: 10px;
+ border-radius: 10px;*/
  padding: 3px 5px 3px 5px;
- color:#244640;
+ color:#ffffff;
  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
  font-size: 10pt;
  font-weight:bold;
  max-width: 160px;
  width:100%;
  padding-left:10px;
- border: 1px solid rgba(0,0,0,0.5);
- background: #bfe7ea; 
- background: rgba(191,231,234,0.6); 
+ border: 1px solid #4e9689 ;
+ background: #00827e; 
+ /*background: rgba(191,231,234,0.6); 
  box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
  -o-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
  -webkit-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
- -moz-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
+ -moz-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);*/
 /*behavior: url('../Scripts/PIE.htc');*/
  }
 
-  #attention
+ #attention
  {
  border: 1px solid #ffca0a; 
  background: #fff5c1; 
@@ -400,7 +418,7 @@ button.submits
  
 .EpiLabel  {
 	/*position:absolute;*/
-	color: #000;   
+	color: #3f3f3f;   
 	font-family: "Segoe UI", Tahoma, Geneva, Verdana, AriaL, sans-serif;  
 	font-size: 10pt;  
 	/*white-space: pre;*/
@@ -484,23 +502,23 @@ button.copylink
 {
   width: 340px; 
   border: 1px solid #4e9689;  
-  -moz-border-radius: 10px; 
+  /*-moz-border-radius: 10px; 
   -webkit-border-radius: 10px; 
   -khtml-border-radius: 10px; 
   border-radius: 10px; 
-  /*behavior: url('../Scripts/PIE.htc');*/
+  behavior: url('../Scripts/PIE.htc');*/
   margin-left:auto;
   margin-right:auto;
 }
 
 .LogHead
 {
-    background:#87d69b; 
+    background:#cce6e5; 
     padding-top:5px; 
     padding-left:20px; 
-    -moz-border-radius: 10px 10px 0 0; 
+    /*-moz-border-radius: 10px 10px 0 0; 
     border-radius: 10px 10px 0 0; 
-    /*behavior: url('../Scripts/PIE.htc');*/
+    behavior: url('../Scripts/PIE.htc');*/
 }
 
 .logbody
@@ -511,21 +529,21 @@ button.copylink
 .validation-summary-errors
 {
     
-    background: #fbe1dd;
-    border: 1px solid #e6482d;
+   /* background: #fbe1dd;*/
+    border: 1px solid #ff333d;
     padding:3px 5px 3px 2px;
     margin:5px 0 10px 0;
-    -moz-border-radius: 10px; 
+   /* -moz-border-radius: 10px; 
     border-radius: 10px; 
-    /*behavior: url('../Scripts/PIE.htc');*/
+    behavior: url('../Scripts/PIE.htc');*/
 }
 .validation-summary-errors li
 {
    
-   background-image: url('../images/error2.png') !important;
-  background-position:1px center !important;
-  background-repeat:no-repeat !important;
-     font-size: 10pt;
+    background-image: url('../images/error2.png') !important;
+    background-position:1px center !important;
+    background-repeat:no-repeat !important;
+    font-size: 10pt;
     font-weight: bold;
     color: #000;
     list-style-type:none;
@@ -545,23 +563,22 @@ button.copylink
 a.returnto
  {
  border: 1px #4e9689 solid;
- -moz-border-radius: 10px;
+/* -moz-border-radius: 10px;
  -webkit-border-radius: 10px;
  -khtml-border-radius: 10px;
- border-radius: 10px;
+ border-radius: 10px;*/
  padding: 5px 15px 5px 15px;
- color:#244640;
+ color:#ffffff;
  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
  font-size: 10pt;
  font-weight:bold;
  width: 150px;
- border: 1px solid rgba(0,0,0,0.5);
- background: #d4eab3; 
- background: rgba(195,255,104,0.6); 
+ background: #00827e; 
+ /*background: rgba(195,255,104,0.6); 
  box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
  -o-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
  -webkit-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
- -moz-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
+ -moz-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);*/
   text-decoration: none;
   /*behavior: url('../Scripts/PIE.htc');*/
  }
@@ -715,23 +732,23 @@ a.watch
 button.dialogbtn
  {
  border: 1px #4e9689 solid !important;
- -moz-border-radius: 10px !important;
+ /*-moz-border-radius: 10px !important;
  -webkit-border-radius: 10px !important;
  -khtml-border-radius: 10px !important;
- border-radius: 10px !important;
+ border-radius: 10px !important;*/
  padding: 3px 5px 3px 5px !important;
- color:#244640 !important;
+ color:#ffffff !important;
  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif !important;
  font-size: 10pt !important;
  font-weight:bold !important;
  width: 150px !important;
- border: 1px solid rgba(0,0,0,0.5) !important;
- background: #d4eab3 !important; 
- background: rgba(195,255,104,0.6) !important; 
+ border: 1px solid #4e9689 !important;
+ background: #00827e !important; 
+ /*background: rgba(195,255,104,0.6) !important; 
  box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3) !important;
  -o-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3) !important;
  -webkit-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3) !important;
- -moz-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3) !important;
+ -moz-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3) !important;*/
   /*behavior: url('../Scripts/PIE.htc');*/
  }
  
@@ -756,30 +773,83 @@ button.dialogbtn
  {
      position:relative; 
      left:45%;display: inline-block;
-     background:#d6dfec; 
-     border:1px solid #8ca1c7; 
+     background:#e5f2f2; 
+     border:1px solid #339a98; 
      padding: 8px 8px; 
-     border-radius:10px; 
+    /* border-radius:10px; 
      -moz-border-radius: 10px !important;
     -webkit-border-radius: 10px !important;
-     -khtml-border-radius: 10px !important;
+     -khtml-border-radius: 10px !important;*/
      font-size: 16pt; 
      font-weight:bold; 
      text-align:center; 
      width: 70px; 
      margin:5px auto 20px;
+     color: #555555;
  }
- 
+
+.surveyLinkTxtArea {
+    background:#e5f2f2; 
+    border:1px solid #339a98;
+
+}
+
+.spPassCodeSpan {
+    background:#e5f2f2; 
+    border:1px solid #339a98;
+}
+
 .ui-priority-secondary { opacity: 1.0 !important; filter:Alpha(Opacity=100) !important; font-weight: bold !important; color: #3f3f3f !important;}
 .ui-priority-primary { color: #3f3f3f !important;}
 
 /*printbottom button.ui-state-default { color:#1c94c4 !important;}*/
-input[type=text]:focus, textarea:focus, select:focus{ border: 1px solid rgba(255, 216, 81, 43) !important; outline: 1px solid rgba(255, 216, 81, 43) !important; background-color: #ffffce;}
-input[type=checkbox]:focus, input[type=radio]:focus  { outline:2px solid rgba(255, 216, 81, 43) !important; background-color: #ffffce;}
-input[type=checkbox]:checked{background-color: #ffffce;}
-input[type="checkbox"] { min-width:13px !important;}
 
-input[type=text]:disabled, textarea:disabled, select:disabled { color:#3f3f3f; background-color:#c5c5c5; }
 
 #ui-datepicker-div {z-index:6000 !important;}
 
+.ui-corner-all, .ui-corner-top, .ui-corner-left, .ui-corner-tl { -moz-border-radius-topleft: 0px; -webkit-border-top-left-radius: 0px; -khtml-border-top-left-radius: 0px; border-top-left-radius: 0px; }
+.ui-corner-all, .ui-corner-top, .ui-corner-right, .ui-corner-tr { -moz-border-radius-topright: 0px; -webkit-border-top-right-radius: 0px; -khtml-border-top-right-radius: 0px; border-top-right-radius: 0px; }
+.ui-corner-all, .ui-corner-bottom, .ui-corner-left, .ui-corner-bl { -moz-border-radius-bottomleft: 0px; -webkit-border-bottom-left-radius: 0px; -khtml-border-bottom-left-radius: 0px; border-bottom-left-radius: 0px; }
+.ui-corner-all, .ui-corner-bottom, .ui-corner-right, .ui-corner-br { -moz-border-radius-bottomright: 0px; -webkit-border-bottom-right-radius: 0px; -khtml-border-bottom-right-radius: 0px; border-bottom-right-radius: 0px; }
+
+.ui-widget-header { border: 1px solid #4e9689/*{borderColorHeader}*/; background: #80c0be/*{bgColorHeader}url(images/ui-bg_highlight-soft_75_cccccc_1x100.png)/*{bgImgUrlHeader}*/ 50%/*{bgHeaderXPos}*/ 50%/*{bgHeaderYPos}*/ repeat-x/*{bgHeaderRepeat}*/; color: #222222/*{fcHeader}*/; font-weight: bold; }
+
+/*page.css custom style for themes*/
+
+.pages span.current {
+    border: 1px solid #4e9689;
+    font-weight: bold;
+    background: #339a98;
+    color: #fff;
+    /*-moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -khtml-border-radius: 5px;
+    border-radius: 5px;*/
+}
+
+.pages a {
+    border: 1px solid #4e9689;
+    text-decoration: none;
+}
+
+.pages a:hover {
+    border-color: #244640;
+    cursor: pointer;
+    opacity:0.8;
+}
+
+
+.pages a {
+	color:#244640;
+    display: block;
+    float: left;
+    padding: 0.2em 0.5em;
+    margin-right: 0.1em;
+    border: 1px solid #4e9689;
+    background: #fff;
+    /*-moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -khtml-border-radius: 5px;
+    border-radius: 5px;*/
+    text-decoration:none;
+}
