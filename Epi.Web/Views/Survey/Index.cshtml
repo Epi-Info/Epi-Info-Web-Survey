@@ -282,7 +282,7 @@
 
             if ('@Model.StatusId' == '1') { //if clicking the save button for the first time
                 $('#successContent').show();
-                $('#successContent').append('<div class="success"><img src="@Url.Content("~/Content/images/button_check.png")" style="vertical-align:middle; padding-right: 10px;" alt=""/> Your survey has been saved.<button id="copy" type="button" name="copy" class="copylink">Get Survey Link & Pass Code</button></div>')
+                $('#successContent').append('<div class="success"><img src="@Url.Content("~/Content/images/button_check.png")" style="vertical-align:middle; padding-right: 10px; width:36px" alt=""/> Your survey has been saved.<button id="copy" type="button" name="copy" class="copylink">Get Survey Link & Pass Code</button></div>')
 
 
 
@@ -295,7 +295,7 @@
 
 
                 $('#successContent').show(); //in subsequest click we just show that the survey has been saved not the modal popup
-                $('#successContent').append('<div class="success"><img src="@Url.Content("~/Content/images/button_check.png")" style="vertical-align:middle; padding-right: 10px;" alt=""/> Your survey has been saved.<button id="copy" type="button" name="copy" class="copylink">Get Survey Link & Pass Code</button></div>')
+                $('#successContent').append('<div class="success"><img src="@Url.Content("~/Content/images/button_check.png")" style="vertical-align:middle; padding-right: 10px; width:36px" alt=""/> Your survey has been saved.<button id="copy" type="button" name="copy" class="copylink">Get Survey Link & Pass Code</button></div>')
             }
             return true;
         }
@@ -552,7 +552,7 @@ else
                     @*<a  style="background-image: url('@Url.Content("~/Content/images/prev.png")'); background-repeat:no-repeat; background-position:center; width:13px;"   href="@string.Format("../../Survey/{0}/{1}", Model.ResponseId, Model.CurrentPage - 1)"    class="nextprev" title="Previous Page">
                         &nbsp;&nbsp;&nbsp;
                             </a>*@
-                    <a style="background-image: url('@Url.Content("~/Content/images/prev.png")'); background-repeat:no-repeat; background-position:center; width:13px;" href="@Url.RouteUrl(null, new { controller = "Survey", action = "Index", responseid = Model.ResponseId, PageNumber = Model.CurrentPage - 1 })" class="nextprev" title="Previous Page">
+                    <a id="anchorPrev" style="width:13px;" href="@Url.RouteUrl(null, new { controller = "Survey", action = "Index", responseid = Model.ResponseId, PageNumber = Model.CurrentPage - 1 })" class="nextprev" title="Previous Page">
                         &nbsp;&nbsp;&nbsp;
                     </a>
 
@@ -587,7 +587,7 @@ else
                 @* <a  id="anchorNext"   style="background-image: url('@Url.Content("~/Content/images/next.png")');  background-repeat:no-repeat; background-position:center; width:13px;" href="@string.Format("../../Survey/{0}/{1}", Model.ResponseId, Model.CurrentPage + 1)" class="nextprev" title="Go to Next Page">
                     &nbsp;&nbsp;&nbsp;
                      </a>*@
-                <a id="anchorNext" style="background-image: url('@Url.Content("~/Content/images/next.png")');  background-repeat:no-repeat; background-position:center; width:13px;" href="@Url.RouteUrl(null, new { controller = "Survey", action = "Index", responseid = Model.ResponseId, PageNumber = Model.CurrentPage + 1 })" class="nextprev" title="Go to Next Page">
+                <a id="anchorNext" style="width:13px;" href="@Url.RouteUrl(null, new { controller = "Survey", action = "Index", responseid = Model.ResponseId, PageNumber = Model.CurrentPage + 1 })" class="nextprev" title="Go to Next Page">
                     &nbsp;&nbsp;&nbsp;
                 </a>
 
@@ -620,7 +620,7 @@ else
         <div class="errormsg">
 
             <div class="image">
-                <img src="@Url.Content("~/Content/images/error.png")" style="vertical-align: middle; padding-right: 10px;" alt="" />
+                <img src="@Url.Content("~/Content/images/error.png")" style="width:36px;vertical-align: middle; padding-right: 10px;" alt="" />
             </div>
             <div class="message">
                 <span style="font-weight:bold; font-size:10pt;">Please correct the following errors before continuing:</span>
@@ -711,9 +711,9 @@ else
 
 <div id="dialog" title="Your Survey has been saved.">
     <p>Please copy and save the <span style="font-weight:bold;">Survey Link</span> and <span style="font-weight:bold;">Pass Code</span> in order to return to the survey at a later time.</p>
-    <p><span style="font-weight:bold;">Survey Link:</span><br /><textarea id="url" wrap="soft" cols="65" style="  height:45px;  white-space:pre; background:#d6e7f5; border:1px solid #aecfea; padding:4px; margin-top:4px;" readonly="readonly"></textarea></p>
+    <p><span style="font-weight:bold;">Survey Link:</span><br /><textarea id="url" class="surveyLinkTxtArea" wrap="soft" cols="65" style="  height:45px;  white-space:pre;  padding:4px; margin-top:4px;" readonly="readonly"></textarea></p>
 
-    <p style="font-weight:bold;">Pass Code: <span id="spPassCode" style="font-size:12pt; background:#d6e7f5; border:1px solid #aecfea; padding:4px 10px;"></span></p>
+    <p style="font-weight:bold;">Pass Code: <span id="spPassCode" class="spPassCodeSpan" style="color:#555555;font-size:12pt;  padding:4px 10px;"></span></p>
     <hr />
     <p>Optionally enter your email address to have the Survey Link and Pass Code emailed to you.</p>
 
@@ -770,7 +770,7 @@ else
 
 <div id="TimeOutdialog" title="Your session is about to expire!">
     <p>
-        <span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
+        <span class="ui-iconabc ui-icon-alertabc" style="float:left; margin:0 7px 20px 0; background-image: url('@Url.Content("~/Content/images/warning_icon_32.jpg")'); background-repeat:no-repeat;width:32px; height:32px"></span>
         You will be logged off in <span id="dialog-countdown" style="font-weight:bold"></span>
     </p>
 

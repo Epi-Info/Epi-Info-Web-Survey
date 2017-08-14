@@ -1,0 +1,155 @@
+﻿@charset "utf-8";
+/* CSS Document */
+
+/* Added CSS for Theme Styling */
+
+div legend {
+        background-color: #d2dfee;
+		color: #3f3f3f;
+		padding: 1px 5px;
+		font-size:13px !important;
+        margin-left:-15px;
+		/*margin-top:-5px;
+		border-radius: 5px;*/
+        text-wrap:normal;
+		
+}
+div legend span {
+background-color: transparent;    
+}
+
+
+/* might need to change this on main EWE CSS*/
+
+
+select {
+    font-size:12px!important;
+    padding-left:5px;
+}
+
+
+/* ------------------------------------------ */
+
+
+input {
+    border: 1px solid #B3B3B3;
+	/*height: 21px;*/
+    font-size:12px!important;
+}
+
+button.submits
+{
+  background-image: url('../images/checkmark.png') !important;
+  background-position:10px center !important;
+  background-repeat:no-repeat !important;
+    /*padding-left:20px;*/
+}
+
+select::-ms-expand {
+    display: none;
+}  
+
+select {
+
+  /* make arrow and background */
+
+ background-image:
+    linear-gradient(45deg, transparent 50%, #1d60ac 50%),
+    linear-gradient(135deg, #1d60ac 50%, transparent 50%),
+    linear-gradient(to right, #1d60ac, #1d60ac);
+  background-position:
+    calc(100% - 9px) calc(0.6em + 0px),
+    calc(100% - 4px) calc(0.6em + 0px),
+    calc(100% - 1.5em) 0.28em;
+  background-size:
+    5px 5px,
+    5px 5px,
+    1px 1em;
+  background-repeat: no-repeat;
+  background-color: white;
+  border: 1px solid #b3b3b3;
+  border-radius: 0px;
+  display: inline-block;
+  font: inherit;
+  line-height: 1.5em;
+  /*padding: 0.5em 3.5em 0.5em 1em;*/
+
+  /* reset */
+  margin: 0;      
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  height:20px;
+}
+
+
+
+
+
+select:-moz-focusring {
+  color: transparent;
+  text-shadow: 0 0 0 #000;
+}
+
+
+div.MvcFieldWrapper {padding-bottom:10px !important}
+
+/* Changed CSS for Theme Styling */
+div fieldset
+{
+  border:1px solid #4a80bd;
+  padding:2px;
+  /*border-radius: 6px;*/
+  padding-top:-100px;
+	}
+
+
+input[type=checkbox] label {
+  display: inline;
+  
+}
+input[type=checkbox]  {
+  display: inline;
+  ms-transform: scale(0); /* IE */
+ -moz-transform: scale(0); /* FF */
+ -webkit-transform: scale(0); /* Safari and Chrome */
+ -o-transform: scale(0); /* Opera */
+
+}
+
+input[type=checkbox] + label:before {
+  background-color: #ffffff;
+  border: 1px solid #b3b3b3;  
+  display: inline-block;
+  transition-duration: 0.3s;
+  width: 14px;
+  height: 14px;
+  content: '';
+  margin-left: -20px;
+  margin-right:5px;
+}
+
+input [type=checkbox][disabled] + label:before {
+background-color: #b7b8b9;
+
+}
+
+input[type=checkbox]:checked + label:before {
+    background-color: #ffffff;
+       
+    background-image: url('../images/checkmark1.png');
+}
+
+textarea {
+	border: 1px solid #b3b3b3; 
+	
+	}
+
+input[type=text]:focus, textarea:focus, select:focus{ border: 1px solid rgba(255, 216, 81, 43) !important; outline: 1px solid rgba(255, 216, 81, 43) !important; background-color: #ffffce;}
+input[type=checkbox]:focus, input[type=radio]:focus  { outline:2px solid rgba(255, 216, 81, 43) !important; background-color: #ffffce;}
+input[type=checkbox]:checked{background-color: #ffffce;}
+input[type="checkbox"] { min-width:13px !important;}
+
+input[type=text]:disabled, textarea:disabled, select:disabled { color:#3f3f3f; background-color:#c5c5c5; }

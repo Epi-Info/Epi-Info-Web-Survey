@@ -10,20 +10,7 @@
 
 img { border: none;}
 
-.pages a {
-	color:#244640;
-    display: block;
-    float: left;
-    padding: 0.2em 0.5em;
-    margin-right: 0.1em;
-    border: 1px solid #fff;
-    background: #fff;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    -khtml-border-radius: 5px;
-    border-radius: 5px;
-    text-decoration:none;
-}
+
 
 .pages span {
 	color:#244640;
@@ -32,34 +19,16 @@ img { border: none;}
     padding: 0.2em 0.5em;
     margin-right: 0.1em;
     /*border: 1px solid #fff;*/
-   /* background: #fff;*/
+   /* background: #fff;
        -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
     -khtml-border-radius: 5px;
-    border-radius: 5px;
+    border-radius: 5px;*/
 }
 
-.pages span.current {
-    border: 1px solid #4e9689;
-    font-weight: bold;
-    background: #4e9689;
-    color: #fff;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    -khtml-border-radius: 5px;
-    border-radius: 5px;
-}
 
-.pages a {
-    border: 1px solid #4e9689;
-    text-decoration: none;
-}
 
-.pages a:hover {
-    border-color: #244640;
-    cursor: pointer;
-    opacity:0.8;
-}
+
 
 .pages a.nextprev {
     font-weight: bold;
