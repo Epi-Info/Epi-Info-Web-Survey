@@ -341,6 +341,7 @@
     <Content Include="Content\images\black_arrow2.png" />
     <Content Include="Content\images\button_check.png" />
     <Content Include="Content\images\cdclogo.png" />
+    <Content Include="Content\images\cdc_logo_footer.png" />
     <Content Include="Content\images\checkmark.png" />
     <Content Include="Content\images\checkmark1.png" />
     <Content Include="Content\images\checkmark_icon.png" />

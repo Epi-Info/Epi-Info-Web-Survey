@@ -158,13 +158,13 @@ background-origin:content-box;*/
 
 
 .pages a#anchorPrev {
- background-image: url('/Content/images/prev_classic.png');
+ background-image: url('../images/prev_classic.png');
  background-repeat:no-repeat;
  background-position:center;
 }
 
 .pages a#anchorNext {
- background-image: url('/Content/images/next_classic.png');
+ background-image: url('../images/next_classic.png');
  background-repeat:no-repeat;
  background-position:center;
 }
