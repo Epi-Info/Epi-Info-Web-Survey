@@ -818,13 +818,13 @@ a.prev, a.next, a.save, .ui-btn-up-save1, .ui-btn-up-submit1, a.login {
  }
 
 .pages a.nextArrow {
-    background-image: url('/Content/images/next.png');
+    background-image: url('../images/next.png');
     background-repeat:no-repeat; 
     background-position:center;
 }
 
 .pages a.prevArrow {
-    background-image: url('/Content/images/prev.png'); 
+    background-image: url('../images/prev.png'); 
     background-repeat:no-repeat; 
     background-position:center;
 
