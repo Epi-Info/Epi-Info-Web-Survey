@@ -286,7 +286,9 @@
     <Content Include="Content\css\epistyle.css" />
     <Content Include="Content\css\epistyle_controls.css" />
     <Content Include="Content\css\images\check.gif" />
+    <Content Include="Content\css\images\next.png" />
     <Content Include="Content\css\images\next_classic.png" />
+    <Content Include="Content\css\images\prev.png" />
     <Content Include="Content\css\images\prev_classic.png" />
     <Content Include="Content\css\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\css\images\ui-bg_flat_75_ffffff_40x100.png" />
