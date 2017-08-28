@@ -1896,7 +1896,7 @@ function CCE_ContextOpenMobileSimpleDialogBox(Title,Prompt,id)
                               }
 
                             },
-                'blankContent': "<div id='SimpleDialogBox' title='" + Title + "'><p><label id='SimpleDialogBoxPrempt'>" + Prompt + "</label></p><p style='text-align:right;'><button  id='SimpleDialogBoxButton' type='button' style='width:100%;'onclick='CCE_CloseMobileSimpleDialogBox(" + id.toString() + ");'>Ok</button></p></div>"
+                'blankContent': "<div id='SimpleDialogBox' title='" + Title + "'><p><label id='SimpleDialogBoxPrempt'>" + Prompt + "</label></p><p style='text-align:right;'><button  id='SimpleDialogBoxButton' type='button' style='width:100%;'onclick='CCE_CloseMobileSimpleDialogBox(" + id.toString() + ");'>OK</button></p></div>"
                 })
  
  
@@ -2206,7 +2206,7 @@ function CCE_ContextOpenSimpleDialogBox(Title,Prompt,id)
         $('#ui-dialog-title-SimpledialogBox').text(Title.toString());
         $('.ui-dialog-title').text(Title.toString());
         $('#SimpleDialogBoxPrempt').text(Prompt.toString());
-        $('#SimpleDialogBoxButton').text('Ok');
+        $('#SimpleDialogBoxButton').text('OK');
         setTimeout(function () {
           
             $("#SimpleDialogBox").dialog('option', 'title', Title.toString());
@@ -2230,7 +2230,7 @@ function CCE_ContextOpenDialogBox(Title,MaskOpt,Identifier,Prompt)
    
         $('#ui-dialog-title-DialogBox').text(Title.toString());
         $('#DialogBoxPrempt').text(Prompt.toString());
-        $('#DialogBoxOkButton').text('Ok');
+        $('#DialogBoxOkButton').text('OK');
         $('#DialogBoxInput').datepicker( "hide" );
          
         setTimeout(function () {
