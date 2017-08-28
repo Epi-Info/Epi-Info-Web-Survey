@@ -147,9 +147,8 @@ textarea {
 	
 	}
 
-input[type=text]:focus, textarea:focus, select:focus{ border: 1px solid rgba(255, 216, 81, 43) !important; outline: 1px solid rgba(255, 216, 81, 43) !important; background-color: #ffffce;}
+input[type=text]:focus, textarea:focus, select:focus{ border: 1px solid #ffd851 !important;  background-color: #ffffce; outline: 0px solid rgba(255, 216, 81, 43) !important; }
 input[type=checkbox]:focus, input[type=radio]:focus  { outline:2px solid rgba(255, 216, 81, 43) !important; background-color: #ffffce;}
 input[type=checkbox]:checked{background-color: #ffffce;}
 input[type="checkbox"] { min-width:13px !important;}
-
 input[type=text]:disabled, textarea:disabled, select:disabled { color:#3f3f3f; background-color:#c5c5c5; }
