@@ -658,7 +658,7 @@ CCE_Context.prototype.setValue = function (pName,pValue,dateformat,NumberSep) {
                             if (!IsHidden)
                              {
                                 $(Jquery).val('1').attr("selected", "Yes");
-                                $(Jquery).selectmenu('refresh', true);
+                               // $(Jquery).selectmenu('refresh', true);
                                 cce_Symbol.Value = true;
                             }
                         }
@@ -675,7 +675,7 @@ CCE_Context.prototype.setValue = function (pName,pValue,dateformat,NumberSep) {
                             if (!IsHidden) 
                             {
                                 $(Jquery).val('0').attr("selected", "No");
-                                $(Jquery).selectmenu('refresh', true);
+                                //$(Jquery).selectmenu('refresh', true);
                                 cce_Symbol.Value = false;
                             }
                         }
@@ -693,7 +693,7 @@ CCE_Context.prototype.setValue = function (pName,pValue,dateformat,NumberSep) {
                             if (!IsHidden)
                              {
                                 $(Jquery).val(null).attr("selected", null);
-                                $(Jquery).selectmenu('refresh', null);
+                                //$(Jquery).selectmenu('refresh', null);
                                 cce_Symbol.Value = null;
                             }
                         }
@@ -781,7 +781,7 @@ CCE_Context.prototype.setValue = function (pName,pValue,dateformat,NumberSep) {
                     if (eval(document.getElementById("IsMobile"))) {
                         if (!IsHidden) {
                             $(Jquery).val(pValue).attr("selected", true);
-                            $(Jquery).selectmenu('refresh', true);
+                          //  $(Jquery).selectmenu('refresh', true);
                             cce_Symbol.Value = pValue;
                         } else {
                             cce_Symbol.Value = pValue;
