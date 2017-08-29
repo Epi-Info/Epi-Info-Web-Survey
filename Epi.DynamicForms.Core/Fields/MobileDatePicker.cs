@@ -14,14 +14,152 @@ namespace MvcDynamicForms.Fields
     [Serializable]
     public class MobileDatePicker : DatePicker
     {
+        public string GetDatePickerFormat(string DateFormat)
+        {          
+
+            string datePickerFormat = string.Empty;
+            switch (DateFormat.ToLower().ToString())
+            {
+                case "mm-dd-yyyy":
+                    datePickerFormat = "%m-%d-%Y";
+                    break;                
+                case "mm/dd/yyyy":
+                    datePickerFormat = "%m/%d/%Y";
+                    break;
+                case "mm.dd.yyyy":
+                    datePickerFormat = "%m.%d.%Y";
+                    break;
+                case "m-d-yyyy":
+                    datePickerFormat = "%m-%d-%Y";
+                    break;
+                case "m/d/yyyy":
+                    datePickerFormat = "%m/%d/%Y";
+                    break;
+                case "m.d.yyyy":
+                    datePickerFormat = "%m.%d.%Y";
+                    break;
+                case "dd-mm-yyyy":
+                    datePickerFormat = "%d-%m-%Y";
+                    break;
+                case "dd/mm/yyyy":
+                    datePickerFormat = "%d/%m/%Y";
+                    break;
+                case "dd.mm.yyyy":
+                    datePickerFormat = "%d.%m.%Y";
+                    break;
+                case "d-m-yyyy":
+                    datePickerFormat = "%d-%m-%Y";
+                    break;
+                case "d/m/yyyy":
+                    datePickerFormat = "%d/%m/%Y";
+                    break;
+                case "d.m.yyyy":
+                    datePickerFormat = "%d.%m.%Y";
+                    break;
+                case "yyyy-mm-dd":
+                    datePickerFormat = "%Y-%m-%d";
+                    break;
+                case "yyyy/mm/dd":
+                    datePickerFormat = "%Y/%m/%d";
+                    break;
+                case "yyyy.mm.dd":
+                    datePickerFormat = "%Y.%m.%d";
+                    break;
+                case "yyyy-m-d":
+                    datePickerFormat = "%Y-%m-%d";
+                    break;
+                case "yyyy/m/d":
+                    datePickerFormat = "%Y/%m/%d";
+                    break;
+                case "yyyy.m.d":
+                    datePickerFormat = "%Y.%m.%d";
+                    break;
+                default:
+                    datePickerFormat = "%m/%d/%Y";
+                    break;
+
+            }
+            return datePickerFormat;
+        }
+
+        public string GetDatePickerOrder(string DateFormat)
+        {
+
+            string datePickerFormat = string.Empty;
+            switch (DateFormat.ToLower().ToString())
+            {
+                case "mm-dd-yyyy":
+                    datePickerFormat = "[\"m\",\"d\",\"y\"]";
+                    break;
+                case "mm/dd/yyyy":
+                    datePickerFormat = "[\"m\",\"d\",\"y\"]";
+                    break;
+                case "mm.dd.yyyy":
+                    datePickerFormat = "[\"m\",\"d\",\"y\"]";
+                    break;
+                case "m-d-yyyy":
+                    datePickerFormat = "[\"m\",\"d\",\"y\"]";
+                    break;
+                case "m/d/yyyy":
+                    datePickerFormat = "[\"m\",\"d\",\"y\"]";
+                    break;
+                case "m.d.yyyy":
+                    datePickerFormat = "[\"m\",\"d\",\"y\"]";
+                    break;
+                case "dd-mm-yyyy":
+                    datePickerFormat = "[\"d\",\"m\",\"y\"]";
+                    break;
+                case "dd/mm/yyyy":
+                    datePickerFormat = "[\"d\",\"m\",\"y\"]";
+                    break;
+                case "dd.mm.yyyy":
+                    datePickerFormat = "[\"d\",\"m\",\"y\"]";
+                    break;
+                case "d-m-yyyy":
+                    datePickerFormat = "[\"d\",\"m\",\"y\"]";
+                    break;
+                case "d/m/yyyy":
+                    datePickerFormat = "[\"d\",\"m\",\"y\"]";
+                    break;
+                case "d.m.yyyy":
+                    datePickerFormat = "[\"d\",\"m\",\"y\"]";
+                    break;
+                case "yyyy-mm-dd":
+                    datePickerFormat = "[\"y\",\"m\",\"d\"]";
+                    break;
+                case "yyyy/mm/dd":
+                    datePickerFormat = "[\"y\",\"m\",\"d\"]";
+                    break;
+                case "yyyy.mm.dd":
+                    datePickerFormat = "[\"y\",\"m\",\"d\"]";
+                    break;
+                case "yyyy-m-d":
+                    datePickerFormat = "[\"y\",\"m\",\"d\"]";
+                    break;
+                case "yyyy/m/d":
+                    datePickerFormat = "[\"y\",\"m\",\"d\"]";
+                    break;
+                case "yyyy.m.d":
+                    datePickerFormat = "[\"y\",\"m\",\"d\"]";
+                    break;
+                default:
+                    datePickerFormat = "[\"m\",\"d\",\"y\"]";
+                    break;
+
+
+            }
+            return datePickerFormat;
+        }
         public override string RenderHtml()
         {
             var html = new StringBuilder();
             var inputName = _fieldPrefix + _key;
             string ErrorStyle = string.Empty;
+
             CultureInfo currentCulture = Thread.CurrentThread.CurrentCulture;
             string DateFormat = currentCulture.DateTimeFormat.ShortDatePattern;
-            DateFormat = DateFormat.Remove(DateFormat.IndexOf("y"), 2);
+            //DateFormat = DateFormat.Remove(DateFormat.IndexOf("y"), 2);
+
             // prompt label
             var prompt = new TagBuilder("label");
             prompt.SetInnerText(Prompt);
@@ -49,10 +187,12 @@ namespace MvcDynamicForms.Fields
             txt.Attributes.Add("type", "date");
             txt.Attributes.Add("Theme", "b");
             txt.Attributes.Add("data-role", "datebox");
-            txt.Attributes.Add("data-options", "{\"mode\": \"datebox\", \"pickPageButtonTheme\": \"e\", \"pickPageInputTheme\":\"e\", \"pickPageFlipButtonTheme\":\"a\", \"pickPageTheme\":\"e\" ,  \"useNewStyle\":true}");
+            txt.Attributes.Add("data-options", "{\"mode\": \"datebox\", \"pickPageButtonTheme\": \"e\", \"pickPageInputTheme\":\"e\", \"pickPageFlipButtonTheme\":\"a\", \"pickPageTheme\":\"e\" ,  \"useNewStyle\":true,  \"dateFormat\":\""+GetDatePickerFormat(DateFormat)+ "\",  \"fieldsOrderOverride\":" + GetDatePickerOrder(DateFormat)+  "}");
             txt.Attributes.Add("value", NewDateFormat);
-            txt.Attributes.Add("onkeydown ", "return DateFormat(this, event.keyCode);");
-          
+            //txt.Attributes.Add("data-date-format",DateFormat.ToLower());
+            txt.Attributes.Add("onkeydown ", "return DateFormat(this, event.keyCode);");           
+
+
             if (FunctionObjectAfter != null && !FunctionObjectAfter.IsNull())
             {
                 txt.Attributes.Add("onchange", "return " + _key + "_after();"); //After
@@ -102,6 +242,7 @@ namespace MvcDynamicForms.Fields
                 //html.Append(scriptReadOnlyText.ToString(TagRenderMode.Normal));
          
             }
+          
 
             var wrapper = new TagBuilder(_fieldWrapper);
 
@@ -127,8 +268,10 @@ namespace MvcDynamicForms.Fields
 
         public string GetControlClass(string Value)
         {
+            CultureInfo currentCulture = Thread.CurrentThread.CurrentCulture;
+            string DateFormat = currentCulture.DateTimeFormat.ShortDatePattern;
             StringBuilder ControlClass = new StringBuilder();
-            ControlClass.Append("validate[");
+            ControlClass.Append("IsDate validate[");
 
             if ((!string.IsNullOrEmpty(GetRightDateFormat(Lower,Pattern).ToString()) && (!string.IsNullOrEmpty(GetRightDateFormat(Upper,Pattern).ToString()))))
             {
@@ -137,7 +280,6 @@ namespace MvcDynamicForms.Fields
                 if (Required == true)
                 {
                     ControlClass.Append("required"); 
-
                 }
                 ControlClass.Append("] text-input datepicker");
 
@@ -147,11 +289,11 @@ namespace MvcDynamicForms.Fields
             {
                 if (Required == true)
                 {
-                    ControlClass.Append("required,custom[date]] text-input datepicker({onClose:function(){setTimeout(" + _key + "_after,100);},changeMonth:true,changeYear:true});");
+                    ControlClass.Append("required,custom[" + DateFormat.ToUpper() + "]] text-input datepicker({onClose:function(){setTimeout(" + _key + "_after,100);},changeMonth:true,changeYear:true});");
                 }
                 else
                 {
-                    ControlClass.Append("custom[date]] text-input datepicker");
+                    ControlClass.Append("custom[" + DateFormat.ToUpper() + "]] text-input datepicker");
                 }
 
                 return ControlClass.ToString();
@@ -202,9 +344,23 @@ namespace MvcDynamicForms.Fields
                 }
                 else
                 {
-                    switch (patternOut.ToString())
+                    switch (patternOut.ToLower().ToString())
                     {
                         case "dd/mm/yyyy":
+                            NewDateFormat.Append(DD);
+                            NewDateFormat.Append('/');
+                            NewDateFormat.Append(MM);
+                            NewDateFormat.Append('/');
+                            NewDateFormat.Append(YYYY);
+                            break;
+                        case "dd/mm/yy":
+                            NewDateFormat.Append(DD);
+                            NewDateFormat.Append('/');
+                            NewDateFormat.Append(MM);
+                            NewDateFormat.Append('/');
+                            NewDateFormat.Append(YYYY);
+                            break;
+                        case "d/m/yy":
                             NewDateFormat.Append(DD);
                             NewDateFormat.Append('/');
                             NewDateFormat.Append(MM);
@@ -218,13 +374,100 @@ namespace MvcDynamicForms.Fields
                             NewDateFormat.Append('/');
                             NewDateFormat.Append(YYYY);
                             break;
-                        case "M/d/yy":
+                        case "m/d/yy":
                             NewDateFormat.Append(MM);
                             NewDateFormat.Append('/');
                             NewDateFormat.Append(DD);
                             NewDateFormat.Append('/');
                             NewDateFormat.Append(YYYY);
                             break;
+                        case "yy/mm/dd":
+                            NewDateFormat.Append(YYYY);
+                            NewDateFormat.Append('/');
+                            NewDateFormat.Append(MM);
+                            NewDateFormat.Append('/');
+                            NewDateFormat.Append(DD);
+                            break;
+                        //.
+                        case "dd.mm.yyyy":
+                            NewDateFormat.Append(DD);
+                            NewDateFormat.Append('.');
+                            NewDateFormat.Append(MM);
+                            NewDateFormat.Append('.');
+                            NewDateFormat.Append(YYYY);
+                            break;
+                        case "dd.mm.yy":
+                            NewDateFormat.Append(DD);
+                            NewDateFormat.Append('.');
+                            NewDateFormat.Append(MM);
+                            NewDateFormat.Append('.');
+                            NewDateFormat.Append(YYYY);
+                            break;
+                        case "mm.dd.yyyy":
+                            NewDateFormat.Append(MM);
+                            NewDateFormat.Append('.');
+                            NewDateFormat.Append(DD);
+                            NewDateFormat.Append('.');
+                            NewDateFormat.Append(YYYY);
+                            break;
+                        case "m.d.yy":
+                            NewDateFormat.Append(MM);
+                            NewDateFormat.Append('.');
+                            NewDateFormat.Append(DD);
+                            NewDateFormat.Append('.');
+                            NewDateFormat.Append(YYYY);
+                            break;
+                        case "yy.MM.dd":
+                            NewDateFormat.Append(YYYY);
+                            NewDateFormat.Append('.');
+                            NewDateFormat.Append(MM);
+                            NewDateFormat.Append('.');
+                            NewDateFormat.Append(DD);
+                            break;
+                        //-
+                        case "dd-mm-yyyy":
+                            NewDateFormat.Append(DD);
+                            NewDateFormat.Append('-');
+                            NewDateFormat.Append(MM);
+                            NewDateFormat.Append('-');
+                            NewDateFormat.Append(YYYY);
+                            break;
+                        case "dd-mm-yy":
+                            NewDateFormat.Append(DD);
+                            NewDateFormat.Append('-');
+                            NewDateFormat.Append(MM);
+                            NewDateFormat.Append('-');
+                            NewDateFormat.Append(YYYY);
+                            break;
+                        case "d-m-yy":
+                            NewDateFormat.Append(DD);
+                            NewDateFormat.Append('-');
+                            NewDateFormat.Append(MM);
+                            NewDateFormat.Append('-');
+                            NewDateFormat.Append(YYYY);
+                            break;
+                        case "mm-dd-yyyy":
+                            NewDateFormat.Append(MM);
+                            NewDateFormat.Append('-');
+                            NewDateFormat.Append(DD);
+                            NewDateFormat.Append('-');
+                            NewDateFormat.Append(YYYY);
+                            break;
+                        case "m-d-yy":
+                            NewDateFormat.Append(MM);
+                            NewDateFormat.Append('-');
+                            NewDateFormat.Append(DD);
+                            NewDateFormat.Append('-');
+                            NewDateFormat.Append(YYYY);
+                            break;
+                        case "yy-mm-dd":
+                            NewDateFormat.Append(YYYY);
+                            NewDateFormat.Append('-');
+                            NewDateFormat.Append(MM);
+                            NewDateFormat.Append('-');
+                            NewDateFormat.Append(DD);
+                            break;
+
                     }
                 }
             }
