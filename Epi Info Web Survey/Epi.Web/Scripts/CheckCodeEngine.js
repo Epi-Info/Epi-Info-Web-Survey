@@ -592,9 +592,10 @@ CCE_Context.prototype.setValue = function (pName,pValue,dateformat,NumberSep) {
                 case "datepicker": //string has been converted to date for comparison with another date                    
                     //  if (eval(document.getElementById("IsMobile"))) {
                     var FormatedDate;
+                   // alert(CCE_SystemDate(dateformat, cce_Symbol.Value));
                     if (cce_Symbol.Value != null && cce_Symbol.Value != "") {
 
-                        $(Jquery).val(cce_Symbol.Value);
+                        $(Jquery).val(CCE_SystemDate(dateformat, cce_Symbol.Value));
                     } else {
                         $(Jquery).val("");
                     }
@@ -1954,9 +1955,18 @@ function CCE_Truncate(pValue)
     return pValue | 0; // bitwise operators convert operands to 32-bit integers
 }
 
-function CCE_SystemDate(dateformat)
+function CCE_SystemDate(dateformat,DateValue)
 { 
-    var date = new Date();
+    var date = "";
+    if (DateValue != null || DateValue !="")
+    {
+        date = new Date(DateValue);
+    }
+    else
+    {
+        date = new Date();
+    }
+
     var FormatedDate;
     switch (dateformat.toLowerCase()) {
         case "dd/mm/yyyy":
