@@ -253,7 +253,14 @@ CCE_Context.prototype.getValue = function (pName)
                         }
 
                     case "datepicker": //string has been converted to date for comparison with another date
-                        value = new Date(field.val()).valueOf();
+                        value = field.val();
+
+                        if (value == "" || isNaN(value)) {
+                            return field.val();
+                        }
+                        else {
+                            return value;
+                        }
                         return value;
                     case "timepicker":
                         var refDate = "01/01/1970 ";//It is a reference date 
@@ -261,8 +268,20 @@ CCE_Context.prototype.getValue = function (pName)
                         value = new Date(dateTime).valueOf();
                         return value;
                     case "numeric": //string has been converted to number to compare with another number
-                        value = new Number(field.val()).valueOf();
-                        return value;
+                        var validNumber = field.val();
+                        value = new Number(validNumber.replace(',', '.')).valueOf();
+
+                        if (value == "" || isNaN(value)) {
+                            if (value == 0) {
+                                return value;
+                            }
+                            else {
+                                return null;
+                            }
+                        }
+                        else {
+                            return value;
+                        }
                     case "radiobutton":
                        var RadiofieldName = "." + fieldName;
                          
@@ -311,27 +330,37 @@ CCE_Context.prototype.setValue = function (pName, pValue)
             if(cce_Symbol.Source == "datasource")
             {
 
-                switch (cce_Symbol.Type) 
-                {
-                   case "datepicker": //string has been converted to date for comparison with another date
-//                        $(Jquery).datepicker("setDate", new Date(pValue));
-//                        cce_Symbol.Value = pValue;
-                          var FormatedDate;
-                          var date = new Date();
-                          FormatedDate =date.getMonth()+ 1 +"/"+date.getDate()+"/"+date.getFullYear();
-                           cce_Symbol.Value = FormatedDate;
-                             $(Jquery).val(FormatedDate);
+                switch (cce_Symbol.Type) {
+                    case "datepicker": //string has been converted to date for comparison with another date
+                        //                        $(Jquery).datepicker("setDate", new Date(pValue));
+                        //                        cce_Symbol.Value = pValue;
+                        var FormatedDate;
+                        if (cce_Symbol.Value != null && cce_Symbol.Value != "") {
+
+                            $(Jquery).val(cce_Symbol.Value);
+                        } else {
+                            $(Jquery).val("");
+                        }
                         break;
                     case "timepicker":
-                       // $(Jquery).timepicker("setTime", new Date(pValue));
-                       //  cce_Symbol.Value = pValue;
-                         var FormatedTime;
-                         var date = new Date();
-                         FormatedTime = FormatTime(date);
-                         $(Jquery).val(FormatedTime);
-                         cce_Symbol.Value = FormatedTime;
+                        // $(Jquery).timepicker("setTime", new Date(pValue));
+                        //  cce_Symbol.Value = pValue;
+                        var FormatedTime;
+                        var date = new Date();
+                        FormatedTime = FormatTime(date);
+                        $(Jquery).val(FormatedTime);
+                        cce_Symbol.Value = FormatedTime;
                         break;
-                   default:
+                    case "numeric":
+                        if (NumberSep == ",") {
+                            pValue = pValue.toString().replace('.', ',')
+                            cce_Symbol.Value = pValue;
+                        }
+                        else {
+                            cce_Symbol.Value = pValue;
+                        }
+                        break;
+                    default:
                         $(Jquery).val(pValue);
                         cce_Symbol.Value = pValue;
                         break;
@@ -1200,7 +1229,63 @@ function CCE_Truncate(pValue)
 //}
 function CCE_SystemDate()
 {
-    return new Date();
+    var date = new Date();
+    var FormatedDate;
+    switch (dateformat.toLowerCase()) {
+        case "dd/mm/yyyy":
+            FormatedDate = (date.getDate() < 10 ? "0" + date.getDate() : date.getDate()) + "/" + ((date.getMonth() + 1) < 10 ? "0" + (date.getMonth() + 1) : (date.getMonth() + 1)) + "/" + date.getFullYear();
+            break;
+        case "d/m/yyyy":
+            FormatedDate = (date.getDate() < 10 ? date.getDate() : date.getDate()) + "/" + ((date.getMonth() + 1) < 10 ? (date.getMonth() + 1) : (date.getMonth() + 1)) + "/" + date.getFullYear();
+            break;
+        case "mm/dd/yyyy":
+            FormatedDate = ((date.getMonth() + 1) < 10 ? "0" + (date.getMonth() + 1) : (date.getMonth() + 1)) + "/" + (date.getDate() < 10 ? "0" + date.getDate() : date.getDate()) + "/" + date.getFullYear();
+            break;
+        case "mm/dd/yy":
+            FormatedDate = ((date.getMonth() + 1) < 10 ? "0" + (date.getMonth() + 1) : (date.getMonth() + 1)) + "/" + (date.getDate() < 10 ? "0" + date.getDate() : date.getDate()) + "/" + date.getFullYear();
+            break;
+        case "m/d/yyyy":
+            FormatedDate = ((date.getMonth() + 1) < 10 ? (date.getMonth() + 1) : (date.getMonth() + 1)) + "/" + (date.getDate() < 10 ? date.getDate() : date.getDate()) + "/" + date.getFullYear();
+            break;
+        case "yyyy/mm/dd":
+            FormatedDate = date.getFullYear() + "/" + (date.getMonth() + 1) > 10 ? "0" + (date.getMonth() + 1) : (date.getMonth() + 1) + "/" + (date.getDate() > 10 ? "0" + date.getDate() : date.getDate());
+            break;
+        case "dd-mm-yyyy":
+            FormatedDate = (date.getDate() > 10 ? "0" + date.getDate() : date.getDate()) + "-" + (date.getMonth() + 1) > 10 ? "0" + (date.getMonth() + 1) : (date.getMonth() + 1) + "-" + date.getFullYear();
+            break;
+        case "d-m-yyyy":
+            FormatedDate = (date.getDate() > 10 ? date.getDate() : date.getDate()) + "-" + (date.getMonth() + 1) > 10 ? (date.getMonth() + 1) : (date.getMonth() + 1) + "-" + date.getFullYear();
+            break;
+        case "mm-dd-yyyy":
+            FormatedDate = (date.getMonth() + 1) > 10 ? "0" + (date.getMonth() + 1) : (date.getMonth() + 1) + "-" + (date.getDate() > 10 ? "0" + date.getDate() : date.getDate()) + "-" + date.getFullYear();
+            break;
+        case "m-d-yyyy":
+            FormatedDate = (date.getMonth() + 1) > 10 ? (date.getMonth() + 1) : (date.getMonth() + 1) + "-" + (date.getDate() > 10 ? date.getDate() : date.getDate()) + "-" + date.getFullYear();
+            break;
+        case "yyyy-mm-dd":
+            FormatedDate = date.getFullYear() + "-" + (date.getMonth() + 1) > 10 ? "0" + (date.getMonth() + 1) : (date.getMonth() + 1) + "-" + (date.getDate() > 10 ? "0" + date.getDate() : date.getDate());
+            break;
+        case "dd.mm.yyyy":
+            FormatedDate = (date.getDate() > 10 ? "0" + date.getDate() : date.getDate()) + "." + (date.getMonth() + 1) > 10 ? "0" + (date.getMonth() + 1) : (date.getMonth() + 1) + "." + date.getFullYear();
+            break;
+        case "d.m.yyyy":
+            FormatedDate = (date.getDate() > 10 ? date.getDate() : date.getDate()) + "." + (date.getMonth() + 1) > 10 ? (date.getMonth() + 1) : (date.getMonth() + 1) + "." + date.getFullYear();
+            break;
+        case "mm.dd.yyyy":
+            FormatedDate = (date.getMonth() + 1) > 10 ? "0" + (date.getMonth() + 1) : (date.getMonth() + 1) + "." + (date.getDate() > 10 ? "0" + date.getDate() : date.getDate()) + "." + date.getFullYear();
+            break;
+        case "m.d.yyyy":
+            FormatedDate = (date.getMonth() + 1) > 10 ? (date.getMonth() + 1) : (date.getMonth() + 1) + "." + (date.getDate() > 10 ? date.getDate() : date.getDate()) + "." + date.getFullYear();
+            break;
+        case "yyyy.mm.dd":
+            FormatedDate = date.getFullYear() + "." + (date.getMonth() + 1) > 10 ? "0" + (date.getMonth() + 1) : (date.getMonth() + 1) + "." + (date.getDate() > 10 ? "0" + date.getDate() : date.getDate());
+            break;
+        default:
+            FormatedDate = cce_Symbol.Value;
+            break;
+    }
+
+    return FormatedDate;
 }
 
 //function CCE_SystemTime()

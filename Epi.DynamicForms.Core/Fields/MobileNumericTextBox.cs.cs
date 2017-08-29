@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Web.Mvc;
 using Epi.Core.EnterInterpreter;
+using System.Globalization;
 
 namespace MvcDynamicForms.Fields
 {
@@ -77,7 +78,18 @@ namespace MvcDynamicForms.Fields
             html.Append(txt.ToString(TagRenderMode.SelfClosing));
 
             var scriptNumeric = new TagBuilder("script");
-            scriptNumeric.InnerHtml = "$(function() { $('#" + inputName + "').numeric();});";
+            string uiSep = CultureInfo.CurrentUICulture.NumberFormat.NumberDecimalSeparator;
+
+            if (uiSep == ".")
+            {
+                scriptNumeric.InnerHtml = "$(function() { $('#" + inputName + "').numeric();});";
+            }
+            else
+            {
+                string temp = "\"" + uiSep + "\"";
+
+                scriptNumeric.InnerHtml = "$(function() { $('#" + inputName + "').numeric({ decimal :" + temp + "});});";
+            }
             html.Append(scriptNumeric.ToString(TagRenderMode.Normal));
 
             if (!string.IsNullOrEmpty(Pattern))
