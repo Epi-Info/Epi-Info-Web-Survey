@@ -814,6 +814,11 @@ button.dialogbtn
 
 .ui-widget-header { border: 1px solid #4e9689/*{borderColorHeader}*/; background: #80c0be/*{bgColorHeader}url(images/ui-bg_highlight-soft_75_cccccc_1x100.png)/*{bgImgUrlHeader}*/ 50%/*{bgHeaderXPos}*/ 50%/*{bgHeaderYPos}*/ repeat-x/*{bgHeaderRepeat}*/; color: #222222/*{fcHeader}*/; font-weight: bold; }
 
+
+.ui-datepicker {
+    width:12.4em!important;
+}
+
 /*page.css custom style for themes*/
 
 .pages span.current {

@@ -817,6 +817,10 @@ button.dialogbtn
     border: 1px solid #4a80bd /*{borderColorContent}*/;
 }
 
+.ui-datepicker {
+    width:12.4em!important;
+}
+
 /*page.css custom style for themes*/
 .pages span.current {
     border: 1px solid #8eafd5;
