@@ -86,9 +86,9 @@ namespace MvcDynamicForms.Fields
             }
             else
             {
-                string temp = "\"" + uiSep + "\"";
+                string DecimalSeperator = "\"" + uiSep + "\"";
 
-                scriptNumeric.InnerHtml = "$(function() { $('#" + inputName + "').numeric({ decimal :" + temp + "});});";
+                scriptNumeric.InnerHtml = "$(function() { $('#" + inputName + "').numeric({ decimal :" + DecimalSeperator + "});});";
             }
             html.Append(scriptNumeric.ToString(TagRenderMode.Normal));
 
