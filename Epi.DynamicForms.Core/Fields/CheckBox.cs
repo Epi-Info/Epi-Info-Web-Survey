@@ -81,7 +81,7 @@ namespace MvcDynamicForms.Fields
 
         public override string RenderHtml()
         {
-            var inputName = _fieldPrefix + _key;
+            var inputName = _form.FieldPrefix + _key;
             var html = new StringBuilder();
             string ErrorStyle = string.Empty;
 
@@ -114,20 +114,23 @@ namespace MvcDynamicForms.Fields
             //    chk.Attributes.Add("disabled", "disabled");
             //}
 
-            chk.Attributes.Add("style", "position:absolute;left:" + _left.ToString() + "px;top:" + _top.ToString() + "px" + ";width:" + _ControlWidth.ToString() + "px" + ErrorStyle + ";" + IsHiddenStyle + ";" + IsHighlightedStyle);            
+            chk.Attributes.Add("style", "position:absolute;left:" + _left.ToString() + "px;top:" + _top.ToString() + "px" + ";width:" + _ControlWidth.ToString() + "px" + ErrorStyle + ";" + IsHiddenStyle + ";");            
           
             chk.MergeAttributes(_inputHtmlAttributes);
-
+            ////////////Check code start//////////////////
+            EnterRule FunctionObjectAfter = (EnterRule)_form.FormCheckCodeObj.GetCommand("level=field&event=after&identifier=" + _key);
             if (FunctionObjectAfter != null && !FunctionObjectAfter.IsNull())
             {
                 chk.Attributes.Add("onblur", "return " + _key + "_after();"); 
             }
-            
+            EnterRule FunctionObjectBefore = (EnterRule)_form.FormCheckCodeObj.GetCommand("level=field&event=before&identifier=" + _key);
             if (FunctionObjectBefore != null && !FunctionObjectBefore.IsNull())
             {
                 chk.Attributes.Add("onfocus", "return " + _key + "_before();"); 
             }
 
+
+            EnterRule FunctionObjectClick = (EnterRule)_form.FormCheckCodeObj.GetCommand("level=field&event=click&identifier=" + _key);
             if (FunctionObjectClick != null && !FunctionObjectClick.IsNull())
             {
                 chk.Attributes.Add("onclick", "return " + _key + "_click();"); 
@@ -142,8 +145,8 @@ namespace MvcDynamicForms.Fields
             prompt.Attributes.Add("class", "EpiLabel");
             prompt.Attributes.Add("Id", "label" + inputName);
             StringBuilder StyleValues = new StringBuilder();
-            StyleValues.Append(GetControlStyle(_fontstyle.ToString(), (_Prompttop-1).ToString(), _Promptleft.ToString(), null, Height.ToString(), IsHidden));
-            prompt.Attributes.Add("style", StyleValues.ToString());
+            StyleValues.Append(GetControlStyle(_fontstyle.ToString(), _Prompttop.ToString(), _Promptleft.ToString(), null,null, IsHidden));
+            prompt.Attributes.Add("style", StyleValues.ToString() + " ; " + IsHighlightedStyle );
             html.Append(prompt.ToString());
             if (ReadOnly || _IsDisabled)
                 {
