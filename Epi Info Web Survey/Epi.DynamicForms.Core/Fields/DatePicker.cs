@@ -192,7 +192,10 @@ namespace MvcDynamicForms.Fields
         public string GetRightDateFormat(string Date, string patternIn, string patternOut = "")
         {
             StringBuilder NewDateFormat = new StringBuilder();
-
+             if (Date == "SYSTEMDATE")
+          {
+               Date = DateTime.Now.Date.ToString();
+             }
             string MM = "";
             string DD = "";
             string YYYY = "";
