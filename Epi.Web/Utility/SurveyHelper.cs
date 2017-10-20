@@ -13,6 +13,9 @@ using System.Collections.Generic;
 using System.Xml.XPath;
 using System.Text.RegularExpressions;
 using System.Text;
+using System.Globalization;
+using System.Threading;
+
 namespace Epi.Web.MVC.Utility
 {
     public class SurveyHelper
@@ -441,7 +444,8 @@ namespace Epi.Web.MVC.Utility
                     string ControlId  = item.Attribute("QuestionName").Value;
                     bool Type = (bool) List.SurveyControlList.Any(x => x.ControlId == ControlId && x.ControlType != "Literal" && x.ControlType != "GroupBox");
                     bool YesNoType = (bool)List.SurveyControlList.Any(x => x.ControlId == ControlId && x.ControlType == "YesNo");
-
+                    bool IsDate = (bool)List.SurveyControlList.Any(x => x.ControlId == ControlId && x.ControlType == "Date");
+                    bool ISNumericTextBox = (bool)List.SurveyControlList.Any(x => x.ControlId == ControlId && x.ControlType == "NumericTextBox");
                     if (Type)
                         {
                     string Question = List.SurveyControlList.Single(x => x.ControlId == ControlId).ControlPrompt;
@@ -452,22 +456,45 @@ namespace Epi.Web.MVC.Utility
                     PrintModel.Question = Question;
                     PrintModel.ControlName = ControlId;
                     PrintModel.ControlType =  ControlType;
-                    if (!YesNoType)
-                        {
-                            PrintModel.Value = item.Value;
-                        }
-                    else{
-                    if (item.Value == "1")
-                                {
+                    if (YesNoType)
+                        {   
+                        if (item.Value == "1")
+                            {
                                 PrintModel.Value = "Yes";
-                                }
+                            }
                             else
-                                {
+                            {
 
                                 PrintModel.Value = "No";
-                                }
-                            
+                            }
                         }
+                    else if (IsDate)
+                    {
+                        CultureInfo currentCulture = Thread.CurrentThread.CurrentCulture;
+                        string DateFormat = currentCulture.DateTimeFormat.ShortDatePattern;
+                        DateFormat = DateFormat.Remove(DateFormat.IndexOf("y"), 2);
+                        var NewDateFormat = Epi.Web.Common.GlobalizationCommon.GetRightDateFormat(item.Value, "YYYY-MM-DD", DateFormat);
+                        PrintModel.Value = NewDateFormat;
+                    }
+                    else if (ISNumericTextBox)
+                    {
+                        string uiSep = CultureInfo.CurrentUICulture.NumberFormat.NumberDecimalSeparator;
+                        string scriptNumeric = "";
+                        if (uiSep == ".")
+                        {
+                            scriptNumeric =   item.Value.Replace(',','.')  ;
+                        }
+                        if (uiSep == ",")
+                        {
+                            
+                            scriptNumeric = item.Value.Replace('.', ',');
+                        }
+                        PrintModel.Value = scriptNumeric;
+                    }
+                    else {
+                        PrintModel.Value = item.Value;
+                    }
+                   
                     QuestionAnswerList.Add(PrintModel);
                         }
                     }

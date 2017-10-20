@@ -1303,7 +1303,7 @@ namespace Epi.Web.MVC.Utility
                             field = GetCommandButton(fieldElement, form);
                             break;
 
-                        case "17":
+                        case "17"://DropDown LegalValues
 
                             string DropDownValues1 = "";
                             if (SourceTableList != null)
@@ -1317,7 +1317,7 @@ namespace Epi.Web.MVC.Utility
 
                             break;
 
-                        case "18":
+                        case "18": //DropDown Codes
 
 
                             dropDownValues = GetDropDownValues(form.XDocMetadata, fieldElement.Attribute("Name").Value, fieldElement.Attribute("SourceTableName").Value, fieldElement.Attribute("CodeColumnName").Value, form.SourceTableList);
@@ -1341,7 +1341,7 @@ namespace Epi.Web.MVC.Utility
 
                             break;
 
-                        case "19":
+                        case "19": //DropDown CommentLegal
 
                             dropDownValues = GetDropDownValues(form.XDocMetadata, fieldElement.Attribute("Name").Value, fieldElement.Attribute("SourceTableName").Value, fieldElement.Attribute("CodeColumnName").Value, form.SourceTableList);
                             field = GetDropDown(fieldElement, dropDownValues, 19, form);
