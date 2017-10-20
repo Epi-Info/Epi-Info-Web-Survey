@@ -6,7 +6,7 @@ using System.Web.Mvc;
 using Epi.Core.EnterInterpreter;
 using System.Globalization;
 using System.Threading;
-
+using Epi.Web.Common;
 namespace MvcDynamicForms.Fields
 {
     /// <summary>
@@ -43,7 +43,7 @@ namespace MvcDynamicForms.Fields
             }
 
             // input element
-            var NewDateFormat = GetRightDateFormat(Response, "YYYY-MM-DD", DateFormat);
+            var NewDateFormat =  GlobalizationCommon.GetRightDateFormat(Response, "YYYY-MM-DD", DateFormat);
             var txt = new TagBuilder("input");
             txt.Attributes.Add("name", inputName);
             txt.Attributes.Add("id", inputName);
@@ -154,12 +154,12 @@ namespace MvcDynamicForms.Fields
             ControlClass.Append("IsDate validate[");
 
 
-            if ((!string.IsNullOrEmpty(GetRightDateFormat(Lower, Pattern).ToString()) && (!string.IsNullOrEmpty(GetRightDateFormat(Upper, Pattern).ToString()))))
+            if ((!string.IsNullOrEmpty(GlobalizationCommon.GetRightDateFormat(Lower, Pattern).ToString()) && (!string.IsNullOrEmpty(GlobalizationCommon.GetRightDateFormat(Upper, Pattern).ToString()))))
             {
 
                 //   ControlClass.Append("customDate[date],future[" + GetRightDateFormat(Lower).ToString() + "],past[" + GetRightDateFormat(Upper).ToString() + "],");
                 //dateRange
-                ControlClass.Append("customDate[date],datePickerRange, " + GetRightDateFormat(Lower, Pattern).ToString() + "," + GetRightDateFormat(Upper, Pattern).ToString() + ",");
+                ControlClass.Append("customDate[date],datePickerRange, " + GlobalizationCommon.GetRightDateFormat(Lower, Pattern).ToString() + "," + GlobalizationCommon.GetRightDateFormat(Upper, Pattern).ToString() + ",");
                 if (Required == true)
                 {
 
@@ -189,187 +189,7 @@ namespace MvcDynamicForms.Fields
 
         }
 
-        public string GetRightDateFormat(string Date, string patternIn, string patternOut = "")
-        {
-            StringBuilder NewDateFormat = new StringBuilder();
-             if (Date == "SYSTEMDATE")
-          {
-               Date = DateTime.Now.Date.ToString();
-             }
-            string MM = "";
-            string DD = "";
-            string YYYY = "";
-            char splitChar = '/';
-            if (!string.IsNullOrEmpty(Date))
-            {
-                if (Date.Contains('-'))
-                {
-                    splitChar = ' ';
-                    splitChar = '-';
-                }
-                else
-                {
-
-                    splitChar = '/';
-                }
-                string[] dateList = Date.Split((char)splitChar);
-                switch (patternIn.ToString())
-                {
-                    case "YYYY-MM-DD":
-                        MM = dateList[1];
-                        DD = dateList[2];
-                        YYYY = dateList[0];
-                        break;
-                    case "MM-DD-YYYY":
-                        MM = dateList[0];
-                        DD = dateList[1];
-                        YYYY = dateList[2];
-                        break;
-                }
-                if (string.IsNullOrEmpty(patternOut))
-                {
-                    NewDateFormat.Append(YYYY);
-                    NewDateFormat.Append('/');
-                    NewDateFormat.Append(MM);
-                    NewDateFormat.Append('/');
-                    NewDateFormat.Append(DD);
-                }
-                else
-                {
-                    switch (patternOut.ToString().ToLower())
-                    {
-                        case "dd/mm/yyyy":
-                            NewDateFormat.Append(DD);
-                            NewDateFormat.Append('/');
-                            NewDateFormat.Append(MM);
-                            NewDateFormat.Append('/');
-                            NewDateFormat.Append(YYYY);
-                            break;
-                        case "dd/mm/yy":
-                            NewDateFormat.Append(DD);
-                            NewDateFormat.Append('/');
-                            NewDateFormat.Append(MM);
-                            NewDateFormat.Append('/');
-                            NewDateFormat.Append(YYYY);
-                            break;                      
-                        case "d/m/yy":
-                            NewDateFormat.Append(DD);
-                            NewDateFormat.Append('/');
-                            NewDateFormat.Append(MM);
-                            NewDateFormat.Append('/');
-                            NewDateFormat.Append(YYYY);
-                            break;
-                        case "mm/dd/yyyy":
-                            NewDateFormat.Append(MM);
-                            NewDateFormat.Append('/');
-                            NewDateFormat.Append(DD);
-                            NewDateFormat.Append('/');
-                            NewDateFormat.Append(YYYY);
-                            break;                       
-                        case "m/d/yy":
-                            NewDateFormat.Append(MM);
-                            NewDateFormat.Append('/');
-                            NewDateFormat.Append(DD);
-                            NewDateFormat.Append('/');
-                            NewDateFormat.Append(YYYY);
-                            break;
-                        case "yy/mm/dd":
-                            NewDateFormat.Append(YYYY);
-                            NewDateFormat.Append('/');
-                            NewDateFormat.Append(MM);
-                            NewDateFormat.Append('/');
-                            NewDateFormat.Append(DD);
-                            break;                      
-                        //.
-                        case "dd.mm.yyyy":
-                            NewDateFormat.Append(DD);
-                            NewDateFormat.Append('.');
-                            NewDateFormat.Append(MM);
-                            NewDateFormat.Append('.');
-                            NewDateFormat.Append(YYYY);
-                            break;
-                        case "dd.mm.yy":
-                            NewDateFormat.Append(DD);
-                            NewDateFormat.Append('.');
-                            NewDateFormat.Append(MM);
-                            NewDateFormat.Append('.');
-                            NewDateFormat.Append(YYYY);
-                            break;                                             
-                        case "mm.dd.yyyy":
-                            NewDateFormat.Append(MM);
-                            NewDateFormat.Append('.');
-                            NewDateFormat.Append(DD);
-                            NewDateFormat.Append('.');
-                            NewDateFormat.Append(YYYY);
-                            break;                      
-                        case "m.d.yy":
-                            NewDateFormat.Append(MM);
-                            NewDateFormat.Append('.');
-                            NewDateFormat.Append(DD);
-                            NewDateFormat.Append('.');
-                            NewDateFormat.Append(YYYY);
-                            break;
-                        case "yy.MM.dd":
-                            NewDateFormat.Append(YYYY);
-                            NewDateFormat.Append('.');
-                            NewDateFormat.Append(MM);
-                            NewDateFormat.Append('.');
-                            NewDateFormat.Append(DD);
-                            break;
-                        //-
-                        case "dd-mm-yyyy":
-                            NewDateFormat.Append(DD);
-                            NewDateFormat.Append('-');
-                            NewDateFormat.Append(MM);
-                            NewDateFormat.Append('-');
-                            NewDateFormat.Append(YYYY);
-                            break;
-                        case "dd-mm-yy":
-                            NewDateFormat.Append(DD);
-                            NewDateFormat.Append('-');
-                            NewDateFormat.Append(MM);
-                            NewDateFormat.Append('-');
-                            NewDateFormat.Append(YYYY);
-                            break;                      
-                        case "d-m-yy":
-                            NewDateFormat.Append(DD);
-                            NewDateFormat.Append('-');
-                            NewDateFormat.Append(MM);
-                            NewDateFormat.Append('-');
-                            NewDateFormat.Append(YYYY);
-                            break;
-                        case "mm-dd-yyyy":
-                            NewDateFormat.Append(MM);
-                            NewDateFormat.Append('-');
-                            NewDateFormat.Append(DD);
-                            NewDateFormat.Append('-');
-                            NewDateFormat.Append(YYYY);
-                            break;                       
-                        case "m-d-yy":
-                            NewDateFormat.Append(MM);
-                            NewDateFormat.Append('-');
-                            NewDateFormat.Append(DD);
-                            NewDateFormat.Append('-');
-                            NewDateFormat.Append(YYYY);
-                            break;
-                        case "yy-mm-dd":
-                            NewDateFormat.Append(YYYY);
-                            NewDateFormat.Append('-');
-                            NewDateFormat.Append(MM);
-                            NewDateFormat.Append('-');
-                            NewDateFormat.Append(DD);
-                            break;                      
-
-                    }
-                }
-            }
-            else
-            {
-                NewDateFormat.Append("");
-
-            }
-            return NewDateFormat.ToString();
-        }
+       
         public int GetYear(string Date, string pattern)
         {
 
