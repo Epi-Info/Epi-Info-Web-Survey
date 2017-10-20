@@ -568,7 +568,7 @@ function CCE_GetTodaysDate() {
 }
 
 
-CCE_Context.prototype.setValue = function (pName,pValue,dateformat,NumberSep) {
+CCE_Context.prototype.setValue = function (pName,pValue,_dateformat,NumberSep) {
     var cce_Symbol = this.resolve(pName);    
     
     if (cce_Symbol != null) {
@@ -589,15 +589,30 @@ CCE_Context.prototype.setValue = function (pName,pValue,dateformat,NumberSep) {
         // setTimeout(function () { 
         if (cce_Symbol.Source == "datasource") {
             switch (cce_Symbol.Type) {
-                case "datepicker": //string has been converted to date for comparison with another date                    
-                    //  if (eval(document.getElementById("IsMobile"))) {
+                case "datepicker": //string has been converted to date for comparison with another date      
                     var FormatedDate;
-                   // alert(CCE_SystemDate(dateformat, cce_Symbol.Value));
-                    if (cce_Symbol.Value != null && cce_Symbol.Value != "") {
+                    if (!eval(document.getElementById("IsMobile")))
+                    {
+                        if (cce_Symbol.Value != null && cce_Symbol.Value != "")
+                        {
+                           
+                              $(Jquery).datepicker('setDate', cce_Symbol.Value);
+                        } else {
+                            $(Jquery).val("");
+                        }
+                    }
+                    else// Mobile
+                    {
+                        if (cce_Symbol.Value != null && cce_Symbol.Value != "") {
+                            var DateNewValue = CCE_SystemDate(_dateformat, cce_Symbol.Value);
+                             $(Jquery).val(DateNewValue.toString());
 
-                        $(Jquery).val(CCE_SystemDate(dateformat, cce_Symbol.Value));
-                    } else {
-                        $(Jquery).val("");
+
+                            //$(Jquery).datepicker('setDate', DateNewValue);
+                        } else {
+                            $(Jquery).val("");
+                        }
+
                     }
                     break;
 
@@ -1957,20 +1972,29 @@ function CCE_Truncate(pValue)
 
 function CCE_SystemDate(dateformat,DateValue)
 { 
-    var date = "";
-    if (DateValue != null || DateValue !="")
-    {
+    var date ;
+    
+    if (DateValue != null && DateValue != "" && DateValue != "undefined")
+    {        
         date = new Date(DateValue);
+        
     }
     else
     {
+        
         date = new Date();
     }
-
+    
+    if (date != "Invalid Date") {
+        
+        
     var FormatedDate;
     switch (dateformat.toLowerCase()) {
         case "dd/mm/yyyy":
+       
+           
             FormatedDate = (date.getDate() < 10 ? "0" + date.getDate() : date.getDate()) + "/" + ((date.getMonth() + 1) < 10 ? "0" + (date.getMonth() + 1) : (date.getMonth() + 1)) + "/" + date.getFullYear();
+            
             break;
         case "d/m/yyyy":
             FormatedDate = (date.getDate() < 10 ? date.getDate() : date.getDate()) + "/" + ((date.getMonth() + 1) < 10 ? (date.getMonth() + 1) : (date.getMonth() + 1)) + "/" + date.getFullYear();
@@ -2020,8 +2044,13 @@ function CCE_SystemDate(dateformat,DateValue)
         default:
             FormatedDate = cce_Symbol.Value;
             break;
+        }
     }
-
+    else
+    {
+    FormatedDate = DateValue;
+    }
+  
     return FormatedDate;
 }
 
