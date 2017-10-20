@@ -8,6 +8,7 @@ using System.Xml.Linq;
 using System.Xml.XPath;
 using Epi.Web.Common.DTO;
 using OfficeOpenXml;
+using Epi.Web.Common.Message;
 namespace Epi.Web.Common.Xml
 {
     public class SurveyXml
@@ -445,5 +446,23 @@ namespace Epi.Web.Common.Xml
             }
             return ValueList;
         }
+
+
+        public static XDocument AddSourceTableToXml(XDocument xdoc, List<SourceTableDTO> SourceTables)
+        {
+            XElement TemplaitElement = xdoc.XPathSelectElement("Template");
+            foreach (var table in SourceTables )
+            {
+                XElement SourceTableElement = XElement.Parse(table.TableXml);
+                TemplaitElement.Add(SourceTableElement);
+            }
+
+
+            return xdoc;
+        
+        }
+
+
+
     }
 }
