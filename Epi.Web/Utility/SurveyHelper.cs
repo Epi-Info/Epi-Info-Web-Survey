@@ -507,11 +507,12 @@ namespace Epi.Web.MVC.Utility
 
             }
 
-        internal static List<PrintModel> SetCommentLegalValues(List<PrintModel> QuestionAnswerList, SurveyControlsResponse List, SurveyInfoModel surveyInfoModel)
+        internal static List<PrintModel> SetCommentLegalValues(List<PrintModel> QuestionAnswerList, SurveyControlsResponse List, SurveyInfoModel surveyInfoModel, SourceTablesResponse SourceTables)
         {
             try
             {
                 XDocument xdoc = XDocument.Parse(surveyInfoModel.XML);
+                xdoc = Epi.Web.Common.Xml.SurveyXml.AddSourceTableToXml(xdoc, SourceTables.List);
                 var CommentLegals = List.SurveyControlList.Where(x => x.ControlType == "CommentLegal");
                 if (CommentLegals.Count() > 0)
                 {
