@@ -512,7 +512,11 @@ namespace Epi.Web.MVC.Utility
             try
             {
                 XDocument xdoc = XDocument.Parse(surveyInfoModel.XML);
-                xdoc = Epi.Web.Common.Xml.SurveyXml.AddSourceTableToXml(xdoc, SourceTables.List);
+                var  Node = xdoc.Element("SourceTable");
+                if ( Node == null)
+                {
+                    xdoc = Epi.Web.Common.Xml.SurveyXml.AddSourceTableToXml(xdoc, SourceTables.List);
+                }
                 var CommentLegals = List.SurveyControlList.Where(x => x.ControlType == "CommentLegal");
                 if (CommentLegals.Count() > 0)
                 {
