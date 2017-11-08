@@ -33,7 +33,7 @@ namespace MvcDynamicForms.Fields
                     datePickerFormat = "%m-%d-%Y";
                     break;
                 case "m/d/yyyy":
-                    datePickerFormat = "%m/%d/%Y";
+                    datePickerFormat = "%m/%d/%y";
                     break;
                 case "m.d.yyyy":
                     datePickerFormat = "%m.%d.%Y";
@@ -184,10 +184,12 @@ namespace MvcDynamicForms.Fields
             var txt = new TagBuilder("input");
             txt.Attributes.Add("name", inputName);
             txt.Attributes.Add("id", inputName);
-            txt.Attributes.Add("type", "date");
+            txt.Attributes.Add("type", "text");
             txt.Attributes.Add("Theme", "b");
             txt.Attributes.Add("data-role", "datebox");
-            txt.Attributes.Add("data-options", "{\"mode\": \"datebox\", \"pickPageButtonTheme\": \"e\", \"pickPageInputTheme\":\"e\", \"pickPageFlipButtonTheme\":\"a\", \"pickPageTheme\":\"e\" ,  \"useNewStyle\":true,  \"dateFormat\":\""+GetDatePickerFormat(DateFormat)+ "\",  \"fieldsOrderOverride\":" + GetDatePickerOrder(DateFormat)+  "}");
+           txt.Attributes.Add("data-options", "{\"mode\": \"datebox\", \"pickPageButtonTheme\": \"e\", \"pickPageInputTheme\":\"e\", \"pickPageFlipButtonTheme\":\"a\", \"pickPageTheme\":\"e\" ,  \"useNewStyle\":true,  \"dateFormat\":\"" + GetDatePickerFormat(DateFormat) + "\""+  "}");
+         
+
             txt.Attributes.Add("value", NewDateFormat);
             //txt.Attributes.Add("data-date-format",DateFormat.ToLower());
             txt.Attributes.Add("onkeydown ", "return DateFormat(this, event.keyCode);");           
@@ -215,7 +217,7 @@ namespace MvcDynamicForms.Fields
             //{
             //    txt.Attributes.Add("disabled", "disabled");
             //}
-            txt.Attributes.Add("class", GetControlClass(Response));          
+           txt.Attributes.Add("class", GetControlClass(Response));          
                 txt.Attributes.Add("data-prompt-position", "topLeft:15");
 
                 txt.Attributes.Add("style", "" + _ControlWidth.ToString() + "px" + ErrorStyle + ";" + IsHiddenStyle + ";" + IsHighlightedStyle);          
@@ -374,6 +376,7 @@ namespace MvcDynamicForms.Fields
                             NewDateFormat.Append('/');
                             NewDateFormat.Append(YYYY);
                             break;
+                        case "m/d/yyyy":
                         case "m/d/yy":
                             NewDateFormat.Append(MM);
                             NewDateFormat.Append('/');
