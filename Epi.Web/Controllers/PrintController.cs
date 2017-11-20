@@ -48,8 +48,8 @@ namespace Epi.Web.MVC.Controllers
         Common.Message.SurveyControlsResponse List = _isurveyFacade.GetSurveyControlList(Request);
 
         var QuestionAnswerList = SurveyHelper.GetQuestionAnswerList(answerResponse.SurveyResponseList[0].XML, List);
-
-        PrintResponseModel.ResponseList = SurveyHelper.SetCommentLegalValues(QuestionAnswerList, List, surveyInfoModel);
+        var SourceTables = _isurveyFacade.GetSourceTables(Session["RootFormId"].ToString());
+        PrintResponseModel.ResponseList = SurveyHelper.SetCommentLegalValues(QuestionAnswerList, List, surveyInfoModel, SourceTables);
         PrintResponseModel.NumberOfPages = SurveyHelper.GetNumberOfPags(answerResponse.SurveyResponseList[0].XML);
         PrintResponseModel.SurveyName = surveyInfoModel.SurveyName;
         PrintResponseModel.CurrentDate = DateTime.Now.ToString();
