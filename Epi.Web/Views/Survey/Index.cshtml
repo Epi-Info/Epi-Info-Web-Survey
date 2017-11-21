@@ -11,7 +11,7 @@
         background-repeat: no-repeat;
         background-position: right;
         outline: 0;
-   
+
     }
 
     input.Search::-ms-expand {
@@ -26,7 +26,10 @@
     input.Search::-webkit-calendar-picker-indicator {
         display: none;
     }
-
+    .ui-datepicker-calendar td.zero a:before
+    {
+    content: "0";
+    }
 </style>
 <script type="text/javascript">
 
@@ -35,8 +38,26 @@
     //Check code logic end
 
 
+    $(document).ready(function () {
 
 
+     
+       var DateFormat = '@Model.CurrentCultureDateFormat'
+       DateFormat = DateFormat.toLocaleLowerCase().toString();
+
+        // Start fix for en-us format
+       if (DateFormat=="m/d/yy"){
+           DateFormat ="mm/dd/yy"
+       }
+         // End fix for en-us format
+        
+        var dateFormat1 = $(".IsDate").val();
+         
+        if (dateFormat1 == "") {
+
+            $(".IsDate").datepicker("option", "dateFormat", DateFormat);
+        }
+  });
 
 </script>
 
@@ -110,16 +131,7 @@
 
         //$("#Savebutton").tooltip();
 
-       var DateFormat = '@Model.CurrentCultureDateFormat'
-        DateFormat = DateFormat.toLocaleLowerCase().toString();
-        //var dateFormat1 = $(".datepicker").datepicker("option", "dateFormat");
-        var dateFormat1 = $(".IsDate").val();
-        //  alert("DateFormat: " + DateFormat + "/// dateFormat1: " + dateFormat1)
-        //alert(dateFormat1);
-        if (dateFormat1 == "") {
-            
-            $(".IsDate").datepicker("option", "dateFormat", DateFormat);
-        }
+      
 
 
         $("#dialog").dialog({
