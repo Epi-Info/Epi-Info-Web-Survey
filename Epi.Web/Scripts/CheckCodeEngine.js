@@ -1631,13 +1631,13 @@ function CCE_Years(pValue1, pValue2) {
     }
 
     var result = date2.getFullYear() - date1.getFullYear();
-    if
-    (
-        date2.getMonth() < date1.getMonth() ||
-        (date2.getMonth() == date1.getMonth() && date2.getDate() < date1.getDate())
-    ) {
-        result--;
-    }
+    //if
+    //(
+    //    date2.getMonth() < date1.getMonth() ||
+    //    (date2.getMonth() == date1.getMonth() && date2.getDate() < date1.getDate())
+    //) {
+    //    result--;
+    //}
     return result;
 }
 
@@ -1681,9 +1681,9 @@ function CCE_Months(pValue1, pValue2) {
 
     var result = 12 * (date2.getFullYear() - date1.getFullYear()) + date2.getMonth() - date1.getMonth();
 
-    if (date2.getDate() < date1.getDate()) {
-        result--;
-    }
+    //if (date2.getDate() < date1.getDate()) {
+    //    result--;
+    //}
     return result;
 }
 
