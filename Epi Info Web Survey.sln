@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.27004.2009
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epi.Web", "Epi.Web\Epi.Web.csproj", "{91794FFF-48C0-414F-933E-34412A29EEAC}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -29,8 +29,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epi.Web.CheckCodeEngine", "Epi.Web.CheckCodeEngine\Epi.Web.CheckCodeEngine.csproj", "{6B084882-EF4F-4CF0-85B1-1E8C357AE822}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epi.Web.SurveyManager.Client", "Epi.Web.SurveyManager_Test\Epi.Web.SurveyManager.Client.csproj", "{13D8FD8D-1403-4C84-823A-1E27806CAC30}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{95D9CE06-6A23-4D90-890E-A7E0BC7F8B3C}"
 	ProjectSection(SolutionItems) = preProject
 		.nuget\NuGet.Config = .nuget\NuGet.Config
@@ -39,42 +37,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{95D9CE
 	EndProjectSection
 EndProject
 Global
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 11
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs04
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = Epi.Web\\Epi.Web.csproj
-		SccProjectName1 = Epi.Web
-		SccLocalPath1 = Epi.Web
-		SccProjectUniqueName2 = Epi.Web.Interfaces\\Epi.Web.Interfaces.csproj
-		SccProjectName2 = Epi.Web.Interfaces
-		SccLocalPath2 = Epi.Web.Interfaces
-		SccProjectUniqueName3 = EIWS_BLL_Core\\Epi.Web.BLL.csproj
-		SccProjectName3 = EIWS_BLL_Core
-		SccLocalPath3 = EIWS_BLL_Core
-		SccProjectUniqueName4 = Epi.Web.EF\\Epi.Web.EF.csproj
-		SccProjectName4 = Epi.Web.EF
-		SccLocalPath4 = Epi.Web.EF
-		SccProjectUniqueName5 = Epi.Web.Common\\Epi.Web.Common.csproj
-		SccProjectName5 = Epi.Web.Common
-		SccLocalPath5 = Epi.Web.Common
-		SccProjectUniqueName6 = Epi.DynamicForms.Core\\Epi.Web.DynamicForms.Core.csproj
-		SccProjectName6 = Epi.DynamicForms.Core
-		SccLocalPath6 = Epi.DynamicForms.Core
-		SccProjectUniqueName7 = SurveyManagerInterface\\Epi.Web.WCF.SurveyService.csproj
-		SccProjectName7 = SurveyManagerInterface
-		SccLocalPath7 = SurveyManagerInterface
-		SccProjectUniqueName8 = Epi.Web.WCF.PublishServer\\Epi.Web.WCF.SurveyHost.csproj
-		SccProjectName8 = Epi.Web.WCF.PublishServer
-		SccLocalPath8 = Epi.Web.WCF.PublishServer
-		SccProjectUniqueName9 = Epi.Web.CheckCodeEngine\\Epi.Web.CheckCodeEngine.csproj
-		SccProjectName9 = Epi.Web.CheckCodeEngine
-		SccLocalPath9 = Epi.Web.CheckCodeEngine
-		SccProjectUniqueName10 = Epi.Web.SurveyManager_Test\\Epi.Web.SurveyManager.Client.csproj
-		SccProjectName10 = Epi.Web.SurveyManager_Test
-		SccLocalPath10 = Epi.Web.SurveyManager_Test
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|Mixed Platforms = Debug|Mixed Platforms
@@ -174,21 +136,12 @@ Global
 		{6B084882-EF4F-4CF0-85B1-1E8C357AE822}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{6B084882-EF4F-4CF0-85B1-1E8C357AE822}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{6B084882-EF4F-4CF0-85B1-1E8C357AE822}.Release|x86.ActiveCfg = Release|Any CPU
-		{13D8FD8D-1403-4C84-823A-1E27806CAC30}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{13D8FD8D-1403-4C84-823A-1E27806CAC30}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{13D8FD8D-1403-4C84-823A-1E27806CAC30}.Debug|Mixed Platforms.Build.0 = Debug|x86
-		{13D8FD8D-1403-4C84-823A-1E27806CAC30}.Debug|x86.ActiveCfg = Debug|x86
-		{13D8FD8D-1403-4C84-823A-1E27806CAC30}.Debug|x86.Build.0 = Debug|x86
-		{13D8FD8D-1403-4C84-823A-1E27806CAC30}.Release|Any CPU.ActiveCfg = Release|x86
-		{13D8FD8D-1403-4C84-823A-1E27806CAC30}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{13D8FD8D-1403-4C84-823A-1E27806CAC30}.Release|Mixed Platforms.Build.0 = Release|x86
-		{13D8FD8D-1403-4C84-823A-1E27806CAC30}.Release|x86.ActiveCfg = Release|x86
-		{13D8FD8D-1403-4C84-823A-1E27806CAC30}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.0\lib\NET35
+		SolutionGuid = {90BC8E71-8799-4A31-90F1-9C35C40CF1F0}
 	EndGlobalSection
 EndGlobal

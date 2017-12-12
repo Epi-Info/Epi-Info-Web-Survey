@@ -883,9 +883,12 @@
                 if (field.val().indexOf("-") != -1) {
                     splitChar = '-';
                 }
-                else {
+                else if (field.val().indexOf("/") != -1) {
 
                     splitChar = '/';
+                } else {
+
+                    splitChar = '.';
                 }
                 var dateList = field.val().split(splitChar);
 
@@ -978,10 +981,74 @@
             }
             return false;
         },
+
+        _FormatNonUsDate: function (dateformat, DateValue ) {
+            
+
+            if (DateValue != null && DateValue != "" && DateValue != "undefined") 
+            {
+               switch (dateformat.toLowerCase()) {
+                   case "dd/mm/yyyy":
+                   case "dd/mm/yy":
+                   case "d/m/yyyy":
+                   case "dd-mm-yyyy":
+                   case "dd-mm-yy":
+                   case "d-m-yyyy":
+                   case "dd.mm.yyyy":
+                   case "d.m.yyyy":
+                   case "dd.mm.yy":
+                      // alert(dateformat);
+                        var NewDateFormat = "";
+                        var MM = "";
+                        var DD = "";
+                        var YYYY = "";
+                        var splitChar = '';
+                        if (DateValue != '' && DateValue != null) {
+
+                            if (DateValue.indexOf("-") != -1) {
+                                splitChar = '-';
+                            }
+                            else {
+
+                                splitChar = '/';
+                            }
+                            var dateList = DateValue.split(splitChar);
+
+                            MM = dateList[1];
+                            DD = dateList[0];
+                            YYYY = dateList[2];
+
+                            NewDateFormat = NewDateFormat.concat(YYYY);
+                            NewDateFormat = NewDateFormat.concat('/');
+                            NewDateFormat = NewDateFormat.concat(MM);
+                            NewDateFormat = NewDateFormat.concat('/');
+                            NewDateFormat = NewDateFormat.concat(DD);
+                        }
+                        else {
+                            NewDateFormat.concat("");
+
+                        }
+                        
+                        FormatedDate = NewDateFormat;
+                        break;
+                    default:
+                        FormatedDate = DateValue;
+                        break;
+                }
+            }
+            else {
+                FormatedDate = DateValue;
+            }
+
+            return FormatedDate;
+        },
         //Checks if the start date is before the end date
         //returns true if end is later than start
         _dateCompare: function (start, end) {
-            return (new Date(start.toString()) <= new Date(end.toString()));
+             var Date1 = new Date(start.toString());
+             var Date2 = new Date(end.toString());
+             return (Date1 <= Date2)
+
         },
         /**
         * Checks date range
@@ -991,17 +1058,19 @@
         * @return an error string if validation failed
         */
         _datepickerRange: function (first, second, rules, i, options, field) {
-            //are not both populated
+            
+            var FieldDate = methods._FormatNonUsDate($('#CurrentCultureDateFormat').val(), field.val());
+            
 
             var Lower = methods._parseDate(first);
             var Upper = methods._parseDate(second);
             //are both dates but range is off
             if (field.val() != null && field.val() != "") {
-                if (!methods._dateCompare(first, field.val())) {
+                if (!methods._dateCompare(first, FieldDate)) {
                     return options.allrules[rules[i]].alertText + " " + methods._dateToString(Lower) + " and " + methods._dateToString(Upper);
                 }
                 ///are both dates but range is off
-                if (!methods._dateCompare(field.val(), second)) {
+                if (!methods._dateCompare(FieldDate, second)) {
                     return options.allrules[rules[i]].alertText + " " + methods._dateToString(Lower) + " and " + methods._dateToString(Upper);
                 }
             }
@@ -1245,9 +1314,13 @@
         * @param {Object} date
         */
         _dateToString: function (date) {
-
-            // return date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
-            return (date.getMonth() + 1) + "/" + date.getDate() + "/" + date.getFullYear();
+            var userLang = navigator.language || navigator.userLanguage; 
+            
+            return date.toLocaleDateString(userLang);
+          //  return date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+        //    return (date.getMonth() + 1) + "/" + date.getDate() + "/" + date.getFullYear();
+            
+            
         },
         /**
         * Parses an ISO date
