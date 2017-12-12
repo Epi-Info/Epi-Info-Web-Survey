@@ -153,13 +153,13 @@ namespace MvcDynamicForms.Fields
 
             ControlClass.Append("IsDate validate[");
 
-
+                 // var NewDateFormat = GetRightDateFormat(Response, "YYYY-MM-DD", DateFormat);
             if ((!string.IsNullOrEmpty(GetRightDateFormat(Lower, Pattern).ToString()) && (!string.IsNullOrEmpty(GetRightDateFormat(Upper, Pattern).ToString()))))
             {
 
                 //   ControlClass.Append("customDate[date],future[" + GetRightDateFormat(Lower).ToString() + "],past[" + GetRightDateFormat(Upper).ToString() + "],");
                 //dateRange
-                ControlClass.Append("customDate[date],datePickerRange, " + GetRightDateFormat(Lower, Pattern).ToString() + "," + GetRightDateFormat(Upper, Pattern).ToString() + ",");
+                ControlClass.Append("customDate["+ DateFormat.ToUpper() + "],datePickerRange, " + GetRightDateFormat(Lower, Pattern).ToString() + "," + GetRightDateFormat(Upper, Pattern).ToString() + ",");
                 if (Required == true)
                 {
 
