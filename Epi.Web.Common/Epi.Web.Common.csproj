@@ -133,7 +133,7 @@
     <Compile Include="Message\TokenResponse.cs" />
     <Compile Include="Message\UserAuthenticationResponse.cs" />
     <Compile Include="ObjectMapping\Mapper.cs" />
-    <Compile Include="OrganizationResponse.cs" />
+    <Compile Include="Message\OrganizationResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\Cryptography.cs" />
     <Compile Include="Security\PasswordGenerator.cs" />
