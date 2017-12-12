@@ -40,9 +40,10 @@
 
     $(document).ready(function () {
 
-
+       
      
-       var DateFormat = '@Model.CurrentCultureDateFormat'
+        var DateFormat = '@Model.CurrentCultureDateFormat'
+       
        DateFormat = DateFormat.toLocaleLowerCase().toString();
 
         // Start fix for en-us format
@@ -50,13 +51,14 @@
            DateFormat ="mm/dd/yy"
        }
          // End fix for en-us format
-        
-        var dateFormat1 = $(".IsDate").val();
-         
-        if (dateFormat1 == "") {
+        $(".IsDate").each(function () {
+             var  DateValue =  $(this).val();
+             $(this).datepicker("option", "dateFormat", DateFormat);
+             $(this).val(DateValue);
+         });
 
-            $(".IsDate").datepicker("option", "dateFormat", DateFormat);
-        }
+
+
   });
 
 </script>
@@ -668,7 +670,7 @@ else
         <input type="hidden" name="is_save_action" value="false" />
         <input type="hidden" name="is_print_action" value="false" />
         <input type="hidden" name="is_goto_action" value="false" />
-
+        <input type="hidden" id="CurrentCultureDateFormat" name="CurrentCultureDateFormat" value="@Model.CurrentCultureDateFormat" />
 
         <div id="nav">
             <div id="prev" align="left">
