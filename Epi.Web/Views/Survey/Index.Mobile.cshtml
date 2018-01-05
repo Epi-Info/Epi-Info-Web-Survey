@@ -81,7 +81,32 @@
             alert("Required mm/dd/yyyy format. Slashes will come up automatically.");
         }
     }
+     $(document).ready(function () {
 
+
+
+        var DateFormat = '@Model.CurrentCultureDateFormat'
+
+       DateFormat = DateFormat.toLocaleLowerCase().toString();
+
+        // Start fix for en-us format
+       if (DateFormat=="m/d/yy"){
+           DateFormat ="mm/dd/yy"
+       }
+         // End fix for en-us format
+        $(".IsDate").each(function () {
+             var  DateValue =  $(this).val();
+             $(this).datepicker("option", "dateFormat", DateFormat);
+             $(this).val(DateValue);
+         });
+
+        $(".IsTime").each(function () {
+            var DateValue = $(this).val();
+            $(this).datepicker("option", "dateFormat", DateFormat);
+            $(this).val(DateValue);
+        });
+
+  });
 </script>
 
 <script type="text/javascript">
