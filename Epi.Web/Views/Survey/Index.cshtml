@@ -57,7 +57,11 @@
              $(this).val(DateValue);
          });
 
-
+        $(".IsTime").each(function () {
+            var DateValue = $(this).val();
+            $(this).datepicker("option", "dateFormat", DateFormat);
+            $(this).val(DateValue);
+        });
 
   });
 
