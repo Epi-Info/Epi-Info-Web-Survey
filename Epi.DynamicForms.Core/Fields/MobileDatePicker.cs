@@ -463,6 +463,7 @@ namespace MvcDynamicForms.Fields
                             NewDateFormat.Append('-');
                             NewDateFormat.Append(YYYY);
                             break;
+                        case "yyyy-mm-dd":
                         case "yy-mm-dd":
                             NewDateFormat.Append(YYYY);
                             NewDateFormat.Append('-');
