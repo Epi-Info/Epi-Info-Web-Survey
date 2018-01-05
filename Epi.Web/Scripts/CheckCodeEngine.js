@@ -368,15 +368,24 @@ CCE_Context.prototype.getValue = function (pName) {
                             return false;
                         }
                     case "datepicker": //string has been converted to date for comparison with another date
-                        value = field.val();
+                      //  alert(field.val())
+                        var DateFormat = $('#CurrentCultureDateFormat').val();
+                        //alert(GetDateOpject(DateFormat, field.val()))
+                       // alert( DateFormat +""+ field.val())
 
-                        if (value == "" || isNaN(value)) {
-                            return field.val();
-                        }
-                        else {
-                            return value;
-                        }
-                        return value;
+                     //   alert(CCE_SystemDate(DateFormat  , field.val()))
+                        return GetDateOpject(DateFormat, field.val());   
+                        //var value = new Date(field.val()).valueOf();
+                         
+                        //if (value == "" || isNaN(value)) {
+                        //    var DateFormat = $('#CurrentCultureDateFormat').val();
+
+                        //    return CCE_SystemDate(DateFormat, field.val());   
+                            
+                        //}
+                        //else {
+                        //    return value;
+                        //}
                     case "timepicker":
 
                         var refDate = CCE_GetTodaysDate();//It is a reference date 
@@ -521,9 +530,10 @@ CCE_Context.prototype.setValue = function (pName, pValue, _dateformat, NumberSep
                 case "datepicker": //string has been converted to date for comparison with another date      
                     var FormatedDate;
                     if (!eval(document.getElementById("IsMobile"))) {
+                        var DateNewValue = CCE_SystemDate(_dateformat, cce_Symbol.Value);
+                      //  alert("DateNewValue: " + DateNewValue + "  cce_Symbol.Value " + cce_Symbol.Value)
                         if (cce_Symbol.Value != null && cce_Symbol.Value != "") {
-
-                            $(Jquery).datepicker('setDate', cce_Symbol.Value);
+                           $(Jquery).datepicker('setDate', DateNewValue);
                         } else {
                             $(Jquery).val("");
                         }
@@ -1597,66 +1607,118 @@ function isValidDate(pValue) {
 
 function CCE_Year(pValue) {
 
+    //if (isValidDate(pValue)) {
+    //    return pValue.getFullYear();
+    //}
+    //else {
+    //    //var DateFormat = $('#CurrentCultureDateFormat').val();
+    //    //pValue = GetDateOpject(DateFormat, pValue)
+    //    pValue = new Date(pValue)
+    //    if (isValidDate(pValue)) {
+    //        return pValue.getFullYear();
+    //    } else {
+    //        return new Date(pValue).getFullYear();
+    //    }
+    //}
+    var pValue2 = pValue;
+    var DateFormat = $('#CurrentCultureDateFormat').val();
+    pValue = GetDateOpject(DateFormat, pValue)
+
     if (isValidDate(pValue)) {
-        return pValue.getFullYear();
-    }
-    else {
-        var DateFormat = $('#CurrentCultureDateFormat').val();
-        pValue = GetDateOpject(DateFormat, pValue)
-        if (isValidDate(pValue)) {
-            return pValue.getFullYear();
+        if (pValue.getDate() == "" || isNaN(pValue.getDate())) {
+
+            pValue = new Date(pValue2)
+            if (isValidDate(pValue)) {
+                return pValue.getFullYear();
+            }
+
+
         } else {
-            return new Date(pValue).getFullYear();
+            return pValue.getFullYear();
         }
     }
+    else {
+
+
+        pValue = new Date(pValue2);
+        return pValue.getFullYear();
+    }
+
 }
 
 function CCE_Years(pValue1, pValue2) {
-    //var date1 = new Date(pValue1);
-    //var date2 = new Date(pValue2);
+   
     var DateFormat = $('#CurrentCultureDateFormat').val();
-    pValue1 = GetDateOpject(DateFormat, pValue1)
-    pValue2 = GetDateOpject(DateFormat, pValue2)
+   
+    //pValue1 = GetDateOpject(DateFormat, new Date( pValue1))
+    //pValue2 = GetDateOpject(DateFormat, new Date(pValue2))
     if (!isValidDate(pValue1)) {
-        var date1 = new Date(pValue1);
+        var date1 = GetDateOpject(DateFormat, pValue1)//new Date(pValue1);
     } else {
         var date1 = pValue1;
 
     }
     if (!isValidDate(pValue2)) {
-        var date2 = new Date(pValue2);
+        var date2 = GetDateOpject(DateFormat, pValue2)// new Date(pValue2);
     } else {
         var date2 = pValue2;
 
     }
 
     var result = date2.getFullYear() - date1.getFullYear();
-    //if
-    //(
-    //    date2.getMonth() < date1.getMonth() ||
-    //    (date2.getMonth() == date1.getMonth() && date2.getDate() < date1.getDate())
-    //) {
-    //    result--;
-    //}
+    if
+    (
+        date2.getMonth() < date1.getMonth() ||
+        (date2.getMonth() == date1.getMonth() && date2.getDate() < date1.getDate())
+    )
+    {
+        if (result>0)
+        result--;
+    }
     return result;
 }
 
 
 function CCE_Month(pValue) {
 
+    //if (isValidDate(pValue)) {
+    //    return pValue.getMonth() + 1;
+    //}
+    //else {
+
+    //    //var DateFormat = $('#CurrentCultureDateFormat').val();
+    //    //pValue = GetDateOpject(DateFormat, pValue)
+    //    pValue = new Date(pValue)
+    //    if (isValidDate(pValue)) {
+    //        return pValue.getMonth() + 1;
+    //    } else {
+    //        return new Date(pValue).getMonth() + 1;//I added 1 because getMonth() returns the index  of the month.
+    //    }
+    //}
+    var pValue2 = pValue;
+    var DateFormat = $('#CurrentCultureDateFormat').val();
+    pValue = GetDateOpject(DateFormat, pValue)
+
     if (isValidDate(pValue)) {
-        return pValue.getMonth() + 1;
+        if (pValue.getDate() == "" || isNaN(pValue.getDate())) {
+
+            pValue = new Date(pValue2)
+            if (isValidDate(pValue)) {
+                return pValue.getMonth() + 1;
+            }
+
+
+        } else {
+            return pValue.getMonth() + 1;
+        }
     }
     else {
 
-        var DateFormat = $('#CurrentCultureDateFormat').val();
-        pValue = GetDateOpject(DateFormat, pValue)
-        if (isValidDate(pValue)) {
-            return pValue.getMonth() + 1;
-        } else {
-            return new Date(pValue).getMonth() + 1;//I added 1 because getMonth() returns the index  of the month.
-        }
+
+        pValue = new Date(pValue2);
+        return pValue.getMonth() + 1;
     }
+    
 
 }
 
@@ -1664,16 +1726,16 @@ function CCE_Months(pValue1, pValue2) {
     //var date1 = new Date(pValue1);
     //var date2 = new Date(pValue2);
     var DateFormat = $('#CurrentCultureDateFormat').val();
-    pValue1 = GetDateOpject(DateFormat, pValue1)
-    pValue2 = GetDateOpject(DateFormat, pValue2)
+    //pValue1 = GetDateOpject(DateFormat, new Date(pValue1))
+    //pValue2 = GetDateOpject(DateFormat, new Date(pValue2))
     if (!isValidDate(pValue1)) {
-        var date1 = new Date(pValue1);
+        var date1 = GetDateOpject(DateFormat, pValue1)//new Date(pValue1);
     } else {
         var date1 = pValue1;
 
     }
     if (!isValidDate(pValue2)) {
-        var date2 = new Date(pValue2);
+        var date2 = GetDateOpject(DateFormat, pValue2)// new Date(pValue2);
     } else {
         var date2 = pValue2;
 
@@ -1700,100 +1762,136 @@ function CCE_Round(pValue1) {
 }
 
 function CCE_Day(pValue) {
+    var pValue2 = pValue;
+    var DateFormat = $('#CurrentCultureDateFormat').val();
+    pValue = GetDateOpject(DateFormat, pValue)
+   
+    if (isValidDate(pValue))
+    {
+        if (pValue.getDate() == "" || isNaN(pValue.getDate()))
+        {
+              
+            pValue = new Date(pValue2)
+            if (isValidDate(pValue))
+            {
+                return pValue.getDate();;
+            }  
 
-    if (isValidDate(pValue)) {
 
-        return pValue.getDate();
-    }
-    else {
-        //var NewDate = new Date(pValue);
-
-        //return new Date(pValue).getDate() +1;
-        var DateFormat = $('#CurrentCultureDateFormat').val();
-        pValue = GetDateOpject(DateFormat, pValue)
-
-        if (isValidDate(pValue)) {
+        } else
+        {
             return pValue.getDate();
-        } else {
-            return new Date(pValue).getDate();
         }
+    } 
+    else {
+         
+        
+        pValue = new Date(pValue2);
+        return pValue.getMonth() + 1;
+       
     }
 
 }
 function GetDateOpject(DateFormat, DateValue) {
+  //  alert(DateFormat+"---"+ DateValue )
     var NewDateFormat = "";
     var MM = "";
     var DD = "";
     var YYYY = "";
     var splitChar = '';
     if (DateValue != '' && DateValue != null) {
-
+        DateValue = DateValue.toString();
         if (DateValue.indexOf("-") != -1) {
             splitChar = '-';
         }
         else if (DateValue.indexOf("/") != -1) {
 
             splitChar = '/';
-        } else {
+        } else if (DateValue.indexOf(".") != -1) {
 
             splitChar = '.';
+        } else {
+            DateValue = CCE_SystemDate(DateFormat,DateValue);
+            if (DateValue.indexOf("-") != -1) {
+                splitChar = '-';
+            }
+            else if (DateValue.indexOf("/") != -1) {
+
+                splitChar = '/';
+            } else {
+
+                splitChar = '.';
+            }
         }
+    
         var dateList = DateValue.split(splitChar);
 
+        if (dateList.length > 1) {
 
 
-        switch (DateFormat.toLowerCase()) {
-            case "dd/mm/yyyy":
-            case "d/m/yyyy":
-            case "dd/mm/yy":
-            case "dd-mm-yyyy":
-            case "d-m-yyyy":
-            case "dd-mm-yyyy":
-            case "d-m-yyyy":
-            case "d.m.yyyy":
-                DD = dateList[0];
-                MM = dateList[1];
-                YYYY = dateList[2];
-                var dateObject = new Date(YYYY, MM - 1, DD); // month is 0-based
-                break;
+            switch (DateFormat.toLowerCase()) {
+                case "dd/mm/yyyy":
+                case "d/m/yyyy":
+                case "dd/mm/yy":
+                case "dd-mm-yyyy":
+                case "d-m-yyyy":
+                case "dd-mm-yyyy":
+                case "d-m-yyyy":
+                case "d.m.yyyy":
+                    DD = dateList[0];
+                    MM = dateList[1];
+                    YYYY = dateList[2];
+                    var dateObject = new Date(YYYY, MM - 1, DD); // month is 0-based
+                    break;
 
-            case "mm/dd/yyyy":
-            case "mm/dd/yy":
-            case "m/d/yyyy":
-            case "mm-dd-yyyy":
-            case "m-d-yyyy":
-            case "mm.dd.yyyy":
-            case "m.d.yyyy":
-                MM = dateList[0];
-                DD = dateList[1];
-                YYYY = dateList[2];
-                var dateObject = new Date(YYYY, MM - 1, DD); // month is 0-based
-                break;
+                case "mm/dd/yyyy":
+                case "mm/dd/yy":
+                case "m/d/yyyy":
+                case "mm-dd-yyyy":
+                case "m-d-yyyy":
+                case "mm.dd.yyyy":
+                case "m.d.yyyy":
+                    MM = dateList[0];
+                    DD = dateList[1];
+                    YYYY = dateList[2];
+                    var dateObject = new Date(YYYY, MM - 1, DD); // month is 0-based
+                    break;
 
-            case "yyyy/mm/dd":
-            case "yyyy-mm-dd":
-            case "yyyy.mm.dd":
-            case "yy/mm/dd":
-            case "yy-mm-dd":
-            case "yy.mm.dd":
-                MM = dateList[1];
-                DD = dateList[2];
-                YYYY = dateList[0];
-                var dateObject = new Date(YYYY, MM - 1, DD); // month is 0-based
-                break;
-
-
+                case "yyyy/mm/dd":
+                case "yyyy-mm-dd":
+                case "yyyy.mm.dd":
+                case "yy/mm/dd":
+                case "yy-mm-dd":
+                case "yy.mm.dd":
+                    MM = dateList[1];
+                    DD = dateList[2];
+                    YYYY = dateList[0];
+                    var dateObject = new Date(YYYY, MM - 1, DD); // month is 0-based
+                    break;
 
 
 
 
-            default:
-                var dateObject = new Date(DateValue);
-                break;
 
+
+                default:
+
+                    var dateObject = new Date(DateValue);
+                    break;
+
+            }
+
+        } else {
+           // var data = { "date_created": DateValue };
+          //  var date = new Date(parseInt(DateValue));
+           // alert(date);
+            //Create your custom format
+           // var fdate = (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear()
+          //  alert(fdate);
+
+           // var dateObject = fdate;
+            var dateObject = new Date(DateValue);
         }
-
-
 
 
 
@@ -1803,17 +1901,19 @@ function GetDateOpject(DateFormat, DateValue) {
     }
 }
 function CCE_Days(pValue1, pValue2) {
+    //alert("val1 =" + pValue1 + "val2 =" + pValue2);
     var DateFormat = $('#CurrentCultureDateFormat').val();
-    pValue1 = GetDateOpject(DateFormat, pValue1)
-    pValue2 = GetDateOpject(DateFormat, pValue2)
+    
+  //  pValue1 = GetDateOpject(DateFormat, new Date(pValue1))
+ //   pValue2 = GetDateOpject(DateFormat, new Date( pValue2))
     if (!isValidDate(pValue1)) {
-        var date1 = new Date(pValue1);
+        var date1 = GetDateOpject(DateFormat, pValue1)//new Date(pValue1);
     } else {
         var date1 = pValue1;
 
     }
     if (!isValidDate(pValue2)) {
-        var date2 = new Date(pValue2);
+        var date2 = GetDateOpject(DateFormat, pValue2)// new Date(pValue2);
     } else {
         var date2 = pValue2;
 
@@ -1896,17 +1996,38 @@ function CCE_Truncate(pValue) {
     return pValue | 0; // bitwise operators convert operands to 32-bit integers
 }
 
-function CCE_SystemDate(dateformat, DateValue) {
+function CCE_SystemDate(dateformat, DateValue) { 
+
+    //alert("dateformat: " + dateformat + "  DateValue " + DateValue)
     var date;
 
+    
     if (DateValue != null && DateValue != "" && DateValue != "undefined") {
-        date = new Date(DateValue);
+        //alert( "  DateValue " + DateValue)
+          
+            if (isValidDate(DateValue)) {
+                date = DateValue
+                
+            } else {
+                if (DateValue.indexOf("-") != -1 || DateValue.indexOf("/") != -1 || DateValue.indexOf(".") != -1) {
 
+                    date = GetDateOpject(dateformat, DateValue)
+                    
+                } else {
+                    date = new Date();
+                }
+                 
+            }
+
+        
     }
-    else {
-
+    else
+    {
+         
         date = new Date();
+
     }
+  
 
     if (date != "Invalid Date") {
 
@@ -1975,7 +2096,7 @@ function CCE_SystemDate(dateformat, DateValue) {
                 FormatedDate = date.getFullYear() + "." + (date.getMonth() + 1) > 10 ? "0" + (date.getMonth() + 1) : (date.getMonth() + 1) + "." + (date.getDate() > 10 ? "0" + date.getDate() : date.getDate());
                 break;
             default:
-                FormatedDate = cce_Symbol.Value;
+                FormatedDate = DateValue;// cce_Symbol.Value;
                 break;
         }
     }
