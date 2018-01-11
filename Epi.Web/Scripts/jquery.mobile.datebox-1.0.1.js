@@ -68,7 +68,7 @@
             meridiemLetters: ['AM', 'PM'],
             timeOutputOverride: false,
             timeFormats: { '12': '%l:%M %p', '24': '%k:%M' },
-            durationFormat: 'DD ddd, hh:ii:ss',
+            durationFormat: 'hh:ii:ss',
             timeOutput: false,
             rolloverMode: { 'm': true, 'd': true, 'h': true, 'i': true, 's': true },
 
@@ -99,7 +99,7 @@
 
             fieldsOrder: false,
             fieldsOrderOverride: false,
-            durationOrder: ['d', 'h', 'i', 's'],
+            durationOrder: ['h', 'i', 's'],
             defaultDateFormat: '%Y-%m-%d',
             dateFormat: false,
             timeFormatOverride: false,

@@ -98,7 +98,9 @@ namespace MvcDynamicForms.Fields
                 
                      matches 24hrs time or am/pm
                  */
-                string regularExp = "^(\\d{1,2}):(\\d{2})(:(\\d{2}))?(\\s?(AM|am|PM|pm))?$" ;
+                //  string regularExp = "^(\\d{1,2}):(\\d{2})(:(\\d{2}))?(\\s?(AM|am|PM|pm))?$" ;
+                // string regularExp = "^(\\d{1,2}):(\\d{2})(:(\\d{2}))?(\\s?$";
+                string regularExp = "^(?:[01]\\d|2[0123]):(?:[012345]\\d):(?:[012345]\\d)$";
                 var regex = new Regex(regularExp);
 
                 if (!regex.IsMatch(Value))
@@ -106,20 +108,21 @@ namespace MvcDynamicForms.Fields
                     //invalid: it is not a valid time matching the above regular expression
                     if (string.IsNullOrEmpty(Pattern))
                     {
-                        Error = "Value must be a valid time (e.g. 09:24:45 AM|PM or in Military time 13:23:45)";
+                        Error = "Value must be a valid time (e.g. 09:24:45   or in Military time 13:23:45)";
                     }
                     else
                     {
-                        if (Pattern == "HH:MM:SS AMPM")
+                        //  if (Pattern == "HH:MM:SS AMPM")
+                        if (Pattern == "HH:MM:SS")
                         {
-                            Error = "Value must be a valid time (e.g. 09:24:45 AM|PM )";
+                            Error = "Value must be a valid time (e.g. 09:24:45  )";
                         }
                         else
                         {
                             Error = "Value must be a valid Military time (e.g. 13:23:45)";
                         }
                     }
-                    
+
                     return false;
                 }
             }
