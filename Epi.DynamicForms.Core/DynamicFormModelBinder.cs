@@ -75,7 +75,14 @@ namespace MvcDynamicForms
                         else if (dynField is TimePickerField)
                         {
                             var timepickerField = (TimePickerField)dynField;
-                            timepickerField.Value = postedForm[key];
+                            if (postedForm[key].Contains(','))
+                            {
+                                timepickerField.Value = postedForm[key].Remove(postedForm[key].IndexOf(','));
+                            }
+                            else
+                            {
+                                timepickerField.Value = postedForm[key];
+                            }
                         }
                         //else if (dynField is MobileRadioList )
                         //    {

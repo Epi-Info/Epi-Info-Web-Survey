@@ -556,11 +556,35 @@ CCE_Context.prototype.setValue = function (pName, pValue, _dateformat, NumberSep
                 case "timepicker":
 
                     if (eval(document.getElementById("IsMobile"))) {
-                        var FormatedTime;
-                        var date = new Date(cce_Symbol.Value);
-                        FormatedTime = FormatTime(date);
-                        $(Jquery).val(FormatedTime);
-                        cce_Symbol.Value = FormatedTime;
+                        
+                        
+                        //var FormatedTime;
+                        //var date = new Date(cce_Symbol.Value);
+                        //FormatedTime = FormatTime_Mobile(date);
+                        
+                        //$(Jquery).val(FormatedTime);
+                        //cce_Symbol.Value = FormatedTime;
+
+
+
+                        var str = cce_Symbol.Value.toString();
+                        //var nincluded= str.includes(":");
+                        var array = str.split(':');
+                        if (array != null && array.length > 1) {
+
+                            $(Jquery).val(cce_Symbol.Value)
+                            // $(Jquery).timepicker("set   cce_Symbol.Value = pValue;
+                            cce_Symbol.Value = pValue;
+                        }
+                        else {
+
+                            var FormatedTime;
+                            var date = new Date(cce_Symbol.Value);
+                            FormatedTime = FormatTime(date);
+
+                            $(Jquery).val(FormatedTime);
+                            cce_Symbol.Value = FormatedTime;
+                        }
                     }
                     else {
 
@@ -2265,7 +2289,71 @@ function FormatTime(currentTime) {
     return FormatedTime;
 
 }
+function FormatTime_Mobile(currentTime) {
+     
+    currentTime = currentTime.toString();
+    var time = currentTime.match(/(\d+):(\d+):(\d+) (\w)/);
+    var PMAM = "";
+    var FormatedTime = "";
 
+    var hours = Number(time[1]);
+    var minutes = Number(time[2]);
+    var seconds = Number(time[3]);
+    var meridian = time[4].toLowerCase();
+
+    //if (minutes < 10)
+    //{
+    //minutes = "0" + minutes
+    //}
+    //if (seconds < 10)
+    //{
+    //seconds = "0" + seconds
+    //}
+
+
+    //if ( hours < 10 )  
+    //{
+    //   hours = "0" + hours
+    //}
+    if(hours > 11)
+    {
+       PMAM = "PM";
+    } else {
+       PMAM = "AM" ;
+    }
+    if (hours > 12) 
+    {
+        hours = hours - 12; 
+        if ( hours < 10 )  
+        {
+           hours = "0" + hours
+        } 
+    }
+
+
+    if (meridian == 'p' && hours < 12) {
+        hours = hours + 12;
+    }
+    else if (meridian == 'a' && hours == 12) {
+        hours = hours - 12;
+    }
+
+    //if (hours < 10) {
+    //    hours = "0" + hours;
+    //}
+
+    //if (minutes < 10) {
+    //    minutes = "0" + minutes;
+    //}
+
+    //if (seconds < 10) {
+    //    seconds = "0" + seconds;
+    //}
+   // FormatedTime = hours + ":" + minutes + ":" + seconds;//+ " " + PMAM;
+    FormatedTime = hours + ":" + minutes +  " " + PMAM;
+    return FormatedTime;
+
+}
 function OpenVideoDialog() {
     $("#VideoDialog").dialog("open");
 }

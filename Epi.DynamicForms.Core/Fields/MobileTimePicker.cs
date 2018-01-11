@@ -37,8 +37,9 @@ namespace MvcDynamicForms.Fields
             txt.Attributes.Add("id", inputName);
             txt.Attributes.Add("type", "date");
             txt.Attributes.Add("data-role", "datebox");
-            txt.Attributes.Add("data-options", "{\"mode\": \"timebox\" , \"themeInput\":\"e\" , \"themeButton\" : \"e\", \"pickPageButtonTheme\": \"e\", \"pickPageInputTheme\":\"e\", \"pickPageFlipButtonTheme\":\"a\", \"pickPageTheme\":\"e\"}");
-            
+          ///  txt.Attributes.Add("data-options", "{\"mode\": \"timebox\" , \"themeInput\":\"e\" , \"themeButton\" : \"e\", \"pickPageButtonTheme\": \"e\", \"pickPageInputTheme\":\"e\", \"pickPageFlipButtonTheme\":\"a\", \"pickPageTheme\":\"e\"}");
+            txt.Attributes.Add("data-options", "{\"mode\": \"durationbox\" , \"timeFormat\":\"24\"}");
+          
             txt.Attributes.Add("value", Value);            
 
             if (FunctionObjectAfter != null && !FunctionObjectAfter.IsNull())
@@ -64,17 +65,28 @@ namespace MvcDynamicForms.Fields
             //    txt.Attributes.Add("disabled", "disabled");
             //}
 
+            //if (Required == true)
+            //{
+            //    txt.Attributes.Add("class", "validate[required,custom[time]] text-input datepicker");
+            //    txt.Attributes.Add("data-prompt-position", "topLeft:15");
+            //}
+            //else
+            //{
+            //    txt.Attributes.Add("class", "validate[custom[time]] text-input datepicker");
+            //    txt.Attributes.Add("data-prompt-position", "topLeft:15");
+            //}
             if (Required == true)
             {
-                txt.Attributes.Add("class", "validate[required,custom[time]] text-input datepicker");
-                txt.Attributes.Add("data-prompt-position", "topLeft:15");
+                
+                txt.Attributes.Add("class", "validate[required,custom[time]]  text-input  datepicker IsTime");
+                txt.Attributes.Add("data-prompt-position", "topRight:15");
             }
             else
             {
-                txt.Attributes.Add("class", "validate[custom[time]] text-input datepicker");
-                txt.Attributes.Add("data-prompt-position", "topLeft:15");
+                 
+                txt.Attributes.Add("class", "validate[custom[time]]   text-input  datepicker IsTime");
+                txt.Attributes.Add("data-prompt-position", "topRight:15");
             }
-
             //if (ReadOnly)
             //    {
             //    txt.Attributes.Add("disabled", "disabled");
@@ -97,6 +109,16 @@ namespace MvcDynamicForms.Fields
             //    scriptReadOnlyText.InnerHtml = "$(function(){$('#" + inputName + "').attr('disabled','disabled')});";
             //    html.Append(scriptReadOnlyText.ToString(TagRenderMode.Normal));
             //}
+
+            var hdn = new TagBuilder("input");
+            hdn.Attributes.Add("type", "hidden");
+            hdn.Attributes.Add("id", inputName + "_hidden");
+            hdn.Attributes.Add("name", inputName);
+            hdn.Attributes.Add("value", Value);
+           
+            html.Append(hdn.ToString(TagRenderMode.SelfClosing));
+
+
 
             var wrapper = new TagBuilder(_fieldWrapper);
 

@@ -94,15 +94,19 @@
            DateFormat ="mm/dd/yy"
        }
          // End fix for en-us format
-        $(".IsDate").each(function () {
+       $(".IsDate").each(function () {
+          //  alert(1)
              var  DateValue =  $(this).val();
              $(this).datepicker("option", "dateFormat", DateFormat);
              $(this).val(DateValue);
          });
-
+         
         $(".IsTime").each(function () {
-            var DateValue = $(this).val();
-            $(this).datepicker("option", "dateFormat", DateFormat);
+           
+            
+            var DateValue = $("#" + this.id +"_hidden").val();
+            //alert(DateValue);
+            //$(this).datepicker("option", "dateFormat", DateFormat);
             $(this).val(DateValue);
         });
 
