@@ -97,7 +97,7 @@
        $(".IsDate").each(function () {
           //  alert(1)
              var  DateValue =  $(this).val();
-             $(this).datepicker("option", "dateFormat", DateFormat);
+             //$(this).datepicker("option", "dateFormat", DateFormat);
              $(this).val(DateValue);
          });
          
@@ -390,6 +390,7 @@
     }
     /*Clicking the save button to save the survey*/
     function Save() {
+        
         var DisabledFieldsList = $('#DisabledFieldsList').val();
 
         if (DisabledFieldsList.length > 0) {
