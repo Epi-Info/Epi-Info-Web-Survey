@@ -175,7 +175,7 @@ namespace MvcDynamicForms.Fields
             if (!IsValid)
             {
                 ErrorStyle = ";border-color: red";
-                NewDateFormat = Response;
+                NewDateFormat = GetRightDateFormat(Response, "YYYY-MM-DD", DateFormat);
             }
             else
             {
