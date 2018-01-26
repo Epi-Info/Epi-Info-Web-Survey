@@ -30,9 +30,7 @@
 
 <script type="text/javascript">
 
-    //Check Code Logic start
-     @Html.Raw(Model.FormJavaScript)
-    //Check code logic end
+
 
     var isShift = false;
 
@@ -81,7 +79,7 @@
             alert("Required mm/dd/yyyy format. Slashes will come up automatically.");
         }
     }
-     $(document).ready(function () {
+    $(document).ready(function () {
 
 
 
@@ -100,17 +98,20 @@
              //$(this).datepicker("option", "dateFormat", DateFormat);
              $(this).val(DateValue);
          });
-         
+
         $(".IsTime").each(function () {
-           
-            
+
+
             var DateValue = $("#" + this.id +"_hidden").val();
             //alert(DateValue);
             //$(this).datepicker("option", "dateFormat", DateFormat);
             $(this).val(DateValue);
         });
 
-  });
+    });
+    //Check Code Logic start
+     @Html.Raw(Model.FormJavaScript)
+    //Check code logic end
 </script>
 
 <script type="text/javascript">

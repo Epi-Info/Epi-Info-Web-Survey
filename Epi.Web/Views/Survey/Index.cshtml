@@ -33,14 +33,11 @@
 </style>
 <script type="text/javascript">
 
-    //Check Code Logic start
-    @Html.Raw(Model.FormJavaScript)
-    //Check code logic end
+   
+     
+      $(document).ready(function () {
 
-
-    $(document).ready(function () {
-
-       
+    
      
         var DateFormat = '@Model.CurrentCultureDateFormat'
        
@@ -69,6 +66,9 @@
 
 <script type="text/javascript">
 
+     //Check Code Logic start
+    @Html.Raw(Model.FormJavaScript)
+    //Check code logic end
     $(function () {
         $("#savediv button[title]").tooltip();
     });
