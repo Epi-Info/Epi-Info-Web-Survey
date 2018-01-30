@@ -1152,6 +1152,7 @@ function CCE_ProcessDisableCommand(pCheckCodeList) {
                         //  $(query).selectmenu();
                         // $(query).selectmenu('disable');
                         $(query).attr("disabled", "disabled");
+                        $(query + "_arrow_icon").css("background-color","lightgray")
                         break;
                     // case "yesno":
                     //    //  $(query).selectmenu();
@@ -1280,6 +1281,7 @@ function CCE_ProcessEnableCommand(pCheckCodeList) {
                         // $(query).selectmenu();
                         //$(query).selectmenu('enable');
                         $(query).attr('disabled', false);
+                        $(query + "_arrow_icon").css("background-color", "gray")
                         break;
                     //case "yesno":
                     //            // $(query).selectmenu();
