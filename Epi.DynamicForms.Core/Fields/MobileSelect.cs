@@ -43,7 +43,12 @@ namespace MvcDynamicForms.Fields
            // {
                 var Div = new TagBuilder("div");
                 Div.Attributes.Add("class", "arrow_icon");
-                Div.SetInnerText("");
+            Div.Attributes.Add("id", inputName+"_arrow_icon");
+            Div.SetInnerText("");
+            if (ReadOnly || _IsDisabled)
+            {
+                Div.Attributes.Add("style", "background-color:lightgray !important");
+            }
                 html.Append(Div.ToString());
             //}
             if (!IsValid)

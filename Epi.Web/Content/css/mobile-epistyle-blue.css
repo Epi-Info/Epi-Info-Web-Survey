@@ -71,7 +71,7 @@ body
 /*Android DropDown Style*/
 .mainselection select {
    border: 0px;
-   color: #58595b;
+   /*color: #58595b;*/
    background: transparent;
    font-size: 20px;
    padding: 7px 10px;
