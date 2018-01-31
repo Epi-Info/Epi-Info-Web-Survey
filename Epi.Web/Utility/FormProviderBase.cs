@@ -1196,7 +1196,7 @@ namespace Epi.Web.MVC.Utility
                             }
                             var _DropDownSelectedValue2 = value;
                             var Dropdown = GetDropDown(fieldElement, _Width, _Height, xdocResponse, _DropDownSelectedValue2, DropDownValues2, 18, form);
-                            if (Dropdown.ChoiceKeyValuePairs.Count() > 200)
+                            if (Dropdown.ChoiceKeyValuePairs.Count() > 50)
                             {
 
                                 form.AddFields(GetAutoComplete(fieldElement, _Width, _Height, xdocResponse, _DropDownSelectedValue2, DropDownValues2, 1, form));
@@ -1326,7 +1326,7 @@ namespace Epi.Web.MVC.Utility
 
                             dropDownValues = GetDropDownValues(form.XDocMetadata, fieldElement.Attribute("Name").Value, fieldElement.Attribute("SourceTableName").Value, fieldElement.Attribute("CodeColumnName").Value, form.SourceTableList);
                             var dropdown = GetDropDown(fieldElement, dropDownValues, 18, form);
-                            if ((isMobile && dropdown.ChoiceKeyValuePairs.Count > 24) || (!isMobile && dropdown.ChoiceKeyValuePairs.Count > 100))
+                            if ((isMobile && dropdown.ChoiceKeyValuePairs.Count > 15) || (!isMobile && dropdown.ChoiceKeyValuePairs.Count > 50))
                             {
                               
                                 if (isMobile)
