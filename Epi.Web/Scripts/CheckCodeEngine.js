@@ -724,7 +724,7 @@ CCE_Context.prototype.setValue = function (pName, pValue, _dateformat, NumberSep
                     }
                     cce_Symbol.Value = pValue;
                     break;
-
+                case "codes":
                 case "commentlegal":
                     if (eval(document.getElementById("IsMobile"))) {
                         if (!IsHidden) {
@@ -872,6 +872,7 @@ function CCE_ProcessHighlightCommand(pCheckCodeList) {
                         query = '#mvcdynamicfield_' + pCheckCodeList[i];
                         $(query).css("background-color", "yellow");
                         break;
+                    case "codes":
                     case "commentlegal":
                         query = '#mvcdynamicfield_' + pCheckCodeList[i] + "_fieldWrapper";
                         $(query).find('span').css("background-color", "yellow");
@@ -1012,6 +1013,7 @@ function CCE_ProcessUnHighlightCommand(pCheckCodeList) {
                         query = '#mvcdynamicfield_' + pCheckCodeList[i];
                         $(query).removeAttr('Style');
                         break;
+                    case "codes":
                     case "commentlegal":
                         query = '#mvcdynamicfield_' + pCheckCodeList[i] + "_fieldWrapper";
                         $(query).find('span').removeAttr('Style');
@@ -1146,6 +1148,7 @@ function CCE_ProcessDisableCommand(pCheckCodeList) {
                         $(checkboxcontrolId).attr("disabled", true);
                         $(Labelquery).css("color", "LightGray")
                         break;
+                    case "codes":
                     case "yesno":
                     case "legalvalues":
                     case "commentlegal":
@@ -1275,6 +1278,7 @@ function CCE_ProcessEnableCommand(pCheckCodeList) {
 
 
                         break;
+                    case "codes":
                     case "yesno":
                     case "legalvalues":
                     case "commentlegal":
@@ -1528,42 +1532,34 @@ function CCE_ClearControlValue(pCheckCodeList) {
                                 $(controlId).val('');
                             }
                             break;
+                        case"codes":
+                        case "commentlegal":
                         case "legalvalues":
                             if (eval(document.getElementById("IsMobile"))) {
                                 $(controlId).val('');
-                                if (!IsHidden) {
-                                    $(controlId).selectmenu();
-                                    $(controlId).selectmenu('refresh');
-                                }
+                                //if (!IsHidden) {
+                                //    $(controlId).selectmenu();
+                                //    $(controlId).selectmenu('refresh');
+                                //}
                             }
                             else
                             { $(controlId).val(''); }
                             break;
                         case "yesno":
                             if (eval(document.getElementById("IsMobile"))) {
-
+                                 
                                 $(controlId).val('');
-                                if (!IsHidden) {
-                                    $(controlId).selectmenu();
-                                    $(controlId).selectmenu('refresh');
-                                }
+                                //if (!IsHidden) {
+                                //    $(controlId).selectmenu();
+                                //    $(controlId).selectmenu('refresh');
+                                //}
 
 
                             }
                             else
                             { $(controlId).val(''); }
                             break;
-                        case "commentlegal":
-                            if (eval(document.getElementById("IsMobile"))) {
-                                $(controlId).val('');
-                                if (!IsHidden) {
-                                    $(controlId).selectmenu();
-                                    $(controlId).selectmenu('refresh');
-                                }
-                            }
-                            else
-                            { $(controlId).val(''); }
-                            break;
+                         
                         case "groupbox":
                             break;
 
@@ -2665,6 +2661,7 @@ function CCE_ProcessEnableAllControls(List) {
                             $(query).selectmenu();
                             $(query).selectmenu('enable');
                             break;
+                        case "codes":
                         case "commentlegal":
                             $(query).selectmenu();
                             $(query).selectmenu('enable');
