@@ -859,13 +859,25 @@ namespace Epi.Web.MVC.Utility
                      if ( SourceTable!= null && SourceTable.Count() > 0)
                                 {
                                     var SourceTableXml1 = SourceTable.Where(x => x.TableName == TableName.ToString()).Select(y => y.TableXml).ToList() ;
-                                    if (SourceTableXml1.Count()>0)
-                                    {
-                                    XDocument SourceTableXml =   XDocument.Parse(SourceTableXml1[0].ToString());
-                                    _ControlValues = from _ControlValue in SourceTableXml.Descendants("SourceTable")
-                                                    where _ControlValue.Attribute("TableName").Value == TableName.ToString()
-                                                    select _ControlValue;
-                         }
+                        if (SourceTableXml1.Count() > 0)
+                        {
+                            XDocument SourceTableXml = XDocument.Parse(SourceTableXml1[0].ToString());
+                            _ControlValues = from _ControlValue in SourceTableXml.Descendants("SourceTable")
+                                                 // where _ControlValue.Attribute("TableName").Value == TableName.ToString()
+                                             select _ControlValue;
+                        }
+                        else {
+                            var SourceTableXml2 = SourceTable.Where(x => x.TableName == TableName.ToLower().ToString()).Select(y => y.TableXml).ToList();
+
+                            if (SourceTableXml2.Count() > 0)
+                            {
+                                XDocument SourceTableXml = XDocument.Parse(SourceTableXml2[0].ToString());
+                                _ControlValues = from _ControlValue in SourceTableXml.Descendants("SourceTable")
+                                                      
+                                                 select _ControlValue;
+                            }
+
+                        }
                                 }
                 
                 }
