@@ -149,14 +149,29 @@ namespace Epi.Web.BLL
                 }
                 this.SurveyInfoDao.UpdateSurveyInfo(pValue);
                 result.StatusText = "Successfully updated survey information.";
-            }else{
+                string _Xml = pValue.XML;
+                ReSetSourceTable(_Xml, pValue.SurveyId.ToString());
+
+            }
+            else{
                 result.StatusText = "One or more survey required fields are missing values.";
             
             }
             
             return result;
         }
+        private void ReSetSourceTable(string Xml, string FormId)
+        {
 
+            XDocument xdoc1 = XDocument.Parse(Xml);
+            foreach (XElement Xelement in xdoc1.Descendants("Template").Elements("SourceTable"))
+            {
+                //  Xelement.ToString()
+                string SourcetableName = Xelement.Attribute("TableName").Value;
+                this.SurveyInfoDao.UpdateSourceTable(Xelement.ToString(), SourcetableName, FormId);
+            }
+
+        }
         public bool DeleteSurveyInfo(SurveyInfoBO pValue)
         {
             bool result = false;

@@ -197,7 +197,7 @@ namespace Epi.Web.BLL
                               //  this.SurveyInfoDao.InsertConnectionString(DbConnectionStringBO);
                                 this.SurveyInfoDao.UpdateConnectionString(DbConnectionStringBO);
                             }
-                            SetSourceTable(_Xml, SurveyId.ToString());
+                        
 
                         }
                         catch (Exception ex)
