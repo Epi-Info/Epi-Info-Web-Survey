@@ -563,26 +563,27 @@ namespace Epi.Web.EF
            
          
              Connection.Open();
-            // SqlCommand Command = new SqlCommand(Query, EWEConnection);
-                SqlCommand Command = new SqlCommand();
-                Command.Connection = Connection;
+           
               try
                {
                    Guid Id = new Guid(FormId);
-                Command.CommandType = CommandType.Text;
-                //Command.CommandText = "Insert into Sourcetables (SourceTableName, FormId,SourceTableXml) values ('@SourceTableName','@FormId','@SourceTableXml')";
-                //Command.Parameters.AddWithValue("SourceTableName", SourcetableName);
-                //Command.Parameters.AddWithValue("FormId", Id);
-                //Command.Parameters.AddWithValue("SourceTableXml", SourcetableXml);
+                 
 
 
-              Command.CommandText = "Insert into Sourcetables (SourceTableName, FormId,SourceTableXml) values ('" + SourcetableName + "','" + FormId + "','" + SourcetableXml.Replace("'","''")  + "')";
+
+
+                SqlCommand Command = new SqlCommand("INSERT INTO Sourcetables VALUES(@SourceTableName , @FormId ,@SourcetableXml)", Connection);
+
+                Command.Parameters.AddWithValue("SourceTableName", SourcetableName);
+                Command.Parameters.AddWithValue("FormId", Id);
+                Command.Parameters.AddWithValue("SourceTableXml", SourcetableXml);
+
                
+
+
+
                 Command.ExecuteNonQuery();
-                //SqlDataAdapter  Adapter = new SqlDataAdapter( Command);
-
-               // DataSet  DS = new DataSet();
-
+                 
                
 
                
@@ -605,17 +606,36 @@ namespace Epi.Web.EF
 
            Connection.Open();
            // SqlCommand Command = new SqlCommand(Query, EWEConnection);
-           SqlCommand Command = new SqlCommand();
-           Command.Connection = Connection;
+           //SqlCommand Command = new SqlCommand();
+           //Command.Connection = Connection;
            try
            {
                Guid Id = new Guid(FormId);
-               Command.CommandType = CommandType.Text;
+                //Command.CommandType = CommandType.Text;
+
+                // var Sourcetable_Xml = SourcetableXml.Replace("'", "''");
+                // Command.CommandText = "UPDATE Sourcetables  SET SourceTableXml = @Sourcetable_Xml   where FormId = @Form_Id And  SourcetableName =  @Source_table_Name  ";
 
 
-               Command.CommandText = "UPDATE Sourcetables  SET SourceTableXml ='" + SourcetableXml.Replace("'", "''") + "'  where FormId =" + "'" + FormId + "' And  SourcetableName='" + SourcetableName + "'";
+                // var param = new SqlParameter("Form_Id", SqlDbType.VarChar);
+                // param.Value = FormId;
+                // Command.Parameters.Add(param);
 
-               Command.ExecuteNonQuery();
+                // var param1 = new SqlParameter("Source_table_Name", SqlDbType.VarChar);
+                // param1.Value = FormId;
+                // Command.Parameters.Add(param1);
+                // var param2 = new SqlParameter("Sourcetable_Xml", SqlDbType.VarChar);
+                // param2.Value = Sourcetable_Xml;
+                // Command.Parameters.Add(param2);
+
+                SqlCommand Command = new SqlCommand("UPDATE Sourcetables  SET SourceTableXml = @SourceTableXml   where FormId = @FormId And  SourcetableName =  @SourceTableName ", Connection);
+
+                Command.Parameters.AddWithValue("SourceTableName", SourcetableName);
+                Command.Parameters.AddWithValue("FormId", Id);
+                Command.Parameters.AddWithValue("SourceTableXml", SourcetableXml);
+
+
+                Command.ExecuteNonQuery();
                 
 
                Connection.Close();
@@ -642,9 +662,12 @@ namespace Epi.Web.EF
            try
            {
               Command.CommandType = CommandType.Text;
-              Command.CommandText = "select * from Sourcetables  where  FormId ='" + FormId+"'";
+              Command.CommandText = "select * from Sourcetables  where  FormId = @Form_Id"  ;
+              var param = new SqlParameter("Form_Id", SqlDbType.VarChar);
+              param.Value = FormId;
+              Command.Parameters.Add(param);
              // Command.ExecuteNonQuery();
-              SqlDataAdapter  Adapter = new SqlDataAdapter( Command);
+                SqlDataAdapter Adapter = new SqlDataAdapter( Command);
               DataSet  DS = new DataSet();
               Adapter.Fill(DS);
                if(DS.Tables.Count>0){
