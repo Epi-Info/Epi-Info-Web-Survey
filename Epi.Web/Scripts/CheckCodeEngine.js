@@ -417,13 +417,22 @@ CCE_Context.prototype.getValue = function (pName) {
                     case "radiobutton":
                         var RadiofieldName = "." + fieldName;
 
-                        value = -1;
+                        //value = -1;
                         $(RadiofieldName).each(function (i, obj) {
                             if ($(this).is(':checked')) {
                                 value = new Number($(this).val()).valueOf();
-                            }
+                                
+                                
+                            } 
                         });
-                        return value;
+                        
+                        if (value.toString() == "") {
+                            
+                            return null;
+                        }
+                        else {
+                            return value;
+                        }
                     default:
                         /*  if(value == "")
                               {
