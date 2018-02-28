@@ -271,7 +271,15 @@ namespace Epi.Web.EF
 
             if(PageSize!=-1 && PageNumber != -1){
              result = Mapper.Map(responseList);
-               result = result.Skip((PageNumber - 1) * PageSize).Take(PageSize);
+                if (pStatusId == 3) // Only 3
+                {
+                    result = result.Take(PageSize);
+                }
+                else {
+
+                    result = result.Skip((PageNumber - 1) * PageSize).Take(PageSize);
+
+                }
                 foreach(var item in result)
                     {
                     Finalresult.Add(item);
