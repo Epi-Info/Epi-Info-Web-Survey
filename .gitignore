@@ -28,3 +28,7 @@
 /Epi.DynamicForms.Core/bin
 /Epi.DynamicForms.Core/obj/Debug
 /Epi.DynamicForms.Core/obj/Release
+Epi.Web/Web.config
+*.config
+*.config
+*.config
