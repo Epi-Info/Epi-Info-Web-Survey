@@ -498,19 +498,26 @@
                         <p>
                  @if(Model.IsAuthenticated)
                    {
+                            
+                            <div style="width: 100%; display: inline;">
+                                <input type="checkbox" id="IagreeBox" for="IagreeBoxLabel" onchange="EnablePublishButton(this);" />
+
+
+                                <label class="accountlabel" for="IagreeBox" id="IagreeBoxLabel" style="width:330px;">
+                                    <span style="font-weight:normal !important;">I agree to the</span>
+                                    <span class="TermsSpan" style="font-weight:bold;" onclick="OpenFile_txt()">
+                                        Terms of service and conditions of use
+
+                                    </span>
+                                </label>
+                            </div>
+                            <br/>
+                            <br />
                             <input class="submits create" type="submit" disabled="disabled" name="PublishSurvey" id="PublishSurvey" value="Publish" style="margin-right:90px;" />
-                      
-                            <input type="checkbox" id="IagreeBox" for="IagreeBoxLabel"  onchange="EnablePublishButton(this);" />
-                            <label class="accountlabel" id="IagreeBoxLabel" style="width:330px;"><span style="font-weight:normal !important;">I agree to the</span> 
-                            <span class="TermsSpan" style="font-weight:bold;" onclick="OpenFile_txt()">
-                                 Terms of service and conditions of use 
-                                
-                            </span>
-                            </label>
-                   }
+                 }
                  else
                  {
-                    <input class="submits create" type="submit"  name="PublishSurvey" id="PublishSurvey" value="Publish" style="margin-right:90px;" />
+                                <input class="submits create" type="submit" name="PublishSurvey" id="PublishSurvey" value="Publish" style="margin-right:90px;" />
 
                  }
                         </p>
