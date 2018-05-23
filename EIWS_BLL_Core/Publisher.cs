@@ -336,16 +336,24 @@ namespace Epi.Web.BLL
         }
         private void ReSetSourceTable(string Xml, string FormId)
         {
-
+            var SourceTables = this.SurveyInfoDao.GetSourceTables(FormId);
             XDocument xdoc1 = XDocument.Parse(Xml);
             foreach (XElement Xelement in xdoc1.Descendants("Template").Elements("SourceTable"))
             {
                 //  Xelement.ToString()
                 string SourcetableName = Xelement.Attribute("TableName").Value;
-                this.SurveyInfoDao.UpdateSourceTable(Xelement.ToString(), SourcetableName, FormId);
+                var Table = SourceTables.Where(x => x.TableName == SourcetableName);
+                if (Table.Count()>0) {
+                    this.SurveyInfoDao.UpdateSourceTable(Xelement.ToString(), SourcetableName, FormId);
+                }
+                else {
+
+                    this.SurveyInfoDao.InsertSourceTable(Xelement.ToString(), SourcetableName, FormId);
+                }
+            }
             }
 
         }
       
     }
-}
+

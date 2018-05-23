@@ -22,15 +22,26 @@
             }
         });
 
-        $("#IagreeBox").change(function () {
-            if (this.checked) {
-                $('#CreateAccount').removeAttr("disabled");
-            } else {
+        //$("#IagreeBox").change(function () {
+        //    if (this.checked) {
+        //        $('#CreateAccount').removeAttr("disabled");
+        //    } else {
 
-                $('#CreateAccount').attr("disabled", "disabled");
-            }
-        });
+        //        $('#CreateAccount').attr("disabled", "disabled");
+        //    }
+        //});
     });
+
+    function EnableButton(obj) {
+       
+        if (obj.checked) {
+            $('#CreateAccount').removeAttr("disabled");
+        } else {
+
+            $('#CreateAccount').attr("disabled", "disabled");
+        }
+
+    }
 
     
  
@@ -212,9 +223,14 @@
               @Html.ValidationMessageFor(m => m.ConfirmEmail, null, new { @class = "required" })
         </p>
         <p>
-            <input type="checkbox" id="IagreeBox" for="IagreeBoxLabel" />
-            <label class="accountlabel" id="IagreeBoxLabel" style="width:330px;"><span style="font-weight:normal !important;">I agree to the</span> <span style="font-weight:bold;">Terms of service and conditions of use</span></label>
-        </p>
+             
+                <input type="checkbox" id="IagreeBox" for="IagreeBoxLabel" onclick="EnableButton(this)" />
+                
+    
+            <label class="accountlabel" id="IagreeBoxLabel" for="IagreeBox" style="width:330px;"><span style="font-weight:normal !important;">I agree to the</span> <span style="font-weight:bold;">Terms of service and conditions of use</span></label>
+
+            
+</p>
         <p>
             <input class="submits create" type="submit" id="CreateAccount" value="Create Account"   style="margin-right:90px;" />
            
