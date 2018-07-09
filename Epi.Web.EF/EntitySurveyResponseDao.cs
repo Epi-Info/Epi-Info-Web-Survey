@@ -274,7 +274,19 @@ namespace Epi.Web.EF
 
             if(PageSize!=-1 && PageNumber != -1){
              result = Mapper.Map(responseList);
+<<<<<<< HEAD
                  
+=======
+                if (pStatusId == 3) // Only 3
+                {
+                    result = result.Take(PageSize);
+                }
+                else {
+
+                    result = result.Skip((PageNumber - 1) * PageSize).Take(PageSize);
+
+                }
+>>>>>>> 12e2a2216bab68d6867ba2f9bced9cb451f58c19
                 foreach(var item in result)
                     {
                       List<SurveyResponseBO> ResponsesHierarchy = this.GetResponsesHierarchyIdsByRootId(item.ResponseId.ToString());
