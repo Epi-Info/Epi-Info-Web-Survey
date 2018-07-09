@@ -762,11 +762,9 @@ namespace Epi.Web.BLL
             {
                 //  Xelement.ToString()
                 string SourcetableName = Xelement.Attribute("TableName").Value;
-<<<<<<< HEAD
                
                     this.SurveyInfoDao.UpdateSourceTable(Xelement.ToString(), SourcetableName, FormId);
                 
-=======
                 var Table = SourceTables.Where(x => x.TableName == SourcetableName);
                 if (Table.Count()>0) {
                     this.SurveyInfoDao.UpdateSourceTable(Xelement.ToString(), SourcetableName, FormId);
@@ -776,7 +774,6 @@ namespace Epi.Web.BLL
                     this.SurveyInfoDao.InsertSourceTable(Xelement.ToString(), SourcetableName, FormId);
                 }
             }
->>>>>>> 12e2a2216bab68d6867ba2f9bced9cb451f58c19
             }
 
         }
