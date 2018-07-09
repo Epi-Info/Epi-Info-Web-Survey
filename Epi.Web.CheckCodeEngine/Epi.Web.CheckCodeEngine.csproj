@@ -40,7 +40,7 @@
   <ItemGroup>
     <Reference Include="CalithaLib, Version=1.13.2403.14266, Culture=neutral, PublicKeyToken=6fe80ec331a66ec8, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>.\CalithaLib.dll</HintPath>
+      <HintPath>..\Epi.Web\bin\CalithaLib.dll</HintPath>
     </Reference>
     <Reference Include="EpiInfo.Plugin, Version=7.1.1.5, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -48,7 +48,7 @@
     </Reference>
     <Reference Include="GoldParserEngine, Version=1.13.2403.14266, Culture=neutral, PublicKeyToken=6fe80ec331a66ec8, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>.\GoldParserEngine.dll</HintPath>
+      <HintPath>..\Epi.Web\bin\GoldParserEngine.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />

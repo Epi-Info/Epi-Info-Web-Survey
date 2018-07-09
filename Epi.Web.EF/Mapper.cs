@@ -10,14 +10,14 @@ namespace Epi.Web.EF
     /// <summary>
     /// Maps Entity Framework entities to business objects and vice versa.
     /// </summary>
-    public class Mapper
+    public static class Mapper
     {
         /// <summary>
         /// Maps SurveyMetaData entity to SurveyInfoBO business object.
         /// </summary>
         /// <param name="entity">A SurveyMetaData entity to be transformed.</param>
         /// <returns>A SurveyInfoBO business object.</returns>
-        internal static SurveyInfoBO Map(SurveyMetaData entity)
+        public static SurveyInfoBO Map(SurveyMetaData entity)
         {
             SurveyInfoBO result =  new SurveyInfoBO();
             
@@ -34,17 +34,45 @@ namespace Epi.Web.EF
                 result.DateCreated = entity.DateCreated;
                 result.IsDraftMode = entity.IsDraftMode;
                 result.StartDate = entity.StartDate;
-                
-                if (entity.UserPublishKey != null)
-                {
-                    result.UserPublishKey = entity.UserPublishKey;
-                }
-                result.SurveyType = entity.SurveyTypeId; 
-            
+            result.IsSqlProject = (bool)entity.IsSQLProject;
+           // result.OwnerId = entity.OwnerId;
+            if (entity.UserPublishKey != null)
+            {
+                // result.UserPublishKey = (Guid)entity.UserPublishKey.Value;
+                result.UserPublishKey = entity.UserPublishKey;
+            }
+            result.SurveyType = entity.SurveyTypeId;
+            result.ParentId = entity.ParentId.ToString();
+            if (entity.ViewId != null)
+            {
+                result.ViewId = (int)entity.ViewId;
+            }
+            //result. = (bool)entity.ShowAllRecords;
+           // result.IsShareable = (bool)entity.IsShareable;
+            return result;
+        }
+        public static List<SurveyResponseBO> Map(IQueryable<SurveyResponse> entities)
+        {
+            List<SurveyResponseBO> result = new List<SurveyResponseBO>();
+            foreach (SurveyResponse surveyResponse in entities)
+            {
+                result.Add(Map(surveyResponse));
+            }
+
             return result;
         }
 
-        internal static CacheDependencyBO MapDependency(SurveyMetaData entity)
+        public static List<SurveyInfoBO> Map(IQueryable<SurveyMetaData> iQueryable)
+        {
+            List<SurveyInfoBO> result = new List<SurveyInfoBO>();
+            foreach (SurveyMetaData Obj in iQueryable)
+            {
+                result.Add(Map(Obj));
+
+            }
+            return result;
+        }
+        public static CacheDependencyBO MapDependency(SurveyMetaData entity)
         {
             CacheDependencyBO cacheDependencyBO = new CacheDependencyBO();
 
@@ -58,7 +86,7 @@ namespace Epi.Web.EF
             return cacheDependencyBO;
         }
 
-        internal static List<SurveyInfoBO> Map(List<SurveyMetaData> entities)
+        public static List<SurveyInfoBO> Map(List<SurveyMetaData> entities)
         {
             List<SurveyInfoBO> result = new List<SurveyInfoBO>();
             foreach (SurveyMetaData surveyMetaData in entities)
@@ -69,7 +97,7 @@ namespace Epi.Web.EF
             return result;
         }
 
-        internal static void Map(SurveyMetaData entity, out CacheDependencyBO cacheDependencyBO)
+        public static void Map(SurveyMetaData entity, out CacheDependencyBO cacheDependencyBO)
         {
             cacheDependencyBO = new CacheDependencyBO();
 
@@ -83,7 +111,7 @@ namespace Epi.Web.EF
             cacheDependencyBO.LastUpdate = (DateTime)entity.LastUpdate;
         }
 
-        internal static void Map(List<SurveyMetaData> entities, out List<CacheDependencyBO> list)
+        public static void Map(List<SurveyMetaData> entities, out List<CacheDependencyBO> list)
         {
             list = new List<CacheDependencyBO>();
 
@@ -100,27 +128,36 @@ namespace Epi.Web.EF
         /// </summary>
         /// <param name="businessobject">A SurveyInfoBO business object.</param>
         /// <returns>A SurveyMetaData entity.</returns>
-        internal static SurveyMetaData Map(SurveyInfoBO businessobject)
+        public static SurveyMetaData Map(SurveyInfoBO businessobject)
         {
-            return new SurveyMetaData
+            SurveyMetaData SurveyMetaData = new SurveyMetaData();
+
+            SurveyMetaData.SurveyId = new Guid(businessobject.SurveyId);
+            SurveyMetaData.SurveyName = businessobject.SurveyName;
+            SurveyMetaData.SurveyNumber = businessobject.SurveyNumber;
+            SurveyMetaData.TemplateXML = businessobject.XML;
+            SurveyMetaData.IntroductionText = businessobject.IntroductionText;
+            SurveyMetaData.ExitText = businessobject.ExitText;
+            SurveyMetaData.OrganizationName = businessobject.OrganizationName;
+            SurveyMetaData.DepartmentName = businessobject.DepartmentName;
+            SurveyMetaData.ClosingDate = businessobject.ClosingDate;
+            SurveyMetaData.UserPublishKey = businessobject.UserPublishKey;
+            SurveyMetaData.SurveyTypeId = businessobject.SurveyType;
+            SurveyMetaData.TemplateXMLSize = businessobject.TemplateXMLSize;
+            SurveyMetaData.DateCreated = businessobject.DateCreated;
+            SurveyMetaData.IsDraftMode = businessobject.IsDraftMode;
+            SurveyMetaData.StartDate = businessobject.StartDate;
+           // SurveyMetaData.OwnerId = businessobject.OwnerId;
+            SurveyMetaData.ViewId = businessobject.ViewId;
+            SurveyMetaData.IsSQLProject = businessobject.IsSqlProject;
+           // SurveyMetaData.IsShareable = businessobject.IsShareable;
+           // SurveyMetaData.DataAccessRuleId = businessobject.DataAccessRuleId;
+          //  SurveyMetaData.DataAccessRuleId = businessobject.;
+            if (!string.IsNullOrEmpty(businessobject.ParentId))
             {
-                SurveyId = new Guid(businessobject.SurveyId),
-                SurveyName = businessobject.SurveyName,
-                SurveyNumber = businessobject.SurveyNumber,
-                TemplateXML = businessobject.XML,
-                IntroductionText = businessobject.IntroductionText,
-                ExitText = businessobject.ExitText,
-                OrganizationName = businessobject.OrganizationName,
-                DepartmentName = businessobject.DepartmentName,
-                ClosingDate = businessobject.ClosingDate ,
-                UserPublishKey=businessobject.UserPublishKey,
-                SurveyTypeId = businessobject.SurveyType,
-                TemplateXMLSize = businessobject.TemplateXMLSize,
-                DateCreated = businessobject.DateCreated,
-                IsDraftMode = businessobject.IsDraftMode,
-                StartDate = businessobject.StartDate,
-                IsSQLProject = businessobject._IsSqlProject
-            };
+                SurveyMetaData.ParentId = new Guid(businessobject.ParentId);
+            }
+            return SurveyMetaData;
         }
 
         /// <summary>
@@ -128,7 +165,7 @@ namespace Epi.Web.EF
         /// </summary>
         /// <param name="entity">A SurveyMetaData entity to be transformed.</param>
         /// <returns>A SurveyInfoBO business object.</returns>
-        internal static SurveyResponseBO Map(SurveyAnswerDTO entity)
+        public static SurveyResponseBO Map(SurveyAnswerDTO entity)
         {
             return new SurveyResponseBO
             {
@@ -147,7 +184,7 @@ namespace Epi.Web.EF
         /// </summary>
         /// <param name="businessobject">A SurveyInfoBO business object.</param>
         /// <returns>A SurveyMetaData entity.</returns>
-        internal static SurveyAnswerDTO Map(SurveyResponseBO businessobject)
+        public static SurveyAnswerDTO Map(SurveyResponseBO businessobject)
         {
             return new SurveyAnswerDTO
             {
@@ -167,24 +204,44 @@ namespace Epi.Web.EF
         /// </summary>
         /// <param name="entity">A SurveyMetaData entity to be transformed.</param>
         /// <returns>A SurveyInfoBO business object.</returns>
-        internal static SurveyResponseBO Map(SurveyResponse entity)
-        {
-           
-            return new SurveyResponseBO
-            {
-                SurveyId = entity.SurveyId.ToString(),
-                ResponseId = entity.ResponseId.ToString(),
-                XML = entity.ResponseXML,
-                Status = entity.StatusId,
-                 DateUpdated = entity.DateUpdated,
-                DateCompleted = entity.DateCompleted,
-                TemplateXMLSize = (long)entity.ResponseXMLSize,
-                 DateCreated = entity.DateCreated,
-                 IsDraftMode = entity.IsDraftMode ,
-            };
-        }
+        //internal static SurveyResponseBO Map(SurveyResponse entity, User User = null, int LastActiveUseerId = -1)
+        //{
 
-        internal static List<SurveyResponseBO> Map(List<SurveyResponse> entities)
+        //    SurveyResponseBO SurveyResponseBO = new SurveyResponseBO();
+        //    SurveyResponseBO.SurveyId = entity.SurveyId.ToString();
+        //    SurveyResponseBO.ResponseId = entity.ResponseId.ToString();
+        //    SurveyResponseBO.XML = entity.ResponseXML;
+        //    SurveyResponseBO.Status = entity.StatusId;
+        //    SurveyResponseBO.DateUpdated = entity.DateUpdated;
+        //    SurveyResponseBO.DateCompleted = entity.DateCompleted;
+        //    SurveyResponseBO.TemplateXMLSize = (long)entity.ResponseXMLSize;
+        //    SurveyResponseBO.DateCreated = entity.DateCreated;
+        //    SurveyResponseBO.IsDraftMode = entity.IsDraftMode;
+        //    SurveyResponseBO.IsLocked = entity.IsLocked;
+        //    SurveyResponseBO.LastActiveUserId = LastActiveUseerId;
+        //    if (entity.SurveyMetaData != null)
+        //    {
+        //        SurveyResponseBO.ViewId = (int)entity.SurveyMetaData.ViewId;
+        //    }
+        //    if (entity.ParentRecordId != null)
+        //    {
+        //        SurveyResponseBO.ParentRecordId = entity.ParentRecordId.ToString();
+        //    }
+        //    if (entity.RelateParentId != null)
+        //    {
+        //        SurveyResponseBO.RelateParentId = entity.RelateParentId.ToString();
+        //    }
+        //    if (User != null)
+        //    {
+        //        SurveyResponseBO.UserEmail = User.EmailAddress;
+        //    }
+
+        //    return SurveyResponseBO;
+
+
+        //}
+
+        public static List<SurveyResponseBO> Map(List<SurveyResponse> entities)
         {
             List<SurveyResponseBO> result = new List<SurveyResponseBO>();
             foreach (SurveyResponse surveyResponse in entities)
@@ -194,7 +251,7 @@ namespace Epi.Web.EF
 
             return result;
         }
-        internal static OrganizationBO Map(Organization entity)
+        public static OrganizationBO Map(Organization entity)
         {
             return new OrganizationBO
             {
@@ -205,7 +262,7 @@ namespace Epi.Web.EF
 
             };
         }
-        internal static OrganizationBO Map(string Organization)
+        public static OrganizationBO Map(string Organization)
         {
             return new OrganizationBO
             {
@@ -215,7 +272,7 @@ namespace Epi.Web.EF
 
             };
         }
-        internal static AdminBO MapAdminEmail(string AdminEmail)
+        public static AdminBO MapAdminEmail(string AdminEmail)
             {
             return new AdminBO
             {
@@ -225,7 +282,7 @@ namespace Epi.Web.EF
 
             };
             }
-        internal static Organization ToEF(OrganizationBO pBo)
+        public static Organization ToEF(OrganizationBO pBo)
         {
             return new Organization
             {
@@ -237,7 +294,7 @@ namespace Epi.Web.EF
             };
         }
 
-        internal static Admin ToEF(AdminBO pBo)
+        public static Admin ToEF(AdminBO pBo)
             {
             Guid AdminId = Guid.NewGuid();
             //int id;
@@ -260,23 +317,45 @@ namespace Epi.Web.EF
         /// </summary>
         /// <param name="businessobject">A SurveyInfoBO business object.</param>
         /// <returns>A SurveyMetaData entity.</returns>
-        internal static SurveyResponse ToEF(SurveyResponseBO pBO)
+        internal static SurveyResponse ToEF(SurveyResponseBO pBO,int OrgId = -1)
         {
-            return new SurveyResponse
-            {
-                SurveyId = new Guid(pBO.SurveyId),
-                ResponseId = new Guid(pBO.ResponseId),
-                ResponseXML = pBO.XML,
-                StatusId = pBO.Status,
-                 ResponseXMLSize = pBO.TemplateXMLSize,
-                DateUpdated = pBO.DateUpdated,
-                DateCompleted = pBO.DateCompleted,
-                DateCreated = pBO.DateCreated,
-                IsDraftMode = pBO.IsDraftMode
 
-            };
+            SurveyResponse SurveyResponse = new SurveyResponse();
+            Guid RelateParentId = Guid.Empty;
+            if (!string.IsNullOrEmpty(pBO.RelateParentId))
+            {
+                RelateParentId = new Guid(pBO.RelateParentId);
+            }
+            Guid ParentRecordId = Guid.Empty;
+            if (!string.IsNullOrEmpty(pBO.ParentRecordId))
+            {
+                ParentRecordId = new Guid(pBO.ParentRecordId);
+            }
+            SurveyResponse.SurveyId = new Guid(pBO.SurveyId);
+            SurveyResponse.ResponseId = new Guid(pBO.ResponseId);
+            SurveyResponse.ResponseXML = pBO.XML;
+            SurveyResponse.StatusId = pBO.Status;
+            SurveyResponse.ResponseXMLSize = pBO.TemplateXMLSize;
+            SurveyResponse.DateUpdated = pBO.DateUpdated;
+            SurveyResponse.DateCompleted = pBO.DateCompleted;
+            SurveyResponse.DateCreated = pBO.DateCreated;
+            SurveyResponse.IsDraftMode = pBO.IsDraftMode;
+            SurveyResponse.RecordSourceId = pBO.RecrodSourceId;
+            if (!string.IsNullOrEmpty(pBO.RelateParentId) && RelateParentId != Guid.Empty)
+            {
+                SurveyResponse.RelateParentId = new Guid(pBO.RelateParentId);
+            }
+            if (!string.IsNullOrEmpty(pBO.ParentRecordId) && ParentRecordId != Guid.Empty)
+            {
+                SurveyResponse.ParentRecordId = new Guid(pBO.ParentRecordId);
+            }
+            if (OrgId != -1)
+            {
+                SurveyResponse.OrganizationId = OrgId;
+            }
+            return SurveyResponse;
         }
-        internal static UserAuthenticationResponseBO ToAuthenticationResponseBO(UserAuthenticationRequestBO AuthenticationRequestBO)
+        public static UserAuthenticationResponseBO ToAuthenticationResponseBO(UserAuthenticationRequestBO AuthenticationRequestBO)
         {
 
 
@@ -288,7 +367,7 @@ namespace Epi.Web.EF
         
         }
 
-        internal static StateBO Map(State Row)
+        public static StateBO Map(State Row)
             {
             StateBO StateBO = new StateBO();
             StateBO.StateCode = Row.StateCode;
@@ -297,7 +376,7 @@ namespace Epi.Web.EF
             return StateBO;
             }
 
-        internal static   Address ToAddressEF(AdminBO Admin)
+        public static   Address ToAddressEF(AdminBO Admin)
             {
             return new Address
             {
@@ -310,7 +389,7 @@ namespace Epi.Web.EF
                 AdminId = Admin.AdminId
             };
             }
-        internal static EIDatasource Map(DbConnectionStringBO ConnectionString)
+        public static EIDatasource Map(DbConnectionStringBO ConnectionString)
         {
             EIDatasource Datasource = new EIDatasource();
             Datasource.DatabaseType = ConnectionString.DatabaseType;
@@ -323,7 +402,7 @@ namespace Epi.Web.EF
             Datasource.PersistSecurityInfo = ConnectionString.PersistSecurityInfo;
             return Datasource;
         }
-        internal static List<SourceTableBO> MapToSourceTableBO(System.Data.DataTable dataTable)
+        public static List<SourceTableBO> MapToSourceTableBO(System.Data.DataTable dataTable)
         {
             List<SourceTableBO> List = new List<SourceTableBO>();
           
@@ -340,6 +419,77 @@ namespace Epi.Web.EF
             }
             return List;
             
+        }
+        public static SurveyResponseBO Map(ResponseXml ResponseXml)
+        {
+            SurveyResponseBO SurveyResponseBO = new SurveyResponseBO();
+            SurveyResponseBO.ResponseId = ResponseXml.ResponseId.ToString();
+            SurveyResponseBO.XML = ResponseXml.Xml;
+          //  SurveyResponseBO.UserId = (int)ResponseXml.UserId;
+          //  SurveyResponseBO.IsNewRecord = (bool)ResponseXml.IsNewRecord;
+            return SurveyResponseBO;
+        }
+
+        public static ResponseXml ToEF(ResponseXmlBO ResponseXmlBO)
+        {
+            ResponseXml ResponseXml = new ResponseXml();
+            ResponseXml.ResponseId = new Guid(ResponseXmlBO.ResponseId);
+            ResponseXml.Xml = ResponseXmlBO.Xml;
+            ResponseXml.UserId = ResponseXmlBO.User;
+            ResponseXml.IsNewRecord = ResponseXmlBO.IsNewRecord;
+            return ResponseXml;
+        }
+        public static ResponseDisplaySetting ToColumnName(KeyValuePair<int, string> ColumnList, Guid FormId)
+        {
+            return new ResponseDisplaySetting
+            {
+                SortOrder = ColumnList.Key + 1,
+                ColumnName = ColumnList.Value,
+                FormId = FormId
+            };
+        }
+        public static ResponseDisplaySetting Map(string FormId, int i, string Column)
+        {
+            ResponseDisplaySetting ResponseDisplaySetting = new ResponseDisplaySetting();
+            ResponseDisplaySetting.FormId = new Guid(FormId);
+            ResponseDisplaySetting.ColumnName = Column;
+            ResponseDisplaySetting.SortOrder = i;
+            return ResponseDisplaySetting;
+
+        }
+        public static SurveyResponseBO Map(SurveyResponse entity, User User = null, int LastActiveUseerId = -1)
+        {
+            SurveyResponseBO SurveyResponseBO = new SurveyResponseBO();
+
+            SurveyResponseBO.SurveyId = entity.SurveyId.ToString();
+            SurveyResponseBO.ResponseId = entity.ResponseId.ToString();
+            SurveyResponseBO.XML = entity.ResponseXML;
+            SurveyResponseBO.Status = entity.StatusId;
+            SurveyResponseBO.DateUpdated = entity.DateUpdated;
+            SurveyResponseBO.DateCompleted = entity.DateCompleted;
+            SurveyResponseBO.TemplateXMLSize = (long)entity.ResponseXMLSize;
+            SurveyResponseBO.DateCreated = entity.DateCreated;
+            SurveyResponseBO.IsDraftMode = entity.IsDraftMode;
+            //SurveyResponseBO.IsLocked = entity.IsLocked;
+            /// SurveyResponseBO.LastActiveUserId = LastActiveUseerId;
+            if (entity.SurveyMetaData != null && entity.SurveyMetaData.ViewId!= null)
+            {
+                SurveyResponseBO.ViewId = (int)entity.SurveyMetaData.ViewId;
+            }
+            if (entity.ParentRecordId != null && entity.ParentRecordId!= null)
+            {
+                SurveyResponseBO.ParentRecordId = entity.ParentRecordId.ToString();
+            }
+            if (entity.RelateParentId != null && entity.RelateParentId!= null)
+            {
+                SurveyResponseBO.RelateParentId = entity.RelateParentId.ToString();
+            }
+            //if (User != null)
+            //{
+            //    SurveyResponseBO.UserEmail = User.EmailAddress;
+            //}
+
+            return SurveyResponseBO;
         }
     }
 }

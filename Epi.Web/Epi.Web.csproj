@@ -52,6 +52,24 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Epi.Web.BLL, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\EIWS_BLL_Core\bin\Release\Epi.Web.BLL.dll</HintPath>
+    </Reference>
+    <Reference Include="Epi.Web.CheckCodeEngine, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Epi.Web.CheckCodeEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="Epi.Web.EF">
+      <HintPath>..\Epi.Web.EF\bin\Release\Epi.Web.EF.dll</HintPath>
+    </Reference>
+    <Reference Include="Epi.Web.Interfaces, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Epi.Web.Interfaces.dll</HintPath>
+    </Reference>
     <Reference Include="EpiInfo.Plugin, Version=7.0.9.8, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\EpiInfo.Plugin.dll</HintPath>
@@ -193,12 +211,19 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Controllers\FormResponseController.cs" />
     <Compile Include="Controllers\SurveyManagerController.cs" />
     <Compile Include="Controllers\PrintController.cs" />
+    <Compile Include="Models\FormInfoModel.cs" />
+    <Compile Include="Models\FormResponseInfoModel.cs" />
     <Compile Include="Models\PrintModel.cs" />
     <Compile Include="Models\PrintResponseModel.cs" />
     <Compile Include="Models\PublishModel.cs" />
+    <Compile Include="Models\RelateModel.cs" />
+    <Compile Include="Models\ResponseModel.cs" />
+    <Compile Include="Models\SeachBoxModel.cs" />
     <Compile Include="Models\StateModel.cs" />
+    <Compile Include="Models\SurveyModel.cs" />
     <Compile Include="Repositories\CacheDependencyRepository.cs" />
     <Compile Include="Constants\Constant.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -343,6 +368,7 @@
     <Content Include="Content\css\ui-lightness\jquery-ui-1.8.16.custom.css" />
     <Content Include="Content\css\validationEngine.jquery.css" />
     <Content Include="Content\css\validationEngine.jquery.Mobile.css" />
+    <Content Include="Content\images\addnew.png" />
     <Content Include="Content\images\ajax-loader.gif" />
     <Content Include="Content\images\arrow_left.png" />
     <Content Include="Content\images\arrow_right.png" />
@@ -354,18 +380,37 @@
     <Content Include="Content\images\checkmark.png" />
     <Content Include="Content\images\checkmark1.png" />
     <Content Include="Content\images\checkmark_icon.png" />
+    <Content Include="Content\images\Close.png" />
     <Content Include="Content\images\codebk.png" />
+    <Content Include="Content\images\delset.png" />
+    <Content Include="Content\images\Demo.png" />
+    <Content Include="Content\images\designlegend.png" />
+    <Content Include="Content\images\designlegend1.png" />
     <Content Include="Content\images\DRAFT.png" />
+    <Content Include="Content\images\edit.png" />
+    <Content Include="Content\images\ei_logomark_wht_outln_350px.png" />
+    <Content Include="Content\images\ei_logomark_wht_outln_50px.png" />
     <Content Include="Content\images\epi.png" />
+    <Content Include="Content\images\epiIcon.png" />
+    <Content Include="Content\images\epi_info_logo_01.png" />
     <Content Include="Content\images\error.png" />
     <Content Include="Content\images\error1.png" />
     <Content Include="Content\images\error2.png" />
+    <Content Include="Content\images\footer_bar.png" />
     <Content Include="Content\images\go.png" />
+    <Content Include="Content\images\graphs_icon.png" />
+    <Content Include="Content\images\header_bg.png" />
+    <Content Include="Content\images\header_bg2.png" />
+    <Content Include="Content\images\icn_alert_error.png" />
+    <Content Include="Content\images\icn_alert_success.png" />
     <Content Include="Content\images\icon-search-black.png" />
     <Content Include="Content\images\icons-18-black.png" />
     <Content Include="Content\images\icons-18-white.png" />
     <Content Include="Content\images\icons-36-black.png" />
     <Content Include="Content\images\icons-36-white.png" />
+    <Content Include="Content\images\info.png" />
+    <Content Include="Content\images\leftbk2.png" />
+    <Content Include="Content\images\leftbk23.png" />
     <Content Include="Content\images\logo_dhhs.gif" />
     <Content Include="Content\images\next.png" />
     <Content Include="Content\images\next_classic.png" />
@@ -377,12 +422,14 @@
     <Content Include="Content\images\prev.png" />
     <Content Include="Content\images\prev_classic.png" />
     <Content Include="Content\images\prev_d.png" />
+    <Content Include="Content\images\root.png" />
     <Content Include="Content\images\save.png" />
     <Content Include="Content\images\save_white.png" />
     <Content Include="Content\images\sign_warning.png" />
     <Content Include="Content\images\submit.png" />
     <Content Include="Content\images\Toggle-collapse-alt_green.png" />
     <Content Include="Content\images\Toggle-expand-alt_green.png" />
+    <Content Include="Content\images\uplevel.png" />
     <Content Include="Content\images\video.png" />
     <Content Include="Content\images\warn.png" />
     <Content Include="Content\images\warning_icon.jpg" />
@@ -465,6 +512,9 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Properties\DataSources\Epi.Web.Common.Message.FormsHierarchyResponse.datasource" />
+    <Content Include="Content\Text\EmailList.xlsx" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
@@ -528,23 +578,23 @@
     <None Include="Properties\PublishProfiles\EIWSSandbox.pubxml" />
     <None Include="Properties\PublishProfiles\Profile1.pubxml" />
     <Content Include="Scripts\jquery-1.9.1.min.map" />
-    <None Include="Service References\DataServiceClient\DataService.wsdl" />
-    <None Include="Service References\DataServiceClient\SurveyDataService.xsd">
+    <None Include="Service References\DataServiceClient\DataService1.wsdl" />
+    <None Include="Service References\DataServiceClient\SurveyDataService6.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\DataServiceClient\SurveyDataService1.xsd">
+    <None Include="Service References\DataServiceClient\SurveyDataService61.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\DataServiceClient\SurveyDataService2.xsd">
+    <None Include="Service References\DataServiceClient\SurveyDataService62.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\DataServiceClient\SurveyDataService3.xsd">
+    <None Include="Service References\DataServiceClient\SurveyDataService63.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\DataServiceClient\SurveyDataService4.xsd">
+    <None Include="Service References\DataServiceClient\SurveyDataService64.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\DataServiceClient\SurveyDataService5.xsd">
+    <None Include="Service References\DataServiceClient\SurveyDataService65.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\SurveyManagerServiceV4\ManagerServiceV4.wsdl" />
@@ -555,13 +605,13 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <None Include="Service References\DataServiceClient\SurveyDataService.disco" />
     <None Include="Service References\DataServiceClient\configuration91.svcinfo" />
     <None Include="Service References\DataServiceClient\configuration.svcinfo" />
     <None Include="Service References\DataServiceClient\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <None Include="Service References\DataServiceClient\SurveyDataService1.disco" />
     <Content Include="SurveyDataService.svc" />
     <Content Include="SurveyManagerService.svc" />
     <Content Include="SurveyManagerServiceV2.svc" />
@@ -570,6 +620,7 @@
     <Content Include="Unity.Mvc3.README.txt" />
     <Content Include="Views\Shared\footer.htm" />
     <Content Include="Views\Shared\header.htm" />
+    <Content Include="Views\Survey\ListResponsesOld.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -626,6 +677,8 @@
     <None Include="Service References\SurveyManagerServiceV4\SurveyManagerServiceV45.xsd">
       <SubType>Designer</SubType>
     </None>
+    <Content Include="Views\FormResponse\Index.Mobile.cshtml" />
+    <Content Include="Views\Survey\ListResponses.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -640,34 +693,22 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <WCFMetadataStorage Include="Service References\DataServiceClient\" />
+    <WCFMetadataStorage Include="Service References\SurveyManagerServiceV4\" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\Epi.DynamicForms.Core\Epi.Web.DynamicForms.Core.csproj">
-      <Project>{9624E64A-013F-41E8-84BA-C34EE744685E}</Project>
+      <Project>{9624e64a-013f-41e8-84ba-c34ee744685e}</Project>
       <Name>Epi.Web.DynamicForms.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Epi.Web.CheckCodeEngine\Epi.Web.CheckCodeEngine.csproj">
-      <Project>{6B084882-EF4F-4CF0-85B1-1E8C357AE822}</Project>
-      <Name>Epi.Web.CheckCodeEngine</Name>
     </ProjectReference>
     <ProjectReference Include="..\Epi.Web.Common\Epi.Web.Common.csproj">
       <Project>{6e2f059b-c1cd-401f-8a63-dc2933cfb0d8}</Project>
       <Name>Epi.Web.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Epi.Web.EF\Epi.Web.EF.csproj">
-      <Project>{05A484AB-A555-4200-936B-BEC573285BCC}</Project>
-      <Name>Epi.Web.EF</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Epi.Web.Interfaces\Epi.Web.Interfaces.csproj">
-      <Project>{b8af69bd-3ce1-4aa5-875d-3fb87c7fce44}</Project>
-      <Name>Epi.Web.Interfaces</Name>
-    </ProjectReference>
     <ProjectReference Include="..\SurveyManagerInterface\Epi.Web.WCF.SurveyService.csproj">
       <Project>{31f91938-2997-4650-8d36-71c845f1071d}</Project>
       <Name>Epi.Web.WCF.SurveyService</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadataStorage Include="Service References\DataServiceClient\" />
-    <WCFMetadataStorage Include="Service References\SurveyManagerServiceV4\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -690,8 +731,7 @@
           <IISUrl>http://localhost:59584/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
-          <CustomServerUrl>
-          </CustomServerUrl>
+          <CustomServerUrl>http://tephinetepiinfo.cloudapp.net/EIWS_RelatedForms/</CustomServerUrl>
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>

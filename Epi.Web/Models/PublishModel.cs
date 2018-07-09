@@ -11,9 +11,11 @@ namespace Epi.Web.MVC.Models
     {
         private string _Path;
         private string _RepublishPath;
+        private string _EmailFilePath;
         private string _OrganizationKey;
         private string _SurveyKey;
         private string _RepublishSurveyKey;
+        private string _EmailSurveyKey;
         private bool _UpdateExisting;
         private string _EndDate;
         private string _EndDateUpdate;
@@ -21,6 +23,7 @@ namespace Epi.Web.MVC.Models
         private bool  _SuccessfulPublish;
         private string _FileName;
         private string _UserPublishKey;
+        private string _EmailUserPublishKey;
         private string _RepublishUserPublishKey;
         private List<string> _SurveyNameList;
          
@@ -135,6 +138,11 @@ namespace Epi.Web.MVC.Models
          public bool PublishDivState { get; set; }
          public bool DownLoadDivState { get; set; }
          public bool IsAuthenticated { get; set; }
-          
+          public bool SendEmaiDivState { get; set; }
+
+        public string EmailUserPublishKey { get; set; }
+        public string EmailFilePath { get; set; }
+        public string EmailSurveyKey { get; set; }
+        public bool SuccessfullySentEmail { get; set; }
     }
 }

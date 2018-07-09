@@ -14,8 +14,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epi.Web.BLL", "EIWS_BLL_Cor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epi.Web.EF", "Epi.Web.EF\Epi.Web.EF.csproj", "{05A484AB-A555-4200-936B-BEC573285BCC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epi.Web.WCF.SurveyService", "SurveyManagerInterface\Epi.Web.WCF.SurveyService.csproj", "{31F91938-2997-4650-8D36-71C845F1071D}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epi.Web.Common", "Epi.Web.Common\Epi.Web.Common.csproj", "{6E2F059B-C1CD-401F-8A63-DC2933CFB0D8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epi.Web.DynamicForms.Core", "Epi.DynamicForms.Core\Epi.Web.DynamicForms.Core.csproj", "{9624E64A-013F-41E8-84BA-C34EE744685E}"
@@ -35,6 +33,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{95D9CE
 		.nuget\NuGet.exe = .nuget\NuGet.exe
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epi.Web.WCF.SurveyService", "SurveyManagerInterface\Epi.Web.WCF.SurveyService.csproj", "{31F91938-2997-4650-8D36-71C845F1071D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -86,16 +86,6 @@ Global
 		{05A484AB-A555-4200-936B-BEC573285BCC}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{05A484AB-A555-4200-936B-BEC573285BCC}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{05A484AB-A555-4200-936B-BEC573285BCC}.Release|x86.ActiveCfg = Release|Any CPU
-		{31F91938-2997-4650-8D36-71C845F1071D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{31F91938-2997-4650-8D36-71C845F1071D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{31F91938-2997-4650-8D36-71C845F1071D}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{31F91938-2997-4650-8D36-71C845F1071D}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{31F91938-2997-4650-8D36-71C845F1071D}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{31F91938-2997-4650-8D36-71C845F1071D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{31F91938-2997-4650-8D36-71C845F1071D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{31F91938-2997-4650-8D36-71C845F1071D}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{31F91938-2997-4650-8D36-71C845F1071D}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{31F91938-2997-4650-8D36-71C845F1071D}.Release|x86.ActiveCfg = Release|Any CPU
 		{6E2F059B-C1CD-401F-8A63-DC2933CFB0D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6E2F059B-C1CD-401F-8A63-DC2933CFB0D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6E2F059B-C1CD-401F-8A63-DC2933CFB0D8}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -136,6 +126,18 @@ Global
 		{6B084882-EF4F-4CF0-85B1-1E8C357AE822}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{6B084882-EF4F-4CF0-85B1-1E8C357AE822}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{6B084882-EF4F-4CF0-85B1-1E8C357AE822}.Release|x86.ActiveCfg = Release|Any CPU
+		{31F91938-2997-4650-8D36-71C845F1071D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31F91938-2997-4650-8D36-71C845F1071D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31F91938-2997-4650-8D36-71C845F1071D}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{31F91938-2997-4650-8D36-71C845F1071D}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{31F91938-2997-4650-8D36-71C845F1071D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{31F91938-2997-4650-8D36-71C845F1071D}.Debug|x86.Build.0 = Debug|Any CPU
+		{31F91938-2997-4650-8D36-71C845F1071D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31F91938-2997-4650-8D36-71C845F1071D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31F91938-2997-4650-8D36-71C845F1071D}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{31F91938-2997-4650-8D36-71C845F1071D}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{31F91938-2997-4650-8D36-71C845F1071D}.Release|x86.ActiveCfg = Release|Any CPU
+		{31F91938-2997-4650-8D36-71C845F1071D}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

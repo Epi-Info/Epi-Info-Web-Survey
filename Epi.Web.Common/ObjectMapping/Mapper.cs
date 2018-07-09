@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Epi.Web.Common.BusinessObject;
 using Epi.Web.Common.DTO;
 using Epi.Web.Common.Message;
+using Epi.Web.Common.Constants;
 using System;
 using System.Configuration;
 namespace Epi.Web.Common.ObjectMapping
@@ -38,6 +39,7 @@ namespace Epi.Web.Common.ObjectMapping
                  StartDate  = pDTO.StartDate,
                 DBConnectionString = pDTO.DBConnectionString,
                 IsSqlProject = pDTO.IsSqlProject,
+                ViewId = pDTO.ViewId
             };
         }
 
@@ -118,7 +120,7 @@ namespace Epi.Web.Common.ObjectMapping
                 ClosingDate = pBO.ClosingDate,
                 IsDraftMode = pBO.IsDraftMode,
                 StartDate = pBO.StartDate,
-
+                IsSqlProject =pBO.IsSqlProject,
                 UserPublishKey = pBO.UserPublishKey
 
 
@@ -163,19 +165,36 @@ namespace Epi.Web.Common.ObjectMapping
         /// <returns>A SurveyInfoDTO.</returns>
         public static SurveyAnswerDTO ToDataTransferObject(SurveyResponseBO pBO)
         {
-            return new SurveyAnswerDTO
+            SurveyAnswerDTO SurveyAnswerDTO = new SurveyAnswerDTO();
+            try
             {
-                SurveyId = pBO.SurveyId,
-                ResponseId = pBO.ResponseId,
-                DateUpdated = pBO.DateUpdated,
-                XML = pBO.XML,
-                DateCompleted = pBO.DateCompleted,
-                DateCreated = pBO.DateCreated, 
-                Status = pBO.Status,
-                IsDraftMode = pBO.IsDraftMode
-            };
+                SurveyAnswerDTO.SurveyId = pBO.SurveyId;
+                SurveyAnswerDTO.ResponseId = pBO.ResponseId;
+                SurveyAnswerDTO.DateUpdated = pBO.DateUpdated;
+                SurveyAnswerDTO.XML = pBO.XML;
+                SurveyAnswerDTO.DateCompleted = pBO.DateCompleted;
+                SurveyAnswerDTO.DateCreated = pBO.DateCreated;
+                SurveyAnswerDTO.Status = pBO.Status;
+                SurveyAnswerDTO.IsDraftMode = pBO.IsDraftMode;
+                //SurveyAnswerDTO.IsLocked = pBO.IsLocked;
+                SurveyAnswerDTO.ParentRecordId = pBO.ParentRecordId;
+                // SurveyAnswerDTO.UserEmail = pBO.UserEmail;
+                SurveyAnswerDTO.ViewId = pBO.ViewId;
+                SurveyAnswerDTO.RelateParentId = pBO.RelateParentId;
+                //  SurveyAnswerDTO.SqlData = pBO.SqlData;
+                //  SurveyAnswerDTO.LastActiveUserId = pBO.LastActiveUserId;
+                if (pBO.ResponseHierarchyIds != null)
+                {
+                    SurveyAnswerDTO.ResponseHierarchyIds = ToDataTransferObject(pBO.ResponseHierarchyIds);
+                }
+                return SurveyAnswerDTO;
+            } catch ( System.Exception ex) {
+
+                throw ex;
+            }
         }
-        public static List<SurveyAnswerDTO> ToDataTransferObject(List<SurveyResponseBO> pSurveyResposneList)
+
+        public static List<SurveyAnswerDTO> ToDataTransferObject(List<SurveyResponseBO> pSurveyResposneList , int UserId =0)
         {
             List<SurveyAnswerDTO> result = new List<SurveyAnswerDTO>();
             foreach (SurveyResponseBO surveyResponse in pSurveyResposneList)
@@ -185,6 +204,8 @@ namespace Epi.Web.Common.ObjectMapping
 
             return result;
         }
+
+        
 
         /// <summary>
         /// Maps SurveyInfoBO business object to SurveyInfoDTO entity.
@@ -202,8 +223,9 @@ namespace Epi.Web.Common.ObjectMapping
                 DateCompleted = pDTO.DateCompleted,
                 DateCreated = pDTO.DateCreated,
                 Status = pDTO.Status,
-                IsDraftMode = pDTO.IsDraftMode
-                
+                IsDraftMode = pDTO.IsDraftMode,
+                ParentRecordId = pDTO.RelateParentId
+                ,RecrodSourceId = pDTO.RecordSourceId
             };
         }
 
@@ -229,8 +251,8 @@ namespace Epi.Web.Common.ObjectMapping
             {
                 IsPulished = pBO.IsPulished,
                 StatusText = pBO.StatusText,
-                URL = pBO.URL
-
+                URL = pBO.URL,
+                ViewIdAndFormIdList = pBO.ViewIdAndFormIdList
             };
         }
 
@@ -301,6 +323,68 @@ namespace Epi.Web.Common.ObjectMapping
 
             }
 
+        public static List<FormsHierarchyDTO> ToFormHierarchyDTO(List<FormsHierarchyBO> AllChildIDsList)
+            {
+            List<FormsHierarchyDTO> result = new List<FormsHierarchyDTO>();
+            foreach (FormsHierarchyBO Obj in AllChildIDsList)
+                {
+                FormsHierarchyDTO FormsHierarchyDTO = new FormsHierarchyDTO();
+                FormsHierarchyDTO.FormId = Obj.FormId;
+                FormsHierarchyDTO.ViewId = Obj.ViewId;
+                FormsHierarchyDTO.IsSqlProject = Obj.IsSqlProject;
+                FormsHierarchyDTO.IsRoot = Obj.IsRoot;
+                FormsHierarchyDTO.SurveyInfo = Mapper.ToSurveyInfoDTO(Obj.SurveyInfo);
+                if (Obj.ResponseIds != null)
+                    {
+                    FormsHierarchyDTO.ResponseIds = ToSurveyAnswerDTO(Obj.ResponseIds);
+                    }
+                result.Add(FormsHierarchyDTO);
+                }
+            return result;
+            }
+        public static SurveyInfoDTO ToSurveyInfoDTO(SurveyInfoBO SurveyInfoModel)
+        {
+            return new Epi.Web.Common.DTO.SurveyInfoDTO
+            {
+                SurveyId = SurveyInfoModel.SurveyId,
+                SurveyNumber = SurveyInfoModel.SurveyNumber,
+                SurveyName = SurveyInfoModel.SurveyName,
+                OrganizationName = SurveyInfoModel.OrganizationName,
+                DepartmentName = SurveyInfoModel.DepartmentName,
+                IntroductionText = SurveyInfoModel.IntroductionText,
+                ExitText = SurveyInfoModel.ExitText,
+                XML = SurveyInfoModel.XML,
+               // IsShareable = SurveyInfoModel.IsShareable,
+               /// IsShared = SurveyInfoModel.IsShared,
+                IsSqlProject = SurveyInfoModel.IsSqlProject,
+                ClosingDate = SurveyInfoModel.ClosingDate,
+                UserPublishKey = SurveyInfoModel.UserPublishKey,
+                IsDraftMode = SurveyInfoModel.IsDraftMode,
+                StartDate = SurveyInfoModel.StartDate,
+                ViewId = SurveyInfoModel.ViewId,
+               // OwnerId = SurveyInfoModel.OwnerId,
+                ParentId = SurveyInfoModel.ParentId,
+               // HasDraftModeData = SurveyInfoModel.HasDraftModeData
+            };
+        }
+        private static List<SurveyAnswerDTO> ToSurveyAnswerDTO(List<SurveyResponseBO> list)
+        {
+            List<SurveyAnswerDTO> ModelList = new List<SurveyAnswerDTO>();
+            foreach (var Obj in list)
+            {
+                SurveyAnswerDTO SurveyAnswerModel = new SurveyAnswerDTO();
+                SurveyAnswerModel.ResponseId = Obj.ResponseId;
+                SurveyAnswerModel.SurveyId = Obj.SurveyId;
+                SurveyAnswerModel.DateUpdated = Obj.DateUpdated;
+                SurveyAnswerModel.DateCompleted = Obj.DateCompleted;
+                SurveyAnswerModel.Status = Obj.Status;
+                SurveyAnswerModel.XML = Obj.XML;
+                SurveyAnswerModel.ParentRecordId = Obj.ParentRecordId;
+                SurveyAnswerModel.RelateParentId = Obj.RelateParentId;
+                ModelList.Add(SurveyAnswerModel);
+            }
+            return ModelList;
+        }
         public static UserAuthenticationRequestBO ToBusinessObject(string ResponseId)
             {
            
@@ -352,6 +436,39 @@ namespace Epi.Web.Common.ObjectMapping
                 DTOList.Add(SourceTableDTO);
            }
             return DTOList;
+        }
+
+        public static List<SurveyResponseBO> ToSurveyResponseBOList(List<SurveyAnswerDTO> surveyAnswerList, int userId=0)
+        {
+            List<SurveyResponseBO> BOList = new List<SurveyResponseBO>();
+
+            foreach (var item in surveyAnswerList)
+            {
+                SurveyResponseBO SurveyResponseBO = new SurveyResponseBO();
+
+                SurveyResponseBO = Mapper.ToSurveyResponseBO(item, userId);
+                BOList.Add(SurveyResponseBO);
+            }
+            return BOList;
+        }
+
+        private static SurveyResponseBO ToSurveyResponseBO(SurveyAnswerDTO pDTO, int UserId)
+        {
+            SurveyResponseBO SurveyResponseBO = new SurveyResponseBO();
+
+            SurveyResponseBO.SurveyId = pDTO.SurveyId;
+            SurveyResponseBO.ResponseId = pDTO.ResponseId;
+            SurveyResponseBO.DateUpdated = pDTO.DateUpdated;
+            SurveyResponseBO.XML = pDTO.XML;
+            SurveyResponseBO.DateCompleted = pDTO.DateCompleted;
+            SurveyResponseBO.DateCreated = pDTO.DateCreated;
+            SurveyResponseBO.Status = pDTO.Status;
+            SurveyResponseBO.IsDraftMode = pDTO.IsDraftMode;
+            //UserId = UserId,
+            SurveyResponseBO.ParentRecordId = pDTO.ParentRecordId;
+            SurveyResponseBO.RecrodSourceId = pDTO.RecordSourceId;
+
+            return SurveyResponseBO;
         }
     }
 }

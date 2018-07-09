@@ -69,6 +69,35 @@ namespace Epi.Web.MVC.Repositories
                 throw ex;
             }
         }
+        public SurveyAnswerResponse GetFormResponseList(SurveyAnswerRequest pRequest)
+        {
+            try
+            {
+                //SurveyResponseResponse result = Client.GetSurveyResponse(pRequest);
+                SurveyAnswerResponse result = _iDataService.GetFormResponseList(pRequest);
+                return result;
+            }
+            catch (FaultException<CustomFaultException> cfe)
+            {
+                throw cfe;
+            }
+            catch (FaultException fe)
+            {
+                throw fe;
+            }
+            catch (CommunicationException ce)
+            {
+                throw ce;
+            }
+            catch (TimeoutException te)
+            {
+                throw te;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         public UserAuthenticationResponse UpdatePassCode(UserAuthenticationRequest AuthenticationRequest)
         {
             try
@@ -185,9 +214,197 @@ namespace Epi.Web.MVC.Repositories
                 throw ex;
             }
         }
+        public SurveyAnswerResponse SetChildRecord(SurveyAnswerRequest SurveyAnswerRequest)
+        {
 
+            try
+            {
+                SurveyAnswerResponse result = _iDataService.SetSurveyAnswer(SurveyAnswerRequest);
+                return result;
+            }
+            catch (FaultException<CustomFaultException> cfe)
+            {
+                throw cfe;
+            }
+            catch (FaultException fe)
+            {
+                throw fe;
+            }
+            catch (CommunicationException ce)
+            {
+                throw ce;
+            }
+            catch (TimeoutException te)
+            {
+                throw te;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public SurveyAnswerResponse GetSurveyAnswerHierarchy(SurveyAnswerRequest pRequest)
+        {
+
+            try
+            {
+
+                SurveyAnswerResponse result = _iDataService.GetSurveyAnswerHierarchy(pRequest);
+                return result;
+            }
+            catch (FaultException<CustomFaultException> cfe)
+            {
+                throw cfe;
+            }
+            catch (FaultException fe)
+            {
+                throw fe;
+            }
+            catch (CommunicationException ce)
+            {
+                throw ce;
+            }
+            catch (TimeoutException te)
+            {
+                throw te;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+        }
+
+        public SurveyAnswerResponse GetSurveyAnswerAncestor(SurveyAnswerRequest pRequest)
+        {
+
+            try
+            {
+
+                SurveyAnswerResponse result = _iDataService.GetAncestorResponseIdsByChildId(pRequest);
+                return result;
+            }
+            catch (FaultException<CustomFaultException> cfe)
+            {
+                throw cfe;
+            }
+            catch (FaultException fe)
+            {
+                throw fe;
+            }
+            catch (CommunicationException ce)
+            {
+                throw ce;
+            }
+            catch (TimeoutException te)
+            {
+                throw te;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+
+            }
+        }
+
+        public SurveyAnswerResponse GetResponsesByRelatedFormId(SurveyAnswerRequest FormResponseReq)
+        {
+
+            try
+            {
+
+                SurveyAnswerResponse result = _iDataService.GetResponsesByRelatedFormId(FormResponseReq);
+                return result;
+            }
+            catch (FaultException<CustomFaultException> cfe)
+            {
+                throw cfe;
+            }
+            catch (FaultException fe)
+            {
+                throw fe;
+            }
+            catch (CommunicationException ce)
+            {
+                throw ce;
+            }
+            catch (TimeoutException te)
+            {
+                throw te;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+
+            }
+
+        }
+        public void UpdateResponseStatus(SurveyAnswerRequest Request)
+        {
+            try
+            {
+
+                _iDataService.UpdateResponseStatus(Request);
+
+            }
+            catch (FaultException<CustomFaultException> cfe)
+            {
+                throw cfe;
+            }
+            catch (FaultException fe)
+            {
+                throw fe;
+            }
+            catch (CommunicationException ce)
+            {
+                throw ce;
+            }
+            catch (TimeoutException te)
+            {
+                throw te;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+
+            }
+
+
+        }
+        public bool HasResponse(string SurveyId, string ResponseId)
+        {
+            try
+            {
+
+                return _iDataService.HasResponse(SurveyId, ResponseId);
+
+            }
+            catch (FaultException<CustomFaultException> cfe)
+            {
+                throw cfe;
+            }
+            catch (FaultException fe)
+            {
+                throw fe;
+            }
+            catch (CommunicationException ce)
+            {
+                throw ce;
+            }
+            catch (TimeoutException te)
+            {
+                throw te;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+
+            }
+
+
+        }
         #region stubcode
-            public List<Common.DTO.SurveyAnswerDTO> GetList(Criterion criterion = null)
+        public List<Common.DTO.SurveyAnswerDTO> GetList(Criterion criterion = null)
             {
                 throw new NotImplementedException();
             }

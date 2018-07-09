@@ -17,6 +17,7 @@ namespace Epi.Web.MVC.Models
         public DateTime? DateCompleted { get; set; }
         public int Status { get; set; }
         public string XML { get; set; }
-
+        public string ParentRecordId { get; internal set; }
+        public string RelateParentId { get; internal set; }
     }
 }

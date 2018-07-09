@@ -29,46 +29,67 @@ namespace Epi.Web.MVC.Utility
         /// <param name="surveyAnswerDTO"></param>
         /// <param name="surveyResponseXML"></param>
         /// <param name="iSurveyAnswerRepository"></param>
-        public static Epi.Web.Common.DTO.SurveyAnswerDTO CreateSurveyResponse(
-            string surveyId, 
-            string responseId, 
-            SurveyAnswerRequest surveyAnswerRequest,
-            Common.DTO.SurveyAnswerDTO surveyAnswerDTO,
-            SurveyResponseXML surveyResponseXML, 
-            ISurveyAnswerRepository iSurveyAnswerRepository)
+        public static Epi.Web.Common.DTO.SurveyAnswerDTO CreateSurveyResponse(string surveyId, string responseId, SurveyAnswerRequest surveyAnswerRequest1,
+                                          Common.DTO.SurveyAnswerDTO surveyAnswerDTO,
+                                          SurveyResponseXML surveyResponseXML, ISurveyAnswerRepository iSurveyAnswerRepository, int UserId, bool IsChild = false, string RelateResponseId = "", bool IsEditMode = false, int CurrentOrgId = -1)
         {
             bool AddRoot = false;
+            SurveyAnswerRequest surveyAnswerRequest = new SurveyAnswerRequest();
             surveyAnswerRequest.Criteria.SurveyAnswerIdList.Add(responseId.ToString());
             surveyAnswerDTO.ResponseId = responseId.ToString();
             //surveyAnswerDTO.DateCompleted = DateTime.Now;
             surveyAnswerDTO.DateCreated = DateTime.Now;
             surveyAnswerDTO.SurveyId = surveyId;
             surveyAnswerDTO.Status = (int)Constant.Status.InProgress;
-            surveyAnswerDTO.XML = surveyResponseXML.CreateResponseXml(surveyId, AddRoot,0,"").InnerXml;
+            surveyAnswerDTO.RecordSourceId = 4;
+            if (IsEditMode)
+                {
+                      surveyAnswerDTO.ParentRecordId = RelateResponseId;
+                }
+            //if (IsEditMode)
+            //    {
+            //    surveyAnswerDTO.Status = (int)Constant.Status.Complete;
+            //    }
+            //else
+            //    {
+            //    surveyAnswerDTO.Status = (int)Constant.Status.InProgress;
+            //    }
+            surveyAnswerDTO.XML = surveyResponseXML.CreateResponseXml(surveyId, AddRoot,0,"0").InnerXml;
+            surveyAnswerDTO.RelateParentId = RelateResponseId;
+            surveyAnswerRequest.Criteria.UserId = UserId;
+            surveyAnswerRequest.Criteria.UserOrganizationId = CurrentOrgId;
             surveyAnswerRequest.SurveyAnswerList.Add(surveyAnswerDTO);
-            surveyAnswerRequest.Action = Epi.Web.MVC.Constants.Constant.CREATE;  //"Create";
+            if (!IsChild)
+                {
+                surveyAnswerRequest.Action = Epi.Web.MVC.Constants.Constant.CREATE;   
+                }
+            else 
+                {
+                if (IsEditMode)
+                    {
+                   
+                    surveyAnswerRequest.SurveyAnswerList[0].ParentRecordId = null;
+                    }
+              
+                    surveyAnswerRequest.Action = Epi.Web.MVC.Constants.Constant.CREATECHILD;
+                    
+                }
+
             iSurveyAnswerRepository.SaveSurveyAnswer(surveyAnswerRequest);
 
             return surveyAnswerDTO;
         }
 
-        public static void UpdateSurveyResponse(
-            SurveyInfoModel surveyInfoModel,
-            MvcDynamicForms.Form form, 
-            SurveyAnswerRequest surveyAnswerRequest,
-            SurveyResponseXML surveyResponseXML,
-            ISurveyAnswerRepository iSurveyAnswerRepository,
-            SurveyAnswerResponse surveyAnswerResponse, 
-            string responseId, 
-            Epi.Web.Common.DTO.SurveyAnswerDTO surveyAnswerDTO, 
-            bool IsSubmited, 
-            bool IsSaved,
-            int  PageNumber)
+        public static void UpdateSurveyResponse(SurveyInfoModel surveyInfoModel,MvcDynamicForms.Form form, SurveyAnswerRequest surveyAnswerRequest,
+                                                             SurveyResponseXML surveyResponseXML,
+                                                            ISurveyAnswerRepository iSurveyAnswerRepository,
+                                                             SurveyAnswerResponse surveyAnswerResponse, string responseId, Epi.Web.Common.DTO.SurveyAnswerDTO surveyAnswerDTO, bool IsSubmited, bool IsSaved,int  PageNumber,int UserId=-1)
         {
             // 1 Get the record for the current survey response
             // 2 update the current survey response
             // 3 save the current survey response
-            
+            if (!IsSubmited)
+            {
 
                 // 2 a. update the current survey answer request
                 surveyAnswerRequest.SurveyAnswerList = surveyAnswerResponse.SurveyResponseList;
@@ -90,7 +111,7 @@ namespace Epi.Web.MVC.Utility
                 {
                     surveyAnswerRequest.SurveyAnswerList[0].XML = MergeXml(SavedXml, CurrentPageResponseXml, form.CurrentPage).ToString();
                 }
-           
+            }
                 ////Update page number before saving response XML
 
                 XDocument Xdoc = XDocument.Parse(surveyAnswerRequest.SurveyAnswerList[0].XML);
@@ -775,5 +796,25 @@ namespace Epi.Web.MVC.Utility
         }
 
 
+        //public static int GetDecryptUserId(string Id)
+        //    {
+
+        //    string DecryptedUserId = "";
+        //    try
+        //        {
+        //        DecryptedUserId = Epi.Web.Common.Security.Cryptography.Decrypt(Id);
+        //        }
+        //    catch (Exception ex)
+        //        {
+        //        FormsAuthentication.SignOut();
+        //        FormsAuthentication.RedirectToLoginPage();
+
+        //        }
+        //    int UserId = -1;
+        //    int.TryParse(DecryptedUserId, out UserId);
+
+        //    return UserId;
+        //    }
+       
     }
 }

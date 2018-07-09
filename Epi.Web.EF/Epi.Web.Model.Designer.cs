@@ -20,14 +20,31 @@ using System.Xml.Serialization;
 #region EDM Relationship Metadata
 
 [assembly: EdmRelationshipAttribute("EIWSModel", "FK_SurveyMetaData_lk_SurveyType", "lk_SurveyType", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Epi.Web.EF.lk_SurveyType), "SurveyMetaData", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Epi.Web.EF.SurveyMetaData), true)]
+[assembly: EdmRelationshipAttribute("EIWSModel", "SurveyMetaDataUser", "SurveyMetaData", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Epi.Web.EF.SurveyMetaData), "User", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Epi.Web.EF.User))]
+[assembly: EdmRelationshipAttribute("EIWSModel", "FK_ResponseGridcolumns_SurveyMetaData", "SurveyMetaData", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Epi.Web.EF.SurveyMetaData), "ResponseDisplaySetting", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Epi.Web.EF.ResponseDisplaySetting), true)]
+[assembly: EdmRelationshipAttribute("EIWSModel", "FK_SurveyMetaData_SurveyMetaData1", "SurveyMetaData", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Epi.Web.EF.SurveyMetaData), "SurveyMetaData1", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Epi.Web.EF.SurveyMetaData), true)]
+[assembly: EdmRelationshipAttribute("EIWSModel", "FK_UserOrganization_Organization", "Organization", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Epi.Web.EF.Organization), "UserOrganization", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Epi.Web.EF.UserOrganization), true)]
+[assembly: EdmRelationshipAttribute("EIWSModel", "FK_UserOrganization_Role", "Role", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Epi.Web.EF.Role), "UserOrganization", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Epi.Web.EF.UserOrganization), true)]
+[assembly: EdmRelationshipAttribute("EIWSModel", "FK_UserOrganization_User", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Epi.Web.EF.User), "UserOrganization", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Epi.Web.EF.UserOrganization), true)]
+[assembly: EdmRelationshipAttribute("EIWSModel", "FK_SurveyMetaDataTransform_SurveyMetaData", "SurveyMetaData", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Epi.Web.EF.SurveyMetaData), "SurveyMetaDataTransform", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Epi.Web.EF.SurveyMetaDataTransform), true)]
+[assembly: EdmRelationshipAttribute("EIWSModel", "FK_Datasource_SurveyMetaData1", "SurveyMetaData", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Epi.Web.EF.SurveyMetaData), "EIDatasource", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Epi.Web.EF.EIDatasource), true)]
 [assembly: EdmRelationshipAttribute("EIWSModel", "FK_SurveyResponse_lk_Status", "lk_Status", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Epi.Web.EF.lk_Status), "SurveyResponse", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Epi.Web.EF.SurveyResponse), true)]
 [assembly: EdmRelationshipAttribute("EIWSModel", "FK_SurveyResponse_SurveyMetaData", "SurveyMetaData", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Epi.Web.EF.SurveyMetaData), "SurveyResponse", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Epi.Web.EF.SurveyResponse), true)]
-[assembly: EdmRelationshipAttribute("EIWSModel", "FK_SurveyMetaData_Organization", "Organization", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Epi.Web.EF.Organization), "SurveyMetaData", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Epi.Web.EF.SurveyMetaData), true)]
+[assembly: EdmRelationshipAttribute("EIWSModel", "FK_SurveyResponse_SurveyResponse", "SurveyResponse", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Epi.Web.EF.SurveyResponse), "SurveyResponse1", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Epi.Web.EF.SurveyResponse), true)]
+[assembly: EdmRelationshipAttribute("EIWSModel", "SurveyResponseUser", "SurveyResponse", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Epi.Web.EF.SurveyResponse), "User", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Epi.Web.EF.User))]
+[assembly: EdmRelationshipAttribute("EIWSModel", "FK_SurveyResponseTracking_SurveyResponse", "SurveyResponse", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Epi.Web.EF.SurveyResponse), "SurveyResponseTracking", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Epi.Web.EF.SurveyResponseTracking), true)]
+[assembly: EdmRelationshipAttribute("EIWSModel", "SurveyMetadataOrganization", "Organization", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Epi.Web.EF.Organization), "SurveyMetaData", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Epi.Web.EF.SurveyMetaData))]
+[assembly: EdmRelationshipAttribute("EIWSModel", "FK_SurveyResponse_Organization", "Organization", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Epi.Web.EF.Organization), "SurveyResponse", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Epi.Web.EF.SurveyResponse), true)]
+[assembly: EdmRelationshipAttribute("EIWSModel", "FK_SurveyMetaData_DataAccessRules", "DataAccessRule", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Epi.Web.EF.DataAccessRule), "SurveyMetaData", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Epi.Web.EF.SurveyMetaData), true)]
+[assembly: EdmRelationshipAttribute("EIWSModel", "FK_Canvas__Datasource", "Datasource", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Epi.Web.EF.Datasource), "Canva", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Epi.Web.EF.Canva), true)]
+[assembly: EdmRelationshipAttribute("EIWSModel", "FK_Canvas_CreatorUser", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Epi.Web.EF.User), "Canva", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Epi.Web.EF.Canva), true)]
+[assembly: EdmRelationshipAttribute("EIWSModel", "FK_Datasource_Organization", "Organization", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Epi.Web.EF.Organization), "Datasource", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Epi.Web.EF.Datasource), true)]
+[assembly: EdmRelationshipAttribute("EIWSModel", "FK_CanvasUser_User", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Epi.Web.EF.User), "SharedCanvas", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Epi.Web.EF.SharedCanvas), true)]
+[assembly: EdmRelationshipAttribute("EIWSModel", "DatasourceUser", "Datasource", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Epi.Web.EF.Datasource), "User", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Epi.Web.EF.User))]
 [assembly: EdmRelationshipAttribute("EIWSModel", "FK_Address_Admin", "Admin", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Epi.Web.EF.Admin), "Address", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Epi.Web.EF.Address), true)]
 [assembly: EdmRelationshipAttribute("EIWSModel", "FK_Admin_Organization", "Organization", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Epi.Web.EF.Organization), "Admin", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Epi.Web.EF.Admin), true)]
-[assembly: EdmRelationshipAttribute("EIWSModel", "FK_Datasource_SurveyMetaData", "SurveyMetaData", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Epi.Web.EF.SurveyMetaData), "EIDatasource", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Epi.Web.EF.EIDatasource), true)]
 [assembly: EdmRelationshipAttribute("EIWSModel", "FK_SurveyResponse_lk_RecordSource", "lk_RecordSource", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(Epi.Web.EF.lk_RecordSource), "SurveyResponse", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Epi.Web.EF.SurveyResponse), true)]
-[assembly: EdmRelationshipAttribute("EIWSModel", "FK_SurveyMetaDataTransform_SurveyMetaData", "SurveyMetaData", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Epi.Web.EF.SurveyMetaData), "SurveyMetaDataTransform", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Epi.Web.EF.SurveyMetaDataTransform), true)]
+[assembly: EdmRelationshipAttribute("EIWSModel", "FK_SurveyMetaData_Organization", "Organization", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Epi.Web.EF.Organization), "SurveyMetaData", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Epi.Web.EF.SurveyMetaData), true)]
 
 #endregion
 
@@ -114,38 +131,6 @@ namespace Epi.Web.EF
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<SurveyMetaData> SurveyMetaDatas
-        {
-            get
-            {
-                if ((_SurveyMetaDatas == null))
-                {
-                    _SurveyMetaDatas = base.CreateObjectSet<SurveyMetaData>("SurveyMetaDatas");
-                }
-                return _SurveyMetaDatas;
-            }
-        }
-        private ObjectSet<SurveyMetaData> _SurveyMetaDatas;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<SurveyResponse> SurveyResponses
-        {
-            get
-            {
-                if ((_SurveyResponses == null))
-                {
-                    _SurveyResponses = base.CreateObjectSet<SurveyResponse>("SurveyResponses");
-                }
-                return _SurveyResponses;
-            }
-        }
-        private ObjectSet<SurveyResponse> _SurveyResponses;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         public ObjectSet<Organization> Organizations
         {
             get
@@ -162,66 +147,114 @@ namespace Epi.Web.EF
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<sysdiagram> sysdiagrams
+        public ObjectSet<SurveyMetaData> SurveyMetaDatas
         {
             get
             {
-                if ((_sysdiagrams == null))
+                if ((_SurveyMetaDatas == null))
                 {
-                    _sysdiagrams = base.CreateObjectSet<sysdiagram>("sysdiagrams");
+                    _SurveyMetaDatas = base.CreateObjectSet<SurveyMetaData>("SurveyMetaDatas");
                 }
-                return _sysdiagrams;
+                return _SurveyMetaDatas;
             }
         }
-        private ObjectSet<sysdiagram> _sysdiagrams;
+        private ObjectSet<SurveyMetaData> _SurveyMetaDatas;
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<Address> Addresses
+        public ObjectSet<User> Users
         {
             get
             {
-                if ((_Addresses == null))
+                if ((_Users == null))
                 {
-                    _Addresses = base.CreateObjectSet<Address>("Addresses");
+                    _Users = base.CreateObjectSet<User>("Users");
                 }
-                return _Addresses;
+                return _Users;
             }
         }
-        private ObjectSet<Address> _Addresses;
+        private ObjectSet<User> _Users;
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<State> States
+        public ObjectSet<ResponseDisplaySetting> ResponseDisplaySettings
         {
             get
             {
-                if ((_States == null))
+                if ((_ResponseDisplaySettings == null))
                 {
-                    _States = base.CreateObjectSet<State>("States");
+                    _ResponseDisplaySettings = base.CreateObjectSet<ResponseDisplaySetting>("ResponseDisplaySettings");
                 }
-                return _States;
+                return _ResponseDisplaySettings;
             }
         }
-        private ObjectSet<State> _States;
+        private ObjectSet<ResponseDisplaySetting> _ResponseDisplaySettings;
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<Admin> Admins
+        public ObjectSet<ResponseXml> ResponseXmls
         {
             get
             {
-                if ((_Admins == null))
+                if ((_ResponseXmls == null))
                 {
-                    _Admins = base.CreateObjectSet<Admin>("Admins");
+                    _ResponseXmls = base.CreateObjectSet<ResponseXml>("ResponseXmls");
                 }
-                return _Admins;
+                return _ResponseXmls;
             }
         }
-        private ObjectSet<Admin> _Admins;
+        private ObjectSet<ResponseXml> _ResponseXmls;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Role> Roles
+        {
+            get
+            {
+                if ((_Roles == null))
+                {
+                    _Roles = base.CreateObjectSet<Role>("Roles");
+                }
+                return _Roles;
+            }
+        }
+        private ObjectSet<Role> _Roles;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<UserOrganization> UserOrganizations
+        {
+            get
+            {
+                if ((_UserOrganizations == null))
+                {
+                    _UserOrganizations = base.CreateObjectSet<UserOrganization>("UserOrganizations");
+                }
+                return _UserOrganizations;
+            }
+        }
+        private ObjectSet<UserOrganization> _UserOrganizations;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<SurveyMetaDataTransform> SurveyMetaDataTransforms
+        {
+            get
+            {
+                if ((_SurveyMetaDataTransforms == null))
+                {
+                    _SurveyMetaDataTransforms = base.CreateObjectSet<SurveyMetaDataTransform>("SurveyMetaDataTransforms");
+                }
+                return _SurveyMetaDataTransforms;
+            }
+        }
+        private ObjectSet<SurveyMetaDataTransform> _SurveyMetaDataTransforms;
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -258,6 +291,22 @@ namespace Epi.Web.EF
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
+        public ObjectSet<SurveyResponse> SurveyResponses
+        {
+            get
+            {
+                if ((_SurveyResponses == null))
+                {
+                    _SurveyResponses = base.CreateObjectSet<SurveyResponse>("SurveyResponses");
+                }
+                return _SurveyResponses;
+            }
+        }
+        private ObjectSet<SurveyResponse> _SurveyResponses;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
         public ObjectSet<SurveyMetaDataView> SurveyMetaDataViews
         {
             get
@@ -274,34 +323,162 @@ namespace Epi.Web.EF
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<ErrorLog> ErrorLogs
+        public ObjectSet<SurveyResponseTracking> SurveyResponseTrackings
         {
             get
             {
-                if ((_ErrorLogs == null))
+                if ((_SurveyResponseTrackings == null))
                 {
-                    _ErrorLogs = base.CreateObjectSet<ErrorLog>("ErrorLogs");
+                    _SurveyResponseTrackings = base.CreateObjectSet<SurveyResponseTracking>("SurveyResponseTrackings");
                 }
-                return _ErrorLogs;
+                return _SurveyResponseTrackings;
             }
         }
-        private ObjectSet<ErrorLog> _ErrorLogs;
+        private ObjectSet<SurveyResponseTracking> _SurveyResponseTrackings;
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<SurveyMetaDataTransform> SurveyMetaDataTransforms
+        public ObjectSet<familyset> familysets
         {
             get
             {
-                if ((_SurveyMetaDataTransforms == null))
+                if ((_familysets == null))
                 {
-                    _SurveyMetaDataTransforms = base.CreateObjectSet<SurveyMetaDataTransform>("SurveyMetaDataTransforms");
+                    _familysets = base.CreateObjectSet<familyset>("familysets");
                 }
-                return _SurveyMetaDataTransforms;
+                return _familysets;
             }
         }
-        private ObjectSet<SurveyMetaDataTransform> _SurveyMetaDataTransforms;
+        private ObjectSet<familyset> _familysets;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<DataAccessRule> DataAccessRules
+        {
+            get
+            {
+                if ((_DataAccessRules == null))
+                {
+                    _DataAccessRules = base.CreateObjectSet<DataAccessRule>("DataAccessRules");
+                }
+                return _DataAccessRules;
+            }
+        }
+        private ObjectSet<DataAccessRule> _DataAccessRules;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Canva> Canvas
+        {
+            get
+            {
+                if ((_Canvas == null))
+                {
+                    _Canvas = base.CreateObjectSet<Canva>("Canvas");
+                }
+                return _Canvas;
+            }
+        }
+        private ObjectSet<Canva> _Canvas;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Datasource> Datasources
+        {
+            get
+            {
+                if ((_Datasources == null))
+                {
+                    _Datasources = base.CreateObjectSet<Datasource>("Datasources");
+                }
+                return _Datasources;
+            }
+        }
+        private ObjectSet<Datasource> _Datasources;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<SharedCanvas> SharedCanvases
+        {
+            get
+            {
+                if ((_SharedCanvases == null))
+                {
+                    _SharedCanvases = base.CreateObjectSet<SharedCanvas>("SharedCanvases");
+                }
+                return _SharedCanvases;
+            }
+        }
+        private ObjectSet<SharedCanvas> _SharedCanvases;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Address> Addresses
+        {
+            get
+            {
+                if ((_Addresses == null))
+                {
+                    _Addresses = base.CreateObjectSet<Address>("Addresses");
+                }
+                return _Addresses;
+            }
+        }
+        private ObjectSet<Address> _Addresses;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Admin> Admins
+        {
+            get
+            {
+                if ((_Admins == null))
+                {
+                    _Admins = base.CreateObjectSet<Admin>("Admins");
+                }
+                return _Admins;
+            }
+        }
+        private ObjectSet<Admin> _Admins;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<SourceTable> SourceTables
+        {
+            get
+            {
+                if ((_SourceTables == null))
+                {
+                    _SourceTables = base.CreateObjectSet<SourceTable>("SourceTables");
+                }
+                return _SourceTables;
+            }
+        }
+        private ObjectSet<SourceTable> _SourceTables;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<State> States
+        {
+            get
+            {
+                if ((_States == null))
+                {
+                    _States = base.CreateObjectSet<State>("States");
+                }
+                return _States;
+            }
+        }
+        private ObjectSet<State> _States;
 
         #endregion
 
@@ -324,22 +501,6 @@ namespace Epi.Web.EF
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the SurveyMetaDatas EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToSurveyMetaDatas(SurveyMetaData surveyMetaData)
-        {
-            base.AddObject("SurveyMetaDatas", surveyMetaData);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the SurveyResponses EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToSurveyResponses(SurveyResponse surveyResponse)
-        {
-            base.AddObject("SurveyResponses", surveyResponse);
-        }
-    
-        /// <summary>
         /// Deprecated Method for adding a new object to the Organizations EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddToOrganizations(Organization organization)
@@ -348,35 +509,59 @@ namespace Epi.Web.EF
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the sysdiagrams EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// Deprecated Method for adding a new object to the SurveyMetaDatas EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
-        public void AddTosysdiagrams(sysdiagram sysdiagram)
+        public void AddToSurveyMetaDatas(SurveyMetaData surveyMetaData)
         {
-            base.AddObject("sysdiagrams", sysdiagram);
+            base.AddObject("SurveyMetaDatas", surveyMetaData);
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the Addresses EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// Deprecated Method for adding a new object to the Users EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
-        public void AddToAddresses(Address address)
+        public void AddToUsers(User user)
         {
-            base.AddObject("Addresses", address);
+            base.AddObject("Users", user);
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the States EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// Deprecated Method for adding a new object to the ResponseDisplaySettings EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
-        public void AddToStates(State state)
+        public void AddToResponseDisplaySettings(ResponseDisplaySetting responseDisplaySetting)
         {
-            base.AddObject("States", state);
+            base.AddObject("ResponseDisplaySettings", responseDisplaySetting);
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the Admins EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// Deprecated Method for adding a new object to the ResponseXmls EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
-        public void AddToAdmins(Admin admin)
+        public void AddToResponseXmls(ResponseXml responseXml)
         {
-            base.AddObject("Admins", admin);
+            base.AddObject("ResponseXmls", responseXml);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Roles EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToRoles(Role role)
+        {
+            base.AddObject("Roles", role);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the UserOrganizations EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToUserOrganizations(UserOrganization userOrganization)
+        {
+            base.AddObject("UserOrganizations", userOrganization);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the SurveyMetaDataTransforms EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToSurveyMetaDataTransforms(SurveyMetaDataTransform surveyMetaDataTransform)
+        {
+            base.AddObject("SurveyMetaDataTransforms", surveyMetaDataTransform);
         }
     
         /// <summary>
@@ -396,6 +581,14 @@ namespace Epi.Web.EF
         }
     
         /// <summary>
+        /// Deprecated Method for adding a new object to the SurveyResponses EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToSurveyResponses(SurveyResponse surveyResponse)
+        {
+            base.AddObject("SurveyResponses", surveyResponse);
+        }
+    
+        /// <summary>
         /// Deprecated Method for adding a new object to the SurveyMetaDataViews EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddToSurveyMetaDataViews(SurveyMetaDataView surveyMetaDataView)
@@ -404,19 +597,457 @@ namespace Epi.Web.EF
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the ErrorLogs EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// Deprecated Method for adding a new object to the SurveyResponseTrackings EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
-        public void AddToErrorLogs(ErrorLog errorLog)
+        public void AddToSurveyResponseTrackings(SurveyResponseTracking surveyResponseTracking)
         {
-            base.AddObject("ErrorLogs", errorLog);
+            base.AddObject("SurveyResponseTrackings", surveyResponseTracking);
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the SurveyMetaDataTransforms EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// Deprecated Method for adding a new object to the familysets EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
-        public void AddToSurveyMetaDataTransforms(SurveyMetaDataTransform surveyMetaDataTransform)
+        public void AddTofamilysets(familyset familyset)
         {
-            base.AddObject("SurveyMetaDataTransforms", surveyMetaDataTransform);
+            base.AddObject("familysets", familyset);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the DataAccessRules EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToDataAccessRules(DataAccessRule dataAccessRule)
+        {
+            base.AddObject("DataAccessRules", dataAccessRule);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Canvas EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToCanvas(Canva canva)
+        {
+            base.AddObject("Canvas", canva);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Datasources EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToDatasources(Datasource datasource)
+        {
+            base.AddObject("Datasources", datasource);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the SharedCanvases EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToSharedCanvases(SharedCanvas sharedCanvas)
+        {
+            base.AddObject("SharedCanvases", sharedCanvas);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Addresses EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToAddresses(Address address)
+        {
+            base.AddObject("Addresses", address);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Admins EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToAdmins(Admin admin)
+        {
+            base.AddObject("Admins", admin);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the SourceTables EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToSourceTables(SourceTable sourceTable)
+        {
+            base.AddObject("SourceTables", sourceTable);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the States EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToStates(State state)
+        {
+            base.AddObject("States", state);
+        }
+
+        #endregion
+
+        #region Function Imports
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        /// <param name="datasourceServerName">No Metadata Documentation available.</param>
+        /// <param name="databaseType">No Metadata Documentation available.</param>
+        /// <param name="initialCatalog">No Metadata Documentation available.</param>
+        /// <param name="persistSecurityInfo">No Metadata Documentation available.</param>
+        /// <param name="databaseUserID">No Metadata Documentation available.</param>
+        /// <param name="surveyID">No Metadata Documentation available.</param>
+        /// <param name="password">No Metadata Documentation available.</param>
+        public int usp_AddDatasource(global::System.String datasourceServerName, global::System.String databaseType, global::System.String initialCatalog, global::System.String persistSecurityInfo, global::System.String databaseUserID, Nullable<global::System.Guid> surveyID, global::System.String password)
+        {
+            ObjectParameter datasourceServerNameParameter;
+            if (datasourceServerName != null)
+            {
+                datasourceServerNameParameter = new ObjectParameter("DatasourceServerName", datasourceServerName);
+            }
+            else
+            {
+                datasourceServerNameParameter = new ObjectParameter("DatasourceServerName", typeof(global::System.String));
+            }
+    
+            ObjectParameter databaseTypeParameter;
+            if (databaseType != null)
+            {
+                databaseTypeParameter = new ObjectParameter("DatabaseType", databaseType);
+            }
+            else
+            {
+                databaseTypeParameter = new ObjectParameter("DatabaseType", typeof(global::System.String));
+            }
+    
+            ObjectParameter initialCatalogParameter;
+            if (initialCatalog != null)
+            {
+                initialCatalogParameter = new ObjectParameter("InitialCatalog", initialCatalog);
+            }
+            else
+            {
+                initialCatalogParameter = new ObjectParameter("InitialCatalog", typeof(global::System.String));
+            }
+    
+            ObjectParameter persistSecurityInfoParameter;
+            if (persistSecurityInfo != null)
+            {
+                persistSecurityInfoParameter = new ObjectParameter("PersistSecurityInfo", persistSecurityInfo);
+            }
+            else
+            {
+                persistSecurityInfoParameter = new ObjectParameter("PersistSecurityInfo", typeof(global::System.String));
+            }
+    
+            ObjectParameter databaseUserIDParameter;
+            if (databaseUserID != null)
+            {
+                databaseUserIDParameter = new ObjectParameter("DatabaseUserID", databaseUserID);
+            }
+            else
+            {
+                databaseUserIDParameter = new ObjectParameter("DatabaseUserID", typeof(global::System.String));
+            }
+    
+            ObjectParameter surveyIDParameter;
+            if (surveyID.HasValue)
+            {
+                surveyIDParameter = new ObjectParameter("SurveyID", surveyID);
+            }
+            else
+            {
+                surveyIDParameter = new ObjectParameter("SurveyID", typeof(global::System.Guid));
+            }
+    
+            ObjectParameter passwordParameter;
+            if (password != null)
+            {
+                passwordParameter = new ObjectParameter("Password", password);
+            }
+            else
+            {
+                passwordParameter = new ObjectParameter("Password", typeof(global::System.String));
+            }
+    
+            return base.ExecuteFunction("usp_AddDatasource", datasourceServerNameParameter, databaseTypeParameter, initialCatalogParameter, persistSecurityInfoParameter, databaseUserIDParameter, surveyIDParameter, passwordParameter);
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        /// <param name="responseId">No Metadata Documentation available.</param>
+        /// <param name="surveyId">No Metadata Documentation available.</param>
+        /// <param name="isResponsePresent">No Metadata Documentation available.</param>
+        public int usp_soft_delete_Epi7_record(Nullable<global::System.Guid> responseId, Nullable<global::System.Guid> surveyId, Nullable<global::System.Boolean> isResponsePresent)
+        {
+            ObjectParameter responseIdParameter;
+            if (responseId.HasValue)
+            {
+                responseIdParameter = new ObjectParameter("ResponseId", responseId);
+            }
+            else
+            {
+                responseIdParameter = new ObjectParameter("ResponseId", typeof(global::System.Guid));
+            }
+    
+            ObjectParameter surveyIdParameter;
+            if (surveyId.HasValue)
+            {
+                surveyIdParameter = new ObjectParameter("SurveyId", surveyId);
+            }
+            else
+            {
+                surveyIdParameter = new ObjectParameter("SurveyId", typeof(global::System.Guid));
+            }
+    
+            ObjectParameter isResponsePresentParameter;
+            if (isResponsePresent.HasValue)
+            {
+                isResponsePresentParameter = new ObjectParameter("IsResponsePresent", isResponsePresent);
+            }
+            else
+            {
+                isResponsePresentParameter = new ObjectParameter("IsResponsePresent", typeof(global::System.Boolean));
+            }
+    
+            return base.ExecuteFunction("usp_soft_delete_Epi7_record", responseIdParameter, surveyIdParameter, isResponsePresentParameter);
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectResult<usp_GetErrorInfo_Result> usp_GetErrorInfo()
+        {
+            return base.ExecuteFunction<usp_GetErrorInfo_Result>("usp_GetErrorInfo");
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        /// <param name="surveyId">No Metadata Documentation available.</param>
+        /// <param name="responseId">No Metadata Documentation available.</param>
+        /// <param name="comment">No Metadata Documentation available.</param>
+        /// <param name="errorText">No Metadata Documentation available.</param>
+        /// <param name="errorText2">No Metadata Documentation available.</param>
+        /// <param name="errorNumber">No Metadata Documentation available.</param>
+        /// <param name="errorSeverity">No Metadata Documentation available.</param>
+        /// <param name="errorState">No Metadata Documentation available.</param>
+        /// <param name="errorProcedure">No Metadata Documentation available.</param>
+        /// <param name="errorLine">No Metadata Documentation available.</param>
+        /// <param name="errorMessage">No Metadata Documentation available.</param>
+        /// <param name="xml">No Metadata Documentation available.</param>
+        public int usp_log_to_errorlog(Nullable<global::System.Guid> surveyId, Nullable<global::System.Guid> responseId, global::System.String comment, global::System.String errorText, global::System.String errorText2, Nullable<global::System.Int32> errorNumber, Nullable<global::System.Int32> errorSeverity, Nullable<global::System.Int32> errorState, global::System.String errorProcedure, Nullable<global::System.Int32> errorLine, global::System.String errorMessage, global::System.String xml)
+        {
+            ObjectParameter surveyIdParameter;
+            if (surveyId.HasValue)
+            {
+                surveyIdParameter = new ObjectParameter("SurveyId", surveyId);
+            }
+            else
+            {
+                surveyIdParameter = new ObjectParameter("SurveyId", typeof(global::System.Guid));
+            }
+    
+            ObjectParameter responseIdParameter;
+            if (responseId.HasValue)
+            {
+                responseIdParameter = new ObjectParameter("ResponseId", responseId);
+            }
+            else
+            {
+                responseIdParameter = new ObjectParameter("ResponseId", typeof(global::System.Guid));
+            }
+    
+            ObjectParameter commentParameter;
+            if (comment != null)
+            {
+                commentParameter = new ObjectParameter("Comment", comment);
+            }
+            else
+            {
+                commentParameter = new ObjectParameter("Comment", typeof(global::System.String));
+            }
+    
+            ObjectParameter errorTextParameter;
+            if (errorText != null)
+            {
+                errorTextParameter = new ObjectParameter("ErrorText", errorText);
+            }
+            else
+            {
+                errorTextParameter = new ObjectParameter("ErrorText", typeof(global::System.String));
+            }
+    
+            ObjectParameter errorText2Parameter;
+            if (errorText2 != null)
+            {
+                errorText2Parameter = new ObjectParameter("ErrorText2", errorText2);
+            }
+            else
+            {
+                errorText2Parameter = new ObjectParameter("ErrorText2", typeof(global::System.String));
+            }
+    
+            ObjectParameter errorNumberParameter;
+            if (errorNumber.HasValue)
+            {
+                errorNumberParameter = new ObjectParameter("ErrorNumber", errorNumber);
+            }
+            else
+            {
+                errorNumberParameter = new ObjectParameter("ErrorNumber", typeof(global::System.Int32));
+            }
+    
+            ObjectParameter errorSeverityParameter;
+            if (errorSeverity.HasValue)
+            {
+                errorSeverityParameter = new ObjectParameter("ErrorSeverity", errorSeverity);
+            }
+            else
+            {
+                errorSeverityParameter = new ObjectParameter("ErrorSeverity", typeof(global::System.Int32));
+            }
+    
+            ObjectParameter errorStateParameter;
+            if (errorState.HasValue)
+            {
+                errorStateParameter = new ObjectParameter("ErrorState", errorState);
+            }
+            else
+            {
+                errorStateParameter = new ObjectParameter("ErrorState", typeof(global::System.Int32));
+            }
+    
+            ObjectParameter errorProcedureParameter;
+            if (errorProcedure != null)
+            {
+                errorProcedureParameter = new ObjectParameter("ErrorProcedure", errorProcedure);
+            }
+            else
+            {
+                errorProcedureParameter = new ObjectParameter("ErrorProcedure", typeof(global::System.String));
+            }
+    
+            ObjectParameter errorLineParameter;
+            if (errorLine.HasValue)
+            {
+                errorLineParameter = new ObjectParameter("ErrorLine", errorLine);
+            }
+            else
+            {
+                errorLineParameter = new ObjectParameter("ErrorLine", typeof(global::System.Int32));
+            }
+    
+            ObjectParameter errorMessageParameter;
+            if (errorMessage != null)
+            {
+                errorMessageParameter = new ObjectParameter("ErrorMessage", errorMessage);
+            }
+            else
+            {
+                errorMessageParameter = new ObjectParameter("ErrorMessage", typeof(global::System.String));
+            }
+    
+            ObjectParameter xmlParameter;
+            if (xml != null)
+            {
+                xmlParameter = new ObjectParameter("Xml", xml);
+            }
+            else
+            {
+                xmlParameter = new ObjectParameter("Xml", typeof(global::System.String));
+            }
+    
+            return base.ExecuteFunction("usp_log_to_errorlog", surveyIdParameter, responseIdParameter, commentParameter, errorTextParameter, errorText2Parameter, errorNumberParameter, errorSeverityParameter, errorStateParameter, errorProcedureParameter, errorLineParameter, errorMessageParameter, xmlParameter);
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        /// <param name="responseId">No Metadata Documentation available.</param>
+        /// <param name="surveyId">No Metadata Documentation available.</param>
+        /// <param name="responseXML">No Metadata Documentation available.</param>
+        /// <param name="isSQLProject">No Metadata Documentation available.</param>
+        /// <param name="isDraftMode">No Metadata Documentation available.</param>
+        /// <param name="statusId">No Metadata Documentation available.</param>
+        /// <param name="isSQLResponse">No Metadata Documentation available.</param>
+        /// <param name="firstSaveLogonName">No Metadata Documentation available.</param>
+        public int usp_process_sql_server_project_response(Nullable<global::System.Guid> responseId, Nullable<global::System.Guid> surveyId, global::System.String responseXML, Nullable<global::System.Boolean> isSQLProject, Nullable<global::System.Boolean> isDraftMode, Nullable<global::System.Int32> statusId, Nullable<global::System.Boolean> isSQLResponse, global::System.String firstSaveLogonName)
+        {
+            ObjectParameter responseIdParameter;
+            if (responseId.HasValue)
+            {
+                responseIdParameter = new ObjectParameter("ResponseId", responseId);
+            }
+            else
+            {
+                responseIdParameter = new ObjectParameter("ResponseId", typeof(global::System.Guid));
+            }
+    
+            ObjectParameter surveyIdParameter;
+            if (surveyId.HasValue)
+            {
+                surveyIdParameter = new ObjectParameter("SurveyId", surveyId);
+            }
+            else
+            {
+                surveyIdParameter = new ObjectParameter("SurveyId", typeof(global::System.Guid));
+            }
+    
+            ObjectParameter responseXMLParameter;
+            if (responseXML != null)
+            {
+                responseXMLParameter = new ObjectParameter("ResponseXML", responseXML);
+            }
+            else
+            {
+                responseXMLParameter = new ObjectParameter("ResponseXML", typeof(global::System.String));
+            }
+    
+            ObjectParameter isSQLProjectParameter;
+            if (isSQLProject.HasValue)
+            {
+                isSQLProjectParameter = new ObjectParameter("IsSQLProject", isSQLProject);
+            }
+            else
+            {
+                isSQLProjectParameter = new ObjectParameter("IsSQLProject", typeof(global::System.Boolean));
+            }
+    
+            ObjectParameter isDraftModeParameter;
+            if (isDraftMode.HasValue)
+            {
+                isDraftModeParameter = new ObjectParameter("IsDraftMode", isDraftMode);
+            }
+            else
+            {
+                isDraftModeParameter = new ObjectParameter("IsDraftMode", typeof(global::System.Boolean));
+            }
+    
+            ObjectParameter statusIdParameter;
+            if (statusId.HasValue)
+            {
+                statusIdParameter = new ObjectParameter("StatusId", statusId);
+            }
+            else
+            {
+                statusIdParameter = new ObjectParameter("StatusId", typeof(global::System.Int32));
+            }
+    
+            ObjectParameter isSQLResponseParameter;
+            if (isSQLResponse.HasValue)
+            {
+                isSQLResponseParameter = new ObjectParameter("IsSQLResponse", isSQLResponse);
+            }
+            else
+            {
+                isSQLResponseParameter = new ObjectParameter("IsSQLResponse", typeof(global::System.Boolean));
+            }
+    
+            ObjectParameter firstSaveLogonNameParameter;
+            if (firstSaveLogonName != null)
+            {
+                firstSaveLogonNameParameter = new ObjectParameter("FirstSaveLogonName", firstSaveLogonName);
+            }
+            else
+            {
+                firstSaveLogonNameParameter = new ObjectParameter("FirstSaveLogonName", typeof(global::System.String));
+            }
+    
+            return base.ExecuteFunction("usp_process_sql_server_project_response", responseIdParameter, surveyIdParameter, responseXMLParameter, isSQLProjectParameter, isDraftModeParameter, statusIdParameter, isSQLResponseParameter, firstSaveLogonNameParameter);
         }
 
         #endregion
@@ -976,6 +1607,990 @@ namespace Epi.Web.EF
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="EIWSModel", Name="Canva")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class Canva : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new Canva object.
+        /// </summary>
+        /// <param name="canvasID">Initial value of the CanvasID property.</param>
+        /// <param name="canvasGUID">Initial value of the CanvasGUID property.</param>
+        /// <param name="canvasName">Initial value of the CanvasName property.</param>
+        /// <param name="userID">Initial value of the UserID property.</param>
+        /// <param name="createdDate">Initial value of the CreatedDate property.</param>
+        /// <param name="modifiedDate">Initial value of the ModifiedDate property.</param>
+        /// <param name="datasourceID">Initial value of the DatasourceID property.</param>
+        /// <param name="canvasContent">Initial value of the CanvasContent property.</param>
+        public static Canva CreateCanva(global::System.Int32 canvasID, global::System.Guid canvasGUID, global::System.String canvasName, global::System.Int32 userID, global::System.DateTime createdDate, global::System.DateTime modifiedDate, global::System.Int32 datasourceID, global::System.String canvasContent)
+        {
+            Canva canva = new Canva();
+            canva.CanvasID = canvasID;
+            canva.CanvasGUID = canvasGUID;
+            canva.CanvasName = canvasName;
+            canva.UserID = userID;
+            canva.CreatedDate = createdDate;
+            canva.ModifiedDate = modifiedDate;
+            canva.DatasourceID = datasourceID;
+            canva.CanvasContent = canvasContent;
+            return canva;
+        }
+
+        #endregion
+
+        #region Simple Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 CanvasID
+        {
+            get
+            {
+                return _CanvasID;
+            }
+            set
+            {
+                if (_CanvasID != value)
+                {
+                    OnCanvasIDChanging(value);
+                    ReportPropertyChanging("CanvasID");
+                    _CanvasID = StructuralObject.SetValidValue(value, "CanvasID");
+                    ReportPropertyChanged("CanvasID");
+                    OnCanvasIDChanged();
+                }
+            }
+        }
+        private global::System.Int32 _CanvasID;
+        partial void OnCanvasIDChanging(global::System.Int32 value);
+        partial void OnCanvasIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Guid CanvasGUID
+        {
+            get
+            {
+                return _CanvasGUID;
+            }
+            set
+            {
+                OnCanvasGUIDChanging(value);
+                ReportPropertyChanging("CanvasGUID");
+                _CanvasGUID = StructuralObject.SetValidValue(value, "CanvasGUID");
+                ReportPropertyChanged("CanvasGUID");
+                OnCanvasGUIDChanged();
+            }
+        }
+        private global::System.Guid _CanvasGUID;
+        partial void OnCanvasGUIDChanging(global::System.Guid value);
+        partial void OnCanvasGUIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String CanvasName
+        {
+            get
+            {
+                return _CanvasName;
+            }
+            set
+            {
+                OnCanvasNameChanging(value);
+                ReportPropertyChanging("CanvasName");
+                _CanvasName = StructuralObject.SetValidValue(value, false, "CanvasName");
+                ReportPropertyChanged("CanvasName");
+                OnCanvasNameChanged();
+            }
+        }
+        private global::System.String _CanvasName;
+        partial void OnCanvasNameChanging(global::System.String value);
+        partial void OnCanvasNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 UserID
+        {
+            get
+            {
+                return _UserID;
+            }
+            set
+            {
+                OnUserIDChanging(value);
+                ReportPropertyChanging("UserID");
+                _UserID = StructuralObject.SetValidValue(value, "UserID");
+                ReportPropertyChanged("UserID");
+                OnUserIDChanged();
+            }
+        }
+        private global::System.Int32 _UserID;
+        partial void OnUserIDChanging(global::System.Int32 value);
+        partial void OnUserIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String CanvasDescription
+        {
+            get
+            {
+                return _CanvasDescription;
+            }
+            set
+            {
+                OnCanvasDescriptionChanging(value);
+                ReportPropertyChanging("CanvasDescription");
+                _CanvasDescription = StructuralObject.SetValidValue(value, true, "CanvasDescription");
+                ReportPropertyChanged("CanvasDescription");
+                OnCanvasDescriptionChanged();
+            }
+        }
+        private global::System.String _CanvasDescription;
+        partial void OnCanvasDescriptionChanging(global::System.String value);
+        partial void OnCanvasDescriptionChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime CreatedDate
+        {
+            get
+            {
+                return _CreatedDate;
+            }
+            set
+            {
+                OnCreatedDateChanging(value);
+                ReportPropertyChanging("CreatedDate");
+                _CreatedDate = StructuralObject.SetValidValue(value, "CreatedDate");
+                ReportPropertyChanged("CreatedDate");
+                OnCreatedDateChanged();
+            }
+        }
+        private global::System.DateTime _CreatedDate;
+        partial void OnCreatedDateChanging(global::System.DateTime value);
+        partial void OnCreatedDateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime ModifiedDate
+        {
+            get
+            {
+                return _ModifiedDate;
+            }
+            set
+            {
+                OnModifiedDateChanging(value);
+                ReportPropertyChanging("ModifiedDate");
+                _ModifiedDate = StructuralObject.SetValidValue(value, "ModifiedDate");
+                ReportPropertyChanged("ModifiedDate");
+                OnModifiedDateChanged();
+            }
+        }
+        private global::System.DateTime _ModifiedDate;
+        partial void OnModifiedDateChanging(global::System.DateTime value);
+        partial void OnModifiedDateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 DatasourceID
+        {
+            get
+            {
+                return _DatasourceID;
+            }
+            set
+            {
+                OnDatasourceIDChanging(value);
+                ReportPropertyChanging("DatasourceID");
+                _DatasourceID = StructuralObject.SetValidValue(value, "DatasourceID");
+                ReportPropertyChanged("DatasourceID");
+                OnDatasourceIDChanged();
+            }
+        }
+        private global::System.Int32 _DatasourceID;
+        partial void OnDatasourceIDChanging(global::System.Int32 value);
+        partial void OnDatasourceIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String CanvasContent
+        {
+            get
+            {
+                return _CanvasContent;
+            }
+            set
+            {
+                OnCanvasContentChanging(value);
+                ReportPropertyChanging("CanvasContent");
+                _CanvasContent = StructuralObject.SetValidValue(value, false, "CanvasContent");
+                ReportPropertyChanged("CanvasContent");
+                OnCanvasContentChanged();
+            }
+        }
+        private global::System.String _CanvasContent;
+        partial void OnCanvasContentChanging(global::System.String value);
+        partial void OnCanvasContentChanged();
+
+        #endregion
+
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("EIWSModel", "FK_Canvas__Datasource", "Datasource")]
+        public Datasource Datasource
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Datasource>("EIWSModel.FK_Canvas__Datasource", "Datasource").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Datasource>("EIWSModel.FK_Canvas__Datasource", "Datasource").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Datasource> DatasourceReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Datasource>("EIWSModel.FK_Canvas__Datasource", "Datasource");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Datasource>("EIWSModel.FK_Canvas__Datasource", "Datasource", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("EIWSModel", "FK_Canvas_CreatorUser", "User")]
+        public User User
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("EIWSModel.FK_Canvas_CreatorUser", "User").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("EIWSModel.FK_Canvas_CreatorUser", "User").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<User> UserReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("EIWSModel.FK_Canvas_CreatorUser", "User");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("EIWSModel.FK_Canvas_CreatorUser", "User", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="EIWSModel", Name="DataAccessRule")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class DataAccessRule : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new DataAccessRule object.
+        /// </summary>
+        /// <param name="ruleId">Initial value of the RuleId property.</param>
+        public static DataAccessRule CreateDataAccessRule(global::System.Int32 ruleId)
+        {
+            DataAccessRule dataAccessRule = new DataAccessRule();
+            dataAccessRule.RuleId = ruleId;
+            return dataAccessRule;
+        }
+
+        #endregion
+
+        #region Simple Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 RuleId
+        {
+            get
+            {
+                return _RuleId;
+            }
+            set
+            {
+                if (_RuleId != value)
+                {
+                    OnRuleIdChanging(value);
+                    ReportPropertyChanging("RuleId");
+                    _RuleId = StructuralObject.SetValidValue(value, "RuleId");
+                    ReportPropertyChanged("RuleId");
+                    OnRuleIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _RuleId;
+        partial void OnRuleIdChanging(global::System.Int32 value);
+        partial void OnRuleIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String RuleName
+        {
+            get
+            {
+                return _RuleName;
+            }
+            set
+            {
+                OnRuleNameChanging(value);
+                ReportPropertyChanging("RuleName");
+                _RuleName = StructuralObject.SetValidValue(value, true, "RuleName");
+                ReportPropertyChanged("RuleName");
+                OnRuleNameChanged();
+            }
+        }
+        private global::System.String _RuleName;
+        partial void OnRuleNameChanging(global::System.String value);
+        partial void OnRuleNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String RuleDescription
+        {
+            get
+            {
+                return _RuleDescription;
+            }
+            set
+            {
+                OnRuleDescriptionChanging(value);
+                ReportPropertyChanging("RuleDescription");
+                _RuleDescription = StructuralObject.SetValidValue(value, true, "RuleDescription");
+                ReportPropertyChanged("RuleDescription");
+                OnRuleDescriptionChanged();
+            }
+        }
+        private global::System.String _RuleDescription;
+        partial void OnRuleDescriptionChanging(global::System.String value);
+        partial void OnRuleDescriptionChanged();
+
+        #endregion
+
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("EIWSModel", "FK_SurveyMetaData_DataAccessRules", "SurveyMetaData")]
+        public EntityCollection<SurveyMetaData> SurveyMetaDatas
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<SurveyMetaData>("EIWSModel.FK_SurveyMetaData_DataAccessRules", "SurveyMetaData");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<SurveyMetaData>("EIWSModel.FK_SurveyMetaData_DataAccessRules", "SurveyMetaData", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="EIWSModel", Name="Datasource")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class Datasource : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new Datasource object.
+        /// </summary>
+        /// <param name="datasourceID">Initial value of the DatasourceID property.</param>
+        /// <param name="organizationID">Initial value of the OrganizationID property.</param>
+        /// <param name="databaseType">Initial value of the DatabaseType property.</param>
+        /// <param name="eIWSDatasource">Initial value of the EIWSDatasource property.</param>
+        /// <param name="databaseObject">Initial value of the DatabaseObject property.</param>
+        /// <param name="active">Initial value of the active property.</param>
+        public static Datasource CreateDatasource(global::System.Int32 datasourceID, global::System.Int32 organizationID, global::System.String databaseType, global::System.Boolean eIWSDatasource, global::System.String databaseObject, global::System.Boolean active)
+        {
+            Datasource datasource = new Datasource();
+            datasource.DatasourceID = datasourceID;
+            datasource.OrganizationID = organizationID;
+            datasource.DatabaseType = databaseType;
+            datasource.EIWSDatasource = eIWSDatasource;
+            datasource.DatabaseObject = databaseObject;
+            datasource.active = active;
+            return datasource;
+        }
+
+        #endregion
+
+        #region Simple Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 DatasourceID
+        {
+            get
+            {
+                return _DatasourceID;
+            }
+            set
+            {
+                if (_DatasourceID != value)
+                {
+                    OnDatasourceIDChanging(value);
+                    ReportPropertyChanging("DatasourceID");
+                    _DatasourceID = StructuralObject.SetValidValue(value, "DatasourceID");
+                    ReportPropertyChanged("DatasourceID");
+                    OnDatasourceIDChanged();
+                }
+            }
+        }
+        private global::System.Int32 _DatasourceID;
+        partial void OnDatasourceIDChanging(global::System.Int32 value);
+        partial void OnDatasourceIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String DatasourceName
+        {
+            get
+            {
+                return _DatasourceName;
+            }
+            set
+            {
+                OnDatasourceNameChanging(value);
+                ReportPropertyChanging("DatasourceName");
+                _DatasourceName = StructuralObject.SetValidValue(value, true, "DatasourceName");
+                ReportPropertyChanged("DatasourceName");
+                OnDatasourceNameChanged();
+            }
+        }
+        private global::System.String _DatasourceName;
+        partial void OnDatasourceNameChanging(global::System.String value);
+        partial void OnDatasourceNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 OrganizationID
+        {
+            get
+            {
+                return _OrganizationID;
+            }
+            set
+            {
+                OnOrganizationIDChanging(value);
+                ReportPropertyChanging("OrganizationID");
+                _OrganizationID = StructuralObject.SetValidValue(value, "OrganizationID");
+                ReportPropertyChanged("OrganizationID");
+                OnOrganizationIDChanged();
+            }
+        }
+        private global::System.Int32 _OrganizationID;
+        partial void OnOrganizationIDChanging(global::System.Int32 value);
+        partial void OnOrganizationIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String DatasourceServerName
+        {
+            get
+            {
+                return _DatasourceServerName;
+            }
+            set
+            {
+                OnDatasourceServerNameChanging(value);
+                ReportPropertyChanging("DatasourceServerName");
+                _DatasourceServerName = StructuralObject.SetValidValue(value, true, "DatasourceServerName");
+                ReportPropertyChanged("DatasourceServerName");
+                OnDatasourceServerNameChanged();
+            }
+        }
+        private global::System.String _DatasourceServerName;
+        partial void OnDatasourceServerNameChanging(global::System.String value);
+        partial void OnDatasourceServerNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String DatabaseType
+        {
+            get
+            {
+                return _DatabaseType;
+            }
+            set
+            {
+                OnDatabaseTypeChanging(value);
+                ReportPropertyChanging("DatabaseType");
+                _DatabaseType = StructuralObject.SetValidValue(value, false, "DatabaseType");
+                ReportPropertyChanged("DatabaseType");
+                OnDatabaseTypeChanged();
+            }
+        }
+        private global::System.String _DatabaseType;
+        partial void OnDatabaseTypeChanging(global::System.String value);
+        partial void OnDatabaseTypeChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String InitialCatalog
+        {
+            get
+            {
+                return _InitialCatalog;
+            }
+            set
+            {
+                OnInitialCatalogChanging(value);
+                ReportPropertyChanging("InitialCatalog");
+                _InitialCatalog = StructuralObject.SetValidValue(value, true, "InitialCatalog");
+                ReportPropertyChanged("InitialCatalog");
+                OnInitialCatalogChanged();
+            }
+        }
+        private global::System.String _InitialCatalog;
+        partial void OnInitialCatalogChanging(global::System.String value);
+        partial void OnInitialCatalogChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String PersistSecurityInfo
+        {
+            get
+            {
+                return _PersistSecurityInfo;
+            }
+            set
+            {
+                OnPersistSecurityInfoChanging(value);
+                ReportPropertyChanging("PersistSecurityInfo");
+                _PersistSecurityInfo = StructuralObject.SetValidValue(value, true, "PersistSecurityInfo");
+                ReportPropertyChanged("PersistSecurityInfo");
+                OnPersistSecurityInfoChanged();
+            }
+        }
+        private global::System.String _PersistSecurityInfo;
+        partial void OnPersistSecurityInfoChanging(global::System.String value);
+        partial void OnPersistSecurityInfoChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean EIWSDatasource
+        {
+            get
+            {
+                return _EIWSDatasource;
+            }
+            set
+            {
+                OnEIWSDatasourceChanging(value);
+                ReportPropertyChanging("EIWSDatasource");
+                _EIWSDatasource = StructuralObject.SetValidValue(value, "EIWSDatasource");
+                ReportPropertyChanged("EIWSDatasource");
+                OnEIWSDatasourceChanged();
+            }
+        }
+        private global::System.Boolean _EIWSDatasource;
+        partial void OnEIWSDatasourceChanging(global::System.Boolean value);
+        partial void OnEIWSDatasourceChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Guid> EIWSSurveyId
+        {
+            get
+            {
+                return _EIWSSurveyId;
+            }
+            set
+            {
+                OnEIWSSurveyIdChanging(value);
+                ReportPropertyChanging("EIWSSurveyId");
+                _EIWSSurveyId = StructuralObject.SetValidValue(value, "EIWSSurveyId");
+                ReportPropertyChanged("EIWSSurveyId");
+                OnEIWSSurveyIdChanged();
+            }
+        }
+        private Nullable<global::System.Guid> _EIWSSurveyId;
+        partial void OnEIWSSurveyIdChanging(Nullable<global::System.Guid> value);
+        partial void OnEIWSSurveyIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String DatabaseUserID
+        {
+            get
+            {
+                return _DatabaseUserID;
+            }
+            set
+            {
+                OnDatabaseUserIDChanging(value);
+                ReportPropertyChanging("DatabaseUserID");
+                _DatabaseUserID = StructuralObject.SetValidValue(value, true, "DatabaseUserID");
+                ReportPropertyChanged("DatabaseUserID");
+                OnDatabaseUserIDChanged();
+            }
+        }
+        private global::System.String _DatabaseUserID;
+        partial void OnDatabaseUserIDChanging(global::System.String value);
+        partial void OnDatabaseUserIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Password
+        {
+            get
+            {
+                return _Password;
+            }
+            set
+            {
+                OnPasswordChanging(value);
+                ReportPropertyChanging("Password");
+                _Password = StructuralObject.SetValidValue(value, true, "Password");
+                ReportPropertyChanged("Password");
+                OnPasswordChanged();
+            }
+        }
+        private global::System.String _Password;
+        partial void OnPasswordChanging(global::System.String value);
+        partial void OnPasswordChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String DatabaseObject
+        {
+            get
+            {
+                return _DatabaseObject;
+            }
+            set
+            {
+                OnDatabaseObjectChanging(value);
+                ReportPropertyChanging("DatabaseObject");
+                _DatabaseObject = StructuralObject.SetValidValue(value, false, "DatabaseObject");
+                ReportPropertyChanged("DatabaseObject");
+                OnDatabaseObjectChanged();
+            }
+        }
+        private global::System.String _DatabaseObject;
+        partial void OnDatabaseObjectChanging(global::System.String value);
+        partial void OnDatabaseObjectChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Boolean> SQLQuery
+        {
+            get
+            {
+                return _SQLQuery;
+            }
+            set
+            {
+                OnSQLQueryChanging(value);
+                ReportPropertyChanging("SQLQuery");
+                _SQLQuery = StructuralObject.SetValidValue(value, "SQLQuery");
+                ReportPropertyChanged("SQLQuery");
+                OnSQLQueryChanged();
+            }
+        }
+        private Nullable<global::System.Boolean> _SQLQuery;
+        partial void OnSQLQueryChanging(Nullable<global::System.Boolean> value);
+        partial void OnSQLQueryChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String SQLText
+        {
+            get
+            {
+                return _SQLText;
+            }
+            set
+            {
+                OnSQLTextChanging(value);
+                ReportPropertyChanging("SQLText");
+                _SQLText = StructuralObject.SetValidValue(value, true, "SQLText");
+                ReportPropertyChanged("SQLText");
+                OnSQLTextChanged();
+            }
+        }
+        private global::System.String _SQLText;
+        partial void OnSQLTextChanging(global::System.String value);
+        partial void OnSQLTextChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean active
+        {
+            get
+            {
+                return _active;
+            }
+            set
+            {
+                OnactiveChanging(value);
+                ReportPropertyChanging("active");
+                _active = StructuralObject.SetValidValue(value, "active");
+                ReportPropertyChanged("active");
+                OnactiveChanged();
+            }
+        }
+        private global::System.Boolean _active;
+        partial void OnactiveChanging(global::System.Boolean value);
+        partial void OnactiveChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String portnumber
+        {
+            get
+            {
+                return _portnumber;
+            }
+            set
+            {
+                OnportnumberChanging(value);
+                ReportPropertyChanging("portnumber");
+                _portnumber = StructuralObject.SetValidValue(value, true, "portnumber");
+                ReportPropertyChanged("portnumber");
+                OnportnumberChanged();
+            }
+        }
+        private global::System.String _portnumber;
+        partial void OnportnumberChanging(global::System.String value);
+        partial void OnportnumberChanged();
+
+        #endregion
+
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("EIWSModel", "FK_Canvas__Datasource", "Canva")]
+        public EntityCollection<Canva> Canvas
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Canva>("EIWSModel.FK_Canvas__Datasource", "Canva");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Canva>("EIWSModel.FK_Canvas__Datasource", "Canva", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("EIWSModel", "FK_Datasource_Organization", "Organization")]
+        public Organization Organization
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Organization>("EIWSModel.FK_Datasource_Organization", "Organization").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Organization>("EIWSModel.FK_Datasource_Organization", "Organization").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Organization> OrganizationReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Organization>("EIWSModel.FK_Datasource_Organization", "Organization");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Organization>("EIWSModel.FK_Datasource_Organization", "Organization", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("EIWSModel", "DatasourceUser", "User")]
+        public EntityCollection<User> Users
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<User>("EIWSModel.DatasourceUser", "User");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<User>("EIWSModel.DatasourceUser", "User", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
     [EdmEntityTypeAttribute(NamespaceName="EIWSModel", Name="EIDatasource")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
@@ -1205,16 +2820,16 @@ namespace Epi.Web.EF
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("EIWSModel", "FK_Datasource_SurveyMetaData", "SurveyMetaData")]
+        [EdmRelationshipNavigationPropertyAttribute("EIWSModel", "FK_Datasource_SurveyMetaData1", "SurveyMetaData")]
         public SurveyMetaData SurveyMetaData
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SurveyMetaData>("EIWSModel.FK_Datasource_SurveyMetaData", "SurveyMetaData").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SurveyMetaData>("EIWSModel.FK_Datasource_SurveyMetaData1", "SurveyMetaData").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SurveyMetaData>("EIWSModel.FK_Datasource_SurveyMetaData", "SurveyMetaData").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SurveyMetaData>("EIWSModel.FK_Datasource_SurveyMetaData1", "SurveyMetaData").Value = value;
             }
         }
         /// <summary>
@@ -1226,13 +2841,13 @@ namespace Epi.Web.EF
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SurveyMetaData>("EIWSModel.FK_Datasource_SurveyMetaData", "SurveyMetaData");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SurveyMetaData>("EIWSModel.FK_Datasource_SurveyMetaData1", "SurveyMetaData");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<SurveyMetaData>("EIWSModel.FK_Datasource_SurveyMetaData", "SurveyMetaData", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<SurveyMetaData>("EIWSModel.FK_Datasource_SurveyMetaData1", "SurveyMetaData", value);
                 }
             }
         }
@@ -1244,22 +2859,44 @@ namespace Epi.Web.EF
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="EIWSModel", Name="ErrorLog")]
+    [EdmEntityTypeAttribute(NamespaceName="EIWSModel", Name="familyset")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    public partial class ErrorLog : EntityObject
+    public partial class familyset : EntityObject
     {
         #region Factory Method
     
         /// <summary>
-        /// Create a new ErrorLog object.
+        /// Create a new familyset object.
         /// </summary>
-        /// <param name="errorDate">Initial value of the ErrorDate property.</param>
-        public static ErrorLog CreateErrorLog(global::System.DateTime errorDate)
+        /// <param name="surveyId">Initial value of the SurveyId property.</param>
+        /// <param name="ownerId">Initial value of the OwnerId property.</param>
+        /// <param name="surveyTypeId">Initial value of the SurveyTypeId property.</param>
+        /// <param name="closingDate">Initial value of the ClosingDate property.</param>
+        /// <param name="surveyName">Initial value of the SurveyName property.</param>
+        /// <param name="templateXML">Initial value of the TemplateXML property.</param>
+        /// <param name="userPublishKey">Initial value of the UserPublishKey property.</param>
+        /// <param name="templateXMLSize">Initial value of the TemplateXMLSize property.</param>
+        /// <param name="dateCreated">Initial value of the DateCreated property.</param>
+        /// <param name="organizationId">Initial value of the OrganizationId property.</param>
+        /// <param name="isDraftMode">Initial value of the IsDraftMode property.</param>
+        /// <param name="startDate">Initial value of the StartDate property.</param>
+        public static familyset Createfamilyset(global::System.Guid surveyId, global::System.Int32 ownerId, global::System.Int32 surveyTypeId, global::System.DateTime closingDate, global::System.String surveyName, global::System.String templateXML, global::System.Guid userPublishKey, global::System.Int64 templateXMLSize, global::System.DateTime dateCreated, global::System.Int32 organizationId, global::System.Boolean isDraftMode, global::System.DateTime startDate)
         {
-            ErrorLog errorLog = new ErrorLog();
-            errorLog.ErrorDate = errorDate;
-            return errorLog;
+            familyset familyset = new familyset();
+            familyset.SurveyId = surveyId;
+            familyset.OwnerId = ownerId;
+            familyset.SurveyTypeId = surveyTypeId;
+            familyset.ClosingDate = closingDate;
+            familyset.SurveyName = surveyName;
+            familyset.TemplateXML = templateXML;
+            familyset.UserPublishKey = userPublishKey;
+            familyset.TemplateXMLSize = templateXMLSize;
+            familyset.DateCreated = dateCreated;
+            familyset.OrganizationId = organizationId;
+            familyset.IsDraftMode = isDraftMode;
+            familyset.StartDate = startDate;
+            return familyset;
         }
 
         #endregion
@@ -1271,34 +2908,7 @@ namespace Epi.Web.EF
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.DateTime ErrorDate
-        {
-            get
-            {
-                return _ErrorDate;
-            }
-            set
-            {
-                if (_ErrorDate != value)
-                {
-                    OnErrorDateChanging(value);
-                    ReportPropertyChanging("ErrorDate");
-                    _ErrorDate = StructuralObject.SetValidValue(value, "ErrorDate");
-                    ReportPropertyChanged("ErrorDate");
-                    OnErrorDateChanged();
-                }
-            }
-        }
-        private global::System.DateTime _ErrorDate;
-        partial void OnErrorDateChanging(global::System.DateTime value);
-        partial void OnErrorDateChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.Guid> SurveyId
+        public global::System.Guid SurveyId
         {
             get
             {
@@ -1306,256 +2916,508 @@ namespace Epi.Web.EF
             }
             set
             {
-                OnSurveyIdChanging(value);
-                ReportPropertyChanging("SurveyId");
-                _SurveyId = StructuralObject.SetValidValue(value, "SurveyId");
-                ReportPropertyChanged("SurveyId");
-                OnSurveyIdChanged();
+                if (_SurveyId != value)
+                {
+                    OnSurveyIdChanging(value);
+                    ReportPropertyChanging("SurveyId");
+                    _SurveyId = StructuralObject.SetValidValue(value, "SurveyId");
+                    ReportPropertyChanged("SurveyId");
+                    OnSurveyIdChanged();
+                }
             }
         }
-        private Nullable<global::System.Guid> _SurveyId;
-        partial void OnSurveyIdChanging(Nullable<global::System.Guid> value);
+        private global::System.Guid _SurveyId;
+        partial void OnSurveyIdChanging(global::System.Guid value);
         partial void OnSurveyIdChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Guid> ResponseId
+        public global::System.Int32 OwnerId
         {
             get
             {
-                return _ResponseId;
+                return _OwnerId;
             }
             set
             {
-                OnResponseIdChanging(value);
-                ReportPropertyChanging("ResponseId");
-                _ResponseId = StructuralObject.SetValidValue(value, "ResponseId");
-                ReportPropertyChanged("ResponseId");
-                OnResponseIdChanged();
+                if (_OwnerId != value)
+                {
+                    OnOwnerIdChanging(value);
+                    ReportPropertyChanging("OwnerId");
+                    _OwnerId = StructuralObject.SetValidValue(value, "OwnerId");
+                    ReportPropertyChanged("OwnerId");
+                    OnOwnerIdChanged();
+                }
             }
         }
-        private Nullable<global::System.Guid> _ResponseId;
-        partial void OnResponseIdChanging(Nullable<global::System.Guid> value);
-        partial void OnResponseIdChanged();
+        private global::System.Int32 _OwnerId;
+        partial void OnOwnerIdChanging(global::System.Int32 value);
+        partial void OnOwnerIdChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String Comment
+        public global::System.String SurveyNumber
         {
             get
             {
-                return _Comment;
+                return _SurveyNumber;
             }
             set
             {
-                OnCommentChanging(value);
-                ReportPropertyChanging("Comment");
-                _Comment = StructuralObject.SetValidValue(value, true, "Comment");
-                ReportPropertyChanged("Comment");
-                OnCommentChanged();
+                OnSurveyNumberChanging(value);
+                ReportPropertyChanging("SurveyNumber");
+                _SurveyNumber = StructuralObject.SetValidValue(value, true, "SurveyNumber");
+                ReportPropertyChanged("SurveyNumber");
+                OnSurveyNumberChanged();
             }
         }
-        private global::System.String _Comment;
-        partial void OnCommentChanging(global::System.String value);
-        partial void OnCommentChanged();
+        private global::System.String _SurveyNumber;
+        partial void OnSurveyNumberChanging(global::System.String value);
+        partial void OnSurveyNumberChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 SurveyTypeId
+        {
+            get
+            {
+                return _SurveyTypeId;
+            }
+            set
+            {
+                if (_SurveyTypeId != value)
+                {
+                    OnSurveyTypeIdChanging(value);
+                    ReportPropertyChanging("SurveyTypeId");
+                    _SurveyTypeId = StructuralObject.SetValidValue(value, "SurveyTypeId");
+                    ReportPropertyChanged("SurveyTypeId");
+                    OnSurveyTypeIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _SurveyTypeId;
+        partial void OnSurveyTypeIdChanging(global::System.Int32 value);
+        partial void OnSurveyTypeIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime ClosingDate
+        {
+            get
+            {
+                return _ClosingDate;
+            }
+            set
+            {
+                if (_ClosingDate != value)
+                {
+                    OnClosingDateChanging(value);
+                    ReportPropertyChanging("ClosingDate");
+                    _ClosingDate = StructuralObject.SetValidValue(value, "ClosingDate");
+                    ReportPropertyChanged("ClosingDate");
+                    OnClosingDateChanged();
+                }
+            }
+        }
+        private global::System.DateTime _ClosingDate;
+        partial void OnClosingDateChanging(global::System.DateTime value);
+        partial void OnClosingDateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String SurveyName
+        {
+            get
+            {
+                return _SurveyName;
+            }
+            set
+            {
+                if (_SurveyName != value)
+                {
+                    OnSurveyNameChanging(value);
+                    ReportPropertyChanging("SurveyName");
+                    _SurveyName = StructuralObject.SetValidValue(value, false, "SurveyName");
+                    ReportPropertyChanged("SurveyName");
+                    OnSurveyNameChanged();
+                }
+            }
+        }
+        private global::System.String _SurveyName;
+        partial void OnSurveyNameChanging(global::System.String value);
+        partial void OnSurveyNameChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Int32> ERROR_NUMBER
+        public global::System.String OrganizationName
         {
             get
             {
-                return _ERROR_NUMBER;
+                return _OrganizationName;
             }
             set
             {
-                OnERROR_NUMBERChanging(value);
-                ReportPropertyChanging("ERROR_NUMBER");
-                _ERROR_NUMBER = StructuralObject.SetValidValue(value, "ERROR_NUMBER");
-                ReportPropertyChanged("ERROR_NUMBER");
-                OnERROR_NUMBERChanged();
+                OnOrganizationNameChanging(value);
+                ReportPropertyChanging("OrganizationName");
+                _OrganizationName = StructuralObject.SetValidValue(value, true, "OrganizationName");
+                ReportPropertyChanged("OrganizationName");
+                OnOrganizationNameChanged();
             }
         }
-        private Nullable<global::System.Int32> _ERROR_NUMBER;
-        partial void OnERROR_NUMBERChanging(Nullable<global::System.Int32> value);
-        partial void OnERROR_NUMBERChanged();
+        private global::System.String _OrganizationName;
+        partial void OnOrganizationNameChanging(global::System.String value);
+        partial void OnOrganizationNameChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String ERROR_MESSAGE
+        public global::System.String DepartmentName
         {
             get
             {
-                return _ERROR_MESSAGE;
+                return _DepartmentName;
             }
             set
             {
-                OnERROR_MESSAGEChanging(value);
-                ReportPropertyChanging("ERROR_MESSAGE");
-                _ERROR_MESSAGE = StructuralObject.SetValidValue(value, true, "ERROR_MESSAGE");
-                ReportPropertyChanged("ERROR_MESSAGE");
-                OnERROR_MESSAGEChanged();
+                OnDepartmentNameChanging(value);
+                ReportPropertyChanging("DepartmentName");
+                _DepartmentName = StructuralObject.SetValidValue(value, true, "DepartmentName");
+                ReportPropertyChanged("DepartmentName");
+                OnDepartmentNameChanged();
             }
         }
-        private global::System.String _ERROR_MESSAGE;
-        partial void OnERROR_MESSAGEChanging(global::System.String value);
-        partial void OnERROR_MESSAGEChanged();
+        private global::System.String _DepartmentName;
+        partial void OnDepartmentNameChanging(global::System.String value);
+        partial void OnDepartmentNameChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Int32> ERROR_SEVERITY
+        public global::System.String IntroductionText
         {
             get
             {
-                return _ERROR_SEVERITY;
+                return _IntroductionText;
             }
             set
             {
-                OnERROR_SEVERITYChanging(value);
-                ReportPropertyChanging("ERROR_SEVERITY");
-                _ERROR_SEVERITY = StructuralObject.SetValidValue(value, "ERROR_SEVERITY");
-                ReportPropertyChanged("ERROR_SEVERITY");
-                OnERROR_SEVERITYChanged();
+                OnIntroductionTextChanging(value);
+                ReportPropertyChanging("IntroductionText");
+                _IntroductionText = StructuralObject.SetValidValue(value, true, "IntroductionText");
+                ReportPropertyChanged("IntroductionText");
+                OnIntroductionTextChanged();
             }
         }
-        private Nullable<global::System.Int32> _ERROR_SEVERITY;
-        partial void OnERROR_SEVERITYChanging(Nullable<global::System.Int32> value);
-        partial void OnERROR_SEVERITYChanged();
+        private global::System.String _IntroductionText;
+        partial void OnIntroductionTextChanging(global::System.String value);
+        partial void OnIntroductionTextChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String TemplateXML
+        {
+            get
+            {
+                return _TemplateXML;
+            }
+            set
+            {
+                if (_TemplateXML != value)
+                {
+                    OnTemplateXMLChanging(value);
+                    ReportPropertyChanging("TemplateXML");
+                    _TemplateXML = StructuralObject.SetValidValue(value, false, "TemplateXML");
+                    ReportPropertyChanged("TemplateXML");
+                    OnTemplateXMLChanged();
+                }
+            }
+        }
+        private global::System.String _TemplateXML;
+        partial void OnTemplateXMLChanging(global::System.String value);
+        partial void OnTemplateXMLChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Int32> ERROR_STATE
+        public global::System.String ExitText
         {
             get
             {
-                return _ERROR_STATE;
+                return _ExitText;
             }
             set
             {
-                OnERROR_STATEChanging(value);
-                ReportPropertyChanging("ERROR_STATE");
-                _ERROR_STATE = StructuralObject.SetValidValue(value, "ERROR_STATE");
-                ReportPropertyChanged("ERROR_STATE");
-                OnERROR_STATEChanged();
+                OnExitTextChanging(value);
+                ReportPropertyChanging("ExitText");
+                _ExitText = StructuralObject.SetValidValue(value, true, "ExitText");
+                ReportPropertyChanged("ExitText");
+                OnExitTextChanged();
             }
         }
-        private Nullable<global::System.Int32> _ERROR_STATE;
-        partial void OnERROR_STATEChanging(Nullable<global::System.Int32> value);
-        partial void OnERROR_STATEChanged();
+        private global::System.String _ExitText;
+        partial void OnExitTextChanging(global::System.String value);
+        partial void OnExitTextChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Guid UserPublishKey
+        {
+            get
+            {
+                return _UserPublishKey;
+            }
+            set
+            {
+                if (_UserPublishKey != value)
+                {
+                    OnUserPublishKeyChanging(value);
+                    ReportPropertyChanging("UserPublishKey");
+                    _UserPublishKey = StructuralObject.SetValidValue(value, "UserPublishKey");
+                    ReportPropertyChanged("UserPublishKey");
+                    OnUserPublishKeyChanged();
+                }
+            }
+        }
+        private global::System.Guid _UserPublishKey;
+        partial void OnUserPublishKeyChanging(global::System.Guid value);
+        partial void OnUserPublishKeyChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int64 TemplateXMLSize
+        {
+            get
+            {
+                return _TemplateXMLSize;
+            }
+            set
+            {
+                if (_TemplateXMLSize != value)
+                {
+                    OnTemplateXMLSizeChanging(value);
+                    ReportPropertyChanging("TemplateXMLSize");
+                    _TemplateXMLSize = StructuralObject.SetValidValue(value, "TemplateXMLSize");
+                    ReportPropertyChanged("TemplateXMLSize");
+                    OnTemplateXMLSizeChanged();
+                }
+            }
+        }
+        private global::System.Int64 _TemplateXMLSize;
+        partial void OnTemplateXMLSizeChanging(global::System.Int64 value);
+        partial void OnTemplateXMLSizeChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime DateCreated
+        {
+            get
+            {
+                return _DateCreated;
+            }
+            set
+            {
+                if (_DateCreated != value)
+                {
+                    OnDateCreatedChanging(value);
+                    ReportPropertyChanging("DateCreated");
+                    _DateCreated = StructuralObject.SetValidValue(value, "DateCreated");
+                    ReportPropertyChanged("DateCreated");
+                    OnDateCreatedChanged();
+                }
+            }
+        }
+        private global::System.DateTime _DateCreated;
+        partial void OnDateCreatedChanging(global::System.DateTime value);
+        partial void OnDateCreatedChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 OrganizationId
+        {
+            get
+            {
+                return _OrganizationId;
+            }
+            set
+            {
+                if (_OrganizationId != value)
+                {
+                    OnOrganizationIdChanging(value);
+                    ReportPropertyChanging("OrganizationId");
+                    _OrganizationId = StructuralObject.SetValidValue(value, "OrganizationId");
+                    ReportPropertyChanged("OrganizationId");
+                    OnOrganizationIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _OrganizationId;
+        partial void OnOrganizationIdChanging(global::System.Int32 value);
+        partial void OnOrganizationIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean IsDraftMode
+        {
+            get
+            {
+                return _IsDraftMode;
+            }
+            set
+            {
+                if (_IsDraftMode != value)
+                {
+                    OnIsDraftModeChanging(value);
+                    ReportPropertyChanging("IsDraftMode");
+                    _IsDraftMode = StructuralObject.SetValidValue(value, "IsDraftMode");
+                    ReportPropertyChanged("IsDraftMode");
+                    OnIsDraftModeChanged();
+                }
+            }
+        }
+        private global::System.Boolean _IsDraftMode;
+        partial void OnIsDraftModeChanging(global::System.Boolean value);
+        partial void OnIsDraftModeChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime StartDate
+        {
+            get
+            {
+                return _StartDate;
+            }
+            set
+            {
+                if (_StartDate != value)
+                {
+                    OnStartDateChanging(value);
+                    ReportPropertyChanging("StartDate");
+                    _StartDate = StructuralObject.SetValidValue(value, "StartDate");
+                    ReportPropertyChanged("StartDate");
+                    OnStartDateChanged();
+                }
+            }
+        }
+        private global::System.DateTime _StartDate;
+        partial void OnStartDateChanging(global::System.DateTime value);
+        partial void OnStartDateChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String ERROR_PROCEDURE
+        public Nullable<global::System.Guid> ParentId
         {
             get
             {
-                return _ERROR_PROCEDURE;
+                return _ParentId;
             }
             set
             {
-                OnERROR_PROCEDUREChanging(value);
-                ReportPropertyChanging("ERROR_PROCEDURE");
-                _ERROR_PROCEDURE = StructuralObject.SetValidValue(value, true, "ERROR_PROCEDURE");
-                ReportPropertyChanged("ERROR_PROCEDURE");
-                OnERROR_PROCEDUREChanged();
+                OnParentIdChanging(value);
+                ReportPropertyChanging("ParentId");
+                _ParentId = StructuralObject.SetValidValue(value, "ParentId");
+                ReportPropertyChanged("ParentId");
+                OnParentIdChanged();
             }
         }
-        private global::System.String _ERROR_PROCEDURE;
-        partial void OnERROR_PROCEDUREChanging(global::System.String value);
-        partial void OnERROR_PROCEDUREChanged();
+        private Nullable<global::System.Guid> _ParentId;
+        partial void OnParentIdChanging(Nullable<global::System.Guid> value);
+        partial void OnParentIdChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Int32> ERROR_LINE
+        public Nullable<global::System.Int32> ViewId
         {
             get
             {
-                return _ERROR_LINE;
+                return _ViewId;
             }
             set
             {
-                OnERROR_LINEChanging(value);
-                ReportPropertyChanging("ERROR_LINE");
-                _ERROR_LINE = StructuralObject.SetValidValue(value, "ERROR_LINE");
-                ReportPropertyChanged("ERROR_LINE");
-                OnERROR_LINEChanged();
+                OnViewIdChanging(value);
+                ReportPropertyChanging("ViewId");
+                _ViewId = StructuralObject.SetValidValue(value, "ViewId");
+                ReportPropertyChanged("ViewId");
+                OnViewIdChanged();
             }
         }
-        private Nullable<global::System.Int32> _ERROR_LINE;
-        partial void OnERROR_LINEChanging(Nullable<global::System.Int32> value);
-        partial void OnERROR_LINEChanged();
+        private Nullable<global::System.Int32> _ViewId;
+        partial void OnViewIdChanging(Nullable<global::System.Int32> value);
+        partial void OnViewIdChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String ErrorText
+        public Nullable<global::System.Boolean> IsSQLProject
         {
             get
             {
-                return _ErrorText;
+                return _IsSQLProject;
             }
             set
             {
-                OnErrorTextChanging(value);
-                ReportPropertyChanging("ErrorText");
-                _ErrorText = StructuralObject.SetValidValue(value, true, "ErrorText");
-                ReportPropertyChanged("ErrorText");
-                OnErrorTextChanged();
+                OnIsSQLProjectChanging(value);
+                ReportPropertyChanging("IsSQLProject");
+                _IsSQLProject = StructuralObject.SetValidValue(value, "IsSQLProject");
+                ReportPropertyChanged("IsSQLProject");
+                OnIsSQLProjectChanged();
             }
         }
-        private global::System.String _ErrorText;
-        partial void OnErrorTextChanging(global::System.String value);
-        partial void OnErrorTextChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String ErrorText2
-        {
-            get
-            {
-                return _ErrorText2;
-            }
-            set
-            {
-                OnErrorText2Changing(value);
-                ReportPropertyChanging("ErrorText2");
-                _ErrorText2 = StructuralObject.SetValidValue(value, true, "ErrorText2");
-                ReportPropertyChanged("ErrorText2");
-                OnErrorText2Changed();
-            }
-        }
-        private global::System.String _ErrorText2;
-        partial void OnErrorText2Changing(global::System.String value);
-        partial void OnErrorText2Changed();
+        private Nullable<global::System.Boolean> _IsSQLProject;
+        partial void OnIsSQLProjectChanging(Nullable<global::System.Boolean> value);
+        partial void OnIsSQLProjectChanged();
 
         #endregion
 
@@ -2073,18 +3935,84 @@ namespace Epi.Web.EF
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("EIWSModel", "FK_SurveyMetaData_Organization", "SurveyMetaData")]
-        public EntityCollection<SurveyMetaData> SurveyMetaDatas
+        [EdmRelationshipNavigationPropertyAttribute("EIWSModel", "FK_UserOrganization_Organization", "UserOrganization")]
+        public EntityCollection<UserOrganization> UserOrganizations
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<SurveyMetaData>("EIWSModel.FK_SurveyMetaData_Organization", "SurveyMetaData");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<UserOrganization>("EIWSModel.FK_UserOrganization_Organization", "UserOrganization");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<SurveyMetaData>("EIWSModel.FK_SurveyMetaData_Organization", "SurveyMetaData", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<UserOrganization>("EIWSModel.FK_UserOrganization_Organization", "UserOrganization", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("EIWSModel", "SurveyMetadataOrganization", "SurveyMetaData")]
+        public EntityCollection<SurveyMetaData> SurveyMetaDatas
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<SurveyMetaData>("EIWSModel.SurveyMetadataOrganization", "SurveyMetaData");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<SurveyMetaData>("EIWSModel.SurveyMetadataOrganization", "SurveyMetaData", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("EIWSModel", "FK_SurveyResponse_Organization", "SurveyResponse")]
+        public EntityCollection<SurveyResponse> SurveyResponses
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<SurveyResponse>("EIWSModel.FK_SurveyResponse_Organization", "SurveyResponse");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<SurveyResponse>("EIWSModel.FK_SurveyResponse_Organization", "SurveyResponse", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("EIWSModel", "FK_Datasource_Organization", "Datasource")]
+        public EntityCollection<Datasource> Datasources
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Datasource>("EIWSModel.FK_Datasource_Organization", "Datasource");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Datasource>("EIWSModel.FK_Datasource_Organization", "Datasource", value);
                 }
             }
         }
@@ -2110,6 +4038,683 @@ namespace Epi.Web.EF
                 }
             }
         }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("EIWSModel", "FK_SurveyMetaData_Organization", "SurveyMetaData")]
+        public EntityCollection<SurveyMetaData> SurveyMetaDatas1
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<SurveyMetaData>("EIWSModel.FK_SurveyMetaData_Organization", "SurveyMetaData");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<SurveyMetaData>("EIWSModel.FK_SurveyMetaData_Organization", "SurveyMetaData", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="EIWSModel", Name="ResponseDisplaySetting")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class ResponseDisplaySetting : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new ResponseDisplaySetting object.
+        /// </summary>
+        /// <param name="formId">Initial value of the FormId property.</param>
+        /// <param name="columnName">Initial value of the ColumnName property.</param>
+        /// <param name="sortOrder">Initial value of the SortOrder property.</param>
+        public static ResponseDisplaySetting CreateResponseDisplaySetting(global::System.Guid formId, global::System.String columnName, global::System.Int32 sortOrder)
+        {
+            ResponseDisplaySetting responseDisplaySetting = new ResponseDisplaySetting();
+            responseDisplaySetting.FormId = formId;
+            responseDisplaySetting.ColumnName = columnName;
+            responseDisplaySetting.SortOrder = sortOrder;
+            return responseDisplaySetting;
+        }
+
+        #endregion
+
+        #region Simple Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Guid FormId
+        {
+            get
+            {
+                return _FormId;
+            }
+            set
+            {
+                if (_FormId != value)
+                {
+                    OnFormIdChanging(value);
+                    ReportPropertyChanging("FormId");
+                    _FormId = StructuralObject.SetValidValue(value, "FormId");
+                    ReportPropertyChanged("FormId");
+                    OnFormIdChanged();
+                }
+            }
+        }
+        private global::System.Guid _FormId;
+        partial void OnFormIdChanging(global::System.Guid value);
+        partial void OnFormIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String ColumnName
+        {
+            get
+            {
+                return _ColumnName;
+            }
+            set
+            {
+                if (_ColumnName != value)
+                {
+                    OnColumnNameChanging(value);
+                    ReportPropertyChanging("ColumnName");
+                    _ColumnName = StructuralObject.SetValidValue(value, false, "ColumnName");
+                    ReportPropertyChanged("ColumnName");
+                    OnColumnNameChanged();
+                }
+            }
+        }
+        private global::System.String _ColumnName;
+        partial void OnColumnNameChanging(global::System.String value);
+        partial void OnColumnNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 SortOrder
+        {
+            get
+            {
+                return _SortOrder;
+            }
+            set
+            {
+                OnSortOrderChanging(value);
+                ReportPropertyChanging("SortOrder");
+                _SortOrder = StructuralObject.SetValidValue(value, "SortOrder");
+                ReportPropertyChanged("SortOrder");
+                OnSortOrderChanged();
+            }
+        }
+        private global::System.Int32 _SortOrder;
+        partial void OnSortOrderChanging(global::System.Int32 value);
+        partial void OnSortOrderChanged();
+
+        #endregion
+
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("EIWSModel", "FK_ResponseGridcolumns_SurveyMetaData", "SurveyMetaData")]
+        public SurveyMetaData SurveyMetaData
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SurveyMetaData>("EIWSModel.FK_ResponseGridcolumns_SurveyMetaData", "SurveyMetaData").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SurveyMetaData>("EIWSModel.FK_ResponseGridcolumns_SurveyMetaData", "SurveyMetaData").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<SurveyMetaData> SurveyMetaDataReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SurveyMetaData>("EIWSModel.FK_ResponseGridcolumns_SurveyMetaData", "SurveyMetaData");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<SurveyMetaData>("EIWSModel.FK_ResponseGridcolumns_SurveyMetaData", "SurveyMetaData", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="EIWSModel", Name="ResponseXml")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class ResponseXml : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new ResponseXml object.
+        /// </summary>
+        /// <param name="responseId">Initial value of the ResponseId property.</param>
+        /// <param name="xml">Initial value of the Xml property.</param>
+        public static ResponseXml CreateResponseXml(global::System.Guid responseId, global::System.String xml)
+        {
+            ResponseXml responseXml = new ResponseXml();
+            responseXml.ResponseId = responseId;
+            responseXml.Xml = xml;
+            return responseXml;
+        }
+
+        #endregion
+
+        #region Simple Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Guid ResponseId
+        {
+            get
+            {
+                return _ResponseId;
+            }
+            set
+            {
+                if (_ResponseId != value)
+                {
+                    OnResponseIdChanging(value);
+                    ReportPropertyChanging("ResponseId");
+                    _ResponseId = StructuralObject.SetValidValue(value, "ResponseId");
+                    ReportPropertyChanged("ResponseId");
+                    OnResponseIdChanged();
+                }
+            }
+        }
+        private global::System.Guid _ResponseId;
+        partial void OnResponseIdChanging(global::System.Guid value);
+        partial void OnResponseIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Xml
+        {
+            get
+            {
+                return _Xml;
+            }
+            set
+            {
+                OnXmlChanging(value);
+                ReportPropertyChanging("Xml");
+                _Xml = StructuralObject.SetValidValue(value, false, "Xml");
+                ReportPropertyChanged("Xml");
+                OnXmlChanged();
+            }
+        }
+        private global::System.String _Xml;
+        partial void OnXmlChanging(global::System.String value);
+        partial void OnXmlChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> UserId
+        {
+            get
+            {
+                return _UserId;
+            }
+            set
+            {
+                OnUserIdChanging(value);
+                ReportPropertyChanging("UserId");
+                _UserId = StructuralObject.SetValidValue(value, "UserId");
+                ReportPropertyChanged("UserId");
+                OnUserIdChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _UserId;
+        partial void OnUserIdChanging(Nullable<global::System.Int32> value);
+        partial void OnUserIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Boolean> IsNewRecord
+        {
+            get
+            {
+                return _IsNewRecord;
+            }
+            set
+            {
+                OnIsNewRecordChanging(value);
+                ReportPropertyChanging("IsNewRecord");
+                _IsNewRecord = StructuralObject.SetValidValue(value, "IsNewRecord");
+                ReportPropertyChanged("IsNewRecord");
+                OnIsNewRecordChanged();
+            }
+        }
+        private Nullable<global::System.Boolean> _IsNewRecord;
+        partial void OnIsNewRecordChanging(Nullable<global::System.Boolean> value);
+        partial void OnIsNewRecordChanged();
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="EIWSModel", Name="Role")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class Role : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new Role object.
+        /// </summary>
+        /// <param name="roleID">Initial value of the RoleID property.</param>
+        /// <param name="roleValue">Initial value of the RoleValue property.</param>
+        /// <param name="roleDescription">Initial value of the RoleDescription property.</param>
+        public static Role CreateRole(global::System.Int32 roleID, global::System.Int32 roleValue, global::System.String roleDescription)
+        {
+            Role role = new Role();
+            role.RoleID = roleID;
+            role.RoleValue = roleValue;
+            role.RoleDescription = roleDescription;
+            return role;
+        }
+
+        #endregion
+
+        #region Simple Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 RoleID
+        {
+            get
+            {
+                return _RoleID;
+            }
+            set
+            {
+                if (_RoleID != value)
+                {
+                    OnRoleIDChanging(value);
+                    ReportPropertyChanging("RoleID");
+                    _RoleID = StructuralObject.SetValidValue(value, "RoleID");
+                    ReportPropertyChanged("RoleID");
+                    OnRoleIDChanged();
+                }
+            }
+        }
+        private global::System.Int32 _RoleID;
+        partial void OnRoleIDChanging(global::System.Int32 value);
+        partial void OnRoleIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 RoleValue
+        {
+            get
+            {
+                return _RoleValue;
+            }
+            set
+            {
+                OnRoleValueChanging(value);
+                ReportPropertyChanging("RoleValue");
+                _RoleValue = StructuralObject.SetValidValue(value, "RoleValue");
+                ReportPropertyChanged("RoleValue");
+                OnRoleValueChanged();
+            }
+        }
+        private global::System.Int32 _RoleValue;
+        partial void OnRoleValueChanging(global::System.Int32 value);
+        partial void OnRoleValueChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String RoleDescription
+        {
+            get
+            {
+                return _RoleDescription;
+            }
+            set
+            {
+                OnRoleDescriptionChanging(value);
+                ReportPropertyChanging("RoleDescription");
+                _RoleDescription = StructuralObject.SetValidValue(value, false, "RoleDescription");
+                ReportPropertyChanged("RoleDescription");
+                OnRoleDescriptionChanged();
+            }
+        }
+        private global::System.String _RoleDescription;
+        partial void OnRoleDescriptionChanging(global::System.String value);
+        partial void OnRoleDescriptionChanged();
+
+        #endregion
+
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("EIWSModel", "FK_UserOrganization_Role", "UserOrganization")]
+        public EntityCollection<UserOrganization> UserOrganizations
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<UserOrganization>("EIWSModel.FK_UserOrganization_Role", "UserOrganization");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<UserOrganization>("EIWSModel.FK_UserOrganization_Role", "UserOrganization", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="EIWSModel", Name="SharedCanvas")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class SharedCanvas : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new SharedCanvas object.
+        /// </summary>
+        /// <param name="canvasID">Initial value of the CanvasID property.</param>
+        /// <param name="userID">Initial value of the UserID property.</param>
+        public static SharedCanvas CreateSharedCanvas(global::System.Int32 canvasID, global::System.Int32 userID)
+        {
+            SharedCanvas sharedCanvas = new SharedCanvas();
+            sharedCanvas.CanvasID = canvasID;
+            sharedCanvas.UserID = userID;
+            return sharedCanvas;
+        }
+
+        #endregion
+
+        #region Simple Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 CanvasID
+        {
+            get
+            {
+                return _CanvasID;
+            }
+            set
+            {
+                if (_CanvasID != value)
+                {
+                    OnCanvasIDChanging(value);
+                    ReportPropertyChanging("CanvasID");
+                    _CanvasID = StructuralObject.SetValidValue(value, "CanvasID");
+                    ReportPropertyChanged("CanvasID");
+                    OnCanvasIDChanged();
+                }
+            }
+        }
+        private global::System.Int32 _CanvasID;
+        partial void OnCanvasIDChanging(global::System.Int32 value);
+        partial void OnCanvasIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 UserID
+        {
+            get
+            {
+                return _UserID;
+            }
+            set
+            {
+                if (_UserID != value)
+                {
+                    OnUserIDChanging(value);
+                    ReportPropertyChanging("UserID");
+                    _UserID = StructuralObject.SetValidValue(value, "UserID");
+                    ReportPropertyChanged("UserID");
+                    OnUserIDChanged();
+                }
+            }
+        }
+        private global::System.Int32 _UserID;
+        partial void OnUserIDChanging(global::System.Int32 value);
+        partial void OnUserIDChanged();
+
+        #endregion
+
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("EIWSModel", "FK_CanvasUser_User", "User")]
+        public User User
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("EIWSModel.FK_CanvasUser_User", "User").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("EIWSModel.FK_CanvasUser_User", "User").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<User> UserReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("EIWSModel.FK_CanvasUser_User", "User");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("EIWSModel.FK_CanvasUser_User", "User", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="EIWSModel", Name="SourceTable")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class SourceTable : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new SourceTable object.
+        /// </summary>
+        /// <param name="sourceTableName">Initial value of the SourceTableName property.</param>
+        /// <param name="formId">Initial value of the FormId property.</param>
+        /// <param name="sourceTableXml">Initial value of the SourceTableXml property.</param>
+        public static SourceTable CreateSourceTable(global::System.String sourceTableName, global::System.Guid formId, global::System.String sourceTableXml)
+        {
+            SourceTable sourceTable = new SourceTable();
+            sourceTable.SourceTableName = sourceTableName;
+            sourceTable.FormId = formId;
+            sourceTable.SourceTableXml = sourceTableXml;
+            return sourceTable;
+        }
+
+        #endregion
+
+        #region Simple Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String SourceTableName
+        {
+            get
+            {
+                return _SourceTableName;
+            }
+            set
+            {
+                if (_SourceTableName != value)
+                {
+                    OnSourceTableNameChanging(value);
+                    ReportPropertyChanging("SourceTableName");
+                    _SourceTableName = StructuralObject.SetValidValue(value, false, "SourceTableName");
+                    ReportPropertyChanged("SourceTableName");
+                    OnSourceTableNameChanged();
+                }
+            }
+        }
+        private global::System.String _SourceTableName;
+        partial void OnSourceTableNameChanging(global::System.String value);
+        partial void OnSourceTableNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Guid FormId
+        {
+            get
+            {
+                return _FormId;
+            }
+            set
+            {
+                if (_FormId != value)
+                {
+                    OnFormIdChanging(value);
+                    ReportPropertyChanging("FormId");
+                    _FormId = StructuralObject.SetValidValue(value, "FormId");
+                    ReportPropertyChanged("FormId");
+                    OnFormIdChanged();
+                }
+            }
+        }
+        private global::System.Guid _FormId;
+        partial void OnFormIdChanging(global::System.Guid value);
+        partial void OnFormIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String SourceTableXml
+        {
+            get
+            {
+                return _SourceTableXml;
+            }
+            set
+            {
+                OnSourceTableXmlChanging(value);
+                ReportPropertyChanging("SourceTableXml");
+                _SourceTableXml = StructuralObject.SetValidValue(value, false, "SourceTableXml");
+                ReportPropertyChanged("SourceTableXml");
+                OnSourceTableXmlChanged();
+            }
+        }
+        private global::System.String _SourceTableXml;
+        partial void OnSourceTableXmlChanging(global::System.String value);
+        partial void OnSourceTableXmlChanged();
 
         #endregion
 
@@ -2237,6 +4842,7 @@ namespace Epi.Web.EF
         /// Create a new SurveyMetaData object.
         /// </summary>
         /// <param name="surveyId">Initial value of the SurveyId property.</param>
+        /// <param name="ownerId">Initial value of the OwnerId property.</param>
         /// <param name="surveyTypeId">Initial value of the SurveyTypeId property.</param>
         /// <param name="closingDate">Initial value of the ClosingDate property.</param>
         /// <param name="surveyName">Initial value of the SurveyName property.</param>
@@ -2245,12 +4851,13 @@ namespace Epi.Web.EF
         /// <param name="templateXMLSize">Initial value of the TemplateXMLSize property.</param>
         /// <param name="dateCreated">Initial value of the DateCreated property.</param>
         /// <param name="organizationId">Initial value of the OrganizationId property.</param>
-        /// <param name="startDate">Initial value of the StartDate property.</param>
         /// <param name="isDraftMode">Initial value of the IsDraftMode property.</param>
-        public static SurveyMetaData CreateSurveyMetaData(global::System.Guid surveyId, global::System.Int32 surveyTypeId, global::System.DateTime closingDate, global::System.String surveyName, global::System.String templateXML, global::System.Guid userPublishKey, global::System.Int64 templateXMLSize, global::System.DateTime dateCreated, global::System.Int32 organizationId, global::System.DateTime startDate, global::System.Boolean isDraftMode)
+        /// <param name="startDate">Initial value of the StartDate property.</param>
+        public static SurveyMetaData CreateSurveyMetaData(global::System.Guid surveyId, global::System.Int32 ownerId, global::System.Int32 surveyTypeId, global::System.DateTime closingDate, global::System.String surveyName, global::System.String templateXML, global::System.Guid userPublishKey, global::System.Int64 templateXMLSize, global::System.DateTime dateCreated, global::System.Int32 organizationId, global::System.Boolean isDraftMode, global::System.DateTime startDate)
         {
             SurveyMetaData surveyMetaData = new SurveyMetaData();
             surveyMetaData.SurveyId = surveyId;
+            surveyMetaData.OwnerId = ownerId;
             surveyMetaData.SurveyTypeId = surveyTypeId;
             surveyMetaData.ClosingDate = closingDate;
             surveyMetaData.SurveyName = surveyName;
@@ -2259,8 +4866,8 @@ namespace Epi.Web.EF
             surveyMetaData.TemplateXMLSize = templateXMLSize;
             surveyMetaData.DateCreated = dateCreated;
             surveyMetaData.OrganizationId = organizationId;
-            surveyMetaData.StartDate = startDate;
             surveyMetaData.IsDraftMode = isDraftMode;
+            surveyMetaData.StartDate = startDate;
             return surveyMetaData;
         }
 
@@ -2294,6 +4901,30 @@ namespace Epi.Web.EF
         private global::System.Guid _SurveyId;
         partial void OnSurveyIdChanging(global::System.Guid value);
         partial void OnSurveyIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 OwnerId
+        {
+            get
+            {
+                return _OwnerId;
+            }
+            set
+            {
+                OnOwnerIdChanging(value);
+                ReportPropertyChanging("OwnerId");
+                _OwnerId = StructuralObject.SetValidValue(value, "OwnerId");
+                ReportPropertyChanged("OwnerId");
+                OnOwnerIdChanged();
+            }
+        }
+        private global::System.Int32 _OwnerId;
+        partial void OnOwnerIdChanging(global::System.Int32 value);
+        partial void OnOwnerIdChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -2612,30 +5243,6 @@ namespace Epi.Web.EF
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.DateTime StartDate
-        {
-            get
-            {
-                return _StartDate;
-            }
-            set
-            {
-                OnStartDateChanging(value);
-                ReportPropertyChanging("StartDate");
-                _StartDate = StructuralObject.SetValidValue(value, "StartDate");
-                ReportPropertyChanged("StartDate");
-                OnStartDateChanged();
-            }
-        }
-        private global::System.DateTime _StartDate;
-        partial void OnStartDateChanging(global::System.DateTime value);
-        partial void OnStartDateChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
         public global::System.Boolean IsDraftMode
         {
             get
@@ -2658,26 +5265,74 @@ namespace Epi.Web.EF
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public Nullable<global::System.DateTime> LastUpdate
+        public global::System.DateTime StartDate
         {
             get
             {
-                return _LastUpdate;
+                return _StartDate;
             }
             set
             {
-                OnLastUpdateChanging(value);
-                ReportPropertyChanging("LastUpdate");
-                _LastUpdate = StructuralObject.SetValidValue(value, "LastUpdate");
-                ReportPropertyChanged("LastUpdate");
-                OnLastUpdateChanged();
+                OnStartDateChanging(value);
+                ReportPropertyChanging("StartDate");
+                _StartDate = StructuralObject.SetValidValue(value, "StartDate");
+                ReportPropertyChanged("StartDate");
+                OnStartDateChanged();
             }
         }
-        private Nullable<global::System.DateTime> _LastUpdate;
-        partial void OnLastUpdateChanging(Nullable<global::System.DateTime> value);
-        partial void OnLastUpdateChanged();
+        private global::System.DateTime _StartDate;
+        partial void OnStartDateChanging(global::System.DateTime value);
+        partial void OnStartDateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Guid> ParentId
+        {
+            get
+            {
+                return _ParentId;
+            }
+            set
+            {
+                OnParentIdChanging(value);
+                ReportPropertyChanging("ParentId");
+                _ParentId = StructuralObject.SetValidValue(value, "ParentId");
+                ReportPropertyChanged("ParentId");
+                OnParentIdChanged();
+            }
+        }
+        private Nullable<global::System.Guid> _ParentId;
+        partial void OnParentIdChanging(Nullable<global::System.Guid> value);
+        partial void OnParentIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> ViewId
+        {
+            get
+            {
+                return _ViewId;
+            }
+            set
+            {
+                OnViewIdChanging(value);
+                ReportPropertyChanging("ViewId");
+                _ViewId = StructuralObject.SetValidValue(value, "ViewId");
+                ReportPropertyChanged("ViewId");
+                OnViewIdChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _ViewId;
+        partial void OnViewIdChanging(Nullable<global::System.Int32> value);
+        partial void OnViewIdChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -2702,6 +5357,102 @@ namespace Epi.Web.EF
         private Nullable<global::System.Boolean> _IsSQLProject;
         partial void OnIsSQLProjectChanging(Nullable<global::System.Boolean> value);
         partial void OnIsSQLProjectChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Boolean> IsShareable
+        {
+            get
+            {
+                return _IsShareable;
+            }
+            set
+            {
+                OnIsShareableChanging(value);
+                ReportPropertyChanging("IsShareable");
+                _IsShareable = StructuralObject.SetValidValue(value, "IsShareable");
+                ReportPropertyChanged("IsShareable");
+                OnIsShareableChanged();
+            }
+        }
+        private Nullable<global::System.Boolean> _IsShareable;
+        partial void OnIsShareableChanging(Nullable<global::System.Boolean> value);
+        partial void OnIsShareableChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> DataAccessRuleId
+        {
+            get
+            {
+                return _DataAccessRuleId;
+            }
+            set
+            {
+                OnDataAccessRuleIdChanging(value);
+                ReportPropertyChanging("DataAccessRuleId");
+                _DataAccessRuleId = StructuralObject.SetValidValue(value, "DataAccessRuleId");
+                ReportPropertyChanged("DataAccessRuleId");
+                OnDataAccessRuleIdChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _DataAccessRuleId;
+        partial void OnDataAccessRuleIdChanging(Nullable<global::System.Int32> value);
+        partial void OnDataAccessRuleIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Boolean> ShowAllRecords
+        {
+            get
+            {
+                return _ShowAllRecords;
+            }
+            set
+            {
+                OnShowAllRecordsChanging(value);
+                ReportPropertyChanging("ShowAllRecords");
+                _ShowAllRecords = StructuralObject.SetValidValue(value, "ShowAllRecords");
+                ReportPropertyChanged("ShowAllRecords");
+                OnShowAllRecordsChanged();
+            }
+        }
+        private Nullable<global::System.Boolean> _ShowAllRecords;
+        partial void OnShowAllRecordsChanging(Nullable<global::System.Boolean> value);
+        partial void OnShowAllRecordsChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> LastUpdate
+        {
+            get
+            {
+                return _LastUpdate;
+            }
+            set
+            {
+                OnLastUpdateChanging(value);
+                ReportPropertyChanging("LastUpdate");
+                _LastUpdate = StructuralObject.SetValidValue(value, "LastUpdate");
+                ReportPropertyChanged("LastUpdate");
+                OnLastUpdateChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _LastUpdate;
+        partial void OnLastUpdateChanging(Nullable<global::System.DateTime> value);
+        partial void OnLastUpdateChanged();
 
         #endregion
 
@@ -2751,6 +5502,154 @@ namespace Epi.Web.EF
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("EIWSModel", "SurveyMetaDataUser", "User")]
+        public EntityCollection<User> Users
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<User>("EIWSModel.SurveyMetaDataUser", "User");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<User>("EIWSModel.SurveyMetaDataUser", "User", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("EIWSModel", "FK_ResponseGridcolumns_SurveyMetaData", "ResponseDisplaySetting")]
+        public EntityCollection<ResponseDisplaySetting> ResponseDisplaySettings
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ResponseDisplaySetting>("EIWSModel.FK_ResponseGridcolumns_SurveyMetaData", "ResponseDisplaySetting");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ResponseDisplaySetting>("EIWSModel.FK_ResponseGridcolumns_SurveyMetaData", "ResponseDisplaySetting", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("EIWSModel", "FK_SurveyMetaData_SurveyMetaData1", "SurveyMetaData1")]
+        public EntityCollection<SurveyMetaData> SurveyMetaData1
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<SurveyMetaData>("EIWSModel.FK_SurveyMetaData_SurveyMetaData1", "SurveyMetaData1");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<SurveyMetaData>("EIWSModel.FK_SurveyMetaData_SurveyMetaData1", "SurveyMetaData1", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("EIWSModel", "FK_SurveyMetaData_SurveyMetaData1", "SurveyMetaData")]
+        public SurveyMetaData SurveyMetaData2
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SurveyMetaData>("EIWSModel.FK_SurveyMetaData_SurveyMetaData1", "SurveyMetaData").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SurveyMetaData>("EIWSModel.FK_SurveyMetaData_SurveyMetaData1", "SurveyMetaData").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<SurveyMetaData> SurveyMetaData2Reference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SurveyMetaData>("EIWSModel.FK_SurveyMetaData_SurveyMetaData1", "SurveyMetaData");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<SurveyMetaData>("EIWSModel.FK_SurveyMetaData_SurveyMetaData1", "SurveyMetaData", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("EIWSModel", "FK_SurveyMetaDataTransform_SurveyMetaData", "SurveyMetaDataTransform")]
+        public EntityCollection<SurveyMetaDataTransform> SurveyMetaDataTransforms
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<SurveyMetaDataTransform>("EIWSModel.FK_SurveyMetaDataTransform_SurveyMetaData", "SurveyMetaDataTransform");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<SurveyMetaDataTransform>("EIWSModel.FK_SurveyMetaDataTransform_SurveyMetaData", "SurveyMetaDataTransform", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("EIWSModel", "FK_Datasource_SurveyMetaData1", "EIDatasource")]
+        public EntityCollection<EIDatasource> EIDatasources
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<EIDatasource>("EIWSModel.FK_Datasource_SurveyMetaData1", "EIDatasource");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<EIDatasource>("EIWSModel.FK_Datasource_SurveyMetaData1", "EIDatasource", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("EIWSModel", "FK_SurveyResponse_SurveyMetaData", "SurveyResponse")]
         public EntityCollection<SurveyResponse> SurveyResponses
         {
@@ -2763,6 +5662,66 @@ namespace Epi.Web.EF
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<SurveyResponse>("EIWSModel.FK_SurveyResponse_SurveyMetaData", "SurveyResponse", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("EIWSModel", "SurveyMetadataOrganization", "Organization")]
+        public EntityCollection<Organization> Organizations
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Organization>("EIWSModel.SurveyMetadataOrganization", "Organization");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Organization>("EIWSModel.SurveyMetadataOrganization", "Organization", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("EIWSModel", "FK_SurveyMetaData_DataAccessRules", "DataAccessRule")]
+        public DataAccessRule DataAccessRule
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<DataAccessRule>("EIWSModel.FK_SurveyMetaData_DataAccessRules", "DataAccessRule").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<DataAccessRule>("EIWSModel.FK_SurveyMetaData_DataAccessRules", "DataAccessRule").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<DataAccessRule> DataAccessRuleReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<DataAccessRule>("EIWSModel.FK_SurveyMetaData_DataAccessRules", "DataAccessRule");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<DataAccessRule>("EIWSModel.FK_SurveyMetaData_DataAccessRules", "DataAccessRule", value);
                 }
             }
         }
@@ -2801,50 +5760,6 @@ namespace Epi.Web.EF
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Organization>("EIWSModel.FK_SurveyMetaData_Organization", "Organization", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("EIWSModel", "FK_Datasource_SurveyMetaData", "EIDatasource")]
-        public EntityCollection<EIDatasource> EIDatasources
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<EIDatasource>("EIWSModel.FK_Datasource_SurveyMetaData", "EIDatasource");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<EIDatasource>("EIWSModel.FK_Datasource_SurveyMetaData", "EIDatasource", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("EIWSModel", "FK_SurveyMetaDataTransform_SurveyMetaData", "SurveyMetaDataTransform")]
-        public EntityCollection<SurveyMetaDataTransform> SurveyMetaDataTransforms
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<SurveyMetaDataTransform>("EIWSModel.FK_SurveyMetaDataTransform_SurveyMetaData", "SurveyMetaDataTransform");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<SurveyMetaDataTransform>("EIWSModel.FK_SurveyMetaDataTransform_SurveyMetaData", "SurveyMetaDataTransform", value);
                 }
             }
         }
@@ -2943,30 +5858,6 @@ namespace Epi.Web.EF
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String BaseTableName
-        {
-            get
-            {
-                return _BaseTableName;
-            }
-            set
-            {
-                OnBaseTableNameChanging(value);
-                ReportPropertyChanging("BaseTableName");
-                _BaseTableName = StructuralObject.SetValidValue(value, true, "BaseTableName");
-                ReportPropertyChanged("BaseTableName");
-                OnBaseTableNameChanged();
-            }
-        }
-        private global::System.String _BaseTableName;
-        partial void OnBaseTableNameChanging(global::System.String value);
-        partial void OnBaseTableNameChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
         public Nullable<global::System.Int32> PageId
         {
             get
@@ -3039,6 +5930,30 @@ namespace Epi.Web.EF
         private global::System.Int32 _FieldTypeId;
         partial void OnFieldTypeIdChanging(global::System.Int32 value);
         partial void OnFieldTypeIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String BaseTableName
+        {
+            get
+            {
+                return _BaseTableName;
+            }
+            set
+            {
+                OnBaseTableNameChanging(value);
+                ReportPropertyChanging("BaseTableName");
+                _BaseTableName = StructuralObject.SetValidValue(value, true, "BaseTableName");
+                ReportPropertyChanged("BaseTableName");
+                OnBaseTableNameChanged();
+            }
+        }
+        private global::System.String _BaseTableName;
+        partial void OnBaseTableNameChanging(global::System.String value);
+        partial void OnBaseTableNameChanged();
 
         #endregion
 
@@ -3188,7 +6103,8 @@ namespace Epi.Web.EF
         /// <param name="responseXML">Initial value of the ResponseXML property.</param>
         /// <param name="dateCreated">Initial value of the DateCreated property.</param>
         /// <param name="isDraftMode">Initial value of the IsDraftMode property.</param>
-        public static SurveyResponse CreateSurveyResponse(global::System.Guid responseId, global::System.Guid surveyId, global::System.DateTime dateUpdated, global::System.Int32 statusId, global::System.String responseXML, global::System.DateTime dateCreated, global::System.Boolean isDraftMode)
+        /// <param name="isLocked">Initial value of the IsLocked property.</param>
+        public static SurveyResponse CreateSurveyResponse(global::System.Guid responseId, global::System.Guid surveyId, global::System.DateTime dateUpdated, global::System.Int32 statusId, global::System.String responseXML, global::System.DateTime dateCreated, global::System.Boolean isDraftMode, global::System.Boolean isLocked)
         {
             SurveyResponse surveyResponse = new SurveyResponse();
             surveyResponse.ResponseId = responseId;
@@ -3198,6 +6114,7 @@ namespace Epi.Web.EF
             surveyResponse.ResponseXML = responseXML;
             surveyResponse.DateCreated = dateCreated;
             surveyResponse.IsDraftMode = isDraftMode;
+            surveyResponse.IsLocked = isLocked;
             return surveyResponse;
         }
 
@@ -3451,6 +6368,78 @@ namespace Epi.Web.EF
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean IsLocked
+        {
+            get
+            {
+                return _IsLocked;
+            }
+            set
+            {
+                OnIsLockedChanging(value);
+                ReportPropertyChanging("IsLocked");
+                _IsLocked = StructuralObject.SetValidValue(value, "IsLocked");
+                ReportPropertyChanged("IsLocked");
+                OnIsLockedChanged();
+            }
+        }
+        private global::System.Boolean _IsLocked;
+        partial void OnIsLockedChanging(global::System.Boolean value);
+        partial void OnIsLockedChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Guid> ParentRecordId
+        {
+            get
+            {
+                return _ParentRecordId;
+            }
+            set
+            {
+                OnParentRecordIdChanging(value);
+                ReportPropertyChanging("ParentRecordId");
+                _ParentRecordId = StructuralObject.SetValidValue(value, "ParentRecordId");
+                ReportPropertyChanged("ParentRecordId");
+                OnParentRecordIdChanged();
+            }
+        }
+        private Nullable<global::System.Guid> _ParentRecordId;
+        partial void OnParentRecordIdChanging(Nullable<global::System.Guid> value);
+        partial void OnParentRecordIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Guid> RelateParentId
+        {
+            get
+            {
+                return _RelateParentId;
+            }
+            set
+            {
+                OnRelateParentIdChanging(value);
+                ReportPropertyChanging("RelateParentId");
+                _RelateParentId = StructuralObject.SetValidValue(value, "RelateParentId");
+                ReportPropertyChanged("RelateParentId");
+                OnRelateParentIdChanged();
+            }
+        }
+        private Nullable<global::System.Guid> _RelateParentId;
+        partial void OnRelateParentIdChanging(Nullable<global::System.Guid> value);
+        partial void OnRelateParentIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public Nullable<global::System.Int32> RecordSourceId
@@ -3471,6 +6460,30 @@ namespace Epi.Web.EF
         private Nullable<global::System.Int32> _RecordSourceId;
         partial void OnRecordSourceIdChanging(Nullable<global::System.Int32> value);
         partial void OnRecordSourceIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> OrganizationId
+        {
+            get
+            {
+                return _OrganizationId;
+            }
+            set
+            {
+                OnOrganizationIdChanging(value);
+                ReportPropertyChanging("OrganizationId");
+                _OrganizationId = StructuralObject.SetValidValue(value, "OrganizationId");
+                ReportPropertyChanged("OrganizationId");
+                OnOrganizationIdChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _OrganizationId;
+        partial void OnOrganizationIdChanging(Nullable<global::System.Int32> value);
+        partial void OnOrganizationIdChanged();
 
         #endregion
 
@@ -3558,6 +6571,164 @@ namespace Epi.Web.EF
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("EIWSModel", "FK_SurveyResponse_SurveyResponse", "SurveyResponse1")]
+        public EntityCollection<SurveyResponse> SurveyResponse1
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<SurveyResponse>("EIWSModel.FK_SurveyResponse_SurveyResponse", "SurveyResponse1");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<SurveyResponse>("EIWSModel.FK_SurveyResponse_SurveyResponse", "SurveyResponse1", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("EIWSModel", "FK_SurveyResponse_SurveyResponse", "SurveyResponse")]
+        public SurveyResponse SurveyResponse2
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SurveyResponse>("EIWSModel.FK_SurveyResponse_SurveyResponse", "SurveyResponse").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SurveyResponse>("EIWSModel.FK_SurveyResponse_SurveyResponse", "SurveyResponse").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<SurveyResponse> SurveyResponse2Reference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SurveyResponse>("EIWSModel.FK_SurveyResponse_SurveyResponse", "SurveyResponse");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<SurveyResponse>("EIWSModel.FK_SurveyResponse_SurveyResponse", "SurveyResponse", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("EIWSModel", "SurveyResponseUser", "User")]
+        public EntityCollection<User> Users
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<User>("EIWSModel.SurveyResponseUser", "User");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<User>("EIWSModel.SurveyResponseUser", "User", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("EIWSModel", "FK_SurveyResponseTracking_SurveyResponse", "SurveyResponseTracking")]
+        public SurveyResponseTracking SurveyResponseTracking
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SurveyResponseTracking>("EIWSModel.FK_SurveyResponseTracking_SurveyResponse", "SurveyResponseTracking").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SurveyResponseTracking>("EIWSModel.FK_SurveyResponseTracking_SurveyResponse", "SurveyResponseTracking").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<SurveyResponseTracking> SurveyResponseTrackingReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SurveyResponseTracking>("EIWSModel.FK_SurveyResponseTracking_SurveyResponse", "SurveyResponseTracking");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<SurveyResponseTracking>("EIWSModel.FK_SurveyResponseTracking_SurveyResponse", "SurveyResponseTracking", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("EIWSModel", "FK_SurveyResponse_Organization", "Organization")]
+        public Organization Organization
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Organization>("EIWSModel.FK_SurveyResponse_Organization", "Organization").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Organization>("EIWSModel.FK_SurveyResponse_Organization", "Organization").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Organization> OrganizationReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Organization>("EIWSModel.FK_SurveyResponse_Organization", "Organization");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Organization>("EIWSModel.FK_SurveyResponse_Organization", "Organization", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("EIWSModel", "FK_SurveyResponse_lk_RecordSource", "lk_RecordSource")]
         public lk_RecordSource lk_RecordSource
         {
@@ -3597,26 +6768,26 @@ namespace Epi.Web.EF
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="EIWSModel", Name="sysdiagram")]
+    [EdmEntityTypeAttribute(NamespaceName="EIWSModel", Name="SurveyResponseTracking")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    public partial class sysdiagram : EntityObject
+    public partial class SurveyResponseTracking : EntityObject
     {
         #region Factory Method
     
         /// <summary>
-        /// Create a new sysdiagram object.
+        /// Create a new SurveyResponseTracking object.
         /// </summary>
-        /// <param name="name">Initial value of the name property.</param>
-        /// <param name="principal_id">Initial value of the principal_id property.</param>
-        /// <param name="diagram_id">Initial value of the diagram_id property.</param>
-        public static sysdiagram Createsysdiagram(global::System.String name, global::System.Int32 principal_id, global::System.Int32 diagram_id)
+        /// <param name="responseId">Initial value of the ResponseId property.</param>
+        /// <param name="isSQLResponse">Initial value of the IsSQLResponse property.</param>
+        /// <param name="isResponseinsertedToEpi7">Initial value of the IsResponseinsertedToEpi7 property.</param>
+        public static SurveyResponseTracking CreateSurveyResponseTracking(global::System.Guid responseId, global::System.Boolean isSQLResponse, global::System.Boolean isResponseinsertedToEpi7)
         {
-            sysdiagram sysdiagram = new sysdiagram();
-            sysdiagram.name = name;
-            sysdiagram.principal_id = principal_id;
-            sysdiagram.diagram_id = diagram_id;
-            return sysdiagram;
+            SurveyResponseTracking surveyResponseTracking = new SurveyResponseTracking();
+            surveyResponseTracking.ResponseId = responseId;
+            surveyResponseTracking.IsSQLResponse = isSQLResponse;
+            surveyResponseTracking.IsResponseinsertedToEpi7 = isResponseinsertedToEpi7;
+            return surveyResponseTracking;
         }
 
         #endregion
@@ -3626,125 +6797,934 @@ namespace Epi.Web.EF
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String name
+        public global::System.Guid ResponseId
         {
             get
             {
-                return _name;
+                return _ResponseId;
             }
             set
             {
-                OnnameChanging(value);
-                ReportPropertyChanging("name");
-                _name = StructuralObject.SetValidValue(value, false, "name");
-                ReportPropertyChanged("name");
-                OnnameChanged();
+                if (_ResponseId != value)
+                {
+                    OnResponseIdChanging(value);
+                    ReportPropertyChanging("ResponseId");
+                    _ResponseId = StructuralObject.SetValidValue(value, "ResponseId");
+                    ReportPropertyChanged("ResponseId");
+                    OnResponseIdChanged();
+                }
             }
         }
-        private global::System.String _name;
-        partial void OnnameChanging(global::System.String value);
-        partial void OnnameChanged();
+        private global::System.Guid _ResponseId;
+        partial void OnResponseIdChanging(global::System.Guid value);
+        partial void OnResponseIdChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Int32 principal_id
+        public global::System.Boolean IsSQLResponse
         {
             get
             {
-                return _principal_id;
+                return _IsSQLResponse;
             }
             set
             {
-                Onprincipal_idChanging(value);
-                ReportPropertyChanging("principal_id");
-                _principal_id = StructuralObject.SetValidValue(value, "principal_id");
-                ReportPropertyChanged("principal_id");
-                Onprincipal_idChanged();
+                OnIsSQLResponseChanging(value);
+                ReportPropertyChanging("IsSQLResponse");
+                _IsSQLResponse = StructuralObject.SetValidValue(value, "IsSQLResponse");
+                ReportPropertyChanged("IsSQLResponse");
+                OnIsSQLResponseChanged();
             }
         }
-        private global::System.Int32 _principal_id;
-        partial void Onprincipal_idChanging(global::System.Int32 value);
-        partial void Onprincipal_idChanged();
+        private global::System.Boolean _IsSQLResponse;
+        partial void OnIsSQLResponseChanging(global::System.Boolean value);
+        partial void OnIsSQLResponseChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean IsResponseinsertedToEpi7
+        {
+            get
+            {
+                return _IsResponseinsertedToEpi7;
+            }
+            set
+            {
+                OnIsResponseinsertedToEpi7Changing(value);
+                ReportPropertyChanging("IsResponseinsertedToEpi7");
+                _IsResponseinsertedToEpi7 = StructuralObject.SetValidValue(value, "IsResponseinsertedToEpi7");
+                ReportPropertyChanged("IsResponseinsertedToEpi7");
+                OnIsResponseinsertedToEpi7Changed();
+            }
+        }
+        private global::System.Boolean _IsResponseinsertedToEpi7;
+        partial void OnIsResponseinsertedToEpi7Changing(global::System.Boolean value);
+        partial void OnIsResponseinsertedToEpi7Changed();
+
+        #endregion
+
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("EIWSModel", "FK_SurveyResponseTracking_SurveyResponse", "SurveyResponse")]
+        public SurveyResponse SurveyResponse
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SurveyResponse>("EIWSModel.FK_SurveyResponseTracking_SurveyResponse", "SurveyResponse").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SurveyResponse>("EIWSModel.FK_SurveyResponseTracking_SurveyResponse", "SurveyResponse").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<SurveyResponse> SurveyResponseReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SurveyResponse>("EIWSModel.FK_SurveyResponseTracking_SurveyResponse", "SurveyResponse");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<SurveyResponse>("EIWSModel.FK_SurveyResponseTracking_SurveyResponse", "SurveyResponse", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="EIWSModel", Name="User")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class User : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new User object.
+        /// </summary>
+        /// <param name="userID">Initial value of the UserID property.</param>
+        /// <param name="userName">Initial value of the UserName property.</param>
+        /// <param name="firstName">Initial value of the FirstName property.</param>
+        /// <param name="lastName">Initial value of the LastName property.</param>
+        /// <param name="passwordHash">Initial value of the PasswordHash property.</param>
+        /// <param name="resetPassword">Initial value of the ResetPassword property.</param>
+        /// <param name="emailAddress">Initial value of the EmailAddress property.</param>
+        /// <param name="phoneNumber">Initial value of the PhoneNumber property.</param>
+        public static User CreateUser(global::System.Int32 userID, global::System.String userName, global::System.String firstName, global::System.String lastName, global::System.String passwordHash, global::System.Boolean resetPassword, global::System.String emailAddress, global::System.String phoneNumber)
+        {
+            User user = new User();
+            user.UserID = userID;
+            user.UserName = userName;
+            user.FirstName = firstName;
+            user.LastName = lastName;
+            user.PasswordHash = passwordHash;
+            user.ResetPassword = resetPassword;
+            user.EmailAddress = emailAddress;
+            user.PhoneNumber = phoneNumber;
+            return user;
+        }
+
+        #endregion
+
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Int32 diagram_id
+        public global::System.Int32 UserID
         {
             get
             {
-                return _diagram_id;
+                return _UserID;
             }
             set
             {
-                if (_diagram_id != value)
+                if (_UserID != value)
                 {
-                    Ondiagram_idChanging(value);
-                    ReportPropertyChanging("diagram_id");
-                    _diagram_id = StructuralObject.SetValidValue(value, "diagram_id");
-                    ReportPropertyChanged("diagram_id");
-                    Ondiagram_idChanged();
+                    OnUserIDChanging(value);
+                    ReportPropertyChanging("UserID");
+                    _UserID = StructuralObject.SetValidValue(value, "UserID");
+                    ReportPropertyChanged("UserID");
+                    OnUserIDChanged();
                 }
             }
         }
-        private global::System.Int32 _diagram_id;
-        partial void Ondiagram_idChanging(global::System.Int32 value);
-        partial void Ondiagram_idChanged();
+        private global::System.Int32 _UserID;
+        partial void OnUserIDChanging(global::System.Int32 value);
+        partial void OnUserIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String UserName
+        {
+            get
+            {
+                return _UserName;
+            }
+            set
+            {
+                OnUserNameChanging(value);
+                ReportPropertyChanging("UserName");
+                _UserName = StructuralObject.SetValidValue(value, false, "UserName");
+                ReportPropertyChanged("UserName");
+                OnUserNameChanged();
+            }
+        }
+        private global::System.String _UserName;
+        partial void OnUserNameChanging(global::System.String value);
+        partial void OnUserNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String FirstName
+        {
+            get
+            {
+                return _FirstName;
+            }
+            set
+            {
+                OnFirstNameChanging(value);
+                ReportPropertyChanging("FirstName");
+                _FirstName = StructuralObject.SetValidValue(value, false, "FirstName");
+                ReportPropertyChanged("FirstName");
+                OnFirstNameChanged();
+            }
+        }
+        private global::System.String _FirstName;
+        partial void OnFirstNameChanging(global::System.String value);
+        partial void OnFirstNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String LastName
+        {
+            get
+            {
+                return _LastName;
+            }
+            set
+            {
+                OnLastNameChanging(value);
+                ReportPropertyChanging("LastName");
+                _LastName = StructuralObject.SetValidValue(value, false, "LastName");
+                ReportPropertyChanged("LastName");
+                OnLastNameChanged();
+            }
+        }
+        private global::System.String _LastName;
+        partial void OnLastNameChanging(global::System.String value);
+        partial void OnLastNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String PasswordHash
+        {
+            get
+            {
+                return _PasswordHash;
+            }
+            set
+            {
+                OnPasswordHashChanging(value);
+                ReportPropertyChanging("PasswordHash");
+                _PasswordHash = StructuralObject.SetValidValue(value, false, "PasswordHash");
+                ReportPropertyChanged("PasswordHash");
+                OnPasswordHashChanged();
+            }
+        }
+        private global::System.String _PasswordHash;
+        partial void OnPasswordHashChanging(global::System.String value);
+        partial void OnPasswordHashChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean ResetPassword
+        {
+            get
+            {
+                return _ResetPassword;
+            }
+            set
+            {
+                OnResetPasswordChanging(value);
+                ReportPropertyChanging("ResetPassword");
+                _ResetPassword = StructuralObject.SetValidValue(value, "ResetPassword");
+                ReportPropertyChanged("ResetPassword");
+                OnResetPasswordChanged();
+            }
+        }
+        private global::System.Boolean _ResetPassword;
+        partial void OnResetPasswordChanging(global::System.Boolean value);
+        partial void OnResetPasswordChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String EmailAddress
+        {
+            get
+            {
+                return _EmailAddress;
+            }
+            set
+            {
+                OnEmailAddressChanging(value);
+                ReportPropertyChanging("EmailAddress");
+                _EmailAddress = StructuralObject.SetValidValue(value, false, "EmailAddress");
+                ReportPropertyChanged("EmailAddress");
+                OnEmailAddressChanged();
+            }
+        }
+        private global::System.String _EmailAddress;
+        partial void OnEmailAddressChanging(global::System.String value);
+        partial void OnEmailAddressChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String PhoneNumber
+        {
+            get
+            {
+                return _PhoneNumber;
+            }
+            set
+            {
+                OnPhoneNumberChanging(value);
+                ReportPropertyChanging("PhoneNumber");
+                _PhoneNumber = StructuralObject.SetValidValue(value, false, "PhoneNumber");
+                ReportPropertyChanged("PhoneNumber");
+                OnPhoneNumberChanged();
+            }
+        }
+        private global::System.String _PhoneNumber;
+        partial void OnPhoneNumberChanging(global::System.String value);
+        partial void OnPhoneNumberChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Int32> version
+        public Nullable<global::System.Guid> UGuid
         {
             get
             {
-                return _version;
+                return _UGuid;
             }
             set
             {
-                OnversionChanging(value);
-                ReportPropertyChanging("version");
-                _version = StructuralObject.SetValidValue(value, "version");
-                ReportPropertyChanged("version");
-                OnversionChanged();
+                OnUGuidChanging(value);
+                ReportPropertyChanging("UGuid");
+                _UGuid = StructuralObject.SetValidValue(value, "UGuid");
+                ReportPropertyChanged("UGuid");
+                OnUGuidChanged();
             }
         }
-        private Nullable<global::System.Int32> _version;
-        partial void OnversionChanging(Nullable<global::System.Int32> value);
-        partial void OnversionChanged();
+        private Nullable<global::System.Guid> _UGuid;
+        partial void OnUGuidChanging(Nullable<global::System.Guid> value);
+        partial void OnUGuidChanged();
+
+        #endregion
+
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("EIWSModel", "SurveyMetaDataUser", "SurveyMetaData")]
+        public EntityCollection<SurveyMetaData> SurveyMetaDatas
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<SurveyMetaData>("EIWSModel.SurveyMetaDataUser", "SurveyMetaData");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<SurveyMetaData>("EIWSModel.SurveyMetaDataUser", "SurveyMetaData", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("EIWSModel", "FK_UserOrganization_User", "UserOrganization")]
+        public EntityCollection<UserOrganization> UserOrganizations
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<UserOrganization>("EIWSModel.FK_UserOrganization_User", "UserOrganization");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<UserOrganization>("EIWSModel.FK_UserOrganization_User", "UserOrganization", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("EIWSModel", "SurveyResponseUser", "SurveyResponse")]
+        public EntityCollection<SurveyResponse> SurveyResponses
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<SurveyResponse>("EIWSModel.SurveyResponseUser", "SurveyResponse");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<SurveyResponse>("EIWSModel.SurveyResponseUser", "SurveyResponse", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("EIWSModel", "FK_Canvas_CreatorUser", "Canva")]
+        public EntityCollection<Canva> Canvas
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Canva>("EIWSModel.FK_Canvas_CreatorUser", "Canva");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Canva>("EIWSModel.FK_Canvas_CreatorUser", "Canva", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("EIWSModel", "FK_CanvasUser_User", "SharedCanvas")]
+        public EntityCollection<SharedCanvas> SharedCanvases
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<SharedCanvas>("EIWSModel.FK_CanvasUser_User", "SharedCanvas");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<SharedCanvas>("EIWSModel.FK_CanvasUser_User", "SharedCanvas", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("EIWSModel", "DatasourceUser", "Datasource")]
+        public EntityCollection<Datasource> Datasources
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Datasource>("EIWSModel.DatasourceUser", "Datasource");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Datasource>("EIWSModel.DatasourceUser", "Datasource", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="EIWSModel", Name="UserOrganization")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class UserOrganization : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new UserOrganization object.
+        /// </summary>
+        /// <param name="userID">Initial value of the UserID property.</param>
+        /// <param name="organizationID">Initial value of the OrganizationID property.</param>
+        /// <param name="roleId">Initial value of the RoleId property.</param>
+        /// <param name="active">Initial value of the Active property.</param>
+        public static UserOrganization CreateUserOrganization(global::System.Int32 userID, global::System.Int32 organizationID, global::System.Int32 roleId, global::System.Boolean active)
+        {
+            UserOrganization userOrganization = new UserOrganization();
+            userOrganization.UserID = userID;
+            userOrganization.OrganizationID = organizationID;
+            userOrganization.RoleId = roleId;
+            userOrganization.Active = active;
+            return userOrganization;
+        }
+
+        #endregion
+
+        #region Simple Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 UserID
+        {
+            get
+            {
+                return _UserID;
+            }
+            set
+            {
+                if (_UserID != value)
+                {
+                    OnUserIDChanging(value);
+                    ReportPropertyChanging("UserID");
+                    _UserID = StructuralObject.SetValidValue(value, "UserID");
+                    ReportPropertyChanged("UserID");
+                    OnUserIDChanged();
+                }
+            }
+        }
+        private global::System.Int32 _UserID;
+        partial void OnUserIDChanging(global::System.Int32 value);
+        partial void OnUserIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 OrganizationID
+        {
+            get
+            {
+                return _OrganizationID;
+            }
+            set
+            {
+                if (_OrganizationID != value)
+                {
+                    OnOrganizationIDChanging(value);
+                    ReportPropertyChanging("OrganizationID");
+                    _OrganizationID = StructuralObject.SetValidValue(value, "OrganizationID");
+                    ReportPropertyChanged("OrganizationID");
+                    OnOrganizationIDChanged();
+                }
+            }
+        }
+        private global::System.Int32 _OrganizationID;
+        partial void OnOrganizationIDChanging(global::System.Int32 value);
+        partial void OnOrganizationIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 RoleId
+        {
+            get
+            {
+                return _RoleId;
+            }
+            set
+            {
+                OnRoleIdChanging(value);
+                ReportPropertyChanging("RoleId");
+                _RoleId = StructuralObject.SetValidValue(value, "RoleId");
+                ReportPropertyChanged("RoleId");
+                OnRoleIdChanged();
+            }
+        }
+        private global::System.Int32 _RoleId;
+        partial void OnRoleIdChanging(global::System.Int32 value);
+        partial void OnRoleIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean Active
+        {
+            get
+            {
+                return _Active;
+            }
+            set
+            {
+                OnActiveChanging(value);
+                ReportPropertyChanging("Active");
+                _Active = StructuralObject.SetValidValue(value, "Active");
+                ReportPropertyChanged("Active");
+                OnActiveChanged();
+            }
+        }
+        private global::System.Boolean _Active;
+        partial void OnActiveChanging(global::System.Boolean value);
+        partial void OnActiveChanged();
+
+        #endregion
+
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("EIWSModel", "FK_UserOrganization_Organization", "Organization")]
+        public Organization Organization
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Organization>("EIWSModel.FK_UserOrganization_Organization", "Organization").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Organization>("EIWSModel.FK_UserOrganization_Organization", "Organization").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Organization> OrganizationReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Organization>("EIWSModel.FK_UserOrganization_Organization", "Organization");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Organization>("EIWSModel.FK_UserOrganization_Organization", "Organization", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("EIWSModel", "FK_UserOrganization_Role", "Role")]
+        public Role Role
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Role>("EIWSModel.FK_UserOrganization_Role", "Role").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Role>("EIWSModel.FK_UserOrganization_Role", "Role").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Role> RoleReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Role>("EIWSModel.FK_UserOrganization_Role", "Role");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Role>("EIWSModel.FK_UserOrganization_Role", "Role", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("EIWSModel", "FK_UserOrganization_User", "User")]
+        public User User
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("EIWSModel.FK_UserOrganization_User", "User").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("EIWSModel.FK_UserOrganization_User", "User").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<User> UserReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("EIWSModel.FK_UserOrganization_User", "User");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("EIWSModel.FK_UserOrganization_User", "User", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+
+    #endregion
+
+    #region ComplexTypes
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmComplexTypeAttribute(NamespaceName="EIWSModel", Name="usp_GetErrorInfo_Result")]
+    [DataContractAttribute(IsReference=true)]
+    [Serializable()]
+    public partial class usp_GetErrorInfo_Result : ComplexObject
+    {
+        #region Simple Properties
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.Byte[] definition
+        public Nullable<global::System.Int32> ErrorNumber
         {
             get
             {
-                return StructuralObject.GetValidValue(_definition);
+                return _ErrorNumber;
             }
             set
             {
-                OndefinitionChanging(value);
-                ReportPropertyChanging("definition");
-                _definition = StructuralObject.SetValidValue(value, true, "definition");
-                ReportPropertyChanged("definition");
-                OndefinitionChanged();
+                OnErrorNumberChanging(value);
+                ReportPropertyChanging("ErrorNumber");
+                _ErrorNumber = StructuralObject.SetValidValue(value, "ErrorNumber");
+                ReportPropertyChanged("ErrorNumber");
+                OnErrorNumberChanged();
             }
         }
-        private global::System.Byte[] _definition;
-        partial void OndefinitionChanging(global::System.Byte[] value);
-        partial void OndefinitionChanged();
+        private Nullable<global::System.Int32> _ErrorNumber;
+        partial void OnErrorNumberChanging(Nullable<global::System.Int32> value);
+        partial void OnErrorNumberChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> ErrorSeverity
+        {
+            get
+            {
+                return _ErrorSeverity;
+            }
+            set
+            {
+                OnErrorSeverityChanging(value);
+                ReportPropertyChanging("ErrorSeverity");
+                _ErrorSeverity = StructuralObject.SetValidValue(value, "ErrorSeverity");
+                ReportPropertyChanged("ErrorSeverity");
+                OnErrorSeverityChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _ErrorSeverity;
+        partial void OnErrorSeverityChanging(Nullable<global::System.Int32> value);
+        partial void OnErrorSeverityChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> ErrorState
+        {
+            get
+            {
+                return _ErrorState;
+            }
+            set
+            {
+                OnErrorStateChanging(value);
+                ReportPropertyChanging("ErrorState");
+                _ErrorState = StructuralObject.SetValidValue(value, "ErrorState");
+                ReportPropertyChanged("ErrorState");
+                OnErrorStateChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _ErrorState;
+        partial void OnErrorStateChanging(Nullable<global::System.Int32> value);
+        partial void OnErrorStateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String ErrorProcedure
+        {
+            get
+            {
+                return _ErrorProcedure;
+            }
+            set
+            {
+                OnErrorProcedureChanging(value);
+                ReportPropertyChanging("ErrorProcedure");
+                _ErrorProcedure = StructuralObject.SetValidValue(value, true, "ErrorProcedure");
+                ReportPropertyChanged("ErrorProcedure");
+                OnErrorProcedureChanged();
+            }
+        }
+        private global::System.String _ErrorProcedure;
+        partial void OnErrorProcedureChanging(global::System.String value);
+        partial void OnErrorProcedureChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> ErrorLine
+        {
+            get
+            {
+                return _ErrorLine;
+            }
+            set
+            {
+                OnErrorLineChanging(value);
+                ReportPropertyChanging("ErrorLine");
+                _ErrorLine = StructuralObject.SetValidValue(value, "ErrorLine");
+                ReportPropertyChanged("ErrorLine");
+                OnErrorLineChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _ErrorLine;
+        partial void OnErrorLineChanging(Nullable<global::System.Int32> value);
+        partial void OnErrorLineChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String ErrorMessage
+        {
+            get
+            {
+                return _ErrorMessage;
+            }
+            set
+            {
+                OnErrorMessageChanging(value);
+                ReportPropertyChanging("ErrorMessage");
+                _ErrorMessage = StructuralObject.SetValidValue(value, true, "ErrorMessage");
+                ReportPropertyChanged("ErrorMessage");
+                OnErrorMessageChanged();
+            }
+        }
+        private global::System.String _ErrorMessage;
+        partial void OnErrorMessageChanging(global::System.String value);
+        partial void OnErrorMessageChanged();
 
         #endregion
 

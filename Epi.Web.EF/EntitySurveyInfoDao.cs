@@ -7,8 +7,10 @@ using System.Collections.Generic;
 //using System.Linq.Dynamic;
 using Epi.Web.Interfaces.DataInterfaces;
 using Epi.Web.Common.BusinessObject;
+using System.Data.Objects;
 using System.Data.SqlClient;
 using System.Data;
+using Epi.Web.Common.Extension;
 
 namespace Epi.Web.EF
 {
@@ -244,10 +246,25 @@ namespace Epi.Web.EF
                     
                     using (var Context = DataObjectFactory.CreateContext())
                     {
-                       responseList= Context.SurveyMetaDatas.Where(x =>  x.OrganizationId == OrganizationId ).ToList();
-                       if (responseList.Count() > 0 && responseList[0] != null)
+                    //var responseList1= Context.SurveyMetaDatas.Where(x =>  x.OrganizationId == OrganizationId );
+                    var responseList1 = from r in Context.SurveyMetaDatas
+                                   where r.OrganizationId == OrganizationId
+                                        select new
+                                   {
+                                       SurveyName = r.SurveyName,
+                                            SurveyId = r.SurveyId
+
+                                        };
+
+                    if (responseList1.Count() > 0)
                         {
-                            result = Mapper.Map(responseList);
+                        //result = Mapper.Map(responseList1);
+                        foreach (var item in responseList1) {
+                            SurveyInfoBO SurveyInfoBO = new SurveyInfoBO();
+                            SurveyInfoBO.SurveyId = item.SurveyId.ToString();
+                            SurveyInfoBO.SurveyName = item.SurveyName;
+                            result.Add(SurveyInfoBO);
+                        }
                         }
                     }
                 }
@@ -325,6 +342,8 @@ namespace Epi.Web.EF
                     var Query = (from response in Context.Organizations
                                  where response.OrganizationKey == Okey
                                  select response).SingleOrDefault();
+
+                   
 
                     if (Query != null)
                     {
@@ -424,7 +443,10 @@ namespace Epi.Web.EF
                     var DataRow = Query.Single();
                     DataRow.SurveyName = SurveyInfo.SurveyName;
                     DataRow.SurveyNumber = SurveyInfo.SurveyNumber;
-                    DataRow.TemplateXML = SurveyInfo.XML;
+                    if (!string.IsNullOrEmpty(SurveyInfo.XML)) {
+                        DataRow.TemplateXML = SurveyInfo.XML;
+                        DataRow.TemplateXMLSize = RemoveWhitespace(SurveyInfo.XML).Length;
+                    }
                     DataRow.IntroductionText = SurveyInfo.IntroductionText;
                     DataRow.ExitText = SurveyInfo.ExitText;
                     DataRow.OrganizationName = SurveyInfo.OrganizationName;
@@ -432,7 +454,7 @@ namespace Epi.Web.EF
                     DataRow.ClosingDate = SurveyInfo.ClosingDate;
                     DataRow.SurveyTypeId = SurveyInfo.SurveyType;
                     DataRow.UserPublishKey = SurveyInfo.UserPublishKey;
-                    DataRow.TemplateXMLSize = RemoveWhitespace(SurveyInfo.XML).Length;
+                    
                     DataRow.IsDraftMode = SurveyInfo.IsDraftMode;
                     DataRow.StartDate = SurveyInfo.StartDate;
                     DataRow.LastUpdate = DateTime.Now;
@@ -494,15 +516,176 @@ namespace Epi.Web.EF
             return xml.Trim();
         }
 
-        public void InsertConnectionString(DbConnectionStringBO ConnectionString)
-        {
+        public List<SurveyInfoBO> GetChildInfoByParentId(string ParentFormId, int ViewId) 
+            {
+            List<SurveyInfoBO> result = new List<SurveyInfoBO>();
             try
+                {
+
+                Guid Id = new Guid(ParentFormId);
+
+                    using (var Context = DataObjectFactory.CreateContext())
+                        {
+                        result.Add(Mapper.Map(Context.SurveyMetaDatas.FirstOrDefault(x => x.ParentId == Id && x.ViewId == ViewId)));
+                        }
+                    
+                }
+            catch (Exception ex)
+                {
+                throw (ex);
+                }
+            return result;
+            }
+
+        public SurveyInfoBO GetParentInfoByChildId(string ChildId)
+        {
+        SurveyInfoBO result = new SurveyInfoBO();
+        try
             {
 
+            Guid Id = new Guid(ChildId);
 
-                using (var Context = DataObjectFactory.CreateContext())
+            using (var Context = DataObjectFactory.CreateContext())
                 {
-                    //Context.usp_AddDatasource(ConnectionString.DatasourceServerName, ConnectionString.DatabaseType, ConnectionString.InitialCatalog, ConnectionString.PersistSecurityInfo, ConnectionString.DatabaseUserID, ConnectionString.SurveyId, ConnectionString.Password);
+                result = Mapper.Map(Context.SurveyMetaDatas.FirstOrDefault(x => x.SurveyId == Id ));
+                }
+
+            }
+        catch (Exception ex)
+            {
+            throw (ex);
+            }
+        return result;
+        }
+
+   public List<SurveyInfoBO> GetFormsHierarchyIdsByRootId(string RootId)
+        {
+
+      List<SurveyInfoBO> result = new List<SurveyInfoBO>();
+         
+            List<string> list = new List<string>();
+        try
+            {
+
+            Guid Id = new Guid(RootId);
+
+            using (var Context = DataObjectFactory.CreateContext())
+                {
+                    IQueryable<SurveyMetaData> Query = Context.SurveyMetaDatas.Where(x => x.SurveyId == Id).Traverse(x => x.SurveyMetaData1).AsQueryable();
+                   result = Mapper.Map(Query);
+
+
+ 
+                }
+
+            }
+        catch (Exception ex)
+            {
+            throw (ex);
+            }
+        return result;
+
+        }
+
+
+   public void InsertFormdefaultSettings(string FormId, bool IsSqlProject, List<string> ControlsNameList)
+       {
+      
+       try
+           {
+             //Delete old columns
+               using (var Context = DataObjectFactory.CreateContext())
+               {
+                   Guid Id = new Guid(FormId);
+                   IQueryable<ResponseDisplaySetting> ColumnList = Context.ResponseDisplaySettings.Where(x => x.FormId == Id);
+
+                   
+                   foreach (var item in ColumnList)
+                   {
+                       Context.ResponseDisplaySettings.DeleteObject(item);
+                   }
+                   Context.SaveChanges();
+               }
+           // Adding new columns
+           List<string> ColumnNames = new List<string>();
+           if (!IsSqlProject)
+               {
+                  ColumnNames = MetaDaTaColumnNames();
+               }
+           else
+               {
+                   ColumnNames = ControlsNameList;
+               }
+           int i = 1;
+           foreach (string Column in ColumnNames)
+               {
+              
+               using (var Context = DataObjectFactory.CreateContext())
+                   {
+
+                   ResponseDisplaySetting SettingEntity = Mapper.Map(FormId, i, Column);
+
+                   Context.AddToResponseDisplaySettings(SettingEntity);
+
+                   Context.SaveChanges();
+                   
+                   }
+               i++;
+               }
+           }
+       catch (Exception ex)
+           {
+           throw (ex);
+           }
+       }
+   public void UpdateParentId(string SurveyId ,int ViewId , string ParentId)
+       {
+       try
+           {
+           Guid Id = new Guid(SurveyId);
+           Guid PId = new Guid(ParentId);
+
+           //Update Survey
+           using (var Context = DataObjectFactory.CreateContext())
+               {
+               var Query = from Form in Context.SurveyMetaDatas
+                           where Form.SurveyId == Id && Form.ViewId == ViewId
+                           select Form;
+
+               var DataRow = Query.Single();
+               DataRow.ParentId = PId;
+               Context.SaveChanges();
+               }
+
+           }
+       catch (Exception ex)
+           {
+           throw (ex);
+           }
+       }
+   private static List<string> MetaDaTaColumnNames()
+       {
+
+       List<string> columns = new List<string>();
+       columns.Add("_UserEmail");
+       columns.Add("_DateUpdated");
+       columns.Add("_DateCreated");
+       // columns.Add("IsDraftMode");
+       columns.Add("_Mode");
+       return columns;
+
+       }
+
+
+   public void InsertConnectionString(DbConnectionStringBO ConnectionString)
+       { 
+        try
+           {
+             
+              
+               using (var Context = DataObjectFactory.CreateContext())
+                   { 
+                   Context.usp_AddDatasource(ConnectionString.DatasourceServerName, ConnectionString.DatabaseType, ConnectionString.InitialCatalog, ConnectionString.PersistSecurityInfo, ConnectionString.DatabaseUserID, ConnectionString.SurveyId, ConnectionString.Password);
 
                     //Context.SaveChanges();
                     Context.AddToEIDatasources(Mapper.Map(ConnectionString));
@@ -544,15 +727,15 @@ namespace Epi.Web.EF
 
         public void ValidateServername(SurveyInfoBO pRequestMessage)
         {
-            var Context = DataObjectFactory.CreateContext();
-            string eweAdostring = Context.Connection.ConnectionString.Substring(Context.Connection.ConnectionString.ToLower().IndexOf("data source="), Context.Connection.ConnectionString.Substring(Context.Connection.ConnectionString.ToLower().IndexOf("data source=")).IndexOf(";"));
+            //var Context = DataObjectFactory.CreateContext();
+            //string eweAdostring = Context.Connection.Substring(Context.Connection.ToLower().IndexOf("data source="), Context.Connection.Substring(Context.Connection.ToLower().IndexOf("data source=")).IndexOf(";"));
 
-            string epiDBstring = pRequestMessage.DBConnectionString.Substring(0, pRequestMessage.DBConnectionString.IndexOf(";"));
+            //string epiDBstring = pRequestMessage.DBConnectionString.Substring(0, pRequestMessage.DBConnectionString.IndexOf(";"));
 
-            if (eweAdostring.ToLower() != epiDBstring.ToLower())
-            {
-                pRequestMessage.IsSqlProject = false;
-            }
+            //if (eweAdostring.ToLower() != epiDBstring.ToLower())
+            //{
+            //    pRequestMessage.IsSqlProject = false;
+            //}
         }
        public void InsertSourceTable(string SourcetableXml, string SourcetableName, string FormId)
        {
@@ -682,6 +865,45 @@ namespace Epi.Web.EF
            }
 
            return result;
+       }
+       public bool  TableExist(string FormId, string Tablename)
+       {
+           List<SourceTableBO> result = new List<SourceTableBO>();
+           string ConnectionString = DataObjectFactory._ADOConnectionString;
+           SqlConnection Connection = new SqlConnection(ConnectionString);
+           Connection.Open();
+           bool TableExist = false;
+           SqlCommand Command = new SqlCommand();
+           Command.Connection = Connection;
+           try
+           {
+               Command.CommandType = CommandType.Text;
+               Command.CommandText = "select * from Sourcetables  where  FormId ='" + FormId + "' And SourceTableName='" + Tablename + "'";
+               // Command.ExecuteNonQuery();
+               SqlDataAdapter Adapter = new SqlDataAdapter(Command);
+               DataSet DS = new DataSet();
+               Adapter.Fill(DS);
+               if (DS.Tables.Count > 0)
+               {
+                   if (DS.Tables[0].Rows.Count>0)
+               {
+                   TableExist =  true;
+               }
+               else {
+                    TableExist=  false;
+
+               }
+               }
+               Connection.Close();
+               
+           }
+           catch (Exception)
+           {
+               Connection.Close();
+
+           }
+           return TableExist;
+            
        }
     }
 }

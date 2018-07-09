@@ -33,6 +33,37 @@ namespace Epi.Web.MVC
             );
 
 
+              routes.MapRoute
+                  (
+                      null, // Route name
+                      "FormResponse/Unlock/{ResponseId}/{RecoverLastRecordVersion}", // URL with parameters
+                      new { controller = "FormResponse", action = "Unlock", ResponseId = UrlParameter.Optional, RecoverLastRecordVersion = UrlParameter.Optional }
+                  ); // Param
+              routes.MapRoute
+                (
+                    null, // Route name
+                    "FormResponse/CheckForConcurrency", // URL with parameters
+                    new { controller = "FormResponse", action = "CheckForConcurrency" }
+                ); 
+            routes.MapRoute
+            (
+                null, // Route name
+                "FormResponse/Delete/{ResponseId}", // URL with parameters
+                new { controller = "FormResponse", action = "Delete", ResponseId = UrlParameter.Optional }
+            );
+            /*routes.MapRoute
+               (
+                   null, // Route name
+                   "FormResponse/CheckForConcurrency", // URL with parameters
+                   new { controller = "FormResponse", action = "CheckForConcurrency", ResponseId = UrlParameter.Optional }
+               ); // Param*/
+           
+            routes.MapRoute
+           (
+               null, // Route name
+               "FormResponse/DeleteBranch/{ResponseId}", // URL with parameters
+               new { controller = "FormResponse", action = "DeleteBranch", ResponseId = UrlParameter.Optional }
+           );
             routes.MapRoute
             (
                 null, // Route name
@@ -40,6 +71,31 @@ namespace Epi.Web.MVC
                 new { controller = "Home", action = "Index", surveyid = UrlParameter.Optional }
             ); // Parameter defaults
 
+ routes.MapRoute
+            (
+                null, // Route name
+                "FormResponse/LogOut", // URL with parameters
+                new { controller = "FormResponse", action = "LogOut", ResId = UrlParameter.Optional }
+            );
+            routes.MapRoute
+           (
+               "FormResponse", // Route name
+               "FormResponse/ReadResponseInfo", // URL with parameters
+               new { controller = "FormResponse", action = "ReadResponseInfo", ResId = UrlParameter.Optional }
+           );
+           
+            routes.MapRoute
+            (
+                null, // Route name
+                "FormResponse/{formid}/{responseid}", // URL with parameters
+                new { controller = "FormResponse", action = "Index", formid = UrlParameter.Optional, responseid = UrlParameter.Optional }
+            ); // Parameter defaults
+            routes.MapRoute
+                      (
+                          null, // Route name
+                          "FormResponse/{formid}", // URL with parameters
+                          new { controller = "FormResponse", action = "Index", formid = UrlParameter.Optional }
+                      ); // Parameter
             routes.MapRoute
          (
              null, // Route name
@@ -47,13 +103,18 @@ namespace Epi.Web.MVC
              new { controller = "EIWST", action = "Index", surveyid = UrlParameter.Optional }
          ); // Parameter defaults
 
-       //     routes.MapRoute
-       //(
-       //    null, // Route name
-       //    "EIWST/ManagerService", // URL with parameters
-       //    new { controller = "EIWST", action = "TestManagerService" }
-       //); // Parameter defaults
-
+            //     routes.MapRoute
+            //(
+            //    null, // Route name
+            //    "EIWST/ManagerService", // URL with parameters
+            //    new { controller = "EIWST", action = "TestManagerService" }
+            //); // Parameter defaults
+            routes.MapRoute
+                   (
+                       null, // Route name
+                       "Survey/AddChild", // URL with parameters
+                       new { controller = "Survey", action = "AddChild" }
+                   );
 
             routes.MapRoute
               (
@@ -67,7 +128,7 @@ namespace Epi.Web.MVC
            "SurveyManager/{surveyid}", // URL with parameters
            new { controller = "SurveyManager", action = "Index", surveyid = UrlParameter.Optional }
           ); // Parameter defaults
-
+           
             routes.MapRoute
                (
                    null, // Route name
@@ -87,7 +148,19 @@ namespace Epi.Web.MVC
                    new { controller = "Survey", action = "SaveSurvey", id = "" }
                    ); 
             
-                 routes.MapRoute (
+            routes.MapRoute
+              (
+                  null, // Route name
+                  "Survey/HasResponse", // URL with parameters
+                  new { controller = "Survey", action = "HasResponse" }
+              );
+            routes.MapRoute
+          (
+              "ReadResponseInfo", // Route name
+              "Survey/ReadResponseInfo", // URL with parameters
+              new { controller = "Survey", action = "ReadResponseInfo" , SurveyId = UrlParameter.Optional, ViewId = UrlParameter.Optional, ResponseId = UrlParameter.Optional, CurrentPage = UrlParameter.Optional }
+          );
+            routes.MapRoute (
                    null,                                              // Route name
                    "Survey/GetPrintView/{id}",                           // URL with parameters
                    new { controller = "Survey", action = "GetPrintView", id = "" }

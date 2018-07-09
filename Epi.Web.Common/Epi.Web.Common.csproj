@@ -59,8 +59,10 @@
     <Compile Include="BusinessObject\BusinessObject.cs" />
     <Compile Include="BusinessObject\CacheDependencyBO.cs" />
     <Compile Include="BusinessObject\DbConnectionStringBO.cs" />
+    <Compile Include="BusinessObject\FormsHierarchyBO.cs" />
     <Compile Include="BusinessObject\OrganizationBO.cs" />
     <Compile Include="BusinessObject\PageInfoBO.cs" />
+    <Compile Include="BusinessObject\ResponseXmlBO.cs" />
     <Compile Include="BusinessObject\SourceTableBO.cs" />
     <Compile Include="BusinessObject\UserAuthenticationRequestBO.cs" />
     <Compile Include="BusinessObject\SurveyInfoBO.cs" />
@@ -80,7 +82,7 @@
     <Compile Include="BusinessRule\ValidateRequired.cs" />
     <Compile Include="BusinessRule\ValidationDataType.cs" />
     <Compile Include="BusinessRule\ValidationOperator.cs" />
-    <Compile Include="Constant.cs" />
+    <Compile Include="Constants\Constant.cs" />
     <Compile Include="Criteria\CacheDependencyCriteria.cs" />
     <Compile Include="Criteria\OrganizationCriteria.cs" />
     <Compile Include="Criteria\SurveyAnswerCriteria.cs" />
@@ -88,6 +90,7 @@
     <Compile Include="Criteria\SurveyInfoCriteria.cs" />
     <Compile Include="DTO\AdminDTO.cs" />
     <Compile Include="DTO\CacheDependencyDTO.cs" />
+    <Compile Include="DTO\FormsHierarchyDTO.cs" />
     <Compile Include="DTO\OrganizationDTO.cs" />
     <Compile Include="DTO\PageInfoDTO.cs" />
     <Compile Include="DTO\PassCodeDTO.cs" />
@@ -100,12 +103,15 @@
     <Compile Include="DTO\SurveyPageDTO.cs" />
     <Compile Include="Email\Email.cs" />
     <Compile Include="Exception\CustomFaultException.cs" />
+    <Compile Include="Extension\LinqExtensions.cs" />
     <Compile Include="Message\Base\AcknowledgeType.cs" />
     <Compile Include="Message\Base\PersistType.cs" />
     <Compile Include="Message\Base\RequestBase.cs" />
     <Compile Include="Message\Base\ResponseBase.cs" />
     <Compile Include="Message\CacheDependencyRequest.cs" />
     <Compile Include="Message\CacheDependencyResponse.cs" />
+    <Compile Include="Message\FormsHierarchyRequest.cs" />
+    <Compile Include="Message\FormsHierarchyResponse.cs" />
     <Compile Include="Message\OrganizationAccountRequest.cs" />
     <Compile Include="Message\OrganizationAccountResponse.cs" />
     <Compile Include="Message\OrganizationRequest.cs" />

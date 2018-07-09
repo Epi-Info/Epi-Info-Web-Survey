@@ -104,6 +104,15 @@ namespace Epi.Web.Interfaces.DataInterfaces
          /// Deletes a SurveyInfo
          /// </summary>
          /// <param name="SurveyInfo">SurveyInfo.</param>
+         List<SurveyInfoBO> GetChildInfoByParentId(string ParentFormId , int ViewId);
+
+         SurveyInfoBO GetParentInfoByChildId(string ChildId);
+
+
+
+         List<SurveyInfoBO> GetFormsHierarchyIdsByRootId(string RootId);
+         void InsertFormdefaultSettings(string FormId,bool  IsSqlProject,List<string> ControlsNameList);
+         void UpdateParentId(string SurveyId, int ViewId, string ParentId);
          void InsertConnectionString(DbConnectionStringBO ConnectionString);
 
 

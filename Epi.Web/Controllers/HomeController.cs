@@ -50,6 +50,7 @@ namespace Epi.Web.MVC.Controllers
         {
             try
             {
+                Session["RootFormId"] = surveyid;
             string SurveyMode="";
                 SurveyInfoModel surveyInfoModel = GetSurveyInfo(surveyid);
                 System.Text.RegularExpressions.Regex regex = new System.Text.RegularExpressions.Regex(@"(\r\n|\r|\n)+");
@@ -73,7 +74,7 @@ namespace Epi.Web.MVC.Controllers
 
                 //create the responseid
                 Guid ResponseID = Guid.NewGuid();
-                TempData[Epi.Web.MVC.Constants.Constant.RESPONSE_ID] = ResponseID.ToString();
+                Session["RootResponseId"] = TempData[Epi.Web.MVC.Constants.Constant.RESPONSE_ID] = ResponseID.ToString();
                 surveyInfoModel.ResponseId = ResponseID.ToString();
                
                 string strPassCode = Epi.Web.MVC.Utility.SurveyHelper.GetPassCode();
@@ -126,8 +127,8 @@ namespace Epi.Web.MVC.Controllers
 
 
 
-
-                string ResponseID = surveyModel.ResponseId;//string.Empty;
+                Session["RootResponseId"] = surveyModel.ResponseId;
+                string ResponseID =  surveyModel.ResponseId;//string.Empty;
                 //object tempDataValue;
 
                 //if (TempData.TryGetValue(Epi.Web.MVC.Constants.Constant.RESPONSE_ID, out tempDataValue))
@@ -159,7 +160,8 @@ namespace Epi.Web.MVC.Controllers
                 SurveyAnswer.IsDraftMode = surveyInfoModel.IsDraftMode;
                 XDocument xdoc = XDocument.Parse(surveyInfoModel.XML);
 
-                MvcDynamicForms.Form form = _isurveyFacade.GetSurveyFormData(SurveyAnswer.SurveyId, 1, SurveyAnswer, IsMobileDevice, "homeController");
+               // MvcDynamicForms.Form form = _isurveyFacade.GetSurveyFormData(SurveyAnswer.SurveyId, 1, SurveyAnswer, IsMobileDevice, "homeController");
+                MvcDynamicForms.Form form = _isurveyFacade.GetSurveyFormData(SurveyAnswer.SurveyId, 1, SurveyAnswer, IsMobileDevice,null);
 
                 var _FieldsTypeIDs = from _FieldTypeID in
                                      xdoc.Descendants("Field")
