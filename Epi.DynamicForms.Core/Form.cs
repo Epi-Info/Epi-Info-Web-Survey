@@ -11,6 +11,7 @@ using Epi.Web.Common.DTO;
 using System.Globalization;
 using System.Threading;
 using Epi.Core.EnterInterpreter;
+using Epi.Web.Common.Constants;
 
 namespace MvcDynamicForms
 {
@@ -422,6 +423,6 @@ namespace MvcDynamicForms
             }
         }
 
-
+        public  string FormValuesHasChanged { get; set; }
     }
 }

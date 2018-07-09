@@ -22,5 +22,9 @@ namespace Epi.Web.MVC.Repositories.Core
 
         SurveyInfoResponse GetAllSurveysByOrgKey(string OrgKey);
         SourceTablesResponse GetSourceTables(SourceTablesRequest Request);
+        SurveyInfoResponse GetFormChildInfo(SurveyInfoRequest SurveyInfoRequest);
+        FormsHierarchyResponse GetFormsHierarchy(FormsHierarchyRequest FormsHierarchyRequest);
+        SurveyAnswerResponse GetResponseAncestor(SurveyAnswerRequest SARequest);
+        bool HasResponse(string SurveyId, string ResponseId);
     }
 }

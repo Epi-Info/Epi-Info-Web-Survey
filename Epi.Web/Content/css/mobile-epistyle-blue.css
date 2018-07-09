@@ -967,3 +967,36 @@ div.ui-checkbox .ui-btn-corner-all {
    border: 1px solid #4a80bd /*{b-bup-border}*/;
    background: #1d60ac /*{b-bup-background-color}*/;
 }
+.ui-btn-up-submit2, .ui-btn-hover-submit2 {
+    cursor: pointer;
+    border: 1px solid #00827e;
+    background: #00827e;
+    color: #fff !important;
+    /*padding:0 0 0 5px !important;*/
+    vertical-align: middle;
+    /* box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(158,158,158,0.3);
+    -o-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(158,158,158,0.3);
+    -webkit-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(158,158,158,0.3);
+    -moz-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(158,158,158,0.3);
+ /*margin: -6px 0 0 0 !important;*/
+    margin: 0px !important;
+    text-shadow: none !important;
+    /*font-weight: bold;*/
+}
+
+.ui-btn-up-defrecord, .ui-btn-hover-defrecord {
+    cursor: pointer;
+    vertical-align: middle;
+    color: #fff;
+    border: 1px solid #00827e;
+    background: #00827e;
+    font: 12pt lighter "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background-image: url('../images/addnew.png');
+    background-repeat: no-repeat;
+    background-position: 8px center;
+    background-size: 18px;
+    width: 180px;
+    height: 35px;
+    /* border: none !important; padding: 0px !important;*/
+    text-align: left;
+}

@@ -28,6 +28,7 @@ namespace Epi.Web.Common.BusinessObject
         private DateTime _StartDate;
         public string _DBConnectionString { get; set; }
         public bool _IsSqlProject { get; set; }
+        public int ViewId { get; set; }
         public string StatusText
         { 
             get { return _StatusText; }
@@ -151,7 +152,13 @@ namespace Epi.Web.Common.BusinessObject
         }
 
 
+        private string _ParentId;
+        [DataMember]
+        public string ParentId
+        {
+            get { return _ParentId; }
+            set { _ParentId = value; }
+        }
 
-        
     }
 }

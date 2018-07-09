@@ -77,14 +77,39 @@ namespace Epi.Web.Common.Criteria
 
        [DataMember]
        public Guid OrganizationKey { get; set; }
+       [DataMember]
+       public bool IsMobile { get; set; }
+       [DataMember]
+       public int UserId { get; set; }
+       [DataMember]
+       public bool IsEditMode { get; set; }
 
-       /// <summary>
-       /// Number of Records per page
-       /// </summary>
+       [DataMember]
+       public string SortOrder { get; set; }
+
+       [DataMember]
+       public string Sortfield { get; set; }
+
+       [DataMember]
+       public bool GetAllColumns { get; set; }
+
+       [DataMember]
+       public string SearchCriteria { get; set; }
+
+        [DataMember]
+       public bool IsSqlProject { get; set; }
+        [DataMember]
+        public bool IsDeleteMode { get; set; }
        [DataMember]
        public bool IsDraftMode { get; set; }
        [DataMember]
        public bool IsDownLoadFromApp { get; set; }
+        [DataMember]
+        public int UserOrganizationId { get; set; }
 
+        [DataMember]
+        public string ParentResponseId { get; set; }
+        [DataMember]
+        public bool IsChild { get; set; }
     }
 }

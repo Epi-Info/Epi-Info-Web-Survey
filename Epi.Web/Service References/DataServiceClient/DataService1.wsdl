@@ -1,0 +1,543 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="DataService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:22587/Epi.Web.ServiceHost/SurveyDataService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:22587/Epi.Web.ServiceHost/SurveyDataService.svc?xsd=xsd2" namespace="http://www.yourcompany.com/types/" />
+      <xsd:import schemaLocation="http://localhost:22587/Epi.Web.ServiceHost/SurveyDataService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:22587/Epi.Web.ServiceHost/SurveyDataService.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xsd:import schemaLocation="http://localhost:22587/Epi.Web.ServiceHost/SurveyDataService.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/System.Web" />
+      <xsd:import schemaLocation="http://localhost:22587/Epi.Web.ServiceHost/SurveyDataService.svc?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/Epi.Web.Common.DTO" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IDataService_GetSurveyInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSurveyInfo" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_GetSurveyInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSurveyInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_GetSurveyInfo_CustomFaultExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q1="http://www.yourcompany.com/types/" name="detail" element="q1:CustomFaultException" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_GetCacheDependencyInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCacheDependencyInfo" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_GetCacheDependencyInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCacheDependencyInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_GetCacheDependencyInfo_CustomFaultExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q2="http://www.yourcompany.com/types/" name="detail" element="q2:CustomFaultException" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_GetSurveyAnswer_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSurveyAnswer" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_GetSurveyAnswer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSurveyAnswerResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_GetSurveyAnswer_CustomFaultExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q3="http://www.yourcompany.com/types/" name="detail" element="q3:CustomFaultException" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_SetSurveyAnswer_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetSurveyAnswer" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_SetSurveyAnswer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetSurveyAnswerResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_SetSurveyAnswer_CustomFaultExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q4="http://www.yourcompany.com/types/" name="detail" element="q4:CustomFaultException" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_PassCodeLogin_InputMessage">
+    <wsdl:part name="parameters" element="tns:PassCodeLogin" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_PassCodeLogin_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PassCodeLoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_PassCodeLogin_CustomFaultExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q5="http://www.yourcompany.com/types/" name="detail" element="q5:CustomFaultException" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_SetPassCode_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetPassCode" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_SetPassCode_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetPassCodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_SetPassCode_CustomFaultExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q6="http://www.yourcompany.com/types/" name="detail" element="q6:CustomFaultException" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_GetAuthenticationResponse_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAuthenticationResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_GetAuthenticationResponse_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAuthenticationResponseResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_GetAuthenticationResponse_CustomFaultExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q7="http://www.yourcompany.com/types/" name="detail" element="q7:CustomFaultException" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_GetFormResponseList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetFormResponseList" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_GetFormResponseList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetFormResponseListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_GetFormResponseList_CustomFaultExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q8="http://www.yourcompany.com/types/" name="detail" element="q8:CustomFaultException" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_GetFormChildInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetFormChildInfo" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_GetFormChildInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetFormChildInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_GetFormChildInfo_CustomFaultExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q9="http://www.yourcompany.com/types/" name="detail" element="q9:CustomFaultException" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_GetFormsHierarchy_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetFormsHierarchy" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_GetFormsHierarchy_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetFormsHierarchyResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_GetFormsHierarchy_CustomFaultExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q10="http://www.yourcompany.com/types/" name="detail" element="q10:CustomFaultException" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_GetSurveyAnswerHierarchy_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSurveyAnswerHierarchy" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_GetSurveyAnswerHierarchy_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSurveyAnswerHierarchyResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_GetSurveyAnswerHierarchy_CustomFaultExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q11="http://www.yourcompany.com/types/" name="detail" element="q11:CustomFaultException" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_GetAncestorResponseIdsByChildId_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAncestorResponseIdsByChildId" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_GetAncestorResponseIdsByChildId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAncestorResponseIdsByChildIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_GetAncestorResponseIdsByChildId_CustomFaultExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q12="http://www.yourcompany.com/types/" name="detail" element="q12:CustomFaultException" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_GetResponsesByRelatedFormId_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetResponsesByRelatedFormId" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_GetResponsesByRelatedFormId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetResponsesByRelatedFormIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_GetResponsesByRelatedFormId_CustomFaultExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q13="http://www.yourcompany.com/types/" name="detail" element="q13:CustomFaultException" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_CreateAccount_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateAccount" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_CreateAccount_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateAccountResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_CreateAccount_CustomFaultExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q14="http://www.yourcompany.com/types/" name="detail" element="q14:CustomFaultException" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_GetStateList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetStateList" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_GetStateList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetStateListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_GetStateList_CustomFaultExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q15="http://www.yourcompany.com/types/" name="detail" element="q15:CustomFaultException" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_GetSurveyControlList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSurveyControlList" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_GetSurveyControlList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSurveyControlListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_GetSurveyControlList_CustomFaultExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q16="http://www.yourcompany.com/types/" name="detail" element="q16:CustomFaultException" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_GetUserOrgId_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserOrgId" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_GetUserOrgId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserOrgIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_GetUserOrgId_CustomFaultExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q17="http://www.yourcompany.com/types/" name="detail" element="q17:CustomFaultException" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_HasResponse_InputMessage">
+    <wsdl:part name="parameters" element="tns:HasResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_HasResponse_OutputMessage">
+    <wsdl:part name="parameters" element="tns:HasResponseResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_HasResponse_CustomFaultExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q18="http://www.yourcompany.com/types/" name="detail" element="q18:CustomFaultException" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_GetSourceTables_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSourceTables" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_GetSourceTables_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSourceTablesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_GetSourceTables_CustomFaultExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q19="http://www.yourcompany.com/types/" name="detail" element="q19:CustomFaultException" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_UpdateResponseStatus_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateResponseStatus" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_UpdateResponseStatus_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateResponseStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_UpdateResponseStatus_CustomFaultExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q20="http://www.yourcompany.com/types/" name="detail" element="q20:CustomFaultException" />
+  </wsdl:message>
+  <wsdl:portType name="IDataService">
+    <wsdl:operation name="GetSurveyInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDataService/GetSurveyInfo" message="tns:IDataService_GetSurveyInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDataService/GetSurveyInfoResponse" message="tns:IDataService_GetSurveyInfo_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IDataService/GetSurveyInfoCustomFaultExceptionFault" name="CustomFaultExceptionFault" message="tns:IDataService_GetSurveyInfo_CustomFaultExceptionFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCacheDependencyInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDataService/GetCacheDependencyInfo" message="tns:IDataService_GetCacheDependencyInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDataService/GetCacheDependencyInfoResponse" message="tns:IDataService_GetCacheDependencyInfo_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IDataService/GetCacheDependencyInfoCustomFaultExceptionFault" name="CustomFaultExceptionFault" message="tns:IDataService_GetCacheDependencyInfo_CustomFaultExceptionFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSurveyAnswer">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDataService/GetSurveyAnswer" message="tns:IDataService_GetSurveyAnswer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDataService/GetSurveyAnswerResponse" message="tns:IDataService_GetSurveyAnswer_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IDataService/GetSurveyAnswerCustomFaultExceptionFault" name="CustomFaultExceptionFault" message="tns:IDataService_GetSurveyAnswer_CustomFaultExceptionFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetSurveyAnswer">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDataService/SetSurveyAnswer" message="tns:IDataService_SetSurveyAnswer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDataService/SetSurveyAnswerResponse" message="tns:IDataService_SetSurveyAnswer_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IDataService/SetSurveyAnswerCustomFaultExceptionFault" name="CustomFaultExceptionFault" message="tns:IDataService_SetSurveyAnswer_CustomFaultExceptionFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="PassCodeLogin">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDataService/PassCodeLogin" message="tns:IDataService_PassCodeLogin_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDataService/PassCodeLoginResponse" message="tns:IDataService_PassCodeLogin_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IDataService/PassCodeLoginCustomFaultExceptionFault" name="CustomFaultExceptionFault" message="tns:IDataService_PassCodeLogin_CustomFaultExceptionFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetPassCode">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDataService/SetPassCode" message="tns:IDataService_SetPassCode_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDataService/SetPassCodeResponse" message="tns:IDataService_SetPassCode_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IDataService/SetPassCodeCustomFaultExceptionFault" name="CustomFaultExceptionFault" message="tns:IDataService_SetPassCode_CustomFaultExceptionFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAuthenticationResponse">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDataService/GetAuthenticationResponse" message="tns:IDataService_GetAuthenticationResponse_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDataService/GetAuthenticationResponseResponse" message="tns:IDataService_GetAuthenticationResponse_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IDataService/GetAuthenticationResponseCustomFaultExceptionFault" name="CustomFaultExceptionFault" message="tns:IDataService_GetAuthenticationResponse_CustomFaultExceptionFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFormResponseList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDataService/GetFormResponseList" message="tns:IDataService_GetFormResponseList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDataService/GetFormResponseListResponse" message="tns:IDataService_GetFormResponseList_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IDataService/GetFormResponseListCustomFaultExceptionFault" name="CustomFaultExceptionFault" message="tns:IDataService_GetFormResponseList_CustomFaultExceptionFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFormChildInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDataService/GetFormChildInfo" message="tns:IDataService_GetFormChildInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDataService/GetFormChildInfoResponse" message="tns:IDataService_GetFormChildInfo_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IDataService/GetFormChildInfoCustomFaultExceptionFault" name="CustomFaultExceptionFault" message="tns:IDataService_GetFormChildInfo_CustomFaultExceptionFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFormsHierarchy">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDataService/GetFormsHierarchy" message="tns:IDataService_GetFormsHierarchy_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDataService/GetFormsHierarchyResponse" message="tns:IDataService_GetFormsHierarchy_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IDataService/GetFormsHierarchyCustomFaultExceptionFault" name="CustomFaultExceptionFault" message="tns:IDataService_GetFormsHierarchy_CustomFaultExceptionFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSurveyAnswerHierarchy">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDataService/GetSurveyAnswerHierarchy" message="tns:IDataService_GetSurveyAnswerHierarchy_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDataService/GetSurveyAnswerHierarchyResponse" message="tns:IDataService_GetSurveyAnswerHierarchy_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IDataService/GetSurveyAnswerHierarchyCustomFaultExceptionFault" name="CustomFaultExceptionFault" message="tns:IDataService_GetSurveyAnswerHierarchy_CustomFaultExceptionFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAncestorResponseIdsByChildId">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDataService/GetAncestorResponseIdsByChildId" message="tns:IDataService_GetAncestorResponseIdsByChildId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDataService/GetAncestorResponseIdsByChildIdResponse" message="tns:IDataService_GetAncestorResponseIdsByChildId_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IDataService/GetAncestorResponseIdsByChildIdCustomFaultExceptionFault" name="CustomFaultExceptionFault" message="tns:IDataService_GetAncestorResponseIdsByChildId_CustomFaultExceptionFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetResponsesByRelatedFormId">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDataService/GetResponsesByRelatedFormId" message="tns:IDataService_GetResponsesByRelatedFormId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDataService/GetResponsesByRelatedFormIdResponse" message="tns:IDataService_GetResponsesByRelatedFormId_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IDataService/GetResponsesByRelatedFormIdCustomFaultExceptionFault" name="CustomFaultExceptionFault" message="tns:IDataService_GetResponsesByRelatedFormId_CustomFaultExceptionFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateAccount">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDataService/CreateAccount" message="tns:IDataService_CreateAccount_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDataService/CreateAccountResponse" message="tns:IDataService_CreateAccount_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IDataService/CreateAccountCustomFaultExceptionFault" name="CustomFaultExceptionFault" message="tns:IDataService_CreateAccount_CustomFaultExceptionFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetStateList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDataService/GetStateList" message="tns:IDataService_GetStateList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDataService/GetStateListResponse" message="tns:IDataService_GetStateList_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IDataService/GetStateListCustomFaultExceptionFault" name="CustomFaultExceptionFault" message="tns:IDataService_GetStateList_CustomFaultExceptionFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSurveyControlList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDataService/GetSurveyControlList" message="tns:IDataService_GetSurveyControlList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDataService/GetSurveyControlListResponse" message="tns:IDataService_GetSurveyControlList_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IDataService/GetSurveyControlListCustomFaultExceptionFault" name="CustomFaultExceptionFault" message="tns:IDataService_GetSurveyControlList_CustomFaultExceptionFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserOrgId">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDataService/GetUserOrgId" message="tns:IDataService_GetUserOrgId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDataService/GetUserOrgIdResponse" message="tns:IDataService_GetUserOrgId_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IDataService/GetUserOrgIdCustomFaultExceptionFault" name="CustomFaultExceptionFault" message="tns:IDataService_GetUserOrgId_CustomFaultExceptionFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="HasResponse">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDataService/HasResponse" message="tns:IDataService_HasResponse_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDataService/HasResponseResponse" message="tns:IDataService_HasResponse_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IDataService/HasResponseCustomFaultExceptionFault" name="CustomFaultExceptionFault" message="tns:IDataService_HasResponse_CustomFaultExceptionFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSourceTables">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDataService/GetSourceTables" message="tns:IDataService_GetSourceTables_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDataService/GetSourceTablesResponse" message="tns:IDataService_GetSourceTables_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IDataService/GetSourceTablesCustomFaultExceptionFault" name="CustomFaultExceptionFault" message="tns:IDataService_GetSourceTables_CustomFaultExceptionFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateResponseStatus">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDataService/UpdateResponseStatus" message="tns:IDataService_UpdateResponseStatus_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDataService/UpdateResponseStatusResponse" message="tns:IDataService_UpdateResponseStatus_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IDataService/UpdateResponseStatusCustomFaultExceptionFault" name="CustomFaultExceptionFault" message="tns:IDataService_UpdateResponseStatus_CustomFaultExceptionFault_FaultMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IDataService" type="tns:IDataService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetSurveyInfo">
+      <soap:operation soapAction="http://tempuri.org/IDataService/GetSurveyInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="CustomFaultExceptionFault">
+        <soap:fault use="literal" name="CustomFaultExceptionFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetCacheDependencyInfo">
+      <soap:operation soapAction="http://tempuri.org/IDataService/GetCacheDependencyInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="CustomFaultExceptionFault">
+        <soap:fault use="literal" name="CustomFaultExceptionFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetSurveyAnswer">
+      <soap:operation soapAction="http://tempuri.org/IDataService/GetSurveyAnswer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="CustomFaultExceptionFault">
+        <soap:fault use="literal" name="CustomFaultExceptionFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="SetSurveyAnswer">
+      <soap:operation soapAction="http://tempuri.org/IDataService/SetSurveyAnswer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="CustomFaultExceptionFault">
+        <soap:fault use="literal" name="CustomFaultExceptionFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="PassCodeLogin">
+      <soap:operation soapAction="http://tempuri.org/IDataService/PassCodeLogin" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="CustomFaultExceptionFault">
+        <soap:fault use="literal" name="CustomFaultExceptionFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="SetPassCode">
+      <soap:operation soapAction="http://tempuri.org/IDataService/SetPassCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="CustomFaultExceptionFault">
+        <soap:fault use="literal" name="CustomFaultExceptionFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetAuthenticationResponse">
+      <soap:operation soapAction="http://tempuri.org/IDataService/GetAuthenticationResponse" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="CustomFaultExceptionFault">
+        <soap:fault use="literal" name="CustomFaultExceptionFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetFormResponseList">
+      <soap:operation soapAction="http://tempuri.org/IDataService/GetFormResponseList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="CustomFaultExceptionFault">
+        <soap:fault use="literal" name="CustomFaultExceptionFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetFormChildInfo">
+      <soap:operation soapAction="http://tempuri.org/IDataService/GetFormChildInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="CustomFaultExceptionFault">
+        <soap:fault use="literal" name="CustomFaultExceptionFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetFormsHierarchy">
+      <soap:operation soapAction="http://tempuri.org/IDataService/GetFormsHierarchy" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="CustomFaultExceptionFault">
+        <soap:fault use="literal" name="CustomFaultExceptionFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetSurveyAnswerHierarchy">
+      <soap:operation soapAction="http://tempuri.org/IDataService/GetSurveyAnswerHierarchy" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="CustomFaultExceptionFault">
+        <soap:fault use="literal" name="CustomFaultExceptionFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetAncestorResponseIdsByChildId">
+      <soap:operation soapAction="http://tempuri.org/IDataService/GetAncestorResponseIdsByChildId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="CustomFaultExceptionFault">
+        <soap:fault use="literal" name="CustomFaultExceptionFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetResponsesByRelatedFormId">
+      <soap:operation soapAction="http://tempuri.org/IDataService/GetResponsesByRelatedFormId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="CustomFaultExceptionFault">
+        <soap:fault use="literal" name="CustomFaultExceptionFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="CreateAccount">
+      <soap:operation soapAction="http://tempuri.org/IDataService/CreateAccount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="CustomFaultExceptionFault">
+        <soap:fault use="literal" name="CustomFaultExceptionFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetStateList">
+      <soap:operation soapAction="http://tempuri.org/IDataService/GetStateList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="CustomFaultExceptionFault">
+        <soap:fault use="literal" name="CustomFaultExceptionFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetSurveyControlList">
+      <soap:operation soapAction="http://tempuri.org/IDataService/GetSurveyControlList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="CustomFaultExceptionFault">
+        <soap:fault use="literal" name="CustomFaultExceptionFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserOrgId">
+      <soap:operation soapAction="http://tempuri.org/IDataService/GetUserOrgId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="CustomFaultExceptionFault">
+        <soap:fault use="literal" name="CustomFaultExceptionFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="HasResponse">
+      <soap:operation soapAction="http://tempuri.org/IDataService/HasResponse" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="CustomFaultExceptionFault">
+        <soap:fault use="literal" name="CustomFaultExceptionFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetSourceTables">
+      <soap:operation soapAction="http://tempuri.org/IDataService/GetSourceTables" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="CustomFaultExceptionFault">
+        <soap:fault use="literal" name="CustomFaultExceptionFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateResponseStatus">
+      <soap:operation soapAction="http://tempuri.org/IDataService/UpdateResponseStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="CustomFaultExceptionFault">
+        <soap:fault use="literal" name="CustomFaultExceptionFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="DataService">
+    <wsdl:port name="BasicHttpBinding_IDataService" binding="tns:BasicHttpBinding_IDataService">
+      <soap:address location="http://localhost:22587/Epi.Web.ServiceHost/SurveyDataService.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

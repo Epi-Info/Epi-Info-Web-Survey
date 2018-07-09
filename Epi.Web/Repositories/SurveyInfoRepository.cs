@@ -20,10 +20,16 @@ namespace Epi.Web.MVC.Repositories
 
         private   IDataService _iDataService;
         private Epi.Web.WCF.SurveyService.IManagerServiceV4 _iManagerService;
+        private string CacheIsOn = "";
+        private string IsCacheSlidingExpiration = "";
+        private int CacheDuration = 0;
         public SurveyInfoRepository(IDataService iDataService, Epi.Web.WCF.SurveyService.IManagerServiceV4 iManagerService)
         {
             _iDataService = iDataService;
             _iManagerService = iManagerService;
+            int.TryParse(ConfigurationManager.AppSettings["CACHE_DURATION"].ToString(), out CacheDuration);
+            CacheIsOn = ConfigurationManager.AppSettings["CACHE_IS_ON"];//false;
+            IsCacheSlidingExpiration = ConfigurationManager.AppSettings["CACHE_SLIDING_EXPIRATION"].ToString();
         }
         
         /// <summary>
@@ -338,5 +344,90 @@ namespace Epi.Web.MVC.Repositories
            }
 
        }
+
+        public SurveyInfoResponse GetFormChildInfo(SurveyInfoRequest SurveyInfoRequest)
+        {
+            return _iDataService.GetFormChildInfo(SurveyInfoRequest);
+
+        }
+        public FormsHierarchyResponse GetFormsHierarchy(FormsHierarchyRequest pRequest)
+        {
+
+
+            string SurveyId = pRequest.SurveyInfo.SurveyId;
+            var CacheObj = HttpRuntime.Cache.Get(SurveyId);
+            FormsHierarchyResponse result = new FormsHierarchyResponse();
+
+
+            if (CacheIsOn.ToUpper() == "TRUE")
+            {
+                if (CacheObj == null)
+                {
+                    result = (FormsHierarchyResponse)_iDataService.GetFormsHierarchy(pRequest);
+
+                    if (IsCacheSlidingExpiration.ToUpper() == "TRUE")
+                    {
+
+                        HttpRuntime.Cache.Insert(SurveyId, result, null, Cache.NoAbsoluteExpiration, TimeSpan.FromMinutes(CacheDuration));
+                    }
+                    else
+                    {
+                        HttpRuntime.Cache.Insert(SurveyId, result, null, DateTime.Now.AddMinutes(CacheDuration), Cache.NoSlidingExpiration);
+
+                    }
+                    return result;
+                }
+                else
+                {
+
+
+                    return (FormsHierarchyResponse)CacheObj;
+
+                }
+            }
+            else
+            {
+                result = (FormsHierarchyResponse)_iDataService.GetFormsHierarchy(pRequest);
+                return result;
+
+            }
+        }
+        public bool HasResponse(string SurveyId, string ResponseId)
+        {
+            try
+            {
+
+                return _iDataService.HasResponse(SurveyId, ResponseId);
+
+            }
+            catch (FaultException<CustomFaultException> cfe)
+            {
+                throw cfe;
+            }
+            catch (FaultException fe)
+            {
+                throw fe;
+            }
+            catch (CommunicationException ce)
+            {
+                throw ce;
+            }
+            catch (TimeoutException te)
+            {
+                throw te;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+
+            }
+
+
+        }
+        public SurveyAnswerResponse GetResponseAncestor(SurveyAnswerRequest SARequest)
+        {
+
+            return _iDataService.GetAncestorResponseIdsByChildId(SARequest);
+        }
     }
 }

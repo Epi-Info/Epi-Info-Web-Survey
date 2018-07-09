@@ -31,7 +31,18 @@ namespace Epi.Web.Common.DTO
 
         [DataMember]
         public bool RecordBeforeFlag { get; set; }
+        [DataMember]
+        public int ViewId { get;   set; }
+        [DataMember]
+        public string ParentRecordId { get;   set; }
+        [DataMember]
+        public string RelateParentId { get;   set; }
+        [DataMember]    
+        public List<SurveyAnswerDTO> ResponseHierarchyIds { get; internal set; }
+        [DataMember]
+        public int RecordSourceId { get; set; }
+        [DataMember]
+        public Dictionary<string, string> SqlData { get; set; }
 
-       
     }
 }

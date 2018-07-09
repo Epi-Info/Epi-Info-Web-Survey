@@ -31,7 +31,7 @@ namespace Epi.Web.MVC.Models
         private string _PassCode;
         private string _ResponseId;
         private string _CurrentCultureDateFormat;
-
+        private bool _IsSqlProject;
         //public SurveyInfoModel()
         //{
         //    //CultureInfo currentCulture = Thread.CurrentThread.CurrentCulture;
@@ -146,5 +146,11 @@ namespace Epi.Web.MVC.Models
             get { return _ResponseId; }
             set { _ResponseId = value; }
             }
+        
+        public bool IsSqlProject
+        {
+            get { return _IsSqlProject; }
+            set { _IsSqlProject = value; }
+        }
     }
 }

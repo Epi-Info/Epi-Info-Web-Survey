@@ -1019,3 +1019,120 @@ div.ui-checkbox .ui-btn-corner-all {
    border: 1px solid #339a98 /*{b-bup-border}*/;
    background: #00827e /*{b-bup-background-color}*/;
 }
+.ui-btn-up-backrecord, .ui-btn-hover-backrecord {
+    cursor: pointer;
+    vertical-align: middle;
+    border: 1px solid #1f3b53 !important;
+    background: #bbb;
+    background-image: url('../images/backform.png');
+    background-repeat: no-repeat;
+    background-position: 15px center;
+    background-size: 16px;
+    padding: 5px 5px 5px -5px;
+    color: #3f3f3f !important;
+    width: 160px;
+    height: 30px;
+    text-align: left;
+    text-shadow: none !important;
+}
+
+.ui-btn-up-defrecord, .ui-btn-hover-defrecord {
+    cursor: pointer;
+    vertical-align: middle;
+    color: #fff;
+    border: 1px solid #1f3b53;
+    background: #1D60AC;
+    font: 12pt lighter "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background-image: url('../images/addnew.png');
+    background-repeat: no-repeat;
+    background-position: 8px center;
+    background-size: 18px;
+    width: 180px;
+    height: 35px;
+    /* border: none !important; padding: 0px !important;*/
+    text-align: left;
+}
+
+#addnew .ui-btn-inner {
+    border: none !important;
+    padding: 5px 6px 5px 40px !important;
+}
+
+
+h2.surveyTitle {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: lighter !important;
+    ;
+    font-size: 21pt !important;
+    margin: 0 0 .5em 0;
+    line-height: 100%;
+}
+
+#mode {
+    float: left;
+}
+
+#NumberOfRecords {
+    float: right;
+    text-align: right;
+}
+
+#formtitle {
+    border-bottom: 5px solid #5c53ac;
+    padding: 0 10px 1px 0;
+    /*display:inline-block;*/
+    float: none;
+}
+
+.ui-btn-up-submit2, .ui-btn-hover-submit2 {
+    cursor: pointer;
+    border: 1px solid #1f3b53;
+    background: #1D60AC;
+    color: #fff !important;
+    /*padding:0 0 0 5px !important;*/
+    vertical-align: middle;
+    /* box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(158,158,158,0.3);
+    -o-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(158,158,158,0.3);
+    -webkit-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(158,158,158,0.3);
+    -moz-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(158,158,158,0.3);
+ /*margin: -6px 0 0 0 !important;*/
+    margin: 0px !important;
+    text-shadow: none !important;
+    /*font-weight: bold;*/
+}
+
+#recordstable ul {
+    margin: 0;
+    padding: 0
+}
+
+#recordstable li {
+    margin: 5px 0 0 0;
+    padding: 0;
+    list-style: none;
+    border-bottom: 1px solid #ccc;
+}
+
+.mobilewrap {
+    display: block;
+    padding: 8px;
+    border-top: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+}
+
+.mobileheader {
+    width: 45%;
+    font-weight: 600;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    float: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mobilevalue {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    float: left;
+    width: 50%;
+    word-break: break-all;
+    word

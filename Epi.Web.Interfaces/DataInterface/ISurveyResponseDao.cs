@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Epi.Web.Common.BusinessObject;
+using Epi.Web.Common.Criteria;
 
 namespace Epi.Web.Interfaces.DataInterfaces
 {
@@ -70,20 +71,33 @@ namespace Epi.Web.Interfaces.DataInterfaces
         /// <param name="SurveyResponse">SurveyResponse.</param>
         void InsertSurveyResponse(SurveyResponseBO SurveyResponse);
 
+        void InsertChildSurveyResponse(SurveyResponseBO SurveyResponse);
         /// <summary>
         /// Updates a SurveyResponse.
         /// </summary>
         /// <param name="SurveyResponse">SurveyResponse.</param>
         void UpdateSurveyResponse(SurveyResponseBO SurveyResponse);
+        void InsertResponseXml(ResponseXmlBO responseXmlBO);
 
         /// <summary>
         /// Deletes a SurveyResponse
         /// </summary>
         /// <param name="SurveyResponse">SurveyResponse.</param>
-         void DeleteSurveyResponse(SurveyResponseBO SurveyResponse);
-
+        void DeleteSurveyResponse(SurveyResponseBO SurveyResponse);
+        SurveyResponseBO GetResponseXml(string ResponseId);
          void UpdatePassCode(UserAuthenticationRequestBO passcodeBO);
          UserAuthenticationResponseBO GetAuthenticationResponse(UserAuthenticationRequestBO passcodeBO);
+         List<SurveyResponseBO> GetFormResponseByFormId(string FormId,int PageNumber, int PageSize);
+         List<SurveyResponseBO> GetFormResponseByFormId(SurveyAnswerCriteria criteria);
+         int GetFormResponseCount(string FormId);
+
+         int GetFormResponseCount(SurveyAnswerCriteria Criteria);
+         string GetResponseParentId(string ResponseId);
+         List<SurveyResponseBO> GetResponsesHierarchyIdsByRootId(string RootId);
+         SurveyResponseBO GetFormResponseByParentRecordId(string ResponseId);
+         List<SurveyResponseBO> GetAncestorResponseIdsByChildId(string ChildId);
+         List<SurveyResponseBO> GetResponsesByRelatedFormId(string ResponseId, string SurveyId);
+         bool HasResponse(SurveyAnswerCriteria Criteria);
          void UpdateRecordStatus(SurveyResponseBO SurveyResponseBO);
     }
 }

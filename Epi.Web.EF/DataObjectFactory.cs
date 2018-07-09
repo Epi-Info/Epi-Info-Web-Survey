@@ -1,6 +1,7 @@
 ﻿using System.Configuration;
 using System;
-using Epi.Web.Common.Security; 
+using Epi.Web.Common.Security;
+using System.Data.EntityClient;
 
 namespace Epi.Web.EF
 {
@@ -23,7 +24,11 @@ namespace Epi.Web.EF
                 string AdoConnectionStringName = "EIWSADO";
                 //Decrypt connection string here
                 _connectionString = Cryptography.Decrypt(ConfigurationManager.ConnectionStrings[connectionStringName].ConnectionString);
+                _connectionString = _connectionString.Replace("&quot;", "'");
+               // _connectionString =  ConfigurationManager.ConnectionStrings[connectionStringName].ConnectionString;
+
                 _ADOConnectionString = Cryptography.Decrypt(ConfigurationManager.ConnectionStrings[AdoConnectionStringName].ConnectionString);
+            
             }
             catch (Exception ex) 
                 {
@@ -40,16 +45,26 @@ namespace Epi.Web.EF
         /// <returns>Action Entities context.</returns>
         public static Epi.Web.EF.EIWSEntities CreateContext()
         {
-            return new Epi.Web.EF.EIWSEntities(_connectionString);
-        }
-        public static Epi.Web.EF.SurveyMetaData CreateSurveyMetaData()
-        {
-            return new Epi.Web.EF.SurveyMetaData();
-        }
 
-        public static Epi.Web.EF.SurveyResponse CreateSurveyResponse()
-        {
-            return new Epi.Web.EF.SurveyResponse();
+
+            var ConnectionObj = new Epi.Web.EF.EIWSEntities(_connectionString); 
+
+
+           
+            return ConnectionObj;
         }
+        //public static Epi.Web.EF.SurveyMetaData CreateSurveyMetaData()
+        //{
+        //    return new Epi.Web.EF.SurveyMetaData();
+        //}
+
+        //public static Epi.Web.EF.SurveyResponse CreateSurveyResponse()
+        //{
+        //    return new Epi.Web.EF.SurveyResponse();
+        //}
+        //public static Epi.Web.EF.Organization CreateOrganization()
+        //{
+        //    return new Epi.Web.EF.Organization();
+        //}
     }
 }

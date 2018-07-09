@@ -7,13 +7,14 @@ using Epi.Web.Common.Criteria;
 using System.Xml;
 using System.Xml.Linq;
 using System.Web;
+using System.Xml.XPath;
 namespace Epi.Web.BLL
 {
 
   public  class SurveyInfo
     {
       private Epi.Web.Interfaces.DataInterfaces.ISurveyInfoDao SurveyInfoDao;
-
+      Dictionary<int, int> ViewIds = new Dictionary<int, int>();
 
         public SurveyInfo(Epi.Web.Interfaces.DataInterfaces.ISurveyInfoDao pSurveyInfoDao)
         {
@@ -142,18 +143,72 @@ namespace Epi.Web.BLL
             SurveyInfoBO result = pValue;
             if (ValidateSurveyFields(pValue))
             {
-                if (result.IsSqlProject == true)
-                {
-                    this.SurveyInfoDao.ValidateServername(pValue);
-                    result.IsSqlProject = pValue.IsSqlProject;
-                }
-                this.SurveyInfoDao.UpdateSurveyInfo(pValue);
-                result.StatusText = "Successfully updated survey information.";
-                string _Xml = pValue.XML;
-                ReSetSourceTable(_Xml, pValue.SurveyId.ToString());
+                if (!string.IsNullOrEmpty(pValue.XML)) {
+                    if (this.IsRelatedForm(pValue.XML))
+                    {
 
-            }
-            else{
+                        List<SurveyInfoBO> FormsHierarchyIds = this.GetFormsHierarchyIds(pValue.SurveyId.ToString());
+
+                        // 1- breck down the xml to n views
+                        List<string> XmlList = new List<string>();
+                        XmlList = XmlChunking(pValue.XML);
+
+                        // 2- call publish() with each of the views
+                        foreach (string Xml in XmlList)
+                        {
+                            XDocument xdoc = XDocument.Parse(Xml);
+                            SurveyInfoBO SurveyInfoBO = new SurveyInfoBO();
+                            XElement ViewElement = xdoc.XPathSelectElement("Template/Project/View");
+                            int ViewId;
+                            int.TryParse(ViewElement.Attribute("ViewId").Value.ToString(), out ViewId);
+
+                            GetRelateViewIds(ViewElement, ViewId);
+
+                            SurveyInfoBO = pValue;
+                            SurveyInfoBO.XML = Xml;
+                            SurveyInfoBO.SurveyName = ViewElement.Attribute("Name").Value.ToString();
+                            SurveyInfoBO.ViewId = ViewId;
+
+                            SurveyInfoBO pBO = FormsHierarchyIds.Single(x => x.ViewId == ViewId);
+                            SurveyInfoBO.SurveyId = pBO.SurveyId;
+                            SurveyInfoBO.ParentId = pBO.ParentId;
+                            SurveyInfoBO.UserPublishKey = pBO.UserPublishKey;
+                            //SurveyInfoBO.OwnerId = pValue.OwnerId;
+                            if (result.IsSqlProject == true)
+                            {
+                                this.SurveyInfoDao.ValidateServername(pValue);
+                                result.IsSqlProject = pValue.IsSqlProject;
+                            }
+                            this.SurveyInfoDao.UpdateSurveyInfo(pValue);
+                            //Commented as updating mode does not require update of the display settings
+                            //this.SurveyInfoDao.InsertFormdefaultSettings(pRequestMessage.SurveyId, pRequestMessage.IsSqlProject, GetSurveyControls(SurveyInfoBO));
+                        }
+                    }
+                    else
+                    {
+                        if (pValue.IsSqlProject == true)
+                        {
+                            this.SurveyInfoDao.ValidateServername(pValue);
+                        }
+                        this.SurveyInfoDao.UpdateSurveyInfo(pValue);
+
+
+                        //Commented as updating mode does not require update of the display settings
+                        //this.SurveyInfoDao.InsertFormdefaultSettings(pRequestMessage.SurveyId, pRequestMessage.IsSqlProject, GetSurveyControls(pRequestMessage));
+                    }
+                }
+                else
+                {
+                    this.SurveyInfoDao.UpdateSurveyInfo(pValue);
+                }
+                result.StatusText = "Successfully updated survey information.";
+                
+                if (!string.IsNullOrEmpty(pValue.XML))
+                {
+                    ReSetSourceTable(pValue.XML, pValue.SurveyId.ToString());
+                }
+            
+            }else{
                 result.StatusText = "One or more survey required fields are missing values.";
             
             }
@@ -208,6 +263,134 @@ namespace Epi.Web.BLL
         }
 
 
+        public List<SurveyInfoBO> GetChildInfoByParentId(Dictionary<string ,int > ParentIdList)
+            {
+            List<SurveyInfoBO> result = new List<SurveyInfoBO>();
+            foreach (KeyValuePair<string, int> item in ParentIdList)
+                {
+                result = this.SurveyInfoDao.GetChildInfoByParentId(item.Key, item.Value);
+                }
+            return result;
+            }
+        public SurveyInfoBO GetParentInfoByChildId(string ChildId)
+            {
+            SurveyInfoBO result = new SurveyInfoBO();
+
+            result = this.SurveyInfoDao.GetParentInfoByChildId(ChildId);
+              
+            return result;
+            }
+        public List<FormsHierarchyBO> GetFormsHierarchyIdsByRootId(string RootId)
+            {
+            List<SurveyInfoBO> SurveyInfoBOList = new List<SurveyInfoBO>();
+            List<FormsHierarchyBO> result = new List<FormsHierarchyBO>();
+
+            SurveyInfoBOList = this.SurveyInfoDao.GetFormsHierarchyIdsByRootId(RootId);
+            foreach (var item in SurveyInfoBOList)
+                {
+                FormsHierarchyBO FormsHierarchyBO = new FormsHierarchyBO();
+                FormsHierarchyBO.ViewId = item.ViewId;
+                FormsHierarchyBO.FormId = item.SurveyId;
+                FormsHierarchyBO.SurveyInfo = item;
+                FormsHierarchyBO.IsSqlProject = item.IsSqlProject;
+                
+                if (item.SurveyId == RootId)
+                    {
+                    FormsHierarchyBO.IsRoot = true;
+                    }
+                result.Add(FormsHierarchyBO);
+                }
+
+            return result;
+
+            }
+        private List<SurveyInfoBO> GetFormsHierarchyIds(string RootId)
+            {
+            List<SurveyInfoBO> FormsHierarchyIds = new List<SurveyInfoBO>();
+            FormsHierarchyIds = this.SurveyInfoDao.GetFormsHierarchyIdsByRootId(RootId);
+            return FormsHierarchyIds;
+            }
+        private bool IsRelatedForm(string Xml)
+            {
+
+            bool IsRelatedForm = false;
+            XDocument xdoc = XDocument.Parse(Xml);
+
+
+            int NumberOfViews = xdoc.Descendants("View").Count();
+            if (NumberOfViews > 1)
+                {
+                IsRelatedForm = true;
+
+                }
+
+            return IsRelatedForm;
+
+            }
+
+
+        private void GetRelateViewIds(XElement ViewElement, int ViewId)
+            {
+
+            var _RelateFields = from _Field in
+                                    ViewElement.Descendants("Field")
+                                where _Field.Attribute("FieldTypeId").Value == "20"
+                                select _Field;
+
+            foreach (var Item in _RelateFields)
+                {
+
+                int RelateViewId = 0;
+                int.TryParse(Item.Attribute("RelatedViewId").Value, out RelateViewId);
+
+                this.ViewIds.Add(RelateViewId, ViewId);
+                }
+
+
+            }
+
+        private List<string> XmlChunking(string Xml)
+            {
+            List<string> XmlList = new List<string>();
+            XDocument xdoc = XDocument.Parse(Xml);
+            XDocument xdoc1 = XDocument.Parse(Xml);
+
+            xdoc.Descendants("View").Remove();
+
+            foreach (XElement Xelement in xdoc1.Descendants("Project").Elements("View"))
+                {
+
+                //xdoc.Element("Project").Add(Xelement);
+                xdoc.Root.Element("Project").Add(Xelement);
+                XmlList.Add(xdoc.ToString());
+                xdoc.Descendants("View").Remove();
+                }
+
+            return XmlList;
+            }
+        //private List<string> GetSurveyControls(SurveyInfoBO SurveyInfoBO)
+        //{
+        //    List<string> List = new List<string>();
+
+        //    XDocument xdoc = XDocument.Parse(SurveyInfoBO.XML);
+
+        //    var _FieldsTypeIDs = from _FieldTypeID in
+        //                             xdoc.Descendants("Field")
+        //                         select _FieldTypeID;
+
+        //    string fieldType = "";
+
+        //    foreach (var _FieldTypeID in _FieldsTypeIDs.Take(5))
+        //    {
+        //        fieldType = _FieldTypeID.Attribute("FieldTypeId").Value;
+
+        //        if (fieldType != "2" && fieldType != "21" && fieldType != "3" && fieldType != "20")
+        //        {
+        //            List.Add(_FieldTypeID.Attribute("Name").Value.ToString());
+        //        }
+        //    }
+        //    return List;
+        //}
         public Web.Common.Message.SurveyControlsResponse GetSurveyControlList(string SurveyId)
             {
             Web.Common.Message.SurveyControlsResponse SurveyControlsResponse = new Web.Common.Message.SurveyControlsResponse();
@@ -240,28 +423,28 @@ namespace Epi.Web.BLL
         
         }
         private List<Web.Common.DTO.SurveyControlDTO> GetSurveyControls(SurveyInfoBO SurveyInfoBO)
-            {
+        {
             List<Web.Common.DTO.SurveyControlDTO> List = new List<Web.Common.DTO.SurveyControlDTO>();
-           
+
             XDocument xdoc = XDocument.Parse(SurveyInfoBO.XML);
 
 
             var _FieldsTypeIDs = from _FieldTypeID in
                                       xdoc.Descendants("Field")
-                                      select _FieldTypeID;
-            
+                                 select _FieldTypeID;
+
             foreach (var _FieldTypeID in _FieldsTypeIDs)
-                {
+            {
                 Web.Common.DTO.SurveyControlDTO SurveyControlDTO = new Web.Common.DTO.SurveyControlDTO();
                 SurveyControlDTO.ControlId = _FieldTypeID.Attribute("Name").Value.ToString();
                 SurveyControlDTO.ControlPrompt = _FieldTypeID.Attribute("PromptText").Value.ToString();
                 SurveyControlDTO.ControlType = GetControlType(_FieldTypeID.Attribute("FieldTypeId").Value);
                 List.Add(SurveyControlDTO);
-                     
-                }
-            return List;
 
             }
+            return List;
+
+        }
         private string GetControlType(string Type) 
             {
             string ControlType="";

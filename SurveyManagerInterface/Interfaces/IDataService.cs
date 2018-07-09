@@ -43,6 +43,25 @@ namespace Epi.Web.WCF.SurveyService
         
         [OperationContract]
         [FaultContract(typeof(CustomFaultException))]
+        SurveyAnswerResponse GetFormResponseList(SurveyAnswerRequest pRequest);
+        [OperationContract]
+        [FaultContract(typeof(CustomFaultException))]
+        SurveyInfoResponse GetFormChildInfo(SurveyInfoRequest SurveyInfoRequest);
+
+        [OperationContract]
+        [FaultContract(typeof(CustomFaultException))]
+        FormsHierarchyResponse GetFormsHierarchy(FormsHierarchyRequest FormsHierarchyRequest);
+        [OperationContract]
+        [FaultContract(typeof(CustomFaultException))]
+        SurveyAnswerResponse GetSurveyAnswerHierarchy(SurveyAnswerRequest pRequest);
+        [OperationContract]
+        [FaultContract(typeof(CustomFaultException))]
+        SurveyAnswerResponse GetAncestorResponseIdsByChildId(SurveyAnswerRequest pRequest);
+        [OperationContract]
+        [FaultContract(typeof(CustomFaultException))]
+        SurveyAnswerResponse GetResponsesByRelatedFormId(SurveyAnswerRequest pRequest);
+        [OperationContract]
+        [FaultContract(typeof(CustomFaultException))]
         OrganizationAccountResponse CreateAccount(OrganizationAccountRequest pRequest);
         [OperationContract]
         [FaultContract(typeof(CustomFaultException))]
@@ -56,6 +75,12 @@ namespace Epi.Web.WCF.SurveyService
         OrganizationAccountResponse GetUserOrgId(OrganizationAccountRequest Request);
         [OperationContract]
         [FaultContract(typeof(CustomFaultException))]
+        bool HasResponse(string SurveyId, string ResponseId);
+        [OperationContract]
+        [FaultContract(typeof(CustomFaultException))]
         SourceTablesResponse GetSourceTables(SourceTablesRequest Request);
+        [OperationContract]
+        [FaultContract(typeof(CustomFaultException))]
+        void UpdateResponseStatus(SurveyAnswerRequest request);
     }
 }

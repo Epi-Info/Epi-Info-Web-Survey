@@ -57,6 +57,9 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Epi.Web.Common">
+      <HintPath>..\Epi.Web\bin\Epi.Web.Common.dll</HintPath>
+    </Reference>
     <Reference Include="EpiInfo.Plugin">
       <HintPath>..\Epi.Web\bin\EpiInfo.Plugin.dll</HintPath>
     </Reference>
@@ -115,12 +118,14 @@
     <Compile Include="Fields\MobileLiteral.cs" />
     <Compile Include="Fields\MobileNumericTextBox.cs.cs" />
     <Compile Include="Fields\MobileRadioList.cs" />
+    <Compile Include="Fields\MobileRelateButton.cs" />
     <Compile Include="Fields\MobileSelect.cs" />
     <Compile Include="Fields\MobileTextArea.cs" />
     <Compile Include="Fields\MobileTextBox.cs" />
     <Compile Include="Fields\MobileTimePicker.cs" />
     <Compile Include="Fields\NumericTextBox.cs" />
     <Compile Include="Fields\RadioList.cs" />
+    <Compile Include="Fields\RelateButton.cs" />
     <Compile Include="Fields\Select.cs" />
     <Compile Include="Fields\TextArea.cs" />
     <Compile Include="Fields\TextBox.cs" />
@@ -159,10 +164,6 @@
     <ProjectReference Include="..\Epi.Web.CheckCodeEngine\Epi.Web.CheckCodeEngine.csproj">
       <Project>{6B084882-EF4F-4CF0-85B1-1E8C357AE822}</Project>
       <Name>Epi.Web.CheckCodeEngine</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Epi.Web.Common\Epi.Web.Common.csproj">
-      <Project>{6E2F059B-C1CD-401F-8A63-DC2933CFB0D8}</Project>
-      <Name>Epi.Web.Common</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -17,5 +17,13 @@ namespace Epi.Web.MVC.Repositories.Core
         UserAuthenticationResponse ValidateUser(UserAuthenticationRequest pRequest);
         UserAuthenticationResponse UpdatePassCode(UserAuthenticationRequest PassCodeDTO);
         UserAuthenticationResponse GetAuthenticationResponse(UserAuthenticationRequest pRequest);
+        SurveyAnswerResponse GetSurveyAnswerHierarchy(SurveyAnswerRequest pRequest);
+        SurveyAnswerResponse GetSurveyAnswerAncestor(SurveyAnswerRequest pRequest);
+        SurveyAnswerResponse SetChildRecord(SurveyAnswerRequest SurveyAnswerRequest);
+        SurveyAnswerResponse GetResponsesByRelatedFormId(SurveyAnswerRequest FormResponseReq);
+        bool HasResponse(string SurveyId, string ResponseId);
+        void UpdateResponseStatus(SurveyAnswerRequest Request);
+        SurveyAnswerResponse GetFormResponseList(SurveyAnswerRequest pRequest);
     }
+
 }
