@@ -24,7 +24,11 @@ namespace Epi.Web.Common.BusinessObject
         public long TemplateXMLSize { get; set; }
         public DateTime DateCreated { get; set; }
         public bool IsDraftMode { get; set; }
-        
-       
+        public int ViewId { get;   set; }
+        public string ParentRecordId { get;   set; }
+        public string RelateParentId { get;   set; }
+        public List<SurveyResponseBO> ResponseHierarchyIds { get;   set; }
+
+        public int RecrodSourceId { get; set; }
     }
 }

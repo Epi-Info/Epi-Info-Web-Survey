@@ -12,12 +12,25 @@ namespace Epi.Web.MVC.Constants
            InProgress = 1,
            Complete = 2
         }
+        public static List<string> MetaDaTaColumnNames()
+        {
 
+            List<string> columns = new List<string>();
+            columns.Add("_UserEmail");
+            columns.Add("_DateUpdated");
+            columns.Add("_DateCreated");
+            // columns.Add("IsDraftMode");
+            columns.Add("_Mode");
+            return columns;
+
+        }
         /*sql commands*/
         public const string UPDATE = "Update";
         public const string CREATE = "Create";
         public const string SELECT = "Select";
+        public const string CREATECHILD = "CreateChild";
         
+        public const string CREATECHILDINEDITMODE = "CreateChildInEditMode";
         public const string SURVEY_ID = "SurveyId";
         public const string QUESTION_ID = "QuestionId";
         public const string RESPONSE_ID = "ResponseId";

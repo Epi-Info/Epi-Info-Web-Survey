@@ -92,7 +92,19 @@ namespace Epi.Web.Common.Email
                 return false;
             }
         }
-              
+        public static bool IsValidEmail(string email)
+        {
+            try
+            {
+                MailAddress m = new MailAddress(email);
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
     }
 
    

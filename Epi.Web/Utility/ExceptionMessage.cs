@@ -56,9 +56,10 @@ namespace Epi.Web.Utility
                     }
                     pMessage += "Inner Exception :\n" + exc.InnerException + "\n\n\n" +
                                 "Exception StackTrace:\n" + exc.StackTrace;
-                   
-        
-                
+                pMessage += "Source :\n" + exc.Source + "\n\n\n";
+                             
+
+
 
                 string s = ConfigurationManager.AppSettings["LOGGING_ADMIN_EMAIL_ADDRESS"];
                 if (!String.IsNullOrEmpty(s))

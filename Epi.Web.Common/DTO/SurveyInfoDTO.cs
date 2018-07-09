@@ -26,7 +26,7 @@ namespace Epi.Web.Common.DTO
         private DateTime _StartDate;
         private bool _IsSqlProject;
         private string _DBConnectionString;
-
+        private int _ViewId;
         [DataMember]
         public string SurveyId
         {
@@ -145,5 +145,20 @@ namespace Epi.Web.Common.DTO
             set { _DBConnectionString = value; }
         }
 
+        
+        [DataMember]
+        public int ViewId
+        {
+            get { return _ViewId; }
+            set { _ViewId = value; }
+        }
+
+        private string _ParentId;
+        [DataMember]
+        public string ParentId
+        {
+            get { return _ParentId; }
+            set { _ParentId = value; }
+        }
     }
 }

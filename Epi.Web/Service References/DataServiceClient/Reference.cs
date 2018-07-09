@@ -44,6 +44,33 @@ namespace Epi.Web.MVC.DataServiceClient {
             "t", Name="CustomFaultException", Namespace="http://www.yourcompany.com/types/")]
         Epi.Web.Common.Message.UserAuthenticationResponse GetAuthenticationResponse(Epi.Web.Common.Message.UserAuthenticationRequest pRequest);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/GetFormResponseList", ReplyAction="http://tempuri.org/IDataService/GetFormResponseListResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Epi.Web.Common.Exception.CustomFaultException), Action="http://tempuri.org/IDataService/GetFormResponseListCustomFaultExceptionFault", Name="CustomFaultException", Namespace="http://www.yourcompany.com/types/")]
+        Epi.Web.Common.Message.SurveyAnswerResponse GetFormResponseList(Epi.Web.Common.Message.SurveyAnswerRequest pRequest);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/GetFormChildInfo", ReplyAction="http://tempuri.org/IDataService/GetFormChildInfoResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Epi.Web.Common.Exception.CustomFaultException), Action="http://tempuri.org/IDataService/GetFormChildInfoCustomFaultExceptionFault", Name="CustomFaultException", Namespace="http://www.yourcompany.com/types/")]
+        Epi.Web.Common.Message.SurveyInfoResponse GetFormChildInfo(Epi.Web.Common.Message.SurveyInfoRequest SurveyInfoRequest);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/GetFormsHierarchy", ReplyAction="http://tempuri.org/IDataService/GetFormsHierarchyResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Epi.Web.Common.Exception.CustomFaultException), Action="http://tempuri.org/IDataService/GetFormsHierarchyCustomFaultExceptionFault", Name="CustomFaultException", Namespace="http://www.yourcompany.com/types/")]
+        Epi.Web.Common.Message.FormsHierarchyResponse GetFormsHierarchy(Epi.Web.Common.Message.FormsHierarchyRequest FormsHierarchyRequest);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/GetSurveyAnswerHierarchy", ReplyAction="http://tempuri.org/IDataService/GetSurveyAnswerHierarchyResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Epi.Web.Common.Exception.CustomFaultException), Action="http://tempuri.org/IDataService/GetSurveyAnswerHierarchyCustomFaultExceptionFault" +
+            "", Name="CustomFaultException", Namespace="http://www.yourcompany.com/types/")]
+        Epi.Web.Common.Message.SurveyAnswerResponse GetSurveyAnswerHierarchy(Epi.Web.Common.Message.SurveyAnswerRequest pRequest);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/GetAncestorResponseIdsByChildId", ReplyAction="http://tempuri.org/IDataService/GetAncestorResponseIdsByChildIdResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Epi.Web.Common.Exception.CustomFaultException), Action="http://tempuri.org/IDataService/GetAncestorResponseIdsByChildIdCustomFaultExcepti" +
+            "onFault", Name="CustomFaultException", Namespace="http://www.yourcompany.com/types/")]
+        Epi.Web.Common.Message.SurveyAnswerResponse GetAncestorResponseIdsByChildId(Epi.Web.Common.Message.SurveyAnswerRequest pRequest);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/GetResponsesByRelatedFormId", ReplyAction="http://tempuri.org/IDataService/GetResponsesByRelatedFormIdResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Epi.Web.Common.Exception.CustomFaultException), Action="http://tempuri.org/IDataService/GetResponsesByRelatedFormIdCustomFaultExceptionFa" +
+            "ult", Name="CustomFaultException", Namespace="http://www.yourcompany.com/types/")]
+        Epi.Web.Common.Message.SurveyAnswerResponse GetResponsesByRelatedFormId(Epi.Web.Common.Message.SurveyAnswerRequest pRequest);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/CreateAccount", ReplyAction="http://tempuri.org/IDataService/CreateAccountResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(Epi.Web.Common.Exception.CustomFaultException), Action="http://tempuri.org/IDataService/CreateAccountCustomFaultExceptionFault", Name="CustomFaultException", Namespace="http://www.yourcompany.com/types/")]
         Epi.Web.Common.Message.OrganizationAccountResponse CreateAccount(Epi.Web.Common.Message.OrganizationAccountRequest pRequest);
@@ -60,9 +87,17 @@ namespace Epi.Web.MVC.DataServiceClient {
         [System.ServiceModel.FaultContractAttribute(typeof(Epi.Web.Common.Exception.CustomFaultException), Action="http://tempuri.org/IDataService/GetUserOrgIdCustomFaultExceptionFault", Name="CustomFaultException", Namespace="http://www.yourcompany.com/types/")]
         Epi.Web.Common.Message.OrganizationAccountResponse GetUserOrgId(Epi.Web.Common.Message.OrganizationAccountRequest Request);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/HasResponse", ReplyAction="http://tempuri.org/IDataService/HasResponseResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Epi.Web.Common.Exception.CustomFaultException), Action="http://tempuri.org/IDataService/HasResponseCustomFaultExceptionFault", Name="CustomFaultException", Namespace="http://www.yourcompany.com/types/")]
+        bool HasResponse(string SurveyId, string ResponseId);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/GetSourceTables", ReplyAction="http://tempuri.org/IDataService/GetSourceTablesResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(Epi.Web.Common.Exception.CustomFaultException), Action="http://tempuri.org/IDataService/GetSourceTablesCustomFaultExceptionFault", Name="CustomFaultException", Namespace="http://www.yourcompany.com/types/")]
         Epi.Web.Common.Message.SourceTablesResponse GetSourceTables(Epi.Web.Common.Message.SourceTablesRequest Request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/UpdateResponseStatus", ReplyAction="http://tempuri.org/IDataService/UpdateResponseStatusResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Epi.Web.Common.Exception.CustomFaultException), Action="http://tempuri.org/IDataService/UpdateResponseStatusCustomFaultExceptionFault", Name="CustomFaultException", Namespace="http://www.yourcompany.com/types/")]
+        void UpdateResponseStatus(Epi.Web.Common.Message.SurveyAnswerRequest request);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -120,6 +155,30 @@ namespace Epi.Web.MVC.DataServiceClient {
             return base.Channel.GetAuthenticationResponse(pRequest);
         }
         
+        public Epi.Web.Common.Message.SurveyAnswerResponse GetFormResponseList(Epi.Web.Common.Message.SurveyAnswerRequest pRequest) {
+            return base.Channel.GetFormResponseList(pRequest);
+        }
+        
+        public Epi.Web.Common.Message.SurveyInfoResponse GetFormChildInfo(Epi.Web.Common.Message.SurveyInfoRequest SurveyInfoRequest) {
+            return base.Channel.GetFormChildInfo(SurveyInfoRequest);
+        }
+        
+        public Epi.Web.Common.Message.FormsHierarchyResponse GetFormsHierarchy(Epi.Web.Common.Message.FormsHierarchyRequest FormsHierarchyRequest) {
+            return base.Channel.GetFormsHierarchy(FormsHierarchyRequest);
+        }
+        
+        public Epi.Web.Common.Message.SurveyAnswerResponse GetSurveyAnswerHierarchy(Epi.Web.Common.Message.SurveyAnswerRequest pRequest) {
+            return base.Channel.GetSurveyAnswerHierarchy(pRequest);
+        }
+        
+        public Epi.Web.Common.Message.SurveyAnswerResponse GetAncestorResponseIdsByChildId(Epi.Web.Common.Message.SurveyAnswerRequest pRequest) {
+            return base.Channel.GetAncestorResponseIdsByChildId(pRequest);
+        }
+        
+        public Epi.Web.Common.Message.SurveyAnswerResponse GetResponsesByRelatedFormId(Epi.Web.Common.Message.SurveyAnswerRequest pRequest) {
+            return base.Channel.GetResponsesByRelatedFormId(pRequest);
+        }
+        
         public Epi.Web.Common.Message.OrganizationAccountResponse CreateAccount(Epi.Web.Common.Message.OrganizationAccountRequest pRequest) {
             return base.Channel.CreateAccount(pRequest);
         }
@@ -136,8 +195,16 @@ namespace Epi.Web.MVC.DataServiceClient {
             return base.Channel.GetUserOrgId(Request);
         }
         
+        public bool HasResponse(string SurveyId, string ResponseId) {
+            return base.Channel.HasResponse(SurveyId, ResponseId);
+        }
+        
         public Epi.Web.Common.Message.SourceTablesResponse GetSourceTables(Epi.Web.Common.Message.SourceTablesRequest Request) {
             return base.Channel.GetSourceTables(Request);
+        }
+        
+        public void UpdateResponseStatus(Epi.Web.Common.Message.SurveyAnswerRequest request) {
+            base.Channel.UpdateResponseStatus(request);
         }
     }
 }

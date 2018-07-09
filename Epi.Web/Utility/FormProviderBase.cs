@@ -20,6 +20,7 @@ namespace Epi.Web.MVC.Utility
 {
     public class FormProviderBase
     {
+       
         public static void SetStates(Form form, SurveyAnswerDTO answer)
         {
             Dictionary<string, string> fieldValues = new Dictionary<string, string>();
@@ -27,8 +28,8 @@ namespace Epi.Web.MVC.Utility
             List<string> HighlightedFieldsList = new List<string>();
             List<string> DisabledFieldsList = new List<string>();
             List<string> RequiredFieldsList = new List<string>();
-
-            XmlReader reader = XmlReader.Create(new StringReader(answer.XML));
+            
+        XmlReader reader = XmlReader.Create(new StringReader(answer.XML));
 
             while (reader.Read())
             {
@@ -526,18 +527,39 @@ namespace Epi.Web.MVC.Utility
             return (CommandButton)field;
         }
 
-        protected static CommandButton GetRelateButton(XElement fieldElement, Form form)
-        {
-            InputField field;
+        //protected static CommandButton GetRelateButton(XElement fieldElement, Form form)
+        //{
+        //    InputField field;
 
-            if (form.IsMobile)
-            {
-                field = new MobileCommandButton();
-            }
-            else
-            {
-                field = new CommandButton();
-            }
+        //    if (form.IsMobile)
+        //    {
+        //        field = new MobileCommandButton();
+        //    }
+        //    else
+        //    {
+        //        field = new CommandButton();
+        //    }
+
+        //    field.Title = fieldElement.Attribute("PromptText").Value;
+        //    field.DisplayOrder = int.Parse(fieldElement.Attribute("TabIndex").Value);
+        //    field.Prompt = fieldElement.Attribute("PromptText").Value;
+        //    field.Key = fieldElement.Attribute("Name").Value;
+        //    field.Name = fieldElement.Attribute("Name").Value;
+        //    field.Top = form.Height * ParseDouble(fieldElement.Attribute("ControlTopPositionPercentage").Value);
+        //    field.Left = form.Width * ParseDouble(fieldElement.Attribute("ControlLeftPositionPercentage").Value);
+        //    field.Width = form.Width * ParseDouble(fieldElement.Attribute("ControlWidthPercentage").Value);
+        //    field.Height = form.Height * ParseDouble(fieldElement.Attribute("ControlHeightPercentage").Value);
+        //    field.fontstyle = fieldElement.Attribute("ControlFontStyle").Value;
+        //    field.fontSize = ParseDouble(fieldElement.Attribute("ControlFontSize").Value);
+        //    field.fontfamily = fieldElement.Attribute("ControlFontFamily").Value;
+        //    SetFieldCommon(field, form);
+
+        //    return (CommandButton)field;
+        //}
+        protected static RelateButton GetRelateButton(XElement fieldElement, Form form)
+        {
+            InputField field = new RelateButton(); 
+ 
 
             field.Title = fieldElement.Attribute("PromptText").Value;
             field.DisplayOrder = int.Parse(fieldElement.Attribute("TabIndex").Value);
@@ -546,16 +568,43 @@ namespace Epi.Web.MVC.Utility
             field.Name = fieldElement.Attribute("Name").Value;
             field.Top = form.Height * ParseDouble(fieldElement.Attribute("ControlTopPositionPercentage").Value);
             field.Left = form.Width * ParseDouble(fieldElement.Attribute("ControlLeftPositionPercentage").Value);
-            field.Width = form.Width * ParseDouble(fieldElement.Attribute("ControlWidthPercentage").Value);
-            field.Height = form.Height * ParseDouble(fieldElement.Attribute("ControlHeightPercentage").Value);
+            field.ControlWidth = form.Width * ParseDouble(fieldElement.Attribute("ControlWidthPercentage").Value);
+            field.ControlHeight = form.Height * ParseDouble(fieldElement.Attribute("ControlHeightPercentage").Value);
             field.fontstyle = fieldElement.Attribute("ControlFontStyle").Value;
             field.fontSize = ParseDouble(fieldElement.Attribute("ControlFontSize").Value);
             field.fontfamily = fieldElement.Attribute("ControlFontFamily").Value;
+             
+                ((RelateButton)field).RelatedViewId = fieldElement.Attribute("RelatedViewId").Value;
+            
             SetFieldCommon(field, form);
 
-            return (CommandButton)field;
+            return (RelateButton)field;
         }
+        protected static MobileRelateButton GetMobileRelateButton(XElement fieldElement, Form form)
+        {
+            InputField field = new MobileRelateButton();
 
+            
+
+            field.Title = fieldElement.Attribute("PromptText").Value;
+            field.DisplayOrder = int.Parse(fieldElement.Attribute("TabIndex").Value);
+            field.Prompt = fieldElement.Attribute("PromptText").Value;
+            field.Key = fieldElement.Attribute("Name").Value;
+            field.Name = fieldElement.Attribute("Name").Value;
+            field.Top = form.Height * ParseDouble(fieldElement.Attribute("ControlTopPositionPercentage").Value);
+            field.Left = form.Width * ParseDouble(fieldElement.Attribute("ControlLeftPositionPercentage").Value);
+            field.ControlWidth = form.Width * ParseDouble(fieldElement.Attribute("ControlWidthPercentage").Value);
+            field.ControlHeight = form.Height * ParseDouble(fieldElement.Attribute("ControlHeightPercentage").Value);
+            field.fontstyle = fieldElement.Attribute("ControlFontStyle").Value;
+            field.fontSize = ParseDouble(fieldElement.Attribute("ControlFontSize").Value);
+            field.fontfamily = fieldElement.Attribute("ControlFontFamily").Value;
+            
+             ((MobileRelateButton)field).RelatedViewId = fieldElement.Attribute("RelatedViewId").Value;
+            
+            SetFieldCommon(field, form);
+
+            return (MobileRelateButton)field;
+        }
         protected static DatePicker GetDatePicker(XElement _FieldTypeID, Form form)
         {
             InputField field;
@@ -1226,7 +1275,12 @@ namespace Epi.Web.MVC.Utility
                             break;
 
                         case "20":
-                            field = GetRelateButton(fieldElement, form);
+                            if (!form.IsMobile) {
+                                field = GetRelateButton(fieldElement, form);
+                            }
+                            else {
+                                field = GetMobileRelateButton(fieldElement, form);
+                            }
                             break;
 
                         case "21": 
@@ -1364,7 +1418,13 @@ namespace Epi.Web.MVC.Utility
                             break;
 
                         case "20":
-                            field = GetRelateButton(fieldElement, form);
+                            if (!isMobile)
+                            {
+                                field = GetRelateButton(fieldElement, form);
+                            }
+                            else {
+                                field = GetMobileRelateButton(fieldElement, form);
+                            }
                             break;
 
                         case "21":

@@ -40,8 +40,14 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Epi.Web.EF">
+      <HintPath>..\Epi.Web\bin\Epi.Web.EF.dll</HintPath>
+    </Reference>
+    <Reference Include="Epi.Web.Interfaces">
+      <HintPath>..\Epi.Web\bin\Epi.Web.Interfaces.dll</HintPath>
+    </Reference>
     <Reference Include="EPPlus">
-      <HintPath>..\Epi.Web\bin\EPPlus.dll</HintPath>
+      <HintPath>..\SurveyManagerInterface\bin\Release\EPPlus.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation">
       <HintPath>..\packages\CommonServiceLocator.1.0\lib\NET35\Microsoft.Practices.ServiceLocation.dll</HintPath>
@@ -75,21 +81,13 @@
     <Compile Include="SurveyResponse.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\Epi.Web.Common\Epi.Web.Common.csproj">
       <Project>{6e2f059b-c1cd-401f-8a63-dc2933cfb0d8}</Project>
       <Name>Epi.Web.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Epi.Web.EF\Epi.Web.EF.csproj">
-      <Project>{05a484ab-a555-4200-936b-bec573285bcc}</Project>
-      <Name>Epi.Web.EF</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Epi.Web.Interfaces\Epi.Web.Interfaces.csproj">
-      <Project>{B8AF69BD-3CE1-4AA5-875D-3FB87C7FCE44}</Project>
-      <Name>Epi.Web.Interfaces</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

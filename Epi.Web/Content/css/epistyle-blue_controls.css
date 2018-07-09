@@ -152,3 +152,111 @@ input[type=checkbox]:focus, input[type=radio]:focus  { outline:2px solid rgba(25
 input[type=checkbox]:checked{background-color: #ffffce;}
 input[type="checkbox"] { min-width:13px !important;}
 input[type=text]:disabled, textarea:disabled, select:disabled { color:#3f3f3f; background-color:#c5c5c5; }
+#recordstable table {
+    /*width: 100%; */
+    border-spacing: 1px !important;
+    border-collapse: collapse;
+    min-width: 780px;
+    /*border: 1px solid #2878ec; */
+}
+
+#recordstable tr:nth-of-type(even) {
+    background: #e0ebfc;
+}
+
+#recordstable th {
+    background: white;
+    color: #2878ec;
+    font-size: 10pt;
+    font-weight: lighter;
+    border-bottom: 3px solid #2878ec !important;
+}
+
+#recordstable td, #recordstable th {
+    padding: 6px;
+    /*border-bottom: 1px solid #2878ec; */
+    text-align: left;
+    vertical-align: top;
+    max-width: 130px;
+}
+
+
+
+
+#recordscontent button.record {
+    border: 1px #4a80bd solid;
+    /*-moz-border-radius: 10px;
+ -webkit-border-radius: 10px;
+ -khtml-border-radius: 10px;
+ border-radius: 10px;*/
+    padding: 3px 5px 3px 5px;
+    color: #ffffff;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 10pt;
+    font-weight: bold;
+    width: 150px;
+    background: #1d60ac;
+    /*border: 1px solid rgba(0,0,0,0.5);
+ background: rgba(195,255,104,0.6); 
+ box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
+ -o-box-shadow: 0 2px 6px rgba(0,0,0,0.5),  0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
+ -webkit-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
+ -moz-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);*/
+    /*behavior: url('../Scripts/PIE.htc');*/
+}
+
+button.record {
+    background-image: url('../images/addnew.png');
+    background-repeat: no-repeat;
+    background-size: 18px;
+    background-position: 8px center;
+    /*width: 155px;*/
+    height: 35px;
+    padding: 4px 12px 4px 33px;
+}
+
+#recordscontent button.edit {
+    border: 1px #4a80bd solid;
+    /*-moz-border-radius: 10px;
+ -webkit-border-radius: 10px;
+ -khtml-border-radius: 10px;
+ border-radius: 10px;*/
+    padding: 3px 5px 3px 5px;
+    color: #ffffff;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 10pt;
+    font-weight: bold;
+    width: 75px;
+    background: #1d60ac;
+    /*border: 1px solid rgba(0,0,0,0.5);
+ background: rgba(195,255,104,0.6); 
+ box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
+ -o-box-shadow: 0 2px 6px rgba(0,0,0,0.5),  0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
+ -webkit-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
+ -moz-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);*/
+    /*behavior: url('../Scripts/PIE.htc');*/
+}
+
+
+h2.surveyTitle {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: lighter;
+    font-size: 21pt;
+    margin: 0px 0px 0px 0px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

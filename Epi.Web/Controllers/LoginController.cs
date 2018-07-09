@@ -99,7 +99,8 @@ namespace Epi.Web.MVC.Controllers
            responseId = GetResponseId(ReturnUrl);
 
            Common.DTO.SurveyAnswerDTO  R = _isurveyFacade.GetSurveyAnswerResponse(responseId).SurveyResponseList[0];
-
+            Session["RootFormId"] = R.SurveyId.ToString();
+            Session["RootResponseId"] = responseId;
            // Get Last Page visited else send to page 1 - Begin
 
            XDocument Xdoc = XDocument.Parse(R.XML);

@@ -17,6 +17,8 @@ namespace Epi.Web.MVC.Utility
 {
     public class FormProvider : FormProviderBase
     {
+        public static List<Epi.Web.Common.DTO.SurveyAnswerDTO> SurveyAnswerList;
+        public static List<Epi.Web.Common.DTO.SurveyInfoDTO> SurveyInfoList;
         public static Form GetForm(SurveyInfoDTO surveyInfo, int pageNumber, SurveyAnswerDTO surveyAnswer, bool isMobile = false, bool IsAndroid = false, List<SourceTableDTO> SourceTableList = null)
             
         {

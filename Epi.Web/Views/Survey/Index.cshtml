@@ -1,4 +1,5 @@
-﻿@model MvcDynamicForms.Form
+﻿
+@model Epi.Web.MVC.Models.SurveyModel  
 @{
     ViewBag.Title = "Survey";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -67,7 +68,7 @@
 <script type="text/javascript">
 
      //Check Code Logic start
-    @Html.Raw(Model.FormJavaScript)
+    @Html.Raw(Model.Form.FormJavaScript)
     //Check code logic end
     $(function () {
         $("#savediv button[title]").tooltip();
@@ -97,6 +98,17 @@
         // return false;
 
     }
+    function AddNewChild(ViewId) {
+        
+        $("#myform")[0].Get_Child_action.value = 'true';
+
+        $("#myform")[0].action = window.location.href;
+
+
+        $('#myform').submit();
+
+    }
+    
     /*Clicking the continue button*/
 
     function Continue() {
@@ -105,7 +117,7 @@
         var pageNumber;
         var actionUrlC;
         presentUrl = '@Url.Action("Index","Survey")';
-        pageNumber = '@Model.CurrentPage';
+        pageNumber = '@Model.Form.CurrentPage';
         actionUrlC = processUrl(presentUrl, 'ContinueUrl', pageNumber);
         $("#myform")[0].action = actionUrlC;
         $("#myform").submit();
@@ -119,7 +131,7 @@
         var pageNumber;
         var actionUrlP;
         presentUrl = '@Url.Action("Index","Survey")';
-        pageNumber = '@Model.CurrentPage';
+        pageNumber = '@Model.Form.CurrentPage';
         actionUrlP = processUrl(presentUrl, 'PreviousUrl', pageNumber);
         $("#myform")[0].action = actionUrlP;
         $("#myform").submit();
@@ -156,6 +168,15 @@
             resizable: false,
             height: 410,
             width: 500,
+            modal: true
+        });
+        $("#RelateNavigation").dialog({
+            autoOpen: false,
+            show: "blind",
+            hide: "blind",
+            resizable: false,
+            height: 410,
+            width: 'auto',
             modal: true
         });
         // setup the dialog
@@ -226,7 +247,7 @@
                         var homePageUrl = '@System.Configuration.ConfigurationManager.AppSettings["ExitURL"]'
                         if (homePageUrl == "" || homePageUrl == " " || homePageUrl == null) {
 
-                            homePageUrl = '@Url.Action("Index","Home")' + '/' + '@Model.SurveyInfo.SurveyId';
+                            homePageUrl = '@Url.Action("Index","Home")' + '/' + '@Model.Form.SurveyInfo.SurveyId';
                         }
 
                         SignOutAndRedirect(signoutUrl, homePageUrl);
@@ -286,35 +307,44 @@
             modal: true
         });
 
+        if ("@Model.RelatedButtonWasClicked" != "") {
+
+            ReadRelatedResponse('@Model.RelatedButtonWasClicked');
+        }
         var responseUrl = GetRedirectionUrl();
-        $('#url').val('@Model.RedirectURL');
-        var Subject = "Link for Survey: " + '@Model.SurveyInfo.SurveyName';
+        $('#url').val('@Model.Form.RedirectURL');
+        var Subject = "Link for Survey: " + '@Model.Form.SurveyInfo.SurveyName';
         Subject = ReplaceString(Subject);
         $('#Subject').val(Subject);
 
 
-        var passcode = '@Model.PassCode';
+        var passcode = '@Model.Form.PassCode';
         $('#spPassCode').text(passcode);
 
-        if ('@Model.IsSaved' == 'True') {
+        if ('@Model.Form.IsSaved' == 'True')
+        {
+            //if clicking the save button for the first time
+            if ('@Model.Form.StatusId' == '1')
+                 {
+                         if ('@Model.Form.SurveyInfo.SurveyId' == '@Session["RootFormId"].ToString()')
+                                 { 
+                                    $('#successContent').show();
+                                    $('#successContent').append('<div class="success"><img src="@Url.Content("~/Content/images/button_check.png")" style="vertical-align:middle; padding-right: 10px; width:36px" alt=""/> Your survey has been saved.<button id="copy" type="button" name="copy" class="copylink">Get Survey Link & Pass Code</button></div>')
+                
 
-            if ('@Model.StatusId' == '1') { //if clicking the save button for the first time
-                $('#successContent').show();
-                $('#successContent').append('<div class="success"><img src="@Url.Content("~/Content/images/button_check.png")" style="vertical-align:middle; padding-right: 10px; width:36px" alt=""/> Your survey has been saved.<button id="copy" type="button" name="copy" class="copylink">Get Survey Link & Pass Code</button></div>')
+                
+                                    //call your jquery modal popup method
+                                    $("#dialog").dialog("open");
+                                 }
+                 }
+            else
+                 {
 
-
-
-                //call your jquery modal popup method
-                $("#dialog").dialog("open");
-
-            }
-            else {
-
-
+               
 
                 $('#successContent').show(); //in subsequest click we just show that the survey has been saved not the modal popup
                 $('#successContent').append('<div class="success"><img src="@Url.Content("~/Content/images/button_check.png")" style="vertical-align:middle; padding-right: 10px; width:36px" alt=""/> Your survey has been saved.<button id="copy" type="button" name="copy" class="copylink">Get Survey Link & Pass Code</button></div>')
-            }
+                }
             return true;
         }
 
@@ -330,7 +360,7 @@
             //var surveyName = $("#_surveyName").val();
 
 
-            var surveyName = '@Model.SurveyInfo.SurveyName';
+            var surveyName = '@Model.Form.SurveyInfo.SurveyName';
 
             surveyName = ReplaceString(surveyName);
 
@@ -366,7 +396,7 @@
             $("#exitdialog").dialog("open");
             //  if (!$("#exitdialog").dialog("open")) {
             //   var signoutUrl = '@Url.Action("SignOut","Post")';
-            // var homePageUrl = '@Url.Action("Index","Home")' + '/' + '@Model.SurveyInfo.SurveyId';
+            // var homePageUrl = '@Url.Action("Index","Home")' + '/' + '@Model.Form.SurveyInfo.SurveyId';
             //   SignOutAndRedirect(signoutUrl, homePageUrl);
             // }
         });
@@ -376,7 +406,7 @@
         $('#copy').click(function () {
             $("#dialog").dialog("open");
             // $('#url').val(GetRedirectionUrl());
-            $('#url').val('@Model.RedirectURL');
+            $('#url').val('@Model.Form.RedirectURL');
             return false;
         });
 
@@ -389,7 +419,7 @@
     });
     function GetPrintView() {
 
-        //	    var signoutUrl = '@Url.Action("GetPrintView", "Survey")' + '?ResponseId=' + '@Model.ResponseId';
+        //	    var signoutUrl = '@Url.Action("GetPrintView", "Survey")' + '?ResponseId=' + '@Model.Form.ResponseId';
 
         //	    $.ajax({
         //	        url: signoutUrl,
@@ -429,7 +459,7 @@
             }
 
         }
-        UpdateResponse(UpdateUrl, NList, pValue, '@Model.ResponseId');
+        UpdateResponse(UpdateUrl, NList, pValue, '@Model.Form.ResponseId');
 
     }
 
@@ -448,6 +478,247 @@
             return true;
         });
     });
+    function OpenRelateNavigationDialog() {
+
+        $("#RelateNavigation").dialog("open");
+    }
+    function CloseRelateNavigationDialog() {
+
+        $("#RelateNavigation").dialog("close");
+    }
+    function NavigateToChild(ViewId) {
+        //ShowSppiner();
+        $('#RelateButtonWasClicked_Temp').val(ViewId)
+        $('#RelateButtonWasClicked').val(ViewId);
+        var temp = HasResponse(ViewId);
+
+       // alert(temp)
+        if (temp) {
+             
+          //  ReadResponse(ViewId);
+            ReadRelatedResponse(ViewId)
+          
+        }
+        else {
+            // Save();//Save Current page.
+            AddNewChild(ViewId);
+            // AddChild(ViewId);
+          
+        }
+
+    }
+
+    function ReadRelatedResponse(ViewId) {
+        //ShowSppiner();
+
+        // var signoutUrl = '@Url.Action("ReadResponseInfo", "Survey")' + '?SurveyId=' + '@Model.Form.SurveyInfo.SurveyId' + '&ViewId=' + ViewId + '&ResponseId=' + '@Model.Form.ResponseId' + '&FormValuesHasChanged=' + $('#FormHasChanged').val() + '&CurrentPage=' + '@Model.Form.CurrentPage';
+        var signoutUrl = '@Url.Action("ReadResponseInfo", "Survey")' + '?SurveyId=' + '@Model.Form.SurveyInfo.SurveyId' + '&ViewId=' + ViewId + '&ResponseId=' + '@Model.Form.ResponseId' + '&CurrentPage=' + '@Model.Form.CurrentPage';
+
+        $.ajax({
+            url: signoutUrl,
+            type: 'POST',
+            contentType: 'application/json; charset=utf-8',
+            //data: JSON.stringify(model),
+            dataType: "text",
+            async: false,
+            success: successFunc,
+            Error: errorFunc
+        });
+
+
+        function successFunc(data) {
+
+            $('#RelateButtonWasClicked_Temp').val(ViewId)
+            $('#RelateButtonWasClicked').val(ViewId);
+            $('#RelateNavigation').html(data);
+            //CloseSppiner();
+            OpenRelateNavigationDialog();
+
+        }
+
+        function errorFunc() {
+
+            alert('error');
+        }
+    }
+    function ReadResponse(ViewId) {
+
+        //    var signoutUrl = '@Url.Action("ReadResponseInfo", "Survey")' + '?SurveyId=' + '@Model.Form.SurveyInfo.SurveyId' + '&ViewId=' + ViewId + '&ResponseId=' + '@Model.Form.ResponseId' + '&FormValuesHasChanged=' + $('#FormHasChanged').val() + '&CurrentPage=' + '@Model.Form.CurrentPage';
+
+        //    $.ajax({
+        //        url: signoutUrl,
+        //        type: 'GET',
+        //        contentType: 'application/json; charset=utf-8',
+        //        //data: JSON.stringify(model),
+        //        async: false,
+        //        success: successFunc,
+        //        Error: errorFunc
+        //    });
+        //
+        //
+        //    function successFunc(data) {
+        //
+        //        $('#RelateNavigation').html(data);
+        //        OpenRelateNavigationDialog();
+        //
+        //    }
+
+        //    function errorFunc() {
+        //        alert('error');
+        //    }
+
+
+        $("#myform")[0].Click_Related_Form.value = ViewId;
+
+        $("#myform")[0].action = window.location.href;
+
+
+        $('#myform').submit();
+
+    }
+
+    function AddChild(ViewId) {
+
+        $('#FormHasChanged').val('True');
+        var signoutUrl = '@Url.Action("AddChild", "Survey")' + '?SurveyId=' + '@Model.Form.SurveyInfo.SurveyId' + '&ViewId=' + ViewId + '&ResponseId=' + '@Model.Form.ResponseId' + '&FormValuesHasChanged=' + $('#FormHasChanged').val() + '&CurrentPage=' + '@Model.Form.CurrentPage';
+
+        $.ajax({
+            url: signoutUrl,
+            type: 'POST',
+            contentType: 'application/json; charset=utf-8',
+            //  data: $('#myform').serialize(),
+            //data:JSON.stringify(model),
+            dataType: "json",
+            //cache: false,
+            async: false,
+            success: successFunc,
+            error: errorFunc
+        });
+        function successFunc(data) {
+            //$(this).dialog("close");
+
+            var tem = 'responseId =' + data;
+            var homePageUrl = '@Url.Action("Index", "Survey",new { responseId= "RId", PageNumber = "1" })';
+            homePageUrl = homePageUrl.replace("RId", data.toString());
+
+            window.location.href = homePageUrl;
+        }
+        function errorFunc(data) {
+            alert('failed');
+        }
+
+
+    }
+    function GoHome() {
+        
+        
+        var DisabledFieldsList = $('#DisabledFieldsList').val();
+
+        if (DisabledFieldsList.length > 0) {
+            CCE_ProcessEnableAllControls(DisabledFieldsList);
+        }
+        $('#myform').validationEngine('detach');
+        $("#myform")[0].Go_Home_action.value = 'true';
+
+        $("#myform")[0].action = window.location.href;
+
+
+        $('#myform').submit();
+
+    }
+
+    function GoOneLevelUp() {
+         
+        var DisabledFieldsList = $('#DisabledFieldsList').val();
+
+        if (DisabledFieldsList.length > 0) {
+            CCE_ProcessEnableAllControls(DisabledFieldsList);
+        }
+        $('#myform').validationEngine('detach');
+        $("#myform")[0].Go_One_Level_Up_action.value = 'true';
+
+        $("#myform")[0].action = window.location.href;
+
+
+        $('#myform').submit();
+
+    }
+
+    function OpenForm(ResponseId) {
+        var homePageUrl = '@Url.Action("Index", "Survey",new { responseId= "RId", PageNumber = "1" })';
+        var Id = ResponseId;
+        homePageUrl = homePageUrl.replace("RId", Id.toString());
+
+        window.location.href = homePageUrl;
+    }
+    $(document).on("click", "button[name='EditForm']", function (e) {
+        //e.preventDefault();
+
+        var homePageUrl = '@Url.Action("Index", "Survey",new { responseId= "RId", PageNumber = "1" })';
+        var Id = $(this).attr("value");
+        homePageUrl = homePageUrl.replace("RId", Id.toString());
+
+        window.location.href = homePageUrl;
+
+    });
+    $(document).on("click", "button[name='DeleteButton']", function (e) {
+        //e.preventDefault();
+        if (confirm('Are you sure you want to delete this record and all associated child records?')) {
+            var signoutUrl = '@Url.Action("DeleteBranch", "Survey", new { ResponseId = "RId" })';
+            var Id = $(this).attr("value");
+            signoutUrl = signoutUrl.replace("RId", Id.toString());
+
+
+
+            $.ajax({
+                url: signoutUrl,
+                type: 'POST',
+                contentType: 'application/json; charset=utf-8',
+                //data: "{}",
+                dataType: "json",
+                //cache: false,
+                async: false,
+                success: successFunc,
+                error: errorFunc
+            });
+        }
+        function successFunc(data) {
+            var BValue = $('#RelateButtonWasClicked_Temp').val();
+            $('#RelateButtonWasClicked').val(BValue)
+            $('#RelateButtonWasClicked_Temp').val("");
+            Save();
+
+        }
+        function errorFunc(data) {
+            alert('failed');
+        }
+
+    });
+
+    function HasResponse(ViewId) {
+        var signoutUrl = '@Url.Action("HasResponse", "Survey")' + '?SurveyId=' + '@Model.Form.SurveyInfo.SurveyId' + '&ViewId=' + ViewId + '&ResponseId=' + '@Model.Form.ResponseId';
+        //alert(signoutUrl);
+        var HasResponse;
+        $.ajax({
+            url: signoutUrl,
+            type: 'POST',
+            contentType: 'application/json; charset=utf-8',
+            //data: "{}",
+            dataType: "json",
+            //cache: false,
+            async: false,
+            success: successFunc,
+            error: errorFunc
+        });
+        function successFunc(data) {
+            HasResponse = data
+        }
+        function errorFunc(data) {
+            alert('failed');
+        }
+        return HasResponse;
+
+    }
     function SetCodes_Val(obj, SurveyId, TableName, AutoComplete) {
         //debugger;
         $('#' + obj.id).val(obj.value);     
@@ -524,12 +795,12 @@
 
     }
 </script>
-@if (@Model.IsDraftModeStyleClass != "")
+@if (@Model.Form.IsDraftModeStyleClass != "")
 {
     <div id="header" class="TestHeader">
 
         <h1>
-            @Model.SurveyInfo.SurveyName
+            @Model.Form.SurveyInfo.SurveyName
 
         </h1>
 
@@ -540,7 +811,7 @@ else
     <div id="header">
 
         <h1>
-            @Model.SurveyInfo.SurveyName
+            @Model.Form.SurveyInfo.SurveyName
 
         </h1>
 
@@ -553,24 +824,24 @@ else
 
 
 
-        @if (Model.NumberOfPages > 0)
+        @if (Model.Form.NumberOfPages > 0)
         {
             int num = 0;
 
 
 
-            for (int i = 1; Model.NumberOfPages > i - 1; i++)
+            for (int i = 1; Model.Form.NumberOfPages > i - 1; i++)
             {
 
                 num = i;
-                if (i == 1 && Model.CurrentPage > 1)
+                if (i == 1 && Model.Form.CurrentPage > 1)
                 {
 
 
                     @*<a  style="background-image: url('@Url.Content("~/Content/images/prev.png")'); background-repeat:no-repeat; background-position:center; width:13px;"   href="@string.Format("../../Survey/{0}/{1}", Model.ResponseId, Model.CurrentPage - 1)"    class="nextprev" title="Previous Page">
                         &nbsp;&nbsp;&nbsp;
                             </a>*@
-                    <a id="anchorPrev" style="width:13px;" href="@Url.RouteUrl(null, new { controller = "Survey", action = "Index", responseid = Model.ResponseId, PageNumber = Model.CurrentPage - 1 })" class="nextprev" title="Previous Page">
+                    <a id="anchorPrev" style="width:13px;" href="@Url.RouteUrl(null, new { controller = "Survey", action = "Index", responseid = Model.Form.ResponseId, PageNumber = Model.Form.CurrentPage - 1 })" class="nextprev" title="Previous Page">
                         &nbsp;&nbsp;&nbsp;
                     </a>
 
@@ -579,7 +850,7 @@ else
 
 
 
-                if (Model.CurrentPage == i)
+                if (Model.Form.CurrentPage == i)
                 {
                     <span class="current">@num</span>
 
@@ -591,7 +862,7 @@ else
 
 
 
-                    @Html.ActionLink(num.ToString(), "Index", "Survey", new { responseid = Model.ResponseId, PageNumber = num }, null)
+                    @Html.ActionLink(num.ToString(), "Index", "Survey", new { responseid = Model.Form.ResponseId, PageNumber = num }, null)
 
 
 
@@ -599,13 +870,13 @@ else
 
             }
 
-            if (Model.CurrentPage != Model.NumberOfPages)
+            if (Model.Form.CurrentPage != Model.Form.NumberOfPages)
             {
 
                 @* <a  id="anchorNext"   style="background-image: url('@Url.Content("~/Content/images/next.png")');  background-repeat:no-repeat; background-position:center; width:13px;" href="@string.Format("../../Survey/{0}/{1}", Model.ResponseId, Model.CurrentPage + 1)" class="nextprev" title="Go to Next Page">
                     &nbsp;&nbsp;&nbsp;
                      </a>*@
-                <a id="anchorNext" style="width:13px;" href="@Url.RouteUrl(null, new { controller = "Survey", action = "Index", responseid = Model.ResponseId, PageNumber = Model.CurrentPage + 1 })" class="nextprev" title="Go to Next Page">
+                <a id="anchorNext" style="width:13px;" href="@Url.RouteUrl(null, new { controller = "Survey", action = "Index", responseid = Model.Form.ResponseId, PageNumber = Model.Form.CurrentPage + 1 })" class="nextprev" title="Go to Next Page">
                     &nbsp;&nbsp;&nbsp;
                 </a>
 
@@ -633,7 +904,7 @@ else
     <div id="successContent">
 
     </div>
-    @if (!string.IsNullOrEmpty(Model.GetErrorSummary()))
+    @if (!string.IsNullOrEmpty(Model.Form.GetErrorSummary()))
     {
         <div class="errormsg">
 
@@ -644,7 +915,7 @@ else
                 <span style="font-weight:bold; font-size:10pt;">Please correct the following errors before continuing:</span>
                 <br />
 
-                @Html.Raw(Model.GetErrorSummary())
+                @Html.Raw(Model.Form.GetErrorSummary())
             </div>
             <div style="clear: both;">
             </div>
@@ -655,31 +926,46 @@ else
 
 
 
-    @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "myform", @class = @Model.IsDraftModeStyleClass.ToString() }))
+    @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "myform", @class = @Model.Form.IsDraftModeStyleClass.ToString() }))
     {
+ if (@Model.Form.SurveyInfo.SurveyId != @Session["RootFormId"].ToString())
+     {
+	<div id="relatenav" style="padding-bottom:25px;">
+            <button class="exitsurvey default"   id ="Home" type="button" onclick="GoHome()" name="Home" style="width:150px; font-size:10pt; float:left; background: #00B050;"><img src="../../Content/images/root.png" style="width:16px; vertical-align: text-top;"/> Main Record</button>
+            <button class="exitsurvey default"   id ="LevelUp" type="button" onclick="GoOneLevelUp()" name="Home" style="width:150px; font-size:10pt; float:right; background: #00B050;"><img src="../../Content/images/uplevel.png" style="width:16px;  vertical-align: text-top;"/> Back</button>
 
+        </div>
+     }
 
         @Html.AntiForgeryToken()
 
-        @Html.Raw(Model.RenderHtml(true))
+        @Html.Raw(Model.Form.RenderHtml(true))
 
 
 
 
-        <input type="hidden" id="HiddenFieldsList" name="HiddenFieldsList" value="@Model.HiddenFieldsList" />
-        <input type="hidden" id="HighlightedFieldsList" name="HighlightedFieldsList" value="@Model.HighlightedFieldsList" />
-        <input type="hidden" id="DisabledFieldsList" name="DisabledFieldsList" value="@Model.DisabledFieldsList" />
-        <input type="hidden" id="RequiredFieldsList" name="RequiredFieldsList" value="@Model.RequiredFieldsList" />
-        <input type="hidden" id="AssignList" name="AssignList" value="@Model.AssignList" />
+        <input type="hidden" id="HiddenFieldsList" name="HiddenFieldsList" value="@Model.Form.HiddenFieldsList" />
+        <input type="hidden" id="HighlightedFieldsList" name="HighlightedFieldsList" value="@Model.Form.HighlightedFieldsList" />
+        <input type="hidden" id="DisabledFieldsList" name="DisabledFieldsList" value="@Model.Form.DisabledFieldsList" />
+        <input type="hidden" id="RequiredFieldsList" name="RequiredFieldsList" value="@Model.Form.RequiredFieldsList" />
+        <input type="hidden" id="AssignList" name="AssignList" value="@Model.Form.AssignList" />
         <input type="hidden" name="is_save_action" value="false" />
         <input type="hidden" name="is_print_action" value="false" />
         <input type="hidden" name="is_goto_action" value="false" />
         <input type="hidden" id="CurrentCultureDateFormat" name="CurrentCultureDateFormat" value="@Model.CurrentCultureDateFormat" />
+         <input type="hidden" name="Get_Child_action" value="false" />
+         <input type="hidden" name="Go_Home_action" value="false" />
+         <input type="hidden" name="Click_Related_Form" value="" />
 
+         <input type="hidden" name="Go_One_Level_Up_action" value="false" />
+         @*<input type="hidden" id="FormHasChanged" name="Form_Has_Changed" value="@Model.Form.FormValuesHasChanged" />*@
+         <input type="hidden" id="RelateButtonWasClicked" name="Requested_View_Id" value="@HttpContext.Current.Session["RequestedViewId"]" />
+         <input type="hidden" id="RelateButtonWasClicked_Temp" name="Requested_View_Id_Temp" value="@HttpContext.Current.Session["RequestedViewId"]" />
+         <input type="hidden" id="LogoutButtoneWasClicked" name="Log_Out" value="" />
         <div id="nav">
             <div id="prev" align="left">
                 &nbsp;
-                @if (Model.CurrentPage != 1)
+                @if (Model.Form.CurrentPage != 1)
                 {
 
 
@@ -688,25 +974,29 @@ else
                 }
             </div>
 
-
+            @if (@Model.Form.SurveyInfo.SurveyId == @Session["RootFormId"].ToString())
+            {
             <div id="savediv" align="center">
                 <button class="save" title="Click this button to finish the survey later. Use the survey link and pass code provided to return to the survey at a later time." type="button" id="Savebutton" onclick="Save();" name="Savebutton" value="save"> &nbsp; Finish later</button>
-                @if (Model.CurrentPage == Model.NumberOfPages)
+                @if (Model.Form.CurrentPage == Model.Form.NumberOfPages)
                 {
                     <button id="Print" class="printbottom" type="button" name="Printbutton" value="Print" style="">Print</button>
                 }
             </div>
 
-
-            @if (Model.CurrentPage == Model.NumberOfPages)
+            }
+            @if (Model.Form.CurrentPage == Model.Form.NumberOfPages)
             {
-                <div id="next" align="right">
-                    <button class="submits" type="submit" name="Submitbutton" value="Submit">
+                if (@Model.Form.SurveyInfo.SurveyId == @Session["RootFormId"].ToString())
+                {
+                    <div id="next" align="right">
+    
+                        <button class="submits" type="submit" name="Submitbutton" value="Submit">
                         Submit Survey &nbsp;
-                    </button>
+                        </button>
 
-                </div>
-
+                    </div>
+                }
 
 
             }
@@ -818,3 +1108,9 @@ else
 <div id="PrintdialogBox" title="Print">
 
 </div>
+            <div id="RelateNavigation" title="View Related Records" >
+        @*  @if(Model.FormResponseInfoModel != null){
+				@Html.Partial("ListResponses", Model)
+                }*@
+
+			 </div>

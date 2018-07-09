@@ -23,6 +23,8 @@ using System.Text;
 
 
 using System.Web.Security;
+using OfficeOpenXml.Drawing.Chart;
+
 namespace Epi.Web.MVC.Controllers
 {
     public class SurveyManagerController : Controller
@@ -82,8 +84,8 @@ namespace Epi.Web.MVC.Controllers
                     else
                     {
                         Session["OrgId"] = Model.OrganizationKey;
-                      
-                        ViewBag.SurveyNameList1 = GetAllSurveysByOrgId(Model.OrganizationKey); ;
+
+                        Model.SurveyNameList = ViewBag.SurveyNameList1 = GetAllSurveysByOrgId(Model.OrganizationKey); ;
                     }
 
                     
@@ -113,7 +115,7 @@ namespace Epi.Web.MVC.Controllers
                           {
                               Session["OrgId"] = Model.OrganizationKey;
                               ViewBag.IsNewOrg =  Session["IsNewOrg"] = true;
-                              ViewBag.SurveyNameList1 = GetAllSurveysByOrgId(Model.OrganizationKey); ;
+                            Model.SurveyNameList=ViewBag.SurveyNameList1 = GetAllSurveysByOrgId(Model.OrganizationKey); ;
                           }
                       }
                    }
@@ -128,7 +130,7 @@ namespace Epi.Web.MVC.Controllers
             
         }
         [HttpPost]
-         public ActionResult Index(PublishModel Model, string PublishSurvey, string DownLoadResponse, string ValidateOrganization, HttpPostedFileBase Newfile1, HttpPostedFileBase Newfile, string SurveyName, string RePublishSurvey, string RePublishSurveyName)
+         public ActionResult Index(PublishModel Model, string PublishSurvey, string DownLoadResponse, string ValidateOrganization, HttpPostedFileBase Newfile, HttpPostedFileBase Newfile1, HttpPostedFileBase Newfile2, string SurveyName, string RePublishSurvey, string RePublishSurveyName,string SendEmail)
         {
 
             string filepath = Server.MapPath("~\\Content\\Text\\TermOfUse.txt");
@@ -145,7 +147,6 @@ namespace Epi.Web.MVC.Controllers
 
             }
             
-
 
             try
             {
@@ -174,8 +175,8 @@ namespace Epi.Web.MVC.Controllers
                         }
                         else {
                            Session["OrgId"] =  Model.OrganizationKey;
-                          // Model.SurveyNameList = GetAllSurveysByOrgId(Model.OrganizationKey);
-                           ViewBag.SurveyNameList1 = GetAllSurveysByOrgId(Model.OrganizationKey); ;
+                          Model.SurveyNameList = GetAllSurveysByOrgId(Model.OrganizationKey);
+                          ViewBag.SurveyNameList1 = GetAllSurveysByOrgId(Model.OrganizationKey); ;
                         }
                     }
                     return View("Index", Model);
@@ -184,7 +185,7 @@ namespace Epi.Web.MVC.Controllers
                 {
                     Model.IsValidOrg = true;
                     Model.OrganizationKey = Session["OrgId"].ToString();
-                 //  Model.SurveyNameList = GetAllSurveysByOrgId(Model.OrganizationKey);
+                    Model.SurveyNameList = GetAllSurveysByOrgId(Model.OrganizationKey);
                  
                     if (string.IsNullOrEmpty(Request.Form["ExistingSurvey"]))
                     {
@@ -222,7 +223,7 @@ namespace Epi.Web.MVC.Controllers
                        // ModelState.AddModelError("Error", "Please validate the information provided and try publishing again.");
                       //  Model.Path = "";
                         Model.SuccessfulPublish = false;
-                        ViewBag.SurveyNameList1 = GetAllSurveysByOrgId(Model.OrganizationKey); ;
+                        Model.SurveyNameList = ViewBag.SurveyNameList1 = GetAllSurveysByOrgId(Model.OrganizationKey); ;
                         return View("Index", Model);
 
 
@@ -237,7 +238,13 @@ namespace Epi.Web.MVC.Controllers
                     Model.IsValidOrg = true;
                     Model.OrganizationKey = Session["OrgId"].ToString();
                     //  Model.SurveyNameList = GetAllSurveysByOrgId(Model.OrganizationKey);
-
+                    if (Model.RepublishSurveyMode == "0")
+                    {
+                        Model.IsDraft = true;
+                    }
+                    else {
+                        Model.IsDraft = false;
+                    }
                     
                         Model.UpdateExisting = true;
                         if (string.IsNullOrEmpty(Model.RepublishSurveyKey))
@@ -250,6 +257,7 @@ namespace Epi.Web.MVC.Controllers
                     ModelState["FileName"].Errors.Clear();
                     ModelState["OrganizationKey"].Errors.Clear();
                     ModelState["UserPublishKey"].Errors.Clear();
+                    ModelState["RepublishPath"].Errors.Clear();
                     if (IsAuthenticated)
                     {
                     ModelState["RePublishUserPublishKey"].Errors.Clear();
@@ -279,12 +287,12 @@ namespace Epi.Web.MVC.Controllers
                         // ModelState.AddModelError("Error", "Please validate the information provided and try publishing again.");
                         //  Model.Path = "";
                         Model.SuccessfulPublish = false;
-                        ViewBag.SurveyNameList1 = GetAllSurveysByOrgId(Model.OrganizationKey); ;
+                        Model.SurveyNameList = ViewBag.SurveyNameList1 = GetAllSurveysByOrgId(Model.OrganizationKey); 
                         return View("Index", Model);
 
 
                     }
-
+                    Model.SurveyNameList = ViewBag.SurveyNameList1 = GetAllSurveysByOrgId(Model.OrganizationKey); ;
 
                     return View(Model);
                 }
@@ -316,11 +324,64 @@ namespace Epi.Web.MVC.Controllers
                         DoDownLoad(Model);
                     }
                     else {
-                        ViewBag.SurveyNameList1 = GetAllSurveysByOrgId(Model.OrganizationKey); 
+                        Model.SurveyNameList = ViewBag.SurveyNameList1 = GetAllSurveysByOrgId(Model.OrganizationKey); 
                         return View("Index", Model);
                     }
                 }
+                //send email notification
+                if (!string.IsNullOrEmpty(SendEmail))
+                {
+                    Model.IsValidOrg = true;
+                   var orgkey = Model.OrganizationKey = Session["OrgId"].ToString();
+                    // Model.SurveyNameList = GetAllSurveysByOrgId(Model.OrganizationKey);
+                    if (string.IsNullOrEmpty(Model.EmailSurveyKey))
+                    {
+                        ModelState.AddModelError("EmailSurveyKey", "Survey Id is required.");
+                    }
+                    ModelState["FileName"].Errors.Clear();
+                    ModelState["SurveyName"].Errors.Clear();
+                    ModelState["RepublishUserPublishKey"].Errors.Clear();
+                    ModelState["UserPublishKey"].Errors.Clear();
+                    ModelState["Path"].Errors.Clear();
+                    ModelState["RepublishPath"].Errors.Clear();
+                    ModelState["EndDate"].Errors.Clear();
+                    ModelState["RePublishDivState"].Errors.Clear();
+                    ModelState["PublishDivState"].Errors.Clear();
+                    ModelState["DownLoadDivState"].Errors.Clear();
+                    ModelState["OrganizationKey"].Errors.Clear();
 
+
+
+
+                    if (IsAuthenticated)
+                    {
+                        ModelState["EmailUserPublishKey"].Errors.Clear();
+                    }
+                  
+                    if (ModelState.IsValid)
+                    {
+                        var SurveyInfo = this._isurveyFacade.GetSurveyInfoModel(Model.EmailSurveyKey);
+                        if (SurveyInfo.UserPublishKey.ToString() == Model.EmailUserPublishKey)
+                        {
+                            SendEmailNotification(Model, Newfile2, SurveyInfo);
+                            
+                            Model.SuccessfulPublish = true;
+                            Model.SuccessfullySentEmail = true;
+                        }
+                        else {
+                            ModelState.AddModelError("EmailUserPublishKey", "Please provide the right Security Token.");
+                            Model.SendEmaiDivState = true;
+                        }
+                        // Model = new PublishModel();
+                        Model.SurveyNameList = ViewBag.SurveyNameList1 = GetAllSurveysByOrgId(orgkey);
+                        return  View( Model);
+                    }
+                    else
+                    {
+                        Model.SurveyNameList = ViewBag.SurveyNameList1 = GetAllSurveysByOrgId(orgkey);
+                        return View("Index", Model);
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -330,6 +391,309 @@ namespace Epi.Web.MVC.Controllers
                 return View("Index", Model);
             }
             return View("Index", Model);
+        }
+
+        private void SendEmailNotification(PublishModel model, HttpPostedFileBase newfile2, SurveyInfoModel SurveyInfo)
+        {
+
+
+            using (var package = new OfficeOpenXml.ExcelPackage(newfile2.InputStream))
+            {
+                OfficeOpenXml.ExcelWorkbook workbook = package.Workbook;
+                string Subject = workbook.Worksheets[2].Cells[2, 1].Text;
+                string Body = workbook.Worksheets[2].Cells[2, 2].Text;
+                string Sender = workbook.Worksheets[2].Cells[2, 3].Text;
+
+                string Subject2 = workbook.Worksheets[2].Cells[3, 1].Text;
+                string Body2 = workbook.Worksheets[2].Cells[3, 2].Text;
+                string Sender2 = workbook.Worksheets[2].Cells[3, 3].Text;
+
+                ExcelWorksheet xlWorksheet = workbook.Worksheets[1];
+
+                var start = xlWorksheet.Dimension.Start;
+                var end = xlWorksheet.Dimension.End;
+
+                int InProgress = 0;
+                int Saved = 0;
+                int Submited = 0;
+
+                for (int row = 2; row <= end.Row; row++)
+                { // Row by row...
+
+                    if (xlWorksheet.Cells[row, 1] != null && xlWorksheet.Cells[row, 1].Text != "")
+                    {
+                        bool IsValidEmail = Epi.Web.Common.Email.EmailHandler.IsValidEmail(xlWorksheet.Cells[row, 1].Text.ToString());
+                        if (IsValidEmail)
+                        {
+                            string UserEamil = xlWorksheet.Cells[row, 1].Text;
+                            string _ResponseId = xlWorksheet.Cells[row, 2].Text;
+                            string _Status = xlWorksheet.Cells[row, 3].Text;
+                            string SurveyUrl = "";
+                            int ResponseStatuse = 1;
+                            string DateCompleted = "";
+                            // Add ResponseId , status and Date sent to EXCEL 
+
+                            if (string.IsNullOrEmpty(_Status))
+                            {
+                                xlWorksheet.SetValue(row, 3, "InProgress");
+                                InProgress++;
+                            }
+                            xlWorksheet.SetValue(row, 4, DateTime.Now.ToShortDateString());
+
+
+
+
+                            // Create a response
+
+                            if (string.IsNullOrEmpty(_ResponseId))
+                            {
+                                string strPassCode = Epi.Web.MVC.Utility.SurveyHelper.GetPassCode();
+                                Guid ResponseID = Guid.NewGuid();
+                                SurveyUrl = ConfigurationManager.AppSettings["ResponseURL"] + ResponseID.ToString() + "/" + strPassCode;
+
+                                Epi.Web.Common.DTO.SurveyAnswerDTO SurveyAnswer = _isurveyFacade.CreateSurveyAnswer(SurveyInfo.SurveyId, ResponseID.ToString());
+                                _isurveyFacade.UpdatePassCode(ResponseID.ToString(), strPassCode);
+                                // Update response if  key value pair availeble 
+
+                                bool IsPreFiledValues = false;
+                                if (!string.IsNullOrEmpty(xlWorksheet.Cells[row, 9].Text))
+                                {
+
+                                    IsPreFiledValues = true;
+
+                                }
+                                if (IsPreFiledValues)
+                                {
+                                    XDocument SurveyXml = XDocument.Parse(SurveyInfo.XML);
+                                    Epi.Web.Common.Message.PreFilledAnswerRequest request = new PreFilledAnswerRequest();
+                                    request.AnswerInfo.SurveyQuestionAnswerList = new Dictionary<string, string>();
+                                    for (int cell = 9; cell <= end.Column; cell++)
+                                    {
+                                        string ColumnName = xlWorksheet.Cells[1, cell].Value.ToString();
+                                        string Value = xlWorksheet.Cells[row, cell].Value.ToString();
+                                        request.AnswerInfo.SurveyQuestionAnswerList.Add(ColumnName, Value);
+                                    }
+
+
+
+
+                                    Epi.Web.Common.Xml.SurveyResponseXML Implementation = new Epi.Web.Common.Xml.SurveyResponseXML(request, SurveyXml);
+                                    string ResponseXml = Implementation.CreateResponseDocument(SurveyXml).ToString();
+                                    SurveyAnswerRequest Request = new SurveyAnswerRequest();
+                                    SurveyAnswerDTO DTO = new SurveyAnswerDTO();
+                                    DTO.SurveyId = SurveyInfo.SurveyId;
+                                    DTO.ResponseId = ResponseID.ToString();
+                                    DTO.Status = 1;
+                                    DTO.XML = ResponseXml;
+                                    Request.Action = "Update";
+                                    Request.SurveyAnswerList.Add(DTO);
+                                    _isurveyFacade.SaveSurveyAnswer(Request);
+
+                                }
+                                xlWorksheet.SetValue(row, 2, ResponseID.ToString());
+                                xlWorksheet.SetValue(row, 5, SurveyUrl);
+                                xlWorksheet.SetValue(row, 6, strPassCode);
+                            }
+                            else
+                            {
+                                // Get Response status
+                                var SurveyResponse = _isurveyFacade.GetSurveyAnswerResponse(_ResponseId, model.EmailSurveyKey).SurveyResponseList[0];
+                                ResponseStatuse = SurveyResponse.Status;
+                                DateCompleted = SurveyResponse.DateCompleted.ToString();
+                            }
+                            // send email
+                            Epi.Web.Common.Email.Email EmailObj = new Common.Email.Email();
+                            if (ResponseStatuse < 3 && !string.IsNullOrEmpty(SurveyUrl))
+                            {
+                                try
+                                {
+
+                                    EmailObj.Body = Body +
+                                        "\n\n Survey URL: \n" + SurveyUrl;
+
+                                    EmailObj.From = Sender;// ConfigurationManager.AppSettings["EMAIL_FROM"].ToString();
+                                    EmailObj.Subject = Uri.UnescapeDataString(Subject);
+
+
+                                    List<string> tempList = new List<string>();
+                                    tempList.Add(UserEamil);
+                                    EmailObj.To = tempList;
+                                    bool EmailSent = Epi.Web.Common.Email.EmailHandler.SendMessage(EmailObj);
+                                    xlWorksheet.SetValue(row, 8, "Email sent successfully!");
+                                }
+                                catch (Exception ex)
+                                {
+                                    xlWorksheet.SetValue(row, 8, "Error occurred while sending email.");
+                                    //throw ex;
+                                }
+
+                            }
+                            else
+                            {
+                                if (ResponseStatuse != 3)
+                                {
+                                    try
+                                    {
+                                        EmailObj.Body = Body2 +
+                                                "\n\n Survey URL: \n" + SurveyUrl;
+                                        EmailObj.Subject = Uri.UnescapeDataString(Subject2);
+                                        EmailObj.From = Sender2;// ConfigurationManager.AppSettings["EMAIL_FROM"].ToString();
+                                        List<string> tempList = new List<string>();
+                                        tempList.Add(UserEamil);
+                                        EmailObj.To = tempList;
+                                        bool EmailSent = Epi.Web.Common.Email.EmailHandler.SendMessage(EmailObj);
+                                        xlWorksheet.SetValue(row, 8, "Email sent successfully!");
+
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        xlWorksheet.SetValue(row, 8, "Error occurred while sending email.");
+                                        //throw ex;
+                                    }
+                                }
+                                var _ResponseStatus = GetStatus(ResponseStatuse);
+                                xlWorksheet.SetValue(row, 3, _ResponseStatus);
+                                xlWorksheet.SetValue(row, 7, DateCompleted);
+
+                                switch (ResponseStatuse)
+                                {
+                                    case 1:
+                                        InProgress++;
+                                        //data.Add(new KeyValuePair<string, int>($"Group {i}", rand.Next(10, 100)));
+                                        break;
+                                    case 2:
+                                        Saved++;
+                                        break;
+                                    case 3:
+                                        Submited++;
+                                        break;
+                                    default:
+
+                                        break;
+                                }
+
+                            }
+
+                        }
+                        else
+                        {
+                            xlWorksheet.SetValue(row, 8, "Email address is not valid. Please check email address and try again.");
+                        }
+                    }
+                    else
+                    {
+                        xlWorksheet.SetValue(row, 8, "Email not found.");
+
+                    }
+                }
+                // adding a sumery 
+
+
+                 GetPieChart(InProgress, Saved, Submited, workbook);
+
+                using (var memoryStream = new MemoryStream())
+                {
+                    Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+                    Response.AddHeader("content-disposition", "attachment; filename=" + SurveyInfo.SurveyName + ".xlsx");
+                    package.SaveAs(memoryStream);
+                    memoryStream.WriteTo(Response.OutputStream);
+                    Response.Flush();
+                    Response.End();
+                }
+
+
+
+            }
+        }
+
+        private static void GetPieChart(int InProgress, int Saved, int Submited,  ExcelWorkbook workbook)
+        {
+
+
+            //workbook.Properties.Title = "Charts With Excel";
+            try {
+                workbook.Worksheets.Delete("Summary Report");
+            }
+            catch (Exception ex) {
+
+
+            }
+
+           var   ws = workbook.Worksheets.Add("Summary Report");
+            var data = new List<KeyValuePair<string, int>>();
+            data.Add(new KeyValuePair<string, int>("InProgress", InProgress));
+            data.Add(new KeyValuePair<string, int>("Saved", Saved));
+            data.Add(new KeyValuePair<string, int>("Submited", Submited));
+
+            //Fill the table
+            var startCell = ws.Cells[1, 1];
+            startCell.Offset(0, 0).Value = "Response Status";
+            startCell.Offset(0, 1).Value = "Number Of Responses";
+            startCell.Offset(1, 0).LoadFromCollection(data);
+
+            //Add the chart to the sheet
+            var pieChart = ws.Drawings.AddChart("Chart1", eChartType.Pie);
+            pieChart.SetPosition(data.Count + 1, 0, 0, 0);
+            pieChart.SetSize(500, 400);
+            pieChart.Title.Text = "Response Status";
+
+            //Set the data range
+            var series = pieChart.Series.Add(ws.Cells[2, 2, data.Count + 1, 2], ws.Cells[2, 1, data.Count + 1, 1]);
+            var pieSeries = (ExcelPieChartSerie)series;
+            pieSeries.Explosion = 5;
+
+            //Format the labels
+            pieSeries.DataLabel.ShowValue = true;
+            pieSeries.DataLabel.ShowPercent = true;
+            pieSeries.DataLabel.ShowLeaderLines = true;
+            pieSeries.DataLabel.Separator = ";  ";
+            pieSeries.DataLabel.Position = eLabelPosition.BestFit;
+
+            var xdoc = pieChart.ChartXml;
+            var nsuri = xdoc.DocumentElement.NamespaceURI;
+            var nsm = new XmlNamespaceManager(xdoc.NameTable);
+            nsm.AddNamespace("c", nsuri);
+
+            //Added the number format node via XML
+            var numFmtNode = xdoc.CreateElement("c:numFmt", nsuri);
+
+            var formatCodeAtt = xdoc.CreateAttribute("formatCode", nsuri);
+            formatCodeAtt.Value = "0.00%";
+            numFmtNode.Attributes.Append(formatCodeAtt);
+
+            var sourceLinkedAtt = xdoc.CreateAttribute("sourceLinked", nsuri);
+            sourceLinkedAtt.Value = "0";
+            numFmtNode.Attributes.Append(sourceLinkedAtt);
+
+            var dLblsNode = xdoc.SelectSingleNode("c:chartSpace/c:chart/c:plotArea/c:pieChart/c:ser/c:dLbls", nsm);
+            dLblsNode.AppendChild(numFmtNode);
+
+
+            //Format the legend
+            pieChart.Legend.Add();
+            pieChart.Legend.Position = eLegendPosition.Right;
+
+            //pck.Save();
+             
+        }
+
+        private string GetStatus(int responseStatuse)
+        {
+            switch (responseStatuse)
+            {
+                case 1:
+                    return "InProgress";
+                    break;
+                case 2:
+                    return "Saved";
+                    break;
+                case 3:
+                    return "Submited";
+                    break;
+                default:
+                    return "";
+                    break;
+            }
         }
 
         private string GetUserPublishKey(string surveyid)
@@ -389,7 +753,7 @@ namespace Epi.Web.MVC.Controllers
 
         private SelectList GetAllSurveysByOrgId(string orgkey)
         {
-              var SurveyListObject = this._isurveyFacade.GetAllSurveysByOrgKey(orgkey);
+            var SurveyListObject = this._isurveyFacade.GetAllSurveysByOrgKey(orgkey);
             string SurveyName = "";
             string FirstFourSurveyId = "";
              
@@ -581,7 +945,7 @@ namespace Epi.Web.MVC.Controllers
                             ModelState.AddModelError("Error", "No records found for the download criteria entered.");
 
 
-                            ViewBag.SurveyNameList1 = GetAllSurveysByOrgId(Session["OrgId"].ToString()); ;
+                            Model.SurveyNameList= ViewBag.SurveyNameList1 = GetAllSurveysByOrgId(Session["OrgId"].ToString()); ;
                             return View("Index", Model);
                         }
                     }//using
