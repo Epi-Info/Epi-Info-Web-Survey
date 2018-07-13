@@ -331,7 +331,13 @@ namespace Epi.Web.MVC.Facade
                 }
                 else
                 {
-                    Request.SurveyId = surveyId;
+                    if (string.IsNullOrEmpty(surveyAnswerDTO.ParentRecordId)) {
+                        Request.SurveyId = surveyId;
+                    }
+                    else {
+                        Request.SurveyId = surveyAnswerDTO.ParentRecordId;
+
+                    }
                 }
                 Response = _iSurveyInfoRepository.GetSourceTables(Request);//Pain Point 
                 //}
