@@ -1,0 +1,2325 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Epi.Web.SurveyAPI</name>
+    </assembly>
+    <members>
+        <member name="M:Epi.Web.SurveyAPI.Areas.HelpPage.ApiDescriptionExtensions.GetFriendlyId(System.Web.Http.Description.ApiDescription)">
+            <summary>
+            Generates an URI-friendly ID for the <see cref="T:System.Web.Http.Description.ApiDescription"/>. E.g. "Get-Values-id_name" instead of "GetValues/{id}?name={name}"
+            </summary>
+            <param name="description">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <returns>The ID as a string.</returns>
+        </member>
+        <member name="T:Epi.Web.SurveyAPI.Areas.HelpPage.HelpPageConfig">
+            <summary>
+            Use this class to customize the Help Page.
+            For example you can set a custom <see cref="T:System.Web.Http.Description.IDocumentationProvider"/> to supply the documentation
+            or you can provide the samples for the requests/responses.
+            </summary>
+        </member>
+        <member name="T:Epi.Web.SurveyAPI.Areas.HelpPage.Controllers.HelpController">
+            <summary>
+            The controller that will handle requests for the help page.
+            </summary>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.Areas.HelpPage.HelpPageConfigurationExtensions.SetDocumentationProvider(System.Web.Http.HttpConfiguration,System.Web.Http.Description.IDocumentationProvider)">
+            <summary>
+            Sets the documentation provider for help page.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="documentationProvider">The documentation provider.</param>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleObjects(System.Web.Http.HttpConfiguration,System.Collections.Generic.IDictionary{System.Type,System.Object})">
+            <summary>
+            Sets the objects that will be used by the formatters to produce sample requests/responses.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sampleObjects">The sample objects.</param>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleRequest(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String)">
+            <summary>
+            Sets the sample request directly for the specified media type and action.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample request.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleRequest(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String,System.String[])">
+            <summary>
+            Sets the sample request directly for the specified media type and action with parameters.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample request.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleResponse(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String)">
+            <summary>
+            Sets the sample request directly for the specified media type of the action.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample response.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleResponse(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String,System.String[])">
+            <summary>
+            Sets the sample response directly for the specified media type of the action with specific parameters.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample response.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleForMediaType(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue)">
+            <summary>
+            Sets the sample directly for all actions with the specified media type.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample.</param>
+            <param name="mediaType">The media type.</param>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleForType(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.Type)">
+            <summary>
+            Sets the sample directly for all actions with the specified type and media type.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="type">The parameter type or return type of an action.</param>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualRequestType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String)">
+            <summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> passed to the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action.
+            The help page will use this information to produce more accurate request samples.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="type">The type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualRequestType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String,System.String[])">
+            <summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> passed to the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action.
+            The help page will use this information to produce more accurate request samples.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="type">The type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualResponseType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String)">
+            <summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> returned as part of the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action.
+            The help page will use this information to produce more accurate response samples.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="type">The type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualResponseType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String,System.String[])">
+            <summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> returned as part of the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action.
+            The help page will use this information to produce more accurate response samples.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="type">The type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.Areas.HelpPage.HelpPageConfigurationExtensions.GetHelpPageSampleGenerator(System.Web.Http.HttpConfiguration)">
+            <summary>
+            Gets the help page sample generator.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <returns>The help page sample generator.</returns>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.Areas.HelpPage.HelpPageConfigurationExtensions.SetHelpPageSampleGenerator(System.Web.Http.HttpConfiguration,Epi.Web.SurveyAPI.Areas.HelpPage.HelpPageSampleGenerator)">
+            <summary>
+            Sets the help page sample generator.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sampleGenerator">The help page sample generator.</param>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.Areas.HelpPage.HelpPageConfigurationExtensions.GetModelDescriptionGenerator(System.Web.Http.HttpConfiguration)">
+            <summary>
+            Gets the model description generator.
+            </summary>
+            <param name="config">The configuration.</param>
+            <returns>The <see cref="T:Epi.Web.SurveyAPI.Areas.HelpPage.ModelDescriptions.ModelDescriptionGenerator"/></returns>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.Areas.HelpPage.HelpPageConfigurationExtensions.GetHelpPageApiModel(System.Web.Http.HttpConfiguration,System.String)">
+            <summary>
+            Gets the model that represents an API displayed on the help page. The model is initialized on the first call and cached for subsequent calls.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="apiDescriptionId">The <see cref="T:System.Web.Http.Description.ApiDescription"/> ID.</param>
+            <returns>
+            An <see cref="T:Epi.Web.SurveyAPI.Areas.HelpPage.Models.HelpPageApiModel"/>
+            </returns>
+        </member>
+        <member name="T:Epi.Web.SurveyAPI.Areas.HelpPage.ModelDescriptions.ModelDescription">
+            <summary>
+            Describes a type model.
+            </summary>
+        </member>
+        <member name="T:Epi.Web.SurveyAPI.Areas.HelpPage.ModelDescriptions.ModelDescriptionGenerator">
+            <summary>
+            Generates model descriptions for given types.
+            </summary>
+        </member>
+        <member name="T:Epi.Web.SurveyAPI.Areas.HelpPage.ModelDescriptions.ModelNameAttribute">
+            <summary>
+            Use this attribute to change the name of the <see cref="T:Epi.Web.SurveyAPI.Areas.HelpPage.ModelDescriptions.ModelDescription"/> generated for a type.
+            </summary>
+        </member>
+        <member name="T:Epi.Web.SurveyAPI.Areas.HelpPage.Models.HelpPageApiModel">
+            <summary>
+            The model that represents an API displayed on the help page.
+            </summary>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.Areas.HelpPage.Models.HelpPageApiModel.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Epi.Web.SurveyAPI.Areas.HelpPage.Models.HelpPageApiModel"/> class.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.Areas.HelpPage.Models.HelpPageApiModel.ApiDescription">
+            <summary>
+            Gets or sets the <see cref="P:Epi.Web.SurveyAPI.Areas.HelpPage.Models.HelpPageApiModel.ApiDescription"/> that describes the API.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.Areas.HelpPage.Models.HelpPageApiModel.UriParameters">
+            <summary>
+            Gets or sets the <see cref="T:Epi.Web.SurveyAPI.Areas.HelpPage.ModelDescriptions.ParameterDescription"/> collection that describes the URI parameters for the API.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.Areas.HelpPage.Models.HelpPageApiModel.RequestDocumentation">
+            <summary>
+            Gets or sets the documentation for the request.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.Areas.HelpPage.Models.HelpPageApiModel.RequestModelDescription">
+            <summary>
+            Gets or sets the <see cref="T:Epi.Web.SurveyAPI.Areas.HelpPage.ModelDescriptions.ModelDescription"/> that describes the request body.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.Areas.HelpPage.Models.HelpPageApiModel.RequestBodyParameters">
+            <summary>
+            Gets the request body parameter descriptions.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.Areas.HelpPage.Models.HelpPageApiModel.ResourceDescription">
+            <summary>
+            Gets or sets the <see cref="T:Epi.Web.SurveyAPI.Areas.HelpPage.ModelDescriptions.ModelDescription"/> that describes the resource.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.Areas.HelpPage.Models.HelpPageApiModel.ResourceProperties">
+            <summary>
+            Gets the resource property descriptions.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.Areas.HelpPage.Models.HelpPageApiModel.SampleRequests">
+            <summary>
+            Gets the sample requests associated with the API.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.Areas.HelpPage.Models.HelpPageApiModel.SampleResponses">
+            <summary>
+            Gets the sample responses associated with the API.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.Areas.HelpPage.Models.HelpPageApiModel.ErrorMessages">
+            <summary>
+            Gets the error messages associated with this model.
+            </summary>
+        </member>
+        <member name="T:Epi.Web.SurveyAPI.Areas.HelpPage.HelpPageSampleGenerator">
+            <summary>
+            This class will generate the samples for the help page.
+            </summary>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.Areas.HelpPage.HelpPageSampleGenerator.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Epi.Web.SurveyAPI.Areas.HelpPage.HelpPageSampleGenerator"/> class.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.Areas.HelpPage.HelpPageSampleGenerator.ActualHttpMessageTypes">
+            <summary>
+            Gets CLR types that are used as the content of <see cref="T:System.Net.Http.HttpRequestMessage"/> or <see cref="T:System.Net.Http.HttpResponseMessage"/>.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.Areas.HelpPage.HelpPageSampleGenerator.ActionSamples">
+            <summary>
+            Gets the objects that are used directly as samples for certain actions.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.Areas.HelpPage.HelpPageSampleGenerator.SampleObjects">
+            <summary>
+            Gets the objects that are serialized as samples by the supported formatters.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.Areas.HelpPage.HelpPageSampleGenerator.SampleObjectFactories">
+            <summary>
+            Gets factories for the objects that the supported formatters will serialize as samples. Processed in order,
+            stopping when the factory successfully returns a non-<see langref="null"/> object.
+            </summary>
+            <remarks>
+            Collection includes just <see cref="M:Epi.Web.SurveyAPI.Areas.HelpPage.ObjectGenerator.GenerateObject(System.Type)"/> initially. Use
+            <code>SampleObjectFactories.Insert(0, func)</code> to provide an override and
+            <code>SampleObjectFactories.Add(func)</code> to provide a fallback.</remarks>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.Areas.HelpPage.HelpPageSampleGenerator.GetSampleRequests(System.Web.Http.Description.ApiDescription)">
+            <summary>
+            Gets the request body samples for a given <see cref="T:System.Web.Http.Description.ApiDescription"/>.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <returns>The samples keyed by media type.</returns>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.Areas.HelpPage.HelpPageSampleGenerator.GetSampleResponses(System.Web.Http.Description.ApiDescription)">
+            <summary>
+            Gets the response body samples for a given <see cref="T:System.Web.Http.Description.ApiDescription"/>.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <returns>The samples keyed by media type.</returns>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.Areas.HelpPage.HelpPageSampleGenerator.GetSample(System.Web.Http.Description.ApiDescription,Epi.Web.SurveyAPI.Areas.HelpPage.SampleDirection)">
+            <summary>
+            Gets the request or response body samples.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <param name="sampleDirection">The value indicating whether the sample is for a request or for a response.</param>
+            <returns>The samples keyed by media type.</returns>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.Areas.HelpPage.HelpPageSampleGenerator.GetActionSample(System.String,System.String,System.Collections.Generic.IEnumerable{System.String},System.Type,System.Net.Http.Formatting.MediaTypeFormatter,System.Net.Http.Headers.MediaTypeHeaderValue,Epi.Web.SurveyAPI.Areas.HelpPage.SampleDirection)">
+            <summary>
+            Search for samples that are provided directly through <see cref="P:Epi.Web.SurveyAPI.Areas.HelpPage.HelpPageSampleGenerator.ActionSamples"/>.
+            </summary>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+            <param name="type">The CLR type.</param>
+            <param name="formatter">The formatter.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="sampleDirection">The value indicating whether the sample is for a request or for a response.</param>
+            <returns>The sample that matches the parameters.</returns>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.Areas.HelpPage.HelpPageSampleGenerator.GetSampleObject(System.Type)">
+            <summary>
+            Gets the sample object that will be serialized by the formatters. 
+            First, it will look at the <see cref="P:Epi.Web.SurveyAPI.Areas.HelpPage.HelpPageSampleGenerator.SampleObjects"/>. If no sample object is found, it will try to create
+            one using <see cref="M:Epi.Web.SurveyAPI.Areas.HelpPage.HelpPageSampleGenerator.DefaultSampleObjectFactory(Epi.Web.SurveyAPI.Areas.HelpPage.HelpPageSampleGenerator,System.Type)"/> (which wraps an <see cref="T:Epi.Web.SurveyAPI.Areas.HelpPage.ObjectGenerator"/>) and other
+            factories in <see cref="P:Epi.Web.SurveyAPI.Areas.HelpPage.HelpPageSampleGenerator.SampleObjectFactories"/>.
+            </summary>
+            <param name="type">The type.</param>
+            <returns>The sample object.</returns>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.Areas.HelpPage.HelpPageSampleGenerator.ResolveHttpRequestMessageType(System.Web.Http.Description.ApiDescription)">
+            <summary>
+            Resolves the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> passed to the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <returns>The type.</returns>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.Areas.HelpPage.HelpPageSampleGenerator.ResolveType(System.Web.Http.Description.ApiDescription,System.String,System.String,System.Collections.Generic.IEnumerable{System.String},Epi.Web.SurveyAPI.Areas.HelpPage.SampleDirection,System.Collections.ObjectModel.Collection{System.Net.Http.Formatting.MediaTypeFormatter}@)">
+            <summary>
+            Resolves the type of the action parameter or return value when <see cref="T:System.Net.Http.HttpRequestMessage"/> or <see cref="T:System.Net.Http.HttpResponseMessage"/> is used.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+            <param name="sampleDirection">The value indicating whether the sample is for a request or a response.</param>
+            <param name="formatters">The formatters.</param>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.Areas.HelpPage.HelpPageSampleGenerator.WriteSampleObjectUsingFormatter(System.Net.Http.Formatting.MediaTypeFormatter,System.Object,System.Type,System.Net.Http.Headers.MediaTypeHeaderValue)">
+            <summary>
+            Writes the sample object using formatter.
+            </summary>
+            <param name="formatter">The formatter.</param>
+            <param name="value">The value.</param>
+            <param name="type">The type.</param>
+            <param name="mediaType">Type of the media.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Epi.Web.SurveyAPI.Areas.HelpPage.HelpPageSampleKey">
+            <summary>
+            This is used to identify the place where the sample should be applied.
+            </summary>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.Areas.HelpPage.HelpPageSampleKey.#ctor(System.Net.Http.Headers.MediaTypeHeaderValue)">
+            <summary>
+            Creates a new <see cref="T:Epi.Web.SurveyAPI.Areas.HelpPage.HelpPageSampleKey"/> based on media type.
+            </summary>
+            <param name="mediaType">The media type.</param>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.Areas.HelpPage.HelpPageSampleKey.#ctor(System.Net.Http.Headers.MediaTypeHeaderValue,System.Type)">
+            <summary>
+            Creates a new <see cref="T:Epi.Web.SurveyAPI.Areas.HelpPage.HelpPageSampleKey"/> based on media type and CLR type.
+            </summary>
+            <param name="mediaType">The media type.</param>
+            <param name="type">The CLR type.</param>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.Areas.HelpPage.HelpPageSampleKey.#ctor(Epi.Web.SurveyAPI.Areas.HelpPage.SampleDirection,System.String,System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Creates a new <see cref="T:Epi.Web.SurveyAPI.Areas.HelpPage.HelpPageSampleKey"/> based on <see cref="P:Epi.Web.SurveyAPI.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>, controller name, action name and parameter names.
+            </summary>
+            <param name="sampleDirection">The <see cref="P:Epi.Web.SurveyAPI.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.Areas.HelpPage.HelpPageSampleKey.#ctor(System.Net.Http.Headers.MediaTypeHeaderValue,Epi.Web.SurveyAPI.Areas.HelpPage.SampleDirection,System.String,System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Creates a new <see cref="T:Epi.Web.SurveyAPI.Areas.HelpPage.HelpPageSampleKey"/> based on media type, <see cref="P:Epi.Web.SurveyAPI.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>, controller name, action name and parameter names.
+            </summary>
+            <param name="mediaType">The media type.</param>
+            <param name="sampleDirection">The <see cref="P:Epi.Web.SurveyAPI.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.Areas.HelpPage.HelpPageSampleKey.ControllerName">
+            <summary>
+            Gets the name of the controller.
+            </summary>
+            <value>
+            The name of the controller.
+            </value>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.Areas.HelpPage.HelpPageSampleKey.ActionName">
+            <summary>
+            Gets the name of the action.
+            </summary>
+            <value>
+            The name of the action.
+            </value>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.Areas.HelpPage.HelpPageSampleKey.MediaType">
+            <summary>
+            Gets the media type.
+            </summary>
+            <value>
+            The media type.
+            </value>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.Areas.HelpPage.HelpPageSampleKey.ParameterNames">
+            <summary>
+            Gets the parameter names.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.Areas.HelpPage.HelpPageSampleKey.SampleDirection">
+            <summary>
+            Gets the <see cref="P:Epi.Web.SurveyAPI.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>.
+            </summary>
+        </member>
+        <member name="T:Epi.Web.SurveyAPI.Areas.HelpPage.ImageSample">
+            <summary>
+            This represents an image sample on the help page. There's a display template named ImageSample associated with this class.
+            </summary>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.Areas.HelpPage.ImageSample.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Epi.Web.SurveyAPI.Areas.HelpPage.ImageSample"/> class.
+            </summary>
+            <param name="src">The URL of an image.</param>
+        </member>
+        <member name="T:Epi.Web.SurveyAPI.Areas.HelpPage.InvalidSample">
+            <summary>
+            This represents an invalid sample on the help page. There's a display template named InvalidSample associated with this class.
+            </summary>
+        </member>
+        <member name="T:Epi.Web.SurveyAPI.Areas.HelpPage.ObjectGenerator">
+            <summary>
+            This class will create an object of a given type and populate it with sample data.
+            </summary>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.Areas.HelpPage.ObjectGenerator.GenerateObject(System.Type)">
+            <summary>
+            Generates an object for a given type. The type needs to be public, have a public default constructor and settable public properties/fields. Currently it supports the following types:
+            Simple types: <see cref="T:System.Int32"/>, <see cref="T:System.String"/>, <see cref="T:System.Enum"/>, <see cref="T:System.DateTime"/>, <see cref="T:System.Uri"/>, etc.
+            Complex types: POCO types.
+            Nullables: <see cref="T:System.Nullable`1"/>.
+            Arrays: arrays of simple types or complex types.
+            Key value pairs: <see cref="T:System.Collections.Generic.KeyValuePair`2"/>
+            Tuples: <see cref="T:System.Tuple`1"/>, <see cref="T:System.Tuple`2"/>, etc
+            Dictionaries: <see cref="T:System.Collections.Generic.IDictionary`2"/> or anything deriving from <see cref="T:System.Collections.Generic.IDictionary`2"/>.
+            Collections: <see cref="T:System.Collections.Generic.IList`1"/>, <see cref="T:System.Collections.Generic.IEnumerable`1"/>, <see cref="T:System.Collections.Generic.ICollection`1"/>, <see cref="T:System.Collections.IList"/>, <see cref="T:System.Collections.IEnumerable"/>, <see cref="T:System.Collections.ICollection"/> or anything deriving from <see cref="T:System.Collections.Generic.ICollection`1"/> or <see cref="T:System.Collections.IList"/>.
+            Queryables: <see cref="T:System.Linq.IQueryable"/>, <see cref="T:System.Linq.IQueryable`1"/>.
+            </summary>
+            <param name="type">The type.</param>
+            <returns>An object of the given type.</returns>
+        </member>
+        <member name="T:Epi.Web.SurveyAPI.Areas.HelpPage.SampleDirection">
+            <summary>
+            Indicates whether the sample is used for request or response
+            </summary>
+        </member>
+        <member name="T:Epi.Web.SurveyAPI.Areas.HelpPage.TextSample">
+            <summary>
+            This represents a preformatted text sample on the help page. There's a display template named TextSample associated with this class.
+            </summary>
+        </member>
+        <member name="T:Epi.Web.SurveyAPI.Areas.HelpPage.XmlDocumentationProvider">
+            <summary>
+            A custom <see cref="T:System.Web.Http.Description.IDocumentationProvider"/> that reads the API documentation from an XML documentation file.
+            </summary>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.Areas.HelpPage.XmlDocumentationProvider.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Epi.Web.SurveyAPI.Areas.HelpPage.XmlDocumentationProvider"/> class.
+            </summary>
+            <param name="documentPath">The physical path to XML document.</param>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.BLL.Organization.OrganizationNameExists(System.String,System.String,System.String)">
+            <summary>
+            Checks whether a particular organization name already exists in database
+            </summary>
+            <param name="key"></param>
+            <param name="organizationName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.BLL.SurveyInfo.GetSurveyInfoById(System.Collections.Generic.List{System.String})">
+            <summary>
+            Gets SurveyInfo based on criteria
+            </summary>
+            <param name="SurveyInfoId">Unique SurveyInfo identifier.</param>
+            <returns>SurveyInfo.</returns>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.BLL.SurveyInfo.GetSurveyInfo(System.Collections.Generic.List{System.String},System.DateTime,System.String,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Gets SurveyInfo based on criteria
+            </summary>
+            <param name="SurveyInfoId">Unique SurveyInfo identifier.</param>
+            <returns>SurveyInfo.</returns>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.Controllers.SurveyResponseController.PostSurveyAnswer(System.Net.Http.HttpRequestMessage)">
+            <summary>
+            Handle HTTPPOST request coming in from the client after successful Authentication
+            </summary>
+            <param name="request"></param>
+            <returns>HTTPRespose code with succee/failure</returns>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.Controllers.SurveyResponseController.Put(System.Net.Http.HttpRequestMessage)">
+            <summary>
+            Handle HTTPPUT request coming in from the client after successful Authentication
+            </summary>
+            <param name="request"></param>
+            <returns>HTTPRespose code with succees/failure</returns>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.Controllers.SurveyResponseController.Delete(System.Net.Http.HttpRequestMessage)">
+            <summary>
+            Handle HTTPDELETE request coming in from the client after successful Authentication
+            </summary>
+            <param name="request"></param>
+            <returns>HTTPRespose code with succee/failure</returns>
+        </member>
+        <member name="T:Epi.Web.SurveyAPI.EF.DataObjectFactory">
+            <summary>
+            DataObjectFactory caches the connectionstring so that the context can be created quickly.
+            </summary>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.EF.DataObjectFactory.#cctor">
+            <summary>
+            Static constructor. Reads the connectionstring from web.config just once.
+            </summary>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.EF.DataObjectFactory.CreateContext">
+            <summary>
+            Creates the Context using the current connectionstring.
+            </summary>
+            <remarks>
+            Gof pattern: Factory method. 
+            </remarks>
+            <returns>Action Entities context.</returns>
+        </member>
+        <member name="T:Epi.Web.SurveyAPI.EF.EntityDaoFactory">
+            <summary>
+            Entity Framework specific factory that creates data access objects.
+            </summary>
+            <remarks>
+            GoF Design Patterns: Factory.
+            </remarks>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.EntityDaoFactory.SurveyInfoDao">
+            <summary>
+            Gets an Entity Framework specific Sur data access object.
+            </summary>
+        </member>
+        <member name="T:Epi.Web.SurveyAPI.EF.EntityOrganizationDao">
+            <summary>
+            Entity Framework implementation of the IOrganizationDao interface.
+            </summary>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.EF.EntityOrganizationDao.GetOrganizationKeys(System.String)">
+            <summary>
+            Gets a specific Organization.
+            </summary>
+            <param name="OrganizationId">Unique Organization identifier.</param>
+            <returns>Organization.</returns>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.EF.EntityOrganizationDao.InsertOrganization(Epi.Web.SurveyAPI.Web.Common.BusinessObject.OrganizationBO)">
+            <summary>
+            Inserts a new Organization. 
+            </summary>
+            <remarks>
+            Following insert, Organization object will contain the new identifier.
+            </remarks>  
+            <param name="Organization">Organization.</param>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.EF.EntityOrganizationDao.UpdateOrganization(Epi.Web.SurveyAPI.Web.Common.BusinessObject.OrganizationBO)">
+            <summary>
+            Updates a Organization.
+            </summary>
+            <param name="Organization">Organization.</param>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.EF.EntityOrganizationDao.DeleteOrganization(Epi.Web.SurveyAPI.Web.Common.BusinessObject.OrganizationBO)">
+            <summary>
+            Deletes a Organization
+            </summary>
+            <param name="Organization">Organization.</param>
+        </member>
+        <member name="T:Epi.Web.SurveyAPI.EF.EntitySurveyInfoDao">
+            <summary>
+            Entity Framework implementation of the ISurveyInfoDao interface.
+            </summary>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.EF.EntitySurveyInfoDao.GetSurveyInfo(System.Collections.Generic.List{System.String},System.Int32,System.Int32)">
+            <summary>
+            Gets SurveyInfo based on a list of ids
+            </summary>
+            <param name="SurveyInfoId">Unique SurveyInfo identifier.</param>
+            <returns>SurveyInfo.</returns>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.EF.EntitySurveyInfoDao.GetSurveyInfo(System.Collections.Generic.List{System.String},System.DateTime,System.String,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Gets SurveyInfo based on criteria
+            </summary>
+            <param name="SurveyInfoId">Unique SurveyInfo identifier.</param>
+            <returns>SurveyInfo.</returns>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.EF.EntitySurveyInfoDao.InsertSurveyInfo(Epi.Web.SurveyAPI.Web.Common.BusinessObject.SurveyInfoBO)">
+            <summary>
+            Inserts a new SurveyInfo. 
+            </summary>
+            <remarks>
+            Following insert, SurveyInfo object will contain the new identifier.
+            </remarks>  
+            <param name="SurveyInfo">SurveyInfo.</param>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.EF.EntitySurveyInfoDao.UpdateSurveyInfo(Epi.Web.SurveyAPI.Web.Common.BusinessObject.SurveyInfoBO)">
+            <summary>
+            Updates a SurveyInfo.
+            </summary>
+            <param name="SurveyInfo">SurveyInfo.</param>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.EF.EntitySurveyInfoDao.DeleteSurveyInfo(Epi.Web.SurveyAPI.Web.Common.BusinessObject.SurveyInfoBO)">
+            <summary>
+            Deletes a SurveyInfo
+            </summary>
+            <param name="SurveyInfo">SurveyInfo.</param>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.EF.EntitySurveyInfoDao.GetSurveySizeInfo(System.Collections.Generic.List{System.String},System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Gets SurveyInfo Size Data on a list of ids
+            </summary>
+            <param name="SurveyInfoId">Unique SurveyInfo identifier.</param>
+            <returns>PageInfoBO.</returns>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.EF.EntitySurveyInfoDao.GetSurveySizeInfo(System.Collections.Generic.List{System.String},System.DateTime,System.String,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Gets SurveyInfo Size Data based on criteria
+            </summary>
+            <param name="SurveyInfoId">Unique SurveyInfo identifier.</param>
+            <returns>PageInfoBO.</returns>
+        </member>
+        <member name="T:Epi.Web.SurveyAPI.EF.EntitySurveyResponseDao">
+            <summary>
+            Entity Framework implementation of the ISurveyResponseDao interface.
+            </summary>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.EF.EntitySurveyResponseDao.GetSurveyResponse(System.Collections.Generic.List{System.String},System.Guid,System.Int32,System.Int32)">
+            <summary>
+            Gets a specific SurveyResponse.
+            </summary>
+            <param name="SurveyResponseId">Unique SurveyResponse identifier.</param>
+            <returns>SurveyResponse.</returns>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.EF.EntitySurveyResponseDao.GetSurveyResponseBySurveyId(System.Collections.Generic.List{System.String},System.Guid,System.Int32,System.Int32)">
+            <summary>
+            Gets SurveyResponses per a SurveyId.
+            </summary>
+            <param name="SurveyResponseId">Unique SurveyResponse identifier.</param>
+            <returns>SurveyResponse.</returns>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.EF.EntitySurveyResponseDao.GetSurveyResponse(System.Collections.Generic.List{System.String},System.String,System.DateTime,System.Boolean,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Gets SurveyResponses depending on criteria.
+            </summary>
+            <param name="SurveyResponseId">Unique SurveyResponse identifier.</param>
+            <returns>SurveyResponse.</returns>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.EF.EntitySurveyResponseDao.InsertSurveyResponse(Epi.Web.SurveyAPI.Web.Common.BusinessObject.SurveyResponseBO)">
+            <summary>
+            Inserts a new SurveyResponse. 
+            </summary>
+            <remarks>
+            Following insert, SurveyResponse object will contain the new identifier.
+            </remarks>  
+            <param name="SurveyResponse">SurveyResponse.</param>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.EF.EntitySurveyResponseDao.UpdateSurveyResponse(Epi.Web.SurveyAPI.Web.Common.BusinessObject.SurveyResponseBO)">
+            <summary>
+            Updates a SurveyResponse.
+            </summary>
+            <param name="SurveyResponse">SurveyResponse.</param>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.EF.EntitySurveyResponseDao.DeleteSurveyResponse(Epi.Web.SurveyAPI.Web.Common.BusinessObject.SurveyResponseBO)">
+            <summary>
+            Deletes a SurveyResponse
+            </summary>
+            <param name="SurveyResponse">SurveyResponse.</param>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.EF.EntitySurveyResponseDao.InsertErrorLog(System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Inserts a new ErrorLog. 
+            </summary>
+            <remarks>       
+            </remarks>  
+            <param name="pValue">ErrorText.</param>
+        </member>
+        <member name="T:Epi.Web.SurveyAPI.EF.SurveyAPIEntities">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.EF.SurveyAPIEntities.#ctor">
+            <summary>
+            Initializes a new SurveyAPIEntities object using the connection string found in the 'SurveyAPIEntities' section of the application configuration file.
+            </summary>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.EF.SurveyAPIEntities.#ctor(System.String)">
+            <summary>
+            Initialize a new SurveyAPIEntities object.
+            </summary>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.EF.SurveyAPIEntities.#ctor(System.Data.EntityClient.EntityConnection)">
+            <summary>
+            Initialize a new SurveyAPIEntities object.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.SurveyAPIEntities.lk_Status">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.SurveyAPIEntities.lk_SurveyType">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.SurveyAPIEntities.SurveyMetaDatas">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.SurveyAPIEntities.SurveyResponses">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.SurveyAPIEntities.Organizations">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.SurveyAPIEntities.sysdiagrams">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.SurveyAPIEntities.Addresses">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.SurveyAPIEntities.States">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.SurveyAPIEntities.Admins">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.SurveyAPIEntities.EIDatasources">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.SurveyAPIEntities.lk_RecordSource">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.SurveyAPIEntities.SurveyMetaDataViews">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.SurveyAPIEntities.ErrorLogs">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.SurveyAPIEntities.SurveyMetaDataTransforms">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.EF.SurveyAPIEntities.AddTolk_Status(Epi.Web.SurveyAPI.EF.lk_Status)">
+            <summary>
+            Deprecated Method for adding a new object to the lk_Status EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+            </summary>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.EF.SurveyAPIEntities.AddTolk_SurveyType(Epi.Web.SurveyAPI.EF.lk_SurveyType)">
+            <summary>
+            Deprecated Method for adding a new object to the lk_SurveyType EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+            </summary>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.EF.SurveyAPIEntities.AddToSurveyMetaDatas(Epi.Web.SurveyAPI.EF.SurveyMetaData)">
+            <summary>
+            Deprecated Method for adding a new object to the SurveyMetaDatas EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+            </summary>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.EF.SurveyAPIEntities.AddToSurveyResponses(Epi.Web.SurveyAPI.EF.SurveyResponse)">
+            <summary>
+            Deprecated Method for adding a new object to the SurveyResponses EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+            </summary>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.EF.SurveyAPIEntities.AddToOrganizations(Epi.Web.SurveyAPI.EF.Organization)">
+            <summary>
+            Deprecated Method for adding a new object to the Organizations EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+            </summary>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.EF.SurveyAPIEntities.AddTosysdiagrams(Epi.Web.SurveyAPI.EF.sysdiagram)">
+            <summary>
+            Deprecated Method for adding a new object to the sysdiagrams EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+            </summary>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.EF.SurveyAPIEntities.AddToAddresses(Epi.Web.SurveyAPI.EF.Address)">
+            <summary>
+            Deprecated Method for adding a new object to the Addresses EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+            </summary>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.EF.SurveyAPIEntities.AddToStates(Epi.Web.SurveyAPI.EF.State)">
+            <summary>
+            Deprecated Method for adding a new object to the States EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+            </summary>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.EF.SurveyAPIEntities.AddToAdmins(Epi.Web.SurveyAPI.EF.Admin)">
+            <summary>
+            Deprecated Method for adding a new object to the Admins EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+            </summary>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.EF.SurveyAPIEntities.AddToEIDatasources(Epi.Web.SurveyAPI.EF.EIDatasource)">
+            <summary>
+            Deprecated Method for adding a new object to the EIDatasources EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+            </summary>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.EF.SurveyAPIEntities.AddTolk_RecordSource(Epi.Web.SurveyAPI.EF.lk_RecordSource)">
+            <summary>
+            Deprecated Method for adding a new object to the lk_RecordSource EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+            </summary>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.EF.SurveyAPIEntities.AddToSurveyMetaDataViews(Epi.Web.SurveyAPI.EF.SurveyMetaDataView)">
+            <summary>
+            Deprecated Method for adding a new object to the SurveyMetaDataViews EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+            </summary>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.EF.SurveyAPIEntities.AddToErrorLogs(Epi.Web.SurveyAPI.EF.ErrorLog)">
+            <summary>
+            Deprecated Method for adding a new object to the ErrorLogs EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+            </summary>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.EF.SurveyAPIEntities.AddToSurveyMetaDataTransforms(Epi.Web.SurveyAPI.EF.SurveyMetaDataTransform)">
+            <summary>
+            Deprecated Method for adding a new object to the SurveyMetaDataTransforms EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+            </summary>
+        </member>
+        <member name="T:Epi.Web.SurveyAPI.EF.Address">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.EF.Address.CreateAddress(System.Int32,System.String,System.String,System.Int32,System.String)">
+            <summary>
+            Create a new Address object.
+            </summary>
+            <param name="addressId">Initial value of the AddressId property.</param>
+            <param name="addressLine1">Initial value of the AddressLine1 property.</param>
+            <param name="city">Initial value of the City property.</param>
+            <param name="stateProvinceId">Initial value of the StateProvinceId property.</param>
+            <param name="postalCode">Initial value of the PostalCode property.</param>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.Address.AddressId">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.Address.AddressLine1">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.Address.AddressLine2">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.Address.City">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.Address.StateProvinceId">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.Address.PostalCode">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.Address.AdminId">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.Address.Admin">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.Address.AdminReference">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="T:Epi.Web.SurveyAPI.EF.Admin">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.EF.Admin.CreateAdmin(System.Guid,System.String,System.Int32,System.Boolean,System.Boolean)">
+            <summary>
+            Create a new Admin object.
+            </summary>
+            <param name="adminId">Initial value of the AdminId property.</param>
+            <param name="adminEmail">Initial value of the AdminEmail property.</param>
+            <param name="organizationId">Initial value of the OrganizationId property.</param>
+            <param name="isActive">Initial value of the IsActive property.</param>
+            <param name="notify">Initial value of the Notify property.</param>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.Admin.AdminId">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.Admin.AdminEmail">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.Admin.OrganizationId">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.Admin.IsActive">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.Admin.Notify">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.Admin.LastName">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.Admin.FirstName">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.Admin.PhoneNumber">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.Admin.Addresses">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.Admin.Organization">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.Admin.OrganizationReference">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="T:Epi.Web.SurveyAPI.EF.EIDatasource">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.EF.EIDatasource.CreateEIDatasource(System.Int32,System.String)">
+            <summary>
+            Create a new EIDatasource object.
+            </summary>
+            <param name="datasourceID">Initial value of the DatasourceID property.</param>
+            <param name="databaseType">Initial value of the DatabaseType property.</param>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.EIDatasource.DatasourceID">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.EIDatasource.DatasourceServerName">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.EIDatasource.DatabaseType">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.EIDatasource.InitialCatalog">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.EIDatasource.PersistSecurityInfo">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.EIDatasource.SurveyId">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.EIDatasource.DatabaseUserID">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.EIDatasource.Password">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.EIDatasource.SurveyMetaData">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.EIDatasource.SurveyMetaDataReference">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="T:Epi.Web.SurveyAPI.EF.ErrorLog">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.EF.ErrorLog.CreateErrorLog(System.DateTime)">
+            <summary>
+            Create a new ErrorLog object.
+            </summary>
+            <param name="errorDate">Initial value of the ErrorDate property.</param>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.ErrorLog.ErrorDate">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.ErrorLog.SurveyId">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.ErrorLog.ResponseId">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.ErrorLog.Comment">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.ErrorLog.ERROR_NUMBER">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.ErrorLog.ERROR_MESSAGE">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.ErrorLog.ERROR_SEVERITY">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.ErrorLog.ERROR_STATE">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.ErrorLog.ERROR_PROCEDURE">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.ErrorLog.ERROR_LINE">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.ErrorLog.ErrorText">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.ErrorLog.ErrorText2">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="T:Epi.Web.SurveyAPI.EF.lk_RecordSource">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.EF.lk_RecordSource.Createlk_RecordSource(System.Int32,System.String)">
+            <summary>
+            Create a new lk_RecordSource object.
+            </summary>
+            <param name="recordSourceId">Initial value of the RecordSourceId property.</param>
+            <param name="recordSource">Initial value of the RecordSource property.</param>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.lk_RecordSource.RecordSourceId">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.lk_RecordSource.RecordSource">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.lk_RecordSource.RecordSourceDescription">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.lk_RecordSource.SurveyResponses">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="T:Epi.Web.SurveyAPI.EF.lk_Status">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.EF.lk_Status.Createlk_Status(System.Int32,System.String)">
+            <summary>
+            Create a new lk_Status object.
+            </summary>
+            <param name="statusId">Initial value of the StatusId property.</param>
+            <param name="status">Initial value of the Status property.</param>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.lk_Status.StatusId">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.lk_Status.Status">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.lk_Status.SurveyResponses">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="T:Epi.Web.SurveyAPI.EF.lk_SurveyType">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.EF.lk_SurveyType.Createlk_SurveyType(System.Int32)">
+            <summary>
+            Create a new lk_SurveyType object.
+            </summary>
+            <param name="surveyTypeId">Initial value of the SurveyTypeId property.</param>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.lk_SurveyType.SurveyTypeId">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.lk_SurveyType.SurveyType">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.lk_SurveyType.SurveyMetaDatas">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="T:Epi.Web.SurveyAPI.EF.Organization">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.EF.Organization.CreateOrganization(System.Int32,System.String,System.String,System.Boolean,System.Boolean)">
+            <summary>
+            Create a new Organization object.
+            </summary>
+            <param name="organizationId">Initial value of the OrganizationId property.</param>
+            <param name="organizationKey">Initial value of the OrganizationKey property.</param>
+            <param name="organization1">Initial value of the Organization1 property.</param>
+            <param name="isEnabled">Initial value of the IsEnabled property.</param>
+            <param name="isHostOrganization">Initial value of the IsHostOrganization property.</param>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.Organization.OrganizationId">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.Organization.OrganizationKey">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.Organization.Organization1">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.Organization.IsEnabled">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.Organization.IsHostOrganization">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.Organization.SurveyMetaDatas">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.Organization.Admins">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="T:Epi.Web.SurveyAPI.EF.State">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.EF.State.CreateState(System.Int32,System.String,System.String)">
+            <summary>
+            Create a new State object.
+            </summary>
+            <param name="stateProvinceId">Initial value of the StateProvinceId property.</param>
+            <param name="stateCode">Initial value of the StateCode property.</param>
+            <param name="stateName">Initial value of the StateName property.</param>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.State.StateProvinceId">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.State.StateCode">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.State.StateName">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="T:Epi.Web.SurveyAPI.EF.SurveyMetaData">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.EF.SurveyMetaData.CreateSurveyMetaData(System.Guid,System.Int32,System.DateTime,System.String,System.String,System.Guid,System.Int64,System.DateTime,System.Int32,System.DateTime,System.Boolean)">
+            <summary>
+            Create a new SurveyMetaData object.
+            </summary>
+            <param name="surveyId">Initial value of the SurveyId property.</param>
+            <param name="surveyTypeId">Initial value of the SurveyTypeId property.</param>
+            <param name="closingDate">Initial value of the ClosingDate property.</param>
+            <param name="surveyName">Initial value of the SurveyName property.</param>
+            <param name="templateXML">Initial value of the TemplateXML property.</param>
+            <param name="userPublishKey">Initial value of the UserPublishKey property.</param>
+            <param name="templateXMLSize">Initial value of the TemplateXMLSize property.</param>
+            <param name="dateCreated">Initial value of the DateCreated property.</param>
+            <param name="organizationId">Initial value of the OrganizationId property.</param>
+            <param name="startDate">Initial value of the StartDate property.</param>
+            <param name="isDraftMode">Initial value of the IsDraftMode property.</param>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.SurveyMetaData.SurveyId">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.SurveyMetaData.SurveyNumber">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.SurveyMetaData.SurveyTypeId">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.SurveyMetaData.ClosingDate">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.SurveyMetaData.SurveyName">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.SurveyMetaData.OrganizationName">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.SurveyMetaData.DepartmentName">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.SurveyMetaData.IntroductionText">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.SurveyMetaData.TemplateXML">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.SurveyMetaData.ExitText">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.SurveyMetaData.UserPublishKey">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.SurveyMetaData.TemplateXMLSize">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.SurveyMetaData.DateCreated">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.SurveyMetaData.OrganizationId">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.SurveyMetaData.StartDate">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.SurveyMetaData.IsDraftMode">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.SurveyMetaData.LastUpdate">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.SurveyMetaData.IsSQLProject">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.SurveyMetaData.lk_SurveyType">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.SurveyMetaData.lk_SurveyTypeReference">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.SurveyMetaData.SurveyResponses">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.SurveyMetaData.Organization">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.SurveyMetaData.OrganizationReference">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.SurveyMetaData.EIDatasources">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.SurveyMetaData.SurveyMetaDataTransforms">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="T:Epi.Web.SurveyAPI.EF.SurveyMetaDataTransform">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.EF.SurveyMetaDataTransform.CreateSurveyMetaDataTransform(System.Guid,System.String,System.String,System.Int32)">
+            <summary>
+            Create a new SurveyMetaDataTransform object.
+            </summary>
+            <param name="surveyId">Initial value of the SurveyId property.</param>
+            <param name="tableName">Initial value of the TableName property.</param>
+            <param name="fieldName">Initial value of the FieldName property.</param>
+            <param name="fieldTypeId">Initial value of the FieldTypeId property.</param>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.SurveyMetaDataTransform.SurveyId">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.SurveyMetaDataTransform.TableName">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.SurveyMetaDataTransform.BaseTableName">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.SurveyMetaDataTransform.PageId">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.SurveyMetaDataTransform.FieldName">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.SurveyMetaDataTransform.FieldTypeId">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.SurveyMetaDataTransform.SurveyMetaData">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.SurveyMetaDataTransform.SurveyMetaDataReference">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="T:Epi.Web.SurveyAPI.EF.SurveyMetaDataView">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.EF.SurveyMetaDataView.CreateSurveyMetaDataView(System.Guid,System.String)">
+            <summary>
+            Create a new SurveyMetaDataView object.
+            </summary>
+            <param name="surveyId">Initial value of the SurveyId property.</param>
+            <param name="viewTableName">Initial value of the ViewTableName property.</param>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.SurveyMetaDataView.SurveyId">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.SurveyMetaDataView.ViewTableName">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="T:Epi.Web.SurveyAPI.EF.SurveyResponse">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.EF.SurveyResponse.CreateSurveyResponse(System.Guid,System.Guid,System.DateTime,System.Int32,System.String,System.DateTime,System.Boolean)">
+            <summary>
+            Create a new SurveyResponse object.
+            </summary>
+            <param name="responseId">Initial value of the ResponseId property.</param>
+            <param name="surveyId">Initial value of the SurveyId property.</param>
+            <param name="dateUpdated">Initial value of the DateUpdated property.</param>
+            <param name="statusId">Initial value of the StatusId property.</param>
+            <param name="responseXML">Initial value of the ResponseXML property.</param>
+            <param name="dateCreated">Initial value of the DateCreated property.</param>
+            <param name="isDraftMode">Initial value of the IsDraftMode property.</param>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.SurveyResponse.ResponseId">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.SurveyResponse.SurveyId">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.SurveyResponse.DateUpdated">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.SurveyResponse.DateCompleted">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.SurveyResponse.StatusId">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.SurveyResponse.ResponseXML">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.SurveyResponse.ResponsePasscode">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.SurveyResponse.ResponseXMLSize">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.SurveyResponse.DateCreated">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.SurveyResponse.IsDraftMode">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.SurveyResponse.RecordSourceId">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.SurveyResponse.lk_Status">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.SurveyResponse.lk_StatusReference">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.SurveyResponse.SurveyMetaData">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.SurveyResponse.SurveyMetaDataReference">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.SurveyResponse.lk_RecordSource">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.SurveyResponse.lk_RecordSourceReference">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="T:Epi.Web.SurveyAPI.EF.sysdiagram">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.EF.sysdiagram.Createsysdiagram(System.String,System.Int32,System.Int32)">
+            <summary>
+            Create a new sysdiagram object.
+            </summary>
+            <param name="name">Initial value of the name property.</param>
+            <param name="principal_id">Initial value of the principal_id property.</param>
+            <param name="diagram_id">Initial value of the diagram_id property.</param>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.sysdiagram.name">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.sysdiagram.principal_id">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.sysdiagram.diagram_id">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.sysdiagram.version">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.EF.sysdiagram.definition">
+            <summary>
+            No Metadata Documentation available.
+            </summary>
+        </member>
+        <member name="T:Epi.Web.SurveyAPI.EF.Mapper">
+            <summary>
+            Maps Entity Framework entities to business objects and vice versa.
+            </summary>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.EF.Mapper.Map(Epi.Web.SurveyAPI.EF.SurveyMetaData)">
+            <summary>
+            Maps SurveyMetaData entity to SurveyInfoBO business object.
+            </summary>
+            <param name="entity">A SurveyMetaData entity to be transformed.</param>
+            <returns>A SurveyInfoBO business object.</returns>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.EF.Mapper.Map(Epi.Web.SurveyAPI.Web.Common.BusinessObject.SurveyInfoBO)">
+            <summary>
+            Maps SurveyInfoBO business object to SurveyMetaData entity.
+            </summary>
+            <param name="businessobject">A SurveyInfoBO business object.</param>
+            <returns>A SurveyMetaData entity.</returns>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.EF.Mapper.Map(Epi.Web.SurveyAPI.Web.Common.DTO.SurveyAnswerDTO)">
+            <summary>
+            Maps SurveyMetaData entity to SurveyInfoBO business object.
+            </summary>
+            <param name="entity">A SurveyMetaData entity to be transformed.</param>
+            <returns>A SurveyInfoBO business object.</returns>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.EF.Mapper.Map(Epi.Web.SurveyAPI.Web.Common.BusinessObject.SurveyResponseBO)">
+            <summary>
+            Maps SurveyInfoBO business object to SurveyMetaData entity.
+            </summary>
+            <param name="businessobject">A SurveyInfoBO business object.</param>
+            <returns>A SurveyMetaData entity.</returns>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.EF.Mapper.Map(Epi.Web.SurveyAPI.EF.SurveyResponse)">
+            <summary>
+            Maps SurveyMetaData entity to SurveyInfoBO business object.
+            </summary>
+            <param name="entity">A SurveyMetaData entity to be transformed.</param>
+            <returns>A SurveyInfoBO business object.</returns>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.EF.Mapper.ToEF(Epi.Web.SurveyAPI.Web.Common.BusinessObject.SurveyResponseBO)">
+            <summary>
+            Maps SurveyInfoBO business object to SurveyMetaData entity.
+            </summary>
+            <param name="businessobject">A SurveyInfoBO business object.</param>
+            <returns>A SurveyMetaData entity.</returns>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.Interfaces.DataInterfaces.IDaoFactory.SurveyInfoDao">
+            <summary>
+            Gets an order data access object.
+            </summary>
+        </member>
+        <member name="T:Epi.Web.SurveyAPI.Interfaces.DataInterfaces.IOrganizationDao">
+            <summary>
+            Defines methods to access Organizations.
+            </summary>
+            <remarks>
+            This is a database-independent interface. Implementations are database specific.
+            </remarks>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.Interfaces.DataInterfaces.IOrganizationDao.GetOrganizationKeys(System.String)">
+            <summary>
+            Gets a specific Organization.
+            </summary>
+            <param name="OrganizationId">Unique Organization identifier.</param>
+            <returns>Organization.</returns>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.Interfaces.DataInterfaces.IOrganizationDao.InsertOrganization(Epi.Web.SurveyAPI.Web.Common.BusinessObject.OrganizationBO)">
+            <summary>
+            Inserts a new Organization. 
+            </summary>
+            <remarks>
+            Following insert, Organization object will contain the new identifier.
+            </remarks>
+            <param name="Organization">Organization.</param>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.Interfaces.DataInterfaces.IOrganizationDao.UpdateOrganization(Epi.Web.SurveyAPI.Web.Common.BusinessObject.OrganizationBO)">
+            <summary>
+            Updates a Organization.
+            </summary>
+            <param name="Organization">Organization.</param>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.Interfaces.DataInterfaces.IOrganizationDao.DeleteOrganization(Epi.Web.SurveyAPI.Web.Common.BusinessObject.OrganizationBO)">
+            <summary>
+            Deletes a Organization
+            </summary>
+            <param name="Organization">Organization.</param>
+        </member>
+        <member name="T:Epi.Web.SurveyAPI.Interfaces.DataInterfaces.ISurveyInfoDao">
+            <summary>
+            Defines methods to access SurveyInfos.
+            </summary>
+            <remarks>
+            This is a database-independent interface. Implementations are database specific.
+            </remarks>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.Interfaces.DataInterfaces.ISurveyInfoDao.GetSurveyInfo(System.Collections.Generic.List{System.String},System.Int32,System.Int32)">
+            <summary>
+            Gets SurveyInfo based on a list of ids
+            </summary>
+            <param name="SurveyInfoId">Unique SurveyInfo identifier.</param>
+            <returns>SurveyInfo.</returns>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.Interfaces.DataInterfaces.ISurveyInfoDao.GetSurveySizeInfo(System.Collections.Generic.List{System.String},System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Gets SurveyInfo Size data based on a list of ids
+            </summary>
+            <param name="SurveyInfoId">Unique SurveyInfo identifier.</param>
+            <returns>PageInfoBO.</returns>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.Interfaces.DataInterfaces.ISurveyInfoDao.GetSurveyInfo(System.Collections.Generic.List{System.String},System.DateTime,System.String,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Gets SurveyInfo based on criteria
+            </summary>
+            <param name="SurveyInfoId">Unique SurveyInfo identifier.</param>
+            <returns>SurveyInfo.</returns>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.Interfaces.DataInterfaces.ISurveyInfoDao.GetSurveySizeInfo(System.Collections.Generic.List{System.String},System.DateTime,System.String,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Gets SurveyInfo Size data based on a list of ids
+            </summary>
+            <param name="SurveyInfoId">Unique SurveyInfo identifier.</param>
+            <returns>PageInfoBO.</returns>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.Interfaces.DataInterfaces.ISurveyInfoDao.InsertSurveyInfo(Epi.Web.SurveyAPI.Web.Common.BusinessObject.SurveyInfoBO)">
+            <summary>
+            Inserts a new SurveyInfo. 
+            </summary>
+            <remarks>
+            Following insert, SurveyInfo object will contain the new identifier.
+            </remarks>
+            <param name="SurveyInfo">SurveyInfo.</param>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.Interfaces.DataInterfaces.ISurveyInfoDao.UpdateSurveyInfo(Epi.Web.SurveyAPI.Web.Common.BusinessObject.SurveyInfoBO)">
+            <summary>
+            Updates a SurveyInfo.
+            </summary>
+            <param name="SurveyInfo">SurveyInfo.</param>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.Interfaces.DataInterfaces.ISurveyInfoDao.DeleteSurveyInfo(Epi.Web.SurveyAPI.Web.Common.BusinessObject.SurveyInfoBO)">
+            <summary>
+            Deletes a SurveyInfo
+            </summary>
+            <param name="SurveyInfo">SurveyInfo.</param>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.Interfaces.DataInterfaces.ISurveyInfoDao.InsertConnectionString(Epi.Web.SurveyAPI.Web.Common.BusinessObject.DbConnectionStringBO)">
+            <summary>
+            Deletes a SurveyInfo
+            </summary>
+            <param name="SurveyInfo">SurveyInfo.</param>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.Interfaces.DataInterfaces.ISurveyInfoDao.UpdateConnectionString(Epi.Web.SurveyAPI.Web.Common.BusinessObject.DbConnectionStringBO)">
+            <summary>
+            Deletes a SurveyInfo
+            </summary>
+            <param name="SurveyInfo">SurveyInfo.</param>
+        </member>
+        <member name="T:Epi.Web.SurveyAPI.Interfaces.DataInterfaces.ISurveyResponseDao">
+            <summary>
+            Defines methods to access SurveyResponses.
+            </summary>
+            <remarks>
+            This is a database-independent interface. Implementations are database specific.
+            </remarks>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.Interfaces.DataInterfaces.ISurveyResponseDao.GetSurveyResponse(System.Collections.Generic.List{System.String},System.Guid,System.Int32,System.Int32)">
+            <summary>
+            Gets a specific SurveyResponse.
+            </summary>
+            <param name="SurveyResponseId">Unique SurveyResponse identifier.</param>
+            <returns>SurveyResponse.</returns>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.Interfaces.DataInterfaces.ISurveyResponseDao.GetSurveyResponseBySurveyId(System.Collections.Generic.List{System.String},System.Guid,System.Int32,System.Int32)">
+            <summary>
+            Gets a specific SurveyResponse.
+            </summary>
+            <param name="SurveyResponseId">Unique SurveyResponse identifier.</param>
+            <returns>SurveyResponse.</returns>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.Interfaces.DataInterfaces.ISurveyResponseDao.GetSurveyResponse(System.Collections.Generic.List{System.String},System.String,System.DateTime,System.Boolean,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Get SurveyResponses based on criteria.
+            </summary>
+            <param name="SurveyResponseId">Unique SurveyResponse identifier.</param>
+            <returns>SurveyResponse.</returns>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.Interfaces.DataInterfaces.ISurveyResponseDao.InsertSurveyResponse(Epi.Web.SurveyAPI.Web.Common.BusinessObject.SurveyResponseBO)">
+            <summary>
+            Inserts a new SurveyResponse. 
+            </summary>
+            <remarks>
+            Following insert, SurveyResponse object will contain the new identifier.
+            </remarks>
+            <param name="SurveyResponse">SurveyResponse.</param>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.Interfaces.DataInterfaces.ISurveyResponseDao.UpdateSurveyResponse(Epi.Web.SurveyAPI.Web.Common.BusinessObject.SurveyResponseBO)">
+            <summary>
+            Updates a SurveyResponse.
+            </summary>
+            <param name="SurveyResponse">SurveyResponse.</param>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.Interfaces.DataInterfaces.ISurveyResponseDao.DeleteSurveyResponse(Epi.Web.SurveyAPI.Web.Common.BusinessObject.SurveyResponseBO)">
+            <summary>
+            Deletes a SurveyResponse
+            </summary>
+            <param name="SurveyResponse">SurveyResponse.</param>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.Repository.SurveyResponseRepository.SetSurveyAnswer(Epi.Web.SurveyAPI.Models.SurveyAnswerModel)">
+            <summary>
+            Inserts SurveyResponse 
+            </summary>
+            <param name="SurveyAnswerModel"></param>
+            <returns>response </returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Epi.Web.SurveyAPI.Repository.SurveyResponseRepository.Update(Epi.Web.SurveyAPI.Models.SurveyAnswerModel,System.String)" -->
+        <member name="M:Epi.Web.SurveyAPI.Repository.SurveyResponseRepository.GetSurveyInfoById(System.String)">
+            <summary>
+            Validate Header information coming from the request
+            </summary>
+            <param name="SurveyId"></param>
+            <returns>response </returns>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.Repository.SurveyResponseRepository.Remove(System.String)">
+            <summary>
+            Updates SurveyResponse 
+            </summary>
+            <param name="id"></param>
+        </member>
+        <member name="T:Epi.Web.SurveyAPI.Web.Common.BusinessObject.BusinessObject">
+            <summary>
+            Abstract base class for business objects.
+            Contains basic business rule infrastructure.
+            </summary>
+        </member>
+        <member name="F:Epi.Web.SurveyAPI.Web.Common.BusinessObject.BusinessObject._versionDefault">
+            <summary>
+            Default value for version number (used in LINQ's optimistic concurrency)
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.Web.Common.BusinessObject.BusinessObject.ValidationErrors">
+            <summary>
+            Gets list of validations errors.
+            </summary>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.Web.Common.BusinessObject.BusinessObject.Validate">
+            <summary>
+            Determines whether business rules are valid or not.
+            Creates a list of validation errors when appropriate.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Epi.Web.SurveyAPI.Web.Common.BusinessRule.BusinessRule">
+            <summary>
+            Abstract base class for business rules. 
+            Maintains property name to which rule applies and validation error message.
+            </summary>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.Web.Common.BusinessRule.BusinessRule.#ctor(System.String)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="propertyName">The property name to which rule applies.</param>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.Web.Common.BusinessRule.BusinessRule.#ctor(System.String,System.String)">
+            <summary>
+            Overloaded constructor
+            </summary>
+            <param name="propertyName">The property name to which rule applies.</param>
+            <param name="errorMessage">The error message.</param>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.Web.Common.BusinessRule.BusinessRule.Validate(Epi.Web.SurveyAPI.Web.Common.BusinessObject.BusinessObject)">
+            <summary>
+            Validation method. To be implemented in derived classes.
+            </summary>
+            <param name="businessObject"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.Web.Common.BusinessRule.BusinessRule.GetPropertyValue(Epi.Web.SurveyAPI.Web.Common.BusinessObject.BusinessObject)">
+            <summary>
+            Gets value for given business object's property using reflection.
+            </summary>
+            <param name="businessObject"></param>
+            <param name="propertyName"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Epi.Web.SurveyAPI.Web.Common.BusinessRule.ValidationDataType">
+            <summary>
+            Datatype enum of types to be used in validation rules.
+            </summary>
+        </member>
+        <member name="T:Epi.Web.SurveyAPI.Web.Common.Criteria.Criteria">
+            <summary>
+            Base class that holds criteria for queries.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.Web.Common.Criteria.Criteria.SortExpression">
+            <summary>
+            Sort expression of the criteria.
+            </summary>
+        </member>
+        <member name="T:Epi.Web.SurveyAPI.Web.Common.Criteria.OrganizationCriteria">
+            <summary>
+            Holds criteria for Organization queries.
+            </summary>
+        </member>
+        <member name="T:Epi.Web.SurveyAPI.Web.Common.Criteria.SurveyAnswerCriteria">
+            <summary>
+            Holds criteria for SurveyResponse queries.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.Web.Common.Criteria.SurveyAnswerCriteria.PageNumber">
+            <summary>
+            Which page to retrieve
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.Web.Common.Criteria.SurveyAnswerCriteria.PageSize">
+            <summary>
+            Number of Records per page
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.Web.Common.Criteria.SurveyAnswerCriteria.ReturnSizeInfoOnly">
+            <summary>
+            Number of Records per page
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.Web.Common.Criteria.SurveyAnswerCriteria.SurveyAnswerIdList">
+            <summary>
+            Unique SurveyResponse identifier.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.Web.Common.Criteria.SurveyAnswerCriteria.SurveyId">
+            <summary>
+            SurveyInfo identifier.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.Web.Common.Criteria.SurveyAnswerCriteria.StatusId">
+            <summary>
+            Complete / Inprogress indicator
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.Web.Common.Criteria.SurveyAnswerCriteria.DateCompleted">
+            <summary>
+            IsCompleted date.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.Web.Common.Criteria.SurveyAnswerCriteria.IncludeOrderStatistics">
+            <summary>
+            Flag as to whether to include order statistics.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.Web.Common.Criteria.SurveyAnswerCriteria.IsDraftMode">
+            <summary>
+            Number of Records per page
+            </summary>
+        </member>
+        <member name="T:Epi.Web.SurveyAPI.Web.Common.Criteria.SurveyInfoCriteria">
+            <summary>
+            Holds criteria for SurveyInfo queries.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.Web.Common.Criteria.SurveyInfoCriteria.OrganizationKey">
+            <summary>
+            Organization Key for Manager Service
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.Web.Common.Criteria.SurveyInfoCriteria.PageNumber">
+            <summary>
+            Which page to retrieve
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.Web.Common.Criteria.SurveyInfoCriteria.PageSize">
+            <summary>
+            Number of Records per page
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.Web.Common.Criteria.SurveyInfoCriteria.ReturnSizeInfoOnly">
+            <summary>
+            Number of Records per page
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.Web.Common.Criteria.SurveyInfoCriteria.SurveyIdList">
+            <summary>
+            Unique SurveyInfo identifier.
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.Web.Common.Criteria.SurveyInfoCriteria.ClosingDate">
+            <summary>
+            Last Day survey can be completed
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.Web.Common.Criteria.SurveyInfoCriteria.SurveyType">
+            <summary>
+            Survey Type
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.Web.Common.Criteria.SurveyInfoCriteria.UserPublishKey">
+            <summary>
+            User Publish Key for Manager Service
+            </summary>
+        </member>
+        <member name="P:Epi.Web.SurveyAPI.Web.Common.Criteria.SurveyInfoCriteria.IncludeOrderStatistics">
+            <summary>
+            Flag as to whether to include order statistics.
+            </summary>
+        </member>
+        <member name="T:Epi.Web.SurveyAPI.Web.Common.MessageBase.AcknowledgeType">
+            <summary>
+            Enumeration of message response acknowledgements. This is a simple
+            enumerated values indicating success of failure.
+            </summary>
+        </member>
+        <member name="F:Epi.Web.SurveyAPI.Web.Common.MessageBase.AcknowledgeType.Failure">
+            <summary>
+            Respresents an failed response.
+            </summary>
+        </member>
+        <member name="F:Epi.Web.SurveyAPI.Web.Common.MessageBase.AcknowledgeType.Success">
+            <summary>
+            Represents a successful response.
+            </summary>
+        </member>
+        <member name="T:Epi.Web.SurveyAPI.Web.Common.MessageBase.PersistType">
+            <summary>
+            Enumeration of database persistence actions.
+            (Also called CRUD operations: Create, Read, Update, Delete).
+            
+            SOA Design Pattern: Command Message. Basically this in an instruction
+            or command to the receiver which operatin to execute.
+            </summary>
+        </member>
+        <member name="F:Epi.Web.SurveyAPI.Web.Common.MessageBase.PersistType.Insert">
+            <summary>
+            Insert record in database.
+            </summary>
+        </member>
+        <member name="F:Epi.Web.SurveyAPI.Web.Common.MessageBase.PersistType.Update">
+            <summary>
+            Update record in database.
+            </summary>
+        </member>
+        <member name="F:Epi.Web.SurveyAPI.Web.Common.MessageBase.PersistType.Delete">
+            <summary>
+            Delete record from database.
+            </summary>
+        </member>
+        <member name="T:Epi.Web.SurveyAPI.Web.Common.MessageBase.RequestBase">
+            <summary>
+            Base class for all client request messages of the web service. It standardizes 
+            communication between web services and clients with a series of common values.
+            Derived request message classes assign values to these variables. There are no 
+            default values. 
+            </summary>
+        </member>
+        <member name="F:Epi.Web.SurveyAPI.Web.Common.MessageBase.RequestBase.ClientTag">
+            <summary>
+            Each web service request carries a security token as an extra level of security.
+            Tokens are issued when users are coming online. They can expire if necessary.
+            Google.com and Amazon.com uses this in their API.
+            </summary>
+        </member>
+        <member name="F:Epi.Web.SurveyAPI.Web.Common.MessageBase.RequestBase.AccessToken">
+            <summary>
+            Each web service request carries a security token as an extra level of security.
+            Tokens are issued when users are coming online. They can expire if necessary.
+            Google.com and Amazon.com uses this in their API.
+            </summary>
+        </member>
+        <member name="F:Epi.Web.SurveyAPI.Web.Common.MessageBase.RequestBase.Version">
+            <summary>
+            Minimum version number that client request is required to run under. This facilitates
+            a certain level of backward compatibility for when the web service API evolves.
+            Ebay.com uses the version number in their API. 
+            </summary>
+        </member>
+        <member name="F:Epi.Web.SurveyAPI.Web.Common.MessageBase.RequestBase.RequestId">
+            <summary>
+            A unique number (ideally a Guid) issued by the client representing the instance 
+            of the request. Avoids rapid-fire processing of the same request over and over 
+            in denial-of-service type attacks.
+            </summary>
+        </member>
+        <member name="F:Epi.Web.SurveyAPI.Web.Common.MessageBase.RequestBase.LoadOptions">
+            <summary>
+            Load options indicated what types are to be returned in the request.
+            </summary>
+        </member>
+        <member name="F:Epi.Web.SurveyAPI.Web.Common.MessageBase.RequestBase.Action">
+            <summary>
+            Crud action: Create, Read, Update, Delete
+            </summary>
+        </member>
+        <member name="T:Epi.Web.SurveyAPI.Web.Common.MessageBase.ResponseBase">
+            <summary>
+            Base class for all response messages to clients of the web service. It standardizes 
+            communication between web services and clients with a series of common values and 
+            their initial defaults. Derived response message classes can override the default 
+            values if necessary.
+            </summary>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.Web.Common.MessageBase.ResponseBase.#ctor">
+            <summary>
+            Default Constructor for ResponseBase.
+            </summary>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.Web.Common.MessageBase.ResponseBase.#ctor(System.String)">
+            <summary>
+            Overloaded Constructor for ResponseBase. 
+            Sets CorrelationId from incoming Request.
+            </summary>
+            <param name="correlationId">The correlation identifier for request and response.</param>
+        </member>
+        <member name="F:Epi.Web.SurveyAPI.Web.Common.MessageBase.ResponseBase.Acknowledge">
+            <summary>
+            A flag indicating success or failure of the web service response back to the 
+            client. Default is success. Ebay.com uses this model.
+            </summary>
+        </member>
+        <member name="F:Epi.Web.SurveyAPI.Web.Common.MessageBase.ResponseBase.CorrelationId">
+            <summary>
+            CorrelationId mostly returns the RequestId back to client. 
+            </summary>
+        </member>
+        <member name="F:Epi.Web.SurveyAPI.Web.Common.MessageBase.ResponseBase.Message">
+            <summary>
+            Message back to client. Mostly used when a web service failure occurs. 
+            </summary>
+        </member>
+        <member name="F:Epi.Web.SurveyAPI.Web.Common.MessageBase.ResponseBase.ReservationId">
+            <summary>
+            Reservation number issued by the web service. Used in long running requests. 
+            Also sometimes referred to as Correlation Id. This number is a way for both the client
+            and web service to keep track of long running requests (for example, a request 
+            to make a reservation for a airplane flight).
+            </summary>
+        </member>
+        <member name="F:Epi.Web.SurveyAPI.Web.Common.MessageBase.ResponseBase.ReservationExpires">
+            <summary>
+            Date when reservation number expires. 
+            </summary>
+        </member>
+        <member name="F:Epi.Web.SurveyAPI.Web.Common.MessageBase.ResponseBase.Version">
+            <summary>
+            Version number (in major.minor format) of currently executing web service. 
+            Used to offer a level of understanding (related to compatibility issues) between
+            the client and the web service as the web services evolve over time. 
+            Ebay.com uses this in their API.
+            </summary>
+        </member>
+        <member name="F:Epi.Web.SurveyAPI.Web.Common.MessageBase.ResponseBase.Build">
+            <summary>
+            Build number of currently executing web service. Used as an indicator
+            to client whether certain code fixes are included or not.
+            Ebay.com uses this in their API.
+            </summary>
+        </member>
+        <member name="F:Epi.Web.SurveyAPI.Web.Common.MessageBase.ResponseBase.RowsAffected">
+            <summary>
+            Number of rows affected by "Create", "Update", or "Delete" action.
+            </summary>
+        </member>
+        <member name="F:Epi.Web.SurveyAPI.Web.Common.Message.OrganizationRequest.Organization">
+            <summary>
+            Organization object.
+            </summary>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.Web.Common.Message.OrganizationResponse.#ctor">
+            <summary>
+            Default Constructor for OrganizationResponse.
+            </summary>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.Web.Common.Message.OrganizationResponse.#ctor(System.String)">
+            <summary>
+            Overloaded Constructor for OrganizationResponse. Sets CorrelationId.
+            </summary>
+            <param name="correlationId"></param>
+        </member>
+        <member name="F:Epi.Web.SurveyAPI.Web.Common.Message.OrganizationResponse.OrganizationList">
+            <summary>
+            OrganizationInfo object.
+            </summary>
+        </member>
+        <member name="T:Epi.Web.SurveyAPI.Web.Common.Message.PreFilledAnswerRequest">
+            <summary>
+            Represents a Survey Response  request message from client.
+            </summary>
+        </member>
+        <member name="F:Epi.Web.SurveyAPI.Web.Common.Message.PreFilledAnswerRequest.AnswerInfo">
+            <summary>
+            AnswerInfo object.
+            </summary>
+        </member>
+        <member name="T:Epi.Web.SurveyAPI.Web.Common.Message.SurveyInfoRequest">
+            <summary>
+            Represents a SurveyInfo request message from client.
+            </summary>
+        </member>
+        <member name="F:Epi.Web.SurveyAPI.Web.Common.Message.SurveyInfoRequest.Criteria">
+            <summary>
+            Selection criteria and sort order
+            </summary>
+        </member>
+        <member name="F:Epi.Web.SurveyAPI.Web.Common.Message.SurveyInfoRequest.SurveyInfoList">
+            <summary>
+            SurveyInfo List.
+            </summary>
+        </member>
+        <member name="T:Epi.Web.SurveyAPI.Web.Common.ObjectMapping.Mapper">
+            <summary>
+            Maps DTOs (Data Transfer Objects) to BOs (Business Objects) and vice versa.
+            </summary>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.Web.Common.ObjectMapping.Mapper.ToBusinessObject(Epi.Web.SurveyAPI.Web.Common.DTO.SurveyInfoDTO)">
+            <summary>
+            Maps SurveyMetaData entity to SurveyInfoBO business object.
+            </summary>
+            <param name="entity">A SurveyMetaData entity to be transformed.</param>
+            <returns>A SurveyInfoBO business object.</returns>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.Web.Common.ObjectMapping.Mapper.ToDataTransferObject(Epi.Web.SurveyAPI.Web.Common.BusinessObject.SurveyInfoBO)">
+            <summary>
+            Maps SurveyInfoBO business object to SurveyInfoDTO entity.
+            </summary>
+            <param name="SurveyInfo">A SurveyInfoBO business object.</param>
+            <returns>A SurveyInfoDTO.</returns>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.Web.Common.ObjectMapping.Mapper.ToDataTransferObject(Epi.Web.SurveyAPI.Web.Common.BusinessObject.SurveyResponseBO)">
+            <summary>
+            Maps SurveyInfoBO business object to SurveyInfoDTO entity.
+            </summary>
+            <param name="SurveyInfo">A SurveyInfoBO business object.</param>
+            <returns>A SurveyInfoDTO.</returns>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.Web.Common.ObjectMapping.Mapper.ToBusinessObject(Epi.Web.SurveyAPI.Web.Common.DTO.SurveyAnswerDTO)">
+            <summary>
+            Maps SurveyInfoBO business object to SurveyInfoDTO entity.
+            </summary>
+            <param name="SurveyInfo">A SurveyResponseDTO business object.</param>
+            /// <returns>A SurveyResponseBO.</returns>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.Web.Common.ObjectMapping.Mapper.ToDataTransferObjects(System.Collections.Generic.IEnumerable{Epi.Web.SurveyAPI.Web.Common.BusinessObject.SurveyInfoBO})">
+            <summary>
+            Maps SurveyRequestResultBO business object to PublishInfoDTO.
+            </summary>
+            <param name="SurveyInfo">A SurveyRequestResultBO business object.</param>
+            <returns>A PublishInfoDTO.</returns>
+            <summary>
+            Transforms list of SurveyInfoBO BOs list of category DTOs.
+            </summary>
+            <param name="SurveyInfoBO">List of categories BOs.</param>
+            <returns>List of SurveyInfoDTO DTOs.</returns>
+        </member>
+        <member name="T:Epi.Web.SurveyAPI.Web.Common.Security.Cryptography">
+            <summary>
+            This class contains two static methods one to entrypt string and one to decrypt string
+            </summary>
+        </member>
+        <member name="F:Epi.Web.SurveyAPI.Web.Common.Security.Cryptography.passPhrase">
+            <summary>
+            Identifier for Web driver that is built into Epi Info
+            </summary>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.Web.Common.Security.Cryptography.Encrypt(System.String)">
+            <summary>
+            Encryption
+            </summary>
+            <param name="plainText">The plaintext to encrypt</param>
+            <returns>The ciphertext</returns>
+        </member>
+        <member name="M:Epi.Web.SurveyAPI.Web.Common.Security.Cryptography.Decrypt(System.String)">
+            <summary>
+            Decryption
+            </summary>
+            <param name="cipherText">The ciphertext to decrypt</param>
+            <returns>The plaintext</returns>
+        </member>
+    </members>
+</doc>
