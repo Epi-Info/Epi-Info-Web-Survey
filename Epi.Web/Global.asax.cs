@@ -12,7 +12,9 @@ using System.Configuration;
 using ImranB.ModelBindingFix;
  
 using System.Web.WebPages;
- 
+using Epi.Web.MVC.App_Start;
+using Epi.Web.SurveyAPI.MessageHandlers;
+
 
 
 namespace Epi.Web.MVC
@@ -35,6 +37,11 @@ namespace Epi.Web.MVC
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
+            if (ConfigurationManager.AppSettings["SurveyAPIIntegration"] != null && ConfigurationManager.AppSettings["SurveyAPIIntegration"].ToString().ToLower() == "true")
+            {
+                GlobalConfiguration.Configure(WebApiConfig.Register);
+                GlobalConfiguration.Configuration.MessageHandlers.Add(new APIKeyHandler());
+            }
 
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
