@@ -1759,8 +1759,22 @@ namespace Epi.Web.MVC.Controllers
 
                     for (int i = 1; i < form.NumberOfPages + 1; i++)
                     {
+                        SourceTablesResponse SourceTables = null;
+                        if (string.IsNullOrEmpty(form.SurveyInfo.ParentId))
+                        {
+                             SourceTables = _isurveyFacade.GetSourceTables(form.SurveyInfo.SurveyId);
+                        }
+                        else
+                        {
+                           SourceTables = _isurveyFacade.GetSourceTables(form.SurveyInfo.ParentId);
 
-                        form = Epi.Web.MVC.Utility.FormProvider.GetForm(form.SurveyInfo, i, SurveyAnswer);
+                        }
+                        bool IsAndroid = false;
+                        if (this.Request.UserAgent.IndexOf("Android", StringComparison.OrdinalIgnoreCase) >= 0)
+                        {
+                            IsAndroid = true;
+                        }
+                        form = Epi.Web.MVC.Utility.FormProvider.GetForm(form.SurveyInfo, i, SurveyAnswer, IsMobileDevice, IsAndroid,SourceTables.List);
                         if (!form.Validate(form.RequiredFieldsList))
                         {
                             TempData["isredirect"] = "true";
