@@ -108,7 +108,8 @@ namespace Epi.Web.MVC.Controllers
 
                     case PreValidationResultEnum.Success:
                     default:
-                        var form = _isurveyFacade.GetSurveyFormData(surveyAnswerDTO.SurveyId, pageNumber, surveyAnswerDTO, isMobileDevice,null,null,IsAndroid);
+                        List<FormsHierarchyDTO> FormsHierarchy = GetFormsHierarchy();// Pain Point
+                        var form = _isurveyFacade.GetSurveyFormData(surveyAnswerDTO.SurveyId, pageNumber, surveyAnswerDTO, isMobileDevice,null, FormsHierarchy, IsAndroid);
                        
                         TempData["Width"] = form.Width + 5;
 
@@ -342,12 +343,12 @@ namespace Epi.Web.MVC.Controllers
                             
                         if (NewPageNumber != CurrentPageNum)
                             {
-                            form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, NewPageNumber, SurveyAnswer, isMobileDevice,null,null,IsAndroid);
+                            form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, NewPageNumber, SurveyAnswer, isMobileDevice,null, FormsHierarchy, IsAndroid);
                             Epi.Web.MVC.Utility.FormProvider.UpdateHiddenFields(NewPageNumber, form, XDocument.Parse(surveyInfoModel.XML), XDocument.Parse(SurveyAnswer.XML), this.ControllerContext.RequestContext.HttpContext.Request.Form);
                             }
                             else
                             {
-                                form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, CurrentPageNum, SurveyAnswer, isMobileDevice,null,null,IsAndroid);
+                                form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, CurrentPageNum, SurveyAnswer, isMobileDevice,null, FormsHierarchy, IsAndroid);
                                 Epi.Web.MVC.Utility.FormProvider.UpdateHiddenFields(CurrentPageNum, form, XDocument.Parse(surveyInfoModel.XML), XDocument.Parse(SurveyAnswer.XML), this.ControllerContext.RequestContext.HttpContext.Request.Form);
                             }                         
 
@@ -357,7 +358,7 @@ namespace Epi.Web.MVC.Controllers
                         {
 
 
-                        form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, CurrentPageNum, SurveyAnswer, isMobileDevice,null,null,IsAndroid );
+                        form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, CurrentPageNum, SurveyAnswer, isMobileDevice,null, FormsHierarchy, IsAndroid );
                         form.ClearAllErrors();
                         Epi.Web.MVC.Utility.FormProvider.UpdateHiddenFields(CurrentPageNum, form, XDocument.Parse(surveyInfoModel.XML), XDocument.Parse(SurveyAnswer.XML), this.ControllerContext.RequestContext.HttpContext.Request.Form);
                                                        
