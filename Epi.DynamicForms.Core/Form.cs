@@ -408,6 +408,18 @@ namespace MvcDynamicForms
 
             return result;
         }
+        public Epi.Core.EnterInterpreter.Rule_Context GetRelateCheckCodeObj(List<Epi.Web.Common.Helper.RelatedFormsObj> Obj, string FormCheckCode)
+            {
+            Epi.Core.EnterInterpreter.EpiInterpreterParser EIP = new Epi.Core.EnterInterpreter.EpiInterpreterParser(Epi.Core.EnterInterpreter.EpiInterpreterParser.GetEnterCompiledGrammarTable());
+            Epi.Core.EnterInterpreter.Rule_Context result = (Epi.Core.EnterInterpreter.Rule_Context)EIP.Context;
+            foreach (var item in Obj)
+                {
+                result.LoadTemplate(item.MetaData, item.Response);
+                }
+            EIP.Execute(FormCheckCode);
+
+            return result;
+        }
         public string FormJavaScript { get; set; }
 
  

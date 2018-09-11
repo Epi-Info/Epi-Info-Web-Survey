@@ -91,8 +91,15 @@ namespace Epi.Web.MVC.Utility
                     form.HiddenFieldsList = xdocResponse.Root.Attribute("HiddenFieldsList").Value;
                     form.HighlightedFieldsList = xdocResponse.Root.Attribute("HighlightedFieldsList").Value;
                     form.DisabledFieldsList = xdocResponse.Root.Attribute("DisabledFieldsList").Value;
+                    if (SurveyAnswerList != null)
+                    {
 
-                    form.FormCheckCodeObj = form.GetCheckCodeObj(form.XDocMetadata, xdocResponse, checkcode);
+                        form.FormCheckCodeObj = form.GetRelateCheckCodeObj(GetRelateFormObj(), checkcode);
+                    }
+                    else
+                    {
+                        form.FormCheckCodeObj = form.GetCheckCodeObj(form.XDocMetadata, xdocResponse, checkcode);
+                    }
                     form.FormCheckCodeObj.GetVariableJavaScript(VariableDefinitions);
                     form.FormCheckCodeObj.GetSubroutineJavaScript(VariableDefinitions);
 
@@ -136,6 +143,29 @@ namespace Epi.Web.MVC.Utility
             }
 
             return form;
+        }
+
+        private static List<Epi.Web.Common.Helper.RelatedFormsObj> GetRelateFormObj()
+        {
+
+            List<Epi.Web.Common.Helper.RelatedFormsObj> List = new List<Web.Common.Helper.RelatedFormsObj>();
+
+
+            for (int i = 0; SurveyAnswerList.Count() > i; i++)
+            {
+
+
+                Epi.Web.Common.Helper.RelatedFormsObj RelatedFormsObj = new Epi.Web.Common.Helper.RelatedFormsObj();
+                XDocument xdocResponse1 = XDocument.Parse(SurveyAnswerList[i].XML);
+                XDocument xdoc1 = XDocument.Parse(SurveyInfoList[i].XML.ToString());
+                RelatedFormsObj.MetaData = xdoc1;
+                RelatedFormsObj.Response = xdocResponse1;
+
+
+                List.Add(RelatedFormsObj);
+            }
+
+            return List;
         }
     }
 }
