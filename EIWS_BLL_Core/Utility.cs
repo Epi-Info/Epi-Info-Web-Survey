@@ -89,7 +89,12 @@ namespace Epi.Web.BLL
                     ISValidUser = true;
 
 
+                }                                 
+                else if (EncryptedAdminKey.ToLower() == AdminKeyToValidate.ToLower())
+                {
+                    ISValidUser = true;
                 }
+               
                 else
                 {
                     ISValidUser = false;
