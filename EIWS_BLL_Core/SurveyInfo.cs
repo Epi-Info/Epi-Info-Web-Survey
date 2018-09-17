@@ -522,6 +522,16 @@ namespace Epi.Web.BLL
                 IsValid = true;
 
             }
+            else
+            {
+                 EncryptedKey = Epi.Web.Common.Security.Cryptography.Encrypt(Request.Organization.OrganizationKey.ToLower());
+                 OrgId = this.SurveyInfoDao.GetOrganizationId(EncryptedKey);
+                if (OrgId != -1)
+                {
+                    IsValid = true;
+
+                }
+            }
             return IsValid;
         }
 
