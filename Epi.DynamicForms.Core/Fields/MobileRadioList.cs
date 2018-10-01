@@ -70,7 +70,7 @@ namespace MvcDynamicForms.Fields
                 radioTag.Attributes.Add("class", inputName);
                 radioTag.Attributes.Add("id", radId);                               
            
-                if (FunctionObjectAfter != null)
+                if (FunctionObjectAfter != null && ((Epi.Core.EnterInterpreter.Rules.Rule_Begin_After_Statement)FunctionObjectAfter).Statements != null)
                 {
                     //radioTag.Attributes.Add("onclick", "return " + _key + "_after();");
                     radioTag.Attributes.Add("onchange", "$('#" + inputName + "').val('" + i.ToString() + "');return " + _key + "_after(this.id);"); //After
