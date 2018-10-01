@@ -2798,15 +2798,17 @@ function CCE_HasFormValuesChanged() {
                     else {
                         CurrentValue = "No";
                     }
-
-                    if (symbol_value.toString().toLowerCase() == "true" || symbol_value.toString().toLowerCase() == "yes") {
-                        symbol_value = "Yes";
-                    }
-                    // if (symbol_value == "false" || symbol_value == "no")
-                    else {
+                    if (symbol_value != "" && symbol_value!=null){
+                        if (symbol_value.toString().toLowerCase() == "true" || symbol_value.toString().toLowerCase() == "yes") {
+                            symbol_value = "Yes";
+                        }
+                        // if (symbol_value == "false" || symbol_value == "no")
+                        else {
+                            symbol_value = "No";
+                        }
+                    } else {
                         symbol_value = "No";
                     }
-
                 }
                 else {
 

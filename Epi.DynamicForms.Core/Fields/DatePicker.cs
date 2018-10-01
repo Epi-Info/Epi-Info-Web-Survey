@@ -194,8 +194,18 @@ namespace MvcDynamicForms.Fields
             StringBuilder NewDateFormat = new StringBuilder();
             if (Date == "SYSTEMDATE")
             {
-                Date = DateTime.Now.Date.ToString();
+                 
+                switch (patternIn.ToString())
+                {
+                    case "YYYY-MM-DD":
+                        Date = DateTime.Now.ToString("yyyy-MM-dd");
+                        break;
+                    case "MM-DD-YYYY":
+                        Date = DateTime.Now.ToString("MM-DD-YYYY");
+                        break;
+                }
             }
+            
             string MM = "";
             string DD = "";
             string YYYY = "";
