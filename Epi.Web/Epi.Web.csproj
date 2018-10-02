@@ -69,7 +69,7 @@
     </Reference>
     <Reference Include="Epi.Web.SurveyAPI, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Epi-Info-Survey-API\Epi.Web.SurveyAPI\bin\Epi.Web.SurveyAPI.dll</HintPath>
+      <HintPath>bin\Epi.Web.SurveyAPI.dll</HintPath>
     </Reference>
     <Reference Include="EpiInfo.Plugin, Version=7.0.9.8, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
