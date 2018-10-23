@@ -75,10 +75,11 @@ namespace MvcDynamicForms.Fields
             }
             else
             {
-
+                var Value = _choices.FirstOrDefault(x => x.Value == true).Key;
                 select = new TagBuilder("input");
                 select.Attributes.Add("list", inputName + "_DataList");
                 select.Attributes.Add("data-autofirst", "true");
+                select.Attributes.Add("value", Value);
             }
             select.Attributes.Add("id", inputName);
             select.Attributes.Add("name", inputName);
@@ -366,9 +367,10 @@ namespace MvcDynamicForms.Fields
                 {
                     var opt = new TagBuilder("option");
                     opt.Attributes.Add("value", choice.Key);
-                    if (choice.Key == SelectedValue.ToString()) opt.Attributes.Add("selected", "selected");
+                    if (choice.Key == SelectedValue.ToString())
                     {
                         opt.SetInnerText(choice.Key);
+                        opt.Attributes.Add("selected", "selected");
                     }
                     html.Append(opt.ToString());
                 }
