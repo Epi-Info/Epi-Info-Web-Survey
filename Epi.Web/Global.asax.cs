@@ -8,12 +8,12 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using System.Diagnostics;
 using System.Configuration;
- 
+
 using ImranB.ModelBindingFix;
- 
+
 using System.Web.WebPages;
 using Epi.Web.MVC.App_Start;
-using Epi.Web.SurveyAPI.MessageHandlers;
+using Epi.Web.MVC.MessageHandlers;
 
 
 
@@ -39,7 +39,7 @@ namespace Epi.Web.MVC
             AreaRegistration.RegisterAllAreas();
             if (ConfigurationManager.AppSettings["SurveyAPIIntegration"] != null && ConfigurationManager.AppSettings["SurveyAPIIntegration"].ToString().ToLower() == "true")
             {
-                GlobalConfiguration.Configure(WebApiConfig.Register);
+                 GlobalConfiguration.Configure(WebApiConfig.Register);
                 GlobalConfiguration.Configuration.MessageHandlers.Add(new APIKeyHandler());
             }
 
@@ -53,7 +53,7 @@ namespace Epi.Web.MVC
             DisplayModeProvider.Instance.Modes.Insert(0, new DefaultDisplayMode("Mobile") { ContextCondition = (context => context.Request.UserAgent.IndexOf("iPad", StringComparison.OrdinalIgnoreCase) >= 0) });
 
             //DisplayModeProvider.Instance.Modes.Insert(0, new DefaultDisplayMode("iPhone") { ContextCondition = (context => context.Request.UserAgent.IndexOf("iPhone", StringComparison.OrdinalIgnoreCase) >= 0) });
-            BundleConfig.RegisterBundles(BundleTable.Bundles);
+            BundleConfig.RegisterBundles(BundleTable.Bundles);           
             Bootstrapper.Initialise();
 
            // DisplayModes.Modes.Insert(0, new  DefaultDisplayMode("Mobile") 

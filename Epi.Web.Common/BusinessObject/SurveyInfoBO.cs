@@ -29,6 +29,7 @@ namespace Epi.Web.Common.BusinessObject
         public string _DBConnectionString { get; set; }
         public bool _IsSqlProject { get; set; }
         public int ViewId { get; set; }
+        public int OrganizationId { get; set; }
         public string StatusText
         { 
             get { return _StatusText; }
