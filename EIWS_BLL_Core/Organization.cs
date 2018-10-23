@@ -5,7 +5,7 @@ using System.Text;
 using Epi.Web.Common.BusinessObject;
 using Epi.Web.Common.Criteria;
 using System.Configuration;
-
+using Epi.Web.Common.Security;
 
 namespace Epi.Web.BLL
 {
@@ -130,6 +130,15 @@ namespace Epi.Web.BLL
             return result;
             }
 
-         
+        public OrganizationBO GetOrganizationById(int OrganizationId)
+        {
+             OrganizationBO result = this.OrganizationDao.GetOrganizationInfoById(OrganizationId);
+             string orgKey = Cryptography.Decrypt(result.OrganizationKey);
+             result.OrganizationKey = orgKey;
+             return result;
+            //return null;
+        }
+
+
     }
 }
