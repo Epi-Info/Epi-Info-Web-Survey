@@ -109,11 +109,45 @@ namespace MvcDynamicForms.Fields
                 }
                 else
                 {
+                    if (Lower == "SYSTEMDATE")
+                    {
 
+                        switch (Pattern.ToString())
+                        {
+                            case "YYYY-MM-DD":
+                                Lower = DateTime.Now.ToString("YYYY - MM - DD");
+                                break;
+                            case "MM-DD-YYYY":
+                                Lower = DateTime.Now.ToString("MM-DD-YYYY");
+                                break;
+                        }
+                    } else if (Lower == "1/1/0001") {
+
+                        Lower = "1/1/1901";
+                    }
+                    if (Upper == "SYSTEMDATE")
+                    {
+
+                        switch (Pattern.ToString())
+                        {
+                            case "YYYY-MM-DD":
+                                Upper = DateTime.Now.ToString("yyyy-mm-dd");
+                                break;
+                            case "MM-DD-YYYY":
+                                Upper = DateTime.Now.ToString("MM-DD-YYYY");
+                                break;
+                        }
+                    }
+                    else if (Upper == "1/1/0001")
+                    {
+
+                        Upper = "1/1/1901";
+                    }
                     //invalid: not in between range
                     //first check if low and upper are not empty
                     if ((!string.IsNullOrEmpty(Lower)) && (!string.IsNullOrEmpty(Upper)))
                     {
+                       
                         //if the date is either less than the lower limit or greater than the upper limit raise error
                         if ((DateTime.Parse(Response) < DateTime.Parse(Lower)) || (DateTime.Parse(Response) > DateTime.Parse(Upper)))
                         {
@@ -147,8 +181,19 @@ namespace MvcDynamicForms.Fields
         public string GetDateFormat(string Date, string pattern)
         {
             StringBuilder NewDateFormat = new StringBuilder();
-
-            string MM = "";
+            if (Date == "SYSTEMDATE")
+            {
+                switch (pattern.ToString())
+                {
+                    case "YYYY-MM-DD":
+                        Date = DateTime.Now.ToString("YYYY - MM - DD");
+                        break;
+                    case "MM-DD-YYYY":
+                        Date = DateTime.Now.ToString("MM-DD-YYYY");
+                        break;
+                }
+            }
+                string MM = "";
             string DD = "";
             string YYYY = "";
             char splitChar = '/';
