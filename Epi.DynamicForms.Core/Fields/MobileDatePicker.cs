@@ -310,7 +310,20 @@ namespace MvcDynamicForms.Fields
             string DD = "";
             string YYYY = "";
             char splitChar = '/';
-            if (!string.IsNullOrEmpty(Date) && Date != "SYSTEMDATE")
+            if (Date == "SYSTEMDATE") {
+                switch (patternIn.ToString())
+                {
+                    case "YYYY-MM-DD":
+                        Date = DateTime.Now.ToString("yyyy-mm-dd");
+                        break;
+                    case "MM-DD-YYYY":
+                        Date = DateTime.Now.ToString("MM-DD-YYYY");
+                        break;
+                }
+               
+
+            }
+            if (!string.IsNullOrEmpty(Date) )
             {
                 if (Date.Contains('-'))
                 {
