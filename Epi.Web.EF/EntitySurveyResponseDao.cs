@@ -362,6 +362,32 @@ namespace Epi.Web.EF
              
         }
 
+
+        /// <summary>
+        /// Inserts a new SurveyResponse via API. 
+        /// </summary>
+        /// <remarks>
+        /// Following insert, SurveyResponse object will contain the new identifier.
+        /// </remarks>  
+        /// <param name="SurveyResponse">SurveyResponse.</param>
+        public void InsertSurveyResponseApi(SurveyResponseBO SurveyResponse)
+        {
+            try
+            {
+                using (var Context = DataObjectFactory.CreateContext())
+                {
+                    SurveyResponse SurveyResponseEntity = Mapper.ToEF(SurveyResponse);                   
+                    Context.AddToSurveyResponses(SurveyResponseEntity);
+                    Context.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
+            }
+
+        }
+
         /// <summary>
         /// Updates a SurveyResponse.
         /// </summary>
@@ -1565,6 +1591,43 @@ namespace Epi.Web.EF
             stringBuilder.Append(" WHERE " + EweDS.Tables[0].Rows[0]["TableName"] + ".GlobalRecordId ='" + ResponseId + "'");
 
             return stringBuilder.ToString();
+        }
+
+        /// <summary>
+        /// Inserts a new ErrorLog. 
+        /// </summary>
+        /// <remarks>       
+        /// </remarks>  
+        /// <param name="pValue">ErrorText.</param>
+        public void InsertErrorLog(Dictionary<string, string> pValue)
+        {            
+            try
+            {
+                Guid surveyId=Guid.Empty, responseId=Guid.Empty; StringBuilder ErrText = new StringBuilder();
+                foreach (KeyValuePair<string, string> kvp in pValue)
+                {
+                    if (kvp.Key == "SurveyId")
+                    {
+                        surveyId = new Guid(kvp.Value.ToString());
+                    }
+                    else if (kvp.Key == "ResponseId")
+                    {
+                        responseId = new Guid(kvp.Value.ToString());
+                    }
+                    else
+                        ErrText.Append(" " + kvp.Key + " " + kvp.Value + ". ");
+                }
+                using (var Context = DataObjectFactory.CreateContext())
+                {
+                    Context.usp_log_to_errorlog(surveyId,responseId, "SurveyAPI Error", ErrText.ToString(), null,null,null,null,null,null,null,null);                                       
+                    Context.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
+            }
+
         }
 
     }
