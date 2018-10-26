@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Epi.Web.MVC.Repositories.Core;
-using Epi.Web.MVC.DataServiceClient;
+//using Epi.Web.MVC.DataServiceClient;
 using Epi.Web.Common.Message;
 using Epi.Web.Common.Exception;
 using System.ServiceModel;
