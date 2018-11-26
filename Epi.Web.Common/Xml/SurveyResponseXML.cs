@@ -398,9 +398,9 @@ namespace Epi.Web.Common.Xml
                     case "2"://Label/Title
                         IsValidType = false;
                         break;
-                    case "3"://Label
-                        IsValidType = false;
-                        break;
+                  //  case "3"://Label
+                       // IsValidType = false;
+                       // break;
                    
                     }
 
