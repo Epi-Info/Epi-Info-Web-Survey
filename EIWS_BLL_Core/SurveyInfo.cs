@@ -548,5 +548,46 @@ namespace Epi.Web.BLL
 
             return List;
         }
+
+        public Web.Common.Message.SurveyControlsResponse GetSurveyControlsforApi(string  SurveyId)
+        {
+            Web.Common.Message.SurveyControlsResponse SurveyControlsResponse = new Web.Common.Message.SurveyControlsResponse();
+            SurveyInfoBO SurveyInfoBO = new SurveyInfoBO();
+            if (!string.IsNullOrEmpty(SurveyId))
+            {               
+                try
+                {
+                    SurveyInfoBO = GetSurveyInfoById(SurveyId);
+                }
+                catch (Exception ex)
+                {
+                   SurveyControlsResponse.Message = "Survey doesn’t exist.";
+
+                }
+            }
+
+                List<Web.Common.DTO.SurveyControlDTO> List = new List<Web.Common.DTO.SurveyControlDTO>();
+
+            XDocument xdoc = XDocument.Parse(SurveyInfoBO.XML);
+
+
+            var _FieldsTypeIDs = from _FieldTypeID in
+                                      xdoc.Descendants("Field")                                                              
+                                 select _FieldTypeID;
+
+            foreach (var _FieldTypeID in _FieldsTypeIDs)
+            {
+                Web.Common.DTO.SurveyControlDTO SurveyControlDTO = new Web.Common.DTO.SurveyControlDTO();
+                SurveyControlDTO.ControlId = _FieldTypeID.Attribute("Name").Value.ToString();
+                SurveyControlDTO.ControlPrompt = _FieldTypeID.Attribute("PromptText").Value.ToString();
+                SurveyControlDTO.ControlType = GetControlType(_FieldTypeID.Attribute("FieldTypeId").Value);
+                SurveyControlDTO.SourceTableName = _FieldTypeID.Attribute("SourceTableName").Value;
+                List.Add(SurveyControlDTO);
+
+            }
+            SurveyControlsResponse.SurveyControlList = List;
+            return SurveyControlsResponse;
+
+        }
     }
 }
