@@ -12,7 +12,7 @@ using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Xml.Linq;
-using static Epi.Web.BLL.SurveyResponse;
+//using  Epi.Web.BLL.SurveyResponse;
 
 namespace Epi.Web.MVC.Repositories
 {
