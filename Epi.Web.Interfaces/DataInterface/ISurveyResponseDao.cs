@@ -71,6 +71,15 @@ namespace Epi.Web.Interfaces.DataInterfaces
         /// <param name="SurveyResponse">SurveyResponse.</param>
         void InsertSurveyResponse(SurveyResponseBO SurveyResponse);
 
+        /// <summary>
+        /// Inserts a new SurveyResponse from API. 
+        /// </summary>
+        /// <remarks>
+        /// Following insert, SurveyResponse object will contain the new identifier.
+        /// </remarks>
+        /// <param name="SurveyResponse">SurveyResponse.</param>
+        void InsertSurveyResponseApi(SurveyResponseBO SurveyResponse);
+
         void InsertChildSurveyResponse(SurveyResponseBO SurveyResponse);
         /// <summary>
         /// Updates a SurveyResponse.
@@ -99,5 +108,7 @@ namespace Epi.Web.Interfaces.DataInterfaces
          List<SurveyResponseBO> GetResponsesByRelatedFormId(string ResponseId, string SurveyId);
          bool HasResponse(SurveyAnswerCriteria Criteria);
          void UpdateRecordStatus(SurveyResponseBO SurveyResponseBO);
+
+        void InsertErrorLog(Dictionary<string, string> pValue);
     }
 }
