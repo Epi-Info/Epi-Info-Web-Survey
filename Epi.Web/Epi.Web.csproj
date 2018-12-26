@@ -56,7 +56,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Epi.Web.CheckCodeEngine.dll</HintPath>
     </Reference>
-<<<<<<< HEAD
+ 
     <Reference Include="Epi.Web.EF, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Epi.Web.EF.dll</HintPath>
@@ -65,8 +65,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Epi.Web.Interfaces.dll</HintPath>
     </Reference>
-=======
->>>>>>> bcae5e54681c4597cbec35ad7813086b4a5a8151
+ 
     <Reference Include="EpiInfo.Plugin, Version=7.0.9.8, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\EpiInfo.Plugin.dll</HintPath>
