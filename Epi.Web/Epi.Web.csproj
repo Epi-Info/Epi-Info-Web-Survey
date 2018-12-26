@@ -56,6 +56,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Epi.Web.CheckCodeEngine.dll</HintPath>
     </Reference>
+<<<<<<< HEAD
     <Reference Include="Epi.Web.EF, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Epi.Web.EF.dll</HintPath>
@@ -64,6 +65,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Epi.Web.Interfaces.dll</HintPath>
     </Reference>
+=======
+>>>>>>> bcae5e54681c4597cbec35ad7813086b4a5a8151
     <Reference Include="EpiInfo.Plugin, Version=7.0.9.8, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\EpiInfo.Plugin.dll</HintPath>
@@ -212,6 +215,8 @@
     <Compile Include="Controllers\FormResponseController.cs" />
     <Compile Include="Controllers\SurveyManagerController.cs" />
     <Compile Include="Controllers\PrintController.cs" />
+    <Compile Include="Controllers\SurveyResponseController.cs" />
+    <Compile Include="MessageHandlers\APIKeyHandler.cs" />
     <Compile Include="Models\FormInfoModel.cs" />
     <Compile Include="Models\FormResponseInfoModel.cs" />
     <Compile Include="Models\PrintModel.cs" />
@@ -222,6 +227,7 @@
     <Compile Include="Models\SeachBoxModel.cs" />
     <Compile Include="Models\StateModel.cs" />
     <Compile Include="Models\SurveyModel.cs" />
+    <Compile Include="Models\SurveyResponseApiModel.cs" />
     <Compile Include="Repositories\CacheDependencyRepository.cs" />
     <Compile Include="Constants\Constant.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -249,6 +255,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\Core\ICacheDependancyRepository.cs" />
     <Compile Include="Repositories\Core\IOrganizationAccountRepository.cs" />
+    <Compile Include="Repositories\Core\ISurveyResponseApiRepository.cs" />
     <Compile Include="Repositories\IntegratedCacheDependencyRepository.cs" />
     <Compile Include="Repositories\IntegratedOrganizationAccountRepository.cs" />
     <Compile Include="Repositories\IntegratedSurveyAnswerRepository.cs" />
@@ -260,6 +267,7 @@
     <Compile Include="Repositories\Core\RepositoryBase.cs" />
     <Compile Include="Repositories\SurveyAnswerRepository.cs" />
     <Compile Include="Repositories\SurveyInfoRepository.cs" />
+    <Compile Include="Repositories\SurveyResponseApiRepository.cs" />
     <Compile Include="Resolver\UnityResolver.cs" />
     <Compile Include="Service References\DataServiceClient\Reference.cs">
       <AutoGen>True</AutoGen>
@@ -738,6 +746,10 @@
     <WCFMetadataStorage Include="Service References\SurveyManagerServiceV4\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\EIWS_BLL_Core\Epi.Web.BLL.csproj">
+      <Project>{d49b7a21-644b-49d7-9a5d-387bf31eafe5}</Project>
+      <Name>Epi.Web.BLL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Epi.DynamicForms.Core\Epi.Web.DynamicForms.Core.csproj">
       <Project>{9624e64a-013f-41e8-84ba-c34ee744685e}</Project>
       <Name>Epi.Web.DynamicForms.Core</Name>
@@ -745,6 +757,14 @@
     <ProjectReference Include="..\Epi.Web.Common\Epi.Web.Common.csproj">
       <Project>{6e2f059b-c1cd-401f-8a63-dc2933cfb0d8}</Project>
       <Name>Epi.Web.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Epi.Web.EF\Epi.Web.EF.csproj">
+      <Project>{05a484ab-a555-4200-936b-bec573285bcc}</Project>
+      <Name>Epi.Web.EF</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Epi.Web.Interfaces\Epi.Web.Interfaces.csproj">
+      <Project>{b8af69bd-3ce1-4aa5-875d-3fb87c7fce44}</Project>
+      <Name>Epi.Web.Interfaces</Name>
     </ProjectReference>
     <ProjectReference Include="..\SurveyManagerInterface\Epi.Web.WCF.SurveyService.csproj">
       <Project>{31f91938-2997-4650-8d36-71c845f1071d}</Project>
