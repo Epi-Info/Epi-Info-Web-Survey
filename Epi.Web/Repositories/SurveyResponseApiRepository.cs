@@ -12,8 +12,7 @@ using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Xml.Linq;
-//using  Epi.Web.BLL.SurveyResponse;
-
+ 
 namespace Epi.Web.MVC.Repositories
 {
     public class SurveyResponseApiRepository : ISurveyResponseApiRepository
@@ -333,7 +332,7 @@ namespace Epi.Web.MVC.Repositories
                     response.ErrorMessageList = ErrorMessageList;
                     response.ErrorMessageList.Add("SurveyId", request.SurveyId.ToString());
                     response.ErrorMessageList.Add("ResponseId", ResponseId);
-                    response.Status = ((Message)1).ToString();
+                    response.Status = ((Epi.Web.BLL.SurveyResponse.Message)1).ToString();
                     Implementation.InsertErrorLog(response.ErrorMessageList);
                 }
                 SurveyResponseBO surveyresponseBO = new SurveyResponseBO(); SurveyResponseBO SurveyResponse = new SurveyResponseBO();
@@ -365,7 +364,7 @@ namespace Epi.Web.MVC.Repositories
                 string ResponseUrl = ConfigurationManager.AppSettings["ResponseURL"];
                 response = new PreFilledAnswerResponse(Web.Common.ObjectMapping.Mapper.ToDataTransferObjects(UserAuthenticationRequestBO));
                 response.SurveyResponseUrl = ResponseUrl + UserAuthenticationRequestBO.ResponseId;
-                response.Status = ((Message)2).ToString();
+                response.Status = ((Epi.Web.BLL.SurveyResponse.Message)2).ToString();
                 return response;
             }
             catch (Exception ex)
