@@ -12,6 +12,7 @@ using Epi.Web.Interfaces.DataInterfaces;
 using Epi.Web.Common.Xml;
 using Epi.Web.Common.DTO;
 using Epi.Web.Common.Criteria;
+using Epi.Web.Common.BusinessRule;
 
 namespace Epi.Web.BLL
 {
@@ -171,6 +172,13 @@ namespace Epi.Web.BLL
             this.SurveyResponseDao.InsertSurveyResponse(pValue);
             return result;
         }
+
+        public SurveyResponseBO InsertSurveyResponseApi(SurveyResponseBO pValue)
+        {
+            SurveyResponseBO result = pValue;
+            this.SurveyResponseDao.InsertSurveyResponseApi(pValue);
+            return result;
+        }
         public List<SurveyResponseBO> InsertSurveyResponse(List<SurveyResponseBO> pValue, int UserId, bool IsNewRecord = false)
         {
 
@@ -187,6 +195,7 @@ namespace Epi.Web.BLL
 
             return pValue;
         }
+
         //public List<SurveyResponseBO> InsertSurveyResponse(List<SurveyResponseBO> pValue, int UserId, bool IsNewRecord = false)
         //{
 
@@ -370,7 +379,7 @@ namespace Epi.Web.BLL
             return SurveyResponseBO;
 
         }
-        private string CreateResponseXml(Epi.Web.Common.Message.PreFilledAnswerRequest request, List<SurveyInfoBO> SurveyBOList)
+        public string CreateResponseXml(Epi.Web.Common.Message.PreFilledAnswerRequest request, List<SurveyInfoBO> SurveyBOList)
             
             {
            
@@ -388,7 +397,7 @@ namespace Epi.Web.BLL
 
             return ResponseXml;
             }
-        private Dictionary<string, string> ValidateResponse(List<SurveyInfoBO> SurveyBOList,  PreFilledAnswerRequest request)
+        public Dictionary<string, string> ValidateResponse(List<SurveyInfoBO> SurveyBOList,  PreFilledAnswerRequest request)
             {
              
             XDocument SurveyXml = new XDocument();
@@ -407,7 +416,7 @@ namespace Epi.Web.BLL
 
 
             }
-        private List<SurveyInfoBO> GetSurveyInfo( PreFilledAnswerRequest request)
+        public List<SurveyInfoBO> GetSurveyInfo( PreFilledAnswerRequest request)
             {
             
             List<string> SurveyIdList = new List<string>();
@@ -455,6 +464,22 @@ namespace Epi.Web.BLL
 
                 string Xml = CreateResponseXml(request, SurveyBOList);
                 //Validate Response values
+                var responseid = request.AnswerInfo.SurveyQuestionAnswerList.Where(x => x.Key.ToLower() == "responseid" || x.Key.ToLower() == "id").FirstOrDefault();
+                if (responseid.Key != null)
+                {
+                    request.AnswerInfo.SurveyQuestionAnswerList.Remove(responseid.Key);
+                }
+                var relateparentid = request.AnswerInfo.SurveyQuestionAnswerList.Where(x => x.Key.ToLower() == "fkey").FirstOrDefault();
+                if (relateparentid.Key != null)
+                {
+                    request.AnswerInfo.SurveyQuestionAnswerList.Remove(relateparentid.Key);
+                }
+
+                var updatedtime = request.AnswerInfo.SurveyQuestionAnswerList.Where(x => x.Key.ToLower() == "_updatestamp").FirstOrDefault();
+                if (updatedtime.Key != null)
+                {
+                    request.AnswerInfo.SurveyQuestionAnswerList.Remove(updatedtime.Key);
+                }
 
                 ErrorMessageList = ValidateResponse(SurveyBOList, request);
 
@@ -464,15 +489,81 @@ namespace Epi.Web.BLL
                     response.ErrorMessageList = ErrorMessageList;
                     response.Status = ((Message)1).ToString();
                     }
-                else
-                    {
+                if (responseid.Value == null && updatedtime.Value == null)
+                {
                     //Insert Survey Response
 
-                    SurveyResponse = InsertSurveyResponse( Mapper.ToBusinessObject(Xml, request.AnswerInfo.SurveyId.ToString()));
+                    SurveyResponse = InsertSurveyResponse(Mapper.ToBusinessObject(Xml, request.AnswerInfo.SurveyId.ToString()));
+                }
+                else
+                {//Insert  Response Api
+                    if (relateparentid.Value == null)
+                    {
+                        SurveyResponseBO surveyresponseBO = new SurveyResponseBO();
+                        surveyresponseBO.SurveyId = request.AnswerInfo.SurveyId.ToString();
+                        surveyresponseBO.ResponseId = responseid.Value.ToString();
+                        surveyresponseBO.XML = Xml;
+                        surveyresponseBO.Status = 3;
+                        surveyresponseBO.RecrodSourceId = (int)ValidationRecordSourceId.MA;
+                        System.DateTime dateTime = new System.DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+                        if (updatedtime.Value != null)
+                        {
+                            surveyresponseBO.DateUpdated = dateTime.AddMilliseconds(Convert.ToDouble(updatedtime.Value.ToString())).ToLocalTime();
+                        }
+                        else
+                        {
+                            surveyresponseBO.DateUpdated = DateTime.Now;
+                        }
+                        surveyresponseBO.DateCreated = surveyresponseBO.DateUpdated;
+                        surveyresponseBO.DateCompleted = surveyresponseBO.DateUpdated;
+                        SurveyResponse = InsertSurveyResponseApi(surveyresponseBO);
+                    }
+                    else
+                    {
+                        try
+                        {
+                            var survey = GetSurveyResponseById(new List<string> { relateparentid.Value }, UserPublishKey);
+                        }
+                        catch (Exception ex)//insert parent response
+                        {
+                            SurveyResponseBO surveyresponsebO = new SurveyResponseBO();
+                            surveyresponsebO.SurveyId = SurveyBOList[0].ParentId;
+                            surveyresponsebO.ResponseId = relateparentid.Value.ToString();
+                            surveyresponsebO.XML = "  ";
+                            surveyresponsebO.Status = 3;
+                            surveyresponsebO.RecrodSourceId = (int)ValidationRecordSourceId.MA;
+                            surveyresponsebO.DateUpdated = DateTime.Now;
+                            surveyresponsebO.DateCreated = surveyresponsebO.DateUpdated;
+                            surveyresponsebO.DateCompleted = surveyresponsebO.DateUpdated;
+                            surveyresponsebO = InsertSurveyResponseApi(surveyresponsebO);
+                        }
+                        //insert child response
+                        SurveyResponseBO surveyresponseBO = new SurveyResponseBO();
+                        surveyresponseBO.SurveyId = request.AnswerInfo.SurveyId.ToString();
+                        surveyresponseBO.ResponseId = responseid.Value.ToString();
+                        surveyresponseBO.XML = Xml;
+                        surveyresponseBO.Status = 3;
+                        surveyresponseBO.RecrodSourceId = (int)ValidationRecordSourceId.MA;
+                        surveyresponseBO.RelateParentId = relateparentid.Value;
+                        System.DateTime dateTime = new System.DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+                        if (updatedtime.Value != null)
+                        {
+                            surveyresponseBO.DateUpdated = dateTime.AddMilliseconds(Convert.ToDouble(updatedtime.Value.ToString())).ToLocalTime();
+                        }
+                        else
+                        {
+                            surveyresponseBO.DateUpdated = DateTime.Now;
+                        }
+                        surveyresponseBO.DateCreated = surveyresponseBO.DateUpdated;
+                        surveyresponseBO.DateCompleted = surveyresponseBO.DateUpdated;
+                        SurveyResponse = InsertSurveyResponseApi(surveyresponseBO);
 
-                    //Save PassCode
+                    }
+                }
 
-                    UserAuthenticationRequestBO =  Mapper.ToBusinessObject(SurveyResponse.ResponseId);
+                //Save PassCode
+
+                UserAuthenticationRequestBO =  Mapper.ToBusinessObject(SurveyResponse.ResponseId);
                     SavePassCode(UserAuthenticationRequestBO);
 
                     //return Response
@@ -482,7 +573,7 @@ namespace Epi.Web.BLL
                     response.Status = ((Message)2).ToString(); ;
 
                     }
-                }
+                
             else
                 {
                 PassCodeDTO DTOList = new   PassCodeDTO();
@@ -526,6 +617,11 @@ namespace Epi.Web.BLL
             SurveyResponseBO result = pValue;
             this.SurveyResponseDao.UpdateRecordStatus(pValue);
             
+        }
+
+        public void InsertErrorLog(Dictionary<string, string> pValue)
+        {
+            this.SurveyResponseDao.InsertErrorLog(pValue);
         }
     }
 }

@@ -1,5 +1,7 @@
-﻿using Epi.Web.MVC.Resolver;
-using Epi.Web.SurveyAPI.Repository;
+﻿using Epi.Web.MVC.Repositories;
+using Epi.Web.MVC.Repositories.Core;
+using Epi.Web.MVC.Resolver;
+//using Epi.Web.SurveyAPI.Repository;
 using Microsoft.Practices.Unity;
 using System;
 using System.Collections.Generic;
@@ -14,11 +16,11 @@ namespace Epi.Web.MVC.App_Start
 {
     public class WebApiConfig
     {
-        public static void Register(HttpConfiguration configuration)
+        public static void Register(HttpConfiguration config)
         {
-            var container = new UnityContainer();
-            container.RegisterType<ISurveyResponseRepository, SurveyResponseRepository>(new HierarchicalLifetimeManager());
-            configuration.DependencyResolver = new UnityResolver(container);
+             var container = new UnityContainer();
+             container.RegisterType<ISurveyResponseApiRepository, SurveyResponseApiRepository>(new HierarchicalLifetimeManager());
+             config.DependencyResolver = new UnityResolver(container);        
         }
     }
 }

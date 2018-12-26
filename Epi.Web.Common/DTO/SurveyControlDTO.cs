@@ -10,6 +10,7 @@ namespace Epi.Web.Common.DTO
         private string _ControlId;
         private string _ControlPrompt;
         private string _ControlType;
+        private string _SourceTableName;
 
         public string ControlId
             {
@@ -30,5 +31,11 @@ namespace Epi.Web.Common.DTO
             get { return _ControlType; }
             set { _ControlType = value; }
             }
+
+        public string SourceTableName
+        {
+            get { return _SourceTableName; }
+            set { _SourceTableName = value; }
         }
+    }
     }

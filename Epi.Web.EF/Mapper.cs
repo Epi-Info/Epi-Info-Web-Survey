@@ -35,7 +35,8 @@ namespace Epi.Web.EF
                 result.IsDraftMode = entity.IsDraftMode;
                 result.StartDate = entity.StartDate;
             result.IsSqlProject = (bool)entity.IsSQLProject;
-           // result.OwnerId = entity.OwnerId;
+            result.OrganizationId = entity.OrganizationId;
+            // result.OwnerId = entity.OwnerId;
             if (entity.UserPublishKey != null)
             {
                 // result.UserPublishKey = (Guid)entity.UserPublishKey.Value;
