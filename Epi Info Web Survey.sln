@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.27004.2009
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epi.Web", "Epi.Web\Epi.Web.csproj", "{91794FFF-48C0-414F-933E-34412A29EEAC}"
 	ProjectSection(ProjectDependencies) = postProject
-		{BEFC85E4-F3A3-4108-9575-4EF1A004364E} = {BEFC85E4-F3A3-4108-9575-4EF1A004364E}
+		{05A484AB-A555-4200-936B-BEC573285BCC} = {05A484AB-A555-4200-936B-BEC573285BCC}
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epi.Web.Interfaces", "Epi.Web.Interfaces\Epi.Web.Interfaces.csproj", "{B8AF69BD-3CE1-4AA5-875D-3FB87C7FCE44}"
@@ -35,6 +35,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{95D9CE
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epi.Web.WCF.SurveyService", "SurveyManagerInterface\Epi.Web.WCF.SurveyService.csproj", "{31F91938-2997-4650-8D36-71C845F1071D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epi.Web.SurveyManager.Client", "Epi.Web.SurveyManager_Test\Epi.Web.SurveyManager.Client.csproj", "{13D8FD8D-1403-4C84-823A-1E27806CAC30}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -138,6 +140,16 @@ Global
 		{31F91938-2997-4650-8D36-71C845F1071D}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{31F91938-2997-4650-8D36-71C845F1071D}.Release|x86.ActiveCfg = Release|Any CPU
 		{31F91938-2997-4650-8D36-71C845F1071D}.Release|x86.Build.0 = Release|Any CPU
+		{13D8FD8D-1403-4C84-823A-1E27806CAC30}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{13D8FD8D-1403-4C84-823A-1E27806CAC30}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{13D8FD8D-1403-4C84-823A-1E27806CAC30}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{13D8FD8D-1403-4C84-823A-1E27806CAC30}.Debug|x86.ActiveCfg = Debug|x86
+		{13D8FD8D-1403-4C84-823A-1E27806CAC30}.Debug|x86.Build.0 = Debug|x86
+		{13D8FD8D-1403-4C84-823A-1E27806CAC30}.Release|Any CPU.ActiveCfg = Release|x86
+		{13D8FD8D-1403-4C84-823A-1E27806CAC30}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{13D8FD8D-1403-4C84-823A-1E27806CAC30}.Release|Mixed Platforms.Build.0 = Release|x86
+		{13D8FD8D-1403-4C84-823A-1E27806CAC30}.Release|x86.ActiveCfg = Release|x86
+		{13D8FD8D-1403-4C84-823A-1E27806CAC30}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
