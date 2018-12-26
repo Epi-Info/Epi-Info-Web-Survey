@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -13,7 +13,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Epi.Web.MVC</RootNamespace>
     <AssemblyName>Epi.Web.MVC</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <SccProjectName>%24/EpiInfoWebSurvey/Epi Info Web Survey/Epi.Web</SccProjectName>
@@ -52,24 +52,17 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Epi.Web.BLL, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\EIWS_BLL_Core\bin\Release\Epi.Web.BLL.dll</HintPath>
-    </Reference>
     <Reference Include="Epi.Web.CheckCodeEngine, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Epi.Web.CheckCodeEngine.dll</HintPath>
     </Reference>
-    <Reference Include="Epi.Web.EF">
-      <HintPath>..\Epi.Web.EF\bin\Release\Epi.Web.EF.dll</HintPath>
+    <Reference Include="Epi.Web.EF, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Epi.Web.EF.dll</HintPath>
     </Reference>
     <Reference Include="Epi.Web.Interfaces, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Epi.Web.Interfaces.dll</HintPath>
-    </Reference>
-    <Reference Include="Epi.Web.SurveyAPI, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Epi.Web.SurveyAPI.dll</HintPath>
     </Reference>
     <Reference Include="EpiInfo.Plugin, Version=7.0.9.8, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -586,6 +579,30 @@
     <None Include="Properties\PublishProfiles\Profile1.pubxml" />
     <Content Include="Scripts\jquery-1.9.1.min.map" />
     <None Include="Service References\DataServiceClient\DataService1.wsdl" />
+    <Content Include="Service References\DataServiceClient\Epi.Web.MVC.DataServiceClient.CacheDependencyResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\DataServiceClient\Epi.Web.MVC.DataServiceClient.FormsHierarchyResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\DataServiceClient\Epi.Web.MVC.DataServiceClient.OrganizationAccountResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\DataServiceClient\Epi.Web.MVC.DataServiceClient.SourceTablesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\DataServiceClient\Epi.Web.MVC.DataServiceClient.SurveyAnswerResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\DataServiceClient\Epi.Web.MVC.DataServiceClient.SurveyControlsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\DataServiceClient\Epi.Web.MVC.DataServiceClient.SurveyInfoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\DataServiceClient\Epi.Web.MVC.DataServiceClient.UserAuthenticationResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <None Include="Service References\DataServiceClient\SurveyDataService6.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -604,6 +621,24 @@
     <None Include="Service References\DataServiceClient\SurveyDataService65.xsd">
       <SubType>Designer</SubType>
     </None>
+    <Content Include="Service References\SurveyManagerServiceV4\Epi.Web.MVC.SurveyManagerServiceV4.OrganizationResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\SurveyManagerServiceV4\Epi.Web.MVC.SurveyManagerServiceV4.PreFilledAnswerResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\SurveyManagerServiceV4\Epi.Web.MVC.SurveyManagerServiceV4.PublishResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\SurveyManagerServiceV4\Epi.Web.MVC.SurveyManagerServiceV4.SurveyAnswerResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\SurveyManagerServiceV4\Epi.Web.MVC.SurveyManagerServiceV4.SurveyControlsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\SurveyManagerServiceV4\Epi.Web.MVC.SurveyManagerServiceV4.SurveyInfoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <None Include="Service References\SurveyManagerServiceV4\ManagerServiceV4.wsdl" />
     <None Include="Service References\SurveyManagerServiceV4\SurveyManagerServiceV4.disco" />
     <None Include="Service References\SurveyManagerServiceV4\configuration91.svcinfo" />
