@@ -1,0 +1,2 @@
+#Epi Info™ Web Survey
+A free and open source tool developed for the public health community for one-click publishing of Epi Info™ surveys on the web to collect data from a broad audience. Epidemiologists can distribute links to the surveys via emails, blogs, social media and QR codes, and survey participants can anonymously provide secure responses. The anonymous collected data is stored in a centralized database for instantaneous access and analysis.
