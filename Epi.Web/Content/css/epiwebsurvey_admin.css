@@ -1,0 +1,530 @@
+﻿/* Used for the Web Survey Admin Page*/
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+
+}
+
+body {
+    background: linear-gradient(to right, #fbfbfc, #e5e5e5);
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+
+#container {
+    width: 100% !important;
+    margin-top: 0px !important;
+    border: 0px solid red;
+
+}
+
+.containerContent {
+margin-left:30px;
+}
+#header {
+    padding: 0.5em 0.5em 1.0em .5em;
+    background-color: #173e5d;
+    border-bottom: 0px solid #4a80bd;
+    color: #ffffff;
+    /*-moz-border-radius: 10px 10px 0 0;
+ border-radius: 10px 10px 0 0;
+ behavior: url('../Scripts/PIE.htc');*/
+}
+
+#header h1 {
+    padding: 0;
+    margin: 0;
+    font-size: 16pt;
+    font-weight: bold;
+    color: #e8eff7;
+}
+
+h1 {
+    font-size: 26px !important;
+    color: #272727;
+}
+
+#footer {
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    /**/ padding: .5em 0;
+    color: #333;
+    background: linear-gradient(to bottom, #e6e7ed, #fbfbfc);
+    border-top: 1px solid #4a80bd;
+    /*-moz-border-radius: 0 0 10px 10px;
+    border-radius: 0 0 10px 10px;*/
+    height: 40px;
+    vertical-align: middle;
+    /*-moz-box-shadow: -1px -1px 0px 0px #888;
+    -webkit-box-shadow: 1px -1px 0px 0px #888;
+    box-shadow: 0px -1px 1px 0px #888;*/
+    /*behavior: url('../Scripts/PIE.htc');*/
+}
+#footleft {
+    float: left;
+    width: 55%;
+    /**/ margin-left: 10px;
+}
+
+#footright {
+    float: right;
+    /**/ margin-right: 10px;
+    margin-top: -3px;
+}
+
+.requiredField {
+    font-size: 9pt;
+    font-weight: bold;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    color: #900000;
+}
+
+img.button {
+    vertical-align: text-top;
+}
+
+
+button.submits {
+    background-image: url('../images/checkmark.png') !important;
+    background-position: 129px center !important;
+    background-repeat: no-repeat !important;
+    /*padding-left:20px;*/
+}
+
+.accountlabel {
+    font: 18px Segoe UI;
+    color: #363636;
+}
+
+
+button.submits {
+    padding: 3px 5px 3px 5px;
+    color: #ffffff;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 10pt;
+    font-weight: bold;
+    max-width: 160px;
+    width: 100%;
+    padding-left: 10px;
+    border: 1px solid #4a80bd;
+    background: #1d60ac;
+}
+
+.submits {
+    border: 1px #1d60ac solid;
+    padding: 3px 5px 3px 5px;
+    color: #ffffff;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 10pt;
+    font-weight: bold;
+    height: 27px;
+    cursor: pointer;
+    background-color: #1d60ac;
+}
+
+
+    .submits:hover {
+        background: #2b6db8;
+    }
+
+.create {
+    background: #1d60ac;
+}
+
+.create1 {
+    background: #1d60ac;
+}
+textarea {
+    resize: none;
+}
+
+.Account {
+    width: 350px;
+    height: 24px;
+    font: 14px Segoe UI;
+    border: 1px solid #B3B3B3;
+    margin-top:3px;
+}
+
+.surveyMode {
+width:150px;
+}
+
+.datepicker {
+width:120px;
+}
+
+select {
+    /* make arrow and background */
+    background-image: linear-gradient(45deg, transparent 50%, #1d60ac 50%), linear-gradient(135deg, #1d60ac 50%, transparent 50%), linear-gradient(to right, #1d60ac, #1d60ac);
+    background-position: calc(100% - 10px) calc(0.7em + 1px), calc(100% - 5px) calc(0.7em + 1px), calc(100% - 1.5em) 0.4em;
+    background-size: 5px 5px, 5px 5px, 1px 1em;
+    background-repeat: no-repeat;
+    background-color: white;
+    border: 1px solid #b3b3b3;
+    border-radius: 0px;
+    display: inline-block;
+    font: inherit;
+    line-height: 1.5em;
+    /*padding: 0.5em 3.5em 0.5em 1em;*/
+    /* reset */
+    margin: 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    height: 27px!important;
+}
+/* End Used for the Web Survey Admin Page*/
+/* Not sure if used for the Web Survey Admin Page*/
+#exit {
+    float: right;
+    /* width: 12%;*/
+    position: relative;
+    vertical-align: middle;
+    /* margin-right: -10px;*/
+}
+
+.errormsg {
+    border: 1px solid #e6482d;
+    background: #fbe1dd;
+    margin-bottom: 10px;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+    padding: 10px;
+    font-size: 9pt;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -khtml-border-radius: 10px;
+    border-radius: 10px;
+    /*behavior: url('../Scripts/PIE.htc');*/
+}
+/* End Not sure if used for the Web Survey Admin Page*/
+
+
+/*Tooltip Styles*/
+.tooltip {
+    display: none;
+    background: url('../images/black_arrow2.png') no-repeat;
+    background-position: -5px 10px;
+    font-size: 9pt;
+    font-family: Segoe UI;
+    font-weight: bold;
+    height: 80px;
+    width: 150px;
+    padding: 26px 22px 20px 38px;
+    color: #333;
+}
+
+/*for TimePicker*/
+.ui-timepicker-div .ui-widget-header {
+    margin-bottom: 8px;
+    font-size: 75%;
+}
+
+.ui-timepicker-div dl {
+    text-align: left;
+    font-size: 75%;
+}
+
+    .ui-timepicker-div dl dt {
+        height: 20px;
+        margin-bottom: -20px;
+        font-size: 11px;
+    }
+
+    .ui-timepicker-div dl dd {
+        margin: 0 10px 10px 65px;
+        font-size: 11px;
+        font-weight: bold;
+    }
+
+.ui-timepicker-div td {
+    font-size: 1em;
+    font-size: 75%;
+}
+
+.ui-tpicker-grid-label {
+    background: none;
+    border: none;
+    margin: 0;
+    padding: 0;
+    font-size: 75%;
+}
+
+.ui-datepicker .ui-datepicker-buttonpane {
+    font-size: 65%;
+}
+
+
+fieldset {
+    border: 1px solid #c4c4c4;
+    padding: 2px;
+}
+
+legend {
+    white-space: normal;
+    width: 100%;
+    margin-left: -7px;
+}
+
+    legend span {
+        background-color: white;
+        float: left;
+        display: block;
+    }
+
+/* This wraps all html rendered by Mvc Dynamic Forms */
+div.MvcDynamicForm {
+}
+
+/* By default, every field is wrapped with this.
+   The developer can modify the wrapping element
+   and nearly all class names of rendered Html  */
+div.MvcFieldWrapper {
+    /* margin-bottom: 2em;  provides spacing between fields */
+}
+
+/* These are used to style the labels that accompany
+   your input elements. */
+label.MvcDynamicFieldPrompt, label.MvcDynamicFieldError {
+    display: block; /* causes labels to appear above their input elements */
+}
+
+label.MvcDynamicFieldError {
+    color: Red; /* ERROR! */
+}
+
+/* Used to style the unordered lists that contain
+   radio button lists and checkbox lists */
+ul.MvcDynamicOrientableList {
+    list-style-type: none; /* prevents bullets from showing next to input elements */
+    padding: 0 0px;
+}
+
+    ul.MvcDynamicOrientableList label {
+        display: inline;
+    }
+
+/*  Used to style the list fields that can
+    go in either vertical or horizontal directions
+    (CheckboxList & RadioList) */
+ul.MvcDynamicHorizontal li {
+    display: inline; /* causs list items to display horizontally */
+    white-space: nowrap;
+    /*margin-right:0.5em; /* provides spacing between input elements */
+}
+
+
+
+/*  You can view html source or use a DOM inspector 
+    to figure out how to select elements to style them. */
+
+
+select.expand {
+    width: auto;
+}
+
+
+
+
+
+
+
+button.dialogbtn {
+    /*-moz-border-radius: 10px !important;
+ -webkit-border-radius: 10px !important;
+ -khtml-border-radius: 10px !important;
+ border-radius: 10px !important;*/
+    padding: 3px 5px 3px 5px !important;
+    color: #ffffff !important;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif !important;
+    font-size: 10pt !important;
+    font-weight: bold !important;
+    width: 150px !important;
+    border: 1px solid #4a80bd !important;
+    background: #1d60ac !important;
+    /*background: rgba(195,255,104,0.6) !important; 
+ box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3) !important;
+ -o-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3) !important;
+ -webkit-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3) !important;
+ -moz-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3) !important;*/
+    /*behavior: url('../Scripts/PIE.htc');*/
+}
+
+#codebk {
+    position: relative;
+    background-image: url('../images/codebk.png');
+    background-repeat: no-repeat;
+    background-size: 283px;
+    left: 44.5%;
+    margin: 0 auto;
+    font-size: 10pt;
+    text-align: center;
+    color: #af463a;
+    display: inline-block;
+    line-height: 110%;
+    padding: 8px 22px 20px 55px;
+}
+
+#passcodebox {
+    position: relative;
+    left: 45%;
+    display: inline-block;
+    background: #e8eff7;
+    border: 1px solid #4a80bd;
+    padding: 8px 8px;
+    /* border-radius:10px; 
+     -moz-border-radius: 10px !important;
+    -webkit-border-radius: 10px !important;
+     -khtml-border-radius: 10px !important;*/
+    font-size: 16pt;
+    font-weight: bold;
+    text-align: center;
+    width: 70px;
+    margin: 5px auto 20px;
+    color: #555555;
+}
+
+.surveyLinkTxtArea {
+    background: #e8eff7;
+    border: 1px solid #4a80bd;
+}
+
+.spPassCodeSpan {
+    background: #e8eff7;
+    border: 1px solid #4a80bd;
+}
+
+.ui-priority-secondary {
+    opacity: 1.0 !important;
+    filter: Alpha(Opacity=100) !important;
+    font-weight: bold !important;
+    color: #3f3f3f !important;
+}
+
+.ui-priority-primary {
+    color: #3f3f3f !important;
+}
+
+/*printbottom button.ui-state-default { color:#1c94c4 !important;}*/
+
+
+#ui-datepicker-div {
+    z-index: 6000 !important;
+}
+
+.ui-corner-all, .ui-corner-top, .ui-corner-left, .ui-corner-tl {
+    -moz-border-radius-topleft: 0px;
+    -webkit-border-top-left-radius: 0px;
+    -khtml-border-top-left-radius: 0px;
+    border-top-left-radius: 0px;
+}
+
+.ui-corner-all, .ui-corner-top, .ui-corner-right, .ui-corner-tr {
+    -moz-border-radius-topright: 0px;
+    -webkit-border-top-right-radius: 0px;
+    -khtml-border-top-right-radius: 0px;
+    border-top-right-radius: 0px;
+}
+
+.ui-corner-all, .ui-corner-bottom, .ui-corner-left, .ui-corner-bl {
+    -moz-border-radius-bottomleft: 0px;
+    -webkit-border-bottom-left-radius: 0px;
+    -khtml-border-bottom-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+}
+
+.ui-corner-all, .ui-corner-bottom, .ui-corner-right, .ui-corner-br {
+    -moz-border-radius-bottomright: 0px;
+    -webkit-border-bottom-right-radius: 0px;
+    -khtml-border-bottom-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
+.ui-widget-header {
+    border: 1px solid #4a80bd /*{borderColorHeader}*/;
+    background: #8eafd5 /*{bgColorHeader}url(images/ui-bg_highlight-soft_75_cccccc_1x100.png)/*{bgImgUrlHeader}*/ 50% /*{bgHeaderXPos}*/ 50% /*{bgHeaderYPos}*/ repeat-x /*{bgHeaderRepeat}*/;
+    color: #222222 /*{fcHeader}*/;
+    font-weight: bold;
+}
+
+.ui-widget-content {
+    border: 1px solid #4a80bd /*{borderColorContent}*/;
+}
+
+.ui-datepicker {
+    width: 12.4em !important;
+}
+
+/*page.css custom style for themes*/
+.pages span.current {
+    border: 1px solid #8eafd5;
+    font-weight: bold;
+    background: #4a80bd;
+    color: #fff;
+    /*-moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -khtml-border-radius: 5px;
+    border-radius: 5px;*/
+}
+
+.pages a {
+    color: #244640;
+    display: block;
+    float: left;
+    padding: 0.2em 0.5em;
+    margin-right: 0.1em;
+    border: 1px solid #fff;
+    background: #fff;
+    /*-moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -khtml-border-radius: 5px;
+    border-radius: 5px;*/
+    text-decoration: none;
+}
+
+
+.pages a {
+    border: 1px solid #4a80bd;
+    text-decoration: none;
+}
+
+    .pages a:hover {
+        border-color: #4a80bd;
+        cursor: pointer;
+        opacity: 0.8;
+    }
+
+a.navLink {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 16px;
+    color: #ffffff;
+    text-decoration: none !important;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+    a.navLink:visited {
+        color: #ffffff;
+        text-decoration: none !important;
+    }
+
+.leftNav {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: left;
+    margin-top: 0;
+    margin-bottom: 10px;
+    background-color: #3c3c3c;
+
+}
+
+
+
+
+
