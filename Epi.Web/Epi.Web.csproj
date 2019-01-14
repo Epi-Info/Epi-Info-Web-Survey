@@ -56,7 +56,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Epi.Web.CheckCodeEngine.dll</HintPath>
     </Reference>
- 
     <Reference Include="Epi.Web.EF, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Epi.Web.EF.dll</HintPath>
@@ -65,7 +64,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Epi.Web.Interfaces.dll</HintPath>
     </Reference>
- 
     <Reference Include="EpiInfo.Plugin, Version=7.0.9.8, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\EpiInfo.Plugin.dll</HintPath>
@@ -324,6 +322,7 @@
     <Content Include="Content\css\epistyle-blue_controls.css" />
     <Content Include="Content\css\epistyle.css" />
     <Content Include="Content\css\epistyle_controls.css" />
+    <Content Include="Content\css\epiwebsurvey_admin.css" />
     <Content Include="Content\css\images\check.gif" />
     <Content Include="Content\css\images\next.png" />
     <Content Include="Content\css\images\next_classic.png" />
@@ -728,6 +727,7 @@
     </None>
     <Content Include="Views\FormResponse\Index.Mobile.cshtml" />
     <Content Include="Views\Survey\ListResponses.cshtml" />
+    <Content Include="Views\Shared\_LayoutPage2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\" />
