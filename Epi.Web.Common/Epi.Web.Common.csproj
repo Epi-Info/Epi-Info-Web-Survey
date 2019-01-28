@@ -45,6 +45,7 @@
     <Reference Include="EPPlus">
       <HintPath>..\packages\EPPlus.4.0.5\lib\net20\EPPlus.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
@@ -107,6 +108,8 @@
     <Compile Include="Exception\CustomFaultException.cs" />
     <Compile Include="Extension\LinqExtensions.cs" />
     <Compile Include="Helper\RelatedFormsObj.cs" />
+    <Compile Include="Json\ResponseDetail.cs" />
+    <Compile Include="Json\SurveyJson.cs" />
     <Compile Include="Message\Base\AcknowledgeType.cs" />
     <Compile Include="Message\Base\PersistType.cs" />
     <Compile Include="Message\Base\RequestBase.cs" />
