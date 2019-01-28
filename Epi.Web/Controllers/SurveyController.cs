@@ -19,8 +19,6 @@ using System.Web.Caching;
  
 using System.Reflection;
 using System.Diagnostics;
-using System.Reflection;
-using System.Diagnostics;
 using Epi.Web.MVC.Utility;
 using System.Linq;
 
@@ -29,6 +27,11 @@ using Epi.Web.Common.DTO;
 using System.Globalization;
 using System.Threading;
 using System.Web.Configuration;
+using System.IO;
+using Newtonsoft.Json;
+using System.Net.Http;
+using System.Threading.Tasks;
+using System.Net.Http.Headers;
 
 namespace Epi.Web.MVC.Controllers
 {
@@ -41,7 +44,9 @@ namespace Epi.Web.MVC.Controllers
         private string RootFormId = "";
         private string RootResponseId = "";
         private bool IsEditMode;
-       
+        private static  string drawername;
+        private  string nodename;
+
         private int ReffererPageNum;
         List<KeyValuePair<int, string>> Columns = new List<KeyValuePair<int, string>>();
         public SurveyController(ISurveyFacade isurveyFacade)
@@ -652,6 +657,43 @@ namespace Epi.Web.MVC.Controllers
                                 _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId, form, SurveyAnswer, IsSubmited, IsSaved, PageNumber);
                                 //FormsAuthentication.SignOut();
 
+                                //FDNS API
+                                drawername = surveyInfoModel.OrganizationName;
+                                nodename = surveyInfoModel.SurveyName + System.DateTime.Now.ToFileTime();
+                                var json=  _isurveyFacade.GetSurveyResponseJson(SurveyAnswer, FormsHierarchy);                             
+                                string endpoint = WebConfigurationManager.AppSettings["StorageAPIEndpoint"].ToString();
+                                using (var _client = new HttpClient())
+                                {
+                                    _client.BaseAddress = new Uri(endpoint);
+                                    _client.DefaultRequestHeaders.Accept.Clear();
+                                    _client.DefaultRequestHeaders.Accept.Add(
+                                       new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                                    var response = _client.GetAsync(drawername);
+                                    response.Wait();
+                                    var result = response.Result;
+                                    if (result.IsSuccessStatusCode)
+                                    {
+                                    }
+                                    else
+                                    { //Create Drawer                                      
+                                        var method = new HttpMethod("POST");
+                                        var parameters = new Dictionary<string, string> { { "collection", drawername }, { "db", nodename }, { "payload", json } };
+                                        var con = CreateHttpContent(parameters);
+                                        var request = new HttpRequestMessage(method, nodename + "/" + drawername)
+                                        {
+                                            Content = con
+                                        };
+                                        CancellationToken canceltoken;
+                                        var response1 = _client.SendAsync(request, canceltoken);
+                                        response1.Wait();
+                                        var result1 = response1.Result;
+                                        if (result1.IsSuccessStatusCode)
+                                        {
+
+                                        }
+                                    }
+                                }
+                               
                                 actionResult = RedirectToAction("Index", "Final", new { surveyId = surveyInfoModel.SurveyId ,responseId = responseId });
                                 return actionResult;
                             }
@@ -733,7 +775,44 @@ namespace Epi.Web.MVC.Controllers
             return actionResult;
         }
 
- 
+        private static HttpContent CreateHttpContent(object content)
+        {
+            HttpContent httpContent = null;
+
+            if (content != null)
+            {
+                var ms = new MemoryStream();
+                SerializeJsonIntoStream(content, ms);
+                ms.Seek(0, SeekOrigin.Begin);
+                httpContent = new StreamContent(ms);
+                httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+            }
+
+            return httpContent;
+        }
+
+        public static void SerializeJsonIntoStream(object value, Stream stream)
+        {
+            using (var sw = new StreamWriter(stream, new UTF8Encoding(false), 1024, true))
+            using (var jtw = new JsonTextWriter(sw) { Formatting = Newtonsoft.Json.Formatting.None })
+            {
+                var js = new JsonSerializer();
+                js.Serialize(jtw, value);
+                jtw.Flush();
+            }
+        }
+
+
+
+        static async Task RunAsync()
+        {
+            string endpoint = WebConfigurationManager.AppSettings["StorageAPIEndpoint"].ToString();
+            HttpClient _client = new HttpClient();
+            _client.BaseAddress = new Uri(endpoint);
+            HttpResponseMessage response = await _client.GetAsync(drawername.ToLower().Trim());
+        }
+
+
         private int GetCurrentPage()
         {
             int currentPage = 1;

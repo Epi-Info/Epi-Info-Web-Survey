@@ -27,6 +27,7 @@ namespace Epi.Web.EF
         public List<SurveyInfoBO> GetSurveyInfo(List<string> SurveyInfoIdList, int PageNumber = -1, int PageSize = -1)
         {
             List<SurveyInfoBO> result = new List<SurveyInfoBO>();
+            string OrganizationName = ""; int OrgId = 0;
             if (SurveyInfoIdList.Count > 0)
             {
                 try
@@ -59,6 +60,19 @@ namespace Epi.Web.EF
                 {
                     throw (ex);
                 }
+            }
+            try
+            {
+                using (var Context = DataObjectFactory.CreateContext())
+                {
+                    OrgId = Convert.ToInt32(result[0].OrganizationId);
+                    OrganizationName = Context.Organizations.FirstOrDefault(x => x.OrganizationId == OrgId).Organization1;
+                    result[0].OrganizationName = OrganizationName;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
             }
 
             // remove the items to skip

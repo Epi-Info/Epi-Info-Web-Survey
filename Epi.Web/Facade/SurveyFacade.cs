@@ -8,6 +8,7 @@ using Epi.Web.MVC.Facade;
 using Epi.Web.Common.DTO;
 using System.Collections.Generic;
 using System.Linq;
+using Epi.Web.Common.Json;
 
 namespace Epi.Web.MVC.Facade
 {
@@ -413,5 +414,11 @@ namespace Epi.Web.MVC.Facade
 
             _iSurveyAnswerRepository.SaveSurveyAnswer(  pRequest);
 }
+
+        public string GetSurveyResponseJson(Epi.Web.Common.DTO.SurveyAnswerDTO surveyAnswerDTO, List<FormsHierarchyDTO> FormsHierarchyDTOList)
+        {
+            SurveyResponseJson Implementation = new SurveyResponseJson();
+            return Implementation.GetSurveyResponseJson(surveyAnswerDTO, FormsHierarchyDTOList);
+        }
     }
 }
