@@ -123,6 +123,7 @@
     <Compile Include="Fields\MobileTextArea.cs" />
     <Compile Include="Fields\MobileTextBox.cs" />
     <Compile Include="Fields\MobileTimePicker.cs" />
+    <Compile Include="Fields\MobileUpperCaseTextBox.cs" />
     <Compile Include="Fields\NumericTextBox.cs" />
     <Compile Include="Fields\RadioList.cs" />
     <Compile Include="Fields\RelateButton.cs" />
@@ -131,6 +132,7 @@
     <Compile Include="Fields\TextBox.cs" />
     <Compile Include="Enums\FieldType.cs" />
     <Compile Include="Fields\TimePicker.cs" />
+    <Compile Include="Fields\UpperCaseTextBox.cs" />
     <Compile Include="Form.cs" />
     <Compile Include="Fields\Abstract\InputField.cs" />
     <Compile Include="MagicStrings.cs" />

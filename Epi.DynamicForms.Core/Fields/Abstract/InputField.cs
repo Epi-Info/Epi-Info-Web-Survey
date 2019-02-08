@@ -28,8 +28,9 @@ namespace MvcDynamicForms.Fields
         protected string _InputFieldfontfamily;
         protected string _BackgroundColor;
         protected Dictionary<string, string> _inputHtmlAttributes = new Dictionary<string, string>();
+        protected  string _Response;       
 
-        
+
         /// <summary>
         /// Used to identify InputFields when working with end users' responses.
         /// </summary>
@@ -55,7 +56,7 @@ namespace MvcDynamicForms.Fields
         /// <summary>
         /// String representing the user's response to the field.
         /// </summary>
-        public virtual string Response { get; set; }
+        public virtual string Response { get { return this._Response; } set { this._Response = value; } }
         /// <summary>
         /// Whether the field must be completed to be valid.
         /// </summary>
@@ -151,7 +152,7 @@ namespace MvcDynamicForms.Fields
         public string InputFieldfontfamily { get { return this._InputFieldfontfamily; } set { this._InputFieldfontfamily = value; } }
 
         public string BackgroundColor { get { return this._BackgroundColor; } set { this._BackgroundColor = value; } }
-        public bool Sort { get; set; }
+        public bool Sort { get; set; }      
         public string GetInputFieldStyle(string ControlFontStyle, double ControlFontSize, string ControlFontFamily)
         {
             StringBuilder FontStyle = new StringBuilder();
