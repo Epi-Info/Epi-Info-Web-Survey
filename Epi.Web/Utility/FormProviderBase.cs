@@ -163,7 +163,7 @@ namespace Epi.Web.MVC.Utility
 
                             ((NumericTextBox)field).Response = Value;
 
-                    }
+                    }                  
                     else if (field is InputField)
                     {
                         ((InputField)field).Response = kvp.Value;
@@ -463,6 +463,47 @@ namespace Epi.Web.MVC.Utility
             return (TextBox)field;
         }
 
+        protected static UpperCaseTextBox GetUpperCaseTextBox(XElement _FieldTypeID, Form form)
+        {
+            InputField field;
+
+            if (form.IsMobile)
+            {
+                field = new MobileUpperCaseTextBox();
+            }
+            else
+            {
+                field = new UpperCaseTextBox();
+            }
+
+            field.Title = _FieldTypeID.Attribute("Name").Value;
+            field.Prompt = _FieldTypeID.Attribute("PromptText").Value.Trim();
+            field.DisplayOrder = int.Parse(_FieldTypeID.Attribute("TabIndex").Value);
+            field.RequiredMessage = "This field is required";
+            field.Key = _FieldTypeID.Attribute("Name").Value;
+            field.PromptTop = form.Height * ParseDouble(_FieldTypeID.Attribute("PromptTopPositionPercentage").Value);
+            field.PromptLeft = form.Width * ParseDouble(_FieldTypeID.Attribute("PromptLeftPositionPercentage").Value);
+            field.Top = form.Height * ParseDouble(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value);
+            field.Left = form.Width * ParseDouble(_FieldTypeID.Attribute("ControlLeftPositionPercentage").Value);
+            field.PromptWidth = form.Width * ParseDouble(_FieldTypeID.Attribute("ControlWidthPercentage").Value);
+            field.ControlWidth = form.Width * ParseDouble(_FieldTypeID.Attribute("ControlWidthPercentage").Value);
+            field.fontstyle = _FieldTypeID.Attribute("PromptFontStyle").Value;
+            field.fontSize = ParseDouble(_FieldTypeID.Attribute("PromptFontSize").Value);
+            field.fontfamily = _FieldTypeID.Attribute("PromptFontFamily").Value;
+            field.Required = bool.Parse(_FieldTypeID.Attribute("IsRequired").Value);
+            field.InputFieldfontstyle = _FieldTypeID.Attribute("ControlFontStyle").Value;
+            field.InputFieldfontSize = ParseDouble(_FieldTypeID.Attribute("ControlFontSize").Value);
+            field.InputFieldfontfamily = _FieldTypeID.Attribute("ControlFontFamily").Value;
+            field.ReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value);
+            if (!string.IsNullOrEmpty(_FieldTypeID.Attribute("MaxLength").Value))
+            {
+                field.MaxLength = int.Parse(_FieldTypeID.Attribute("MaxLength").Value);
+            }          
+            field.Name = _FieldTypeID.Attribute("Name").Value;
+            SetFieldCommon(field, form);
+
+            return (UpperCaseTextBox)field;
+        }
         protected static CheckBox GetCheckBox(XElement _FieldTypeID, Form form)
         {
             InputField field;
@@ -1200,8 +1241,10 @@ namespace Epi.Web.MVC.Utility
                     switch (fieldElement.Attribute("FieldTypeId").Value)
                     {
                         case "1":
-                        case "3":
                             field = GetTextBox(fieldElement, form);
+                            break;
+                        case "3":
+                            field = GetUpperCaseTextBox(fieldElement, form);
                             break;
 
                         case "2":
@@ -1234,7 +1277,7 @@ namespace Epi.Web.MVC.Utility
 
                         case "12": 
                             field = GetRadioList(fieldElement, 12, form);
-                            break;
+                            break;                       
 
                         case "17":
                             string legalValues = GetDropDownValues(xdocMetadata, fieldElement.Attribute("Name").Value, fieldElement.Attribute("SourceTableName").Value, fieldElement.Attribute("CodeColumnName").Value, form.SourceTableList);
@@ -1324,8 +1367,10 @@ namespace Epi.Web.MVC.Utility
                     switch (fieldElement.Attribute("FieldTypeId").Value)
                     {
                         case "1":
-                        case "3":
                             field = GetTextBox(fieldElement, form);
+                            break;
+                        case "3":
+                            field = GetUpperCaseTextBox(fieldElement, form);
                             break;
 
                         case "2":
@@ -1367,7 +1412,7 @@ namespace Epi.Web.MVC.Utility
 
                         case "13":
                             field = GetCommandButton(fieldElement, form);
-                            break;
+                            break;                      
 
                         case "17"://DropDown LegalValues
 
@@ -1466,7 +1511,7 @@ namespace Epi.Web.MVC.Utility
 
             return ControlValue;
         }
-
+      
 
         private static bool GetRequiredControlState(string Requiredlist, string ControlName, string ListName)
         {
@@ -1662,6 +1707,6 @@ namespace Epi.Web.MVC.Utility
                 float.TryParse(ParseString, System.Globalization.NumberStyles.Any, CultureInfo.InvariantCulture, out result);
             }
             return result;
-        }
+        }                  
     }
 }

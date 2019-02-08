@@ -620,11 +620,10 @@ public System.Collections.Specialized.NameValueCollection GlobalVariables;*/
                         var.ControlType = "label";
                         //continue;
                         break;
-                    case "3"://Label
-                        var.DataType = DataType.Text;
-                        var.ControlType = "label";
-                        continue;
-                        //break;
+                    case "3"://UpperCase
+                        var.DataType = DataType.Text;                      
+                        var.ControlType = "textbox";                        
+                        break;
                     case "4"://MultiLineTextBox
                         var.DataType = DataType.Text;
                         var.ControlType = "multiline";
@@ -781,8 +780,8 @@ public System.Collections.Specialized.NameValueCollection GlobalVariables;*/
                          pJavaScriptBuilder.AppendLine(string.Format(defineFormat, var.Name, var.ControlType, DataSource, var.PageNumber, var.Expression.Replace("\n"," ")));
                         break;
                     case "textbox": 
-                    case "commandbutton":
-                    
+                    case "commandbutton":                   
+
                     default:
                         pJavaScriptBuilder.AppendLine(string.Format(defineFormat, var.Name, var.ControlType, DataSource, var.PageNumber, var.Expression));
                         break;
