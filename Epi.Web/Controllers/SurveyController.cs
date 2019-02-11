@@ -1133,7 +1133,7 @@ namespace Epi.Web.MVC.Controllers
 
         
         [HttpGet]
-        public JsonResult GetCodesValue(string SourceTableName= "", string SelectedValue="",string SurveyId="") 
+        public JsonResult GetCodesValue(string SourceTableName= "", string SelectedValue="",string SurveyId="", string  ColumnName ="" , string FieldRelateCondition = "") 
         {
             SurveyId = Session["RootFormId"].ToString();
             string CacheIsOn = ConfigurationManager.AppSettings["CACHE_IS_ON"]; ;
@@ -1176,21 +1176,40 @@ namespace Epi.Web.MVC.Controllers
             try
             {
               
-                SourceTableDTO Table = CacheObj.List.Where(x => x.TableName.Contains(SourceTableName.ToString())).Single();
+                 SourceTableDTO Table = CacheObj.List.Where(x => x.TableName.Contains(SourceTableName.ToString())).Single();
+                
                 XDocument Xdoc = XDocument.Parse(Table.TableXml);
                 var _ControlValues = from _ControlValue in Xdoc.Descendants("Item")
-                                     where _ControlValue.Attributes().SingleOrDefault(xa => string.Equals(xa.Name.LocalName, SourceTableName,
-                                     StringComparison.InvariantCultureIgnoreCase)).Value == SelectedValue.ToString()
+                                    // where _ControlValue.Attributes().SingleOrDefault(xa => string.Equals(xa.Name.LocalName, SourceTableName,
+                                      where _ControlValue.Attributes().SingleOrDefault(xa => string.Equals(xa.Name.LocalName, ColumnName,StringComparison.InvariantCultureIgnoreCase)).Value == SelectedValue.ToString()
                                      select _ControlValue;
 
                  var Attributes = _ControlValues.Attributes().ToList();
                 Dictionary<string,string> List = new  Dictionary<string,string>();
-                 foreach (var Attribute in Attributes)
-                {
-                    List.Add(Attribute.Name.LocalName.ToLower(), Attribute.Value);
+                if (Attributes.Count() == 1) {
+                   
+                    foreach (var Attribute in Attributes)
+                    {
+
+                        // List.Add(Attribute.Name.LocalName.ToLower(), Attribute.Value);
+                        List.Add(Attribute.Value, Attribute.Name.LocalName.ToLower());
+
+                    }
                 }
+                else {
+                    
+                    foreach (var Attribute in Attributes)
+                    {
+                        
+                        if (FieldRelateCondition.Contains(Attribute.Name.LocalName) && !List.ContainsKey(Attribute.Value)) {
+                            // List.Add(Attribute.Name.LocalName.ToLower(), Attribute.Value);
+                            
+                            List.Add(Attribute.Value, Attribute.Name.LocalName );
+                             
+                        }
+                    }
 
-
+                }
 
                  return Json(List, JsonRequestBehavior.AllowGet);
             }

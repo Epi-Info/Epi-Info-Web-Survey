@@ -766,6 +766,9 @@ namespace Epi.Web.MVC.Utility
             field.Name = _FieldTypeID.Attribute("Name").Value;
             field.FieldTypeId = FieldTypeId;
             field.IsAndroidfield = form.IsAndroid;
+            field.TextColumnName = _FieldTypeID.Attribute("TextColumnName").Value;
+            field.FieldRelateCondition = _FieldTypeID.Attribute("RelateCondition").Value;
+            field.SourceTable = _FieldTypeID.Attribute("SourceTableName").Value;
             if (!string.IsNullOrEmpty(_FieldTypeID.Attribute("Sort").Value))
             {
                 field.Sort = bool.Parse(_FieldTypeID.Attribute("Sort").Value);
@@ -985,7 +988,8 @@ namespace Epi.Web.MVC.Utility
                             XElement XElement = XElement.Parse(_SourceTableValue.ToString());
                            try{
                            // DropDownValues.Append(XElement.Attribute(CodeColumnName.ToLower()).Value.Trim());
-                            DropDownValues.Append(XElement.Attribute(CodeColumnName.ToLower()).Value.Trim());
+                            //DropDownValues.Append(XElement.Attribute(CodeColumnName.ToLower()).Value.Trim());
+                                DropDownValues.Append(XElement.Attribute(CodeColumnName).Value.Trim());
                             }
                            catch (Exception ex)
                              {
@@ -1435,7 +1439,7 @@ namespace Epi.Web.MVC.Utility
                         case "18": //DropDown Codes
 
 
-                            dropDownValues = GetDropDownValues(form.XDocMetadata, fieldElement.Attribute("Name").Value, fieldElement.Attribute("SourceTableName").Value, fieldElement.Attribute("CodeColumnName").Value, form.SourceTableList);
+                            dropDownValues = GetDropDownValues(form.XDocMetadata, fieldElement.Attribute("Name").Value, fieldElement.Attribute("SourceTableName").Value, fieldElement.Attribute("TextColumnName").Value, form.SourceTableList);
                             var dropdown = GetDropDown(fieldElement, dropDownValues, 18, form);
                             if ((isMobile && dropdown.ChoiceKeyValuePairs.Count > 15) || (!isMobile && dropdown.ChoiceKeyValuePairs.Count > 50))
                             {
