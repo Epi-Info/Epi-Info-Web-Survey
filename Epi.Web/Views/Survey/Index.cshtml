@@ -719,15 +719,16 @@
         return HasResponse;
 
     }
-    function SetCodes_Val(obj, SurveyId, TableName, AutoComplete) {
-        //debugger;
+    function SetCodes_Val(obj, SurveyId, TableName, AutoComplete, ColumnName, FieldRelateCondition) {
+        //debugger; 
+       
         $('#' + obj.id).val(obj.value);     
         var availableTags = [obj.value];
         var signoutUrl = "";
         if (AutoComplete) {
-            signoutUrl = '@Url.Action("GetCodesValue","Survey")' + '?SourceTableName=' + TableName + '&SelectedValue=' + obj + '&SurveyId=' + SurveyId;
+            signoutUrl = '@Url.Action("GetCodesValue","Survey")' + '?SourceTableName=' + TableName + '&SelectedValue=' + obj + '&SurveyId=' + SurveyId + "&ColumnName=" + ColumnName + "&FieldRelateCondition=" + FieldRelateCondition;
         } else {
-            signoutUrl = '@Url.Action("GetCodesValue","Survey")' + '?SourceTableName=' + TableName + '&SelectedValue=' + obj.value + '&SurveyId=' + SurveyId;
+            signoutUrl = '@Url.Action("GetCodesValue","Survey")' + '?SourceTableName=' + TableName + '&SelectedValue=' + obj.value + '&SurveyId=' + SurveyId + "&ColumnName=" + ColumnName + "&FieldRelateCondition=" + FieldRelateCondition;
         }
 
         $.ajax({
@@ -742,11 +743,36 @@
 
 
         function successFunc(data, status) {
-            $.each(data, function (key, value) {
-                var Query = "#mvcdynamicfield_" + key;
-                // alert(Query);
-                $(Query).val(value);
-            });
+          
+           
+            if ($("#mvcdynamicfield_" + Object.values(data)[0]).is("input")) {
+                $.each(data, function (key, value) {
+                    //  var Query = "#mvcdynamicfield_" + key;
+                    var Query = "#mvcdynamicfield_" + value;
+                    // alert(Query);
+                    // $(Query).val(value);
+                    $(Query).val(key);
+
+
+                });
+            } else {
+                var Query = "#mvcdynamicfield_" + Object.values(data)[0];
+               
+              
+                $(Query).empty();
+                $(Query).append($("<option></option>")
+                    .attr("value", "").text("Select"));
+                $.each(data, function (key, value) {
+                    
+                    
+                    $(Query).append($("<option></option>")
+                        .attr("value", key).text(key));
+
+
+                });
+
+
+            }
         }
 
         function errorFunc() {
