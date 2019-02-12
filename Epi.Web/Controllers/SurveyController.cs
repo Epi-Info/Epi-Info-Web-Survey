@@ -658,33 +658,66 @@ namespace Epi.Web.MVC.Controllers
                                 //FormsAuthentication.SignOut();
 
                                 //FDNS API
-                                drawername = surveyInfoModel.OrganizationName;
-                                nodename = surveyInfoModel.SurveyName + System.DateTime.Now.ToFileTime();
-                                var json=  _isurveyFacade.GetSurveyResponseJson(SurveyAnswer, FormsHierarchy);                             
                                 string endpoint = WebConfigurationManager.AppSettings["StorageAPIEndpoint"].ToString();
-                                using (var _client = new HttpClient())
+                                if (!string.IsNullOrEmpty(endpoint))
                                 {
-                                    _client.BaseAddress = new Uri(endpoint);
-                                    _client.DefaultRequestHeaders.Accept.Clear();
-                                    _client.DefaultRequestHeaders.Accept.Add(
-                                       new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-                                    var response = _client.GetAsync(drawername);
-                                    response.Wait();
-                                    var result = response.Result;
-                                    if (result.IsSuccessStatusCode)
+                                    drawername = surveyInfoModel.OrganizationName;
+                                    nodename = surveyInfoModel.SurveyName + System.DateTime.Now.ToFileTime();
+                                    var json = _isurveyFacade.GetSurveyResponseJson(SurveyAnswer, FormsHierarchy);
+
+                                    using (var _client = new HttpClient())
                                     {
-                                    }
-                                    else
-                                    { //Create Drawer                                      
-                                        var method = new HttpMethod("POST");
-                                        var parameters = new Dictionary<string, string> { { "collection", drawername }, { "db", nodename }, { "payload", json } };
-                                        var con = CreateHttpContent(parameters);
-                                        var request = new HttpRequestMessage(method, nodename + "/" + drawername)
+                                        _client.BaseAddress = new Uri(endpoint);
+                                        _client.DefaultRequestHeaders.Accept.Clear();
+                                        _client.DefaultRequestHeaders.Accept.Add(
+                                           new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                                        var response = _client.GetAsync(drawername);
+                                        response.Wait();
+                                        var result = response.Result;
+                                        if (result.IsSuccessStatusCode)
                                         {
-                                            Content = con
-                                        };
-                                        CancellationToken canceltoken;
-                                        var response1 = _client.SendAsync(request, canceltoken);
+                                        }
+                                        else
+                                        { //Create Drawer                                      
+                                            var method = new HttpMethod("POST");
+                                            var parameters = new Dictionary<string, string> { { "collection", drawername }, { "db", nodename }, { "payload", json } };
+                                            var con = CreateHttpContent(parameters);
+                                            var request = new HttpRequestMessage(method, nodename + "/" + drawername)
+                                            {
+                                                Content = con
+                                            };
+                                            CancellationToken canceltoken;
+                                            var response1 = _client.SendAsync(request, canceltoken);
+                                            response1.Wait();
+                                            var result1 = response1.Result;
+                                            if (result1.IsSuccessStatusCode)
+                                            {
+
+                                            }
+                                        }
+                                    }
+                                }
+                                //Mongodb API insert a response after publish
+                                string MongodbEndpoint = WebConfigurationManager.AppSettings["MongodbStorageAPIEndpoint"].ToString();
+                                if (!string.IsNullOrEmpty(MongodbEndpoint))
+                                {
+                                    // var response = _client.GetAsync("Eiws/EIWStest"); check if the db exists may not be needed
+                                    var db = surveyInfoModel.OrganizationName.Replace("'", "").Replace(" ", "_"); // db name can not have a space also there is a size limit for db names 
+                                    string  CollectionUniqueCode = "_"+surveyInfoModel.SurveyId.ToString().Substring(0, 8);
+                                    var Collection = (surveyInfoModel.SurveyName).Replace("'", "").Replace(" ","_") + CollectionUniqueCode; // collection name can have space 
+                                    var DocumentId = SurveyAnswer.ResponseId;
+                                    FormsHierarchy[0].SurveyInfo.OrganizationKey = surveyInfoModel.OrganizationKey;
+                                    var json = _isurveyFacade.GetSurveyResponseJson(SurveyAnswer, FormsHierarchy);
+                                   
+                                    using (var _client = new HttpClient())
+                                    {
+
+                                        var httpContent = new StringContent(json, Encoding.UTF8, "application/json");
+
+                                        //  var response1 = _client.PostAsync(MongodbEndpoint + db + "/" + Collection + "/" + DocumentId, httpContent);
+                                        var uri = MongodbEndpoint + db + "/" + Collection + "/" + DocumentId;
+                                        var response1 = _client.PostAsync(uri, httpContent);
+
                                         response1.Wait();
                                         var result1 = response1.Result;
                                         if (result1.IsSuccessStatusCode)
@@ -693,8 +726,7 @@ namespace Epi.Web.MVC.Controllers
                                         }
                                     }
                                 }
-                               
-                                actionResult = RedirectToAction("Index", "Final", new { surveyId = surveyInfoModel.SurveyId ,responseId = responseId });
+                                    actionResult = RedirectToAction("Index", "Final", new { surveyId = surveyInfoModel.SurveyId ,responseId = responseId });
                                 return actionResult;
                             }
                             else
