@@ -102,7 +102,7 @@ namespace Epi.Web.MVC.Utility
             {
                 if (form.Fields.Keys.Contains(fieldName.ToLower()))
                 {
-                    form.Fields[fieldName].IsDisabled = true;
+                    form.Fields[fieldName.ToLower()].IsDisabled = true;
                 }
             }
 
