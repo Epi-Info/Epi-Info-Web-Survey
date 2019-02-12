@@ -25,7 +25,7 @@ namespace Epi.Web.Common.Json
 
             Responsedetail.ResponseId = surveyAnswer.ResponseId;
             Responsedetail.FormId = surveyAnswer.SurveyId;
-
+            Responsedetail.OKey = FormsHierarchyDTOList[0].SurveyInfo.OrganizationKey.ToString().Substring(0, 8);
             for (int i = 1; NumberOfPages + 1 > i; i++)
             {
                 var _FieldsTypeIDs = from _FieldTypeID in

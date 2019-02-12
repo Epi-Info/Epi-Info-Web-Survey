@@ -87,7 +87,7 @@ namespace MvcDynamicForms.Fields
             }
             if (this.RelateCondition)
             {
-                select.Attributes.Add("onchange", "return SetCodes_Val(this,'" + _form.SurveyInfo.SurveyId + "','" + _key + "');"); //click
+                select.Attributes.Add("onchange", "return SetCodes_Val(this,'" + _form.SurveyInfo.SurveyId + "','" + SourceTable + "'," + "''" + ",'" + TextColumnName + "','" + FieldRelateCondition + "');"); //click
 
 
             }
