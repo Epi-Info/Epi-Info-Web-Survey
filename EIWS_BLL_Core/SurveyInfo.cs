@@ -451,8 +451,9 @@ namespace Epi.Web.BLL
             switch (Type)
                 {
                 case "1":
-                case "3"://TextBox
-                    ControlType="TextBox";
+                case "3"://UpperCase
+                case "15"://Mirror
+                    ControlType ="TextBox";
                     break;
 
                 case "2"://Literal
