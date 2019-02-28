@@ -36,6 +36,11 @@ namespace Epi.Web.EF
                 result.StartDate = entity.StartDate;
             result.IsSqlProject = (bool)entity.IsSQLProject;
             result.OrganizationId = entity.OrganizationId;
+            try
+            {
+                result.OrganizationKey = Guid.Parse(Common.Security.Cryptography.Decrypt(entity.Organization.OrganizationKey.ToString()));
+            }
+            catch (Exception ex) {}
             // result.OwnerId = entity.OwnerId;
             if (entity.UserPublishKey != null)
             {
