@@ -36,7 +36,7 @@ namespace Epi.Web.MVC.Controllers
             _isurveyFacade = isurveyFacade;
         }
          [HttpGet]
-        public ActionResult Index()
+        public ActionResult Index(bool ResetOrg = false )
         {
             string content = string.Empty;
             PublishModel Model = new PublishModel();
@@ -57,7 +57,7 @@ namespace Epi.Web.MVC.Controllers
 
             }
             ViewData["TermOfUse1"] = content;
-            if (IsAuthenticated)
+            if (IsAuthenticated && !ResetOrg)
             {
                 Session["IsAuthenticated"] = Model.IsAuthenticated = IsAuthenticated;
                 //check if the user exists 
@@ -153,6 +153,18 @@ namespace Epi.Web.MVC.Controllers
                 ViewBag.Version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
                 bool IsAuthenticated = Model.IsAuthenticated = bool.Parse(Session["IsAuthenticated"].ToString());
                 ViewBag.IsNewOrg = Session["IsNewOrg"]; ViewBag.Org = "OrganizationKey:";
+                OrganizationAccountRequest OrgRequest = new OrganizationAccountRequest();
+                if (Model.OrganizationKey != null)
+                {
+                    OrgRequest.Organization.OrganizationKey = Model.OrganizationKey;
+                }
+                else
+                {
+                    OrgRequest.Organization.OrganizationKey = Model.OrganizationKey = Session["OrgId"].ToString();
+                }
+                OrganizationAccountResponse Response = this._isurveyFacade.GetOrg(OrgRequest);
+                Model.OrgName = Response.OrganizationDTO.Organization;
+
                 if (!string.IsNullOrEmpty(ValidateOrganization))
                 {
                     ModelState["FileName"].Errors.Clear();
@@ -167,7 +179,20 @@ namespace Epi.Web.MVC.Controllers
                     ModelState["DownLoadDivState"].Errors.Clear();
                     if (ModelState.IsValid)
                     {
-                        Model.IsValidOrg = ValidateOrganizationId(Model.OrganizationKey);
+                      //  OrganizationAccountRequest Request = new OrganizationAccountRequest();
+
+                      //  Request.Organization.OrganizationKey = Model.OrganizationKey;
+                        //OrganizationAccountResponse Response = this._isurveyFacade.GetOrg(Request);
+                        if (Response.OrganizationDTO != null)
+                        {
+                            Model.IsValidOrg = true;//ValidateOrganizationId(Model.OrganizationKey);
+                        } else
+                        {
+                            Model.IsValidOrg = false; 
+                        }
+                       // Model.OrgName = Response.OrganizationDTO.Organization;
+
+                       
 
                         if (!Model.IsValidOrg)
                         {
@@ -177,6 +202,8 @@ namespace Epi.Web.MVC.Controllers
                            Session["OrgId"] =  Model.OrganizationKey;
                           Model.SurveyNameList = GetAllSurveysByOrgId(Model.OrganizationKey);
                           ViewBag.SurveyNameList1 = GetAllSurveysByOrgId(Model.OrganizationKey); ;
+
+                          
                         }
                     }
                     return View("Index", Model);
@@ -322,6 +349,8 @@ namespace Epi.Web.MVC.Controllers
                     if (ModelState.IsValid)
                     {
                         DoDownLoad(Model);
+                    
+                       
                     }
                     else {
                         Model.SurveyNameList = ViewBag.SurveyNameList1 = GetAllSurveysByOrgId(Model.OrganizationKey); 
@@ -387,7 +416,7 @@ namespace Epi.Web.MVC.Controllers
             {
                 ViewBag.SurveyNameList1 = GetAllSurveysByOrgId(Model.OrganizationKey); 
                 Model.SuccessfulPublish = false;
-                ModelState.AddModelError("Error", "Please validate the information provided and try publishing again.");
+                ModelState.AddModelError("Error", "Please validate the information provided.");
                 return View("Index", Model);
             }
             return View("Index", Model);
@@ -937,10 +966,13 @@ namespace Epi.Web.MVC.Controllers
                                 memoryStream.WriteTo(Response.OutputStream);
                                 Response.Flush();
                                 Response.End();
+                                ModelState.AddModelError("Error", "Download was Successful.");
+                                Model.SurveyNameList = ViewBag.SurveyNameList1 = GetAllSurveysByOrgId(Session["OrgId"].ToString()); ;
+                                return View("Index", Model);
                             }
                         }
                         else {
-
+                            stopwatch.Stop();
                             Model.SuccessfulPublish = false;
                             ModelState.AddModelError("Error", "No records found for the download criteria entered.");
 
@@ -958,6 +990,7 @@ namespace Epi.Web.MVC.Controllers
                 }
                 catch (Exception ex)
                 {
+                    stopwatch.Stop();
                     Model.SuccessfulPublish = false;
                     ModelState.AddModelError("Error", "Please validate the information provided and try downloading again.");
                     ViewBag.SurveyNameList1 = GetAllSurveysByOrgId(Session["OrgId"].ToString()); ;
