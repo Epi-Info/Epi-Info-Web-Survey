@@ -122,7 +122,7 @@ namespace Epi.Web.Common.ObjectMapping
                 StartDate = pBO.StartDate,
                 IsSqlProject =pBO.IsSqlProject,
                 UserPublishKey = pBO.UserPublishKey
-
+               , OrganizationKey = pBO.OrganizationKey
 
 
             };
