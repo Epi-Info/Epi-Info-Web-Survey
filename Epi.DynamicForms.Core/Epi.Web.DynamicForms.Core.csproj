@@ -106,6 +106,7 @@
     <Compile Include="Fields\CheckBox.cs" />
     <Compile Include="Fields\CheckBoxList.cs" />
     <Compile Include="Fields\CommandButton.cs" />
+    <Compile Include="Fields\MirrorField.cs" />
     <Compile Include="Fields\MobileAutoComplete.cs" />
     <Compile Include="Fields\MobileCommandButton.cs" />
     <Compile Include="Fields\Hidden.cs" />
@@ -116,6 +117,7 @@
     <Compile Include="Fields\MobileDatePicker.cs" />
     <Compile Include="Fields\MobileGroupBox.cs" />
     <Compile Include="Fields\MobileLiteral.cs" />
+    <Compile Include="Fields\MobileMirrorField.cs" />
     <Compile Include="Fields\MobileNumericTextBox.cs.cs" />
     <Compile Include="Fields\MobileRadioList.cs" />
     <Compile Include="Fields\MobileRelateButton.cs" />
