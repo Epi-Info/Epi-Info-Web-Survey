@@ -930,5 +930,27 @@ namespace Epi.Web.WCF.SurveyService
             return DropDownsResponse;
         
         }
+        public OrganizationAccountResponse GetOrganization(OrganizationAccountRequest request) {
+
+            OrganizationAccountResponse OrgAccountResponse = new OrganizationAccountResponse();
+
+            try
+            {
+                 
+                Epi.Web.Interfaces.DataInterfaces.IOrganizationDao OrgDao = new EF.EntityOrganizationDao();
+                Epi.Web.BLL.Account Implementation = new Epi.Web.BLL.Account(null,OrgDao);
+                OrganizationBO OrgInfo = Implementation.GetOrganization(request.Organization.OrganizationKey);
+                if (OrgInfo != null) {
+                    OrgAccountResponse.OrganizationDTO = Mapper.ToDataTransferObjects(OrgInfo);
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return OrgAccountResponse;
+
+        }
     }
 }

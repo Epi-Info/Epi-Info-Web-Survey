@@ -96,6 +96,12 @@ namespace Epi.Web.MVC.Repositories
              {
              throw new NotImplementedException();
              }
+        public OrganizationAccountResponse GetOrg(OrganizationAccountRequest Request)
+        {
+            OrganizationAccountResponse Response = new OrganizationAccountResponse();
+            Response = _iDataService.GetOrganization(Request);
+            return Response;
 
         }
+    }
     }

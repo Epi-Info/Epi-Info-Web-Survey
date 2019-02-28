@@ -38,6 +38,7 @@ namespace Epi.Web.MVC.Models
                 IsDraftMode = SurveyInfoDTO.IsDraftMode,
                 StartDate = SurveyInfoDTO.StartDate,
                 IsSqlProject = SurveyInfoDTO.IsSqlProject
+                ,OrganizationKey = SurveyInfoDTO.OrganizationKey
             };
 
         }

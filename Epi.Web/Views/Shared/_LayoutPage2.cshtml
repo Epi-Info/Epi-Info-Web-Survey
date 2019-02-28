@@ -33,50 +33,50 @@
 
 
     <link href="@Url.Content("~/Content/css/epiwebsurvey_admin.css")" rel="Stylesheet" type="text/css" />
-
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
 
     <meta name="viewport" content="width=device-width">
     <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.tools.min.js")"></script>
 
     <script type="text/javascript">
 
-       //debugger;
+        //debugger;
 
-       $(document).ready(function () {
-
-
-           $('#successContent').hide();
+        $(document).ready(function () {
 
 
-           $("#myform").validationEngine();
-
-           $('div#pages a').click(PostForm);
-           function PostForm(event) {
-               // Clicking the navigation links at the top, get the target Url and then post the form
-               document.forms[0].action = event.target.href;
-
-               $("#myform").submit();
-
-               return false;
-           }
+            $('#successContent').hide();
 
 
+            $("#myform").validationEngine();
 
-//           if ($.browser.msie && $.browser.version < 9) $('select.wide')
-//                .bind('focus mouseover', function() { $(this).addClass('expand').removeClass('clicked'); })
-//                .bind('click', function() { $(this).toggleClass('clicked'); })
-//                .bind('mouseout', function() { if (!$(this).hasClass('clicked')) { $(this).removeClass('expand'); }})
-//                .bind('blur', function() { $(this).removeClass('expand clicked'); });
+            $('div#pages a').click(PostForm);
+            function PostForm(event) {
+                // Clicking the navigation links at the top, get the target Url and then post the form
+                document.forms[0].action = event.target.href;
 
+                $("#myform").submit();
 
-               var firstControl = $('form *:input[type!=hidden]:enabled:first');
-               if(firstControl != null)
-               {
-                    firstControl.focus();
-               }
+                return false;
+            }
 
 
-       });
+
+            //           if ($.browser.msie && $.browser.version < 9) $('select.wide')
+            //                .bind('focus mouseover', function() { $(this).addClass('expand').removeClass('clicked'); })
+            //                .bind('click', function() { $(this).toggleClass('clicked'); })
+            //                .bind('mouseout', function() { if (!$(this).hasClass('clicked')) { $(this).removeClass('expand'); }})
+            //                .bind('blur', function() { $(this).removeClass('expand clicked'); });
+
+
+            var firstControl = $('form *:input[type!=hidden]:enabled:first');
+            if (firstControl != null) {
+                firstControl.focus();
+            }
+
+
+        });
 
 
 

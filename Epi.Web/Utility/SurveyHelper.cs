@@ -534,11 +534,19 @@ namespace Epi.Web.MVC.Utility
             {
                 Date = DateTime.Now.Date.ToString();
             }
+
+            bool isDate = false;
+            DateTime temp;
+            if (DateTime.TryParse(Date, out temp))
+            {
+                isDate = true;
+            }
+             
             string MM = "";
             string DD = "";
             string YYYY = "";
             char splitChar = '/';
-            if (!string.IsNullOrEmpty(Date))
+            if (!string.IsNullOrEmpty(Date) && isDate)
             {
                 if (Date.Contains('-'))
                 {
