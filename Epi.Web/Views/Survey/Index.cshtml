@@ -1,5 +1,5 @@
 ﻿
-@model Epi.Web.MVC.Models.SurveyModel  
+@model Epi.Web.MVC.Models.SurveyModel
 @{
     ViewBag.Title = "Survey";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -32,16 +32,22 @@
     content: "0";
     }
 </style>
+
+
+
+
+
+
 <script type="text/javascript">
 
-   
-     
+
+
       $(document).ready(function () {
 
-    
-     
+
+
         var DateFormat = '@Model.CurrentCultureDateFormat'
-       
+
        DateFormat = DateFormat.toLocaleLowerCase().toString();
 
         // Start fix for en-us format
@@ -99,7 +105,7 @@
 
     }
     function AddNewChild(ViewId) {
-        
+
         $("#myform")[0].Get_Child_action.value = 'true';
 
         $("#myform")[0].action = window.location.href;
@@ -108,7 +114,7 @@
         $('#myform').submit();
 
     }
-    
+
     /*Clicking the continue button*/
 
     function Continue() {
@@ -137,8 +143,8 @@
         $("#myform").submit();
     }
     function ChangeDatePickerFormat(dateformat,controlVal) {
-        
-        dateformat = dateformat.toLocaleLowerCase().toString();      
+
+        dateformat = dateformat.toLocaleLowerCase().toString();
         $("#" + this.id).datepicker("option", "dateFormat", dateformat);
 
     }
@@ -149,7 +155,13 @@
 
         //$("#Savebutton").tooltip();
 
-      
+        //if (!window.indexedDB) {
+        //    window.alert("Your browser doesn't support IndexedDB. ");
+        //} else {
+
+        //    window.alert(" IndexedDB is supported ");
+        //}
+
 
 
         $("#dialog").dialog({
@@ -327,12 +339,12 @@
             if ('@Model.Form.StatusId' == '1')
                  {
                          if ('@Model.Form.SurveyInfo.SurveyId' == '@Session["RootFormId"].ToString()')
-                                 { 
+                                 {
                                     $('#successContent').show();
                                     $('#successContent').append('<div class="success"><img src="@Url.Content("~/Content/images/button_check.png")" style="vertical-align:middle; padding-right: 10px; width:36px" alt=""/> Your survey has been saved.<button id="copy" type="button" name="copy" class="copylink">Get Survey Link & Pass Code</button></div>')
-                
 
-                
+
+
                                     //call your jquery modal popup method
                                     $("#dialog").dialog("open");
                                  }
@@ -340,7 +352,7 @@
             else
                  {
 
-               
+
 
                 $('#successContent').show(); //in subsequest click we just show that the survey has been saved not the modal popup
                 $('#successContent').append('<div class="success"><img src="@Url.Content("~/Content/images/button_check.png")" style="vertical-align:middle; padding-right: 10px; width:36px" alt=""/> Your survey has been saved.<button id="copy" type="button" name="copy" class="copylink">Get Survey Link & Pass Code</button></div>')
@@ -494,16 +506,16 @@
 
        // alert(temp)
         if (temp) {
-             
+
           //  ReadResponse(ViewId);
             ReadRelatedResponse(ViewId)
-          
+
         }
         else {
             // Save();//Save Current page.
             AddNewChild(ViewId);
             // AddChild(ViewId);
-          
+
         }
 
     }
@@ -610,8 +622,8 @@
 
     }
     function GoHome() {
-        
-        
+
+
         var DisabledFieldsList = $('#DisabledFieldsList').val();
 
         if (DisabledFieldsList.length > 0) {
@@ -628,7 +640,7 @@
     }
 
     function GoOneLevelUp() {
-         
+
         var DisabledFieldsList = $('#DisabledFieldsList').val();
 
         if (DisabledFieldsList.length > 0) {
@@ -720,9 +732,9 @@
 
     }
     function SetCodes_Val(obj, SurveyId, TableName, AutoComplete, ColumnName, FieldRelateCondition) {
-        //debugger; 
-       
-        $('#' + obj.id).val(obj.value);     
+        //debugger;
+
+        $('#' + obj.id).val(obj.value);
         var availableTags = [obj.value];
         var signoutUrl = "";
         if (AutoComplete) {
@@ -743,8 +755,8 @@
 
 
         function successFunc(data, status) {
-          
-           
+
+
             if ($("#mvcdynamicfield_" + Object.values(data)[0]).is("input")) {
                 $.each(data, function (key, value) {
                     //  var Query = "#mvcdynamicfield_" + key;
@@ -757,14 +769,14 @@
                 });
             } else {
                 var Query = "#mvcdynamicfield_" + Object.values(data)[0];
-               
-              
+
+
                 $(Query).empty();
                 $(Query).append($("<option></option>")
                     .attr("value", "").text("Select"));
                 $.each(data, function (key, value) {
-                    
-                    
+
+
                     $(Query).append($("<option></option>")
                         .attr("value", key).text(key));
 
@@ -954,14 +966,14 @@ else
 
     @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "myform", @class = @Model.Form.IsDraftModeStyleClass.ToString() }))
     {
- if (@Model.Form.SurveyInfo.SurveyId != @Session["RootFormId"].ToString())
-     {
-	<div id="relatenav" style="padding-bottom:25px;">
-            <button class="exitsurvey default"   id ="Home" type="button" onclick="GoHome()" name="Home" style="width:150px; font-size:10pt; float:left; background: #00B050;"><img src="../../Content/images/root.png" style="width:16px; vertical-align: text-top;"/> Main Record</button>
-            <button class="exitsurvey default"   id ="LevelUp" type="button" onclick="GoOneLevelUp()" name="Home" style="width:150px; font-size:10pt; float:right; background: #00B050;"><img src="../../Content/images/uplevel.png" style="width:16px;  vertical-align: text-top;"/> Back</button>
+        if (@Model.Form.SurveyInfo.SurveyId != @Session["RootFormId"].ToString())
+        {
+            <div id="relatenav" style="padding-bottom:25px;">
+                <button class="exitsurvey default" id="Home" type="button" onclick="GoHome()" name="Home" style="width:150px; font-size:10pt; float:left; background: #00B050;"><img src="../../Content/images/root.png" style="width:16px; vertical-align: text-top;" /> Main Record</button>
+                <button class="exitsurvey default" id="LevelUp" type="button" onclick="GoOneLevelUp()" name="Home" style="width:150px; font-size:10pt; float:right; background: #00B050;"><img src="../../Content/images/uplevel.png" style="width:16px;  vertical-align: text-top;" /> Back</button>
 
-        </div>
-     }
+            </div>
+        }
 
         @Html.AntiForgeryToken()
 
@@ -979,15 +991,15 @@ else
         <input type="hidden" name="is_print_action" value="false" />
         <input type="hidden" name="is_goto_action" value="false" />
         <input type="hidden" id="CurrentCultureDateFormat" name="CurrentCultureDateFormat" value="@Model.CurrentCultureDateFormat" />
-         <input type="hidden" name="Get_Child_action" value="false" />
-         <input type="hidden" name="Go_Home_action" value="false" />
-         <input type="hidden" name="Click_Related_Form" value="" />
+        <input type="hidden" name="Get_Child_action" value="false" />
+        <input type="hidden" name="Go_Home_action" value="false" />
+        <input type="hidden" name="Click_Related_Form" value="" />
 
-         <input type="hidden" name="Go_One_Level_Up_action" value="false" />
-         @*<input type="hidden" id="FormHasChanged" name="Form_Has_Changed" value="@Model.Form.FormValuesHasChanged" />*@
-         <input type="hidden" id="RelateButtonWasClicked" name="Requested_View_Id" value="@HttpContext.Current.Session["RequestedViewId"]" />
-         <input type="hidden" id="RelateButtonWasClicked_Temp" name="Requested_View_Id_Temp" value="@HttpContext.Current.Session["RequestedViewId"]" />
-         <input type="hidden" id="LogoutButtoneWasClicked" name="Log_Out" value="" />
+        <input type="hidden" name="Go_One_Level_Up_action" value="false" />
+        @*<input type="hidden" id="FormHasChanged" name="Form_Has_Changed" value="@Model.Form.FormValuesHasChanged" />*@
+        <input type="hidden" id="RelateButtonWasClicked" name="Requested_View_Id" value="@HttpContext.Current.Session["RequestedViewId"]" />
+        <input type="hidden" id="RelateButtonWasClicked_Temp" name="Requested_View_Id_Temp" value="@HttpContext.Current.Session["RequestedViewId"]" />
+        <input type="hidden" id="LogoutButtoneWasClicked" name="Log_Out" value="" />
         <div id="nav">
             <div id="prev" align="left">
                 &nbsp;
@@ -1002,13 +1014,13 @@ else
 
             @if (@Model.Form.SurveyInfo.SurveyId == @Session["RootFormId"].ToString())
             {
-            <div id="savediv" align="center">
-                <button class="save" title="Click this button to finish the survey later. Use the survey link and pass code provided to return to the survey at a later time." type="button" id="Savebutton" onclick="Save();" name="Savebutton" value="save"> &nbsp; Finish later</button>
-                @if (Model.Form.CurrentPage == Model.Form.NumberOfPages)
-                {
-                    <button id="Print" class="printbottom" type="button" name="Printbutton" value="Print" style="">Print</button>
-                }
-            </div>
+                <div id="savediv" align="center">
+                    <button class="save" title="Click this button to finish the survey later. Use the survey link and pass code provided to return to the survey at a later time." type="button" id="Savebutton" onclick="Save();" name="Savebutton" value="save"> &nbsp; Finish later</button>
+                    @if (Model.Form.CurrentPage == Model.Form.NumberOfPages)
+                    {
+                        <button id="Print" class="printbottom" type="button" name="Printbutton" value="Print" style="">Print</button>
+                    }
+                </div>
 
             }
             @if (Model.Form.CurrentPage == Model.Form.NumberOfPages)
@@ -1016,9 +1028,9 @@ else
                 if (@Model.Form.SurveyInfo.SurveyId == @Session["RootFormId"].ToString())
                 {
                     <div id="next" align="right">
-    
+
                         <button class="submits" type="submit" name="Submitbutton" value="Submit">
-                        Submit Survey &nbsp;
+                            Submit Survey &nbsp;
                         </button>
 
                     </div>
@@ -1134,9 +1146,9 @@ else
 <div id="PrintdialogBox" title="Print">
 
 </div>
-            <div id="RelateNavigation" title="View Related Records" >
-        @*  @if(Model.FormResponseInfoModel != null){
-				@Html.Partial("ListResponses", Model)
-                }*@
+<div id="RelateNavigation" title="View Related Records">
+    @*  @if(Model.FormResponseInfoModel != null){
+        @Html.Partial("ListResponses", Model)
+        }*@
 
-			 </div>
+</div>

@@ -32,12 +32,13 @@ namespace Epi.Web.MVC.Models
         private string _ResponseId;
         private string _CurrentCultureDateFormat;
         private bool _IsSqlProject;
+        private Guid _OrganizationKey;
         //public SurveyInfoModel()
         //{
         //    //CultureInfo currentCulture = Thread.CurrentThread.CurrentCulture;
-            //string DateFormat = currentCulture.DateTimeFormat.ShortDatePattern;
-            //DateFormat = DateFormat.Remove(DateFormat.IndexOf("y"), 2);
-            //_CurrentCultureDateFormat = DateFormat;
+        //string DateFormat = currentCulture.DateTimeFormat.ShortDatePattern;
+        //DateFormat = DateFormat.Remove(DateFormat.IndexOf("y"), 2);
+        //_CurrentCultureDateFormat = DateFormat;
         //}
         public string SurveyId
         {
@@ -151,6 +152,13 @@ namespace Epi.Web.MVC.Models
         {
             get { return _IsSqlProject; }
             set { _IsSqlProject = value; }
+        }
+
+        
+        public Guid OrganizationKey
+        {
+            get { return _OrganizationKey; }
+            set { _OrganizationKey = value; }
         }
     }
 }

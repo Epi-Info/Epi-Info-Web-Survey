@@ -144,5 +144,6 @@ namespace Epi.Web.MVC.Models
         public string EmailFilePath { get; set; }
         public string EmailSurveyKey { get; set; }
         public bool SuccessfullySentEmail { get; set; }
+        public string OrgName { get; set; }
     }
 }

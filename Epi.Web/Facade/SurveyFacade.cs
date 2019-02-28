@@ -420,5 +420,13 @@ namespace Epi.Web.MVC.Facade
             SurveyResponseJson Implementation = new SurveyResponseJson();
             return Implementation.GetSurveyResponseJson(surveyAnswerDTO, FormsHierarchyDTOList);
         }
+        public OrganizationAccountResponse GetOrg(OrganizationAccountRequest Request) {
+            OrganizationAccountResponse Response = new OrganizationAccountResponse();
+
+            Response = _iOrgAccountRepository.GetOrg(Request);
+
+            return Response ;
+
+        }
     }
 }
