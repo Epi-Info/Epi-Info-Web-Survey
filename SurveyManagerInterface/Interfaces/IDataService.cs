@@ -78,6 +78,9 @@ namespace Epi.Web.WCF.SurveyService
         bool HasResponse(string SurveyId, string ResponseId);
         [OperationContract]
         [FaultContract(typeof(CustomFaultException))]
+        OrganizationAccountResponse GetOrganization(OrganizationAccountRequest request);
+        [OperationContract]
+        [FaultContract(typeof(CustomFaultException))]
         SourceTablesResponse GetSourceTables(SourceTablesRequest Request);
         [OperationContract]
         [FaultContract(typeof(CustomFaultException))]

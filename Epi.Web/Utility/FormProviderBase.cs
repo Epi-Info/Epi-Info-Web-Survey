@@ -988,8 +988,8 @@ namespace Epi.Web.MVC.Utility
                             XElement XElement = XElement.Parse(_SourceTableValue.ToString());
                            try{
                            // DropDownValues.Append(XElement.Attribute(CodeColumnName.ToLower()).Value.Trim());
-                            //DropDownValues.Append(XElement.Attribute(CodeColumnName.ToLower()).Value.Trim());
-                                DropDownValues.Append(XElement.Attribute(CodeColumnName).Value.Trim());
+                           DropDownValues.Append(XElement.Attribute(CodeColumnName.ToLower()).Value.Trim());
+                               // DropDownValues.Append(XElement.Attribute(CodeColumnName).Value.Trim());
                             }
                            catch (Exception ex)
                              {

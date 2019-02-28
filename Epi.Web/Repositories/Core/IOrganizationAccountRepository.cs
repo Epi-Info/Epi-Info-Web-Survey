@@ -13,5 +13,6 @@ namespace Epi.Web.MVC.Repositories.Core
         OrganizationAccountResponse GetStateList(OrganizationAccountRequest Request);
 
         OrganizationAccountResponse GetUserOrgId(OrganizationAccountRequest Request);
-        }   
+        OrganizationAccountResponse GetOrg(OrganizationAccountRequest request);
+    }   
     }
