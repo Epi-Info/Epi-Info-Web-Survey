@@ -770,6 +770,9 @@ CCE_Context.prototype.setValue = function (pName, pValue, _dateformat, NumberSep
                     $(Jquery).html(pValue);
                     cce_Symbol.Value = pValue;
                     break;
+                case "mirrorfield":
+                    
+                    break;
                 case "numeric":
                     if (NumberSep == ",") {
                         pValue = pValue.toString().replace('.', ',')
