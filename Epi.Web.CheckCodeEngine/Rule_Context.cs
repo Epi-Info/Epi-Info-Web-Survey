@@ -665,6 +665,10 @@ public System.Collections.Specialized.NameValueCollection GlobalVariables;*/
                         var.DataType = DataType.Text;
                         var.ControlType = "commandbutton";
                         break;
+                    case "15"://MirrorField
+                        var.DataType = DataType.Text;
+                        var.ControlType = "mirrorfield";                       
+                        break;
 
                     case "17"://DropDown LegalValues
                         var.DataType = DataType.Text;

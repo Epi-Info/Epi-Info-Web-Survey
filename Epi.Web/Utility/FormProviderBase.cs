@@ -94,7 +94,7 @@ namespace Epi.Web.MVC.Utility
             {
                 if (form.Fields.Keys.Contains(fieldName.ToLower()))
                 {
-                    form.Fields[fieldName].IsHighlighted = true;
+                    form.Fields[fieldName.ToLower()].IsHighlighted = true;
                 }
             }
 
@@ -110,7 +110,7 @@ namespace Epi.Web.MVC.Utility
             {
                 if (form.Fields.Keys.Contains(fieldName.ToLower()))
                 {
-                    ((InputField)form.Fields[fieldName]).Required = true;
+                    ((InputField)form.Fields[fieldName.ToLower()]).Required = true;
                 }
             }
 
@@ -163,7 +163,11 @@ namespace Epi.Web.MVC.Utility
 
                             ((NumericTextBox)field).Response = Value;
 
-                    }                  
+                    }
+                    else if (field is MirrorField)
+                    {
+                        ((MirrorField)field).Response = ((MirrorField)field).SourceFieldValue;
+                    }
                     else if (field is InputField)
                     {
                         ((InputField)field).Response = kvp.Value;
@@ -1281,7 +1285,20 @@ namespace Epi.Web.MVC.Utility
 
                         case "12": 
                             field = GetRadioList(fieldElement, 12, form);
-                            break;                       
+                            break;
+                        case "15":
+                            string sourcefieldid = fieldElement.Attribute("SourceFieldId").Value;
+                            field = GetMirrorField(fieldElement, form);
+                            if (sourcefieldid != null)
+                            {
+                                Dictionary<string, string> val = new Dictionary<string, string>();
+                                val = GetMirrorData(xdocResponse, form, Convert.ToInt32(sourcefieldid));
+                                ((MirrorField)field).SourceFieldName = val.ElementAt(0).Key;
+                                ((MirrorField)field).Response = val.ElementAt(0).Value;
+                                ((MirrorField)field).SourceFieldValue = val.ElementAt(0).Value;
+                            }
+                            break;
+
 
                         case "17":
                             string legalValues = GetDropDownValues(xdocMetadata, fieldElement.Attribute("Name").Value, fieldElement.Attribute("SourceTableName").Value, fieldElement.Attribute("CodeColumnName").Value, form.SourceTableList);
@@ -1416,7 +1433,20 @@ namespace Epi.Web.MVC.Utility
 
                         case "13":
                             field = GetCommandButton(fieldElement, form);
-                            break;                      
+                            break;
+
+                        case "15":
+                            string sourcefieldid = fieldElement.Attribute("SourceFieldId").Value;
+                            field = GetMirrorField(fieldElement, form);
+                            if (sourcefieldid != null)
+                            {
+                                Dictionary<string, string> val = new Dictionary<string, string>();
+                                val = GetMirrorData(xdocResponse, form, Convert.ToInt32(sourcefieldid));
+                                ((MirrorField)field).SourceFieldName = val.ElementAt(0).Key;
+                                ((MirrorField)field).Response = val.ElementAt(0).Value;
+                                ((MirrorField)field).SourceFieldValue = val.ElementAt(0).Value;
+                            }
+                            break;
 
                         case "17"://DropDown LegalValues
 
@@ -1711,6 +1741,63 @@ namespace Epi.Web.MVC.Utility
                 float.TryParse(ParseString, System.Globalization.NumberStyles.Any, CultureInfo.InvariantCulture, out result);
             }
             return result;
-        }                  
+        }
+
+        protected static MirrorField GetMirrorField(XElement _FieldTypeID, Form form)
+        {
+            MirrorField field = new MirrorField();
+            if (form.IsMobile)
+            {
+                field = new MobileMirrorField();
+            }
+            else
+            {
+                field = new MirrorField();
+            }
+            field.Title = _FieldTypeID.Attribute("Name").Value;
+            field.Prompt = _FieldTypeID.Attribute("PromptText").Value.Trim();
+            field.DisplayOrder = int.Parse(_FieldTypeID.Attribute("TabIndex").Value);
+            field.RequiredMessage = "This field is required";
+            field.Key = _FieldTypeID.Attribute("Name").Value;
+            field.PromptTop = form.Height * ParseDouble(_FieldTypeID.Attribute("PromptTopPositionPercentage").Value);
+            field.PromptLeft = form.Width * ParseDouble(_FieldTypeID.Attribute("PromptLeftPositionPercentage").Value);
+            field.Top = form.Height * ParseDouble(_FieldTypeID.Attribute("ControlTopPositionPercentage").Value);
+            field.Left = form.Width * ParseDouble(_FieldTypeID.Attribute("ControlLeftPositionPercentage").Value);
+            field.PromptWidth = form.Width * ParseDouble(_FieldTypeID.Attribute("ControlWidthPercentage").Value);
+            field.ControlWidth = form.Width * ParseDouble(_FieldTypeID.Attribute("ControlWidthPercentage").Value);
+            field.fontstyle = _FieldTypeID.Attribute("PromptFontStyle").Value;
+            field.fontSize = ParseDouble(_FieldTypeID.Attribute("PromptFontSize").Value);
+            field.fontfamily = _FieldTypeID.Attribute("PromptFontFamily").Value;
+            field.Required = bool.Parse(_FieldTypeID.Attribute("IsRequired").Value);
+            field.InputFieldfontstyle = _FieldTypeID.Attribute("ControlFontStyle").Value;
+            field.InputFieldfontSize = ParseDouble(_FieldTypeID.Attribute("ControlFontSize").Value);
+            field.InputFieldfontfamily = _FieldTypeID.Attribute("ControlFontFamily").Value;
+            field.ReadOnly = bool.Parse(_FieldTypeID.Attribute("IsReadOnly").Value);
+            if (!string.IsNullOrEmpty(_FieldTypeID.Attribute("MaxLength").Value))
+            {
+                field.MaxLength = int.Parse(_FieldTypeID.Attribute("MaxLength").Value);
+            }
+            field.Name = _FieldTypeID.Attribute("Name").Value;
+            SetFieldCommon(field, form);
+
+            return field;
+        }
+
+        public static Dictionary<string, string> GetMirrorData(XDocument xdocResponse, Form form, int SourceFieldId)
+        {
+            Dictionary<string, string> response = new Dictionary<string, string>();
+            foreach (var fieldElement in form.FieldsTypeIDs)
+            {
+                if (fieldElement.Attribute("FieldId").Value == SourceFieldId.ToString())
+                {
+                    response.Add(fieldElement.Attribute("Name").Value, GetControlValue(xdocResponse, fieldElement.Attribute("Name").Value));
+                    return response;
+                }
+            }
+            return response;
+        }
+
+
+
     }
 }
