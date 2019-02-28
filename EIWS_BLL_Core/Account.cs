@@ -6,6 +6,8 @@ using Epi.Web.Common.BusinessObject;
 using Epi.Web.Common.Criteria;
 using System.Configuration;
 using Epi.Web.Common.Exception;
+using Epi.Web.Common.DTO;
+
 namespace Epi.Web.BLL
     {
     public class Account
@@ -266,5 +268,12 @@ namespace Epi.Web.BLL
               string OrgId = this.AdminDao.GetAdminOrgKeyByEmail(UserEmail);
               return OrgId;
           }
+
+        public OrganizationBO GetOrganization(string OrgKey)
+        {
+            
+            OrganizationBO OrgBO = GetOrganizationByKey(OrgKey);
+            return OrgBO;
         }
+    }
     }
