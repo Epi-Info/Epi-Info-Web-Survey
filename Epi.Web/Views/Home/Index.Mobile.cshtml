@@ -88,6 +88,34 @@
              </div>
  
        }
+
+<div id="ModEnvheadrer">
+    @if (@System.Configuration.ConfigurationManager.AppSettings["ModerateEnv"] != null)
+    {
+        if (@System.Configuration.ConfigurationManager.AppSettings["ModerateEnv"].ToUpper() == "TRUE")
+        {
+            <img src="@Url.Content("~/Content/images/sign_warning.png")" alt="" style="vertical-align: middle;
+                padding-right: 10px;" />
+
+                <span style="color:#ff333d;font-weight:bold; text-align:center"> Notice to Respondents:</span>
+                <br />
+                <p style="text-align:left">
+                    This Epi Info™ Secure Web Survey system is approved for the collection of Personally Identifiable Information (PII) and Protected Health Information (PHI) as described in 45 CFR 160.103 and summarized
+                    <a id="anchor1" style="width:13px;" href="https://www.hhs.gov/hipaa/for-professionals/privacy/laws-regulations/index.html" target="_blank" title="Summary of the HIPAA Privacy Rule">
+                        Summary of the HIPAA Privacy Rule  
+                    </a>
+                    &nbsp;and
+
+                    <a id="anchor2" style="width:13px;" href="https://www.hhs.gov/sites/default/files/privacysummary.pdf" target="_blank" title="HHS Office of Civil Rights: Summary of the HIPAA Privacy Rule PDF">
+                        HHS Office of Civil Rights: Summary of the HIPAA Privacy Rule PDF
+                    </a>
+                   .&nbsp;
+                    The survey that follows *MAY* collect your personally identifiable information.  If you have any questions about how your data will be used, protected, and possibly shared, please contact the survey authors listed in the survey.
+                </p>
+        }
+    }
+</div>
+
        		 
 		@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "myform", @class = @Model.IsDraftModeStyleClass.ToString() }))
 		{ 

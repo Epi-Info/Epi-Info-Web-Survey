@@ -65,6 +65,21 @@ background-origin:content-box;*/
  /*font: 10pt;*/
 /* padding-bottom:80px; */
  }
+#ModEnvheadrer
+{ 
+text-align:center ;
+margin: 10px;
+border: 1px solid #ffca0a;
+background: #fff5c1;
+margin-bottom: 10px; 
+margin-left: 0.5em; 
+margin-right: 0.5em; 
+-moz-border-radius: 10px;
+-webkit-border-radius : 10px;
+-khtml-border-radius: 10px;
+ border-radius: 10px;
+ font-family: Segoe UI,Tahoma,Geneva,Verdana,sans-serif;
+}
 
 /*#content h2
  {
