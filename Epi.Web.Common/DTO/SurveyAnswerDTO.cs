@@ -24,6 +24,8 @@ namespace Epi.Web.Common.DTO
         [DataMember]
         public string XML { get; set; }
         [DataMember]
+        public string Json { get; set; }
+        [DataMember]
         public Guid UserPublishKey { get; set; }
 
         [DataMember]

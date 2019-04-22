@@ -65,6 +65,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Address.cs">
+      <DependentUpon>Epi.Web.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Admin.cs">
+      <DependentUpon>Epi.Web.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Canva.cs">
+      <DependentUpon>Epi.Web.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataAccessRule.cs">
+      <DependentUpon>Epi.Web.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Datasource.cs">
+      <DependentUpon>Epi.Web.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EIDatasource.cs">
+      <DependentUpon>Epi.Web.tt</DependentUpon>
+    </Compile>
     <Compile Include="EntityCacheDependencyInfoDao.cs" />
     <Compile Include="EntityAdminDao.cs" />
     <Compile Include="EntityOrganizationDao.cs" />
@@ -73,13 +91,80 @@
     <Compile Include="DataObjectFactory.cs" />
     <Compile Include="EntityDaoFactory.cs" />
     <Compile Include="EntitySurveyInfoDao.cs" />
+    <Compile Include="Epi.Web.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Epi.Web.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Epi.Web.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Epi.Web.tt</DependentUpon>
+    </Compile>
     <Compile Include="Epi.Web.Model.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Epi.Web.Model.edmx</DependentUpon>
     </Compile>
+    <Compile Include="familyset.cs">
+      <DependentUpon>Epi.Web.tt</DependentUpon>
+    </Compile>
+    <Compile Include="lk_RecordSource.cs">
+      <DependentUpon>Epi.Web.tt</DependentUpon>
+    </Compile>
+    <Compile Include="lk_Status.cs">
+      <DependentUpon>Epi.Web.tt</DependentUpon>
+    </Compile>
+    <Compile Include="lk_SurveyType.cs">
+      <DependentUpon>Epi.Web.tt</DependentUpon>
+    </Compile>
     <Compile Include="Mapper.cs" />
+    <Compile Include="Organization.cs">
+      <DependentUpon>Epi.Web.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResponseDisplaySetting.cs">
+      <DependentUpon>Epi.Web.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ResponseXml.cs">
+      <DependentUpon>Epi.Web.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Role.cs">
+      <DependentUpon>Epi.Web.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SharedCanvas.cs">
+      <DependentUpon>Epi.Web.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SourceTable.cs">
+      <DependentUpon>Epi.Web.tt</DependentUpon>
+    </Compile>
+    <Compile Include="State.cs">
+      <DependentUpon>Epi.Web.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SurveyMetaData.cs">
+      <DependentUpon>Epi.Web.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SurveyMetaDataTransform.cs">
+      <DependentUpon>Epi.Web.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SurveyMetaDataView.cs">
+      <DependentUpon>Epi.Web.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SurveyResponse.cs">
+      <DependentUpon>Epi.Web.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SurveyResponseTracking.cs">
+      <DependentUpon>Epi.Web.tt</DependentUpon>
+    </Compile>
+    <Compile Include="User.cs">
+      <DependentUpon>Epi.Web.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserOrganization.cs">
+      <DependentUpon>Epi.Web.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usp_GetErrorInfo_Result.cs">
+      <DependentUpon>Epi.Web.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config">
@@ -92,6 +177,18 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Epi.Web.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Epi.Web.Context.cs</LastGenOutput>
+      <DependentUpon>Epi.Web.Model.edmx</DependentUpon>
+    </Content>
+    <Content Include="Epi.Web.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Epi.Web.cs</LastGenOutput>
+      <DependentUpon>Epi.Web.Model.edmx</DependentUpon>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
