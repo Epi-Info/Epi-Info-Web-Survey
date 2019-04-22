@@ -225,7 +225,7 @@ namespace Epi.Web.Common.ObjectMapping
                 Status = pDTO.Status,
                 IsDraftMode = pDTO.IsDraftMode,
                 ParentRecordId = pDTO.RelateParentId
-                ,RecrodSourceId = pDTO.RecordSourceId
+                ,RecrodSourceId = pDTO.RecordSourceId,Json = pDTO.Json
             };
         }
 

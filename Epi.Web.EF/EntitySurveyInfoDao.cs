@@ -426,7 +426,7 @@ namespace Epi.Web.EF
                    SurveyInfo.IsSqlProject = SurveyInfo.IsSqlProject;                   
                    var SurveyMetaDataEntity = Mapper.Map(SurveyInfo);
                    SurveyMetaDataEntity.OrganizationId = OrganizationId;
-                   Context.AddToSurveyMetaDatas(SurveyMetaDataEntity);
+                   Context.SurveyMetaDatas.Add(SurveyMetaDataEntity);
 
                    Context.SaveChanges();
                }
@@ -616,7 +616,7 @@ namespace Epi.Web.EF
                    
                    foreach (var item in ColumnList)
                    {
-                       Context.ResponseDisplaySettings.DeleteObject(item);
+                       Context.ResponseDisplaySettings.Remove(item);
                    }
                    Context.SaveChanges();
                }
@@ -639,7 +639,7 @@ namespace Epi.Web.EF
 
                    ResponseDisplaySetting SettingEntity = Mapper.Map(FormId, i, Column);
 
-                   Context.AddToResponseDisplaySettings(SettingEntity);
+                   Context.ResponseDisplaySettings.Add(SettingEntity);
 
                    Context.SaveChanges();
                    
@@ -702,7 +702,7 @@ namespace Epi.Web.EF
                    Context.usp_AddDatasource(ConnectionString.DatasourceServerName, ConnectionString.DatabaseType, ConnectionString.InitialCatalog, ConnectionString.PersistSecurityInfo, ConnectionString.DatabaseUserID, ConnectionString.SurveyId, ConnectionString.Password);
 
                     //Context.SaveChanges();
-                    Context.AddToEIDatasources(Mapper.Map(ConnectionString));
+                    Context.EIDatasources.Add(Mapper.Map(ConnectionString));
                     Context.SaveChanges();
                 }
 

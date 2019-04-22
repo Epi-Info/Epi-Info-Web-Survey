@@ -178,7 +178,7 @@ namespace Epi.Web.EF
             using (var Context = DataObjectFactory.CreateContext())
             {
                 Organization OrganizationEntity = Mapper.ToEF(Organization);
-                Context.AddToOrganizations(OrganizationEntity);
+                Context.Organizations.Add(OrganizationEntity);
 
                 Context.SaveChanges();
             }

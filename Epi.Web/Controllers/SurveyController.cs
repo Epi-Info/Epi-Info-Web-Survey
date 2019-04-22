@@ -654,6 +654,8 @@ namespace Epi.Web.MVC.Controllers
                                 SurveyAnswer.IsDraftMode = surveyInfoModel.IsDraftMode;
                                 IsSubmited = true;//survey has been submited this will change the survey status to 3 - Completed
                                 UpdateModel(form);
+                                var json = _isurveyFacade.GetSurveyResponseJson(SurveyAnswer, FormsHierarchy);
+                                SurveyAnswer.Json = json;
                                 _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId, form, SurveyAnswer, IsSubmited, IsSaved, PageNumber);
                                 //FormsAuthentication.SignOut();
 
@@ -663,7 +665,7 @@ namespace Epi.Web.MVC.Controllers
                                 {
                                     drawername = surveyInfoModel.OrganizationName;
                                     nodename = surveyInfoModel.SurveyName + System.DateTime.Now.ToFileTime();
-                                    var json = _isurveyFacade.GetSurveyResponseJson(SurveyAnswer, FormsHierarchy);
+                                     
 
                                     using (var _client = new HttpClient())
                                     {
@@ -707,7 +709,7 @@ namespace Epi.Web.MVC.Controllers
                                     var Collection = (surveyInfoModel.SurveyName).Replace("'", "").Replace(" ","_") + CollectionUniqueCode; // collection name can have space 
                                     var DocumentId = SurveyAnswer.ResponseId;
                                     FormsHierarchy[0].SurveyInfo.OrganizationKey = surveyInfoModel.OrganizationKey;
-                                    var json = _isurveyFacade.GetSurveyResponseJson(SurveyAnswer, FormsHierarchy);
+                                   
                                    
                                     using (var _client = new HttpClient())
                                     {

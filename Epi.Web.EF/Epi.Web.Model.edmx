@@ -95,7 +95,7 @@
           <Property Name="Password" Type="varchar" MaxLength="200" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'EIWeb_EWE_QA.dbo.familyset' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'EIWeb_EIWS_QA.dbo.familyset' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="familyset">
           <Key>
             <PropertyRef Name="SurveyId" />
@@ -253,7 +253,7 @@ warning 6002: The table/view 'EIWeb_EWE_QA.dbo.familyset' does not have a primar
           <Property Name="OrganizationId" Type="int" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'EIWeb_EWE_QA.dbo.SurveyMetaDataTransform' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'EIWeb_EIWS_QA.dbo.SurveyMetaDataTransform' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="SurveyMetaDataTransform">
           <Key>
             <PropertyRef Name="SurveyId" />
@@ -302,6 +302,8 @@ warning 6002: The table/view 'EIWeb_EWE_QA.dbo.SurveyMetaDataTransform' does not
           <Property Name="RelateParentId" Type="uniqueidentifier" />
           <Property Name="RecordSourceId" Type="int" />
           <Property Name="OrganizationId" Type="int" />
+          <Property Name="ResponseJsonSize" Type="bigint" />
+          <Property Name="ResponseJson" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="SurveyResponseTracking">
           <Key>
@@ -1402,6 +1404,8 @@ FROM [dbo].[SurveyMetaDataTransform] AS [SurveyMetaDataTransform]</DefiningQuery
           <Property Name="OrganizationId" Type="Int32" />
           <NavigationProperty Name="Organization" Relationship="EIWSModel.FK_SurveyResponse_Organization" FromRole="SurveyResponse" ToRole="Organization" />
           <NavigationProperty Name="lk_RecordSource" Relationship="EIWSModel.FK_SurveyResponse_lk_RecordSource" FromRole="SurveyResponse" ToRole="lk_RecordSource" />
+          <Property Name="ResponseJsonSize" Type="Int64" />
+          <Property Name="ResponseJson" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_SurveyResponse_lk_Status">
           <End Type="EIWSModel.lk_Status" Role="lk_Status" Multiplicity="1" />
@@ -1909,6 +1913,8 @@ FROM [dbo].[SurveyMetaDataTransform] AS [SurveyMetaDataTransform]</DefiningQuery
           <EntitySetMapping Name="SurveyResponses">
             <EntityTypeMapping TypeName="EIWSModel.SurveyResponse">
               <MappingFragment StoreEntitySet="SurveyResponse">
+                <ScalarProperty Name="ResponseJson" ColumnName="ResponseJson" />
+                <ScalarProperty Name="ResponseJsonSize" ColumnName="ResponseJsonSize" />
                 <ScalarProperty Name="OrganizationId" ColumnName="OrganizationId" />
                 <ScalarProperty Name="RecordSourceId" ColumnName="RecordSourceId" />
                 <ScalarProperty Name="RelateParentId" ColumnName="RelateParentId" />
@@ -2125,7 +2131,7 @@ FROM [dbo].[SurveyMetaDataTransform] AS [SurveyMetaDataTransform]</DefiningQuery
         <DesignerProperty Name="EnablePluralization" Value="True" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
         <DesignerProperty Name="UseLegacyProvider" Value="True" />
-        <DesignerProperty Name="CodeGenerationStrategy" Value="Default" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->

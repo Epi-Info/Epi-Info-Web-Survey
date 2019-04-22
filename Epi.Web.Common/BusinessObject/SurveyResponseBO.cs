@@ -21,6 +21,7 @@ namespace Epi.Web.Common.BusinessObject
         public DateTime? DateCompleted { get; set; }
         public int Status { get; set; }
         public string XML { get; set; }
+        public string Json { get; set; }
         public long TemplateXMLSize { get; set; }
         public DateTime DateCreated { get; set; }
         public bool IsDraftMode { get; set; }
