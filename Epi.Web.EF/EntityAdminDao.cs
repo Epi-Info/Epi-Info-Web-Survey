@@ -95,7 +95,7 @@ namespace Epi.Web.EF
 
 
 
-                Context.AddToAdmins(AdminEntity);
+                Context.Admins.Add(AdminEntity);
 
                 Context.SaveChanges();
 
@@ -148,7 +148,7 @@ namespace Epi.Web.EF
 
 
 
-            Context.AddToAddresses(AddressEntity);
+            Context.Addresses.Add(AddressEntity);
 
             Context.SaveChanges();
 
@@ -168,7 +168,7 @@ namespace Epi.Web.EF
 
 
 
-                Context.AddToAdmins(AdminEntity);
+                Context.Admins.Add(AdminEntity);
 
                 Context.SaveChanges();
 

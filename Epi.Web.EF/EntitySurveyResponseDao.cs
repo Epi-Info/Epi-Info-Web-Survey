@@ -350,7 +350,7 @@ namespace Epi.Web.EF
                 {
 
                 }
-                Context.AddToSurveyResponses(SurveyResponseEntity);
+                Context.SurveyResponses.Add(SurveyResponseEntity);
                
                 Context.SaveChanges();
             }
@@ -377,7 +377,7 @@ namespace Epi.Web.EF
                 using (var Context = DataObjectFactory.CreateContext())
                 {
                     SurveyResponse SurveyResponseEntity = Mapper.ToEF(SurveyResponse);                   
-                    Context.AddToSurveyResponses(SurveyResponseEntity);
+                    Context.SurveyResponses.Add(SurveyResponseEntity);
                     Context.SaveChanges();
                 }
             }
@@ -418,8 +418,12 @@ namespace Epi.Web.EF
                 DataRow.DateUpdated = DateTime.Now;
              //   DataRow.ResponsePasscode = SurveyResponse.ResponsePassCode;
                 DataRow.IsDraftMode = SurveyResponse.IsDraftMode;
-                DataRow.ResponseXMLSize = RemoveWhitespace(SurveyResponse.XML).Length; 
-                Context.SaveChanges();
+                DataRow.ResponseXMLSize = RemoveWhitespace(SurveyResponse.XML).Length;
+                DataRow.ResponseJson = SurveyResponse.Json;
+                if (!string.IsNullOrEmpty(SurveyResponse.Json)) {
+                DataRow.ResponseJsonSize = RemoveWhitespace(SurveyResponse.Json).Length;
+                    }
+                    Context.SaveChanges();
             }
             }
             catch (Exception ex)
@@ -941,7 +945,7 @@ namespace Epi.Web.EF
                     SurveyResponse SurveyResponseEntity = Mapper.ToEF(SurveyResponse);
                     //User User = Context.Users.FirstOrDefault(x => x.UserID == SurveyResponse.UserId);
                     //SurveyResponseEntity.Users.Add(User);
-                    Context.AddToSurveyResponses(SurveyResponseEntity);
+                    Context.SurveyResponses.Add(SurveyResponseEntity);
 
                     Context.SaveChanges();
                 }
@@ -1164,7 +1168,7 @@ namespace Epi.Web.EF
                 using (var Context = DataObjectFactory.CreateContext())
                 {
                     ResponseXml ResponseXml = Mapper.ToEF(ResponseXmlBO);
-                    Context.AddToResponseXmls(ResponseXml);
+                    Context.ResponseXmls.Add(ResponseXml);
 
                     //Update Status
                     var Query = from response in Context.SurveyResponses

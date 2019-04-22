@@ -185,11 +185,12 @@ namespace Epi.Web.MVC.Utility
 
                 surveyAnswerRequest.SurveyAnswerList[0].Status = 3;
                 surveyAnswerRequest.SurveyAnswerList[0].DateCompleted = DateTime.Now;
+                surveyAnswerRequest.SurveyAnswerList[0].Json = surveyAnswerResponse.SurveyResponseList[0].Json;
                // Xdoc.Root.Attribute("LastPageVisited").Remove();
                // Xdoc.Root.Attribute("HiddenFieldsList").Remove();
                // Xdoc.Root.Attribute("HighlightedFieldsList").Remove();
-                //Xdoc.Root.Attribute("DisabledFieldsList").Remove();
-                //Xdoc.Root.Attribute("RequiredFieldsList").Remove();
+               //Xdoc.Root.Attribute("DisabledFieldsList").Remove();
+               //Xdoc.Root.Attribute("RequiredFieldsList").Remove();
                 Xdoc.Root.Attribute("RecordBeforeFlag").Remove();
                 //RemovePageNumAtt(Xdoc);
             }
