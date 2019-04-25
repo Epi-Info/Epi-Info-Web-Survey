@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="7c1140c0-c197-4563-ba3e-720528554631" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="034d83c6-2c2d-4371-a97d-fb02a87da397" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
     <EnableDataBinding>true</EnableDataBinding>
     <ExcludedTypes />
     <ImportXmlTypes>false</ImportXmlTypes>
@@ -18,17 +19,17 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost:22587/Epi.Web.ServiceHost/SurveyDataService.svc" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://tephinetepiinfo.cloudapp.net/EIWS_QA/SurveyDataService.svc" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="SurveyDataService6.xsd" MetadataType="Schema" ID="f5be7723-8c30-4f10-8fed-2eb3f597409e" SourceId="1" SourceUrl="http://localhost:22587/Epi.Web.ServiceHost/SurveyDataService.svc?xsd=xsd3" />
-    <MetadataFile FileName="SurveyDataService61.xsd" MetadataType="Schema" ID="133f231d-1022-400c-9e1c-b9261a5d4227" SourceId="1" SourceUrl="http://localhost:22587/Epi.Web.ServiceHost/SurveyDataService.svc?xsd=xsd2" />
-    <MetadataFile FileName="DataService1.wsdl" MetadataType="Wsdl" ID="827261b4-6ce5-40c9-924c-f136ac55f812" SourceId="1" SourceUrl="http://localhost:22587/Epi.Web.ServiceHost/SurveyDataService.svc?wsdl" />
-    <MetadataFile FileName="SurveyDataService62.xsd" MetadataType="Schema" ID="94b3239b-e6ca-4dc1-bbd9-a4dd49b0637a" SourceId="1" SourceUrl="http://localhost:22587/Epi.Web.ServiceHost/SurveyDataService.svc?xsd=xsd0" />
-    <MetadataFile FileName="SurveyDataService63.xsd" MetadataType="Schema" ID="61f392da-a1b1-4112-986f-6cf3bccc38ff" SourceId="1" SourceUrl="http://localhost:22587/Epi.Web.ServiceHost/SurveyDataService.svc?xsd=xsd1" />
-    <MetadataFile FileName="SurveyDataService64.xsd" MetadataType="Schema" ID="7c3e2623-d200-43c5-a5c1-5122cc5136d1" SourceId="1" SourceUrl="http://localhost:22587/Epi.Web.ServiceHost/SurveyDataService.svc?xsd=xsd5" />
-    <MetadataFile FileName="SurveyDataService65.xsd" MetadataType="Schema" ID="54372bfc-22ad-4c49-9424-223ed0ff439e" SourceId="1" SourceUrl="http://localhost:22587/Epi.Web.ServiceHost/SurveyDataService.svc?xsd=xsd4" />
-    <MetadataFile FileName="SurveyDataService1.disco" MetadataType="Disco" ID="14d7c904-0045-409f-a410-06db363fd474" SourceId="1" SourceUrl="http://localhost:22587/Epi.Web.ServiceHost/SurveyDataService.svc?disco" />
+    <MetadataFile FileName="DataService.wsdl" MetadataType="Wsdl" ID="2b6b3953-c9aa-41a1-a22f-5df2eb4b74cb" SourceId="1" SourceUrl="http://tephinetepiinfo.cloudapp.net/EIWS_QA/SurveyDataService.svc?wsdl" />
+    <MetadataFile FileName="SurveyDataService.xsd" MetadataType="Schema" ID="58d839f3-3fb0-4b28-a492-3ed161189083" SourceId="1" SourceUrl="http://tephinetepiinfo.cloudapp.net/EIWS_QA/SurveyDataService.svc?xsd=xsd5" />
+    <MetadataFile FileName="SurveyDataService1.xsd" MetadataType="Schema" ID="e289d5eb-8e14-4aec-af17-baba269f7e61" SourceId="1" SourceUrl="http://tephinetepiinfo.cloudapp.net/EIWS_QA/SurveyDataService.svc?xsd=xsd4" />
+    <MetadataFile FileName="SurveyDataService2.xsd" MetadataType="Schema" ID="5d34518b-bb38-46da-a64b-ed0d1beb2198" SourceId="1" SourceUrl="http://tephinetepiinfo.cloudapp.net/EIWS_QA/SurveyDataService.svc?xsd=xsd1" />
+    <MetadataFile FileName="SurveyDataService3.xsd" MetadataType="Schema" ID="079bf930-c673-49a5-a6b0-5cb83ba9a250" SourceId="1" SourceUrl="http://tephinetepiinfo.cloudapp.net/EIWS_QA/SurveyDataService.svc?xsd=xsd0" />
+    <MetadataFile FileName="SurveyDataService4.xsd" MetadataType="Schema" ID="85a77ac3-073a-475a-9041-e09ce4e4a435" SourceId="1" SourceUrl="http://tephinetepiinfo.cloudapp.net/EIWS_QA/SurveyDataService.svc?xsd=xsd3" />
+    <MetadataFile FileName="SurveyDataService5.xsd" MetadataType="Schema" ID="cb2a9fdc-6d40-48c7-9edb-c9c1a63f94e8" SourceId="1" SourceUrl="http://tephinetepiinfo.cloudapp.net/EIWS_QA/SurveyDataService.svc?xsd=xsd2" />
+    <MetadataFile FileName="SurveyDataService.disco" MetadataType="Disco" ID="1bd19d56-fb7a-4e72-9994-defd9d90c1d3" SourceId="1" SourceUrl="http://tephinetepiinfo.cloudapp.net/EIWS_QA/SurveyDataService.svc?disco" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
