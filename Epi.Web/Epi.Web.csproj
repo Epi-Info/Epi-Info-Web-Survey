@@ -271,11 +271,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="Service References\SurveyManagerServiceV4\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
     <Compile Include="Utility\CacheUtility.cs" />
     <Compile Include="Utility\FormProviderBase.cs" />
     <Compile Include="Utility\ExceptionMessage.cs" />
@@ -520,6 +515,7 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Properties\DataSources\Epi.Web.Common.Message.FormsHierarchyResponse.datasource" />
     <Content Include="Content\Text\EmailList.xlsx" />
+    <Content Include="Properties\DataSources\Epi.Web.Common.Message.FormsHierarchyResponse2.datasource" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
@@ -584,82 +580,13 @@
     <None Include="Properties\PublishProfiles\EIWSSandbox.pubxml" />
     <None Include="Properties\PublishProfiles\Profile1.pubxml" />
     <Content Include="Scripts\jquery-1.9.1.min.map" />
-    <None Include="Service References\DataServiceClient\DataService1.wsdl" />
-    <Content Include="Service References\DataServiceClient\Epi.Web.MVC.DataServiceClient.CacheDependencyResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\DataServiceClient\Epi.Web.MVC.DataServiceClient.FormsHierarchyResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\DataServiceClient\Epi.Web.MVC.DataServiceClient.OrganizationAccountResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\DataServiceClient\Epi.Web.MVC.DataServiceClient.SourceTablesResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\DataServiceClient\Epi.Web.MVC.DataServiceClient.SurveyAnswerResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\DataServiceClient\Epi.Web.MVC.DataServiceClient.SurveyControlsResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\DataServiceClient\Epi.Web.MVC.DataServiceClient.SurveyInfoResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\DataServiceClient\Epi.Web.MVC.DataServiceClient.UserAuthenticationResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <None Include="Service References\DataServiceClient\SurveyDataService6.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\DataServiceClient\SurveyDataService61.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\DataServiceClient\SurveyDataService62.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\DataServiceClient\SurveyDataService63.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\DataServiceClient\SurveyDataService64.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\DataServiceClient\SurveyDataService65.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <Content Include="Service References\SurveyManagerServiceV4\Epi.Web.MVC.SurveyManagerServiceV4.OrganizationResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\SurveyManagerServiceV4\Epi.Web.MVC.SurveyManagerServiceV4.PreFilledAnswerResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\SurveyManagerServiceV4\Epi.Web.MVC.SurveyManagerServiceV4.PublishResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\SurveyManagerServiceV4\Epi.Web.MVC.SurveyManagerServiceV4.SurveyAnswerResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\SurveyManagerServiceV4\Epi.Web.MVC.SurveyManagerServiceV4.SurveyControlsResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\SurveyManagerServiceV4\Epi.Web.MVC.SurveyManagerServiceV4.SurveyInfoResponse.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <None Include="Service References\SurveyManagerServiceV4\ManagerServiceV4.wsdl" />
-    <None Include="Service References\SurveyManagerServiceV4\SurveyManagerServiceV4.disco" />
-    <None Include="Service References\SurveyManagerServiceV4\configuration91.svcinfo" />
-    <None Include="Service References\SurveyManagerServiceV4\configuration.svcinfo" />
-    <None Include="Service References\SurveyManagerServiceV4\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
+    <None Include="Service References\DataServiceClient\SurveyDataService.disco" />
     <None Include="Service References\DataServiceClient\configuration91.svcinfo" />
     <None Include="Service References\DataServiceClient\configuration.svcinfo" />
     <None Include="Service References\DataServiceClient\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <None Include="Service References\DataServiceClient\SurveyDataService1.disco" />
     <Content Include="SurveyDataService.svc" />
     <Content Include="SurveyManagerService.svc" />
     <Content Include="SurveyManagerServiceV2.svc" />
@@ -707,27 +634,28 @@
     <Content Include="Views\Print\Index.cshtml" />
     <Content Include="Views\Account\AccessDenied.cshtml" />
     <Content Include="Views\SurveyManager\Index.cshtml" />
-    <None Include="Service References\SurveyManagerServiceV4\SurveyManagerServiceV4.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\SurveyManagerServiceV4\SurveyManagerServiceV41.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\SurveyManagerServiceV4\SurveyManagerServiceV42.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\SurveyManagerServiceV4\SurveyManagerServiceV43.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\SurveyManagerServiceV4\SurveyManagerServiceV44.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\SurveyManagerServiceV4\SurveyManagerServiceV45.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <Content Include="Views\FormResponse\Index.Mobile.cshtml" />
     <Content Include="Views\Survey\ListResponses.cshtml" />
     <Content Include="Views\Shared\_LayoutPage2.cshtml" />
+    <None Include="Service References\DataServiceClient\DataService.wsdl" />
+    <None Include="Service References\DataServiceClient\SurveyDataService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DataServiceClient\SurveyDataService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DataServiceClient\SurveyDataService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DataServiceClient\SurveyDataService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DataServiceClient\SurveyDataService4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DataServiceClient\SurveyDataService5.xsd">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\" />
@@ -739,10 +667,6 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadataStorage Include="Service References\DataServiceClient\" />
-    <WCFMetadataStorage Include="Service References\SurveyManagerServiceV4\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EIWS_BLL_Core\Epi.Web.BLL.csproj">
@@ -770,9 +694,12 @@
       <Name>Epi.Web.WCF.SurveyService</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\DataServiceClient\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
-    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildProgramFiles32)\MSBuild\Microsoft\VisualStudio\v14.0</VSToolsPath>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
