@@ -10,7 +10,7 @@ namespace Epi.Web.Common.Json
     {
         public ResponseDetail()
         {
-            ResponseQA = new Dictionary<string, string>();
+            ResponseQA = new Dictionary<string, object>();
             ChildResponseDetailList = new List<ResponseDetail>();
         }
 
@@ -20,7 +20,7 @@ namespace Epi.Web.Common.Json
         public string ParentResponseId { get; set; }
         public string ParentFormId { get; set; }
         public string OKey { get; set; }
-        public Dictionary<string, string> ResponseQA { get; set; }
+        public Dictionary<string, object> ResponseQA { get; set; }
 
         public List<ResponseDetail> ChildResponseDetailList { get; set; }
     }
