@@ -415,10 +415,10 @@ namespace Epi.Web.MVC.Facade
             _iSurveyAnswerRepository.SaveSurveyAnswer(  pRequest);
 }
 
-        public string GetSurveyResponseJson(Epi.Web.Common.DTO.SurveyAnswerDTO surveyAnswerDTO, List<FormsHierarchyDTO> FormsHierarchyDTOList)
+        public string GetSurveyResponseJson(Epi.Web.Common.DTO.SurveyAnswerDTO surveyAnswerDTO, List<FormsHierarchyDTO> FormsHierarchyDTOList, SurveyControlsResponse List)
         {
             SurveyResponseJson Implementation = new SurveyResponseJson();
-            return Implementation.GetSurveyResponseJson(surveyAnswerDTO, FormsHierarchyDTOList);
+            return Implementation.GetSurveyResponseJson(surveyAnswerDTO, FormsHierarchyDTOList,List);
         }
         public OrganizationAccountResponse GetOrg(OrganizationAccountRequest Request) {
             OrganizationAccountResponse Response = new OrganizationAccountResponse();

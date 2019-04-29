@@ -1,4 +1,5 @@
 ﻿using Epi.Web.Common.DTO;
+using Epi.Web.Common.Message;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -12,13 +13,13 @@ namespace Epi.Web.Common.Json
    public class SurveyResponseJson
     {
 
-        public string GetSurveyResponseJson(Epi.Web.Common.DTO.SurveyAnswerDTO surveyAnswer, List<FormsHierarchyDTO> FormsHierarchyDTOList)
+        public string GetSurveyResponseJson(Epi.Web.Common.DTO.SurveyAnswerDTO surveyAnswer, List<FormsHierarchyDTO> FormsHierarchyDTOList, SurveyControlsResponse List)
         {
             ResponseDetail Responsedetail = new ResponseDetail();
 
             var ChildFormsHierarchy = FormsHierarchyDTOList.Where(x => x.IsRoot == false);
-            Dictionary<string, string> ResponseQA = new Dictionary<string, string>();
-            Dictionary<string, string> RootResponseQA = new Dictionary<string, string>();
+            Dictionary<string, object> ResponseQA = new Dictionary<string, object>();
+            Dictionary<string, object> RootResponseQA = new Dictionary<string, object>();
 
             XDocument xdoc = XDocument.Parse(surveyAnswer.XML);
             int NumberOfPages = GetNumberOfPags(surveyAnswer.XML);           
@@ -40,7 +41,21 @@ namespace Epi.Web.Common.Json
                                          select _FieldTypeID1;
                 foreach (var item in _PageFieldsTypeIDs)
                 {
-                    RootResponseQA.Add(item.Attribute("QuestionName").Value, item.Value);
+                    string ControlId = item.Attribute("QuestionName").Value;
+                    bool IsCheckBox = (bool)List.SurveyControlList.Any(x => x.ControlId == ControlId && x.ControlType == "CheckBox");                   
+                    bool ISNumericTextBox = (bool)List.SurveyControlList.Any(x => x.ControlId == ControlId && x.ControlType == "NumericTextBox");
+                    if (ISNumericTextBox && item.Value!=null)
+                        RootResponseQA.Add(item.Attribute("QuestionName").Value, Convert.ToInt32(item.Value));
+                    else if (IsCheckBox)
+                    {
+                        bool Ischecked = false;
+                        if (item.Value == "Yes")
+                            RootResponseQA.Add(item.Attribute("QuestionName").Value, !Ischecked);
+                        else
+                            RootResponseQA.Add(item.Attribute("QuestionName").Value, Ischecked);
+                    }
+                    else
+                        RootResponseQA.Add(item.Attribute("QuestionName").Value, item.Value);
                 }
 
             }
@@ -56,7 +71,7 @@ namespace Epi.Web.Common.Json
                     childresponseDetail.ResponseId = childresponse.ResponseId;
                     childresponseDetail.ParentResponseId = childresponse.RelateParentId;
                     childresponseDetail.ParentFormId = childresponse.ParentRecordId;
-                    ResponseQA = new Dictionary<string, string>();
+                    ResponseQA = new Dictionary<string, object>();
                     ResponseQA.Add("FKEY", childresponse.RelateParentId);
                     ResponseQA.Add("ResponseId", childresponse.ResponseId);
 
@@ -79,6 +94,21 @@ namespace Epi.Web.Common.Json
                         {
                             try
                             {
+                                string ControlId = item.Attribute("QuestionName").Value;
+                                bool IsCheckBox = (bool)List.SurveyControlList.Any(x => x.ControlId == ControlId && x.ControlType == "CheckBox");
+                                bool ISNumericTextBox = (bool)List.SurveyControlList.Any(x => x.ControlId == ControlId && x.ControlType == "NumericTextBox");
+                                if (ISNumericTextBox && item.Value != null)
+                                    ResponseQA.Add(item.Attribute("QuestionName").Value, Convert.ToInt32(item.Value));
+                                else if (IsCheckBox)
+                                {
+                                    bool Ischecked = false;
+                                    if (item.Value == "Yes")
+                                        ResponseQA.Add(item.Attribute("QuestionName").Value, !Ischecked);
+                                    else
+                                        ResponseQA.Add(item.Attribute("QuestionName").Value, Ischecked);
+                                }
+                                else
+                                    ResponseQA.Add(item.Attribute("QuestionName").Value, item.Value);
                                 ResponseQA.Add(item.Attribute("QuestionName").Value, item.Value);
                             }
                             catch (System.Exception ex)
@@ -98,6 +128,9 @@ namespace Epi.Web.Common.Json
 
             return json;
         }
+
+
+
 
 
         public static int GetNumberOfPags(string ResponseXml)
