@@ -3,6 +3,7 @@ using Epi.Web.Common.Message;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -44,8 +45,14 @@ namespace Epi.Web.Common.Json
                     string ControlId = item.Attribute("QuestionName").Value;
                     bool IsCheckBox = (bool)List.SurveyControlList.Any(x => x.ControlId == ControlId && x.ControlType == "CheckBox");                   
                     bool ISNumericTextBox = (bool)List.SurveyControlList.Any(x => x.ControlId == ControlId && x.ControlType == "NumericTextBox");
-                    if (ISNumericTextBox && item.Value!=null)
-                        RootResponseQA.Add(item.Attribute("QuestionName").Value, Convert.ToInt32(item.Value));
+                    if (ISNumericTextBox && item.Value != null)
+                    {
+                        string uiSep = CultureInfo.CurrentUICulture.NumberFormat.NumberDecimalSeparator;
+                        if (item.Value.Contains(uiSep))                           
+                            RootResponseQA.Add(item.Attribute("QuestionName").Value, Convert.ToDecimal(item.Value)); 
+                        else
+                            RootResponseQA.Add(item.Attribute("QuestionName").Value, Convert.ToInt32(item.Value));
+                    }
                     else if (IsCheckBox)
                     {
                         bool Ischecked = false;
@@ -98,7 +105,13 @@ namespace Epi.Web.Common.Json
                                 bool IsCheckBox = (bool)List.SurveyControlList.Any(x => x.ControlId == ControlId && x.ControlType == "CheckBox");
                                 bool ISNumericTextBox = (bool)List.SurveyControlList.Any(x => x.ControlId == ControlId && x.ControlType == "NumericTextBox");
                                 if (ISNumericTextBox && item.Value != null)
+                                {
+                                    string uiSep = CultureInfo.CurrentUICulture.NumberFormat.NumberDecimalSeparator;
+                                    if (item.Value.Contains(uiSep))
+                                        ResponseQA.Add(item.Attribute("QuestionName").Value, Convert.ToDecimal(item.Value));
+                                    else
                                     ResponseQA.Add(item.Attribute("QuestionName").Value, Convert.ToInt32(item.Value));
+                                }
                                 else if (IsCheckBox)
                                 {
                                     bool Ischecked = false;
