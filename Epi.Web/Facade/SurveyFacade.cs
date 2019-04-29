@@ -428,5 +428,12 @@ namespace Epi.Web.MVC.Facade
             return Response ;
 
         }
+        public bool SetJsonColumnAll(string orgid) {
+
+           bool result = _iSurveyAnswerRepository.SetJsonColumnAll(orgid);
+
+            return result;
+
+        }
     }
 }
