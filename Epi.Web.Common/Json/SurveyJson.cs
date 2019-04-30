@@ -14,7 +14,7 @@ namespace Epi.Web.Common.Json
    public class SurveyResponseJson
     {
 
-        public string GetSurveyResponseJson(Epi.Web.Common.DTO.SurveyAnswerDTO surveyAnswer, List<FormsHierarchyDTO> FormsHierarchyDTOList, SurveyControlsResponse List)
+        public string GetSurveyResponseJson(Epi.Web.Common.DTO.SurveyAnswerDTO surveyAnswer, List<FormsHierarchyDTO> FormsHierarchyDTOList, Dictionary<string, SurveyControlsResponse> List)
         {
             ResponseDetail Responsedetail = new ResponseDetail();
 
@@ -27,6 +27,8 @@ namespace Epi.Web.Common.Json
 
             Responsedetail.ResponseId = surveyAnswer.ResponseId;
             Responsedetail.FormId = surveyAnswer.SurveyId;
+            SurveyControlsResponse surveylist= List.Where(x => x.Key == surveyAnswer.SurveyId).Select(d => d.Value).Single();
+            
             Responsedetail.OKey = FormsHierarchyDTOList[0].SurveyInfo.OrganizationKey.ToString().Substring(0, 8);
             for (int i = 1; NumberOfPages + 1 > i; i++)
             {
@@ -43,9 +45,9 @@ namespace Epi.Web.Common.Json
                 foreach (var item in _PageFieldsTypeIDs)
                 {
                     string ControlId = item.Attribute("QuestionName").Value;
-                    bool IsCheckBox = (bool)List.SurveyControlList.Any(x => x.ControlId == ControlId && x.ControlType == "CheckBox");                   
-                    bool ISNumericTextBox = (bool)List.SurveyControlList.Any(x => x.ControlId == ControlId && x.ControlType == "NumericTextBox");
-                    if (ISNumericTextBox && item.Value != null)
+                    bool IsCheckBox = (bool)surveylist.SurveyControlList.Any(x => x.ControlId == ControlId && x.ControlType == "CheckBox");                   
+                    bool ISNumericTextBox = (bool)surveylist.SurveyControlList.Any(x => x.ControlId == ControlId && x.ControlType == "NumericTextBox");
+                    if (ISNumericTextBox && !string.IsNullOrEmpty(item.Value))
                     {
                         string uiSep = CultureInfo.CurrentUICulture.NumberFormat.NumberDecimalSeparator;
                         if (item.Value.Contains(uiSep))                           
@@ -73,6 +75,9 @@ namespace Epi.Web.Common.Json
                 List<SurveyAnswerDTO> childResponses = child.ResponseIds;
                 foreach (var childresponse in childResponses)
                 {
+                  //  SurveyControlsRequest Request = new SurveyControlsRequest();
+                   // Request.SurveyId = childresponse.SurveyId;
+                    //SurveyControlsResponse ChildList = _isurveyFacade.GetSurveyControlList(Request);
                     ResponseDetail childresponseDetail = new ResponseDetail();
                     childresponseDetail.FormId = childresponse.SurveyId;
                     childresponseDetail.ResponseId = childresponse.ResponseId;
@@ -81,6 +86,7 @@ namespace Epi.Web.Common.Json
                     ResponseQA = new Dictionary<string, object>();
                     ResponseQA.Add("FKEY", childresponse.RelateParentId);
                     ResponseQA.Add("ResponseId", childresponse.ResponseId);
+                    var childsurveylist = List.Where(x => x.Key == childresponse.SurveyId).Select(d => d.Value).Single();
 
                     XDocument xdochild = XDocument.Parse(childresponse.XML);
                     int NumberOfPagesChild = GetNumberOfPags(childresponse.XML);
@@ -102,9 +108,9 @@ namespace Epi.Web.Common.Json
                             try
                             {
                                 string ControlId = item.Attribute("QuestionName").Value;
-                                bool IsCheckBox = (bool)List.SurveyControlList.Any(x => x.ControlId == ControlId && x.ControlType == "CheckBox");
-                                bool ISNumericTextBox = (bool)List.SurveyControlList.Any(x => x.ControlId == ControlId && x.ControlType == "NumericTextBox");
-                                if (ISNumericTextBox && item.Value != null)
+                                bool IsCheckBox = (bool)childsurveylist.SurveyControlList.Any(x => x.ControlId == ControlId && x.ControlType == "CheckBox");
+                                bool ISNumericTextBox = (bool)childsurveylist.SurveyControlList.Any(x => x.ControlId == ControlId && x.ControlType == "NumericTextBox");
+                                if (ISNumericTextBox && !string.IsNullOrEmpty(item.Value))
                                 {
                                     string uiSep = CultureInfo.CurrentUICulture.NumberFormat.NumberDecimalSeparator;
                                     if (item.Value.Contains(uiSep))
