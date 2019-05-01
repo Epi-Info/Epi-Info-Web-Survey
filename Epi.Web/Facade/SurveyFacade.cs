@@ -415,7 +415,7 @@ namespace Epi.Web.MVC.Facade
             _iSurveyAnswerRepository.SaveSurveyAnswer(  pRequest);
 }
 
-        public string GetSurveyResponseJson(Epi.Web.Common.DTO.SurveyAnswerDTO surveyAnswerDTO, List<FormsHierarchyDTO> FormsHierarchyDTOList, SurveyControlsResponse List)
+        public string GetSurveyResponseJson(Epi.Web.Common.DTO.SurveyAnswerDTO surveyAnswerDTO, List<FormsHierarchyDTO> FormsHierarchyDTOList, Dictionary<string, SurveyControlsResponse> List)
         {
             SurveyResponseJson Implementation = new SurveyResponseJson();
             return Implementation.GetSurveyResponseJson(surveyAnswerDTO, FormsHierarchyDTOList,List);
@@ -430,7 +430,7 @@ namespace Epi.Web.MVC.Facade
         }
         public bool SetJsonColumnAll(string orgid) {
 
-           bool result = _iSurveyAnswerRepository.SetJsonColumnAll(orgid);
+            bool result = true; //_iSurveyAnswerRepository.SetJsonColumnAll(orgid);
 
             return result;
 

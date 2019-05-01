@@ -654,12 +654,20 @@ namespace Epi.Web.MVC.Controllers
                                 SurveyAnswer.IsDraftMode = surveyInfoModel.IsDraftMode;
                                 IsSubmited = true;//survey has been submited this will change the survey status to 3 - Completed
                                 UpdateModel(form);
+                              
+                                Dictionary<string, SurveyControlsResponse> SurveyControlsList = new Dictionary<string, SurveyControlsResponse>();
+                                foreach (var survey in FormsHierarchy)
+                                {
+                                   
+                                    SurveyControlsRequest Request = new SurveyControlsRequest();
+                                    Request.SurveyId = survey.FormId;
+                                    SurveyControlsResponse List = _isurveyFacade.GetSurveyControlList(Request);
+                                    SurveyControlsList.Add(Request.SurveyId, List);
+                                }
 
+                                var json = _isurveyFacade.GetSurveyResponseJson(SurveyAnswer, FormsHierarchy, SurveyControlsList);
 
-                                SurveyControlsRequest Request = new SurveyControlsRequest();
-                                Request.SurveyId = SurveyAnswer.SurveyId;
-                                SurveyControlsResponse List = _isurveyFacade.GetSurveyControlList(Request);                              
-                                var json = _isurveyFacade.GetSurveyResponseJson(SurveyAnswer, FormsHierarchy,List);                           
+                              //  var json = _isurveyFacade.GetSurveyResponseJson(SurveyAnswer, FormsHierarchy,List);                           
                                 SurveyAnswer.Json = json;
                                 _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId, form, SurveyAnswer, IsSubmited, IsSaved, PageNumber);
                                 //FormsAuthentication.SignOut();
