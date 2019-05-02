@@ -126,6 +126,41 @@ namespace MvcDynamicForms
 
                         //        }
                         //    }
+                        else if (dynField is RadioList)
+                        {
+                            var listField = (ListField)dynField;
+
+                            foreach (string choiceKey in listField.ChoiceKeyValuePairs.Keys.ToList())
+                            {
+                                listField.ChoiceKeyValuePairs[choiceKey] = false;
+                            }
+
+                            foreach (string value in postedForm.GetValues(key))
+                            {
+
+
+                                try
+                                {
+                                    var CurrentValue = listField.ChoiceKeyValuePairs[value];
+                                    listField.ChoiceKeyValuePairs[value] = true;
+                                }
+                                catch (Exception ex)
+                                {
+                                    if (!string.IsNullOrEmpty(value))
+                                    {
+                                        var array = listField.ChoiceKeyValuePairs.ToArray();
+                                        var NewValue = array[int.Parse(value)];
+                                        listField.ChoiceKeyValuePairs[NewValue.Key] = true;
+                                    }
+
+                                }
+                                 
+
+                            }
+
+                            listField.ChoiceKeyValuePairs.Remove("");
+
+                        }
                         else if (dynField is ListField)
                         {
                             var listField = (ListField)dynField;
@@ -134,32 +169,20 @@ namespace MvcDynamicForms
                             {
                                 listField.ChoiceKeyValuePairs[choiceKey] = false;
                             }
-                          
-                          
+
+
                             foreach (string value in postedForm.GetValues(key))
                             {
-                                 
 
-                                try
-                                {
-                                    var CurrentValue = listField.ChoiceKeyValuePairs[value];
-                                    listField.ChoiceKeyValuePairs[value] = true;
-                                }
-                                catch (Exception ex) {
-                                    if (!string.IsNullOrEmpty(value)) {
-                                        var array = listField.ChoiceKeyValuePairs.ToArray();
-                                        var NewValue = array[int.Parse(value)];
-                                        listField.ChoiceKeyValuePairs[NewValue.Key] = true;
-                                    }
 
-                                }
-                         //  listField.ChoiceKeyValuePairs[value] = true;
-                           
+                                
+                                 listField.ChoiceKeyValuePairs[value] = true;
+
                             }
 
-                           listField.ChoiceKeyValuePairs.Remove("");
+                            listField.ChoiceKeyValuePairs.Remove("");
                         }
-                       
+
                         else if (dynField is CheckBox)
                         {
                             var chkField = (CheckBox)dynField;
