@@ -20,8 +20,17 @@ namespace MvcDynamicForms.Fields
             {
                 _options_position_string = value;
 
-                string pipeString = _options_position_string.Replace("||", "|");
-                List<string> lists = pipeString.Split('|').ToList<string>();
+                //string pipeString = _options_position_string.Replace("||", "|");
+                //List<string> lists = pipeString.Split('|').ToList<string>();
+
+
+               
+                string[] stringSeparators = new string[] { "||" };
+
+                List<string> lists = _options_position_string.Split(stringSeparators, StringSplitOptions.None).ToList();
+
+
+
                 string options = lists[0];
                 string locations = lists[1].Replace(",",".");
                 locations = locations.Replace("..", ",.");
