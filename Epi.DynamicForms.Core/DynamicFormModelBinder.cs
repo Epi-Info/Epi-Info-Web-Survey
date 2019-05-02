@@ -138,7 +138,22 @@ namespace MvcDynamicForms
                           
                             foreach (string value in postedForm.GetValues(key))
                             {
-                           listField.ChoiceKeyValuePairs[value] = true;
+                                 
+
+                                try
+                                {
+                                    var CurrentValue = listField.ChoiceKeyValuePairs[value];
+                                    listField.ChoiceKeyValuePairs[value] = true;
+                                }
+                                catch (Exception ex) {
+                                    if (!string.IsNullOrEmpty(value)) {
+                                        var array = listField.ChoiceKeyValuePairs.ToArray();
+                                        var NewValue = array[int.Parse(value)];
+                                        listField.ChoiceKeyValuePairs[NewValue.Key] = true;
+                                    }
+
+                                }
+                         //  listField.ChoiceKeyValuePairs[value] = true;
                            
                             }
 
