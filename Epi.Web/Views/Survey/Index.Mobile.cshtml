@@ -439,7 +439,8 @@
             var EmailSubject = $('#Subject').val();
             EmailSubject = "H";//ReplaceString(EmailSubject);
             if (ValidateEmail(emailAddress) && ValidateEmail(confirmemail)) {
-                if ($.trim(emailAddress) == $.trim(confirmemail)) {
+                alert();
+                if ($.trim(emailAddress.toLowerCase()) == $.trim(confirmemail.toLowerCase())) {
                     //Call notify function to send notification
                     NotifyByEmail(emailAddress, redirectUrl, surveyName, postUrl, passCode, EmailSubject);
                     //close the modal popup after processing
@@ -542,7 +543,7 @@
         //url to post for email to be sent
         var postUrl = '@Url.Action("Notify","Post")';
         if (ValidateEmail(emailAddress) && ValidateEmail(confirmemail)) {
-            if ($.trim(emailAddress) == $.trim(confirmemail)) {
+            if ($.trim(emailAddress.toLowerCase()) == $.trim(confirmemail.toLowerCase())) {
                 //Call notify function to send notification
                 NotifyByEmail(emailAddress, redirectUrl, surveyName, postUrl, passCode, EmailSubject);
                 //close the modal popup after processing
@@ -966,13 +967,16 @@
                 <button type="button" onclick="Save();" id="Savebutton1" name="Savebutton" value="save" data-role="button" data-theme="save1" data-inline="true" data-iconpos="notext"></button>
                 @*onclick="Save();"*@
             </div>
-
+         
             @if (Model.Form.CurrentPage == Model.Form.NumberOfPages)
             {
+                if (Model.Form.SurveyInfo.SurveyId == @Session["RootFormId"].ToString())
+                {
                 <div id="next" align="right" style="margin-top:-8px !important;">
                     @*<a  name="Submitbutton" onclick="Submit();" class="submits" >Submit</a>*@
                     <button data-role="button" data-theme="submit1" data-inline="true" type="submit" name="Submitbutton" value="Submit">Submit</button>
                 </div>
+                }
             }
             else
             {
