@@ -14,15 +14,17 @@ namespace Epi.Web.Common.Json
    public class SurveyResponseJson
     {
 
-        public string GetSurveyResponseJson(Epi.Web.Common.DTO.SurveyAnswerDTO surveyAnswer, List<FormsHierarchyDTO> FormsHierarchyDTOList, SurveyControlsResponse List)
+        public string GetSurveyResponseJson(Epi.Web.Common.DTO.SurveyAnswerDTO surveyAnswer, List<FormsHierarchyDTO> FormsHierarchyDTOList, Dictionary<string, SurveyControlsResponse> List)
         {
-            ResponseDetail Responsedetail = new ResponseDetail();
-            var json = "";
-            var ChildFormsHierarchy = FormsHierarchyDTOList.Where(x => x.IsRoot == false);
-            Dictionary<string, object> ResponseQA = new Dictionary<string, object>();
-            Dictionary<string, object> RootResponseQA = new Dictionary<string, object>();
             if (!string.IsNullOrEmpty(surveyAnswer.XML))
             {
+                ResponseDetail Responsedetail = new ResponseDetail();
+
+                var ChildFormsHierarchy = FormsHierarchyDTOList.Where(x => x.IsRoot == false);
+                Dictionary<string, object> ResponseQA = new Dictionary<string, object>();
+                Dictionary<string, object> RootResponseQA = new Dictionary<string, object>();
+
+
                 XDocument xdoc = XDocument.Parse(surveyAnswer.XML);
                 int NumberOfPages = GetNumberOfPags(surveyAnswer.XML);
 
@@ -33,50 +35,60 @@ namespace Epi.Web.Common.Json
                 Responsedetail.OKey = FormsHierarchyDTOList[0].SurveyInfo.OrganizationKey.ToString().Substring(0, 8);
                 for (int i = 1; NumberOfPages + 1 > i; i++)
                 {
-                    var _FieldsTypeIDs = from _FieldTypeID in
-                   xdoc.Descendants("Page")
-
-                                         where _FieldTypeID.Attribute("PageNumber").Value == (i).ToString()
-                                         select _FieldTypeID;
-
-                    var _PageFieldsTypeIDs = from _FieldTypeID1 in
-                                                 _FieldsTypeIDs.Descendants("ResponseDetail")
-
-                                             select _FieldTypeID1;
-                    foreach (var item in _PageFieldsTypeIDs)
+                    try
                     {
-                        try
+                        var _FieldsTypeIDs = from _FieldTypeID in
+                       xdoc.Descendants("Page")
+
+                                             where _FieldTypeID.Attribute("PageNumber").Value == (i).ToString()
+                                             select _FieldTypeID;
+
+                        var _PageFieldsTypeIDs = from _FieldTypeID1 in
+                                                     _FieldsTypeIDs.Descendants("ResponseDetail")
+
+                                                 select _FieldTypeID1;
+                        foreach (var item in _PageFieldsTypeIDs)
                         {
-                            string ControlId = item.Attribute("QuestionName").Value;
-                            bool IsCheckBox = (bool)surveylist.SurveyControlList.Any(x => x.ControlId == ControlId && x.ControlType == "CheckBox");
-                            bool ISNumericTextBox = (bool)surveylist.SurveyControlList.Any(x => x.ControlId == ControlId && x.ControlType == "NumericTextBox");
-                            if (ISNumericTextBox && !string.IsNullOrEmpty(item.Value))
+                            if (!string.IsNullOrEmpty(item.Value))
                             {
-                                string uiSep = CultureInfo.CurrentUICulture.NumberFormat.NumberDecimalSeparator;
-                                if (item.Value.Contains(uiSep))
-                                    RootResponseQA.Add(item.Attribute("QuestionName").Value, Convert.ToDecimal(item.Value));
-                                else
-                                    RootResponseQA.Add(item.Attribute("QuestionName").Value, Convert.ToInt64(item.Value));
-                            }
-                            else if (IsCheckBox)
-                            {
-                                bool Ischecked = false;
-                                if (item.Value == "Yes")
-                                    RootResponseQA.Add(item.Attribute("QuestionName").Value, !Ischecked);
-                                else if (item.Value == "No")
-                                    RootResponseQA.Add(item.Attribute("QuestionName").Value, Ischecked);
-                                else
+                                try
+                                {
+                                    string ControlId = item.Attribute("QuestionName").Value;
+                                    bool IsCheckBox = (bool)surveylist.SurveyControlList.Any(x => x.ControlId == ControlId && x.ControlType == "CheckBox");
+                                    bool ISNumericTextBox = (bool)surveylist.SurveyControlList.Any(x => x.ControlId == ControlId && x.ControlType == "NumericTextBox");
+                                    if (ISNumericTextBox && !string.IsNullOrEmpty(item.Value))
+                                        {                                   
+                                            string uiSep = CultureInfo.CurrentUICulture.NumberFormat.NumberDecimalSeparator;
+                                            if (item.Value.Contains(uiSep))
+                                                RootResponseQA.Add(item.Attribute("QuestionName").Value, Convert.ToDecimal(item.Value));
+                                            else
+                                                RootResponseQA.Add(item.Attribute("QuestionName").Value, Convert.ToInt64(item.Value));
+                                            }
+                                    
+                                            else if (IsCheckBox)
+                                            {
+                                                bool Ischecked = false;
+                                                if (item.Value == "Yes")
+                                                    RootResponseQA.Add(item.Attribute("QuestionName").Value, !Ischecked);
+                                                else
+                                                    RootResponseQA.Add(item.Attribute("QuestionName").Value, Ischecked);
+                                            }
+                                            else
+                                            {
+                                                RootResponseQA.Add(item.Attribute("QuestionName").Value, item.Value);
+                                            }
+                                }
+                                catch (System.Exception ex)
+                                {
                                     RootResponseQA.Add(item.Attribute("QuestionName").Value, item.Value);
+                                }
                             }
-                            else
-                                RootResponseQA.Add(item.Attribute("QuestionName").Value, item.Value);
-                        }
-                        catch(System.Exception ex)
-                        {
-                            RootResponseQA.Add(item.Attribute("QuestionName").Value, item.Value);
                         }
                     }
+                    catch (System.Exception ex)
+                    {
 
+                    }
                 }
                 Responsedetail.ResponseQA = RootResponseQA;
 
@@ -95,51 +107,54 @@ namespace Epi.Web.Common.Json
                         ResponseQA.Add("ResponseId", childresponse.ResponseId);
                         var childsurveylist = List.Where(x => x.Key == childresponse.SurveyId).Select(d => d.Value).Single();
                         if (!string.IsNullOrEmpty(childresponse.XML))
-                        { 
+                        {
                             XDocument xdochild = XDocument.Parse(childresponse.XML);
                             int NumberOfPagesChild = GetNumberOfPags(childresponse.XML);
                             for (int i = 1; NumberOfPagesChild + 1 > i; i++)
                             {
                                 var _FieldsTypeIDs = from _FieldTypeID in
                                xdochild.Descendants("Page")
-                                                 where _FieldTypeID.Attribute("PageNumber").Value == (i).ToString()
-                                                 select _FieldTypeID;
+                                                     where _FieldTypeID.Attribute("PageNumber").Value == (i).ToString()
+                                                     select _FieldTypeID;
 
                                 var _PageFieldsTypeIDs = from _FieldTypeID1 in
                                                          _FieldsTypeIDs.Descendants("ResponseDetail")
 
-                                                     select _FieldTypeID1;
+                                                         select _FieldTypeID1;
                                 foreach (var item in _PageFieldsTypeIDs)
                                 {
-                                    try
+                                    if (!string.IsNullOrEmpty(item.Value))
                                     {
-                                        string ControlId = item.Attribute("QuestionName").Value;
-                                        bool IsCheckBox = (bool)childsurveylist.SurveyControlList.Any(x => x.ControlId == ControlId && x.ControlType == "CheckBox");
-                                        bool ISNumericTextBox = (bool)childsurveylist.SurveyControlList.Any(x => x.ControlId == ControlId && x.ControlType == "NumericTextBox");
-                                        if (ISNumericTextBox && !string.IsNullOrEmpty(item.Value))
+                                        try
                                         {
-                                            string uiSep = CultureInfo.CurrentUICulture.NumberFormat.NumberDecimalSeparator;
-                                            if (item.Value.Contains(uiSep))
-                                                ResponseQA.Add(item.Attribute("QuestionName").Value, Convert.ToDecimal(item.Value));
-                                            else
-                                                ResponseQA.Add(item.Attribute("QuestionName").Value, Convert.ToInt64(item.Value));
-                                        }
-                                        else if (IsCheckBox)
-                                        {
-                                            bool Ischecked = false;
-                                            if (item.Value == "Yes")
-                                                ResponseQA.Add(item.Attribute("QuestionName").Value, !Ischecked);
-                                            else if (item.Value == "No")
-                                                ResponseQA.Add(item.Attribute("QuestionName").Value, Ischecked);
+                                            string ControlId = item.Attribute("QuestionName").Value;
+                                            bool IsCheckBox = (bool)childsurveylist.SurveyControlList.Any(x => x.ControlId == ControlId && x.ControlType == "CheckBox");
+                                            bool ISNumericTextBox = (bool)childsurveylist.SurveyControlList.Any(x => x.ControlId == ControlId && x.ControlType == "NumericTextBox");
+                                            if (ISNumericTextBox && !string.IsNullOrEmpty(item.Value))
+                                            {
+                                                string uiSep = CultureInfo.CurrentUICulture.NumberFormat.NumberDecimalSeparator;
+                                                if (item.Value.Contains(uiSep))
+                                                    ResponseQA.Add(item.Attribute("QuestionName").Value, Convert.ToDecimal(item.Value));
+                                                else
+                                                    ResponseQA.Add(item.Attribute("QuestionName").Value, Convert.ToInt64(item.Value));
+                                            }
+                                            else if (IsCheckBox)
+                                            {
+                                                bool Ischecked = false;
+                                                if (item.Value == "Yes")
+                                                    ResponseQA.Add(item.Attribute("QuestionName").Value, !Ischecked);
+                                                else if (item.Value == "No")
+                                                    ResponseQA.Add(item.Attribute("QuestionName").Value, Ischecked);
+                                                else
+                                                    ResponseQA.Add(item.Attribute("QuestionName").Value, item.Value);
+                                            }
                                             else
                                                 ResponseQA.Add(item.Attribute("QuestionName").Value, item.Value);
                                         }
-                                        else
-                                            ResponseQA.Add(item.Attribute("QuestionName").Value, item.Value);                                        
-                                    }
-                                    catch (System.Exception ex)
-                                    {
-                                        ResponseQA.Add(item.Attribute("QuestionName").Value, item.Value);
+                                        catch (System.Exception ex)
+                                        {
+                                            ResponseQA.Add(item.Attribute("QuestionName").Value, item.Value);
+                                        }
                                     }
                                 }
                             }
@@ -148,10 +163,20 @@ namespace Epi.Web.Common.Json
                     }
                   }               
                 }
-                 json = JsonConvert.SerializeObject(Responsedetail);
+                try
+                {
+                    var json = JsonConvert.SerializeObject(Responsedetail);
+                    return json;
+                }
+                catch(System.Exception ex)
+                {
+                    return "";
+                }               
+            }            
+            else
+            {
+                return "";
             }
-
-            return json;
         }
 
 
