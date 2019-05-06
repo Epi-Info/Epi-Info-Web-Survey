@@ -33,7 +33,7 @@ namespace MvcDynamicForms.Fields
                     datePickerFormat = "%m-%d-%Y";
                     break;
                 case "m/d/yyyy":
-                    datePickerFormat = "%m/%d/%y";
+                    datePickerFormat = "%m/%d/%Y";
                     break;
                 case "m.d.yyyy":
                     datePickerFormat = "%m.%d.%Y";
