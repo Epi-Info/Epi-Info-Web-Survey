@@ -656,17 +656,18 @@ namespace Epi.Web.MVC.Controllers
                                 UpdateModel(form);
                               
                                 Dictionary<string, SurveyControlsResponse> SurveyControlsList = new Dictionary<string, SurveyControlsResponse>();
-                                foreach (var survey in FormsHierarchy)
-                                {
-                                   
+                                //foreach (var survey in FormsHierarchy)
+                                //{
+
                                     SurveyControlsRequest Request = new SurveyControlsRequest();
-                                    Request.SurveyId = survey.FormId;
+                                    Request.SurveyId = surveyInfoModel.SurveyId;
                                     SurveyControlsResponse List = _isurveyFacade.GetSurveyControlList(Request);
                                     SurveyControlsList.Add(Request.SurveyId, List);
-                                }
-                                var json = _isurveyFacade.GetSurveyResponseJson(SurveyAnswer, FormsHierarchy, SurveyControlsList);
-                                SurveyAnswer.Json = json;
-                                _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId, form, SurveyAnswer, IsSubmited, IsSaved, PageNumber);
+
+                                    var json = _isurveyFacade.GetSurveyResponseJson(SurveyAnswer, FormsHierarchy, List);
+                                    SurveyAnswer.Json = json;
+                                    _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId, form, SurveyAnswer, IsSubmited, IsSaved, PageNumber);
+                                //}
                                 //FormsAuthentication.SignOut();
 
                                 //FDNS API
@@ -789,7 +790,7 @@ namespace Epi.Web.MVC.Controllers
                         }
                         else
                         {
-                            CurrentPageNum = GetSurveyPageNumber(SurveyAnswer.XML.ToString()) ;
+                            CurrentPageNum = NewPageNumber;//GetSurveyPageNumber(SurveyAnswer.XML.ToString()) ;
 
                             if (CurrentPageNum != PageNumber) // failed validation and navigating to different page// must keep url the same 
                             {
