@@ -436,7 +436,7 @@ namespace Epi.Web.MVC.Controllers
                           //  return actionResult;
                            // return RedirectToAction("Index", "Survey", new { RequestId = form.ResponseId, PageNumber = CurrentPageNum,IsSaved = true });
 
-                            return RedirectToAction("Index", "Survey", new { RequestId = form.ResponseId, PageNumber = 1, IsSaved = true });
+                            return RedirectToAction("Index", "Survey", new { RequestId = form.ResponseId, PageNumber = CurrentPageNum, IsSaved = true });
                         }
                         else if (!string.IsNullOrEmpty(this.Request.Form["is_print_action"]) && this.Request.Form["is_print_action"].ToString().Equals("true", StringComparison.OrdinalIgnoreCase))
                             {
@@ -664,10 +664,7 @@ namespace Epi.Web.MVC.Controllers
                                     SurveyControlsResponse List = _isurveyFacade.GetSurveyControlList(Request);
                                     SurveyControlsList.Add(Request.SurveyId, List);
                                 }
-
                                 var json = _isurveyFacade.GetSurveyResponseJson(SurveyAnswer, FormsHierarchy, SurveyControlsList);
-
-                              //  var json = _isurveyFacade.GetSurveyResponseJson(SurveyAnswer, FormsHierarchy,List);                           
                                 SurveyAnswer.Json = json;
                                 _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId, form, SurveyAnswer, IsSubmited, IsSaved, PageNumber);
                                 //FormsAuthentication.SignOut();
