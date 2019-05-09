@@ -23,12 +23,15 @@
 {
      
     @Html.ValidationSummary(true)
-    <p style="margin-bottom:2px; font-size:10pt; font-weight:bold;"><label for="Passcode">Pass Code:</label>
-    
-    
-   @Html.PasswordFor(m => m.PassCode)
-    
- <button style="margin-left:10px; width:50px;" type="submit" value="Log in" class="login" data-theme="e">Go</button></p>
+    <p style="margin-bottom:2px; font-size:10pt; font-weight:bold;">
+        <label for="Passcode">Pass Code:</label>
+
+
+        @Html.PasswordFor(m => m.PassCode)
+
+        <button type="submit" value="Log in" class="login" data-theme="e" data-role="button">Go</button>
+    </p>
+
 }
 </div> 
 </div>
