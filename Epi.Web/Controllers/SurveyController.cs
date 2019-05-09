@@ -353,7 +353,6 @@ namespace Epi.Web.MVC.Controllers
                             }
                             else
                             {
-                                
                                 form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, CurrentPageNum, SurveyAnswer, isMobileDevice,null, FormsHierarchy, IsAndroid);
                                 Epi.Web.MVC.Utility.FormProvider.UpdateHiddenFields(CurrentPageNum, form, XDocument.Parse(surveyInfoModel.XML), XDocument.Parse(SurveyAnswer.XML), this.ControllerContext.RequestContext.HttpContext.Request.Form);
                             }                         
@@ -368,7 +367,7 @@ namespace Epi.Web.MVC.Controllers
                         form.ClearAllErrors();
                         Epi.Web.MVC.Utility.FormProvider.UpdateHiddenFields(CurrentPageNum, form, XDocument.Parse(surveyInfoModel.XML), XDocument.Parse(SurveyAnswer.XML), this.ControllerContext.RequestContext.HttpContext.Request.Form);
                                                        
-                         UpdateModel(form);
+                            UpdateModel(form);
 
                         }
 
@@ -604,7 +603,7 @@ namespace Epi.Web.MVC.Controllers
                         }
                         else if (form.Validate(form.RequiredFieldsList))
                         {
-                            
+
 
                             if (!string.IsNullOrEmpty(Submitbutton) || !string.IsNullOrEmpty(CloseButton) || (!string.IsNullOrEmpty(this.Request.Form["is_save_action_Mobile"]) && this.Request.Form["is_save_action_Mobile"].ToString().Equals("true", StringComparison.OrdinalIgnoreCase)))
                             {
@@ -656,15 +655,15 @@ namespace Epi.Web.MVC.Controllers
                                 IsSubmited = true;//survey has been submited this will change the survey status to 3 - Completed
                                 UpdateModel(form);
                               
-                                 SurveyControlsResponse SurveyControlsList = new  SurveyControlsResponse();
-                                //foreach (var survey in FormsHierarchy)
-                               // {
+                                Dictionary<string, SurveyControlsResponse> SurveyControlsList = new Dictionary<string, SurveyControlsResponse>();
+                                foreach (var survey in FormsHierarchy)
+                                {
                                    
                                     SurveyControlsRequest Request = new SurveyControlsRequest();
-                                    Request.SurveyId = surveyInfoModel.SurveyId;
-                                    SurveyControlsList = _isurveyFacade.GetSurveyControlList(Request);
-                                   // SurveyControlsList.Add(Request.SurveyId, List);
-                              //  }
+                                    Request.SurveyId = survey.FormId;
+                                    SurveyControlsResponse List = _isurveyFacade.GetSurveyControlList(Request);
+                                    SurveyControlsList.Add(Request.SurveyId, List);
+                                }
 
                                 var json = _isurveyFacade.GetSurveyResponseJson(SurveyAnswer, FormsHierarchy, SurveyControlsList);
 
@@ -793,9 +792,8 @@ namespace Epi.Web.MVC.Controllers
                         }
                         else
                         {
+                            CurrentPageNum = GetSurveyPageNumber(SurveyAnswer.XML.ToString()) ;
 
-                            CurrentPageNum = NewPageNumber; //GetSurveyPageNumber(SurveyAnswer.XML.ToString()) ;
-                             
                             if (CurrentPageNum != PageNumber) // failed validation and navigating to different page// must keep url the same 
                             {
                                 TempData["isredirect"] = "true";
@@ -808,9 +806,7 @@ namespace Epi.Web.MVC.Controllers
                                 SurveyModel Model = new SurveyModel();
                                 Model.Form = new MvcDynamicForms.Form();
                                 Model.Form = form;
-                                 actionResult = View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, Model);
-                                
-
+                                actionResult = View(Epi.Web.MVC.Constants.Constant.INDEX_PAGE, Model);
                             }
                         }
 
