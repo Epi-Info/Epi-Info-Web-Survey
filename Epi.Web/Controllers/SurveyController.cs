@@ -674,7 +674,10 @@ namespace Epi.Web.MVC.Controllers
                                 string endpoint = WebConfigurationManager.AppSettings["StorageAPIEndpoint"].ToString();
                                 if (!string.IsNullOrEmpty(endpoint))
                                 {
-                                    drawername = surveyInfoModel.OrganizationName;
+                                    if (!string.IsNullOrEmpty(surveyInfoModel.OrganizationName))
+                                        drawername = surveyInfoModel.OrganizationName;
+                                    else
+                                        drawername = surveyInfoModel.PublishedOrgName;
                                     nodename = surveyInfoModel.SurveyName + System.DateTime.Now.ToFileTime();
                                      
 
@@ -715,7 +718,8 @@ namespace Epi.Web.MVC.Controllers
                                 if (!string.IsNullOrEmpty(MongodbEndpoint))
                                 {
                                     // var response = _client.GetAsync("Eiws/EIWStest"); check if the db exists may not be needed
-                                    var db = surveyInfoModel.OrganizationName.Replace("'", "").Replace(" ", "_"); // db name can not have a space also there is a size limit for db names 
+                                    //var db = surveyInfoModel.OrganizationName.Replace("'", "").Replace(" ", "_"); // db name can not have a space also there is a size limit for db names 
+                                    var db = drawername.Replace("'", "").Replace(" ", "_");
                                     string  CollectionUniqueCode = "_"+surveyInfoModel.SurveyId.ToString().Substring(0, 8);
                                     var Collection = (surveyInfoModel.SurveyName).Replace("'", "").Replace(" ","_") + CollectionUniqueCode; // collection name can have space 
                                     var DocumentId = SurveyAnswer.ResponseId;
