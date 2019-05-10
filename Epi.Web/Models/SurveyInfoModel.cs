@@ -160,5 +160,12 @@ namespace Epi.Web.MVC.Models
             get { return _OrganizationKey; }
             set { _OrganizationKey = value; }
         }
+
+        private string _PublishedOrgName;       
+        public string PublishedOrgName
+        {
+            get { return _PublishedOrgName; }
+            set { _PublishedOrgName = value; }
+        }
     }
 }
