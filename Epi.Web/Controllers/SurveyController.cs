@@ -1838,6 +1838,11 @@ namespace Epi.Web.MVC.Controllers
             {
                 if (counter<=5) {
                     string ColumnName = Xelement.Attribute("Name").Value;
+                    if (ColumnName.Length>20)
+                    {
+                        ColumnName = ColumnName.Substring(0, 17) + "...";
+
+                    }
                     Columns.Add(new KeyValuePair<int, string>(counter, ColumnName));
 
 
