@@ -1000,3 +1000,61 @@ div.ui-checkbox .ui-btn-corner-all {
     /* border: none !important; padding: 0px !important;*/
     text-align: left;
 }
+
+.ui-btn-up-backrecord, .ui-btn-hover-backrecord {
+    cursor: pointer;
+    vertical-align: middle;
+    border: 1px solid #00827e !important;
+    background: #bbb;
+    background-image: url('../images/backform.png');
+    background-repeat: no-repeat;
+    background-position: 15px center;
+    background-size: 16px;
+    padding: 5px 5px 5px -5px;
+    color: #3f3f3f !important;
+    width: 160px;
+    height: 30px;
+    text-align: left;
+    text-shadow: none !important;
+}
+
+#addnew .ui-btn-inner {
+    border: none !important;
+    padding: 5px 6px 5px 40px !important;
+}
+
+#recordstable ul {
+    margin: 0;
+    padding: 0
+}
+
+#recordstable li {
+    margin: 5px 0 0 0;
+    padding: 0;
+    list-style: none;
+    border-bottom: 1px solid #ccc;
+}
+.mobilewrap {
+    display: block;
+    padding: 8px;
+    border-top: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+}
+
+.mobileheader {
+    width: 45%;
+    font-weight: 600;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    float: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mobilevalue {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    float: left;
+    width: 50%;
+    word-break: break-all;
+   
+}
