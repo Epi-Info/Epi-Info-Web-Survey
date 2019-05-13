@@ -439,7 +439,7 @@
             var EmailSubject = $('#Subject').val();
             EmailSubject = "H";//ReplaceString(EmailSubject);
             if (ValidateEmail(emailAddress) && ValidateEmail(confirmemail)) {
-                alert();
+               // alert();
                 if ($.trim(emailAddress.toLowerCase()) == $.trim(confirmemail.toLowerCase())) {
                     //Call notify function to send notification
                     NotifyByEmail(emailAddress, redirectUrl, surveyName, postUrl, passCode, EmailSubject);
