@@ -39,6 +39,7 @@ namespace Epi.Web.MVC.Models
                 StartDate = SurveyInfoDTO.StartDate,
                 IsSqlProject = SurveyInfoDTO.IsSqlProject
                 ,OrganizationKey = SurveyInfoDTO.OrganizationKey
+                ,PublishedOrgName= SurveyInfoDTO.PublishedOrgName
             };
 
         }
@@ -66,7 +67,8 @@ namespace Epi.Web.MVC.Models
                 UserPublishKey = SurveyInfoModel.UserPublishKey,
                 IsDraftMode = SurveyInfoModel.IsDraftMode,
                 StartDate = SurveyInfoModel.StartDate,
-                
+                PublishedOrgName=SurveyInfoModel.PublishedOrgName
+
             };
         }
 

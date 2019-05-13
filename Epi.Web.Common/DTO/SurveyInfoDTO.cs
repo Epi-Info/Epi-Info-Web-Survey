@@ -160,5 +160,13 @@ namespace Epi.Web.Common.DTO
             get { return _ParentId; }
             set { _ParentId = value; }
         }
+
+        private string _PublishedOrgName;
+        [DataMember]
+        public string PublishedOrgName
+        {
+            get { return _PublishedOrgName; }
+            set { _PublishedOrgName = value; }
+        }
     }
 }
