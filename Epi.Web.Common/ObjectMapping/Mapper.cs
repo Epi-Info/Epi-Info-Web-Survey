@@ -178,6 +178,7 @@ namespace Epi.Web.Common.ObjectMapping
                 SurveyAnswerDTO.IsDraftMode = pBO.IsDraftMode;
                 //SurveyAnswerDTO.IsLocked = pBO.IsLocked;
                 SurveyAnswerDTO.ParentRecordId = pBO.ParentRecordId;
+                SurveyAnswerDTO.Json = pBO.Json;
                 // SurveyAnswerDTO.UserEmail = pBO.UserEmail;
                 SurveyAnswerDTO.ViewId = pBO.ViewId;
                 SurveyAnswerDTO.RelateParentId = pBO.RelateParentId;
@@ -451,7 +452,13 @@ namespace Epi.Web.Common.ObjectMapping
             }
             return BOList;
         }
+        public static UserBO ToUserBO(UserDTO userBO) {
 
+            UserBO UserBO = new UserBO();
+
+            return UserBO;
+
+        }
         private static SurveyResponseBO ToSurveyResponseBO(SurveyAnswerDTO pDTO, int UserId)
         {
             SurveyResponseBO SurveyResponseBO = new SurveyResponseBO();
