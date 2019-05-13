@@ -123,6 +123,7 @@ namespace Epi.Web.Common.ObjectMapping
                 IsSqlProject =pBO.IsSqlProject,
                 UserPublishKey = pBO.UserPublishKey
                , OrganizationKey = pBO.OrganizationKey
+               ,PublishedOrgName=pBO.PublishedOrgName
 
 
             };
@@ -365,7 +366,8 @@ namespace Epi.Web.Common.ObjectMapping
                 ViewId = SurveyInfoModel.ViewId,
                // OwnerId = SurveyInfoModel.OwnerId,
                 ParentId = SurveyInfoModel.ParentId,
-               // HasDraftModeData = SurveyInfoModel.HasDraftModeData
+                PublishedOrgName=SurveyInfoModel.PublishedOrgName
+                // HasDraftModeData = SurveyInfoModel.HasDraftModeData
             };
         }
         private static List<SurveyAnswerDTO> ToSurveyAnswerDTO(List<SurveyResponseBO> list)

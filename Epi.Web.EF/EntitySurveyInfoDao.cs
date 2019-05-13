@@ -61,18 +61,21 @@ namespace Epi.Web.EF
                     throw (ex);
                 }
             }
-            try
-            {
-                using (var Context = DataObjectFactory.CreateContext())
+            if (result!=null && string.IsNullOrEmpty((result[0].OrganizationName)))
                 {
-                    OrgId = Convert.ToInt32(result[0].OrganizationId);
-                    OrganizationName = Context.Organizations.FirstOrDefault(x => x.OrganizationId == OrgId).Organization1;
-                    result[0].OrganizationName = OrganizationName;
+                try
+                {
+                    using (var Context = DataObjectFactory.CreateContext())
+                    {
+                        OrgId = Convert.ToInt32(result[0].OrganizationId);
+                        OrganizationName = Context.Organizations.FirstOrDefault(x => x.OrganizationId == OrgId).Organization1;
+                        result[0].PublishedOrgName = OrganizationName;
+                    }
                 }
-            }
-            catch (Exception ex)
-            {
-                throw (ex);
+                catch (Exception ex)
+                {
+                    throw (ex);
+                }
             }
 
             // remove the items to skip
