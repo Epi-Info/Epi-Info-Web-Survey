@@ -13,6 +13,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epi.Web.BLL", "EIWS_BLL_Core\Epi.Web.BLL.csproj", "{D49B7A21-644B-49D7-9A5D-387BF31EAFE5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epi.Web.EF", "Epi.Web.EF\Epi.Web.EF.csproj", "{05A484AB-A555-4200-936B-BEC573285BCC}"
+	ProjectSection(ProjectDependencies) = postProject
+		{6E2F059B-C1CD-401F-8A63-DC2933CFB0D8} = {6E2F059B-C1CD-401F-8A63-DC2933CFB0D8}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epi.Web.Common", "Epi.Web.Common\Epi.Web.Common.csproj", "{6E2F059B-C1CD-401F-8A63-DC2933CFB0D8}"
 EndProject
@@ -155,7 +158,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {90BC8E71-8799-4A31-90F1-9C35C40CF1F0}
 		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.0\lib\NET35
+		SolutionGuid = {90BC8E71-8799-4A31-90F1-9C35C40CF1F0}
 	EndGlobalSection
 EndGlobal
