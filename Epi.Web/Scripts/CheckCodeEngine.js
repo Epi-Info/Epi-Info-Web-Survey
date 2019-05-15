@@ -1885,7 +1885,6 @@ function GetDateOpject(DateFormat, DateValue) {
                 case "m-d-yyyy":
                 case "mm.dd.yyyy":
                 case "m.d.yyyy":
-                case "m/d/yy":
                     MM = dateList[0];
                     DD = dateList[1];
                     YYYY = dateList[2];
@@ -1962,36 +1961,27 @@ function CCE_Days(pValue1, pValue2) {
 }
 /////////////////Simple  Dialogbox //////////////////////
 function CCE_ContextOpenMobileSimpleDialogBox(Title, Prompt, id) {
-   
-     var passcode1 = '@Model.PassCode';
+    var passcode1 = '@Model.PassCode';
 
-
-    $('#' +id).simpledialog2({
-//'mode' : 'blank',
-//'headerText' : Title,
-    //'headerClose' : true,
-    //'dialogAllow' : true,
-    //'useDialogForceTrue': true, 
-    //'useDialogForceFalse': false,
-    //'cleanOnClose': true,
-    //'prompt': Title,
-        //'forceInput': false,
-        //'useModal':true,
-            mode: 'button',
-                headerText : Title,
-            headerClose: true,
-            buttonPrompt: Prompt,
+    $('#' + id).simpledialog2({
+        'mode': 'blank',
+        'headerText': Title,
+        //'headerClose': true,
+        //'dialogAllow': true,
+        //'useDialogForceTrue': true,
+        //'useDialogForceFalse': false,
+        'prompt': Title,
+        'forceInput': false,
+        'useModal': true,
         'buttons': {
-        'OK': {
-            click : function () {
+            'OK': {
+                click: function () {
                     $('#dialogoutput').text('OK');
-        }
+                }
             }
 
-            },
-                icon: "delete",
-                theme: "c"
-// 'fullHTML': "<div id='SimpleDialogBox' title='"+ Title +"'><p><label id='SimpleDialogBoxPrempt'>"+ Prompt +"</label></p><p style='text-align:right;'><button  id='SimpleDialogBoxButton' type='button' style='width:100%;'onclick='CCE_CloseMobileSimpleDialogBox("+ id.toString() +");'>Ok</button></p></div>"
+        },
+        'blankContent': "<div id='SimpleDialogBox' title='" + Title + "'><p><label id='SimpleDialogBoxPrempt'>" + Prompt + "</label></p><p style='text-align:right;'><button  id='SimpleDialogBoxButton' type='button' style='width:100%;'onclick='CCE_CloseMobileSimpleDialogBox(" + id.toString() + ");'>OK</button></p></div>"
     })
 
 
