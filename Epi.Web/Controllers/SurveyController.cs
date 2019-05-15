@@ -346,7 +346,7 @@ namespace Epi.Web.MVC.Controllers
                         if (int.TryParse(StringNumber, out NewPageNumber))
                         {
                             
-                        if (NewPageNumber != CurrentPageNum)
+                        if (NewPageNumber != CurrentPageNum && NewPageNumber!=0)
                             {
                             form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, NewPageNumber, SurveyAnswer, isMobileDevice,null, FormsHierarchy, IsAndroid);
                             Epi.Web.MVC.Utility.FormProvider.UpdateHiddenFields(NewPageNumber, form, XDocument.Parse(surveyInfoModel.XML), XDocument.Parse(SurveyAnswer.XML), this.ControllerContext.RequestContext.HttpContext.Request.Form);
@@ -528,7 +528,7 @@ namespace Epi.Web.MVC.Controllers
                             }
                             else
                             {
-                                return RedirectToRoute(new { Controller = "Survey", Action = "Index", responseid = RootResponseId, PageNumber = PageNumber });
+                                return RedirectToRoute(new { Controller = "Survey", Action = "Index", responseid = Session["RootResponseId"], PageNumber = PageNumber });
                             }
 
 
@@ -664,7 +664,7 @@ namespace Epi.Web.MVC.Controllers
                                     SurveyControlsResponse List = _isurveyFacade.GetSurveyControlList(Request);
                                     SurveyControlsList.Add(Request.SurveyId, List);
 
-                                    var json = _isurveyFacade.GetSurveyResponseJson(SurveyAnswer, FormsHierarchy, List);
+                                    var json = _isurveyFacade.GetSurveyResponseJson(SurveyAnswer, FormsHierarchy, SurveyControlsList);
                                     SurveyAnswer.Json = json;
                                     _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId, form, SurveyAnswer, IsSubmited, IsSaved, PageNumber);
                                 //}
@@ -794,6 +794,7 @@ namespace Epi.Web.MVC.Controllers
                         }
                         else
                         {
+                            if(NewPageNumber!=0)
                             CurrentPageNum = NewPageNumber;//GetSurveyPageNumber(SurveyAnswer.XML.ToString()) ;
 
                             if (CurrentPageNum != PageNumber) // failed validation and navigating to different page// must keep url the same 
