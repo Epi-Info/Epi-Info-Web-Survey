@@ -13,6 +13,7 @@ using Epi.Web.Common.Xml;
 using Epi.Web.Common.DTO;
 using Epi.Web.Common.Criteria;
 using Epi.Web.Common.BusinessRule;
+using Epi.Web.Common.Json;
 
 namespace Epi.Web.BLL
 {
@@ -26,10 +27,11 @@ namespace Epi.Web.BLL
            
             }
         private Epi.Web.Interfaces.DataInterfaces.ISurveyResponseDao SurveyResponseDao;
-
-        public SurveyResponse(Epi.Web.Interfaces.DataInterfaces.ISurveyResponseDao pSurveyResponseDao)
+        private ISurveyInfoDao SurveyInfoDao;
+        public SurveyResponse(Epi.Web.Interfaces.DataInterfaces.ISurveyResponseDao pSurveyResponseDao, ISurveyInfoDao pSurveyInfoDao)
         {
             this.SurveyResponseDao = pSurveyResponseDao;
+            this.SurveyInfoDao = pSurveyInfoDao;
         }
 
         public List<SurveyResponseBO> GetSurveyResponseById(List<String> pId, Guid UserPublishKey)
@@ -623,5 +625,21 @@ namespace Epi.Web.BLL
         {
             this.SurveyResponseDao.InsertErrorLog(pValue);
         }
+
+        public bool  SetJsonColumn(string json , string responseid)
+        {
+            try
+            {
+                this.SurveyResponseDao.SetJsonColumn(json, responseid);
+                return true;
+            } catch (Exception ex) {
+
+                return false;
+
+            }
+        }
+
+        
+
     }
 }

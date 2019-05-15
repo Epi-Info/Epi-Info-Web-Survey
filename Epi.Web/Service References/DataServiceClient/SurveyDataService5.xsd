@@ -72,6 +72,7 @@
       <xs:element minOccurs="0" name="OrganizationKey" type="ser:guid" />
       <xs:element minOccurs="0" name="OrganizationName" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="ParentId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PublishedOrgName" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="StartDate" type="xs:dateTime" />
       <xs:element minOccurs="0" name="SurveyId" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="SurveyName" nillable="true" type="xs:string" />
@@ -235,6 +236,7 @@
       <xs:element minOccurs="0" name="DateCreated" type="xs:dateTime" />
       <xs:element minOccurs="0" name="DateUpdated" type="xs:dateTime" />
       <xs:element minOccurs="0" name="IsDraftMode" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Json" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="ParentRecordId" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="RecordBeforeFlag" type="xs:boolean" />
       <xs:element minOccurs="0" name="RecordSourceId" type="xs:int" />

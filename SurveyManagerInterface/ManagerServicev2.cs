@@ -27,7 +27,8 @@ namespace Epi.Web.WCF.SurveyService
  
                 PreFilledAnswerResponse response;
                 Epi.Web.Interfaces.DataInterfaces.ISurveyResponseDao SurveyResponseDao = new EF.EntitySurveyResponseDao();
-                Epi.Web.BLL.SurveyResponse Implementation = new Epi.Web.BLL.SurveyResponse(SurveyResponseDao);
+                Interfaces.DataInterfaces.ISurveyInfoDao ISurveyInfoDao = new  EF.EntitySurveyInfoDao();
+                Epi.Web.BLL.SurveyResponse Implementation = new Epi.Web.BLL.SurveyResponse(SurveyResponseDao,ISurveyInfoDao);
 
                 response = Implementation.SetSurveyAnswer(request);
                     

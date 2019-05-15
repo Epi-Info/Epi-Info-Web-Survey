@@ -145,6 +145,13 @@ namespace Epi.Web.MVC.DataServiceClient {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/HasResponse", ReplyAction="http://tempuri.org/IDataService/HasResponseResponse")]
         System.Threading.Tasks.Task<bool> HasResponseAsync(string SurveyId, string ResponseId);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/GetOrganization", ReplyAction="http://tempuri.org/IDataService/GetOrganizationResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Epi.Web.Common.Exception.CustomFaultException), Action="http://tempuri.org/IDataService/GetOrganizationCustomFaultExceptionFault", Name="CustomFaultException", Namespace="http://www.yourcompany.com/types/")]
+        Epi.Web.Common.Message.OrganizationAccountResponse GetOrganization(Epi.Web.Common.Message.OrganizationAccountRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/GetOrganization", ReplyAction="http://tempuri.org/IDataService/GetOrganizationResponse")]
+        System.Threading.Tasks.Task<Epi.Web.Common.Message.OrganizationAccountResponse> GetOrganizationAsync(Epi.Web.Common.Message.OrganizationAccountRequest request);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/GetSourceTables", ReplyAction="http://tempuri.org/IDataService/GetSourceTablesResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(Epi.Web.Common.Exception.CustomFaultException), Action="http://tempuri.org/IDataService/GetSourceTablesCustomFaultExceptionFault", Name="CustomFaultException", Namespace="http://www.yourcompany.com/types/")]
         Epi.Web.Common.Message.SourceTablesResponse GetSourceTables(Epi.Web.Common.Message.SourceTablesRequest Request);
@@ -158,6 +165,13 @@ namespace Epi.Web.MVC.DataServiceClient {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/UpdateResponseStatus", ReplyAction="http://tempuri.org/IDataService/UpdateResponseStatusResponse")]
         System.Threading.Tasks.Task UpdateResponseStatusAsync(Epi.Web.Common.Message.SurveyAnswerRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/SetJsonColumn", ReplyAction="http://tempuri.org/IDataService/SetJsonColumnResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Epi.Web.Common.Exception.CustomFaultException), Action="http://tempuri.org/IDataService/SetJsonColumnCustomFaultExceptionFault", Name="CustomFaultException", Namespace="http://www.yourcompany.com/types/")]
+        bool SetJsonColumn(string json, string responseid);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/SetJsonColumn", ReplyAction="http://tempuri.org/IDataService/SetJsonColumnResponse")]
+        System.Threading.Tasks.Task<bool> SetJsonColumnAsync(string json, string responseid);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -331,6 +345,14 @@ namespace Epi.Web.MVC.DataServiceClient {
             return base.Channel.HasResponseAsync(SurveyId, ResponseId);
         }
         
+        public Epi.Web.Common.Message.OrganizationAccountResponse GetOrganization(Epi.Web.Common.Message.OrganizationAccountRequest request) {
+            return base.Channel.GetOrganization(request);
+        }
+        
+        public System.Threading.Tasks.Task<Epi.Web.Common.Message.OrganizationAccountResponse> GetOrganizationAsync(Epi.Web.Common.Message.OrganizationAccountRequest request) {
+            return base.Channel.GetOrganizationAsync(request);
+        }
+        
         public Epi.Web.Common.Message.SourceTablesResponse GetSourceTables(Epi.Web.Common.Message.SourceTablesRequest Request) {
             return base.Channel.GetSourceTables(Request);
         }
@@ -345,6 +367,14 @@ namespace Epi.Web.MVC.DataServiceClient {
         
         public System.Threading.Tasks.Task UpdateResponseStatusAsync(Epi.Web.Common.Message.SurveyAnswerRequest request) {
             return base.Channel.UpdateResponseStatusAsync(request);
+        }
+        
+        public bool SetJsonColumn(string json, string responseid) {
+            return base.Channel.SetJsonColumn(json, responseid);
+        }
+        
+        public System.Threading.Tasks.Task<bool> SetJsonColumnAsync(string json, string responseid) {
+            return base.Channel.SetJsonColumnAsync(json, responseid);
         }
     }
 }

@@ -329,7 +329,8 @@ namespace Epi.Web.WCF.SurveyService
 
                 Epi.Web.Interfaces.DataInterfaces.IDaoFactory entityDaoFactory = new EF.EntityDaoFactory();
                 Epi.Web.Interfaces.DataInterfaces.ISurveyResponseDao ISurveyResponseDao = entityDaoFactory.SurveyResponseDao;
-                Epi.Web.BLL.SurveyResponse Implementation = new Epi.Web.BLL.SurveyResponse(ISurveyResponseDao);
+                Interfaces.DataInterfaces.ISurveyInfoDao ISurveyInfoDao = entityDaoFactory.SurveyInfoDao;
+                Epi.Web.BLL.SurveyResponse Implementation = new Epi.Web.BLL.SurveyResponse(ISurveyResponseDao,ISurveyInfoDao);
                
 
 
