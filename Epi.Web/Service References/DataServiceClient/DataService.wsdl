@@ -172,6 +172,15 @@
   <wsdl:message name="IDataService_HasResponse_CustomFaultExceptionFault_FaultMessage">
     <wsdl:part xmlns:q18="http://www.yourcompany.com/types/" name="detail" element="q18:CustomFaultException" />
   </wsdl:message>
+  <wsdl:message name="IDataService_GetOrganization_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetOrganization" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_GetOrganization_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetOrganizationResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_GetOrganization_CustomFaultExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q19="http://www.yourcompany.com/types/" name="detail" element="q19:CustomFaultException" />
+  </wsdl:message>
   <wsdl:message name="IDataService_GetSourceTables_InputMessage">
     <wsdl:part name="parameters" element="tns:GetSourceTables" />
   </wsdl:message>
@@ -179,7 +188,7 @@
     <wsdl:part name="parameters" element="tns:GetSourceTablesResponse" />
   </wsdl:message>
   <wsdl:message name="IDataService_GetSourceTables_CustomFaultExceptionFault_FaultMessage">
-    <wsdl:part xmlns:q19="http://www.yourcompany.com/types/" name="detail" element="q19:CustomFaultException" />
+    <wsdl:part xmlns:q20="http://www.yourcompany.com/types/" name="detail" element="q20:CustomFaultException" />
   </wsdl:message>
   <wsdl:message name="IDataService_UpdateResponseStatus_InputMessage">
     <wsdl:part name="parameters" element="tns:UpdateResponseStatus" />
@@ -188,7 +197,16 @@
     <wsdl:part name="parameters" element="tns:UpdateResponseStatusResponse" />
   </wsdl:message>
   <wsdl:message name="IDataService_UpdateResponseStatus_CustomFaultExceptionFault_FaultMessage">
-    <wsdl:part xmlns:q20="http://www.yourcompany.com/types/" name="detail" element="q20:CustomFaultException" />
+    <wsdl:part xmlns:q21="http://www.yourcompany.com/types/" name="detail" element="q21:CustomFaultException" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_SetJsonColumn_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetJsonColumn" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_SetJsonColumn_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetJsonColumnResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_SetJsonColumn_CustomFaultExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q22="http://www.yourcompany.com/types/" name="detail" element="q22:CustomFaultException" />
   </wsdl:message>
   <wsdl:portType name="IDataService">
     <wsdl:operation name="GetSurveyInfo">
@@ -281,6 +299,11 @@
       <wsdl:output wsaw:Action="http://tempuri.org/IDataService/HasResponseResponse" message="tns:IDataService_HasResponse_OutputMessage" />
       <wsdl:fault wsaw:Action="http://tempuri.org/IDataService/HasResponseCustomFaultExceptionFault" name="CustomFaultExceptionFault" message="tns:IDataService_HasResponse_CustomFaultExceptionFault_FaultMessage" />
     </wsdl:operation>
+    <wsdl:operation name="GetOrganization">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDataService/GetOrganization" message="tns:IDataService_GetOrganization_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDataService/GetOrganizationResponse" message="tns:IDataService_GetOrganization_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IDataService/GetOrganizationCustomFaultExceptionFault" name="CustomFaultExceptionFault" message="tns:IDataService_GetOrganization_CustomFaultExceptionFault_FaultMessage" />
+    </wsdl:operation>
     <wsdl:operation name="GetSourceTables">
       <wsdl:input wsaw:Action="http://tempuri.org/IDataService/GetSourceTables" message="tns:IDataService_GetSourceTables_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IDataService/GetSourceTablesResponse" message="tns:IDataService_GetSourceTables_OutputMessage" />
@@ -290,6 +313,11 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IDataService/UpdateResponseStatus" message="tns:IDataService_UpdateResponseStatus_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IDataService/UpdateResponseStatusResponse" message="tns:IDataService_UpdateResponseStatus_OutputMessage" />
       <wsdl:fault wsaw:Action="http://tempuri.org/IDataService/UpdateResponseStatusCustomFaultExceptionFault" name="CustomFaultExceptionFault" message="tns:IDataService_UpdateResponseStatus_CustomFaultExceptionFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetJsonColumn">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDataService/SetJsonColumn" message="tns:IDataService_SetJsonColumn_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDataService/SetJsonColumnResponse" message="tns:IDataService_SetJsonColumn_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IDataService/SetJsonColumnCustomFaultExceptionFault" name="CustomFaultExceptionFault" message="tns:IDataService_SetJsonColumn_CustomFaultExceptionFault_FaultMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IDataService" type="tns:IDataService">
@@ -510,6 +538,18 @@
         <soap:fault use="literal" name="CustomFaultExceptionFault" namespace="" />
       </wsdl:fault>
     </wsdl:operation>
+    <wsdl:operation name="GetOrganization">
+      <soap:operation soapAction="http://tempuri.org/IDataService/GetOrganization" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="CustomFaultExceptionFault">
+        <soap:fault use="literal" name="CustomFaultExceptionFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
     <wsdl:operation name="GetSourceTables">
       <soap:operation soapAction="http://tempuri.org/IDataService/GetSourceTables" style="document" />
       <wsdl:input>
@@ -524,6 +564,18 @@
     </wsdl:operation>
     <wsdl:operation name="UpdateResponseStatus">
       <soap:operation soapAction="http://tempuri.org/IDataService/UpdateResponseStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="CustomFaultExceptionFault">
+        <soap:fault use="literal" name="CustomFaultExceptionFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="SetJsonColumn">
+      <soap:operation soapAction="http://tempuri.org/IDataService/SetJsonColumn" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
