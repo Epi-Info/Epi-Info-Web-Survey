@@ -42,9 +42,9 @@ namespace Epi.Web.MVC.Facade
         SurveyAnswerResponse DeleteResponse(SurveyAnswerRequest sARequest);
         SurveyAnswerResponse GetResponsesByRelatedFormId(SurveyAnswerRequest formResponseReq);
         void SaveSurveyAnswer(SurveyAnswerRequest pRequest);
-        string GetSurveyResponseJson(Epi.Web.Common.DTO.SurveyAnswerDTO surveyAnswerDTO, List<FormsHierarchyDTO> FormsHierarchyDTOList, Dictionary<string, SurveyControlsResponse> List);
+        string GetSurveyResponseJson(Epi.Web.Common.DTO.SurveyAnswerDTO surveyAnswerDTO, List<FormsHierarchyDTO> FormsHierarchyDTOList, SurveyControlsResponse List);
           OrganizationAccountResponse GetOrg(OrganizationAccountRequest Request);
-        bool SetJsonColumnAll(string orgid);
+        bool SetJsonColumn(string Json,string Responseid);
     }
 
 }
