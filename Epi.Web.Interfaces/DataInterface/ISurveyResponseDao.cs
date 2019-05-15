@@ -110,5 +110,6 @@ namespace Epi.Web.Interfaces.DataInterfaces
          void UpdateRecordStatus(SurveyResponseBO SurveyResponseBO);
 
         void InsertErrorLog(Dictionary<string, string> pValue);
+        void SetJsonColumn(string json, string responseid);
     }
 }

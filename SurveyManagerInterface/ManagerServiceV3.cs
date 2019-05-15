@@ -26,7 +26,8 @@ namespace Epi.Web.WCF.SurveyService
            try
            {
                Epi.Web.Interfaces.DataInterfaces.ISurveyResponseDao SurveyResponseDao = new EF.EntitySurveyResponseDao();
-               Epi.Web.BLL.SurveyResponse Implementation = new Epi.Web.BLL.SurveyResponse(SurveyResponseDao);
+                Interfaces.DataInterfaces.ISurveyInfoDao ISurveyInfoDao = new EF.EntitySurveyInfoDao();
+                Epi.Web.BLL.SurveyResponse Implementation = new Epi.Web.BLL.SurveyResponse(SurveyResponseDao,ISurveyInfoDao);
                foreach (SurveyAnswerDTO DTO in pRequestMessage.SurveyAnswerList)
                {
                    Implementation.UpdateRecordStatus(Mapper.ToBusinessObject(DTO));

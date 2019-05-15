@@ -172,7 +172,8 @@ namespace Epi.Web.MVC.Repositories
             try
             {
                 Interfaces.DataInterfaces.ISurveyResponseDao SurveyResponseDao = new EntitySurveyResponseDao();
-                BLL.SurveyResponse Implementation = new BLL.SurveyResponse(SurveyResponseDao);
+                Epi.Web.Interfaces.DataInterfaces.ISurveyInfoDao ISurveyInfoDao = new EntitySurveyInfoDao();
+                BLL.SurveyResponse Implementation = new BLL.SurveyResponse(SurveyResponseDao, ISurveyInfoDao);
                 PreFilledAnswerRequest prefilledanswerRequest = new PreFilledAnswerRequest();
                 Dictionary<string, string> Values = new Dictionary<string, string>();
                 prefilledanswerRequest.AnswerInfo.UserPublishKey = request.PublisherKey;
@@ -214,7 +215,8 @@ namespace Epi.Web.MVC.Repositories
         public void GetRootFormId(PreFilledAnswerRequest request)
         {
             Interfaces.DataInterfaces.ISurveyResponseDao SurveyResponseDao = new EntitySurveyResponseDao();
-            BLL.SurveyResponse Implementation = new BLL.SurveyResponse(SurveyResponseDao);
+            Interfaces.DataInterfaces.ISurveyInfoDao ISurveyInfoDao = new EntitySurveyInfoDao();
+            BLL.SurveyResponse Implementation = new BLL.SurveyResponse(SurveyResponseDao,ISurveyInfoDao);
             List<SurveyInfoBO> SurveyBOList = Implementation.GetSurveyInfo(request);//
             if ( string.IsNullOrEmpty(SurveyBOList[0].ParentId))
             {
@@ -230,7 +232,8 @@ namespace Epi.Web.MVC.Repositories
         public List<SurveyInfoBO> GetSurveyInfo(PreFilledAnswerRequest request)
         {
             Interfaces.DataInterfaces.ISurveyResponseDao SurveyResponseDao = new EntitySurveyResponseDao();
-            BLL.SurveyResponse Implementation = new BLL.SurveyResponse(SurveyResponseDao);
+            Interfaces.DataInterfaces.ISurveyInfoDao ISurveyInfoDao = new EntitySurveyInfoDao();
+            BLL.SurveyResponse Implementation = new BLL.SurveyResponse(SurveyResponseDao, ISurveyInfoDao);
             List<SurveyInfoBO> SurveyBOList = Implementation.GetSurveyInfo(request);//           
             return SurveyBOList;
         }
@@ -250,7 +253,8 @@ namespace Epi.Web.MVC.Repositories
             try
             {
                 Interfaces.DataInterfaces.ISurveyResponseDao SurveyResponseDao = new EntitySurveyResponseDao();
-                BLL.SurveyResponse Implementation = new BLL.SurveyResponse(SurveyResponseDao);
+                Interfaces.DataInterfaces.ISurveyInfoDao ISurveyInfoDao = new EntitySurveyInfoDao();
+                BLL.SurveyResponse Implementation = new BLL.SurveyResponse(SurveyResponseDao,ISurveyInfoDao);
                 PreFilledAnswerRequest prefilledanswerRequest = new PreFilledAnswerRequest();
                 Dictionary<string, string> Values = new Dictionary<string, string>();
                 prefilledanswerRequest.AnswerInfo.UserPublishKey = request.PublisherKey;
@@ -413,7 +417,9 @@ namespace Epi.Web.MVC.Repositories
         public void Remove(string id)
         {
             Interfaces.DataInterfaces.ISurveyResponseDao SurveyResponseDao = new EntitySurveyResponseDao();
-            BLL.SurveyResponse Implementation = new BLL.SurveyResponse(SurveyResponseDao);
+            Interfaces.DataInterfaces.ISurveyInfoDao ISurveyInfoDao = new EntitySurveyInfoDao();
+             
+            BLL.SurveyResponse Implementation = new BLL.SurveyResponse(SurveyResponseDao,ISurveyInfoDao);
             SurveyResponseBO surveyresponseBO = new SurveyResponseBO();
             surveyresponseBO.ResponseId = id;
             surveyresponseBO.Status = 0;

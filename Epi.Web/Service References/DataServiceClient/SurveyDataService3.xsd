@@ -254,30 +254,59 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetOrganization">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q35="http://www.yourcompany.com/types/" minOccurs="0" name="request" nillable="true" type="q35:OrganizationAccountRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetOrganizationResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q36="http://www.yourcompany.com/types/" minOccurs="0" name="GetOrganizationResult" nillable="true" type="q36:OrganizationAccountResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="GetSourceTables">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q35="http://www.yourcompany.com/types/" minOccurs="0" name="Request" nillable="true" type="q35:SourceTablesRequest" />
+        <xs:element xmlns:q37="http://www.yourcompany.com/types/" minOccurs="0" name="Request" nillable="true" type="q37:SourceTablesRequest" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetSourceTablesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q36="http://www.yourcompany.com/types/" minOccurs="0" name="GetSourceTablesResult" nillable="true" type="q36:SourceTablesResponse" />
+        <xs:element xmlns:q38="http://www.yourcompany.com/types/" minOccurs="0" name="GetSourceTablesResult" nillable="true" type="q38:SourceTablesResponse" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="UpdateResponseStatus">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q37="http://www.yourcompany.com/types/" minOccurs="0" name="request" nillable="true" type="q37:SurveyAnswerRequest" />
+        <xs:element xmlns:q39="http://www.yourcompany.com/types/" minOccurs="0" name="request" nillable="true" type="q39:SurveyAnswerRequest" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="UpdateResponseStatusResponse">
     <xs:complexType>
       <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetJsonColumn">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="json" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="responseid" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetJsonColumnResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="SetJsonColumnResult" type="xs:boolean" />
+      </xs:sequence>
     </xs:complexType>
   </xs:element>
 </xs:schema>

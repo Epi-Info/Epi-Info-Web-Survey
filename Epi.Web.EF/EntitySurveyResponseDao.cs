@@ -255,7 +255,13 @@ namespace Epi.Web.EF
                        {
                            responseList = Context.SurveyResponses.Where(x => x.SurveyId == Id ).OrderBy(x => x.DateCompleted).ToList();
                        }
+                        if (pStatusId == -2) // Json
+                        {
+                                
+                            responseList = Context.SurveyResponses.Where(x => x.SurveyId == Id && x.ResponseJsonSize == null).ToList();
+                                //responseList = Context.SurveyResponses.Where(x => x.SurveyId == Id ).ToList();
 
+                            }
                     }
                     
              if (pDateCompleted > DateTime.MinValue)
@@ -1637,6 +1643,35 @@ namespace Epi.Web.EF
 
         }
 
+        public void SetJsonColumn(string json, string responseid)
+        {
+            try
+            {
+                Guid Id = new Guid(responseid);
+
+
+                using (var Context = DataObjectFactory.CreateContext())
+                {
+                    var Query = from response in Context.SurveyResponses
+                                where response.ResponseId == Id
+                                select response;
+
+                    var DataRow = Query.Single();
+
+
+                    DataRow.ResponseJsonSize = RemoveWhitespace(json).Length;
+                    DataRow.ResponseJson = json;
+                    
+
+                    Context.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
+            }
+
+        }
     }
 
 
