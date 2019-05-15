@@ -72,6 +72,7 @@
     <Compile Include="BusinessObject\SurveyRequestResultBO.cs" />
     <Compile Include="BusinessObject\SurveyResponseBO.cs" />
     <Compile Include="BusinessObject\UserAuthenticationResponseBO.cs" />
+    <Compile Include="BusinessObject\UserBO.cs" />
     <Compile Include="BusinessRule\BusinessRule.cs" />
     <Compile Include="BusinessRule\ValidateCompare.cs" />
     <Compile Include="BusinessRule\ValidateCreditcard.cs" />
@@ -104,6 +105,7 @@
     <Compile Include="DTO\SurveyAnswerDTO.cs" />
     <Compile Include="DTO\SurveyControlDTO.cs" />
     <Compile Include="DTO\SurveyPageDTO.cs" />
+    <Compile Include="DTO\UserDTO.cs" />
     <Compile Include="Email\Email.cs" />
     <Compile Include="Exception\CustomFaultException.cs" />
     <Compile Include="Extension\LinqExtensions.cs" />
@@ -144,6 +146,8 @@
     <Compile Include="Message\TokenRequest.cs" />
     <Compile Include="Message\TokenResponse.cs" />
     <Compile Include="Message\UserAuthenticationResponse.cs" />
+    <Compile Include="Message\UserRequest.cs" />
+    <Compile Include="Message\UserResponse.cs" />
     <Compile Include="ObjectMapping\Mapper.cs" />
     <Compile Include="Message\OrganizationResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
