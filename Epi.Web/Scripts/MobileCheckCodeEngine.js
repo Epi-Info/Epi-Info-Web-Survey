@@ -1162,7 +1162,7 @@ function CCE_ContextOpenSimpleDialogBox(Title,Prompt,id)
                               }
                        
                             },
-                       'fullHTML': "<div id='SimpleDialogBox' title='"+ Title +"'><p><label id='SimpleDialogBoxPrempt'>"+ Prompt +"</label></p><p style='text-align:right;'><button  id='SimpleDialogBoxButton' type='button' style='width:100%;'onclick='CCE_CloseSimpleDialogBox("+ id.toString() +");'>OK</button></p></div>"
+                       'fullHTML': "<div id='SimpleDialogBox' title='"+ Title +"'><p><label id='SimpleDialogBoxPrempt'>"+ Prompt +"</label></p><p style='text-align:right;'><button  id='SimpleDialogBoxButton' type='button' style='width:100%;'onclick='CCE_CloseSimpleDialogBox("+ id+");'>OK</button></p></div>"
                   })
 }
 

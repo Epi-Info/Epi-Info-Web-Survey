@@ -1981,7 +1981,8 @@ function CCE_ContextOpenMobileSimpleDialogBox(Title, Prompt, id) {
             }
 
         },
-        'blankContent': "<div id='SimpleDialogBox' title='" + Title + "'><p><label id='SimpleDialogBoxPrempt'>" + Prompt + "</label></p><p style='text-align:right;'><button  id='SimpleDialogBoxButton' type='button' style='width:100%;'onclick='CCE_CloseMobileSimpleDialogBox(" + id.toString() + ");'>OK</button></p></div>"
+
+        'blankContent': "<div id='SimpleDialogBox' title='" + Title + "'><p><label id='SimpleDialogBoxPrempt'>" + Prompt + "</label></p><p style='text-align:right;'><button  id='SimpleDialogBoxButton' type='button' style='width:100%;'onclick='CCE_CloseMobileSimpleDialogBox(" + id + ");'>OK</button></p></div>"
     })
 
 
