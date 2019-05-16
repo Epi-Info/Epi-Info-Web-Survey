@@ -54,6 +54,7 @@
     <Compile Include="DataInterface\ISurveyResponseDao.cs" />
     <Compile Include="DataInterface\ISurveyInfoDao.cs" />
     <Compile Include="DataInterface\IDaoFactory.cs" />
+    <Compile Include="DataInterface\IUserDao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
