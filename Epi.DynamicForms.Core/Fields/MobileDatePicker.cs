@@ -197,7 +197,7 @@ namespace MvcDynamicForms.Fields
 
             if (FunctionObjectAfter != null && !FunctionObjectAfter.IsNull())
             {
-                txt.Attributes.Add("onchange", "return " + _key + "_after();"); //After
+                txt.Attributes.Add("onchange", "return " + _key + "_after(this.id);"); //After
             }
 
             if (FunctionObjectBefore != null && !FunctionObjectBefore.IsNull())
