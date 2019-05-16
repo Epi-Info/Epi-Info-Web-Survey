@@ -102,8 +102,26 @@ namespace Epi.Web.BLL
             }
             return ISValidUser;
         }
+        public static List<FormsHierarchyBO> MapToFormHierarchyBOs(string RootId, List<SurveyInfoBO> SurveyInfoBOList)
+        {
+            List<FormsHierarchyBO> result = new List<FormsHierarchyBO>();
+            foreach (var item in SurveyInfoBOList)
+            {
+                FormsHierarchyBO FormsHierarchyBO = new FormsHierarchyBO();
+                FormsHierarchyBO.ViewId = item.ViewId;
+                FormsHierarchyBO.FormId = item.SurveyId;
+                FormsHierarchyBO.SurveyInfo = item;
+                FormsHierarchyBO.IsSqlProject = item.IsSqlProject;
 
-        
+                if (item.SurveyId == RootId)
+                {
+                    FormsHierarchyBO.IsRoot = true;
+                }
+                result.Add(FormsHierarchyBO);
+            }
+            return result;
+        }
+
 
 
 

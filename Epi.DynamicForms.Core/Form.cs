@@ -147,7 +147,7 @@ namespace MvcDynamicForms
 
                     foreach (var item in RequiredList)
                     {
-                        if (item == field.Key.ToString())
+                        if (item.ToLower() == field.Key.ToLower().ToString())
                         {
                             _Required = true;
                             break;

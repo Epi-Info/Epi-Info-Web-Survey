@@ -34,7 +34,10 @@ namespace Epi.Web.EF
                 result.DateCreated = entity.DateCreated;
                 result.IsDraftMode = entity.IsDraftMode;
                 result.StartDate = entity.StartDate;
-            result.IsSqlProject = (bool)entity.IsSQLProject;
+            if (entity.IsSQLProject != null)
+            {
+                result.IsSqlProject = (bool)entity.IsSQLProject;
+            }
             result.OrganizationId = entity.OrganizationId;
             try
             {
@@ -476,6 +479,7 @@ namespace Epi.Web.EF
             SurveyResponseBO.TemplateXMLSize = (long)entity.ResponseXMLSize;
             SurveyResponseBO.DateCreated = entity.DateCreated;
             SurveyResponseBO.IsDraftMode = entity.IsDraftMode;
+            SurveyResponseBO.Json = entity.ResponseJson;
             //SurveyResponseBO.IsLocked = entity.IsLocked;
             /// SurveyResponseBO.LastActiveUserId = LastActiveUseerId;
             if (entity.SurveyMetaData != null && entity.SurveyMetaData.ViewId!= null)
