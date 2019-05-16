@@ -27,7 +27,7 @@ namespace MvcDynamicForms.Fields
             commandButtonTag.Attributes.Add("name", "Relate");
             commandButtonTag.Attributes.Add("data-role", "button");
             commandButtonTag.Attributes.Add("data-inline", "true");
-            commandButtonTag.Attributes.Add("type", "button");
+            commandButtonTag.Attributes.Add("type", "submit");
             commandButtonTag.Attributes.Add("data-theme", "submit2");
             StringBuilder StyleValues = new StringBuilder();
             //StyleValues.Append(GetControlStyle(_fontstyle.ToString(), _Prompttop.ToString(), _Promptleft.ToString(), null, Height.ToString(), _IsHidden));
