@@ -80,6 +80,7 @@
     <Compile Include="Account.cs" />
     <Compile Include="Admin.cs" />
     <Compile Include="CacheDependencyInfo.cs" />
+    <Compile Include="User.cs" />
     <Compile Include="Utility.cs" />
     <Compile Include="Organization.cs" />
     <Compile Include="Publisher.cs" />
@@ -100,7 +101,7 @@
   </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
+  <Target Name="BeforeBuild"> 
   </Target>
   <Target Name="AfterBuild">
   </Target>

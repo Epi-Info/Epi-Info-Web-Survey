@@ -70,26 +70,28 @@ namespace MvcDynamicForms.Fields
             //select.Attributes.Add("data-shadow", "true");
             //select.Attributes.Add("data-iconshadow", "true");
             //select.Attributes.Add("data-theme", "c");
-            FunctionObjectAfter = (EnterRule)_form.FormCheckCodeObj.GetCommand("level=field&event=after&identifier=" + _key);
-            if (FunctionObjectAfter != null && !FunctionObjectAfter.IsNull())
-            {
-                select.Attributes.Add("onchange", "return " + _key + "_after(this.id);"); //After
-            }
-            FunctionObjectBefore = (EnterRule)_form.FormCheckCodeObj.GetCommand("level=field&event=before&identifier=" + _key);
-            if (FunctionObjectBefore != null && !FunctionObjectBefore.IsNull())
-            {
-                select.Attributes.Add("onfocus", "return " + _key + "_before(this.id);"); //Before
-            }
-            FunctionObjectClick = (EnterRule)_form.FormCheckCodeObj.GetCommand("level=field&event=click&identifier=" + _key);
-            if (FunctionObjectClick != null && !FunctionObjectClick.IsNull())
-            {
-                select.Attributes.Add("onclick", "return " + _key + "_click(this.id);"); //click
-            }
-            if (this.RelateCondition)
-            {
-                select.Attributes.Add("onchange", "return SetCodes_Val(this,'" + _form.SurveyInfo.SurveyId + "','" + SourceTable + "'," + "''" + ",'" + TextColumnName + "','" + FieldRelateCondition + "');"); //click
+            if (_form != null) {
+                FunctionObjectAfter = (EnterRule)_form.FormCheckCodeObj.GetCommand("level=field&event=after&identifier=" + _key);
+                if (FunctionObjectAfter != null && !FunctionObjectAfter.IsNull())
+                {
+                    select.Attributes.Add("onchange", "return " + _key + "_after(this.id);"); //After
+                }
+                FunctionObjectBefore = (EnterRule)_form.FormCheckCodeObj.GetCommand("level=field&event=before&identifier=" + _key);
+                if (FunctionObjectBefore != null && !FunctionObjectBefore.IsNull())
+                {
+                    select.Attributes.Add("onfocus", "return " + _key + "_before(this.id);"); //Before
+                }
+                FunctionObjectClick = (EnterRule)_form.FormCheckCodeObj.GetCommand("level=field&event=click&identifier=" + _key);
+                if (FunctionObjectClick != null && !FunctionObjectClick.IsNull())
+                {
+                    select.Attributes.Add("onclick", "return " + _key + "_click(this.id);"); //click
+                }
+                if (this.RelateCondition)
+                {
+                    select.Attributes.Add("onchange", "return SetCodes_Val(this,'" + _form.SurveyInfo.SurveyId + "','" + SourceTable + "'," + "''" + ",'" + TextColumnName + "','" + FieldRelateCondition + "');"); //click
 
 
+                }
             }
             int LargestChoiseLength = 0;
             string measureString = "";
