@@ -1355,7 +1355,10 @@ namespace Epi.Web.MVC.Utility
                     if (field != null)
                     {
                         field.IsPlaceHolder = true;
-                        form.Fields.Add(field.Name.ToLower(), field);
+                        if (!form.Fields.ContainsKey(field.Name.ToLower()))
+                        {
+                            form.Fields.Add(field.Name.ToLower(), field);
+                        }
                     }
                 }
             }
