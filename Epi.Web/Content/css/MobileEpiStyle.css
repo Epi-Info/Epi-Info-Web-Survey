@@ -1139,26 +1139,20 @@ h2.surveyTitle {
 }
 
 #ModEnvheadrer
-{
-    /*display:inline;*/
-    /*color:#ff333d ;*/
-    /*min-height:50px;*/ 
-    text-align:center ;
-    margin: 10px;
-    /*padding: 0.5em;*/
-    /*border-top: .5px solid #4e9689 ;
-    border-bottom: .5px solid #4e9689 ;*/
-    border: 1px solid #ffca0a;
-    background: #fff5c1;
-    margin-bottom: 10px; 
-    margin-left: 0.5em; 
-    margin-right: 0.5em; 
-    -moz-border-radius: 10px;
- -webkit-border-radius: 10px;
- -khtml-border-radius: 10px;
+{ 
+text-align:center ;
+margin: 10px;
+padding:5px;
+/*stroke-width:1px;
+stroke:#eaeaea;*/
+border: 1px solid #eaeaea;
+background: #f7f7f7;
+margin-bottom: 10px; 
+margin-left: 0.5em; 
+margin-right: 0.5em;*
+-moz-border-radius: 10px;
+-webkit-border-radius : 10px;
+-khtml-border-radius: 10px;
  border-radius: 10px;
-    font-family: Segoe UI,Tahoma,Geneva,Verdana,sans-serif;
-    /*font-weight:bold;*/
-    /*position:absolute;*/
-
+ font-family: Segoe UI,Tahoma,Geneva,Verdana,sans-serif;
 }

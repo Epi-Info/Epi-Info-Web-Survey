@@ -69,11 +69,14 @@ background-origin:content-box;*/
 { 
 text-align:center ;
 margin: 10px;
-border: 1px solid #ffca0a;
-background: #fff5c1;
+padding:5px;
+/*stroke-width:1px;
+stroke:#eaeaea;*/
+border: 1px solid #eaeaea;
+background: #f7f7f7;
 margin-bottom: 10px; 
 margin-left: 0.5em; 
-margin-right: 0.5em; 
+margin-right: 0.5em;*
 -moz-border-radius: 10px;
 -webkit-border-radius : 10px;
 -khtml-border-radius: 10px;
