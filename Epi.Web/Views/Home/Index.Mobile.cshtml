@@ -1,30 +1,30 @@
 ﻿@{
     ViewBag.Title = "Survey Home" + " - " +
         Model.SurveyName + " - " + Model.IsDraftModeStyleClass + " - Mobile";
-    
+
 }
 
- 
-@*<ul data-role="listview" data-filter="true">
-     
-    
-</ul>
 
-<div data-role="fieldcontain">
-    <label for="name">Text Input:</label>
-    <input type="text" name="name" id="name" value=""  style="background-color: Gray"/>
-</div>	
-<div data-role="fieldcontain">
-	<label for="number-pattern">Number + pattern:</label>
-	<input type="number" name="number" style="background-color: Gray"  pattern="[0-9]*" id="number-pattern" value="" placeholder="Pattern attribute [0-9]* for a numeric keypad" />
-</div>*@
+@*<ul data-role="listview" data-filter="true">
+
+
+    </ul>
+
+    <div data-role="fieldcontain">
+        <label for="name">Text Input:</label>
+        <input type="text" name="name" id="name" value=""  style="background-color: Gray"/>
+    </div>
+    <div data-role="fieldcontain">
+        <label for="number-pattern">Number + pattern:</label>
+        <input type="number" name="number" style="background-color: Gray"  pattern="[0-9]*" id="number-pattern" value="" placeholder="Pattern attribute [0-9]* for a numeric keypad" />
+    </div>*@
 <script type="text/javascript" >
 
     $(document).ready(function () {
         // a workaround for a flaw in the demo system (http://dev.jqueryui.com/ticket/4375), ignore!
-        
-       
- 
+
+
+
 
 //         $("#VideoDialog").dialog({
 //            autoOpen: false,
@@ -36,10 +36,10 @@
 //            modal: true
 //        });
 
-//          
+//
 //          document.getElementById("VideoDialog").style.display ="none";
        });
-        
+
 // $(document).delegate('#VideoDialog', 'click', function() {
 // $(this).simpledialog({
 //                'mode' : 'blank',
@@ -52,200 +52,206 @@
 //                                  $('#dialogoutput').text('OK');
 //                                }
 //                              }
-//                       
+//
 //                            },
 //                      'fullHTML': "<Div><iframe width='480' height='360' src='http://www.youtube.com/embed/BgTJnSKQKIs?rel=0' frameborder='0' allowfullscreen></iframe><span style='font: bold 10pt Segoe UI; color:#04aeda; '>  Epi Info 7</span></Div>"
 //                         })
 
-//               
+//
 
-//         
+//
 //});
 </script>
- 
+
 @* <div id="header">
-            <h1>
-                @Model.SurveyName </h1>
-             
-        </div>*@
-         @if (@Model.IsDraftModeStyleClass != "")
-          {
-              <div id="header" class="TestHeader">
-  
-                <h1>
-                    @Model.SurveyName 
-                </h1>
-      
-              </div>
-           }
-         else 
-         { 
-             <div id="header"  >
-               <h1>
-                   @Model.SurveyName 
-               </h1>
-      
-             </div>
- 
-       }
+        <h1>
+            @Model.SurveyName </h1>
 
-<div id="ModEnvheadrer">
-    @if (@System.Configuration.ConfigurationManager.AppSettings["ModerateEnv"] != null)
-    {
-        if (@System.Configuration.ConfigurationManager.AppSettings["ModerateEnv"].ToUpper() == "TRUE")
+    </div>*@
+@if (@Model.IsDraftModeStyleClass != "")
+{
+    <div id="header" class="TestHeader">
+
+        <h1>
+            @Model.SurveyName
+        </h1>
+
+    </div>
+}
+else
+{
+    <div id="header"  >
+        <h1>
+            @Model.SurveyName
+        </h1>
+
+    </div>
+
+}
+
+
+
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "myform", @class = @Model.IsDraftModeStyleClass.ToString() }))
+{
+
+
+    <div id="content" style="margin-bottom:200px;">
+        @if (Model.ClosingDate >= DateTime.Now && Model.StartDate <= DateTime.Now)
         {
-            <img src="@Url.Content("~/Content/images/sign_warning.png")" alt="" style="vertical-align: middle;
-                padding-right: 10px;" />
-
-                <span style="color:#ff333d;font-weight:bold; text-align:center"> Notice to Respondents:</span>
-                <br />
-                <p style="text-align:left">
-                    This Epi Info™ Secure Web Survey system is approved for the collection of Personally Identifiable Information (PII) and Protected Health Information (PHI) as described in 45 CFR 160.103 and summarized
-                    <a id="anchor1" style="width:13px;" href="https://www.hhs.gov/hipaa/for-professionals/privacy/laws-regulations/index.html" target="_blank" title="Summary of the HIPAA Privacy Rule">
-                        Summary of the HIPAA Privacy Rule  
-                    </a>
-                    &nbsp;and
-
-                    <a id="anchor2" style="width:13px;" href="https://www.hhs.gov/sites/default/files/privacysummary.pdf" target="_blank" title="HHS Office of Civil Rights: Summary of the HIPAA Privacy Rule PDF">
-                        HHS Office of Civil Rights: Summary of the HIPAA Privacy Rule PDF
-                    </a>
-                   .&nbsp;
-                    The survey that follows *MAY* collect your personally identifiable information.  If you have any questions about how your data will be used, protected, and possibly shared, please contact the survey authors listed in the survey.
-                </p>
-        }
-    }
-</div>
-
-       		 
-		@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "myform", @class = @Model.IsDraftModeStyleClass.ToString() }))
-		{ 
-     
-        
-            <div id="content" style="margin-bottom:200px;">
-                @if (Model.ClosingDate >= DateTime.Now && Model.StartDate <= DateTime.Now)
-               {
-                       @* <h2>
-                            Welcome!</h2>*@
-                          <br />
+            @* <h2>
+                Welcome!</h2>*@
+            <br />
                         <div>
-                           @Html.Raw(Model.IntroductionText)
+                            @Html.Raw(Model.IntroductionText)
                             <br />
                         </div>
                         <p></p>
                         <p></p> <p>&nbsp;</p>
                         <p style="margin: 0 auto; font-size:9pt; text-align:center; color:#af463a;">Please save this pass code in reference to your survey response.</p>
                         <div class="passcodeBox" >@Model.PassCode</div>
-                        <p></p>    
+                        <p></p>
                         <p style="width: 250px; min-width:120px; margin: 0 auto;">
-                         
-                                <button id="beginsurvey" class="ui-btn-hidden" data-theme="e" type="submit" aria-disabled="false" > Begin Survey</button>
-                       
+
+                            <button id="beginsurvey" class="ui-btn-hidden" data-theme="e" type="submit" aria-disabled="false" > Begin Survey</button>
+
 
 
                         </p>
                         <p style="text-align:center; font-size:9pt;">Survey Starting Date: @string.Format("{0:f}", Model.StartDate)</p>
-                        
+
                         <p style="text-align:center;font-size:9pt;">Survey Closing Date: @string.Format("{0:f}", Model.ClosingDate)</p>
-                        
+
                         <p>&nbsp;</p>
-                   <div style="margin: 0 auto; text-align:center;">
-                         @if (!string.IsNullOrWhiteSpace(@Model.SurveyNumber))
-                         {
-                                    <div>
-                                        <span class="boldlabel">Survey #:</span> <span>
-                                           @Model.SurveyNumber</span></div>
-                         }
-                        @if (!string.IsNullOrWhiteSpace(@Model.OrganizationName))
-                        {
-                                  <div>
+                        <div style="margin: 0 auto; text-align:center;">
+                            @if (!string.IsNullOrWhiteSpace(@Model.SurveyNumber))
+                            {
+                                <div>
+                                    <span class="boldlabel">Survey #:</span> <span>
+                                        @Model.SurveyNumber
+                                    </span>
+                                </div>
+                            }
+                            @if (!string.IsNullOrWhiteSpace(@Model.OrganizationName))
+                            {
+                                <div>
                                     <span class="boldlabel">Organization:</span> <span>
-                                    @Model.OrganizationName</span></div>
-                        }
-         
-                        @*<div>
-                            <span class="boldlabel">Survey #:</span> <span>
-                               @Model.SurveyNumber</span></div>
-                        <div>
-                            <span class="boldlabel">Organization:</span> <span>
-                                @Model.OrganizationName</span></div>*@
-                        @*<div>
-                            <span class="boldlabel">Department:</span> <span>
-                               @Model.DepartmentName</span></div>*@
-                        <div style="clear: both;">
-                        </div>
-                    </div>
-                    <br /> 
-                     if (System.Configuration.ConfigurationManager.AppSettings["SHOW_HOME_LOGO"].ToUpper() == "TRUE")
-                         {
-                       <div style="margin:50px auto 0 auto; text-align:center;" >
-                          
-                         <img src="@Url.Content(@System.Configuration.ConfigurationManager.AppSettings["HOME_LOGO_PATH"].ToString())" alt="CSTE" style="width:300px;" />
-                        
-                       </div> 
-                         }
-               }
+                                        @Model.OrganizationName
+                                    </span>
+                                </div>
+                            }
 
-                else
-                { 
-                <div>
+                            @*<div>
+                                    <span class="boldlabel">Survey #:</span> <span>
+                                       @Model.SurveyNumber</span></div>
+                                <div>
+                                    <span class="boldlabel">Organization:</span> <span>
+                                        @Model.OrganizationName</span></div>*@
+                            @*<div>
+                                <span class="boldlabel">Department:</span> <span>
+                                   @Model.DepartmentName</span></div>*@
+                            <div style="clear: both;">
+                            </div>
+                        </div>
+                        <br />
+            if (System.Configuration.ConfigurationManager.AppSettings["SHOW_HOME_LOGO"].ToUpper() == "TRUE")
+            {
+                <div style="margin:50px auto 0 auto; text-align:center;" >
+
+                    <img src="@Url.Content(@System.Configuration.ConfigurationManager.AppSettings["HOME_LOGO_PATH"].ToString())" alt="CSTE" style="width:300px;" />
+
                 </div>
-                    if (Model.StartDate > DateTime.Now)
-                    { 
-                              <div id="attention">
-                         <img src="@Url.Content("~/Content/images/sign_warning.png")" alt="" style="vertical-align: middle;
+            }
+        }
+
+        else
+        {
+            <div>
+            </div>
+            if (Model.StartDate > DateTime.Now)
+            {
+                <div id="attention">
+                    <img src="@Url.Content("~/Content/images/sign_warning.png")" alt="" style="vertical-align: middle;
                             padding-right: 10px;" />
-                       Survey has not yet started.
-                        <p style="text-align:center">Survey Starting Date: @string.Format("{0:f}", Model.StartDate)</p>
-                    </div>
+                    Survey has not yet started.
+                    <p style="text-align:center">Survey Starting Date: @string.Format("{0:f}", Model.StartDate)</p>
+                </div>
 
-                    }
-                    if (Model.ClosingDate < DateTime.Now)
-                    {
-                   
-                        <div id="attention">
-                             <img src="@Url.Content("~/Content/images/sign_warning.png")" alt="" style="vertical-align: middle;
+            }
+            if (Model.ClosingDate < DateTime.Now)
+            {
+
+                <div id="attention">
+                    <img src="@Url.Content("~/Content/images/sign_warning.png")" alt="" style="vertical-align: middle;
                                 padding-right: 10px;" />
-                            This survey is currently closed. Please contact the author of this survey for further
-                            assistance.
-                            <p style="text-align:center">Survey Closing Date: @string.Format("{0:f}", Model.ClosingDate)</p>
-                        </div>
-                    }
+                    This survey is currently closed. Please contact the author of this survey for further
+                    assistance.
+                    <p style="text-align:center">Survey Closing Date: @string.Format("{0:f}", Model.ClosingDate)</p>
+                </div>
+            }
+        }
+
+
+        <div id="ModEnvheadrer">
+            @if (@System.Configuration.ConfigurationManager.AppSettings["ModerateEnv"] != null)
+            {
+                if (@System.Configuration.ConfigurationManager.AppSettings["ModerateEnv"].ToUpper() == "TRUE")
+                {
+                    <img src="@Url.Content("~/Contentcss//images/exclamationcircle.png")" alt="" />
+
+                            <span style="color:#515151;font-weight:bold;font-size:16px; text-align:center"> Notice to Respondents:</span>
+                            <br />
+                            <p style="text-align:left;color:#515151;font-size:14px">
+                                This Epi Info™ Secure Web Survey system is approved for the collection of Personally Identifiable Information (PII) and Protected Health Information (PHI) as described in 45 CFR 160.103 and summarized
+                                <a id="anchor1" style="width:13px;color:#1e61ac;" href="https://www.hhs.gov/hipaa/for-professionals/privacy/laws-regulations/index.html" target="_blank" title="Summary of the HIPAA Privacy Rule">
+                                    Summary of the HIPAA Privacy Rule
+                                </a>
+                                &nbsp;and
+
+                                <a id="anchor2" style="width:13px;color:#1e61ac;" href="https://www.hhs.gov/sites/default/files/privacysummary.pdf" target="_blank" title="HHS Office of Civil Rights: Summary of the HIPAA Privacy Rule PDF">
+                                    HHS Office of Civil Rights: Summary of the HIPAA Privacy Rule PDF
+                                </a>
+                                .&nbsp;
+                                The survey that follows *MAY* collect your personally identifiable information.  If you have any questions about how your data will be used, protected, and possibly shared, please contact the survey authors listed in the survey.
+                            </p>
                 }
-                <input type="hidden"  id="PassCode"  name="PassCode" value="@Model.PassCode" />
-			  <input type="hidden"  id="ResponseId"  name="ResponseId" value="@Model.ResponseId" />
-               
-           </div>
-           
-          @* <div style="width:220px; padding:5px; border: 2px solid #04aeda; margin:2em auto;">
-	            <div style="float:left; width:54px;">
-	                <img alt="" style="z-index:12;"  src="@Url.Content("~/Content/images/video.png")"/>
-	            </div>
-	            <div style="float:right; vertical-align:top; text-align:left; padding-right:10px;">
-	                <span style="font: bold 10pt Segoe UI; color:#04aeda; "> Created using Epi Info 7</span>
-	               <p style="margin: 5px 0;">*@
-                 @*<a id="VideoDialog"   onclick ="OpenVideoDialogMobile();"   class="watch" >Watch Video</a>*@
+            }
+        </div>
+        <input type="hidden" id="PassCode" name="PassCode" value="@Model.PassCode" />
+        <input type="hidden" id="ResponseId" name="ResponseId" value="@Model.ResponseId" />
 
-                  @*<a id="VideoDialog" href="http://www.youtube.com/watch?v=BgTJnSKQKIs" class="watch" >Watch Video</a>*@
-                    @*<a id="VideoDialog"  class="watch" >Watch Video</a>*@
+    </div>
 
-                     @* <button type="button"  data-role="button"  class ="watch" id ="VideoDialog" name="VideoDialog" value="Watch Video">Watch Video</button>*@
-                 @*  </p>
-	            </div>
-	            <div style="clear:both;"></div>
+        @* <div style="width:220px; padding:5px; border: 2px solid #04aeda; margin:2em auto;">
+            <div style="float:left; width:54px;">
+                <img alt="" style="z-index:12;"  src="@Url.Content("~/Content/images/video.png")"/>
+            </div>
+            <div style="float:right; vertical-align:top; text-align:left; padding-right:10px;">
+                <span style="font: bold 10pt Segoe UI; color:#04aeda; "> Created using Epi Info 7</span>
+               <p style="margin: 5px 0;">*@
+        @*<a id="VideoDialog"   onclick ="OpenVideoDialogMobile();"   class="watch" >Watch Video</a>*@
+
+        @*<a id="VideoDialog" href="http://www.youtube.com/watch?v=BgTJnSKQKIs" class="watch" >Watch Video</a>*@
+        @*<a id="VideoDialog"  class="watch" >Watch Video</a>*@
+
+        @* <button type="button"  data-role="button"  class ="watch" id ="VideoDialog" name="VideoDialog" value="Watch Video">Watch Video</button>*@
+        @*  </p>
+                </div>
+                <div style="clear:both;"></div>
             </div>*@
 
-               
-        }
 
-     @* <div id="VideoDialog"  title = "How this survey was created!">
-               
-     <iframe width="480" height="360" src="http://www.youtube.com/embed/BgTJnSKQKIs?rel=0" frameborder="0" allowfullscreen></iframe>
-              <span style="font: bold 10pt Segoe UI; color:#04aeda; ">  Epi Info 7</span> 
-               
-       </div>*@
+}
 
-       @{if (ViewBag.Omniture.IsEnabled == true)
-        { 
-         Html.RenderPartial("OmniturePartial");  
-        } 
-        }
+@* <div id="VideoDialog"  title = "How this survey was created!">
+
+    <iframe width="480" height="360" src="http://www.youtube.com/embed/BgTJnSKQKIs?rel=0" frameborder="0" allowfullscreen></iframe>
+             <span style="font: bold 10pt Segoe UI; color:#04aeda; ">  Epi Info 7</span>
+
+      </div>*@
+
+@{if (ViewBag.Omniture.IsEnabled == true)
+    {
+        Html.RenderPartial("OmniturePartial");
+    }
+}

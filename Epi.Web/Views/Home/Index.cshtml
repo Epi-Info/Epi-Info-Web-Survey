@@ -3,16 +3,16 @@
     ViewBag.Title = "Survey Home" + " - " +
         Model.SurveyName + " - " + Model.IsDraftModeStyleClass;
     Layout = "~/Views/Shared/_Layout.cshtml";
-    
+
 }
 
 <script type="text/javascript" >
 
     $(document).ready(function () {
         // a workaround for a flaw in the demo system (http://dev.jqueryui.com/ticket/4375), ignore!
-        
-       
- 
+
+
+
 
          $("#VideoDialog").dialog({
             autoOpen: false,
@@ -25,32 +25,32 @@
          });
 
     });
-         
+
 </script>
 
- 
- 
- @if (@Model.IsDraftModeStyleClass != "")
- {
-          <div id="header" class="TestHeader">
-  
-            <h1>
-                @Model.SurveyName 
-            </h1>
-      
-          </div>
- }
- else
- { 
-             <div id="header"  >
-               <h1>
-                   @Model.SurveyName 
-               </h1>
-      
-             </div>
- 
- }
-        <div id="infobox">
+
+
+@if (@Model.IsDraftModeStyleClass != "")
+{
+    <div id="header" class="TestHeader">
+
+        <h1>
+            @Model.SurveyName
+        </h1>
+
+    </div>
+}
+else
+{
+    <div id="header"  >
+        <h1>
+            @Model.SurveyName
+        </h1>
+
+    </div>
+
+}
+<div id="infobox">
     @if (!string.IsNullOrWhiteSpace(@Model.SurveyNumber))
     {
         <div id="surveyno">
@@ -59,79 +59,47 @@
             </span>
         </div>
     }
-@if (!string.IsNullOrWhiteSpace(@Model.OrganizationName))
-{
-    <div id="orgn">
-        <span class="boldlabel">Organization:</span> <span>
-            @Model.OrganizationName
-        </span>
-    </div>
-}
-
-
-
-                @* <div id="dept">
-                    <span class="boldlabel">Department:</span> <span>
-                        @Model.DepartmentName
-                    </span>
-                </div>*@
-                <div style="clear: both;">
-                </div>
-
-
-           
+    @if (!string.IsNullOrWhiteSpace(@Model.OrganizationName))
+    {
+        <div id="orgn">
+            <span class="boldlabel">Organization:</span> <span>
+                @Model.OrganizationName
+            </span>
         </div>
-
-
-<div id="ModEnvheadrer">
-    @if (@System.Configuration.ConfigurationManager.AppSettings["ModerateEnv"] != null)
-    {
-        if (@System.Configuration.ConfigurationManager.AppSettings["ModerateEnv"].ToUpper() == "TRUE")
-        {
-            <img src="@Url.Content("~/Content/images/sign_warning.png")" alt="" style="vertical-align: middle;
-                padding-right: 10px;" />
-            
-                <span style="color:#ff333d;font-weight:bold; text-align:center"> Notice to Respondents:</span> 
-                <br />
-                <p style="text-align:left">
-                    This Epi Info™ Secure Web Survey system is approved for the collection of Personally Identifiable Information (PII) and Protected Health Information (PHI) as described in 45 CFR 160.103 and summarized at
-                    <a id="anchor1" style="width:13px;" href="https://www.hhs.gov/hipaa/for-professionals/privacy/laws-regulations/index.html" target="_blank" title="Summary of the HIPAA Privacy Rule">
-                        Summary of the HIPAA Privacy Rule  
-                    </a>
-                    &nbsp;and
-
-                    <a id="anchor2" style="width:13px;" href="https://www.hhs.gov/sites/default/files/privacysummary.pdf" target="_blank" title="HHS Office of Civil Rights: Summary of the HIPAA Privacy Rule PDF">
-                        HHS Office of Civil Rights: Summary of the HIPAA Privacy Rule PDF
-                    </a>
-                    .&nbsp;
-                    The survey that follows *MAY* collect your personally identifiable information.  If you have any questions about how your data will be used, protected, and possibly shared, please contact the survey authors listed in the survey.
-                </p>
-        }
     }
-</div>       
-
-    @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "myform", @class = @Model.IsDraftModeStyleClass.ToString() }))
-    {
-
-        @*<div id="content" style="margin-bottom:200px; padding-left:10px; min-height:375px;">*@
-        <div id="content" style="margin-bottom:200px; padding-left:10px; min-height:375px;"  >
 
 
 
-            
+    @* <div id="dept">
+            <span class="boldlabel">Department:</span> <span>
+                @Model.DepartmentName
+            </span>
+        </div>*@
+    <div style="clear: both;">
+    </div>
 
 
-            @if (Model.ClosingDate >= DateTime.Now && Model.StartDate <= DateTime.Now)
+
+</div>
+
+
+
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "myform", @class = @Model.IsDraftModeStyleClass.ToString() }))
+{
+
+    <div id="content" style="margin-bottom:200px; padding-left:10px; min-height:375px;"  >
+        @if (Model.ClosingDate >= DateTime.Now && Model.StartDate <= DateTime.Now)
                 {
-                @* <h2>
-                    Welcome!</h2>*@
-                <br />
-                    <div>
-                        @Html.Raw(Model.IntroductionText)
-                        <br />
-                    </div>
+            @* <h2>
+                Welcome!</h2>*@
+            <br />
+                <div>
+                    @Html.Raw(Model.IntroductionText)
+                    <br />
+                </div>
                     <p></p>
-                        <p></p>
+                    <p></p>
                         <p></p> <p>&nbsp;</p>
 
                         <div id="passcodebox" style="">@Model.PassCode</div>
@@ -147,83 +115,115 @@
 
                         <p style="text-align:center;font-size:9pt;">Survey Closing Date: @string.Format("{0:f}", Model.ClosingDate)</p>
                         <br />
-                if (System.Configuration.ConfigurationManager.AppSettings["SHOW_HOME_LOGO"].ToUpper() == "TRUE")
-                {
-                    <div style="margin:50px auto 0 auto; text-align:center;">
-
-                        <img src="@Url.Content(@System.Configuration.ConfigurationManager.AppSettings["HOME_LOGO_PATH"].ToString())" alt="" style="width:300px;" />
-
-                    </div>
-                }
-                @*<div style="text-align:center; margin:0px auto;font-size: 9pt; line-height: 120%; ">
-                                <strong>Technical Support</strong><br />
-
-                    <img src="@Url.Content("~/Content/images/email1.png")" width="16"  alt="" style="vertical-align:middle;" /> <a href="#">abcd@ghy.com</a> <br />
-                    <img src="@Url.Content("~/Content/images/phone.png")"  height="14"  alt="" style="vertical-align:middle;" />&nbsp; 678-890-6789 ext. 1234     </div>
-                *@
-
-            }
-
-            else
+            if (System.Configuration.ConfigurationManager.AppSettings["SHOW_HOME_LOGO"].ToUpper() == "TRUE")
             {
-                <div>
-                    <br />
+                <div style="margin:50px auto 0 auto; text-align:center;">
+
+                    <img src="@Url.Content(@System.Configuration.ConfigurationManager.AppSettings["HOME_LOGO_PATH"].ToString())" alt="" style="width:300px;" />
+
+                </div>
+            }
+            @*<div style="text-align:center; margin:0px auto;font-size: 9pt; line-height: 120%; ">
+                            <strong>Technical Support</strong><br />
+
+                <img src="@Url.Content("~/Content/images/email1.png")" width="16"  alt="" style="vertical-align:middle;" /> <a href="#">abcd@ghy.com</a> <br />
+                <img src="@Url.Content("~/Content/images/phone.png")"  height="14"  alt="" style="vertical-align:middle;" />&nbsp; 678-890-6789 ext. 1234     </div>
+            *@
+
+        }
+
+        else
+        {
+            <div>
+                <br />
+            </div>
+
+            if (Model.StartDate > DateTime.Now)
+            {
+
+                <div id="attention">
+                    <img src="@Url.Content("~/Content/images/sign_warning.png")" alt="" style="vertical-align: middle;
+                            padding-right: 10px;" />
+                    Survey has not yet started.
+                    <p style="text-align:center">Survey Starting Date: @string.Format("{0:f}", Model.StartDate)</p>
                 </div>
 
-                if (Model.StartDate > DateTime.Now)
-                {
+            }
+            if (Model.ClosingDate < DateTime.Now)
+            {
 
-                    <div id="attention">
-                        <img src="@Url.Content("~/Content/images/sign_warning.png")" alt="" style="vertical-align: middle;
-                            padding-right: 10px;" />
-                        Survey has not yet started.
-                        <p style="text-align:center">Survey Starting Date: @string.Format("{0:f}", Model.StartDate)</p>
-                    </div>
-
-                }
-                if (Model.ClosingDate < DateTime.Now)
-                {
-
-                    <div id="attention">
-                        <img src="@Url.Content("~/Content/images/sign_warning.png")" alt="" style="vertical-align: middle;
+                <div id="attention">
+                    <img src="@Url.Content("~/Content/images/sign_warning.png")" alt="" style="vertical-align: middle;
                                 padding-right: 10px;" />
-                        This survey is currently closed. Please contact the author of this survey for further
-                        assistance.
-                        <p style="text-align:center">Survey Closing Date: @string.Format("{0:f}", Model.ClosingDate)</p>
-                    </div>
+                    This survey is currently closed. Please contact the author of this survey for further
+                    assistance.
+                    <p style="text-align:center">Survey Closing Date: @string.Format("{0:f}", Model.ClosingDate)</p>
+                </div>
+            }
+        }
+
+        <div id="ModEnvheadrer">
+            @if (@System.Configuration.ConfigurationManager.AppSettings["ModerateEnv"] != null)
+                {
+                    if (@System.Configuration.ConfigurationManager.AppSettings["ModerateEnv"].ToUpper() == "TRUE")
+                    {
+                    <img src="@Url.Content("~/Content/css/images/exclamationcircle.png")" alt="" style="vertical-align: middle;
+                " />
+
+                    <span style="color:#515151;font-weight:bold;font-size:16px; text-align:center"> Notice to Respondents:</span>
+                        <br />
+                        <p style="text-align:left;color:#515151;font-size:14px">
+                            This Epi Info™ Secure Web Survey system is approved for the collection of Personally Identifiable Information (PII) and Protected Health Information (PHI) as described in 45 CFR 160.103 and summarized at
+                            <a id="anchor1" style="width:13px;color:#1e61ac;" href="https://www.hhs.gov/hipaa/for-professionals/privacy/laws-regulations/index.html" target="_blank" title="Summary of the HIPAA Privacy Rule">
+                                Summary of the HIPAA Privacy Rule
+                            </a>
+                            &nbsp;and
+
+                            <a id="anchor2" style="width:13px;color:#1e61ac;" href="https://www.hhs.gov/sites/default/files/privacysummary.pdf" target="_blank" title="HHS Office of Civil Rights: Summary of the HIPAA Privacy Rule PDF">
+                                HHS Office of Civil Rights: Summary of the HIPAA Privacy Rule PDF
+                            </a>
+                            .&nbsp;
+                            The survey that follows *MAY* collect your personally identifiable information.  If you have any questions about how your data will be used, protected, and possibly shared, please contact the survey authors listed in the survey.
+                        </p>
                 }
             }
-
         </div>
+    </div>
+
+
 
         @*<div style="width:220px; padding:5px; border: 2px solid #04aeda; margin-right:10px; margin-left:590px; position:absolute; bottom:100px;">
-            <div style="float:left; width:54px;">
-                <img alt="" style="z-index:12;" src="@Url.Content(" ~/Content/images/video.png")"/>
-            </div>
-            <div style="float:right; vertical-align:top; text-align:left; padding-right:10px;">
-                <span style="font: bold 10pt Segoe UI; color:#04aeda;"> Created using Epi Info 7</span>
-                <p style="margin-top:5px; margin-bottom:1px;"> <a onclick="OpenVideoDialog();" class="watch">Watch Video</a></p>
-            </div>
-            <div style="clear:both;"></div>
-        </div>*@
+                <div style="float:left; width:54px;">
+                    <img alt="" style="z-index:12;" src="@Url.Content(" ~/Content/images/video.png")"/>
+                </div>
+                <div style="float:right; vertical-align:top; text-align:left; padding-right:10px;">
+                    <span style="font: bold 10pt Segoe UI; color:#04aeda;"> Created using Epi Info 7</span>
+                    <p style="margin-top:5px; margin-bottom:1px;"> <a onclick="OpenVideoDialog();" class="watch">Watch Video</a></p>
+                </div>
+                <div style="clear:both;"></div>
+            </div>*@
         <input type="hidden" id="PassCode" name="PassCode" value="@Model.PassCode" />
-            <input type="hidden" id="ResponseId" name="ResponseId" value="@Model.ResponseId" />
+        <input type="hidden" id="ResponseId" name="ResponseId" value="@Model.ResponseId" />
 
-    }
-
-    @*<div id="VideoDialog" title = "How this survey was created!">
-
-        <iframe width="480" height="360" src="http://www.youtube.com/embed/BgTJnSKQKIs?rel=0" frameborder="0" allowfullscreen></iframe>
-
-
-         </div>*@
+}
 
 
 
-    @{if (ViewBag.Omniture.IsEnabled == true)
+
+
+@*<div id="VideoDialog" title = "How this survey was created!">
+
+    <iframe width="480" height="360" src="http://www.youtube.com/embed/BgTJnSKQKIs?rel=0" frameborder="0" allowfullscreen></iframe>
+
+
+     </div>*@
+
+
+
+@{if (ViewBag.Omniture.IsEnabled == true)
             {
                 Html.RenderPartial("OmniturePartial");
             }
-    }
-    <br>
+}
+<br>
 
