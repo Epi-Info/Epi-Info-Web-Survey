@@ -1674,7 +1674,8 @@ namespace Epi.Web.MVC.Utility
             DropDown.RelateCondition = _FieldTypeID.Attribute("RelateCondition").Value;
             DropDown.EmptyOption = "Select";
             DropDown.FieldTypeId = FieldTypeId;
-
+            DropDown.TextColumnName = _FieldTypeID.Attribute("TextColumnName").Value;            
+            DropDown.SourceTable = _FieldTypeID.Attribute("SourceTableName").Value;
             DropDown.Value = _ControlValue;
             DropDown.Response = _ControlValue;
 
