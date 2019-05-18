@@ -140,15 +140,11 @@ namespace MvcDynamicForms.Fields
             }
             EnterRule FunctionObjectClick = (EnterRule)_form.FormCheckCodeObj.GetCommand("level=field&event=click&identifier=" + _key);
 
-            
-            //if (!string.IsNullOrEmpty(this.RelateCondition))
-            //{
-            //    input.Attributes.Add("onchange", "SetCodes_Val(this,'" + _form.SurveyInfo.SurveyId + "','" + _key + "');  "); //click
-               
-               
 
-
-            //}
+            if (!string.IsNullOrEmpty(this.RelateCondition))
+            {             
+                input.Attributes.Add("onchange", "SetCodes_Val(this,'" + _form.SurveyInfo.SurveyId + "','" + SourceTable + "'," + "''" + ",'" + TextColumnName + "','" + RelateCondition + "');"); //click         
+            }
             ////////////Check code end//////////////////
             int LargestChoiseLength = 0;
             string measureString = "";
