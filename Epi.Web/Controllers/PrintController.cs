@@ -25,7 +25,8 @@ namespace Epi.Web.MVC.Controllers
         [HttpGet]
         public ActionResult Index(string responseId ,bool FromFinal, SurveyModel FormsHierarchyModel)
         {
-            List<FormsHierarchyDTO> FormsHierarchy = GetFormsHierarchy();
+             
+            List<FormsHierarchyDTO> FormsHierarchy = GetFormsHierarchy(responseId);
             SurveyModel SurveyModel = new SurveyModel();
            // SurveyModel.Form = form;
             SurveyModel.RelateModel = Mapper.ToRelateModel(FormsHierarchy, Session["RootFormId"].ToString());
@@ -66,21 +67,21 @@ namespace Epi.Web.MVC.Controllers
             return surveyInfoModel;
             }
 
-        private List<FormsHierarchyDTO> GetFormsHierarchy()
+        private List<FormsHierarchyDTO> GetFormsHierarchy( string responseId)
         {
             FormsHierarchyResponse FormsHierarchyResponse = new FormsHierarchyResponse();
             FormsHierarchyRequest FormsHierarchyRequest = new FormsHierarchyRequest();
             SurveyAnswerRequest ResponseIDsHierarchyRequest = new SurveyAnswerRequest();
             SurveyAnswerResponse ResponseIDsHierarchyResponse = new SurveyAnswerResponse();
             // FormsHierarchyRequest FormsHierarchyRequest = new FormsHierarchyRequest();
-            if (Session["RootFormId"] != null && Session["RootResponseId"] != null)
+            if (Session["RootFormId"] != null && responseId != null)
             {
                 FormsHierarchyRequest.SurveyInfo.SurveyId = Session["RootFormId"].ToString();
-                FormsHierarchyRequest.SurveyResponseInfo.ResponseId = Session["RootResponseId"].ToString();
+                FormsHierarchyRequest.SurveyResponseInfo.ResponseId = responseId.ToString();
                 FormsHierarchyResponse = _isurveyFacade.GetFormsHierarchy(FormsHierarchyRequest);
 
                 SurveyAnswerDTO SurveyAnswerDTO = new SurveyAnswerDTO();
-                SurveyAnswerDTO.ResponseId = Session["RootResponseId"].ToString();
+                SurveyAnswerDTO.ResponseId = responseId.ToString();
                 ResponseIDsHierarchyRequest.SurveyAnswerList.Add(SurveyAnswerDTO);
                 ResponseIDsHierarchyResponse = _isurveyFacade.GetSurveyAnswerHierarchy(ResponseIDsHierarchyRequest);
                 FormsHierarchyResponse.FormsHierarchy = CombineLists(FormsHierarchyResponse.FormsHierarchy, ResponseIDsHierarchyResponse.SurveyResponseList);
