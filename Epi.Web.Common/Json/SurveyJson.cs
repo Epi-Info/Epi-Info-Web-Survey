@@ -57,7 +57,7 @@ namespace Epi.Web.Common.Json
 
                                     if (ISNumericTextBox && !string.IsNullOrEmpty(item.Value))
                                     {
-                                        string uiSep = CultureInfo.CurrentUICulture.NumberFormat.NumberDecimalSeparator;
+                                        string uiSep = ".";
                                         if (item.Value.Contains(uiSep))
                                             RootResponseQA.Add(item.Attribute("QuestionName").Value, Convert.ToDecimal(item.Value));
                                         else
