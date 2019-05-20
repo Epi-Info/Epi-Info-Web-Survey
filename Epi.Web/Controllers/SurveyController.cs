@@ -715,7 +715,7 @@ namespace Epi.Web.MVC.Controllers
                                 }
                                 //Mongodb API insert a response after publish
                                 string MongodbEndpoint = WebConfigurationManager.AppSettings["MongodbStorageAPIEndpoint"].ToString();
-                                if (!string.IsNullOrEmpty(MongodbEndpoint))
+                                if (!string.IsNullOrEmpty(MongodbEndpoint) && drawername !=null)
                                 {
                                     // var response = _client.GetAsync("Eiws/EIWStest"); check if the db exists may not be needed
                                     //var db = surveyInfoModel.OrganizationName.Replace("'", "").Replace(" ", "_"); // db name can not have a space also there is a size limit for db names 
