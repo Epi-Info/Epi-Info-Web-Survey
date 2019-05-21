@@ -1057,6 +1057,7 @@ namespace Epi.Web.MVC.Utility
             field.fontSize = ParseDouble(fieldTypeID.Attribute("PromptFontSize").Value);
             field.fontfamily = fieldTypeID.Attribute("PromptFontFamily").Value;
             AssignCommonGroupProperties(fieldTypeID, form.Width + 12, form.Height, field as GroupBox, form);
+            field.ControlWidth = field.ControlWidth + 20;//form.Width * ParseDouble(fieldTypeID.Attribute("ControlWidthPercentage").Value) - 12;
             if (fieldTypeID.Attribute("BackgroundColor") != null)
             {
                 var color = Color.FromArgb((int)(int.Parse(fieldTypeID.Attribute("BackgroundColor").Value)) + unchecked((int)0xFF000000));
