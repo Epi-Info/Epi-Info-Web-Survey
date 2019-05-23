@@ -169,7 +169,7 @@
             show: "blind",
             hide: "blind",
             resizable: false,
-            height: 470,          
+            height: 470,
             modal: true
         });
 
@@ -323,7 +323,7 @@
 
             ReadRelatedResponse('@Model.RelatedButtonWasClicked');
         }
-        var responseUrl = GetRedirectionUrl();
+        var responseUrl = GetRedirectionUrl();           
         $('#url').val('@Model.Form.RedirectURL');
         var Subject = "Link for Survey: " + '@Model.Form.SurveyInfo.SurveyName';
         Subject = ReplaceString(Subject);
@@ -756,7 +756,7 @@
 
         function successFunc(data, status) {
 //            debugger;
-          
+
             Object.keys(data).forEach(function (key) {
                 var value = data[key];
                 console.log(value, key);
@@ -1078,7 +1078,7 @@ else
 
 <div id="dialog" title="Your Survey has been saved.">
     <p>Please copy and save the <span style="font-weight:bold;">Survey Link</span> and <span style="font-weight:bold;">Pass Code</span> in order to return to the survey at a later time.</p>
-    <p><span style="font-weight:bold;">Survey Link:</span><br /><textarea id="url" class="surveyLinkTxtArea" wrap="soft" cols="65" style="  height:45px;  white-space:pre;  padding:4px; margin-top:4px;" readonly="readonly"></textarea></p>
+    <p><span style="font-weight:bold;">Survey Link:</span><br /><textarea id="url" class="surveyLinkTxtArea" wrap="soft" cols="65" style=" word-wrap:"break-word"; height:100%;  white-space:pre;  padding:4px; margin-top:4px;" readonly="readonly"></textarea></p>
 
     <p style="font-weight:bold;">Pass Code: <span id="spPassCode" class="spPassCodeSpan" style="color:#555555;font-size:12pt;  padding:4px 10px;"></span></p>
     <hr />
