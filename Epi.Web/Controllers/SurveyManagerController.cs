@@ -29,19 +29,23 @@ namespace Epi.Web.MVC.Controllers
 {
     public class SurveyManagerController : Controller
     {
-       private ISurveyFacade _isurveyFacade;
-       public string FullPath = "";      
+        private ISurveyFacade _isurveyFacade;
+        public string FullPath = "";
         public SurveyManagerController(ISurveyFacade isurveyFacade)
         {
             _isurveyFacade = isurveyFacade;
         }
-         [HttpGet]
-        public ActionResult Index(bool ResetOrg = false )
+        [HttpGet]
+        public ActionResult Index(bool ResetOrg = false)
         {
+           
             string content = string.Empty;
             PublishModel Model = new PublishModel();
+           
             ViewBag.Version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
-            var IsAuthenticated = System.Web.HttpContext.Current.User.Identity.IsAuthenticated;         
+            var IsAuthenticated = System.Web.HttpContext.Current.User.Identity.IsAuthenticated;
+             
+           
             Session["IsAuthenticated"] = false;
             Session["IsNewOrg"] = false;
             string filepath = Server.MapPath("~\\Content\\Text\\TermOfUse.txt");
@@ -57,11 +61,14 @@ namespace Epi.Web.MVC.Controllers
 
             }
             ViewData["TermOfUse1"] = content;
+            var UserName = System.Web.HttpContext.Current.User.Identity.Name;
+            UserName = UserName.Substring(4);
+            var Token = Common.Security.Cryptography.GetToken(UserName);
             if (IsAuthenticated && !ResetOrg)
             {
                 Session["IsAuthenticated"] = Model.IsAuthenticated = IsAuthenticated;
                 //check if the user exists 
-                var UserName = System.Web.HttpContext.Current.User.Identity.Name;
+               
                 OrganizationAccountRequest Request = new OrganizationAccountRequest();
                 Request.Admin = new AdminDTO();
                 Request.Admin.AdminEmail = UserName;
@@ -69,12 +76,12 @@ namespace Epi.Web.MVC.Controllers
                 var OrgId = "";
                 if (!string.IsNullOrEmpty(Response.OrganizationDTO.OrganizationKey))
                 {
-            
-                  OrgId=  Epi.Web.Common.Security.Cryptography.Decrypt(Response.OrganizationDTO.OrganizationKey);
-                }             
+
+                    OrgId = Epi.Web.Common.Security.Cryptography.Decrypt(Response.OrganizationDTO.OrganizationKey);
+                }
                 if (Epi.Web.MVC.Utility.SurveyHelper.IsGuid(OrgId))
                 {
-                    Model.OrganizationKey = OrgId;  
+                    Model.OrganizationKey = OrgId;
                     Model.IsValidOrg = ValidateOrganizationId(Model.OrganizationKey);
 
                     if (!Model.IsValidOrg)
@@ -88,51 +95,56 @@ namespace Epi.Web.MVC.Controllers
                         Model.SurveyNameList = ViewBag.SurveyNameList1 = GetAllSurveysByOrgId(Model.OrganizationKey); ;
                     }
 
-                    
-                }
-                else { 
-                // create a new account 
-                    Request.AccountType = "ORGANIZATION";
-                      Request.Admin.IsActive = true;
-                      Request.Admin.Notify = false;
-                      Request.Organization = new OrganizationDTO();
-                      Request.Organization.Organization = UserName.Replace("\\"," ") + "_Organization";
-                      Request.Organization.IsEnabled = true;
-                      Guid OrgKey = Guid.NewGuid();
-                      Request.Organization.OrganizationKey = OrgKey.ToString();
-                    
-                      Response = this._isurveyFacade.CreateAccount(Request);
-                      if (Response.Message == "Success")
-                      {
-                          Model.OrganizationKey = OrgKey.ToString();
-                          Model.IsValidOrg = ValidateOrganizationId(Model.OrganizationKey);
 
-                          if (!Model.IsValidOrg)
-                          {
-                              ModelState.AddModelError("OrganizationKey", "Organization Key does not exist.");
-                          }
-                          else
-                          {
-                              Session["OrgId"] = Model.OrganizationKey;
-                              ViewBag.IsNewOrg =  Session["IsNewOrg"] = true;
-                            Model.SurveyNameList=ViewBag.SurveyNameList1 = GetAllSurveysByOrgId(Model.OrganizationKey); ;
-                          }
-                      }
-                   }
-                Model.PublishDivState = true; 
-                return View("Index", Model);
-            }
-            else {
+                }
+                else
+                {
+                    // create a new account 
+                    Request.AccountType = "ORGANIZATION";
+                    Request.Admin.IsActive = true;
+                    Request.Admin.Notify = false;
+                    Request.Organization = new OrganizationDTO();
+                    Request.Organization.Organization = UserName.Replace("\\", " ") + "_Organization";
+                    Request.Organization.IsEnabled = true;
+                    Guid OrgKey = Guid.NewGuid();
+                    Request.Organization.OrganizationKey = OrgKey.ToString();
+
+                    Response = this._isurveyFacade.CreateAccount(Request);
+                    if (Response.Message == "Success")
+                    {
+                        Model.OrganizationKey = OrgKey.ToString();
+                        Model.IsValidOrg = ValidateOrganizationId(Model.OrganizationKey);
+
+                        if (!Model.IsValidOrg)
+                        {
+                            ModelState.AddModelError("OrganizationKey", "Organization Key does not exist.");
+                        }
+                        else
+                        {
+                            Session["OrgId"] = Model.OrganizationKey;
+                            ViewBag.IsNewOrg = Session["IsNewOrg"] = true;
+                            Model.SurveyNameList = ViewBag.SurveyNameList1 = GetAllSurveysByOrgId(Model.OrganizationKey); ;
+                        }
+                    }
+                }
                 Model.PublishDivState = true;
+               
+                Model.ViewRecordsURL = ConfigurationManager.AppSettings["ViewRecordsURL"] + Uri.EscapeDataString(Token);
                 return View("Index", Model);
             }
-           
-            
+            else
+            {
+                Model.PublishDivState = true;
+                Model.ViewRecordsURL = ConfigurationManager.AppSettings["ViewRecordsURL"] + Uri.EscapeDataString(Token);
+                return View("Index", Model);
+            }
+
+
         }
         [HttpPost]
-         public ActionResult Index(PublishModel Model, string PublishSurvey, string DownLoadResponse, string ValidateOrganization, HttpPostedFileBase Newfile, HttpPostedFileBase Newfile1, HttpPostedFileBase Newfile2, string SurveyName, string RePublishSurvey, string RePublishSurveyName,string SendEmail)
+        public ActionResult Index(PublishModel Model, string PublishSurvey, string DownLoadResponse, string ValidateOrganization, HttpPostedFileBase Newfile, HttpPostedFileBase Newfile1, HttpPostedFileBase Newfile2, string SurveyName, string RePublishSurvey, string RePublishSurveyName, string SendEmail,string SetJson)
         {
-
+            Model.ViewRecordsURL = ConfigurationManager.AppSettings["ViewRecordsURL"];
             string filepath = Server.MapPath("~\\Content\\Text\\TermOfUse.txt");
             try
             {
@@ -146,7 +158,7 @@ namespace Epi.Web.MVC.Controllers
             {
 
             }
-            
+
 
             try
             {
@@ -179,31 +191,33 @@ namespace Epi.Web.MVC.Controllers
                     ModelState["DownLoadDivState"].Errors.Clear();
                     if (ModelState.IsValid)
                     {
-                      //  OrganizationAccountRequest Request = new OrganizationAccountRequest();
+                        //  OrganizationAccountRequest Request = new OrganizationAccountRequest();
 
-                      //  Request.Organization.OrganizationKey = Model.OrganizationKey;
+                        //  Request.Organization.OrganizationKey = Model.OrganizationKey;
                         //OrganizationAccountResponse Response = this._isurveyFacade.GetOrg(Request);
                         if (Response.OrganizationDTO != null)
                         {
                             Model.IsValidOrg = true;//ValidateOrganizationId(Model.OrganizationKey);
-                        } else
-                        {
-                            Model.IsValidOrg = false; 
                         }
-                       // Model.OrgName = Response.OrganizationDTO.Organization;
+                        else
+                        {
+                            Model.IsValidOrg = false;
+                        }
+                        // Model.OrgName = Response.OrganizationDTO.Organization;
 
-                       
+
 
                         if (!Model.IsValidOrg)
                         {
                             ModelState.AddModelError("OrganizationKey", "Organization Key does not exist.");
                         }
-                        else {
-                           Session["OrgId"] =  Model.OrganizationKey;
-                          Model.SurveyNameList = GetAllSurveysByOrgId(Model.OrganizationKey);
-                          ViewBag.SurveyNameList1 = GetAllSurveysByOrgId(Model.OrganizationKey); ;
+                        else
+                        {
+                            Session["OrgId"] = Model.OrganizationKey;
+                            Model.SurveyNameList = GetAllSurveysByOrgId(Model.OrganizationKey);
+                            ViewBag.SurveyNameList1 = GetAllSurveysByOrgId(Model.OrganizationKey); ;
 
-                          
+
                         }
                     }
                     return View("Index", Model);
@@ -213,7 +227,7 @@ namespace Epi.Web.MVC.Controllers
                     Model.IsValidOrg = true;
                     Model.OrganizationKey = Session["OrgId"].ToString();
                     Model.SurveyNameList = GetAllSurveysByOrgId(Model.OrganizationKey);
-                 
+
                     if (string.IsNullOrEmpty(Request.Form["ExistingSurvey"]))
                     {
                         Model.UpdateExisting = false;
@@ -223,9 +237,9 @@ namespace Epi.Web.MVC.Controllers
                         Model.UpdateExisting = true;
                         if (string.IsNullOrEmpty(Model.SurveyKey))
                         {
-                            ModelState.AddModelError("SurveyKey", "Survey Id is required."); 
+                            ModelState.AddModelError("SurveyKey", "Survey Id is required.");
                         }
-                       
+
                     }
                     ModelState["FileName"].Errors.Clear();
                     ModelState["OrganizationKey"].Errors.Clear();
@@ -236,19 +250,19 @@ namespace Epi.Web.MVC.Controllers
                     {
                         var response = DoPublish(Model, Newfile);
                         Model.SuccessfulPublish = true;
-                        if (response.SurveyInfoList.Count()>0)
+                        if (response.SurveyInfoList.Count() > 0)
                         {
-                        Model.SurveyKey = response.SurveyInfoList[0].SurveyId.ToString();
-                        Model.UserPublishKey = response.SurveyInfoList[0].UserPublishKey.ToString();
-                        Model.SurveyURL = ConfigurationManager.AppSettings["URL"] + response.SurveyInfoList[0].SurveyId.ToString();
+                            Model.SurveyKey = response.SurveyInfoList[0].SurveyId.ToString();
+                            Model.UserPublishKey = response.SurveyInfoList[0].UserPublishKey.ToString();
+                            Model.SurveyURL = ConfigurationManager.AppSettings["URL"] + response.SurveyInfoList[0].SurveyId.ToString();
                         }
-                       
+
                     }
                     else
                     {
 
-                       // ModelState.AddModelError("Error", "Please validate the information provided and try publishing again.");
-                      //  Model.Path = "";
+                        // ModelState.AddModelError("Error", "Please validate the information provided and try publishing again.");
+                        //  Model.Path = "";
                         Model.SuccessfulPublish = false;
                         Model.SurveyNameList = ViewBag.SurveyNameList1 = GetAllSurveysByOrgId(Model.OrganizationKey); ;
                         return View("Index", Model);
@@ -269,31 +283,32 @@ namespace Epi.Web.MVC.Controllers
                     {
                         Model.IsDraft = true;
                     }
-                    else {
+                    else
+                    {
                         Model.IsDraft = false;
                     }
-                    
-                        Model.UpdateExisting = true;
-                        if (string.IsNullOrEmpty(Model.RepublishSurveyKey))
-                        {
-                            ModelState.AddModelError("RepublishSurveyKey", "Survey Id is required.");
-                        }
 
-                        
-                    ModelState["SurveyName"].Errors.Clear(); 
+                    Model.UpdateExisting = true;
+                    if (string.IsNullOrEmpty(Model.RepublishSurveyKey))
+                    {
+                        ModelState.AddModelError("RepublishSurveyKey", "Survey Id is required.");
+                    }
+
+
+                    ModelState["SurveyName"].Errors.Clear();
                     ModelState["FileName"].Errors.Clear();
                     ModelState["OrganizationKey"].Errors.Clear();
                     ModelState["UserPublishKey"].Errors.Clear();
                     ModelState["RepublishPath"].Errors.Clear();
                     if (IsAuthenticated)
                     {
-                    ModelState["RePublishUserPublishKey"].Errors.Clear();
+                        ModelState["RePublishUserPublishKey"].Errors.Clear();
                     }
                     ModelState["Path"].Errors.Clear();
                     ModelState["EndDate"].Errors.Clear();
                     if (ModelState.IsValid)
                     {
-                       
+
                         Model.SurveyName = RePublishSurveyName;
                         if (IsAuthenticated)
                         {
@@ -314,7 +329,7 @@ namespace Epi.Web.MVC.Controllers
                         // ModelState.AddModelError("Error", "Please validate the information provided and try publishing again.");
                         //  Model.Path = "";
                         Model.SuccessfulPublish = false;
-                        Model.SurveyNameList = ViewBag.SurveyNameList1 = GetAllSurveysByOrgId(Model.OrganizationKey); 
+                        Model.SurveyNameList = ViewBag.SurveyNameList1 = GetAllSurveysByOrgId(Model.OrganizationKey);
                         return View("Index", Model);
 
 
@@ -327,15 +342,15 @@ namespace Epi.Web.MVC.Controllers
 
                 if (!string.IsNullOrEmpty(DownLoadResponse))
                 {
-                     Model.IsValidOrg = true;
-                     Model.OrganizationKey = Session["OrgId"].ToString();
+                    Model.IsValidOrg = true;
+                    Model.OrganizationKey = Session["OrgId"].ToString();
                     // Model.SurveyNameList = GetAllSurveysByOrgId(Model.OrganizationKey);
-                     if (string.IsNullOrEmpty(Model.SurveyKey))
-                     {
-                         ModelState.AddModelError("SurveyKey", "Survey Id is required.");
-                     }
+                    if (string.IsNullOrEmpty(Model.SurveyKey))
+                    {
+                        ModelState.AddModelError("SurveyKey", "Survey Id is required.");
+                    }
                     //ModelState["FileName"].Errors.Clear();
-                   // ModelState["SurveyKey"].Errors.Clear();
+                    // ModelState["SurveyKey"].Errors.Clear();
                     ModelState["OrganizationKey"].Errors.Clear();
                     ModelState["SurveyName"].Errors.Clear();
                     ModelState["Path"].Errors.Clear();
@@ -349,11 +364,12 @@ namespace Epi.Web.MVC.Controllers
                     if (ModelState.IsValid)
                     {
                         DoDownLoad(Model);
-                    
-                       
+
+
                     }
-                    else {
-                        Model.SurveyNameList = ViewBag.SurveyNameList1 = GetAllSurveysByOrgId(Model.OrganizationKey); 
+                    else
+                    {
+                        Model.SurveyNameList = ViewBag.SurveyNameList1 = GetAllSurveysByOrgId(Model.OrganizationKey);
                         return View("Index", Model);
                     }
                 }
@@ -361,7 +377,7 @@ namespace Epi.Web.MVC.Controllers
                 if (!string.IsNullOrEmpty(SendEmail))
                 {
                     Model.IsValidOrg = true;
-                   var orgkey = Model.OrganizationKey = Session["OrgId"].ToString();
+                    var orgkey = Model.OrganizationKey = Session["OrgId"].ToString();
                     // Model.SurveyNameList = GetAllSurveysByOrgId(Model.OrganizationKey);
                     if (string.IsNullOrEmpty(Model.EmailSurveyKey))
                     {
@@ -386,24 +402,25 @@ namespace Epi.Web.MVC.Controllers
                     {
                         ModelState["EmailUserPublishKey"].Errors.Clear();
                     }
-                  
+
                     if (ModelState.IsValid)
                     {
                         var SurveyInfo = this._isurveyFacade.GetSurveyInfoModel(Model.EmailSurveyKey);
                         if (SurveyInfo.UserPublishKey.ToString() == Model.EmailUserPublishKey)
                         {
                             SendEmailNotification(Model, Newfile2, SurveyInfo);
-                            
+
                             Model.SuccessfulPublish = true;
                             Model.SuccessfullySentEmail = true;
                         }
-                        else {
+                        else
+                        {
                             ModelState.AddModelError("EmailUserPublishKey", "Please provide the right Security Token.");
                             Model.SendEmaiDivState = true;
                         }
                         // Model = new PublishModel();
                         Model.SurveyNameList = ViewBag.SurveyNameList1 = GetAllSurveysByOrgId(orgkey);
-                        return  View( Model);
+                        return View(Model);
                     }
                     else
                     {
@@ -411,17 +428,125 @@ namespace Epi.Web.MVC.Controllers
                         return View("Index", Model);
                     }
                 }
-            }
+
+                if (!string.IsNullOrEmpty(SetJson))
+                {
+                    try
+                    {
+                       var SurveyIds = GetAllSurveysByOrgId(Session["OrgId"].ToString());
+
+                        foreach (var SurveyInfo in SurveyIds)
+                        {
+                            SurveyInfoModel surveyInfoModel = _isurveyFacade.GetSurveyInfoModel(SurveyInfo.Value);
+                            SurveyAnswerRequest SurveyAnswerRequest = SetMessageObject(true, SurveyInfo.Value, new Guid(surveyInfoModel.UserPublishKey.ToString()), Session["OrgId"].ToString(), false, -2);
+                            SurveyAnswerResponse SurveyAnswerResponse = new Common.Message.SurveyAnswerResponse();
+                            SurveyAnswerResponse = _isurveyFacade.GetSurveyAnswerResponse(SurveyAnswerRequest);
+                            int PageSize = SurveyAnswerResponse.PageSize;
+                            if (PageSize > 0)
+                            {
+
+                                for (int i = 1; SurveyAnswerResponse.NumberOfPages > i - 1; i++)
+                                {
+                                    int TotalCount = 0;
+                                    SurveyControlsRequest Request = new SurveyControlsRequest();
+                                    Request.SurveyId = SurveyInfo.Value;
+                                    SurveyControlsResponse List = _isurveyFacade.GetSurveyControlList(Request);
+
+                                    
+                                    SurveyAnswerRequest _Request = SetMessageObject(false, SurveyInfo.Value, new Guid(surveyInfoModel.UserPublishKey.ToString()), Session["OrgId"].ToString(), false, -2, i, PageSize);
+                                    SurveyAnswerResponse Responses = _isurveyFacade.GetSurveyAnswerResponse(_Request);
+
+                                    //var Responses = _isurveyFacade.GetFormResponseList(SurveyAnswerRequest);
+                                    foreach (var ResponseDetail in Responses.SurveyResponseList)
+                                    {
+                                       // if (string.IsNullOrEmpty(ResponseDetail.Json)) {
+                                            List<FormsHierarchyDTO> FormsHierarchy = GetFormsHierarchy(SurveyInfo.Value, ResponseDetail.ResponseId);
+                                            var json = _isurveyFacade.GetSurveyResponseJson(ResponseDetail, FormsHierarchy, List);
+                                            if (!string.IsNullOrEmpty(json))
+                                            {
+                                                bool temp = this._isurveyFacade.SetJsonColumn(json, ResponseDetail.ResponseId);
+                                            }
+                                      //  }
+                                    }
+                                }
+                            }
+                        }
+
+                        Model.SetJsonDivState = true;
+                        Model.JsonIsSet = true;
+                        Model.SurveyNameList = ViewBag.SurveyNameList1 = GetAllSurveysByOrgId(Session["OrgId"].ToString());
+                        return View("Index", Model);
+                    }
+                    catch (Exception ex)
+                    {
+                        Model.SetJsonDivState = true;
+                      
+                        return View("Index", Model);
+                        throw ex;
+                    }
+
+                }
+                }
             catch (Exception ex)
             {
-                ViewBag.SurveyNameList1 = GetAllSurveysByOrgId(Model.OrganizationKey); 
+                ViewBag.SurveyNameList1 = GetAllSurveysByOrgId(Model.OrganizationKey);
                 Model.SuccessfulPublish = false;
                 ModelState.AddModelError("Error", "Please validate the information provided.");
                 return View("Index", Model);
             }
             return View("Index", Model);
         }
+        private List<FormsHierarchyDTO> GetFormsHierarchy(string RootFormId, string RootResponseId)
+        {
+            FormsHierarchyResponse FormsHierarchyResponse = new FormsHierarchyResponse();
+            FormsHierarchyRequest FormsHierarchyRequest = new FormsHierarchyRequest();
+            SurveyAnswerRequest ResponseIDsHierarchyRequest = new SurveyAnswerRequest();
+            SurveyAnswerResponse ResponseIDsHierarchyResponse = new SurveyAnswerResponse();
+            // FormsHierarchyRequest FormsHierarchyRequest = new FormsHierarchyRequest();
+            try
+            {
+                if (RootFormId != null && RootResponseId  != null)
+                {
+                    FormsHierarchyRequest.SurveyInfo.SurveyId =  RootFormId .ToString();
+                    FormsHierarchyRequest.SurveyResponseInfo.ResponseId = RootResponseId.ToString();
+                    FormsHierarchyResponse = _isurveyFacade.GetFormsHierarchy(FormsHierarchyRequest);
 
+                    SurveyAnswerDTO SurveyAnswerDTO = new SurveyAnswerDTO();
+                    SurveyAnswerDTO.ResponseId =  RootResponseId .ToString();
+                    ResponseIDsHierarchyRequest.SurveyAnswerList.Add(SurveyAnswerDTO);
+                    ResponseIDsHierarchyResponse = _isurveyFacade.GetSurveyAnswerHierarchy(ResponseIDsHierarchyRequest);
+                    FormsHierarchyResponse.FormsHierarchy = CombineLists(FormsHierarchyResponse.FormsHierarchy, ResponseIDsHierarchyResponse.SurveyResponseList);
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.Source = "GetFormsHierarchy";
+                throw ex;
+            }
+            return FormsHierarchyResponse.FormsHierarchy;
+        }
+        private List<FormsHierarchyDTO> CombineLists(List<FormsHierarchyDTO> RelatedFormIDsList, List<SurveyAnswerDTO> AllResponsesIDsList)
+        {
+
+            List<FormsHierarchyDTO> List = new List<FormsHierarchyDTO>();
+
+            foreach (var Item in RelatedFormIDsList)
+            {
+                FormsHierarchyDTO FormsHierarchyDTO = new FormsHierarchyDTO();
+                FormsHierarchyDTO.FormId = Item.FormId;
+                FormsHierarchyDTO.ViewId = Item.ViewId;
+                FormsHierarchyDTO.IsSqlProject = Item.IsSqlProject;
+                FormsHierarchyDTO.IsRoot = Item.IsRoot;
+                FormsHierarchyDTO.SurveyInfo = Item.SurveyInfo;
+                if (AllResponsesIDsList != null)
+                {
+                    FormsHierarchyDTO.ResponseIds = AllResponsesIDsList.Where(x => x.SurveyId == Item.FormId).ToList();
+                }
+                List.Add(FormsHierarchyDTO);
+            }
+            return List;
+
+        }
         private void SendEmailNotification(PublishModel model, HttpPostedFileBase newfile2, SurveyInfoModel SurveyInfo)
         {
 
@@ -618,7 +743,7 @@ namespace Epi.Web.MVC.Controllers
                 // adding a sumery 
 
 
-                 GetPieChart(InProgress, Saved, Submited, workbook);
+                GetPieChart(InProgress, Saved, Submited, workbook);
 
                 using (var memoryStream = new MemoryStream())
                 {
@@ -635,20 +760,22 @@ namespace Epi.Web.MVC.Controllers
             }
         }
 
-        private static void GetPieChart(int InProgress, int Saved, int Submited,  ExcelWorkbook workbook)
+        private static void GetPieChart(int InProgress, int Saved, int Submited, ExcelWorkbook workbook)
         {
 
 
             //workbook.Properties.Title = "Charts With Excel";
-            try {
+            try
+            {
                 workbook.Worksheets.Delete("Summary Report");
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
 
 
             }
 
-           var   ws = workbook.Worksheets.Add("Summary Report");
+            var ws = workbook.Worksheets.Add("Summary Report");
             var data = new List<KeyValuePair<string, int>>();
             data.Add(new KeyValuePair<string, int>("InProgress", InProgress));
             data.Add(new KeyValuePair<string, int>("Saved", Saved));
@@ -703,7 +830,7 @@ namespace Epi.Web.MVC.Controllers
             pieChart.Legend.Position = eLegendPosition.Right;
 
             //pck.Save();
-             
+
         }
 
         private string GetStatus(int responseStatuse)
@@ -744,10 +871,10 @@ namespace Epi.Web.MVC.Controllers
             SurveyInfoDTO.SurveyName = Model.SurveyName;
             SurveyInfoDTO.StartDate = DateTime.Now;
             SurveyInfoDTO.SurveyType = SurveyRequest.Criteria.SurveyType = 1;
-            
+
             if (Model.UpdateExisting)
             {
-                SurveyInfoDTO.SurveyId =  Model.RepublishSurveyKey;
+                SurveyInfoDTO.SurveyId = Model.RepublishSurveyKey;
                 SurveyInfoDTO.IsDraftMode = Model.IsDraft;
                 SurveyInfoDTO.ClosingDate = DateTime.Parse(Model.EndDateUpdate); Model.EndDate = Model.EndDateUpdate;
                 SurveyInfoDTO.SurveyName = Model.SurveyName;
@@ -757,7 +884,7 @@ namespace Epi.Web.MVC.Controllers
             }
             else
             {
-                SurveyInfoDTO.SurveyId = Guid.NewGuid().ToString() ;
+                SurveyInfoDTO.SurveyId = Guid.NewGuid().ToString();
                 SurveyInfoDTO.ClosingDate = DateTime.Parse(Model.EndDate);
                 SurveyRequest.SurveyInfoList.Add(SurveyInfoDTO);
                 SurveyInfoDTO.UserPublishKey = SurveyRequest.Criteria.UserPublishKey = Guid.NewGuid();
@@ -768,7 +895,7 @@ namespace Epi.Web.MVC.Controllers
             return response;
         }
 
-      
+
 
         private bool ValidateOrganizationId(string orgkey)
         {
@@ -785,21 +912,21 @@ namespace Epi.Web.MVC.Controllers
             var SurveyListObject = this._isurveyFacade.GetAllSurveysByOrgKey(orgkey);
             string SurveyName = "";
             string FirstFourSurveyId = "";
-             
+
             int numberOfSurveys = SurveyListObject.SurveyInfoList.Count();
             List<SelectListItem> SurveyList = new List<SelectListItem>();
-            List<SurveyInfoDTO> DTOList = SurveyListObject.SurveyInfoList.OrderBy(x=>x.SurveyName).ToList();
+            List<SurveyInfoDTO> DTOList = SurveyListObject.SurveyInfoList.OrderBy(x => x.SurveyName).ToList();
             foreach (var survey in DTOList)
             {
-                FirstFourSurveyId = "****" + survey.SurveyId.ToString().Substring(32,4); 
-                SurveyName = survey.SurveyName + "-" + FirstFourSurveyId; 
+                FirstFourSurveyId = "****" + survey.SurveyId.ToString().Substring(32, 4);
+                SurveyName = survey.SurveyName + "-" + FirstFourSurveyId;
                 SurveyList.Add(new SelectListItem { Value = survey.SurveyId.ToString(), Text = SurveyName, Selected = false });
-                
+
             }
             SelectList SelectList = new SelectList(SurveyList, "Value", "Text");
             return SelectList;
         }
-       
+
 
         private ActionResult DoDownLoad(PublishModel Model)
         {
@@ -839,7 +966,7 @@ namespace Epi.Web.MVC.Controllers
 
 
                     ///////////////////////////////////////////
-                 //   string path = Directory.GetParent(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)).FullName;
+                    //   string path = Directory.GetParent(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)).FullName;
                     if (Model.SurveyMode.ToString() == "1")
                     {
                         IsDraftMode = false;
@@ -849,9 +976,9 @@ namespace Epi.Web.MVC.Controllers
                         IsDraftMode = true;
 
                     }
-                   // if (Environment.OSVersion.Version.Major >= 6)
-                   // {
-                       // path = Directory.GetParent(path).ToString();
+                    // if (Environment.OSVersion.Version.Major >= 6)
+                    // {
+                    // path = Directory.GetParent(path).ToString();
                     //}
 
 
@@ -887,7 +1014,7 @@ namespace Epi.Web.MVC.Controllers
 
                                 foreach (var item in Response.SurveyResponseList)
                                 {
-                                  //  var item = Response.SurveyResponseList[0];
+                                    //  var item = Response.SurveyResponseList[0];
                                     var ResponseValueList = SurveyHelper.GetQuestionAnswerList(item.XML, List);
                                     if (InitialSetupCounter == 0)
                                     {
@@ -897,15 +1024,15 @@ namespace Epi.Web.MVC.Controllers
                                         for (int j = 1; NumberOfPages > j - 1; j++)
                                         {
 
-                                            
-                                           // var ws = package.Workbook.Worksheets.FirstOrDefault(x => x.Name == "Page" + j);
-                                           // if (ws == null)
+
+                                            // var ws = package.Workbook.Worksheets.FirstOrDefault(x => x.Name == "Page" + j);
+                                            // if (ws == null)
                                             //{
-                                                //var sheet = package.Workbook.Worksheets.Add("Page" + j);
-                                           // }
+                                            //var sheet = package.Workbook.Worksheets.Add("Page" + j);
+                                            // }
                                             var List1 = ResponseValueList.Where(x => x.PageNumber == j).ToList();
 
-                                           // var Sheet = package.Workbook.Worksheets["Page" + j];
+                                            // var Sheet = package.Workbook.Worksheets["Page" + j];
 
                                             foreach (var item1 in List1)
                                             {
@@ -923,7 +1050,7 @@ namespace Epi.Web.MVC.Controllers
 
                                                         break;
                                                 }
-                                                Sheet.Cells[Row+1, col].Value = item1.Value;
+                                                Sheet.Cells[Row + 1, col].Value = item1.Value;
                                                 col++;
                                             }
 
@@ -942,7 +1069,7 @@ namespace Epi.Web.MVC.Controllers
                                             var List2 = ResponseValueList.Where(x => x.PageNumber == j).ToList();
 
                                             //var Sheet = package.Workbook.Worksheets["Page" + j];
-                                           // int col = 1;
+                                            // int col = 1;
                                             foreach (var ListItem in List2)
                                             {
 
@@ -971,13 +1098,14 @@ namespace Epi.Web.MVC.Controllers
                                 return View("Index", Model);
                             }
                         }
-                        else {
+                        else
+                        {
                             stopwatch.Stop();
                             Model.SuccessfulPublish = false;
                             ModelState.AddModelError("Error", "No records found for the download criteria entered.");
 
 
-                            Model.SurveyNameList= ViewBag.SurveyNameList1 = GetAllSurveysByOrgId(Session["OrgId"].ToString()); ;
+                            Model.SurveyNameList = ViewBag.SurveyNameList1 = GetAllSurveysByOrgId(Session["OrgId"].ToString()); ;
                             return View("Index", Model);
                         }
                     }//using
@@ -1029,7 +1157,7 @@ namespace Epi.Web.MVC.Controllers
             return Request;
         }
         [HttpPost]
-        public JsonResult GetSurveyInfo(string surveyid) 
+        public JsonResult GetSurveyInfo(string surveyid)
         {
 
             var SurveyInfo = this._isurveyFacade.GetSurveyInfoModel(surveyid);
@@ -1038,12 +1166,12 @@ namespace Epi.Web.MVC.Controllers
             Model.IsDraft = SurveyInfo.IsDraftMode;
             Model.SurveyName = SurveyInfo.SurveyName;
             return Json(Model);
-        
+
         }
-        private string AddLeadingZero(string value) 
+        private string AddLeadingZero(string value)
         {
             string NewValue = "";
-            if (value.Count()<2)
+            if (value.Count() < 2)
             {
                 NewValue = "0" + value;
             }
@@ -1054,5 +1182,7 @@ namespace Epi.Web.MVC.Controllers
             }
             return NewValue;
         }
+       
+        
     }
 }

@@ -57,9 +57,6 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Epi.Web.Common">
-      <HintPath>..\Epi.Web\bin\Epi.Web.Common.dll</HintPath>
-    </Reference>
     <Reference Include="EpiInfo.Plugin">
       <HintPath>..\Epi.Web\bin\EpiInfo.Plugin.dll</HintPath>
     </Reference>
@@ -169,6 +166,13 @@
       <Project>{6B084882-EF4F-4CF0-85B1-1E8C357AE822}</Project>
       <Name>Epi.Web.CheckCodeEngine</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Epi.Web.Common\Epi.Web.Common.csproj">
+      <Project>{6e2f059b-c1cd-401f-8a63-dc2933cfb0d8}</Project>
+      <Name>Epi.Web.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

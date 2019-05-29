@@ -1,59 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/Epi.Web.Common.DTO" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Epi.Web.Common.DTO" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="http://tephinetepiinfo.cloudapp.net/EIWS_QA/SurveyDataService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-  <xs:complexType name="AdminDTO">
+<xs:schema xmlns:tns="http://schemas.microsoft.com/2003/10/Serialization/Arrays" elementFormDefault="qualified" targetNamespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="ArrayOfstring">
     <xs:sequence>
-      <xs:element minOccurs="0" name="AdminEmail" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="AdminId" type="ser:guid" />
-      <xs:element minOccurs="0" name="AdressLine1" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="AdressLine2" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="City" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="FirstName" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="IsActive" type="xs:boolean" />
-      <xs:element minOccurs="0" name="LastName" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Notify" type="xs:boolean" />
-      <xs:element minOccurs="0" name="OrganizationId" type="xs:int" />
-      <xs:element minOccurs="0" name="PhoneNumber" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="StateId" type="xs:int" />
-      <xs:element minOccurs="0" name="Zip" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="AdminDTO" nillable="true" type="tns:AdminDTO" />
-  <xs:complexType name="OrganizationDTO">
+  <xs:element name="ArrayOfstring" nillable="true" type="tns:ArrayOfstring" />
+  <xs:complexType name="ArrayOfKeyValueOfstringdateTime">
+    <xs:annotation>
+      <xs:appinfo>
+        <IsDictionary xmlns="http://schemas.microsoft.com/2003/10/Serialization/">true</IsDictionary>
+      </xs:appinfo>
+    </xs:annotation>
     <xs:sequence>
-      <xs:element minOccurs="0" name="IsEnabled" type="xs:boolean" />
-      <xs:element minOccurs="0" name="Organization" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="OrganizationKey" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="KeyValueOfstringdateTime">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="Key" nillable="true" type="xs:string" />
+            <xs:element name="Value" type="xs:dateTime" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="OrganizationDTO" nillable="true" type="tns:OrganizationDTO" />
-  <xs:complexType name="ArrayOfStateDTO">
+  <xs:element name="ArrayOfKeyValueOfstringdateTime" nillable="true" type="tns:ArrayOfKeyValueOfstringdateTime" />
+  <xs:complexType name="ArrayOfKeyValueOfstringstring">
+    <xs:annotation>
+      <xs:appinfo>
+        <IsDictionary xmlns="http://schemas.microsoft.com/2003/10/Serialization/">true</IsDictionary>
+      </xs:appinfo>
+    </xs:annotation>
     <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="StateDTO" nillable="true" type="tns:StateDTO" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="KeyValueOfstringstring">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="Key" nillable="true" type="xs:string" />
+            <xs:element name="Value" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="ArrayOfStateDTO" nillable="true" type="tns:ArrayOfStateDTO" />
-  <xs:complexType name="StateDTO">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="StateCode" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="StateId" type="xs:int" />
-      <xs:element minOccurs="0" name="StateName" nillable="true" type="xs:string" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="StateDTO" nillable="true" type="tns:StateDTO" />
-  <xs:complexType name="ArrayOfSurveyControlDTO">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="SurveyControlDTO" nillable="true" type="tns:SurveyControlDTO" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfSurveyControlDTO" nillable="true" type="tns:ArrayOfSurveyControlDTO" />
-  <xs:complexType name="SurveyControlDTO">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="ControlId" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="ControlPrompt" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="ControlType" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="SourceTableName" nillable="true" type="xs:string" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="SurveyControlDTO" nillable="true" type="tns:SurveyControlDTO" />
+  <xs:element name="ArrayOfKeyValueOfstringstring" nillable="true" type="tns:ArrayOfKeyValueOfstringstring" />
 </xs:schema>
