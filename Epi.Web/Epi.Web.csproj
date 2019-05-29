@@ -315,6 +315,7 @@
     <Content Include="Content\css\epistyle_controls.css" />
     <Content Include="Content\css\epiwebsurvey_admin.css" />
     <Content Include="Content\css\images\check.gif" />
+    <Content Include="Content\css\images\exclamationcircle.png" />
     <Content Include="Content\css\images\next.png" />
     <Content Include="Content\css\images\next_classic.png" />
     <Content Include="Content\css\images\prev.png" />
