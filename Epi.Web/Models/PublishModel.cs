@@ -139,11 +139,14 @@ namespace Epi.Web.MVC.Models
          public bool DownLoadDivState { get; set; }
          public bool IsAuthenticated { get; set; }
           public bool SendEmaiDivState { get; set; }
-
+        public bool SetJsonDivState { get; set; }
+        public bool ViewRecordsDivState { get; set; }
         public string EmailUserPublishKey { get; set; }
         public string EmailFilePath { get; set; }
         public string EmailSurveyKey { get; set; }
         public bool SuccessfullySentEmail { get; set; }
         public string OrgName { get; set; }
+        public bool JsonIsSet { get; internal set; }
+        public string ViewRecordsURL { get; set; }
     }
 }

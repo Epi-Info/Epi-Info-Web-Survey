@@ -22,9 +22,12 @@ namespace Epi.Web.Common.Security
         public static string initVector = "0f8f*d5bd&cb4~9f";
         public static string passPhrase_config = ConfigurationManager.AppSettings["KeyForConnectionStringPassphrase"];
         public static string saltValue_config = ConfigurationManager.AppSettings["KeyForConnectionStringSalt"];
-        public static string initVector_config = ConfigurationManager.AppSettings["KeyForConnectionStringVector"]; 
+        public static string initVector_config = ConfigurationManager.AppSettings["KeyForConnectionStringVector"];
 
-     
+        private static string TokenPassPhrase = ConfigurationManager.AppSettings["TokenPassPhrase"]; 
+        private static string TokenSaltValue = ConfigurationManager.AppSettings["TokenSaltValue"]; 
+        private static string TokenInitVector = ConfigurationManager.AppSettings["TokenInitVector"]; 
+
         /// <summary>
         /// Encryption
         /// </summary>
@@ -135,5 +138,27 @@ namespace Epi.Web.Common.Security
             }
             return plainText;
         }
+
+        public static string GetToken(string userName)
+        {
+            byte[] initVectorBytes = Encoding.ASCII.GetBytes(TokenInitVector);
+            byte[] saltValueBytes = Encoding.ASCII.GetBytes(TokenSaltValue);
+            byte[] plainTextBytes = Encoding.UTF8.GetBytes(userName);
+            PasswordDeriveBytes password = new PasswordDeriveBytes(TokenPassPhrase, saltValueBytes, "MD5", 1);
+            byte[] keyBytes = password.GetBytes(initVector.Length);
+            RijndaelManaged symmetricKey = new RijndaelManaged();
+            symmetricKey.Mode = CipherMode.CBC;
+            ICryptoTransform encryptor = symmetricKey.CreateEncryptor(keyBytes, initVectorBytes);
+            MemoryStream memoryStream = new MemoryStream();
+            CryptoStream cryptoStream = new CryptoStream(memoryStream, encryptor, CryptoStreamMode.Write);
+            cryptoStream.Write(plainTextBytes, 0, plainTextBytes.Length);
+            cryptoStream.FlushFinalBlock();
+            byte[] cipherTextBytes = memoryStream.ToArray();
+            memoryStream.Close();
+            cryptoStream.Close();
+            string cipherText = Convert.ToBase64String(cipherTextBytes);
+            return cipherText;
+        }
+
     }
 }
