@@ -20,6 +20,7 @@ namespace Epi.Web.Common.DTO
        private string _City;
        private int _StateId;
        private string _Zip;
+       private string _UserName;
        public string AdminEmail
            {
            get { return _AdminEmail; }
@@ -95,6 +96,9 @@ namespace Epi.Web.Common.DTO
            get { return _Zip; }
            set { _Zip = value; }
            }
-
-       }
+        public string UserName        {
+            get { return _UserName; }
+            set { _UserName = value; }
+        }
+    }
     }

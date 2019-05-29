@@ -62,8 +62,7 @@ namespace Epi.Web.MVC.Controllers
             }
             ViewData["TermOfUse1"] = content;
             var UserName = System.Web.HttpContext.Current.User.Identity.Name;
-            UserName = UserName.Substring(4);
-            var Token = Common.Security.Cryptography.GetToken(UserName);
+         
             if (IsAuthenticated && !ResetOrg)
             {
                 Session["IsAuthenticated"] = Model.IsAuthenticated = IsAuthenticated;
@@ -128,13 +127,23 @@ namespace Epi.Web.MVC.Controllers
                     }
                 }
                 Model.PublishDivState = true;
-               
+                string Token = "";
+                if (!string.IsNullOrEmpty(UserName))
+                {
+                    UserName = UserName.Substring(4);
+                      Token = Common.Security.Cryptography.GetToken(UserName);
+                }
                 Model.ViewRecordsURL = ConfigurationManager.AppSettings["ViewRecordsURL"] + Uri.EscapeDataString(Token);
                 return View("Index", Model);
             }
             else
             {
                 Model.PublishDivState = true;
+                string Token = "";
+                if (!string.IsNullOrEmpty(UserName)) {
+                    UserName = UserName.Substring(4);
+                      Token = Common.Security.Cryptography.GetToken(UserName);
+                }
                 Model.ViewRecordsURL = ConfigurationManager.AppSettings["ViewRecordsURL"] + Uri.EscapeDataString(Token);
                 return View("Index", Model);
             }
@@ -214,8 +223,8 @@ namespace Epi.Web.MVC.Controllers
                         else
                         {
                             Session["OrgId"] = Model.OrganizationKey;
-                            Model.SurveyNameList = GetAllSurveysByOrgId(Model.OrganizationKey);
-                            ViewBag.SurveyNameList1 = GetAllSurveysByOrgId(Model.OrganizationKey); ;
+                            ViewBag.SurveyNameList1 = Model.SurveyNameList = GetAllSurveysByOrgId(Model.OrganizationKey);
+                            
 
 
                         }
