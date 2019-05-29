@@ -28,7 +28,27 @@
 
 </script>
 
+<style>
+    #ModEnvheadrer {
+        text-align: center;
+        margin: 10px;
+        padding: 5px;
+        /*stroke-width:1px;
+stroke:#eaeaea;*/
+        border: 1px solid #eaeaea;
+        background: #f7f7f7;
+        margin-bottom: 10px;
+        margin-left: 0.5em;
+        margin-right: 0.5em;
+        *
+-moz-border-radius: 10px;
+        -webkit-border-radius: 10px;
+        -khtml-border-radius: 10px;
+        border-radius: 10px;
+        font-family: Segoe UI,Tahoma,Geneva,Verdana,sans-serif;
+    }
 
+</style>
 
 @if (@Model.IsDraftModeStyleClass != "")
 {
@@ -167,8 +187,7 @@ else
                 {
                     if (@System.Configuration.ConfigurationManager.AppSettings["ModerateEnv"].ToUpper() == "TRUE")
                     {
-                    <img src="@Url.Content("~/Content/css/images/exclamationcircle.png")" alt="" style="vertical-align: middle;
-                " />
+                    <img src="@Url.Content("~/Content/css/images/exclamationcircle.png")" alt="" style="vertical-align: middle;" />
 
                     <span style="color:#515151;font-weight:bold;font-size:16px; text-align:center"> Notice to Respondents:</span>
                         <br />
