@@ -1,312 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="http://tephinetepiinfo.cloudapp.net/EIWS_QA/SurveyDataService.svc?xsd=xsd2" namespace="http://www.yourcompany.com/types/" />
-  <xs:element name="GetSurveyInfo">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q1="http://www.yourcompany.com/types/" minOccurs="0" name="pRequest" nillable="true" type="q1:SurveyInfoRequest" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetSurveyInfoResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q2="http://www.yourcompany.com/types/" minOccurs="0" name="GetSurveyInfoResult" nillable="true" type="q2:SurveyInfoResponse" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetCacheDependencyInfo">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q3="http://www.yourcompany.com/types/" minOccurs="0" name="pRequest" nillable="true" type="q3:CacheDependencyRequest" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetCacheDependencyInfoResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q4="http://www.yourcompany.com/types/" minOccurs="0" name="GetCacheDependencyInfoResult" nillable="true" type="q4:CacheDependencyResponse" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetSurveyAnswer">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q5="http://www.yourcompany.com/types/" minOccurs="0" name="pRequest" nillable="true" type="q5:SurveyAnswerRequest" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetSurveyAnswerResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q6="http://www.yourcompany.com/types/" minOccurs="0" name="GetSurveyAnswerResult" nillable="true" type="q6:SurveyAnswerResponse" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="SetSurveyAnswer">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q7="http://www.yourcompany.com/types/" minOccurs="0" name="pRequest" nillable="true" type="q7:SurveyAnswerRequest" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="SetSurveyAnswerResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q8="http://www.yourcompany.com/types/" minOccurs="0" name="SetSurveyAnswerResult" nillable="true" type="q8:SurveyAnswerResponse" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="PassCodeLogin">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q9="http://www.yourcompany.com/types/" minOccurs="0" name="pRequest" nillable="true" type="q9:UserAuthenticationRequest" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="PassCodeLoginResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q10="http://www.yourcompany.com/types/" minOccurs="0" name="PassCodeLoginResult" nillable="true" type="q10:UserAuthenticationResponse" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="SetPassCode">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q11="http://www.yourcompany.com/types/" minOccurs="0" name="pRequest" nillable="true" type="q11:UserAuthenticationRequest" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="SetPassCodeResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q12="http://www.yourcompany.com/types/" minOccurs="0" name="SetPassCodeResult" nillable="true" type="q12:UserAuthenticationResponse" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetAuthenticationResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q13="http://www.yourcompany.com/types/" minOccurs="0" name="pRequest" nillable="true" type="q13:UserAuthenticationRequest" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetAuthenticationResponseResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q14="http://www.yourcompany.com/types/" minOccurs="0" name="GetAuthenticationResponseResult" nillable="true" type="q14:UserAuthenticationResponse" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetFormResponseList">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q15="http://www.yourcompany.com/types/" minOccurs="0" name="pRequest" nillable="true" type="q15:SurveyAnswerRequest" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetFormResponseListResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q16="http://www.yourcompany.com/types/" minOccurs="0" name="GetFormResponseListResult" nillable="true" type="q16:SurveyAnswerResponse" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetFormChildInfo">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q17="http://www.yourcompany.com/types/" minOccurs="0" name="SurveyInfoRequest" nillable="true" type="q17:SurveyInfoRequest" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetFormChildInfoResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q18="http://www.yourcompany.com/types/" minOccurs="0" name="GetFormChildInfoResult" nillable="true" type="q18:SurveyInfoResponse" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetFormsHierarchy">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q19="http://www.yourcompany.com/types/" minOccurs="0" name="FormsHierarchyRequest" nillable="true" type="q19:FormsHierarchyRequest" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetFormsHierarchyResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q20="http://www.yourcompany.com/types/" minOccurs="0" name="GetFormsHierarchyResult" nillable="true" type="q20:FormsHierarchyResponse" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetSurveyAnswerHierarchy">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q21="http://www.yourcompany.com/types/" minOccurs="0" name="pRequest" nillable="true" type="q21:SurveyAnswerRequest" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetSurveyAnswerHierarchyResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q22="http://www.yourcompany.com/types/" minOccurs="0" name="GetSurveyAnswerHierarchyResult" nillable="true" type="q22:SurveyAnswerResponse" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetAncestorResponseIdsByChildId">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q23="http://www.yourcompany.com/types/" minOccurs="0" name="pRequest" nillable="true" type="q23:SurveyAnswerRequest" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetAncestorResponseIdsByChildIdResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q24="http://www.yourcompany.com/types/" minOccurs="0" name="GetAncestorResponseIdsByChildIdResult" nillable="true" type="q24:SurveyAnswerResponse" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetResponsesByRelatedFormId">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q25="http://www.yourcompany.com/types/" minOccurs="0" name="pRequest" nillable="true" type="q25:SurveyAnswerRequest" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetResponsesByRelatedFormIdResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q26="http://www.yourcompany.com/types/" minOccurs="0" name="GetResponsesByRelatedFormIdResult" nillable="true" type="q26:SurveyAnswerResponse" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="CreateAccount">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q27="http://www.yourcompany.com/types/" minOccurs="0" name="pRequest" nillable="true" type="q27:OrganizationAccountRequest" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="CreateAccountResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q28="http://www.yourcompany.com/types/" minOccurs="0" name="CreateAccountResult" nillable="true" type="q28:OrganizationAccountResponse" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetStateList">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q29="http://www.yourcompany.com/types/" minOccurs="0" name="Request" nillable="true" type="q29:OrganizationAccountRequest" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetStateListResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q30="http://www.yourcompany.com/types/" minOccurs="0" name="GetStateListResult" nillable="true" type="q30:OrganizationAccountResponse" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetSurveyControlList">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q31="http://www.yourcompany.com/types/" minOccurs="0" name="pRequestMessage" nillable="true" type="q31:SurveyControlsRequest" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetSurveyControlListResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q32="http://www.yourcompany.com/types/" minOccurs="0" name="GetSurveyControlListResult" nillable="true" type="q32:SurveyControlsResponse" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetUserOrgId">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q33="http://www.yourcompany.com/types/" minOccurs="0" name="Request" nillable="true" type="q33:OrganizationAccountRequest" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetUserOrgIdResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q34="http://www.yourcompany.com/types/" minOccurs="0" name="GetUserOrgIdResult" nillable="true" type="q34:OrganizationAccountResponse" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="HasResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="SurveyId" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="ResponseId" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="HasResponseResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="HasResponseResult" type="xs:boolean" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetOrganization">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q35="http://www.yourcompany.com/types/" minOccurs="0" name="request" nillable="true" type="q35:OrganizationAccountRequest" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetOrganizationResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q36="http://www.yourcompany.com/types/" minOccurs="0" name="GetOrganizationResult" nillable="true" type="q36:OrganizationAccountResponse" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetSourceTables">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q37="http://www.yourcompany.com/types/" minOccurs="0" name="Request" nillable="true" type="q37:SourceTablesRequest" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetSourceTablesResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q38="http://www.yourcompany.com/types/" minOccurs="0" name="GetSourceTablesResult" nillable="true" type="q38:SourceTablesResponse" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="UpdateResponseStatus">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q39="http://www.yourcompany.com/types/" minOccurs="0" name="request" nillable="true" type="q39:SurveyAnswerRequest" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="UpdateResponseStatusResponse">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="SetJsonColumn">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="json" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="responseid" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="SetJsonColumnResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="SetJsonColumnResult" type="xs:boolean" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
+<xs:schema xmlns:tns="http://schemas.microsoft.com/2003/10/Serialization/" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="anyType" nillable="true" type="xs:anyType" />
+  <xs:element name="anyURI" nillable="true" type="xs:anyURI" />
+  <xs:element name="base64Binary" nillable="true" type="xs:base64Binary" />
+  <xs:element name="boolean" nillable="true" type="xs:boolean" />
+  <xs:element name="byte" nillable="true" type="xs:byte" />
+  <xs:element name="dateTime" nillable="true" type="xs:dateTime" />
+  <xs:element name="decimal" nillable="true" type="xs:decimal" />
+  <xs:element name="double" nillable="true" type="xs:double" />
+  <xs:element name="float" nillable="true" type="xs:float" />
+  <xs:element name="int" nillable="true" type="xs:int" />
+  <xs:element name="long" nillable="true" type="xs:long" />
+  <xs:element name="QName" nillable="true" type="xs:QName" />
+  <xs:element name="short" nillable="true" type="xs:short" />
+  <xs:element name="string" nillable="true" type="xs:string" />
+  <xs:element name="unsignedByte" nillable="true" type="xs:unsignedByte" />
+  <xs:element name="unsignedInt" nillable="true" type="xs:unsignedInt" />
+  <xs:element name="unsignedLong" nillable="true" type="xs:unsignedLong" />
+  <xs:element name="unsignedShort" nillable="true" type="xs:unsignedShort" />
+  <xs:element name="char" nillable="true" type="tns:char" />
+  <xs:simpleType name="char">
+    <xs:restriction base="xs:int" />
+  </xs:simpleType>
+  <xs:element name="duration" nillable="true" type="tns:duration" />
+  <xs:simpleType name="duration">
+    <xs:restriction base="xs:duration">
+      <xs:pattern value="\-?P(\d*D)?(T(\d*H)?(\d*M)?(\d*(\.\d*)?S)?)?" />
+      <xs:minInclusive value="-P10675199DT2H48M5.4775808S" />
+      <xs:maxInclusive value="P10675199DT2H48M5.4775807S" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="guid" nillable="true" type="tns:guid" />
+  <xs:simpleType name="guid">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[\da-fA-F]{8}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{12}" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:attribute name="FactoryType" type="xs:QName" />
+  <xs:attribute name="Id" type="xs:ID" />
+  <xs:attribute name="Ref" type="xs:IDREF" />
 </xs:schema>

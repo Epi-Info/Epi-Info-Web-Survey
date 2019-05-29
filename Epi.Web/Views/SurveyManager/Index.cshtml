@@ -167,7 +167,13 @@
         if ($('#SendEmaiDivState').val() == "True") {
             Toggle('SendEmailDivExpand');
         }
-
+        
+        if ($('#SetJsonDivState').val() == "True") {
+            Toggle('SetJsonDivExpand');
+        }
+        if ($('#ViewRecordsDivState').val() == "True") {
+            Toggle('ViewRecordsDivExpand');
+        }
         $('#SurveyIdDiv').hide();
        //$('#PublishDiv').hide();
        //$('#DownLoadDiv').hide();
@@ -317,6 +323,32 @@
                     $('.sendEmailExpand').css({ "color": "#3c3c3c" });
 
                     break;
+                case "SetJsonDivExpand":
+                    $('#SetJsonDivState').val('true');
+                    $('.SetJsoncollaps').removeAttr("style");
+                    $('.SetJsoncollaps').css({ "cursor": "pointer" });
+                    /*$('.SetJsonExpand').css({ "display": "none", "visibility": "collapse" });*/
+                    $('.contentContainer').css({ "display": "none", "visibility": "collapse" });
+                    $('#SetJsonDiv').css({ "display": "", "visibility": "" });
+                    $('.navLink').css({ "color": "#ffffff" });
+                    $(".leftNav").css({ "background-color": "#3c3c3c" });
+                    $(".contentSetJson").css({ "background-color": "#f3f3f3" });
+                    $('.SetJsonExpand').css({ "color": "#3c3c3c" });
+                    
+                    break;
+                case "ViewRecordsDivExpand":
+                    $('#ViewRecordsDivState').val('true');
+                    $('.ViewRecordscollaps').removeAttr("style");
+                    $('.ViewRecordscollaps').css({ "cursor": "pointer" });
+                  
+                    $('.contentContainer').css({ "display": "none", "visibility": "collapse" });
+                    $('#ViewRecordsDiv').css({ "display": "", "visibility": "" });
+                    $('.navLink').css({ "color": "#ffffff" });
+                    $(".leftNav").css({ "background-color": "#3c3c3c" });
+                    $(".contentViewRecords").css({ "background-color": "#f3f3f3" });
+                    $('.ViewRecordsExpand').css({ "color": "#3c3c3c" });
+
+                    break;
                 default:
             }
 
@@ -378,15 +410,15 @@
     @using (Html.BeginForm("Index", "SurveyManager", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
 
-        <div class="container col-lg-12" >
-            <div id="header" class="row" >
+        <div class="container col-lg-12">
+            <div id="header" class="row">
                 <div class="col-lg-9">
                     <h1 style="text-indent: 0 !important; font-family:Segoe UI !important;">
 
                         <img src="~/Content/images/ei_logomark_wht_outln_50px.png" /> Epi Info™ Web Survey
                     </h1>
                 </div>
-                @if (Model.IsValidOrg)
+                @if (Model.IsValidOrg && !string.IsNullOrEmpty(Model.OrgName))
                 {
                     <div class="col-lg-3">
 
@@ -441,6 +473,7 @@
             }
             else
             {
+
                 <div style="float:left; background-color: #313131; height:819px">
                     <div class="contentPublish leftNav" style="background-color:#f3f3f3;">
                         <a href="#" style="cursor:pointer;color:#3c3c3c!important;" class="navLink publishExpand" onclick="Toggle('PublishDivExpand')">
@@ -457,16 +490,28 @@
                         </a>
 
                     </div>
-                    <div class="contentDownLoad leftNav">
+                    @*<div class="contentDownLoad leftNav">
                         <a href="#" style="cursor:pointer;color:#ffffff" class="navLink downloadExpand" onclick="Toggle('DownloadDivExpand')">
                             <img style="display:none" src="~/Content/images/Toggle-expand-alt_green.png" />
                             <img style="display:none" src="~/Content/images/Toggle-collapse-alt_green.png" /> Download responses
                         </a>
-                    </div>
+                    </div>*@
                     <div class="contentSendEmail leftNav">
                         <a href="#" style="cursor:pointer;color:#ffffff" class="navLink sendEmailExpand" onclick="Toggle('SendEmailDivExpand')">
                             <img style="display:none" src="~/Content/images/Toggle-expand-alt_green.png" />
                             <img style="display:none" src="~/Content/images/Toggle-collapse-alt_green.png" /> Send email with survey link
+                        </a>
+                    </div>
+                    @*<div class="contentSetJson leftNav">
+                        <a href="#" style="cursor:pointer;color:#ffffff" class="navLink SetJsonExpand" onclick="Toggle('SetJsonDivExpand')">
+                            <img style="display:none" src="~/Content/images/Toggle-expand-alt_green.png" />
+                            <img style="display:none" src="~/Content/images/Toggle-collapse-alt_green.png" /> Generate Json Response for Surveys
+                        </a>
+                    </div>*@
+                    <div class="contentViewRecords leftNav">
+                        <a href="#" style="cursor:pointer;color:#ffffff" class="navLink ViewRecordsExpand" onclick="Toggle('ViewRecordsDivExpand')">
+                            <img style="display:none" src="~/Content/images/Toggle-expand-alt_green.png" />
+                            <img style="display:none" src="~/Content/images/Toggle-collapse-alt_green.png" /> View Survey Responses
                         </a>
                     </div>
                 </div>
@@ -485,8 +530,8 @@
                                 @Html.TextBoxFor(m => m.Path, new { @class = "Account Path" })
 
                                 @*<label for="file-upload" class="submits create"   onclick="javascript: document.getElementById('Newfile').click();">
-                                        Browse
-                                    </label>*@
+                        Browse
+                    </label>*@
                                 <input for="file-upload" class="submits create" style="width:70px; " type="button" id="PublishButton" onclick="javascript: document.getElementById('Newfile').click();" value="Browse" />
 
                                 @Html.ValidationMessageFor(m => m.Path, null, new { @class = "required" })
@@ -514,26 +559,26 @@
                             <script>$('#EndDate').BlockEnter('EndDate');</script>
 
                             @*<p>
-                                    <input type="checkbox" id="ExistingSurvey" value="@Model.UpdateExisting" name="ExistingSurvey" for="ExistingSurveyLabel" onclick="HidUnhidSurveyId(this)" />
+                    <input type="checkbox" id="ExistingSurvey" value="@Model.UpdateExisting" name="ExistingSurvey" for="ExistingSurveyLabel" onclick="HidUnhidSurveyId(this)" />
 
-                                    <label class="accountlabel" id="ExistingSurveyLabel" style="width:330px;">
-                                        <span style="font-weight:normal !important;">Update Existing Survey</span>
-                                    </label>
-                                    <div id="SurveyIdDiv">
-                                        <label class="accountlabel" id="SurveyIdlabel">*Survey Id:</label><br>
+                    <label class="accountlabel" id="ExistingSurveyLabel" style="width:330px;">
+                        <span style="font-weight:normal !important;">Update Existing Survey</span>
+                    </label>
+                    <div id="SurveyIdDiv">
+                        <label class="accountlabel" id="SurveyIdlabel">*Survey Id:</label><br>
 
-                                        @Html.TextBoxFor(m => m.SurveyKey, new { @class = "Account" }) <br>
-                                        @Html.ValidationMessageFor(m => m.SurveyKey, null)
-                                        <br>
-                                        <label class="accountlabel" id="SecurityTokenlabel">*Security Token:</label><br>
+                        @Html.TextBoxFor(m => m.SurveyKey, new { @class = "Account" }) <br>
+                        @Html.ValidationMessageFor(m => m.SurveyKey, null)
+                        <br>
+                        <label class="accountlabel" id="SecurityTokenlabel">*Security Token:</label><br>
 
-                                        @Html.TextBoxFor(m => m.UserPublishKey, new { @class = "Account" }) <br>
-                                        @Html.ValidationMessageFor(m => m.UserPublishKey, null)
+                        @Html.TextBoxFor(m => m.UserPublishKey, new { @class = "Account" }) <br>
+                        @Html.ValidationMessageFor(m => m.UserPublishKey, null)
 
 
-                                    </div>
+                    </div>
 
-                                </p>*@
+                </p>*@
                             <br />
                             @if (Model.IsAuthenticated)
                             {
@@ -577,8 +622,8 @@
                                 @Html.TextBoxFor(m => m.RepublishPath, new { @class = "Account RepublishPath" })
 
                                 @*<label for="file-upload" class="submits create"   onclick="javascript: document.getElementById('Newfile').click();">
-                                        Browse
-                                    </label>*@
+                        Browse
+                    </label>*@
                                 <input for="file-upload" class="submits create" style="width:70px;" type="button" id="RePublishButton" onclick="javascript: document.getElementById('Newfile1').click();" value="Browse" /><br>
 
                                 @Html.ValidationMessageFor(m => m.RepublishPath, null, new { @class = "required" })
@@ -641,15 +686,15 @@
                         <div class="accountdiv">
 
                             @*<p style="text-align:center;margin-top: 0;margin-bottom: 0px; font-size: 9pt; font-weight:bold;">
-            Epi Info Web Survey Download Tool (.CSV)
-        </p>
-        <br><br>
-        <p style="text-align:right;margin-top: 0;margin-bottom: -29px; font-size: 9pt; font-weight:bold;">* indicates required fields</p>*@
+                    Epi Info Web Survey Download Tool (.CSV)
+                </p>
+                <br><br>
+                <p style="text-align:right;margin-top: 0;margin-bottom: -29px; font-size: 9pt; font-weight:bold;">* indicates required fields</p>*@
 
                             <div>
                                 @*<label class="accountlabel" id="OrgKeylabel">*Organization Key:</label><br>
-            @Html.TextBoxFor(m => m.OrganizationKey, new { @class = "Account" }) <br>
-            @Html.ValidationMessageFor(m => m.OrganizationKey, null, new { @class = "required" })<br>*@
+                    @Html.TextBoxFor(m => m.OrganizationKey, new { @class = "Account" }) <br>
+                    @Html.ValidationMessageFor(m => m.OrganizationKey, null, new { @class = "required" })<br>*@
 
                                 <label class="accountlabel" id="SurveyIdlabel"><span style="color:#900000;">*</span> Survey Id:</label><br>
 
@@ -681,14 +726,14 @@
 
                             </div>
                             @*<div id="spinner">
-            Working on your request...
-        </div>*@
+                    Working on your request...
+                </div>*@
 
                             <br />
 
                             <input class="submits create " type="submit" onclick=" clear();  " name="DownLoadResponse" id="DownLoadResponse" value="DownLoad" style="margin-right:90px;" />
 
-                             
+
 
                         </div>
                     </div>
@@ -708,8 +753,8 @@
                                 @Html.TextBoxFor(m => m.EmailFilePath, new { @class = "Account Path2" })
 
                                 @*<label for="file-upload" class="submits create"   onclick="javascript: document.getElementById('Newfile').click();">
-                                        Browse
-                                    </label>*@
+                        Browse
+                    </label>*@
                                 <input for="file-upload" class="submits create" style="width:70px;" type="button" id="PublishButton" onclick="javascript: document.getElementById('Newfile2').click();" value="Browse" />
 
                                 <br>
@@ -749,6 +794,37 @@
                         </div>
 
                     </div>
+
+
+
+                    <div id="SetJsonDiv" class="contentContainer" style="margin-bottom: 100px; align-self:center ;display:none; visibility:collapse;margin:1em">
+                        @*<input class="submits create " type="submit" name="SetJson" id="SetJson" value="Set Json" style="margin-right:90px;" />*@
+                    </div>
+
+
+                    <div id="ViewRecordsDiv" class="contentContainer" style="margin-bottom: 100px; align-self:center ;display:none; visibility:collapse;margin:1em">
+                        <h1>View Survey Responses</h1>
+                         
+                        <div class="accountdiv">
+
+                            <div>
+
+                          
+
+                            </div>
+
+
+                            <a href="@Model.ViewRecordsURL" target="_blank" style="cursor:pointer;color:#3c3c3c!important; background-color:#1d60ac;font-weight: bold" class="navLink publishExpand">
+                                <img style="display:none" src="~/Content/images/Toggle-expand-alt_green.png" />
+                                <img style="display:none" src="~/Content/images/Toggle-collapse-alt_green.png" />
+                                Launch Data Viewer
+                            </a>
+
+                            @*<input class="submits create" type="button" name="ViewRecords" id="ViewRecords" value="View Records" style="margin-right:90px;" />*@
+
+
+                        </div>
+                    </div>
                 </div>
             }
         }
@@ -756,6 +832,7 @@
         {
             if (Model.SuccessfulPublish)
             {
+
                 <div id="SuccessfullPublishcontent" style="margin:1em;">
 
                     <div class="accountdiv" style="margin-bottom: 100px;">
@@ -818,16 +895,37 @@
                 </div>
             }
 
+            if (Model.JsonIsSet)
+            {
+                <div id="SuccessfullJsoncontent" style="margin:1em;">
+
+                    <div class="accountdiv" style="margin-bottom: 100px;">
+                        <p style="text-align:left;margin-top: 0; font-size: 9pt; font-weight:bold; color:green">
+
+                            <label class="accountlabel" id="SetJsonSuccessfull">  Json column have been successfully sent! </label><br>
+
+
+                        </p>
+
+                    </div>
+                </div>
+            }
+
+
+
+
 
         }
         <input type="hidden" id="RePublishDivState" value="@Model.RePublishDivState.ToString()" name="RePublishDivState" />
         <input type="hidden" id="PublishDivState" value="@Model.PublishDivState.ToString()" name="PublishDivState" />
         <input type="hidden" id="DownLoadDivState" value="@Model.DownLoadDivState.ToString()" name="DownLoadDivState" />
         <input type="hidden" id="SendEmaiDivState" value="@Model.SendEmaiDivState.ToString()" name="SendEmaiDivState" />
+        <input type="hidden" id="SetJsonDivState" value="@Model.SetJsonDivState.ToString()" name="SetJsonDivState" />
+        <input type="hidden" id="ViewRecordsDivState" value="@Model.ViewRecordsDivState.ToString()" name="ViewRecordsDivState" />
 
     }
     <div id="TermsDialog">
         @Html.Raw(ViewData["TermOfUse1"].ToString())
     </div>
-    
+
 </div>

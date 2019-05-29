@@ -21,8 +21,8 @@
     <SccAuxPath>https://tfs.codeplex.com/tfs/tfs04</SccAuxPath>
     <SccProvider>{4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}</SccProvider>
     <IISExpressSSLPort>44300</IISExpressSSLPort>
-    <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
-    <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
+    <IISExpressAnonymousAuthentication>disabled</IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>enabled</IISExpressWindowsAuthentication>
     <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
     <UseGlobalApplicationHostFile />
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
@@ -379,6 +379,7 @@
     <Content Include="Content\images\checkmark_icon.png" />
     <Content Include="Content\images\Close.png" />
     <Content Include="Content\images\codebk.png" />
+    <Content Include="Content\images\DataViewer.png" />
     <Content Include="Content\images\delset.png" />
     <Content Include="Content\images\Demo.png" />
     <Content Include="Content\images\designlegend.png" />
@@ -588,6 +589,7 @@
     <Content Include="SurveyManagerServiceV2.svc" />
     <Content Include="SurveyManagerServiceV3.svc" />
     <Content Include="SurveyManagerServiceV4.svc" />
+    <Content Include="SurveyManagerServiceV5.svc" />
     <Content Include="Unity.Mvc3.README.txt" />
     <Content Include="Views\Shared\footer.htm" />
     <Content Include="Views\Shared\header.htm" />
@@ -601,7 +603,9 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Views\Web.config" />
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Home\Default.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />

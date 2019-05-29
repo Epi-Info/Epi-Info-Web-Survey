@@ -37,10 +37,13 @@ namespace Epi.Web.MVC.Controllers
                
            //get the responseId
             responseId = GetResponseId(ReturnUrl);
-            //get the surveyId
-             string SurveyId = _isurveyFacade.GetSurveyAnswerResponse(responseId).SurveyResponseList[0].SurveyId;
-             //put surveyId in viewbag so can be retrieved in Login/Index.cshtml
-             ViewBag.SurveyId = SurveyId;
+            if (!string.IsNullOrEmpty(responseId))
+            {
+                //get the surveyId
+                string SurveyId = _isurveyFacade.GetSurveyAnswerResponse(responseId).SurveyResponseList[0].SurveyId;
+                //put surveyId in viewbag so can be retrieved in Login/Index.cshtml
+                ViewBag.SurveyId = SurveyId;
+            }
              if (string.IsNullOrEmpty(GetPassCode(ReturnUrl)))
              {
                  return View("Index");
