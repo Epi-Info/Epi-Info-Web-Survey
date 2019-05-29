@@ -479,5 +479,17 @@ namespace Epi.Web.Common.ObjectMapping
 
             return SurveyResponseBO;
         }
+
+        public static List<AdminDTO> ToAdminDTOList(List<AdminBO>  List )
+        {
+            List<AdminDTO> DTOList = new List<AdminDTO>();
+
+            foreach (var item in List)
+            {
+                
+                DTOList.Add(Mapper.ToAdminDTO(item));
+            }
+            return DTOList;
+        }
     }
 }

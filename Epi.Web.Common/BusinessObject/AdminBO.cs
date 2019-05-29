@@ -23,6 +23,7 @@ namespace Epi.Web.Common.BusinessObject
         private int _StateId;
         private string _Zip;
         private int _AddressId;
+        private string _UserName;
         [DataMember]
         public string AdminEmail
             {
@@ -109,5 +110,11 @@ namespace Epi.Web.Common.BusinessObject
              get { return _AddressId; }
              set { _AddressId = value; }
              }
+        [DataMember]
+        public string UserName
+        {
+            get { return _UserName; }
+            set { _UserName = value; }
         }
+    }
     }

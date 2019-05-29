@@ -44,10 +44,6 @@
     <Reference Include="Epi.Web.BLL">
       <HintPath>..\Epi.Web\bin\Epi.Web.BLL.dll</HintPath>
     </Reference>
-    <Reference Include="Epi.Web.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Epi.Web\bin\Epi.Web.Common.dll</HintPath>
-    </Reference>
     <Reference Include="Epi.Web.Interfaces, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Epi.Web\bin\Epi.Web.Interfaces.dll</HintPath>
@@ -79,10 +75,17 @@
     <Compile Include="ManagerService.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Epi.Web.Common\Epi.Web.Common.csproj">
+      <Project>{6e2f059b-c1cd-401f-8a63-dc2933cfb0d8}</Project>
+      <Name>Epi.Web.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Epi.Web.EF\Epi.Web.EF.csproj">
       <Project>{05a484ab-a555-4200-936b-bec573285bcc}</Project>
       <Name>Epi.Web.EF</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
