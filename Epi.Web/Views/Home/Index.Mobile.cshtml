@@ -121,7 +121,7 @@ else
         @if (Model.ClosingDate >= DateTime.Now && Model.StartDate <= DateTime.Now)
         {
             @* <h2>
-                Welcome!</h2>*@
+            Welcome!</h2>*@
             <br />
             <div>
                 @Html.Raw(Model.IntroductionText)
@@ -163,14 +163,14 @@ else
                 }
 
                 @*<div>
-                        <span class="boldlabel">Survey #:</span> <span>
-                           @Model.SurveyNumber</span></div>
-                    <div>
-                        <span class="boldlabel">Organization:</span> <span>
-                            @Model.OrganizationName</span></div>*@
+                    <span class="boldlabel">Survey #:</span> <span>
+                       @Model.SurveyNumber</span></div>
+                <div>
+                    <span class="boldlabel">Organization:</span> <span>
+                        @Model.OrganizationName</span></div>*@
                 @*<div>
-                    <span class="boldlabel">Department:</span> <span>
-                       @Model.DepartmentName</span></div>*@
+                <span class="boldlabel">Department:</span> <span>
+                   @Model.DepartmentName</span></div>*@
                 <div style="clear: both;">
                 </div>
             </div>
@@ -213,11 +213,12 @@ else
         }
 
 
-        <div id="ModEnvheadrer">
-            @if (@System.Configuration.ConfigurationManager.AppSettings["ModerateEnv"] != null)
+
+        @if (@System.Configuration.ConfigurationManager.AppSettings["ModerateEnv"] != null)
+        {
+            if (@System.Configuration.ConfigurationManager.AppSettings["ModerateEnv"].ToUpper() == "TRUE")
             {
-                if (@System.Configuration.ConfigurationManager.AppSettings["ModerateEnv"].ToUpper() == "TRUE")
-                {
+                <div id="ModEnvheadrer">
                     <img src="@Url.Content("~/Contentcss//images/exclamationcircle.png")" alt="" />
 
                     <span style="color:#515151;font-weight:bold;font-size:16px; text-align:center"> Notice to Respondents:</span>
@@ -235,9 +236,10 @@ else
                         .&nbsp;
                         The survey that follows *MAY* collect your personally identifiable information.  If you have any questions about how your data will be used, protected, and possibly shared, please contact the survey authors listed in the survey.
                     </p>
-                }
+                </div>
             }
-        </div>
+        }
+
         <input type="hidden" id="PassCode" name="PassCode" value="@Model.PassCode" />
         <input type="hidden" id="ResponseId" name="ResponseId" value="@Model.ResponseId" />
 

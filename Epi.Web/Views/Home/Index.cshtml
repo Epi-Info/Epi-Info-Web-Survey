@@ -108,106 +108,108 @@ else
 @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "myform", @class = @Model.IsDraftModeStyleClass.ToString() }))
 {
 
-    <div id="content" style="margin-bottom:200px; padding-left:10px; min-height:375px;"  >
-        @if (Model.ClosingDate >= DateTime.Now && Model.StartDate <= DateTime.Now)
-                {
-            @* <h2>
-                Welcome!</h2>*@
+<div id="content" style="margin-bottom:200px; padding-left:10px; min-height:375px;">
+    @if (Model.ClosingDate >= DateTime.Now && Model.StartDate <= DateTime.Now)
+    {
+        @* <h2>
+            Welcome!</h2>*@
+        <br />
+        <div>
+            @Html.Raw(Model.IntroductionText)
             <br />
-                <div>
-                    @Html.Raw(Model.IntroductionText)
-                    <br />
-                </div>
-                    <p></p>
-                    <p></p>
-                        <p></p> <p>&nbsp;</p>
+        </div>
+        <p></p>
+        <p></p>
+        <p></p> <p>&nbsp;</p>
 
-                        <div id="passcodebox" style="">@Model.PassCode</div>
-                        <div id="codebk" style="">Please save this pass code in<br />reference to your survey response.</div>
-                        <p></p>
-                        <p>
-                            <button id="beginsurvey" class="begin green" type="submit">
-                                Begin Survey
-                            </button>
+        <div id="passcodebox" style="">@Model.PassCode</div>
+        <div id="codebk" style="">Please save this pass code in<br />reference to your survey response.</div>
+        <p></p>
+        <p>
+            <button id="beginsurvey" class="begin green" type="submit">
+                Begin Survey
+            </button>
 
-                        </p>
-                        <p style="text-align:center; font-size:9pt;">Survey Starting Date: @string.Format("{0:f}", Model.StartDate)</p>
+        </p>
+        <p style="text-align:center; font-size:9pt;">Survey Starting Date: @string.Format("{0:f}", Model.StartDate)</p>
 
-                        <p style="text-align:center;font-size:9pt;">Survey Closing Date: @string.Format("{0:f}", Model.ClosingDate)</p>
-                        <br />
-            if (System.Configuration.ConfigurationManager.AppSettings["SHOW_HOME_LOGO"].ToUpper() == "TRUE")
-            {
-                <div style="margin:50px auto 0 auto; text-align:center;">
-
-                    <img src="@Url.Content(@System.Configuration.ConfigurationManager.AppSettings["HOME_LOGO_PATH"].ToString())" alt="" style="width:300px;" />
-
-                </div>
-            }
-            @*<div style="text-align:center; margin:0px auto;font-size: 9pt; line-height: 120%; ">
-                            <strong>Technical Support</strong><br />
-
-                <img src="@Url.Content("~/Content/images/email1.png")" width="16"  alt="" style="vertical-align:middle;" /> <a href="#">abcd@ghy.com</a> <br />
-                <img src="@Url.Content("~/Content/images/phone.png")"  height="14"  alt="" style="vertical-align:middle;" />&nbsp; 678-890-6789 ext. 1234     </div>
-            *@
-
-        }
-
-        else
+        <p style="text-align:center;font-size:9pt;">Survey Closing Date: @string.Format("{0:f}", Model.ClosingDate)</p>
+        <br />
+        if (System.Configuration.ConfigurationManager.AppSettings["SHOW_HOME_LOGO"].ToUpper() == "TRUE")
         {
-            <div>
-                <br />
+            <div style="margin:50px auto 0 auto; text-align:center;">
+
+                <img src="@Url.Content(@System.Configuration.ConfigurationManager.AppSettings["HOME_LOGO_PATH"].ToString())" alt="" style="width:300px;" />
+
+            </div>
+        }
+        @*<div style="text-align:center; margin:0px auto;font-size: 9pt; line-height: 120%; ">
+                        <strong>Technical Support</strong><br />
+
+            <img src="@Url.Content("~/Content/images/email1.png")" width="16"  alt="" style="vertical-align:middle;" /> <a href="#">abcd@ghy.com</a> <br />
+            <img src="@Url.Content("~/Content/images/phone.png")"  height="14"  alt="" style="vertical-align:middle;" />&nbsp; 678-890-6789 ext. 1234     </div>
+        *@
+
+    }
+
+    else
+    {
+        <div>
+            <br />
+        </div>
+
+        if (Model.StartDate > DateTime.Now)
+        {
+
+            <div id="attention">
+                <img src="@Url.Content("~/Content/images/sign_warning.png")" alt="" style="vertical-align: middle;
+                            padding-right: 10px;" />
+                Survey has not yet started.
+                <p style="text-align:center">Survey Starting Date: @string.Format("{0:f}", Model.StartDate)</p>
             </div>
 
-            if (Model.StartDate > DateTime.Now)
-            {
-
-                <div id="attention">
-                    <img src="@Url.Content("~/Content/images/sign_warning.png")" alt="" style="vertical-align: middle;
-                            padding-right: 10px;" />
-                    Survey has not yet started.
-                    <p style="text-align:center">Survey Starting Date: @string.Format("{0:f}", Model.StartDate)</p>
-                </div>
-
-            }
-            if (Model.ClosingDate < DateTime.Now)
-            {
-
-                <div id="attention">
-                    <img src="@Url.Content("~/Content/images/sign_warning.png")" alt="" style="vertical-align: middle;
-                                padding-right: 10px;" />
-                    This survey is currently closed. Please contact the author of this survey for further
-                    assistance.
-                    <p style="text-align:center">Survey Closing Date: @string.Format("{0:f}", Model.ClosingDate)</p>
-                </div>
-            }
         }
+        if (Model.ClosingDate < DateTime.Now)
+        {
 
-        <div id="ModEnvheadrer">
-            @if (@System.Configuration.ConfigurationManager.AppSettings["ModerateEnv"] != null)
-                {
-                    if (@System.Configuration.ConfigurationManager.AppSettings["ModerateEnv"].ToUpper() == "TRUE")
-                    {
-                    <img src="@Url.Content("~/Content/css/images/exclamationcircle.png")" alt="" style="vertical-align: middle;" />
+            <div id="attention">
+                <img src="@Url.Content("~/Content/images/sign_warning.png")" alt="" style="vertical-align: middle;
+                                padding-right: 10px;" />
+                This survey is currently closed. Please contact the author of this survey for further
+                assistance.
+                <p style="text-align:center">Survey Closing Date: @string.Format("{0:f}", Model.ClosingDate)</p>
+            </div>
+        }
+    }
 
-                    <span style="color:#515151;font-weight:bold;font-size:16px; text-align:center"> Notice to Respondents:</span>
-                        <br />
-                        <p style="text-align:left;color:#515151;font-size:14px">
-                            This Epi Info™ Secure Web Survey system is approved for the collection of Personally Identifiable Information (PII) and Protected Health Information (PHI) as described in 45 CFR 160.103 and summarized at
-                            <a id="anchor1" style="width:13px;color:#1e61ac;" href="https://www.hhs.gov/hipaa/for-professionals/privacy/laws-regulations/index.html" target="_blank" title="Summary of the HIPAA Privacy Rule">
-                                Summary of the HIPAA Privacy Rule
-                            </a>
-                            &nbsp;and
 
-                            <a id="anchor2" style="width:13px;color:#1e61ac;" href="https://www.hhs.gov/sites/default/files/privacysummary.pdf" target="_blank" title="HHS Office of Civil Rights: Summary of the HIPAA Privacy Rule PDF">
-                                HHS Office of Civil Rights: Summary of the HIPAA Privacy Rule PDF
-                            </a>
-                            .&nbsp;
-                            The survey that follows *MAY* collect your personally identifiable information.  If you have any questions about how your data will be used, protected, and possibly shared, please contact the survey authors listed in the survey.
-                        </p>
+    @if (@System.Configuration.ConfigurationManager.AppSettings["ModerateEnv"] != null)
+    {
+        if (@System.Configuration.ConfigurationManager.AppSettings["ModerateEnv"].ToUpper() == "TRUE")
+        {
+            <div id="ModEnvheadrer">
+                <img src="@Url.Content("~/Content/css/images/exclamationcircle.png")" alt="" style="vertical-align: middle;" />
+
+                <span style="color:#515151;font-weight:bold;font-size:16px; text-align:center"> Notice to Respondents:</span>
+                <br />
+                <p style="text-align:left;color:#515151;font-size:14px">
+                    This Epi Info™ Secure Web Survey system is approved for the collection of Personally Identifiable Information (PII) and Protected Health Information (PHI) as described in 45 CFR 160.103 and summarized at
+                    <a id="anchor1" style="width:13px;color:#1e61ac;" href="https://www.hhs.gov/hipaa/for-professionals/privacy/laws-regulations/index.html" target="_blank" title="Summary of the HIPAA Privacy Rule">
+                        Summary of the HIPAA Privacy Rule
+                    </a>
+                    &nbsp;and
+
+                    <a id="anchor2" style="width:13px;color:#1e61ac;" href="https://www.hhs.gov/sites/default/files/privacysummary.pdf" target="_blank" title="HHS Office of Civil Rights: Summary of the HIPAA Privacy Rule PDF">
+                        HHS Office of Civil Rights: Summary of the HIPAA Privacy Rule PDF
+                    </a>
+                    .&nbsp;
+                    The survey that follows *MAY* collect your personally identifiable information.  If you have any questions about how your data will be used, protected, and possibly shared, please contact the survey authors listed in the survey.
+                </p>
+            </div>
                 }
-            }
+                }
+            
         </div>
-    </div>
 
 
 

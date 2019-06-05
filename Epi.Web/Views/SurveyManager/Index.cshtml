@@ -490,12 +490,25 @@
                         </a>
 
                     </div>
-                    @*<div class="contentDownLoad leftNav">
-                        <a href="#" style="cursor:pointer;color:#ffffff" class="navLink downloadExpand" onclick="Toggle('DownloadDivExpand')">
-                            <img style="display:none" src="~/Content/images/Toggle-expand-alt_green.png" />
-                            <img style="display:none" src="~/Content/images/Toggle-collapse-alt_green.png" /> Download responses
-                        </a>
-                    </div>*@
+                    @if (System.Configuration.ConfigurationManager.AppSettings["ViewRecordsURL"] != null  )
+                    {
+                        <div class="contentViewRecords leftNav">
+                            <a href="#" style="cursor:pointer;color:#ffffff" class="navLink ViewRecordsExpand" onclick="Toggle('ViewRecordsDivExpand')">
+                                <img style="display:none" src="~/Content/images/Toggle-expand-alt_green.png" />
+                                <img style="display:none" src="~/Content/images/Toggle-collapse-alt_green.png" /> View Survey Responses
+                            </a>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="contentDownLoad leftNav">
+                            <a href="#" style="cursor:pointer;color:#ffffff" class="navLink downloadExpand" onclick="Toggle('DownloadDivExpand')">
+                                <img style="display:none" src="~/Content/images/Toggle-expand-alt_green.png" />
+                                <img style="display:none" src="~/Content/images/Toggle-collapse-alt_green.png" /> Download responses
+                            </a>
+                        </div>
+                    }
+
                     <div class="contentSendEmail leftNav">
                         <a href="#" style="cursor:pointer;color:#ffffff" class="navLink sendEmailExpand" onclick="Toggle('SendEmailDivExpand')">
                             <img style="display:none" src="~/Content/images/Toggle-expand-alt_green.png" />
@@ -503,17 +516,12 @@
                         </a>
                     </div>
                     @*<div class="contentSetJson leftNav">
-                        <a href="#" style="cursor:pointer;color:#ffffff" class="navLink SetJsonExpand" onclick="Toggle('SetJsonDivExpand')">
-                            <img style="display:none" src="~/Content/images/Toggle-expand-alt_green.png" />
-                            <img style="display:none" src="~/Content/images/Toggle-collapse-alt_green.png" /> Generate Json Response for Surveys
-                        </a>
-                    </div>*@
-                    <div class="contentViewRecords leftNav">
-                        <a href="#" style="cursor:pointer;color:#ffffff" class="navLink ViewRecordsExpand" onclick="Toggle('ViewRecordsDivExpand')">
-                            <img style="display:none" src="~/Content/images/Toggle-expand-alt_green.png" />
-                            <img style="display:none" src="~/Content/images/Toggle-collapse-alt_green.png" /> View Survey Responses
-                        </a>
-                    </div>
+            <a href="#" style="cursor:pointer;color:#ffffff" class="navLink SetJsonExpand" onclick="Toggle('SetJsonDivExpand')">
+                <img style="display:none" src="~/Content/images/Toggle-expand-alt_green.png" />
+                <img style="display:none" src="~/Content/images/Toggle-collapse-alt_green.png" /> Generate Json Response for Surveys
+            </a>
+        </div>*@
+                     
                 </div>
                 <!--end of nav-->
 

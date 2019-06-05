@@ -1966,7 +1966,7 @@ function CCE_ContextOpenMobileSimpleDialogBox(Title, Prompt, id) {
     $('#' + id).simpledialog2({
         'mode': 'blank',
         'headerText': Title,
-        //'headerClose': true,
+        'headerClose': true,
         //'dialogAllow': true,
         //'useDialogForceTrue': true,
         //'useDialogForceFalse': false,
