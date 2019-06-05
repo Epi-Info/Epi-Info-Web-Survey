@@ -671,9 +671,10 @@ namespace Epi.Web.MVC.Controllers
                                 //FormsAuthentication.SignOut();
 
                                 //FDNS API
-                                string endpoint = WebConfigurationManager.AppSettings["StorageAPIEndpoint"].ToString();
-                                if (!string.IsNullOrEmpty(endpoint))
+                                
+                                if (WebConfigurationManager.AppSettings["StorageAPIEndpoint"] != null && !string.IsNullOrEmpty(WebConfigurationManager.AppSettings["StorageAPIEndpoint"]))
                                 {
+                                    string endpoint = WebConfigurationManager.AppSettings["StorageAPIEndpoint"].ToString();
                                     if (!string.IsNullOrEmpty(surveyInfoModel.OrganizationName))
                                         drawername = surveyInfoModel.OrganizationName;
                                     else
@@ -714,9 +715,10 @@ namespace Epi.Web.MVC.Controllers
                                     }
                                 }
                                 //Mongodb API insert a response after publish
-                                string MongodbEndpoint = WebConfigurationManager.AppSettings["MongodbStorageAPIEndpoint"].ToString();
-                                if (!string.IsNullOrEmpty(MongodbEndpoint) && drawername !=null)
+                               
+                                if (WebConfigurationManager.AppSettings["MongodbStorageAPIEndpoint"] != null && !string.IsNullOrEmpty(WebConfigurationManager.AppSettings["MongodbStorageAPIEndpoint"]))
                                 {
+                                    string MongodbEndpoint = WebConfigurationManager.AppSettings["MongodbStorageAPIEndpoint"].ToString();
                                     // var response = _client.GetAsync("Eiws/EIWStest"); check if the db exists may not be needed
                                     //var db = surveyInfoModel.OrganizationName.Replace("'", "").Replace(" ", "_"); // db name can not have a space also there is a size limit for db names 
                                     var db = drawername.Replace("'", "").Replace(" ", "_");
