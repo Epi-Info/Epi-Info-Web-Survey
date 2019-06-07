@@ -733,7 +733,7 @@
     }
     function SetCodes_Val(obj, SurveyId, TableName, AutoComplete, ColumnName, FieldRelateCondition) {
         //debugger;
-
+      //  alert(FieldRelateCondition)
         $('#' + obj.id).val(obj.value);
         var availableTags = [obj.value];
         var signoutUrl = "";
@@ -757,55 +757,55 @@
         function successFunc(data, status) {
 //            debugger;
 
-            Object.keys(data).forEach(function (key) {
-                var value = data[key];
-                console.log(value, key);
+            //Object.keys(data).forEach(function (key) {
+            //    var value = data[key];
+            //    console.log(value, key);
 
-                if ($("#mvcdynamicfield_" + value.toLowerCase()).is("input")) {
-                    var Query = "#mvcdynamicfield_" + value.toLowerCase();
-                    $(Query).val(key);
-                }
-                else
-                {
-                    var Query = "#mvcdynamicfield_" + value.toLowerCase();
-                    $(Query).empty();
-                    $(Query).append($("<option></option>")
-                        .attr("value", "").text("Select"));
-                        $(Query).append($("<option></option>")
-                            .attr("value", key).text(key));
-
-
-                }
-            });
-
-            //if ($("#mvcdynamicfield_" + Object.values(data)[0]).is("input")) {
-            //    $.each(data, function (key, value) {
-            //        //  var Query = "#mvcdynamicfield_" + key;
-            //        var Query = "#mvcdynamicfield_" + value;
-            //        // alert(Query);
-            //        // $(Query).val(value);
+            //    if ($("#mvcdynamicfield_" + value.toLowerCase()).is("input")) {
+            //        var Query = "#mvcdynamicfield_" + value.toLowerCase();
             //        $(Query).val(key);
-
-
-            //    });
-            //} else {
-            //    var Query = "#mvcdynamicfield_" + Object.values(data)[0];
-
-
-            //    $(Query).empty();
-            //    $(Query).append($("<option></option>")
-            //        .attr("value", "").text("Select"));
-            //    $.each(data, function (key, value) {
-
-
+            //    }
+            //    else
+            //    {
+            //        var Query = "#mvcdynamicfield_" + value.toLowerCase();
+            //        $(Query).empty();
             //        $(Query).append($("<option></option>")
-            //            .attr("value", key).text(key));
+            //            .attr("value", "").text("Select"));
+            //            $(Query).append($("<option></option>")
+            //                .attr("value", key).text(key));
 
 
-            //    });
+            //    }
+            //});
+
+            if ($("#mvcdynamicfield_" + Object.values(data)[0]).is("input")) {
+                $.each(data, function (key, value) {
+                    //  var Query = "#mvcdynamicfield_" + key;
+                    var Query = "#mvcdynamicfield_" + value;
+                    // alert(Query);
+                    // $(Query).val(value);
+                    $(Query).val(key);
 
 
-            //}
+                });
+            } else {
+                var Query = "#mvcdynamicfield_" + Object.values(data)[0];
+
+
+                $(Query).empty();
+                $(Query).append($("<option></option>")
+                    .attr("value", "").text("Select"));
+                $.each(data, function (key, value) {
+
+
+                    $(Query).append($("<option></option>")
+                        .attr("value", key).text(key));
+
+
+                });
+
+
+            }
         }
 
         function errorFunc() {
@@ -842,7 +842,8 @@
             $(Query).autocomplete({
                 source: availableTags,
                 select: function (event, ui) {
-                    SetCodes_Val(ui.item.label, SurveyId, TableName, true);
+                     
+                    SetCodes_Val(ui.item.label, SurveyId, TableName, true,"","");
                 },
             });
         }
