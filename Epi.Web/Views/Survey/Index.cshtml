@@ -31,6 +31,8 @@
     {
     content: "0";
     }
+
+ 
 </style>
 
 
@@ -40,9 +42,30 @@
 
 <script type="text/javascript">
 
-
+    window.onerror = function (msg) {
+        alert("JavaScript error on page: Please stop entering data and contact survey admin.")
+    }
 
       $(document).ready(function () {
+
+
+
+
+
+          $(":input").keypress(function (e) { // override keypress of " or '
+              if (e.which == 13 || e.which == 34 || e.which == 39) {
+                  return false;
+              }
+          })
+
+              .bind("paste", function (e) {// forbid paste
+                  e.preventDefault();
+              })
+
+              .change(function () {
+                  var value = $(this).val();
+                  //and then I use this value for my operations
+              });
 
 
 
