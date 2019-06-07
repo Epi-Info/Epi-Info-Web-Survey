@@ -15,6 +15,7 @@ using Epi.Web.Utility;
 using System.Drawing;
 using System.Globalization;
 using System.Web.Mvc;
+using System.Configuration;
 
 namespace Epi.Web.MVC.Utility
 {
@@ -1226,8 +1227,15 @@ namespace Epi.Web.MVC.Utility
             _Width = GetWidth(xdocMetadata);
             _Height = GetHeight(xdocMetadata);
 
+        
             foreach (var fieldElement in fieldElementList)
             {
+                bool AutoComplete = false;
+                if (string.IsNullOrEmpty(fieldElement.Attribute("RelateCondition").Value))
+                    {
+
+                    AutoComplete = true;
+                   }
                 bool isFound = false;
                 string value = null;
 
@@ -1322,7 +1330,7 @@ namespace Epi.Web.MVC.Utility
                             }
                             var _DropDownSelectedValue2 = value;
                             var Dropdown = GetDropDown(fieldElement, _Width, _Height, xdocResponse, _DropDownSelectedValue2, DropDownValues2, 18, form);
-                            if (Dropdown.ChoiceKeyValuePairs.Count() > 50)
+                            if (Dropdown.ChoiceKeyValuePairs.Count() > 50 && AutoComplete)
                             {
 
                                 form.AddFields(GetAutoComplete(fieldElement, _Width, _Height, xdocResponse, _DropDownSelectedValue2, DropDownValues2, 1, form));
@@ -1377,14 +1385,19 @@ namespace Epi.Web.MVC.Utility
             double _Width, _Height;
             _Width = GetWidth(xdoc);
             _Height = GetHeight(xdoc);
-
+            
             XDocument xdocResponse = XDocument.Parse(_SurveyAnswer.XML);
 
             foreach (var fieldElement in form.FieldsTypeIDs)
             {
                 var Value = GetControlValue(xdocResponse, fieldElement.Attribute("Name").Value);
                 //JavaScript.Append(GetFormJavaScript(checkcode, form, _FieldTypeID.Attribute("Name").Value));
+                bool AutoComplete = false;
+                if (string.IsNullOrEmpty(fieldElement.Attribute("RelateCondition").Value))
+                {
 
+                    AutoComplete = true;
+                }
                 if (fieldElement.Attribute("Position").Value == (pageNumber - 1).ToString())
                 {
                     MvcDynamicForms.Fields.Field field = null;
@@ -1475,7 +1488,7 @@ namespace Epi.Web.MVC.Utility
 
                             dropDownValues = GetDropDownValues(form.XDocMetadata, fieldElement.Attribute("Name").Value, fieldElement.Attribute("SourceTableName").Value, fieldElement.Attribute("TextColumnName").Value, form.SourceTableList);
                             var dropdown = GetDropDown(fieldElement, dropDownValues, 18, form);
-                            if ((isMobile && dropdown.ChoiceKeyValuePairs.Count > 15) || (!isMobile && dropdown.ChoiceKeyValuePairs.Count > 50))
+                            if ((isMobile && dropdown.ChoiceKeyValuePairs.Count > 15 && AutoComplete) || (!isMobile && dropdown.ChoiceKeyValuePairs.Count > 50 && AutoComplete))
                             {
                               
                                 if (isMobile)
