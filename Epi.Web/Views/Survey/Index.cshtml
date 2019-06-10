@@ -808,6 +808,7 @@
                    // alert(1 + ":" + ListSize);
                     var Query = "#mvcdynamicfield_" + Object.values(data)[0];
                     $(Query).empty();
+                    $(Query).val("");
                     $(Query).append($("<option></option>")
                         .attr("value", "").text("Select"));
                     $.each(data, function (key, value) {
