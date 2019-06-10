@@ -800,21 +800,43 @@
 
             //    }
             //});
+            var ListSize = Object.values(data).length;
+            if ($("#mvcdynamicfield_" + Object.values(data)[0]).is("input"))
+            {
+               
+                if (ListSize > 1) {
+                   // alert(1 + ":" + ListSize);
+                    var Query = "#mvcdynamicfield_" + Object.values(data)[0];
+                    $(Query).empty();
+                    $(Query).append($("<option></option>")
+                        .attr("value", "").text("Select"));
+                    $.each(data, function (key, value) {
 
-            if ($("#mvcdynamicfield_" + Object.values(data)[0]).is("input")) {
-                $.each(data, function (key, value) {
-                    //  var Query = "#mvcdynamicfield_" + key;
-                    var Query = "#mvcdynamicfield_" + value;
-                    // alert(Query);
-                    // $(Query).val(value);
-                    $(Query).val(key);
+
+                        $(Query).append($("<option></option>")
+                            .attr("value", key).text(key));
 
 
-                });
+                    });
+
+                    }
+                else {
+                   // alert(2 + ":" + ListSize);
+                    $.each(data, function (key, value) {
+                        //  var Query = "#mvcdynamicfield_" + key;
+                        var Query = "#mvcdynamicfield_" + value;
+                        // alert(Query);
+                        // $(Query).val(value);
+                        $(Query).val(key);
+
+
+                    });
+                    }
             } else {
+
+
+                //alert(3 + ":" + ListSize);
                 var Query = "#mvcdynamicfield_" + Object.values(data)[0];
-
-
                 $(Query).empty();
                 $(Query).append($("<option></option>")
                     .attr("value", "").text("Select"));
