@@ -755,12 +755,21 @@
             //    }
             //});
 
-            var ListSize = Object.values(data).length;
-            if ($("#mvcdynamicfield_" + Object.values(data)[0]).is("input")) {
+            var value = "";
+            Object.keys(data).forEach(function (key) {
+                value = data[key];
+                return;
+
+
+            });
+
+
+            var ListSize = Object.keys(data).length;
+            if ($("#mvcdynamicfield_" + value).is("input")) {
 
                 if (ListSize > 1) {
                     // alert(1 + ":" + ListSize);
-                    var Query = "#mvcdynamicfield_" + Object.values(data)[0];
+                    var Query = "#mvcdynamicfield_" + value;
                     $(Query).empty();
                     $(Query).val("");
                   
@@ -778,9 +787,9 @@
                 }
                 else {
                     // alert(2 + ":" + ListSize);
-                    $.each(data, function (key, value) {
+                    $.each(data, function (key, value1) {
                         //  var Query = "#mvcdynamicfield_" + key;
-                        var Query = "#mvcdynamicfield_" + value;
+                        var Query = "#mvcdynamicfield_" + value1;
                         // alert(Query);
                         // $(Query).val(value);
                         $(Query).val(key);
@@ -792,11 +801,11 @@
 
 
                 //alert(3 + ":" + ListSize);
-                var Query = "#mvcdynamicfield_" + Object.values(data)[0];
+                var Query = "#mvcdynamicfield_" + value;
                 $(Query).empty();
                 $(Query).append($("<option></option>")
                     .attr("value", "").text("Select"));
-                $.each(data, function (key, value) {
+                $.each(data, function (key, value2) {
 
 
                     $(Query).append($("<option></option>")
