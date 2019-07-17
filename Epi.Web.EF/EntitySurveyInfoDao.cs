@@ -257,39 +257,41 @@ namespace Epi.Web.EF
                 throw (ex);
             }
 
-           
-                try
+            try
+            {
+                using (var Context = DataObjectFactory.CreateContext())
                 {
-                    
-                    using (var Context = DataObjectFactory.CreateContext())
-                    {
-                    //var responseList1= Context.SurveyMetaDatas.Where(x =>  x.OrganizationId == OrganizationId );
-                    var responseList1 = from r in Context.SurveyMetaDatas
-                                   where r.OrganizationId == OrganizationId
-                                        select new
-                                   {
-                                       SurveyName = r.SurveyName,
-                                            SurveyId = r.SurveyId
-
-                                        };
+                    var responseList1 = 
+                        from r in Context.SurveyMetaDatas
+                        where r.OrganizationId == OrganizationId
+                        select new
+                        {
+                            SurveyName = r.SurveyName,
+                            SurveyId = r.SurveyId,
+                            IsDraftMode = r.IsDraftMode,
+                            ClosingDate = r.ClosingDate,
+                            StartDate = r.StartDate
+                        };
 
                     if (responseList1.Count() > 0)
+                    {
+                        foreach (var item in responseList1)
                         {
-                        //result = Mapper.Map(responseList1);
-                        foreach (var item in responseList1) {
                             SurveyInfoBO SurveyInfoBO = new SurveyInfoBO();
                             SurveyInfoBO.SurveyId = item.SurveyId.ToString();
                             SurveyInfoBO.SurveyName = item.SurveyName;
+                            SurveyInfoBO.IsDraftMode = item.IsDraftMode;
+                            SurveyInfoBO.ClosingDate = item.ClosingDate;
+                            SurveyInfoBO.StartDate = item.StartDate;
                             result.Add(SurveyInfoBO);
-                        }
                         }
                     }
                 }
-                catch (Exception ex)
-                {
-                    throw (ex);
-                }
-             
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
+            }
 
             return result;
         }
