@@ -40,7 +40,7 @@ namespace Epi.Web.Common.DTO
         [DataMember]
         public string RelateParentId { get;   set; }
         [DataMember]    
-        public List<SurveyAnswerDTO> ResponseHierarchyIds { get; internal set; }
+        public List<SurveyAnswerDTO> ResponseHierarchyIds { get;  set; }
         [DataMember]
         public int RecordSourceId { get; set; }
         [DataMember]
