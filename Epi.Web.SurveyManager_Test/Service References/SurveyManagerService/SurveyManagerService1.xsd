@@ -141,4 +141,32 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="IsValidOrgKey">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q21="http://www.yourcompany.com/types/" minOccurs="0" name="pRequest" nillable="true" type="q21:SurveyInfoRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="IsValidOrgKeyResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="IsValidOrgKeyResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RePublishSurvey">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q22="http://www.yourcompany.com/types/" minOccurs="0" name="pRequestMessage" nillable="true" type="q22:PublishRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RePublishSurveyResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q23="http://www.yourcompany.com/types/" minOccurs="0" name="RePublishSurveyResult" nillable="true" type="q23:PublishResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>
