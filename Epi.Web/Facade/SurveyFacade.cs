@@ -272,7 +272,7 @@ namespace Epi.Web.MVC.Facade
 
             //Get the SurveyInfoDTO
             Epi.Web.Common.DTO.SurveyInfoDTO surveyInfoDTO;
-            if (FormsHierarchyDTOList == null)
+            if (FormsHierarchyDTOList == null || FormsHierarchyDTOList.Count()==0)
             {
                 surveyInfoDTO = SurveyHelper.GetSurveyInfoDTO(_surveyInfoRequest, _iSurveyInfoRepository, surveyId);//Pain Point 5s
                 if (_SurveyAnswerDTOList != null)
