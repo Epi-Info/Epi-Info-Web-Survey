@@ -107,8 +107,9 @@ namespace Epi.Web.MVC.Controllers
                     Request.Admin.IsActive = true;
                     Request.Admin.Notify = false;
                     Request.Organization = new OrganizationDTO();
-                    Request.Organization.Organization = UserName.Replace("\\", " ") + "_Organization";
+                    Model.OrgName = Request.Organization.Organization = UserName.Replace("\\", " ") + "_Organization";
                     Request.Organization.IsEnabled = true;
+                   
                     Guid OrgKey = Guid.NewGuid();
                     Request.Organization.OrganizationKey = OrgKey.ToString();
 
