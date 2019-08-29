@@ -82,7 +82,7 @@ namespace Epi.Web.MVC.Controllers
                 {
                     Model.OrganizationKey = OrgId;
                     Model.IsValidOrg = ValidateOrganizationId(Model.OrganizationKey);
-
+                   
                     if (!Model.IsValidOrg)
                     {
                         ModelState.AddModelError("OrganizationKey", "Organization Key does not exist.");
@@ -90,8 +90,12 @@ namespace Epi.Web.MVC.Controllers
                     else
                     {
                         Session["OrgId"] = Model.OrganizationKey;
-
-                        Model.SurveyNameList = ViewBag.SurveyNameList1 = GetAllSurveysByOrgId(Model.OrganizationKey); ;
+                       
+                       Model.SurveyNameList = ViewBag.SurveyNameList1 = GetAllSurveysByOrgId(Model.OrganizationKey); ;
+                        OrganizationAccountRequest OrgRequest = new OrganizationAccountRequest();
+                        OrgRequest.Organization.OrganizationKey = Model.OrganizationKey;
+                        OrganizationAccountResponse OrganizationAccountResponse = this._isurveyFacade.GetOrg(OrgRequest);
+                        Model.OrgName = OrganizationAccountResponse.OrganizationDTO.Organization;
                     }
 
 
