@@ -177,6 +177,7 @@ namespace Epi.Web.Common.ObjectMapping
                 SurveyAnswerDTO.DateCreated = pBO.DateCreated;
                 SurveyAnswerDTO.Status = pBO.Status;
                 SurveyAnswerDTO.IsDraftMode = pBO.IsDraftMode;
+                SurveyAnswerDTO.PassCode = pBO.PassCode;
                 //SurveyAnswerDTO.IsLocked = pBO.IsLocked;
                 SurveyAnswerDTO.ParentRecordId = pBO.ParentRecordId;
                 SurveyAnswerDTO.Json = pBO.Json;
