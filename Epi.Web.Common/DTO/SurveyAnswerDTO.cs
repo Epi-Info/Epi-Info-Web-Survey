@@ -45,6 +45,6 @@ namespace Epi.Web.Common.DTO
         public int RecordSourceId { get; set; }
         [DataMember]
         public Dictionary<string, string> SqlData { get; set; }
-
+        public string PassCode { get; set; }
     }
 }
