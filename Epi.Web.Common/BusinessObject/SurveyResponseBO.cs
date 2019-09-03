@@ -31,5 +31,6 @@ namespace Epi.Web.Common.BusinessObject
         public List<SurveyResponseBO> ResponseHierarchyIds { get;   set; }
 
         public int RecrodSourceId { get; set; }
+        public string PassCode { get; set; }
     }
 }

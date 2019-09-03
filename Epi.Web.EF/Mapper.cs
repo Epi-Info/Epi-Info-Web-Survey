@@ -480,6 +480,7 @@ namespace Epi.Web.EF
             SurveyResponseBO.DateCreated = entity.DateCreated;
             SurveyResponseBO.IsDraftMode = entity.IsDraftMode;
             SurveyResponseBO.Json = entity.ResponseJson;
+            SurveyResponseBO.PassCode = entity.ResponsePasscode;
             //SurveyResponseBO.IsLocked = entity.IsLocked;
             /// SurveyResponseBO.LastActiveUserId = LastActiveUseerId;
             if (entity.SurveyMetaData != null && entity.SurveyMetaData.ViewId!= null)
