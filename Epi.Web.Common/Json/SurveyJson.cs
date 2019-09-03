@@ -30,7 +30,9 @@ namespace Epi.Web.Common.Json
 
                 Responsedetail.ResponseId = surveyAnswer.ResponseId;
                 Responsedetail.FormId = surveyAnswer.SurveyId;
-                Responsedetail.OKey = FormsHierarchyDTOList[0].SurveyInfo.OrganizationKey.ToString().Substring(0, 8);
+                if (FormsHierarchyDTOList.Count()>0) {
+                    Responsedetail.OKey = FormsHierarchyDTOList[0].SurveyInfo.OrganizationKey.ToString().Substring(0, 8);
+                }
                 for (int i = 1; NumberOfPages + 1 > i; i++)
                 {
                     try
