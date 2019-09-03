@@ -668,6 +668,7 @@ namespace Epi.Web.MVC.Controllers
                                 var SurveyResponse = _isurveyFacade.GetSurveyAnswerResponse(_ResponseId, model.EmailSurveyKey).SurveyResponseList[0];
                                 ResponseStatuse = SurveyResponse.Status;
                                 DateCompleted = SurveyResponse.DateCompleted.ToString();
+                                SurveyUrl = ConfigurationManager.AppSettings["ResponseURL"] + SurveyResponse.ResponseId.ToString() + "/" + SurveyResponse.PassCode;
                             }
                             // send email
                             Epi.Web.Common.Email.Email EmailObj = new Common.Email.Email();
