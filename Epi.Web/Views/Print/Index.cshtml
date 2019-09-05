@@ -5,160 +5,235 @@
 }
 
 <style type="text/css" media="print">
- #Print1, #Print2 {display:none; visibility:collapse;}
- .printable {margin-top: -50px;}
-
-</style>
-<style type="text/css" media="screen, print">
-body{background:none;}
-
-#container
-{
-    width:100% important; padding:20px; border: none;
-    -moz-border-radius: 0px;
- border-radius: 0px;
- -moz-box-shadow: none;
- -webkit-box-shadow: none;
- box-shadow: none;
- }
-
-#footer {display:none; visibility:collapse;}
-.printable {
-border: 1px dotted #CCCCCC ;
-padding: 10px 10px 10px 10px ;
-/*margin-top: -50px;*/
-}
-
-.surveyinfo 
-{
-    margin: 1px 0 10px;
-    font: 12pt "Segoe UI", Sans-serif;
+    #Print1, #Print2 {
+        display: none;
+        visibility: collapse;
     }
 
-table { 
-		width: 100%; 
-		border-spacing: 1px !important;
-		border-collapse: collapse; 
-		border: 1px solid #ccc !important;
-		padding: 3px 5px;
-		font-family: "Segoe UI", Sans-Serif;
-		font-size:10pt;
-	}
-	/* Zebra striping */
-	 tr:nth-of-type(even) { 
-		background: #e5e5e5; 
-	}
-	 th { 
-		background: white;
-		/*color:#2878ec;  */
-		font-size:12pt;
-		font-weight: bold; 
-		border-bottom: 2px solid #ccc !important;
-		text-align:left;
-		 background: #b2b2b2 !important;
-        
-	}
-	 td, th { 
-		padding: 6px; 
-		/*border-bottom: 1px solid #2878ec; */
-		text-align: left; 
-		vertical-align:top;
-		max-width: 140px;
-		border: 1px solid #ccc !important;
-		width:50%;
-		
-	}
-	
-	td th:nth-of-type(1) { width:50%; }
-	td td:nth-of-type(1) { border-right: 1px solid #ccc !important;}
-	button.exitsurvey
-    {
-        margin-right:5px;
+    .printable {
+        margin-top: -50px;
+    }
+</style>
+<style type="text/css" media="screen, print">
+    body {
+        background: none;
+    }
+
+    #container {
+        width: 100% important;
+        padding: 20px;
+        border: none;
+        -moz-border-radius: 0px;
+        border-radius: 0px;
+        -moz-box-shadow: none;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+    }
+
+    #footer {
+        display: none;
+        visibility: collapse;
+    }
+
+    .printable {
+        border: 1px dotted #CCCCCC;
+        padding: 10px 10px 10px 10px;
+        /*margin-top: -50px;*/
+    }
+
+    .surveyinfo {
+        margin: 1px 0 10px;
+        font: 12pt "Segoe UI", Sans-serif;
+    }
+
+    table {
+        width: 100%;
+        border-spacing: 1px !important;
+        border-collapse: collapse;
+        border: 1px solid #ccc !important;
+        padding: 3px 5px;
+        font-family: "Segoe UI", Sans-Serif;
+        font-size: 10pt;
+    }
+    /* Zebra striping */
+    tr:nth-of-type(even) {
+        background: #e5e5e5;
+    }
+
+    th {
+        background: white;
+        /*color:#2878ec;  */
+        font-size: 12pt;
+        font-weight: bold;
+        border-bottom: 2px solid #ccc !important;
+        text-align: left;
+        background: #b2b2b2 !important;
+    }
+
+    td, th {
+        padding: 6px;
+        /*border-bottom: 1px solid #2878ec; */
+        text-align: left;
+        vertical-align: top;
+        max-width: 140px;
+        border: 1px solid #ccc !important;
+        width: 50%;
+    }
+
+        td th:nth-of-type(1) {
+            width: 50%;
+        }
+
+        td td:nth-of-type(1) {
+            border-right: 1px solid #ccc !important;
+        }
+
+    button.exitsurvey {
+        margin-right: 5px;
         background: #E5E5E5 !important;
         color: #3f3f3f !important;
         box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5), inset 0 1px rgba(255, 255, 255, 0.3), inset 0 10px rgba(255, 255, 255, 0.2), inset 0 10px 20px rgba(255, 255, 255, 0.25), inset 0 -15px 30px rgba(0, 0, 0, 0.3);
         -o-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
         -webkit-box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5), inset 0 1px rgba(255, 255, 255, 0.3), inset 0 10px rgba(255, 255, 255, 0.2), inset 0 10px 20px rgba(255, 255, 255, 0.25), inset 0 -15px 30px rgba(0, 0, 0, 0.3);
         -moz-box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
-    } 
-	
+    }
 </style>
 <script language="javascript" type="text/javascript">
+    $(document).ready(function () {
+
+
+        $('.btn').on('click', function () {
+            var $this = $(this);
+            $this.button('loading');
+            setTimeout(function () {
+                $this.button('reset');
+            }, 8000);
+        });
+    });
     function Print(divID) {
 
-      
+
 
         $(".printable").print();
 
         return (false);
 
     }
+        function GetCSV() {
+        var signoutUrl = '@Url.Action("GetCSV", "Print")' + '?responseId=' + '@Model[0].ResponseId'  ;
+
+        $.ajax({
+            url: signoutUrl,
+            type: 'POST',
+            contentType: 'application/json; charset=utf-8',
+            //data: JSON.stringify(model),
+           // dataType: "text",
+            //async: false,
+            success: successFunc,
+            Error: errorFunc
+        });
+
+
+        function successFunc(data) {
+
+
+
+        }
+
+        function errorFunc() {
+
+            alert('error');
+        }
+    }
 </script>
 <br />
- 
-<div id="Print1" align="right">
-    <div style="float:left;">
-
-@if(!@Model[0].IsFromFinal){
-   <span class="current">@Html.ActionLink("Return To Survey", "Index", "Survey", new { responseid = Model[0].ResponseId, PageNumber = Model[0].NumberOfPages }, new {@class = "returnto"})</span>
-
-}
-else
+@using (Html.BeginForm("Index", "Print", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
+    <div id="Print1" align="right">
 
-   <span class="current">@Html.ActionLink("Return To Final Page.", "Index", "Final", new { surveyid = Model[0].SurveyId, responseid = Model[0].ResponseId }, new {@class = "returnto"})</span>
-}
-</div>
-    <div style="float:right;">
-	    <button class="exitsurvey"  name="PrintButton" id="PrintButton" onclick="Print('printable')" type="button" >Print</button>
+
+        <div style="float:left;">
+
+            @if (!@Model[0].IsFromFinal)
+            {
+                <span class="current">@Html.ActionLink("Return To Survey", "Index", "Survey", new { responseid = Model[0].ResponseId, PageNumber = Model[0].NumberOfPages }, new { @class = "returnto" })</span>
+
+            }
+            else
+            {
+
+                <span class="current">@Html.ActionLink("Return To Final Page.", "Index", "Final", new { surveyid = Model[0].SurveyId, responseid = Model[0].ResponseId }, new { @class = "returnto" })</span>
+            }
+        </div>
+        <div style="float:right;">
+            @*<a href="" onclick="GetCSV()">
+            <img src="~/Content/images/CSV_Icon.png" />
+        </a>*@
+            <button class="exitsurvey" type="submit" name="DownLoadResponse" id="DownLoadResponse" value="DownLoad" style="margin-right:90px;width:100px">Download CSV</button>
+        </div>
+        <div style="float:right;">
+
+            <button class="exitsurvey" name="PrintButton" id="PrintButton" onclick="Print('printable')" type="button">Print</button>
+        </div>
+        <div style="clear:both;"></div>
     </div>
-    <div style="clear:both;"></div>
-</div>
-<br />
-<div id="recordstable" class="printable">
-   @foreach (var form in @Model)
+    <br />
+    <div id="recordstable" class="printable">
+        @foreach (var form in @Model)
 
-   {
-        <p class="surveyinfo">Form Name: <strong> @form.SurveyName</strong> </p>
-        <p class="surveyinfo">Date: <strong> @form.CurrentDate</strong> </p>
-        for (int i = 1; form.NumberOfPages + 1 > i; i++)
-        {
-            <br />
-            <p class="surveyinfo"><strong>Page @i</strong></p>
+            {
+            <p class="surveyinfo">Form Name: <strong> @form.SurveyName</strong> </p>
+            <p class="surveyinfo">Date: <strong> @form.CurrentDate</strong> </p>
+                for (int i = 1; form.NumberOfPages + 1 > i; i++)
+                {
+                <br />
+                <p class="surveyinfo"><strong>Page @i</strong></p>
 
-            <table id="printtable">
-              <tr>
-                <th scope="col">Question</th>
-                <th scope="col">Answer</th>
-              </tr>
-              @foreach (var item in form.ResponseList)
-              {
-                  if (item.PageNumber == i)
-                  {
-                        <tr>
-                            <td align =left scope="row">@item.Question</td>
-                            <td align= left>@item.Value</td>
-                        </tr>
-                  }
-              }
-            </table>
-        }
-   }
-</div>
-<br />
-<div id="Print2" align="right">
-<div style="float:left;">
+                <table id="printtable">
+                    <tr>
+                        <th scope="col">Question</th>
+                        <th scope="col">Answer</th>
+                    </tr>
+                    @foreach (var item in form.ResponseList)
+            {
+                if (item.PageNumber == i)
+                {
+                            <tr>
+                                <td align=left scope="row">@item.Question</td>
+                                <td align=left>@item.Value</td>
+                            </tr>
+                }
+            }
+                </table>
+                }
+            }
+    </div>
+    <br />
 
-@if(!@Model[0].IsFromFinal){
-   <span class="current">@Html.ActionLink("Return To Survey", "Index", "Survey", new { responseid = Model[0].ResponseId, PageNumber = Model[0].NumberOfPages }, new {@class = "returnto"})</span>
+    <div id="Print2" align="right">
+
+        <div style="float:left;">
+
+            @if (!@Model[0].IsFromFinal)
+            {
+                <span class="current">@Html.ActionLink("Return To Survey", "Index", "Survey", new { responseid = Model[0].ResponseId, PageNumber = Model[0].NumberOfPages }, new { @class = "returnto" })</span>
+
+            }
+            else
+            {
+
+                <span class="current">@Html.ActionLink("Return To Final Page.", "Index", "Final", new { surveyid = Model[0].SurveyId, responseid = Model[0].ResponseId }, new { @class = "returnto" })</span>
+            }
+
+        </div>
+
+        <button class="exitsurvey" name="PrintButton2" id="PrintButton2" onclick="Print('printable')" type="button">Print</button>
+        <button class="exitsurvey" type="submit" name="DownLoadResponse" id="DownLoadResponse1" value="DownLoad" style="margin-right:90px; width:100px" >Download CSV</button>
+        @*<div style="float:right;">
+            <a href="" onclick=" GetCSV()">
+                <img src="~/Content/images/CSV_Icon.png" />
+            </a>
+        </div>*@
+    </div>
 
 }
-else
-{
-
-   <span class="current">@Html.ActionLink("Return To Final Page.", "Index", "Final", new { surveyid = Model[0].SurveyId, responseid = Model[0].ResponseId }, new {@class = "returnto"})</span>
-}
-</div>
-	<button class="exitsurvey"  name="PrintButton2" id="PrintButton2" onclick="Print('printable')" type="button" >Print</button>
-</div>    
-
