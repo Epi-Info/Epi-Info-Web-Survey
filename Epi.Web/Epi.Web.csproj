@@ -20,9 +20,10 @@
     <SccLocalPath>.</SccLocalPath>
     <SccAuxPath>https://tfs.codeplex.com/tfs/tfs04</SccAuxPath>
     <SccProvider>{4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}</SccProvider>
-    <IISExpressSSLPort>44300</IISExpressSSLPort>
-    <IISExpressAnonymousAuthentication>disabled</IISExpressAnonymousAuthentication>
-    <IISExpressWindowsAuthentication>enabled</IISExpressWindowsAuthentication>
+    <IISExpressSSLPort>
+    </IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
     <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
     <UseGlobalApplicationHostFile />
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
@@ -380,6 +381,7 @@
     <Content Include="Content\images\checkmark_icon.png" />
     <Content Include="Content\images\Close.png" />
     <Content Include="Content\images\codebk.png" />
+    <Content Include="Content\images\CSV_Icon.png" />
     <Content Include="Content\images\DataViewer.png" />
     <Content Include="Content\images\delset.png" />
     <Content Include="Content\images\Demo.png" />
@@ -511,9 +513,7 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
-    <Content Include="Properties\DataSources\Epi.Web.Common.Message.FormsHierarchyResponse.datasource" />
     <Content Include="Content\Text\EmailList.xlsx" />
-    <Content Include="Properties\DataSources\Epi.Web.Common.Message.FormsHierarchyResponse2.datasource" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
@@ -567,8 +567,6 @@
     <Content Include="Content\Text\Survey.xlsx" />
     <None Include="Properties\DataSources\Epi.Web.Common.Message.CacheDependencyResponse.datasource" />
     <None Include="Properties\DataSources\Epi.Web.Common.Message.OrganizationAccountResponse.datasource" />
-    <Content Include="Properties\DataSources\Epi.Web.Common.Message.OrganizationResponse.datasource" />
-    <Content Include="Properties\DataSources\Epi.Web.Common.Message.SourceTablesResponse.datasource" />
     <None Include="Properties\DataSources\Epi.Web.Common.Message.SurveyAnswerResponse.datasource" />
     <None Include="Properties\DataSources\Epi.Web.Common.Message.SurveyControlsResponse.datasource" />
     <None Include="Properties\DataSources\Epi.Web.Common.Message.SurveyInfoResponse.datasource" />

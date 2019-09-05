@@ -181,14 +181,19 @@ namespace Epi.Web.MVC
              new { controller = "Survey", action = "Index", responseid = UrlParameter.Optional,pageNumber = UrlParameter.Optional, issaved = UrlParameter.Optional }
          ); // Parameter defaults
 
-
+            routes.MapRoute
+          (
+              null, // Route name
+              "Print/GetCSV", // URL with parameters
+              new { controller = "Print", action = "GetCSV", responseId = UrlParameter.Optional }
+          );
             routes.MapRoute
            (
                null, // Route name
                "Print/{responseid}", // URL with parameters
                new { controller = "Print", action = "Index", responseid = UrlParameter.Optional }
            ); // Parameter defaults
-
+            
             routes.MapRoute
               (
                   null, // Route name

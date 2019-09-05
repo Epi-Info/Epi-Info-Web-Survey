@@ -587,15 +587,16 @@ namespace Epi.Web.MVC.Controllers
 
                 for (int row = 2; row <= end.Row; row++)
                 { // Row by row...
-
-                    if (xlWorksheet.Cells[row, 1] != null && xlWorksheet.Cells[row, 1].Text != "")
+                    int DoSend = 0;
+                    int.TryParse(xlWorksheet.Cells[row, 1].Text, out DoSend);
+                    // validate email Address
+                    bool IsValid = ValidateEmail(xlWorksheet.Cells[row, 2].Text);
+                    if( IsValid)
                     {
-                        bool IsValidEmail = Epi.Web.Common.Email.EmailHandler.IsValidEmail(xlWorksheet.Cells[row, 1].Text.ToString());
-                        if (IsValidEmail)
-                        {
-                            string UserEamil = xlWorksheet.Cells[row, 1].Text;
-                            string _ResponseId = xlWorksheet.Cells[row, 2].Text;
-                            string _Status = xlWorksheet.Cells[row, 3].Text;
+                        
+                            string UserEamil = xlWorksheet.Cells[row, 2].Text;
+                            string _ResponseId = xlWorksheet.Cells[row, 3].Text;
+                            string _Status = xlWorksheet.Cells[row, 4].Text;
                             string SurveyUrl = "";
                             int ResponseStatuse = 1;
                             string DateCompleted = "";
@@ -603,10 +604,10 @@ namespace Epi.Web.MVC.Controllers
 
                             if (string.IsNullOrEmpty(_Status))
                             {
-                                xlWorksheet.SetValue(row, 3, "InProgress");
+                                xlWorksheet.SetValue(row, 4, "InProgress");
                                 InProgress++;
                             }
-                            xlWorksheet.SetValue(row, 4, DateTime.Now.ToShortDateString());
+                            xlWorksheet.SetValue(row, 5, DateTime.Now.ToShortDateString());
 
 
 
@@ -624,7 +625,7 @@ namespace Epi.Web.MVC.Controllers
                                 // Update response if  key value pair availeble 
 
                                 bool IsPreFiledValues = false;
-                                if (!string.IsNullOrEmpty(xlWorksheet.Cells[row, 9].Text))
+                                if (!string.IsNullOrEmpty(xlWorksheet.Cells[row, 10].Text))
                                 {
 
                                     IsPreFiledValues = true;
@@ -635,7 +636,7 @@ namespace Epi.Web.MVC.Controllers
                                     XDocument SurveyXml = XDocument.Parse(SurveyInfo.XML);
                                     Epi.Web.Common.Message.PreFilledAnswerRequest request = new PreFilledAnswerRequest();
                                     request.AnswerInfo.SurveyQuestionAnswerList = new Dictionary<string, string>();
-                                    for (int cell = 9; cell <= end.Column; cell++)
+                                    for (int cell = 10; cell <= end.Column; cell++)
                                     {
                                         string ColumnName = xlWorksheet.Cells[1, cell].Value.ToString();
                                         string Value = xlWorksheet.Cells[row, cell].Value.ToString();
@@ -658,9 +659,9 @@ namespace Epi.Web.MVC.Controllers
                                     _isurveyFacade.SaveSurveyAnswer(Request);
 
                                 }
-                                xlWorksheet.SetValue(row, 2, ResponseID.ToString());
-                                xlWorksheet.SetValue(row, 5, SurveyUrl);
-                                xlWorksheet.SetValue(row, 6, strPassCode);
+                                xlWorksheet.SetValue(row, 3, ResponseID.ToString());
+                                xlWorksheet.SetValue(row, 6, SurveyUrl);
+                                xlWorksheet.SetValue(row, 7, strPassCode);
                             }
                             else
                             {
@@ -671,89 +672,98 @@ namespace Epi.Web.MVC.Controllers
                                 SurveyUrl = ConfigurationManager.AppSettings["ResponseURL"] + SurveyResponse.ResponseId.ToString() + "/" + SurveyResponse.PassCode;
                             }
                             // send email
-                            Epi.Web.Common.Email.Email EmailObj = new Common.Email.Email();
-                            if (ResponseStatuse < 3 && !string.IsNullOrEmpty(SurveyUrl))
+                            if (DoSend==1)
                             {
-                                try
-                                {
-
-                                    EmailObj.Body = Body +
-                                        "\n\n Survey URL: \n" + SurveyUrl;
-
-                                    EmailObj.From = Sender;// ConfigurationManager.AppSettings["EMAIL_FROM"].ToString();
-                                    EmailObj.Subject = Uri.UnescapeDataString(Subject);
-
-
-                                    List<string> tempList = new List<string>();
-                                    tempList.Add(UserEamil);
-                                    EmailObj.To = tempList;
-                                    bool EmailSent = Epi.Web.Common.Email.EmailHandler.SendMessage(EmailObj);
-                                    xlWorksheet.SetValue(row, 8, "Email sent successfully!");
-                                }
-                                catch (Exception ex)
-                                {
-                                    xlWorksheet.SetValue(row, 8, "Error occurred while sending email.");
-                                    //throw ex;
-                                }
-
-                            }
-                            else
-                            {
-                                if (ResponseStatuse != 3)
+                                Epi.Web.Common.Email.Email EmailObj = new Common.Email.Email();
+                                if (ResponseStatuse < 3 && !string.IsNullOrEmpty(SurveyUrl))
                                 {
                                     try
                                     {
-                                        EmailObj.Body = Body2 +
-                                                "\n\n Survey URL: \n" + SurveyUrl;
-                                        EmailObj.Subject = Uri.UnescapeDataString(Subject2);
-                                        EmailObj.From = Sender2;// ConfigurationManager.AppSettings["EMAIL_FROM"].ToString();
+
+                                        EmailObj.Body = Body +
+                                            "\n\n Survey URL: \n" + SurveyUrl;
+
+                                        EmailObj.From = Sender;// ConfigurationManager.AppSettings["EMAIL_FROM"].ToString();
+                                        EmailObj.Subject = Uri.UnescapeDataString(Subject);
+
+
                                         List<string> tempList = new List<string>();
                                         tempList.Add(UserEamil);
                                         EmailObj.To = tempList;
                                         bool EmailSent = Epi.Web.Common.Email.EmailHandler.SendMessage(EmailObj);
-                                        xlWorksheet.SetValue(row, 8, "Email sent successfully!");
-
+                                    if (EmailSent) {
+                                        xlWorksheet.SetValue(row, 9, "Email sent successfully!");
+                                    }
+                                    else {
+                                        xlWorksheet.SetValue(row, 9, "Error occurred while sending email.");
+                                    }
                                     }
                                     catch (Exception ex)
                                     {
-                                        xlWorksheet.SetValue(row, 8, "Error occurred while sending email.");
+                                        xlWorksheet.SetValue(row, 9, "Error occurred while sending email.");
                                         //throw ex;
                                     }
-                                }
-                                var _ResponseStatus = GetStatus(ResponseStatuse);
-                                xlWorksheet.SetValue(row, 3, _ResponseStatus);
-                                xlWorksheet.SetValue(row, 7, DateCompleted);
 
-                                switch (ResponseStatuse)
+                                }
+                                else
                                 {
-                                    case 1:
-                                        InProgress++;
-                                        //data.Add(new KeyValuePair<string, int>($"Group {i}", rand.Next(10, 100)));
-                                        break;
-                                    case 2:
-                                        Saved++;
-                                        break;
-                                    case 3:
-                                        Submited++;
-                                        break;
-                                    default:
+                                    if (ResponseStatuse != 3)
+                                    {
+                                        try
+                                        {
+                                            EmailObj.Body = Body2 +
+                                                    "\n\n Survey URL: \n" + SurveyUrl;
+                                            EmailObj.Subject = Uri.UnescapeDataString(Subject2);
+                                            EmailObj.From = Sender2;// ConfigurationManager.AppSettings["EMAIL_FROM"].ToString();
+                                            List<string> tempList = new List<string>();
+                                            tempList.Add(UserEamil);
+                                            EmailObj.To = tempList;
+                                            bool EmailSent = Epi.Web.Common.Email.EmailHandler.SendMessage(EmailObj);
+                                        if (EmailSent)
+                                        {
+                                            xlWorksheet.SetValue(row, 9, "Email sent successfully!");
+                                        }
+                                        else
+                                        {
+                                            xlWorksheet.SetValue(row, 9, "Error occurred while sending email.");
+                                        }
 
-                                        break;
+                                    }
+                                        catch (Exception ex)
+                                        {
+                                            xlWorksheet.SetValue(row, 9, "Error occurred while sending email.");
+                                            //throw ex;
+                                        }
+                                    }
+                                    var _ResponseStatus = GetStatus(ResponseStatuse);
+                                    xlWorksheet.SetValue(row, 4, _ResponseStatus);
+                                    xlWorksheet.SetValue(row, 8, DateCompleted);
+
+                                    switch (ResponseStatuse)
+                                    {
+                                        case 1:
+                                            InProgress++;
+                                            //data.Add(new KeyValuePair<string, int>($"Group {i}", rand.Next(10, 100)));
+                                            break;
+                                        case 2:
+                                            Saved++;
+                                            break;
+                                        case 3:
+                                            Submited++;
+                                            break;
+                                        default:
+
+                                            break;
+                                    }
+
                                 }
-
                             }
-
                         }
                         else
                         {
-                            xlWorksheet.SetValue(row, 8, "Email address is not valid. Please check email address and try again.");
+                            xlWorksheet.SetValue(row, 9, "Email address is not valid. Please check email address and try again.");
                         }
-                    }
-                    else
-                    {
-                        xlWorksheet.SetValue(row, 8, "Email not found.");
-
-                    }
+                   
                 }
                 // adding a sumery 
 
@@ -773,6 +783,20 @@ namespace Epi.Web.MVC.Controllers
 
 
             }
+        }
+
+        private bool ValidateEmail(string email)
+        {
+            try
+            {
+                var addr = new System.Net.Mail.MailAddress(email);
+                return addr.Address == email;
+            }
+            catch
+            {
+                return false;
+            }
+
         }
 
         private static void GetPieChart(int InProgress, int Saved, int Submited, ExcelWorkbook workbook)
