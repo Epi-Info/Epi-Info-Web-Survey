@@ -115,23 +115,23 @@
                                                                                                    )));
             if (Model.FormResponseInfoModel.Columns.Count >= 1)
             {
-                gridColumns.Add(webGrid.Column("Column1", (Model.FormResponseInfoModel.Columns.Count >= 1) ? Model.FormResponseInfoModel.Columns[0].Value : ""));
+                gridColumns.Add(webGrid.Column("Column1", (Model.FormResponseInfoModel.Columns.Count >= 1) ? Model.FormResponseInfoModel.Columns[0].Value : "",style: "gridcolumn"));
             }
             if (Model.FormResponseInfoModel.Columns.Count >= 2)
             {
-                gridColumns.Add(webGrid.Column("Column2", (Model.FormResponseInfoModel.Columns.Count >= 2) ? Model.FormResponseInfoModel.Columns[1].Value : ""));
+                gridColumns.Add(webGrid.Column("Column2", (Model.FormResponseInfoModel.Columns.Count >= 2) ? Model.FormResponseInfoModel.Columns[1].Value : "",style: "gridcolumn"));
             }
             if (Model.FormResponseInfoModel.Columns.Count >= 3)
             {
-                gridColumns.Add(webGrid.Column("Column3", (Model.FormResponseInfoModel.Columns.Count >= 3) ? Model.FormResponseInfoModel.Columns[2].Value : ""));
+                gridColumns.Add(webGrid.Column("Column3", (Model.FormResponseInfoModel.Columns.Count >= 3) ? Model.FormResponseInfoModel.Columns[2].Value : "",style: "gridcolumn"));
             }
             if (Model.FormResponseInfoModel.Columns.Count >= 4)
             {
-                gridColumns.Add(webGrid.Column("Column4", (Model.FormResponseInfoModel.Columns.Count >= 4) ? Model.FormResponseInfoModel.Columns[3].Value : ""));
+                gridColumns.Add(webGrid.Column("Column4", (Model.FormResponseInfoModel.Columns.Count >= 4) ? Model.FormResponseInfoModel.Columns[3].Value : "",style: "gridcolumn"));
             }
             if (Model.FormResponseInfoModel.Columns.Count >= 5)
             {
-                gridColumns.Add(webGrid.Column("Column5", (Model.FormResponseInfoModel.Columns.Count >= 5) ? Model.FormResponseInfoModel.Columns[4].Value : ""));
+                gridColumns.Add(webGrid.Column("Column5", (Model.FormResponseInfoModel.Columns.Count >= 5) ? Model.FormResponseInfoModel.Columns[4].Value : "",style: "gridcolumn"));
             }
             @webGrid.GetHtml(columns: gridColumns);
 
@@ -169,3 +169,15 @@
       var redirectTimeoutHandle = setTimeout(function() { window.location.href = '@FormsAuthentication.LoginUrl' + '?'+ returnUrl; }, redirectTimeout);
     </script>*@
 
+<style>
+
+    .gridcolumn{
+    max-width: 70px;
+    width: 250px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+}
+
+</style>
