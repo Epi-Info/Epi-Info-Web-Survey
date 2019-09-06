@@ -1842,20 +1842,21 @@ namespace Epi.Web.MVC.Controllers
             Columns.Add(new KeyValuePair<int, string>(1, "_DateCreated"));
             foreach (XElement Xelement in xdoc1.Descendants("Page").Elements("Field"))
             {
-                if (counter<=5) {
+                var FieldTypeId = Xelement.Attribute("FieldTypeId").Value;
+                if (counter<=5 && FieldTypeId!= "2") {
                     string ColumnName = Xelement.Attribute("Name").Value;
-                    if (ColumnName.Length>20)
-                    {
-                        ColumnName = ColumnName.Substring(0, 17) + "...";
+                    //if (ColumnName.Length>20)
+                    //{
+                    //    ColumnName = ColumnName.Substring(0, 17) + "...";
 
-                    }
+                    //}
                     Columns.Add(new KeyValuePair<int, string>(counter, ColumnName));
 
-
+                    counter++;
                 }
 
 
-                counter++;
+                //counter++;
             }
 
                 return Columns;
