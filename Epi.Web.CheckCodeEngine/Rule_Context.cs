@@ -785,13 +785,13 @@ public System.Collections.Specialized.NameValueCollection GlobalVariables;*/
                     case "datepicker":
                     case "timepicker":
                     case "multiline":
-                         pJavaScriptBuilder.AppendLine(string.Format(defineFormat, var.Name, var.ControlType, DataSource, var.PageNumber, var.Expression.Replace("\n"," ")));
+                         pJavaScriptBuilder.AppendLine(string.Format(defineFormat, var.Name, var.ControlType, DataSource, var.PageNumber, var.Expression.Replace("\n"," ").Replace("\"", "'")));
                         break;
                     case "textbox": 
                     case "commandbutton":                   
 
                     default:
-                        pJavaScriptBuilder.AppendLine(string.Format(defineFormat, var.Name, var.ControlType, DataSource, var.PageNumber, var.Expression));
+                        pJavaScriptBuilder.AppendLine(string.Format(defineFormat, var.Name, var.ControlType, DataSource, var.PageNumber, var.Expression.Replace("\"","'")));
                         break;
 
                 }
