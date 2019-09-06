@@ -135,14 +135,14 @@ background-origin:content-box;*/
 #prev
  {
  float: left;
- width: 33%;
+ width: 25%;
  vertical-align:middle;
  }
 
 #savediv
  {
  float: left;
- width: 33%;
+ width: 50%;
  margin: auto;
  vertical-align:middle;
  }
@@ -150,7 +150,7 @@ background-origin:content-box;*/
 #next
  {
  float: right;
- width: 33%;
+ width: 25%;
  vertical-align:middle;
  }
 /*---*/
