@@ -153,14 +153,14 @@ margin-right: 0.5em;*
 #prev
  {
  float: left;
- width: 33%;
+ width: 25%;
  vertical-align:middle;
  }
 
 #savediv
  {
  float: left;
- width: 33%;
+ width: 50%;
  margin: auto;
  vertical-align:middle;
  }
@@ -168,7 +168,7 @@ margin-right: 0.5em;*
 #next
  {
  float: right;
- width: 33%;
+ width: 25%;
  vertical-align:middle;
  }
 /*---*/
