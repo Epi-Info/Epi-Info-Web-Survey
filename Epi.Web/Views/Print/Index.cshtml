@@ -165,27 +165,41 @@
                 <span class="current">@Html.ActionLink("Return To Final Page.", "Index", "Final", new { surveyid = Model[0].SurveyId, responseid = Model[0].ResponseId }, new { @class = "returnto" })</span>
             }
         </div>
+
         <div style="float:right;">
             @*<a href="" onclick="GetCSV()">
-            <img src="~/Content/images/CSV_Icon.png" />
-        </a>*@
+                    <img src="~/Content/images/CSV_Icon.png" />
+                </a>*@
             <button class="exitsurvey" type="submit" name="DownLoadResponse" id="DownLoadResponse" value="DownLoad" style="margin-right:90px;width:100px">Download CSV</button>
         </div>
-        <div style="float:right;">
+        <div style="float:right; ">
 
             <button class="exitsurvey" name="PrintButton" id="PrintButton" onclick="Print('printable')" type="button">Print</button>
         </div>
         <div style="clear:both;"></div>
     </div>
     <br />
+    <div>
+        <p align="center" style="color:#4a80bd">
+            <b> Review your Answers – You can still go back to the survey if you need to change or add something.</b> <br>
+          </p>
+        <p align="center">
+            <b>
+                Click Print and Download to have a record of your answers<br>
+                DON’T FORGET TO CLICK ‘Return to Survey’ TO SUBMIT THE RESPONSE.
+                </b>
+</p>
+
+    </div>
+    <br />
     <div id="recordstable" class="printable">
         @foreach (var form in @Model)
 
-            {
+        {
             <p class="surveyinfo">Form Name: <strong> @form.SurveyName</strong> </p>
             <p class="surveyinfo">Date: <strong> @form.CurrentDate</strong> </p>
-                for (int i = 1; form.NumberOfPages + 1 > i; i++)
-                {
+            for (int i = 1; form.NumberOfPages + 1 > i; i++)
+            {
                 <br />
                 <p class="surveyinfo"><strong>Page @i</strong></p>
 
@@ -195,18 +209,18 @@
                         <th scope="col">Answer</th>
                     </tr>
                     @foreach (var item in form.ResponseList)
-            {
-                if (item.PageNumber == i)
-                {
+                    {
+                        if (item.PageNumber == i)
+                        {
                             <tr>
                                 <td align=left scope="row">@item.Question</td>
                                 <td align=left>@item.Value</td>
                             </tr>
-                }
-            }
+                        }
+                    }
                 </table>
-                }
             }
+        }
     </div>
     <br />
 
@@ -228,12 +242,12 @@
         </div>
 
         <button class="exitsurvey" name="PrintButton2" id="PrintButton2" onclick="Print('printable')" type="button">Print</button>
-        <button class="exitsurvey" type="submit" name="DownLoadResponse" id="DownLoadResponse1" value="DownLoad" style="margin-right:90px; width:100px" >Download CSV</button>
+        <button class="exitsurvey" type="submit" name="DownLoadResponse" id="DownLoadResponse1" value="DownLoad" style="margin-right:90px; width:100px">Download CSV</button>
         @*<div style="float:right;">
-            <a href="" onclick=" GetCSV()">
-                <img src="~/Content/images/CSV_Icon.png" />
-            </a>
-        </div>*@
+                <a href="" onclick=" GetCSV()">
+                    <img src="~/Content/images/CSV_Icon.png" />
+                </a>
+            </div>*@
     </div>
 
 }

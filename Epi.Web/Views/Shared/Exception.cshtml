@@ -3,10 +3,17 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div id="attention" style="margin: 10px">
-            <img src="@Url.Content("~/Content/images/sign_warning.png")" alt="" style="vertical-align: middle;
-                padding-right: 10px;"/>
-       @System.Configuration.ConfigurationManager.AppSettings["SURVEY_NOT_EXISTS"]
+<div id="attention" style="margin: 10px;margin-bottom:100px">
+            <img src="@Url.Content("~/Content/images/sign_warning.png")" alt="" style="vertical-align: middle; padding-right: 10px;"/>
+
+            <p>
+                The survey you are trying to access may have lost its connection to the server or the network.  Please try to recover your session by clicking your browser’s ‘Back’ button. Then click the ‘Refresh’ button.
+                If this does not return to the page you were on, then, use the unique Response URL and Pass Code obtained by clicking ‘Finish Later’.  You may have to go back to the original survey link and begin again.
+                If this error continues, then please check the survey link or contact the survey author(s) for other instructions.
+
+
+            </p>
+       @*@System.Configuration.ConfigurationManager.AppSettings["SURVEY_NOT_EXISTS"]*@
         @*<p>@TempData["exc"]</p>
         <br>
          <p>@TempData["exc1"]</p>
