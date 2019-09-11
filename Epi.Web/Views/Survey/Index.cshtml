@@ -535,6 +535,7 @@
 
         }
         else {
+            
             // Save();//Save Current page.
             AddNewChild(ViewId);
             // AddChild(ViewId);
@@ -613,7 +614,7 @@
     }
 
     function AddChild(ViewId) {
-
+       
         $('#FormHasChanged').val('True');
         var signoutUrl = '@Url.Action("AddChild", "Survey")' + '?SurveyId=' + '@Model.Form.SurveyInfo.SurveyId' + '&ViewId=' + ViewId + '&ResponseId=' + '@Model.Form.ResponseId' + '&FormValuesHasChanged=' + $('#FormHasChanged').val() + '&CurrentPage=' + '@Model.Form.CurrentPage';
 
@@ -632,11 +633,19 @@
         function successFunc(data) {
             //$(this).dialog("close");
 
-            var tem = 'responseId =' + data;
-            var homePageUrl = '@Url.Action("Index", "Survey",new { responseId= "RId", PageNumber = "1" })';
-            homePageUrl = homePageUrl.replace("RId", data.toString());
+           // var tem = 'responseId =' + data;
+          //  var homePageUrl = '@Url.Action("Index", "Survey",new { responseId= "RId", PageNumber = "1" })';
+          //  homePageUrl = homePageUrl.replace("RId", data.toString());
 
-            window.location.href = homePageUrl;
+          //  window.location.href = homePageUrl;
+
+
+
+             $("#myform")[0].is_save_action_relate.value = data.toString();
+             $("#myform")[0].action = window.location.href;
+             $('#myform').submit();
+
+
         }
         function errorFunc(data) {
             alert('failed');
@@ -1073,6 +1082,12 @@ else
         <input type="hidden" name="Get_Child_action" value="false" />
         <input type="hidden" name="Go_Home_action" value="false" />
         <input type="hidden" name="Click_Related_Form" value="" />
+
+
+        
+            <input type="hidden" name="is_save_action_relate" value="" />
+
+
 
         <input type="hidden" name="Go_One_Level_Up_action" value="false" />
         @*<input type="hidden" id="FormHasChanged" name="Form_Has_Changed" value="@Model.Form.FormValuesHasChanged" />*@
