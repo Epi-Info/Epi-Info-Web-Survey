@@ -438,6 +438,48 @@ namespace Epi.Web.MVC.Controllers
 
                             return RedirectToAction("Index", "Survey", new { RequestId = form.ResponseId, PageNumber = CurrentPageNum, IsSaved = true });
                         }
+                        else if (!string.IsNullOrEmpty(this.Request.Form["is_save_action_relate"]))
+                        {
+                            Guid childID = new Guid(this.Request.Form["is_save_action_relate"].ToString());
+                            SurveyAnswer = _isurveyFacade.GetSurveyAnswerResponse(responseId).SurveyResponseList[0];
+                            SurveyAnswer.IsDraftMode = surveyInfoModel.IsDraftMode;
+                            form = _isurveyFacade.GetSurveyFormData(surveyInfoModel.SurveyId, GetSurveyPageNumber(SurveyAnswer.XML.ToString()) == 0 ? 1 : GetSurveyPageNumber(SurveyAnswer.XML.ToString()), SurveyAnswer, isMobileDevice, null, null, IsAndroid);
+
+                            form = SetLists(form);
+
+                            IsSaved = form.IsSaved = true;
+                            form.StatusId = SurveyAnswer.Status;
+
+                            Epi.Web.Common.Message.UserAuthenticationResponse AuthenticationResponse = _isurveyFacade.GetAuthenticationResponse(responseId);
+
+                            string strPassCode = Epi.Web.MVC.Utility.SurveyHelper.GetPassCode();
+                            if (string.IsNullOrEmpty(AuthenticationResponse.PassCode))
+                            {
+                                _isurveyFacade.UpdatePassCode(responseId, strPassCode);
+                            }
+                            if (AuthenticationResponse.PassCode == null)
+                            {
+                                form.PassCode = strPassCode;
+                            }
+                            else
+                            {
+                                form.PassCode = AuthenticationResponse.PassCode;
+                            }
+                            Session["PassCode"] = form.PassCode;
+                            form = SetLists(form);
+                            UpdateModel(form);
+                            _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, responseId, form, SurveyAnswer, IsSubmited, IsSaved, PageNumber);
+
+                            TempData["Width"] = form.Width + 5;
+                             
+
+                            
+
+
+
+                           // return RedirectToAction("Index", "Survey", new { RequestId = childID, PageNumber = 1, IsSaved = true });
+                            return RedirectToRoute(new { Controller = "Survey", Action = "Index", responseid = childID, PageNumber = 1 });
+                        }
                         else if (!string.IsNullOrEmpty(this.Request.Form["is_print_action"]) && this.Request.Form["is_print_action"].ToString().Equals("true", StringComparison.OrdinalIgnoreCase))
                             {
                             SurveyAnswer = _isurveyFacade.GetSurveyAnswerResponse(responseId).SurveyResponseList[0];
