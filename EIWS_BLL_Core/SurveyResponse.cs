@@ -237,7 +237,12 @@ namespace Epi.Web.BLL
                 {
                        ParentIdGuid = new Guid(ParentId);
                 }
-            
+            Epi.Web.Interfaces.DataInterfaces.ISurveyInfoDao ISurveyInfoDao = new EF.EntitySurveyInfoDao();
+            Epi.Web.BLL.SurveyInfo Implementation = new Epi.Web.BLL.SurveyInfo(ISurveyInfoDao);
+            var List = Implementation.GetSurveyControlList(pValue.SurveyId);
+            SurveyResponseJson SurveyResponseJson = new SurveyResponseJson();
+            var json = SurveyResponseJson.GetSurveyResponseJson(pValue, List);
+            pValue.Json = json;
             //if ( pValue.Status == 2 && ParentIdGuid!= Guid.Empty )
             //{
             //if (!string.IsNullOrEmpty(ParentId) && ParentId != Guid.Empty.ToString() && pValue.Status == 2)
@@ -267,8 +272,8 @@ namespace Epi.Web.BLL
             //}
             //else
             //{
-                //Check if the record existes.If it does update otherwise insert new 
-                this.SurveyResponseDao.UpdateSurveyResponse(pValue);
+            //Check if the record existes.If it does update otherwise insert new 
+            this.SurveyResponseDao.UpdateSurveyResponse(pValue);
 
                 SurveyResponseBO SurveyResponseBO = SurveyResponseDao.GetResponseXml(pValue.ResponseId);
 
