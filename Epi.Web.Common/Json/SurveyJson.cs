@@ -174,6 +174,98 @@ namespace Epi.Web.Common.Json
 
 
 
+        public string GetSurveyResponseJson(Epi.Web.Common.BusinessObject.SurveyResponseBO surveyAnswer,  SurveyControlsResponse List)
+        {
+            if (!string.IsNullOrEmpty(surveyAnswer.XML))
+            {
+                ResponseDetail Responsedetail = new ResponseDetail();
+
+               // var ChildFormsHierarchy = FormsHierarchyDTOList.Where(x => x.IsRoot == false);
+                Dictionary<string, object> ResponseQA = new Dictionary<string, object>();
+                Dictionary<string, object> RootResponseQA = new Dictionary<string, object>();
+
+
+                XDocument xdoc = XDocument.Parse(surveyAnswer.XML);
+                int NumberOfPages = GetNumberOfPags(surveyAnswer.XML);
+
+                Responsedetail.ResponseId = surveyAnswer.ResponseId;
+                Responsedetail.FormId = surveyAnswer.SurveyId;
+                //if (FormsHierarchyDTOList.Count() > 0)
+                //{
+                //    Responsedetail.OKey = FormsHierarchyDTOList[0].SurveyInfo.OrganizationKey.ToString().Substring(0, 8);
+                //}
+                for (int i = 1; NumberOfPages + 1 > i; i++)
+                {
+                    try
+                    {
+                        var _FieldsTypeIDs = from _FieldTypeID in
+                       xdoc.Descendants("Page")
+
+                                             where _FieldTypeID.Attribute("PageNumber").Value == (i).ToString()
+                                             select _FieldTypeID;
+
+                        var _PageFieldsTypeIDs = from _FieldTypeID1 in
+                                                     _FieldsTypeIDs.Descendants("ResponseDetail")
+
+                                                 select _FieldTypeID1;
+                        foreach (var item in _PageFieldsTypeIDs)
+                        {
+                            if (!string.IsNullOrEmpty(item.Value))
+                            {
+                                try
+                                {
+                                    string ControlId = item.Attribute("QuestionName").Value;
+                                    bool IsCheckBox = (bool)List.SurveyControlList.Any(x => x.ControlId == ControlId && x.ControlType == "CheckBox");
+                                    bool ISNumericTextBox = (bool)List.SurveyControlList.Any(x => x.ControlId == ControlId && x.ControlType == "NumericTextBox");
+
+                                    if (ISNumericTextBox && !string.IsNullOrEmpty(item.Value))
+                                    {
+                                        string uiSep = ".";
+                                        if (item.Value.Contains(uiSep))
+                                            RootResponseQA.Add(item.Attribute("QuestionName").Value, Convert.ToDecimal(item.Value));
+                                        else
+                                            RootResponseQA.Add(item.Attribute("QuestionName").Value, Convert.ToInt64(item.Value));
+                                    }
+                                    else if (IsCheckBox)
+                                    {
+                                        bool Ischecked = false;
+                                        if (item.Value == "Yes")
+                                            RootResponseQA.Add(item.Attribute("QuestionName").Value, !Ischecked);
+                                        else
+                                            RootResponseQA.Add(item.Attribute("QuestionName").Value, Ischecked);
+                                    }
+                                    else
+                                    {
+                                        RootResponseQA.Add(item.Attribute("QuestionName").Value, item.Value);
+                                    }
+                                }
+                                catch (System.Exception ex)
+                                {
+
+                                }
+                            }
+                        }
+                    }
+                    catch (System.Exception ex)
+                    {
+
+                    }
+                }
+                Responsedetail.ResponseQA = RootResponseQA;
+
+
+
+                var json = JsonConvert.SerializeObject(Responsedetail);
+
+                return json;
+            }
+            else
+            {
+
+                return "";
+            }
+        }
+
 
 
         public static int GetNumberOfPags(string ResponseXml)
