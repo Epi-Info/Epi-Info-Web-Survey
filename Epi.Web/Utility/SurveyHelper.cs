@@ -191,7 +191,7 @@ namespace Epi.Web.MVC.Utility
                // Xdoc.Root.Attribute("HighlightedFieldsList").Remove();
                //Xdoc.Root.Attribute("DisabledFieldsList").Remove();
                //Xdoc.Root.Attribute("RequiredFieldsList").Remove();
-                Xdoc.Root.Attribute("RecordBeforeFlag").Remove();
+             //   Xdoc.Root.Attribute("RecordBeforeFlag").Remove();
                 //RemovePageNumAtt(Xdoc);
             }
             if (IsSaved)
