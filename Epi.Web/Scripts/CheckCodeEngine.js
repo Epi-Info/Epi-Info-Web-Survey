@@ -458,8 +458,15 @@ CCE_Context.prototype.getValue = function (pName) {
                             return false;
                         }
                     case "datepicker": //string has been converted to date for comparison with another date
-                        value = new Date(cce_Symbol.Value).valueOf();
+                       
+                        var DateOpject = GetDateOpject("yyyy-mm-dd", cce_Symbol.Value);
+                       
+                        value = new Date(DateOpject).valueOf();
 
+                        
+
+
+                      
                         if (value == "" || isNaN(value)) {
                             return null;
                         }
@@ -2037,17 +2044,18 @@ function CCE_SystemDate(dateformat, DateValue) {
     var date;
 
     
-    if (DateValue != null && DateValue != "" && DateValue != "undefined") {
+    if (DateValue !== null && DateValue !== "" && DateValue !== "undefined") {
         //alert( "  DateValue " + DateValue)
           
             if (isValidDate(DateValue)) {
-                date = DateValue
+                date = DateValue;
                 
             } else {
-                if (DateValue.indexOf("-") != -1 || DateValue.indexOf("/") != -1 || DateValue.indexOf(".") != -1) {
+                //alert(String(DateValue).indexOf("-"));
+                if (String(DateValue).indexOf("-") === -1 && String(DateValue).indexOf("/") === -1 && String(DateValue).indexOf(".") === -1) {
 
-                    date = GetDateOpject(dateformat, DateValue)
-                    
+                    date = new Date(DateValue);
+                    //alert(date);
                 } else {
                     date = new Date();
                 }
