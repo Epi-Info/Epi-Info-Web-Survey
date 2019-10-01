@@ -90,18 +90,18 @@ namespace MvcDynamicForms.Fields
             var scriptNumeric = new TagBuilder("script");
             string uiSep = CultureInfo.CurrentUICulture.NumberFormat.NumberDecimalSeparator;
 
-            if (uiSep == ".")
-            {
-                scriptNumeric.InnerHtml = "$(function() { $('#" + inputName + "').numeric();});";
-            }
-            else
-            {
-                string DecimalSeperator = "\"" + uiSep + "\"";
+            //if (uiSep == ".")
+            //{
+            //    scriptNumeric.InnerHtml = "$(function() { $('#" + inputName + "').numeric();});";
+            //}
+            //else
+            //{
+            //    string DecimalSeperator = "\"" + uiSep + "\"";
 
-                scriptNumeric.InnerHtml = "$(function() { $('#" + inputName + "').numeric({ decimal :" + DecimalSeperator + "});});";
-            }
+            //    scriptNumeric.InnerHtml = "$(function() { $('#" + inputName + "').numeric({ decimal :" + DecimalSeperator + "});});";
+            //}
 
-            html.Append(scriptNumeric.ToString(TagRenderMode.Normal));
+            //html.Append(scriptNumeric.ToString(TagRenderMode.Normal));
 
             if (!string.IsNullOrEmpty(Pattern))
             {
@@ -178,10 +178,10 @@ namespace MvcDynamicForms.Fields
 
             if (Required == true)
             {
-                ControlClass.Append("required");
+                ControlClass.Append("required,");
             }
 
-            ControlClass.Append("]");
+            ControlClass.Append("custom[number]]");
 
             return ControlClass.ToString();
         }
