@@ -137,24 +137,29 @@ namespace MvcDynamicForms
 
                             foreach (string value in postedForm.GetValues(key))
                             {
-
-
-                                try
-                                {
-                                    var CurrentValue = listField.ChoiceKeyValuePairs[value];
-                                    listField.ChoiceKeyValuePairs[value] = true;
-                                }
-                                catch (Exception ex)
-                                {
-                                    if (!string.IsNullOrEmpty(value))
+                                
+                                    try
                                     {
-                                        var array = listField.ChoiceKeyValuePairs.ToArray();
-                                        var NewValue = array[int.Parse(value)];
-                                        listField.ChoiceKeyValuePairs[NewValue.Key] = true;
+                                        var CurrentValue = listField.ChoiceKeyValuePairs[value];
+                                        listField.ChoiceKeyValuePairs[value] = true;
                                     }
+                                    catch (Exception ex)
+                                    {
+                                        if (!string.IsNullOrEmpty(value))
+                                        {
+                                            var array = listField.ChoiceKeyValuePairs.ToArray();
+                                            var NewValue = array[int.Parse(value)];
+                                        //Make sure that other values are not set to true 
+                                        var temp = listField.ChoiceKeyValuePairs.Where(x => x.Value == true).ToList();
+                                        if (temp.Count == 0)
+                                        {
+                                            listField.ChoiceKeyValuePairs[NewValue.Key] = true;
+                                        }
+                                        }
 
-                                }
-                                 
+
+                                    }
+                                
 
                             }
 
