@@ -412,7 +412,7 @@ namespace Epi.Web.MVC.Controllers
 
 
 
-                    if (IsAuthenticated)
+                    if (IsAuthenticated && ModelState["EmailUserPublishKey"]!= null)
                     {
                         ModelState["EmailUserPublishKey"].Errors.Clear();
                     }
@@ -420,7 +420,7 @@ namespace Epi.Web.MVC.Controllers
                     if (ModelState.IsValid)
                     {
                         var SurveyInfo = this._isurveyFacade.GetSurveyInfoModel(Model.EmailSurveyKey);
-                        if (SurveyInfo.UserPublishKey.ToString() == Model.EmailUserPublishKey)
+                        if (IsAuthenticated || SurveyInfo.UserPublishKey.ToString() == Model.EmailUserPublishKey)
                         {
                             SendEmailNotification(Model, Newfile2, SurveyInfo);
 
