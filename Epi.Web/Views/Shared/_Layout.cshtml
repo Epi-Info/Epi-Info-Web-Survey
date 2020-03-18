@@ -18,7 +18,8 @@
     <script src="@Url.Content("~/Scripts/jquery.ui.core.js")" type="text/javascript"></script>
     <script src="@Url.Content("~/Scripts/jquery.ui.widget.js")" type="text/javascript"></script>
     <script src="@Url.Content("~/Scripts/jquery.Epi.Survey.Components.js")" type="text/javascript"></script>
-    <script src="@Url.Content("~/Scripts/CheckCodeEngine.js")" type="text/javascript"></script>
+    
+     <script src="@Url.Content("~/Scripts/CheckCodeEngineV1.js")" type="text/javascript"></script>
     <script src="@Url.Content("~/Scripts/jquery.PreventEnter.js")" type="text/javascript"></script>
     <script src="@Url.Content("~/Scripts/idle-timer.js")" type="text/javascript"></script>
     <script src="@Url.Content("~/Scripts/jquery-ui-sliderAccess.js")" type="text/javascript"></script>
@@ -61,13 +62,21 @@
 
 
            $("#myform").validationEngine();
+            
 
            $('div#pages a').click(PostForm);
            function PostForm(event) {
+               var isValid = $("#myform").validationEngine('validate') ;
                // Clicking the navigation links at the top, get the target Url and then post the form
                document.forms[0].action = event.target.href;
 
-               $("#myform").submit();
+              
+               
+                  var DisabledFieldsList = $('#DisabledFieldsList').val();
+                    if (DisabledFieldsList.length > 0 && isValid) {
+                        CCE_ProcessEnableAllControls(DisabledFieldsList);
+                    }
+                 $("#myform").submit();
 
                return false;
            }
