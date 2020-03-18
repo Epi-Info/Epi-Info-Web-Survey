@@ -83,7 +83,12 @@
            function PostForm(event) {
                // Clicking the navigation links at the top, get the target Url and then post the form
                document.forms[0].action = event.target.href;
-
+        
+                  var DisabledFieldsList = $('#DisabledFieldsList').val();
+                    if (DisabledFieldsList.length > 0 ) {
+                        CCE_ProcessEnableAllControls(DisabledFieldsList);
+                    }
+                 
                $("#myform").submit();
 
                return false;

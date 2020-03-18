@@ -2649,11 +2649,11 @@ function CCE_Set_Update_DisabledControls_State(Items) {
 //////Enable all controls before leaving the page start ////////
 
 function CCE_ProcessEnableAllControls(List) {
-
+    
     var pCheckCodeList = new Array();
     pCheckCodeList = List.split(',');
-    pCheckCodeList.splice(0, 1);
-
+   // pCheckCodeList.splice(0, 1);
+   //alert(1)
     if (pCheckCodeList != null) {
         for (var i = 0; i < pCheckCodeList.length; i++) {
             var query = null;
