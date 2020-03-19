@@ -876,6 +876,17 @@
 
     }
 
+
+    function EnableAllControls() {
+
+        var DisabledFieldsList = $('#DisabledFieldsList').val();
+
+        if (DisabledFieldsList.length > 0) {
+            CCE_ProcessEnableAllControls(DisabledFieldsList);
+        }
+
+    }
+
 </script>
 
 <div id="header">
@@ -1038,7 +1049,7 @@
                 {
                 <div id="next" align="right" style="margin-top:-8px !important;">
                     @*<a  name="Submitbutton" onclick="Submit();" class="submits" >Submit</a>*@
-                    <button data-role="button" data-theme="submit1" data-inline="true" type="submit" name="Submitbutton" value="Submit">Submit</button>
+                    <button onclick="EnableAllControls()" data-role="button" data-theme="submit1" data-inline="true" type="submit" name="Submitbutton" value="Submit">Submit</button>
                 </div>
                 }
             }
