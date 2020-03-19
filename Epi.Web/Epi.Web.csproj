@@ -493,6 +493,7 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\CheckCodeEngine.js" />
+    <Content Include="Scripts\CheckCodeEngineV1.js" />
     <Content Include="Scripts\idle-timer.js" />
     <Content Include="Scripts\jqm-datebox.core.js" />
     <Content Include="Scripts\jqm-datebox.mode.flipbox.js" />

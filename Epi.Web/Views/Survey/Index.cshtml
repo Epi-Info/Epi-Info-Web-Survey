@@ -122,9 +122,19 @@
         $("#myform")[0].action = window.location.href;
         //detach the validation engine as we don't want to validate data on save button click
         $('#myform').validationEngine('detach');
+
         //posting the form
         $('#myform').submit();
         // return false;
+
+    }
+    function EnableAllControls() {
+
+        var DisabledFieldsList = $('#DisabledFieldsList').val();
+
+        if (DisabledFieldsList.length > 0) {
+            CCE_ProcessEnableAllControls(DisabledFieldsList);
+        }
 
     }
     function AddNewChild(ViewId) {
@@ -474,7 +484,10 @@
         //	    function errorFunc(data) {
         //	        alert('failed');
         //	    }
-
+        var DisabledFieldsList = $('#DisabledFieldsList').val();
+           if (DisabledFieldsList.length > 0 ) {
+               CCE_ProcessEnableAllControls(DisabledFieldsList);
+          }
         $("#myform")[0].is_print_action.value = 'true';
 
         $("#myform")[0].action = window.location.href;
@@ -1136,7 +1149,7 @@ else
                 {
                     <div id="next" align="right">
 
-                        <button class="submits" type="submit" name="Submitbutton" value="Submit">
+                        <button class="submits" onclick="EnableAllControls()" type="submit" name="Submitbutton" value="Submit">
                             Submit Survey &nbsp;
                         </button>
 
