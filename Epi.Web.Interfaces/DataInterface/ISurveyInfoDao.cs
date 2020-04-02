@@ -26,9 +26,10 @@ namespace Epi.Web.Interfaces.DataInterfaces
         List<SurveyInfoBO> GetSurveyInfoByOrgKeyAndPublishKey(string SurveyId, string pOrganizationKey, Guid publishKey);
 
         List<SurveyInfoBO> GetSurveyInfoByOrgKey(string SurveyId, string pOrganizationKey);
-        
-        
-        
+        SurveyInfoBO GetDashboardSurveyInfo(string surveyid);
+
+
+
         /// <summary>
         /// Gets SurveyInfo Size data based on a list of ids
         /// </summary>

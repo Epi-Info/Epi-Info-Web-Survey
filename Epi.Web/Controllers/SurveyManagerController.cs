@@ -21,9 +21,14 @@ using System.Diagnostics;
 using System.Reflection;
 using System.Text;
 
+using Newtonsoft.Json.Linq;
+using System.Collections;
 
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using System.Web.Security;
 using OfficeOpenXml.Drawing.Chart;
+
 
 namespace Epi.Web.MVC.Controllers
 {
@@ -1205,6 +1210,25 @@ namespace Epi.Web.MVC.Controllers
             Model.IsDraft = SurveyInfo.IsDraftMode;
             Model.SurveyName = SurveyInfo.SurveyName;
             return Json(Model);
+
+
+        }
+        public JsonResult GetDashboardInfo(string surveyid)
+        {
+
+            DashboardResponse DashboardResponse = new DashboardResponse();
+            DashboardResponse = _isurveyFacade.GetSurveyDashboardInfo(surveyid);
+            DashboardResponse.DateList = new List<string>();
+            foreach (var date in DashboardResponse.RecordCountPerDate) {
+
+                DashboardResponse.DateList.Add(date.Key);
+
+
+            }
+
+            
+            var info =  JsonConvert.SerializeObject(DashboardResponse);
+            return Json(info);
 
         }
         private string AddLeadingZero(string value)

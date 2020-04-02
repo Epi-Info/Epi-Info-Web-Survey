@@ -22,8 +22,8 @@
     <SccProvider>{4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}</SccProvider>
     <IISExpressSSLPort>
     </IISExpressSSLPort>
-    <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
-    <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
+    <IISExpressAnonymousAuthentication>disabled</IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>enabled</IISExpressWindowsAuthentication>
     <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
     <UseGlobalApplicationHostFile />
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
@@ -309,6 +309,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\CheckCode\IFElse.txt" />
     <Content Include="Content\css\awesomplete.css" />
+    <Content Include="Content\css\c3.min.css" />
     <Content Include="Content\css\demos.css" />
     <Content Include="Content\css\epistyle-blue.css" />
     <Content Include="Content\css\epistyle-blue_controls.css" />
@@ -492,8 +493,10 @@
     <Content Include="Scripts\awesomplete.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\c3.min.js" />
     <Content Include="Scripts\CheckCodeEngine.js" />
     <Content Include="Scripts\CheckCodeEngineV1.js" />
+    <Content Include="Scripts\d3-5.8.2.min.js" />
     <Content Include="Scripts\idle-timer.js" />
     <Content Include="Scripts\jqm-datebox.core.js" />
     <Content Include="Scripts\jqm-datebox.mode.flipbox.js" />
@@ -515,6 +518,9 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\Text\EmailList.xlsx" />
+    <Content Include="Properties\DataSources\Epi.Web.Common.Message.DashboardResponse.datasource" />
+    <Content Include="Properties\DataSources\Epi.Web.Common.Message.FormsHierarchyResponse.datasource" />
+    <Content Include="Properties\DataSources\Epi.Web.Common.Message.SourceTablesResponse.datasource" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />

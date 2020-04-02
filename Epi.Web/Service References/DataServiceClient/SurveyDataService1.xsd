@@ -389,4 +389,19 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="SourceTablesResponse" nillable="true" type="tns:SourceTablesResponse" />
+  <xs:complexType name="DashboardResponse">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ResponseBase">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="RecordCount" type="xs:int" />
+          <xs:element minOccurs="0" name="SavedRecordCount" type="xs:int" />
+          <xs:element minOccurs="0" name="StartedRecordCount" type="xs:int" />
+          <xs:element minOccurs="0" name="SubmitedRecordCount" type="xs:int" />
+          <xs:element minOccurs="0" name="SurveyInfo" nillable="true" type="tns:SurveyInfoDTO" />
+          <xs:element xmlns:q14="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="barChart" nillable="true" type="q14:ArrayOfKeyValueOfintint" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="DashboardResponse" nillable="true" type="tns:DashboardResponse" />
 </xs:schema>

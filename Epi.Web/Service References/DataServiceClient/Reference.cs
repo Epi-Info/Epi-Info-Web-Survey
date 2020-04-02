@@ -172,6 +172,13 @@ namespace Epi.Web.MVC.DataServiceClient {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/SetJsonColumn", ReplyAction="http://tempuri.org/IDataService/SetJsonColumnResponse")]
         System.Threading.Tasks.Task<bool> SetJsonColumnAsync(string json, string responseid);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/GetSurveyDashboardInfo", ReplyAction="http://tempuri.org/IDataService/GetSurveyDashboardInfoResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Epi.Web.Common.Exception.CustomFaultException), Action="http://tempuri.org/IDataService/GetSurveyDashboardInfoCustomFaultExceptionFault", Name="CustomFaultException", Namespace="http://www.yourcompany.com/types/")]
+        Epi.Web.Common.Message.DashboardResponse GetSurveyDashboardInfo(string surveyid);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/GetSurveyDashboardInfo", ReplyAction="http://tempuri.org/IDataService/GetSurveyDashboardInfoResponse")]
+        System.Threading.Tasks.Task<Epi.Web.Common.Message.DashboardResponse> GetSurveyDashboardInfoAsync(string surveyid);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -375,6 +382,14 @@ namespace Epi.Web.MVC.DataServiceClient {
         
         public System.Threading.Tasks.Task<bool> SetJsonColumnAsync(string json, string responseid) {
             return base.Channel.SetJsonColumnAsync(json, responseid);
+        }
+        
+        public Epi.Web.Common.Message.DashboardResponse GetSurveyDashboardInfo(string surveyid) {
+            return base.Channel.GetSurveyDashboardInfo(surveyid);
+        }
+        
+        public System.Threading.Tasks.Task<Epi.Web.Common.Message.DashboardResponse> GetSurveyDashboardInfoAsync(string surveyid) {
+            return base.Channel.GetSurveyDashboardInfoAsync(surveyid);
         }
     }
 }

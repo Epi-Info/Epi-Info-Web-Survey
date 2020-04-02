@@ -118,6 +118,7 @@
     <Compile Include="Message\Base\ResponseBase.cs" />
     <Compile Include="Message\CacheDependencyRequest.cs" />
     <Compile Include="Message\CacheDependencyResponse.cs" />
+    <Compile Include="Message\DashboardResponse.cs" />
     <Compile Include="Message\FormsHierarchyRequest.cs" />
     <Compile Include="Message\FormsHierarchyResponse.cs" />
     <Compile Include="Message\OrganizationAccountRequest.cs" />
@@ -154,6 +155,7 @@
     <Compile Include="Security\Cryptography.cs" />
     <Compile Include="Security\PasswordGenerator.cs" />
     <Compile Include="Email\EmailHandler.cs" />
+    <Compile Include="SurveyDashboardBO.cs" />
     <Compile Include="Xml\SurveyResponseXML.cs" />
     <Compile Include="Xml\SurveyXml.cs" />
   </ItemGroup>
