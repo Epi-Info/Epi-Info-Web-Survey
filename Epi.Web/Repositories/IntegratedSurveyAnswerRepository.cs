@@ -440,7 +440,38 @@ namespace Epi.Web.MVC.Repositories
 
 
         }
+        public DashboardResponse GetSurveyDashboardInfo(string surveyId)
+        {
+            try
+            {
 
+                return _iDataService.GetSurveyDashboardInfo(surveyId);
+
+            }
+            catch (FaultException<CustomFaultException> cfe)
+            {
+                throw cfe;
+            }
+            catch (FaultException fe)
+            {
+                throw fe;
+            }
+            catch (CommunicationException ce)
+            {
+                throw ce;
+            }
+            catch (TimeoutException te)
+            {
+                throw te;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+
+            }
+
+
+        }
         #region stubcode
         public List<Common.DTO.SurveyAnswerDTO> GetList(Criterion criterion = null)
             {

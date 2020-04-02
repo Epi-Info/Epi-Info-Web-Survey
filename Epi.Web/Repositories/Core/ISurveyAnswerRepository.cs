@@ -25,6 +25,7 @@ namespace Epi.Web.MVC.Repositories.Core
         void UpdateResponseStatus(SurveyAnswerRequest Request);
         SurveyAnswerResponse GetFormResponseList(SurveyAnswerRequest pRequest);
         bool SetJsonColumn(string json,string responseid);
+        DashboardResponse GetSurveyDashboardInfo(string surveyId);
     }
 
 }

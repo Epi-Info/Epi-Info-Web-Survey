@@ -13,6 +13,10 @@ using Epi.Web.Common.Criteria;
 using Epi.Web.Common.Extension;
 using System.Data.SqlClient;
 using System.Data;
+using Epi.Web.Common;
+using System.Globalization;
+using System.Data.Objects.SqlClient;
+using System.Data.Objects;
 
 namespace Epi.Web.EF
 {
@@ -1671,6 +1675,73 @@ namespace Epi.Web.EF
                 throw (ex);
             }
 
+        }
+
+        public SurveyDashboardBO GetSurveyDashboardCounts(string surveyid) {
+
+            SurveyDashboardBO SurveyDashboardBO = new SurveyDashboardBO();
+
+            try
+            {
+                Guid Id = new Guid(surveyid);
+
+
+                using (var Context = DataObjectFactory.CreateContext())
+                {
+                    var Query = from response in Context.SurveyResponses
+                                where response.SurveyId == Id
+                                select response.SurveyId;
+
+
+                    SurveyDashboardBO.RecordCount = Query.Count();
+
+
+                    var Query1 = from response in Context.SurveyResponses
+                                 where response.SurveyId == Id && response.StatusId == 2
+                                 select response.SurveyId;
+                    SurveyDashboardBO.SavedRecordCount = Query1.Count();
+
+
+
+                    var Query2 = from response in Context.SurveyResponses
+                                 where response.SurveyId == Id && response.StatusId == 3
+                                 select response.SurveyId;
+                    SurveyDashboardBO.SubmitedRecordCount = Query2.Count();
+
+
+                    var Query3 = from response in Context.SurveyResponses
+                                 where response.SurveyId == Id && response.StatusId == 1
+                                 select response.SurveyId;
+                    SurveyDashboardBO.StartedRecordCount = Query3.Count();
+
+                    var Query4 = //(
+                                        from response in Context.SurveyResponses
+                                        where response.SurveyId == Id
+                                        group response by new { Date = EntityFunctions.TruncateTime(response.DateCreated) } into g
+                                        select new
+                                        {
+                                            Date = g.Key,
+                                            Count = g.Count()
+                                        };
+                    //      ).OrderBy(nda => nda.Date);
+                    SurveyDashboardBO.RecordCountPerDate = new Dictionary<string, int>();
+                    foreach (var item in Query4) {
+                        var CurrentDate = item.Date.Date.ToString();
+                        var NewDate = DateTime.Parse(CurrentDate).ToString("MM/dd/yyyy");
+
+                        SurveyDashboardBO.RecordCountPerDate.Add(NewDate.ToString(),item.Count);
+
+                    }
+                    
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
+            }
+
+            return SurveyDashboardBO;
         }
     }
 

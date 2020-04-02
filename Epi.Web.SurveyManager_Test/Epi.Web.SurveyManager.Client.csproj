@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Epi.Web.SurveyManager.Client</RootNamespace>
     <AssemblyName>Epi.Web.SurveyManager.Client</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -267,16 +267,6 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Epi.Web.Common\Epi.Web.Common.csproj">
-      <Project>{6E2F059B-C1CD-401F-8A63-DC2933CFB0D8}</Project>
-      <Name>Epi.Web.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Epi.Web.Interfaces\Epi.Web.Interfaces.csproj">
-      <Project>{B8AF69BD-3CE1-4AA5-875D-3FB87C7FCE44}</Project>
-      <Name>Epi.Web.Interfaces</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0,Profile=Client">
       <Visible>False</Visible>
       <ProductName>Microsoft .NET Framework 4 Client Profile %28x86 and x64%29</ProductName>
@@ -350,6 +340,16 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Epi.Web.Common\Epi.Web.Common.csproj">
+      <Project>{6e2f059b-c1cd-401f-8a63-dc2933cfb0d8}</Project>
+      <Name>Epi.Web.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Epi.Web.Interfaces\Epi.Web.Interfaces.csproj">
+      <Project>{b8af69bd-3ce1-4aa5-875d-3fb87c7fce44}</Project>
+      <Name>Epi.Web.Interfaces</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

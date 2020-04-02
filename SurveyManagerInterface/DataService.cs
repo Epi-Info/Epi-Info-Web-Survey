@@ -980,5 +980,27 @@ namespace Epi.Web.WCF.SurveyService
             }
           
         }
+
+        public DashboardResponse GetSurveyDashboardInfo(string surveyid) {
+            DashboardResponse DashboardResponse = new DashboardResponse();
+
+            Epi.Web.Interfaces.DataInterfaces.ISurveyResponseDao SurveyResponseDao = new EF.EntitySurveyResponseDao();
+            Epi.Web.Interfaces.DataInterfaces.ISurveyInfoDao ISurveyInfoDao = new EF.EntitySurveyInfoDao();
+            Epi.Web.BLL.SurveyDashboardInfo Implementation = new Epi.Web.BLL.SurveyDashboardInfo(SurveyResponseDao, ISurveyInfoDao);
+            try
+            {
+                return Implementation.GetSurveyDashboardInfo(surveyid);
+
+            }
+            catch (Exception ex)
+            {
+                return null;
+                throw ex;
+            } 
+
+           
+
+
+        }
     }
 }

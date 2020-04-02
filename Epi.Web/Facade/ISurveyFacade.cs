@@ -45,6 +45,7 @@ namespace Epi.Web.MVC.Facade
         string GetSurveyResponseJson(Epi.Web.Common.DTO.SurveyAnswerDTO surveyAnswerDTO, List<FormsHierarchyDTO> FormsHierarchyDTOList, SurveyControlsResponse List);
           OrganizationAccountResponse GetOrg(OrganizationAccountRequest Request);
         bool SetJsonColumn(string Json,string Responseid);
+        DashboardResponse GetSurveyDashboardInfo(string SurveyId);
     }
 
 }

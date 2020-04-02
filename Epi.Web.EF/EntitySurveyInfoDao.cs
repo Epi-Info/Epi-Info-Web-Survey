@@ -924,5 +924,34 @@ namespace Epi.Web.EF
            return TableExist;
             
        }
+
+
+        public SurveyInfoBO GetDashboardSurveyInfo(string surveyid) {
+
+            SurveyInfoBO SurveyInfoBO = new SurveyInfoBO();
+            using (var Context = DataObjectFactory.CreateContext())
+            {
+                Guid Id = new Guid(surveyid);
+
+
+                var Query = from survey in Context.SurveyMetaDatas
+                            where survey.SurveyId == Id
+                            select new { survey.IsSQLProject, survey.IsDraftMode, survey.ClosingDate, survey.StartDate, survey.DateCreated, survey.SurveyName };
+
+
+
+
+                foreach (var item in Query)
+                {
+                    SurveyInfoBO.SurveyName = item.SurveyName;
+                    SurveyInfoBO.DateCreated = item.DateCreated;
+                    SurveyInfoBO.ClosingDate = item.ClosingDate;
+                    SurveyInfoBO.StartDate = item.StartDate;
+                    SurveyInfoBO.IsDraftMode = item.IsDraftMode;
+                    SurveyInfoBO.IsSqlProject = (bool)item.IsSQLProject;
+                        }
+              }
+            return SurveyInfoBO;
+        }
     }
 }
