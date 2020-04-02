@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Epi.Web.Common;
 using Epi.Web.Common.BusinessObject;
 using Epi.Web.Common.Criteria;
 
@@ -22,6 +23,7 @@ namespace Epi.Web.Interfaces.DataInterfaces
         /// <returns>SurveyResponse.</returns>
         List<SurveyResponseBO> GetSurveyResponse(List<string> SurveyResponseIdList, Guid UserPublishKey, int PageNumber = -1, int PageSize = -1);
         List<SurveyResponseBO> GetSurveyResponseSize(List<string> SurveyResponseIdList, Guid UserPublishKey, int PageNumber = -1, int PageSize = -1, int ResponseMaxSize = -1);
+        SurveyDashboardBO GetSurveyDashboardCounts(string surveyid);
 
         /// <summary>
         /// Gets a specific SurveyResponse.

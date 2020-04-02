@@ -3,8 +3,27 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutPage2.cshtml";
 }
-
+<script src="@Url.Content("~/Scripts/c3.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/d3-5.8.2.min.js")" type="text/javascript"></script>
+<link href="@Url.Content("~/Content/css/c3.min.css")" rel="Stylesheet" type="text/css" />
 <style>
+
+    table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
     .TermsSpan {
         cursor: pointer;
         color: blue;
@@ -128,13 +147,12 @@
     #footer {
         position: initial;
     }
-    
 
 </style>
 <script type="text/javascript">
     $(document).ready(function () {
-        
-       
+
+
         $('.btn').on('click', function () {
             var $this = $(this);
             $this.button('loading');
@@ -153,7 +171,9 @@
 
             modal: true
         });
-
+        if ($('#DashboardDivState').val() == "True") {
+            Toggle('DashboardDivExpand');
+        }
         if ($('#PublishDivState').val() == "True") {
             Toggle('PublishDivExpand');
         }
@@ -167,7 +187,7 @@
         if ($('#SendEmaiDivState').val() == "True") {
             Toggle('SendEmailDivExpand');
         }
-        
+
         if ($('#SetJsonDivState').val() == "True") {
             Toggle('SetJsonDivExpand');
         }
@@ -273,7 +293,19 @@
 
         //('PublishDivExpand')
         function Toggle(Obj){
-            switch (Obj){
+            switch (Obj) {
+                case "DashboardDivExpand":
+                    $('.Dashboardcollaps').removeAttr("style");
+                    $('.Dashboardcollaps').css({ "cursor": "pointer"});
+                    $('.Dashboardexpand').css({ "display": "none", "visibility": "collapse" });
+                    $('.contentContainer').css({ "display": "none", "visibility": "collapse" });
+                    $('#DashboardDiv').css({ "display": "", "visibility": "" });
+                    $('#DashboardDivState').val('true');
+                    $(".leftNav").css({ "background-color":"#3c3c3c"});
+                    $('.navLink').css({ "color": "#ffffff" });
+                    $(".contentDashboard").css({ "background-color": "#f3f3f3" });
+                    $('.DashboardExpand').css({ "color": "#3c3c3c" });
+                    break;
                 case "PublishDivExpand":
                     $('.Publishcollaps').removeAttr("style");
                     $('.Publishcollaps').css({ "cursor": "pointer"});
@@ -334,13 +366,13 @@
                     $(".leftNav").css({ "background-color": "#3c3c3c" });
                     $(".contentSetJson").css({ "background-color": "#f3f3f3" });
                     $('.SetJsonExpand').css({ "color": "#3c3c3c" });
-                    
+
                     break;
                 case "ViewRecordsDivExpand":
                     $('#ViewRecordsDivState').val('true');
                     $('.ViewRecordscollaps').removeAttr("style");
                     $('.ViewRecordscollaps').css({ "cursor": "pointer" });
-                  
+
                     $('.contentContainer').css({ "display": "none", "visibility": "collapse" });
                     $('#ViewRecordsDiv').css({ "display": "", "visibility": "" });
                     $('.navLink').css({ "color": "#ffffff" });
@@ -352,7 +384,8 @@
                 default:
             }
 
-        }
+    }
+       
         function GetSurveyInfo()
         {
             var SurveyId = $('#RepublishSurveyKey').val();
@@ -392,15 +425,15 @@
         }
     function ChangeOrg(el)
     {
-         
+
        var e = document.getElementById(el);
-         
+
         if (e.options[e.selectedIndex].value == 1)
         {
              var ActionUrl = '@Url.Action("Index", "SurveyManager")' + '?ResetOrg=true' ;
             window.location.href = ActionUrl
         }
-       
+
     }
 
 </script>
@@ -474,7 +507,8 @@
             else
             {
 
-                <div style="float:left; background-color: #313131; height:819px">
+                <div style="float:left; background-color: #313131; height:810px">
+
                     <div class="contentPublish leftNav" style="background-color:#f3f3f3;">
                         <a href="#" style="cursor:pointer;color:#3c3c3c!important;" class="navLink publishExpand" onclick="Toggle('PublishDivExpand')">
                             <img style="display:none" src="~/Content/images/Toggle-expand-alt_green.png" />
@@ -486,11 +520,11 @@
                     <div class="contentRePublish leftNav">
                         <a href="#" style="cursor:pointer;color:#ffffff" class="navLink rePublishExpand" onclick="Toggle('RePublishDivExpand')">
                             <img style="display:none" src="~/Content/images/Toggle-expand-alt_green.png" />
-                            <img style="display:none" src="~/Content/images/Toggle-collapse-alt_green.png" /> RePublish a survey
+                            <img style="display:none" src="~/Content/images/Toggle-collapse-alt_green.png" /> Update a survey
                         </a>
 
                     </div>
-                    @if (System.Configuration.ConfigurationManager.AppSettings["ViewRecordsURL"] != null  )
+                    @if (System.Configuration.ConfigurationManager.AppSettings["ViewRecordsURL"] != null)
                     {
                         <div class="contentViewRecords leftNav">
                             <a href="#" style="cursor:pointer;color:#ffffff" class="navLink ViewRecordsExpand" onclick="Toggle('ViewRecordsDivExpand')">
@@ -516,17 +550,25 @@
                         </a>
                     </div>
                     @*<div class="contentSetJson leftNav">
-            <a href="#" style="cursor:pointer;color:#ffffff" class="navLink SetJsonExpand" onclick="Toggle('SetJsonDivExpand')">
-                <img style="display:none" src="~/Content/images/Toggle-expand-alt_green.png" />
-                <img style="display:none" src="~/Content/images/Toggle-collapse-alt_green.png" /> Generate Json Response for Surveys
-            </a>
-        </div>*@
-                     
+                            <a href="#" style="cursor:pointer;color:#ffffff" class="navLink SetJsonExpand" onclick="Toggle('SetJsonDivExpand')">
+                                <img style="display:none" src="~/Content/images/Toggle-expand-alt_green.png" />
+                                <img style="display:none" src="~/Content/images/Toggle-collapse-alt_green.png" /> Generate Json Response for Surveys
+                            </a>
+                        </div>*@
+                    <div class="contentDashboard leftNav" style="background-color:#f3f3f3;">
+                        <a href="#" style="cursor:pointer;color:#3c3c3c!important;" class="navLink DashboardExpand" onclick="Toggle('DashboardDivExpand')">
+                            <img style="display:none" src="~/Content/images/Toggle-expand-alt_green.png" />
+                            <img style="display:none" src="~/Content/images/Toggle-collapse-alt_green.png" />
+                            Survey Dashboard
+                        </a>
+
+                    </div>
+
                 </div>
                 <!--end of nav-->
 
 
-                <div style="float:left;">
+                <div style="float:left;width: 70%">
                     <div id="PublishDiv" class="contentContainer" style="margin-bottom:10px; align-self:center;margin:1em;">
                         <h1>Publish A New Survey</h1>
                         <p id="RequiredLable" class="requiredField">* indicates required fields</p>
@@ -538,8 +580,8 @@
                                 @Html.TextBoxFor(m => m.Path, new { @class = "Account Path" })
 
                                 @*<label for="file-upload" class="submits create"   onclick="javascript: document.getElementById('Newfile').click();">
-                        Browse
-                    </label>*@
+                                        Browse
+                                    </label>*@
                                 <input for="file-upload" class="submits create" style="width:70px; " type="button" id="PublishButton" onclick="javascript: document.getElementById('Newfile').click();" value="Browse" />
 
                                 @Html.ValidationMessageFor(m => m.Path, null, new { @class = "required" })
@@ -567,26 +609,26 @@
                             <script>$('#EndDate').BlockEnter('EndDate');</script>
 
                             @*<p>
-                    <input type="checkbox" id="ExistingSurvey" value="@Model.UpdateExisting" name="ExistingSurvey" for="ExistingSurveyLabel" onclick="HidUnhidSurveyId(this)" />
+                                    <input type="checkbox" id="ExistingSurvey" value="@Model.UpdateExisting" name="ExistingSurvey" for="ExistingSurveyLabel" onclick="HidUnhidSurveyId(this)" />
 
-                    <label class="accountlabel" id="ExistingSurveyLabel" style="width:330px;">
-                        <span style="font-weight:normal !important;">Update Existing Survey</span>
-                    </label>
-                    <div id="SurveyIdDiv">
-                        <label class="accountlabel" id="SurveyIdlabel">*Survey Id:</label><br>
+                                    <label class="accountlabel" id="ExistingSurveyLabel" style="width:330px;">
+                                        <span style="font-weight:normal !important;">Update Existing Survey</span>
+                                    </label>
+                                    <div id="SurveyIdDiv">
+                                        <label class="accountlabel" id="SurveyIdlabel">*Survey Id:</label><br>
 
-                        @Html.TextBoxFor(m => m.SurveyKey, new { @class = "Account" }) <br>
-                        @Html.ValidationMessageFor(m => m.SurveyKey, null)
-                        <br>
-                        <label class="accountlabel" id="SecurityTokenlabel">*Security Token:</label><br>
+                                        @Html.TextBoxFor(m => m.SurveyKey, new { @class = "Account" }) <br>
+                                        @Html.ValidationMessageFor(m => m.SurveyKey, null)
+                                        <br>
+                                        <label class="accountlabel" id="SecurityTokenlabel">*Security Token:</label><br>
 
-                        @Html.TextBoxFor(m => m.UserPublishKey, new { @class = "Account" }) <br>
-                        @Html.ValidationMessageFor(m => m.UserPublishKey, null)
+                                        @Html.TextBoxFor(m => m.UserPublishKey, new { @class = "Account" }) <br>
+                                        @Html.ValidationMessageFor(m => m.UserPublishKey, null)
 
 
-                    </div>
+                                    </div>
 
-                </p>*@
+                                </p>*@
                             <br />
                             @if (Model.IsAuthenticated)
                             {
@@ -630,8 +672,8 @@
                                 @Html.TextBoxFor(m => m.RepublishPath, new { @class = "Account RepublishPath" })
 
                                 @*<label for="file-upload" class="submits create"   onclick="javascript: document.getElementById('Newfile').click();">
-                        Browse
-                    </label>*@
+                                        Browse
+                                    </label>*@
                                 <input for="file-upload" class="submits create" style="width:70px;" type="button" id="RePublishButton" onclick="javascript: document.getElementById('Newfile1').click();" value="Browse" /><br>
 
                                 @Html.ValidationMessageFor(m => m.RepublishPath, null, new { @class = "required" })
@@ -694,15 +736,15 @@
                         <div class="accountdiv">
 
                             @*<p style="text-align:center;margin-top: 0;margin-bottom: 0px; font-size: 9pt; font-weight:bold;">
-                    Epi Info Web Survey Download Tool (.CSV)
-                </p>
-                <br><br>
-                <p style="text-align:right;margin-top: 0;margin-bottom: -29px; font-size: 9pt; font-weight:bold;">* indicates required fields</p>*@
+                                    Epi Info Web Survey Download Tool (.CSV)
+                                </p>
+                                <br><br>
+                                <p style="text-align:right;margin-top: 0;margin-bottom: -29px; font-size: 9pt; font-weight:bold;">* indicates required fields</p>*@
 
                             <div>
                                 @*<label class="accountlabel" id="OrgKeylabel">*Organization Key:</label><br>
-                    @Html.TextBoxFor(m => m.OrganizationKey, new { @class = "Account" }) <br>
-                    @Html.ValidationMessageFor(m => m.OrganizationKey, null, new { @class = "required" })<br>*@
+                                    @Html.TextBoxFor(m => m.OrganizationKey, new { @class = "Account" }) <br>
+                                    @Html.ValidationMessageFor(m => m.OrganizationKey, null, new { @class = "required" })<br>*@
 
                                 <label class="accountlabel" id="SurveyIdlabel"><span style="color:#900000;">*</span> Survey Id:</label><br>
 
@@ -734,8 +776,8 @@
 
                             </div>
                             @*<div id="spinner">
-                    Working on your request...
-                </div>*@
+                                    Working on your request...
+                                </div>*@
 
                             <br />
 
@@ -761,8 +803,8 @@
                                 @Html.TextBoxFor(m => m.EmailFilePath, new { @class = "Account Path2" })
 
                                 @*<label for="file-upload" class="submits create"   onclick="javascript: document.getElementById('Newfile').click();">
-                        Browse
-                    </label>*@
+                                        Browse
+                                    </label>*@
                                 <input for="file-upload" class="submits create" style="width:70px;" type="button" id="PublishButton" onclick="javascript: document.getElementById('Newfile2').click();" value="Browse" />
 
                                 <br>
@@ -812,12 +854,12 @@
 
                     <div id="ViewRecordsDiv" class="contentContainer" style="margin-bottom: 100px; align-self:center ;display:none; visibility:collapse;margin:1em">
                         <h1>View Survey Responses</h1>
-                         
+
                         <div class="accountdiv">
 
                             <div>
 
-                          
+
 
                             </div>
 
@@ -833,6 +875,186 @@
 
                         </div>
                     </div>
+
+
+                    <div id="DashboardDiv" class="contentContainer" style="margin-bottom: 100px; align-self:center ;display:none; visibility:collapse;margin:1em">
+
+                        <h1>Survey Dashboard</h1>
+
+                        <div class="accountdiv">
+
+
+                            @Html.DropDownListFor(m => m.EmailSurveyKey, new SelectList(ViewBag.SurveyNameList1, "Value", "Text", 0), "Select Survey To View Dashboard", new { @class = "Account Dashboard" })
+
+                            <script>
+                                    function FormatDate(DateString)
+                                    {
+                                            var date = new Date(DateString);
+                                            var result = ((date.getMonth().toString().length > 1) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1))) + '/' + ((date.getDate().toString().length > 1) ? date.getDate() : ('0' + date.getDate())) + '/' + date.getFullYear()
+                                            return result;
+                                    }
+                                    function FormatDate2(date)
+                                    {
+                                        var newdate = date.split("/")
+
+                                        return newdate[2] + "-" + newdate[0] +"-"+newdate[1]
+                                    }
+                                     function GetDashboardInfo(SurveyId)
+                                     {
+
+
+                                                    var ActionUrl = '@Url.Action("GetDashboardInfo", "SurveyManager")' + '?surveyid=' + SurveyId;
+
+                                                    $.ajax({
+                                                        url: ActionUrl,
+                                                        type: 'POST',
+                                                        contentType: 'application/json; charset=utf-8',
+                                                        dataType: "json",
+                                                        async: false,
+                                                        success: successFunc,
+                                                        error: errorFunc
+                                                    });
+                                                    function successFunc(data)
+                                                    {
+
+                                                        var obj = JSON.parse(data);
+                                                       // alert(obj.RecordCountPerDate[obj.DateList[1]]);
+
+                                                        //alert(obj.DateList.length);
+                                                         
+                                                        var _dateArray= new Array("x");
+                                                        var _countArray=new Array("Record Count");
+                                                        for (var i = 0; i < obj.DateList.length; i++)
+                                                        { 
+                                                             
+                                                            _dateArray.push(FormatDate2(obj.DateList[i]))
+                                                            _countArray.push(obj.RecordCountPerDate[obj.DateList[i] ])
+                                                        }
+                                                        
+                                                      
+                                                          
+
+                                                         $('#SurveyName1').html(obj.SurveyInfo.SurveyName)
+                                                         $('#StartDate1').html(FormatDate(obj.SurveyInfo.StartDate))
+                                                        $('#CloseDate1').html(FormatDate(obj.SurveyInfo.ClosingDate))
+
+                                                        if (obj.SurveyInfo.IsDraftMode) {
+                                                            $('#SurveyMode1').html('Draft')
+                                                        } else {
+                                                             $('#SurveyMode1').html('Final')
+                                                        }
+                                                         $('#RecordsCount').html(obj.RecordCount)
+
+                                                       var chart = c3.generate({
+                                                                                data: {
+                                                                                    x: 'x',
+                                                                            //        xFormat: '%Y%m%d', // 'xFormat' can be used as custom format of 'x'
+                                                                                    columns: [
+                                                                                        
+                                                                                        _dateArray,_countArray
+                                                                                    ]
+                                                                                },
+                                                                                axis: {
+                                                                                    x: {
+                                                                                        type: 'timeseries',
+                                                                                        tick: {
+                                                                                            format: '%m/%d/%Y'
+                                                                                        }
+                                                                                    }
+                                                                                }
+                                                                            });
+
+
+                                                        
+
+
+
+                                                        var piechart = c3.generate({
+                                                            bindto: '#piechart',
+                                                            data: {
+                                                                columns: [
+                                                                    ['Submited', obj.SubmitedRecordCount],
+                                                                    ['Saved', obj.SavedRecordCount],
+                                                                    ['Started', obj.StartedRecordCount]
+                                                                ],
+                                                                type: 'pie'
+                                                            },
+                                                            pie: {
+                                                                label: {
+                                                                    format: function (value, ratio, id) {
+                                                                        return d3.format('#')(value);
+                                                                    }
+                                                                }
+                                                            }
+                                                        });
+
+
+                                                    }
+                                                    function errorFunc(data) {
+                                                        alert('failed');
+                                                    }
+                                                }
+                                    $(".Dashboard").change(function () {
+
+
+
+                                        var str = "";
+                                        $(".Dashboard option:selected").each(function () {
+                                          str += $(this).val() + " ";
+                                        });
+
+                                        GetDashboardInfo(str);
+
+
+
+
+                                    });
+                            </script>
+
+
+                            <br>
+                            <br>
+                            <h1>Record Count</h1>
+                            <h1 id="RecordsCount">0</h1>
+
+                            <br>
+                            <br>
+
+                            <div id="piechart" style="float:left ; width:300px"></div>
+
+                            <div id="chart" style="float:left; width:800px"></div>
+
+                            <br>
+                            <br>
+
+                            <div>
+
+
+                                <table>
+                                    <tr>
+                                        <th>Survey Name</th>
+                                        <th>Start Date</th>
+                                        <th>Close Date</th>
+                                        <th>Survey Mode</th>
+                                    </tr>
+                                    <tr>
+                                        <td id="SurveyName1">Survey Name</td>
+                                        <td id="StartDate1">9/99/9999</td>
+                                        <td id="CloseDate1">9/9/9999</td>
+                                        <td id="SurveyMode1">-----</td>
+                                    </tr>
+
+                                </table>
+
+                            </div>
+
+
+
+                        </div>
+                    </div>
+
+
+
                 </div>
             }
         }

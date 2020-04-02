@@ -436,5 +436,22 @@ namespace Epi.Web.MVC.Facade
              
 
         }
+
+        public DashboardResponse GetSurveyDashboardInfo(string SurveyId)
+        {
+
+            DashboardResponse DashboardResponse = new DashboardResponse();
+            _surveyInfoRequest.Criteria.SurveyIdList = new List<string>();
+            _surveyInfoRequest.Criteria.SurveyIdList.Add(SurveyId);
+
+            var ListDTO = _iSurveyInfoRepository.GetSurveyInfo(_surveyInfoRequest).SurveyInfoList;
+            if (ListDTO.Count()>0) {
+                DashboardResponse.SurveyInfo = ListDTO[0];
+            }
+
+            DashboardResponse = _iSurveyAnswerRepository.GetSurveyDashboardInfo(SurveyId);
+            return DashboardResponse;
+
+        }
     }
 }
