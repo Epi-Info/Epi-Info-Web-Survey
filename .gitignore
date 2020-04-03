@@ -25,6 +25,7 @@
 /Epi.Web/bin/es
 /Epi.Web/bin/de
 /Epi.Web/Epi.Web.csproj.user
+/Epi.Web/web.config
 /Epi.DynamicForms.Core/bin
 /Epi.DynamicForms.Core/obj/Debug
 /Epi.DynamicForms.Core/obj/Release
