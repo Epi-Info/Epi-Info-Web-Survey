@@ -777,18 +777,31 @@
         return HasResponse;
 
     }
+    function IsSelect(key)
+    {
+        if ($("#mvcdynamicfield_" + key).is("select")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
     function SetCodes_Val(obj, SurveyId, TableName, AutoComplete, ColumnName, FieldRelateCondition) {
         //debugger;
        //alert(FieldRelateCondition)
+        var FieldRelateName = FieldRelateCondition.split(":")[0];
+       
+        var _IsSelect = IsSelect(FieldRelateName);
+        
+
         $('#' + obj.id).val(obj.value);
         var availableTags = [obj.value];
         var signoutUrl = "";
         
         if (AutoComplete) {
-            signoutUrl = '@Url.Action("GetCodesValue","Survey")' + '?SourceTableName=' + TableName + '&SelectedValue=' + obj + '&SurveyId=' + SurveyId + "&ColumnName=" + ColumnName + "&FieldRelateCondition=" + FieldRelateCondition;
+            signoutUrl = '@Url.Action("GetCodesValue","Survey")' + '?SourceTableName=' + TableName + '&SelectedValue=' + obj + '&SurveyId=' + SurveyId + "&ColumnName=" + ColumnName + "&FieldRelateCondition=" + FieldRelateCondition + "&IsSelect=" +_IsSelect;
             // alert(signoutUrl + "    1")
         } else {
-            signoutUrl = '@Url.Action("GetCodesValue","Survey")' + '?SourceTableName=' + TableName + '&SelectedValue=' + obj.value + '&SurveyId=' + SurveyId + "&ColumnName=" + ColumnName + "&FieldRelateCondition=" + FieldRelateCondition;
+            signoutUrl = '@Url.Action("GetCodesValue","Survey")' + '?SourceTableName=' + TableName + '&SelectedValue=' + obj.value + '&SurveyId=' + SurveyId + "&ColumnName=" + ColumnName + "&FieldRelateCondition=" + FieldRelateCondition +"&IsSelect="+_IsSelect;
            // alert(signoutUrl + "    2")
         }
 
@@ -832,7 +845,7 @@
             {
                 
                 value = data[key];
-               
+             //  alert(key+"....." +value)
                // return;
                 
                  
@@ -842,12 +855,14 @@
                     var ListSize = Object.keys(data).length;
                    // alert(value)
               //  if ($("#mvcdynamicfield_" + value).is("input"))
-                    if ($("#mvcdynamicfield_" + value).is("select"))
+                  //  if ($("#mvcdynamicfield_" + value).is("select"))
+             if ($("#mvcdynamicfield_" + value).is("select"))
                     {
                
                         //if (ListSize > 1) {
                             //alert(1 + ":" + ListSize);
                             var Query = "#mvcdynamicfield_" + value;
+                              
                             $(Query).empty();
                             $(Query).val("");
                             $(Query).append($("<option></option>")
@@ -857,6 +872,7 @@
 
                                 $(Query).append($("<option></option>")
                                     .attr("value", key).text(key));
+                                     
 
 
                             });
@@ -865,15 +881,15 @@
                     else
                     {
                            // alert(2 + ":" + ListSize);
-                            $.each(data, function (key, value1) {
-                                //  var Query = "#mvcdynamicfield_" + key;
-                                var Query = "#mvcdynamicfield_" + value1;
+                          //  $.each(data, function (key, value1) {
+                                 var Query = "#mvcdynamicfield_" + key;
+                                //var Query = "#mvcdynamicfield_" + value1;
                                 // alert(Query);
-                                // $(Query).val(value);
-                                $(Query).val(key);
+                                 $(Query).val(value);
+                                //$(Query).val(key);
 
 
-                            });
+                          //  });
                     }
                     //} else
                     //{

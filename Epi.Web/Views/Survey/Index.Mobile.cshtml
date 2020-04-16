@@ -706,18 +706,29 @@
 
         return string.replace(/&amp;/g, "&").replace(/&gt;/g, ">").replace(/&lt;/g, "<").replace(/&quot;/g, "\"").replace(/&#39;/g, "'");
     }
+     function IsSelect(key)
+    {
+        if ($("#mvcdynamicfield_" + key).is("select")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
+    function SetCodes_Val(obj, SurveyId, TableName, AutoComplete, ColumnName, FieldRelateCondition) {
 
- function SetCodes_Val(obj, SurveyId, TableName, AutoComplete, ColumnName, FieldRelateCondition) {
+        var FieldRelateName = FieldRelateCondition.split(":")[0];
+       
+        var _IsSelect = IsSelect(FieldRelateName);
         //debugger;
       //  alert(FieldRelateCondition)
         $('#' + obj.id).val(obj.value);
         var availableTags = [obj.value];
         var signoutUrl = "";
         if (AutoComplete) {
-            signoutUrl = '@Url.Action("GetCodesValue","Survey")' + '?SourceTableName=' + TableName + '&SelectedValue=' + obj + '&SurveyId=' + SurveyId + "&ColumnName=" + ColumnName + "&FieldRelateCondition=" + FieldRelateCondition;
+            signoutUrl = '@Url.Action("GetCodesValue","Survey")' + '?SourceTableName=' + TableName + '&SelectedValue=' + obj + '&SurveyId=' + SurveyId + "&ColumnName=" + ColumnName + "&FieldRelateCondition=" + FieldRelateCondition + "&IsSelect=" +_IsSelect;
         } else {
-            signoutUrl = '@Url.Action("GetCodesValue","Survey")' + '?SourceTableName=' + TableName + '&SelectedValue=' + obj.value + '&SurveyId=' + SurveyId + "&ColumnName=" + ColumnName + "&FieldRelateCondition=" + FieldRelateCondition;
+            signoutUrl = '@Url.Action("GetCodesValue","Survey")' + '?SourceTableName=' + TableName + '&SelectedValue=' + obj.value + '&SurveyId=' + SurveyId + "&ColumnName=" + ColumnName + "&FieldRelateCondition=" + FieldRelateCondition + "&IsSelect=" +_IsSelect;
         }
 
         $.ajax({
@@ -793,15 +804,15 @@
                     else
                     {
                            // alert(2 + ":" + ListSize);
-                            $.each(data, function (key, value1) {
+                         //   $.each(data, function (key, value1) {
                                 //  var Query = "#mvcdynamicfield_" + key;
-                                var Query = "#mvcdynamicfield_" + value1;
+                                var Query = "#mvcdynamicfield_" + key;
                                 // alert(Query);
                                 // $(Query).val(value);
-                                $(Query).val(key);
+                                $(Query).val(value);
 
 
-                            });
+                         //   });
                     }
                     //} else
                     //{

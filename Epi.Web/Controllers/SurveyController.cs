@@ -1226,7 +1226,7 @@ namespace Epi.Web.MVC.Controllers
 
         
         [HttpGet]
-        public JsonResult GetCodesValue(string SourceTableName= "", string SelectedValue="",string SurveyId="", string  ColumnName ="" , string FieldRelateCondition = "") 
+        public JsonResult GetCodesValue(string SourceTableName= "", string SelectedValue="",string SurveyId="", string  ColumnName ="" , string FieldRelateCondition = "",bool IsSelect =false) 
         {
             SurveyId = Session["RootFormId"].ToString();
             string CacheIsOn = ConfigurationManager.AppSettings["CACHE_IS_ON"]; ;
@@ -1279,6 +1279,11 @@ namespace Epi.Web.MVC.Controllers
 
                  var Attributes = _ControlValues.Attributes().ToList();
                 Dictionary<string,string> List = new  Dictionary<string,string>();
+
+              
+
+
+
                 if (Attributes.Count() == 1) {
                    
                     foreach (var Attribute in Attributes)
@@ -1290,21 +1295,42 @@ namespace Epi.Web.MVC.Controllers
                     }
                 }
                 else {
-                    
-                    foreach (var Attribute in Attributes)
+
+                   
+
+                    if (IsSelect)
                     {
-                        
-                        if (FieldRelateCondition.Contains(Attribute.Name.LocalName) && !List.ContainsKey(Attribute.Value)) {
-                            // List.Add(Attribute.Name.LocalName.ToLower(), Attribute.Value);
-                            
-                            List.Add(Attribute.Value, Attribute.Name.LocalName );
-                             
+                        foreach (var Attribute in Attributes)
+                        {
+
+                            if (FieldRelateCondition.Contains(Attribute.Name.LocalName) && !List.ContainsKey(Attribute.Value))
+                            {
+                                // List.Add(Attribute.Name.LocalName.ToLower(), Attribute.Value);
+
+                                List.Add(Attribute.Value, Attribute.Name.LocalName);
+
+                            }
+
+                        }
+
+                    }
+                    else
+                    {
+
+                        foreach (var Attribute in Attributes)
+                        {
+                            if (FieldRelateCondition.Contains(Attribute.Name.LocalName) && !List.ContainsKey(Attribute.Name.LocalName))
+                            {
+
+
+                                List.Add(Attribute.Name.LocalName, Attribute.Value);
+
+                            }
                         }
                     }
-
                 }
-
-                 return Json(List, JsonRequestBehavior.AllowGet);
+                return Json(List, JsonRequestBehavior.AllowGet);
+               
             }
             catch (Exception ex)
             {
