@@ -1230,12 +1230,12 @@ namespace Epi.Web.MVC.Utility
         
             foreach (var fieldElement in fieldElementList)
             {
-                bool AutoComplete = false;
-                if (string.IsNullOrEmpty(fieldElement.Attribute("RelateCondition").Value))
-                    {
+                bool AutoComplete = true;
+                //if (string.IsNullOrEmpty(fieldElement.Attribute("RelateCondition").Value))
+                //    {
 
-                    AutoComplete = true;
-                   }
+                //    AutoComplete = true;
+                //   }
                 bool isFound = false;
                 string value = null;
 
@@ -1314,6 +1314,7 @@ namespace Epi.Web.MVC.Utility
                             field = GetDropDown(fieldElement, legalValues, 17, form);
                            
                             ((Select)field).SelectedValue = value.Trim(new char[]{','});
+
                             break;
 
                         case "18":
@@ -1330,7 +1331,7 @@ namespace Epi.Web.MVC.Utility
                             }
                             var _DropDownSelectedValue2 = value;
                             var Dropdown = GetDropDown(fieldElement, _Width, _Height, xdocResponse, _DropDownSelectedValue2, DropDownValues2, 18, form);
-                            if (Dropdown.ChoiceKeyValuePairs.Count() > 50 && AutoComplete)
+                            if (Dropdown.ChoiceKeyValuePairs.Count() > 100 && AutoComplete)
                             {
 
                                 form.AddFields(GetAutoComplete(fieldElement, _Width, _Height, xdocResponse, _DropDownSelectedValue2, DropDownValues2, 1, form));
@@ -1392,12 +1393,12 @@ namespace Epi.Web.MVC.Utility
             {
                 var Value = GetControlValue(xdocResponse, fieldElement.Attribute("Name").Value);
                 //JavaScript.Append(GetFormJavaScript(checkcode, form, _FieldTypeID.Attribute("Name").Value));
-                bool AutoComplete = false;
-                if (string.IsNullOrEmpty(fieldElement.Attribute("RelateCondition").Value))
-                {
+                bool AutoComplete = true;
+                //if (string.IsNullOrEmpty(fieldElement.Attribute("RelateCondition").Value))
+                //{
 
-                    AutoComplete = true;
-                }
+                //    AutoComplete = true;
+                //}
                 if (fieldElement.Attribute("Position").Value == (pageNumber - 1).ToString())
                 {
                     MvcDynamicForms.Fields.Field field = null;
@@ -1479,25 +1480,41 @@ namespace Epi.Web.MVC.Utility
                                  
                             }
                             var _DropDownSelectedValue1 = Value;
-                            form.AddFields(GetDropDown(fieldElement, _Width, _Height, xdocResponse, _DropDownSelectedValue1, DropDownValues1, 17, form));
+                            var   dropdown = GetDropDown(fieldElement, _Width, _Height, xdocResponse, _DropDownSelectedValue1, DropDownValues1, 17, form);
+                            //  form.AddFields(field);
+                            if ((isMobile && dropdown.ChoiceKeyValuePairs.Count > 20 && AutoComplete) || (!isMobile && dropdown.ChoiceKeyValuePairs.Count > 100 && AutoComplete))
+                            {
 
+                                if (isMobile)
+                                {
+                                    field = GetMobileAutoComplete(fieldElement, _Width, _Height, xdocResponse, Value, dropDownValues, 17, form);
+                                }
+                                else
+                                {
+                                    field = GetAutoComplete(fieldElement, _Width, _Height, xdocResponse, Value, dropDownValues, 17, form);
+                                }
+                            }
+                            else
+                            {
+                                field = dropdown;
+                            }
                             break;
 
                         case "18": //DropDown Codes
 
 
                             dropDownValues = GetDropDownValues(form.XDocMetadata, fieldElement.Attribute("Name").Value, fieldElement.Attribute("SourceTableName").Value, fieldElement.Attribute("TextColumnName").Value, form.SourceTableList);
-                            var dropdown = GetDropDown(fieldElement, dropDownValues, 18, form);
-                            if ((isMobile && dropdown.ChoiceKeyValuePairs.Count > 15 && AutoComplete) || (!isMobile && dropdown.ChoiceKeyValuePairs.Count > 50 && AutoComplete))
+                             dropdown = GetDropDown(fieldElement, dropDownValues, 18, form);
+                            if ((isMobile && dropdown.ChoiceKeyValuePairs.Count > 20 && AutoComplete) || (!isMobile && dropdown.ChoiceKeyValuePairs.Count > 100 && AutoComplete))
                             {
                               
                                 if (isMobile)
                                 {
-                                    field = GetMobileAutoComplete(fieldElement, _Width, _Height, xdocResponse, Value, dropDownValues, 1, form);
+                                    field = GetMobileAutoComplete(fieldElement, _Width, _Height, xdocResponse, Value, dropDownValues, 18, form);
                                 }
                                 else
                                 {
-                                    field = GetAutoComplete(fieldElement, _Width, _Height, xdocResponse, Value, dropDownValues, 1, form);
+                                    field = GetAutoComplete(fieldElement, _Width, _Height, xdocResponse, Value, dropDownValues, 18, form);
                                 }
                             }
                             else
@@ -1510,7 +1527,25 @@ namespace Epi.Web.MVC.Utility
                         case "19": //DropDown CommentLegal
 
                             dropDownValues = GetDropDownValues(form.XDocMetadata, fieldElement.Attribute("Name").Value, fieldElement.Attribute("SourceTableName").Value, fieldElement.Attribute("CodeColumnName").Value, form.SourceTableList);
-                            field = GetDropDown(fieldElement, dropDownValues, 19, form);
+                            dropdown = GetDropDown(fieldElement, dropDownValues, 19, form);
+                            if ((isMobile && dropdown.ChoiceKeyValuePairs.Count > 20 && AutoComplete) || (!isMobile && dropdown.ChoiceKeyValuePairs.Count > 100 && AutoComplete))
+                            {
+
+                                if (isMobile)
+                                {
+                                    field = GetMobileAutoComplete(fieldElement, _Width, _Height, xdocResponse, Value, dropDownValues, 19, form);
+                                }
+                                else
+                                {
+                                    field = GetAutoComplete(fieldElement, _Width, _Height, xdocResponse, Value, dropDownValues, 19, form);
+                                }
+                            }
+                            else
+                            {
+                                field = dropdown;
+                            }
+
+
                             break;
 
                         case "20":
@@ -1633,6 +1668,8 @@ namespace Epi.Web.MVC.Utility
             DropDown.ControlFontSize = ParseFloat(_FieldTypeID.Attribute("ControlFontSize").Value);
             DropDown.ControlFontStyle = _FieldTypeID.Attribute("ControlFontStyle").Value;
             DropDown.RelateCondition = _FieldTypeID.Attribute("RelateCondition").Value;
+            DropDown.TextColumnName = _FieldTypeID.Attribute("TextColumnName").Value;
+            DropDown.SourceTable = _FieldTypeID.Attribute("SourceTableName").Value;
             DropDown.EmptyOption = "Select";
             DropDown.FieldTypeId = FieldTypeId;
 

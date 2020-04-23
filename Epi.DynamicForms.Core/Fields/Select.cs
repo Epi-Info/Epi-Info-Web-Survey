@@ -129,12 +129,12 @@ namespace MvcDynamicForms.Fields
             {
                 select.Attributes.Add("onclick", "return " + _key + "_click();"); //click
             }
-            if (this.RelateCondition)
-            {
-                select.Attributes.Add("onchange", "return SetCodes_Val(this,'" + _form.SurveyInfo.SurveyId + "','" + SourceTable + "',"+"''"+",'" + TextColumnName + "','"+ FieldRelateCondition + "');"); //click
+            //if (this.RelateCondition)
+            //{
+            //    select.Attributes.Add("onchange", "return SetCodes_Val(this,'" + _form.SurveyInfo.SurveyId + "','" + SourceTable + "',"+"''"+",'" + TextColumnName + "','"+ FieldRelateCondition + "');"); //click
 
 
-            }
+            //}
             ////////////Check code end//////////////////
             int LargestChoiseLength =0 ;
             string measureString = "";
@@ -176,11 +176,11 @@ namespace MvcDynamicForms.Fields
                 {
                     if ((size.Width) > _ControlWidth)
                     {
-                        select.Attributes.Add("class", GetControlClass() + "fix-me ");
+                        select.Attributes.Add("class", GetControlClass() + "fix-me awesomplete Search ");
                     }
                     else
                     {
-                        select.Attributes.Add("class", GetControlClass() + " awesomplete");
+                        select.Attributes.Add("class", GetControlClass() + " awesomplete Search");
                     }
 
                     select.Attributes.Add("data-prompt-position", "topRight:10");
@@ -207,12 +207,12 @@ namespace MvcDynamicForms.Fields
                 {
                     if ((size.Width) > _ControlWidth)
                     {
-                        select.Attributes.Add("class", GetControlClass() + "fix-me awesomplete");
+                        select.Attributes.Add("class", GetControlClass() + "fix-me awesomplete Search");
                     }
                     else
                     {
 
-                        select.Attributes.Add("class", GetControlClass() + " awesomplete");
+                        select.Attributes.Add("class", GetControlClass() + " awesomplete Search");
                     }
                     select.Attributes.Add("data-prompt-position", "topRight:10");
 

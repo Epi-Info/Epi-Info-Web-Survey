@@ -295,21 +295,36 @@ namespace MvcDynamicForms.Fields
                 //html.Append(scriptReadOnlyText.ToString(TagRenderMode.Normal));
 
 
-                var scriptReadOnlyText1 = new TagBuilder("script");
-                StringBuilder Script1 = new StringBuilder();
-                Script1.Append("  $(document).ready(function () {");
+                //var scriptReadOnlyText1 = new TagBuilder("script");
+                //StringBuilder Script1 = new StringBuilder();
+                //Script1.Append("  $(document).ready(function () {");
 
 
-                Script1.Append("$( '#" + inputName + "').blur(function() { ");
-                Script1.Append("SetCodes_Val(this,'" + _form.SurveyInfo.SurveyId + "','" + _key + "');  ");
+                //Script1.Append("$( '#" + inputName + "').blur(function() { ");
+                //Script1.Append("SetCodes_Val(this,'" + _form.SurveyInfo.SurveyId + "','" + _key + "');  ");
 
-                Script1.Append("});");
-                Script1.Append("});");
-                scriptReadOnlyText1.InnerHtml = Script1.ToString();
-                html.Append(scriptReadOnlyText1.ToString(TagRenderMode.Normal));
+                //Script1.Append("});");
+                //Script1.Append("});");
+                //scriptReadOnlyText1.InnerHtml = Script1.ToString();
+                //html.Append(scriptReadOnlyText1.ToString(TagRenderMode.Normal));
 
             }
+            var scriptReadOnlyText2 = new TagBuilder("script");
+            StringBuilder Script2 = new StringBuilder();
 
+            if (!string.IsNullOrEmpty(this.RelateCondition))
+            {
+                // select.Attributes.Add("onchange", "return SetCodes_Val(this,'" + _form.SurveyInfo.SurveyId + "','" + SourceTable + "'," + "''" + ",'" + TextColumnName + "','" + FieldRelateCondition + "');"); //click
+                string RelateConditionScript = "SetCodes_Val(this, '" + _form.SurveyInfo.SurveyId + "', '" + SourceTable + "', " + "''" + ", '" + TextColumnName + "', '" + this.RelateCondition + "');";
+                Script2.Append("$('#" + inputName + "' ).on('awesomplete-selectcomplete',function () {  ");
+
+                Script2.Append(RelateConditionScript);
+                Script2.Append("});");
+                scriptReadOnlyText2.InnerHtml = Script2.ToString();
+                html.Append(scriptReadOnlyText2.ToString(TagRenderMode.Normal));
+
+
+            }
 
 
 
@@ -318,21 +333,69 @@ namespace MvcDynamicForms.Fields
             var datalist = new TagBuilder("datalist ");
             datalist.Attributes.Add("id", inputName + "_DataList");
             html.Append(datalist.ToString(TagRenderMode.StartTag));
-            foreach (var choice in _choices)
+
+            switch (FieldTypeId.ToString())
             {
-                var opt = new TagBuilder("option");
-                opt.Attributes.Add("value", choice.Key);
-                opt.SetInnerText(choice.Key);
+               
 
-                html.Append(opt.ToString());
+                case "17":
+                    foreach (var choice in _choices)
+                    {
+                        var opt = new TagBuilder("option");
+                        opt.Attributes.Add("style", "");
+                        opt.Attributes.Add("value", choice.Key);
+                        if (choice.Key == SelectedValue.ToString()) opt.Attributes.Add("selected", "selected");
+                        opt.SetInnerText(choice.Key);
+                        html.Append(opt.ToString());
+                    }
+                    break;
 
+                case "18":
+                    //foreach (var choice in _choices)
+                    //{
+                    //    var opt = new TagBuilder("option");
+                    //    opt.Attributes.Add("style", "");
+                    //    opt.Attributes.Add("value", choice.Key);
+                    //    if (choice.Key == SelectedValue.ToString()) opt.Attributes.Add("selected", "selected");
+                    //    opt.SetInnerText(choice.Key);
+                    //    html.Append(opt.ToString());
+                    //}
+                    foreach (var choice in _choices)
+                    {
+                        var opt = new TagBuilder("option");
+                        opt.Attributes.Add("value", choice.Key);
+                        opt.SetInnerText(choice.Key);
 
+                        html.Append(opt.ToString());
 
+                    }
+                    break;
 
+                case "19":
+                    foreach (var choice in _choices)
+                    {
+                        var opt = new TagBuilder("option");
+                        opt.Attributes.Add("style", "");
+                        if (choice.Key.Contains("-"))
+                        {
+                            string[] keyValue = choice.Key.Split(new char[] { '-' }, 2);
+                            string comment = keyValue[0].Trim();
+                            string description = keyValue[1].Trim();
 
-                ///////////////////////////
+                            opt.Attributes.Add("value", comment);
+
+                            if (choice.Value || comment == SelectedValue.ToString())
+                            {
+                                opt.Attributes.Add("selected", "selected");
+                            }
+
+                            opt.SetInnerText(description);
+                        }
+
+                        html.Append(opt.ToString());
+                    }
+                    break;
             }
-
             // close select element
             html.Append(input.ToString(TagRenderMode.EndTag));
 
