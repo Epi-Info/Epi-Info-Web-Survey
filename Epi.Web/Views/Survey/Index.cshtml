@@ -156,6 +156,7 @@
     /*Clicking the continue button*/
 
     function Continue() {
+       
         //debugger;
         var presentUrl;
         var pageNumber;
@@ -164,6 +165,13 @@
         pageNumber = '@Model.Form.CurrentPage';
         actionUrlC = processUrl(presentUrl, 'ContinueUrl', pageNumber);
         $("#myform")[0].action = actionUrlC;
+
+         var DisabledFieldsList = $('#DisabledFieldsList').val();
+           if (DisabledFieldsList.length > 0 ) {
+               CCE_ProcessEnableAllControls(DisabledFieldsList);
+          }
+
+
         $("#myform").submit();
 
     }
@@ -178,6 +186,12 @@
         pageNumber = '@Model.Form.CurrentPage';
         actionUrlP = processUrl(presentUrl, 'PreviousUrl', pageNumber);
         $("#myform")[0].action = actionUrlP;
+
+         var DisabledFieldsList = $('#DisabledFieldsList').val();
+           if (DisabledFieldsList.length > 0 ) {
+               CCE_ProcessEnableAllControls(DisabledFieldsList);
+          }
+
         $("#myform").submit();
     }
     function ChangeDatePickerFormat(dateformat,controlVal) {
