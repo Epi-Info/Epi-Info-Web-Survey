@@ -183,6 +183,8 @@ namespace MvcDynamicForms.Fields
 
             ControlClass.Append("custom[number]]");
 
+            ControlClass.Append("  IsInt ");
+
             return ControlClass.ToString();
         }
     }

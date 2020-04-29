@@ -69,7 +69,7 @@ namespace MvcDynamicForms.Fields
 
             //var select = new TagBuilder("select");
             TagBuilder select = null;
-            if (this._choices.Count() < 100)
+            if (this._choices.Count() < 200)
             {
                 select = new TagBuilder("select");
             }
@@ -129,12 +129,12 @@ namespace MvcDynamicForms.Fields
             {
                 select.Attributes.Add("onclick", "return " + _key + "_click();"); //click
             }
-            //if (this.RelateCondition)
-            //{
-            //    select.Attributes.Add("onchange", "return SetCodes_Val(this,'" + _form.SurveyInfo.SurveyId + "','" + SourceTable + "',"+"''"+",'" + TextColumnName + "','"+ FieldRelateCondition + "');"); //click
+            if (this.RelateCondition)
+            {
+                select.Attributes.Add("onchange", "return SetCodes_Val(this,'" + _form.SurveyInfo.SurveyId + "','" + SourceTable + "'," + "''" + ",'" + TextColumnName + "','" + FieldRelateCondition + "');"); //click
 
 
-            //}
+            }
             ////////////Check code end//////////////////
             int LargestChoiseLength =0 ;
             string measureString = "";
@@ -159,7 +159,7 @@ namespace MvcDynamicForms.Fields
 
             if (Required == true)
             {
-                if (this._choices.Count() < 100)
+                if (this._choices.Count() < 200)
                 {
                     if ((size.Width) > _ControlWidth)
                     {
@@ -189,7 +189,7 @@ namespace MvcDynamicForms.Fields
             }
             else
             {
-                if (this._choices.Count() < 100)
+                if (this._choices.Count() < 200)
                 {
                     //select.Attributes.Add("class", GetControlClass() + "text-input fix-me");
                     if ((size.Width) > _ControlWidth)
@@ -251,7 +251,7 @@ namespace MvcDynamicForms.Fields
                 scriptReadOnlyText.InnerHtml = "$(function(){  var List = new Array();List.push('" + _key + "');CCE_Disable(List, false);});";
                 html.Append(scriptReadOnlyText.ToString(TagRenderMode.Normal));
                 }
-            if (this._choices.Count() > 100)
+            if (this._choices.Count() > 200)
             {
 
                 var scriptReadOnlyText = new TagBuilder("script");
@@ -267,7 +267,7 @@ namespace MvcDynamicForms.Fields
             }
 
             // initial empty option
-            if (this._choices.Count() < 100)
+            if (this._choices.Count() < 200)
             {
 
                 if (ShowEmptyOption)
@@ -283,7 +283,7 @@ namespace MvcDynamicForms.Fields
             //options
             //Build codes relatecondition Script Object
 
-            if (this._choices.Count() < 100 && this.SelectedValue.ToString() != "18")
+            if (this._choices.Count() < 200 && this.SelectedValue.ToString() != "18")
             {
                 switch (FieldTypeId.ToString())
                 {

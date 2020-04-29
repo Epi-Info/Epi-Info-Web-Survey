@@ -46,14 +46,19 @@
         alert("JavaScript error on page: Please stop entering data and contact survey admin.")
     }
 
-      $(document).ready(function () {
-
-
-
-
+    $(document).ready(function () {
+     
+            $("input.IsInt").keydown(function (e) { // forbid comma for numeric fields 
+            if(e.keyCode == 188){
+                e.preventDefault();
+            }
+            })
+            $("input.IsInt").bind("paste", function (e) {// forbid paste for numeric fields 
+                  e.preventDefault();
+              })
 
           $(":input").keypress(function (e) { // override keypress of " or '
-              if (e.which == 13 || e.which == 34 || e.which == 39) {
+              if (e.which == 13 || e.which == 34 || e.which == 39 ) {
                   return false;
               }
           })
@@ -779,7 +784,7 @@
     }
     function IsSelect(key)
     {
-        if ($("#mvcdynamicfield_" + key).is("select")) {
+        if ($("#mvcdynamicfield_" + key).is("select") ||  $("#mvcdynamicfield_" + key).hasClass("awesomplete")) {
             return true;
         } else {
             return false;
@@ -817,51 +822,40 @@
 
 
         function successFunc(data, status) {
-//            debugger;
 
-            //Object.keys(data).forEach(function (key) {
-            //    var value = data[key];
-            //    console.log(value, key);
-
-            //    if ($("#mvcdynamicfield_" + value.toLowerCase()).is("input")) {
-            //        var Query = "#mvcdynamicfield_" + value.toLowerCase();
-            //        $(Query).val(key);
-            //    }
-            //    else
-            //    {
-            //        var Query = "#mvcdynamicfield_" + value.toLowerCase();
-            //        $(Query).empty();
-            //        $(Query).append($("<option></option>")
-            //            .attr("value", "").text("Select"));
-            //            $(Query).append($("<option></option>")
-            //                .attr("value", key).text(key));
-
-
-            //    }
-            //});
-
-            var value = "";
-            Object.keys(data).forEach(function (key)
-            {
-                
-                value = data[key];
-             //  alert(key+"....." +value)
-               // return;
                 
                  
            
              
        
                     var ListSize = Object.keys(data).length;
-                   // alert(value)
-              //  if ($("#mvcdynamicfield_" + value).is("input"))
-                  //  if ($("#mvcdynamicfield_" + value).is("select"))
-             if ($("#mvcdynamicfield_" + value).is("select"))
+                 
+                if ($("#mvcdynamicfield_" + FieldRelateName).hasClass("awesomplete"))
+                {
+                   
+                      var Query = "#mvcdynamicfield_" + FieldRelateName + "_DataList";
+                            
+                            $(Query).empty();
+                            $(Query).val("");
+                          
+                            $.each(data, function (key, value) {
+                               // alert(key)
+                           
+                                $(Query).append($("<option></option>")
+                                     .attr("style", "")
+                                    .attr("value", key).text(key));
+                                     
+
+
+                           });
+                    $(Query).focus();
+
+
+                }
+             if ($("#mvcdynamicfield_" + FieldRelateName).is("select") )
                     {
-               
-                        //if (ListSize > 1) {
-                            //alert(1 + ":" + ListSize);
-                            var Query = "#mvcdynamicfield_" + value;
+            
+                            var Query = "#mvcdynamicfield_" + FieldRelateName;
                               
                             $(Query).empty();
                             $(Query).val("");
@@ -877,42 +871,25 @@
 
                             });
 
-                    }
-                    else
+                    } 
+                   if (!$("#mvcdynamicfield_" + FieldRelateName).is("select") && !$("#mvcdynamicfield_" + FieldRelateName).hasClass("awesomplete") )
                     {
-                           // alert(2 + ":" + ListSize);
-                          //  $.each(data, function (key, value1) {
+                         
+                       var value = "";
+                        Object.keys(data).forEach(function (key)
+                        {
+                            value = data[key];
                                  var Query = "#mvcdynamicfield_" + key;
-                                //var Query = "#mvcdynamicfield_" + value1;
-                                // alert(Query);
+                                
                                  $(Query).val(value);
-                                //$(Query).val(key);
+                                 
 
 
-                          //  });
-                    }
-                    //} else
-                    //{
+                             });
+                        }
+                   
 
-
-                    //    alert(3 + ":" + ListSize);
-                    //    var Query = "#mvcdynamicfield_" + value;
-                    //    $(Query).empty();
-                    //    $(Query).append($("<option></option>")
-                    //        .attr("value", "").text("Select"));
-                    //    $.each(data, function (key, value2) {
-
-
-                    //        $(Query).append($("<option></option>")
-                    //            .attr("value", key).text(key));
-
-
-                    //    });
-
-
-                    //}
-
-            });
+         
 
         }
 

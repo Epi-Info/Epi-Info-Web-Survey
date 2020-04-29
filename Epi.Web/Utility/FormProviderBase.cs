@@ -991,15 +991,35 @@ namespace Epi.Web.MVC.Utility
                         {
                             //XElement XElement =  XElement.Parse(_SourceTableValue.ToString().ToLower());
                             XElement XElement = XElement.Parse(_SourceTableValue.ToString());
-                           try{
-                           // DropDownValues.Append(XElement.Attribute(CodeColumnName.ToLower()).Value.Trim());
-                           DropDownValues.Append(XElement.Attribute(CodeColumnName.ToLower()).Value.Trim());
-                               // DropDownValues.Append(XElement.Attribute(CodeColumnName).Value.Trim());
+                            bool AttributeExist = XElement.Attribute(ControlName.ToLower()) != null ? true : false;
+                            bool AttributeExist2 = XElement.Attribute(CodeColumnName.ToLower()) != null ? true : false;
+                            if (AttributeExist) {
+
+                                DropDownValues.Append(XElement.Attribute(ControlName.ToLower()).Value.Trim());
+                            } else if (AttributeExist2)   {
+
+                                DropDownValues.Append(XElement.Attribute(CodeColumnName.ToLower()).Value.Trim());
                             }
-                           catch (Exception ex)
-                             {
-                             DropDownValues.Append(_SourceTableValue.Attributes().FirstOrDefault().Value.Trim());
+                            else {
+
+                                DropDownValues.Append(_SourceTableValue.Attributes().FirstOrDefault().Value.Trim());
                             }
+
+                         //   try
+                         //   {
+                         //  DropDownValues.Append(XElement.Attribute(ControlName.ToLower()).Value.Trim());
+                         ////  DropDownValues.Append(XElement.Attribute(CodeColumnName.ToLower()).Value.Trim());
+                             
+                         //   }
+                         //  catch (Exception ex)
+                         //    {
+                         //    DropDownValues.Append(_SourceTableValue.Attributes().FirstOrDefault().Value.Trim());
+                         //   }
+
+
+                          
+
+
                         }
                         else
                         {
@@ -1482,16 +1502,16 @@ namespace Epi.Web.MVC.Utility
                             var _DropDownSelectedValue1 = Value;
                             var   dropdown = GetDropDown(fieldElement, _Width, _Height, xdocResponse, _DropDownSelectedValue1, DropDownValues1, 17, form);
                             //  form.AddFields(field);
-                            if ((isMobile && dropdown.ChoiceKeyValuePairs.Count > 20 && AutoComplete) || (!isMobile && dropdown.ChoiceKeyValuePairs.Count > 100 && AutoComplete))
+                            if ((isMobile && dropdown.ChoiceKeyValuePairs.Count > 200 && AutoComplete) || (!isMobile && dropdown.ChoiceKeyValuePairs.Count > 200 && AutoComplete))
                             {
 
                                 if (isMobile)
                                 {
-                                    field = GetMobileAutoComplete(fieldElement, _Width, _Height, xdocResponse, Value, dropDownValues, 17, form);
+                                    field = GetMobileAutoComplete(fieldElement, _Width, _Height, xdocResponse, Value, DropDownValues1, 17, form);
                                 }
                                 else
                                 {
-                                    field = GetAutoComplete(fieldElement, _Width, _Height, xdocResponse, Value, dropDownValues, 17, form);
+                                    field = GetAutoComplete(fieldElement, _Width, _Height, xdocResponse, Value, DropDownValues1, 17, form);
                                 }
                             }
                             else
@@ -1505,7 +1525,7 @@ namespace Epi.Web.MVC.Utility
 
                             dropDownValues = GetDropDownValues(form.XDocMetadata, fieldElement.Attribute("Name").Value, fieldElement.Attribute("SourceTableName").Value, fieldElement.Attribute("TextColumnName").Value, form.SourceTableList);
                              dropdown = GetDropDown(fieldElement, dropDownValues, 18, form);
-                            if ((isMobile && dropdown.ChoiceKeyValuePairs.Count > 20 && AutoComplete) || (!isMobile && dropdown.ChoiceKeyValuePairs.Count > 100 && AutoComplete))
+                            if ((isMobile && dropdown.ChoiceKeyValuePairs.Count > 200 && AutoComplete) || (!isMobile && dropdown.ChoiceKeyValuePairs.Count > 200 && AutoComplete))
                             {
                               
                                 if (isMobile)
@@ -1528,7 +1548,7 @@ namespace Epi.Web.MVC.Utility
 
                             dropDownValues = GetDropDownValues(form.XDocMetadata, fieldElement.Attribute("Name").Value, fieldElement.Attribute("SourceTableName").Value, fieldElement.Attribute("CodeColumnName").Value, form.SourceTableList);
                             dropdown = GetDropDown(fieldElement, dropDownValues, 19, form);
-                            if ((isMobile && dropdown.ChoiceKeyValuePairs.Count > 20 && AutoComplete) || (!isMobile && dropdown.ChoiceKeyValuePairs.Count > 100 && AutoComplete))
+                            if ((isMobile && dropdown.ChoiceKeyValuePairs.Count > 200 && AutoComplete) || (!isMobile && dropdown.ChoiceKeyValuePairs.Count > 200 && AutoComplete))
                             {
 
                                 if (isMobile)

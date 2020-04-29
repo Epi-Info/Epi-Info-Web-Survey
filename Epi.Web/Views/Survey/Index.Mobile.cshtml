@@ -741,52 +741,44 @@
             error: errorFunc
         });
 
+function successFunc(data, status) {
 
-         function successFunc(data, status) {
-//            debugger;
-
-            //Object.keys(data).forEach(function (key) {
-            //    var value = data[key];
-            //    console.log(value, key);
-
-            //    if ($("#mvcdynamicfield_" + value.toLowerCase()).is("input")) {
-            //        var Query = "#mvcdynamicfield_" + value.toLowerCase();
-            //        $(Query).val(key);
-            //    }
-            //    else
-            //    {
-            //        var Query = "#mvcdynamicfield_" + value.toLowerCase();
-            //        $(Query).empty();
-            //        $(Query).append($("<option></option>")
-            //            .attr("value", "").text("Select"));
-            //            $(Query).append($("<option></option>")
-            //                .attr("value", key).text(key));
-
-
-            //    }
-            //});
-
-            var value = "";
-            Object.keys(data).forEach(function (key)
-            {
-                
-                value = data[key];
-               
-               // return;
                 
                  
            
              
        
                     var ListSize = Object.keys(data).length;
-                   // alert(value)
-              //  if ($("#mvcdynamicfield_" + value).is("input"))
-                    if ($("#mvcdynamicfield_" + value).is("select"))
+                 
+                if ($("#mvcdynamicfield_" + FieldRelateName).hasClass("awesomplete"))
+                {
+                  // alert(1)
+                      var Query = "#mvcdynamicfield_" + FieldRelateName + "_DataList";
+                            
+                            $(Query).empty();
+                            $(Query).val("");
+                          
+                            $.each(data, function (key, value) {
+                               // alert(key)
+                           
+                                $(Query).append($("<option></option>")
+                                     .attr("style", "")
+                                    .attr("value", value).text(value));
+                                     
+
+
+                           });
+                    $(Query).focus();
+
+
+
+
+                }
+             if ($("#mvcdynamicfield_" + FieldRelateName).is("select") )
                     {
-               
-                        //if (ListSize > 1) {
-                            //alert(1 + ":" + ListSize);
-                            var Query = "#mvcdynamicfield_" + value;
+            // alert(2)
+                            var Query = "#mvcdynamicfield_" + FieldRelateName;
+                              
                             $(Query).empty();
                             $(Query).val("");
                             $(Query).append($("<option></option>")
@@ -796,46 +788,30 @@
 
                                 $(Query).append($("<option></option>")
                                     .attr("value", key).text(key));
+                                     
 
 
                             });
 
-                    }
-                    else
+                    } 
+                   if (!$("#mvcdynamicfield_" + FieldRelateName).is("select") && !$("#mvcdynamicfield_" + FieldRelateName).hasClass("awesomplete") )
                     {
-                           // alert(2 + ":" + ListSize);
-                         //   $.each(data, function (key, value1) {
-                                //  var Query = "#mvcdynamicfield_" + key;
-                                var Query = "#mvcdynamicfield_" + key;
-                                // alert(Query);
-                                // $(Query).val(value);
-                                $(Query).val(value);
+                       //   alert(3)
+                       var value = "";
+                        Object.keys(data).forEach(function (key)
+                        {
+                            value = data[key];
+                                 var Query = "#mvcdynamicfield_" + key;
+                                
+                                 $(Query).val(value);
+                                 
 
 
-                         //   });
-                    }
-                    //} else
-                    //{
+                             });
+                        }
+                   
 
-
-                    //    alert(3 + ":" + ListSize);
-                    //    var Query = "#mvcdynamicfield_" + value;
-                    //    $(Query).empty();
-                    //    $(Query).append($("<option></option>")
-                    //        .attr("value", "").text("Select"));
-                    //    $.each(data, function (key, value2) {
-
-
-                    //        $(Query).append($("<option></option>")
-                    //            .attr("value", key).text(key));
-
-
-                    //    });
-
-
-                    //}
-
-            });
+         
 
         }
 
