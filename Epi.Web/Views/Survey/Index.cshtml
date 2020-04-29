@@ -166,8 +166,10 @@
         actionUrlC = processUrl(presentUrl, 'ContinueUrl', pageNumber);
         $("#myform")[0].action = actionUrlC;
 
+
+         var isValid = $("#myform").validationEngine('validate') ;
          var DisabledFieldsList = $('#DisabledFieldsList').val();
-           if (DisabledFieldsList.length > 0 ) {
+           if (DisabledFieldsList.length > 0 && isValid) {
                CCE_ProcessEnableAllControls(DisabledFieldsList);
           }
 
@@ -186,9 +188,9 @@
         pageNumber = '@Model.Form.CurrentPage';
         actionUrlP = processUrl(presentUrl, 'PreviousUrl', pageNumber);
         $("#myform")[0].action = actionUrlP;
-
+        var isValid = $("#myform").validationEngine('validate') ;
          var DisabledFieldsList = $('#DisabledFieldsList').val();
-           if (DisabledFieldsList.length > 0 ) {
+           if (DisabledFieldsList.length > 0 && isValid) {
                CCE_ProcessEnableAllControls(DisabledFieldsList);
           }
 
