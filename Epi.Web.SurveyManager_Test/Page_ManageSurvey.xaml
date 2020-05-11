@@ -65,7 +65,7 @@
                 <Button Content="Update Survey Information" Height="25" HorizontalAlignment="Left" Margin="225,578,0,0" Name="UpdateSurveyButton" VerticalAlignment="Top" Width="158" Click="UpdateSurveyButton_Click" />
             <!--</Grid>-->
         <!--</GroupBox>-->
-        <Button Content="Add User" Height="30" HorizontalAlignment="Left" Margin="298,27,0,0" Name="AddUser" VerticalAlignment="Top" Width="144" Click="AddUser_click" />
+        <Button Content="Add Organization" Height="30" HorizontalAlignment="Left" Margin="298,27,0,0" Name="AddOrganization" VerticalAlignment="Top" Width="144" Click="AddOrganization_click" />
             <TextBox  Height="23" Margin="182,86,179,583" MaxLength="36" Name="OrgTextBox1" />
             <GroupBox Background="#FFD6E0BA" Header="Survey Criteria" Name="groupBox2" Margin="44,115,17,439" Panel.ZIndex="-1" FontSize="13.333" FontWeight="Bold"></GroupBox>
         <TextBox Height="23" Name="SurveyCriteria_SurveyId" Uid="" Margin="178,136,180,533" />

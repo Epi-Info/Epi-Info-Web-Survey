@@ -19,5 +19,32 @@ namespace Epi.Web.WCF.SurveyService
         [OperationContract]
         [FaultContract(typeof(CustomFaultException))]
         SurveyInfoResponse GetAllSurveysByOrgKey(string OrgKey);
+        [OperationContract]
+        [FaultContract(typeof(CustomFaultException))]
+        string SetJsonColumn(List<string> SurveyIds, string OrgId);
+        [OperationContract]
+        [FaultContract(typeof(CustomFaultException))]
+        string SetJsonColumnAll(string AdminKey);
+        [OperationContract]
+        [FaultContract(typeof(CustomFaultException))]
+        UserResponse GetLoginToken(UserRequest UserInfo);
+        [OperationContract]
+        [FaultContract(typeof(CustomFaultException))]
+        bool SetUserInfo(UserRequest UserInfo);
+        [OperationContract]
+        [FaultContract(typeof(CustomFaultException))]
+        bool GetExistingUser(UserRequest UserInfo);
+        [OperationContract]
+        [FaultContract(typeof(CustomFaultException))]
+        UserResponse GetUserListByOrganization(UserRequest UserInfo);
+        [OperationContract]
+        [FaultContract(typeof(CustomFaultException))]
+        bool DeleteUser(UserRequest UserInfo);
+        [OperationContract]
+        [FaultContract(typeof(CustomFaultException))]
+        bool UpdateUserInfo(UserRequest UserInfo);
+        [OperationContract]
+        [FaultContract(typeof(CustomFaultException))]
+        UserResponse GetUserByUserId(UserRequest UserInfo);
     }
 }

@@ -108,16 +108,19 @@
 </head>
 <body>
 
-    <div id="container" style=" width:@TempData["Width"]px">
+    <div id="container" class="container-fluid">
+        @*style=" width:@TempData["Width"]px"*@
 
-        <div id="body">
-            @RenderBody()
+        @*<div id="body" class="row">*@
+        @RenderBody()
 
+        @*</div>*@
+
+        <br>
+        <br>
+        <div class="row">
+            @Html.Partial("FooterPartial")
         </div>
-
-
-
-        @Html.Partial("FooterPartial")
     </div>
 
 

@@ -21,7 +21,7 @@
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>C:\WorkSpace\Deployment\X\</PublishUrl>
+    <PublishUrl>C:\Users\vwm5\Desktop\Publish\AdminClient\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -31,8 +31,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <AutorunEnabled>true</AutorunEnabled>
-    <ApplicationRevision>5</ApplicationRevision>
+    <ApplicationRevision>45</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -107,6 +106,9 @@
     <Compile Include="DownLoad.xaml.cs">
       <DependentUpon>DownLoad.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Page_AddOrganization.xaml.cs">
+      <DependentUpon>Page_AddOrganization.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Page_AddUser.xaml.cs">
       <DependentUpon>Page_AddUser.xaml</DependentUpon>
     </Compile>
@@ -135,6 +137,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Service References\SurveyManagerServiceV4\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Service References\SurveyManagerService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -145,7 +152,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Page_AddUser.xaml">
+    <Page Include="Page_AddOrganization.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -161,6 +168,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Page_AddUser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Page_Configuration.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -209,6 +220,7 @@
     <None Include="Properties\DataSources\Epi.Web.Common.Message.SurveyAnswerResponse.datasource" />
     <None Include="Properties\DataSources\Epi.Web.Common.Message.SurveyControlsResponse.datasource" />
     <None Include="Properties\DataSources\Epi.Web.Common.Message.SurveyInfoResponse.datasource" />
+    <None Include="Properties\DataSources\Epi.Web.Common.Message.UserResponse.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -246,7 +258,33 @@
     <None Include="Service References\SurveyManagerServiceV3\SurveyManagerServiceV34.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Service References\SurveyManagerServiceV4\ManagerServiceV4.wsdl" />
+    <None Include="Service References\SurveyManagerServiceV4\SurveyManagerServiceV4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SurveyManagerServiceV4\SurveyManagerServiceV41.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SurveyManagerServiceV4\SurveyManagerServiceV42.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SurveyManagerServiceV4\SurveyManagerServiceV43.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SurveyManagerServiceV4\SurveyManagerServiceV44.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SurveyManagerServiceV4\SurveyManagerServiceV45.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SurveyManagerServiceV4\SurveyManagerServiceV46.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SurveyManagerServiceV4\SurveyManagerServiceV461.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\SurveyManagerService\ManagerService.wsdl" />
+    <None Include="Service References\SurveyManagerService\Service.wsdl" />
     <None Include="Service References\SurveyManagerService\SurveyManagerService.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -260,6 +298,9 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\SurveyManagerService\SurveyManagerService4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SurveyManagerService\SurveyManagerService5.xsd">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
@@ -294,6 +335,7 @@
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\SurveyManagerServiceV2\" />
     <WCFMetadataStorage Include="Service References\SurveyManagerServiceV3\" />
+    <WCFMetadataStorage Include="Service References\SurveyManagerServiceV4\" />
     <WCFMetadataStorage Include="Service References\SurveyManagerService\" />
   </ItemGroup>
   <ItemGroup>
@@ -337,6 +379,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\SurveyManagerServiceV3\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\SurveyManagerServiceV4\SurveyManagerServiceV4.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\SurveyManagerServiceV4\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\SurveyManagerServiceV4\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\SurveyManagerServiceV4\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>

@@ -85,7 +85,6 @@
     <Content Include="SurveyManagerServiceV3.svc" />
     <Content Include="SurveyManagerServiceV2.svc" />
     <Content Include="SurveyManagerServiceV4.svc" />
-    <Content Include="SurveyManagerServiceV5.svc" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

@@ -148,5 +148,6 @@ namespace Epi.Web.MVC.Models
         public string OrgName { get; set; }
         public bool JsonIsSet { get; internal set; }
         public string ViewRecordsURL { get; set; }
+        public bool IsBulk { get; set; }
     }
 }

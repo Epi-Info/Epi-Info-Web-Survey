@@ -47,11 +47,12 @@ namespace Epi.Web.Common.ObjectMapping
         {
             return new OrganizationBO
             {
-                 IsEnabled = pDTO.IsEnabled,
-                 Organization = pDTO.Organization,
-                 OrganizationKey = pDTO.OrganizationKey,
-                 // AdminId = pDTO.AdminId,
-                  
+                IsEnabled = pDTO.IsEnabled,
+                Organization = pDTO.Organization,
+                OrganizationKey = pDTO.OrganizationKey,
+                OrganizationId = pDTO.OrganizationId
+                // AdminId = pDTO.AdminId,
+
             };
         }
         public static AdminBO ToBusinessObject(AdminDTO pDTO)
@@ -73,6 +74,20 @@ namespace Epi.Web.Common.ObjectMapping
                  PhoneNumber =pDTO.PhoneNumber,
             };
             }
+
+        public static List<UserDTO> ToUserDTO(List<UserBO> list)
+        {
+            List<UserDTO> UserDTOList = new List<UserDTO>();
+            foreach (var user in list)
+            {
+
+                UserDTOList.Add(Mapper.ToUserDTO(user));
+
+
+            }
+            return UserDTOList;
+        }
+
         public static OrganizationDTO ToDataTransferObjects(OrganizationBO pBO)
         {
 
@@ -81,8 +96,8 @@ namespace Epi.Web.Common.ObjectMapping
               //  AdminId = pBO.AdminId,
                 IsEnabled = pBO.IsEnabled,
                 Organization = pBO.Organization,
-                OrganizationKey = pBO.OrganizationKey
-
+                OrganizationKey = pBO.OrganizationKey,
+                OrganizationId = pBO.OrganizationId
             };
 
         }
@@ -455,11 +470,32 @@ namespace Epi.Web.Common.ObjectMapping
             }
             return BOList;
         }
-        public static UserBO ToUserBO(UserDTO userBO) {
+        public static UserBO ToUserBO(UserDTO userDTO) {
 
             UserBO UserBO = new UserBO();
-
+            UserBO.PhoneNumber = userDTO.PhoneNumber;
+            UserBO.EmailAddress = userDTO.EmailAddress;
+            UserBO.FirstName = userDTO.FirstName;
+            UserBO.LastName = userDTO.LastName;
+            UserBO.UserName = userDTO.UserName;
+            UserBO.IsActive = userDTO.IsActive;
+            UserBO.UserId = userDTO.UserId;
+            UserBO.Operation = userDTO.Operation;
             return UserBO;
+
+        }
+        public static UserDTO ToUserDTO(UserBO UserBO)
+        {
+
+            UserDTO UserDTO = new UserDTO();
+            UserDTO.PhoneNumber = UserBO.PhoneNumber;
+            UserDTO.EmailAddress = UserBO.EmailAddress;
+            UserDTO.FirstName = UserBO.FirstName;
+            UserDTO.LastName = UserBO.LastName;
+            UserDTO.UserName = UserBO.EmailAddress.Split('@')[0].ToString();
+            UserDTO.IsActive = UserBO.IsActive;
+            UserDTO.UserId = UserBO.UserId;
+            return UserDTO;
 
         }
         private static SurveyResponseBO ToSurveyResponseBO(SurveyAnswerDTO pDTO, int UserId)

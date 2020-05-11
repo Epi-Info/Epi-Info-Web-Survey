@@ -17,7 +17,7 @@
         <Button  Click="DownloadSurveyInfoButton_Click" Content="Get Survey Information" Height="23" HorizontalAlignment="Left" Margin="324,184,0,0" Name="DownloadSurveyInfoButton" VerticalAlignment="Top" Width="137" />
         <Button Click="button3_Click" Content="View Publish Client" Height="30" HorizontalAlignment="Left" Margin="28,10,0,0" Name="button3" VerticalAlignment="Top" Width="118" />
         <Button Click="ManageSurveyButton_Click"  Content="Manage Existing Surveys" Height="30" HorizontalAlignment="Left" Margin="152,10,0,0" Name="ManageSurveyButton" VerticalAlignment="Top" Width="150" />
-        <Button Click="AddUser_click" Content="Add User" Height="30" HorizontalAlignment="Left" Margin="309,10,0,0" Name="button1" VerticalAlignment="Top" Width="162" />
+        <Button Click="AddOrganization_click" Content="Add Organization" Height="30" HorizontalAlignment="Left" Margin="309,10,0,0" Name="button1" VerticalAlignment="Top" Width="162" />
         <ListBox Height="51" HorizontalAlignment="Left" Margin="422,127,0,0" Name="SurveyInfoCriteria_SurveyTypeListBox" VerticalAlignment="Top" Width="120">
             <ListBoxItem Content="All Survey Types" Tag="-1" />
             <ListBoxItem Content="Single Response" Tag="1" />

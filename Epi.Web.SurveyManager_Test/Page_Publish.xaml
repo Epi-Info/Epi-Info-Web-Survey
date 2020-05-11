@@ -73,7 +73,7 @@
         </GroupBox>
         <Button Content="Open URL" Grid.Column="4" Grid.Row="2" Height="30" Margin="0,303,31.049,0" Name="OpenURLButton" VerticalAlignment="Top" Click="OpenURLButton_Click" IsEnabled="False" HorizontalAlignment="Right" Width="125" />
         <Button Content="Manage Existing Surveys" Grid.Column="3" Grid.Row="1" Height="30" HorizontalAlignment="Left" Margin="4,1,0,0" Name="ManageSurveyButton" VerticalAlignment="Top" Width="140" Grid.ColumnSpan="2" Click="ManageSurveyButton_Click" />
-        <Button Content="Add User" Grid.Column="4" Grid.Row="1" Height="30" HorizontalAlignment="Left" Margin="40,0,0,0" Name="AddUser" VerticalAlignment="Top" Width="162" Click="AddUser_click" />
+        <Button Content="Add Organization" Grid.Column="4" Grid.Row="1" Height="30" HorizontalAlignment="Left" Margin="40,0,0,0" Name="AddOrganization" VerticalAlignment="Top" Width="162" Click="AddOrganization_click" />
     </Grid>
     </ScrollViewer>
 </Page>

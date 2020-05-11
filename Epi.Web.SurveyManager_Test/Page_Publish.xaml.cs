@@ -313,12 +313,12 @@ namespace Epi.Web.SurveyManager.Client
             ExitTextTextBox.Document.Blocks.Clear();
         }
 
-        private void AddUser_click(object sender, RoutedEventArgs e)
+        private void AddOrganization_click(object sender, RoutedEventArgs e)
         {
 
 
-            Page_AddUser page_AddUser = new Page_AddUser();
-            this.NavigationService.Navigate(page_AddUser);
+            Page_AddOrganization Page_AddOrganization = new Page_AddOrganization();
+            this.NavigationService.Navigate(Page_AddOrganization);
         }
 
         private  bool IsGuid(string expression)

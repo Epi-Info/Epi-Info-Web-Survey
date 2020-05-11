@@ -116,14 +116,14 @@ namespace Epi.Web.EF
             {
                 var Query = (from response in Context.Organizations
 
-                             select new {response.Organization1 }).Distinct();
+                             select new {response.Organization1 ,response.OrganizationId}).Distinct();
 
 
                 var DataRow = Query.Distinct() ;
                 foreach (var Row in DataRow)
                 {
 
-                    OrganizationBO.Add(Mapper.Map(Row.Organization1));
+                    OrganizationBO.Add(Mapper.Map(Row.Organization1,Row.OrganizationId));
 
                 }
             }

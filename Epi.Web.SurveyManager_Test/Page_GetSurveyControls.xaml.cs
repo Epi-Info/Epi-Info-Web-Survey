@@ -31,10 +31,10 @@ namespace Epi.Web.SurveyManager.Client
             this.NavigationService.Navigate(page_ManageSurvey);
             }
 
-        private void AddUser_Click(object sender, RoutedEventArgs e)
+        private void AddOrganization_Click(object sender, RoutedEventArgs e)
             {
-            Page_AddUser page_AddUser = new Page_AddUser();
-            this.NavigationService.Navigate(page_AddUser);
+            Page_AddOrganization Page_AddOrganization = new Page_AddOrganization();
+            this.NavigationService.Navigate(Page_AddOrganization);
             }
 
         private void button1_Click(object sender, RoutedEventArgs e)

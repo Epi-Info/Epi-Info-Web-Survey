@@ -44,25 +44,36 @@ namespace Epi.Web.EF
 
             return Result;
         }
+        public bool IsUserActive(int UserID, int OrganizationId)
+        {
+          
+            using (var Context = DataObjectFactory.CreateContext())
+            {
+                var _User = Context.UserOrganizations.Where(x => x.UserID == UserID && x.OrganizationID == OrganizationId).Single();
 
+                return _User.Active;
+            }
+           
+        
+         }
         //public bool UpdateUser(UserBO User)
         //{
-            //var Context = DataObjectFactory.CreateContext();
-            //switch (User.Operation)
-            //{
-            //    case Constant.OperationMode.UpdatePassword:
-            //        var user = Context.Users.Single(a => a.UserName == User.UserName);
-            //        user.PasswordHash = User.PasswordHash;
-            //        Context.SaveChanges();
-            //        return true;
-            //    case Constant.OperationMode.UpdateUserInfo:
-            //        break;
-            //    case Constant.OperationMode.UpdateUser:
-            //        break;
-            //    default:
-            //        break;
-            //}
-            //return false;
+        //var Context = DataObjectFactory.CreateContext();
+        //switch (User.Operation)
+        //{
+        //    case Constant.OperationMode.UpdatePassword:
+        //        var user = Context.Users.Single(a => a.UserName == User.UserName);
+        //        user.PasswordHash = User.PasswordHash;
+        //        Context.SaveChanges();
+        //        return true;
+        //    case Constant.OperationMode.UpdateUserInfo:
+        //        break;
+        //    case Constant.OperationMode.UpdateUser:
+        //        break;
+        //    default:
+        //        break;
+        //}
+        //return false;
         //    throw new NotImplementedException();
         //}
 
@@ -71,51 +82,62 @@ namespace Epi.Web.EF
         //    throw new NotImplementedException();
         //}
 
-        //public bool InsertUser(UserBO User, OrganizationBO OrgBO)
-        //{
-        //    try
-        //    {
-        //        User.UGuid = Guid.NewGuid();
-        //        using (var Context = DataObjectFactory.CreateContext())
-        //        {
-        //            var Org = Context.Organizations.Where(x => x.OrganizationId == OrgBO.OrganizationId).Single();
+        public bool InsertUser(UserBO User, OrganizationBO OrgBO)
+        {
+            try
+            {
+                var _user = GetUserByEmail(User);
+                _user.Role = User.Role;
+               
+                using (var Context = DataObjectFactory.CreateContext())
+                {
+                     
+                        var Org = Context.Organizations.Where(x => x.OrganizationId == OrgBO.OrganizationId).Single();
 
-        //            Context.Organizations.Attach(Org);
+                        Context.Organizations.Attach(Org);
+                    if (_user == null)
+                    {
+                        User.UGuid = Guid.NewGuid();
+                        Context.Users.Add(Mapper.ToUserEntity(User));
+                        Context.SaveChanges();
+                        UserOrganization UserOrganizationEntity = Mapper.ToUserOrganizationEntity(User, OrgBO);
+                        Context.UserOrganizations.Add(UserOrganizationEntity);
+                    }
+                    else
+                    {
+                        UserOrganization UserOrganizationEntity = Mapper.ToUserOrganizationEntity(_user, OrgBO);
+                        //UserOrganizationEntity.Role = 1;
+                        Context.UserOrganizations.Add(UserOrganizationEntity);
+                    }
 
 
-                   
-        //            Context.Users.AddObject(Mapper.ToUserEntity(User));
+                        Context.SaveChanges();
+                 
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
+            }
+        }
+        public UserBO GetUserByUserId(UserBO User)
+        {
+            var Context = DataObjectFactory.CreateContext();
+            var UserQuery = from Users in Context.Users
+                            where Users.UserID == User.UserId
+                            select Users;
+            UserBO Result = new UserBO();
 
-        //            UserOrganization UserOrganizationEntity = Mapper.ToUserOrganizationEntity(User, OrgBO);
-        //            Context.UserOrganizations.AddObject(UserOrganizationEntity);
+            foreach (var user in UserQuery)
+            {
+             
+                Result = Mapper.MapToUserBO(user);
+                
+            }
 
-                                   
-
-        //            Context.SaveChanges();
-        //        }
-        //        return true;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw (ex);
-        //    }
-        //}
-        //public UserBO GetUserByUserId(UserBO User)
-        //{
-        //    var Context = DataObjectFactory.CreateContext();
-        //    var UserQuery = from Users in Context.Users
-        //                    where Users.UserID == User.UserId
-        //                    select Users;
-        //    UserBO Result = new UserBO();
-
-        //    foreach (var user in UserQuery)
-        //    {
-        //        Result = Mapper.MapToUserBO(user);
-        //        return Result;
-        //    }
-
-        //    return null;
-        //}
+            return Result;
+        }
         //public UserBO GetUserByUserIdAndOrgId(UserBO User, OrganizationBO OrgBO)
         //{
 
@@ -173,38 +195,38 @@ namespace Epi.Web.EF
         //    }
         //}
 
-        //public bool UpdateUserInfo(UserBO User, OrganizationBO OrgBO)
-        //{
+        public bool UpdateUserInfo(UserBO User, OrganizationBO OrgBO)
+        {
 
-        //    try
-        //    {
-        //        using (var Context = DataObjectFactory.CreateContext())
-        //        {
-
-
-        //            User user = Context.Users.First(x => x.UserID == User.UserId);
-        //            // user.UserName = User.UserName;
-        //            user.EmailAddress = User.EmailAddress;
-        //            user.FirstName = User.FirstName;
-        //            user.LastName = User.LastName;
-
-        //            UserOrganization UserOrganization = Context.UserOrganizations.First(x => x.OrganizationID == OrgBO.OrganizationId && x.UserID == User.UserId);
-        //            UserOrganization.RoleId = User.Role;
-        //            UserOrganization.Active = User.IsActive;
-
-        //            Context.SaveChanges();
+            try
+            {
+                using (var Context = DataObjectFactory.CreateContext())
+                {
 
 
+                    User user = Context.Users.First(x => x.UserID == User.UserId);
+                    //user.UserName = User.UserName;
+                    user.EmailAddress = User.EmailAddress;
+                    user.FirstName = User.FirstName;
+                    user.LastName = User.LastName;
+                    user.PhoneNumber = User.PhoneNumber;
+                    UserOrganization UserOrganization = Context.UserOrganizations.First(x => x.OrganizationID == OrgBO.OrganizationId && x.UserID == User.UserId);
+                    //UserOrganization.RoleId = User.Role;
+                    UserOrganization.Active = User.IsActive;
 
-        //        }
-        //        return true;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw (ex);
-        //    }
+                    Context.SaveChanges();
 
-        //}
+
+
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
+            }
+
+        }
 
         //public List<UserBO> GetUserByFormId(string FormId)
         //{
@@ -226,48 +248,48 @@ namespace Epi.Web.EF
 
         //}
 
-        //public UserBO GetUserByEmail(UserBO User)
-        //{
-        //    var Context = DataObjectFactory.CreateContext();
-        //    var UserQuery = from Users in Context.Users
-        //                    where Users.EmailAddress == User.EmailAddress
-        //                    select Users;
-        //    UserBO Result = new UserBO();
+        public UserBO GetUserByEmail(UserBO User)
+        {
+            var Context = DataObjectFactory.CreateContext();
+            var UserQuery = from Users in Context.Users
+                            where Users.EmailAddress == User.EmailAddress
+                            select Users;
+            UserBO Result = new UserBO();
 
-        //    foreach (var user in UserQuery)
-        //    {
-        //        Result = Mapper.MapToUserBO(user);
-        //        return Result;
-        //    }
+            foreach (var user in UserQuery)
+            {
+                Result = Mapper.MapToUserBO(user);
+                return Result;
+            }
 
-        //    return null;
-        //}
+            return null;
+        }
 
-        //public List<UserBO> GetUserByOrgId(int OrgId)
-        //{
+        public List<UserBO> GetUserByOrgId(int OrgId)
+        {
 
-        //    List<UserBO> UserList = new List<UserBO>();
-        //    using (var Context = DataObjectFactory.CreateContext())
-        //    {
-        //        var SelectedUserQuery = from UserOrg in Context.UserOrganizations
-        //                                join user in Context.Users on UserOrg.UserID equals user.UserID
-        //                                where UserOrg.OrganizationID == OrgId
-        //                                select user;
-        //        foreach (var user in SelectedUserQuery)
-        //        {
-        //            var UserBO = Mapper.MapToUserBO(user);
-        //            var User = Context.UserOrganizations.Where(x => x.UserID == user.UserID && x.OrganizationID == OrgId).Single();
-        //            UserBO.IsActive = User.Active;
-        //            UserBO.Role = User.RoleId;
-        //            UserList.Add(UserBO);
-        //        }
-        //    }
+            List<UserBO> UserList = new List<UserBO>();
+            using (var Context = DataObjectFactory.CreateContext())
+            {
+                var SelectedUserQuery = from UserOrg in Context.UserOrganizations
+                                        join user in Context.Users on UserOrg.UserID equals user.UserID
+                                        where UserOrg.OrganizationID == OrgId
+                                        select user;
+                foreach (var user in SelectedUserQuery)
+                {
+                    var UserBO = Mapper.MapToUserBO(user);
+                    var User = Context.UserOrganizations.Where(x => x.UserID == user.UserID && x.OrganizationID == OrgId).Single();
+                    UserBO.IsActive = User.Active;
+                    UserBO.Role = User.RoleId;
+                    UserList.Add(UserBO);
+                }
+            }
 
 
 
-        //    return UserList;
+            return UserList;
 
-        //}
+        }
 
         //public int GetUserHighestRole(int UserId)
         //{
@@ -332,7 +354,7 @@ namespace Epi.Web.EF
 
         //public List<UserBO> GetAdminsBySelectedOrgs(FormSettingBO FormSettingBO, string formId)
         //   {
-             
+
         //      List<UserBO> AdminList = new List<UserBO>();
         //      using (var Context = DataObjectFactory.CreateContext())
         //      {
@@ -352,5 +374,5 @@ namespace Epi.Web.EF
         //          return AdminList;
         //     }
 
-}
+    }
 }

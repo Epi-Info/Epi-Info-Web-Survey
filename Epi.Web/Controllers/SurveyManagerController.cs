@@ -43,14 +43,14 @@ namespace Epi.Web.MVC.Controllers
         [HttpGet]
         public ActionResult Index(bool ResetOrg = false)
         {
-           
+
             string content = string.Empty;
             PublishModel Model = new PublishModel();
-           
+
             ViewBag.Version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
             var IsAuthenticated = System.Web.HttpContext.Current.User.Identity.IsAuthenticated;
-             
-           
+
+
             Session["IsAuthenticated"] = false;
             Session["IsNewOrg"] = false;
             string filepath = Server.MapPath("~\\Content\\Text\\TermOfUse.txt");
@@ -67,12 +67,12 @@ namespace Epi.Web.MVC.Controllers
             }
             ViewData["TermOfUse1"] = content;
             var UserName = System.Web.HttpContext.Current.User.Identity.Name;
-         
+
             if (IsAuthenticated && !ResetOrg)
             {
                 Session["IsAuthenticated"] = Model.IsAuthenticated = IsAuthenticated;
                 //check if the user exists 
-               
+
                 OrganizationAccountRequest Request = new OrganizationAccountRequest();
                 Request.Admin = new AdminDTO();
                 Request.Admin.AdminEmail = UserName;
@@ -87,7 +87,7 @@ namespace Epi.Web.MVC.Controllers
                 {
                     Model.OrganizationKey = OrgId;
                     Model.IsValidOrg = ValidateOrganizationId(Model.OrganizationKey);
-                   
+
                     if (!Model.IsValidOrg)
                     {
                         ModelState.AddModelError("OrganizationKey", "Organization Key does not exist.");
@@ -95,8 +95,8 @@ namespace Epi.Web.MVC.Controllers
                     else
                     {
                         Session["OrgId"] = Model.OrganizationKey;
-                       
-                       Model.SurveyNameList = ViewBag.SurveyNameList1 = GetAllSurveysByOrgId(Model.OrganizationKey); ;
+
+                        Model.SurveyNameList = ViewBag.SurveyNameList1 = GetAllSurveysByOrgId(Model.OrganizationKey); ;
                         OrganizationAccountRequest OrgRequest = new OrganizationAccountRequest();
                         OrgRequest.Organization.OrganizationKey = Model.OrganizationKey;
                         OrganizationAccountResponse OrganizationAccountResponse = this._isurveyFacade.GetOrg(OrgRequest);
@@ -114,7 +114,7 @@ namespace Epi.Web.MVC.Controllers
                     Request.Organization = new OrganizationDTO();
                     Model.OrgName = Request.Organization.Organization = UserName.Replace("\\", " ") + "_Organization";
                     Request.Organization.IsEnabled = true;
-                   
+
                     Guid OrgKey = Guid.NewGuid();
                     Request.Organization.OrganizationKey = OrgKey.ToString();
 
@@ -141,7 +141,7 @@ namespace Epi.Web.MVC.Controllers
                 if (!string.IsNullOrEmpty(UserName))
                 {
                     UserName = UserName.Substring(4);
-                      Token = Common.Security.Cryptography.GetToken(UserName);
+                    Token = Common.Security.Cryptography.GetToken(UserName);
                 }
                 Model.ViewRecordsURL = ConfigurationManager.AppSettings["ViewRecordsURL"] + Uri.EscapeDataString(Token);
                 return View("Index", Model);
@@ -152,7 +152,7 @@ namespace Epi.Web.MVC.Controllers
                 string Token = "";
                 if (!string.IsNullOrEmpty(UserName)) {
                     UserName = UserName.Substring(4);
-                      Token = Common.Security.Cryptography.GetToken(UserName);
+                    Token = Common.Security.Cryptography.GetToken(UserName);
                 }
                 Model.ViewRecordsURL = ConfigurationManager.AppSettings["ViewRecordsURL"] + Uri.EscapeDataString(Token);
                 return View("Index", Model);
@@ -161,7 +161,7 @@ namespace Epi.Web.MVC.Controllers
 
         }
         [HttpPost]
-        public ActionResult Index(PublishModel Model, string PublishSurvey, string DownLoadResponse, string ValidateOrganization, HttpPostedFileBase Newfile, HttpPostedFileBase Newfile1, HttpPostedFileBase Newfile2, string SurveyName, string RePublishSurvey, string RePublishSurveyName, string SendEmail,string SetJson)
+        public ActionResult Index(PublishModel Model, string PublishSurvey, string DownLoadResponse, string ValidateOrganization, HttpPostedFileBase Newfile, HttpPostedFileBase Newfile1, HttpPostedFileBase Newfile2, string SurveyName, string RePublishSurvey, string RePublishSurveyName, string SendEmail, string SetJson)
         {
             Model.ViewRecordsURL = ConfigurationManager.AppSettings["ViewRecordsURL"];
             string filepath = Server.MapPath("~\\Content\\Text\\TermOfUse.txt");
@@ -234,7 +234,7 @@ namespace Epi.Web.MVC.Controllers
                         {
                             Session["OrgId"] = Model.OrganizationKey;
                             ViewBag.SurveyNameList1 = Model.SurveyNameList = GetAllSurveysByOrgId(Model.OrganizationKey);
-                            
+
 
 
                         }
@@ -417,7 +417,7 @@ namespace Epi.Web.MVC.Controllers
 
 
 
-                    if (IsAuthenticated && ModelState["EmailUserPublishKey"]!= null)
+                    if (IsAuthenticated && ModelState["EmailUserPublishKey"] != null)
                     {
                         ModelState["EmailUserPublishKey"].Errors.Clear();
                     }
@@ -452,7 +452,7 @@ namespace Epi.Web.MVC.Controllers
                 {
                     try
                     {
-                       var SurveyIds = GetAllSurveysByOrgId(Session["OrgId"].ToString());
+                        var SurveyIds = GetAllSurveysByOrgId(Session["OrgId"].ToString());
 
                         foreach (var SurveyInfo in SurveyIds)
                         {
@@ -471,21 +471,21 @@ namespace Epi.Web.MVC.Controllers
                                     Request.SurveyId = SurveyInfo.Value;
                                     SurveyControlsResponse List = _isurveyFacade.GetSurveyControlList(Request);
 
-                                    
+
                                     SurveyAnswerRequest _Request = SetMessageObject(false, SurveyInfo.Value, new Guid(surveyInfoModel.UserPublishKey.ToString()), Session["OrgId"].ToString(), false, -2, i, PageSize);
                                     SurveyAnswerResponse Responses = _isurveyFacade.GetSurveyAnswerResponse(_Request);
 
                                     //var Responses = _isurveyFacade.GetFormResponseList(SurveyAnswerRequest);
                                     foreach (var ResponseDetail in Responses.SurveyResponseList)
                                     {
-                                       // if (string.IsNullOrEmpty(ResponseDetail.Json)) {
-                                            List<FormsHierarchyDTO> FormsHierarchy = GetFormsHierarchy(SurveyInfo.Value, ResponseDetail.ResponseId);
-                                            var json = _isurveyFacade.GetSurveyResponseJson(ResponseDetail, FormsHierarchy, List);
-                                            if (!string.IsNullOrEmpty(json))
-                                            {
-                                                bool temp = this._isurveyFacade.SetJsonColumn(json, ResponseDetail.ResponseId);
-                                            }
-                                      //  }
+                                        // if (string.IsNullOrEmpty(ResponseDetail.Json)) {
+                                        List<FormsHierarchyDTO> FormsHierarchy = GetFormsHierarchy(SurveyInfo.Value, ResponseDetail.ResponseId);
+                                        var json = _isurveyFacade.GetSurveyResponseJson(ResponseDetail, FormsHierarchy, List);
+                                        if (!string.IsNullOrEmpty(json))
+                                        {
+                                            bool temp = this._isurveyFacade.SetJsonColumn(json, ResponseDetail.ResponseId);
+                                        }
+                                        //  }
                                     }
                                 }
                             }
@@ -499,13 +499,13 @@ namespace Epi.Web.MVC.Controllers
                     catch (Exception ex)
                     {
                         Model.SetJsonDivState = true;
-                      
+
                         return View("Index", Model);
                         throw ex;
                     }
 
                 }
-                }
+            }
             catch (Exception ex)
             {
                 ViewBag.SurveyNameList1 = GetAllSurveysByOrgId(Model.OrganizationKey);
@@ -524,14 +524,14 @@ namespace Epi.Web.MVC.Controllers
             // FormsHierarchyRequest FormsHierarchyRequest = new FormsHierarchyRequest();
             try
             {
-                if (RootFormId != null && RootResponseId  != null)
+                if (RootFormId != null && RootResponseId != null)
                 {
-                    FormsHierarchyRequest.SurveyInfo.SurveyId =  RootFormId .ToString();
+                    FormsHierarchyRequest.SurveyInfo.SurveyId = RootFormId.ToString();
                     FormsHierarchyRequest.SurveyResponseInfo.ResponseId = RootResponseId.ToString();
                     FormsHierarchyResponse = _isurveyFacade.GetFormsHierarchy(FormsHierarchyRequest);
 
                     SurveyAnswerDTO SurveyAnswerDTO = new SurveyAnswerDTO();
-                    SurveyAnswerDTO.ResponseId =  RootResponseId .ToString();
+                    SurveyAnswerDTO.ResponseId = RootResponseId.ToString();
                     ResponseIDsHierarchyRequest.SurveyAnswerList.Add(SurveyAnswerDTO);
                     ResponseIDsHierarchyResponse = _isurveyFacade.GetSurveyAnswerHierarchy(ResponseIDsHierarchyRequest);
                     FormsHierarchyResponse.FormsHierarchy = CombineLists(FormsHierarchyResponse.FormsHierarchy, ResponseIDsHierarchyResponse.SurveyResponseList);
@@ -574,11 +574,11 @@ namespace Epi.Web.MVC.Controllers
             {
                 OfficeOpenXml.ExcelWorkbook workbook = package.Workbook;
                 string Subject = workbook.Worksheets[2].Cells[2, 1].Text;
-                string Body = workbook.Worksheets[2].Cells[2, 2].Text;
+                StringBuilder Body = new StringBuilder( workbook.Worksheets[2].Cells[2, 2].Text);
                 string Sender = workbook.Worksheets[2].Cells[2, 3].Text;
 
                 string Subject2 = workbook.Worksheets[2].Cells[3, 1].Text;
-                string Body2 = workbook.Worksheets[2].Cells[3, 2].Text;
+                StringBuilder Body2 = new StringBuilder(workbook.Worksheets[2].Cells[3, 2].Text);
                 string Sender2 = workbook.Worksheets[2].Cells[3, 3].Text;
 
                 ExcelWorksheet xlWorksheet = workbook.Worksheets[1];
@@ -586,19 +586,19 @@ namespace Epi.Web.MVC.Controllers
                 var start = xlWorksheet.Dimension.Start;
                 var end = xlWorksheet.Dimension.End;
 
-                int InProgress = 0;
-                int Saved = 0;
-                int Submited = 0;
 
-                for (int row = 2; row <= end.Row; row++)
-                { // Row by row...
-                    int DoSend = 0;
-                    int.TryParse(xlWorksheet.Cells[row, 1].Text, out DoSend);
-                    // validate email Address
-                    bool IsValid = ValidateEmail(xlWorksheet.Cells[row, 2].Text);
-                    if( IsValid)
-                    {
-                        
+                if (!model.IsBulk)
+                {
+                    for (int row = 2; row <= end.Row; row++)
+                    { // Row by row...
+                        int DoSend = 0;
+                        int.TryParse(xlWorksheet.Cells[row, 1].Text, out DoSend);
+                        // validate email Address
+                        bool IsValid = ValidateEmail(xlWorksheet.Cells[row, 2].Text);
+                        Dictionary<string, string> SurveyQuestionAnswerList = new Dictionary<string, string>();
+                        if (IsValid)
+                        {
+
                             string UserEamil = xlWorksheet.Cells[row, 2].Text;
                             string _ResponseId = xlWorksheet.Cells[row, 3].Text;
                             string _Status = xlWorksheet.Cells[row, 4].Text;
@@ -610,7 +610,7 @@ namespace Epi.Web.MVC.Controllers
                             if (string.IsNullOrEmpty(_Status))
                             {
                                 xlWorksheet.SetValue(row, 4, "InProgress");
-                                InProgress++;
+
                             }
                             xlWorksheet.SetValue(row, 5, DateTime.Now.ToShortDateString());
 
@@ -621,13 +621,10 @@ namespace Epi.Web.MVC.Controllers
 
                             if (string.IsNullOrEmpty(_ResponseId))
                             {
-                                string strPassCode = Epi.Web.MVC.Utility.SurveyHelper.GetPassCode();
-                                Guid ResponseID = Guid.NewGuid();
-                                SurveyUrl = ConfigurationManager.AppSettings["ResponseURL"] + ResponseID.ToString() + "/" + strPassCode;
-
-                                Epi.Web.Common.DTO.SurveyAnswerDTO SurveyAnswer = _isurveyFacade.CreateSurveyAnswer(SurveyInfo.SurveyId, ResponseID.ToString());
-                                _isurveyFacade.UpdatePassCode(ResponseID.ToString(), strPassCode);
-                                // Update response if  key value pair availeble 
+                                string strPassCode;
+                                Guid ResponseID;
+                                CreateResponse(SurveyInfo, out SurveyUrl, out strPassCode, out ResponseID);    // CreateResponse
+                                                                                                               // Update response if  key value pair availeble 
 
                                 bool IsPreFiledValues = false;
                                 if (!string.IsNullOrEmpty(xlWorksheet.Cells[row, 10].Text))
@@ -638,30 +635,8 @@ namespace Epi.Web.MVC.Controllers
                                 }
                                 if (IsPreFiledValues)
                                 {
-                                    XDocument SurveyXml = XDocument.Parse(SurveyInfo.XML);
-                                    Epi.Web.Common.Message.PreFilledAnswerRequest request = new PreFilledAnswerRequest();
-                                    request.AnswerInfo.SurveyQuestionAnswerList = new Dictionary<string, string>();
-                                    for (int cell = 10; cell <= end.Column; cell++)
-                                    {
-                                        string ColumnName = xlWorksheet.Cells[1, cell].Value.ToString();
-                                        string Value = xlWorksheet.Cells[row, cell].Value.ToString();
-                                        request.AnswerInfo.SurveyQuestionAnswerList.Add(ColumnName, Value);
-                                    }
 
-
-
-
-                                    Epi.Web.Common.Xml.SurveyResponseXML Implementation = new Epi.Web.Common.Xml.SurveyResponseXML(request, SurveyXml);
-                                    string ResponseXml = Implementation.CreateResponseDocument(SurveyXml).ToString();
-                                    SurveyAnswerRequest Request = new SurveyAnswerRequest();
-                                    SurveyAnswerDTO DTO = new SurveyAnswerDTO();
-                                    DTO.SurveyId = SurveyInfo.SurveyId;
-                                    DTO.ResponseId = ResponseID.ToString();
-                                    DTO.Status = 1;
-                                    DTO.XML = ResponseXml;
-                                    Request.Action = "Update";
-                                    Request.SurveyAnswerList.Add(DTO);
-                                    _isurveyFacade.SaveSurveyAnswer(Request);
+                                    ResponseID = UpdateResponse(SurveyInfo, xlWorksheet, end, row, ResponseID, out SurveyQuestionAnswerList);   // UpdateResponse
 
                                 }
                                 xlWorksheet.SetValue(row, 3, ResponseID.ToString());
@@ -671,95 +646,32 @@ namespace Epi.Web.MVC.Controllers
                             else
                             {
                                 // Get Response status
-                                var SurveyResponse = _isurveyFacade.GetSurveyAnswerResponse(_ResponseId, model.EmailSurveyKey).SurveyResponseList[0];
-                                ResponseStatuse = SurveyResponse.Status;
-                                DateCompleted = SurveyResponse.DateCompleted.ToString();
-                                SurveyUrl = ConfigurationManager.AppSettings["ResponseURL"] + SurveyResponse.ResponseId.ToString() + "/" + SurveyResponse.PassCode;
+                                GetResponseStatus(model, _ResponseId, out SurveyUrl, out ResponseStatuse, out DateCompleted); //GetResponseStatus
                             }
                             // send email
-                            if (DoSend==1)
+                            if (DoSend == 1)
                             {
                                 Epi.Web.Common.Email.Email EmailObj = new Common.Email.Email();
                                 if (ResponseStatuse < 3 && !string.IsNullOrEmpty(SurveyUrl))
                                 {
-                                    try
-                                    {
-
-                                        EmailObj.Body = Body +
-                                            "\n\n Survey URL: \n" + SurveyUrl;
-
-                                        EmailObj.From = Sender;// ConfigurationManager.AppSettings["EMAIL_FROM"].ToString();
-                                        EmailObj.Subject = Uri.UnescapeDataString(Subject);
-
-
-                                        List<string> tempList = new List<string>();
-                                        tempList.Add(UserEamil);
-                                        EmailObj.To = tempList;
-                                        bool EmailSent = Epi.Web.Common.Email.EmailHandler.SendMessage(EmailObj);
-                                    if (EmailSent) {
-                                        xlWorksheet.SetValue(row, 9, "Email sent successfully!");
-                                    }
-                                    else {
-                                        xlWorksheet.SetValue(row, 9, "Error occurred while sending email.");
-                                    }
-                                    }
-                                    catch (Exception ex)
-                                    {
-                                        xlWorksheet.SetValue(row, 9, "Error occurred while sending email.");
-                                        //throw ex;
-                                    }
+                                    Body.AppendLine();
+                                    Body.Append( GetEmailInfo(SurveyQuestionAnswerList, SurveyUrl));
+                                    SendEmail(Subject, Body.ToString(), Sender, xlWorksheet, row, UserEamil, SurveyUrl); //Initial  email 
 
                                 }
                                 else
                                 {
                                     if (ResponseStatuse != 3)
                                     {
-                                        try
-                                        {
-                                            EmailObj.Body = Body2 +
-                                                    "\n\n Survey URL: \n" + SurveyUrl;
-                                            EmailObj.Subject = Uri.UnescapeDataString(Subject2);
-                                            EmailObj.From = Sender2;// ConfigurationManager.AppSettings["EMAIL_FROM"].ToString();
-                                            List<string> tempList = new List<string>();
-                                            tempList.Add(UserEamil);
-                                            EmailObj.To = tempList;
-                                            bool EmailSent = Epi.Web.Common.Email.EmailHandler.SendMessage(EmailObj);
-                                        if (EmailSent)
-                                        {
-                                            xlWorksheet.SetValue(row, 9, "Email sent successfully!");
-                                        }
-                                        else
-                                        {
-                                            xlWorksheet.SetValue(row, 9, "Error occurred while sending email.");
-                                        }
 
-                                    }
-                                        catch (Exception ex)
-                                        {
-                                            xlWorksheet.SetValue(row, 9, "Error occurred while sending email.");
-                                            //throw ex;
-                                        }
+                                        SendEmail(Subject2, Body2.ToString(), Sender2, xlWorksheet, row, UserEamil, SurveyUrl);  //Reminder email 
+
                                     }
                                     var _ResponseStatus = GetStatus(ResponseStatuse);
                                     xlWorksheet.SetValue(row, 4, _ResponseStatus);
                                     xlWorksheet.SetValue(row, 8, DateCompleted);
 
-                                    switch (ResponseStatuse)
-                                    {
-                                        case 1:
-                                            InProgress++;
-                                            //data.Add(new KeyValuePair<string, int>($"Group {i}", rand.Next(10, 100)));
-                                            break;
-                                        case 2:
-                                            Saved++;
-                                            break;
-                                        case 3:
-                                            Submited++;
-                                            break;
-                                        default:
 
-                                            break;
-                                    }
 
                                 }
                             }
@@ -768,12 +680,131 @@ namespace Epi.Web.MVC.Controllers
                         {
                             xlWorksheet.SetValue(row, 9, "Email address is not valid. Please check email address and try again.");
                         }
-                   
+
+                    }
+
                 }
+                else
+                {
+                    //////////////////////Bulk logic/////////////////////////////////////////////////
+                    int DoSend = 0;
+                    int.TryParse(xlWorksheet.Cells[2, 1].Text, out DoSend);
+                    // validate email Address
+                    bool IsValid = ValidateEmail(xlWorksheet.Cells[2, 2].Text);
+                    string UserEamil = xlWorksheet.Cells[2, 2].Text;
+                    List<string> URL_List = new List<string>();
+                    Dictionary<int, string> DateCompleted_List = new Dictionary<int, string>();
+
+                    int ResponseStatuse = 1;
+                    for (int row = 2; row <= end.Row; row++)
+                    {
+                        Dictionary<string, string> SurveyQuestionAnswerList = new Dictionary<string, string>();
+                        if (IsValid)
+                        {
+
+
+                            string _ResponseId = xlWorksheet.Cells[row, 3].Text;
+                            string _Status = xlWorksheet.Cells[row, 4].Text;
+                            string SurveyUrl = "";
+
+                            string DateCompleted = "";
+                            // Add ResponseId , status and Date sent to EXCEL 
+
+                            if (string.IsNullOrEmpty(_Status))
+                            {
+                                xlWorksheet.SetValue(row, 4, "InProgress");
+
+                            }
+                            xlWorksheet.SetValue(row, 5, DateTime.Now.ToShortDateString());
+
+
+
+
+                            // Create a response
+
+                            if (string.IsNullOrEmpty(_ResponseId))
+                            {
+                                string strPassCode;
+                                Guid ResponseID;
+                                CreateResponse(SurveyInfo, out SurveyUrl, out strPassCode, out ResponseID);    // CreateResponse
+                                                                                                               // Update response if  key value pair availeble 
+
+                                bool IsPreFiledValues = false;
+                                if (!string.IsNullOrEmpty(xlWorksheet.Cells[row, 10].Text))
+                                {
+
+                                    IsPreFiledValues = true;
+
+                                }
+                                if (IsPreFiledValues)
+                                {
+
+                                    ResponseID = UpdateResponse(SurveyInfo, xlWorksheet, end, row, ResponseID, out SurveyQuestionAnswerList);   // UpdateResponse
+
+                                }
+                                xlWorksheet.SetValue(row, 3, ResponseID.ToString());
+                                xlWorksheet.SetValue(row, 6, SurveyUrl);
+                                xlWorksheet.SetValue(row, 7, strPassCode);
+                            }
+                            else
+                            {
+                                // Get Response status
+                                GetResponseStatus(model, _ResponseId, out SurveyUrl, out ResponseStatuse, out DateCompleted); //GetResponseStatus
+                                DateCompleted_List.Add(row, DateCompleted);
+                            }
+
+                            URL_List.Add(SurveyUrl);
+                        }
+                        else
+                        {
+                            xlWorksheet.SetValue(2, 9, "Email address is not valid. Please check email address and try again.");
+                        }
+                    }
+
+                    if (URL_List.Count > 0 && DoSend == 1)
+                    {
+
+                        string SurveyUrl = GetUrlstring(URL_List);
+
+
+                        if (ResponseStatuse < 3)
+                        {
+                            SendEmail(Subject, Body.ToString(), Sender, xlWorksheet, 2, UserEamil, SurveyUrl); //Initial  email 
+
+                        }
+                        else
+                        {
+                            if (ResponseStatuse != 3)
+                            {
+
+                                SendEmail(Subject2, Body2.ToString(), Sender2, xlWorksheet, 2, UserEamil, SurveyUrl);  //Reminder email 
+
+                            }
+
+
+
+
+                        }
+
+                        for (int row = 2; row <= end.Row; row++)
+                        {
+                            var _ResponseStatus = GetStatus(ResponseStatuse);
+                            xlWorksheet.SetValue(row, 4, _ResponseStatus);
+                            if (DateCompleted_List.ContainsKey(row))
+                            {
+                                xlWorksheet.SetValue(row, 8, DateCompleted_List[row]);
+                            }
+                        }
+
+                    }
+
+                }
+
+
                 // adding a sumery 
 
 
-                GetPieChart(InProgress, Saved, Submited, workbook);
+                // GetPieChart(InProgress, Saved, Submited, workbook);
 
                 using (var memoryStream = new MemoryStream())
                 {
@@ -788,6 +819,99 @@ namespace Epi.Web.MVC.Controllers
 
 
             }
+        }
+
+        private string GetUrlstring(List<string> uRL_List)
+        {
+            StringBuilder UrlString = new StringBuilder();
+            foreach (var url in uRL_List) {
+                UrlString.Append(url);
+                UrlString.AppendLine();
+
+            }
+
+
+            return UrlString.ToString();
+        }
+
+        private void GetResponseStatus(PublishModel model, string _ResponseId, out string SurveyUrl, out int ResponseStatuse, out string DateCompleted)
+        {
+            var SurveyResponse = _isurveyFacade.GetSurveyAnswerResponse(_ResponseId, model.EmailSurveyKey).SurveyResponseList[0];
+            ResponseStatuse = SurveyResponse.Status;
+            DateCompleted = SurveyResponse.DateCompleted.ToString();
+            SurveyUrl = ConfigurationManager.AppSettings["ResponseURL"] + SurveyResponse.ResponseId.ToString() + "/" + SurveyResponse.PassCode;
+        }
+
+        private static void SendEmail(string Subject, string Body, string Sender, ExcelWorksheet xlWorksheet, int row, string UserEamil, string SurveyUrl)
+        {
+            try
+            {
+                Epi.Web.Common.Email.Email EmailObj = new Common.Email.Email();
+                EmailObj.Body = Body;// + "\n\n Survey URL: \n" + SurveyUrl;
+
+                EmailObj.From = Sender;// ConfigurationManager.AppSettings["EMAIL_FROM"].ToString();
+                EmailObj.Subject = Uri.UnescapeDataString(Subject);
+
+
+                List<string> tempList = new List<string>();
+                tempList.Add(UserEamil);
+                EmailObj.To = tempList;
+                bool EmailSent = Epi.Web.Common.Email.EmailHandler.SendMessage(EmailObj);
+                if (EmailSent)
+                {
+                    xlWorksheet.SetValue(row, 9, "Email sent successfully!");
+                }
+                else
+                {
+                    xlWorksheet.SetValue(row, 9, "Error occurred while sending email.");
+                }
+            }
+            catch (Exception ex)
+            {
+                xlWorksheet.SetValue(row, 9, "Error occurred while sending email.");
+                //throw ex;
+            }
+        }
+
+        private Guid UpdateResponse(SurveyInfoModel SurveyInfo, ExcelWorksheet xlWorksheet, ExcelCellAddress end, int row, Guid ResponseID, out Dictionary<string, string> SurveyQuestionAnswerList)
+        {
+            XDocument SurveyXml = XDocument.Parse(SurveyInfo.XML);
+            SurveyQuestionAnswerList = new Dictionary<string, string>();
+            Epi.Web.Common.Message.PreFilledAnswerRequest request = new PreFilledAnswerRequest();
+            request.AnswerInfo.SurveyQuestionAnswerList = new Dictionary<string, string>();
+            for (int cell = 10; cell <= end.Column; cell++)
+            {
+                string ColumnName = xlWorksheet.Cells[1, cell].Value.ToString();
+                string Value = xlWorksheet.Cells[row, cell].Value.ToString();
+                request.AnswerInfo.SurveyQuestionAnswerList.Add(ColumnName, Value);
+                SurveyQuestionAnswerList.Add(ColumnName, Value);
+            }
+
+
+
+
+            Epi.Web.Common.Xml.SurveyResponseXML Implementation = new Epi.Web.Common.Xml.SurveyResponseXML(request, SurveyXml);
+            string ResponseXml = Implementation.CreateResponseDocument(SurveyXml).ToString();
+            SurveyAnswerRequest Request = new SurveyAnswerRequest();
+            SurveyAnswerDTO DTO = new SurveyAnswerDTO();
+            DTO.SurveyId = SurveyInfo.SurveyId;
+            DTO.ResponseId = ResponseID.ToString();
+            DTO.Status = 1;
+            DTO.XML = ResponseXml;
+            Request.Action = "Update";
+            Request.SurveyAnswerList.Add(DTO);
+            _isurveyFacade.SaveSurveyAnswer(Request);
+            return ResponseID;
+        }
+
+        private void CreateResponse(SurveyInfoModel SurveyInfo, out string SurveyUrl, out string strPassCode, out Guid ResponseID)
+        {
+            strPassCode = Epi.Web.MVC.Utility.SurveyHelper.GetPassCode();
+            ResponseID = Guid.NewGuid();
+            SurveyUrl = ConfigurationManager.AppSettings["ResponseURL"] + ResponseID.ToString() + "/" + strPassCode;
+
+            Epi.Web.Common.DTO.SurveyAnswerDTO SurveyAnswer = _isurveyFacade.CreateSurveyAnswer(SurveyInfo.SurveyId, ResponseID.ToString());
+            _isurveyFacade.UpdatePassCode(ResponseID.ToString(), strPassCode);
         }
 
         private bool ValidateEmail(string email)
@@ -1226,8 +1350,8 @@ namespace Epi.Web.MVC.Controllers
 
             }
 
-            
-            var info =  JsonConvert.SerializeObject(DashboardResponse);
+
+            var info = JsonConvert.SerializeObject(DashboardResponse);
             return Json(info);
 
         }
@@ -1245,7 +1369,40 @@ namespace Epi.Web.MVC.Controllers
             }
             return NewValue;
         }
-       
+        private string GetEmailInfo(Dictionary<string,string> Response, string URL)
+        {
+            
+
+            string EmailInfo = "<table width ='100%' style ='border:Solid 1px Black;'>";
+            EmailInfo += "<tr>";
+            EmailInfo += "<td stlye='color:blue;'>Survey URL</td>";
+            foreach (var row in Response) //Loop through DataGridView to get rows
+            {
+                
+              
+                    EmailInfo += "<td stlye='color:blue;'>" + row.Key + "</td>";
+              
+               
+            }
+            EmailInfo += "</tr>";
+            EmailInfo += "<tr>";
+            EmailInfo += "<td stlye='color:blue;'>" + URL + "</td>";
+            foreach (var row in Response) //Loop through DataGridView to get rows
+            {
+
+
+                EmailInfo += "<td stlye='color:blue;'>" + row.Value + "</td>";
+
+
+            }
+           EmailInfo += "</tr>";
+            EmailInfo += "</table>";
+
+
+            return EmailInfo;
+
+
+        }
         
     }
 }

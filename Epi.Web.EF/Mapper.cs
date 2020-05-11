@@ -271,12 +271,12 @@ namespace Epi.Web.EF
 
             };
         }
-        public static OrganizationBO Map(string Organization)
+        public static OrganizationBO Map(string Organization, int OrganizationId)
         {
             return new OrganizationBO
             {
-                Organization = Organization
-                 
+                Organization = Organization,
+                OrganizationId = OrganizationId
 
 
             };
@@ -501,6 +501,99 @@ namespace Epi.Web.EF
             //}
 
             return SurveyResponseBO;
+        }
+        internal static User ToUserEntity(UserBO User)
+        {
+            User UserEntity = new User();
+            UserEntity.EmailAddress = User.EmailAddress;
+            UserEntity.UserName = User.EmailAddress.ToLower();
+            UserEntity.LastName = User.LastName;
+            UserEntity.FirstName = User.FirstName;
+            UserEntity.PhoneNumber = User.PhoneNumber;
+            UserEntity.ResetPassword = User.ResetPassword;
+            UserEntity.PasswordHash = User.PasswordHash;
+            UserEntity.UGuid = User.UGuid;
+            UserEntity.UserID = User.UserId;
+           
+            return UserEntity;
+        }
+        internal static UserOrganization ToUserOrganizationEntity(bool IsActive, UserBO User, OrganizationBO Organization)
+        {
+            UserOrganization UserOrganization = new UserOrganization();
+            UserOrganization.Active = IsActive;
+
+            UserOrganization.RoleId = User.Role;
+
+            User UserInfo = new EF.User();
+            Organization OrganizationInfo = new EF.Organization();
+            UserInfo.EmailAddress = User.EmailAddress;
+            UserInfo.UserName = User.EmailAddress;
+            UserInfo.LastName = User.LastName;
+            UserInfo.FirstName = User.FirstName;
+            UserInfo.PhoneNumber = User.PhoneNumber;
+            UserInfo.ResetPassword = User.ResetPassword; //false;
+            UserInfo.PasswordHash = User.PasswordHash; //"PassWord1";
+            UserInfo.UGuid = User.UGuid;
+            UserInfo.UserID = User.UserId;
+            UserOrganization.User = UserInfo;
+
+
+            OrganizationInfo.Organization1 = Organization.Organization;
+            OrganizationInfo.IsEnabled = Organization.IsEnabled;
+            OrganizationInfo.OrganizationKey = Organization.OrganizationKey;
+
+            UserOrganization.Organization = OrganizationInfo;
+
+            return UserOrganization;
+        }
+
+        internal static UserOrganization ToUserOrganizationEntity(bool IsActive, int UserId, int RoleId, OrganizationBO Organization)
+        {
+            UserOrganization UserOrganization = new UserOrganization();
+            UserOrganization.Active = IsActive;
+
+            UserOrganization.RoleId = RoleId;
+            UserOrganization.UserID = UserId;
+
+            Organization OrganizationInfo = new EF.Organization();
+
+
+
+            OrganizationInfo.Organization1 = Organization.Organization;
+            OrganizationInfo.IsEnabled = Organization.IsEnabled;
+            OrganizationInfo.OrganizationKey = Organization.OrganizationKey;
+            OrganizationInfo.OrganizationId = Organization.OrganizationId;
+            UserOrganization.Organization = OrganizationInfo;
+
+            return UserOrganization;
+        }
+        internal static UserOrganization ToUserOrganizationEntity(UserBO User, OrganizationBO Organization)
+        {
+            UserOrganization UserOrganization = new UserOrganization();
+            UserOrganization.Active = User.IsActive;
+            UserOrganization.RoleId = User.Role;
+            UserOrganization.OrganizationID = Organization.OrganizationId;
+            UserOrganization.UserID = User.UserId;
+            //UserOrganization.Role = User.Role;
+            return UserOrganization;
+        }
+        public static UserBO MapToUserBO(User user, int Role = 0)
+        {
+            UserBO Result = new UserBO();
+            Result.UserId = user.UserID;
+            Result.UserName = user.UserName;
+            Result.EmailAddress = user.EmailAddress;
+            Result.FirstName = user.FirstName;
+            Result.LastName = user.LastName;
+            Result.PhoneNumber = user.PhoneNumber;
+            Result.ResetPassword = user.ResetPassword;
+            Result.UserId = user.UserID;
+            Result.Role = Role;
+            if (!string.IsNullOrEmpty(user.UGuid.ToString()))
+            {
+                Result.UGuid = Guid.Parse(user.UGuid.ToString());
+            }
+            return Result;
         }
     }
 }

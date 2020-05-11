@@ -31,6 +31,6 @@ namespace Epi.Web.Common.DTO
             set { _IsEnabled = value; }
         }
 
-
+        public int OrganizationId { get;  set; }
     }
 }

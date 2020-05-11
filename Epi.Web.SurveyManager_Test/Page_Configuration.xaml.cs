@@ -181,7 +181,7 @@ namespace Epi.Web.SurveyManager.Client
 
             if (ServiceVersion == 1)
                 {
-                    SurveyManagerService.ManagerServiceClient Client = ServiceClient.GetClient(pEndPointAddress, pIsAuthenticated, pIsWsHTTPBinding);
+                    SurveyManagerServiceV4.ManagerServiceV4Client Client = ServiceClient.GetClientV4(pEndPointAddress, pIsAuthenticated, pIsWsHTTPBinding);
                     Epi.Web.Common.Message.OrganizationRequest Request = new Epi.Web.Common.Message.OrganizationRequest();
                      var Result  = Client.GetOrganization(Request);
                 }
@@ -196,8 +196,14 @@ namespace Epi.Web.SurveyManager.Client
                 SurveyManagerServiceV3.ManagerServiceV3Client Client = ServiceClient.GetClientV3(pEndPointAddress, pIsAuthenticated, pIsWsHTTPBinding);
                 Epi.Web.Common.Message.OrganizationRequest Request = new Epi.Web.Common.Message.OrganizationRequest();
                 var Result = Client.GetOrganization(Request);
-            }  
-            this.PingResultTextBox.Text = "Successfully Created Service Client";
+            }
+                else if (ServiceVersion == 4)
+                {
+                    SurveyManagerServiceV4.ManagerServiceV4Client Client = ServiceClient.GetClientV4(pEndPointAddress, pIsAuthenticated, pIsWsHTTPBinding);
+                    Epi.Web.Common.Message.OrganizationRequest Request = new Epi.Web.Common.Message.OrganizationRequest();
+                    var Result = Client.GetOrganization(Request);
+                }
+                this.PingResultTextBox.Text = "Successfully Created Service Client";
             
             this.PingResultTextBox.Text = "Successfully Created Service Client";
             }

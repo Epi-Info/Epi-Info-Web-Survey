@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27004.2009
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29123.88
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epi.Web", "Epi.Web\Epi.Web.csproj", "{91794FFF-48C0-414F-933E-34412A29EEAC}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -41,6 +41,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epi.Web.WCF.SurveyService", "SurveyManagerInterface\Epi.Web.WCF.SurveyService.csproj", "{31F91938-2997-4650-8D36-71C845F1071D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epi.Web.SurveyManager.Client", "Epi.Web.SurveyManager_Test\Epi.Web.SurveyManager.Client.csproj", "{13D8FD8D-1403-4C84-823A-1E27806CAC30}"
+	ProjectSection(ProjectDependencies) = postProject
+		{BEFC85E4-F3A3-4108-9575-4EF1A004364E} = {BEFC85E4-F3A3-4108-9575-4EF1A004364E}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -222,7 +225,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {90BC8E71-8799-4A31-90F1-9C35C40CF1F0}
 		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.0\lib\NET35
+		SolutionGuid = {90BC8E71-8799-4A31-90F1-9C35C40CF1F0}
 	EndGlobalSection
 EndGlobal

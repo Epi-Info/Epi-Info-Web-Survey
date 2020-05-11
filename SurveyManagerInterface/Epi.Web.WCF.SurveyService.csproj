@@ -41,9 +41,6 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Epi.Web.BLL">
-      <HintPath>..\Epi.Web\bin\Epi.Web.BLL.dll</HintPath>
-    </Reference>
     <Reference Include="Epi.Web.Interfaces, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Epi.Web\bin\Epi.Web.Interfaces.dll</HintPath>
@@ -66,15 +63,17 @@
     <Compile Include="Interfaces\IManagerServiceV2.cs" />
     <Compile Include="Interfaces\IManagerServiceV3.cs" />
     <Compile Include="Interfaces\IManagerServiceV4.cs" />
-    <Compile Include="Interfaces\IManagerServiceV5.cs" />
     <Compile Include="ManagerServiceV2.cs" />
     <Compile Include="ManagerServiceV3.cs" />
     <Compile Include="ManagerServiceV4.cs" />
-    <Compile Include="ManagerServiceV5.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ManagerService.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\EIWS_BLL_Core\Epi.Web.BLL.csproj">
+      <Project>{d49b7a21-644b-49d7-9a5d-387bf31eafe5}</Project>
+      <Name>Epi.Web.BLL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Epi.Web.Common\Epi.Web.Common.csproj">
       <Project>{6e2f059b-c1cd-401f-8a63-dc2933cfb0d8}</Project>
       <Name>Epi.Web.Common</Name>
