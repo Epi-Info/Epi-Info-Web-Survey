@@ -69,7 +69,8 @@ namespace Epi.Web.Common.Email
 
                 message.Subject = Email.Subject;
                 message.From =  new System.Net.Mail.MailAddress(Email.From.ToString());
-                message.Body = Email.Body;  
+                message.Body = Email.Body;
+                message.IsBodyHtml = true;
                 System.Net.Mail.SmtpClient smtp = new System.Net.Mail.SmtpClient(ConfigurationManager.AppSettings["SMTP_HOST"].ToString());
                 smtp.Port = SMTPPort;
 

@@ -22,8 +22,8 @@
     <SccProvider>{4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}</SccProvider>
     <IISExpressSSLPort>
     </IISExpressSSLPort>
-    <IISExpressAnonymousAuthentication>disabled</IISExpressAnonymousAuthentication>
-    <IISExpressWindowsAuthentication>enabled</IISExpressWindowsAuthentication>
+    <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
     <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
     <UseGlobalApplicationHostFile />
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
@@ -53,10 +53,6 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Epi.Web.EF, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Epi.Web.EF.dll</HintPath>
-    </Reference>
     <Reference Include="Epi.Web.Interfaces, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Epi.Web.Interfaces.dll</HintPath>
@@ -211,6 +207,7 @@
     <Compile Include="Controllers\PrintController.cs" />
     <Compile Include="Controllers\SurveyResponseController.cs" />
     <Compile Include="MessageHandlers\APIKeyHandler.cs" />
+    <Compile Include="Models\BulkResponsesModel.cs" />
     <Compile Include="Models\FormInfoModel.cs" />
     <Compile Include="Models\FormResponseInfoModel.cs" />
     <Compile Include="Models\PrintModel.cs" />
@@ -521,6 +518,11 @@
     <Content Include="Properties\DataSources\Epi.Web.Common.Message.DashboardResponse.datasource" />
     <Content Include="Properties\DataSources\Epi.Web.Common.Message.FormsHierarchyResponse.datasource" />
     <Content Include="Properties\DataSources\Epi.Web.Common.Message.SourceTablesResponse.datasource" />
+    <Content Include="Properties\DataSources\Epi.Web.Common.Message.OrganizationResponse.datasource" />
+    <Content Include="Properties\DataSources\Epi.Web.Common.Message.PreFilledAnswerResponse.datasource" />
+    <Content Include="Properties\DataSources\Epi.Web.Common.Message.PublishResponse1.datasource" />
+    <Content Include="Properties\DataSources\Epi.Web.Common.Message.UserResponse.datasource" />
+    <Content Include="Content\Text\EmailList-Bulk.xlsx" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
@@ -595,7 +597,6 @@
     <Content Include="SurveyManagerServiceV2.svc" />
     <Content Include="SurveyManagerServiceV3.svc" />
     <Content Include="SurveyManagerServiceV4.svc" />
-    <Content Include="SurveyManagerServiceV5.svc" />
     <Content Include="Unity.Mvc3.README.txt" />
     <Content Include="Views\Shared\footer.htm" />
     <Content Include="Views\Shared\header.htm" />
@@ -690,6 +691,10 @@
     <ProjectReference Include="..\Epi.Web.Common\Epi.Web.Common.csproj">
       <Project>{6e2f059b-c1cd-401f-8a63-dc2933cfb0d8}</Project>
       <Name>Epi.Web.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Epi.Web.EF\Epi.Web.EF.csproj">
+      <Project>{05a484ab-a555-4200-936b-bec573285bcc}</Project>
+      <Name>Epi.Web.EF</Name>
     </ProjectReference>
     <ProjectReference Include="..\Epi.Web.EF\Epi.Web.EF.csproj">
       <Project>{05a484ab-a555-4200-936b-bec573285bcc}</Project>

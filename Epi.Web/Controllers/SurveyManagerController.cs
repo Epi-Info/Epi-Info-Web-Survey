@@ -656,7 +656,7 @@ namespace Epi.Web.MVC.Controllers
                                 {
                                     Body.AppendLine();
                                     Body.Append( GetEmailInfo(SurveyQuestionAnswerList, SurveyUrl));
-                                    SendEmail(Subject, Body.ToString(), Sender, xlWorksheet, row, UserEamil, SurveyUrl); //Initial  email 
+                                    SendEmail(Subject, Body.ToString(), Sender, xlWorksheet, row, UserEamil); //Initial  email 
 
                                 }
                                 else
@@ -664,7 +664,7 @@ namespace Epi.Web.MVC.Controllers
                                     if (ResponseStatuse != 3)
                                     {
 
-                                        SendEmail(Subject2, Body2.ToString(), Sender2, xlWorksheet, row, UserEamil, SurveyUrl);  //Reminder email 
+                                        SendEmail(Subject2, Body2.ToString(), Sender2, xlWorksheet, row, UserEamil);  //Reminder email 
 
                                     }
                                     var _ResponseStatus = GetStatus(ResponseStatuse);
@@ -678,7 +678,10 @@ namespace Epi.Web.MVC.Controllers
                         }
                         else
                         {
-                            xlWorksheet.SetValue(row, 9, "Email address is not valid. Please check email address and try again.");
+                            if (!string.IsNullOrEmpty(xlWorksheet.Cells[row, 2].Text))
+                            {
+                                xlWorksheet.SetValue(row, 9, "Email address is not valid. Please check email address and try again.");
+                            }
                         }
 
                     }
@@ -692,9 +695,10 @@ namespace Epi.Web.MVC.Controllers
                     // validate email Address
                     bool IsValid = ValidateEmail(xlWorksheet.Cells[2, 2].Text);
                     string UserEamil = xlWorksheet.Cells[2, 2].Text;
-                    List<string> URL_List = new List<string>();
-                    Dictionary<int, string> DateCompleted_List = new Dictionary<int, string>();
+                   
+                    string Initial = xlWorksheet.Cells[2, 3].Text;
 
+                    List<BulkResponsesModel> BulkResponsesModelList = new List<BulkResponsesModel>();
                     int ResponseStatuse = 1;
                     for (int row = 2; row <= end.Row; row++)
                     {
@@ -750,10 +754,25 @@ namespace Epi.Web.MVC.Controllers
                             {
                                 // Get Response status
                                 GetResponseStatus(model, _ResponseId, out SurveyUrl, out ResponseStatuse, out DateCompleted); //GetResponseStatus
-                                DateCompleted_List.Add(row, DateCompleted);
+                                
+                                
                             }
 
-                            URL_List.Add(SurveyUrl);
+                            var _ResponseStatus = GetStatus(ResponseStatuse);
+                            xlWorksheet.SetValue(row, 4, _ResponseStatus);
+                            xlWorksheet.SetValue(row, 8, DateCompleted);
+
+
+                            BulkResponsesModel BulkResponsesModel = new BulkResponsesModel();
+
+                            BulkResponsesModel.Url = SurveyUrl;
+                            BulkResponsesModel.SurveyQuestionAnswerList = SurveyQuestionAnswerList;
+                            BulkResponsesModel.DateCompleted = DateCompleted;
+                            BulkResponsesModel.Status = ResponseStatuse;
+                           BulkResponsesModelList.Add(BulkResponsesModel);
+                          
+                       
+
                         }
                         else
                         {
@@ -761,40 +780,48 @@ namespace Epi.Web.MVC.Controllers
                         }
                     }
 
-                    if (URL_List.Count > 0 && DoSend == 1)
+                      if (BulkResponsesModelList.Count > 0 && DoSend == 1)
                     {
+                        int InitialEmailCounter = 0;
+                        int ReminderEmailCounter = 0;
 
-                        string SurveyUrl = GetUrlstring(URL_List);
-
-
-                        if (ResponseStatuse < 3)
+                        foreach (var item in BulkResponsesModelList)
                         {
-                            SendEmail(Subject, Body.ToString(), Sender, xlWorksheet, 2, UserEamil, SurveyUrl); //Initial  email 
-
-                        }
-                        else
-                        {
-                            if (ResponseStatuse != 3)
+                            if (item.Status < 3 && string.IsNullOrEmpty(Initial)) //Initial  email 
                             {
-
-                                SendEmail(Subject2, Body2.ToString(), Sender2, xlWorksheet, 2, UserEamil, SurveyUrl);  //Reminder email 
-
+                                Body.AppendLine();
+                                Body.Append(GetEmailInfo(item.SurveyQuestionAnswerList, item.Url));
+                                InitialEmailCounter++;
                             }
-
-
-
-
+                            else
+                            { 
+                                if (item.Status != 3) //Reminder email 
+                                {
+                                    Body2.AppendLine();
+                                    Body2.Append(GetEmailInfo(item.SurveyQuestionAnswerList, item.Url));
+                                    ReminderEmailCounter++;
+                                }
                         }
-
-                        for (int row = 2; row <= end.Row; row++)
+                        }
+                      //  SendEmail(Subject, Body.ToString(), Sender, xlWorksheet, 2, UserEamil); //Initial  email 
+                        if (InitialEmailCounter > 0)
                         {
-                            var _ResponseStatus = GetStatus(ResponseStatuse);
-                            xlWorksheet.SetValue(row, 4, _ResponseStatus);
-                            if (DateCompleted_List.ContainsKey(row))
-                            {
-                                xlWorksheet.SetValue(row, 8, DateCompleted_List[row]);
-                            }
+
+                            SendEmail(Subject, Body.ToString(), Sender, xlWorksheet, 2, UserEamil); //Initial  email 
+
                         }
+                      
+                        if (ReminderEmailCounter >0)
+                        {
+
+                            SendEmail(Subject2, Body2.ToString(), Sender2, xlWorksheet, 2, UserEamil);  //Reminder email 
+
+                        }
+
+
+
+
+                      
 
                     }
 
@@ -842,7 +869,7 @@ namespace Epi.Web.MVC.Controllers
             SurveyUrl = ConfigurationManager.AppSettings["ResponseURL"] + SurveyResponse.ResponseId.ToString() + "/" + SurveyResponse.PassCode;
         }
 
-        private static void SendEmail(string Subject, string Body, string Sender, ExcelWorksheet xlWorksheet, int row, string UserEamil, string SurveyUrl)
+        private static void SendEmail(string Subject, string Body, string Sender, ExcelWorksheet xlWorksheet, int row, string UserEamil)
         {
             try
             {

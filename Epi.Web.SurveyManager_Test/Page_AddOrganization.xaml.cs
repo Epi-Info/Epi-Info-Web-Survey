@@ -25,13 +25,15 @@ namespace Epi.Web.SurveyManager.Client
     {
         private static string _ConfigurationAdminCode;
         private string _AdminKey;
-        public Page_AddOrganization(string AdminKey)
+        private string _Organization;
+        public Page_AddOrganization(string AdminKey,string Organization)
         {
             InitializeComponent();
             if (!string.IsNullOrEmpty(AdminKey))
             {
 
                 _AdminKey = AdminKey;
+                _Organization = Organization;
                 passwordBox1.Password = _AdminKey;
                 GetOrganizationNames();
             }
@@ -60,7 +62,7 @@ namespace Epi.Web.SurveyManager.Client
                 }
             }
 
-
+            this.OnamelistBox1.SelectedItem = _Organization;
 
         }
         public Page_AddOrganization()
@@ -145,8 +147,7 @@ namespace Epi.Web.SurveyManager.Client
 
                             if (ServiceVersion == 1)
                             {
-                                Page_AddUser Page_AddUser = new Page_AddUser(new Guid(this.GeneratedkeytextBox1.Text.ToString()), new Guid(passwordBox1.Password), OrganizationtextBox1.Text,"",false);
-                                this.NavigationService.Navigate(Page_AddUser);
+                                 
 
                                 SurveyManagerService.ManagerServiceClient Client = ServiceClient.GetClient();
 
@@ -156,9 +157,16 @@ namespace Epi.Web.SurveyManager.Client
                                 GeneratedkeytextBox1.Clear();
                                 if (Result.Message.ToString().Contains("Successfully"))
                                 {
+                                    Page_AddUser Page_AddUser = new Page_AddUser(new Guid(this.GeneratedkeytextBox1.Text.ToString()), new Guid(passwordBox1.Password), OrganizationtextBox1.Text, "", false);
+                                    this.NavigationService.Navigate(Page_AddUser);
                                     richTextBox1.Foreground = Brushes.Green;
+                                    richTextBox1.AppendText(Result.Message.ToString());
                                 }
-                                richTextBox1.AppendText(Result.Message.ToString());
+                                else
+                                {
+                                    richTextBox1.Foreground = Brushes.Red;
+                                    richTextBox1.AppendText(Result.Message.ToString());
+                                }
                             }
                             else if (ServiceVersion == 2)
                             {
@@ -170,9 +178,16 @@ namespace Epi.Web.SurveyManager.Client
                                 GeneratedkeytextBox1.Clear();
                                 if (Result.Message.ToString().Contains("Successfully"))
                                 {
+                                    Page_AddUser Page_AddUser = new Page_AddUser(new Guid(this.GeneratedkeytextBox1.Text.ToString()), new Guid(passwordBox1.Password), OrganizationtextBox1.Text, "", false);
+                                    this.NavigationService.Navigate(Page_AddUser);
                                     richTextBox1.Foreground = Brushes.Green;
+                                    richTextBox1.AppendText(Result.Message.ToString());
                                 }
-                                richTextBox1.AppendText(Result.Message.ToString());
+                                else
+                                {
+                                    richTextBox1.Foreground = Brushes.Red;
+                                    richTextBox1.AppendText(Result.Message.ToString());
+                                }
                             }
                             else if (ServiceVersion == 3)
                             {
@@ -186,11 +201,18 @@ namespace Epi.Web.SurveyManager.Client
                                 GeneratedkeytextBox1.Clear();
                                 if (Result.Message.ToString().Contains("Successfully"))
                                 {
+                                    Page_AddUser Page_AddUser = new Page_AddUser(new Guid(this.GeneratedkeytextBox1.Text.ToString()), new Guid(passwordBox1.Password), OrganizationtextBox1.Text, "", false);
+                                    this.NavigationService.Navigate(Page_AddUser);
                                     richTextBox1.Foreground = Brushes.Green;
+                                    richTextBox1.AppendText(Result.Message.ToString());
                                 }
-                                richTextBox1.AppendText(Result.Message.ToString());
+                                else
+                                {
+                                    richTextBox1.Foreground = Brushes.Red;
+                                    richTextBox1.AppendText(Result.Message.ToString());
+                                }
                             }
-                            else if (ServiceVersion == 5)
+                            else if (ServiceVersion == 4)
                             {
 
 
@@ -202,9 +224,16 @@ namespace Epi.Web.SurveyManager.Client
                                 GeneratedkeytextBox1.Clear();
                                 if (Result.Message.ToString().Contains("Successfully"))
                                 {
+                                    Page_AddUser Page_AddUser = new Page_AddUser(new Guid(this.GeneratedkeytextBox1.Text.ToString()), new Guid(passwordBox1.Password), OrganizationtextBox1.Text, "", false);
+                                    this.NavigationService.Navigate(Page_AddUser);
                                     richTextBox1.Foreground = Brushes.Green;
+                                    richTextBox1.AppendText(Result.Message.ToString());
                                 }
-                                richTextBox1.AppendText(Result.Message.ToString());
+                                else
+                                {
+                                    richTextBox1.Foreground = Brushes.Red;
+                                    richTextBox1.AppendText(Result.Message.ToString());
+                                }
                             }
                         }
                         else
@@ -328,8 +357,30 @@ namespace Epi.Web.SurveyManager.Client
 
 
         }
+        private void GetKey_KeyUp(object sender, KeyEventArgs e)
+        {
+            CollectionView itemsViewOriginal = (CollectionView)CollectionViewSource.GetDefaultView(OnamelistBox1.Items);
 
-        private void GetOrganizationNames_Clik(object sender, RoutedEventArgs e)
+            itemsViewOriginal.Filter = ((o) =>
+            {
+                if (String.IsNullOrEmpty(OnamelistBox1.Text)) return true;
+                else
+                {
+                    if (((string)o).Contains(OnamelistBox1.Text)) return true;
+                    else return false;
+                }
+            });
+
+            itemsViewOriginal.Refresh();
+
+            // if datasource is a DataView, then apply RowFilter as below and replace above logic with below one
+            /* 
+             DataView view = (DataView) Cmb.ItemsSource; 
+             view.RowFilter = ("Name like '*" + Cmb.Text + "*'"); 
+            */
+        }
+    
+    private void GetOrganizationNames_Clik(object sender, RoutedEventArgs e)
         {
 
             //  GetOrgUsers();

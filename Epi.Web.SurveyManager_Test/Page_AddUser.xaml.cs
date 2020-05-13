@@ -134,7 +134,7 @@ namespace Epi.Web.SurveyManager.Client
                 //Message.Foreground = Brushes.Green;
                 //Message.Text = "Successfully added a user";
 
-                Page_AddOrganization Page_AddUser = new Page_AddOrganization(_AdminKey.ToString());
+                Page_AddOrganization Page_AddUser = new Page_AddOrganization(_AdminKey.ToString(), _OrganizationName.ToString());
                 this.NavigationService.Navigate(Page_AddUser);
 
             }
@@ -147,7 +147,7 @@ namespace Epi.Web.SurveyManager.Client
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            Page_AddOrganization Page_AddUser = new Page_AddOrganization(_AdminKey.ToString());
+            Page_AddOrganization Page_AddUser = new Page_AddOrganization(_AdminKey.ToString(), _OrganizationName.ToString());
             this.NavigationService.Navigate(Page_AddUser);
         }
     }

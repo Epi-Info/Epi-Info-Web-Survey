@@ -115,11 +115,22 @@ namespace Epi.Web.MVC.Utility
                         string formJavaScript = GetFormJavaScript(checkcode, form, fieldElement.Attribute("Name").Value);
                         JavaScript.Append(formJavaScript);
                     }
+                    ///JavaScript POC start
 
+                    if (checkcode.Contains("Script-Start") && checkcode.Contains("Script-End"))
+                    {
+                        var startTag = "Script-Start";
+                        int startIndex = checkcode.IndexOf(startTag) + startTag.Length;
+                        int endIndex = checkcode.IndexOf("Script-End", startIndex);
+                        var Script = checkcode.Substring(startIndex, endIndex - startIndex);
+                        JavaScript.Append(Script);
+                    }
+
+                    ///JavaScript POC End 
 
                     AddFormFields(pageNumber, form, surveyAnswer, SourceTableList,isMobile);
                     form.FormJavaScript = VariableDefinitions.ToString() + "\n" + JavaScript.ToString();
-
+                   
                 }
 
                 if (enableFormCaching)

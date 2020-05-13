@@ -22,7 +22,7 @@
             <GroupBox Header="Admin Key" Name="groupBox1" Width="551" Background="#FFE5E19E" Margin="33,82,45,544" FontWeight="Bold"/>
             <Label Content="Admin Key:" Height="28" Name="label1" Margin="48,105,491,559" />
             <Button Content="Generate Key" Height="23" HorizontalAlignment="Left" Margin="193,245,0,0" Name="GenerateKey" VerticalAlignment="Top" Width="130" Click="GenerateKey_Clik" />
-            <GroupBox Header="Get Organization Key" Height="391" HorizontalAlignment="Left" Margin="35,281,0,0" Name="groupBox3" VerticalAlignment="Top" Width="549" Background="#FFE5E19E" FontSize="13.333" FontWeight="Bold"/>
+            <GroupBox Header="Organization Management" Height="391" HorizontalAlignment="Left" Margin="35,281,0,0" Name="groupBox3" VerticalAlignment="Top" Width="549" Background="#FFE5E19E" FontSize="13.333" FontWeight="Bold"/>
             <RichTextBox Foreground="#FFF20909" Height="35" HorizontalAlignment="Left" Margin="112,607,0,0" Name="richTextBox1" VerticalAlignment="Top" VerticalScrollBarVisibility="Visible" Width="467" RenderTransformOrigin="0.494,0.469" TextChanged="RichTextBox1_TextChanged" />
             <Label Content="Message:" Height="28" HorizontalAlignment="Left" Margin="48,614,0,0" Name="label7" VerticalAlignment="Top" />
             <Label Content="Organization Name:" Height="28" HorizontalAlignment="Left" Margin="51,424,0,240" Name="label8" Width="117" />
@@ -47,7 +47,7 @@
             <Label Content="Organization Name:" Height="28" HorizontalAlignment="Left" Margin="48,330,0,334" x:Name="label4" Width="126" />
             <Button Content="Copy" Height="23" Margin="505,363,50,0" x:Name="GetKey" VerticalAlignment="Top" Click="Copy_Clik" ToolTip="Copy to Clipboard" />
             <Label Content="Organization Key:" Height="28" HorizontalAlignment="Left" Margin="48,358,0,306" x:Name="label5" Width="158" />
-            <ComboBox   Height="25" HorizontalAlignment="Left" Margin="192,330,0,0" x:Name="OnamelistBox1" VerticalAlignment="Top" Width="308" AllowDrop="True" SelectionChanged="GetKey_Clik" SelectedIndex="0" />
+            <ComboBox   Height="25" HorizontalAlignment="Left" Margin="192,330,0,0" x:Name="OnamelistBox1" VerticalAlignment="Top" Width="308" AllowDrop="True"  KeyUp="GetKey_KeyUp"  IsDropDownOpen="True"   StaysOpenOnEdit="True"  SelectionChanged="GetKey_Clik" IsTextSearchEnabled="False" IsEditable="True" SelectedIndex="0" />
             <TextBox Background="#FFD8D5D5" Height="23" HorizontalAlignment="Right" IsReadOnly="True" Margin="0,363,129,0" x:Name="EditOtextBox1" VerticalAlignment="Top" Width="308" />
         </Grid>
     </ScrollViewer>
