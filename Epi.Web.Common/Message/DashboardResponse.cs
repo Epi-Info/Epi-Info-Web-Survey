@@ -19,7 +19,8 @@ namespace Epi.Web.Common.Message
         }
         [DataMember]
         public SurveyInfoDTO SurveyInfo;
-
+        [DataMember]
+        public int DownloadedRecordCount { get; set; }
 
         [DataMember]
         public int RecordCount { get; set; }

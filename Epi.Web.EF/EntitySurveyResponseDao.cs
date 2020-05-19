@@ -1713,6 +1713,10 @@ namespace Epi.Web.EF
                                  where response.SurveyId == Id && response.StatusId == 1
                                  select response.SurveyId;
                     SurveyDashboardBO.StartedRecordCount = Query3.Count();
+                    var Query5 = from response in Context.SurveyResponses
+                                 where response.SurveyId == Id && response.StatusId == 4
+                                 select response.SurveyId;
+                    SurveyDashboardBO.DownloadedRecordCount = Query5.Count();
 
                     var Query4 = //(
                                         from response in Context.SurveyResponses

@@ -19,6 +19,8 @@ namespace Epi.Web.Common
         public int SavedRecordCount { get; set; }
         [DataMember]
         public Dictionary<string, int> RecordCountPerDate { get; set; }
+        [DataMember]
+        public int DownloadedRecordCount { get; set; }
     }
 }
     
