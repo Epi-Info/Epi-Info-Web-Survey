@@ -1364,6 +1364,35 @@ namespace Epi.Web.MVC.Controllers
 
 
         }
+        [HttpPost]
+        public JsonResult GetJsonResponse(string surveyid,string PublisherKey,bool IsDraft)
+        {
+
+            var _PublisherKey = GetUserPublishKey(surveyid);
+
+            if (_PublisherKey.ToLower() == PublisherKey.ToLower())
+            {
+
+                var jsonContent = SqlHelper.GetSurveyJsonData(surveyid, IsDraft);
+            return Json(jsonContent);
+            }
+            else
+            {
+
+                return Json(false);
+            }
+
+        }
+         
+        [HttpPost]
+        public JsonResult GetJsonHeader(string surveyid, string PublisherKey, bool IsDraft)
+        {
+             
+                var jsonContent = SqlHelper.GetHeadData(surveyid);
+                return Json(jsonContent);
+            
+
+        }
         public JsonResult GetDashboardInfo(string surveyid)
         {
 

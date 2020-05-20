@@ -445,8 +445,13 @@
     {
 
             var SurveyId = $('#SurveyKey').val();
+        var PublisherKey = $('#UserPublishKey').val();
+     
+        if ($('#SurveyMode').val() == 0) {
+            IsDraft = true;
 
-            var ActionUrl = '@Url.Action("GetJsonHeader", "SurveyManager")' + '?surveyid=' + SurveyId;
+        } else { IsDraft = false}
+            var ActionUrl = '@Url.Action("GetJsonHeader", "SurveyManager")' + '?surveyid=' + SurveyId + '&PublisherKey=' + PublisherKey +'&IsDraft=' + IsDraft;
 
             $.ajax({
                 url: ActionUrl,
@@ -464,6 +469,7 @@
             {
 
                //alert(data)
+              
                 $('#JsonHeadder').val(data);
             }
             function errorFunc(data) {
@@ -474,9 +480,15 @@
      function GetJsonResponse()
      {
           GetJsonHeader()
-            var SurveyId = $('#SurveyKey').val();
+          var SurveyId = $('#SurveyKey').val();
+          var PublisherKey = $('#UserPublishKey').val();
 
-            var ActionUrl = '@Url.Action("GetJsonResponse", "SurveyManager")' + '?surveyid=' + SurveyId;
+         
+
+        if ($('#SurveyMode').val() == 0) {
+            IsDraft = true;
+            } else { IsDraft = false}
+            var ActionUrl = '@Url.Action("GetJsonResponse", "SurveyManager")' + '?surveyid=' + SurveyId + '&PublisherKey=' + PublisherKey +'&IsDraft=' + IsDraft;
 
             $.ajax({
                 url: ActionUrl,
@@ -492,18 +504,26 @@
             });
             function successFunc(data)
             {
+               
+                if (JSON.stringify(data) != 'false') {
 
-                var FileName = $('#FileName').val();
-               // alert(FileName);
+                     $('#UserPublishKey').removeClass('input-validation-error');
+                    $('#DownloadError').text('');
 
-                var Headder =$.parseJSON( $('#JsonHeadder').val());
-              
-                var obj = $.parseJSON(data);
-              
+                    var FileName = $('#FileName').val();
+                    var Headder = $.parseJSON($('#JsonHeadder').val());
+                    var obj = $.parseJSON(data);
+                    exportCSVFile(Headder, obj, FileName);
+                }
+                else
 
-
-               exportCSVFile(Headder, obj, FileName); 
-
+                {
+                    
+                    //alert('Please validate the Security Token and try again');
+                    //input-validation-error valerr
+                    $('#UserPublishKey').addClass('input-validation-error');
+                    $('#DownloadError').text('Please validate the Security Token and try again');
+                }
             }
             function errorFunc(data) {
                 alert('failed');
@@ -530,7 +550,8 @@
     return str;
   }
 
-function exportCSVFile(headers, items, fileTitle) {
+    function exportCSVFile(headers, items, fileTitle) {
+
     if (headers) {
         items.unshift(headers);
     }
@@ -539,24 +560,31 @@ function exportCSVFile(headers, items, fileTitle) {
     var jsonObject = JSON.stringify(items);
  
     var csv = convertToCSV(jsonObject);
+        
+      //  alert(items.length)
+    if (items.length> 1 ) {
+        var exportedFilenmae = fileTitle + '.csv'; //|| 'export.csv';
 
-    var exportedFilenmae = fileTitle + '.csv'; //|| 'export.csv';
-   
-    var blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-    if (navigator.msSaveBlob) { // IE 10+
-        navigator.msSaveBlob(blob, exportedFilenmae);
-    } else {
-        var link = document.createElement("a");
-        if (link.download !== undefined) { // feature detection
-            // Browsers that support HTML5 download attribute
-            var url = URL.createObjectURL(blob);
-            link.setAttribute("href", url);
-            link.setAttribute("download", exportedFilenmae);
-            link.style.visibility = 'hidden';
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
+        var blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+        if (navigator.msSaveBlob) { // IE 10+
+            navigator.msSaveBlob(blob, exportedFilenmae);
+        } else {
+            var link = document.createElement("a");
+            if (link.download !== undefined) { // feature detection
+                // Browsers that support HTML5 download attribute
+                var url = URL.createObjectURL(blob);
+                link.setAttribute("href", url);
+                link.setAttribute("download", exportedFilenmae);
+                link.style.visibility = 'hidden';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
         }
+    } else {
+
+        alert("No records found for the download criteria entered.")
+
     }
 }
 
@@ -885,18 +913,20 @@ function exportCSVFile(headers, items, fileTitle) {
 
                             <h1>Download responses</h1>
                             <p id="RequiredLable" class="requiredField">* indicates required fields</p>
+                            
+
                             <div class="accountdiv">
 
                                 @*<p style="text-align:center;margin-top: 0;margin-bottom: 0px; font-size: 9pt; font-weight:bold;">
-                                        Epi Info Web Survey Download Tool (.CSV)
-                                    </p>
-                                    <br><br>
-                                    <p style="text-align:right;margin-top: 0;margin-bottom: -29px; font-size: 9pt; font-weight:bold;">* indicates required fields</p>*@
+                Epi Info Web Survey Download Tool (.CSV)
+            </p>
+            <br><br>
+            <p style="text-align:right;margin-top: 0;margin-bottom: -29px; font-size: 9pt; font-weight:bold;">* indicates required fields</p>*@
 
                                 <div>
                                     @*<label class="accountlabel" id="OrgKeylabel">*Organization Key:</label><br>
-                                        @Html.TextBoxFor(m => m.OrganizationKey, new { @class = "Account" }) <br>
-                                        @Html.ValidationMessageFor(m => m.OrganizationKey, null, new { @class = "required" })<br>*@
+                @Html.TextBoxFor(m => m.OrganizationKey, new { @class = "Account" }) <br>
+                @Html.ValidationMessageFor(m => m.OrganizationKey, null, new { @class = "required" })<br>*@
 
                                     <label class="accountlabel" id="SurveyIdlabel"><span style="color:#900000;">*</span> Survey Id:</label><br>
 
@@ -911,7 +941,8 @@ function exportCSVFile(headers, items, fileTitle) {
                                         /**/
 
                                         @Html.TextBoxFor(m => m.UserPublishKey, new { @class = "Account" }) <br>
-                                        @Html.ValidationMessageFor(m => m.UserPublishKey, null)<br>
+                                        @Html.ValidationMessageFor(m => m.UserPublishKey, null)<p id="DownloadError" class="requiredField"></p><br>
+
                                     }
 
                                     <label class="accountlabel" id="FileName1"><span style="color:#900000;">*</span> Survey Mode:</label><br>
@@ -928,8 +959,8 @@ function exportCSVFile(headers, items, fileTitle) {
 
                                 </div>
                                 @*<div id="spinner">
-                                        Working on your request...
-                                    </div>*@
+                Working on your request...
+            </div>*@
 
                                 <br />
 

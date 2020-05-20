@@ -58,12 +58,13 @@ namespace Epi.Web.MVC.Utility
                 }
                 Dictionary<string, string> NewKeys = new Dictionary<string, string>();
 
-
+                NewKeys.Add("MetaData_ResponseStatus", "MetaData_ResponseStatus");
                 foreach (var key in keys) {
 
                     NewKeys.Add(key, key);
 
                 }
+                
                 var json = JsonConvert.SerializeObject(NewKeys);
 
                 return json;
@@ -75,9 +76,29 @@ namespace Epi.Web.MVC.Utility
 
         }
 
+        private static string GetStatus(int responseStatuse)
+        {
+            switch (responseStatuse)
+            {
+                case 1:
+                    return "InProgress";
+                    break;
+                case 2:
+                    return "Saved";
+                    break;
+                case 3:
+                    return "Submited";
+                    break;
+                case 4:
+                    return "Downloadeded";
+                    break;
+                default:
+                    return "";
+                    break;
+            }
+        }
 
-
-        public static string GetSurveyJsonData(string surveyid)
+        public static string GetSurveyJsonData(string surveyid , bool IsDraft)
         {
             SqlConnection conn = new SqlConnection(DataObjectFactory._ADOConnectionString);
 
@@ -89,7 +110,7 @@ namespace Epi.Web.MVC.Utility
                     using (SqlConnection connection = new SqlConnection(conn.ConnectionString))
                     {
                         connection.Open();
-                    string commandString = "select ResponseJson from SurveyResponse where ResponseJson is not null and surveyid = '" + surveyid + "'";
+                    string commandString = "select ResponseJson , StatusId from SurveyResponse where ResponseJson is not null and surveyid = '" + surveyid + "'" + "and IsDraftMode = '" + IsDraft + "'";
                     // string commandString = "select ResponseJson from SurveyResponse r inner join SurveyMetaData m on r.SurveyId = m.SurveyId inner join UserOrganization uo on m.OrganizationId = uo.OrganizationID inner join [User] u on uo.UserID = u.UserID where r.ResponseJson is not null and r.SurveyId = '" + surveyid + "' and u.UserName = '" + userName + "' order by DateUpdated desc";
                     using (SqlCommand command = new SqlCommand(commandString, connection))
                         {
@@ -100,6 +121,9 @@ namespace Epi.Web.MVC.Utility
                                     while (reader.Read())
                                     {
                                         string row = JsonConvert.DeserializeObject<JsonMessage>(reader.GetFieldValue<string>(0)).ResponseQA.ToString();
+                                       JObject newJson =   JObject.Parse(row);
+                                       newJson.AddFirst(new JProperty("MetaData_ResponseStatus", GetStatus(reader.GetFieldValue<Int32>(1))));
+                                       row = newJson.ToString();
                                         if (!row.Equals("{}"))
                                         {
                                             json.Append(row);
