@@ -210,7 +210,6 @@
     <Compile Include="Models\BulkResponsesModel.cs" />
     <Compile Include="Models\FormInfoModel.cs" />
     <Compile Include="Models\FormResponseInfoModel.cs" />
-    <Compile Include="Models\JsonMessage.cs" />
     <Compile Include="Models\PrintModel.cs" />
     <Compile Include="Models\PrintResponseModel.cs" />
     <Compile Include="Models\PublishModel.cs" />
@@ -273,7 +272,6 @@
     <Compile Include="Utility\OmnitureHelper.cs" />
     <Compile Include="Utility\ProxyDependency.cs" />
     <Compile Include="Utility\ProxyDependencyReference.cs" />
-    <Compile Include="Utility\SqlHelper.cs" />
     <Compile Include="Utility\SurveyHelper.cs" />
     <Compile Include="Utility\SurveyResponseXML.cs" />
     <Compile Include="Utility\ValidateResponse.cs" />

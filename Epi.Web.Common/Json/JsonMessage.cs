@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Epi.Web.MVC.Models
+namespace Epi.Web.Common.Json
 {
     public class JsonMessage
     {

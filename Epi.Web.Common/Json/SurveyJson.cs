@@ -83,6 +83,11 @@ namespace Epi.Web.Common.Json
 
                                 }
                             }
+                            else {
+
+                                RootResponseQA.Add(item.Attribute("QuestionName").Value, "");
+
+                            }
                         }
                     }
                     catch (System.Exception ex)

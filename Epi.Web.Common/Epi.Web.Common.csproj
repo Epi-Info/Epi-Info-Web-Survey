@@ -110,6 +110,8 @@
     <Compile Include="Exception\CustomFaultException.cs" />
     <Compile Include="Extension\LinqExtensions.cs" />
     <Compile Include="Helper\RelatedFormsObj.cs" />
+    <Compile Include="Helper\SqlHelper.cs" />
+    <Compile Include="Json\JsonMessage.cs" />
     <Compile Include="Json\ResponseDetail.cs" />
     <Compile Include="Json\SurveyJson.cs" />
     <Compile Include="Message\Base\AcknowledgeType.cs" />
