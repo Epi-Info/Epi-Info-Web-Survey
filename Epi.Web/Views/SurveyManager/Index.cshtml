@@ -732,7 +732,7 @@
                             <a href="#" style="cursor:pointer;color:#ffffff;" class="navLink DashboardExpand" onclick="Toggle('DashboardDivExpand')">
                                 <img style="display:none" src="~/Content/images/Toggle-expand-alt_green.png" />
                                 <img style="display:none" src="~/Content/images/Toggle-collapse-alt_green.png" />
-                                Survey Dashboard
+                                Survey Dashboard (Beta)
                             </a>
 
                         </div>
@@ -755,7 +755,7 @@
                         <div id="PublishDiv" class="contentContainer" style="margin-bottom:10px; align-self:center;margin:1em;">
                             <h1>Publish A New Survey</h1>
                             <p id="RequiredLable" class="requiredField">* indicates required fields</p>
-                            <div class="accountdiv">
+                            <div class="accountdiv col-md-12">
                                 <div>
                                     <label class="accountlabel" id="FilePath"><span style="color:#900000;">*</span> Excel based survey:</label> <a onclick="OpenFile()" style="text-decoration:none!important; font-size:14px" href="~/Content/Text/Survey.xlsx">Excel Template</a><br>
                                     @*<input id="Path" class="Account" type="text" value=""   >*@
@@ -845,7 +845,7 @@
                         <div id="RePublishDiv" class="contentContainer" style="margin-bottom:10px; align-self:center; display:none; visibility:collapse;margin:1em;">
                             <h1>RePublish A Survey</h1>
                             <p id="RequiredLable" class="requiredField">* indicates required fields</p>
-                            <div class="accountdiv">
+                            <div class="accountdiv col-md-12">
                                 <div>
 
                                     <label class="accountlabel" id="FilePath1">Excel based survey:</label>
@@ -918,7 +918,7 @@
                             <p id="RequiredLable" class="requiredField">* indicates required fields</p>
                             
 
-                            <div class="accountdiv">
+                            <div class="accountdiv col-md-12">
 
                                 @*<p style="text-align:center;margin-top: 0;margin-bottom: 0px; font-size: 9pt; font-weight:bold;">
                 Epi Info Web Survey Download Tool (.CSV)
@@ -980,7 +980,7 @@
                         <div id="SendEmailDiv" class="contentContainer" style="margin-bottom: 100px; align-self:center ;display:none; visibility:collapse;margin:1em">
                             <h1>Send Email With Survey Link</h1>
                             <p id="RequiredLable" class="requiredField">* indicates required fields</p>
-                            <div class="accountdiv">
+                            <div class="accountdiv col-md-12">
 
                                 <div>
 
@@ -1047,7 +1047,7 @@
                         <div id="ViewRecordsDiv" class="contentContainer" style="margin-bottom: 100px; align-self:center ;display:none; visibility:collapse;margin:1em">
                             <h1>View Survey Responses</h1>
 
-                            <div class="accountdiv">
+                            <div class="accountdiv col-md-12">
 
                                 <div>
 
@@ -1073,7 +1073,7 @@
 
                             <h1>Survey Dashboard</h1>
 
-                            <div class="accountdiv">
+                            <div class="accountdiv col-md-12">
 
 
                                 @Html.DropDownListFor(m => m.EmailSurveyKey, new SelectList(ViewBag.SurveyNameList1, "Value", "Text", 0), "Select Survey To View Dashboard", new { @class = "Account Dashboard" })
