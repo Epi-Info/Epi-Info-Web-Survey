@@ -323,6 +323,16 @@
                     $('.navLink').css({ "color": "#ffffff" });
                     $(".contentDashboard").css({ "background-color": "#f3f3f3" });
                     $('.DashboardExpand').css({ "color": "#3c3c3c" });
+                   // $('#DashboardDiv').load();
+                      var str = "";
+                    $(".Dashboard option:selected").each(function () {
+                        str += $(this).val() + " ";
+                    });
+                  //  alert (str)
+                    if (str.trim() != "" && str != null)
+                    {
+                        GetDashboardInfo(str);
+                    }
                     break;
                 case "PublishDivExpand":
                     $('.Publishcollaps').removeAttr("style");
@@ -755,7 +765,7 @@
                         <div id="PublishDiv" class="contentContainer" style="margin-bottom:10px; align-self:center;margin:1em;">
                             <h1>Publish A New Survey</h1>
                             <p id="RequiredLable" class="requiredField">* indicates required fields</p>
-                            <div class="accountdiv col-md-12">
+                            <div class="accountdiv col-md-10">
                                 <div>
                                     <label class="accountlabel" id="FilePath"><span style="color:#900000;">*</span> Excel based survey:</label> <a onclick="OpenFile()" style="text-decoration:none!important; font-size:14px" href="~/Content/Text/Survey.xlsx">Excel Template</a><br>
                                     @*<input id="Path" class="Account" type="text" value=""   >*@
@@ -845,7 +855,7 @@
                         <div id="RePublishDiv" class="contentContainer" style="margin-bottom:10px; align-self:center; display:none; visibility:collapse;margin:1em;">
                             <h1>RePublish A Survey</h1>
                             <p id="RequiredLable" class="requiredField">* indicates required fields</p>
-                            <div class="accountdiv col-md-12">
+                            <div class="accountdiv col-md-10">
                                 <div>
 
                                     <label class="accountlabel" id="FilePath1">Excel based survey:</label>
@@ -918,7 +928,7 @@
                             <p id="RequiredLable" class="requiredField">* indicates required fields</p>
                             
 
-                            <div class="accountdiv col-md-12">
+                            <div class="accountdiv col-md-10">
 
                                 @*<p style="text-align:center;margin-top: 0;margin-bottom: 0px; font-size: 9pt; font-weight:bold;">
                 Epi Info Web Survey Download Tool (.CSV)
@@ -980,7 +990,7 @@
                         <div id="SendEmailDiv" class="contentContainer" style="margin-bottom: 100px; align-self:center ;display:none; visibility:collapse;margin:1em">
                             <h1>Send Email With Survey Link</h1>
                             <p id="RequiredLable" class="requiredField">* indicates required fields</p>
-                            <div class="accountdiv col-md-12">
+                            <div class="accountdiv col-md-10">
 
                                 <div>
 
@@ -1047,7 +1057,7 @@
                         <div id="ViewRecordsDiv" class="contentContainer" style="margin-bottom: 100px; align-self:center ;display:none; visibility:collapse;margin:1em">
                             <h1>View Survey Responses</h1>
 
-                            <div class="accountdiv col-md-12">
+                            <div class="accountdiv col-md-10">
 
                                 <div>
 
@@ -1073,7 +1083,7 @@
 
                             <h1>Survey Dashboard</h1>
 
-                            <div class="accountdiv col-md-12">
+                            <div class="accountdiv col-md-pull-12">
 
 
                                 @Html.DropDownListFor(m => m.EmailSurveyKey, new SelectList(ViewBag.SurveyNameList1, "Value", "Text", 0), "Select Survey To View Dashboard", new { @class = "Account Dashboard" })
@@ -1156,7 +1166,12 @@
                                                                                         }
                                                                                     }
                                                                                 }
-                                                                            });
+                                                       }
+
+
+
+
+                                                       );
 
 
 
@@ -1215,7 +1230,7 @@
                                 <br>
                                 <br>
                                 <div class="row">
-                                    <div class="col-md-3" id="piechart" style="float:left ; "></div>
+                                    <div class="col-md-4" id="piechart" style="float:left ; "></div>
 
                                     <div class="col-md-7" id="chart" style="float:left; "></div>
                                 </div>
