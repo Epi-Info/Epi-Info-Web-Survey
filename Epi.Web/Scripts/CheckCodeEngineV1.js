@@ -2552,7 +2552,7 @@ function CCE_YesNoClick(Val) {
 
 function CCE_FindText(pValue1, pValue2) {
     if (pValue1 != null && pValue2 != null) {
-        return pValue1.to().indexOf(pValue2);
+        return pValue1.toString().indexOf(pValue2);
     }
     else {
         return -1;
