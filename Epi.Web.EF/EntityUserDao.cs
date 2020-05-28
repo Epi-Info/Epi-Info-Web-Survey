@@ -87,7 +87,7 @@ namespace Epi.Web.EF
             try
             {
                 var _user = GetUserByEmail(User);
-                _user.Role = User.Role;
+              
                
                 using (var Context = DataObjectFactory.CreateContext())
                 {
@@ -99,14 +99,16 @@ namespace Epi.Web.EF
                     {
                         User.UGuid = Guid.NewGuid();
                         Context.Users.Add(Mapper.ToUserEntity(User));
-                        Context.SaveChanges();
+                        
                         UserOrganization UserOrganizationEntity = Mapper.ToUserOrganizationEntity(User, OrgBO);
                         Context.UserOrganizations.Add(UserOrganizationEntity);
                     }
                     else
                     {
+                        _user.Role = User.Role;
                         UserOrganization UserOrganizationEntity = Mapper.ToUserOrganizationEntity(_user, OrgBO);
                         //UserOrganizationEntity.Role = 1;
+                       
                         Context.UserOrganizations.Add(UserOrganizationEntity);
                     }
 

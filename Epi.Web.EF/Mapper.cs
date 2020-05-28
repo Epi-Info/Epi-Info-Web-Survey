@@ -513,7 +513,7 @@ namespace Epi.Web.EF
             UserEntity.ResetPassword = User.ResetPassword;
             UserEntity.PasswordHash = User.PasswordHash;
             UserEntity.UGuid = User.UGuid;
-            UserEntity.UserID = User.UserId;
+           // UserEntity.UserID = User.UserId;
            
             return UserEntity;
         }

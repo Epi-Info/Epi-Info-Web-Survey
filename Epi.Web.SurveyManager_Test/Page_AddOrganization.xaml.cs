@@ -142,7 +142,11 @@ namespace Epi.Web.SurveyManager.Client
                             //Request.Organization.OrganizationKey = Cryptography.Encrypt(this.GeneratedkeytextBox1.Text);
                             Request.Organization.OrganizationKey = this.GeneratedkeytextBox1.Text.ToString();
                             // Epi.Web.Common.Message.OrganizationResponse Result = client.SetOrganization(Request);
-
+                            var Organizationtext = OrganizationtextBox1.Text.ToString();
+                            var Generatedkey = GeneratedkeytextBox1.Text.ToString();
+                            richTextBox1.Document.Blocks.Clear();
+                            OrganizationtextBox1.Clear();
+                            GeneratedkeytextBox1.Clear();
                             int ServiceVersion = ServiceClient.GetServiceVersion();
 
                             if (ServiceVersion == 1)
@@ -152,12 +156,10 @@ namespace Epi.Web.SurveyManager.Client
                                 SurveyManagerService.ManagerServiceClient Client = ServiceClient.GetClient();
 
                                 Epi.Web.Common.Message.OrganizationResponse Result = Client.SetOrganization(Request);
-                                richTextBox1.Document.Blocks.Clear();
-                                OrganizationtextBox1.Clear();
-                                GeneratedkeytextBox1.Clear();
+                               
                                 if (Result.Message.ToString().Contains("Successfully"))
                                 {
-                                    Page_AddUser Page_AddUser = new Page_AddUser(new Guid(this.GeneratedkeytextBox1.Text.ToString()), new Guid(passwordBox1.Password), OrganizationtextBox1.Text, "", false);
+                                    Page_AddUser Page_AddUser = new Page_AddUser(new Guid(Generatedkey), new Guid(passwordBox1.Password), Organizationtext, "", false);
                                     this.NavigationService.Navigate(Page_AddUser);
                                     richTextBox1.Foreground = Brushes.Green;
                                     richTextBox1.AppendText(Result.Message.ToString());
@@ -173,12 +175,10 @@ namespace Epi.Web.SurveyManager.Client
                                 SurveyManagerServiceV2.ManagerServiceV2Client Client = ServiceClient.GetClientV2();
 
                                 Epi.Web.Common.Message.OrganizationResponse Result = Client.SetOrganization(Request);
-                                richTextBox1.Document.Blocks.Clear();
-                                OrganizationtextBox1.Clear();
-                                GeneratedkeytextBox1.Clear();
+                                
                                 if (Result.Message.ToString().Contains("Successfully"))
                                 {
-                                    Page_AddUser Page_AddUser = new Page_AddUser(new Guid(this.GeneratedkeytextBox1.Text.ToString()), new Guid(passwordBox1.Password), OrganizationtextBox1.Text, "", false);
+                                    Page_AddUser Page_AddUser = new Page_AddUser(new Guid(Generatedkey), new Guid(passwordBox1.Password), Organizationtext, "", false);
                                     this.NavigationService.Navigate(Page_AddUser);
                                     richTextBox1.Foreground = Brushes.Green;
                                     richTextBox1.AppendText(Result.Message.ToString());
@@ -196,12 +196,10 @@ namespace Epi.Web.SurveyManager.Client
                                 SurveyManagerServiceV3.ManagerServiceV3Client Client = ServiceClient.GetClientV3();
 
                                 Epi.Web.Common.Message.OrganizationResponse Result = Client.SetOrganization(Request);
-                                richTextBox1.Document.Blocks.Clear();
-                                OrganizationtextBox1.Clear();
-                                GeneratedkeytextBox1.Clear();
+                                 
                                 if (Result.Message.ToString().Contains("Successfully"))
                                 {
-                                    Page_AddUser Page_AddUser = new Page_AddUser(new Guid(this.GeneratedkeytextBox1.Text.ToString()), new Guid(passwordBox1.Password), OrganizationtextBox1.Text, "", false);
+                                    Page_AddUser Page_AddUser = new Page_AddUser(new Guid(Generatedkey), new Guid(passwordBox1.Password), Organizationtext, "", false);
                                     this.NavigationService.Navigate(Page_AddUser);
                                     richTextBox1.Foreground = Brushes.Green;
                                     richTextBox1.AppendText(Result.Message.ToString());
@@ -219,12 +217,10 @@ namespace Epi.Web.SurveyManager.Client
                                 SurveyManagerServiceV4.ManagerServiceV4Client Client = ServiceClient.GetClientV4();
 
                                 Epi.Web.Common.Message.OrganizationResponse Result = Client.SetOrganization(Request);
-                                richTextBox1.Document.Blocks.Clear();
-                                OrganizationtextBox1.Clear();
-                                GeneratedkeytextBox1.Clear();
+                                 
                                 if (Result.Message.ToString().Contains("Successfully"))
                                 {
-                                    Page_AddUser Page_AddUser = new Page_AddUser(new Guid(this.GeneratedkeytextBox1.Text.ToString()), new Guid(passwordBox1.Password), OrganizationtextBox1.Text, "", false);
+                                    Page_AddUser Page_AddUser = new Page_AddUser(new Guid(Generatedkey), new Guid(passwordBox1.Password), Organizationtext, "", false);
                                     this.NavigationService.Navigate(Page_AddUser);
                                     richTextBox1.Foreground = Brushes.Green;
                                     richTextBox1.AppendText(Result.Message.ToString());
