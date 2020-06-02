@@ -606,7 +606,13 @@ namespace Epi.Web.BLL
 
                 SurveyInfoBO = pRequestMessage;
                 SurveyInfoBO.XML = Xml;
-                SurveyInfoBO.SurveyName = ViewElement.Attribute("Name").Value.ToString();
+                if (ViewId == 1 ) {
+                    SurveyInfoBO.SurveyName = pRequestMessage.SurveyName;
+                }
+                else {
+                    SurveyInfoBO.SurveyName = ViewElement.Attribute("Name").Value.ToString();
+
+                }
                 SurveyInfoBO.ViewId = ViewId;
                 var ViewExists = FormsHierarchyIds.Where(x => x.ViewId == ViewId);
                 if (ViewExists.Count() > 0)
@@ -684,7 +690,15 @@ namespace Epi.Web.BLL
 
                 SurveyInfoBO = pRequestMessage;
                 SurveyInfoBO.XML = Xml;
-                SurveyInfoBO.SurveyName = ViewElement.Attribute("Name").Value.ToString();
+                if (_ViewId == 1)
+                {
+                    SurveyInfoBO.SurveyName = pRequestMessage.SurveyName;
+                }
+                else
+                {
+                    SurveyInfoBO.SurveyName = ViewElement.Attribute("Name").Value.ToString();
+
+                }
                 SurveyInfoBO.ViewId = _ViewId;
                 SurveyInfoBO.ParentId = ParentId;
                 // SurveyInfoBO.OwnerId = pRequestMessage.OwnerId ;

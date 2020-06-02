@@ -158,7 +158,7 @@ namespace Epi.Web.Common.Helper
 
             return retval;
         }
-        public static string GetSurveyJsonDataAll(string surveyid)
+        public static string GetJsonResponseAll(string surveyid)
         {
             var _ADOConnectionString = Cryptography.Decrypt(ConfigurationManager.ConnectionStrings["EIWSADO"].ConnectionString);
             SqlConnection conn = new SqlConnection(_ADOConnectionString);
@@ -171,7 +171,7 @@ namespace Epi.Web.Common.Helper
                 using (SqlConnection connection = new SqlConnection(conn.ConnectionString))
                 {
                     connection.Open();
-                    string commandString = "select ResponseJson , StatusId , ResponseId from SurveyResponse where ResponseJson is not null and surveyid = '" + surveyid ;
+                    string commandString = "select ResponseJson , StatusId , ResponseId from SurveyResponse where ResponseJson is not null and surveyid = '" + surveyid + "'";
                     // string commandString = "select ResponseJson from SurveyResponse r inner join SurveyMetaData m on r.SurveyId = m.SurveyId inner join UserOrganization uo on m.OrganizationId = uo.OrganizationID inner join [User] u on uo.UserID = u.UserID where r.ResponseJson is not null and r.SurveyId = '" + surveyid + "' and u.UserName = '" + userName + "' order by DateUpdated desc";
                     using (SqlCommand command = new SqlCommand(commandString, connection))
                     {
