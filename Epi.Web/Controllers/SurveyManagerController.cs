@@ -28,7 +28,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System.Web.Security;
 using OfficeOpenXml.Drawing.Chart;
-
+using Epi.Web.Common.Helper;
 
 namespace Epi.Web.MVC.Controllers
 {
@@ -591,6 +591,8 @@ namespace Epi.Web.MVC.Controllers
                 {
                     for (int row = 2; row <= end.Row; row++)
                     { // Row by row...
+                        Body = new StringBuilder(workbook.Worksheets[2].Cells[2, 2].Text);
+                        Body2 = new StringBuilder(workbook.Worksheets[2].Cells[3, 2].Text);
                         int DoSend = 0;
                         int.TryParse(xlWorksheet.Cells[row, 1].Text, out DoSend);
                         // validate email Address
