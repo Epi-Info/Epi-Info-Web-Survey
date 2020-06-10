@@ -166,13 +166,22 @@ namespace Epi.Web.BLL
 
                             SurveyInfoBO = pValue;
                             SurveyInfoBO.XML = Xml;
-                            SurveyInfoBO.SurveyName = ViewElement.Attribute("Name").Value.ToString();
+                            
                             SurveyInfoBO.ViewId = ViewId;
 
                             SurveyInfoBO pBO = FormsHierarchyIds.Single(x => x.ViewId == ViewId);
                             SurveyInfoBO.SurveyId = pBO.SurveyId;
                             SurveyInfoBO.ParentId = pBO.ParentId;
                             SurveyInfoBO.UserPublishKey = pBO.UserPublishKey;
+                            if (ViewId == 1)
+                            {
+                                SurveyInfoBO.SurveyName = pBO.SurveyName;
+                            }
+                            else
+                            {
+                                SurveyInfoBO.SurveyName = ViewElement.Attribute("Name").Value.ToString();
+
+                            }
                             //SurveyInfoBO.OwnerId = pValue.OwnerId;
                             if (result.IsSqlProject == true)
                             {
