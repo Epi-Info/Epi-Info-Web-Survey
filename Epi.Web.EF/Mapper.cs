@@ -506,7 +506,7 @@ namespace Epi.Web.EF
         {
             User UserEntity = new User();
             UserEntity.EmailAddress = User.EmailAddress;
-            UserEntity.UserName = User.EmailAddress.ToLower();
+            UserEntity.UserName = User.EmailAddress.Split('@')[0];
             UserEntity.LastName = User.LastName;
             UserEntity.FirstName = User.FirstName;
             UserEntity.PhoneNumber = User.PhoneNumber;

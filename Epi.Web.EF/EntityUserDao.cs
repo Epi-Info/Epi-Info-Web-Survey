@@ -212,6 +212,7 @@ namespace Epi.Web.EF
                     user.FirstName = User.FirstName;
                     user.LastName = User.LastName;
                     user.PhoneNumber = User.PhoneNumber;
+                    user.UserName = User.EmailAddress.Split('@')[0];
                     UserOrganization UserOrganization = Context.UserOrganizations.First(x => x.OrganizationID == OrgBO.OrganizationId && x.UserID == User.UserId);
                     //UserOrganization.RoleId = User.Role;
                     UserOrganization.Active = User.IsActive;
