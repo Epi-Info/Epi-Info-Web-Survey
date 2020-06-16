@@ -5,6 +5,7 @@ VisualStudioVersion = 16.0.29123.88
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epi.Web", "Epi.Web\Epi.Web.csproj", "{91794FFF-48C0-414F-933E-34412A29EEAC}"
 	ProjectSection(ProjectDependencies) = postProject
+		{13D8FD8D-1403-4C84-823A-1E27806CAC30} = {13D8FD8D-1403-4C84-823A-1E27806CAC30}
 		{05A484AB-A555-4200-936B-BEC573285BCC} = {05A484AB-A555-4200-936B-BEC573285BCC}
 		{BEFC85E4-F3A3-4108-9575-4EF1A004364E} = {BEFC85E4-F3A3-4108-9575-4EF1A004364E}
 	EndProjectSection
@@ -225,7 +226,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.0\lib\NET35
 		SolutionGuid = {90BC8E71-8799-4A31-90F1-9C35C40CF1F0}
+		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.0\lib\NET35
 	EndGlobalSection
 EndGlobal
