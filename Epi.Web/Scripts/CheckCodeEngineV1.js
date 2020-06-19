@@ -2053,8 +2053,12 @@ function CCE_SystemDate(dateformat, DateValue) {
             } else {
                 //alert(String(DateValue).indexOf("-"));
                 if (String(DateValue).indexOf("-") === -1 && String(DateValue).indexOf("/") === -1 && String(DateValue).indexOf(".") === -1) {
+                    if ( typeof DateValue !== "undefined") {  
+                        date = new Date(DateValue);
+                    } else {
 
-                    date = new Date(DateValue);
+                        date = new Date();
+                    }
                     //alert(date);
                 } else {
                     date = new Date();
