@@ -323,4 +323,18 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="UpdateSourceTable">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q41="http://www.yourcompany.com/types/" minOccurs="0" name="sourceTablesRequest" nillable="true" type="q41:SourceTablesRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateSourceTableResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="UpdateSourceTableResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

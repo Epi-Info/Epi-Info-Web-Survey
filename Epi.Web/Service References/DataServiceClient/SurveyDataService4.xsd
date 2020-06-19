@@ -24,6 +24,7 @@
     <xs:sequence>
       <xs:element minOccurs="0" name="IsEnabled" type="xs:boolean" />
       <xs:element minOccurs="0" name="Organization" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OrganizationId" type="xs:int" />
       <xs:element minOccurs="0" name="OrganizationKey" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>

@@ -6,6 +6,7 @@
 <script src="@Url.Content("~/Scripts/c3.min.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/d3-5.8.2.min.js")" type="text/javascript"></script>
 <link href="@Url.Content("~/Content/css/c3.min.css")" rel="Stylesheet" type="text/css" />
+
 <script src="https://cdn.jsdelivr.net/npm/json2csv"></script>
 @*<script src="@Url.Content("~/Scripts/jquery-1.9.1.js")" type="text/javascript"></script>*@
 
@@ -169,8 +170,27 @@
 </style>
 <script type="text/javascript">
     $(document).ready(function () {
+         $("div.alert-success").hide();
+         $("#EditValueSetDialogBox").dialog({
+            autoOpen: false,
+            show: "blind",
+            hide: "blind",
+            resizable: false,
+           height: 400,
+            width: 500,
+            modal: true
 
+        });
+          $("#ViewValueSetDialogBox").dialog({
+            autoOpen: false,
+            show: "blind",
+            hide: "blind",
+            resizable: false,
+           height: 600,
+            width: 500,
+            modal: true
 
+        });
         $('.btn').on('click', function () {
             var $this = $(this);
             $this.button('loading');
@@ -189,6 +209,23 @@
 
             modal: true
         });
+        $(".DataSets").change(function ()
+        {
+
+
+
+            var str = "";
+            $(".DataSets option:selected").each(function () {
+                str += $(this).val() + " ";
+            });
+
+            GetDataSets(str);
+
+
+
+
+        });
+       
         if ($('#DashboardDivState').val() == "True") {
             Toggle('DashboardDivExpand');
         }
@@ -212,6 +249,16 @@
         if ($('#ViewRecordsDivState').val() == "True") {
             Toggle('ViewRecordsDivExpand');
         }
+         if ($('#UpdateDataSetDivState').val() == "True") {
+             Toggle('UpdateDataSetDivExpand');
+            // var Id = $('#ValueSetSurveyKey').val();
+           //  GetDataSets(Id);
+             $("div.alert").hide();
+             $("div.alert-success").show();
+        }
+        // if ($('#ValueSetsDivState').val() == "True") {
+        //    Toggle('UpdateDataSetDivExpand');
+        //}
         $('#SurveyIdDiv').hide();
        //$('#PublishDiv').hide();
        //$('#DownLoadDiv').hide();
@@ -227,8 +274,13 @@
 
         //('#Path').val('');
         //('#Newfile').val('');
-
-
+        
+         $("#ValueSetFilePath").change(function () {
+            EnableUpdateButton()
+        });
+          $("#ValueSetUserPublishKey").change(function () {
+            EnableUpdateButton()
+        });
         });
 
     function EnablePublishButton(obj) {
@@ -409,6 +461,19 @@
                     $('.ViewRecordsExpand').css({ "color": "#3c3c3c" });
 
                     break;
+                 case "UpdateDataSetDivExpand":
+                    $('#UpdateDataSetDivState').val('true');
+                    $('.UpdateDataSetcollaps').removeAttr("style");
+                    $('.UpdateDataSetcollaps').css({ "cursor": "pointer" });
+
+                    $('.contentContainer').css({ "display": "none", "visibility": "collapse" });
+                    $('#UpdateDataSetDiv').css({ "display": "", "visibility": "" });
+                    $('.navLink').css({ "color": "#ffffff" });
+                    $(".leftNav").css({ "background-color": "#3c3c3c" });
+                    $(".contentUpdateDataSet").css({ "background-color": "#f3f3f3" });
+                    $('.UpdateDataSetExpand').css({ "color": "#3c3c3c" });
+
+                    break;
                 default:
             }
 
@@ -451,6 +516,211 @@
                 alert('failed');
             }
     }
+    window.SurveyDataSet = "";
+     function GetDataSets(SurveyId)
+        {
+        // alert(SurveyId)
+            $('#ValueSetSurveyKey').val(SurveyId)
+
+            var ActionUrl = '@Url.Action("GetSurveyInfo", "SurveyManager")' + '?surveyid=' + SurveyId +'&getsourcetable= True';
+
+            $.ajax({
+                url: ActionUrl,
+                type: 'POST',
+                contentType: 'application/json; charset=utf-8',
+                //  data: $('#myform').serialize(),
+                //data:JSON.stringify(model),
+                dataType: "json",
+                //cache: false,
+                async: false,
+                success: successFunc,
+                error: errorFunc
+            });
+         function successFunc(data) {
+
+             window.SurveyDataSet = data;
+           //  alert(data.SourceTables[0].TableName)
+             $("#DataSetTable").find("tr:gt(0)").remove();
+
+             if (data.SourceTables.length > 0)
+             {
+                 var table = document.getElementById("DataSetTable");
+                 for (var i = 0; i < data.SourceTables.length; i++) {
+
+
+
+                     var row = table.insertRow(i + 1);
+                     var cell1 = row.insertCell(0);
+                     cell1.width = "33%"
+                     var cell2 = row.insertCell(1);
+
+                        cell1.innerHTML = "<input id=\""+ data.SourceTables[i].TableName+ "_Edit" +"\"  class=\"btn btn-primary\" type=\"button\" onclick=\" EditValueSets('"+ data.SourceTables[i].TableName+ "')\" id=\"EditDataSet\" value=\"Edit\" /> <input id=\""+ data.SourceTables[i].TableName +"\"  class=\"btn btn-primary  \" type=\"button\" onclick=\" ViewDataSet('"+data.SourceTables[i].TableName+"') \"  value=\"View\" />  <input id=\""+ data.SourceTables[i].TableName +"_CSV\"  class=\"btn btn-primary  \" type=\"button\" onclick=\" GetDataSetCsv('"+data.SourceTables[i].TableName+"') \"  value=\"CSV\" />";
+                         cell2.innerHTML = data.SourceTables[i].TableName;
+                     //cell1.innerHTML = "<button id=\""+ data.SourceTables[i].TableName +"\"  type=\"button\" class=\"btn btn-primary\" data-toggle=\"modal\" data-target=\"#exampleModal\">view</button>";
+
+
+                 }
+
+
+
+             }
+         }
+            function errorFunc(data) {
+                alert('failed');
+            }
+    }
+    function UpdateValueSets(ValueSet) {
+     //   alert(ValueSet)
+       //  $("#EditValueSetDialogBox").dialog("close");
+          var ActionUrl = '@Url.Action("Index", "SurveyManager")' ;
+            window.location.href = ActionUrl
+           
+    }
+    function ViewDataSet(DataSet)
+    {
+
+
+        for (var i = 0; i < window.SurveyDataSet.SourceTables.length; i++)
+        {
+            if (window.SurveyDataSet.SourceTables[i].TableName == DataSet) {
+
+
+                var json = window.SurveyDataSet.SourceTables[i].TableXml;
+
+
+
+
+                var DataSetName = window.SurveyDataSet.SourceTables[i].TableName;
+                generateDynamicTable(json, "DialogBoxPrempt", DataSetName.toString())
+                $('#DownLoadDataSet1').removeAttr('hidden');
+                $('#DownLoadDataSet2').removeAttr('hidden');
+
+               $("#ViewValueSetDialogBox").dialog("open");
+                return;
+            }
+
+
+
+        }
+
+    }
+    function GetDataSetCsv(DataSet) {
+
+         for (var i = 0; i < window.SurveyDataSet.SourceTables.length; i++)
+                {
+             if (window.SurveyDataSet.SourceTables[i].TableName == DataSet)
+                     {
+
+
+                 var json = window.SurveyDataSet.SourceTables[i].TableXml;
+                 var obj = $.parseJSON(json);
+                        var col = [];
+                        for (var i = 0; i < obj.length; i++) {
+                            for (var key in obj[i]) {
+                                if (col.indexOf(key.substring(1)) === -1) {
+                                    col.push(key.substring(1));
+                                }
+                            }
+                        }
+                       //var jsonObject = JSON.stringify(json);
+                       var FileName =DataSet;
+                       var Headder = $.parseJSON(col);
+
+                       exportCSVFile(col, obj, FileName);
+
+
+
+                        return;
+                    }
+
+
+
+                }
+
+
+    }
+
+    function generateDynamicTable(objArray, element , DataSetName) {
+        var json = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
+
+		 // EXTRACT VALUE FOR HTML HEADER.
+
+        var col = [];
+        for (var i = 0; i < json.length; i++) {
+            for (var key in json[i]) {
+                if (col.indexOf(key) === -1) {
+                    col.push(key);
+                }
+            }
+        }
+
+        // CREATE DYNAMIC TABLE.
+        var table = document.createElement("table");
+         
+        // CREATE HTML TABLE HEADER ROW USING THE EXTRACTED HEADERS ABOVE.
+
+        var tr = table.insertRow(-1);                   // TABLE ROW.
+
+        for (var i = 0; i < col.length; i++) {
+            var th = document.createElement("th");      // TABLE HEADER.
+            th.innerHTML = col[i].substring(1);
+            tr.appendChild(th);
+        }
+
+        // ADD JSON DATA TO THE TABLE AS ROWS.
+        for (var i = 0; i < json.length; i++) {
+
+            tr = table.insertRow(-1);
+
+            for (var j = 0; j < col.length; j++) {
+                var tabCell = tr.insertCell(-1);
+                tabCell.innerHTML = json[i][col[j]];
+            }
+        }
+
+        // FINALLY ADD THE NEWLY CREATED TABLE WITH JSON DATA TO A CONTAINER.
+        var divContainer = document.getElementById(element);
+        divContainer.innerHTML = "";
+
+        divContainer.appendChild(table);
+	}
+  
+ 
+
+    function EditValueSets(DataSet) {
+    
+        $('#EditValueSetDialogBoxPrempt').text(DataSet);
+        $('#ValueSetFilePath').val("");
+        $('#ValueSetUserPublishKey').val("");
+        $('#SelectedValueSet').val(DataSet);
+        $("#EditValueSetDialogBox").dialog("open");
+    }
+    function EnableUpdateButton() {
+      //  alert();
+        var pattern = new RegExp('^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$', 'i');
+        
+        if ($('#ValueSetFilePath').val() != "" && $('#ValueSetUserPublishKey').val() != "") {
+            if (pattern.test($('#ValueSetUserPublishKey').val()) === false) {
+
+                alert('Security Token Should be a GUID.');
+            } else {
+                $('#UpdateValueSet').removeAttr('disabled');
+            }
+        } else {
+
+            $('#UpdateValueSet').setAttribute('disabled');
+        }
+
+    }
+    function Validate() {
+
+        var isValid = $("#myform").validationEngine('validate') ;
+
+
+    }
+
+
+
     function GetJsonHeader()
     {
 
@@ -543,7 +813,8 @@
 
     function convertToCSV(objArray)
     {
-    var array = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
+        var array = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
+       
     var str = '';
        
     for (var i = 0; i < array.length; i++) {
@@ -565,7 +836,7 @@
   }
 
     function exportCSVFile(headers, items, fileTitle) {
-
+       
     if (headers) {
         items.unshift(headers);
     }
@@ -758,6 +1029,15 @@
                             </div>*@
 
                         @*</div>*@
+
+                        <div class="contentUpdateDataSet leftNav" style="background-color:#f3f3f3;">
+                            <a href="#" style="cursor:pointer;color:#ffffff;" class="navLink UpdateDataSetExpand" onclick="Toggle('UpdateDataSetDivExpand')">
+                                <img style="display:none" src="~/Content/images/Toggle-expand-alt_green.png" />
+                                <img style="display:none" src="~/Content/images/Toggle-collapse-alt_green.png" />
+                                Update Survey Value Sets (Beta)
+                            </a>
+
+                        </div>
                     </div>
                     <!--end of nav-->
 
@@ -927,20 +1207,20 @@
 
                             <h1>Download responses</h1>
                             <p id="RequiredLable" class="requiredField">* indicates required fields</p>
-                            
+
 
                             <div class="accountdiv col-md-10">
 
                                 @*<p style="text-align:center;margin-top: 0;margin-bottom: 0px; font-size: 9pt; font-weight:bold;">
-                Epi Info Web Survey Download Tool (.CSV)
-            </p>
-            <br><br>
-            <p style="text-align:right;margin-top: 0;margin-bottom: -29px; font-size: 9pt; font-weight:bold;">* indicates required fields</p>*@
+                                        Epi Info Web Survey Download Tool (.CSV)
+                                    </p>
+                                    <br><br>
+                                    <p style="text-align:right;margin-top: 0;margin-bottom: -29px; font-size: 9pt; font-weight:bold;">* indicates required fields</p>*@
 
                                 <div>
                                     @*<label class="accountlabel" id="OrgKeylabel">*Organization Key:</label><br>
-                @Html.TextBoxFor(m => m.OrganizationKey, new { @class = "Account" }) <br>
-                @Html.ValidationMessageFor(m => m.OrganizationKey, null, new { @class = "required" })<br>*@
+                                        @Html.TextBoxFor(m => m.OrganizationKey, new { @class = "Account" }) <br>
+                                        @Html.ValidationMessageFor(m => m.OrganizationKey, null, new { @class = "required" })<br>*@
 
                                     <label class="accountlabel" id="SurveyIdlabel"><span style="color:#900000;">*</span> Survey Id:</label><br>
 
@@ -973,8 +1253,8 @@
 
                                 </div>
                                 @*<div id="spinner">
-                Working on your request...
-            </div>*@
+                                        Working on your request...
+                                    </div>*@
 
                                 <br />
 
@@ -1220,6 +1500,7 @@
 
 
                                     });
+
                                 </script>
 
 
@@ -1264,9 +1545,47 @@
                             </div>
                         </div>
 
+                        <div id="UpdateDataSetDiv" class="contentContainer" style="margin-bottom: 100px; align-self:center ;display:none; visibility:collapse;margin:1em">
+                            <h1>Survey Data Sets</h1>
+                            <br />
+
+                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                <strong>Note:</strong>  Republishing a survey will override changes made through this process.
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="alert alert-success alert-dismissible fade show " role="alert">
+                                 Value Set was successfully updated!
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="accountdiv col-md-pull-9">
+                                <label class="accountlabel" id="SurveyIdlabel"><span style="color:#900000;">*</span> Survey Id:</label><br>
 
 
-                        @*</div>*@
+                                @Html.DropDownListFor(m => m.EmailSurveyKey, new SelectList(ViewBag.SurveyNameList1, "Value", "Text", 0), "Select Survey To View Value Sets", new { @class = "Account DataSets" })
+                                <br />
+
+                                <br />
+                                <div>
+
+
+                                    <table id="DataSetTable" style="width:70%">
+
+                                        <tr>
+                                        </tr>
+
+                                    </table>
+
+
+
+                                </div>
+
+                            </div>
+
+                        </div>
                     </div>
 
 
@@ -1373,11 +1692,81 @@
         <input type="hidden" id="SendEmaiDivState" value="@Model.SendEmaiDivState.ToString()" name="SendEmaiDivState" />
         <input type="hidden" id="SetJsonDivState" value="@Model.SetJsonDivState.ToString()" name="SetJsonDivState" />
         <input type="hidden" id="ViewRecordsDivState" value="@Model.ViewRecordsDivState.ToString()" name="ViewRecordsDivState" />
+        <input type="hidden" id="UpdateDataSetDivState" value="@Model.UpdateDataSetDivState.ToString()" name="UpdateDataSetDivState" />
         <input type="hidden" id="JsonHeadder" value="" name="JsonHeadder" />
+        <input type="hidden" id="DataSets" value="" name="DataSets" />
+       
+
 
     }
     <div id="TermsDialog">
         @Html.Raw(ViewData["TermOfUse1"].ToString())
+    </div>
+    <div id="ViewValueSetDialogBox" title="View Value Set">
+
+        <p><label id="DialogBoxPrempt">Prempt</label></p>
+
+    </div>
+
+    <div id="EditValueSetDialogBox" title="Update Value Set">
+        @using (Html.BeginForm("Index", "SurveyManager", null, FormMethod.Post, new { id = "myform", enctype = "multipart/form-data" }))
+        {
+            <p><label id="EditValueSetDialogBoxPrempt" style="font:bolder">Prempt</label></p>
+
+            <div class="accountdiv col-md-12">
+                <div>
+                    <label class="accountlabel" id="FilePath"><span style="color:#900000;">*</span> Value Sets:</label> <br>
+
+
+                    @Html.TextBoxFor(m => m.ValueSetFilePath, new { @class = "Account ValueSetFilePath" })
+
+
+                    <input for="file-upload" class="btn btn-primary" style="width:70px; " type="button" id="btnFileUpload" onclick="javascript: document.getElementById('FileUpload1').click();" value="Browse" />
+
+                    @Html.ValidationMessageFor(m => m.ValueSetFilePath, null, new { @class = "required" })
+                    <input id="FileUpload1" type="file" style='visibility: hidden;' name="FileUpload1" accept=".xls,.xlsx,.csv" onchange="ChangeText(this, 'ValueSetFilePath');" />
+
+
+                    <span id="spnFilePath"></span>
+
+                    <script type="text/javascript">
+                        window.onload = function () {
+                            var fileupload = document.getElementById("FileUpload1");
+
+                            var filePath = document.getElementById("Path");
+                            var button = document.getElementById("btnFileUpload");
+                            button.onclick = function () {
+                                fileupload.click();
+                            };
+                            fileupload.onchange = function () {
+                                var fileName = fileupload.value.split('\\')[fileupload.value.split('\\').length - 1];
+
+                                $('#ValueSetFilePath').val(fileName);
+                            };
+                        };
+                    </script>
+
+                </div>
+                @if (!Model.IsAuthenticated)
+                {
+                    <div>
+                        <label class="accountlabel" id="SecurityTokenlabel1"><span style="color:#900000;">*</span> Security Token:</label><br>
+
+
+                        @Html.TextBoxFor(m => m.ValueSetUserPublishKey, new { @class = "Account" }) <br>
+                        @Html.ValidationMessageFor(m => m.ValueSetUserPublishKey, null)<br>
+                    </div>
+                }
+                <br>
+
+
+                <input class="btn btn-primary" type="submit" name="UpdateValueSet" disabled="disabled" id="UpdateValueSet" onclick="" value="Update" style="margin-right:90px;" />
+
+
+            </div>
+            <input type="hidden" id="SelectedValueSet" value="@Model.SelectedValueSet" name="SelectedValueSet" />
+            <input type="hidden" id="ValueSetSurveyKey" value="@Model.ValueSetSurveyKey" name="ValueSetSurveyKey" />
+        }
     </div>
 
 </div>

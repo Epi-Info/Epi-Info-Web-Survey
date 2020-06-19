@@ -12,5 +12,7 @@ namespace Epi.Web.Common.Message
         public SourceTablesRequest() { }
        
         public string SurveyId { get; set; }
+
+        public List<SourceTableDTO> List { get; set; }
     }
 }

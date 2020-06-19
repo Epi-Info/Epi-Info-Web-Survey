@@ -429,5 +429,37 @@ namespace Epi.Web.MVC.Repositories
 
             return _iDataService.GetAncestorResponseIdsByChildId(SARequest);
         }
+
+        public bool UpdateSourceTable(SourceTablesRequest SourceTablesRequest) {
+            try
+            {
+
+                return _iDataService.UpdateSourceTable(SourceTablesRequest);
+
+
+            }
+            catch (FaultException<CustomFaultException> cfe)
+            {
+                throw cfe;
+            }
+            catch (FaultException fe)
+            {
+                throw fe;
+            }
+            catch (CommunicationException ce)
+            {
+                throw ce;
+            }
+            catch (TimeoutException te)
+            {
+                throw te;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+
+            }
+
+        }
     }
 }

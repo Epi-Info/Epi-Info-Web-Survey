@@ -8,6 +8,8 @@ using System.Xml;
 using System.Xml.Linq;
 using System.Web;
 using System.Xml.XPath;
+using Epi.Web.Common.DTO;
+
 namespace Epi.Web.BLL
 {
 
@@ -598,6 +600,21 @@ namespace Epi.Web.BLL
             SurveyControlsResponse.SurveyControlList = List;
             return SurveyControlsResponse;
 
+        }
+
+        public bool UpdateSourceTable(List<SourceTableDTO> list, string surveyId)
+        {
+            try
+            {
+                foreach (var item in list)
+                {
+
+                    //this.SurveyInfoDao.UpdateSourceTables(item,surveyId);
+                    this.SurveyInfoDao.UpdateSourceTable(item.TableXml.ToString(), item.TableName, surveyId);
+                }
+                return true;
+            }
+            catch (Exception ex) { return false; }
         }
     }
 }

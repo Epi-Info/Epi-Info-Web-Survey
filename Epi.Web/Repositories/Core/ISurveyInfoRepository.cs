@@ -26,5 +26,6 @@ namespace Epi.Web.MVC.Repositories.Core
         FormsHierarchyResponse GetFormsHierarchy(FormsHierarchyRequest FormsHierarchyRequest);
         SurveyAnswerResponse GetResponseAncestor(SurveyAnswerRequest SARequest);
         bool HasResponse(string SurveyId, string ResponseId);
+        bool UpdateSourceTable(SourceTablesRequest sourceTablesRequest);
     }
 }

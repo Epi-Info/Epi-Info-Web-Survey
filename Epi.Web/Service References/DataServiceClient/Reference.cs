@@ -179,6 +179,13 @@ namespace Epi.Web.MVC.DataServiceClient {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/GetSurveyDashboardInfo", ReplyAction="http://tempuri.org/IDataService/GetSurveyDashboardInfoResponse")]
         System.Threading.Tasks.Task<Epi.Web.Common.Message.DashboardResponse> GetSurveyDashboardInfoAsync(string surveyid);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/UpdateSourceTable", ReplyAction="http://tempuri.org/IDataService/UpdateSourceTableResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Epi.Web.Common.Exception.CustomFaultException), Action="http://tempuri.org/IDataService/UpdateSourceTableCustomFaultExceptionFault", Name="CustomFaultException", Namespace="http://www.yourcompany.com/types/")]
+        bool UpdateSourceTable(Epi.Web.Common.Message.SourceTablesRequest sourceTablesRequest);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/UpdateSourceTable", ReplyAction="http://tempuri.org/IDataService/UpdateSourceTableResponse")]
+        System.Threading.Tasks.Task<bool> UpdateSourceTableAsync(Epi.Web.Common.Message.SourceTablesRequest sourceTablesRequest);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -390,6 +397,14 @@ namespace Epi.Web.MVC.DataServiceClient {
         
         public System.Threading.Tasks.Task<Epi.Web.Common.Message.DashboardResponse> GetSurveyDashboardInfoAsync(string surveyid) {
             return base.Channel.GetSurveyDashboardInfoAsync(surveyid);
+        }
+        
+        public bool UpdateSourceTable(Epi.Web.Common.Message.SourceTablesRequest sourceTablesRequest) {
+            return base.Channel.UpdateSourceTable(sourceTablesRequest);
+        }
+        
+        public System.Threading.Tasks.Task<bool> UpdateSourceTableAsync(Epi.Web.Common.Message.SourceTablesRequest sourceTablesRequest) {
+            return base.Channel.UpdateSourceTableAsync(sourceTablesRequest);
         }
     }
 }

@@ -12,6 +12,7 @@ namespace Epi.Web.MVC.Models
         private string _Path;
         private string _RepublishPath;
         private string _EmailFilePath;
+        private string _ValueSetFilePath;
         private string _OrganizationKey;
         private string _SurveyKey;
         private string _RepublishSurveyKey;
@@ -25,6 +26,8 @@ namespace Epi.Web.MVC.Models
         private string _UserPublishKey;
         private string _EmailUserPublishKey;
         private string _RepublishUserPublishKey;
+        private string _ValueSetUserPublishKey;
+
         private List<string> _SurveyNameList;
          
         public PublishModel()
@@ -38,8 +41,13 @@ namespace Epi.Web.MVC.Models
                 get { return _Path; }
                 set { _Path = value; }
             }
-
-
+        
+            [Required(ErrorMessage = "File path is required.")]
+        public string ValueSetFilePath
+        {
+            get { return _ValueSetFilePath; }
+            set { _ValueSetFilePath = value; }
+        }
         [Required(ErrorMessage = "File path is required.")]  
         public string RepublishPath
             {
@@ -69,10 +77,18 @@ namespace Epi.Web.MVC.Models
              get { return _RepublishUserPublishKey; }
              set { _RepublishUserPublishKey = value; }
          }
-         // [RegularExpression(@"^(\{){0,1}[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}(\}){0,1}$", ErrorMessage = "Invalid Organization key.")]
-         
-         //[Required(ErrorMessage = "Survey Id is required.")]
-         
+        [Required(ErrorMessage = "Security Token is required.")]
+        [RegularExpression(@"^(\{){0,1}[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}(\}){0,1}$", ErrorMessage = "Invalid Security Token.")]
+
+        public string ValueSetUserPublishKey
+        {
+            get { return _ValueSetUserPublishKey; }
+            set { _ValueSetUserPublishKey = value; }
+        }
+        // [RegularExpression(@"^(\{){0,1}[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}(\}){0,1}$", ErrorMessage = "Invalid Organization key.")]
+
+        //[Required(ErrorMessage = "Survey Id is required.")]
+
         public string SurveyKey
          {
              get { return _SurveyKey; }
@@ -149,5 +165,11 @@ namespace Epi.Web.MVC.Models
         public bool JsonIsSet { get; internal set; }
         public string ViewRecordsURL { get; set; }
         public bool IsBulk { get; set; }
+        public bool UpdateDataSetDivState { get; set; }
+        public List<Web.Models.SourceTableModel> SourceTables { get; set; }
+        public string SelectedValueSet { get; set; }
+        public string ValueSetSurveyKey { get; set; }
+         
+
     }
 }

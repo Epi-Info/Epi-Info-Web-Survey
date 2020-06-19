@@ -272,7 +272,7 @@ namespace Epi.Web.MVC.Facade
 
             //Get the SurveyInfoDTO
             Epi.Web.Common.DTO.SurveyInfoDTO surveyInfoDTO;
-            if (FormsHierarchyDTOList == null || FormsHierarchyDTOList.Count()==0)
+            if (FormsHierarchyDTOList == null || FormsHierarchyDTOList.Count() == 0)
             {
                 surveyInfoDTO = SurveyHelper.GetSurveyInfoDTO(_surveyInfoRequest, _iSurveyInfoRepository, surveyId);//Pain Point 5s
                 if (_SurveyAnswerDTOList != null)
@@ -410,30 +410,30 @@ namespace Epi.Web.MVC.Facade
             return Response;
         }
 
-        public void  SaveSurveyAnswer(SurveyAnswerRequest pRequest){
+        public void SaveSurveyAnswer(SurveyAnswerRequest pRequest) {
 
-            _iSurveyAnswerRepository.SaveSurveyAnswer(  pRequest);
-}
+            _iSurveyAnswerRepository.SaveSurveyAnswer(pRequest);
+        }
 
-        public string GetSurveyResponseJson(Epi.Web.Common.DTO.SurveyAnswerDTO surveyAnswerDTO, List<FormsHierarchyDTO> FormsHierarchyDTOList,   SurveyControlsResponse List)
+        public string GetSurveyResponseJson(Epi.Web.Common.DTO.SurveyAnswerDTO surveyAnswerDTO, List<FormsHierarchyDTO> FormsHierarchyDTOList, SurveyControlsResponse List)
         {
             SurveyResponseJson Implementation = new SurveyResponseJson();
-            return Implementation.GetSurveyResponseJson(surveyAnswerDTO, FormsHierarchyDTOList,List);
+            return Implementation.GetSurveyResponseJson(surveyAnswerDTO, FormsHierarchyDTOList, List);
         }
         public OrganizationAccountResponse GetOrg(OrganizationAccountRequest Request) {
             OrganizationAccountResponse Response = new OrganizationAccountResponse();
 
             Response = _iOrgAccountRepository.GetOrg(Request);
 
-            return Response ;
+            return Response;
 
         }
-        public bool SetJsonColumn(string Json , string ResponseId) {
+        public bool SetJsonColumn(string Json, string ResponseId) {
 
 
             return _iSurveyAnswerRepository.SetJsonColumn(Json, ResponseId);
 
-             
+
 
         }
 
@@ -445,7 +445,7 @@ namespace Epi.Web.MVC.Facade
             _surveyInfoRequest.Criteria.SurveyIdList.Add(SurveyId);
 
             var ListDTO = _iSurveyInfoRepository.GetSurveyInfo(_surveyInfoRequest).SurveyInfoList;
-            if (ListDTO.Count()>0) {
+            if (ListDTO.Count() > 0) {
                 DashboardResponse.SurveyInfo = ListDTO[0];
             }
 
@@ -453,5 +453,12 @@ namespace Epi.Web.MVC.Facade
             return DashboardResponse;
 
         }
-    }
+        public bool UpdateSourceTable (SourceTablesRequest SourceTablesRequest)
+            {
+
+             return _iSurveyInfoRepository.UpdateSourceTable(SourceTablesRequest);
+
+            }
+            
+         }
 }

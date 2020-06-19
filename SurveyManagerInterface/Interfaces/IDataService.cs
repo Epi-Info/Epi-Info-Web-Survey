@@ -92,5 +92,8 @@ namespace Epi.Web.WCF.SurveyService
         [OperationContract]
         [FaultContract(typeof(CustomFaultException))]
         DashboardResponse GetSurveyDashboardInfo( string surveyid);
+        [OperationContract]
+        [FaultContract(typeof(CustomFaultException))]
+        bool UpdateSourceTable(SourceTablesRequest sourceTablesRequest);
     }
 }

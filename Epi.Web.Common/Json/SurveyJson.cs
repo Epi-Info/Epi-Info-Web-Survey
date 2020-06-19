@@ -7,6 +7,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 using System.Xml.Linq;
 
 namespace Epi.Web.Common.Json
@@ -284,5 +285,40 @@ namespace Epi.Web.Common.Json
 
 
         }
+
+        public static string XmlToJson(string xml) {
+
+            StringBuilder JsonString = new StringBuilder();
+            //   var mystring =GetDropDownValues(XDocument.Parse(xml));
+            XmlDocument doc = new XmlDocument();
+           // doc.LoadXml(xml);
+            //var json = JsonConvert.SerializeObject(xml);
+            var _ControlValues = from _ControlValue in XDocument.Parse(xml).Descendants("SourceTable")
+                                    
+                                 select _ControlValue;
+
+
+            var _SourceTableValues = from _SourceTableValue in _ControlValues.Descendants("Item")
+
+                                     select _SourceTableValue;
+
+
+            var list = _SourceTableValues.ToList();
+            JsonString.Append("[");
+            for (int i = 0; list.Count()> i; i++)
+            {
+                doc.LoadXml(list[i].ToString());
+                 JsonString.Append(JsonConvert.SerializeXmlNode(doc, Newtonsoft.Json.Formatting.None, true));
+                if (i < list.Count()-1)
+                {
+                    JsonString.Append(",");
+                }
+            }
+            //object transactObject1 = JsonConvert.DeserializeObject(json);
+            JsonString.Append("]");
+            return JsonString.ToString();
+
+        }
+       
     }
 }

@@ -1002,5 +1002,26 @@ namespace Epi.Web.WCF.SurveyService
 
 
         }
+
+        public   bool UpdateSourceTable(SourceTablesRequest SourceTablesRequest)
+        {
+            Epi.Web.Interfaces.DataInterfaces.ISurveyInfoDao ISurveyInfoDao = new EF.EntitySurveyInfoDao();
+            Epi.Web.BLL.SurveyInfo Implementation = new Epi.Web.BLL.SurveyInfo( ISurveyInfoDao);
+            try
+            {
+                return Implementation.UpdateSourceTable(SourceTablesRequest.List, SourceTablesRequest.SurveyId);
+
+            }
+            catch (Exception ex)
+            {
+                return false;
+                throw ex;
+            }
+
+            
+        }
+
     }
+
+
 }

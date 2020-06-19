@@ -46,6 +46,7 @@ namespace Epi.Web.MVC.Facade
           OrganizationAccountResponse GetOrg(OrganizationAccountRequest Request);
         bool SetJsonColumn(string Json,string Responseid);
         DashboardResponse GetSurveyDashboardInfo(string SurveyId);
+        bool UpdateSourceTable(SourceTablesRequest sourceTablesRequest);
     }
 
 }
