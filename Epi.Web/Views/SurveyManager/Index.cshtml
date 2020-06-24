@@ -12,7 +12,7 @@
 
 <style>
 
-    table {
+   table {
         font-family: arial, sans-serif;
         border-collapse: collapse;
         width: 100%;
@@ -23,9 +23,15 @@
         text-align: left;
         padding: 8px;
     }
-
+ 
     tr:nth-child(even) {
-        background-color: #dddddd;
+        background-color: #daedf4;
+    }
+   #ViewTable tr:hover {
+          background-color: #ffff99;
+    }
+    #ViewTable  tr:focus {
+          background-color: #ffff99;
     }
 
     .TermsSpan {
@@ -165,19 +171,42 @@
         height: 100%
     }*/
 
+    .closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
 
+.closebtn:hover {
+  color: black;
+}
 
 </style>
 <script type="text/javascript">
+
+     window.SurveyDataSet = "";
+    window.ColumnLength = 0;
+    window.SelectedRowId = "";
+
+     
     $(document).ready(function () {
+
+
+     
+
          $("div.alert-success").hide();
          $("#EditValueSetDialogBox").dialog({
             autoOpen: false,
             show: "blind",
             hide: "blind",
             resizable: false,
-           height: 400,
-            width: 500,
+           height:600,
+            width: 'auto' ,
             modal: true
 
         });
@@ -186,9 +215,10 @@
             show: "blind",
             hide: "blind",
             resizable: false,
-           height: 600,
-            width: 500,
-            modal: true
+            height: 600,
+            width:'auto' 
+           
+            
 
         });
         $('.btn').on('click', function () {
@@ -225,7 +255,8 @@
 
 
         });
-       
+     
+
         if ($('#DashboardDivState').val() == "True") {
             Toggle('DashboardDivExpand');
         }
@@ -280,9 +311,12 @@
         });
           $("#ValueSetUserPublishKey").change(function () {
             EnableUpdateButton()
-        });
-        });
+          });
 
+   
+    });
+   
+ 
     function EnablePublishButton(obj) {
         // alert();
         //Term of use
@@ -334,7 +368,8 @@
 
 
 
-        function ChangeText(oFileInput, sTargetID) {
+    function ChangeText(oFileInput, sTargetID) {
+        alert(12);
 
            // document.getElementById(sTargetID).value = oFileInput.value;
             $('.' + sTargetID).val(oFileInput.value);
@@ -357,7 +392,30 @@
             }
         }
 
+        function csvToJSON(csv){
 
+            var lines=csv.split("\n");
+
+            var result = [];
+
+            var headers=lines[0].split(",");
+
+            for(var i=1;i<lines.length-1;i++){
+
+	            var obj = {};
+	            var currentline=lines[i].split(",");
+
+	            for(var j=0;j<headers.length;j++){
+		            obj[headers[j]] = currentline[j];
+	            }
+
+	            result.push(obj);
+
+        }
+  
+        //return result; //JavaScript object
+        return JSON.stringify(result); //JSON
+        }
 
 
 
@@ -516,7 +574,7 @@
                 alert('failed');
             }
     }
-    window.SurveyDataSet = "";
+   
      function GetDataSets(SurveyId)
         {
         // alert(SurveyId)
@@ -554,9 +612,9 @@
                      cell1.width = "33%"
                      var cell2 = row.insertCell(1);
 
-                        cell1.innerHTML = "<input id=\""+ data.SourceTables[i].TableName+ "_Edit" +"\"  class=\"btn btn-primary\" type=\"button\" onclick=\" EditValueSets('"+ data.SourceTables[i].TableName+ "')\" id=\"EditDataSet\" value=\"Edit\" /> <input id=\""+ data.SourceTables[i].TableName +"\"  class=\"btn btn-primary  \" type=\"button\" onclick=\" ViewDataSet('"+data.SourceTables[i].TableName+"') \"  value=\"View\" />  <input id=\""+ data.SourceTables[i].TableName +"_CSV\"  class=\"btn btn-primary  \" type=\"button\" onclick=\" GetDataSetCsv('"+data.SourceTables[i].TableName+"') \"  value=\"CSV\" />";
+                        cell1.innerHTML = "<input id=\""+ data.SourceTables[i].TableName+ "_Edit" +"\"  class=\"btn btn-primary btn-sm\" type=\"button\" onclick=\" EditValueSets('"+ data.SourceTables[i].TableName+ "')\" id=\"EditDataSet\" value=\"Load CSV\" /> <input id=\""+ data.SourceTables[i].TableName +"\"  class=\"btn btn-primary btn-sm  \" type=\"button\" onclick=\" ViewDataSet('"+data.SourceTables[i].TableName+"') \"  value=\"View/Edit\" />  <input id=\""+ data.SourceTables[i].TableName +"_CSV\"  class=\"btn btn-primary btn-sm  \" type=\"button\" onclick=\" GetDataSetCsv('"+data.SourceTables[i].TableName+"') \"  value=\"Download\" />";
                          cell2.innerHTML = data.SourceTables[i].TableName;
-                     //cell1.innerHTML = "<button id=\""+ data.SourceTables[i].TableName +"\"  type=\"button\" class=\"btn btn-primary\" data-toggle=\"modal\" data-target=\"#exampleModal\">view</button>";
+                     //cell1.innerHTML = "<button id=\""+ data.SourceTables[i].TableName +"\"  type=\"button\" class=\"btn btn-primary btn-sm\" data-toggle=\"modal\" data-target=\"#exampleModal\">view</button>";
 
 
                  }
@@ -591,7 +649,8 @@
 
 
                 var DataSetName = window.SurveyDataSet.SourceTables[i].TableName;
-                generateDynamicTable(json, "DialogBoxPrempt", DataSetName.toString())
+                generateDynamicTable(json, "DialogBoxPrempt", DataSetName.toString(),false)
+                $('#ValueSetName').text( DataSetName.toString())
                 $('#DownLoadDataSet1').removeAttr('hidden');
                 $('#DownLoadDataSet2').removeAttr('hidden');
 
@@ -639,8 +698,8 @@
 
 
     }
-
-    function generateDynamicTable(objArray, element , DataSetName) {
+   
+    function generateDynamicTable(objArray, element , DataSetName, NoAtSign) {
         var json = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
 
 		 // EXTRACT VALUE FOR HTML HEADER.
@@ -653,17 +712,25 @@
                 }
             }
         }
-
+        window.ColumnLength = col.length;
         // CREATE DYNAMIC TABLE.
         var table = document.createElement("table");
-         
+        table.id = "ViewTable"
+       
         // CREATE HTML TABLE HEADER ROW USING THE EXTRACTED HEADERS ABOVE.
 
         var tr = table.insertRow(-1);                   // TABLE ROW.
-
+       
         for (var i = 0; i < col.length; i++) {
             var th = document.createElement("th");      // TABLE HEADER.
-            th.innerHTML = col[i].substring(1);
+            if (typeof col[i] !== "undefined") { 
+                if (NoAtSign) {
+                    th.innerHTML = col[i];
+                } else {
+
+                    th.innerHTML = col[i].substring(1);
+                }
+            }
             tr.appendChild(th);
         }
 
@@ -671,21 +738,113 @@
         for (var i = 0; i < json.length; i++) {
 
             tr = table.insertRow(-1);
-
+            tr.setAttribute("contentEditable", "true");
+            tr.tabIndex = i;
+            tr.id = "Row_" + i;
+             tr.setAttribute("onclick", "SetRowId(this.id);");
+           
+             //$("<td />").html('<input type="checkbox" id="Row_'+ i+'" />').appendTo(tr);
             for (var j = 0; j < col.length; j++) {
+
+                
                 var tabCell = tr.insertCell(-1);
-                tabCell.innerHTML = json[i][col[j]];
+                
+
+                    tabCell.innerHTML = json[i][col[j]];
+                
+                
             }
         }
-
+       
         // FINALLY ADD THE NEWLY CREATED TABLE WITH JSON DATA TO A CONTAINER.
         var divContainer = document.getElementById(element);
         divContainer.innerHTML = "";
 
         divContainer.appendChild(table);
 	}
-  
+           
+    function SetRowId(row) {
+        window.SelectedRowId = row;
+
+    }
+   function  SaveChanges(DialogBox)
+    {
+       
+       var surveyid = $("#ValueSetSurveyKey").val();
+       var valueSetName = $('#ValueSetName').text();
+       var table = document.getElementById("ViewTable");
+    
+        var ActionUrl = '@Url.Action("SaveValueSet", "SurveyManager")' + '?surveyid=' + surveyid + '&valueSetName=' + valueSetName;
+       var JData = JSON.stringify(tableToJson(table));
  
+       $.ajax({
+           url: ActionUrl,
+           type: 'post',
+          
+           data: { JsonData: JData },
+                dataType: "json",
+              
+                async: false,
+                success: successFunc,
+                error: errorFunc
+            });
+            function successFunc(data)
+            {
+ 
+               $("#" + DialogBox).dialog("close");
+
+                GetDataSets(surveyid);
+                $("div.alert-warning").hide();
+                 
+               $("div.alert-success").show();
+            }
+            function errorFunc(data) {
+                alert('failed');
+        }
+
+    }  
+    function tableToJson(table)
+    {
+        var data = []; // first row needs to be headers
+        var headers = [];
+        for (var i=0; i<table.rows[0].cells.length; i++) {
+          headers[i] = table.rows[0].cells[i].innerHTML.toLowerCase().replace(/ /gi,'');
+        }
+        // go through cellsvar
+        for (var i=1; i<table.rows.length; i++) {
+        var tableRow = table.rows[i]; var rowData = {};
+        for (var j=0; j<tableRow.cells.length; j++) {
+        rowData[ headers[j] ] = tableRow.cells[j].innerHTML;
+        } data.push(rowData);
+        }
+        return data; 
+    }
+
+ 
+    function AddRow() {
+
+        var table = document.getElementById("ViewTable");
+      
+        var tr = table.insertRow(-1);  
+        var RowNumber = table.length +1
+        tr.setAttribute("contentEditable", "true");
+        tr.id = "Row_" + RowNumber;
+         tr.setAttribute("onclick", "SetRowId(this.id);");
+       // $("<td />").html('<input type="checkbox" id="Row_'+ RowNumber +'" />').appendTo(tr);
+        for (var j = 0; j < ColumnLength; j++) {
+                var tabCell = tr.insertCell(-1);
+                
+                tabCell.innerHTML = " ";
+               
+                
+        }
+        $("#SaveChanges").removeAttr('disabled');
+    }
+    function DeleteRow() {
+         
+        $("#" + window.SelectedRowId).remove();
+        $("#SaveChanges").removeAttr('disabled');
+    }
 
     function EditValueSets(DataSet) {
     
@@ -693,6 +852,18 @@
         $('#ValueSetFilePath').val("");
         $('#ValueSetUserPublishKey').val("");
         $('#SelectedValueSet').val(DataSet);
+        $('#DialogBoxPrempt1').text("");
+        $('#SaveChanges1').attr('style','visibility:hidden');
+        $('#AddRow1').attr('style','visibility:hidden');
+        $('#DeleteRow1').attr('style', 'visibility:hidden');
+        
+         
+        
+       
+       var $el = $('#FileUpload1');
+        $el.wrap('<form>').closest('form').get(0).reset();
+        $el.unwrap();
+       
         $("#EditValueSetDialogBox").dialog("open");
     }
     function EnableUpdateButton() {
@@ -885,6 +1056,7 @@
         }
 
     }
+ 
 
 </script>
 
@@ -949,7 +1121,7 @@
 
                             @*<label class="accountlabel" id="OrgKeylabel">*Organization Key:</label><br>*@
                             @Html.TextBoxFor(m => m.OrganizationKey, new { @class = "Account" })
-                            <input class="submits create" style="width:70px;" type="submit" name="ValidateOrganization" id="ValidateOrganization" onclick=" " value="Submit" /><br>
+                            <input class="btn btn-primary btn-sm" style="width:70px;" type="submit" name="ValidateOrganization" id="ValidateOrganization" onclick=" " value="Submit" /><br>
                             @Html.ValidationMessageFor(m => m.OrganizationKey, null, new { @class = "required" })
 
                         </p>
@@ -1056,7 +1228,7 @@
                                     @*<label for="file-upload" class="submits create"   onclick="javascript: document.getElementById('Newfile').click();">
                                             Browse
                                         </label>*@
-                                    <input for="file-upload" class="submits create" style="width:70px; " type="button" id="PublishButton" onclick="javascript: document.getElementById('Newfile').click();" value="Browse" />
+                                    <input for="file-upload" class="btn btn-primary btn-sm" style="width:70px; " type="button" id="PublishButton" onclick="javascript: document.getElementById('Newfile').click();" value="Browse" />
 
                                     @Html.ValidationMessageFor(m => m.Path, null, new { @class = "required" })
                                     <input id="Newfile" type="file" style='visibility: hidden;' name="Newfile" accept=".xls,.xlsx,.csv" onchange="ChangeText(this, 'Path');" />
@@ -1121,11 +1293,11 @@
                                     </div>
                                     <br />
                                     <br />
-                                    <input class="submits create" type="submit" disabled="disabled" name="PublishSurvey" id="PublishSurvey" value="Publish" style="margin-right:90px;" />
+                                    <input class="btn btn-primary btn-sm" type="submit" disabled="disabled" name="PublishSurvey" id="PublishSurvey" value="Publish" style="margin-right:90px;" />
                                 }
                                 else
                                 {
-                                    <input class="submits create" type="submit" name="PublishSurvey" id="PublishSurvey" value="Publish" style="margin-right:90px;" />
+                                    <input class="btn btn-primary btn-sm" type="submit" name="PublishSurvey" id="PublishSurvey" value="Publish" style="margin-right:90px;" />
 
                                 }
 
@@ -1148,7 +1320,7 @@
                                     @*<label for="file-upload" class="submits create"   onclick="javascript: document.getElementById('Newfile').click();">
                                             Browse
                                         </label>*@
-                                    <input for="file-upload" class="submits create" style="width:70px;" type="button" id="RePublishButton" onclick="javascript: document.getElementById('Newfile1').click();" value="Browse" /><br>
+                                    <input for="file-upload" class="btn btn-primary btn-sm" style="width:70px;" type="button" id="RePublishButton" onclick="javascript: document.getElementById('Newfile1').click();" value="Browse" /><br>
 
                                     @Html.ValidationMessageFor(m => m.RepublishPath, null, new { @class = "required" })
                                     <input id="Newfile1" type="file" style='visibility: hidden;' name="Newfile1" accept=".xls,.xlsx,.csv" onchange="ChangeText(this, 'RepublishPath');" />
@@ -1190,7 +1362,7 @@
 
                                 <br />
 
-                                <input class="submits create" type="submit" name="RePublishSurvey" id="RePublishSurvey" value="RePublish" style="margin-right:90px;" />
+                                <input class="btn btn-primary btn-sm" type="submit" name="RePublishSurvey" id="RePublishSurvey" value="RePublish" style="margin-right:90px;" />
 
 
                                 <input type="hidden" id="ExistingSurvey_Hidden1" value="@Model.UpdateExisting.ToString()" />
@@ -1261,7 +1433,7 @@
                                 @* <input class="submits create " type="submit" onclick=" clear();  " name="DownLoadResponse" id="DownLoadResponse" value="DownLoad" style="margin-right:90px;" />*@
 
 
-                                <input class="submits create " type="button" onclick="  GetJsonResponse();clear();   " name="DownLoadResponse" id="DownLoadResponse" value="DownLoad" style="margin-right:90px;" />
+                                <input class="btn btn-primary btn-sm" type="button" onclick="  GetJsonResponse();clear();   " name="DownLoadResponse" id="DownLoadResponse" value="DownLoad" style="margin-right:90px;" />
 
                             </div>
                         </div>
@@ -1283,7 +1455,7 @@
                                     @*<label for="file-upload" class="submits create"   onclick="javascript: document.getElementById('Newfile').click();">
                                             Browse
                                         </label>*@
-                                    <input for="file-upload" class="submits create" style="width:70px;" type="button" id="PublishButton" onclick="javascript: document.getElementById('Newfile2').click();" value="Browse" />
+                                    <input for="file-upload" class="btn btn-primary btn-sm" style="width:70px;" type="button" id="PublishButton" onclick="javascript: document.getElementById('Newfile2').click();" value="Browse" />
 
                                     <br>
 
@@ -1320,8 +1492,8 @@
 
 
 
-                                <input class="submits create" type="submit" onclick="clear()" name="SendEmail" id="SendEmail" value="Send Email" style="margin-right:90px;" />
-                                @*<button type="submit" class="btn btn-primary  " name="SendEmail" id="SendEmail" value="Send Email" data-loading-text="<i class='fa fa-spinner fa-spin '></i> Processing Order">Submit Order</button>*@
+                                <input class="btn btn-primary btn-sm" type="submit" onclick="clear()" name="SendEmail" id="SendEmail" value="Send Email" style="margin-right:90px;" />
+                                @*<button type="submit" class="btn btn-primary btn-sm  " name="SendEmail" id="SendEmail" value="Send Email" data-loading-text="<i class='fa fa-spinner fa-spin '></i> Processing Order">Submit Order</button>*@
 
 
                             </div>
@@ -1555,12 +1727,19 @@
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
-                            <div class="alert alert-success alert-dismissible fade show " role="alert">
-                                 Value Set was successfully updated!
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <div class="alert alert-success  " role="alert">
+                                Value Set was successfully updated!
+                                <button type="button" class="close" data-hide="alert"> 
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
+                            <script>
+                                $(function(){
+                                            $("[data-hide]").on("click", function(){
+                                                $(this).closest("." + $(this).attr("data-hide")).hide();
+                                            });
+                                        });
+                            </script>
                             <div class="accountdiv col-md-pull-9">
                                 <label class="accountlabel" id="SurveyIdlabel"><span style="color:#900000;">*</span> Survey Id:</label><br>
 
@@ -1638,8 +1817,8 @@
 
 
                         <p>
-                            <input class="submits create" onclick="OpenSurvey('@Model.SurveyURL')" type="button" id="LaunchSurvey" value="Launch Survey" />
-                            <input class="submits create  " type="button" onclick="copyToClipboard()" id="Copy" value="Copy All to Clipboard" />
+                            <input class="btn btn-primary btn-sm" onclick="OpenSurvey('@Model.SurveyURL')" type="button" id="LaunchSurvey" value="Launch Survey" />
+                            <input class="btn btn-primary btn-sm" type="button" onclick="copyToClipboard()" id="Copy" value="Copy All to Clipboard" />
                         </p>
 
                     </div>
@@ -1703,9 +1882,13 @@
         @Html.Raw(ViewData["TermOfUse1"].ToString())
     </div>
     <div id="ViewValueSetDialogBox" title="View Value Set">
-
+        <p><label id="ValueSetName">Prempt</label></p>
         <p><label id="DialogBoxPrempt">Prempt</label></p>
 
+        <input class="btn btn-danger" type="button" name="" id="DeleteRow" onclick="DeleteRow()" value="Delete Row" style="margin-right:20px;" />
+        <input class="btn btn-primary btn-sm" type="button" name="" id="AddRow" onclick="AddRow();" value="Add Row" style="margin-right:20px;" />
+        <input class="btn btn-success" type="button" name="" id="SaveChanges" onclick="SaveChanges('ViewValueSetDialogBox')" value="Save & close" style="margin-right:20px;" />
+       
     </div>
 
     <div id="EditValueSetDialogBox" title="Update Value Set">
@@ -1721,7 +1904,7 @@
                     @Html.TextBoxFor(m => m.ValueSetFilePath, new { @class = "Account ValueSetFilePath" })
 
 
-                    <input for="file-upload" class="btn btn-primary" style="width:70px; " type="button" id="btnFileUpload" onclick="javascript: document.getElementById('FileUpload1').click();" value="Browse" />
+                    <input for="file-upload" class="btn btn-primary btn-sm" style="width:70px; " type="button" id="btnFileUpload" onclick="javascript: document.getElementById('FileUpload1').click();" value="Load CSV" />
 
                     @Html.ValidationMessageFor(m => m.ValueSetFilePath, null, new { @class = "required" })
                     <input id="FileUpload1" type="file" style='visibility: hidden;' name="FileUpload1" accept=".xls,.xlsx,.csv" onchange="ChangeText(this, 'ValueSetFilePath');" />
@@ -1732,37 +1915,54 @@
                     <script type="text/javascript">
                         window.onload = function () {
                             var fileupload = document.getElementById("FileUpload1");
-
+                           
                             var filePath = document.getElementById("Path");
                             var button = document.getElementById("btnFileUpload");
                             button.onclick = function () {
+                                
                                 fileupload.click();
+                                 
                             };
                             fileupload.onchange = function () {
+                               
                                 var fileName = fileupload.value.split('\\')[fileupload.value.split('\\').length - 1];
-
+                                 
                                 $('#ValueSetFilePath').val(fileName);
+                                var reader = new FileReader();
+                                reader.onload = function () {
+                                    var json = csvToJSON(reader.result)
+                                    $('#SaveChanges1').removeAttr('style');
+                                    $('#AddRow1').removeAttr('style');
+                                     $('#DeleteRow1').removeAttr('style');
+                                     
+                                    generateDynamicTable(json, "DialogBoxPrempt1", $('#EditValueSetDialogBoxPrempt').text(), true);
+                                };
+
+                                reader.readAsBinaryString(fileupload.files[0]);
                             };
                         };
                     </script>
 
                 </div>
-                @if (!Model.IsAuthenticated)
-                {
-                    <div>
-                        <label class="accountlabel" id="SecurityTokenlabel1"><span style="color:#900000;">*</span> Security Token:</label><br>
+                @*@if (!Model.IsAuthenticated)
+        {
+            <div>
+                <label class="accountlabel" id="SecurityTokenlabel1"><span style="color:#900000;">*</span> Security Token:</label><br>
 
 
-                        @Html.TextBoxFor(m => m.ValueSetUserPublishKey, new { @class = "Account" }) <br>
-                        @Html.ValidationMessageFor(m => m.ValueSetUserPublishKey, null)<br>
-                    </div>
-                }
+                @Html.TextBoxFor(m => m.ValueSetUserPublishKey, new { @class = "Account" }) <br>
+                @Html.ValidationMessageFor(m => m.ValueSetUserPublishKey, null)<br>
+            </div>
+        }*@
                 <br>
+                <p><label id="DialogBoxPrempt1"></label></p>
+
+                @*<input class="btn btn-primary btn-sm" type="submit" name="UpdateValueSet" disabled="disabled" id="UpdateValueSet" onclick="" value="Update" style="margin-right:90px;" />*@
 
 
-                <input class="btn btn-primary" type="submit" name="UpdateValueSet" disabled="disabled" id="UpdateValueSet" onclick="" value="Update" style="margin-right:90px;" />
-
-
+                <input class="btn btn-danger" style="visibility:hidden" type="button" name="" id="DeleteRow1" onclick="DeleteRow()" value="Delete Row" style="margin-right:20px;" />
+                <input class="btn btn-primary btn-sm"  style="visibility:hidden" type="button" name="" id="AddRow1" onclick="AddRow();" value="Add Row" style="margin-right:20px;" />
+                <input class="btn btn-success"  style="visibility:hidden" type="button" name="" id="SaveChanges1" onclick="SaveChanges('EditValueSetDialogBox')" value="Update & close" style="margin-right:20px;" />
             </div>
             <input type="hidden" id="SelectedValueSet" value="@Model.SelectedValueSet" name="SelectedValueSet" />
             <input type="hidden" id="ValueSetSurveyKey" value="@Model.ValueSetSurveyKey" name="ValueSetSurveyKey" />

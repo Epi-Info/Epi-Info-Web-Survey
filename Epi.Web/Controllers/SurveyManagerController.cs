@@ -161,7 +161,7 @@ namespace Epi.Web.MVC.Controllers
 
         }
         [HttpPost]
-        public ActionResult Index(PublishModel Model, string PublishSurvey, string DownLoadResponse, string ValidateOrganization, HttpPostedFileBase Newfile, HttpPostedFileBase Newfile1, HttpPostedFileBase Newfile2, string SurveyName, string RePublishSurvey, string RePublishSurveyName, string SendEmail, string SetJson)
+        public ActionResult Index(PublishModel Model, string PublishSurvey, string DownLoadResponse, string ValidateOrganization, HttpPostedFileBase Newfile, HttpPostedFileBase Newfile1, HttpPostedFileBase Newfile2, string SurveyName, string RePublishSurvey, string RePublishSurveyName, string SendEmail, string SetJson, HttpPostedFileBase FileUpload1)
         {
             Model.ViewRecordsURL = ConfigurationManager.AppSettings["ViewRecordsURL"];
             string filepath = Server.MapPath("~\\Content\\Text\\TermOfUse.txt");
@@ -204,10 +204,12 @@ namespace Epi.Web.MVC.Controllers
                     ModelState["UserPublishKey"].Errors.Clear();
                     ModelState["Path"].Errors.Clear();
                     ModelState["RepublishPath"].Errors.Clear();
+                    ModelState["ValueSetFilePath"].Errors.Clear();
                     ModelState["EndDate"].Errors.Clear();
                     ModelState["RePublishDivState"].Errors.Clear();
                     ModelState["PublishDivState"].Errors.Clear();
                     ModelState["DownLoadDivState"].Errors.Clear();
+                    ModelState["ValueSetUserPublishKey"].Errors.Clear();
                     if (ModelState.IsValid)
                     {
                         //  OrganizationAccountRequest Request = new OrganizationAccountRequest();
@@ -265,6 +267,8 @@ namespace Epi.Web.MVC.Controllers
                     ModelState["UserPublishKey"].Errors.Clear();
                     ModelState["RepublishUserPublishKey"].Errors.Clear();
                     ModelState["RepublishPath"].Errors.Clear();
+                    ModelState["ValueSetFilePath"].Errors.Clear();
+                    ModelState["ValueSetUserPublishKey"].Errors.Clear();
                     if (ModelState.IsValid)
                     {
                         var response = DoPublish(Model, Newfile);
@@ -319,6 +323,8 @@ namespace Epi.Web.MVC.Controllers
                     ModelState["OrganizationKey"].Errors.Clear();
                     ModelState["UserPublishKey"].Errors.Clear();
                     ModelState["RepublishPath"].Errors.Clear();
+                    ModelState["ValueSetFilePath"].Errors.Clear();
+                    ModelState["ValueSetUserPublishKey"].Errors.Clear();
                     if (IsAuthenticated)
                     {
                         ModelState["RePublishUserPublishKey"].Errors.Clear();
@@ -376,6 +382,8 @@ namespace Epi.Web.MVC.Controllers
                     ModelState["EndDate"].Errors.Clear();
                     ModelState["RepublishPath"].Errors.Clear();
                     ModelState["RepublishUserPublishKey"].Errors.Clear();
+                    ModelState["ValueSetFilePath"].Errors.Clear();
+                    ModelState["ValueSetUserPublishKey"].Errors.Clear();
                     if (IsAuthenticated)
                     {
                         ModelState["UserPublishKey"].Errors.Clear();
@@ -413,7 +421,8 @@ namespace Epi.Web.MVC.Controllers
                     ModelState["PublishDivState"].Errors.Clear();
                     ModelState["DownLoadDivState"].Errors.Clear();
                     ModelState["OrganizationKey"].Errors.Clear();
-
+                    ModelState["ValueSetFilePath"].Errors.Clear();
+                    ModelState["ValueSetUserPublishKey"].Errors.Clear();
 
 
 
@@ -505,7 +514,42 @@ namespace Epi.Web.MVC.Controllers
                     }
 
                 }
-            }
+
+
+                if (FileUpload1 != null)
+                {
+                    Model.IsValidOrg = true;
+                    var orgkey = Model.OrganizationKey = Session["OrgId"].ToString();
+                    ModelState["FileName"].Errors.Clear();
+                    ModelState["SurveyName"].Errors.Clear();
+                    ModelState["RepublishUserPublishKey"].Errors.Clear();
+                    ModelState["UserPublishKey"].Errors.Clear();
+                    ModelState["Path"].Errors.Clear();
+                    ModelState["RepublishPath"].Errors.Clear();
+                    ModelState["OrganizationKey"].Errors.Clear();
+                    ModelState["EndDate"].Errors.Clear();
+                    ModelState["ValueSetFilePath"].Errors.Clear();
+                    ModelState["ValueSetUserPublishKey"].Errors.Clear();
+
+
+                    if (ModelState.IsValid)
+                    {
+                        string ValueSetXml =  GetValueSetXml(Model.SelectedValueSet, FileUpload1);
+                        SourceTablesRequest SourceTablesRequest = new SourceTablesRequest();
+                        SourceTablesRequest.List = new List<SourceTableDTO>();
+                        SourceTableDTO SourceTableDTO = new SourceTableDTO();
+                        SourceTableDTO.TableXml = ValueSetXml;
+                        SourceTableDTO.TableName = Model.SelectedValueSet;
+                        SourceTablesRequest.List.Add(SourceTableDTO);
+                        SourceTablesRequest.SurveyId = Model.ValueSetSurveyKey;
+                        _isurveyFacade.UpdateSourceTable(SourceTablesRequest);
+                    }
+                   
+                    Model.UpdateDataSetDivState = true;
+                    Model.SurveyNameList = ViewBag.SurveyNameList1 = GetAllSurveysByOrgId(Session["OrgId"].ToString());
+                    return View("Index", Model);
+                }
+                    }
             catch (Exception ex)
             {
                 ViewBag.SurveyNameList1 = GetAllSurveysByOrgId(Model.OrganizationKey);
@@ -566,7 +610,92 @@ namespace Epi.Web.MVC.Controllers
             return List;
 
         }
-        private void SendEmailNotification(PublishModel model, HttpPostedFileBase newfile2, SurveyInfoModel SurveyInfo)
+
+        private string GetValueSetXml(string ValueSetName, HttpPostedFileBase newfile2)
+        {
+
+            StringBuilder Xml = new StringBuilder();
+            try
+            {
+
+
+
+                StreamReader reader = new StreamReader(newfile2.InputStream);
+
+                string[] headers = reader.ReadLine().Split(',');
+
+                string attributesFormat = string.Join(" ", headers.Select((colStr, colIdx) => string.Format("{0}=\"{{{1}}}\"", colStr, colIdx)));
+
+
+                string rowFormat = string.Format("{0}", attributesFormat);
+
+                string line;
+
+                Xml.Append("<SourceTable TableName=\"" + ValueSetName + "\" >");
+                while ((line = reader.ReadLine()) != null)
+                {
+                    string Element = "<Item " + string.Format(rowFormat, line.Split(',')) + " />";
+
+                    Xml.Append(Element);
+
+
+                }
+                Xml.Append("</SourceTable>");
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            XDocument doc = XDocument.Parse(Xml.ToString());
+
+            return doc.ToString();
+        }
+        private  string GetValueSetXml(string ValueSetName, string JsonString)
+            {
+
+                StringBuilder Xml = new StringBuilder();
+                try
+                {
+
+                  
+                var objects = JsonConvert.DeserializeObject<List<object>>(JsonString);
+                var valueSetObject = objects.Select(obj => JsonConvert.SerializeObject(obj)).ToArray();
+
+
+                Xml.Append("<SourceTable TableName=\"" + ValueSetName + "\" >");
+                    foreach (var item in valueSetObject)
+                    {
+                    StringBuilder Element = new StringBuilder();
+                    Element.Append("<Item ");
+                    var Dictionary = JsonConvert.DeserializeObject<Dictionary<string, string>>(item);
+                    //   string Element = "<Item " + string.Format(rowFormat, line.Split(',')) + " />";
+                    foreach (var kv in Dictionary)
+                    {
+
+                        Element.Append(kv.Key +"=\""+kv.Value+"\" " );
+
+                    }
+                    Element.Append("/>");
+                    Xml.Append(Element);
+                }
+                Xml.Append("</SourceTable>");
+
+                }
+                catch (Exception ex)
+                {
+
+                    throw ex;
+                }
+                XDocument doc = XDocument.Parse(Xml.ToString());
+
+                return doc.ToString();
+
+            }
+
+
+            private void SendEmailNotification(PublishModel model, HttpPostedFileBase newfile2, SurveyInfoModel SurveyInfo)
         {
 
 
@@ -1104,7 +1233,7 @@ namespace Epi.Web.MVC.Controllers
             return IsValidOrg;
         }
 
-        private SelectList GetAllSurveysByOrgId(string orgkey)
+        private SelectList GetAllSurveysByOrgId(string orgkey,string surveyid ="")
         {
             var SurveyListObject = this._isurveyFacade.GetAllSurveysByOrgKey(orgkey);
             string SurveyName = "";
@@ -1354,16 +1483,52 @@ namespace Epi.Web.MVC.Controllers
             return Request;
         }
         [HttpPost]
-        public JsonResult GetSurveyInfo(string surveyid)
+        public JsonResult GetSurveyInfo(string surveyid, bool getsourcetable = false )
         {
+             PublishModel Model = new PublishModel();
+            if (getsourcetable)
+            {
+                Model.SourceTables = new List<Web.Models.SourceTableModel>();
+                var SourceTables = this._isurveyFacade.GetSourceTables(surveyid).List;
+                foreach (var item in SourceTables)
+                {
+                    Web.Models.SourceTableModel SourceTable = new Web.Models.SourceTableModel();
+                    SourceTable.TableName = item.TableName;
+                    SourceTable.TableXml = Common.Json.SurveyResponseJson.XmlToJson(item.TableXml);
+                    Model.SourceTables.Add(SourceTable);
 
+                }
+            }
             var SurveyInfo = this._isurveyFacade.GetSurveyInfoModel(surveyid);
-            PublishModel Model = new PublishModel();
+           
             Model.EndDate = AddLeadingZero(SurveyInfo.ClosingDate.Month.ToString()) + "/" + AddLeadingZero(SurveyInfo.ClosingDate.Day.ToString()) + "/" + SurveyInfo.ClosingDate.Year;
             Model.IsDraft = SurveyInfo.IsDraftMode;
             Model.SurveyName = SurveyInfo.SurveyName;
             return Json(Model);
 
+
+        }
+        [HttpPost]
+        public JsonResult SaveValueSet(string JsonData ,string surveyid, string valueSetName )
+        {
+            try
+            {
+                string ValueSetXml = GetValueSetXml(valueSetName, JsonData);
+                SourceTablesRequest SourceTablesRequest = new SourceTablesRequest();
+                SourceTablesRequest.List = new List<SourceTableDTO>();
+                SourceTableDTO SourceTableDTO = new SourceTableDTO();
+                SourceTableDTO.TableXml = ValueSetXml;
+                SourceTableDTO.TableName = valueSetName;
+                SourceTablesRequest.List.Add(SourceTableDTO);
+                SourceTablesRequest.SurveyId = surveyid;
+                _isurveyFacade.UpdateSourceTable(SourceTablesRequest);
+
+                return Json(true);
+            }
+            catch (Exception ex) {
+
+                return Json(false);
+            }
 
         }
         [HttpPost]

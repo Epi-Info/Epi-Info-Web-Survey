@@ -116,7 +116,12 @@ namespace Epi.Web.MVC
                        "Survey/AddChild", // URL with parameters
                        new { controller = "Survey", action = "AddChild" }
                    );
-
+            routes.MapRoute
+             (
+             null, // Route name
+             "SurveyManager/SaveValueSet", // URL with parameters
+             new { controller = "SurveyManager", action = "SaveValueSet" }
+            ); // Parameter defaults
             routes.MapRoute
               (
               null, // Route name
