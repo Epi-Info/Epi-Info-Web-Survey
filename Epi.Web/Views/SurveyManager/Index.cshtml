@@ -27,10 +27,10 @@
     tr:nth-child(even) {
         background-color: #daedf4;
     }
-   #ViewTable tr:hover {
+   .ViewTable tr:hover {
           background-color: #ffff99;
     }
-    #ViewTable  tr:focus {
+    .ViewTable  tr:focus {
           background-color: #ffff99;
     }
 
@@ -715,8 +715,8 @@
         window.ColumnLength = col.length;
         // CREATE DYNAMIC TABLE.
         var table = document.createElement("table");
-        table.id = "ViewTable"
-       
+        table.id = "ViewTable_" + element;
+        table.setAttribute("class", "ViewTable");
         // CREATE HTML TABLE HEADER ROW USING THE EXTRACTED HEADERS ABOVE.
 
         var tr = table.insertRow(-1);                   // TABLE ROW.
@@ -767,12 +767,12 @@
         window.SelectedRowId = row;
 
     }
-   function  SaveChanges(DialogBox)
+   function  SaveChanges(DialogBox,TableName)
     {
        
        var surveyid = $("#ValueSetSurveyKey").val();
        var valueSetName = $('#ValueSetName').text();
-       var table = document.getElementById("ViewTable");
+       var table = document.getElementById("ViewTable_"+TableName);
     
         var ActionUrl = '@Url.Action("SaveValueSet", "SurveyManager")' + '?surveyid=' + surveyid + '&valueSetName=' + valueSetName;
        var JData = JSON.stringify(tableToJson(table));
@@ -821,9 +821,9 @@
     }
 
  
-    function AddRow() {
+    function AddRow(TableName) {
 
-        var table = document.getElementById("ViewTable");
+        var table = document.getElementById("ViewTable_"+ TableName);
       
         var tr = table.insertRow(-1);  
         var RowNumber = table.length +1
@@ -1885,9 +1885,9 @@
         <p><label id="ValueSetName">Prempt</label></p>
         <p><label id="DialogBoxPrempt">Prempt</label></p>
 
-        <input class="btn btn-danger" type="button" name="" id="DeleteRow" onclick="DeleteRow()" value="Delete Row" style="margin-right:20px;" />
-        <input class="btn btn-primary btn-sm" type="button" name="" id="AddRow" onclick="AddRow();" value="Add Row" style="margin-right:20px;" />
-        <input class="btn btn-success" type="button" name="" id="SaveChanges" onclick="SaveChanges('ViewValueSetDialogBox')" value="Save & close" style="margin-right:20px;" />
+        <input class="btn btn-danger" type="button" name="" id="DeleteRow" onclick="DeleteRow('DialogBoxPrempt')" value="Delete Row" style="margin-right:20px;" />
+        <input class="btn btn-primary btn-sm" type="button" name="" id="AddRow" onclick="AddRow('DialogBoxPrempt');" value="Add Row" style="margin-right:20px;" />
+        <input class="btn btn-success" type="button" name="" id="SaveChanges" onclick="SaveChanges('ViewValueSetDialogBox','DialogBoxPrempt')" value="Save & close" style="margin-right:20px;" />
        
     </div>
 
@@ -1960,9 +1960,9 @@
                 @*<input class="btn btn-primary btn-sm" type="submit" name="UpdateValueSet" disabled="disabled" id="UpdateValueSet" onclick="" value="Update" style="margin-right:90px;" />*@
 
 
-                <input class="btn btn-danger" style="visibility:hidden" type="button" name="" id="DeleteRow1" onclick="DeleteRow()" value="Delete Row" style="margin-right:20px;" />
-                <input class="btn btn-primary btn-sm"  style="visibility:hidden" type="button" name="" id="AddRow1" onclick="AddRow();" value="Add Row" style="margin-right:20px;" />
-                <input class="btn btn-success"  style="visibility:hidden" type="button" name="" id="SaveChanges1" onclick="SaveChanges('EditValueSetDialogBox')" value="Update & close" style="margin-right:20px;" />
+                <input class="btn btn-danger" style="visibility:hidden" type="button" name="" id="DeleteRow1" onclick="DeleteRow('DialogBoxPrempt1')" value="Delete Row" style="margin-right:20px;" />
+                <input class="btn btn-primary btn-sm"  style="visibility:hidden" type="button" name="" id="AddRow1" onclick="AddRow('DialogBoxPrempt1');" value="Add Row" style="margin-right:20px;" />
+                <input class="btn btn-success"  style="visibility:hidden" type="button" name="" id="SaveChanges1" onclick="SaveChanges('EditValueSetDialogBox','DialogBoxPrempt1')" value="Update & close" style="margin-right:20px;" />
             </div>
             <input type="hidden" id="SelectedValueSet" value="@Model.SelectedValueSet" name="SelectedValueSet" />
             <input type="hidden" id="ValueSetSurveyKey" value="@Model.ValueSetSurveyKey" name="ValueSetSurveyKey" />
