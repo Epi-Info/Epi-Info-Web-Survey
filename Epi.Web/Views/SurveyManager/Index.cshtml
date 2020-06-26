@@ -197,7 +197,12 @@
     $(document).ready(function () {
 
 
-     
+          $(".SearchInput").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $(".ViewTable .TableRow").filter(function() {
+              $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+          });
 
          $("div.alert-success").hide();
          $("#EditValueSetDialogBox").dialog({
@@ -741,8 +746,8 @@
             tr.setAttribute("contentEditable", "true");
             tr.tabIndex = i;
             tr.id = "Row_" + i;
-             tr.setAttribute("onclick", "SetRowId(this.id);");
-           
+            tr.setAttribute("onclick", "SetRowId(this.id);");
+            tr.setAttribute("class", "TableRow");
              //$("<td />").html('<input type="checkbox" id="Row_'+ i+'" />').appendTo(tr);
             for (var j = 0; j < col.length; j++) {
 
@@ -856,7 +861,7 @@
         $('#SaveChanges1').attr('style','visibility:hidden');
         $('#AddRow1').attr('style','visibility:hidden');
         $('#DeleteRow1').attr('style', 'visibility:hidden');
-        
+        $('#SearchInput1').attr('style', 'visibility:hidden');
          
         
        
@@ -1206,7 +1211,7 @@
                             <a href="#" style="cursor:pointer;color:#ffffff;" class="navLink UpdateDataSetExpand" onclick="Toggle('UpdateDataSetDivExpand')">
                                 <img style="display:none" src="~/Content/images/Toggle-expand-alt_green.png" />
                                 <img style="display:none" src="~/Content/images/Toggle-collapse-alt_green.png" />
-                                Update Survey Value Sets (Beta)
+                                 Survey Value Sets (Beta)
                             </a>
 
                         </div>
@@ -1718,7 +1723,7 @@
                         </div>
 
                         <div id="UpdateDataSetDiv" class="contentContainer" style="margin-bottom: 100px; align-self:center ;display:none; visibility:collapse;margin:1em">
-                            <h1>Survey Data Sets</h1>
+                            <h1>Survey Value Sets</h1>
                             <br />
 
                             <div class="alert alert-warning alert-dismissible fade show" role="alert">
@@ -1881,17 +1886,18 @@
     <div id="TermsDialog">
         @Html.Raw(ViewData["TermOfUse1"].ToString())
     </div>
-    <div id="ViewValueSetDialogBox" title="View Value Set">
+    <div id="ViewValueSetDialogBox" title="View Value Sets">
         <p><label id="ValueSetName">Prempt</label></p>
+        <p><input class="form-control SearchInput" id="SearchInput" type="text" placeholder="Search.."></p>
         <p><label id="DialogBoxPrempt">Prempt</label></p>
 
         <input class="btn btn-danger" type="button" name="" id="DeleteRow" onclick="DeleteRow('DialogBoxPrempt')" value="Delete Row" style="margin-right:20px;" />
         <input class="btn btn-primary btn-sm" type="button" name="" id="AddRow" onclick="AddRow('DialogBoxPrempt');" value="Add Row" style="margin-right:20px;" />
         <input class="btn btn-success" type="button" name="" id="SaveChanges" onclick="SaveChanges('ViewValueSetDialogBox','DialogBoxPrempt')" value="Save & close" style="margin-right:20px;" />
-       
+
     </div>
 
-    <div id="EditValueSetDialogBox" title="Update Value Set">
+    <div id="EditValueSetDialogBox" title="Update Value Sets">
         @using (Html.BeginForm("Index", "SurveyManager", null, FormMethod.Post, new { id = "myform", enctype = "multipart/form-data" }))
         {
             <p><label id="EditValueSetDialogBoxPrempt" style="font:bolder">Prempt</label></p>
@@ -1915,26 +1921,26 @@
                     <script type="text/javascript">
                         window.onload = function () {
                             var fileupload = document.getElementById("FileUpload1");
-                           
+
                             var filePath = document.getElementById("Path");
                             var button = document.getElementById("btnFileUpload");
                             button.onclick = function () {
-                                
+
                                 fileupload.click();
-                                 
+
                             };
                             fileupload.onchange = function () {
-                               
+
                                 var fileName = fileupload.value.split('\\')[fileupload.value.split('\\').length - 1];
-                                 
+
                                 $('#ValueSetFilePath').val(fileName);
                                 var reader = new FileReader();
                                 reader.onload = function () {
                                     var json = csvToJSON(reader.result)
                                     $('#SaveChanges1').removeAttr('style');
                                     $('#AddRow1').removeAttr('style');
-                                     $('#DeleteRow1').removeAttr('style');
-                                     
+                                    $('#DeleteRow1').removeAttr('style');
+                                    $('#SearchInput1').removeAttr('style');
                                     generateDynamicTable(json, "DialogBoxPrempt1", $('#EditValueSetDialogBoxPrempt').text(), true);
                                 };
 
@@ -1955,14 +1961,15 @@
             </div>
         }*@
                 <br>
+                <p><input class="form-control SearchInput" id="SearchInput1" type="text" style="visibility:hidden" placeholder="Search.."></p>
                 <p><label id="DialogBoxPrempt1"></label></p>
 
                 @*<input class="btn btn-primary btn-sm" type="submit" name="UpdateValueSet" disabled="disabled" id="UpdateValueSet" onclick="" value="Update" style="margin-right:90px;" />*@
 
 
                 <input class="btn btn-danger" style="visibility:hidden" type="button" name="" id="DeleteRow1" onclick="DeleteRow('DialogBoxPrempt1')" value="Delete Row" style="margin-right:20px;" />
-                <input class="btn btn-primary btn-sm"  style="visibility:hidden" type="button" name="" id="AddRow1" onclick="AddRow('DialogBoxPrempt1');" value="Add Row" style="margin-right:20px;" />
-                <input class="btn btn-success"  style="visibility:hidden" type="button" name="" id="SaveChanges1" onclick="SaveChanges('EditValueSetDialogBox','DialogBoxPrempt1')" value="Update & close" style="margin-right:20px;" />
+                <input class="btn btn-primary btn-sm" style="visibility:hidden" type="button" name="" id="AddRow1" onclick="AddRow('DialogBoxPrempt1');" value="Add Row" style="margin-right:20px;" />
+                <input class="btn btn-success" style="visibility:hidden" type="button" name="" id="SaveChanges1" onclick="SaveChanges('EditValueSetDialogBox','DialogBoxPrempt1')" value="Update & close" style="margin-right:20px;" />
             </div>
             <input type="hidden" id="SelectedValueSet" value="@Model.SelectedValueSet" name="SelectedValueSet" />
             <input type="hidden" id="ValueSetSurveyKey" value="@Model.ValueSetSurveyKey" name="ValueSetSurveyKey" />
