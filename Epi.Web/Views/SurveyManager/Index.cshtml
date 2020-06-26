@@ -642,7 +642,7 @@
     function ViewDataSet(DataSet)
     {
 
-
+        $('#SearchInput').val("");
         for (var i = 0; i < window.SurveyDataSet.SourceTables.length; i++)
         {
             if (window.SurveyDataSet.SourceTables[i].TableName == DataSet) {
@@ -862,6 +862,7 @@
         $('#AddRow1').attr('style','visibility:hidden');
         $('#DeleteRow1').attr('style', 'visibility:hidden');
         $('#SearchInput1').attr('style', 'visibility:hidden');
+        $('#SearchInput1').val("");
          
         
        
