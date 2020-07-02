@@ -719,6 +719,7 @@
         }
         window.ColumnLength = col.length;
         // CREATE DYNAMIC TABLE.
+        
         var table = document.createElement("table");
         table.id = "ViewTable_" + element;
         table.setAttribute("class", "ViewTable");
@@ -728,6 +729,7 @@
        
         for (var i = 0; i < col.length; i++) {
             var th = document.createElement("th");      // TABLE HEADER.
+            th.setAttribute("contentEditable", "false");
             if (typeof col[i] !== "undefined") { 
                 if (NoAtSign) {
                     th.innerHTML = col[i];
@@ -744,10 +746,12 @@
 
             tr = table.insertRow(-1);
             tr.setAttribute("contentEditable", "true");
+           
             tr.tabIndex = i;
             tr.id = "Row_" + i;
             tr.setAttribute("onclick", "SetRowId(this.id);");
             tr.setAttribute("class", "TableRow");
+            
              //$("<td />").html('<input type="checkbox" id="Row_'+ i+'" />').appendTo(tr);
             for (var j = 0; j < col.length; j++) {
 
@@ -764,7 +768,7 @@
         // FINALLY ADD THE NEWLY CREATED TABLE WITH JSON DATA TO A CONTAINER.
         var divContainer = document.getElementById(element);
         divContainer.innerHTML = "";
-
+        divContainer.setAttribute("contentEditable", "true");
         divContainer.appendChild(table);
 	}
            
@@ -1887,8 +1891,9 @@
     <div id="TermsDialog">
         @Html.Raw(ViewData["TermOfUse1"].ToString())
     </div>
-    <div id="ViewValueSetDialogBox" title="View Value Sets">
-        <p><label id="ValueSetName">Prempt</label></p>
+    <div id="ViewValueSetDialogBox" title="View Value Sets" >
+
+        <p><label id="ValueSetName" >Prempt</label></p>
         <p><input class="form-control SearchInput" id="SearchInput" type="text" placeholder="Search.."></p>
         <p><label id="DialogBoxPrempt">Prempt</label></p>
 
@@ -1898,10 +1903,10 @@
 
     </div>
 
-    <div id="EditValueSetDialogBox" title="Update Value Sets">
+    <div id="EditValueSetDialogBox" title="Update Value Sets" >
         @using (Html.BeginForm("Index", "SurveyManager", null, FormMethod.Post, new { id = "myform", enctype = "multipart/form-data" }))
         {
-            <p><label id="EditValueSetDialogBoxPrempt" style="font:bolder">Prempt</label></p>
+            <p><label id="EditValueSetDialogBoxPrempt" style="font:bolder" >Prempt</label></p>
 
             <div class="accountdiv col-md-12">
                 <div>
@@ -1926,26 +1931,32 @@
                             var filePath = document.getElementById("Path");
                             var button = document.getElementById("btnFileUpload");
                             button.onclick = function () {
-
+                               // alert(1);
                                 fileupload.click();
 
                             };
                             fileupload.onchange = function () {
-
+                                 //alert(2);
                                 var fileName = fileupload.value.split('\\')[fileupload.value.split('\\').length - 1];
 
                                 $('#ValueSetFilePath').val(fileName);
                                 var reader = new FileReader();
-                                reader.onload = function () {
-                                    var json = csvToJSON(reader.result)
+                                reader.onload = function (e) {
+                                   
+                                 
+                                      
+                                   var json = csvToJSON(reader.result)
+                                      
                                     $('#SaveChanges1').removeAttr('style');
                                     $('#AddRow1').removeAttr('style');
                                     $('#DeleteRow1').removeAttr('style');
                                     $('#SearchInput1').removeAttr('style');
+                                    
                                     generateDynamicTable(json, "DialogBoxPrempt1", $('#EditValueSetDialogBoxPrempt').text(), true);
                                 };
 
-                                reader.readAsBinaryString(fileupload.files[0]);
+                               // reader.readAsBinaryString(fileupload.files[0]);
+                                 reader.readAsText (fileupload.files[0])
                             };
                         };
                     </script>
