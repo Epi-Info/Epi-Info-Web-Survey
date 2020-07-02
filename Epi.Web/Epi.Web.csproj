@@ -216,6 +216,7 @@
     <Compile Include="Models\RelateModel.cs" />
     <Compile Include="Models\ResponseModel.cs" />
     <Compile Include="Models\SeachBoxModel.cs" />
+    <Compile Include="Models\SourceTableModel.cs" />
     <Compile Include="Models\StateModel.cs" />
     <Compile Include="Models\SurveyModel.cs" />
     <Compile Include="Models\SurveyResponseApiModel.cs" />
@@ -306,6 +307,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\CheckCode\IFElse.txt" />
     <Content Include="Content\css\awesomplete.css" />
+    <Content Include="Content\css\bootstrap.min.css" />
     <Content Include="Content\css\c3.min.css" />
     <Content Include="Content\css\demos.css" />
     <Content Include="Content\css\epistyle-blue.css" />
@@ -490,6 +492,7 @@
     <Content Include="Scripts\awesomplete.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\bootstrapV4.min.js" />
     <Content Include="Scripts\c3.min.js" />
     <Content Include="Scripts\CheckCodeEngine.js" />
     <Content Include="Scripts\CheckCodeEngineV1.js" />
@@ -523,6 +526,7 @@
     <Content Include="Properties\DataSources\Epi.Web.Common.Message.PublishResponse1.datasource" />
     <Content Include="Properties\DataSources\Epi.Web.Common.Message.UserResponse.datasource" />
     <Content Include="Content\Text\EmailList-Bulk.xlsx" />
+    <Content Include="libman.json" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
