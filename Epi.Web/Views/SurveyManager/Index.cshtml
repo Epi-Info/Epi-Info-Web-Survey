@@ -197,6 +197,10 @@
     $(document).ready(function () {
 
 
+
+
+  
+
           $(".SearchInput").on("keyup", function() {
             var value = $(this).val().toLowerCase();
             $(".ViewTable .TableRow").filter(function() {
@@ -374,7 +378,7 @@
 
 
     function ChangeText(oFileInput, sTargetID) {
-        alert(12);
+       // alert(12);
 
            // document.getElementById(sTargetID).value = oFileInput.value;
             $('.' + sTargetID).val(oFileInput.value);
@@ -774,7 +778,7 @@
            
     function SetRowId(row) {
         window.SelectedRowId = row;
-
+        $(row).css('background-color',' yellow');
     }
    function  SaveChanges(DialogBox,TableName)
     {
