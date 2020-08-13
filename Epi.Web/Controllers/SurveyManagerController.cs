@@ -1039,10 +1039,12 @@ namespace Epi.Web.MVC.Controllers
             request.AnswerInfo.SurveyQuestionAnswerList = new Dictionary<string, string>();
             for (int cell = 10; cell <= end.Column; cell++)
             {
-                string ColumnName = xlWorksheet.Cells[1, cell].Value.ToString();
-                string Value = xlWorksheet.Cells[row, cell].Value.ToString();
-                request.AnswerInfo.SurveyQuestionAnswerList.Add(ColumnName, Value);
-                SurveyQuestionAnswerList.Add(ColumnName, Value);
+                if (xlWorksheet.Cells[1, cell].Value != null) {
+                    string ColumnName = xlWorksheet.Cells[1, cell].Value.ToString();
+                    string Value = xlWorksheet.Cells[row, cell].Value.ToString();
+                    request.AnswerInfo.SurveyQuestionAnswerList.Add(ColumnName, Value);
+                    SurveyQuestionAnswerList.Add(ColumnName, Value);
+                }
             }
 
 
