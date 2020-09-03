@@ -22,7 +22,7 @@ namespace Epi.Web.EF
             : base("name=EIWSEntities")
         {
         }
-        public EIWSEntities(string connectionstring ): base(connectionstring)
+        public EIWSEntities(string connectionstring) : base(connectionstring)
         {
         }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -54,6 +54,8 @@ namespace Epi.Web.EF
         public DbSet<Admin> Admins { get; set; }
         public DbSet<SourceTable> SourceTables { get; set; }
         public DbSet<State> States { get; set; }
+        public DbSet<SurveyReport> SurveyReports { get; set; }
+        public DbSet<SurveyReportsInfo> SurveyReportsInfoes { get; set; }
     
         public virtual int usp_AddDatasource(string datasourceServerName, string databaseType, string initialCatalog, string persistSecurityInfo, string databaseUserID, Nullable<System.Guid> surveyID, string password)
         {

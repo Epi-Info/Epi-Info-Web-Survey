@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\vwm5\source\repos\Epi-Info-Web-Survey\Epi.Web.SurveyManager_Test\obj\x86\Release\
+C:\Users\vwm5\source\repos\Epi-Info\Epi-Info-Web-Survey\Epi.Web.SurveyManager_Test\obj\x86\Release\
 Epi.Web.SurveyManager.Client
 none
 false
 TRACE
-C:\Users\vwm5\source\repos\Epi-Info-Web-Survey\Epi.Web.SurveyManager_Test\App.xaml
-8-1338260984
+C:\Users\vwm5\source\repos\Epi-Info\Epi-Info-Web-Survey\Epi.Web.SurveyManager_Test\App.xaml
+9-426338623
 
-16200376167
-21-2046993185
-DownLoad.xaml;Page_AddUser.xaml;MainWindow.xaml;Page_Configuration.xaml;Page_GetSurveyControls.xaml;Page_ManageSurvey.xaml;Page_Publish.xaml;ResponseClient.xaml;
+191236233215
+21145093081
+DownLoad.xaml;Page_AddOrganization.xaml;MainWindow.xaml;Page_AddUser.xaml;Page_Configuration.xaml;Page_GetSurveyControls.xaml;Page_ManageSurvey.xaml;Page_Publish.xaml;ResponseClient.xaml;
 
-False
+True
 

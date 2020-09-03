@@ -232,5 +232,45 @@ namespace Epi.Web.WCF.SurveyService
 
 
         }
+        public string GetJsonResponseAll(string SurveyId, string OrganizationId, string PublisherKey)
+        {
+
+
+
+            return Common.Helper.SqlHelper.GetJsonResponseAll(SurveyId);
+
+
+
+        }
+
+        public PublishReportResponse PublishReport(PublishReportRequest Request)
+        {
+            try
+            {
+                PublishReportResponse result = new PublishReportResponse();
+                Epi.Web.Interfaces.DataInterfaces.IReportDao IReportDao  = new EF.EntityReportDao();
+                
+
+
+                Epi.Web.BLL.Report Implementation = new Epi.Web.BLL.Report(IReportDao);
+
+                ReportInfoBO ReportInfoBO = Mapper.ToReportInfoBO(Request.ReportInfo);
+
+                Implementation.PublishReport(ReportInfoBO);
+
+                result.Message = "The report was successfully published";
+                return result;
+            }
+            catch (Exception ex)
+            {
+                CustomFaultException customFaultException = new CustomFaultException();
+                customFaultException.CustomMessage = ex.Message;
+                customFaultException.Source = ex.Source;
+                customFaultException.StackTrace = ex.StackTrace;
+                customFaultException.HelpLink = ex.HelpLink;
+                throw new FaultException<CustomFaultException>(customFaultException);
+            }
+            
+        }
     }
 }

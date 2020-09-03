@@ -71,6 +71,7 @@
     <Compile Include="Account.cs" />
     <Compile Include="Admin.cs" />
     <Compile Include="CacheDependencyInfo.cs" />
+    <Compile Include="Report.cs" />
     <Compile Include="SurveyDashboardInfo.cs" />
     <Compile Include="User.cs" />
     <Compile Include="Utility.cs" />

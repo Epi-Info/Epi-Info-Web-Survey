@@ -223,7 +223,45 @@ namespace Epi.Web.Common.ObjectMapping
             return result;
         }
 
-        
+        public static GadgetBO ToGadgetBO(GadgetDTO gadget)
+        {
+            GadgetBO GadgetBO = new GadgetBO();
+
+            GadgetBO.CreatedDate = gadget.CreatedDate;
+            GadgetBO.EditedDate = gadget.EditedDate;
+            GadgetBO.ReportId = gadget.ReportId;
+            GadgetBO.GadgetVersion = gadget.GadgetVersion;
+
+            GadgetBO.GadgetsScript = gadget.GadgetsScript;
+            GadgetBO.ReportHtml = gadget.GadgetHtml;
+            GadgetBO.GadgetId = gadget.GadgetId;
+            GadgetBO.GadgetNumber = gadget.GadgetNumber;
+            return GadgetBO;
+        }
+        public static List<GadgetBO> ToReportInfoBOList( List<GadgetDTO> DTOList)
+        {
+            List<GadgetBO> List = new List<GadgetBO>();
+            foreach (var item in DTOList) {
+                List.Add(ToGadgetBO(item));
+            }
+            return List;
+        }
+        public static ReportInfoBO ToReportInfoBO(ReportInfoDTO reportInfo)
+        {
+            ReportInfoBO ReportInfoBO = new ReportInfoBO();
+
+            ReportInfoBO.CreatedDate = reportInfo.CreatedDate;
+            ReportInfoBO.EditedDate = reportInfo.EditedDate;
+            ReportInfoBO.ReportId = reportInfo.ReportId;
+            ReportInfoBO.ReportVersion = reportInfo.ReportVersion;
+            ReportInfoBO.SurveyId = reportInfo.SurveyId;
+            ReportInfoBO.ReportURL = reportInfo.ReportURL;
+            ReportInfoBO.Gadgets =ToReportInfoBOList(reportInfo.Gadgets);
+            ReportInfoBO.RecordCount = reportInfo.RecordCount;
+            ReportInfoBO.DataSource = reportInfo.DataSource;
+            return ReportInfoBO;
+        }
+
 
         /// <summary>
         /// Maps SurveyInfoBO business object to SurveyInfoDTO entity.
@@ -527,6 +565,52 @@ namespace Epi.Web.Common.ObjectMapping
                 DTOList.Add(Mapper.ToAdminDTO(item));
             }
             return DTOList;
+        }
+
+        public static GadgetDTO ToGadgetDTO(GadgetBO reportInfo)
+        {
+            GadgetDTO ReportDTO = new GadgetDTO();
+
+            ReportDTO.CreatedDate = reportInfo.CreatedDate;
+            ReportDTO.EditedDate = reportInfo.EditedDate;
+            ReportDTO.ReportId = reportInfo.ReportId;
+            ReportDTO.GadgetVersion = reportInfo.GadgetVersion;
+           // ReportDTO.SurveyId = reportInfo.SurveyId;
+            ReportDTO.GadgetsScript = reportInfo.GadgetsScript;
+            ReportDTO.GadgetHtml = reportInfo.ReportHtml;
+            ReportDTO.GadgetId = reportInfo.GadgetId;
+            ReportDTO.GadgetNumber = reportInfo.GadgetNumber;
+            return ReportDTO;
+        }
+        public static ReportInfoDTO ToReportInfoDTO(ReportInfoBO reportInfo)
+        {
+            ReportInfoDTO ReportDTO = new ReportInfoDTO();
+
+            ReportDTO.CreatedDate = reportInfo.CreatedDate;
+            ReportDTO.EditedDate = reportInfo.EditedDate;
+            ReportDTO.ReportId = reportInfo.ReportId;
+            ReportDTO.ReportVersion = reportInfo.ReportVersion;
+            ReportDTO.SurveyId = reportInfo.SurveyId;
+            ReportDTO.DataSource = reportInfo.DataSource;
+            ReportDTO.RecordCount = reportInfo.RecordCount;
+            if (reportInfo.Gadgets != null) {
+                ReportDTO.Gadgets = ToGadgetsListDTO(reportInfo.Gadgets);
+            }
+            return ReportDTO;
+        }
+        public static List<GadgetDTO> ToGadgetsListDTO(List<GadgetBO> GadgetList)
+        {
+            List<GadgetDTO> GadgetCollection = new List<GadgetDTO>();
+            foreach (var gadget in GadgetList)
+            {
+
+                GadgetCollection.Add(ToGadgetDTO(gadget));
+            }
+
+
+
+
+            return GadgetCollection;
         }
     }
 }

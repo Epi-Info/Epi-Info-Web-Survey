@@ -337,4 +337,32 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetSurveyReportList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q42="http://www.yourcompany.com/types/" minOccurs="0" name="publishReportRequest" nillable="true" type="q42:PublishReportRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSurveyReportListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q43="http://www.yourcompany.com/types/" minOccurs="0" name="GetSurveyReportListResult" nillable="true" type="q43:PublishReportResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSurveyReport">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q44="http://www.yourcompany.com/types/" minOccurs="0" name="publishReportRequest" nillable="true" type="q44:PublishReportRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSurveyReportResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q45="http://www.yourcompany.com/types/" minOccurs="0" name="GetSurveyReportResult" nillable="true" type="q45:PublishReportResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

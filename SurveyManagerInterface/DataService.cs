@@ -1021,6 +1021,88 @@ namespace Epi.Web.WCF.SurveyService
             
         }
 
+
+
+
+
+        public PublishReportResponse GetSurveyReportList(PublishReportRequest publishReportRequest) {
+            PublishReportResponse PublishReportResponse = new PublishReportResponse();
+
+
+
+            try
+            {
+                 
+                Epi.Web.Interfaces.DataInterfaces.IReportDao IReportDao = new EF.EntityReportDao();
+
+
+
+                Epi.Web.BLL.Report Implementation = new Epi.Web.BLL.Report(IReportDao);
+
+                 
+
+                var List = Implementation.GetSurveyReports(publishReportRequest.ReportInfo.SurveyId.ToString(), publishReportRequest.IncludHTML);
+
+                foreach (var Bo in List )
+                {
+
+                    PublishReportResponse.Reports.Add(Mapper.ToReportInfoDTO(Bo));
+                }
+
+                
+                return PublishReportResponse;
+            }
+            catch (Exception ex)
+            {
+                CustomFaultException customFaultException = new CustomFaultException();
+                customFaultException.CustomMessage = ex.Message;
+                customFaultException.Source = ex.Source;
+                customFaultException.StackTrace = ex.StackTrace;
+                customFaultException.HelpLink = ex.HelpLink;
+                throw new FaultException<CustomFaultException>(customFaultException);
+            }
+
+             
+        }
+        public PublishReportResponse GetSurveyReport(PublishReportRequest publishReportRequest)
+        {
+            PublishReportResponse PublishReportResponse = new PublishReportResponse();
+            try
+            {
+
+                Epi.Web.Interfaces.DataInterfaces.IReportDao IReportDao = new EF.EntityReportDao();
+
+
+
+                Epi.Web.BLL.Report Implementation = new Epi.Web.BLL.Report(IReportDao);
+
+               
+
+                var Result = Implementation.GetReport(publishReportRequest.ReportInfo.ReportId.ToString());
+
+                foreach (var item in Result) {
+
+                    PublishReportResponse.Reports.Add(Mapper.ToReportInfoDTO(item));
+                }
+
+                   
+                
+
+
+                return PublishReportResponse;
+            }
+            catch (Exception ex)
+            {
+                CustomFaultException customFaultException = new CustomFaultException();
+                customFaultException.CustomMessage = ex.Message;
+                customFaultException.Source = ex.Source;
+                customFaultException.StackTrace = ex.StackTrace;
+                customFaultException.HelpLink = ex.HelpLink;
+                throw new FaultException<CustomFaultException>(customFaultException);
+            }
+
+
+        }
     }
 
 

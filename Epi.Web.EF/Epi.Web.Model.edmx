@@ -95,7 +95,7 @@
           <Property Name="Password" Type="varchar" MaxLength="200" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'EIWeb_EIWS_QA.dbo.familyset' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'EIWS.dbo.familyset' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="familyset">
           <Key>
             <PropertyRef Name="SurveyId" />
@@ -206,6 +206,7 @@ warning 6002: The table/view 'EIWeb_EIWS_QA.dbo.familyset' does not have a prima
           <Property Name="SourceTableName" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="FormId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="SourceTableXml" Type="xml" Nullable="false" />
+          <Property Name="AllowRepublish" Type="bit" />
         </EntityType>
         <EntityType Name="States">
           <Key>
@@ -253,7 +254,7 @@ warning 6002: The table/view 'EIWeb_EIWS_QA.dbo.familyset' does not have a prima
           <Property Name="OrganizationId" Type="int" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'EIWeb_EIWS_QA.dbo.SurveyMetaDataTransform' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'EIWS.dbo.SurveyMetaDataTransform' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="SurveyMetaDataTransform">
           <Key>
             <PropertyRef Name="SurveyId" />
@@ -282,6 +283,31 @@ warning 6002: The table/view 'EIWeb_EIWS_QA.dbo.SurveyMetaDataTransform' does no
           </Key>
           <Property Name="SurveyId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="ViewTableName" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SurveyReports">
+          <Key>
+            <PropertyRef Name="ReportId" />
+            <PropertyRef Name="GadgetId" />
+          </Key>
+          <Property Name="ReportId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="GadgetId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="GadgetNumber" Type="int" Nullable="false" />
+          <Property Name="GadgetVersion" Type="int" Nullable="false" />
+          <Property Name="ReportHtml" Type="text" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="DateEdited" Type="datetime2" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SurveyReportsInfo">
+          <Key>
+            <PropertyRef Name="ReportId" />
+          </Key>
+          <Property Name="ReportId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="SurveyId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ReportVersion" Type="int" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="DateEdited" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="DataSource" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="RecordCount" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="SurveyResponse">
           <Key>
@@ -557,6 +583,30 @@ warning 6002: The table/view 'EIWeb_EIWS_QA.dbo.SurveyMetaDataTransform' does no
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_SurveyReports_SurveyReportsInfo">
+          <End Role="SurveyReportsInfo" Type="Self.SurveyReportsInfo" Multiplicity="1" />
+          <End Role="SurveyReports" Type="Self.SurveyReports" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SurveyReportsInfo">
+              <PropertyRef Name="ReportId" />
+            </Principal>
+            <Dependent Role="SurveyReports">
+              <PropertyRef Name="ReportId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SurveyReportsInfo_SurveyMetaData">
+          <End Role="SurveyMetaData" Type="Self.SurveyMetaData" Multiplicity="1" />
+          <End Role="SurveyReportsInfo" Type="Self.SurveyReportsInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SurveyMetaData">
+              <PropertyRef Name="SurveyId" />
+            </Principal>
+            <Dependent Role="SurveyReportsInfo">
+              <PropertyRef Name="SurveyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_SurveyResponse_lk_RecordSource">
           <End Role="lk_RecordSource" Type="Self.lk_RecordSource" Multiplicity="0..1" />
           <End Role="SurveyResponse" Type="Self.SurveyResponse" Multiplicity="*" />
@@ -785,6 +835,8 @@ warning 6002: The table/view 'EIWeb_EIWS_QA.dbo.SurveyMetaDataTransform' does no
           <EntitySet Name="SurveyMetadataOrganization" EntityType="Self.SurveyMetadataOrganization" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SurveyMetaDataUser" EntityType="Self.SurveyMetaDataUser" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SurveyMetaDataView" EntityType="Self.SurveyMetaDataView" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SurveyReports" EntityType="Self.SurveyReports" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SurveyReportsInfo" EntityType="Self.SurveyReportsInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SurveyResponse" EntityType="Self.SurveyResponse" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SurveyResponseTracking" EntityType="Self.SurveyResponseTracking" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SurveyResponseUser" EntityType="Self.SurveyResponseUser" Schema="dbo" store:Type="Tables" />
@@ -891,6 +943,14 @@ FROM [dbo].[SurveyMetaDataTransform] AS [SurveyMetaDataTransform]</DefiningQuery
           <AssociationSet Name="FK_SurveyMetaDataUser_User" Association="Self.FK_SurveyMetaDataUser_User">
             <End Role="User" EntitySet="User" />
             <End Role="SurveyMetaDataUser" EntitySet="SurveyMetaDataUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SurveyReports_SurveyReportsInfo" Association="Self.FK_SurveyReports_SurveyReportsInfo">
+            <End Role="SurveyReportsInfo" EntitySet="SurveyReportsInfo" />
+            <End Role="SurveyReports" EntitySet="SurveyReports" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SurveyReportsInfo_SurveyMetaData" Association="Self.FK_SurveyReportsInfo_SurveyMetaData">
+            <End Role="SurveyMetaData" EntitySet="SurveyMetaData" />
+            <End Role="SurveyReportsInfo" EntitySet="SurveyReportsInfo" />
           </AssociationSet>
           <AssociationSet Name="FK_SurveyResponse_lk_RecordSource" Association="Self.FK_SurveyResponse_lk_RecordSource">
             <End Role="lk_RecordSource" EntitySet="lk_RecordSource" />
@@ -1105,6 +1165,16 @@ FROM [dbo].[SurveyMetaDataTransform] AS [SurveyMetaDataTransform]</DefiningQuery
             <End Role="Organization" EntitySet="Organizations" />
             <End Role="SurveyMetaData" EntitySet="SurveyMetaDatas" />
           </AssociationSet>
+          <EntitySet Name="SurveyReports" EntityType="EIWSModel.SurveyReport" />
+          <EntitySet Name="SurveyReportsInfoes" EntityType="EIWSModel.SurveyReportsInfo" />
+          <AssociationSet Name="FK_SurveyReportsInfo_SurveyMetaData" Association="EIWSModel.FK_SurveyReportsInfo_SurveyMetaData">
+            <End Role="SurveyMetaData" EntitySet="SurveyMetaDatas" />
+            <End Role="SurveyReportsInfo" EntitySet="SurveyReportsInfoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SurveyReports_SurveyReportsInfo" Association="EIWSModel.FK_SurveyReports_SurveyReportsInfo">
+            <End Role="SurveyReportsInfo" EntitySet="SurveyReportsInfoes" />
+            <End Role="SurveyReport" EntitySet="SurveyReports" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="lk_Status">
           <Key>
@@ -1177,6 +1247,7 @@ FROM [dbo].[SurveyMetaDataTransform] AS [SurveyMetaDataTransform]</DefiningQuery
           <Property Name="ShowAllRecords" Type="Boolean" />
           <Property Name="LastUpdate" Type="DateTime" Precision="7" />
           <NavigationProperty Name="Organization" Relationship="EIWSModel.FK_SurveyMetaData_Organization" FromRole="SurveyMetaData" ToRole="Organization" />
+          <NavigationProperty Name="SurveyReportsInfoes" Relationship="EIWSModel.FK_SurveyReportsInfo_SurveyMetaData" FromRole="SurveyMetaData" ToRole="SurveyReportsInfo" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -1693,6 +1764,7 @@ FROM [dbo].[SurveyMetaDataTransform] AS [SurveyMetaDataTransform]</DefiningQuery
           <Property Name="SourceTableName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="FormId" Type="Guid" Nullable="false" />
           <Property Name="SourceTableXml" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AllowRepublish" Type="Boolean" />
         </EntityType>
         <EntityType Name="State">
           <Key>
@@ -1747,6 +1819,58 @@ FROM [dbo].[SurveyMetaDataTransform] AS [SurveyMetaDataTransform]</DefiningQuery
             </Principal>
             <Dependent Role="SurveyMetaData">
               <PropertyRef Name="OrganizationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="SurveyReport">
+          <Key>
+            <PropertyRef Name="ReportId" />
+            <PropertyRef Name="GadgetId" />
+          </Key>
+          <Property Name="ReportId" Type="Guid" Nullable="false" />
+          <Property Name="GadgetId" Type="Guid" Nullable="false" />
+          <Property Name="GadgetNumber" Type="Int32" Nullable="false" />
+          <Property Name="GadgetVersion" Type="Int32" Nullable="false" />
+          <Property Name="ReportHtml" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="DateEdited" Type="DateTime" Nullable="false" Precision="7" />
+          <NavigationProperty Name="SurveyReportsInfo" Relationship="EIWSModel.FK_SurveyReports_SurveyReportsInfo" FromRole="SurveyReport" ToRole="SurveyReportsInfo" />
+        </EntityType>
+        <EntityType Name="SurveyReportsInfo">
+          <Key>
+            <PropertyRef Name="ReportId" />
+          </Key>
+          <Property Name="ReportId" Type="Guid" Nullable="false" />
+          <Property Name="SurveyId" Type="Guid" Nullable="false" />
+          <Property Name="ReportVersion" Type="Int32" Nullable="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="DateEdited" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="DataSource" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="RecordCount" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="SurveyMetaData" Relationship="EIWSModel.FK_SurveyReportsInfo_SurveyMetaData" FromRole="SurveyReportsInfo" ToRole="SurveyMetaData" />
+          <NavigationProperty Name="SurveyReports" Relationship="EIWSModel.FK_SurveyReports_SurveyReportsInfo" FromRole="SurveyReportsInfo" ToRole="SurveyReport" />
+        </EntityType>
+        <Association Name="FK_SurveyReportsInfo_SurveyMetaData">
+          <End Type="EIWSModel.SurveyMetaData" Role="SurveyMetaData" Multiplicity="1" />
+          <End Type="EIWSModel.SurveyReportsInfo" Role="SurveyReportsInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SurveyMetaData">
+              <PropertyRef Name="SurveyId" />
+            </Principal>
+            <Dependent Role="SurveyReportsInfo">
+              <PropertyRef Name="SurveyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SurveyReports_SurveyReportsInfo">
+          <End Type="EIWSModel.SurveyReportsInfo" Role="SurveyReportsInfo" Multiplicity="1" />
+          <End Type="EIWSModel.SurveyReport" Role="SurveyReport" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SurveyReportsInfo">
+              <PropertyRef Name="ReportId" />
+            </Principal>
+            <Dependent Role="SurveyReport">
+              <PropertyRef Name="ReportId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2099,6 +2223,7 @@ FROM [dbo].[SurveyMetaDataTransform] AS [SurveyMetaDataTransform]</DefiningQuery
           <EntitySetMapping Name="SourceTables">
             <EntityTypeMapping TypeName="EIWSModel.SourceTable">
               <MappingFragment StoreEntitySet="SourceTables">
+                <ScalarProperty Name="AllowRepublish" ColumnName="AllowRepublish" />
                 <ScalarProperty Name="SourceTableXml" ColumnName="SourceTableXml" />
                 <ScalarProperty Name="FormId" ColumnName="FormId" />
                 <ScalarProperty Name="SourceTableName" ColumnName="SourceTableName" />
@@ -2111,6 +2236,32 @@ FROM [dbo].[SurveyMetaDataTransform] AS [SurveyMetaDataTransform]</DefiningQuery
                 <ScalarProperty Name="StateName" ColumnName="StateName" />
                 <ScalarProperty Name="StateCode" ColumnName="StateCode" />
                 <ScalarProperty Name="StateProvinceId" ColumnName="StateProvinceId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SurveyReports">
+            <EntityTypeMapping TypeName="EIWSModel.SurveyReport">
+              <MappingFragment StoreEntitySet="SurveyReports">
+                <ScalarProperty Name="DateEdited" ColumnName="DateEdited" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="ReportHtml" ColumnName="ReportHtml" />
+                <ScalarProperty Name="GadgetVersion" ColumnName="GadgetVersion" />
+                <ScalarProperty Name="GadgetNumber" ColumnName="GadgetNumber" />
+                <ScalarProperty Name="GadgetId" ColumnName="GadgetId" />
+                <ScalarProperty Name="ReportId" ColumnName="ReportId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SurveyReportsInfoes">
+            <EntityTypeMapping TypeName="EIWSModel.SurveyReportsInfo">
+              <MappingFragment StoreEntitySet="SurveyReportsInfo">
+                <ScalarProperty Name="RecordCount" ColumnName="RecordCount" />
+                <ScalarProperty Name="DataSource" ColumnName="DataSource" />
+                <ScalarProperty Name="DateEdited" ColumnName="DateEdited" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="ReportVersion" ColumnName="ReportVersion" />
+                <ScalarProperty Name="SurveyId" ColumnName="SurveyId" />
+                <ScalarProperty Name="ReportId" ColumnName="ReportId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2241,6 +2392,10 @@ FROM [dbo].[SurveyMetaDataTransform] AS [SurveyMetaDataTransform]</DefiningQuery
         <AssociationConnector Association="EIWSModel.FK_Admin_Organization" />
         <AssociationConnector Association="EIWSModel.FK_SurveyResponse_lk_RecordSource" />
         <AssociationConnector Association="EIWSModel.FK_SurveyMetaData_Organization" />
+        <EntityTypeShape EntityType="EIWSModel.SurveyReport" Width="1.5" PointX="10.5" PointY="21.75" />
+        <EntityTypeShape EntityType="EIWSModel.SurveyReportsInfo" Width="1.5" PointX="8.25" PointY="21.625" />
+        <AssociationConnector Association="EIWSModel.FK_SurveyReportsInfo_SurveyMetaData" />
+        <AssociationConnector Association="EIWSModel.FK_SurveyReports_SurveyReportsInfo" />
       </Diagram>
     </Diagrams>
   </Designer>

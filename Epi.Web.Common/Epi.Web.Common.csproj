@@ -64,6 +64,8 @@
     <Compile Include="BusinessObject\FormsHierarchyBO.cs" />
     <Compile Include="BusinessObject\OrganizationBO.cs" />
     <Compile Include="BusinessObject\PageInfoBO.cs" />
+    <Compile Include="BusinessObject\GadgetBO.cs" />
+    <Compile Include="BusinessObject\ReportInfoBO.cs" />
     <Compile Include="BusinessObject\ResponseXmlBO.cs" />
     <Compile Include="BusinessObject\SourceTableBO.cs" />
     <Compile Include="BusinessObject\UserAuthenticationRequestBO.cs" />
@@ -100,6 +102,8 @@
     <Compile Include="DTO\PassCodeDTO.cs" />
     <Compile Include="DTO\PreFilledAnswerDTO.cs" />
     <Compile Include="BusinessObject\StateBO.cs" />
+    <Compile Include="DTO\GadgetDTO.cs" />
+    <Compile Include="DTO\ReportInfoDTO.cs" />
     <Compile Include="DTO\SourceTableDTO.cs" />
     <Compile Include="DTO\StateDTO.cs" />
     <Compile Include="DTO\SurveyAnswerDTO.cs" />
@@ -128,6 +132,8 @@
     <Compile Include="Message\OrganizationRequest.cs" />
     <Compile Include="Message\PreFilledAnswerRequest.cs" />
     <Compile Include="Message\PreFilledAnswerResponse.cs" />
+    <Compile Include="Message\PublishReportRequest.cs" />
+    <Compile Include="Message\PublishReportResponse.cs" />
     <Compile Include="Message\SourceTablesRequest.cs" />
     <Compile Include="Message\SourceTablesResponse.cs" />
     <Compile Include="Message\SurveyControlsRequest.cs" />

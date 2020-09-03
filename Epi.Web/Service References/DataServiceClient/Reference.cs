@@ -186,6 +186,20 @@ namespace Epi.Web.MVC.DataServiceClient {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/UpdateSourceTable", ReplyAction="http://tempuri.org/IDataService/UpdateSourceTableResponse")]
         System.Threading.Tasks.Task<bool> UpdateSourceTableAsync(Epi.Web.Common.Message.SourceTablesRequest sourceTablesRequest);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/GetSurveyReportList", ReplyAction="http://tempuri.org/IDataService/GetSurveyReportListResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Epi.Web.Common.Exception.CustomFaultException), Action="http://tempuri.org/IDataService/GetSurveyReportListCustomFaultExceptionFault", Name="CustomFaultException", Namespace="http://www.yourcompany.com/types/")]
+        Epi.Web.Common.Message.PublishReportResponse GetSurveyReportList(Epi.Web.Common.Message.PublishReportRequest publishReportRequest);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/GetSurveyReportList", ReplyAction="http://tempuri.org/IDataService/GetSurveyReportListResponse")]
+        System.Threading.Tasks.Task<Epi.Web.Common.Message.PublishReportResponse> GetSurveyReportListAsync(Epi.Web.Common.Message.PublishReportRequest publishReportRequest);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/GetSurveyReport", ReplyAction="http://tempuri.org/IDataService/GetSurveyReportResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Epi.Web.Common.Exception.CustomFaultException), Action="http://tempuri.org/IDataService/GetSurveyReportCustomFaultExceptionFault", Name="CustomFaultException", Namespace="http://www.yourcompany.com/types/")]
+        Epi.Web.Common.Message.PublishReportResponse GetSurveyReport(Epi.Web.Common.Message.PublishReportRequest publishReportRequest);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/GetSurveyReport", ReplyAction="http://tempuri.org/IDataService/GetSurveyReportResponse")]
+        System.Threading.Tasks.Task<Epi.Web.Common.Message.PublishReportResponse> GetSurveyReportAsync(Epi.Web.Common.Message.PublishReportRequest publishReportRequest);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -405,6 +419,22 @@ namespace Epi.Web.MVC.DataServiceClient {
         
         public System.Threading.Tasks.Task<bool> UpdateSourceTableAsync(Epi.Web.Common.Message.SourceTablesRequest sourceTablesRequest) {
             return base.Channel.UpdateSourceTableAsync(sourceTablesRequest);
+        }
+        
+        public Epi.Web.Common.Message.PublishReportResponse GetSurveyReportList(Epi.Web.Common.Message.PublishReportRequest publishReportRequest) {
+            return base.Channel.GetSurveyReportList(publishReportRequest);
+        }
+        
+        public System.Threading.Tasks.Task<Epi.Web.Common.Message.PublishReportResponse> GetSurveyReportListAsync(Epi.Web.Common.Message.PublishReportRequest publishReportRequest) {
+            return base.Channel.GetSurveyReportListAsync(publishReportRequest);
+        }
+        
+        public Epi.Web.Common.Message.PublishReportResponse GetSurveyReport(Epi.Web.Common.Message.PublishReportRequest publishReportRequest) {
+            return base.Channel.GetSurveyReport(publishReportRequest);
+        }
+        
+        public System.Threading.Tasks.Task<Epi.Web.Common.Message.PublishReportResponse> GetSurveyReportAsync(Epi.Web.Common.Message.PublishReportRequest publishReportRequest) {
+            return base.Channel.GetSurveyReportAsync(publishReportRequest);
         }
     }
 }

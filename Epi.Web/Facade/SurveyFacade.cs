@@ -17,7 +17,7 @@ namespace Epi.Web.MVC.Facade
 
         // declare ISurveyInfoRepository which inherits IRepository of SurveyInfoResponse object
         private ISurveyInfoRepository _iSurveyInfoRepository;
-
+        private IReportRepository _iReportRepository;
         // declare ISurveyResponseRepository which inherits IRepository of SurveyResponseResponse object
         private ISurveyAnswerRepository _iSurveyAnswerRepository;
         public ISurveyAnswerRepository GetSurveyAnswerRepository() { return this._iSurveyAnswerRepository; }
@@ -47,7 +47,7 @@ namespace Epi.Web.MVC.Facade
         public SurveyFacade(ISurveyInfoRepository iSurveyInfoRepository, ISurveyAnswerRepository iSurveyResponseRepository,
                                   Epi.Web.Common.Message.SurveyInfoRequest surveyInfoRequest, Epi.Web.Common.Message.SurveyAnswerRequest surveyResponseRequest,
                                   Common.DTO.SurveyAnswerDTO surveyAnswerDTO,
-                                   SurveyResponseXML surveyResponseXML, UserAuthenticationRequest surveyAuthenticationRequest, Epi.Web.Common.DTO.PassCodeDTO PassCodeDTO, IOrganizationAccountRepository iOrgAccountRepository)
+                                   SurveyResponseXML surveyResponseXML, UserAuthenticationRequest surveyAuthenticationRequest, Epi.Web.Common.DTO.PassCodeDTO PassCodeDTO, IOrganizationAccountRepository iOrgAccountRepository, IReportRepository iReportRepsitory)
         {
             _iSurveyInfoRepository = iSurveyInfoRepository;
             _iSurveyAnswerRepository = iSurveyResponseRepository;
@@ -58,6 +58,7 @@ namespace Epi.Web.MVC.Facade
             _surveyAuthenticationRequest = surveyAuthenticationRequest;
             _PassCodeDTO = PassCodeDTO;
             _iOrgAccountRepository = iOrgAccountRepository;
+            _iReportRepository = iReportRepsitory;
         }
 
         /// <summary>
@@ -459,6 +460,19 @@ namespace Epi.Web.MVC.Facade
              return _iSurveyInfoRepository.UpdateSourceTable(SourceTablesRequest);
 
             }
-            
-         }
+        public PublishReportResponse GetSurveyReportList(PublishReportRequest publishReportRequest)
+        {
+
+            return _iReportRepository.GetSurveyReportList(publishReportRequest);
+        }
+        public PublishReportResponse GetSurveyReport(PublishReportRequest publishReportRequest)
+        {
+
+            return _iReportRepository.GetSurveyReport(publishReportRequest);
+        }
+
+    }
+   
+
+   
 }

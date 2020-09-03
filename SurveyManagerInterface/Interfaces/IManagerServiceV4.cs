@@ -46,5 +46,11 @@ namespace Epi.Web.WCF.SurveyService
         [OperationContract]
         [FaultContract(typeof(CustomFaultException))]
         UserResponse GetUserByUserId(UserRequest UserInfo);
+        [OperationContract]
+        [FaultContract(typeof(CustomFaultException))]
+        string GetJsonResponseAll(string SurveyId, string OrganizationId, string PublisherKey);
+        [OperationContract]
+        [FaultContract(typeof(CustomFaultException))]
+        PublishReportResponse PublishReport(PublishReportRequest Request);
     }
 }

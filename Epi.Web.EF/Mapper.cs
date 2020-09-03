@@ -60,6 +60,55 @@ namespace Epi.Web.EF
            // result.IsShareable = (bool)entity.IsShareable;
             return result;
         }
+
+        internal static GadgetBO ToGadgetBO(SurveyReport reportInfo)
+        {
+            GadgetBO GadgetBO = new GadgetBO();
+
+            GadgetBO.CreatedDate = reportInfo.DateCreated;
+            GadgetBO.EditedDate = (DateTime) reportInfo.DateEdited;
+            if (!string.IsNullOrEmpty(reportInfo.ReportId.ToString()))
+            {
+                GadgetBO.ReportId = reportInfo.ReportId.ToString();
+            }
+
+            GadgetBO.GadgetVersion = reportInfo.GadgetVersion;
+
+
+            GadgetBO.ReportHtml = reportInfo.ReportHtml;
+            GadgetBO.GadgetId = reportInfo.GadgetId.ToString();
+            GadgetBO.GadgetNumber = reportInfo.GadgetNumber;
+            return GadgetBO;
+        }
+        internal static ReportInfoBO ToReportInfoBO(SurveyReportsInfo reportInfo)
+        {
+            ReportInfoBO ReportInfoBO = new ReportInfoBO();
+
+            ReportInfoBO.CreatedDate = reportInfo.DateCreated;
+            ReportInfoBO.EditedDate = (DateTime)reportInfo.DateEdited;
+            if (!string.IsNullOrEmpty(reportInfo.ReportId.ToString()))
+            {
+                ReportInfoBO.ReportId = reportInfo.ReportId.ToString();
+            }
+            if (!string.IsNullOrEmpty(reportInfo.SurveyId.ToString()))
+            {
+                ReportInfoBO.SurveyId = reportInfo.SurveyId.ToString();
+            }
+            ReportInfoBO.ReportVersion = reportInfo.ReportVersion;
+
+
+            ReportInfoBO.DataSource = reportInfo.DataSource;
+            ReportInfoBO.Gadgets = new List<GadgetBO>();
+            foreach (var item in reportInfo.SurveyReports.OrderBy(x => x.GadgetNumber)) {
+
+                
+                ReportInfoBO.Gadgets.Add(ToGadgetBO(item));
+            }
+            
+            ReportInfoBO.RecordCount = reportInfo.RecordCount;
+            return ReportInfoBO;
+        }
+
         public static List<SurveyResponseBO> Map(IQueryable<SurveyResponse> entities)
         {
             List<SurveyResponseBO> result = new List<SurveyResponseBO>();
@@ -594,6 +643,63 @@ namespace Epi.Web.EF
                 Result.UGuid = Guid.Parse(user.UGuid.ToString());
             }
             return Result;
+        }
+
+        internal static SurveyReportsInfo ToReportInfoEF(ReportInfoBO reportInfo)
+        {
+            SurveyReportsInfo SurveyReport = new SurveyReportsInfo();
+
+            SurveyReport.DateCreated = reportInfo.CreatedDate;
+            SurveyReport.DateEdited = reportInfo.EditedDate;
+            if (!string.IsNullOrEmpty(reportInfo.ReportId.ToString()))
+            {
+                SurveyReport.ReportId = Guid.Parse(reportInfo.ReportId);
+            }
+            if (!string.IsNullOrEmpty(reportInfo.SurveyId.ToString()))
+            {
+                SurveyReport.SurveyId = Guid.Parse(reportInfo.SurveyId);
+            }
+            SurveyReport.ReportVersion = reportInfo.ReportVersion;
+
+            
+            SurveyReport.DataSource = reportInfo.DataSource;
+            SurveyReport.RecordCount = reportInfo.RecordCount;
+
+            SurveyReport.SurveyReports = ToGadgetsEF(reportInfo.Gadgets);
+
+
+            return SurveyReport;
+        }
+        internal static List<SurveyReport> ToGadgetsEF(List<GadgetBO> GadgetList)
+        {
+            List<SurveyReport> GadgetCollection = new List<SurveyReport>();
+            foreach (var gadget in GadgetList) {
+
+                GadgetCollection.Add(ToSurveyReport(gadget));
+            }
+            
+
+
+
+            return GadgetCollection;
+        }
+
+        private static SurveyReport ToSurveyReport(GadgetBO gadget)
+        {
+            SurveyReport SurveyReport = new SurveyReport();
+
+            SurveyReport.DateCreated = gadget.CreatedDate;
+            SurveyReport.DateEdited = gadget.EditedDate;
+            SurveyReport.ReportId = Guid.Parse(gadget.ReportId);
+            SurveyReport.GadgetVersion = gadget.GadgetVersion;
+
+           // SurveyReport.GadgetsScript = gadget.GadgetsScript;
+            SurveyReport.ReportHtml = gadget.ReportHtml;
+            SurveyReport.GadgetId = Guid.Parse(gadget.GadgetId);
+            SurveyReport.GadgetNumber = gadget.GadgetNumber;
+
+
+            return SurveyReport;
         }
     }
 }

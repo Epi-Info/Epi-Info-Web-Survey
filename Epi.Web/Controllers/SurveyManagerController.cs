@@ -1628,6 +1628,38 @@ namespace Epi.Web.MVC.Controllers
 
 
         }
-        
+
+        [HttpPost]
+        public JsonResult GetSurveyReportList(string surveyid) {
+
+            try
+            {
+
+                PublishReportRequest PublishReportRequest = new PublishReportRequest();
+                PublishReportRequest.ReportInfo.SurveyId = surveyid;
+                PublishReportRequest.IncludHTML = false;
+
+                PublishReportResponse result = _isurveyFacade.GetSurveyReportList(PublishReportRequest);
+                List<ReportModel> ModelList = new List<ReportModel>();
+                foreach (var item in result.Reports)
+                {
+                    ReportModel Model = new ReportModel();
+                    Model.DateCreated = item.CreatedDate.ToString();
+                    Model.DataSource = item.DataSource;
+                    Model.ReportURL = ConfigurationManager.AppSettings["ReportURL"] + item.ReportId;
+                    Model.RecordCount = item.RecordCount;
+                    ModelList.Add(Model);
+                }
+
+                return Json(ModelList); // convert to report model
+            }
+            catch (Exception ex)
+            {
+
+                return Json(false);
+            }
+
+
+        }
     }
 }

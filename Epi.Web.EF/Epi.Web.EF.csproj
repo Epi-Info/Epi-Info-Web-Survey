@@ -82,6 +82,7 @@
     <Compile Include="EntityCacheDependencyInfoDao.cs" />
     <Compile Include="EntityAdminDao.cs" />
     <Compile Include="EntityOrganizationDao.cs" />
+    <Compile Include="EntityReportDao.cs" />
     <Compile Include="EntityStateDao.cs" />
     <Compile Include="EntitySurveyResponseDao.cs" />
     <Compile Include="DataObjectFactory.cs" />
@@ -145,6 +146,12 @@
       <DependentUpon>Epi.Web.tt</DependentUpon>
     </Compile>
     <Compile Include="SurveyMetaDataView.cs">
+      <DependentUpon>Epi.Web.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SurveyReport.cs">
+      <DependentUpon>Epi.Web.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SurveyReportsInfo.cs">
       <DependentUpon>Epi.Web.tt</DependentUpon>
     </Compile>
     <Compile Include="SurveyResponse.cs">

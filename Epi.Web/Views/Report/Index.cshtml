@@ -1,0 +1,19 @@
+﻿
+@model Epi.Web.MVC.Models.ReportModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutPage3.cshtml";
+}
+<script src="@Url.Content("~/Scripts/c3.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/d3-5.8.2.min.js")" type="text/javascript"></script>
+<link href="@Url.Content("~/Content/css/c3.min.css")" rel="Stylesheet" type="text/css" />
+
+
+
+
+
+    @Html.Raw(Model.ReportHtml)
+
+
+
+ 

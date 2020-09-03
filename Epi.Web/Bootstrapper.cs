@@ -57,6 +57,7 @@ namespace Epi.Web.MVC
                 container.RegisterType<Epi.Web.MVC.Repositories.Core.ISurveyInfoRepository, Epi.Web.MVC.Repositories.IntegratedSurveyInfoRepository>();
                 container.RegisterType<Epi.Web.MVC.Repositories.Core.ICacheDependencyRepository, Epi.Web.MVC.Repositories.IntegratedCacheDependencyRepository>();
                 container.RegisterType<Epi.Web.MVC.Repositories.Core.IOrganizationAccountRepository, Epi.Web.MVC.Repositories.IntegratedOrganizationAccountRepository>();
+                container.RegisterType<Epi.Web.MVC.Repositories.Core.IReportRepository, Epi.Web.MVC.Repositories.IntegratedReportInfoRepository>();
             }
             else
             {
@@ -64,6 +65,7 @@ namespace Epi.Web.MVC
                 .Configure<InjectedMembers>()
                 .ConfigureInjectionFor<Epi.Web.MVC.DataServiceClient.DataServiceClient>(new InjectionConstructor(ConfigurationManager.AppSettings["ENDPOINT_USED"]));
                 container.RegisterType<Epi.Web.MVC.Repositories.Core.ISurveyInfoRepository, Epi.Web.MVC.Repositories.SurveyInfoRepository>();
+                container.RegisterType<Epi.Web.MVC.Repositories.Core.IReportRepository, Epi.Web.MVC.Repositories.ReportInfoRepository>();
             }
 
             container.RegisterType<Epi.Web.Common.Message.SurveyAnswerRequest, Epi.Web.Common.Message.SurveyAnswerRequest>();

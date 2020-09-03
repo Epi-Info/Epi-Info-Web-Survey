@@ -47,6 +47,8 @@ namespace Epi.Web.MVC.Facade
         bool SetJsonColumn(string Json,string Responseid);
         DashboardResponse GetSurveyDashboardInfo(string SurveyId);
         bool UpdateSourceTable(SourceTablesRequest sourceTablesRequest);
+        PublishReportResponse GetSurveyReportList(PublishReportRequest publishReportRequest);
+        PublishReportResponse GetSurveyReport(PublishReportRequest publishReportRequest);
     }
 
 }

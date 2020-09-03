@@ -23,6 +23,7 @@ namespace Epi.Web.EF
             this.EIDatasources = new HashSet<EIDatasource>();
             this.SurveyResponses = new HashSet<SurveyResponse>();
             this.Organizations = new HashSet<Organization>();
+            this.SurveyReportsInfoes = new HashSet<SurveyReportsInfo>();
         }
     
         public System.Guid SurveyId { get; set; }
@@ -61,5 +62,6 @@ namespace Epi.Web.EF
         public virtual ICollection<Organization> Organizations { get; set; }
         public virtual DataAccessRule DataAccessRule { get; set; }
         public virtual Organization Organization { get; set; }
+        public virtual ICollection<SurveyReportsInfo> SurveyReportsInfoes { get; set; }
     }
 }

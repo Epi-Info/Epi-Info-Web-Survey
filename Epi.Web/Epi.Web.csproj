@@ -53,6 +53,10 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Epi.Web.EF, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Epi.Web.EF.dll</HintPath>
+    </Reference>
     <Reference Include="Epi.Web.Interfaces, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Epi.Web.Interfaces.dll</HintPath>
@@ -203,6 +207,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Controllers\FormResponseController.cs" />
+    <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\SurveyManagerController.cs" />
     <Compile Include="Controllers\PrintController.cs" />
     <Compile Include="Controllers\SurveyResponseController.cs" />
@@ -214,6 +219,7 @@
     <Compile Include="Models\PrintResponseModel.cs" />
     <Compile Include="Models\PublishModel.cs" />
     <Compile Include="Models\RelateModel.cs" />
+    <Compile Include="Models\ReportModel.cs" />
     <Compile Include="Models\ResponseModel.cs" />
     <Compile Include="Models\SeachBoxModel.cs" />
     <Compile Include="Models\SourceTableModel.cs" />
@@ -250,6 +256,7 @@
     <Compile Include="Repositories\Core\ISurveyResponseApiRepository.cs" />
     <Compile Include="Repositories\IntegratedCacheDependencyRepository.cs" />
     <Compile Include="Repositories\IntegratedOrganizationAccountRepository.cs" />
+    <Compile Include="Repositories\IntegratedReportInfoRepository.cs" />
     <Compile Include="Repositories\IntegratedSurveyAnswerRepository.cs" />
     <Compile Include="Repositories\IntegratedSurveyInfoRepository.cs" />
     <Compile Include="Repositories\Core\Criterion.cs" />
@@ -257,6 +264,8 @@
     <Compile Include="Repositories\Core\ISurveyInfoRepository.cs" />
     <Compile Include="Repositories\Core\ISurveyAnswerRepository.cs" />
     <Compile Include="Repositories\Core\RepositoryBase.cs" />
+    <Compile Include="Repositories\Core\IReportRepository.cs" />
+    <Compile Include="Repositories\ReportInfoRepository.cs" />
     <Compile Include="Repositories\SurveyAnswerRepository.cs" />
     <Compile Include="Repositories\SurveyInfoRepository.cs" />
     <Compile Include="Repositories\SurveyResponseApiRepository.cs" />
@@ -307,7 +316,6 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\CheckCode\IFElse.txt" />
     <Content Include="Content\css\awesomplete.css" />
-    <Content Include="Content\css\bootstrap.min.css" />
     <Content Include="Content\css\c3.min.css" />
     <Content Include="Content\css\demos.css" />
     <Content Include="Content\css\epistyle-blue.css" />
@@ -492,7 +500,6 @@
     <Content Include="Scripts\awesomplete.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\bootstrapV4.min.js" />
     <Content Include="Scripts\c3.min.js" />
     <Content Include="Scripts\CheckCodeEngine.js" />
     <Content Include="Scripts\CheckCodeEngineV1.js" />
@@ -521,12 +528,6 @@
     <Content Include="Properties\DataSources\Epi.Web.Common.Message.DashboardResponse.datasource" />
     <Content Include="Properties\DataSources\Epi.Web.Common.Message.FormsHierarchyResponse.datasource" />
     <Content Include="Properties\DataSources\Epi.Web.Common.Message.SourceTablesResponse.datasource" />
-    <Content Include="Properties\DataSources\Epi.Web.Common.Message.OrganizationResponse.datasource" />
-    <Content Include="Properties\DataSources\Epi.Web.Common.Message.PreFilledAnswerResponse.datasource" />
-    <Content Include="Properties\DataSources\Epi.Web.Common.Message.PublishResponse1.datasource" />
-    <Content Include="Properties\DataSources\Epi.Web.Common.Message.UserResponse.datasource" />
-    <Content Include="Content\Text\EmailList-Bulk.xlsx" />
-    <Content Include="libman.json" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
@@ -601,6 +602,7 @@
     <Content Include="SurveyManagerServiceV2.svc" />
     <Content Include="SurveyManagerServiceV3.svc" />
     <Content Include="SurveyManagerServiceV4.svc" />
+    <Content Include="SurveyManagerServiceV5.svc" />
     <Content Include="Unity.Mvc3.README.txt" />
     <Content Include="Views\Shared\footer.htm" />
     <Content Include="Views\Shared\header.htm" />
@@ -667,6 +669,8 @@
     <None Include="Service References\DataServiceClient\SurveyDataService5.xsd">
       <SubType>Designer</SubType>
     </None>
+    <Content Include="Views\Report\Index.cshtml" />
+    <Content Include="Views\Shared\_LayoutPage3.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\" />
@@ -695,10 +699,6 @@
     <ProjectReference Include="..\Epi.Web.Common\Epi.Web.Common.csproj">
       <Project>{6e2f059b-c1cd-401f-8a63-dc2933cfb0d8}</Project>
       <Name>Epi.Web.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Epi.Web.EF\Epi.Web.EF.csproj">
-      <Project>{05a484ab-a555-4200-936b-bec573285bcc}</Project>
-      <Name>Epi.Web.EF</Name>
     </ProjectReference>
     <ProjectReference Include="..\Epi.Web.EF\Epi.Web.EF.csproj">
       <Project>{05a484ab-a555-4200-936b-bec573285bcc}</Project>

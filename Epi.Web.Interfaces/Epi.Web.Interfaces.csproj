@@ -50,6 +50,7 @@
     <Compile Include="DataInterface\ICacheDependencyInfoDao.cs" />
     <Compile Include="DataInterface\IAdminDao.cs" />
     <Compile Include="DataInterface\IOrganizationDao.cs" />
+    <Compile Include="DataInterface\IReportDao.cs" />
     <Compile Include="DataInterface\IStateDao.cs" />
     <Compile Include="DataInterface\ISurveyResponseDao.cs" />
     <Compile Include="DataInterface\ISurveyInfoDao.cs" />

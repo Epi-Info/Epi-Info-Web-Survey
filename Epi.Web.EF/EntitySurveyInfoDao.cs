@@ -275,7 +275,8 @@ namespace Epi.Web.EF
 
                     if (responseList1.Count() > 0)
                     {
-                        foreach (var item in responseList1)
+                       var SortedList   = responseList1.OrderBy(x => x.SurveyName);
+                        foreach (var item in SortedList)
                         {
                             SurveyInfoBO SurveyInfoBO = new SurveyInfoBO();
                             SurveyInfoBO.SurveyId = item.SurveyId.ToString();

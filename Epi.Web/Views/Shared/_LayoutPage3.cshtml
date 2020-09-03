@@ -1,0 +1,383 @@
+﻿<!DOCTYPE html>
+
+<html >
+<head>
+
+    <title>@ViewBag.Title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=11;IE=10;IE=9; IE=8; IE=7" />
+    @*<script src="@Url.Content("~/Scripts/jquery-1.7.1.js")" type="text/javascript"></script>
+        <script src="@Url.Content("~/Scripts/jquery.validationEngine.js")" type="text/javascript"></script>
+        <script src="@Url.Content("~/Scripts/jquery.validationEngine-en.js")" type="text/javascript"></script>
+        <script src="@Url.Content("~/Scripts/jquery.numeric.js")" type="text/javascript"></script>
+        <script src="@Url.Content("~/Scripts/jquery.maskedinput-1.3.js")" type="text/javascript"></script>
+        <script src="@Url.Content("~/Scripts/jquery-ui-1.8.16.custom.min.js")" type="text/javascript"></script>
+        <script src="@Url.Content("~/Scripts/jquery.ui.mouse.js")" type="text/javascript"></script>
+        <script src="@Url.Content("~/Scripts/jquery.ui.dialog.js")" type="text/javascript"></script>
+        <script src="@Url.Content("~/Scripts/jquery.ui.position.js")" type="text/javascript"></script>
+        <script src="@Url.Content("~/Scripts/jquery.bgiframe-2.1.2.js")" type="text/javascript"></script>
+        <script src="@Url.Content("~/Scripts/jquery.ui.core.js")" type="text/javascript"></script>
+        <script src="@Url.Content("~/Scripts/jquery.ui.widget.js")" type="text/javascript"></script>
+        <script src="@Url.Content("~/Scripts/jquery.Epi.Survey.Components.js")" type="text/javascript"></script>
+        <script src="@Url.Content("~/Scripts/CheckCodeEngine.js")" type="text/javascript"></script>
+        <script src="@Url.Content("~/Scripts/jquery.PreventEnter.js")" type="text/javascript"></script>
+        <script src="@Url.Content("~/Scripts/idle-timer.js")" type="text/javascript"></script>
+        <script src="@Url.Content("~/Scripts/jquery-ui-sliderAccess.js")" type="text/javascript"></script>
+        <script src="@Url.Content("~/Scripts/jquery-ui-timepicker-addon.js")" type="text/javascript"></script>
+        <script src="@Url.Content("~/Scripts/jquery.idletimeout.js")" type="text/javascript"></script>
+        <script src="@Url.Content("~/Scripts/jquery.idletimer.js")" type="text/javascript"></script>
+        <script src="@Url.Content("~/Scripts/Print.js")" type="text/javascript"></script>
+        <script src="@Url.Content("~/Scripts/awesomplete.js")" type="text/javascript"></script>
+        <link href="@Url.Content("~/Content/css/validationEngine.jquery.css")" rel="Stylesheet" type="text/css" />
+        <link href="@Url.Content("~/Content/css/ui-lightness/jquery-ui-1.8.16.custom.css")" rel="Stylesheet" type="text/css" />
+        <link href="@Url.Content("~/Content/css/jquery.ui.all.css")" rel="Stylesheet" type="text/css" />*@
+
+
+    @*<link href="@Url.Content("~/Content/css/epiwebsurvey_admin.css")" rel="Stylesheet" type="text/css" />*@
+    @*<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <link rel="stylesheet" href="/resources/demos/style.css">*@
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link href="@Url.Content("~/Content/css/bootstrap.min.css")" rel="Stylesheet" type="text/css" />
+    <meta name="viewport" content="width=device-width">
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.tools.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/bootstrapV4.min.js")"></script>
+    <script type="text/javascript">
+
+        //debugger;
+
+        $(document).ready(function () {
+
+
+            $('#successContent').hide();
+
+
+            $("#myform").validationEngine();
+
+            $('div#pages a').click(PostForm);
+            function PostForm(event) {
+                // Clicking the navigation links at the top, get the target Url and then post the form
+                document.forms[0].action = event.target.href;
+
+                $("#myform").submit();
+
+                return false;
+            }
+
+
+
+            //           if ($.browser.msie && $.browser.version < 9) $('select.wide')
+            //                .bind('focus mouseover', function() { $(this).addClass('expand').removeClass('clicked'); })
+            //                .bind('click', function() { $(this).toggleClass('clicked'); })
+            //                .bind('mouseout', function() { if (!$(this).hasClass('clicked')) { $(this).removeClass('expand'); }})
+            //                .bind('blur', function() { $(this).removeClass('expand clicked'); });
+
+
+            var firstControl = $('form *:input[type!=hidden]:enabled:first');
+            if (firstControl != null) {
+                firstControl.focus();
+            }
+
+            //       $( function() {
+            //  $( "#slider" ).slider();
+            //} );
+
+
+
+        });
+
+
+
+    </script>
+    <script>
+            //$(function () {
+            //    $("#slider").slider({
+            //        value: 100,
+            //        min: 0,
+            //        max: 500,
+            //        step: 50,
+            //        slide: function (event, ui) {
+            //            $("#amount").val("$" + ui.value);
+            //        }
+            //    });
+            //    $("#amount").val("$" + $("#slider").slider("value"));
+            //});
+    </script>
+    <style>
+        .GadgetDiv {
+            padding-top: 3px;
+            padding-right: 3px;
+            padding-bottom: 3px;
+            padding-left: 3px;
+            background-color: white !important;
+        }
+
+        html {
+            display: table;
+            width: 100%;
+        }
+
+        #container {
+            width: 100% !important;
+            margin-top: 0px !important;
+            border: 0px solid red;
+        }
+
+        .containerContent {
+            margin-left: 30px;
+        }
+
+        #header {
+            padding: 0.5em 0.5em 1.0em .5em;
+            background-color: #2f6fa3;
+            border-bottom: 1px solid #4a80bd;
+            color: #ffffff;
+            /*-moz-border-radius: 10px 10px 0 0;
+        border-radius: 10px 10px 0 0;
+        behavior: url('../Scripts/PIE.htc');*/
+        }
+
+            #header h1 {
+                padding: 0;
+                margin: 0;
+                font-size: 16pt;
+                font-weight: bold;
+                color: #e8eff7;
+            }
+
+        h1 {
+            font-size: 26px !important;
+            color: #272727;
+        }
+
+        h2.gadgetHeading {
+            color: #4a7ac9;
+            font-family: Cambria, 'Times New Roman', serif;
+            font-size: 16pt;
+        }
+
+        #footer {
+            position: absolute;
+            bottom: 0px;
+            width: 100%;
+            /**/ padding: .5em 0;
+            color: #333;
+            background: linear-gradient(to bottom, #e6e7ed, #fbfbfc);
+            border-top: 1px solid #4a80bd;
+            /*-moz-border-radius: 0 0 10px 10px;
+           border-radius: 0 0 10px 10px;*/
+            height: 50px;
+            vertical-align: middle;
+            /*-moz-box-shadow: -1px -1px 0px 0px #888;
+           -webkit-box-shadow: 1px -1px 0px 0px #888;
+           box-shadow: 0px -1px 1px 0px #888;*/
+            /*behavior: url('../Scripts/PIE.htc');*/
+        }
+
+        #footleft {
+            float: left;
+            width: 55%;
+            /**/ margin-left: 10px;
+        }
+
+        #footright {
+            float: right;
+            /**/ margin-right: 10px;
+            margin-top: -3px;
+        }
+
+        table.twoByTwoColoredSquares {
+            width: 100px !important;
+            height: 100px !important;
+            margin-top: 100px;
+        }
+
+        hr {
+            margin-top: 0rem !important;
+            margin-bottom: 0rem !important;
+        }
+        th {
+            /*font-size: 12px !important;*/
+             border-right: 1px solid white!important;
+            border-bottom: 1px solid white !important;
+            
+        }
+        table {
+            font-size: 10px !important;
+        }
+
+            table.tr {
+                font-size: 10px !important;
+            }
+
+        tr.td {
+            /*font-size: 11px !important;*/
+            
+
+        }
+        td {
+             
+            border-right: 1px solid lightgray!important;
+            border-bottom: 1px solid lightgray !important;
+             border-left: 1px solid lightgray!important;
+              border-top: 1px solid lightgray!important;
+        }
+        .percentBar {
+            height: 12px !important;
+            background-color: Highlight !important;
+        }
+
+        .CenterText {
+            text-align: center;
+        }
+        .TwoByTwoTable   {
+            background-color:none!important;
+             border: 0px solid #ddd !important;
+              border: 0px solid #ddd !important;
+               border-collapse:separate;
+   
+        }
+          .TwoByTwoTr  {
+           background-color:none!important;
+             border: 0px solid #ddd !important;
+             
+        }
+          .TwoByTwoTr > th  {
+            background-color: white !important;
+            color:black !important;
+             border: 0px solid #ddd !important;
+        }
+            .TwoByTwoTr > td {
+                background-color: white !important;
+                color: black !important;
+                border: 0px solid #ddd !important;
+
+            }
+            .TwoByTwoTr1  {
+           background-color:none!important;
+             border: 0px solid #ddd !important;
+             
+        }
+           .TwoByTwoTr1 > th  {
+            background-color: white !important;
+            color:black !important;
+             border: 0px solid #ddd !important;
+              font-size:12px
+        }
+            .TwoByTwoTr1 > td {
+                background-color: white !important;
+                color: black !important;
+                border: 0px solid #ddd !important;
+
+            }
+       .TwoByTwoTd
+       {
+           
+             border-right: 1px solid rgb(23, 54, 93 ) !important;
+        }
+       
+        .ChiSquare  {
+           background-color:none!important;
+             border: 0px solid #ddd !important;
+             
+        }
+           .ChiSquare > th  {
+            background-color: white !important;
+            color:black !important;
+             border: 0px solid #ddd !important;
+              font-size:11px
+        }
+            .ChiSquare > td {
+                background-color: white !important;
+                color: black !important;
+                border: 0px solid #ddd !important;
+
+            }
+             .ChiSquareTable   {
+            background-color:none!important;
+             border: 0px solid #ddd !important;
+              border: 0px solid #ddd !important;
+               border-collapse:separate;
+   
+        }
+        .twobyTwoColoredSquareCell {
+            border: 0px solid #ddd !important;
+        }
+
+       .rotate-text
+        {
+          -webkit-transform: rotate(-90deg);
+            -moz-transform: rotate(-90deg);
+            -ms-transform: rotate(-90deg);
+            -o-transform: rotate(-90deg);
+            filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+            left: -10px;
+            top: 125px;
+            /*position: absolute;*/
+            position: relative;
+            /*color: #FFF;*/
+            text-transform: uppercase;
+            font-size:12px;
+            font-weight:bold;
+        }
+        .gadgetsummary {
+            color:gray !important;
+        }
+        .NoBorders {
+           /*border-color:white;*/ 
+            border-left: 1px solid white!important;
+              border-top: 1px solid white!important;
+        }
+        }
+    </style>
+
+
+</head>
+<body>
+    <nav id="header" class="navbar navbar-expand-md navbar-blue bg-blue fixed-top">
+        <div class="row col-lg-10">
+            <h1 style="text-indent: 0 !important; font-family:Segoe UI !important;">
+
+                <img src="~/Content/images/ei_logomark_wht_outln_50px.png" /> Epi Info™ Web Survey
+            </h1>
+        </div>
+        <div class="row col-lg-1"></div>
+        <div id="slider_1" class="row col-lg-1" style="width:100px; float:right">
+
+            @*<p>
+                <label for="amount">Donation amount ($50 increments):</label>
+                <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
+            </p>*@
+
+        </div>
+       
+    </nav>
+
+    <div id="container" class="container-fluid" style="padding-top:70px;padding-bottom:200px;padding-right:200px">
+
+
+
+
+
+        <div class="containerContent" style="min-height: 5000px;height: 100% ; width:100% ;">
+            @RenderBody()
+
+
+        </div>
+
+
+        <br>
+        <br>
+        <br>
+        
+    </div>
+   
+    <div class="row navbar navbar-expand-md   fixed-bottom" style="width:100%;  ">
+
+        @Html.Partial("FooterPartial")
+    </div>
+
+</body>
+</html>
+

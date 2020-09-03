@@ -15,9 +15,13 @@ namespace Epi.Web.EF
     public partial class SurveyReport
     {
         public System.Guid ReportId { get; set; }
-        public System.Guid SurveyId { get; set; }
+        public System.Guid GadgetId { get; set; }
+        public int GadgetNumber { get; set; }
+        public int GadgetVersion { get; set; }
         public string ReportHtml { get; set; }
         public System.DateTime DateCreated { get; set; }
-        public int Version { get; set; }
+        public System.DateTime DateEdited { get; set; }
+    
+        public virtual SurveyReportsInfo SurveyReportsInfo { get; set; }
     }
 }

@@ -226,6 +226,24 @@
   <wsdl:message name="IDataService_UpdateSourceTable_CustomFaultExceptionFault_FaultMessage">
     <wsdl:part xmlns:q24="http://www.yourcompany.com/types/" name="detail" element="q24:CustomFaultException" />
   </wsdl:message>
+  <wsdl:message name="IDataService_GetSurveyReportList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSurveyReportList" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_GetSurveyReportList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSurveyReportListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_GetSurveyReportList_CustomFaultExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q25="http://www.yourcompany.com/types/" name="detail" element="q25:CustomFaultException" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_GetSurveyReport_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSurveyReport" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_GetSurveyReport_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSurveyReportResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_GetSurveyReport_CustomFaultExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q26="http://www.yourcompany.com/types/" name="detail" element="q26:CustomFaultException" />
+  </wsdl:message>
   <wsdl:portType name="IDataService">
     <wsdl:operation name="GetSurveyInfo">
       <wsdl:input wsaw:Action="http://tempuri.org/IDataService/GetSurveyInfo" message="tns:IDataService_GetSurveyInfo_InputMessage" />
@@ -346,6 +364,16 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IDataService/UpdateSourceTable" message="tns:IDataService_UpdateSourceTable_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IDataService/UpdateSourceTableResponse" message="tns:IDataService_UpdateSourceTable_OutputMessage" />
       <wsdl:fault wsaw:Action="http://tempuri.org/IDataService/UpdateSourceTableCustomFaultExceptionFault" name="CustomFaultExceptionFault" message="tns:IDataService_UpdateSourceTable_CustomFaultExceptionFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSurveyReportList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDataService/GetSurveyReportList" message="tns:IDataService_GetSurveyReportList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDataService/GetSurveyReportListResponse" message="tns:IDataService_GetSurveyReportList_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IDataService/GetSurveyReportListCustomFaultExceptionFault" name="CustomFaultExceptionFault" message="tns:IDataService_GetSurveyReportList_CustomFaultExceptionFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSurveyReport">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDataService/GetSurveyReport" message="tns:IDataService_GetSurveyReport_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDataService/GetSurveyReportResponse" message="tns:IDataService_GetSurveyReport_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IDataService/GetSurveyReportCustomFaultExceptionFault" name="CustomFaultExceptionFault" message="tns:IDataService_GetSurveyReport_CustomFaultExceptionFault_FaultMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IDataService" type="tns:IDataService">
@@ -628,6 +656,30 @@
     </wsdl:operation>
     <wsdl:operation name="UpdateSourceTable">
       <soap:operation soapAction="http://tempuri.org/IDataService/UpdateSourceTable" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="CustomFaultExceptionFault">
+        <soap:fault use="literal" name="CustomFaultExceptionFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetSurveyReportList">
+      <soap:operation soapAction="http://tempuri.org/IDataService/GetSurveyReportList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="CustomFaultExceptionFault">
+        <soap:fault use="literal" name="CustomFaultExceptionFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetSurveyReport">
+      <soap:operation soapAction="http://tempuri.org/IDataService/GetSurveyReport" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

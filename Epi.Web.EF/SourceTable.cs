@@ -17,5 +17,6 @@ namespace Epi.Web.EF
         public string SourceTableName { get; set; }
         public System.Guid FormId { get; set; }
         public string SourceTableXml { get; set; }
+        public Nullable<bool> AllowRepublish { get; set; }
     }
 }

@@ -406,4 +406,26 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="DashboardResponse" nillable="true" type="tns:DashboardResponse" />
+  <xs:complexType name="PublishReportRequest">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:RequestBase">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="IncludHTML" type="xs:boolean" />
+          <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/Epi.Web.Common.DTO" minOccurs="0" name="ReportInfo" nillable="true" type="q16:ReportDTO" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="PublishReportRequest" nillable="true" type="tns:PublishReportRequest" />
+  <xs:complexType name="PublishReportResponse">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:RequestBase">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
+          <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/Epi.Web.Common.DTO" minOccurs="0" name="Reports" nillable="true" type="q17:ArrayOfReportDTO" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="PublishReportResponse" nillable="true" type="tns:PublishReportResponse" />
 </xs:schema>

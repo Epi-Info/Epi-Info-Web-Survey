@@ -95,5 +95,16 @@ namespace Epi.Web.WCF.SurveyService
         [OperationContract]
         [FaultContract(typeof(CustomFaultException))]
         bool UpdateSourceTable(SourceTablesRequest sourceTablesRequest);
+
+        [OperationContract]
+        [FaultContract(typeof(CustomFaultException))]
+        PublishReportResponse GetSurveyReportList(PublishReportRequest publishReportRequest);
+
+        [OperationContract]
+        [FaultContract(typeof(CustomFaultException))]
+        PublishReportResponse GetSurveyReport(PublishReportRequest publishReportRequest);
+
+
+
     }
 }

@@ -193,13 +193,13 @@
     window.ColumnLength = 0;
     window.SelectedRowId = "";
 
-     
+
     $(document).ready(function () {
 
 
 
 
-  
+
 
           $(".SearchInput").on("keyup", function() {
             var value = $(this).val().toLowerCase();
@@ -225,9 +225,9 @@
             hide: "blind",
             resizable: false,
             height: 600,
-            width:'auto' 
-           
-            
+            width:'auto'
+
+
 
         });
         $('.btn').on('click', function () {
@@ -264,7 +264,22 @@
 
 
         });
-     
+       $(".Report").change(function ()
+        {
+
+
+
+            var str = "";
+            $(".Report option:selected").each(function () {
+                str += $(this).val() + " ";
+            });
+
+            GetSurveyReports(str);
+
+
+
+
+        });
 
         if ($('#DashboardDivState').val() == "True") {
             Toggle('DashboardDivExpand');
@@ -314,7 +329,7 @@
 
         //('#Path').val('');
         //('#Newfile').val('');
-        
+
          $("#ValueSetFilePath").change(function () {
             EnableUpdateButton()
         });
@@ -322,10 +337,10 @@
             EnableUpdateButton()
           });
 
-   
+
     });
-   
- 
+
+
     function EnablePublishButton(obj) {
         // alert();
         //Term of use
@@ -421,7 +436,7 @@
 	            result.push(obj);
 
         }
-  
+
         //return result; //JavaScript object
         return JSON.stringify(result); //JSON
         }
@@ -541,6 +556,19 @@
                     $('.UpdateDataSetExpand').css({ "color": "#3c3c3c" });
 
                     break;
+                 case "SurveyReportsDivExpand":
+                    $('#SurveyReportsDivState').val('true');
+                    $('.SurveyReportscollaps').removeAttr("style");
+                    $('.SurveyReportscollaps').css({ "cursor": "pointer" });
+
+                    $('.contentContainer').css({ "display": "none", "visibility": "collapse" });
+                    $('#SurveyReportsDiv').css({ "display": "", "visibility": "" });
+                    $('.navLink').css({ "color": "#ffffff" });
+                    $(".leftNav").css({ "background-color": "#3c3c3c" });
+                    $(".contentSurveyReports").css({ "background-color": "#f3f3f3" });
+                    $('.SurveyReportsExpand').css({ "color": "#3c3c3c" });
+
+                    break;
                 default:
             }
 
@@ -583,7 +611,64 @@
                 alert('failed');
             }
     }
-   
+    function GetSurveyReports(SurveyId) {
+           $('#ReportsSurveyKey').val(SurveyId)
+         var ActionUrl = '@Url.Action("GetSurveyReportList", "SurveyManager")' + '?surveyid=' + SurveyId ;
+
+            $.ajax({
+                url: ActionUrl,
+                type: 'POST',
+                contentType: 'application/json; charset=utf-8',
+                //  data: $('#myform').serialize(),
+                //data:JSON.stringify(model),
+                dataType: "json",
+                //cache: false,
+                async: false,
+                success: successFunc,
+                error: errorFunc
+            });
+
+        function successFunc(data) {
+
+           // alert(data[0].ReportId)
+            $("#ReportTable").find("tr:gt(0)").remove();
+            if (data.length > 0) {
+
+                 var table = document.getElementById("ReportTable");
+                 for (var i = 0; i < data.length; i++) {
+
+
+
+                     var row = table.insertRow(i + 1);
+                     var cell1 = row.insertCell(0);
+                   //  cell1.width = "33%"
+                     var cell2 = row.insertCell(1);
+                     var cell3 = row.insertCell(2);
+                     var cell4 = row.insertCell(3);
+                      var cell5 = row.insertCell(4);
+                     
+                    cell1.innerHTML = "<input id=\""+ data[i].ReportId +"\"  class=\"btn btn-primary btn-sm\" type=\"button\" onclick=\" OpenReport('"+data[i].ReportURL.toString()+ "')\"  value=\"Open\" /> ";
+
+
+                     cell2.innerHTML = data[i].ReportURL.toString();
+                     cell3.innerHTML = data[i].DateCreated.toString();
+                     cell4.innerHTML = data[i].DataSource.toString();
+                     cell5.innerHTML = data[i].RecordCount.toString();
+
+
+
+                 }
+            }
+        }
+         function errorFunc(data) {
+                alert('failed');
+            }
+    }
+    function OpenReport(URL) {
+
+         window.open( URL, "_blank"); 
+
+    }
      function GetDataSets(SurveyId)
         {
         // alert(SurveyId)
@@ -641,7 +726,7 @@
        //  $("#EditValueSetDialogBox").dialog("close");
           var ActionUrl = '@Url.Action("Index", "SurveyManager")' ;
             window.location.href = ActionUrl
-           
+
     }
     function ViewDataSet(DataSet)
     {
@@ -707,7 +792,7 @@
 
 
     }
-   
+
     function generateDynamicTable(objArray, element , DataSetName, NoAtSign) {
         var json = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
 
@@ -723,18 +808,18 @@
         }
         window.ColumnLength = col.length;
         // CREATE DYNAMIC TABLE.
-        
+
         var table = document.createElement("table");
         table.id = "ViewTable_" + element;
         table.setAttribute("class", "ViewTable");
         // CREATE HTML TABLE HEADER ROW USING THE EXTRACTED HEADERS ABOVE.
 
         var tr = table.insertRow(-1);                   // TABLE ROW.
-       
+
         for (var i = 0; i < col.length; i++) {
             var th = document.createElement("th");      // TABLE HEADER.
             th.setAttribute("contentEditable", "false");
-            if (typeof col[i] !== "undefined") { 
+            if (typeof col[i] !== "undefined") {
                 if (NoAtSign) {
                     th.innerHTML = col[i];
                 } else {
@@ -750,72 +835,72 @@
 
             tr = table.insertRow(-1);
             tr.setAttribute("contentEditable", "true");
-           
+
             tr.tabIndex = i;
             tr.id = "Row_" + i;
             tr.setAttribute("onclick", "SetRowId(this.id);");
             tr.setAttribute("class", "TableRow");
-            
+
              //$("<td />").html('<input type="checkbox" id="Row_'+ i+'" />').appendTo(tr);
             for (var j = 0; j < col.length; j++) {
 
-                
+
                 var tabCell = tr.insertCell(-1);
-                
+
 
                     tabCell.innerHTML = json[i][col[j]];
-                
-                
+
+
             }
         }
-       
+
         // FINALLY ADD THE NEWLY CREATED TABLE WITH JSON DATA TO A CONTAINER.
         var divContainer = document.getElementById(element);
         divContainer.innerHTML = "";
         divContainer.setAttribute("contentEditable", "true");
         divContainer.appendChild(table);
 	}
-           
+
     function SetRowId(row) {
         window.SelectedRowId = row;
         $(row).css('background-color',' yellow');
     }
    function  SaveChanges(DialogBox,TableName)
     {
-       
+
        var surveyid = $("#ValueSetSurveyKey").val();
        var valueSetName = $('#ValueSetName').text();
        var table = document.getElementById("ViewTable_"+TableName);
-    
+
         var ActionUrl = '@Url.Action("SaveValueSet", "SurveyManager")' + '?surveyid=' + surveyid + '&valueSetName=' + valueSetName;
        var JData = JSON.stringify(tableToJson(table));
- 
+
        $.ajax({
            url: ActionUrl,
            type: 'post',
-          
+
            data: { JsonData: JData },
                 dataType: "json",
-              
+
                 async: false,
                 success: successFunc,
                 error: errorFunc
             });
             function successFunc(data)
             {
- 
+
                $("#" + DialogBox).dialog("close");
 
                 GetDataSets(surveyid);
                 $("div.alert-warning").hide();
-                 
+
                $("div.alert-success").show();
             }
             function errorFunc(data) {
                 alert('failed');
         }
 
-    }  
+    }
     function tableToJson(table)
     {
         var data = []; // first row needs to be headers
@@ -830,15 +915,15 @@
         rowData[ headers[j] ] = tableRow.cells[j].innerHTML;
         } data.push(rowData);
         }
-        return data; 
+        return data;
     }
 
- 
+
     function AddRow(TableName) {
 
         var table = document.getElementById("ViewTable_"+ TableName);
-      
-        var tr = table.insertRow(-1);  
+
+        var tr = table.insertRow(-1);
         var RowNumber = table.length +1
         tr.setAttribute("contentEditable", "true");
         tr.id = "Row_" + RowNumber;
@@ -846,21 +931,21 @@
        // $("<td />").html('<input type="checkbox" id="Row_'+ RowNumber +'" />').appendTo(tr);
         for (var j = 0; j < ColumnLength; j++) {
                 var tabCell = tr.insertCell(-1);
-                
+
                 tabCell.innerHTML = " ";
-               
-                
+
+
         }
         $("#SaveChanges").removeAttr('disabled');
     }
     function DeleteRow() {
-         
+
         $("#" + window.SelectedRowId).remove();
         $("#SaveChanges").removeAttr('disabled');
     }
 
     function EditValueSets(DataSet) {
-    
+
         $('#EditValueSetDialogBoxPrempt').text(DataSet);
         $('#ValueSetFilePath').val("");
         $('#ValueSetUserPublishKey').val("");
@@ -871,19 +956,19 @@
         $('#DeleteRow1').attr('style', 'visibility:hidden');
         $('#SearchInput1').attr('style', 'visibility:hidden');
         $('#SearchInput1').val("");
-         
-        
-       
+
+
+
        var $el = $('#FileUpload1');
         $el.wrap('<form>').closest('form').get(0).reset();
         $el.unwrap();
-       
+
         $("#EditValueSetDialogBox").dialog("open");
     }
     function EnableUpdateButton() {
       //  alert();
         var pattern = new RegExp('^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$', 'i');
-        
+
         if ($('#ValueSetFilePath').val() != "" && $('#ValueSetUserPublishKey').val() != "") {
             if (pattern.test($('#ValueSetUserPublishKey').val()) === false) {
 
@@ -911,7 +996,7 @@
 
             var SurveyId = $('#SurveyKey').val();
         var PublisherKey = $('#UserPublishKey').val();
-     
+
         if ($('#SurveyMode').val() == 0) {
             IsDraft = true;
 
@@ -934,7 +1019,7 @@
             {
 
                //alert(data)
-              
+
                 $('#JsonHeadder').val(data);
             }
             function errorFunc(data) {
@@ -948,7 +1033,7 @@
           var SurveyId = $('#SurveyKey').val();
           var PublisherKey = $('#UserPublishKey').val();
 
-         
+
 
         if ($('#SurveyMode').val() == 0) {
             IsDraft = true;
@@ -969,7 +1054,7 @@
             });
             function successFunc(data)
             {
-               
+
                 if (JSON.stringify(data) != 'false') {
 
                      $('#UserPublishKey').removeClass('input-validation-error');
@@ -983,7 +1068,7 @@
                 else
 
                 {
-                    
+
                     //alert('Please validate the Security Token and try again');
                     //input-validation-error valerr
                     $('#UserPublishKey').addClass('input-validation-error');
@@ -999,12 +1084,12 @@
     function convertToCSV(objArray)
     {
         var array = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
-       
+
     var str = '';
-       
+
     for (var i = 0; i < array.length; i++) {
         var line = '';
-         
+
         for (var index in array[i]) {
          //  alert(index)
             if (line != '') line += ','
@@ -1016,21 +1101,21 @@
 
         str += line + '\r\n';
     }
-   
+
     return str;
   }
 
     function exportCSVFile(headers, items, fileTitle) {
-       
+
     if (headers) {
         items.unshift(headers);
     }
 
     // Convert Object to JSON
     var jsonObject = JSON.stringify(items);
- 
+
     var csv = convertToCSV(jsonObject);
-        
+
       //  alert(items.length)
     if (items.length> 1 ) {
         var exportedFilenmae = fileTitle + '.csv'; //|| 'export.csv';
@@ -1070,7 +1155,7 @@
         }
 
     }
- 
+
 
 </script>
 
@@ -1220,10 +1305,21 @@
                             <a href="#" style="cursor:pointer;color:#ffffff;" class="navLink UpdateDataSetExpand" onclick="Toggle('UpdateDataSetDivExpand')">
                                 <img style="display:none" src="~/Content/images/Toggle-expand-alt_green.png" />
                                 <img style="display:none" src="~/Content/images/Toggle-collapse-alt_green.png" />
-                                 Survey Value Sets (Beta)
+                                Survey Value Sets (Beta)
                             </a>
 
                         </div>
+
+
+                        <div class="contentSurveyReports leftNav" style="background-color:#f3f3f3;">
+                            <a href="#" style="cursor:pointer;color:#ffffff;" class="navLink SurveyReportsExpand" onclick="Toggle('SurveyReportsDivExpand')">
+                                <img style="display:none" src="~/Content/images/Toggle-expand-alt_green.png" />
+                                <img style="display:none" src="~/Content/images/Toggle-collapse-alt_green.png" />
+                                Survey Reports (Beta)
+                            </a>
+
+                        </div>
+
                     </div>
                     <!--end of nav-->
 
@@ -1635,7 +1731,7 @@
                                                                                 }
                                                        }
 
-
+                                                           
 
 
                                                        );
@@ -1743,16 +1839,16 @@
                             </div>
                             <div class="alert alert-success  " role="alert">
                                 Value Set was successfully updated!
-                                <button type="button" class="close" data-hide="alert"> 
+                                <button type="button" class="close" data-hide="alert">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
                             <script>
-                                $(function(){
-                                            $("[data-hide]").on("click", function(){
-                                                $(this).closest("." + $(this).attr("data-hide")).hide();
-                                            });
-                                        });
+                                $(function () {
+                                    $("[data-hide]").on("click", function () {
+                                        $(this).closest("." + $(this).attr("data-hide")).hide();
+                                    });
+                                });
                             </script>
                             <div class="accountdiv col-md-pull-9">
                                 <label class="accountlabel" id="SurveyIdlabel"><span style="color:#900000;">*</span> Survey Id:</label><br>
@@ -1779,6 +1875,44 @@
                             </div>
 
                         </div>
+
+                        <div id="SurveyReportsDiv" class="contentContainer" style="margin-bottom: 100px; align-self:center ;display:none; visibility:collapse;margin:1em">
+                            <h1>Survey Reports</h1>
+                            <br />
+
+
+                            <div class="accountdiv col-md-pull-9">
+                                <label class="accountlabel" id="SurveyIdlabel"><span style="color:#900000;">*</span> Survey Id:</label><br>
+
+
+                                @Html.DropDownListFor(m => m.EmailSurveyKey, new SelectList(ViewBag.SurveyNameList1, "Value", "Text", 0), "Select Survey To View Reports", new { @class = "Account Report" })
+                                <br />
+
+                                <br />
+                                <div>
+
+
+                                    <table id="ReportTable" style="width:100%">
+
+                                        <tr>
+                                            <td style="font:bold"></td>
+                                            <td style="font:bold">Report Link</td>
+                                            <td style="font:bold">Date created</td>
+                                            <td style="font:bold">Data Source</td>
+                                            <td style="font:bold">Record Count</td>
+                                        </tr>
+
+                                    </table>
+
+
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
                     </div>
 
 
@@ -1886,18 +2020,19 @@
         <input type="hidden" id="SetJsonDivState" value="@Model.SetJsonDivState.ToString()" name="SetJsonDivState" />
         <input type="hidden" id="ViewRecordsDivState" value="@Model.ViewRecordsDivState.ToString()" name="ViewRecordsDivState" />
         <input type="hidden" id="UpdateDataSetDivState" value="@Model.UpdateDataSetDivState.ToString()" name="UpdateDataSetDivState" />
+        <input type="hidden" id="SurveyReportsDivState" value="@Model.SurveyReportsDivState.ToString()" name="SurveyReportsDivState" />
         <input type="hidden" id="JsonHeadder" value="" name="JsonHeadder" />
         <input type="hidden" id="DataSets" value="" name="DataSets" />
-       
+
 
 
     }
     <div id="TermsDialog">
         @Html.Raw(ViewData["TermOfUse1"].ToString())
     </div>
-    <div id="ViewValueSetDialogBox" title="View Value Sets" >
+    <div id="ViewValueSetDialogBox" title="View Value Sets">
 
-        <p><label id="ValueSetName" >Prempt</label></p>
+        <p><label id="ValueSetName">Prempt</label></p>
         <p><input class="form-control SearchInput" id="SearchInput" type="text" placeholder="Search.."></p>
         <p><label id="DialogBoxPrempt">Prempt</label></p>
 
@@ -1907,10 +2042,10 @@
 
     </div>
 
-    <div id="EditValueSetDialogBox" title="Update Value Sets" >
+    <div id="EditValueSetDialogBox" title="Update Value Sets">
         @using (Html.BeginForm("Index", "SurveyManager", null, FormMethod.Post, new { id = "myform", enctype = "multipart/form-data" }))
         {
-            <p><label id="EditValueSetDialogBoxPrempt" style="font:bolder" >Prempt</label></p>
+            <p><label id="EditValueSetDialogBoxPrempt" style="font:bolder">Prempt</label></p>
 
             <div class="accountdiv col-md-12">
                 <div>
@@ -1935,47 +2070,47 @@
                             var filePath = document.getElementById("Path");
                             var button = document.getElementById("btnFileUpload");
                             button.onclick = function () {
-                               // alert(1);
+                                // alert(1);
                                 fileupload.click();
 
                             };
                             fileupload.onchange = function () {
-                                 //alert(2);
+                                //alert(2);
                                 var fileName = fileupload.value.split('\\')[fileupload.value.split('\\').length - 1];
 
                                 $('#ValueSetFilePath').val(fileName);
                                 var reader = new FileReader();
                                 reader.onload = function (e) {
-                                   
-                                 
-                                      
-                                   var json = csvToJSON(reader.result)
-                                      
+
+
+
+                                    var json = csvToJSON(reader.result)
+
                                     $('#SaveChanges1').removeAttr('style');
                                     $('#AddRow1').removeAttr('style');
                                     $('#DeleteRow1').removeAttr('style');
                                     $('#SearchInput1').removeAttr('style');
-                                    
+
                                     generateDynamicTable(json, "DialogBoxPrempt1", $('#EditValueSetDialogBoxPrempt').text(), true);
                                 };
 
-                               // reader.readAsBinaryString(fileupload.files[0]);
-                                 reader.readAsText (fileupload.files[0])
+                                // reader.readAsBinaryString(fileupload.files[0]);
+                                reader.readAsText(fileupload.files[0])
                             };
                         };
                     </script>
 
                 </div>
                 @*@if (!Model.IsAuthenticated)
-        {
-            <div>
-                <label class="accountlabel" id="SecurityTokenlabel1"><span style="color:#900000;">*</span> Security Token:</label><br>
+                {
+                    <div>
+                        <label class="accountlabel" id="SecurityTokenlabel1"><span style="color:#900000;">*</span> Security Token:</label><br>
 
 
-                @Html.TextBoxFor(m => m.ValueSetUserPublishKey, new { @class = "Account" }) <br>
-                @Html.ValidationMessageFor(m => m.ValueSetUserPublishKey, null)<br>
-            </div>
-        }*@
+                        @Html.TextBoxFor(m => m.ValueSetUserPublishKey, new { @class = "Account" }) <br>
+                        @Html.ValidationMessageFor(m => m.ValueSetUserPublishKey, null)<br>
+                    </div>
+                }*@
                 <br>
                 <p><input class="form-control SearchInput" id="SearchInput1" type="text" style="visibility:hidden" placeholder="Search.."></p>
                 <p><label id="DialogBoxPrempt1"></label></p>
@@ -1989,6 +2124,7 @@
             </div>
             <input type="hidden" id="SelectedValueSet" value="@Model.SelectedValueSet" name="SelectedValueSet" />
             <input type="hidden" id="ValueSetSurveyKey" value="@Model.ValueSetSurveyKey" name="ValueSetSurveyKey" />
+            <input type="hidden" id="ReportsSurveyKey" value="@Model.ReportsSurveyKey" name="ReportsSurveyKey" />
         }
     </div>
 

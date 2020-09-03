@@ -166,10 +166,10 @@ namespace Epi.Web.MVC.Models
         public string ViewRecordsURL { get; set; }
         public bool IsBulk { get; set; }
         public bool UpdateDataSetDivState { get; set; }
+        public bool SurveyReportsDivState { get; set; }
         public List<Web.Models.SourceTableModel> SourceTables { get; set; }
         public string SelectedValueSet { get; set; }
         public string ValueSetSurveyKey { get; set; }
-         
-
+        public string ReportsSurveyKey { get; set; }
     }
 }

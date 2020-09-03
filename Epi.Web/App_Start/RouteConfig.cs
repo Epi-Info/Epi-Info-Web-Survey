@@ -122,6 +122,14 @@ namespace Epi.Web.MVC
              "SurveyManager/SaveValueSet", // URL with parameters
              new { controller = "SurveyManager", action = "SaveValueSet" }
             ); // Parameter defaults
+            //GetSurveyReports
+            routes.MapRoute
+              (
+              null, // Route name
+              "SurveyManager/GetSurveyReportList", // URL with parameters
+              new { controller = "SurveyManager", action = "GetSurveyReportList" }
+             ); // Parameter defaults
+
             routes.MapRoute
               (
               null, // Route name
@@ -256,13 +264,23 @@ namespace Epi.Web.MVC
                         "Account/{emailaddress}",                           // URL with parameters
                         new { controller = "Account", action = "Index", emailaddress = UrlParameter.Optional }
                         );  // Parameter defaults
+
+
+
+            routes.MapRoute
+                    (
+                        null, // Route name
+                        "Report/{reportid}", // URL with parameters
+                        new { controller = "Report", action = "Index", reportid = UrlParameter.Optional }
+                    ); // Param
+
             //routes.MapRoute
             //         (
             //           null,                                              // Route name
             //           "Account/Index",                           // URL with parameters
             //           new { controller = "Account", action = "Index" }
             //           );   
-           
+
             //routes.MapRoute(
             //   "Default", // Route name
             //   "{*url}", // URL with parameters
