@@ -577,6 +577,7 @@
     <Content Include="Scripts\modernizr-2.0.6-development-only.js" />
     <Content Include="Scripts\PIE.htc" />
     <Content Include="Scripts\Print.js" />
+    <Content Include="Scripts\wordcloud2.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Content\Text\Survey.xlsx" />
     <None Include="Properties\DataSources\Epi.Web.Common.Message.CacheDependencyResponse.datasource" />
