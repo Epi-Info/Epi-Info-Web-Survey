@@ -182,14 +182,14 @@ if (!window.clearImmediate) {
             //fontFamily: '"Trebuchet MS", "Heiti TC", "微軟正黑體", ' +
             //    '"Arial Unicode MS", "Droid Fallback Sans", sans-serif',
             fontFamily:'"Georgia"',
-            fontWeight: 'normal',
+            fontWeight: 'bold',
             color: 'random-light',
             minSize: 0, // 0 to disable
             weightFactor: 18,
             clearCanvas: true,
             backgroundColor: '#fff',  // opaque white = rgba(255, 255, 255, 1)
 
-            gridSize: 12,
+            gridSize: 10,
             drawOutOfBound: false,
             shrinkToFit: true,
             origin: null,

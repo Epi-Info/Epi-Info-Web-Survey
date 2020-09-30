@@ -196,5 +196,29 @@ namespace Epi.Web.EF
 
 
         }
+
+
+
+        public void DeleteReport(ReportInfoBO Report)
+        {
+            
+            Guid ReportId = Guid.Parse(Report.ReportId);
+            using (var Context = DataObjectFactory.CreateContext())
+            {
+
+
+                var Query = from SurveyReport in Context.SurveyReports
+                            where SurveyReport.ReportId == ReportId && SurveyReport.GadgetVersion == Report.ReportVersion
+                            select SurveyReport;
+                foreach (var item in Query) {
+                    Context.SurveyReports.Remove(item);
+                }
+                Context.SaveChanges();
+
+
+
+            }
+
+        }
     }
     }

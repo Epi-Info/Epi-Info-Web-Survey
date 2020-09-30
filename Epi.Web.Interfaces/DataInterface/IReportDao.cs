@@ -12,5 +12,6 @@ namespace Epi.Web.Interfaces.DataInterfaces
         void PublishReport(ReportInfoBO Report);
         List<ReportInfoBO> GetSurveyReports(string surveyID,bool IncludHTML);
         List<ReportInfoBO> GetReport(string reportID);
+        void DeleteReport(ReportInfoBO Report);
     }
 }

@@ -52,5 +52,8 @@ namespace Epi.Web.WCF.SurveyService
         [OperationContract]
         [FaultContract(typeof(CustomFaultException))]
         PublishReportResponse PublishReport(PublishReportRequest Request);
+        [OperationContract]
+        [FaultContract(typeof(CustomFaultException))]
+        PublishReportResponse DeleteReport(PublishReportRequest Request);
     }
 }

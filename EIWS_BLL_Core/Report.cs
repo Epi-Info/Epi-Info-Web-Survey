@@ -45,5 +45,9 @@ namespace Epi.Web.BLL
 
 
         }
+        public void DeleteReport(ReportInfoBO reportBO)
+        {
+            this.ReportDao.DeleteReport(reportBO);
+        }
     }
 }

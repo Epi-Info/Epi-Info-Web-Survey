@@ -24,6 +24,8 @@ namespace Epi.Web.MVC.Controllers
     public class FinalController : Controller
     {
         private ISurveyFacade _isurveyFacade;
+        private IEnumerable<XElement> PageFields;
+        private string RequiredList = "";
 
         /// <summary>
         /// Injecting SurveyTransactionObject through constructor
@@ -148,7 +150,7 @@ namespace Epi.Web.MVC.Controllers
                         }
                     }
                 }
-                
+                SurveyAnswer.XML = CreateResponseDocument(xdoc, SurveyAnswer.XML);
                 _isurveyFacade.UpdateSurveyResponse(surveyInfoModel, SurveyAnswer.ResponseId, form, SurveyAnswer, false, false, 1);
 
                 return RedirectToRoute(new { Controller = "Survey", Action = "Index", responseId = responseId, PageNumber = 1 });
@@ -160,6 +162,139 @@ namespace Epi.Web.MVC.Controllers
             }
 
         }
+        private static int GetNumberOfPages(XDocument Xml)
+        {
+            var _FieldsTypeIDs = from _FieldTypeID in
+                                 Xml.Descendants("View")
+                                 select _FieldTypeID;
+
+            return _FieldsTypeIDs.Elements().Count();
+        }
+        private string CreateResponseDocument(XDocument pMetaData, string pXML)
+        {
+            XDocument XmlResponse = new XDocument();
+            int NumberOfPages = GetNumberOfPages(pMetaData);
+            for (int i = 0; NumberOfPages > i - 1; i++)
+            {
+                var _FieldsTypeIDs = from _FieldTypeID in
+                                     pMetaData.Descendants("Field")
+                                     where _FieldTypeID.Attribute("Position").Value == (i - 1).ToString()
+                                     select _FieldTypeID;
+
+                PageFields = _FieldsTypeIDs;
+                var PageId = "";
+
+                if (PageFields.Count() > 0)
+                {
+                    PageId = PageFields.First().Attribute("PageId").Value;
+                }
+
+                //   XmlElement temp = (XmlElement) _FieldsTypeIDs.First();
+
+                XDocument CurrentPageXml = ToXDocument(CreateResponseXml("", false, i, PageId));
+
+                if (i == 0)
+                {
+                    XmlResponse = ToXDocument(CreateResponseXml("", true, i, ""));
+                }
+                else
+                {
+                    XmlResponse = MergeXml(XmlResponse, CurrentPageXml, i);
+                }
+            }
+
+            return XmlResponse.ToString();
+        }
+
+        public XmlDocument CreateResponseXml(string SurveyId, bool AddRoot, int CurrentPage, string Pageid)
+        {
+            XmlDocument xml = new XmlDocument();
+            XmlElement root = xml.CreateElement("SurveyResponse");
+
+            if (CurrentPage == 0)
+            {
+                root.SetAttribute("SurveyId", SurveyId);
+                root.SetAttribute("LastPageVisited", "1");
+                root.SetAttribute("HiddenFieldsList", "");
+                root.SetAttribute("HighlightedFieldsList", "");
+                root.SetAttribute("DisabledFieldsList", "");
+                root.SetAttribute("RequiredFieldsList", "");
+                root.SetAttribute("RecordBeforeFlag", "");
+                xml.AppendChild(root);
+            }
+
+            XmlElement PageRoot = xml.CreateElement("Page");
+            if (CurrentPage != 0)
+            {
+                PageRoot.SetAttribute("PageNumber", CurrentPage.ToString());
+                PageRoot.SetAttribute("PageId", Pageid);//Added PageId Attribute to the page node
+                PageRoot.SetAttribute("MetaDataPageId", Pageid.ToString());
+                xml.AppendChild(PageRoot);
+            }
+
+            foreach (var Field in this.PageFields)
+            {
+                XmlElement child = xml.CreateElement(Epi.Web.MVC.Constants.Constant.RESPONSE_DETAILS);
+                child.SetAttribute("QuestionName", Field.Attribute("Name").Value);
+                child.InnerText = Field.Value;
+                PageRoot.AppendChild(child);
+                //Start Adding required controls to the list
+                SetRequiredList(Field);
+            }
+
+            return xml;
+        }
+        public void SetRequiredList(XElement _Fields)
+        {
+            bool isRequired = false;
+            string value = _Fields.Attribute("IsRequired").Value;
+
+            if (bool.TryParse(value, out isRequired))
+            {
+                if (isRequired)
+                {
+                    if (!RequiredList.Contains(_Fields.Attribute("Name").Value))
+                    {
+                        if (RequiredList != "")
+                        {
+                            RequiredList = RequiredList + "," + _Fields.Attribute("Name").Value.ToLower();
+                        }
+                        else
+                        {
+                            RequiredList = _Fields.Attribute("Name").Value.ToLower();
+                        }
+                    }
+                }
+            }
+        }
+        public static XDocument ToXDocument(XmlDocument xmlDocument)
+        {
+            using (var nodeReader = new XmlNodeReader(xmlDocument))
+            {
+                nodeReader.MoveToContent();
+                return XDocument.Load(nodeReader);
+            }
+        }
+
+        public static XDocument MergeXml(XDocument SavedXml, XDocument CurrentPageResponseXml, int Pagenumber)
+        {
+            XDocument xdoc = XDocument.Parse(SavedXml.ToString());
+            XElement oldXElement = xdoc.XPathSelectElement("SurveyResponse/Page[@PageNumber = '" + Pagenumber.ToString() + "']");
+
+            if (oldXElement == null)
+            {
+                SavedXml.Root.Add(CurrentPageResponseXml.Elements());
+                return SavedXml;
+            }
+
+            else
+            {
+                oldXElement.Remove();
+                xdoc.Root.Add(CurrentPageResponseXml.Elements());
+                return xdoc;
+            }
+        }
+
         public SurveyInfoModel GetSurveyInfo(string SurveyId)
         {
             SurveyInfoModel surveyInfoModel = _isurveyFacade.GetSurveyInfoModel(SurveyId);
