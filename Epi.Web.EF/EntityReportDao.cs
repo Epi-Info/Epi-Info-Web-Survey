@@ -196,29 +196,57 @@ namespace Epi.Web.EF
 
 
         }
-
-
-
-        public void DeleteReport(ReportInfoBO Report)
+        private bool ReportExist2(Guid ReportId)
         {
-            
-            Guid ReportId = Guid.Parse(Report.ReportId);
+
+            bool HasReport = false;
+
             using (var Context = DataObjectFactory.CreateContext())
             {
 
 
-                var Query = from SurveyReport in Context.SurveyReports
-                            where SurveyReport.ReportId == ReportId && SurveyReport.GadgetVersion == Report.ReportVersion
-                            select SurveyReport;
-                foreach (var item in Query) {
-                    Context.SurveyReports.Remove(item);
+                var Query = Context.SurveyReportsInfoes.Where(x =>   x.ReportId == ReportId).Count();
+
+
+                if (Query > 0)
+                {
+                    HasReport = true;
                 }
-                Context.SaveChanges();
+
+
 
 
 
             }
 
+
+            return HasReport;
+
+
+        }
+
+
+        public void DeleteReport(ReportInfoBO Report)
+        {
+            if (ReportExist2(Guid.Parse(Report.ReportId)))
+            {
+                Guid ReportId = Guid.Parse(Report.ReportId);
+                using (var Context = DataObjectFactory.CreateContext())
+                {
+
+
+                    var Query = from SurveyReport in Context.SurveyReports
+                                where SurveyReport.ReportId == ReportId && SurveyReport.GadgetVersion == Report.ReportVersion
+                                select SurveyReport;
+                    foreach (var item in Query) {
+                        Context.SurveyReports.Remove(item);
+                    }
+                    Context.SaveChanges();
+
+
+
+                }
+            }
         }
     }
     }
