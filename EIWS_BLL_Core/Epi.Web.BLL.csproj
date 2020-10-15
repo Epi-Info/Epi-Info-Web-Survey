@@ -45,7 +45,7 @@
       <HintPath>..\Epi.Web\bin\Epi.Web.Interfaces.dll</HintPath>
     </Reference>
     <Reference Include="EPPlus">
-      <HintPath>..\SurveyManagerInterface\bin\Release\EPPlus.dll</HintPath>
+      <HintPath>..\Epi.Web\bin\EPPlus.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation">
       <HintPath>..\packages\CommonServiceLocator.1.0\lib\NET35\Microsoft.Practices.ServiceLocation.dll</HintPath>

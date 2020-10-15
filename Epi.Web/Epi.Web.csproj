@@ -316,6 +316,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\CheckCode\IFElse.txt" />
     <Content Include="Content\css\awesomplete.css" />
+    <Content Include="Content\css\bootstrap.min.css" />
     <Content Include="Content\css\c3.min.css" />
     <Content Include="Content\css\demos.css" />
     <Content Include="Content\css\epistyle-blue.css" />
