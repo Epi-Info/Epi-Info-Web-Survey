@@ -216,13 +216,13 @@ namespace Epi.Web.EF
                                 if (PageSize != -1 && PageNumber != -1)
                                 {
                                    var responseList0 = Context.SurveyResponses.Where(x => x.SurveyId == Id && x.IsDraftMode == pIsDraftMode)
-                                    .OrderBy(x => x.DateCompleted).Skip((PageNumber - 1) * PageSize).Take(PageSize);
+                                    .OrderBy(x => x.DateCreated).Skip((PageNumber - 1) * PageSize).Take(PageSize);
                                     responseList = responseList0.ToList();
                                 }
                                 else {
 
                                     responseList = Context.SurveyResponses.Where(x => x.SurveyId == Id && x.IsDraftMode == pIsDraftMode)
-                                    .OrderBy(x => x.DateCompleted).ToList();
+                                    .OrderBy(x => x.DateCreated).ToList();
 
                                 }
                         }
@@ -231,12 +231,12 @@ namespace Epi.Web.EF
                                 if (PageSize != -1 && PageNumber != -1)
                                 {
                                     var responseList3 = Context.SurveyResponses.Where(x => x.SurveyId == Id && x.StatusId == pStatusId && x.IsDraftMode == pIsDraftMode)
-                                    .OrderBy(x => x.DateCompleted).Take(PageSize);
+                                    .OrderBy(x => x.DateCreated).Take(PageSize);
                                     responseList = responseList3.ToList();
                                 }
                                 else {
                                     responseList = Context.SurveyResponses.Where(x => x.SurveyId == Id && x.StatusId == pStatusId && x.IsDraftMode == pIsDraftMode)
-                                   .OrderBy(x => x.DateCompleted).ToList();
+                                   .OrderBy(x => x.DateCreated).ToList();
                                 }
 
 
@@ -246,18 +246,18 @@ namespace Epi.Web.EF
                                 if (PageSize != -1 && PageNumber != -1)
                                 {
                                     var responseList34 = Context.SurveyResponses.Where(x => x.SurveyId == Id && (x.StatusId == pStatusId || x.StatusId == 3) && x.IsDraftMode == pIsDraftMode)
-                                    .OrderBy(x => x.DateCompleted).Skip((PageNumber - 1) * PageSize).Take(PageSize);
+                                    .OrderBy(x => x.DateCreated).Skip((PageNumber - 1) * PageSize).Take(PageSize);
                                     responseList = responseList34.ToList();
                                 }
                                 else {
                                     responseList = Context.SurveyResponses.Where(x => x.SurveyId == Id && (x.StatusId == pStatusId || x.StatusId == 3) && x.IsDraftMode == pIsDraftMode)
-                                    .OrderBy(x => x.DateCompleted).ToList();
+                                    .OrderBy(x => x.DateCreated).ToList();
                                 }
                        }
                         // Old client Epi info version 7.1.5.2
                        if (pStatusId == -1) // All 2,3,and 4 if available
                        {
-                           responseList = Context.SurveyResponses.Where(x => x.SurveyId == Id ).OrderBy(x => x.DateCompleted).ToList();
+                           responseList = Context.SurveyResponses.Where(x => x.SurveyId == Id ).OrderBy(x => x.DateCreated).ToList();
                        }
                         if (pStatusId == -2) // Json
                         {
@@ -285,7 +285,7 @@ namespace Epi.Web.EF
             if(PageSize!=-1 && PageNumber != -1){
              result = Mapper.Map(responseList);
                  
-                if (pStatusId == 3) // Only 3
+                if (pStatusId == 3 || pStatusId ==0 || pStatusId ==4) // Only 3
                 {
                     result = result.Take(PageSize);
                 }

@@ -500,6 +500,7 @@
     <Content Include="Scripts\awesomplete.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\bootstrapV4.min.js" />
     <Content Include="Scripts\c3.min.js" />
     <Content Include="Scripts\CheckCodeEngine.js" />
     <Content Include="Scripts\CheckCodeEngineV1.js" />
@@ -603,7 +604,6 @@
     <Content Include="SurveyManagerServiceV2.svc" />
     <Content Include="SurveyManagerServiceV3.svc" />
     <Content Include="SurveyManagerServiceV4.svc" />
-    <Content Include="SurveyManagerServiceV5.svc" />
     <Content Include="Unity.Mvc3.README.txt" />
     <Content Include="Views\Shared\footer.htm" />
     <Content Include="Views\Shared\header.htm" />

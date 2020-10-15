@@ -198,8 +198,8 @@
 
 
 
-
-
+         $('#ReportList').hide();// to hide report list div 
+         $("div.Report-alert").hide(); // to hide report alert
 
           $(".SearchInput").on("keyup", function() {
             var value = $(this).val().toLowerCase();
@@ -415,7 +415,24 @@
                alert("Your browser doesn't support copying towards the clipboard. Copy the text manually.")
             }
         }
-
+    function copyToClipboard1(link) {
+        
+       
+        
+            var el = document.createElement('textarea');
+               // Set value (string to be copied)
+               el.value = link;
+               // Set non-editable to avoid focus and move outside of view
+               el.setAttribute('readonly', '');
+               el.style = {position: 'absolute', left: '-9999px'};
+               document.body.appendChild(el);
+               // Select text inside element
+               el.select();
+               // Copy text to clipboard
+               document.execCommand('copy');
+               // Remove temporary element
+               document.body.removeChild(el);
+        }
         function csvToJSON(csv){
 
             var lines=csv.split("\n");
@@ -612,7 +629,8 @@
             }
     }
     function GetSurveyReports(SurveyId) {
-           $('#ReportsSurveyKey').val(SurveyId)
+        $('#ReportsSurveyKey').val(SurveyId)
+         $("#ReportTable").find("tr:gt(0)").remove();
          var ActionUrl = '@Url.Action("GetSurveyReportList", "SurveyManager")' + '?surveyid=' + SurveyId ;
 
             $.ajax({
@@ -631,33 +649,37 @@
         function successFunc(data) {
 
            // alert(data[0].ReportId)
-            $("#ReportTable").find("tr:gt(0)").remove();
+            $('#ReportList').show();
+            $("div.Report-alert").hide();
             if (data.length > 0) {
 
-                 var table = document.getElementById("ReportTable");
-                 for (var i = 0; i < data.length; i++) {
+                var table = document.getElementById("ReportTable");
+                for (var i = 0; i < data.length; i++) {
 
 
 
-                     var row = table.insertRow(i + 1);
-                     var cell1 = row.insertCell(0);
-                   //  cell1.width = "33%"
-                     var cell2 = row.insertCell(1);
-                     var cell3 = row.insertCell(2);
-                     var cell4 = row.insertCell(3);
-                      var cell5 = row.insertCell(4);
-                     
-                    cell1.innerHTML = "<input id=\""+ data[i].ReportId +"\"  class=\"btn btn-primary btn-sm\" type=\"button\" onclick=\" OpenReport('"+data[i].ReportURL.toString()+ "')\"  value=\"Open\" /> ";
+                    var row = table.insertRow(i + 1);
+                    var cell1 = row.insertCell(0);
+                    //  cell1.width = "33%"
+                    var cell2 = row.insertCell(1);
+                    var cell3 = row.insertCell(2);
+                    var cell4 = row.insertCell(3);
+                    var cell5 = row.insertCell(4);
+
+                    cell1.innerHTML = "<input id=\"" + data[i].ReportId + "\"  class=\"btn btn-primary btn-sm\" type=\"button\" onclick=\" OpenReport('" + data[i].ReportURL.toString() + "')\"  value=\"Open\" /> ";
+                    cell2.innerHTML = "<input class=\"btn btn-primary btn-sm\" type=\"button\" onclick=\"copyToClipboard1('" + data[i].ReportURL.toString() + "')\" id=\"Copy\" value=\"Copy\" />"
+
+                    // cell2.innerHTML = data[i].ReportURL.toString();
+                    cell3.innerHTML = data[i].DateCreated.toString();
+                    cell4.innerHTML = data[i].DataSource.toString();
+                    cell5.innerHTML = data[i].RecordCount.toString();
 
 
-                     cell2.innerHTML = data[i].ReportURL.toString();
-                     cell3.innerHTML = data[i].DateCreated.toString();
-                     cell4.innerHTML = data[i].DataSource.toString();
-                     cell5.innerHTML = data[i].RecordCount.toString();
 
-
-
-                 }
+                }
+            } else {
+                $('#ReportList').hide();
+                $("div.Report-alert").show();
             }
         }
          function errorFunc(data) {
@@ -892,7 +914,7 @@
                $("#" + DialogBox).dialog("close");
 
                 GetDataSets(surveyid);
-                $("div.alert-warning").hide();
+                $("div.ValueSets-alert").hide();
 
                $("div.alert-success").show();
             }
@@ -1831,7 +1853,7 @@
                             <h1>Survey Value Sets</h1>
                             <br />
 
-                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            <div class="alert ValueSets-alert alert-warning alert-dismissible fade show" role="alert">
                                 <strong>Note:</strong>  Republishing a survey will override changes made through this process.
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
@@ -1889,7 +1911,7 @@
                                 <br />
 
                                 <br />
-                                <div>
+                                <div id="ReportList">
 
 
                                     <table id="ReportTable" style="width:100%">
@@ -1907,8 +1929,14 @@
 
 
                                 </div>
-
+                                <div class="alert Report-alert alert-warning alert-dismissible fade show" role="alert">
+                                    <strong>No available reports!</strong>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
                             </div>
+                           
 
                         </div>
 
