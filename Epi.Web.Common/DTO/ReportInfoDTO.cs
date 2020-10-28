@@ -21,6 +21,7 @@ namespace Epi.Web.Common.DTO
         private string _SurveyId;
         private string _DataSource;
         private int _RecordCount;
+        private string _ReportName;
         [DataMember]
         public int RecordCount
         {
@@ -90,6 +91,14 @@ namespace Epi.Web.Common.DTO
 
             get { return _Gadgets; }
             set { _Gadgets = value; }
+
+        }
+        [DataMember]
+        public string ReportName
+        {
+
+            get { return _ReportName; }
+            set { _ReportName = value; }
 
         }
     }

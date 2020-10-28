@@ -1648,6 +1648,7 @@ namespace Epi.Web.MVC.Controllers
                     Model.DataSource = item.DataSource;
                     Model.ReportURL = ConfigurationManager.AppSettings["ReportURL"] + item.ReportId;
                     Model.RecordCount = item.RecordCount;
+                    Model.ReportName = item.ReportName;
                     ModelList.Add(Model);
                 }
 

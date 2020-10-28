@@ -26,6 +26,7 @@ namespace Epi.Web.EF
         public System.DateTime DateEdited { get; set; }
         public string DataSource { get; set; }
         public int RecordCount { get; set; }
+        public string ReportName { get; set; }
     
         public virtual SurveyMetaData SurveyMetaData { get; set; }
         public virtual ICollection<SurveyReport> SurveyReports { get; set; }

@@ -259,6 +259,10 @@ namespace Epi.Web.WCF.SurveyService
                 Implementation.PublishReport(ReportInfoBO);
 
                 result.Message = "The report was successfully published";
+                var ReportInfo = new ReportInfoDTO();
+                ReportInfo.ReportURL = ConfigurationManager.AppSettings["ReportURL"] + Request.ReportInfo.ReportId;
+                result.Reports = new List<ReportInfoDTO>();
+                result.Reports.Add(ReportInfo);
                 return result;
             }
             catch (Exception ex)

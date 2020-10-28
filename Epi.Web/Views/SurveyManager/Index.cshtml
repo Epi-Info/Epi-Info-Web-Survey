@@ -660,19 +660,16 @@
 
                     var row = table.insertRow(i + 1);
                     var cell1 = row.insertCell(0);
-                    //  cell1.width = "33%"
                     var cell2 = row.insertCell(1);
                     var cell3 = row.insertCell(2);
                     var cell4 = row.insertCell(3);
-                    var cell5 = row.insertCell(4);
+                  
 
-                    cell1.innerHTML = "<input id=\"" + data[i].ReportId + "\"  class=\"btn btn-primary btn-sm\" type=\"button\" onclick=\" OpenReport('" + data[i].ReportURL.toString() + "')\"  value=\"Open\" /> ";
-                    cell2.innerHTML = "<input class=\"btn btn-primary btn-sm\" type=\"button\" onclick=\"copyToClipboard1('" + data[i].ReportURL.toString() + "')\" id=\"Copy\" value=\"Copy\" />"
-
-                    // cell2.innerHTML = data[i].ReportURL.toString();
+                    cell1.innerHTML = "<input id=\"" + data[i].ReportId + "\"  class=\"btn btn-primary btn-sm\" type=\"button\" onclick=\" OpenReport('" + data[i].ReportURL.toString() + "')\"  value=\"Open\" /> <input class=\"btn btn-primary btn-sm\" type=\"button\" onclick=\"copyToClipboard1('" + data[i].ReportURL.toString() + "')\" id=\"Copy\" value=\"Copy\" />";
+                   // cell2.innerHTML = "<input class=\"btn btn-primary btn-sm\" type=\"button\" onclick=\"copyToClipboard1('" + data[i].ReportURL.toString() + "')\" id=\"Copy\" value=\"Copy\" />"
+                    cell2.innerHTML = data[i].ReportName;
                     cell3.innerHTML = data[i].DateCreated.toString();
-                    cell4.innerHTML = data[i].DataSource.toString();
-                    cell5.innerHTML = data[i].RecordCount.toString();
+                    cell4.innerHTML = data[i].RecordCount.toString();
 
 
 
@@ -1918,9 +1915,9 @@
 
                                         <tr>
                                             <td style="font:bold"></td>
-                                            <td style="font:bold">Report Link</td>
+                                            <td style="font:bold">Canvas</td>
                                             <td style="font:bold">Date created</td>
-                                            <td style="font:bold">Data Source</td>
+                                            @*<td style="font:bold">Data Source</td>*@
                                             <td style="font:bold">Record Count</td>
                                         </tr>
 

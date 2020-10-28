@@ -667,7 +667,7 @@ namespace Epi.Web.EF
 
             SurveyReport.SurveyReports = ToGadgetsEF(reportInfo.Gadgets);
 
-
+           SurveyReport.ReportName = reportInfo.ReportName;
             return SurveyReport;
         }
         internal static List<SurveyReport> ToGadgetsEF(List<GadgetBO> GadgetList)

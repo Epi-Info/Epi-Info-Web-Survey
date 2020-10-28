@@ -236,6 +236,7 @@ namespace Epi.Web.Common.ObjectMapping
             GadgetBO.ReportHtml = gadget.GadgetHtml;
             GadgetBO.GadgetId = gadget.GadgetId;
             GadgetBO.GadgetNumber = gadget.GadgetNumber;
+
             return GadgetBO;
         }
         public static List<GadgetBO> ToReportInfoBOList( List<GadgetDTO> DTOList)
@@ -259,6 +260,7 @@ namespace Epi.Web.Common.ObjectMapping
             ReportInfoBO.Gadgets =ToReportInfoBOList(reportInfo.Gadgets);
             ReportInfoBO.RecordCount = reportInfo.RecordCount;
             ReportInfoBO.DataSource = reportInfo.DataSource;
+            ReportInfoBO.ReportName = reportInfo.ReportName;
             return ReportInfoBO;
         }
 
@@ -592,6 +594,7 @@ namespace Epi.Web.Common.ObjectMapping
             ReportDTO.ReportVersion = reportInfo.ReportVersion;
             ReportDTO.SurveyId = reportInfo.SurveyId;
             ReportDTO.DataSource = reportInfo.DataSource;
+            ReportDTO.ReportName = reportInfo.ReportName;
             ReportDTO.RecordCount = reportInfo.RecordCount;
             if (reportInfo.Gadgets != null) {
                 ReportDTO.Gadgets = ToGadgetsListDTO(reportInfo.Gadgets);

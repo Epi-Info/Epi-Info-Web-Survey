@@ -308,6 +308,7 @@ warning 6002: The table/view 'EIWS.dbo.SurveyMetaDataTransform' does not have a 
           <Property Name="DateEdited" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="DataSource" Type="varchar" MaxLength="150" Nullable="false" />
           <Property Name="RecordCount" Type="int" Nullable="false" />
+          <Property Name="ReportName" Type="varchar" MaxLength="250" />
         </EntityType>
         <EntityType Name="SurveyResponse">
           <Key>
@@ -1849,6 +1850,7 @@ FROM [dbo].[SurveyMetaDataTransform] AS [SurveyMetaDataTransform]</DefiningQuery
           <Property Name="RecordCount" Type="Int32" Nullable="false" />
           <NavigationProperty Name="SurveyMetaData" Relationship="EIWSModel.FK_SurveyReportsInfo_SurveyMetaData" FromRole="SurveyReportsInfo" ToRole="SurveyMetaData" />
           <NavigationProperty Name="SurveyReports" Relationship="EIWSModel.FK_SurveyReports_SurveyReportsInfo" FromRole="SurveyReportsInfo" ToRole="SurveyReport" />
+          <Property Name="ReportName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_SurveyReportsInfo_SurveyMetaData">
           <End Type="EIWSModel.SurveyMetaData" Role="SurveyMetaData" Multiplicity="1" />
@@ -2255,6 +2257,7 @@ FROM [dbo].[SurveyMetaDataTransform] AS [SurveyMetaDataTransform]</DefiningQuery
           <EntitySetMapping Name="SurveyReportsInfoes">
             <EntityTypeMapping TypeName="EIWSModel.SurveyReportsInfo">
               <MappingFragment StoreEntitySet="SurveyReportsInfo">
+                <ScalarProperty Name="ReportName" ColumnName="ReportName" />
                 <ScalarProperty Name="RecordCount" ColumnName="RecordCount" />
                 <ScalarProperty Name="DataSource" ColumnName="DataSource" />
                 <ScalarProperty Name="DateEdited" ColumnName="DateEdited" />

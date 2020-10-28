@@ -47,6 +47,7 @@ namespace Epi.Web.EF
                         DataRow.RecordCount = ReportInfo.RecordCount;
                         DataRow.ReportVersion = ReportInfo.ReportVersion + 1;
                         DataRow.DataSource = ReportInfo.DataSource;
+                        DataRow.ReportName = ReportInfo.ReportName;
                         Context.SaveChanges();
 
                         // update Gadget
@@ -112,8 +113,8 @@ namespace Epi.Web.EF
                     else {
 
                         var NoHtmlQuery = (from response in Context.SurveyReportsInfoes
-                                        where response.SurveyId == surveyid
-                                        select new { response.ReportId, response.ReportVersion, response.DateCreated, response.DateEdited, response.DataSource,response.RecordCount });
+                                        where response.SurveyId == surveyid orderby response.DateCreated
+                                        select new { response.ReportId, response.ReportVersion, response.DateCreated, response.DateEdited, response.DataSource,response.RecordCount ,response.ReportName});
                         foreach (var reportInfo in NoHtmlQuery)
                         {
                             ReportInfoBO ReportInfoBO = new ReportInfoBO();
@@ -126,7 +127,7 @@ namespace Epi.Web.EF
                             ReportInfoBO.DataSource = reportInfo.DataSource;
                             ReportInfoBO.RecordCount = reportInfo.RecordCount;
                             ReportInfoBO.ReportVersion = reportInfo.ReportVersion;
-
+                            ReportInfoBO.ReportName = reportInfo.ReportName;
                             List.Add (ReportInfoBO);
                         }
                     }

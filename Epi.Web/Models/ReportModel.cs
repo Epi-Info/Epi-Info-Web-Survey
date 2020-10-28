@@ -15,5 +15,6 @@ namespace Epi.Web.MVC.Models
         public string DataSource { get; set; }
         public int RecordCount { get; set; }
         public string ReportURL { get; set; }
+        public string ReportName { get; set; }
     }
 }
