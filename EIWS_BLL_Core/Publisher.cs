@@ -229,7 +229,7 @@ namespace Epi.Web.BLL
                             BO.IsSqlProject = pRequestMessage.IsSqlProject;
 
                             this.SurveyInfoDao.UpdateSurveyInfo(BO);
-                            ReSetSourceTable(_Xml, SurveyId.ToString());
+                            ReSetSourceTable(_Xml, SurveyId.ToString(),false,false);
                             result.URL = GetURL(pRequestMessage, SurveyId);
                             result.IsPulished = true;
                             //Updateing Connection string..
@@ -654,7 +654,7 @@ namespace Epi.Web.BLL
             }
             var _SId = SurveyIds.Keys.ElementAt(0);
 
-            ReSetSourceTable(_Xml, FormsHierarchyIds[0].SurveyId);
+            ReSetSourceTable(_Xml, FormsHierarchyIds[0].SurveyId,false,false);
             SurveyRequestResultBO.URL = GetURL(pRequestMessage, new Guid(FormsHierarchyIds[0].SurveyId));
             return SurveyRequestResultBO;
         }
@@ -771,7 +771,7 @@ namespace Epi.Web.BLL
             }
 
         }
-        private void ReSetSourceTable(string Xml, string FormId)
+        private void ReSetSourceTable(string Xml, string FormId , bool UpdateStatus, bool AllowUpdate)
         {
             var SourceTables = this.SurveyInfoDao.GetSourceTables(FormId);
             XDocument xdoc1 = XDocument.Parse(Xml);
@@ -780,12 +780,12 @@ namespace Epi.Web.BLL
                 //  Xelement.ToString()
                 string SourcetableName = Xelement.Attribute("TableName").Value;
 
-                this.SurveyInfoDao.UpdateSourceTable(Xelement.ToString(), SourcetableName, FormId);
+                this.SurveyInfoDao.UpdateSourceTable(Xelement.ToString(), SourcetableName, FormId,   UpdateStatus,   AllowUpdate);
 
                 var Table = SourceTables.Where(x => x.TableName == SourcetableName);
                 if (Table.Count() > 0)
                 {
-                    this.SurveyInfoDao.UpdateSourceTable(Xelement.ToString(), SourcetableName, FormId);
+                    this.SurveyInfoDao.UpdateSourceTable(Xelement.ToString(), SourcetableName, FormId,   UpdateStatus,   AllowUpdate);
                 }
                 else
                 {

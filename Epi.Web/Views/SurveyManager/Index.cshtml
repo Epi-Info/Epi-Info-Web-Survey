@@ -207,7 +207,13 @@
               $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
             });
           });
-
+        $(".ValueSetSearchInput").on("keyup", function () {
+           // alert("ValueSetSearchInput")
+            var value = $(this).val().toLowerCase();
+            $(".ViewTable1 .TableRow1").filter(function() {
+              $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+          });
          $("div.alert-success").hide();
          $("#EditValueSetDialogBox").dialog({
             autoOpen: false,
@@ -690,7 +696,8 @@
     }
      function GetDataSets(SurveyId)
         {
-        // alert(SurveyId)
+        //alert(SurveyId)
+         $('#ValueSetSearchInput').val("");
             $('#ValueSetSurveyKey').val(SurveyId)
 
             var ActionUrl = '@Url.Action("GetSurveyInfo", "SurveyManager")' + '?surveyid=' + SurveyId +'&getsourcetable= True';
@@ -719,8 +726,9 @@
                  for (var i = 0; i < data.SourceTables.length; i++) {
 
 
-
+                     var Counter = i + 1;
                      var row = table.insertRow(i + 1);
+                     
                      var cell1 = row.insertCell(0);
                      cell1.width = "33%"
                      var cell2 = row.insertCell(1);
@@ -728,11 +736,11 @@
                         cell1.innerHTML = "<input id=\""+ data.SourceTables[i].TableName+ "_Edit" +"\"  class=\"btn btn-primary btn-sm\" type=\"button\" onclick=\" EditValueSets('"+ data.SourceTables[i].TableName+ "')\" id=\"EditDataSet\" value=\"Load CSV\" /> <input id=\""+ data.SourceTables[i].TableName +"\"  class=\"btn btn-primary btn-sm  \" type=\"button\" onclick=\" ViewDataSet('"+data.SourceTables[i].TableName+"') \"  value=\"View/Edit\" />  <input id=\""+ data.SourceTables[i].TableName +"_CSV\"  class=\"btn btn-primary btn-sm  \" type=\"button\" onclick=\" GetDataSetCsv('"+data.SourceTables[i].TableName+"') \"  value=\"Download\" />";
                          cell2.innerHTML = data.SourceTables[i].TableName;
                      //cell1.innerHTML = "<button id=\""+ data.SourceTables[i].TableName +"\"  type=\"button\" class=\"btn btn-primary btn-sm\" data-toggle=\"modal\" data-target=\"#exampleModal\">view</button>";
-
+                        $("#DataSetTable > tbody > tr:nth-child("+ Counter +")").addClass("TableRow1");
 
                  }
 
-
+              
 
              }
          }
@@ -757,8 +765,13 @@
 
 
                 var json = window.SurveyDataSet.SourceTables[i].TableXml;
-
-
+                var AllowUpdate = window.SurveyDataSet.SourceTables[i].AllowUpdate;
+               
+                if (AllowUpdate) {
+                    $('input[id=AllowUpdate]').attr('checked', true);
+                } else {
+                    $('input[id=AllowUpdate]').attr('checked', false);
+                }
 
 
                 var DataSetName = window.SurveyDataSet.SourceTables[i].TableName;
@@ -889,9 +902,14 @@
 
        var surveyid = $("#ValueSetSurveyKey").val();
        var valueSetName = $('#ValueSetName').text();
+       var AllowUpdate = false;
+       if ($("#AllowUpdate").is(':checked'))
+       {
+           AllowUpdate = true;
+       }
        var table = document.getElementById("ViewTable_"+TableName);
 
-        var ActionUrl = '@Url.Action("SaveValueSet", "SurveyManager")' + '?surveyid=' + surveyid + '&valueSetName=' + valueSetName;
+        var ActionUrl = '@Url.Action("SaveValueSet", "SurveyManager")' + '?surveyid=' + surveyid + '&valueSetName=' + valueSetName + '&AllowUpdate='+ AllowUpdate;
        var JData = JSON.stringify(tableToJson(table));
 
        $.ajax({
@@ -1850,12 +1868,16 @@
                             <h1>Survey Value Sets</h1>
                             <br />
 
-                            <div class="alert ValueSets-alert alert-warning alert-dismissible fade show" role="alert">
+                            @*<div class="alert ValueSets-alert alert-warning alert-dismissible fade show" role="alert">
                                 <strong>Note:</strong>  Republishing a survey will override changes made through this process.
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
-                            </div>
+                            </div>*@
+
+
+                        
+
                             <div class="alert alert-success  " role="alert">
                                 Value Set was successfully updated!
                                 <button type="button" class="close" data-hide="alert">
@@ -1874,19 +1896,21 @@
 
 
                                 @Html.DropDownListFor(m => m.EmailSurveyKey, new SelectList(ViewBag.SurveyNameList1, "Value", "Text", 0), "Select Survey To View Value Sets", new { @class = "Account DataSets" })
-                                <br />
+                                <br/>
 
-                                <br />
+                                <br/>
                                 <div>
 
 
-                                    <table id="DataSetTable" style="width:70%">
+                                    <p><input class="form-control ValueSetSearchInput  " style="width:70%" id="ValueSetSearchInput" type="text" placeholder="Search.."></p>
+                                    <br />
+                                    <table class="ViewTable1" id="DataSetTable" style="width:70%">
 
-                                        <tr>
+                                        <tr class="TableRow1">
                                         </tr>
 
                                     </table>
-
+                                     
 
 
                                 </div>
@@ -2057,9 +2081,20 @@
     </div>
     <div id="ViewValueSetDialogBox" title="View Value Sets">
 
-        <p><label id="ValueSetName">Prempt</label></p>
+        <p style="font:15px Segoe UI;font-weight:bold">Name: <label style="font:15px Segoe UI" id="ValueSetName">Prempt</label></p>
+       
+        <input type="checkbox" id="AllowUpdate" for="AllowUpdateLabel" value="@Model.AllowUpdateValueSet" />
+
+
+        <label style="font:15px Segoe UI" for="AllowUpdate" id="AllowUpdateLabel">
+            <span>Update value set when survey is republished.</span>
+
+        </label>
+
+        <br><br>
         <p><input class="form-control SearchInput" id="SearchInput" type="text" placeholder="Search.."></p>
         <p><label id="DialogBoxPrempt">Prempt</label></p>
+
 
         <input class="btn btn-danger" type="button" name="" id="DeleteRow" onclick="DeleteRow('DialogBoxPrempt')" value="Delete Row" style="margin-right:20px;" />
         <input class="btn btn-primary btn-sm" type="button" name="" id="AddRow" onclick="AddRow('DialogBoxPrempt');" value="Add Row" style="margin-right:20px;" />
@@ -2127,17 +2162,18 @@
 
                 </div>
                 @*@if (!Model.IsAuthenticated)
-                {
-                    <div>
-                        <label class="accountlabel" id="SecurityTokenlabel1"><span style="color:#900000;">*</span> Security Token:</label><br>
+        {
+            <div>
+                <label class="accountlabel" id="SecurityTokenlabel1"><span style="color:#900000;">*</span> Security Token:</label><br>
 
 
-                        @Html.TextBoxFor(m => m.ValueSetUserPublishKey, new { @class = "Account" }) <br>
-                        @Html.ValidationMessageFor(m => m.ValueSetUserPublishKey, null)<br>
-                    </div>
-                }*@
+                @Html.TextBoxFor(m => m.ValueSetUserPublishKey, new { @class = "Account" }) <br>
+                @Html.ValidationMessageFor(m => m.ValueSetUserPublishKey, null)<br>
+            </div>
+        }*@
                 <br>
                 <p><input class="form-control SearchInput" id="SearchInput1" type="text" style="visibility:hidden" placeholder="Search.."></p>
+                <p><input class="form-control SearchInput" id="SearchInput2" type="text" style="visibility:hidden" placeholder="Search.."></p>
                 <p><label id="DialogBoxPrempt1"></label></p>
 
                 @*<input class="btn btn-primary btn-sm" type="submit" name="UpdateValueSet" disabled="disabled" id="UpdateValueSet" onclick="" value="Update" style="margin-right:90px;" />*@

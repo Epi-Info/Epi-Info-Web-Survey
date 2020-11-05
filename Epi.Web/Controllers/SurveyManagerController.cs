@@ -540,6 +540,7 @@ namespace Epi.Web.MVC.Controllers
                         SourceTableDTO SourceTableDTO = new SourceTableDTO();
                         SourceTableDTO.TableXml = ValueSetXml;
                         SourceTableDTO.TableName = Model.SelectedValueSet;
+                        SourceTableDTO.AllowUpdate = Model.AllowUpdateValueSet;
                         SourceTablesRequest.List.Add(SourceTableDTO);
                         SourceTablesRequest.SurveyId = Model.ValueSetSurveyKey;
                         _isurveyFacade.UpdateSourceTable(SourceTablesRequest);
@@ -1497,6 +1498,7 @@ namespace Epi.Web.MVC.Controllers
                     Web.Models.SourceTableModel SourceTable = new Web.Models.SourceTableModel();
                     SourceTable.TableName = item.TableName;
                     SourceTable.TableXml = Common.Json.SurveyResponseJson.XmlToJson(item.TableXml);
+                    SourceTable.AllowUpdate = item.AllowUpdate;
                     Model.SourceTables.Add(SourceTable);
 
                 }
@@ -1511,7 +1513,7 @@ namespace Epi.Web.MVC.Controllers
 
         }
         [HttpPost]
-        public JsonResult SaveValueSet(string JsonData ,string surveyid, string valueSetName )
+        public JsonResult SaveValueSet(string JsonData ,string surveyid, string valueSetName , bool AllowUpdate)
         {
             try
             {
@@ -1521,6 +1523,8 @@ namespace Epi.Web.MVC.Controllers
                 SourceTableDTO SourceTableDTO = new SourceTableDTO();
                 SourceTableDTO.TableXml = ValueSetXml;
                 SourceTableDTO.TableName = valueSetName;
+                SourceTableDTO.AllowUpdate = AllowUpdate;
+                SourceTableDTO.UpdateStatus = true;
                 SourceTablesRequest.List.Add(SourceTableDTO);
                 SourceTablesRequest.SurveyId = surveyid;
                 _isurveyFacade.UpdateSourceTable(SourceTablesRequest);

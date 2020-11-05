@@ -171,5 +171,8 @@ namespace Epi.Web.MVC.Models
         public string SelectedValueSet { get; set; }
         public string ValueSetSurveyKey { get; set; }
         public string ReportsSurveyKey { get; set; }
+        public bool AllowUpdateValueSet { get; set; }
+
+        public bool UpdateStatus { get; set; }
     }
 }

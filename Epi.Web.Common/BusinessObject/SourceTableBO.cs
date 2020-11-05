@@ -10,5 +10,7 @@ namespace Epi.Web.Common.BusinessObject
     {
         public string TableName { get; set; }
         public string TableXml { get; set; }
+        public bool AllowUpdate { get; set; }
+        public bool UpdateStatus { get; set; } 
     }
 }

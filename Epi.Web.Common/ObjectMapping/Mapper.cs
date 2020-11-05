@@ -492,6 +492,8 @@ namespace Epi.Web.Common.ObjectMapping
                 SourceTableDTO SourceTableDTO = new SourceTableDTO();
                 SourceTableDTO.TableName = item.TableName;
                 SourceTableDTO.TableXml  = item.TableXml ;
+                SourceTableDTO.UpdateStatus = item.UpdateStatus;
+                SourceTableDTO.AllowUpdate = item.AllowUpdate;
                 DTOList.Add(SourceTableDTO);
            }
             return DTOList;

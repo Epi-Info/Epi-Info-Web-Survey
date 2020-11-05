@@ -8,7 +8,10 @@ namespace Epi.Web.Common.DTO
 {
     public class SourceTableDTO
     {
-        public string TableName   { get; set; }
+        public string TableName { get; set; }
         public string TableXml { get; set; }
+
+        public bool AllowUpdate { get; set; }
+        public bool UpdateStatus { get; set; }
     }
 }

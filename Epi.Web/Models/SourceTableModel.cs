@@ -10,5 +10,6 @@ namespace Epi.Web.Models
     {
         public string TableName   { get; set; }
         public string TableXml { get; set; }
+        public bool AllowUpdate { get; set; }
     }
 }

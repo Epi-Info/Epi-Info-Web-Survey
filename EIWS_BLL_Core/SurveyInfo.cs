@@ -216,7 +216,7 @@ namespace Epi.Web.BLL
                 
                 if (!string.IsNullOrEmpty(pValue.XML))
                 {
-                    ReSetSourceTable(pValue.XML, pValue.SurveyId.ToString());
+                    ReSetSourceTable(pValue.XML, pValue.SurveyId.ToString(),false , false);
                 }
             
             }else{
@@ -226,7 +226,7 @@ namespace Epi.Web.BLL
             
             return result;
         }
-        private void ReSetSourceTable(string Xml, string FormId)
+        private void ReSetSourceTable(string Xml, string FormId, bool UpdateStatus, bool AllowUpdate)
         {
 
             XDocument xdoc1 = XDocument.Parse(Xml);
@@ -234,7 +234,7 @@ namespace Epi.Web.BLL
             {
                 //  Xelement.ToString()
                 string SourcetableName = Xelement.Attribute("TableName").Value;
-                this.SurveyInfoDao.UpdateSourceTable(Xelement.ToString(), SourcetableName, FormId);
+                this.SurveyInfoDao.UpdateSourceTable(Xelement.ToString(), SourcetableName, FormId , UpdateStatus,   AllowUpdate);
             }
 
         }
@@ -610,7 +610,7 @@ namespace Epi.Web.BLL
                 {
 
                     //this.SurveyInfoDao.UpdateSourceTables(item,surveyId);
-                    this.SurveyInfoDao.UpdateSourceTable(item.TableXml.ToString(), item.TableName, surveyId);
+                    this.SurveyInfoDao.UpdateSourceTable(item.TableXml.ToString(), item.TableName, surveyId,item.UpdateStatus,item.AllowUpdate);
                 }
                 return true;
             }

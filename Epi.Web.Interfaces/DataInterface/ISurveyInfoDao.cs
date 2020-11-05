@@ -131,6 +131,6 @@ namespace Epi.Web.Interfaces.DataInterfaces
          void InsertSourceTable(string SourcetableXml, string SourcetableName, string FormId);
          List<SourceTableBO> GetSourceTables(string SurveyId);
 
-         void UpdateSourceTable(string p, string SourcetableName, string FormId);
+         void UpdateSourceTable(string p, string SourcetableName, string FormId, bool UpdateStatus, bool AllowUpdate);
     }
 }

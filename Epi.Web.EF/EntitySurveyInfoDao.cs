@@ -775,13 +775,14 @@ namespace Epi.Web.EF
 
 
 
-                SqlCommand Command = new SqlCommand("INSERT INTO Sourcetables VALUES(@SourceTableName , @FormId ,@SourcetableXml)", Connection);
+                SqlCommand Command = new SqlCommand("INSERT INTO Sourcetables VALUES(@SourceTableName , @FormId ,@SourcetableXml,@AllowUpdate)", Connection);
 
                 Command.Parameters.AddWithValue("SourceTableName", SourcetableName);
                 Command.Parameters.AddWithValue("FormId", Id);
                 Command.Parameters.AddWithValue("SourceTableXml", SourcetableXml);
+                Command.Parameters.AddWithValue("AllowUpdate", true);
 
-               
+
 
 
 
@@ -801,7 +802,7 @@ namespace Epi.Web.EF
 
        
        }
-       public void UpdateSourceTable(string SourcetableXml, string SourcetableName, string FormId)
+       public void UpdateSourceTable(string SourcetableXml, string SourcetableName, string FormId,bool UpdateStatus , bool AllowUpdate)
        {
            string ConnectionString = DataObjectFactory._ADOConnectionString;
            SqlConnection Connection = new SqlConnection(ConnectionString);
@@ -831,22 +832,37 @@ namespace Epi.Web.EF
                 // param2.Value = Sourcetable_Xml;
                 // Command.Parameters.Add(param2);
 
-                SqlCommand Command = new SqlCommand("UPDATE Sourcetables  SET SourceTableXml = @SourceTableXml   where FormId = @FormId And  SourcetableName =  @SourceTableName ", Connection);
 
-                Command.Parameters.AddWithValue("SourceTableName", SourcetableName);
-                Command.Parameters.AddWithValue("FormId", Id);
-                Command.Parameters.AddWithValue("SourceTableXml", SourcetableXml);
+                SqlCommand Command = new SqlCommand();
+                if (UpdateStatus)
+                {
+                      Command = new SqlCommand("UPDATE Sourcetables  SET SourceTableXml = @SourceTableXml , AllowUpdate =@AllowUpdate where FormId = @FormId  And  SourcetableName =  @SourceTableName ", Connection);
 
+                    Command.Parameters.AddWithValue("SourceTableName", SourcetableName);
+                    Command.Parameters.AddWithValue("FormId", Id);
+                    Command.Parameters.AddWithValue("SourceTableXml", SourcetableXml);
+                    Command.Parameters.AddWithValue("AllowUpdate", AllowUpdate);
+
+                }
+                else {
+
+                      Command = new SqlCommand("UPDATE Sourcetables  SET SourceTableXml = @SourceTableXml where FormId = @FormId  And  SourcetableName =  @SourceTableName And AllowUpdate = 1 ", Connection);
+
+                    Command.Parameters.AddWithValue("SourceTableName", SourcetableName);
+                    Command.Parameters.AddWithValue("FormId", Id);
+                    Command.Parameters.AddWithValue("SourceTableXml", SourcetableXml);
+
+                }
 
                 Command.ExecuteNonQuery();
                 
 
                Connection.Close();
            }
-           catch (Exception)
+           catch (Exception ex)
            {
                Connection.Close();
-
+                throw ex;
            }
        
        

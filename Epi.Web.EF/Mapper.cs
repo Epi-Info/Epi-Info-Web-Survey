@@ -470,9 +470,10 @@ namespace Epi.Web.EF
                  SourceTableBO SourceTableBO = new SourceTableBO();
                  SourceTableBO.TableName = dataTable.Rows[i][0].ToString();
                  SourceTableBO.TableXml = dataTable.Rows[i][2].ToString();
-                 
-
-
+                if (!string.IsNullOrEmpty(dataTable.Rows[i][3].ToString())) {
+                    SourceTableBO.AllowUpdate = bool.Parse(dataTable.Rows[i][3].ToString());
+                }
+                
                 List.Add(SourceTableBO);
             }
             return List;
