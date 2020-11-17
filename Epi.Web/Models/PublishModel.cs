@@ -27,7 +27,7 @@ namespace Epi.Web.MVC.Models
         private string _EmailUserPublishKey;
         private string _RepublishUserPublishKey;
         private string _ValueSetUserPublishKey;
-
+        private string _LoadResponseUserPublishKey;
         private List<string> _SurveyNameList;
          
         public PublishModel()
@@ -88,7 +88,14 @@ namespace Epi.Web.MVC.Models
         // [RegularExpression(@"^(\{){0,1}[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}(\}){0,1}$", ErrorMessage = "Invalid Organization key.")]
 
         //[Required(ErrorMessage = "Survey Id is required.")]
+        [Required(ErrorMessage = "Security Token is required.")]
+        [RegularExpression(@"^(\{){0,1}[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}(\}){0,1}$", ErrorMessage = "Invalid Security Token.")]
 
+        public string LoadResponseUserPublishKey
+        {
+            get { return _LoadResponseUserPublishKey; }
+            set { _LoadResponseUserPublishKey = value; }
+        }
         public string SurveyKey
          {
              get { return _SurveyKey; }
@@ -174,5 +181,6 @@ namespace Epi.Web.MVC.Models
         public bool AllowUpdateValueSet { get; set; }
 
         public bool UpdateStatus { get; set; }
+        public string LoadResponsesSurveyKey { get; set; }
     }
 }

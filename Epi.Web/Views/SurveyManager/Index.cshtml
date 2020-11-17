@@ -6,7 +6,7 @@
 <script src="@Url.Content("~/Scripts/c3.min.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/d3-5.8.2.min.js")" type="text/javascript"></script>
 <link href="@Url.Content("~/Content/css/c3.min.css")" rel="Stylesheet" type="text/css" />
-
+<script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/json2csv"></script>
 @*<script src="@Url.Content("~/Scripts/jquery-1.9.1.js")" type="text/javascript"></script>*@
 
@@ -592,6 +592,19 @@
                     $('.SurveyReportsExpand').css({ "color": "#3c3c3c" });
 
                     break;
+                 case "LoadResponsesDivExpand":
+                    $('#LoadResponsesDivState').val('true');
+                    $('.LoadResponsescollaps').removeAttr("style");
+                    $('.LoadResponsescollaps').css({ "cursor": "pointer" });
+
+                    $('.contentContainer').css({ "display": "none", "visibility": "collapse" });
+                    $('#LoadResponsesDiv').css({ "display": "", "visibility": "" });
+                    $('.navLink').css({ "color": "#ffffff" });
+                    $(".leftNav").css({ "background-color": "#3c3c3c" });
+                    $(".contentLoadResponses").css({ "background-color": "#f3f3f3" });
+                    $('.LoadResponsesExpand').css({ "color": "#3c3c3c" });
+
+                    break;
                 default:
             }
 
@@ -1028,11 +1041,11 @@
 
 
 
-    function GetJsonHeader()
+    function GetJsonHeader(SurveyKey,UserPublishKey)
     {
 
-            var SurveyId = $('#SurveyKey').val();
-        var PublisherKey = $('#UserPublishKey').val();
+            var SurveyId = $('#'+SurveyKey).val();
+        var PublisherKey = $('#'+UserPublishKey).val();
 
         if ($('#SurveyMode').val() == 0) {
             IsDraft = true;
@@ -1055,20 +1068,37 @@
             function successFunc(data)
             {
 
-               //alert(data)
+             //  alert(data)
 
                 $('#JsonHeadder').val(data);
             }
             function errorFunc(data) {
-                alert('failed');
+                //alert('failed');
         }
 
-        }
-     function GetJsonResponse()
+    }
+     function GetJsonResponse(SurveyKey,UserPublishKey,FileName1,HeadderOnly)
      {
-          GetJsonHeader()
-          var SurveyId = $('#SurveyKey').val();
-          var PublisherKey = $('#UserPublishKey').val();
+        
+         GetJsonHeader(SurveyKey, UserPublishKey)
+
+         if (HeadderOnly)
+         {
+             var Headder = $.parseJSON($('#JsonHeadder').val());
+             alert(Headder)
+             if (Headder != null) {
+                 var obj = $.parseJSON(JSON.stringify(Headder));
+                 exportCSVFileHeadder("", obj, FileName)
+                 return;
+             } else {
+                 alert("Please make sure to provide all required ");
+
+                 return;
+             }
+         }
+         var SurveyId = $('#'+SurveyKey).val();
+         var PublisherKey = $('#' + UserPublishKey).val();
+         
 
 
 
@@ -1097,10 +1127,14 @@
                      $('#UserPublishKey').removeClass('input-validation-error');
                     $('#DownloadError').text('');
 
-                    var FileName = $('#FileName').val();
+                    var FileName = $('#'+FileName1).val();
                     var Headder = $.parseJSON($('#JsonHeadder').val());
-                    var obj = $.parseJSON(data);
-                    exportCSVFile(Headder, obj, FileName);
+                   //alert(Headder);
+                     
+                        var obj = $.parseJSON(data);
+                          exportCSVFile(Headder, obj, FileName);
+                     
+                  
                 }
                 else
 
@@ -1116,12 +1150,12 @@
                 alert('failed');
             }
     }
-
+     
 
     function convertToCSV(objArray)
     {
         var array = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
-
+        
     var str = '';
 
     for (var i = 0; i < array.length; i++) {
@@ -1147,14 +1181,15 @@
     if (headers) {
         items.unshift(headers);
     }
-
+         
     // Convert Object to JSON
     var jsonObject = JSON.stringify(items);
 
     var csv = convertToCSV(jsonObject);
 
       //  alert(items.length)
-    if (items.length> 1 ) {
+        if (items.length > 1)
+        {
         var exportedFilenmae = fileTitle + '.csv'; //|| 'export.csv';
 
         var blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
@@ -1179,6 +1214,90 @@
 
     }
 }
+    function exportCSVFileHeadder(headers, items, fileTitle) {
+
+      fileTitle = "Survey_Response_Template";
+    if (headers) {
+        items.unshift(headers);
+    }
+
+   var jsonObject = JSON.stringify(items);
+
+      var ws_data = convertToCSVHeadder(jsonObject);
+
+        var wb = XLSX.utils.book_new();
+                    
+        wb.Props = {
+                Title: "SheetJS Tutorial",
+                Subject: "Test",
+                Author: "Red Stapler",
+                CreatedDate: new Date(2017,12,19)
+        };
+        wb.SheetNames.push("Responses Sheet");
+       
+        var ws = XLSX.utils.aoa_to_sheet([ws_data]);
+        wb.Sheets["Responses Sheet"] = ws;
+        var wbout = XLSX.write(wb, {bookType:'xlsx',  type: 'binary'});
+
+        
+        
+ 
+        var exportedFilenmae = fileTitle + '.xlsx'; 
+
+      
+      var blob = new Blob([s2ab(wbout)], { type: "application/octet-stream" });
+       
+        if (navigator.msSaveBlob) { // IE 10+
+            navigator.msSaveBlob(blob, exportedFilenmae);
+        } else {
+            var link = document.createElement("a");
+            if (link.download !== undefined) { // feature detection
+                // Browsers that support HTML5 download attribute
+                var url = URL.createObjectURL(blob);
+                link.setAttribute("href", url);
+                link.setAttribute("download", exportedFilenmae);
+                link.style.visibility = 'hidden';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
+        }
+    
+    }
+    function s2ab(s)
+    { 
+        var buf = new ArrayBuffer(s.length); //convert s to arrayBuffer
+        var view = new Uint8Array(buf);  //create uint8array as viewer
+        for (var i=0; i<s.length; i++) view[i] = s.charCodeAt(i) & 0xFF; //convert to octet
+        return buf;    
+    }
+    function convertToCSVHeadder(objArray)
+    {
+        
+       
+        var array = objArray.toString().replace('{','').replace('}','').split(',');
+      
+        var output = [];
+    
+
+       
+            for (var i = 0; i < array.length; i++) 
+            {
+            
+
+
+            
+                    if (typeof array[i] !== 'undefined'){
+
+                         
+                        output.push(array[i].split(':')[0].replace(/"/g, ""));
+                    }
+            
+            }
+         
+       return output;
+  }
+
 
     function ChangeOrg(el)
     {
@@ -1313,28 +1432,28 @@
                             </a>
                         </div>
                         @*<div class="contentSetJson leftNav">
-                                <a href="#" style="cursor:pointer;color:#ffffff" class="navLink SetJsonExpand" onclick="Toggle('SetJsonDivExpand')">
-                                    <img style="display:none" src="~/Content/images/Toggle-expand-alt_green.png" />
-                                    <img style="display:none" src="~/Content/images/Toggle-collapse-alt_green.png" /> Generate Json Response for Surveys
-                                </a>
-                            </div>*@
+            <a href="#" style="cursor:pointer;color:#ffffff" class="navLink SetJsonExpand" onclick="Toggle('SetJsonDivExpand')">
+                <img style="display:none" src="~/Content/images/Toggle-expand-alt_green.png" />
+                <img style="display:none" src="~/Content/images/Toggle-collapse-alt_green.png" /> Generate Json Response for Surveys
+            </a>
+        </div>*@
                         <div class="contentDashboard leftNav" style="background-color:#f3f3f3;">
                             <a href="#" style="cursor:pointer;color:#ffffff;" class="navLink DashboardExpand" onclick="Toggle('DashboardDivExpand')">
                                 <img style="display:none" src="~/Content/images/Toggle-expand-alt_green.png" />
                                 <img style="display:none" src="~/Content/images/Toggle-collapse-alt_green.png" />
-                                Survey Dashboard (Beta)
+                                Survey Dashboard 
                             </a>
 
                         </div>
 
                         @*<div class="contentDownLoad leftNav" style="background-color:#f3f3f3;">
-                                <a href="#" style="cursor:pointer;color:#ffffff;" class="navLink downloadExpand" onclick="Toggle('DownloadDivExpand')">
-                                    <img style="display:none" src="~/Content/images/Toggle-expand-alt_green.png" />
-                                    <img style="display:none" src="~/Content/images/Toggle-collapse-alt_green.png" />
-                                    DownLoad CSV
-                                </a>
+            <a href="#" style="cursor:pointer;color:#ffffff;" class="navLink downloadExpand" onclick="Toggle('DownloadDivExpand')">
+                <img style="display:none" src="~/Content/images/Toggle-expand-alt_green.png" />
+                <img style="display:none" src="~/Content/images/Toggle-collapse-alt_green.png" />
+                DownLoad CSV
+            </a>
 
-                            </div>*@
+        </div>*@
 
                         @*</div>*@
 
@@ -1342,7 +1461,7 @@
                             <a href="#" style="cursor:pointer;color:#ffffff;" class="navLink UpdateDataSetExpand" onclick="Toggle('UpdateDataSetDivExpand')">
                                 <img style="display:none" src="~/Content/images/Toggle-expand-alt_green.png" />
                                 <img style="display:none" src="~/Content/images/Toggle-collapse-alt_green.png" />
-                                Survey Value Sets (Beta)
+                                Survey Value Sets
                             </a>
 
                         </div>
@@ -1353,6 +1472,16 @@
                                 <img style="display:none" src="~/Content/images/Toggle-expand-alt_green.png" />
                                 <img style="display:none" src="~/Content/images/Toggle-collapse-alt_green.png" />
                                 Survey Reports (Beta)
+                            </a>
+
+                        </div>
+
+
+                        <div class="contentLoadResponses leftNav" style="background-color:#f3f3f3;">
+                            <a href="#" style="cursor:pointer;color:#ffffff;" class="navLink LoadResponsesExpand" onclick="Toggle('LoadResponsesDivExpand')">
+                                <img style="display:none" src="~/Content/images/Toggle-expand-alt_green.png" />
+                                <img style="display:none" src="~/Content/images/Toggle-collapse-alt_green.png" />
+                                Load Responses From .xlsx (Beta)
                             </a>
 
                         </div>
@@ -1373,8 +1502,8 @@
                                     @Html.TextBoxFor(m => m.Path, new { @class = "Account Path" })
 
                                     @*<label for="file-upload" class="submits create"   onclick="javascript: document.getElementById('Newfile').click();">
-                                            Browse
-                                        </label>*@
+                        Browse
+                    </label>*@
                                     <input for="file-upload" class="btn btn-primary btn-sm" style="width:70px; " type="button" id="PublishButton" onclick="javascript: document.getElementById('Newfile').click();" value="Browse" />
 
                                     @Html.ValidationMessageFor(m => m.Path, null, new { @class = "required" })
@@ -1402,26 +1531,26 @@
                                 <script>$('#EndDate').BlockEnter('EndDate');</script>
 
                                 @*<p>
-                                        <input type="checkbox" id="ExistingSurvey" value="@Model.UpdateExisting" name="ExistingSurvey" for="ExistingSurveyLabel" onclick="HidUnhidSurveyId(this)" />
+                    <input type="checkbox" id="ExistingSurvey" value="@Model.UpdateExisting" name="ExistingSurvey" for="ExistingSurveyLabel" onclick="HidUnhidSurveyId(this)" />
 
-                                        <label class="accountlabel" id="ExistingSurveyLabel" style="width:330px;">
-                                            <span style="font-weight:normal !important;">Update Existing Survey</span>
-                                        </label>
-                                        <div id="SurveyIdDiv">
-                                            <label class="accountlabel" id="SurveyIdlabel">*Survey Id:</label><br>
+                    <label class="accountlabel" id="ExistingSurveyLabel" style="width:330px;">
+                        <span style="font-weight:normal !important;">Update Existing Survey</span>
+                    </label>
+                    <div id="SurveyIdDiv">
+                        <label class="accountlabel" id="SurveyIdlabel">*Survey Id:</label><br>
 
-                                            @Html.TextBoxFor(m => m.SurveyKey, new { @class = "Account" }) <br>
-                                            @Html.ValidationMessageFor(m => m.SurveyKey, null)
-                                            <br>
-                                            <label class="accountlabel" id="SecurityTokenlabel">*Security Token:</label><br>
+                        @Html.TextBoxFor(m => m.SurveyKey, new { @class = "Account" }) <br>
+                        @Html.ValidationMessageFor(m => m.SurveyKey, null)
+                        <br>
+                        <label class="accountlabel" id="SecurityTokenlabel">*Security Token:</label><br>
 
-                                            @Html.TextBoxFor(m => m.UserPublishKey, new { @class = "Account" }) <br>
-                                            @Html.ValidationMessageFor(m => m.UserPublishKey, null)
+                        @Html.TextBoxFor(m => m.UserPublishKey, new { @class = "Account" }) <br>
+                        @Html.ValidationMessageFor(m => m.UserPublishKey, null)
 
 
-                                        </div>
+                    </div>
 
-                                    </p>*@
+                </p>*@
                                 <br />
                                 @if (Model.IsAuthenticated)
                                 {
@@ -1465,8 +1594,8 @@
                                     @Html.TextBoxFor(m => m.RepublishPath, new { @class = "Account RepublishPath" })
 
                                     @*<label for="file-upload" class="submits create"   onclick="javascript: document.getElementById('Newfile').click();">
-                                            Browse
-                                        </label>*@
+                        Browse
+                    </label>*@
                                     <input for="file-upload" class="btn btn-primary btn-sm" style="width:70px;" type="button" id="RePublishButton" onclick="javascript: document.getElementById('Newfile1').click();" value="Browse" /><br>
 
                                     @Html.ValidationMessageFor(m => m.RepublishPath, null, new { @class = "required" })
@@ -1531,15 +1660,15 @@
                             <div class="accountdiv col-md-10">
 
                                 @*<p style="text-align:center;margin-top: 0;margin-bottom: 0px; font-size: 9pt; font-weight:bold;">
-                                        Epi Info Web Survey Download Tool (.CSV)
-                                    </p>
-                                    <br><br>
-                                    <p style="text-align:right;margin-top: 0;margin-bottom: -29px; font-size: 9pt; font-weight:bold;">* indicates required fields</p>*@
+                    Epi Info Web Survey Download Tool (.CSV)
+                </p>
+                <br><br>
+                <p style="text-align:right;margin-top: 0;margin-bottom: -29px; font-size: 9pt; font-weight:bold;">* indicates required fields</p>*@
 
                                 <div>
                                     @*<label class="accountlabel" id="OrgKeylabel">*Organization Key:</label><br>
-                                        @Html.TextBoxFor(m => m.OrganizationKey, new { @class = "Account" }) <br>
-                                        @Html.ValidationMessageFor(m => m.OrganizationKey, null, new { @class = "required" })<br>*@
+                    @Html.TextBoxFor(m => m.OrganizationKey, new { @class = "Account" }) <br>
+                    @Html.ValidationMessageFor(m => m.OrganizationKey, null, new { @class = "required" })<br>*@
 
                                     <label class="accountlabel" id="SurveyIdlabel"><span style="color:#900000;">*</span> Survey Id:</label><br>
 
@@ -1572,15 +1701,15 @@
 
                                 </div>
                                 @*<div id="spinner">
-                                        Working on your request...
-                                    </div>*@
+                    Working on your request...
+                </div>*@
 
                                 <br />
 
                                 @* <input class="submits create " type="submit" onclick=" clear();  " name="DownLoadResponse" id="DownLoadResponse" value="DownLoad" style="margin-right:90px;" />*@
 
 
-                                <input class="btn btn-primary btn-sm" type="button" onclick="  GetJsonResponse();clear();   " name="DownLoadResponse" id="DownLoadResponse" value="DownLoad" style="margin-right:90px;" />
+                                <input class="btn btn-primary btn-sm" type="button" onclick="  GetJsonResponse('SurveyKey','UserPublishKey','FileName',false) ;clear();   " name="DownLoadResponse" id="DownLoadResponse" value="DownLoad" style="margin-right:90px;" />
 
                             </div>
                         </div>
@@ -1600,8 +1729,8 @@
                                     @Html.TextBoxFor(m => m.EmailFilePath, new { @class = "Account Path2" })
 
                                     @*<label for="file-upload" class="submits create"   onclick="javascript: document.getElementById('Newfile').click();">
-                                            Browse
-                                        </label>*@
+                        Browse
+                    </label>*@
                                     <input for="file-upload" class="btn btn-primary btn-sm" style="width:70px;" type="button" id="PublishButton" onclick="javascript: document.getElementById('Newfile2').click();" value="Browse" />
 
                                     <br>
@@ -1768,7 +1897,7 @@
                                                                                 }
                                                        }
 
-                                                           
+
 
 
                                                        );
@@ -1869,14 +1998,14 @@
                             <br />
 
                             @*<div class="alert ValueSets-alert alert-warning alert-dismissible fade show" role="alert">
-                                <strong>Note:</strong>  Republishing a survey will override changes made through this process.
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>*@
+                <strong>Note:</strong>  Republishing a survey will override changes made through this process.
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>*@
 
 
-                        
+
 
                             <div class="alert alert-success  " role="alert">
                                 Value Set was successfully updated!
@@ -1896,9 +2025,9 @@
 
 
                                 @Html.DropDownListFor(m => m.EmailSurveyKey, new SelectList(ViewBag.SurveyNameList1, "Value", "Text", 0), "Select Survey To View Value Sets", new { @class = "Account DataSets" })
-                                <br/>
+                                <br />
 
-                                <br/>
+                                <br />
                                 <div>
 
 
@@ -1910,7 +2039,7 @@
                                         </tr>
 
                                     </table>
-                                     
+
 
 
                                 </div>
@@ -1957,10 +2086,69 @@
                                     </button>
                                 </div>
                             </div>
-                           
+
 
                         </div>
 
+                        @*LoadResponsesDivExpand*@
+
+
+
+                        <div id="LoadResponsesDiv" class="contentContainer" style="margin-bottom: 100px; align-self:center ;display:none; visibility:collapse;margin:1em">
+                            <h1>Load Responses From .xlsx</h1>
+                            <p id="RequiredLable" class="requiredField">* indicates required fields</p>
+                            <div class="accountdiv col-md-10">
+
+                                <div>
+                                    <label class="accountlabel" id="SurveyIdlabel"><span style="color:#900000;">*</span> Survey Id:</label><br>
+
+
+                                    @Html.DropDownListFor(m => m.LoadResponsesSurveyKey, new SelectList(ViewBag.SurveyNameList1, "Value", "Text", 0), "Select Survey", new { @class = "Account" })
+                                    <br />
+                                    <br />
+
+
+
+                                    @if (!Model.IsAuthenticated)
+                                    {
+                                        <label class="accountlabel" id="SecurityTokenlabel"><span style="color:#900000;">*</span> Security Token:</label><br>
+
+                                        @Html.TextBoxFor(m => m.LoadResponseUserPublishKey, new { @class = "Account" }) <br>
+                                        @Html.ValidationMessageFor(m => m.LoadResponseUserPublishKey, null)<br>
+                                    }
+                                    <br />
+                                    <input class="btn btn-primary btn-sm" type="button" onclick="GetJsonResponse('LoadResponsesSurveyKey', 'LoadResponseUserPublishKey', 'FileName', true); " name="DownLoadTemplate" id="DownLoadTemplate" value="Get Template (.xlsx)" style="margin-right:90px;" />
+                                    <br />
+
+                                    @Html.ValidationMessageFor(m => m.LoadResponsesSurveyKey, null)
+                                    <br />
+                                    <label class="accountlabel" id="FilePath"><span style="color:#900000;">*</span>File (.xlsx):</label> <br>
+
+
+                                    @Html.TextBoxFor(m => m.EmailFilePath, new { @class = "Account Path2" })
+
+
+                                    <input for="file-upload" class="btn btn-primary btn-sm" style="width:70px;" type="button" id="PublishButton" onclick="javascript: document.getElementById('Newfile3').click();" value="Browse" />
+
+                                    <br>
+
+                                    @Html.ValidationMessageFor(m => m.EmailFilePath, null, new { @class = "required " })
+                                    <input id="Newfile3" type="file" style='visibility: hidden;' name="Newfile3" accept=".xls,.xlsx" onchange="ChangeText(this, 'Path2');" />
+
+
+
+
+                                </div>
+
+
+
+
+                                <input class="btn btn-primary btn-sm" type="submit" onclick="clear()" name="LoadResponses" id="LoadResponses" value="Load" style="margin-right:90px;" />
+                               
+
+                            </div>
+
+                        </div>
 
                     </div>
 

@@ -29,6 +29,8 @@ using Newtonsoft.Json.Serialization;
 using System.Web.Security;
 using OfficeOpenXml.Drawing.Chart;
 using Epi.Web.Common.Helper;
+using Epi.Core.EnterInterpreter;
+using Microsoft.Office.Interop.Excel;
 
 namespace Epi.Web.MVC.Controllers
 {
@@ -36,6 +38,9 @@ namespace Epi.Web.MVC.Controllers
     {
         private ISurveyFacade _isurveyFacade;
         public string FullPath = "";
+
+        public object ExcelVersion { get; private set; }
+
         public SurveyManagerController(ISurveyFacade isurveyFacade)
         {
             _isurveyFacade = isurveyFacade;
@@ -161,7 +166,7 @@ namespace Epi.Web.MVC.Controllers
 
         }
         [HttpPost]
-        public ActionResult Index(PublishModel Model, string PublishSurvey, string DownLoadResponse, string ValidateOrganization, HttpPostedFileBase Newfile, HttpPostedFileBase Newfile1, HttpPostedFileBase Newfile2, string SurveyName, string RePublishSurvey, string RePublishSurveyName, string SendEmail, string SetJson, HttpPostedFileBase FileUpload1)
+        public ActionResult Index(PublishModel Model, string PublishSurvey, string DownLoadResponse, string ValidateOrganization, HttpPostedFileBase Newfile, HttpPostedFileBase Newfile1, HttpPostedFileBase Newfile2, HttpPostedFileBase Newfile3, string SurveyName, string RePublishSurvey, string RePublishSurveyName, string SendEmail, string SetJson, HttpPostedFileBase FileUpload1,string LoadResponses)
         {
             Model.ViewRecordsURL = ConfigurationManager.AppSettings["ViewRecordsURL"];
             string filepath = Server.MapPath("~\\Content\\Text\\TermOfUse.txt");
@@ -210,6 +215,8 @@ namespace Epi.Web.MVC.Controllers
                     ModelState["PublishDivState"].Errors.Clear();
                     ModelState["DownLoadDivState"].Errors.Clear();
                     ModelState["ValueSetUserPublishKey"].Errors.Clear();
+                    ModelState["LoadResponseUserPublishKey"].Errors.Clear();
+                    //ModelState["LoadResponsesSurveyKey"].Errors.Clear();
                     if (ModelState.IsValid)
                     {
                         //  OrganizationAccountRequest Request = new OrganizationAccountRequest();
@@ -456,7 +463,61 @@ namespace Epi.Web.MVC.Controllers
                         return View("Index", Model);
                     }
                 }
+                if (!string.IsNullOrEmpty(LoadResponses))
+                {
+                    Model.IsValidOrg = true;
+                    var orgkey = Model.OrganizationKey = Session["OrgId"].ToString();
+                    // Model.SurveyNameList = GetAllSurveysByOrgId(Model.OrganizationKey);
+                    if (string.IsNullOrEmpty(Model.EmailSurveyKey))
+                    {
+                        ModelState.AddModelError("EmailSurveyKey", "Survey Id is required.");
+                    }
+                    ModelState["FileName"].Errors.Clear();
+                    ModelState["SurveyName"].Errors.Clear();
+                    ModelState["RepublishUserPublishKey"].Errors.Clear();
+                    ModelState["UserPublishKey"].Errors.Clear();
+                    ModelState["Path"].Errors.Clear();
+                    ModelState["RepublishPath"].Errors.Clear();
+                    ModelState["EndDate"].Errors.Clear();
+                    ModelState["RePublishDivState"].Errors.Clear();
+                    ModelState["PublishDivState"].Errors.Clear();
+                    ModelState["DownLoadDivState"].Errors.Clear();
+                    ModelState["OrganizationKey"].Errors.Clear();
+                    ModelState["ValueSetFilePath"].Errors.Clear();
+                    ModelState["ValueSetUserPublishKey"].Errors.Clear();
+                    ModelState["EmailSurveyKey"].Errors.Clear();
+                    ModelState["EmailUserPublishKey"].Errors.Clear();
 
+                    if (IsAuthenticated && ModelState["LoadResponsesPublishKey"] != null)
+                    {
+                        ModelState["LoadResponsesPublishKey"].Errors.Clear();
+                    }
+
+                    if (ModelState.IsValid)
+                    {
+                        var SurveyInfo = this._isurveyFacade.GetSurveyInfoModel(Model.LoadResponsesSurveyKey);
+                        if (IsAuthenticated || SurveyInfo.UserPublishKey.ToString() == Model.LoadResponseUserPublishKey)
+                        {
+                            LoadResponse(Model, Newfile3, SurveyInfo);
+
+                            Model.SuccessfulPublish = true;
+                            Model.SuccessfullySentEmail = true;
+                        }
+                        else
+                        {
+                            ModelState.AddModelError("LoadResponsesPublishKey", "Please provide the right Security Token.");
+                            Model.SendEmaiDivState = true;
+                        }
+                        // Model = new PublishModel();
+                        Model.SurveyNameList = ViewBag.SurveyNameList1 = GetAllSurveysByOrgId(orgkey);
+                        return View(Model);
+                    }
+                    else
+                    {
+                        Model.SurveyNameList = ViewBag.SurveyNameList1 = GetAllSurveysByOrgId(orgkey);
+                        return View("Index", Model);
+                    }
+                }
                 if (!string.IsNullOrEmpty(SetJson))
                 {
                     try
@@ -979,6 +1040,69 @@ namespace Epi.Web.MVC.Controllers
 
             }
         }
+        private void LoadResponse(PublishModel model, HttpPostedFileBase newfile2, SurveyInfoModel SurveyInfo)
+        {
+           
+         
+              using (var package = new OfficeOpenXml.ExcelPackage(newfile2.InputStream))
+            {
+                OfficeOpenXml.ExcelWorkbook workbook = package.Workbook;
+                
+
+                ExcelWorksheet xlWorksheet = workbook.Worksheets[1];
+
+                var start = xlWorksheet.Dimension.Start;
+                var end = xlWorksheet.Dimension.End;
+
+
+                for (int row = 2; row <= end.Row; row++)
+                { // Row by row...
+                 
+                    Dictionary<string, string> SurveyQuestionAnswerList = new Dictionary<string, string>();
+                   
+                   
+                    string _ResponseId = xlWorksheet.Cells[row, 1].Text;
+                    string _Status = xlWorksheet.Cells[row, 2].Text;
+                    string SurveyUrl = "";
+                 
+                    string DateCompleted = DateTime.Now.ToString();
+                    if (string.IsNullOrEmpty(_ResponseId))
+                    {
+                        string strPassCode;
+                        Guid ResponseID;
+
+                        CreateResponse(SurveyInfo, out SurveyUrl, out strPassCode, out ResponseID);    // CreateResponse
+                                                                                                       // Update response if  key value pair availeble 
+
+                        bool IsPreFiledValues = true;
+
+                        if (IsPreFiledValues)
+                        {
+
+                            ResponseID = UpdateResponse(SurveyInfo, xlWorksheet, end, row, ResponseID, out SurveyQuestionAnswerList, 3);   // UpdateResponse
+
+                        }
+                        xlWorksheet.SetValue(row, 1, ResponseID.ToString());
+                    }
+
+                }
+                var _Date = DateTime.Now.ToShortDateString();
+
+                using (var memoryStream = new MemoryStream())
+                {
+                    Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+                    Response.AddHeader("content-disposition", "attachment; filename=" + SurveyInfo.SurveyName +"_"+_Date+ ".xlsx");
+                    package.SaveAs(memoryStream);
+                    memoryStream.WriteTo(Response.OutputStream);
+                    Response.Flush();
+                    Response.End();
+                }
+
+
+
+            }
+            
+        }
 
         private string GetUrlstring(List<string> uRL_List)
         {
@@ -1032,17 +1156,21 @@ namespace Epi.Web.MVC.Controllers
             }
         }
 
-        private Guid UpdateResponse(SurveyInfoModel SurveyInfo, ExcelWorksheet xlWorksheet, ExcelCellAddress end, int row, Guid ResponseID, out Dictionary<string, string> SurveyQuestionAnswerList)
+        private Guid UpdateResponse(SurveyInfoModel SurveyInfo, ExcelWorksheet xlWorksheet, ExcelCellAddress end, int row, Guid ResponseID, out Dictionary<string, string> SurveyQuestionAnswerList, int cell_Start = 10)
         {
             XDocument SurveyXml = XDocument.Parse(SurveyInfo.XML);
             SurveyQuestionAnswerList = new Dictionary<string, string>();
             Epi.Web.Common.Message.PreFilledAnswerRequest request = new PreFilledAnswerRequest();
             request.AnswerInfo.SurveyQuestionAnswerList = new Dictionary<string, string>();
-            for (int cell = 10; cell <= end.Column; cell++)
+            for (int cell = cell_Start; cell <= end.Column; cell++)
             {
                 if (xlWorksheet.Cells[1, cell].Value != null) {
                     string ColumnName = xlWorksheet.Cells[1, cell].Value.ToString();
-                    string Value = xlWorksheet.Cells[row, cell].Value.ToString();
+                    string Value = "";
+                    if (xlWorksheet.Cells[row, cell].Value != null) {
+                          Value = xlWorksheet.Cells[row, cell].Value.ToString();
+                    }
+                    
                     request.AnswerInfo.SurveyQuestionAnswerList.Add(ColumnName, Value);
                     SurveyQuestionAnswerList.Add(ColumnName, Value);
                 }
@@ -1057,7 +1185,13 @@ namespace Epi.Web.MVC.Controllers
             SurveyAnswerDTO DTO = new SurveyAnswerDTO();
             DTO.SurveyId = SurveyInfo.SurveyId;
             DTO.ResponseId = ResponseID.ToString();
-            DTO.Status = 1;
+            if (cell_Start == 10) {
+                DTO.Status = 1;
+            }
+            else {
+                DTO.Status = 3;
+                DTO.DateCompleted = DateTime.Now;
+            }
             DTO.XML = ResponseXml;
             Request.Action = "Update";
             Request.SurveyAnswerList.Add(DTO);
@@ -1560,10 +1694,19 @@ namespace Epi.Web.MVC.Controllers
         [HttpPost]
         public JsonResult GetJsonHeader(string surveyid, string PublisherKey, bool IsDraft)
         {
-             
+            var _PublisherKey = GetUserPublishKey(surveyid);
+
+            if (_PublisherKey.ToLower() == PublisherKey.ToLower())
+            {
+
                 var jsonContent = SqlHelper.GetHeadData(surveyid);
                 return Json(jsonContent);
-            
+            }
+            else
+            {
+
+                return Json(false);
+            }
 
         }
         public JsonResult GetDashboardInfo(string surveyid)
