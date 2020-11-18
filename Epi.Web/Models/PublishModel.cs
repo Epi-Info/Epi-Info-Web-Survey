@@ -182,5 +182,6 @@ namespace Epi.Web.MVC.Models
 
         public bool UpdateStatus { get; set; }
         public string LoadResponsesSurveyKey { get; set; }
+        public bool LoadResponsesDivState { get; set; }
     }
 }

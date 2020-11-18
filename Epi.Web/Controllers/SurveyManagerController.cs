@@ -506,7 +506,7 @@ namespace Epi.Web.MVC.Controllers
                         else
                         {
                             ModelState.AddModelError("LoadResponsesPublishKey", "Please provide the right Security Token.");
-                            Model.SendEmaiDivState = true;
+                            Model.LoadResponsesDivState = true;
                         }
                         // Model = new PublishModel();
                         Model.SurveyNameList = ViewBag.SurveyNameList1 = GetAllSurveysByOrgId(orgkey);
