@@ -486,11 +486,14 @@ namespace Epi.Web.MVC.Controllers
                     ModelState["ValueSetFilePath"].Errors.Clear();
                     ModelState["ValueSetUserPublishKey"].Errors.Clear();
                     ModelState["EmailSurveyKey"].Errors.Clear();
-                    ModelState["EmailUserPublishKey"].Errors.Clear();
-
-                    if (IsAuthenticated && ModelState["LoadResponsesPublishKey"] != null)
+                   
+                    if (IsAuthenticated && ModelState["EmailUserPublishKey"] != null)
                     {
-                        ModelState["LoadResponsesPublishKey"].Errors.Clear();
+                        ModelState["EmailUserPublishKey"].Errors.Clear();
+                    }
+                    if (IsAuthenticated && ModelState["LoadResponseUserPublishKey"] != null)
+                    {
+                        ModelState["LoadResponseUserPublishKey"].Errors.Clear();
                     }
 
                     if (ModelState.IsValid)
@@ -1694,20 +1697,27 @@ namespace Epi.Web.MVC.Controllers
         [HttpPost]
         public JsonResult GetJsonHeader(string surveyid, string PublisherKey, bool IsDraft)
         {
+            var IsAuthenticated = System.Web.HttpContext.Current.User.Identity.IsAuthenticated;
             var _PublisherKey = GetUserPublishKey(surveyid);
-
-            if (_PublisherKey.ToLower() == PublisherKey.ToLower())
+            if (IsAuthenticated)
             {
-
                 var jsonContent = SqlHelper.GetHeadData(surveyid);
                 return Json(jsonContent);
             }
             else
             {
+                if (_PublisherKey.ToLower() == PublisherKey.ToLower())
+                {
 
-                return Json(false);
+                    var jsonContent = SqlHelper.GetHeadData(surveyid);
+                    return Json(jsonContent);
+                }
+                else
+                {
+
+                    return Json(false);
+                }
             }
-
         }
         public JsonResult GetDashboardInfo(string surveyid)
         {
