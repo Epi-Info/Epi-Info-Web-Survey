@@ -1076,16 +1076,20 @@ namespace Epi.Web.MVC.Controllers
 
                         CreateResponse(SurveyInfo, out SurveyUrl, out strPassCode, out ResponseID);    // CreateResponse
                                                                                                        // Update response if  key value pair availeble 
+ 
 
-                        bool IsPreFiledValues = true;
+                        ResponseID = UpdateResponse(SurveyInfo, xlWorksheet, end, row, ResponseID, out SurveyQuestionAnswerList, 3);   // UpdateResponse
 
-                        if (IsPreFiledValues)
-                        {
-
-                            ResponseID = UpdateResponse(SurveyInfo, xlWorksheet, end, row, ResponseID, out SurveyQuestionAnswerList, 3);   // UpdateResponse
-
-                        }
+                        
                         xlWorksheet.SetValue(row, 1, ResponseID.ToString());
+                        xlWorksheet.SetValue(row, 2, "Inserted");
+                    }
+                    else {
+                        Guid ResponseID =  Guid.Parse(_ResponseId);
+                        UpdateResponse(SurveyInfo, xlWorksheet, end, row, ResponseID, out SurveyQuestionAnswerList, 3);   // UpdateResponse
+
+                        xlWorksheet.SetValue(row, 1, ResponseID.ToString());
+                        xlWorksheet.SetValue(row, 2, "Updated");
                     }
 
                 }
@@ -1699,17 +1703,47 @@ namespace Epi.Web.MVC.Controllers
         {
             var IsAuthenticated = System.Web.HttpContext.Current.User.Identity.IsAuthenticated;
             var _PublisherKey = GetUserPublishKey(surveyid);
+
+            SurveyControlsRequest Request = new SurveyControlsRequest();
+            Request.SurveyId = surveyid;
+           
+            Dictionary<string, string> NewKeys = new Dictionary<string, string>();
+            NewKeys.Add("MetaData_ResponseId", "MetaData_ResponseId");
+            NewKeys.Add("MetaData_ResponseStatus", "MetaData_ResponseStatus");
+
+           
+
             if (IsAuthenticated)
             {
-                var jsonContent = SqlHelper.GetHeadData(surveyid);
+                SurveyControlsResponse List = _isurveyFacade.GetSurveyControlList(Request);
+                
+                foreach (var key in List.SurveyControlList)
+                {
+                    if (key.ControlType != "Literal" && key.ControlType != "GroupBox")
+                    {
+                        NewKeys.Add(key.ControlId, key.ControlId);
+                    }
+                }
+
+                var jsonContent = JsonConvert.SerializeObject(NewKeys);
+
                 return Json(jsonContent);
             }
             else
             {
                 if (_PublisherKey.ToLower() == PublisherKey.ToLower())
                 {
+                    SurveyControlsResponse List = _isurveyFacade.GetSurveyControlList(Request);
+                    foreach (var key in List.SurveyControlList)
+                    {
+                        if (key.ControlType != "Literal" && key.ControlType != "GroupBox")
+                        {
+                            NewKeys.Add(key.ControlId, key.ControlId);
+                        }
+                    }
 
-                    var jsonContent = SqlHelper.GetHeadData(surveyid);
+                    var jsonContent = JsonConvert.SerializeObject(NewKeys);
+
                     return Json(jsonContent);
                 }
                 else
