@@ -276,6 +276,7 @@ namespace Epi.Web.MVC.Controllers
                     ModelState["RepublishPath"].Errors.Clear();
                     ModelState["ValueSetFilePath"].Errors.Clear();
                     ModelState["ValueSetUserPublishKey"].Errors.Clear();
+                    ModelState["LoadResponseUserPublishKey"].Errors.Clear();
                     if (ModelState.IsValid)
                     {
                         var response = DoPublish(Model, Newfile);
@@ -332,6 +333,7 @@ namespace Epi.Web.MVC.Controllers
                     ModelState["RepublishPath"].Errors.Clear();
                     ModelState["ValueSetFilePath"].Errors.Clear();
                     ModelState["ValueSetUserPublishKey"].Errors.Clear();
+                    ModelState["LoadResponseUserPublishKey"].Errors.Clear();
                     if (IsAuthenticated)
                     {
                         ModelState["RePublishUserPublishKey"].Errors.Clear();
@@ -430,7 +432,7 @@ namespace Epi.Web.MVC.Controllers
                     ModelState["OrganizationKey"].Errors.Clear();
                     ModelState["ValueSetFilePath"].Errors.Clear();
                     ModelState["ValueSetUserPublishKey"].Errors.Clear();
-
+                    ModelState["LoadResponseUserPublishKey"].Errors.Clear();
 
 
                     if (IsAuthenticated && ModelState["EmailUserPublishKey"] != null)
@@ -1681,21 +1683,28 @@ namespace Epi.Web.MVC.Controllers
         [HttpPost]
         public JsonResult GetJsonResponse(string surveyid,string PublisherKey,bool IsDraft)
         {
-
+            var IsAuthenticated = System.Web.HttpContext.Current.User.Identity.IsAuthenticated;
             var _PublisherKey = GetUserPublishKey(surveyid);
-
-            if (_PublisherKey.ToLower() == PublisherKey.ToLower())
+            if (IsAuthenticated)
             {
-
                 var jsonContent = SqlHelper.GetSurveyJsonData(surveyid, IsDraft);
-            return Json(jsonContent);
+                return Json(jsonContent);
             }
             else
             {
 
-                return Json(false);
-            }
+                if (_PublisherKey.ToLower() == PublisherKey.ToLower())
+                {
 
+                    var jsonContent = SqlHelper.GetSurveyJsonData(surveyid, IsDraft);
+                    return Json(jsonContent);
+                }
+                else
+                {
+
+                    return Json(false);
+                }
+            }
         }
          
         [HttpPost]

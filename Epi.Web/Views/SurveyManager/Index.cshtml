@@ -638,7 +638,7 @@
 
     }
 
-        function GetSurveyInfo()
+    function GetSurveyInfo()
         {
             var SurveyId = $('#RepublishSurveyKey').val();
 
@@ -790,6 +790,13 @@
             }
     }
     function UpdateValueSets(ValueSet) {
+     //   alert(ValueSet)
+       //  $("#EditValueSetDialogBox").dialog("close");
+          var ActionUrl = '@Url.Action("Index", "SurveyManager")' ;
+            window.location.href = ActionUrl
+
+    }
+        function Home() {
      //   alert(ValueSet)
        //  $("#EditValueSetDialogBox").dialog("close");
           var ActionUrl = '@Url.Action("Index", "SurveyManager")' ;
@@ -1071,6 +1078,7 @@
 
     function GetJsonHeader(SurveyKey,UserPublishKey)
     {
+
 
             var SurveyId = $('#'+SurveyKey).val();
         var PublisherKey = $('#'+UserPublishKey).val();
@@ -1610,7 +1618,7 @@
                         </div>
 
                         <div id="RePublishDiv" class="contentContainer" style="margin-bottom:10px; align-self:center; display:none; visibility:collapse;margin:1em;">
-                            <h1>RePublish A Survey</h1>
+                            <h1>Update A Survey</h1>
                             <p id="RequiredLable" class="requiredField">* indicates required fields</p>
                             <div class="accountdiv col-md-10">
                                 <div>
@@ -1666,7 +1674,7 @@
 
                                 <br />
 
-                                <input class="btn btn-primary btn-sm" type="submit" name="RePublishSurvey" id="RePublishSurvey" value="RePublish" style="margin-right:90px;" />
+                                <input class="btn btn-primary btn-sm" type="submit" name="RePublishSurvey" id="RePublishSurvey" value="Update" style="margin-right:90px;" />
 
 
                                 <input type="hidden" id="ExistingSurvey_Hidden1" value="@Model.UpdateExisting.ToString()" />
@@ -1681,7 +1689,7 @@
 
                         <div id="DownLoadDiv" class="contentContainer" style="margin-bottom: 100px; align-self:center;display:none; visibility:collapse;margin:1em">
 
-                            <h1>Download responses</h1>
+                            <h1>Download Responses</h1>
                             <p id="RequiredLable" class="requiredField">* indicates required fields</p>
 
 
@@ -2235,6 +2243,7 @@
                         <p>
                             <input class="btn btn-primary btn-sm" onclick="OpenSurvey('@Model.SurveyURL')" type="button" id="LaunchSurvey" value="Launch Survey" />
                             <input class="btn btn-primary btn-sm" type="button" onclick="copyToClipboard()" id="Copy" value="Copy All to Clipboard" />
+                            <button type="button" class="btn btn-primary btn-sm" onclick="Home()"><i class="fa fa-home"></i> Home</button>
                         </p>
 
                     </div>
