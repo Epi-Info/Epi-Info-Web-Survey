@@ -751,7 +751,20 @@ namespace Epi.Web.MVC.Utility
         {
             if (!string.IsNullOrEmpty(AnswerValue.Value))
             {
-            string NewValue = CommentLegalValues.Where(x => x.StartsWith(AnswerValue.Value + "-")).Single();
+                string NewValue = string.Empty;
+                if (!AnswerValue.Value.Contains('-')) {
+                    try
+                    {
+                        NewValue = CommentLegalValues.Where(x => x.StartsWith(AnswerValue.Value + "-")).Single();
+                    }
+                    catch {
+                        NewValue = CommentLegalValues.Where(x => x.StartsWith(AnswerValue.Value + " -")).Single();
+                    }
+                }
+                else {
+                      NewValue = CommentLegalValues.Where(x => x.StartsWith(AnswerValue.Value )).Single();
+
+                }
             NewValue = NewValue.Split(new char[] { '-' }, 2)[1]; // Split(new char[] { '-' }, 2)
             QuestionAnswerList.Remove(AnswerValue);
             AnswerValue.Value = NewValue;

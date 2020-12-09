@@ -31,6 +31,7 @@ using OfficeOpenXml.Drawing.Chart;
 using Epi.Web.Common.Helper;
 using Epi.Core.EnterInterpreter;
 using Microsoft.Office.Interop.Excel;
+using System.Web.Script.Serialization;
 
 namespace Epi.Web.MVC.Controllers
 {
@@ -393,6 +394,7 @@ namespace Epi.Web.MVC.Controllers
                     ModelState["RepublishUserPublishKey"].Errors.Clear();
                     ModelState["ValueSetFilePath"].Errors.Clear();
                     ModelState["ValueSetUserPublishKey"].Errors.Clear();
+                    ModelState["LoadResponseUserPublishKey"].Errors.Clear();
                     if (IsAuthenticated)
                     {
                         ModelState["UserPublishKey"].Errors.Clear();
@@ -790,6 +792,7 @@ namespace Epi.Web.MVC.Controllers
                         Body = new StringBuilder(workbook.Worksheets[2].Cells[2, 2].Text);
                         Body2 = new StringBuilder(workbook.Worksheets[2].Cells[3, 2].Text);
                         int DoSend = 0;
+                        bool SendInitialemail = false;
                         int.TryParse(xlWorksheet.Cells[row, 1].Text, out DoSend);
                         // validate email Address
                         bool IsValid = ValidateEmail(xlWorksheet.Cells[row, 2].Text);
@@ -816,11 +819,11 @@ namespace Epi.Web.MVC.Controllers
 
 
                             // Create a response
-
+                            Guid ResponseID;
                             if (string.IsNullOrEmpty(_ResponseId))
                             {
                                 string strPassCode;
-                                Guid ResponseID;
+                              
                                 CreateResponse(SurveyInfo, out SurveyUrl, out strPassCode, out ResponseID);    // CreateResponse
                                                                                                                // Update response if  key value pair availeble 
 
@@ -834,23 +837,30 @@ namespace Epi.Web.MVC.Controllers
                                 if (IsPreFiledValues)
                                 {
 
-                                    ResponseID = UpdateResponse(SurveyInfo, xlWorksheet, end, row, ResponseID, out SurveyQuestionAnswerList);   // UpdateResponse
+                                    ResponseID = UpdateResponse(SurveyInfo, xlWorksheet, end, row, ResponseID, out SurveyQuestionAnswerList,10,1);   // UpdateResponse
 
                                 }
                                 xlWorksheet.SetValue(row, 3, ResponseID.ToString());
                                 xlWorksheet.SetValue(row, 6, SurveyUrl);
                                 xlWorksheet.SetValue(row, 7, strPassCode);
+                                SendInitialemail = true;
                             }
                             else
                             {
+                                
                                 // Get Response status
                                 GetResponseStatus(model, _ResponseId, out SurveyUrl, out ResponseStatuse, out DateCompleted); //GetResponseStatus
+                                var _ResponseStatus = GetStatus(ResponseStatuse);
+                                UpdateResponse(SurveyInfo, xlWorksheet, end, row, Guid.Parse(_ResponseId), out SurveyQuestionAnswerList, 10, ResponseStatuse);
+                                xlWorksheet.SetValue(row, 4, _ResponseStatus);
+                                xlWorksheet.SetValue(row, 8, DateCompleted);
                             }
                             // send email
                             if (DoSend == 1)
                             {
                                 Epi.Web.Common.Email.Email EmailObj = new Common.Email.Email();
-                                if (ResponseStatuse < 3 && !string.IsNullOrEmpty(SurveyUrl))
+                               
+                                if (ResponseStatuse < 3 && SendInitialemail)
                                 {
                                     Body.AppendLine();
                                     Body.Append( GetEmailInfo(SurveyQuestionAnswerList, SurveyUrl));
@@ -861,13 +871,14 @@ namespace Epi.Web.MVC.Controllers
                                 {
                                     if (ResponseStatuse != 3)
                                     {
-
+                                        Body2.AppendLine();
+                                        Body2.Append(GetEmailInfo(SurveyQuestionAnswerList, SurveyUrl));
                                         SendEmail(Subject2, Body2.ToString(), Sender2, xlWorksheet, row, UserEamil);  //Reminder email 
 
                                     }
-                                    var _ResponseStatus = GetStatus(ResponseStatuse);
-                                    xlWorksheet.SetValue(row, 4, _ResponseStatus);
-                                    xlWorksheet.SetValue(row, 8, DateCompleted);
+                                    //var _ResponseStatus = GetStatus(ResponseStatuse);
+                                    //xlWorksheet.SetValue(row, 4, _ResponseStatus);
+                                    //xlWorksheet.SetValue(row, 8, DateCompleted);
 
 
 
@@ -941,7 +952,7 @@ namespace Epi.Web.MVC.Controllers
                                 if (IsPreFiledValues)
                                 {
 
-                                    ResponseID = UpdateResponse(SurveyInfo, xlWorksheet, end, row, ResponseID, out SurveyQuestionAnswerList);   // UpdateResponse
+                                    ResponseID = UpdateResponse(SurveyInfo, xlWorksheet, end, row, ResponseID, out SurveyQuestionAnswerList,10,1);   // UpdateResponse
 
                                 }
                                 xlWorksheet.SetValue(row, 3, ResponseID.ToString());
@@ -1066,8 +1077,8 @@ namespace Epi.Web.MVC.Controllers
                     Dictionary<string, string> SurveyQuestionAnswerList = new Dictionary<string, string>();
                    
                    
-                    string _ResponseId = xlWorksheet.Cells[row, 1].Text;
-                    string _Status = xlWorksheet.Cells[row, 2].Text;
+                    string _ResponseId = xlWorksheet.Cells[row, 2].Text;
+                    string _Status = xlWorksheet.Cells[row, 3].Text;
                     string SurveyUrl = "";
                  
                     string DateCompleted = DateTime.Now.ToString();
@@ -1080,18 +1091,18 @@ namespace Epi.Web.MVC.Controllers
                                                                                                        // Update response if  key value pair availeble 
  
 
-                        ResponseID = UpdateResponse(SurveyInfo, xlWorksheet, end, row, ResponseID, out SurveyQuestionAnswerList, 3);   // UpdateResponse
+                        ResponseID = UpdateResponse(SurveyInfo, xlWorksheet, end, row, ResponseID, out SurveyQuestionAnswerList, 4,3);   // UpdateResponse
 
-                        
-                        xlWorksheet.SetValue(row, 1, ResponseID.ToString());
-                        xlWorksheet.SetValue(row, 2, "Inserted");
+                        xlWorksheet.SetValue(row, 1, DateTime.Now);
+                        xlWorksheet.SetValue(row, 2, ResponseID.ToString());
+                        xlWorksheet.SetValue(row, 3, "Inserted");
                     }
                     else {
                         Guid ResponseID =  Guid.Parse(_ResponseId);
-                        UpdateResponse(SurveyInfo, xlWorksheet, end, row, ResponseID, out SurveyQuestionAnswerList, 3);   // UpdateResponse
-
-                        xlWorksheet.SetValue(row, 1, ResponseID.ToString());
-                        xlWorksheet.SetValue(row, 2, "Updated");
+                        UpdateResponse(SurveyInfo, xlWorksheet, end, row, ResponseID, out SurveyQuestionAnswerList, 4,3);   // UpdateResponse
+                        xlWorksheet.SetValue(row, 1, DateTime.Now);
+                        xlWorksheet.SetValue(row, 2, ResponseID.ToString());
+                        xlWorksheet.SetValue(row, 3, "Updated");
                     }
 
                 }
@@ -1165,7 +1176,7 @@ namespace Epi.Web.MVC.Controllers
             }
         }
 
-        private Guid UpdateResponse(SurveyInfoModel SurveyInfo, ExcelWorksheet xlWorksheet, ExcelCellAddress end, int row, Guid ResponseID, out Dictionary<string, string> SurveyQuestionAnswerList, int cell_Start = 10)
+        private Guid UpdateResponse(SurveyInfoModel SurveyInfo, ExcelWorksheet xlWorksheet, ExcelCellAddress end, int row, Guid ResponseID, out Dictionary<string, string> SurveyQuestionAnswerList, int cell_Start = 10, int _Status=0)
         {
             XDocument SurveyXml = XDocument.Parse(SurveyInfo.XML);
             SurveyQuestionAnswerList = new Dictionary<string, string>();
@@ -1194,12 +1205,12 @@ namespace Epi.Web.MVC.Controllers
             SurveyAnswerDTO DTO = new SurveyAnswerDTO();
             DTO.SurveyId = SurveyInfo.SurveyId;
             DTO.ResponseId = ResponseID.ToString();
-            if (cell_Start == 10) {
-                DTO.Status = 1;
-            }
-            else {
-                DTO.Status = 3;
-                DTO.DateCompleted = DateTime.Now;
+            DTO.Status = _Status;
+            if (_Status == 3)
+            {
+             
+                    DTO.DateCompleted = DateTime.Now;
+                
             }
             DTO.XML = ResponseXml;
             Request.Action = "Update";
@@ -1688,7 +1699,24 @@ namespace Epi.Web.MVC.Controllers
             if (IsAuthenticated)
             {
                 var jsonContent = SqlHelper.GetSurveyJsonData(surveyid, IsDraft);
-                return Json(jsonContent);
+                jsonContent = jsonContent.Replace("'", "");
+                //var ReturnJson = Json(jsonContent, "application/json",JsonRequestBehavior.AllowGet);
+
+                var serializer = new JavaScriptSerializer();
+
+                // For simplicity just use Int32's max value.
+                // You could always read the value from the config section mentioned above.
+                serializer.MaxJsonLength = Int32.MaxValue;
+
+                var resultData =  jsonContent;
+                var result = new JsonResult
+                {
+                    Data = serializer.Serialize(resultData),
+                    ContentType = "application/json"
+                };
+                return result;
+
+               // return ReturnJson;
             }
             else
             {
@@ -1717,10 +1745,11 @@ namespace Epi.Web.MVC.Controllers
             Request.SurveyId = surveyid;
            
             Dictionary<string, string> NewKeys = new Dictionary<string, string>();
+            NewKeys.Add("MetaData_DateUpdated", "MetaData_DateUpdated");
             NewKeys.Add("MetaData_ResponseId", "MetaData_ResponseId");
             NewKeys.Add("MetaData_ResponseStatus", "MetaData_ResponseStatus");
+            
 
-           
 
             if (IsAuthenticated)
             {
