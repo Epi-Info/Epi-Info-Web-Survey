@@ -1539,6 +1539,10 @@ function CCE_ClearControlValue(pCheckCodeList) {
                                 $(Radiofield).find('.ui-icon-radio-on').removeClass('ui-icon-radio-on'); //2
                                 $(Radiofield).find('.RadioTemp').addClass('ui-icon-radio-off'); //3
                                 $(Radiofield).find('.ui-icon-radio-off').removeClass('RadioTemp'); //4 keep them in this order
+                                
+                                $("." + FieldName).removeAttr("checked");
+                                $("input[type='radio']").checkboxradio("refresh");
+                                $(controlId).val('');
                             }
                             else {
                                 var RadiofieldName = "." + FieldName;
