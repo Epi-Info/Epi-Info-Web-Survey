@@ -214,13 +214,21 @@ namespace MvcDynamicForms.Fields
             {
                 if (Date.Contains('-'))
                 {
-                    splitChar = ' ';
+                    // splitChar = ' ';
                     splitChar = '-';
                 }
-                else
+                else if (Date.Contains('/'))
                 {
 
                     splitChar = '/';
+                }
+                else if (Date.Contains('.'))
+                {
+                    splitChar = '.';
+                }
+                else {
+                    return Date;
+
                 }
                 string[] dateList = Date.Split((char)splitChar);
                 switch (patternIn.ToString())
