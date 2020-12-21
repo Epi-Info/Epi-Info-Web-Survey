@@ -851,7 +851,7 @@ namespace Epi.Web.MVC.Controllers
                                 // Get Response status
                                 GetResponseStatus(model, _ResponseId, out SurveyUrl, out ResponseStatuse, out DateCompleted); //GetResponseStatus
                                 var _ResponseStatus = GetStatus(ResponseStatuse);
-                                UpdateResponse(SurveyInfo, xlWorksheet, end, row, Guid.Parse(_ResponseId), out SurveyQuestionAnswerList, 10, ResponseStatuse);
+                              
                                 xlWorksheet.SetValue(row, 4, _ResponseStatus);
                                 xlWorksheet.SetValue(row, 8, DateCompleted);
                             }
