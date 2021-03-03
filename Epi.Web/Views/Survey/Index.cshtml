@@ -1137,17 +1137,17 @@ else
 
 
 
-                    <button class="prev" id="PreviousButton" value="PreviousButton" onclick="Previous();" name="PreviousButton" type="button"> &nbsp; Previous</button>
+                    <button class="prev" tabindex="297" id="PreviousButton" value="PreviousButton" onclick="Previous();" name="PreviousButton" type="button"> &nbsp; Previous</button>
                 }
             </div>
 
             @if (@Model.Form.SurveyInfo.SurveyId == @Session["RootFormId"].ToString())
             {
                 <div id="savediv" align="center">
-                    <button class="save" title="Click this button to finish the survey later. Use the survey link and pass code provided to return to the survey at a later time." type="button" id="Savebutton" onclick="Save();" name="Savebutton" value="save"> &nbsp; Finish Later</button>
+                    <button class="save" tabindex="298" title="Click this button to finish the survey later. Use the survey link and pass code provided to return to the survey at a later time." type="button" id="Savebutton" onclick="Save();" name="Savebutton" value="save"> &nbsp; Finish Later</button>
                     @if (Model.Form.CurrentPage == Model.Form.NumberOfPages)
                     {
-                <button id="Print" class="printbottom" title="Click this button to review, print, and download your answers." type="button" name="Printbutton" value="Print" style="width:150px">Print / Download CSV</button>
+                <button id="Print" tabindex="299" class="printbottom" title="Click this button to review, print, and download your answers." type="button" name="Printbutton" value="Print" style="width:150px">Print / Download CSV</button>
                     }
                 </div>
 
@@ -1171,7 +1171,7 @@ else
             {
 
                 <div id="next" align="right">
-                    <button class="next" name="ContinueButton" id="ContinueButton" onclick="Continue();" type="button">Continue &nbsp; </button>
+                    <button class="next" name="ContinueButton" id="ContinueButton"  onclick="Continue();" type="button">Continue &nbsp; </button>
                 </div>
 
             }
