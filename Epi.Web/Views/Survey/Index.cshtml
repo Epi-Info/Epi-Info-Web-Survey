@@ -114,7 +114,7 @@
 
     /*Clicking the save button to save the survey*/
     function Save() {
-      
+
 
         var DisabledFieldsList = $('#DisabledFieldsList').val();
 
@@ -156,7 +156,7 @@
     /*Clicking the continue button*/
 
     function Continue() {
-       
+
         //debugger;
         var presentUrl;
         var pageNumber;
@@ -310,7 +310,7 @@
                     "click": function () {
                         var signoutUrl = '@Url.Action("SignOut","Post")';
 
-                        var homePageUrl = '@Epi.Web.Common.Config.EIWSConfig.ExitURL'
+                        var homePageUrl = '@System.Configuration.ConfigurationManager.AppSettings["ExitURL"]'
                         if (homePageUrl == "" || homePageUrl == " " || homePageUrl == null) {
 
                             homePageUrl = '@Url.Action("Index","Home")' + '/' + '@Model.Form.SurveyInfo.SurveyId';
@@ -377,7 +377,7 @@
 
             ReadRelatedResponse('@Model.RelatedButtonWasClicked');
         }
-        var responseUrl = GetRedirectionUrl();           
+        var responseUrl = GetRedirectionUrl();
         $('#url').val('@Model.Form.RedirectURL');
         var Subject = "Link for Survey: " + '@Model.Form.SurveyInfo.SurveyName';
         Subject = ReplaceString(Subject);
@@ -538,9 +538,9 @@
     }
 
     $(function () {
-         
+
         //$('#myform').submit(function () {
-             
+
         //    var DisabledFieldsList = $('#DisabledFieldsList').val();
         //    if (DisabledFieldsList.length > 0 ) {
         //        CCE_ProcessEnableAllControls(DisabledFieldsList);
@@ -570,7 +570,7 @@
 
         }
         else {
-            
+
             // Save();//Save Current page.
             AddNewChild(ViewId);
             // AddChild(ViewId);
@@ -649,7 +649,7 @@
     }
 
     function AddChild(ViewId) {
-       
+
         $('#FormHasChanged').val('True');
         var signoutUrl = '@Url.Action("AddChild", "Survey")' + '?SurveyId=' + '@Model.Form.SurveyInfo.SurveyId' + '&ViewId=' + ViewId + '&ResponseId=' + '@Model.Form.ResponseId' + '&FormValuesHasChanged=' + $('#FormHasChanged').val() + '&CurrentPage=' + '@Model.Form.CurrentPage';
 
@@ -810,14 +810,14 @@
         //debugger;
        //alert(FieldRelateCondition)
         var FieldRelateName = FieldRelateCondition.split(":")[0];
-       
+
         var _IsSelect = IsSelect(FieldRelateName);
-        
+
 
         $('#' + obj.id).val(obj.value);
         var availableTags = [obj.value];
         var signoutUrl = "";
-        
+
         if (AutoComplete) {
             signoutUrl = '@Url.Action("GetCodesValue","Survey")' + '?SourceTableName=' + TableName + '&SelectedValue=' + obj + '&SurveyId=' + SurveyId + "&ColumnName=" + ColumnName + "&FieldRelateCondition=" + FieldRelateCondition + "&IsSelect=" +_IsSelect;
             // alert(signoutUrl + "    1")
@@ -839,28 +839,28 @@
 
         function successFunc(data, status) {
 
-                
-                 
-           
-             
-       
+
+
+
+
+
                     var ListSize = Object.keys(data).length;
-                 
+
                 if ($("#mvcdynamicfield_" + FieldRelateName).hasClass("awesomplete"))
                 {
-                   
+
                       var Query = "#mvcdynamicfield_" + FieldRelateName + "_DataList";
-                            
+
                             $(Query).empty();
                             $(Query).val("");
-                          
+
                             $.each(data, function (key, value) {
                                // alert(key)
-                           
+
                                 $(Query).append($("<option></option>")
                                      .attr("style", "")
                                     .attr("value", key).text(key));
-                                     
+
 
 
                            });
@@ -870,9 +870,9 @@
                 }
              if ($("#mvcdynamicfield_" + FieldRelateName).is("select") )
                     {
-            
+
                             var Query = "#mvcdynamicfield_" + FieldRelateName;
-                              
+
                             $(Query).empty();
                             $(Query).val("");
                             $(Query).append($("<option></option>")
@@ -882,30 +882,30 @@
 
                                 $(Query).append($("<option></option>")
                                     .attr("value", key).text(key));
-                                     
+
 
 
                             });
 
-                    } 
+                    }
                    if (!$("#mvcdynamicfield_" + FieldRelateName).is("select") && !$("#mvcdynamicfield_" + FieldRelateName).hasClass("awesomplete") )
                     {
-                         
+
                        var value = "";
                         Object.keys(data).forEach(function (key)
                         {
                             value = data[key];
                                  var Query = "#mvcdynamicfield_" + key;
-                                
+
                                  $(Query).val(value);
-                                 
+
 
 
                              });
                         }
-                   
 
-         
+
+
 
         }
 
@@ -943,7 +943,7 @@
             $(Query).autocomplete({
                 source: availableTags,
                 select: function (event, ui) {
-                     
+
                     SetCodes_Val(ui.item.label, SurveyId, TableName, true,"","");
                 },
             });
