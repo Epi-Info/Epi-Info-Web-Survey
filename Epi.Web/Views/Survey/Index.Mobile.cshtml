@@ -190,11 +190,11 @@
        // $("#RelateNavigation").dialog("close");
     }
     function NavigateToChild(ViewId) {
-        
+
         $('#RelateButtonWasClicked_Temp').val(ViewId)
         $('#RelateButtonWasClicked').val(ViewId);
         var temp = HasResponse(ViewId);
-       
+
         if (temp) {
 
             ReadResponse(ViewId);
@@ -231,13 +231,13 @@
         return HasResponse;
 
     }
- 
+
     function ReadResponse(ViewId) {
 
 
 //        var signoutUrl = '@Url.Action("ReadResponseInfo", "Survey")' + '?SurveyId=' + '@Model.Form.SurveyInfo.SurveyId' + '&ViewId=' + ViewId + '&ResponseId=' + '@Model.Form.ResponseId' + '&FormValuesHasChanged=' + $('#FormHasChanged').val() + '&CurrentPage=' + '@Model.Form.CurrentPage';
 
-//     
+//
 
 //        $.ajax({
 //            url: signoutUrl,
@@ -275,7 +275,7 @@
     }
 
     function AddChild(ViewId) {
-        
+
         $('#FormHasChanged').val('True');
         var signoutUrl = '@Url.Action("AddChild", "Survey")' + '?SurveyId=' + '@Model.Form.SurveyInfo.SurveyId' + '&ViewId=' + ViewId + '&ResponseId=' + '@Model.Form.ResponseId' + '&FormValuesHasChanged=' + $('#FormHasChanged').val() + '&CurrentPage=' + '@Model.Form.CurrentPage';
 
@@ -497,7 +497,7 @@
 
 
             if ('@Model.Form.StatusId' == '1') { //if clicking the save button for the first time
-         
+
                 $('#Savebutton1').simpledialog2({
                     'mode': 'blank',
                     'prompt': false,
@@ -580,7 +580,7 @@
     }
     /*Clicking the save button to save the survey*/
     function Save() {
-        
+
         var DisabledFieldsList = $('#DisabledFieldsList').val();
 
         if (DisabledFieldsList.length > 0) {
@@ -611,7 +611,7 @@
     // save button dialog
 
     $(document).delegate('#Savebutton1', 'click', function () {
- 
+
 
 
     });
@@ -718,7 +718,7 @@
     function SetCodes_Val(obj, SurveyId, TableName, AutoComplete, ColumnName, FieldRelateCondition) {
 
         var FieldRelateName = FieldRelateCondition.split(":")[0];
-       
+
         var _IsSelect = IsSelect(FieldRelateName);
         //debugger;
       //  alert(FieldRelateCondition)
@@ -743,28 +743,28 @@
 
 function successFunc(data, status) {
 
-                
-                 
-           
-             
-       
+
+
+
+
+
                     var ListSize = Object.keys(data).length;
-                 
+
                 if ($("#mvcdynamicfield_" + FieldRelateName).hasClass("awesomplete"))
                 {
                   // alert(1)
                       var Query = "#mvcdynamicfield_" + FieldRelateName + "_DataList";
-                            
+
                             $(Query).empty();
                             $(Query).val("");
-                          
+
                             $.each(data, function (key, value) {
                                // alert(key)
-                           
+
                                 $(Query).append($("<option></option>")
                                      .attr("style", "")
                                     .attr("value", value).text(value));
-                                     
+
 
 
                            });
@@ -778,7 +778,7 @@ function successFunc(data, status) {
                     {
             // alert(2)
                             var Query = "#mvcdynamicfield_" + FieldRelateName;
-                              
+
                             $(Query).empty();
                             $(Query).val("");
                             $(Query).append($("<option></option>")
@@ -788,12 +788,12 @@ function successFunc(data, status) {
 
                                 $(Query).append($("<option></option>")
                                     .attr("value", key).text(key));
-                                     
+
 
 
                             });
 
-                    } 
+                    }
                    if (!$("#mvcdynamicfield_" + FieldRelateName).is("select") && !$("#mvcdynamicfield_" + FieldRelateName).hasClass("awesomplete") )
                     {
                        //   alert(3)
@@ -802,16 +802,16 @@ function successFunc(data, status) {
                         {
                             value = data[key];
                                  var Query = "#mvcdynamicfield_" + key;
-                                
+
                                  $(Query).val(value);
-                                 
+
 
 
                              });
                         }
-                   
 
-         
+
+
 
         }
 
@@ -974,7 +974,7 @@ function successFunc(data, status) {
 @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "myform", @class = @Model.Form.IsDraftModeStyleClass.ToString() }))
 {
 
- if (@Model.Form.SurveyInfo.SurveyId != @Session["RootFormId"].ToString())
+ if (@Model.Form.SurveyInfo.SurveyId.ToString().ToLower() != @Session["RootFormId"].ToString().ToLower())
      {
 	<div id="relatenav" style="padding-bottom:10px;">
             @* <button class=""   id ="Home" type="button" onclick="GoHome()" name="Home"  >  Main Record</button>
@@ -1032,7 +1032,7 @@ function successFunc(data, status) {
          
             @if (Model.Form.CurrentPage == Model.Form.NumberOfPages)
             {
-                if (Model.Form.SurveyInfo.SurveyId == @Session["RootFormId"].ToString())
+                if (Model.Form.SurveyInfo.SurveyId.ToString().ToLower() == @Session["RootFormId"].ToString().ToLower())
                 {
                 <div id="next" align="right" style="margin-top:-8px !important;">
                     @*<a  name="Submitbutton" onclick="Submit();" class="submits" >Submit</a>*@

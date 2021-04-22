@@ -310,7 +310,7 @@
                     "click": function () {
                         var signoutUrl = '@Url.Action("SignOut","Post")';
 
-                        var homePageUrl = '@System.Configuration.ConfigurationManager.AppSettings["ExitURL"]'
+                        var homePageUrl = '@Epi.Web.Common.Config.EIWSConfig.ExitURL'
                         if (homePageUrl == "" || homePageUrl == " " || homePageUrl == null) {
 
                             homePageUrl = '@Url.Action("Index","Home")' + '/' + '@Model.Form.SurveyInfo.SurveyId';
@@ -1089,7 +1089,7 @@ else
 
     @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "myform", @class = @Model.Form.IsDraftModeStyleClass.ToString() }))
     {
-        if (@Model.Form.SurveyInfo.SurveyId != @Session["RootFormId"].ToString())
+        if (@Model.Form.SurveyInfo.SurveyId.ToString().ToLower() != @Session["RootFormId"].ToString().ToLower())
         {
             <div id="relatenav" style="padding-bottom:25px;">
                 <button class="exitsurvey default" id="Home" type="button" onclick="GoHome()" name="Home" style="width:150px; font-size:10pt; float:left; background: #00B050;"><img src="../../Content/images/root.png" style="width:16px; vertical-align: text-top;" /> Main Record</button>
@@ -1141,7 +1141,7 @@ else
                 }
             </div>
 
-            @if (@Model.Form.SurveyInfo.SurveyId == @Session["RootFormId"].ToString())
+            @if (@Model.Form.SurveyInfo.SurveyId.ToString().ToLower() == @Session["RootFormId"].ToString().ToLower())
             {
                 <div id="savediv" align="center">
                     <button class="save" tabindex="298" title="Click this button to finish the survey later. Use the survey link and pass code provided to return to the survey at a later time." type="button" id="Savebutton" onclick="Save();" name="Savebutton" value="save"> &nbsp; Finish Later</button>
@@ -1154,7 +1154,7 @@ else
             }
             @if (Model.Form.CurrentPage == Model.Form.NumberOfPages)
             {
-                if (@Model.Form.SurveyInfo.SurveyId == @Session["RootFormId"].ToString())
+                if (@Model.Form.SurveyInfo.SurveyId.ToString().ToLower() == @Session["RootFormId"].ToString().ToLower())
                 {
                     <div id="next" align="right">
 
