@@ -393,9 +393,13 @@ font-weight:bold;
                 <img src="~/Content/images/ei_logomark_wht_outln_50px.png" /> Epi Info™ Web Survey
             </h1>
         </div>
-        <div class="row col-lg-1"></div>
-        <div id="slider_1" class="row col-lg-1" style="width:100px; float:right">
+        <div class="row col-lg-1">
+            
+        </div>
+        <div id="slider_1" class="row col-lg-1" style="float:left">
 
+            @*<button type="button" onclick="RefreshReport()" class="btn btn-primary icon-refresh">Refresh Report</button>*@
+            <button type="button" class="btn btn-primary" onclick="on();RefreshReport()">Refresh Report</button>
             @*<p>
                 <label for="amount">Donation amount ($50 increments):</label>
                 <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
@@ -407,7 +411,11 @@ font-weight:bold;
 
     <div id="container" class="container-fluid" style="padding-top:70px;padding-bottom:200px;padding-right:200px">
 
-
+        <div id="overlay"   style="height: 100% ; width:100% ;">
+            <div class="w-100 d-flex justify-content-center align-items-center">
+                <div class="spinner"> </div>
+            </div>
+        </div>
 
 
 

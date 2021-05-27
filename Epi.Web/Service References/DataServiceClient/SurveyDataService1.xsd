@@ -411,7 +411,7 @@
       <xs:extension base="tns:RequestBase">
         <xs:sequence>
           <xs:element minOccurs="0" name="IncludHTML" type="xs:boolean" />
-          <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/Epi.Web.Common.DTO" minOccurs="0" name="ReportInfo" nillable="true" type="q16:ReportDTO" />
+          <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/Epi.Web.Common.DTO" minOccurs="0" name="ReportInfo" nillable="true" type="q16:ReportInfoDTO" />
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -422,7 +422,7 @@
       <xs:extension base="tns:RequestBase">
         <xs:sequence>
           <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
-          <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/Epi.Web.Common.DTO" minOccurs="0" name="Reports" nillable="true" type="q17:ArrayOfReportDTO" />
+          <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/Epi.Web.Common.DTO" minOccurs="0" name="Reports" nillable="true" type="q17:ArrayOfReportInfoDTO" />
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>

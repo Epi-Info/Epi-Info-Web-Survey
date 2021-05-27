@@ -22,6 +22,14 @@ namespace Epi.Web.Common.DTO
         private string _DataSource;
         private int _RecordCount;
         private string _ReportName;
+        private string _ReportXml;
+        [DataMember]
+        public string ReportXml
+        {
+
+            get { return _ReportXml; }
+            set { _ReportXml = value; }
+        }
         [DataMember]
         public int RecordCount
         {

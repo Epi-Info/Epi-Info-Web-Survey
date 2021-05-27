@@ -63,8 +63,8 @@
           <Property Name="DatabaseType" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="InitialCatalog" Type="varchar" MaxLength="300" />
           <Property Name="PersistSecurityInfo" Type="varchar" MaxLength="50" />
-          <Property Name="EIWSDatasource" Type="bit" Nullable="false" />
-          <Property Name="EIWSSurveyId" Type="uniqueidentifier" />
+          <Property Name="EIWS16Datasource" Type="bit" Nullable="false" />
+          <Property Name="EIWS16SurveyId" Type="uniqueidentifier" />
           <Property Name="DatabaseUserID" Type="varchar" MaxLength="200" />
           <Property Name="Password" Type="varchar" MaxLength="200" />
           <Property Name="DatabaseObject" Type="varchar(max)" Nullable="false" />
@@ -95,7 +95,7 @@
           <Property Name="Password" Type="varchar" MaxLength="200" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'EIWS.dbo.familyset' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'EIWS16.dbo.familyset' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="familyset">
           <Key>
             <PropertyRef Name="SurveyId" />
@@ -206,7 +206,7 @@ warning 6002: The table/view 'EIWS.dbo.familyset' does not have a primary key de
           <Property Name="SourceTableName" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="FormId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="SourceTableXml" Type="xml" Nullable="false" />
-          <Property Name="AllowRepublish" Type="bit" />
+          <Property Name="AllowUpdate" Type="bit" />
         </EntityType>
         <EntityType Name="States">
           <Key>
@@ -254,7 +254,7 @@ warning 6002: The table/view 'EIWS.dbo.familyset' does not have a primary key de
           <Property Name="OrganizationId" Type="int" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'EIWS.dbo.SurveyMetaDataTransform' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'EIWS16.dbo.SurveyMetaDataTransform' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="SurveyMetaDataTransform">
           <Key>
             <PropertyRef Name="SurveyId" />
@@ -309,6 +309,8 @@ warning 6002: The table/view 'EIWS.dbo.SurveyMetaDataTransform' does not have a 
           <Property Name="DataSource" Type="varchar" MaxLength="150" Nullable="false" />
           <Property Name="RecordCount" Type="int" Nullable="false" />
           <Property Name="ReportName" Type="varchar" MaxLength="250" />
+          <Property Name="ReportXml" Type="xml" />
+          <Property Name="ReportDataSize" Type="int" />
         </EntityType>
         <EntityType Name="SurveyResponse">
           <Key>
@@ -1124,31 +1126,17 @@ FROM [dbo].[SurveyMetaDataTransform] AS [SurveyMetaDataTransform]</DefiningQuery
             <End Role="SurveyMetaData" EntitySet="SurveyMetaDatas" />
           </AssociationSet>
           <EntitySet Name="Canvas" EntityType="EIWSModel.Canva" />
-          <EntitySet Name="Datasources" EntityType="EIWSModel.Datasource" />
           <EntitySet Name="SharedCanvases" EntityType="EIWSModel.SharedCanvas" />
-          <AssociationSet Name="FK_Canvas__Datasource" Association="EIWSModel.FK_Canvas__Datasource">
-            <End Role="Datasource" EntitySet="Datasources" />
-            <End Role="Canva" EntitySet="Canvas" />
-          </AssociationSet>
           <AssociationSet Name="FK_Canvas_CreatorUser" Association="EIWSModel.FK_Canvas_CreatorUser">
             <End Role="User" EntitySet="Users" />
             <End Role="Canva" EntitySet="Canvas" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Datasource_Organization" Association="EIWSModel.FK_Datasource_Organization">
-            <End Role="Organization" EntitySet="Organizations" />
-            <End Role="Datasource" EntitySet="Datasources" />
           </AssociationSet>
           <AssociationSet Name="FK_CanvasUser_User" Association="EIWSModel.FK_CanvasUser_User">
             <End Role="User" EntitySet="Users" />
             <End Role="SharedCanvas" EntitySet="SharedCanvases" />
           </AssociationSet>
-          <AssociationSet Name="DatasourceUser" Association="EIWSModel.DatasourceUser">
-            <End Role="Datasource" EntitySet="Datasources" />
-            <End Role="User" EntitySet="Users" />
-          </AssociationSet>
           <EntitySet Name="Addresses" EntityType="EIWSModel.Address" />
           <EntitySet Name="Admins" EntityType="EIWSModel.Admin" />
-          <EntitySet Name="SourceTables" EntityType="EIWSModel.SourceTable" />
           <EntitySet Name="States" EntityType="EIWSModel.State" />
           <AssociationSet Name="FK_Address_Admin" Association="EIWSModel.FK_Address_Admin">
             <End Role="Admin" EntitySet="Admins" />
@@ -1175,6 +1163,20 @@ FROM [dbo].[SurveyMetaDataTransform] AS [SurveyMetaDataTransform]</DefiningQuery
           <AssociationSet Name="FK_SurveyReports_SurveyReportsInfo" Association="EIWSModel.FK_SurveyReports_SurveyReportsInfo">
             <End Role="SurveyReportsInfo" EntitySet="SurveyReportsInfoes" />
             <End Role="SurveyReport" EntitySet="SurveyReports" />
+          </AssociationSet>
+          <EntitySet Name="Datasources" EntityType="EIWSModel.Datasource" />
+          <EntitySet Name="SourceTables" EntityType="EIWSModel.SourceTable" />
+          <AssociationSet Name="FK_Canvas__Datasource" Association="EIWSModel.FK_Canvas__Datasource">
+            <End Role="Datasource" EntitySet="Datasources" />
+            <End Role="Canva" EntitySet="Canvas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Datasource_Organization" Association="EIWSModel.FK_Datasource_Organization">
+            <End Role="Organization" EntitySet="Organizations" />
+            <End Role="Datasource" EntitySet="Datasources" />
+          </AssociationSet>
+          <AssociationSet Name="DatasourceUser" Association="EIWSModel.DatasourceUser">
+            <End Role="Datasource" EntitySet="Datasources" />
+            <End Role="User" EntitySet="Users" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="lk_Status">
@@ -1205,9 +1207,9 @@ FROM [dbo].[SurveyMetaDataTransform] AS [SurveyMetaDataTransform]</DefiningQuery
           <NavigationProperty Name="UserOrganizations" Relationship="EIWSModel.FK_UserOrganization_Organization" FromRole="Organization" ToRole="UserOrganization" />
           <NavigationProperty Name="SurveyMetaDatas" Relationship="EIWSModel.SurveyMetadataOrganization" FromRole="Organization" ToRole="SurveyMetaData" />
           <NavigationProperty Name="SurveyResponses" Relationship="EIWSModel.FK_SurveyResponse_Organization" FromRole="Organization" ToRole="SurveyResponse" />
-          <NavigationProperty Name="Datasources" Relationship="EIWSModel.FK_Datasource_Organization" FromRole="Organization" ToRole="Datasource" />
           <NavigationProperty Name="Admins" Relationship="EIWSModel.FK_Admin_Organization" FromRole="Organization" ToRole="Admin" />
           <NavigationProperty Name="SurveyMetaDatas1" Relationship="EIWSModel.FK_SurveyMetaData_Organization" FromRole="Organization" ToRole="SurveyMetaData" />
+          <NavigationProperty Name="Datasources" Relationship="EIWSModel.FK_Datasource_Organization" FromRole="Organization" ToRole="Datasource" />
         </EntityType>
         <EntityType Name="SurveyMetaData">
           <Key>
@@ -1641,32 +1643,8 @@ FROM [dbo].[SurveyMetaDataTransform] AS [SurveyMetaDataTransform]</DefiningQuery
           <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="DatasourceID" Type="Int32" Nullable="false" />
           <Property Name="CanvasContent" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Datasource" Relationship="EIWSModel.FK_Canvas__Datasource" FromRole="Canva" ToRole="Datasource" />
           <NavigationProperty Name="User" Relationship="EIWSModel.FK_Canvas_CreatorUser" FromRole="Canva" ToRole="User" />
-        </EntityType>
-        <EntityType Name="Datasource">
-          <Key>
-            <PropertyRef Name="DatasourceID" />
-          </Key>
-          <Property Name="DatasourceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
-          <Property Name="DatasourceName" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
-          <Property Name="OrganizationID" Type="Int32" Nullable="false" />
-          <Property Name="DatasourceServerName" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
-          <Property Name="DatabaseType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="InitialCatalog" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
-          <Property Name="PersistSecurityInfo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="EIWSDatasource" Type="Boolean" Nullable="false" />
-          <Property Name="EIWSSurveyId" Type="Guid" />
-          <Property Name="DatabaseUserID" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Password" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="DatabaseObject" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="SQLQuery" Type="Boolean" />
-          <Property Name="SQLText" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="active" Type="Boolean" Nullable="false" />
-          <Property Name="portnumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Canvas" Relationship="EIWSModel.FK_Canvas__Datasource" FromRole="Datasource" ToRole="Canva" />
-          <NavigationProperty Name="Organization" Relationship="EIWSModel.FK_Datasource_Organization" FromRole="Datasource" ToRole="Organization" />
-          <NavigationProperty Name="Users" Relationship="EIWSModel.DatasourceUser" FromRole="Datasource" ToRole="User" />
+          <NavigationProperty Name="Datasource" Relationship="EIWSModel.FK_Canvas__Datasource" FromRole="Canva" ToRole="Datasource" />
         </EntityType>
         <EntityType Name="SharedCanvas">
           <Key>
@@ -1677,18 +1655,6 @@ FROM [dbo].[SurveyMetaDataTransform] AS [SurveyMetaDataTransform]</DefiningQuery
           <Property Name="UserID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="User" Relationship="EIWSModel.FK_CanvasUser_User" FromRole="SharedCanvas" ToRole="User" />
         </EntityType>
-        <Association Name="FK_Canvas__Datasource">
-          <End Type="EIWSModel.Datasource" Role="Datasource" Multiplicity="1" />
-          <End Type="EIWSModel.Canva" Role="Canva" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Datasource">
-              <PropertyRef Name="DatasourceID" />
-            </Principal>
-            <Dependent Role="Canva">
-              <PropertyRef Name="DatasourceID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Canvas_CreatorUser">
           <End Type="EIWSModel.User" Role="User" Multiplicity="1" />
           <End Type="EIWSModel.Canva" Role="Canva" Multiplicity="*" />
@@ -1698,18 +1664,6 @@ FROM [dbo].[SurveyMetaDataTransform] AS [SurveyMetaDataTransform]</DefiningQuery
             </Principal>
             <Dependent Role="Canva">
               <PropertyRef Name="UserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Datasource_Organization">
-          <End Type="EIWSModel.Organization" Role="Organization" Multiplicity="1" />
-          <End Type="EIWSModel.Datasource" Role="Datasource" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Organization">
-              <PropertyRef Name="OrganizationId" />
-            </Principal>
-            <Dependent Role="Datasource">
-              <PropertyRef Name="OrganizationID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1724,10 +1678,6 @@ FROM [dbo].[SurveyMetaDataTransform] AS [SurveyMetaDataTransform]</DefiningQuery
               <PropertyRef Name="UserID" />
             </Dependent>
           </ReferentialConstraint>
-        </Association>
-        <Association Name="DatasourceUser">
-          <End Type="EIWSModel.Datasource" Role="Datasource" Multiplicity="*" />
-          <End Type="EIWSModel.User" Role="User" Multiplicity="*" />
         </Association>
         <EntityType Name="Address">
           <Key>
@@ -1756,16 +1706,6 @@ FROM [dbo].[SurveyMetaDataTransform] AS [SurveyMetaDataTransform]</DefiningQuery
           <Property Name="PhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Addresses" Relationship="EIWSModel.FK_Address_Admin" FromRole="Admin" ToRole="Address" />
           <NavigationProperty Name="Organization" Relationship="EIWSModel.FK_Admin_Organization" FromRole="Admin" ToRole="Organization" />
-        </EntityType>
-        <EntityType Name="SourceTable">
-          <Key>
-            <PropertyRef Name="SourceTableName" />
-            <PropertyRef Name="FormId" />
-          </Key>
-          <Property Name="SourceTableName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="FormId" Type="Guid" Nullable="false" />
-          <Property Name="SourceTableXml" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="AllowRepublish" Type="Boolean" />
         </EntityType>
         <EntityType Name="State">
           <Key>
@@ -1851,6 +1791,8 @@ FROM [dbo].[SurveyMetaDataTransform] AS [SurveyMetaDataTransform]</DefiningQuery
           <NavigationProperty Name="SurveyMetaData" Relationship="EIWSModel.FK_SurveyReportsInfo_SurveyMetaData" FromRole="SurveyReportsInfo" ToRole="SurveyMetaData" />
           <NavigationProperty Name="SurveyReports" Relationship="EIWSModel.FK_SurveyReports_SurveyReportsInfo" FromRole="SurveyReportsInfo" ToRole="SurveyReport" />
           <Property Name="ReportName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="ReportXml" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ReportDataSize" Type="Int32" />
         </EntityType>
         <Association Name="FK_SurveyReportsInfo_SurveyMetaData">
           <End Type="EIWSModel.SurveyMetaData" Role="SurveyMetaData" Multiplicity="1" />
@@ -1875,6 +1817,68 @@ FROM [dbo].[SurveyMetaDataTransform] AS [SurveyMetaDataTransform]</DefiningQuery
               <PropertyRef Name="ReportId" />
             </Dependent>
           </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Datasource">
+          <Key>
+            <PropertyRef Name="DatasourceID" />
+          </Key>
+          <Property Name="DatasourceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DatasourceName" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="OrganizationID" Type="Int32" Nullable="false" />
+          <Property Name="DatasourceServerName" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="DatabaseType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="InitialCatalog" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="PersistSecurityInfo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EIWS16Datasource" Type="Boolean" Nullable="false" />
+          <Property Name="EIWS16SurveyId" Type="Guid" />
+          <Property Name="DatabaseUserID" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="DatabaseObject" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="SQLQuery" Type="Boolean" />
+          <Property Name="SQLText" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="active" Type="Boolean" Nullable="false" />
+          <Property Name="portnumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Canvas" Relationship="EIWSModel.FK_Canvas__Datasource" FromRole="Datasource" ToRole="Canva" />
+          <NavigationProperty Name="Organization" Relationship="EIWSModel.FK_Datasource_Organization" FromRole="Datasource" ToRole="Organization" />
+          <NavigationProperty Name="Users" Relationship="EIWSModel.DatasourceUser" FromRole="Datasource" ToRole="User" />
+        </EntityType>
+        <EntityType Name="SourceTable">
+          <Key>
+            <PropertyRef Name="SourceTableName" />
+            <PropertyRef Name="FormId" />
+          </Key>
+          <Property Name="SourceTableName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="FormId" Type="Guid" Nullable="false" />
+          <Property Name="SourceTableXml" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AllowUpdate" Type="Boolean" />
+        </EntityType>
+        <Association Name="FK_Canvas__Datasource">
+          <End Type="EIWSModel.Datasource" Role="Datasource" Multiplicity="1" />
+          <End Type="EIWSModel.Canva" Role="Canva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Datasource">
+              <PropertyRef Name="DatasourceID" />
+            </Principal>
+            <Dependent Role="Canva">
+              <PropertyRef Name="DatasourceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Datasource_Organization">
+          <End Type="EIWSModel.Organization" Role="Organization" Multiplicity="1" />
+          <End Type="EIWSModel.Datasource" Role="Datasource" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="OrganizationId" />
+            </Principal>
+            <Dependent Role="Datasource">
+              <PropertyRef Name="OrganizationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="DatasourceUser">
+          <End Type="EIWSModel.Datasource" Role="Datasource" Multiplicity="*" />
+          <End Type="EIWSModel.User" Role="User" Multiplicity="*" />
         </Association>
       </Schema>
     </edmx:ConceptualModels>
@@ -2157,28 +2161,6 @@ FROM [dbo].[SurveyMetaDataTransform] AS [SurveyMetaDataTransform]</DefiningQuery
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Datasources">
-            <EntityTypeMapping TypeName="EIWSModel.Datasource">
-              <MappingFragment StoreEntitySet="Datasource">
-                <ScalarProperty Name="portnumber" ColumnName="portnumber" />
-                <ScalarProperty Name="active" ColumnName="active" />
-                <ScalarProperty Name="SQLText" ColumnName="SQLText" />
-                <ScalarProperty Name="SQLQuery" ColumnName="SQLQuery" />
-                <ScalarProperty Name="DatabaseObject" ColumnName="DatabaseObject" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="DatabaseUserID" ColumnName="DatabaseUserID" />
-                <ScalarProperty Name="EIWSSurveyId" ColumnName="EIWSSurveyId" />
-                <ScalarProperty Name="EIWSDatasource" ColumnName="EIWSDatasource" />
-                <ScalarProperty Name="PersistSecurityInfo" ColumnName="PersistSecurityInfo" />
-                <ScalarProperty Name="InitialCatalog" ColumnName="InitialCatalog" />
-                <ScalarProperty Name="DatabaseType" ColumnName="DatabaseType" />
-                <ScalarProperty Name="DatasourceServerName" ColumnName="DatasourceServerName" />
-                <ScalarProperty Name="OrganizationID" ColumnName="OrganizationID" />
-                <ScalarProperty Name="DatasourceName" ColumnName="DatasourceName" />
-                <ScalarProperty Name="DatasourceID" ColumnName="DatasourceID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="SharedCanvases">
             <EntityTypeMapping TypeName="EIWSModel.SharedCanvas">
               <MappingFragment StoreEntitySet="SharedCanvases">
@@ -2187,14 +2169,6 @@ FROM [dbo].[SurveyMetaDataTransform] AS [SurveyMetaDataTransform]</DefiningQuery
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="DatasourceUser" TypeName="EIWSModel.DatasourceUser" StoreEntitySet="DatasourceUser">
-            <EndProperty Name="User">
-              <ScalarProperty Name="UserID" ColumnName="UserID" />
-            </EndProperty>
-            <EndProperty Name="Datasource">
-              <ScalarProperty Name="DatasourceID" ColumnName="DatasourceID" />
-            </EndProperty>
-          </AssociationSetMapping>
           <EntitySetMapping Name="Addresses">
             <EntityTypeMapping TypeName="EIWSModel.Address">
               <MappingFragment StoreEntitySet="Address">
@@ -2219,16 +2193,6 @@ FROM [dbo].[SurveyMetaDataTransform] AS [SurveyMetaDataTransform]</DefiningQuery
                 <ScalarProperty Name="OrganizationId" ColumnName="OrganizationId" />
                 <ScalarProperty Name="AdminEmail" ColumnName="AdminEmail" />
                 <ScalarProperty Name="AdminId" ColumnName="AdminId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="SourceTables">
-            <EntityTypeMapping TypeName="EIWSModel.SourceTable">
-              <MappingFragment StoreEntitySet="SourceTables">
-                <ScalarProperty Name="AllowRepublish" ColumnName="AllowRepublish" />
-                <ScalarProperty Name="SourceTableXml" ColumnName="SourceTableXml" />
-                <ScalarProperty Name="FormId" ColumnName="FormId" />
-                <ScalarProperty Name="SourceTableName" ColumnName="SourceTableName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2257,6 +2221,8 @@ FROM [dbo].[SurveyMetaDataTransform] AS [SurveyMetaDataTransform]</DefiningQuery
           <EntitySetMapping Name="SurveyReportsInfoes">
             <EntityTypeMapping TypeName="EIWSModel.SurveyReportsInfo">
               <MappingFragment StoreEntitySet="SurveyReportsInfo">
+                <ScalarProperty Name="ReportDataSize" ColumnName="ReportDataSize" />
+                <ScalarProperty Name="ReportXml" ColumnName="ReportXml" />
                 <ScalarProperty Name="ReportName" ColumnName="ReportName" />
                 <ScalarProperty Name="RecordCount" ColumnName="RecordCount" />
                 <ScalarProperty Name="DataSource" ColumnName="DataSource" />
@@ -2268,6 +2234,46 @@ FROM [dbo].[SurveyMetaDataTransform] AS [SurveyMetaDataTransform]</DefiningQuery
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Datasources">
+            <EntityTypeMapping TypeName="EIWSModel.Datasource">
+              <MappingFragment StoreEntitySet="Datasource">
+                <ScalarProperty Name="portnumber" ColumnName="portnumber" />
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="SQLText" ColumnName="SQLText" />
+                <ScalarProperty Name="SQLQuery" ColumnName="SQLQuery" />
+                <ScalarProperty Name="DatabaseObject" ColumnName="DatabaseObject" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="DatabaseUserID" ColumnName="DatabaseUserID" />
+                <ScalarProperty Name="EIWS16SurveyId" ColumnName="EIWS16SurveyId" />
+                <ScalarProperty Name="EIWS16Datasource" ColumnName="EIWS16Datasource" />
+                <ScalarProperty Name="PersistSecurityInfo" ColumnName="PersistSecurityInfo" />
+                <ScalarProperty Name="InitialCatalog" ColumnName="InitialCatalog" />
+                <ScalarProperty Name="DatabaseType" ColumnName="DatabaseType" />
+                <ScalarProperty Name="DatasourceServerName" ColumnName="DatasourceServerName" />
+                <ScalarProperty Name="OrganizationID" ColumnName="OrganizationID" />
+                <ScalarProperty Name="DatasourceName" ColumnName="DatasourceName" />
+                <ScalarProperty Name="DatasourceID" ColumnName="DatasourceID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SourceTables">
+            <EntityTypeMapping TypeName="EIWSModel.SourceTable">
+              <MappingFragment StoreEntitySet="SourceTables">
+                <ScalarProperty Name="AllowUpdate" ColumnName="AllowUpdate" />
+                <ScalarProperty Name="SourceTableXml" ColumnName="SourceTableXml" />
+                <ScalarProperty Name="FormId" ColumnName="FormId" />
+                <ScalarProperty Name="SourceTableName" ColumnName="SourceTableName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="DatasourceUser" TypeName="EIWSModel.DatasourceUser" StoreEntitySet="DatasourceUser">
+            <EndProperty Name="User">
+              <ScalarProperty Name="UserID" ColumnName="UserID" />
+            </EndProperty>
+            <EndProperty Name="Datasource">
+              <ScalarProperty Name="DatasourceID" ColumnName="DatasourceID" />
+            </EndProperty>
+          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -2290,7 +2296,7 @@ FROM [dbo].[SurveyMetaDataTransform] AS [SurveyMetaDataTransform]</DefiningQuery
     </Options>
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
-      <Diagram Name="Epi.Web.Model" ZoomLevel="109">
+      <Diagram Name="Epi.Web.Model" ZoomLevel="89">
         <EntityTypeShape EntityType="EIWSModel.lk_Status" Width="1.5" PointX="9.625" PointY="5.625" Height="1.5956835937499996" IsExpanded="true" />
         <EntityTypeShape EntityType="EIWSModel.lk_SurveyType" Width="1.5" PointX="2.125" PointY="1.625" Height="1.5956835937499996" IsExpanded="true" />
         <EntityTypeShape EntityType="EIWSModel.Organization" Width="1.5" PointX="0.75" PointY="5.375" Height="2.3648893229166656" IsExpanded="true" />
@@ -2380,16 +2386,11 @@ FROM [dbo].[SurveyMetaDataTransform] AS [SurveyMetaDataTransform]</DefiningQuery
         <EntityTypeShape EntityType="EIWSModel.DataAccessRule" Width="1.5" PointX="18" PointY="7.5" />
         <AssociationConnector Association="EIWSModel.FK_SurveyMetaData_DataAccessRules" />
         <EntityTypeShape EntityType="EIWSModel.Canva" Width="1.5" PointX="8.25" PointY="17.25" />
-        <EntityTypeShape EntityType="EIWSModel.Datasource" Width="1.5" PointX="3" PointY="6" />
         <EntityTypeShape EntityType="EIWSModel.SharedCanvas" Width="1.5" PointX="5.25" PointY="16.875" />
-        <AssociationConnector Association="EIWSModel.FK_Canvas__Datasource" />
         <AssociationConnector Association="EIWSModel.FK_Canvas_CreatorUser" />
-        <AssociationConnector Association="EIWSModel.FK_Datasource_Organization" />
         <AssociationConnector Association="EIWSModel.FK_CanvasUser_User" />
-        <AssociationConnector Association="EIWSModel.DatasourceUser" />
         <EntityTypeShape EntityType="EIWSModel.Address" Width="1.5" PointX="5.25" PointY="21.125" />
         <EntityTypeShape EntityType="EIWSModel.Admin" Width="1.5" PointX="3" PointY="21" />
-        <EntityTypeShape EntityType="EIWSModel.SourceTable" Width="1.5" PointX="14.375" PointY="13.25" />
         <EntityTypeShape EntityType="EIWSModel.State" Width="1.5" PointX="14.375" PointY="16.25" />
         <AssociationConnector Association="EIWSModel.FK_Address_Admin" />
         <AssociationConnector Association="EIWSModel.FK_Admin_Organization" />
@@ -2399,6 +2400,11 @@ FROM [dbo].[SurveyMetaDataTransform] AS [SurveyMetaDataTransform]</DefiningQuery
         <EntityTypeShape EntityType="EIWSModel.SurveyReportsInfo" Width="1.5" PointX="8.25" PointY="21.625" />
         <AssociationConnector Association="EIWSModel.FK_SurveyReportsInfo_SurveyMetaData" />
         <AssociationConnector Association="EIWSModel.FK_SurveyReports_SurveyReportsInfo" />
+        <EntityTypeShape EntityType="EIWSModel.Datasource" Width="1.5" PointX="3" PointY="4.625" />
+        <EntityTypeShape EntityType="EIWSModel.SourceTable" Width="1.5" PointX="10.375" PointY="8.75" />
+        <AssociationConnector Association="EIWSModel.FK_Canvas__Datasource" />
+        <AssociationConnector Association="EIWSModel.FK_Datasource_Organization" />
+        <AssociationConnector Association="EIWSModel.DatasourceUser" />
       </Diagram>
     </Diagrams>
   </Designer>

@@ -261,6 +261,7 @@ namespace Epi.Web.Common.ObjectMapping
             ReportInfoBO.RecordCount = reportInfo.RecordCount;
             ReportInfoBO.DataSource = reportInfo.DataSource;
             ReportInfoBO.ReportName = reportInfo.ReportName;
+            ReportInfoBO.ReportXml = reportInfo.ReportXml;
             return ReportInfoBO;
         }
 
@@ -601,6 +602,7 @@ namespace Epi.Web.Common.ObjectMapping
             if (reportInfo.Gadgets != null) {
                 ReportDTO.Gadgets = ToGadgetsListDTO(reportInfo.Gadgets);
             }
+            ReportDTO.ReportXml = reportInfo.ReportXml;
             return ReportDTO;
         }
         public static List<GadgetDTO> ToGadgetsListDTO(List<GadgetBO> GadgetList)

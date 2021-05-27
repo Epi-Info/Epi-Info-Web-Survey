@@ -27,8 +27,8 @@ namespace Epi.Web.EF
         public string DatabaseType { get; set; }
         public string InitialCatalog { get; set; }
         public string PersistSecurityInfo { get; set; }
-        public bool EIWSDatasource { get; set; }
-        public Nullable<System.Guid> EIWSSurveyId { get; set; }
+        public bool EIWS16Datasource { get; set; }
+        public Nullable<System.Guid> EIWS16SurveyId { get; set; }
         public string DatabaseUserID { get; set; }
         public string Password { get; set; }
         public string DatabaseObject { get; set; }

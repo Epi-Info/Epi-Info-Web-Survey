@@ -37,19 +37,25 @@ namespace Epi.Web.EF
                     }
                     else
                     {
+                        if (ReportInfo.Gadgets[0].GadgetNumber ==0) {
 
-                        var Query = from SurveyReportInfo in Context.SurveyReportsInfoes
-                                    where SurveyReportInfo.ReportId == ReportId
-                                    select SurveyReportInfo;
+                            var Query = from SurveyReportInfo in Context.SurveyReportsInfoes
+                                        where SurveyReportInfo.ReportId == ReportId
+                                        select SurveyReportInfo;
 
-                        var DataRow = Query.Single();
-                        DataRow.DateEdited = DateTime.Now;
-                        DataRow.RecordCount = ReportInfo.RecordCount;
-                        DataRow.ReportVersion = ReportInfo.ReportVersion + 1;
-                        DataRow.DataSource = ReportInfo.DataSource;
-                        DataRow.ReportName = ReportInfo.ReportName;
-                        Context.SaveChanges();
-
+                            var DataRow = Query.Single();
+                            DataRow.DateEdited = DateTime.Now;
+                            DataRow.RecordCount = ReportInfo.RecordCount;
+                            DataRow.ReportVersion = ReportInfo.ReportVersion + 1;
+                            DataRow.DataSource = ReportInfo.DataSource;
+                            DataRow.ReportName = ReportInfo.ReportName;
+                            DataRow.ReportDataSize = GetDataSize(SurveyId);
+                            if (!String.IsNullOrEmpty(ReportInfo.ReportXml))
+                            {
+                                DataRow.ReportXml = ReportInfo.ReportXml;
+                            }
+                            Context.SaveChanges();
+                        }
                         // update Gadget
                         foreach (var gadget in ReportInfo.Gadgets)
                         {
@@ -248,6 +254,32 @@ namespace Epi.Web.EF
 
                 }
             }
+        }
+
+        private int GetDataSize(Guid SurveyID) {
+
+            int DataSize = 0;
+            try
+            {
+               
+                using (var Context = DataObjectFactory.CreateContext())
+                {
+
+
+
+                    DataSize =(int) Context.SurveyResponses.Where(x => x.SurveyId == SurveyID).Sum(x=>x.ResponseJsonSize);
+                    
+                   
+
+                    
+                }
+            }
+            catch (Exception ex)
+            {
+                return DataSize;
+            }
+            return DataSize;
+
         }
     }
     }

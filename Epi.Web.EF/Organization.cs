@@ -19,9 +19,9 @@ namespace Epi.Web.EF
             this.UserOrganizations = new HashSet<UserOrganization>();
             this.SurveyMetaDatas = new HashSet<SurveyMetaData>();
             this.SurveyResponses = new HashSet<SurveyResponse>();
-            this.Datasources = new HashSet<Datasource>();
             this.Admins = new HashSet<Admin>();
             this.SurveyMetaDatas1 = new HashSet<SurveyMetaData>();
+            this.Datasources = new HashSet<Datasource>();
         }
     
         public int OrganizationId { get; set; }
@@ -33,8 +33,8 @@ namespace Epi.Web.EF
         public virtual ICollection<UserOrganization> UserOrganizations { get; set; }
         public virtual ICollection<SurveyMetaData> SurveyMetaDatas { get; set; }
         public virtual ICollection<SurveyResponse> SurveyResponses { get; set; }
-        public virtual ICollection<Datasource> Datasources { get; set; }
         public virtual ICollection<Admin> Admins { get; set; }
         public virtual ICollection<SurveyMetaData> SurveyMetaDatas1 { get; set; }
+        public virtual ICollection<Datasource> Datasources { get; set; }
     }
 }

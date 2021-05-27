@@ -27,6 +27,8 @@ namespace Epi.Web.EF
         public string DataSource { get; set; }
         public int RecordCount { get; set; }
         public string ReportName { get; set; }
+        public string ReportXml { get; set; }
+        public Nullable<int> ReportDataSize { get; set; }
     
         public virtual SurveyMetaData SurveyMetaData { get; set; }
         public virtual ICollection<SurveyReport> SurveyReports { get; set; }

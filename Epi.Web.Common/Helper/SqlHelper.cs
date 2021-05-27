@@ -214,5 +214,45 @@ namespace Epi.Web.Common.Helper
             return retval;
         }
 
+        public static string GetReportXml(string ReportID) 
+        {
+
+            var _ADOConnectionString = Cryptography.Decrypt(ConfigurationManager.ConnectionStrings["EIWSADO"].ConnectionString);
+            SqlConnection conn = new SqlConnection(_ADOConnectionString);
+
+
+            string xml = "";
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(conn.ConnectionString))
+                {
+                    connection.Open();
+                    string commandString = "select ReportXml from SurveyReportsInfo where Reportid = '" + ReportID + "'";
+                   
+                    using (SqlCommand command = new SqlCommand(commandString, connection))
+                    {
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.HasRows)
+                            {
+                                while (reader.Read())
+                                   
+                                    xml = reader.GetFieldValue<string>(0);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (System.Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+
+ 
+
+            return xml;
+
+        }
     }
 }

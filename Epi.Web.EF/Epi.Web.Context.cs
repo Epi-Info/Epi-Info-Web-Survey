@@ -19,7 +19,7 @@ namespace Epi.Web.EF
     public partial class EIWSEntities : DbContext
     {
         public EIWSEntities()
-            : base("name=EIWSEntities")
+              : base("name=EIWSEntities")
         {
         }
         public EIWSEntities(string connectionstring) : base(connectionstring)
@@ -29,7 +29,7 @@ namespace Epi.Web.EF
         {
             throw new UnintentionalCodeFirstException();
         }
-    
+
         public DbSet<lk_Status> lk_Status { get; set; }
         public DbSet<lk_SurveyType> lk_SurveyType { get; set; }
         public DbSet<Organization> Organizations { get; set; }
@@ -48,14 +48,14 @@ namespace Epi.Web.EF
         public DbSet<familyset> familysets { get; set; }
         public DbSet<DataAccessRule> DataAccessRules { get; set; }
         public DbSet<Canva> Canvas { get; set; }
-        public DbSet<Datasource> Datasources { get; set; }
         public DbSet<SharedCanvas> SharedCanvases { get; set; }
         public DbSet<Address> Addresses { get; set; }
         public DbSet<Admin> Admins { get; set; }
-        public DbSet<SourceTable> SourceTables { get; set; }
         public DbSet<State> States { get; set; }
         public DbSet<SurveyReport> SurveyReports { get; set; }
         public DbSet<SurveyReportsInfo> SurveyReportsInfoes { get; set; }
+        public DbSet<Datasource> Datasources { get; set; }
+        public DbSet<SourceTable> SourceTables { get; set; }
     
         public virtual int usp_AddDatasource(string datasourceServerName, string databaseType, string initialCatalog, string persistSecurityInfo, string databaseUserID, Nullable<System.Guid> surveyID, string password)
         {

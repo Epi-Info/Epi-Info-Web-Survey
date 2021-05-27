@@ -1,0 +1,78 @@
+<?xml version="1.0" standalone="yes"?>
+<Config>
+  <Version EpiInfoVersion="7" ConfigVersion="117" />
+  <RecentView Name="C:\Users\vwm5\source\repos\Epi-Info\Epi-Info-Community-Edition\Build\Debug\Projects\Mumps\Mumps.prj:Survey" Location="C:\Users\vwm5\source\repos\Epi-Info\Epi-Info-Community-Edition\Build\Debug\Projects\Mumps\Mumps.prj:Survey" LastAccessed="2021-03-23T10:04:31.6399194-04:00" />
+  <RecentView Name="C:\Users\vwm5\source\repos\Epi-Info\Epi-Info-Community-Edition\Build\Debug\Projects\HIV\HIV.prj:Case" Location="C:\Users\vwm5\source\repos\Epi-Info\Epi-Info-Community-Edition\Build\Debug\Projects\HIV\HIV.prj:Case" LastAccessed="2021-03-23T10:04:31.6459196-04:00" />
+  <RecentView Name="C:\Users\vwm5\source\repos\Epi-Info\Epi-Info-Community-Edition\Build\Debug\Projects\EColi\EColi.prj:FoodHistory" Location="C:\Users\vwm5\source\repos\Epi-Info\Epi-Info-Community-Edition\Build\Debug\Projects\EColi\EColi.prj:FoodHistory" LastAccessed="2021-03-23T10:04:31.6459196-04:00" />
+  <Projects CurrentProjectLocation="">
+    <RecentProject Name="ewerepulish" Location="C:\Users\vwm5\source\repos\Epi-Info\Epi-Info-Community-Edition\Build\Debug\Projects\ewerepulish\ewerepulish.prj" LastAccessed="2021-03-23T10:15:05.7296845-04:00" />
+    <RecentProject Name="clouddatatest" Location="C:\Users\vwm5\source\repos\Epi-Info\Epi-Info-Community-Edition\Build\Debug\Projects\clouddatatest\clouddatatest.prj" LastAccessed="2021-04-07T09:14:34.6286119-04:00" />
+    <RecentProject Name="cloudTest" Location="C:\Users\vwm5\source\repos\Epi-Info\Epi-Info-Community-Edition\Build\Debug\Projects\cloudTest\cloudTest.prj" LastAccessed="2021-04-07T10:27:53.699966-04:00" />
+  </Projects>
+  <RecentProject Name="Sample" Location="C:\Users\vwm5\source\repos\Epi-Info\Epi-Info-Community-Edition\Build\Debug\Projects\Sample\Sample.prj" LastAccessed="2021-03-23T10:04:31.6469194-04:00" />
+  <Modules>
+    <Module Name="MENU" Type="Epi.Windows.Menu.MenuWindowsModule, Menu" />
+    <Module Name="MAKEVIEW" Type="Epi.Windows.MakeView.MakeViewWindowsModule, MakeView" />
+    <Module Name="ENTER" Type="Epi.Windows.Enter.EnterWindowsModule, Enter" />
+    <Module Name="ANALYSIS" Type="Epi.Windows.Analysis.AnalysisWindowsModule, Analysis" />
+    <Module Name="EPIMAP" Type="Epi.Windows.EpiMap.EpiMapWindowsModule, EpiMap" />
+    <Module Name="EPIREPORT" Type="Epi.Windows.EpiReport.EpiReportWindowsModule, EpiReport" />
+    <Module Name="Localization" Type="Epi.Windows.Localization.LocalizationWindowsModule, TSetup" />
+  </Modules>
+  <Directories>
+    <Configuration>C:\Users\vwm5\source\repos\Epi-Info\Epi-Info-Community-Edition\Build\Debug\Configuration\</Configuration>
+    <Output>C:\Users\vwm5\source\repos\Epi-Info\Epi-Info-Community-Edition\Build\Debug\Output\</Output>
+    <Project>C:\Users\vwm5\source\repos\Epi-Info\Epi-Info-Community-Edition\Build\Debug\Projects\</Project>
+    <Templates>C:\Users\vwm5\source\repos\Epi-Info\Epi-Info-Community-Edition\Build\Debug\Templates\</Templates>
+    <Working>C:\Temp\</Working>
+    <Samples>C:\Users\vwm5\source\repos\Epi-Info\Epi-Info-Community-Edition\Build\Debug\Resources\Samples\</Samples>
+    <LogDir>C:\Users\vwm5\source\repos\Epi-Info\Epi-Info-Community-Edition\Build\Debug\Logs\</LogDir>
+    <Archive />
+  </Directories>
+  <DataDrivers>
+    <DataDriver DisplayName="Epi Info Web &amp; Cloud Services" Type="Epi.Data.EpiWeb.EpiWebFactory, Epi.Data.EpiWeb">
+      <MetadataProvider>false</MetadataProvider>
+      <DataProvider>true</DataProvider>
+    </DataDriver>
+    <DataDriver DisplayName="REDCap" Type="Epi.Data.REDCap.REDCapFactory, Epi.Data.REDCap">
+      <MetadataProvider>false</MetadataProvider>
+      <DataProvider>true</DataProvider>
+    </DataDriver>
+    <DataDriver DisplayName="Microsoft Access 2002-2003 (.mdb)" Type="Epi.Data.Office.AccessDBFactory, Epi.Data.Office">
+      <MetadataProvider>true</MetadataProvider>
+      <DataProvider>true</DataProvider>
+    </DataDriver>
+    <DataDriver DisplayName="Microsoft Access 2007 (.accdb)" Type="Epi.Data.Office.Access2007DBFactory, Epi.Data.Office">
+      <MetadataProvider>false</MetadataProvider>
+      <DataProvider>true</DataProvider>
+    </DataDriver>
+    <DataDriver DisplayName="Microsoft Excel 97-2003 Workbook (.xls)" Type="Epi.Data.Office.ExcelWBFactory, Epi.Data.Office">
+      <MetadataProvider>false</MetadataProvider>
+      <DataProvider>true</DataProvider>
+    </DataDriver>
+    <DataDriver DisplayName="Microsoft Excel 2007 Workbook (.xlsx)" Type="Epi.Data.Office.Excel2007WBFactory, Epi.Data.Office">
+      <MetadataProvider>false</MetadataProvider>
+      <DataProvider>true</DataProvider>
+    </DataDriver>
+    <DataDriver DisplayName="Microsoft SQL Server Database" Type="Epi.Data.SqlServer.SqlDBFactory, Epi.Data.SqlServer">
+      <MetadataProvider>true</MetadataProvider>
+      <DataProvider>true</DataProvider>
+    </DataDriver>
+    <DataDriver DisplayName="CSV File" Type="Epi.Data.Office.CsvFileFactory, Epi.Data.Office">
+      <MetadataProvider>false</MetadataProvider>
+      <DataProvider>true</DataProvider>
+    </DataDriver>
+    <DataDriver DisplayName="MySQL Database" Type="Epi.Data.MySQL.MySQLDBFactory, Epi.Data.MySQL">
+      <MetadataProvider>false</MetadataProvider>
+      <DataProvider>true</DataProvider>
+    </DataDriver>
+    <DataDriver DisplayName="MongoDB (Beta)" Type="Epi.Data.MongoDB.MongoDBDBFactory, Epi.Data.MongoDB">
+      <MetadataProvider>false</MetadataProvider>
+      <DataProvider>true</DataProvider>
+    </DataDriver>
+    <DataDriver DisplayName="PostgreSQL Database" Type="Epi.Data.PostgreSQL.PostgreSQLDBFactory, Epi.Data.PostgreSQL">
+      <MetadataProvider>false</MetadataProvider>
+      <DataProvider>true</DataProvider>
+    </DataDriver>
+  </DataDrivers>
+</Config>

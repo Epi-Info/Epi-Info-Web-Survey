@@ -1,22 +1,6 @@
 ﻿using System;
 using System.Web.Mvc;
 using Epi.Web.MVC.Models;
-using System.Xml;
-using System.Xml.Linq;
-using System.Xml.XPath;
-using System.Linq;
-using Epi.Core.EnterInterpreter;
-using System.Collections.Generic;
-using System.Web.Security;
-using System.Configuration;
-using System.Web;
-using System.Web.Caching;
-using System.Web.UI;
-using Epi.Web.EF;
-using System.ServiceModel.Description;
-using Epi.Web.Common.Security;
-using System.Reflection;
-using System.Diagnostics;
 using Epi.Web.Common.Message;
 using System.Text;
 
@@ -37,6 +21,11 @@ namespace Epi.Web.MVC.Controllers
 
             try
             {
+
+
+                //dba3faf6-4417-4f6d-920a-e3d6b680932a
+                Epi.Web.Common.Helper.SqlHelper.GetReportXml(reportid);
+
 
                 PublishReportRequest PublishReportRequest = new PublishReportRequest();
                 PublishReportRequest.ReportInfo.ReportId = reportid;
