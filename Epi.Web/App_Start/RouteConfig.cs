@@ -142,7 +142,12 @@ namespace Epi.Web.MVC
              "SurveyManager/GetJsonResponse", // URL with parameters
              new { controller = "SurveyManager", action = "GetJsonResponse" }
             ); // Parameter defaults
-            
+            routes.MapRoute
+            (
+            null, // Route name
+            "SurveyManager/GetResponseJsonSize", // URL with parameters
+            new { controller = "SurveyManager", action = "GetResponseJsonSize" }
+           ); // P
             routes.MapRoute
              (
              null, // Route name

@@ -1692,13 +1692,13 @@ namespace Epi.Web.MVC.Controllers
 
         }
         [HttpPost]
-        public JsonResult GetJsonResponse(string surveyid,string PublisherKey,bool IsDraft)
+        public JsonResult GetJsonResponse(string surveyid,string PublisherKey,bool IsDraft,int PageSize=100 ,int PageNumber = 1)
         {
             var IsAuthenticated = System.Web.HttpContext.Current.User.Identity.IsAuthenticated;
             var _PublisherKey = GetUserPublishKey(surveyid);
             if (IsAuthenticated)
             {
-                var jsonContent = SqlHelper.GetSurveyJsonData(surveyid, IsDraft);
+                var jsonContent = SqlHelper.GetSurveyJsonData(surveyid, IsDraft, PageSize, PageNumber);
                 jsonContent = jsonContent.Replace("'", "");
                 //var ReturnJson = Json(jsonContent, "application/json",JsonRequestBehavior.AllowGet);
 
@@ -1724,7 +1724,7 @@ namespace Epi.Web.MVC.Controllers
                 if (_PublisherKey.ToLower() == PublisherKey.ToLower())
                 {
 
-                    var jsonContent = SqlHelper.GetSurveyJsonData(surveyid, IsDraft);
+                    var jsonContent = SqlHelper.GetSurveyJsonData(surveyid, IsDraft, PageSize, PageNumber);
                     return Json(jsonContent);
                 }
                 else
@@ -1734,7 +1734,35 @@ namespace Epi.Web.MVC.Controllers
                 }
             }
         }
-         
+        [HttpPost]
+        public JsonResult GetResponseJsonSize(string surveyid, bool IsDraft) {
+
+            //NumberOfRows = resultRows.Count;
+            //ResponsesTotalsize = (int)resultRows.Select(x => x.TemplateXMLSize).Sum();
+
+            //AvgResponseSize = (int)resultRows.Select(x => x.TemplateXMLSize).Average();
+            //// NumberOfResponsPerPage = (int)Math.Ceiling((ResponseMaxSize * (BandwidthUsageFactor / 100)) / AvgResponseSize);
+
+            //NumberOfResponsPerPage = (int)Math.Ceiling((int)(ResponseMaxSize * (BandwidthUsageFactor * 0.01)) / AvgResponseSize);
+
+            //result.PageSize = (int)Math.Ceiling(NumberOfResponsPerPage);
+            //result.NumberOfPages = (int)Math.Ceiling(NumberOfRows / NumberOfResponsPerPage);
+
+            int ResponseJsonSize = SqlHelper.GetResponseJsonSize(surveyid, IsDraft);
+            double AvgResponseSize = SqlHelper.GetAvgResponseSize(surveyid, IsDraft);
+            double NumberOfRows = SqlHelper.GetResponseCount(surveyid, IsDraft);
+            double BandwidthUsageFactor = 50;
+            double ResponseMaxSize = 1000000;
+            
+            int NumberOfResponsPerPage = (int)Math.Ceiling((int)(ResponseMaxSize * (BandwidthUsageFactor * 0.01)) / AvgResponseSize);
+            int NumberOfPages = (int)Math.Ceiling(NumberOfRows / NumberOfResponsPerPage);
+
+            Dictionary<string,int> values = new Dictionary<string, int>();
+            values.Add("NumberOfResponsPerPage", NumberOfResponsPerPage);
+            values.Add("NumberOfPages", NumberOfPages);
+
+            return Json(JsonConvert.SerializeObject(values));
+        }
         [HttpPost]
         public JsonResult GetJsonHeader(string surveyid, string PublisherKey, bool IsDraft)
         {
@@ -1745,10 +1773,10 @@ namespace Epi.Web.MVC.Controllers
             Request.SurveyId = surveyid;
            
             Dictionary<string, string> NewKeys = new Dictionary<string, string>();
-            NewKeys.Add("MetaData_DateUpdated", "MetaData_DateUpdated");
+           
             NewKeys.Add("MetaData_ResponseId", "MetaData_ResponseId");
             NewKeys.Add("MetaData_ResponseStatus", "MetaData_ResponseStatus");
-            
+            NewKeys.Add("MetaData_DateUpdated", "MetaData_DateUpdated");
 
 
             if (IsAuthenticated)

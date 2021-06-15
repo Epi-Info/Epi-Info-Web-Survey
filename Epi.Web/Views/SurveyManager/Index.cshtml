@@ -8,11 +8,83 @@
 <link href="@Url.Content("~/Content/css/c3.min.css")" rel="Stylesheet" type="text/css" />
 <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/json2csv"></script>
+
+@*<script src="@Url.Content("~/Scripts/jloading-overlay.js")" type="text/javascript"></script>
+<link href="@Url.Content("~/Content/css/jloading-overlay.css")" rel="Stylesheet" type="text/css" />*@
 @*<script src="@Url.Content("~/Scripts/jquery-1.9.1.js")" type="text/javascript"></script>*@
-
+ 
 <style>
+    .spinner {
+        height: 60px;
+        width: 60px;
+        margin: auto;
+        display: flex;
+        position: absolute;
+        -webkit-animation: rotation .6s infinite linear;
+        -moz-animation: rotation .6s infinite linear;
+        -o-animation: rotation .6s infinite linear;
+        animation: rotation .6s infinite linear;
+        border-left: 6px solid rgba(0, 174, 239, .15);
+        border-right: 6px solid rgba(0, 174, 239, .15);
+        border-bottom: 6px solid rgba(0, 174, 239, .15);
+        border-top: 6px solid rgba(0, 174, 239, .8);
+        border-radius: 100%;
+    }
 
-   table {
+    @@-webkit-keyframes rotation {
+        from {
+            -webkit-transform: rotate(0deg);
+        }
+
+        to {
+            -webkit-transform: rotate(359deg);
+        }
+    }
+
+    @@-moz-keyframes rotation {
+        from {
+            -moz-transform: rotate(0deg);
+        }
+
+        to {
+            -moz-transform: rotate(359deg);
+        }
+    }
+
+    @@-o-keyframes rotation {
+        from {
+            -o-transform: rotate(0deg);
+        }
+
+        to {
+            -o-transform: rotate(359deg);
+        }
+    }
+
+    @@keyframes rotation {
+        from {
+            transform: rotate(0deg);
+        }
+
+        to {
+            transform: rotate(359deg);
+        }
+    }
+
+
+    #overlay {
+        position: absolute;
+        display: none;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 2;
+        cursor: pointer;
+    }
+
+    table {
         font-family: arial, sans-serif;
         border-collapse: collapse;
         width: 100%;
@@ -23,15 +95,17 @@
         text-align: left;
         padding: 8px;
     }
- 
+
     tr:nth-child(even) {
         background-color: #daedf4;
     }
-   .ViewTable tr:hover {
-          background-color: #ffff99;
+
+    .ViewTable tr:hover {
+        background-color: #ffff99;
     }
-    .ViewTable  tr:focus {
-          background-color: #ffff99;
+
+    .ViewTable tr:focus {
+        background-color: #ffff99;
     }
 
     .TermsSpan {
@@ -172,20 +246,19 @@
     }*/
 
     .closebtn {
-  margin-left: 15px;
-  color: white;
-  font-weight: bold;
-  float: right;
-  font-size: 22px;
-  line-height: 20px;
-  cursor: pointer;
-  transition: 0.3s;
-}
+        margin-left: 15px;
+        color: white;
+        font-weight: bold;
+        float: right;
+        font-size: 22px;
+        line-height: 20px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
 
-.closebtn:hover {
-  color: black;
-}
-
+        .closebtn:hover {
+            color: black;
+        }
 </style>
 <script type="text/javascript">
 
@@ -201,7 +274,7 @@
         //DownLoadTemplate
         $('#LoadResponsesSurveyKey').change(function ()
         {
-          
+
             if ($("#LoadResponseUserPublishKey").val() != "" && $("#LoadResponsesSurveyKey").val()!= "") {
 
                 $("#DownLoadTemplate").removeAttr('disabled');
@@ -213,7 +286,7 @@
         });
         $("#LoadResponseUserPublishKey").change(function ()
         {
-             
+
             if ($("#LoadResponsesSurveyKey").val()!= "" && $("#LoadResponseUserPublishKey").val() != "")
             {
                   $("#DownLoadTemplate").removeAttr('disabled');
@@ -224,7 +297,7 @@
             }
         });
 
-         $('#ReportList').hide();// to hide report list div 
+         $('#ReportList').hide();// to hide report list div
          $("div.Report-alert").hide(); // to hide report alert
 
           $(".SearchInput").on("keyup", function() {
@@ -398,7 +471,8 @@
         }
 
     }
-            function clear() {
+    function clear() {
+       
                 document.getElementById('valerr').innerHTML = '';
             }
 
@@ -450,9 +524,9 @@
             }
         }
     function copyToClipboard1(link) {
-        
-       
-        
+
+
+
             var el = document.createElement('textarea');
                // Set value (string to be copied)
                el.value = link;
@@ -710,7 +784,7 @@
                     var cell2 = row.insertCell(1);
                     var cell3 = row.insertCell(2);
                     var cell4 = row.insertCell(3);
-                  
+
 
                     cell1.innerHTML = "<input id=\"" + data[i].ReportId + "\"  class=\"btn btn-primary btn-sm\" type=\"button\" onclick=\" OpenReport('" + data[i].ReportURL.toString() + "')\"  value=\"Open\" /> <input class=\"btn btn-primary btn-sm\" type=\"button\" onclick=\"copyToClipboard1('" + data[i].ReportURL.toString() + "')\" id=\"Copy\" value=\"Copy\" />";
                    // cell2.innerHTML = "<input class=\"btn btn-primary btn-sm\" type=\"button\" onclick=\"copyToClipboard1('" + data[i].ReportURL.toString() + "')\" id=\"Copy\" value=\"Copy\" />"
@@ -732,7 +806,7 @@
     }
     function OpenReport(URL) {
 
-         window.open( URL, "_blank"); 
+         window.open( URL, "_blank");
 
     }
      function GetDataSets(SurveyId)
@@ -769,7 +843,7 @@
 
                      var Counter = i + 1;
                      var row = table.insertRow(i + 1);
-                     
+
                      var cell1 = row.insertCell(0);
                      cell1.width = "33%"
                      var cell2 = row.insertCell(1);
@@ -781,7 +855,7 @@
 
                  }
 
-              
+
 
              }
          }
@@ -814,7 +888,7 @@
 
                 var json = window.SurveyDataSet.SourceTables[i].TableXml;
                 var AllowUpdate = window.SurveyDataSet.SourceTables[i].AllowUpdate;
-               
+
                 if (AllowUpdate) {
                     $('input[id=AllowUpdate]').attr('checked', true);
                 } else {
@@ -1110,13 +1184,18 @@
             }
             function errorFunc(data) {
                 //alert('failed');
+                off();
         }
 
     }
-     function GetJsonResponse(SurveyKey,UserPublishKey,FileName1,HeadderOnly)
+     async function GetJsonResponse(SurveyKey,UserPublishKey,FileName1,HeadderOnly)
      {
-        
-         GetJsonHeader(SurveyKey, UserPublishKey)
+        // await setTimeout( function () { on();}, 1);
+      
+         var SurveyId = $('#' + SurveyKey).val();
+         var PublisherKey = $('#' + UserPublishKey).val();
+
+         await GetJsonHeader(SurveyKey, UserPublishKey)
 
          if (HeadderOnly)
          {
@@ -1132,17 +1211,112 @@
                  return;
              }
          }
-         var SurveyId = $('#'+SurveyKey).val();
-         var PublisherKey = $('#' + UserPublishKey).val();
-         
 
 
 
         if ($('#SurveyMode').val() == 0) {
             IsDraft = true;
-            } else { IsDraft = false}
-            var ActionUrl = '@Url.Action("GetJsonResponse", "SurveyManager")' + '?surveyid=' + SurveyId + '&PublisherKey=' + PublisherKey +'&IsDraft=' + IsDraft;
+         } else { IsDraft = false }
 
+
+
+         var ResponseInfoArr= JSON.parse(GetResponsJsonSize(SurveyId, IsDraft));
+         var NumberOfResponsPerPage = ResponseInfoArr.NumberOfResponsPerPage;
+         var NumberOfPages = ResponseInfoArr.NumberOfPages;
+         var finalObj=[];
+        // alert("NumberOfPages" +NumberOfPages);
+        
+
+         for (var PageNumber = 1; PageNumber < NumberOfPages + 1; PageNumber++ )
+         {
+             var obj = await GetJsonData(SurveyId, PublisherKey, IsDraft, NumberOfResponsPerPage, PageNumber)
+
+
+             if (PageNumber == 1)
+             {
+                 finalObj = obj;
+
+             }
+             else
+             {
+                 finalObj  =   await finalObj.concat(obj)
+
+             }
+
+
+         }
+         
+
+                  $('#UserPublishKey').removeClass('input-validation-error');
+                  $('#DownloadError').text('');
+
+                  var FileName = $('#' + FileName1).val();
+                  var Headder = $.parseJSON($('#JsonHeadder').val());
+
+                  await  exportCSVFile(Headder, finalObj, FileName);
+      
+         await setTimeout(
+             function () {
+
+                 off();
+             }, 100);
+
+
+
+    }
+    function GetJsonData(SurveyKey, UserPublishKey, IsDraft, NumberOfResponsPerPage, PageNumber)
+    {
+        
+     
+        
+    
+       // alert(SurveyKey);
+        var ActionUrl = '@Url.Action("GetJsonResponse", "SurveyManager")' + '?surveyid=' + SurveyKey + '&PublisherKey=' + UserPublishKey + '&IsDraft=' + IsDraft + '&PageSize=' + NumberOfResponsPerPage + '&PageNumber=' + PageNumber;
+        var obj;
+       
+             $.ajax({
+                 url: ActionUrl,
+                 type: 'POST',
+                 contentType: 'application/json; charset=utf-8',
+                 //  data: $('#myform').serialize(),
+                 //data:JSON.stringify(model),
+                 dataType: "json",
+                 //cache: false,
+
+                 async: false,
+                 success: successFunc,
+                 error: errorFunc
+             });
+             function successFunc(data) {
+
+                 if (JSON.stringify(data) != 'false') {
+
+                     obj = $.parseJSON(data);
+
+                 }
+                 else {
+
+                     //alert('Please validate the Security Token and try again');
+                     //input-validation-error valerr
+                     $('#UserPublishKey').addClass('input-validation-error');
+                     $('#DownloadError').text('Please validate the Security Token and try again');
+                     off();
+                 }
+             }
+             function errorFunc(data) {
+                 //alert('failed');
+             }
+
+        
+      
+        return obj;
+      
+    }
+    function GetResponsJsonSize(SurveyId, IsDraft)
+    {
+    
+        var ActionUrl = '@Url.Action("GetResponseJsonSize", "SurveyManager")' + '?surveyid=' + SurveyId + '&IsDraft=' + IsDraft;
+        var info = "";
             $.ajax({
                 url: ActionUrl,
                 type: 'POST',
@@ -1153,45 +1327,24 @@
                 //cache: false,
                 async: false,
                 success: successFunc,
-                error: errorFunc
+                error: errorFunc1
             });
             function successFunc(data)
             {
+                info = data;
 
-                if (JSON.stringify(data) != 'false') {
-
-                     $('#UserPublishKey').removeClass('input-validation-error');
-                    $('#DownloadError').text('');
-
-                    var FileName = $('#'+FileName1).val();
-                    var Headder = $.parseJSON($('#JsonHeadder').val());
-                   //alert(Headder);
-                     
-                        var obj = $.parseJSON(data);
-                          exportCSVFile(Headder, obj, FileName);
-                     
-                  
-                }
-                else
-
-                {
-
-                    //alert('Please validate the Security Token and try again');
-                    //input-validation-error valerr
-                    $('#UserPublishKey').addClass('input-validation-error');
-                    $('#DownloadError').text('Please validate the Security Token and try again');
-                }
             }
-            function errorFunc(data) {
-                alert('failed');
+            function errorFunc1(data) {
+               alert('failed');
             }
+
+        return info;
     }
-     
 
     function convertToCSV(objArray)
     {
         var array = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
-        
+
     var str = '';
 
     for (var i = 0; i < array.length; i++) {
@@ -1217,7 +1370,7 @@
     if (headers) {
         items.unshift(headers);
     }
-         
+
     // Convert Object to JSON
     var jsonObject = JSON.stringify(items);
 
@@ -1248,7 +1401,8 @@
 
         alert("No records found for the download criteria entered.")
 
-    }
+        }
+        
 }
     function exportCSVFileHeadder(headers, items, fileTitle) {
 
@@ -1262,7 +1416,7 @@
       var ws_data = convertToCSVHeadder(jsonObject);
 
         var wb = XLSX.utils.book_new();
-                    
+
         wb.Props = {
                 Title: "SheetJS Tutorial",
                 Subject: "Test",
@@ -1270,19 +1424,19 @@
                 CreatedDate: new Date(2017,12,19)
         };
         wb.SheetNames.push("Responses Sheet");
-       
+
         var ws = XLSX.utils.aoa_to_sheet([ws_data]);
         wb.Sheets["Responses Sheet"] = ws;
         var wbout = XLSX.write(wb, {bookType:'xlsx',  type: 'binary'});
 
-        
-        
- 
-        var exportedFilenmae = fileTitle + '.xlsx'; 
 
-      
+
+
+        var exportedFilenmae = fileTitle + '.xlsx';
+
+
       var blob = new Blob([s2ab(wbout)], { type: "application/octet-stream" });
-       
+
         if (navigator.msSaveBlob) { // IE 10+
             navigator.msSaveBlob(blob, exportedFilenmae);
         } else {
@@ -1298,39 +1452,39 @@
                 document.body.removeChild(link);
             }
         }
-    
+
     }
     function s2ab(s)
-    { 
+    {
         var buf = new ArrayBuffer(s.length); //convert s to arrayBuffer
         var view = new Uint8Array(buf);  //create uint8array as viewer
         for (var i=0; i<s.length; i++) view[i] = s.charCodeAt(i) & 0xFF; //convert to octet
-        return buf;    
+        return buf;
     }
     function convertToCSVHeadder(objArray)
     {
-        
-       
+
+
         var array = objArray.toString().replace('{','').replace('}','').split(',');
-      
+
         var output = [];
-    
 
-       
-            for (var i = 0; i < array.length; i++) 
+
+
+            for (var i = 0; i < array.length; i++)
             {
-            
 
 
-            
+
+
                     if (typeof array[i] !== 'undefined'){
 
-                         
+
                         output.push(array[i].split(':')[0].replace(/"/g, ""));
                     }
-            
+
             }
-         
+
        return output;
   }
 
@@ -1348,6 +1502,16 @@
 
     }
 
+    function on() {
+
+        document.getElementById("overlay").style.display = "flex";
+        return true;
+    }
+
+    function off() {
+        document.getElementById("overlay").style.display = "none";
+        return false;
+    }
 
 </script>
 
@@ -1688,7 +1852,11 @@
 
 
                         <div id="DownLoadDiv" class="contentContainer" style="margin-bottom: 100px; align-self:center;display:none; visibility:collapse;margin:1em">
-
+                            <div id="overlay" style="height: 100% ; width:100% ;">
+                                <div class="w-100 d-flex justify-content-center align-items-center">
+                                    <div class="spinner"> </div>
+                                </div>
+                            </div>
                             <h1>Download Responses</h1>
                             <p id="RequiredLable" class="requiredField">* indicates required fields</p>
 
@@ -1696,15 +1864,15 @@
                             <div class="accountdiv col-md-10">
 
                                 @*<p style="text-align:center;margin-top: 0;margin-bottom: 0px; font-size: 9pt; font-weight:bold;">
-                                        Epi Info Web Survey Download Tool (.CSV)
-                                    </p>
-                                    <br><br>
-                                    <p style="text-align:right;margin-top: 0;margin-bottom: -29px; font-size: 9pt; font-weight:bold;">* indicates required fields</p>*@
+                Epi Info Web Survey Download Tool (.CSV)
+            </p>
+            <br><br>
+            <p style="text-align:right;margin-top: 0;margin-bottom: -29px; font-size: 9pt; font-weight:bold;">* indicates required fields</p>*@
 
                                 <div>
                                     @*<label class="accountlabel" id="OrgKeylabel">*Organization Key:</label><br>
-                                        @Html.TextBoxFor(m => m.OrganizationKey, new { @class = "Account" }) <br>
-                                        @Html.ValidationMessageFor(m => m.OrganizationKey, null, new { @class = "required" })<br>*@
+                @Html.TextBoxFor(m => m.OrganizationKey, new { @class = "Account" }) <br>
+                @Html.ValidationMessageFor(m => m.OrganizationKey, null, new { @class = "required" })<br>*@
 
                                     <label class="accountlabel" id="SurveyIdlabel"><span style="color:#900000;">*</span> Survey Id:</label><br>
 
@@ -1737,15 +1905,15 @@
 
                                 </div>
                                 @*<div id="spinner">
-                                        Working on your request...
-                                    </div>*@
+                Working on your request...
+            </div>*@
 
                                 <br />
 
                                 @* <input class="submits create " type="submit" onclick=" clear();  " name="DownLoadResponse" id="DownLoadResponse" value="DownLoad" style="margin-right:90px;" />*@
 
 
-                                <input class="btn btn-primary btn-sm" type="button" onclick="  GetJsonResponse('SurveyKey','UserPublishKey','FileName',false) ;clear();   " name="DownLoadResponse" id="DownLoadResponse" value="DownLoad" style="margin-right:90px;" />
+                                <input class="btn btn-primary btn-sm" type="button" onclick=" on(); setTimeout( function () { GetJsonResponse('SurveyKey','UserPublishKey','FileName',false) ;}, 1000); clear();   " name="DownLoadResponse" id="DownLoadResponse" value="DownLoad" style="margin-right:90px;" />
 
                             </div>
                         </div>
@@ -2136,7 +2304,7 @@
                             <div class="accountdiv col-md-10">
 
                                 <div>
-                                    
+
                                     <label class="accountlabel" id="SurveyIdlabel"><span style="color:#900000;">*</span> Survey Id:</label><br>
 
 
@@ -2158,7 +2326,7 @@
                                     <input class="btn btn-primary btn-sm" type="button" disabled="disabled" onclick="GetJsonResponse('LoadResponsesSurveyKey', 'LoadResponseUserPublishKey', 'FileName', true); " name="DownLoadTemplate" id="DownLoadTemplate" value="Get Template (.xlsx)" style="margin-right:90px;" />
                                     <br />
 
-                                   
+
 
                                     <br />
                                     <label class="accountlabel" id="FilePath"><span style="color:#900000;">*</span>File (.xlsx):</label> <br>

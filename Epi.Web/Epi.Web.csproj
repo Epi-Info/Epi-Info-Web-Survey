@@ -343,6 +343,7 @@
     <Content Include="Content\css\images\ui-icons_454545_256x240.png" />
     <Content Include="Content\css\images\ui-icons_888888_256x240.png" />
     <Content Include="Content\css\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\css\jloading-overlay.css" />
     <Content Include="Content\css\jqm-datebox.css" />
     <Content Include="Content\css\jquery-ui-1.8.16.custom.css" />
     <Content Include="Content\css\jquery.mobile.datebox-1.0.1.css" />
@@ -507,6 +508,7 @@
     <Content Include="Scripts\CheckCodeEngineV1.js" />
     <Content Include="Scripts\d3-5.8.2.min.js" />
     <Content Include="Scripts\idle-timer.js" />
+    <Content Include="Scripts\jloading-overlay.js" />
     <Content Include="Scripts\jqm-datebox.core.js" />
     <Content Include="Scripts\jqm-datebox.mode.flipbox.js" />
     <Content Include="Scripts\jqm-docs.js" />
@@ -530,6 +532,12 @@
     <Content Include="Properties\DataSources\Epi.Web.Common.Message.DashboardResponse.datasource" />
     <Content Include="Properties\DataSources\Epi.Web.Common.Message.FormsHierarchyResponse.datasource" />
     <Content Include="Properties\DataSources\Epi.Web.Common.Message.SourceTablesResponse.datasource" />
+    <Content Include="Properties\DataSources\Epi.Web.Common.Message.PublishReportResponse1.datasource" />
+    <Content Include="Content\Text\EWETest123.cvs7" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
@@ -611,12 +619,6 @@
     <Content Include="Views\Survey\ListResponsesOld.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
-    <Content Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Views\Web.config">
       <SubType>Designer</SubType>
@@ -710,6 +712,10 @@
       <Project>{b8af69bd-3ce1-4aa5-875d-3fb87c7fce44}</Project>
       <Name>Epi.Web.Interfaces</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Epi.Web.Interfaces\Epi.Web.Interfaces.csproj">
+      <Project>{b8af69bd-3ce1-4aa5-875d-3fb87c7fce44}</Project>
+      <Name>Epi.Web.Interfaces</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SurveyManagerInterface\Epi.Web.WCF.SurveyService.csproj">
       <Project>{31f91938-2997-4650-8d36-71c845f1071d}</Project>
       <Name>Epi.Web.WCF.SurveyService</Name>
@@ -736,7 +742,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>0</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:59584/</IISUrl>
+          <IISUrl>http://localhost:8080/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>http://tephinetepiinfo.cloudapp.net/EIWS_RelatedForms/</CustomServerUrl>

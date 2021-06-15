@@ -83,66 +83,47 @@
 </style>
 <script>
     $(document).ready(function () {
-        //$(".spinner").show();
-
-        //$.ajax({
-        //    type: "Get",
-        //    url: "https://localhost:44387/api/Report/dba3faf6-4417-4f6d-920a-e3d6b680932a",
-        //    dataType: "jsonp",
-        //    cors: true,
-        //    contentType: 'application/json',
-        //    secure: true,
-        //    headers: {
-        //        'Access-Control-Allow-Origin': '*',
-        //    },
-        //    beforeSend: function (xhr) {
-        //        xhr.setRequestHeader("Authorization", "Basic " + btoa(""));
-        //    },
-        //    success: SuccessFunction(),
-        //    error: ErrorFunction()
-        //});
-       // RefreshReport()
-    //    setTimeout(
-    //        function () {
-    //            location.reload();
-    //        }, 5000);
-
-
+        on();
+        setTimeout( function () {
+             
+            off()
+        }, 2000);
         $(window).scroll(function () {
             $("#overlay").stop().animate({ "marginTop": ($(window).scrollTop()) + "px", "marginLeft": ($(window).scrollLeft()) + "px" }, "fast");
-        });
-    });
+             });
+         });
+
     function SuccessFunction() {
-        
+
         setTimeout(
             function () {
-                location.reload();
+                //location.reload();
                 off()
             }, 2000);
-        
+
        // location.reload();
     }
     function ErrorFunction() {
-        
+
         //alert("Error updatting the report.");
         setTimeout(
             function () {
-                
+
                 off()
             }, 2000);
     }
     function RefreshReport()
     {
-        
+
         var id = window.location;
-        
-        var arr = id.toString().split('/'); 
-        
+
+        var arr = id.toString().split('/');
+
         var Reportid = arr[arr.length - 1]
-     
+
         $.ajax({
             type: "Get",
-            url: "https://localhost:44387/api/Report/" + Reportid,
+            url: "@System.Configuration.ConfigurationManager.AppSettings["Report_API_URL"]" + Reportid,
             dataType: "jsonp",
             cors: true,
             contentType: 'application/json',
@@ -161,13 +142,13 @@
 
     }
     function on() {
-      
+
         document.getElementById("overlay").style.display = "flex";
     }
 
     function off() {
         document.getElementById("overlay").style.display = "none";
     }
-   
+
 </script>
  

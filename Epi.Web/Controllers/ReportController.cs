@@ -3,6 +3,9 @@ using System.Web.Mvc;
 using Epi.Web.MVC.Models;
 using Epi.Web.Common.Message;
 using System.Text;
+using System.Web.Configuration;
+using System.Net.Http;
+ 
 
 namespace Epi.Web.MVC.Controllers
 {
@@ -21,8 +24,10 @@ namespace Epi.Web.MVC.Controllers
 
             try
             {
-
-
+                if (!string.IsNullOrEmpty(WebConfigurationManager.AppSettings["Report_API_URL"].ToString()))
+                {
+                    RefeshReport(reportid);
+                }
                 //dba3faf6-4417-4f6d-920a-e3d6b680932a
                 Epi.Web.Common.Helper.SqlHelper.GetReportXml(reportid);
 
@@ -57,6 +62,34 @@ namespace Epi.Web.MVC.Controllers
             }
 
             
+
+        }
+
+
+        public   void RefeshReport(string reportid) {
+
+            string endpoint = WebConfigurationManager.AppSettings["Report_API_URL"].ToString()+ reportid;
+             
+
+            using (var _client = new HttpClient())
+            {
+                _client.BaseAddress = new Uri(endpoint);
+                _client.DefaultRequestHeaders.Accept.Clear();
+                _client.DefaultRequestHeaders.Accept.Add(
+                   new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                var response =  _client.GetAsync("");
+                response.Wait();
+                var result =   response.Result;
+                if (result.IsSuccessStatusCode)
+                {
+                }
+                else
+                {  
+                }
+            }
+
+
+
 
         }
     }

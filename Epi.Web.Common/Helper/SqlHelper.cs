@@ -61,6 +61,7 @@ namespace Epi.Web.Common.Helper
                     Console.WriteLine(ex.ToString());
                 }
                 Dictionary<string, string> NewKeys = new Dictionary<string, string>();
+                NewKeys.Add("MetaData_DateUpdated", "MetaData_DateUpdated");
                 NewKeys.Add("MetaData_ResponseId", "MetaData_ResponseId");
                 NewKeys.Add("MetaData_ResponseStatus", "MetaData_ResponseStatus");
                 
@@ -103,20 +104,30 @@ namespace Epi.Web.Common.Helper
             }
         }
 
-        public static string GetSurveyJsonData(string surveyid , bool IsDraft)
+        public static string GetSurveyJsonData(string surveyid , bool IsDraft , int PageSize , int PageNumber )
         {
             var _ADOConnectionString = Cryptography.Decrypt(ConfigurationManager.ConnectionStrings["EIWSADO"].ConnectionString);
             SqlConnection conn = new SqlConnection(_ADOConnectionString);
 
             StringBuilder json = new StringBuilder("[");
 
+            int OffSet = 0;
             
                 try
                 {
                     using (SqlConnection connection = new SqlConnection(conn.ConnectionString))
                     {
                         connection.Open();
-                    string commandString = "select ResponseJson , StatusId , ResponseId from SurveyResponse where ResponseJson is not null and surveyid = '" + surveyid + "'" + "and IsDraftMode = '" + IsDraft + "'";
+                    string commandString = "";
+                    if (PageNumber == 1) {
+                          commandString = "select top("+ PageSize + ")ResponseJson , StatusId , ResponseId, DateUpdated, DateCreated from SurveyResponse where ResponseJson is not null and surveyid = '" + surveyid + "'" + "and IsDraftMode = '" + IsDraft + "' order by DateCreated ";
+                    }
+                    else {
+                        OffSet = PageSize * (PageNumber-1);
+                          commandString = "select ResponseJson , StatusId , ResponseId, DateUpdated, DateCreated from SurveyResponse where ResponseJson is not null and surveyid = '" + surveyid + "'" + "and IsDraftMode = '" + IsDraft + "' order by DateCreated OFFSET " + OffSet + " ROWS FETCH NEXT " + PageSize  + " ROWS ONLY";
+
+                    }
+
                     // string commandString = "select ResponseJson from SurveyResponse r inner join SurveyMetaData m on r.SurveyId = m.SurveyId inner join UserOrganization uo on m.OrganizationId = uo.OrganizationID inner join [User] u on uo.UserID = u.UserID where r.ResponseJson is not null and r.SurveyId = '" + surveyid + "' and u.UserName = '" + userName + "' order by DateUpdated desc";
                     using (SqlCommand command = new SqlCommand(commandString, connection))
                         {
@@ -128,7 +139,8 @@ namespace Epi.Web.Common.Helper
                                     {
                                         string row = JsonConvert.DeserializeObject<JsonMessage>(reader.GetFieldValue<string>(0)).ResponseQA.ToString();
                                        JObject newJson =   JObject.Parse(row);
-                                       newJson.AddFirst(new JProperty("MetaData_ResponseStatus", GetStatus(reader.GetFieldValue<Int32>(1))));
+                                    newJson.AddFirst(new JProperty("MetaData_DateUpdated",  reader.GetFieldValue<DateTime>(3)));
+                                    newJson.AddFirst(new JProperty("MetaData_ResponseStatus", GetStatus(reader.GetFieldValue<Int32>(1))));
                                        newJson.AddFirst(new JProperty("MetaData_ResponseId", reader.GetFieldValue<Guid>(2)));
                                     row = newJson.ToString();
                                         if (!row.Equals("{}"))
@@ -171,7 +183,7 @@ namespace Epi.Web.Common.Helper
                 using (SqlConnection connection = new SqlConnection(conn.ConnectionString))
                 {
                     connection.Open();
-                    string commandString = "select ResponseJson , StatusId , ResponseId from SurveyResponse where ResponseJson is not null and surveyid = '" + surveyid + "'";
+                    string commandString = "select ResponseJson , StatusId , ResponseId , DateUpdated from SurveyResponse where ResponseJson is not null and surveyid = '" + surveyid + "'";
                     // string commandString = "select ResponseJson from SurveyResponse r inner join SurveyMetaData m on r.SurveyId = m.SurveyId inner join UserOrganization uo on m.OrganizationId = uo.OrganizationID inner join [User] u on uo.UserID = u.UserID where r.ResponseJson is not null and r.SurveyId = '" + surveyid + "' and u.UserName = '" + userName + "' order by DateUpdated desc";
                     using (SqlCommand command = new SqlCommand(commandString, connection))
                     {
@@ -183,6 +195,7 @@ namespace Epi.Web.Common.Helper
                                 {
                                     string row = JsonConvert.DeserializeObject<JsonMessage>(reader.GetFieldValue<string>(0)).ResponseQA.ToString();
                                     JObject newJson = JObject.Parse(row);
+                                    newJson.AddFirst(new JProperty("MetaData_DateUpdated", reader.GetFieldValue<DateTime>(3)));
                                     newJson.AddFirst(new JProperty("MetaData_ResponseStatus", GetStatus(reader.GetFieldValue<Int32>(1))));
                                     newJson.AddFirst(new JProperty("MetaData_ResponseId", reader.GetFieldValue<Guid>(2)));
                                     row = newJson.ToString();
@@ -253,6 +266,126 @@ namespace Epi.Web.Common.Helper
 
             return xml;
 
+        }
+
+        public static int GetResponseJsonSize(string surveyid, bool isDraft)
+        {
+            var _ADOConnectionString = Cryptography.Decrypt(ConfigurationManager.ConnectionStrings["EIWSADO"].ConnectionString);
+            SqlConnection conn = new SqlConnection(_ADOConnectionString);
+
+
+         
+            string size = "0";
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(conn.ConnectionString))
+                {
+                    connection.Open();
+                    string commandString = "select sum(ResponseJsonSize) as Size from SurveyResponse where Surveyid = '" + surveyid + "' and IsDraftMode ='" + isDraft  + "'";
+
+                    using (SqlCommand command = new SqlCommand(commandString, connection))
+                    {
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.HasRows)
+                            {
+                                //while (reader.Read())
+
+                                    if (reader.Read())
+                                    size = reader["Size"].ToString();
+                            }
+                        }
+                    }
+                }
+            }
+            catch (System.Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+
+
+
+            return int.Parse(size);
+        }
+
+        public static int GetAvgResponseSize(string surveyid, bool isDraft)
+        {
+            var _ADOConnectionString = Cryptography.Decrypt(ConfigurationManager.ConnectionStrings["EIWSADO"].ConnectionString);
+            SqlConnection conn = new SqlConnection(_ADOConnectionString);
+
+
+
+            string AvgSize = "0";
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(conn.ConnectionString))
+                {
+                    connection.Open();
+                    string commandString = "select avg(ResponseJsonSize) as AvgSize from SurveyResponse where Surveyid = '" + surveyid + "' and IsDraftMode ='" + isDraft + "'";
+
+                    using (SqlCommand command = new SqlCommand(commandString, connection))
+                    {
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.HasRows)
+                            {
+                                //while (reader.Read())
+
+                                if (reader.Read())
+                                    AvgSize = reader["AvgSize"].ToString();
+                            }
+                        }
+                    }
+                }
+            }
+            catch (System.Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+
+
+
+            return int.Parse(AvgSize);
+        }
+
+        public static int GetResponseCount(string surveyid, bool isDraft)
+        {
+            var _ADOConnectionString = Cryptography.Decrypt(ConfigurationManager.ConnectionStrings["EIWSADO"].ConnectionString);
+            SqlConnection conn = new SqlConnection(_ADOConnectionString);
+
+
+
+            string Count = "0";
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(conn.ConnectionString))
+                {
+                    connection.Open();
+                    string commandString = "select count(ResponseJsonSize) as Count from SurveyResponse where Surveyid = '" + surveyid + "' and IsDraftMode ='" + isDraft + "'";
+
+                    using (SqlCommand command = new SqlCommand(commandString, connection))
+                    {
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.HasRows)
+                            {
+                                //while (reader.Read())
+
+                                if (reader.Read())
+                                    Count = reader["Count"].ToString();
+                            }
+                        }
+                    }
+                }
+            }
+            catch (System.Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+
+
+
+            return int.Parse(Count);
         }
     }
 }
