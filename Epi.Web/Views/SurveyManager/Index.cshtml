@@ -848,7 +848,7 @@
                      cell1.width = "33%"
                      var cell2 = row.insertCell(1);
 
-                        cell1.innerHTML = "<input id=\""+ data.SourceTables[i].TableName+ "_Edit" +"\"  class=\"btn btn-primary btn-sm\" type=\"button\" onclick=\" EditValueSets('"+ data.SourceTables[i].TableName+ "')\" id=\"EditDataSet\" value=\"Load CSV\" /> <input id=\""+ data.SourceTables[i].TableName +"\"  class=\"btn btn-primary btn-sm  \" type=\"button\" onclick=\" ViewDataSet('"+data.SourceTables[i].TableName+"') \"  value=\"View/Edit\" />  <input id=\""+ data.SourceTables[i].TableName +"_CSV\"  class=\"btn btn-primary btn-sm  \" type=\"button\" onclick=\" GetDataSetCsv('"+data.SourceTables[i].TableName+"') \"  value=\"Download\" />";
+                     cell1.innerHTML = "<button id=\"" + data.SourceTables[i].TableName + "_Edit" + "\" title=\"Load CSV\" style=\"width: 40px; margin-right: 5px; margin-top: 2px;\" class=\"btn btn-primary btn-sm\" type=\"button\"  onclick=\" EditValueSets('" + data.SourceTables[i].TableName + "')\" id=\"EditDataSet\" value=\"Load CSV\" > <span class=\"material-icons-outlined\">upload_file</span> </button><button id=\"" + data.SourceTables[i].TableName + "\" style=\"width: 40px; margin-top: 2px;\"  class=\"btn btn-primary btn-sm  \" title=\"view and edit\" type=\"button\" onclick=\" ViewDataSet('" + data.SourceTables[i].TableName + "') \"  value=\"View/Edit\" ><span class=\"material-icons-outlined\"> mode_edit</span></button>  <button id=\"" + data.SourceTables[i].TableName + "_CSV\" style=\"width: 40px;   margin-top: 2px;\"  class=\"btn btn-primary btn-sm  \" title=\"Download value set\" type=\"button\" onclick=\" GetDataSetCsv('" + data.SourceTables[i].TableName + "') \"  value=\"Download\" ><span class=\"material-icons-outlined\">file_download</span></button>";
                          cell2.innerHTML = data.SourceTables[i].TableName;
                      //cell1.innerHTML = "<button id=\""+ data.SourceTables[i].TableName +"\"  type=\"button\" class=\"btn btn-primary btn-sm\" data-toggle=\"modal\" data-target=\"#exampleModal\">view</button>";
                         $("#DataSetTable > tbody > tr:nth-child("+ Counter +")").addClass("TableRow1");
@@ -1558,7 +1558,7 @@
         {
             if (!Model.IsValidOrg)
             {
-                <div id="contentOrganization" style="margin:1em; margin-top:50px">
+                <div id="contentOrganization" style="margin:1em; margin-top:40px">
                     <div id="OrgnizationDiv" class="accountdiv" style="margin-bottom: 100px; align-self:center">
                         <p style="text-align:center;margin-top: 0;margin-bottom: 0px; font-size: 22pt; font-weight:bold; color:#3f3f3f">
                             Welcome to Epi Info Survey Manager
@@ -1572,16 +1572,27 @@
                         @*<p style="text-align:right;margin-top: 0;margin-bottom: -29px; font-size: 9pt; font-weight:bold;">* indicates required fields</p>
 
                         *@
-                        <p style="text-align:center; margin-left:15px">
+                    <p style="text-align:center; margin-left:15px">
 
-                            @*<label class="accountlabel" id="OrgKeylabel">*Organization Key:</label><br>*@
-                            @Html.TextBoxFor(m => m.OrganizationKey, new { @class = "Account" })
-                            <input class="btn btn-primary btn-sm" style="width:70px;" type="submit" name="ValidateOrganization" id="ValidateOrganization" onclick=" " value="Submit" /><br>
-                            @Html.ValidationMessageFor(m => m.OrganizationKey, null, new { @class = "required" })
+                        @*<label class="accountlabel" id="OrgKeylabel">*Organization Key:</label><br>*@
+                        @*  @Html.TextBoxFor(m => m.OrganizationKey, new { @class = "Account" })
+        <input class="btn btn-primary btn-sm" style="width:70px;" type="submit" name="ValidateOrganization" id="ValidateOrganization" onclick=" " value="Submit" /><br>
+        @Html.ValidationMessageFor(m => m.OrganizationKey, null, new { @class = "required" })*@
 
-                        </p>
+
+
+
+                        <div class="field" id="searchform">
+                            @Html.TextBoxFor(m => m.OrganizationKey, new { @class = "" })
+                            <input class="btn btn-primary btn-md" style="width: 70px;" type="submit" name="ValidateOrganization" id="ValidateOrganization" onclick=" " value="Submit" /><br>
+
+                        </div>
+                        @*@Html.ValidationMessageFor(m => m.OrganizationKey, null, new { @class = "required" })*@
+                    </p>
                     </div>
                 </div>
+
+
             }
             else
             {
@@ -1592,17 +1603,19 @@
                         @*<div style="float:left; background-color: #313131; height:810px">*@
 
                         <div class="contentPublish leftNav" style="background-color:#f3f3f3;">
+                            
                             <a href="#" style="cursor:pointer;color:#ffffff" class="navLink publishExpand" onclick="Toggle('PublishDivExpand')">
-                                <img style="display:none" src="~/Content/images/Toggle-expand-alt_green.png" />
-                                <img style="display:none" src="~/Content/images/Toggle-collapse-alt_green.png" />
-                                Publish a new survey
+                                @*<img style="display:none" src="@Url.Content("~/Content/images/Toggle-expand-alt_green.png")" />
+                                 <img style="display:none" src="@Url.Content("~/Content/images/Toggle-collapse-alt_green.png")" />*@
+                                <span class="material-icons-outlined ">publish</span> <span>Publish a new survey</span>
+
                             </a>
 
                         </div>
                         <div class="contentRePublish leftNav">
                             <a href="#" style="cursor:pointer;color:#ffffff" class="navLink rePublishExpand" onclick="Toggle('RePublishDivExpand')">
                                 <img style="display:none" src="~/Content/images/Toggle-expand-alt_green.png" />
-                                <img style="display:none" src="~/Content/images/Toggle-collapse-alt_green.png" /> Update a survey
+                                <img style="display:none" src="~/Content/images/Toggle-collapse-alt_green.png" /><span class="material-icons-outlined"> mode_edit</span> Update a survey
                             </a>
 
                         </div>
@@ -1611,7 +1624,7 @@
                             <div class="contentViewRecords leftNav">
                                 <a href="#" style="cursor:pointer;color:#ffffff" class="navLink ViewRecordsExpand" onclick="Toggle('ViewRecordsDivExpand')">
                                     <img style="display:none" src="~/Content/images/Toggle-expand-alt_green.png" />
-                                    <img style="display:none" src="~/Content/images/Toggle-collapse-alt_green.png" /> View Survey Responses
+                                    <img style="display:none" src="~/Content/images/Toggle-collapse-alt_green.png" /> <span class="material-icons-outlined">file_download</span>View survey responses
                                 </a>
                             </div>
                         }
@@ -1620,7 +1633,7 @@
                             <div class="contentDownLoad leftNav">
                                 <a href="#" style="cursor:pointer;color:#ffffff" class="navLink downloadExpand" onclick="Toggle('DownloadDivExpand')">
                                     <img style="display:none" src="~/Content/images/Toggle-expand-alt_green.png" />
-                                    <img style="display:none" src="~/Content/images/Toggle-collapse-alt_green.png" /> Download responses (CSV)
+                                    <img style="display:none" src="~/Content/images/Toggle-collapse-alt_green.png" /><span class="material-icons-outlined">file_download</span> Download responses (CSV)
                                 </a>
                             </div>
                         }
@@ -1628,7 +1641,7 @@
                         <div class="contentSendEmail leftNav">
                             <a href="#" style="cursor:pointer;color:#ffffff" class="navLink sendEmailExpand" onclick="Toggle('SendEmailDivExpand')">
                                 <img style="display:none" src="~/Content/images/Toggle-expand-alt_green.png" />
-                                <img style="display:none" src="~/Content/images/Toggle-collapse-alt_green.png" /> Send email with survey link
+                                <img style="display:none" src="~/Content/images/Toggle-collapse-alt_green.png" /><span class="material-icons-outlined">reply_all</span>Send email with survey link
                             </a>
                         </div>
                         @*<div class="contentSetJson leftNav">
@@ -1641,7 +1654,7 @@
                             <a href="#" style="cursor:pointer;color:#ffffff;" class="navLink DashboardExpand" onclick="Toggle('DashboardDivExpand')">
                                 <img style="display:none" src="~/Content/images/Toggle-expand-alt_green.png" />
                                 <img style="display:none" src="~/Content/images/Toggle-collapse-alt_green.png" />
-                                Survey Dashboard
+                                <span class="material-icons-outlined">speed</span> Survey dashboard
                             </a>
 
                         </div>
@@ -1661,7 +1674,7 @@
                             <a href="#" style="cursor:pointer;color:#ffffff;" class="navLink UpdateDataSetExpand" onclick="Toggle('UpdateDataSetDivExpand')">
                                 <img style="display:none" src="~/Content/images/Toggle-expand-alt_green.png" />
                                 <img style="display:none" src="~/Content/images/Toggle-collapse-alt_green.png" />
-                                Survey Value Sets
+                                <span class="material-icons-outlined">grid_view </span> Survey value sets
                             </a>
 
                         </div>
@@ -1671,7 +1684,7 @@
                             <a href="#" style="cursor:pointer;color:#ffffff;" class="navLink SurveyReportsExpand" onclick="Toggle('SurveyReportsDivExpand')">
                                 <img style="display:none" src="~/Content/images/Toggle-expand-alt_green.png" />
                                 <img style="display:none" src="~/Content/images/Toggle-collapse-alt_green.png" />
-                                Survey Reports (Beta)
+                                <span class="material-icons-outlined">dashboard</span>Survey reports (Beta)
                             </a>
 
                         </div>
@@ -1681,7 +1694,9 @@
                             <a href="#" style="cursor:pointer;color:#ffffff;" class="navLink LoadResponsesExpand" onclick="Toggle('LoadResponsesDivExpand')">
                                 <img style="display:none" src="~/Content/images/Toggle-expand-alt_green.png" />
                                 <img style="display:none" src="~/Content/images/Toggle-collapse-alt_green.png" />
-                                Load Responses From .xlsx (Beta)
+                                <span class="material-icons-outlined">
+                                    upload_file
+                                </span>Load responses from .xlsx (Beta)
                             </a>
 
                         </div>
@@ -1699,86 +1714,91 @@
                                     <label class="accountlabel" id="FilePath"><span style="color:#900000;">*</span> Excel based survey:</label> <a onclick="OpenFile()" style="text-decoration:none!important; font-size:14px" href="~/Content/Text/Survey.xlsx">Excel Template</a><br>
                                     @*<input id="Path" class="Account" type="text" value=""   >*@
 
-                                    @Html.TextBoxFor(m => m.Path, new { @class = "Account Path" })
+                                <div class="field" style="margin: unset !important ; height:29px;">
+                                    @Html.TextBoxFor(m => m.Path, new { @class = "  Path" })
 
                                     @*<label for="file-upload" class="submits create"   onclick="javascript: document.getElementById('Newfile').click();">
-                                            Browse
-                                        </label>*@
+            Browse
+        </label>*@
                                     <input for="file-upload" class="btn btn-primary btn-sm" style="width:70px; " type="button" id="PublishButton" onclick="javascript: document.getElementById('Newfile').click();" value="Browse" />
-
-                                    @Html.ValidationMessageFor(m => m.Path, null, new { @class = "required" })
-                                    <input id="Newfile" type="file" style='visibility: hidden;' name="Newfile" accept=".xls,.xlsx,.csv" onchange="ChangeText(this, 'Path');" />
-
-
                                 </div>
-                                <br>
-                                <div>
-
-                                    <label class="accountlabel" id="SurveyNamelabel"><span style="color:#900000;">*</span> Survey Name:</label><br>
-                                    @Html.TextBoxFor(m => m.SurveyName, new { @class = "Account" }) <br>
-                                    @Html.ValidationMessageFor(m => m.SurveyName, null, new { @class = "required" })
-                                </div>
-                                <br>
-                                <div>
-
-                                    <label style="text-align:left" class="accountlabel" id="SurveyNamelabel"><span style="color:#900000;">*</span> End Date:</label><br>
-                                    @Html.TextBoxFor(m => m.EndDate, new { @class = "Account validate[required,custom[date]]  datepicker" }) <br>
-                                    @Html.ValidationMessageFor(m => m.EndDate, null, new { @class = "required" })
+                                        @Html.ValidationMessageFor(m => m.Path, null, new { @class = "required" })
+                                        <input id="Newfile" type="file" style='visibility: hidden;' name="Newfile" accept=".xls,.xlsx,.csv" onchange="ChangeText(this, 'Path');" />
 
 
-                                </div>
-                                <script>$('#EndDate').datepicker({ changeMonth: true, changeYear: true, yearRange: '-110:+10' });</script>
-                                <script>$('#EndDate').BlockEnter('EndDate');</script>
-
-                                @*<p>
-                                        <input type="checkbox" id="ExistingSurvey" value="@Model.UpdateExisting" name="ExistingSurvey" for="ExistingSurveyLabel" onclick="HidUnhidSurveyId(this)" />
-
-                                        <label class="accountlabel" id="ExistingSurveyLabel" style="width:330px;">
-                                            <span style="font-weight:normal !important;">Update Existing Survey</span>
-                                        </label>
-                                        <div id="SurveyIdDiv">
-                                            <label class="accountlabel" id="SurveyIdlabel">*Survey Id:</label><br>
-
-                                            @Html.TextBoxFor(m => m.SurveyKey, new { @class = "Account" }) <br>
-                                            @Html.ValidationMessageFor(m => m.SurveyKey, null)
-                                            <br>
-                                            <label class="accountlabel" id="SecurityTokenlabel">*Security Token:</label><br>
-
-                                            @Html.TextBoxFor(m => m.UserPublishKey, new { @class = "Account" }) <br>
-                                            @Html.ValidationMessageFor(m => m.UserPublishKey, null)
-
-
-                                        </div>
-
-                                    </p>*@
-                                <br />
-                                @if (Model.IsAuthenticated)
-                                {
-
-                                    <div style="width: 100%; display: inline;">
-                                        <input type="checkbox" id="IagreeBox" for="IagreeBoxLabel" onchange="EnablePublishButton(this);" />
-
-
-                                        <label class="accountlabel" for="IagreeBox" id="IagreeBoxLabel" style="width:330px;">
-                                            <span style="font-weight:normal !important;">I agree to the</span>
-                                            <span class="TermsSpan" style="font-weight:bold;" onclick="OpenFile_txt()">
-                                                Terms of service and conditions of use
-
-                                            </span>
-                                        </label>
                                     </div>
-                                    <br />
-                                    <br />
-                                    <input class="btn btn-primary btn-sm" type="submit" disabled="disabled" name="PublishSurvey" id="PublishSurvey" value="Publish" style="margin-right:90px;" />
-                                }
-                                else
-                                {
-                                    <input class="btn btn-primary btn-sm" type="submit" name="PublishSurvey" id="PublishSurvey" value="Publish" style="margin-right:90px;" />
+                                    <br>
+                                    <div>
 
-                                }
+                                        <label class="accountlabel" id="SurveyNamelabel"><span style="color:#900000;">*</span> Survey Name:</label><br>
+                                         
+                                            @Html.TextBoxFor(m => m.SurveyName, new { @class = "Account" }) <br>
+                                         
+                                        @Html.ValidationMessageFor(m => m.SurveyName, null, new { @class = "required" })
+                                    </div>
+                                        <br>
+                                        <div>
 
-                                <input type="hidden" id="ExistingSurvey_Hidden" value="@Model.UpdateExisting.ToString()" />
-                            </div>
+                                            <label style="text-align:left" class="accountlabel" id="SurveyNamelabel"><span style="color:#900000;">*</span> End Date:</label><br>
+                                            
+                                                @Html.TextBoxFor(m => m.EndDate, new { @class = " Account validate[required,custom[date]]  datepicker" }) <br>
+                                          
+                                                @Html.ValidationMessageFor(m => m.EndDate, null, new { @class = "required" })
+
+
+                                            </div>
+                                            <script>$('#EndDate').datepicker({ changeMonth: true, changeYear: true, yearRange: '-110:+10' });</script>
+                                            <script>$('#EndDate').BlockEnter('EndDate');</script>
+
+                                            @*<p>
+            <input type="checkbox" id="ExistingSurvey" value="@Model.UpdateExisting" name="ExistingSurvey" for="ExistingSurveyLabel" onclick="HidUnhidSurveyId(this)" />
+
+            <label class="accountlabel" id="ExistingSurveyLabel" style="width:330px;">
+                <span style="font-weight:normal !important;">Update Existing Survey</span>
+            </label>
+            <div id="SurveyIdDiv">
+                <label class="accountlabel" id="SurveyIdlabel">*Survey Id:</label><br>
+
+                @Html.TextBoxFor(m => m.SurveyKey, new { @class = "Account" }) <br>
+                @Html.ValidationMessageFor(m => m.SurveyKey, null)
+                <br>
+                <label class="accountlabel" id="SecurityTokenlabel">*Security Token:</label><br>
+
+                @Html.TextBoxFor(m => m.UserPublishKey, new { @class = "Account" }) <br>
+                @Html.ValidationMessageFor(m => m.UserPublishKey, null)
+
+
+            </div>
+
+        </p>*@
+                                            <br />
+                                            @if (Model.IsAuthenticated)
+                                            {
+
+                                                <div style="width: 100%; display: inline;">
+                                                    <input type="checkbox" id="IagreeBox" for="IagreeBoxLabel" onchange="EnablePublishButton(this);" />
+
+
+                                                    <label class="accountlabel" for="IagreeBox" id="IagreeBoxLabel" style="width:330px;">
+                                                        <span style="font-weight:normal !important;">I agree to the</span>
+                                                        <span class="TermsSpan" style="font-weight:bold;" onclick="OpenFile_txt()">
+                                                            Terms of service and conditions of use
+
+                                                        </span>
+                                                    </label>
+                                                </div>
+                                                <br />
+                                                <br />
+                                                <input class="btn btn-primary btn-sm" type="submit" disabled="disabled" name="PublishSurvey" id="PublishSurvey" value="Publish" style="margin-right:90px;" />
+                                            }
+                                            else
+                                            {
+                                                <input class="btn btn-primary btn-sm" type="submit" name="PublishSurvey" id="PublishSurvey" value="Publish" style="margin-right:90px;" />
+
+                                            }
+
+                                            <input type="hidden" id="ExistingSurvey_Hidden" value="@Model.UpdateExisting.ToString()" />
+                                        </div>
                         </div>
 
                         <div id="RePublishDiv" class="contentContainer" style="margin-bottom:10px; align-self:center; display:none; visibility:collapse;margin:1em;">
@@ -1790,60 +1810,60 @@
                                     <label class="accountlabel" id="FilePath1">Excel based survey:</label>
                                     @*<a onclick="OpenFile()" href="~/Content/Text/Survey.xlsx">Excel Template</a>*@ <br /><span style="font-size: 14px">This file is only needed if survey content has changed!</span><br>
                                     @*<input id="Path" class="Account" type="text" value=""   >*@
+                                    <div class="field" style="margin: unset !important ; height:29px;">
+                                        @Html.TextBoxFor(m => m.RepublishPath, new { @class = "  RepublishPath" })
 
-                                    @Html.TextBoxFor(m => m.RepublishPath, new { @class = "Account RepublishPath" })
-
-                                    @*<label for="file-upload" class="submits create"   onclick="javascript: document.getElementById('Newfile').click();">
-                                            Browse
-                                        </label>*@
-                                    <input for="file-upload" class="btn btn-primary btn-sm" style="width:70px;" type="button" id="RePublishButton" onclick="javascript: document.getElementById('Newfile1').click();" value="Browse" /><br>
-
-                                    @Html.ValidationMessageFor(m => m.RepublishPath, null, new { @class = "required" })
-                                    <input id="Newfile1" type="file" style='visibility: hidden;' name="Newfile1" accept=".xls,.xlsx,.csv" onchange="ChangeText(this, 'RepublishPath');" />
+                                        @*<label for="file-upload" class="submits create"   onclick="javascript: document.getElementById('Newfile').click();">
+                Browse
+            </label>*@
+                                        <input for="file-upload" class="btn btn-primary btn-sm" style="width:70px;" type="button" id="RePublishButton" onclick="javascript: document.getElementById('Newfile1').click();" value="Browse" /><br>
+                                        </div>
+                                        @Html.ValidationMessageFor(m => m.RepublishPath, null, new { @class = "required" })
+                                        <input id="Newfile1" type="file" style='visibility: hidden;' name="Newfile1" accept=".xls,.xlsx,.csv" onchange="ChangeText(this, 'RepublishPath');" />
 
 
+                                    </div>
+                                    <label class="accountlabel" id="SurveyIdlabel1"><span style="color:#900000;">*</span> Survey Id:</label><br>
+
+                                    @Html.DropDownListFor(m => m.RepublishSurveyKey, new SelectList(Model.SurveyNameList, "Value", "Text", 0), "Select Survey", new { @class = "Account", @onchange = "GetSurveyInfo()" })<br>
+
+                                    @Html.ValidationMessageFor(m => m.RepublishSurveyKey, null)
+                                    <br>
+
+                                    @if (!Model.IsAuthenticated)
+                                    {
+
+                                        <label class="accountlabel" id="SecurityTokenlabel1"><span style="color:#900000;">*</span> Security Token:</label><br>
+                                        /**/
+
+                                        @Html.TextBoxFor(m => m.RepublishUserPublishKey, new { @class = "Account" }) <br>
+                                        @Html.ValidationMessageFor(m => m.RepublishUserPublishKey, null)<br>
+                                    }
+                                    <label class="accountlabel" id="FileName3">Survey Mode:</label><br>
+
+
+                                    @Html.DropDownListFor(model => model.RepublishSurveyMode, new SelectList(
+                                                   new List<Object> { new { value = "0", text = "Draft" }, new { value = "1", text = "Final" }, }, "value", "text", 2), new { @class = "Account" })<br>
+                                    @Html.ValidationMessageFor(m => m.RepublishSurveyMode, null)
+
+                                    <br />
+                                    <label style="text-align:left" class="accountlabel" id="SurveyNamelabel1">End Date:</label><br>
+                                    @Html.TextBoxFor(m => m.EndDateUpdate, new { @class = "Account validate[required,custom[date]]  datepicker" }) <br>
+                                    @Html.ValidationMessageFor(m => m.EndDateUpdate, null, new { @class = "required" })
+
+
+
+                                    <script>$('#EndDateUpdate').datepicker({ changeMonth: true, changeYear: true, yearRange: '-110:+10' });</script>
+                                    <script>$('#EndDateUpdate').BlockEnter('EndDateUpdate');</script>
+
+                                    <br />
+
+                                    <input class="btn btn-primary btn-sm" type="submit" name="RePublishSurvey" id="RePublishSurvey" value="Update" style="margin-right:90px;" />
+
+
+                                    <input type="hidden" id="ExistingSurvey_Hidden1" value="@Model.UpdateExisting.ToString()" />
+                                    <input type="hidden" id="RePublishSurveyName" value="" name="RePublishSurveyName" />
                                 </div>
-                                <label class="accountlabel" id="SurveyIdlabel1"><span style="color:#900000;">*</span> Survey Id:</label><br>
-
-                                @Html.DropDownListFor(m => m.RepublishSurveyKey, new SelectList(Model.SurveyNameList, "Value", "Text", 0), "Select Survey", new { @class = "Account", @onchange = "GetSurveyInfo()" })<br>
-
-                                @Html.ValidationMessageFor(m => m.RepublishSurveyKey, null)
-                                <br>
-
-                                @if (!Model.IsAuthenticated)
-                                {
-
-                                    <label class="accountlabel" id="SecurityTokenlabel1"><span style="color:#900000;">*</span> Security Token:</label><br>
-                                    /**/
-
-                                    @Html.TextBoxFor(m => m.RepublishUserPublishKey, new { @class = "Account" }) <br>
-                                    @Html.ValidationMessageFor(m => m.RepublishUserPublishKey, null)<br>
-                                }
-                                <label class="accountlabel" id="FileName3">Survey Mode:</label><br>
-
-
-                                @Html.DropDownListFor(model => model.RepublishSurveyMode, new SelectList(
-                                               new List<Object> { new { value = "0", text = "Draft" }, new { value = "1", text = "Final" }, }, "value", "text", 2), new { @class = "Account" })<br>
-                                @Html.ValidationMessageFor(m => m.RepublishSurveyMode, null)
-
-                                <br />
-                                <label style="text-align:left" class="accountlabel" id="SurveyNamelabel1">End Date:</label><br>
-                                @Html.TextBoxFor(m => m.EndDateUpdate, new { @class = "Account validate[required,custom[date]]  datepicker" }) <br>
-                                @Html.ValidationMessageFor(m => m.EndDateUpdate, null, new { @class = "required" })
-
-
-
-                                <script>$('#EndDateUpdate').datepicker({ changeMonth: true, changeYear: true, yearRange: '-110:+10' });</script>
-                                <script>$('#EndDateUpdate').BlockEnter('EndDateUpdate');</script>
-
-                                <br />
-
-                                <input class="btn btn-primary btn-sm" type="submit" name="RePublishSurvey" id="RePublishSurvey" value="Update" style="margin-right:90px;" />
-
-
-                                <input type="hidden" id="ExistingSurvey_Hidden1" value="@Model.UpdateExisting.ToString()" />
-                                <input type="hidden" id="RePublishSurveyName" value="" name="RePublishSurveyName" />
-                            </div>
                         </div>
 
 
@@ -1929,54 +1949,54 @@
 
                                     <label class="accountlabel" id="FilePath"><span style="color:#900000;">*</span> Excel Email list:</label> <a onclick="OpenFile()" style="font-size:14px;text-decoration:none!important" href="~/Content/Text/EmailList.xlsx">Excel Template (Email List)</a><br>
                                     @*<input id="Path" class="Account" type="text" value=""   >*@
+                                    <div class="field" style="margin: unset !important ; height:29px;">
+                                        @Html.TextBoxFor(m => m.EmailFilePath, new { @class = "  Path2" })
 
-                                    @Html.TextBoxFor(m => m.EmailFilePath, new { @class = "Account Path2" })
+                                        @*<label for="file-upload" class="submits create"   onclick="javascript: document.getElementById('Newfile').click();">
+                Browse
+            </label>*@
+                                        <input for="file-upload" class="btn btn-primary btn-sm" style="width:70px;" type="button" id="PublishButton" onclick="javascript: document.getElementById('Newfile2').click();" value="Browse" />
+                                        </div>
+                                        <br>
 
-                                    @*<label for="file-upload" class="submits create"   onclick="javascript: document.getElementById('Newfile').click();">
-                                            Browse
-                                        </label>*@
-                                    <input for="file-upload" class="btn btn-primary btn-sm" style="width:70px;" type="button" id="PublishButton" onclick="javascript: document.getElementById('Newfile2').click();" value="Browse" />
-
-                                    <br>
-
-                                    @Html.ValidationMessageFor(m => m.EmailFilePath, null, new { @class = "required " })
-                                    <input id="Newfile2" type="file" style='visibility: hidden;' name="Newfile2" accept=".xls,.xlsx,.csv" onchange="ChangeText(this, 'Path2');" />
-
-
-                                    <br />
-
-                                    <label class="accountlabel" id="SurveyIdlabel"><span style="color:#900000;">*</span> Survey Id:</label><br>
+                                        @Html.ValidationMessageFor(m => m.EmailFilePath, null, new { @class = "required " })
+                                        <input id="Newfile2" type="file" style='visibility: hidden;' name="Newfile2" accept=".xls,.xlsx,.csv" onchange="ChangeText(this, 'Path2');" />
 
 
-                                    @Html.DropDownListFor(m => m.EmailSurveyKey, new SelectList(ViewBag.SurveyNameList1, "Value", "Text", 0), "Select Survey", new { @class = "Account" })<br>
+                                        <br />
 
-                                    @Html.ValidationMessageFor(m => m.EmailSurveyKey, null)
-                                    <br />
-                                    @if (!Model.IsAuthenticated)
-                                    {
-                                        <label class="accountlabel" id="SecurityTokenlabel"><span style="color:#900000;">*</span> Security Token:</label><br>
-
-                                        @Html.TextBoxFor(m => m.EmailUserPublishKey, new { @class = "Account" }) <br>
-                                        @Html.ValidationMessageFor(m => m.EmailUserPublishKey, null)<br>
-                                    }
+                                        <label class="accountlabel" id="SurveyIdlabel"><span style="color:#900000;">*</span> Survey Id:</label><br>
 
 
-                                    <input data-val="false"
-                                           id="IsBulk"
-                                           name="IsBulk"
-                                           type="checkbox"
-                                           value="true" />
-                                    <label class="accountlabel" id="FilePath">Bulk (To generate multiple response URL's for one email address.)<a onclick="OpenFile()" style="font-size:14px;text-decoration:none!important" href="~/Content/Text/EmailList-Bulk.xlsx">Excel Template (Bulk Email List)</a></label>
+                                        @Html.DropDownListFor(m => m.EmailSurveyKey, new SelectList(ViewBag.SurveyNameList1, "Value", "Text", 0), "Select Survey", new { @class = "Account" })<br>
+
+                                        @Html.ValidationMessageFor(m => m.EmailSurveyKey, null)
+                                        <br />
+                                        @if (!Model.IsAuthenticated)
+                                        {
+                                            <label class="accountlabel" id="SecurityTokenlabel"><span style="color:#900000;">*</span> Security Token:</label><br>
+
+                                            @Html.TextBoxFor(m => m.EmailUserPublishKey, new { @class = "Account" }) <br>
+                                            @Html.ValidationMessageFor(m => m.EmailUserPublishKey, null)<br>
+                                        }
+
+
+                                        <input data-val="false"
+                                               id="IsBulk"
+                                               name="IsBulk"
+                                               type="checkbox"
+                                               value="true" />
+                                        <label class="accountlabel" id="FilePath">Bulk (To generate multiple response URL's for one email address.)<a onclick="OpenFile()" style="font-size:14px;text-decoration:none!important" href="~/Content/Text/EmailList-Bulk.xlsx">Excel Template (Bulk Email List)</a></label>
+                                    </div>
+
+
+
+
+                                    <input class="btn btn-primary btn-sm" type="submit" onclick="clear()" name="SendEmail" id="SendEmail" value="Send Email" style="margin-right:90px;" />
+                                    @*<button type="submit" class="btn btn-primary btn-sm  " name="SendEmail" id="SendEmail" value="Send Email" data-loading-text="<i class='fa fa-spinner fa-spin '></i> Processing Order">Submit Order</button>*@
+
+
                                 </div>
-
-
-
-
-                                <input class="btn btn-primary btn-sm" type="submit" onclick="clear()" name="SendEmail" id="SendEmail" value="Send Email" style="margin-right:90px;" />
-                                @*<button type="submit" class="btn btn-primary btn-sm  " name="SendEmail" id="SendEmail" value="Send Email" data-loading-text="<i class='fa fa-spinner fa-spin '></i> Processing Order">Submit Order</button>*@
-
-
-                            </div>
 
                         </div>
 
@@ -2331,29 +2351,29 @@
                                     <br />
                                     <label class="accountlabel" id="FilePath"><span style="color:#900000;">*</span>File (.xlsx):</label> <br>
 
-
-                                    @Html.TextBoxFor(m => m.EmailFilePath, new { @class = "Account Path2" })
-
-
-                                    <input for="file-upload" class="btn btn-primary btn-sm" style="width:70px;" type="button" id="PublishButton" onclick="javascript: document.getElementById('Newfile3').click();" value="Browse" />
-
-                                    <br>
-
-                                    @Html.ValidationMessageFor(m => m.EmailFilePath, null, new { @class = "required " })
-                                    <input id="Newfile3" type="file" style='visibility: hidden;' name="Newfile3" accept=".xls,.xlsx" onchange="ChangeText(this, 'Path2');" />
+                                    <div class="field" style="margin: unset !important ; height:29px;">
+                                        @Html.TextBoxFor(m => m.EmailFilePath, new { @class = "  Path2" })
 
 
+                                        <input for="file-upload" class="btn btn-primary btn-sm" style="width:70px;" type="button" id="PublishButton" onclick="javascript: document.getElementById('Newfile3').click();" value="Browse" />
+                                        </div>
+                                        <br>
+
+                                        @Html.ValidationMessageFor(m => m.EmailFilePath, null, new { @class = "required " })
+                                        <input id="Newfile3" type="file" style='visibility: hidden;' name="Newfile3" accept=".xls,.xlsx" onchange="ChangeText(this, 'Path2');" />
+
+
+
+
+                                    </div>
+
+
+
+
+                                    <input class="btn btn-primary btn-sm" type="submit" onclick="clear()" name="LoadResponses" id="LoadResponses" value="Load" style="margin-right:90px;" />
 
 
                                 </div>
-
-
-
-
-                                <input class="btn btn-primary btn-sm" type="submit" onclick="clear()" name="LoadResponses" id="LoadResponses" value="Load" style="margin-right:90px;" />
-
-
-                            </div>
 
                         </div>
 

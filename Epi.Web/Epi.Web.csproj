@@ -454,6 +454,7 @@
     <Content Include="Content\jquery.mobile.theme-1.1.1.css" />
     <Content Include="Content\jquery.mobile.theme-1.1.1.min.css" />
     <Content Include="Content\Site.Mobile.css" />
+    <Content Include="Content\Text\EpiInfo.Config.xml" />
     <Content Include="Content\Text\TermOfUse.txt" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
@@ -533,7 +534,6 @@
     <Content Include="Properties\DataSources\Epi.Web.Common.Message.FormsHierarchyResponse.datasource" />
     <Content Include="Properties\DataSources\Epi.Web.Common.Message.SourceTablesResponse.datasource" />
     <Content Include="Properties\DataSources\Epi.Web.Common.Message.PublishReportResponse1.datasource" />
-    <Content Include="Content\Text\EWETest123.cvs7" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
