@@ -483,7 +483,7 @@
         }
         function OpenFile_txt() {
 
-
+            $("#TermsDialog").css("visibility", "visible");
             $("#TermsDialog").dialog("open");
             $("span.ui-dialog-title").text('Terms of service and conditions of use');
         }
@@ -901,7 +901,7 @@
                 $('#ValueSetName').text( DataSetName.toString())
                 $('#DownLoadDataSet1').removeAttr('hidden');
                 $('#DownLoadDataSet2').removeAttr('hidden');
-
+                $("#ViewValueSetDialogBox").css("visibility", "visible");
                $("#ViewValueSetDialogBox").dialog("open");
                 return;
             }
@@ -1121,7 +1121,7 @@
        var $el = $('#FileUpload1');
         $el.wrap('<form>').closest('form').get(0).reset();
         $el.unwrap();
-
+        $("#EditValueSetDialogBox").css("visibility", "visible");
         $("#EditValueSetDialogBox").dialog("open");
     }
     function EnableUpdateButton() {
@@ -2493,10 +2493,10 @@
 
 
     }
-    <div id="TermsDialog">
+    <div id="TermsDialog" style="visibility:hidden">
         @Html.Raw(ViewData["TermOfUse1"].ToString())
     </div>
-    <div id="ViewValueSetDialogBox" title="View Value Sets">
+    <div id="ViewValueSetDialogBox" style="visibility:hidden" title="View Value Sets">
 
         <p style="font:15px Segoe UI;font-weight:bold">Name: <label style="font:15px Segoe UI" id="ValueSetName">Prempt</label></p>
 
@@ -2519,7 +2519,7 @@
 
     </div>
 
-    <div id="EditValueSetDialogBox" title="Update Value Sets">
+    <div id="EditValueSetDialogBox" style="visibility:hidden" title="Update Value Sets">
         @using (Html.BeginForm("Index", "SurveyManager", null, FormMethod.Post, new { id = "myform", enctype = "multipart/form-data" }))
         {
             <p><label id="EditValueSetDialogBoxPrempt" style="font:bolder">Prempt</label></p>
