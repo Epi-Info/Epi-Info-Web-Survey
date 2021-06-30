@@ -838,10 +838,12 @@
              if (data.SourceTables.length > 0)
              {
                  var table = document.getElementById("DataSetTable");
+                 //alert(data.SourceTables.length);
                  for (var i = 0; i < data.SourceTables.length; i++) {
 
-
-                     var Counter = i + 1;
+                     
+                     var Counter = i + 2;
+                     
                      var row = table.insertRow(i + 1);
 
                      var cell1 = row.insertCell(0);
