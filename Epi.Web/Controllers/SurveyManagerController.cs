@@ -1093,16 +1093,17 @@ namespace Epi.Web.MVC.Controllers
 
                         ResponseID = UpdateResponse(SurveyInfo, xlWorksheet, end, row, ResponseID, out SurveyQuestionAnswerList, 4,3);   // UpdateResponse
 
-                        xlWorksheet.SetValue(row, 1, DateTime.Now);
-                        xlWorksheet.SetValue(row, 2, ResponseID.ToString());
-                        xlWorksheet.SetValue(row, 3, "Inserted");
+                        
+                        xlWorksheet.SetValue(row, 1, ResponseID.ToString());
+                        xlWorksheet.SetValue(row, 2, "Inserted");
+                        xlWorksheet.SetValue(row, 3, DateTime.Now.Date.ToShortDateString());
                     }
                     else {
                         Guid ResponseID =  Guid.Parse(_ResponseId);
                         UpdateResponse(SurveyInfo, xlWorksheet, end, row, ResponseID, out SurveyQuestionAnswerList, 4,3);   // UpdateResponse
-                        xlWorksheet.SetValue(row, 1, DateTime.Now);
-                        xlWorksheet.SetValue(row, 2, ResponseID.ToString());
-                        xlWorksheet.SetValue(row, 3, "Updated");
+                        xlWorksheet.SetValue(row, 1, ResponseID.ToString());
+                        xlWorksheet.SetValue(row, 2, "Inserted");
+                        xlWorksheet.SetValue(row, 3, DateTime.Now.Date.ToShortDateString());
                     }
 
                 }
