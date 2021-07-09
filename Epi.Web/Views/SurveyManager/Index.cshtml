@@ -278,10 +278,12 @@
             if ($("#LoadResponseUserPublishKey").val() != "" && $("#LoadResponsesSurveyKey").val()!= "") {
 
                 $("#DownLoadTemplate").removeAttr('disabled');
+                $("#DownLoadTemplate").css('cursor', 'pointer');
 
             } else {
 
-                 $("#DownLoadTemplate").prop("disabled",true);
+                $("#DownLoadTemplate").prop("disabled", true);
+                $("#DownLoadTemplate").css('cursor', 'not-allowed');
             }
         });
         $("#LoadResponseUserPublishKey").change(function ()
@@ -289,11 +291,13 @@
 
             if ($("#LoadResponsesSurveyKey").val()!= "" && $("#LoadResponseUserPublishKey").val() != "")
             {
-                  $("#DownLoadTemplate").removeAttr('disabled');
+                $("#DownLoadTemplate").removeAttr('disabled');
+                $("#DownLoadTemplate").css('cursor', 'pointer');
 
             }else {
 
-                 $("#DownLoadTemplate").prop("disabled",true);
+                $("#DownLoadTemplate").prop("disabled", true);
+                $("#DownLoadTemplate").css('cursor', 'not-allowed');
             }
         });
 
@@ -2345,7 +2349,7 @@
                                         @Html.ValidationMessageFor(m => m.LoadResponseUserPublishKey, null)<br>
                                     }
                                     <br />
-                                    <input class="btn btn-primary btn-sm" type="button" disabled="disabled" onclick="GetJsonResponse('LoadResponsesSurveyKey', 'LoadResponseUserPublishKey', 'FileName', true); " name="DownLoadTemplate" id="DownLoadTemplate" value="Get Template (.xlsx)" style="margin-right:90px;" />
+                                    <input class="btn btn-primary btn-sm" type="button" disabled="disabled" onclick="GetJsonResponse('LoadResponsesSurveyKey', 'LoadResponseUserPublishKey', 'FileName', true); " name="DownLoadTemplate" id="DownLoadTemplate" value="Get Template (.xlsx)" style="margin-right:90px;cursor:not-allowed" />
                                     <br />
 
 
