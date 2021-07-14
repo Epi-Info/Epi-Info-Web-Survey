@@ -387,11 +387,11 @@ namespace Epi.Web.MVC.Controllers
         {
             StringBuilder Body = new StringBuilder();
             string Sender = ConfigurationManager.AppSettings["EMAIL_FROM"].ToString();
-            string Subject = "Epi Info Response Submission Notification";
+            string Subject = "Epi Info™ Response Submission Notification";
             
            List <PrintResponseModel> list = GetResponseList(responseId, true);
             int NumberOfPages = list[0].NumberOfPages;
-            Body.Append("Thank you for using Epi info web survey to submit your response to: " + list[0].SurveyName + "<br/>");
+            Body.Append("Thank you for using Epi Info™ Web Survey to submit your response to: " + list[0].SurveyName + "<br/>");
             //    Body.Append(" <style>.table, th, td { border: 1px solid black;}</style>");
             Body.Append("<style>.table { font-family: 'Trebuchet MS', Arial, Helvetica, sans-serif;border-collapse: collapse;width:90%;}.table td, #customers th {border: 1px solid #ddd; padding: 8px;} .table tr:nth-child(even){background-color: #f2f2f2;} .table tr:hover {background-color: #ddd;} .table th { padding-top: 12px;padding-bottom: 12px;text-align: left;background-color: #2f6fa3;color: white;}</style>");
             for (int i = 1; NumberOfPages + 1 > i; i++)
@@ -434,10 +434,13 @@ namespace Epi.Web.MVC.Controllers
            
             foreach (var row in Response) 
             {
-                if (row.ControlName.Contains("EIWS_MetaData_Email_Notification_hidden"))
+                if (row.ControlName.Contains("EIWS_MetaData_Email_Notification_hidden") && !string.IsNullOrEmpty(row.Value))
                 {
-
-                    this.EmailAddressList.Add(row.Value);
+                    var List = row.Value.Split(',');
+                    foreach (var item in List) 
+                    {
+                        this.EmailAddressList.Add(item);
+                    }
                 }
                 else
                 {
