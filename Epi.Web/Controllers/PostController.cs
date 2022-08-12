@@ -28,25 +28,44 @@ namespace Epi.Web.Controllers
                     redirectUrl = redirectUrl.Replace("&IsSaved=False", "");
 
                 }
-                Epi.Web.Common.Email.Email EmailObj = new Common.Email.Email();
-                EmailObj.Body = redirectUrl + " and Pass Code is: " + passCode;
-                EmailObj.From = ConfigurationManager.AppSettings["EMAIL_FROM"].ToString();
-                EmailObj.Subject = Uri.UnescapeDataString(emailSubject);
 
-                List<string> tempList = new List<string>();
-                tempList.Add(emailAddress);
-                EmailObj.To = tempList;
+                Epi.Web.Common.Email.Email surveyLinkEmail = new Common.Email.Email();
+                surveyLinkEmail.Body = 
+                    redirectUrl + 
+                    Environment.NewLine + 
+                    Environment.NewLine +
+                    "For enhanced security, the information needed to access your response securely is provided in two emails.";
+                surveyLinkEmail.From = ConfigurationManager.AppSettings["EMAIL_FROM"].ToString();
+                surveyLinkEmail.Subject = Uri.UnescapeDataString("Link for survey: " + surveyName);
 
-                if (Epi.Web.Common.Email.EmailHandler.SendMessage(EmailObj))
+                List<string> toList = new List<string>();
+                toList.Add(emailAddress);
+                surveyLinkEmail.To = toList;
+
+                if (Epi.Web.Common.Email.EmailHandler.SendMessage(surveyLinkEmail))
                 {
-                    return Json(true);
+                    Epi.Web.Common.Email.Email passcodeEmail = new Common.Email.Email();
+                    passcodeEmail.Body = "Pass code: " + passCode;
+                    passcodeEmail.From = ConfigurationManager.AppSettings["EMAIL_FROM"].ToString();
+                    passcodeEmail.Subject = Uri.UnescapeDataString("Access information for survey: " + surveyName);
+                    passcodeEmail.To = toList;
+
+                    if (Epi.Web.Common.Email.EmailHandler.SendMessage(passcodeEmail))
+                    {
+                        return Json(true);
+                    }
+                    else
+                    {
+                        return Json(false);
+                    }
                 }
                 else
                 {
                     return Json(false);
                 }
+
             }
-            catch (Exception ex)
+            catch 
             {
                 return Json(false);
             }
