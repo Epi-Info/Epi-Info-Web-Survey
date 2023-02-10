@@ -533,7 +533,6 @@
     <Content Include="Properties\DataSources\Epi.Web.Common.Message.DashboardResponse.datasource" />
     <Content Include="Properties\DataSources\Epi.Web.Common.Message.FormsHierarchyResponse.datasource" />
     <Content Include="Properties\DataSources\Epi.Web.Common.Message.SourceTablesResponse.datasource" />
-    <Content Include="Properties\DataSources\Epi.Web.Common.Message.PublishReportResponse1.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
