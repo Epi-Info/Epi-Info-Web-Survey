@@ -32,8 +32,7 @@ namespace Epi.Web.Controllers
                 Epi.Web.Common.Email.Email surveyLinkEmail = new Common.Email.Email();
                 surveyLinkEmail.Body = 
                     redirectUrl + 
-                    Environment.NewLine + 
-                    Environment.NewLine +
+                    "<br/><br/>" +
                     "For enhanced security, the information needed to access your response securely is provided in two emails.";
                 surveyLinkEmail.From = ConfigurationManager.AppSettings["EMAIL_FROM"].ToString();
                 surveyLinkEmail.Subject = Uri.UnescapeDataString("Link for survey: " + surveyName);
@@ -45,9 +44,9 @@ namespace Epi.Web.Controllers
                 if (Epi.Web.Common.Email.EmailHandler.SendMessage(surveyLinkEmail))
                 {
                     Epi.Web.Common.Email.Email passcodeEmail = new Common.Email.Email();
-                    passcodeEmail.Body = "Pass code: " + passCode;
+                    passcodeEmail.Body = passCode.Trim() + "<br/><br/>";
                     passcodeEmail.From = ConfigurationManager.AppSettings["EMAIL_FROM"].ToString();
-                    passcodeEmail.Subject = Uri.UnescapeDataString("Access information for survey: " + surveyName);
+                    passcodeEmail.Subject = Uri.UnescapeDataString("Information for survey: " + surveyName);
                     passcodeEmail.To = toList;
 
                     if (Epi.Web.Common.Email.EmailHandler.SendMessage(passcodeEmail))
