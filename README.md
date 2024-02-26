@@ -5,3 +5,17 @@ A free and open source tool developed by CDC for the public health community for
 For additional info, please watch this [video](https://www.youtube.com/watch?v=xCVlaGumXAo)
 
 Epi Info™ for Web & Cloud [Website](https://www.cdc.gov/epiinfo/cloud.html)
+
+<H3>Needed</H3> 
+
+Relatively decent Windows machine running 10 or 11. 
+Visual Studio Community Edition (free). 
+Access to a MS SQL Server database with write permissions.
+
+<H3>Building the Project - Summary</H3>
+
+After installing Visual Studio 2022 Community Edition, follow along after cloning and opening the solution to install Windows Connection Framework (WCF), the .NET Desktop Development workload, and the 4.6.1 Developer Pack.
+
+<H3>Building the Project</H3>
+
+(coming soon)
