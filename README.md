@@ -19,4 +19,6 @@ After installing Visual Studio 2022 Community Edition, follow along after clonin
 
 <H3>Building the Project</H3>
 
-(coming soon)
+(coming soon) 
+
+Note: The web config is missing from the Epi.Web project. This is most likely because of keys we don’t want out there. I’ll look into that.
