@@ -22,3 +22,9 @@ After installing Visual Studio 2022 Community Edition, follow along after clonin
 (coming soon) 
 
 Note: The web config is missing from the Epi.Web project. This is most likely because of keys we don’t want out there. I’ll look into that.
+
+=== readme editing work in progress below ===
+
+Epi Info 7 Introduction to Web Survey
+https://github.com/Epi-Info/Epi-Info-Web-Survey/assets/18171996/f2484513-bda0-4603-981c-4d08f8db8015
+
