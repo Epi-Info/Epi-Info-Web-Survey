@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Epi.Web.SurveyManager.Client</RootNamespace>
     <AssemblyName>Epi.Web.SurveyManager.Client</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -226,6 +226,24 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+    <None Include="Service References\SurveyManagerServiceV2\Epi.Web.SurveyManager.Client.SurveyManagerServiceV2.OrganizationResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SurveyManagerServiceV2\Epi.Web.SurveyManager.Client.SurveyManagerServiceV2.PreFilledAnswerResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SurveyManagerServiceV2\Epi.Web.SurveyManager.Client.SurveyManagerServiceV2.PublishResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SurveyManagerServiceV2\Epi.Web.SurveyManager.Client.SurveyManagerServiceV2.SurveyAnswerResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SurveyManagerServiceV2\Epi.Web.SurveyManager.Client.SurveyManagerServiceV2.SurveyControlsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SurveyManagerServiceV2\Epi.Web.SurveyManager.Client.SurveyManagerServiceV2.SurveyInfoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\SurveyManagerServiceV2\ManagerServiceV2.wsdl" />
     <None Include="Service References\SurveyManagerServiceV2\SurveyManagerServiceV2.xsd">
       <SubType>Designer</SubType>
@@ -242,6 +260,24 @@
     <None Include="Service References\SurveyManagerServiceV2\SurveyManagerServiceV24.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Service References\SurveyManagerServiceV3\Epi.Web.SurveyManager.Client.SurveyManagerServiceV3.OrganizationResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SurveyManagerServiceV3\Epi.Web.SurveyManager.Client.SurveyManagerServiceV3.PreFilledAnswerResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SurveyManagerServiceV3\Epi.Web.SurveyManager.Client.SurveyManagerServiceV3.PublishResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SurveyManagerServiceV3\Epi.Web.SurveyManager.Client.SurveyManagerServiceV3.SurveyAnswerResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SurveyManagerServiceV3\Epi.Web.SurveyManager.Client.SurveyManagerServiceV3.SurveyControlsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SurveyManagerServiceV3\Epi.Web.SurveyManager.Client.SurveyManagerServiceV3.SurveyInfoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\SurveyManagerServiceV3\ManagerServiceV3.wsdl" />
     <None Include="Service References\SurveyManagerServiceV3\SurveyManagerServiceV3.xsd">
       <SubType>Designer</SubType>
@@ -257,6 +293,27 @@
     </None>
     <None Include="Service References\SurveyManagerServiceV3\SurveyManagerServiceV34.xsd">
       <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SurveyManagerServiceV4\Epi.Web.SurveyManager.Client.SurveyManagerServiceV4.OrganizationResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SurveyManagerServiceV4\Epi.Web.SurveyManager.Client.SurveyManagerServiceV4.PreFilledAnswerResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SurveyManagerServiceV4\Epi.Web.SurveyManager.Client.SurveyManagerServiceV4.PublishResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SurveyManagerServiceV4\Epi.Web.SurveyManager.Client.SurveyManagerServiceV4.SurveyAnswerResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SurveyManagerServiceV4\Epi.Web.SurveyManager.Client.SurveyManagerServiceV4.SurveyControlsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SurveyManagerServiceV4\Epi.Web.SurveyManager.Client.SurveyManagerServiceV4.SurveyInfoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SurveyManagerServiceV4\Epi.Web.SurveyManager.Client.SurveyManagerServiceV4.UserResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\SurveyManagerServiceV4\ManagerServiceV4.wsdl" />
     <None Include="Service References\SurveyManagerServiceV4\SurveyManagerServiceV4.xsd">
@@ -282,6 +339,18 @@
     </None>
     <None Include="Service References\SurveyManagerServiceV4\SurveyManagerServiceV461.xsd">
       <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SurveyManagerService\Epi.Web.SurveyManager.Client.SurveyManagerService.OrganizationResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SurveyManagerService\Epi.Web.SurveyManager.Client.SurveyManagerService.PublishResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SurveyManagerService\Epi.Web.SurveyManager.Client.SurveyManagerService.SurveyAnswerResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SurveyManagerService\Epi.Web.SurveyManager.Client.SurveyManagerService.SurveyInfoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\SurveyManagerService\ManagerService.wsdl" />
     <None Include="Service References\SurveyManagerService\Service.wsdl" />
